@@ -35,7 +35,7 @@ class AppScaffold extends StatelessWidget{
       );
   }
 
-  static void showSnackBar(BuildContext context, String text, {String buttonText:'Ok', Function(BuildContext) onButtonPressed, Color background, String tag, Duration duration: const Duration(seconds: 3)}){
+  static void showMessage(BuildContext context, String text, {String buttonText:'Ok', Function(BuildContext) onButtonPressed, Color background, String tag, Duration duration: const Duration(seconds: 3)}){
     Scaffold.of(context).hideCurrentSnackBar();
     Scaffold.of(context).showSnackBar(
         getSnackBar(
