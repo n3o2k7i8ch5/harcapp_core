@@ -73,7 +73,7 @@ SnackBar getSnackBar(BuildContext context, String text, {String buttonText:'Ok',
   );
 }
 
-void showSnackBar(GlobalKey<ScaffoldState> key, String text, {String buttonText:'Ok', Function onButtonPressed, Color background, String tag, Duration duration: const Duration(seconds: 3)}){
+void showMessage(GlobalKey<ScaffoldState> key, String text, {String buttonText:'Ok', Function onButtonPressed, Color background, String tag, Duration duration: const Duration(seconds: 3)}){
   _snackBarTag = tag;
   _isSnackbarActive = true;
   key.currentState
