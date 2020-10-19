@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 
 import 'app_text.dart';
@@ -36,6 +38,22 @@ class AppScaffold extends StatelessWidget{
   }
 
   static void showMessage(BuildContext context, String text, {String buttonText:'Ok', Function(BuildContext) onButtonPressed, Color background, String tag, Duration duration: const Duration(seconds: 3)}){
+
+    if(kIsWeb){
+      Fluttertoast.showToast(
+        msg: text,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0,
+        webPosition: 'center',
+        timeInSecForIosWeb: duration.inSeconds,
+        webShowClose: true,
+      );
+      return;
+    }
+
     Scaffold.of(context).hideCurrentSnackBar();
     Scaffold.of(context).showSnackBar(
         getSnackBar(
