@@ -1,9 +1,6 @@
 
 import 'package:flutter/widgets.dart';
 
-
-const int MAX_INT = 9223372036854775807;
-
 String remPolChars(String string){
   return string.toLowerCase()
       .replaceAll('ą', 'a')
