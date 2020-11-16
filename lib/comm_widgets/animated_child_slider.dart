@@ -19,7 +19,7 @@ class AnimatedChildSlider extends StatelessWidget{
   const AnimatedChildSlider({
     this.switchInCurve: Curves.easeOutQuad,
     this.switchOutCurve:Curves.easeInQuad,
-    this.duration: const Duration(milliseconds: 500),
+    this.duration: const Duration(milliseconds: 300),
     this.children,
     this.index,
     this.isCenter: true,
