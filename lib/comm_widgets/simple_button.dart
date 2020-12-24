@@ -19,8 +19,9 @@ class SimpleButton extends StatelessWidget{
     this.padding: const EdgeInsets.all(Dimen.DEF_MARG/2),
     this.margin: const EdgeInsets.all(Dimen.DEF_MARG/2),
     this.radius: AppCard.defRadius,
-    this.enabled: true
-  });
+    this.enabled: true,
+    Key key
+  }):super(key: key);
 
   @override
   Widget build(BuildContext context) {
