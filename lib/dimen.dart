@@ -17,4 +17,16 @@ class Dimen{
   static const double TEXT_FIELD_PADD = 16;
 
   static const double LIST_TILE_SEPARATOR = 32;
+
+  static const double FLOATING_BUTTON_MARG = 16;
+
+  static const double BOTTOM_SHEET_TITLE_MARG = 20;
+  static const double BOTTOM_SHEET_MARG = 16;
+
+  static const double SETTINGS_MARG = 38;
+
+  static const double LIST_SIDE_MARG = 10;
+  static const double LIST_SIDE_MARG_DENSE = 3;
+  static const double LIST_SEP_MARG = 18;
+  static const double LIST_SEP_MARG_DENSE = 6;
 }
