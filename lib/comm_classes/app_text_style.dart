@@ -18,6 +18,7 @@ class CustTextStyle extends TextStyle{
         double height: 1.0,
         TextDecoration decoration,
         TextDecorationStyle decorationStyle,
+        double decorationThickness,
       }):super(
       fontFamily: familyName,
       color: color,
@@ -31,6 +32,7 @@ class CustTextStyle extends TextStyle{
       height: height,
       decoration: decoration,
       decorationStyle: decorationStyle,
+      decorationThickness: decorationThickness,
       shadows: shadow==true?
       const [Shadow(
         offset: const Offset(1.0, 1.0),
@@ -42,7 +44,7 @@ class CustTextStyle extends TextStyle{
 
 class AppTextStyle extends CustTextStyle{
 
-  const AppTextStyle({Color color, weight fontWeight:weight.normal, fontSize, bool shadow, FontStyle fontStyle, double height: 1.0, TextDecoration decoration, TextDecorationStyle decorationStyle}):super(
+  const AppTextStyle({Color color, weight fontWeight:weight.normal, fontSize, bool shadow, FontStyle fontStyle, double height: 1.0, TextDecoration decoration, TextDecorationStyle decorationStyle, double decorationThickness}):super(
     'Ubuntu',
     color: color,
     fontWeight: fontWeight,
@@ -52,5 +54,6 @@ class AppTextStyle extends CustTextStyle{
     height: height,
     decoration: decoration,
     decorationStyle: decorationStyle,
+    decorationThickness: decorationThickness,
   );
 }
