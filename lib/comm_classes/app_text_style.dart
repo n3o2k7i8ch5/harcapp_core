@@ -15,7 +15,8 @@ class CustTextStyle extends TextStyle{
         fontSize: Dimen.TEXT_SIZE_NORMAL,
         bool shadow: false,
         FontStyle fontStyle,
-        double height: 1.0
+        double height: 1.0,
+        TextDecoration decoration,
       }):super(
       fontFamily: familyName,
       color: color,
@@ -27,6 +28,7 @@ class CustTextStyle extends TextStyle{
       /*fontWeight == weight.bold?*/FontWeight.w700)),
       fontSize: fontSize,
       height: height,
+      decoration: decoration,
       shadows: shadow==true?
       const [Shadow(
         offset: const Offset(1.0, 1.0),
@@ -39,7 +41,7 @@ class CustTextStyle extends TextStyle{
 
 class AppTextStyle extends CustTextStyle{
 
-  const AppTextStyle({Color color, weight fontWeight:weight.normal, fontSize, bool shadow, FontStyle fontStyle, double height: 1.0}):super(
+  const AppTextStyle({Color color, weight fontWeight:weight.normal, fontSize, bool shadow, FontStyle fontStyle, double height: 1.0, TextDecoration decoration}):super(
     'Ubuntu',
     color: color,
     fontWeight: fontWeight,
@@ -47,5 +49,6 @@ class AppTextStyle extends CustTextStyle{
     fontStyle: fontStyle,
     shadow: shadow,
     height: height,
+    decoration: decoration,
   );
 }
