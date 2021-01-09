@@ -18,7 +18,7 @@ class SimpleButton extends StatelessWidget{
     this.onLongPress,
     this.padding: const EdgeInsets.all(Dimen.DEF_MARG/2),
     this.margin: const EdgeInsets.all(Dimen.DEF_MARG/2),
-    this.radius: AppCard.defRadius,
+    this.radius: AppCard.DEF_RADIUS,
     this.enabled: true,
     Key key
   }):super(key: key);

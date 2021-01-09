@@ -5,16 +5,20 @@ import '../dimen.dart';
 
 class AppCard extends StatelessWidget{
 
-  static const double defRadius = 6.0;
+  static const double DEF_RADIUS = 6.0;
+  static const double BIG_RADIUS = 20.0;
   static const double ALERT_DIALOG_RADIUS = 10;
-  static const double defBigRadius = 20.0;
+
   static const double defElevation = 1.0;
   static const double bigElevation = 6.0;
 
   static const int DEF_TRANS_MILIS = 300;
 
-  static const EdgeInsets defMargin = EdgeInsets.all(Dimen.DEF_MARG/2);
-  static const EdgeInsets defPadding = EdgeInsets.all(Dimen.DEF_MARG);
+  static const double DEF_MARGIN_VAL = Dimen.DEF_MARG/2;
+  static const double DEF_PADDING_VAL = Dimen.DEF_MARG;
+
+  static const EdgeInsets defMargin = EdgeInsets.all(DEF_MARGIN_VAL);
+  static const EdgeInsets defPadding = EdgeInsets.all(DEF_PADDING_VAL);
   static const double ALERT_DIALOG_PADDING = 10;
 
   final Key key;
@@ -31,36 +35,6 @@ class AppCard extends StatelessWidget{
   final Color elevetionColor;
   final int transMilis;
 
-  static AppCard Default({
-    Key key,
-    @required BuildContext context,
-    @required Widget child,
-    EdgeInsets margin: defMargin,
-    EdgeInsets padding: defPadding,
-    bool enabled: true,
-    Function onTap,
-    Function onLongPress,
-    Function onDoubleTap,
-    double radius: defRadius,
-    BorderRadius borderRadius,
-    double elevation,
-    int transMilis: DEF_TRANS_MILIS,
-  }) => AppCard(
-    key: key,
-    child: child,
-    color: enabled?defCardEnabled(context):defCardDisabled(context),
-    margin: margin,
-    padding: padding,
-    onTap: onTap, //enabled?onTap:null - nie rób tak, z jakiegoś powodu animatedopacity nie ogarnia, poza tym stan się resetuje.
-    onLongPress: onLongPress,
-    onDoubleTap: onDoubleTap,
-    radius: radius,
-    borderRadius: borderRadius,
-    elevetionColor: defCardElevation(context),
-    elevation: elevation??1.0,
-    transMilis: transMilis
-  );
-
   const AppCard({
     this.key,
     this.child,
@@ -71,7 +45,7 @@ class AppCard extends StatelessWidget{
     this.onTap,
     this.onLongPress,
     this.onDoubleTap,
-    this.radius: defRadius,
+    this.radius: DEF_RADIUS,
     this.borderRadius,
     this.elevetionColor: Colors.black,
     this.transMilis: DEF_TRANS_MILIS
