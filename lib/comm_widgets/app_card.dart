@@ -73,20 +73,15 @@ class AppCard extends StatelessWidget{
               child: AnimatedContainer(
                 duration: Duration(milliseconds: transMilis),
                 color: color??defCardEnabled(context),
-                child: Material(
-                  color: Colors.transparent,
-                  child: Ink(
-                      child: clickable?
-                      InkWell(
-                          borderRadius: borderRadius??BorderRadius.circular(radius),
-                          onTap: onTap==null?null:onTap,
-                          onLongPress: onLongPress==null?null:onLongPress,
-                          onDoubleTap: onDoubleTap==null?null:onDoubleTap,
-                          child: _child
-                      ):
-                      _child
-                  ),
-                )
+                child: clickable?
+                InkWell(
+                    borderRadius: borderRadius??BorderRadius.circular(radius),
+                    onTap: onTap==null?null:onTap,
+                    onLongPress: onLongPress==null?null:onLongPress,
+                    onDoubleTap: onDoubleTap==null?null:onDoubleTap,
+                    child: _child
+                ):
+                _child
               )
           ),
       ),
