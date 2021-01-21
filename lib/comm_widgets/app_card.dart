@@ -56,9 +56,11 @@ class AppCard extends StatelessWidget{
 
     bool clickable = onTap!=null || onLongPress!=null || onDoubleTap!=null;
 
-    Widget _child = Padding(
-        padding: padding,
-        child: child
+    Widget _child = Material(
+      child: Padding(
+          padding: padding,
+          child: child
+      ),
     );
 
     return Container(
