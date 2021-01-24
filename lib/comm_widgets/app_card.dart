@@ -56,12 +56,9 @@ class AppCard extends StatelessWidget{
 
     bool clickable = onTap!=null || onLongPress!=null || onDoubleTap!=null;
 
-    Widget _child = Material(
-      color: Colors.transparent,
-      child: Padding(
-          padding: padding,
-          child: child
-      ),
+    Widget _child = Padding(
+        padding: padding,
+        child: child
     );
 
     return Container(
@@ -77,12 +74,15 @@ class AppCard extends StatelessWidget{
                 duration: Duration(milliseconds: transMilis),
                 color: color??defCardEnabled(context),
                 child: clickable?
-                InkWell(
-                    borderRadius: borderRadius??BorderRadius.circular(radius),
-                    onTap: onTap==null?null:onTap,
-                    onLongPress: onLongPress==null?null:onLongPress,
-                    onDoubleTap: onDoubleTap==null?null:onDoubleTap,
-                    child: _child
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                      borderRadius: borderRadius??BorderRadius.circular(radius),
+                      onTap: onTap==null?null:onTap,
+                      onLongPress: onLongPress==null?null:onLongPress,
+                      onDoubleTap: onDoubleTap==null?null:onDoubleTap,
+                      child: _child
+                  ),
                 ):
                 _child
               )
