@@ -56,9 +56,12 @@ class AppCard extends StatelessWidget{
 
     bool clickable = onTap!=null || onLongPress!=null || onDoubleTap!=null;
 
-    Widget _child = Padding(
-        padding: padding,
-        child: child
+    Widget _child = Material(
+      color: color??defCardEnabled(context),
+      child: Padding(
+          padding: padding,
+          child: child
+      ),
     );
 
     return Container(
@@ -70,22 +73,15 @@ class AppCard extends StatelessWidget{
           shadowColor: elevetionColor,
           child: ClipRRect(
               borderRadius: borderRadius??BorderRadius.circular(radius),
-              child: AnimatedContainer(
-                duration: Duration(milliseconds: transMilis),
-                color: color??defCardEnabled(context),
-                child: clickable?
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                      borderRadius: borderRadius??BorderRadius.circular(radius),
-                      onTap: onTap==null?null:onTap,
-                      onLongPress: onLongPress==null?null:onLongPress,
-                      onDoubleTap: onDoubleTap==null?null:onDoubleTap,
-                      child: _child
-                  ),
-                ):
-                _child
-              )
+              child: clickable?
+              InkWell(
+                  borderRadius: borderRadius??BorderRadius.circular(radius),
+                  onTap: onTap==null?null:onTap,
+                  onLongPress: onLongPress==null?null:onLongPress,
+                  onDoubleTap: onDoubleTap==null?null:onDoubleTap,
+                  child: _child
+              ):
+              _child
           ),
       ),
     );
