@@ -12,7 +12,7 @@ class AppCard extends StatelessWidget{
   static const double defElevation = 1.0;
   static const double bigElevation = 6.0;
 
-  static const int DEF_TRANS_MILIS = 300;
+  //static const int DEF_TRANS_MILIS = 300;
 
   static const double DEF_MARGIN_VAL = Dimen.DEF_MARG/2;
   static const double DEF_PADDING_VAL = Dimen.DEF_MARG;
@@ -33,7 +33,7 @@ class AppCard extends StatelessWidget{
   final double radius;
   final BorderRadius borderRadius;
   final Color elevetionColor;
-  final int transMilis;
+  //final int transMilis;
 
   const AppCard({
     this.key,
@@ -48,7 +48,7 @@ class AppCard extends StatelessWidget{
     this.radius: DEF_RADIUS,
     this.borderRadius,
     this.elevetionColor: Colors.black,
-    this.transMilis: DEF_TRANS_MILIS
+    //this.transMilis: DEF_TRANS_MILIS
   }):super(key: key);
 
   @override
