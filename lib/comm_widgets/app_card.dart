@@ -27,9 +27,9 @@ class AppCard extends StatelessWidget{
   final EdgeInsets margin;
   final EdgeInsets padding;
   final double elevation;
-  final Function onTap;
-  final Function onLongPress;
-  final Function onDoubleTap;
+  final void Function() onTap;
+  final void Function() onLongPress;
+  final void Function() onDoubleTap;
   final double radius;
   final BorderRadius borderRadius;
   final Color elevetionColor;
