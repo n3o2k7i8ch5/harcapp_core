@@ -197,6 +197,7 @@ class ChordDrawBarState extends State<ChordDrawBar> with TickerProviderStateMixi
 
                   Expanded(
                     child: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       child: Row(children: chordsString.map((item){
 
