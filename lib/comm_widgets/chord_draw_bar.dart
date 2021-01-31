@@ -15,6 +15,7 @@ const Duration CHORD_WIDGET_GROW_DURATION = const Duration(milliseconds: 200);
 class ChordWidget extends StatelessWidget{
 
   static const double STRING_HEIGHT = 5;
+  static const double CHORD_NAME_HEIGHT = Dimen.TEXT_SIZE_SMALL;
 
   final Chord _chord;
   final int nearestDotPosition;
@@ -125,7 +126,7 @@ class ChordWidget extends StatelessWidget{
           Text(
               _chord.name,
               style: AppTextStyle(
-                  fontSize: Dimen.TEXT_SIZE_SMALL,
+                  fontSize: CHORD_NAME_HEIGHT,
                   fontWeight: weight.halfBold,
                   color: color
               )
@@ -141,7 +142,7 @@ class ChordWidget extends StatelessWidget{
     return (stringCount-1)*STRING_HEIGHT +
         stringCount+
         7.0 +
-        Dimen.TEXT_SIZE_NORMAL +
+        CHORD_NAME_HEIGHT +
         2*Dimen.DEF_MARG;
   }
 
