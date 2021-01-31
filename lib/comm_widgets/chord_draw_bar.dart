@@ -14,6 +14,7 @@ const Duration CHORD_WIDGET_GROW_DURATION = const Duration(milliseconds: 200);
 
 class ChordWidget extends StatelessWidget{
 
+  static const double POSITION_TEXT_HEIGHT = 7.0;
   static const double STRING_HEIGHT = 5;
   static const double CHORD_NAME_HEIGHT = Dimen.TEXT_SIZE_SMALL;
 
@@ -67,14 +68,20 @@ class ChordWidget extends StatelessWidget{
     List<Widget> childBar = [];
     List<Widget> childDot = [];
 
-    for(int i=0; i<_chord.strings.length; i++){
-      childBar.add(i==_chord.strings.length-1?stringElementFat:stringElement);
+    for(int i=0; i<_chord.strings.length-1; i++){
+      childBar.add(stringElement);
       childDot.add(Stack(children: <Widget>[
-        i==_chord.strings.length-1?stringElementFat:stringElement,
+        stringElement,
         _chord.strings[_chord.strings.length-i-1]==index?RoundContainer(ChordWidget.STRING_HEIGHT, color: color):Container(width: ChordWidget.STRING_HEIGHT),
       ])
       );
     }
+
+    childBar.add(stringElementFat);
+    childDot.add(Stack(children: <Widget>[
+      stringElementFat,
+      _chord.strings[0]==index?RoundContainer(ChordWidget.STRING_HEIGHT, color: color):Container(width: ChordWidget.STRING_HEIGHT),
+    ]));
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -111,7 +118,7 @@ class ChordWidget extends StatelessWidget{
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(nearestDotPosition.toString(), style: AppTextStyle(fontSize: 7.0, color: hint), textAlign: TextAlign.start,),
+          Text(nearestDotPosition.toString(), style: AppTextStyle(fontSize: POSITION_TEXT_HEIGHT, color: hint), textAlign: TextAlign.start,),
 
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -139,9 +146,9 @@ class ChordWidget extends StatelessWidget{
   }
 
   static double height(int stringCount){
-    return (stringCount-1)*STRING_HEIGHT +
+    return (stringCount)*STRING_HEIGHT +
         stringCount+
-        7.0 +
+        POSITION_TEXT_HEIGHT +
         CHORD_NAME_HEIGHT +
         2*Dimen.DEF_MARG;
   }
