@@ -19,6 +19,10 @@ class ChordShifter{
     on Exception{throw Exception();}
   }
 
+  static String run(String text, int shift){
+    return ChordShifter(text, shift).getText(true);
+  }
+
   void decode(List<String> lines, int shift){
 
     List<ChordDraw> _chordList = [];
