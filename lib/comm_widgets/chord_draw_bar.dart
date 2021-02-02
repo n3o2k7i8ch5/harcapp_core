@@ -195,7 +195,7 @@ class ChordDrawBarState extends State<ChordDrawBar> with TickerProviderStateMixi
     }
 
     return Material(
-      color: background??background(context),
+      color: widget.background??background(context),
       elevation: widget.elevation,
       child: AnimatedSize(
         vsync: this,
