@@ -166,10 +166,11 @@ class ChordDrawBar extends StatefulWidget{
   final EdgeInsets margin;
   final double elevation;
   final double chordElevation;
+  final Color background;
   final Color chordBackground;
   final Widget leading, trailing;
 
-  const ChordDrawBar(this.text, {@required this.typeGuitar, this.onTypeChanged, this.onChordTap, this.changeTypeOnTap: true, this.borderRadius, this.margin:const EdgeInsets.all(Dimen.DEF_MARG/2), this.elevation: 1.0, this.chordElevation: 0, this.chordBackground, this.leading, this.trailing});
+  const ChordDrawBar(this.text, {@required this.typeGuitar, this.onTypeChanged, this.onChordTap, this.changeTypeOnTap: true, this.borderRadius, this.margin:const EdgeInsets.all(Dimen.DEF_MARG/2), this.elevation: 1.0, this.chordElevation: 0, this.background, this.chordBackground, this.leading, this.trailing});
 
   @override
   State<StatefulWidget> createState() => ChordDrawBarState();
@@ -194,7 +195,7 @@ class ChordDrawBarState extends State<ChordDrawBar> with TickerProviderStateMixi
     }
 
     return Material(
-      color: background(context),
+      color: background??background(context),
       elevation: widget.elevation,
       child: AnimatedSize(
         vsync: this,
