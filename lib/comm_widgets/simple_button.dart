@@ -54,6 +54,8 @@ class SimpleButton extends StatelessWidget{
       radius: AppCard.BIG_RADIUS,
       padding: EdgeInsets.all(Dimen.ICON_MARG),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             if(iconLeading)
               Icon(icon, color: color??iconEnabledColor(context)),
