@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/app_text_style.dart';
+import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/app_text.dart';
 
 import '../dimen.dart';
 import 'app_card.dart';
@@ -41,6 +44,36 @@ class SimpleButton extends StatelessWidget{
         ),
       ),
     );
+  }
+
+  static SimpleButton from({BuildContext context, @required IconData icon, @required String text, @required void Function() onTap, bool iconLeading=true, Color color}){
+
+    assert(color != null || context != null, 'Color or context must not be null.');
+
+    return SimpleButton(
+        child: Row(
+          children: [
+            if(iconLeading)
+              Icon(icon, color: color??iconEnabledColor(context)),
+
+            SizedBox(width: Dimen.ICON_MARG),
+
+            Text(
+              text,
+              style: AppTextStyle(
+                color: color??iconEnabledColor(context),
+                fontWeight: weight.halfBold,
+                fontSize: Dimen.TEXT_SIZE_BIG
+              ),
+            ),
+
+            SizedBox(width: Dimen.ICON_MARG),
+
+          ],
+        ),
+        onTap: onTap
+    );
+
   }
 
 }
