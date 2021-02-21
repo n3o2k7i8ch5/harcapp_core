@@ -51,6 +51,8 @@ class SimpleButton extends StatelessWidget{
     assert(color != null || context != null, 'Color or context must not be null.');
 
     return SimpleButton(
+      radius: AppCard.BIG_RADIUS,
+      padding: EdgeInsets.all(Dimen.ICON_MARG),
         child: Row(
           children: [
             if(iconLeading)
