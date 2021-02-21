@@ -7,7 +7,7 @@ class AppCard extends StatelessWidget{
 
   static const double DEF_RADIUS = 6.0;
   static const double BIG_RADIUS = 20.0;
-  static const double ALERT_DIALOG_RADIUS = 10;
+  static const double ALERT_DIALOG_RADIUS = BIG_RADIUS;
 
   static const double defElevation = 1.0;
   static const double bigElevation = 6.0;
@@ -19,7 +19,7 @@ class AppCard extends StatelessWidget{
 
   static const EdgeInsets defMargin = EdgeInsets.all(DEF_MARGIN_VAL);
   static const EdgeInsets defPadding = EdgeInsets.all(DEF_PADDING_VAL);
-  static const double ALERT_DIALOG_PADDING = 10;
+  static const double ALERT_DIALOG_PADDING = 18.0;
 
   final Key key;
   final Widget child;
