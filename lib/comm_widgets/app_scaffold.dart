@@ -34,7 +34,7 @@ class AppScaffold extends StatelessWidget{
             backgroundColor: backgroundColor,
             bottomNavigationBar: bottomNavigationBar,
             floatingActionButton: floatingActionButton,
-            resizeToAvoidBottomPadding: avoidKeyboard,
+            resizeToAvoidBottomInset: avoidKeyboard,
           )
       );
   }
