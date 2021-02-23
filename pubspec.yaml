@@ -12,8 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  connectivity: 2.0.0
-  fluttertoast: 7.1.1
+  material_design_icons_flutter: 4.0.5855
+  connectivity: 2.0.2
+  fluttertoast: 7.1.8
 
 dev_dependencies:
   flutter_test:
