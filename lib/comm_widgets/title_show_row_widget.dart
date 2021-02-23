@@ -67,7 +67,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
             icon: Icon(MdiIcons.arrowRight, color: onOpenIconColor),
             onPressed: () => onOpen(context),
           )
-        else if(icon != null && textAlign == TextAlign.center)
+        else if(icon != null && textAlign == TextAlign.center && trailing == null)
           SizedBox(width: Dimen.ICON_FOOTPRINT),
 
       ],
