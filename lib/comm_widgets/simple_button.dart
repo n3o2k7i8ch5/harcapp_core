@@ -73,6 +73,9 @@ class SimpleButton extends StatelessWidget{
 
             SizedBox(width: Dimen.ICON_MARG),
 
+            if(!iconLeading)
+              Icon(icon, color: color??iconEnabledColor(context)),
+
           ],
         ),
         onTap: onTap
