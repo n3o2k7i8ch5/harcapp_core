@@ -31,8 +31,8 @@ Color background(BuildContext context) => Theme.of(context).backgroundColor;
 Color mainColor(BuildContext context) => Theme.of(context).primaryColor;
 Color lightColor(BuildContext context) => Theme.of(context).primaryColorLight;
 Color darkColor(BuildContext context) => Theme.of(context).primaryColorDark;
-Color accentColor(BuildContext context) => Theme.of(context).accentColor;
-Color accentIcon(BuildContext context) => Theme.of(context).accentIconTheme.color;
+Color accent_(BuildContext context) => Theme.of(context).accentColor;
+Color accentIcon_(BuildContext context) => Theme.of(context).accentIconTheme.color;
 
 Color iconEnabledColor(BuildContext context) => Theme.of(context).bottomNavigationBarTheme.selectedIconTheme.color;
 Color iconDisabledColor(BuildContext context) => Theme.of(context).bottomNavigationBarTheme.unselectedIconTheme.color;

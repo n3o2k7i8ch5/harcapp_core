@@ -80,13 +80,13 @@ bool isSnackBarActive({String tag}) => tag==null?_isSnackbarActive:_isSnackbarAc
 SnackBar getSnackBar(BuildContext context, String text, {String buttonText:'Ok', Function onButtonPressed, Color background, String tag, Duration duration: const Duration(seconds: 3)}){
 
   return SnackBar(
-    backgroundColor: background == null? accentColor(context) : background,
+    backgroundColor: background == null? accent_(context) : background,
     elevation: 6.0,
     behavior: SnackBarBehavior.fixed,
-    content: AppText(text, color: accentIcon(context)),
+    content: AppText(text, color: accentIcon_(context)),
     action: SnackBarAction(
         label: buttonText,
-        textColor: accentIcon(context),
+        textColor: accentIcon_(context),
         onPressed: onButtonPressed
     ),//
     duration: duration,
