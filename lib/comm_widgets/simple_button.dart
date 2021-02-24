@@ -34,6 +34,7 @@ class SimpleButton extends StatelessWidget{
   Widget build(BuildContext context) {
 
     return Material(
+      borderRadius: BorderRadius.circular(radius),
       color: color??Colors.transparent,
       elevation: elevation,
       child: Padding(
