@@ -69,14 +69,14 @@ class SimpleButton extends StatelessWidget{
           mainAxisSize: MainAxisSize.min,
           children: [
             if(iconLeading)
-              Icon(icon, color: textColor??iconEnabledColor(context)),
+              Icon(icon, color: textColor??iconEnab_(context)),
 
             SizedBox(width: Dimen.ICON_MARG),
 
             Text(
               text,
               style: AppTextStyle(
-                color: textColor??iconEnabledColor(context),
+                color: textColor??iconEnab_(context),
                 fontWeight: weight.halfBold,
                 fontSize: Dimen.TEXT_SIZE_BIG
               ),
@@ -85,7 +85,7 @@ class SimpleButton extends StatelessWidget{
             SizedBox(width: Dimen.ICON_MARG),
 
             if(!iconLeading)
-              Icon(icon, color: textColor??iconEnabledColor(context)),
+              Icon(icon, color: textColor??iconEnab_(context)),
 
           ],
         ),

@@ -28,7 +28,7 @@ class RText extends StatelessWidget{
     bool italic = false;
     bool bold = false;
 
-    Color _color = color??textEnabled(context);
+    Color _color = color??textEnab_(context);
 
     Function add = (){
       spans.add(TextSpan(

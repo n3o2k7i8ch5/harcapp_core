@@ -71,7 +71,7 @@ class FadeScrollViewState extends State<FadeScrollView>{
               width: 36,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: [background(context), background(context).withAlpha(0)]
+                      colors: [background_(context), background_(context).withAlpha(0)]
                   )
               ),
             ),
@@ -88,7 +88,7 @@ class FadeScrollViewState extends State<FadeScrollView>{
               width: 36,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: [background(context).withAlpha(0), background(context)]
+                      colors: [background_(context).withAlpha(0), background_(context)]
                   )
               ),
             ),

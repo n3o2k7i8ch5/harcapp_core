@@ -195,7 +195,7 @@ class ChordDrawBarState extends State<ChordDrawBar> with TickerProviderStateMixi
     }
 
     return Material(
-      color: widget.background??background(context),
+      color: widget.background??background_(context),
       elevation: widget.elevation,
       child: AnimatedSize(
         vsync: this,
@@ -237,9 +237,9 @@ class ChordDrawBarState extends State<ChordDrawBar> with TickerProviderStateMixi
                           return chord == null?Container(width: 0, height: 0,):
                           ChordWidget.from(
                               chord,
-                              background: widget.chordBackground??defCardEnabled(context),
-                              hint: textEnabled(context),
-                              color: iconEnabledColor(context),
+                              background: widget.chordBackground??cardEnab_(context),
+                              hint: textEnab_(context),
+                              color: iconEnab_(context),
                               onTap: onTap,
                               elevation: widget.chordElevation
                           );

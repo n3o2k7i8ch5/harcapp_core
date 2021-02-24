@@ -64,7 +64,7 @@ class AppCard extends StatelessWidget{
     return Container(
       margin: margin,
       child: Material(
-          color: color??defCardEnabled(context),
+          color: color??cardEnab_(context),
           borderRadius: borderRadius??BorderRadius.circular(radius),
           elevation: elevation,
           shadowColor: elevetionColor,
