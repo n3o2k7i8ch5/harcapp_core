@@ -51,11 +51,13 @@ class SimpleButton extends StatelessWidget{
     );
   }
 
-  static SimpleButton from({BuildContext context, @required IconData icon, @required String text, @required void Function() onTap, bool iconLeading=true, Color color}){
+  static SimpleButton from({BuildContext context, @required IconData icon, @required String text, @required void Function() onTap, bool iconLeading=true, double elevation, Color color, Color textColor}){
 
-    assert(color != null || context != null, 'Color or context must not be null.');
+    assert(textColor != null || context != null, 'Color or context must not be null.');
 
     return SimpleButton(
+      elevation: elevation,
+      color: color,
       radius: AppCard.BIG_RADIUS,
       padding: EdgeInsets.all(Dimen.ICON_MARG),
         child: Row(
@@ -63,14 +65,14 @@ class SimpleButton extends StatelessWidget{
           mainAxisSize: MainAxisSize.min,
           children: [
             if(iconLeading)
-              Icon(icon, color: color??iconEnabledColor(context)),
+              Icon(icon, color: textColor??iconEnabledColor(context)),
 
             SizedBox(width: Dimen.ICON_MARG),
 
             Text(
               text,
               style: AppTextStyle(
-                color: color??iconEnabledColor(context),
+                color: textColor??iconEnabledColor(context),
                 fontWeight: weight.halfBold,
                 fontSize: Dimen.TEXT_SIZE_BIG
               ),
@@ -79,7 +81,7 @@ class SimpleButton extends StatelessWidget{
             SizedBox(width: Dimen.ICON_MARG),
 
             if(!iconLeading)
-              Icon(icon, color: color??iconEnabledColor(context)),
+              Icon(icon, color: textColor??iconEnabledColor(context)),
 
           ],
         ),
