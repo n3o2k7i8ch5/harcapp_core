@@ -14,6 +14,8 @@ class SimpleButton extends StatelessWidget{
   final EdgeInsets padding;
   final EdgeInsets margin;
   final double radius;
+  final double elevation;
+  final Color color;
   final bool enabled;
   const SimpleButton({
     @required this.child,
@@ -22,6 +24,8 @@ class SimpleButton extends StatelessWidget{
     this.padding: const EdgeInsets.all(Dimen.DEF_MARG/2),
     this.margin: const EdgeInsets.all(Dimen.DEF_MARG/2),
     this.radius: AppCard.DEF_RADIUS,
+    this.elevation: 0,
+    this.color,
     this.enabled: true,
     Key key
   }):super(key: key);
@@ -30,7 +34,8 @@ class SimpleButton extends StatelessWidget{
   Widget build(BuildContext context) {
 
     return Material(
-      color: Colors.transparent,
+      color: color??Colors.transparent,
+      elevation: elevation,
       child: Padding(
         padding: margin,
         child: InkWell(
