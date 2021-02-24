@@ -52,7 +52,7 @@ class SimpleButton extends StatelessWidget{
     );
   }
 
-  static SimpleButton from({BuildContext context, @required IconData icon, @required String text, @required void Function() onTap, bool iconLeading=true, double elevation, Color color, Color textColor}){
+  static SimpleButton from({BuildContext context, @required IconData icon, @required String text, @required void Function() onTap, bool iconLeading=true, double elevation: 0, Color color, Color textColor}){
 
     assert(textColor != null || context != null, 'Color or context must not be null.');
 
