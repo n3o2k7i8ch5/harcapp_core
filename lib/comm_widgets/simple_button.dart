@@ -8,6 +8,9 @@ import 'app_card.dart';
 
 class SimpleButton extends StatelessWidget{
 
+  static const double DEF_PADDING = Dimen.DEF_MARG/2;
+  static const double DEF_MARG = Dimen.DEF_MARG/2;
+
   final Widget child;
   final Function onTap;
   final Function onLongPress;
@@ -21,8 +24,8 @@ class SimpleButton extends StatelessWidget{
     @required this.child,
     @required this.onTap,
     this.onLongPress,
-    this.padding: const EdgeInsets.all(Dimen.DEF_MARG/2),
-    this.margin: const EdgeInsets.all(Dimen.DEF_MARG/2),
+    this.padding: const EdgeInsets.all(DEF_PADDING),
+    this.margin: const EdgeInsets.all(DEF_MARG),
     this.radius: AppCard.DEF_RADIUS,
     this.elevation: 0,
     this.color,
