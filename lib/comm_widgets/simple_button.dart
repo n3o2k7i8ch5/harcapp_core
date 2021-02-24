@@ -33,12 +33,12 @@ class SimpleButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    return Material(
-      borderRadius: BorderRadius.circular(radius),
-      color: color??Colors.transparent,
-      elevation: elevation,
-      child: Padding(
-        padding: margin,
+    return Padding(
+      padding: padding,
+      child: Material(
+        borderRadius: BorderRadius.circular(radius),
+        color: color??Colors.transparent,
+        elevation: elevation,
         child: InkWell(
           borderRadius: BorderRadius.circular(radius),
           onTap: enabled?onTap:null,
