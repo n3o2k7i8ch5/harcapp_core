@@ -21,6 +21,7 @@ class Dimen{
   static const double LIST_TILE_SEPARATOR = 32;
 
   static const double FLOATING_BUTTON_MARG = 16;
+  static const double FLOATING_BUTTON_SIZE = 56;
 
   static const double BOTTOM_SHEET_TITLE_MARG = 20;
   static const double BOTTOM_SHEET_MARG = 16;
