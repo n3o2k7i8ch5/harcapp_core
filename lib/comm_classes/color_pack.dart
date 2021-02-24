@@ -17,7 +17,6 @@ Color textDrawer(BuildContext context) => Theme.of(context).primaryTextTheme.bod
 Color hintDrawer(BuildContext context) => Theme.of(context).primaryTextTheme.subtitle1.color;
 
 Color hintEnabled(BuildContext context) => Theme.of(context).textTheme.subtitle1.color;
-Color hintDisabled(BuildContext context) => Theme.of(context).textTheme.subtitle1.color;
 
 Color defCardEnabled(BuildContext context) => Theme.of(context).cardTheme.color;
 Color defCardDisabled(BuildContext context) => Theme.of(context).cardTheme.color.withOpacity(0.9);
@@ -27,12 +26,14 @@ Color colorCard(BuildContext context) => mainColor(context);
 Color colorBackground(BuildContext context) => darkColor(context);
 
 Color background(BuildContext context) => Theme.of(context).backgroundColor;
+Color backgroundIcon(BuildContext context) => Theme.of(context).splashColor;
+//Color backgroundIcon(BuildContext context) => Settings.isDark?Colors.white24:Colors.black.withOpacity(0.05);
 
 Color mainColor(BuildContext context) => Theme.of(context).primaryColor;
 Color lightColor(BuildContext context) => Theme.of(context).primaryColorLight;
 Color darkColor(BuildContext context) => Theme.of(context).primaryColorDark;
-Color accent_(BuildContext context) => Theme.of(context).accentColor;
-Color accentIcon_(BuildContext context) => Theme.of(context).accentIconTheme.color;
+Color accentColor(BuildContext context) => Theme.of(context).accentColor;
+Color accentIcon(BuildContext context) => Theme.of(context).accentIconTheme.color;
 
 Color iconEnabledColor(BuildContext context) => Theme.of(context).bottomNavigationBarTheme.selectedIconTheme.color;
 Color iconDisabledColor(BuildContext context) => Theme.of(context).bottomNavigationBarTheme.unselectedIconTheme.color;
