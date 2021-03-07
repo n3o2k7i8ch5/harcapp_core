@@ -15,6 +15,8 @@ class Dimen{
   static const double ICON_FOOTPRINT = 2*ICON_MARG + ICON_SIZE;
   static const double ICON_EMPTY_INFO_SIZE = 72;
 
+  static const double APPBAR_LEADING_WIDTH = ICON_FOOTPRINT + 8;
+
 
   static const double TEXT_FIELD_PADD = 16;
 
