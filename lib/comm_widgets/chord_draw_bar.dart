@@ -10,8 +10,6 @@ import '../dimen.dart';
 import 'app_card.dart';
 import 'chord.dart';
 
-const Duration CHORD_WIDGET_GROW_DURATION = const Duration(milliseconds: 200);
-
 class ChordWidget extends StatelessWidget{
 
   static const double POSITION_TEXT_HEIGHT = 7.0;
@@ -177,7 +175,7 @@ class ChordDrawBar extends StatefulWidget{
 
 }
 
-class ChordDrawBarState extends State<ChordDrawBar> with TickerProviderStateMixin{
+class ChordDrawBarState extends State<ChordDrawBar>{
 
   @override
   Widget build(BuildContext context) {
@@ -197,69 +195,65 @@ class ChordDrawBarState extends State<ChordDrawBar> with TickerProviderStateMixi
     return Material(
       color: widget.background??background_(context),
       elevation: widget.elevation,
-      child: AnimatedSize(
-        vsync: this,
-        duration: CHORD_WIDGET_GROW_DURATION,
-        child: Row(
-          children: <Widget>[
-            if(widget.leading != null) widget.leading,
+      child: Row(
+        children: <Widget>[
+          if(widget.leading != null) widget.leading,
 
-            Expanded(
-                child: Row(
-                  children: <Widget>[
+          Expanded(
+              child: Row(
+                children: <Widget>[
 
-                    Expanded(
-                      child: SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        child: Row(children: chordsString.map((item){
+                  Expanded(
+                    child: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      child: Row(children: chordsString.map((item){
 
-                          Chord chord;
+                        Chord chord;
 
-                          if(widget.typeGuitar.get()){
-                            if(GChord.chordDrawableMap[item] == null)
-                              chord = GChord.empty;
-                            else
-                              chord = GChord.chordDrawableMap[item][0];
-                          }else{
-                            if(UChord.chordDrawableMap[item] == null)
-                              chord = UChord.empty;
-                            else
-                              chord = UChord.chordDrawableMap[item];
-                          }
+                        if(widget.typeGuitar.get()){
+                          if(GChord.chordDrawableMap[item] == null)
+                            chord = GChord.empty;
+                          else
+                            chord = GChord.chordDrawableMap[item][0];
+                        }else{
+                          if(UChord.chordDrawableMap[item] == null)
+                            chord = UChord.empty;
+                          else
+                            chord = UChord.chordDrawableMap[item];
+                        }
 
-                          Function() onTap = widget.onTypeChanged==null && widget.onChordTap==null?null:(){
-                            if(widget.onChordTap!=null) widget.onChordTap(chord);
-                            if(widget.onTypeChanged!=null) widget.onTypeChanged(!widget.typeGuitar.get());
-                            if(widget.changeTypeOnTap) setState(() => widget.typeGuitar.set(!widget.typeGuitar.get()));
-                          };
+                        Function() onTap = widget.onTypeChanged==null && widget.onChordTap==null?null:(){
+                          if(widget.onChordTap!=null) widget.onChordTap(chord);
+                          if(widget.onTypeChanged!=null) widget.onTypeChanged(!widget.typeGuitar.get());
+                          if(widget.changeTypeOnTap) setState(() => widget.typeGuitar.set(!widget.typeGuitar.get()));
+                        };
 
-                          return chord == null?Container(width: 0, height: 0,):
-                          ChordWidget.from(
-                              chord,
-                              background: widget.chordBackground??cardEnab_(context),
-                              hint: textEnab_(context),
-                              color: iconEnab_(context),
-                              onTap: onTap,
-                              elevation: widget.chordElevation
-                          );
-                        }).toList()
-                        ),
+                        return chord == null?Container(width: 0, height: 0,):
+                        ChordWidget.from(
+                            chord,
+                            background: widget.chordBackground??cardEnab_(context),
+                            hint: textEnab_(context),
+                            color: iconEnab_(context),
+                            onTap: onTap,
+                            elevation: widget.chordElevation
+                        );
+                      }).toList()
                       ),
                     ),
-                  ],
-                )
-            ),
+                  ),
+                ],
+              )
+          ),
 
-            Padding(
-              padding: EdgeInsets.all(Dimen.DEF_MARG),
-              child: RotatedBox(
-                child: Text(widget.typeGuitar.get()?'Gitara':'Ukulele', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnabled(context))),
-                quarterTurns: 3,
-              ),
-            )
-          ],
-        ),
+          Padding(
+            padding: EdgeInsets.all(Dimen.DEF_MARG),
+            child: RotatedBox(
+              child: Text(widget.typeGuitar.get()?'Gitara':'Ukulele', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnabled(context))),
+              quarterTurns: 3,
+            ),
+          )
+        ],
       ),
     );
   }
