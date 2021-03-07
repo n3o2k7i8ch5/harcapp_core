@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/color_pack_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../colors.dart';
 
@@ -26,7 +28,7 @@ Color colorCard(BuildContext context) => mainColor(context);
 Color colorBackground(BuildContext context) => darkColor(context);
 
 Color background_(BuildContext context) => Theme.of(context).backgroundColor;
-Color backgroundIcon_(BuildContext context) => Theme.of(context).splashColor;
+Color backgroundIcon_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.backgroundIcon;
 //Color backgroundIcon(BuildContext context) => Settings.isDark?Colors.white24:Colors.black.withOpacity(0.05);
 
 Color mainColor(BuildContext context) => Theme.of(context).primaryColor;
