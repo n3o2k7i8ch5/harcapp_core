@@ -10,6 +10,72 @@ import '../dimen.dart';
 import 'app_card.dart';
 import 'chord.dart';
 
+class Fretboard extends StatelessWidget{
+
+  final double width;
+  final double height;
+  final Color color;
+
+  final int frets;
+  final int strings;
+
+  const Fretboard(this.width, this.height, this.color, this.frets, this.strings);
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> horLines = [SizedBox(
+      height: height/strings,
+      child: Container(height: 1, width: width, color: color),
+    )];
+
+    List<Widget> verLines = [SizedBox(
+      width: width/frets,
+      child: Container(height: height, width: 1, color: color),
+    )];
+
+    for(int i=0; i<strings-1; i++)
+      horLines.add(SizedBox(
+        height: height/strings,
+        child: Container(height: 1, width: width, color: color),
+      ));
+
+    return Stack(
+      children: [
+        Column(children: horLines),
+        Row(children: verLines)
+      ],
+    );
+  }
+
+}
+
+class ChordWidget2 extends StatelessWidget{
+
+  final double width;
+  final double height;
+  final Color color;
+
+  final int frets;
+  final int strings;
+
+  const ChordWidget2(this.width, this.height, this.color, this.frets, this.strings);
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Stack(
+      children: [
+
+        Fretboard(width, height, color, frets, strings),
+
+
+      ],
+    );
+  }
+
+
+}
+
 class ChordWidget extends StatelessWidget{
 
   static const double POSITION_TEXT_HEIGHT = 7.0;
@@ -280,3 +346,4 @@ class RoundContainer extends StatelessWidget{
     );
   }
 }
+
