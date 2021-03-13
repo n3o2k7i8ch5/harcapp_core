@@ -168,7 +168,7 @@ class ChordWidget2 extends StatelessWidget{
                     if(_chord.bar != 0)
                       Container(
                         width: heightFactor*sizePart,
-                        height: heightFactor*size,
+                        height: strings*heightFactor*sizePart,
                         child: Material(
                           borderRadius: BorderRadius.all(Radius.circular(100)),
                           elevation: elevation,

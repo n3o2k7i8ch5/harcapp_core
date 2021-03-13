@@ -685,8 +685,6 @@ class UChord extends Chord {
           max(0, strings[3]-pos)
     ]);
   }
-
-
 }
 
 class EmptyChord extends Chord{
