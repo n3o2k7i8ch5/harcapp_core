@@ -228,8 +228,10 @@ class ChordDrawBar2 extends StatefulWidget{
         this.changeTypeOnTap=true,
         this.initTypeGuitar,
 
-        this.onTap
-      });
+        this.onTap,
+
+        Key key
+      }):super(key: key);
   
   @override
   State<StatefulWidget> createState() => ChordDrawBar2State();
