@@ -144,12 +144,19 @@ class ChordWidget2 extends StatelessWidget{
 class ChordDrawBar2 extends StatefulWidget{
   
   final String chords;
-  final Color color;
+  final Color background;
+  final Color chordColor;
   final double elevation;
 
   final void Function(bool) onTap;
   
-  const ChordDrawBar2(this.chords, {this.color=ColorPack.DEF_ICON_ENAB, this.elevation=0, this.onTap});
+  const ChordDrawBar2(
+      this.chords, {
+        this.background=Colors.transparent,
+        this.chordColor=ColorPack.DEF_ICON_ENAB,
+        this.elevation=0,
+        this.onTap
+      });
   
   @override
   State<StatefulWidget> createState() => ChordDrawBar2State();
@@ -189,14 +196,14 @@ class ChordDrawBar2State extends State<ChordDrawBar2>{
       for(String chordStr in guitChordStrs) {
         List<GChord> chordSet = GChord.chordDrawableMap[chordStr];
         if(chordSet == null) continue;
-        guitChords.add(ChordWidget2.fromGChord(chordSet[0], color: widget.color));
+        guitChords.add(ChordWidget2.fromGChord(chordSet[0], color: widget.chordColor));
       }
 
       ukulChords = [];
       for(String chordStr in ukulChordStrs){
         UChord chord = UChord.chordDrawableMap[chordStr];
         if(chord == null) continue;
-        ukulChords.add(ChordWidget2.fromUChord(chord, color: widget.color));
+        ukulChords.add(ChordWidget2.fromUChord(chord, color: widget.chordColor));
       }
 
     }
@@ -208,7 +215,7 @@ class ChordDrawBar2State extends State<ChordDrawBar2>{
   Widget build(BuildContext context) {
 
     return Material(
-      color: widget.color,
+      color: widget.background,
       elevation: widget.elevation,
       child: InkWell(
         onTap: (){
