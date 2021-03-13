@@ -43,7 +43,7 @@ class _Fretboard extends StatelessWidget{
     for(int i=0; i<strings-1; i++)
       horLines.add(SizedBox(
         height: height/strings,
-        child: Container(height: 1, width: width, color: color),
+        child: Center(child: Container(height: 1, width: width, color: color)),
       ));
 
     return Stack(
