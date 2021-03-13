@@ -1,3 +1,5 @@
+import 'dart:math';
+
 abstract class Chord{
 
   final String name;
@@ -586,7 +588,16 @@ class GChord extends Chord{
   @override
   GChord shiftToFirstDot(){
     int pos = nearestDotPosition - 1;
-    return new GChord(name, bar!=0?bar-pos:0, [strings[0]-pos, strings[1]-pos, strings[2]-pos, strings[3]-pos, strings[4]-pos, strings[5]-pos]);
+    return GChord(
+        name,
+        bar==0?0:bar-pos,
+        [max(0, strings[0]-pos),
+          max(0, strings[1]-pos),
+          max(0, strings[2]-pos),
+          max(0, strings[3]-pos),
+          max(0, strings[4]-pos),
+          max(0, strings[5]-pos)
+        ]);
   }
 }
 
@@ -664,8 +675,17 @@ class UChord extends Chord {
   @override
   UChord shiftToFirstDot(){
     int pos = nearestDotPosition - 1;
-    return UChord(name, bar, [strings[0]-pos, strings[1]-pos, strings[2]-pos, strings[3]-pos]);
+
+    return UChord(
+        name,
+        bar==0?0:bar-pos,
+        [max(0, strings[0]-pos),
+          max(0, strings[1]-pos),
+          max(0, strings[2]-pos),
+          max(0, strings[3]-pos)
+    ]);
   }
+
 
 }
 
