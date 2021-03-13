@@ -59,6 +59,7 @@ class _Fretboard extends StatelessWidget{
 class ChordWidget2 extends StatelessWidget{
 
   static const double POSITION_TEXT_HEIGHT = 7.0;
+  static const double CHORD_NAME_HEIGHT = Dimen.TEXT_SIZE_SMALL;
 
   final Chord chord;
   final double width;
@@ -133,6 +134,16 @@ class ChordWidget2 extends StatelessWidget{
                 )
 
               ],
+            ),
+
+            Text(
+                chord.name,
+                style: AppTextStyle(
+                    fontSize: CHORD_NAME_HEIGHT,
+                    fontWeight: weight.halfBold,
+                    color: color
+                )
+
             )
           ],
         )
