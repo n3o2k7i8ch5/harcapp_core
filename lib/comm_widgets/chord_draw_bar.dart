@@ -112,7 +112,6 @@ class ChordWidget2 extends StatelessWidget{
 
     Chord _chord = chord.shiftChordToFirstDot();
 
-
     double sizePart = size/frets;
     double heightFactor = .8;
 
@@ -120,7 +119,7 @@ class ChordWidget2 extends StatelessWidget{
 
     for(int pos in _chord.strings)
       dotsOnString.insert(0, 
-        pos == -1?
+        pos == 0?
         SizedBox(height: sizePart*heightFactor):
         Row(
           children: [
@@ -166,11 +165,15 @@ class ChordWidget2 extends StatelessWidget{
 
                 Row(
                   children: [
-                    if(_chord.bar != -1)
-                      Material(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                        elevation: elevation,
-                        color: color,
+                    if(_chord.bar != 0)
+                      Container(
+                        width: heightFactor*sizePart,
+                        height: heightFactor*size,
+                        child: Material(
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                          elevation: elevation,
+                          color: color,
+                        ),
                       ),
 
                   ],
