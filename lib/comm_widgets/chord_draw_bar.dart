@@ -110,6 +110,8 @@ class ChordWidget2 extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
+    Chord _chord = chord.shiftChordToFirstDot();
+
     return SimpleButton(
         onTap: onTap,
         child: Column(
@@ -138,7 +140,7 @@ class ChordWidget2 extends StatelessWidget{
 
                 Row(
                   children: [
-                    if(chord.bar != 0)
+                    if(_chord.bar != 0)
                       Material(
                         borderRadius: BorderRadius.all(Radius.circular(100)),
                         elevation: elevation,
