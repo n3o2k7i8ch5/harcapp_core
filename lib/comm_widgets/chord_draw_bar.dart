@@ -118,23 +118,20 @@ class ChordWidget2 extends StatelessWidget{
       dotsOnString.insert(0, 
         pos == 0?
         SizedBox(height: sizePart*heightFactor):
-        Container(
-          color: Colors.green[100],
-          child: Row(
-            children: [
-              SizedBox(width: sizePart*(pos-1)),
-              Container(
-                width: sizePart*heightFactor,
-                height: sizePart*heightFactor,
-                child: Material(
-                  borderRadius: BorderRadius.circular(100),
-                  color: color,
-                  elevation: elevation,
-                ),
-              )
-            ],
-          ),
-        )
+        Row(
+          children: [
+            SizedBox(width: sizePart*(pos-1) + (1-heightFactor)*sizePart),
+            Container(
+              width: sizePart*heightFactor,
+              height: sizePart*heightFactor,
+              child: Material(
+                borderRadius: BorderRadius.circular(100),
+                color: color,
+                elevation: elevation,
+              ),
+            )
+          ],
+        ),
       );
 
     return SimpleButton(
