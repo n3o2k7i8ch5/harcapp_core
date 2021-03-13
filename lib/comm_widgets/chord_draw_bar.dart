@@ -54,11 +54,7 @@ class _Fretboard extends StatelessWidget{
       child: Stack(
         children: [
           Column(children: horLines),
-          Positioned.fill(
-            child: Center(
-              child: Row(children: verLines, crossAxisAlignment: CrossAxisAlignment.center),
-            ),
-          )
+          Positioned.fill(child: Center(child: Row(children: verLines)))
         ],
       ),
     );
