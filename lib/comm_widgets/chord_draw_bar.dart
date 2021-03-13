@@ -110,7 +110,7 @@ class ChordWidget2 extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    Chord _chord = chord.shiftChordToFirstDot();
+    Chord _chord = chord.shiftToFirstDot();
 
     double sizePart = size/frets;
     double heightFactor = .8;
@@ -144,7 +144,7 @@ class ChordWidget2 extends StatelessWidget{
           children: [
 
             Text(
-                chord.getNearestDotPosition().toString(),
+                chord.nearestDotPosition.toString(),
                 style: AppTextStyle(
                     fontSize: POSITION_TEXT_HEIGHT,
                     fontWeight: weight.halfBold,
@@ -338,8 +338,8 @@ class ChordWidget extends StatelessWidget{
       );
 
   static ChordWidget from(Chord chord, {Function onTap, Color background: Colors.white, Color hint: AppColors.text_hint_enab, Color color: AppColors.text_def_enab, elevation: AppCard.defElevation}){
-    int nearestDotPosition = chord.getNearestDotPosition();
-    chord = chord.shiftChordToFirstDot();
+    int nearestDotPosition = chord.nearestDotPosition;
+    chord = chord.shiftToFirstDot();
     return ChordWidget(chord, nearestDotPosition, onTap, background, hint, color, elevation);
   }
 

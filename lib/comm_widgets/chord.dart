@@ -6,8 +6,22 @@ abstract class Chord{
 
   const Chord(this.name, this.bar, this.strings);
 
-  int getNearestDotPosition();
-  Chord shiftChordToFirstDot();
+  int get nearestDotPosition{
+    int nearestDotPostion;
+
+    if(bar!=0)
+      nearestDotPostion = bar;
+    else{
+      nearestDotPostion = 999999999;
+      for(int pos in strings)
+        if(pos != 0 && pos < nearestDotPostion)
+          nearestDotPostion = pos;
+    }
+
+    return nearestDotPostion;
+  }
+
+  Chord shiftToFirstDot();
 
   int min(int i1, int i2){
 
@@ -570,24 +584,8 @@ class GChord extends Chord{
   const GChord(String name, int bar, List<int> strings) : super(name, bar, strings);
 
   @override
-  int getNearestDotPosition(){
-    int nearestDotPostion;
-
-    if(bar!=0)
-      nearestDotPostion = bar;
-    else
-      nearestDotPostion = min(strings[0],
-          min(strings[1],
-              min(strings[2],
-                  min(strings[3],
-                      min(strings[4], strings[5])))));
-
-    return nearestDotPostion;
-  }
-
-  @override
-  GChord shiftChordToFirstDot(){
-    int pos = getNearestDotPosition() - 1;
+  GChord shiftToFirstDot(){
+    int pos = nearestDotPosition - 1;
     return new GChord(name, bar!=0?bar-pos:0, [strings[0]-pos, strings[1]-pos, strings[2]-pos, strings[3]-pos, strings[4]-pos, strings[5]-pos]);
   }
 }
@@ -664,13 +662,8 @@ class UChord extends Chord {
   const UChord(String name, int bar, List<int> strings) : super(name, bar, strings);
 
   @override
-  int getNearestDotPosition() {
-    return min(strings[0], min(strings[1], min(strings[2], strings[3])));
-  }
-
-  @override
-  UChord shiftChordToFirstDot(){
-    int pos = getNearestDotPosition() - 1;
+  UChord shiftToFirstDot(){
+    int pos = nearestDotPosition - 1;
     return UChord(name, bar, [strings[0]-pos, strings[1]-pos, strings[2]-pos, strings[3]-pos]);
   }
 
@@ -681,12 +674,12 @@ class EmptyChord extends Chord{
   const EmptyChord() : super('', 0, const [0, 0, 0, 0, 0, 0]);
 
   @override
-  int getNearestDotPosition() {
+  int get nearestDotPosition {
     return 0;
   }
 
   @override
-  Chord shiftChordToFirstDot() {
+  Chord shiftToFirstDot() {
     return EmptyChord();
   }
 
