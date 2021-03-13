@@ -105,7 +105,7 @@ class ChordWidget2 extends StatelessWidget{
     return SimpleButton(
         onTap: onTap,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
             Text(chord.getNearestDotPosition().toString(), style: AppTextStyle(fontSize: POSITION_TEXT_HEIGHT, color: hintEnabled(context)), textAlign: TextAlign.start),
