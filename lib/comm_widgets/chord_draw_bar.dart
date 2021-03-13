@@ -171,7 +171,7 @@ class ChordWidget2 extends StatelessWidget{
                 if(_chord.bar != 0)
                   Positioned(
                     top: 0,
-                    left: (1-heightFactor)*sizePart + nearestDotPosition == 1?0:sizePart,
+                    left: (1-heightFactor)*sizePart + (nearestDotPosition == 1?0:sizePart),
                     child: Container(
                       width: heightFactor*sizePart,
                       height: strings*heightFactor*sizePart,
