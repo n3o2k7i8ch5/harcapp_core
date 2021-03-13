@@ -89,18 +89,30 @@ class ChordWidget extends StatelessWidget{
     this.onTap,
   });
 
-  static ChordWidget fromGChord(GChord chord, {Color color}) => ChordWidget(
+  static ChordWidget fromGChord(
+      GChord chord,
+      {
+        Color color,
+        void Function() onTap,
+      }) => ChordWidget(
     chord: chord,
     frets: 5,
     strings: 6,
     color: color,
+    onTap: onTap,
   );
 
-  static ChordWidget fromUChord(UChord chord, {Color color}) => ChordWidget(
+  static ChordWidget fromUChord(
+      UChord chord,
+      {
+        Color color,
+        void Function() onTap,
+      }) => ChordWidget(
     chord: chord,
     frets: 5,
     strings: 4,
     color: color,
+    onTap: onTap,
   );
 
 
