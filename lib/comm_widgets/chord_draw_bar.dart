@@ -80,7 +80,7 @@ class ChordWidget2 extends StatelessWidget{
 
   const ChordWidget2({
     this.chord,
-    this.size: 32.0,
+    this.size: 28.0,
     this.color,
     this.elevation: 0,
 
