@@ -47,6 +47,9 @@ abstract class ColorPack{
   static const DEF_APP_BAR_TEXT_ENAB = Colors.white;
   static const DEF_APP_BAR_TEXT_DISAB = Colors.white70;
 
+  static const DEF_ICON_ENAB = Colors.black;
+  static const DEF_ICON_DISAB = Colors.black38;
+
   const ColorPack();
 
   String get name;

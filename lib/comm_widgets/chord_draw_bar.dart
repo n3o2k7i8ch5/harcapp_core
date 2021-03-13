@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/primitive_wrapper.dart';
+import 'package:harcapp_core/comm_widgets/simple_button.dart';
 
 import '../comm_classes/color_pack.dart';
 import '../colors.dart';
@@ -19,7 +20,13 @@ class Fretboard extends StatelessWidget{
   final int frets;
   final int strings;
 
-  const Fretboard(this.width, this.height, this.color, this.frets, this.strings);
+  const Fretboard({
+    this.width: 32,
+    this.height: 32,
+    this.color,
+    this.frets,
+    this.strings
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,29 +58,180 @@ class Fretboard extends StatelessWidget{
 
 class ChordWidget2 extends StatelessWidget{
 
+  static const double POSITION_TEXT_HEIGHT = 7.0;
+
+  final Chord chord;
   final double width;
   final double height;
   final Color color;
+  final double elevation;
 
   final int frets;
   final int strings;
 
-  const ChordWidget2(this.width, this.height, this.color, this.frets, this.strings);
+  final void Function() onTap;
+
+  const ChordWidget2({
+    this.chord,
+    this.width: 32.0,
+    this.height: 32.0,
+    this.color,
+    this.elevation,
+
+    this.frets,
+    this.strings,
+
+    this.onTap,
+  });
+
+  static ChordWidget2 fromGChord(GChord chord) => ChordWidget2(
+    chord: chord,
+    frets: 4,
+    strings: 6,
+  );
+
+  static ChordWidget2 fromUChord(UChord chord) => ChordWidget2(
+    chord: chord,
+    frets: 4,
+    strings: 4,
+  );
+
 
   @override
   Widget build(BuildContext context) {
 
-    return Stack(
-      children: [
+    return SimpleButton(
+        onTap: onTap,
+        child: Column(
+          children: [
 
-        Fretboard(width, height, color, frets, strings),
+            Text(chord.getNearestDotPosition().toString(), style: AppTextStyle(fontSize: POSITION_TEXT_HEIGHT, color: hintEnabled(context)), textAlign: TextAlign.start),
 
+            Stack(
+              children: [
 
-      ],
+                Fretboard(
+                    width: width,
+                    height: height,
+                    color: color,
+                    frets: frets,
+                    strings: strings
+                ),
+
+                Row(
+                  children: [
+                    if(chord.bar != 0)
+                      Material(
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
+                        elevation: elevation,
+                        color: color,
+                      )
+                  ],
+                )
+
+              ],
+            )
+          ],
+        )
     );
   }
 
 
+}
+
+class ChordDrawBar2 extends StatefulWidget{
+  
+  final String chords;
+  final Color color;
+  final double elevation;
+
+  final void Function() onTap;
+  
+  const ChordDrawBar2(this.chords, {this.color=ColorPack.DEF_ICON_ENAB, this.elevation=0, this.onTap});
+  
+  @override
+  State<StatefulWidget> createState() => ChordDrawBar2State();
+  
+}
+
+class ChordDrawBar2State extends State<ChordDrawBar2>{
+  
+  bool typeGuitar;
+
+  List<Widget> guitChords;
+  List<Widget> ukulChords;
+
+  @override
+  void initState() {    
+    List<String> guitChordStrs = [];
+    List<String> ukulChordStrs = [];
+    List<String> lines = widget.chords.split('\n');
+
+    for(String line in lines) {
+      List<String> chordStrs = line.split(' ');
+      for(String chordStr in chordStrs) {
+        
+        if(chordStr.isEmpty) continue;
+        
+        if(!guitChordStrs.contains(chordStr))guitChordStrs.add(chordStr);
+        
+        String ukulChordStr = chordStr.replaceAll(RegExp(r'[0-9+]'), '');
+        if(!ukulChordStrs.contains(ukulChordStr)) ukulChordStrs.add(ukulChordStr);
+        
+      }
+      
+      guitChords = [];
+      for(String chordStr in guitChordStrs) {
+        List<GChord> chordSet = GChord.chordDrawableMap[chordStr];
+        if(chordSet == null) continue;
+        guitChords.add(ChordWidget2.fromGChord(chordSet[0]));
+      }
+
+      ukulChords = [];
+      for(String chordStr in ukulChordStrs){
+        UChord chord = UChord.chordDrawableMap[chordStr];
+        if(chord == null) continue;
+        ukulChords.add(ChordWidget2.fromUChord(chord));
+      }
+
+
+    }
+
+    super.initState();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+
+    return Material(
+      color: widget.color,
+      elevation: widget.elevation,
+      child: Row(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children:
+                typeGuitar?
+                guitChords:
+                ukulChords,
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.all(Dimen.DEF_MARG),
+            child: RotatedBox(
+              child: Text(typeGuitar?'Gitara':'Ukulele', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnabled(context))),
+              quarterTurns: 3,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+  
 }
 
 class ChordWidget extends StatelessWidget{
