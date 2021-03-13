@@ -174,7 +174,9 @@ class ChordWidget2 extends StatelessWidget{
                     ),
                   ),
 
-                Column(children: dotsOnString)
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: dotsOnString)
 
               ],
             ),
