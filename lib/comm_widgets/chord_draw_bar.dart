@@ -32,13 +32,13 @@ class _Fretboard extends StatelessWidget{
   Widget build(BuildContext context) {
     List<Widget> horLines = [SizedBox(
       height: height/strings,
-      child: Center(child: Container(height: 2, width: width, color: color)),
+      child: Align(child: Container(height: 2, width: width, color: color), alignment: Alignment.centerLeft),
     )];
 
     for(int i=0; i<strings-1; i++)
       horLines.insert(0, SizedBox(
         height: height/strings,
-        child: Center(child: Container(height: 1, width: width*(1-1/frets), color: color)),
+        child: Align(child: Container(height: 1, width: width, color: color), alignment: Alignment.centerLeft),
       ));
 
     List<Widget> verLines = [SizedBox(
