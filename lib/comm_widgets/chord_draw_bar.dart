@@ -172,7 +172,7 @@ class ChordWidget2 extends StatelessWidget{
                   Positioned(
                     top: 0,
                     left: (1-heightFactor)*sizePart + (nearestDotPosition == 1?0:sizePart),
-                    child: Container(
+                    child: SizedBox(
                       width: heightFactor*sizePart,
                       height: strings*heightFactor*sizePart,
                       child: Center(
