@@ -114,7 +114,15 @@ class ChordWidget2 extends StatelessWidget{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            Text(chord.getNearestDotPosition().toString(), style: AppTextStyle(fontSize: POSITION_TEXT_HEIGHT, color: hintEnabled(context)), textAlign: TextAlign.start),
+            Text(
+                chord.getNearestDotPosition().toString(),
+                style: AppTextStyle(
+                    fontSize: POSITION_TEXT_HEIGHT,
+                    fontWeight: weight.halfBold,
+                    color: textEnab_(context)
+                ),
+                textAlign: TextAlign.start
+            ),
 
             Stack(
               children: [
