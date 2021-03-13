@@ -37,7 +37,7 @@ class _Fretboard extends StatelessWidget{
 
     List<Widget> verLines = [SizedBox(
       width: width/frets,
-      child: Center(child: Container(height: height, width: 1, color: color)),
+      child: Center(child: Container(height: height*(1-1/strings), width: 1, color: color)),
     )];
 
     for(int i=0; i<strings-1; i++)
