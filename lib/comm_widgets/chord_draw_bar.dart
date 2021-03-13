@@ -66,6 +66,16 @@ class ChordWidget extends StatelessWidget{
   static const double DEF_SIZE = 32.0;
   static const double POSITION_TEXT_HEIGHT = 7.0;
   static const double CHORD_NAME_HEIGHT = Dimen.TEXT_SIZE_SMALL;
+  static const int DEF_FRET_CNT = 5;
+
+
+  static double height(int strCnt, {double size = DEF_SIZE, int frets = DEF_FRET_CNT}){
+
+    double sizePart = size/frets;
+    double heightFactor = .8;
+
+    return strCnt*frets + CHORD_NAME_HEIGHT + POSITION_TEXT_HEIGHT + 2*SimpleButton.DEF_MARG + 2*SimpleButton.DEF_PADDING;
+  }
 
   final Chord chord;
   final double size;
@@ -83,7 +93,7 @@ class ChordWidget extends StatelessWidget{
     this.color,
     this.elevation: 4.0,
 
-    this.frets,
+    this.frets: 5,
     this.strings,
 
     this.onTap,
@@ -96,7 +106,6 @@ class ChordWidget extends StatelessWidget{
         void Function() onTap,
       }) => ChordWidget(
     chord: chord,
-    frets: 5,
     strings: 6,
     color: color,
     onTap: onTap,
@@ -109,7 +118,6 @@ class ChordWidget extends StatelessWidget{
         void Function() onTap,
       }) => ChordWidget(
     chord: chord,
-    frets: 5,
     strings: 4,
     color: color,
     onTap: onTap,
