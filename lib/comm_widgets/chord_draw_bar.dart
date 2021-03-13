@@ -32,7 +32,7 @@ class _Fretboard extends StatelessWidget{
   Widget build(BuildContext context) {
     List<Widget> horLines = [SizedBox(
       height: height/strings,
-      child: Align(child: Container(height: 2, width: width, color: color), alignment: Alignment.centerLeft),
+      child: Center(child: Container(height: 2, width: width, color: color)),
     )];
 
     for(int i=0; i<strings-1; i++)
@@ -41,10 +41,13 @@ class _Fretboard extends StatelessWidget{
         child: Center(child: Container(height: 1, width: width, color: color)),
       ));
 
-    List<Widget> verLines = [SizedBox(
-      width: width/frets,
-      child: Align(child: Container(height: height*(1-1/strings), width: 1, color: color), alignment: Alignment.centerLeft),
-    )];
+    List<Widget> verLines = [];
+
+    for(int i=0; i<strings-1; i++)
+      verLines.add(SizedBox(
+        width: width/frets,
+        child: Align(child: Container(height: height*(1-1/strings), width: 1, color: color), alignment: Alignment.centerLeft),
+      ));
 
     return Stack(
       children: [
