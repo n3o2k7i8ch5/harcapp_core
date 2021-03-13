@@ -215,6 +215,8 @@ class ChordDrawBar2 extends StatefulWidget{
   final Color background;
   final Color chordColor;
   final double elevation;
+  final bool changeTypeOnTap;
+  final bool initTypeGuitar;
 
   final void Function(bool) onTap;
   
@@ -223,6 +225,9 @@ class ChordDrawBar2 extends StatefulWidget{
         this.background=Colors.transparent,
         this.chordColor=ColorPack.DEF_ICON_ENAB,
         this.elevation=0,
+        this.changeTypeOnTap=true,
+        this.initTypeGuitar,
+
         this.onTap
       });
   
@@ -241,7 +246,7 @@ class ChordDrawBar2State extends State<ChordDrawBar2>{
   @override
   void initState() {
 
-    typeGuitar = true;
+    typeGuitar = widget.initTypeGuitar??true;
 
     List<String> guitChordStrs = [];
     List<String> ukulChordStrs = [];
@@ -287,7 +292,7 @@ class ChordDrawBar2State extends State<ChordDrawBar2>{
       elevation: widget.elevation,
       child: InkWell(
         onTap: (){
-          setState(() => typeGuitar = !typeGuitar);
+          if(widget.changeTypeOnTap) setState(() => typeGuitar = !typeGuitar);
           if(widget.onTap != null)
             widget.onTap(typeGuitar);
         },
