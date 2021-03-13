@@ -13,16 +13,14 @@ import 'chord.dart';
 
 class _Fretboard extends StatelessWidget{
 
-  final double width;
-  final double height;
+  final double size;
   final Color color;
 
   final int frets;
   final int strings;
 
   const _Fretboard({
-    this.width: 32,
-    this.height: 32,
+    this.size: 32,
     this.color,
     this.frets,
     this.strings
@@ -30,23 +28,26 @@ class _Fretboard extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+
+    double sizePart = size/frets;
+
     List<Widget> horLines = [SizedBox(
-      height: height/strings,
-      child: Center(child: Container(height: 2, width: width, color: color)),
+      height: sizePart*strings,
+      child: Center(child: Container(height: 2, width: size, color: color)),
     )];
 
     for(int i=0; i<strings-1; i++)
       horLines.insert(0, SizedBox(
-        height: height/strings,
-        child: Center(child: Container(height: 1, width: width, color: color)),
+        height: sizePart*strings,
+        child: Center(child: Container(height: 1, width: size, color: color)),
       ));
 
     List<Widget> verLines = [];
 
-    for(int i=0; i<frets-1; i++)
+    for(int i=0; i<frets; i++)
       verLines.add(SizedBox(
-        width: width/frets,
-        child: Align(child: Container(height: height*(1-(1/strings)), width: 1, color: color), alignment: Alignment.centerLeft),
+        width: sizePart,
+        child: Align(child: Container(height: sizePart*(strings-1), width: 1, color: color), alignment: Alignment.centerLeft),
       ));
 
     return Container(
@@ -68,8 +69,7 @@ class ChordWidget2 extends StatelessWidget{
   static const double CHORD_NAME_HEIGHT = Dimen.TEXT_SIZE_SMALL;
 
   final Chord chord;
-  final double width;
-  final double height;
+  final double size;
   final Color color;
   final double elevation;
 
@@ -80,8 +80,7 @@ class ChordWidget2 extends StatelessWidget{
 
   const ChordWidget2({
     this.chord,
-    this.width: 32.0,
-    this.height: 32.0,
+    this.size: 32.0,
     this.color,
     this.elevation: 0,
 
@@ -121,8 +120,7 @@ class ChordWidget2 extends StatelessWidget{
               children: [
 
                 _Fretboard(
-                    width: width,
-                    height: height,
+                    size: size,
                     color: color,
                     frets: frets,
                     strings: strings
