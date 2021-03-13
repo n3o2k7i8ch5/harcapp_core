@@ -84,16 +84,18 @@ class ChordWidget2 extends StatelessWidget{
     this.onTap,
   });
 
-  static ChordWidget2 fromGChord(GChord chord) => ChordWidget2(
+  static ChordWidget2 fromGChord(GChord chord, {Color color}) => ChordWidget2(
     chord: chord,
     frets: 4,
     strings: 6,
+    color: color,
   );
 
-  static ChordWidget2 fromUChord(UChord chord) => ChordWidget2(
+  static ChordWidget2 fromUChord(UChord chord, {Color color}) => ChordWidget2(
     chord: chord,
     frets: 4,
     strings: 4,
+    color: color,
   );
 
 
@@ -187,16 +189,15 @@ class ChordDrawBar2State extends State<ChordDrawBar2>{
       for(String chordStr in guitChordStrs) {
         List<GChord> chordSet = GChord.chordDrawableMap[chordStr];
         if(chordSet == null) continue;
-        guitChords.add(ChordWidget2.fromGChord(chordSet[0]));
+        guitChords.add(ChordWidget2.fromGChord(chordSet[0], color: widget.color));
       }
 
       ukulChords = [];
       for(String chordStr in ukulChordStrs){
         UChord chord = UChord.chordDrawableMap[chordStr];
         if(chord == null) continue;
-        ukulChords.add(ChordWidget2.fromUChord(chord));
+        ukulChords.add(ChordWidget2.fromUChord(chord, color: widget.color));
       }
-
 
     }
 
