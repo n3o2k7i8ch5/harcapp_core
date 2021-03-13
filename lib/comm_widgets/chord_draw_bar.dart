@@ -169,25 +169,24 @@ class ChordWidget2 extends StatelessWidget{
                 ),
 
                 if(_chord.bar != 0)
-                  Row(
-                    children: [
-                      if(nearestDotPosition != 1)
-                        SizedBox(width: sizePart),
-                      Container(
-                        width: heightFactor*sizePart,
-                        height: strings*heightFactor*sizePart,
-                        child: Material(
-                          borderRadius: BorderRadius.all(Radius.circular(100)),
-                          elevation: elevation,
-                          color: color,
-                        ),
+                  Positioned(
+                    top: 0,
+                    left: (1-heightFactor)*sizePart + nearestDotPosition == 1?0:sizePart,
+                    child: Container(
+                      width: heightFactor*sizePart,
+                      height: strings*heightFactor*sizePart,
+                      child: Material(
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
+                        elevation: elevation,
+                        color: color,
                       ),
-                    ],
+                    ),
                   ),
 
                 Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: dotsOnString)
+                    children: dotsOnString
+                )
 
               ],
             ),
