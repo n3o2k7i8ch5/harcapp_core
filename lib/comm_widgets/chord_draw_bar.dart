@@ -123,7 +123,7 @@ class ChordWidget2 extends StatelessWidget{
         SizedBox(height: sizePart*heightFactor):
         Row(
           children: [
-            SizedBox(width: sizePart*pos),
+            SizedBox(width: sizePart*(pos-1)),
             Container(
               width: sizePart*heightFactor,
               height: sizePart*heightFactor,
