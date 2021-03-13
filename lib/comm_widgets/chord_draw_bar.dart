@@ -120,9 +120,11 @@ class ChordWidget2 extends StatelessWidget{
 
     for(int pos in _chord.strings)
       dotsOnString.add(
+        pos == -1?
+        SizedBox(height: sizePart*heightFactor):
         Row(
           children: [
-            SizedBox(width: sizePart*(pos)),
+            SizedBox(width: sizePart*pos),
             Container(
               width: sizePart*heightFactor,
               height: sizePart*heightFactor,
