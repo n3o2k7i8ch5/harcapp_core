@@ -11,7 +11,7 @@ import '../dimen.dart';
 import 'app_card.dart';
 import 'chord.dart';
 
-class Fretboard extends StatelessWidget{
+class _Fretboard extends StatelessWidget{
 
   final double width;
   final double height;
@@ -20,7 +20,7 @@ class Fretboard extends StatelessWidget{
   final int frets;
   final int strings;
 
-  const Fretboard({
+  const _Fretboard({
     this.width: 32,
     this.height: 32,
     this.color,
@@ -110,7 +110,7 @@ class ChordWidget2 extends StatelessWidget{
             Stack(
               children: [
 
-                Fretboard(
+                _Fretboard(
                     width: width,
                     height: height,
                     color: color,
