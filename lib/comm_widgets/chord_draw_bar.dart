@@ -50,7 +50,7 @@ class _Fretboard extends StatelessWidget{
       ));
 
     return Container(
-      color: Colors.red,
+      color: Colors.red[100],
       child: Stack(
         children: [
           Column(children: horLines),
