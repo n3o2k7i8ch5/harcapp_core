@@ -133,7 +133,7 @@ class ChordWidget2 extends StatelessWidget{
               height: sizePart*heightFactor,
               child: Material(
                 borderRadius: BorderRadius.circular(100),
-                color: color,
+                color: color??iconEnab_(context),
                 elevation: elevation,
               ),
             )
@@ -154,7 +154,7 @@ class ChordWidget2 extends StatelessWidget{
                 style: AppTextStyle(
                     fontSize: POSITION_TEXT_HEIGHT,
                     fontWeight: weight.bold,
-                    color: textEnab_(context)
+                    color: color??iconEnab_(context)
                 ),
                 textAlign: TextAlign.start
             ),
@@ -164,7 +164,7 @@ class ChordWidget2 extends StatelessWidget{
 
                 _Fretboard(
                     size: size,
-                    color: color,
+                    color: color??iconEnab_(context),
                     frets: frets,
                     strings: strings
                 ),
@@ -179,7 +179,7 @@ class ChordWidget2 extends StatelessWidget{
                       child: Material(
                         borderRadius: BorderRadius.all(Radius.circular(100)),
                         elevation: elevation,
-                        color: color,
+                        color: color??iconEnab_(context),
                       ),
                     ),
                   ),
@@ -197,7 +197,7 @@ class ChordWidget2 extends StatelessWidget{
                 style: AppTextStyle(
                     fontSize: CHORD_NAME_HEIGHT,
                     fontWeight: weight.halfBold,
-                    color: color
+                    color: color??iconEnab_(context)
                 )
 
             )
