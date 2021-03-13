@@ -108,6 +108,7 @@ class ChordWidget2 extends StatelessWidget{
   Widget build(BuildContext context) {
 
     Chord _chord = chord.shiftToFirstDot();
+    int nearestDotPosition = chord.nearestDotPosition;
 
     double sizePart = size/frets;
     double heightFactor = .8;
@@ -120,7 +121,12 @@ class ChordWidget2 extends StatelessWidget{
         SizedBox(height: sizePart*heightFactor):
         Row(
           children: [
-            SizedBox(width: sizePart*(pos-1) + (1-heightFactor)*sizePart),
+            SizedBox(
+                width:
+                nearestDotPosition == 1?
+                sizePart*(pos-1) + (1-heightFactor)*sizePart:
+                sizePart*(pos) + (1-heightFactor)*sizePart
+            ),
             Container(
               width: sizePart*heightFactor,
               height: sizePart*heightFactor,
@@ -141,7 +147,9 @@ class ChordWidget2 extends StatelessWidget{
           children: [
 
             Text(
-                chord.nearestDotPosition.toString(),
+                nearestDotPosition==1?
+                nearestDotPosition.toString():
+                (nearestDotPosition-1).toString(),
                 style: AppTextStyle(
                     fontSize: POSITION_TEXT_HEIGHT,
                     fontWeight: weight.halfBold,
