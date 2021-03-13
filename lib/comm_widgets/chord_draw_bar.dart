@@ -162,7 +162,10 @@ class ChordDrawBar2State extends State<ChordDrawBar2>{
   List<Widget> ukulChords;
 
   @override
-  void initState() {    
+  void initState() {
+
+    typeGuitar = true;
+
     List<String> guitChordStrs = [];
     List<String> ukulChordStrs = [];
     List<String> lines = widget.chords.split('\n');
