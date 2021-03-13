@@ -122,7 +122,7 @@ class ChordWidget2 extends StatelessWidget{
       dotsOnString.add(
         Row(
           children: [
-            SizedBox(width: sizePart*(pos-1)),
+            SizedBox(width: sizePart*(pos)),
             Container(
               width: sizePart*heightFactor,
               height: sizePart*heightFactor,
@@ -163,7 +163,7 @@ class ChordWidget2 extends StatelessWidget{
 
                 Row(
                   children: [
-                    if(_chord.bar != 0)
+                    if(_chord.bar != -1)
                       Material(
                         borderRadius: BorderRadius.all(Radius.circular(100)),
                         elevation: elevation,
