@@ -145,7 +145,7 @@ class ChordDrawBar2 extends StatefulWidget{
   final Color color;
   final double elevation;
 
-  final void Function() onTap;
+  final void Function(bool) onTap;
   
   const ChordDrawBar2(this.chords, {this.color=ColorPack.DEF_ICON_ENAB, this.elevation=0, this.onTap});
   
@@ -206,28 +206,35 @@ class ChordDrawBar2State extends State<ChordDrawBar2>{
     return Material(
       color: widget.color,
       elevation: widget.elevation,
-      child: Row(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children:
-                typeGuitar?
-                guitChords:
-                ukulChords,
+      child: InkWell(
+        onTap: (){
+          setState(() => typeGuitar = !typeGuitar);
+          if(widget.onTap != null)
+            widget.onTap(typeGuitar);
+        },
+        child: Row(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children:
+                  typeGuitar?
+                  guitChords:
+                  ukulChords,
+                ),
               ),
             ),
-          ),
 
-          Padding(
-            padding: EdgeInsets.all(Dimen.DEF_MARG),
-            child: RotatedBox(
-              child: Text(typeGuitar?'Gitara':'Ukulele', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnabled(context))),
-              quarterTurns: 3,
-            ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.all(Dimen.DEF_MARG),
+              child: RotatedBox(
+                child: Text(typeGuitar?'Gitara':'Ukulele', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnabled(context))),
+                quarterTurns: 3,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
