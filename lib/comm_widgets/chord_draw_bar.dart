@@ -63,7 +63,7 @@ class _Fretboard extends StatelessWidget{
 
 class ChordWidget2 extends StatelessWidget{
 
-  static const double DEF_SIZE = 28.0;
+  static const double DEF_SIZE = 32.0;
   static const double POSITION_TEXT_HEIGHT = 7.0;
   static const double CHORD_NAME_HEIGHT = Dimen.TEXT_SIZE_SMALL;
 
@@ -112,6 +112,7 @@ class ChordWidget2 extends StatelessWidget{
 
     double sizePart = size/frets;
     double heightFactor = .8;
+    double barFactor = .7;
 
     List<Widget> dotsOnString = [];
 
@@ -173,7 +174,7 @@ class ChordWidget2 extends StatelessWidget{
                     top: 0,
                     left: (1-heightFactor)*sizePart + (nearestDotPosition == 1?0:sizePart),
                     child: Container(
-                      width: heightFactor*sizePart,
+                      width: barFactor*sizePart,
                       height: strings*heightFactor*sizePart,
                       child: Material(
                         borderRadius: BorderRadius.all(Radius.circular(100)),
