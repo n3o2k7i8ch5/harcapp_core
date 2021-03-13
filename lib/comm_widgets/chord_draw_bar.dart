@@ -20,7 +20,7 @@ class _Fretboard extends StatelessWidget{
   final int strings;
 
   const _Fretboard({
-    this.size: 28,
+    this.size: 24,
     this.color,
     this.frets,
     this.strings
@@ -46,7 +46,7 @@ class _Fretboard extends StatelessWidget{
 
     for(int i=0; i<frets; i++)
       verLines.add(SizedBox(
-        width: sizePart,
+        width: sizePart*1.1,
         child: Align(child: Container(height: sizePart*(strings-1), width: 1, color: color), alignment: Alignment.centerLeft),
       ));
 
@@ -80,7 +80,7 @@ class ChordWidget2 extends StatelessWidget{
 
   const ChordWidget2({
     this.chord,
-    this.size: 28.0,
+    this.size: 24.0,
     this.color,
     this.elevation: 0,
 
