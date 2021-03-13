@@ -32,22 +32,22 @@ class _Fretboard extends StatelessWidget{
     double sizePart = size/frets;
 
     List<Widget> horLines = [SizedBox(
-      height: sizePart,
-      child: Center(child: Container(height: 2, width: size*1.1, color: color)),
+      height: .9*sizePart,
+      child: Center(child: Container(height: 2, width: size, color: color)),
     )];
 
     for(int i=0; i<strings-1; i++)
       horLines.insert(0, SizedBox(
-        height: sizePart,
-        child: Center(child: Container(height: 1, width: size*1.1, color: color)),
+        height: .9*sizePart,
+        child: Center(child: Container(height: 1, width: size, color: color)),
       ));
 
     List<Widget> verLines = [];
 
     for(int i=0; i<frets; i++)
       verLines.add(SizedBox(
-        width: sizePart*1.1,
-        child: Align(child: Container(height: sizePart*(strings-1), width: 1, color: color), alignment: Alignment.centerLeft),
+        width: sizePart,
+        child: Align(child: Container(height: .9*sizePart*(strings-1), width: 1, color: color), alignment: Alignment.centerLeft),
       ));
 
     return Container(
