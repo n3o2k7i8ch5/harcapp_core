@@ -20,7 +20,7 @@ class _Fretboard extends StatelessWidget{
   final int strings;
 
   const _Fretboard({
-    this.size: 24,
+    this.size: ChordWidget2.DEF_SIZE,
     this.color,
     this.frets,
     this.strings
@@ -30,15 +30,16 @@ class _Fretboard extends StatelessWidget{
   Widget build(BuildContext context) {
 
     double sizePart = size/frets;
+    double heightFactor = .8;
 
     List<Widget> horLines = [SizedBox(
-      height: .9*sizePart,
+      height: heightFactor*sizePart,
       child: Center(child: Container(height: 2, width: size, color: color)),
     )];
 
     for(int i=0; i<strings-1; i++)
       horLines.insert(0, SizedBox(
-        height: .9*sizePart,
+        height: heightFactor*sizePart,
         child: Center(child: Container(height: 1, width: size, color: color)),
       ));
 
@@ -47,7 +48,7 @@ class _Fretboard extends StatelessWidget{
     for(int i=0; i<frets; i++)
       verLines.add(SizedBox(
         width: sizePart,
-        child: Align(child: Container(height: .9*sizePart*(strings-1), width: 1, color: color), alignment: Alignment.centerLeft),
+        child: Align(child: Container(height: heightFactor*sizePart*(strings-1), width: 1, color: color), alignment: Alignment.centerLeft),
       ));
 
     return Container(
@@ -65,6 +66,7 @@ class _Fretboard extends StatelessWidget{
 
 class ChordWidget2 extends StatelessWidget{
 
+  static const double DEF_SIZE = 28.0;
   static const double POSITION_TEXT_HEIGHT = 7.0;
   static const double CHORD_NAME_HEIGHT = Dimen.TEXT_SIZE_SMALL;
 
@@ -80,7 +82,7 @@ class ChordWidget2 extends StatelessWidget{
 
   const ChordWidget2({
     this.chord,
-    this.size: 24.0,
+    this.size: DEF_SIZE,
     this.color,
     this.elevation: 0,
 
