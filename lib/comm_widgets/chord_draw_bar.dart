@@ -91,14 +91,14 @@ class ChordWidget2 extends StatelessWidget{
 
   static ChordWidget2 fromGChord(GChord chord, {Color color}) => ChordWidget2(
     chord: chord,
-    frets: 4,
+    frets: 5,
     strings: 6,
     color: color,
   );
 
   static ChordWidget2 fromUChord(UChord chord, {Color color}) => ChordWidget2(
     chord: chord,
-    frets: 4,
+    frets: 5,
     strings: 4,
     color: color,
   );
