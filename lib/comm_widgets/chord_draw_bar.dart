@@ -153,7 +153,7 @@ class ChordWidget2 extends StatelessWidget{
                 (nearestDotPosition-1).toString(),
                 style: AppTextStyle(
                     fontSize: POSITION_TEXT_HEIGHT,
-                    fontWeight: weight.halfBold,
+                    fontWeight: weight.bold,
                     color: textEnab_(context)
                 ),
                 textAlign: TextAlign.start
