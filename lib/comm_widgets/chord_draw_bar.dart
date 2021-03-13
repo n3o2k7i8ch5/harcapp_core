@@ -175,10 +175,12 @@ class ChordWidget2 extends StatelessWidget{
                     child: Container(
                       width: heightFactor*sizePart,
                       height: strings*heightFactor*sizePart,
-                      child: Material(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                        elevation: elevation,
-                        color: color,
+                      child: Center(
+                        child: Material(
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                          elevation: elevation,
+                          color: color,
+                        ),
                       ),
                     ),
                   ),
