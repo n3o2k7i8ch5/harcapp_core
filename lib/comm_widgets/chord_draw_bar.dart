@@ -84,7 +84,7 @@ class ChordWidget2 extends StatelessWidget{
     this.chord,
     this.size: DEF_SIZE,
     this.color,
-    this.elevation: 0,
+    this.elevation: 4.0,
 
     this.frets,
     this.strings,
