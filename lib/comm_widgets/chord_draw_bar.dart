@@ -20,7 +20,7 @@ class _Fretboard extends StatelessWidget{
   final int strings;
 
   const _Fretboard({
-    this.size: 32,
+    this.size: 28,
     this.color,
     this.frets,
     this.strings
