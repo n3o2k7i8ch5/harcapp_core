@@ -51,14 +51,11 @@ class _Fretboard extends StatelessWidget{
         child: Align(child: Container(height: heightFactor*sizePart*(strings-1), width: 1, color: color), alignment: Alignment.centerLeft),
       ));
 
-    return Container(
-      color: Colors.red[100],
-      child: Stack(
-        children: [
-          Column(children: horLines),
-          Positioned.fill(child: Center(child: Row(children: verLines)))
-        ],
-      ),
+    return Stack(
+      children: [
+        Column(children: horLines),
+        Positioned.fill(child: Center(child: Row(children: verLines)))
+      ],
     );
   }
 
@@ -121,19 +118,22 @@ class ChordWidget2 extends StatelessWidget{
       dotsOnString.insert(0, 
         pos == 0?
         SizedBox(height: sizePart*heightFactor):
-        Row(
-          children: [
-            SizedBox(width: sizePart*(pos-1)),
-            Container(
-              width: sizePart*heightFactor,
-              height: sizePart*heightFactor,
-              child: Material(
-                borderRadius: BorderRadius.circular(100),
-                color: color,
-                elevation: elevation,
-              ),
-            )
-          ],
+        Container(
+          color: Colors.green[100],
+          child: Row(
+            children: [
+              SizedBox(width: sizePart*(pos-1)),
+              Container(
+                width: sizePart*heightFactor,
+                height: sizePart*heightFactor,
+                child: Material(
+                  borderRadius: BorderRadius.circular(100),
+                  color: color,
+                  elevation: elevation,
+                ),
+              )
+            ],
+          ),
         )
       );
 
