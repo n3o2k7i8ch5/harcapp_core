@@ -112,6 +112,29 @@ class ChordWidget2 extends StatelessWidget{
 
     Chord _chord = chord.shiftChordToFirstDot();
 
+
+    double sizePart = size/frets;
+    double heightFactor = .8;
+
+    List<Widget> dotsOnString = [];
+
+    for(int pos in _chord.strings)
+      dotsOnString.add(
+        Row(
+          children: [
+            SizedBox(width: sizePart*(pos-1)),
+            Container(
+              width: sizePart*heightFactor,
+              height: sizePart*heightFactor,
+              child: Material(
+                color: color,
+                elevation: elevation,
+              ),
+            )
+          ],
+        )
+      );
+
     return SimpleButton(
         onTap: onTap,
         child: Column(
@@ -145,9 +168,12 @@ class ChordWidget2 extends StatelessWidget{
                         borderRadius: BorderRadius.all(Radius.circular(100)),
                         elevation: elevation,
                         color: color,
-                      )
+                      ),
+
                   ],
-                )
+                ),
+
+                Column(children: dotsOnString)
 
               ],
             ),
