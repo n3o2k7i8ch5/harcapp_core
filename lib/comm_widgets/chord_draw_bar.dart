@@ -32,7 +32,7 @@ class _Fretboard extends StatelessWidget{
   Widget build(BuildContext context) {
     List<Widget> horLines = [SizedBox(
       height: height/strings,
-      child: Container(height: 1, width: width, color: color),
+      child: Center(child: Container(height: 1, width: width, color: color)),
     )];
 
     List<Widget> verLines = [SizedBox(
