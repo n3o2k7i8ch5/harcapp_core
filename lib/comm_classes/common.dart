@@ -61,31 +61,57 @@ String dateToString(DateTime date, {bool showYear=true, bool showMonth=true, boo
 
   String day = '';
   if(showDay)
-    day = date.day.toString();
+    day = date.day.toString() + ' ';
 
   String month = '';
-  if(showMonth)
-    switch(date.month){
-      case 1: month = shortMonth?'sty':'stycznia'; break;
-      case 2: month = shortMonth?'lut':'lutego'; break;
-      case 3: month = shortMonth?'mar':'marca'; break;
-      case 4: month = shortMonth?'kwi':'kwietnia'; break;
-      case 5: month = shortMonth?'maj':'maja'; break;
-      case 6: month = shortMonth?'cze':'czerwca'; break;
-      case 7: month = shortMonth?'lip':'lipca'; break;
-      case 8: month = shortMonth?'sie':'sierpnia'; break;
-      case 9: month = shortMonth?'wrz':'września'; break;
-      case 10: month = shortMonth?'paź':'października'; break;
-      case 11: month = shortMonth?'lis':'listopada'; break;
-      case 12: month = shortMonth?'gru':'grudnia'; break;
+  if(showMonth) {
+    switch (date.month) {
+      case 1:
+        month = shortMonth ? 'sty' : (showDay ? 'stycznia' : 'styczeń');
+        break;
+      case 2:
+        month = shortMonth ? 'lut' : (showDay ? 'lutego' : 'luty');
+        break;
+      case 3:
+        month = shortMonth ? 'mar' : (showDay ? 'marca' : 'marzec');
+        break;
+      case 4:
+        month = shortMonth ? 'kwi' : (showDay ? 'kwietnia' : 'kwiecień');
+        break;
+      case 5:
+        month = shortMonth ? 'maj' : (showDay ? 'maja' : 'maj');
+        break;
+      case 6:
+        month = shortMonth ? 'cze' : (showDay ? 'czerwca' : 'czerwiec');
+        break;
+      case 7:
+        month = shortMonth ? 'lip' : (showDay ? 'lipca' : 'lipiec');
+        break;
+      case 8:
+        month = shortMonth ? 'sie' : (showDay ? 'sierpnia' : 'sierpień');
+        break;
+      case 9:
+        month = shortMonth ? 'wrz' : (showDay ? 'września' : 'wrzesień');
+        break;
+      case 10:
+        month = shortMonth ? 'paź' : (showDay ? 'października' : 'październik');
+        break;
+      case 11:
+        month = shortMonth ? 'lis' : (showDay ? 'listopada' : 'listopad');
+        break;
+      case 12:
+        month = shortMonth ? 'gru' : (showDay ? 'grudnia' : 'grudzień');
+        break;
     }
+    month += ' ';
+  }
 
   String year = '';
   if(showYear)
     year = date.year.toString() + ' $yearAbbr';
 
   if(!withTime)
-    return '$day $month $year';
+    return '$day$month$year';
 
   String hours = (date.hour<10?'0':'') + date.hour.toString();
   String minutes = (date.minute<10?'0':'') + date.minute.toString();
