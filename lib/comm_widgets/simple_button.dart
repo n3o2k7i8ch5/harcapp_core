@@ -64,7 +64,8 @@ class SimpleButton extends StatelessWidget{
     bool iconLeading=true,
     double elevation: 0,
     Color color,
-    Color textColor
+    Color textColor,
+    bool dense: false,
   }){
 
     assert(textColor != null || context != null, 'Color or context must not be null.');
@@ -80,20 +81,20 @@ class SimpleButton extends StatelessWidget{
           mainAxisSize: MainAxisSize.min,
           children: [
             if(iconLeading)
-              Icon(icon, color: textColor??iconEnab_(context)),
+              Icon(icon, color: textColor??iconEnab_(context), size: dense?18.0:Dimen.ICON_SIZE),
 
-            SizedBox(width: Dimen.ICON_MARG),
+            SizedBox(width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
 
             Text(
               text,
               style: AppTextStyle(
                 color: textColor??iconEnab_(context),
                 fontWeight: weight.halfBold,
-                fontSize: Dimen.TEXT_SIZE_BIG
+                fontSize: dense?Dimen.TEXT_SIZE_NORMAL:Dimen.TEXT_SIZE_BIG
               ),
             ),
 
-            SizedBox(width: Dimen.ICON_MARG),
+            SizedBox(width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
 
             if(!iconLeading)
               Icon(icon, color: textColor??iconEnab_(context)),
