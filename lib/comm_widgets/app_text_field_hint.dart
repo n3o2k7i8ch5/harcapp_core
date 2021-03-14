@@ -34,7 +34,8 @@ class AppTextFieldHint extends StatefulWidget{
     this.obscureText: false,
     this.enabled,
     this.leading,
-  });
+    Key key
+  }):super(key: key);
 
   @override
   State<StatefulWidget> createState() => AppTextFieldHintState();
