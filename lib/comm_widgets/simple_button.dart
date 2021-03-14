@@ -55,7 +55,17 @@ class SimpleButton extends StatelessWidget{
     );
   }
 
-  static SimpleButton from({BuildContext context, @required IconData icon, @required String text, @required void Function() onTap, bool iconLeading=true, double elevation: 0, Color color, Color textColor}){
+  static SimpleButton from({
+    BuildContext context,
+    @required IconData icon,
+    @required String text,
+    @required void Function() onTap,
+    EdgeInsets margin,
+    bool iconLeading=true,
+    double elevation: 0,
+    Color color,
+    Color textColor
+  }){
 
     assert(textColor != null || context != null, 'Color or context must not be null.');
 
@@ -63,6 +73,7 @@ class SimpleButton extends StatelessWidget{
       elevation: elevation,
       color: color,
       radius: AppCard.BIG_RADIUS,
+      margin: margin,
       padding: EdgeInsets.all(Dimen.ICON_MARG),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
