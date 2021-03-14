@@ -53,3 +53,44 @@ bool isDigit(String string){
 }
 
 void post(Function function) => WidgetsBinding.instance.addPostFrameCallback((_) => function());
+
+String dateToString(DateTime date, {bool showYear=true, bool showMonth=true, bool showDay=true, bool withTime=false, bool shortMonth=false, String yearAbbr='r.'}){
+
+  if(date == null)
+    return '-';
+
+  String day = '';
+  if(showDay)
+    day = date.day.toString();
+
+  String month = '';
+  if(showMonth)
+    switch(date.month){
+      case 1: month = shortMonth?'sty':'stycznia'; break;
+      case 2: month = shortMonth?'lut':'lutego'; break;
+      case 3: month = shortMonth?'mar':'marca'; break;
+      case 4: month = shortMonth?'kwi':'kwietnia'; break;
+      case 5: month = shortMonth?'maj':'maja'; break;
+      case 6: month = shortMonth?'cze':'czerwca'; break;
+      case 7: month = shortMonth?'lip':'lipca'; break;
+      case 8: month = shortMonth?'sie':'sierpnia'; break;
+      case 9: month = shortMonth?'wrz':'września'; break;
+      case 10: month = shortMonth?'paź':'października'; break;
+      case 11: month = shortMonth?'lis':'listopada'; break;
+      case 12: month = shortMonth?'gru':'grudnia'; break;
+    }
+
+  String year = '';
+  if(showYear)
+    year = date.year.toString() + ' $yearAbbr';
+
+  if(!withTime)
+    return '$day $month $year';
+
+  String hours = (date.hour<10?'0':'') + date.hour.toString();
+  String minutes = (date.minute<10?'0':'') + date.minute.toString();
+  String seconds = (date.second<10?'0':'') + date.second.toString();
+
+  return '$day $month $year, $hours:$minutes:$seconds';
+
+}
