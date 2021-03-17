@@ -322,6 +322,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
           children: [
             Expanded(
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children:
