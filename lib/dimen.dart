@@ -3,6 +3,7 @@ class Dimen{
   static const double TEXT_SIZE_APPBAR = 20;
 
   static const double DEF_MARG = 6;
+  static const double SIDE_MARG = 12.0;
 
   static const double TEXT_SIZE_LIMIT = 8;
   static const double TEXT_SIZE_TINY = 10;
