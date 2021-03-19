@@ -44,7 +44,9 @@ class TitleShortcutRowWidget extends StatelessWidget{
             child: Icon(icon, color: iconColor),
           )
         else if(onOpen != null && textAlign == TextAlign.center)
-            SizedBox(width: Dimen.ICON_FOOTPRINT),
+            SizedBox(width: Dimen.ICON_FOOTPRINT)
+        else if(textAlign == TextAlign.start)
+              SizedBox(width: 10.0),
 
         Expanded(
             child: Text(
