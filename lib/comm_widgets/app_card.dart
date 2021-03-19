@@ -14,10 +14,10 @@ class AppCard extends StatelessWidget{
 
   //static const int DEF_TRANS_MILIS = 300;
 
-  static const double DEF_MARGIN_VAL = Dimen.DEF_MARG/2;
+  static const double NORM_MARGIN_VAL = Dimen.DEF_MARG/2;
   static const double DEF_PADDING_VAL = Dimen.DEF_MARG;
 
-  static const EdgeInsets defMargin = EdgeInsets.all(DEF_MARGIN_VAL);
+  static const EdgeInsets normMargin = EdgeInsets.all(NORM_MARGIN_VAL);
   static const EdgeInsets defPadding = EdgeInsets.all(DEF_PADDING_VAL);
   static const double ALERT_DIALOG_PADDING = 18.0;
 
@@ -39,7 +39,7 @@ class AppCard extends StatelessWidget{
     this.key,
     this.child,
     this.color,
-    this.margin: defMargin,
+    this.margin: EdgeInsets.zero,
     this.padding: defPadding,
     this.elevation: 1.0,
     this.onTap,
