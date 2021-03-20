@@ -262,13 +262,16 @@ class ChordDrawBarState extends State<ChordDrawBar>{
   
   bool typeGuitar;
 
-  List<Widget> guitChords;
-  List<Widget> ukulChords;
-
   @override
   void initState() {
 
     typeGuitar = widget.initTypeGuitar??true;
+
+    super.initState();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
 
     List<String> guitChordStrs = [];
     List<String> ukulChordStrs = [];
@@ -277,37 +280,30 @@ class ChordDrawBarState extends State<ChordDrawBar>{
     for(String line in lines) {
       List<String> chordStrs = line.split(' ');
       for(String chordStr in chordStrs) {
-        
+
         if(chordStr.isEmpty) continue;
-        
+
         if(!guitChordStrs.contains(chordStr))guitChordStrs.add(chordStr);
-        
+
         String ukulChordStr = chordStr.replaceAll(RegExp(r'[0-9+]'), '');
         if(!ukulChordStrs.contains(ukulChordStr)) ukulChordStrs.add(ukulChordStr);
-        
-      }
-      
-      guitChords = [];
-      for(String chordStr in guitChordStrs) {
-        List<GChord> chordSet = GChord.chordDrawableMap[chordStr];
-        if(chordSet == null) continue;
-        guitChords.add(ChordWidget.fromGChord(chordSet[0], color: widget.chordColor));
-      }
 
-      ukulChords = [];
-      for(String chordStr in ukulChordStrs){
-        UChord chord = UChord.chordDrawableMap[chordStr];
-        if(chord == null) continue;
-        ukulChords.add(ChordWidget.fromUChord(chord, color: widget.chordColor));
       }
-
     }
 
-    super.initState();
-  }
-  
-  @override
-  Widget build(BuildContext context) {
+    List<Widget> guitChords = [];
+    for(String chordStr in guitChordStrs) {
+      List<GChord> chordSet = GChord.chordDrawableMap[chordStr];
+      if(chordSet == null) continue;
+      guitChords.add(ChordWidget.fromGChord(chordSet[0], color: widget.chordColor));
+    }
+
+    List<Widget> ukulChords = [];
+    for(String chordStr in ukulChordStrs){
+      UChord chord = UChord.chordDrawableMap[chordStr];
+      if(chord == null) continue;
+      ukulChords.add(ChordWidget.fromUChord(chord, color: widget.chordColor));
+    }
 
     return Material(
       color: widget.background,
