@@ -78,9 +78,12 @@ class AppCard extends StatelessWidget{
       radius: ALERT_DIALOG_RADIUS,
       padding: EdgeInsets.all(ALERT_DIALOG_PADDING),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold), textAlign: TextAlign.center),
+          Center(
+            child: Text(title, style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold), textAlign: TextAlign.center),
+          ),
           SizedBox(height: ALERT_DIALOG_PADDING),
           Text(text, style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG)),
           SizedBox(height: ALERT_DIALOG_PADDING),
