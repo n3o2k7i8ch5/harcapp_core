@@ -16,6 +16,7 @@ dependencies:
   connectivity: 2.0.2
   fluttertoast: 7.1.8
   provider: 5.0.0
+  tuple: 1.0.2
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/app_text_style.dart';
+import 'package:harcapp_core/comm_widgets/simple_button.dart';
+import 'package:tuple/tuple.dart';
 
 import '../comm_classes/color_pack.dart';
 import '../dimen.dart';
@@ -50,6 +53,46 @@ class AppCard extends StatelessWidget{
     this.elevetionColor: Colors.black,
     //this.transMilis: DEF_TRANS_MILIS
   }):super(key: key);
+
+  static AppCard alert(
+      String title,
+      String text,
+      List<Tuple2<String, void Function()>> buttons,
+  ){
+
+    List<Widget> buttonChildren = [];
+    for(Tuple2 button in buttons){
+      String text = button.item1;
+      void Function() onTap = button.item2;
+
+      buttonChildren.add(
+        SimpleButton(
+          padding: EdgeInsets.all(Dimen.ICON_MARG),
+          child: Text(text, style: AppTextStyle(fontWeight: weight.bold)),
+          onTap: onTap
+        ),
+      );
+    }
+
+    return AppCard(
+      radius: ALERT_DIALOG_RADIUS,
+      padding: EdgeInsets.all(ALERT_DIALOG_PADDING),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(title, style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold), textAlign: TextAlign.center),
+          SizedBox(height: ALERT_DIALOG_PADDING),
+          Text(text, style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG)),
+          SizedBox(height: ALERT_DIALOG_PADDING),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: buttonChildren,
+          )
+        ],
+      ),
+    );
+
+  }
 
   @override
   Widget build(BuildContext context) {
