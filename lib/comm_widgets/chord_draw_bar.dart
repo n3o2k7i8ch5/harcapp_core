@@ -237,8 +237,9 @@ class ChordDrawBar extends StatefulWidget{
   final double elevation;
   final bool changeTypeOnTap;
   final bool initTypeGuitar;
+  final bool showLabel;
 
-  final void Function(bool) onTap;
+  final void Function(Chord, bool) onTap;
   
   const ChordDrawBar(
       this.chords, {
@@ -247,6 +248,7 @@ class ChordDrawBar extends StatefulWidget{
         this.elevation=0,
         this.changeTypeOnTap=true,
         this.initTypeGuitar,
+        this.showLabel=true,
 
         this.onTap,
 
@@ -295,40 +297,53 @@ class ChordDrawBarState extends State<ChordDrawBar>{
     for(String chordStr in guitChordStrs) {
       List<GChord> chordSet = GChord.chordDrawableMap[chordStr];
       if(chordSet == null) continue;
-      guitChords.add(ChordWidget.fromGChord(chordSet[0], color: widget.chordColor));
+      guitChords.add(
+          ChordWidget.fromGChord(
+              chordSet[0],
+              color: widget.chordColor,
+              onTap: (){
+                if(widget.onTap != null)
+                  widget.onTap(chordSet[0], typeGuitar);
+              }
+          )
+      );
     }
 
     List<Widget> ukulChords = [];
     for(String chordStr in ukulChordStrs){
       UChord chord = UChord.chordDrawableMap[chordStr];
       if(chord == null) continue;
-      ukulChords.add(ChordWidget.fromUChord(chord, color: widget.chordColor));
+      ukulChords.add(
+          ChordWidget.fromUChord(
+              chord,
+              color: widget.chordColor,
+              onTap:(){
+                if(widget.onTap != null)
+                  widget.onTap(chord, typeGuitar);
+              }
+          )
+      );
     }
 
     return Material(
       color: widget.background,
       elevation: widget.elevation,
-      child: InkWell(
-        onTap: (){
-          if(widget.changeTypeOnTap) setState(() => typeGuitar = !typeGuitar);
-          if(widget.onTap != null)
-            widget.onTap(typeGuitar);
-        },
-        child: Row(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children:
-                  typeGuitar?
-                  guitChords:
-                  ukulChords,
-                ),
+      child: Row(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children:
+                typeGuitar?
+                guitChords:
+                ukulChords,
               ),
             ),
+          ),
 
+          if(widget.showLabel)
             Padding(
               padding: EdgeInsets.all(Dimen.DEF_MARG),
               child: RotatedBox(
@@ -336,8 +351,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
                 quarterTurns: 3,
               ),
             )
-          ],
-        ),
+        ],
       ),
     );
   }
