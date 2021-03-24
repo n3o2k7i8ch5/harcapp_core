@@ -238,6 +238,7 @@ class ChordDrawBar extends StatefulWidget{
   final bool changeTypeOnTap;
   final bool initTypeGuitar;
   final bool showLabel;
+  final EdgeInsets padding;
 
   final void Function(Chord, bool) onTap;
   
@@ -249,6 +250,7 @@ class ChordDrawBar extends StatefulWidget{
         this.changeTypeOnTap=true,
         this.initTypeGuitar,
         this.showLabel=true,
+        this.padding=EdgeInsets.zero,
 
         this.onTap,
 
@@ -333,6 +335,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
           Expanded(
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
+              padding: widget.padding,
               scrollDirection: Axis.horizontal,
               child: Row(
                 children:
