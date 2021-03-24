@@ -304,6 +304,9 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               chordSet[0],
               color: widget.chordColor,
               onTap: (){
+                if(widget.changeTypeOnTap)
+                  setState(() => typeGuitar = !typeGuitar);
+
                 if(widget.onTap != null)
                   widget.onTap(chordSet[0], typeGuitar);
               }
@@ -320,6 +323,9 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               chord,
               color: widget.chordColor,
               onTap:(){
+                if(widget.changeTypeOnTap)
+                  setState(() => typeGuitar = !typeGuitar);
+
                 if(widget.onTap != null)
                   widget.onTap(chord, typeGuitar);
               }
