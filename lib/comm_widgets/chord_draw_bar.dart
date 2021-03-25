@@ -139,7 +139,7 @@ class ChordWidget extends StatelessWidget{
     for(int pos in _chord.strings)
       dotsOnString.insert(0, 
         pos == 0?
-        SizedBox(height: sizePart*heightFactor, width: size):
+        SizedBox(height: sizePart*heightFactor):
         Row(
           children: [
             SizedBox(
@@ -179,37 +179,41 @@ class ChordWidget extends StatelessWidget{
                 textAlign: TextAlign.start
             ),
 
-            Stack(
-              children: [
+            SizedBox(
+              width: size*heightFactor,
+              height: size,
+              child: Stack(
+                children: [
 
-                _Fretboard(
-                    size: size,
-                    color: color??iconEnab_(context),
-                    frets: frets,
-                    strings: strings
-                ),
-
-                if(_chord.bar != 0)
-                  Positioned(
-                    top: 0,
-                    left: (1-heightFactor)*sizePart + (nearestDotPosition == 1?0:sizePart),
-                    child: Container(
-                      width: barFactor*sizePart,
-                      height: strings*heightFactor*sizePart,
-                      child: Material(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                        elevation: elevation,
-                        color: color??iconEnab_(context),
-                      ),
-                    ),
+                  _Fretboard(
+                      size: size,
+                      color: color??iconEnab_(context),
+                      frets: frets,
+                      strings: strings
                   ),
 
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: dotsOnString
-                )
+                  if(_chord.bar != 0)
+                    Positioned(
+                      top: 0,
+                      left: (1-heightFactor)*sizePart + (nearestDotPosition == 1?0:sizePart),
+                      child: Container(
+                        width: barFactor*sizePart,
+                        height: strings*heightFactor*sizePart,
+                        child: Material(
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                          elevation: elevation,
+                          color: color??iconEnab_(context),
+                        ),
+                      ),
+                    ),
 
-              ],
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: dotsOnString
+                  )
+
+                ],
+              ),
             ),
 
             Text(
