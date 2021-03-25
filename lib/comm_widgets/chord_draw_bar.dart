@@ -180,8 +180,8 @@ class ChordWidget extends StatelessWidget{
             ),
 
             SizedBox(
-              width: size*heightFactor,
-              height: size,
+              width: (frets-1)*sizePart*heightFactor,
+              height: strings*heightFactor*sizePart,
               child: Stack(
                 children: [
 
