@@ -69,7 +69,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         if((text.length==0) != (oldText.length==0))
           setState(() {});
         oldText = text;
-        widget.onChanged(text);
+        if(widget.onChanged != null)
+          widget.onChanged(text);
       },
       decoration: InputDecoration(
         counterStyle: widget.counterStyle??TextStyle(color: hintEnabled(context)),
