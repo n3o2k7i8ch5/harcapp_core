@@ -70,10 +70,6 @@ class ChordWidget extends StatelessWidget{
 
 
   static double height(int strCnt, {double size = DEF_SIZE, int frets = DEF_FRET_CNT}){
-
-    double sizePart = size/frets;
-    double heightFactor = .8;
-
     return strCnt*frets + CHORD_NAME_HEIGHT + POSITION_TEXT_HEIGHT + 2*SimpleButton.DEF_MARG + 2*SimpleButton.DEF_PADDING;
   }
 
@@ -360,7 +356,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
             Padding(
               padding: EdgeInsets.all(Dimen.DEF_MARG),
               child: RotatedBox(
-                child: Text(typeGuitar?'Gitara':'Ukulele', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnabled(context))),
+                child: Text(typeGuitar?'Gitara':'Ukulele', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnab_(context))),
                 quarterTurns: 3,
               ),
             )

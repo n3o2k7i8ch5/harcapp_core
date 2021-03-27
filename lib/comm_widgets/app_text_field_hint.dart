@@ -73,7 +73,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           widget.onChanged(text);
       },
       decoration: InputDecoration(
-        counterStyle: widget.counterStyle??TextStyle(color: hintEnabled(context)),
+        counterStyle: widget.counterStyle??TextStyle(color: hintEnab_(context)),
         hintText: hint,
         hintStyle: hintStyle,
         border: widget.showUnderline?null:InputBorder.none,
@@ -99,7 +99,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           AnimatedOpacity(
             child: Text(
               hintTop,
-              style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_SMALL, fontWeight: weight.halfBold, color: hintEnabled(context)),
+              style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_SMALL, fontWeight: weight.halfBold, color: hintEnab_(context)),
             ),
             duration: Duration(milliseconds: 300),
             opacity: controller.text.length==0?0:1,
