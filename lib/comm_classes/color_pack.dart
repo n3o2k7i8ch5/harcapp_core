@@ -37,8 +37,8 @@ Color darkColor(BuildContext context) => Theme.of(context).primaryColorDark;
 Color accent_(BuildContext context) => Theme.of(context).accentColor;
 Color accentIcon_(BuildContext context) => Theme.of(context).accentIconTheme.color;
 
-Color iconEnab_(BuildContext context) => Theme.of(context).bottomNavigationBarTheme.selectedIconTheme.color;
-Color iconDisab_(BuildContext context) => Theme.of(context).bottomNavigationBarTheme.unselectedIconTheme.color;
+Color iconEnab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.iconEnabled;
+Color iconDisab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.iconDisabled;
 Color drawerIconColor(BuildContext context) => Colors.black54;
 Color drawerIconDisabled(BuildContext context) => Colors.black26;
 
