@@ -11,16 +11,16 @@ import 'app_text_style.dart';
 
 
 Color appBar(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.background;
-Color appBarTextEnab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.appBarTextEnabled;
-Color appBarTextDisab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.appBarTextDisabled;
+Color appBarTextEnab_(BuildContext context) => Theme.of(context).appBarTheme.titleTextStyle.color;//Provider.of<ColorPackProvider>(context, listen: false).colorPack.appBarTextEnabled;
+//Color appBarTextDisab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.appBarTextDisabled;
 
 //Color disabled(BuildContext context) => Theme.of(context).disabledColor;
 
 Color textEnab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.textEnabled;
 Color textDisab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.textDisabled;
 
-Color textDrawer(BuildContext context) => Theme.of(context).primaryTextTheme.bodyText1.color;
-Color hintDrawer(BuildContext context) => Theme.of(context).primaryTextTheme.subtitle1.color;
+//Color textDrawer(BuildContext context) => Theme.of(context).primaryTextTheme.bodyText1.color;
+//Color hintDrawer(BuildContext context) => Theme.of(context).primaryTextTheme.subtitle1.color;
 
 Color hintEnab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.hintEnabled;
 
@@ -30,17 +30,20 @@ Color defCardElevation(BuildContext context) => Theme.of(context).cardTheme.shad
 Color background_(BuildContext context) => Theme.of(context).backgroundColor;
 Color backgroundIcon_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.backgroundIcon;
 
-Color accent_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentColor;
-Color accentIcon_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentIconColor;
+Color accent_(BuildContext context) => Theme.of(context).accentColor;// Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentColor;
+Color accentIcon_(BuildContext context) => Theme.of(context).accentIconTheme.color;//Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentIconColor;
 
 Color iconEnab_(BuildContext context) => Theme.of(context).iconEnabled(context);
-Color iconDisab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.iconDisabled;
+Color iconDisab_(BuildContext context) => Theme.of(context).iconDisabled(context);
 Color drawerIconColor(BuildContext context) => Colors.black54;
 Color drawerIconDisabled(BuildContext context) => Colors.black26;
 
 extension _ThemeData on ThemeData {
 
   Color iconEnabled(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.iconEnabled;
+  Color iconDisabled(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.iconDisabled;
+
+  Color backgroundIcon(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.backgroundIcon;
 
 }
 
@@ -58,9 +61,9 @@ abstract class ColorPack{
 
   Brightness get brightness => Brightness.light;
 
-  Color get appBar => darkColor;
+  Color get appBar => background;
   Color get appBarTextEnabled => DEF_APP_BAR_TEXT_ENAB;
-  Color get appBarTextDisabled => DEF_APP_BAR_TEXT_DISAB;
+  //Color get appBarTextDisabled => DEF_APP_BAR_TEXT_DISAB;
 
   Color get textEnabled => AppColors.text_def_enab;
   Color get textDisabled => AppColors.text_def_disab;
@@ -74,15 +77,15 @@ abstract class ColorPack{
   Color get defCardDisabled => Color.fromARGB(255, 235, 235, 235);
   Color get defCardElevation => Colors.black;
 
-  Color get colorCard => mainColor;
-  Color get colorBackground => darkColor;
+  //Color get colorCard => mainColor;
+  //Color get colorBackground => darkColor;
 
   Color get background => Colors.white;
   Color get backgroundIcon => Colors.black.withOpacity(0.05);
 
-  Color get mainColor;
-  Color get lightColor;
-  Color get darkColor;
+  //Color get mainColor;
+  //Color get lightColor;
+  //Color get darkColor;
   Color get accentColor;
   Color get accentIconColor;
   Color get iconEnabled;
@@ -97,10 +100,7 @@ abstract class ColorPack{
     brightness: brightness,
     appBarTheme: AppBarTheme(
         color: appBar,
-        textTheme: TextTheme(
-          headline6: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
-          headline5: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextDisabled),
-        ),
+        titleTextStyle: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
         actionsIconTheme: IconThemeData(color: appBarTextEnabled),
         iconTheme: IconThemeData(color: appBarTextEnabled)
     ),
@@ -179,9 +179,9 @@ abstract class ColorPack{
     ),
 
     //primarySwatch: _realColorPack.mainColor,
-    primaryColor: mainColor,
-    primaryColorDark: darkColor,
-    primaryColorLight: lightColor,
+    primaryColor: accentColor,
+    primaryColorDark: accentColor,
+    primaryColorLight: accentColor,
     accentColor: accentColor,
     accentIconTheme: IconThemeData(
         color: accentIconColor
