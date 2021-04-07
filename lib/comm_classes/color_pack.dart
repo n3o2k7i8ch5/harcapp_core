@@ -16,19 +16,19 @@ Color appBarTextEnab_(BuildContext context) => Theme.of(context).appBarTheme.tit
 
 //Color disabled(BuildContext context) => Theme.of(context).disabledColor;
 
-Color textEnab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.textEnabled;
-Color textDisab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.textDisabled;
+Color textEnab_(BuildContext context) => Theme.of(context).textTheme.bodyText1.color;
+Color textDisab_(BuildContext context) => Theme.of(context).hintEnabled(context);//Provider.of<ColorPackProvider>(context, listen: false).colorPack.textDisabled;
 
 //Color textDrawer(BuildContext context) => Theme.of(context).primaryTextTheme.bodyText1.color;
 //Color hintDrawer(BuildContext context) => Theme.of(context).primaryTextTheme.subtitle1.color;
 
-Color hintEnab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.hintEnabled;
+Color hintEnab_(BuildContext context) => Theme.of(context).hintEnabled(context);
 
 Color cardEnab_(BuildContext context) => Theme.of(context).cardTheme.color;
 Color defCardElevation(BuildContext context) => Theme.of(context).cardTheme.shadowColor;
 
 Color background_(BuildContext context) => Theme.of(context).backgroundColor;
-Color backgroundIcon_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.backgroundIcon;
+Color backgroundIcon_(BuildContext context) => Theme.of(context).backgroundIcon(context);
 
 Color accent_(BuildContext context) => Theme.of(context).accentColor;// Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentColor;
 Color accentIcon_(BuildContext context) => Theme.of(context).accentIconTheme.color;//Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentIconColor;
@@ -44,6 +44,8 @@ extension _ThemeData on ThemeData {
   Color iconDisabled(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.iconDisabled;
 
   Color backgroundIcon(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.backgroundIcon;
+
+  Color hintEnabled(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.hintEnabled;
 
 }
 
