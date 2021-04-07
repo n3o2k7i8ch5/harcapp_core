@@ -103,6 +103,10 @@ abstract class ColorPack{
     appBarTheme: AppBarTheme(
         color: appBar,
         titleTextStyle: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
+        textTheme: TextTheme(
+          headline1: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
+          headline6: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
+        ),
         actionsIconTheme: IconThemeData(color: appBarTextEnabled),
         iconTheme: IconThemeData(color: appBarTextEnabled)
     ),
