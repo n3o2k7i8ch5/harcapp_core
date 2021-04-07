@@ -2,9 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/color_pack_provider.dart';
+import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:provider/provider.dart';
 
 import '../colors.dart';
+import '../dimen.dart';
+import 'app_text_style.dart';
+
 
 Color appBar(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.background;
 Color appBarTextEnab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.appBarTextEnabled;
@@ -25,18 +29,20 @@ Color defCardElevation(BuildContext context) => Theme.of(context).cardTheme.shad
 
 Color background_(BuildContext context) => Theme.of(context).backgroundColor;
 Color backgroundIcon_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.backgroundIcon;
-//Color backgroundIcon(BuildContext context) => Settings.isDark?Colors.white24:Colors.black.withOpacity(0.05);
 
-//Color mainColor(BuildContext context) => Theme.of(context).primaryColor;
-//Color lightColor(BuildContext context) => Theme.of(context).primaryColorLight;
-//Color darkColor(BuildContext context) => Theme.of(context).primaryColorDark;
 Color accent_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentColor;
 Color accentIcon_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentIconColor;
 
-Color iconEnab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.iconEnabled;
+Color iconEnab_(BuildContext context) => Theme.of(context).iconEnabled(context);
 Color iconDisab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.iconDisabled;
 Color drawerIconColor(BuildContext context) => Colors.black54;
 Color drawerIconDisabled(BuildContext context) => Colors.black26;
+
+extension _ThemeData on ThemeData {
+
+  Color iconEnabled(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.iconEnabled;
+
+}
 
 abstract class ColorPack{
 
@@ -49,6 +55,8 @@ abstract class ColorPack{
   const ColorPack();
 
   String get name;
+
+  Brightness get brightness => Brightness.light;
 
   Color get appBar => darkColor;
   Color get appBarTextEnabled => DEF_APP_BAR_TEXT_ENAB;
@@ -84,4 +92,107 @@ abstract class ColorPack{
 
   bool operator == (Object other) => other is ColorPack && name == other.name;
   int get hashCode => name.hashCode;
+
+  ThemeData get themeData => ThemeData(
+    brightness: brightness,
+    appBarTheme: AppBarTheme(
+        color: appBar,
+        textTheme: TextTheme(
+          headline6: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
+          headline5: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextDisabled),
+        ),
+        actionsIconTheme: IconThemeData(color: appBarTextEnabled),
+        iconTheme: IconThemeData(color: appBarTextEnabled)
+    ),
+    textTheme: TextTheme(
+      bodyText1: TextStyle(color: textEnabled),
+      bodyText2: TextStyle(color: textEnabled),
+      subtitle1: TextStyle(color: textEnabled),
+      subtitle2: TextStyle(color: textEnabled),
+    ).apply(
+      //bodyColor: _realColorPack.textEnabled,
+      //displayColor: _realColorPack.textEnabled,
+    ),
+    tabBarTheme: TabBarTheme(
+        labelColor: iconEnabled,
+        unselectedLabelColor: hintEnabled,
+        labelStyle: AppTextStyle(fontWeight: weight.halfBold),
+        unselectedLabelStyle: AppTextStyle(fontWeight: weight.halfBold)
+    ),
+    timePickerTheme: TimePickerThemeData(
+      backgroundColor: background,
+      //hourMinuteColor: _realColorPack.accentColor.withOpacity(0.3),
+      //hourMinuteTextColor: _realColorPack.accentColor,
+      dialHandColor: accentColor,
+      helpTextStyle: AppTextStyle(color: hintEnabled),
+      dayPeriodTextStyle: AppTextStyle(),
+      hourMinuteTextStyle: TextStyle(
+        fontSize: 48,
+      ),
+      hourMinuteShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0))
+      ),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(AppCard.BIG_RADIUS))
+      ),
+    ),
+
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: accentColor,
+      selectionColor: accentColor.withOpacity(0.5),
+      selectionHandleColor: accentColor,
+    ),
+
+    primaryTextTheme: TextTheme(
+      bodyText1: TextStyle(color: textEnabled),
+      bodyText2: TextStyle(color: textEnabled),
+      subtitle1: TextStyle(color: textEnabled),
+      subtitle2: TextStyle(color: textEnabled),
+    ),
+    backgroundColor: background,
+    scaffoldBackgroundColor: background,
+
+    toggleableActiveColor: accentColor,
+    unselectedWidgetColor: hintEnabled,
+
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: background,
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedIconTheme: IconThemeData(color: iconEnabled),
+      unselectedIconTheme: IconThemeData(color: iconDisabled),
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: accentColor,
+      foregroundColor: accentIconColor,
+    ),
+
+    cardColor: defCardEnabled,
+    cardTheme: CardTheme(
+        color: defCardEnabled,
+        shadowColor: defCardElevation
+    ),
+
+    disabledColor: textDisabled,
+    inputDecorationTheme: InputDecorationTheme(
+        fillColor: textEnabled
+    ),
+
+    //primarySwatch: _realColorPack.mainColor,
+    primaryColor: mainColor,
+    primaryColorDark: darkColor,
+    primaryColorLight: lightColor,
+    accentColor: accentColor,
+    accentIconTheme: IconThemeData(
+        color: accentIconColor
+    ),
+    accentTextTheme: TextTheme().apply(
+        displayColor: accentIconColor,
+        bodyColor: accentIconColor
+    ),
+    selectedRowColor: accentColor.withOpacity(0.3),
+    iconTheme: IconThemeData(
+        color: iconEnabled
+    ),
+  );
 }
