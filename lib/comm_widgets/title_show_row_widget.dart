@@ -10,6 +10,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
   final Color iconColor;
   final Widget leading;
   final Widget trailing;
+  final Widget trailingTitle;
   final String title;
   final Color titleColor;
   final TextAlign textAlign;
@@ -21,6 +22,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
     this.iconColor,
     this.leading,
     this.trailing,
+    this.trailingTitle,
     @required this.title,
     this.titleColor,
     this.textAlign = TextAlign.center,
@@ -49,14 +51,23 @@ class TitleShortcutRowWidget extends StatelessWidget{
               SizedBox(width: 10.0),
 
         Expanded(
-            child: Text(
-              title,
-              style: AppTextStyle(
-                  fontSize: Dimen.TEXT_SIZE_APPBAR,
-                  fontWeight: weight.bold,
-                  color: titleColor
-              ),
-              textAlign: textAlign,
+            child: Row(
+              children: [
+
+                Text(
+                  title,
+                  style: AppTextStyle(
+                      fontSize: Dimen.TEXT_SIZE_APPBAR,
+                      fontWeight: weight.bold,
+                      color: titleColor
+                  ),
+                  textAlign: textAlign,
+                ),
+
+                if(trailingTitle != null)
+                  trailingTitle
+
+              ],
             )
         ),
 
