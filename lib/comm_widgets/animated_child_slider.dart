@@ -69,18 +69,14 @@ class AnimatedChildSlider extends StatelessWidget{
         int childKeyVal = (child.key as ValueKey).value;
 
         if (childKeyVal == ValueKey(index).value) {
-          return ClipRect(
-            child: SlideTransition(
-              position: inAnimation,
-              child: isCenter?Center(child: child):child,
-            ),
+          return SlideTransition(
+            position: inAnimation,
+            child: isCenter?Center(child: child):child,
           );
         } else {
-          return ClipRect(
-            child: SlideTransition(
-              position: outAnimation,
-              child: isCenter?Center(child: child):child,
-            ),
+          return SlideTransition(
+            position: outAnimation,
+            child: isCenter?Center(child: child):child,
           );
         }
       },
