@@ -6,6 +6,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 class TitleShortcutRowWidget extends StatelessWidget{
 
+  static const double textStartPadding = 10.0;
+
   final IconData icon;
   final Color iconColor;
   final Widget leading;
@@ -46,7 +48,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
         else if(onOpen != null && textAlign == TextAlign.center)
             SizedBox(width: Dimen.ICON_FOOTPRINT)
         else if(textAlign == TextAlign.start)
-              SizedBox(width: 10.0),
+              SizedBox(width: textStartPadding),
 
         Expanded(
             child: Text(
