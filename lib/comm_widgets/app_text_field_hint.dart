@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 
 import '../comm_classes/color_pack.dart';
@@ -19,6 +20,8 @@ class AppTextFieldHint extends StatefulWidget{
   final bool obscureText;
   final bool enabled;
   final Widget leading;
+  final TextInputType keyboardType;
+  final List<TextInputFormatter> inputFormatters;
 
   const AppTextFieldHint({
     @required this.hint,
@@ -34,6 +37,8 @@ class AppTextFieldHint extends StatefulWidget{
     this.obscureText: false,
     this.enabled,
     this.leading,
+    this.keyboardType,
+    this.inputFormatters,
     Key key
   }):super(key: key);
 
@@ -82,6 +87,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       maxLines: widget.maxLines,
       obscureText: widget.obscureText,
       enabled: widget.enabled,
+      keyboardType: widget.keyboardType,
+      inputFormatters: widget.inputFormatters,
     );
 
     return Material( // to jest po to, żeby hero tag nie rzucał błędów.
