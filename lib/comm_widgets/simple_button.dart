@@ -58,7 +58,7 @@ class SimpleButton extends StatelessWidget{
   static SimpleButton from({
     BuildContext context,
     @required IconData icon,
-    @required String text,
+    String text,
     @required void Function() onTap,
     EdgeInsets margin = const EdgeInsets.all(DEF_MARG),
     bool iconLeading = true,
@@ -83,18 +83,21 @@ class SimpleButton extends StatelessWidget{
             if(iconLeading)
               Icon(icon, color: textColor??iconEnab_(context), size: dense?18.0:Dimen.ICON_SIZE),
 
-            SizedBox(width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
+            if(text != null)
+              SizedBox(width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
 
-            Text(
-              text,
-              style: AppTextStyle(
-                color: textColor??iconEnab_(context),
-                fontWeight: weight.halfBold,
-                fontSize: dense?Dimen.TEXT_SIZE_NORMAL:Dimen.TEXT_SIZE_BIG
+            if(text != null)
+              Text(
+                text,
+                style: AppTextStyle(
+                  color: textColor??iconEnab_(context),
+                  fontWeight: weight.halfBold,
+                  fontSize: dense?Dimen.TEXT_SIZE_NORMAL:Dimen.TEXT_SIZE_BIG
+                ),
               ),
-            ),
 
-            SizedBox(width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
+            if(text != null)
+              SizedBox(width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
 
             if(!iconLeading)
               Icon(icon, color: textColor??iconEnab_(context)),
