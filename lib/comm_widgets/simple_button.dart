@@ -12,8 +12,8 @@ class SimpleButton extends StatelessWidget{
   static const double DEF_MARG = Dimen.DEF_MARG/2;
 
   final Widget child;
-  final Function onTap;
-  final Function onLongPress;
+  final void Function() onTap;
+  final void Function() onLongPress;
   final EdgeInsets padding;
   final EdgeInsets margin;
   final double radius;
@@ -60,6 +60,7 @@ class SimpleButton extends StatelessWidget{
     @required IconData icon,
     String text,
     @required void Function() onTap,
+    void Function() onLongPress,
     EdgeInsets margin = const EdgeInsets.all(DEF_MARG),
     bool iconLeading = true,
     double elevation: 0,
@@ -104,7 +105,8 @@ class SimpleButton extends StatelessWidget{
 
           ],
         ),
-        onTap: onTap
+        onTap: onTap,
+        onLongPress: onLongPress,
     );
 
   }
