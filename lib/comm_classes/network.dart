@@ -7,6 +7,7 @@ Future<bool> isNetworkAvailable() async {
   return result != ConnectivityResult.none;
 }
 
+
 addConnectionListener(Function(bool hasConnection) onChanged){
   return Connectivity().onConnectivityChanged.listen(
           (ConnectivityResult result) =>
