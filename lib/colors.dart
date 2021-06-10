@@ -13,6 +13,7 @@ class AppColors{
   static const Color white_dark = Color.fromARGB(255, 245, 245, 245);
 
   static const Color zhr_red = Color.fromARGB(255, 220, 0, 20);
+  static const Color rrp_red = Color.fromARGB(255, 225, 5, 25);
 
 
 }
