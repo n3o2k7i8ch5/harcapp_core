@@ -61,6 +61,7 @@ class SimpleButton extends StatelessWidget{
     String text,
     @required void Function() onTap,
     void Function() onLongPress,
+    double iconSize,
     EdgeInsets margin = const EdgeInsets.all(DEF_MARG),
     bool iconLeading = true,
     double elevation: 0,
@@ -82,7 +83,7 @@ class SimpleButton extends StatelessWidget{
           mainAxisSize: MainAxisSize.min,
           children: [
             if(iconLeading)
-              Icon(icon, color: textColor??iconEnab_(context), size: dense?18.0:Dimen.ICON_SIZE),
+              Icon(icon, color: textColor??iconEnab_(context), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
 
             if(text != null)
               SizedBox(width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
