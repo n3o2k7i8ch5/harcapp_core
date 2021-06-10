@@ -36,6 +36,7 @@ class AppCard extends StatelessWidget{
   final double radius;
   final BorderRadius borderRadius;
   final Color elevetionColor;
+  final Clip clipBehavior;
   //final int transMilis;
 
   const AppCard({
@@ -51,6 +52,7 @@ class AppCard extends StatelessWidget{
     this.radius: DEF_RADIUS,
     this.borderRadius,
     this.elevetionColor: Colors.black,
+    this.clipBehavior: Clip.hardEdge,
     //this.transMilis: DEF_TRANS_MILIS
   }):super(key: key);
 
@@ -71,6 +73,7 @@ class AppCard extends StatelessWidget{
           borderRadius: borderRadius??BorderRadius.circular(radius),
           elevation: elevation,
           shadowColor: elevetionColor,
+          clipBehavior: clipBehavior,
           child: ClipRRect(
               borderRadius: borderRadius??BorderRadius.circular(radius),
               child: clickable?
