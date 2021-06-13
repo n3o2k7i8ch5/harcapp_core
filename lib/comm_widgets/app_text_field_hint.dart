@@ -74,7 +74,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
     texts = initVals??[''];
 
-    controller = widget.controller??TextEditingController(text: initVals==null?'':initVals[0]);
+    controller = widget.controller??TextEditingController(text: initVals==null || initVals.isEmpty?'':initVals[0]);
     hintStyle = widget.hintStyle??widget.style;
   }
 
