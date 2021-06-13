@@ -107,6 +107,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         initVals: texts,
         hint: hint,
         onChanged: (texts){
+          this.texts = texts;
           if(texts.length == 1)
             setState(() {});
         },
