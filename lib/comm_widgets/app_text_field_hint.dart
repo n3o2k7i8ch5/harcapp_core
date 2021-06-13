@@ -124,7 +124,10 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
               if(widget.multi && texts.length==1)
                 IconButton(
                     icon: Icon(MultiTextField.addIcon),
-                    onPressed: () => setState(() => texts.add(''))
+                    onPressed: () => setState((){
+                      texts.add('');
+                      widget.onChanged?.call(texts);
+                    })
                 )
             ],
           ),
