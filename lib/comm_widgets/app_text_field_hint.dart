@@ -126,6 +126,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     return Material( // to jest po to, żeby hero tag nie rzucał błędów.
       color: Colors.transparent,
       child: Stack(
+        clipBehavior: Clip.none,
         children: <Widget>[
 
           Row(
