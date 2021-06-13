@@ -124,7 +124,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
               if(widget.multi)
                 IconButton(
                     icon: Icon(MultiTextField.addIcon),
-                    onPressed: () => texts.add('')
+                    onPressed: () => setState(() => texts.add(''))
                 )
             ],
           ),
