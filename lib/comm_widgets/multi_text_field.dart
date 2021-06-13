@@ -13,9 +13,10 @@ class MultiTextField extends StatefulWidget{
   final List<String> initVals;
   final String hint;
   final bool linear;
+  final Color accentColor;
   final void Function(List<String>) onChanged;
 
-  const MultiTextField({this.initVals, this.hint, this.linear: true, this.onChanged});
+  const MultiTextField({this.initVals, this.hint, this.linear: true, this.accentColor, this.onChanged});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -28,6 +29,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   List<String> get initVals => widget.initVals;
   String get hint => widget.hint;
   bool get linear => widget.linear;
+  Color get accentColor => widget.accentColor;
   void Function(List<String>) get onChanged => widget.onChanged;
 
   List<String> texts;
@@ -80,7 +82,7 @@ class MultiTextFieldState extends State<MultiTextField>{
           color:
           texts.isNotEmpty && texts.last.isEmpty?
           iconDisab_(context):
-          accent_(context),
+          accentColor,
         ),
         onPressed:
         texts.isNotEmpty && texts.last.isEmpty?

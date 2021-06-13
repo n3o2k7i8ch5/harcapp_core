@@ -23,6 +23,7 @@ class AppTextFieldHint extends StatefulWidget{
   final Widget leading;
   final TextInputType keyboardType;
   final List<TextInputFormatter> inputFormatters;
+  final Color accentColor;
 
   final bool multi;
   final List<String> initVals;
@@ -43,6 +44,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.leading,
     this.keyboardType,
     this.inputFormatters,
+    this.accentColor,
     this.multi: false,
     this.initVals,
     Key key
