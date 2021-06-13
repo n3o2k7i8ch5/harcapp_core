@@ -150,7 +150,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
           AnimatedOpacity(
             child: Text(
-              texts.length > 0?multiHintTop:hintTop,
+              texts.length==1?hintTop:multiHintTop,
               style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_SMALL, fontWeight: weight.halfBold, color: hintEnab_(context)),
             ),
             duration: Duration(milliseconds: 300),
