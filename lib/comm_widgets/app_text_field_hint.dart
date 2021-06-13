@@ -55,7 +55,6 @@ class AppTextFieldHint extends StatefulWidget{
 
 class AppTextFieldHintState extends State<AppTextFieldHint>{
 
-  String oldText;
   TextEditingController controller;
 
   List<String> texts;
@@ -70,9 +69,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   @override
   void initState() {
     super.initState();
-    oldText = '';
 
-    texts = initVals??[''];
+    texts = initVals == null || initVals.length == 0??[''];
 
     controller = widget.controller??TextEditingController(text: initVals==null || initVals.isEmpty?'':initVals[0]);
     hintStyle = widget.hintStyle??widget.style;
@@ -91,7 +89,6 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           //if((text.length==0) != (oldText.length==0))
           texts[0] = text;
           setState(() {});
-          oldText = text;
           widget.onChanged?.call([text]);
         },
         decoration: InputDecoration(
