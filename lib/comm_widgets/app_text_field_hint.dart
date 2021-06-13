@@ -26,6 +26,7 @@ class AppTextFieldHint extends StatefulWidget{
   final Color accentColor;
 
   final bool multi;
+  final String multiHintTop;
   final List<String> initVals;
 
   const AppTextFieldHint({
@@ -46,6 +47,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.inputFormatters,
     this.accentColor,
     this.multi: false,
+    this.multiHintTop,
     this.initVals,
     Key key
   }):super(key: key);
@@ -65,6 +67,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
   String get hint => widget.hint;
   String get hintTop => widget.hintTop??hint;
+  String get multiHintTop => widget.multiHintTop??hintTop;
 
   List<String> get initVals => widget.initVals;
 
@@ -146,7 +149,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
           AnimatedOpacity(
             child: Text(
-              hintTop,
+              texts.length > 0?multiHintTop:hintTop,
               style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_SMALL, fontWeight: weight.halfBold, color: hintEnab_(context)),
             ),
             duration: Duration(milliseconds: 300),
