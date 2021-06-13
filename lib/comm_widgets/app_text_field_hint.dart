@@ -122,10 +122,14 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
             children: <Widget>[
               if(widget.leading!=null) widget.leading,
               Expanded(child: textField),
+
               if(widget.multi && texts.length==1)
                 IconButton(
-                    icon: Icon(MultiTextField.addIcon),
-                    onPressed: () => setState((){
+                    icon: Icon(
+                      MultiTextField.addIcon,
+                      color: texts[0].isEmpty?iconDisab_(context):iconEnab_(context),
+                    ),
+                    onPressed: texts[0].isEmpty?null:() => setState((){
                       texts.add('');
                       widget.onChanged?.call(texts);
                     })
