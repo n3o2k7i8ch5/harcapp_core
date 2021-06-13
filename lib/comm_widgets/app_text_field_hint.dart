@@ -4,6 +4,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 
 import '../comm_classes/color_pack.dart';
 import '../dimen.dart';
+import 'multi_text_field.dart';
 
 class AppTextFieldHint extends StatefulWidget{
 
@@ -23,6 +24,8 @@ class AppTextFieldHint extends StatefulWidget{
   final TextInputType keyboardType;
   final List<TextInputFormatter> inputFormatters;
 
+  final bool multi;
+
   const AppTextFieldHint({
     @required this.hint,
     this.hintTop,
@@ -39,6 +42,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.leading,
     this.keyboardType,
     this.inputFormatters,
+    this.multi,
     Key key
   }):super(key: key);
 
@@ -99,7 +103,14 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           Row(
             children: <Widget>[
               if(widget.leading!=null) widget.leading,
-              Expanded(child: textField)
+              Expanded(child: textField),
+              if(widget.multi)
+                IconButton(
+                    icon: Icon(MultiTextField.addIcon),
+                    onPressed: (){
+
+                    }
+                )
             ],
           ),
 
