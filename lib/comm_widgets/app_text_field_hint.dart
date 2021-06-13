@@ -17,7 +17,7 @@ class AppTextFieldHint extends StatefulWidget{
   final int maxLength;
   final int maxLines;
   final bool showUnderline;
-  final Function(String) onChanged;
+  final Function(List<String>) onChanged;
   final bool obscureText;
   final bool enabled;
   final Widget leading;
@@ -42,7 +42,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.leading,
     this.keyboardType,
     this.inputFormatters,
-    this.multi,
+    this.multi: false,
     Key key
   }):super(key: key);
 
@@ -55,6 +55,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
   String oldText;
   TextEditingController controller;
+
+  List<String> texts;
+
   TextStyle hintStyle;
 
   String get hint => widget.hint;
@@ -64,6 +67,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   void initState() {
     super.initState();
     oldText = '';
+
+    texts = [''];
+
     controller = widget.controller??TextEditingController();
     hintStyle = widget.hintStyle??widget.style;
   }
@@ -71,29 +77,40 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   @override
   Widget build(BuildContext context) {
 
-    Widget textField = TextField(
-      style: widget.style,
-      controller: controller,
-      onChanged: (text){
-        if((text.length==0) != (oldText.length==0))
-          setState(() {});
-        oldText = text;
-        if(widget.onChanged != null)
-          widget.onChanged(text);
-      },
-      decoration: InputDecoration(
-        counterStyle: widget.counterStyle??TextStyle(color: hintEnab_(context)),
-        hintText: hint,
-        hintStyle: hintStyle,
-        border: widget.showUnderline?null:InputBorder.none,
-      ),
-      maxLength: widget.maxLength,
-      maxLines: widget.maxLines,
-      obscureText: widget.obscureText,
-      enabled: widget.enabled,
-      keyboardType: widget.keyboardType,
-      inputFormatters: widget.inputFormatters,
-    );
+    Widget textField;
+
+    if(texts.length == 1)
+      textField = TextField(
+        style: widget.style,
+        controller: controller,
+        onChanged: (text){
+          if((text.length==0) != (oldText.length==0))
+            setState(() {});
+          oldText = text;
+          widget.onChanged?.call([text]);
+        },
+        decoration: InputDecoration(
+          counterStyle: widget.counterStyle??TextStyle(color: hintEnab_(context)),
+          hintText: hint,
+          hintStyle: hintStyle,
+          border: widget.showUnderline?null:InputBorder.none,
+        ),
+        maxLength: widget.maxLength,
+        maxLines: widget.maxLines,
+        obscureText: widget.obscureText,
+        enabled: widget.enabled,
+        keyboardType: widget.keyboardType,
+        inputFormatters: widget.inputFormatters,
+      );
+    else
+      textField = MultiTextField(
+        initVals: texts,
+        hint: hint,
+        onChanged: (texts){
+          if(texts.length == 0)
+            setState(() {});
+        },
+      );
 
     return Material( // to jest po to, żeby hero tag nie rzucał błędów.
       color: Colors.transparent,
@@ -107,9 +124,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
               if(widget.multi)
                 IconButton(
                     icon: Icon(MultiTextField.addIcon),
-                    onPressed: (){
-
-                    }
+                    onPressed: () => texts.add('')
                 )
             ],
           ),

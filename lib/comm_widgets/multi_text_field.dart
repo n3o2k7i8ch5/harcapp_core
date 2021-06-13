@@ -57,11 +57,12 @@ class MultiTextFieldState extends State<MultiTextField>{
         hint: hint,
         onChanged: (text){
           texts[i] = text;
-          onChanged(texts);
+          onChanged?.call(texts);
         },
         onRemoveTap: () => setState((){
           texts.removeAt(i);
           keys.removeAt(i);
+          onChanged?.call(texts);
         }),
         key: keys[i],
       ));
@@ -82,6 +83,7 @@ class MultiTextFieldState extends State<MultiTextField>{
         onTap: () => setState((){
           texts.add('');
           keys.add(GlobalKey<ItemState>());
+          onChanged?.call(texts);
         }),
       )
     );
