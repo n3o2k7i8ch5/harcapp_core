@@ -25,6 +25,7 @@ class AppTextFieldHint extends StatefulWidget{
   final List<TextInputFormatter> inputFormatters;
 
   final bool multi;
+  final List<String> initVals;
 
   const AppTextFieldHint({
     @required this.hint,
@@ -43,6 +44,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.keyboardType,
     this.inputFormatters,
     this.multi: false,
+    this.initVals,
     Key key
   }):super(key: key);
 
@@ -63,14 +65,16 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   String get hint => widget.hint;
   String get hintTop => widget.hintTop??hint;
 
+  List<String> get initVals => widget.initVals;
+
   @override
   void initState() {
     super.initState();
     oldText = '';
 
-    texts = [''];
+    texts = initVals??[''];
 
-    controller = widget.controller??TextEditingController();
+    controller = widget.controller??TextEditingController(text: initVals==null?'':initVals[0]);
     hintStyle = widget.hintStyle??widget.style;
   }
 
