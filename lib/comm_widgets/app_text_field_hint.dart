@@ -107,7 +107,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         initVals: texts,
         hint: hint,
         onChanged: (texts){
-          if(texts.length == 0)
+          if(texts.length == 1)
             setState(() {});
         },
       );
@@ -121,7 +121,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
             children: <Widget>[
               if(widget.leading!=null) widget.leading,
               Expanded(child: textField),
-              if(widget.multi)
+              if(widget.multi && texts.length==1)
                 IconButton(
                     icon: Icon(MultiTextField.addIcon),
                     onPressed: () => setState(() => texts.add(''))
