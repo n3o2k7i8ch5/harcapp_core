@@ -85,6 +85,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         controller: controller,
         onChanged: (text){
           //if((text.length==0) != (oldText.length==0))
+          texts[0] = text;
           setState(() {});
           oldText = text;
           widget.onChanged?.call([text]);
