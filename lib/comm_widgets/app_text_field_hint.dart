@@ -123,43 +123,39 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         },
       );
 
-    return Material( // to jest po to, żeby hero tag nie rzucał błędów.
-      color: Colors.transparent,
-      type: MaterialType.transparency,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: <Widget>[
+    return Stack(
+      clipBehavior: Clip.none,
+      children: <Widget>[
 
-          Row(
-            children: <Widget>[
-              if(widget.leading!=null) widget.leading,
-              Expanded(child: textField),
+        Row(
+          children: <Widget>[
+            if(widget.leading!=null) widget.leading,
+            Expanded(child: textField),
 
-              if(widget.multi && texts.length==1)
-                IconButton(
-                    icon: Icon(
-                      MultiTextField.addIcon,
-                      color: texts[0].isEmpty?iconDisab_(context):iconEnab_(context),
-                    ),
-                    onPressed: texts[0].isEmpty?null:() => setState((){
-                      texts.add('');
-                      widget.onChanged?.call(texts);
-                    })
-                )
-            ],
+            if(widget.multi && texts.length==1)
+              IconButton(
+                  icon: Icon(
+                    MultiTextField.addIcon,
+                    color: texts[0].isEmpty?iconDisab_(context):iconEnab_(context),
+                  ),
+                  onPressed: texts[0].isEmpty?null:() => setState((){
+                    texts.add('');
+                    widget.onChanged?.call(texts);
+                  })
+              )
+          ],
+        ),
+
+        AnimatedOpacity(
+          child: Text(
+            texts.length==1?hintTop:multiHintTop,
+            style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_SMALL, fontWeight: weight.halfBold, color: hintEnab_(context)),
           ),
+          duration: Duration(milliseconds: 300),
+          opacity: controller.text.length==0?0:1,
+        ),
 
-          AnimatedOpacity(
-            child: Text(
-              texts.length==1?hintTop:multiHintTop,
-              style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_SMALL, fontWeight: weight.halfBold, color: hintEnab_(context)),
-            ),
-            duration: Duration(milliseconds: 300),
-            opacity: controller.text.length==0?0:1,
-          ),
-
-        ],
-      ),
+      ],
     );
   }
 
