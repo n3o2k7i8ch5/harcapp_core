@@ -113,6 +113,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           if(texts.length == 1) {
             controller.text = texts[0];
             setState(() {});
+            widget.onChanged?.call(texts);
           }
         },
       );
