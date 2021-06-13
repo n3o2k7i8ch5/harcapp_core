@@ -32,7 +32,7 @@ class MultiTextFieldState extends State<MultiTextField>{
 
   List<String> texts;
   List<GlobalKey<ItemState>> keys;
-  
+
   @override
   void initState() {
     texts = [];
@@ -72,15 +72,18 @@ class MultiTextFieldState extends State<MultiTextField>{
     }
 
     children.add(
-      SimpleButton.from(
-        textColor: accent_(context),
-        text: 'Dodaj',
-        icon: MultiTextField.addIcon,
-        iconLeading: false,
-        textSize: Dimen.TEXT_SIZE_NORMAL,
-        iconSize: 20.0,
-        margin: EdgeInsets.zero,
-        onTap: () => setState((){
+      IconButton(
+        icon: Icon(
+          MultiTextField.addIcon,
+          color:
+          texts.isNotEmpty && texts.last.isEmpty?
+          iconDisab_(context):
+          accent_(context),
+        ),
+        onPressed:
+        texts.isNotEmpty && texts.last.isEmpty?
+        null:
+        () => setState((){
           texts.add('');
           keys.add(GlobalKey<ItemState>());
           onChanged?.call(texts);
