@@ -57,6 +57,8 @@ class MultiTextFieldState extends State<MultiTextField>{
         hint: hint,
         onChanged: (text){
           texts[i] = text;
+          if(i == texts.length-1)
+            setState(() {});
           onChanged?.call(texts);
         },
         onRemoveTap: () => setState((){
