@@ -13,8 +13,8 @@ dependencies:
     sdk: flutter
 
   material_design_icons_flutter: 4.0.5955
-  connectivity: 3.0.3
-  fluttertoast: 8.0.3
+  connectivity: 3.0.6
+  fluttertoast: 8.0.7
   provider: 5.0.0
   tuple: 1.0.2
 
