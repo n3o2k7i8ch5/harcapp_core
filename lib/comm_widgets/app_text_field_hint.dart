@@ -27,7 +27,8 @@ class AppTextFieldHint extends StatefulWidget{
 
   final bool multi;
   final String multiHintTop;
-  final List<String> initVals;
+  //final List<String> initVals;
+  final MultiAppTextFieldHintController multiController;
 
   const AppTextFieldHint({
     @required this.hint,
@@ -48,7 +49,8 @@ class AppTextFieldHint extends StatefulWidget{
     this.accentColor,
     this.multi: false,
     this.multiHintTop,
-    this.initVals,
+    this.multiController,
+    //this.initVals,
     Key key
   }):super(key: key);
 
@@ -61,7 +63,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
   TextEditingController controller;
 
-  List<String> texts;
+  MultiAppTextFieldHintController _multiController;
+
+  MultiAppTextFieldHintController get multiController => widget.multiController??_multiController;
 
   TextStyle hintStyle;
 
@@ -69,15 +73,20 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   String get hintTop => widget.hintTop??hint;
   String get multiHintTop => widget.multiHintTop??hintTop;
 
-  List<String> get initVals => widget.initVals;
+  //List<String> get initVals => widget.initVals;
+
+  List<String> get texts => multiController.texts;
+  set texts(List<String> values) => multiController.texts = values;
 
   @override
   void initState() {
     super.initState();
 
-    texts = initVals == null || initVals.length == 0?['']:initVals;
+    if(multiController == null)
+      _multiController = MultiAppTextFieldHintController();
+    //texts = initVals == null || initVals.length == 0?['']:initVals;
 
-    controller = widget.controller??TextEditingController(text: initVals==null || initVals.isEmpty?'':initVals[0]);
+    controller = widget.controller??TextEditingController(text: texts==null || texts.isEmpty?'':texts[0]);
     hintStyle = widget.hintStyle??widget.style;
   }
 
@@ -157,6 +166,20 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
       ],
     );
+  }
+
+}
+
+class MultiAppTextFieldHintController{
+
+  //AppTextFieldHintState _state;
+
+  //void init(AppTextFieldHintState state) => _state = state;
+
+  List<String> texts;
+
+  MultiAppTextFieldHintController({List<String> texts}){
+      this.texts = texts??[];
   }
 
 }
