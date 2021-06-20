@@ -230,7 +230,7 @@ class ItemState extends State<Item>{
           child: child,
         ),
 
-        if(focusNode.hasFocus)
+        if(focusNode.hasFocus && false)
           Positioned(
             left: 0,
             right: Dimen.ICON_MARG,
