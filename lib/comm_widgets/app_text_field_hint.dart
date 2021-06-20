@@ -179,7 +179,7 @@ class MultiAppTextFieldHintController{
   List<String> texts;
 
   MultiAppTextFieldHintController({List<String> texts}){
-      this.texts = texts??[];
+      this.texts = texts??[''];
   }
 
 }
