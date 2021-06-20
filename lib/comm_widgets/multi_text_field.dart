@@ -178,7 +178,7 @@ class ItemState extends State<Item>{
                   hintText: hint,
                   hintStyle: AppTextStyle(
                     color: hintEnab_(context),
-                    fontSize: Dimen.TEXT_SIZE_NORMAL,
+                    fontSize: Dimen.TEXT_SIZE_BIG,
                   ),
                   border: InputBorder.none
               ),
@@ -189,7 +189,7 @@ class ItemState extends State<Item>{
           Text(
             controller.text.length==0?hint:controller.text,
             style: AppTextStyle(
-                fontSize: controller.text.length==0?Dimen.TEXT_SIZE_NORMAL:Dimen.TEXT_SIZE_BIG,
+                fontSize: controller.text.length==0?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
                 fontWeight: controller.text.length==0?weight.normal:weight.halfBold,
                 color: controller.text.length==0?hintEnab_(context):textEnab_(context)
             ),
