@@ -37,17 +37,12 @@ class MultiTextFieldState extends State<MultiTextField>{
   void Function() get onRemoved => widget.onRemoved;
 
   List<String> texts;
-  List<GlobalKey<ItemState>> keys;
 
   @override
   void initState() {
     texts = [];
     if(initVals != null)
       texts.addAll(initVals);
-
-    keys = [];
-    for(int i=0; i<texts.length; i++)
-      keys.add(GlobalKey<ItemState>());
 
     super.initState();
   }
@@ -70,12 +65,10 @@ class MultiTextFieldState extends State<MultiTextField>{
         },
         onRemoveTap: () => setState((){
           texts.removeAt(i);
-          keys.removeAt(i);
           onAnyChanged?.call(texts);
           onChanged?.call(i, text);
           onRemoved?.call();
         }),
-        key: keys[i],
       ));
 
       if(linear && i < texts.length-1)
@@ -97,7 +90,6 @@ class MultiTextFieldState extends State<MultiTextField>{
         () => setState((){
           String text = '';
           texts.add(text);
-          keys.add(GlobalKey<ItemState>());
           onAnyChanged?.call(texts);
           onChanged?.call(texts.length-1, text);
         }),

@@ -73,6 +73,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
   String get hint => widget.hint;
   String get hintTop => widget.hintTop??hint;
+  bool get multi => widget.multi;
   String get multiHintTop => widget.multiHintTop??hintTop;
 
   //List<String> get initVals => widget.initVals;
@@ -86,16 +87,17 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   void initState() {
     super.initState();
 
-    if(widget.multiController == null)
+    if(multi && widget.multiController == null)
       _multiController = MultiAppTextFieldHintController();
 
-    multiController.addListener((index, text) {
-      if(index == 0 && multiController.length > 1)
-        controller.text = text;
-    });
+    if(multi)
+      multiController.addListener((index, text) {
+        if(index == 0 && multiController.length > 1)
+          controller.text = text;
+      });
 
-    if(widget.controller == null)
-      _controller = TextEditingController(text: multiController[0]);
+    if(!multi && widget.controller == null)
+      _controller = TextEditingController(text: multi?multiController[0]:'');
 
     hintStyle = widget.hintStyle??widget.style;
   }
