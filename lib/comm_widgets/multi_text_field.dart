@@ -23,34 +23,51 @@ class MultiTextFieldController{
   List<String> get texts => _texts;
 
   List<void Function(int, String)> _listeners;
+  List<void Function(List<String>)> _anyListeners;
 
   MultiTextFieldController({List<String> texts}){
     if(texts == null || texts.length == 0)
       texts = [''];
     this._texts = texts;
     _listeners = [];
+    _anyListeners = [];
   }
 
   removeAt(int index){
     _texts.removeAt(index);
     for(void Function(int, String) listener in _listeners)
       listener(index, last);
+
+    for(void Function(List<String>) listener in _anyListeners)
+      listener(_texts);
   }
 
   addText(String text){
     _texts.add(text);
     for(void Function(int, String) listener in _listeners)
       listener(_texts.length-1, text);
+    for(void Function(List<String>) listener in _anyListeners)
+      listener(_texts);
   }
 
   setText(int index, String text){
     _texts[index] = text;
     for(void Function(int, String) listener in _listeners)
       listener(index, text);
+    for(void Function(List<String>) listener in _anyListeners)
+      listener(_texts);
   }
 
-  void addListener(void Function(int, String) listener) => _listeners.add(listener);
-  void removeListener(void Function(int, String) listener) => _listeners.remove(listener);
+  void addOnChangedListener(void Function(int, String) listener) => _listeners.add(listener);
+  void removeOnChangedListener(void Function(int, String) listener) => _listeners.remove(listener);
+
+  void addOnAnyChangedListener(void Function(List<String>) listener) => _anyListeners.add(listener);
+  void removeOnAnyChangedListener(void Function(List<String>) listener) => _anyListeners.remove(listener);
+
+  void dispose(){
+    _listeners.clear();
+    _anyListeners.clear();
+  }
 
 }
 

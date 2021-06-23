@@ -91,9 +91,20 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       _multiController = MultiTextFieldController(texts: ['']);
 
     if(multi)
-      multiController.addListener((index, text) {
+      multiController.addOnChangedListener((index, text) {
+        widget.onChanged?.call(index, text);
         if(index == 0 && multiController.length > 1)
           controller.text = text;
+      });
+
+    if(multi)
+      multiController.addOnAnyChangedListener((texts) {
+        widget.onAnyChanged?.call(texts);
+        if(multiController.length == 1) {
+          controller.text = multiController[0];
+          setState(() {});
+        }else if(multiController.length == 2)
+          setState(() {});
       });
 
     if(widget.controller == null)
@@ -133,15 +144,6 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       textField = MultiTextField(
         controller: multiController,
         hint: hint,
-        onAnyChanged: widget.onAnyChanged,
-        onChanged: (index, text){
-          widget.onChanged?.call(index, text);
-          //widget.onAnyChanged?.call(multiController._texts);
-          if(multiController.length == 1) {
-            controller.text = multiController[0];
-            setState(() {});
-          }
-        },
         onRemoved: (){
           if(multiController.length==1)
             setState(() {});
