@@ -6,11 +6,59 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+class MultiTextFieldController{
+
+  operator [](int index) => _texts[index];
+  operator []=(int index, String value){
+    _texts[index] = value;
+    for(void Function(int, String) listener in _listeners)
+      listener(index, value);
+  }
+  int get length => _texts.length;
+  String get last => _texts[length-1];
+  bool get isEmpty => _texts.isEmpty;
+  bool get isNotEmpty => _texts.isNotEmpty;
+
+  List<String> _texts;
+  List<String> get texts => _texts;
+
+  List<void Function(int, String)> _listeners;
+
+  MultiTextFieldController({List<String> texts}){
+    if(texts == null || texts.length == 0)
+      texts = [''];
+    this._texts = texts;
+    _listeners = [];
+  }
+
+  removeAt(int index){
+    _texts.removeAt(index);
+    for(void Function(int, String) listener in _listeners)
+      listener(index, last);
+  }
+
+  addText(String text){
+    _texts.add(text);
+    for(void Function(int, String) listener in _listeners)
+      listener(_texts.length-1, text);
+  }
+
+  setText(int index, String text){
+    _texts[index] = text;
+    for(void Function(int, String) listener in _listeners)
+      listener(index, text);
+  }
+
+  void addListener(void Function(int, String) listener) => _listeners.add(listener);
+  void removeListener(void Function(int, String) listener) => _listeners.remove(listener);
+
+}
+
 class MultiTextField extends StatefulWidget{
 
   static const IconData addIcon = MdiIcons.plusCircleOutline;
 
-  final List<String> initVals;
+  final MultiTextFieldController controller;
   final String hint;
   final bool linear;
   final Color accentColor;
@@ -18,7 +66,7 @@ class MultiTextField extends StatefulWidget{
   final void Function(int, String) onChanged;
   final void Function() onRemoved;
 
-  const MultiTextField({this.initVals, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged, this.onRemoved});
+  const MultiTextField({this.controller, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged, this.onRemoved});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -28,7 +76,8 @@ class MultiTextField extends StatefulWidget{
 
 class MultiTextFieldState extends State<MultiTextField>{
 
-  List<String> get initVals => widget.initVals;
+  MultiTextFieldController _controller;
+  MultiTextFieldController get controller => widget.controller??_controller;
   String get hint => widget.hint;
   bool get linear => widget.linear;
   Color get accentColor => widget.accentColor;
@@ -36,13 +85,10 @@ class MultiTextFieldState extends State<MultiTextField>{
   void Function(int, String) get onChanged => widget.onChanged;
   void Function() get onRemoved => widget.onRemoved;
 
-  List<String> texts;
-
   @override
   void initState() {
-    texts = [];
-    if(initVals != null)
-      texts.addAll(initVals);
+    if(widget.controller == null)
+      _controller = MultiTextFieldController();
 
     super.initState();
   }
@@ -51,27 +97,27 @@ class MultiTextFieldState extends State<MultiTextField>{
   Widget build(BuildContext context) {
     
     List<Widget> children = [];
-    for(int i=0; i<texts.length; i++) {
-      String text = texts[i];
+    for(int i=0; i<controller.length; i++) {
+      String text = controller[i];
       children.add(Item(
         initText: text,
         hint: hint,
         onChanged: (text){
-          texts[i] = text;
-          if(i == texts.length-1)
+          controller[i] = text;
+          if(i == controller.length-1)
             setState(() {});
-          onAnyChanged?.call(texts);
+          onAnyChanged?.call(controller._texts);
           onChanged?.call(i, text);
         },
         onRemoveTap: () => setState((){
-          texts.removeAt(i);
-          onAnyChanged?.call(texts);
+          controller.removeAt(i);
+          onAnyChanged?.call(controller._texts);
           onChanged?.call(i, text);
           onRemoved?.call();
         }),
       ));
 
-      if(linear && i < texts.length-1)
+      if(linear && i < controller.length-1)
         children.add(SizedBox(width: Dimen.DEF_MARG));
     }
 
@@ -80,18 +126,18 @@ class MultiTextFieldState extends State<MultiTextField>{
         icon: Icon(
           MultiTextField.addIcon,
           color:
-          texts.isNotEmpty && texts.last.isEmpty?
+          controller.isNotEmpty && controller.last.isEmpty?
           iconDisab_(context):
           accentColor,
         ),
         onPressed:
-        texts.isNotEmpty && texts.last.isEmpty?
+        controller.isNotEmpty && controller.last.isEmpty?
         null:
         () => setState((){
           String text = '';
-          texts.add(text);
-          onAnyChanged?.call(texts);
-          onChanged?.call(texts.length-1, text);
+          controller.addText(text);
+          onAnyChanged?.call(controller._texts);
+          onChanged?.call(controller.length-1, text);
         }),
       )
     );
@@ -111,9 +157,9 @@ class MultiTextFieldState extends State<MultiTextField>{
         spacing: Dimen.DEF_MARG,
       );
   }
-
-
 }
+
+
 
 class Item extends StatefulWidget{
   

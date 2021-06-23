@@ -29,7 +29,7 @@ class AppTextFieldHint extends StatefulWidget{
   final bool multi;
   final String multiHintTop;
   //final List<String> initVals;
-  final MultiAppTextFieldHintController multiController;
+  final MultiTextFieldController multiController;
 
   const AppTextFieldHint({
     @required this.hint,
@@ -66,8 +66,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   TextEditingController _controller;
   TextEditingController get controller => widget.controller??_controller;
 
-  MultiAppTextFieldHintController _multiController;
-  MultiAppTextFieldHintController get multiController => widget.multiController??_multiController;
+  MultiTextFieldController _multiController;
+  MultiTextFieldController get multiController => widget.multiController??_multiController;
 
   TextStyle hintStyle;
 
@@ -88,7 +88,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     super.initState();
 
     if(widget.multiController == null)
-      _multiController = MultiAppTextFieldHintController();
+      _multiController = MultiTextFieldController(texts: ['']);
 
     if(multi)
       multiController.addListener((index, text) {
@@ -112,9 +112,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         style: widget.style,
         controller: controller,
         onChanged: (text){
-          //if((text.length==0) != (oldText.length==0))
           multiController[0] = text;
-          //setState(() {});
           widget.onChanged?.call(0, text);
           widget.onAnyChanged?.call([text]);
         },
@@ -133,12 +131,12 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       );
     else
       textField = MultiTextField(
-        initVals: multiController._texts,
+        controller: multiController,
         hint: hint,
+        onAnyChanged: widget.onAnyChanged,
         onChanged: (index, text){
-          multiController[index] = text;
           widget.onChanged?.call(index, text);
-          widget.onAnyChanged?.call(multiController._texts);
+          //widget.onAnyChanged?.call(multiController._texts);
           if(multiController.length == 1) {
             controller.text = multiController[0];
             setState(() {});
@@ -169,7 +167,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
                     String text = '';
                     multiController.addText(text);
                     widget.onChanged?.call(multiController.length-1, text);
-                    widget.onAnyChanged?.call(multiController._texts);
+                    widget.onAnyChanged?.call(multiController.texts);
                   })
               )
           ],
@@ -187,48 +185,5 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       ],
     );
   }
-
-}
-
-class MultiAppTextFieldHintController{
-
-  //AppTextFieldHintState _state;
-
-  //void init(AppTextFieldHintState state) => _state = state;
-
-  operator [](int index) => _texts[index];
-  operator []=(int index, String value){
-    _texts[index] = value;
-    for(void Function(int, String) listener in _listeners)
-      listener(index, value);
-  }
-  int get length => _texts.length;
-
-  List<String> _texts;
-
-  List<void Function(int, String)> _listeners;
-
-  MultiAppTextFieldHintController({List<String> texts}){
-    if(texts == null || texts.length == 0)
-      texts = [''];
-    this._texts = texts;
-    _listeners = [];
-  }
-
-  addText(String text){
-    _texts.add(text);
-    for(void Function(int, String) listener in _listeners)
-      listener(_texts.length-1, text);
-  }
-
-  setText(int index, String text){
-    _texts[index] = text;
-    for(void Function(int, String) listener in _listeners)
-      listener(index, text);
-  }
-
-  void addListener(void Function(int, String) listener) => _listeners.add(listener);
-  void removeListener(void Function(int, String) listener) => _listeners.remove(listener);
-
 
 }
