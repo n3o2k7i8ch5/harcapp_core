@@ -113,7 +113,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           //if((text.length==0) != (oldText.length==0))
           multiController[0] = text;
           //setState(() {});
-          widget.onChanged(0, text);
+          widget.onChanged?.call(0, text);
           widget.onAnyChanged?.call([text]);
         },
         decoration: InputDecoration(
