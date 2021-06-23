@@ -122,7 +122,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         onChanged: (text){
           if(multi) multiController[0] = text;
           widget.onChanged?.call(0, text);
-          if(multi) widget.onAnyChanged?.call([text]);
+          widget.onAnyChanged?.call([text]);
         },
         decoration: InputDecoration(
           counterStyle: widget.counterStyle??TextStyle(color: hintEnab_(context)),
