@@ -206,14 +206,7 @@ class MultiAppTextFieldHintController{
     if(texts == null || texts.length == 0)
       texts = [''];
     this._texts = texts;
-    for(int i=0; i<texts.length; i++) {
-
-      ValueNotifier notifier = ValueNotifier(texts[i]);
-      notifier.addListener(() {
-        for(void Function(int, String) listener in _listeners)
-          listener(i, texts[i]);
-      });
-    }
+    _listeners = [];
   }
 
   addText(String text){
