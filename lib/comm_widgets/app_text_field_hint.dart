@@ -142,6 +142,10 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
             setState(() {});
           }
         },
+        onRemoved: (){
+          if(multiController.length==1)
+            setState(() {});
+        },
       );
 
     return Stack(

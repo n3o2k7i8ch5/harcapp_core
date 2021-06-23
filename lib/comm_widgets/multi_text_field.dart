@@ -16,8 +16,9 @@ class MultiTextField extends StatefulWidget{
   final Color accentColor;
   final void Function(List<String>) onAnyChanged;
   final void Function(int, String) onChanged;
+  final void Function() onRemoved;
 
-  const MultiTextField({this.initVals, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged});
+  const MultiTextField({this.initVals, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged, this.onRemoved});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -33,6 +34,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   Color get accentColor => widget.accentColor;
   void Function(List<String>) get onAnyChanged => widget.onAnyChanged;
   void Function(int, String) get onChanged => widget.onChanged;
+  void Function() get onRemoved => widget.onRemoved;
 
   List<String> texts;
   List<GlobalKey<ItemState>> keys;
@@ -71,6 +73,7 @@ class MultiTextFieldState extends State<MultiTextField>{
           keys.removeAt(i);
           onAnyChanged?.call(texts);
           onChanged?.call(i, text);
+          onRemoved?.call();
         }),
         key: keys[i],
       ));
