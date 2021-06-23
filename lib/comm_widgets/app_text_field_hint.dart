@@ -87,7 +87,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   void initState() {
     super.initState();
 
-    if(multi && widget.multiController == null)
+    if(widget.multiController == null)
       _multiController = MultiAppTextFieldHintController();
 
     if(multi)
@@ -96,7 +96,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           controller.text = text;
       });
 
-    if(!multi && widget.controller == null)
+    if(widget.controller == null)
       _controller = TextEditingController(text: multi?multiController[0]:'');
 
     hintStyle = widget.hintStyle??widget.style;
