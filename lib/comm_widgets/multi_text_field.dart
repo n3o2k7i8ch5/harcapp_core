@@ -14,9 +14,10 @@ class MultiTextField extends StatefulWidget{
   final String hint;
   final bool linear;
   final Color accentColor;
-  final void Function(List<String>) onChanged;
+  final void Function(List<String>) onAnyChanged;
+  final void Function(int, String) onChanged;
 
-  const MultiTextField({this.initVals, this.hint, this.linear: true, this.accentColor, this.onChanged});
+  const MultiTextField({this.initVals, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -30,7 +31,8 @@ class MultiTextFieldState extends State<MultiTextField>{
   String get hint => widget.hint;
   bool get linear => widget.linear;
   Color get accentColor => widget.accentColor;
-  void Function(List<String>) get onChanged => widget.onChanged;
+  void Function(List<String>) get onAnyChanged => widget.onAnyChanged;
+  void Function(int, String) get onChanged => widget.onChanged;
 
   List<String> texts;
   List<GlobalKey<ItemState>> keys;
@@ -61,12 +63,14 @@ class MultiTextFieldState extends State<MultiTextField>{
           texts[i] = text;
           if(i == texts.length-1)
             setState(() {});
-          onChanged?.call(texts);
+          onAnyChanged?.call(texts);
+          onChanged?.call(i, text);
         },
         onRemoveTap: () => setState((){
           texts.removeAt(i);
           keys.removeAt(i);
-          onChanged?.call(texts);
+          onAnyChanged?.call(texts);
+          onChanged?.call(i, text);
         }),
         key: keys[i],
       ));
@@ -88,9 +92,11 @@ class MultiTextFieldState extends State<MultiTextField>{
         texts.isNotEmpty && texts.last.isEmpty?
         null:
         () => setState((){
-          texts.add('');
+          String text = '';
+          texts.add(text);
           keys.add(GlobalKey<ItemState>());
-          onChanged?.call(texts);
+          onAnyChanged?.call(texts);
+          onChanged?.call(texts.length-1, text);
         }),
       )
     );
