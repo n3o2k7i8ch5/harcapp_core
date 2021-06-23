@@ -61,10 +61,10 @@ class AppTextFieldHint extends StatefulWidget{
 
 class AppTextFieldHintState extends State<AppTextFieldHint>{
 
-  TextEditingController controller;
+  TextEditingController _controller;
+  TextEditingController get controller => widget.controller??_controller;
 
   MultiAppTextFieldHintController _multiController;
-
   MultiAppTextFieldHintController get multiController => widget.multiController??_multiController;
 
   TextStyle hintStyle;
@@ -82,11 +82,12 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   void initState() {
     super.initState();
 
-    if(multiController == null)
+    if(widget.multiController == null)
       _multiController = MultiAppTextFieldHintController();
-    //texts = initVals == null || initVals.length == 0?['']:initVals;
 
-    controller = widget.controller??TextEditingController(text: texts==null || texts.isEmpty?'':texts[0]);
+    if(widget.controller == null)
+      _controller = TextEditingController(text: texts==null || texts.isEmpty?'':texts[0]);
+
     hintStyle = widget.hintStyle??widget.style;
   }
 
@@ -98,7 +99,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     if(texts.length == 1)
       textField = TextField(
         style: widget.style,
-        controller: controller,
+        controller: widget.multi?TextEditingController(text: texts==null || texts.isEmpty?'':texts[0]):controller,
         onChanged: (text){
           //if((text.length==0) != (oldText.length==0))
           texts[0] = text;
