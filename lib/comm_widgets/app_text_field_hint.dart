@@ -90,7 +90,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       _multiController = MultiAppTextFieldHintController();
 
     multiController.addListener((index, text) {
-      if(index == 0)
+      if(index == 0 && multiController.length > 1)
         controller.text = text;
     });
 
