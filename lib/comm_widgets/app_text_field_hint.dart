@@ -100,10 +100,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     if(multi)
       multiController.addOnAnyChangedListener((texts) {
         widget.onAnyChanged?.call(texts);
-        if(multiController.length == 1) {
-          controller.text = multiController[0];
-          setState(() {});
-        }else if(multiController.length == 2)
+        if(multiController.length == 1 || multiController.length == 2)
           setState(() {});
       });
 
@@ -123,9 +120,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         style: widget.style,
         controller: controller,
         onChanged: (text){
-          multiController[0] = text;
+          if(multi) multiController[0] = text;
           widget.onChanged?.call(0, text);
-          widget.onAnyChanged?.call([text]);
+          if(multi) widget.onAnyChanged?.call([text]);
         },
         decoration: InputDecoration(
           counterStyle: widget.counterStyle??TextStyle(color: hintEnab_(context)),

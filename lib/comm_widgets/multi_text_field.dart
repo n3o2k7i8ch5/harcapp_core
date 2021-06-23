@@ -35,27 +35,20 @@ class MultiTextFieldController{
 
   removeAt(int index){
     _texts.removeAt(index);
-    for(void Function(int, String) listener in _listeners)
-      listener(index, last);
-
-    for(void Function(List<String>) listener in _anyListeners)
-      listener(_texts);
+    _callOnChanged(index);
+    _callOnAnyChanged();
   }
 
   addText(String text){
     _texts.add(text);
-    for(void Function(int, String) listener in _listeners)
-      listener(_texts.length-1, text);
-    for(void Function(List<String>) listener in _anyListeners)
-      listener(_texts);
+    _callOnChanged(_texts.length-1);
+    _callOnAnyChanged();
   }
 
   setText(int index, String text){
     _texts[index] = text;
-    for(void Function(int, String) listener in _listeners)
-      listener(index, text);
-    for(void Function(List<String>) listener in _anyListeners)
-      listener(_texts);
+    _callOnChanged(index);
+    _callOnAnyChanged();
   }
 
   void addOnChangedListener(void Function(int, String) listener) => _listeners.add(listener);
@@ -63,6 +56,16 @@ class MultiTextFieldController{
 
   void addOnAnyChangedListener(void Function(List<String>) listener) => _anyListeners.add(listener);
   void removeOnAnyChangedListener(void Function(List<String>) listener) => _anyListeners.remove(listener);
+
+  void _callOnChanged(int index){
+    for(void Function(int, String) listener in _listeners)
+      listener(index, texts[index]);
+  }
+
+  void _callOnAnyChanged(){
+    for(void Function(List<String>) listener in _anyListeners)
+      listener(texts);
+  }
 
   void dispose(){
     _listeners.clear();
@@ -98,8 +101,8 @@ class MultiTextFieldState extends State<MultiTextField>{
   String get hint => widget.hint;
   bool get linear => widget.linear;
   Color get accentColor => widget.accentColor;
-  void Function(List<String>) get onAnyChanged => widget.onAnyChanged;
-  void Function(int, String) get onChanged => widget.onChanged;
+  //void Function(List<String>) get onAnyChanged => widget.onAnyChanged;
+  //void Function(int, String) get onChanged => widget.onChanged;
   void Function() get onRemoved => widget.onRemoved;
 
   @override
@@ -123,14 +126,14 @@ class MultiTextFieldState extends State<MultiTextField>{
           controller[i] = text;
           if(i == controller.length-1)
             setState(() {});
-          onAnyChanged?.call(controller._texts);
-          onChanged?.call(i, text);
+          controller._callOnChanged(i);
+          controller._callOnAnyChanged();
         },
         onRemoveTap: () => setState((){
           controller.removeAt(i);
-          onAnyChanged?.call(controller._texts);
-          onChanged?.call(i, text);
           onRemoved?.call();
+          controller._callOnChanged(i);
+          controller._callOnAnyChanged();
         }),
       ));
 
@@ -153,8 +156,8 @@ class MultiTextFieldState extends State<MultiTextField>{
         () => setState((){
           String text = '';
           controller.addText(text);
-          onAnyChanged?.call(controller._texts);
-          onChanged?.call(controller.length-1, text);
+          controller._callOnChanged(controller.length-1);
+          controller._callOnAnyChanged();
         }),
       )
     );
