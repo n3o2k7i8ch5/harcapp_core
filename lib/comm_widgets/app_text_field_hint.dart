@@ -78,6 +78,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   List<String> get texts => multiController.texts;
   set texts(List<String> values) => multiController.texts = values;
 
+  ValueNotifier notifier;
+
   @override
   void initState() {
     super.initState();
@@ -89,6 +91,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       _controller = TextEditingController(text: texts==null || texts.isEmpty?'':texts[0]);
 
     hintStyle = widget.hintStyle??widget.style;
+
+    notifier = ValueNotifier(texts[0]);
+    notifier.addListener(() => controller.text = texts[0]);
   }
 
   @override
@@ -99,11 +104,11 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     if(texts.length == 1)
       textField = TextField(
         style: widget.style,
-        controller: widget.multi?TextEditingController(text: texts==null || texts.isEmpty?'':texts[0]):controller,
+        controller: controller,
         onChanged: (text){
           //if((text.length==0) != (oldText.length==0))
           texts[0] = text;
-          setState(() {});
+          //setState(() {});
           widget.onChanged?.call([text]);
         },
         decoration: InputDecoration(
