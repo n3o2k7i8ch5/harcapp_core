@@ -250,7 +250,7 @@ class ItemState extends State<Item>{
               controller: controller,
               style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
               textAlignVertical: TextAlignVertical.center,
-              scrollPadding: EdgeInsets.zero,
+              //scrollPadding: EdgeInsets.zero,
               decoration: InputDecoration(
                   isCollapsed: true,
                   //contentPadding: EdgeInsets.zero,
