@@ -81,7 +81,17 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   //List<String> get texts => multiController.texts;
   //set texts(List<String> values) => multiController.texts = values;
 
-  ValueNotifier notifier;
+  void onChangedListener(int index, String text) {
+    widget.onChanged?.call(index, text);
+    if(index == 0 && multiController.length > 1)
+      controller.text = text;
+  }
+
+  void onAnyChangedListener(List<String> texts) {
+    widget.onAnyChanged?.call(texts);
+    if(multiController.length == 1 || multiController.length == 2)
+      setState(() {});
+  }
 
   @override
   void initState() {
@@ -91,23 +101,27 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       _multiController = MultiTextFieldController(texts: ['']);
 
     if(multi)
-      multiController.addOnChangedListener((index, text) {
-        widget.onChanged?.call(index, text);
-        if(index == 0 && multiController.length > 1)
-          controller.text = text;
-      });
+      multiController.addOnChangedListener(onChangedListener);
 
     if(multi)
-      multiController.addOnAnyChangedListener((texts) {
-        widget.onAnyChanged?.call(texts);
-        if(multiController.length == 1 || multiController.length == 2)
-          setState(() {});
-      });
+      multiController.addOnAnyChangedListener(onAnyChangedListener);
 
     if(widget.controller == null)
       _controller = TextEditingController(text: multi?multiController[0]:'');
 
     hintStyle = widget.hintStyle??widget.style;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    if(multi)
+      multiController.removeOnChangedListener(onChangedListener);
+
+    if(multi)
+      multiController.removeOnAnyChangedListener(onAnyChangedListener);
+
   }
 
   @override
