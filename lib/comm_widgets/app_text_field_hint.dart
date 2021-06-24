@@ -100,18 +100,20 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     if(widget.multiController == null)
       _multiController = MultiTextFieldController(texts: ['']);
 
+    /*
     if(multi)
       multiController.addOnChangedListener(onChangedListener);
 
     if(multi)
       multiController.addOnAnyChangedListener(onAnyChangedListener);
-
+*/
     if(widget.controller == null)
       _controller = TextEditingController(text: multi?multiController[0]:'');
 
     hintStyle = widget.hintStyle??widget.style;
   }
 
+  /*
   @override
   void dispose() {
     super.dispose();
@@ -123,6 +125,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       multiController.removeOnAnyChangedListener(onAnyChangedListener);
 
   }
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +158,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       textField = MultiTextField(
         controller: multiController,
         hint: hint,
+        onAnyChanged: onAnyChangedListener,
+        onChanged: onChangedListener,
         onRemoved: (){
           if(multiController.length==1)
             setState(() {});

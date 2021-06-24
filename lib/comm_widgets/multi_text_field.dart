@@ -101,9 +101,13 @@ class MultiTextFieldState extends State<MultiTextField>{
   String get hint => widget.hint;
   bool get linear => widget.linear;
   Color get accentColor => widget.accentColor;
-  //void Function(List<String>) get onAnyChanged => widget.onAnyChanged;
-  //void Function(int, String) get onChanged => widget.onChanged;
+  void Function(List<String>) get onAnyChanged => widget.onAnyChanged;
+  void Function(int, String) get onChanged => widget.onChanged;
   void Function() get onRemoved => widget.onRemoved;
+
+  void _callOnChanged(int index) => onChanged(index, controller[index]);
+
+  void _callOnAnyChanged() => onAnyChanged(controller.texts);
 
   @override
   void initState() {
@@ -126,13 +130,19 @@ class MultiTextFieldState extends State<MultiTextField>{
           controller[i] = text;
           if(i == controller.length-1)
             setState(() {});
+
+          _callOnChanged(i);
           controller._callOnChanged(i);
+          _callOnAnyChanged();
           controller._callOnAnyChanged();
         },
         onRemoveTap: () => setState((){
           controller.removeAt(i);
           onRemoved?.call();
+
+          _callOnChanged(i);
           controller._callOnChanged(i);
+          _callOnAnyChanged();
           controller._callOnAnyChanged();
         }),
       ));
@@ -156,7 +166,9 @@ class MultiTextFieldState extends State<MultiTextField>{
         () => setState((){
           String text = '';
           controller.addText(text);
+          _callOnChanged(controller.length-1);
           controller._callOnChanged(controller.length-1);
+          _callOnAnyChanged();
           controller._callOnAnyChanged();
         }),
       )
