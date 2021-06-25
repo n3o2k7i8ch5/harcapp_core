@@ -52,7 +52,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.accentColor,
     this.multi: false,
     this.multiHintTop,
-    this.multiExpanded,
+    this.multiExpanded: false,
     this.multiController,
     Key key
   }):super(key: key);
