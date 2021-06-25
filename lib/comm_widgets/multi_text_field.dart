@@ -345,27 +345,7 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
       ),
     );
 
-    return Stack(
-      children: [
-
-        child,
-
-        if(focusNode.hasFocus && false)
-          Positioned(
-            left: 0,
-            right: Dimen.ICON_MARG,
-            bottom: 10,
-            child: Container(
-              height: 1,
-              decoration: BoxDecoration(
-                color: hintEnab_(context), //accent_(context),
-                borderRadius: BorderRadius.all(Radius.circular(20))
-              ),
-            ),
-          )
-
-      ],
-    );
+    return child;
 
   }
 

@@ -54,7 +54,6 @@ class AppTextFieldHint extends StatefulWidget{
     this.multiHintTop,
     this.multiExpanded,
     this.multiController,
-    //this.initVals,
     Key key
   }):super(key: key);
 
@@ -79,21 +78,12 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   String get multiHintTop => widget.multiHintTop??hintTop;
   bool get multiExpanded => widget.multiExpanded;
 
-  //List<String> get initVals => widget.initVals;
-
-  //List<String> get texts => multiController.texts;
-  //set texts(List<String> values) => multiController.texts = values;
-
   void onChangedListener(int index, String text) {
     widget.onChanged?.call(index, text);
-    if(index == 0 && multiController.length > 1)
-      controller.text = text;
   }
 
   void onAnyChangedListener(List<String> texts) {
     widget.onAnyChanged?.call(texts);
-    if(multiController.length == 1 || multiController.length == 2)
-      setState(() {});
   }
 
   @override
@@ -103,13 +93,6 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     if(widget.multiController == null)
       _multiController = MultiTextFieldController(texts: ['']);
 
-    /*
-    if(multi)
-      multiController.addOnChangedListener(onChangedListener);
-
-    if(multi)
-      multiController.addOnAnyChangedListener(onAnyChangedListener);
-*/
     if(widget.controller == null)
       _controller = TextEditingController(text: multi?multiController[0]:'');
 
@@ -136,11 +119,22 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     Widget textField;
 
     if(!multi)
+      textField = MultiTextField(
+        controller: multiController,
+        expanded: multiExpanded,
+        hint: hint,
+        onAnyChanged: onAnyChangedListener,
+        onChanged: onChangedListener,
+        onRemoved: (){
+          if(multiController.length==1)
+            setState(() {});
+        },
+      );
+    else
       textField = TextField(
         style: widget.style,
         controller: controller,
         onChanged: (text){
-          if(multi) multiController[0] = text;
           widget.onChanged?.call(0, text);
           widget.onAnyChanged?.call([text]);
         },
@@ -157,18 +151,6 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         keyboardType: widget.keyboardType,
         inputFormatters: widget.inputFormatters,
       );
-    else
-      textField = MultiTextField(
-        controller: multiController,
-        expanded: multiExpanded,
-        hint: hint,
-        onAnyChanged: onAnyChangedListener,
-        onChanged: onChangedListener,
-        onRemoved: (){
-          if(multiController.length==1)
-            setState(() {});
-        },
-      );
 
     return Stack(
       clipBehavior: Clip.none,
@@ -178,22 +160,6 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           children: <Widget>[
             if(widget.leading!=null) widget.leading,
             Expanded(child: textField),
-
-            /*
-            if(widget.multi && multiController.length==1)
-              IconButton(
-                  icon: Icon(
-                    MultiTextField.addIcon,
-                    color: multiController[0].isEmpty?iconDisab_(context):iconEnab_(context),
-                  ),
-                  onPressed: multiController[0].isEmpty?null:() => setState((){
-                    String text = '';
-                    multiController.addText(text);
-                    widget.onChanged?.call(multiController.length-1, text);
-                    widget.onAnyChanged?.call(multiController.texts);
-                  })
-              )
-             */
           ],
         ),
 
