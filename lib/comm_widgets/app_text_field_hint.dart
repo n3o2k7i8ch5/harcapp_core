@@ -132,7 +132,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
     Widget textField;
 
-    if(multiController.length == 1)
+    if(!multi)
       textField = TextField(
         style: widget.style,
         controller: controller,
