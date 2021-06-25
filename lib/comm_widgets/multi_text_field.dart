@@ -79,6 +79,7 @@ class MultiTextField extends StatefulWidget{
   static const IconData addIcon = MdiIcons.plusCircleOutline;
 
   final MultiTextFieldController controller;
+  final int minCount;
   final String hint;
   final bool linear;
   final Color accentColor;
@@ -86,11 +87,10 @@ class MultiTextField extends StatefulWidget{
   final void Function(int, String) onChanged;
   final void Function() onRemoved;
 
-  const MultiTextField({this.controller, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged, this.onRemoved});
+  const MultiTextField({this.controller, this.minCount = 1, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged, this.onRemoved});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
-
 
 }
 
@@ -127,6 +127,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       children.add(Item(
         initText: text,
         hint: hint,
+        removable: controller.length>widget.minCount,
         onChanged: (text){
           controller[i] = text;
           if(i == controller.length-1)
@@ -198,10 +199,11 @@ class Item extends StatefulWidget{
   
   final String initText;
   final String hint;
+  final bool removable;
   final void Function() onRemoveTap;
   final void Function(String) onChanged;
 
-  const Item({@required this.initText, @required this.hint, this.onRemoveTap, this.onChanged, Key key}):super(key: key);
+  const Item({@required this.initText, @required this.hint, this.removable: true, this.onRemoveTap, this.onChanged, Key key}):super(key: key);
 
   @override
   State<StatefulWidget> createState() => ItemState();
@@ -210,10 +212,13 @@ class Item extends StatefulWidget{
 
 class ItemState extends State<Item>{
 
+  static const double iconSize = 20.0;
+
   FocusNode focusNode;
 
   String get initText => widget.initText;
   String get hint => widget.hint;
+  bool get removable => widget.removable;
   void Function() get onRemoveTap => widget.onRemoveTap;
   void Function(String) get onChanged => widget.onChanged;
 
@@ -241,74 +246,76 @@ class ItemState extends State<Item>{
         mainAxisSize: MainAxisSize.min,
         children: [
 
-          GestureDetector(
-            onTap: selected?null:(){
-              setState(() => selected = true);
-              focusNode.requestFocus();
-            },
-            child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: 40.0,
-                ),
-                child:
-                selected?
-
-                IntrinsicWidth(
-                  child: TextField(
-                    focusNode: focusNode,
-                    controller: controller,
-                    style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
-                    minLines: 1,
-                    maxLines: 1,
-                    decoration: InputDecoration(
-                        isDense: true,
-                        isCollapsed: true,
-                        contentPadding: EdgeInsets.all(0),
-                        hintText: hint,
-                        hintStyle: AppTextStyle(
-                          color: hintEnab_(context),
-                          fontSize: Dimen.TEXT_SIZE_BIG,
-                        ),
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none
-                    ),
-                    onChanged: onChanged,
-                  ),
-                ):
-
-                Text(
-                  controller.text.isEmpty?hint:controller.text,
-                  style: AppTextStyle(
-                      fontSize: controller.text.isEmpty?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
-                      fontWeight: controller.text.isEmpty?weight.normal:weight.halfBold,
-                      color: controller.text.isEmpty?hintEnab_(context):textEnab_(context)
-                  ),
-                )
-
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              minWidth: 40.0,
             ),
+            child:
+            selected?
+
+            IntrinsicWidth(
+              child: TextField(
+                focusNode: focusNode,
+                controller: controller,
+                style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
+                minLines: 1,
+                maxLines: 1,
+                decoration: InputDecoration(
+                    isDense: true,
+                    isCollapsed: true,
+                    contentPadding: EdgeInsets.all(0),
+                    hintText: hint,
+                    hintStyle: AppTextStyle(
+                      color: hintEnab_(context),
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                    ),
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none
+                ),
+                onChanged: onChanged,
+              ),
+            ):
+
+            GestureDetector(
+              onTap: (){
+                setState(() => selected = true);
+                focusNode.requestFocus();
+              },
+              child: Text(
+                controller.text.isEmpty?hint:controller.text,
+                style: AppTextStyle(
+                    fontSize: controller.text.isEmpty?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
+                    fontWeight: controller.text.isEmpty?weight.normal:weight.halfBold,
+                    color: controller.text.isEmpty?hintEnab_(context):textEnab_(context)
+                ),
+              ),
+            ),
+
           ),
 
           if(focusNode.hasFocus)
             SimpleButton.from(
               context: context,
               icon: MdiIcons.check,
-              iconSize: 20,
+              iconSize: iconSize,
               margin: EdgeInsets.zero,
               onTap: (){
                 setState(() => selected = false);
                 focusNode.unfocus();
               },
             )
-          else
+          else if(removable)
             SimpleButton.from(
               context: context,
               icon: MdiIcons.close,
-              iconSize: 20,
+              iconSize: iconSize,
               margin: EdgeInsets.zero,
               onTap: onRemoveTap,
             )
+          else
+            SizedBox(width: 2*Dimen.ICON_MARG + iconSize,)
 
         ],
       ),
