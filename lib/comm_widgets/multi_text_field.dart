@@ -25,7 +25,7 @@ class MultiTextFieldController{
   set texts(List<String> values){
     int i;
     for(i=0; i<values.length; i++)
-      if(i < _ctrls.length-1)
+      if(i < _ctrls.length)
         _ctrls[i].text = values[i];
       else
         _ctrls.add(TextEditingController(text: values[i]));
