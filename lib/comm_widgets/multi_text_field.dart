@@ -251,9 +251,8 @@ class ItemState extends State<Item>{
                 focusNode: focusNode,
                 controller: controller,
                 style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
-                textAlignVertical: TextAlignVertical.center,
-                //scrollPadding: EdgeInsets.zero,
-
+                minLines: 1,
+                maxLines: 1,
                 decoration: InputDecoration(
                     isDense: true,
                     isCollapsed: true,
