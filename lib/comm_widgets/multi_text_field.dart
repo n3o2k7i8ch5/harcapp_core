@@ -257,13 +257,16 @@ class ItemState extends State<Item>{
                 decoration: InputDecoration(
                     isDense: true,
                     isCollapsed: true,
-                    contentPadding: EdgeInsets.zero,
+                    contentPadding: EdgeInsets.all(-10),
                     hintText: hint,
                     hintStyle: AppTextStyle(
                       color: hintEnab_(context),
                       fontSize: Dimen.TEXT_SIZE_BIG,
                     ),
-                    border: InputBorder.none
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none
                 ),
                 onChanged: onChanged,
               ),
