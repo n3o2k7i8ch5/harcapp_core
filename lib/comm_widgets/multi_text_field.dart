@@ -313,7 +313,7 @@ class ItemState extends State<Item>{
           if(focusNode.hasFocus)
             Container(
               child: IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: Dimen.ICON_MARG, vertical: 0),
+                  padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
                   onPressed: (){
                     setState(() => selected = false);
                     focusNode.unfocus();
@@ -325,7 +325,7 @@ class ItemState extends State<Item>{
           else if(removable)
             Container(
               child: IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: Dimen.ICON_MARG, vertical: 0),
+                  padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
                   onPressed: onRemoveTap,
                   icon: Icon(MdiIcons.close, size: iconSize)
               ),
