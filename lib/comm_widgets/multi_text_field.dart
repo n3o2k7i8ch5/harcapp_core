@@ -80,6 +80,7 @@ class MultiTextField extends StatefulWidget{
 
   final MultiTextFieldController controller;
   final int minCount;
+  final bool expanded;
   final String hint;
   final bool linear;
   final Color accentColor;
@@ -87,7 +88,7 @@ class MultiTextField extends StatefulWidget{
   final void Function(int, String) onChanged;
   final void Function() onRemoved;
 
-  const MultiTextField({this.controller, this.minCount = 1, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged, this.onRemoved});
+  const MultiTextField({this.controller, this.minCount = 1, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged, this.onRemoved});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -99,6 +100,8 @@ class MultiTextFieldState extends State<MultiTextField>{
   MultiTextFieldController _controller;
   MultiTextFieldController get controller => widget.controller??_controller;
 
+  int get minCount => widget.minCount;
+  bool get expanded => widget.expanded;
   String get hint => widget.hint;
   bool get linear => widget.linear;
   Color get accentColor => widget.accentColor;
@@ -127,7 +130,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       children.add(Item(
         initText: text,
         hint: hint,
-        removable: controller.length>widget.minCount,
+        removable: controller.length>minCount,
         onChanged: (text){
           controller[i] = text;
           if(i == controller.length-1)
@@ -153,36 +156,49 @@ class MultiTextFieldState extends State<MultiTextField>{
         children.add(SizedBox(width: Dimen.DEF_MARG));
     }
 
-    children.add(
-      IconButton(
-        icon: Icon(
-          MultiTextField.addIcon,
-          color:
-          controller.isNotEmpty && controller.last.isEmpty?
-          iconDisab_(context):
-          accentColor,
-        ),
-        onPressed:
+    Widget addButton = IconButton(
+      icon: Icon(
+        MultiTextField.addIcon,
+        color:
         controller.isNotEmpty && controller.last.isEmpty?
-        null:
-        () => setState((){
-          String text = '';
-          controller.addText(text);
-          _callOnChanged(controller.length-1);
-          controller._callOnChanged(controller.length-1);
-          _callOnAnyChanged();
-          controller._callOnAnyChanged();
-        }),
-      )
+        iconDisab_(context):
+        accentColor,
+      ),
+      onPressed:
+      controller.isNotEmpty && controller.last.isEmpty?
+      null:
+          () => setState((){
+        String text = '';
+        controller.addText(text);
+        _callOnChanged(controller.length-1);
+        controller._callOnChanged(controller.length-1);
+        _callOnAnyChanged();
+        controller._callOnAnyChanged();
+      }),
     );
 
     if(linear)
-      return SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        child: Row(children: children),
-        clipBehavior: Clip.none,
-      );
+      return Builder(builder: (context){
+        if(!expanded)
+          children.add(addButton);
+
+        Widget scrollView = SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          child: Row(children: children),
+          clipBehavior: Clip.none,
+        );
+
+        if(expanded)
+          return Row(
+            children: [
+              Expanded(child: scrollView),
+              addButton
+            ],
+          );
+        else
+          return scrollView;
+      });
     else
       return Wrap(
         crossAxisAlignment: WrapCrossAlignment.start,
@@ -292,27 +308,22 @@ class ItemState extends State<Item>{
                 ),
               ),
             ),
-
           ),
 
           if(focusNode.hasFocus)
-            SimpleButton.from(
-              context: context,
-              icon: MdiIcons.check,
-              iconSize: iconSize,
-              margin: EdgeInsets.zero,
-              onTap: (){
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: Dimen.ICON_MARG),
+              onPressed: (){
                 setState(() => selected = false);
                 focusNode.unfocus();
               },
+              icon: Icon(MdiIcons.check, size: iconSize)
             )
           else if(removable)
-            SimpleButton.from(
-              context: context,
-              icon: MdiIcons.close,
-              iconSize: iconSize,
-              margin: EdgeInsets.zero,
-              onTap: onRemoveTap,
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: Dimen.ICON_MARG),
+              onPressed: onRemoveTap,
+              icon: Icon(MdiIcons.close, size: iconSize)
             )
           else
             SizedBox(width: 2*Dimen.ICON_MARG + iconSize,)
