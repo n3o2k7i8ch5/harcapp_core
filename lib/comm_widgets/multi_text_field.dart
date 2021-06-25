@@ -256,7 +256,7 @@ class ItemState extends State<Item>{
                 decoration: InputDecoration(
                     isDense: true,
                     isCollapsed: true,
-                    contentPadding: EdgeInsets.all(-10),
+                    contentPadding: EdgeInsets.all(0),
                     hintText: hint,
                     hintStyle: AppTextStyle(
                       color: hintEnab_(context),
