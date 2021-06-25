@@ -17,6 +17,8 @@ class MultiTextFieldController{
   bool get isEmpty => _ctrls.isEmpty;
   bool get isNotEmpty => _ctrls.isNotEmpty;
 
+  int minCount;
+
   List<TextEditingController> _ctrls;
 
   List<String> get texts => _ctrls.map((ctrl) => ctrl.text).toList();
@@ -30,13 +32,17 @@ class MultiTextFieldController{
 
     while(i<_ctrls.length)
       _ctrls.removeAt(i);
+
+    while(_ctrls.length < minCount)
+      _ctrls.add(TextEditingController(text: ''));
+
   }
 
 
   List<void Function(int, String)> _listeners;
   List<void Function(List<String>)> _anyListeners;
 
-  MultiTextFieldController({List<String> texts}){
+  MultiTextFieldController({List<String> texts, this.minCount = 1}){
     if(texts == null || texts.length == 0)
       texts = [''];
     this._ctrls = texts.map((text) => TextEditingController(text: text)).toList();
@@ -90,7 +96,6 @@ class MultiTextField extends StatefulWidget{
   static const IconData addIcon = MdiIcons.plusCircleOutline;
 
   final MultiTextFieldController controller;
-  final int minCount;
   final bool expanded;
   final String hint;
   final bool linear;
@@ -99,7 +104,7 @@ class MultiTextField extends StatefulWidget{
   final void Function(int, String) onChanged;
   final void Function() onRemoved;
 
-  const MultiTextField({this.controller, this.minCount = 1, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged, this.onRemoved});
+  const MultiTextField({this.controller, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged, this.onRemoved});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -111,7 +116,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   MultiTextFieldController _controller;
   MultiTextFieldController get controller => widget.controller??_controller;
 
-  int get minCount => widget.minCount;
+  int get minCount => controller.minCount;
   bool get expanded => widget.expanded;
   String get hint => widget.hint;
   bool get linear => widget.linear;
