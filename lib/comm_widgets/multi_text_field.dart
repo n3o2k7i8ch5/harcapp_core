@@ -312,11 +312,13 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
               ),
             ),
             duration: Duration(milliseconds: 300),
+            alignment: Alignment.centerLeft,
           ),
 
           if(focusNode.hasFocus)
             SizedBox(
               child: IconButton(
+                padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
                 icon: Icon(MdiIcons.check, size: iconSize),
                 onPressed: (){
                   setState(() => selected = false);
@@ -328,6 +330,7 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
           else if(removable)
             SizedBox(
               child: IconButton(
+                padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
                 icon: Icon(MdiIcons.close, size: iconSize),
                 onPressed: onRemoveTap,
               ),
