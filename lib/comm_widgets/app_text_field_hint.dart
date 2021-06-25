@@ -29,6 +29,7 @@ class AppTextFieldHint extends StatefulWidget{
   final bool multi;
   final String multiHintTop;
   //final List<String> initVals;
+  final bool multiExpanded;
   final MultiTextFieldController multiController;
 
   const AppTextFieldHint({
@@ -51,6 +52,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.accentColor,
     this.multi: false,
     this.multiHintTop,
+    this.multiExpanded,
     this.multiController,
     //this.initVals,
     Key key
@@ -75,6 +77,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   String get hintTop => widget.hintTop??hint;
   bool get multi => widget.multi;
   String get multiHintTop => widget.multiHintTop??hintTop;
+  bool get multiExpanded => widget.multiExpanded;
 
   //List<String> get initVals => widget.initVals;
 
@@ -157,6 +160,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     else
       textField = MultiTextField(
         controller: multiController,
+        expanded: multiExpanded,
         hint: hint,
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
@@ -197,7 +201,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
             style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_SMALL, fontWeight: weight.halfBold, color: hintEnab_(context)),
           ),
           duration: Duration(milliseconds: 300),
-          opacity: controller.text.length==0?0:1,
+          opacity:
+          (multi && (multiController.isEmpty || multiController[0].isEmpty))
+              || (controller.text.isEmpty)?0:1,
         ),
 
       ],

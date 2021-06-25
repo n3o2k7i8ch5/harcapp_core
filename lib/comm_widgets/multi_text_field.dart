@@ -8,7 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 class MultiTextFieldController{
 
-  operator [](int index) => _texts[index];
+  String operator [](int index) => _texts[index];
   operator []=(int index, String value){
     _texts[index] = value;
     for(void Function(int, String) listener in _listeners)
