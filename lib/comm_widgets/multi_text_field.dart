@@ -253,6 +253,7 @@ class ItemState extends State<Item>{
                 style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
                 textAlignVertical: TextAlignVertical.center,
                 //scrollPadding: EdgeInsets.zero,
+
                 decoration: InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
