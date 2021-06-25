@@ -273,23 +273,24 @@ class ItemState extends State<Item>{
               ),
             ):
 
-            GestureDetector(
-              onTap: (){
-                setState(() => selected = true);
-                focusNode.requestFocus();
-              },
-              child: Align(
+            Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  controller.text.isEmpty?hint:controller.text,
-                  style: AppTextStyle(
-                      fontSize: controller.text.isEmpty?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
-                      fontWeight: controller.text.isEmpty?weight.normal:weight.halfBold,
-                      color: controller.text.isEmpty?hintEnab_(context):textEnab_(context)
+                child: GestureDetector(
+                  onTap: (){
+                    setState(() => selected = true);
+                    focusNode.requestFocus();
+                  },
+                  child: Text(
+                    controller.text.isEmpty?hint:controller.text,
+                    style: AppTextStyle(
+                        fontSize: controller.text.isEmpty?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
+                        fontWeight: controller.text.isEmpty?weight.normal:weight.halfBold,
+                        color: controller.text.isEmpty?hintEnab_(context):textEnab_(context)
+                    ),
                   ),
                 ),
-              ),
             ),
+
           ),
 
           if(focusNode.hasFocus)
