@@ -170,7 +170,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           ),
           duration: Duration(milliseconds: 300),
           opacity:
-          (multi && (multiController.isEmpty || multiController[0].isEmpty))
+          (multi && (multiController.isEmpty || multiController[0].text.isEmpty))
               || (controller.text.isEmpty)?0:1,
         ),
 
