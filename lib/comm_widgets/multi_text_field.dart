@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
-import 'package:harcapp_core/comm_widgets/app_card.dart';
-import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MultiTextFieldController{
 
-  String operator [](int index) => _texts[index];
+  TextEditingController operator [](int index) => _ctrls[index];
   operator []=(int index, String value){
-    _texts[index] = value;
+    _ctrls[index].text = value;
     for(void Function(int, String) listener in _listeners)
       listener(index, value);
   }
-  int get length => _texts.length;
-  String get last => _texts[length-1];
-  bool get isEmpty => _texts.isEmpty;
-  bool get isNotEmpty => _texts.isNotEmpty;
+  int get length => _ctrls.length;
+  String get last => _ctrls[length-1].text;
+  bool get isEmpty => _ctrls.isEmpty;
+  bool get isNotEmpty => _ctrls.isNotEmpty;
 
-  List<String> _texts;
-  List<String> get texts => _texts;
+  List<TextEditingController> _ctrls;
+
+  List<String> get texts => _ctrls.map((ctrl) => ctrl.text).toList();
 
   List<void Function(int, String)> _listeners;
   List<void Function(List<String>)> _anyListeners;
@@ -28,25 +27,25 @@ class MultiTextFieldController{
   MultiTextFieldController({List<String> texts}){
     if(texts == null || texts.length == 0)
       texts = [''];
-    this._texts = texts;
+    this._ctrls = texts.map((text) => TextEditingController(text: text)).toList();
     _listeners = [];
     _anyListeners = [];
   }
 
   removeAt(int index){
-    _texts.removeAt(index);
+    _ctrls.removeAt(index);
     _callOnChanged(index);
     _callOnAnyChanged();
   }
 
   addText(String text){
-    _texts.add(text);
-    _callOnChanged(_texts.length-1);
+    _ctrls.add(TextEditingController(text: text));
+    _callOnChanged(_ctrls.length-1);
     _callOnAnyChanged();
   }
 
   setText(int index, String text){
-    _texts[index] = text;
+    _ctrls[index].text = text;
     _callOnChanged(index);
     _callOnAnyChanged();
   }
@@ -59,7 +58,7 @@ class MultiTextFieldController{
 
   void _callOnChanged(int index){
     for(void Function(int, String) listener in _listeners)
-      listener(index, texts[index]);
+      listener(index, _ctrls[index].text);
   }
 
   void _callOnAnyChanged(){
@@ -109,7 +108,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   void Function(int, String) get onChanged => widget.onChanged;
   void Function() get onRemoved => widget.onRemoved;
 
-  void _callOnChanged(int index) => onChanged(index, controller[index]);
+  void _callOnChanged(int index) => onChanged(index, controller[index].text);
 
   void _callOnAnyChanged() => onAnyChanged(controller.texts);
 
@@ -126,9 +125,8 @@ class MultiTextFieldState extends State<MultiTextField>{
     
     List<Widget> children = [];
     for(int i=0; i<controller.length; i++) {
-      String text = controller[i];
       children.add(Item(
-        controller: TextEditingController(text: text),
+        controller: controller[i],
         hint: hint,
         removable: controller.length>minCount,
         onChanged: (text){
