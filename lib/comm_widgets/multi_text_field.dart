@@ -282,7 +282,7 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
                 minWidth: 10,//40.0,
               ),
               child:
-              selected?
+              selected || true?
 
               IntrinsicWidth(
                 child: TextField(
