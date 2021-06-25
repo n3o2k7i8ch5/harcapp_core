@@ -226,7 +226,7 @@ class Item extends StatefulWidget{
 
 }
 
-class ItemState extends State<Item>{
+class ItemState extends State<Item> with TickerProviderStateMixin{
 
   static const double iconSize = 20.0;
 
@@ -262,52 +262,56 @@ class ItemState extends State<Item>{
         mainAxisSize: MainAxisSize.min,
         children: [
 
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              minWidth: 10,//40.0,
-            ),
-            child:
-            selected?
-
-            IntrinsicWidth(
-              child: TextField(
-                focusNode: focusNode,
-                controller: controller,
-                style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
-                minLines: 1,
-                maxLines: 1,
-                decoration: InputDecoration(
-                    isDense: true,
-                    isCollapsed: true,
-                    contentPadding: EdgeInsets.all(0),
-                    hintText: hint,
-                    hintStyle: AppTextStyle(
-                      color: hintEnab_(context),
-                      fontSize: Dimen.TEXT_SIZE_BIG,
-                    ),
-                    border: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none
-                ),
-                onChanged: onChanged,
+          AnimatedSize(
+            vsync: this,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minWidth: 10,//40.0,
               ),
-            ):
+              child:
+              selected?
 
-            GestureDetector(
-              onTap: (){
-                setState(() => selected = true);
-                focusNode.requestFocus();
-              },
-              child: Text(
-                controller.text.isEmpty?hint:controller.text,
-                style: AppTextStyle(
-                    fontSize: controller.text.isEmpty?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
-                    fontWeight: controller.text.isEmpty?weight.normal:weight.halfBold,
-                    color: controller.text.isEmpty?hintEnab_(context):textEnab_(context)
+              IntrinsicWidth(
+                child: TextField(
+                  focusNode: focusNode,
+                  controller: controller,
+                  style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
+                  minLines: 1,
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                      isDense: true,
+                      isCollapsed: true,
+                      contentPadding: EdgeInsets.all(0),
+                      hintText: hint,
+                      hintStyle: AppTextStyle(
+                        color: hintEnab_(context),
+                        fontSize: Dimen.TEXT_SIZE_BIG,
+                      ),
+                      border: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none
+                  ),
+                  onChanged: onChanged,
+                ),
+              ):
+
+              GestureDetector(
+                onTap: (){
+                  setState(() => selected = true);
+                  focusNode.requestFocus();
+                },
+                child: Text(
+                  controller.text.isEmpty?hint:controller.text,
+                  style: AppTextStyle(
+                      fontSize: controller.text.isEmpty?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
+                      fontWeight: controller.text.isEmpty?weight.normal:weight.halfBold,
+                      color: controller.text.isEmpty?hintEnab_(context):textEnab_(context)
+                  ),
                 ),
               ),
             ),
+            duration: Duration(milliseconds: 300),
           ),
 
           if(focusNode.hasFocus)
