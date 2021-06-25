@@ -118,7 +118,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
     Widget textField;
 
-    if(!multi)
+    if(multi)
       textField = MultiTextField(
         controller: multiController,
         expanded: multiExpanded,
