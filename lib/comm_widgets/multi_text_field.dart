@@ -312,7 +312,9 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
               ),
             ),
             duration: Duration(milliseconds: 300),
+            curve: Curves.easeOutQuint,
             alignment: Alignment.centerLeft,
+            clipBehavior: Clip.none,
           ),
 
           if(focusNode.hasFocus)
