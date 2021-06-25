@@ -28,7 +28,7 @@ class MultiTextFieldController{
       else
         _ctrls.add(TextEditingController(text: values[i]));
 
-    while(i<_ctrls.length-1)
+    while(i<_ctrls.length)
       _ctrls.removeAt(i);
   }
 
