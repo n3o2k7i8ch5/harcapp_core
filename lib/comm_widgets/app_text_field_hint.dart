@@ -179,6 +179,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
             if(widget.leading!=null) widget.leading,
             Expanded(child: textField),
 
+            /*
             if(widget.multi && multiController.length==1)
               IconButton(
                   icon: Icon(
@@ -192,6 +193,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
                     widget.onAnyChanged?.call(multiController.texts);
                   })
               )
+             */
           ],
         ),
 

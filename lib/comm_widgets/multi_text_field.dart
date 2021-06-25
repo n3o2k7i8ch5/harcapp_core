@@ -311,19 +311,25 @@ class ItemState extends State<Item>{
           ),
 
           if(focusNode.hasFocus)
-            IconButton(
-              padding: EdgeInsets.symmetric(horizontal: Dimen.ICON_MARG),
-              onPressed: (){
-                setState(() => selected = false);
-                focusNode.unfocus();
-              },
-              icon: Icon(MdiIcons.check, size: iconSize)
+            Container(
+              child: IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: Dimen.ICON_MARG),
+                  onPressed: (){
+                    setState(() => selected = false);
+                    focusNode.unfocus();
+                  },
+                  icon: Icon(MdiIcons.check, size: iconSize)
+              ),
+              color: Colors.red,
             )
           else if(removable)
-            IconButton(
-              padding: EdgeInsets.symmetric(horizontal: Dimen.ICON_MARG),
-              onPressed: onRemoveTap,
-              icon: Icon(MdiIcons.close, size: iconSize)
+            Container(
+              child: IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: Dimen.ICON_MARG),
+                  onPressed: onRemoveTap,
+                  icon: Icon(MdiIcons.close, size: iconSize)
+              ),
+              color: Colors.red,
             )
           else
             SizedBox(width: 2*Dimen.ICON_MARG + iconSize,)
