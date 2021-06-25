@@ -264,7 +264,7 @@ class ItemState extends State<Item>{
 
           ConstrainedBox(
             constraints: BoxConstraints(
-              minWidth: 0,//40.0,
+              minWidth: 10,//40.0,
             ),
             child:
             selected?
@@ -313,23 +313,21 @@ class ItemState extends State<Item>{
           if(focusNode.hasFocus)
             SizedBox(
               child: IconButton(
-                padding: EdgeInsets.symmetric(vertical: Dimen.ICON_MARG),
                 icon: Icon(MdiIcons.check, size: iconSize),
                 onPressed: (){
                   setState(() => selected = false);
                   focusNode.unfocus();
                 },
               ),
-              height: iconSize + 4,
+              height: iconSize,
             )
           else if(removable)
             SizedBox(
               child: IconButton(
-                padding: EdgeInsets.symmetric(vertical: Dimen.ICON_MARG),
                 icon: Icon(MdiIcons.close, size: iconSize),
                 onPressed: onRemoveTap,
               ),
-              height: iconSize + 4,
+              height: iconSize,
             )
           else
             SizedBox(width: 2*Dimen.ICON_MARG + iconSize)
