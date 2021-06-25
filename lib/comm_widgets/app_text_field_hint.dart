@@ -94,7 +94,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       _multiController = MultiTextFieldController(texts: ['']);
 
     if(widget.controller == null)
-      _controller = TextEditingController(text: multi?multiController[0]:'');
+      _controller = TextEditingController(text: '');
 
     hintStyle = widget.hintStyle??widget.style;
   }
@@ -135,8 +135,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         style: widget.style,
         controller: controller,
         onChanged: (text){
-          widget.onChanged?.call(0, text);
-          widget.onAnyChanged?.call([text]);
+          onChangedListener(0, text);
+          onAnyChangedListener([text]);
         },
         decoration: InputDecoration(
           counterStyle: widget.counterStyle??TextStyle(color: hintEnab_(context)),

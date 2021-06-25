@@ -128,7 +128,7 @@ class MultiTextFieldState extends State<MultiTextField>{
     for(int i=0; i<controller.length; i++) {
       String text = controller[i];
       children.add(Item(
-        initText: text,
+        controller: TextEditingController(text: text),
         hint: hint,
         removable: controller.length>minCount,
         onChanged: (text){
@@ -213,13 +213,14 @@ class MultiTextFieldState extends State<MultiTextField>{
 
 class Item extends StatefulWidget{
   
-  final String initText;
+  //final String initText;
+  final TextEditingController controller;
   final String hint;
   final bool removable;
   final void Function() onRemoveTap;
   final void Function(String) onChanged;
 
-  const Item({@required this.initText, @required this.hint, this.removable: true, this.onRemoveTap, this.onChanged, Key key}):super(key: key);
+  const Item({@required this.controller, @required this.hint, this.removable: true, this.onRemoveTap, this.onChanged, Key key}):super(key: key);
 
   @override
   State<StatefulWidget> createState() => ItemState();
@@ -232,13 +233,12 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
 
   FocusNode focusNode;
 
-  String get initText => widget.initText;
+  TextEditingController get controller => widget.controller;
   String get hint => widget.hint;
   bool get removable => widget.removable;
   void Function() get onRemoveTap => widget.onRemoveTap;
   void Function(String) get onChanged => widget.onChanged;
 
-  TextEditingController controller;
   bool selected;
 
   @override
@@ -247,7 +247,6 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
     focusNode.addListener(() =>
         setState(() => selected = focusNode.hasFocus));
 
-    controller = TextEditingController(text: initText);
     selected = false;
     super.initState();
   }
