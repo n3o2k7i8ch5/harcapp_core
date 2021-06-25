@@ -255,7 +255,7 @@ class ItemState extends State<Item>{
                 //scrollPadding: EdgeInsets.zero,
                 decoration: InputDecoration(
                     isCollapsed: true,
-                    //contentPadding: EdgeInsets.zero,
+                    contentPadding: EdgeInsets.zero,
                     hintText: hint,
                     hintStyle: AppTextStyle(
                       color: hintEnab_(context),
