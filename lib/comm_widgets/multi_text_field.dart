@@ -273,14 +273,22 @@ class ItemState extends State<Item>{
             ),
             ):
 
-          Text(
-            controller.text.length==0?hint:controller.text,
-            style: AppTextStyle(
-                fontSize: controller.text.length==0?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
-                fontWeight: controller.text.length==0?weight.normal:weight.halfBold,
-                color: controller.text.length==0?hintEnab_(context):textEnab_(context)
+          GestureDetector(
+            onTap: (){
+              setState(() => selected = true);
+              focusNode.requestFocus();
+            },
+            child: Text(
+              controller.text.length==0?hint:controller.text,
+              style: AppTextStyle(
+                  fontSize: controller.text.length==0?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
+                  fontWeight: controller.text.length==0?weight.normal:weight.halfBold,
+                  color: controller.text.length==0?hintEnab_(context):textEnab_(context)
+              ),
             ),
-          ),
+          )
+
+          ,
         ),
 
         if(focusNode.hasFocus)
@@ -309,13 +317,7 @@ class ItemState extends State<Item>{
     return Stack(
       children: [
 
-        GestureDetector(
-          onTap: (){
-            setState(() => selected = true);
-            focusNode.requestFocus();
-          },
-          child: child,
-        ),
+        child,
 
         if(focusNode.hasFocus && false)
           Positioned(
