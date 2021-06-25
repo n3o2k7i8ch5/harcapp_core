@@ -246,7 +246,7 @@ class ItemState extends State<Item>{
 
           IntrinsicWidth(
             child: Container(
-              color: Colors.red,
+              color: Colors.orange,
               child: TextField(
                 focusNode: focusNode,
                 controller: controller,
