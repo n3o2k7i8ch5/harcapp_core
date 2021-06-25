@@ -311,7 +311,7 @@ class ItemState extends State<Item>{
           ),
 
           if(focusNode.hasFocus)
-            Container(
+            SizedBox(
               child: IconButton(
                   padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
                   onPressed: (){
@@ -320,16 +320,16 @@ class ItemState extends State<Item>{
                   },
                   icon: Icon(MdiIcons.check, size: iconSize)
               ),
-              color: Colors.red,
+              height: iconSize,
             )
           else if(removable)
-            Container(
+            SizedBox(
               child: IconButton(
                   padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
                   onPressed: onRemoveTap,
                   icon: Icon(MdiIcons.close, size: iconSize)
               ),
-              color: Colors.red,
+              height: iconSize,
             )
           else
             SizedBox(width: 2*Dimen.ICON_MARG + iconSize,)
