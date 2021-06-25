@@ -240,37 +240,37 @@ class ItemState extends State<Item>{
       children: [
 
         ConstrainedBox(
-          constraints: BoxConstraints(minWidth: 40.0),
+          constraints: BoxConstraints(
+            minWidth: 40.0,
+            maxHeight: InputDecoration().contentPadding.vertical
+          ),
           child:
           selected?
 
           IntrinsicWidth(
-            child: Container(
-              color: Colors.orange,
-              child: TextField(
-                focusNode: focusNode,
-                controller: controller,
-                style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
-                minLines: 1,
-                maxLines: 1,
-                decoration: InputDecoration(
-                    isDense: true,
-                    isCollapsed: true,
-                    contentPadding: EdgeInsets.all(0),
-                    hintText: hint,
-                    hintStyle: AppTextStyle(
-                      color: hintEnab_(context),
-                      fontSize: Dimen.TEXT_SIZE_BIG,
-                    ),
-                    border: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none
-                ),
-                onChanged: onChanged,
+            child: TextField(
+              focusNode: focusNode,
+              controller: controller,
+              style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
+              minLines: 1,
+              maxLines: 1,
+              decoration: InputDecoration(
+                  isDense: true,
+                  isCollapsed: true,
+                  contentPadding: EdgeInsets.all(0),
+                  hintText: hint,
+                  hintStyle: AppTextStyle(
+                    color: hintEnab_(context),
+                    fontSize: Dimen.TEXT_SIZE_BIG,
+                  ),
+                  border: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none
               ),
+              onChanged: onChanged,
             ),
-            ):
+          ):
 
           GestureDetector(
             onTap: (){
@@ -278,16 +278,14 @@ class ItemState extends State<Item>{
               focusNode.requestFocus();
             },
             child: Text(
-              controller.text.length==0?hint:controller.text,
+              controller.text.isEmpty?hint:controller.text,
               style: AppTextStyle(
-                  fontSize: controller.text.length==0?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
-                  fontWeight: controller.text.length==0?weight.normal:weight.halfBold,
-                  color: controller.text.length==0?hintEnab_(context):textEnab_(context)
+                  fontSize: controller.text.isEmpty?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
+                  fontWeight: controller.text.isEmpty?weight.normal:weight.halfBold,
+                  color: controller.text.isEmpty?hintEnab_(context):textEnab_(context)
               ),
             ),
-          )
-
-          ,
+          ),
         ),
 
         if(focusNode.hasFocus)
