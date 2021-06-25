@@ -98,6 +98,7 @@ class MultiTextFieldState extends State<MultiTextField>{
 
   MultiTextFieldController _controller;
   MultiTextFieldController get controller => widget.controller??_controller;
+
   String get hint => widget.hint;
   bool get linear => widget.linear;
   Color get accentColor => widget.accentColor;
@@ -222,9 +223,8 @@ class ItemState extends State<Item>{
   @override
   void initState() {
     focusNode = FocusNode();
-    focusNode.addListener(() {
-      setState(() => selected = focusNode.hasFocus);
-    });
+    focusNode.addListener(() =>
+        setState(() => selected = focusNode.hasFocus));
 
     controller = TextEditingController(text: initText);
     selected = false;
@@ -245,25 +245,28 @@ class ItemState extends State<Item>{
           selected?
 
           IntrinsicWidth(
-            child: TextField(
-              focusNode: focusNode,
-              controller: controller,
-              style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
-              textAlignVertical: TextAlignVertical.center,
-              //scrollPadding: EdgeInsets.zero,
-              decoration: InputDecoration(
-                  isCollapsed: true,
-                  //contentPadding: EdgeInsets.zero,
-                  hintText: hint,
-                  hintStyle: AppTextStyle(
-                    color: hintEnab_(context),
-                    fontSize: Dimen.TEXT_SIZE_BIG,
-                  ),
-                  border: InputBorder.none
+            child: Container(
+              color: Colors.red,
+              child: TextField(
+                focusNode: focusNode,
+                controller: controller,
+                style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
+                textAlignVertical: TextAlignVertical.center,
+                //scrollPadding: EdgeInsets.zero,
+                decoration: InputDecoration(
+                    isCollapsed: true,
+                    //contentPadding: EdgeInsets.zero,
+                    hintText: hint,
+                    hintStyle: AppTextStyle(
+                      color: hintEnab_(context),
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                    ),
+                    border: InputBorder.none
+                ),
+                onChanged: onChanged,
               ),
-              onChanged: onChanged,
             ),
-          ):
+            ):
 
           Text(
             controller.text.length==0?hint:controller.text,
