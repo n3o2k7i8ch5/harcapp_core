@@ -242,7 +242,7 @@ class ItemState extends State<Item>{
         ConstrainedBox(
           constraints: BoxConstraints(
             minWidth: 40.0,
-            maxHeight: InputDecoration().contentPadding.vertical
+            maxHeight: InputDecoration().contentPadding.vertical + Dimen.TEXT_SIZE_BIG
           ),
           child:
           selected?
