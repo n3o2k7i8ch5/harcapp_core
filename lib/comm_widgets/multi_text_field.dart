@@ -142,7 +142,6 @@ class MultiTextFieldState extends State<MultiTextField>{
         hint: hint,
         removable: controller.length>minCount,
         onChanged: (text){
-          controller[i] = text;
           if(i == controller.length-1)
             setState(() {});
 
