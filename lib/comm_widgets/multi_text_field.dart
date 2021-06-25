@@ -20,6 +20,18 @@ class MultiTextFieldController{
   List<TextEditingController> _ctrls;
 
   List<String> get texts => _ctrls.map((ctrl) => ctrl.text).toList();
+  set texts(List<String> values){
+    int i;
+    for(i=0; i<values.length; i++)
+      if(i < _ctrls.length-1)
+        _ctrls[i].text = values[i];
+      else
+        _ctrls.add(TextEditingController(text: values[i]));
+
+    while(i<_ctrls.length-1)
+      _ctrls.removeAt(i);
+  }
+
 
   List<void Function(int, String)> _listeners;
   List<void Function(List<String>)> _anyListeners;
