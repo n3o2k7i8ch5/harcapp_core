@@ -59,7 +59,7 @@ class SimpleButton extends StatelessWidget{
     BuildContext? context,
     required IconData icon,
     String? text,
-    required void Function() onTap,
+    required void Function()? onTap,
     void Function()? onLongPress,
     double? iconSize,
     double? textSize,
