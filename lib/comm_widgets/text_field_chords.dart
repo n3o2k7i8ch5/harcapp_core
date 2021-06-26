@@ -63,7 +63,7 @@ class TextFieldChordsState extends State<TextFieldChords> {
       maxLines: widget.maxLines,
       focusNode: widget.focusNode,
       controller: _effectiveController,
-      expands: widget.expands??false,
+      expands: widget.expands,
       autofocus: widget.autofocus,
       enabled: widget.enabled,
       onChanged: widget.onChanged,
