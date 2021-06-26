@@ -17,9 +17,9 @@ class ShadowIcon extends StatelessWidget {
     double dimens = 1.0;
     double dimens2 = 2.0;
     double dimens3 = 3.0;
-    Color? _shadowColor = icon.color;
-    if (shadowColor != null)
-      _shadowColor = shadowColor;
+
+    Color? _shadowColor = shadowColor??icon.color;
+
     List<Widget> list = [];
     if (showShadow) {
       list.addAll([
