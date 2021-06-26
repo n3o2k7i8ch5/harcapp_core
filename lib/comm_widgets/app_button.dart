@@ -24,7 +24,7 @@ class AppButton extends StatelessWidget {
     this.highlightColor,
     this.splashColor,
     this.disabledColor,
-    required this.onTap,
+    this.onTap,
     this.onLongPress,
     this.focusNode,
     this.autofocus = false,
@@ -48,7 +48,7 @@ class AppButton extends StatelessWidget {
   final Color? splashColor;
   final Color? highlightColor;
   final Color? disabledColor;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final VoidCallback? onLongPress;
 
   final FocusNode? focusNode;
