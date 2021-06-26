@@ -65,7 +65,7 @@ import 'package:flutter/material.dart';
 ///  * [Slider], for selecting a value in a range.
 ///  * <https://material.io/design/components/selection-controls.html#checkboxes>
 ///  * <https://material.io/design/components/lists.html#types>
-class Checkbox extends StatefulWidget {
+class CircularCheckbox extends StatefulWidget {
   /// Creates a material design checkbox.
   ///
   /// The checkbox itself does not maintain any state. Instead, when the state of
@@ -82,7 +82,7 @@ class Checkbox extends StatefulWidget {
   ///   change. It can be set to null to disable the checkbox.
   ///
   /// The values of [tristate] and [autofocus] must not be null.
-  const Checkbox({
+  const CircularCheckbox({
     Key? key,
     @required this.value,
     this.tristate = false,
