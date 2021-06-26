@@ -10,15 +10,15 @@ class CustTextStyle extends TextStyle{
 
   const CustTextStyle(
       String familyName,
-      {Color color: AppColors.text_def_enab,
+      {Color? color: AppColors.text_def_enab,
         weight fontWeight:weight.normal,
         fontSize: Dimen.TEXT_SIZE_NORMAL,
-        bool shadow: false,
-        FontStyle fontStyle,
+        bool? shadow: false,
+        FontStyle? fontStyle,
         double height: 1.0,
-        TextDecoration decoration,
-        TextDecorationStyle decorationStyle,
-        double decorationThickness,
+        TextDecoration? decoration,
+        TextDecorationStyle? decorationStyle,
+        double? decorationThickness,
       }):super(
       fontFamily: familyName,
       color: color,
@@ -44,7 +44,7 @@ class CustTextStyle extends TextStyle{
 
 class AppTextStyle extends CustTextStyle{
 
-  const AppTextStyle({Color color, weight fontWeight:weight.normal, fontSize, bool shadow, FontStyle fontStyle, double height: 1.0, TextDecoration decoration, TextDecorationStyle decorationStyle, double decorationThickness}):super(
+  const AppTextStyle({Color? color, weight fontWeight:weight.normal, fontSize, bool? shadow, FontStyle? fontStyle, double height: 1.0, TextDecoration? decoration, TextDecorationStyle? decorationStyle, double? decorationThickness}):super(
     'Ubuntu',
     color: color,
     fontWeight: fontWeight,

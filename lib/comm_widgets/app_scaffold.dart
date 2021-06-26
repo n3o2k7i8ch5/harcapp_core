@@ -8,13 +8,13 @@ import 'app_text.dart';
 
 class AppScaffold extends StatelessWidget{
 
-  final GlobalKey scaffoldKey;
-  final PreferredSizeWidget appBar;
-  final Widget drawer;
-  final Widget body;
-  final Widget bottomNavigationBar;
-  final Widget floatingActionButton;
-  final Color backgroundColor;
+  final GlobalKey? scaffoldKey;
+  final PreferredSizeWidget? appBar;
+  final Widget? drawer;
+  final Widget? body;
+  final Widget? bottomNavigationBar;
+  final Widget? floatingActionButton;
+  final Color? backgroundColor;
   final bool avoidKeyboard;
 
   const AppScaffold({this.scaffoldKey, this.appBar, this.drawer, this.body, this.backgroundColor, this.bottomNavigationBar, this.floatingActionButton, this.avoidKeyboard: true});
@@ -29,7 +29,7 @@ class AppScaffold extends StatelessWidget{
             appBar: appBar,
             drawer: drawer,
             body: SafeArea(
-              child: body,
+              child: body!,
             ),
             backgroundColor: backgroundColor,
             bottomNavigationBar: bottomNavigationBar,
@@ -39,7 +39,7 @@ class AppScaffold extends StatelessWidget{
       );
   }
 
-  static void showMessage(BuildContext context, String text, {String buttonText:'Ok', Function(BuildContext) onButtonPressed, Color background, String tag, Duration duration: const Duration(seconds: 3)}){
+  static void showMessage(BuildContext context, String text, {String buttonText:'Ok', Function(BuildContext)? onButtonPressed, Color? background, String? tag, Duration duration: const Duration(seconds: 3)}){
 
     if(kIsWeb){
       Fluttertoast.showToast(
@@ -73,11 +73,11 @@ class AppScaffold extends StatelessWidget{
 
 }
 
-String _snackBarTag;
+String? _snackBarTag;
 bool _isSnackbarActive = false;
-bool isSnackBarActive({String tag}) => tag==null?_isSnackbarActive:_isSnackbarActive&&tag == _snackBarTag;
+bool isSnackBarActive({String? tag}) => tag==null?_isSnackbarActive:_isSnackbarActive&&tag == _snackBarTag;
 
-SnackBar getSnackBar(BuildContext context, String text, {String buttonText:'Ok', Function onButtonPressed, Color background, String tag, Duration duration: const Duration(seconds: 3)}){
+SnackBar getSnackBar(BuildContext context, String text, {String buttonText:'Ok', required Function onButtonPressed, Color? background, String? tag, Duration duration: const Duration(seconds: 3)}){
 
   return SnackBar(
     backgroundColor: background == null? accent_(context) : background,
@@ -87,23 +87,23 @@ SnackBar getSnackBar(BuildContext context, String text, {String buttonText:'Ok',
     action: SnackBarAction(
         label: buttonText,
         textColor: accentIcon_(context),
-        onPressed: onButtonPressed
+        onPressed: onButtonPressed as void Function()
     ),//
     duration: duration,
   );
 }
 
-void showMessage(GlobalKey<ScaffoldState> key, String text, {String buttonText:'Ok', Function onButtonPressed, Color background, String tag, Duration duration: const Duration(seconds: 3)}){
+void showMessage(GlobalKey<ScaffoldState> key, String text, {String buttonText:'Ok', Function? onButtonPressed, Color? background, String? tag, Duration duration: const Duration(seconds: 3)}){
   _snackBarTag = tag;
   _isSnackbarActive = true;
   key.currentState
-    ..hideCurrentSnackBar()
+    ?..hideCurrentSnackBar()
     ..showSnackBar(
         getSnackBar(
-          key.currentContext,
+          key.currentContext!,
           text,
           buttonText: buttonText,
-          onButtonPressed: () => onButtonPressed!=null?onButtonPressed():key.currentState.hideCurrentSnackBar(),
+          onButtonPressed: () => onButtonPressed!=null?onButtonPressed():key.currentState!.hideCurrentSnackBar(),
           background: background,
           tag: tag,
           duration: duration,

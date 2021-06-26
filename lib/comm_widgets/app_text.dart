@@ -10,13 +10,13 @@ class RText extends StatelessWidget{
   final String text;
   final String fontFamily;
   final bool globalBold;
-  final Color color;
+  final Color? color;
   final Alignment alignment;
-  final TextAlign textAlign;
-  final int maxLines;
+  final TextAlign? textAlign;
+  final int? maxLines;
   final double height;
   final double size;
-  final Color colorItalic;
+  final Color? colorItalic;
 
   const RText(this.text, this.fontFamily, {this.globalBold: false, this.color, this.alignment: Alignment.topLeft, this.textAlign, this.maxLines, this.height: 1, this.size:Dimen.TEXT_SIZE_NORMAL, this.colorItalic});
 
@@ -28,7 +28,7 @@ class RText extends StatelessWidget{
     bool italic = false;
     bool bold = false;
 
-    Color _color = color??textEnab_(context);
+    Color? _color = color??textEnab_(context);
 
     Function add = (){
       spans.add(TextSpan(
@@ -90,13 +90,13 @@ class AppText extends RText{
   const AppText(
   String text,
       {bool globalBold: false,
-        Color color,
+        Color? color,
         Alignment alignment: Alignment.topLeft,
-        TextAlign textAlign,
-        int maxLines,
+        TextAlign? textAlign,
+        int? maxLines,
         double height: 1,
         double size:Dimen.TEXT_SIZE_NORMAL,
-        Color colorItalic,
+        Color? colorItalic,
       }):super(
       text,
       'Ubuntu',

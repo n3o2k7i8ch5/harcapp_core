@@ -9,31 +9,31 @@ import 'multi_text_field.dart';
 class AppTextFieldHint extends StatefulWidget{
 
   final String hint;
-  final String hintTop;
-  final TextEditingController controller;
-  final TextStyle style;
-  final TextStyle hintStyle;
-  final TextStyle counterStyle;
-  final int maxLength;
+  final String? hintTop;
+  final TextEditingController? controller;
+  final TextStyle? style;
+  final TextStyle? hintStyle;
+  final TextStyle? counterStyle;
+  final int? maxLength;
   final int maxLines;
   final bool showUnderline;
-  final Function(List<String>) onAnyChanged;
-  final Function(int, String) onChanged;
+  final Function(List<String>)? onAnyChanged;
+  final Function(int, String)? onChanged;
   final bool obscureText;
-  final bool enabled;
-  final Widget leading;
-  final TextInputType keyboardType;
-  final List<TextInputFormatter> inputFormatters;
-  final Color accentColor;
+  final bool? enabled;
+  final Widget? leading;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final Color? accentColor;
 
   final bool multi;
-  final String multiHintTop;
+  final String? multiHintTop;
   //final List<String> initVals;
   final bool multiExpanded;
-  final MultiTextFieldController multiController;
+  final MultiTextFieldController? multiController;
 
   const AppTextFieldHint({
-    @required this.hint,
+    required this.hint,
     this.hintTop,
     this.controller,
     this.style,
@@ -54,7 +54,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.multiHintTop,
     this.multiExpanded: false,
     this.multiController,
-    Key key
+    Key? key
   }):super(key: key);
 
   @override
@@ -64,13 +64,13 @@ class AppTextFieldHint extends StatefulWidget{
 
 class AppTextFieldHintState extends State<AppTextFieldHint>{
 
-  TextEditingController _controller;
-  TextEditingController get controller => widget.controller??_controller;
+  TextEditingController? _controller;
+  TextEditingController? get controller => widget.controller??_controller;
 
-  MultiTextFieldController _multiController;
-  MultiTextFieldController get multiController => widget.multiController??_multiController;
+  MultiTextFieldController? _multiController;
+  MultiTextFieldController? get multiController => widget.multiController??_multiController;
 
-  TextStyle hintStyle;
+  TextStyle? hintStyle;
 
   String get hint => widget.hint;
   String get hintTop => widget.hintTop??hint;
@@ -126,7 +126,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
         onRemoved: (){
-          if(multiController.length==1)
+          if(multiController!.length==1)
             setState(() {});
         },
       );
@@ -158,20 +158,20 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
         Row(
           children: <Widget>[
-            if(widget.leading!=null) widget.leading,
+            if(widget.leading!=null) widget.leading!,
             Expanded(child: textField),
           ],
         ),
 
         AnimatedOpacity(
           child: Text(
-            multiController.length==1?hintTop:multiHintTop,
+            multiController!.length==1?hintTop:multiHintTop,
             style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_SMALL, fontWeight: weight.halfBold, color: hintEnab_(context)),
           ),
           duration: Duration(milliseconds: 300),
           opacity:
-          (multi && (multiController.isEmpty || multiController[0].text.isEmpty))
-              || (!multi && controller.text.isEmpty)?0:1,
+          (multi && (multiController!.isEmpty || multiController![0].text.isEmpty))
+              || (!multi && controller!.text.isEmpty)?0:1,
         ),
 
       ],

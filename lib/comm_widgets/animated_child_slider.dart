@@ -8,8 +8,8 @@ class AnimatedChildSlider extends StatelessWidget{
   final Curve switchOutCurve;
   final Duration duration;
 
-  final List<Widget> children;
-  final int index;
+  final List<Widget>? children;
+  final int? index;
 
   final bool isCenter;
   final Axis direction;
@@ -35,8 +35,8 @@ class AnimatedChildSlider extends StatelessWidget{
       switchInCurve: Curves.easeOutQuad,
       switchOutCurve: Curves.easeInQuad,
       duration: duration,
-      child: Container(child: children[index], key: ValueKey(index)),
-      layoutBuilder: (Widget currentChild, List<Widget> previousChildren) {
+      child: Container(child: children![index!], key: ValueKey(index)),
+      layoutBuilder: (Widget? currentChild, List<Widget> previousChildren) {
         List<Widget> children = previousChildren;
         if (currentChild != null)
           children = children.toList()..add(currentChild);

@@ -14,10 +14,10 @@ import 'chord.dart';
 class _Fretboard extends StatelessWidget{
 
   final double size;
-  final Color color;
+  final Color? color;
 
-  final int frets;
-  final int strings;
+  final int? frets;
+  final int? strings;
 
   const _Fretboard({
     this.size: ChordWidget.DEF_SIZE,
@@ -29,7 +29,7 @@ class _Fretboard extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    double sizePart = size/frets;
+    double sizePart = size/frets!;
     double heightFactor = .8;
 
     List<Widget> horLines = [SizedBox(
@@ -37,7 +37,7 @@ class _Fretboard extends StatelessWidget{
       child: Center(child: Container(height: 2, width: size, color: color)),
     )];
 
-    for(int i=0; i<strings-1; i++)
+    for(int i=0; i<strings!-1; i++)
       horLines.insert(0, SizedBox(
         height: heightFactor*sizePart,
         child: Center(child: Container(height: 1, width: size, color: color)),
@@ -45,10 +45,10 @@ class _Fretboard extends StatelessWidget{
 
     List<Widget> verLines = [];
 
-    for(int i=0; i<frets; i++)
+    for(int i=0; i<frets!; i++)
       verLines.add(SizedBox(
         width: sizePart,
-        child: Align(child: Container(height: heightFactor*sizePart*(strings-1), width: 1, color: color), alignment: Alignment.centerLeft),
+        child: Align(child: Container(height: heightFactor*sizePart*(strings!-1), width: 1, color: color), alignment: Alignment.centerLeft),
       ));
 
     return Stack(
@@ -73,15 +73,15 @@ class ChordWidget extends StatelessWidget{
     return strCnt*frets + CHORD_NAME_HEIGHT + POSITION_TEXT_HEIGHT + 2*SimpleButton.DEF_MARG + 2*SimpleButton.DEF_PADDING;
   }
 
-  final Chord chord;
+  final Chord? chord;
   final double size;
-  final Color color;
+  final Color? color;
   final double elevation;
 
   final int frets;
-  final int strings;
+  final int? strings;
 
-  final void Function() onTap;
+  final void Function()? onTap;
 
   const ChordWidget({
     this.chord,
@@ -98,8 +98,8 @@ class ChordWidget extends StatelessWidget{
   static ChordWidget fromGChord(
       GChord chord,
       {
-        Color color,
-        void Function() onTap,
+        Color? color,
+        void Function()? onTap,
       }) => ChordWidget(
     chord: chord,
     strings: 6,
@@ -110,8 +110,8 @@ class ChordWidget extends StatelessWidget{
   static ChordWidget fromUChord(
       UChord chord,
       {
-        Color color,
-        void Function() onTap,
+        Color? color,
+        void Function()? onTap,
       }) => ChordWidget(
     chord: chord,
     strings: 4,
@@ -123,8 +123,8 @@ class ChordWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    Chord _chord = chord.shiftToFirstDot();
-    int nearestDotPosition = chord.nearestDotPosition;
+    Chord _chord = chord!.shiftToFirstDot();
+    int nearestDotPosition = chord!.nearestDotPosition;
 
     double sizePart = size/frets;
     double heightFactor = .8;
@@ -177,7 +177,7 @@ class ChordWidget extends StatelessWidget{
 
             SizedBox(
               width: size,
-              height: strings*heightFactor*sizePart,
+              height: strings!*heightFactor*sizePart,
               child: Stack(
                 children: [
 
@@ -194,7 +194,7 @@ class ChordWidget extends StatelessWidget{
                       left: (1-heightFactor)*sizePart + (nearestDotPosition == 1?0:sizePart),
                       child: Container(
                         width: barFactor*sizePart,
-                        height: strings*heightFactor*sizePart,
+                        height: strings!*heightFactor*sizePart,
                         child: Material(
                           borderRadius: BorderRadius.all(Radius.circular(100)),
                           elevation: elevation,
@@ -213,7 +213,7 @@ class ChordWidget extends StatelessWidget{
             ),
 
             Text(
-                chord.name,
+                chord!.name,
                 style: AppTextStyle(
                     fontSize: CHORD_NAME_HEIGHT,
                     fontWeight: weight.halfBold,
@@ -236,11 +236,11 @@ class ChordDrawBar extends StatefulWidget{
   final Color chordColor;
   final double elevation;
   final bool changeTypeOnTap;
-  final bool initTypeGuitar;
+  final bool? initTypeGuitar;
   final bool showLabel;
   final EdgeInsets padding;
 
-  final void Function(Chord, bool) onTap;
+  final void Function(Chord, bool?)? onTap;
   
   const ChordDrawBar(
       this.chords, {
@@ -254,7 +254,7 @@ class ChordDrawBar extends StatefulWidget{
 
         this.onTap,
 
-        Key key
+        Key? key
       }):super(key: key);
   
   @override
@@ -264,7 +264,7 @@ class ChordDrawBar extends StatefulWidget{
 
 class ChordDrawBarState extends State<ChordDrawBar>{
   
-  bool typeGuitar;
+  bool? typeGuitar;
 
   @override
   void initState() {
@@ -297,7 +297,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
 
     List<Widget> guitChords = [];
     for(String chordStr in guitChordStrs) {
-      List<GChord> chordSet = GChord.chordDrawableMap[chordStr];
+      List<GChord>? chordSet = GChord.chordDrawableMap[chordStr];
       if(chordSet == null) continue;
       guitChords.add(
           ChordWidget.fromGChord(
@@ -305,10 +305,10 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               color: widget.chordColor,
               onTap: (){
                 if(widget.changeTypeOnTap)
-                  setState(() => typeGuitar = !typeGuitar);
+                  setState(() => typeGuitar = !typeGuitar!);
 
                 if(widget.onTap != null)
-                  widget.onTap(chordSet[0], typeGuitar);
+                  widget.onTap!(chordSet[0], typeGuitar);
               }
           )
       );
@@ -316,7 +316,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
 
     List<Widget> ukulChords = [];
     for(String chordStr in ukulChordStrs){
-      UChord chord = UChord.chordDrawableMap[chordStr];
+      UChord? chord = UChord.chordDrawableMap[chordStr];
       if(chord == null) continue;
       ukulChords.add(
           ChordWidget.fromUChord(
@@ -324,10 +324,10 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               color: widget.chordColor,
               onTap:(){
                 if(widget.changeTypeOnTap)
-                  setState(() => typeGuitar = !typeGuitar);
+                  setState(() => typeGuitar = !typeGuitar!);
 
                 if(widget.onTap != null)
-                  widget.onTap(chord, typeGuitar);
+                  widget.onTap!(chord, typeGuitar);
               }
           )
       );
@@ -345,7 +345,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               scrollDirection: Axis.horizontal,
               child: Row(
                 children:
-                typeGuitar?
+                typeGuitar!?
                 guitChords:
                 ukulChords,
               ),
@@ -356,7 +356,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
             Padding(
               padding: EdgeInsets.all(Dimen.DEF_MARG),
               child: RotatedBox(
-                child: Text(typeGuitar?'Gitara':'Ukulele', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnab_(context))),
+                child: Text(typeGuitar!?'Gitara':'Ukulele', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnab_(context))),
                 quarterTurns: 3,
               ),
             )

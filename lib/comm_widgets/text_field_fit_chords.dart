@@ -4,21 +4,21 @@ import 'package:harcapp_core/comm_widgets/text_field_chords.dart';
 class TextFieldFitChords extends StatefulWidget {
 
   final double minWidth;
-  final InputDecoration decoration;
-  final TextStyle style;
-  final TextAlign textAlign;
-  final TextDirection textDirection;
-  final Locale locale;
-  final StrutStyle strutStyle;
-  final int minLines;
-  final int maxLines;
-  final FocusNode focusNode;
+  final InputDecoration? decoration;
+  final TextStyle? style;
+  final TextAlign? textAlign;
+  final TextDirection? textDirection;
+  final Locale? locale;
+  final StrutStyle? strutStyle;
+  final int? minLines;
+  final int? maxLines;
+  final FocusNode? focusNode;
   final bool expands;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final bool autofocus;
   final bool enabled;
-  final Function(String) onChanged;
-  final TextInputType keyboardType;
+  final Function(String)? onChanged;
+  final TextInputType? keyboardType;
 
   const TextFieldFitChords({this.minWidth: 30, this.decoration, this.style, this.textAlign, this.textDirection, this.locale, this.strutStyle, this.minLines, this.maxLines, this.focusNode, this.expands: false, this.controller, this.autofocus: false, this.enabled: true, this.onChanged, this.keyboardType});
 
@@ -33,7 +33,7 @@ class TextFieldFitChordsState extends State<TextFieldFitChords>{
   // we are actually displaying
   //TextStyle textStyle = TextStyle(color: Colors.grey[600]);
 
-  TextEditingController _controller;
+  TextEditingController? _controller;
 
   @override
   void initState() {
@@ -56,13 +56,13 @@ class TextFieldFitChordsState extends State<TextFieldFitChords>{
       autofocus: widget.autofocus,
       onChanged: (String text){
         setState(() {});
-        if(widget.onChanged != null) widget.onChanged(text);
+        if(widget.onChanged != null) widget.onChanged!(text);
       },
       enabled: widget.enabled,
     );
 
     // Use TextPainter to calculate the width of our text
-    TextSpan ts = TextSpan(style: textField.textStyle, text: textField.controller.text);
+    TextSpan ts = TextSpan(style: textField.textStyle, text: textField.controller!.text);
     TextPainter tp = TextPainter(
       text: ts,
       textAlign: widget.textAlign ?? TextAlign.left,

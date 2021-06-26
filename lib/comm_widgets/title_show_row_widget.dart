@@ -8,22 +8,22 @@ class TitleShortcutRowWidget extends StatelessWidget{
 
   static const double textStartPadding = 10.0;
 
-  final IconData icon;
-  final Color iconColor;
-  final Widget leading;
-  final Widget trailing;
+  final IconData? icon;
+  final Color? iconColor;
+  final Widget? leading;
+  final Widget? trailing;
   final String title;
-  final Color titleColor;
+  final Color? titleColor;
   final TextAlign textAlign;
-  final void Function(BuildContext context) onOpen;
-  final Color onOpenIconColor;
+  final void Function(BuildContext context)? onOpen;
+  final Color? onOpenIconColor;
 
   const TitleShortcutRowWidget({
     this.icon,
     this.iconColor,
     this.leading,
     this.trailing,
-    @required this.title,
+    required this.title,
     this.titleColor,
     this.textAlign = TextAlign.center,
     this.onOpen,
@@ -39,7 +39,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
         SizedBox(height: Dimen.ICON_FOOTPRINT),
 
         if(leading != null)
-          leading
+          leading!
         else if(icon != null)
           Padding(
             padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
@@ -63,13 +63,13 @@ class TitleShortcutRowWidget extends StatelessWidget{
         ),
 
         if(trailing != null)
-          trailing,
+          trailing!,
 
         if(onOpen != null)
           IconButton(
             padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
             icon: Icon(MdiIcons.arrowRight, color: onOpenIconColor),
-            onPressed: () => onOpen(context),
+            onPressed: () => onOpen!(context),
           )
         else if(icon != null && textAlign == TextAlign.center && trailing == null)
           SizedBox(width: Dimen.ICON_FOOTPRINT),
@@ -81,7 +81,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
       return widget;
     else
       return GestureDetector(
-        onTap: () => onOpen(context),
+        onTap: () => onOpen!(context),
         child: widget
       );
   }

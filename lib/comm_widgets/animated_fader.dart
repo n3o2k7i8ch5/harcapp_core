@@ -8,9 +8,9 @@ class AnimatedFader extends StatelessWidget{
   Axis direction;
 
   AnimatedFader({
-    @required this.child,
-    @required this.duration,
-    @required this.fade,
+    required this.child,
+    required this.duration,
+    required this.fade,
     this.direction: Axis.horizontal
   });
 

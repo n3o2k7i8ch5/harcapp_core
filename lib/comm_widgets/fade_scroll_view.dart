@@ -6,10 +6,10 @@ class FadeScrollView extends StatefulWidget{
 
   final Axis scrollDirection;
   final bool reverse;
-  final EdgeInsetsGeometry padding;
-  final Widget child;
-  final ScrollController controller;
-  final ScrollPhysics physics;
+  final EdgeInsetsGeometry? padding;
+  final Widget? child;
+  final ScrollController? controller;
+  final ScrollPhysics? physics;
 
   const FadeScrollView({this.scrollDirection: Axis.vertical, this.reverse: false, this.padding, this.child, this.controller, this.physics});
 
@@ -20,12 +20,12 @@ class FadeScrollView extends StatefulWidget{
 
 class FadeScrollViewState extends State<FadeScrollView>{
 
-  ScrollController _controller;
+  ScrollController? _controller;
 
-  ScrollController get controller => widget.controller==null?_controller:widget.controller;
+  ScrollController? get controller => widget.controller==null?_controller:widget.controller;
 
-  bool showStartGlow;
-  bool showEndGlow;
+  late bool showStartGlow;
+  late bool showEndGlow;
 
   @override
   void initState() {
@@ -35,10 +35,10 @@ class FadeScrollViewState extends State<FadeScrollView>{
 
     if(widget.controller == null) _controller = ScrollController();
 
-    controller.addListener(() {
-      if (_controller.offset >= _controller.position.maxScrollExtent && !_controller.position.outOfRange)
+    controller!.addListener(() {
+      if (_controller!.offset >= _controller!.position.maxScrollExtent && !_controller!.position.outOfRange)
         setState(() {showStartGlow = true; showEndGlow = false;});
-      else if (_controller.offset <= _controller.position.minScrollExtent && !_controller.position.outOfRange)
+      else if (_controller!.offset <= _controller!.position.minScrollExtent && !_controller!.position.outOfRange)
         setState((){showStartGlow = false; showEndGlow = true;});
       else
         setState(() {showStartGlow = true; showEndGlow = true;});

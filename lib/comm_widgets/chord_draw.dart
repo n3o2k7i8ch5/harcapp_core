@@ -6,7 +6,7 @@ class ChordDraw{
 
   int chordCode;
   bool isDur;
-  String additionalNumber; // ex. d7; null -> nothing
+  String? additionalNumber; // ex. d7; null -> nothing
   bool hasPlus = false;
 
   ChordDraw(this.chordCode, this.isDur, this.additionalNumber, this.hasPlus);
@@ -25,7 +25,7 @@ class ChordDraw{
       chord = chord.substring(0, chord.length-1);
     }else hasPlus = false;
 
-    String additionalNumber;
+    String? additionalNumber;
     if(isDigit(lastChar)) {
       additionalNumber = lastChar;
       chord = chord.substring(0, chord.length-1);
@@ -70,103 +70,65 @@ class ChordDraw{
     }
   }
 
-  String getChordName(int shift){
-    String s_chord = null;
+  String? getChordName(int shift){
+    String chordStr = '';
 
-    int chord_with_shift;
-    chord_with_shift = (chordCode + shift + 12) %12;
+    int chordWithShift = (chordCode + shift + 12) %12;
 
 
     if(isDur) {
-      switch (chord_with_shift) {
+      switch (chordWithShift) {
         case 0:
-          s_chord = "C";
+          chordStr = isDur?'C':'c';
           break;
         case 1:
-          s_chord = "Cis";
+          chordStr = isDur?'Cis':'cis';
           break;
         case 2:
-          s_chord = "D";
+          chordStr = isDur?'D':'d';
           break;
         case 3:
-          s_chord = "Dis";
+          chordStr = isDur?'Dis':'dis';
           break;
         case 4:
-          s_chord = "E";
+          chordStr = isDur?'E':'e';
           break;
         case 5:
-          s_chord = "F";
+          chordStr = isDur?'F':'f';
           break;
         case 6:
-          s_chord = "Fis";
+          chordStr = isDur?'Fis':'fis';
           break;
         case 7:
-          s_chord = "G";
+          chordStr = isDur?'G':'g';
           break;
         case 8:
-          s_chord = "Gis";
+          chordStr = isDur?'Gis':'gis';
           break;
         case 9:
-          s_chord = "A";
+          chordStr = isDur?'A':'a';
           break;
         case 10:
-          s_chord = "B";
+          chordStr = isDur?'B':'b';
           break;
         case 11:
-          s_chord = "H";
+          chordStr = isDur?'H':'h';
           break;
-      }
-    }else{
-      switch (chord_with_shift){
-        case 0:
-          s_chord = "c";
-          break;
-        case 1:
-          s_chord = "cis";
-          break;
-        case 2:
-          s_chord = "d";
-          break;
-        case 3:
-          s_chord = "dis";
-          break;
-        case 4:
-          s_chord = "e";
-          break;
-        case 5:
-          s_chord = "f";
-          break;
-        case 6:
-          s_chord = "fis";
-          break;
-        case 7:
-          s_chord = "g";
-          break;
-        case 8:
-          s_chord = "gis";
-          break;
-        case 9:
-          s_chord = "a";
-          break;
-        case 10:
-          s_chord = "b";
-          break;
-        case 11:
-          s_chord = "h";
-          break;
+        default:
+          return null;
       }
     }
 
     if(additionalNumber != null)
-      s_chord += additionalNumber.toString();
+      chordStr += additionalNumber.toString();
 
     if(hasPlus)
-      s_chord += "+";
+      chordStr += "+";
 
-    return s_chord;
+    return chordStr;
   }
 
   int getChordCode(){return chordCode;}
   bool getIsDur(){return isDur;}
-  String getAdditionalNumber(){return additionalNumber;}
+  String? getAdditionalNumber(){return additionalNumber;}
 }

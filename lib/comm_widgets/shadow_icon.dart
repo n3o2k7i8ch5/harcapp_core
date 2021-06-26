@@ -4,7 +4,7 @@ import 'dart:ui' as ui;
 class ShadowIcon extends StatelessWidget {
   final Icon icon;
   final bool showShadow;
-  final Color shadowColor;
+  final Color? shadowColor;
 
   ShadowIcon(this.icon, {this.showShadow = true, this.shadowColor});
 
@@ -17,10 +17,10 @@ class ShadowIcon extends StatelessWidget {
     double dimens = 1.0;
     double dimens2 = 2.0;
     double dimens3 = 3.0;
-    Color _shadowColor = icon.color;
+    Color? _shadowColor = icon.color;
     if (shadowColor != null)
       _shadowColor = shadowColor;
-    List<Widget> list = new List();
+    List<Widget> list = [];
     if (showShadow) {
       list.addAll([
         Positioned(

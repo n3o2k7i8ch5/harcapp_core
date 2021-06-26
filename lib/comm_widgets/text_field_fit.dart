@@ -4,22 +4,22 @@ import 'package:flutter/services.dart';
 class TextFieldFit extends StatefulWidget {
 
   final double minWidth;
-  final InputDecoration decoration;
-  final TextStyle style;
-  final TextAlign textAlign;
-  final TextDirection textDirection;
-  final Locale locale;
-  final StrutStyle strutStyle;
-  final int minLines;
-  final int maxLines;
+  final InputDecoration? decoration;
+  final TextStyle? style;
+  final TextAlign? textAlign;
+  final TextDirection? textDirection;
+  final Locale? locale;
+  final StrutStyle? strutStyle;
+  final int? minLines;
+  final int? maxLines;
   final bool expands;
-  final TextEditingController controller;
-  final FocusNode focusNode;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
   final bool autofocus;
   final bool enabled;
-  final Function(String) onChanged;
-  final List<TextInputFormatter> inputFormatters;
-  final TextInputType keyboardType;
+  final Function(String)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputType? keyboardType;
 
   const TextFieldFit({this.minWidth: 30, this.decoration, this.style,
   this.textAlign, this.textDirection, this.locale, this.strutStyle, this.minLines,
@@ -35,7 +35,7 @@ class TextFieldFitState extends State<TextFieldFit>{
   // and for the TextField so that we calculate the correct size for the text
   // we are actually displaying
 
-  TextEditingController _controller;
+  TextEditingController? _controller;
 
   @override
   void initState() {
@@ -61,14 +61,14 @@ class TextFieldFitState extends State<TextFieldFit>{
         // Tells the framework to redraw the widget
         // The widget will redraw with a new width
         setState(() {});
-        if(widget.onChanged != null) widget.onChanged(text);
+        if(widget.onChanged != null) widget.onChanged!(text);
       },
       inputFormatters: widget.inputFormatters,
       keyboardType: widget.keyboardType,
     );
 
     // Use TextPainter to calculate the width of our text
-    TextSpan ts = new TextSpan(style: textField.style, text: textField.controller.text);
+    TextSpan ts = new TextSpan(style: textField.style, text: textField.controller!.text);
     TextPainter tp = new TextPainter(
       text: ts,
       textAlign: widget.textAlign ?? TextAlign.left,

@@ -38,7 +38,7 @@ abstract class Chord{
 
 class GChord extends Chord{
 
-  static const GChord empty = null;
+  static const GChord? empty = null;
 
   static const GChord c_1 = const GChord("c", 3, [0, 0, 5, 5, 4, 0]);
   static const GChord c_2 = const GChord("c", 8, [0, 10, 10, 0, 0, 0]);
@@ -559,7 +559,7 @@ class GChord extends Chord{
   static const int CHORD_SET_B = 10;
   static const int CHORD_SET_H = 11;
 
-  static List<List<GChord>> getChordSet(final int set){
+  static List<List<GChord>>? getChordSet(final int set){
     switch (set){
       case CHORD_SET_C: return C_set;
       case CHORD_SET_Cis: return Cis_set;
@@ -578,7 +578,7 @@ class GChord extends Chord{
   }
 
   static GChord getChord(final int set, final int group, final int position){
-    List<List<GChord>> chordSet = getChordSet(set);
+    List<List<GChord>> chordSet = getChordSet(set)!;
     List<GChord> chordGroup = chordSet[group];
     return chordGroup[position];
   }
@@ -603,7 +603,7 @@ class GChord extends Chord{
 
 class UChord extends Chord {
 
-  static const UChord empty = null;
+  static const UChord? empty = null;
 
   static const UChord c =  UChord("c", 0, [0, 3, 3, 3]);
   static const UChord C =  UChord("C", 0, [0, 0, 0, 3]);

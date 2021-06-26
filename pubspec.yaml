@@ -5,18 +5,18 @@ author:
 homepage:
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
   flutter: ">=1.17.0 <2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  material_design_icons_flutter: 4.0.5955
-  connectivity: 3.0.6
-  fluttertoast: 8.0.7
-  provider: 5.0.0
-  tuple: 1.0.2
+  material_design_icons_flutter: ^5.0.5955-rc.1
+  connectivity: ^3.0.6
+  fluttertoast: ^8.0.7
+  provider: ^5.0.0
+  tuple: ^2.0.0 #1.0.2
 
 dev_dependencies:
   flutter_test:

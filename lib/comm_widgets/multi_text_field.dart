@@ -19,7 +19,7 @@ class MultiTextFieldController{
 
   int minCount;
 
-  List<TextEditingController> _ctrls;
+  late List<TextEditingController> _ctrls;
 
   List<String> get texts => _ctrls.map((ctrl) => ctrl.text).toList();
   set texts(List<String> values){
@@ -39,10 +39,10 @@ class MultiTextFieldController{
   }
 
 
-  List<void Function(int, String)> _listeners;
-  List<void Function(List<String>)> _anyListeners;
+  late List<void Function(int, String)> _listeners;
+  late List<void Function(List<String>)> _anyListeners;
 
-  MultiTextFieldController({List<String> texts, this.minCount = 1}){
+  MultiTextFieldController({List<String>? texts, this.minCount = 1}){
     if(texts == null || texts.length == 0)
       texts = [''];
     this._ctrls = texts.map((text) => TextEditingController(text: text)).toList();
@@ -95,14 +95,14 @@ class MultiTextField extends StatefulWidget{
 
   static const IconData addIcon = MdiIcons.plusCircleOutline;
 
-  final MultiTextFieldController controller;
+  final MultiTextFieldController? controller;
   final bool expanded;
-  final String hint;
+  final String? hint;
   final bool linear;
-  final Color accentColor;
-  final void Function(List<String>) onAnyChanged;
-  final void Function(int, String) onChanged;
-  final void Function() onRemoved;
+  final Color? accentColor;
+  final void Function(List<String>)? onAnyChanged;
+  final void Function(int, String)? onChanged;
+  final void Function()? onRemoved;
 
   const MultiTextField({this.controller, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged, this.onRemoved});
 
@@ -113,21 +113,21 @@ class MultiTextField extends StatefulWidget{
 
 class MultiTextFieldState extends State<MultiTextField>{
 
-  MultiTextFieldController _controller;
-  MultiTextFieldController get controller => widget.controller??_controller;
+  MultiTextFieldController? _controller;
+  MultiTextFieldController? get controller => widget.controller??_controller;
 
-  int get minCount => controller.minCount;
+  int get minCount => controller!.minCount;
   bool get expanded => widget.expanded;
-  String get hint => widget.hint;
+  String? get hint => widget.hint;
   bool get linear => widget.linear;
-  Color get accentColor => widget.accentColor;
-  void Function(List<String>) get onAnyChanged => widget.onAnyChanged;
-  void Function(int, String) get onChanged => widget.onChanged;
-  void Function() get onRemoved => widget.onRemoved;
+  Color? get accentColor => widget.accentColor;
+  void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
+  void Function(int, String)? get onChanged => widget.onChanged;
+  void Function()? get onRemoved => widget.onRemoved;
 
-  void _callOnChanged(int index) => onChanged(index, controller[index].text);
+  void _callOnChanged(int index) => onChanged!(index, controller![index].text);
 
-  void _callOnAnyChanged() => onAnyChanged(controller.texts);
+  void _callOnAnyChanged() => onAnyChanged!(controller!.texts);
 
   @override
   void initState() {
@@ -141,32 +141,32 @@ class MultiTextFieldState extends State<MultiTextField>{
   Widget build(BuildContext context) {
     
     List<Widget> children = [];
-    for(int i=0; i<controller.length; i++) {
+    for(int i=0; i<controller!.length; i++) {
       children.add(Item(
-        controller: controller[i],
+        controller: controller![i],
         hint: hint,
-        removable: controller.length>minCount,
+        removable: controller!.length>minCount,
         onChanged: (text){
-          if(i == controller.length-1)
+          if(i == controller!.length-1)
             setState(() {});
 
           _callOnChanged(i);
-          controller._callOnChanged(i);
+          controller!._callOnChanged(i);
           _callOnAnyChanged();
-          controller._callOnAnyChanged();
+          controller!._callOnAnyChanged();
         },
         onRemoveTap: () => setState((){
-          controller.removeAt(i);
+          controller!.removeAt(i);
           onRemoved?.call();
 
           _callOnChanged(i);
-          controller._callOnChanged(i);
+          controller!._callOnChanged(i);
           _callOnAnyChanged();
-          controller._callOnAnyChanged();
+          controller!._callOnAnyChanged();
         }),
       ));
 
-      if(linear && i < controller.length-1)
+      if(linear && i < controller!.length-1)
         children.add(SizedBox(width: Dimen.DEF_MARG));
     }
 
@@ -174,20 +174,20 @@ class MultiTextFieldState extends State<MultiTextField>{
       icon: Icon(
         MultiTextField.addIcon,
         color:
-        controller.isNotEmpty && controller.last.isEmpty?
+        controller!.isNotEmpty && controller!.last.isEmpty?
         iconDisab_(context):
         accentColor,
       ),
       onPressed:
-      controller.isNotEmpty && controller.last.isEmpty?
+      controller!.isNotEmpty && controller!.last.isEmpty?
       null:
           () => setState((){
         String text = '';
-        controller.addText(text);
-        _callOnChanged(controller.length-1);
-        controller._callOnChanged(controller.length-1);
+        controller!.addText(text);
+        _callOnChanged(controller!.length-1);
+        controller!._callOnChanged(controller!.length-1);
         _callOnAnyChanged();
-        controller._callOnAnyChanged();
+        controller!._callOnAnyChanged();
       }),
     );
 
@@ -229,12 +229,12 @@ class Item extends StatefulWidget{
   
   //final String initText;
   final TextEditingController controller;
-  final String hint;
+  final String? hint;
   final bool removable;
-  final void Function() onRemoveTap;
-  final void Function(String) onChanged;
+  final void Function()? onRemoveTap;
+  final void Function(String)? onChanged;
 
-  const Item({@required this.controller, @required this.hint, this.removable: true, this.onRemoveTap, this.onChanged, Key key}):super(key: key);
+  const Item({required this.controller, required this.hint, this.removable: true, this.onRemoveTap, this.onChanged, Key? key}):super(key: key);
 
   @override
   State<StatefulWidget> createState() => ItemState();
@@ -245,21 +245,21 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
 
   static const double iconSize = 20.0;
 
-  FocusNode focusNode;
+  FocusNode? focusNode;
 
   TextEditingController get controller => widget.controller;
-  String get hint => widget.hint;
+  String? get hint => widget.hint;
   bool get removable => widget.removable;
-  void Function() get onRemoveTap => widget.onRemoveTap;
-  void Function(String) get onChanged => widget.onChanged;
+  void Function()? get onRemoveTap => widget.onRemoveTap;
+  void Function(String)? get onChanged => widget.onChanged;
 
-  bool selected;
+  late bool selected;
 
   @override
   void initState() {
     focusNode = FocusNode();
-    focusNode.addListener(() =>
-        setState(() => selected = focusNode.hasFocus));
+    focusNode!.addListener(() =>
+        setState(() => selected = focusNode!.hasFocus));
 
     selected = false;
     super.initState();
@@ -312,10 +312,10 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
               GestureDetector(
                 onTap: (){
                   setState(() => selected = true);
-                  focusNode.requestFocus();
+                  focusNode!.requestFocus();
                 },
                 child: Text(
-                  controller.text.isEmpty?hint:controller.text,
+                  controller.text.isEmpty?hint!:controller.text,
                   style: AppTextStyle(
                       fontSize: controller.text.isEmpty?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
                       fontWeight: controller.text.isEmpty?weight.normal:weight.halfBold,
@@ -330,14 +330,14 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
             clipBehavior: Clip.none,
           ),
 
-          if(focusNode.hasFocus)
+          if(focusNode!.hasFocus)
             SizedBox(
               child: IconButton(
                 padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
                 icon: Icon(MdiIcons.check, size: iconSize),
                 onPressed: (){
                   setState(() => selected = false);
-                  focusNode.unfocus();
+                  focusNode!.unfocus();
                 },
               ),
               height: iconSize,

@@ -13,18 +13,18 @@ const double _kMinButtonSize = kMinInteractiveDimension;
 class AppButton extends StatelessWidget {
 
   const AppButton({
-    Key key,
+    Key? key,
     this.iconSize = 24.0,
     this.padding = const EdgeInsets.all(8.0),
     this.alignment = Alignment.center,
-    @required this.icon,
+    required this.icon,
     this.color,
     this.focusColor,
     this.hoverColor,
     this.highlightColor,
     this.splashColor,
     this.disabledColor,
-    @required this.onTap,
+    required this.onTap,
     this.onLongPress,
     this.focusNode,
     this.autofocus = false,
@@ -42,20 +42,20 @@ class AppButton extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final AlignmentGeometry alignment;
   final Widget icon;
-  final Color focusColor;
-  final Color hoverColor;
-  final Color color;
-  final Color splashColor;
-  final Color highlightColor;
-  final Color disabledColor;
+  final Color? focusColor;
+  final Color? hoverColor;
+  final Color? color;
+  final Color? splashColor;
+  final Color? highlightColor;
+  final Color? disabledColor;
   final VoidCallback onTap;
-  final VoidCallback onLongPress;
+  final VoidCallback? onLongPress;
 
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
 
   final bool autofocus;
 
-  final String tooltip;
+  final String? tooltip;
 
 
   final bool enableFeedback;
@@ -63,7 +63,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
-    Color currentColor;
+    Color? currentColor;
     if (onTap != null)
       currentColor = color;
     else
@@ -92,7 +92,7 @@ class AppButton extends StatelessWidget {
 
     if (tooltip != null) {
       result = Tooltip(
-        message: tooltip,
+        message: tooltip!,
         child: result,
       );
     }

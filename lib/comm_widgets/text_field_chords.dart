@@ -3,15 +3,15 @@ import 'package:flutter/services.dart';
 
 class TextFieldChords extends StatefulWidget{
 
-  final TextStyle textStyle;
-  final TextEditingController controller;
-  final InputDecoration decoration;
-  final int minLines;
-  final int maxLines;
-  final FocusNode focusNode;
+  final TextStyle? textStyle;
+  final TextEditingController? controller;
+  final InputDecoration? decoration;
+  final int? minLines;
+  final int? maxLines;
+  final FocusNode? focusNode;
   final TextInputType keyboardType;
   final bool expands;
-  final Function(String) onChanged;
+  final Function(String)? onChanged;
   final bool autofocus;
   final bool enabled;
   final TextAlign textAlign;
@@ -36,12 +36,12 @@ class TextFieldChords extends StatefulWidget{
 
 class TextFieldChordsState extends State<TextFieldChords> {
 
-  TextEditingController _controller;
-  TextEditingController get _effectiveController => widget.controller ?? _controller;
+  TextEditingController? _controller;
+  TextEditingController? get _effectiveController => widget.controller ?? _controller;
 
-  int shift;
+  int? shift;
 
-  bool recentlyTyped;
+  bool? recentlyTyped;
   @override
   void initState() {
 
@@ -141,7 +141,7 @@ class ChordsTextInputFormatter extends TextInputFormatter {
       return oldVal;
   }
 
-  String formatTextAdd(String text, String charBef, String charAft){
+  String formatTextAdd(String text, String? charBef, String? charAft){
 
     // remove double spaces
     if (charAft == ' ') text = text.replaceAll(' ', '');
@@ -175,7 +175,7 @@ class ChordsTextInputFormatter extends TextInputFormatter {
     if(removedText == '\n')
       //ab => a b
       text = text.replaceAllMapped(RegExp(r'[CcDdEeFfGgAaBbHhs0-9\+][CcDdEeFfGgAaBbHh]'), (match) {
-        return '${match.group(0)[0]} ${match.group(0)[1]}';
+        return '${match.group(0)![0]} ${match.group(0)![1]}';
       });
     else
       // Gis0+ A -> Gis0+A -> A

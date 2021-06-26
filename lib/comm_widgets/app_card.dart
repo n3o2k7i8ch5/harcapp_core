@@ -24,17 +24,17 @@ class AppCard extends StatelessWidget{
   static const EdgeInsets defPadding = EdgeInsets.all(DEF_PADDING_VAL);
   static const double ALERT_DIALOG_PADDING = 18.0;
 
-  final Key key;
-  final Widget child;
-  final Color color;
+  final Key? key;
+  final Widget? child;
+  final Color? color;
   final EdgeInsets margin;
   final EdgeInsets padding;
   final double elevation;
-  final void Function() onTap;
-  final void Function() onLongPress;
-  final void Function() onDoubleTap;
+  final void Function()? onTap;
+  final void Function()? onLongPress;
+  final void Function()? onDoubleTap;
   final double radius;
-  final BorderRadius borderRadius;
+  final BorderRadius? borderRadius;
   final Color elevetionColor;
   final Clip clipBehavior;
   //final int transMilis;
