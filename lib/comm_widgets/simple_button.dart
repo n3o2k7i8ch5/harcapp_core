@@ -20,6 +20,8 @@ class SimpleButton extends StatelessWidget{
   final double elevation;
   final Color? color;
   final bool enabled;
+  final Clip clipBehavior;
+
   const SimpleButton({
     required this.child,
     required this.onTap,
@@ -30,6 +32,7 @@ class SimpleButton extends StatelessWidget{
     this.elevation: 0,
     this.color,
     this.enabled: true,
+    this.clipBehavior: Clip.hardEdge,
     Key? key
   }):super(key: key);
 
@@ -39,6 +42,7 @@ class SimpleButton extends StatelessWidget{
     return Padding(
       padding: margin,
       child: Material(
+        clipBehavior: clipBehavior,
         borderRadius: BorderRadius.circular(radius),
         color: color??Colors.transparent,
         elevation: elevation,
