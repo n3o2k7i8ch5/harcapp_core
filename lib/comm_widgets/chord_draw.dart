@@ -70,11 +70,10 @@ class ChordDraw{
     }
   }
 
-  String? getChordName(int shift){
+  String getChordName(int shift){
     String chordStr = '';
 
     int chordWithShift = (chordCode + shift + 12) %12;
-
 
     if(isDur) {
       switch (chordWithShift) {
@@ -114,8 +113,6 @@ class ChordDraw{
         case 11:
           chordStr = isDur?'H':'h';
           break;
-        default:
-          return null;
       }
     }
 

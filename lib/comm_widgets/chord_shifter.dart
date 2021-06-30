@@ -5,12 +5,12 @@ class ChordShifter{
   List<ChordDraw> chordList = [];
   List<String> separatorList = [];
 
-  int? _shift;
+  late int _shift;
   bool separatorFirst = false;
 
   ChordShifter(String string, int shift){
 
-    if(string == null || string.length==0) {
+    if(string.length==0) {
       this._shift = shift;
       return;
     }
@@ -63,13 +63,13 @@ class ChordShifter{
     this.separatorFirst = _separatorFirst;
   }
 
-  int? up() {
-    _shift = (_shift! + 1)%12;
+  int up() {
+    _shift = (_shift + 1)%12;
     return _shift;
   }
 
-  int? down() {
-    _shift = (_shift! + 11)%12;
+  int down() {
+    _shift = (_shift + 11)%12;
     return _shift;
   }
 
@@ -83,15 +83,15 @@ class ChordShifter{
         output += separatorList[i];
 
         if(chordList.length > i) {
-          if (shifted) output += chordList[i].getChordName(_shift!)!;
-          else output += chordList[i].getChordName(0)!;
+          if (shifted) output += chordList[i].getChordName(_shift);
+          else output += chordList[i].getChordName(0);
         }
       }
     }
     else {
       for(int i = 0; i<chordList.length; i++){
-        if (shifted) output += chordList[i].getChordName(_shift!)!;
-        else output += chordList[i].getChordName(0)!;
+        if (shifted) output += chordList[i].getChordName(_shift);
+        else output += chordList[i].getChordName(0);
 
         if (separatorList.length > i) output += separatorList[i];
       }
