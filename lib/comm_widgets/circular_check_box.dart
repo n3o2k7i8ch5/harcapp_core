@@ -314,10 +314,10 @@ class CircularCheckbox extends StatefulWidget {
   static const double width = 18.0;
 
   @override
-  _CheckboxState createState() => _CheckboxState();
+  _CircularCheckboxState createState() => _CircularCheckboxState();
 }
 
-class _CheckboxState extends State<Checkbox> with TickerProviderStateMixin, ToggleableStateMixin {
+class _CircularCheckboxState extends State<CircularCheckbox> with TickerProviderStateMixin, ToggleableStateMixin {
   final _CheckboxPainter _painter = _CheckboxPainter();
   bool? _previousValue;
 
@@ -328,7 +328,7 @@ class _CheckboxState extends State<Checkbox> with TickerProviderStateMixin, Togg
   }
 
   @override
-  void didUpdateWidget(Checkbox oldWidget) {
+  void didUpdateWidget(CircularCheckbox oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.value != widget.value) {
       _previousValue = oldWidget.value;
