@@ -75,45 +75,43 @@ class ChordDraw{
 
     int chordWithShift = (chordCode + shift + 12) %12;
 
-    if(isDur) {
-      switch (chordWithShift) {
-        case 0:
-          chordStr = isDur?'C':'c';
-          break;
-        case 1:
-          chordStr = isDur?'Cis':'cis';
-          break;
-        case 2:
-          chordStr = isDur?'D':'d';
-          break;
-        case 3:
-          chordStr = isDur?'Dis':'dis';
-          break;
-        case 4:
-          chordStr = isDur?'E':'e';
-          break;
-        case 5:
-          chordStr = isDur?'F':'f';
-          break;
-        case 6:
-          chordStr = isDur?'Fis':'fis';
-          break;
-        case 7:
-          chordStr = isDur?'G':'g';
-          break;
-        case 8:
-          chordStr = isDur?'Gis':'gis';
-          break;
-        case 9:
-          chordStr = isDur?'A':'a';
-          break;
-        case 10:
-          chordStr = isDur?'B':'b';
-          break;
-        case 11:
-          chordStr = isDur?'H':'h';
-          break;
-      }
+    switch (chordWithShift) {
+      case 0:
+        chordStr = isDur?'C':'c';
+        break;
+      case 1:
+        chordStr = isDur?'Cis':'cis';
+        break;
+      case 2:
+        chordStr = isDur?'D':'d';
+        break;
+      case 3:
+        chordStr = isDur?'Dis':'dis';
+        break;
+      case 4:
+        chordStr = isDur?'E':'e';
+        break;
+      case 5:
+        chordStr = isDur?'F':'f';
+        break;
+      case 6:
+        chordStr = isDur?'Fis':'fis';
+        break;
+      case 7:
+        chordStr = isDur?'G':'g';
+        break;
+      case 8:
+        chordStr = isDur?'Gis':'gis';
+        break;
+      case 9:
+        chordStr = isDur?'A':'a';
+        break;
+      case 10:
+        chordStr = isDur?'B':'b';
+        break;
+      case 11:
+        chordStr = isDur?'H':'h';
+        break;
     }
 
     if(additionalNumber != null)
