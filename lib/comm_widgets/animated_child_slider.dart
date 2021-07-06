@@ -15,6 +15,7 @@ class AnimatedChildSlider extends StatelessWidget{
   final Axis direction;
   final bool reverse;
   final Alignment alignment;
+  final Clip clipBehavior;
 
   const AnimatedChildSlider({
     this.switchInCurve: Curves.easeOutQuad,
@@ -26,6 +27,7 @@ class AnimatedChildSlider extends StatelessWidget{
     this.direction: Axis.vertical,
     this.reverse: false,
     this.alignment: Alignment.center,
+    this.clipBehavior: Clip.hardEdge,
   });
 
   @override
@@ -41,6 +43,7 @@ class AnimatedChildSlider extends StatelessWidget{
         if (currentChild != null)
           children = children.toList()..add(currentChild);
         return Stack(
+          clipBehavior: clipBehavior,
           children: children,
           alignment: alignment,
         );
