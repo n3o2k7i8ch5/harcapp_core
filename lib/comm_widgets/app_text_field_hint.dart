@@ -64,8 +64,8 @@ class AppTextFieldHint extends StatefulWidget{
 
 class AppTextFieldHintState extends State<AppTextFieldHint>{
 
-  TextEditingController? _controller;
-  TextEditingController? get controller => widget.controller??_controller;
+  late TextEditingController _controller;
+  TextEditingController get controller => widget.controller??_controller;
 
   MultiTextFieldController? _multiController;
   MultiTextFieldController? get multiController => widget.multiController??_multiController;
@@ -126,8 +126,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
         onRemoved: (){
-          if(multiController!.length==1)
-            setState(() {});
+          //if(multiController!.length==1)
+            //setState(() {});
         },
       );
     else
@@ -135,6 +135,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         style: widget.style,
         controller: controller,
         onChanged: (text){
+          if(controller.text.length<=1)
+            setState(() {});
+
           onChangedListener(0, text);
           onAnyChangedListener([text]);
         },
