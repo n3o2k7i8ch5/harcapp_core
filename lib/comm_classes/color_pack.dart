@@ -119,6 +119,9 @@ abstract class ColorPack{
       //bodyColor: _realColorPack.textEnabled,
       //displayColor: _realColorPack.textEnabled,
     ),
+    checkboxTheme: CheckboxThemeData(
+      checkColor: MaterialStateProperty.all(background),
+    ),
     tabBarTheme: TabBarTheme(
         labelColor: iconEnabled,
         unselectedLabelColor: hintEnabled,
