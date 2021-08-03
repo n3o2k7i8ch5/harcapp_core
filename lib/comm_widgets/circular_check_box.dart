@@ -84,9 +84,9 @@ class CircularCheckbox extends StatefulWidget {
   /// The values of [tristate] and [autofocus] must not be null.
   const CircularCheckbox({
     Key? key,
-    @required this.value,
+    required this.value,
     this.tristate = false,
-    @required this.onChanged,
+    required this.onChanged,
     this.mouseCursor,
     this.activeColor,
     this.fillColor,
