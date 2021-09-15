@@ -57,6 +57,8 @@ abstract class ColorPack{
   static const DEF_ICON_ENAB = Colors.black;
   static const DEF_ICON_DISAB = Colors.black38;
 
+  static const DEF_CARD = AppColors.white_dark;
+
   const ColorPack();
 
   String get name;
@@ -75,7 +77,7 @@ abstract class ColorPack{
 
   Color get hintEnabled => AppColors.text_hint_enab;
 
-  Color get defCardEnabled => AppColors.white_dark;//Colors.white;
+  Color get defCardEnabled => DEF_CARD;
   Color get defCardDisabled => Color.fromARGB(255, 235, 235, 235);
   Color get defCardElevation => Colors.black;
 
