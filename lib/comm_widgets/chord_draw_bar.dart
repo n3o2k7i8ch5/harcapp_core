@@ -10,6 +10,8 @@ import '../colors.dart';
 import '../dimen.dart';
 import 'app_card.dart';
 import 'chord.dart';
+import 'instrument_type.dart';
+
 
 class _Fretboard extends StatelessWidget{
 
@@ -119,6 +121,17 @@ class ChordWidget extends StatelessWidget{
     onTap: onTap,
   );
 
+  static ChordWidget fromMChord(
+      MChord chord,
+      {
+        Color? color,
+        void Function()? onTap,
+      }) => ChordWidget(
+    chord: chord,
+    strings: 4,
+    color: color,
+    onTap: onTap,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -236,11 +249,11 @@ class ChordDrawBar extends StatefulWidget{
   final Color chordColor;
   final double elevation;
   final bool changeTypeOnTap;
-  final bool? initTypeGuitar;
+  final InstrumentType type;
   final bool showLabel;
   final EdgeInsets padding;
 
-  final void Function(Chord, bool?)? onTap;
+  final void Function(Chord, InstrumentType)? onTap;
   
   const ChordDrawBar(
       this.chords, {
@@ -248,7 +261,7 @@ class ChordDrawBar extends StatefulWidget{
         this.chordColor=ColorPack.DEF_ICON_ENAB,
         this.elevation=0,
         this.changeTypeOnTap=true,
-        this.initTypeGuitar,
+        this.type = InstrumentType.GUITAR,
         this.showLabel=true,
         this.padding=EdgeInsets.zero,
 
@@ -263,13 +276,13 @@ class ChordDrawBar extends StatefulWidget{
 }
 
 class ChordDrawBarState extends State<ChordDrawBar>{
-  
-  bool? typeGuitar;
+
+  late InstrumentType type;
 
   @override
   void initState() {
 
-    typeGuitar = widget.initTypeGuitar??true;
+    type = widget.type;
 
     super.initState();
   }
@@ -279,6 +292,8 @@ class ChordDrawBarState extends State<ChordDrawBar>{
 
     List<String> guitChordStrs = [];
     List<String> ukulChordStrs = [];
+    List<String> mandChordStrs = [];
+
     List<String> lines = widget.chords.split('\n');
 
     for(String line in lines) {
@@ -291,6 +306,9 @@ class ChordDrawBarState extends State<ChordDrawBar>{
 
         String ukulChordStr = chordStr.replaceAll(RegExp(r'[0-9+]'), '');
         if(!ukulChordStrs.contains(ukulChordStr)) ukulChordStrs.add(ukulChordStr);
+
+        String mandChordStr = chordStr.replaceAll(RegExp(r'[1234589+]'), '');
+        if(!mandChordStrs.contains(mandChordStr)) mandChordStrs.add(mandChordStr);
 
       }
     }
@@ -305,10 +323,10 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               color: widget.chordColor,
               onTap: (){
                 if(widget.changeTypeOnTap)
-                  setState(() => typeGuitar = !typeGuitar!);
+                  setState(() => type = nextInstrumentType(type));
 
                 if(widget.onTap != null)
-                  widget.onTap!(chordSet[0], typeGuitar);
+                  widget.onTap!(chordSet[0], type);
               }
           )
       );
@@ -324,10 +342,29 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               color: widget.chordColor,
               onTap:(){
                 if(widget.changeTypeOnTap)
-                  setState(() => typeGuitar = !typeGuitar!);
+                  setState(() => type = nextInstrumentType(type));
 
                 if(widget.onTap != null)
-                  widget.onTap!(chord, typeGuitar);
+                  widget.onTap!(chord, type);
+              }
+          )
+      );
+    }
+
+    List<Widget> mandChords = [];
+    for(String chordStr in mandChordStrs){
+      MChord? chord = MChord.chordDrawableMap[chordStr];
+      if(chord == null) continue;
+      ukulChords.add(
+          ChordWidget.fromMChord(
+              chord,
+              color: widget.chordColor,
+              onTap:(){
+                if(widget.changeTypeOnTap)
+                  setState(() => type = nextInstrumentType(type));
+
+                if(widget.onTap != null)
+                  widget.onTap!(chord, type);
               }
           )
       );
@@ -345,9 +382,13 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               scrollDirection: Axis.horizontal,
               child: Row(
                 children:
-                typeGuitar!?
+                type == InstrumentType.GUITAR?
                 guitChords:
-                ukulChords,
+                (type == InstrumentType.UKULELE?
+                ukulChords:
+                // type == InstrumentType.MANDOLIN?
+                mandChords
+                )
               ),
             ),
           ),
@@ -356,7 +397,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
             Padding(
               padding: EdgeInsets.all(Dimen.DEF_MARG),
               child: RotatedBox(
-                child: Text(typeGuitar!?'Gitara':'Ukulele', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnab_(context))),
+                child: Text(instrumentTypeName(type), style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnab_(context))),
                 quarterTurns: 3,
               ),
             )
