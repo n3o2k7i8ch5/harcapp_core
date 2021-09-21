@@ -352,7 +352,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
     for(String chordStr in mandChordStrs){
       MChord? chord = MChord.chordDrawableMap[chordStr];
       if(chord == null) continue;
-      ukulChords.add(
+      mandChords.add(
           ChordWidget.fromMChord(
               chord,
               color: widget.chordColor,
