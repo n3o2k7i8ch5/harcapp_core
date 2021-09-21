@@ -601,6 +601,235 @@ class GChord extends Chord{
   }
 }
 
+class MChord extends Chord{
+
+  static const MChord? empty = null;
+
+  static const MChord c = const MChord("c", 0, [0, 1, 3, 3]);
+  static const MChord c6 = const MChord("c6", 0, [2, 1, 3, 2]);
+  static const MChord c7 = const MChord("c7", 0, [3, 1, 3, 3]);
+
+  static const MChord C = const MChord("C", 0, [0, 2, 3, 0]);
+  static const MChord C6 = const MChord("C6", 0, [2, 2, 3, 3]);
+  static const MChord C7 = const MChord("C7", 0, [4, 2, 3, 3]);
+
+  static const MChord cis = const MChord("cis", 0, [1, 2, 4, 4]);
+  static const MChord cis6 = const MChord("cis6", 0, [3, 2, 4, 4]);
+  static const MChord cis7 = const MChord("cis7", 0, [4, 2, 4, 4]);
+
+  static const MChord Cis = const MChord("Cis", 0, [1, 3, 4, 4]);
+  static const MChord Cis6 = const MChord("Cis6", 0, [3, 3, 4, 4]);
+  static const MChord Cis7 = const MChord("Cis7", 0, [1, 3, 3, 4]);
+
+  static const MChord d = const MChord("d", 0, [2, 0, 0, 1]);
+  static const MChord d6 = const MChord("d6", 0, [2, 0, 2, 1]);
+  static const MChord d7 = const MChord("d7", 0, [2, 0, 3, 1]);
+
+  static const MChord D = const MChord("D", 0, [2, 0, 0, 2]);
+  static const MChord D6 = const MChord("D6", 0, [2, 0, 2, 2]);
+  static const MChord D7 = const MChord("D7", 0, [2, 0, 4, 2]);
+
+  static const MChord dis = const MChord("dis", 0, [3, 4, 6, 6]);
+  static const MChord dis6 = const MChord("dis6", 0, [3, 1, 3, 2]);
+  static const MChord dis7 = const MChord("dis7", 0, [3, 1, 4, 2]);
+
+  static const MChord Dis = const MChord("Dis", 0, [0, 1, 1, 3]);
+  static const MChord Dis6 = const MChord("Dis6", 0, [3, 1, 3, 3]);
+  static const MChord Dis7 = const MChord("Dis7", 0, [0, 0, 1, 3]);
+
+  static const MChord e = const MChord("e", 0, [0, 2, 2, 3]);
+  static const MChord e6 = const MChord("e6", 0, [4, 2, 4, 3]);
+  static const MChord e7 = const MChord("e7", 0, [0, 0, 2, 0]);
+
+  static const MChord E = const MChord("E", 0, [1, 2, 2, 4]);
+  static const MChord E6 = const MChord("E6", 0, [4, 2, 4, 4]);
+  static const MChord E7 = const MChord("E7", 0, [1, 1, 2, 0]);
+
+  static const MChord f = const MChord("f", 0, [1, 3, 3, 4]);
+  static const MChord f6 = const MChord("f6", 0, [1, 0, 3, 1]);
+  static const MChord f7 = const MChord("f7", 0, [1, 1, 3, 1]);
+
+  static const MChord F = const MChord("F", 0, [5, 3, 0, 1]);
+  static const MChord F6 = const MChord("F6", 0, [2, 0, 3, 1]);
+  static const MChord F7 = const MChord("F7", 0, [2, 3, 3, 0]);
+
+  static const MChord fis = const MChord("fis", 0, [2, 4, 4, 2]);
+  static const MChord fis6 = const MChord("fis6", 0, [2, 1, 4, 2]);
+  static const MChord fis7 = const MChord("fis7", 0, [2, 4, 4, 0]);
+
+  static const MChord Fis = const MChord("Fis", 0, [3, 4, 4, 6]);
+  static const MChord Fis6 = const MChord("Fis6", 0, [3, 1, 4, 2]);
+  static const MChord Fis7 = const MChord("Fis7", 0, [3, 4, 4, 1]);
+
+  static const MChord g = const MChord("g", 0, [0, 0, 1, 3]);
+  static const MChord g6 = const MChord("g6", 0, [0, 0, 1, 0]);
+  static const MChord g7 = const MChord("g7", 0, [0, 0, 1, 1]);
+
+  static const MChord G = const MChord("G", 0, [0, 0, 2, 3]);
+  static const MChord G6 = const MChord("G6", 0, [0, 0, 2, 0]);
+  static const MChord G7 = const MChord("G7", 0, [0, 0, 2, 2]);
+
+  static const MChord gis = const MChord("gis", 0, [1, 1, 2, 4]);
+  static const MChord gis6 = const MChord("gis6", 0, [1, 1, 2, 1]);
+  static const MChord gis7 = const MChord("gis7", 0, [1, 1, 2, 2]);
+
+  static const MChord Gis = const MChord("Gis", 0, [1, 1, 3, 4]);
+  static const MChord Gis6 = const MChord("Gis6", 0, [1, 1, 3, 1]);
+  static const MChord Gis7 = const MChord("Gis7", 0, [1, 1, 3, 3]);
+
+  static const MChord a = const MChord("a", 0, [2, 2, 3, 4]);
+  static const MChord a6 = const MChord("a6", 0, [2, 2, 3, 2]);
+  static const MChord a7 = const MChord("a7", 0, [2, 2, 3, 3]);
+
+  static const MChord A = const MChord("A", 0, [2, 2, 4, 5]);
+  static const MChord A6 = const MChord("A6", 0, [2, 4, 4, 0]);
+  static const MChord A7 = const MChord("A7", 0, [2, 2, 4, 4]);
+
+  static const MChord b = const MChord("b", 0, [3, 3, 4, 6]);
+  static const MChord b6 = const MChord("b6", 0, [3, 3, 4, 3]);
+  static const MChord b7 = const MChord("b7", 0, [3, 3, 4, 4]);
+
+  static const MChord B = const MChord("B", 0, [3, 0, 1, 1]);
+  static const MChord B6 = const MChord("B6", 0, [0, 0, 1, 1]);
+  static const MChord B7 = const MChord("B7", 0, [3, 3, 5, 5]);
+
+  static const MChord h = const MChord("h", 0, [4, 0, 2, 2]);
+  static const MChord h6 = const MChord("h6", 0, [1, 0, 2, 2]);
+  static const MChord h7 = const MChord("h7", 0, [2, 0, 2, 2]);
+
+  static const MChord H = const MChord("H", 0, [4, 4, 6, 7]);
+  static const MChord H6 = const MChord("H6", 0, [1, 1, 2, 2]);
+  static const MChord H7 = const MChord("H7", 0, [3, 1, 2, 2]);
+
+
+  static const int CHORD_SET_C = 0;
+  static const int CHORD_SET_Cis = 1;
+  static const int CHORD_SET_D = 2;
+  static const int CHORD_SET_Dis = 3;
+  static const int CHORD_SET_E = 4;
+  static const int CHORD_SET_F = 5;
+  static const int CHORD_SET_Fis = 6;
+  static const int CHORD_SET_G = 7;
+  static const int CHORD_SET_Gis = 8;
+  static const int CHORD_SET_A = 9;
+  static const int CHORD_SET_B = 10;
+  static const int CHORD_SET_H = 11;
+
+  static const Map<String, MChord> chordDrawableMap = {
+    "c" :c,
+    "c6" :c6,
+    "c7" :c7,
+
+    "C" :C,
+    "C6" :C6,
+    "C7" :C7,
+
+    "cis" :cis,
+    "cis6" :cis6,
+    "cis7" :cis7,
+
+    "Cis" :Cis,
+    "Cis6" :Cis6,
+    "Cis7" :Cis7,
+
+    "d" :d,
+    "d6" :d6,
+    "d7" :d7,
+
+    "D" :D,
+    "D6" :D6,
+    "D7" :D7,
+
+    "dis" :dis,
+    "dis6" :dis6,
+    "dis7" :dis7,
+
+    "Dis" :Dis,
+    "Dis6" :Dis6,
+    "Dis7" :Dis7,
+
+    "e" :e,
+    "e6" :e6,
+    "e7" :e7,
+
+    "E" :E,
+    "E6" :E6,
+    "E7" :E7,
+
+    "f" :f,
+    "f6" :f6,
+    "f7" :f7,
+
+    "F" :F,
+    "F6" :F6,
+    "F7" :F7,
+
+    "fis" :fis,
+    "fis6" :fis6,
+    "fis7" :fis7,
+
+    "Fis" :Fis,
+    "Fis6" :Fis6,
+    "Fis7" :Fis7,
+
+    "g" :g,
+    "g6" :g6,
+    "g7" :g7,
+
+    "G" :G,
+    "G6" :G6,
+    "G7" :G7,
+
+    "gis" :gis,
+    "gis6" :gis6,
+    "gis7" :gis7,
+
+    "Gis" :Gis,
+    "Gis6" :Gis6,
+    "Gis7" :Gis7,
+
+    "a" :a,
+    "a6" :a6,
+    "a7" :a7,
+
+    "A" :A,
+    "A6" :A6,
+    "A7" :A7,
+
+    "b" :b,
+    "b6" :b6,
+    "b7" :b7,
+
+    "B" :B,
+    "B6" :B6,
+    "B7" :B7,
+
+    "h" :h,
+    "h6" :h6,
+    "h7" :h7,
+
+    "H" :H,
+    "H6" :H6,
+    "H7" :H7,
+
+  };
+
+  const MChord(String name, int bar, List<int> strings) : super(name, bar, strings);
+
+  @override
+  GChord shiftToFirstDot(){
+    int pos = nearestDotPosition - 1;
+    return GChord(
+        name,
+        bar==0?0:bar-pos,
+        [ max(0, strings[0]-pos),
+          max(0, strings[1]-pos),
+          max(0, strings[2]-pos),
+          max(0, strings[3]-pos),
+        ]);
+  }
+}
+
 class UChord extends Chord {
 
   static const UChord? empty = null;
