@@ -2,13 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
-import 'package:harcapp_core/comm_classes/primitive_wrapper.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 
 import '../comm_classes/color_pack.dart';
-import '../colors.dart';
 import '../dimen.dart';
-import 'app_card.dart';
 import 'chord.dart';
 import 'instrument_type.dart';
 
@@ -249,7 +246,7 @@ class ChordDrawBar extends StatefulWidget{
   final Color chordColor;
   final double elevation;
   final bool changeTypeOnTap;
-  final InstrumentType type;
+  final InstrumentType initType;
   final bool showLabel;
   final EdgeInsets padding;
 
@@ -261,7 +258,7 @@ class ChordDrawBar extends StatefulWidget{
         this.chordColor=ColorPack.DEF_ICON_ENAB,
         this.elevation=0,
         this.changeTypeOnTap=true,
-        this.type = InstrumentType.GUITAR,
+        this.initType = InstrumentType.GUITAR,
         this.showLabel=true,
         this.padding=EdgeInsets.zero,
 
@@ -282,7 +279,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
   @override
   void initState() {
 
-    type = widget.type;
+    type = widget.initType;
 
     super.initState();
   }
