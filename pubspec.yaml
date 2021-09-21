@@ -1,7 +1,7 @@
 name: harcapp_core
 description: A new Flutter package project.
 version: 0.0.1
-author:
+author: Daniel Iwanicki
 homepage:
 
 environment:
@@ -15,8 +15,8 @@ dependencies:
   material_design_icons_flutter: ^5.0.5955-rc.1
   connectivity: ^3.0.6
   fluttertoast: ^8.0.7
-  provider: ^5.0.0
-  tuple: ^2.0.0 #1.0.2
+  provider: ^6.0.0
+  tuple: ^2.0.0
 
 dev_dependencies:
   flutter_test:
