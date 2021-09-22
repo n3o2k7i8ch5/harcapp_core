@@ -172,6 +172,7 @@ class ChordWidget extends StatelessWidget{
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
               Text(
