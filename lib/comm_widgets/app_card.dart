@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:harcapp_core/comm_classes/app_text_style.dart';
-import 'package:harcapp_core/comm_widgets/simple_button.dart';
-import 'package:tuple/tuple.dart';
-
 import '../comm_classes/color_pack.dart';
 import '../dimen.dart';
 
@@ -14,8 +10,6 @@ class AppCard extends StatelessWidget{
 
   static const double defElevation = 1.0;
   static const double bigElevation = 6.0;
-
-  //static const int DEF_TRANS_MILIS = 300;
 
   static const double NORM_MARGIN_VAL = Dimen.DEF_MARG/2;
   static const double DEF_PADDING_VAL = Dimen.DEF_MARG;

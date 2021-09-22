@@ -321,9 +321,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               onTap: (){
                 if(widget.changeTypeOnTap)
                   setState(() => type = nextInstrumentType(type));
-
-                if(widget.onTap != null)
-                  widget.onTap!(chordSet[0], type);
+                widget.onTap?.call(chordSet[0], type);
               }
           )
       );
@@ -340,9 +338,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               onTap:(){
                 if(widget.changeTypeOnTap)
                   setState(() => type = nextInstrumentType(type));
-
-                if(widget.onTap != null)
-                  widget.onTap!(chord, type);
+                widget.onTap?.call(chord, type);
               }
           )
       );
@@ -359,9 +355,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               onTap:(){
                 if(widget.changeTypeOnTap)
                   setState(() => type = nextInstrumentType(type));
-
-                if(widget.onTap != null)
-                  widget.onTap!(chord, type);
+                widget.onTap?.call(chord, type);
               }
           )
       );
@@ -370,35 +364,38 @@ class ChordDrawBarState extends State<ChordDrawBar>{
     return Material(
       color: widget.background,
       elevation: widget.elevation,
-      child: Row(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              padding: widget.padding,
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children:
-                type == InstrumentType.GUITAR?
-                guitChords:
-                (type == InstrumentType.UKULELE?
-                ukulChords:
-                // type == InstrumentType.MANDOLIN?
-                mandChords
-                )
+      child: SizedBox(
+        height: ChordWidget.height(6),
+        child: Row(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                padding: widget.padding,
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                    children:
+                    type == InstrumentType.GUITAR?
+                    guitChords:
+                    (type == InstrumentType.UKULELE?
+                    ukulChords:
+                    // type == InstrumentType.MANDOLIN?
+                    mandChords
+                    )
+                ),
               ),
             ),
-          ),
 
-          if(widget.showLabel)
-            Padding(
-              padding: EdgeInsets.all(Dimen.DEF_MARG),
-              child: RotatedBox(
-                child: Text(instrumentTypeName(type), style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnab_(context))),
-                quarterTurns: 3,
-              ),
-            )
-        ],
+            if(widget.showLabel)
+              Padding(
+                padding: EdgeInsets.all(Dimen.DEF_MARG),
+                child: RotatedBox(
+                  child: Text(instrumentTypeName(type), style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnab_(context))),
+                  quarterTurns: 3,
+                ),
+              )
+          ],
+        ),
       ),
     );
   }

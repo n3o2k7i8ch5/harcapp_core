@@ -10,6 +10,7 @@ const Map<InstrumentType, String> _instrumentTypeName = {
   InstrumentType.MANDOLIN: 'Mandolina'
 };
 
+
 String instrumentTypeName(InstrumentType type) => _instrumentTypeName[type]??'Nie ma takiego';
 
 InstrumentType nextInstrumentType(InstrumentType type){
