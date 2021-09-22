@@ -373,6 +373,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               padding: widget.padding,
               scrollDirection: Axis.horizontal,
               child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children:
                   type == InstrumentType.GUITAR?
                   guitChords:
