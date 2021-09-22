@@ -365,42 +365,36 @@ class ChordDrawBarState extends State<ChordDrawBar>{
     return Material(
       color: widget.background,
       elevation: widget.elevation,
-      child: Center(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  padding: widget.padding,
-                  scrollDirection: Axis.horizontal,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children:
-                        type == InstrumentType.GUITAR?
-                        guitChords:
-                        (type == InstrumentType.UKULELE?
-                        ukulChords:
-                        // type == InstrumentType.MANDOLIN?
-                        mandChords
-                        )
-                    ),
-                  )
-              ),
-            ),
-
-            if(widget.showLabel)
-              Padding(
-                padding: EdgeInsets.all(Dimen.DEF_MARG),
-                child: RotatedBox(
-                  child: Text(instrumentTypeName(type), style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnab_(context))),
-                  quarterTurns: 3,
+      child: Row(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                padding: widget.padding,
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children:
+                    type == InstrumentType.GUITAR?
+                    guitChords:
+                    (type == InstrumentType.UKULELE?
+                    ukulChords:
+                    // type == InstrumentType.MANDOLIN?
+                    mandChords
+                    )
                 ),
-              )
-          ],
-        ),
+            ),
+          ),
+
+          if(widget.showLabel)
+            Padding(
+              padding: EdgeInsets.all(Dimen.DEF_MARG),
+              child: RotatedBox(
+                child: Text(instrumentTypeName(type), style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnab_(context))),
+                quarterTurns: 3,
+              ),
+            )
+        ],
       ),
     );
   }
