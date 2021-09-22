@@ -169,73 +169,71 @@ class ChordWidget extends StatelessWidget{
 
     return SimpleButton(
         onTap: onTap,
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
 
-              Text(
-                  nearestDotPosition==1?
-                  nearestDotPosition.toString():
-                  (nearestDotPosition-1).toString(),
-                  style: AppTextStyle(
-                      fontSize: POSITION_TEXT_HEIGHT,
-                      fontWeight: weight.bold,
-                      color: color??iconEnab_(context)
+            Text(
+                nearestDotPosition==1?
+                nearestDotPosition.toString():
+                (nearestDotPosition-1).toString(),
+                style: AppTextStyle(
+                    fontSize: POSITION_TEXT_HEIGHT,
+                    fontWeight: weight.bold,
+                    color: color??iconEnab_(context)
+                ),
+                textAlign: TextAlign.start
+            ),
+
+            SizedBox(
+              width: size,
+              height: strings!*heightFactor*sizePart,
+              child: Stack(
+                children: [
+
+                  _Fretboard(
+                      size: size,
+                      color: color??iconEnab_(context),
+                      frets: frets,
+                      strings: strings
                   ),
-                  textAlign: TextAlign.start
-              ),
 
-              SizedBox(
-                width: size,
-                height: strings!*heightFactor*sizePart,
-                child: Stack(
-                  children: [
-
-                    _Fretboard(
-                        size: size,
-                        color: color??iconEnab_(context),
-                        frets: frets,
-                        strings: strings
-                    ),
-
-                    if(_chord.bar != 0)
-                      Positioned(
-                        top: 0,
-                        left: (1-heightFactor)*sizePart + (nearestDotPosition == 1?0:sizePart),
-                        child: Container(
-                          width: barFactor*sizePart,
-                          height: strings!*heightFactor*sizePart,
-                          child: Material(
-                            borderRadius: BorderRadius.all(Radius.circular(100)),
-                            elevation: elevation,
-                            color: color??iconEnab_(context),
-                          ),
+                  if(_chord.bar != 0)
+                    Positioned(
+                      top: 0,
+                      left: (1-heightFactor)*sizePart + (nearestDotPosition == 1?0:sizePart),
+                      child: Container(
+                        width: barFactor*sizePart,
+                        height: strings!*heightFactor*sizePart,
+                        child: Material(
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                          elevation: elevation,
+                          color: color??iconEnab_(context),
                         ),
                       ),
+                    ),
 
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: dotsOnString
-                    )
-
-                  ],
-                ),
-              ),
-
-              Text(
-                  chord!.name,
-                  style: AppTextStyle(
-                      fontSize: CHORD_NAME_HEIGHT,
-                      fontWeight: weight.halfBold,
-                      color: color??iconEnab_(context)
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: dotsOnString
                   )
 
-              )
-            ],
-          ),
-        )
+                ],
+              ),
+            ),
+
+            Text(
+                chord!.name,
+                style: AppTextStyle(
+                    fontSize: CHORD_NAME_HEIGHT,
+                    fontWeight: weight.halfBold,
+                    color: color??iconEnab_(context)
+                )
+
+            )
+          ],
+        ),
     );
   }
 
