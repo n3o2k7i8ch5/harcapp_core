@@ -365,7 +365,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
       color: widget.background,
       elevation: widget.elevation,
       child: SizedBox(
-        height: ChordWidget.height(10),
+        height: 200,
         child: Center(
           child: Row(
             children: [
