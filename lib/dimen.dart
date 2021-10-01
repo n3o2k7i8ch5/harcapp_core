@@ -26,6 +26,7 @@ class Dimen{
   static const double TEXT_FIELD_PADD = 16;
 
   static const double LIST_TILE_SEPARATOR = 32;
+  static const double LIST_TILE_LEADING_MARGIN_VAL = 16.0;
 
   static const double FLOATING_BUTTON_MARG = 16;
   static const double FLOATING_BUTTON_SIZE = 56;
