@@ -11,6 +11,7 @@ class AppTextFieldHint extends StatefulWidget{
   final String hint;
   final String? hintTop;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
   final TextStyle? style;
   final TextStyle? hintStyle;
   final TextStyle? counterStyle;
@@ -36,6 +37,7 @@ class AppTextFieldHint extends StatefulWidget{
     required this.hint,
     this.hintTop,
     this.controller,
+    this.focusNode,
     this.style,
     this.hintStyle,
     this.counterStyle,
@@ -134,6 +136,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       textField = TextField(
         style: widget.style,
         controller: controller,
+        focusNode: widget.focusNode,
         onChanged: (text){
           if(controller.text.length<=1)
             setState(() {});
