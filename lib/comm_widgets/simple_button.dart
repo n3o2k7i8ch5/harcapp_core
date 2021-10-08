@@ -61,7 +61,7 @@ class SimpleButton extends StatelessWidget{
 
   static SimpleButton from({
     BuildContext? context,
-    required IconData icon,
+    IconData? icon,
     String? text,
     required void Function()? onTap,
     void Function()? onLongPress,
@@ -73,6 +73,7 @@ class SimpleButton extends StatelessWidget{
     Color? color,
     Color? textColor,
     bool dense: false,
+    weight fontWeight: weight.halfBold,
   }){
 
     assert(textColor != null || context != null, 'Color or context must not be null.');
@@ -87,7 +88,7 @@ class SimpleButton extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            if(iconLeading)
+            if(iconLeading && icon != null)
               Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
 
             if(text != null)
@@ -98,7 +99,7 @@ class SimpleButton extends StatelessWidget{
                 text,
                 style: AppTextStyle(
                   color: textColor??iconEnab_(context!),
-                  fontWeight: weight.halfBold,
+                  fontWeight: fontWeight,
                   fontSize: textSize??(dense?Dimen.TEXT_SIZE_NORMAL:Dimen.TEXT_SIZE_BIG)
                 ),
               ),
@@ -106,7 +107,7 @@ class SimpleButton extends StatelessWidget{
             if(text != null)
               SizedBox(width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
 
-            if(!iconLeading)
+            if(!iconLeading && icon != null)
               Icon(icon, color: textColor??iconEnab_(context!)),
 
           ],

@@ -15,6 +15,7 @@ class AnimatedChildSlider extends StatelessWidget{
   final bool reverse;
   final Alignment alignment;
   final Clip clipBehavior;
+  final bool withOpacity;
 
   const AnimatedChildSlider({
     this.switchInCurve: Curves.easeOutQuad,
@@ -27,6 +28,7 @@ class AnimatedChildSlider extends StatelessWidget{
     this.reverse: false,
     this.alignment: Alignment.center,
     this.clipBehavior: Clip.hardEdge,
+    this.withOpacity: false,
   });
 
   @override
@@ -74,14 +76,22 @@ class AnimatedChildSlider extends StatelessWidget{
           return ClipRect(
             child: SlideTransition(
               position: inAnimation,
-              child: isCenter?Center(child: child):child,
+              child: AnimatedOpacity(
+                duration: duration,
+                opacity: childKeyVal == index?1:0,
+                child: isCenter?Center(child: child):child,
+              ),
             ),
           );
         } else {
           return ClipRect(
             child: SlideTransition(
               position: outAnimation,
-              child: isCenter?Center(child: child):child,
+              child: AnimatedOpacity(
+                duration: duration,
+                opacity: childKeyVal == index?1:0,
+                child: isCenter?Center(child: child):child,
+              ),
             ),
           );
         }
