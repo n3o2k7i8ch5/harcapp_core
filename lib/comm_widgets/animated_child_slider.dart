@@ -77,6 +77,7 @@ class AnimatedChildSlider extends StatelessWidget{
             child: SlideTransition(
               position: inAnimation,
               child: AnimatedOpacity(
+                curve: switchInCurve,
                 duration: Duration(milliseconds: duration.inMilliseconds~/2),
                 opacity: withOpacity?(childKeyVal == index?1:0):1,
                 child: isCenter?Center(child: child):child,
@@ -88,6 +89,7 @@ class AnimatedChildSlider extends StatelessWidget{
             child: SlideTransition(
               position: outAnimation,
               child: AnimatedOpacity(
+                curve: switchOutCurve,
                 duration: Duration(milliseconds: duration.inMilliseconds~/2),
                 opacity: withOpacity?(childKeyVal == index?1:0):1,
                 child: isCenter?Center(child: child):child,
