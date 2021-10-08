@@ -78,7 +78,7 @@ class AnimatedChildSlider extends StatelessWidget{
               position: inAnimation,
               child: AnimatedOpacity(
                 duration: duration,
-                opacity: childKeyVal == index?1:0,
+                opacity: withOpacity?(childKeyVal == index?1:0):1,
                 child: isCenter?Center(child: child):child,
               ),
             ),
@@ -89,7 +89,7 @@ class AnimatedChildSlider extends StatelessWidget{
               position: outAnimation,
               child: AnimatedOpacity(
                 duration: duration,
-                opacity: childKeyVal == index?1:0,
+                opacity: withOpacity?(childKeyVal == index?1:0):1,
                 child: isCenter?Center(child: child):child,
               ),
             ),
