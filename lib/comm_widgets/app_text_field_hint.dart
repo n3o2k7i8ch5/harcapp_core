@@ -134,6 +134,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       );
     else
       textField = TextField(
+        scrollPhysics: BouncingScrollPhysics(),
         style: widget.style,
         controller: controller,
         focusNode: widget.focusNode,
