@@ -21,6 +21,7 @@ class SimpleButton extends StatelessWidget{
   final double elevation;
   final Color? color;
   final Color? colorEnd;
+  final Color? colorSplash;
   final bool enabled;
   final Clip clipBehavior;
 
@@ -34,6 +35,7 @@ class SimpleButton extends StatelessWidget{
     this.elevation: 0,
     this.color,
     this.colorEnd,
+    this.colorSplash,
     this.enabled: true,
     this.clipBehavior: Clip.hardEdge,
     Key? key
@@ -50,6 +52,7 @@ class SimpleButton extends StatelessWidget{
         child: child,
         padding: padding,
       ),
+      splashColor: colorSplash,
     );
 
     if(colorEnd == null)
