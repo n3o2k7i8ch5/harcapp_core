@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 Future<bool> isNetworkAvailable() async {
   var result = await Connectivity().checkConnectivity();
@@ -24,12 +25,15 @@ class ConnectivityProvider extends ChangeNotifier{
 
   late List<void Function(bool)> _onChangedListeners;
 
-  void addChangedListeners(void Function(bool) listener){
-    _onChangedListeners.add(listener);
+  void addChangedListeners_(void Function(bool) listener) => _onChangedListeners.add(listener);
+  void removeChangedListeners_(void Function(bool) listener) => _onChangedListeners.remove(listener);
+
+  static void addChangedListeners(BuildContext context, void Function(bool) listener){
+    Provider.of<ConnectivityProvider>(context, listen: false).addChangedListeners_(listener);
   }
 
-  void removeChangedListeners(void Function(bool) listener){
-    _onChangedListeners.remove(listener);
+  static void removeChangedListeners(BuildContext context, void Function(bool) listener){
+    Provider.of<ConnectivityProvider>(context, listen: false).removeChangedListeners_(listener);
   }
 
   ConnectivityProvider(){
