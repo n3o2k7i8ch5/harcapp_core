@@ -22,19 +22,36 @@ class ConnectivityProvider extends ChangeNotifier{
 
   bool get connected => _connected;
 
+  late List<void Function(bool)> _onChangedListeners;
+
+  void addChangedListeners(void Function(bool) listener){
+    _onChangedListeners.add(listener);
+  }
+
+  void removeChangedListeners(void Function(bool) listener){
+    _onChangedListeners.remove(listener);
+  }
+
   ConnectivityProvider(){
     _connected = true;
+    _onChangedListeners = [];
     Connectivity().checkConnectivity().then((ConnectivityResult value){
       bool _connectedNew = value != ConnectivityResult.none;
       if(_connectedNew != _connected){
         _connected = _connectedNew;
-        notifyListeners();
+        notify();
       }
     });
     Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       _connected = result != ConnectivityResult.none;
-      notifyListeners();
+      notify();
     });
+  }
+
+  void notify(){
+    notifyListeners();
+    for(void Function(bool) listener in _onChangedListeners)
+      listener.call(_connected);
   }
 
 }
