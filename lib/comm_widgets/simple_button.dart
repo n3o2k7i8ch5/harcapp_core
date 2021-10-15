@@ -93,6 +93,7 @@ class SimpleButton extends StatelessWidget{
     double elevation: 0,
     Color? color,
     Color? textColor,
+    Color? colorSplash,
     bool dense: false,
     weight fontWeight: weight.halfBold,
   }){
@@ -135,6 +136,7 @@ class SimpleButton extends StatelessWidget{
         ),
         onTap: onTap,
         onLongPress: onLongPress,
+        colorSplash: colorSplash,
     );
 
   }
