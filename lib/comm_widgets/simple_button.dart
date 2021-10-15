@@ -5,6 +5,7 @@ import 'package:harcapp_core/comm_widgets/app_text.dart';
 
 import '../dimen.dart';
 import 'app_card.dart';
+import 'gradient_widget.dart';
 
 class SimpleButton extends StatelessWidget{
 
@@ -19,6 +20,7 @@ class SimpleButton extends StatelessWidget{
   final double radius;
   final double elevation;
   final Color? color;
+  final Color? colorEnd;
   final bool enabled;
   final Clip clipBehavior;
 
@@ -31,6 +33,7 @@ class SimpleButton extends StatelessWidget{
     this.radius: AppCard.DEF_RADIUS,
     this.elevation: 0,
     this.color,
+    this.colorEnd,
     this.enabled: true,
     this.clipBehavior: Clip.hardEdge,
     Key? key
@@ -39,24 +42,36 @@ class SimpleButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    return Padding(
-      padding: margin,
-      child: Material(
-        clipBehavior: clipBehavior,
-        borderRadius: BorderRadius.circular(radius),
-        color: color??Colors.transparent,
-        elevation: elevation,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(radius),
-          onTap: enabled?onTap:null,
-          onLongPress: onLongPress,
-          child: Padding(
-            child: child,
-            padding: padding,
-          ),
-        ),
+    Widget _child = InkWell(
+      borderRadius: BorderRadius.circular(radius),
+      onTap: enabled?onTap:null,
+      onLongPress: onLongPress,
+      child: Padding(
+        child: child,
+        padding: padding,
       ),
     );
+
+    if(colorEnd == null)
+      return Padding(
+        padding: margin,
+        child: Material(
+          clipBehavior: clipBehavior,
+          borderRadius: BorderRadius.circular(radius),
+          color: color??Colors.transparent,
+          elevation: elevation,
+          child: _child
+        ),
+      );
+    else
+      return GradientWidget(
+        clipBehavior: clipBehavior,
+        colorStart: color??Colors.transparent,
+        colorEnd: colorEnd??color??Colors.transparent,
+        radius: radius,
+        elevation: elevation,
+        child: _child,
+      );
   }
 
   static SimpleButton from({
