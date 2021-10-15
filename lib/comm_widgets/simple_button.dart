@@ -64,13 +64,16 @@ class SimpleButton extends StatelessWidget{
         ),
       );
     else
-      return GradientWidget(
-        clipBehavior: clipBehavior,
-        colorStart: color??Colors.transparent,
-        colorEnd: colorEnd??color??Colors.transparent,
-        radius: radius,
-        elevation: elevation,
-        child: _child,
+      return Padding(
+        padding: margin,
+        child: GradientWidget(
+          clipBehavior: clipBehavior,
+          colorStart: color??Colors.transparent,
+          colorEnd: colorEnd??color??Colors.transparent,
+          radius: radius,
+          elevation: elevation,
+          child: _child,
+        ),
       );
   }
 

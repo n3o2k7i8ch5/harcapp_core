@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 
-class GradientWidget extends StatelessWidget{
+class GradientWidget extends StatelessWidget {
 
   static const Duration DEF_DURATION = Duration(milliseconds: 500);
   static const Curve DEF_CURVE = Curves.linear;
@@ -33,12 +33,9 @@ class GradientWidget extends StatelessWidget{
   });
 
   @override
-  Widget build(BuildContext context) => PhysicalModel(
-    clipBehavior: clipBehavior??Clip.antiAlias,
-    borderRadius: BorderRadius.circular(radius),
-    color: Colors.transparent,
-    elevation: elevation,
-    child: AnimatedContainer(
+  Widget build(BuildContext context){
+
+    Widget _child = AnimatedContainer(
       clipBehavior: clipBehavior??Clip.antiAlias,
       width: width,
       height: height,
@@ -55,7 +52,18 @@ class GradientWidget extends StatelessWidget{
       duration: duration??DEF_DURATION,
       curve: curve??DEF_CURVE,
       child: Material(child: child??Container(), color: Colors.transparent),
-    ),
-  );
+    );
+
+    if(elevation == 0)
+      return _child;
+
+    return PhysicalModel(
+      clipBehavior: clipBehavior ?? Clip.antiAlias,
+      borderRadius: BorderRadius.circular(radius),
+      color: Colors.transparent,
+      elevation: elevation,
+      child: _child,
+    );
+}
 
 }
