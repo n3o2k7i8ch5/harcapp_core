@@ -24,6 +24,7 @@ class SimpleButton extends StatelessWidget{
   final Color? colorSplash;
   final bool enabled;
   final Clip clipBehavior;
+  final Duration? duration;
 
   const SimpleButton({
     required this.child,
@@ -38,6 +39,7 @@ class SimpleButton extends StatelessWidget{
     this.colorSplash,
     this.enabled: true,
     this.clipBehavior: Clip.hardEdge,
+    this.duration,
     Key? key
   }):super(key: key);
 
@@ -76,6 +78,7 @@ class SimpleButton extends StatelessWidget{
           radius: radius,
           elevation: elevation,
           child: _child,
+          duration: duration,
         ),
       );
   }
