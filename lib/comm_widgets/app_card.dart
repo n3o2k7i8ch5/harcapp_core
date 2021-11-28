@@ -46,7 +46,7 @@ class AppCard extends StatelessWidget{
     this.radius: DEF_RADIUS,
     this.borderRadius,
     this.elevetionColor: Colors.black,
-    this.clipBehavior: Clip.hardEdge,
+    this.clipBehavior: Clip.antiAliasWithSaveLayer,
     //this.transMilis: DEF_TRANS_MILIS
   }):super(key: key);
 
