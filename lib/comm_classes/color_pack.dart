@@ -58,6 +58,7 @@ abstract class ColorPack{
   static const DEF_ICON_DISAB = Colors.black38;
 
   static const DEF_CARD = AppColors.white_dark;
+  static const DEF_BACKGROUND = Colors.white;
 
   const ColorPack();
 
@@ -84,7 +85,7 @@ abstract class ColorPack{
   //Color get colorCard => mainColor;
   //Color get colorBackground => darkColor;
 
-  Color get background => Colors.white;
+  Color get background => DEF_BACKGROUND;
   Color get backgroundIcon => Colors.black.withOpacity(0.05);
 
   //Color get mainColor;
