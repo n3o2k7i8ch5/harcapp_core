@@ -99,11 +99,13 @@ class SimpleButton extends StatelessWidget{
     Color? colorSplash,
     bool dense: false,
     weight fontWeight: weight.halfBold,
+    Key? key
   }){
 
     assert(textColor != null || context != null, 'Color or context must not be null.');
 
     return SimpleButton(
+      key: key,
       elevation: elevation,
       color: color,
       radius: AppCard.BIG_RADIUS,
