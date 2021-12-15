@@ -100,11 +100,12 @@ class MultiTextField extends StatefulWidget{
   final String? hint;
   final bool linear;
   final Color? accentColor;
+  final TextCapitalization textCapitalization;
   final void Function(List<String>)? onAnyChanged;
   final void Function(int, String)? onChanged;
   final void Function()? onRemoved;
 
-  const MultiTextField({this.controller, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.onAnyChanged, this.onChanged, this.onRemoved});
+  const MultiTextField({this.controller, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.textCapitalization: TextCapitalization.none, this.onAnyChanged, this.onChanged, this.onRemoved});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -121,6 +122,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   String? get hint => widget.hint;
   bool get linear => widget.linear;
   Color? get accentColor => widget.accentColor;
+  TextCapitalization get textCapitalization => widget.textCapitalization;
   void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
   void Function(int, String)? get onChanged => widget.onChanged;
   void Function()? get onRemoved => widget.onRemoved;
@@ -145,6 +147,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       children.add(Item(
         controller: controller![i],
         hint: hint,
+        textCapitalization: textCapitalization,
         removable: controller!.length>minCount,
         onChanged: (text){
           if(i == controller!.length-1)
@@ -231,10 +234,11 @@ class Item extends StatefulWidget{
   final TextEditingController controller;
   final String? hint;
   final bool removable;
+  final TextCapitalization textCapitalization;
   final void Function()? onRemoveTap;
   final void Function(String)? onChanged;
 
-  const Item({required this.controller, required this.hint, this.removable: true, this.onRemoveTap, this.onChanged, Key? key}):super(key: key);
+  const Item({required this.controller, required this.hint, this.removable: true, this.textCapitalization: TextCapitalization.none, this.onRemoveTap, this.onChanged, Key? key}):super(key: key);
 
   @override
   State<StatefulWidget> createState() => ItemState();
@@ -250,6 +254,7 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
   TextEditingController get controller => widget.controller;
   String? get hint => widget.hint;
   bool get removable => widget.removable;
+  TextCapitalization get textCapitalization => widget.textCapitalization;
   void Function()? get onRemoveTap => widget.onRemoveTap;
   void Function(String)? get onChanged => widget.onChanged;
 
@@ -291,6 +296,7 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
                   style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
                   minLines: 1,
                   maxLines: 1,
+                  textCapitalization: textCapitalization,
                   decoration: InputDecoration(
                       isDense: true,
                       isCollapsed: true,

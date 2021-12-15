@@ -32,6 +32,7 @@ class AppTextFieldHint extends StatefulWidget{
   //final List<String> initVals;
   final bool multiExpanded;
   final MultiTextFieldController? multiController;
+  final TextCapitalization textCapitalization;
 
   const AppTextFieldHint({
     required this.hint,
@@ -56,6 +57,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.multiHintTop,
     this.multiExpanded: false,
     this.multiController,
+    this.textCapitalization: TextCapitalization.none,
     Key? key
   }):super(key: key);
 
@@ -108,6 +110,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         controller: multiController,
         expanded: multiExpanded,
         hint: hint,
+        textCapitalization: widget.textCapitalization,
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
       );
@@ -136,6 +139,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         enabled: widget.enabled,
         keyboardType: widget.keyboardType,
         inputFormatters: widget.inputFormatters,
+        textCapitalization: widget.textCapitalization,
       );
 
     return Stack(
