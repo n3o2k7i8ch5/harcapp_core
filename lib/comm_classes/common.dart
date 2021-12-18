@@ -116,6 +116,6 @@ String dateToString(DateTime date, {bool showYear=true, bool showMonth=true, boo
   String minutes = (date.minute<10?'0':'') + date.minute.toString();
   String seconds = (date.second<10?'0':'') + date.second.toString();
 
-  return '$day $month $year, $hours:$minutes:$seconds';
+  return '$day $month $year $hours:$minutes:$seconds';
 
 }
