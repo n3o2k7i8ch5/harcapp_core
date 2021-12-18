@@ -61,7 +61,7 @@ String dateToString(DateTime date, {bool showYear=true, bool showMonth=true, boo
 
   String day = '';
   if(showDay)
-    day = date.day.toString() + ' ';
+    day = date.day.toString();
 
   String month = '';
   if(showMonth) {
@@ -103,7 +103,6 @@ String dateToString(DateTime date, {bool showYear=true, bool showMonth=true, boo
         month = shortMonth ? 'gru' : (showDay ? 'grudnia' : 'grudzień');
         break;
     }
-    month += ' ';
   }
 
   String year = '';
@@ -111,7 +110,7 @@ String dateToString(DateTime date, {bool showYear=true, bool showMonth=true, boo
     year = date.year.toString() + ' $yearAbbr';
 
   if(!withTime)
-    return '$day$month$year';
+    return '$day $month $year';
 
   String hours = (date.hour<10?'0':'') + date.hour.toString();
   String minutes = (date.minute<10?'0':'') + date.minute.toString();
