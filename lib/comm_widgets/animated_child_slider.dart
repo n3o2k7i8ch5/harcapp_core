@@ -74,7 +74,6 @@ class AnimatedChildSlider extends StatelessWidget{
 
         if (childKeyVal == ValueKey(index).value) {
           return ClipRect(
-            clipBehavior: clipBehavior,
             child: SlideTransition(
               position: inAnimation,
               child: AnimatedOpacity(
@@ -87,7 +86,6 @@ class AnimatedChildSlider extends StatelessWidget{
           );
         } else {
           return ClipRect(
-            clipBehavior: clipBehavior,
             child: SlideTransition(
               position: outAnimation,
               child: AnimatedOpacity(
