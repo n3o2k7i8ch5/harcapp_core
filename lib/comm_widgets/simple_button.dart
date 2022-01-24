@@ -149,7 +149,7 @@ class SimpleButton extends StatelessWidget{
             ),
           ),
 
-        if(text != null)
+        if(text != null && !iconLeading)
           SizedBox(height: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
 
         if(!iconLeading && icon != null)
