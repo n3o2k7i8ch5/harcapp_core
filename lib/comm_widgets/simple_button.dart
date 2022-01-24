@@ -99,10 +99,36 @@ class SimpleButton extends StatelessWidget{
     Color? colorSplash,
     bool dense: false,
     weight fontWeight: weight.halfBold,
+    Axis direction: Axis.horizontal,
     Key? key
   }){
 
     assert(textColor != null || context != null, 'Color or context must not be null.');
+
+    List<Widget> children = [
+      if(iconLeading && icon != null)
+        Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
+
+      if(text != null)
+        SizedBox(height: Dimen.ICON_SIZE,width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
+
+      if(text != null)
+        Text(
+          text,
+          style: AppTextStyle(
+              color: textColor??iconEnab_(context!),
+              fontWeight: fontWeight,
+              fontSize: textSize??(dense?Dimen.TEXT_SIZE_NORMAL:Dimen.TEXT_SIZE_BIG)
+          ),
+        ),
+
+      if(text != null)
+        SizedBox(width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
+
+      if(!iconLeading && icon != null)
+        Icon(icon, color: textColor??iconEnab_(context!)),
+
+    ];
 
     return SimpleButton(
       key: key,
@@ -111,37 +137,21 @@ class SimpleButton extends StatelessWidget{
       radius: AppCard.BIG_RADIUS,
       margin: margin,
       padding: EdgeInsets.all(Dimen.ICON_MARG),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if(iconLeading && icon != null)
-              Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
-
-            if(text != null)
-              SizedBox(height: Dimen.ICON_SIZE,width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
-
-            if(text != null)
-              Text(
-                text,
-                style: AppTextStyle(
-                  color: textColor??iconEnab_(context!),
-                  fontWeight: fontWeight,
-                  fontSize: textSize??(dense?Dimen.TEXT_SIZE_NORMAL:Dimen.TEXT_SIZE_BIG)
-                ),
-              ),
-
-            if(text != null)
-              SizedBox(width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
-
-            if(!iconLeading && icon != null)
-              Icon(icon, color: textColor??iconEnab_(context!)),
-
-          ],
-        ),
-        onTap: onTap,
-        onLongPress: onLongPress,
-        colorSplash: colorSplash,
+      child:
+      direction==Axis.horizontal?
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: children,
+      ):
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: children,
+      ),
+      onTap: onTap,
+      onLongPress: onLongPress,
+      colorSplash: colorSplash,
     );
 
   }
