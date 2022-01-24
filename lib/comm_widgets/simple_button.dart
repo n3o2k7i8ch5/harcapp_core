@@ -109,8 +109,8 @@ class SimpleButton extends StatelessWidget{
       if(iconLeading && icon != null)
         Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
 
-      if(text != null)
-        SizedBox(height: Dimen.ICON_SIZE,width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
+      if(text != null && direction == Axis.horizontal)
+        SizedBox(height: Dimen.ICON_SIZE, width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
 
       if(text != null)
         Text(
