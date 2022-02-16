@@ -1,5 +1,4 @@
 
-
 import 'package:harcapp_core/comm_classes/common.dart';
 
 class ChordDraw{
@@ -17,7 +16,7 @@ class ChordDraw{
     chords = chords[chords.length-1].split('\n');
     chord = chords[chords.length-1];
 
-    String lastChar = chord.substring(chord.length - 1, chord.length);
+    String lastChar = chord.substring(chord.length - 1);
 
     bool hasPlus;
     if(lastChar == '+') {
@@ -29,6 +28,7 @@ class ChordDraw{
     if(isDigit(lastChar)) {
       additionalNumber = lastChar;
       chord = chord.substring(0, chord.length-1);
+      lastChar = chord.substring(chord.length - 1);
     }else additionalNumber = null;
 
     //Check Dur-Mol
@@ -123,7 +123,4 @@ class ChordDraw{
     return chordStr;
   }
 
-  int getChordCode(){return chordCode;}
-  bool getIsDur(){return isDur;}
-  String? getAdditionalNumber(){return additionalNumber;}
 }
