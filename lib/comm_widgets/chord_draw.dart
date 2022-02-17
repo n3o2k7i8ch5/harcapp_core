@@ -22,13 +22,13 @@ class ChordDraw{
     if(lastChar == '+') {
       hasPlus = true;
       chord = chord.substring(0, chord.length-1);
+      lastChar = chord.substring(chord.length - 1);
     }else hasPlus = false;
 
     String? additionalNumber;
     if(isDigit(lastChar)) {
       additionalNumber = lastChar;
       chord = chord.substring(0, chord.length-1);
-      lastChar = chord.substring(chord.length - 1);
     }else additionalNumber = null;
 
     //Check Dur-Mol
