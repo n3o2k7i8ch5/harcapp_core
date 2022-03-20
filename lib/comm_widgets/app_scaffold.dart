@@ -16,28 +16,27 @@ class AppScaffold extends StatelessWidget{
   final Widget? floatingActionButton;
   final Color? backgroundColor;
   final bool avoidKeyboard;
+  final bool extendBody;
 
-  const AppScaffold({this.scaffoldKey, this.appBar, this.drawer, this.body, this.backgroundColor, this.bottomNavigationBar, this.floatingActionButton, this.avoidKeyboard: true});
+  const AppScaffold({this.scaffoldKey, this.appBar, this.drawer, this.body, this.backgroundColor, this.bottomNavigationBar, this.floatingActionButton, this.avoidKeyboard: true, extendBody: false});
 
   @override
-  Widget build(BuildContext context) {
-
-      return MediaQuery.removePadding(
-          context: context,
-          child: Scaffold(
-            key: scaffoldKey,
-            appBar: appBar,
-            drawer: drawer,
-            body: SafeArea(
-              child: body!,
-            ),
-            backgroundColor: backgroundColor,
-            bottomNavigationBar: bottomNavigationBar,
-            floatingActionButton: floatingActionButton,
-            resizeToAvoidBottomInset: avoidKeyboard,
-          )
-      );
-  }
+  Widget build(BuildContext context) => MediaQuery.removePadding(
+      context: context,
+      child: Scaffold(
+        key: scaffoldKey,
+        appBar: appBar,
+        drawer: drawer,
+        body: SafeArea(
+          child: body!,
+        ),
+        backgroundColor: backgroundColor,
+        bottomNavigationBar: bottomNavigationBar,
+        floatingActionButton: floatingActionButton,
+        resizeToAvoidBottomInset: avoidKeyboard,
+        extendBody: extendBody,
+      )
+  );
 
   static void showMessage(BuildContext context, String text, {String buttonText:'Ok', Function(BuildContext)? onButtonPressed, Color? background, String? tag, Duration duration: const Duration(seconds: 3)}){
 
