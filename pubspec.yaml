@@ -12,10 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  material_design_icons_flutter: ^5.0.6295
+  material_design_icons_flutter: ^5.0.6595
   connectivity: ^3.0.6
-  fluttertoast: ^8.0.7
-  provider: ^6.0.0
+  fluttertoast: ^8.0.9
+  provider: ^6.0.2
   tuple: ^2.0.0
 
 dev_dependencies:
