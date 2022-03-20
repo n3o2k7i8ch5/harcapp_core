@@ -18,7 +18,7 @@ class AppScaffold extends StatelessWidget{
   final bool avoidKeyboard;
   final bool extendBody;
 
-  const AppScaffold({this.scaffoldKey, this.appBar, this.drawer, this.body, this.backgroundColor, this.bottomNavigationBar, this.floatingActionButton, this.avoidKeyboard: true, extendBody: false});
+  const AppScaffold({this.scaffoldKey, this.appBar, this.drawer, this.body, this.backgroundColor, this.bottomNavigationBar, this.floatingActionButton, this.avoidKeyboard: true, this.extendBody: false});
 
   @override
   Widget build(BuildContext context) => MediaQuery.removePadding(
