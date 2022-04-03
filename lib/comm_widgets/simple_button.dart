@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
-import 'package:harcapp_core/comm_widgets/app_text.dart';
 
 import '../dimen.dart';
 import 'app_card.dart';
@@ -95,6 +94,7 @@ class SimpleButton extends StatelessWidget{
     bool iconLeading = true,
     double elevation: 0,
     Color? color,
+    Color? colorEnd,
     Color? textColor,
     Color? colorSplash,
     bool dense: false,
@@ -160,6 +160,7 @@ class SimpleButton extends StatelessWidget{
       key: key,
       elevation: elevation,
       color: color,
+      colorEnd: colorEnd,
       radius: AppCard.BIG_RADIUS,
       margin: margin,
       padding: EdgeInsets.all(Dimen.ICON_MARG),
