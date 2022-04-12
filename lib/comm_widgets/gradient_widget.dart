@@ -9,6 +9,7 @@ class GradientWidget extends StatelessWidget {
   final Color colorStart;
   final Color colorEnd;
   final Widget? child;
+  final BorderRadius? borderRadius;
   final double radius;
   final double elevation;
   final BoxShape? shape;
@@ -23,6 +24,7 @@ class GradientWidget extends StatelessWidget {
     required this.colorStart,
     required this.colorEnd,
     this.child,
+    this.borderRadius,
     this.radius = AppCard.DEF_RADIUS,
     this.elevation = 0,
     this.shape,
@@ -55,7 +57,7 @@ class GradientWidget extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         shape: shape??BoxShape.rectangle,
-        borderRadius: shape!=null?null:BorderRadius.circular(radius),
+        borderRadius: shape!=null?null:borderRadius??BorderRadius.circular(radius),
         gradient: LinearGradient(
           begin: alignment,
           end: oppositeAlignment, // 10% of the width, so there are ten blinds.
