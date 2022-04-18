@@ -80,6 +80,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   String get multiHintTop => widget.multiHintTop??hintTop;
   bool get multiExpanded => widget.multiExpanded;
 
+  TextStyle get style => widget.style??AppTextStyle(color: textEnab_(context));
+  TextStyle get hintStyle => widget.hintStyle??widget.style?.copyWith(color: hintEnab_(context))??AppTextStyle(color: hintEnab_(context));
+
   void onChangedListener(int index, String text) {
     widget.onChanged?.call(index, text);
   }
@@ -117,7 +120,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     else
       textField = TextField(
         scrollPhysics: BouncingScrollPhysics(),
-        style: widget.style,
+        style: style,
         controller: controller,
         focusNode: widget.focusNode,
         onChanged: (text){
@@ -128,9 +131,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           onAnyChangedListener([text]);
         },
         decoration: InputDecoration(
-          counterStyle: widget.counterStyle??TextStyle(color: hintEnab_(context)),
+          counterStyle: widget.counterStyle??AppTextStyle(color: hintEnab_(context)),
           hintText: hint,
-          hintStyle: widget.hintStyle??widget.style,
+          hintStyle: hintStyle,
           border: widget.showUnderline?null:InputBorder.none,
         ),
         maxLength: widget.maxLength,
