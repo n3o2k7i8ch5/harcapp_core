@@ -54,7 +54,7 @@ bool isDigit(String string){
 
 void post(Function function) => WidgetsBinding.instance!.addPostFrameCallback((_) => function());
 
-String dateToString(DateTime date, {bool showYear=true, bool showMonth=true, bool showDay=true, bool withTime=false, bool shortMonth=false, String yearAbbr='r.'}){
+String dateToString(DateTime? date, {bool showYear=true, bool showMonth=true, bool showDay=true, bool withTime=false, bool shortMonth=false, String yearAbbr='r.'}){
 
   if(date == null)
     return '-';
