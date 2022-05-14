@@ -101,15 +101,10 @@ class CircularCheckbox extends StatefulWidget {
     this.autofocus = false,
     this.shape,
     this.side,
-  }) : assert(tristate != null),
-        assert(tristate || value != null),
-        assert(autofocus != null),
-        super(key: key);
+  }) : super(key: key);
 
   /// Whether this checkbox is checked.
-  ///
-  /// This property must not be null.
-  final bool? value;
+  final bool value;
 
   /// Called when the value of the checkbox should change.
   ///
