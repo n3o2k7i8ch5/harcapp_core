@@ -16,7 +16,7 @@ class AppTextFieldHint extends StatefulWidget{
   final TextStyle? hintStyle;
   final TextStyle? counterStyle;
   final int? maxLength;
-  final int maxLines;
+  final int? maxLines;
   final bool showUnderline;
   final Function(List<String>)? onAnyChanged;
   final Function(int, String)? onChanged;
