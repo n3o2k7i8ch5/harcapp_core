@@ -1,8 +1,11 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 import 'color_pack.dart';
 
 class ColorPackProvider extends ChangeNotifier{
+
+  static ColorPackProvider of(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false);
 
   late bool Function() isDark;
   ColorPack? _colorPackDark;
