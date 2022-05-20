@@ -60,6 +60,7 @@ String dateToString(
       bool showMonth=true,
       bool showDay=true,
       bool withTime=false,
+      String dateTimeSep=' ',
       bool showSeconds=false,
       bool shortMonth=false,
       String yearAbbr='r.'
@@ -127,10 +128,10 @@ String dateToString(
   String minutes = (date.minute<10?'0':'') + date.minute.toString();
 
   if(!showSeconds)
-    return '$day$month$year $hours:$minutes'.trimLeft();
+    return '$day$month$year$dateTimeSep$hours:$minutes'.trimLeft();
 
   String seconds = (date.second<10?'0':'') + date.second.toString();
 
-  return '$day$month$year $hours:$minutes:$seconds'.trimLeft();
+  return '$day$month$year$dateTimeSep$hours:$minutes:$seconds'.trimLeft();
 
 }
