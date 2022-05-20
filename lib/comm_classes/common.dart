@@ -114,21 +114,23 @@ String dateToString(
     }
   }
 
+  month = ' $month';
+
   String year = '';
   if(showYear)
-    year = date.year.toString() + ' $yearAbbr';
+    year = ' ' + date.year.toString() + ' $yearAbbr';
 
   if(!withTime)
-    return '$day $month $year'.trimLeft();
+    return '$day$month$year'.trimLeft();
 
   String hours = (date.hour<10?'0':'') + date.hour.toString();
   String minutes = (date.minute<10?'0':'') + date.minute.toString();
 
   if(!showSeconds)
-    return '$day $month $year $hours:$minutes'.trimLeft();
+    return '$day$month$year $hours:$minutes'.trimLeft();
 
   String seconds = (date.second<10?'0':'') + date.second.toString();
 
-  return '$day $month $year $hours:$minutes:$seconds'.trimLeft();
+  return '$day$month$year $hours:$minutes:$seconds'.trimLeft();
 
 }
