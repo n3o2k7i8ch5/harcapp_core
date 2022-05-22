@@ -95,6 +95,7 @@ class SimpleButton extends StatelessWidget{
     double elevation: 0,
     Color? color,
     Color? colorEnd,
+    Color? iconColor,
     Color? textColor,
     Color? colorSplash,
     bool dense: false,
@@ -103,13 +104,13 @@ class SimpleButton extends StatelessWidget{
     Key? key
   }){
 
-    assert(textColor != null || context != null, 'Color or context must not be null.');
+    assert(iconColor != null || textColor != null || context != null, 'Color or context must not be null.');
 
     List<Widget> children;
 
     if(direction == Axis.horizontal) children = [
       if(iconLeading && icon != null)
-        Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
+        Icon(icon, color: iconColor??textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
 
       if(text != null)
         SizedBox(height: Dimen.ICON_SIZE, width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
@@ -118,7 +119,7 @@ class SimpleButton extends StatelessWidget{
         Text(
           text,
           style: AppTextStyle(
-              color: textColor??iconEnab_(context!),
+              color: textColor??iconColor??iconEnab_(context!),
               fontWeight: fontWeight,
               fontSize: textSize??(dense?Dimen.TEXT_SIZE_NORMAL:Dimen.TEXT_SIZE_BIG)
           ),
