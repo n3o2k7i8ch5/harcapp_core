@@ -29,8 +29,8 @@ class SimpleButton extends StatelessWidget{
     required this.child,
     required this.onTap,
     this.onLongPress,
-    this.padding: const EdgeInsets.all(DEF_PADDING),
-    this.margin: const EdgeInsets.all(DEF_MARG),
+    this.padding: EdgeInsets.zero,
+    this.margin: EdgeInsets.zero,
     this.radius: AppCard.DEF_RADIUS,
     this.elevation: 0,
     this.color,
@@ -45,41 +45,44 @@ class SimpleButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    Widget _child = InkWell(
+    Widget child = InkWell(
       borderRadius: BorderRadius.circular(radius),
       onTap: enabled?onTap:null,
       onLongPress: onLongPress,
       child: Padding(
-        child: child,
+        child: this.child,
         padding: padding,
       ),
       splashColor: colorSplash,
     );
 
     if(colorEnd == null)
-      return Padding(
-        padding: margin,
-        child: Material(
-          clipBehavior: clipBehavior,
-          borderRadius: BorderRadius.circular(radius),
-          color: color??Colors.transparent,
-          elevation: elevation,
-          child: _child
-        ),
+      child = Material(
+        clipBehavior: clipBehavior,
+        borderRadius: BorderRadius.circular(radius),
+        color: color??Colors.transparent,
+        elevation: elevation,
+        child: child
       );
     else
-      return Padding(
-        padding: margin,
-        child: GradientWidget(
-          clipBehavior: clipBehavior,
-          colorStart: color??Colors.transparent,
-          colorEnd: colorEnd??color??Colors.transparent,
-          radius: radius,
-          elevation: elevation,
-          child: _child,
-          duration: duration,
-        ),
+      child = GradientWidget(
+        clipBehavior: clipBehavior,
+        colorStart: color??Colors.transparent,
+        colorEnd: colorEnd??color??Colors.transparent,
+        radius: radius,
+        elevation: elevation,
+        child: child,
+        duration: duration,
       );
+
+    if(margin != EdgeInsets.zero)
+      child = Padding(
+        padding: margin,
+        child: child
+      );
+
+    return child;
+
   }
 
   static SimpleButton from({
