@@ -16,7 +16,8 @@ class SimpleButton extends StatelessWidget{
   final void Function()? onLongPress;
   final EdgeInsets padding;
   final EdgeInsets margin;
-  final double radius;
+  final double? radius;
+  final BorderRadius? borderRadius;
   final double elevation;
   final Color? color;
   final Color? colorEnd;
@@ -31,7 +32,8 @@ class SimpleButton extends StatelessWidget{
     this.onLongPress,
     this.padding: EdgeInsets.zero,
     this.margin: EdgeInsets.zero,
-    this.radius: AppCard.DEF_RADIUS,
+    this.radius,
+    this.borderRadius,
     this.elevation: 0,
     this.color,
     this.colorEnd,
@@ -46,7 +48,7 @@ class SimpleButton extends StatelessWidget{
   Widget build(BuildContext context) {
 
     Widget child = InkWell(
-      borderRadius: BorderRadius.circular(radius),
+      borderRadius: borderRadius??BorderRadius.circular(radius??AppCard.DEF_RADIUS),
       onTap: enabled?onTap:null,
       onLongPress: onLongPress,
       child: Padding(
@@ -59,7 +61,7 @@ class SimpleButton extends StatelessWidget{
     if(colorEnd == null)
       child = Material(
         clipBehavior: clipBehavior,
-        borderRadius: BorderRadius.circular(radius),
+        borderRadius: borderRadius??BorderRadius.circular(radius??AppCard.DEF_RADIUS),
         color: color??Colors.transparent,
         elevation: elevation,
         child: child
@@ -69,7 +71,8 @@ class SimpleButton extends StatelessWidget{
         clipBehavior: clipBehavior,
         colorStart: color??Colors.transparent,
         colorEnd: colorEnd??color??Colors.transparent,
-        radius: radius,
+        borderRadius: borderRadius,
+        radius: radius??AppCard.DEF_RADIUS,
         elevation: elevation,
         child: child,
         duration: duration,
