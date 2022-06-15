@@ -30,7 +30,7 @@ Color? defCardElevation(BuildContext context) => Theme.of(context).cardTheme.sha
 Color background_(BuildContext context) => Theme.of(context).backgroundColor;
 Color backgroundIcon_(BuildContext context) => Theme.of(context).backgroundIcon(context);
 
-Color accent_(BuildContext context) => Theme.of(context).colorScheme.secondary;// Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentColor;
+Color accent_(BuildContext context) => Theme.of(context).accentColor;// Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentColor;
 Color? accentIcon_(BuildContext context) => Theme.of(context).accentIconTheme.color;//Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentIconColor;
 
 Color iconEnab_(BuildContext context) => Theme.of(context).iconEnabled(context);
@@ -194,7 +194,10 @@ abstract class ColorPack{
     primaryColor: accentColor,
     primaryColorDark: accentColor,
     primaryColorLight: accentColor,
-    colorScheme: ColorScheme.fromSwatch().copyWith(secondary: accentColor),
+    accentColor: accentColor,
+    accentIconTheme: IconThemeData(
+        color: accentIconColor
+    ),
     accentTextTheme: TextTheme().apply(
         displayColor: accentIconColor,
         bodyColor: accentIconColor
