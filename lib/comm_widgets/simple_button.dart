@@ -98,6 +98,8 @@ class SimpleButton extends StatelessWidget{
     double? textSize,
     EdgeInsets margin = const EdgeInsets.all(DEF_MARG),
     bool iconLeading = true,
+    double? radius,
+    BorderRadius? borderRadius,
     double elevation: 0,
     Color? color,
     Color? colorEnd,
@@ -168,9 +170,10 @@ class SimpleButton extends StatelessWidget{
       elevation: elevation,
       color: color,
       colorEnd: colorEnd,
-      radius: AppCard.BIG_RADIUS,
+      radius: radius??AppCard.BIG_RADIUS,
       margin: margin,
       padding: EdgeInsets.all(Dimen.ICON_MARG),
+      borderRadius: borderRadius,
       child:
       direction==Axis.horizontal?
       Row(
