@@ -43,6 +43,14 @@ List<String> remPolCharsList(List<String> strings){
   return result;
 }
 
+List<String> remSpecCharsList(List<String> strings){
+  List<String> result = [];
+  for(String string in strings)
+    result.add(remSpecChars(string));
+
+  return result;
+}
+
 bool isDigit(String string){
   try {
     int.parse(string);
@@ -52,7 +60,7 @@ bool isDigit(String string){
   }
 }
 
-void post(Function function) => WidgetsBinding.instance!.addPostFrameCallback((_) => function());
+void post(Function function) => WidgetsBinding.instance.addPostFrameCallback((_) => function());
 
 String dateToString(DateTime date, {bool showYear=true, bool showMonth=true, bool showDay=true, bool withTime=false, bool shortMonth=false, String yearAbbr='r.'}){
 
