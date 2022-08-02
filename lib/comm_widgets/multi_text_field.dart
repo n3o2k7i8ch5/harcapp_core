@@ -103,7 +103,7 @@ class MultiTextField extends StatefulWidget{
   final TextCapitalization textCapitalization;
   final void Function(List<String>)? onAnyChanged;
   final void Function(int, String)? onChanged;
-  final void Function()? onRemoved;
+  final void Function(int)? onRemoved;
 
   const MultiTextField({this.controller, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.textCapitalization: TextCapitalization.none, this.onAnyChanged, this.onChanged, this.onRemoved});
 
@@ -125,7 +125,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   TextCapitalization get textCapitalization => widget.textCapitalization;
   void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
   void Function(int, String)? get onChanged => widget.onChanged;
-  void Function()? get onRemoved => widget.onRemoved;
+  void Function(int)? get onRemoved => widget.onRemoved;
 
   void _callOnChanged(int index) => onChanged!(index, controller![index].text);
 
@@ -160,10 +160,8 @@ class MultiTextFieldState extends State<MultiTextField>{
         },
         onRemoveTap: () => setState((){
           controller!.removeAt(i);
-          onRemoved?.call();
+          onRemoved?.call(i);
 
-          _callOnChanged(i);
-          controller!._callOnChanged(i);
           _callOnAnyChanged();
           controller!._callOnAnyChanged();
         }),

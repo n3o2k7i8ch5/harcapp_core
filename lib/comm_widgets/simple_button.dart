@@ -16,7 +16,8 @@ class SimpleButton extends StatelessWidget{
   final void Function()? onLongPress;
   final EdgeInsets padding;
   final EdgeInsets margin;
-  final double radius;
+  final double? radius;
+  final BorderRadius? borderRadius;
   final double elevation;
   final Color? color;
   final Color? colorEnd;
@@ -29,9 +30,10 @@ class SimpleButton extends StatelessWidget{
     required this.child,
     required this.onTap,
     this.onLongPress,
-    this.padding: const EdgeInsets.all(DEF_PADDING),
-    this.margin: const EdgeInsets.all(DEF_MARG),
-    this.radius: AppCard.DEF_RADIUS,
+    this.padding: EdgeInsets.zero,
+    this.margin: EdgeInsets.zero,
+    this.radius,
+    this.borderRadius,
     this.elevation: 0,
     this.color,
     this.colorEnd,
@@ -45,41 +47,45 @@ class SimpleButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    Widget _child = InkWell(
-      borderRadius: BorderRadius.circular(radius),
+    Widget child = InkWell(
+      borderRadius: borderRadius??BorderRadius.circular(radius??AppCard.DEF_RADIUS),
       onTap: enabled?onTap:null,
       onLongPress: onLongPress,
       child: Padding(
-        child: child,
+        child: this.child,
         padding: padding,
       ),
       splashColor: colorSplash,
     );
 
     if(colorEnd == null)
-      return Padding(
-        padding: margin,
-        child: Material(
-          clipBehavior: clipBehavior,
-          borderRadius: BorderRadius.circular(radius),
-          color: color??Colors.transparent,
-          elevation: elevation,
-          child: _child
-        ),
+      child = Material(
+        clipBehavior: clipBehavior,
+        borderRadius: borderRadius??BorderRadius.circular(radius??AppCard.DEF_RADIUS),
+        color: color??Colors.transparent,
+        elevation: elevation,
+        child: child
       );
     else
-      return Padding(
-        padding: margin,
-        child: GradientWidget(
-          clipBehavior: clipBehavior,
-          colorStart: color??Colors.transparent,
-          colorEnd: colorEnd??color??Colors.transparent,
-          radius: radius,
-          elevation: elevation,
-          child: _child,
-          duration: duration,
-        ),
+      child = GradientWidget(
+        clipBehavior: clipBehavior,
+        colorStart: color??Colors.transparent,
+        colorEnd: colorEnd??color??Colors.transparent,
+        borderRadius: borderRadius,
+        radius: radius??AppCard.DEF_RADIUS,
+        elevation: elevation,
+        child: child,
+        duration: duration,
       );
+
+    if(margin != EdgeInsets.zero)
+      child = Padding(
+        padding: margin,
+        child: child
+      );
+
+    return child;
+
   }
 
   static SimpleButton from({
@@ -92,9 +98,12 @@ class SimpleButton extends StatelessWidget{
     double? textSize,
     EdgeInsets margin = const EdgeInsets.all(DEF_MARG),
     bool iconLeading = true,
+    double? radius,
+    BorderRadius? borderRadius,
     double elevation: 0,
     Color? color,
     Color? colorEnd,
+    Color? iconColor,
     Color? textColor,
     Color? colorSplash,
     bool dense: false,
@@ -103,13 +112,13 @@ class SimpleButton extends StatelessWidget{
     Key? key
   }){
 
-    assert(textColor != null || context != null, 'Color or context must not be null.');
+    assert(iconColor != null || textColor != null || context != null, 'Color or context must not be null.');
 
     List<Widget> children;
 
     if(direction == Axis.horizontal) children = [
       if(iconLeading && icon != null)
-        Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
+        Icon(icon, color: iconColor??textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
 
       if(text != null)
         SizedBox(height: Dimen.ICON_SIZE, width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
@@ -118,7 +127,7 @@ class SimpleButton extends StatelessWidget{
         Text(
           text,
           style: AppTextStyle(
-              color: textColor??iconEnab_(context!),
+              color: textColor??iconColor??iconEnab_(context!),
               fontWeight: fontWeight,
               fontSize: textSize??(dense?Dimen.TEXT_SIZE_NORMAL:Dimen.TEXT_SIZE_BIG)
           ),
@@ -161,9 +170,10 @@ class SimpleButton extends StatelessWidget{
       elevation: elevation,
       color: color,
       colorEnd: colorEnd,
-      radius: AppCard.BIG_RADIUS,
+      radius: radius??AppCard.BIG_RADIUS,
       margin: margin,
       padding: EdgeInsets.all(Dimen.ICON_MARG),
+      borderRadius: borderRadius,
       child:
       direction==Axis.horizontal?
       Row(

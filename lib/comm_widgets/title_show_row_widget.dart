@@ -15,7 +15,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
   final String title;
   final Color? titleColor;
   final TextAlign textAlign;
-  final void Function(BuildContext context)? onOpen;
+  final void Function()? onOpen;
   final Color? onOpenIconColor;
 
   const TitleShortcutRowWidget({
@@ -69,7 +69,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
           IconButton(
             padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
             icon: Icon(MdiIcons.arrowRight, color: onOpenIconColor),
-            onPressed: () => onOpen!(context),
+            onPressed: () => onOpen!(),
           )
         else if(icon != null && textAlign == TextAlign.center && trailing == null)
           SizedBox(width: Dimen.ICON_FOOTPRINT),
@@ -81,7 +81,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
       return widget;
     else
       return GestureDetector(
-        onTap: () => onOpen!(context),
+        onTap: () => onOpen!(),
         child: widget
       );
   }

@@ -169,6 +169,8 @@ class ChordWidget extends StatelessWidget{
 
     return SimpleButton(
         onTap: onTap,
+        margin: EdgeInsets.all(SimpleButton.DEF_MARG),
+        padding: EdgeInsets.all(SimpleButton.DEF_PADDING),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
