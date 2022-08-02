@@ -43,6 +43,14 @@ List<String> remPolCharsList(List<String> strings){
   return result;
 }
 
+List<String> remSpecCharsList(List<String> strings){
+  List<String> result = [];
+  for(String string in strings)
+    result.add(remSpecChars(string));
+
+  return result;
+}
+
 bool isDigit(String string){
   try {
     int.parse(string);
