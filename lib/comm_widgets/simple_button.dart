@@ -179,6 +179,8 @@ class SimpleButton extends StatelessWidget{
       borderRadius: borderRadius,
       child: AnimatedSize(
         duration: Duration(milliseconds: animateSize?300:0),
+        alignment: Alignment.centerLeft,
+        curve: Curves.easeInOutQuad,
         child:
         direction==Axis.horizontal?
         Row(
