@@ -177,7 +177,7 @@ class SimpleButton extends StatelessWidget{
       margin: margin,
       padding: EdgeInsets.all(Dimen.ICON_MARG),
       borderRadius: borderRadius,
-      child: AnimatedContainer(
+      child: AnimatedSize(
         duration: Duration(milliseconds: animateSize?300:0),
         child:
         direction==Axis.horizontal?
