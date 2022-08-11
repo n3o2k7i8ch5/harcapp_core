@@ -25,6 +25,7 @@ class SimpleButton extends StatelessWidget{
   final bool enabled;
   final Clip clipBehavior;
   final Duration? duration;
+  final bool animateSize;
 
   const SimpleButton({
     required this.child,
@@ -41,6 +42,7 @@ class SimpleButton extends StatelessWidget{
     this.enabled: true,
     this.clipBehavior: Clip.hardEdge,
     this.duration,
+    this.animateSize = false,
     Key? key
   }):super(key: key);
 
@@ -109,6 +111,7 @@ class SimpleButton extends StatelessWidget{
     bool dense: false,
     weight fontWeight: weight.halfBold,
     Axis direction: Axis.horizontal,
+    bool animateSize: false,
     Key? key
   }){
 
@@ -174,17 +177,20 @@ class SimpleButton extends StatelessWidget{
       margin: margin,
       padding: EdgeInsets.all(Dimen.ICON_MARG),
       borderRadius: borderRadius,
-      child:
-      direction==Axis.horizontal?
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: children,
-      ):
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: children,
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: animateSize?300:0),
+        child:
+        direction==Axis.horizontal?
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: children,
+        ):
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: children,
+        ),
       ),
       onTap: onTap,
       onLongPress: onLongPress,
