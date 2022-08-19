@@ -39,8 +39,8 @@ class AppScaffold extends StatelessWidget{
   static void showMessage(
       BuildContext context,
       String text,
-      { String buttonText:'Ok',
-        Function()? onButtonPressed,
+      { String? buttonText,
+        void Function()? onButtonPressed,
         Color? backgroundColor,
         Color? textColor,
         Duration duration: const Duration(seconds: 3)

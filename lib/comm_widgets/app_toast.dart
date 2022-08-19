@@ -30,7 +30,14 @@ void showAppToast(
             elevation: 20.0,
             color: background??cardEnab_(context),
             child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: buttonText != null && onButtonPressed != null?
+                const EdgeInsets.only(
+                  left: 8.0,
+                  top: 8.0 - Dimen.DEF_MARG,
+                  bottom: 8.0 - Dimen.DEF_MARG,
+                  right: 8.0 - Dimen.DEF_MARG,
+                ):
+                const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
