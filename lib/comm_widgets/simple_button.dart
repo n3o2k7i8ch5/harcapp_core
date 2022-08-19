@@ -8,8 +8,8 @@ import 'gradient_widget.dart';
 
 class SimpleButton extends StatelessWidget{
 
-  static const double DEF_PADDING = Dimen.DEF_MARG/2;
-  static const double DEF_MARG = Dimen.DEF_MARG/2;
+  static const double DEF_PADDING = Dimen.defMarg/2;
+  static const double DEF_MARG = Dimen.defMarg/2;
 
   final Widget child;
   final void Function()? onTap;
@@ -50,7 +50,7 @@ class SimpleButton extends StatelessWidget{
   Widget build(BuildContext context) {
 
     Widget child = InkWell(
-      borderRadius: borderRadius??BorderRadius.circular(radius??AppCard.DEF_RADIUS),
+      borderRadius: borderRadius??BorderRadius.circular(radius??AppCard.defRadius),
       onTap: enabled?onTap:null,
       onLongPress: onLongPress,
       child: Padding(
@@ -63,7 +63,7 @@ class SimpleButton extends StatelessWidget{
     if(colorEnd == null)
       child = Material(
         clipBehavior: clipBehavior,
-        borderRadius: borderRadius??BorderRadius.circular(radius??AppCard.DEF_RADIUS),
+        borderRadius: borderRadius??BorderRadius.circular(radius??AppCard.defRadius),
         color: color??Colors.transparent,
         elevation: elevation,
         child: child
@@ -74,7 +74,7 @@ class SimpleButton extends StatelessWidget{
         colorStart: color??Colors.transparent,
         colorEnd: colorEnd??color??Colors.transparent,
         borderRadius: borderRadius,
-        radius: radius??AppCard.DEF_RADIUS,
+        radius: radius??AppCard.defRadius,
         elevation: elevation,
         child: child,
         duration: duration,
@@ -125,7 +125,7 @@ class SimpleButton extends StatelessWidget{
         Icon(icon, color: iconColor??textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
 
       if(text != null)
-        SizedBox(height: Dimen.ICON_SIZE, width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
+        SizedBox(height: Dimen.ICON_SIZE, width: dense?Dimen.defMarg:Dimen.ICON_MARG),
 
       if(text != null)
         Text(
@@ -138,7 +138,7 @@ class SimpleButton extends StatelessWidget{
         ),
 
       if(text != null)
-        SizedBox(width: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
+        SizedBox(width: dense?Dimen.defMarg:Dimen.ICON_MARG),
 
       if(!iconLeading && icon != null)
         Icon(icon, color: textColor??iconEnab_(context!)),
@@ -150,7 +150,7 @@ class SimpleButton extends StatelessWidget{
           Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
 
         if(text != null)
-          SizedBox(height: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
+          SizedBox(height: dense?Dimen.defMarg:Dimen.ICON_MARG),
 
         if(text != null)
           Text(
@@ -163,7 +163,7 @@ class SimpleButton extends StatelessWidget{
           ),
 
         if(text != null && !iconLeading)
-          SizedBox(height: dense?Dimen.DEF_MARG:Dimen.ICON_MARG),
+          SizedBox(height: dense?Dimen.defMarg:Dimen.ICON_MARG),
 
         if(!iconLeading && icon != null)
           Icon(icon, color: textColor??iconEnab_(context!)),
@@ -174,7 +174,7 @@ class SimpleButton extends StatelessWidget{
       elevation: elevation,
       color: color,
       colorEnd: colorEnd,
-      radius: radius??AppCard.BIG_RADIUS,
+      radius: radius??AppCard.bigRadius,
       margin: margin,
       padding: padding,
       borderRadius: borderRadius,

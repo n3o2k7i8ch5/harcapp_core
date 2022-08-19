@@ -25,7 +25,7 @@ class GradientWidget extends StatelessWidget {
     required this.colorEnd,
     this.child,
     this.borderRadius,
-    this.radius = AppCard.DEF_RADIUS,
+    this.radius = AppCard.defRadius,
     this.elevation = 0,
     this.shape,
     this.height,

@@ -168,7 +168,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       ));
 
       if(linear && i < controller!.length-1)
-        children.add(SizedBox(width: Dimen.DEF_MARG));
+        children.add(SizedBox(width: Dimen.defMarg));
     }
 
     Widget addButton = IconButton(
@@ -218,8 +218,8 @@ class MultiTextFieldState extends State<MultiTextField>{
       return Wrap(
         crossAxisAlignment: WrapCrossAlignment.start,
         children: children,
-        runSpacing: Dimen.DEF_MARG,
-        spacing: Dimen.DEF_MARG,
+        runSpacing: Dimen.defMarg,
+        spacing: Dimen.defMarg,
       );
   }
 }
@@ -228,7 +228,6 @@ class MultiTextFieldState extends State<MultiTextField>{
 
 class Item extends StatefulWidget{
   
-  //final String initText;
   final TextEditingController controller;
   final String? hint;
   final bool removable;
@@ -243,7 +242,7 @@ class Item extends StatefulWidget{
 
 }
 
-class ItemState extends State<Item> with TickerProviderStateMixin{
+class ItemState extends State<Item>{
 
   static const double iconSize = 20.0;
 
@@ -279,7 +278,6 @@ class ItemState extends State<Item> with TickerProviderStateMixin{
         children: [
 
           AnimatedSize(
-            vsync: this,
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 minWidth: 10,//40.0,

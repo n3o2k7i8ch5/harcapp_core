@@ -33,9 +33,9 @@ void showAppToast(
                 padding: buttonText != null && onButtonPressed != null?
                 const EdgeInsets.only(
                   left: 12.0,
-                  top: 12.0 - Dimen.DEF_MARG,
-                  bottom: 12.0 - Dimen.DEF_MARG,
-                  right: 12.0 - Dimen.DEF_MARG,
+                  top: 12.0 - Dimen.defMarg,
+                  bottom: 12.0 - Dimen.defMarg,
+                  right: 12.0 - Dimen.defMarg,
                 ):
                 const EdgeInsets.all(12.0),
                 child: Row(
@@ -70,9 +70,9 @@ void showAppToast(
                     if(buttonText != null && onButtonPressed != null)
                       SimpleButton.from(
                           textColor: textColor??iconEnab_(context),
-                          radius: AppCard.DEF_RADIUS,
-                          margin: EdgeInsets.only(left: Dimen.DEF_MARG),
-                          padding: EdgeInsets.all(Dimen.DEF_MARG),
+                          radius: AppCard.defRadius,
+                          margin: EdgeInsets.only(left: Dimen.defMarg),
+                          padding: EdgeInsets.all(Dimen.defMarg),
                           text: buttonText,
                           onTap: onButtonPressed
                       )

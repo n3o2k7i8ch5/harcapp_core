@@ -390,7 +390,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
 
           if(widget.showLabel)
             Padding(
-              padding: EdgeInsets.all(Dimen.DEF_MARG),
+              padding: EdgeInsets.all(Dimen.defMarg),
               child: RotatedBox(
                 child: Text(instrumentTypeName(type), style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnab_(context))),
                 quarterTurns: 3,

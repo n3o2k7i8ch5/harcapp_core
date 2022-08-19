@@ -4,7 +4,7 @@ class Dimen{
 
   static const double TEXT_SIZE_APPBAR = 20;
 
-  static const double DEF_MARG = 6;
+  static const double defMarg = 6;
   static const double SIDE_MARG = 18.0;
   static const double CARD_BIG_PADD = 16.0;
   static const double APPBAR_ELEVATION = 4.0;

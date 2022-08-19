@@ -4,19 +4,19 @@ import '../dimen.dart';
 
 class AppCard extends StatelessWidget{
 
-  static const double DEF_RADIUS = 6.0;
-  static const double BIG_RADIUS = 20.0;
-  static const double ALERT_DIALOG_RADIUS = BIG_RADIUS;
+  static const double defRadius = 6.0;
+  static const double bigRadius = 20.0;
+  static const double alertDialogRadius = bigRadius;
 
   static const double defElevation = 1.0;
   static const double bigElevation = 6.0;
 
-  static const double NORM_MARGIN_VAL = Dimen.DEF_MARG/2;
-  static const double DEF_PADDING_VAL = Dimen.DEF_MARG;
+  static const double normMargVal = Dimen.defMarg/2;
+  static const double defPaddingVal = Dimen.defMarg;
 
-  static const EdgeInsets normMargin = EdgeInsets.all(NORM_MARGIN_VAL);
-  static const EdgeInsets defPadding = EdgeInsets.all(DEF_PADDING_VAL);
-  static const double ALERT_DIALOG_PADDING = 18.0;
+  static const EdgeInsets normMargin = EdgeInsets.all(normMargVal);
+  static const EdgeInsets defPadding = EdgeInsets.all(defPaddingVal);
+  static const double alertDialogPadding = 18.0;
 
   final Key? key;
   final Widget? child;
@@ -43,7 +43,7 @@ class AppCard extends StatelessWidget{
     this.onTap,
     this.onLongPress,
     this.onDoubleTap,
-    this.radius: DEF_RADIUS,
+    this.radius: defRadius,
     this.borderRadius,
     this.elevetionColor: Colors.black,
     this.clipBehavior: Clip.antiAliasWithSaveLayer,

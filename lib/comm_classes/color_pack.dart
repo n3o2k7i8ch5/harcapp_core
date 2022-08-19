@@ -143,7 +143,7 @@ abstract class ColorPack{
           borderRadius: BorderRadius.all(Radius.circular(10.0))
       ),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(AppCard.BIG_RADIUS))
+          borderRadius: BorderRadius.all(Radius.circular(AppCard.bigRadius))
       ),
     ),
 
