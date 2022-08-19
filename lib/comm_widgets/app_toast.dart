@@ -57,7 +57,7 @@ void showAppToast(
                   ),
 
                   if(buttonText != null && onButtonPressed != null)
-                    SimpleButton.from(textColor: textColor, text: text, onTap: onButtonPressed)
+                    SimpleButton.from(textColor: textColor??iconEnab_(context), text: text, onTap: onButtonPressed)
 
                 ],
               )

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 
 class AppScaffold extends StatelessWidget{
@@ -66,7 +65,7 @@ class AppScaffold extends StatelessWidget{
       context,
       text: text,
       background: backgroundColor,
-      textColor: textColor??iconEnab_(context),
+      textColor: textColor,
       duration: duration,
 
       buttonText: buttonText,
