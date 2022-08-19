@@ -5,8 +5,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 
-import 'app_text.dart';
-
 class AppScaffold extends StatelessWidget{
 
   final GlobalKey? scaffoldKey;
@@ -43,7 +41,7 @@ class AppScaffold extends StatelessWidget{
       BuildContext context,
       String text,
       { String buttonText:'Ok',
-        Function(BuildContext)? onButtonPressed,
+        Function()? onButtonPressed,
         Color? backgroundColor,
         Color? textColor,
         Duration duration: const Duration(seconds: 3)
@@ -68,51 +66,13 @@ class AppScaffold extends StatelessWidget{
       context,
       text: text,
       background: backgroundColor,
-      textColor: textColor,
+      textColor: textColor??iconEnab_(context),
       duration: duration,
 
       buttonText: buttonText,
-      onButtonPressed: () => onButtonPressed!=null?onButtonPressed(context):Scaffold.of(context).hideCurrentSnackBar(),
+      onButtonPressed: () => onButtonPressed==null?null:onButtonPressed()
     );
 
   }
 
-}
-
-String? _snackBarTag;
-bool _isSnackbarActive = false;
-bool isSnackBarActive({String? tag}) => tag==null?_isSnackbarActive:_isSnackbarActive&&tag == _snackBarTag;
-
-SnackBar getSnackBar(BuildContext context, String text, {String buttonText:'Ok', required Function onButtonPressed, Color? background, String? tag, Duration duration: const Duration(seconds: 3)}){
-
-  return SnackBar(
-    backgroundColor: background == null? accent_(context) : background,
-    elevation: 6.0,
-    behavior: SnackBarBehavior.fixed,
-    content: AppText(text, color: accentIcon_(context)),
-    action: SnackBarAction(
-        label: buttonText,
-        textColor: accentIcon_(context),
-        onPressed: onButtonPressed as void Function()
-    ),//
-    duration: duration,
-  );
-}
-
-void showMessage(GlobalKey<ScaffoldState> key, String text, {String buttonText:'Ok', Function? onButtonPressed, Color? background, String? tag, Duration duration: const Duration(seconds: 3)}){
-  _snackBarTag = tag;
-  _isSnackbarActive = true;
-  key.currentState
-    ?..hideCurrentSnackBar()
-    ..showSnackBar(
-        getSnackBar(
-          key.currentContext!,
-          text,
-          buttonText: buttonText,
-          onButtonPressed: () => onButtonPressed!=null?onButtonPressed():key.currentState!.hideCurrentSnackBar(),
-          background: background,
-          tag: tag,
-          duration: duration,
-        )
-    ).closed.then((SnackBarClosedReason reason) => _isSnackbarActive = false);
 }
