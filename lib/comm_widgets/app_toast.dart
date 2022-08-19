@@ -65,7 +65,7 @@ void showAppToast(
                           textColor: textColor??iconEnab_(context),
                           radius: AppCard.DEF_RADIUS,
                           padding: EdgeInsets.all(Dimen.DEF_MARG),
-                          text: text,
+                          text: buttonText,
                           onTap: onButtonPressed
                       )
 
@@ -75,6 +75,7 @@ void showAppToast(
         ),
       )
     ),
+    handleTouch: true,
     position: ToastPosition.bottom,
     duration: duration,
     dismissOtherToast: true,
