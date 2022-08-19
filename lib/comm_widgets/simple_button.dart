@@ -98,6 +98,7 @@ class SimpleButton extends StatelessWidget{
     void Function()? onLongPress,
     double? iconSize,
     double? textSize,
+    EdgeInsets padding = const EdgeInsets.all(Dimen.ICON_MARG),
     EdgeInsets margin = const EdgeInsets.all(DEF_MARG),
     bool iconLeading = true,
     double? radius,
@@ -175,7 +176,7 @@ class SimpleButton extends StatelessWidget{
       colorEnd: colorEnd,
       radius: radius??AppCard.BIG_RADIUS,
       margin: margin,
-      padding: EdgeInsets.all(Dimen.ICON_MARG),
+      padding: padding,
       borderRadius: borderRadius,
       child: AnimatedSize(
         duration: Duration(milliseconds: animateSize?300:0),
