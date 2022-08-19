@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/app_toast.dart';
 
 import 'app_text.dart';
 
@@ -38,15 +39,23 @@ class AppScaffold extends StatelessWidget{
       )
   );
 
-  static void showMessage(BuildContext context, String text, {String buttonText:'Ok', Function(BuildContext)? onButtonPressed, Color? background, String? tag, Duration duration: const Duration(seconds: 3)}){
+  static void showMessage(
+      BuildContext context,
+      String text,
+      { String buttonText:'Ok',
+        Function(BuildContext)? onButtonPressed,
+        Color? backgroundColor,
+        Color? textColor,
+        Duration duration: const Duration(seconds: 3)
+      }){
 
     if(kIsWeb){
       Fluttertoast.showToast(
         msg: text,
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.CENTER,
-        backgroundColor: Colors.black,
-        textColor: Colors.white,
+        backgroundColor: backgroundColor,
+        textColor: textColor,
         fontSize: 16.0,
         webPosition: 'center',
         timeInSecForIosWeb: duration.inSeconds,
@@ -55,17 +64,15 @@ class AppScaffold extends StatelessWidget{
       return;
     }
 
-    Scaffold.of(context).hideCurrentSnackBar();
-    Scaffold.of(context).showSnackBar(
-        getSnackBar(
-          context,
-          text,
-          buttonText: buttonText,
-          onButtonPressed: () => onButtonPressed!=null?onButtonPressed(context):Scaffold.of(context).hideCurrentSnackBar(),
-          background: background,
-          tag: tag,
-          duration: duration,
-        )
+    showAppToast(
+      context,
+      text: text,
+      background: backgroundColor,
+      textColor: textColor,
+      duration: duration,
+
+      buttonText: buttonText,
+      onButtonPressed: () => onButtonPressed!=null?onButtonPressed(context):Scaffold.of(context).hideCurrentSnackBar(),
     );
 
   }
