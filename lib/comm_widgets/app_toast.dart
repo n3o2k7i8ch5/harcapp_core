@@ -64,6 +64,7 @@ void showAppToast(
                       SimpleButton.from(
                           textColor: textColor??iconEnab_(context),
                           radius: AppCard.DEF_RADIUS,
+                          margin: EdgeInsets.only(left: Dimen.DEF_MARG),
                           padding: EdgeInsets.all(Dimen.DEF_MARG),
                           text: buttonText,
                           onTap: onButtonPressed
