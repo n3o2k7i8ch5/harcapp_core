@@ -246,7 +246,7 @@ class ChordDrawBar extends StatefulWidget{
   
   final String chords;
   final Color background;
-  final Color chordColor;
+  final Color? chordColor;
   final double elevation;
   final bool changeTypeOnTap;
   final InstrumentType initType;
@@ -258,7 +258,7 @@ class ChordDrawBar extends StatefulWidget{
   const ChordDrawBar(
       this.chords, {
         this.background=Colors.transparent,
-        this.chordColor=ColorPack.DEF_ICON_ENAB,
+        this.chordColor,
         this.elevation=0,
         this.changeTypeOnTap=true,
         this.initType = InstrumentType.GUITAR,
