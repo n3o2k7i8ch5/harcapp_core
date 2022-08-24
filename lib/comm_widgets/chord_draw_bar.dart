@@ -63,13 +63,21 @@ class _Fretboard extends StatelessWidget{
 class ChordWidget extends StatelessWidget{
 
   static const double defSize = 32.0;
-  static const double POSITION_TEXT_HEIGHT = 7.0;
-  static const double CHORD_NAME_HEIGHT = Dimen.TEXT_SIZE_SMALL;
-  static const int DEF_FRET_CNT = 5;
+  static const double defPositionTextSize = 7.0;
+  static const double defChordNameSize = Dimen.TEXT_SIZE_SMALL;
+  static const double defMarg = SimpleButton.DEF_MARG;
+  static const double defPadding = SimpleButton.DEF_PADDING;
 
+  static const int defFretCnt = 5;
 
-  static double height(int strCnt, {double size = defSize, int frets = DEF_FRET_CNT}){
-    return strCnt*frets + CHORD_NAME_HEIGHT + POSITION_TEXT_HEIGHT + 2*SimpleButton.DEF_MARG + 2*SimpleButton.DEF_PADDING;
+  static double positionTextSize(double size) => defPositionTextSize * size/defSize;
+  static double chordNameSize(double size) => defChordNameSize * size/defSize;
+  static double marg(double size) => defMarg * size/defSize;
+  static double padding(double size) => defPadding * size/defSize;
+  
+  
+  static double height(int strCnt, {double size = defSize, int frets = defFretCnt}){
+    return strCnt*frets + chordNameSize(size) + positionTextSize(size) + 2*marg(size) + 2*padding(size);
   }
 
   final Chord? chord;
@@ -88,7 +96,7 @@ class ChordWidget extends StatelessWidget{
     this.color,
     this.elevation: 4.0,
 
-    this.frets: 5,
+    this.frets: defFretCnt,
     this.strings,
 
     this.onTap,
@@ -172,8 +180,8 @@ class ChordWidget extends StatelessWidget{
 
     return SimpleButton(
         onTap: onTap,
-        margin: EdgeInsets.all(SimpleButton.DEF_MARG),
-        padding: EdgeInsets.all(SimpleButton.DEF_PADDING),
+        margin: EdgeInsets.all(marg(size)),
+        padding: EdgeInsets.all(padding(size)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -184,7 +192,7 @@ class ChordWidget extends StatelessWidget{
                 nearestDotPosition.toString():
                 (nearestDotPosition-1).toString(),
                 style: AppTextStyle(
-                    fontSize: POSITION_TEXT_HEIGHT,
+                    fontSize: positionTextSize(size),
                     fontWeight: weight.bold,
                     color: color??iconEnab_(context)
                 ),
@@ -231,7 +239,7 @@ class ChordWidget extends StatelessWidget{
             Text(
                 chord!.name,
                 style: AppTextStyle(
-                    fontSize: CHORD_NAME_HEIGHT,
+                    fontSize: chordNameSize(size),
                     fontWeight: weight.halfBold,
                     color: color??iconEnab_(context)
                 )
