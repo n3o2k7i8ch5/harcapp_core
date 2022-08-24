@@ -19,7 +19,7 @@ class _Fretboard extends StatelessWidget{
   final int? strings;
 
   const _Fretboard({
-    this.size: ChordWidget.DEF_SIZE,
+    this.size: ChordWidget.defSize,
     this.color,
     this.frets,
     this.strings
@@ -62,13 +62,13 @@ class _Fretboard extends StatelessWidget{
 
 class ChordWidget extends StatelessWidget{
 
-  static const double DEF_SIZE = 32.0;
+  static const double defSize = 32.0;
   static const double POSITION_TEXT_HEIGHT = 7.0;
   static const double CHORD_NAME_HEIGHT = Dimen.TEXT_SIZE_SMALL;
   static const int DEF_FRET_CNT = 5;
 
 
-  static double height(int strCnt, {double size = DEF_SIZE, int frets = DEF_FRET_CNT}){
+  static double height(int strCnt, {double size = defSize, int frets = DEF_FRET_CNT}){
     return strCnt*frets + CHORD_NAME_HEIGHT + POSITION_TEXT_HEIGHT + 2*SimpleButton.DEF_MARG + 2*SimpleButton.DEF_PADDING;
   }
 
@@ -84,7 +84,7 @@ class ChordWidget extends StatelessWidget{
 
   const ChordWidget({
     this.chord,
-    this.size: DEF_SIZE,
+    this.size: defSize,
     this.color,
     this.elevation: 4.0,
 
@@ -96,37 +96,40 @@ class ChordWidget extends StatelessWidget{
 
   static ChordWidget fromGChord(
       GChord chord,
-      {
-        Color? color,
+      { Color? color,
+        double size = ChordWidget.defSize,
         void Function()? onTap,
       }) => ChordWidget(
     chord: chord,
     strings: 6,
     color: color,
+    size: size,
     onTap: onTap,
   );
 
   static ChordWidget fromUChord(
       UChord chord,
-      {
-        Color? color,
+      { Color? color,
+        double size = ChordWidget.defSize,
         void Function()? onTap,
       }) => ChordWidget(
     chord: chord,
     strings: 4,
     color: color,
+    size: size,
     onTap: onTap,
   );
 
   static ChordWidget fromMChord(
-      MChord chord,
-      {
-        Color? color,
-        void Function()? onTap,
-      }) => ChordWidget(
+    MChord chord,
+    { Color? color,
+      double size = ChordWidget.defSize,
+      void Function()? onTap,
+    }) => ChordWidget(
     chord: chord,
     strings: 4,
     color: color,
+    size: size,
     onTap: onTap,
   );
 
