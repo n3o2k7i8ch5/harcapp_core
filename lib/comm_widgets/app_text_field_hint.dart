@@ -33,6 +33,7 @@ class AppTextFieldHint extends StatefulWidget{
   final bool multiExpanded;
   final MultiTextFieldController? multiController;
   final TextCapitalization textCapitalization;
+  final bool autofocus;
 
   const AppTextFieldHint({
     required this.hint,
@@ -58,6 +59,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.multiExpanded: false,
     this.multiController,
     this.textCapitalization: TextCapitalization.none,
+    this.autofocus = false,
     Key? key
   }):super(key: key);
 
@@ -123,6 +125,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         style: style,
         controller: controller,
         focusNode: widget.focusNode,
+        autofocus: widget.autofocus,
         onChanged: (text){
           if(controller.text.length<=1)
             setState(() {});
