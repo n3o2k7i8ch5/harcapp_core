@@ -74,7 +74,14 @@ void showAppToast(
                           margin: EdgeInsets.only(left: Dimen.defMarg),
                           padding: EdgeInsets.all(Dimen.defMarg),
                           text: buttonText,
-                          onTap: onButtonPressed
+                          onTap: (){
+                            showToastWidget(
+                              Container(),
+                              context: context,
+                              duration: Duration.zero
+                            );
+                            onButtonPressed.call();
+                          }
                       )
 
                   ],
