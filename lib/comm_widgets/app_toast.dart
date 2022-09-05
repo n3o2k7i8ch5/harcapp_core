@@ -78,7 +78,8 @@ void showAppToast(
                             showToastWidget(
                               Container(),
                               context: context,
-                              duration: Duration.zero
+                              duration: Duration.zero,
+                              dismissOtherToast: true
                             );
                             onButtonPressed.call();
                           }
