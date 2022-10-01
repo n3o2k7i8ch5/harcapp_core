@@ -64,6 +64,10 @@ bool isDigit(String string){
 void post(Function function) => WidgetsBinding.instance.addPostFrameCallback((_) => function());
 
 void launchURL(String url) async {
+
+  if(!url.startsWith('www'))
+    url = 'www' + url;
+
   if (await canLaunchUrlString(url)) {
     await launchUrlString(url);
   } else {
