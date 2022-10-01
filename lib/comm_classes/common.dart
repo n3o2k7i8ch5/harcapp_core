@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -72,9 +71,9 @@ void launchURL(String url) async {
   if(!url.startsWith('www'))
     url = 'www' + url;
 
-  if (await canLaunchUrlString(url)) {
+  if (await canLaunchUrlString(url))
     await launchUrlString(url);
-  } else {
+  else
     throw CannotLaunchUrlException();
-  }
+
 }
