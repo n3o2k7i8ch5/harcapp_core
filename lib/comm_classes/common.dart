@@ -69,6 +69,9 @@ void launchURL(String url) async {
   if(!url.startsWith('www') && !url.startsWith('http://') && !url.startsWith('https://'))
     url = 'www.' + url;
 
+  if(!url.startsWith('http://') && !url.startsWith('https://'))
+    url = 'https://' + url;
+
   if (await canLaunchUrlString(url))
     await launchUrlString(url);
   else
