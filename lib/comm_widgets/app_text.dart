@@ -6,6 +6,7 @@ import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 
 import '../comm_classes/common.dart';
+import 'app_toast.dart';
 
 class RText extends StatelessWidget{
 
@@ -42,7 +43,9 @@ class RText extends StatelessWidget{
       fontSize: size,
       height: height,
     ),
-    recognizer: url?(TapGestureRecognizer()..onTap = () => launchURL(text)):null,
+    recognizer: url?(TapGestureRecognizer()..onTap = (){
+      launchURL(text);
+    }):null,
   );
 
   @override

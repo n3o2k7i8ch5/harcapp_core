@@ -62,14 +62,12 @@ bool isDigit(String string){
 
 void post(Function function) => WidgetsBinding.instance.addPostFrameCallback((_) => function());
 
-class CannotLaunchUrlException implements Exception{
-
-}
+class CannotLaunchUrlException implements Exception{}
 
 void launchURL(String url) async {
 
-  if(!url.startsWith('www'))
-    url = 'www' + url;
+  if(!url.startsWith('www') && !url.startsWith('http://') && !url.startsWith('https://'))
+    url = 'www.' + url;
 
   if (await canLaunchUrlString(url))
     await launchUrlString(url);
