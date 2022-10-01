@@ -1,5 +1,6 @@
 
 import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 String remPolChars(String string){
   return string.toLowerCase()
@@ -61,3 +62,11 @@ bool isDigit(String string){
 }
 
 void post(Function function) => WidgetsBinding.instance.addPostFrameCallback((_) => function());
+
+void launchURL(String url) async {
+  if (await canLaunchUrlString(url)) {
+    await launchUrlString(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
