@@ -296,8 +296,8 @@ class ItemState extends State<Item>{
                   maxLines: 1,
                   textCapitalization: textCapitalization,
                   decoration: InputDecoration(
-                      isDense: true,
-                      isCollapsed: true,
+                      //isDense: true,
+                      //isCollapsed: true,
                       //contentPadding: EdgeInsets.all(0),
                       hintText: hint,
                       hintStyle: AppTextStyle(

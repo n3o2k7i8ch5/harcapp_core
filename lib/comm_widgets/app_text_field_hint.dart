@@ -119,6 +119,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         expanded: multiExpanded,
         hint: hint,
         textCapitalization: widget.textCapitalization,
+        addIcon: multiAddIcon,
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
       );
