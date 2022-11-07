@@ -203,7 +203,7 @@ class MultiTextFieldState extends State<MultiTextField>{
           physics: BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           child: Row(children: children),
-          clipBehavior: Clip.none,
+          clipBehavior: Clip.hardEdge,
         );
 
         if(expanded)
