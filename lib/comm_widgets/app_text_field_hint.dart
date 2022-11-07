@@ -118,6 +118,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         controller: multiController,
         expanded: multiExpanded,
         hint: hint,
+        style: style,
+        hintStyle: hintStyle,
         textCapitalization: widget.textCapitalization,
         addIcon: multiAddIcon,
         onAnyChanged: onAnyChangedListener,
