@@ -96,6 +96,8 @@ class MultiTextField extends StatefulWidget{
   static const IconData defAddIcon = MdiIcons.plusCircleOutline;
 
   final MultiTextFieldController? controller;
+  final TextStyle? textStyle;
+  final TextStyle? hintTextStyle;
   final bool expanded;
   final String? hint;
   final bool linear;
@@ -106,7 +108,7 @@ class MultiTextField extends StatefulWidget{
   final void Function(int, String)? onChanged;
   final void Function(int)? onRemoved;
 
-  const MultiTextField({this.controller, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.addIcon, this.textCapitalization: TextCapitalization.none, this.onAnyChanged, this.onChanged, this.onRemoved});
+  const MultiTextField({this.controller, this.textStyle, this.hintTextStyle, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.addIcon, this.textCapitalization: TextCapitalization.none, this.onAnyChanged, this.onChanged, this.onRemoved});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -117,6 +119,8 @@ class MultiTextFieldState extends State<MultiTextField>{
 
   MultiTextFieldController? _controller;
   MultiTextFieldController? get controller => widget.controller??_controller;
+  TextStyle? get textStyle => widget.textStyle;
+  TextStyle? get hintTextStyle => widget.hintTextStyle;
 
   int get minCount => controller!.minCount;
   bool get expanded => widget.expanded;
@@ -148,6 +152,8 @@ class MultiTextFieldState extends State<MultiTextField>{
     for(int i=0; i<controller!.length; i++) {
       children.add(Item(
         controller: controller![i],
+        textStyle: textStyle,
+        hintTextStyle: hintTextStyle,
         hint: hint,
         textCapitalization: textCapitalization,
         removable: controller!.length>minCount,
@@ -231,13 +237,15 @@ class MultiTextFieldState extends State<MultiTextField>{
 class Item extends StatefulWidget{
   
   final TextEditingController controller;
+  final TextStyle? textStyle;
+  final TextStyle? hintTextStyle;
   final String? hint;
   final bool removable;
   final TextCapitalization textCapitalization;
   final void Function()? onRemoveTap;
   final void Function(String)? onChanged;
 
-  const Item({required this.controller, required this.hint, this.removable: true, this.textCapitalization: TextCapitalization.none, this.onRemoveTap, this.onChanged, Key? key}):super(key: key);
+  const Item({required this.controller, this.textStyle, this.hintTextStyle, required this.hint, this.removable: true, this.textCapitalization: TextCapitalization.none, this.onRemoveTap, this.onChanged, Key? key}):super(key: key);
 
   @override
   State<StatefulWidget> createState() => ItemState();
@@ -251,6 +259,8 @@ class ItemState extends State<Item>{
   FocusNode? focusNode;
 
   TextEditingController get controller => widget.controller;
+  TextStyle? get textStyle => widget.textStyle;
+  TextStyle? get hintTextStyle => widget.hintTextStyle;
   String? get hint => widget.hint;
   bool get removable => widget.removable;
   TextCapitalization get textCapitalization => widget.textCapitalization;
@@ -291,7 +301,7 @@ class ItemState extends State<Item>{
                 child: TextField(
                   focusNode: focusNode,
                   controller: controller,
-                  style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
+                  style: textStyle??AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
                   minLines: 1,
                   maxLines: 1,
                   textCapitalization: textCapitalization,
@@ -300,7 +310,7 @@ class ItemState extends State<Item>{
                       //isCollapsed: true,
                       //contentPadding: EdgeInsets.all(0),
                       hintText: hint,
-                      hintStyle: AppTextStyle(
+                      hintStyle: hintTextStyle??AppTextStyle(
                         color: hintEnab_(context),
                         fontSize: Dimen.TEXT_SIZE_BIG,
                       ),
