@@ -93,19 +93,20 @@ class MultiTextFieldController{
 
 class MultiTextField extends StatefulWidget{
 
-  static const IconData addIcon = MdiIcons.plusCircleOutline;
+  static const IconData defAddIcon = MdiIcons.plusCircleOutline;
 
   final MultiTextFieldController? controller;
   final bool expanded;
   final String? hint;
   final bool linear;
   final Color? accentColor;
+  final IconData? addIcon;
   final TextCapitalization textCapitalization;
   final void Function(List<String>)? onAnyChanged;
   final void Function(int, String)? onChanged;
   final void Function(int)? onRemoved;
 
-  const MultiTextField({this.controller, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.textCapitalization: TextCapitalization.none, this.onAnyChanged, this.onChanged, this.onRemoved});
+  const MultiTextField({this.controller, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.addIcon, this.textCapitalization: TextCapitalization.none, this.onAnyChanged, this.onChanged, this.onRemoved});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -122,6 +123,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   String? get hint => widget.hint;
   bool get linear => widget.linear;
   Color? get accentColor => widget.accentColor;
+  IconData? get addIcon => widget.addIcon;
   TextCapitalization get textCapitalization => widget.textCapitalization;
   void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
   void Function(int, String)? get onChanged => widget.onChanged;
@@ -173,7 +175,7 @@ class MultiTextFieldState extends State<MultiTextField>{
 
     Widget addButton = IconButton(
       icon: Icon(
-        MultiTextField.addIcon,
+        addIcon??MultiTextField.defAddIcon,
         color:
         controller!.isNotEmpty && controller!.last.isEmpty?
         iconDisab_(context):
@@ -296,7 +298,7 @@ class ItemState extends State<Item>{
                   decoration: InputDecoration(
                       isDense: true,
                       isCollapsed: true,
-                      contentPadding: EdgeInsets.all(0),
+                      //contentPadding: EdgeInsets.all(0),
                       hintText: hint,
                       hintStyle: AppTextStyle(
                         color: hintEnab_(context),

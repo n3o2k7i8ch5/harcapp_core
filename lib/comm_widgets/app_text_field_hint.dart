@@ -31,6 +31,7 @@ class AppTextFieldHint extends StatefulWidget{
   final String? multiHintTop;
   //final List<String> initVals;
   final bool multiExpanded;
+  final IconData? multiAddIcon;
   final MultiTextFieldController? multiController;
   final TextCapitalization textCapitalization;
   final bool autofocus;
@@ -57,6 +58,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.multi: false,
     this.multiHintTop,
     this.multiExpanded: false,
+    this.multiAddIcon,
     this.multiController,
     this.textCapitalization: TextCapitalization.none,
     this.autofocus = false,
@@ -81,6 +83,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   bool get multi => widget.multi;
   String get multiHintTop => widget.multiHintTop??hintTop;
   bool get multiExpanded => widget.multiExpanded;
+  IconData? get multiAddIcon => widget.multiAddIcon;
 
   TextStyle get style => widget.style??AppTextStyle(color: textEnab_(context));
   TextStyle get hintStyle => widget.hintStyle??widget.style?.copyWith(color: hintEnab_(context))??AppTextStyle(color: hintEnab_(context));
