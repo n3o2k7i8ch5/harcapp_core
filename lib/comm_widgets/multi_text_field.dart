@@ -283,14 +283,15 @@ class ItemState extends State<Item>{
   }
   
   @override
-  Widget build(BuildContext context) => Padding(
+  Widget build(BuildContext context) => IntrinsicWidth(
+    child: Padding(
       padding: EdgeInsets.symmetric(vertical: 2.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
 
-          AnimatedSize(
+          Expanded(child: AnimatedSize(
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 minWidth: 10,//40.0,
@@ -307,9 +308,9 @@ class ItemState extends State<Item>{
                   maxLines: 1,
                   textCapitalization: textCapitalization,
                   decoration: InputDecoration(
-                      //isDense: true,
-                      //isCollapsed: true,
-                      //contentPadding: EdgeInsets.all(0),
+                    //isDense: true,
+                    //isCollapsed: true,
+                    //contentPadding: EdgeInsets.all(0),
                       hintText: hint,
                       hintStyle: hintStyle??AppTextStyle(
                         color: hintEnab_(context),
@@ -343,7 +344,7 @@ class ItemState extends State<Item>{
             curve: Curves.easeOutQuint,
             alignment: Alignment.centerLeft,
             clipBehavior: Clip.none,
-          ),
+          )),
 
           if(focusNode!.hasFocus)
             SizedBox(
@@ -371,7 +372,8 @@ class ItemState extends State<Item>{
 
         ],
       ),
-    );
+    ),
+  );
 
 
   void setEditing(editing) => setState(() => this.selected = editing);
