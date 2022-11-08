@@ -215,7 +215,10 @@ class MultiTextFieldState extends State<MultiTextField>{
         if(expanded)
           return Row(
             children: [
-              Expanded(child: scrollView),
+              if(children.length == 1)
+                Expanded(child: children[0])
+              else
+                Expanded(child: scrollView),
               addButton
             ],
           );
@@ -280,9 +283,7 @@ class ItemState extends State<Item>{
   }
   
   @override
-  Widget build(BuildContext context) {
-
-    Widget child = Padding(
+  Widget build(BuildContext context) => Padding(
       padding: EdgeInsets.symmetric(vertical: 2.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -372,9 +373,6 @@ class ItemState extends State<Item>{
       ),
     );
 
-    return child;
-
-  }
 
   void setEditing(editing) => setState(() => this.selected = editing);
 
