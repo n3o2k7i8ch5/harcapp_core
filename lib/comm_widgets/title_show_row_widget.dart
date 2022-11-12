@@ -16,6 +16,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
   final Color? titleColor;
   final TextAlign textAlign;
   final void Function()? onOpen;
+  final IconData? onOpenIcon;
   final Color? onOpenIconColor;
 
   const TitleShortcutRowWidget({
@@ -27,6 +28,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
     this.titleColor,
     this.textAlign = TextAlign.center,
     this.onOpen,
+    this.onOpenIcon,
     this.onOpenIconColor,
   });
   
@@ -68,7 +70,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
         if(onOpen != null)
           IconButton(
             padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
-            icon: Icon(MdiIcons.arrowRight, color: onOpenIconColor),
+            icon: Icon(onOpenIcon??MdiIcons.arrowRight, color: onOpenIconColor),
             onPressed: () => onOpen!(),
           )
         else if(icon != null && textAlign == TextAlign.center && trailing == null)
