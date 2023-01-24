@@ -113,6 +113,7 @@ class SimpleButton extends StatelessWidget{
     weight fontWeight: weight.halfBold,
     Axis direction: Axis.horizontal,
     bool animateSize: false,
+    bool center: true,
     Key? key
   }){
 
@@ -185,7 +186,7 @@ class SimpleButton extends StatelessWidget{
         child:
         direction==Axis.horizontal?
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: center?MainAxisAlignment.center:MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: children,
         ):
