@@ -75,7 +75,7 @@ class GradientWidget extends StatelessWidget {
 
     return PhysicalModel(
       clipBehavior: clipBehavior ?? Clip.antiAlias,
-      borderRadius: BorderRadius.circular(radius),
+      borderRadius: borderRadius??BorderRadius.circular(radius),
       color: Colors.transparent,
       elevation: elevation,
       child: _child,
