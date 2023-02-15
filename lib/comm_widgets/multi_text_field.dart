@@ -327,7 +327,7 @@ class ItemState extends State<Item>{
                       border: InputBorder.none,
                       enabledBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none
+                      focusedBorder: InputBorder.none,
                   ),
                   onChanged: onChanged,
                 ),

@@ -34,7 +34,7 @@ class Dimen{
   static const double BOTTOM_SHEET_TITLE_MARG = 20;
   static const double BOTTOM_SHEET_MARG = 16;
 
-  static double viewportFraction(BuildContext context) => 1 - (2*Dimen.SIDE_MARG/MediaQuery.of(context).size.width);
+  static double viewportFraction(BuildContext context, {double margin = Dimen.SIDE_MARG}) => 1 - (2*margin/MediaQuery.of(context).size.width);
 
   static const double SETTINGS_MARG = 38;
 
