@@ -131,7 +131,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   Color? get accentColor => widget.accentColor;
   IconData? get addIcon => widget.addIcon;
   TextCapitalization get textCapitalization => widget.textCapitalization;
-  textAlignVertical? get textAlignVertical => widget.textAlignVertical;
+  TextAlignVertical? get textAlignVertical => widget.textAlignVertical;
 
   void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
   void Function(int, String)? get onChanged => widget.onChanged;
