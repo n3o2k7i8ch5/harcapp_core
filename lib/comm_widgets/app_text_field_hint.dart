@@ -34,6 +34,7 @@ class AppTextFieldHint extends StatefulWidget{
   final IconData? multiAddIcon;
   final MultiTextFieldController? multiController;
   final TextCapitalization textCapitalization;
+  final TextAlignVertical? textAlignVertical;
   final bool autofocus;
 
   const AppTextFieldHint({
@@ -45,22 +46,23 @@ class AppTextFieldHint extends StatefulWidget{
     this.hintStyle,
     this.counterStyle,
     this.maxLength,
-    this.maxLines: 1,
-    this.showUnderline:false,
+    this.maxLines = 1,
+    this.showUnderline =false,
     this.onAnyChanged,
     this.onChanged,
-    this.obscureText: false,
+    this.obscureText = false,
     this.enabled,
     this.leading,
     this.keyboardType,
     this.inputFormatters,
     this.accentColor,
-    this.multi: false,
+    this.multi = false,
     this.multiHintTop,
-    this.multiExpanded: false,
+    this.multiExpanded = false,
     this.multiAddIcon,
     this.multiController,
-    this.textCapitalization: TextCapitalization.none,
+    this.textCapitalization = TextCapitalization.none,
+    this.textAlignVertical,
     this.autofocus = false,
     Key? key
   }):super(key: key);
@@ -121,6 +123,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         style: style,
         hintStyle: hintStyle,
         textCapitalization: widget.textCapitalization,
+        textAlignVertical: widget.textAlignVertical,
+
         addIcon: multiAddIcon,
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
@@ -152,6 +156,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         keyboardType: widget.keyboardType,
         inputFormatters: widget.inputFormatters,
         textCapitalization: widget.textCapitalization,
+        textAlignVertical: widget.textAlignVertical,
       );
 
     return Stack(

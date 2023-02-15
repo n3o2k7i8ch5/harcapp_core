@@ -104,11 +104,13 @@ class MultiTextField extends StatefulWidget{
   final Color? accentColor;
   final IconData? addIcon;
   final TextCapitalization textCapitalization;
+  final TextAlignVertical? textAlignVertical;
+
   final void Function(List<String>)? onAnyChanged;
   final void Function(int, String)? onChanged;
   final void Function(int)? onRemoved;
 
-  const MultiTextField({this.controller, this.style, this.hintStyle, this.expanded = false, this.hint, this.linear: true, this.accentColor, this.addIcon, this.textCapitalization: TextCapitalization.none, this.onAnyChanged, this.onChanged, this.onRemoved});
+  const MultiTextField({this.controller, this.style, this.hintStyle, this.expanded = false, this.hint, this.linear = true, this.accentColor, this.addIcon, this.textCapitalization = TextCapitalization.none, this.textAlignVertical, this.onAnyChanged, this.onChanged, this.onRemoved});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -129,6 +131,8 @@ class MultiTextFieldState extends State<MultiTextField>{
   Color? get accentColor => widget.accentColor;
   IconData? get addIcon => widget.addIcon;
   TextCapitalization get textCapitalization => widget.textCapitalization;
+  textAlignVertical? get textAlignVertical => widget.textAlignVertical;
+
   void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
   void Function(int, String)? get onChanged => widget.onChanged;
   void Function(int)? get onRemoved => widget.onRemoved;
@@ -156,6 +160,7 @@ class MultiTextFieldState extends State<MultiTextField>{
         hintStyle: hintStyle,
         hint: hint,
         textCapitalization: textCapitalization,
+        textAlignVertical: textAlignVertical,
         removable: controller!.length>minCount,
         onChanged: (text){
           if(i == controller!.length-1)
@@ -245,10 +250,11 @@ class Item extends StatefulWidget{
   final String? hint;
   final bool removable;
   final TextCapitalization textCapitalization;
+  final TextAlignVertical? textAlignVertical;
   final void Function()? onRemoveTap;
   final void Function(String)? onChanged;
 
-  const Item({required this.controller, this.style, this.hintStyle, required this.hint, this.removable: true, this.textCapitalization: TextCapitalization.none, this.onRemoveTap, this.onChanged, Key? key}):super(key: key);
+  const Item({required this.controller, this.style, this.hintStyle, required this.hint, this.removable = true, this.textCapitalization = TextCapitalization.none,this.textAlignVertical, this.onRemoveTap, this.onChanged, Key? key}):super(key: key);
 
   @override
   State<StatefulWidget> createState() => ItemState();
@@ -267,6 +273,7 @@ class ItemState extends State<Item>{
   String? get hint => widget.hint;
   bool get removable => widget.removable;
   TextCapitalization get textCapitalization => widget.textCapitalization;
+  TextAlignVertical? get textAlignVertical => widget.textAlignVertical;
   void Function()? get onRemoveTap => widget.onRemoveTap;
   void Function(String)? get onChanged => widget.onChanged;
 
@@ -307,6 +314,7 @@ class ItemState extends State<Item>{
                   minLines: 1,
                   maxLines: 1,
                   textCapitalization: textCapitalization,
+                  textAlignVertical: textAlignVertical,
                   decoration: InputDecoration(
                     //isDense: true,
                     //isCollapsed: true,
