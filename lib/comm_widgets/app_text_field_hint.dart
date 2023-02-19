@@ -128,6 +128,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         addIcon: multiAddIcon,
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
+        enabled: widget.enabled,
       );
     else
       textField = TextField(

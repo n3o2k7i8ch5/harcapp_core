@@ -109,8 +109,9 @@ class MultiTextField extends StatefulWidget{
   final void Function(List<String>)? onAnyChanged;
   final void Function(int, String)? onChanged;
   final void Function(int)? onRemoved;
+  final bool enabled;
 
-  const MultiTextField({this.controller, this.style, this.hintStyle, this.expanded = false, this.hint, this.linear = true, this.accentColor, this.addIcon, this.textCapitalization = TextCapitalization.none, this.textAlignVertical, this.onAnyChanged, this.onChanged, this.onRemoved});
+  const MultiTextField({this.controller, this.style, this.hintStyle, this.expanded = false, this.hint, this.linear = true, this.accentColor, this.addIcon, this.textCapitalization = TextCapitalization.none, this.textAlignVertical, this.onAnyChanged, this.onChanged, this.onRemoved, this.enabled = true});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -136,6 +137,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
   void Function(int, String)? get onChanged => widget.onChanged;
   void Function(int)? get onRemoved => widget.onRemoved;
+  bool get enabled => widget.enabled;
 
   void _callOnChanged(int index) => onChanged!(index, controller![index].text);
 
@@ -178,13 +180,16 @@ class MultiTextFieldState extends State<MultiTextField>{
           _callOnAnyChanged();
           controller!._callOnAnyChanged();
         }),
+        enabled: enabled,
       ));
 
       if(linear && i < controller!.length-1)
         children.add(SizedBox(width: Dimen.defMarg));
     }
 
-    Widget addButton = IconButton(
+    Widget addButton = enabled?
+    Container():
+    IconButton(
       icon: Icon(
         addIcon??MultiTextField.defAddIcon,
         color:
@@ -253,8 +258,9 @@ class Item extends StatefulWidget{
   final TextAlignVertical? textAlignVertical;
   final void Function()? onRemoveTap;
   final void Function(String)? onChanged;
+  final bool enabled;
 
-  const Item({required this.controller, this.style, this.hintStyle, required this.hint, this.removable = true, this.textCapitalization = TextCapitalization.none,this.textAlignVertical, this.onRemoveTap, this.onChanged, Key? key}):super(key: key);
+  const Item({required this.controller, this.style, this.hintStyle, required this.hint, this.removable = true, this.textCapitalization = TextCapitalization.none,this.textAlignVertical, this.onRemoveTap, this.onChanged, this.enabled, Key? key}):super(key: key);
 
   @override
   State<StatefulWidget> createState() => ItemState();
@@ -276,6 +282,7 @@ class ItemState extends State<Item>{
   TextAlignVertical? get textAlignVertical => widget.textAlignVertical;
   void Function()? get onRemoveTap => widget.onRemoveTap;
   void Function(String)? get onChanged => widget.onChanged;
+  bool get enabled => widget.enabled;
 
   late bool selected;
 
@@ -330,6 +337,7 @@ class ItemState extends State<Item>{
                       focusedBorder: InputBorder.none,
                   ),
                   onChanged: onChanged,
+                  enabled: enabled,
                 ),
               ):
 
@@ -354,7 +362,7 @@ class ItemState extends State<Item>{
             clipBehavior: Clip.none,
           )),
 
-          if(focusNode!.hasFocus)
+          if(focusNode!.hasFocus && enabled)
             SizedBox(
               child: IconButton(
                 padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
@@ -366,7 +374,7 @@ class ItemState extends State<Item>{
               ),
               height: iconSize,
             )
-          else if(removable)
+          else if(removable && enabled)
             SizedBox(
               child: IconButton(
                 padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
