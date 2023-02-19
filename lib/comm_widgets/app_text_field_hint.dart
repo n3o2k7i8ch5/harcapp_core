@@ -21,7 +21,7 @@ class AppTextFieldHint extends StatefulWidget{
   final Function(List<String>)? onAnyChanged;
   final Function(int, String)? onChanged;
   final bool obscureText;
-  final bool? enabled;
+  final bool enabled;
   final Widget? leading;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
@@ -51,7 +51,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.onAnyChanged,
     this.onChanged,
     this.obscureText = false,
-    this.enabled,
+    this.enabled = true,
     this.leading,
     this.keyboardType,
     this.inputFormatters,

@@ -260,7 +260,7 @@ class Item extends StatefulWidget{
   final void Function(String)? onChanged;
   final bool enabled;
 
-  const Item({required this.controller, this.style, this.hintStyle, required this.hint, this.removable = true, this.textCapitalization = TextCapitalization.none,this.textAlignVertical, this.onRemoveTap, this.onChanged, this.enabled, Key? key}):super(key: key);
+  const Item({required this.controller, this.style, this.hintStyle, required this.hint, this.removable = true, this.textCapitalization = TextCapitalization.none,this.textAlignVertical, this.onRemoveTap, this.onChanged, this.enabled = true, Key? key}):super(key: key);
 
   @override
   State<StatefulWidget> createState() => ItemState();

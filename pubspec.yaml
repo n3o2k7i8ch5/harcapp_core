@@ -13,7 +13,7 @@ dependencies:
 
   connectivity: ^3.0.6
   fluttertoast: ^8.0.9
-  material_design_icons_flutter: ^5.0.6595
+  material_design_icons_flutter: ^6.0.7096
   oktoast: ^3.2.0
   provider: ^6.0.2
   tuple: ^2.0.0
