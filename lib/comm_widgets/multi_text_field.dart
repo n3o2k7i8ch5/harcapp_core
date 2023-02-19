@@ -323,9 +323,6 @@ class ItemState extends State<Item>{
                   textCapitalization: textCapitalization,
                   textAlignVertical: textAlignVertical,
                   decoration: InputDecoration(
-                    //isDense: true,
-                    //isCollapsed: true,
-                    //contentPadding: EdgeInsets.all(0),
                       hintText: hint,
                       hintStyle: hintStyle??AppTextStyle(
                         color: hintEnab_(context),

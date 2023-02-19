@@ -44,7 +44,7 @@ String _timeToStr(DateTime date, {bool showSeconds = false}){
 
 String dateToString(
     DateTime? date,
-    { bool showYear=true,
+    { bool? showYear=true,
       bool showMonth=true,
       bool showDay=true,
       bool withTime=false,
@@ -54,8 +54,13 @@ String dateToString(
       String yearAbbr='r.'
     }){
 
+  // showYear == null means that the year will be shown only if it different
+  // from the current year.
+
   if(date == null)
     return '-';
+
+  bool _showYear = showYear??DateTime.now().year!=date.year;
 
   String day = '';
   if(showDay)
@@ -66,7 +71,7 @@ String dateToString(
     month = ' ${_monthToStr(date, shortMonth: shortMonth, showDay: showDay)}';
 
   String year = '';
-  if(showYear)
+  if(_showYear == true)
     year = ' ' + date.year.toString() + ' $yearAbbr';
 
   if(!withTime)
