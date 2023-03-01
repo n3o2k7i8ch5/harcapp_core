@@ -188,7 +188,6 @@ class MultiTextFieldState extends State<MultiTextField>{
     }
 
     Widget addButton = enabled?
-    Container():
     IconButton(
       icon: Icon(
         addIcon??MultiTextField.defAddIcon,
@@ -208,7 +207,7 @@ class MultiTextFieldState extends State<MultiTextField>{
         _callOnAnyChanged();
         controller!._callOnAnyChanged();
       }),
-    );
+    ):Container();
 
     if(linear)
       return Builder(builder: (context){
