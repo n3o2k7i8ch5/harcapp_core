@@ -9,27 +9,20 @@ import 'app_text_style.dart';
 
 
 Color appBar(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.background;
-Color? appBarTextEnab_(BuildContext context) => Theme.of(context).appBarTheme.titleTextStyle!.color;//Provider.of<ColorPackProvider>(context, listen: false).colorPack.appBarTextEnabled;
-//Color appBarTextDisab_(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.appBarTextDisabled;
+Color? appBarTextEnab_(BuildContext context) => Theme.of(context).appBarTheme.titleTextStyle!.color;
 
-//Color disabled(BuildContext context) => Theme.of(context).disabledColor;
-
-Color? textEnab_(BuildContext context) => Theme.of(context).textTheme.bodyText1!.color;
-Color textDisab_(BuildContext context) => Theme.of(context).hintEnabled(context);//Provider.of<ColorPackProvider>(context, listen: false).colorPack.textDisabled;
-
-//Color textDrawer(BuildContext context) => Theme.of(context).primaryTextTheme.bodyText1.color;
-//Color hintDrawer(BuildContext context) => Theme.of(context).primaryTextTheme.subtitle1.color;
+Color? textEnab_(BuildContext context) => Theme.of(context).textTheme.bodySmall!.color;
+Color textDisab_(BuildContext context) => Theme.of(context).hintEnabled(context);
 
 Color hintEnab_(BuildContext context) => Theme.of(context).hintEnabled(context);
 
 Color? cardEnab_(BuildContext context) => Theme.of(context).cardTheme.color;
 Color? defCardElevation(BuildContext context) => Theme.of(context).cardTheme.shadowColor;
 
-Color background_(BuildContext context) => Theme.of(context).backgroundColor;
+Color background_(BuildContext context) => Theme.of(context).colorScheme.background;
 Color backgroundIcon_(BuildContext context) => Theme.of(context).backgroundIcon(context);
 
-Color accent_(BuildContext context) => Theme.of(context).accentColor;// Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentColor;
-Color? accentIcon_(BuildContext context) => Theme.of(context).accentIconTheme.color;//Provider.of<ColorPackProvider>(context, listen: false).colorPack.accentIconColor;
+Color accent_(BuildContext context) => Theme.of(context).colorScheme.secondary;
 
 Color iconEnab_(BuildContext context) => Theme.of(context).iconEnabled(context);
 Color iconDisab_(BuildContext context) => Theme.of(context).iconDisabled(context);
@@ -80,17 +73,10 @@ abstract class ColorPack{
   Color get defCardDisabled => Color.fromARGB(255, 235, 235, 235);
   Color get defCardElevation => Colors.black;
 
-  //Color get colorCard => mainColor;
-  //Color get colorBackground => darkColor;
-
   Color get background => DEF_BACKGROUND;
   Color get backgroundIcon => Colors.black.withOpacity(0.05);
 
-  //Color get mainColor;
-  //Color get lightColor;
-  //Color get darkColor;
   Color get accentColor;
-  Color get accentIconColor;
   Color get iconEnabled;
   Color get iconDisabled;
   Color get drawerIconColor => Colors.black54;
@@ -104,22 +90,15 @@ abstract class ColorPack{
     appBarTheme: AppBarTheme(
         color: appBar,
         titleTextStyle: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
-        textTheme: TextTheme(
-          headline1: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
-          headline6: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
-        ),
+        toolbarTextStyle: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
         actionsIconTheme: IconThemeData(color: appBarTextEnabled),
         iconTheme: IconThemeData(color: appBarTextEnabled)
     ),
     textTheme: TextTheme(
-      bodyText1: TextStyle(color: textEnabled),
-      bodyText2: TextStyle(color: textEnabled),
-      subtitle1: TextStyle(color: textEnabled),
-      subtitle2: TextStyle(color: textEnabled),
-    ).apply(
-      //bodyColor: _realColorPack.textEnabled,
-      //displayColor: _realColorPack.textEnabled,
-    ),
+      bodySmall: TextStyle(color: textEnabled),
+      bodyMedium: TextStyle(color: textEnabled),
+      bodyLarge: TextStyle(color: textEnabled),
+    ).apply(),
     checkboxTheme: CheckboxThemeData(
       checkColor: MaterialStateProperty.all(background),
     ),
@@ -131,8 +110,6 @@ abstract class ColorPack{
     ),
     timePickerTheme: TimePickerThemeData(
       backgroundColor: background,
-      //hourMinuteColor: _realColorPack.accentColor.withOpacity(0.3),
-      //hourMinuteTextColor: _realColorPack.accentColor,
       dialHandColor: accentColor,
       helpTextStyle: AppTextStyle(color: hintEnabled),
       dayPeriodTextStyle: AppTextStyle(),
@@ -154,12 +131,23 @@ abstract class ColorPack{
     ),
 
     primaryTextTheme: TextTheme(
-      bodyText1: TextStyle(color: textEnabled),
-      bodyText2: TextStyle(color: textEnabled),
-      subtitle1: TextStyle(color: textEnabled),
-      subtitle2: TextStyle(color: textEnabled),
+      bodySmall: TextStyle(color: textEnabled),
+      bodyMedium: TextStyle(color: textEnabled),
+      bodyLarge: TextStyle(color: textEnabled),
     ),
-    backgroundColor: background,
+    colorScheme: ColorScheme(
+      brightness: brightness,
+      primary: accentColor,
+      secondary: accentColor,
+      surface: background,
+      background: background,
+      error: Colors.red,
+      onPrimary: accentColor,
+      onSecondary: accentColor,
+      onSurface: textEnabled,
+      onBackground: textEnabled,
+      onError: Colors.red,
+    ),
     scaffoldBackgroundColor: background,
 
     toggleableActiveColor: accentColor,
@@ -174,7 +162,7 @@ abstract class ColorPack{
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: accentColor,
-      foregroundColor: accentIconColor,
+      foregroundColor: iconEnabled,
     ),
 
     cardColor: defCardEnabled,
@@ -188,19 +176,9 @@ abstract class ColorPack{
         fillColor: textEnabled
     ),
 
-    //primarySwatch: _realColorPack.mainColor,
     primaryColor: accentColor,
     primaryColorDark: accentColor,
     primaryColorLight: accentColor,
-    accentColor: accentColor,
-    accentIconTheme: IconThemeData(
-        color: accentIconColor
-    ),
-    accentTextTheme: TextTheme().apply(
-        displayColor: accentIconColor,
-        bodyColor: accentIconColor
-    ),
-    selectedRowColor: accentColor.withOpacity(0.3),
     iconTheme: IconThemeData(
         color: iconEnabled
     ),
