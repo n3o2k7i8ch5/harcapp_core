@@ -93,7 +93,7 @@ class MultiTextFieldController{
 
 class MultiTextField extends StatefulWidget{
 
-  static const IconData defAddIcon = MdiIcons.plusCircleOutline;
+  static IconData defAddIcon = MdiIcons.plusCircleOutline;
 
   final MultiTextFieldController? controller;
   final TextStyle? style;
