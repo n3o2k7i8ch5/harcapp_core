@@ -20,6 +20,7 @@ Color? cardEnab_(BuildContext context) => Theme.of(context).cardTheme.color;
 Color? defCardElevation(BuildContext context) => Theme.of(context).cardTheme.shadowColor;
 
 Color background_(BuildContext context) => Theme.of(context).colorScheme.background;
+Color backgroundIcon_(BuildContext context) => Theme.of(context).colorScheme.primaryContainer;
 
 Color accent_(BuildContext context) => Theme.of(context).colorScheme.secondary;
 
@@ -130,6 +131,7 @@ abstract class ColorPack{
       secondary: accentColor,
       surface: background,
       background: background,
+      primaryContainer: backgroundIcon,
       error: Colors.red,
       onPrimary: accentColor,
       onSecondary: accentColor,
