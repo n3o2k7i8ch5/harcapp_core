@@ -12,33 +12,21 @@ Color appBar(BuildContext context) => Provider.of<ColorPackProvider>(context, li
 Color? appBarTextEnab_(BuildContext context) => Theme.of(context).appBarTheme.titleTextStyle!.color;
 
 Color? textEnab_(BuildContext context) => Theme.of(context).textTheme.bodySmall!.color;
-Color textDisab_(BuildContext context) => Theme.of(context).hintEnabled(context);
+Color textDisab_(BuildContext context) => Theme.of(context).hintColor;
 
-Color hintEnab_(BuildContext context) => Theme.of(context).hintEnabled(context);
+Color hintEnab_(BuildContext context) => Theme.of(context).hintColor;
 
 Color? cardEnab_(BuildContext context) => Theme.of(context).cardTheme.color;
 Color? defCardElevation(BuildContext context) => Theme.of(context).cardTheme.shadowColor;
 
 Color background_(BuildContext context) => Theme.of(context).colorScheme.background;
-Color backgroundIcon_(BuildContext context) => Theme.of(context).backgroundIcon(context);
 
 Color accent_(BuildContext context) => Theme.of(context).colorScheme.secondary;
 
-Color iconEnab_(BuildContext context) => Theme.of(context).iconEnabled(context);
-Color iconDisab_(BuildContext context) => Theme.of(context).iconDisabled(context);
+Color iconEnab_(BuildContext context) => Theme.of(context).iconTheme.color!;
+Color iconDisab_(BuildContext context) => Theme.of(context).hintColor;
 Color drawerIconColor(BuildContext context) => Colors.black54;
 Color drawerIconDisabled(BuildContext context) => Colors.black26;
-
-extension _ThemeData on ThemeData {
-
-  Color iconEnabled(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.iconEnabled;
-  Color iconDisabled(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.iconDisabled;
-
-  Color backgroundIcon(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.backgroundIcon;
-
-  Color hintEnabled(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.hintEnabled;
-
-}
 
 abstract class ColorPack{
 
@@ -87,6 +75,7 @@ abstract class ColorPack{
 
   ThemeData get themeData => ThemeData(
     brightness: brightness,
+    hintColor: hintEnabled,
     appBarTheme: AppBarTheme(
         color: appBar,
         titleTextStyle: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
@@ -180,7 +169,10 @@ abstract class ColorPack{
     primaryColorDark: accentColor,
     primaryColorLight: accentColor,
     iconTheme: IconThemeData(
-        color: iconEnabled
+        color: iconEnabled,
+    ),
+    primaryIconTheme: IconThemeData(
+      color: iconEnabled,
     ),
   );
 }
