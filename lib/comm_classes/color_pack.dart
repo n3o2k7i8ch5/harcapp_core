@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:harcapp_core/comm_classes/color_pack_provider.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
-import 'package:provider/provider.dart';
 
 import '../colors.dart';
 import '../dimen.dart';
 import 'app_text_style.dart';
 
 
-Color appBar(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false).colorPack.background;
+Color appBar(BuildContext context) => Theme.of(context).appBarTheme.backgroundColor!;
 Color? appBarTextEnab_(BuildContext context) => Theme.of(context).appBarTheme.titleTextStyle!.color;
 
 Color? textEnab_(BuildContext context) => Theme.of(context).textTheme.bodySmall!.color;
