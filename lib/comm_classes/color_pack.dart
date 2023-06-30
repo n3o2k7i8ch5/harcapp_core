@@ -24,8 +24,6 @@ Color accent_(BuildContext context) => Theme.of(context).colorScheme.secondary;
 
 Color iconEnab_(BuildContext context) => Theme.of(context).iconTheme.color!;
 Color iconDisab_(BuildContext context) => Theme.of(context).hintColor;
-Color drawerIconColor(BuildContext context) => Colors.black54;
-Color drawerIconDisabled(BuildContext context) => Colors.black26;
 
 abstract class ColorPack{
 
