@@ -57,13 +57,15 @@ class TitleShortcutRowWidget extends StatelessWidget{
 
         Expanded(
             child: pulseTitle?
-            PulsingText(
-              title,
-              fontSize: Dimen.TEXT_SIZE_APPBAR,
-              fontWeight: weight.bold,
-              fontColor: titleColor,
-              pulseColor: titleColor?.withOpacity((titleColor?.opacity??1)*0.7),
-              textAlign: textAlign,
+            Center(
+              child: PulsingText(
+                title,
+                fontSize: Dimen.TEXT_SIZE_APPBAR,
+                fontWeight: weight.bold,
+                fontColor: titleColor,
+                pulseColor: titleColor?.withOpacity((titleColor?.opacity??1)*0.7),
+                textAlign: textAlign,
+              ),
             ):
             Text(
               title,

@@ -58,24 +58,14 @@ class PulsingTextState extends State<PulsingText> {
   }
 
   @override
-  Widget build(BuildContext context) =>  Stack(
+  Widget build(BuildContext context) => Stack(
+    clipBehavior: Clip.none,
     children: [
 
       AnimatedOpacity(
         opacity: widget.pulse && pulseVisible?1:0,
         duration: pulseDuration,
-        child:
-        widget.selectable?
-        SelectableText(
-          widget.text,
-          textAlign: widget.textAlign??TextAlign.center,
-          style: AppTextStyle(
-            fontSize: widget.fontSize,
-            fontWeight: widget.fontWeight,
-            color: widget.pulseColor??iconEnab_(context).withOpacity(0.7),
-          ),
-        ):
-        Text(
+        child: Text(
           widget.text,
           textAlign: widget.textAlign??TextAlign.center,
           style: AppTextStyle(
@@ -88,6 +78,7 @@ class PulsingTextState extends State<PulsingText> {
 
       Positioned.fill(child: Blur(sigma: 3, child: Container())),
 
+      widget.selectable?
       SelectableText(
         widget.text,
         textAlign: TextAlign.center,
@@ -96,8 +87,16 @@ class PulsingTextState extends State<PulsingText> {
           fontWeight: widget.fontWeight,
           color: widget.fontColor??iconEnab_(context),
         ),
+      ):
+      Text(
+        widget.text,
+        textAlign: TextAlign.center,
+        style: AppTextStyle(
+          fontSize: Dimen.TEXT_SIZE_APPBAR,
+          fontWeight: widget.fontWeight,
+          color: widget.fontColor??iconEnab_(context),
+        ),
       ),
-
 
     ],
   );
