@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
+import 'package:harcapp_core/comm_widgets/pulsing_text.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -13,6 +14,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
   final Widget? leading;
   final Widget? trailing;
   final String title;
+  final bool pulseTitle;
   final Color? titleColor;
   final TextAlign textAlign;
   final void Function()? onOpen;
@@ -25,6 +27,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
     this.leading,
     this.trailing,
     required this.title,
+    this.pulseTitle = false,
     this.titleColor,
     this.textAlign = TextAlign.center,
     this.onOpen,
@@ -53,7 +56,16 @@ class TitleShortcutRowWidget extends StatelessWidget{
               SizedBox(width: textStartPadding),
 
         Expanded(
-            child: Text(
+            child: pulseTitle?
+            PulsingText(
+              title,
+              fontSize: Dimen.TEXT_SIZE_APPBAR,
+              fontWeight: weight.bold,
+              fontColor: titleColor,
+              pulseColor: titleColor?.withOpacity((titleColor?.opacity??1)*0.7),
+              textAlign: textAlign,
+            ):
+            Text(
               title,
               style: AppTextStyle(
                   fontSize: Dimen.TEXT_SIZE_APPBAR,

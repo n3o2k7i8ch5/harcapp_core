@@ -12,6 +12,7 @@ class PulsingText extends StatefulWidget{
   final bool pulse;
   final double fontSize;
   final weight fontWeight;
+  final TextAlign? textAlign;
   final Color? fontColor;
   final Color? pulseColor;
 
@@ -21,6 +22,7 @@ class PulsingText extends StatefulWidget{
         this.pulse = true,
         this.fontSize = Dimen.TEXT_SIZE_BIG,
         this.fontWeight = weight.bold,
+        this.textAlign,
         this.fontColor,
         this.pulseColor,
         super.key
@@ -66,7 +68,7 @@ class PulsingTextState extends State<PulsingText> {
         widget.selectable?
         SelectableText(
           widget.text,
-          textAlign: TextAlign.center,
+          textAlign: widget.textAlign??TextAlign.center,
           style: AppTextStyle(
             fontSize: widget.fontSize,
             fontWeight: widget.fontWeight,
@@ -75,7 +77,7 @@ class PulsingTextState extends State<PulsingText> {
         ):
         Text(
           widget.text,
-          textAlign: TextAlign.center,
+          textAlign: widget.textAlign??TextAlign.center,
           style: AppTextStyle(
             fontSize: widget.fontSize,
             fontWeight: widget.fontWeight,
