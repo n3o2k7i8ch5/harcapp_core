@@ -15,6 +15,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
   final Widget? trailing;
   final String title;
   final bool pulseTitle;
+  final Color? pulseShadowColor;
   final Color? titleColor;
   final TextAlign textAlign;
   final void Function()? onOpen;
@@ -28,6 +29,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
     this.trailing,
     required this.title,
     this.pulseTitle = false,
+    this.pulseShadowColor,
     this.titleColor,
     this.textAlign = TextAlign.center,
     this.onOpen,
@@ -63,7 +65,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
                 fontSize: Dimen.TEXT_SIZE_APPBAR,
                 fontWeight: weight.bold,
                 fontColor: titleColor,
-                pulseColor: titleColor?.withOpacity((titleColor?.opacity??1)*0.7),
+                pulseColor: pulseShadowColor??titleColor?.withOpacity((titleColor?.opacity??1)*0.7),
                 textAlign: textAlign,
               ),
             ):
