@@ -61,11 +61,12 @@ class ChordShifter{
         List<String> chordsStringArray = line.split(' ');
         if (line.isNotEmpty) {
           for (String chord in chordsStringArray) {
+
             if(chord.isEmpty) continue;
             _chordList.add(ChordDraw.decode(chord));
             _separatorList.add(' ');
           }
-          if (lines.length - 1 != i)
+          if (i != lines.length - 1)
             _separatorList[_separatorList.length - 1] = '\n';
         } else {
           if (i == 0)
