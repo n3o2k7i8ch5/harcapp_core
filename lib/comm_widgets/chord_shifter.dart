@@ -35,15 +35,18 @@ class ChordShifter{
         _separatorFirst = true;
 
       for (int i = 0; i < lines.length; i++) {
-        List<String> chordsStringArray = lines[i].split(' ');
-        if (lines[i].length > 0) {
-          for (String chord in chordsStringArray) {
+        String line = lines[i];
+        List<String> chordsStrings = line.split(' ');
+        if (line.length > 0) {
+          for (int iChord = 0; i<chordsStrings.length; i++) {
+            String chord = chordsStrings[iChord];
             if(chord.length == 0) continue;
             _chordList.add(ChordDraw.decode(chord));
-            _separatorList.add(' ');
+            if(iChord != chordsStrings.length-1)
+              _separatorList.add(' ');
           }
-          if (lines.length - 1 != i)
-            _separatorList[_separatorList.length - 1] = '\n';
+          if (i != lines.length - 1)
+            _separatorList.add('\n');
         } else {
           if (i == 0)
             _separatorList.add('\n');
