@@ -57,11 +57,10 @@ class ChordShifter{
       // }
 
       for (int i = 0; i < lines.length; i++) {
-        String line = lines[i];
+        String line = lines[i].trim();
         List<String> chordsStringArray = line.split(' ');
         if (line.isNotEmpty) {
           for (String chord in chordsStringArray) {
-
             if(chord.isEmpty) continue;
             _chordList.add(ChordDraw.decode(chord));
             _separatorList.add(' ');
