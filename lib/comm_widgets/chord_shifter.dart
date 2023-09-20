@@ -14,8 +14,7 @@ class ChordShifter{
       this._shift = shift;
       return;
     }
-    List<String> lines = string.split('\n');
-    try {decode(lines, shift);}
+    try {decode(string, shift);}
     on Exception{throw Exception();}
   }
 
@@ -23,7 +22,9 @@ class ChordShifter{
     return ChordShifter(text, shift).getText(true);
   }
 
-  void decode(List<String> lines, int shift){
+  void decode(String chordsString, int shift){
+
+    List<String> lines = chordsString.split('\n').map((line) => line.trim()).toList();
 
     List<ChordDraw> _chordList = [];
     List<String> _separatorList = [];
@@ -66,17 +67,12 @@ class ChordShifter{
             _chordList.add(ChordDraw.decode(chord));
             if(iChord < chordsStringArray.length-1) _separatorList.add(' ');
           }
-          if (i < lines.length - 1)
-            _separatorList.add('\n');
-            // _separatorList[_separatorList.length - 1] = '\n';
-        } else {
-          if (i == 0)
-            _separatorList.add('\n');
-          else if (i < lines.length - 1) {
-            int lastPos = _separatorList.length - 1;
-            _separatorList[lastPos] = _separatorList[lastPos] + '\n';
-          }
-        }
+          if (i < lines.length - 1) _separatorList.add('\n');
+        } else  if (i == 0)
+          _separatorList.add('\n');
+        else if (i < lines.length - 1)
+          _separatorList.last = _separatorList.last + '\n';
+
       }
     } on Exception{
       throw Exception();
