@@ -34,6 +34,29 @@ class ChordShifter{
       if (lines[0].length == 0)
         _separatorFirst = true;
 
+      // for (int i = 0; i < lines.length; i++) {
+      //   String line = lines[i];
+      //   List<String> chordsStrings = line.split(' ');
+      //   if (line.length > 0) {
+      //     for (int iChord = 0; i<chordsStrings.length; i++) {
+      //       String chord = chordsStrings[iChord];
+      //       if(chord.length == 0) continue;
+      //       _chordList.add(ChordDraw.decode(chord));
+      //       if(iChord != chordsStrings.length-1)
+      //         _separatorList.add(' ');
+      //     }
+      //     if (i != lines.length - 1)
+      //       _separatorList.add('\n');
+      //   } else {
+      //     if (i == 0)
+      //       _separatorList.add('\n');
+      //     else if (i != lines.length - 1) {
+      //       int lastPos = _separatorList.length - 1;
+      //       _separatorList[lastPos] = _separatorList[lastPos] + '\n';
+      //     }
+      //   }
+      // }
+
       for (int i = 0; i < lines.length; i++) {
         String line = lines[i];
         List<String> chordsStrings = line.split(' ');
@@ -42,11 +65,10 @@ class ChordShifter{
             String chord = chordsStrings[iChord];
             if(chord.length == 0) continue;
             _chordList.add(ChordDraw.decode(chord));
-            if(iChord != chordsStrings.length-1)
-              _separatorList.add(' ');
+            _separatorList.add(' ');
           }
           if (i != lines.length - 1)
-            _separatorList.add('\n');
+            _separatorList[_separatorList.length - 1] = '\n';
         } else {
           if (i == 0)
             _separatorList.add('\n');
