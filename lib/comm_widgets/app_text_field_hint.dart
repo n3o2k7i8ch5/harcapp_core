@@ -160,30 +160,31 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         textAlignVertical: widget.textAlignVertical,
       );
 
-    return Stack(
-      clipBehavior: Clip.none,
+    return Row(
       children: <Widget>[
-
-        Row(
+        if(widget.leading!=null) widget.leading!,
+        Expanded(child: Stack(
+          clipBehavior: Clip.none,
           children: <Widget>[
-            if(widget.leading!=null) widget.leading!,
-            Expanded(child: textField),
+
+            textField,
+
+            AnimatedOpacity(
+              child: Text(
+                multiController!.length==1?hintTop:multiHintTop,
+                style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_SMALL, fontWeight: weight.halfBold, color: hintEnab_(context)),
+              ),
+              duration: Duration(milliseconds: 300),
+              opacity:
+              (multi && (multiController!.isEmpty || multiController![0].text.isEmpty))
+                  || (!multi && controller.text.isEmpty)?0:1,
+            ),
+
           ],
-        ),
-
-        AnimatedOpacity(
-          child: Text(
-            multiController!.length==1?hintTop:multiHintTop,
-            style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_SMALL, fontWeight: weight.halfBold, color: hintEnab_(context)),
-          ),
-          duration: Duration(milliseconds: 300),
-          opacity:
-          (multi && (multiController!.isEmpty || multiController![0].text.isEmpty))
-              || (!multi && controller.text.isEmpty)?0:1,
-        ),
-
+        )),
       ],
     );
+
   }
 
 }
