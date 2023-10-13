@@ -333,7 +333,7 @@ class ItemState extends State<Item>{
                       focusedBorder: InputBorder.none,
                   ),
                   onChanged: onChanged,
-                  enabled: enabled,
+                  readOnly: enabled,
                 ),
               ):
 

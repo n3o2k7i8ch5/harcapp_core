@@ -153,7 +153,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         maxLength: widget.maxLength,
         maxLines: widget.maxLines,
         obscureText: widget.obscureText,
-        enabled: widget.enabled,
+        readOnly: widget.enabled,
         keyboardType: widget.keyboardType,
         inputFormatters: widget.inputFormatters,
         textCapitalization: widget.textCapitalization,
