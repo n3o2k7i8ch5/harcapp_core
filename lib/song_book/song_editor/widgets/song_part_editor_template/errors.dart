@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:harcapp_core/song/own_song/page_widgets/song_part_editor_template/providers.dart';
 import 'package:provider/provider.dart';
 
 import '../../common.dart';
+import 'providers.dart';
 
 const int MAX_CHORDS_IN_LINE = 8;
 const int MAX_TEXT_LINE_LENGTH = 52;

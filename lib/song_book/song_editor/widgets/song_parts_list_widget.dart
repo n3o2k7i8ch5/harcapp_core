@@ -5,15 +5,15 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/dimen.dart';
-import 'package:harcapp_core/song/own_song/page_widgets/scroll_to_bottom.dart';
 import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
 import 'package:implicitly_animated_reorderable_list_2/transitions.dart';
 import 'package:provider/provider.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../common.dart';
 import '../providers.dart';
-import '../song_part_card.dart';
+import 'song_part_card.dart';
+import '../song_raw.dart';
+import 'scroll_to_bottom.dart';
 
 class SongPartsListWidget extends StatelessWidget{
 

@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../providers.dart';
-import '../song_part_card.dart';
+import 'song_part_card.dart';
 
 
 class RefrenTemplate extends StatelessWidget{

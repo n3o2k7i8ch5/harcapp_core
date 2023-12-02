@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 import '../song_core.dart';
 import '../song_element.dart';
-import 'common.dart';
+import '../add_person.dart';
+import 'providers.dart';
+import 'widgets/song_part_editor_template/errors.dart';
 
 
 class SongRaw extends SongCore{
@@ -358,7 +361,38 @@ class SongRaw extends SongCore{
 */
 }
 
+class SongPart{
 
+  final SongElement _songElement;
+  bool isError;
 
+  String getText({bool withTabs = false}) => _songElement.getText(withTabs: withTabs);
+  void setText(String text) => _songElement.setText(text);
 
+  SongElement get element => _songElement;
 
+  String get chords => _songElement.chords;
+  set chords(String text) => _songElement.chords = text;
+
+  bool get shift => _songElement.shift;
+  set shift(bool value) => _songElement.shift = value;
+
+  bool get isEmpty => chords.length==0 && getText().length==0;
+
+  SongPart copy() => SongPart.from(
+    element.copy(),
+  );
+
+  static SongPart from(SongElement songElement) => SongPart(
+      songElement,
+      hasAnyErrors(songElement.getText(), songElement.chords)
+  );
+
+  static empty({isRefrenTemplate = false}) => SongPart.from(SongElement.empty(isRefrenTemplate: isRefrenTemplate));
+
+  SongPart(this._songElement, this.isError);
+
+  bool isRefren(BuildContext context) =>
+      CurrentItemProvider.of(context).song.refrenPart.element == element;
+
+}

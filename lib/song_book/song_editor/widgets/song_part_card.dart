@@ -5,12 +5,13 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
-import 'package:harcapp_core/song/own_song/providers.dart';
 import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'common.dart';
+import '../common.dart';
+import '../providers.dart';
+import '../song_raw.dart';
 
 enum SongPartType{
   ZWROTKA,
@@ -75,7 +76,7 @@ class SongPartCard extends StatelessWidget{
                 child: SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  child: SongTextWidget(type: type, songPart: songPart),
+                  child: _SongTextWidget(type: type, songPart: songPart),
                 )
             ),
 
@@ -83,7 +84,7 @@ class SongPartCard extends StatelessWidget{
 
             ConstrainedBox(
                 constraints: BoxConstraints(minWidth: CHORDS_WIDGET_MIN_WIDTH),
-                child: SongChordsWidget(type: type, songPart: songPart)
+                child: _SongChordsWidget(type: type, songPart: songPart)
             )
           ],
         );
@@ -141,12 +142,12 @@ class SongPartCard extends StatelessWidget{
   );
 }
 
-class SongTextWidget extends StatelessWidget{
+class _SongTextWidget extends StatelessWidget{
 
   final SongPartType type;
   final SongPart songPart;
 
-  const SongTextWidget({required this.type, required this.songPart});
+  const _SongTextWidget({required this.type, required this.songPart});
 
   @override
   Widget build(BuildContext context) {
@@ -188,12 +189,12 @@ class SongTextWidget extends StatelessWidget{
   }
 }
 
-class SongChordsWidget extends StatelessWidget{
+class _SongChordsWidget extends StatelessWidget{
 
   final SongPartType type;
   final SongPart songPart;
 
-  const SongChordsWidget({required this.type, required this.songPart});
+  const _SongChordsWidget({required this.type, required this.songPart});
 
   @override
   Widget build(BuildContext context) {

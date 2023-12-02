@@ -11,7 +11,6 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/comm_widgets/text_field_fit.dart';
 import 'package:harcapp_core/comm_widgets/text_field_fit_chords.dart';
 import 'package:harcapp_core/dimen.dart';
-import 'package:harcapp_core/song/own_song/page_widgets/song_part_editor_template/providers.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +19,7 @@ import '../../common.dart';
 import '../../song_raw.dart';
 import 'errors.dart';
 import '../../providers.dart';
+import 'providers.dart';
 
 const double TEXT_FIELD_TOP_PADD = Dimen.TEXT_FIELD_PADD - 7;
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/dimen.dart';
-import 'package:harcapp_core/song/own_song/page_widgets/song_part_editor_template/errors.dart';
-import 'package:harcapp_core/song/own_song/page_widgets/song_part_editor_template/providers.dart';
 import 'package:provider/provider.dart';
+
+import 'errors.dart';
+import 'providers.dart';
 
 class ErrorListWidget extends StatelessWidget{
 

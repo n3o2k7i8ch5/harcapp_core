@@ -1,11 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
-import 'package:harcapp_core/song/own_song/song_raw.dart';
 import 'package:tuple/tuple.dart';
 import 'package:provider/provider.dart';
 
-import '../song_core.dart';
-import 'common.dart';
+import '../add_person.dart';
+import 'song_raw.dart';
 
 
 class CurrentItemProvider extends ChangeNotifier{
