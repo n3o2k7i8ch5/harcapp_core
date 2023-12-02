@@ -131,7 +131,7 @@ class SongWidgetTemplate<TSong extends SongCore, TAddPersRes extends AddPersonRe
   final ScrollController scrollController;
   final Color? accentColor;
 
-  final TAddPersRes addPersResolver;
+  final TAddPersRes addPersonResolver;
 
   const SongWidgetTemplate(
       this.song,
@@ -194,7 +194,7 @@ class SongWidgetTemplate<TSong extends SongCore, TAddPersRes extends AddPersonRe
         required this.scrollController,
         this.accentColor,
 
-        required this.addPersResolver,
+        required this.addPersonResolver,
 
         Key? key
       }):super(key: key);
@@ -267,7 +267,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
   ScrollController get scrollController => widget.scrollController;
   Color? get accentColor => widget.accentColor;
 
-  TAddPersRes get addPersResolver => widget.addPersResolver;
+  TAddPersRes get addPersonResolver => widget.addPersonResolver;
 
   bool get showChords => settings.showChords && song.hasChords;
 
@@ -418,7 +418,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
                       padding: const EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg, left: 2*Dimen.defMarg + Dimen.TEXT_SIZE_NORMAL + 2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: song.addPers.map((addPers) => addPersResolver.build(context, addPers)).toList(),
+                        children: song.addPers.map((addPers) => addPersonResolver.build(context, addPers)).toList(),
                       )
                   ),
 

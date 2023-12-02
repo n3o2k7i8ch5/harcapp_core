@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
-import 'package:harcapp_core/tag/tag.dart';
+import 'package:harcapp_core/song_book/song_tags.dart';
 import 'package:harcapp_core/tag/tags_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -35,21 +35,20 @@ class SongTagsWidget extends StatelessWidget{
               child: TitleShortcutRowWidget(
                 title: 'Tagi${prov.count==0?'':' (${prov.count})'}',
                 textAlign: TextAlign.start,
-                //icon: MdiIcons.tagOutline,
               ),
             ),
 
             if(linear)
               TagsWidget.linear(
                 onTagTap: onTagTap as dynamic Function(String, bool)?,
-                allTags: Tag.ALL_TAG_NAMES,
+                allTags: SongTag.ALL,
                 checkedTags: prov.checkedTags,
                 fontSize: Dimen.TEXT_SIZE_NORMAL,
               )
             else
               TagsWidget.wrap(
                 onTagTap: onTagTap as dynamic Function(String, bool)?,
-                allTags: Tag.ALL_TAG_NAMES,
+                allTags: SongTag.ALL,
                 checkedTags: prov.checkedTags,
                 fontSize: Dimen.TEXT_SIZE_NORMAL,
               )
