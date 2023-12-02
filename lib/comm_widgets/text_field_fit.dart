@@ -21,9 +21,9 @@ class TextFieldFit extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
 
-  const TextFieldFit({this.minWidth: 30, this.decoration, this.style,
+  const TextFieldFit({this.minWidth = 30, this.decoration, this.style,
   this.textAlign, this.textDirection, this.locale, this.strutStyle, this.minLines,
-  this.maxLines, this.expands: false, this.controller, this.focusNode, this.autofocus: false, this.enabled: true, this.onChanged, this.inputFormatters, this.keyboardType});
+  this.maxLines, this.expands = false, this.controller, this.focusNode, this.autofocus = false, this.enabled = true, this.onChanged, this.inputFormatters, this.keyboardType});
 
   @override
   State<StatefulWidget> createState() => TextFieldFitState();

@@ -23,12 +23,12 @@ class TextFieldChords extends StatefulWidget{
     this.minLines,
     this.maxLines,
     this.focusNode,
-    this.keyboardType:TextInputType.visiblePassword,
-    this.expands: false,
+    this.keyboardType = TextInputType.visiblePassword,
+    this.expands = false,
     this.onChanged,
-    this.autofocus: false,
-    this.enabled: true,
-    this.textAlign: TextAlign.start});
+    this.autofocus = false,
+    this.enabled = true,
+    this.textAlign = TextAlign.start});
 
   @override
   State<StatefulWidget> createState() => TextFieldChordsState();

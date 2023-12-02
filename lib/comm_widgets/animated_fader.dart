@@ -11,7 +11,7 @@ class AnimatedFader extends StatelessWidget{
     required this.child,
     required this.duration,
     required this.fade,
-    this.direction: Axis.horizontal
+    this.direction = Axis.horizontal
   });
 
   @override

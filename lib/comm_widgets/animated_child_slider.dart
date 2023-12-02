@@ -18,17 +18,17 @@ class AnimatedChildSlider extends StatelessWidget{
   final bool withOpacity;
 
   const AnimatedChildSlider({
-    this.switchInCurve: Curves.easeOutQuad,
-    this.switchOutCurve:Curves.easeInQuad,
-    this.duration: const Duration(milliseconds: 300),
+    this.switchInCurve = Curves.easeOutQuad,
+    this.switchOutCurve = Curves.easeInQuad,
+    this.duration = const Duration(milliseconds: 300),
     required this.children,
     required this.index,
-    this.isCenter: true,
-    this.direction: Axis.vertical,
-    this.reverse: false,
-    this.alignment: Alignment.center,
-    this.clipBehavior: Clip.hardEdge,
-    this.withOpacity: false,
+    this.isCenter = true,
+    this.direction = Axis.vertical,
+    this.reverse = false,
+    this.alignment = Alignment.center,
+    this.clipBehavior = Clip.hardEdge,
+    this.withOpacity = false,
   });
 
   @override

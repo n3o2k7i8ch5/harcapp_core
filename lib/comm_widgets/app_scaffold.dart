@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,7 +15,7 @@ class AppScaffold extends StatelessWidget{
   final bool avoidKeyboard;
   final bool extendBody;
 
-  const AppScaffold({this.scaffoldKey, this.appBar, this.drawer, this.body, this.backgroundColor, this.bottomNavigationBar, this.floatingActionButton, this.avoidKeyboard: true, this.extendBody: false});
+  const AppScaffold({this.scaffoldKey, this.appBar, this.drawer, this.body, this.backgroundColor, this.bottomNavigationBar, this.floatingActionButton, this.avoidKeyboard = true, this.extendBody = false});
 
   @override
   Widget build(BuildContext context) => MediaQuery.removePadding(
@@ -43,7 +42,7 @@ class AppScaffold extends StatelessWidget{
         void Function()? onButtonPressed,
         Color? backgroundColor,
         Color? textColor,
-        Duration duration: const Duration(seconds: 3)
+        Duration duration = const Duration(seconds: 3)
       }){
 
     if(kIsWeb){

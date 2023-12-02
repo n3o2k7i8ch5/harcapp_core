@@ -20,7 +20,7 @@ class TextFieldFitChords extends StatefulWidget {
   final Function(String)? onChanged;
   final TextInputType? keyboardType;
 
-  const TextFieldFitChords({this.minWidth: 30, this.decoration, this.style, this.textAlign, this.textDirection, this.locale, this.strutStyle, this.minLines, this.maxLines, this.focusNode, this.expands: false, this.controller, this.autofocus: false, this.enabled: true, this.onChanged, this.keyboardType});
+  const TextFieldFitChords({this.minWidth = 30, this.decoration, this.style, this.textAlign, this.textDirection, this.locale, this.strutStyle, this.minLines, this.maxLines, this.focusNode, this.expands = false, this.controller, this.autofocus = false, this.enabled = true, this.onChanged, this.keyboardType});
 
   @override
   State<StatefulWidget> createState() => TextFieldFitChordsState();

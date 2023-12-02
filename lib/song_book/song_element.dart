@@ -19,7 +19,7 @@ class SongElement{
 
   void setText(String text) => this._text.set(text);
 
-  String getText({bool withTabs: false}){
+  String getText({bool withTabs=false}){
     if(withTabs)
       return SongCore.TAB_CHAR + _text.get().replaceAll('\n', '\n${SongCore.TAB_CHAR}');
     else

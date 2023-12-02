@@ -165,7 +165,7 @@ class TextSizeProvider extends ChangeNotifier{
     return changedSize;
   }
 
-  double calculate(double screenWidth, SongCore song, {required bool chordsVisible, double initSize: defFontSize}){
+  double calculate(double screenWidth, SongCore song, {required bool chordsVisible, double initSize=defFontSize}){
     double scale = fits(screenWidth, song.text, chordsVisible?song.chords:null, song.lineNumStr, initSize);
     return scale*initSize;
   }

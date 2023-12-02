@@ -37,17 +37,16 @@ class AppCard extends StatelessWidget{
     this.key,
     this.child,
     this.color,
-    this.margin: EdgeInsets.zero,
-    this.padding: defPadding,
-    this.elevation: 1.0,
+    this.margin = EdgeInsets.zero,
+    this.padding = defPadding,
+    this.elevation = 1.0,
     this.onTap,
     this.onLongPress,
     this.onDoubleTap,
-    this.radius: defRadius,
+    this.radius = defRadius,
     this.borderRadius,
-    this.elevetionColor: Colors.black,
-    this.clipBehavior: Clip.antiAliasWithSaveLayer,
-    //this.transMilis: DEF_TRANS_MILIS
+    this.elevetionColor = Colors.black,
+    this.clipBehavior = Clip.antiAliasWithSaveLayer,
   }):super(key: key);
 
   @override

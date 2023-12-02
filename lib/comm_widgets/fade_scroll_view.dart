@@ -11,7 +11,7 @@ class FadeScrollView extends StatefulWidget{
   final ScrollController? controller;
   final ScrollPhysics? physics;
 
-  const FadeScrollView({this.scrollDirection: Axis.vertical, this.reverse: false, this.padding, this.child, this.controller, this.physics});
+  const FadeScrollView({this.scrollDirection = Axis.vertical, this.reverse = false, this.padding, this.child, this.controller, this.physics});
 
   @override
   State<StatefulWidget> createState() => FadeScrollViewState();

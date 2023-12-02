@@ -19,7 +19,7 @@ class _Fretboard extends StatelessWidget{
   final int? strings;
 
   const _Fretboard({
-    this.size: ChordWidget.defSize,
+    this.size = ChordWidget.defSize,
     this.color,
     this.frets,
     this.strings
@@ -92,11 +92,11 @@ class ChordWidget extends StatelessWidget{
 
   const ChordWidget({
     this.chord,
-    this.size: defSize,
+    this.size = defSize,
     this.color,
-    this.elevation: 4.0,
+    this.elevation = 4.0,
 
-    this.frets: defFretCnt,
+    this.frets = defFretCnt,
     this.strings,
 
     this.onTap,
