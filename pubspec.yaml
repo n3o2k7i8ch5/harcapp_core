@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  connectivity_plus: ^4.0.2
+  connectivity_plus: ^5.0.2
   fluttertoast: ^8.2.2
   implicitly_animated_reorderable_list_2: ^0.5.1
   linked_scroll_controller: ^0.2.0
@@ -20,7 +20,7 @@ dependencies:
   provider: ^6.0.5
   tuple: ^2.0.2
   url_launcher: ^6.1.11
-  uuid: ^3.0.7
+  uuid: ^4.2.1
 
 dev_dependencies:
   flutter_test:
