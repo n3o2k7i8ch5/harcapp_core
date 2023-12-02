@@ -16,7 +16,7 @@ class TagsWidget extends StatelessWidget{
   final Function(String, bool)? onTagTap;
   final double separator;
   final Layout layout;
-  final Widget Function(BuildContext, String, bool)? tagBuilder;
+  final Widget Function(BuildContext, String, bool) tagBuilder;
 
   static double get height => Dimen.TEXT_SIZE_BIG + 2*Dimen.ICON_MARG;
 
@@ -41,8 +41,8 @@ class TagsWidget extends StatelessWidget{
     required List<String> allTags,
     required List<String> checkedTags,
     Function(String, bool)? onTagTap,
-    double separator=0,
-    Widget Function(BuildContext, String, bool)? tagBuilder
+    double separator = 0,
+    required Widget Function(BuildContext, String, bool) tagBuilder
   }) => TagsWidget(
     allTags: allTags,
     checkedTags: checkedTags,
@@ -116,7 +116,7 @@ class TagsWidget extends StatelessWidget{
     List<Widget> tags = [];
     for(int i=0; i<allTags.length; i++) {
       String tagStr = allTags[i];
-      tags.add(tagBuilder!(context, tagStr, checkedTags!.contains(tagStr)));
+      tags.add(tagBuilder(context, tagStr, checkedTags!.contains(tagStr)));
       if(i<allTags.length-1 && layout == Layout.LINEAR) tags.add(SizedBox(width: separator));
     }
 
