@@ -2,12 +2,12 @@ import 'package:flutter/widgets.dart';
 
 class AnimatedFader extends StatelessWidget{
 
-  Widget child;
-  Duration duration;
-  bool fade;
-  Axis direction;
+  final Widget child;
+  final Duration duration;
+  final bool fade;
+  final Axis direction;
 
-  AnimatedFader({
+  const AnimatedFader({
     required this.child,
     required this.duration,
     required this.fade,
@@ -15,16 +15,14 @@ class AnimatedFader extends StatelessWidget{
   });
 
   @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
+  Widget build(BuildContext context) => AnimatedContainer(
+    duration: duration,
+    width: direction==Axis.horizontal && fade?0:null,
+    height: direction==Axis.vertical && fade?0:null,
+    child: AnimatedOpacity(
       duration: duration,
-      width: direction==Axis.horizontal && fade?0:null,
-      height: direction==Axis.vertical && fade?0:null,
-      child: AnimatedOpacity(
-        duration: duration,
-        opacity: fade?0:1,
-      ),
-    );
-  }
+      opacity: fade?0:1,
+    ),
+  );
 
 }
