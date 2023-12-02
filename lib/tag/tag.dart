@@ -57,10 +57,12 @@ class Tag extends StatelessWidget{
 
     var wordWrapText = TextPainter(
       text: TextSpan(
-          style: AppTextStyle(
-              fontSize: fontSize,
-              fontWeight: weight.halfBold
-          ), text: text),
+        text: text,
+        style: AppTextStyle(
+            fontSize: fontSize,
+            fontWeight: weight.halfBold
+        )
+      ),
       textDirection: TextDirection.ltr,
     );
     wordWrapText.layout();
@@ -77,11 +79,11 @@ class Tag extends StatelessWidget{
               fontWeight: fontWeight,
               color: textColor,
             ),
+            maxLines: 1,
             textAlign: TextAlign.center,
           ),
-          width: width
+          width: width + 2
       ),
-      margin: EdgeInsets.zero,
       padding: padding,
       onTap: onTap,
       elevation: elevation,
