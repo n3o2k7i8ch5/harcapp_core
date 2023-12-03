@@ -25,7 +25,7 @@ class Tag extends StatelessWidget{
     fontSize: fontSize,
     padding: padding,
 
-    fontWeight: weight.halfBold,
+    bold: true,
     elevation: AppCard.bigElevation,
   );
 
@@ -33,7 +33,7 @@ class Tag extends StatelessWidget{
   final Function()? onTap;
   final Clip clipBehavior;
   final double fontSize;
-  final weight fontWeight;
+  final bool bold;
   final EdgeInsets padding;
   final double elevation;
   final Color? color;
@@ -44,7 +44,7 @@ class Tag extends StatelessWidget{
       { this.onTap,
         this.clipBehavior = Clip.hardEdge,
         this.fontSize = Dimen.TEXT_SIZE_NORMAL,
-        this.fontWeight = weight.normal,
+        this.bold = false,
         this.padding = const EdgeInsets.all(Dimen.ICON_MARG),
         this.elevation = AppCard.defElevation,
         this.color,
@@ -55,34 +55,57 @@ class Tag extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    var wordWrapText = TextPainter(
-      text: TextSpan(
-        text: text,
-        style: AppTextStyle(
-            fontSize: fontSize,
-            fontWeight: weight.halfBold
-        )
-      ),
-      textDirection: TextDirection.ltr,
-    );
-    wordWrapText.layout();
-    double width = wordWrapText.width;
+    // Not working, for some reason.
+    //
+    // var wordWrapText = TextPainter(
+    //     text: TextSpan(
+    //       text: text,
+    //       style: AppTextStyle(
+    //           fontSize: MediaQuery.of(context).textScaler.scale(fontSize),
+    //           fontWeight: weight.halfBold
+    //       ),
+    //     ),
+    //     textDirection: TextDirection.ltr,
+    //     maxLines: 1
+    // );
+    // wordWrapText.layout();
+    // double width = wordWrapText.width;
 
     return SimpleButton(
       radius: 100.0,
       clipBehavior: clipBehavior,
-      child: SizedBox(
-          child: Text(
-            text,
-            style: AppTextStyle(
-              fontSize: fontSize,
-              fontWeight: fontWeight,
-              color: textColor,
+      child: IntrinsicWidth(
+        child: Stack(
+          children: [
+
+            Center(
+              child: Text(
+                text,
+                style: AppTextStyle(
+                  fontSize: fontSize,
+                  fontWeight: bold?weight.halfBold:weight.normal,
+                  color: textColor,
+                ),
+                maxLines: 1,
+                textAlign: TextAlign.center,
+              ),
             ),
-            maxLines: 1,
-            textAlign: TextAlign.center,
-          ),
-          width: width + 2
+
+            Opacity(
+              opacity: 0,
+              child: Text(
+                text,
+                style: AppTextStyle(
+                  fontSize: fontSize,
+                  fontWeight: weight.halfBold,
+                  color: textColor,
+                ),
+                maxLines: 1,
+              ),
+            )
+
+          ],
+        ),
       ),
       padding: padding,
       onTap: onTap,
