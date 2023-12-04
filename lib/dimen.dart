@@ -8,6 +8,7 @@ class Dimen{
   static const double SIDE_MARG = 18.0;
   static const double CARD_BIG_PADD = 16.0;
   static const double APPBAR_ELEVATION = 4.0;
+  static const double APPBAR_TITLE_BOTTOM_PADDING_VAL = 16.0;
 
   static const double TEXT_SIZE_LIMIT = 8;
   static const double TEXT_SIZE_TINY = 10;
