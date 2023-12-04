@@ -8,7 +8,7 @@ import 'package:oktoast/oktoast.dart';
 import 'app_card.dart';
 import 'app_text.dart';
 
-void showAppToast(
+ToastFuture showAppToast(
     BuildContext context,
     {String? header,
     required String text,
