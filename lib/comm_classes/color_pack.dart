@@ -91,9 +91,10 @@ abstract class ColorPack{
     ),
     tabBarTheme: TabBarTheme(
         labelColor: iconEnabled,
-        unselectedLabelColor: hintEnabled,
+        unselectedLabelColor: iconDisabled,
         labelStyle: AppTextStyle(fontWeight: weight.halfBold),
-        unselectedLabelStyle: AppTextStyle(fontWeight: weight.halfBold)
+        unselectedLabelStyle: AppTextStyle(fontWeight: weight.halfBold),
+        overlayColor: MaterialStateColor.resolveWith((states) => accentColor.withOpacity(.2))
     ),
     timePickerTheme: TimePickerThemeData(
       backgroundColor: background,
