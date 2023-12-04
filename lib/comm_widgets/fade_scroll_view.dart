@@ -5,13 +5,14 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 class FadeScrollView extends StatefulWidget{
 
   final Axis scrollDirection;
+  final Clip clipBehavior;
   final bool reverse;
   final EdgeInsetsGeometry? padding;
   final Widget? child;
   final ScrollController? controller;
   final ScrollPhysics? physics;
 
-  const FadeScrollView({this.scrollDirection = Axis.vertical, this.reverse = false, this.padding, this.child, this.controller, this.physics});
+  const FadeScrollView({this.scrollDirection = Axis.vertical, this.clipBehavior = Clip.none, this.reverse = false, this.padding, this.child, this.controller, this.physics});
 
   @override
   State<StatefulWidget> createState() => FadeScrollViewState();
@@ -48,55 +49,55 @@ class FadeScrollViewState extends State<FadeScrollView>{
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
+  Widget build(BuildContext context) => Stack(
+    clipBehavior: widget.clipBehavior,
+    children: [
 
-        SingleChildScrollView(
-          scrollDirection: widget.scrollDirection,
-          reverse: widget.reverse,
-          padding: widget.padding,
-          child: widget.child,
-          controller: controller,
-          physics: widget.physics,
-        ),
+      SingleChildScrollView(
+        scrollDirection: widget.scrollDirection,
+        clipBehavior: widget.clipBehavior,
+        reverse: widget.reverse,
+        padding: widget.padding,
+        child: widget.child,
+        controller: controller,
+        physics: widget.physics,
+      ),
 
-        Positioned(
-          top: 0, bottom: 0,
-          left: 0,
-          child: AnimatedOpacity(
-            duration: Duration(milliseconds: 500),
-            opacity: showStartGlow?1:0,
-            child: Container(
-              width: 36,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [background_(context), background_(context).withAlpha(0)]
-                  )
-              ),
+      Positioned(
+        top: 0, bottom: 0,
+        left: 0,
+        child: AnimatedOpacity(
+          duration: Duration(milliseconds: 500),
+          opacity: showStartGlow?1:0,
+          child: Container(
+            width: 36,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [background_(context), background_(context).withAlpha(0)]
+                )
             ),
           ),
         ),
+      ),
 
-        Positioned(
-          top: 0, bottom: 0,
-          right: 0,
-          child: AnimatedOpacity(
-            duration: Duration(milliseconds: 500),
-            opacity: showEndGlow?1:0,
-            child: Container(
-              width: 36,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [background_(context).withAlpha(0), background_(context)]
-                  )
-              ),
+      Positioned(
+        top: 0, bottom: 0,
+        right: 0,
+        child: AnimatedOpacity(
+          duration: Duration(milliseconds: 500),
+          opacity: showEndGlow?1:0,
+          child: Container(
+            width: 36,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [background_(context).withAlpha(0), background_(context)]
+                )
             ),
           ),
-        )
+        ),
+      )
 
-      ],
-    );
-  }
+    ],
+  );
 
 }
