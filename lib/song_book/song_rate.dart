@@ -32,8 +32,11 @@ class RateCard<T extends SongCore> extends StatelessWidget{
             bottom: 0,
             left: 0,
             right: 0,
-            height: RateButton.HEIGHT*backgroundBars![index],
-            child: Container(color: backgroundIcon_(context))
+            child: Container(
+              width: double.infinity,
+              height: RateButton.HEIGHT*backgroundBars![index],
+              color: backgroundIcon_(context)
+            )
         ),
         child,
       ],
