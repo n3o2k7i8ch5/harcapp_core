@@ -11,7 +11,7 @@ import 'song_core.dart';
 
 class RateStatisticsClipper extends CustomClipper<Path>{
 
-  static const double radius = 20;
+  static const double radius = 5;
 
   final List<double> bars;
 
@@ -25,23 +25,25 @@ class RateStatisticsClipper extends CustomClipper<Path>{
     Path path = Path();
     path.moveTo(0, height);
 
-    path.lineTo(0, height*bars[0] - radius);
-    path.quadraticBezierTo(0, height*bars[0], radius, height*bars[0]);
-    path.lineTo(width - radius, height*bars[0]);
+    List<double> _bars = bars.map((b) => 1-b).toList();
 
-    if(bars[1] > bars[0])
-      path.quadraticBezierTo(width, height*bars[0], width, height*bars[0] - radius);
+    path.lineTo(0, height*_bars[0] - radius);
+    path.quadraticBezierTo(0, height*_bars[0], radius, height*_bars[0]);
+    path.lineTo(width - radius, height*_bars[0]);
+
+    if(_bars[1] > _bars[0])
+      path.quadraticBezierTo(width, height*_bars[0], width, height*_bars[0] - radius);
     else
-      path.quadraticBezierTo(width, height*bars[0], width, height*bars[0] + radius);
+      path.quadraticBezierTo(width, height*_bars[0], width, height*_bars[0] + radius);
 
-    path.lineTo(width, height*bars[1] - radius);
-    path.quadraticBezierTo(width, height*bars[1], width + radius, height*bars[0]);
-    path.lineTo(2*width - radius, height*bars[0]);
+    path.lineTo(width, height*_bars[1] - radius);
+    path.quadraticBezierTo(width, height*_bars[1], width + radius, height*_bars[0]);
+    path.lineTo(2*width - radius, height*_bars[0]);
 
-    if(bars[2] > bars[1])
-      path.quadraticBezierTo(2*width, height*bars[1], 2*width, height*bars[1] - radius);
+    if(_bars[2] > _bars[1])
+      path.quadraticBezierTo(2*width, height*_bars[1], 2*width, height*_bars[1] - radius);
     else
-      path.quadraticBezierTo(2*width, height*bars[1], 2*width, height*bars[1] + radius);
+      path.quadraticBezierTo(2*width, height*_bars[1], 2*width, height*_bars[1] + radius);
 
     path.lineTo(width, 0);
     path.lineTo(width, height);
