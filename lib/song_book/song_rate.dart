@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
@@ -11,11 +13,14 @@ import 'song_core.dart';
 
 class RateStatisticsClipper extends CustomClipper<Path>{
 
-  static const double radius = 5;
+  static const double radius = 15;
 
   final List<double> bars;
 
   const RateStatisticsClipper(this.bars);
+
+  double safeRadius(double barPrev, double barNext) =>
+      min((barPrev - barNext).abs()/2, radius);
 
   @override
   Path getClip(Size size) {
@@ -25,28 +30,188 @@ class RateStatisticsClipper extends CustomClipper<Path>{
     Path path = Path();
     path.moveTo(0, height);
 
-    List<double> _bars = bars.map((b) => 1-b).toList();
+    double br0 = height*(1-bars[0]); // bar remainer 0
+    double br1 = height*(1-bars[1]); // bar remainer 1
+    double br2 = height*(1-bars[2]); // bar remainer 2
+    double br3 = height*(1-bars[3]); // bar remainer 3
+    double br4 = height*(1-bars[4]); // bar remainer 4
 
-    path.lineTo(0, height*_bars[0] - radius);
-    path.quadraticBezierTo(0, height*_bars[0], radius, height*_bars[0]);
-    path.lineTo(width - radius, height*_bars[0]);
+    path.lineTo(0*width, br0 + safeRadius(height, br0)); // up
 
-    if(_bars[1] > _bars[0])
-      path.quadraticBezierTo(width, height*_bars[0], width, height*_bars[0] - radius);
-    else
-      path.quadraticBezierTo(width, height*_bars[0], width, height*_bars[0] + radius);
+    path.arcToPoint(
+      Offset(0*width + safeRadius(height, br0), br0),
+      radius: Radius.circular(safeRadius(height, br0)),
+      rotation: 90,
+    );
+    // path.lineTo(0*width + safeRadius(0, br0), br0); // --
 
-    path.lineTo(width, height*_bars[1] - radius);
-    path.quadraticBezierTo(width, height*_bars[1], width + radius, height*_bars[0]);
-    path.lineTo(2*width - radius, height*_bars[0]);
+    // -- Bar 0
+    path.lineTo(1*width - safeRadius(br0, br1), br0); // right
 
-    if(_bars[2] > _bars[1])
-      path.quadraticBezierTo(2*width, height*_bars[1], 2*width, height*_bars[1] - radius);
-    else
-      path.quadraticBezierTo(2*width, height*_bars[1], 2*width, height*_bars[1] + radius);
+    if(br1 > br0) {
+      path.arcToPoint(
+        Offset(1*width, br0 + safeRadius(br0, br1)),
+        radius: Radius.circular(safeRadius(br0, br1)),
+        rotation: 90,
+      );
+      // path.lineTo(1*width, br0 + safeRadius(br0, br1)); // --
 
-    path.lineTo(width, 0);
-    path.lineTo(width, height);
+      path.lineTo(1*width, br1 - safeRadius(br0, br1)); // down
+
+      path.arcToPoint(
+          Offset(1*width + safeRadius(br0, br1), br1),
+          radius: Radius.circular(safeRadius(br0, br1)),
+          rotation: -90,
+          clockwise: false
+      );
+      // path.lineTo(1*width+safeRadius(br0, br1), safeRadius(br0, br1)); // --
+    }else {
+      path.arcToPoint(
+          Offset(1*width, br0 - safeRadius(br0, br1)),
+          radius: Radius.circular(safeRadius(br0, br1)),
+          rotation: -90,
+          clockwise: false
+      );
+      // path.lineTo(1*width, br0 - safeRadius(br0, br1)); // --
+
+      path.lineTo(1*width, br1 + safeRadius(br0, br1)); // up
+
+      path.arcToPoint(
+        Offset(1*width + safeRadius(br0, br1), br1),
+        radius: Radius.circular(safeRadius(br0, br1)),
+        rotation: 90,
+      );
+      // path.lineTo(1*width+safeRadius(br0, br1), br1); // --
+    }
+
+    // -- Bar 1
+    path.lineTo(2*width - safeRadius(br1, br2), br1); // right
+
+    if(br2 > br1) {
+      path.arcToPoint(
+        Offset(2*width, br1 + safeRadius(br1, br2)),
+        radius: Radius.circular(safeRadius(br1, br2)),
+        rotation: 90,
+      );
+      // path.lineTo(2*width, br1 + safeRadius(br1, br2)); // --
+
+      path.lineTo(2*width, br2 - safeRadius(br1, br2)); // down
+
+      path.arcToPoint(
+          Offset(2*width + safeRadius(br1, br2), br2),
+          radius: Radius.circular(safeRadius(br1, br2)),
+          rotation: -90,
+          clockwise: false
+      );
+      //path.lineTo(2*width+safeRadius(br1, br2), br2); // --
+    }else {
+      path.arcToPoint(
+          Offset(2*width, br1 - safeRadius(br1, br2)),
+          radius: Radius.circular(safeRadius(br1, br2)),
+          rotation: -90,
+          clockwise: false
+      );
+      // path.lineTo(2*width, br1 - safeRadius(br1, br2)); // --
+
+      path.lineTo(2*width, br2 + safeRadius(br1, br2)); // up
+
+      path.arcToPoint(
+        Offset(2*width + safeRadius(br1, br2), br2),
+        radius: Radius.circular(safeRadius(br1, br2)),
+        rotation: 90,
+      );
+      // path.lineTo(2*width+safeRadius(br1, br2), br2); // --
+    }
+
+    // -- Bar 2
+    path.lineTo(3*width - safeRadius(br2, br3), br2); // right
+
+    if(br3 > br2) {
+      path.arcToPoint(
+        Offset(3*width, br2 + safeRadius(br2, br3)),
+        radius: Radius.circular(safeRadius(br2, br3)),
+        rotation: 90,
+      );
+      //path.lineTo(3*width, bar2 + safeRadius(bar2, bar3)); // --
+
+      path.lineTo(3*width, br3 - safeRadius(br2, br3)); // down
+
+      path.arcToPoint(
+          Offset(3*width+safeRadius(br2, br3), br3),
+          radius: Radius.circular(safeRadius(br2, br3)),
+          rotation: -90,
+          clockwise: false
+      );
+      //path.lineTo(3*width+safeRadius(bar2, bar3), bar3); // --
+    }else {
+      path.arcToPoint(
+          Offset(3*width, br2 - safeRadius(br2, br3)),
+          radius: Radius.circular(safeRadius(br2, br3)),
+          rotation: -90,
+          clockwise: false
+      );
+      // path.lineTo(3*width, br2 - safeRadius(br2, br3)); // --
+
+      path.lineTo(3*width, br3 + safeRadius(br2, br3)); // up
+
+      path.arcToPoint(
+        Offset(3*width + safeRadius(br2, br3), br3),
+        radius: Radius.circular(safeRadius(br2, br3)),
+        rotation: 90,
+      );
+      // path.lineTo(3*width + safeRadius(br2, br3), br3); // --
+    }
+
+    // -- Bar 3
+    path.lineTo(4*width - safeRadius(br3, br4), br3); // right
+
+    if(br4 > br3) {
+      path.arcToPoint(
+        Offset(4*width, br3 + safeRadius(br3, br4)),
+        radius: Radius.circular(safeRadius(br3, br4)),
+        rotation: 90,
+      );
+      // path.lineTo(4*width, br3 + safeRadius(br3, br4)); // --
+
+      path.lineTo(4*width, br4 - safeRadius(br3, br4)); // down
+
+      path.arcToPoint(
+          Offset(4*width+safeRadius(br3, br4), br4),
+          radius: Radius.circular(safeRadius(br3, br4)),
+          rotation: -90,
+          clockwise: false
+      );
+      // path.lineTo(4*width+safeRadius(br3, br4), br4); // --
+    }else {
+      path.arcToPoint(
+          Offset(4*width, br3 - safeRadius(br3, br4)),
+          radius: Radius.circular(safeRadius(br3, br4)),
+          rotation: -90,
+          clockwise: false
+      );
+      // path.lineTo(4*width, br3 - safeRadius(br3, br4)); // --
+
+      path.lineTo(4*width, br4 + safeRadius(br3, br4)); // down
+
+      path.arcToPoint(
+        Offset(4*width + safeRadius(br3, br4), br4),
+        radius: Radius.circular(safeRadius(br3, br4)),
+        rotation: 90,
+      );
+      // path.lineTo(4*width+safeRadius(br3, br4), br4); // --
+    }
+
+    // -- Bar 4
+    path.lineTo(5*width - safeRadius(br4, height), br4); // right
+
+    // path.lineTo(5*width, br4 + safeRadius(br4, 0)); // --
+    path.arcToPoint(
+      Offset(5*width, br4 + safeRadius(br4, height)),
+      radius: Radius.circular(safeRadius(br4, height)),
+      rotation: 90,
+    );
+
+    path.lineTo(totalWidth, height);
     return path;
   }
 
