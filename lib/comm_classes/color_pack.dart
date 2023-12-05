@@ -27,14 +27,13 @@ Color iconDisab_(BuildContext context) => Theme.of(context).hintColor;
 
 abstract class ColorPack{
 
-  static const DEF_APP_BAR_TEXT_ENAB = Colors.black;
-  static const DEF_APP_BAR_TEXT_DISAB = Colors.black54;
+  static const defAppBarTextEnab = Colors.black;
 
-  static const DEF_ICON_ENAB = Colors.black;
-  static const DEF_ICON_DISAB = Colors.black38;
+  static const defIconEnab = Colors.black;
+  static const defIconDisab = Colors.black38;
 
-  static const DEF_CARD = AppColors.white_dark;
-  static const DEF_BACKGROUND = Colors.white;
+  static const defCard = AppColors.white_dark;
+  static const defBackground = Colors.white;
 
   const ColorPack();
 
@@ -43,8 +42,7 @@ abstract class ColorPack{
   Brightness get brightness => Brightness.light;
 
   Color get appBar => background;
-  Color get appBarTextEnabled => DEF_APP_BAR_TEXT_ENAB;
-  //Color get appBarTextDisabled => DEF_APP_BAR_TEXT_DISAB;
+  Color get appBarTextEnabled => defAppBarTextEnab;
 
   Color get textEnabled => AppColors.text_def_enab;
   Color get textDisabled => AppColors.text_def_disab;
@@ -54,11 +52,15 @@ abstract class ColorPack{
 
   Color get hintEnabled => AppColors.text_hint_enab;
 
-  Color get defCardEnabled => DEF_CARD;
+  Color get defCardEnabled => defCard;
   Color get defCardDisabled => Color.fromARGB(255, 235, 235, 235);
   Color get defCardElevation => Colors.black;
 
-  Color get background => DEF_BACKGROUND;
+  Color get background => defBackground;
+  // Status bar color
+  Color get backgroundStart => background;
+  // Bottom navigation bar color
+  Color get backgroundEnd => background;
   Color get backgroundIcon => Colors.black.withOpacity(0.05);
 
   Color get accentColor;
@@ -86,9 +88,6 @@ abstract class ColorPack{
       bodyMedium: TextStyle(color: textEnabled),
       bodyLarge: TextStyle(color: textEnabled),
     ).apply(),
-    checkboxTheme: CheckboxThemeData(
-      checkColor: MaterialStateProperty.all(background),
-    ),
     tabBarTheme: TabBarTheme(
         labelColor: iconEnabled,
         unselectedLabelColor: iconDisabled,
@@ -138,8 +137,6 @@ abstract class ColorPack{
       onError: Colors.red,
     ),
     scaffoldBackgroundColor: background,
-
-    toggleableActiveColor: accentColor,
     unselectedWidgetColor: hintEnabled,
 
     bottomSheetTheme: BottomSheetThemeData(
@@ -169,10 +166,36 @@ abstract class ColorPack{
     primaryColorDark: accentColor,
     primaryColorLight: accentColor,
     iconTheme: IconThemeData(
-        color: iconEnabled,
+      color: iconEnabled,
     ),
     primaryIconTheme: IconThemeData(
       color: iconEnabled,
     ),
+    checkboxTheme: CheckboxThemeData(
+      checkColor: MaterialStateProperty.all(background),
+    ).copyWith(
+      fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) { return null; }
+        if (states.contains(MaterialState.selected)) { return accentColor; }
+        return null;
+      }),
+    ), radioTheme: RadioThemeData(
+    fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+      if (states.contains(MaterialState.disabled)) { return null; }
+      if (states.contains(MaterialState.selected)) { return accentColor; }
+      return null;
+    }),
+  ), switchTheme: SwitchThemeData(
+    thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+      if (states.contains(MaterialState.disabled)) { return null; }
+      if (states.contains(MaterialState.selected)) { return accentColor; }
+      return null;
+    }),
+    trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+      if (states.contains(MaterialState.disabled)) { return null; }
+      if (states.contains(MaterialState.selected)) { return accentColor; }
+      return null;
+    }),
+  ),
   );
 }
