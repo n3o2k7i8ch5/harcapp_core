@@ -215,50 +215,50 @@ class RateCard<T extends SongCore> extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Align(
-    alignment: Alignment.topCenter,
-    child: Padding(
-      padding: const EdgeInsets.all(Dimen.defMarg),
-      child: Material(
-        color: background_(context),
-        clipBehavior: Clip.hardEdge,
-        borderRadius: BorderRadius.circular(AppCard.bigRadius),
-        elevation: AppCard.bigElevation,
-        child: Stack(
-          children: [
-            if(backgroundBars != null)
-              SizedBox(
-                height: RateButton.HEIGHT,
-                child: ClipPath(
-                  clipper: RateStatisticsClipper(backgroundBars!),
-                  child: Container(
-                    color: cardEnab_(context),
-                  )
+      alignment: Alignment.topCenter,
+      child: Padding(
+        padding: const EdgeInsets.all(Dimen.defMarg),
+        child: Material(
+          color: background_(context),
+          clipBehavior: Clip.hardEdge,
+          borderRadius: BorderRadius.circular(AppCard.bigRadius),
+          elevation: AppCard.bigElevation,
+          child: Stack(
+            children: [
+              if(backgroundBars != null)
+                SizedBox(
+                  height: RateButton.HEIGHT,
+                  child: ClipPath(
+                      clipper: RateStatisticsClipper(backgroundBars!),
+                      child: Container(
+                        color: cardEnab_(context),
+                      )
+                  ),
                 ),
-              ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: RateButton.from(song, SongRate.textLike1, SongRate.getIcon(1), SongRate.RATE_1, onTap),
-                ),
-                Expanded(
-                  child: RateButton.from(song, SongRate.textLike2, SongRate.getIcon(2), SongRate.RATE_2, onTap)
-                ),
-                Expanded(
-                  child: RateButton.from(song, SongRate.textLike3, SongRate.getIcon(3), SongRate.RATE_3, onTap)
-                ),
-                Expanded(
-                  child: RateButton.from(song, SongRate.textLike4, SongRate.getIcon(4), SongRate.RATE_4, onTap)
-                ),
-                Expanded(
-                  child: RateButton.from(song, SongRate.textLike5, SongRate.getIcon(5), SongRate.RATE_5, onTap)
-                ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: RateButton.from(song, SongRate.textLike1, SongRate.RATE_1, onTap),
+                  ),
+                  Expanded(
+                      child: RateButton.from(song, SongRate.textLike2, SongRate.RATE_2, onTap)
+                  ),
+                  Expanded(
+                      child: RateButton.from(song, SongRate.textLike3, SongRate.RATE_3, onTap)
+                  ),
+                  Expanded(
+                      child: RateButton.from(song, SongRate.textLike4, SongRate.RATE_4, onTap)
+                  ),
+                  Expanded(
+                      child: RateButton.from(song, SongRate.textLike5, SongRate.RATE_5, onTap)
+                  ),
 
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
-      ),
-    )
+      )
   );
 
 }
@@ -434,45 +434,41 @@ class RateButton extends StatelessWidget{
   static const double HEIGHT = 2*Dimen.ICON_SIZE /*CHILD*/ + Dimen.TEXT_SIZE_SMALL /*TEXT*/ + 2* Dimen.defMarg /*PADDING*/;
 
   final String title;
-  final Icon icon;
   final int rate;
   final Function(int rate, bool clicked)? onTap;
   final bool selected;
   final Color? background;
-  final bool glow;
 
-  const RateButton(this.title, this.icon, this.rate, this.selected, {this.background, this.glow =true, this.onTap});
+  const RateButton(this.title, this.rate, this.selected, {this.background, this.onTap});
 
   static RateButton from<T extends SongCore>(
       T song,
       String title,
-      Icon icon,
       int rate,
       Function(int rate, bool clicked)? onTap
-  ) => RateButton(title, icon, rate, song.rate == rate, onTap: onTap);
+      ) => RateButton(title, rate, song.rate == rate, onTap: onTap);
 
 
   @override
   Widget build(BuildContext context) => SimpleButton(
     radius: AppCard.bigRadius,
     padding: EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg),
-    // color: selected?backgroundIcon_(context):null,
     margin: EdgeInsets.zero,
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          child: icon,
+          child: SongRate.getIcon(rate, size: selected?(Dimen.ICON_SIZE+4):Dimen.ICON_SIZE),
           height: 2*Dimen.ICON_SIZE,
         ),
         Text(
-          title,
-          style: AppTextStyle(
-            fontSize: Dimen.TEXT_SIZE_SMALL,
-            color: textEnab_(context),
-            fontWeight: selected?weight.bold:weight.normal
-          ),
-          textAlign: TextAlign.center
+            title,
+            style: AppTextStyle(
+                fontSize: Dimen.TEXT_SIZE_SMALL,
+                color: selected?iconEnab_(context):textEnab_(context),
+                fontWeight: selected?weight.bold:weight.normal
+            ),
+            textAlign: TextAlign.center
         )
       ],
     ),
