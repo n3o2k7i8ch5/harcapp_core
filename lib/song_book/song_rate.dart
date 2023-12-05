@@ -11,15 +11,31 @@ import 'song_core.dart';
 
 class RateStatisticsClipper extends CustomClipper<Path>{
 
+  static const double radius = 20;
+
+  final List<double> bars;
+
+  const RateStatisticsClipper(this.bars);
+
   @override
   Path getClip(Size size) {
+    double totalWidth = size.width;
+    double width = totalWidth/5;
+    double height = size.height;
     Path path = Path();
-    path.lineTo(0, size.height);
+    path.lineTo(0, height);
+
+    path.lineTo(0, height*bars[0] - radius);
+    path.quadraticBezierTo(0, height*bars[0], radius, height*bars[0]);
+    path.lineTo(width - radius, height*bars[0]);
+
+    path.quadraticBezierTo(width, height*bars[0], width, height*bars[0] + radius);
+
+    path.quadraticBezierTo(width / 4, height - 40, width / 2, height - 20);
     path.quadraticBezierTo(
-        size.width / 4, size.height - 40, size.width / 2, size.height - 20);
-    path.quadraticBezierTo(
-        3 / 4 * size.width, size.height, size.width, size.height - 30);
-    path.lineTo(size.width, 0);
+        3 / 4 * width, height, width, height - 30);
+    path.lineTo(width, 0);
+    path.lineTo(width, height);
     return path;
   }
 
@@ -39,31 +55,6 @@ class RateCard<T extends SongCore> extends StatelessWidget{
   const RateCard(this.song, {this.onTap, this.backgroundBars})
       :assert(backgroundBars == null || backgroundBars.length == 5);
 
-  Widget wrapBackgroundBar({
-    required BuildContext context,
-    required int index,
-    required Widget child,
-  }){
-    if(backgroundBars == null) return child;
-
-    return Stack(
-      children: [
-        Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              width: double.infinity,
-              height: RateButton.HEIGHT*backgroundBars![index],
-              color: backgroundIcon_(context)
-            )
-        ),
-        child,
-      ],
-    );
-
-  }
-
   @override
   Widget build(BuildContext context) => Align(
     alignment: Alignment.topCenter,
@@ -75,48 +66,32 @@ class RateCard<T extends SongCore> extends StatelessWidget{
         elevation: AppCard.bigElevation,
         child: Stack(
           children: [
-            ClipPath(
-              clipper: RateStatisticsClipper(),
-              child: Container(
-                color: backgroundIcon_(context),
-              )
-            ),
+            if(backgroundBars != null)
+              SizedBox(
+                height: RateButton.HEIGHT,
+                child: ClipPath(
+                  clipper: RateStatisticsClipper(backgroundBars!),
+                  child: Container(
+                    color: backgroundIcon_(context),
+                  )
+                ),
+              ),
             Row(
               children: <Widget>[
                 Expanded(
-                  child: wrapBackgroundBar(
-                    context: context,
-                    index: 0,
-                    child: RateButton.from(song, SongRate.textLike1, SongRate.getIcon(1), SongRate.RATE_1, onTap),
-                  ),
+                  child: RateButton.from(song, SongRate.textLike1, SongRate.getIcon(1), SongRate.RATE_1, onTap),
                 ),
                 Expanded(
-                    child: wrapBackgroundBar(
-                        context: context,
-                        index: 1,
-                        child: RateButton.from(song, SongRate.textLike2, SongRate.getIcon(2), SongRate.RATE_2, onTap)
-                    )
+                  child: RateButton.from(song, SongRate.textLike2, SongRate.getIcon(2), SongRate.RATE_2, onTap)
                 ),
                 Expanded(
-                    child: wrapBackgroundBar(
-                        context: context,
-                        index: 2,
-                        child: RateButton.from(song, SongRate.textLike3, SongRate.getIcon(3), SongRate.RATE_3, onTap)
-                    )
+                  child: RateButton.from(song, SongRate.textLike3, SongRate.getIcon(3), SongRate.RATE_3, onTap)
                 ),
                 Expanded(
-                    child: wrapBackgroundBar(
-                        context: context,
-                        index: 3,
-                        child: RateButton.from(song, SongRate.textLike4, SongRate.getIcon(4), SongRate.RATE_4, onTap)
-                    )
+                  child: RateButton.from(song, SongRate.textLike4, SongRate.getIcon(4), SongRate.RATE_4, onTap)
                 ),
                 Expanded(
-                  child: wrapBackgroundBar(
-                      context: context,
-                      index: 4,
-                      child: RateButton.from(song, SongRate.textLike5, SongRate.getIcon(5), SongRate.RATE_5, onTap)
-                  ),
+                  child: RateButton.from(song, SongRate.textLike5, SongRate.getIcon(5), SongRate.RATE_5, onTap)
                 ),
 
               ],
