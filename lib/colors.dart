@@ -10,7 +10,7 @@ class AppColors{
   static const Color text_def_enab = Colors.black54;
   static const Color text_def_disab = Colors.black26;
 
-  static const Color white_dark = Color.fromARGB(255, 245, 245, 245);
+  static const Color white_dark = Color.fromARGB(255, 240, 240, 240);
 
   static const Color hrpGreen = Color.fromARGB(255, 128, 128, 0);
   static const Color zhpGreen = Color.fromARGB(255, 132, 163, 17);

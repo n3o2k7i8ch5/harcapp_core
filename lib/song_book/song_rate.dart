@@ -454,9 +454,9 @@ class RateButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => SimpleButton(
-    radius: 0, // AppCard.bigRadius,
+    radius: AppCard.bigRadius,
     padding: EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg),
-    color: selected?backgroundIcon_(context):null,
+    // color: selected?backgroundIcon_(context):null,
     margin: EdgeInsets.zero,
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -466,12 +466,13 @@ class RateButton extends StatelessWidget{
           height: 2*Dimen.ICON_SIZE,
         ),
         Text(
-            title,
-            style: AppTextStyle(
-                fontSize: Dimen.TEXT_SIZE_SMALL,
-                color: selected?textEnab_(context):hintEnab_(context),
-                fontWeight: selected?weight.bold:weight.normal),
-            textAlign: TextAlign.center
+          title,
+          style: AppTextStyle(
+            fontSize: Dimen.TEXT_SIZE_SMALL,
+            color: textEnab_(context),
+            fontWeight: selected?weight.bold:weight.normal
+          ),
+          textAlign: TextAlign.center
         )
       ],
     ),
