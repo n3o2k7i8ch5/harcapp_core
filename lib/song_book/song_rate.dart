@@ -23,13 +23,16 @@ class RateStatisticsClipper extends CustomClipper<Path>{
     double width = totalWidth/5;
     double height = size.height;
     Path path = Path();
-    path.lineTo(0, height);
+    path.moveTo(0, height);
 
     path.lineTo(0, height*bars[0] - radius);
     path.quadraticBezierTo(0, height*bars[0], radius, height*bars[0]);
     path.lineTo(width - radius, height*bars[0]);
 
-    path.quadraticBezierTo(width, height*bars[0], width, height*bars[0] + radius);
+    if(bars[1] > bars[0])
+      path.quadraticBezierTo(width, height*bars[0], width, height*bars[0] - radius);
+    else
+      path.quadraticBezierTo(width, height*bars[0], width, height*bars[0] + radius);
 
     path.quadraticBezierTo(width / 4, height - 40, width / 2, height - 20);
     path.quadraticBezierTo(
