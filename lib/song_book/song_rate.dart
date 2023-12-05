@@ -231,7 +231,7 @@ class RateCard<T extends SongCore> extends StatelessWidget{
                 child: ClipPath(
                   clipper: RateStatisticsClipper(backgroundBars!),
                   child: Container(
-                    color: backgroundIcon_(context),
+                    color: cardEnab_(context),
                   )
                 ),
               ),
@@ -443,13 +443,18 @@ class RateButton extends StatelessWidget{
 
   const RateButton(this.title, this.icon, this.rate, this.selected, {this.background, this.glow =true, this.onTap});
 
-  static RateButton from<T extends SongCore>(T song, String title, Icon icon, int rate, Function(int rate, bool clicked)? onTap){
-    return RateButton(title, icon, rate, song.rate == rate, onTap: onTap);
-  }
+  static RateButton from<T extends SongCore>(
+      T song,
+      String title,
+      Icon icon,
+      int rate,
+      Function(int rate, bool clicked)? onTap
+  ) => RateButton(title, icon, rate, song.rate == rate, onTap: onTap);
+
 
   @override
   Widget build(BuildContext context) => SimpleButton(
-    radius: AppCard.bigRadius,
+    radius: 0, // AppCard.bigRadius,
     padding: EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg),
     color: selected?backgroundIcon_(context):null,
     margin: EdgeInsets.zero,
