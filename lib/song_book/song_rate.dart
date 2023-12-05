@@ -43,7 +43,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
       radius: Radius.circular(safeRadius(height, br0)),
       rotation: 90,
     );
-    // path.lineTo(0*width + safeRadius(0, br0), br0); // --
 
     // -- Bar 0
     path.lineTo(1*width - safeRadius(br0, br1), br0); // right
@@ -54,7 +53,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
         radius: Radius.circular(safeRadius(br0, br1)),
         rotation: 90,
       );
-      // path.lineTo(1*width, br0 + safeRadius(br0, br1)); // --
 
       path.lineTo(1*width, br1 - safeRadius(br0, br1)); // down
 
@@ -64,7 +62,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
           rotation: -90,
           clockwise: false
       );
-      // path.lineTo(1*width+safeRadius(br0, br1), safeRadius(br0, br1)); // --
     }else {
       path.arcToPoint(
           Offset(1*width, br0 - safeRadius(br0, br1)),
@@ -72,7 +69,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
           rotation: -90,
           clockwise: false
       );
-      // path.lineTo(1*width, br0 - safeRadius(br0, br1)); // --
 
       path.lineTo(1*width, br1 + safeRadius(br0, br1)); // up
 
@@ -81,7 +77,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
         radius: Radius.circular(safeRadius(br0, br1)),
         rotation: 90,
       );
-      // path.lineTo(1*width+safeRadius(br0, br1), br1); // --
     }
 
     // -- Bar 1
@@ -93,7 +88,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
         radius: Radius.circular(safeRadius(br1, br2)),
         rotation: 90,
       );
-      // path.lineTo(2*width, br1 + safeRadius(br1, br2)); // --
 
       path.lineTo(2*width, br2 - safeRadius(br1, br2)); // down
 
@@ -103,7 +97,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
           rotation: -90,
           clockwise: false
       );
-      //path.lineTo(2*width+safeRadius(br1, br2), br2); // --
     }else {
       path.arcToPoint(
           Offset(2*width, br1 - safeRadius(br1, br2)),
@@ -111,7 +104,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
           rotation: -90,
           clockwise: false
       );
-      // path.lineTo(2*width, br1 - safeRadius(br1, br2)); // --
 
       path.lineTo(2*width, br2 + safeRadius(br1, br2)); // up
 
@@ -120,7 +112,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
         radius: Radius.circular(safeRadius(br1, br2)),
         rotation: 90,
       );
-      // path.lineTo(2*width+safeRadius(br1, br2), br2); // --
     }
 
     // -- Bar 2
@@ -132,7 +123,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
         radius: Radius.circular(safeRadius(br2, br3)),
         rotation: 90,
       );
-      //path.lineTo(3*width, bar2 + safeRadius(bar2, bar3)); // --
 
       path.lineTo(3*width, br3 - safeRadius(br2, br3)); // down
 
@@ -142,7 +132,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
           rotation: -90,
           clockwise: false
       );
-      //path.lineTo(3*width+safeRadius(bar2, bar3), bar3); // --
     }else {
       path.arcToPoint(
           Offset(3*width, br2 - safeRadius(br2, br3)),
@@ -150,7 +139,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
           rotation: -90,
           clockwise: false
       );
-      // path.lineTo(3*width, br2 - safeRadius(br2, br3)); // --
 
       path.lineTo(3*width, br3 + safeRadius(br2, br3)); // up
 
@@ -159,7 +147,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
         radius: Radius.circular(safeRadius(br2, br3)),
         rotation: 90,
       );
-      // path.lineTo(3*width + safeRadius(br2, br3), br3); // --
     }
 
     // -- Bar 3
@@ -171,7 +158,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
         radius: Radius.circular(safeRadius(br3, br4)),
         rotation: 90,
       );
-      // path.lineTo(4*width, br3 + safeRadius(br3, br4)); // --
 
       path.lineTo(4*width, br4 - safeRadius(br3, br4)); // down
 
@@ -181,7 +167,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
           rotation: -90,
           clockwise: false
       );
-      // path.lineTo(4*width+safeRadius(br3, br4), br4); // --
     }else {
       path.arcToPoint(
           Offset(4*width, br3 - safeRadius(br3, br4)),
@@ -189,7 +174,6 @@ class RateStatisticsClipper extends CustomClipper<Path>{
           rotation: -90,
           clockwise: false
       );
-      // path.lineTo(4*width, br3 - safeRadius(br3, br4)); // --
 
       path.lineTo(4*width, br4 + safeRadius(br3, br4)); // down
 
@@ -198,13 +182,11 @@ class RateStatisticsClipper extends CustomClipper<Path>{
         radius: Radius.circular(safeRadius(br3, br4)),
         rotation: 90,
       );
-      // path.lineTo(4*width+safeRadius(br3, br4), br4); // --
     }
 
     // -- Bar 4
     path.lineTo(5*width - safeRadius(br4, height), br4); // right
 
-    // path.lineTo(5*width, br4 + safeRadius(br4, 0)); // --
     path.arcToPoint(
       Offset(5*width, br4 + safeRadius(br4, height)),
       radius: Radius.circular(safeRadius(br4, height)),
@@ -238,6 +220,7 @@ class RateCard<T extends SongCore> extends StatelessWidget{
       padding: const EdgeInsets.all(Dimen.defMarg),
       child: Material(
         color: background_(context),
+        clipBehavior: Clip.hardEdge,
         borderRadius: BorderRadius.circular(AppCard.bigRadius),
         elevation: AppCard.bigElevation,
         child: Stack(
