@@ -8,62 +8,96 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import 'song_core.dart';
 
-class RateCard<T extends SongCore> extends StatefulWidget{
+class RateCard<T extends SongCore> extends StatelessWidget{
 
   static const double HEIGHT = RateButton.HEIGHT;
 
   final T song;
   final Function(int rate, bool selected)? onTap;
+  final List<double>? backgroundBars;
 
-  const RateCard(this.song, {this.onTap});
+  const RateCard(this.song, {this.onTap, this.backgroundBars})
+      :assert(backgroundBars == null || backgroundBars.length == 5);
+
+  Widget wrapBackgdoundBar({
+    required BuildContext context,
+    required int index,
+    required Widget child,
+  }){
+    if(backgroundBars == null) return child;
+
+    return Stack(
+      children: [
+        Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: RateButton.HEIGHT*backgroundBars![index],
+            child: Container(color: backgroundIcon_(context))
+        ),
+        child,
+      ],
+    );
+
+  }
 
   @override
-  State<StatefulWidget> createState() => RateCardState<T>();
-}
-
-class RateCardState<T extends SongCore> extends State<RateCard>{
-
-  T get song => widget.song as T;
-  Function(int rate, bool selected)? get onTap => widget.onTap;
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Align(
-        alignment: Alignment.topCenter,
-        child: AppCard(
-            padding: EdgeInsets.zero,
-            margin: EdgeInsets.all(Dimen.defMarg),
-            radius: AppCard.bigRadius,
-            elevation: AppCard.bigElevation,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                        child: RateButton.from(song, SongRate.textLike1, SongRate.getIcon(1), SongRate.RATE_1, onTap)
+  Widget build(BuildContext context) => Align(
+      alignment: Alignment.topCenter,
+      child: AppCard(
+          padding: EdgeInsets.zero,
+          margin: EdgeInsets.all(Dimen.defMarg),
+          radius: AppCard.bigRadius,
+          elevation: AppCard.bigElevation,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: wrapBackgdoundBar(
+                      context: context,
+                      index: 0,
+                      child: RateButton.from(song, SongRate.textLike1, SongRate.getIcon(1), SongRate.RATE_1, onTap),
                     ),
-                    Expanded(
-                        child: RateButton.from(song, SongRate.textLike2, SongRate.getIcon(2), SongRate.RATE_2, onTap)
-                    ),
-                    Expanded(
-                        child: RateButton.from(song, SongRate.textLike3, SongRate.getIcon(3), SongRate.RATE_3, onTap)
-                    ),
-                    Expanded(
-                        child: RateButton.from(song, SongRate.textLike4, SongRate.getIcon(4), SongRate.RATE_4, onTap)
-                    ),
-                    Expanded(
+                  ),
+                  Expanded(
+                      child: wrapBackgdoundBar(
+                          context: context,
+                          index: 1,
+                          child: RateButton.from(song, SongRate.textLike2, SongRate.getIcon(2), SongRate.RATE_2, onTap)
+                      )
+                  ),
+                  Expanded(
+                      child: wrapBackgdoundBar(
+                          context: context,
+                          index: 2,
+                          child: RateButton.from(song, SongRate.textLike3, SongRate.getIcon(3), SongRate.RATE_3, onTap)
+                      )
+                  ),
+                  Expanded(
+                      child: wrapBackgdoundBar(
+                          context: context,
+                          index: 3,
+                          child: RateButton.from(song, SongRate.textLike4, SongRate.getIcon(4), SongRate.RATE_4, onTap)
+                      )
+                  ),
+                  Expanded(
+                    child: wrapBackgdoundBar(
+                        context: context,
+                        index: 4,
                         child: RateButton.from(song, SongRate.textLike5, SongRate.getIcon(5), SongRate.RATE_5, onTap)
                     ),
-                  ],
-                ),
-              ],
-            )
-        )
-    );
-  }
+                  ),
+
+                ],
+              ),
+            ],
+          )
+      )
+  );
+
 }
 
 class SongRate{
@@ -264,12 +298,12 @@ class RateButton extends StatelessWidget{
           height: 2*Dimen.ICON_SIZE,
         ),
         Text(
-          title,
-          style: AppTextStyle(
-              fontSize: Dimen.TEXT_SIZE_SMALL,
-              color: selected?textEnab_(context):hintEnab_(context),
-              fontWeight: selected?weight.bold:weight.normal),
-          textAlign: TextAlign.center
+            title,
+            style: AppTextStyle(
+                fontSize: Dimen.TEXT_SIZE_SMALL,
+                color: selected?textEnab_(context):hintEnab_(context),
+                fontWeight: selected?weight.bold:weight.normal),
+            textAlign: TextAlign.center
         )
       ],
     ),
@@ -298,4 +332,3 @@ class RateIcon{
   }
 
 }
-

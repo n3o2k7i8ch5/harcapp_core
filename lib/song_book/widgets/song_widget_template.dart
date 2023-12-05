@@ -1027,7 +1027,9 @@ class _TopWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
 
         IconButton(
             icon: RateIcon.build(context, song.rate),
-            onPressed: parent.onRateTap==null?null:
+            onPressed:
+            parent.onRateTap==null?
+            null:
             (){
               final RenderBox renderBox = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
               final position = renderBox.localToGlobal(Offset.zero).dy;// - parent.widget.topScreenPadding;

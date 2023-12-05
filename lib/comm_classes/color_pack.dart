@@ -7,15 +7,15 @@ import 'app_text_style.dart';
 
 
 Color appBar(BuildContext context) => Theme.of(context).appBarTheme.backgroundColor!;
-Color? appBarTextEnab_(BuildContext context) => Theme.of(context).appBarTheme.titleTextStyle!.color;
+Color appBarTextEnab_(BuildContext context) => Theme.of(context).appBarTheme.titleTextStyle!.color!;
 
-Color? textEnab_(BuildContext context) => Theme.of(context).textTheme.bodySmall!.color;
+Color textEnab_(BuildContext context) => Theme.of(context).textTheme.bodySmall!.color!;
 Color textDisab_(BuildContext context) => Theme.of(context).hintColor;
 
 Color hintEnab_(BuildContext context) => Theme.of(context).hintColor;
 
-Color? cardEnab_(BuildContext context) => Theme.of(context).cardTheme.color;
-Color? defCardElevation(BuildContext context) => Theme.of(context).cardTheme.shadowColor;
+Color cardEnab_(BuildContext context) => Theme.of(context).cardTheme.color!;
+Color defCardElevation(BuildContext context) => Theme.of(context).cardTheme.shadowColor!;
 
 Color background_(BuildContext context) => Theme.of(context).colorScheme.background;
 Color backgroundIcon_(BuildContext context) => Theme.of(context).colorScheme.primaryContainer;
@@ -185,17 +185,18 @@ abstract class ColorPack{
       if (states.contains(MaterialState.selected)) { return accentColor; }
       return null;
     }),
-  ), switchTheme: SwitchThemeData(
-    thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) { return null; }
-      if (states.contains(MaterialState.selected)) { return accentColor; }
-      return null;
-    }),
-    trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) { return null; }
-      if (states.contains(MaterialState.selected)) { return accentColor; }
-      return null;
-    }),
-  ),
+    ),
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) { return null; }
+          if (states.contains(MaterialState.selected)) { return accentColor; }
+          return null;
+        }),
+        trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) { return null; }
+          if (states.contains(MaterialState.selected)) { return accentColor.withOpacity(.5); }
+          return null;
+        }),
+    ),
   );
 }
