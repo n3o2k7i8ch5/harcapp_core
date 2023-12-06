@@ -72,7 +72,7 @@ class TagsWidget extends StatelessWidget{
 
   static TagsWidget linear({
     required List<String> allTags,
-    required List<String> checkedTags,
+    List<String> checkedTags = const [],
     Clip clipBehavior = Clip.none,
     EdgeInsets padding = EdgeInsets.zero,
     Function(String, bool)? onTagTap,
