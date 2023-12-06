@@ -104,6 +104,7 @@ class TextSizeProvider extends ChangeNotifier{
   late Map<double, double> _wantedValue;
   late double _screenWidth;
   late bool _cacheSizes;
+  late TextScaler _textScaler;
 
   double get value => _value[_screenWidth]!;
   set value(double val){
@@ -113,17 +114,18 @@ class TextSizeProvider extends ChangeNotifier{
 
   double get screenWidth => _screenWidth;
 
-  TextSizeProvider(SongCore song, double screenWidth, {required bool chordsVisible, bool cacheSizes = true}){
+  TextSizeProvider(SongCore song, double screenWidth, TextScaler textScaler, {required bool chordsVisible, bool cacheSizes = true}){
     _value = {};
     _wantedValue = {};
     _cacheSizes = cacheSizes;
+    _textScaler = textScaler;
     tryInit(song, screenWidth, chordsVisible: chordsVisible);
   }
 
   void tryInit(SongCore song, double screenWidth, {required bool chordsVisible, bool force = false}){
     _screenWidth = screenWidth;
     if(!force && _cacheSizes && _value.containsKey(_screenWidth)) return;
-    _value[_screenWidth] = calculate(screenWidth, song, chordsVisible: chordsVisible);
+    _value[_screenWidth] = calculate(screenWidth, _textScaler, song, chordsVisible: chordsVisible);
     _wantedValue[_screenWidth] = _value[_screenWidth]!;
   }
 
@@ -135,6 +137,7 @@ class TextSizeProvider extends ChangeNotifier{
   bool up(double screenWidth, String text, String chords, String lineNum){
     double scaleFactor = TextSizeProvider.fits(
         screenWidth,
+        _textScaler,
         text,
         chords,
         lineNum,
@@ -165,23 +168,24 @@ class TextSizeProvider extends ChangeNotifier{
     return changedSize;
   }
 
-  double calculate(double screenWidth, SongCore song, {required bool chordsVisible, double initSize=defFontSize}){
-    double scale = fits(screenWidth, song.text, chordsVisible?song.chords:null, song.lineNumStr, initSize);
+  double calculate(double screenWidth, TextScaler textScaler, SongCore song, {required bool chordsVisible, double initSize=defFontSize}){
+    double scale = fits(screenWidth, textScaler, song.text, chordsVisible?song.chords:null, song.lineNumStr, initSize);
     return scale*initSize;
   }
 
-  double? recalculate(double screenWidth, SongCore song, {required chordsVisible, double? fontSize}){
-    _value[_screenWidth] = calculate(screenWidth, song, chordsVisible: chordsVisible, initSize: fontSize??_wantedValue[_screenWidth]!);
+  double? recalculate(double screenWidth, TextScaler textScaler, SongCore song, {required chordsVisible, double? fontSize}){
+    _value[_screenWidth] = calculate(screenWidth, textScaler, song, chordsVisible: chordsVisible, initSize: fontSize??_wantedValue[_screenWidth]!);
     notifyListeners();
     return _value[_screenWidth];
   }
 
-  static double fits(double? screenWidth, String text, String? chords, String nums, double fontSize){
+  static double fits(double? screenWidth, TextScaler textScaler, String text, String? chords, String nums, double fontSize){
 
     TextStyle style = TextStyle(fontSize: fontSize, fontFamily: 'Roboto');
 
     var wordWrapText = TextPainter(text: TextSpan(style: style, text: text),
       textDirection: TextDirection.ltr,
+      textScaler: textScaler
     );
     wordWrapText.layout();
 

@@ -296,12 +296,13 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
   Widget build(BuildContext context) {
 
     double _screenWidth = screenWidth??MediaQuery.of(context).size.width;
+    TextScaler textScaler = MediaQuery.textScalerOf(context);
 
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context){
           textSizeProvider = TextSizeProvider(
-              song, _screenWidth,
+              song, _screenWidth, textScaler,
               cacheSizes: cacheSizes,
               chordsVisible: ShowChordsProvider.of(context).showChords
           );
@@ -902,9 +903,11 @@ class _TextResizeWidget<TSong extends SongCore, TAddPersRes extends AddPersonRes
             onPressed: fragmentState.onPlusTap==null?null:(){
 
               TextSizeProvider prov = TextSizeProvider.of(context);
+              TextScaler textScaler = MediaQuery.textScalerOf(context);
 
-              double scaleFactor = TextSizeProvider.fits(
+                double scaleFactor = TextSizeProvider.fits(
                   prov.screenWidth,
+                  textScaler,
                   fragmentState.song.text,
                   fragmentState.showChords?fragmentState.song.chords:null,
                   fragmentState.song.lineNumStr,
