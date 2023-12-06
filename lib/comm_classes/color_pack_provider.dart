@@ -12,7 +12,7 @@ class ColorPackProvider extends ChangeNotifier{
 
   late ColorPack _colorPack;
 
-  ColorPack get colorPack => isDark()?_colorPackDark:_colorPack;
+  ColorPack get colorPack => isDark() && _colorPack.darkSensitive?_colorPackDark:_colorPack;
   set colorPack(ColorPack value){
     _colorPack = value;
     notifyListeners();

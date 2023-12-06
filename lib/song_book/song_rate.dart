@@ -209,8 +209,9 @@ class RateCard<T extends SongCore> extends StatelessWidget{
   final T song;
   final Function(int rate, bool selected)? onTap;
   final List<double>? backgroundBars;
+  final Widget? bottom;
 
-  const RateCard(this.song, {this.onTap, this.backgroundBars})
+  const RateCard(this.song, {this.onTap, this.backgroundBars, this.bottom})
       :assert(backgroundBars == null || backgroundBars.length == 5);
 
   @override
@@ -223,38 +224,46 @@ class RateCard<T extends SongCore> extends StatelessWidget{
           clipBehavior: Clip.hardEdge,
           borderRadius: BorderRadius.circular(AppCard.bigRadius),
           elevation: AppCard.bigElevation,
-          child: Stack(
+          child: Column(
             children: [
-              if(backgroundBars != null)
-                SizedBox(
-                  height: RateButton.HEIGHT,
-                  child: ClipPath(
-                      clipper: RateStatisticsClipper(backgroundBars!),
-                      child: Container(
-                        color: cardEnab_(context),
-                      )
-                  ),
-                ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: RateButton.from(song, SongRate.textLike1, SongRate.RATE_1, onTap),
-                  ),
-                  Expanded(
-                      child: RateButton.from(song, SongRate.textLike2, SongRate.RATE_2, onTap)
-                  ),
-                  Expanded(
-                      child: RateButton.from(song, SongRate.textLike3, SongRate.RATE_3, onTap)
-                  ),
-                  Expanded(
-                      child: RateButton.from(song, SongRate.textLike4, SongRate.RATE_4, onTap)
-                  ),
-                  Expanded(
-                      child: RateButton.from(song, SongRate.textLike5, SongRate.RATE_5, onTap)
-                  ),
+              Stack(
+                children: [
+                  if(backgroundBars != null)
+                    SizedBox(
+                      height: RateButton.HEIGHT,
+                      child: ClipPath(
+                          clipper: RateStatisticsClipper(backgroundBars!),
+                          child: Container(
+                            color: cardEnab_(context),
+                          )
+                      ),
+                    ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: RateButton.from(song, SongRate.textLike1, SongRate.RATE_1, onTap),
+                      ),
+                      Expanded(
+                          child: RateButton.from(song, SongRate.textLike2, SongRate.RATE_2, onTap)
+                      ),
+                      Expanded(
+                          child: RateButton.from(song, SongRate.textLike3, SongRate.RATE_3, onTap)
+                      ),
+                      Expanded(
+                          child: RateButton.from(song, SongRate.textLike4, SongRate.RATE_4, onTap)
+                      ),
+                      Expanded(
+                          child: RateButton.from(song, SongRate.textLike5, SongRate.RATE_5, onTap)
+                      ),
 
+                    ],
+                  )
                 ],
-              )
+              ),
+
+              if(bottom != null)
+                bottom!
+
             ],
           ),
         ),

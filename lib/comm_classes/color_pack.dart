@@ -6,7 +6,7 @@ import '../dimen.dart';
 import 'app_text_style.dart';
 
 
-Color appBar(BuildContext context) => Theme.of(context).appBarTheme.backgroundColor!;
+Color appBar_(BuildContext context) => Theme.of(context).appBarTheme.backgroundColor!;
 Color appBarTextEnab_(BuildContext context) => Theme.of(context).appBarTheme.titleTextStyle!.color!;
 
 Color textEnab_(BuildContext context) => Theme.of(context).textTheme.bodySmall!.color!;
@@ -39,6 +39,8 @@ abstract class ColorPack{
 
   String get name;
 
+  bool get darkSensitive => true;
+
   Brightness get brightness => Brightness.light;
 
   Color get appBar => background;
@@ -63,11 +65,9 @@ abstract class ColorPack{
   Color get backgroundEnd => background;
   Color get backgroundIcon => Colors.black.withOpacity(0.05);
 
-  Color get accentColor;
+  Color get accent;
   Color get iconEnabled;
   Color get iconDisabled;
-  Color get drawerIconColor => Colors.black54;
-  Color get drawerIconDisabled => Colors.black26;
 
   bool operator == (Object other) => other is ColorPack && name == other.name;
   int get hashCode => name.hashCode;
@@ -93,11 +93,11 @@ abstract class ColorPack{
         unselectedLabelColor: iconDisabled,
         labelStyle: AppTextStyle(fontWeight: weight.halfBold),
         unselectedLabelStyle: AppTextStyle(fontWeight: weight.halfBold),
-        overlayColor: MaterialStateColor.resolveWith((states) => accentColor.withOpacity(.2))
+        overlayColor: MaterialStateColor.resolveWith((states) => accent.withOpacity(.2))
     ),
     timePickerTheme: TimePickerThemeData(
       backgroundColor: background,
-      dialHandColor: accentColor,
+      dialHandColor: accent,
       helpTextStyle: AppTextStyle(color: hintEnabled),
       dayPeriodTextStyle: AppTextStyle(),
       hourMinuteTextStyle: TextStyle(
@@ -112,9 +112,9 @@ abstract class ColorPack{
     ),
 
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: accentColor,
-      selectionColor: accentColor.withOpacity(0.5),
-      selectionHandleColor: accentColor,
+      cursorColor: accent,
+      selectionColor: accent.withOpacity(0.5),
+      selectionHandleColor: accent,
     ),
 
     primaryTextTheme: TextTheme(
@@ -124,14 +124,14 @@ abstract class ColorPack{
     ),
     colorScheme: ColorScheme(
       brightness: brightness,
-      primary: accentColor,
-      secondary: accentColor,
+      primary: accent,
+      secondary: accent,
       surface: background,
       background: background,
       primaryContainer: backgroundIcon,
       error: Colors.red,
-      onPrimary: accentColor,
-      onSecondary: accentColor,
+      onPrimary: accent,
+      onSecondary: accent,
       onSurface: textEnabled,
       onBackground: textEnabled,
       onError: Colors.red,
@@ -147,7 +147,7 @@ abstract class ColorPack{
       unselectedIconTheme: IconThemeData(color: iconDisabled),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: accentColor,
+      backgroundColor: accent,
       foregroundColor: iconEnabled,
     ),
 
@@ -162,9 +162,9 @@ abstract class ColorPack{
         fillColor: textEnabled
     ),
 
-    primaryColor: accentColor,
-    primaryColorDark: accentColor,
-    primaryColorLight: accentColor,
+    primaryColor: accent,
+    primaryColorDark: accent,
+    primaryColorLight: accent,
     iconTheme: IconThemeData(
       color: iconEnabled,
     ),
@@ -176,25 +176,25 @@ abstract class ColorPack{
     ).copyWith(
       fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) { return null; }
-        if (states.contains(MaterialState.selected)) { return accentColor; }
+        if (states.contains(MaterialState.selected)) { return accent; }
         return null;
       }),
     ), radioTheme: RadioThemeData(
     fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
       if (states.contains(MaterialState.disabled)) { return null; }
-      if (states.contains(MaterialState.selected)) { return accentColor; }
+      if (states.contains(MaterialState.selected)) { return accent; }
       return null;
     }),
     ),
       switchTheme: SwitchThemeData(
         thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) { return null; }
-          if (states.contains(MaterialState.selected)) { return accentColor; }
+          if (states.contains(MaterialState.selected)) { return accent; }
           return null;
         }),
         trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) { return null; }
-          if (states.contains(MaterialState.selected)) { return accentColor.withOpacity(.5); }
+          if (states.contains(MaterialState.selected)) { return accent.withOpacity(.5); }
           return null;
         }),
     ),
