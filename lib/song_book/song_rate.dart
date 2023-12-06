@@ -225,6 +225,7 @@ class RateCard<T extends SongCore> extends StatelessWidget{
           borderRadius: BorderRadius.circular(AppCard.bigRadius),
           elevation: AppCard.bigElevation,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Stack(
                 children: [
