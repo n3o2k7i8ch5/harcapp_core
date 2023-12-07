@@ -6,7 +6,6 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/song_book/settings.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
-import 'package:harcapp_core/song_book/widgets/song_widget_template.dart';
 import 'package:provider/provider.dart';
 
 class HarcAppSongBook extends StatelessWidget{
@@ -104,35 +103,34 @@ class TextSizeProvider extends ChangeNotifier{
 
   late Map<double, double> _value;
   late Map<double, double> _wantedValue;
-  late double _screenWidth;
+  late double _maxWidth;
   late bool _cacheSizes;
   late TextScaler _textScaler;
 
-  double get value => _value[_screenWidth]!;
+  double get value => _value[_maxWidth]!;
   set value(double val){
-    _value[_screenWidth] = val;
+    _value[_maxWidth] = val;
     notifyListeners();
   }
 
-  double get screenWidth => _screenWidth;
+  double get maxWidth => _maxWidth;
 
-  TextSizeProvider(SongCore song, double screenWidth, TextScaler textScaler, {required bool chordsVisible, bool cacheSizes = true}){
+  TextSizeProvider(SongCore song, TextScaler textScaler, {required bool chordsVisible, bool cacheSizes = true}){
     _value = {};
     _wantedValue = {};
     _cacheSizes = cacheSizes;
     _textScaler = textScaler;
-    // tryInit(song, screenWidth, chordsVisible: chordsVisible);
   }
 
-  void tryInit(SongCore song, double screenWidth, {required bool chordsVisible, bool force = false}){
-    _screenWidth = screenWidth;
-    if(!force && _cacheSizes && _value.containsKey(_screenWidth)) return;
-    _value[_screenWidth] = calculate(screenWidth, _textScaler, song, chordsVisible: chordsVisible);
-    _wantedValue[_screenWidth] = _value[_screenWidth]!;
+  void tryInit(SongCore song, double maxWidth, {required bool chordsVisible, bool force = false}){
+    _maxWidth = maxWidth;
+    if(!force && _cacheSizes && _value.containsKey(_maxWidth)) return;
+    _value[_maxWidth] = calculate(maxWidth, _textScaler, song, chordsVisible: chordsVisible);
+    _wantedValue[_maxWidth] = _value[_maxWidth]!;
   }
 
   void reinit(SongCore song, {required bool chordsVisible, double? screenWidth}){
-    tryInit(song, screenWidth??_screenWidth, chordsVisible: chordsVisible, force: true);
+    tryInit(song, screenWidth??_maxWidth, chordsVisible: chordsVisible, force: true);
     notifyListeners();
   }
 
@@ -143,12 +141,12 @@ class TextSizeProvider extends ChangeNotifier{
         text,
         chords,
         lineNum,
-        _value[_screenWidth]! + 0.5);
+        _value[_maxWidth]! + 0.5);
 
     bool changedSize = true;
     if(scaleFactor == 1){
-      if(_value[_screenWidth]! >= 24) changedSize = false;
-      else _value[_screenWidth] = _value[_screenWidth]! + 0.5;
+      if(_value[_maxWidth]! >= 24) changedSize = false;
+      else _value[_maxWidth] = _value[_maxWidth]! + 0.5;
     }else
       changedSize = false;
 
@@ -160,8 +158,8 @@ class TextSizeProvider extends ChangeNotifier{
   bool down(){
 
     bool changedSize = true;
-    if(_value[_screenWidth]! - 0.5 >= Dimen.TEXT_SIZE_LIMIT)
-      _value[_screenWidth] = _value[_screenWidth]! - 0.5;
+    if(_value[_maxWidth]! - 0.5 >= Dimen.TEXT_SIZE_LIMIT)
+      _value[_maxWidth] = _value[_maxWidth]! - 0.5;
     else
       changedSize = false;
 
@@ -170,18 +168,18 @@ class TextSizeProvider extends ChangeNotifier{
     return changedSize;
   }
 
-  double calculate(double screenWidth, TextScaler textScaler, SongCore song, {required bool chordsVisible, double initSize=defFontSize}){
-    double scale = fits(screenWidth, textScaler, song.text, chordsVisible?song.chords:null, song.lineNumStr, initSize);
+  double calculate(double maxWidth, TextScaler textScaler, SongCore song, {required bool chordsVisible, double initSize=defFontSize}){
+    double scale = fits(maxWidth, textScaler, song.text, chordsVisible?song.chords:null, song.lineNumStr, initSize);
     return scale*initSize;
   }
 
-  double? recalculate(double screenWidth, TextScaler textScaler, SongCore song, {required chordsVisible, double? fontSize}){
-    _value[_screenWidth] = calculate(screenWidth, textScaler, song, chordsVisible: chordsVisible, initSize: fontSize??_wantedValue[_screenWidth]!);
+  double? recalculate(double maxWidth, TextScaler textScaler, SongCore song, {required chordsVisible, double? fontSize}){
+    _value[_maxWidth] = calculate(maxWidth, textScaler, song, chordsVisible: chordsVisible, initSize: fontSize??_wantedValue[_maxWidth]!);
     notifyListeners();
-    return _value[_screenWidth];
+    return _value[_maxWidth];
   }
 
-  static double fits(double screenWidth, TextScaler textScaler, String text, String? chords, String nums, double fontSize){
+  static double fits(double maxWidth, TextScaler textScaler, String text, String? chords, String nums, double fontSize){
 
     TextStyle style = TextStyle(fontSize: fontSize, fontFamily: 'Roboto', height: 1.2);
 
@@ -210,13 +208,14 @@ class TextSizeProvider extends ChangeNotifier{
     double textPadMargWidth = 2*SimpleButton.defMargVal + 2*SimpleButton.defPaddVal;
     double chordsPadMargWidth = 2*SimpleButton.defMargVal + 2*SimpleButton.defPaddVal;
 
+    double maxTextWidth;
     if(chords!=null)
-      screenWidth = screenWidth - textPadMargWidth - chordsPadMargWidth - 2*4;
+      maxTextWidth = .98*(maxWidth - textPadMargWidth - chordsPadMargWidth);
     else
-      screenWidth = screenWidth - textPadMargWidth - 2*2;
+      maxTextWidth = .98*(maxWidth - textPadMargWidth);
 
-    if(screenWidth < textWidth + chordsWidth + numsWidth)
-      return screenWidth/(textWidth + chordsWidth + numsWidth);
+    if(maxTextWidth < textWidth + chordsWidth + numsWidth)
+      return maxTextWidth/(textWidth + chordsWidth + numsWidth);
     else return 1;
   }
 

@@ -74,7 +74,6 @@ class SongWidgetTemplate<TSong extends SongCore, TAddPersRes extends AddPersonRe
   final SongBookSettTempl settings;
   final SongController? controller;
   final ScrollPhysics? physics;
-  final double? screenWidth;
   final bool cacheSizes;
 
   final ValueNotifier? pageNotifier;
@@ -138,7 +137,6 @@ class SongWidgetTemplate<TSong extends SongCore, TAddPersRes extends AddPersonRe
       this.settings,
       { this.controller,
         this.physics,
-        this.screenWidth,
         this.cacheSizes = true,
         this.pageNotifier,
         this.index = -1,
@@ -210,7 +208,6 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
   SongBookSettTempl get settings => widget.settings;
   SongController get controller => widget.controller??_controller!;
   ScrollPhysics? get physics => widget.physics;
-  double? get screenWidth => widget.screenWidth;
   bool get cacheSizes => widget.cacheSizes;
 
   ValueNotifier? get pageNotifier => widget.pageNotifier;
@@ -295,14 +292,13 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
   @override
   Widget build(BuildContext context) {
 
-    double _screenWidth = screenWidth??MediaQuery.of(context).size.width;
     TextScaler textScaler = MediaQuery.textScalerOf(context);
 
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context){
           textSizeProvider = TextSizeProvider(
-              song, _screenWidth, textScaler,
+              song, textScaler,
               cacheSizes: cacheSizes,
               chordsVisible: ShowChordsProvider.of(context).showChords
           );
@@ -906,7 +902,7 @@ class _TextResizeWidget<TSong extends SongCore, TAddPersRes extends AddPersonRes
               TextScaler textScaler = MediaQuery.textScalerOf(context);
 
                 double scaleFactor = TextSizeProvider.fits(
-                  prov.screenWidth,
+                  prov.maxWidth,
                   textScaler,
                   fragmentState.song.text,
                   fragmentState.showChords?fragmentState.song.chords:null,
@@ -1134,7 +1130,7 @@ class _ContentWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolv
               builder: (context, textSizeProv, showChordsProv, chordsTrailProv, _){
 
                 textSizeProv.tryInit(
-                    song, constraints.maxWidth,//parent.screenWidth??MediaQuery.of(context).size.width,
+                    song, constraints.maxWidth,
                     chordsVisible: showChordsProv.showChords
                 );
 
