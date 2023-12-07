@@ -1126,8 +1126,8 @@ class _ContentWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolv
       builder: (BuildContext context, Orientation orientation) {
 
         // To po to, żeby tekst został zresetowany po zmianie orientacji.
-        //if (parent.oldOrientation != MediaQuery.of(context).orientation)
-        //parent.oldOrientation = orientation;
+        // if (parent.oldOrientation != MediaQuery.of(context).orientation)
+        // parent.oldOrientation = orientation;
 
         return Consumer3<TextSizeProvider, ShowChordsProvider, ChordsTrailingProvider>(
             builder: (context, textSizeProv, showChordsProv, chordsTrailProv, _){

@@ -87,7 +87,7 @@ class TagsWidget extends StatelessWidget{
     onTagTap: onTagTap,
     separator: separator,
     layout: Layout.LINEAR,
-    tagBuilder: (context, tag, chekced) =>
+    tagBuilder: (context, tag, checked) =>
     checkedTags.contains(tag)?
     Tag.checked(
       tag,

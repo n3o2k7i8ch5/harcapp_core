@@ -250,8 +250,8 @@ class AutoscrollProvider extends ChangeNotifier{
       return;
     }
     _isScrolling = value;
-    if(_isScrolling!) onAutoscrollStart!();
-    else onAutoscrollEnd!();
+    if(_isScrolling!) onAutoscrollStart?.call();
+    else onAutoscrollEnd?.call();
 
     notifyListeners();
   }
