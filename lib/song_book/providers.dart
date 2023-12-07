@@ -214,9 +214,9 @@ class TextSizeProvider extends ChangeNotifier{
 
     double maxTextWidth;
     if(chords!=null)
-      maxTextWidth = 1*(maxWidth - lineNumPadMargWidth - textPadMargWidth - chordsPadMargWidth);
+      maxTextWidth = .96*(maxWidth - lineNumPadMargWidth - textPadMargWidth - chordsPadMargWidth);
     else
-      maxTextWidth = 1*(maxWidth - lineNumPadMargWidth - textPadMargWidth);
+      maxTextWidth = .96*(maxWidth - lineNumPadMargWidth - textPadMargWidth);
 
     return min(1, maxTextWidth/(textWidth + chordsWidth + numsWidth));
   }
