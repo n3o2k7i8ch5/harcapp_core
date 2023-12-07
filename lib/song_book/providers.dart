@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_widgets/instrument_type.dart';
@@ -210,13 +211,11 @@ class TextSizeProvider extends ChangeNotifier{
 
     double maxTextWidth;
     if(chords!=null)
-      maxTextWidth = .98*(maxWidth - textPadMargWidth - chordsPadMargWidth);
+      maxTextWidth = .95*(maxWidth - textPadMargWidth - chordsPadMargWidth);
     else
-      maxTextWidth = .98*(maxWidth - textPadMargWidth);
+      maxTextWidth = .95*(maxWidth - textPadMargWidth);
 
-    if(maxTextWidth < textWidth + chordsWidth + numsWidth)
-      return maxTextWidth/(textWidth + chordsWidth + numsWidth);
-    else return 1;
+    return min(1, maxTextWidth/(textWidth + chordsWidth + numsWidth));
   }
 
 
