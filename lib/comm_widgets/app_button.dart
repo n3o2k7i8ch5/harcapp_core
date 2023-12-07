@@ -6,7 +6,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 const double _kMinButtonSize = kMinInteractiveDimension;
 
@@ -30,12 +29,7 @@ class AppButton extends StatelessWidget {
     this.autofocus = false,
     this.tooltip,
     this.enableFeedback = true,
-  }) : assert(iconSize != null),
-        assert(padding != null),
-        assert(alignment != null),
-        assert(autofocus != null),
-        assert(icon != null),
-        super(key: key);
+  }):super(key: key);
 
 
   final double iconSize;

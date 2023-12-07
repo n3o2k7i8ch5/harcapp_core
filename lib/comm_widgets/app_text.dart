@@ -55,7 +55,7 @@ class RText extends StatelessWidget{
     bool bold = false;
     bool url = false;
 
-    Color _color = color??textEnab_(context)!;
+    Color _color = color??textEnab_(context);
 
     for(int i=0; i<text.length; i++) {
       if(i+3 <= text.length && text.substring(i, i+3) == '<i>') {
