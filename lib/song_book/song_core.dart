@@ -2,6 +2,28 @@ import 'package:harcapp_core/comm_classes/common.dart';
 
 import 'add_person.dart';
 
+SongRate? songRateFromInt(int value){
+  switch(value){
+    case 1: return SongRate.rate1;
+    case 2: return SongRate.rate2;
+    case 3: return SongRate.rate3;
+    case 4: return SongRate.rate4;
+    case 5: return SongRate.rate5;
+    default: return null;
+  }
+}
+
+int songRateToInt(SongRate? value){
+  switch(value){
+    case null: return 0;
+    case SongRate.rate1: return 1;
+    case SongRate.rate2: return 2;
+    case SongRate.rate3: return 3;
+    case SongRate.rate4: return 4;
+    case SongRate.rate5: return 5;
+  }
+}
+
 enum SongRate{
   rate1, rate2, rate3, rate4, rate5
 }
