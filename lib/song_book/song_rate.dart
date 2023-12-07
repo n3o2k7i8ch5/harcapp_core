@@ -447,15 +447,13 @@ class SongRate{
   }
 
   static int _disabledAlpha = 128;
-
-  static Icon getIcon(int rate, {bool enabled = true, size = Dimen.ICON_SIZE}) => Icon(iconData(rate), color: color(rate).withAlpha(enabled?255:_disabledAlpha), size: size,);
-
-  static Widget getIconX(int rate, {bool enabled = true, size = Dimen.ICON_SIZE, bool glow = false}) =>
+  
+  static Widget getIcon(int rate, {bool enabled = true, size = Dimen.ICON_SIZE, bool glow = false}) =>
       DecoratedIcon(
         iconData(rate),
         color: color(rate).withAlpha(enabled?255:_disabledAlpha),
         size: size,
-        shadows: [
+        shadows: glow?[
           BoxShadow(
             blurRadius: 42.0,
             color: color(rate),
@@ -464,7 +462,7 @@ class SongRate{
             blurRadius: 12.0,
             color: color(rate),
           ),
-        ],
+        ]:null,
       );
 
 }
@@ -490,14 +488,14 @@ class RateButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) => SimpleButton(
     radius: AppCard.bigRadius,
-    color: highlightSelectedBackground?backgroundIcon_(context):null,
+    color: selected && highlightSelectedBackground?backgroundIcon_(context):null,
     padding: EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg),
     margin: EdgeInsets.zero,
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          child: SongRate.getIconX(
+          child: SongRate.getIcon(
             rate,
             size: selected?(Dimen.ICON_SIZE+4):Dimen.ICON_SIZE,
             glow: selected

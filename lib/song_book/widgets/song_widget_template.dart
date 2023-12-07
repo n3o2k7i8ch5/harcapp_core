@@ -1029,7 +1029,7 @@ class _TopWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
         ),
 
         IconButton(
-            icon: SongRate.getIconX(song.rate),
+            icon: SongRate.getIcon(song.rate),
             onPressed:
             parent.onRateTap==null?
             null:
