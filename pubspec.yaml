@@ -12,6 +12,7 @@ dependencies:
 
   auto_size_text: ^3.0.0
   connectivity_plus: ^5.0.2
+  decorated_icon: ^1.2.1
   fluttertoast: ^8.2.2
   flutter_feather_icons: ^2.0.0+1
   implicitly_animated_reorderable_list_2: ^0.5.1
