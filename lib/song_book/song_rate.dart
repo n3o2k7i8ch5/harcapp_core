@@ -243,19 +243,19 @@ class RateCard<T extends SongCore> extends StatelessWidget{
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: RateButton.highlightableFrom(song, SongRate.RATE_1, onTap: onTap),
+                        child: RateButton.from(song, SongRate.RATE_1, onTap: onTap),
                       ),
                       Expanded(
-                          child: RateButton.highlightableFrom(song, SongRate.RATE_2, onTap: onTap)
+                          child: RateButton.from(song, SongRate.RATE_2, onTap: onTap)
                       ),
                       Expanded(
-                          child: RateButton.highlightableFrom(song, SongRate.RATE_3, onTap: onTap)
+                          child: RateButton.from(song, SongRate.RATE_3, onTap: onTap)
                       ),
                       Expanded(
-                          child: RateButton.highlightableFrom(song, SongRate.RATE_4, onTap: onTap)
+                          child: RateButton.from(song, SongRate.RATE_4, onTap: onTap)
                       ),
                       Expanded(
-                          child: RateButton.highlightableFrom(song, SongRate.RATE_5, onTap: onTap)
+                          child: RateButton.from(song, SongRate.RATE_5, onTap: onTap)
                       ),
 
                     ],
@@ -476,13 +476,14 @@ class RateButton extends StatelessWidget{
   final bool highlightSelectedBackground;
   final Function(int rate, bool clicked)? onTap;
 
-  const RateButton(this.rate, this.selected, {this.highlightSelectedBackground = true, this.onTap});
+  const RateButton(this.rate, this.selected, {this.highlightSelectedBackground = false, this.onTap});
 
-  static RateButton highlightableFrom<T extends SongCore>(
+  static RateButton from<T extends SongCore>(
       T song,
       int rate,
-      { Function(int rate, bool clicked)? onTap
-      }) => RateButton(rate, song.rate == rate, highlightSelectedBackground: true, onTap: onTap);
+      { bool highlightSelectedBackground = false,
+        Function(int rate, bool clicked)? onTap
+      }) => RateButton(rate, song.rate == rate, highlightSelectedBackground: highlightSelectedBackground, onTap: onTap);
 
 
   @override
