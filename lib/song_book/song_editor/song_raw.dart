@@ -299,7 +299,7 @@ class SongRaw extends SongCore{
   String toCode({bool withLclId = true}) => jsonEncode(toMap(withLclId: withLclId));
 
   @override
-  int get rate => 0;
+  SongRate? get rate => null;
 
   static String correctPartText(String text){
 

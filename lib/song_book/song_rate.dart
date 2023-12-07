@@ -208,7 +208,7 @@ class RateCard<T extends SongCore> extends StatelessWidget{
   static const double HEIGHT = RateButton.HEIGHT;
 
   final T song;
-  final Function(int rate, bool selected)? onTap;
+  final Function(SongRate rate, bool selected)? onTap;
   final List<double>? backgroundBars;
   final Widget? bottom;
 
@@ -243,19 +243,19 @@ class RateCard<T extends SongCore> extends StatelessWidget{
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: RateButton.from(song, SongRate.RATE_1, onTap: onTap),
+                        child: RateButton.from(song, SongRate.rate1, onTap: onTap),
                       ),
                       Expanded(
-                          child: RateButton.from(song, SongRate.RATE_2, onTap: onTap)
+                          child: RateButton.from(song, SongRate.rate2, onTap: onTap)
                       ),
                       Expanded(
-                          child: RateButton.from(song, SongRate.RATE_3, onTap: onTap)
+                          child: RateButton.from(song, SongRate.rate3, onTap: onTap)
                       ),
                       Expanded(
-                          child: RateButton.from(song, SongRate.RATE_4, onTap: onTap)
+                          child: RateButton.from(song, SongRate.rate4, onTap: onTap)
                       ),
                       Expanded(
-                          child: RateButton.from(song, SongRate.RATE_5, onTap: onTap)
+                          child: RateButton.from(song, SongRate.rate5, onTap: onTap)
                       ),
 
                     ],
@@ -274,14 +274,14 @@ class RateCard<T extends SongCore> extends StatelessWidget{
 
 }
 
-class SongRate{
-
-  static const int RATE_NULL = 0;
-  static const int RATE_1 = 1;
-  static const int RATE_2 = 2;
-  static const int RATE_3 = 3;
-  static const int RATE_4 = 4;
-  static const int RATE_5 = 5;
+class SongRateIcon extends StatelessWidget{
+  //
+  // static const int RATE_NULL = 0;
+  // static const int RATE_1 = 1;
+  // static const int RATE_2 = 2;
+  // static const int RATE_3 = 3;
+  // static const int RATE_4 = 4;
+  // static const int RATE_5 = 5;
 
   static const String textLike1 = 'Tragedia';
   static const String textLike2 = 'Słabe';
@@ -289,15 +289,13 @@ class SongRate{
   static const String textLike4 = 'Świetne';
   static const String textLike5 = 'Perełka';
 
-  static String text(int rate){
+  static String text(SongRate rate){
     switch(rate){
-      case RATE_NULL: return '';
-      case RATE_1: return textLike1;
-      case RATE_2: return textLike2;
-      case RATE_3: return textLike3;
-      case RATE_4: return textLike4;
-      case RATE_5: return textLike5;
-      default: return '';
+      case SongRate.rate1: return textLike1;
+      case SongRate.rate2: return textLike2;
+      case SongRate.rate3: return textLike3;
+      case SongRate.rate4: return textLike4;
+      case SongRate.rate5: return textLike5;
     }
   }
 
@@ -307,34 +305,31 @@ class SongRate{
   static const Color colorLike4 = Colors.deepPurple;
   static const Color colorLike5 = Colors.pinkAccent;
 
-  static Color? color(int rate){
+  static Color color(SongRate rate){
     switch(rate){
-      case RATE_NULL: return null;
-      case RATE_1: return colorLike1;
-      case RATE_2: return colorLike2;
-      case RATE_3: return colorLike3;
-      case RATE_4: return colorLike4;
-      case RATE_5: return colorLike5;
-      default: return null;
+      case SongRate.rate1: return colorLike1;
+      case SongRate.rate2: return colorLike2;
+      case SongRate.rate3: return colorLike3;
+      case SongRate.rate4: return colorLike4;
+      case SongRate.rate5: return colorLike5;
     }
   }
 
-  static IconData IC_DATA_NULL = MdiIcons.heartOutline;
-  static IconData IC_DATA_LIKE_1 = MdiIcons.musicRestQuarter;
-  static IconData IC_DATA_LIKE_2 = MdiIcons.musicRestWhole;
-  static IconData IC_DATA_LIKE_3 = MdiIcons.musicNoteQuarter;
-  static IconData IC_DATA_LIKE_4 = MdiIcons.musicNoteEighth;
-  static IconData IC_DATA_LIKE_5 = MdiIcons.musicNoteSixteenth;
+  static IconData iconDataNull = MdiIcons.heartOutline;
+  static IconData iconDataRate1 = MdiIcons.musicRestQuarter;
+  static IconData iconDataRate2 = MdiIcons.musicRestWhole;
+  static IconData iconDataRate3 = MdiIcons.musicNoteQuarter;
+  static IconData iconDataRate4 = MdiIcons.musicNoteEighth;
+  static IconData iconDataRate5 = MdiIcons.musicNoteSixteenth;
 
-  static IconData iconData(int rate){
+  static IconData iconData(SongRate? rate){
     switch(rate){
-      case RATE_NULL: return IC_DATA_NULL;
-      case RATE_1: return IC_DATA_LIKE_1;
-      case RATE_2: return IC_DATA_LIKE_2;
-      case RATE_3: return IC_DATA_LIKE_3;
-      case RATE_4: return IC_DATA_LIKE_4;
-      case RATE_5: return IC_DATA_LIKE_5;
-      default: return IC_DATA_NULL;
+      case null: return iconDataNull;
+      case SongRate.rate1: return iconDataRate1;
+      case SongRate.rate2: return iconDataRate2;
+      case SongRate.rate3: return iconDataRate3;
+      case SongRate.rate4: return iconDataRate4;
+      case SongRate.rate5: return iconDataRate5;
     }
   }
 
@@ -433,36 +428,46 @@ class SongRate{
     return path;
   }
 
-  static Path Function(Size) path(int rate){
+  static Path Function(Size) path(SongRate rate){
     switch(rate){
-      case RATE_NULL: return (Size size) => Path();
-      case RATE_1: return like1Path;
-      case RATE_2: return like2Path;
-      case RATE_3: return like3Path;
-      case RATE_4: return like4Path;
-      case RATE_5: return like5Path;
-      default: return (Size size) => Path();
+      case SongRate.rate1: return like1Path;
+      case SongRate.rate2: return like2Path;
+      case SongRate.rate3: return like3Path;
+      case SongRate.rate4: return like4Path;
+      case SongRate.rate5: return like5Path;
     }
   }
 
   static int _disabledAlpha = 128;
+
+  final SongRate? rate;
+  final bool enabled;
+  final double size;
+  final bool glow;
   
-  static Widget getIcon(BuildContext context, int rate, {bool enabled = true, size = Dimen.ICON_SIZE, bool glow = false}) =>
-      DecoratedIcon(
-        iconData(rate),
-        color: (color(rate)??iconEnab_(context)).withAlpha(enabled?255:_disabledAlpha),
-        size: size,
-        shadows: glow?[
-          BoxShadow(
-            blurRadius: 42.0,
-            color: (color(rate)??iconEnab_(context)),
-          ),
-          BoxShadow(
-            blurRadius: 12.0,
-            color: (color(rate)??iconEnab_(context)),
-          ),
-        ]:null,
-      );
+  const SongRateIcon(
+      this.rate,
+      { this.enabled = true,
+        this.size = Dimen.ICON_SIZE,
+        this.glow = false
+      });
+  
+  @override
+  Widget build(BuildContext context) => DecoratedIcon(
+    iconData(rate),
+    color: rate==null?iconEnab_(context):color(rate!).withAlpha(enabled?255:_disabledAlpha),
+    size: size,
+    shadows: glow?[
+      BoxShadow(
+        blurRadius: 42.0,
+        color: rate==null?iconEnab_(context):color(rate!),
+      ),
+      BoxShadow(
+        blurRadius: 12.0,
+        color: rate==null?iconEnab_(context):color(rate!),
+      ),
+    ]:null,
+  );
 
 }
 
@@ -470,18 +475,18 @@ class RateButton extends StatelessWidget{
 
   static const double HEIGHT = 2*Dimen.ICON_SIZE /*CHILD*/ + Dimen.TEXT_SIZE_SMALL /*TEXT*/ + 2* Dimen.defMarg /*PADDING*/;
 
-  final int rate;
+  final SongRate rate;
   final bool selected;
   final bool highlightSelectedBackground;
-  final Function(int rate, bool clicked)? onTap;
+  final Function(SongRate rate, bool clicked)? onTap;
 
   const RateButton(this.rate, this.selected, {this.highlightSelectedBackground = false, this.onTap});
 
   static RateButton from<T extends SongCore>(
       T song,
-      int rate,
+      SongRate rate,
       { bool highlightSelectedBackground = false,
-        Function(int rate, bool clicked)? onTap
+        Function(SongRate rate, bool clicked)? onTap
       }) => RateButton(rate, song.rate == rate, highlightSelectedBackground: highlightSelectedBackground, onTap: onTap);
 
 
@@ -495,16 +500,17 @@ class RateButton extends StatelessWidget{
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          child: SongRate.getIcon(
-            context,
-            rate,
-            size: selected?(Dimen.ICON_SIZE+4):Dimen.ICON_SIZE,
-            glow: selected
+          child: Center(
+            child: SongRateIcon(
+                rate,
+                size: selected?(Dimen.ICON_SIZE+4):Dimen.ICON_SIZE,
+                glow: selected
+            ),
           ),
           height: 2*Dimen.ICON_SIZE,
         ),
         Text(
-            SongRate.text(rate),
+            SongRateIcon.text(rate),
             style: AppTextStyle(
                 fontSize: Dimen.TEXT_SIZE_SMALL,
                 color: selected?iconEnab_(context):textEnab_(context),

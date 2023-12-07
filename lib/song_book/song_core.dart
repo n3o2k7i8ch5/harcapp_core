@@ -2,6 +2,10 @@ import 'package:harcapp_core/comm_classes/common.dart';
 
 import 'add_person.dart';
 
+enum SongRate{
+  rate1, rate2, rate3, rate4, rate5
+}
+
 abstract class SongCore{
 
   static const String TAB_CHAR = '   ';
@@ -39,7 +43,7 @@ abstract class SongCore{
 
   String get text;
   String get chords;
-  int get rate;
+  SongRate? get rate;
 
   late final String authorsStr = _authorsStr;
   String get _authorsStr{
