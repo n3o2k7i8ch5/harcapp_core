@@ -301,22 +301,21 @@ class SongRate{
     }
   }
 
-  static const Color colorNull = Colors.black;
   static const Color colorLike1 = Colors.orange;
   static const Color colorLike2 = Colors.lightBlueAccent;
   static const Color colorLike3 = Colors.blueAccent;
   static const Color colorLike4 = Colors.deepPurple;
   static const Color colorLike5 = Colors.pinkAccent;
 
-  static Color color(int rate){
+  static Color? color(int rate){
     switch(rate){
-      case RATE_NULL: return colorNull;
+      case RATE_NULL: return null;
       case RATE_1: return colorLike1;
       case RATE_2: return colorLike2;
       case RATE_3: return colorLike3;
       case RATE_4: return colorLike4;
       case RATE_5: return colorLike5;
-      default: return colorNull;
+      default: return null;
     }
   }
 
@@ -448,19 +447,19 @@ class SongRate{
 
   static int _disabledAlpha = 128;
   
-  static Widget getIcon(int rate, {bool enabled = true, size = Dimen.ICON_SIZE, bool glow = false}) =>
+  static Widget getIcon(BuildContext context, int rate, {bool enabled = true, size = Dimen.ICON_SIZE, bool glow = false}) =>
       DecoratedIcon(
         iconData(rate),
-        color: color(rate).withAlpha(enabled?255:_disabledAlpha),
+        color: (color(rate)??iconEnab_(context)).withAlpha(enabled?255:_disabledAlpha),
         size: size,
         shadows: glow?[
           BoxShadow(
             blurRadius: 42.0,
-            color: color(rate),
+            color: (color(rate)??iconEnab_(context)),
           ),
           BoxShadow(
             blurRadius: 12.0,
-            color: color(rate),
+            color: (color(rate)??iconEnab_(context)),
           ),
         ]:null,
       );
@@ -497,6 +496,7 @@ class RateButton extends StatelessWidget{
       children: <Widget>[
         SizedBox(
           child: SongRate.getIcon(
+            context,
             rate,
             size: selected?(Dimen.ICON_SIZE+4):Dimen.ICON_SIZE,
             glow: selected
