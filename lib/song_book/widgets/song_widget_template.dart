@@ -1102,8 +1102,8 @@ class _BottomWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolve
 
 class _ContentWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
 
-  static const double vertMargVal = SimpleButton.DEF_MARG;
-  static const double vertPaddVal = SimpleButton.DEF_PADDING;
+  static const double vertMargVal = SimpleButton.defMargVal;
+  static const double vertPaddVal = SimpleButton.defPaddVal;
 
   final SongWidgetTemplateState<TSong, TAddPersRes> parent;
   final ScrollController scrollController;
@@ -1122,128 +1122,127 @@ class _ContentWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolv
   const _ContentWidget(this.parent, this.scrollController, this.contentCardsKey, this.scrollviewKey, {Key? key}):super(key: key);
 
   @override
-  Widget build(BuildContext context) => OrientationBuilder(
-      builder: (BuildContext context, Orientation orientation) {
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (BuildContext context, BoxConstraints constraints) => OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
 
-        // To po to, żeby tekst został zresetowany po zmianie orientacji.
-        // if (parent.oldOrientation != MediaQuery.of(context).orientation)
-        // parent.oldOrientation = orientation;
+          // To po to, żeby tekst został zresetowany po zmianie orientacji.
+          // if (parent.oldOrientation != MediaQuery.of(context).orientation)
+          // parent.oldOrientation = orientation;
 
-        return Consumer3<TextSizeProvider, ShowChordsProvider, ChordsTrailingProvider>(
-            builder: (context, textSizeProv, showChordsProv, chordsTrailProv, _){
+          return Consumer3<TextSizeProvider, ShowChordsProvider, ChordsTrailingProvider>(
+              builder: (context, textSizeProv, showChordsProv, chordsTrailProv, _){
 
-              textSizeProv.tryInit(
-                  song, parent.screenWidth??MediaQuery.of(context).size.width,
-                  chordsVisible: showChordsProv.showChords
-              );
+                textSizeProv.tryInit(
+                    song, constraints.maxWidth,//parent.screenWidth??MediaQuery.of(context).size.width,
+                    chordsVisible: showChordsProv.showChords
+                );
 
-              Widget chordsWidget = Builder(
-                  builder: (context){
+                Widget chordsWidget = Builder(
+                    builder: (context){
 
-                    if(!showChordsProv.showChords)
-                      return Container();
+                      if(!showChordsProv.showChords)
+                        return Container();
 
-                    return SimpleButton(
-                        margin: EdgeInsets.all(SimpleButton.DEF_MARG),
-                        padding: EdgeInsets.all(SimpleButton.DEF_PADDING),
-                        child: Text(
-                          chords,
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: textSizeProv.value, //initial font size
-                            color: textEnab_(context),
-                            height: lineSpacing,
-                          ),
-                        ),
-                        onTap: parent.onChordsTap==null?null:(){
-                          parent.onChordsTap!(textSizeProv);
-                          Provider.of<ChordShiftProvider>(context, listen: false).notify();
-                        },
-                        onLongPress: parent.onChordsLongPress==null?null:(){
-                          parent.onChordsLongPress!(textSizeProv);
-                          Provider.of<ChordShiftProvider>(context, listen: false).notify();
-                        }
-                    );
-
-                  }
-              );
-
-              Widget numWidget = Text(
-                lineNum,
-                textAlign: TextAlign.end,
-                style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: textSizeProv.value<Dimen.TEXT_SIZE_TINY?
-                    textSizeProv.value:
-                    Dimen.TEXT_SIZE_TINY, //initial font size
-                    color: hintEnab_(context),
-                    height:
-                    textSizeProv.value<Dimen.TEXT_SIZE_TINY?
-                    lineSpacing:
-                    lineSpacing*(textSizeProv.value / Dimen.TEXT_SIZE_TINY)
-                ),
-              );
-
-              bool chordsTrailing = settings.chordsTrailing;
-              // bool numTrailing = settings.chordsTrailing || !settings.showChords;
-
-              return Row(
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-
-                  if(!chordsTrailing) chordsWidget,
-                  
-                  Expanded(
-                    child: SimpleButton(
-                        margin: EdgeInsets.all(SimpleButton.DEF_MARG),
-                        padding: EdgeInsets.all(SimpleButton.DEF_PADDING),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Expanded(
-                                child: Text(
-                                  text,
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: textSizeProv.value, //initial font size
-                                    color: textEnab_(context),
-                                    height: lineSpacing,
-                                  ),
-                                )
+                      return SimpleButton(
+                          margin: EdgeInsets.all(SimpleButton.defMargVal),
+                          padding: EdgeInsets.all(SimpleButton.defPaddVal),
+                          child: Text(
+                            chords,
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: textSizeProv.value, //initial font size
+                              color: textEnab_(context),
+                              height: lineSpacing,
                             ),
-                            numWidget
-                          ],
-                        ),
-                        onTap: (){
-                          if(settings.scrollText) {
-
-                            double scrollDefDelta = MediaQuery.of(context).size.height / 2;
-                            double scrollDelta = min(
-                                scrollDefDelta,
-                                scrollController.position.maxScrollExtent - scrollController.offset
-                            );
-
-                            int scrollDuration = (2000*scrollDelta/scrollDefDelta).round();
-
-                            if(scrollDuration > 0)
-                              scrollController.animateTo(
-                                  scrollController.offset + scrollDelta,
-                                  duration: Duration(milliseconds: scrollDuration),
-                                  curve: Curves.ease
-                              );
+                          ),
+                          onTap: parent.onChordsTap==null?null:(){
+                            parent.onChordsTap!(textSizeProv);
+                            ChordShiftProvider.of(context).notify();
+                          },
+                          onLongPress: parent.onChordsLongPress==null?null:(){
+                            parent.onChordsLongPress!(textSizeProv);
+                            ChordShiftProvider.of(context).notify();
                           }
-                        },
-                        onLongPress: () => SongWidgetTemplateState._startAutoscroll(context, scrollController, contentCardsKey: contentCardsKey, scrollviewKey: scrollviewKey)
-                    ),
+                      );
+
+                    }
+                );
+
+                Widget numWidget = Text(
+                  lineNum,
+                  textAlign: TextAlign.end,
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: min(textSizeProv.value, Dimen.TEXT_SIZE_TINY),  //initial font size
+                      color: hintEnab_(context),
+                      height:
+                      textSizeProv.value<Dimen.TEXT_SIZE_TINY?
+                      lineSpacing:
+                      lineSpacing*(textSizeProv.value / Dimen.TEXT_SIZE_TINY)
                   ),
+                );
 
-                  if(chordsTrailing) chordsWidget
+                bool chordsTrailing = settings.chordsTrailing;
+                // bool numTrailing = settings.chordsTrailing || !settings.showChords;
 
-                ],
-              );
-            }
-        );
-      });
+                return Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+
+                    if(!chordsTrailing) chordsWidget,
+
+                    Expanded(
+                      child: SimpleButton(
+                          margin: EdgeInsets.all(SimpleButton.defMargVal),
+                          padding: EdgeInsets.all(SimpleButton.defPaddVal),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              Expanded(
+                                  child: Text(
+                                    text,
+                                    style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: textSizeProv.value, //initial font size
+                                      color: textEnab_(context),
+                                      height: lineSpacing,
+                                    ),
+                                  )
+                              ),
+                              numWidget
+                            ],
+                          ),
+                          onTap: (){
+                            if(settings.scrollText) {
+
+                              double scrollDefDelta = MediaQuery.of(context).size.height / 2;
+                              double scrollDelta = min(
+                                  scrollDefDelta,
+                                  scrollController.position.maxScrollExtent - scrollController.offset
+                              );
+
+                              int scrollDuration = (2000*scrollDelta/scrollDefDelta).round();
+
+                              if(scrollDuration > 0)
+                                scrollController.animateTo(
+                                    scrollController.offset + scrollDelta,
+                                    duration: Duration(milliseconds: scrollDuration),
+                                    curve: Curves.ease
+                                );
+                            }
+                          },
+                          onLongPress: () => SongWidgetTemplateState._startAutoscroll(context, scrollController, contentCardsKey: contentCardsKey, scrollviewKey: scrollviewKey)
+                      ),
+                    ),
+
+                    if(chordsTrailing) chordsWidget
+
+                  ],
+                );
+              }
+          );
+        }));
 
 }
 

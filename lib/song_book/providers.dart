@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_widgets/instrument_type.dart';
+import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/song_book/settings.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
+import 'package:harcapp_core/song_book/widgets/song_widget_template.dart';
 import 'package:provider/provider.dart';
 
 class HarcAppSongBook extends StatelessWidget{
@@ -119,7 +121,7 @@ class TextSizeProvider extends ChangeNotifier{
     _wantedValue = {};
     _cacheSizes = cacheSizes;
     _textScaler = textScaler;
-    tryInit(song, screenWidth, chordsVisible: chordsVisible);
+    // tryInit(song, screenWidth, chordsVisible: chordsVisible);
   }
 
   void tryInit(SongCore song, double screenWidth, {required bool chordsVisible, bool force = false}){
@@ -179,13 +181,13 @@ class TextSizeProvider extends ChangeNotifier{
     return _value[_screenWidth];
   }
 
-  static double fits(double? screenWidth, TextScaler textScaler, String text, String? chords, String nums, double fontSize){
+  static double fits(double screenWidth, TextScaler textScaler, String text, String? chords, String nums, double fontSize){
 
-    TextStyle style = TextStyle(fontSize: fontSize, fontFamily: 'Roboto');
+    TextStyle style = TextStyle(fontSize: fontSize, fontFamily: 'Roboto', height: 1.2);
 
     var wordWrapText = TextPainter(text: TextSpan(style: style, text: text),
       textDirection: TextDirection.ltr,
-      textScaler: textScaler
+      textScaler: textScaler,
     );
     wordWrapText.layout();
 
@@ -205,10 +207,13 @@ class TextSizeProvider extends ChangeNotifier{
     double chordsWidth = chords==null?0:wordWrapChords.width;
     double numsWidth = wordWrapNums.width;
 
+    double textPadMargWidth = 2*SimpleButton.defMargVal + 2*SimpleButton.defPaddVal;
+    double chordsPadMargWidth = 2*SimpleButton.defMargVal + 2*SimpleButton.defPaddVal;
+
     if(chords!=null)
-      screenWidth = screenWidth! - Dimen.defMarg - 4*Dimen.defMarg - 2*4;
+      screenWidth = screenWidth - textPadMargWidth - chordsPadMargWidth - 2*4;
     else
-      screenWidth = screenWidth! - Dimen.defMarg - 2*Dimen.defMarg - 2*2;
+      screenWidth = screenWidth - textPadMargWidth - 2*2;
 
     if(screenWidth < textWidth + chordsWidth + numsWidth)
       return screenWidth/(textWidth + chordsWidth + numsWidth);

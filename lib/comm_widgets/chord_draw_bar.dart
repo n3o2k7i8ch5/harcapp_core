@@ -63,8 +63,8 @@ class ChordWidget extends StatelessWidget{
   static const double defSize = 32.0;
   static const double defPositionTextSize = 7.0;
   static const double defChordNameSize = Dimen.TEXT_SIZE_SMALL;
-  static const double defMarg = SimpleButton.DEF_MARG;
-  static const double defPadding = SimpleButton.DEF_PADDING;
+  static const double defMarg = SimpleButton.defMargVal;
+  static const double defPadding = SimpleButton.defPaddVal;
 
   static const int defFretCnt = 5;
 

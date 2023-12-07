@@ -8,8 +8,8 @@ import 'gradient_widget.dart';
 
 class SimpleButton extends StatelessWidget{
 
-  static const double DEF_PADDING = Dimen.defMarg/2;
-  static const double DEF_MARG = Dimen.defMarg/2;
+  static const double defPaddVal = Dimen.defMarg/2;
+  static const double defMargVal = Dimen.defMarg/2;
 
   final Widget child;
   final void Function()? onTap;
@@ -99,7 +99,7 @@ class SimpleButton extends StatelessWidget{
     double? iconSize,
     double? textSize,
     EdgeInsets padding = const EdgeInsets.all(Dimen.ICON_MARG),
-    EdgeInsets margin = const EdgeInsets.all(DEF_MARG),
+    EdgeInsets margin = const EdgeInsets.all(defMargVal),
     bool iconLeading = true,
     double? radius,
     BorderRadius? borderRadius,
