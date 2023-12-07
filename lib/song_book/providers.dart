@@ -210,12 +210,13 @@ class TextSizeProvider extends ChangeNotifier{
 
     double textPadMargWidth = 2*SimpleButton.defMargVal + 2*SimpleButton.defPaddVal;
     double chordsPadMargWidth = 2*SimpleButton.defMargVal + 2*SimpleButton.defPaddVal;
+    double lineNumPadMargWidth = 2*SimpleButton.defMargVal + 2*SimpleButton.defPaddVal;
 
     double maxTextWidth;
     if(chords!=null)
-      maxTextWidth = .95*(maxWidth - textPadMargWidth - chordsPadMargWidth);
+      maxTextWidth = 1*(maxWidth - lineNumPadMargWidth - textPadMargWidth - chordsPadMargWidth);
     else
-      maxTextWidth = .95*(maxWidth - textPadMargWidth);
+      maxTextWidth = 1*(maxWidth - lineNumPadMargWidth - textPadMargWidth);
 
     return min(1, maxTextWidth/(textWidth + chordsWidth + numsWidth));
   }
