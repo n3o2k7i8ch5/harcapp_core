@@ -194,11 +194,13 @@ class TextSizeProvider extends ChangeNotifier{
     if(chords!=null) {
       wordWrapChords = TextPainter(text: TextSpan(style: style, text: chords),
         textDirection: TextDirection.ltr,
+        textScaler: textScaler,
       );
       wordWrapChords.layout();
     }
     var wordWrapNums = TextPainter(text: TextSpan(style: style.copyWith(fontSize: Dimen.TEXT_SIZE_TINY), text: nums),
       textDirection: TextDirection.ltr,
+      textScaler: textScaler,
     );
     wordWrapNums.layout();
 
