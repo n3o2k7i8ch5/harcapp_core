@@ -21,7 +21,7 @@ import 'errors.dart';
 import '../../providers.dart';
 import 'providers.dart';
 
-const double TEXT_FIELD_TOP_PADD = Dimen.TEXT_FIELD_PADD - 7;
+const double TEXT_FIELD_TOP_PADD = Dimen.TEXT_FIELD_PADD - 9;
 
 class SongPartEditorTemplate extends StatefulWidget{
 
