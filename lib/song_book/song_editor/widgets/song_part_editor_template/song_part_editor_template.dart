@@ -283,8 +283,9 @@ class _SongTextWidgetState extends State<SongTextWidget>{
                     )
                 )),
                 Stack(
+                  alignment: Alignment.topCenter,
                   children: [
-                    Positioned.fill(child: LineCountWidget()),
+                    LineCountWidget(),
                     TextLengthWarning(),
                   ],
                 )
