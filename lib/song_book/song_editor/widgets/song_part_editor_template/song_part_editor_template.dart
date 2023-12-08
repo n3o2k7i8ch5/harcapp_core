@@ -119,8 +119,8 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
             ChangeNotifierProvider(create: (context) => TextProvider(text: initText??'')),
             ChangeNotifierProvider(create: (context) => ChordsProvider(chords: initChord??'')),
             ChangeNotifierProvider(create: (context) => TextShiftProvider(shifted: initShifted??isRefren, onChanged: onShiftedChanged)),
-            ChangeNotifierProvider(create: (context) => ErrorProvider<ChordsMissingError>(init: (errProv) => ChordsMissingError.handleErrors(context, errProv))),
-            ChangeNotifierProvider(create: (context) => ErrorProvider<TextTooLongError>(init: (errProv) => TextTooLongError.handleErrors(context, errProv))),
+            ChangeNotifierProvider(create: (context) => ErrorProvider<ChordsMissingError>(init: (errProv) => ChordsMissingError.handleNotifyErrors(context, errProv))),
+            ChangeNotifierProvider(create: (context) => ErrorProvider<TextTooLongError>(init: (errProv) => TextTooLongError.handleNotifyErrors(context, errProv))),
           ],
           builder: (context, _) => Column(
             children: [
@@ -193,7 +193,9 @@ class _SongTextWidgetState extends State<SongTextWidget>{
 
   void onChanged(){
     TextProvider.notify_(context);
-    widget.onChanged?.call(textController.text, handleErrors(context, isRefren));
+    int errorCount = TextTooLongError.handleNotifyErrorsFrom(context);
+    widget.onChanged?.call(textController.text, errorCount);
+    
   }
 
   @override
@@ -319,7 +321,10 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
   late TextEditingController chordsController;
   void Function(String, int)? get onChanged => widget.onChanged;
 
-  void _onChanged() => onChanged?.call(chordsController.text, handleErrors(context, isRefren));
+  void _onChanged(){
+    int errorCount = ChordsMissingError.handleNotifyErrorsFrom(context);
+    onChanged?.call(chordsController.text, errorCount);
+  }
 
   late FocusNode focusNode;
 
@@ -367,6 +372,7 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
         physics: BouncingScrollPhysics(),
         controller: scrollController,
         child: Stack(
+          clipBehavior: Clip.none,
           children: [
 
             Positioned(
@@ -533,7 +539,13 @@ class ChordPresenceWarning extends StatelessWidget{
       int lines = TextProvider.of(context).text.split('\n').length;
       for(int i=0; i<lines; i++){
         ChordsMissingError? error = provider.errorAt(i);
-        lineWidgets.add(WarningShade(error==null?background_(context).withOpacity(0):error.color));
+        lineWidgets.add(
+            WarningShade(
+                error==null?
+                background_(context).withOpacity(0):
+                error.color
+            )
+        );
       }
 
       return Column(
@@ -579,7 +591,13 @@ class TextLengthWarning extends StatelessWidget{
         int lines = TextProvider.of(context).text.split('\n').length;
         for(int i=0; i<lines; i++){
           TextTooLongError? error = provider.errorAt(i);
-          lineWidgets.add(WarningShade(error==null?background_(context).withOpacity(0):error.color));
+          lineWidgets.add(
+              WarningShade(
+                  error==null?
+                  background_(context).withOpacity(0):
+                  error.color
+              )
+          );
         }
 
         return Padding(
@@ -600,32 +618,31 @@ class LineCountWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) => Padding(
       padding: EdgeInsets.only(top: TEXT_FIELD_TOP_PADD),
-      child: Consumer<TextProvider>(
-          builder: (context, textProv, child) => Consumer<ChordsProvider>(
-              builder: (context, chordsProv, child) {
+      child: Consumer2<TextProvider, ChordsProvider>(
+          builder: (context, textProv, chordsProv, child) {
+            int textLines = textProv.text.split('\n').length;
+            int chordsLines = chordsProv.chords.split('\n').length;
 
-                int textLines = textProv.text.split('\n').length;
-                int chordsLines = chordsProv.chords.split('\n').length;
+            int lines = max(textLines, chordsLines);
+            String text = '';
+            for (int i = 0; i < lines; i++)
+              text += '${i + 1}\n';
 
-                int lines = max(textLines, chordsLines);
-                String text = '';
-                for(int i=0; i<lines; i++)
-                  text += '${i + 1}\n';
+            if (text.length > 0)
+              text = text.substring(0, text.length - 1);
 
-                if(text.length>0)
-                  text = text.substring(0, text.length-1);
-
-                return Text(
-                  text,
-                  textAlign: TextAlign.end,
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: Dimen.TEXT_SIZE_TINY,//initial font size
-                      color: hintEnab_(context),
-                      height: SongTextWidget.fontSize*SongTextWidget.height/ Dimen.TEXT_SIZE_TINY
-                  ),
-                );
-              })
+            return Text(
+              text,
+              textAlign: TextAlign.end,
+              style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontSize: Dimen.TEXT_SIZE_TINY, //initial font size
+                  color: hintEnab_(context),
+                  height: SongTextWidget.fontSize * SongTextWidget.height /
+                      Dimen.TEXT_SIZE_TINY
+              ),
+            );
+          }
       )
   );
 

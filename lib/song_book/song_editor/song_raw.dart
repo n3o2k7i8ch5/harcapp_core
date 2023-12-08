@@ -99,17 +99,13 @@ class SongRaw extends SongCore{
     songParts: [],
   );
 
-  static SongRaw parse(String lclId, String code) {
-    Map<String, dynamic> map = jsonDecode(code)[lclId];
-    return fromRespMap(lclId, map);
-  }
+  static SongRaw parse(String lclId, String code) =>
+      fromRespMap(lclId, jsonDecode(code)[lclId]);
 
-  static SongRaw fromBase64({String? lclId, required String code}){
-    return SongRaw.parse(
-        const Uuid().v4(),
-        Utf8Decoder().convert(Base64Codec().decode(code).toList())
-    );
-  }
+  static SongRaw fromBase64({String? lclId, required String code}) => SongRaw.parse(
+      const Uuid().v4(),
+      Utf8Decoder().convert(Base64Codec().decode(code).toList())
+  );
 
   static SongRaw fromRespMap(String lclId, Map respMap){
     bool hasRefren = false;

@@ -53,11 +53,11 @@ class ErrorProvider<T extends SongEditError> extends ChangeNotifier{
   late List<T> _errorList;
   late Map<int?, T> _errorMap;
 
-  ErrorProvider({Function(ErrorProvider<T> errProv)? init}){
+  ErrorProvider({void Function(ErrorProvider<T> errProv)? init}){
     _errorList = [];
     _errorMap = {};
 
-    if(init != null) init(this);
+    init?.call(this);
   }
 
   void add(T error){

@@ -9,16 +9,11 @@ const int MAX_TEXT_LINE_LENGTH = 52;
 
 isChordMissing(String text, String? chords) => text.length>0 && (chords == null || chords.length==0);
 
-int handleErrors(BuildContext context, bool isRefren){
-
+int handleAllErrors(BuildContext context){
   int errCount = 0;
-
-  ErrorProvider<ChordsMissingError> chordsMissingErrProv = Provider.of<ErrorProvider<ChordsMissingError>>(context, listen: false);
-  errCount += ChordsMissingError.handleErrors(context, chordsMissingErrProv);
-
-  ErrorProvider<TextTooLongError> textTooLongErrProv = Provider.of<ErrorProvider<TextTooLongError>>(context, listen: false);
-  errCount += TextTooLongError.handleErrors(context, textTooLongErrProv);
-
+  errCount += TextTooLongError.handleNotifyErrorsFrom(context);
+  errCount += ChordsMissingError.handleNotifyErrorsFrom(context);
+  
   return errCount;
 }
 
@@ -44,10 +39,15 @@ class ChordsMissingError extends SongEditError{
     text: 'Każda linijka tekstu, której akompniuje instrument wymaga podania chwytów.'
   );
 
-  static int handleErrors(BuildContext context, ErrorProvider<ChordsMissingError> errProv){
+  static int handleNotifyErrorsFrom(BuildContext context){
+    ErrorProvider<ChordsMissingError> chordsMissingErrProv = Provider.of<ErrorProvider<ChordsMissingError>>(context, listen: false);
+    return handleNotifyErrors(context, chordsMissingErrProv);
+  }
+  
+  static int handleNotifyErrors(BuildContext context, ErrorProvider<ChordsMissingError> errProv){
 
-    List<String> textLines = Provider.of<TextProvider>(context, listen: false).text.split('\n');
-    List<String> chordLines = Provider.of<ChordsProvider>(context, listen: false).chords.split('\n');
+    List<String> textLines = TextProvider.of(context).text.split('\n');
+    List<String> chordLines = ChordsProvider.of(context).chords.split('\n');
 
     errProv.clear();
     for(int i=0; i<textLines.length; i++)
@@ -64,7 +64,7 @@ class ChordsMissingError extends SongEditError{
     List<String> chordsLines = chords.split('\n');
 
     for(int i=0; i<textLines.length; i++)
-      if (isChordMissing(textLines[i], i < chordsLines.length ? chordsLines[i] : null))
+      if (isChordMissing(textLines[i], i<chordsLines.length?chordsLines[i]:null))
         return true;
 
     return false;
@@ -80,7 +80,12 @@ class TextTooLongError extends SongEditError{
       text: 'Linijka tekstu nie powinna przekraczać $MAX_TEXT_LINE_LENGTH znaków.'
   );
 
-  static int handleErrors(BuildContext context, ErrorProvider<TextTooLongError> errProv){
+  static int handleNotifyErrorsFrom(BuildContext context){
+    ErrorProvider<TextTooLongError> textTooLongErrProv = Provider.of<ErrorProvider<TextTooLongError>>(context, listen: false);
+    return handleNotifyErrors(context, textTooLongErrProv);
+  }
+  
+  static int handleNotifyErrors(BuildContext context, ErrorProvider<TextTooLongError> errProv){
 
     List<String> textLines = Provider.of<TextProvider>(context, listen: false).text.split('\n');
 
@@ -112,19 +117,14 @@ class AnyError extends StatelessWidget{
   const AnyError({required this.builder});
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<ErrorProvider<ChordsMissingError>>(builder: (context, chordsMissingErrProv, child) =>
-        Consumer<ErrorProvider<TextTooLongError>>(builder: (context, textTooLongErrProv, child) =>
-          builder(
-            context,
-            chordsMissingErrProv.length + textTooLongErrProv.length
-          )
-        ),
-    );
-  }
+  Widget build(BuildContext context) => Consumer2<ErrorProvider<ChordsMissingError>, ErrorProvider<TextTooLongError>>(builder: (context, chordsMissingErrProv, textTooLongErrProv, child) =>
+      builder(
+          context,
+          chordsMissingErrProv.length + textTooLongErrProv.length
+      )
+  );
 
 }
 
-bool hasAnyErrors(String text, String chords){
-  return ChordsMissingError.hasError(text, chords) || TextTooLongError.hasError(text, chords);
-}
+bool hasAnyErrors(String text, String chords) =>
+  ChordsMissingError.hasError(text, chords) || TextTooLongError.hasError(text, chords);
