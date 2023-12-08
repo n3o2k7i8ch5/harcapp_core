@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'errors.dart';
 
 class TextProvider extends ChangeNotifier{
+
+  static TextProvider of(BuildContext context) => Provider.of<TextProvider>(context, listen: false);
+  static notify_(BuildContext context) => of(context).notify();
 
   late TextEditingController controller;
 
@@ -16,9 +20,14 @@ class TextProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  void notify() => notifyListeners();
+
 }
 
 class ChordsProvider extends ChangeNotifier{
+
+  static ChordsProvider of(BuildContext context) => Provider.of<ChordsProvider>(context, listen: false);
+  static notify_(BuildContext context) => of(context).notify();
 
   late TextEditingController controller;
 
@@ -32,9 +41,14 @@ class ChordsProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  void notify() => notifyListeners();
+
 }
 
 class ErrorProvider<T extends SongEditError> extends ChangeNotifier{
+
+  static ErrorProvider of(BuildContext context) => Provider.of<ErrorProvider>(context, listen: false);
+  static notify_(BuildContext context) => of(context).notify();
 
   late List<T> _errorList;
   late Map<int?, T> _errorMap;

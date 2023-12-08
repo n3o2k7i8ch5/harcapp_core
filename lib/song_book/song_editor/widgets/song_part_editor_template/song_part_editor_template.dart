@@ -164,6 +164,9 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
 
 class SongTextWidget extends StatefulWidget{
 
+  static const double height = 1.2;
+  static const double fontSize = Dimen.TEXT_SIZE_NORMAL;
+  
   final bool isRefren;
   final ScrollController scrollController;
   final void Function(String, int)? onChanged;
@@ -185,17 +188,19 @@ class _SongTextWidgetState extends State<SongTextWidget>{
   ScrollController get scrollController => widget.scrollController;
   late TextEditingController textController;
   late TextEditingController chordsController;
-  void Function(String, int)? get onChanged => widget.onChanged;
 
   late FocusNode focusNode;
 
-  _onChanged() => onChanged?.call(textController.text, handleErrors(context, isRefren));
+  void onChanged(){
+    TextProvider.notify_(context);
+    widget.onChanged?.call(textController.text, handleErrors(context, isRefren));
+  }
 
   @override
   void initState() {
 
-    textController = Provider.of<TextProvider>(context, listen: false).controller;
-    chordsController = Provider.of<ChordsProvider>(context, listen: false).controller;
+    textController = TextProvider.of(context).controller;
+    chordsController = ChordsProvider.of(context).controller;
 
     focusNode = FocusNode();
     focusNode.addListener(() {
@@ -208,13 +213,13 @@ class _SongTextWidgetState extends State<SongTextWidget>{
       textController.text = SongRaw.correctPartText(textController.text);
     });
 
-    textController.addListener(_onChanged);
+    textController.addListener(onChanged);
     super.initState();
   }
 
   @override
   void dispose() {
-    textController.removeListener(_onChanged);
+    textController.removeListener(onChanged);
     focusNode.dispose();
     super.dispose();
   }
@@ -251,13 +256,15 @@ class _SongTextWidgetState extends State<SongTextWidget>{
                           fontFamily: 'Roboto',
                           fontSize: Dimen.TEXT_SIZE_NORMAL,
                           color: textEnab_(context),
+                          height: SongTextWidget.height,
                         ),
                         decoration: InputDecoration(
                             hintText: 'Słowa ${isRefren?'refrenu':'zwrotki'}',
                             hintStyle: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: Dimen.TEXT_SIZE_NORMAL,
-                                color: hintEnab_(context)
+                              fontFamily: 'Roboto',
+                              fontSize: Dimen.TEXT_SIZE_NORMAL,
+                              color: hintEnab_(context),
+                              height: SongTextWidget.height,
                             ),
                             border: InputBorder.none,
                             isDense: true
@@ -268,12 +275,12 @@ class _SongTextWidgetState extends State<SongTextWidget>{
                         autofocus: false,
                         minWidth: Dimen.ICON_FOOTPRINT*2,
                         inputFormatters: [ALLOWED_TEXT_REGEXP],
-                        controller: textController
+                        controller: textController,
                     )
                 )),
                 Stack(
                   children: [
-                    Positioned.fill(child: LineCount()),
+                    Positioned.fill(child: LineCountWidget()),
                     TextLengthWarning(),
                   ],
                 )
@@ -319,8 +326,8 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
   @override
   void initState() {
 
-    textController = Provider.of<TextProvider>(context, listen: false).controller;
-    chordsController = Provider.of<ChordsProvider>(context, listen: false).controller;
+    textController = TextProvider.of(context).controller;
+    chordsController = ChordsProvider.of(context).controller;
 
     focusNode = FocusNode();
     focusNode.addListener(() {
@@ -373,15 +380,16 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
                 focusNode: focusNode,
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: Dimen.TEXT_SIZE_NORMAL,
+                  fontSize: SongTextWidget.fontSize,
                   color: textEnab_(context),
                 ),
                 decoration: InputDecoration(
                     hintText: 'Chwyty ${isRefren?'ref.':'zwr.'}',
                     hintStyle: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: Dimen.TEXT_SIZE_NORMAL,
-                        color: hintEnab_(context)
+                      fontFamily: 'Roboto',
+                      fontSize: SongTextWidget.fontSize,
+                      color: hintEnab_(context),
+                      height: SongTextWidget.height,
                     ),
                     border: InputBorder.none,
                     isDense: true
@@ -521,7 +529,7 @@ class ChordPresenceWarning extends StatelessWidget{
 
       List<Widget> lineWidgets = [];
 
-      int lines = Provider.of<TextProvider>(context).text.split('\n').length;
+      int lines = TextProvider.of(context).text.split('\n').length;
       for(int i=0; i<lines; i++){
         ChordsMissingError? error = provider.errorAt(i);
         lineWidgets.add(WarningShade(error==null?background_(context).withOpacity(0):error.color));
@@ -551,7 +559,7 @@ class WarningShade extends StatelessWidget{
           borderRadius: new BorderRadius.all(Radius.circular(4))
       ),
       duration: Duration(milliseconds: 500),
-      height: Dimen.TEXT_SIZE_NORMAL + 1,
+      height: SongTextWidget.fontSize * SongTextWidget.height - 1,
     ),
   );
 
@@ -567,7 +575,7 @@ class TextLengthWarning extends StatelessWidget{
 
         List<Widget> lineWidgets = [];
 
-        int lines = Provider.of<TextProvider>(context).text.split('\n').length;
+        int lines = TextProvider.of(context).text.split('\n').length;
         for(int i=0; i<lines; i++){
           TextTooLongError? error = provider.errorAt(i);
           lineWidgets.add(WarningShade(error==null?background_(context).withOpacity(0):error.color));
@@ -586,40 +594,38 @@ class TextLengthWarning extends StatelessWidget{
 
 }
 
-class LineCount extends StatelessWidget{
+class LineCountWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Padding(
       padding: EdgeInsets.only(top: TEXT_FIELD_TOP_PADD),
-      child: Consumer<TextProvider>(builder: (context, textProv, child) {
+      child: Consumer<TextProvider>(
+          builder: (context, textProv, child) => Consumer<ChordsProvider>(
+              builder: (context, chordsProv, child) {
 
-        return Consumer<ChordsProvider>(
-            builder: (context, chordsProv, child) {
+                int textLines = textProv.text.split('\n').length;
+                int chordsLines = chordsProv.chords.split('\n').length;
 
-              int textLines = textProv.text.split('\n').length;
-              int chordsLines = chordsProv.chords.split('\n').length;
+                int lines = max(textLines, chordsLines);
+                String text = '';
+                for(int i=0; i<lines; i++)
+                  text += '${i + 1}\n';
 
-              int lines = max(textLines, chordsLines);
-              String text = '';
-              for(int i=0; i<lines; i++)
-                text += '${i + 1}\n';
+                if(text.length>0)
+                  text = text.substring(0, text.length-1);
 
-              if(text.length>0)
-                text = text.substring(0, text.length-1);
-
-              return Text(
-                text,
-                textAlign: TextAlign.end,
-                style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: Dimen.TEXT_SIZE_TINY,//initial font size
-                    color: hintEnab_(context),
-                    height: 1*Dimen.TEXT_SIZE_BIG/ Dimen.TEXT_SIZE_TINY
-                ),
-              );
-            });
-
-      })
+                return Text(
+                  text,
+                  textAlign: TextAlign.end,
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: Dimen.TEXT_SIZE_TINY,//initial font size
+                      color: hintEnab_(context),
+                      height: SongTextWidget.fontSize*SongTextWidget.height/ Dimen.TEXT_SIZE_TINY
+                  ),
+                );
+              })
+      )
   );
 
 }
