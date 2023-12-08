@@ -79,7 +79,7 @@ class TextFieldFitState extends State<TextFieldFit>{
     );
 
     tp.layout();
-    var textWidth = 1.08*tp.width; // We will use this width for the container wrapping our TextField
+    var textWidth = 1.1*tp.width; // We will use this width for the container wrapping our TextField
 
     // Enforce a minimum width
     if ( textWidth < widget.minWidth )
