@@ -61,7 +61,7 @@ class TextFieldFitState extends State<TextFieldFit>{
         // Tells the framework to redraw the widget
         // The widget will redraw with a new width
         setState(() {});
-        if(widget.onChanged != null) widget.onChanged!(text);
+        widget.onChanged?.call(text);
       },
       inputFormatters: widget.inputFormatters,
       keyboardType: widget.keyboardType,
@@ -79,12 +79,11 @@ class TextFieldFitState extends State<TextFieldFit>{
     );
 
     tp.layout();
-    var textWidth = 1.06*tp.width; // We will use this width for the container wrapping our TextField
+    var textWidth = 1.08*tp.width; // We will use this width for the container wrapping our TextField
 
     // Enforce a minimum width
-    if ( textWidth < widget.minWidth ) {
+    if ( textWidth < widget.minWidth )
       textWidth = widget.minWidth;
-    }
 
     return Container(
       width: textWidth,
