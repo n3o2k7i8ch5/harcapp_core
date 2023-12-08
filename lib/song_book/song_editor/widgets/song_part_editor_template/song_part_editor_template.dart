@@ -193,7 +193,9 @@ class _SongTextWidgetState extends State<SongTextWidget>{
 
   void onChanged(){
     TextProvider.notify_(context);
-    int errorCount = TextTooLongError.handleNotifyErrorsFrom(context);
+    int errorCount = 0;
+    errorCount += TextTooLongError.handleNotifyErrorsFrom(context);
+    errorCount += ChordsMissingError.handleNotifyErrorsFrom(context);
     widget.onChanged?.call(textController.text, errorCount);
     
   }
@@ -322,7 +324,9 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
   void Function(String, int)? get onChanged => widget.onChanged;
 
   void _onChanged(){
-    int errorCount = ChordsMissingError.handleNotifyErrorsFrom(context);
+    int errorCount = 0;
+    errorCount += TextTooLongError.handleNotifyErrorsFrom(context);
+    errorCount += ChordsMissingError.handleNotifyErrorsFrom(context);
     onChanged?.call(chordsController.text, errorCount);
   }
 
