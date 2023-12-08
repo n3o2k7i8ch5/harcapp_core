@@ -440,8 +440,7 @@ class ButtonsWidget extends StatelessWidget{
             MdiIcons.rayStartArrow,
             color: iconDisab_(context)
         ),
-      )
-          :
+      ) :
       Consumer<TextShiftProvider>(
           builder: (context, provider, child) => IconButton(
             icon: AnimatedChildSlider(
@@ -460,8 +459,7 @@ class ButtonsWidget extends StatelessWidget{
               ],
             ),
             onPressed: isRefren?null:(){
-              TextShiftProvider prov = Provider.of<TextShiftProvider>(context, listen: false);
-              prov.reverseShift();
+              TextShiftProvider.of(context).reverseShift();
             },
           )
       ),
@@ -490,7 +488,7 @@ class ButtonsWidget extends StatelessWidget{
         icon: Icon(MdiIcons.chevronDoubleDown),
         onPressed: (){
 
-          ChordsProvider provider = Provider.of<ChordsProvider>(context, listen: false);
+          ChordsProvider provider = ChordsProvider.of(context);
 
           ChordShifter cs = ChordShifter(provider.chords, 0);
           cs.down();
@@ -500,7 +498,6 @@ class ButtonsWidget extends StatelessWidget{
           provider.chords = chords;
 
           provider.controller.selection = TextSelection.collapsed(offset: provider.chords.length);
-          //parent.onTextChanged?.call(chords, handleErrors(context, isRefren));
         },
       ),
 
@@ -508,7 +505,7 @@ class ButtonsWidget extends StatelessWidget{
         icon: Icon(MdiIcons.chevronDoubleUp),
         onPressed: (){
 
-          ChordsProvider provider = Provider.of<ChordsProvider>(context, listen: false);
+          ChordsProvider provider = ChordsProvider.of(context);
 
           ChordShifter cs = ChordShifter(provider.chords, 0);
           cs.up();
@@ -564,15 +561,17 @@ class WarningShade extends StatelessWidget{
   const WarningShade(this.color);
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: EdgeInsets.only(top: 0.5, bottom: 0.5),
-    child: AnimatedContainer(
-      decoration: BoxDecoration(
-          color: color,
-          borderRadius: new BorderRadius.all(Radius.circular(4))
+  Widget build(BuildContext context) => SizedBox(
+    height: SongTextWidget.fontSize * SongTextWidget.height,
+    child: Padding(
+      padding: EdgeInsets.symmetric(vertical: 0.5),
+      child: AnimatedContainer(
+        decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(4)
+        ),
+        duration: Duration(milliseconds: 500),
       ),
-      duration: Duration(milliseconds: 500),
-      height: SongTextWidget.fontSize * SongTextWidget.height - 1,
     ),
   );
 
