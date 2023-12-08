@@ -254,7 +254,7 @@ class _SongTextWidgetState extends State<SongTextWidget>{
                     child: TextFieldFit(
                         style: TextStyle(
                           fontFamily: 'Roboto',
-                          fontSize: Dimen.TEXT_SIZE_NORMAL,
+                          fontSize: SongTextWidget.fontSize,
                           color: textEnab_(context),
                           height: SongTextWidget.height,
                         ),
@@ -262,7 +262,7 @@ class _SongTextWidgetState extends State<SongTextWidget>{
                             hintText: 'Słowa ${isRefren?'refrenu':'zwrotki'}',
                             hintStyle: TextStyle(
                               fontFamily: 'Roboto',
-                              fontSize: Dimen.TEXT_SIZE_NORMAL,
+                              fontSize: SongTextWidget.fontSize,
                               color: hintEnab_(context),
                               height: SongTextWidget.height,
                             ),
@@ -382,6 +382,7 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
                   fontFamily: 'Roboto',
                   fontSize: SongTextWidget.fontSize,
                   color: textEnab_(context),
+                  height: SongTextWidget.height,
                 ),
                 decoration: InputDecoration(
                     hintText: 'Chwyty ${isRefren?'ref.':'zwr.'}',
