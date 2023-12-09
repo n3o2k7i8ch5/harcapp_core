@@ -62,7 +62,7 @@ class ChordWidget extends StatelessWidget{
 
   static const double defSize = 32.0;
   static const double defPositionTextSize = 7.0;
-  static const double defChordNameSize = Dimen.TEXT_SIZE_SMALL;
+  static const double defChordNameSize = Dimen.textSizeSmall;
   static const double defMarg = SimpleButton.defMargVal;
   static const double defPadding = SimpleButton.defPaddVal;
 
@@ -401,7 +401,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
             Padding(
               padding: EdgeInsets.all(Dimen.defMarg),
               child: RotatedBox(
-                child: Text(instrumentTypeName(type), style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_TINY, color: hintEnab_(context))),
+                child: Text(instrumentTypeName(type), style: AppTextStyle(fontSize: Dimen.textSizeTiny, color: hintEnab_(context))),
                 quarterTurns: 3,
               ),
             )

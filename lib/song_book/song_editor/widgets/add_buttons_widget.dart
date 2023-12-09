@@ -34,7 +34,7 @@ class AddButtonsWidget extends StatelessWidget{
               Icon(MdiIcons.plus, color: accentColor??accent_(context)),
               Icon(MdiIcons.musicBox, color: accentColor??accent_(context)),
               SizedBox(width: Dimen.iconMarg),
-              Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG))
+              Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.textSizeBig))
             ],
           ),
         ),
@@ -58,7 +58,7 @@ class AddButtonsWidget extends StatelessWidget{
                   Text(
                       'Refren',
                       style: AppTextStyle(
-                          fontSize: Dimen.TEXT_SIZE_BIG,
+                          fontSize: Dimen.textSizeBig,
                           color: currItemProv.hasRefren?textEnab_(context):iconDisab_(context)
                       )
                   )

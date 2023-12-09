@@ -12,7 +12,7 @@ class CustTextStyle extends TextStyle{
       String familyName,
       { Color? color = AppColors.text_def_enab,
         weight fontWeight = weight.normal,
-        fontSize = Dimen.TEXT_SIZE_NORMAL,
+        fontSize = Dimen.textSizeNormal,
         bool? shadow = false,
         FontStyle? fontStyle,
         double height = 1.0,

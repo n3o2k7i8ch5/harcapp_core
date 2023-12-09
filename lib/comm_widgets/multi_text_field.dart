@@ -316,7 +316,7 @@ class ItemState extends State<Item>{
                 child: TextField(
                   focusNode: focusNode,
                   controller: controller,
-                  style: style??AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
+                  style: style??AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weight.halfBold),
                   minLines: 1,
                   maxLines: 1,
                   textCapitalization: textCapitalization,
@@ -325,7 +325,7 @@ class ItemState extends State<Item>{
                       hintText: hint,
                       hintStyle: hintStyle??AppTextStyle(
                         color: hintEnab_(context),
-                        fontSize: Dimen.TEXT_SIZE_BIG,
+                        fontSize: Dimen.textSizeBig,
                       ),
                       border: InputBorder.none,
                       enabledBorder: InputBorder.none,
@@ -345,7 +345,7 @@ class ItemState extends State<Item>{
                 child: Text(
                   controller.text.isEmpty?hint!:controller.text,
                   style: AppTextStyle(
-                      fontSize: controller.text.isEmpty?Dimen.TEXT_SIZE_BIG:Dimen.TEXT_SIZE_BIG,
+                      fontSize: controller.text.isEmpty?Dimen.textSizeBig:Dimen.textSizeBig,
                       fontWeight: controller.text.isEmpty?weight.normal:weight.halfBold,
                       color: controller.text.isEmpty?hintEnab_(context):textEnab_(context)
                   ),

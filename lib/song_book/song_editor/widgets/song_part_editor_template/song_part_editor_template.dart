@@ -165,7 +165,7 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
 class SongTextWidget extends StatefulWidget{
 
   static const double height = 1.2;
-  static const double fontSize = Dimen.TEXT_SIZE_NORMAL;
+  static const double fontSize = Dimen.textSizeNormal;
   
   final bool isRefren;
   final ScrollController scrollController;
@@ -640,10 +640,10 @@ class LineCountWidget extends StatelessWidget{
               textAlign: TextAlign.end,
               style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: Dimen.TEXT_SIZE_TINY, //initial font size
+                  fontSize: Dimen.textSizeTiny, //initial font size
                   color: hintEnab_(context),
                   height: SongTextWidget.fontSize * SongTextWidget.height /
-                      Dimen.TEXT_SIZE_TINY
+                      Dimen.textSizeTiny
               ),
             );
           }

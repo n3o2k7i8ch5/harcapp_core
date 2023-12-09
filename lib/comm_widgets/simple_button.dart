@@ -134,7 +134,7 @@ class SimpleButton extends StatelessWidget{
           style: AppTextStyle(
               color: textColor??iconColor??iconEnab_(context!),
               fontWeight: fontWeight,
-              fontSize: textSize??(dense?Dimen.TEXT_SIZE_NORMAL:Dimen.TEXT_SIZE_BIG)
+              fontSize: textSize??(dense?Dimen.textSizeNormal:Dimen.textSizeBig)
           ),
         ),
 
@@ -159,7 +159,7 @@ class SimpleButton extends StatelessWidget{
             style: AppTextStyle(
                 color: textColor??iconEnab_(context!),
                 fontWeight: fontWeight,
-                fontSize: textSize??(dense?Dimen.TEXT_SIZE_NORMAL:Dimen.TEXT_SIZE_BIG)
+                fontSize: textSize??(dense?Dimen.textSizeNormal:Dimen.textSizeBig)
             ),
           ),
 

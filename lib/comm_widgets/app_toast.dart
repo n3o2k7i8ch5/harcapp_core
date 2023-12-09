@@ -52,7 +52,7 @@ ToastFuture showAppToast(
                               padding: const EdgeInsets.only(bottom: 6.0),
                               child: Text(
                                 header,
-                                style: AppTextStyle(color: textColor??textEnab_(context), fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
+                                style: AppTextStyle(color: textColor??textEnab_(context), fontSize: Dimen.textSizeBig, fontWeight: weight.halfBold),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -60,7 +60,7 @@ ToastFuture showAppToast(
                           AppText(
                             text,
                             color: textEnab_(context),
-                            size: Dimen.TEXT_SIZE_BIG,
+                            size: Dimen.textSizeBig,
                             textAlign: TextAlign.center,
                           ),
                         ],

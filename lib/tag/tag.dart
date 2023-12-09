@@ -11,13 +11,13 @@ class Tag extends StatelessWidget{
 
   static double height({
     double paddingVal = Dimen.iconMarg,
-    double fontSize = Dimen.TEXT_SIZE_NORMAL,
+    double fontSize = Dimen.textSizeNormal,
   }) => 2*paddingVal + fontSize;
 
   static Tag checked(
       String text,
       { Function()? onTap,
-        double fontSize = Dimen.TEXT_SIZE_NORMAL,
+        double fontSize = Dimen.textSizeNormal,
         EdgeInsets padding = const EdgeInsets.all(Dimen.iconMarg),
       }) => Tag(
     text,
@@ -43,7 +43,7 @@ class Tag extends StatelessWidget{
       this.text,
       { this.onTap,
         this.clipBehavior = Clip.hardEdge,
-        this.fontSize = Dimen.TEXT_SIZE_NORMAL,
+        this.fontSize = Dimen.textSizeNormal,
         this.bold = false,
         this.padding = const EdgeInsets.all(Dimen.iconMarg),
         this.elevation = AppCard.defElevation,

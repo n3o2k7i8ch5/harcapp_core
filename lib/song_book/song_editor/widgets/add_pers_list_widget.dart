@@ -177,7 +177,7 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
 
           if(prov.addPersData.isEmpty)
             SizedBox(
-              height: AddPersWidget.height + 2*Dimen.iconMarg + 2*Dimen.TEXT_SIZE_BIG,
+              height: AddPersWidget.height + 2*Dimen.iconMarg + 2*Dimen.textSizeBig,
               child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -194,7 +194,7 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
                       textAlign: TextAlign.center,
                       style: AppTextStyle(
                         color: hintEnab_(context),
-                        fontSize: Dimen.TEXT_SIZE_BIG,
+                        fontSize: Dimen.textSizeBig,
                       ),
                     ),
 
@@ -211,7 +211,7 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
                 style: AppTextStyle(
                   fontWeight: weight.halfBold,
                   color: hintEnab_(context),
-                  fontSize: Dimen.TEXT_SIZE_BIG
+                  fontSize: Dimen.textSizeBig
                 ),
                 textAlign: TextAlign.center,
               ),

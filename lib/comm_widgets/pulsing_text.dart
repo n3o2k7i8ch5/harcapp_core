@@ -20,7 +20,7 @@ class PulsingText extends StatefulWidget{
       this.text,
       { this.selectable = true,
         this.pulse = true,
-        this.fontSize = Dimen.TEXT_SIZE_BIG,
+        this.fontSize = Dimen.textSizeBig,
         this.fontWeight = weight.bold,
         this.textAlign,
         this.fontColor,

@@ -19,7 +19,7 @@ class TagsWidget extends StatelessWidget{
   final Layout layout;
   final Widget Function(BuildContext, String, bool) tagBuilder;
 
-  static double get height => Dimen.TEXT_SIZE_BIG + 2*Dimen.iconMarg;
+  static double get height => Dimen.textSizeBig + 2*Dimen.iconMarg;
 
   const TagsWidget({
     required this.allTags,
@@ -78,7 +78,7 @@ class TagsWidget extends StatelessWidget{
     Function(String, bool)? onTagTap,
     double separator=Dimen.defMarg,
     double uncheckedElevation=0,
-    double fontSize = Dimen.TEXT_SIZE_NORMAL,
+    double fontSize = Dimen.textSizeNormal,
   }) => TagsWidget(
     allTags: allTags,
     checkedTags: checkedTags,
@@ -111,7 +111,7 @@ class TagsWidget extends StatelessWidget{
     Function(String, bool)? onTagTap,
     double separator=Dimen.defMarg,
     double uncheckedElevation=0,
-    double fontSize = Dimen.TEXT_SIZE_NORMAL,
+    double fontSize = Dimen.textSizeNormal,
   }) => TagsWidget(
     allTags: allTags,
     checkedTags: checkedTags,

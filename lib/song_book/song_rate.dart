@@ -473,7 +473,7 @@ class SongRateIcon extends StatelessWidget{
 
 class RateButton extends StatelessWidget{
 
-  static const double HEIGHT = 2*Dimen.iconSize /*CHILD*/ + Dimen.TEXT_SIZE_SMALL /*TEXT*/ + 2* Dimen.defMarg /*PADDING*/;
+  static const double HEIGHT = 2*Dimen.iconSize /*CHILD*/ + Dimen.textSizeSmall /*TEXT*/ + 2* Dimen.defMarg /*PADDING*/;
 
   final SongRate rate;
   final bool selected;
@@ -512,7 +512,7 @@ class RateButton extends StatelessWidget{
         Text(
             SongRateIcon.text(rate),
             style: AppTextStyle(
-                fontSize: Dimen.TEXT_SIZE_SMALL,
+                fontSize: Dimen.textSizeSmall,
                 color: selected?iconEnab_(context):textEnab_(context),
                 fontWeight: selected?weight.bold:weight.normal
             ),

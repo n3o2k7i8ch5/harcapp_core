@@ -47,7 +47,7 @@ class SongTagsWidget extends StatelessWidget{
               allTags: SongTag.ALL,
               padding: padding,
               checkedTags: prov.checkedTags,
-              fontSize: Dimen.TEXT_SIZE_NORMAL,
+              fontSize: Dimen.textSizeNormal,
             )
           else
             TagsWidget.wrap(
@@ -55,7 +55,7 @@ class SongTagsWidget extends StatelessWidget{
               allTags: SongTag.ALL,
               padding: padding,
               checkedTags: prov.checkedTags,
-              fontSize: Dimen.TEXT_SIZE_NORMAL,
+              fontSize: Dimen.textSizeNormal,
             )
 
         ],

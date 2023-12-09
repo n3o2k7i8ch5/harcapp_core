@@ -10,11 +10,11 @@ class Dimen{
   static const double APPBAR_ELEVATION = 4.0;
   static const double APPBAR_TITLE_BOTTOM_PADDING_VAL = 16.0;
 
-  static const double TEXT_SIZE_LIMIT = 8;
-  static const double TEXT_SIZE_TINY = 10;
-  static const double TEXT_SIZE_SMALL = 12;
-  static const double TEXT_SIZE_NORMAL = 14;
-  static const double TEXT_SIZE_BIG = 16;
+  static const double textSizeLimit = 8;
+  static const double textSizeTiny = 10;
+  static const double textSizeSmall = 12;
+  static const double textSizeNormal = 14;
+  static const double textSizeBig = 16;
 
   static const double iconMarg = 12;
   static const double iconSize = 24;

@@ -387,7 +387,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
                     child: Row(
                       children: [
                         Expanded(child: Container()),
-                        Icon(MdiIcons.draw, color: hintEnab_(context), size: Dimen.TEXT_SIZE_NORMAL + 2),
+                        Icon(MdiIcons.draw, color: hintEnab_(context), size: Dimen.textSizeNormal + 2),
                         SizedBox(width: 6.0),
                         Text(
                             dateToString(song.releaseDate!, showMonth: song.showRelDateMonth, showDay: song.showRelDateMonth && song.showRelDateDay, yearAbbr: 'A.D.'),
@@ -404,15 +404,15 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(width: Dimen.defMarg),
-                      Icon(MdiIcons.accountEdit, size: Dimen.TEXT_SIZE_NORMAL + 2, color: hintEnab_(context)),
+                      Icon(MdiIcons.accountEdit, size: Dimen.textSizeNormal + 2, color: hintEnab_(context)),
                       const SizedBox(width: Dimen.defMarg),
-                      Expanded(child: Text(song.addPers.length <=1 ? 'Osoba dodająca' : 'Osoby dodające', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_NORMAL, color: hintEnab_(context))))
+                      Expanded(child: Text(song.addPers.length <=1 ? 'Osoba dodająca' : 'Osoby dodające', style: AppTextStyle(fontSize: Dimen.textSizeNormal, color: hintEnab_(context))))
                     ],
                   ),
 
                 if(song.addPers.isNotEmpty)
                   Padding(
-                      padding: const EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg, left: 2*Dimen.defMarg + Dimen.TEXT_SIZE_NORMAL + 2),
+                      padding: const EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg, left: 2*Dimen.defMarg + Dimen.textSizeNormal + 2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: song.addPers.map((addPers) => addPersonResolver.build(context, addPers)).toList(),
@@ -584,12 +584,12 @@ class _TitleCard<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
         mainAxisSize: MainAxisSize.min,
         children:[
 
-          SizedBox(width: Dimen.defMarg, height: Dimen.TEXT_SIZE_SMALL + 3*Dimen.defMarg),
+          SizedBox(width: Dimen.defMarg, height: Dimen.textSizeSmall + 3*Dimen.defMarg),
 
           Text(
             'Autor sł.: ',
             style: AppTextStyle(
-              fontSize: Dimen.TEXT_SIZE_SMALL,
+              fontSize: Dimen.textSizeSmall,
               color: hintEnab_(context),
             ),
             textAlign: TextAlign.left,
@@ -614,12 +614,12 @@ class _TitleCard<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
       mainAxisSize: MainAxisSize.min,
       children:[
 
-        SizedBox(width: Dimen.defMarg, height: Dimen.TEXT_SIZE_SMALL + 3*Dimen.defMarg),
+        SizedBox(width: Dimen.defMarg, height: Dimen.textSizeSmall + 3*Dimen.defMarg),
 
         Text(
           'Kompoz.: ',
           style: AppTextStyle(
-            fontSize: Dimen.TEXT_SIZE_SMALL,
+            fontSize: Dimen.textSizeSmall,
             color: hintEnab_(context),
           ),
           textAlign: TextAlign.left,
@@ -645,12 +645,12 @@ class _TitleCard<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
         mainAxisSize: MainAxisSize.min,
         children:[
 
-          SizedBox(width: Dimen.defMarg, height: Dimen.TEXT_SIZE_SMALL + 3*Dimen.defMarg),
+          SizedBox(width: Dimen.defMarg, height: Dimen.textSizeSmall + 3*Dimen.defMarg),
 
           Text(
             'Wykona.: ',
             style: AppTextStyle(
-              fontSize: Dimen.TEXT_SIZE_SMALL,
+              fontSize: Dimen.textSizeSmall,
               color: hintEnab_(context),
             ),
             textAlign: TextAlign.left,
@@ -673,7 +673,7 @@ class _TitleCard<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
     );
 
     Widget widgetTags = Container(
-        height: Dimen.TEXT_SIZE_SMALL + 3*Dimen.defMarg,
+        height: Dimen.textSizeSmall + 3*Dimen.defMarg,
         child: ListView.builder(
           physics: BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
@@ -684,7 +684,7 @@ class _TitleCard<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
             radius: AppCard.bigRadius,
             child: Text(
               song.tags[index],
-              style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_SMALL, color: textEnab_(context), fontWeight: weight.halfBold),
+              style: AppTextStyle(fontSize: Dimen.textSizeSmall, color: textEnab_(context), fontWeight: weight.halfBold),
             ),
             onTap: () => onTagTap?.call(song.tags[index]),
           ),
@@ -755,7 +755,7 @@ class _ContribPersonWidget extends StatelessWidget{
         text,
         style: AppTextStyle(
           fontWeight: weight.halfBold,
-          fontSize: Dimen.TEXT_SIZE_SMALL,
+          fontSize: Dimen.textSizeSmall,
           color: textEnab_(context),
         ),
         textAlign: TextAlign.left,
@@ -886,7 +886,7 @@ class _TextResizeWidget<TSong extends SongCore, TAddPersRes extends AddPersonRes
               TextSizeProvider prov = TextSizeProvider.of(context);
 
               bool changedSize = true;
-              if(prov.value-0.5 >= Dimen.TEXT_SIZE_LIMIT)
+              if(prov.value-0.5 >= Dimen.textSizeLimit)
                 prov.value -= 0.5;
               else
                 changedSize = false;
@@ -1170,12 +1170,12 @@ class _ContentWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolv
                   textAlign: TextAlign.end,
                   style: TextStyle(
                       fontFamily: 'Roboto',
-                      fontSize: min(textSizeProv.value, Dimen.TEXT_SIZE_TINY),  //initial font size
+                      fontSize: min(textSizeProv.value, Dimen.textSizeTiny),  //initial font size
                       color: hintEnab_(context),
                       height:
-                      textSizeProv.value<Dimen.TEXT_SIZE_TINY?
+                      textSizeProv.value<Dimen.textSizeTiny?
                       lineSpacing:
-                      lineSpacing*(textSizeProv.value / Dimen.TEXT_SIZE_TINY)
+                      lineSpacing*(textSizeProv.value / Dimen.textSizeTiny)
                   ),
                 );
 

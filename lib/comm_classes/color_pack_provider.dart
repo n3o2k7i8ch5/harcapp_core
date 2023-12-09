@@ -8,11 +8,10 @@ class ColorPackProvider extends ChangeNotifier{
   static ColorPackProvider of(BuildContext context) => Provider.of<ColorPackProvider>(context, listen: false);
 
   late bool Function() isDark;
-  late ColorPack _colorPackDark;
 
   late ColorPack _colorPack;
 
-  ColorPack get colorPack => isDark() && _colorPack.darkSensitive?_colorPackDark:_colorPack;
+  ColorPack get colorPack => isDark() ? _colorPack.darkEquivalent??_colorPack: _colorPack;
   set colorPack(ColorPack value){
     _colorPack = value;
     notifyListeners();
@@ -21,11 +20,9 @@ class ColorPackProvider extends ChangeNotifier{
   ColorPackProvider({
     required ColorPack initColorPack,
     required bool Function() isDark,
-    required ColorPack colorPackDark,
   }){
     _colorPack = initColorPack;
     this.isDark = isDark;
-    this._colorPackDark = colorPackDark;
   }
 
   void notify() => notifyListeners();

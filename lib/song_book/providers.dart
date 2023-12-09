@@ -159,7 +159,7 @@ class TextSizeProvider extends ChangeNotifier{
   bool down(){
 
     bool changedSize = true;
-    if(_value[_maxWidth]! - 0.5 >= Dimen.TEXT_SIZE_LIMIT)
+    if(_value[_maxWidth]! - 0.5 >= Dimen.textSizeLimit)
       _value[_maxWidth] = _value[_maxWidth]! - 0.5;
     else
       changedSize = false;
@@ -198,7 +198,7 @@ class TextSizeProvider extends ChangeNotifier{
       );
       wordWrapChords.layout();
     }
-    var wordWrapNums = TextPainter(text: TextSpan(style: style.copyWith(fontSize: Dimen.TEXT_SIZE_TINY), text: nums),
+    var wordWrapNums = TextPainter(text: TextSpan(style: style.copyWith(fontSize: Dimen.textSizeTiny), text: nums),
       textDirection: TextDirection.ltr,
       textScaler: textScaler,
     );

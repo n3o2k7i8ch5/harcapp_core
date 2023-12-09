@@ -61,12 +61,12 @@ class TopCards extends StatelessWidget{
                         controller: currItemProv.titleController,
                         hint: 'Tytuł:',
                         style: AppTextStyle(
-                          fontSize: Dimen.TEXT_SIZE_BIG,
+                          fontSize: Dimen.textSizeBig,
                           fontWeight: weight.halfBold,
                           color: textEnab_(context),
                         ),
                         hintStyle: AppTextStyle(
-                          fontSize: Dimen.TEXT_SIZE_BIG,
+                          fontSize: Dimen.textSizeBig,
                           color: hintEnab_(context),
                         ),
                         onAnyChanged: (values) => onChangedTitle?.call(values[0]),
@@ -167,12 +167,12 @@ class TopCards extends StatelessWidget{
                   accentColor: accentColor,
                   hint: 'Autor słów:',
                   style: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
+                    fontSize: Dimen.textSizeBig,
                     fontWeight: weight.halfBold,
                     color: textEnab_(context),
                   ),
                   hintStyle: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
+                    fontSize: Dimen.textSizeBig,
                     color: hintEnab_(context),
                   ),
                   multi: true,
@@ -186,12 +186,12 @@ class TopCards extends StatelessWidget{
                   accentColor: accentColor,
                   hint: 'Kompozytor muzyki:',
                   style: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
+                    fontSize: Dimen.textSizeBig,
                     fontWeight: weight.halfBold,
                     color: textEnab_(context),
                   ),
                   hintStyle: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
+                    fontSize: Dimen.textSizeBig,
                     color: hintEnab_(context),
                   ),
                   multi: true,
@@ -205,12 +205,12 @@ class TopCards extends StatelessWidget{
                   accentColor: accentColor,
                   hint: 'Wykonawca:',
                   style: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
+                    fontSize: Dimen.textSizeBig,
                     fontWeight: weight.halfBold,
                     color: textEnab_(context),
                   ),
                   hintStyle: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
+                    fontSize: Dimen.textSizeBig,
                     color: hintEnab_(context),
                   ),
                   multi: true,
@@ -235,12 +235,12 @@ class TopCards extends StatelessWidget{
                         controller: currItemProv.ytLinkController,
                         hint: 'Link YouTube:',
                         style: AppTextStyle(
-                          fontSize: Dimen.TEXT_SIZE_BIG,
+                          fontSize: Dimen.textSizeBig,
                           fontWeight: weight.halfBold,
                           color: textEnab_(context),
                         ),
                         hintStyle: AppTextStyle(
-                          fontSize: Dimen.TEXT_SIZE_BIG,
+                          fontSize: Dimen.textSizeBig,
                           color: hintEnab_(context),
                         ),
                         onAnyChanged: (values) => onChangedYT?.call(values[0]),
@@ -281,12 +281,12 @@ class TopCards extends StatelessWidget{
                             ),
                             hint: 'Data pierwszego wykonania:',
                             style: AppTextStyle(
-                              fontSize: Dimen.TEXT_SIZE_BIG,
+                              fontSize: Dimen.textSizeBig,
                               fontWeight: weight.halfBold,
                               color: textEnab_(context),
                             ),
                             hintStyle: AppTextStyle(
-                              fontSize: Dimen.TEXT_SIZE_BIG,
+                              fontSize: Dimen.textSizeBig,
                               color: hintEnab_(context),
                             ),
                             onAnyChanged: (text) => onChangedReleaseDate?.call(currItemProv.releaseDate),
@@ -379,11 +379,11 @@ class AddTextWidget extends StatelessWidget{
         hintTop: '',
         controller: controller,
         style: AppTextStyle(
-          fontSize: Dimen.TEXT_SIZE_BIG,
+          fontSize: Dimen.textSizeBig,
           color: textEnab_(context),
         ),
         hintStyle: AppTextStyle(
-          fontSize: Dimen.TEXT_SIZE_BIG,
+          fontSize: Dimen.textSizeBig,
           color: hintEnab_(context),
         ),
         onChanged: (_, value) => onTextChanged?.call(value),

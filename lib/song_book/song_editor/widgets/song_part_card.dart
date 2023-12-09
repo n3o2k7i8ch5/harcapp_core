@@ -23,7 +23,7 @@ class SongPartCard extends StatelessWidget{
 
   static const int MIN_LINE_CNT = 4;
 
-  static const double EMPTY_HEIGHT = MIN_LINE_CNT*Dimen.TEXT_SIZE_NORMAL+4*Dimen.defMarg;
+  static const double EMPTY_HEIGHT = MIN_LINE_CNT*Dimen.textSizeNormal+4*Dimen.defMarg;
 
   final SongPart songPart;
   final SongPartType type;
@@ -97,7 +97,7 @@ class SongPartCard extends StatelessWidget{
             emptText,
             style: AppTextStyle(
                 color: pressable?iconEnab_(context):hintEnab_(context),
-                fontSize: Dimen.TEXT_SIZE_BIG,
+                fontSize: Dimen.textSizeBig,
                 fontWeight: pressable?weight.halfBold:weight.normal
             ),
             textAlign: TextAlign.center,
@@ -105,7 +105,7 @@ class SongPartCard extends StatelessWidget{
         ];
 
         main = SizedBox(
-            height: MIN_LINE_CNT*Dimen.TEXT_SIZE_NORMAL,
+            height: MIN_LINE_CNT*Dimen.textSizeNormal,
             child:
             pressable?
             Row(
@@ -164,7 +164,7 @@ class _SongTextWidget extends StatelessWidget{
         text,
         style: TextStyle(
             fontFamily: 'Roboto',
-            fontSize: Dimen.TEXT_SIZE_NORMAL,
+            fontSize: Dimen.textSizeNormal,
             color: textColor
         ),
       ),
@@ -209,7 +209,7 @@ class _SongChordsWidget extends StatelessWidget{
       text,
       style: TextStyle(
           fontFamily: 'Roboto',
-          fontSize: Dimen.TEXT_SIZE_NORMAL,
+          fontSize: Dimen.textSizeNormal,
           color: textColor
       ),
     );
@@ -259,7 +259,7 @@ class TopZwrotkaButtons extends StatelessWidget{
 
       Expanded(
           child: showName?
-          Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold, color: hintEnab_(context))):
+          Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weight.halfBold, color: hintEnab_(context))):
           Container()
       ),
 
@@ -313,7 +313,7 @@ class TopRefrenButtons extends StatelessWidget{
 
       Expanded(
           child: showName?
-          Text('Refren', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold, color: hintEnab_(context))):
+          Text('Refren', style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weight.halfBold, color: hintEnab_(context))):
           Container()
       ),
 

@@ -26,7 +26,7 @@ class RText extends StatelessWidget{
         this.textAlign,
         this.maxLines,
         this.height = 1,
-        this.size = Dimen.TEXT_SIZE_NORMAL,
+        this.size = Dimen.textSizeNormal,
         this.colorItalic,
         super.key
       });
@@ -116,7 +116,7 @@ class AppText extends RText{
         TextAlign? textAlign,
         int? maxLines,
         double height = 1,
-        double size = Dimen.TEXT_SIZE_NORMAL,
+        double size = Dimen.textSizeNormal,
         Color? colorItalic,
       }):super(
     text,

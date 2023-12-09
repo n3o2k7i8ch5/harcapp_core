@@ -151,7 +151,7 @@ class SongPartsListWidget extends StatelessWidget{
                     textAlign: TextAlign.center,
                     style: AppTextStyle(
                       color: hintEnab_(context),
-                      fontSize: Dimen.TEXT_SIZE_BIG,
+                      fontSize: Dimen.textSizeBig,
                     ),
                   ),
                 ]
