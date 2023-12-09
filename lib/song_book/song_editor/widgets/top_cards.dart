@@ -135,7 +135,7 @@ class TopCards extends StatelessWidget{
                     AnimatedContainer(
                         duration: Duration(milliseconds: 500),
                         curve: Curves.easeInOut,
-                        height: currItemProv.hidTitles.isEmpty?0:Dimen.ICON_FOOTPRINT + Dimen.ICON_MARG,
+                        height: currItemProv.hidTitles.isEmpty?0:Dimen.iconFootprint + Dimen.iconMarg,
                         child: AnimatedOpacity(
                           opacity: currItemProv.hidTitles.isEmpty?0:1,
                           duration: Duration(milliseconds: 500),
@@ -150,7 +150,7 @@ class TopCards extends StatelessWidget{
                             iconEnab_(context),
 
                             radius: AppCard.bigRadius,
-                            margin: EdgeInsets.only(bottom: Dimen.ICON_MARG),
+                            margin: EdgeInsets.only(bottom: Dimen.iconMarg),
                             onTap: isLastHidTitleEmpty(currItemProv)?null:(){
                               List<String> hidTitles = currItemProv.addHidTitle();
                               onChangedHiddenTitles?.call(hidTitles);
@@ -370,7 +370,7 @@ class AddTextWidget extends StatelessWidget{
 
       IconButton(
         icon: Icon(MdiIcons.trashCanOutline),
-        padding: EdgeInsets.all(Dimen.ICON_MARG),
+        padding: EdgeInsets.all(Dimen.iconMarg),
         onPressed: onRemove,
       ),
 

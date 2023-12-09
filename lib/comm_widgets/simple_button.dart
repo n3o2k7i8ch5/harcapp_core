@@ -98,7 +98,7 @@ class SimpleButton extends StatelessWidget{
     void Function()? onLongPress,
     double? iconSize,
     double? textSize,
-    EdgeInsets padding = const EdgeInsets.all(Dimen.ICON_MARG),
+    EdgeInsets padding = const EdgeInsets.all(Dimen.iconMarg),
     EdgeInsets margin = const EdgeInsets.all(defMargVal),
     bool iconLeading = true,
     double? radius,
@@ -123,10 +123,10 @@ class SimpleButton extends StatelessWidget{
 
     if(direction == Axis.horizontal) children = [
       if(iconLeading && icon != null)
-        Icon(icon, color: iconColor??textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
+        Icon(icon, color: iconColor??textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.iconSize)),
 
       if(text != null)
-        SizedBox(height: Dimen.ICON_SIZE, width: dense?Dimen.defMarg:Dimen.ICON_MARG),
+        SizedBox(height: Dimen.iconSize, width: dense?Dimen.defMarg:Dimen.iconMarg),
 
       if(text != null)
         Text(
@@ -139,7 +139,7 @@ class SimpleButton extends StatelessWidget{
         ),
 
       if(text != null)
-        SizedBox(width: dense?Dimen.defMarg:Dimen.ICON_MARG),
+        SizedBox(width: dense?Dimen.defMarg:Dimen.iconMarg),
 
       if(!iconLeading && icon != null)
         Icon(icon, color: textColor??iconEnab_(context!)),
@@ -148,10 +148,10 @@ class SimpleButton extends StatelessWidget{
     else
       children = [
         if(iconLeading && icon != null)
-          Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.ICON_SIZE)),
+          Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.iconSize)),
 
         if(text != null)
-          SizedBox(height: dense?Dimen.defMarg:Dimen.ICON_MARG),
+          SizedBox(height: dense?Dimen.defMarg:Dimen.iconMarg),
 
         if(text != null)
           Text(
@@ -164,7 +164,7 @@ class SimpleButton extends StatelessWidget{
           ),
 
         if(text != null && !iconLeading)
-          SizedBox(height: dense?Dimen.defMarg:Dimen.ICON_MARG),
+          SizedBox(height: dense?Dimen.defMarg:Dimen.iconMarg),
 
         if(!iconLeading && icon != null)
           Icon(icon, color: textColor??iconEnab_(context!)),

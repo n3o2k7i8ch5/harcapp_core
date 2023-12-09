@@ -42,17 +42,17 @@ class TitleShortcutRowWidget extends StatelessWidget{
     Widget widget = Row(
       children: [
 
-        SizedBox(height: Dimen.ICON_FOOTPRINT),
+        SizedBox(height: Dimen.iconFootprint),
 
         if(leading != null)
           leading!
         else if(icon != null)
           Padding(
-            padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
+            padding: EdgeInsets.only(left: Dimen.iconMarg, right: Dimen.iconMarg),
             child: Icon(icon, color: iconColor),
           )
         else if(onOpen != null && textAlign == TextAlign.center)
-            SizedBox(width: Dimen.ICON_FOOTPRINT)
+            SizedBox(width: Dimen.iconFootprint)
         else if(textAlign == TextAlign.start)
               SizedBox(width: textStartPadding),
 
@@ -84,12 +84,12 @@ class TitleShortcutRowWidget extends StatelessWidget{
 
         if(onOpen != null)
           IconButton(
-            padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
+            padding: EdgeInsets.only(left: Dimen.iconMarg, right: Dimen.iconMarg),
             icon: Icon(onOpenIcon??MdiIcons.arrowRight, color: onOpenIconColor),
             onPressed: () => onOpen!(),
           )
         else if(icon != null && textAlign == TextAlign.center && trailing == null)
-          SizedBox(width: Dimen.ICON_FOOTPRINT),
+          SizedBox(width: Dimen.iconFootprint),
 
       ],
     );

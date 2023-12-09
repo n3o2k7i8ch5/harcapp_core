@@ -68,8 +68,8 @@ class ErrorInfoLine extends StatelessWidget{
     return ListTile(
       dense: true,
       leading: Container(
-        height: Dimen.ICON_SIZE,
-        width: Dimen.ICON_SIZE,
+        height: Dimen.iconSize,
+        width: Dimen.iconSize,
         child: AppCard(
           elevation: 0,
           color: error.color,

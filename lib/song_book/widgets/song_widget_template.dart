@@ -575,7 +575,7 @@ class _TitleCard<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
         maxLines: 1,
         textAlign: TextAlign.center,
       ),
-      padding: const EdgeInsets.all(Dimen.ICON_MARG),
+      padding: const EdgeInsets.all(Dimen.iconMarg),
       margin: EdgeInsets.zero,
       onTap: onTitleTap,
     );
@@ -702,7 +702,7 @@ class _TitleCard<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
           children: <Widget>[
 
             Padding(
-              padding: const EdgeInsets.all(Dimen.ICON_MARG - Dimen.defMarg),
+              padding: const EdgeInsets.all(Dimen.iconMarg - Dimen.defMarg),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -814,7 +814,7 @@ class _ButtonWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonRe
   
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: Dimen.ICON_FOOTPRINT,
+    height: Dimen.iconFootprint,
     child: AnimatedChildSlider(
       direction: Axis.horizontal,
       duration: Duration(milliseconds: 150),
@@ -876,7 +876,7 @@ class _TextResizeWidget<TSong extends SongCore, TAddPersRes extends AddPersonRes
       children: [
 
         Padding(
-          padding: EdgeInsets.all(Dimen.ICON_MARG),
+          padding: EdgeInsets.all(Dimen.iconMarg),
           child: TextSizeIcon(color: iconDisab_(context))
         ),
         
@@ -940,8 +940,8 @@ class TextSizeIcon extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => SizedBox(
-      width: Dimen.ICON_SIZE,
-      height: Dimen.ICON_SIZE,
+      width: Dimen.iconSize,
+      height: Dimen.iconSize,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -1264,7 +1264,7 @@ class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
             children: [
 
               Padding(
-                padding: const EdgeInsets.all(Dimen.ICON_MARG),
+                padding: const EdgeInsets.all(Dimen.iconMarg),
                 child: Icon(MdiIcons.speedometer),
               ),
 

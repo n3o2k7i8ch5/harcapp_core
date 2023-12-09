@@ -10,7 +10,7 @@ import 'package:harcapp_core/dimen.dart';
 class Tag extends StatelessWidget{
 
   static double height({
-    double paddingVal = Dimen.ICON_MARG,
+    double paddingVal = Dimen.iconMarg,
     double fontSize = Dimen.TEXT_SIZE_NORMAL,
   }) => 2*paddingVal + fontSize;
 
@@ -18,7 +18,7 @@ class Tag extends StatelessWidget{
       String text,
       { Function()? onTap,
         double fontSize = Dimen.TEXT_SIZE_NORMAL,
-        EdgeInsets padding = const EdgeInsets.all(Dimen.ICON_MARG),
+        EdgeInsets padding = const EdgeInsets.all(Dimen.iconMarg),
       }) => Tag(
     text,
     onTap: onTap,
@@ -45,7 +45,7 @@ class Tag extends StatelessWidget{
         this.clipBehavior = Clip.hardEdge,
         this.fontSize = Dimen.TEXT_SIZE_NORMAL,
         this.bold = false,
-        this.padding = const EdgeInsets.all(Dimen.ICON_MARG),
+        this.padding = const EdgeInsets.all(Dimen.iconMarg),
         this.elevation = AppCard.defElevation,
         this.color,
         this.textColor,

@@ -19,7 +19,7 @@ class TagsWidget extends StatelessWidget{
   final Layout layout;
   final Widget Function(BuildContext, String, bool) tagBuilder;
 
-  static double get height => Dimen.TEXT_SIZE_BIG + 2*Dimen.ICON_MARG;
+  static double get height => Dimen.TEXT_SIZE_BIG + 2*Dimen.iconMarg;
 
   const TagsWidget({
     required this.allTags,

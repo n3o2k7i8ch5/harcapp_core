@@ -17,7 +17,7 @@ import '../providers.dart';
 
 class AddPersWidget extends StatelessWidget{
 
-  static const double height = 2*Dimen.defMarg + 2*Dimen.defMarg + Dimen.defMarg + 2*Dimen.ICON_FOOTPRINT;
+  static const double height = 2*Dimen.defMarg + 2*Dimen.defMarg + Dimen.defMarg + 2*Dimen.iconFootprint;
 
   final TextEditingController nameController;
   final TextEditingController emailController;
@@ -40,7 +40,7 @@ class AddPersWidget extends StatelessWidget{
           clipBehavior: Clip.hardEdge,
           color: background_(context),
           child: Padding(
-            padding: EdgeInsets.only(left: Dimen.ICON_MARG, top: Dimen.defMarg),
+            padding: EdgeInsets.only(left: Dimen.iconMarg, top: Dimen.defMarg),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -152,7 +152,7 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
       ),
 
       header: Padding(
-        padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.defMarg),
+        padding: EdgeInsets.only(left: Dimen.iconMarg, right: Dimen.defMarg),
         child: TitleShortcutRowWidget(
           title: prov.addPersData.length <= 1?'Osoba dodająca':'Osoby dodające',
           textAlign: TextAlign.start,
@@ -177,17 +177,17 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
 
           if(prov.addPersData.isEmpty)
             SizedBox(
-              height: AddPersWidget.height + 2*Dimen.ICON_MARG + 2*Dimen.TEXT_SIZE_BIG,
+              height: AddPersWidget.height + 2*Dimen.iconMarg + 2*Dimen.TEXT_SIZE_BIG,
               child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    SizedBox(height: Dimen.ICON_MARG),
+                    SizedBox(height: Dimen.iconMarg),
 
                     Icon(MdiIcons.accountPlusOutline, color: hintEnab_(context)),
 
-                    SizedBox(height: Dimen.ICON_MARG),
+                    SizedBox(height: Dimen.iconMarg),
 
                     Text(
                       'Pusto!\nUzupełnij swoje imię :)',
@@ -198,14 +198,14 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
                       ),
                     ),
 
-                    SizedBox(height: Dimen.ICON_MARG),
+                    SizedBox(height: Dimen.iconMarg),
 
                   ]
               ),
             )
           else
             Padding(
-              padding: EdgeInsets.symmetric(vertical: Dimen.ICON_MARG, horizontal: Dimen.ICON_MARG),
+              padding: EdgeInsets.symmetric(vertical: Dimen.iconMarg, horizontal: Dimen.iconMarg),
               child: Text(
                 'Podaj email, by połączyć swoje piosenki jednolitym podpisem. Sam email nie będzie widoczny.',
                 style: AppTextStyle(

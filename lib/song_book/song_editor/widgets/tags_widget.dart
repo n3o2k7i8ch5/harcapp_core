@@ -34,7 +34,7 @@ class SongTagsWidget extends StatelessWidget{
         children: [
 
           Padding(
-            padding: EdgeInsets.only(left: Dimen.ICON_MARG),
+            padding: EdgeInsets.only(left: Dimen.iconMarg),
             child: TitleShortcutRowWidget(
               title: 'Tagi${prov.count==0?'':' (${prov.count})'}',
               textAlign: TextAlign.start,

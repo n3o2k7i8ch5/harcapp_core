@@ -136,7 +136,7 @@ class SongPartsListWidget extends StatelessWidget{
             duration: Duration(milliseconds: 1),
             height:
             prov.song.songParts.isEmpty?
-            SongPartCard.EMPTY_HEIGHT + Dimen.ICON_FOOTPRINT + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
+            SongPartCard.EMPTY_HEIGHT + Dimen.iconFootprint + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
                 :0,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -144,7 +144,7 @@ class SongPartsListWidget extends StatelessWidget{
 
                   Icon(MdiIcons.musicNoteOffOutline, color: hintEnab_(context)),
 
-                  SizedBox(height: Dimen.ICON_MARG),
+                  SizedBox(height: Dimen.iconMarg),
 
                   Text(
                     'Pusto!\nUżyj poniższych przycisków.',

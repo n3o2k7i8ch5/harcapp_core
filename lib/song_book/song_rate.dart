@@ -448,7 +448,7 @@ class SongRateIcon extends StatelessWidget{
   const SongRateIcon(
       this.rate,
       { this.enabled = true,
-        this.size = Dimen.ICON_SIZE,
+        this.size = Dimen.iconSize,
         this.glow = false
       });
   
@@ -473,7 +473,7 @@ class SongRateIcon extends StatelessWidget{
 
 class RateButton extends StatelessWidget{
 
-  static const double HEIGHT = 2*Dimen.ICON_SIZE /*CHILD*/ + Dimen.TEXT_SIZE_SMALL /*TEXT*/ + 2* Dimen.defMarg /*PADDING*/;
+  static const double HEIGHT = 2*Dimen.iconSize /*CHILD*/ + Dimen.TEXT_SIZE_SMALL /*TEXT*/ + 2* Dimen.defMarg /*PADDING*/;
 
   final SongRate rate;
   final bool selected;
@@ -503,11 +503,11 @@ class RateButton extends StatelessWidget{
           child: Center(
             child: SongRateIcon(
                 rate,
-                size: selected?(Dimen.ICON_SIZE+4):Dimen.ICON_SIZE,
+                size: selected?(Dimen.iconSize+4):Dimen.iconSize,
                 glow: selected
             ),
           ),
-          height: 2*Dimen.ICON_SIZE,
+          height: 2*Dimen.iconSize,
         ),
         Text(
             SongRateIcon.text(rate),

@@ -26,7 +26,7 @@ class RefrenTemplate extends StatelessWidget{
         songPart: currItemProv.song.refrenPart,
         type: SongPartType.REFREN_TEMPLATE,
         topBuilder: (context, part) => Padding(
-          padding: EdgeInsets.only(left: Dimen.ICON_MARG - Dimen.defMarg),
+          padding: EdgeInsets.only(left: Dimen.iconMarg - Dimen.defMarg),
           child: Consumer<CurrentItemProvider>(
             builder: (context, currItemProv, child) => TitleShortcutRowWidget(
                 title: 'Szablon refrenu',

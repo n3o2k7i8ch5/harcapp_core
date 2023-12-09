@@ -23,7 +23,7 @@ class AddButtonsWidget extends StatelessWidget{
       Expanded(
         child: SimpleButton(
           radius: AppCard.bigRadius,
-          padding: EdgeInsets.all(Dimen.ICON_MARG),
+          padding: EdgeInsets.all(Dimen.iconMarg),
           onTap: (){
             Provider.of<CurrentItemProvider>(context, listen: false).addPart(SongPart.empty());
             onPressed?.call();
@@ -33,7 +33,7 @@ class AddButtonsWidget extends StatelessWidget{
             children: [
               Icon(MdiIcons.plus, color: accentColor??accent_(context)),
               Icon(MdiIcons.musicBox, color: accentColor??accent_(context)),
-              SizedBox(width: Dimen.ICON_MARG),
+              SizedBox(width: Dimen.iconMarg),
               Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG))
             ],
           ),
@@ -44,7 +44,7 @@ class AddButtonsWidget extends StatelessWidget{
         child: Consumer<CurrentItemProvider>(
             builder: (context, currItemProv, child) => SimpleButton(
               radius: AppCard.bigRadius,
-              padding: EdgeInsets.all(Dimen.ICON_MARG),
+              padding: EdgeInsets.all(Dimen.iconMarg),
               onTap: currItemProv.hasRefren?(){
                 currItemProv.addPart(SongPart.from(currItemProv.song.refrenPart.element));
                 onPressed?.call();
@@ -54,7 +54,7 @@ class AddButtonsWidget extends StatelessWidget{
                 children: [
                   Icon(MdiIcons.plus, color: currItemProv.hasRefren?(accentColor??accent_(context)):iconDisab_(context)),
                   Icon(MdiIcons.musicBoxOutline, color: currItemProv.hasRefren?(accentColor??accent_(context)):iconDisab_(context)),
-                  SizedBox(width: Dimen.ICON_MARG),
+                  SizedBox(width: Dimen.iconMarg),
                   Text(
                       'Refren',
                       style: AppTextStyle(

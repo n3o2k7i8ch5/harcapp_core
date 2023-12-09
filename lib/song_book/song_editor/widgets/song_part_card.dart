@@ -92,7 +92,7 @@ class SongPartCard extends StatelessWidget{
 
         List<Widget> children = [
           Icon(iconData, color: pressable?iconEnab_(context):hintEnab_(context)),
-          SizedBox(height: Dimen.ICON_MARG, width: Dimen.ICON_MARG),
+          SizedBox(height: Dimen.iconMarg, width: Dimen.iconMarg),
           Text(
             emptText,
             style: AppTextStyle(
@@ -159,7 +159,7 @@ class _SongTextWidget extends StatelessWidget{
     else if(type == SongPartType.REFREN_TEMPLATE) textColor = textEnab_(context);
 
     return Padding(
-      padding: EdgeInsets.only(left: songPart.shift?Dimen.ICON_SIZE:0),
+      padding: EdgeInsets.only(left: songPart.shift?Dimen.iconSize:0),
       child: Text(
         text,
         style: TextStyle(
@@ -253,7 +253,7 @@ class TopZwrotkaButtons extends StatelessWidget{
     children: <Widget>[
 
       Padding(
-        padding: EdgeInsets.all(Dimen.ICON_MARG),
+        padding: EdgeInsets.all(Dimen.iconMarg),
         child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))),
       ),
 
@@ -307,7 +307,7 @@ class TopRefrenButtons extends StatelessWidget{
     children: <Widget>[
 
       Padding(
-        padding: EdgeInsets.all(Dimen.ICON_MARG),
+        padding: EdgeInsets.all(Dimen.iconMarg),
         child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))),
       ),
 

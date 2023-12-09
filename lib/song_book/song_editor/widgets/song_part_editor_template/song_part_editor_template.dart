@@ -250,7 +250,7 @@ class _SongTextWidgetState extends State<SongTextWidget>{
                 AnimatedContainer(
                     duration: Duration(milliseconds: 300),
                     curve: Curves.easeOutQuad,
-                    width: provider.shifted?Dimen.ICON_SIZE + Dimen.ICON_MARG:0
+                    width: provider.shifted?Dimen.iconSize + Dimen.iconMarg:0
                 ),
                 Expanded(child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
@@ -277,7 +277,7 @@ class _SongTextWidgetState extends State<SongTextWidget>{
                         maxLines: null,
                         focusNode: focusNode,
                         autofocus: false,
-                        minWidth: Dimen.ICON_FOOTPRINT*2,
+                        minWidth: Dimen.iconFootprint*2,
                         inputFormatters: [ALLOWED_TEXT_REGEXP],
                         controller: textController,
                     )
@@ -440,7 +440,7 @@ class ButtonsWidget extends StatelessWidget{
 
       isRefren?
       Padding(
-        padding: EdgeInsets.all(Dimen.ICON_MARG),
+        padding: EdgeInsets.all(Dimen.iconMarg),
         child: Icon(
             MdiIcons.rayStartArrow,
             color: iconDisab_(context)
@@ -476,12 +476,12 @@ class ButtonsWidget extends StatelessWidget{
             curve: Curves.easeOutQuad,
             child: SimpleButton(
               onTap: errCont==0?null:onAlertTap,
-              padding: EdgeInsets.all(Dimen.ICON_MARG),
+              padding: EdgeInsets.all(Dimen.iconMarg),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                  SizedBox(width: Dimen.ICON_MARG),
+                  SizedBox(width: Dimen.iconMarg),
                   Text('$errCont', style: AppTextStyle(fontWeight: weight.halfBold, color: Colors.red),)
                 ],
               ),
@@ -607,7 +607,7 @@ class TextLengthWarning extends StatelessWidget{
         return Padding(
           padding: EdgeInsets.only(left: 3),
           child: SizedBox(
-            width: Dimen.ICON_MARG+2,
+            width: Dimen.iconMarg+2,
             child: Column(children: lineWidgets),
           ),
         );

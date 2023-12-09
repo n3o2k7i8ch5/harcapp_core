@@ -361,7 +361,7 @@ class ItemState extends State<Item>{
           if(focusNode!.hasFocus && enabled)
             SizedBox(
               child: IconButton(
-                padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
+                padding: EdgeInsets.only(left: Dimen.iconMarg, right: Dimen.iconMarg),
                 icon: Icon(MdiIcons.check, size: iconSize),
                 onPressed: (){
                   setState(() => selected = false);
@@ -373,14 +373,14 @@ class ItemState extends State<Item>{
           else if(removable && enabled)
             SizedBox(
               child: IconButton(
-                padding: EdgeInsets.only(left: Dimen.ICON_MARG, right: Dimen.ICON_MARG),
+                padding: EdgeInsets.only(left: Dimen.iconMarg, right: Dimen.iconMarg),
                 icon: Icon(MdiIcons.close, size: iconSize),
                 onPressed: onRemoveTap,
               ),
               height: iconSize,
             )
           else
-            SizedBox(width: 2*Dimen.ICON_MARG + iconSize)
+            SizedBox(width: 2*Dimen.iconMarg + iconSize)
 
         ],
       ),
