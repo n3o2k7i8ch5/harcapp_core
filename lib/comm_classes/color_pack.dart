@@ -39,8 +39,6 @@ abstract class ColorPack{
 
   String get name;
 
-  bool get darkSensitive => true;
-
   Brightness get brightness => Brightness.light;
 
   Color get appBar => background;
@@ -68,6 +66,8 @@ abstract class ColorPack{
   Color get accent;
   Color get iconEnabled;
   Color get iconDisabled;
+
+  ColorPack? get darkEquivalent;
 
   bool operator == (Object other) => other is ColorPack && name == other.name;
   int get hashCode => name.hashCode;
