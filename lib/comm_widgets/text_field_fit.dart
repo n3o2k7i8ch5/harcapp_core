@@ -68,8 +68,8 @@ class TextFieldFitState extends State<TextFieldFit>{
     );
 
     // Use TextPainter to calculate the width of our text
-    TextSpan ts = new TextSpan(style: textField.style, text: textField.controller!.text);
-    TextPainter tp = new TextPainter(
+    TextSpan ts = TextSpan(style: textField.style, text: textField.controller!.text);
+    TextPainter tp = TextPainter(
       text: ts,
       textAlign: widget.textAlign ?? TextAlign.left,
       textDirection: widget.textDirection ?? TextDirection.ltr,
@@ -79,7 +79,7 @@ class TextFieldFitState extends State<TextFieldFit>{
     );
 
     tp.layout();
-    var textWidth = 1.1*tp.width; // We will use this width for the container wrapping our TextField
+    var textWidth = 1.15*tp.width; // We will use this width for the container wrapping our TextField
 
     // Enforce a minimum width
     if ( textWidth < widget.minWidth )

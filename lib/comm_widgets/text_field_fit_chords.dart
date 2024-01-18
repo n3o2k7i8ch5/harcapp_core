@@ -56,7 +56,7 @@ class TextFieldFitChordsState extends State<TextFieldFitChords>{
       autofocus: widget.autofocus,
       onChanged: (String text){
         setState(() {});
-        if(widget.onChanged != null) widget.onChanged!(text);
+        widget.onChanged?.call(text);
       },
       enabled: widget.enabled,
     );
@@ -67,18 +67,17 @@ class TextFieldFitChordsState extends State<TextFieldFitChords>{
       text: ts,
       textAlign: widget.textAlign ?? TextAlign.left,
       textDirection: widget.textDirection ?? TextDirection.ltr,
-      textScaleFactor: 1,
+      textScaler: MediaQuery.textScalerOf(context),
       locale: widget.locale,
       strutStyle: widget.strutStyle,
     );
 
     tp.layout();
-    var textWidth = tp.width + 4; // We will use this width for the container wrapping our TextField
+    var textWidth = 1.15*tp.width; // We will use this width for the container wrapping our TextField
 
     // Enforce a minimum width
-    if ( textWidth < widget.minWidth ) {
+    if ( textWidth < widget.minWidth )
       textWidth = widget.minWidth;
-    }
 
     return Container(
       width: textWidth,
