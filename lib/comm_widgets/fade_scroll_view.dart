@@ -7,12 +7,13 @@ class FadeScrollView extends StatefulWidget{
   final Axis scrollDirection;
   final Clip clipBehavior;
   final bool reverse;
+  final Color? background;
   final EdgeInsetsGeometry? padding;
   final Widget? child;
   final ScrollController? controller;
   final ScrollPhysics? physics;
 
-  const FadeScrollView({this.scrollDirection = Axis.vertical, this.clipBehavior = Clip.none, this.reverse = false, this.padding, this.child, this.controller, this.physics});
+  const FadeScrollView({this.scrollDirection = Axis.vertical, this.clipBehavior = Clip.none, this.reverse = false, this.background, this.padding, this.child, this.controller, this.physics});
 
   @override
   State<StatefulWidget> createState() => FadeScrollViewState();
@@ -27,6 +28,8 @@ class FadeScrollViewState extends State<FadeScrollView>{
 
   late bool showStartGlow;
   late bool showEndGlow;
+
+  Color get background => widget.background??background_(context);
 
   @override
   void initState() {
@@ -73,7 +76,7 @@ class FadeScrollViewState extends State<FadeScrollView>{
             width: 36,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [background_(context), background_(context).withAlpha(0)]
+                    colors: [background, background.withAlpha(0)]
                 )
             ),
           ),
@@ -90,7 +93,7 @@ class FadeScrollViewState extends State<FadeScrollView>{
             width: 36,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    colors: [background_(context).withAlpha(0), background_(context)]
+                    colors: [background.withAlpha(0), background]
                 )
             ),
           ),
