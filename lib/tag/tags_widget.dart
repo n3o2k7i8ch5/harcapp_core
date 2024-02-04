@@ -13,6 +13,7 @@ class TagsWidget extends StatelessWidget{
   final List<String> allTags;
   final List<String> checkedTags;
   final Clip clipBehavior;
+  final Color? background;
   final EdgeInsets padding;
   final Function(String, bool)? onTagTap;
   final double separator;
@@ -25,6 +26,7 @@ class TagsWidget extends StatelessWidget{
     required this.allTags,
     this.checkedTags = const [],
     this.clipBehavior = Clip.none,
+    this.background,
     this.padding = EdgeInsets.zero,
     this.onTagTap,
     this.separator = Dimen.defMarg,
@@ -36,6 +38,7 @@ class TagsWidget extends StatelessWidget{
     required List<String> allTags,
     List<String> checkedTags = const [],
     Clip clipBehavior = Clip.none,
+    Color? background,
     EdgeInsets padding = EdgeInsets.zero,
     Function(String, bool)? onTagTap,
     double separator=0,
@@ -43,6 +46,7 @@ class TagsWidget extends StatelessWidget{
   }) => TagsWidget(
     allTags: allTags,
     clipBehavior: clipBehavior,
+    background: background,
     padding: padding,
     checkedTags: checkedTags,
     onTagTap: onTagTap,
@@ -55,6 +59,7 @@ class TagsWidget extends StatelessWidget{
     required List<String> allTags,
     List<String> checkedTags = const [],
     Clip clipBehavior = Clip.none,
+    Color? background,
     EdgeInsets padding = EdgeInsets.zero,
     Function(String, bool)? onTagTap,
     double separator = 0,
@@ -63,6 +68,7 @@ class TagsWidget extends StatelessWidget{
     allTags: allTags,
     checkedTags: checkedTags,
     clipBehavior: clipBehavior,
+    background: background,
     padding: padding,
     onTagTap: onTagTap,
     separator: separator,
@@ -74,6 +80,7 @@ class TagsWidget extends StatelessWidget{
     required List<String> allTags,
     List<String> checkedTags = const [],
     Clip clipBehavior = Clip.none,
+    Color? background,
     EdgeInsets padding = EdgeInsets.zero,
     Function(String, bool)? onTagTap,
     double separator=Dimen.defMarg,
@@ -83,6 +90,7 @@ class TagsWidget extends StatelessWidget{
     allTags: allTags,
     checkedTags: checkedTags,
     clipBehavior: clipBehavior,
+    background: background,
     padding: padding,
     onTagTap: onTagTap,
     separator: separator,
@@ -107,6 +115,7 @@ class TagsWidget extends StatelessWidget{
     required List<String> allTags,
     List<String> checkedTags = const [],
     Clip clipBehavior = Clip.none,
+    Color? background,
     EdgeInsets padding = EdgeInsets.zero,
     Function(String, bool)? onTagTap,
     double separator=Dimen.defMarg,
@@ -116,6 +125,7 @@ class TagsWidget extends StatelessWidget{
     allTags: allTags,
     checkedTags: checkedTags,
     clipBehavior: clipBehavior,
+    background: background,
     padding: padding,
     onTagTap: onTagTap,
     layout: Layout.WRAP,
@@ -157,6 +167,7 @@ class TagsWidget extends StatelessWidget{
     FadeScrollView(
         padding: padding,
         clipBehavior: clipBehavior,
+        background: background,
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Row(children: tags)
