@@ -359,26 +359,20 @@ class ItemState extends State<Item>{
           )),
 
           if(focusNode!.hasFocus && enabled)
-            SizedBox(
-              child: IconButton(
-                icon: Icon(MdiIcons.check, size: iconSize),
-                onPressed: (){
-                  setState(() => selected = false);
-                  focusNode!.unfocus();
-                },
-              ),
-              height: iconSize,
+            IconButton(
+              icon: Icon(MdiIcons.check, size: iconSize),
+              onPressed: (){
+                setState(() => selected = false);
+                focusNode!.unfocus();
+              },
             )
           else if(removable && enabled)
-            SizedBox(
-              child: IconButton(
-                icon: Icon(MdiIcons.close, size: iconSize),
-                onPressed: onRemoveTap,
-              ),
-              height: iconSize,
+            IconButton(
+              icon: Icon(MdiIcons.close, size: iconSize),
+              onPressed: onRemoveTap,
             )
           else
-            SizedBox(width: 2*Dimen.iconMarg + iconSize)
+            SizedBox(width: Dimen.iconFootprint)
 
         ],
       ),
