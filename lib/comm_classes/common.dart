@@ -5,111 +5,74 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 int charToInt(String c) {
   switch (c) {
-    case ' ':
-      return 0;
-    case 'a':
-      return 1;
-    case 'ą':
-      return 2;
-    case 'b':
-      return 3;
-    case 'c':
-      return 4;
-    case 'ć':
-      return 5;
-    case 'd':
-      return 6;
-    case 'e':
-      return 7;
-    case 'ę':
-      return 8;
-    case 'f':
-      return 9;
-    case 'g':
-      return 10;
-    case 'h':
-      return 11;
-    case 'i':
-      return 12;
-    case 'j':
-      return 13;
-    case 'k':
-      return 14;
-    case 'l':
-      return 15;
-    case 'ł':
-      return 16;
-    case 'm':
-      return 17;
-    case 'n':
-      return 18;
-    case 'ń':
-      return 19;
-    case 'o':
-      return 20;
-    case 'ó':
-      return 21;
-    case 'p':
-      return 22;
-    case 'q':
-      return 23;
-    case 'r':
-      return 24;
-    case 's':
-      return 25;
-    case 'ś':
-      return 26;
-    case 't':
-      return 27;
-    case 'u':
-      return 28;
-    case 'v':
-      return 29;
-    case 'w':
-      return 30;
-    case 'x':
-      return 31;
-    case 'y':
-      return 32;
-    case 'z':
-      return 33;
-    case 'ź':
-      return 34;
-    case 'ż':
-      return 35;
+    case ' ': return 0;
+    case 'a': return 1;
+    case 'ą': return 2;
+    case 'á': return 3;
+    case 'b': return 4;
+    case 'c': return 5;
+    case 'ć': return 6;
+    case 'd': return 7;
+    case 'e': return 8;
+    case 'ę': return 9;
+    case 'é': return 10;
+    case 'ě': return 11;
+    case 'f': return 12;
+    case 'g': return 13;
+    case 'h': return 14;
+    case 'i': return 15;
+    case 'í': return 16;
+    case 'j': return 17;
+    case 'k': return 18;
+    case 'l': return 19;
+    case 'ł': return 20;
+    case 'm': return 21;
+    case 'n': return 22;
+    case 'ń': return 23;
+    case 'o': return 24;
+    case 'ó': return 25;
+    case 'p': return 26;
+    case 'q': return 27;
+    case 'r': return 28;
+    case 'ř': return 29;
+    case 's': return 30;
+    case 'ś': return 31;
+    case 'š': return 32;
+    case 't': return 33;
+    case 'u': return 34;
+    case 'v': return 35;
+    case 'w': return 36;
+    case 'x': return 37;
+    case 'y': return 38;
+    case 'ý': return 39;
+    case 'z': return 40;
+    case 'ź': return 41;
+    case 'ż': return 42;
+    case 'ž': return 43;
 
-    case '0':
-      return 36;
-    case '1':
-      return 37;
-    case '2':
-      return 38;
-    case '3':
-      return 39;
-    case '4':
-      return 40;
-    case '5':
-      return 41;
-    case '6':
-      return 42;
-    case '7':
-      return 43;
-    case '8':
-      return 44;
-    case '9':
-      return 45;
-    default:
-      return -1;
+    case '0': return 44;
+    case '1': return 45;
+    case '2': return 46;
+    case '3': return 47;
+    case '4': return 48;
+    case '5': return 49;
+    case '6': return 50;
+    case '7': return 51;
+    case '8': return 52;
+    case '9': return 53;
+    default: return -1;
   }
 }
 
 int compareText(String s1, String s2){
 
+  RegExp regexp = RegExp(r'[^a-ząáćęéěíłńóřśšýźżž0-9]');
+
   s1 = s1.toLowerCase()
-      .replaceAll(RegExp(r'[^a-ząćęłńóśźżA-ZĄĆĘŁŃÓŚŹŻ0-9]'), '');
+      .replaceAll(regexp, '');
 
   s2 = s2.toLowerCase()
-      .replaceAll(RegExp(r'[^a-ząćęłńóśźżA-ZĄĆĘŁŃÓŚŹŻ0-9]'), '');
+      .replaceAll(regexp, '');
 
   for(int i=0; i<min(s1.length, s2.length); i++){
 
@@ -134,18 +97,24 @@ String remPolChars(String string){
       .replaceAll('ć', 'c')
       .replaceAll('ę', 'e')
       .replaceAll('é', 'e')
+      .replaceAll('ě', 'e')
       .replaceAll('í', 'i')
       .replaceAll('ł', 'l')
       .replaceAll('ń', 'n')
       .replaceAll('ó', 'o')
       .replaceAll('ö', 'o')
       .replaceAll('ő', 'o')
+      .replaceAll('ř', 'r')
       .replaceAll('ś', 's')
+      .replaceAll('š', 's')
+      .replaceAll('š', 's')
       .replaceAll('ú', 'u')
       .replaceAll('ü', 'u')
       .replaceAll('ű', 'u')
+      .replaceAll('ý', 'y')
       .replaceAll('ź', 'z')
-      .replaceAll('ż', 'z');
+      .replaceAll('ż', 'z')
+      .replaceAll('ž', 'z');
 }
 
 String remSpecChars(String string){
