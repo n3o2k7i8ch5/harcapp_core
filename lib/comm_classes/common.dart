@@ -64,15 +64,13 @@ int charToInt(String c) {
   }
 }
 
-int compareText(String s1, String s2){
+int compareText(String s1, String s2, {bool replaceStrangeChars = true}){
 
-  RegExp regexp = RegExp(r'[^a-ząáćęéěíłńóřśšýźżž0-9]');
-
-  s1 = s1.toLowerCase()
-      .replaceAll(regexp, '');
-
-  s2 = s2.toLowerCase()
-      .replaceAll(regexp, '');
+  if(replaceStrangeChars) {
+    RegExp regexp = RegExp(r'[^a-ząáćęéěíłńóřśšýźżž0-9]');
+    s1 = s1.toLowerCase().replaceAll(regexp, '');
+    s2 = s2.toLowerCase().replaceAll(regexp, '');
+  }
 
   for(int i=0; i<min(s1.length, s2.length); i++){
 

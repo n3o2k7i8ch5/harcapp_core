@@ -52,8 +52,8 @@ class SongRaw extends SongCore{
     this.youtubeLink = song.youtubeLink;
     this.tags = song.tags.toList();
 
-    this.hasRefren = song.hasRefren;//??SongPart.empty(isRefrenTemplate: true);
-    this.refrenPart = song.refrenPart;//.copy();
+    this.hasRefren = song.hasRefren;
+    this.refrenPart = song.refrenPart;
 
     this.songParts = song.songParts;
   }

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
@@ -278,7 +279,7 @@ class _SongTextWidgetState extends State<SongTextWidget>{
                         focusNode: focusNode,
                         autofocus: false,
                         minWidth: Dimen.iconFootprint*2,
-                        inputFormatters: [ALLOWED_TEXT_REGEXP],
+                        inputFormatters: [FilteringTextInputFormatter.allow(allowedSongTextRegexp)],
                         controller: textController,
                     )
                 )),
