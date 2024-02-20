@@ -246,7 +246,7 @@ class SongRaw extends SongCore{
     map[SongCore.PARAM_REL_DATE] = releaseDate?.toIso8601String();
     map[SongCore.PARAM_SHOW_REL_DATE_MONTH] = showRelDateMonth;
     map[SongCore.PARAM_SHOW_REL_DATE_DAY] = showRelDateDay;
-    map[SongCore.PARAM_YT_LINK] = youtubeLink;
+    map[SongCore.PARAM_YT_LINK] = youtubeLink?.split('&')[0];
     map[SongCore.PARAM_ADD_PERS] = addPers.where((addPers) => addPers.isNotEmpty)
         .map((addPers) => addPers.toMap()).toList();
 
