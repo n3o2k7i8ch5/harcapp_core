@@ -67,7 +67,7 @@ int charToInt(String c) {
 int compareText(String s1, String s2, {bool replaceStrangeChars = true}){
 
   if(replaceStrangeChars) {
-    RegExp regexp = RegExp(r'[^a-ząáćęéěíłńóřśšýźżž0-9]');
+    RegExp regexp = RegExp(r'[^a-ząáćęéěíłńóřśšýźżž0-9 ]');
     s1 = s1.toLowerCase().replaceAll(regexp, '');
     s2 = s2.toLowerCase().replaceAll(regexp, '');
   }
