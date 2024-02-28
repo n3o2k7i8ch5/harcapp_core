@@ -8,17 +8,17 @@ import 'tag.dart';
 
 
 enum Layout{LINEAR, WRAP}
-class TagsWidget extends StatelessWidget{
+class TagsWidget<T> extends StatelessWidget{
 
-  final List<String> allTags;
-  final List<String> checkedTags;
+  final List<T> allTags;
+  final List<T> checkedTags;
   final Clip clipBehavior;
   final Color? background;
   final EdgeInsets padding;
-  final Function(String, bool)? onTagTap;
+  final Function(T, bool)? onTagTap;
   final double separator;
   final Layout layout;
-  final Widget Function(BuildContext, String, bool) tagBuilder;
+  final Widget Function(BuildContext, T, bool) tagBuilder;
 
   static double get height => Dimen.textSizeBig + 2*Dimen.iconMarg;
 
@@ -34,16 +34,16 @@ class TagsWidget extends StatelessWidget{
     required this.tagBuilder
   });
 
-  static TagsWidget customWrap({
-    required List<String> allTags,
-    List<String> checkedTags = const [],
+  static TagsWidget customWrap<T>({
+    required List<T> allTags,
+    List<T> checkedTags = const [],
     Clip clipBehavior = Clip.none,
     Color? background,
     EdgeInsets padding = EdgeInsets.zero,
-    Function(String, bool)? onTagTap,
+    void Function(T, bool)? onTagTap,
     double separator=0,
-    required Widget Function(BuildContext, String, bool) tagBuilder
-  }) => TagsWidget(
+    required Widget Function(BuildContext, T, bool) tagBuilder
+  }) => TagsWidget<T>(
     allTags: allTags,
     clipBehavior: clipBehavior,
     background: background,
@@ -55,16 +55,16 @@ class TagsWidget extends StatelessWidget{
     tagBuilder: tagBuilder,
   );
 
-  static TagsWidget customLinear({
-    required List<String> allTags,
-    List<String> checkedTags = const [],
+  static TagsWidget customLinear<T>({
+    required List<T> allTags,
+    List<T> checkedTags = const [],
     Clip clipBehavior = Clip.none,
     Color? background,
     EdgeInsets padding = EdgeInsets.zero,
-    Function(String, bool)? onTagTap,
+    void Function(T, bool)? onTagTap,
     double separator = 0,
-    required Widget Function(BuildContext, String, bool) tagBuilder
-  }) => TagsWidget(
+    required Widget Function(BuildContext, T, bool) tagBuilder
+  }) => TagsWidget<T>(
     allTags: allTags,
     checkedTags: checkedTags,
     clipBehavior: clipBehavior,
@@ -76,17 +76,18 @@ class TagsWidget extends StatelessWidget{
     tagBuilder: tagBuilder,
   );
 
-  static TagsWidget linear({
-    required List<String> allTags,
-    List<String> checkedTags = const [],
+  static TagsWidget linear<T>({
+    required List<T> allTags,
+    List<T> checkedTags = const [],
     Clip clipBehavior = Clip.none,
     Color? background,
     EdgeInsets padding = EdgeInsets.zero,
-    Function(String, bool)? onTagTap,
+    void Function(T, bool)? onTagTap,
     double separator=Dimen.defMarg,
     double uncheckedElevation=0,
     double fontSize = Dimen.textSizeNormal,
-  }) => TagsWidget(
+    String Function(T)? tagToName,
+  }) => TagsWidget<T>(
     allTags: allTags,
     checkedTags: checkedTags,
     clipBehavior: clipBehavior,
@@ -98,12 +99,12 @@ class TagsWidget extends StatelessWidget{
     tagBuilder: (context, tag, checked) =>
     checkedTags.contains(tag)?
     Tag.checked(
-      tag,
+      tagToName?.call(tag)??tag.toString(),
       onTap: onTagTap==null?null:() => onTagTap(tag, checkedTags.contains(tag)),
       fontSize: fontSize,
     ):
     Tag(
-      tag,
+      tagToName?.call(tag)??tag.toString(),
       onTap: onTagTap==null?null:() => onTagTap(tag, checkedTags.contains(tag)),
       fontSize: fontSize,
       elevation: uncheckedElevation,
@@ -111,17 +112,18 @@ class TagsWidget extends StatelessWidget{
     ),
   );
 
-  static TagsWidget wrap({
-    required List<String> allTags,
-    List<String> checkedTags = const [],
+  static TagsWidget wrap<T>({
+    required List<T> allTags,
+    List<T> checkedTags = const [],
     Clip clipBehavior = Clip.none,
     Color? background,
     EdgeInsets padding = EdgeInsets.zero,
-    Function(String, bool)? onTagTap,
-    double separator=Dimen.defMarg,
+    void Function(T, bool)? onTagTap,
+    double separator = Dimen.defMarg,
     double uncheckedElevation=0,
     double fontSize = Dimen.textSizeNormal,
-  }) => TagsWidget(
+    String Function(T)? tagToName,
+  }) => TagsWidget<T>(
     allTags: allTags,
     checkedTags: checkedTags,
     clipBehavior: clipBehavior,
@@ -133,12 +135,12 @@ class TagsWidget extends StatelessWidget{
     tagBuilder: (context, tag, chekced) =>
     checkedTags.contains(tag)?
     Tag.checked(
-      tag,
+      tagToName?.call(tag)??tag.toString(),
       onTap: onTagTap==null?null:() => onTagTap(tag, checkedTags.contains(tag)),
       fontSize: fontSize,
     ):
     Tag(
-      tag,
+      tagToName?.call(tag)??tag.toString(),
       onTap: onTagTap==null?null:() => onTagTap(tag, checkedTags.contains(tag)),
       fontSize: fontSize,
       elevation: uncheckedElevation,
@@ -151,7 +153,7 @@ class TagsWidget extends StatelessWidget{
 
     List<Widget> tags = [];
     for(int i=0; i<allTags.length; i++) {
-      String tagStr = allTags[i];
+      T tagStr = allTags[i];
       tags.add(tagBuilder(context, tagStr, checkedTags.contains(tagStr)));
       if(i<allTags.length-1 && layout == Layout.LINEAR) tags.add(SizedBox(width: separator));
     }
