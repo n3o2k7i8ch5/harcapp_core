@@ -11,7 +11,7 @@ enum Layout{LINEAR, WRAP}
 class TagsWidget<T> extends StatelessWidget{
 
   final List<T> allTags;
-  final List<T> checkedTags;
+  final Iterable<T> checkedTags;
   final Clip clipBehavior;
   final Color? background;
   final EdgeInsets padding;
