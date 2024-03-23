@@ -8,8 +8,13 @@ class ColorPackApp extends StatelessWidget{
 
   final ColorPack initColorPack;
   final bool Function() isDark;
+  final Widget child;
 
-  const ColorPackApp(this.initColorPack, this.isDark);
+  const ColorPackApp({
+    required this.initColorPack,
+    required this.isDark,
+    required this.child
+  });
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
@@ -17,6 +22,7 @@ class ColorPackApp extends StatelessWidget{
       initColorPack: initColorPack,
       isDark: isDark,
     ),
+    builder: (context, _) => child,
   );
 
 }
