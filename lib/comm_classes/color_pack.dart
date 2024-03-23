@@ -77,8 +77,8 @@ abstract class ColorPack{
     hintColor: hintEnabled,
     appBarTheme: AppBarTheme(
         backgroundColor: appBar,
-        titleTextStyle: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
-        toolbarTextStyle: AppTextStyle(fontSize: Dimen.TEXT_SIZE_APPBAR, color: appBarTextEnabled),
+        titleTextStyle: AppTextStyle(fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
+        toolbarTextStyle: AppTextStyle(fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
         actionsIconTheme: IconThemeData(color: appBarTextEnabled),
         iconTheme: IconThemeData(color: appBarTextEnabled),
         surfaceTintColor: null

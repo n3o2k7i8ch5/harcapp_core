@@ -83,7 +83,7 @@ class PulsingTextState extends State<PulsingText> {
         widget.text,
         textAlign: TextAlign.center,
         style: AppTextStyle(
-          fontSize: Dimen.TEXT_SIZE_APPBAR,
+          fontSize: Dimen.textSizeAppBar,
           fontWeight: widget.fontWeight,
           color: widget.fontColor??iconEnab_(context),
         ),
@@ -92,7 +92,7 @@ class PulsingTextState extends State<PulsingText> {
         widget.text,
         textAlign: TextAlign.center,
         style: AppTextStyle(
-          fontSize: Dimen.TEXT_SIZE_APPBAR,
+          fontSize: Dimen.textSizeAppBar,
           fontWeight: widget.fontWeight,
           color: widget.fontColor??iconEnab_(context),
         ),

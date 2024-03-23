@@ -2,26 +2,27 @@ import 'package:flutter/material.dart';
 
 class Dimen{
 
-  static const double TEXT_SIZE_APPBAR = 20;
 
-  static const double defMarg = 6;
+  static const double defMarg = 6.0;
   static const double sideMarg = 18.0;
   static const double CARD_BIG_PADD = 16.0;
   static const double APPBAR_ELEVATION = 4.0;
   static const double APPBAR_TITLE_BOTTOM_PADDING_VAL = 16.0;
 
-  static const double textSizeLimit = 8;
-  static const double textSizeTiny = 10;
-  static const double textSizeSmall = 12;
-  static const double textSizeNormal = 14;
-  static const double textSizeBig = 16;
+  static const double textSizeLimit = 8.0;
+  static const double textSizeTiny = 10.0;
+  static const double textSizeSmall = 12.0;
+  static const double textSizeNormal = 14.0;
+  static const double textSizeBig = 16.0;
+  static const double textSizeAppBar = 20.0;
 
-  static const double iconMarg = 12;
-  static const double iconSize = 24;
+  static const double iconMarg = 12.0;
+  static const double iconSize = 24.0;
+  static const double iconSmallSize = 18.0;
   static const double iconFootprint = 2*iconMarg + iconSize;
-  static const double ICON_EMPTY_INFO_SIZE = 72;
+  static const double iconEmptyInfoSize = 72.0;
 
-  static const double APPBAR_LEADING_WIDTH = iconFootprint + 8;
+  static const double APPBAR_LEADING_WIDTH = iconFootprint + 8.0;
 
 
   static const double TEXT_FIELD_PADD = 16;

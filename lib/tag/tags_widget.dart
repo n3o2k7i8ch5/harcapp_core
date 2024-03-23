@@ -19,6 +19,7 @@ class TagsWidget<T> extends StatelessWidget{
   final double separator;
   final Layout layout;
   final Widget Function(BuildContext, T, bool) tagBuilder;
+  final WrapAlignment wrapAlignment;
 
   static double get height => Dimen.textSizeBig + 2*Dimen.iconMarg;
 
@@ -31,7 +32,8 @@ class TagsWidget<T> extends StatelessWidget{
     this.onTagTap,
     this.separator = Dimen.defMarg,
     required this.layout,
-    required this.tagBuilder
+    required this.tagBuilder,
+    this.wrapAlignment = WrapAlignment.center
   });
 
   static TagsWidget customWrap<T>({
@@ -42,7 +44,8 @@ class TagsWidget<T> extends StatelessWidget{
     EdgeInsets padding = EdgeInsets.zero,
     void Function(T, bool)? onTagTap,
     double separator=0,
-    required Widget Function(BuildContext, T, bool) tagBuilder
+    required Widget Function(BuildContext, T, bool) tagBuilder,
+    WrapAlignment wrapAlignment = WrapAlignment.center,
   }) => TagsWidget<T>(
     allTags: allTags,
     clipBehavior: clipBehavior,
@@ -52,6 +55,7 @@ class TagsWidget<T> extends StatelessWidget{
     onTagTap: onTagTap,
     separator: separator,
     layout: Layout.WRAP,
+    wrapAlignment: wrapAlignment,
     tagBuilder: tagBuilder,
   );
 
@@ -123,6 +127,7 @@ class TagsWidget<T> extends StatelessWidget{
     double uncheckedElevation=0,
     double fontSize = Dimen.textSizeNormal,
     String Function(T)? tagToName,
+    WrapAlignment wrapAlignment = WrapAlignment.center,
   }) => TagsWidget<T>(
     allTags: allTags,
     checkedTags: checkedTags,
@@ -131,6 +136,7 @@ class TagsWidget<T> extends StatelessWidget{
     padding: padding,
     onTagTap: onTagTap,
     layout: Layout.WRAP,
+    wrapAlignment: wrapAlignment,
     separator: separator,
     tagBuilder: (context, tag, chekced) =>
     checkedTags.contains(tag)?
@@ -160,7 +166,7 @@ class TagsWidget<T> extends StatelessWidget{
 
     return layout == Layout.WRAP?
     Wrap(
-      alignment: WrapAlignment.center,
+      alignment: wrapAlignment,
       children: tags,
       spacing: separator,
       runSpacing: separator,
