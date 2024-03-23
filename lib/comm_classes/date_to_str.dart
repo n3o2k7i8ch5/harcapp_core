@@ -165,3 +165,55 @@ String dateRangeToString(
     return '$day $month$year';
 
 }
+
+String durationToString(Duration? duration, {bool onlyBiggestTimeFactor = false}){
+
+  if(duration == null) return '-';
+
+  int seconds = duration.inSeconds % 60;
+  int minutes = duration.inMinutes % 60;
+  int hours = duration.inHours % 24;
+  int days = duration.inDays % 7;
+
+  List<String> resultParts = [];
+
+  if(days == 1) resultParts.add('$days dzień');
+  else if(days > 1) resultParts.add('$days dni');
+  if(onlyBiggestTimeFactor && resultParts.isNotEmpty) return resultParts.first;
+
+  if(hours != 0) resultParts.add('$hours godz.');
+  if(onlyBiggestTimeFactor && resultParts.isNotEmpty) return resultParts.first;
+
+  if(minutes != 0) resultParts.add('$minutes min.');
+  if(onlyBiggestTimeFactor && resultParts.isNotEmpty) return resultParts.first;
+
+  if(seconds != 0) resultParts.add('$seconds sek.');
+
+  return resultParts.join(' ');
+
+}
+
+String timeAgo(DateTime now, DateTime past){
+
+  Duration diff = now.difference(past);
+
+  // if(diff < const Duration(seconds: 60))
+  //   return '${diff.inSeconds } sek.';
+  //
+  // if(diff < const Duration(minutes: 60))
+  //   return '${diff.inMinutes } min.';
+  //
+  // if(diff < const Duration(hours: 24))
+  //   return '${diff.inHours } godz.';
+  //
+  // if(diff < const Duration(days: 7))
+  //   return '${diff.inDays } dni';
+
+  if(diff < const Duration(days: 7))
+    return durationToString(diff, onlyBiggestTimeFactor: true);
+
+  if(now.year == past.year)
+    return dateToString(past, showYear: false);
+
+  return dateToString(past, shortMonth: true);
+}
