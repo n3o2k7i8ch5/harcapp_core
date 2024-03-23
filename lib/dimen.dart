@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class Dimen{
 
-
   static const double defMarg = 6.0;
   static const double sideMarg = 18.0;
   static const double CARD_BIG_PADD = 16.0;
@@ -31,8 +30,8 @@ class Dimen{
   static const double LIST_TILE_LEADING_MARGIN_VAL = 16.0;
   static const double LIST_TILE_TRAILING_MARGIN_VAL = 15.0;
 
-  static const double FLOATING_BUTTON_MARG = 16;
-  static const double FLOATING_BUTTON_SIZE = 56;
+  static const double floatingButtonMarg = 16;
+  static const double floatingButtonSize = 56;
 
   static const double BOTTOM_SHEET_TITLE_MARG = 20;
   static const double BOTTOM_SHEET_MARG = 16;
