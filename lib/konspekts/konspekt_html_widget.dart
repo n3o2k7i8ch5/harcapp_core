@@ -15,6 +15,7 @@ class KonspektHtmlWidget extends StatelessWidget{
   final double textSize;
   final void Function()? onDuchLevelInfoTap;
   final void Function()? onDuchMechanismInfoTap;
+  final double? maxRelatedDialogWidth;
 
   const KonspektHtmlWidget(
       this.konspekt,
@@ -22,6 +23,7 @@ class KonspektHtmlWidget extends StatelessWidget{
       { this.textSize = Dimen.textSizeNormal,
         this.onDuchLevelInfoTap,
         this.onDuchMechanismInfoTap,
+        this.maxRelatedDialogWidth,
         super.key
       });
 
@@ -43,6 +45,7 @@ class KonspektHtmlWidget extends StatelessWidget{
           konspektName: konspektName,
           onDuchLevelInfoTap: onDuchLevelInfoTap,
           onDuchMechanismInfoTap: onDuchMechanismInfoTap,
+          maxWidth: maxRelatedDialogWidth
         );
       }else if(url.endsWith('@attachment')){
         String formName = url.substring(0, url.length - '@attachment'.length);

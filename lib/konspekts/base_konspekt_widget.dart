@@ -156,6 +156,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final bool withAppBar;
   final void Function()? onDuchLevelInfoTap;
   final void Function()? onDuchMechanismInfoTap;
+  final double? maxRelatedDialogWidth;
   final ScrollPhysics physics;
   final bool shrinkWrap;
   final Widget? leading;
@@ -166,6 +167,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.withAppBar = true,
         required this.onDuchLevelInfoTap,
         required this.onDuchMechanismInfoTap,
+        this.maxRelatedDialogWidth,
         this.physics = const BouncingScrollPhysics(),
         this.shrinkWrap = false,
         this.leading,
@@ -272,7 +274,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             const SizedBox(height: Dimen.sideMarg),
 
           if(konspekt.summary != null)
-            KonspektHtmlWidget(konspekt, '<b>W skrócie:</b> ${konspekt.summary!}'),
+            KonspektHtmlWidget(
+                konspekt,
+                '<b>W skrócie:</b> ${konspekt.summary!}',
+                maxRelatedDialogWidth: widget.maxRelatedDialogWidth
+            ),
 
           const SizedBox(height: Dimen.sideMarg),
 
@@ -414,6 +420,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               konspekt,
               konspekt.intro!,
               textSize: Dimen.textSizeBig,
+              maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
             ),
 
           if(konspekt.description != null)
@@ -427,6 +434,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               konspekt,
               konspekt.description!,
               textSize: Dimen.textSizeBig,
+              maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
             ),
 
           if(konspekt.steps != null)
