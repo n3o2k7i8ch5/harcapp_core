@@ -122,3 +122,11 @@ class KonspektSphereDuchMechanismsInfoDialog extends StatelessWidget{
   );
 
 }
+
+void openKonspektSphereDuchMechanismsInfoDialog(BuildContext context) => showDialog(
+    context: context,
+    builder: (context) => Padding(
+        padding: const EdgeInsets.all(Dimen.defMarg),
+        child: KonspektSphereDuchMechanismsInfoDialog()
+    )
+);
