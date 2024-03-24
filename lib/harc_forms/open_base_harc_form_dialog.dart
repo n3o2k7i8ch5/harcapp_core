@@ -4,7 +4,7 @@ import 'package:harcapp_core/dimen.dart';
 
 import 'data.dart';
 import 'harc_form.dart';
-import 'harc_form_widget.dart';
+import 'base_harc_form_widget.dart';
 
 Future<void> openBaseHarcFormDialog({
   required BuildContext context,
