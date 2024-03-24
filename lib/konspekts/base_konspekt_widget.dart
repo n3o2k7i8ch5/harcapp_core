@@ -246,12 +246,13 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               onTap: () => showAppToast(context, text: 'Źródło: <b>${konspekt.coverAuthor}</b>'),
               child: Hero(
                 tag: konspekt.coverPath,
-                child: SafeArea(
-                  child: Image(
-                    image: AssetImage(konspekt.coverPath),
-                    fit: BoxFit.cover,
-                  ),
-                )
+                child: Center(child: SizedBox( // This is needed to avoid expading the image to the web device screen size
+                    width: widget.maxRelatedDialogWidth,
+                    child: Image(
+                      image: AssetImage(konspekt.coverPath),
+                      fit: BoxFit.cover,
+                    ),
+                  ),)
               ),
             ),
             stretchModes: const [
