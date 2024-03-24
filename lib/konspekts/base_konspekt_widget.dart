@@ -191,13 +191,16 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
   Duration? duration;
 
+  double? layoutWidth;
+
   @override
   void initState() {
     showAppBarTitle = false;
     controller = ScrollController();
 
     controller.addListener((){
-      bool shouldBeVisible = controller.offset > (MediaQuery.of(context).size.width*600/1000);
+      double layoutWidth = this.layoutWidth??MediaQuery.of(context).size.width;
+      bool shouldBeVisible = controller.offset > (layoutWidth*600/1000);
 
       if(showAppBarTitle && !shouldBeVisible)
         setState(() => showAppBarTitle = shouldBeVisible);
@@ -219,319 +222,329 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   }
 
   @override
-  Widget build(BuildContext context) => CustomScrollView(
-    controller: controller,
-    physics: widget.physics,
-    shrinkWrap: widget.shrinkWrap,
-    slivers: [
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
-      if(widget.withAppBar)
-        SliverAppBarX(
-          pinned: true,
-          stretch: true,
-          floating: false,
-          expandedHeight: MediaQuery.of(context).size.width*600/1000,
-          flexibleSpace: FlexibleSpaceBar(
-            title: AnimatedOpacity(
-              opacity: showAppBarTitle?1:0,
-              duration: const Duration(milliseconds: 300),
-              child: Text(
-                  konspekt.title,
-                  style: AppTextStyle(color: iconEnab_(context)),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis
-              ),
-            ),
-            background: GestureDetector(
-              onTap: () => showAppToast(context, text: 'Źródło: <b>${konspekt.coverAuthor}</b>'),
-              child: Hero(
-                tag: konspekt.coverPath,
-                child: Center(child: SizedBox( // This is needed to avoid expading the image to the web device screen size
-                    width: widget.maxRelatedDialogWidth,
-                    child: Image(
-                      image: AssetImage(konspekt.coverPath),
-                      fit: BoxFit.cover,
-                    ),
-                  ),)
-              ),
-            ),
-            stretchModes: const [
-              StretchMode.zoomBackground,
-              StretchMode.blurBackground
-            ],
-          ),
-        ),
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (BuildContext context, BoxConstraints constraints) {
 
-      SliverPadding(
-        padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
-        sliver: SliverList(delegate: SliverChildListDelegate([
+      layoutWidth = constraints.maxWidth;
 
-          if(widget.leading != null)
-            widget.leading!,
+      return CustomScrollView(
+        controller: controller,
+        physics: widget.physics,
+        shrinkWrap: widget.shrinkWrap,
+        slivers: [
 
-          const SizedBox(height: Dimen.sideMarg),
-
-          TitleShortcutRowWidget(title: konspekt.title, titleColor: iconEnab_(context)),
-
-          if(konspekt.summary != null)
-            const SizedBox(height: Dimen.sideMarg),
-
-          if(konspekt.summary != null)
-            KonspektHtmlWidget(
-                konspekt,
-                '<b>W skrócie:</b> ${konspekt.summary!}',
-                maxRelatedDialogWidth: widget.maxRelatedDialogWidth
-            ),
-
-          const SizedBox(height: Dimen.sideMarg),
-
-          const TitleShortcutRowWidget(title: 'Metodyki', textAlign: TextAlign.left),
-
-          SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            clipBehavior: Clip.none,
-            child: Row(
-              children: [
-                if(konspekt.metos.contains(Meto.zuch))
-                  const MetoTile(meto: Meto.zuch, iconSize: 42.0),
-                if(konspekt.metos.contains(Meto.zuch))
-                  const SizedBox(width: Dimen.defMarg),
-
-                if(konspekt.metos.contains(Meto.harc))
-                  const MetoTile(meto: Meto.harc, iconSize: 42.0),
-                if(konspekt.metos.contains(Meto.harc))
-                  const SizedBox(width: Dimen.defMarg),
-
-                if(konspekt.metos.contains(Meto.hs))
-                  const MetoTile(meto: Meto.hs, iconSize: 42.0),
-                if(konspekt.metos.contains(Meto.hs))
-                  const SizedBox(width: Dimen.defMarg),
-
-                if(konspekt.metos.contains(Meto.wedro))
-                  const MetoTile(meto: Meto.wedro, iconSize: 42.0),
-
-              ],
-            ),
-          ),
-
-          const SizedBox(height: Dimen.sideMarg),
-
-          Row(
-            children: [
-              const IntrinsicWidth(
-                child: TitleShortcutRowWidget(title: 'Rodzaj: ', textAlign: TextAlign.left),
-              ),
-              Text(konspekt.type.displayName.toLowerCase(), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
-            ],
-          ),
-
-          if(konspekt.spheres.isNotEmpty)
-            const SizedBox(height: Dimen.sideMarg),
-
-          if(konspekt.spheres.isNotEmpty)
-            const TitleShortcutRowWidget(title: 'Sfery rozwoju', textAlign: TextAlign.left),
-
-          if(konspekt.spheres.isNotEmpty)
-            KonspektSpheresWidget(
-              konspekt.spheres,
-              onDuchLevelInfoTap: onDuchLevelInfoTap,
-              onDuchMechanismInfoTap: onDuchMechanismInfoTap,
-            ),
-
-          const SizedBox(height: Dimen.sideMarg),
-
-          if(duration != null)
-            Row(
-              children: [
-                const IntrinsicWidth(
-                  child: TitleShortcutRowWidget(title: 'Czas: ', textAlign: TextAlign.left),
+          if(widget.withAppBar)
+            SliverAppBarX(
+              pinned: true,
+              stretch: true,
+              floating: false,
+              expandedHeight: constraints.maxWidth*600/1000,
+              flexibleSpace: FlexibleSpaceBar(
+                title: AnimatedOpacity(
+                  opacity: showAppBarTitle?1:0,
+                  duration: const Duration(milliseconds: 300),
+                  child: Text(
+                      konspekt.title,
+                      style: AppTextStyle(color: iconEnab_(context)),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis
+                  ),
                 ),
-                Text(durationToString(duration), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
-              ],
-            ),
-
-          if(duration != null)
-            const SizedBox(height: Dimen.sideMarg),
-
-          const TitleShortcutRowWidget(title: 'Cele', textAlign: TextAlign.left),
-
-        ])),
-      ),
-
-      SliverPadding(
-        padding: const EdgeInsets.only(
-          left: Dimen.sideMarg,
-          right: Dimen.sideMarg,
-          bottom: Dimen.sideMarg,
-        ),
-        sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-            (context, index) => Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
-                const SizedBox(width: Dimen.defMarg),
-                Expanded(child: AppText(konspekt.aims[index], size: Dimen.textSizeBig))
-              ],
-            ),
-            separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
-            count: konspekt.aims.length
-        )),
-      ),
-
-      if(konspekt.materials != null)
-        SliverPadding(
-          padding: const EdgeInsets.only(
-            left: Dimen.sideMarg,
-            right: Dimen.sideMarg,
-            bottom: Dimen.sideMarg,
-          ),
-          sliver: SliverList(delegate: SliverChildListDelegate([
-
-            const TitleShortcutRowWidget(title: 'Materiały', textAlign: TextAlign.left),
-
-          ])),
-        ),
-
-      if(konspekt.materials != null)
-        SliverPadding(
-          padding: const EdgeInsets.only(
-            left: Dimen.sideMarg,
-            right: Dimen.sideMarg,
-            bottom: Dimen.sideMarg,
-          ),
-          sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                  (context, index) => KonspektMaterialTile(konspekt, konspekt.materials![index]),
-              separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
-              count: konspekt.materials!.length
-          )),
-        ),
-
-      SliverPadding(
-        padding: const EdgeInsets.only(
-          left: Dimen.sideMarg,
-          right: Dimen.sideMarg,
-          bottom: Dimen.sideMarg,
-        ),
-        sliver: SliverList(delegate: SliverChildListDelegate([
-
-          if(konspekt.intro != null)
-            const TitleShortcutRowWidget(title: 'Wstęp', textAlign: TextAlign.left),
-
-          if(konspekt.intro != null)
-            KonspektHtmlWidget(
-              konspekt,
-              konspekt.intro!,
-              textSize: Dimen.textSizeBig,
-              maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
-            ),
-
-          if(konspekt.description != null)
-            const SizedBox(height: Dimen.sideMarg),
-
-          if(konspekt.description != null)
-            const TitleShortcutRowWidget(title: 'Opis', textAlign: TextAlign.left),
-
-          if(konspekt.description != null)
-            KonspektHtmlWidget(
-              konspekt,
-              konspekt.description!,
-              textSize: Dimen.textSizeBig,
-              maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
-            ),
-
-          if(konspekt.steps != null)
-            const SizedBox(height: Dimen.sideMarg),
-
-          if(konspekt.steps != null)
-            const TitleShortcutRowWidget(title: 'Plan', textAlign: TextAlign.left),
-
-        ])),
-      ),
-
-      if(konspekt.steps != null)
-        SliverPadding(
-          padding: const EdgeInsets.only(bottom: Dimen.sideMarg),
-          sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                  (context, index) => KonspektStepWidget(konspekt, index),
-              separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
-              count: konspekt.steps!.length
-          )),
-        ),
-
-      if(konspekt.howToFail != null)
-        SliverPadding(
-          padding: const EdgeInsets.only(
-            left: Dimen.sideMarg,
-            right: Dimen.sideMarg,
-          ),
-          sliver: SliverList(delegate: SliverChildListDelegate([
-
-            const TitleShortcutRowWidget(title: 'Jak to spartolić?', textAlign: TextAlign.left),
-
-          ])),
-        ),
-
-      if(konspekt.howToFail != null)
-        SliverPadding(
-          padding: const EdgeInsets.only(
-            left: Dimen.sideMarg,
-            right: Dimen.sideMarg,
-            bottom: Dimen.sideMarg,
-          ),
-          sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-              (context, index) => Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
-                  const SizedBox(width: Dimen.defMarg),
-                  Expanded(child: AppText(konspekt.howToFail![index], size: Dimen.textSizeBig))
+                background: GestureDetector(
+                  onTap: () => showAppToast(context, text: 'Źródło: <b>${konspekt.coverAuthor}</b>'),
+                  child: Hero(
+                      tag: konspekt.coverPath,
+                      child: Image(
+                        image: AssetImage(konspekt.coverPath),
+                        fit: BoxFit.cover,
+                      )
+                  ),
+                ),
+                stretchModes: const [
+                  StretchMode.zoomBackground,
+                  StretchMode.blurBackground
                 ],
               ),
-              separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
-              count: konspekt.howToFail!.length
-          )),
-        ),
+            ),
 
-      if(konspekt.attachments != null)
-        SliverPadding(
-          padding: const EdgeInsets.only(
-            left: Dimen.sideMarg,
-            right: Dimen.sideMarg,
-            bottom: Dimen.sideMarg,
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
+            sliver: SliverList(delegate: SliverChildListDelegate([
+
+              if(widget.leading != null)
+                widget.leading!,
+
+              const SizedBox(height: Dimen.sideMarg),
+
+              TitleShortcutRowWidget(title: konspekt.title, titleColor: iconEnab_(context)),
+
+              if(konspekt.summary != null)
+                const SizedBox(height: Dimen.sideMarg),
+
+              if(konspekt.summary != null)
+                KonspektHtmlWidget(
+                    konspekt,
+                    '<b>W skrócie:</b> ${konspekt.summary!}',
+                    maxRelatedDialogWidth: widget.maxRelatedDialogWidth
+                ),
+
+              const SizedBox(height: Dimen.sideMarg),
+
+              const TitleShortcutRowWidget(title: 'Metodyki', textAlign: TextAlign.left),
+
+              SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                clipBehavior: Clip.none,
+                child: Row(
+                  children: [
+                    if(konspekt.metos.contains(Meto.zuch))
+                      const MetoTile(meto: Meto.zuch, iconSize: 42.0),
+                    if(konspekt.metos.contains(Meto.zuch))
+                      const SizedBox(width: Dimen.defMarg),
+
+                    if(konspekt.metos.contains(Meto.harc))
+                      const MetoTile(meto: Meto.harc, iconSize: 42.0),
+                    if(konspekt.metos.contains(Meto.harc))
+                      const SizedBox(width: Dimen.defMarg),
+
+                    if(konspekt.metos.contains(Meto.hs))
+                      const MetoTile(meto: Meto.hs, iconSize: 42.0),
+                    if(konspekt.metos.contains(Meto.hs))
+                      const SizedBox(width: Dimen.defMarg),
+
+                    if(konspekt.metos.contains(Meto.wedro))
+                      const MetoTile(meto: Meto.wedro, iconSize: 42.0),
+
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: Dimen.sideMarg),
+
+              Row(
+                children: [
+                  const IntrinsicWidth(
+                    child: TitleShortcutRowWidget(title: 'Rodzaj: ', textAlign: TextAlign.left),
+                  ),
+                  Text(konspekt.type.displayName.toLowerCase(), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
+                ],
+              ),
+
+              if(konspekt.spheres.isNotEmpty)
+                const SizedBox(height: Dimen.sideMarg),
+
+              if(konspekt.spheres.isNotEmpty)
+                const TitleShortcutRowWidget(title: 'Sfery rozwoju', textAlign: TextAlign.left),
+
+              if(konspekt.spheres.isNotEmpty)
+                KonspektSpheresWidget(
+                  konspekt.spheres,
+                  onDuchLevelInfoTap: onDuchLevelInfoTap,
+                  onDuchMechanismInfoTap: onDuchMechanismInfoTap,
+                ),
+
+              const SizedBox(height: Dimen.sideMarg),
+
+              if(duration != null)
+                Row(
+                  children: [
+                    const IntrinsicWidth(
+                      child: TitleShortcutRowWidget(title: 'Czas: ', textAlign: TextAlign.left),
+                    ),
+                    Text(durationToString(duration), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
+                  ],
+                ),
+
+              if(duration != null)
+                const SizedBox(height: Dimen.sideMarg),
+
+              const TitleShortcutRowWidget(title: 'Cele', textAlign: TextAlign.left),
+
+            ])),
           ),
-          sliver: SliverList(delegate: SliverChildListDelegate([
 
-            const TitleShortcutRowWidget(title: 'Załączniki', textAlign: TextAlign.left),
+          SliverPadding(
+            padding: const EdgeInsets.only(
+              left: Dimen.sideMarg,
+              right: Dimen.sideMarg,
+              bottom: Dimen.sideMarg,
+            ),
+            sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
+                    (context, index) => Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
+                    const SizedBox(width: Dimen.defMarg),
+                    Expanded(child: AppText(konspekt.aims[index], size: Dimen.textSizeBig))
+                  ],
+                ),
+                separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
+                count: konspekt.aims.length
+            )),
+          ),
 
-          ])),
-        ),
+          if(konspekt.materials != null)
+            SliverPadding(
+              padding: const EdgeInsets.only(
+                left: Dimen.sideMarg,
+                right: Dimen.sideMarg,
+                bottom: Dimen.sideMarg,
+              ),
+              sliver: SliverList(delegate: SliverChildListDelegate([
 
-      if(konspekt.attachments != null)
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
-          sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                  (context, index) => KonspektAttachmentWidget(konspekt.attachments![index]),
-              separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
-              count: konspekt.attachments!.length
-          )),
-        ),
+                const TitleShortcutRowWidget(title: 'Materiały', textAlign: TextAlign.left),
 
-      SliverPadding(
-        padding: const EdgeInsets.all(Dimen.sideMarg),
-        sliver: SliverList(delegate: SliverChildListDelegate([
+              ])),
+            ),
 
-          if(konspekt.author != null)
-            const TitleShortcutRowWidget(title: 'Autor', textAlign: TextAlign.left),
+          if(konspekt.materials != null)
+            SliverPadding(
+              padding: const EdgeInsets.only(
+                left: Dimen.sideMarg,
+                right: Dimen.sideMarg,
+                bottom: Dimen.sideMarg,
+              ),
+              sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
+                      (context, index) => KonspektMaterialTile(konspekt, konspekt.materials![index]),
+                  separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
+                  count: konspekt.materials!.length
+              )),
+            ),
 
-          if(konspekt.author != null)
-            PersonCard(konspekt.author!)
+          SliverPadding(
+            padding: const EdgeInsets.only(
+              left: Dimen.sideMarg,
+              right: Dimen.sideMarg,
+              bottom: Dimen.sideMarg,
+            ),
+            sliver: SliverList(delegate: SliverChildListDelegate([
 
-        ])),
-      ),
+              if(konspekt.intro != null)
+                const TitleShortcutRowWidget(title: 'Wstęp', textAlign: TextAlign.left),
 
-    ],
-  );
+              if(konspekt.intro != null)
+                KonspektHtmlWidget(
+                  konspekt,
+                  konspekt.intro!,
+                  textSize: Dimen.textSizeBig,
+                  maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
+                ),
+
+              if(konspekt.description != null)
+                const SizedBox(height: Dimen.sideMarg),
+
+              if(konspekt.description != null)
+                const TitleShortcutRowWidget(title: 'Opis', textAlign: TextAlign.left),
+
+              if(konspekt.description != null)
+                KonspektHtmlWidget(
+                  konspekt,
+                  konspekt.description!,
+                  textSize: Dimen.textSizeBig,
+                  maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
+                ),
+
+              if(konspekt.steps != null)
+                const SizedBox(height: Dimen.sideMarg),
+
+              if(konspekt.steps != null)
+                const TitleShortcutRowWidget(title: 'Plan', textAlign: TextAlign.left),
+
+            ])),
+          ),
+
+          if(konspekt.steps != null)
+            SliverPadding(
+              padding: const EdgeInsets.only(bottom: Dimen.sideMarg),
+              sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
+                      (context, index) => KonspektStepWidget(konspekt, index),
+                  separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
+                  count: konspekt.steps!.length
+              )),
+            ),
+
+          if(konspekt.howToFail != null)
+            SliverPadding(
+              padding: const EdgeInsets.only(
+                left: Dimen.sideMarg,
+                right: Dimen.sideMarg,
+              ),
+              sliver: SliverList(delegate: SliverChildListDelegate([
+
+                const TitleShortcutRowWidget(title: 'Jak to spartolić?', textAlign: TextAlign.left),
+
+              ])),
+            ),
+
+          if(konspekt.howToFail != null)
+            SliverPadding(
+              padding: const EdgeInsets.only(
+                left: Dimen.sideMarg,
+                right: Dimen.sideMarg,
+                bottom: Dimen.sideMarg,
+              ),
+              sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
+                      (context, index) => Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
+                      const SizedBox(width: Dimen.defMarg),
+                      Expanded(child: AppText(konspekt.howToFail![index], size: Dimen.textSizeBig))
+                    ],
+                  ),
+                  separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
+                  count: konspekt.howToFail!.length
+              )),
+            ),
+
+          if(konspekt.attachments != null)
+            SliverPadding(
+              padding: const EdgeInsets.only(
+                left: Dimen.sideMarg,
+                right: Dimen.sideMarg,
+                bottom: Dimen.sideMarg,
+              ),
+              sliver: SliverList(delegate: SliverChildListDelegate([
+
+                const TitleShortcutRowWidget(title: 'Załączniki', textAlign: TextAlign.left),
+
+              ])),
+            ),
+
+          if(konspekt.attachments != null)
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
+              sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
+                      (context, index) => KonspektAttachmentWidget(konspekt.attachments![index]),
+                  separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
+                  count: konspekt.attachments!.length
+              )),
+            ),
+
+          SliverPadding(
+            padding: const EdgeInsets.all(Dimen.sideMarg),
+            sliver: SliverList(delegate: SliverChildListDelegate([
+
+              if(konspekt.author != null)
+                const TitleShortcutRowWidget(title: 'Autor', textAlign: TextAlign.left),
+
+              if(konspekt.author != null)
+                PersonCard(konspekt.author!)
+
+            ])),
+          ),
+
+        ],
+      );
+
+  });
 
 }
 
