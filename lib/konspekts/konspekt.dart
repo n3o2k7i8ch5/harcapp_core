@@ -230,7 +230,7 @@ class Konspekt{
 
   final List<KonspektAttachment>? attachments;
 
-  String get coverPath => 'assets/konspekty/$name/cover.webp';
+  String get coverPath => 'packages/harcapp_core/assets/konspekty/$name/cover.webp';
 
   const Konspekt({
     required this.name,
