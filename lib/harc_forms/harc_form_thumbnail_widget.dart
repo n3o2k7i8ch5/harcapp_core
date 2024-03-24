@@ -54,9 +54,10 @@ class FormThumbnailTagsWidget extends StatelessWidget{
 class FormThumbnailWidget extends StatelessWidget{
 
   final HarcForm form;
+  final double elevation;
   final void Function()? onTap;
 
-  const FormThumbnailWidget(this.form, {this.onTap, super.key});
+  const FormThumbnailWidget(this.form, {this.elevation = 0, this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) => AspectRatio(
@@ -64,58 +65,59 @@ class FormThumbnailWidget extends StatelessWidget{
     child: Hero(
         tag: form,
         child: GradientWidget(
-            colorStart: form.colorStart.withOpacity(.25),
-            colorEnd: form.colorEnd.withOpacity(.25),
-            radius: AppCard.bigRadius,
-            child: InkWell(
-                onTap: onTap, // () => pushPage(context, builder: (context) => HarcFormPage(form)),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
+          elevation: elevation,
+          colorStart: form.colorStart.withOpacity(.25),
+          colorEnd: form.colorEnd.withOpacity(.25),
+          radius: AppCard.bigRadius,
+          child: InkWell(
+              onTap: onTap, // () => pushPage(context, builder: (context) => HarcFormPage(form)),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
 
-                      GradientIcon(
-                        form.icon,
-                        colorStart: form.colorStart,
-                        colorEnd: form.colorEnd,
-                        size: 64.0,
-                      ),
+                    GradientIcon(
+                      form.icon,
+                      colorStart: form.colorStart,
+                      colorEnd: form.colorEnd,
+                      size: 64.0,
+                    ),
 
-                      const SizedBox(width: Dimen.iconMarg),
+                    const SizedBox(width: Dimen.iconMarg),
 
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              form.title,
-                              style: AppTextStyle(
-                                fontSize: Dimen.textSizeBig,
-                                color: iconEnab_(context),
-                                fontWeight: weight.bold,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            form.title,
+                            style: AppTextStyle(
+                              fontSize: Dimen.textSizeBig,
+                              color: iconEnab_(context),
+                              fontWeight: weight.bold,
                             ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
 
-                            const SizedBox(height: Dimen.iconMarg),
+                          const SizedBox(height: Dimen.iconMarg),
 
-                            FormThumbnailTagsWidget(form),
+                          FormThumbnailTagsWidget(form),
 
-                            Expanded(child: Container()),
+                          Expanded(child: Container()),
 
-                            MetoRow(form.metos, elevated: true, mainAxisAlignment: MainAxisAlignment.end),
+                          MetoRow(form.metos, elevated: true, mainAxisAlignment: MainAxisAlignment.end),
 
-                          ],
-                        ),
+                        ],
                       ),
+                    ),
 
-                    ],
-                  ),
-                )
-            )
-        )
+                  ],
+                ),
+              )
+          )
+      )
 
     ),
   );

@@ -15,15 +15,17 @@ import 'konspekt.dart';
 class KonspektThumbnailWidget extends StatelessWidget{
 
   final Konspekt konspekt;
+  final double elevation;
   final void Function()? onTap;
 
-  const KonspektThumbnailWidget(this.konspekt, {this.onTap, super.key});
+  const KonspektThumbnailWidget(this.konspekt, {this.elevation = 0, this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) => Hero(
       tag: konspekt,
       child: SimpleButton(
-        onTap: onTap, // () => pushPage(context, builder: (context) => KonspektPage(konspekt)),
+        elevation: elevation,
+        onTap: onTap,
         color: isDark(context)?Colors.brown[400]:Colors.amber[100],
         colorEnd: isDark(context)?Colors.brown[500]:Colors.amber[200],
         borderRadius: BorderRadius.circular(AppCard.bigRadius),

@@ -11,6 +11,7 @@ Future<void> openBaseKonspektDialog({
   required String konspektName,
   final void Function()? onDuchLevelInfoTap,
   final void Function()? onDuchMechanismInfoTap,
+  double? maxWidth,
 }) async {
 
   Konspekt konspekt;
@@ -24,16 +25,19 @@ Future<void> openBaseKonspektDialog({
   await showDialog(
       context: context,
       builder: (context) => Padding(
-        padding: const EdgeInsets.all(Dimen.defMarg),
-        child: Material(
-          borderRadius: BorderRadius.circular(AppCard.bigRadius),
-          clipBehavior: Clip.hardEdge,
-          child: BaseKonspektWidget(
-            konspekt,
-            onDuchLevelInfoTap: onDuchLevelInfoTap,
-            onDuchMechanismInfoTap: onDuchMechanismInfoTap
+          padding: const EdgeInsets.all(Dimen.defMarg),
+          child: SizedBox(
+            width: maxWidth,
+            child: Material(
+                borderRadius: BorderRadius.circular(AppCard.bigRadius),
+                clipBehavior: Clip.hardEdge,
+                child: BaseKonspektWidget(
+                    konspekt,
+                    onDuchLevelInfoTap: onDuchLevelInfoTap,
+                    onDuchMechanismInfoTap: onDuchMechanismInfoTap
+                )
+            ),
           )
-        ),
       )
   );
 }

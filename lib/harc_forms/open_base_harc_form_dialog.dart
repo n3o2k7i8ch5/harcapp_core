@@ -9,6 +9,7 @@ import 'harc_form_widget.dart';
 Future<void> openBaseHarcFormDialog({
   required BuildContext context,
   required String name,
+  double? maxWidth,
 }) async {
 
   HarcForm form;
@@ -22,12 +23,15 @@ Future<void> openBaseHarcFormDialog({
   await showDialog(
       context: context,
       builder: (context) => Padding(
-        padding: const EdgeInsets.all(Dimen.defMarg),
-        child: Material(
-          borderRadius: BorderRadius.circular(AppCard.bigRadius),
-          clipBehavior: Clip.hardEdge,
-          child: BaseHarcFormWidget(form)
-        ),
+          padding: const EdgeInsets.all(Dimen.defMarg),
+          child: SizedBox(
+            width: maxWidth,
+            child: Material(
+                borderRadius: BorderRadius.circular(AppCard.bigRadius),
+                clipBehavior: Clip.hardEdge,
+                child: BaseHarcFormWidget(form)
+            ),
+          )
       )
   );
 }
