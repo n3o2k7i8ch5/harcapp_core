@@ -8,7 +8,7 @@ import 'package:harcapp_core/dimen.dart';
 
 import 'konspekt.dart';
 
-class KonspektSphereDuchMechanismsInfoWidget extends StatelessWidget{
+class KonspektSphereDuchMechanismsInfoDialog extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Material(

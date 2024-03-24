@@ -4,7 +4,7 @@ import 'package:harcapp_core/dimen.dart';
 
 import 'data.dart';
 import 'konspekt.dart';
-import 'konspekt_widget.dart';
+import 'base_konspekt_widget.dart';
 
 Future<void> openBaseKonspektDialog({
   required BuildContext context,
