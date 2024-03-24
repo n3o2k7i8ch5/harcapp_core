@@ -22,16 +22,18 @@ Future<void> openBaseHarcFormDialog({
 
   await showDialog(
       context: context,
-      builder: (context) => Padding(
-          padding: const EdgeInsets.all(Dimen.defMarg),
-          child: SizedBox(
-            width: maxWidth,
-            child: Material(
-                borderRadius: BorderRadius.circular(AppCard.bigRadius),
-                clipBehavior: Clip.hardEdge,
-                child: BaseHarcFormWidget(form)
-            ),
-          )
+      builder: (context) => Center(
+        child: Padding(
+            padding: const EdgeInsets.all(Dimen.defMarg),
+            child: SizedBox(
+              width: maxWidth,
+              child: Material(
+                  borderRadius: BorderRadius.circular(AppCard.bigRadius),
+                  clipBehavior: Clip.hardEdge,
+                  child: BaseHarcFormWidget(form)
+              ),
+            )
+        ),
       )
   );
 }

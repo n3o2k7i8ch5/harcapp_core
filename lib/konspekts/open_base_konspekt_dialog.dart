@@ -24,20 +24,22 @@ Future<void> openBaseKonspektDialog({
 
   await showDialog(
       context: context,
-      builder: (context) => Padding(
-          padding: const EdgeInsets.all(Dimen.defMarg),
-          child: SizedBox(
-            width: maxWidth,
-            child: Material(
-                borderRadius: BorderRadius.circular(AppCard.bigRadius),
-                clipBehavior: Clip.hardEdge,
-                child: BaseKonspektWidget(
-                    konspekt,
-                    onDuchLevelInfoTap: onDuchLevelInfoTap,
-                    onDuchMechanismInfoTap: onDuchMechanismInfoTap
-                )
-            ),
-          )
+      builder: (context) => Center(
+        child: Padding(
+            padding: const EdgeInsets.all(Dimen.defMarg),
+            child: SizedBox(
+              width: maxWidth,
+              child: Material(
+                  borderRadius: BorderRadius.circular(AppCard.bigRadius),
+                  clipBehavior: Clip.hardEdge,
+                  child: BaseKonspektWidget(
+                      konspekt,
+                      onDuchLevelInfoTap: onDuchLevelInfoTap,
+                      onDuchMechanismInfoTap: onDuchMechanismInfoTap
+                  )
+              ),
+            )
+        ),
       )
   );
 }
