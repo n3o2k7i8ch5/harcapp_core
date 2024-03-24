@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
+import 'package:harcapp_core/comm_widgets/meto.dart';
 import 'package:harcapp_core/comm_widgets/sliver_child_builder_separated_delegate.dart';
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
@@ -37,21 +38,21 @@ class KonspektSphereDetailWidget extends StatelessWidget{
 
       if(details.level.isNotEmpty)
         SimpleButton(
-          radius: 0,
-          padding: const EdgeInsets.all(2*Dimen.defMarg),
-          onTap: onLevelTap,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(levelName??'Poziom:', style: const AppTextStyle()),
-              const SizedBox(height: .5*Dimen.defMarg),
-              Wrap(
-                spacing: 2*Dimen.defMarg,
-                runSpacing: Dimen.defMarg,
-                children: details.level.map((l) => l.textWidget).toList(),
-              ),
-            ],
-          )
+            radius: 0,
+            padding: const EdgeInsets.all(2*Dimen.defMarg),
+            onTap: onLevelTap,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(levelName??'Poziom:', style: const AppTextStyle()),
+                const SizedBox(height: .5*Dimen.defMarg),
+                Wrap(
+                  spacing: 2*Dimen.defMarg,
+                  runSpacing: Dimen.defMarg,
+                  children: details.level.map((l) => l.textWidget).toList(),
+                ),
+              ],
+            )
         ),
 
       if(details.mechanism.isNotEmpty)
@@ -107,8 +108,8 @@ class KonspektSpheresWidget extends StatelessWidget{
 
             Padding(
                 padding: const EdgeInsets.only(
-                  top: 2*Dimen.defMarg,
-                  left: 2*Dimen.defMarg
+                    top: 2*Dimen.defMarg,
+                    left: 2*Dimen.defMarg
                 ),
                 child: Row(
                   children: [
@@ -217,37 +218,37 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
       if(widget.withAppBar)
         SliverAppBarX(
-        pinned: true,
-        stretch: true,
-        floating: false,
-        expandedHeight: MediaQuery.of(context).size.width*600/1000,
-        flexibleSpace: FlexibleSpaceBar(
-          title: AnimatedOpacity(
-            opacity: showAppBarTitle?1:0,
-            duration: const Duration(milliseconds: 300),
-            child: Text(
-                konspekt.title,
-                style: AppTextStyle(color: iconEnab_(context)),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis
-            ),
-          ),
-          background: GestureDetector(
-            onTap: () => showAppToast(context, text: 'Źródło: <b>${konspekt.coverAuthor}</b>'),
-            child: Hero(
-              tag: konspekt.coverPath,
-              child: Image(
-                image: AssetImage(konspekt.coverPath),
-                fit: BoxFit.cover,
+          pinned: true,
+          stretch: true,
+          floating: false,
+          expandedHeight: MediaQuery.of(context).size.width*600/1000,
+          flexibleSpace: FlexibleSpaceBar(
+            title: AnimatedOpacity(
+              opacity: showAppBarTitle?1:0,
+              duration: const Duration(milliseconds: 300),
+              child: Text(
+                  konspekt.title,
+                  style: AppTextStyle(color: iconEnab_(context)),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis
               ),
             ),
+            background: GestureDetector(
+              onTap: () => showAppToast(context, text: 'Źródło: <b>${konspekt.coverAuthor}</b>'),
+              child: Hero(
+                tag: konspekt.coverPath,
+                child: Image(
+                  image: AssetImage(konspekt.coverPath),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            stretchModes: const [
+              StretchMode.zoomBackground,
+              StretchMode.blurBackground
+            ],
           ),
-          stretchModes: const [
-            StretchMode.zoomBackground,
-            StretchMode.blurBackground
-          ],
         ),
-      ),
 
       SliverPadding(
         padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
@@ -346,7 +347,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
           bottom: Dimen.sideMarg,
         ),
         sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-            (context, index) => Row(
+                (context, index) => Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
@@ -458,7 +459,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             bottom: Dimen.sideMarg,
           ),
           sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                  (context, index) => Row(
+              (context, index) => Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),

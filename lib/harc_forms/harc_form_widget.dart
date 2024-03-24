@@ -6,6 +6,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/gradient_icon.dart';
+import 'package:harcapp_core/comm_widgets/meto.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
