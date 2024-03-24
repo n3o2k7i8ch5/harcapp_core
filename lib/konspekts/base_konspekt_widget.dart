@@ -156,6 +156,9 @@ class BaseKonspektWidget extends StatefulWidget{
   final bool withAppBar;
   final void Function()? onDuchLevelInfoTap;
   final void Function()? onDuchMechanismInfoTap;
+  final ScrollPhysics physics;
+  final bool shrinkWrap;
+  final Widget? leading;
 
   const BaseKonspektWidget(
       this.konspekt,
@@ -163,6 +166,9 @@ class BaseKonspektWidget extends StatefulWidget{
         this.withAppBar = true,
         required this.onDuchLevelInfoTap,
         required this.onDuchMechanismInfoTap,
+        this.physics = const BouncingScrollPhysics(),
+        this.shrinkWrap = false,
+        this.leading,
       });
 
   @override
@@ -213,7 +219,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   @override
   Widget build(BuildContext context) => CustomScrollView(
     controller: controller,
-    physics: const BouncingScrollPhysics(),
+    physics: widget.physics,
+    shrinkWrap: widget.shrinkWrap,
     slivers: [
 
       if(widget.withAppBar)
@@ -253,6 +260,9 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
       SliverPadding(
         padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
         sliver: SliverList(delegate: SliverChildListDelegate([
+
+          if(widget.leading != null)
+            widget.leading!,
 
           const SizedBox(height: Dimen.sideMarg),
 
@@ -347,7 +357,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
           bottom: Dimen.sideMarg,
         ),
         sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                (context, index) => Row(
+            (context, index) => Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
