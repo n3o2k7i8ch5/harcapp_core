@@ -7,7 +7,6 @@ import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:open_filex/open_filex.dart';
 
 enum KonspektType{
   zwyczaj, zajecia, projekt;
