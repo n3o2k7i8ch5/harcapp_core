@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
@@ -8,7 +6,6 @@ import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:open_filex/open_filex.dart';
 
 enum KonspektType{
   zwyczaj, zajecia, projekt;
@@ -159,9 +156,7 @@ class KonspektAttachment{
         case KonspektAttachmentFormat.pdf:
         case KonspektAttachmentFormat.docx:
           // TODO: make this work both on web and on android
-          OpenResult result = await openAsset('packages/harcapp_core/${assetPath}');
-          // logger.i(result.message);
-          return result.type == ResultType.done;
+          return await openAsset('packages/harcapp_core/${assetPath}');
       }
 
     }
