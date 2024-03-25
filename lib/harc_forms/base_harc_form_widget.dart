@@ -91,7 +91,6 @@ class BaseHarcFormWidgetState extends State<BaseHarcFormWidget>{
 
           const SizedBox(height: Dimen.sideMarg),
 
-
         ])),
       )
     ],
