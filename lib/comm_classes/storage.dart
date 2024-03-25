@@ -3,6 +3,7 @@ import 'dart:html' as html;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:mime/mime.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
@@ -29,7 +30,8 @@ Future<OpenResult> openAssetIO(String assetPath) async {
 
 Future<void> openAssetWeb(String assetPath) async {
   final ByteData bytes = await rootBundle.load(assetPath);
-  var blob = html.Blob([bytes.buffer.asUint8List()], 'text/plain', 'native');
+  String? mimeType = lookupMimeType(assetPath);
+  var blob = html.Blob([bytes.buffer.asUint8List()], mimeType??'text/plain', 'native');
 
   String url = html.Url.createObjectUrlFromBlob(blob);
 

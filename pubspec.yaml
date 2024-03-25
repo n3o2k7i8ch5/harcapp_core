@@ -21,6 +21,7 @@ dependencies:
   linked_scroll_controller: ^0.2.0
   logger: ^2.0.2+1
   material_design_icons_flutter: ^7.0.7296
+  mime: 1.0.5
   native_device_orientation: ^1.1.4
   oktoast: ^3.3.1
   open_filex: ^4.4.0
