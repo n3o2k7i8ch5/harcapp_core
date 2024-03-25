@@ -28,25 +28,29 @@ Future<OpenResult> openAssetIO(String assetPath) async {
   return OpenFilex.open(file.path);
 }
 
-Future<void> openAssetWeb(String assetPath) async {
+Future<void> openAssetWeb(String assetPath, {bool webOpenInNewTab = false}) async {
   final ByteData bytes = await rootBundle.load(assetPath);
   String? mimeType = lookupMimeType(assetPath);
   var blob = html.Blob([bytes.buffer.asUint8List()], mimeType??'text/plain', 'native');
 
   String url = html.Url.createObjectUrlFromBlob(blob);
 
-  html.AnchorElement()
+  html.AnchorElement anchor = html.AnchorElement()
     ..href = url
-    ..download = basename(assetPath)
-    ..click();
+    ..download = basename(assetPath);
+
+  if(webOpenInNewTab)
+    anchor.target = "_blank";
+
+  anchor.click();
 
   html.Url.revokeObjectUrl(url);
-
 }
 
-Future<bool> openAsset(String assetPath) async {
+Future<bool> openAsset(String assetPath, {bool webOpenInNewTab = false}) async {
   if(kIsWeb){
-    openAssetWeb(assetPath);
+    openAssetWeb(assetPath, webOpenInNewTab: webOpenInNewTab);
     return true;
-  } else return openAssetIO(assetPath) == ResultType.done;
+  } else
+    return openAssetIO(assetPath) == ResultType.done;
 }
