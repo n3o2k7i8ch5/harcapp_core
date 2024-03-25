@@ -159,7 +159,7 @@ class KonspektAttachment{
         case KonspektAttachmentFormat.pdf:
         case KonspektAttachmentFormat.docx:
           // TODO: make this work both on web and on android
-          OpenResult result = await openAsset(assetPath);
+          OpenResult result = await openAsset('packages/harcapp_core/${assetPath}');
           // logger.i(result.message);
           return result.type == ResultType.done;
       }

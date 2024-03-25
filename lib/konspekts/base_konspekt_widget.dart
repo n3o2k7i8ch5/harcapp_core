@@ -377,7 +377,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               bottom: Dimen.sideMarg,
             ),
             sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                    (context, index) => Row(
+                (context, index) => Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
@@ -491,7 +491,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 bottom: Dimen.sideMarg,
               ),
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                      (context, index) => Row(
+                  (context, index) => Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),

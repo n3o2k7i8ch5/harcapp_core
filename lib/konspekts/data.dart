@@ -165,7 +165,6 @@ List<Konspekt> allKonspekts = [
         )
       },
 
-
       metos: [Meto.wedro],
       coverAuthor: 'freepik.com (freepik)',
       author: MIKOLAJ_WITKOWSKI,
