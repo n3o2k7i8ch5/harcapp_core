@@ -291,7 +291,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 KonspektHtmlWidget(
                     konspekt,
                     '<b>W skrócie:</b> ${konspekt.summary!}',
-                    maxRelatedDialogWidth: widget.maxRelatedDialogWidth
+                    maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
+                    textSize: Dimen.textSizeBig,
                 ),
 
               const SizedBox(height: Dimen.sideMarg),

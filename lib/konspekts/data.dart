@@ -356,7 +356,7 @@ List<Konspekt> allKonspekts = [
       ],
 
 
-      summary: 'Harcerze bez udziału kadry organizują biwak, na który jadą i ponoszą wszystkie konsekwencje swoich niedociągnięć.',
+      summary: 'Harcerze bez udziału kadry organizują biwak, na który jadą (kadra jedzie jako opieka) i ponoszą wszystkie konsekwencje swoich niedociągnięć.',
       description: 'Forma polega na przeprowadzeniu biwaku drużyny (lub zastępu), tyle że z niemal zerowym zaangażowaniem kadry drużyny. Rola kadry powinna się ograniczyć do przeprowadzenia zbiórki, podczas której pomogą ustalić w drużynie (lub zastępie), co trzeba zrobić, by zorganizować biwak oraz pomogą rozdzielić zadania i wybrać spośród uczestników głównego koordynatora biwaku.'
           '<br>'
           '<br>Forma swoje główne walory czerpie z tego, że liczba i poziom skomplikowania problemów, z którymi uczestnicy się zmierzą jest ściśle zależna od tego jak skutecznie zorganizują biwak jako grupa:'
@@ -409,14 +409,14 @@ List<Konspekt> allKonspekts = [
             onTap: (context) => openAssetGalleryViewer(
                 context,
                 [
-                  ('assets/konspekty/budowanie_kapliczki/kapliczka_1.webp', ''),
-                  ('assets/konspekty/budowanie_kapliczki/kapliczka_2.webp', ''),
-                  ('assets/konspekty/budowanie_kapliczki/kapliczka_3.webp', ''),
-                  ('assets/konspekty/budowanie_kapliczki/kapliczka_4.webp', ''),
-                  ('assets/konspekty/budowanie_kapliczki/kapliczka_5.webp', ''),
-                  ('assets/konspekty/budowanie_kapliczki/kapliczka_6.webp', ''),
-                  ('assets/konspekty/budowanie_kapliczki/kapliczka_7.webp', ''),
-                  ('assets/konspekty/budowanie_kapliczki/kapliczka_8.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_1.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_2.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_3.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_4.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_5.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_6.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_7.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_8.webp', ''),
                 ]
             )
         ),
@@ -463,7 +463,7 @@ List<Konspekt> allKonspekts = [
         const KonspektStep(
             title: 'Budowa',
             duration: Duration(hours: 6),
-            activeForm: false,
+            activeForm: true,
             content: 'Uczestnicy mając do dyspozycji dostępne materiały (drewno, zaprawę, kamienie) i narzędzia budują kapliczkę.'
         ),
 
@@ -516,17 +516,17 @@ List<Konspekt> allKonspekts = [
             onTap: (context) => openAssetGalleryViewer(
                 context,
                 [
-                  ('assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_1.webp', ''),
-                  ('assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_2.webp', ''),
-                  ('assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_3.webp', ''),
-                  ('assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_4.webp', ''),
-                  ('assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_5.webp', ''),
-                  ('assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_6.webp', ''),
-                  ('assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_7.webp', ''),
-                  ('assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_8.webp', ''),
-                  ('assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_9.webp', ''),
-                  ('assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_10.webp', ''),
-                  ('assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_11.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_1.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_2.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_3.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_4.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_5.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_6.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_7.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_8.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_9.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_10.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_11.webp', ''),
                 ]
             )
         ),
@@ -605,7 +605,7 @@ List<Konspekt> allKonspekts = [
       aims: [
         aimHartDuchaZimno
       ],
-      summary: 'Drużyna podczas wyjazdu myje się w jeziorze.',
+      summary: 'Drużyna podczas wyjazdu myje się w jeziorze zamiast w cywilizowanych warunkach.',
 
       description: 'Podczas formy wyjazdowej (obóz lub zimowisko) drużyna aby się umyć kąpie się w jeziorze. Jeziora w Polsce są wieczorami chłodne co kształtuje hart ducha. Forma ta pozwala także zaobserwować prowadzącemu łatwość, z jaką harcerze przełamują się i wskakują do wody, działa przy tym efekt wzajemności oddziaływań.'
           '<br>'
@@ -632,6 +632,7 @@ List<Konspekt> allKonspekts = [
         aimHartDuchaWedrowanie,
         aimPraktykaModlitwy
       ],
+      summary: 'Uczestnicy przechodzą w nocy drogę krzyżową rozłożoną na dystansie kilkudziesięciu kilometrów.',
       description: 'Uczestnicy przechodzą w nocy drogę krzyżową rozłożoną na dystansie kilkudziesięciu kilometrów. Poza-harcerski zasięg formy jest także korzystnym z wychowawczego punktu widzenia doświadczeniem powszechności Kościoła.'
           '<br>'
           '<br>Trasa kończy się Mszą Świętą u celu w kościele. Warto poruszać się grupami nie większymi niż zastęp. Do każdej stacji przygotowane są rozważania.'
@@ -661,7 +662,6 @@ List<Konspekt> allKonspekts = [
       'Poprawa umiejętności analizy i dyskryminowania między informacjami ważnymi i nieważnymi.',
     ],
     summary: 'Harcerze dowiadują się, że dokonano porwania. Zdobywają liczne informacje na ten temat, po czym ich zadaniem jest dokonać ich syntezy i ustalić tożsamość porywaczy.',
-
 
     intro: 'Harcerze dowiadują się, że <b>nad ranem</b> w <b>weekend</b> dokonano porwania ważnej osoby. Policja ustaliła już, że za porwaniem stoi jeden z działających w okolicy gangów.'
         '<br>'
@@ -729,7 +729,6 @@ List<Konspekt> allKonspekts = [
       author: DANIEL_IWANICKI,
       aims: [],
 
-
       description: 'Prowadzący przygotowuje i opowiada (najlepiej przy ognisku) gawędę o wybranym świętym, którego postawa lub inne cechy są dla uczestników w szczególny sposób godne naśladowania.'
           '<br>'
           '<br>Kluczowe jest, by opowiedzieć o bohaterze i realiach jego życia w sposób aktualnie zrozumiały, aby uczestnicy formy mogli się z nim utożsamić.',
@@ -768,6 +767,7 @@ List<Konspekt> allKonspekts = [
                 '\nWydrukowany załącznik należy pociąć na części i zagiąć we wskazanych miejscach tak, by dolna część każdej wyciętej części kartki przykrywała treść kroku, lecz by odsłaniała nagłówek.'
         ),
       ],
+      summary: '',
       intro: 'Forma nie przygotowuje do spowiedzi. Jest to paradoksalna forma medytacyjna - skupiająca się z jednej strony na emocjach celem przejścia do obiektywnej oceny czynów. Szczegóły dotyczące formy można znaleźć na <a href="jezuici.pl/rachunek">tej stronie</a>.'
           '<br>'
           '<br>Każdy z uczestników otrzymuje zestaw pięciu kartek przygotowanych zgodnie z załącznikiem <a href="kroki@attachment">kroki</a>.'
@@ -1356,6 +1356,8 @@ List<Konspekt> allKonspekts = [
         'Kształtowanie u uczestników hartu ducha'
       ],
       description: 'Uczestnicy dobrowolnie wstrzymują się od jedzenia przez określony czas (np. przez dobę) w otoczeniu osób jedzących. Celem formy jest kształtowanie hartu ducha i siły woli - jest, przykładowo, częścią sprawności “trzy pióra”.'
+          '<br>'
+          '<br>Post nie musi dotyczyć całkowitego powstrzymania się od jedzenia. Może np. być realizowany poprzez jedzenie jedynie warzyw, jedzenie jedynie chleba, albo niejedzenie cukru.'
   ),
 
 
