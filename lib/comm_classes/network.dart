@@ -10,12 +10,9 @@ Future<bool> isNetworkAvailable() async {
 }
 
 
-addConnectionListener(Function(bool hasConnection) onChanged){
-  return Connectivity().onConnectivityChanged.listen(
-          (ConnectivityResult result) =>
-              onChanged(result != ConnectivityResult.none)
-  );
-}
+addConnectionListener(Function(bool hasConnection) onChanged) => Connectivity().onConnectivityChanged.listen(
+    (List<ConnectivityResult> result) => onChanged(result.isNotEmpty)
+);
 
 class ConnectivityProvider extends ChangeNotifier{
 
@@ -39,15 +36,15 @@ class ConnectivityProvider extends ChangeNotifier{
   ConnectivityProvider(){
     _connected = true;
     _onChangedListeners = [];
-    Connectivity().checkConnectivity().then((ConnectivityResult value){
-      bool _connectedNew = value != ConnectivityResult.none;
+    Connectivity().checkConnectivity().then((List<ConnectivityResult> value){
+      bool _connectedNew = value.isNotEmpty;
       if(_connectedNew != _connected){
         _connected = _connectedNew;
         notify();
       }
     });
-    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      _connected = result != ConnectivityResult.none;
+    Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
+      _connected = result.isNotEmpty;
       notify();
     });
   }
