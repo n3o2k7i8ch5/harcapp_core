@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 
-Future<OpenResult> openAsset(String assetPath, {bool webOpenInNewTab = false}) async {
+Future<OpenResult> openAssetImpl(String assetPath, {bool webOpenInNewTab = false}) async {
   final ByteData bytes = await rootBundle.load(assetPath);
   final Uint8List list = bytes.buffer.asUint8List();
 
