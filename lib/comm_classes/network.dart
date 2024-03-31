@@ -4,14 +4,14 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-Future<bool> isNetworkAvailable() async {
-  var result = await Connectivity().checkConnectivity();
-  return result != ConnectivityResult.none;
-}
-
 bool __isConnected(List<ConnectivityResult> values) => values.length != 1 || !values.contains(ConnectivityResult.none);
 
-void addConnectionListener(Function(bool hasConnection) onChanged) => Connectivity().onConnectivityChanged.listen(
+Future<bool> isNetworkAvailable() async {
+  var result = await Connectivity().checkConnectivity();
+  return __isConnected(result);
+}
+
+StreamSubscription<List<ConnectivityResult>> addConnectionListener(void Function(bool hasConnection) onChanged) => Connectivity().onConnectivityChanged.listen(
     (List<ConnectivityResult> result) => onChanged(__isConnected(result))
 );
 
