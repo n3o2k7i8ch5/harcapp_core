@@ -44,7 +44,7 @@ class CurrentItemProvider extends ChangeNotifier{
     _song = song;
 
     titleController = TextEditingController(text: song.title);
-    hiddenTitlesController = MultiTextFieldController(texts: song.hidTitles);
+    hiddenTitlesController = MultiTextFieldController(texts: song.hidTitles, minCount: 0);
     authorsController = MultiTextFieldController(texts: song.authors);
     composersController = MultiTextFieldController(texts: song.composers);
     performersController = MultiTextFieldController(texts: song.performers);
