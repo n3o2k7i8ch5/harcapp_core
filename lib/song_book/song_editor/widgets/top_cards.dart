@@ -38,8 +38,7 @@ class TopCards extends StatelessWidget{
     this.onChangedReleaseDate,
   });
 
-  bool isLastHidTitleEmpty(CurrentItemProvider currItemProv) => 
-      currItemProv.hidTitles.isEmpty || currItemProv.hidTitles.last.isEmpty;
+  bool isLastHidTitleEmpty(CurrentItemProvider currItemProv) => currItemProv.hiddenTitlesController.isLastEmpty;
   
   @override
   Widget build(BuildContext context) => Consumer<CurrentItemProvider>(
@@ -74,21 +73,17 @@ class TopCards extends StatelessWidget{
                     ),
 
                     AnimatedChildSlider(
-                      index: currItemProv.hidTitles.isEmpty?0:1,
+                      index: currItemProv.hiddenTitlesController.isEmpty?0:1,
                       children: [
                         IconButton(
                           icon: Icon(MdiIcons.plus),
-                          onPressed: (){
-                            List<String> hidTitles = currItemProv.addHidTitle();
-                            onChangedHiddenTitles?.call(hidTitles);
-                          },
+                          onPressed: () => onChangedHiddenTitles?.call(currItemProv.addHidTitle()),
                         ),
 
                         IconButton(
                           icon: Icon(MdiIcons.informationOutline),
-                          onPressed: (){
-                            AppScaffold.showMessage(context, 'Tytuły ukryte są dodatkowymi kluczami wyszukwiania piosneki.');
-                          },
+                          onPressed: () =>
+                            AppScaffold.showMessage(context, 'Tytuły ukryte są dodatkowymi kluczami wyszukwiania piosneki.'),
                         )
                       ],
                     )
@@ -102,7 +97,7 @@ class TopCards extends StatelessWidget{
 
                     ImplicitlyAnimatedList<TextEditingController>(
                       physics: BouncingScrollPhysics(),
-                      items: currItemProv.hiddenTitlesControllers,
+                      items: currItemProv.hiddenTitlesController.controllers,
                       areItemsTheSame: (a, b) => a.hashCode == b.hashCode,
 
                       itemBuilder: (context, animation, item, index) => SizeFadeTransition(
@@ -111,14 +106,10 @@ class TopCards extends StatelessWidget{
                         animation: animation,
                         child: AddTextWidget(
                           item,
-                          onTextChanged: (text){
-                            List<String> hidTitles = currItemProv.editHidTitle(index, text);
-                            onChangedHiddenTitles?.call(hidTitles);
-                          },
-                          onRemove: (){
-                            List<String> hidTitles = currItemProv.removeHidTitleAt(index);
-                            onChangedHiddenTitles?.call(hidTitles);
-                          },
+                          onTextChanged: (text) =>
+                              onChangedHiddenTitles?.call(currItemProv.editHidTitle(index, text)),
+                          onRemove: () =>
+                            onChangedHiddenTitles?.call(currItemProv.removeHidTitleAt(index)),
                         ),
                       ),
 
@@ -135,9 +126,15 @@ class TopCards extends StatelessWidget{
                     AnimatedContainer(
                         duration: Duration(milliseconds: 500),
                         curve: Curves.easeInOut,
-                        height: currItemProv.hidTitles.isEmpty?0:Dimen.iconFootprint + Dimen.iconMarg,
+                        height: currItemProv.hiddenTitlesController.isEmpty?
+                        0:
+                        Dimen.iconFootprint + Dimen.iconMarg,
+
                         child: AnimatedOpacity(
-                          opacity: currItemProv.hidTitles.isEmpty?0:1,
+                          opacity: currItemProv.hiddenTitlesController.isEmpty?
+                          0:
+                          1,
+
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
                           child: SimpleButton.from(

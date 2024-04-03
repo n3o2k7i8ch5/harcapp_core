@@ -15,7 +15,7 @@ class CurrentItemProvider extends ChangeNotifier{
   late SongRaw _song;
 
   late TextEditingController titleController;
-  late List<TextEditingController> hiddenTitlesControllers;
+  late MultiTextFieldController hiddenTitlesController;
   late MultiTextFieldController authorsController;
   late MultiTextFieldController composersController;
   late MultiTextFieldController performersController;
@@ -26,7 +26,7 @@ class CurrentItemProvider extends ChangeNotifier{
 
   void _updateControllers(SongRaw song){
     titleController.text = song.title;
-    hiddenTitlesControllers = song.hidTitles.map((hidTitle) => TextEditingController(text: hidTitle)).toList();
+    hiddenTitlesController.texts = song.hidTitles;
     authorsController.texts = song.authors;
     composersController.texts = song.composers;
     performersController.texts = song.performers;
@@ -44,7 +44,7 @@ class CurrentItemProvider extends ChangeNotifier{
     _song = song;
 
     titleController = TextEditingController(text: song.title);
-    hiddenTitlesControllers = song.hidTitles.map((hidTitle) => TextEditingController(text: hidTitle)).toList();
+    hiddenTitlesController = MultiTextFieldController(texts: song.hidTitles);
     authorsController = MultiTextFieldController(texts: song.authors);
     composersController = MultiTextFieldController(texts: song.composers);
     performersController = MultiTextFieldController(texts: song.performers);
@@ -86,28 +86,27 @@ class CurrentItemProvider extends ChangeNotifier{
     if(notify) notifyListeners();
   }
 
-  List<String> get hidTitles => _song.hidTitles;
   setHidTitles(List<String> value, {bool notify = true}){
     _song.hidTitles = value;
     if(notify) notifyListeners();
   }
 
-  List<String> addHidTitle({TextEditingController? controller}){
-    hiddenTitlesControllers.add(controller??TextEditingController());
+  List<String> addHidTitle({String? value}){
+    hiddenTitlesController.addText(value??'');
     notifyListeners();
-    return hiddenTitlesControllers.map((controller) => controller.text).toList();
+    return hiddenTitlesController.texts;
   }
 
   List<String> editHidTitle(int index, String text, {bool updateController = false}){
-    if(updateController) hiddenTitlesControllers[index].text = text;
+    if(updateController) hiddenTitlesController[index].text = text;
     notifyListeners();
-    return hiddenTitlesControllers.map((controller) => controller.text).toList();
+    return hiddenTitlesController.texts;
   }
 
   List<String> removeHidTitleAt(int index){
-    hiddenTitlesControllers.removeAt(index);
+    hiddenTitlesController.removeAt(index);
     notifyListeners();
-    return hiddenTitlesControllers.map((controller) => controller.text).toList();
+    return hiddenTitlesController.texts;
   }
 
   setAuthors(List<String> value, {bool notify = true}){

@@ -11,11 +11,15 @@ Future<bool> isNetworkAvailable() async {
   return __isConnected(result);
 }
 
-StreamSubscription<List<ConnectivityResult>> addConnectionListener(void Function(bool hasConnection) onChanged) => Connectivity().onConnectivityChanged.listen(
+StreamSubscription<List<ConnectivityResult>> addConnectionListener(
+    void Function(bool hasConnection) onChanged
+) => Connectivity().onConnectivityChanged.listen(
     (List<ConnectivityResult> result) => onChanged(__isConnected(result))
 );
 
 class ConnectivityProvider extends ChangeNotifier{
+
+  static ConnectivityProvider of(BuildContext context) => Provider.of<ConnectivityProvider>(context, listen: false);
 
   late bool _connected;
 
@@ -26,13 +30,11 @@ class ConnectivityProvider extends ChangeNotifier{
   void addChangedListeners_(void Function(bool) listener) => _onChangedListeners.add(listener);
   void removeChangedListeners_(void Function(bool) listener) => _onChangedListeners.remove(listener);
 
-  static void addChangedListeners(BuildContext context, void Function(bool) listener){
-    Provider.of<ConnectivityProvider>(context, listen: false).addChangedListeners_(listener);
-  }
+  static void addChangedListeners(BuildContext context, void Function(bool) listener) =>
+    ConnectivityProvider.of(context).addChangedListeners_(listener);
 
-  static void removeChangedListeners(BuildContext context, void Function(bool) listener){
-    Provider.of<ConnectivityProvider>(context, listen: false).removeChangedListeners_(listener);
-  }
+  static void removeChangedListeners(BuildContext context, void Function(bool) listener) =>
+    ConnectivityProvider.of(context).removeChangedListeners_(listener);
 
   ConnectivityProvider(){
     _connected = true;

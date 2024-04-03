@@ -6,64 +6,66 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 class MultiTextFieldController{
 
-  TextEditingController operator [](int index) => _ctrls[index];
+  TextEditingController operator [](int index) => _controllers[index];
+
   operator []=(int index, String value){
-    _ctrls[index].text = value;
+    _controllers[index].text = value;
     for(void Function(int, String) listener in _listeners)
       listener(index, value);
   }
-  int get length => _ctrls.length;
-  String get last => _ctrls[length-1].text;
-  bool get isEmpty => _ctrls.isEmpty;
-  bool get isNotEmpty => _ctrls.isNotEmpty;
+
+  List<TextEditingController> get controllers => _controllers;
+
+  int get length => _controllers.length;
+  String get last => _controllers[length-1].text;
+  bool get isEmpty => _controllers.isEmpty || _controllers.first.text.isEmpty;
+  bool get isNotEmpty => _controllers.isNotEmpty && _controllers.first.text.isNotEmpty;
+  bool get isLastEmpty => _controllers.isEmpty || _controllers.last.text.isEmpty;
 
   int minCount;
 
-  late List<TextEditingController> _ctrls;
+  late List<TextEditingController> _controllers;
 
-  List<String> get texts => _ctrls.map((ctrl) => ctrl.text).toList();
+  List<String> get texts => _controllers.map((ctrl) => ctrl.text).toList();
   set texts(List<String> values){
     int i;
     for(i=0; i<values.length; i++)
-      if(i < _ctrls.length)
-        _ctrls[i].text = values[i];
+      if(i < _controllers.length)
+        _controllers[i].text = values[i];
       else
-        _ctrls.add(TextEditingController(text: values[i]));
+        _controllers.add(TextEditingController(text: values[i]));
 
-    while(i<_ctrls.length)
-      _ctrls.removeAt(i);
+    while(i<_controllers.length)
+      _controllers.removeAt(i);
 
-    while(_ctrls.length < minCount)
-      _ctrls.add(TextEditingController(text: ''));
-
+    while(_controllers.length < minCount)
+      _controllers.add(TextEditingController(text: ''));
   }
-
 
   late List<void Function(int, String)> _listeners;
   late List<void Function(List<String>)> _anyListeners;
 
   MultiTextFieldController({List<String>? texts, this.minCount = 1}){
-    if(texts == null || texts.length == 0)
-      texts = [''];
-    this._ctrls = texts.map((text) => TextEditingController(text: text)).toList();
+    if(texts == null || texts.length == 0) texts = [''];
+    this._controllers = texts.map((text) => TextEditingController(text: text)).toList();
     _listeners = [];
     _anyListeners = [];
   }
 
-  removeAt(int index){
-    _ctrls.removeAt(index);
+  void removeAt(int index){
+    _controllers.removeAt(index);
     _callOnChanged(index);
     _callOnAnyChanged();
   }
 
-  addText(String text){
-    _ctrls.add(TextEditingController(text: text));
-    _callOnChanged(_ctrls.length-1);
+  void addText(String text){
+    _controllers.add(TextEditingController(text: text));
+    _callOnChanged(_controllers.length-1);
     _callOnAnyChanged();
   }
 
-  setText(int index, String text){
-    _ctrls[index].text = text;
+  void setText(int index, String text){
+    _controllers[index].text = text;
     _callOnChanged(index);
     _callOnAnyChanged();
   }
@@ -76,7 +78,7 @@ class MultiTextFieldController{
 
   void _callOnChanged(int index){
     for(void Function(int, String) listener in _listeners)
-      listener(index, _ctrls[index].text);
+      listener(index, _controllers[index].text);
   }
 
   void _callOnAnyChanged(){
@@ -111,7 +113,22 @@ class MultiTextField extends StatefulWidget{
   final void Function(int)? onRemoved;
   final bool enabled;
 
-  const MultiTextField({this.controller, this.style, this.hintStyle, this.expanded = false, this.hint, this.linear = true, this.accentColor, this.addIcon, this.textCapitalization = TextCapitalization.none, this.textAlignVertical, this.onAnyChanged, this.onChanged, this.onRemoved, this.enabled = true});
+  const MultiTextField({
+    this.controller, 
+    this.style, 
+    this.hintStyle, 
+    this.expanded = false, 
+    this.hint, 
+    this.linear = true, 
+    this.accentColor,
+    this.addIcon, 
+    this.textCapitalization = TextCapitalization.none, 
+    this.textAlignVertical, 
+    this.onAnyChanged,
+    this.onChanged, 
+    this.onRemoved, 
+    this.enabled = true
+  });
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -121,11 +138,11 @@ class MultiTextField extends StatefulWidget{
 class MultiTextFieldState extends State<MultiTextField>{
 
   MultiTextFieldController? _controller;
-  MultiTextFieldController? get controller => widget.controller??_controller;
+  MultiTextFieldController get controller => widget.controller??_controller!;
   TextStyle? get style => widget.style;
   TextStyle? get hintStyle => widget.hintStyle;
 
-  int get minCount => controller!.minCount;
+  int get minCount => controller.minCount;
   bool get expanded => widget.expanded;
   String? get hint => widget.hint;
   bool get linear => widget.linear;
@@ -139,9 +156,9 @@ class MultiTextFieldState extends State<MultiTextField>{
   void Function(int)? get onRemoved => widget.onRemoved;
   bool get enabled => widget.enabled;
 
-  void _callOnChanged(int index) => onChanged!(index, controller![index].text);
+  void _callOnChanged(int index) => onChanged!(index, controller[index].text);
 
-  void _callOnAnyChanged() => onAnyChanged!(controller!.texts);
+  void _callOnAnyChanged() => onAnyChanged!(controller.texts);
 
   @override
   void initState() {
@@ -155,35 +172,35 @@ class MultiTextFieldState extends State<MultiTextField>{
   Widget build(BuildContext context) {
     
     List<Widget> children = [];
-    for(int i=0; i<controller!.length; i++) {
+    for(int i=0; i<controller.length; i++) {
       children.add(Item(
-        controller: controller![i],
+        controller: controller[i],
         style: style,
         hintStyle: hintStyle,
         hint: hint,
         textCapitalization: textCapitalization,
         textAlignVertical: textAlignVertical,
-        removable: controller!.length>minCount,
+        removable: controller.length>minCount,
         onChanged: (text){
-          if(i == controller!.length-1)
+          if(i == controller.length-1)
             setState(() {});
 
           _callOnChanged(i);
-          controller!._callOnChanged(i);
+          controller._callOnChanged(i);
           _callOnAnyChanged();
-          controller!._callOnAnyChanged();
+          controller._callOnAnyChanged();
         },
         onRemoveTap: () => setState((){
-          controller!.removeAt(i);
+          controller.removeAt(i);
           onRemoved?.call(i);
 
           _callOnAnyChanged();
-          controller!._callOnAnyChanged();
+          controller._callOnAnyChanged();
         }),
         enabled: enabled,
       ));
 
-      if(linear && i < controller!.length-1)
+      if(linear && i < controller.length-1)
         children.add(SizedBox(width: Dimen.defMarg));
     }
 
@@ -192,20 +209,20 @@ class MultiTextFieldState extends State<MultiTextField>{
       icon: Icon(
         addIcon??MultiTextField.defAddIcon,
         color:
-        controller!.isNotEmpty && controller!.last.isEmpty?
+        controller.isNotEmpty && controller.last.isEmpty?
         iconDisab_(context):
         accentColor,
       ),
       onPressed:
-      controller!.isNotEmpty && controller!.last.isEmpty?
+      controller.isNotEmpty && controller.last.isEmpty?
       null:
           () => setState((){
         String text = '';
-        controller!.addText(text);
-        _callOnChanged(controller!.length-1);
-        controller!._callOnChanged(controller!.length-1);
+        controller.addText(text);
+        _callOnChanged(controller.length-1);
+        controller._callOnChanged(controller.length-1);
         _callOnAnyChanged();
-        controller!._callOnAnyChanged();
+        controller._callOnAnyChanged();
       }),
     ):Container();
 
@@ -234,13 +251,13 @@ class MultiTextFieldState extends State<MultiTextField>{
         else
           return scrollView;
       });
-    else
-      return Wrap(
-        crossAxisAlignment: WrapCrossAlignment.start,
-        children: children,
-        runSpacing: Dimen.defMarg,
-        spacing: Dimen.defMarg,
-      );
+    
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.start,
+      children: children,
+      runSpacing: Dimen.defMarg,
+      spacing: Dimen.defMarg,
+    );
   }
 }
 
@@ -270,7 +287,7 @@ class ItemState extends State<Item>{
 
   static const double iconSize = 20.0;
 
-  FocusNode? focusNode;
+  late FocusNode focusNode;
 
   TextEditingController get controller => widget.controller;
   TextStyle? get style => widget.style;
@@ -288,8 +305,7 @@ class ItemState extends State<Item>{
   @override
   void initState() {
     focusNode = FocusNode();
-    focusNode!.addListener(() =>
-        setState(() => selected = focusNode!.hasFocus));
+    focusNode.addListener(() => setState(() => selected = focusNode.hasFocus));
 
     selected = false;
     super.initState();
@@ -340,7 +356,7 @@ class ItemState extends State<Item>{
               GestureDetector(
                 onTap: (){
                   setState(() => selected = true);
-                  focusNode!.requestFocus();
+                  focusNode.requestFocus();
                 },
                 child: Text(
                   controller.text.isEmpty?hint!:controller.text,
@@ -358,12 +374,12 @@ class ItemState extends State<Item>{
             clipBehavior: Clip.none,
           )),
 
-          if(focusNode!.hasFocus && enabled)
+          if(focusNode.hasFocus && enabled)
             IconButton(
               icon: Icon(MdiIcons.check, size: iconSize),
               onPressed: (){
                 setState(() => selected = false);
-                focusNode!.unfocus();
+                focusNode.unfocus();
               },
             )
           else if(removable && enabled)
