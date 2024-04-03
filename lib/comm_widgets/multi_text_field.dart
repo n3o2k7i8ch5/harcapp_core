@@ -18,8 +18,8 @@ class MultiTextFieldController{
 
   int get length => _controllers.length;
   String get last => _controllers[length-1].text;
-  bool get isEmpty => _controllers.isEmpty || _controllers.first.text.isEmpty;
-  bool get isNotEmpty => _controllers.isNotEmpty && _controllers.first.text.isNotEmpty;
+  bool get isEmpty => _controllers.isEmpty || (_controllers.length == 1 && _controllers.first.text.isEmpty);
+  bool get isNotEmpty => !isEmpty;
   bool get isLastEmpty => _controllers.isEmpty || _controllers.last.text.isEmpty;
 
   int minCount;
