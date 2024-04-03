@@ -76,17 +76,23 @@ class CurrentItemProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  setLclId(String value, {bool notify = true}){
+  String setLclIdFromTitleAndPerformer({bool withPerformer = true, bool notify = true}){
+    String newLclId = (song.isConfid?'oc!_':'o!_') + song.generateFileName(withPerformer: withPerformer);
+    setLclId(newLclId, notify: notify);
+    return newLclId;
+  }
+
+  void setLclId(String value, {bool notify = true}){
     _song.lclId = value;
     if(notify) notifyListeners();
   }
 
-  setTitle(String value, {bool notify = true}){
+  void setTitle(String value, {bool notify = true}){
     _song.title = value;
     if(notify) notifyListeners();
   }
 
-  setHidTitles(List<String> value, {bool notify = true}){
+  void setHidTitles(List<String> value, {bool notify = true}){
     _song.hidTitles = value;
     if(notify) notifyListeners();
   }
