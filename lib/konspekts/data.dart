@@ -655,7 +655,7 @@ List<Konspekt> allKonspekts = [
     metos: [Meto.harc, Meto.hs],
     coverAuthor: 'freepik.com (vector_corp)',
     author: JULIA_JAROSZ,
-    duration: Duration(hours: 3),
+    customDuration: Duration(hours: 3),
     aims: [
       'Poprawa umiejętności pracy w zespole i przyjmowania potrzebnych w zespole ról.',
       'Poprawa umiejętności koordynowania działań w zespole.',
@@ -767,12 +767,12 @@ List<Konspekt> allKonspekts = [
                 '\nWydrukowany załącznik należy pociąć na części i zagiąć we wskazanych miejscach tak, by dolna część każdej wyciętej części kartki przykrywała treść kroku, lecz by odsłaniała nagłówek.'
         ),
       ],
-      summary: '',
+      summary: 'Forma medytacyjna polegająca na refleksji nad swoimi emocjami celem obiektywnej oceny swoich czynów.',
       intro: 'Forma nie przygotowuje do spowiedzi. Jest to paradoksalna forma medytacyjna - skupiająca się z jednej strony na emocjach celem przejścia do obiektywnej oceny czynów. Szczegóły dotyczące formy można znaleźć na <a href="jezuici.pl/rachunek">tej stronie</a>.'
           '<br>'
           '<br>Każdy z uczestników otrzymuje zestaw pięciu kartek przygotowanych zgodnie z załącznikiem <a href="kroki@attachment">kroki</a>.'
           '<br>'
-          '<br>Każda osoba musi znaleźć ustronne miejsce, gdzie będzie mogła w spokoju pomyśleć bez rozpraszania swojej uwagi. Można również udać się na spacer.'
+          '<br>Każdy uczestnik znajduje ustronne miejsce, gdzie może w spokoju pomyśleć bez rozpraszania swojej uwagi. Może również udać się na spacer.'
           '<br>'
           '<br>Harcerze otwierają kartkę z pierwszym krokiem, czytają ją i przez kolejne 15 minut wykonują zapisane polecenie. Gdy czas ten upłynie, przechodzą do kolejnego kroku, nad którym również spędzają 15 minut. Proces ten jest powtarzany analogicznie dla pozostałych kroków.',
       steps: [
@@ -839,7 +839,7 @@ List<Konspekt> allKonspekts = [
         'Normalizacja spraw wiary jako kwestii otwartej i wspólnej',
         'Stworzenie możliwości znalezienia potencjalnego kapelana'
       ],
-      duration: Duration(hours: 2),
+      customDuration: Duration(hours: 2),
       description: 'Forma polega na wspólnym, okresowym (np. co drugi tydzień lub raz na miesiąc) wyjściu kadrą drużyny (drużynowy, przyboczni, zastępowi) na mszę. Forma ma sens tylko, jeśli relacje w drużynie są ku temu stosowne.'
           '<br>'
           '<br>Sens formy polega przede wszystkim na wyniesieniu religii ze sfery “prywatnej” to “wspólnej” oraz na możliwości zbudowania wokół formy tradycji (gadanie o wrażeniach po mszy na kebaba, frytach, lodach - np. za fundusze drużyny).'
@@ -863,7 +863,7 @@ List<Konspekt> allKonspekts = [
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
       author: DANIEL_IWANICKI,
-      duration: Duration(hours: 2),
+      customDuration: Duration(hours: 2),
       aims: [
         'Utrwalenie wśród uczestników treści Prawa Harcerskiego',
         'Lepsze zrozumienie przez uczestników Prawa Harcerskiego'
@@ -889,7 +889,7 @@ List<Konspekt> allKonspekts = [
       metos: [Meto.zuch],
       coverAuthor: 'Daniel Iwanicki',
       author: DANIEL_IWANICKI,
-      duration: Duration(hours: 2),
+      customDuration: Duration(hours: 2),
       aims: [
         'Utrwalenie wśród uczestników treści Prawa Zucha',
         'Lepsze zrozumienie przez uczestników Prawa Zucha'
@@ -950,7 +950,7 @@ List<Konspekt> allKonspekts = [
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (mengsilinxi)',
       author: DANIEL_IWANICKI,
-      duration: Duration(minutes: 90),
+      customDuration: Duration(minutes: 90),
       aims: [
         'Refleksja nad historiami i wynikającymi z nich wartościami i postawami w piosenkach.',
       ],
@@ -1402,7 +1402,7 @@ List<Konspekt> allKonspekts = [
     metos: [Meto.hs, Meto.wedro],
     coverAuthor: 'freepik.com (vectorpouch)',
     author: DANIEL_IWANICKI,
-    duration: Duration(minutes: 4 * 20 + 30),
+    customDuration: Duration(minutes: 4 * 20 + 30),
     aims: [
       'Refleksja nad poziomem aksjomatycznym swojej duchowości',
     ],
@@ -1419,7 +1419,7 @@ List<Konspekt> allKonspekts = [
     summary: 'Uczestnicy indywidualnie i w ciszy podejmują refleksję nad pytaniami dotyczącymi sensu ich życia. Po zakończeniu podsumowują je między sobą.',
     description: 'Harcerze otrzymują wydrukowane i pocięte pytania z załącznika <a href="pytania@attachment">pytania</a>.'
         '<br>'
-        '<br>Każda osoba musi znaleźć ustronne miejsce, gdzie będzie mogła w spokoju pomyśleć bez rozpraszania swojej uwagi. Można również udać się na spacer.'
+        '<br>Każdy uczestnik znajduje ustronne miejsce, gdzie może w spokoju pomyśleć bez rozpraszania swojej uwagi. Może również udać się na spacer.'
         '<br>'
         '<br>Harcerze otwierają pierwsze pytanie, czytają je i przez kolejne 20 minut podejmują nad nim refleksję. Gdy czas ten upłynie, przechodzą do kolejnego pytania, nad którym również spędzają 20 minut. Proces ten jest powtarzany analogicznie dla trzeciego i czwartego pytania.'
         '<br>'
@@ -1458,7 +1458,7 @@ List<Konspekt> allKonspekts = [
         'Wyciszenie poprzez podróż rowerową po niezurbanizowanym terenie',
         aimPraktykaModlitwy,
       ],
-      duration: Duration(hours: 36),
+      customDuration: Duration(hours: 36),
       description: 'Uczestnicy udają się na rowerach na wycieczkę po zaplanowanej trasie, podczas której odwiedzają znalezione wcześniej kapliczki. Przy każdej z kapliczek drużyna się zatrzymuje i kolejna z osób prowadzi krótką modlitwę.'
           '<br>'
           '<br>Warto, aby docelowym punktem podróży było miejsce, gdzie będzie można przenocować - szkoła, chata, las na hamakowisko, pole namiotowe nad rzeką, etc..'
@@ -1509,7 +1509,7 @@ List<Konspekt> allKonspekts = [
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (thetrimhub)',
       author: DANIEL_IWANICKI,
-      duration: Duration(minutes: 90),
+      customDuration: Duration(minutes: 90),
       aims: [
         'Stworzenie naturalnej okazji do poruszenia kluczowych aspektów dot. wartości i postaw',
         'Refleksja uczestników nad słusznością działań i postaw z perspektywy obserwatora',
@@ -1545,7 +1545,7 @@ List<Konspekt> allKonspekts = [
     metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'freepik.com (artefacti)',
     author: DANIEL_IWANICKI,
-    duration: Duration(minutes: 90),
+    customDuration: Duration(minutes: 90),
     aims: [
       'Refleksja nad historiami i wynikającymi z nich wartościami i postawami w piosenkach.',
     ],
@@ -2059,7 +2059,7 @@ List<Konspekt> allKonspekts = [
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (frimufilms)',
       author: DANIEL_IWANICKI,
-      duration: Duration(minutes: 1),
+      customDuration: Duration(minutes: 1),
       aims: [
         'Kształtowanie u uczestników hartu ducha poprzez nieprzyjemne praktyki',
         'Kształtowanie u uczestników wartości funkcjonowania we wspólnocie poprzez wspólny trud',
@@ -2088,7 +2088,7 @@ List<Konspekt> allKonspekts = [
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (hamimfadillah)',
       author: DANIEL_IWANICKI,
-      duration: Duration(minutes: 90),
+      customDuration: Duration(minutes: 90),
       aims: [
         'Ksztaltowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
       ],
@@ -2180,7 +2180,7 @@ List<Konspekt> allKonspekts = [
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
       author: DANIEL_IWANICKI,
-      duration: Duration(hours: 5),
+      customDuration: Duration(hours: 5),
       aims: [
         'Kształtowanie u uczestników otwartości na kontakt z drugim człowiekiem',
         aimSzacunekDlaSkutecznegoDzialania

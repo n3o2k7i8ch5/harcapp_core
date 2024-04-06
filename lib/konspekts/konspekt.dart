@@ -214,7 +214,7 @@ class Konspekt{
   final List<Meto> metos;
   final String coverAuthor;
   final Person? author;
-  final Duration? duration;
+  final Duration? customDuration;
   final List<String> aims;
   final List<KonspektMaterial>? materials;
   final String? summary;
@@ -227,6 +227,21 @@ class Konspekt{
 
   String get coverPath => 'packages/harcapp_core/assets/konspekty/$name/cover.webp';
 
+  Duration? get duration{
+    if(customDuration != null) return customDuration;
+
+    if(steps == null)
+      return null;
+
+    Duration resultDuration = Duration.zero;
+
+    for(KonspektStep step in steps!)
+      resultDuration += step.duration;
+
+    return resultDuration;
+
+  }
+
   const Konspekt({
     required this.name,
     required this.title,
@@ -236,7 +251,7 @@ class Konspekt{
     required this.metos,
     required this.coverAuthor,
     this.author,
-    this.duration,  // if null, `duration` will be calculated from the steps' duration.
+    this.customDuration,  // if null, `duration` will be calculated from the steps' duration.
     required this.aims,
     this.materials,
     this.summary,

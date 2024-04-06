@@ -160,6 +160,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final ScrollPhysics physics;
   final bool shrinkWrap;
   final Widget? leading;
+  final bool oneLineSummary;
 
   const BaseKonspektWidget(
       this.konspekt,
@@ -171,6 +172,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.physics = const BouncingScrollPhysics(),
         this.shrinkWrap = false,
         this.leading,
+        this.oneLineSummary = true,
       });
 
   @override
@@ -189,8 +191,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   late ValueNotifier<double> headerNotifier;
   late ScrollController controller;
 
-  Duration? duration;
-
   double? layoutWidth;
 
   @override
@@ -208,15 +208,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
         setState(() => showAppBarTitle = shouldBeVisible);
 
     });
-
-    duration = konspekt.duration;
-
-    if(konspekt.steps != null && duration == null)
-      duration = Duration.zero;
-
-    if(konspekt.steps != null)
-      for(KonspektStep step in konspekt.steps!)
-        duration = duration! + step.duration;
 
     super.initState();
   }
@@ -287,12 +278,22 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               if(konspekt.summary != null)
                 const SizedBox(height: Dimen.sideMarg),
 
-              if(konspekt.summary != null)
+              if(widget.oneLineSummary && konspekt.summary != null)
                 KonspektHtmlWidget(
                     konspekt,
                     '<b>W skrócie:</b> ${konspekt.summary!}',
                     maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
                     textSize: Dimen.textSizeBig,
+                )
+              else if(widget.oneLineSummary && konspekt.summary != null)
+                const TitleShortcutRowWidget(title: 'W skrócie', textAlign: TextAlign.left),
+
+              if(widget.oneLineSummary && konspekt.summary != null)
+                KonspektHtmlWidget(
+                  konspekt,
+                  konspekt.summary!,
+                  maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
+                  textSize: Dimen.textSizeBig,
                 ),
 
               const SizedBox(height: Dimen.sideMarg),
@@ -353,17 +354,17 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               const SizedBox(height: Dimen.sideMarg),
 
-              if(duration != null)
+              if(konspekt.duration != null)
                 Row(
                   children: [
                     const IntrinsicWidth(
                       child: TitleShortcutRowWidget(title: 'Czas: ', textAlign: TextAlign.left),
                     ),
-                    Text(durationToString(duration), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
+                    Text(durationToString(konspekt.duration), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
                   ],
                 ),
 
-              if(duration != null)
+              if(konspekt.duration != null)
                 const SizedBox(height: Dimen.sideMarg),
 
               const TitleShortcutRowWidget(title: 'Cele', textAlign: TextAlign.left),
