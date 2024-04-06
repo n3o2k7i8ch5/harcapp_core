@@ -52,12 +52,12 @@ enum Meto{
     }
   }
 
-  String get iconPath{
+  String get iconSvgPath{
     switch(this){
-      case Meto.zuch: return 'packages/harcapp_core/assets/images/meto/meto_z.webp';
-      case Meto.harc: return 'packages/harcapp_core/assets/images/meto/meto_h.webp';
-      case Meto.hs: return 'packages/harcapp_core/assets/images/meto/meto_hs.webp';
-      case Meto.wedro: return 'packages/harcapp_core/assets/images/meto/meto_w.webp';
+      case Meto.zuch: return 'packages/harcapp_core/assets/images/meto/z.svg';
+      case Meto.harc: return 'packages/harcapp_core/assets/images/meto/h.svg';
+      case Meto.hs: return 'packages/harcapp_core/assets/images/meto/hs.svg';
+      case Meto.wedro: return 'packages/harcapp_core/assets/images/meto/w.svg';
     }
   }
 

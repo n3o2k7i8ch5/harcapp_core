@@ -285,10 +285,10 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                     maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
                     textSize: Dimen.textSizeBig,
                 )
-              else if(widget.oneLineSummary && konspekt.summary != null)
+              else if(!widget.oneLineSummary && konspekt.summary != null)
                 const TitleShortcutRowWidget(title: 'W skrócie', textAlign: TextAlign.left),
 
-              if(widget.oneLineSummary && konspekt.summary != null)
+              if(!widget.oneLineSummary && konspekt.summary != null)
                 KonspektHtmlWidget(
                   konspekt,
                   konspekt.summary!,
