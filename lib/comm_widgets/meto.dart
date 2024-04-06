@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
@@ -48,7 +49,7 @@ class MetoTile extends StatelessWidget{
 
             const SizedBox(width: Dimen.defMarg),
 
-            Image.asset(
+            SvgPicture.asset(
               meto.iconSvgPath,
               width: iconSize,
               height: iconSize,
