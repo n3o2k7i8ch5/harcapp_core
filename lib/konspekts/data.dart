@@ -1531,6 +1531,68 @@ List<Konspekt> allKonspekts = [
   ),
 
 
+  const Konspekt(
+      name: 'savoir_vivre_urzadzen_mobilnych',
+      title: 'Savoir-vivre urządzeń mobilnych',
+      type: KonspektType.zajecia,
+      spheres: {
+        KonspektSphere.umysl: null,
+        KonspektSphere.duch: KonspektSphereDetails(
+            level: [KonspektSphereLevel.duchWartosci, KonspektSphereLevel.duchPostawy],
+            mechanism: [KonspektSphereMechanism.duchBezposrednia]
+        )
+      },
+      metos: [Meto.hs, Meto.wedro],
+      coverAuthor: 'Freepik (freepik)',
+      author: DANIEL_IWANICKI,
+      aims: [
+        'Zrozumienie przez uczestników mechanizmu szyfrowania danych w sieci',
+        'Zrozumienie przez uczestników poziomu prywatności danych przechowywanych w sieci',
+        'Wypracowanie z uczestnikami zasad korzystania z telefonów podczas zbiórek oraz w dniu codziennym'
+      ],
+      intro: 'Zajęcia i ich cele opierają się na założeniu, że zarówno z punktu widzenia procesu wychowawczego jak i z atrakcyjności harcerstwa i relacji dla samych harcerzy, sytuacja w której członkowie drużyny domyślnie spędzają czas na telefonie by szukać rozrywki jest gorsza względem sytuacji w której uczestnicy są skupieni na sobie.',
+      description: '',
+      steps: [
+        KonspektStep(
+            title: 'Internet i adresy w sieci - pytania',
+            duration: Duration(minutes: 15),
+            activeForm: false,
+            content: 'Uczestnicy zbierają się w kręgu i prowadzący wyjaśnia uczestnikom po krótce sposób, w jaki działa internet. Najlepiej, jeśli uczyni to poprzez zadawanie pytań, na które uczestnicy będa mieli możliwość odpowiedzieć, zaś prowadzący będzie dopowiadał brakujące elementy odpowiedzi:'
+                '<br>'
+                '<ol>'
+                '<li>'
+                'P: Czym jest internet?<br>'
+                'O: To sieć, w której urządzenia elektroniczne mogą się ze sobą wzajemnie komunikować.'
+                '</li>'
+                '<li>'
+                'P: Skąd wiadomo, od kogo i do kogo wiadomości w internecie są wysyłane?<br>'
+                'O: Każdy komputer ma adres IP, który go identyfikuje w internecie.'
+                '</li>'
+                '<li>'
+                'P: Kto może zobaczyć wiadomości wysyłane w sieci?<br>'
+                'O: Każdy.'
+                '</li>'
+                '<li>'
+                'P: Co zrobić, żeby niepożądane osoby nie odczytały sensu wysłanej wiadomości, nawet po jej zobaczeniu?<br>'
+                'O: Wiadomości należy zaszyfrować.'
+                '</li>'
+                '</ol>'
+        ),
+        KonspektStep(
+            title: 'Internet i adresy w sieci - podsumowanie',
+            duration: Duration(minutes: 5),
+            activeForm: false,
+            content: 'Prowadzący podsumowuje krótko to, co zostało powiedziane w formie odpowiedzi na pytania:'
+                '<br>'
+                '<br>Internet to sieć, w której komputery mogą się ze sobą komunikować. Każdy może zobaczyć wiadomości wysyłane między komputerami w internecie, dlatego aby temu zapobiec, wiadomości są szyfrowane.'
+        )
+      ],
+      howToFail: [
+        'Przeprowadzić część zajęć dotyczącą szyfrowania w formie wykładu',
+      ]
+  ),
+
+
   // Done
   const Konspekt(
     name: 'spiewogranie_z_quizem_interpretacyjnym',
