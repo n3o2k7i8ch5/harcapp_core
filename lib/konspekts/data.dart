@@ -193,24 +193,24 @@ List<Konspekt> allKonspekts = [
           name: 'fragment_przykladowy_1',
           title: 'Przykładowy fragment Pisma Świętego (nr 1)',
           assets: {
-            KonspektAttachmentFormat.pdf: 'assets/konspekty/bibliodrama/fragment_przykladowy_1.pdf',
-            KonspektAttachmentFormat.docx: 'assets/konspekty/bibliodrama/fragment_przykladowy_1.docx'
+            KonspektAttachmentFormat.pdf: 'fragment_przykladowy_1.pdf',
+            KonspektAttachmentFormat.docx: 'fragment_przykladowy_1.docx'
           },
         ),
         KonspektAttachment(
           name: 'fragment_przykladowy_2',
           title: 'Przykładowy fragment Pisma Świętego (nr 2)',
           assets: {
-            KonspektAttachmentFormat.pdf: 'assets/konspekty/bibliodrama/fragment_przykladowy_2.pdf',
-            KonspektAttachmentFormat.docx: 'assets/konspekty/bibliodrama/fragment_przykladowy_2.docx'
+            KonspektAttachmentFormat.pdf: 'fragment_przykladowy_2.pdf',
+            KonspektAttachmentFormat.docx: 'fragment_przykladowy_2.docx'
           },
         ),
         KonspektAttachment(
           name: 'fragment_przykladowy_3',
           title: 'Przykładowy fragment Pisma Świętego (nr 3)',
           assets: {
-            KonspektAttachmentFormat.pdf: 'assets/konspekty/bibliodrama/fragment_przykladowy_3.pdf',
-            KonspektAttachmentFormat.docx: 'assets/konspekty/bibliodrama/fragment_przykladowy_3.docx'
+            KonspektAttachmentFormat.pdf: 'fragment_przykladowy_3.pdf',
+            KonspektAttachmentFormat.docx: 'fragment_przykladowy_3.docx'
           },
         )
       ],
@@ -705,7 +705,7 @@ List<Konspekt> allKonspekts = [
         name: 'wycinki_informacji',
         title: 'Wycinki informacji',
         assets: {
-          KonspektAttachmentFormat.pdf: 'assets/konspekty/gang_potencjalnych_porywaczy/wycinki_informacji.pdf'
+          KonspektAttachmentFormat.pdf: 'wycinki_informacji.pdf'
         },
       )
     ],
@@ -812,8 +812,8 @@ List<Konspekt> allKonspekts = [
           name: 'kroki',
           title: 'Kroki',
           assets: {
-            KonspektAttachmentFormat.pdf: 'assets/konspekty/ignacjanski_rachunek_sumienia/kroki.pdf',
-            KonspektAttachmentFormat.docx: 'assets/konspekty/ignacjanski_rachunek_sumienia/kroki.docx'
+            KonspektAttachmentFormat.pdf: 'kroki.pdf',
+            KonspektAttachmentFormat.docx: 'kroki.docx'
           },
         ),
       ]
@@ -1431,8 +1431,8 @@ List<Konspekt> allKonspekts = [
         name: 'pytania',
         title: 'Pytania',
         assets: {
-          KonspektAttachmentFormat.pdf: 'assets/konspekty/refleksja_nad_aksjomatem_ducha/pytania.pdf',
-          KonspektAttachmentFormat.docx: 'assets/konspekty/refleksja_nad_aksjomatem_ducha/pytania.docx'
+          KonspektAttachmentFormat.pdf: 'pytania.pdf',
+          KonspektAttachmentFormat.docx: 'pytania.docx'
         },
       )
     ],
@@ -1550,31 +1550,117 @@ List<Konspekt> allKonspekts = [
         'Zrozumienie przez uczestników poziomu prywatności danych przechowywanych w sieci',
         'Wypracowanie z uczestnikami zasad korzystania z telefonów podczas zbiórek oraz w dniu codziennym'
       ],
+      attachments: [
+        KonspektAttachment(
+          name: 'komputer',
+          title: 'Symulator komputera',
+          assets: {
+            KonspektAttachmentFormat.pdf: 'komputer.pdf',
+            KonspektAttachmentFormat.docx: 'komputer.docx',
+          },
+        ),
+      ],
+      materials: [
+        KonspektMaterial(
+          name: 'Wydrukowany załącznik "Symulator komputera"',
+          comment: 'Uwaga: prowadzący musi umieć grać w warcaby!',
+          attachmentName: 'komputer',
+          amountAttendantFactor: 1
+        ),
+        KonspektMaterial(
+            name: 'Karteczki biurowe (kwadratowe, ok. 10 cm x 10 cm)',
+            amountAttendantFactor: 3
+        ),
+        KonspektMaterial(
+            name: 'Skrzynki zamykane na kłódkę na klucz',
+            amount: 4,
+            comment: 'Kłódki muszą móc się zamknąć bez użycia klucza. Ważne też, by prowadzący miał do każdej kłódki zapasowy klucz, w przypadku gdyby uczestnicy przypadkiem zatrzasnęli klucz w środku.'
+        ),
+      ],
       intro: 'Zajęcia i ich cele opierają się na założeniu, że zarówno z punktu widzenia procesu wychowawczego jak i z atrakcyjności harcerstwa i relacji dla samych harcerzy, sytuacja w której członkowie drużyny domyślnie spędzają czas na telefonie by szukać rozrywki jest gorsza względem sytuacji w której uczestnicy są skupieni na sobie.',
-      description: '',
       steps: [
+        KonspektStep(
+            title: 'Internet i adresy w sieci - pytania',
+            duration: Duration(minutes: 10),
+            activeForm: false,
+            content: 'Uczestnicy zbierają się w kręgu i prowadzący wyjaśnia uczestnikom po krótce sposób, w jaki działa internet. Najlepiej, jeśli uczyni to poprzez zadawanie pytań, na które uczestnicy będą mieli możliwość odpowiedzieć, zaś prowadzący będzie dopowiadał brakujące elementy odpowiedzi:'
+                '<ol>'
+                '<li>'
+                '<b>Pytanie:</b>'
+                '<br><i>Czym jest internet?</i>'
+                '<br>'
+                '<br><b>Odpowiedź:</b>'
+                '<br><i>To sieć, w której urządzenia elektroniczne mogą się ze sobą wzajemnie komunikować.</i>'
+                '</li>'
+                '<li>'
+                '<b>Pytanie:</b>'
+                '<br><i>Skąd wiadomo, od kogo i do kogo wiadomości w internecie są wysyłane?</i>'
+                '<br>'
+                '<br><b>Odpowiedź:</b>'
+                '<br><i>Każdy komputer ma adres IP, który go identyfikuje w internecie.</i>'
+                '</li>'
+                '<li>'
+                '<b>Pytanie:</b>'
+                '<br><i>Skąd bierze się adres IP danego urządzenia?</i>'
+                '<br>'
+                '<br><b>Odpowiedź:</b>'
+                '<br><i>Każde urządzenie otrzymuje swój adres od sieci, dzięki czemu jest on unikalny. Gdyby każde urządzenie nadawało go sobie samo, mogłoby się powtórzyć z którymś z już istniejących przez co wiadomości mogłyby nie trafiać do właściwego urządzenia.</i>'
+                '</li>'
+                '<li>'
+                '<b>Pytanie:</b>'
+                '<br><i>W jaki sposób wiadomość zaadresowana do konkretnego urządzenia w internecie do niego dociera?</i>'
+                '<br>'
+                '<br><b>Odpowiedź:</b>'
+                '<br><i>Wiadomość jest przekazywana kolejnym "uczestnikom" internetu aż dotrze ona do właściwego urządzenia.</i>'
+                '</li>'
+                '</ol>'
+        ),
+        KonspektStep(
+            title: 'Internet i adresy w sieci - podsumowanie',
+            duration: Duration(minutes: 5),
+            activeForm: false,
+            content: 'Prowadzący podsumowuje krótko to, co zostało powiedziane w formie odpowiedzi na pytania:'
+                '<br>'
+                '<br>Internet to sieć, w której komputery mogą się ze sobą komunikować. Każde urządzenie ma swój unikalny adres IP, który go identyfikuje. Wiadomości w sieci są przekazywane kolejnym urządzeniom aż dotrą do urządzenia z właściwym adresem.'
+        ),
+        KonspektStep(
+            title: 'Internet i adresy w sieci - symulacja',
+            duration: Duration(minutes: 5),
+            activeForm: false,
+            content: 'Prowadzący podsumowuje krótko to, co zostało powiedziane w formie odpowiedzi na pytania:'
+                '<br>'
+                '<br>Internet to sieć, w której komputery mogą się ze sobą komunikować. Każde urządzenie ma swój unikalny adres IP, który go identyfikuje. Wiadomości w sieci są przekazywane kolejnym urządzeniom aż dotrą do urządzenia z właściwym adresem.'
+        ),
+
         KonspektStep(
             title: 'Internet i adresy w sieci - pytania',
             duration: Duration(minutes: 15),
             activeForm: false,
             content: 'Uczestnicy zbierają się w kręgu i prowadzący wyjaśnia uczestnikom po krótce sposób, w jaki działa internet. Najlepiej, jeśli uczyni to poprzez zadawanie pytań, na które uczestnicy będa mieli możliwość odpowiedzieć, zaś prowadzący będzie dopowiadał brakujące elementy odpowiedzi:'
-                '<br>'
                 '<ol>'
                 '<li>'
-                'P: Czym jest internet?<br>'
-                'O: To sieć, w której urządzenia elektroniczne mogą się ze sobą wzajemnie komunikować.'
+                '<b>Pytanie:</b>'
+                '<br><i>Czym jest internet?</i>'
+                '<br><b>Odpowiedź:</b>'
+                '<br><i>To sieć, w której urządzenia elektroniczne mogą się ze sobą wzajemnie komunikować.</i>'
                 '</li>'
                 '<li>'
-                'P: Skąd wiadomo, od kogo i do kogo wiadomości w internecie są wysyłane?<br>'
-                'O: Każdy komputer ma adres IP, który go identyfikuje w internecie.'
+                '<b>Pytanie:</b>'
+                '<br><i>Skąd wiadomo, od kogo i do kogo wiadomości w internecie są wysyłane?</i>'
+                '<br><b>Odpowiedź:</b>'
+                '<br><i>Każdy komputer ma adres IP, który go identyfikuje w internecie.</i>'
                 '</li>'
                 '<li>'
-                'P: Kto może zobaczyć wiadomości wysyłane w sieci?<br>'
-                'O: Każdy.'
+                '<b>Pytanie:</b>'
+                '<br><i>Kto może zobaczyć wiadomości wysyłane w sieci?></i>'
+                '<br><b>Odpowiedź:</b>'
+                '<br><i>Każdy.</i>'
                 '</li>'
                 '<li>'
-                'P: Co zrobić, żeby niepożądane osoby nie odczytały sensu wysłanej wiadomości, nawet po jej zobaczeniu?<br>'
-                'O: Wiadomości należy zaszyfrować.'
+                '<b>Pytanie:</b>'
+                '<br><i>Co zrobić, żeby niepożądane osoby nie odczytały sensu wysłanej wiadomości, nawet po jej zobaczeniu?</i>'
+                '<br><b>Odpowiedź:</b>'
+                '<br><i>Wiadomości należy zaszyfrować.</i>'
                 '</li>'
                 '</ol>'
         ),
@@ -1585,7 +1671,82 @@ List<Konspekt> allKonspekts = [
             content: 'Prowadzący podsumowuje krótko to, co zostało powiedziane w formie odpowiedzi na pytania:'
                 '<br>'
                 '<br>Internet to sieć, w której komputery mogą się ze sobą komunikować. Każdy może zobaczyć wiadomości wysyłane między komputerami w internecie, dlatego aby temu zapobiec, wiadomości są szyfrowane.'
-        )
+        ),
+        KonspektStep(
+            title: 'Internet i adresy w sieci - wyjaśnienie symulacji',
+            duration: Duration(minutes: 5),
+            activeForm: true,
+            content: 'Prowadzący rozdaje uczestnikom po jednej kopii wydrukowanego załącznika <a href="sznury@attachment">symulator komputera</a> i po kilka (np. po trzy) karteczek biurowych, po czym tłumaczy co one reprezentują:'
+                '<ul>'
+                '<li>Na kartce biurowej można napisać dowolną wiadomość - jest to informacja, którą można przechowywać w komputerze lub przesłać ją przez sieć. Aby ją wysłać, należy na jej odwrocie napisać adres IP odbiorcy, położyć w polu "Wyślij do" i zwrócić się do prowadzącego (czyli do internetu) z wnioskiem o wysyłkę.</li>'
+                '<li>Dolna część symulatora komputera to prywatna przestrzeń w komputerze, która nie jest udostępniona przez internet. Można w niej trzymać, tworzyć i edytować informacje (karteczki biurowe).</li>'
+                '<li>Górna część symulatora komputera to publiczna przestrzeń w komputerze, która jest udostępniona przez internet. Wszystkie informacje (karteczki biurowe) są w niej widoczne dla innych osób.</li>'
+                '<li>W prawym górnym rogu części publicznej symulatora komputera znaduje się miejsce na adres IP, które jest nadawane komputerowi gdy podłączy się do sieci.</li>'
+                '<li>W prawym dolnym rogu części publicznej symulatora komputera znaduje się miejsce, w którym po podaniu adresu IP odbiorcy, można wysłać komuś przez internet wiadomość (karteczki biurowe). Poniżej zaś znajduje się przestrzeń, w której pojawiają się wiadomości (karteczki biurowe) od innych urządzeń.</li>'
+                '</ul>'
+        ),
+        KonspektStep(
+            title: 'Internet i adresy w sieci - symulacja',
+            duration: Duration(minutes: 10),
+            activeForm: true,
+            content: 'Prowadzący siada na środku kręgu i informuje uczestników, że od teraz reprezentuje sieć internetową - jest przekaźnikiem, pozwala przesyłać innym wiadomości i który nadaje adresy IP.'
+                '<br>'
+                '<br>Uczestnicy mają za zadanie stworzyć wiadomość, podpiąć się się sieci i przesłać wiadomość do innego uczestnika. Nie muszą czekać aż inni będą gotowi do wysyłki swoich wiadomości.'
+                '<br>'
+                '<br><b>Od tej chwili aż do końca symulacji nie komunikuje się werbalnie</b>.'
+                '<br>'
+                '<br>Ważne, by prowadzący pamiętał, że zanim ktoś podłączy się do sieci, musi uzyskać od internetu swój adres IP (czyli poprosić prowadzącego werbalnie o adres).'
+                '<br>'
+                '<br>Ważne też, by prowadzący pamiętał, że jeśli odbiorca nie ma swojego adresu IP, nie można do niego wysłać wiadomości. W takiej sytuacji bez słowa zwraca wiadomość do nadawcy.'
+        ),
+        KonspektStep(
+            title: 'Internet i adresy w sieci - podsumowanie',
+            duration: Duration(minutes: 5),
+            activeForm: false,
+            content: 'Prowadzący podsumowuje krótko to, co zostało powiedziane w formie odpowiedzi na pytania:'
+                '<br>'
+                '<br>Internet to sieć, w której komputery mogą się ze sobą komunikować. Każdy może zobaczyć wiadomości wysyłane między komputerami w internecie, dlatego aby temu zapobiec, wiadomości są szyfrowane.'
+        ),
+
+        KonspektStep(
+            title: 'Czy warto i jak szyfrować wiadomości?',
+            duration: Duration(minutes: 5),
+            activeForm: false,
+            content: 'Prowadzący zaczyna od zapytania uczestników: <i>"Co wy na to, że każda wiadomość jaką przesłaliście była możliwa przeze mnie, czyli każdego w sieci, do odczytania?" Może były tam Wasze maile? Może wyznania miłosne do najładniejszej dziewczyny w szkole? Może problemy zdrowotne, albo leki na przykład zamówienie na czopki, które wkłada się do odbytu? Może hasło do mediów społecznościowych? Czy na pewno to wszystko powinno być jawne?</i>'
+                '<br>'
+                '<br>Następnie prowadzący pyta uczestników jak temu zaradzić?'
+                '<br>'
+                '<br>W trakcie dyskusji warto, by prowadzący zwrócił uwagę, że zaszyfrowanie wiadomości to nie wszystko - należy jeszcze umożliwić odbiorcy jej odszyfrowanie.'
+                '<br>'
+                '<br>Prowadzący prosi uczestników o podanie metod na zawszyfrowanie wiadomości - warto też, by potem zauważył, że metody typu "GADERYPOLUKI", alfabet Mose\'a są dla komputerów bardzo proste do złamania.'
+        ),
+
+        KonspektStep(
+            title: 'Szyfrowanie kluczem',
+            duration: Duration(minutes: 5),
+            activeForm: false,
+            content: 'Prowadzący informuje uczestników, że istnieje metoda szyfrowania przesyłanych wiadomości, która nazywa się "szyfrowaniem kluczem asymetrycznym". Dlaczego asymetrycznym? Bo używa się przy nim dwóch kluczy: jednego do zaszyfrowania, innego do odszyfrowania.'
+                '<br>'
+                '<br>Żeby jednak nie wchodzić w technikalia, uczestnicy będą mieli okazję sami wymyślić mechanizm tej metody.'
+                '<br>'
+                '<br>Prowadzący dzieli uczestników na cztery grupy. Każda grupa otrzymuje po jednej skrzynce, kłódce i kluczyku. Każda grupa udaje się inne miejsce (np. do czterech osobnych sal lub do czeterach krańców jednej sali).'
+                '<br>'
+                '<br>Zadaniem każdej z grup jest wymyślenie metody na to, by doprowadzić do przesłąnia innej grupie tajnej wiadomości w taki sposób, by nie została ona po drodze odczytana. Prowadzący w tym ćwiczeniu pełni rolę internetu:'
+                '<ul>'
+                '<li>Tylko prowadzącemu można przekazać wiadomość do dostarczenia odbiorcy</li>'
+                '<li>Prowadzący, ponieważ jest wścibski jak ludzie w internecie, będzie próbował odczytać przekazywaną wiadomość.</li>'
+                '</ul>'
+                '<br>Uczestnicy muszą skorzystać z internetu jako przekaźnika, ale nie pozwolić mu odczytać sensu przekazywanej wiadomości. Odczytać wiadomość może jedynie odbiorca.'
+                '<br>'
+                '<br><b>Prawidłowe rozwiązanie jest następujące:</b>'
+                '<ol>'
+                '<li>Grupa A chce przesłać wiadomość grupie B.</li>'
+                '<li>Grupa A wysyła do grupy B publiczną, niezaszyfrowaną wiadomość o treści: <i>"Wyślijcie skrzynkę z kłódką otwartą w środku. Klucz zostawcie u siebie."</i></li>'
+                '<li>Grupa B wysyła grupie A skrzynkę z kłódką w środku.</li>'
+                '<li>Grupa A umieszcza tajną wiadomość w skrzynce grupy B, zatrzaskuje na niej kłódkę i wysyła ją do grupy B.</li>'
+                '<li>Grupa B jako jedyna ma klucz do swojej skrzynki, odbiera wiadomość, otwiera kłódkę kluczem i odczytuje wiadomość.</li>'
+                '</ol>'
+        ),
       ],
       howToFail: [
         'Przeprowadzić część zajęć dotyczącą szyfrowania w formie wykładu',
@@ -1860,24 +2021,24 @@ List<Konspekt> allKonspekts = [
         name: 'sznury',
         title: 'Sznury',
         assets: {
-          KonspektAttachmentFormat.pdf: 'assets/konspekty/sznury_funkcje_stopnie/sznury.pdf',
-          KonspektAttachmentFormat.docx: 'assets/konspekty/sznury_funkcje_stopnie/sznury.docx',
+          KonspektAttachmentFormat.pdf: 'sznury.pdf',
+          KonspektAttachmentFormat.docx: 'sznury.docx',
         },
       ),
       KonspektAttachment(
           name: 'nieistniejace_sznury',
           title: 'Nieistniejące sznury',
           assets: {
-            KonspektAttachmentFormat.pdf: 'assets/konspekty/sznury_funkcje_stopnie/nieistniejace_sznury.pdf',
-            KonspektAttachmentFormat.docx: 'assets/konspekty/sznury_funkcje_stopnie/nieistniejace_sznury.docx',
+            KonspektAttachmentFormat.pdf: 'nieistniejace_sznury.pdf',
+            KonspektAttachmentFormat.docx: 'nieistniejace_sznury.docx',
           }
       ),
       KonspektAttachment(
           name: 'stopnie_instruktorskie_pytania',
           title: 'Stopnie instruktorskie - pytania',
           assets: {
-            KonspektAttachmentFormat.pdf: 'assets/konspekty/sznury_funkcje_stopnie/stopnie_instruktorskie_pytania.pdf',
-            KonspektAttachmentFormat.docx: 'assets/konspekty/sznury_funkcje_stopnie/stopnie_instruktorskie_pytania.docx',
+            KonspektAttachmentFormat.pdf: 'stopnie_instruktorskie_pytania.pdf',
+            KonspektAttachmentFormat.docx: 'stopnie_instruktorskie_pytania.docx',
           }
       ),
     ],

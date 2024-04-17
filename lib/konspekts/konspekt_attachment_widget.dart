@@ -41,7 +41,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
       showAppToast(context, text: 'Załącznik o nazwie $name nie istnieje.');
       return null;
     }
-    return KonspektAttachmentWidget(attachment, color: color);
+    return KonspektAttachmentWidget(konspekt, attachment, color: color);
   }
 
   static Future<void> openFirstFrom(BuildContext context, Konspekt konspekt, String attachmentName) async {
@@ -54,13 +54,14 @@ class KonspektAttachmentWidget extends StatelessWidget{
       showAppToast(context, text: 'Załącznik o nazwie $attachmentName nie istnieje.');
       return;
     }
-    await attachment.openOrShowMessage(context, attachment.assets.keys.first);
+    await attachment.openOrShowMessage(context, konspekt.name, attachment.assets.keys.first);
   }
 
+  final Konspekt konspekt;
   final KonspektAttachment attachment;
   final Color? color;
 
-  const KonspektAttachmentWidget(this.attachment, {this.color, super.key});
+  const KonspektAttachmentWidget(this.konspekt, this.attachment, {this.color, super.key});
 
   @override
   Widget build(BuildContext context){
@@ -87,7 +88,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
               ],
             ),
           ),
-          onTap: () => attachment.openOrShowMessage(context, attachment.assets.keys.first)
+          onTap: () => attachment.openOrShowMessage(context, konspekt.name, attachment.assets.keys.first)
       );
 
     return Material(
@@ -118,7 +119,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
                       child: const Center(
                         child: KonspektAttachmentFormatWidget(KonspektAttachmentFormat.pdf),
                       ),
-                      onTap: () => attachment.openOrShowMessage(context, KonspektAttachmentFormat.pdf)
+                      onTap: () => attachment.openOrShowMessage(context, konspekt.name, KonspektAttachmentFormat.pdf)
                   ),
                 ),
 
@@ -131,7 +132,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
                       child: const Center(
                         child: KonspektAttachmentFormatWidget(KonspektAttachmentFormat.docx),
                       ),
-                      onTap: () => attachment.openOrShowMessage(context, KonspektAttachmentFormat.docx)
+                      onTap: () => attachment.openOrShowMessage(context, konspekt.name, KonspektAttachmentFormat.docx)
                   ),
                 ),
 
@@ -144,7 +145,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
                       child: const Center(
                         child: KonspektAttachmentFormatWidget(KonspektAttachmentFormat.url),
                       ),
-                      onTap: () => attachment.openOrShowMessage(context, KonspektAttachmentFormat.url)
+                      onTap: () => attachment.openOrShowMessage(context, konspekt.name, KonspektAttachmentFormat.url)
                   ),
                 )
             ],

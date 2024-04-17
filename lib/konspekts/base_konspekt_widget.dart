@@ -524,7 +524,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                      (context, index) => KonspektAttachmentWidget(konspekt.attachments![index]),
+                      (context, index) => KonspektAttachmentWidget(konspekt, konspekt.attachments![index]),
                   separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
                   count: konspekt.attachments!.length
               )),

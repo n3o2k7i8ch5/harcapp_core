@@ -145,7 +145,7 @@ class KonspektAttachment{
       required this.assets,
     });
 
-    Future<bool> open(KonspektAttachmentFormat format) async {
+    Future<bool> open(String konspektName, KonspektAttachmentFormat format) async {
       String? assetPath = assets[format];
       if(assetPath == null) return false;
 
@@ -155,13 +155,13 @@ class KonspektAttachment{
           return true;
         case KonspektAttachmentFormat.pdf:
         case KonspektAttachmentFormat.docx:
-          return await openAsset('packages/harcapp_core/${assetPath}', webOpenInNewTab: true);
+          return await openAsset('packages/harcapp_core/assets/konspekty/${konspektName}/${assetPath}', webOpenInNewTab: true);
       }
 
     }
 
-    Future<bool> openOrShowMessage(BuildContext context, KonspektAttachmentFormat format) async {
-      bool result = await open(format);
+    Future<bool> openOrShowMessage(BuildContext context, String konspektName, KonspektAttachmentFormat format) async {
+      bool result = await open(konspektName, format);
       if(!result) showAppToast(context, text: 'Nie udało się otworzyć pliku');
       return result;
     }
