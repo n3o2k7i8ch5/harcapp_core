@@ -1548,6 +1548,7 @@ List<Konspekt> allKonspekts = [
       aims: [
         'Zrozumienie przez uczestników mechanizmu szyfrowania danych w sieci',
         'Zrozumienie przez uczestników poziomu prywatności danych przechowywanych w sieci',
+        'Uświadomienie uczestników o istnieniu komunikatorów i usług szyforwanych end-to-end',
         'Wypracowanie z uczestnikami zasad korzystania z telefonów podczas zbiórek oraz w dniu codziennym'
       ],
       attachments: [
@@ -1675,7 +1676,7 @@ List<Konspekt> allKonspekts = [
         KonspektStep(
             title: 'Internet i adresy w sieci - wyjaśnienie symulacji',
             duration: Duration(minutes: 5),
-            activeForm: true,
+            activeForm: false,
             content: 'Prowadzący rozdaje uczestnikom po jednej kopii wydrukowanego załącznika <a href="sznury@attachment">symulator komputera</a> i po kilka (np. po trzy) karteczek biurowych, po czym tłumaczy co one reprezentują:'
                 '<ul>'
                 '<li>Na kartce biurowej można napisać dowolną wiadomość - jest to informacja, którą można przechowywać w komputerze lub przesłać ją przez sieć. Aby ją wysłać, należy na jej odwrocie napisać adres IP odbiorcy, położyć w polu "Wyślij do" i zwrócić się do prowadzącego (czyli do internetu) z wnioskiem o wysyłkę.</li>'
@@ -1709,7 +1710,7 @@ List<Konspekt> allKonspekts = [
         ),
 
         KonspektStep(
-            title: 'Czy warto i jak szyfrować wiadomości?',
+            title: 'Czy i jak warto szyfrować wiadomości?',
             duration: Duration(minutes: 5),
             activeForm: false,
             content: 'Prowadzący zaczyna od zapytania uczestników: <i>"Co wy na to, że każda wiadomość jaką przesłaliście była możliwa przeze mnie, czyli każdego w sieci, do odczytania?" Może były tam Wasze maile? Może wyznania miłosne do najładniejszej dziewczyny w szkole? Może problemy zdrowotne, albo leki na przykład zamówienie na czopki, które wkłada się do odbytu? Może hasło do mediów społecznościowych? Czy na pewno to wszystko powinno być jawne?</i>'
@@ -1722,9 +1723,9 @@ List<Konspekt> allKonspekts = [
         ),
 
         KonspektStep(
-            title: 'Szyfrowanie kluczem',
-            duration: Duration(minutes: 5),
-            activeForm: false,
+            title: 'Szyfrowanie kluczem asymetrycznym',
+            duration: Duration(minutes: 20),
+            activeForm: true,
             content: 'Prowadzący informuje uczestników, że istnieje metoda szyfrowania przesyłanych wiadomości, która nazywa się "szyfrowaniem kluczem asymetrycznym". Dlaczego asymetrycznym? Bo używa się przy nim dwóch kluczy: jednego do zaszyfrowania, innego do odszyfrowania.'
                 '<br>'
                 '<br>Żeby jednak nie wchodzić w technikalia, uczestnicy będą mieli okazję sami wymyślić mechanizm tej metody.'
@@ -1746,6 +1747,59 @@ List<Konspekt> allKonspekts = [
                 '<li>Grupa A umieszcza tajną wiadomość w skrzynce grupy B, zatrzaskuje na niej kłódkę i wysyła ją do grupy B.</li>'
                 '<li>Grupa B jako jedyna ma klucz do swojej skrzynki, odbiera wiadomość, otwiera kłódkę kluczem i odczytuje wiadomość.</li>'
                 '</ol>'
+                '<br>Prawdopodobnie grupy będą próbowały różnych nieskutecznych metod, typu:'
+                '<ul>'
+                '<li>Wysłanie drugiej grupie wiadomości w swojej zamkniętej skrzynce (wówczas odbiorca nie ma jak jej otworzyć)</li>'
+                '<li>Wysłanie drugiej grupie wiadomości w swojej zamkniętej skrzynce z kluczem przyklejonym do spodu skrzynki (wówczas prowadzący może ją otworzyć i odczytać)</li>'
+                '<li>Wysłanie drugiej grupie wiadomości zaszyfrowanej GADERYPOLUKI (wówczas prowadzący może ją odszyfrować na własną rękę)</li>'
+                '<br>W każdym z tych przypadków prowadzący nie może zaliczyć grupie zadania.'
+        ),
+
+        KonspektStep(
+            title: 'Podsumowanie szyfrowania kluczem asymetrycznym',
+            duration: Duration(minutes: 5),
+            activeForm: false,
+            content: 'Prowadzący podsumowuje wykonane przez uczestników ćwiczenie z zamykanymi skrzynkami. W tym celu opisuje proces wysyłania maila w formie <b>scenki</b> z udziałem trzech chętnych uczestników.'
+                '<br>'
+                '<br>Scenka dotyczy następującej sytuacji: osoba A wysyła maila do osoby B używając poczty eletronicznej M. Zarówno osoba A, osoba B jak i poczta B odgrywane sa przez uczestników, każdy z których ma skrzynkę z kłódką i kluczem. W scence tej prowadzący gra rolę internetu i chodzi między uczestnikami obrazując ruch zaszyfrowanych informacji (skrzynek) po sieci.'
+                '<br>'
+                '<br>Scenka przebiega następująco:'
+                '<ol>'
+                '<li>Osoba A tworzy wiadomość email u siebie na komputerze.</li>'
+                '<li>Osoba A pobiera od poczty M kod do zaszyfrowania wiadomości (skrzynkę z kłódką bez klucza). Jeśli nawet ktoś podsłucha tę wiadomość, zobaczy jedynie ogólno dostępny klucz szyfrujący.</li>'
+                '<li>Osoba A szyfruje wiadomość email i wysyła ją do poczty M.</li>'
+                '<li>Poczta M odszyfrowuje wiadomość email, zapisuje jej treść i odbiorcę.</li>'
+                '<li>Osoba B loguje się do skrzynki pocztowej poczty M i pobiera od poczty M kod szyfrujący (skrzynkę z kłódką bez klucza).</li>'
+                '<li>Osoba B szyfruje zapytanie do poczty M: <li>"czy mam nowe wiadomości?".</li>'
+                '<li>Osoba B wysyła do poczty M zaszyfrowane zapytanie o nowe wiadomości.</li>'
+                '<li>Poczta M pobiera od osoby M jej kod szyfrujący (skrzynkę z kłódką bez klucza).</li>'
+                '<li>Poczta M szyfruje nowe wiadomości email jej kodem szyfrującym (skrzynką z kłódką bez klucza).</li>'
+                '<li>Poczta M wysyła zaszyfrowane wiadomości do osoby B.</li>'
+                '<li>Osoba B odszyfrowuje wiadomości od poczty M.</li>'
+                '<li>Koniec!</li>'
+                '</ol>'
+        ),
+
+        KonspektStep(
+            title: 'Kto widzi zaszyfrowane wiadomości?',
+            duration: Duration(minutes: 5),
+            activeForm: false,
+            content: 'Prowadzący zbiera uczestników z powrotem w kręgu i zadaje im pytanie: <i>"Kto może zobaczyć maila, którego wysyłacie do kolegi?"</i>'
+                '<br>'
+                '<br>Uczestnicy rzucają swoje pomysły. Prawidłowa odpowiedź brzmi: <i>"Wysyłający, odbierający oraz dostawca usługi poczty elektronicznej (np. Gmail)."</i>'
+                '<br>'
+                '<br>Prowadzący zwraca uwagę, że tak samo jest z innymi danymi: właściciele usług internetowych wiedzą kiedy używasz telefonu, skąd się logujesz, co piszesz w mediach społecznościowych, co lubisz, co przykuwa twoją uwagę, z kim rozmawiasz, co oglądasz.'
+        ),
+
+        KonspektStep(
+            title: 'Czy można uwolnić się od śledzenia w sieci?',
+            duration: Duration(minutes: 5),
+            activeForm: false,
+            content: 'Prowadzący zadaje uczestnikom pytanie: <i>"W jaki sposób można byłoby teoretycznie wysłać wiadomość email tak, by poczta M nie widziała jaka jest treść wiadomości?"</i>'
+                '<br>'
+                '<br>Jeśli uczestnicy mają problem z wpadnięciem na pomysł, prowadzący podpowiada, że przed chwilą udało im się zabezpieczyć wiadomości skrzynkami - może należy go jakoś zmodyfikować?'
+                '<br>'
+                '<br>Rozwiązanie jest następujące: poczta A pobiera od osoby B jej kod szyfrujący (skrzynkę z kłódką bez klucza) i przekazuje ją osobie A. Osoba A szyfruje wiadomość i oddaje ją poczcie M. Poczta M nie ma dostępu do klucza by odszyfrować wiadomość - więc może ją jedynie przekazać dalej osobie B, gdy ta zapyta o nowe wiadomości.'
         ),
       ],
       howToFail: [
