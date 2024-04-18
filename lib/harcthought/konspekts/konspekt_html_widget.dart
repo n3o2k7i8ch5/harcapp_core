@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/dimen.dart';
-import 'package:harcapp_core/harc_forms/open_base_harc_form_dialog.dart';
+import 'package:harcapp_core/harcthought/harc_forms/open_base_harc_form_dialog.dart';
 
 import 'konspekt.dart';
 import 'konspekt_attachment_widget.dart';

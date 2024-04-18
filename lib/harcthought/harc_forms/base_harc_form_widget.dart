@@ -31,7 +31,7 @@ class BaseHarcFormWidgetState extends State<BaseHarcFormWidget>{
   String? text;
 
   void run() async {
-    text = await readStringFromAssets('assets/forms/${form.filename}');
+    text = await readStringFromAssets('packages/harcapp_core/assets/forms/${form.filename}');
     setState((){});
   }
 
