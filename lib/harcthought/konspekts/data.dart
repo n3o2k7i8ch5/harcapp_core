@@ -1782,7 +1782,7 @@ List<Konspekt> allKonspekts = [
             title: 'Gawęda',
             duration: Duration(minutes: 10),
             activeForm: false,
-            content: 'Prowadzący prosi uczestników, by usiedli wygodnie i zamknęli oczy (mogą się też położyć, jeśli chcą) po czym opowiada im gawędę <a href="">O braku telefonu</a>.'
+            content: 'Prowadzący prosi uczestników, by usiedli wygodnie i zamknęli oczy (mogą się też położyć, jeśli chcą) po czym opowiada im gawędę <a href="gaweda_o_braku_telefonu@gaweda">O braku telefonu</a>.'
         ),
       ],
       howToFail: [
