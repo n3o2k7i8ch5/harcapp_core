@@ -1592,6 +1592,7 @@ List<Konspekt> allKonspekts = [
                 '<br>'
                 '<br><b>Odpowiedź:</b>'
                 '<br><i>To sieć, w której urządzenia elektroniczne mogą się ze sobą wzajemnie komunikować.</i>'
+                '<br>'
                 '</li>'
                 '<li>'
                 '<b>Pytanie:</b>'
@@ -1599,6 +1600,7 @@ List<Konspekt> allKonspekts = [
                 '<br>'
                 '<br><b>Odpowiedź:</b>'
                 '<br><i>Każdy komputer ma adres IP, który go identyfikuje w internecie.</i>'
+                '<br>'
                 '</li>'
                 '<li>'
                 '<b>Pytanie:</b>'
@@ -1606,6 +1608,7 @@ List<Konspekt> allKonspekts = [
                 '<br>'
                 '<br><b>Odpowiedź:</b>'
                 '<br><i>Każde urządzenie otrzymuje swój adres od sieci, dzięki czemu jest on unikalny. Gdyby każde urządzenie nadawało go sobie samo, mogłoby się powtórzyć z którymś z już istniejących przez co wiadomości mogłyby nie trafiać do właściwego urządzenia.</i>'
+                '<br>'
                 '</li>'
                 '<li>'
                 '<b>Pytanie:</b>'
@@ -1634,50 +1637,10 @@ List<Konspekt> allKonspekts = [
         ),
 
         KonspektStep(
-            title: 'Internet i adresy w sieci - pytania',
-            duration: Duration(minutes: 15),
-            activeForm: false,
-            content: 'Uczestnicy zbierają się w kręgu i prowadzący wyjaśnia uczestnikom po krótce sposób, w jaki działa internet. Najlepiej, jeśli uczyni to poprzez zadawanie pytań, na które uczestnicy będa mieli możliwość odpowiedzieć, zaś prowadzący będzie dopowiadał brakujące elementy odpowiedzi:'
-                '<ol>'
-                '<li>'
-                '<b>Pytanie:</b>'
-                '<br><i>Czym jest internet?</i>'
-                '<br><b>Odpowiedź:</b>'
-                '<br><i>To sieć, w której urządzenia elektroniczne mogą się ze sobą wzajemnie komunikować.</i>'
-                '</li>'
-                '<li>'
-                '<b>Pytanie:</b>'
-                '<br><i>Skąd wiadomo, od kogo i do kogo wiadomości w internecie są wysyłane?</i>'
-                '<br><b>Odpowiedź:</b>'
-                '<br><i>Każdy komputer ma adres IP, który go identyfikuje w internecie.</i>'
-                '</li>'
-                '<li>'
-                '<b>Pytanie:</b>'
-                '<br><i>Kto może zobaczyć wiadomości wysyłane w sieci?></i>'
-                '<br><b>Odpowiedź:</b>'
-                '<br><i>Każdy.</i>'
-                '</li>'
-                '<li>'
-                '<b>Pytanie:</b>'
-                '<br><i>Co zrobić, żeby niepożądane osoby nie odczytały sensu wysłanej wiadomości, nawet po jej zobaczeniu?</i>'
-                '<br><b>Odpowiedź:</b>'
-                '<br><i>Wiadomości należy zaszyfrować.</i>'
-                '</li>'
-                '</ol>'
-        ),
-        KonspektStep(
-            title: 'Internet i adresy w sieci - podsumowanie',
-            duration: Duration(minutes: 5),
-            activeForm: false,
-            content: 'Prowadzący podsumowuje krótko to, co zostało powiedziane w formie odpowiedzi na pytania:'
-                '<br>'
-                '<br>Internet to sieć, w której komputery mogą się ze sobą komunikować. Każdy może zobaczyć wiadomości wysyłane między komputerami w internecie, dlatego aby temu zapobiec, wiadomości są szyfrowane.'
-        ),
-        KonspektStep(
             title: 'Internet i adresy w sieci - wyjaśnienie symulacji',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: 'Prowadzący rozdaje uczestnikom po jednej kopii wydrukowanego załącznika <a href="sznury@attachment">symulator komputera</a> i po kilka (np. po trzy) karteczek biurowych, po czym tłumaczy co one reprezentują:'
+            content: 'Prowadzący rozdaje uczestnikom po jednej kopii wydrukowanego załącznika <a href="komputer@attachment">symulator komputera</a> i po kilka (np. po trzy) karteczek biurowych, po czym tłumaczy co one reprezentują:'
                 '<ul>'
                 '<li>Na kartce biurowej można napisać dowolną wiadomość - jest to informacja, którą można przechowywać w komputerze lub przesłać ją przez sieć. Aby ją wysłać, należy na jej odwrocie napisać adres IP odbiorcy, położyć w polu "Wyślij do" i zwrócić się do prowadzącego (czyli do internetu) z wnioskiem o wysyłkę.</li>'
                 '<li>Dolna część symulatora komputera to prywatna przestrzeń w komputerze, która nie jest udostępniona przez internet. Można w niej trzymać, tworzyć i edytować informacje (karteczki biurowe).</li>'
@@ -1692,21 +1655,15 @@ List<Konspekt> allKonspekts = [
             activeForm: true,
             content: 'Prowadzący siada na środku kręgu i informuje uczestników, że od teraz reprezentuje sieć internetową - jest przekaźnikiem, pozwala przesyłać innym wiadomości i który nadaje adresy IP.'
                 '<br>'
-                '<br>Uczestnicy mają za zadanie stworzyć wiadomość, podpiąć się się sieci i przesłać wiadomość do innego uczestnika. Nie muszą czekać aż inni będą gotowi do wysyłki swoich wiadomości.'
+                '<br>Uczestnicy mają za zadanie stworzyć wiadomość, podpiąć się sieci i przesłać wiadomość do innego uczestnika. Nie muszą czekać aż inni będą gotowi do wysyłki swoich wiadomości.'
                 '<br>'
-                '<br><b>Od tej chwili aż do końca symulacji nie komunikuje się werbalnie</b>.'
+                '<br><b>Od tej chwili aż do końca symulacji prowadzący nie komunikuje się werbalnie</b>.'
                 '<br>'
-                '<br>Ważne, by prowadzący pamiętał, że zanim ktoś podłączy się do sieci, musi uzyskać od internetu swój adres IP (czyli poprosić prowadzącego werbalnie o adres).'
+                '<br>Ważne, by prowadzący pamiętał, że zanim ktoś wyśle jakąś wiadomość, musi uzyskać od internetu swój adres IP (czyli poprosić prowadzącego werbalnie o adres).'
                 '<br>'
                 '<br>Ważne też, by prowadzący pamiętał, że jeśli odbiorca nie ma swojego adresu IP, nie można do niego wysłać wiadomości. W takiej sytuacji bez słowa zwraca wiadomość do nadawcy.'
-        ),
-        KonspektStep(
-            title: 'Internet i adresy w sieci - podsumowanie',
-            duration: Duration(minutes: 5),
-            activeForm: false,
-            content: 'Prowadzący podsumowuje krótko to, co zostało powiedziane w formie odpowiedzi na pytania:'
                 '<br>'
-                '<br>Internet to sieć, w której komputery mogą się ze sobą komunikować. Każdy może zobaczyć wiadomości wysyłane między komputerami w internecie, dlatego aby temu zapobiec, wiadomości są szyfrowane.'
+                '<br>Uczestnicy wysyłają sobie wiadomości przez kilka minut tak długo, aż prowadzący zauważy, że każdy rozumie ten prosty mechanizm.'
         ),
 
         KonspektStep(
@@ -1726,40 +1683,50 @@ List<Konspekt> allKonspekts = [
             title: 'Szyfrowanie kluczem asymetrycznym',
             duration: Duration(minutes: 20),
             activeForm: true,
-            content: 'Prowadzący informuje uczestników, że istnieje metoda szyfrowania przesyłanych wiadomości, która nazywa się "szyfrowaniem kluczem asymetrycznym". Dlaczego asymetrycznym? Bo używa się przy nim dwóch kluczy: jednego do zaszyfrowania, innego do odszyfrowania.'
+            content: 'Prowadzący informuje uczestników, że istnieje metoda szyfrowania przesyłanych wiadomości, która nazywa się "szyfrowaniem kluczem asymetrycznym". Dlaczego asymetrycznym? Bo używa się przy nim dwóch <b>różnych</b> kluczy: jednego do zaszyfrowania, innego do odszyfrowania.'
                 '<br>'
                 '<br>Żeby jednak nie wchodzić w technikalia, uczestnicy będą mieli okazję sami wymyślić mechanizm tej metody.'
                 '<br>'
-                '<br>Prowadzący dzieli uczestników na cztery grupy. Każda grupa otrzymuje po jednej skrzynce, kłódce i kluczyku. Każda grupa udaje się inne miejsce (np. do czterech osobnych sal lub do czeterach krańców jednej sali).'
+                '<br>Prowadzący dzieli uczestników na cztery grupy. Każda grupa otrzymuje po jednej skrzynce, kłódce i kluczyku do kłódki. Każda grupa udaje się inne miejsce (np. do czterech osobnych sal lub do czeterach krańców jednej sali).'
                 '<br>'
                 '<br>Zadaniem każdej z grup jest wymyślenie metody na to, by doprowadzić do przesłąnia innej grupie tajnej wiadomości w taki sposób, by nie została ona po drodze odczytana. Prowadzący w tym ćwiczeniu pełni rolę internetu:'
                 '<ul>'
                 '<li>Tylko prowadzącemu można przekazać wiadomość do dostarczenia odbiorcy</li>'
                 '<li>Prowadzący, ponieważ jest wścibski jak ludzie w internecie, będzie próbował odczytać przekazywaną wiadomość.</li>'
                 '</ul>'
-                '<br>Uczestnicy muszą skorzystać z internetu jako przekaźnika, ale nie pozwolić mu odczytać sensu przekazywanej wiadomości. Odczytać wiadomość może jedynie odbiorca.'
+                'Uczestnicy muszą skorzystać z internetu jako przekaźnika, ale nie pozwolić mu odczytać sensu przekazywanej wiadomości. Odczytać wiadomość może jedynie odbiorca.'
                 '<br>'
                 '<br><b>Prawidłowe rozwiązanie jest następujące:</b>'
                 '<ol>'
                 '<li>Grupa A chce przesłać wiadomość grupie B.</li>'
-                '<li>Grupa A wysyła do grupy B publiczną, niezaszyfrowaną wiadomość o treści: <i>"Wyślijcie skrzynkę z kłódką otwartą w środku. Klucz zostawcie u siebie."</i></li>'
+                '<li>Grupa A wysyła do grupy B publiczną, niezaszyfrowaną wiadomość o treści: <i>"Wyślijcie skrzynkę z otwartą kłódką w środku. Klucz zostawcie u siebie."</i></li>'
                 '<li>Grupa B wysyła grupie A skrzynkę z kłódką w środku.</li>'
-                '<li>Grupa A umieszcza tajną wiadomość w skrzynce grupy B, zatrzaskuje na niej kłódkę i wysyła ją do grupy B.</li>'
+                '<li>Grupa A umieszcza tajną wiadomość w skrzynce grupy B, zatrzaskuje na skrzynce kłódkę i wysyła ją z powrotem do grupy B.</li>'
                 '<li>Grupa B jako jedyna ma klucz do swojej skrzynki, odbiera wiadomość, otwiera kłódkę kluczem i odczytuje wiadomość.</li>'
                 '</ol>'
-                '<br>Prawdopodobnie grupy będą próbowały różnych nieskutecznych metod, typu:'
+                'Prawdopodobnie grupy będą próbowały różnych nieskutecznych metod, typu:'
                 '<ul>'
                 '<li>Wysłanie drugiej grupie wiadomości w swojej zamkniętej skrzynce (wówczas odbiorca nie ma jak jej otworzyć)</li>'
                 '<li>Wysłanie drugiej grupie wiadomości w swojej zamkniętej skrzynce z kluczem przyklejonym do spodu skrzynki (wówczas prowadzący może ją otworzyć i odczytać)</li>'
                 '<li>Wysłanie drugiej grupie wiadomości zaszyfrowanej GADERYPOLUKI (wówczas prowadzący może ją odszyfrować na własną rękę)</li>'
-                '<br>W każdym z tych przypadków prowadzący nie może zaliczyć grupie zadania.'
+                '</ul>'
+                'W każdym z tych przypadków prowadzący nie może zaliczyć grupie zadania.'
+                '<br>'
+                '<br>Grupie, która rozgryzła rozwiązanie jako pierwsza można wręczyć jakąś niewielką nagrodę.'
         ),
 
         KonspektStep(
             title: 'Podsumowanie szyfrowania kluczem asymetrycznym',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: 'Prowadzący podsumowuje wykonane przez uczestników ćwiczenie z zamykanymi skrzynkami. W tym celu opisuje proces wysyłania maila w formie <b>scenki</b> z udziałem trzech chętnych uczestników.'
+            content: 'Prowadzący podsumowuje wykonane przez uczestników ćwiczenie z zamykanymi skrzynkami upewniając się, że każdy rozumie dlaczego takie wysłanie wiadomości jest bezpieczne.'
+        ),
+
+        KonspektStep(
+            title: 'Przykład szyfrowanej poczty',
+            duration: Duration(minutes: 5),
+            activeForm: true,
+            content: 'Gdy uczestnicy rozumieją już mechanizm ze skrzynką, kłódką i kluczem, prowadzący organizuje <b>scenkę</b> będącą przykładem wysyłania maila w formie z udziałem trzech chętnych uczestników.'
                 '<br>'
                 '<br>Scenka dotyczy następującej sytuacji: osoba A wysyła maila do osoby B używając poczty eletronicznej M. Zarówno osoba A, osoba B jak i poczta B odgrywane sa przez uczestników, każdy z których ma skrzynkę z kłódką i kluczem. W scence tej prowadzący gra rolę internetu i chodzi między uczestnikami obrazując ruch zaszyfrowanych informacji (skrzynek) po sieci.'
                 '<br>'
@@ -1788,7 +1755,7 @@ List<Konspekt> allKonspekts = [
                 '<br>'
                 '<br>Uczestnicy rzucają swoje pomysły. Prawidłowa odpowiedź brzmi: <i>"Wysyłający, odbierający oraz dostawca usługi poczty elektronicznej (np. Gmail)."</i>'
                 '<br>'
-                '<br>Prowadzący zwraca uwagę, że tak samo jest z innymi danymi: właściciele usług internetowych wiedzą kiedy używasz telefonu, skąd się logujesz, co piszesz w mediach społecznościowych, co lubisz, co przykuwa twoją uwagę, z kim rozmawiasz, co oglądasz.'
+                '<br>Prowadzący zwraca uwagę, że tak samo jest z innymi danymi: właściciele usług internetowych wiedzą kiedy używają telefonu, skąd się logują, co piszą w mediach społecznościowych, co polubili, co przykuło ich uwagę, z kim rozmawiają, co oglądają, jakie jedzenie zamówili, etc..'
         ),
 
         KonspektStep(
@@ -1800,6 +1767,24 @@ List<Konspekt> allKonspekts = [
                 '<br>Jeśli uczestnicy mają problem z wpadnięciem na pomysł, prowadzący podpowiada, że przed chwilą udało im się zabezpieczyć wiadomości skrzynkami - może należy go jakoś zmodyfikować?'
                 '<br>'
                 '<br>Rozwiązanie jest następujące: poczta A pobiera od osoby B jej kod szyfrujący (skrzynkę z kłódką bez klucza) i przekazuje ją osobie A. Osoba A szyfruje wiadomość i oddaje ją poczcie M. Poczta M nie ma dostępu do klucza by odszyfrować wiadomość - więc może ją jedynie przekazać dalej osobie B, gdy ta zapyta o nowe wiadomości.'
+        ),
+
+        KonspektStep(
+            title: 'Bezpieczne komunikatory',
+            duration: Duration(minutes: 5),
+            activeForm: false,
+            content: 'Prowadzący informuje uczestników, że szyforwanie, w którym serwis dostarczający usługi nie ma dostępu do wiadomości nazywa się szyfrowaniem end-to-end.'
+                '<br>'
+                '<br>Prowadzący dodaje także, że jednym z najpopularniejszych bezpiecznych komunikatorów jest Signal - dostępny także w formie aplikacji mobilnej.'
+        ),
+
+        KonspektStep(
+            title: 'Gawęda',
+            duration: Duration(minutes: 10),
+            activeForm: false,
+            content: 'Prowadzący informuje uczestników, że szyforwanie, w którym serwis dostarczający usługi nie ma dostępu do wiadomości nazywa się szyfrowaniem end-to-end.'
+                '<br>'
+                '<br>Prowadzący dodaje także, że jednym z najpopularniejszych bezpiecznych komunikatorów jest Signal - dostępny także w formie aplikacji mobilnej.'
         ),
       ],
       howToFail: [
