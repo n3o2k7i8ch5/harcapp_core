@@ -12,6 +12,8 @@ class Wiersz extends ShortRead{
     required super.graphicalResource,
     super.soundResource,
     super.readingVoice,
-  });
+  }):super(
+    baseAssetsFolder: 'package/harcapp_core/assets/wiersze',
+  );
 
 }

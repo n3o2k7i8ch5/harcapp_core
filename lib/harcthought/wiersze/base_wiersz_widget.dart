@@ -12,7 +12,6 @@ class BaseWierszWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) => BaseShortReadWidget<Wiersz>(
       wiersz,
-      'package/harcapp_core/assets/wiersze',
       withAppBar: withAppBar
   );
 

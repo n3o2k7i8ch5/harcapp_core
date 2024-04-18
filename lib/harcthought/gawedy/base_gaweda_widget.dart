@@ -13,7 +13,6 @@ class BaseGawedaWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) => BaseShortReadWidget<Gaweda>(
       gaweda,
-      'package/harcapp_core/assets/gawedy',
       withAppBar: withAppBar
   );
 

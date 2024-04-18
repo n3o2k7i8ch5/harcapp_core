@@ -6,6 +6,7 @@ class ShortRead{
   final String title;
   final Color Function(BuildContext) titleColor;
   final String fileName;
+  final String baseAssetsFolder;
   final GraphicalResource graphicalResource;
   final String? soundResource;
   final String? readingVoice;
@@ -14,6 +15,7 @@ class ShortRead{
     required this.title,
     required this.titleColor,
     required this.fileName,
+    required this.baseAssetsFolder,
     required this.graphicalResource,
     this.soundResource,
     this.readingVoice

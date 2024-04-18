@@ -18,10 +18,9 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 class BaseShortReadWidget<T extends ShortRead> extends StatefulWidget{
 
   final T shortRead;
-  final String baseAssetsFolder;
   final bool withAppBar;
 
-  const BaseShortReadWidget(this.shortRead, this.baseAssetsFolder, {this.withAppBar = true, super.key});
+  const BaseShortReadWidget(this.shortRead, {this.withAppBar = true, super.key});
 
   @override
   State<StatefulWidget> createState() => BaseShortReadWidgetState();
@@ -31,14 +30,13 @@ class BaseShortReadWidget<T extends ShortRead> extends StatefulWidget{
 class BaseShortReadWidgetState extends State<BaseShortReadWidget>{
 
   ShortRead get shortRead => widget.shortRead;
-  String get baseAssetsFolder => widget.baseAssetsFolder;
 
   String? text;
 
   @override
   void initState() {
     ()async{
-      text = await readStringFromAssets(join(baseAssetsFolder, shortRead.fileName));
+      text = await readStringFromAssets(join(shortRead.baseAssetsFolder, shortRead.fileName));
       setState((){});
     }();
     super.initState();
@@ -76,7 +74,7 @@ class BaseShortReadWidgetState extends State<BaseShortReadWidget>{
                         child: Hero(
                           tag: shortRead,
                           child: Image(
-                            image: AssetImage(join(baseAssetsFolder, shortRead.graphicalResource.path)),
+                            image: AssetImage(join(shortRead.baseAssetsFolder, shortRead.graphicalResource.path)),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -157,7 +155,7 @@ class BaseShortReadWidgetState extends State<BaseShortReadWidget>{
         borderRadius: BorderRadius.circular(AppCard.bigRadius),
         elevation: AppCard.bigElevation,
         child: SoundPlayerWidget(
-          source: join(baseAssetsFolder, shortRead.soundResource),
+          source: join(shortRead.baseAssetsFolder, shortRead.soundResource),
           name: 'Czyta: <b>${shortRead.readingVoice!}</b>',
           isWebAsset: false,
         )
