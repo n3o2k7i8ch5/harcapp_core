@@ -1,0 +1,1 @@
+const String noInternetMessage = 'Nie ma neta';

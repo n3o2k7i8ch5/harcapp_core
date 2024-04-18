@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/harcthought/gawedy/open_base_gaweda_dialog.dart';
 import 'package:harcapp_core/harcthought/harc_forms/open_base_harc_form_dialog.dart';
 
 import 'konspekt.dart';
@@ -37,6 +38,13 @@ class KonspektHtmlWidget extends StatelessWidget{
         openBaseHarcFormDialog(
           context: context,
           name: formName,
+        );
+      }else if(url.endsWith('@gaweda')){
+        String gawedaName = url.substring(0, url.length - '@gaweda'.length);
+        openBaseGawedaDialog(
+            context: context,
+            gawedaName: gawedaName,
+            maxWidth: maxRelatedDialogWidth
         );
       }else if(url.endsWith('@konspekt')){
         String konspektName = url.substring(0, url.length - '@konspekt'.length);

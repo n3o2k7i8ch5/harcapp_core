@@ -1592,7 +1592,7 @@ List<Konspekt> allKonspekts = [
                 '<br>'
                 '<br><b>Odpowiedź:</b>'
                 '<br><i>To sieć, w której urządzenia elektroniczne mogą się ze sobą wzajemnie komunikować.</i>'
-                '<br>'
+                '<br> '
                 '</li>'
                 '<li>'
                 '<b>Pytanie:</b>'
@@ -1600,7 +1600,7 @@ List<Konspekt> allKonspekts = [
                 '<br>'
                 '<br><b>Odpowiedź:</b>'
                 '<br><i>Każdy komputer ma adres IP, który go identyfikuje w internecie.</i>'
-                '<br>'
+                '<br> '
                 '</li>'
                 '<li>'
                 '<b>Pytanie:</b>'
@@ -1608,7 +1608,7 @@ List<Konspekt> allKonspekts = [
                 '<br>'
                 '<br><b>Odpowiedź:</b>'
                 '<br><i>Każde urządzenie otrzymuje swój adres od sieci, dzięki czemu jest on unikalny. Gdyby każde urządzenie nadawało go sobie samo, mogłoby się powtórzyć z którymś z już istniejących przez co wiadomości mogłyby nie trafiać do właściwego urządzenia.</i>'
-                '<br>'
+                '<br> '
                 '</li>'
                 '<li>'
                 '<b>Pytanie:</b>'
@@ -1782,9 +1782,7 @@ List<Konspekt> allKonspekts = [
             title: 'Gawęda',
             duration: Duration(minutes: 10),
             activeForm: false,
-            content: 'Prowadzący informuje uczestników, że szyforwanie, w którym serwis dostarczający usługi nie ma dostępu do wiadomości nazywa się szyfrowaniem end-to-end.'
-                '<br>'
-                '<br>Prowadzący dodaje także, że jednym z najpopularniejszych bezpiecznych komunikatorów jest Signal - dostępny także w formie aplikacji mobilnej.'
+            content: 'Prowadzący prosi uczestników, by usiedli wygodnie i zamknęli oczy (mogą się też położyć, jeśli chcą) po czym opowiada im gawędę <a href="">O braku telefonu</a>.'
         ),
       ],
       howToFail: [
