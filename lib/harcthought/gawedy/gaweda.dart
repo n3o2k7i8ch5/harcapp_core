@@ -10,7 +10,7 @@ class Gaweda extends ShortRead{
     super.soundResource,
     super.readingVoice,
   }):super(
-      baseAssetsFolder: 'package/harcapp_core/assets/gawedy',
+      baseAssetsFolder: 'packages/harcapp_core/assets/gawedy',
   );
 
 }
