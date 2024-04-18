@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/dimen.dart';
-import 'package:harcapp_core/harcthought/common/base_short_read_widget.dart';
 
+import 'base_gaweda_widget.dart';
 import 'data.dart';
 import 'gaweda.dart';
 
@@ -30,7 +30,7 @@ Future<void> openBaseGawedaDialog({
               child: Material(
                   borderRadius: BorderRadius.circular(AppCard.bigRadius),
                   clipBehavior: Clip.hardEdge,
-                  child: BaseShortReadWidget(gaweda, 'package/harcapp_core/assets/gawedy')
+                  child: BaseGawedaWidget(gaweda)
               ),
             )
         ),
