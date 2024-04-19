@@ -114,9 +114,9 @@ List<Konspekt> allKonspekts = [
             title: 'Oznaczenie grup',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: '<p style="text-align:justify;">Każdy uczestnik zostaje oznaczenie przynależności do swojej grupy. Może to być szarfa naramienna o innym kolorze dla każdej grupy lub po prostu może to być beret o wybranym kolorze.</p>'
+            content: '<p style="text-align:justify;">Każdy uczestnik zostaje oznaczenie przynależności do swojej grupy. Może to być szarfa naramienna o innym kolorze dla każdej grupy lub po prostu może to być beret o wybranym kolorze.'
                 '<br>'
-                '<br><p style="text-align:justify;">Jeżeli do gry używane są berety harcerskie, ważne jest, by nie miały one na sobie lilijek lub by berety były "wywrócone na lewą stronę" - inaczej łatwo o pocięte dłonie.</p>'
+                '<br>Jeżeli do gry używane są berety harcerskie, ważne jest, by nie miały one na sobie lilijek lub by berety były "wywrócone na lewą stronę" - inaczej łatwo o pocięte dłonie.</p>'
         ),
 
 
@@ -182,14 +182,14 @@ List<Konspekt> allKonspekts = [
         ),
       ],
       summary: 'Forma teatralna, w której uczestnicy w grupach medytują nad fragmentem Pisma Świętego i wchodzą w rolę pozwalającą zadawać pytania bohaterom biblijnych wydarzeń oraz na nie odpowiadać.',
-      description: 'By zachować precyzję, forma zawarta w niniejszym konspekcie powinna być nazwana "<b>Warsztatami z elementami bibliodramy</b>". Żeby jednak tę nazwę skrócić, używana jest hasłowa nazwa "<b>bibliodrama</b>".'
+      description: '<p style="text-align:justify;">By zachować precyzję, forma zawarta w niniejszym konspekcie powinna być nazwana "<b>Warsztatami z elementami bibliodramy</b>". Żeby jednak tę nazwę skrócić, używana jest hasłowa nazwa "<b>bibliodrama</b>".'
           '<br>'
-          '<br>Bibliodrama składa się z dwóch etapów:'
+          '<br>Bibliodrama składa się z dwóch etapów:</p>'
           '<ul>'
-          '<li>praca ze Słowem Bożym</li>'
-          '<li>przygotowanie i przedstawienie scenki</li>'
+          '<li><p>praca ze Słowem Bożym</p></li>'
+          '<li><p>przygotowanie i przedstawienie scenki</p></li>'
           '</ul>'
-          '<br>Najważniejszym elementem bibliodramy jest praca duchowa poprzedzająca scenki. Należy mieć to na uwadze, jeśli rozważa się skrócenie czasu bibliodramy.',
+          '<p style="text-align:justify;">Najważniejszym elementem bibliodramy jest praca duchowa poprzedzająca scenki. Należy mieć to na uwadze, jeśli rozważa się skrócenie czasu bibliodramy.</p>',
       attachments: [
         KonspektAttachment(
           name: 'fragment_przykladowy_1',
@@ -223,7 +223,7 @@ List<Konspekt> allKonspekts = [
             title: 'Podział na grupy',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: 'Prowadzący dzieli uczestników na grupy. Liczba grup zależy od liczby uczestników - w jednej grupie powinno być ok. 6-10 osób. Ważne, by powstały przynajmniej dwie grupy, by przygotowane na końcu przez każdą grupę scenki mogły zostać komuś przedstawione. Zbyt wiele osób w grupie niepotrzebnie wydłuża pracę, zbyt mało ogranicza dynamikę spacerów pytań.'
+            content: '<p style="text-align:justify;">Prowadzący dzieli uczestników na grupy. Liczba grup zależy od liczby uczestników - w jednej grupie powinno być ok. 6-10 osób. Ważne, by powstały przynajmniej dwie grupy, by przygotowane na końcu przez każdą grupę scenki mogły zostać komuś przedstawione. Zbyt wiele osób w grupie niepotrzebnie wydłuża pracę, zbyt mało ogranicza dynamikę spacerów pytań.'
                 '<br>'
                 '<br>Każda osoba otrzymuje po jednym fragmencie Pisma Świętego - w ramach jednej grupy wszyscy otrzymują ten sam fragment. Ważne, by każdy z fragmentów był różny. Fragmenty Biblii muszą mieć potencjał fabularny – możliwość ich przedstawienia.'
                 '<br>'
@@ -232,7 +232,7 @@ List<Konspekt> allKonspekts = [
                 '<br><a href="fragment_przykladowy_2@attachment">Przykładowy fragment Pisma Świętego (nr 2)</a>'
                 '<br><a href="fragment_przykladowy_3@attachment">Przykładowy fragment Pisma Świętego (nr 3)</a>'
                 '<br>'
-                '<br>Wskazane jest także, by w każdej z grup znalazła się przynajmniej jedna doświadczona osoba, która będzie ją animować: pilnowała czasu, decydowała o przejściach między kolejnymi etapami, wyczuwając atmosferę w grupie.'
+                '<br>Wskazane jest także, by w każdej z grup znalazła się przynajmniej jedna doświadczona osoba, która będzie ją animować: pilnowała czasu, decydowała o przejściach między kolejnymi etapami, wyczuwając atmosferę w grupie.</p>'
         ),
 
 
@@ -240,9 +240,9 @@ List<Konspekt> allKonspekts = [
             title: 'Medytacja fragmentu Pisma Świętego',
             duration: Duration(minutes: 20),
             activeForm: false,
-            content: 'Prowadzący rozdaje uczestnikom wydrukowane fragmenty Pisma Świętego wraz z krótką instrukcją medytacji.'
+            content: '<p style="text-align:justify;">Prowadzący rozdaje uczestnikom wydrukowane fragmenty Pisma Świętego wraz z krótką instrukcją medytacji.'
                 '<br>'
-                '<br>Uczestnicy w ciszy zapoznają się z fragmentem Biblii, jego bohaterami i ich historią. Ważne, by podjęli refleksję dotyczącą tego, co przykuwa ich uwagę, co ich porusza, z czym się nie zgadzają, czego nie rozumieją oraz o co chcielibyśmy zapytać samych bohaterów historii.'
+                '<br>Uczestnicy w ciszy zapoznają się z fragmentem Biblii, jego bohaterami i ich historią. Ważne, by podjęli refleksję dotyczącą tego, co przykuwa ich uwagę, co ich porusza, z czym się nie zgadzają, czego nie rozumieją oraz o co chcielibyśmy zapytać samych bohaterów historii.</p>'
         ),
 
 
@@ -250,9 +250,9 @@ List<Konspekt> allKonspekts = [
             title: 'Wstępny krąg dzielenia',
             duration: Duration(minutes: 20),
             activeForm: false,
-            content: 'Pierwsze dzielenie jest najbardziej uporządkowane. Uczestnicy kolejno w kręgu dzielą się swoimi refleksjami dotyczącymi przeczytanego fragmentu Biblii. Po zakończeniu wypowiedzi uczestnik mówi „dzięki” - w dobrym tonie jest, aby wówczas reszta również odpowiada „dzięki” - wówczas głos wędruje do następnej osoby. Gdy wszyscy się wypowiedzą i zostanie jeszcze czas, każdy może dodać coś jeszcze.'
+            content: '<p style="text-align:justify;">Pierwsze dzielenie jest najbardziej uporządkowane. Uczestnicy kolejno w kręgu dzielą się swoimi refleksjami dotyczącymi przeczytanego fragmentu Biblii. Po zakończeniu wypowiedzi uczestnik mówi „dzięki” - w dobrym tonie jest, aby wówczas reszta również odpowiada „dzięki” - wówczas głos wędruje do następnej osoby. Gdy wszyscy się wypowiedzą i zostanie jeszcze czas, każdy może dodać coś jeszcze.'
                 '<br>'
-                '<br>Uczestnicy nie powinni się odnosić do swoich wzajemnych wypowiedzi w sposób krytyczny lub polemiczny.'
+                '<br>Uczestnicy nie powinni się odnosić do swoich wzajemnych wypowiedzi w sposób krytyczny lub polemiczny.</p>'
         ),
 
 
@@ -260,23 +260,23 @@ List<Konspekt> allKonspekts = [
             title: 'Wstępny krąg dzielenia',
             duration: Duration(minutes: 20),
             activeForm: true,
-            content: 'Spacer jest najbardziej specyficzną formą bibliodramy. Odbywa się w grupach, jednak dobrze jest przed podziałem przećwiczyć go ze wszystkimi uczestnikami na popularnej biblijnej postaci.'
+            content: '<p style="text-align:justify;">Spacer jest najbardziej specyficzną formą bibliodramy. Odbywa się w grupach, jednak dobrze jest przed podziałem przećwiczyć go ze wszystkimi uczestnikami na popularnej biblijnej postaci.'
                 '<br>'
                 '<br>Uczestnicy chodzą powoli w kręgu i kontemplują w myślach bohatera z czytanego fragmentu wskazanego przez prowadzącego. Kiedy komuś pojawia się w głowie pytanie które chciałby owej postaci zadać, wchodzi do środka kręgu, krąg zatrzymuje się, po czym osoba w kręgu zadaje głośno pytanie do postaci. Następnie wraca do kręgu i krąg rusza dalej, tyle, że w przeciwnym kierunku. Uczestnicy w kręgu odpowiadają na pytanie (krótko i zwięźle) w pierwszej osobie wcielając się w bohatera, któremu zostało ono zadane. Odpowiedzi mogą być dowolne: to praca zbiorowej (nie)świadomości.'
                 '<br>'
-                '<br>Przykład pytania zadanego w środku kręgu:'
+                '<br>Przykład pytania zadanego w środku kręgu:</p>'
                 '<ul>'
-                '<li><i>Józefie, jak się czułeś kiedy Maryja urodziła Ci syna?</i></li>'
+                '<li><p><i>Józefie, jak się czułeś kiedy Maryja urodziła Ci syna?</i></p></li>'
                 '</ul>'
-                '<br>Przykład odpowiedzi na pytanie od uczestników idących w kręgu:'
+                '<p style="text-align:justify;">Przykład odpowiedzi na pytanie od uczestników idących w kręgu:</p>'
                 '<ul>'
-                '<li><i>Byłem szczęśliwy.</i></li>'
-                '<li><i>Czułem niepokój.</i></li>'
-                '<li><i>Miałem dziwne poczucie podniosłości tego momentu.</i></li>'
-                '<li><i>Martwiłem się, że zmarznie.</i></li>'
-                '<li><i>...</i></li>'
+                '<li><p><i>Byłem szczęśliwy.</i></p></li>'
+                '<li><p><i>Czułem niepokój.</i></p></li>'
+                '<li><p><i>Miałem dziwne poczucie podniosłości tego momentu.</i></p></li>'
+                '<li><p><i>Martwiłem się, że zmarznie.</i></p></li>'
+                '<li><p><i>...</i></p></li>'
                 '</ul>'
-                '<br>Warto uczulić uczestników, że nie należy się przejmować poprawnością teologiczną pytań i odpowiedzi. Odpowiedzi mogą być ze sobą sprzeczne. Być może każdemu zapadnie w sercu coś innego. Gdy odpowiedzi zaczną się wyczerpywać, kolejna osoba mająca pytanie wchodzi do kręgu, zadaje je, krąg znowu zmienia kierunek i podąża dalej, formułując odpowiedzi na nowe pytanie.'
+                '<p style="text-align:justify;">Warto uczulić uczestników, że nie należy się przejmować poprawnością teologiczną pytań i odpowiedzi. Odpowiedzi mogą być ze sobą sprzeczne. Być może każdemu zapadnie w sercu coś innego. Gdy odpowiedzi zaczną się wyczerpywać, kolejna osoba mająca pytanie wchodzi do kręgu, zadaje je, krąg znowu zmienia kierunek i podąża dalej, formułując odpowiedzi na nowe pytanie.</p>'
         ),
 
 
@@ -284,7 +284,7 @@ List<Konspekt> allKonspekts = [
             title: 'Krąg dzielenia z pierwszym bohaterem',
             duration: Duration(minutes: 20),
             activeForm: false,
-            content: 'Drugi krąg dzielenia jest luźniejszy od pierwszego. Uczestnicy dzielą się swoimi obserwacjami i doświadczeniami w formie dyskusji. Na tym etapie tworzy się wspólne rozumienie historii, nad którą uczestnicy pracują.'
+            content: '<p style="text-align:justify;">Drugi krąg dzielenia jest luźniejszy od pierwszego. Uczestnicy dzielą się swoimi obserwacjami i doświadczeniami w formie dyskusji. Na tym etapie tworzy się wspólne rozumienie historii, nad którą uczestnicy pracują.</p>'
         ),
 
 
@@ -292,7 +292,7 @@ List<Konspekt> allKonspekts = [
             title: 'Spacer pytań z drugim bohaterem',
             duration: Duration(minutes: 20),
             activeForm: true,
-            content: 'Forma analogiczna do <i>spaceru pytań z pierwszym bohaterem</i>, tyle, że dotycząca drugiego, wybranego przez prowadzącego bohatera.'
+            content: '<p style="text-align:justify;">Forma analogiczna do <i>spaceru pytań z pierwszym bohaterem</i>, tyle, że dotycząca drugiego, wybranego przez prowadzącego bohatera.</p>'
         ),
 
 
@@ -300,7 +300,7 @@ List<Konspekt> allKonspekts = [
             title: 'Krąg dzielenia z drugim bohaterem',
             duration: Duration(minutes: 20),
             activeForm: false,
-            content: 'Forma analogiczna do <i>kręgu pytań z pierwszym bohaterem</i>, tyle, że dotycząca drugiego, wybranego przez prowadzącego bohatera.'
+            content: '<p style="text-align:justify;">Forma analogiczna do <i>kręgu pytań z pierwszym bohaterem</i>, tyle, że dotycząca drugiego, wybranego przez prowadzącego bohatera.</p>'
         ),
 
 
@@ -308,7 +308,7 @@ List<Konspekt> allKonspekts = [
             title: 'Kontemplacja końcowa',
             duration: Duration(minutes: 20),
             activeForm: false,
-            content: 'Uczestnicy po raz ostatni siadają z fragmentem sami. Kontemplacja powinna mieć formę jak najgłębszego wejścia w tę sytuację, bez nadmiernego analizowania.'
+            content: '<p style="text-align:justify;">Uczestnicy po raz ostatni siadają z fragmentem sami. Kontemplacja powinna mieć formę jak najgłębszego wejścia w tę sytuację, bez nadmiernego analizowania.</p>'
         ),
 
 
@@ -316,9 +316,9 @@ List<Konspekt> allKonspekts = [
             title: 'Przygotowanie scenki',
             duration: Duration(minutes: 20),
             activeForm: true,
-            content: 'Uczestnicy na podstawie poprzednich form przygotowują scenkę, którą później odegrają - tworzą scenariusz, scenografię i kostiumy, dzielą się rolami i ćwiczą. Prowadzący nie musi przygotowywać żadnych rekwizytów - uczestnicy korzystają z rzeczy znajdujących się w miejscu, w którym się znajdują. Nie potrzeba im niczego więcej ponad to, co mają wokół siebie i ze sobą.'
+            content: '<p style="text-align:justify;">Uczestnicy na podstawie poprzednich form przygotowują scenkę, którą później odegrają - tworzą scenariusz, scenografię i kostiumy, dzielą się rolami i ćwiczą. Prowadzący nie musi przygotowywać żadnych rekwizytów - uczestnicy korzystają z rzeczy znajdujących się w miejscu, w którym się znajdują. Nie potrzeba im niczego więcej ponad to, co mają wokół siebie i ze sobą.'
                 '<br>'
-                '<br>Podczas przygotowywania scenki uczestnicy zazwyczaj wychodzą z nastroju skupienia i powagi – jest to dla nich forma rozładowania napięcia zgromadzonego podczas długotrwałej pracy wewnętrznej. Często towarzyszy temu rodzaj „odpału” – uczestnicy zaczynają żartować co ma pozytywny wpływ na liczbę i jakość pomysłów na formę przedstawienia historii. Dobrze jest dbać o to, żeby scenka uobecniała owoce duchowej pracy, jeśli jednak tak się nie stanie, nie trzeba się tym przejmować.'
+                '<br>Podczas przygotowywania scenki uczestnicy zazwyczaj wychodzą z nastroju skupienia i powagi – jest to dla nich forma rozładowania napięcia zgromadzonego podczas długotrwałej pracy wewnętrznej. Często towarzyszy temu rodzaj „odpału” – uczestnicy zaczynają żartować co ma pozytywny wpływ na liczbę i jakość pomysłów na formę przedstawienia historii. Dobrze jest dbać o to, żeby scenka uobecniała owoce duchowej pracy, jeśli jednak tak się nie stanie, nie trzeba się tym przejmować.</p>'
         ),
 
 
@@ -326,7 +326,7 @@ List<Konspekt> allKonspekts = [
             title: 'Przedstawienie scenek',
             duration: Duration(minutes: 10),
             activeForm: true,
-            content: 'Gdy wszystkie grupy są gotowe, rozpoczynają się przedstawienia. Po każdym przedstawieniu organizator powinien zachęcić grupę do podzielenia się z resztą owocami ich pracy oraz tym, w jaki sposób owoce te uobecniły się w scence.'
+            content: '<p style="text-align:justify;">Gdy wszystkie grupy są gotowe, rozpoczynają się przedstawienia. Po każdym przedstawieniu organizator powinien zachęcić grupę do podzielenia się z resztą owocami ich pracy oraz tym, w jaki sposób owoce te uobecniły się w scence.</p>'
         ),
 
 
@@ -357,20 +357,19 @@ List<Konspekt> allKonspekts = [
         'Kształtowanie u uczestników umiejętności komunikacji i podziału zadań',
       ],
 
-
       summary: 'Harcerze bez udziału kadry organizują biwak, na który jadą (kadra jedzie jako opieka) i ponoszą wszystkie konsekwencje swoich niedociągnięć.',
-      description: 'Forma polega na przeprowadzeniu biwaku drużyny (lub zastępu), tyle że z niemal zerowym zaangażowaniem kadry drużyny. Rola kadry powinna się ograniczyć do przeprowadzenia zbiórki, podczas której pomogą ustalić w drużynie (lub zastępie), co trzeba zrobić, by zorganizować biwak oraz pomogą rozdzielić zadania i wybrać spośród uczestników głównego koordynatora biwaku.'
+      description: '<p style="text-align:justify;">Forma polega na przeprowadzeniu biwaku drużyny (lub zastępu), tyle że z niemal zerowym zaangażowaniem kadry drużyny. Rola kadry powinna się ograniczyć do przeprowadzenia zbiórki, podczas której pomogą ustalić w drużynie (lub zastępie), co trzeba zrobić, by zorganizować biwak oraz pomogą rozdzielić zadania i wybrać spośród uczestników głównego koordynatora biwaku.'
           '<br>'
-          '<br>Forma swoje główne walory czerpie z tego, że liczba i poziom skomplikowania problemów, z którymi uczestnicy się zmierzą jest ściśle zależna od tego jak skutecznie zorganizują biwak jako grupa:'
+          '<br>Forma swoje główne walory czerpie z tego, że liczba i poziom skomplikowania problemów, z którymi uczestnicy się zmierzą jest ściśle zależna od tego jak skutecznie zorganizują biwak jako grupa:</p>'
           '<ul>'
-          '<li>Jeżeli wszyscy zapomną kupić jedzenie - drużyna będzie głodować dwa dni, albo będzie zmuszona załatwić jedzenie na miejscu,</li>'
-          '<li>Jeżeli ktoś pomyli kierunek marszu lub miejsce docelowe - będzie trzeba spać na dworcu lub iść przez noc,</li>'
-          '<li>Jeśli ktoś nie sprawdzi, czy autobus powrotny jeździ także w niedzielę - będzie trzeba łapać stopa, albo iść pieszo.</li>'
+          '<li><p style="text-align:justify;">Jeżeli wszyscy zapomną kupić jedzenie - drużyna będzie głodować dwa dni, albo będzie zmuszona załatwić jedzenie na miejscu,</p></li>'
+          '<li><p style="text-align:justify;">Jeżeli ktoś pomyli kierunek marszu lub miejsce docelowe - będzie trzeba spać na dworcu lub iść przez noc,</p></li>'
+          '<li><p style="text-align:justify;">Jeśli ktoś nie sprawdzi, czy autobus powrotny jeździ także w niedzielę - będzie trzeba łapać stopa, albo iść pieszo.</p></li>'
           '</ul>'
-          '<br>Rola kadry sprowadza się przede wszystkim do dwóch kwestii:'
+          '<p style="text-align:justify;">Rola kadry sprowadza się przede wszystkim do dwóch kwestii:</p>'
           '<ul>'
-          '<li>Reagowania tylko i wyłącznie gdy sytuacja będzie groźna dla życia uczestników,</li>'
-          '<li>Podsumowaniu biwaku po jego zakończeniu.</li>'
+          '<li><p style="text-align:justify;">Reagowania tylko i wyłącznie gdy sytuacja będzie groźna dla życia uczestników,</p></li>'
+          '<li><p style="text-align:justify;">Podsumowaniu biwaku po jego zakończeniu.</p></li>'
           '</ul>'
   ),
 
