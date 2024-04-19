@@ -1592,7 +1592,7 @@ List<Konspekt> allKonspekts = [
                 '<br>'
                 '<br><b>Odpowiedź:</b>'
                 '<br><i>To sieć, w której urządzenia elektroniczne mogą się ze sobą wzajemnie komunikować.</i>'
-                '<br> '
+                '<br>&nbsp'
                 '</li>'
                 '<li>'
                 '<b>Pytanie:</b>'
