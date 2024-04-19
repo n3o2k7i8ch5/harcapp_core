@@ -39,16 +39,16 @@ class KonspektMaterialTile extends StatelessWidget{
                   Row(
                     children: [
                       Expanded(
-                          child: Text(
-                              material.name,
-                              style: const AppTextStyle(fontSize: Dimen.textSizeBig, height: 1.2)
-                          )
+                        child: Text(
+                          material.name,
+                          style: const AppTextStyle(fontSize: Dimen.textSizeBig, height: 1.2)
+                        )
                       ),
 
                       if(material.amount != 0)
                         SizedBox(
-                            width: 64,
-                            child: AmountWidget(material)
+                          width: 64,
+                          child: AmountWidget(material)
                         ),
 
                     ],
