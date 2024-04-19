@@ -338,11 +338,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   Text(konspekt.type.displayName.toLowerCase(), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar)),
                   SizedBox(width: Dimen.iconMarg),
                   Container(
-                    color: konspekt.type.color(context),
                     height: 12.0,
                     width: 12.0,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.0)
+                      borderRadius: BorderRadius.circular(12.0),
+                      color: konspekt.type.color(context),
                     ),
                   )
                 ],
