@@ -16,9 +16,10 @@ class KonspektThumbnailWidget extends StatelessWidget{
 
   final Konspekt konspekt;
   final double elevation;
+  final double radius;
   final void Function()? onTap;
 
-  const KonspektThumbnailWidget(this.konspekt, {this.elevation = 0, this.onTap, super.key});
+  const KonspektThumbnailWidget(this.konspekt, {this.elevation = 0, this.radius = AppCard.bigRadius, this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) => Hero(
@@ -26,8 +27,8 @@ class KonspektThumbnailWidget extends StatelessWidget{
       child: SimpleButton(
         elevation: elevation,
         onTap: onTap,
-        color: isDark(context)?Colors.brown[400]:Colors.amber[100],
-        colorEnd: isDark(context)?Colors.brown[500]:Colors.amber[200],
+        color: konspekt.type.color,// isDark(context)?Colors.brown[400]:Colors.amber[100],
+        // colorEnd: isDark(context)?Colors.brown[500]:Colors.amber[200],
         borderRadius: BorderRadius.circular(AppCard.bigRadius),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,

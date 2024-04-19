@@ -18,6 +18,14 @@ enum KonspektType{
     }
   }
 
+  Color get color{
+    switch(this){
+      case zwyczaj: return Colors.amber[100]!;
+      case zajecia: return Colors.brown[400]!;
+      case projekt: return Colors.deepPurple[300]!;
+    }
+  }
+
 }
 
 enum KonspektAttachmentFormat{
