@@ -1581,6 +1581,14 @@ List<Konspekt> allKonspekts = [
             amount: 4,
             comment: 'Kłódki muszą móc się zamknąć bez użycia klucza. Ważne też, by prowadzący miał do każdej kłódki zapasowy klucz, w przypadku gdyby uczestnicy przypadkiem zatrzasnęli klucz w środku.'
         ),
+        KonspektMaterial(
+            name: 'Kartka A4',
+            amount: 5
+        ),
+        KonspektMaterial(
+            name: 'Długopis',
+            amount: 5
+        ),
       ],
       intro: 'Zajęcia i ich cele opierają się na założeniu, że zarówno z punktu widzenia procesu wychowawczego jak i z atrakcyjności harcerstwa i relacji dla samych harcerzy, sytuacja w której członkowie drużyny domyślnie spędzają czas na telefonie by szukać rozrywki jest gorsza względem sytuacji w której uczestnicy są skupieni na sobie.',
       steps: [
@@ -1730,24 +1738,24 @@ List<Konspekt> allKonspekts = [
             title: 'Przykład szyfrowanej poczty',
             duration: Duration(minutes: 5),
             activeForm: true,
-            content: 'Gdy uczestnicy rozumieją już mechanizm ze skrzynką, kłódką i kluczem, prowadzący organizuje <b>scenkę</b> będącą przykładem wysyłania maila w formie z udziałem trzech chętnych uczestników.'
+            content: '<p>Gdy uczestnicy rozumieją już mechanizm ze skrzynką, kłódką i kluczem, prowadzący organizuje <b>scenkę</b> będącą przykładem wysyłania maila w formie z udziałem trzech chętnych uczestników.'
                 '<br>'
                 '<br>Scenka dotyczy następującej sytuacji: osoba A wysyła maila do osoby B używając poczty eletronicznej M. Zarówno osoba A, osoba B jak i poczta B odgrywane sa przez uczestników, każdy z których ma skrzynkę z kłódką i kluczem. W scence tej prowadzący gra rolę internetu i chodzi między uczestnikami obrazując ruch zaszyfrowanych informacji (skrzynek) po sieci.'
                 '<br>'
-                '<br>Scenka przebiega następująco:'
+                '<br>Scenka przebiega następująco:</p>'
                 '<ol>'
-                '<li>Osoba A tworzy wiadomość email u siebie na komputerze.</li>'
-                '<li>Osoba A pobiera od poczty M kod do zaszyfrowania wiadomości (skrzynkę z kłódką bez klucza). Jeśli nawet ktoś podsłucha tę wiadomość, zobaczy jedynie ogólno dostępny klucz szyfrujący.</li>'
-                '<li>Osoba A szyfruje wiadomość email i wysyła ją do poczty M.</li>'
-                '<li>Poczta M odszyfrowuje wiadomość email, zapisuje jej treść i odbiorcę.</li>'
-                '<li>Osoba B loguje się do skrzynki pocztowej poczty M i pobiera od poczty M kod szyfrujący (skrzynkę z kłódką bez klucza).</li>'
-                '<li>Osoba B szyfruje zapytanie do poczty M: <li>"czy mam nowe wiadomości?".</li>'
-                '<li>Osoba B wysyła do poczty M zaszyfrowane zapytanie o nowe wiadomości.</li>'
-                '<li>Poczta M pobiera od osoby M jej kod szyfrujący (skrzynkę z kłódką bez klucza).</li>'
-                '<li>Poczta M szyfruje nowe wiadomości email jej kodem szyfrującym (skrzynką z kłódką bez klucza).</li>'
-                '<li>Poczta M wysyła zaszyfrowane wiadomości do osoby B.</li>'
-                '<li>Osoba B odszyfrowuje wiadomości od poczty M.</li>'
-                '<li>Koniec!</li>'
+                '<li><p>Osoba A tworzy wiadomość email u siebie na komputerze.</p></li>'
+                '<li><p>Osoba A pobiera od poczty M kod do zaszyfrowania wiadomości (skrzynkę z kłódką bez klucza). Jeśli nawet ktoś podsłucha tę wiadomość, zobaczy jedynie ogólno dostępny klucz szyfrujący.</p></li>'
+                '<li><p>Osoba A szyfruje wiadomość email i wysyła ją do poczty M.</p></li>'
+                '<li><p>Poczta M odszyfrowuje wiadomość email, zapisuje jej treść i odbiorcę.</p></li>'
+                '<li><p>Osoba B loguje się do skrzynki pocztowej poczty M i pobiera od poczty M kod szyfrujący (skrzynkę z kłódką bez klucza).</p></li>'
+                '<li><p>Osoba B szyfruje zapytanie do poczty M: <li>"czy mam nowe wiadomości?".</p></li>'
+                '<li><p>Osoba B wysyła do poczty M zaszyfrowane zapytanie o nowe wiadomości.</p></li>'
+                '<li><p>Poczta M pobiera od osoby M jej kod szyfrujący (skrzynkę z kłódką bez klucza).</p></li>'
+                '<li><p>Poczta M szyfruje nowe wiadomości email jej kodem szyfrującym (skrzynką z kłódką bez klucza).</p></li>'
+                '<li><p>Poczta M wysyła zaszyfrowane wiadomości do osoby B.</p></li>'
+                '<li><p>Osoba B odszyfrowuje wiadomości od poczty M.</p></li>'
+                '<li><p>Koniec!</p></li>'
                 '</ol>'
         ),
 
@@ -1788,9 +1796,44 @@ List<Konspekt> allKonspekts = [
             activeForm: false,
             content: '<p>Prowadzący prosi uczestników, by usiedli wygodnie i zamknęli oczy (mogą się też położyć, jeśli chcą) po czym opowiada im gawędę <a href="gaweda_o_braku_telefonu@gaweda">O braku telefonu</a>.</p>'
         ),
+
+        KonspektStep(
+            title: 'Zagrożenia wynikające z telefonu',
+            duration: Duration(minutes: 10),
+            activeForm: true,
+            content: '<p>Prowadzący dzieli uczestników na grupy. Każda grupa dostaje kartkę i długopis i ma za zadanie w 10 minut wypisać najważniejsze zagrożenia jakie niesie za sobą dostęp do telefonu komórkowego.</p>'
+        ),
+
+        KonspektStep(
+            title: 'Jak korzystać z telefonu? Savoir-vivre',
+            duration: Duration(minutes: 20),
+            activeForm: false,
+            content: '<p>Uczestnicy wracają do kręgu. Prowadzący informuje uczestników, że będą oni teraz tworzyli savoir-vivre urządzeń mobilnych: czyli zasady kulturalnego i mądrego korzystania z telefonów komórkowych.'
+                '<br>'
+                '<br>Prowadzący prosi grupy o odczytanie kolejno po jednym zagrożeniu jakie grupy zapisały. Po każdym zagrożeniu uczestnicy muszą przekuć zagrożenie na ogólną zasadę lub zasady postępowania z telefonami.'
+                '<br>'
+                '<br>Przykładowy savoir-vivre urządzeń mobilnych może wyglądać następująco:'
+                '</p>'
+                '<ol>'
+                '<li><p><i>Wyjście ze znajomymi ma wyższy priorytet niż granie na fonie lub na kompie.</i></p></li>'
+                '<li><p><i>Podczas zbiórek nie wolno korzystać z telfonu, chyba, że drużynowy wyrazi zgodę.</i></p></li>'
+                '<li><p><i>Podczas przebywania w towarzystwie telefon nie powinien być na widoku.</i></p></li>'
+                '<li><p><i>W ciągu dnia można używać telefonu maksymalnie 1h do rzeczy innych niż pomoc w nauce lub dzwonienie.</i></p></li>'
+                '<li><p><i>Oglądanie TikToka, Realsów i Shortsów jest niedozwolone. Szkoda mózgu.</i></p></li>'
+                '</ol>'
+        ),
+
+        KonspektStep(
+            title: 'Podpisanie stworzonego savoir-vivre',
+            duration: Duration(minutes: 5),
+            activeForm: true,
+            content: '<p>Uczestnicy kolejno podpisują savoir-vivre urządzeń mobilnych. Warto również wywiesić podpisany dokument gdzieś w harcówce w widocznym, ale niekoniecznie centralnym miejscu.</p>'
+        ),
+
       ],
       howToFail: [
         'Przeprowadzić część zajęć dotyczącą szyfrowania w formie wykładu',
+        'Jako prowadzący zdominować proces ustalania zasad savoir-vivre urządzeń mobilnych'
       ]
   ),
 
