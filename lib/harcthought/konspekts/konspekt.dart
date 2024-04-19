@@ -23,7 +23,7 @@ enum KonspektType{
     switch(this){
       case zwyczaj: return isDark(context)?Colors.brown[400]!:Colors.amber[100]!;
       case zajecia: return isDark(context)?Colors.brown[800]!:Colors.brown[400]!;
-      case projekt: return isDark(context)?Colors.deepPurple[600]!:Colors.deepPurple[300]!;
+      case projekt: return isDark(context)?Colors.purple[900]!:Colors.deepPurple[300]!;
     }
   }
 

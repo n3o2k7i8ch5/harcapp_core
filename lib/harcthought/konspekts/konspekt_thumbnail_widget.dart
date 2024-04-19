@@ -85,7 +85,6 @@ class KonspektThumbnailWidget extends StatelessWidget{
                               fontFamily: 'PlayfairDisplay',
                               fontSize: Dimen.textSizeBig,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
                             ),
                             maxLines: konspekt.title.split(' ').length,
                           ),
