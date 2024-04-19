@@ -27,9 +27,9 @@ class KonspektThumbnailWidget extends StatelessWidget{
       child: SimpleButton(
         elevation: elevation,
         onTap: onTap,
-        color: konspekt.type.color,// isDark(context)?Colors.brown[400]:Colors.amber[100],
+        color: konspekt.type.color(context), // isDark(context)?Colors.brown[400]:Colors.amber[100],
         // colorEnd: isDark(context)?Colors.brown[500]:Colors.amber[200],
-        borderRadius: BorderRadius.circular(AppCard.bigRadius),
+        borderRadius: BorderRadius.circular(this.radius),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/color_pack_app.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
@@ -18,11 +19,11 @@ enum KonspektType{
     }
   }
 
-  Color get color{
+  Color color(BuildContext context){
     switch(this){
-      case zwyczaj: return Colors.amber[100]!;
-      case zajecia: return Colors.brown[400]!;
-      case projekt: return Colors.deepPurple[300]!;
+      case zwyczaj: return isDark(context)?Colors.brown[400]!:Colors.amber[100]!;
+      case zajecia: return isDark(context)?Colors.brown[800]!:Colors.brown[400]!;
+      case projekt: return isDark(context)?Colors.deepPurple[600]!:Colors.deepPurple[300]!;
     }
   }
 
