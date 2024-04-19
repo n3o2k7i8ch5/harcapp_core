@@ -57,7 +57,7 @@ class KonspektThumbnailWidget extends StatelessWidget{
                       konspekt.metos,
                       itemBuilder: (child) => Material(
                         borderRadius: BorderRadius.circular(100),
-                        color: konspekt.type.color(context).withOpacity(.7),
+                        color: background_(context).withOpacity(.7),
                         child: SizedBox(
                           width: 24,
                           height: 24,
