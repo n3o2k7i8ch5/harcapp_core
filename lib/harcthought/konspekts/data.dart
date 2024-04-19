@@ -657,34 +657,37 @@ List<Konspekt> allKonspekts = [
     intro: '<p style="text-align:justify;">Harcerze dowiadują się, że <b>nad ranem</b> w <b>weekend</b> dokonano porwania ważnej osoby. Policja ustaliła już, że za porwaniem stoi jeden z działających w okolicy gangów.'
         '<br>'
         '<br>Harcerze wyruszają, by zdobyć informacje o gangach. Ich zadaniem jest zebrać jak najwięcej informacji, przeanalizować je i wskazać, który gang, ich zdaniem, dokonał porwania. Wnioski harcerzy muszą być poparte argumentami.</p>',
-    description: '<p style="text-align:justify;">Lista okolicznych gangów:'
-        '<br>- Gang Olszaka'
-        '<br>- Szajka Łysego'
-        '<br>- Świnki trzy'
-        '<br>- Łaciata paczka'
-        '<br>- Grupa Mariana'
-        '<br>- Nowa ekipa'
-        '<br>- Dzika wataha'
-        '<br>- Robaczek i spółka'
-        '<br>- Kolorowe irokezy'
+    description: '<p style="text-align:justify;">Lista okolicznych gangów:</p>'
+        '<ul>'
+        '<li><p>Gang Olszaka</p></li>'
+        '<li><p>Szajka Łysego</p></li>'
+        '<li><p>Świnki trzy</p></li>'
+        '<li><p>Łaciata paczka</p></li>'
+        '<li><p>Grupa Mariana</p></li>'
+        '<li><p>Nowa ekipa</p></li>'
+        '<li><p>Dzika wataha</p></li>'
+        '<li><p>Robaczek i spółka</p></li>'
+        '<li><p>Kolorowe irokezy</p></li>'
+        '</ul>'
+        '<p style="text-align:justify;">Harcerze mają do zdobycia 64 wycinki informacji (załącznik: <a href="wycinki_informacji@attachment">wycinki informacji</a>). Spośród nich jedynie 8 wycinków ma znaczenie dla sprawy, ponieważ dają alibi niektórym gangom - pozostałe wycinki nie mają żadnego znaczenia.'
         '<br>'
-        '<br>Harcerze mają do zdobycia 64 wycinki informacji (załącznik: <a href="wycinki_informacji@attachment">wycinki informacji</a>). Spośród nich jedynie 8 wycinków ma znaczenie dla sprawy, ponieważ dają alibi niektórym gangom - pozostałe wycinki nie mają żadnego znaczenia.'
-        '<br>'
-        '<br>Alibi posiadają następujące gangi:'
-        '<br>- Gang Olszaka'
-        '<br>- Szajka Łysego'
-        '<br>- Świnki trzy'
-        '<br>- Łaciata paczka'
-        '<br>- Dzieci ulicy'
-        '<br>- Grupa Mariana'
-        '<br>- Nowa ekipa'
-        '<br>- Dzika wataha'
-        '<br>'
-        '<br>Alibi nie posiadają następujące gangi:'
-        '<br>- Robaczek i spółka'
-        '<br>- Kolorowe irokezy'
-        '<br>'
-        '<br>Trudność gry polega na odpowiednim skoordynowaniu działań przez harcerzy i uporządkowaniu zebranych informacje.'
+        '<br>Alibi posiadają następujące gangi:</p>'
+        '<ul>'
+        '<li><p>Gang Olszaka</p></li>'
+        '<li><p>Szajka Łysego</p></li>'
+        '<li><p>Świnki trzy</p></li>'
+        '<li><p>Łaciata paczka</p></li>'
+        '<li><p>Dzieci ulicy</p></li>'
+        '<li><p>Grupa Mariana</p></li>'
+        '<li><p>Nowa ekipa</p></li>'
+        '<li><p>Dzika wataha</p></li>'
+        '</ul>'
+        '<p style="text-align:justify;">Alibi nie posiadają następujące gangi:</p>'
+        '<ul>'
+        '<li><p>Robaczek i spółka</p></li>'
+        '<li><p>Kolorowe irokezy</p></li>'
+        '</ul>'
+        '<p style="text-align:justify;">Trudność gry polega na odpowiednim skoordynowaniu działań przez harcerzy i uporządkowaniu zebranych informacje.'
         '<br>'
         '<br><b>Grę można uprościć</b> podając harcerzom wskazówkę: wycinki informacji są opatrzone kolorami i w każdej grupie danego koloru kluczowy jest tylko jeden wycinek.'
         '<br>'
@@ -722,9 +725,9 @@ List<Konspekt> allKonspekts = [
         'Przedstawienie uczestnikom kokretnych sposobów postępowań charakteryzujących świętych'
       ],
 
-      description: 'Prowadzący przygotowuje i opowiada (najlepiej przy ognisku) gawędę o wybranym świętym, którego postawa lub inne cechy są dla uczestników w szczególny sposób godne naśladowania.'
+      description: '<p style="text-align:justify;">Prowadzący przygotowuje i opowiada (najlepiej przy ognisku) gawędę o wybranym świętym, którego postawa lub inne cechy są dla uczestników w szczególny sposób godne naśladowania.'
           '<br>'
-          '<br>Kluczowe jest, by opowiedzieć o bohaterze i realiach jego życia w sposób aktualnie zrozumiały, aby uczestnicy formy mogli się z nim utożsamić.',
+          '<br>Kluczowe jest, by opowiedzieć o bohaterze i realiach jego życia w sposób aktualnie zrozumiały, aby uczestnicy formy mogli się z nim utożsamić.</p>',
       howToFail: [
         'Przeczytać gawędę z kartki'
       ]
@@ -833,11 +836,11 @@ List<Konspekt> allKonspekts = [
         'Stworzenie możliwości znalezienia potencjalnego kapelana'
       ],
       customDuration: Duration(hours: 2),
-      description: 'Forma polega na wspólnym, okresowym (np. co drugi tydzień lub raz na miesiąc) wyjściu kadrą drużyny (drużynowy, przyboczni, zastępowi) na mszę. Forma ma sens tylko, jeśli relacje w drużynie są ku temu stosowne.'
+      description: '<p style="text-align:justify;">Forma polega na wspólnym, okresowym (np. co drugi tydzień lub raz na miesiąc) wyjściu kadrą drużyny (drużynowy, przyboczni, zastępowi) na mszę. Forma ma sens tylko, jeśli relacje w drużynie są ku temu stosowne.'
           '<br>'
           '<br>Sens formy polega przede wszystkim na wyniesieniu religii ze sfery “prywatnej” to “wspólnej” oraz na możliwości zbudowania wokół formy tradycji (gadanie o wrażeniach po mszy na kebaba, frytach, lodach - np. za fundusze drużyny).'
           '<br>'
-          '<br>Forma w szczególnych przypadkach pozwala też na uczestniczeniu po mszach w życiu duszpasterstwa - np. akademickiego działającego przy kościele i możliwości wysondowania, czy ksiądz byłby “dobrym materiałem” na kapelana drużyny, czy środowiska.'
+          '<br>Forma w szczególnych przypadkach pozwala też na uczestniczeniu po mszach w życiu duszpasterstwa - np. akademickiego działającego przy kościele i możliwości wysondowania, czy ksiądz byłby “dobrym materiałem” na kapelana drużyny, czy środowiska.</p>'
   ),
 
 
@@ -861,9 +864,9 @@ List<Konspekt> allKonspekts = [
         'Utrwalenie wśród uczestników treści Prawa Harcerskiego',
         'Lepsze zrozumienie przez uczestników Prawa Harcerskiego'
       ],
-      description: 'Uczestnicy są dzieleni na grupy (np. na zastępy) i otrzymują po jednym punkcie Prawie Harcerskiego na kartce. Ich zadaniem jest przygotować kalambury przedstawiające owe prawo, które zaprezentują pozostałej części uczestników.'
+      description: '<p style="text-align:justify;">Uczestnicy są dzieleni na grupy (np. na zastępy) i otrzymują po jednym punkcie Prawie Harcerskiego na kartce. Ich zadaniem jest przygotować kalambury przedstawiające owe prawo, które zaprezentują pozostałej części uczestników.'
           '<br>'
-          '<br>Grupa, której członek poprawie zgarnie prezentowany punkt Prawa jako kolejna prezentuje. Jeżeli już prezentowała, osoba, która zgadła wskazuje kolejną prezentującą grupę.'
+          '<br>Grupa, której członek poprawie zgarnie prezentowany punkt Prawa jako kolejna prezentuje. Jeżeli już prezentowała, osoba, która zgadła wskazuje kolejną prezentującą grupę.</p>'
   ),
 
 
@@ -887,9 +890,9 @@ List<Konspekt> allKonspekts = [
         'Utrwalenie wśród uczestników treści Prawa Zucha',
         'Lepsze zrozumienie przez uczestników Prawa Zucha'
       ],
-      description: 'Uczestnicy są dzieleni na grupy (np. na szóstki zuchowe) i otrzymują po jednym punkcie Prawie Zucha na kartce. Ich zadaniem jest przygotować kalambury przedstawiające owe prawo, które zaprezentują pozostałej części uczestników.'
+      description: '<p style="text-align:justify;">Uczestnicy są dzieleni na grupy (np. na szóstki zuchowe) i otrzymują po jednym punkcie Prawie Zucha na kartce. Ich zadaniem jest przygotować kalambury przedstawiające owe prawo, które zaprezentują pozostałej części uczestników.'
           '<br>'
-          '<br>Grupa, której członek poprawie zgarnie prezentowany punkt Prawa jako kolejna prezentuje. Jeżeli już prezentowała, osoba, która zgadła wskazuje kolejną prezentującą grupę.'
+          '<br>Grupa, której członek poprawie zgarnie prezentowany punkt Prawa jako kolejna prezentuje. Jeżeli już prezentowała, osoba, która zgadła wskazuje kolejną prezentującą grupę.</p>'
   ),
 
 
@@ -916,7 +919,7 @@ List<Konspekt> allKonspekts = [
         'Kształtowanie uważności poprzez niemal całkowitą możliwość eliminacji szumu informacyjnego i technologii',
         'Stworzenie przestrzeni na realizację znaczącej liczby zajęć',
       ],
-      description: 'Drużyna, najczęściej w okresie letnich wakacji i najlepiej razem z innymi drużynami (np. szczepu) wyjeżdża na obóz do lasu, gdzie buduje infrastrukturę obozową (sanitariaty, kuchnię, magazyn, etc.) i spędza kilka tygodni pod namiotami.'
+      description: '<p style="text-align:justify;">Drużyna, najczęściej w okresie letnich wakacji i najlepiej razem z innymi drużynami (np. szczepu) wyjeżdża na obóz do lasu, gdzie buduje infrastrukturę obozową (sanitariaty, kuchnię, magazyn, etc.) i spędza kilka tygodni pod namiotami.'
           '<br>Forma ta jest jedną z najskuteczniejszych harcerskich form wychowawczych i stwarza możliwość realizacji licznych zajęć i zwyczajów podczas jej trwania.'
           '<br>'
           '<br>Obozowanie w lesie pozwala na niemal dowolne wyeliminowanie czynnika technologicznego z życia uczestników formy: mediów społecznościowych, internetu, reklam, komunikatorów, syntetycznej muzyki, przez co pozwala na niemal dowolne kształtowanie uważności.'
@@ -925,7 +928,7 @@ List<Konspekt> allKonspekts = [
           '<br>'
           '<br>Dodatkowo funkcjonowanie w lesie ma zalety formy o obniżonym komforcie funkcjonowania.'
           '<br>'
-          '<br>Forma wymaga znaczących nakładów materiałowych, logistycznych i osobowych, jak również wymaga odpowiednio wysokiej kultury organizacyjnej w środowisku.'
+          '<br>Forma wymaga znaczących nakładów materiałowych, logistycznych i osobowych, jak również wymaga odpowiednio wysokiej kultury organizacyjnej w środowisku.</p>'
   ),
 
 
@@ -976,19 +979,19 @@ List<Konspekt> allKonspekts = [
         'Nienahalne zwrócenie uwagi harcerzy na naturę skomplikowanych rzeczywistości',
         'Kształtowanie poglądów harcerzy'
       ],
-      description: 'Harcerze (lub kadra) wybierają kontrowersyjny temat i rozpoczyna się dyskusja. Dobrym pomysłem jest zainicjować tę dyskusję przy okazji - na przykład wieczorem na obozie, czy podczas wędrówki - niekoniecznie w formalny sposób. Rolą prowadzącego formę jest moderowanie dyskusji - niekoniecznie granie w niej pierwszych skrzypiec. Zamiast narzucać swoją opinię, drużynowy powinien raczej wpływać na dyskusję kierując rozmową i odpowiednio stawiając pytania, zaś na końcu ją podsumować. Pozwoli mu to także określić poglądy harcerzy na różne tematy.'
+      description: '<p style="text-align:justify;">Harcerze (lub kadra) wybierają kontrowersyjny temat i rozpoczyna się dyskusja. Dobrym pomysłem jest zainicjować tę dyskusję przy okazji - na przykład wieczorem na obozie, czy podczas wędrówki - niekoniecznie w formalny sposób. Rolą prowadzącego formę jest moderowanie dyskusji - niekoniecznie granie w niej pierwszych skrzypiec. Zamiast narzucać swoją opinię, drużynowy powinien raczej wpływać na dyskusję kierując rozmową i odpowiednio stawiając pytania, zaś na końcu ją podsumować. Pozwoli mu to także określić poglądy harcerzy na różne tematy.'
           '<br>'
           '<br>Jeżeli drużyna nie ma znormalizowanych postaw religijnych, drużynowy nie powinien odnosić się do argumentów teologicznych (jeżeli uczestnicy chcą, mogą się odnosić). Jeżeli drużyna ma znormalizowane postawy religijne - kwestie wiary są dopuszczalnym a nawet pożądanym argumentem, jednak nie powinny być argumentem wyłącznym.'
           '<br>'
-          '<br>Przykładowe tematy:'
+          '<br>Przykładowe tematy:</p>'
           '<ul>'
-          '<li>mieszkanie przed ślubem</li>'
-          '<li>aborcja</li>'
-          '<li>seks</li>'
-          '<li>polityka</li>'
-          '<li>religia</li>'
-          '<li>Kościół</li>'
-          '<li>formalna legalizacja związków wieloosobowych</li>'
+          '<li><p style="text-align:justify;">mieszkanie przed ślubem</p></li>'
+          '<li><p style="text-align:justify;">aborcja</p></li>'
+          '<li><p style="text-align:justify;">seks</p></li>'
+          '<li><p style="text-align:justify;">polityka</p></li>'
+          '<li><p style="text-align:justify;">religia</p></li>'
+          '<li><p style="text-align:justify;">Kościół</p></li>'
+          '<li><p style="text-align:justify;">formalna legalizacja związków wieloosobowych</p></li>'
           '</ul>',
       howToFail: [
         'Jako drużynowy lub kadra zmonopolizować dyskusję.',
@@ -1090,21 +1093,20 @@ List<Konspekt> allKonspekts = [
         KonspektMaterial(name: 'Długopisy'),
       ],
       summary: 'Uczestnicy zawiązują partie polityczne, wymyślają swoje postulaty, po czym negocjują koalicję - jeśli im się nie uda, państwo pogrąży się w chaosie.',
-      description:'Forma opiera się ona na założeniu, że uczestnicy wyznają podobne aksjomaty i mają podobne punkty wyjścia, np.: “każdy człowiek powinien móc godnie żyć”, “dobre są jedynie relacje oparte o sprawiedliwość” itd..'
+      description:'<p style="text-align:justify;">Forma opiera się ona na założeniu, że uczestnicy wyznają podobne aksjomaty i mają podobne punkty wyjścia, np.: “każdy człowiek powinien móc godnie żyć”, “dobre są jedynie relacje oparte o sprawiedliwość” itd..'
           '<br>'
           '<br>Aby móc skutecznie przeprowadzić formę, konieczne jest by uczestnicy byli skłonni do poważnej dyskusji - samo posiadanie poglądów politycznych nie wystarczy (zwłaszcza, jeśli towarzyszy tą temu ciągłe “heheszki”, zaś polityka jest dla harcerzy jedynie memem).'
           '<br>'
           '<br>Forma ma sens jedynie w przypadku występowania jasnych różnic światopoglądowych między uczestnikami formy.'
           '<br>'
-          '<br>Prowadzący pełni w tej formie rolę mediatora: gdy negocjacje nad którymś z postulatów utykają, proponuje rozwiązania, zadaje pytania pomagające rozłożyć postulaty na części pierwsze, rozstrzyga przypadku sporów o fakty itd..',
+          '<br>Prowadzący pełni w tej formie rolę mediatora: gdy negocjacje nad którymś z postulatów utykają, proponuje rozwiązania, zadaje pytania pomagające rozłożyć postulaty na części pierwsze, rozstrzyga przypadku sporów o fakty itd..</p>',
       steps: [
-
 
         KonspektStep(
             title: 'Podział na grupy',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: 'Prowadzący dzieli uczestników na wybraną liczbę grup, z których każda powinna być spójna światopoglądowo.'
+            content: '<p style="text-align:justify;">Prowadzący dzieli uczestników na wybraną liczbę grup, z których każda powinna być spójna światopoglądowo.</p>'
         ),
 
 
@@ -1112,7 +1114,7 @@ List<Konspekt> allKonspekts = [
             title: 'Podział na grupy',
             duration: Duration(minutes: 45),
             activeForm: false,
-            content: 'Każda z grup zakłada swoją mini-partię. Każda mini-patria wymyśla swoją <b>nazwę</b>, wybiera spośród siebie <b>przedstawiciela</b>, <b>skrybę</b> oraz spisuje swoje <b>postulaty</b>. Jeśli wystarczy czasu, może stworzyć swoje logo.'
+            content: '<p style="text-align:justify;">Każda z grup zakłada swoją mini-partię. Każda mini-patria wymyśla swoją <b>nazwę</b>, wybiera spośród siebie <b>przedstawiciela</b>, <b>skrybę</b> oraz spisuje swoje <b>postulaty</b>. Jeśli wystarczy czasu, może stworzyć swoje logo.</p>'
         ),
 
 
@@ -1120,7 +1122,7 @@ List<Konspekt> allKonspekts = [
             title: 'Negocjacje - wstęp',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: 'Prowadzący informuje uczestników, że ich zadaniem jest zawiązanie koalicji. Koalicja może być zawiązana tylko, jeśli wszystkie partie zgodzą się na wspólną listę postulatów politycznych, społecznych i gospodarczych w państwie którym rządzą. Żadne postulaty poza tymi koalicyjnymi nie będą zrealizowane.'
+            content: '<p style="text-align:justify;">Prowadzący informuje uczestników, że ich zadaniem jest zawiązanie koalicji. Koalicja może być zawiązana tylko, jeśli wszystkie partie zgodzą się na wspólną listę postulatów politycznych, społecznych i gospodarczych w państwie którym rządzą. Żadne postulaty poza tymi koalicyjnymi nie będą zrealizowane.'
                 '<br>'
                 '<br>Umowa koalicyjna musi zostać spisana do czasu zakończenia ostatniej rundy negocjacji i podpisana przez przedstawicieli wszystkich partii. W przeciwnym razie <b>państwo pogrąży się w chaosie</b>.'
                 '<br>'
@@ -1130,7 +1132,7 @@ List<Konspekt> allKonspekts = [
                 '<br>'
                 '<br>Podczas drugiej i trzeciej rundy strony mają czas by wypracować umowę koalicyjną.'
                 '<br>'
-                '<br>Na każdym etapie rolą partii (w szczególności skryby) jest dbanie o to, by zapisywać kluczowe ustalenia oraz postulaty innych partii.'
+                '<br>Na każdym etapie rolą partii (w szczególności skryby) jest dbanie o to, by zapisywać kluczowe ustalenia oraz postulaty innych partii.</p>'
         ),
 
 
@@ -1138,7 +1140,7 @@ List<Konspekt> allKonspekts = [
             title: 'Negocjacje - runda 1',
             duration: Duration(minutes: 15),
             activeForm: false,
-            content: 'Partie siadają naprzeciw siebie i kolejni przedstawiciele referują postulaty swoich partii. Po zakończeniu wszystkich wystąpień każda partia może zadać każdej innej partii po jednym pytaniu.'
+            content: '<p style="text-align:justify;">Partie siadają naprzeciw siebie i kolejni przedstawiciele referują postulaty swoich partii. Po zakończeniu wszystkich wystąpień każda partia może zadać każdej innej partii po jednym pytaniu.</p>'
         ),
 
 
@@ -1146,9 +1148,9 @@ List<Konspekt> allKonspekts = [
             title: 'Narada',
             duration: Duration(minutes: 15),
             activeForm: false,
-            content: 'Partie udają się w swoje odrębne miejsca i naradzają się nad strategią komunikacji.'
+            content: '<p style="text-align:justify;">Partie udają się w swoje odrębne miejsca i naradzają się nad strategią komunikacji.'
                 '<br>'
-                '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca fazy narady.'
+                '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca fazy narady.</p>'
         ),
 
 
@@ -1156,9 +1158,9 @@ List<Konspekt> allKonspekts = [
             title: 'Negocjacje - runda 2',
             duration: Duration(minutes: 30),
             activeForm: false,
-            content: 'Partie siadają naprzeciw siebie i przedstawiciele przy współudziale i konsultowaniu się z pozostałymi członkami partii negocjują między sobą koalicję.'
+            content: '<p style="text-align:justify;">Partie siadają naprzeciw siebie i przedstawiciele przy współudziale i konsultowaniu się z pozostałymi członkami partii negocjują między sobą koalicję.'
                 '<br>'
-                '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca rundy negocjacji.'
+                '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca rundy negocjacji.</p>'
         ),
 
 
@@ -1166,9 +1168,9 @@ List<Konspekt> allKonspekts = [
             title: 'Narada',
             duration: Duration(minutes: 15),
             activeForm: false,
-            content: 'Partie udają się w swoje odrębne miejsca i naradzają się nad strategią komunikacji.'
+            content: '<p style="text-align:justify;">Partie udają się w swoje odrębne miejsca i naradzają się nad strategią komunikacji.'
                 '<br>'
-                '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca fazy narady.'
+                '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca fazy narady.</p>'
         ),
 
 
@@ -1176,11 +1178,11 @@ List<Konspekt> allKonspekts = [
             title: 'Negocjacje - runda 2',
             duration: Duration(minutes: 45),
             activeForm: false,
-            content: 'Partie siadają naprzeciw siebie i przedstawiciele przy współudziale i konsultowaniu się z pozostałymi członkami partii negocjują między sobą koalicję.'
+            content: '<p style="text-align:justify;">Partie siadają naprzeciw siebie i przedstawiciele przy współudziale i konsultowaniu się z pozostałymi członkami partii negocjują między sobą koalicję.'
                 '<br>'
                 '<br>Na końcu tej rundy musi powstać umowa koalicyjna - w przeciwnym razie państwo pogrąży się w chaosie.'
                 '<br>'
-                '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca rundy negocjacji.'
+                '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca rundy negocjacji.</p>'
         ),
 
 
@@ -1209,11 +1211,11 @@ List<Konspekt> allKonspekts = [
       'Budowanie u uczestników wspólnoty poprzez mechanizm rywalizacji',
       'Kształtowanie u uczestników szacunku dla skuteczności w działaniu',
     ],
-    description: 'Uczestnicy podczas formy wyjazdowej podczas której śpią w grupach osobnych miejscach (np. w osobnych podobozach podczas obozu letniego) w nocy podkradają się do drugiej grupy. Ich celem jest dostać się na teren obozowania przeciwnej grupy nie będąc zauważonymi przez wartę nocna i podkraść rzeczy jakieś symboliczne rzeczy (np. proporce zastępów, menażki, chusty z mundurów).'
+    description: '<p style="text-align:justify;">Uczestnicy podczas formy wyjazdowej podczas której śpią w grupach osobnych miejscach (np. w osobnych podobozach podczas obozu letniego) w nocy podkradają się do drugiej grupy. Ich celem jest dostać się na teren obozowania przeciwnej grupy nie będąc zauważonymi przez wartę nocna i podkraść rzeczy jakieś symboliczne rzeczy (np. proporce zastępów, menażki, chusty z mundurów).'
         '<br>'
         '<br>Podkradanie do innej grupy powinno zostać poprzedzone skonsultowaniem tego zamiaru z kadrą owej grupy (np. z kadrą podobozu), tak, by nie zaszło podejrzenie, że zupełnie obce osoby próbują się dostać na teren obozowania.'
         '<br>'
-        '<br>W przypadku, gdy podczas podkradania warta nocna złapie kogoś z podkradających się, może przywiązać go w pozycji siedzącej do drzewa (izolując od ziemi i samego drzewa karimatą). Upewniwszy się, że osoba nie jest zbyt ciasno związana i że nie ma ryzyka niedokrwienia kończyn, grupa wystawiająca wartę może wysłać delegację do kadry osoby złapanej i uzyskać zgodę na to, by złapany spędził noc będąc przywiązanym do drzewa (zależy to głównie od tego, czy według kadry taka osoba nie będzie miała z tego powodu traumy).',
+        '<br>W przypadku, gdy podczas podkradania warta nocna złapie kogoś z podkradających się, może przywiązać go w pozycji siedzącej do drzewa (izolując od ziemi i samego drzewa karimatą). Upewniwszy się, że osoba nie jest zbyt ciasno związana i że nie ma ryzyka niedokrwienia kończyn, grupa wystawiająca wartę może wysłać delegację do kadry osoby złapanej i uzyskać zgodę na to, by złapany spędził noc będąc przywiązanym do drzewa (zależy to głównie od tego, czy według kadry taka osoba nie będzie miała z tego powodu traumy).</p>',
   ),
 
 
@@ -1239,9 +1241,9 @@ List<Konspekt> allKonspekts = [
         KonspektMaterial(amountAttendantFactor: 1, name: 'Ziemia do roślin'),
         KonspektMaterial(amountAttendantFactor: 5, name: 'Nasiona roślin'),
       ],
-      description: 'Prowadzący na zbiórce daje uczestnikom doniczki, ziemię do roślin i nasiona. Uczestnicy sadzą roślinki do doniczki oraz dowiadują się jak o nie dbać. Uczestnicy dowiadują się, że po ustalonym czasie roślinki wrócą do harcówki, dlatego ważne, by harcerze zatroszczyli się o nie jak najlepiej.'
+      description: '<p style="text-align:justify;">Prowadzący na zbiórce daje uczestnikom doniczki, ziemię do roślin i nasiona. Uczestnicy sadzą roślinki do doniczki oraz dowiadują się jak o nie dbać. Uczestnicy dowiadują się, że po ustalonym czasie roślinki wrócą do harcówki, dlatego ważne, by harcerze zatroszczyli się o nie jak najlepiej.'
           '<br>'
-          '<br>Po czym zabierają je do domu. Przez następny okres (między pół roku a rok) zadaniem uczestników jest regularnie dbać o roślinkę. Po tym czasie roślinki są przynoszone do harcówki, gdzie dalej dba o nią w każdym tygodniu zastęp służbowy.'
+          '<br>Po czym zabierają je do domu. Przez następny okres (między pół roku a rok) zadaniem uczestników jest regularnie dbać o roślinkę. Po tym czasie roślinki są przynoszone do harcówki, gdzie dalej dba o nią w każdym tygodniu zastęp służbowy.</p>'
   ),
 
 
@@ -1262,9 +1264,9 @@ List<Konspekt> allKonspekts = [
       aims: [
         'Refleksja nad życiem i wartościami autorytetu'
       ],
-      description: 'Forma nie polega na tym, że prowadzący opowiada gawędę. Forma polega na tym, by prowadzący przygotował uczestnika do opowiedzenia gawędy.'
+      description: '<p style="text-align:justify;">Forma nie polega na tym, że prowadzący opowiada gawędę. Forma polega na tym, by prowadzący przygotował uczestnika do opowiedzenia gawędy.'
           '<br>'
-          '<br>Zazwyczaj twórca dzieła więcej na nim korzysta niż jego odbiorca - tak samo jest z dobrą gawędą. Forma polega na znalezieniu postaci, która dla słuchaczy będzie autorytetem, zanurzeniu się w historię jej życia i pod okiem doświadczonego instruktora przygotowanie gawędy dla zuchów lub harcerzy, która pozwoli im się utożsamić z bohaterem.',
+          '<br>Zazwyczaj twórca dzieła więcej na nim korzysta niż jego odbiorca - tak samo jest z dobrą gawędą. Forma polega na znalezieniu postaci, która dla słuchaczy będzie autorytetem, zanurzeniu się w historię jej życia i pod okiem doświadczonego instruktora przygotowanie gawędy dla zuchów lub harcerzy, która pozwoli im się utożsamić z bohaterem.</p>',
       howToFail: [
         'Pozwolić na przeczytanie gawędy z kartki'
       ]
@@ -1291,11 +1293,11 @@ List<Konspekt> allKonspekts = [
         aimSzacunekDlaSkutecznegoDzialania,
         aimPostawaWspolpracy,
       ],
-      description: 'Prowadzący po wydaniu komendy “zbiórka” (np. w szeregu), jeśli widzi, że harcerze się ociągają i nie traktują jego komendy z należytą powagą i dyscypliną odlicza od siedmiu do zera. Jeśli do tego czasu harcerze nie ustawią się na zbiórce, prowadzący wydaje całej drużynie komendę “padnij” (czyli przejście do podporu przodem).'
+      description: '<p style="text-align:justify;">Prowadzący po wydaniu komendy “zbiórka” (np. w szeregu), jeśli widzi, że harcerze się ociągają i nie traktują jego komendy z należytą powagą i dyscypliną odlicza od siedmiu do zera. Jeśli do tego czasu harcerze nie ustawią się na zbiórce, prowadzący wydaje całej drużynie komendę “padnij” (czyli przejście do podporu przodem).'
           '<br>'
           '<br>Forma ma na celu zbudowanie postawy szacunku dla wydawanych przez kadrę komend i postawy sprawnego działania - w przeciwnym razie w naturalny sposób harcerze, którzy sprawnie stawiają się na zbiórce są poszkodowani, gdyż czekają bezczynnie na tych, którzy komendę zignorowali. Jednocześnie forma pozwala zbudować przekonanie, że konieczność położenia trzymanych w ręku rzeczy na ziemi w celu wykonania komendy “padnij” oraz dotknięcie rękami podłogi lub ziemi nie jest “końcem świata”.'
           '<br>'
-          '<br>Należy mieć na uwadze, że o ile słuszne jest egzekwowanie od harcerzy wykonywania komend i poleceń kadry, o tyle kadra ma obowiązek stosownie i w sposób otwarty reagować na formułowane przez harcerzy poglądy, pomysły i wątpliwości, nawet, jeśli mają one charakter zaczepny, żartobliwy, czy niepoważny.'
+          '<br>Należy mieć na uwadze, że o ile słuszne jest egzekwowanie od harcerzy wykonywania komend i poleceń kadry, o tyle kadra ma obowiązek stosownie i w sposób otwarty reagować na formułowane przez harcerzy poglądy, pomysły i wątpliwości, nawet, jeśli mają one charakter zaczepny, żartobliwy, czy niepoważny.</p>'
   ),
 
 
@@ -1319,11 +1321,11 @@ List<Konspekt> allKonspekts = [
         aimHartDuchaWedrowanie,
         aimUmiejetnoscWedrowania,
       ],
-      description: 'Wariant <a href="wedrowka@konspekt">Wędrówki</a> lub <a href="wedrowka_medytacyjna@konspekt">Wędrówki medytacyjnej</a> o tematyce religijnej.'
+      description: '<p style="text-align:justify;">Wariant <a href="wedrowka@konspekt">Wędrówki</a> lub <a href="wedrowka_medytacyjna@konspekt">Wędrówki medytacyjnej</a> o tematyce religijnej.'
           '<br>'
           '<br>Wskazane jest, by cel pielgrzymki był określony i w jakiś sposób religijnie istotny. Samą wędrówkę warto podzielić na części i dywersyfikować ich formy wykorzystując np.: śpiewanie, rozważania, luźne rozmowy, milczenie.'
           '<br>'
-          '<br>Warto w ramach formy stworzyć przestrzeń i okoliczności do realizacji przez harcerzy zadań na stopnie i sprawności.',
+          '<br>Warto w ramach formy stworzyć przestrzeń i okoliczności do realizacji przez harcerzy zadań na stopnie i sprawności.</p>',
       howToFail: [
         'Nie uświadomienie uczestnikom jaki jest sens pielgrzymki'
       ]
@@ -1347,9 +1349,9 @@ List<Konspekt> allKonspekts = [
       aims: [
         'Kształtowanie u uczestników hartu ducha'
       ],
-      description: 'Uczestnicy dobrowolnie wstrzymują się od jedzenia przez określony czas (np. przez dobę) w otoczeniu osób jedzących. Celem formy jest kształtowanie hartu ducha i siły woli - jest, przykładowo, częścią sprawności “trzy pióra”.'
+      description: '<p style="text-align:justify;">Uczestnicy dobrowolnie wstrzymują się od jedzenia przez określony czas (np. przez dobę) w otoczeniu osób jedzących. Celem formy jest kształtowanie hartu ducha i siły woli - jest, przykładowo, częścią sprawności “trzy pióra”.'
           '<br>'
-          '<br>Post nie musi dotyczyć całkowitego powstrzymania się od jedzenia. Może np. być realizowany poprzez jedzenie jedynie warzyw, jedzenie jedynie chleba, albo niejedzenie cukru.'
+          '<br>Post nie musi dotyczyć całkowitego powstrzymania się od jedzenia. Może np. być realizowany poprzez jedzenie jedynie warzyw, jedzenie jedynie chleba, albo niejedzenie cukru.</p>'
   ),
 
 
@@ -1371,9 +1373,9 @@ List<Konspekt> allKonspekts = [
       aims: [
         'Podjęcie przez uczestników refleksji nad sensem i celem życia'
       ],
-      description: 'Uczestnik znajduje pięć osób po 60. roku życia o różnych przeszłościach i odbywa z nimi rozmowy na temat ich życia oraz (zwłaszcza!) tego, co według nich jest w życiu najważniejsze, z czego się najbardziej cieszą, czego najbardziej żałują. Forma ma na celu dać uczestnikowi możliwość spojrzenia na rzeczywistość oczami kogoś, kto dobrze ją zna i kto większość swojego życia ma już za sobą.'
+      description: '<p style="text-align:justify;">Uczestnik znajduje pięć osób po 60. roku życia o różnych przeszłościach i odbywa z nimi rozmowy na temat ich życia oraz (zwłaszcza!) tego, co według nich jest w życiu najważniejsze, z czego się najbardziej cieszą, czego najbardziej żałują. Forma ma na celu dać uczestnikowi możliwość spojrzenia na rzeczywistość oczami kogoś, kto dobrze ją zna i kto większość swojego życia ma już za sobą.'
           '<br>'
-          '<br>Uczestnicy do tej formy muszą posiadać potrzebne umiejętności komunikacyjne, by umieli prowadzić rozmowę, a nie tylko “odpytkę”. Jeżeli nie uda im się nawiązać szczerej, mimo, że krótkiej relacji, forma będzie bezcelowa. Wskazane jest z tego względu, by wybrane osoby były otwarte na rozmowy z harcerzami - byli instruktorzy, kombatanci, osoby, które pełniły w ZHP w państwie Polskim funkcje. Wskazane jest także, aby uczestnik formy przygotował strategię rozmowy, która pozwoli mu przejść od tego, czym rozmówca się zajmował do jego ducha.',
+          '<br>Uczestnicy do tej formy muszą posiadać potrzebne umiejętności komunikacyjne, by umieli prowadzić rozmowę, a nie tylko “odpytkę”. Jeżeli nie uda im się nawiązać szczerej, mimo, że krótkiej relacji, forma będzie bezcelowa. Wskazane jest z tego względu, by wybrane osoby były otwarte na rozmowy z harcerzami - byli instruktorzy, kombatanci, osoby, które pełniły w ZHP w państwie Polskim funkcje. Wskazane jest także, aby uczestnik formy przygotował strategię rozmowy, która pozwoli mu przejść od tego, czym rozmówca się zajmował do jego ducha.</p>',
       howToFail: [
         'Pozwolić na realizowanie formy przez niedojrzałą osobę',
       ]
@@ -1451,9 +1453,9 @@ List<Konspekt> allKonspekts = [
         aimPraktykaModlitwy,
       ],
       customDuration: Duration(hours: 36),
-      description: 'Uczestnicy udają się na rowerach na wycieczkę po zaplanowanej trasie, podczas której odwiedzają znalezione wcześniej kapliczki. Przy każdej z kapliczek drużyna się zatrzymuje i kolejna z osób prowadzi krótką modlitwę.'
+      description: '<p style="text-align:justify;">Uczestnicy udają się na rowerach na wycieczkę po zaplanowanej trasie, podczas której odwiedzają znalezione wcześniej kapliczki. Przy każdej z kapliczek drużyna się zatrzymuje i kolejna z osób prowadzi krótką modlitwę.'
           '<br>'
-          '<br>Warto, aby docelowym punktem podróży było miejsce, gdzie będzie można przenocować - szkoła, chata, las na hamakowisko, pole namiotowe nad rzeką, etc..'
+          '<br>Warto, aby docelowym punktem podróży było miejsce, gdzie będzie można przenocować - szkoła, chata, las na hamakowisko, pole namiotowe nad rzeką, etc..</p>'
   ),
 
 
@@ -1480,9 +1482,9 @@ List<Konspekt> allKonspekts = [
         'Budowanie wspólnoty u uczestników poprzez przekonanie, że jest ona na tyle ważna, że tylko wspólnie można rozpocząć posiłek',
         'Budowanie wspólnoty u uczestników poprzez rywalizację z innymi śpiewającymi przed posiłkiem drużynami na to, kto głośniej zaśpiewa'
       ],
-      description: 'Forma polega na rozpoczęciu posiłku wspólnym zaśpiewaniem krótkiej piosenki, przed którą żaden z uczestników nie może rozpocząć posiłku.'
+      description: '<p style="text-align:justify;">Forma polega na rozpoczęciu posiłku wspólnym zaśpiewaniem krótkiej piosenki, przed którą żaden z uczestników nie może rozpocząć posiłku.'
           '<br>'
-          '<br>Warto mieć świadomość, że tradycje śpiewania przed posiłkiem w harcerstwie wywodzą się tradycji wspólnej modlitwy przed posiłkiem (tradycja ta została powszechnie zmieniona w ZHP na skutek czasowego wcielenia ZHP do struktur komunistycznych).'
+          '<br>Warto mieć świadomość, że tradycje śpiewania przed posiłkiem w harcerstwie wywodzą się tradycji wspólnej modlitwy przed posiłkiem (tradycja ta została powszechnie zmieniona w ZHP na skutek czasowego wcielenia ZHP do struktur komunistycznych).</p>'
   ),
 
 
@@ -1507,7 +1509,7 @@ List<Konspekt> allKonspekts = [
         'Refleksja uczestników nad słusznością działań i postaw z perspektywy obserwatora',
         aimUmiejetnoscDyskusji,
       ],
-      description: 'Prowadzący opisuje hipotetyczną, problematyczną sytuację z perspektywy jakiejś osoby oraz sposób, w jaki jej uczestnicy ją rozwiązali. Następnie harcerze muszą ocenić jak owa sytuacja powinna zostać prawidłowo rozwiązana i dlaczego.'
+      description: '<p style="text-align:justify;">Prowadzący opisuje hipotetyczną, problematyczną sytuację z perspektywy jakiejś osoby oraz sposób, w jaki jej uczestnicy ją rozwiązali. Następnie harcerze muszą ocenić jak owa sytuacja powinna zostać prawidłowo rozwiązana i dlaczego.'
           '<br>'
           '<br>Prowadzący powinien w ramach tej formy przygotować mównicę. Polemika powinna odbywać się jedynie z mównicy, zaś rolą prowadzącego jest pilnowanie porządku, udzielenia głosu i w kluczowych momentach zadawanie pytań kierujących uczestników na pomijane przez nich aspekty omawianego dylematu.'
           '<br>'
@@ -1515,7 +1517,7 @@ List<Konspekt> allKonspekts = [
           '<br>'
           '<br>Przykładowa treść sądu:'
           '<br>'
-          '<br><i>“Na obozie jeden z zastępów harcerzy nie mył menażek. Drużynowa z powodów ideologicznych nigdy nie stosowała kar - jedynie rozmowy wychowawcze, jednak zastęp je ignorował. Po tygodniu obozu dwójka harcerzy się zatruła, zaś po półtorej tygodnia była to już połowa zastępu. Wskutek tych wydarzeń na obóz przyjechała kontrola sanepidu i nałożyła karę na komendanta obozu oraz rozwiązał obóz przed terminem, co zmusiło większość rodziców do zmiany swoich planów urlopowych i spowodowało nieprzyjemności w pracy. Komendant obarczył winą drużynową zastępu nie myjącego garów, jednak ona uparcie twierdziła, że kary są znęcaniem się i patologią.”</i>',
+          '<br><i>“Na obozie jeden z zastępów harcerzy nie mył menażek. Drużynowa z powodów ideologicznych nigdy nie stosowała kar - jedynie rozmowy wychowawcze, jednak zastęp je ignorował. Po tygodniu obozu dwójka harcerzy się zatruła, zaś po półtorej tygodnia była to już połowa zastępu. Wskutek tych wydarzeń na obóz przyjechała kontrola sanepidu i nałożyła karę na komendanta obozu oraz rozwiązał obóz przed terminem, co zmusiło większość rodziców do zmiany swoich planów urlopowych i spowodowało nieprzyjemności w pracy. Komendant obarczył winą drużynową zastępu nie myjącego garów, jednak ona uparcie twierdziła, że kary są znęcaniem się i patologią.”</i></p>',
       howToFail: [
         'Jako prowadzący polemizować z uczestnikami występującymi na mównicy',
         'Pozwolić, by uczestnicy robili sobie jaja z formy poprzez odkrywanie ról wielkich mówców i posługiwanie się nienaturalnie pompatycznym językiem'
@@ -1584,7 +1586,7 @@ List<Konspekt> allKonspekts = [
             title: 'Internet i adresy w sieci - pytania',
             duration: Duration(minutes: 10),
             activeForm: false,
-            content: '<p>Uczestnicy zbierają się w kręgu i prowadzący wyjaśnia uczestnikom po krótce sposób, w jaki działa internet. Najlepiej, jeśli uczyni to poprzez zadawanie pytań, na które uczestnicy będą mieli możliwość odpowiedzieć, zaś prowadzący będzie dopowiadał brakujące elementy odpowiedzi:</p>'
+            content: '<p style="text-align:justify;">Uczestnicy zbierają się w kręgu i prowadzący wyjaśnia uczestnikom po krótce sposób, w jaki działa internet. Najlepiej, jeśli uczyni to poprzez zadawanie pytań, na które uczestnicy będą mieli możliwość odpowiedzieć, zaś prowadzący będzie dopowiadał brakujące elementy odpowiedzi:</p>'
                 '<ol>'
                 '<li>'
                 '<p><b>Pytanie:</b>'
@@ -1623,7 +1625,7 @@ List<Konspekt> allKonspekts = [
             title: 'Internet i adresy w sieci - podsumowanie',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: '<p>Prowadzący podsumowuje krótko to, co zostało powiedziane w formie odpowiedzi na pytania:'
+            content: '<p style="text-align:justify;">Prowadzący podsumowuje krótko to, co zostało powiedziane w formie odpowiedzi na pytania:'
                 '<br>'
                 '<br>Internet to sieć, w której komputery mogą się ze sobą komunikować. Każde urządzenie ma swój unikalny adres IP, który go identyfikuje. Wiadomości w sieci są przekazywane kolejnym urządzeniom aż dotrą do urządzenia z właściwym adresem.</p>'
         ),
@@ -1640,20 +1642,20 @@ List<Konspekt> allKonspekts = [
             title: 'Internet i adresy w sieci - wyjaśnienie symulacji',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: '<p>Prowadzący rozdaje uczestnikom po jednej kopii wydrukowanego załącznika <a href="komputer@attachment">symulator komputera</a> i po kilka (np. po trzy) karteczek biurowych, po czym tłumaczy co one reprezentują:</p>'
+            content: '<p style="text-align:justify;">Prowadzący rozdaje uczestnikom po jednej kopii wydrukowanego załącznika <a href="komputer@attachment">symulator komputera</a> i po kilka (np. po trzy) karteczek biurowych, po czym tłumaczy co one reprezentują:</p>'
                 '<ul>'
-                '<li><p>Na kartce biurowej można napisać dowolną wiadomość - jest to informacja, którą można przechowywać w komputerze lub przesłać ją przez sieć. Aby ją wysłać, należy na jej odwrocie napisać adres IP odbiorcy, położyć w polu "Wyślij do" i zwrócić się do prowadzącego (czyli do internetu) z wnioskiem o wysyłkę.</p></li>'
-                '<li><p>Dolna część symulatora komputera to prywatna przestrzeń w komputerze, która nie jest udostępniona przez internet. Można w niej trzymać, tworzyć i edytować informacje (karteczki biurowe).</p></li>'
-                '<li><p>Górna część symulatora komputera to publiczna przestrzeń w komputerze, która jest udostępniona przez internet. Wszystkie informacje (karteczki biurowe) są w niej widoczne dla innych osób.</p></li>'
-                '<li><p>W prawym górnym rogu części publicznej symulatora komputera znaduje się miejsce na adres IP, które jest nadawane komputerowi gdy podłączy się do sieci.</p></li>'
-                '<li><p>W prawym dolnym rogu części publicznej symulatora komputera znaduje się miejsce, w którym po podaniu adresu IP odbiorcy, można wysłać komuś przez internet wiadomość (karteczki biurowe). Poniżej zaś znajduje się przestrzeń, w której pojawiają się wiadomości (karteczki biurowe) od innych urządzeń.</p></li>'
+                '<li><p style="text-align:justify;">Na kartce biurowej można napisać dowolną wiadomość - jest to informacja, którą można przechowywać w komputerze lub przesłać ją przez sieć. Aby ją wysłać, należy na jej odwrocie napisać adres IP odbiorcy, położyć w polu "Wyślij do" i zwrócić się do prowadzącego (czyli do internetu) z wnioskiem o wysyłkę.</p></li>'
+                '<li><p style="text-align:justify;">Dolna część symulatora komputera to prywatna przestrzeń w komputerze, która nie jest udostępniona przez internet. Można w niej trzymać, tworzyć i edytować informacje (karteczki biurowe).</p></li>'
+                '<li><p style="text-align:justify;">Górna część symulatora komputera to publiczna przestrzeń w komputerze, która jest udostępniona przez internet. Wszystkie informacje (karteczki biurowe) są w niej widoczne dla innych osób.</></li>'
+                '<li><p style="text-align:justify;">W prawym górnym rogu części publicznej symulatora komputera znaduje się miejsce na adres IP, które jest nadawane komputerowi gdy podłączy się do sieci.</p></li>'
+                '<li><p style="text-align:justify;">W prawym dolnym rogu części publicznej symulatora komputera znaduje się miejsce, w którym po podaniu adresu IP odbiorcy, można wysłać komuś przez internet wiadomość (karteczki biurowe). Poniżej zaś znajduje się przestrzeń, w której pojawiają się wiadomości (karteczki biurowe) od innych urządzeń.</p></li>'
                 '</ul>'
         ),
         KonspektStep(
             title: 'Internet i adresy w sieci - symulacja',
             duration: Duration(minutes: 10),
             activeForm: true,
-            content: '<p>Prowadzący siada na środku kręgu i informuje uczestników, że od teraz reprezentuje sieć internetową - jest przekaźnikiem, pozwala przesyłać innym wiadomości i który nadaje adresy IP.'
+            content: '<p style="text-align:justify;">Prowadzący siada na środku kręgu i informuje uczestników, że od teraz reprezentuje sieć internetową - jest przekaźnikiem, pozwala przesyłać innym wiadomości i który nadaje adresy IP.'
                 '<br>'
                 '<br>Uczestnicy mają za zadanie stworzyć wiadomość, podpiąć się sieci i przesłać wiadomość do innego uczestnika. Nie muszą czekać aż inni będą gotowi do wysyłki swoich wiadomości.'
                 '<br>'
@@ -1670,7 +1672,7 @@ List<Konspekt> allKonspekts = [
             title: 'Czy i jak warto szyfrować wiadomości?',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: '<p>Prowadzący zaczyna od zapytania uczestników: <i>"Co wy na to, że każda wiadomość jaką przesłaliście była możliwa przeze mnie, czyli każdego w sieci, do odczytania?" Może były tam Wasze maile? Może wyznania miłosne do najładniejszej dziewczyny w szkole? Może problemy zdrowotne, albo leki na przykład zamówienie na czopki, które wkłada się do odbytu? Może hasło do mediów społecznościowych? Czy na pewno to wszystko powinno być jawne?</i>'
+            content: '<p style="text-align:justify;">Prowadzący zaczyna od zapytania uczestników: <i>"Co wy na to, że każda wiadomość jaką przesłaliście była możliwa przeze mnie, czyli każdego w sieci, do odczytania?" Może były tam Wasze maile? Może wyznania miłosne do najładniejszej dziewczyny w szkole? Może problemy zdrowotne, albo leki na przykład zamówienie na czopki, które wkłada się do odbytu? Może hasło do mediów społecznościowych? Czy na pewno to wszystko powinno być jawne?</i>'
                 '<br>'
                 '<br>Następnie prowadzący pyta uczestników jak temu zaradzić?'
                 '<br>'
@@ -1683,7 +1685,7 @@ List<Konspekt> allKonspekts = [
             title: 'Szyfrowanie kluczem asymetrycznym',
             duration: Duration(minutes: 20),
             activeForm: true,
-            content: '<p>Prowadzący informuje uczestników, że istnieje metoda szyfrowania przesyłanych wiadomości, która nazywa się "szyfrowaniem kluczem asymetrycznym". Dlaczego asymetrycznym? Bo używa się przy nim dwóch <b>różnych</b> kluczy: jednego do zaszyfrowania, innego do odszyfrowania.'
+            content: '<p style="text-align:justify;">Prowadzący informuje uczestników, że istnieje metoda szyfrowania przesyłanych wiadomości, która nazywa się "szyfrowaniem kluczem asymetrycznym". Dlaczego asymetrycznym? Bo używa się przy nim dwóch <b>różnych</b> kluczy: jednego do zaszyfrowania, innego do odszyfrowania.'
                 '<br>'
                 '<br>Żeby jednak nie wchodzić w technikalia, uczestnicy będą mieli okazję sami wymyślić mechanizm tej metody.'
                 '<br>'
@@ -1691,59 +1693,59 @@ List<Konspekt> allKonspekts = [
                 '<br>'
                 '<br>Zadaniem każdej z grup jest wymyślenie metody na to, by doprowadzić do przesłąnia innej grupie tajnej wiadomości w taki sposób, by nie została ona po drodze odczytana. Prowadzący w tym ćwiczeniu pełni rolę internetu:</p>'
                 '<ul>'
-                '<li><p>Tylko prowadzącemu można przekazać wiadomość do dostarczenia odbiorcy.</p></li>'
-                '<li><p>Prowadzący, ponieważ jest wścibski jak ludzie w internecie, będzie próbował odczytać przekazywaną wiadomość.</p></li>'
+                '<li><p style="text-align:justify;">Tylko prowadzącemu można przekazać wiadomość do dostarczenia odbiorcy.</p></li>'
+                '<li><p style="text-align:justify;">Prowadzący, ponieważ jest wścibski jak ludzie w internecie, będzie próbował odczytać przekazywaną wiadomość.</p></li>'
                 '</ul>'
                 '<p>Uczestnicy muszą skorzystać z internetu jako przekaźnika, ale nie pozwolić mu odczytać sensu przekazywanej wiadomości. Odczytać wiadomość może jedynie odbiorca.'
                 '<br>'
                 '<br><b>Prawidłowe rozwiązanie jest następujące:</b></p>'
                 '<ol>'
-                '<li><p>Grupa A chce przesłać wiadomość grupie B.</p></li>'
-                '<li><p>Grupa A wysyła do grupy B publiczną, niezaszyfrowaną wiadomość o treści: <i>"Wyślijcie skrzynkę z otwartą kłódką w środku. Klucz zostawcie u siebie."</i></p></li>'
-                '<li><p>Grupa B wysyła grupie A skrzynkę z kłódką w środku.</p></li>'
-                '<li><p>Grupa A umieszcza tajną wiadomość w skrzynce grupy B, zatrzaskuje na skrzynce kłódkę i wysyła ją z powrotem do grupy B.</p></li>'
-                '<li><p>Grupa B jako jedyna ma klucz do swojej skrzynki, odbiera wiadomość, otwiera kłódkę kluczem i odczytuje wiadomość.</p></li>'
+                '<li><p style="text-align:justify;">Grupa A chce przesłać wiadomość grupie B.</p></li>'
+                '<li><p style="text-align:justify;">Grupa A wysyła do grupy B publiczną, niezaszyfrowaną wiadomość o treści: <i>"Wyślijcie skrzynkę z otwartą kłódką w środku. Klucz zostawcie u siebie."</i></></li>'
+                '<li><p style="text-align:justify;">Grupa B wysyła grupie A skrzynkę z kłódką w środku.</></li>'
+                '<li><p style="text-align:justify;">Grupa A umieszcza tajną wiadomość w skrzynce grupy B, zatrzaskuje na skrzynce kłódkę i wysyła ją z powrotem do grupy B.</p></li>'
+                '<li><p style="text-align:justify;">Grupa B jako jedyna ma klucz do swojej skrzynki, odbiera wiadomość, otwiera kłódkę kluczem i odczytuje wiadomość.</p></li>'
                 '</ol>'
-                '<p>Prawdopodobnie grupy będą próbowały różnych nieskutecznych metod, typu:</p>'
+                '<p style="text-align:justify;">Prawdopodobnie grupy będą próbowały różnych nieskutecznych metod, typu:</p>'
                 '<ul>'
-                '<li><p>Wysłanie drugiej grupie wiadomości w swojej zamkniętej skrzynce (wówczas odbiorca nie ma jak jej otworzyć)</p></li>'
-                '<li><p>Wysłanie drugiej grupie wiadomości w swojej zamkniętej skrzynce z kluczem przyklejonym do spodu skrzynki (wówczas prowadzący może ją otworzyć i odczytać)</p></li>'
-                '<li><p>Wysłanie drugiej grupie wiadomości zaszyfrowanej GADERYPOLUKI (wówczas prowadzący może ją odszyfrować na własną rękę)</p></li>'
+                '<li><p style="text-align:justify;">Wysłanie drugiej grupie wiadomości w swojej zamkniętej skrzynce (wówczas odbiorca nie ma jak jej otworzyć)</p></li>'
+                '<li><p style="text-align:justify;">Wysłanie drugiej grupie wiadomości w swojej zamkniętej skrzynce z kluczem przyklejonym do spodu skrzynki (wówczas prowadzący może ją otworzyć i odczytać)</p></li>'
+                '<li><p style="text-align:justify;">Wysłanie drugiej grupie wiadomości zaszyfrowanej GADERYPOLUKI (wówczas prowadzący może ją odszyfrować na własną rękę)</p></li>'
                 '</ul>'
-                '<p>W każdym z tych przypadków prowadzący nie może zaliczyć grupie zadania.'
+                '<p style="text-align:justify;">W każdym z tych przypadków prowadzący nie może zaliczyć grupie zadania.'
                 '<br>'
-                '<br>Grupie, która rozgryzła rozwiązanie jako pierwsza można wręczyć jakąś niewielką nagrodę.</p>'
+                '<br>Grupie, która rozgryzła rozwiązanie jako pierwsza można wręczyć jakąś niewielką nagrodę.</>'
         ),
 
         KonspektStep(
             title: 'Podsumowanie szyfrowania kluczem asymetrycznym',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: '<p>Prowadzący podsumowuje wykonane przez uczestników ćwiczenie z zamykanymi skrzynkami upewniając się, że każdy rozumie dlaczego takie wysłanie wiadomości jest bezpieczne.</p>'
+            content: '<p style="text-align:justify;">Prowadzący podsumowuje wykonane przez uczestników ćwiczenie z zamykanymi skrzynkami upewniając się, że każdy rozumie dlaczego takie wysłanie wiadomości jest bezpieczne.</p>'
         ),
 
         KonspektStep(
             title: 'Przykład szyfrowanej poczty',
             duration: Duration(minutes: 5),
             activeForm: true,
-            content: '<p>Gdy uczestnicy rozumieją już mechanizm ze skrzynką, kłódką i kluczem, prowadzący organizuje <b>scenkę</b> będącą przykładem wysyłania maila w formie z udziałem trzech chętnych uczestników.'
+            content: '<p style="text-align:justify;">Gdy uczestnicy rozumieją już mechanizm ze skrzynką, kłódką i kluczem, prowadzący organizuje <b>scenkę</b> będącą przykładem wysyłania maila w formie z udziałem trzech chętnych uczestników.'
                 '<br>'
                 '<br>Scenka dotyczy następującej sytuacji: osoba A wysyła maila do osoby B używając poczty eletronicznej M. Zarówno osoba A, osoba B jak i poczta B odgrywane sa przez uczestników, każdy z których ma skrzynkę z kłódką i kluczem. W scence tej prowadzący gra rolę internetu i chodzi między uczestnikami obrazując ruch zaszyfrowanych informacji (skrzynek) po sieci.'
                 '<br>'
                 '<br>Scenka przebiega następująco:</p>'
                 '<ol>'
-                '<li><p>Osoba A tworzy wiadomość email u siebie na komputerze.</p></li>'
-                '<li><p>Osoba A pobiera od poczty M kod do zaszyfrowania wiadomości (skrzynkę z kłódką bez klucza). Jeśli nawet ktoś podsłucha tę wiadomość, zobaczy jedynie ogólno dostępny klucz szyfrujący.</p></li>'
-                '<li><p>Osoba A szyfruje wiadomość email i wysyła ją do poczty M.</p></li>'
-                '<li><p>Poczta M odszyfrowuje wiadomość email, zapisuje jej treść i odbiorcę.</p></li>'
-                '<li><p>Osoba B loguje się do skrzynki pocztowej poczty M i pobiera od poczty M kod szyfrujący (skrzynkę z kłódką bez klucza).</p></li>'
-                '<li><p>Osoba B szyfruje zapytanie do poczty M: <li>"czy mam nowe wiadomości?".</p></li>'
-                '<li><p>Osoba B wysyła do poczty M zaszyfrowane zapytanie o nowe wiadomości.</p></li>'
-                '<li><p>Poczta M pobiera od osoby M jej kod szyfrujący (skrzynkę z kłódką bez klucza).</p></li>'
-                '<li><p>Poczta M szyfruje nowe wiadomości email jej kodem szyfrującym (skrzynką z kłódką bez klucza).</p></li>'
-                '<li><p>Poczta M wysyła zaszyfrowane wiadomości do osoby B.</p></li>'
-                '<li><p>Osoba B odszyfrowuje wiadomości od poczty M.</p></li>'
-                '<li><p>Koniec!</p></li>'
+                '<li><p style="text-align:justify;">Osoba A tworzy wiadomość email u siebie na komputerze.</p></li>'
+                '<li><p style="text-align:justify;">Osoba A pobiera od poczty M kod do zaszyfrowania wiadomości (skrzynkę z kłódką bez klucza). Jeśli nawet ktoś podsłucha tę wiadomość, zobaczy jedynie ogólno dostępny klucz szyfrujący.</p></li>'
+                '<li><p style="text-align:justify;">Osoba A szyfruje wiadomość email i wysyła ją do poczty M.</p></li>'
+                '<li><p style="text-align:justify;">Poczta M odszyfrowuje wiadomość email, zapisuje jej treść i odbiorcę.</p></li>'
+                '<li><p style="text-align:justify;">Osoba B loguje się do skrzynki pocztowej poczty M i pobiera od poczty M kod szyfrujący (skrzynkę z kłódką bez klucza).</p></li>'
+                '<li><p style="text-align:justify;">Osoba B szyfruje zapytanie do poczty M: <li>"czy mam nowe wiadomości?".</p></li>'
+                '<li><p style="text-align:justify;">Osoba B wysyła do poczty M zaszyfrowane zapytanie o nowe wiadomości.</></li>'
+                '<li><p style="text-align:justify;">Poczta M pobiera od osoby M jej kod szyfrujący (skrzynkę z kłódką bez klucza).</></li>'
+                '<li><p style="text-align:justify;">Poczta M szyfruje nowe wiadomości email jej kodem szyfrującym (skrzynką z kłódką bez klucza).</p></li>'
+                '<li><p style="text-align:justify;">Poczta M wysyła zaszyfrowane wiadomości do osoby B.</p></li>'
+                '<li><p style="text-align:justify;">Osoba B odszyfrowuje wiadomości od poczty M.</p></li>'
+                '<li><p style="text-align:justify;">Koniec!</p></li>'
                 '</ol>'
         ),
 
@@ -1751,7 +1753,7 @@ List<Konspekt> allKonspekts = [
             title: 'Kto widzi zaszyfrowane wiadomości?',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: '<p>Prowadzący zbiera uczestników z powrotem w kręgu i zadaje im pytanie: <i>"Kto może zobaczyć maila, którego wysyłacie do kolegi?"</i>'
+            content: '<p style="text-align:justify;">Prowadzący zbiera uczestników z powrotem w kręgu i zadaje im pytanie: <i>"Kto może zobaczyć maila, którego wysyłacie do kolegi?"</i>'
                 '<br>'
                 '<br>Uczestnicy rzucają swoje pomysły. Prawidłowa odpowiedź brzmi: <i>"Wysyłający, odbierający oraz dostawca usługi poczty elektronicznej (np. Gmail)."</i>'
                 '<br>'
@@ -1762,7 +1764,7 @@ List<Konspekt> allKonspekts = [
             title: 'Czy można uwolnić się od śledzenia w sieci?',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: '<p>Prowadzący zadaje uczestnikom pytanie: <i>"W jaki sposób można byłoby teoretycznie wysłać wiadomość email tak, by poczta M nie widziała jaka jest treść wiadomości?"</i>'
+            content: '<p style="text-align:justify;">Prowadzący zadaje uczestnikom pytanie: <i>"W jaki sposób można byłoby teoretycznie wysłać wiadomość email tak, by poczta M nie widziała jaka jest treść wiadomości?"</i>'
                 '<br>'
                 '<br>Jeśli uczestnicy mają problem z wpadnięciem na pomysł, prowadzący podpowiada, że przed chwilą udało im się zabezpieczyć wiadomości skrzynkami - może należy go jakoś zmodyfikować?'
                 '<br>'
@@ -1773,7 +1775,7 @@ List<Konspekt> allKonspekts = [
             title: 'Bezpieczne komunikatory',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: '<p>Prowadzący informuje uczestników, że szyforwanie, w którym serwis dostarczający usługi nie ma dostępu do wiadomości nazywa się szyfrowaniem end-to-end.'
+            content: '<p style="text-align:justify;">Prowadzący informuje uczestników, że szyforwanie, w którym serwis dostarczający usługi nie ma dostępu do wiadomości nazywa się szyfrowaniem end-to-end.'
                 '<br>'
                 '<br>Prowadzący dodaje także, że jednym z najpopularniejszych bezpiecznych komunikatorów jest Signal - dostępny także w formie aplikacji mobilnej.</p>'
         ),
@@ -1782,32 +1784,32 @@ List<Konspekt> allKonspekts = [
             title: 'Gawęda',
             duration: Duration(minutes: 10),
             activeForm: false,
-            content: '<p>Prowadzący prosi uczestników, by usiedli wygodnie i zamknęli oczy (mogą się też położyć, jeśli chcą) po czym opowiada im gawędę <a href="gaweda_o_braku_telefonu@gaweda">O braku telefonu</a>.</p>'
+            content: '<p style="text-align:justify;">Prowadzący prosi uczestników, by usiedli wygodnie i zamknęli oczy (mogą się też położyć, jeśli chcą) po czym opowiada im gawędę <a href="gaweda_o_braku_telefonu@gaweda">O braku telefonu</a>.</>'
         ),
 
         KonspektStep(
             title: 'Zagrożenia wynikające z telefonu',
             duration: Duration(minutes: 10),
             activeForm: true,
-            content: '<p>Prowadzący dzieli uczestników na grupy. Każda grupa dostaje kartkę i długopis i ma za zadanie w 10 minut wypisać najważniejsze zagrożenia jakie niesie za sobą dostęp do telefonu komórkowego.</p>'
+            content: '<p style="text-align:justify;">Prowadzący dzieli uczestników na grupy. Każda grupa dostaje kartkę i długopis i ma za zadanie w 10 minut wypisać najważniejsze zagrożenia jakie niesie za sobą dostęp do telefonu komórkowego.</p>'
         ),
 
         KonspektStep(
             title: 'Jak korzystać z telefonu? Savoir-vivre',
             duration: Duration(minutes: 20),
             activeForm: false,
-            content: '<p>Uczestnicy wracają do kręgu. Prowadzący informuje uczestników, że będą oni teraz tworzyli savoir-vivre urządzeń mobilnych: czyli zasady kulturalnego i mądrego korzystania z telefonów komórkowych.'
+            content: '<p style="text-align:justify;">Uczestnicy wracają do kręgu. Prowadzący informuje uczestników, że będą oni teraz tworzyli savoir-vivre urządzeń mobilnych: czyli zasady kulturalnego i mądrego korzystania z telefonów komórkowych.'
                 '<br>'
                 '<br>Prowadzący prosi grupy o odczytanie kolejno po jednym zagrożeniu jakie grupy zapisały. Po każdym zagrożeniu uczestnicy muszą przekuć zagrożenie na ogólną zasadę lub zasady postępowania z telefonami.'
                 '<br>'
                 '<br>Przykładowy savoir-vivre urządzeń mobilnych może wyglądać następująco:'
                 '</p>'
                 '<ol>'
-                '<li><p><i>Wyjście ze znajomymi ma wyższy priorytet niż granie na fonie lub na kompie.</i></p></li>'
-                '<li><p><i>Podczas zbiórek nie wolno korzystać z telfonu, chyba, że drużynowy wyrazi zgodę.</i></p></li>'
-                '<li><p><i>Podczas przebywania w towarzystwie telefon nie powinien być na widoku.</i></p></li>'
-                '<li><p><i>W ciągu dnia można używać telefonu maksymalnie 1h do rzeczy innych niż pomoc w nauce lub dzwonienie.</i></p></li>'
-                '<li><p><i>Oglądanie TikToka, Realsów i Shortsów jest niedozwolone. Szkoda mózgu.</i></p></li>'
+                '<li><p style="text-align:justify;"><i>Wyjście ze znajomymi ma wyższy priorytet niż granie na fonie lub na kompie.</i></p></li>'
+                '<li><p style="text-align:justify;"><i>Podczas zbiórek nie wolno korzystać z telfonu, chyba, że drużynowy wyrazi zgodę.</i></p></li>'
+                '<li><p style="text-align:justify;"><i>Podczas przebywania w towarzystwie telefon nie powinien być na widoku.</i></p></li>'
+                '<li><p style="text-align:justify;"><i>W ciągu dnia można używać telefonu maksymalnie 1h do rzeczy innych niż pomoc w nauce lub dzwonienie.</i></p></li>'
+                '<li><p style="text-align:justify;"><i>Oglądanie TikToka, Realsów i Shortsów jest niedozwolone. Szkoda mózgu.</i></p></li>'
                 '</ol>'
         ),
 
@@ -1815,7 +1817,7 @@ List<Konspekt> allKonspekts = [
             title: 'Podpisanie stworzonego savoir-vivre',
             duration: Duration(minutes: 5),
             activeForm: true,
-            content: '<p>Uczestnicy kolejno podpisują savoir-vivre urządzeń mobilnych. Warto również wywiesić podpisany dokument gdzieś w harcówce w widocznym, ale niekoniecznie centralnym miejscu.</p>'
+            content: '<p style="text-align:justify;">Uczestnicy kolejno podpisują savoir-vivre urządzeń mobilnych. Warto również wywiesić podpisany dokument gdzieś w harcówce w widocznym, ale niekoniecznie centralnym miejscu.</p>'
         ),
 
       ],
@@ -1850,7 +1852,7 @@ List<Konspekt> allKonspekts = [
         name: 'Teksty śpiewanych piosenek',
       ),
     ],
-    description: 'Prowadzący wybiera kilka piosenek, które niosą nieoczywiste na pierwszy “rzut oka (ucha?)” przesłanie w swojej treści lub które wymagają do ich zrozumienia znajomości kontekstu historycznego lub kulturowego.'
+    description: '<p style="text-align:justify;">Prowadzący wybiera kilka piosenek, które niosą nieoczywiste na pierwszy “rzut oka (ucha?)” przesłanie w swojej treści lub które wymagają do ich zrozumienia znajomości kontekstu historycznego lub kulturowego.'
         '<br>'
         '<br>Uczestnicy otrzymują wydrukowane wybranych piosenek (by oszczędzić zasoby i wprowadzić element współpracy można wprowadzić rozdać teksty po jednym komplecie na dwie osoby).'
         '<br>'
@@ -1862,29 +1864,29 @@ List<Konspekt> allKonspekts = [
         '<br>'
         '<br>Szczególną wersją tej formy jest “kolędowanie z quizem interpretacyjnym”, gdzie zbiorem piosenek są kolędy.'
         '<br>'
-        '<br><b>Przykładowe piosenki dla zuchów</b>:'
+        '<br><b>Przykładowe piosenki dla zuchów</b>:</p>'
         '<ul>'
-        '<li>Hej przyjaciele <i>(Zayazd)</i></li>'
-        '<li>Wieczorne śpiewogranie</li>'
+        '<li><p style="text-align:justify;">Hej przyjaciele <i>(Zayazd)</i></p></li>'
+        '<li><p style="text-align:justify;">Wieczorne śpiewogranie</p></li>'
         '</ul>'
-        '<br><b>Przykładowe piosenki dla harcerzy</b>:'
+        '<br><p style="text-align:justify;"><b>Przykładowe piosenki dla harcerzy</b>:</p>'
         '<ul>'
-        '<li>A my nie chcemy uciekać stąd <i>(P. Gintrowski)</i></li>'
-        '<li>Czarny chleb i czarna kawa <i>(Strachy na lachy)</i></li>'
-        '<li>Dni, których nie znamy <i>(Marek Grechuta)</i></li>'
-        '<li>Eldorado <i>(Sanah, D. Zawiałow)</i></li>'
-        '<li>Hej przyjaciele <i>(Zayazd)</i></li>'
-        '<li>Hymn <i>(J. Słowacki, Sanah)</i></li>'
-        '<li>Major ponury</li>'
-        '<li>Moja litania <i>(Leszek Wójtowicz)</i></li>'
-        '<li>Niebieski cyrkiel <i>(Stare Dobre Małżeństwo)</i></li>'
-        '<li>Pójdę boso <i>(Zakopower)</i></li>'
-        '<li>Rozwijając Rilkego <i>(Sahan)</i></li>'
-        '<li>Zielony dom <i>(Stare Dobre Małżeństwo)</i></li>'
+        '<li><p style="text-align:justify;">A my nie chcemy uciekać stąd <i>(P. Gintrowski)</i></p></li>'
+        '<li><p style="text-align:justify;">Czarny chleb i czarna kawa <i>(Strachy na lachy)</i></p></li>'
+        '<li><p style="text-align:justify;">Dni, których nie znamy <i>(Marek Grechuta)</i></p></li>'
+        '<li><p style="text-align:justify;">Eldorado <i>(Sanah, D. Zawiałow)</i></p></li>'
+        '<li><p style="text-align:justify;">Hej przyjaciele <i>(Zayazd)</i></p></li>'
+        '<li><p style="text-align:justify;">Hymn <i>(J. Słowacki, Sanah)</i></p></li>'
+        '<li><p style="text-align:justify;">Major ponury</p></li>'
+        '<li><p style="text-align:justify;">Moja litania <i>(Leszek Wójtowicz)</i></p></li>'
+        '<li><p style="text-align:justify;">Niebieski cyrkiel <i>(Stare Dobre Małżeństwo)</i></p></li>'
+        '<li><p style="text-align:justify;">Pójdę boso <i>(Zakopower)</i></p></li>'
+        '<li><p style="text-align:justify;">Rozwijając Rilkego <i>(Sahan)</i></p></li>'
+        '<li><p style="text-align:justify;">Zielony dom <i>(Stare Dobre Małżeństwo)</i></p></li>'
         '</ul>'
-        '<br>Forma, aby miała sens, powinna być prowadzona przez osobę, które umie i lubi grać na gitarze i która przynajmniej minimalnie "czuje" temat interpretacji sztuki. Osoba prowadząca powinna się do niej zawczasu przygotować - rozpoczęcie przygotowań godzinę przed rozpoczęciem nie ma sensu.'
+        '<p style="text-align:justify;">Forma, aby miała sens, powinna być prowadzona przez osobę, które umie i lubi grać na gitarze i która przynajmniej minimalnie "czuje" temat interpretacji sztuki. Osoba prowadząca powinna się do niej zawczasu przygotować - rozpoczęcie przygotowań godzinę przed rozpoczęciem nie ma sensu.'
         '<br>'
-        '<br>Forma ta ma na celu pracę nad duchowością na poziomie aksjomatu i wartości poprzez normalizację. Forma ta może być stosowana jako forma zastępcza dla osób w pionie Z i H, które na obozie nie uczestniczą we Mszy Świętej.',
+        '<br>Forma ta ma na celu pracę nad duchowością na poziomie aksjomatu i wartości poprzez normalizację. Forma ta może być stosowana jako forma zastępcza dla osób w pionie Z i H, które na obozie nie uczestniczą we Mszy Świętej.</p>',
   ),
 
 
@@ -1906,7 +1908,7 @@ List<Konspekt> allKonspekts = [
       aims: [
         'Uporządkowanie życia i pomoc w pracy nad sobą przez uczestników'
       ],
-      description: 'Uczestnik znajduje duchownego, u którego będzie mógł się regularnie spowiadać. Forma ta jest "spowiedzią dla zaawansowanych". Ważne, by nie był to pierwszy napotkany ksiądz, ale by była to osoba, z którą uczestnik dobrze się rozumie i której ufa - najlepiej jeżeli będzie uczestnik formy będzie miał okazję poznać duchownego także prywatnie, nie tylko jako “dostarczyciela sakramentów”.'
+      description: '<p style="text-align:justify;">Uczestnik znajduje duchownego, u którego będzie mógł się regularnie spowiadać. Forma ta jest "spowiedzią dla zaawansowanych". Ważne, by nie był to pierwszy napotkany ksiądz, ale by była to osoba, z którą uczestnik dobrze się rozumie i której ufa - najlepiej jeżeli będzie uczestnik formy będzie miał okazję poznać duchownego także prywatnie, nie tylko jako “dostarczyciela sakramentów”.</p>'
   ),
 
 
@@ -1964,7 +1966,7 @@ List<Konspekt> allKonspekts = [
           title: 'Podział na grupy',
           duration: Duration(minutes: 5),
           activeForm: true,
-          content: 'Harcerze są dzieleni na dwie grupy. Forma podziału jest dowolna (np. wg. zastępów, grając w <a href="atomy@form">atomy</a>).'
+          content: '<p style="text-align:justify;">Harcerze są dzieleni na dwie grupy. Forma podziału jest dowolna (np. wg. zastępów, grając w <a href="atomy@form">atomy</a>).</p>'
       ),
 
 
@@ -1973,9 +1975,9 @@ List<Konspekt> allKonspekts = [
           duration: Duration(minutes: 15),
           activeForm: true,
           required: false,
-          content: 'Harcerze są informowani, że za chwilę czeka ich wielka gra z wiedzy o funkcjach i sznurach w ZHP. Ich zadaniem jest dowiedzieć się jak najwięcej o sznurach od obecnej na obozie kadry innych drużyn (o ile nie są obecnie zajęci innymi sprawami!). Mogą w tym celu posiłkować się jedynie kartką i długopisem.'
+          content: '<p style="text-align:justify;">Harcerze są informowani, że za chwilę czeka ich wielka gra z wiedzy o funkcjach i sznurach w ZHP. Ich zadaniem jest dowiedzieć się jak najwięcej o sznurach od obecnej na obozie kadry innych drużyn (o ile nie są obecnie zajęci innymi sprawami!). Mogą w tym celu posiłkować się jedynie kartką i długopisem.'
               '<br>'
-              '<br>Ich zadaniem jest także się dowiedzieć czym zajmuje się przyboczny, drużynowy i komendant szczepu.'
+              '<br>Ich zadaniem jest także się dowiedzieć czym zajmuje się przyboczny, drużynowy i komendant szczepu.</p>'
       ),
 
 
@@ -1984,48 +1986,44 @@ List<Konspekt> allKonspekts = [
           duration: Duration(minutes: 15),
           activeForm: false,
           required: false,
-          content: 'Prowadzący, żeby skupić uwagę harcerzy, mówi, że za chwilę harcerze będą podzieleni na grupy i zagrają w “warunkowe warcaby” na podstawie wiedzy z funkcji i sznurów.'
+          content: '<p style="text-align:justify;">Prowadzący, żeby skupić uwagę harcerzy, mówi, że za chwilę harcerze będą podzieleni na grupy i zagrają w “warunkowe warcaby” na podstawie wiedzy z funkcji i sznurów.'
               '<br>'
-              '<br>Prowadzący w miarę krótko, od ogółu do szczegółu opowiada jak działa oznaczanie funkcji w ZHP. Ważne by zaznaczył, że nie trzeba posiąść tej wiedzy natychmiast - ona z czasem się utrwali, a teraz stawiają na tej ścieżce pierwszy krok. Oto ogólne zasady:'
+              '<br>Prowadzący w miarę krótko, od ogółu do szczegółu opowiada jak działa oznaczanie funkcji w ZHP. Ważne by zaznaczył, że nie trzeba posiąść tej wiedzy natychmiast - ona z czasem się utrwali, a teraz stawiają na tej ścieżce pierwszy krok. Oto ogólne zasady:</p>'
               '<ul>'
               '<li>'
-              'Każdy poziom struktury ma w ZHP swój kolor:'
-              '<br>'
+              '<p style="text-align:justify;">Każdy poziom struktury ma w ZHP swój kolor:</p>'
               '<ul>'
-              '<li>Zastępy: <b>brązowy</b></li>'
-              '<li>Drużyna: <b>zielony</b></li>'
-              '<li>Szczep: <b>granatowy</b></li>'
-              '<li>Związek drużyn: <b>granatowo-srebrny</b></li>'
-              '<li>Hufiec: <b>srebrny</b></li>'
-              '<li>Chorągiew: <b>złoty</b></li>'
-              '<li>Poziom centralny: <b>skórzany</b></li>'
+              '<li><p style="text-align:justify;">Zastępy: <b>brązowy</b></p></li>'
+              '<li><p style="text-align:justify;">Drużyna: <b>zielony</b></p></li>'
+              '<li><p style="text-align:justify;">Szczep: <b>granatowy</b></p></li>'
+              '<li><p style="text-align:justify;">Związek drużyn: <b>granatowo-srebrny</b></p></li>'
+              '<li><p style="text-align:justify;">Hufiec: <b>srebrny</b></p></li>'
+              '<li><p style="text-align:justify;">Chorągiew: <b>złoty</b></p></li>'
+              '<li><p style="text-align:justify;">Poziom centralny: <b>skórzany</b></p></li>'
               '</ul>'
               '<br>'
               '</li>'
               '<li>'
-              '<b>Związek drużyn</b> jest jak szczep, tyle że nie musi zapewniać ciągu wychowawczego (Z, H, HS, W).'
-              '<br>'
+              '<p style="text-align:justify;"><b>Związek drużyn</b> jest jak szczep, tyle że nie musi zapewniać ciągu wychowawczego (Z, H, HS, W).</p>'
               '</li>'
               '<li>'
-              'Sznury z ramienia oznaczają kogoś ważniejszego niż spod ramienia. Prowadzący pokazuje na sznurach jak się nosi spod ramienia, jak się nosi sznur z ramienia i jak wygląda sznur poczwórnie pleciony.'
-              '<br>'
+              '<p style="text-align:justify;">Sznury z ramienia oznaczają kogoś ważniejszego niż spod ramienia. Prowadzący pokazuje na sznurach jak się nosi spod ramienia, jak się nosi sznur z ramienia i jak wygląda sznur poczwórnie pleciony.</p>'
               '<li>'
               '<li>'
-              'Różne ważności funkcji we wszystkich poziomach (poza zastępem i drużyną) mają następujące oznaczenia:'
-              '<br>'
+              '<p style="text-align:justify;">Różne ważności funkcji we wszystkich poziomach (poza zastępem i drużyną) mają następujące oznaczenia:</p>'
               '<ul>'
-              '<li>Szef (naczelnik, komendant): <b>poczwórnie pleciony z ramienia</b></li>'
-              '<li>Zastępca szefa i skarbnik: <b>z ramienia zwykły i dwa suwaki</b></li>'
-              '<li>Człon. komendy: <b>spod ramienia, dwa suwaki (w szczepie jeden suwak)</b></li>'
-              '<li>Funkcyjny: <b>sznur funkcji podstawowej i jeden suwak</b></li>'
+              '<li><p style="text-align:justify;">Szef (naczelnik, komendant): <b>poczwórnie pleciony z ramienia</b></p></li>'
+              '<li><p style="text-align:justify;">Zastępca szefa i skarbnik: <b>z ramienia zwykły i dwa suwaki</b></p></li>'
+              '<li><p style="text-align:justify;">Człon. komendy: <b>spod ramienia, dwa suwaki (w szczepie jeden suwak)</b></p></li>'
+              '<li><p style="text-align:justify;">Funkcyjny: <b>sznur funkcji podstawowej i jeden suwak</b></p></li>'
               '</ul>'
               '<br>'
               '</li>'
               '<li>'
-              'Na poziomie centralnym jest podział kompetencji: <b>Rada Naczelna</b> ustala sposób działania, <b>Główna Kwatera</b> działa zgodnie z ustalonym sposobem (to jakby jedna osoba ustalała listę zakupów, a druga szła na zakupy). Szefem RN jest <b>Przewodniczący ZHP</b> i ma skórzany sznur z ramienia, a szefem GK jest <b>Naczelnik ZHP</b> i ma sznur zgodnie ze wcześniej podanymi zasadami.'
+              '<p style="text-align:justify;">Na poziomie centralnym jest podział kompetencji: <b>Rada Naczelna</b> ustala sposób działania, <b>Główna Kwatera</b> działa zgodnie z ustalonym sposobem (to jakby jedna osoba ustalała listę zakupów, a druga szła na zakupy). Szefem RN jest <b>Przewodniczący ZHP</b> i ma skórzany sznur z ramienia, a szefem GK jest <b>Naczelnik ZHP</b> i ma sznur zgodnie ze wcześniej podanymi zasadami.</p>'
               '</li>'
               '</ul>'
-              'Warto poprosić harcerzy, by powtórzyli podstawowe, przekazane właśnie zasady.'
+              '<p style="text-align:justify;">Warto poprosić harcerzy, by powtórzyli podstawowe, przekazane właśnie zasady.</p>'
       ),
 
 
@@ -2033,13 +2031,13 @@ List<Konspekt> allKonspekts = [
           title: 'Przyporządkowywanie sznurów do funkcji - warunkowe warcaby',
           duration: Duration(minutes: 45),
           activeForm: false,
-          content: 'Prowadzący korzystając z załącznika <a href="sznury@attachment">sznury</a> zbiera przygotowane kartki z funkcjami w jedno miejsce (np. do worka, czapki, etc.) z którego harcerze będa je naprzemiennie losowali.'
+          content: '<p style="text-align:justify;">Prowadzący korzystając z załącznika <a href="sznury@attachment">sznury</a> zbiera przygotowane kartki z funkcjami w jedno miejsce (np. do worka, czapki, etc.) z którego harcerze będa je naprzemiennie losowali.'
               '<br>'
               '<br>Pozostałe części pasków (czyli <i>“sznur”</i>-<i>”sposób noszenia”</i>) prowadzący układa w losowej kolejności na widoku jeden pod drugim. Zadaniem harcerzy będzie naprzemienne losowanie funkcji i próba odnalezienia z puli kartek ze sznurami odpowiadającego im sznura wraz ze sposobem noszenia. Gdy poprawnie przyporządkują sznur do funkcji, zabierają obie części kartki do siebie. Jeżeli się pomylą, funkcja wraca do puli losowania, a sznur do puli sznurów.'
               '<br>'
               '<br>Zadanie odbywa się w formie rozgrywki partii <a href="warcaby_warunkowe@form">warcabów warunkowych</a> między obiema grupami. W formie tej grupy między sobą rozgrywają partię warcabów, w których ruch mogą wykonać tylko, jeżeli poprawnie przyporządkowuje wylosowaną funkcję do sznura i sposobu jego noszenia. Wygrywa grupa, która pokona przeciwnika, lub w przypadku wyczerpania puli funkcji będzie miała więcej pionków na planszy.'
               '<br>'
-              '<br>Formę można utrudnić dodając do puli sznurów i sposobów ich noszenia kombinacje nie mające żadnego odpowiednika w funkcjach, np. <i>“sznur złoty z dwoma pomarańczowymi suwakami”</i>. Nieistniejące kombinacje można znaleźć w załączniku <a href="nieistniejace_sznury@attachment">nieistniejące sznury</a>.'
+              '<br>Formę można utrudnić dodając do puli sznurów i sposobów ich noszenia kombinacje nie mające żadnego odpowiednika w funkcjach, np. <i>“sznur złoty z dwoma pomarańczowymi suwakami”</i>. Nieistniejące kombinacje można znaleźć w załączniku <a href="nieistniejace_sznury@attachment">nieistniejące sznury</a>.</p>'
       ),
 
 
@@ -2047,13 +2045,13 @@ List<Konspekt> allKonspekts = [
           title: 'Uszeregowanie męskich stopni harcerskich - milcząca, pół-widoczna kolejność',
           duration: Duration(minutes: 5),
           activeForm: true,
-          content: 'Harcerze są dzieleni na grupy po 6 osób (tyle, ile jest stopni harcerskich). Jeżeli harcerzy jest za mało na dwie grupy, wszyscy powinni być w jednej grupie.'
+          content: '<p style="text-align:justify;">Harcerze są dzieleni na grupy po 6 osób (tyle, ile jest stopni harcerskich). Jeżeli harcerzy jest za mało na dwie grupy, wszyscy powinni być w jednej grupie.'
               '<br>'
               '<br>Od tej chwili harcerze nie mogą się do siebie odzywać. Prowadzący każdej osobie w każdym zespole nakleja na czoło kartkę z nazwą innego męskiego stopnia harcerskiego. Jeżeli liczba uczestników nie pozwala ich podzielić na sześcioosobowe grupy, należy względnie po równo zwiększyć liczebność grup i uzupełnić pulę kartek o nazwy gwiazdek zuchowych i/lub kartkę “próba harcerza”.'
               '<br>'
               '<br>Grupy powinny być od siebie odizolowane (nie powinny widzieć wzajemnie kartek na swoich czołach). Na polecenie prowadzącego osoby w każdej grupie powinny się bez słowa uszeregować od najmłodszego stopnia do najstarszego.'
               '<br>'
-              '<br>Gdy każda grupa skończy się ustawiać, prowadzący pyta każdego co według niego ma na swoim czole. Następnie przykleja (zachowując kolejność) ich kartki na wspólną przestrzeń na podłodze i ze wszystkim uczestnikami omawia wyniki i ocenia ich prawidłowość.'
+              '<br>Gdy każda grupa skończy się ustawiać, prowadzący pyta każdego co według niego ma na swoim czole. Następnie przykleja (zachowując kolejność) ich kartki na wspólną przestrzeń na podłodze i ze wszystkim uczestnikami omawia wyniki i ocenia ich prawidłowość.</p>'
       ),
 
 
@@ -2061,7 +2059,7 @@ List<Konspekt> allKonspekts = [
           title: 'Uszeregowanie żeńskich stopni harcerskich - milcząca, pół-widoczna kolejność',
           duration: Duration(minutes: 5),
           activeForm: true,
-          content: 'Prowadzący powtarza poprzednią formę, tym razem ze stopniami żeńskimi.'
+          content: '<p style="text-align:justify;">Prowadzący powtarza poprzednią formę, tym razem ze stopniami żeńskimi.</p>'
       ),
 
 
@@ -2069,9 +2067,9 @@ List<Konspekt> allKonspekts = [
           title: 'Stopnie męskie i damskie - memory',
           duration: Duration(minutes: 10),
           activeForm: false,
-          content: 'Prowadzący zbiera wszystkie kartki ze stopniami. Zostawia po jednej kartce z każdego stopnia (zarówno męskiego jak i żeńskiego), pozostałe wyrzuca. Tasuje kartki i rozkłada je wierzchem do góry na podłodze. Dzieli harcerzy na dwie grupy (można powtórzyć poprzedni podział) i harcerze grają w memory - zebrać parę mogą tylko, gdy połączą stopień męski i odpowiadający im stopień żeński.'
+          content: '<p style="text-align:justify;">Prowadzący zbiera wszystkie kartki ze stopniami. Zostawia po jednej kartce z każdego stopnia (zarówno męskiego jak i żeńskiego), pozostałe wyrzuca. Tasuje kartki i rozkłada je wierzchem do góry na podłodze. Dzieli harcerzy na dwie grupy (można powtórzyć poprzedni podział) i harcerze grają w memory - zebrać parę mogą tylko, gdy połączą stopień męski i odpowiadający im stopień żeński.'
               '<br>'
-              '<br>Jeżeli uczestników jest więcej niż 12, można podzielić ich na grupy i zagrać w memory w mniejszych grupach.'
+              '<br>Jeżeli uczestników jest więcej niż 12, można podzielić ich na grupy i zagrać w memory w mniejszych grupach.</p>'
       ),
 
 
@@ -2079,11 +2077,11 @@ List<Konspekt> allKonspekts = [
           title: 'Stopnie instruktorskie - tak-nie',
           duration: Duration(minutes: 15),
           activeForm: true,
-          content: 'Harcerze są dzieleni na dwie grupy (można powtórzyć poprzedni podział). Grupy ustawiają się w dwóch kolumnach równolegle obok siebie. Kilka metrów przed nimi prowadzący ustawia dwa przedmioty: przedmiot symbolizujący “tak” oraz drugi symbolizujący “nie”.'
+          content: '<p style="text-align:justify;">Harcerze są dzieleni na dwie grupy (można powtórzyć poprzedni podział). Grupy ustawiają się w dwóch kolumnach równolegle obok siebie. Kilka metrów przed nimi prowadzący ustawia dwa przedmioty: przedmiot symbolizujący “tak” oraz drugi symbolizujący “nie”.'
               '<br>'
               '<br>Prowadzący zadaje kolejne pytania z załącznika <a href="stopnie_instruktorskie_pytania@attachment">stopnie instruktorskie pytania</a> obu grupom. Po zadaniu pytania osoby na czele każdej z kolumn biegną jak najszybciej do przedmiotów “tak” i “nie” i podnoszą ten, który według nich jest odpowiedzią na zadane pytanie (jeżeli grupa A podniesie przedmiot “tak”, grupa B może już wybrać tylko “nie”). Następnie prowadzący udziela głośno odpowiedzi na zadane pytanie, ewentualnie omawia jego szczegóły.'
               '<br>'
-              '<br>Wygrywa grupa, która udzieli najwięcej poprawnych odpowiedzi.'
+              '<br>Wygrywa grupa, która udzieli najwięcej poprawnych odpowiedzi.</p>'
       ),
 
 
@@ -2135,9 +2133,9 @@ List<Konspekt> allKonspekts = [
         'Kształtowanie u uczestników hartu ducha poprzez wstawanie w nocy na wartę, walkę z sennością, wartowaniem w chłodnej temperaturze',
         'Kształtowanie uważności uczestników poprzez spędzenie czasu w ciszy, w izolacji od bodźców dnia codziennego'
       ],
-      description: 'Harcerze w dwuosobowych grupach podczas formy wyjazdowej pełnią wartę na terenie obozowania w celu zapewnienia bezpieczeństwa śpiącym uczestnikom od zewnętrznych czynników.'
+      description: '<p style="text-align:justify;">Harcerze w dwuosobowych grupach podczas formy wyjazdowej pełnią wartę na terenie obozowania w celu zapewnienia bezpieczeństwa śpiącym uczestnikom od zewnętrznych czynników.'
           '<br>'
-          '<br>Formę można z korzyścią połączyć z <a href="nocne_podkradanie@konspekt">nocnym podkradaniem</a>.'
+          '<br>Formę można z korzyścią połączyć z <a href="nocne_podkradanie@konspekt">nocnym podkradaniem</a>.</p>'
   ),
 
 
@@ -2161,11 +2159,11 @@ List<Konspekt> allKonspekts = [
         aimUmiejetnoscWedrowania,
         'Stworzenie naturalnej okazji do dyskusji na ważne tematy'
       ],
-      description: 'Prowadzący wyznacza określoną trasę (samemu lub we współudziale uczestników), uczestnicy przygotowują niezbędny ekwipunek potrzebny do marszu i ew. obozowania, po czym uczestnicy wraz z prowadzącym udają się w trasę.'
+      description: '<p style="text-align:justify;">Prowadzący wyznacza określoną trasę (samemu lub we współudziale uczestników), uczestnicy przygotowują niezbędny ekwipunek potrzebny do marszu i ew. obozowania, po czym uczestnicy wraz z prowadzącym udają się w trasę.'
           '<br>'
           '<br>Forma, jeżeli odbywa się w odpowiednio dostosowanych warunkach, wpływa znakomicie na hart ducha zwłaszcza, jeśli pomimo trudności nie ma możliwości skrócenia trasy, bo celem jest dojście do noclegu. Głównym mechanizmem hartu ducha jest konfrontacja uczestnika z własnymi oporami (takimi jak: zmęczenie, spocenie, dyskomfort termiczny, ciążenie plecaka), które musi przezwyciężyć, by nie znaleźć się w sytuacji dużo trudniejszej niż ta w której jest teraz (perspektywa przedłużenia obecnego stanu bez uzyskania czegokolwiek w zamian).'
           '<br>'
-          '<br>Odpowiednio długa wędrówka pozwala także wpaść w swego rodzaju trans, mantrę stawiania kroków i wyciszenia umysłu. W sposób oczywisty wpływa także na rozwój sfery ciała.'
+          '<br>Odpowiednio długa wędrówka pozwala także wpaść w swego rodzaju trans, mantrę stawiania kroków i wyciszenia umysłu. W sposób oczywisty wpływa także na rozwój sfery ciała.</p>'
   ),
 
 
@@ -2191,9 +2189,9 @@ List<Konspekt> allKonspekts = [
         aimWlasnaSprawczosc,
         aimOtwartoscNaInterakcje,
       ],
-      description: 'Wariant <a href="wedrowka@konspekt">Wędrówki</a>.'
+      description: '<p style="text-align:justify;">Wariant <a href="wedrowka@konspekt">Wędrówki</a>.'
           '<br>'
-          '<br>Uczestnicy wędrują po terenie zamieszkałym (wsiach, miasteczkach) z ograniczonymi zasobami w celu zmuszenia uczestników do wejścia w interakcję z lokalną społecznością. Cel ów można osiągnąć przykładowo przez zaopatrzenie harcerzy w butelki lub bidony na wodę nie większe niż 0.5l (prowadzący powinien mieć w plecaku większy zapas wody dla uczestników na wszelki wypadek) lub poprzez określenie jedynie celu wędrówki bez zaopatrzenia ich w mapę. Mechanizmy te w sposób naturalny prowadzą uczestników do konieczności proszenia mieszkańców o uzupełnienie wody w pobliskich domach i do pytania o drogę napotykanych po drodze ludzi.'
+          '<br>Uczestnicy wędrują po terenie zamieszkałym (wsiach, miasteczkach) z ograniczonymi zasobami w celu zmuszenia uczestników do wejścia w interakcję z lokalną społecznością. Cel ów można osiągnąć przykładowo przez zaopatrzenie harcerzy w butelki lub bidony na wodę nie większe niż 0.5l (prowadzący powinien mieć w plecaku większy zapas wody dla uczestników na wszelki wypadek) lub poprzez określenie jedynie celu wędrówki bez zaopatrzenia ich w mapę. Mechanizmy te w sposób naturalny prowadzą uczestników do konieczności proszenia mieszkańców o uzupełnienie wody w pobliskich domach i do pytania o drogę napotykanych po drodze ludzi.</p>'
   ),
 
 
@@ -2215,7 +2213,7 @@ List<Konspekt> allKonspekts = [
       aims: [
         'Wyciszenie uczestników i refleksja nad wybranym zagadnieniem'
       ],
-      description: 'Harcerze wybierają lub otrzymują jakiś temat do przemyślenia (np. “z jakiego powodu i po co są harcerzami”, “co by zrobili w jakimś przypadku”, “kim jest dla nich Bóg”), fragment rozważania lub Pisma Świętego i wybierają się na całodniową wędrówkę. Forma realizowana jest pojedynczo, trasa powinna zapewniać ciszę i możliwą minimalizację kontaków z ludźmi. Po powrocie harcerze mogą, ale nie muszą opowiedzieć o swoich przemyśleniach i wnioskach np. drużynowemu, opiekunowi próby, zastępowi lub całej drużynie.'
+      description: '<p style="text-align:justify;">Harcerze wybierają lub otrzymują jakiś temat do przemyślenia (np. “z jakiego powodu i po co są harcerzami”, “co by zrobili w jakimś przypadku”, “kim jest dla nich Bóg”), fragment rozważania lub Pisma Świętego i wybierają się na całodniową wędrówkę. Forma realizowana jest pojedynczo, trasa powinna zapewniać ciszę i możliwą minimalizację kontaków z ludźmi. Po powrocie harcerze mogą, ale nie muszą opowiedzieć o swoich przemyśleniach i wnioskach np. drużynowemu, opiekunowi próby, zastępowi lub całej drużynie.</p>'
   ),
 
 
@@ -2242,7 +2240,7 @@ List<Konspekt> allKonspekts = [
         'Kształtowanie u uczestników wartości odpuszczania win',
         'Kształtowanie u uczestników wartości rozmowy o relacjach z bliskimi ludźmi'
       ],
-      description: 'Podczas formy wyjazdowej pod koniec każdego dnia (np. po obrzędowym zakończeniu dnia w kręgu) wszyscy zostają jeszcze na chwilę na wspólnej przestrzeni (np. na placu apelowym). Każda osoba może w tym czasie podejść do wybranych osób i podziękować im za coś, co się tego dnia działo lub za coś przeprosić. Ważne jest, by uczestnictwo w tej formie zawsze pozostawiać dobrowolnym.',
+      description: '<p style="text-align:justify;">Podczas formy wyjazdowej pod koniec każdego dnia (np. po obrzędowym zakończeniu dnia w kręgu) wszyscy zostają jeszcze na chwilę na wspólnej przestrzeni (np. na placu apelowym). Każda osoba może w tym czasie podejść do wybranych osób i podziękować im za coś, co się tego dnia działo lub za coś przeprosić. Ważne jest, by uczestnictwo w tej formie zawsze pozostawiać dobrowolnym.</p>',
       howToFail: [
         'Uczynić formę obowiązkową, np. "każdy musi podejść do min. jednej osoby"',
       ]
@@ -2277,14 +2275,13 @@ List<Konspekt> allKonspekts = [
       summary: 'Uczestnicy wykonują z dostępnych materiałów dwa modele własnych nagrobków - pierwszy to taki, jakby chcieliby by podsumowywał ich życie, drugi to taki, który uważają, że teraz by im postawiono, gdyby umarli jutro.',
       steps: [
 
-
         KonspektStep(
             title: 'Wprowadzenie - nagrobek idealny',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: 'Prowadzący wprowadza uczestników w cel pierwszej części zadania - mają zaprojektować i zbudować nagrobek, który chcieliby by im postawiono na końcu życia.'
+            content: '<p style="text-align:justify;">Prowadzący wprowadza uczestników w cel pierwszej części zadania - mają zaprojektować i zbudować nagrobek, który chcieliby by im postawiono na końcu życia.'
                 '<br>'
-                '<br>Prowadzący informuje uczestników, że na końcu zajęć każdy będzie mógł opowiedzieć o swoim nagrobku idealnym - jeśli tylko będzie chciał.'
+                '<br>Prowadzący informuje uczestników, że na końcu zajęć każdy będzie mógł opowiedzieć o swoim nagrobku idealnym - jeśli tylko będzie chciał.</p>'
         ),
 
 
@@ -2292,9 +2289,9 @@ List<Konspekt> allKonspekts = [
             title: 'Rozdanie materiałów',
             duration: Duration(minutes: 10),
             activeForm: false,
-            content: 'Prowadzący rozdaje uczestnikom materiały, z których będą budowali nagrobki. Część materiałów warto zostawić na środku, tak by były dostępne dla tych, którzy będą potrzebowali ich więcej.'
+            content: '<p style="text-align:justify;">Prowadzący rozdaje uczestnikom materiały, z których będą budowali nagrobki. Część materiałów warto zostawić na środku, tak by były dostępne dla tych, którzy będą potrzebowali ich więcej.'
                 '<br>'
-                '<br>Prowadzący informuje uczestników, że na przemyślenie i stworzenie nagrobka będą mieli 60 minut.'
+                '<br>Prowadzący informuje uczestników, że na przemyślenie i stworzenie nagrobka będą mieli 60 minut.</p>'
         ),
 
 
@@ -2302,7 +2299,7 @@ List<Konspekt> allKonspekts = [
             title: 'Projektowanie i budowanie nagrobka idealnego',
             duration: Duration(minutes: 60),
             activeForm: true,
-            content: 'Uczestnicy projektują i budują swój nagrobek idealny.'
+            content: '<p style="text-align:justify;">Uczestnicy projektują i budują swój nagrobek idealny.</p>'
         ),
 
 
@@ -2310,11 +2307,11 @@ List<Konspekt> allKonspekts = [
             title: 'Wprowadzenie - nagrobek rzeczywisty',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: 'Prowadzący wprowadza uczestników w cel drugiej części zadania - mają zaprojektować i zbudować nagrobek, który sądzą, że postawiono by im, gdyby umarli jutro.'
+            content: '<p style="text-align:justify;">Prowadzący wprowadza uczestników w cel drugiej części zadania - mają zaprojektować i zbudować nagrobek, który sądzą, że postawiono by im, gdyby umarli jutro.'
                 '<br>'
                 '<br>Ważne, by zawarli w nim te same <b>kategorie informacji</b> (np. imię, lata życia, opis kto ich żegna i jak żyli), które zawarli w nagrobku idealnym.'
                 '<br>'
-                '<br>Prowadzący informuje uczestników, że nagrobek rzeczywisty tylko dla nich i że nikt nie będzie go podsumowywał, widział ani oceniał.'
+                '<br>Prowadzący informuje uczestników, że nagrobek rzeczywisty tylko dla nich i że nikt nie będzie go podsumowywał, widział ani oceniał.</p>'
         ),
 
 
@@ -2322,7 +2319,7 @@ List<Konspekt> allKonspekts = [
             title: 'Projektowanie i budowanie nagrobka rzeczywistego',
             duration: Duration(minutes: 60),
             activeForm: true,
-            content: 'Uczestnicy projektują i budują swój nagrobek rzeczywisty.'
+            content: '<p style="text-align:justify;">Uczestnicy projektują i budują swój nagrobek rzeczywisty.</p>'
         ),
 
 
@@ -2330,7 +2327,7 @@ List<Konspekt> allKonspekts = [
             title: 'Podsumowanie nagrobków idealnych',
             duration: Duration(minutes: 20),
             activeForm: false,
-            content: 'Uczestnicy wspólnie z prowadzącym podsumowują swoje nagrobki idealne. Nie ma konieczności prezentowania swojego przygotowanego nagrobka.'
+            content: '<p style="text-align:justify;">Uczestnicy wspólnie z prowadzącym podsumowują swoje nagrobki idealne. Nie ma konieczności prezentowania swojego przygotowanego nagrobka.</p>'
         ),
 
 
@@ -2361,11 +2358,11 @@ List<Konspekt> allKonspekts = [
         'Stwarzanie prowadzącemu okazji do wyśmiania alkoholu',
         'Kształtowanie u uczestników postaw dbania o zdrowie',
       ],
-      description: 'Grupa osób bierze po ząbku czosnku i staje w kręgu. Na dany znak wszyscy zaczynają jeść ząbek czosnku (rozgryzając go), jednak przełknąć i popić go można dopiero po minucie. Przegrywają Ci, którzy przełkną czosnek wcześniej. Ponieważ jest to forma wspólnego trudu, kształtuje też wartości związane ze wspólnotą.'
+      description: '<p style="text-align:justify;">Grupa osób bierze po ząbku czosnku i staje w kręgu. Na dany znak wszyscy zaczynają jeść ząbek czosnku (rozgryzając go), jednak przełknąć i popić go można dopiero po minucie. Przegrywają Ci, którzy przełkną czosnek wcześniej. Ponieważ jest to forma wspólnego trudu, kształtuje też wartości związane ze wspólnotą.'
           '<br>'
           '<br>Jeśli prowadzący uzna to za stosowne, a uczestnicy są odpowiednio duzi (ok, 15+), może w ten sposób naturalnie skomentować podobieństwo jedzenia czosnku do picia wódki - oba pieką, oba trzeba popić, oba dezynfekują, ale jeden wzmacnia odporność, a drugi niszczy wątrobę i mózg.'
           '<br>'
-          '<br>Formę można przeprowadzać <b>maksymalnie</b> raz dziennie - więcej niż jeden ząbek czosnku na dobrę może podrażnić żołądek.'
+          '<br>Formę można przeprowadzać <b>maksymalnie</b> raz dziennie - więcej niż jeden ząbek czosnku na dobrę może podrażnić żołądek.</p>'
   ),
 
 
@@ -2387,32 +2384,26 @@ List<Konspekt> allKonspekts = [
       aims: [
         'Ksztaltowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
       ],
-      description: 'Prowadzący formę regularnie (np. codziennie na apelu na obozie) przedstawia uczestnikom jedną zagadkę matematyczną, która jest w zasięgu ich możliwości intelektualnych, np:'
-          '<br>'
+      description: '<p style="text-align:justify;">Prowadzący formę regularnie (np. codziennie na apelu na obozie) przedstawia uczestnikom jedną zagadkę matematyczną, która jest w zasięgu ich możliwości intelektualnych, np:'
+          '</p>'
           '<i>'
           '<ul>'
-          '<li>“O magicznym kamieniu wiadomo tylko tyle, że waży on kilogram oraz pół magicznego kamienia. Ile kilogramów waży magiczny kamień?”.</li>'
-          '<br>'
-          '<li>Pewien brat mówi o swoim młodszym bracie: „Dwa lata temu byłem trzy razy starszy od mojego brata. Za trzy lata będę dwa razy starszy od mojego brata”. Ile mają teraz lat?</li>'
-          '<br>'
-          '<li>Jeśli półtora kury zniesie półtora jajka w ciągu półtora dnia, ile jaj zniesie pół tuzina kur w ciągu pół tuzina dni?</li>'
-          '<br>'
+          '<li><p style="text-align:justify;">“O magicznym kamieniu wiadomo tylko tyle, że waży on kilogram oraz pół magicznego kamienia. Ile kilogramów waży magiczny kamień?”.</p></li>'
+          '<li><p style="text-align:justify;">Pewien brat mówi o swoim młodszym bracie: „Dwa lata temu byłem trzy razy starszy od mojego brata. Za trzy lata będę dwa razy starszy od mojego brata”. Ile mają teraz lat?</p></li>'
+          '<li><p style="text-align:justify;">Jeśli półtora kury zniesie półtora jajka w ciągu półtora dnia, ile jaj zniesie pół tuzina kur w ciągu pół tuzina dni?</p></li>'
           '<li>'
-          'Mamy kłódkę zamykaną na 3-cyfrowy szyfr. Musimy znaleźć jej kod. O kodzie wiadomo tylko, że:'
+          '<p style="text-align:justify;">Mamy kłódkę zamykaną na 3-cyfrowy szyfr. Musimy znaleźć jej kod. O kodzie wiadomo tylko, że:</p>'
           '<ul>'
-          '<li>276 – jedna cyfra jest poprawna, ale w niewłaściwym miejscu.</li>'
-          '<li>387 – żadna cyfra nie jest właściwa.</li>'
-          '<li>368 – jedna cyfra jest właściwa i znajduje się we właściwym miejscu.</li>'
-          '<li>471 – dwie liczby są poprawne, ale znajdują się w niewłaściwym miejscu.</li>'
+          '<li><p style="text-align:justify;">276 – jedna cyfra jest poprawna, ale w niewłaściwym miejscu.</p></li>'
+          '<li><p style="text-align:justify;">387 – żadna cyfra nie jest właściwa.</p></li>'
+          '<li><p style="text-align:justify;">368 – jedna cyfra jest właściwa i znajduje się we właściwym miejscu.</p></li>'
+          '<li><p style="text-align:justify;">471 – dwie liczby są poprawne, ale znajdują się w niewłaściwym miejscu.</p></li>'
           '</ul>'
           '</li>'
-          '<br>'
-          '<li>Sześcienna kostka została rzucona jeden raz. Jakie jest prawdopodobieństwo. że wyrzucona cyfra będzie parzysta i większa niż 2?</li>'
-          '<br>'
+          '<li><p style="text-align:justify;">Sześcienna kostka została rzucona jeden raz. Jakie jest prawdopodobieństwo. że wyrzucona cyfra będzie parzysta i większa niż 2?</p></li>'
           '</ul>'
           '</i>'
-          '<br>'
-          '<br>Forma ta jest przykładem zjawiska wpływu sfer funkcjonalnych na sferę ducha przy udziale wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..'
+          '<p style="text-align:justify;">Forma ta jest przykładem zjawiska wpływu sfer funkcjonalnych na sferę ducha przy udziale wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..</p>'
   ),
 
 
@@ -2434,7 +2425,7 @@ List<Konspekt> allKonspekts = [
         'Kształtowanie u uczestników hartu ducha poprzez funkcjonowanie w warunkach obniżonego komfortu',
         'Budowanie u uczestników wspólnoty poprzez codzienne funkcjonowanie na ograniczonej przestrzeni'
       ],
-      description: 'Głównym źródłem skuteczności formy jest funkcjonowanie uczestników w warunkach obniżonego komfortu: brak możliwości ogrzania namiotu, brak dobrego światła w namiocie, brak całkowitej izolacji od warunków atmosferycznych (głównie deszczu i upału), obecność robaczków, komarów, pająków, wszechobecność ściółki i kurzu, konieczność korzystania z zewnętrznej latryny, ograniczona przestrzeń na rzeczy w namiocie i brak możliwości całkowitego odizolowania się od pozostałych mieszkańców namiotu.'
+      description: '<p style="text-align:justify;">Głównym źródłem skuteczności formy jest funkcjonowanie uczestników w warunkach obniżonego komfortu: brak możliwości ogrzania namiotu, brak dobrego światła w namiocie, brak całkowitej izolacji od warunków atmosferycznych (głównie deszczu i upału), obecność robaczków, komarów, pająków, wszechobecność ściółki i kurzu, konieczność korzystania z zewnętrznej latryny, ograniczona przestrzeń na rzeczy w namiocie i brak możliwości całkowitego odizolowania się od pozostałych mieszkańców namiotu.</p>'
   ),
 
 
@@ -2455,9 +2446,9 @@ List<Konspekt> allKonspekts = [
       aims: [
         aimHartDuchaZimno
       ],
-      description: 'Podczas zimowej formy wyjazdowej (obóz lub zimowisko) drużyna codziennie przeprowadza apele na zewnątrz na śniegu. Ponadto w bardzo czytelny sposób obrazuje harcerzom dlaczego dyscyplina jest ważna - jeżeli nie chcą marznąć, muszą sprawnie działać.'
+      description: '<p style="text-align:justify;">Podczas zimowej formy wyjazdowej (obóz lub zimowisko) drużyna codziennie przeprowadza apele na zewnątrz na śniegu. Ponadto w bardzo czytelny sposób obrazuje harcerzom dlaczego dyscyplina jest ważna - jeżeli nie chcą marznąć, muszą sprawnie działać.'
           '<br>'
-          '<br>Warto także rozważyć prowadzenie apelu bez kurtek z widocznym mundurem, jeśli mróz nie jest za duży.'
+          '<br>Warto także rozważyć prowadzenie apelu bez kurtek z widocznym mundurem, jeśli mróz nie jest za duży.</p>'
   ),
 
 
@@ -2480,23 +2471,18 @@ List<Konspekt> allKonspekts = [
         'Kształtowanie u uczestników otwartości na kontakt z drugim człowiekiem',
         aimSzacunekDlaSkutecznegoDzialania
       ],
-      description: 'Harcerze w zastępach otrzymują zadanie, by rozpoznać okolicę biwaku lub obozu i zebrać informacje na temat ciekawych, przydatnych lub ważnych miejsc w najbliższym otoczeniu.'
+      description: '<p style="text-align:justify;">Harcerze w zastępach otrzymują zadanie, by rozpoznać okolicę biwaku lub obozu i zebrać informacje na temat ciekawych, przydatnych lub ważnych miejsc w najbliższym otoczeniu.'
           '<br>'
-          '<br>Jednocześnie harcerze mają za zadanie zrealizowanie szeregu zadań związanych z lepszym poznaniem lokalnej społeczności. Przykładowe zadania służące temu celowi to:'
+          '<br>Jednocześnie harcerze mają za zadanie zrealizowanie szeregu zadań związanych z lepszym poznaniem lokalnej społeczności. Przykładowe zadania służące temu celowi to:</p>'
           '<ul>'
-          '<li>Poproście o trzy osoby, żeby zrobiły sobie z Wami zdjęcie pod dowolnym pomnikiem i żeby wysłały je na maila drużynowego</li>'
-          '<br>'
-          '<li>Dowiedzcie się, jaka jest najciekawsza historia związana z parafią według jednego z księży</li>'
-          '<br>'
-          '<li>Ustalcie, ile kosztuje najtańsza woda gazowana w mieście</li>'
-          '<br>'
-          '<li>Dowiedzcie się, w którym roku założone zostało miasto</li>'
+          '<li><p style="text-align:justify;">Poproście o trzy osoby, żeby zrobiły sobie z Wami zdjęcie pod dowolnym pomnikiem i żeby wysłały je na maila drużynowego</p></li>'
+          '<li><p style="text-align:justify;">Dowiedzcie się, jaka jest najciekawsza historia związana z parafią według jednego z księży</p></li>'
+          '<li><p style="text-align:justify;">Ustalcie, ile kosztuje najtańsza woda gazowana w mieście</p></li>'
+          '<li><p style="text-align:justify;">Dowiedzcie się, w którym roku założone zostało miasto</p></li>'
           '</ul>'
-          '<br>Zwiad może być uzupełniony o konkretne zadania lub pytania, na które harcerze podczas wyprawy muszą znaleźć odpowiedzi lub które muszą wykonać.'
+          '<p style="text-align:justify;">Zwiad może być uzupełniony o konkretne zadania lub pytania, na które harcerze podczas wyprawy muszą znaleźć odpowiedzi lub które muszą wykonać.'
           '<br>'
-          '<br>Harcerze mogą otrzymać na początku mapę okolicy na której powinni uzupełnić punkty. Mogą także, w trudniejszym, wariancie otrzymać pustą kartkę, na której mapę powinni narysować od podstaw.'
-          '<br>'
-          '<br>'
+          '<br>Harcerze mogą otrzymać na początku mapę okolicy na której powinni uzupełnić punkty. Mogą także, w trudniejszym, wariancie otrzymać pustą kartkę, na której mapę powinni narysować od podstaw.</p>'
   ),
 
 
