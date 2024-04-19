@@ -81,9 +81,7 @@ List<Konspekt> allKonspekts = [
           '<br>Drużyna <b>broniąca</b> wygrywa, jeśli zabije <b>sapera</b> lub jeśli obroni <b>teren krytyczny</b> przez 20 minut od rozpoczęcia gry.'
           '</p>'
           '</li>'
-          '<li>'
-          '<p style="text-align:justify;">Każda drużyna ma wyznaczoną <b>królową</b>. Drużyna przegrywa, jeśli straci <b>królową</b> niezależnie od tego ile osób pozostanie na końcu przy życiu. Przegrana drużyna natychmiast kończy grę.</p>'
-          '</li>'
+          '<li><p style="text-align:justify;">Każda drużyna ma wyznaczoną <b>królową</b>. Drużyna przegrywa, jeśli straci <b>królową</b> niezależnie od tego ile osób pozostanie na końcu przy życiu. Przegrana drużyna natychmiast kończy grę.</p></li>'
           '</ul>',
       steps: [
 
@@ -423,16 +421,14 @@ List<Konspekt> allKonspekts = [
         ),
       ],
 
-
       summary: 'Harcerze mając do dyspozycji materiały i narzędzia projektują, a później budują kapliczkę w wybranej formie. Może ona powstać na obozie, przy harcówce lub w innym miejscu.',
       steps: [
-
 
         const KonspektStep(
             title: 'Przejrzenie przykładów kapliczek',
             duration: Duration(minutes: 20),
             activeForm: false,
-            content: 'Prowadzący daje uczestnikom trochę czasu, by zapoznali się z przykładowymi kapliczkami oraz by zastanowili się jaki styl kapliczki (krzyża, figurki na cokole, kolumny, etc.) chcą zbudować oraz na jaki styl kapliczki mają wystarczające środki (zdolności, czas, materiały).'
+            content: '<p style="text-align:justify;">Prowadzący daje uczestnikom trochę czasu, by zapoznali się z przykładowymi kapliczkami oraz by zastanowili się jaki styl kapliczki (krzyża, figurki na cokole, kolumny, etc.) chcą zbudować oraz na jaki styl kapliczki mają wystarczające środki (zdolności, czas, materiały).</p>'
         ),
 
 
@@ -440,13 +436,13 @@ List<Konspekt> allKonspekts = [
             title: 'Stworzenie projektu',
             duration: Duration(minutes: 30),
             activeForm: false,
-            content: 'Uczestnicy tworzą projekt kapliczki. Projekt powinien zawierać szczegółowe informacje o:'
+            content: '<p style="text-align:justify;">Uczestnicy tworzą projekt kapliczki. Projekt powinien zawierać szczegółowe informacje o:</p>'
                 '<ul>'
-                '<li>Elementach kapliczki, które zostaną potem złączone w całość</li>'
-                '<li>Wymiarach każdego z elementów</li>'
-                '<li>Materiałach potrzebnych do zbudowania kapliczki</li>'
-                '<li>Narzędzi niezbędnych do zbudowania kapliczki</li>'
-                '<li>Miejscu, w którym stanie kapliczka (miejsce to musi być legalne).</li>'
+                '<li><p style="text-align:justify;">Elementach kapliczki, które zostaną potem złączone w całość,</p></li>'
+                '<li><p style="text-align:justify;">Wymiarach każdego z elementów,</p></li>'
+                '<li><p style="text-align:justify;">Materiałach potrzebnych do zbudowania kapliczki,</p></li>'
+                '<li><p style="text-align:justify;">Narzędzi niezbędnych do zbudowania kapliczki,</p></li>'
+                '<li><p style="text-align:justify;">Miejscu, w którym stanie kapliczka (miejsce to musi być legalne).</p></li>'
                 '</ul>'
         ),
 
@@ -455,9 +451,9 @@ List<Konspekt> allKonspekts = [
             title: 'Konsultacja projektu',
             duration: Duration(minutes: 20),
             activeForm: false,
-            content: 'Uczestnicy przedstawiają gotowy projektu drużynowemu w celu zweryfikowania sensowności technicznej konstrukcji i, jeśli to możliwe, zaprzyjaźnionemu księdzu lub kapelanowi w celu zweryfikowania religijnej spójności kapliczki.'
+            content: '<p style="text-align:justify;">Uczestnicy przedstawiają gotowy projektu drużynowemu w celu zweryfikowania sensowności technicznej konstrukcji i, jeśli to możliwe, zaprzyjaźnionemu księdzu lub kapelanowi w celu zweryfikowania religijnej spójności kapliczki.'
                 '<br>'
-                '<br>Prawdopodobnie niektóre elementy będą wymagały poprawy - poprawianie i ponowne konsultowanie projektu powtarza się aż zostanie on zaakceptowany przez drużynowego.'
+                '<br>Prawdopodobnie niektóre elementy będą wymagały poprawy - poprawianie i ponowne konsultowanie projektu powtarza się aż zostanie on zaakceptowany przez drużynowego.</p>'
         ),
 
 
@@ -465,7 +461,7 @@ List<Konspekt> allKonspekts = [
             title: 'Budowa',
             duration: Duration(hours: 6),
             activeForm: true,
-            content: 'Uczestnicy mając do dyspozycji dostępne materiały (drewno, zaprawę, kamienie) i narzędzia budują kapliczkę.'
+            content: '<p style="text-align:justify;">Uczestnicy mając do dyspozycji dostępne materiały (drewno, zaprawę, kamienie) i narzędzia budują kapliczkę.</p>'
         ),
 
 
@@ -473,7 +469,7 @@ List<Konspekt> allKonspekts = [
             title: 'Dbanie z czasem',
             duration: Duration(minutes: 30),
             activeForm: true,
-            content: 'Uczestnicy ustalają w jaki sposób będą dbali o kapliczkę. Ważne, by po jej zbudowaniu nie została ona porzucona.'
+            content: '<p style="text-align:justify;">Uczestnicy ustalają w jaki sposób będą dbali o kapliczkę. Ważne, by po jej zbudowaniu nie została ona porzucona.</p>'
         ),
 
 
@@ -537,50 +533,44 @@ List<Konspekt> allKonspekts = [
       summary: 'Harcerze mając do dyspozycji materiały i narzędzia projektują, a później budują szopkę bożonarodzeniową w wybranej formie.',
       steps: [
 
-
         const KonspektStep(
             title: 'Przejrzenie przykładów szopek',
             duration: Duration(minutes: 20),
             activeForm: false,
-            content: 'Prowadzący daje uczestnikom trochę czasu, by zapoznali się z przykładowymi szopkami oraz by zastanowili się jaki styl szopki chcą zbudować.'
+            content: '<p style="text-align:justify;">Prowadzący daje uczestnikom trochę czasu, by zapoznali się z przykładowymi szopkami oraz by zastanowili się jaki styl szopki chcą zbudować.</p>'
         ),
-
 
         const KonspektStep(
             title: 'Stworzenie projektu',
             duration: Duration(minutes: 30),
             activeForm: false,
-            content: 'Uczestnicy tworzą projekt szopki bożonarodzeniowej. Projekt powinien zawierać szczegółowe informacje o:'
+            content: '<p style="text-align:justify;">Uczestnicy tworzą projekt szopki bożonarodzeniowej. Projekt powinien zawierać szczegółowe informacje o:</p>'
                 '<ul>'
-                '<li>Elementach szopki, które zostaną potem złączone w całość</li>'
-                '<li>Wymiarach każdego z elementów</li>'
-                '<li>Materiałach potrzebnych do zbudowania szopki</li>'
-                '<li>Narzędzi niezbędnych do zbudowania szopki</li>'
+                '<li><p style="text-align:justify;">Elementach szopki, które zostaną potem złączone w całość</p></li>'
+                '<li><p style="text-align:justify;">Wymiarach każdego z elementów</p></li>'
+                '<li><p style="text-align:justify;">Materiałach potrzebnych do zbudowania szopki</p></li>'
+                '<li><p style="text-align:justify;">Narzędzi niezbędnych do zbudowania szopki</p></li>'
                 '</ul>'
-                'Na tym etapie <b>bardzo ważne</b> jest, aby przedyskutować z harcerzami plan, jaki mają na szopkę ze szczególnym uwzględnieniem elementów takich jak żłóbek, postać Jezusa, Maryi i Józefa, ew. trzech królów.'
+                '<p style="text-align:justify;">Na tym etapie <b>bardzo ważne</b> jest, aby przedyskutować z harcerzami plan, jaki mają na szopkę ze szczególnym uwzględnieniem elementów takich jak żłóbek, postać Jezusa, Maryi i Józefa, ew. trzech królów.</p>'
         ),
-
 
         const KonspektStep(
             title: 'Konsultacja projektu',
             duration: Duration(minutes: 20),
             activeForm: false,
-            content: 'Uczestnicy przedstawiają gotowy projektu drużynowemu w celu zweryfikowania sensowności technicznej konstrukcji. W zależności od wieku można oczekiwać szopki o różnym stopniu zaawansowania. W przypadku zuchów i harcerzy szopka można być budowana z kartonów i farb, jednak w przypadku harcerzy starszych i wędrowników szopka może powstać z np. z desek.'
+            content: '<p style="text-align:justify;">Uczestnicy przedstawiają gotowy projektu drużynowemu w celu zweryfikowania sensowności technicznej konstrukcji. W zależności od wieku można oczekiwać szopki o różnym stopniu zaawansowania. W przypadku zuchów i harcerzy szopka można być budowana z kartonów i farb, jednak w przypadku harcerzy starszych i wędrowników szopka może powstać z np. z desek.'
                 '<br>'
-                '<br>Prawdopodobnie niektóre elementy będą wymagały poprawy - poprawianie i ponowne konsultowanie projektu powtarza się aż zostanie on zaakceptowany przez drużynowego.'
+                '<br>Prawdopodobnie niektóre elementy będą wymagały poprawy - poprawianie i ponowne konsultowanie projektu powtarza się aż zostanie on zaakceptowany przez drużynowego.</p>'
         ),
-
 
         const KonspektStep(
             title: 'Budowa',
             duration: Duration(hours: 6),
             activeForm: false,
-            content: 'Uczestnicy mając do dyspozycji dostępne materiały (drewno, zaprawę, kamienie) i narzędzia budują kapliczkę.'
+            content: '<p style="text-align:justify;">Uczestnicy mając do dyspozycji dostępne materiały (drewno, zaprawę, kamienie) i narzędzia budują kapliczkę.</p>'
         ),
 
-
       ],
-
 
       howToFail: [
         'Potraktować formę jedynie jak majsterkę',
@@ -608,9 +598,9 @@ List<Konspekt> allKonspekts = [
       ],
       summary: 'Drużyna podczas wyjazdu myje się w jeziorze zamiast w cywilizowanych warunkach.',
 
-      description: 'Podczas formy wyjazdowej (obóz lub zimowisko) drużyna aby się umyć kąpie się w jeziorze. Jeziora w Polsce są wieczorami chłodne co kształtuje hart ducha. Forma ta pozwala także zaobserwować prowadzącemu łatwość, z jaką harcerze przełamują się i wskakują do wody, działa przy tym efekt wzajemności oddziaływań.'
+      description: '<p style="text-align:justify;">Podczas formy wyjazdowej (obóz lub zimowisko) drużyna aby się umyć kąpie się w jeziorze. Jeziora w Polsce są wieczorami chłodne co kształtuje hart ducha. Forma ta pozwala także zaobserwować prowadzącemu łatwość, z jaką harcerze przełamują się i wskakują do wody, działa przy tym efekt wzajemności oddziaływań.'
           '<br>'
-          '<br>Należy mieć na uwadze, że z czasem uczestnicy przyzwyczają się wskakiwać do zimnej wody. Wówczas forma ta przestanie spełniać swój cel.'
+          '<br>Należy mieć na uwadze, że z czasem uczestnicy przyzwyczają się wskakiwać do zimnej wody. Wówczas forma ta przestanie spełniać swój cel.</p>'
   ),
 
 
@@ -634,11 +624,11 @@ List<Konspekt> allKonspekts = [
         aimPraktykaModlitwy
       ],
       summary: 'Uczestnicy przechodzą w nocy drogę krzyżową rozłożoną na dystansie kilkudziesięciu kilometrów.',
-      description: 'Uczestnicy przechodzą w nocy drogę krzyżową rozłożoną na dystansie kilkudziesięciu kilometrów. Poza-harcerski zasięg formy jest także korzystnym z wychowawczego punktu widzenia doświadczeniem powszechności Kościoła.'
+      description: '<p style="text-align:justify;">Uczestnicy przechodzą w nocy drogę krzyżową rozłożoną na dystansie kilkudziesięciu kilometrów. Poza-harcerski zasięg formy jest także korzystnym z wychowawczego punktu widzenia doświadczeniem powszechności Kościoła.'
           '<br>'
           '<br>Trasa kończy się Mszą Świętą u celu w kościele. Warto poruszać się grupami nie większymi niż zastęp. Do każdej stacji przygotowane są rozważania.'
           '<br>'
-          '<br>Forma jest organizowana przez księdza Jacka Stryczka. Szczegóły dotyczące tras można znaleźć na stronie <a href="www.edk.org.pl">EDK</a>'
+          '<br>Forma jest organizowana przez księdza Jacka Stryczka. Szczegóły dotyczące tras można znaleźć na stronie <a href="www.edk.org.pl">EDK</a></p>'
   ),
 
 
@@ -664,10 +654,10 @@ List<Konspekt> allKonspekts = [
     ],
     summary: 'Harcerze dowiadują się, że dokonano porwania. Zdobywają liczne informacje na ten temat, po czym ich zadaniem jest dokonać ich syntezy i ustalić tożsamość porywaczy.',
 
-    intro: 'Harcerze dowiadują się, że <b>nad ranem</b> w <b>weekend</b> dokonano porwania ważnej osoby. Policja ustaliła już, że za porwaniem stoi jeden z działających w okolicy gangów.'
+    intro: '<p style="text-align:justify;">Harcerze dowiadują się, że <b>nad ranem</b> w <b>weekend</b> dokonano porwania ważnej osoby. Policja ustaliła już, że za porwaniem stoi jeden z działających w okolicy gangów.'
         '<br>'
-        '<br>Harcerze wyruszają, by zdobyć informacje o gangach. Ich zadaniem jest zebrać jak najwięcej informacji, przeanalizować je i wskazać, który gang, ich zdaniem, dokonał porwania. Wnioski harcerzy muszą być poparte argumentami.',
-    description: 'Lista okolicznych gangów:'
+        '<br>Harcerze wyruszają, by zdobyć informacje o gangach. Ich zadaniem jest zebrać jak najwięcej informacji, przeanalizować je i wskazać, który gang, ich zdaniem, dokonał porwania. Wnioski harcerzy muszą być poparte argumentami.</p>',
+    description: '<p style="text-align:justify;">Lista okolicznych gangów:'
         '<br>- Gang Olszaka'
         '<br>- Szajka Łysego'
         '<br>- Świnki trzy'
@@ -700,7 +690,7 @@ List<Konspekt> allKonspekts = [
         '<br>'
         '<br><b>Grę można utrudnić</b> sprawiając, by żadna osoba lub grupa nie zdobyła zbyt dużej liczby wycinków informacji i by była skazana na współpracę z innymi.'
         '<br>'
-        '<br>Forma zdobywania wycinków informacji jest dowolna: mogą one być nagrodą w innej grze za wykonane zadania, mogą być schowane na określonym terenie, itp..',
+        '<br>Forma zdobywania wycinków informacji jest dowolna: mogą one być nagrodą w innej grze za wykonane zadania, mogą być schowane na określonym terenie, itp..</p>',
     attachments: [
       KonspektAttachment(
         name: 'wycinki_informacji',
@@ -963,9 +953,8 @@ List<Konspekt> allKonspekts = [
           name: 'Teksty śpiewanych piosenek',
         ),
       ],
-      description: 'Szczególna wersja formy <a href="spiewogranie_z_quizem_interpretacyjnym@konspekt">Śpiewogranie z quizem interpretacyjnym</a>, gdzie zbiorem piosenek są kolędy.'
+      description: '<p style="text-align:justify;">Szczególna wersja formy <a href="spiewogranie_z_quizem_interpretacyjnym@konspekt">Śpiewogranie z quizem interpretacyjnym</a>, gdzie zbiorem piosenek są kolędy.</p>'
   ),
-
 
   // Done
   const Konspekt(
@@ -1029,7 +1018,7 @@ List<Konspekt> allKonspekts = [
         'Budowanie przekonania o ważności modlitwy',
         'Budowanie wspólnoty wiary',
       ],
-      description: 'Forma jest pokrewna do formy <a href="rozpoczynanie_posilku_wspolnym_spiewaniem@konspekt">Rozpoczynanie posiłku wspólnym śpiewaniem</a>.'
+      description: '<p style="text-align:justify;">Forma jest pokrewna do formy <a href="rozpoczynanie_posilku_wspolnym_spiewaniem@konspekt">Rozpoczynanie posiłku wspólnym śpiewaniem</a>.'
           '<br>'
           '<br>W przypadku zuchów lub harcerzy modlitwa przed posiłkiem pełni przede wszystkim rolę normalizacyjną - buduje przekonanie, że modlitwa jest ważna. Warto jednak mieć na uwadze, że sprowadzanie modlitwy do roli konkursu piosenki "kto głośniej zaśpiewa" jest niewychowawcze i normalizuje przekonanie, że modlitwa to folklor.'
           '<br>'
@@ -1039,10 +1028,10 @@ List<Konspekt> allKonspekts = [
           '<br>'
           '<br>Uniwersalną formułą może być nieśpiewana modlitwa: <i>"Pobłogosław Panie Boże nas, pobłogosław te dary i tych, którzy go przygotowali i naucz nas dzielić się chlebem i radością, przez Chrystusa, Pana naszego - Amen!"</i>.'
           '<br>'
-          '<br>Przykłady piosenek:'
+          '<br>Przykłady piosenek:</p>'
           '<ul>'
-          '<li>Pobłogosław Panie</li>'
-          '<li>Chodźcie jeść, zbawca woła chodźcie jeść</li>'
+          '<li><p style="text-align:justify;">Pobłogosław Panie</p></li>'
+          '<li><p style="text-align:justify;">Chodźcie jeść, zbawca woła chodźcie jeść</p></li>'
           '</ul>'
   ),
 
@@ -1067,11 +1056,11 @@ List<Konspekt> allKonspekts = [
         'Budowanie u uczestników poczucia elitarności środowiska',
         'Budowanie reprezentatywności środowiska'
       ],
-      description: 'Dbałość o musztrę odbywa się poprzez jej regularną praktykę, oczekiwanie od harcerzy wysokich standardów i dbanie o to, by znaczenie komend było dla nich jasne, klarowne i zrozumiałe.'
+      description: '<p style="text-align:justify;">Dbałość o musztrę odbywa się poprzez jej regularną praktykę, oczekiwanie od harcerzy wysokich standardów i dbanie o to, by znaczenie komend było dla nich jasne, klarowne i zrozumiałe.'
           '<br>'
           '<br>Dbałość o umundurowanie odbywa się po pierwsze przez przykład własny kadry, po drugie przez regularne sprawdzanie jakości umundurowania harcerzy (np. noszenie jednolitych spodni, butów, posiadanie beretów, pierścieni, porządne przyszywanie plakietek i sprawności, odpowiednie wkładanie dołu noszonej koszulki mundurowej do spodni lub spódnicy, zapinanie wszystkich guzików, także w spodniach). Można uwzględniać z tego tytułu punkty do współzawodnictwa indywidualnego.'
           '<br>'
-          '<br>Musztra i umundurowanie jest dla harcerzy emanacją tego, że sposób funkcjonowania wspólnoty może rządzić się jasnymi, określonymi zasadami oraz, że prócz tego, jak drużyna działa w środku, ważne jest także to jak się prezentuje na zewnątrz.'
+          '<br>Musztra i umundurowanie jest dla harcerzy emanacją tego, że sposób funkcjonowania wspólnoty może rządzić się jasnymi, określonymi zasadami oraz, że prócz tego, jak drużyna działa w środku, ważne jest także to jak się prezentuje na zewnątrz.</p>'
   ),
 
 
