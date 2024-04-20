@@ -225,12 +225,13 @@ List<Konspekt> allKonspekts = [
                 '<br>'
                 '<br>Każda osoba otrzymuje po jednym fragmencie Pisma Świętego - w ramach jednej grupy wszyscy otrzymują ten sam fragment. Ważne, by każdy z fragmentów był różny. Fragmenty Biblii muszą mieć potencjał fabularny – możliwość ich przedstawienia.'
                 '<br>'
-                '<br>Przykłady fragmentów można znaleźć w załącznikach:'
-                '<br><a href="fragment_przykladowy_1@attachment">Przykładowy fragment Pisma Świętego (nr 1)</a>'
-                '<br><a href="fragment_przykladowy_2@attachment">Przykładowy fragment Pisma Świętego (nr 2)</a>'
-                '<br><a href="fragment_przykladowy_3@attachment">Przykładowy fragment Pisma Świętego (nr 3)</a>'
-                '<br>'
-                '<br>Wskazane jest także, by w każdej z grup znalazła się przynajmniej jedna doświadczona osoba, która będzie ją animować: pilnowała czasu, decydowała o przejściach między kolejnymi etapami, wyczuwając atmosferę w grupie.</p>'
+                '<br>Przykłady fragmentów można znaleźć w załącznikach:</p>'
+                '<ul>'
+                '<li><p style="text-align:justify;"><a href="fragment_przykladowy_1@attachment">Przykładowy fragment Pisma Świętego (nr 1)</a></p></li>'
+                '<li><p style="text-align:justify;"><a href="fragment_przykladowy_2@attachment">Przykładowy fragment Pisma Świętego (nr 2)</a></p></li>'
+                '<li><p style="text-align:justify;"><a href="fragment_przykladowy_3@attachment">Przykładowy fragment Pisma Świętego (nr 3)</a></p></li>'
+                '</ul>'
+                '<p style="text-align:justify;">Wskazane jest także, by w każdej z grup znalazła się przynajmniej jedna doświadczona osoba, która będzie ją animować: pilnowała czasu, decydowała o przejściach między kolejnymi etapami, wyczuwając atmosferę w grupie.</p>'
         ),
 
 
