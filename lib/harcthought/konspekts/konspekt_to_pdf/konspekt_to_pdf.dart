@@ -10,9 +10,6 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:htmltopdfwidgets/htmltopdfwidgets.dart';
-import 'package:open_filex/open_filex.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 
@@ -756,7 +753,7 @@ Widget AuthorWidget(Konspekt konspekt, Font font, Font fontBold){
 
 }
 
-Future<OpenResult> konspektToPdf(Konspekt konspekt, {bool withCover = true}) async {
+Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) async {
 
   final pdf = Document(pageMode: PdfPageMode.outlines);
   final font = await PdfGoogleFonts.latoRegular();
@@ -823,11 +820,6 @@ Future<OpenResult> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asy
       )
   );
 
-  final output = await getTemporaryDirectory();
-
-  final file = File(join(output.path, 'Konspekt - ${konspekt.title}.pdf'));
-  file.writeAsBytesSync(await pdf.save());
-
-  return await OpenFilex.open(file.path);
+  return await pdf.save();
 
 }
