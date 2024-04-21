@@ -115,7 +115,8 @@ abstract class SongCore{
     for (int i = 0; i < lines.length; i++)
       if (lines[i]
           .replaceAll(RegExp(r"\s+\b|\b\s"), '')
-          .length == 0)
+          .length == 0
+      )
         result.add(count);
       else
         result.add(++count);
@@ -132,7 +133,8 @@ abstract class SongCore{
     for (int i = 0; i < lines.length; i++)
       if (lines[i]
           .replaceAll(RegExp(r"\s+\b|\b\s"), '')
-          .length == 0)
+          .length == 0
+      )
         result += '\n';
       else
         result += '\n${++count}';

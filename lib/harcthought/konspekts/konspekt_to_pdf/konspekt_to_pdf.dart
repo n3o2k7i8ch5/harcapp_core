@@ -810,6 +810,7 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
             child: Text(
               'Strona ${context.pageNumber} z ${context.pagesCount}',
               style: TextStyle(
+                font: font,
                 fontSize: defTextSize,
                 color: PdfColors.grey,
               ),
