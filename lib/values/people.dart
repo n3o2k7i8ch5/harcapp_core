@@ -1003,6 +1003,14 @@ const Person JOANNA_RACZKO = Person(
     org: Org.zhp,
     email: ['joanna.raczko@zhp.net.pl']
 );
+const Person JOWITA_BUCZYNSKA = Person(
+    name: 'Jowita Buczyńska',
+    druzyna: '23 ZDH "Zorza"',
+    hufiec: huf_zhp_ziemi_bedzinskiej,
+    rankHarc: RankHarc.dhd,
+    org: Org.zhp,
+    email: ['jowitabuczynska947@gmail.com']
+);
 const Person JULIA_BIENIEK = Person(
     name: 'Julia Bieniek',
     druzyna: '254. Warszawska Drużyna Harcerska im. Janka Bytnara „Rudego” Matecznik',
@@ -1041,7 +1049,13 @@ const Person JULIA_PIASKOWSKA = Person(
     org: Org.zhp,
     email: ['jpiaskowska25@gmail.com']
 );
-const Person JULIA_PILCH = Person(name: 'Julia Pilch', rankHarc: RankHarc.dhd,);
+const Person JULIA_PILCH = Person(name: 'Julia Pilch', rankHarc: RankHarc.dhd);
+const Person JULIA_PROSZKIEWICZ = Person(
+    name: 'Julia Proszkiewicz',
+    rankHarc: RankHarc.zhpPionierka,
+    org: Org.zhp,
+    email: ['juliaproszkiewicz@gmail.com']
+);
 const Person JULIA_SIUDMAK = Person(name: 'Julia Siudmak');
 const Person JULIA_TYSZKIEWICZ = Person(
     name: 'Julia Tyszkiewicz',
