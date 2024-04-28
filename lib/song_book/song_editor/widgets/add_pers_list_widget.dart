@@ -4,6 +4,7 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
+import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
@@ -178,29 +179,40 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
           if(prov.addPersData.isEmpty)
             SizedBox(
               height: AddPersWidget.height + 2*Dimen.iconMarg + 2*Dimen.textSizeBig,
-              child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+              child: SimpleButton(
+                radius: AppCard.bigRadius,
+                onTap: (){
+                  prov.addPersData.add(Tuple3(
+                      TextEditingController(),
+                      TextEditingController(),
+                      TextEditingController()
+                  ));
+                  prov.notify();
+                },
+                child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
 
-                    SizedBox(height: Dimen.iconMarg),
+                      SizedBox(height: Dimen.iconMarg),
 
-                    Icon(MdiIcons.accountPlusOutline, color: hintEnab_(context)),
+                      Icon(MdiIcons.accountPlusOutline, color: hintEnab_(context)),
 
-                    SizedBox(height: Dimen.iconMarg),
+                      SizedBox(height: Dimen.iconMarg),
 
-                    Text(
-                      'Pusto!\nUzupełnij swoje imię :)',
-                      textAlign: TextAlign.center,
-                      style: AppTextStyle(
-                        color: hintEnab_(context),
-                        fontSize: Dimen.textSizeBig,
+                      Text(
+                        'Pusto!\nUzupełnij swoje imię :)',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyle(
+                          color: hintEnab_(context),
+                          fontSize: Dimen.textSizeBig,
+                        ),
                       ),
-                    ),
 
-                    SizedBox(height: Dimen.iconMarg),
+                      SizedBox(height: Dimen.iconMarg),
 
-                  ]
+                    ]
+                ),
               ),
             )
           else
