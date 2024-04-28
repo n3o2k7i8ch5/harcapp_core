@@ -173,6 +173,7 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
       ),
 
       footer: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
 
@@ -192,6 +193,7 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
                 child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
 
                       SizedBox(height: Dimen.iconMarg),
