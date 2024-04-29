@@ -310,6 +310,7 @@ List<Person> allPeople = [
   TYMON_TALECKI,
   TYMOTEUSZ_JAWORSKI,
   WANDA_MARCHEL,
+  WERONIKA_WICHER,
   WERONIKA_ZAWIERUCHA,
   WIKTOR_KARPALA,
   WIKTORIA_PINKOWSKA,
@@ -2214,6 +2215,14 @@ const Person WANDA_MARCHEL = Person(
     druzyna: '13. DH „Szczęściarze”',
     hufiec: huf_zhp_opole,
     org: Org.zhp
+);
+const Person WERONIKA_WICHER = Person(
+    name: 'Weronika Wicher',
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhpHOc,
+    druzyna: '1. KDH im. ks. Alojzego Koziełka',
+    org: Org.zhp,
+    email: ['weronika.wicher@zhp.net.pl']
 );
 const Person WERONIKA_ZAWIERUCHA = Person(
     name: 'Weronika Zawierucha',
