@@ -2232,7 +2232,10 @@ const Person WERONIKA_ZAWIERUCHA = Person(
     org: Org.zhp,
     email: ['zawieruchaweronika570@gmail.com']
 );
-const Person WIKTOR_KARPALA = Person(name: 'Wiktor Karpała', rankHarc: RankHarc.zhpHOc, rankInstr: RankInstr.pwd,
+const Person WIKTOR_KARPALA = Person(
+  name: 'Wiktor Karpała',
+  rankHarc: RankHarc.zhpHOc,
+  rankInstr: RankInstr.pwd,
   druzyna:'74. DH „Desant” im. 1. SBS gen. bryg. Stanisława Sosabowskiego',
   hufiec: huf_zhp_podkrakowski,
   org: Org.zhp,
