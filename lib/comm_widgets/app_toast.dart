@@ -75,12 +75,7 @@ ToastFuture showAppToast(
                           padding: EdgeInsets.all(Dimen.defMarg),
                           text: buttonText,
                           onTap: (){
-                            showToastWidget(
-                              Container(),
-                              context: context,
-                              duration: Duration.zero,
-                              dismissOtherToast: true
-                            );
+                            dismissAllToast(showAnim: true);
                             onButtonPressed.call();
                           }
                       )
