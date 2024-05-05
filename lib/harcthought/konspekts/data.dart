@@ -2389,6 +2389,7 @@ List<Konspekt> allKonspekts = [
           '<ul>'
           '<li><p style="text-align:justify;"><i>“O magicznym kamieniu wiadomo tylko tyle, że waży on kilogram oraz pół magicznego kamienia. Ile kilogramów waży magiczny kamień?”.</i></p></li>'
           '<li><p style="text-align:justify;"><i>Pewien brat mówi o swoim młodszym bracie: „Dwa lata temu byłem trzy razy starszy od mojego brata. Za trzy lata będę dwa razy starszy od mojego brata”. Ile mają teraz lat?</i></p></li>'
+          '<li><p style="text-align:justify;"><i>Dlaczego dźwięk nadjeżdżającego pociągu szybciej niesie się po torach niż w powietrzu?</i></p></li>'
           '<li><p style="text-align:justify;"><i>Jeśli półtora kury zniesie półtora jajka w ciągu półtora dnia, ile jaj zniesie pół tuzina kur w ciągu pół tuzina dni?</i></p></li>'
           '<li>'
           '<p style="text-align:justify;"><i>Mamy kłódkę zamykaną na 3-cyfrowy szyfr. Musimy znaleźć jej kod. O kodzie wiadomo tylko, że:</i></p>'
