@@ -2259,13 +2259,13 @@ const Person SZYMON_DROPEK = Person(name: 'Szymon Dropek',
 );
 const Person SZYMON_JACKIEWICZ = Person(
     name: 'Szymon Jackiewicz',
-    druzyna: '63 DW „Nagi Ranka”',
+    druzyna: '63. DW „Nagi Tanka”',
     rankHarc: RankHarc.zhpWywiadowca,
     org: Org.zhp,
     email: ['szymbro300@gmail.com']
 );
 const Person SZYMON_JAWOREK = Person(name: 'Szymon Jaworek',
-  druzyna: '17 DH „Gryfne Bajtle”',
+  druzyna: '17. DH „Gryfne Bajtle”',
   hufiec: huf_zhp_ziemi_tarnogorskiej
 );
 const Person SZYMON_PODGORNY = Person(name: 'Szymon Podgórny',
