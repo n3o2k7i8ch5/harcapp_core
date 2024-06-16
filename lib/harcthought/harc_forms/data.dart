@@ -7,11 +7,21 @@ import 'harc_form.dart';
 List<HarcForm> allForms = [
 
   HarcForm(
+      filename: 'trzy_katy',
+      title: 'Trzy kąty',
+      icon: MdiIcons.angleRight,
+      metos: [Meto.hs, Meto.wedro],
+      tags: [HarcFormTag.integracja],
+      colorStart: Colors.yellow[600]!,
+      colorEnd: Colors.orange!
+  ),
+
+  HarcForm(
       filename: 'dwuscienna_dyskusja',
       title: 'Dwuścienna dyskusja',
       icon: MdiIcons.wall,
       metos: [Meto.hs, Meto.wedro],
-      tags: [],
+      tags: [HarcFormTag.argumentacja],
       colorStart: Colors.red,
       colorEnd: Colors.brown[800]!
   ),
