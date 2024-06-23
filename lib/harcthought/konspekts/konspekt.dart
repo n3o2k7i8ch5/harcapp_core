@@ -7,6 +7,7 @@ import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:open_filex/open_filex.dart';
 
 enum KonspektCategory{
   harcerskie, ksztalcenie;
@@ -183,9 +184,13 @@ class KonspektAttachment{
           return true;
         case KonspektAttachmentFormat.pdf:
         case KonspektAttachmentFormat.docx:
+          OpenResult result;
           if(assetPath.contains('/'))
-            return await openAsset(assetPath, webOpenInNewTab: true);
-          return await openAsset('packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', webOpenInNewTab: true);
+            result = await openAsset(assetPath, webOpenInNewTab: true);
+          else
+            result = await openAsset('packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', webOpenInNewTab: true);
+
+          return result.type == ResultType.done;
       }
 
     }
