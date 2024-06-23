@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/color_pack_app.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
@@ -91,7 +92,7 @@ class KonspektStepWidget extends StatelessWidget{
 
       Padding(
         padding: const EdgeInsets.all(Dimen.sideMarg),
-        child: KonspektHtmlWidget(konspekt, step.content, textSize: Dimen.textSizeNormal)
+        child: KonspektHtmlWidget(konspekt, step.content??step.contentBuilder!.call(isDark: isDark(context)), textSize: Dimen.textSizeNormal)
       )
     ],
   );

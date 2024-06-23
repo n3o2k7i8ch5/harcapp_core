@@ -662,7 +662,7 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
     ),
   ];
 
-  List<Widget> htmlWidgets = await fromHtml(htmlString: step.content, font: font, fontBold: fontBold, fontItalic: fontItalic);
+  List<Widget> htmlWidgets = await fromHtml(htmlString: step.content??step.contentBuilder!(isDark: false), font: font, fontBold: fontBold, fontItalic: fontItalic);
 
   widgets.addAll(
       htmlWidgets.map(
