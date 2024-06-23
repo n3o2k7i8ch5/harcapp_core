@@ -22,7 +22,7 @@ enum KonspektCategory{
   String get path{
     switch(this){
       case harcerskie: return 'harcerskie';
-      case ksztalcenie: return 'kształcenie';
+      case ksztalcenie: return 'ksztalcenie';
     }
   }
   
