@@ -186,7 +186,7 @@ class KonspektAttachment{
         case KonspektAttachmentFormat.docx:
           OpenResult result;
           if(assetPath.contains('/'))
-            result = await openAsset(assetPath, webOpenInNewTab: true);
+            result = await openAsset('packages/harcapp_core/assets/konspekty/$assetPath', webOpenInNewTab: true);
           else
             result = await openAsset('packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', webOpenInNewTab: true);
 
