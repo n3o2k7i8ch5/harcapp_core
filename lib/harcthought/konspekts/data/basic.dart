@@ -7,7 +7,7 @@ import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'konspekt.dart';
+import '../konspekt.dart';
 
 
 const String aimPraktykaModlitwy = 'Praktyka modlitwy przez uczestników';
@@ -32,7 +32,7 @@ const String aimSzacunekDlaSkutecznegoDzialania = 'Kształtowanie u uczestników
 
 
 
-List<Konspekt> allKonspekts = [
+List<Konspekt> allBasicKonspekts = [
 
 
   // Done

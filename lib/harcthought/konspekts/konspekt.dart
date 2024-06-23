@@ -9,13 +9,14 @@ import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 enum KonspektType{
-  zwyczaj, zajecia, projekt;
+  zwyczaj, zajecia, projekt, ksztalcenie;
 
   String get displayName{
     switch(this){
       case zwyczaj: return 'Zwyczaj';
       case zajecia: return 'Zajęcia';
       case projekt: return 'Projekt';
+      case ksztalcenie: return 'Kształcene kadry';
     }
   }
 
@@ -24,6 +25,7 @@ enum KonspektType{
       case zwyczaj: return isDark(context)?Colors.brown[400]!:Colors.amber[100]!;
       case zajecia: return isDark(context)?Colors.brown[800]!:Colors.brown[400]!;
       case projekt: return isDark(context)?Colors.purple[900]!:Colors.deepPurple[300]!;
+      case ksztalcenie: return isDark(context)?Colors.blue[900]!:Colors.blue[300]!;
     }
   }
 
