@@ -33,6 +33,7 @@ Widget HeaderWidget(String text, Font fontBold) => Text(
 Future<List<Widget>> fromHtml({required String htmlString, required Font font, required Font fontBold, required Font fontItalic}) async =>
     await HTMLToPdf().convert(
         htmlString
+            .replaceAll('piramida_duchowosci_light.svg', 'piramida_duchowosci_light.webp')
             .replaceAll('<b>', '')
             .replaceAll('</b>', '')
             .replaceAll('<br>', '\n')
