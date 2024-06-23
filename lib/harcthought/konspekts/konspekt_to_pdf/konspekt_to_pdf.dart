@@ -154,6 +154,11 @@ Future<Widget> MetoListWidget(Konspekt konspekt, Font fontBold) async => Row(
 
     if(konspekt.metos.contains(Meto.wedro))
       await MetoTile(Meto.wedro, fontBold, iconSize: 42.0),
+    if(konspekt.metos.contains(Meto.wedro))
+      SizedBox(width: elementSmallSeparator),
+
+    if(konspekt.metos.contains(Meto.kadra))
+      await MetoTile(Meto.kadra, fontBold, iconSize: 42.0),
 
   ],
 );

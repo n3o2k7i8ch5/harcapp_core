@@ -8,15 +8,33 @@ import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+enum KonspektCategory{
+  harcerskie, ksztalcenie;
+
+  String get displayName{
+    switch(this){
+      case harcerskie: return 'Harcerskie';
+      case ksztalcenie: return 'Kształceniowe';
+    }
+  }
+
+  String get path{
+    switch(this){
+      case harcerskie: return 'harcerskie';
+      case ksztalcenie: return 'kształcenie';
+    }
+  }
+  
+}
+
 enum KonspektType{
-  zwyczaj, zajecia, projekt, ksztalcenie;
+  zwyczaj, zajecia, projekt;
 
   String get displayName{
     switch(this){
       case zwyczaj: return 'Zwyczaj';
       case zajecia: return 'Zajęcia';
       case projekt: return 'Projekt';
-      case ksztalcenie: return 'Kształcene kadry';
     }
   }
 
@@ -25,7 +43,6 @@ enum KonspektType{
       case zwyczaj: return isDark(context)?Colors.brown[400]!:Colors.amber[100]!;
       case zajecia: return isDark(context)?Colors.brown[800]!:Colors.brown[400]!;
       case projekt: return isDark(context)?Colors.purple[900]!:Colors.deepPurple[300]!;
-      case ksztalcenie: return isDark(context)?Colors.blue[900]!:Colors.blue[300]!;
     }
   }
 
@@ -156,7 +173,7 @@ class KonspektAttachment{
       required this.assets,
     });
 
-    Future<bool> open(String konspektName, KonspektAttachmentFormat format) async {
+    Future<bool> open(String konspektName, KonspektAttachmentFormat format, KonspektCategory konspektCategory) async {
       String? assetPath = assets[format];
       if(assetPath == null) return false;
 
@@ -166,13 +183,15 @@ class KonspektAttachment{
           return true;
         case KonspektAttachmentFormat.pdf:
         case KonspektAttachmentFormat.docx:
-          return await openAsset('packages/harcapp_core/assets/konspekty/${konspektName}/${assetPath}', webOpenInNewTab: true);
+          if(assetPath.contains('/'))
+            return await openAsset(assetPath, webOpenInNewTab: true);
+          return await openAsset('packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', webOpenInNewTab: true);
       }
 
     }
 
-    Future<bool> openOrShowMessage(BuildContext context, String konspektName, KonspektAttachmentFormat format) async {
-      bool result = await open(konspektName, format);
+    Future<bool> openOrShowMessage(BuildContext context, String konspektName, KonspektAttachmentFormat format, KonspektCategory konspektCategory) async {
+      bool result = await open(konspektName, format, konspektCategory);
       if(!result) showAppToast(context, text: 'Nie udało się otworzyć pliku');
       return result;
     }
@@ -219,6 +238,7 @@ class Konspekt{
 
   final String name;
   final String title;
+  final KonspektCategory category;
   final KonspektType type;
   final Map<KonspektSphere, KonspektSphereDetails?> spheres;
 
@@ -236,7 +256,7 @@ class Konspekt{
 
   final List<KonspektAttachment>? attachments;
 
-  String get coverPath => 'packages/harcapp_core/assets/konspekty/$name/cover.webp';
+  String get coverPath => 'packages/harcapp_core/assets/konspekty/${category.path}/$name/cover.webp';
 
   Duration? get duration{
     if(customDuration != null) return customDuration;
@@ -256,6 +276,7 @@ class Konspekt{
   const Konspekt({
     required this.name,
     required this.title,
+    required this.category,
     required this.type,
     required this.spheres,
 

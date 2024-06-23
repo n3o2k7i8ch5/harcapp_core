@@ -6,26 +6,38 @@ List<Konspekt> allKsztalcenieKonspekts = [
 
   // Done
   const Konspekt(
-      name: 'beretowa',
-      title: 'Beretówa',
+      name: 'wstep_do_wychowania_duchowego',
+      title: 'Wstęp do wychowania duchowego',
+      category: KonspektCategory.ksztalcenie,
       type: KonspektType.zajecia,
-      spheres: {
-        KonspektSphere.cialo: null,
-        KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha, KonspektSphereMechanism.duchOtwartoscNaLudzi]
-        )
-      },
+      spheres: {},
       metos: [Meto.kadra],
       coverAuthor: 'Freepik (???)',
       author: DANIEL_IWANICKI,
       aims: [
-
+        'Przekazanie uczestnikom różnicy między rozwojem sfer funkcjonalnych od sfery ducha',
+        'Przekazanie uczestnikom rozróżnienia poziomów i etapów rozwoju sfery ducha',
+        'Zwrócenie uwagi uczestników na brak możliwości neutralności rozwoju duchowego',
+        'Zrozumienie co wynika z oparcia wartości ZHP o chrześcijaństwo'
+      ],
+      attachments: [
+        KonspektAttachment(
+          name: 'o_strukturze_i_ksztaltowaniu_duchowosci',
+          title: 'O strukturze i ksztaltowaniu duchowosci',
+          assets: {
+            KonspektAttachmentFormat.pdf: 'common/warsztaty_duchowe/o_strukturze_i_ksztaltowaniu_duchowosci.pdf',
+            KonspektAttachmentFormat.docx: 'common/warsztaty_duchowe/o_strukturze_i_ksztaltowaniu_duchowosci.docx',
+          },
+        ),
       ],
       materials: [
 
+        KonspektMaterial(
+          name: 'Dostępny do przygotowania merytorycznego załącznik “O strukturze i kształtowaniu duchowości”.',
+          attachmentName: 'o_strukturze_i_ksztaltowaniu_duchowosci',
+        ),
+
       ],
-      summary: 'Leśna gra harcerska, w której drużyny mają za zadanie wyeliminować przeciwne drużyny ściągając im berety z głów.',
       description: '<p style="text-align:justify;">Aby forma była skuteczna, uczestnicy muszą być w nią zaangażowani i nie mieć nic przeciwko rywalizacji (częściej jest to domeną chłopców niż dziewczyn). Forma bywa kontuzjogenna.'
           '<br>'
           '<br>Forma powinna być toczona na dużym terenie lesistym zapewniającym możliwość łatwego skrycia się.'

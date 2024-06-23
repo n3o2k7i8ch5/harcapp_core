@@ -323,6 +323,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
                     if(konspekt.metos.contains(Meto.wedro))
                       const MetoTile(meto: Meto.wedro, iconSize: 42.0),
+                    if(konspekt.metos.contains(Meto.wedro))
+                      const SizedBox(width: Dimen.defMarg),
+
+                    if(konspekt.metos.contains(Meto.kadra))
+                      const MetoTile(meto: Meto.kadra, iconSize: 42.0),
 
                   ],
                 ),
