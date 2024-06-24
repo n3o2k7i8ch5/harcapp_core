@@ -349,7 +349,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: cb55b1e39d910300b7091df62cda1714bf974ad0
+      resolved-ref: "634bf085f42ce65a065384f4a616ac457ac05683"
       url: "https://github.com/n3o2k7i8ch5/htmltopdfwidgets"
     source: git
     version: "1.0.3"
