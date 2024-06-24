@@ -206,7 +206,13 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br>Ważne, by prowadzący zaznaczył, że struktura wartości nie zależy jedynie od środowiska i wychowania, ale także od <b>natury człowieka</b>, m.in. od jego <b>temperamentu</b>.'
               '</p>'
-              '<img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg", alt="Some text"/>'
+
+              '<img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg", alt="Some text 1"/>'
+              '<img src="asset:packages/harcapp_core/assets/konspekty/common/warsztaty_duchowe/piramida_duchowosci_light.webp", alt="Some text 2"/>'
+              '<img src="packages/harcapp_core/assets/konspekty/common/warsztaty_duchowe/piramida_duchowosci_light.webp", alt="Some text 3"/>'
+
+              '<img src="asset:packages/harcapp_core/assets/konspekty/common/warsztaty_duchowe/piramida_duchowosci_light.svg", alt="Some text 4"/>'
+              '<img src="packages/harcapp_core/assets/konspekty/common/warsztaty_duchowe/piramida_duchowosci_light.svg", alt="Some text 5"/>'
       ),
 
     ]
