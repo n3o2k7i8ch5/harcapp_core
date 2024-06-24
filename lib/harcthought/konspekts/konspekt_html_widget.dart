@@ -66,7 +66,12 @@ class KonspektHtmlWidget extends StatelessWidget{
       if(element.localName == 'img'){
         String src = element.attributes['src']!;
         if (src.startsWith('asset:') && src.endsWith('.svg'))
-          return SvgPicture.asset(src.substring('asset:'.length));
+          return LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) => SvgPicture.asset(
+                src.substring('asset:'.length),
+                width: constraints.maxWidth,
+            ),
+          );
         else if(src.startsWith('asset:'))
           return Image.asset(src);
         else
