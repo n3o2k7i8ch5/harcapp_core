@@ -39,14 +39,15 @@ Future<List<Widget>> fromHtml({
 }) async =>
     await HTMLToPdf().convert(
         htmlString
-            .replaceAll('<b>', '')
-            .replaceAll('</b>', '')
-            .replaceAll('<br>', '\n')
+            // .replaceAll('<b>', '')
+            // .replaceAll('</b>', '')
+            // .replaceAll('<br>', '\n')
             .replaceAll('&nbsp', '&zwnj;'),
         defaultFont: font,
         tagStyle: HtmlTagStyle(
-            boldStyle: TextStyle(font: fontBold, fontSize: defTextSize),
-            italicStyle: TextStyle(font: fontItalic, fontSize: defTextSize),
+            boldStyle: TextStyle(font: fontBold, fontBold: fontBold, fontSize: defTextSize),
+            italicStyle: TextStyle(font: fontItalic, fontItalic: fontItalic, fontSize: defTextSize),
+            boldItalicStyle: TextStyle(font: fontBoldItalic, fontBoldItalic: fontBoldItalic, fontSize: defTextSize),
             listIndexStyle: TextStyle(font: font, fontSize: defTextSize)
         )
     );
