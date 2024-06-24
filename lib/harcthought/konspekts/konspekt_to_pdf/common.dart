@@ -34,6 +34,7 @@ Future<List<Widget>> fromHtml({required String htmlString, required Font font, r
     await HTMLToPdf().convert(
         htmlString
             .replaceAll('"asset:packages/harcapp_core/assets/', '"packages/harcapp_core/assets/')
+            .replaceAll('piramida_duchowosci_light.svg', 'piramida_duchowosci_light.webp')
             .replaceAll('<b>', '')
             .replaceAll('</b>', '')
             .replaceAll('<br>', '\n')
