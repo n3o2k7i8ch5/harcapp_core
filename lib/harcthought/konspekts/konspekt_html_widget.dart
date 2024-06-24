@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/dimen.dart';
@@ -60,6 +61,18 @@ class KonspektHtmlWidget extends StatelessWidget{
         KonspektAttachmentWidget.openFirstFrom(context, konspekt, formName);
       }
       return false;
+    },
+    customWidgetBuilder: (element){
+      if(element.localName == 'img'){
+        String src = element.attributes['src']!;
+        if (src.startsWith('assets:') && src.endsWith('.svg'))
+          return SvgPicture.asset(src.substring('assets:'.length));
+        else if(src.startsWith('assets:'))
+          return Image.asset(src);
+        else
+          return Image.network(src);
+      }
+      return null;
     },
   );
 
