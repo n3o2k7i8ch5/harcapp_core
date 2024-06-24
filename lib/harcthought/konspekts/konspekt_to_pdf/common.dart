@@ -30,7 +30,13 @@ Widget HeaderWidget(String text, Font fontBold) => Text(
 );
 
 
-Future<List<Widget>> fromHtml({required String htmlString, required Font font, required Font fontBold, required Font fontItalic}) async =>
+Future<List<Widget>> fromHtml({
+  required String htmlString,
+  required Font font,
+  required Font fontBold,
+  required Font fontItalic,
+  required Font fontBoldItalic,
+}) async =>
     await HTMLToPdf().convert(
         htmlString
             .replaceAll('<b>', '')

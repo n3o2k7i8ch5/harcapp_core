@@ -527,7 +527,13 @@ List<Widget> MaterialListWidget(Konspekt konspekt, Font font, Font fontBold, Fon
 
 }
 
-Future<List<Widget>> IntroWidget(Konspekt konspekt, Font font, Font fontBold, Font fontItalic) async {
+Future<List<Widget>> IntroWidget(
+    Konspekt konspekt,
+    Font font,
+    Font fontBold,
+    Font fontItalic,
+    Font fontBoldItalic,
+) async {
 
   if(konspekt.intro == null)
     return [];
@@ -546,8 +552,9 @@ Future<List<Widget>> IntroWidget(Konspekt konspekt, Font font, Font fontBold, Fo
       await fromHtml(
         htmlString: konspekt.intro!,
         font: font,
-        fontItalic: fontItalic,
         fontBold: fontBold,
+        fontItalic: fontItalic,
+        fontBoldItalic: fontBoldItalic
       )
   );
 
@@ -555,7 +562,13 @@ Future<List<Widget>> IntroWidget(Konspekt konspekt, Font font, Font fontBold, Fo
 
 }
 
-Future<List<Widget>> DescriptionWidget(Konspekt konspekt, Font font, Font fontBold, Font fontItalic) async {
+Future<List<Widget>> DescriptionWidget(
+    Konspekt konspekt,
+    Font font,
+    Font fontBold,
+    Font fontItalic,
+    Font fontBoldItalic
+) async {
 
   if(konspekt.description == null)
     return [];
@@ -575,7 +588,8 @@ Future<List<Widget>> DescriptionWidget(Konspekt konspekt, Font font, Font fontBo
           htmlString: konspekt.description!,
           font: font,
           fontBold: fontBold,
-          fontItalic: fontItalic
+          fontItalic: fontItalic,
+          fontBoldItalic: fontBoldItalic
       )
   );
 
@@ -583,7 +597,7 @@ Future<List<Widget>> DescriptionWidget(Konspekt konspekt, Font font, Font fontBo
 
 }
 
-Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fontBold, Font fontItalic) async {
+Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fontBold, Font fontItalic, Font fontBoldItalic,) async {
   double numberFontSize = 16.0;
   double numberCircleSize = 2*elementSmallSeparator + numberFontSize;
 
@@ -662,7 +676,13 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
     ),
   ];
 
-  List<Widget> htmlWidgets = await fromHtml(htmlString: step.content??step.contentBuilder!(isDark: false), font: font, fontBold: fontBold, fontItalic: fontItalic);
+  List<Widget> htmlWidgets = await fromHtml(
+      htmlString: step.content??step.contentBuilder!(isDark: false),
+      font: font,
+      fontBold: fontBold,
+      fontItalic: fontItalic,
+      fontBoldItalic: fontBoldItalic
+  );
 
   widgets.addAll(
       htmlWidgets.map(
@@ -679,7 +699,7 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
   return widgets;
 }
 
-Future<List<Widget>> StepListWidget(Konspekt konspekt, Font font, Font fontBold, Font fontItalic) async {
+Future<List<Widget>> StepListWidget(Konspekt konspekt, Font font, Font fontBold, Font fontItalic, Font fontBoldItalic) async {
 
   if(konspekt.steps == null)
     return [];
@@ -695,7 +715,7 @@ Future<List<Widget>> StepListWidget(Konspekt konspekt, Font font, Font fontBold,
   ];
 
   for(int i=0; i<konspekt.steps!.length; i++) {
-    stepWidgets.addAll(await StepWidget(konspekt.steps![i], i, font, fontBold, fontItalic));
+    stepWidgets.addAll(await StepWidget(konspekt.steps![i], i, font, fontBold, fontItalic, fontBoldItalic));
     if(i<konspekt.steps!.length - 1)
       stepWidgets.add(SizedBox(height: 1.5*elementBigSeparator));
   }
@@ -763,6 +783,7 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
   final font = await PdfGoogleFonts.latoRegular();
   final fontItalic = await PdfGoogleFonts.latoItalic();
   final fontBold = await PdfGoogleFonts.latoBold();
+  final fontBoldItalic = await PdfGoogleFonts.latoBoldItalic();
 
   List<Widget> multiPage =  [];
 
@@ -791,11 +812,11 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
 
   multiPage.addAll(MaterialListWidget(konspekt, font, fontBold, fontItalic));
 
-  multiPage.addAll(await IntroWidget(konspekt, font, fontBold, fontItalic));
+  multiPage.addAll(await IntroWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
 
-  multiPage.addAll(await DescriptionWidget(konspekt, font, fontBold, fontItalic));
+  multiPage.addAll(await DescriptionWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
 
-  multiPage.addAll(await StepListWidget(konspekt, font, fontBold, fontItalic));
+  multiPage.addAll(await StepListWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
 
   multiPage.addAll(HowToFailWidget(konspekt, font, fontBold));
 
