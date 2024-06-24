@@ -65,9 +65,9 @@ class KonspektHtmlWidget extends StatelessWidget{
     customWidgetBuilder: (element){
       if(element.localName == 'img'){
         String src = element.attributes['src']!;
-        if (src.startsWith('assets:') && src.endsWith('.svg'))
-          return SvgPicture.asset(src.substring('assets:'.length));
-        else if(src.startsWith('assets:'))
+        if (src.startsWith('asset:') && src.endsWith('.svg'))
+          return SvgPicture.asset(src.substring('asset:'.length));
+        else if(src.startsWith('asset:'))
           return Image.asset(src);
         else
           return Image.network(src);
