@@ -74,6 +74,8 @@ class KonspektHtmlWidget extends StatelessWidget{
           );
         else if(src.startsWith('asset:'))
           return Image.asset(src);
+        else if(src.endsWith('.svg'))
+          return SvgPicture.network(src);
         else
           return Image.network(src);
       }
