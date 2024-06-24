@@ -72,7 +72,7 @@ Future<List<Widget>> fromHtml({
                 fontSize: defTextSize
             ),
             bulletListDotSize: 4.0,
-            bulletListIconSize: 20.0
+            bulletListIconSize: 16.0
         )
     );
 
