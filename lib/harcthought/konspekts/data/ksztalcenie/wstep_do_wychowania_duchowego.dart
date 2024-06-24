@@ -135,6 +135,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br>Następnie prowadzący hasłowo wymienia uczestnikom kilka elementów poszczególnych sfer i prosi uczestników o podanie do jakiej sfery należą, np.:'
               '</p>'
+
               '<ul>'
 
               '<li>'
