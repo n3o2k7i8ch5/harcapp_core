@@ -2427,18 +2427,23 @@ List<Konspekt> allBasicKonspekts = [
       aims: [
         'Ksztaltowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
       ],
-      description: '<p style="text-align:justify;">Prowadzący formę regularnie (np. codziennie na apelu na obozie) przedstawia uczestnikom jedną zagadkę matematyczną, która jest w zasięgu ich możliwości intelektualnych, np:</p>'
+      description: '<p style="text-align:justify;">'
+          'Prowadzący formę regularnie (np. codziennie na apelu na obozie) przedstawia uczestnikom jedną zagadkę matematyczną, która jest w zasięgu ich możliwości intelektualnych, np:'
+          '</p>'
+
           '<ul>'
 
           '<li>'
           '<p style="text-align:justify;">'
-          '<i>“O magicznym kamieniu wiadomo tylko tyle, że waży on kilogram oraz pół magicznego kamienia. Ile kilogramów waży magiczny kamień?”.</i>'
+          '<i>“O magicznym kamieniu wiadomo tylko tyle, że waży on kilogram oraz pół magicznego kamienia.'
+          '<br>Ile kilogramów waży magiczny kamień?”.</i>'
           '</p>'
           '</li>'
 
           '<li>'
           '<p style="text-align:justify;">'
-          '<i>Pewien brat mówi o swoim młodszym bracie: „Dwa lata temu byłem trzy razy starszy od mojego brata. Za trzy lata będę dwa razy starszy od mojego brata”. Ile mają teraz lat?</i>'
+          '<i>Pewien brat mówi o swoim młodszym bracie: „Dwa lata temu byłem trzy razy starszy od mojego brata. Za trzy lata będę dwa razy starszy od mojego brata”.'
+          '<br>Ile mają teraz lat?</i>'
           '</p>'
           '</li>'
 
@@ -2456,27 +2461,32 @@ List<Konspekt> allBasicKonspekts = [
 
           '<li>'
           '<p style="text-align:justify;">'
-          '<i>Mamy kłódkę zamykaną na 3-cyfrowy szyfr. Musimy znaleźć jej kod. O kodzie wiadomo tylko, że:</i></p>'
+          '<i>Mamy kłódkę zamykaną na 3-cyfrowy szyfr. Musimy znaleźć jej kod. O kodzie wiadomo tylko, że:</i>'
+          '</p>'
           '<ul>'
 
           '<li>'
           '<p style="text-align:justify;">'
-          '<i>276 – jedna cyfra jest poprawna, ale w niewłaściwym miejscu.</i></p>'
+          '<i>276 – jedna cyfra jest poprawna, ale w niewłaściwym miejscu.</i>'
+          '</p>'
           '</li>'
 
           '<li>'
           '<p style="text-align:justify;">'
-          '<i>387 – żadna cyfra nie jest właściwa.</i></p>'
+          '<i>387 – żadna cyfra nie jest właściwa.</i>'
+          '</p>'
           '</li>'
 
           '<li>'
           '<p style="text-align:justify;">'
-          '<i>368 – jedna cyfra jest właściwa i znajduje się we właściwym miejscu.</i></p>'
+          '<i>368 – jedna cyfra jest właściwa i znajduje się we właściwym miejscu.</i>'
+          '</p>'
           '</li>'
 
           '<li>'
           '<p style="text-align:justify;">'
-          '<i>471 – dwie liczby są poprawne, ale znajdują się w niewłaściwym miejscu.</i></p>'
+          '<i>471 – dwie liczby są poprawne, ale znajdują się w niewłaściwym miejscu.</i>'
+          '</p>'
           '</li>'
 
           '</ul>'
@@ -2484,7 +2494,8 @@ List<Konspekt> allBasicKonspekts = [
           '</li>'
 
           '<li>'
-          '<p style="text-align:justify;"><i>Sześcienna kostka została rzucona jeden raz. Jakie jest prawdopodobieństwo. że wyrzucona cyfra będzie parzysta i większa niż 2?</i></p>'
+          '<p style="text-align:justify;"><i>Sześcienna kostka została rzucona jeden raz.'
+          '<br>Jakie jest prawdopodobieństwo, że wyrzucona cyfra będzie parzysta i większa niż 2?</i></p>'
           '</li>'
 
           '</ul>'
