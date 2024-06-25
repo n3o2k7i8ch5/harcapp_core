@@ -684,7 +684,7 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
       fontBoldItalic: fontBoldItalic
   );
 
-  widgets.add(SizedBox(width: .5*elementBigSeparator));
+  widgets.add(SizedBox(height: .5*elementBigSeparator));
 
   widgets.addAll(
       htmlWidgets.map(
