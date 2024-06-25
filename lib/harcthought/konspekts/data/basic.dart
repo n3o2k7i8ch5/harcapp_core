@@ -2502,7 +2502,128 @@ List<Konspekt> allBasicKonspekts = [
 
           '<p style="text-align:justify;">'
           'Forma ta jest przykładem zjawiska wpływu sfer funkcjonalnych na sferę ducha przy udziale wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..'
-          '</p>'
+          '</p>',
+
+        // TODO(iwanicki) wywal to
+      steps: [
+
+        KonspektStep(
+            title: 'Skrót tematu zajęć',
+            duration: Duration(minutes: 2),
+            activeForm: false,
+            content: '<p style="text-align:justify;">'
+                'Prowadzący informuje uczestników o czym będą, a o czym nie będą niniejsze zajęcia.'
+                '<br>'
+                '<br>Zajęcia służą temu, żeby:'
+                '</p>'
+
+                '<ul>'
+
+                '<li>'
+                '<p style="text-align:justify;">holistycznie zdefiniować i zrozumieć czym jest duchowość,</p>'
+                '</li>'
+
+                '<li>'
+                '<p style="text-align:justify;">określić relację między duchowością, a religijnością,</p>'
+                '</li>'
+
+                '<li>'
+                '<p style="text-align:justify;">określić relację między duchowością a wychowaniem,</p>'
+                '</li>'
+
+                '<li>'
+                '<p style="text-align:justify;">określić jaka jest i skąd się bierze duchowość harcerska.</p>'
+                '</li>'
+
+                '</ul>'
+                '<p style="text-align:justify;">'
+                'Podczas zajęć nie będzie poruszana kwestia tego jak konkretnie pracować z duchowością - nie starczy na to czasu. Pod koniec zajęć zostanie jednak udostępnione kompendium konspektów chętnym osobom.'
+                '</p>'
+        ),
+
+        KonspektStep(
+            title: 'title',
+            duration: Duration(seconds: 1),
+            activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący formę regularnie (np. codziennie na apelu na obozie) przedstawia uczestnikom jedną zagadkę matematyczną, która jest w zasięgu ich możliwości intelektualnych, np:'
+              '</p>'
+
+              '<ul>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<i>“O magicznym kamieniu wiadomo tylko tyle, że waży on kilogram oraz pół magicznego kamienia.'
+              '<br>Ile kilogramów waży magiczny kamień?”.</i>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<i>Pewien brat mówi o swoim młodszym bracie: „Dwa lata temu byłem trzy razy starszy od mojego brata. Za trzy lata będę dwa razy starszy od mojego brata”.'
+              '<br>Ile mają teraz lat?</i>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<i>Dlaczego dźwięk nadjeżdżającego pociągu szybciej niesie się po torach niż w powietrzu?</i>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<i>Jeśli półtora kury zniesie półtora jajka w ciągu półtora dnia, ile jaj zniesie pół tuzina kur w ciągu pół tuzina dni?</i>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<i>Mamy kłódkę zamykaną na 3-cyfrowy szyfr. Musimy znaleźć jej kod. O kodzie wiadomo tylko, że:</i>'
+              '</p>'
+              '<ul>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<i>276 – jedna cyfra jest poprawna, ale w niewłaściwym miejscu.</i>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<i>387 – żadna cyfra nie jest właściwa.</i>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<i>368 – jedna cyfra jest właściwa i znajduje się we właściwym miejscu.</i>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<i>471 – dwie liczby są poprawne, ale znajdują się w niewłaściwym miejscu.</i>'
+              '</p>'
+              '</li>'
+
+              '</ul>'
+
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;"><i>Sześcienna kostka została rzucona jeden raz.'
+              '<br>Jakie jest prawdopodobieństwo, że wyrzucona cyfra będzie parzysta i większa niż 2?</i></p>'
+              '</li>'
+
+              '</ul>'
+
+              '<p style="text-align:justify;">'
+              'Forma ta jest przykładem zjawiska wpływu sfer funkcjonalnych na sferę ducha przy udziale wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..'
+              '</p>',
+        )
+
+      ]
   ),
 
 
