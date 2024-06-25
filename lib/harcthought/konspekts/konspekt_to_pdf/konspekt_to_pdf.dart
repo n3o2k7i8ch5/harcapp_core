@@ -684,11 +684,12 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
       fontBoldItalic: fontBoldItalic
   );
 
+  widgets.add(SizedBox(width: .5*elementBigSeparator));
+
   widgets.addAll(
       htmlWidgets.map(
-              (widget) => Padding(
+          (widget) => Padding(
               padding: EdgeInsets.only(
-                  top: .5*elementBigSeparator,
                   left: numberCircleSize + .5*elementBigSeparator
               ),
               child: widget

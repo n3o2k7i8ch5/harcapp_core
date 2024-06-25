@@ -102,19 +102,19 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<ul>'
 
               '<li>'
-              '<p style="text-align:justify;">holistycznie zdefiniować i zrozumieć czym jest duchowość,</p>'
+              '<p style="text-align:justify;">Holistycznie zdefiniować i zrozumieć czym jest duchowość,</p>'
               '</li>'
 
               '<li>'
-              '<p style="text-align:justify;">określić relację między duchowością, a religijnością,</p>'
+              '<p style="text-align:justify;">Określić relację między duchowością, a religijnością,</p>'
               '</li>'
 
               '<li>'
-              '<p style="text-align:justify;">określić relację między duchowością a wychowaniem,</p>'
+              '<p style="text-align:justify;">Określić relację między duchowością a wychowaniem,</p>'
               '</li>'
 
               '<li>'
-              '<p style="text-align:justify;">określić jaka jest i skąd się bierze duchowość harcerska.</p>'
+              '<p style="text-align:justify;">Określić jaka jest i skąd się bierze duchowość harcerska.</p>'
               '</li>'
 
               '</ul>'
