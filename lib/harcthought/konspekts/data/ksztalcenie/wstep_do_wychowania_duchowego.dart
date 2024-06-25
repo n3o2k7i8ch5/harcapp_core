@@ -98,6 +98,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br>Zajęcia służą temu, żeby:'
               '</p>'
+
               '<ul>'
 
               '<li>'
