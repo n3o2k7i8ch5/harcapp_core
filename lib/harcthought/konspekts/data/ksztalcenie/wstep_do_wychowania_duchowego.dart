@@ -91,7 +91,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
 
       KonspektStep(
           title: 'Skrót tematu zajęć',
-          duration: Duration(minutes: 2),
+          duration: Duration(minutes: 5),
           activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący informuje uczestników o czym będą, a o czym nie będą niniejsze zajęcia.'
@@ -290,6 +290,19 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '</p>'
       ),
 
+      KonspektStep(
+          title: 'Harcerstwo - fabryka wychowanych ludzi',
+          duration: Duration(minutes: 5),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący przedstawia uczestnikom przydatny sposób myślenia o tym, czym w swoim ogólnym charakterze jest harcerstwo:'
+              '<br>'
+              '<br><i>Harcerstwo jest fabryką wychowanych ludzi. Nasz Związek jest wielką, rozproszoną maszyną, do której na taśmie produkcyjnej z jednej strony wjeżdżają młodzi ludzie, a, z drugiej strony opuszczają ją ukształtowani, wyznający harcerskie wartości młodzi dorośli o silnym charakterze i silnych przekonaniach.</i>'
+              '<br>'
+              '<br>Tak nakreślona analogia pozwala zwrócić uwagę, że harcerstwo, jako proces kształtowania ludzi, w sposób oczywisty kształtuje ich według określonych zasad. Wokół faktu, że harcerstwo ma za zadanie m.in. zmieniać przekonania i wartości młodego człowieka w określonym kierunku narosła dziwna i niepotrzebna kontrowersja - ale <b>bez tej konstatcji nie jest możliwe żadne harcerskie działanie</b>.'
+              '</p>'
+      ),
+
       // Add aim:
       // - Zbudowanie u uczestników zdolności wiązania wartości harcerskich z ich aksjomatami.
       // - Przebicie bańki fałszywej tezy relatywizmu wyznawanych w harcerstwie wartości.
@@ -450,6 +463,42 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<ul>'
               '<li><p style="text-align:justify;">Mamy w ZHP niechlubną tradycję zmieniania harcerskich zasad i ideałów, gdy okazuje się że postawy harcerzy się z nimi nie spotykają. W pierwszej kolejności to harcerstwo powinno zmieniać ludzi, nie zaś się do nich dostosowywać.</p></li>'
               '</ul>'
+      ),
+
+      KonspektStep(
+          title: 'Kratka minimów rozwoju duchowego',
+          duration: Duration(minutes: 5),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący przekazuje uczestnikom w grupach po jednym wydrukowanym egzemplarzu załącznika $attach_kratka_minimow_rozwoju_duchowego. Prowadzący tłumaczy uczestnikom co owa kratka reprezentuje - w każde pole odpowiada ogólnym zasadom, którymi prawidłowo rozwijający się w sferze duchowej harcerz powinien się cechować. Prowadzący informuje uczestników gdzie ten załącznik jest dostępny.'
+              '<br>'
+              '<br>Kratka nie jest omawiana podczas zajęć ze względu na brak czasu. Jest prezentowana jedynie w celu uświadomienia, że taka pomoc merytoryczna jest dla nich, uczestników, dostępna.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Szybkie strzały dyskusyjne',
+          duration: Duration(minutes: 30),
+          activeForm: true,
+          required: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący rzuca krótkie frazy z listy poniżej i nad każdą przez kilka minut trwa dyskusja. Prowadzący może w trakcie dyskusji zadawać pytania, jednak do jej końca nie prezentuje swojego stanowiska. Dojście do wspólnej konkluzji przez uczestników nie jest ważne. Na końcu każdej dyskusji prowadzący może powiedzieć krótko co uważa na wywołany temat.'
+              '</p>'
+              '<ol>'
+              '<li><p style="text-align:justify;">Nie powinno się wychowywać człowieka w konkretnym celu.</p></li>'
+              '<li><p style="text-align:justify;">Religijność jest dodatkiem do duchowości i nie każdy musi ją mieć.</p></li>'
+              '<li><p style="text-align:justify;">Jeśli ktoś chce kościelnego harcerstwa, powinien pójść do ZHRu.</p></li>'
+              '<li><p style="text-align:justify;">Religia to prywatna sprawa każdego człowieka i nie powinien się z nią afiszować.</p></li>'
+              '<li><p style="text-align:justify;">Patriotyzm to duchowość.</p></li>'
+              '<li><p style="text-align:justify;">Wszystkie niebezpieczne działania są niewychowawcze i nieodpowiedzialne.</p></li>'
+              '<li><p style="text-align:justify;">Każdy harcerz powinien mieć dowolność w tym, jak chce się rozwijać duchowo.</p></li>'
+              '<li><p style="text-align:justify;">W ZHP nie wolno narzucać poglądów.</p></li>'
+              '<li><p style="text-align:justify;">Możliwość zamknięcia próby instruktorskiej powinna zależeć od poglądów kandydata.</p></li>'
+              '<li><p style="text-align:justify;">W ramach działań drużyny nie powinno być aktywności religijnych, gdyż te wykluczają niewierzących.</p></li>'
+              '<li><p style="text-align:justify;">Boga nie powinno być w Przyrzeczeniu, bo niektórzy harcerze składaliby Przyrzeczenie wbrew swoim przekonaniom.</p></li>'
+              '<li><p style="text-align:justify;">Polski nie powinno być w Przyrzeczeniu, bo niektórzy harcerze składaliby Przyrzeczenie wbrew swoim przekonaniom.</p></li>'
+              '<li><p style="text-align:justify;">Pomoc bliźnim nie powinna być w Przyrzeczeniu, bo niektórzy harcerze składaliby Przyrzeczenie wbrew swoim przekonaniom.</p></li>'
+              '</ol>'
       ),
 
     ]
