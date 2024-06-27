@@ -232,7 +232,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
       KonspektStep(
           title: 'Duchowość, religia, religijność - opinie uczestników',
           duration: Duration(minutes: 10),
-          activeForm: false,
+          activeForm: true,
           required: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący zadaje publicznie pytanie:'
@@ -270,7 +270,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
       // - Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, wierność w związku, ew. modlitwa), które choć pozornie uniwersalne, wynikają ze ściśle określonego światopoglądu.
       // - Przekonanie uczestników, że neutralność światopoglądowa w wychowaniu nie jest możliwa.
       KonspektStep(
-          title: 'Neutralność światopoglądowa',
+          title: 'Neutralność duchowa',
           duration: Duration(minutes: 25),
           activeForm: false,
           content: '<p style="text-align:justify;">'
@@ -284,7 +284,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br>Gdy wszystkie grupy przedyskutują swoje scenariusze, prowadzący zadaje pytanie:'
               '<br>'
-              '<br><b><i>“Czy w ogóle istnieje neutralność światopoglądowa w wychowaniu?”</i></b>.'
+              '<br><b><i>“Czy w ogóle istnieje neutralność duchowa w wychowaniu?”</i></b>.'
               '<br>'
               '<br>W toku próby odpowiedzi na to pytanie może wywiązać się między uczestnikami dyskusja. Nie powinna ona trwać zbyt długo. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.'
               '</p>'
@@ -312,6 +312,144 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br>Na końcu każda grupa w ciągu minuty prezentuje wyniki swojej pracy. Gdy skończy, prowadzący prosi, by położyli omawiany scenariusz oraz kartkę z aksjomatem przed sobą.'
               '</p>'
+      ),
+
+      // Add aims:
+      // - Uświadomienie uczestnikom, że harcerstwo jest dla wszystkich, ale nie wychowuje do wszystkiego - ma ściśle określone wartości, którymi się kieruje.
+      KonspektStep(
+          title: 'Źródła wartości w ZHP - określoność wartości',
+          duration: Duration(minutes: 5),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący zaczyna od zadania pytania:'
+              '<br>'
+              '<br><i>“Możliwe, że część z was na tym etapie zastanawia się, jakie są oraz skąd wypływają harcerskie wartości?”</i>.'
+              '<br>'
+              '<br>Prowadzący przedstawia uczestnikom stosowny fragment statutu ZHP (załącznik $attach_cel_wychowania_duchowego_zhp_statut) oraz preambułę uchwały w sprawie wspierania rozwoju duchowego w ZHP (załącznik $attach_cel_wychowania_duchowego_zhp_uchwala). Zwraca uwagę na to, że w ZHP mamy ściśle określony zbiór wartości i postaw, do których wychowujemy.'
+              '</p>'
+      ),
+
+      // Add aims:
+      // - Uświadomienie uczestnikom, że do wspierania rozwoju duchowego na poziomie Z i H wystarczy poziom postaw i wartości, ale rozwój duchowy z HS i W wymaga pracy na poziomie aksjomatu.
+      // - Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej.
+      KonspektStep(
+          title: 'Źródła wartości w ZHP - aksjomaty',
+          duration: Duration(minutes: 15),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący stawia pytanie:'
+              '<br>'
+              '<br><i>“Przychodzi do Was HS i pyta: dlaczego mam nie prześladować kogoś, kto wyrządził mi krzywdę? Uważam, że należy go przykładnie i doszczętnie zgnębić. Inni niech robią co chcą na moim miejscu, ale dlaczego mam wierzyć w jakieś arbitralnie wymyślone dyrdymały o godności każdego człowieka?”</i>.'
+              '<br>'
+              '<br>Prowadzący zauważa, że nawet jeśli niewerbalnie, to rozwój duchowy prowadzi przez pytanie “dlaczego mam wierzyć w takie a nie inne wartości?”. Jako instruktorzy organizacji wychowawczej mamy wówczas dwa wyjścia:'
+              '</p>'
+              '<ul>'
+              '<li><p style="text-align:justify;">Zignorować aksjomatyczne poszukiwania harcerzy (pozwolić innym czynnikom wpłynąć na decyzję harcerza),</p></li>'
+              '<li><p style="text-align:justify;">Świadomie pomóc w znalezieniu odpowiedzi</p></li>'
+              '</ul>'
+              '<p style="text-align:justify;">'
+              'Żadne z tych rozwiązań nie jest neutralne światopoglądowo!'
+              '<br>'
+              '<br>Prowadzący stawia w tym miejscu trzy tezy:'
+              '</p>'
+              '<ol>'
+              '<li><p style="text-align:justify;">Jeśli harcerstwo chce być skuteczne wychowawczo, nie powinno abdykować ze rozwoju duchowego na poziomie aksjomatu.</p></li>'
+              '<li><p style="text-align:justify;">Harcerstwo w samym swoim założeniu jest stronnicze. Tak samo każda forma pracy z aksjomatem ducha jest stronnicza i jest związana z wiarą, filozofią i arbitralnością.</p></li>'
+              '<li><p style="text-align:justify;">System wartości harcerskich wynika w głównej mierze z wiary chrześcijańskiej i nie warto tego zmieniać.</p></li>'
+              '</ol>'
+              '<p style="text-align:justify;">'
+              'Prowadzący omawia źródła wartości w poszczególnych scenariuszach, odnosząc się w razie potrzeby do wniosków uczestników.'
+              '</p>'
+
+              '<ol>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>Scenariusz 1.</b> Przebaczenie i odpuszczenie win.'
+              '<br>'
+              '<br>Przebaczenie win nie jest moralnym standardem. W wielu kulturach jest to uważane za zachętę do bycia wykorzystywanym. Nietzsche uważał przebaczanie za wyraz słabości i element moralności niewolników. W tradycyjnej kulturze Japońskiej, po popełnieniu poważnej winy nie było drogi odpuszczenia winy: jedynym honorowym wyjściem było popełnienie reytualnego samobójstwa: seppuku (lub harakiri).'
+              '<br>'
+              '<br>Dlaczego więc w kulturze łacińskiej jest inaczej? Bo naszą kulturę ukształtowała wiara, że sam stwórca świata uznał za słuszne ponieść śmierć za człowieka, by ten doznał odpuszczenia win, a na pytanie św. Piotra o to ile razy ma wybaczyć komuś winę, usłyszał: zawsze.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>Scenariusz 2.</b> Mówienie prawdy.'
+              '<br>'
+              '<br>W kulturach wschodnich, szczególnie w kulturze konfucjańskiej, gdzie najważniejsza jest harmonia społeczna i kolektywizm, należy kłamać, jeśli prowadzi do uniknięcia konfliktu. W części kultur afrykańskich kłamstwo nie jest złem, jeśli służy uniknięciu wstydu.'
+              '<br>'
+              '<br>Dlaczego więc akurat my tak się uparliśmy, by nagannie traktować świadome mówienie nieprawdy?'
+              '<br>'
+              '<br>Po pierwsze naszą kulturę ukształtowała wiara, że całe cierpienie i grzechy świata swój początek wzięły w kłamstwie węża, w które Adam i Ewa uwierzyli. Po drugie, jeśli Bóg stworzył świat, który wierzymy, że jest dobry, to wyjście z trudnych sytuacji nie może być długodystansowo możliwe przez nagięcie lub zatajenie rzeczywistości. Nasz świat jest oparty o ewangeliczną tezę <i>“poznacie prawdę, a prawda was wyzwoli”</i>.'
+              '<br>'
+              '<br><i>“Do obalenia totalitaryzmu wystarczy jeden człowiek, który powie prawdę”</i> napisał Sołżenicyn w „Archipelagu GUŁag”.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>Scenariusz 3.</b> Bezinteresowna pomoc bliźnim'
+              '<br>'
+              '<br>Niezbywalna godność i równość każdego człowieka? W systemach konfucjańskich liczy się najpierw wspólnota i kolektyw, dopiero potem człowiek. Niektórzy buddyści widząc cierpienie drugiego człowieka powstrzymają innych od udzielenia pomocy - jeśli ktoś cierpi, to niewątpliwie pokutuje za grzechy popełnione w poprzednim życiu.'
+              '<br>'
+              '<br>A skąd pogląd, że wykształcony profesor z zasługami dla narodu ma takie same prawa jak półinteligentny osiedlowy cwaniaczek? Skąd pomysł, że prawo do życia i godnego traktowania ma każdy, niezależnie od wieku, pochodzenia, czy wyznania?</i>.'
+              '<br>'
+              '<br>Naszą kulturę ukształtowała wiara, że chyba w nawet najpodlejszemu człowiekowi nie można odebrać godności, skoro sam Bóg zechciał umrzeć na krzyżu dla jego zbawienia. W świetle tego faktu nie ma usprawiedliwienia dla systemu kastowego, niewolnictwa ani wyzysku.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>Scenariusz 4.</b> Wierność w związku'
+              '<br>'
+              '<br>Dlaczego kultura łacińska nalega na trwałe związki damsko-męskie?'
+              '<br>'
+              '<br>Być może przewagi monogamii wyparły skutecznością większość innych modeli relacji. Monogamia jest przewidywalna, stabilna, ułatwia zarządzanie zasobami i dziedziczenie, a to zwiększa bezpieczeństwo dzieci. W skali makro zmniejsza napięcia społeczne wynikające z braku dostępnych partnerów życiowych i minimalizuje ryzyko chorób przenoszonych drogą płciową.'
+              '<br>'
+              '<br>Z indywidualistycznej perspektywy pozwala zrównać w relacji obie płcie nie odbierając możliwości pełnienia komplementarnych ról, zaś brak możliwości łatwego zakończenia związku zmusza jego uczestników do skutecznego mierzenia się z problemami ich osobowości.'
+              '</p>'
+              '</li>'
+
+              '</ol>'
+
+              '<p style="text-align:justify;">'
+              '<b>Ale przecież te aksjomaty są religijne - co z tzw. “niewierzącymi” harcerzami?</b>'
+              '<br>'
+              '<br>Po pierwsze - to, że chrześcijańska myśl dała naszej cywilizacji (i przy okazji harcerstwu) zbiór wartości nie zależy od tego, czy rozmyśla o nich osoba wierząca, czy niewierząca.'
+              '<br>'
+              '<br>Po drugie - na czym miałoby polegać wychowanie “z dala” od chrześcijańskich aksjomatów? Na porzuceniu idei mówienia prawdy, miłości bliźniego, szacunku wobec każdego człowieka, idei przebaczenia, miłosierdzia, sprawiedliwości, równości i relacji z absolutem?'
+              '<br>'
+              '<br>Po trzecie -  jaki inny aksjomat, który jest wewnętrznie spójny, z którego wynikają wartości zgodne z tymi przyjętymi przez ruch harcerski i który nie zapadnie się pod własnymi założeniami w ciągu dwóch pokoleń chcemy tym harcerzom zaproponować?'
+              '<br>'
+              '<br>Nie trzeba być wierzącym, żeby przyznać, że harcerskie wartości są fundamentalnie chrześcijańskie, ani żeby dostrzec ogrom pozytywów, jaki to za sobą niesie.'
+              '<br>'
+              '<br>Wychowanie duchowe na poziomie aksjomatu musi doprowadzić do świadomej, spójnej wiary w “coś”. Ignorowanie tej przestrzeni nie jest wyrazem inkluzywności i tolerancji, ale ignorancji i infantylizmu.'
+              '<br>'
+              '<br>Może drogą do przodu nie jest wymienianie cywilizacyjnych wartości, których się nie rozumiemy, ale próba ich zinternalizowania w nowych warunkach, w których przyszło nam żyć.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Podsumowanie',
+          duration: Duration(minutes: 5),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              '<b>Podsumowanie (dla przewodników)</b>'
+              '</p>'
+              '<ul>'
+              '<li><p style="text-align:justify;">Nie istnieje neutralne wychowanie.</p></li>'
+              '<li><p style="text-align:justify;">Harcerskie wychowanie jest fundamentalnie chrześcijańskie, nawet jeśli jego członkowie są innego wyznania.</p></li>'
+              '<li><p style="text-align:justify;">Jeśli są w harcerskiej duchowości i ideałach wartości, których jako kadra nie rozumiemy, to warto je zgłębić zamiast je pomijać lub się ich pozbyć. Zazwyczaj za tymi wartościami stoją dziesiątki wieków cywilizacyjnej mądrości.</p></li>'
+              '<li><p style="text-align:justify;">Harcerstwo powinno mieć wysokie standardy nie po to, by prowadzić selekcję osób mogących harcerzami zostać, ale po to, by wychować ludzi w szacunku do wartości, postaw, a często również wiary, która dała nam świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, itd..</p></li>'
+              '</ul>'
+              '<p style="text-align:justify;">'
+              '<br>'
+              '<b>Podsumowanie dodatkowe (dla podharcmistrzów)</b>'
+              '</p>'
+              '<ul>'
+              '<li><p style="text-align:justify;">Mamy w ZHP niechlubną tradycję zmieniania harcerskich zasad i ideałów, gdy okazuje się że postawy harcerzy się z nimi nie spotykają. W pierwszej kolejności to harcerstwo powinno zmieniać ludzi, nie zaś się do nich dostosowywać.</p></li>'
+              '</ul>'
       ),
 
     ]
