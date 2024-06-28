@@ -280,6 +280,22 @@ class Konspekt{
 
   }
 
+  Duration? get requiredDuration{
+    if(customDuration != null) return customDuration;
+
+    if(steps == null)
+      return null;
+
+    Duration resultDuration = Duration.zero;
+
+    for(KonspektStep step in steps!)
+      if(step.required)
+        resultDuration += step.duration;
+
+    return resultDuration;
+
+  }
+
   const Konspekt({
     required this.name,
     required this.title,

@@ -172,7 +172,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.physics = const BouncingScrollPhysics(),
         this.shrinkWrap = false,
         this.leading,
-        this.oneLineSummary = true,
+        this.oneLineSummary = false,
       });
 
   @override
@@ -298,7 +298,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               const SizedBox(height: Dimen.sideMarg),
 
-              const TitleShortcutRowWidget(title: 'Metodyki', textAlign: TextAlign.left),
+              TitleShortcutRowWidget(
+                  title: konspekt.category == KonspektCategory.harcerskie?
+                  'Metodyki':
+                  'Poziom',
+                  textAlign: TextAlign.left),
 
               SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -374,7 +378,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                     const IntrinsicWidth(
                       child: TitleShortcutRowWidget(title: 'Czas: ', textAlign: TextAlign.left),
                     ),
-                    Text(durationToString(konspekt.duration), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
+                    if(konspekt.duration == konspekt.requiredDuration)
+                      Text(durationToString(konspekt.duration), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
+                    else
+                      Text('od ${durationToString(konspekt.requiredDuration)}\ndo ${durationToString(konspekt.duration)}', style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
+
                   ],
                 ),
 
