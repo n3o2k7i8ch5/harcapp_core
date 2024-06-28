@@ -161,6 +161,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final bool shrinkWrap;
   final Widget? leading;
   final bool oneLineSummary;
+  final bool oneLineMultiDuration;
 
   const BaseKonspektWidget(
       this.konspekt,
@@ -173,6 +174,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.shrinkWrap = false,
         this.leading,
         this.oneLineSummary = false,
+        this.oneLineMultiDuration = false,
       });
 
   @override
@@ -382,7 +384,12 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                     if(konspekt.duration == konspekt.requiredDuration)
                       Text(durationToString(konspekt.duration), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
                     else
-                      Text('od ${durationToString(konspekt.requiredDuration)}\ndo ${durationToString(konspekt.duration)}', style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
+                      Text(
+                          'od ${durationToString(konspekt.requiredDuration)}'
+                          '${widget.oneLineMultiDuration?' ':'\n'}'
+                          'do ${durationToString(konspekt.duration)}',
+                          style: const AppTextStyle(fontSize: Dimen.textSizeAppBar)
+                      )
 
                   ],
                 ),

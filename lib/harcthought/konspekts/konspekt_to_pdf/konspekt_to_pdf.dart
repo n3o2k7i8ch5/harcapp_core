@@ -328,12 +328,15 @@ Widget DurationWidget(Konspekt konspekt, Font font, Font fontBold){
         SizedBox(height: elementBigSeparator),
 
         Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HeaderWidget('Czas: ', fontBold),
-              Text(
-                durationToString(konspekt.duration!),
-                style: TextStyle(font: font, fontSize: headerTextSize),
-              ),
+
+              if(konspekt.duration == konspekt.requiredDuration)
+                Text(durationToString(konspekt.duration), style: TextStyle(font: font, fontSize: headerTextSize))
+              else
+                Text('od ${durationToString(konspekt.requiredDuration)} do ${durationToString(konspekt.duration)}', style: TextStyle(font: font, fontSize: headerTextSize))
+
             ]
         )
 
