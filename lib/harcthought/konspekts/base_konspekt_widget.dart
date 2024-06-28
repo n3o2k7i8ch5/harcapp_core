@@ -374,6 +374,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               if(konspekt.duration != null)
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const IntrinsicWidth(
                       child: TitleShortcutRowWidget(title: 'Czas: ', textAlign: TextAlign.left),
