@@ -6,6 +6,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 class TitleShortcutRowWidget extends StatelessWidget{
 
+  static const double height = Dimen.iconFootprint;
   static const double textStartPadding = 10.0;
 
   final IconData? icon;
@@ -42,7 +43,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
     Widget widget = Row(
       children: [
 
-        SizedBox(height: Dimen.iconFootprint),
+        SizedBox(height: height),
 
         if(leading != null)
           leading!

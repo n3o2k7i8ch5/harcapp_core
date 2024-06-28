@@ -381,15 +381,22 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                     const IntrinsicWidth(
                       child: TitleShortcutRowWidget(title: 'Czas: ', textAlign: TextAlign.left),
                     ),
-                    if(konspekt.duration == konspekt.requiredDuration)
-                      Text(durationToString(konspekt.duration), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
-                    else
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: (TitleShortcutRowWidget.height - Dimen.textSizeAppBar) / 2
+                      ),
+                      child: konspekt.duration == konspekt.requiredDuration?
+                      Text(
+                          durationToString(konspekt.duration),
+                          style: const AppTextStyle(fontSize: Dimen.textSizeAppBar)
+                      ):
                       Text(
                           'od ${durationToString(konspekt.requiredDuration)}'
-                          '${widget.oneLineMultiDuration?' ':'\n'}'
-                          'do ${durationToString(konspekt.duration)}',
+                              '${widget.oneLineMultiDuration?' ':'\n'}'
+                              'do ${durationToString(konspekt.duration)}',
                           style: const AppTextStyle(fontSize: Dimen.textSizeAppBar)
-                      )
+                      ),
+                    )
 
                   ],
                 ),
