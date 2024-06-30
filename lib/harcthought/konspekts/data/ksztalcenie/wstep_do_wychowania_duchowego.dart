@@ -266,13 +266,15 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '</p>'
       ),
 
-      // Add aim:
-      // - Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, wierność w związku, ew. modlitwa), które choć pozornie uniwersalne, wynikają ze ściśle określonego światopoglądu.
-      // - Przekonanie uczestników, że neutralność światopoglądowa w wychowaniu nie jest możliwa.
+      // Dodanie boldu itp.
       KonspektStep(
           title: 'Neutralność duchowa',
           duration: Duration(minutes: 25),
           activeForm: false,
+          aims: [
+            'Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, wierność w związku, ew. modlitwa), które choć pozornie uniwersalne, wynikają ze ściśle określonego światopoglądu',
+            'Przekonanie uczestników, że neutralność światopoglądowa w wychowaniu nie jest możliwa'
+          ],
           content: '<p style="text-align:justify;">'
               'Prowadzący przedstawia uczestnikom scenariusze z załącznika $attach_neutralnosc_duchowa_przyklady. Wszystkie scenariusze opisują sytuacje wychowawcze z udziałem instruktora harcerskiego. Zadaniem uczestników jest określenie:'
               '<br>'
@@ -303,13 +305,15 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '</p>'
       ),
 
-      // Add aim:
-      // - Zbudowanie u uczestników zdolności wiązania wartości harcerskich z ich aksjomatami.
-      // - Przebicie bańki fałszywej tezy relatywizmu wyznawanych w harcerstwie wartości.
+      // Dodanie boldu itp.
       KonspektStep(
           title: 'Źródła wartości - dyskusje o scenariuszach',
           duration: Duration(minutes: 15),
           activeForm: false,
+          aims: [
+            'Zbudowanie u uczestników zdolności wiązania wartości harcerskich z ich aksjomatami',
+            'Przebicie bańki fałszywej tezy relatywizmu wyznawanych w harcerstwie wartości'
+          ],
           content: '<p style="text-align:justify;">'
               'Prowadzący zaczyna od stwierdzenia:'
               '<br>'
@@ -327,12 +331,14 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '</p>'
       ),
 
-      // Add aims:
-      // - Uświadomienie uczestnikom, że harcerstwo jest dla wszystkich, ale nie wychowuje do wszystkiego - ma ściśle określone wartości, którymi się kieruje.
+      // Dodanie boldu itp.
       KonspektStep(
           title: 'Źródła wartości w ZHP - określoność wartości',
           duration: Duration(minutes: 5),
           activeForm: false,
+          aims: [
+            'Uświadomienie uczestnikom, że harcerstwo jest dla wszystkich, ale nie wychowuje do wszystkiego - ma ściśle określone wartości, którymi się kieruje'
+          ],
           content: '<p style="text-align:justify;">'
               'Prowadzący zaczyna od zadania pytania:'
               '<br>'
@@ -342,13 +348,15 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '</p>'
       ),
 
-      // Add aims:
-      // - Uświadomienie uczestnikom, że do wspierania rozwoju duchowego na poziomie Z i H wystarczy poziom postaw i wartości, ale rozwój duchowy z HS i W wymaga pracy na poziomie aksjomatu.
-      // - Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej.
+      // Dodanie boldu itp.
       KonspektStep(
           title: 'Źródła wartości w ZHP - aksjomaty',
           duration: Duration(minutes: 15),
           activeForm: false,
+          aims: [
+            'Uświadomienie uczestnikom, że do wspierania rozwoju duchowego na poziomie Z i H wystarczy poziom postaw i wartości, ale rozwój duchowy z HS i W wymaga pracy na poziomie aksjomatu',
+            'Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej'
+          ],
           content: '<p style="text-align:justify;">'
               'Prowadzący stawia pytanie:'
               '<br>'
