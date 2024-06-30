@@ -3,7 +3,10 @@ import 'package:harcapp_core/color_pack_app.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
+import 'package:harcapp_core/comm_widgets/app_card.dart';
+import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'konspekt.dart';
 import 'konspekt_html_widget.dart';
@@ -89,6 +92,50 @@ class KonspektStepWidget extends StatelessWidget{
           ],
         ),
       ),
+
+      if(step.aims != null)
+        Padding(
+          padding: const EdgeInsets.only(
+            top: Dimen.sideMarg,
+            left: Dimen.sideMarg,
+            right: Dimen.sideMarg,
+          ),
+          child: Material(
+            borderRadius: BorderRadius.circular(AppCard.defRadius),
+            child: Padding(
+              padding: const EdgeInsets.all(Dimen.sideMarg),
+              child: Column(
+                children: [
+
+                  const Text(
+                    'Cele kroku',
+                    style: AppTextStyle(
+                        fontSize: Dimen.textSizeNormal
+                    ),
+                  ),
+
+                  const SizedBox(height: Dimen.sideMarg),
+
+                  ListView.separated(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, aimIndex) => Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
+                        const SizedBox(width: Dimen.defMarg),
+                        Expanded(child: AppText(konspekt.aims[index], size: Dimen.textSizeBig))
+                      ],
+                    ),
+                    separatorBuilder: (context, aimIndex) => const SizedBox(height: Dimen.defMarg),
+                    itemCount: konspekt.aims.length,
+                  ),
+
+                ],
+              ),
+            )
+          ),
+        ),
 
       Padding(
         padding: const EdgeInsets.all(Dimen.sideMarg),

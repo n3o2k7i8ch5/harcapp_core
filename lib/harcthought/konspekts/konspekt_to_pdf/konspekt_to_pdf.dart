@@ -679,6 +679,43 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
     ),
   ];
 
+  if(step.aims != null)
+    widgets.add(
+        Padding(
+            padding: EdgeInsets.only(
+              top: .5*elementBigSeparator,
+              left: numberCircleSize + .5*elementBigSeparator,
+            ),
+            child: ClipRRect(
+                horizontalRadius: AppCard.defRadius,
+                verticalRadius: AppCard.defRadius,
+                child: Container(
+                    color: cardColor,
+                    child: Padding(
+                        padding: EdgeInsets.all(elementSmallSeparator),
+                        child: Column(
+                            children: [
+
+                              Text(
+                                  'Cele kroku',
+                                  style: TextStyle(
+                                    font: font,
+                                    fontSize: defTextSize,
+                                  )
+                              ),
+
+                              SizedBox(height: elementSmallSeparator),
+
+                              ...StringListWidget(step.aims!, font),
+
+                            ]
+                        )
+                    )
+                )
+            )
+        )
+    );
+
   List<Widget> htmlWidgets = await fromHtml(
       htmlString: step.content??step.contentBuilder!(isDark: false),
       font: font,

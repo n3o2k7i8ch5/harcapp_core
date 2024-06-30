@@ -234,9 +234,20 @@ class KonspektStep{
   final bool activeForm;
   final bool required;
   final String? content;
+  final List<String>? aims;
+  final List<KonspektMaterial>? materials;
   final String Function({required bool isDark})? contentBuilder;
 
-  const KonspektStep({required this.title, required this.duration, required this.activeForm, this.required = true, this.content, this.contentBuilder}):
+  const KonspektStep({
+    required this.title,
+    required this.duration,
+    required this.activeForm,
+    this.required = true,
+    this.content,
+    this.aims,
+    this.materials,
+    this.contentBuilder
+  }):
     assert (content != null || contentBuilder != null);
 
 }
