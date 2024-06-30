@@ -105,6 +105,7 @@ class KonspektStepWidget extends StatelessWidget{
             child: Padding(
               padding: const EdgeInsets.all(Dimen.sideMarg),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
 
                   const Text(
@@ -124,7 +125,7 @@ class KonspektStepWidget extends StatelessWidget{
                       children: [
                         Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
                         const SizedBox(width: Dimen.defMarg),
-                        Expanded(child: AppText(konspekt.aims[index], size: Dimen.textSizeBig))
+                        Expanded(child: AppText(konspekt.aims[aimIndex], size: Dimen.textSizeBig))
                       ],
                     ),
                     separatorBuilder: (context, aimIndex) => const SizedBox(height: Dimen.defMarg),
