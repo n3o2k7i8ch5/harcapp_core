@@ -694,7 +694,8 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
                     child: Padding(
                         padding: EdgeInsets.all(elementSmallSeparator),
                         child: Column(
-                            children: [
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
 
                               Text(
                                   'Cele kroku',
