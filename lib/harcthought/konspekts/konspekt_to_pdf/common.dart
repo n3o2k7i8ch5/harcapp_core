@@ -79,7 +79,14 @@ Future<List<Widget>> fromHtml({
     );
 
 
-List<Widget> StringListWidget(List<String> data, Font font, {double? separatorHeight}){
+Future<List<Widget>> StringListWidget(
+    List<String> data,
+    Font font,
+    Font fontBold,
+    Font fontItalic,
+    Font fontBoldItalic,
+    {double? separatorHeight}
+    ) async {
 
   List<Widget> widgets = [];
 
@@ -100,10 +107,15 @@ List<Widget> StringListWidget(List<String> data, Font font, {double? separatorHe
               ),
 
               Expanded(
-                child: Text(
-                  data[i],
-                  style: TextStyle(font: font, fontSize: defTextSize),
-                ),
+                child: Column(
+                  children: await fromHtml(
+                  htmlString: data[i],
+                  font: font,
+                  fontBold: fontBold,
+                  fontItalic: fontItalic,
+                  fontBoldItalic: fontBoldItalic,
+                )
+              ),
               )
             ]
         )

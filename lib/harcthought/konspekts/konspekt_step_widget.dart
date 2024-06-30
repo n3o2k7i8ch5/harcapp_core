@@ -111,7 +111,8 @@ class KonspektStepWidget extends StatelessWidget{
                   const Text(
                     'Cele kroku',
                     style: AppTextStyle(
-                        fontSize: Dimen.textSizeNormal
+                      fontSize: Dimen.textSizeNormal,
+                      fontWeight: weight.halfBold
                     ),
                   ),
 

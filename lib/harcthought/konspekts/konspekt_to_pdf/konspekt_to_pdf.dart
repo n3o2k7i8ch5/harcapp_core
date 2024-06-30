@@ -345,7 +345,13 @@ Widget DurationWidget(Konspekt konspekt, Font font, Font fontBold){
 
 }
 
-List<Widget> AimsWidget(Konspekt konspekt, Font font, Font fontBold){
+Future<List<Widget>> AimsWidget(
+    Konspekt konspekt,
+    Font font,
+    Font fontBold,
+    Font fontItalic,
+    Font fontBoldItalic,
+) async {
 
   if(konspekt.aims.isEmpty)
     return [];
@@ -360,7 +366,15 @@ List<Widget> AimsWidget(Konspekt konspekt, Font font, Font fontBold){
 
   ];
 
-  widgets.addAll(StringListWidget(konspekt.aims, font));
+  widgets.addAll(
+      await StringListWidget(
+      konspekt.aims,
+      font,
+      fontBold,
+      fontItalic,
+      fontBoldItalic
+  )
+  );
 
   return widgets;
 
@@ -700,14 +714,20 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
                               Text(
                                   'Cele kroku',
                                   style: TextStyle(
-                                    font: font,
+                                    font: fontBold,
                                     fontSize: defTextSize,
                                   )
                               ),
 
                               SizedBox(height: elementSmallSeparator),
 
-                              ...StringListWidget(step.aims!, font),
+                              ...await StringListWidget(
+                                  step.aims!,
+                                  font,
+                                  fontBold,
+                                  fontItalic,
+                                  fontBoldItalic
+                              ),
 
                             ]
                         )
@@ -766,7 +786,13 @@ Future<List<Widget>> StepListWidget(Konspekt konspekt, Font font, Font fontBold,
 
 }
 
-List<Widget> HowToFailWidget(Konspekt konspekt, Font font, Font fontBold){
+Future<List<Widget>> HowToFailWidget(
+    Konspekt konspekt,
+    Font font,
+    Font fontBold,
+    Font fontItalic,
+    Font fontBoldItalic,
+) async {
 
   if(konspekt.howToFail == null)
     return [];
@@ -781,7 +807,15 @@ List<Widget> HowToFailWidget(Konspekt konspekt, Font font, Font fontBold){
 
   ];
 
-  widgets.addAll(StringListWidget(konspekt.howToFail!, font));
+  widgets.addAll(
+      await StringListWidget(
+        konspekt.howToFail!,
+        font,
+        fontBold,
+        fontItalic,
+        fontBoldItalic
+      )
+  );
 
   return widgets;
 
@@ -850,7 +884,7 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
 
   multiPage.add(DurationWidget(konspekt, font, fontBold));
 
-  multiPage.addAll(AimsWidget(konspekt, font, fontBold));
+  multiPage.addAll(await AimsWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
 
   multiPage.addAll(MaterialListWidget(konspekt, font, fontBold, fontItalic));
 
@@ -860,7 +894,7 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
 
   multiPage.addAll(await StepListWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
 
-  multiPage.addAll(HowToFailWidget(konspekt, font, fontBold));
+  multiPage.addAll(await HowToFailWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
 
   ByteData fontByteData = await rootBundle.load('packages/material_design_icons_flutter/lib/fonts/materialdesignicons-webfont.ttf');
 
