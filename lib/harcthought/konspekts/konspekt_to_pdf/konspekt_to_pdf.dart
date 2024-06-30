@@ -706,7 +706,7 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
                 child: Container(
                     color: cardColor,
                     child: Padding(
-                        padding: EdgeInsets.all(elementSmallSeparator),
+                        padding: EdgeInsets.all(2*elementSmallSeparator),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [

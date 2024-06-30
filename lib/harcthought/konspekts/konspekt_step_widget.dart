@@ -101,7 +101,9 @@ class KonspektStepWidget extends StatelessWidget{
             right: Dimen.sideMarg,
           ),
           child: Material(
+            color: cardEnab_(context),
             borderRadius: BorderRadius.circular(AppCard.defRadius),
+            clipBehavior: Clip.hardEdge,
             child: Padding(
               padding: const EdgeInsets.all(Dimen.sideMarg),
               child: Column(
