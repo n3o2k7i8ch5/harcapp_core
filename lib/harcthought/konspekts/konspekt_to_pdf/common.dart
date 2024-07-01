@@ -36,6 +36,7 @@ Future<List<Widget>> fromHtml({
   required Font fontBold,
   required Font fontItalic,
   required Font fontBoldItalic,
+  double? fontSize,
 }) async =>
     await HTMLToPdf().convert(
         htmlString
@@ -50,26 +51,26 @@ Future<List<Widget>> fromHtml({
                 fontBold: fontBold,
                 fontItalic: fontItalic,
                 fontBoldItalic: fontBoldItalic,
-                fontSize: defTextSize
+                fontSize: fontSize??defTextSize
             ),
             boldStyle: TextStyle(
                 font: fontBold,
                 fontBold: fontBold,
-                fontSize: defTextSize
+                fontSize: fontSize??defTextSize
             ),
             italicStyle: TextStyle(
                 font: fontItalic,
                 fontItalic: fontItalic,
-                fontSize: defTextSize
+                fontSize: fontSize??defTextSize
             ),
             boldItalicStyle: TextStyle(
                 font: fontBoldItalic,
                 fontBoldItalic: fontBoldItalic,
-                fontSize: defTextSize
+                fontSize: fontSize??defTextSize
             ),
             listIndexStyle: TextStyle(
                 font: font,
-                fontSize: defTextSize
+                fontSize: fontSize??defTextSize
             ),
             bulletListDotSize: 4.0,
             bulletListIconSize: 16.0,
