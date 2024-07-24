@@ -16,13 +16,22 @@ ToastFuture showAppToast(
     Color? textColor,
     Duration duration = const Duration(seconds: 3),
     String? buttonText,
+    bool bottom = true,
+    bool handleTouch = true,
     void Function()? onButtonPressed,
 }) => showToastWidget(
     Padding(
-      padding: const EdgeInsets.only(
+      padding:
+      bottom?
+      const EdgeInsets.only(
         right: 12.0,
         left: 12.0,
         bottom: 46.0,
+      ):
+      const EdgeInsets.only(
+        right: 12.0,
+        left: 12.0,
+        top: 46.0,
       ),
       child: IntrinsicWidth(
         child: Material(
@@ -86,7 +95,7 @@ ToastFuture showAppToast(
         ),
       )
     ),
-    handleTouch: true,
+    handleTouch: handleTouch,
     position: ToastPosition.bottom,
     duration: duration,
     dismissOtherToast: true,
