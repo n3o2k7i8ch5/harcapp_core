@@ -23,7 +23,7 @@ ToastFuture showAppToast(
     Padding(
       padding:
       const EdgeInsets.only(
-        top: 46.0,
+        top: 12.0,
         right: 12.0,
         left: 12.0,
         bottom: 46.0,
