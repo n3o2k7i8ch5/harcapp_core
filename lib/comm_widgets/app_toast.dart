@@ -22,16 +22,11 @@ ToastFuture showAppToast(
 }) => showToastWidget(
     Padding(
       padding:
-      bottom?
       const EdgeInsets.only(
+        top: 46.0,
         right: 12.0,
         left: 12.0,
         bottom: 46.0,
-      ):
-      const EdgeInsets.only(
-        right: 12.0,
-        left: 12.0,
-        top: 46.0,
       ),
       child: IntrinsicWidth(
         child: Material(
@@ -95,8 +90,8 @@ ToastFuture showAppToast(
         ),
       )
     ),
+    position: bottom?ToastPosition.bottom:ToastPosition.top,
     handleTouch: handleTouch,
-    position: ToastPosition.bottom,
     duration: duration,
     dismissOtherToast: true,
 );
