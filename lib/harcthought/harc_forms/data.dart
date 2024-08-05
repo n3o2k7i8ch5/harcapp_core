@@ -7,13 +7,23 @@ import 'harc_form.dart';
 List<HarcForm> allForms = [
 
   HarcForm(
+    filename: 'przysiady_z_zerdzia',
+    title: 'Przysiady z żerdzią',
+    icon: MdiIcons.human,
+    metos: [Meto.harc, Meto.hs, Meto.wedro],
+    tags: [HarcFormTag.kara, HarcFormTag.ruchowe, HarcFormTag.zespolowe],
+    colorStart: Colors.red[600]!,
+    colorEnd: Colors.orange
+  ),
+
+  HarcForm(
       filename: 'trzy_katy',
       title: 'Trzy kąty',
       icon: MdiIcons.angleRight,
       metos: [Meto.hs, Meto.wedro],
       tags: [HarcFormTag.integracja],
       colorStart: Colors.yellow[600]!,
-      colorEnd: Colors.orange!
+      colorEnd: Colors.orange
   ),
 
   HarcForm(
