@@ -2376,7 +2376,8 @@ List<Konspekt> allKonspekts = [
         KonspektSphere.duch: KonspektSphereDetails(
             level: [KonspektSphereLevel.duchWartosci],
             mechanism: [KonspektSphereMechanism.duchWartoscWtorna]
-        )
+        ),
+        KonspektSphere.umysl: null
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (hamimfadillah)',
