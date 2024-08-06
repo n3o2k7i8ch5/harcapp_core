@@ -18,9 +18,13 @@ dependencies:
   flutter_feather_icons: ^2.0.0+1
   flutter_spinkit: ^5.2.0
   flutter_svg: ^2.0.10+1
-  flutter_widget_from_html: ^0.14.9
-  htmltopdfwidgets: ^1.0.3
-  implicitly_animated_reorderable_list_2: ^0.5.1
+  flutter_widget_from_html: ^0.15.1
+  # htmltopdfwidgets: ^1.0.3
+  htmltopdfwidgets:
+    git:
+      url: https://github.com/n3o2k7i8ch5/htmltopdfwidgets
+
+  implicitly_animated_reorderable_list_2: ^0.6.0
   linked_scroll_controller: ^0.2.0
   logger: ^2.0.2+1
   material_design_icons_flutter: ^7.0.7296
@@ -53,49 +57,58 @@ flutter:
     - assets/forms/
     - assets/gawedy/
     - assets/konspekty/
-    - assets/konspekty/beretowa/
-    - assets/konspekty/bibliodrama/
-    - assets/konspekty/biwak_bez_nadzoru/
-    - assets/konspekty/budowanie_kapliczki/
-    - assets/konspekty/budowanie_szopki_bozonarodzeniowej/
-    - assets/konspekty/druzynowe_mycie_w_jeziorze/
-    - assets/konspekty/ekstremalna_droga_krzyzowa/
-    - assets/konspekty/gang_potencjalnych_porywaczy/
-    - assets/konspekty/gaweda_o_swietym/
-    - assets/konspekty/ignacjanski_rachunek_sumienia/
-    - assets/konspekty/kadrowe_msze/
-    - assets/konspekty/kalambury_z_prawa_harcerskiego/
-    - assets/konspekty/kalambury_z_prawa_zucha/
-    - assets/konspekty/kilkutygodniowe_obozowanie_w_lesie/
-    - assets/konspekty/koledowanie_z_quizem_interpretacyjnym/
-    - assets/konspekty/kontrowersyjna_dyskusja/
-    - assets/konspekty/modlitwa_przed_posilkiem/
-    - assets/konspekty/musztra_i_dbalosc_o_umundurowanie/
-    - assets/konspekty/negocjowanie_koalicji_wlasnych_partii_politycznych/
-    - assets/konspekty/nocne_podkradanie/
-    - assets/konspekty/opieka_nad_roslinka/
-    - assets/konspekty/opowiedzenie_gawedy_o_autorytecie/
-    - assets/konspekty/padnij_za_zbyt_wolno_wykonana_zbiorke/
-    - assets/konspekty/pielgrzymka_druzyny/
-    - assets/konspekty/post/
-    - assets/konspekty/pozno_zyciowe_rozmowy/
-    - assets/konspekty/rowerowe_nabozenstwo_majowe/
-    - assets/konspekty/refleksja_nad_aksjomatem_ducha/
-    - assets/konspekty/rozpoczynanie_posilku_wspolnym_spiewaniem/
-    - assets/konspekty/sad_nad_postawa/
-    - assets/konspekty/savoir_vivre_urzadzen_mobilnych/
-    - assets/konspekty/spiewogranie_z_quizem_interpretacyjnym/
-    - assets/konspekty/staly_spowiednik/
-    - assets/konspekty/sznury_funkcje_stopnie/
-    - assets/konspekty/warta_nocna/
-    - assets/konspekty/wedrowka/
-    - assets/konspekty/wedrowka_bez_zasobow/
-    - assets/konspekty/wedrowka_medytacyjna/
-    - assets/konspekty/wieczorne_przeprosiny_i_podziekowania/
-    - assets/konspekty/wlasny_nagrobek/
-    - assets/konspekty/wspolna_minuta_czosnku/
-    - assets/konspekty/zagadki_matematyczno_logiczne/
-    - assets/konspekty/zakwaterowanie_pod_namiotem/
-    - assets/konspekty/zimowiskowe_apele_przed_osrodkiem/
-    - assets/konspekty/zwiad_lokalnej_spolecznosci/
+
+    - assets/konspekty/common/
+    - assets/konspekty/common/warsztaty_duchowe/
+
+    - assets/konspekty/harcerskie/
+    - assets/konspekty/harcerskie/beretowa/
+    - assets/konspekty/harcerskie/bibliodrama/
+    - assets/konspekty/harcerskie/biwak_bez_nadzoru/
+    - assets/konspekty/harcerskie/budowanie_kapliczki/
+    - assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/
+    - assets/konspekty/harcerskie/druzynowe_mycie_w_jeziorze/
+    - assets/konspekty/harcerskie/ekstremalna_droga_krzyzowa/
+    - assets/konspekty/harcerskie/gang_potencjalnych_porywaczy/
+    - assets/konspekty/harcerskie/gaweda_o_swietym/
+    - assets/konspekty/harcerskie/ignacjanski_rachunek_sumienia/
+    - assets/konspekty/harcerskie/kadrowe_msze/
+    - assets/konspekty/harcerskie/kalambury_z_prawa_harcerskiego/
+    - assets/konspekty/harcerskie/kalambury_z_prawa_zucha/
+    - assets/konspekty/harcerskie/kilkutygodniowe_obozowanie_w_lesie/
+    - assets/konspekty/harcerskie/koledowanie_z_quizem_interpretacyjnym/
+    - assets/konspekty/harcerskie/kontrowersyjna_dyskusja/
+    - assets/konspekty/harcerskie/modlitwa_przed_posilkiem/
+    - assets/konspekty/harcerskie/musztra_i_dbalosc_o_umundurowanie/
+    - assets/konspekty/harcerskie/negocjowanie_koalicji_wlasnych_partii_politycznych/
+    - assets/konspekty/harcerskie/nocne_podkradanie/
+    - assets/konspekty/harcerskie/opieka_nad_roslinka/
+    - assets/konspekty/harcerskie/opowiedzenie_gawedy_o_autorytecie/
+    - assets/konspekty/harcerskie/padnij_za_zbyt_wolno_wykonana_zbiorke/
+    - assets/konspekty/harcerskie/pielgrzymka_druzyny/
+    - assets/konspekty/harcerskie/post/
+    - assets/konspekty/harcerskie/pozno_zyciowe_rozmowy/
+    - assets/konspekty/harcerskie/rowerowe_nabozenstwo_majowe/
+    - assets/konspekty/harcerskie/refleksja_nad_aksjomatem_ducha/
+    - assets/konspekty/harcerskie/rozpoczynanie_posilku_wspolnym_spiewaniem/
+    - assets/konspekty/harcerskie/sad_nad_postawa/
+    - assets/konspekty/harcerskie/savoir_vivre_urzadzen_mobilnych/
+    - assets/konspekty/harcerskie/spiewogranie_z_quizem_interpretacyjnym/
+    - assets/konspekty/harcerskie/staly_spowiednik/
+    - assets/konspekty/harcerskie/sznury_funkcje_stopnie/
+    - assets/konspekty/harcerskie/warta_nocna/
+    - assets/konspekty/harcerskie/wedrowka/
+    - assets/konspekty/harcerskie/wedrowka_bez_zasobow/
+    - assets/konspekty/harcerskie/wedrowka_medytacyjna/
+    - assets/konspekty/harcerskie/wieczorne_przeprosiny_i_podziekowania/
+    - assets/konspekty/harcerskie/wlasny_nagrobek/
+    - assets/konspekty/harcerskie/wspolna_minuta_czosnku/
+    - assets/konspekty/harcerskie/zagadki_matematyczno_logiczne/
+    - assets/konspekty/harcerskie/zakwaterowanie_pod_namiotem/
+    - assets/konspekty/harcerskie/zimowiskowe_apele_przed_osrodkiem/
+    - assets/konspekty/harcerskie/zwiad_lokalnej_spolecznosci/
+
+    - assets/konspekty/ksztalcenie/
+    - assets/konspekty/ksztalcenie/wstep_do_wychowania_duchowego/
+
     - assets/wiersze/

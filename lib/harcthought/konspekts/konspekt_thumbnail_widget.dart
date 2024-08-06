@@ -90,10 +90,9 @@ class KonspektThumbnailWidget extends StatelessWidget{
                         Expanded(
                           child: AutoSizeText(
                             konspekt.title,
-                            style: const TextStyle(
-                              fontFamily: 'PlayfairDisplay',
+                            style: const AppTextStyle(
                               fontSize: Dimen.textSizeBig,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: weight.halfBold,
                             ),
                             maxLines: konspekt.title.split(' ').length,
                           ),

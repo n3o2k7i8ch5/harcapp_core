@@ -30,23 +30,64 @@ Widget HeaderWidget(String text, Font fontBold) => Text(
 );
 
 
-Future<List<Widget>> fromHtml({required String htmlString, required Font font, required Font fontBold, required Font fontItalic}) async =>
+Future<List<Widget>> fromHtml({
+  required String htmlString,
+  required Font font,
+  required Font fontBold,
+  required Font fontItalic,
+  required Font fontBoldItalic,
+  double? fontSize,
+}) async =>
     await HTMLToPdf().convert(
         htmlString
-            .replaceAll('<b>', '')
-            .replaceAll('</b>', '')
-            .replaceAll('<br>', '\n')
+            // .replaceAll('<b>', '')
+            // .replaceAll('</b>', '')
+            // .replaceAll('<br>', '\n')
             .replaceAll('&nbsp', '&zwnj;'),
         defaultFont: font,
         tagStyle: HtmlTagStyle(
-            boldStyle: TextStyle(font: fontBold, fontSize: defTextSize),
-            italicStyle: TextStyle(font: fontItalic, fontSize: defTextSize),
-            listIndexStyle: TextStyle(font: font, fontSize: defTextSize)
+            paragraphStyle: TextStyle(
+                font: font,
+                fontBold: fontBold,
+                fontItalic: fontItalic,
+                fontBoldItalic: fontBoldItalic,
+                fontSize: fontSize??defTextSize
+            ),
+            boldStyle: TextStyle(
+                font: fontBold,
+                fontBold: fontBold,
+                fontSize: fontSize??defTextSize
+            ),
+            italicStyle: TextStyle(
+                font: fontItalic,
+                fontItalic: fontItalic,
+                fontSize: fontSize??defTextSize
+            ),
+            boldItalicStyle: TextStyle(
+                font: fontBoldItalic,
+                fontBoldItalic: fontBoldItalic,
+                fontSize: fontSize??defTextSize
+            ),
+            listIndexStyle: TextStyle(
+                font: font,
+                fontSize: fontSize??defTextSize
+            ),
+            bulletListDotSize: 4.0,
+            bulletListIconSize: 16.0,
+            listItemIndicatorPadding: EdgeInsets.symmetric(horizontal: 6.0),
+            listItemVerticalSeparatorSize: 8.0
         )
     );
 
 
-List<Widget> StringListWidget(List<String> data, Font font, {double? separatorHeight}){
+Future<List<Widget>> StringListWidget(
+    List<String> data,
+    Font font,
+    Font fontBold,
+    Font fontItalic,
+    Font fontBoldItalic,
+    {double? separatorHeight}
+    ) async {
 
   List<Widget> widgets = [];
 
@@ -67,10 +108,15 @@ List<Widget> StringListWidget(List<String> data, Font font, {double? separatorHe
               ),
 
               Expanded(
-                child: Text(
-                  data[i],
-                  style: TextStyle(font: font, fontSize: defTextSize),
-                ),
+                child: Column(
+                  children: await fromHtml(
+                  htmlString: data[i],
+                  font: font,
+                  fontBold: fontBold,
+                  fontItalic: fontItalic,
+                  fontBoldItalic: fontBoldItalic,
+                )
+              ),
               )
             ]
         )

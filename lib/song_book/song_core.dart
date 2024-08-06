@@ -115,7 +115,8 @@ abstract class SongCore{
     for (int i = 0; i < lines.length; i++)
       if (lines[i]
           .replaceAll(RegExp(r"\s+\b|\b\s"), '')
-          .length == 0)
+          .length == 0
+      )
         result.add(count);
       else
         result.add(++count);
@@ -132,7 +133,8 @@ abstract class SongCore{
     for (int i = 0; i < lines.length; i++)
       if (lines[i]
           .replaceAll(RegExp(r"\s+\b|\b\s"), '')
-          .length == 0)
+          .length == 0
+      )
         result += '\n';
       else
         result += '\n${++count}';
@@ -142,9 +144,7 @@ abstract class SongCore{
     return result;
   }
 
-  String generateFileName({required bool withPerformer}){
-
-    String _title = remPolChars(title).trim()
+  static String filenameFromTitle(String title) => remPolChars(title).trim()
         .replaceAll("  ", " ")
         .replaceAll('-', '_')
         .replaceAll(' ', '_')
@@ -158,6 +158,10 @@ abstract class SongCore{
         .replaceAll('„', '')
         .replaceAll('”', '')
         .replaceAll("'", '');
+
+  String generateFileName({required bool withPerformer}){
+
+    String _title = filenameFromTitle(title);
 
     if(!withPerformer || performers.isEmpty || performers[0].isEmpty)
       return _title;

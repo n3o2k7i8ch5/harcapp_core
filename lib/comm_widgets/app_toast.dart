@@ -16,10 +16,14 @@ ToastFuture showAppToast(
     Color? textColor,
     Duration duration = const Duration(seconds: 3),
     String? buttonText,
+    bool bottom = true,
+    bool handleTouch = true,
     void Function()? onButtonPressed,
 }) => showToastWidget(
     Padding(
-      padding: const EdgeInsets.only(
+      padding:
+      const EdgeInsets.only(
+        top: 12.0,
         right: 12.0,
         left: 12.0,
         bottom: 46.0,
@@ -75,12 +79,7 @@ ToastFuture showAppToast(
                           padding: EdgeInsets.all(Dimen.defMarg),
                           text: buttonText,
                           onTap: (){
-                            showToastWidget(
-                              Container(),
-                              context: context,
-                              duration: Duration.zero,
-                              dismissOtherToast: true
-                            );
+                            dismissAllToast(showAnim: true);
                             onButtonPressed.call();
                           }
                       )
@@ -91,8 +90,8 @@ ToastFuture showAppToast(
         ),
       )
     ),
-    handleTouch: true,
-    position: ToastPosition.bottom,
+    position: bottom?ToastPosition.bottom:ToastPosition.top,
+    handleTouch: handleTouch,
     duration: duration,
     dismissOtherToast: true,
 );

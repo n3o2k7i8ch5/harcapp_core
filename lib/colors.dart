@@ -24,6 +24,7 @@ class AppColors{
   static const Color metoZhpH = Color.fromARGB(255, 175, 202, 11);
   static const Color metoZhpHS = Color.fromARGB(255, 25, 64, 147);
   static const Color metoZhpW = Color.fromARGB(255, 227, 6, 19);
+  static const Color metoZhpK = Color.fromARGB(255, 109, 11, 248);
 
   static const Color rankPwdColor = Color.fromARGB(255, 50, 40, 255);
   static const Color rankPhmColor = Color.fromARGB(255, 30, 190, 20);

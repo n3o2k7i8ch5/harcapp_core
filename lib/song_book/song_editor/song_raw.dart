@@ -125,7 +125,7 @@ class SongRaw extends SongCore{
     if (respMap.containsKey(SongCore.PARAM_REFREN)) {
       hasRefren = true;
       Map refrenMap = respMap[SongCore.PARAM_REFREN];
-      refrenPart = SongPart.from(SongElement.from(refrenMap['text'], refrenMap['chords'], true));
+      refrenPart = SongPart.from(SongElement(refrenMap['text'], refrenMap['chords'], true));
     }else{
       refrenPart = SongPart.empty(isRefrenTemplate: true);
     }
@@ -140,7 +140,7 @@ class SongRaw extends SongCore{
         for (int i = 0; i < partMap['refren']; i++)
           songParts.add(SongPart.from(refrenPart.element));
       else
-        songParts.add(SongPart.from(SongElement.from(partMap['text'], partMap['chords'], partMap['shift'])));
+        songParts.add(SongPart.from(SongElement(partMap['text'], partMap['chords'], partMap['shift'])));
 
     }
 
@@ -363,7 +363,7 @@ class SongPart{
   bool isError;
 
   String getText({bool withTabs = false}) => _songElement.getText(withTabs: withTabs);
-  void setText(String text) => _songElement.setText(text);
+  void setText(String text) => _songElement.text = text;
 
   SongElement get element => _songElement;
 

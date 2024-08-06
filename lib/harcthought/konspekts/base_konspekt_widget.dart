@@ -161,6 +161,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final bool shrinkWrap;
   final Widget? leading;
   final bool oneLineSummary;
+  final bool oneLineMultiDuration;
 
   const BaseKonspektWidget(
       this.konspekt,
@@ -172,7 +173,8 @@ class BaseKonspektWidget extends StatefulWidget{
         this.physics = const BouncingScrollPhysics(),
         this.shrinkWrap = false,
         this.leading,
-        this.oneLineSummary = true,
+        this.oneLineSummary = false,
+        this.oneLineMultiDuration = false,
       });
 
   @override
@@ -298,7 +300,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               const SizedBox(height: Dimen.sideMarg),
 
-              const TitleShortcutRowWidget(title: 'Metodyki', textAlign: TextAlign.left),
+              TitleShortcutRowWidget(
+                  title: konspekt.category == KonspektCategory.harcerskie?
+                  'Metodyki':
+                  'Poziom',
+                  textAlign: TextAlign.left),
 
               SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -323,6 +329,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
                     if(konspekt.metos.contains(Meto.wedro))
                       const MetoTile(meto: Meto.wedro, iconSize: 42.0),
+                    if(konspekt.metos.contains(Meto.wedro))
+                      const SizedBox(width: Dimen.defMarg),
+
+                    if(konspekt.metos.contains(Meto.kadra))
+                      const MetoTile(meto: Meto.kadra, iconSize: 42.0),
 
                   ],
                 ),
@@ -365,11 +376,28 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               if(konspekt.duration != null)
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const IntrinsicWidth(
                       child: TitleShortcutRowWidget(title: 'Czas: ', textAlign: TextAlign.left),
                     ),
-                    Text(durationToString(konspekt.duration), style: const AppTextStyle(fontSize: Dimen.textSizeAppBar))
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: (TitleShortcutRowWidget.height - Dimen.textSizeAppBar) / 2
+                      ),
+                      child: konspekt.duration == konspekt.requiredDuration?
+                      Text(
+                          durationToString(konspekt.duration),
+                          style: const AppTextStyle(fontSize: Dimen.textSizeAppBar)
+                      ):
+                      Text(
+                          'od ${durationToString(konspekt.requiredDuration)}'
+                              '${widget.oneLineMultiDuration?' ':'\n'}'
+                              'do ${durationToString(konspekt.duration)}',
+                          style: const AppTextStyle(fontSize: Dimen.textSizeAppBar)
+                      ),
+                    )
+
                   ],
                 ),
 

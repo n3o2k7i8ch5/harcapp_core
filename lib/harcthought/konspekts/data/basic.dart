@@ -7,7 +7,7 @@ import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'konspekt.dart';
+import '../konspekt.dart';
 
 
 const String aimPraktykaModlitwy = 'Praktyka modlitwy przez uczestników';
@@ -32,13 +32,14 @@ const String aimSzacunekDlaSkutecznegoDzialania = 'Kształtowanie u uczestników
 
 
 
-List<Konspekt> allKonspekts = [
+List<Konspekt> allBasicKonspekts = [
 
 
   // Done
   const Konspekt(
       name: 'beretowa',
       title: 'Beretówa',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: null,
@@ -157,6 +158,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'bibliodrama',
       title: 'Bibliodrama',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -337,6 +339,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'biwak_bez_nadzoru',
       title: 'Biwak bez nadzoru',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.projekt,
       spheres: {
         KonspektSphere.relacje: null,
@@ -377,6 +380,7 @@ List<Konspekt> allKonspekts = [
   Konspekt(
       name: 'budowanie_kapliczki',
       title: 'Budowanie kapliczki',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: const KonspektSphereDetails(
@@ -482,6 +486,7 @@ List<Konspekt> allKonspekts = [
   Konspekt(
       name: 'budowanie_szopki_bozonarodzeniowej',
       title: 'Budowanie szopki bożonarodzeniowej',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: const KonspektSphereDetails(
@@ -583,6 +588,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'druzynowe_mycie_w_jeziorze',
       title: 'Drużynowe mycie w jeziorze',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.cialo: null,
@@ -609,6 +615,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'ekstremalna_droga_krzyzowa',
       title: 'Ekstremalna Droga Krzyżowa',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -637,6 +644,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
     name: 'gang_potencjalnych_porywaczy',
     title: 'Gang potencjalnych porywaczy',
+    category: KonspektCategory.harcerskie,
     type: KonspektType.zajecia,
     spheres: {
       KonspektSphere.umysl: null,
@@ -712,6 +720,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'gaweda_o_swietym',
       title: 'Gawęda o świętym',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -739,6 +748,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'ignacjanski_rachunek_sumienia',
       title: 'Ignacjański rachunek sumienia',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.emocje: null,
@@ -821,6 +831,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'kadrowe_msze',
       title: 'Kadrowe msze',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -849,6 +860,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'kalambury_z_prawa_harcerskiego',
       title: 'Kalambury z Prawa Harcerskiego',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.umysl: null,
@@ -875,6 +887,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'kalambury_z_prawa_zucha',
       title: 'Kalambury z Prawa Zucha',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.umysl: null,
@@ -901,6 +914,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'kilkutygodniowe_obozowanie_w_lesie',
       title: 'Kilkutygodniowe obozowanie w lesie',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.projekt,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -937,6 +951,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'koledowanie_z_quizem_interpretacyjnym',
       title: 'Kolędowanie z quizem interpretacyjnym',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -964,6 +979,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'kontrowersyjna_dyskusja',
       title: 'Kontrowersyjna dyskusja',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.umysl: null,
@@ -1007,6 +1023,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'modlitwa_przed_posilkiem',
       title: 'Modlitwa przed posiłkiem',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -1044,6 +1061,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'musztra_i_dbalosc_o_umundurowanie',
       title: 'Musztra i dbałość o umundurowanie',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -1072,6 +1090,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'negocjowanie_koalicji_wlasnych_partii_politycznych',
       title: 'Negocjowanie koalicji własnych partii politycznych',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.umysl: null,
@@ -1198,6 +1217,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
     name: 'nocne_podkradanie',
     title: 'Nocne podkradanie',
+    category: KonspektCategory.harcerskie,
     type: KonspektType.zwyczaj,
     spheres: {
       KonspektSphere.duch: KonspektSphereDetails(
@@ -1224,6 +1244,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'opieka_nad_roslinka',
       title: 'Opieka nad roślinką',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.projekt,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -1252,6 +1273,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'opowiedzenie_gawedy_o_autorytecie',
       title: 'Opowiedzenie gawędy o autorytecie',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -1279,6 +1301,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'padnij_za_zbyt_wolno_wykonana_zbiorke',
       title: '“Padnij” za zbyt wolną zbiórkę',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -1306,6 +1329,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'pielgrzymka_druzyny',
       title: 'Pielgrzymka drużyny',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: null,
@@ -1337,6 +1361,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'post',
       title: 'Post',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -1360,6 +1385,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'pozno_zyciowe_rozmowy',
       title: 'Późno-życiowe rozmowy',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -1387,6 +1413,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
     name: 'refleksja_nad_aksjomatem_ducha',
     title: 'Refleksja nad aksjomatem ducha',
+    category: KonspektCategory.harcerskie,
     type: KonspektType.zajecia,
     spheres: {
       KonspektSphere.duch: KonspektSphereDetails(
@@ -1438,6 +1465,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'rowerowe_nabozenstwo_majowe',
       title: 'Rowerowe nabożeństwo majowe',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: null,
@@ -1464,6 +1492,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'rozpoczynanie_posilku_wspolnym_spiewaniem',
       title: 'Rozpoczynanie posiłku wspólnym śpiewaniem',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -1493,6 +1522,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'sad_nad_postawa',
       title: 'Sąd nad postawą',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.umysl: null,
@@ -1529,6 +1559,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'savoir_vivre_urzadzen_mobilnych',
       title: 'Savoir-vivre urządzeń mobilnych',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.umysl: null,
@@ -1833,6 +1864,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
     name: 'spiewogranie_z_quizem_interpretacyjnym',
     title: 'Śpiewogranie z quizem interpretacyjnym',
+    category: KonspektCategory.harcerskie,
     type: KonspektType.zajecia,
     spheres: {
       KonspektSphere.duch: KonspektSphereDetails(
@@ -1895,6 +1927,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'staly_spowiednik',
       title: 'Stały spowiednik',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -1917,6 +1950,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
     name: 'sznury_funkcje_stopnie',
     title: 'Sznury, funkcje, stopnie ZHP',
+    category: KonspektCategory.harcerskie,
     type: KonspektType.zajecia,
     spheres: {
       KonspektSphere.umysl: null,
@@ -2120,6 +2154,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'warta_nocna',
       title: 'Warta nocna',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -2144,6 +2179,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'wedrowka',
       title: 'Wędrówka',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: null,
@@ -2172,6 +2208,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'wedrowka_bez_zasobow',
       title: 'Wędrówka bez zasobów',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: null,
@@ -2200,6 +2237,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'wedrowka_medytacyjna',
       title: 'Wędrówka medytacyjna',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: null,
@@ -2222,6 +2260,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'wieczorne_przeprosiny_i_podziekowania',
       title: 'Wieczorne przeprosiny i podziękowania',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -2252,6 +2291,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'wlasny_nagrobek',
       title: 'Własny nagrobek',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -2340,6 +2380,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'wspolna_minuta_czosnku',
       title: 'Wspólna minuta czosnku',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: null,
@@ -2371,6 +2412,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'zagadki_matematyczno_logiczne',
       title: 'Zagadki matematno-logiczne',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -2386,23 +2428,82 @@ List<Konspekt> allKonspekts = [
       aims: [
         'Ksztaltowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
       ],
-      description: '<p style="text-align:justify;">Prowadzący formę regularnie (np. codziennie na apelu na obozie) przedstawia uczestnikom jedną zagadkę matematyczną, która jest w zasięgu ich możliwości intelektualnych, np:</p>'
+      description: '<p style="text-align:justify;">'
+          'Prowadzący formę regularnie (np. codziennie na apelu na obozie) przedstawia uczestnikom jedną zagadkę matematyczną, która jest w zasięgu ich możliwości intelektualnych, np:'
+          '</p>'
+
           '<ul>'
-          '<li><p style="text-align:justify;"><i>“O magicznym kamieniu wiadomo tylko tyle, że waży on kilogram oraz pół magicznego kamienia. Ile kilogramów waży magiczny kamień?”.</i></p></li>'
-          '<li><p style="text-align:justify;"><i>Pewien brat mówi o swoim młodszym bracie: „Dwa lata temu byłem trzy razy starszy od mojego brata. Za trzy lata będę dwa razy starszy od mojego brata”. Ile mają teraz lat?</i></p></li>'
-          '<li><p style="text-align:justify;"><i>Jeśli półtora kury zniesie półtora jajka w ciągu półtora dnia, ile jaj zniesie pół tuzina kur w ciągu pół tuzina dni?</i></p></li>'
+
           '<li>'
-          '<p style="text-align:justify;"><i>Mamy kłódkę zamykaną na 3-cyfrowy szyfr. Musimy znaleźć jej kod. O kodzie wiadomo tylko, że:</i></p>'
-          '<ul>'
-          '<li><p style="text-align:justify;"><i>276 – jedna cyfra jest poprawna, ale w niewłaściwym miejscu.</i></p></li>'
-          '<li><p style="text-align:justify;"><i>387 – żadna cyfra nie jest właściwa.</i></p></li>'
-          '<li><p style="text-align:justify;"><i>368 – jedna cyfra jest właściwa i znajduje się we właściwym miejscu.</i></p></li>'
-          '<li><p style="text-align:justify;"><i>471 – dwie liczby są poprawne, ale znajdują się w niewłaściwym miejscu.</i></p></li>'
-          '</ul>'
+          '<p style="text-align:justify;">'
+          '<i>“O magicznym kamieniu wiadomo tylko tyle, że waży on kilogram oraz pół magicznego kamienia.'
+          '<br>Ile kilogramów waży magiczny kamień?”.</i>'
+          '</p>'
           '</li>'
-          '<li><p style="text-align:justify;"><i>Sześcienna kostka została rzucona jeden raz. Jakie jest prawdopodobieństwo. że wyrzucona cyfra będzie parzysta i większa niż 2?</i></p></li>'
+
+          '<li>'
+          '<p style="text-align:justify;">'
+          '<i>Pewien brat mówi o swoim młodszym bracie: „Dwa lata temu byłem trzy razy starszy od mojego brata. Za trzy lata będę dwa razy starszy od mojego brata”.'
+          '<br>Ile mają teraz lat?</i>'
+          '</p>'
+          '</li>'
+
+          '<li>'
+          '<p style="text-align:justify;">'
+          '<i>Dlaczego dźwięk nadjeżdżającego pociągu szybciej niesie się po torach niż w powietrzu?</i>'
+          '</p>'
+          '</li>'
+
+          '<li>'
+          '<p style="text-align:justify;">'
+          '<i>Jeśli półtora kury zniesie półtora jajka w ciągu półtora dnia, ile jaj zniesie pół tuzina kur w ciągu pół tuzina dni?</i>'
+          '</p>'
+          '</li>'
+
+          '<li>'
+          '<p style="text-align:justify;">'
+          '<i>Mamy kłódkę zamykaną na 3-cyfrowy szyfr. Musimy znaleźć jej kod. O kodzie wiadomo tylko, że:</i>'
+          '</p>'
+          '<ul>'
+
+          '<li>'
+          '<p style="text-align:justify;">'
+          '<i>276 – jedna cyfra jest poprawna, ale w niewłaściwym miejscu.</i>'
+          '</p>'
+          '</li>'
+
+          '<li>'
+          '<p style="text-align:justify;">'
+          '<i>387 – żadna cyfra nie jest właściwa.</i>'
+          '</p>'
+          '</li>'
+
+          '<li>'
+          '<p style="text-align:justify;">'
+          '<i>368 – jedna cyfra jest właściwa i znajduje się we właściwym miejscu.</i>'
+          '</p>'
+          '</li>'
+
+          '<li>'
+          '<p style="text-align:justify;">'
+          '<i>471 – dwie liczby są poprawne, ale znajdują się w niewłaściwym miejscu.</i>'
+          '</p>'
+          '</li>'
+
           '</ul>'
-          '<p style="text-align:justify;">Forma ta jest przykładem zjawiska wpływu sfer funkcjonalnych na sferę ducha przy udziale wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..</p>'
+
+          '</li>'
+
+          '<li>'
+          '<p style="text-align:justify;"><i>Sześcienna kostka została rzucona jeden raz.'
+          '<br>Jakie jest prawdopodobieństwo, że wyrzucona cyfra będzie parzysta i większa niż 2?</i></p>'
+          '</li>'
+
+          '</ul>'
+
+          '<p style="text-align:justify;">'
+          'Forma ta jest przykładem zjawiska wpływu sfer funkcjonalnych na sferę ducha przy udziale wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..'
+          '</p>',
   ),
 
 
@@ -2410,6 +2511,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'zakwaterowanie_pod_namiotem',
       title: 'Zakwaterowanie pod namiotem',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -2432,6 +2534,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'zimowiskowe_apele_przed_osrodkiem',
       title: 'Zimowiskowe apele przed ośrodkiem',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
@@ -2455,6 +2558,7 @@ List<Konspekt> allKonspekts = [
   const Konspekt(
       name: 'zwiad_lokalnej_spolecznosci',
       title: 'Zwiad lokalnej społeczności',
+      category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(

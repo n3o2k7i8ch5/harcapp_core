@@ -5,7 +5,8 @@ enum Meto{
   zuch,
   harc,
   hs,
-  wedro;
+  wedro,
+  kadra;
 
   String get displayName{
     switch(this){
@@ -13,6 +14,7 @@ enum Meto{
       case Meto.harc: return 'Harcerze';
       case Meto.hs: return 'Harcerze starsi';
       case Meto.wedro: return 'Wędrownicy';
+      case Meto.kadra: return 'Kadra';
     }
   }
 
@@ -22,6 +24,7 @@ enum Meto{
       case Meto.harc: return 'Harc';
       case Meto.hs: return 'HS';
       case Meto.wedro: return 'Wędro';
+      case Meto.kadra: return 'Kadra';
     }
   }
 
@@ -31,6 +34,7 @@ enum Meto{
       case Meto.harc: return 'H';
       case Meto.hs: return 'HS';
       case Meto.wedro: return 'W';
+      case Meto.kadra: return 'K';
     }
   }
 
@@ -40,6 +44,7 @@ enum Meto{
       case Meto.harc: return '10-12 lat';
       case Meto.hs: return '13-15 lat';
       case Meto.wedro: return '16-21 lat';
+      case Meto.kadra: return 'instruktorzy';
     }
   }
 
@@ -49,6 +54,7 @@ enum Meto{
       case Meto.harc: return AppColors.metoZhpH;
       case Meto.hs: return AppColors.metoZhpHS;
       case Meto.wedro: return AppColors.metoZhpW;
+      case Meto.kadra: return AppColors.metoZhpK;
     }
   }
 
@@ -58,7 +64,10 @@ enum Meto{
       case Meto.harc: return 'packages/harcapp_core/assets/images/meto/h.svg';
       case Meto.hs: return 'packages/harcapp_core/assets/images/meto/hs.svg';
       case Meto.wedro: return 'packages/harcapp_core/assets/images/meto/w.svg';
+      case Meto.kadra: return 'packages/harcapp_core/assets/images/meto/kadra.svg';
     }
   }
+
+
 
 }

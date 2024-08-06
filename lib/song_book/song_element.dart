@@ -3,40 +3,32 @@ import 'package:harcapp_core/comm_classes/primitive_wrapper.dart';
 import 'song_core.dart';
 
 class SongElement{
-  final PrimitiveWrapper<String> _text;
-  final PrimitiveWrapper<String> _chords;
-  final PrimitiveWrapper<bool> _shift;
+  String _text;
+  String _chords;
+  bool _shift;
 
-  const SongElement(this._text, this._chords, this._shift);
+  SongElement(this._text, this._chords, this._shift);
 
-  static SongElement empty({bool isRefrenTemplate=false}){
-    return SongElement(PrimitiveWrapper(''), PrimitiveWrapper(''), PrimitiveWrapper(isRefrenTemplate));
-  }
+  static SongElement empty({bool isRefrenTemplate=false}) =>
+      SongElement('', '', isRefrenTemplate);
 
-  static SongElement from(String text, String chords, bool shift){
-    return SongElement(PrimitiveWrapper(text), PrimitiveWrapper(chords), PrimitiveWrapper(shift));
-  }
-
-  void setText(String text) => this._text.set(text);
+  set text(String value) => _text = value;
 
   String getText({bool withTabs=false}){
     if(withTabs)
-      return SongCore.TAB_CHAR + _text.get().replaceAll('\n', '\n${SongCore.TAB_CHAR}');
-    else
-      return _text.get();
+      return SongCore.TAB_CHAR + _text.replaceAll('\n', '\n${SongCore.TAB_CHAR}');
+   return _text;
   }
 
-  bool isEmpty(){
-    return _text.get().replaceAll('\n', '').replaceAll(' ', '').length == 0;
-  }
+  bool isEmpty() => _text.replaceAll('\n', '').replaceAll(' ', '').isEmpty;
 
-  SongElement copy(){
-    return SongElement.from(_text.get(), _chords.get(), _shift.get());
-  }
+  SongElement copy() =>
+    SongElement(_text, _chords, _shift);
 
-  set chords(String value) => this._chords.set(value);
-  String get chords => _chords.get();
+  set chords(String value) => this._chords = value;
+  String get chords => _chords;
 
-  set shift(bool value) => this._shift.set(value);
-  bool get shift => _shift.get();
+  set shift(bool value) => _shift = value;
+  bool get shift => _shift;
+
 }

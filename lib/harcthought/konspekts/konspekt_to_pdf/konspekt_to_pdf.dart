@@ -154,6 +154,11 @@ Future<Widget> MetoListWidget(Konspekt konspekt, Font fontBold) async => Row(
 
     if(konspekt.metos.contains(Meto.wedro))
       await MetoTile(Meto.wedro, fontBold, iconSize: 42.0),
+    if(konspekt.metos.contains(Meto.wedro))
+      SizedBox(width: elementSmallSeparator),
+
+    if(konspekt.metos.contains(Meto.kadra))
+      await MetoTile(Meto.kadra, fontBold, iconSize: 42.0),
 
   ],
 );
@@ -323,12 +328,15 @@ Widget DurationWidget(Konspekt konspekt, Font font, Font fontBold){
         SizedBox(height: elementBigSeparator),
 
         Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HeaderWidget('Czas: ', fontBold),
-              Text(
-                durationToString(konspekt.duration!),
-                style: TextStyle(font: font, fontSize: headerTextSize),
-              ),
+
+              if(konspekt.duration == konspekt.requiredDuration)
+                Text(durationToString(konspekt.duration), style: TextStyle(font: font, fontSize: headerTextSize))
+              else
+                Text('od ${durationToString(konspekt.requiredDuration)} do ${durationToString(konspekt.duration)}', style: TextStyle(font: font, fontSize: headerTextSize))
+
             ]
         )
 
@@ -337,7 +345,13 @@ Widget DurationWidget(Konspekt konspekt, Font font, Font fontBold){
 
 }
 
-List<Widget> AimsWidget(Konspekt konspekt, Font font, Font fontBold){
+Future<List<Widget>> AimsWidget(
+    Konspekt konspekt,
+    Font font,
+    Font fontBold,
+    Font fontItalic,
+    Font fontBoldItalic,
+) async {
 
   if(konspekt.aims.isEmpty)
     return [];
@@ -352,7 +366,15 @@ List<Widget> AimsWidget(Konspekt konspekt, Font font, Font fontBold){
 
   ];
 
-  widgets.addAll(StringListWidget(konspekt.aims, font));
+  widgets.addAll(
+      await StringListWidget(
+      konspekt.aims,
+      font,
+      fontBold,
+      fontItalic,
+      fontBoldItalic
+  )
+  );
 
   return widgets;
 
@@ -522,7 +544,13 @@ List<Widget> MaterialListWidget(Konspekt konspekt, Font font, Font fontBold, Fon
 
 }
 
-Future<List<Widget>> IntroWidget(Konspekt konspekt, Font font, Font fontBold, Font fontItalic) async {
+Future<List<Widget>> IntroWidget(
+    Konspekt konspekt,
+    Font font,
+    Font fontBold,
+    Font fontItalic,
+    Font fontBoldItalic,
+) async {
 
   if(konspekt.intro == null)
     return [];
@@ -541,8 +569,9 @@ Future<List<Widget>> IntroWidget(Konspekt konspekt, Font font, Font fontBold, Fo
       await fromHtml(
         htmlString: konspekt.intro!,
         font: font,
-        fontItalic: fontItalic,
         fontBold: fontBold,
+        fontItalic: fontItalic,
+        fontBoldItalic: fontBoldItalic
       )
   );
 
@@ -550,7 +579,13 @@ Future<List<Widget>> IntroWidget(Konspekt konspekt, Font font, Font fontBold, Fo
 
 }
 
-Future<List<Widget>> DescriptionWidget(Konspekt konspekt, Font font, Font fontBold, Font fontItalic) async {
+Future<List<Widget>> DescriptionWidget(
+    Konspekt konspekt,
+    Font font,
+    Font fontBold,
+    Font fontItalic,
+    Font fontBoldItalic
+) async {
 
   if(konspekt.description == null)
     return [];
@@ -570,7 +605,8 @@ Future<List<Widget>> DescriptionWidget(Konspekt konspekt, Font font, Font fontBo
           htmlString: konspekt.description!,
           font: font,
           fontBold: fontBold,
-          fontItalic: fontItalic
+          fontItalic: fontItalic,
+          fontBoldItalic: fontBoldItalic
       )
   );
 
@@ -578,7 +614,7 @@ Future<List<Widget>> DescriptionWidget(Konspekt konspekt, Font font, Font fontBo
 
 }
 
-Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fontBold, Font fontItalic) async {
+Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fontBold, Font fontItalic, Font fontBoldItalic,) async {
   double numberFontSize = 16.0;
   double numberCircleSize = 2*elementSmallSeparator + numberFontSize;
 
@@ -657,24 +693,74 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
     ),
   ];
 
-  List<Widget> htmlWidgets = await fromHtml(htmlString: step.content, font: font, fontBold: fontBold, fontItalic: fontItalic);
+  if(step.aims != null)
+    widgets.add(
+        Padding(
+            padding: EdgeInsets.only(
+              top: .5*elementBigSeparator,
+              left: numberCircleSize + .5*elementBigSeparator,
+            ),
+            child: ClipRRect(
+                horizontalRadius: AppCard.defRadius,
+                verticalRadius: AppCard.defRadius,
+                child: Container(
+                    color: cardColor,
+                    child: Padding(
+                        padding: EdgeInsets.all(2*elementSmallSeparator),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
 
-  widgets.addAll(
-      htmlWidgets.map(
-              (widget) => Padding(
-              padding: EdgeInsets.only(
-                  top: .5*elementBigSeparator,
-                  left: numberCircleSize + .5*elementBigSeparator
-              ),
-              child: widget
-          )
-      ).toList()
+                              Text(
+                                  'Cele kroku',
+                                  style: TextStyle(
+                                    font: fontBold,
+                                    fontSize: defTextSize,
+                                  )
+                              ),
+
+                              SizedBox(height: elementSmallSeparator),
+
+                              ...await StringListWidget(
+                                  step.aims!,
+                                  font,
+                                  fontBold,
+                                  fontItalic,
+                                  fontBoldItalic
+                              ),
+
+                            ]
+                        )
+                    )
+                )
+            )
+        )
+    );
+
+  List<Widget> htmlWidgets = await fromHtml(
+      htmlString: step.content??step.contentBuilder!(isDark: false),
+      font: font,
+      fontBold: fontBold,
+      fontItalic: fontItalic,
+      fontBoldItalic: fontBoldItalic
   );
+
+  widgets.add(SizedBox(height: .5*elementBigSeparator));
+
+  for(Widget widget in htmlWidgets)
+    widgets.add(
+        Padding(
+            padding: EdgeInsets.only(
+                left: numberCircleSize + .5*elementBigSeparator
+            ),
+            child: widget
+        )
+    );
 
   return widgets;
 }
 
-Future<List<Widget>> StepListWidget(Konspekt konspekt, Font font, Font fontBold, Font fontItalic) async {
+Future<List<Widget>> StepListWidget(Konspekt konspekt, Font font, Font fontBold, Font fontItalic, Font fontBoldItalic) async {
 
   if(konspekt.steps == null)
     return [];
@@ -690,7 +776,7 @@ Future<List<Widget>> StepListWidget(Konspekt konspekt, Font font, Font fontBold,
   ];
 
   for(int i=0; i<konspekt.steps!.length; i++) {
-    stepWidgets.addAll(await StepWidget(konspekt.steps![i], i, font, fontBold, fontItalic));
+    stepWidgets.addAll(await StepWidget(konspekt.steps![i], i, font, fontBold, fontItalic, fontBoldItalic));
     if(i<konspekt.steps!.length - 1)
       stepWidgets.add(SizedBox(height: 1.5*elementBigSeparator));
   }
@@ -699,7 +785,13 @@ Future<List<Widget>> StepListWidget(Konspekt konspekt, Font font, Font fontBold,
 
 }
 
-List<Widget> HowToFailWidget(Konspekt konspekt, Font font, Font fontBold){
+Future<List<Widget>> HowToFailWidget(
+    Konspekt konspekt,
+    Font font,
+    Font fontBold,
+    Font fontItalic,
+    Font fontBoldItalic,
+) async {
 
   if(konspekt.howToFail == null)
     return [];
@@ -714,7 +806,15 @@ List<Widget> HowToFailWidget(Konspekt konspekt, Font font, Font fontBold){
 
   ];
 
-  widgets.addAll(StringListWidget(konspekt.howToFail!, font));
+  widgets.addAll(
+      await StringListWidget(
+        konspekt.howToFail!,
+        font,
+        fontBold,
+        fontItalic,
+        fontBoldItalic
+      )
+  );
 
   return widgets;
 
@@ -758,6 +858,7 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
   final font = await PdfGoogleFonts.latoRegular();
   final fontItalic = await PdfGoogleFonts.latoItalic();
   final fontBold = await PdfGoogleFonts.latoBold();
+  final fontBoldItalic = await PdfGoogleFonts.latoBoldItalic();
 
   List<Widget> multiPage =  [];
 
@@ -782,17 +883,17 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
 
   multiPage.add(DurationWidget(konspekt, font, fontBold));
 
-  multiPage.addAll(AimsWidget(konspekt, font, fontBold));
+  multiPage.addAll(await AimsWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
 
   multiPage.addAll(MaterialListWidget(konspekt, font, fontBold, fontItalic));
 
-  multiPage.addAll(await IntroWidget(konspekt, font, fontBold, fontItalic));
+  multiPage.addAll(await IntroWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
 
-  multiPage.addAll(await DescriptionWidget(konspekt, font, fontBold, fontItalic));
+  multiPage.addAll(await DescriptionWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
 
-  multiPage.addAll(await StepListWidget(konspekt, font, fontBold, fontItalic));
+  multiPage.addAll(await StepListWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
 
-  multiPage.addAll(HowToFailWidget(konspekt, font, fontBold));
+  multiPage.addAll(await HowToFailWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
 
   ByteData fontByteData = await rootBundle.load('packages/material_design_icons_flutter/lib/fonts/materialdesignicons-webfont.ttf');
 
@@ -810,6 +911,7 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
             child: Text(
               'Strona ${context.pageNumber} z ${context.pagesCount}',
               style: TextStyle(
+                font: font,
                 fontSize: defTextSize,
                 color: PdfColors.grey,
               ),
