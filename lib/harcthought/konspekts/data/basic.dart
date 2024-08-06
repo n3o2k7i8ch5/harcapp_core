@@ -22,7 +22,7 @@ const String aimHartDuchaWedrowanie = 'Hartowanie uczestników hartu ducha przez
 const String aimHartDuchaZimno = 'Kształtowanie u uczestników hartu ducha przez wychodzenie z komfortu termicznego';
 const String aimPostawaOdpowiedzialnosciZaCzynny = 'Kształtowanie u uczestników postawy odpowiedzialności za swoje czyny i decyzje';
 const String aimWlasnaSprawczosc = 'Kształtowanie u uczestników wiary w swoją sprawczość';
-const String aimOtwartoscNaInterakcje = 'Ksztaltowanie u uczestników postawy otwartości na interakcję z innymi ludźmi';
+const String aimOtwartoscNaInterakcje = 'Kształtowanie u uczestników postawy otwartości na interakcję z innymi ludźmi';
 
 
 const String aimPostawaWspolpracy = 'Kształtowanie u uczestników postawy współpracy';
@@ -1373,9 +1373,9 @@ List<Konspekt> allBasicKonspekts = [
       coverAuthor: 'Daniel Iwanicki',
       author: DANIEL_IWANICKI,
       aims: [
-        'Ksztaltowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
+        'Kształtowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
       ],
-      summary: 'Uczestnicy muszą podzielić między siebie piracki łup. Po kolei proponują podział, nad którym wszyscy głosują. Jeśli głosowanie nie przejdzie, proponujący wylatuje za burtę i propozycję podziału wysuwa kolejny z uczesyników.',
+      summary: 'Uczestnicy wcielają się w piratów. Muszą podzielić między siebie piracki łup. Po kolei proponują podział, nad którym wszyscy głosują. Jeśli głosowanie nie przejdzie, proponujący wylatuje za wirtualną burtę i propozycję podziału wysuwa kolejny z uczestników.',
       materials: [
         KonspektMaterial(
             name: 'Kartki A4 z numerami od 1 do 5',
@@ -1402,7 +1402,7 @@ List<Konspekt> allBasicKonspekts = [
           duration: Duration(minutes: 10),
           activeForm: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący przedstawia uczestnikom zasady gry negocjacyjnej, którą za chwilę miedzy sobą stoczą.'
+              'Prowadzący przedstawia uczestnikom zasady gry negocjacyjnej, którą za chwilę między sobą stoczą.'
               '<br>'
               '<br>Uczestnicy wcielają się w piratów oraz ich doradców. Wszyscy płyną jednym statkiem na pokładzie którego znajduje się pięć skarbów - każdy skarb liczy dokładnie 100 złotych monet.'
               '<br>'
@@ -1423,7 +1423,7 @@ List<Konspekt> allBasicKonspekts = [
               '<br>'
               '<br>W każdej kolejnej turze starszeństwo przesuwa się o jeden w dół - każdy pirat otrzymuje numer starszeństwa o jeden mniejszy niż miał, zaś najmłodszy pirat staje się najstarszym. W ten sposób w ciągu pięciu tur każdy pirat będzie miał po jednym razie każdy numer starszeństwa.'
               '<br>'
-              '<br>Po rozegraniu wszystkich tur rozgrywkę wygrywa pirat, który najmniej razy został wyrzucony za burtę. W przyapdku remisu decyduje suma zgromadzonych w ciągu wszystkich tur złotych monet.'
+              '<br>Po rozegraniu wszystkich tur rozgrywkę wygrywa pirat, który najmniej razy został wyrzucony za burtę. W przypadku remisu decyduje suma zgromadzonych w ciągu wszystkich tur złotych monet.'
               '</p>'
         ),
 
@@ -1451,13 +1451,13 @@ List<Konspekt> allBasicKonspekts = [
                 '<br>'
                 '<br>Przed <b>pierwszą propozycją</b> piraci mogą się naradzić z doradcami przez <b>10 minut</b>. Prowadzący odlicza czas na dużym zegarze.'
                 '<br>'
-                '<br>Przed <b>drugą propozycją piraci mogą się naradzić z doradcami przez <b>5 minut</b>. Prowadzący odlicza czas na dużym zegarze.'
+                '<br>Przed <b>drugą propozycją</b> piraci mogą się naradzić z doradcami przez <b>5 minut</b>. Prowadzący odlicza czas na dużym zegarze.'
                 '<br>'
-                '<br>Przed <b>trzecią propozycją piraci mogą się naradzić z doradcami przez <b>4 minut</b>. Prowadzący odlicza czas na dużym zegarze.'
+                '<br>Przed <b>trzecią propozycją</b> piraci mogą się naradzić z doradcami przez <b>4 minut</b>. Prowadzący odlicza czas na dużym zegarze.'
                 '<br>'
-                '<br>Przed <b>czwartą propozycją piraci mogą się naradzić z doradcami przez <b>4 minuty</b>. Prowadzący odlicza czas na dużym zegarze.'
+                '<br>Przed <b>czwartą propozycją</b> piraci mogą się naradzić z doradcami przez <b>4 minuty</b>. Prowadzący odlicza czas na dużym zegarze.'
                 '<br>'
-                '<br>Przed <b>piątą propozycją piraci mogą się naradzić z doradcami przez <b>2 minuty</b>. Prowadzący odlicza czas na dużym zegarze.'
+                '<br>Przed <b>piątą propozycją</b> piraci mogą się naradzić z doradcami przez <b>2 minuty</b>. Prowadzący odlicza czas na dużym zegarze.'
                 '<br>'
                 '<br>Przed każdym głosowaniem piraci mają <b>2 minuty</b>, aby naradzić się ze swoimi doradcami.'
                 '<br>'
@@ -1472,9 +1472,9 @@ List<Konspekt> allBasicKonspekts = [
             duration: Duration(minutes: 45),
             activeForm: false,
             content: '<p style="text-align:justify;">'
-                'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym'
+                'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
-                '<br>Tura przebiega analgicznie do tury poprzedniej.'
+                '<br>Tura przebiega analogicznie do tury poprzedniej.'
                 '</p>'
         ),
 
@@ -1483,9 +1483,9 @@ List<Konspekt> allBasicKonspekts = [
             duration: Duration(minutes: 45),
             activeForm: false,
             content: '<p style="text-align:justify;">'
-                'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym'
+                'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
-                '<br>Tura przebiega analgicznie do tury poprzedniej.'
+                '<br>Tura przebiega analogicznie do tury poprzedniej.'
                 '</p>'
         ),
 
@@ -1494,9 +1494,9 @@ List<Konspekt> allBasicKonspekts = [
             duration: Duration(minutes: 45),
             activeForm: false,
             content: '<p style="text-align:justify;">'
-                'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym'
+                'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
-                '<br>Tura przebiega analgicznie do tury poprzedniej.'
+                '<br>Tura przebiega analogicznie do tury poprzedniej.'
                 '</p>'
         ),
 
@@ -1505,9 +1505,9 @@ List<Konspekt> allBasicKonspekts = [
             duration: Duration(minutes: 45),
             activeForm: false,
             content: '<p style="text-align:justify;">'
-                'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym'
+                'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
-                '<br>Tura przebiega analgicznie do tury poprzedniej.'
+                '<br>Tura przebiega analogicznie do tury poprzedniej.'
                 '</p>'
         ),
 
@@ -2587,7 +2587,7 @@ List<Konspekt> allBasicKonspekts = [
       author: DANIEL_IWANICKI,
       customDuration: Duration(minutes: 90),
       aims: [
-        'Ksztaltowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
+        'Kształtowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
       ],
       description: '<p style="text-align:justify;">'
           'Prowadzący formę regularnie (np. codziennie na apelu na obozie) przedstawia uczestnikom jedną zagadkę matematyczną, która jest w zasięgu ich możliwości intelektualnych, np:'
