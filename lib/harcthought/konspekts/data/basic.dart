@@ -1393,37 +1393,38 @@ List<Konspekt> allBasicKonspekts = [
             duration: Duration(minutes: 5),
             activeForm: false,
             content: '<p style="text-align:justify;">'
-                'Prowadzący dzieli uczestników na pięć równolicznych grup (nie ma przeciwwskazań, aby grupy były jednoosobowe).'
+                'Prowadzący dzieli uczestników na pięć równolicznych grup (grupy mogą być jednoosobowe).'
                 '<br>'
                 '<br>Jeśli podział na równoliczne grupy jest niemożliwy, najliczniejsza i najmniej liczna grupa powinna różnić się od siebie o najwyżej jedną osobę.</p>'
         ),
         KonspektStep(
-          title: 'Zasady',
+          title: 'Przedstawienie zasad',
           duration: Duration(minutes: 10),
           activeForm: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący przedstawia uczestnikom zasady gry negocjacyjnej, którą za chwilę między sobą stoczą.'
+              'Prowadzący przedstawia uczestnikom zasady:'
               '<br>'
-              '<br>Uczestnicy wcielają się w piratów oraz ich doradców. Wszyscy płyną jednym statkiem na pokładzie którego znajduje się pięć skarbów - każdy skarb liczy dokładnie 100 złotych monet.'
+              '<br>Uczestnicy wcielają się w szajki piratów zgodnie z dokonanym wcześniej podziałem na grupy. W każdej szajce jest jeden pirat - reszta osób to jego doradcy. Szajki wspólnie płyną jednym statkiem. Na pokładzie statku znajduje się <b>pięć skarbów</b> - każdy z pięciu skarbów liczy dokładnie <b>100 złotych monet</b>.'
               '<br>'
-              '<br>Piraci chcą podzielić między siebie skarby. Robią to w pięciu niezależnych turach - w każdej turze dzielony jest jeden skarb (100 złotych monet).'
+              '<br>Piraci zdecydowali się podzielić między siebie wszystkie skarby. Robią to w pięciu turach - w każdej turze dzielą jeden skarb (100 złotych monet).'
               '<br>'
-              '<br>Każdy pirat działa wspólnie ze swoimi doradcami - ich celem jest <b>zdobyć jak najwięcej monet</b> i <b>jak najmniej razy wylecieć za burtę</b>.'
-              '<br>'
-              '<br>Każda tura w której dzielony jest kolejny skarb wygląda następująco:'
+              '<br>Każda tura wygląda następująco:'
               '</p>'
               '<ol>'
               '<li><p style="text-align:justify;">Piraci otrzymują numer starszeństwa - od 5 (najstarszy) do 1 (najmłodszy).</p></li>'
-              '<li><p style="text-align:justify;">Najstarszy pirat, naradza się ze swoimi doradcami i proponuje podział skarbu między wszystkie wszystkich piratów (w tym siebie). Piraci i ich doradcy mogą się ze sobą kontaktować przed złożeniem propozycji podziału.</p></li>'
-              '<li><p style="text-align:justify;">Wszyscy piraci naradzają się ze swoimi doradcami. Następne piraci jednocześnie głosują za zaproponowanym podziałem (pirat składający propozycję też głosuje). Każdy pirat ma jeden głos. Jeżeli połowa lub więcej piratów zagłosuje za, skarb dzielony jest wedle propozycji. W przeciwnym wypadku pirat, proponujący podział zostaje wyrzucona za burtę wraz z doradcami.</p></li>'
-              '<li><p style="text-align:justify;">Złożenie propozycji podziału skarbu przechodzi teraz na kolejnego według starszeństwa pirata. Zasady i skutki głosowania podziału są takie same jak wcześniej.</p></li>'
+              '<li><p style="text-align:justify;">Najstarszy pirat (z numerem 5), naradza się jako pierwszy ze swoimi doradcami i proponuje publicznie podział skarbu między wszystkich piratów (w tym siebie).</p></li>'
+              '<li><p style="text-align:justify;">Piraci naradzają się ze swoimi doradcami. Następne piraci jednocześnie głosują za zaproponowanym podziałem (pirat składający propozycję też głosuje). Każdy pirat ma jeden głos. Jeżeli połowa lub więcej piratów zagłosuje "za", skarb dzielony jest wedle propozycji. W przeciwnym wypadku pirat proponujący podział zostaje wyrzucony za burtę wraz z doradcami.</p></li>'
+              '<li><p style="text-align:justify;">Jeśli poprzednia poprzednia szajka wyleciała za burtę, propozycję podziału skarbu składa kolejny według starszeństwa pirat. Zasady i skutki głosowania podziału są takie same jak wcześniej.</p></li>'
+              '<li><p style="text-align:justyfy;"> Wyrzucanie za burtę i się powtarza tak długo, aż piraci nie przegłosują podziału skarbu.</p></li>'
               '</ol>'
               '<p style="text-align:justify;">'
-              'Tura kończy się, gdy przegłosowany zostanie dowolny podział skarbu. Wówczas prowadzący zapisuje piratów, którzy wylecieli za burtę oraz zapisuje zdobyte w podziale monety tych, którzy za burtę nie wylecieli.'
+              'Tura kończy się, gdy przegłosowany zostanie dowolny podział skarbu. Wówczas prowadzący zapisuje piratów, którzy wylecieli za burtę oraz zapisuje monety zdobyte w podziale dla tych, którzy za burtę nie wylecieli.'
               '<br>'
-              '<br>W każdej kolejnej turze starszeństwo przesuwa się o jeden w dół - każdy pirat otrzymuje numer starszeństwa o jeden mniejszy niż miał, zaś najmłodszy pirat staje się najstarszym. W ten sposób w ciągu pięciu tur każdy pirat będzie miał po jednym razie każdy numer starszeństwa.'
+              '<br>Celem każdej szajki jest <b>jak najmniej razy wylecieć za burtę</b> i jednocześnie <b>zdobyć jak najwięcej monet</b>.'
               '<br>'
-              '<br>Po rozegraniu wszystkich tur rozgrywkę wygrywa pirat, który najmniej razy został wyrzucony za burtę. W przypadku remisu decyduje suma zgromadzonych w ciągu wszystkich tur złotych monet.'
+              '<br>W każdej kolejnej turze starszeństwo przesuwa się o jeden w dół - każdy pirat otrzymuje numer starszeństwa o jeden mniejszy niż miał, zaś najmłodszy pirat staje się najstarszym. W ten sposób w ciągu pięciu tur każdy pirat będzie miał jeden raz każdy numer starszeństwa.'
+              '<br>'
+              '<br>Po rozegraniu wszystkich tur rozgrywkę wygrywa pirat i jego szajka, która najmniej razy został wyrzucony za burtę. W przypadku remisu decyduje suma zgromadzonych w ciągu wszystkich tur złotych monet.'
               '</p>'
         ),
 
@@ -1431,13 +1432,14 @@ List<Konspekt> allBasicKonspekts = [
             title: 'Pytania do zasad',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: '<p style="text-align:justify;">Uczestnicy mają możliwość zadania pytań prowadzącemu dotyczących zasad.'
+            content: '<p style="text-align:justify;">Uczestnicy mają możliwość zadania prowadzącemu pytań dotyczących zasad.'
                 '<br>'
                 '<br>W szczególności prowadzący powinien zauważyć, że:'
                 '</p>'
                 '<ul>'
+                '<li><p style="text-align:justify;">Głosują tylko piraci - robią to w imieniu całej szajki. Doradcy nie głosują.</p></li>'
                 '<li><p style="text-align:justify;">Każdy pirat proponując podział uwzględnia także siebie.</p></li>'
-                '<li><p style="text-align:justify;">Pirat składający propozycję także nad nią głosuje.</p></li>'
+                '<li><p style="text-align:justify;">Pirat składający propozycję również nad nią głosuje.</p></li>'
                 '<li><p style="text-align:justify;">Propozycja staje się przegłosowana również, gdy głosowanie kończy się remisem.</p></li>'
                 '</ul>'
         ),
@@ -1445,19 +1447,19 @@ List<Konspekt> allBasicKonspekts = [
         KonspektStep(
             title: 'Tura pierwsza',
             duration: Duration(minutes: 45),
-            activeForm: false,
+            activeForm: true,
             content: '<p style="text-align:justify;">'
                 'Prowadzący rozdaje piratom znaczniki starszeństwa.'
                 '<br>'
-                '<br>Przed <b>pierwszą propozycją</b> piraci mogą się naradzić z doradcami przez <b>10 minut</b>. Prowadzący odlicza czas na dużym zegarze.'
+                '<br>Przed <b>pierwszą propozycją podziału</b> piraci mogą się naradzić z doradcami przez <b>10 minut</b>. Prowadzący odlicza czas na dużym zegarze.'
                 '<br>'
-                '<br>Przed <b>drugą propozycją</b> piraci mogą się naradzić z doradcami przez <b>5 minut</b>. Prowadzący odlicza czas na dużym zegarze.'
+                '<br>Przed <b>drugą propozycją podziału</b> piraci mogą się naradzić z doradcami przez <b>5 minut</b>. Prowadzący odlicza czas na dużym zegarze.'
                 '<br>'
-                '<br>Przed <b>trzecią propozycją</b> piraci mogą się naradzić z doradcami przez <b>4 minut</b>. Prowadzący odlicza czas na dużym zegarze.'
+                '<br>Przed <b>trzecią propozycją podziału</b> piraci mogą się naradzić z doradcami przez <b>4 minut</b>. Prowadzący odlicza czas na dużym zegarze.'
                 '<br>'
-                '<br>Przed <b>czwartą propozycją</b> piraci mogą się naradzić z doradcami przez <b>4 minuty</b>. Prowadzący odlicza czas na dużym zegarze.'
+                '<br>Przed <b>czwartą propozycją podziału</b> piraci mogą się naradzić z doradcami przez <b>4 minuty</b>. Prowadzący odlicza czas na dużym zegarze.'
                 '<br>'
-                '<br>Przed <b>piątą propozycją</b> piraci mogą się naradzić z doradcami przez <b>2 minuty</b>. Prowadzący odlicza czas na dużym zegarze.'
+                '<br>Przed <b>piątą propozycją podziału</b> piraci mogą się naradzić z doradcami przez <b>2 minuty</b>. Prowadzący odlicza czas na dużym zegarze.'
                 '<br>'
                 '<br>Przed każdym głosowaniem piraci mają <b>2 minuty</b>, aby naradzić się ze swoimi doradcami.'
                 '<br>'
@@ -1470,7 +1472,7 @@ List<Konspekt> allBasicKonspekts = [
         KonspektStep(
             title: 'Tura druga',
             duration: Duration(minutes: 45),
-            activeForm: false,
+            activeForm: true,
             content: '<p style="text-align:justify;">'
                 'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
@@ -1481,7 +1483,7 @@ List<Konspekt> allBasicKonspekts = [
         KonspektStep(
             title: 'Tura trzecia',
             duration: Duration(minutes: 45),
-            activeForm: false,
+            activeForm: true,
             content: '<p style="text-align:justify;">'
                 'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
@@ -1492,7 +1494,7 @@ List<Konspekt> allBasicKonspekts = [
         KonspektStep(
             title: 'Tura czwarta',
             duration: Duration(minutes: 45),
-            activeForm: false,
+            activeForm: true,
             content: '<p style="text-align:justify;">'
                 'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
@@ -1503,7 +1505,7 @@ List<Konspekt> allBasicKonspekts = [
         KonspektStep(
             title: 'Tura piąta',
             duration: Duration(minutes: 45),
-            activeForm: false,
+            activeForm: true,
             content: '<p style="text-align:justify;">'
                 'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
@@ -1511,9 +1513,6 @@ List<Konspekt> allBasicKonspekts = [
                 '</p>'
         ),
 
-      ],
-      howToFail: [
-        'Nie uświadomienie uczestnikom jaki jest sens pielgrzymki'
       ]
   ),
 
