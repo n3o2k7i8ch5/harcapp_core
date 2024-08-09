@@ -22,7 +22,10 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
           scrolledUnderElevation: 0,
           backgroundColor: Colors.transparent,
           iconTheme: IconThemeData(color: iconEnab_(context)),
-          titleTextStyle: AppTextStyle(color: iconEnab_(context)),
+          titleTextStyle: AppTextStyle(
+              color: iconEnab_(context),
+              fontSize: Dimen.textSizeAppBar
+          ),
         ),
         body: ListView(
           padding: const EdgeInsets.all(Dimen.sideMarg - Dimen.defMarg),
