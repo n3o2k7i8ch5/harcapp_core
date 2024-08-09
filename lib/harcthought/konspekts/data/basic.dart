@@ -2085,6 +2085,74 @@ List<Konspekt> allBasicKonspekts = [
 
   // Done
   const Konspekt(
+    name: 'swieczka_prawa_harcerskiego',
+    title: 'Świeczka prawa harcerskiego',
+    category: KonspektCategory.harcerskie,
+    spheres: {
+      KonspektSphere.umysl: null,
+      KonspektSphere.duch: KonspektSphereDetails(
+          level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
+          mechanism: [KonspektSphereMechanism.duchNormalizacja]
+      )
+    },
+    type: KonspektType.zwyczaj,
+    metos: [Meto.harc, Meto.hs, Meto.wedro],
+    coverAuthor: 'freepik.com (vecstock)',
+    author: DANIEL_IWANICKI,
+    aims: [
+      'Utrwalenie treści Prawa Harcerskiego u uczestników.',
+      'Oswojenie uczestników z treścią i wartościami wynikającymi z Prawa Harcerskiego.'
+    ],
+    materials: [
+      KonspektMaterial(
+        amount: 10,
+        name: 'Świeczka',
+      ),
+    ],
+    description: '<p style="text-align:justify;">Prowadzący ustawia na podłodze lub na ziemi 10 świeczek. Świeczki mogą być ustawione jedna za drugą lub w okręgu - jeśli jest to okrąg, należy wyraźnie zaznaczyć która świeczka jest pierwsza.'
+        '<br>'
+        '<br>Między świeczkami należy zachować stosowną odległość min. 20 cm, tak, aby zminimalizować ryzyko, że podczas próby zdmuchnięcia jednej z nich zdmuchnięte zostaną sąsiednie.'
+        '<br>'
+        '<br>Uczestnicy ustawiają się w kręgu wokół świeczek. Krąg trwa do czasu aż wszystkie świeczki nie zostaną zdmuchnięte. Aby zdmuchnąć świeczkę, harcerz musi poprawnie powiedzieć punkt Prawa Harcerskiego i dodać, który w kolejności jest to punkt - wówczas harcerz może zdmuchnąć świeczkę, której numer punktu wyrecytował.</p>',
+  ),
+
+
+  // Done
+  const Konspekt(
+    name: 'swieczka_prawa_zuchowego',
+    title: 'Świeczka prawa zuchowego',
+    category: KonspektCategory.harcerskie,
+    spheres: {
+      KonspektSphere.umysl: null,
+      KonspektSphere.duch: KonspektSphereDetails(
+          level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
+          mechanism: [KonspektSphereMechanism.duchNormalizacja]
+      )
+    },
+    type: KonspektType.zwyczaj,
+    metos: [Meto.zuch],
+    coverAuthor: 'freepik.com (Sketchepedia)',
+    author: DANIEL_IWANICKI,
+    aims: [
+      'Utrwalenie treści Prawa Zucha u uczestników.',
+      'Oswojenie uczestników z treścią i wartościami wynikającymi z Prawa Zucha.'
+    ],
+    materials: [
+      KonspektMaterial(
+        amount: 6,
+        name: 'Świeczka',
+      ),
+    ],
+    description: '<p style="text-align:justify;">Prowadzący ustawia na podłodze lub na ziemi 6 świeczek. Świeczki mogą być ustawione jedna za drugą lub w okręgu - jeśli jest to okrąg, należy wyraźnie zaznaczyć która świeczka jest pierwsza.'
+        '<br>'
+        '<br>Między świeczkami należy zachować stosowną odległość min. 20 cm, tak, aby zminimalizować ryzyko, że podczas próby zdmuchnięcia jednej z nich zdmuchnięte zostaną sąsiednie.'
+        '<br>'
+        '<br>Uczestnicy ustawiają się w kręgu wokół świeczek. Krąg trwa do czasu aż wszystkie świeczki nie zostaną zdmuchnięte. Aby zdmuchnąć świeczkę, zuch musi poprawnie powiedzieć punkt Prawa Zucha i dodać, który w kolejności jest to punkt - wówczas zuch może zdmuchnąć świeczkę, której numer punktu wyrecytował.</p>',
+  ),
+
+
+  // Done
+  const Konspekt(
       name: 'staly_spowiednik',
       title: 'Stały spowiednik',
       category: KonspektCategory.harcerskie,
