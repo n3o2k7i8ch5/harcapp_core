@@ -64,10 +64,16 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
 
 }
 
-void openKonspektSphereDuchLevelsInfoDialog(BuildContext context) => showDialog(
+void openKonspektSphereDuchLevelsInfoDialog(
+    BuildContext context,
+    {double? maxWidth}
+    ) => showDialog(
     context: context,
     builder: (context) => Padding(
         padding: const EdgeInsets.all(Dimen.defMarg),
-        child: KonspektSphereDuchLevelsInfoDialog()
+        child: SizedBox(
+            width: maxWidth,
+            child: KonspektSphereDuchLevelsInfoDialog()
+        )
     )
 );

@@ -123,10 +123,16 @@ class KonspektSphereDuchMechanismsInfoDialog extends StatelessWidget{
 
 }
 
-void openKonspektSphereDuchMechanismsInfoDialog(BuildContext context) => showDialog(
+void openKonspektSphereDuchMechanismsInfoDialog(
+    BuildContext context,
+    {double? maxWidth}
+) => showDialog(
     context: context,
     builder: (context) => Padding(
         padding: const EdgeInsets.all(Dimen.defMarg),
-        child: KonspektSphereDuchMechanismsInfoDialog()
+        child: SizedBox(
+            width: maxWidth,
+            child: KonspektSphereDuchMechanismsInfoDialog()
+        )
     )
 );

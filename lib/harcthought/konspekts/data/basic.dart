@@ -2086,7 +2086,7 @@ List<Konspekt> allBasicKonspekts = [
   // Done
   const Konspekt(
     name: 'swieczka_prawa_harcerskiego',
-    title: 'Świeczka prawa harcerskiego',
+    title: 'Świeczka Prawa Harcerskiego',
     category: KonspektCategory.harcerskie,
     spheres: {
       KonspektSphere.umysl: null,
@@ -2120,7 +2120,7 @@ List<Konspekt> allBasicKonspekts = [
   // Done
   const Konspekt(
     name: 'swieczka_prawa_zuchowego',
-    title: 'Świeczka prawa zuchowego',
+    title: 'Świeczka Prawa Zuchowego',
     category: KonspektCategory.harcerskie,
     spheres: {
       KonspektSphere.umysl: null,
