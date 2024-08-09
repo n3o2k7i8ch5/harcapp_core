@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
@@ -20,6 +21,8 @@ class KonspektSphereDuchMechanismsInfoDialog extends StatelessWidget{
           title: 'Mechanizmy duchowości',
           scrolledUnderElevation: 0,
           backgroundColor: Colors.transparent,
+          iconTheme: IconThemeData(color: iconEnab_(context)),
+          titleTextStyle: AppTextStyle(color: iconEnab_(context)),
         ),
         body: ListView(
           physics: const BouncingScrollPhysics(),
