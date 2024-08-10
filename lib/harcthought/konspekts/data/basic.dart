@@ -1814,14 +1814,6 @@ List<Konspekt> allBasicKonspekts = [
                 '</ol>'
         ),
         KonspektStep(
-            title: 'Internet i adresy w sieci - podsumowanie',
-            duration: Duration(minutes: 5),
-            activeForm: false,
-            content: '<p style="text-align:justify;">Prowadzący podsumowuje krótko to, co zostało powiedziane w formie odpowiedzi na pytania:'
-                '<br>'
-                '<br>Internet to sieć, w której komputery mogą się ze sobą komunikować. Każde urządzenie ma swój unikalny adres IP, który go identyfikuje. Wiadomości w sieci są przekazywane kolejnym urządzeniom aż dotrą do urządzenia z właściwym adresem.</p>'
-        ),
-        KonspektStep(
             title: 'Internet i adresy w sieci - symulacja',
             duration: Duration(minutes: 5),
             activeForm: false,
