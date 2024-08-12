@@ -2204,7 +2204,6 @@ List<Konspekt> allBasicKonspekts = [
       KonspektMaterial(amount: 1, name: 'Sznur poczwórnie pleciony do oznaczania funkcji (lub jego zdjęcie)'),
       KonspektMaterial(amount: 1, name: 'Sznur zwykły do oznaczania funkcji (lub jego zdjęcie)'),
 
-
       KonspektMaterial(
           amount: 1,
           name: 'Wydrukowany załącznik “sznury”',
@@ -2213,7 +2212,6 @@ List<Konspekt> allBasicKonspekts = [
               '\n'
               '\nPozostałe części pasków (czyli <i>“sznur”</i>-<i>“sposób noszenia”</i>) należy przygotować do rozłożenia na widoku w losowej kolejności na widoku.'
       ),
-
 
     ],
     intro: '<p style="text-align:justify;">'
