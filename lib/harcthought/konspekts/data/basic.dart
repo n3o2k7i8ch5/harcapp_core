@@ -1389,6 +1389,23 @@ List<Konspekt> allBasicKonspekts = [
             name: 'Duży zegar'
         ),
       ],
+      intro: '<p style="text-align:justify;">'
+          'Forma bazuje na zagadce logicznej, którą można zwyczajnie zadać uczestnikom do przemyślenia.'
+          '<br>'
+          '<br>Treść zagadki pozwala na to, aby uczestnicy wcielili się w postaci w zagadce. Aby zachować symetrię, podczas zajęć zagadka rozgrywana jest pięciokrotnie - zajęcia są tak skonstrułowane, aby każdy uczestnik (lub grupa uczestników) miał okazję wcielić się po jedym razie w każdą postać w zagadce.'
+          '<br>'
+          '<br>Treść zagadki:'
+          '<br>'
+          '<br><i>Pięciu piratów, każdy w innym wieku, płynie razem statkiem. Na statku znajduje się ich skarb - 100 złotych monet.</i>'
+          '<br>'
+          '<br><i>Piraci postanawiają podzielić skarb między siebie zgodnie z następującymi zasadami:</i>'
+          '<br>'
+          '<br><i>Najstarszy z piratów proponuje podział skarbu między wszystkich uczestników (w tym siebie). Następnie wszyscy piraci na statku głosują przyjęcie podziału. Jeśli połowa lub więcej niż połowa piratów zagłosuje za przyjęciem podziału, skarb jest dzielony zgodnie z propozycją. Jeśli jednak za przyjęciem podziału zagłosuje mnie niż połowa piratów, pirat proponujący podział zostaje wyrzucony za burtę. Zaproponowanie podziału przechodzi wówczas na kolejnego najstarszego pirata.</i>'
+          '<br>'
+          '<br><i>Głosowanie i ewentualne wyrzucanie kolejnych piratów za burtę trwa do momentu, aż przynajmniej połowa piratów zgodzi się na zaproponowany podział.</i>'
+          '<br>'
+          '<br><i>Zakładając, że żaden z piratów nie chce wylecieć za burtę, że wszyscy są doskonale inteligentni oraz, że każdy z nich skrajnie wyrachowany i chciwy, kto wyleci za burtę, a kto dostanie złote monety (i ile)?</i>'
+          '</p>',
       steps: [
         KonspektStep(
             title: 'Podział na pięć grup',
@@ -2214,23 +2231,6 @@ List<Konspekt> allBasicKonspekts = [
       ),
 
     ],
-    intro: '<p style="text-align:justify;">'
-        'Forma bazuje na zagadce logicznej, którą można zwyczajnie zadać uczestnikom do przemyślenia.'
-        '<br>'
-        '<br>Treść zagadki pozwala na to, aby uczestnicy wcielili się w postaci w zagadce. Aby zachować symetrię, podczas zajęć zagadka rozgrywana jest pięciokrotnie - zajęcia są tak skonstrułowane, aby każdy uczestnik (lub grupa uczestników) miał okazję wcielić się po jedym razie w każdą postać w zagadce.'
-        '<br>'
-        '<br>Treść zagadki:'
-        '<br>'
-        '<br><i>Pięciu piratów, każdy w innym wieku, płynie razem statkiem. Na statku znajduje się ich skarb - 100 złotych monet.</i>'
-        '<br>'
-        '<br><i>Piraci postanawiają podzielić skarb między siebie zgodnie z następującymi zasadami:</i>'
-        '<br>'
-        '<br><i>Najstarszy z piratów proponuje podział skarbu między wszystkich uczestników (w tym siebie). Następnie wszyscy piraci na statku głosują przyjęcie podziału. Jeśli połowa lub więcej niż połowa piratów zagłosuje za przyjęciem podziału, skarb jest dzielony zgodnie z propozycją. Jeśli jednak za przyjęciem podziału zagłosuje mnie niż połowa piratów, pirat proponujący podział zostaje wyrzucony za burtę. Zaproponowanie podziału przechodzi wówczas na kolejnego najstarszego pirata.</i>'
-        '<br>'
-        '<br><i>Głosowanie i ewentualne wyrzucanie kolejnych piratów za burtę trwa do momentu, aż przynajmniej połowa piratów zgodzi się na zaproponowany podział.</i>'
-        '<br>'
-        '<br><i>Zakładając, że żaden z piratów nie chce wylecieć za burtę, że wszyscy są doskonale inteligentni oraz, że każdy z nich skrajnie wyrachowany i chciwy, kto wyleci za burtę, a kto dostanie złote monety (i ile)?</i>'
-        '</p>',
     description: null,
     steps: [
       KonspektStep(
