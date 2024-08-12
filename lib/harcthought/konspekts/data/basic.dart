@@ -775,13 +775,15 @@ List<Konspekt> allBasicKonspekts = [
         ),
       ],
       summary: 'Forma medytacyjna polegająca na refleksji nad swoimi emocjami celem obiektywnej oceny swoich czynów.',
-      intro: 'Forma nie przygotowuje do spowiedzi. Jest to paradoksalna forma medytacyjna - skupiająca się z jednej strony na emocjach celem przejścia do obiektywnej oceny czynów. Szczegóły dotyczące formy można znaleźć na <a href="jezuici.pl/rachunek">tej stronie</a>.'
+      intro: '<p style="text-align:justify;">'
+          'Forma nie przygotowuje do spowiedzi. Jest to paradoksalna forma medytacyjna - skupiająca się z jednej strony na emocjach celem przejścia do obiektywnej oceny czynów. Szczegóły dotyczące formy można znaleźć na <a href="jezuici.pl/rachunek">tej stronie</a>.'
           '<br>'
           '<br>Każdy z uczestników otrzymuje zestaw pięciu kartek przygotowanych zgodnie z załącznikiem <a href="kroki@attachment">kroki</a>.'
           '<br>'
           '<br>Każdy uczestnik znajduje ustronne miejsce, gdzie może w spokoju pomyśleć bez rozpraszania swojej uwagi. Może również udać się na spacer.'
           '<br>'
-          '<br>Harcerze otwierają kartkę z pierwszym krokiem, czytają ją i przez kolejne 15 minut wykonują zapisane polecenie. Gdy czas ten upłynie, przechodzą do kolejnego kroku, nad którym również spędzają 15 minut. Proces ten jest powtarzany analogicznie dla pozostałych kroków.',
+          '<br>Harcerze otwierają kartkę z pierwszym krokiem, czytają ją i przez kolejne 15 minut wykonują zapisane polecenie. Gdy czas ten upłynie, przechodzą do kolejnego kroku, nad którym również spędzają 15 minut. Proces ten jest powtarzany analogicznie dla pozostałych kroków.'
+          '</p>',
       steps: [
         KonspektStep(
             title: 'Dziękowanie Bogu za otrzymane dobro',
@@ -1772,7 +1774,7 @@ List<Konspekt> allBasicKonspekts = [
             amount: 5
         ),
       ],
-      intro: 'Zajęcia i ich cele opierają się na założeniu, że zarówno z punktu widzenia procesu wychowawczego jak i z atrakcyjności harcerstwa i relacji dla samych harcerzy, sytuacja w której członkowie drużyny domyślnie spędzają czas na telefonie by szukać rozrywki jest gorsza względem sytuacji w której uczestnicy są skupieni na sobie.',
+      intro: '<p style="text-align:justify;">Zajęcia i ich cele opierają się na założeniu, że zarówno z punktu widzenia procesu wychowawczego jak i z atrakcyjności harcerstwa i relacji dla samych harcerzy, sytuacja w której członkowie drużyny domyślnie spędzają czas na telefonie by szukać rozrywki jest gorsza względem sytuacji w której uczestnicy są skupieni na sobie.</p>',
       steps: [
         KonspektStep(
             title: 'Internet i adresy w sieci - pytania',
@@ -2214,7 +2216,23 @@ List<Konspekt> allBasicKonspekts = [
 
 
     ],
-    intro: null,
+    intro: '<p style="text-align:justify;">'
+        'Forma bazuje na zagadce logicznej, którą można zwyczajnie zadać uczestnikom do przemyślenia.'
+        '<br>'
+        '<br>Treść zagadki pozwala na to, aby uczestnicy wcielili się w postaci w zagadce. Aby zachować symetrię, podczas zajęć zagadka rozgrywana jest pięciokrotnie - zajęcia są tak skonstrułowane, aby każdy uczestnik (lub grupa uczestników) miał okazję wcielić się po jedym razie w każdą postać w zagadce.'
+        '<br>'
+        '<br>Treść zagadki:'
+        '<br>'
+        '<br><i>Pięciu piratów, każdy w innym wieku, płynie razem statkiem. Na statku znajduje się ich skarb - 100 złotych monet.</i>'
+        '<br>'
+        '<br><i>Piraci postanawiają podzielić skarb między siebie zgodnie z następującymi zasadami:</i>'
+        '<br>'
+        '<br><i>Najstarszy z piratów proponuje podział skarbu między wszystkich uczestników (w tym siebie). Następnie wszyscy piraci na statku głosują przyjęcie podziału. Jeśli połowa lub więcej niż połowa piratów zagłosuje za przyjęciem podziału, skarb jest dzielony zgodnie z propozycją. Jeśli jednak za przyjęciem podziału zagłosuje mnie niż połowa piratów, pirat proponujący podział zostaje wyrzucony za burtę. Zaproponowanie podziału przechodzi wówczas na kolejnego najstarszego pirata.</i>'
+        '<br>'
+        '<br><i>Głosowanie i ewentualne wyrzucanie kolejnych piratów za burtę trwa do momentu, aż przynajmniej połowa piratów zgodzi się na zaproponowany podział.</i>'
+        '<br>'
+        '<br><i>Zakładając, że żaden z piratów nie chce wylecieć za burtę, że wszyscy są doskonale inteligentni oraz, że każdy z nich skrajnie wyrachowany i chciwy, kto wyleci za burtę, a kto dostanie złote monety (i ile)?</i>'
+        '</p>',
     description: null,
     steps: [
       KonspektStep(
