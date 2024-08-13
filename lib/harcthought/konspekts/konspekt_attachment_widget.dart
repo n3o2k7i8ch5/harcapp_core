@@ -15,41 +15,48 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
   const KonspektAttachmentFormatWidget(this.format, {super.key});
 
   @override
-  Widget build(BuildContext context) => Material(
-    color: konspektAttachmentFormatToColor(format),
-    borderRadius: BorderRadius.circular(AppCard.defRadius),
-    child: Stack(
-      children: [
+  Widget build(BuildContext context){
 
-        Positioned(
-          bottom: 0,
-          right: 0,
-          left: 0,
-          height: 14,
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Icon(
-                konspektAttachmentFormatToSubIcon(format),
-                color: Colors.black45,
-                size: 14,
+    IconData? subIcon = konspektAttachmentFormatToSubIcon(format);
+
+    return Material(
+        color: konspektAttachmentFormatToColor(format),
+        borderRadius: BorderRadius.circular(AppCard.defRadius),
+        child: Stack(
+          children: [
+
+            if(subIcon != null)
+              Positioned(
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  height: 12,
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Icon(
+                      subIcon,
+                      color: Colors.black45,
+                      size: 12,
+                    ),
+                  )
+              ),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                  konspektAttachmentFormatToName(format),
+                  style: const AppTextStyle(
+                    color: Colors.black,
+                    fontWeight: weight.halfBold,
+                  )
+              ),
             ),
-          )
-        ),
 
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-              konspektAttachmentFormatToName(format),
-              style: const AppTextStyle(
-                color: Colors.black,
-                fontWeight: weight.halfBold,
-              )
-          ),
-        ),
+          ],
+        )
+    );
 
-      ],
-    )
-  );
+  }
 
 }
 

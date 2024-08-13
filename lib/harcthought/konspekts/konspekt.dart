@@ -168,8 +168,8 @@ String konspektAttachmentFormatToName(KonspektAttachmentFormat format){
 
 IconData? konspektAttachmentFormatToSubIcon(KonspektAttachmentFormat format){
   switch(format){
-    case KonspektAttachmentFormat.pdf: return null;
-    case KonspektAttachmentFormat.docx: return null;
+    case KonspektAttachmentFormat.pdf:
+    case KonspektAttachmentFormat.docx:
     case KonspektAttachmentFormat.url: return null;
     case KonspektAttachmentFormat.urlPdf: return MdiIcons.abacus;
     case KonspektAttachmentFormat.urlDocx: return MdiIcons.link;
