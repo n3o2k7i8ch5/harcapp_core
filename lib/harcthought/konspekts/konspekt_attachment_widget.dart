@@ -30,7 +30,7 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
             child: Icon(
                 konspektAttachmentFormatToSubIcon(format),
                 color: Colors.black45,
-                size: 14,
+                size: 15,
             ),
           )
         ),
