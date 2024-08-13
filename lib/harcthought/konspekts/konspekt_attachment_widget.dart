@@ -5,6 +5,7 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'konspekt.dart';
 
@@ -17,10 +18,10 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context){
 
-    IconData? subIcon = konspektAttachmentFormatToSubIcon(format);
+    IconData? subIcon = format.subIcon;
 
     return Material(
-        color: konspektAttachmentFormatToColor(format),
+        color: format.color,
         borderRadius: BorderRadius.circular(AppCard.defRadius),
         child: Stack(
           children: [
@@ -44,7 +45,7 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                  konspektAttachmentFormatToName(format),
+                  format.displayName,
                   style: const AppTextStyle(
                     color: Colors.black,
                     fontWeight: weight.halfBold,
@@ -57,6 +58,45 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
     );
 
   }
+
+}
+
+class KonspektAttachmentPrintWidget extends StatelessWidget{
+
+  final KonspektAttachmentPrint print;
+
+  const KonspektAttachmentPrintWidget(this.print, {super.key});
+
+  @override
+  Widget build(BuildContext context) => Column(
+    children: [
+      Text(
+        'Jak drukować:',
+        style: AppTextStyle(
+            color: hintEnab_(context),
+            fontWeight: weight.halfBold
+        )
+      ),
+      SizedBox(height: Dimen.defMarg),
+      Row(
+        children: [
+          SizedBox(width: Dimen.defMarg),
+          Icon(MdiIcons.circleMedium),
+          SizedBox(width: Dimen.defMarg),
+          Text(print.color.displayName)
+        ],
+      ),
+      SizedBox(height: Dimen.defMarg),
+      Row(
+        children: [
+          SizedBox(width: Dimen.defMarg),
+          Icon(MdiIcons.circleMedium),
+          SizedBox(width: Dimen.defMarg),
+          Text(print.side.displayName, style: AppTextStyle())
+        ],
+      )
+    ],
+  );
 
 }
 
@@ -140,7 +180,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
             child: SimpleButton(
                 padding: const EdgeInsets.all(Dimen.defMarg),
                 radius: 0,
-                color: konspektAttachmentFormatToColor(format).withOpacity(.5),
+                color: format.color.withOpacity(.5),
                 child: Center(
                   child: KonspektAttachmentFormatWidget(format),
                 ),
@@ -174,7 +214,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
           ),
           Row(
             children: formatButtons,
-          )
+          ),
         ],
       ),
     );

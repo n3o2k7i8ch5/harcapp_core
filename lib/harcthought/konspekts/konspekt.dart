@@ -29,28 +29,63 @@ enum KonspektCategory{
 }
 
 enum KonspektType{
-  zwyczaj, zajecia, projekt;
+  zwyczaj, zajecia, projekt, wspolzawoIndywidualne, wspolzawoGrupowe;
 
   String get displayName{
     switch(this){
       case zwyczaj: return 'Zwyczaj';
       case zajecia: return 'Zajęcia';
       case projekt: return 'Projekt';
+      case wspolzawoIndywidualne: return 'Współzawodnictwo indywidualne';
+      case wspolzawoGrupowe: return 'Współzawodnictwo grupowe';
     }
   }
 
   Color color(BuildContext context){
     switch(this){
       case zwyczaj: return isDark(context)?Colors.brown[400]!:Colors.amber[100]!;
-      case zajecia: return isDark(context)?Colors.brown[800]!:Colors.brown[400]!;
-      case projekt: return isDark(context)?Colors.purple[900]!:Colors.deepPurple[300]!;
+      case zajecia: return isDark(context)?Colors.brown[800]!:Colors.brown[200]!;
+      case projekt: return isDark(context)?Colors.purple[900]!:Colors.deepPurple[200]!;
+      case wspolzawoIndywidualne: return isDark(context)?Colors.deepOrange[900]!:Colors.deepOrange[200]!;
+      case wspolzawoGrupowe: return isDark(context)?Colors.orange[900]!:Colors.orange[200]!;
     }
   }
 
 }
 
 enum KonspektAttachmentFormat{
-  pdf, docx, url, urlPdf, urlDocx
+  pdf, docx, url, urlPdf, urlDocx;
+  
+  Color get color{
+    switch(this){
+      case pdf: return Colors.red;
+      case docx: return Colors.blue;
+      case url: return Colors.grey;
+      case urlPdf: return Colors.red;
+      case urlDocx: return Colors.blue;
+    }
+  }
+
+  String get displayName{
+    switch(this){
+      case pdf: return 'PDF';
+      case docx: return 'DOC';
+      case url: return 'URL';
+      case urlPdf: return 'PDF';
+      case urlDocx: return 'DOC';
+    }
+  }
+
+  IconData? get subIcon{
+    switch(this){
+      case pdf:
+      case docx:
+      case url: return null;
+      case urlPdf:
+      case urlDocx: return MdiIcons.link;
+    }
+  }
+
 }
 
 enum KonspektSphere{
@@ -146,34 +181,42 @@ enum KonspektSphereMechanism{
 
 }
 
-Color konspektAttachmentFormatToColor(KonspektAttachmentFormat format){
-  switch(format){
-    case KonspektAttachmentFormat.pdf: return Colors.red;
-    case KonspektAttachmentFormat.docx: return Colors.blue;
-    case KonspektAttachmentFormat.url: return Colors.grey;
-    case KonspektAttachmentFormat.urlPdf: return Colors.red;
-    case KonspektAttachmentFormat.urlDocx: return Colors.blue;
+enum KonspektAttachmentPrintColor{
+  monochrome, color, any;
+
+  String get displayName{
+    switch(this){
+      case monochrome: return 'Czarno-biało';
+      case color: return 'W kolorze';
+      case any: return 'W kolorze lub czarno-biało';
+    }
   }
+
 }
 
-String konspektAttachmentFormatToName(KonspektAttachmentFormat format){
-  switch(format){
-    case KonspektAttachmentFormat.pdf: return 'PDF';
-    case KonspektAttachmentFormat.docx: return 'DOC';
-    case KonspektAttachmentFormat.url: return 'URL';
-    case KonspektAttachmentFormat.urlPdf: return 'PDF';
-    case KonspektAttachmentFormat.urlDocx: return 'DOC';
+enum KonspektAttachmentPrintSide{
+  single, double, any;
+
+  String get displayName{
+    switch(this){
+      case single: return 'Jednostronnie';
+      case double: return 'Dwustronnie';
+      case any: return 'Jedno- lub dwustronnie';
+    }
   }
+
 }
 
-IconData? konspektAttachmentFormatToSubIcon(KonspektAttachmentFormat format){
-  switch(format){
-    case KonspektAttachmentFormat.pdf:
-    case KonspektAttachmentFormat.docx:
-    case KonspektAttachmentFormat.url: return null;
-    case KonspektAttachmentFormat.urlPdf:
-    case KonspektAttachmentFormat.urlDocx: return MdiIcons.link;
-  }
+class KonspektAttachmentPrint{
+
+  KonspektAttachmentPrintColor color;
+  KonspektAttachmentPrintSide side;
+
+  KonspektAttachmentPrint({
+    required this.color,
+    required this.side,
+  });
+  
 }
 
 class KonspektAttachment{
@@ -181,11 +224,13 @@ class KonspektAttachment{
     final String name;
     final String title;
     final Map<KonspektAttachmentFormat, String> assets;
+    final KonspektAttachmentPrint? print;
 
     const KonspektAttachment({
       required this.name,
       required this.title,
       required this.assets,
+      this.print
     });
 
     Future<bool> open(String konspektName, KonspektAttachmentFormat format, KonspektCategory konspektCategory) async {
@@ -242,6 +287,8 @@ class KonspektMaterial{
     this.onTap,
     this.bottomBuilder,
   });
+
+
 
 }
 

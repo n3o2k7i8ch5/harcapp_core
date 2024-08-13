@@ -68,10 +68,44 @@ class KonspektMaterialTile extends StatelessWidget{
           ),
 
           if(material.attachmentName != null)
-            Padding(
-              padding: const EdgeInsets.all(Dimen.defMarg),
-              child: KonspektAttachmentWidget.from(context, konspekt, material.attachmentName!, color: backgroundIcon_(context))??
-                  Text('Problem z załącznikiem ${material.attachmentName}'),
+            Builder(
+                builder: (context){
+
+                  KonspektAttachmentWidget? attachmentWidget = KonspektAttachmentWidget.from(
+                      context,
+                      konspekt,
+                      material.attachmentName!,
+                      color: backgroundIcon_(context)
+                  );
+
+                  if(attachmentWidget == null)
+                    return Padding(
+                      padding: const EdgeInsets.all(Dimen.defMarg),
+                      child: attachmentWidget?? Text('Problem z załącznikiem ${material.attachmentName}'),
+                    );
+
+                  KonspektAttachment attachment = attachmentWidget.attachment;
+
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(Dimen.defMarg),
+                        child: attachmentWidget,
+                      ),
+
+                      if(attachment.print != null)
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: Dimen.iconMarg,
+                            right: Dimen.iconMarg,
+                            bottom: Dimen.iconMarg,
+                          ),
+                          child: KonspektAttachmentPrintWidget(attachment.print!)
+                        )
+                    ],
+                  );
+
+                }
             ),
 
           if(material.additionalPreparation != null)
