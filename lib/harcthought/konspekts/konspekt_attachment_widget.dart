@@ -39,9 +39,12 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
               ),
             ),
 
-            Icon(
-              subIcon,
-              color: Colors.black,
+            Padding(
+              padding: const EdgeInsets.only(right: 6.0),
+              child: Icon(
+                subIcon,
+                color: Colors.black,
+              ),
             ),
 
           ],
