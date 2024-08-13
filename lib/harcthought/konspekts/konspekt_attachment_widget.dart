@@ -24,26 +24,29 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
     return Material(
         color: format.color,
         borderRadius: BorderRadius.circular(AppCard.defRadius),
-        child: Row(
-          children: [
+        child: Center(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
 
-            Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Text(
-                  format.displayName,
-                  style: const AppTextStyle(
-                    color: Colors.black,
-                    fontWeight: weight.halfBold,
-                  )
+              Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Text(
+                    format.displayName,
+                    style: const AppTextStyle(
+                      color: Colors.black,
+                      fontWeight: weight.halfBold,
+                    )
+                ),
               ),
-            ),
 
-            Icon(
-              subIcon,
-              color: Colors.black45,
-            ),
+              Icon(
+                subIcon,
+                color: Colors.black,
+              ),
 
-          ],
+            ],
+          ),
         )
     );
 
@@ -64,6 +67,8 @@ class KonspektAttachmentPrintWidget extends StatelessWidget{
     if(isButton)
       return SimpleButton.from(
           context: context,
+          color: backgroundIcon_(context),
+          margin: EdgeInsets.zero,
           icon: MdiIcons.printer,
           text: 'Jak drukować?',
           onTap: () =>
