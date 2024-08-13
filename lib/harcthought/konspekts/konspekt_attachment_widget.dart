@@ -34,13 +34,13 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
         ),
 
         Padding(
-          padding: const EdgeInsets.all(6.0),
+          padding: const EdgeInsets.all(8.0),
           child: Text(
               konspektAttachmentFormatToName(format),
               style: const AppTextStyle(
-                color: Colors.black,
+                color: Colors.black54,
                 fontWeight: weight.halfBold,
-                fontSize: Dimen.textSizeSmall
+                fontSize: Dimen.textSizeTiny
               )
           ),
         ),
