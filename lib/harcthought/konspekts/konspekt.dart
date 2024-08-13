@@ -171,7 +171,7 @@ IconData? konspektAttachmentFormatToSubIcon(KonspektAttachmentFormat format){
     case KonspektAttachmentFormat.pdf: return null;
     case KonspektAttachmentFormat.docx: return null;
     case KonspektAttachmentFormat.url: return null;
-    case KonspektAttachmentFormat.urlPdf: return MdiIcons.link;
+    case KonspektAttachmentFormat.urlPdf: return MdiIcons.abacus;
     case KonspektAttachmentFormat.urlDocx: return MdiIcons.link;
   }
 }
