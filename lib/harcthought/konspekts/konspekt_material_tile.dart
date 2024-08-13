@@ -98,9 +98,9 @@ class KonspektMaterialTile extends StatelessWidget{
                       if(attachment.print != null)
                         Padding(
                           padding: const EdgeInsets.only(
-                            left: Dimen.iconMarg,
-                            right: Dimen.iconMarg,
-                            bottom: Dimen.iconMarg,
+                            left: Dimen.defMarg,
+                            right: Dimen.defMarg,
+                            bottom: Dimen.defMarg,
                           ),
                           child: KonspektAttachmentPrintWidget(attachment.print!)
                         )

@@ -24,29 +24,27 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
     return Material(
         color: format.color,
         borderRadius: BorderRadius.circular(AppCard.defRadius),
-        child: Center(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
 
-              Padding(
-                padding: const EdgeInsets.all(6.0),
-                child: Text(
-                    format.displayName,
-                    style: const AppTextStyle(
-                      color: Colors.black,
-                      fontWeight: weight.halfBold,
-                    )
-                ),
+            Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: Text(
+                  format.displayName,
+                  style: const AppTextStyle(
+                    color: Colors.black,
+                    fontWeight: weight.halfBold,
+                  )
               ),
+            ),
 
-              Icon(
-                subIcon,
-                color: Colors.black,
-              ),
+            Icon(
+              subIcon,
+              color: Colors.black,
+            ),
 
-            ],
-          ),
+          ],
         )
     );
 
@@ -75,54 +73,56 @@ class KonspektAttachmentPrintWidget extends StatelessWidget{
           onTap: () =>
               showDialog(
                   context: context,
-                  builder: (context) =>
-                      Padding(
-                        padding: EdgeInsets.all(Dimen.sideMarg),
-                        child: Material(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              AppBarX(
-                                title: 'Jak drukować?',
+                  builder: (context) => Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(Dimen.sideMarg),
+                      child: Material(
+                        borderRadius: BorderRadius.circular(AppCard.bigRadius),
+                        clipBehavior: Clip.hardEdge,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            AppBarX(
+                              title: 'Jak drukować?',
+                            ),
+
+                            Padding(
+                              padding: EdgeInsets.all(Dimen.sideMarg),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+
+                                  Row(
+                                    children: [
+                                      Icon(MdiIcons.circleMedium),
+                                      SizedBox(width: Dimen.defMarg),
+                                      Text(print.side.displayName, style: AppTextStyle(fontSize: Dimen.textSizeBig))
+                                    ],
+                                  ),
+
+                                  SizedBox(height: Dimen.defMarg),
+                                  Row(
+                                    children: [
+                                      Icon(MdiIcons.circleMedium),
+                                      SizedBox(width: Dimen.defMarg),
+                                      Text(print.color.displayName, style: AppTextStyle(fontSize: Dimen.textSizeBig))
+                                    ],
+                                  ),
+
+                                ],
                               ),
-
-                              Padding(
-                                padding: EdgeInsets.all(Dimen.sideMarg),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-
-                                    Row(
-                                      children: [
-                                        Icon(MdiIcons.circleMedium),
-                                        SizedBox(width: Dimen.defMarg),
-                                        Text(print.side.displayName, style: AppTextStyle())
-                                      ],
-                                    ),
-
-                                    SizedBox(height: Dimen.defMarg),
-                                    Row(
-                                      children: [
-                                        Icon(MdiIcons.circleMedium),
-                                        SizedBox(width: Dimen.defMarg),
-                                        Text(print.color.displayName, style: AppTextStyle())
-                                      ],
-                                    ),
-
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                            )
+                          ],
                         ),
-                      )
+                      ),
+                    ),
+                  )
               )
       );
 
-    return
-      Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
