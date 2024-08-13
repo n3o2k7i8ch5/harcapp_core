@@ -24,27 +24,11 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
     return Material(
         color: format.color,
         borderRadius: BorderRadius.circular(AppCard.defRadius),
-        child: Stack(
+        child: Row(
           children: [
 
-            if(subIcon != null)
-              Positioned(
-                  bottom: 0,
-                  right: 0,
-                  left: 0,
-                  height: 12,
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Icon(
-                      subIcon,
-                      color: Colors.black45,
-                      size: 12,
-                    ),
-                  )
-              ),
-
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(6.0),
               child: Text(
                   format.displayName,
                   style: const AppTextStyle(
@@ -52,6 +36,11 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
                     fontWeight: weight.halfBold,
                   )
               ),
+            ),
+
+            Icon(
+              subIcon,
+              color: Colors.black45,
             ),
 
           ],
