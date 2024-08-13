@@ -1632,7 +1632,7 @@ List<Konspekt> allBasicKonspekts = [
         name: 'pytania',
         title: 'Pytania',
         assets: {
-          KonspektAttachmentFormat.pdf: 'pytania.pdf',
+          KonspektAttachmentFormat.urlPdf: 'pytania.pdf',
           KonspektAttachmentFormat.docx: 'pytania.docx'
         },
       )

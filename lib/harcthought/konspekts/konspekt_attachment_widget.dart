@@ -27,9 +27,8 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
           child: Text(
               konspektAttachmentFormatToSubName(format)??'',
               style: const AppTextStyle(
-                  color: Colors.black,
-                  fontWeight: weight.halfBold,
-                  fontSize: Dimen.textSizeNormal
+                  color: Colors.black54,
+                  fontSize: Dimen.textSizeTiny
               )
           ),
         ),
@@ -39,8 +38,8 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
           child: Text(
               konspektAttachmentFormatToName(format),
               style: const AppTextStyle(
-                color: Colors.black54,
-                fontSize: Dimen.textSizeTiny
+                color: Colors.black,
+                fontWeight: weight.halfBold,
               )
           ),
         ),
