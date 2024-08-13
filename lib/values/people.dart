@@ -292,6 +292,7 @@ List<Person> allPeople = [
   NADIA_OSSOWSKA,
   NADIA_WYSZOGRODZKA,
   NATALIA_STODOLNA,
+  NINA_KESKA,
   OLEKSII_OVCHYNNIKOV,
   OLGA_JAJKO,
   OLGA_LUCZAK,
@@ -361,6 +362,7 @@ List<Person> allPeople = [
   TYMOTEUSZ_JAWORSKI,
   WANDA_MARCHEL,
   WERONIKA_KOLCZ,
+  WERONIKA_MATECKA,
   WERONIKA_WICHER,
   WERONIKA_ZAWIERUCHA,
   WIKTOR_KARPALA,
@@ -2255,6 +2257,13 @@ const Person NATALIA_STODOLNA = Person(
     org: Org.zhp,
     email: ['natalia.stodolna@zhp.net.pl']
 );
+const Person NINA_KESKA = Person(
+    name: 'Nina K',
+    druzyna: '8. PDH „Widmo"',
+    rankHarc: RankHarc.dhd,
+    org: Org.zhp,
+    email: ["keska.nina@gmail.com "]
+);
 const Person OLEKSII_OVCHYNNIKOV = Person(
     name: 'Oleksii Ovchynnikov',
     druzyna: '191. Żagiew',
@@ -2666,6 +2675,14 @@ const Person WERONIKA_KOLCZ = Person(
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ["weronika.kolcz@zhp.pl"]
+);
+const Person WERONIKA_MATECKA = Person(
+    name: 'Weronika Matecka',
+    druzyna: '31. JGZ „Bordowe Wilczęta"',
+    hufiec: huf_zhp_poznan_jezyce,
+    rankHarc: RankHarc.dhd,
+    org: Org.zhp,
+    email: ["weronika.matecka@zhp.net.pl"]
 );
 const Person WERONIKA_WICHER = Person(
     name: 'Weronika Wicher',

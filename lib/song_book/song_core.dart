@@ -178,7 +178,8 @@ abstract class SongCore{
         .replaceAll('"', '')
         .replaceAll('„', '')
         .replaceAll('”', '')
-        .replaceAll("'", '');
+        .replaceAll("'", '')
+        .replaceAll(RegExp(r"_+"), "_");
 
     return _title + '@' + _performer;
 
