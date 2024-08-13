@@ -33,6 +33,9 @@ Konspekt zycie_i_swiat_w_prl = Konspekt(
       'Poznanie przez uczestników historii i najważniejszych wydarzeń w PRL',
       'Rozwinięcie umiejętności myślenia strategicznego u uczestników'
     ],
+    materials: [
+      KonspektMaterial(name: 'Wydrukowany załącznik “$attach_title_wydarzenia_codzienne"')
+    ],
     description: '',
     attachments: [
       attach_wydarzenia_codzienne,

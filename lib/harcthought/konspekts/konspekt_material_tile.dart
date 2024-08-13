@@ -87,6 +87,7 @@ class KonspektMaterialTile extends StatelessWidget{
                   KonspektAttachment attachment = attachmentWidget.attachment;
 
                   return Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(Dimen.defMarg),
