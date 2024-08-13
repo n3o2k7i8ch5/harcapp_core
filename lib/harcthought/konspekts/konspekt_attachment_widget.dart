@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
@@ -64,40 +65,109 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
 class KonspektAttachmentPrintWidget extends StatelessWidget{
 
   final KonspektAttachmentPrint print;
+  final bool isButton;
 
-  const KonspektAttachmentPrintWidget(this.print, {super.key});
+  const KonspektAttachmentPrintWidget(this.print, {this.isButton=true, super.key});
 
   @override
-  Widget build(BuildContext context) => Column(
-    children: [
-      Text(
-        'Jak drukować:',
-        style: AppTextStyle(
-            color: hintEnab_(context),
-            fontWeight: weight.halfBold
-        )
-      ),
-      SizedBox(height: Dimen.defMarg),
-      Row(
-        children: [
-          SizedBox(width: Dimen.defMarg),
-          Icon(MdiIcons.circleMedium),
-          SizedBox(width: Dimen.defMarg),
-          Text(print.color.displayName)
-        ],
-      ),
-      SizedBox(height: Dimen.defMarg),
-      Row(
-        children: [
-          SizedBox(width: Dimen.defMarg),
-          Icon(MdiIcons.circleMedium),
-          SizedBox(width: Dimen.defMarg),
-          Text(print.side.displayName, style: AppTextStyle())
-        ],
-      )
-    ],
-  );
+  Widget build(BuildContext context) {
 
+    if(isButton)
+      return SimpleButton.from(
+          context: context,
+          icon: MdiIcons.printer,
+          text: 'Jak drukować?',
+          onTap: () =>
+              showDialog(
+                  context: context,
+                  builder: (context) =>
+                      Padding(
+                        padding: EdgeInsets.all(Dimen.sideMarg),
+                        child: Material(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              AppBarX(
+                                title: 'Jak drukować?',
+                              ),
+
+                              Padding(
+                                padding: EdgeInsets.all(Dimen.sideMarg),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Row(
+                                      children: [
+                                        Icon(MdiIcons.circleMedium),
+                                        SizedBox(width: Dimen.defMarg),
+                                        Text(print.side.displayName, style: AppTextStyle())
+                                      ],
+                                    ),
+
+                                    SizedBox(height: Dimen.defMarg),
+                                    Row(
+                                      children: [
+                                        Icon(MdiIcons.circleMedium),
+                                        SizedBox(width: Dimen.defMarg),
+                                        Text(print.color.displayName, style: AppTextStyle())
+                                      ],
+                                    ),
+
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+              )
+      );
+
+    return
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+
+              Icon(MdiIcons.printer, color: hintEnab_(context)),
+
+              SizedBox(width: Dimen.defMarg),
+
+              Text(
+                  'Jak drukować:',
+                  style: AppTextStyle(
+                      color: hintEnab_(context),
+                      fontWeight: weight.halfBold
+                  )
+              )
+
+            ],
+          ),
+
+          SizedBox(height: Dimen.defMarg),
+          Row(
+            children: [
+              Icon(MdiIcons.circleMedium),
+              SizedBox(width: Dimen.defMarg),
+              Text(print.side.displayName, style: AppTextStyle())
+            ],
+          ),
+
+          SizedBox(height: Dimen.defMarg),
+          Row(
+            children: [
+              Icon(MdiIcons.circleMedium),
+              SizedBox(width: Dimen.defMarg),
+              Text(print.color.displayName, style: AppTextStyle())
+            ],
+          ),
+        ],
+      );
+  }
 }
 
 class KonspektAttachmentWidget extends StatelessWidget{
