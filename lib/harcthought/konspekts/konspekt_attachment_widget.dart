@@ -24,11 +24,14 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
         Positioned(
           bottom: 1,
           right: 1,
+          left: 1,
           child: Text(
               konspektAttachmentFormatToSubName(format)??'',
+              textAlign: TextAlign.center,
               style: const AppTextStyle(
-                  color: Colors.black54,
-                  fontSize: Dimen.textSizeTiny
+                color: Colors.black45,
+                fontSize: Dimen.textSizeTiny,
+                fontWeight: weight.halfBold,
               )
           ),
         ),
