@@ -50,7 +50,7 @@ enum KonspektType{
 }
 
 enum KonspektAttachmentFormat{
-  pdf, docx, url
+  pdf, docx, url, urlPdf, urlDocx
 }
 
 enum KonspektSphere{
@@ -151,6 +151,8 @@ Color konspektAttachmentFormatToColor(KonspektAttachmentFormat format){
     case KonspektAttachmentFormat.pdf: return Colors.red;
     case KonspektAttachmentFormat.docx: return Colors.blue;
     case KonspektAttachmentFormat.url: return Colors.grey;
+    case KonspektAttachmentFormat.urlPdf: return Colors.red;
+    case KonspektAttachmentFormat.urlDocx: return Colors.blue;
   }
 }
 
@@ -159,6 +161,18 @@ String konspektAttachmentFormatToName(KonspektAttachmentFormat format){
     case KonspektAttachmentFormat.pdf: return 'PDF';
     case KonspektAttachmentFormat.docx: return 'DOC';
     case KonspektAttachmentFormat.url: return 'URL';
+    case KonspektAttachmentFormat.urlPdf: return 'PDF';
+    case KonspektAttachmentFormat.urlDocx: return 'DOC';
+  }
+}
+
+String? konspektAttachmentFormatToSubName(KonspektAttachmentFormat format){
+  switch(format){
+    case KonspektAttachmentFormat.pdf: return null;
+    case KonspektAttachmentFormat.docx: return null;
+    case KonspektAttachmentFormat.url: return null;
+    case KonspektAttachmentFormat.urlPdf: return 'URL';
+    case KonspektAttachmentFormat.urlDocx: return 'URL';
   }
 }
 
@@ -180,6 +194,10 @@ class KonspektAttachment{
 
       switch(format){
         case KonspektAttachmentFormat.url:
+          launchURL(assetPath);
+          return true;
+        case KonspektAttachmentFormat.urlPdf:
+        case KonspektAttachmentFormat.urlDocx:
           launchURL(assetPath);
           return true;
         case KonspektAttachmentFormat.pdf:

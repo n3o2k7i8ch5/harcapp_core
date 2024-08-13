@@ -18,13 +18,35 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
   Widget build(BuildContext context) => Material(
     color: konspektAttachmentFormatToColor(format),
     borderRadius: BorderRadius.circular(AppCard.defRadius),
-    child: Padding(
-      padding: const EdgeInsets.all(6.0),
-      child: Text(
-          konspektAttachmentFormatToName(format),
-          style: const AppTextStyle(color: Colors.black, fontWeight: weight.halfBold)
-      ),
-    ),
+    child: Stack(
+      children: [
+
+        Positioned(
+          bottom: 1,
+          right: 1,
+          child: Text(
+              konspektAttachmentFormatToSubName(format)??'',
+              style: const AppTextStyle(
+                  color: Colors.black,
+                  fontWeight: weight.halfBold
+              )
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: Text(
+              konspektAttachmentFormatToName(format),
+              style: const AppTextStyle(
+                color: Colors.black,
+                fontWeight: weight.halfBold,
+                fontSize: Dimen.textSizeSmall
+              )
+          ),
+        ),
+
+      ],
+    )
   );
 
 }
