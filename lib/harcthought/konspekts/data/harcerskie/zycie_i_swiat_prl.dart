@@ -3,6 +3,8 @@ import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
+const String _konspekt_name = 'zycie_i_swiat_prl';
+
 const String attach_html_wydarzenia_codzienne = '<a href="${attach_name_wydarzenia_codzienne}@attachment">${attach_title_wydarzenia_codzienne}</a>';
 const String attach_name_wydarzenia_codzienne = "wydarzenia_codzienne";
 const String attach_title_wydarzenia_codzienne = "Wydarzenia codzienne";
@@ -10,14 +12,14 @@ KonspektAttachment attach_wydarzenia_codzienne = KonspektAttachment(
   name: attach_name_wydarzenia_codzienne,
   title: attach_title_wydarzenia_codzienne,
   assets: {
-    KonspektAttachmentFormat.urlPdf: urlFilePath(attach_wydarzenia_codzienne.name, 'wydarzenia_codzienne.pdf'),
-    KonspektAttachmentFormat.urlDocx: urlFilePath(attach_wydarzenia_codzienne.name, 'wydarzenia_codzienne.docx')
+    KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'wydarzenia_codzienne.pdf'),
+    KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'wydarzenia_codzienne.docx')
   },
   print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
 
 Konspekt zycie_i_swiat_prl = Konspekt(
-    name: 'zycie_i_swiat_prl',
+    name: _konspekt_name,
     title: 'Życie i świat PRL',
     category: KonspektCategory.harcerskie,
     type: KonspektType.wspolzawoGrupowe,
@@ -36,7 +38,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
     materials: [
       KonspektMaterial(
         name: 'Wydrukowany załącznik “$attach_title_wydarzenia_codzienne"',
-        attachmentName: attach_wydarzenia_codzienne.name
+        attachmentName: attach_name_wydarzenia_codzienne
       )
     ],
     description: '',
