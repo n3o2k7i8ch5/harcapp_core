@@ -122,6 +122,29 @@ class KonspektAttachmentWidget extends StatelessWidget{
           )
       );
 
+    List<Widget> formatButtons = [];
+
+    for(KonspektAttachmentFormat format in attachment.assets.keys){
+      formatButtons.add(
+          Expanded(
+            child: SimpleButton(
+                padding: const EdgeInsets.all(Dimen.defMarg),
+                radius: 0,
+                color: konspektAttachmentFormatToColor(format).withOpacity(.5),
+                child: Center(
+                  child: KonspektAttachmentFormatWidget(format),
+                ),
+                onTap: () => attachment.openOrShowMessage(
+                    context,
+                    konspekt.name,
+                    format,
+                    konspekt.category
+                )
+            ),
+          )
+      );
+    }
+
     return Material(
       clipBehavior: Clip.hardEdge,
       color: color??cardEnab_(context),
@@ -140,60 +163,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
             ),
           ),
           Row(
-            children: [
-              if(attachment.assets.containsKey(KonspektAttachmentFormat.pdf))
-                Expanded(
-                  child: SimpleButton(
-                      padding: const EdgeInsets.all(Dimen.defMarg),
-                      radius: 0,
-                      color: konspektAttachmentFormatToColor(KonspektAttachmentFormat.pdf).withOpacity(.5),
-                      child: const Center(
-                        child: KonspektAttachmentFormatWidget(KonspektAttachmentFormat.pdf),
-                      ),
-                      onTap: () => attachment.openOrShowMessage(
-                        context,
-                        konspekt.name,
-                        KonspektAttachmentFormat.pdf,
-                        konspekt.category
-                      )
-                  ),
-                ),
-
-              if(attachment.assets.containsKey(KonspektAttachmentFormat.docx))
-                Expanded(
-                  child: SimpleButton(
-                      padding: const EdgeInsets.all(Dimen.defMarg),
-                      radius: 0,
-                      color: konspektAttachmentFormatToColor(KonspektAttachmentFormat.docx).withOpacity(.5),
-                      child: const Center(
-                        child: KonspektAttachmentFormatWidget(KonspektAttachmentFormat.docx),
-                      ),
-                      onTap: () => attachment.openOrShowMessage(
-                        context, konspekt.name,
-                        KonspektAttachmentFormat.docx,
-                        konspekt.category
-                      )
-                  ),
-                ),
-
-              if(attachment.assets.containsKey(KonspektAttachmentFormat.url))
-                Expanded(
-                  child: SimpleButton(
-                      padding: const EdgeInsets.all(Dimen.defMarg),
-                      radius: 0,
-                      color: konspektAttachmentFormatToColor(KonspektAttachmentFormat.url).withOpacity(.5),
-                      child: const Center(
-                        child: KonspektAttachmentFormatWidget(KonspektAttachmentFormat.url),
-                      ),
-                      onTap: () => attachment.openOrShowMessage(
-                        context,
-                        konspekt.name,
-                        KonspektAttachmentFormat.url,
-                        konspekt.category
-                      )
-                  ),
-                )
-            ],
+            children: formatButtons,
           )
         ],
       ),
