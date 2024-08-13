@@ -22,7 +22,7 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
       children: [
 
         Positioned(
-          bottom: -1,
+          bottom: 0,
           right: 0,
           left: 0,
           child: Align(
@@ -30,7 +30,7 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
             child: Icon(
                 konspektAttachmentFormatToSubIcon(format),
                 color: Colors.black45,
-                size: 15,
+                size: 14,
             ),
           )
         ),
