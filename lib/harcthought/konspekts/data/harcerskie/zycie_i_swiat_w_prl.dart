@@ -10,8 +10,8 @@ KonspektAttachment attach_wydarzenia_codzienne = KonspektAttachment(
   name: attach_name_wydarzenia_codzienne,
   title: attach_title_wydarzenia_codzienne,
   assets: {
-    KonspektAttachmentFormat.urlPdf: urlFilePath(zycie_i_swiat_w_prl.name, 'wydarzenia_codzienne.pdf'),
-    KonspektAttachmentFormat.urlDocx: urlFilePath(zycie_i_swiat_w_prl.name, 'wydarzenia_codzienne.docx')
+    KonspektAttachmentFormat.urlPdf: urlFilePath('zycie_i_swiat_prl', 'wydarzenia_codzienne.pdf'),
+    KonspektAttachmentFormat.urlDocx: urlFilePath('zycie_i_swiat_prl', 'wydarzenia_codzienne.docx')
   },
   print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
