@@ -67,6 +67,7 @@ class KonspektAttachmentPrintWidget extends StatelessWidget{
     if(isButton)
       return SimpleButton.from(
           context: context,
+          radius: AppCard.defRadius,
           color: backgroundIcon_(context),
           margin: EdgeInsets.zero,
           icon: MdiIcons.printer,
