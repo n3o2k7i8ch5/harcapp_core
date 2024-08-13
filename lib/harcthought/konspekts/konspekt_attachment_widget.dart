@@ -22,18 +22,17 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
       children: [
 
         Positioned(
-          bottom: 1,
-          right: 1,
-          left: 1,
-          child: Text(
-              konspektAttachmentFormatToSubName(format)??'',
-              textAlign: TextAlign.center,
-              style: const AppTextStyle(
+          bottom: 0,
+          right: 0,
+          left: 0,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Icon(
+                konspektAttachmentFormatToSubIcon(format),
                 color: Colors.black45,
-                fontSize: Dimen.textSizeTiny,
-                fontWeight: weight.halfBold,
-              )
-          ),
+                size: 10,
+            ),
+          )
         ),
 
         Padding(

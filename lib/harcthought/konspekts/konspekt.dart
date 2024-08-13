@@ -166,13 +166,13 @@ String konspektAttachmentFormatToName(KonspektAttachmentFormat format){
   }
 }
 
-String? konspektAttachmentFormatToSubName(KonspektAttachmentFormat format){
+IconData? konspektAttachmentFormatToSubIcon(KonspektAttachmentFormat format){
   switch(format){
     case KonspektAttachmentFormat.pdf: return null;
     case KonspektAttachmentFormat.docx: return null;
     case KonspektAttachmentFormat.url: return null;
-    case KonspektAttachmentFormat.urlPdf: return 'URL';
-    case KonspektAttachmentFormat.urlDocx: return 'URL';
+    case KonspektAttachmentFormat.urlPdf: return MdiIcons.link;
+    case KonspektAttachmentFormat.urlDocx: return MdiIcons.link;
   }
 }
 
