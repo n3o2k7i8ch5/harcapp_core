@@ -5,6 +5,122 @@ import 'package:harcapp_core/values/people.dart';
 
 const String _konspekt_name = 'zycie_i_swiat_prl';
 
+const String attach_html_mapa_glowna = '<a href="${attach_name_mapa_glowna}@attachment">${attach_title_mapa_glowna}</a>';
+const String attach_name_mapa_glowna = "mapa_glowna";
+const String attach_title_mapa_glowna = "Mapa główna";
+KonspektAttachment attach_mapa_glowna = KonspektAttachment(
+    name: attach_name_mapa_glowna,
+    title: attach_title_mapa_glowna,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'mapa_prl.pdf'),
+      KonspektAttachmentFormat.urlPng: urlFilePath(_konspekt_name, 'mapa_prl.png'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'mapa_prl.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
+);
+
+// --- Banknoty
+
+const String attach_html_banknot_csk_1 = '<a href="${attach_name_banknot_csk_1}@attachment">${attach_title_banknot_csk_1}</a>';
+const String attach_name_banknot_csk_1 = "banknot_csk_1";
+const String attach_title_banknot_csk_1 = "Banknot 1 CSK";
+KonspektAttachment attach_banknot_csk_1 = KonspektAttachment(
+    name: attach_name_banknot_csk_1,
+    title: attach_title_banknot_csk_1,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_csk_1.pdf'),
+      KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_csk_1.docx'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_csk_1.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
+);
+
+const String attach_html_banknot_ddm_1 = '<a href="${attach_name_banknot_ddm_1}@attachment">${attach_title_banknot_ddm_1}</a>';
+const String attach_name_banknot_ddm_1 = "banknot_ddm_1";
+const String attach_title_banknot_ddm_1 = "Banknot 1 DDM";
+KonspektAttachment attach_banknot_ddm_1 = KonspektAttachment(
+    name: attach_name_banknot_ddm_1,
+    title: attach_title_banknot_ddm_1,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_ddm_1.pdf'),
+      KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_ddm_1.docx'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_ddm_1.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
+);
+
+const String attach_html_banknot_sur_1 = '<a href="${attach_name_banknot_sur_1}@attachment">${attach_title_banknot_sur_1}</a>';
+const String attach_name_banknot_sur_1 = "banknot_sur_1";
+const String attach_title_banknot_sur_1 = "Banknot 1 SUR";
+KonspektAttachment attach_banknot_sur_1 = KonspektAttachment(
+    name: attach_name_banknot_sur_1,
+    title: attach_title_banknot_sur_1,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_sur_1.pdf'),
+      KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_sur_1.docx'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_sur_1.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
+);
+
+const String attach_html_banknot_usd_1 = '<a href="${attach_name_banknot_usd_1}@attachment">${attach_title_banknot_usd_1}</a>';
+const String attach_name_banknot_usd_1 = "banknot_usd_1";
+const String attach_title_banknot_usd_1 = "Banknot 1 USD";
+KonspektAttachment attach_banknot_usd_1 = KonspektAttachment(
+    name: attach_name_banknot_usd_1,
+    title: attach_title_banknot_usd_1,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_usd_1.pdf'),
+      KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_usd_1.docx'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_usd_1.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
+);
+
+const String attach_html_banknot_plz_1_mln = '<a href="${attach_name_banknot_plz_1_mln}@attachment">${attach_title_banknot_plz_1_mln}</a>';
+const String attach_name_banknot_plz_1_mln = "banknot_plz_1_mln";
+const String attach_title_banknot_plz_1_mln = "Banknot 1 mln PLZ";
+KonspektAttachment attach_banknot_plz_1_mln = KonspektAttachment(
+    name: attach_name_banknot_plz_1_mln,
+    title: attach_title_banknot_plz_1_mln,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_plz_1_mln.pdf'),
+      KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_plz_1_mln.docx'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_plz_1_mln.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
+);
+
+const String attach_html_banknot_plz_2_mln = '<a href="${attach_name_banknot_plz_2_mln}@attachment">${attach_title_banknot_plz_2_mln}</a>';
+const String attach_name_banknot_plz_2_mln = "banknot_plz_2_mln";
+const String attach_title_banknot_plz_2_mln = "Banknot 2 mln PLZ";
+KonspektAttachment attach_banknot_plz_2_mln = KonspektAttachment(
+    name: attach_name_banknot_plz_2_mln,
+    title: attach_title_banknot_plz_2_mln,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_plz_2_mln.pdf'),
+      KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_plz_2_mln.docx'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_plz_2_mln.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
+);
+
+const String attach_html_banknot_plz_5_mln = '<a href="${attach_name_banknot_plz_5_mln}@attachment">${attach_title_banknot_plz_5_mln}</a>';
+const String attach_name_banknot_plz_5_mln = "banknot_plz_5_mln";
+const String attach_title_banknot_plz_5_mln = "Banknot 5 mln PLZ";
+KonspektAttachment attach_banknot_plz_5_mln = KonspektAttachment(
+    name: attach_name_banknot_plz_5_mln,
+    title: attach_title_banknot_plz_5_mln,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_plz_5_mln.pdf'),
+      KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_plz_5_mln.docx'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_plz_5_mln.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
+);
+
+// ---
+
 const String attach_html_wydarzenia_codzienne = '<a href="${attach_name_wydarzenia_codzienne}@attachment">${attach_title_wydarzenia_codzienne}</a>';
 const String attach_name_wydarzenia_codzienne = "wydarzenia_codzienne";
 const String attach_title_wydarzenia_codzienne = "Wydarzenia codzienne";
@@ -16,19 +132,6 @@ KonspektAttachment attach_wydarzenia_codzienne = KonspektAttachment(
     KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'wydarzenia_codzienne.docx')
   },
   print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
-);
-
-const String attach_html_wniosek_o_zalegendowanie_agenta = '<a href="${attach_name_wniosek_o_zalegendowanie_agenta}@attachment">${attach_title_wniosek_o_zalegendowanie_agenta}</a>';
-const String attach_name_wniosek_o_zalegendowanie_agenta = "wniosek_o_zalegendowanie_agenta";
-const String attach_title_wniosek_o_zalegendowanie_agenta = "Wniosek o zalegendowanie agenta";
-KonspektAttachment attach_wniosek_o_zalegendowanie_agenta = KonspektAttachment(
-    name: attach_name_wniosek_o_zalegendowanie_agenta,
-    title: attach_title_wniosek_o_zalegendowanie_agenta,
-    assets: {
-      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'wniosek_o_zalegendowanie_agenta.pdf'),
-      KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'wniosek_o_zalegendowanie_agenta.docx')
-    },
-    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
 
 const String attach_html_raporty_obserwacji_obywatelskich = '<a href="${attach_name_raporty_obserwacji_obywatelskich}@attachment">${attach_title_raporty_obserwacji_obywatelskich}</a>';
@@ -53,6 +156,19 @@ KonspektAttachment attach_raporty_realiow_zycia = KonspektAttachment(
     assets: {
       KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'raporty_realiow_zycia.pdf'),
       KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'raporty_realiow_zycia.docx')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
+);
+
+const String attach_html_wniosek_o_zalegendowanie_agenta = '<a href="${attach_name_wniosek_o_zalegendowanie_agenta}@attachment">${attach_title_wniosek_o_zalegendowanie_agenta}</a>';
+const String attach_name_wniosek_o_zalegendowanie_agenta = "wniosek_o_zalegendowanie_agenta";
+const String attach_title_wniosek_o_zalegendowanie_agenta = "Wniosek o zalegendowanie agenta";
+KonspektAttachment attach_wniosek_o_zalegendowanie_agenta = KonspektAttachment(
+    name: attach_name_wniosek_o_zalegendowanie_agenta,
+    title: attach_title_wniosek_o_zalegendowanie_agenta,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'wniosek_o_zalegendowanie_agenta.pdf'),
+      KonspektAttachmentFormat.urlDocx: urlFilePath(_konspekt_name, 'wniosek_o_zalegendowanie_agenta.docx')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
@@ -109,6 +225,60 @@ KonspektAttachment attach_karty_wiedzy = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
 
+// ---
+
+const String attach_html_sekretarz_bierut = '<a href="${attach_name_sekretarz_bierut}@attachment">${attach_title_sekretarz_bierut}</a>';
+const String attach_name_sekretarz_bierut = "sekretarz_bierut";
+const String attach_title_sekretarz_bierut = "Sekretarz Bierut";
+KonspektAttachment attach_sekretarz_bierut = KonspektAttachment(
+    name: attach_name_sekretarz_bierut,
+    title: attach_title_sekretarz_bierut,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'sekretarz_bierut.pdf'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'sekretarz_bierut.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
+);
+
+const String attach_html_sekretarz_gomulka = '<a href="${attach_name_sekretarz_gomulka}@attachment">${attach_title_sekretarz_gomulka}</a>';
+const String attach_name_sekretarz_gomulka = "sekretarz_gomulka";
+const String attach_title_sekretarz_gomulka = "Sekretarz Gomułka";
+KonspektAttachment attach_sekretarz_gomulka = KonspektAttachment(
+    name: attach_name_sekretarz_gomulka,
+    title: attach_title_sekretarz_gomulka,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'sekretarz_gomulka.pdf'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'sekretarz_gomulka.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
+);
+
+const String attach_html_sekretarz_gierek = '<a href="${attach_name_sekretarz_gierek}@attachment">${attach_title_sekretarz_gierek}</a>';
+const String attach_name_sekretarz_gierek = "sekretarz_gierek";
+const String attach_title_sekretarz_gierek = "Sekretarz Gierek";
+KonspektAttachment attach_sekretarz_gierek = KonspektAttachment(
+    name: attach_name_sekretarz_gierek,
+    title: attach_title_sekretarz_gierek,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'sekretarz_gierek.pdf'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'sekretarz_gierek.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
+);
+
+const String attach_html_sekretarz_jaruzelski = '<a href="${attach_name_sekretarz_jaruzelski}@attachment">${attach_title_sekretarz_jaruzelski}</a>';
+const String attach_name_sekretarz_jaruzelski = "sekretarz_jaruzelski";
+const String attach_title_sekretarz_jaruzelski = "Sekretarz Jaruzelski";
+KonspektAttachment attach_sekretarz_jaruzelski = KonspektAttachment(
+    name: attach_name_sekretarz_jaruzelski,
+    title: attach_title_sekretarz_jaruzelski,
+    assets: {
+      KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'sekretarz_jaruzelski.pdf'),
+      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'sekretarz_jaruzelski.webp')
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
+);
+
 Konspekt zycie_i_swiat_prl = Konspekt(
     name: _konspekt_name,
     title: 'Życie i świat PRL',
@@ -128,9 +298,127 @@ Konspekt zycie_i_swiat_prl = Konspekt(
     ],
     materials: [
       KonspektMaterial(
+        name: 'Białe prześcieradło',
+        amount: 1,
+        comment: "Prześcieradło służy temu, by narysować na nim mapę (111cm x 85cm). "
+      ),
+
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_mapa_glowna"',
+          attachmentName: attach_name_mapa_glowna,
+          amount: 1,
+          comment: "Załącznik stworzony przy użyciu strony rasterbator.net",
+          additionalPreparation: "Wydrukowane kartki z załącznika pdf służą temu, by w łatwy sposób nanieść kontury mapę (111cm x 85cm) na prześcieradło.",
+      ),
+
+      KonspektMaterial(
+        name: 'Wydrukowany załącznik “$attach_title_banknot_csk_1"',
+        attachmentName: attach_name_banknot_csk_1,
+        amount: 3,
+        additionalPreparation: "Każdy banknot należy wyciąć."
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_banknot_ddm_1"',
+          attachmentName: attach_name_banknot_ddm_1,
+          amount: 3,
+          additionalPreparation: "Każdy banknot należy wyciąć."
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_banknot_sur_1"',
+          attachmentName: attach_name_banknot_sur_1,
+          amount: 3,
+          additionalPreparation: "Każdy banknot należy wyciąć."
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_banknot_usd_1"',
+          attachmentName: attach_name_banknot_usd_1,
+          amount: 3,
+          additionalPreparation: "Każdy banknot należy wyciąć."
+      ),
+
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_banknot_plz_1_mln"',
+          attachmentName: attach_name_banknot_plz_1_mln,
+          amount: 3,
+          additionalPreparation: "Każdy banknot należy wyciąć."
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_banknot_plz_2_mln"',
+          attachmentName: attach_name_banknot_plz_2_mln,
+          amount: 3,
+          additionalPreparation: "Każdy banknot należy wyciąć."
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_banknot_plz_5_mln"',
+          attachmentName: attach_name_banknot_plz_5_mln,
+          amount: 3,
+          additionalPreparation: "Każdy banknot należy wyciąć."
+      ),
+
+      KonspektMaterial(
         name: 'Wydrukowany załącznik “$attach_title_wydarzenia_codzienne"',
         attachmentName: attach_name_wydarzenia_codzienne
-      )
+      ),
+      KonspektMaterial(
+        name: 'Wydrukowany załącznik “$attach_title_raporty_obserwacji_obywatelskich"',
+        attachmentName: attach_name_raporty_obserwacji_obywatelskich,
+        amount: 1
+      ),
+      KonspektMaterial(
+        name: 'Wydrukowany załącznik “$attach_title_raporty_realiow_zycia"',
+        attachmentName: attach_name_raporty_realiow_zycia,
+        amount: 1
+      ),
+      KonspektMaterial(
+        name: 'Wydrukowany załącznik “$attach_title_wniosek_o_zalegendowanie_agenta"',
+        attachmentName: attach_name_wniosek_o_zalegendowanie_agenta,
+        amount: 1
+      ),
+      KonspektMaterial(
+        name: 'Wydrukowany załącznik “$attach_title_wydarzenia_specjalne"',
+        attachmentName: attach_name_wydarzenia_specjalne,
+        additionalPreparation: 'Karty należy wyciąć wzdłuż przerywanych linii i potasować.',
+        amount: 16
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_sciaga_dla_uczestnikow"',
+          attachmentName: attach_name_sciaga_dla_uczestnikow,
+          amount: 1
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_znaczniki_statystyk_wojewodztw"',
+          attachmentName: attach_name_znaczniki_statystyk_wojewodztw,
+          amount: 1,
+          additionalPreparation: 'Paski z liczbami oraz kartoniki należy wyciąć wzdłuż przerywanych linii. Kartoniki należy następnie dodatkowo naciąć wzdłuż czterech przerywanych linii. Na koniec do każdego kartonika należy wsunąć po dwa paski tak, by powstały dwa "suwaki" do łatwej zamiany wartości liczbowej',
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_karty_wiedzy"',
+          attachmentName: attach_name_karty_wiedzy,
+          additionalPreparation: 'Karty należy wyciąć wzdłuż przerywanych linii, podzielić na trzy grupy według poziomów i każdą grupę potasować.',
+          amount: 16
+      ),
+
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_sekretarz_bierut"',
+          attachmentName: attach_name_sekretarz_bierut,
+          amount: 1
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_sekretarz_gomulka"',
+          attachmentName: attach_name_sekretarz_gomulka,
+          amount: 1
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_sekretarz_gierek"',
+          attachmentName: attach_name_sekretarz_gomulka,
+          amount: 1
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_sekretarz_jaruzelski"',
+          attachmentName: attach_name_sekretarz_jaruzelski,
+          amount: 1
+      ),
+
     ],
     intro: '<p style="text-align:justify;">'
         'Skończyła się II wojna światowa. Polska jest niemal doszczętnie zniszczona po okupacji niemieckiej i po przejściu radzieckiego frontu. Po podpisaniu pokoju w Jałcie nasz kraj znalazł się w sowieckiej strefie wpływów i w Warszawie zostali zainstalowani komuniści.'
@@ -323,13 +611,28 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<h4>Karty działań specjalnych</h4>'
     ,
     attachments: [
+      attach_mapa_glowna,
+
+      attach_banknot_csk_1,
+      attach_banknot_ddm_1,
+      attach_banknot_sur_1,
+      attach_banknot_usd_1,
+      attach_banknot_plz_1_mln,
+      attach_banknot_plz_2_mln,
+      attach_banknot_plz_5_mln,
+
       attach_wydarzenia_codzienne,
-      attach_wniosek_o_zalegendowanie_agenta,
       attach_raporty_obserwacji_obywatelskich,
       attach_raporty_realiow_zycia,
+      attach_wniosek_o_zalegendowanie_agenta,
       attach_wydarzenia_specjalne,
       attach_sciaga_dla_uczestnikow,
       attach_znaczniki_statystyk_wojewodztw,
       attach_karty_wiedzy,
+
+      attach_sekretarz_bierut,
+      attach_sekretarz_gomulka,
+      attach_sekretarz_gierek,
+      attach_sekretarz_jaruzelski
     ]
 );

@@ -56,17 +56,19 @@ enum KonspektType{
 }
 
 enum KonspektAttachmentFormat{
-  pdf, docx, webp, svg, url, urlPdf, urlDocx, urlWebp, urlSvg;
+  pdf, docx, png, webp, svg, url, urlPdf, urlDocx, urlPng, urlWebp, urlSvg;
   
   Color get color{
     switch(this){
       case pdf: return Colors.red;
       case docx: return Colors.blue;
+      case png: return Colors.orange;
       case webp: return Colors.orange;
       case svg: return Colors.deepPurpleAccent;
       case url: return Colors.grey;
       case urlPdf: return Colors.red;
       case urlDocx: return Colors.blue;
+      case urlPng: return Colors.orange;
       case urlWebp: return Colors.orange;
       case urlSvg: return Colors.deepPurpleAccent;
     }
@@ -76,11 +78,13 @@ enum KonspektAttachmentFormat{
     switch(this){
       case pdf: return 'PDF';
       case docx: return 'DOC';
+      case png: return 'PNG';
       case webp: return 'WEBP';
       case svg: return 'SVG';
       case url: return 'URL';
       case urlPdf: return 'PDF';
       case urlDocx: return 'DOC';
+      case urlPng: return 'PNG';
       case urlWebp: return 'WEBP';
       case urlSvg: return 'SVG';
     }
@@ -90,13 +94,15 @@ enum KonspektAttachmentFormat{
     switch(this){
       case pdf:
       case docx:
+      case png:
       case webp:
       case svg:
       case url: return null;
       case urlPdf:
       case urlDocx:
+      case urlPng:
       case urlWebp:
-      case urlSvg: return MdiIcons.link;
+      case urlSvg: return MdiIcons.web;
     }
   }
 
@@ -261,6 +267,7 @@ class KonspektAttachment{
         case KonspektAttachmentFormat.urlDocx:
           launchURL(assetPath);
           return true;
+        case KonspektAttachmentFormat.urlPng:
         case KonspektAttachmentFormat.urlWebp:
           openImageDialog(context, assetPath, web: true);
           return true;
@@ -276,6 +283,7 @@ class KonspektAttachment{
             result = await openAsset('packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', webOpenInNewTab: true);
 
           return result.type == ResultType.done;
+        case KonspektAttachmentFormat.png:
         case KonspektAttachmentFormat.webp:
           if(assetPath.contains('/'))
             await openImageDialog(context, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false);
