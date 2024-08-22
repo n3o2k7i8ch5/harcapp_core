@@ -5,6 +5,8 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
+import 'package:harcapp_core/comm_widgets/open_image_dialog.dart';
+import 'package:harcapp_core/comm_widgets/open_svg_image_dialog.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:open_filex/open_filex.dart';
@@ -54,15 +56,19 @@ enum KonspektType{
 }
 
 enum KonspektAttachmentFormat{
-  pdf, docx, url, urlPdf, urlDocx;
+  pdf, docx, webp, svg, url, urlPdf, urlDocx, urlWebp, urlSvg;
   
   Color get color{
     switch(this){
       case pdf: return Colors.red;
       case docx: return Colors.blue;
+      case webp: return Colors.orange;
+      case svg: return Colors.deepPurpleAccent;
       case url: return Colors.grey;
       case urlPdf: return Colors.red;
       case urlDocx: return Colors.blue;
+      case urlWebp: return Colors.orange;
+      case urlSvg: return Colors.deepPurpleAccent;
     }
   }
 
@@ -70,9 +76,13 @@ enum KonspektAttachmentFormat{
     switch(this){
       case pdf: return 'PDF';
       case docx: return 'DOC';
+      case webp: return 'WEBP';
+      case svg: return 'SVG';
       case url: return 'URL';
       case urlPdf: return 'PDF';
       case urlDocx: return 'DOC';
+      case urlWebp: return 'WEBP';
+      case urlSvg: return 'SVG';
     }
   }
 
@@ -80,9 +90,13 @@ enum KonspektAttachmentFormat{
     switch(this){
       case pdf:
       case docx:
+      case webp:
+      case svg:
       case url: return null;
       case urlPdf:
-      case urlDocx: return MdiIcons.link;
+      case urlDocx:
+      case urlWebp:
+      case urlSvg: return MdiIcons.link;
     }
   }
 
@@ -233,7 +247,7 @@ class KonspektAttachment{
       this.print
     });
 
-    Future<bool> open(String konspektName, KonspektAttachmentFormat format, KonspektCategory konspektCategory) async {
+    Future<bool> open(BuildContext context, String konspektName, KonspektAttachmentFormat format, KonspektCategory konspektCategory) async {
       String? assetPath = assets[format];
       if(assetPath == null) return false;
 
@@ -242,8 +256,16 @@ class KonspektAttachment{
           launchURL(assetPath);
           return true;
         case KonspektAttachmentFormat.urlPdf:
+          launchURL(assetPath);
+          return true;
         case KonspektAttachmentFormat.urlDocx:
           launchURL(assetPath);
+          return true;
+        case KonspektAttachmentFormat.urlWebp:
+          openImageDialog(context, assetPath, web: true);
+          return true;
+        case KonspektAttachmentFormat.urlSvg:
+          openSvgImageDialog(context, assetPath, web: true);
           return true;
         case KonspektAttachmentFormat.pdf:
         case KonspektAttachmentFormat.docx:
@@ -254,12 +276,26 @@ class KonspektAttachment{
             result = await openAsset('packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', webOpenInNewTab: true);
 
           return result.type == ResultType.done;
+        case KonspektAttachmentFormat.webp:
+          if(assetPath.contains('/'))
+            await openImageDialog(context, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false);
+          else
+            await openImageDialog(context, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false);
+
+          return true;
+        case KonspektAttachmentFormat.svg:
+          if(assetPath.contains('/'))
+            await openSvgImageDialog(context, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false);
+          else
+            await openSvgImageDialog(context, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false);
+
+          return true;
       }
 
     }
 
     Future<bool> openOrShowMessage(BuildContext context, String konspektName, KonspektAttachmentFormat format, KonspektCategory konspektCategory) async {
-      bool result = await open(konspektName, format, konspektCategory);
+      bool result = await open(context, konspektName, format, konspektCategory);
       if(!result) showAppToast(context, text: 'Nie udało się otworzyć pliku');
       return result;
     }
