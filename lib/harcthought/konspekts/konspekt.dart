@@ -62,13 +62,13 @@ enum KonspektAttachmentFormat{
     switch(this){
       case pdf: return Colors.red;
       case docx: return Colors.blue;
-      case png: return Colors.orange;
+      case png: return Colors.yellow[600]!;
       case webp: return Colors.orange;
       case svg: return Colors.deepPurpleAccent;
       case url: return Colors.grey;
       case urlPdf: return Colors.red;
       case urlDocx: return Colors.blue;
-      case urlPng: return Colors.orange;
+      case urlPng: return Colors.yellow[600]!;
       case urlWebp: return Colors.orange;
       case urlSvg: return Colors.deepPurpleAccent;
     }

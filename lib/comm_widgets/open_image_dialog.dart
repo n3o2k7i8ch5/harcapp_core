@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/dimen.dart';
 
@@ -28,10 +30,20 @@ class ImageDialog extends StatelessWidget{
           clipBehavior: Clip.hardEdge,
           borderRadius: BorderRadius.circular(AppCard.bigRadius),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               AppBarX(),
               if(web)
-                Image.network(path)
+                Image.network(
+                  path,
+                  loadingBuilder: (_, __, ___) => Padding(
+                    padding: EdgeInsets.all(Dimen.sideMarg),
+                    child: SpinKitChasingDots(
+                      size: 64.0,
+                      color: iconEnab_(context),
+                    ),
+                  ),
+                )
               else
                 Image.asset(path)
             ],
