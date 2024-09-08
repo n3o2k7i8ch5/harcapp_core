@@ -431,7 +431,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '</p>',
     description:
         // W skrócie
-        '<h2>W skrócie</h2>'
+        '<h1>W skrócie</h1>'
         '<p style="text-align:justify;">'
         '<br>Gra toczy się między stronnictwami w turach. Dobrze, jeśli między turami zachowany jest znaczący odstęp czasu, np. jeśli każda tura rozgrywana jest kolejnego dnia.'
         '<br>'
@@ -453,8 +453,8 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '</ol>'
         '<br>'
         // Szczegóły gry - województwa
-        '<h2>Szczegóły gry</h2>'
-        '<h3>Województwa</h3>'
+        '<h1>Szczegóły gry</h1>'
+        '<h2>Województwa</h2>'
         '<p style="text-align:justify;">'
         'Każde województwo zaznaczone jest na <b>mapie głównej</b> i jest opisane przez następujący zestaw cech:'
         '</p>'
@@ -489,7 +489,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
 
         '</ul>'
         // Szczegóły gry - zasoby
-        '<h3>Zasoby</h3>'
+        '<h2>Zasoby</h2>'
         '<p style="text-align:justify;">'
         'Stronnictwa dysponują różnymi zasobami do osiągnięcia celu gry (czyli zakończenia gry z największą liczbą punktów wpływu).'
         '<br>'
@@ -517,7 +517,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<br>Waluty zagraniczne (tj. USD, SUR, CSK, DDM) uczestnicy otrzymują w nominałach 1. Waluty te można pozyskać codziennie zgodnie z zasadami opisanymi w części <b>karty wiedzy</b>.'
         '</p>'
         // Szczegóły gry - agenci wpływu
-        '<h3>Agenci wpływu</h3>'
+        '<h2>Agenci wpływu</h2>'
         '<p style="text-align:justify;">'
         'Stronnictwa mogą umieszczać agentów wpływu na mapie. Agenci pozwalają uczestnikom na szereg działań:'
         '</p>'
@@ -542,7 +542,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<br><b>Agenci różnych stronnictw mogą się znajdować w tym samym województwie</b>.'
         '</p>'
         // Szczegóły gry - agenci wpływu - umieszczanie nowych agentów wpływu
-        '<h4>Umieszczanie nowych agentów wypływu</h4>'
+        '<h3>Umieszczanie nowych agentów wypływu</h3>'
         '<p style="text-align:justify;">'
         'Umieszczenie nowego agenta wpływu na mapie przez określone stronnictwo odbywa się poprzez przekazanie prowadzącemu dwóch rzeczy:'
         '</p>'
@@ -602,18 +602,18 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<br>Agent jest reprezentowany przez <b>znacznik na głównej mapie</b> gry oraz w segregatorze u prowadzącego grę, gdzie ma on swoją <b>koszulkę z legendą oraz zasobami</b>, które stronnictwo agentowi przydzieli.'
         '</p>'
         // Szczegóły gry - agenci wpływu - zasoby agenta
-        '<h4>Zasoby agenta</h4>'
+        '<h3>Zasoby agenta</h3>'
         '<p style="text-align:justify;">'
         'Każdy agent może mieć przydzielone od swojego stronnictwa zasoby w postaci <b>środków finansowych</b> (dowolnych walut) oraz <b>kart działań specjalnych</b>. Zasoby te można przydzielić lub odebrać agentowi jedynie na samym końcu tury.'
         '<br>'
         '<br>Zasoby agenta to środki, którymi dysponuje on w celu prowadzenia swoich działań: nagłaśnianie informacji oraz przeprowadzanie strajków.'
         // Szczegóły gry - agenci wpływu - zasoby agenta
-        '<h4>Karty działań specjalnych</h4>'
+        '<h3>Karty działań specjalnych</h3>'
         '<p style="text-align:justify;">'
         '...'
         '</p>'
         // Szczegóły gry - agenci wpływu - strajk
-        '<h4>Strajk</h4>'
+        '<h3>Strajk</h3>'
         '<p style="text-align:justify;">'
         'Każdy agent może wywołać w swoim województwie strajk. Jeżeli strajk zakończy się powodzeniem, stronnictwo otrzymuje 5 punktów wpływu. Jeśli strajk zakończy się porażką, agent zostaje zdemaskowany i znika.'
         '<br>'
@@ -653,7 +653,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
 
         '</ul>'
         // Szczegóły gry - agenci wpływu - praca zakładowa agentów
-        '<h4>Praca zakładowa agentów</h4>'
+        '<h3>Praca zakładowa agentów</h3>'
         '<p style="text-align:justify;">'
         'Stronnictwa pozyskują dodatkowe środki z województw, w których mają agentów za ich pracę w lokalnej gospodarce. Co turę wartość środków pozyskanych przez agenta się przez poprzez pomnożenie skuteczności agenta przez poziom nastrojów społecznych i podzielenie wyniku przez 100. Po zsumowaniu pozyskanych środków z wszystkich województw, wartość zaokrąglana jest w dół do milionów PLZ.'
         '<br>'
@@ -677,12 +677,12 @@ Konspekt zycie_i_swiat_prl = Konspekt(
 
         '</ul>'
         // Szczegóły gry - agenci wpływu - pozyskiwanie informacji
-        '<h4>Pozyskiwanie informacji</h4>'
+        '<h3>Pozyskiwanie informacji</h3>'
         '<p style="text-align:justify;">'
         'Stronnictwa (uczestnicy) otrzymują co turę informację na temat wydarzeń w województwach, w którym mają umieszczonych agentów oraz województwach sąsiednich. Informacje te mogą następnie wykorzystywać w celu lepszego rozeznania w nastrojach społecznych oraz podjęcia odpowiednich działań.'
         '</p>'
         // Szczegóły gry - agenci wpływu - nagłaśnianie informacji
-        '<h4>Nagłaśnianie informacji</h4>'
+        '<h3>Nagłaśnianie informacji</h3>'
         '<p style="text-align:justify;">'
         'Agenci mogą nagłaśniać informacje, które do nich spływają. Nagłośnione informacje są publicznie dostępne w całym kraju, jednak mogą mieć różne oddziaływanie na różne województwa.'
         '<br>'
@@ -717,7 +717,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
           '</tr>'
         '</table>'
         // Szczegóły gry - karty wiedzy
-        '<h3>Karty wiedzy</h3>'
+        '<h2>Karty wiedzy</h2>'
         '<p style="text-align:justify;">'
         'Stronnictwa mogą zdobywać karty wiedzy poprzez zainwestowanie w nie odpowiednich środków. Karty wiedzy dostarczają dwóch rzeczy: zniżek na płatności w różnych walutach oraz niektóre karty dostarczają punktów wpływu. Karty te są ciągle ogólnie dostępne na wspólnej dla stronnictw “tablicy rozwoju”.'
         '<br>'
@@ -740,7 +740,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         'Karty te są kopią mechaniki z gry planszowej “Splendor”.'
         '</p>'
         // Meta zasady
-        '<h2>Karty wiedzy</h2>'
+        '<h1>Karty wiedzy</h1>'
         '<p style="text-align:justify;">'
         'Uczestnicy powinni sami wywnioskować niniejszą prawidłowość, a jeśli tego nie robią, prowadzący może ich nakierować:'
         '<br>'
@@ -749,13 +749,13 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<br>Z drugiej strony im lepsze nastroje społeczne, tym zazwyczaj mniejsza kontrola. Oznacza to, że łatwiej i taniej jest umieszczać Agentów w czasach dobrych nastrojów społecznych, ale na strajki należy poczekać aż nadejdą trudne czasy.'
         '</p>'
         // Rozpoczęcie gry
-        '<h2>Rozpoczęcie gry</h2>'
+        '<h1>Rozpoczęcie gry</h1>'
         '<ol>'
             '<li><p style="text-align:justify;">Stronnictwa wybierają swoje nazwy,</p></li>'
             '<li><p style="text-align:justify;">Stronnictwa wybierają dowolne skrajne województwo, w którym za darmo lokują swojego pierwszego Agenta (po przekazaniu prowadzącemu Legendy Agenta).</p></li>'
         '</ol>'
         // Przebieg tury
-        '<h2>Przebieg tury</h2>'
+        '<h1>Przebieg tury</h1>'
         '<ol>'
         '<li><p style="text-align:justify;"><b>Pozyskiwane kart wiedzy lub walut zagranicznych.</b></p></li>'
         '<li>'
@@ -813,7 +813,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '</ol>'
 
         // Etapy gry
-        '<h2>Etapy gry</h2>'
+        '<h1>Etapy gry</h1>'
         '<p style="text-align:justify;">'
         'Gra, ponieważ ma także walor historyczny, składa się z kolejnych “etapów komunizmu”. W momencie nastania kolejnych etapów w grze, w miejscu rozłożenia planszy dobrze jest wywiesić portret sekretarza generalnego KC PZPR, żeby uczestnicy zobaczyli jak wyglądał.'
         '</p>'

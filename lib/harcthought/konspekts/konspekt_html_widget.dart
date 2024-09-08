@@ -78,7 +78,32 @@ class KonspektHtmlWidget extends StatelessWidget{
           return SvgPicture.network(src);
         else
           return Image.network(src);
-      }
+      }else if(element.localName == "h1")
+        return Text(
+          element.innerHtml,
+          style: AppTextStyle(
+            fontSize: Dimen.textSizeAppBar,
+            fontWeight: weight.halfBold,
+            decoration: TextDecoration.underline
+          ),
+        );
+      else if(element.localName == "h2")
+        return Text(
+          element.innerHtml,
+          style: AppTextStyle(
+              fontSize: Dimen.textSizeAppBar,
+              fontWeight: weight.halfBold
+          ),
+        );
+      else if(element.localName == "h3")
+        return Text(
+          element.innerHtml,
+          style: AppTextStyle(
+              fontSize: Dimen.textSizeBig,
+              fontWeight: weight.halfBold
+          ),
+        );
+
       return null;
     },
   );
