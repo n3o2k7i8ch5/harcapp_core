@@ -690,7 +690,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<br>'
         '<br>Koszt osiągnięcia określonej zmiany dany jest kolejnymi liczbami ciągu Fibbonaciego:'
         '</p>'
-        '<table border="1" style="border-collapse: collapse;>'
+        '<table border="1" style="border-collapse: collapse;">'
           '<tr>'
             '<th><p>Zmiana poziomu nastrojów</p></th>'
             '<th><p>Koszt</p></th>'
