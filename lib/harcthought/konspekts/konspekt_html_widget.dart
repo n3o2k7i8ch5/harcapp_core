@@ -100,10 +100,18 @@ class KonspektHtmlWidget extends StatelessWidget{
           element.innerHtml,
           style: AppTextStyle(
               fontSize: Dimen.textSizeBig,
-              fontWeight: weight.halfBold
+              fontWeight: weight.halfBold,
+              decoration: TextDecoration.underline
           ),
         );
-
+      else if(element.localName == "h4")
+        return Text(
+          element.innerHtml,
+          style: AppTextStyle(
+              fontSize: Dimen.textSizeBig,
+              fontWeight: weight.halfBold,
+          ),
+        );
       return null;
     },
   );
