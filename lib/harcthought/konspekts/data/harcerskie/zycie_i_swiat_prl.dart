@@ -609,7 +609,84 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<br>Zasoby agenta to środki, którymi dysponuje on w celu prowadzenia swoich działań: nagłaśnianie informacji oraz przeprowadzanie strajków.'
         // Szczegóły gry - agenci wpływu - zasoby agenta
         '<h4>Karty działań specjalnych</h4>'
-    ,
+        '<p style="text-align:justify;">'
+        '...'
+        '</p>'
+        // Szczegóły gry - agenci wpływu - strajk
+        '<h4>Strajk</h4>'
+        '<p style="text-align:justify;">'
+        'Każdy agent może wywołać w swoim województwie strajk. Jeżeli strajk zakończy się powodzeniem, stronnictwo otrzymuje 5 punktów wpływu. Jeśli strajk zakończy się porażką, agent zostaje zdemaskowany i znika.'
+        '<br>'
+        '<br>Po każdym strajku, niezależnie czy zakończonym powodzeniem, czy porażką, poziom kontroli w województwie rośnie o 1 lub o 2 poziomy.'
+        '<br>'
+        '<br>Strajk kończy się sukcesem, jeśli w turze następującej po jego rozpoczęciu ma więcej przydzielonych środków niż graniczny koszt powodzenia strajku. Wartość ta jest liczona jako suma następujących elementów:'
+        '</p>'
+        '<ul>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<u>Koszt bazowy</u>'
+        '<br>Na początku gry jest to <b>10 mln PLZ</b>. Koszt być w miarę postępu gry zwiększany lub zmniejszany przez prowadzącego.'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<u>Skuteczność agenta</u>'
+        '<br><b>Za każdy poziom skuteczności agenta</b> koszt to <b>-1 mln PLZ</b>.'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<u>Poziom nastrojów społecznych w województwie</u>'
+        '<br><b>Za każdy poziom nastrojów społecznych</b> koszt to <b>+1 mln PLZ</b>.'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<u>Poziom kontroli w województwie</u>'
+        '<br><b>Za każdy poziom kontroli</b> koszt to <b>+1 mln PLZ</b>.'
+        '</p>'
+        '</li>'
+
+        '</ul>'
+        // Szczegóły gry - agenci wpływu - praca zakładowa agentów
+        '<h4>Praca zakładowa agentów</h4>'
+        '<p style="text-align:justify;">'
+        'Stronnictwa pozyskują dodatkowe środki z województw, w których mają agentów za ich pracę w lokalnej gospodarce. Co turę wartość środków pozyskanych przez agenta się przez poprzez pomnożenie skuteczności agenta przez poziom nastrojów społecznych i podzielenie wyniku przez 100. Po zsumowaniu pozyskanych środków z wszystkich województw, wartość zaokrąglana jest w dół do milionów PLZ.'
+        '<br>'
+        '<br>Z każdego województwa ilość środków możliwych do pozyskania wynosi między 0 PLZ a 1 000 000 PLZ.'
+        '<br>'
+        '<br>Mechanizm ten ma dwa cele:'
+        '</p>'
+        '<ul>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Zapewnić, by, zwłaszcza na początku, większość zasobów stronnictw pochodziła z realizacji celów wychowawczych.'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Wprowadzić u Stronnictw powód do dbania o wysokie nastroje społeczne.'
+        '</p>'
+        '</li>'
+
+        '</ul>'
+        // Szczegóły gry - agenci wpływu - pozyskiwanie informacji
+        '<h4>Pozyskiwanie informacji</h4>'
+        '<p style="text-align:justify;">'
+        'Stronnictwa (uczestnicy) otrzymują co turę informację na temat wydarzeń w województwach, w którym mają umieszczonych agentów oraz województwach sąsiednich. Informacje te mogą następnie wykorzystywać w celu lepszego rozeznania w nastrojach społecznych oraz podjęcia odpowiednich działań.'
+        '</p>'
+        // Szczegóły gry - agenci wpływu - nagłaśnianie informacji
+        '<h4>Nagłaśnianie informacji</h4>'
+        '<p style="text-align:justify;">'
+        ''
+        '</p>',
+
     attachments: [
       attach_mapa_glowna,
 
