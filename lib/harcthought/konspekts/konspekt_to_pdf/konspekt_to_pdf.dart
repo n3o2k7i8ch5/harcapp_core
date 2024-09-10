@@ -453,6 +453,7 @@ Widget MaterialWidget(KonspektMaterial material, Font font, Font fontBold, Font 
     child: Padding(
       padding: EdgeInsets.all(elementSmallSeparator),
       child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
 
             Row(
@@ -477,7 +478,7 @@ Widget MaterialWidget(KonspektMaterial material, Font font, Font fontBold, Font 
             if(material.comment != null)
               Text(
                   material.comment!,
-                  style: TextStyle(fontSize: defTextSize, height: 1.2, color: PdfColors.grey)
+                  style: TextStyle(font: font, fontSize: defTextSize, height: 1.2, color: PdfColors.grey)
               ),
 
             if(material.additionalPreparation != null)
