@@ -500,6 +500,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
 
         '</ul>'
         // Szczegóły gry - zasoby
+        '<h1>Szczegóły gry</h1>'
         '<h2>Zasoby</h2>'
         '<p style="text-align:justify;">'
         'Stronnictwa dysponują różnymi zasobami do osiągnięcia celu gry.'
@@ -528,6 +529,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<br>Waluty zagraniczne (tj. USD, SUR, CSK, DDM) uczestnicy otrzymują w nominałach 1. Waluty te można pozyskać codziennie zgodnie z zasadami opisanymi w części <b>karty wiedzy</b>.'
         '</p>'
         // Szczegóły gry - agenci wpływu
+        '<h1>Szczegóły gry</h1>'
         '<h2>Agenci wpływu</h2>'
         '<p style="text-align:justify;">'
         'Stronnictwa mogą umieszczać agentów wpływu na mapie. Agenci pozwalają uczestnikom na szereg działań:'
@@ -728,6 +730,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
           '</tr>'
         '</table>'
         // Szczegóły gry - karty wiedzy
+        '<h1>Szczegóły gry</h1>'
         '<h2>Karty wiedzy</h2>'
         '<p style="text-align:justify;">'
         'Stronnictwa mogą zdobywać karty wiedzy poprzez zainwestowanie w nie odpowiednich środków. Karty wiedzy dostarczają dwóch rzeczy: zniżek na płatności w różnych walutach oraz niektóre karty dostarczają punktów wpływu. Karty te są ciągle ogólnie dostępne na wspólnej dla stronnictw “tablicy rozwoju”.'

@@ -46,10 +46,33 @@ Future<List<Widget>> fromHtml({
             .replaceAll('&nbsp', '&zwnj;'),
         defaultFont: font,
         tagStyle: HtmlTagStyle(
+            h1Style: TextStyle(
+                font: fontBold,
+                fontBold: fontBold,
+                fontItalic: fontBoldItalic,
+                fontBoldItalic: fontBoldItalic,
+                fontSize: headerTextSize,
+                decoration: TextDecoration.underline
+            ),
+            h2Style: TextStyle(
+                font: fontBold,
+                fontBold: fontBold,
+                fontItalic: fontBoldItalic,
+                fontBoldItalic: fontBoldItalic,
+                fontSize: headerTextSize
+            ),
+            h3Style: TextStyle(
+                font: fontBold,
+                fontBold: fontBold,
+                fontItalic: fontBoldItalic,
+                fontBoldItalic: fontBoldItalic,
+                fontSize: defTextSize,
+                decoration: TextDecoration.underline
+            ),
             paragraphStyle: TextStyle(
                 font: font,
                 fontBold: fontBold,
-                fontItalic: fontItalic,
+                fontItalic: fontBoldItalic,
                 fontBoldItalic: fontBoldItalic,
                 fontSize: fontSize??defTextSize
             ),
