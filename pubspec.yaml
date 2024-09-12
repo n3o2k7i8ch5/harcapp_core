@@ -120,3 +120,18 @@ flutter:
     - assets/konspekty/ksztalcenie/wstep_do_wychowania_duchowego/
 
     - assets/wiersze/
+
+  fonts:
+
+    - family: Lato
+      fonts:
+        - asset: fonts/Lato/Lato-Regular.ttf
+          weight: 300
+        - asset: fonts/Lato/Lato-Italic.ttf
+          weight: 300
+          style: italic
+        - asset: fonts/Lato/Lato-Bold.ttf
+          weight: 700
+        - asset: fonts/Lato/Lato-BoldItalic.ttf
+          weight: 700
+          style: italic

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart' show Colors;
@@ -856,10 +857,15 @@ Widget AuthorWidget(Konspekt konspekt, Font font, Font fontBold){
 Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) async {
 
   final pdf = Document(pageMode: PdfPageMode.outlines);
-  final font = await PdfGoogleFonts.latoRegular();
-  final fontItalic = await PdfGoogleFonts.latoItalic();
-  final fontBold = await PdfGoogleFonts.latoBold();
-  final fontBoldItalic = await PdfGoogleFonts.latoBoldItalic();
+  // final font = await PdfGoogleFonts.latoRegular();
+  // final fontItalic = await PdfGoogleFonts.latoItalic();
+  // final fontBold = await PdfGoogleFonts.latoBold();
+  // final fontBoldItalic = await PdfGoogleFonts.latoBoldItalic();
+
+  final font = Font.ttf(File('packages/harcapp_core/fonts/Lato/Lato-Regular.ttf').readAsBytesSync().buffer.asByteData());
+  final fontItalic = Font.ttf(File('packages/harcapp_core/fonts/Lato/Lato-Italic.ttf').readAsBytesSync().buffer.asByteData());
+  final fontBold = Font.ttf(File('packages/harcapp_core/fonts/Lato/Lato-Bold.ttf').readAsBytesSync().buffer.asByteData());
+  final fontBoldItalic = Font.ttf(File('packages/harcapp_core/fonts/Lato/Lato-BoldItalic.ttf').readAsBytesSync().buffer.asByteData());
 
   List<Widget> multiPage =  [];
 
