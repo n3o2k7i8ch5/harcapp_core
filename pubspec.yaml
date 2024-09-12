@@ -121,6 +121,13 @@ flutter:
 
     - assets/wiersze/
 
+    - fonts/
+    - fonts/Lato/
+    - fonts/Lato/Lato-Regular.ttf
+    - fonts/Lato/Lato-Italic.ttf
+    - fonts/Lato/Lato-Bold.ttf
+    - fonts/Lato/Lato-BoldItalic.ttf
+
   fonts:
 
     - family: Lato
