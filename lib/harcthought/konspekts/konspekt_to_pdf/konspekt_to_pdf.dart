@@ -856,10 +856,6 @@ Widget AuthorWidget(Konspekt konspekt, Font font, Font fontBold){
 Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) async {
 
   final pdf = Document(pageMode: PdfPageMode.outlines);
-  // final font = await PdfGoogleFonts.latoRegular();
-  // final fontItalic = await PdfGoogleFonts.latoItalic();
-  // final fontBold = await PdfGoogleFonts.latoBold();
-  // final fontBoldItalic = await PdfGoogleFonts.latoBoldItalic();
 
   final font = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Lato/Lato-Regular.ttf'))!);
   final fontItalic = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Lato/Lato-Italic.ttf'))!);
