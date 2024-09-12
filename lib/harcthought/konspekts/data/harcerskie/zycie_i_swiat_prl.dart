@@ -304,6 +304,64 @@ Konspekt zycie_i_swiat_prl = Konspekt(
       ),
 
       KonspektMaterial(
+          name: 'Marker',
+          amount: 3,
+          comment: "Do narysowania mapy na prześcieradle."
+      ),
+
+      KonspektMaterial(
+          name: 'Punkty wpływu',
+          amountAttendantFactor: 100,
+          comment: "Dobrze nadają się w tym celu kryształki z akrylu (złote)."
+      ),
+
+      KonspektMaterial(
+          name: 'Znaczniki protestu',
+          amountAttendantFactor: 20,
+          comment: "Dobrze nadają się w tym celu kryształki z akrylu (czerone)."
+      ),
+
+      KonspektMaterial(
+          name: 'Znaczniki agentów dla każdego ze stronnictw',
+          amountAttendantFactor: 50,
+          comment: "Znaczniki powinny mieć różny kolor dla każdego stronnictwa. Dobrze nadają się w tym celu kryształki z akrylu (niebieskie, fioletowe, zielone, pomarańczowe, ...)."
+      ),
+
+      KonspektMaterial(
+          name: 'Znaczniki wydarzeń specjalnych',
+          amount: 50,
+          comment: "Dobrze nadają się w tym celu kryształki z akrylu (białe)."
+      ),
+
+      KonspektMaterial(
+          name: 'Pinezki',
+          amount: 200,
+          comment: "Pinezki są niezbędne, aby przypiąć do każdego z województw po jednym znaczniku poziomu nastrojów społecznych i poziomu kontorli oraz informacji nagłośnionych przez stronnictwa."
+      ),
+
+      KonspektMaterial(
+          name: 'Segregator',
+          amount: 10,
+      ),
+
+      KonspektMaterial(
+        name: 'Koszulki na dokumenty',
+        amount: 200,
+      ),
+
+      KonspektMaterial(
+          name: 'Długopisy',
+          amount: 5,
+          comment: "Do spisywania legendy agentów."
+      ),
+
+      KonspektMaterial(
+          name: 'Nożyczki',
+          amount: 2,
+          comment: "Część materiałów należy pociąć."
+      ),
+
+      KonspektMaterial(
           name: 'Wydrukowany załącznik “$attach_mapa_glowna"',
           attachmentName: attach_name_mapa_glowna,
           amount: 1,
@@ -456,7 +514,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<h1>Szczegóły gry</h1>'
         '<h2>Województwa</h2>'
         '<p style="text-align:justify;">'
-        'Gra toczy się przede wszystkikm w jednym, ustalonym miejscu, gdzie na stałe umieszczona jest duża (ok. 1x1 m) <b>mapa główna</b> - konturowa mapa Polski podzielonej na 49 województw z okresu PRL wraz z fragemtami sąsiadujących z Polską państw (załącznik $attach_name_mapa_glowna). Mapa główna służy śledzeniu aktualnego stanu świata: rozmieszczenia agentów, skutków ich działania, wydarzeń specjalnych itd..'
+        'Gra toczy się głównie w jednym, ustalonym miejscu, gdzie na stałe umieszczona jest duża (ok. 1x1 m) <b>mapa główna</b> - konturowa mapa Polski podzielonej na 49 województw z okresu PRL wraz z fragemtami sąsiadujących wówczas z Polską państw (załącznik $attach_name_mapa_glowna). Mapa główna służy śledzeniu aktualnego stanu gry: rozmieszczenia agentów, skutków ich działania, wydarzeń specjalnych itd..'
         '<br>'
         '<br>Każde województwo na mapie jest opisane przez następujące elementy:'
         '</p>'
@@ -494,7 +552,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<b>Wydarzenia codzienne</b>'
         '<br>Skala: brak.'
         '<br>'
-        '<br>Co kilka tur każde województwo otrzymuje nową porcję lokalnych wydarzeń, na które stronnictwa powinny reagować. Wydarzenia te mogą mieć wpływ na nastroje społeczne. Domyślnie wydarzenia nie są oznaczone na mapie - pojawiają się tam tylko, jeśli stronnictwo zdecyduje się zapłacić za jego nagłośnienie.'
+        '<br>Co kilka tur każde województwo otrzymuje nową porcję lokalnych wydarzeń, na które stronnictwa powinny reagować. Wydarzenia te mogą mieć wpływ na nastroje społeczne. Domyślnie wydarzenia nie są oznaczone na mapie - pojawiają się tam tylko, jeśli stronnictwo zdecyduje się zainwestować środki za jego nagłośnienie.'
         '</p>'
         '</li>'
 
@@ -535,29 +593,29 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         'Stronnictwa mogą umieszczać agentów wpływu na mapie. Agenci pozwalają uczestnikom na szereg działań:'
         '</p>'
         '<ul>'
-        '<li><p style="text-align:justify;">Pozyskiwanie PLZ za pracę <u>zakładową agentów</u></p></li>'
-        '<li><p style="text-align:justify;"><u>Zbieranie informacji</u> o wydarzeniach mogących wpływać na województwo</p></li>'
-        '<li><p style="text-align:justify;">Wpływanie na poziom nastrojów społecznych i poziom kontroli w województwie poprzez <u>nagłaśnianie zebranych informacji</u></p></li>'
-        '<li><p style="text-align:justify;">Zdobywanie punktów wpływu poprzez przeprowadzanie udanych <u>strajków</u></p></li>'
+        '<li><p style="text-align:justify;">Pozyskiwanie PLZ za <u>pracę zakładową agentów</u> (agenci zarabiają dla swojego stronnictwa PLZ z samego faktu swojego funkcjonowania w społeczeństwie),</p></li>'
+        '<li><p style="text-align:justify;"><u>Zbieranie informacji</u> o wydarzeniach mogących wpływać na województwo,</p></li>'
+        '<li><p style="text-align:justify;">Wpływanie na poziom nastrojów społecznych i poziom kontroli w województwie poprzez <u>nagłaśnianie zebranych informacji</u>,</p></li>'
+        '<li><p style="text-align:justify;">Zdobywanie punktów wpływu poprzez przeprowadzanie udanych <u>strajków</u>,</p></li>'
 
         '</ul>'
         '<p style="text-align:justify;">'
-        'Każdy agent jest charakteryzowany przez następujący zestaw cech:'
+        'Każdy agent jest opisany przez następujący zestaw cech:'
         '</p>'
         '<ul>'
-        '<li><p style="text-align:justify;">Stronnictwo, dla którego działa</p></li>'
-        '<li><p style="text-align:justify;">Województwo, w którym operuje</p></li>'
-        '<li><p style="text-align:justify;">Skuteczność, liczoną w skali od 0 do 10</p></li>'
+        '<li><p style="text-align:justify;">Stronnictwo, dla którego działa,</p></li>'
+        '<li><p style="text-align:justify;">Województwo, w którym operuje,</p></li>'
+        '<li><p style="text-align:justify;">Skuteczność, liczoną w skali od 0 do 10,</p></li>'
         '</ul>'
         '<p style="text-align:justify;">'
         'Jedno stronnictwo może mieć w jednym województwie dowolną liczbę agentów, choć posiadanie ich więcej niż 1 na województwo nie niesie za sobą większych korzyści.'
         '<br>'
-        '<br><b>Agenci różnych stronnictw mogą się znajdować w tym samym województwie</b>.'
+        '<br>Agenci różnych stronnictw mogą się znajdować w tym samym województwie.'
         '</p>'
         // Szczegóły gry - agenci wpływu - umieszczanie nowych agentów wpływu
         '<h3>Umieszczanie nowych agentów wypływu</h3>'
         '<p style="text-align:justify;">'
-        'Umieszczenie nowego agenta wpływu na mapie przez określone stronnictwo odbywa się poprzez przekazanie prowadzącemu dwóch rzeczy:'
+        'Umieszczenie nowego agenta wpływu na mapie przez stronnictwo odbywa się poprzez przekazanie prowadzącemu gry dwóch rzeczy:'
         '</p>'
 
         '<ul>'
@@ -596,50 +654,61 @@ Konspekt zycie_i_swiat_prl = Konspekt(
             '<p style="text-align:justify;">'
             '<b>Legendy agenta</b>'
             '<br>'
-            '<br>Legenda to jednostronicowy opis “przykrywki” agenta: opis codziennego życia, pracy, historii itd. uzupełniony na podstawie załącznika “wniosek o zalegendowanie agenta”.'
+            '<br>Legenda agenta to jednostronicowy opis “przykrywki” agenta: opis codziennego życia, pracy, historii itd. uzupełniony na podstawie załącznika $attach_wniosek_o_zalegendowanie_agenta.'
             '<br>'
-            '<br>Na podstawie legendy prowadzący wystawia agentowi skuteczność sumując:'
+            '<br>Na podstawie legendy prowadzący wystawia agentowi skuteczność. Ocenie podlegają:'
             '</p>'
             '<ul>'
-            '<li><p style="text-align:justify;">Wiarygodności legendy (0-2 pkt.)</p></li>'
-            '<li><p style="text-align:justify;">Wyjątkowości legendy (0-2 pkt.)</p></li>'
-            '<li><p style="text-align:justify;">Szczegółowości legendy (0-3 pkt.)</p></li>'
-            '<li><p style="text-align:justify;">Dopasowania legendy do województwa w którym agent będzie działał (0-2 pkt.)</p></li>'
-            '<li><p style="text-align:justify;">Ortografii i stylistyki (0-1 pkt.)</p></li>'
+            '<li><p style="text-align:justify;">Wiarygodność legendy (0-2 pkt.)</p></li>'
+            '<li><p style="text-align:justify;">Wyjątkowość legendy (0-2 pkt.)</p></li>'
+            '<li><p style="text-align:justify;">Szczegółowość legendy (0-3 pkt.)</p></li>'
+            '<li><p style="text-align:justify;">Dopasowanie legendy do województwa w którym agent będzie działał (0-2 pkt.)</p></li>'
+            '<li><p style="text-align:justify;">Ortografia i stylistyka (0-1 pkt.)</p></li>'
             '</ul>'
         '</li>'
         '</ul>'
         '<p style="text-align:justify;">'
-        'Proces umieszczenia nowego <b>agenta wpływu</b> trwa całą turę - w turze bieżącej stronnictwa przekazują środki pieniężne i legendę agenta, zaś za planszy pojawia się on dopiero w kolejnej turze.'
+        'Proces umieszczenia nowego agenta wpływu trwa jedną turę - w turze bieżącej stronnictwa przekazują środki pieniężne i legendę agenta, jednak za planszy pojawia się on dopiero na początku kolejnej tury.'
         '<br>'
-        '<br>Agent jest reprezentowany przez <b>znacznik na głównej mapie</b> gry oraz w segregatorze u prowadzącego grę, gdzie ma on swoją <b>koszulkę z legendą oraz zasobami</b>, które stronnictwo agentowi przydzieli.'
+        '<br>Agent jest reprezentowany przez <b>znacznik na głównej mapie</b> gry oraz przez podpisaną przez prowadzącego legendy agenta, przechowywaną przez stronnictwo. Ważne, by podpisana legenda agenta znajdowała się w <b>koszulce</b> - jest to niezbędne, aby agentom dało się przydzielić zasoby (można wówczas wrzucić banknoty do koszulki z legendą agenta).'
         '</p>'
         // Szczegóły gry - agenci wpływu - zasoby agenta
         '<h3>Zasoby agenta</h3>'
         '<p style="text-align:justify;">'
-        'Każdy agent może mieć przydzielone od swojego stronnictwa zasoby w postaci <b>środków finansowych</b> (dowolnych walut) oraz <b>kart działań specjalnych</b>. Zasoby te można przydzielić lub odebrać agentowi jedynie na samym końcu tury.'
+        'Każdy agent może mieć przydzielone zasoby w postaci <b>środków finansowych</b> (dowolnych walut) oraz <b>kart wsparcia agenta</b>. Zasoby te można przydzielić lub odebrać agentowi jedynie na samym końcu tury.'
         '<br>'
         '<br>Zasoby agenta to środki, którymi dysponuje on w celu prowadzenia swoich działań: nagłaśnianie informacji oraz przeprowadzanie strajków.'
-        // Szczegóły gry - agenci wpływu - zasoby agenta
-        '<h3>Karty działań specjalnych</h3>'
+        // Szczegóły gry - agenci wpływu - karty wsparcia operacji
+        '<h3>Karty wsparcia operacji</h3>'
         '<p style="text-align:justify;">'
-        '...'
+        '<b>Karty wsparcia operacji</b> to specjalne akcje, które można przydzielić agentom w celu zwiększenia ich skuteczności w czasie przeprowadzania strajków. Karty te można zdobyć od prowadzącego grę np. za postawę, zaangażowanie w zajęcia obozowe itp..'
+        '<br>'
+        '<br>Z kart wsparcia operacji agent może skorzystać jedynie, jeśli w trakcie strajku jest ona w przydzielonych mu zasobach. Karty wsparcia operacji są jednorazowe - po użyciu są zwracane prowadzącemu.'
+        '<br>'
+        '<br>Prowadzący ma dowolność w tworzeniu kart wsparcia operacji. Przykładowe karty wsparcia operacji to:'
+        '<ul>'
+            '<li><p style="text-align:justify;">Karta “Zaangażowanie” - zwiększa skuteczność agenta na czas strajku o 1 pkt.</p></li>'
+            '<li><p style="text-align:justify;">Karta “Znajomość terenu” - zmniejsza poziom kontroli w województwie na czas strajku o 1 pkt.</p></li>'
+            '<li><p style="text-align:justify;">Karta “Znajomość ludzi” - zmniejsza poziom nastrojów społecznych w województwie na czas strajku o 2 pkt.</p></li>'
+            '<li><p style="text-align:justify;">Karta “Korumpowanie milicji” - zmniejsza poziom kontroli w województwie na czas strajku o 2 pkt.</p></li>'
+            '<li><p style="text-align:justify;">Karta “Ewakuacja za winklem” - w przypadku przegranego strajku, agent nie zostaje zdemaskowany.</p></li>'
+            '<li><p style="text-align:justify;">Karta “Wyciąganie wniosków” - w przypadku udanego strajku, agent otrzymuje na stałe +1 punkt skuteczności.</p></li>'
         '</p>'
         // Szczegóły gry - agenci wpływu - strajk
         '<h3>Strajk</h3>'
         '<p style="text-align:justify;">'
-        'Każdy agent może wywołać w swoim województwie strajk. Jeżeli strajk zakończy się powodzeniem, stronnictwo otrzymuje 5 punktów wpływu. Jeśli strajk zakończy się porażką, agent zostaje zdemaskowany i znika.'
+        'Każdy agent może wywołać w swoim województwie strajk. Jeżeli strajk zakończy się powodzeniem, stronnictwo otrzymuje <b>5 punktów wpływu</b>. Jeśli strajk zakończy się porażką, agent zostaje zdemaskowany i znika (nie ma za niego żadnej rekompensaty).'
         '<br>'
-        '<br>Po każdym strajku, niezależnie czy zakończonym powodzeniem, czy porażką, poziom kontroli w województwie rośnie o 1 lub o 2 poziomy.'
+        '<br>Po każdym strajku, niezależnie czy zakończonym powodzeniem, czy porażką, poziom kontroli w województwie rośnie o 1 lub o 2 poziomy (wybiera prowadzący).'
         '<br>'
-        '<br>Strajk kończy się sukcesem, jeśli w turze następującej po jego rozpoczęciu ma więcej przydzielonych środków niż graniczny koszt powodzenia strajku. Wartość ta jest liczona jako suma następujących elementów:'
+        '<br>Strajk kończy się sukcesem, jeśli w turze następującej po jego rozpoczęciu agent ma więcej przydzielonych środków niż graniczny koszt powodzenia strajku. Koszt graniczny jest liczony jako suma następujących elementów:'
         '</p>'
         '<ul>'
 
         '<li>'
         '<p style="text-align:justify;">'
         '<u>Koszt bazowy</u>'
-        '<br>Na początku gry jest to <b>10 mln PLZ</b>. Koszt być w miarę postępu gry zwiększany lub zmniejszany przez prowadzącego.'
+        '<br>Na początku gry jest to <b>10 mln PLZ</b>. Koszt może być w miarę postępu gry zwiększany lub zmniejszany przez prowadzącego.'
         '</p>'
         '</li>'
 
@@ -668,7 +737,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         // Szczegóły gry - agenci wpływu - praca zakładowa agentów
         '<h3>Praca zakładowa agentów</h3>'
         '<p style="text-align:justify;">'
-        'Stronnictwa pozyskują dodatkowe środki z województw, w których mają agentów za ich pracę w lokalnej gospodarce. Co turę wartość środków pozyskanych przez agenta się przez poprzez pomnożenie skuteczności agenta przez poziom nastrojów społecznych i podzielenie wyniku przez 100. Po zsumowaniu pozyskanych środków z wszystkich województw, wartość zaokrąglana jest w dół do milionów PLZ.'
+        'Stronnictwa pozyskują środki z województw, w których mają agentów za ich pracę w lokalnej gospodarce. Co turę wartość środków pozyskanych przez agenta się przez poprzez pomnożenie skuteczności agenta przez poziom nastrojów społecznych i podzielenie wyniku przez 100. Po zsumowaniu pozyskanych środków z wszystkich województw, wartość zaokrąglana jest w dół do milionów PLZ.'
         '<br>'
         '<br>Z każdego województwa ilość środków możliwych do pozyskania wynosi między 0 PLZ a 1 000 000 PLZ.'
         '<br>'
@@ -678,13 +747,13 @@ Konspekt zycie_i_swiat_prl = Konspekt(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Zapewnić, by, zwłaszcza na początku, większość zasobów stronnictw pochodziła z realizacji celów wychowawczych.'
+        'Zapewnić, by (zwłaszcza na początku) większość zasobów stronnictw pochodziła z realizacji celów wychowawczych.'
         '</p>'
         '</li>'
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Wprowadzić u Stronnictw powód do dbania o wysokie nastroje społeczne.'
+        'Wprowadzić u stronnictw powód do dbania o wysokie nastroje społeczne.'
         '</p>'
         '</li>'
 
@@ -692,7 +761,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         // Szczegóły gry - agenci wpływu - pozyskiwanie informacji
         '<h3>Pozyskiwanie informacji</h3>'
         '<p style="text-align:justify;">'
-        'Stronnictwa (uczestnicy) otrzymują co turę informację na temat wydarzeń w województwach, w którym mają umieszczonych agentów oraz województwach sąsiednich. Informacje te mogą następnie wykorzystywać w celu lepszego rozeznania w nastrojach społecznych oraz podjęcia odpowiednich działań.'
+        'Stronnictwa (uczestnicy) otrzymują co turę informacje na temat wydarzeń w województwach, w którym mają umieszczonych agentów oraz województwach sąsiednich. Informacje te są dostępne w załączniku $attach_html_wydarzenia_codzienne. Stronnictwa mogą wykorzystywać te informacje w celu wpływania na nastroje społeczne.'
         '</p>'
         // Szczegóły gry - agenci wpływu - nagłaśnianie informacji
         '<h3>Nagłaśnianie informacji</h3>'
@@ -733,28 +802,32 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<h1>Szczegóły gry</h1>'
         '<h2>Karty wiedzy</h2>'
         '<p style="text-align:justify;">'
-        'Stronnictwa mogą zdobywać karty wiedzy poprzez zainwestowanie w nie odpowiednich środków. Karty wiedzy dostarczają dwóch rzeczy: zniżek na płatności w różnych walutach oraz niektóre karty dostarczają punktów wpływu. Karty te są ciągle ogólnie dostępne na wspólnej dla stronnictw “tablicy rozwoju”.'
+        'Karty wiedzy są kopią mechaniki z gry planszowej “Splendor”.'
         '<br>'
-        '<br>Karty wiedzy dzielą się na trzy kategorie: pierwszą, drugą i trzecią. Karty wiedzy kategorii pierwszej są najtańsze, jednak oferują najmniej punktów wpływu (część kart pierwszej kategorii nie oferuje w ogóle punktów wpływu). Karty wiedzy kategorii drugiej są nieco droższe i oferują nieco więcej punktów wpływu. Karty wiedzy kategorii trzeciej są najdroższe i oferują najwięcej punktów wpływu.'
+        '<br>Stronnictwa mogą zdobywać karty wiedzy (dostępne w załączniku $attach_html_karty_wiedzy) poprzez inwestowanie w nie odpowiednich środków. Karty wiedzy dostarczają dwóch rzeczy: zniżek na płatności w różnych walutach oraz (w niektórych przypadkach) punktów wpływu. Karty te są ciągle ogólnie dostępne na wspólnej dla stronnictw “tablicy rozwoju”.'
         '<br>'
-        '<br>Każda karta wiedzy, niezależnie od poziomu oferuje zniżkę w wysokości 1 mln konkretnej waluty. Szczegółowa ich rozpiska dostępna jest w załączniku “karty wiedzy”.'
+        '<br>Karty wiedzy dzielą się na trzy kategorie: pierwszą, drugą i trzecią:'
+        '</p>'
+        '<ul>'
+          '<li><p style="text-align:justify;">Kategoria pierwsza jest najtańsza i oferuje najmniej punktów wpływu za kartę (część kart pierwszej kategorii nie oferuje w ogóle punktów wpływu),</p></li>'
+          '<li><p style="text-align:justify;">Kategoria druga jest nieco droższe i oferuje nieco więcej punktów wpływu za kartę,</p></li>'
+          '<li><p style="text-align:justify;">Kategoria trzecia jest najdroższa i oferuje najwięcej punktów wpływu za kartę.</p></li>'
+        '</ul>'
+        '<p style="text-align:justify;">Każda karta wiedzy, niezależnie od poziomu oferuje zniżkę w wysokości 1 konkretnej waluty.'
         '<br>'
-        '<br>Każdorazowo stronnictwa mają dostępne do kupienia po cztery karty wiedzy każdej kategorii. Za każdym razem, gdy stronnictwo kupi kartę wiedzy wybranej kategorii, prowadzący natychmiast dodaje do puli kart wiedzy kolejną kartę tej samej kategorii, tak, by liczba dostępnych kart wiedzy każdej kategorii stale wynosiła 4.'
+        '<br>Każdorazowo stronnictwa mają dostępne do kupienia po cztery karty wiedzy każdej kategorii (w sumie 12). Za każdym razem, gdy stronnictwo kupi kartę wiedzy wybranej kategorii, prowadzący natychmiast dodaje do puli kart wiedzy kolejną kartę tej samej kategorii, tak, by liczba dostępnych kart wiedzy każdej kategorii stale wynosiła 4.'
         '<br>'
         '<br>Jeżeli w toku gry zabraknie kart wiedzy jakiejś kategorii (zostaną one wszystkie wykupione), prowadzący nie dostawia kolejnych kart tej kategorii - wówczas na stałe liczba dostępnych kart wiedzy maleje.'
         '<br>'
-        '<br>W jednej turze każde stronnictwo może wybrać jedną z trzech możliwości:'
+        '<br>W każdej turze każde stronnictwo może wybrać jedną z trzech możliwości:'
         '</p>'
         '<ul>'
         '<li><p style="text-align:justify;">Kupić maksymalnie jedną kartę wiedzy,</p></li>'
-        '<li><p style="text-align:justify;">Pobrać po 1 mln. trzech różnych wybranych walut innych niż PLZ,</p></li>'
-        '<li><p style="text-align:justify;">Pobrać 2 mln. jednej, wybranej waluty innej niż PLZ.</p></li>'
+        '<li><p style="text-align:justify;">Pobrać po 1 jednostkę trzech różnych wybranych walut zagranicznych,</p></li>'
+        '<li><p style="text-align:justify;">Pobrać 2 jednostki jednej, wybranej waluty zagranicznej.</p></li>'
         '</ul>'
-        '<p style="text-align:justify;">'
-        'Karty te są kopią mechaniki z gry planszowej “Splendor”.'
-        '</p>'
         // Meta zasady
-        '<h1>Karty wiedzy</h1>'
+        '<h1>Meta zasady</h1>'
         '<p style="text-align:justify;">'
         'Uczestnicy powinni sami wywnioskować niniejszą prawidłowość, a jeśli tego nie robią, prowadzący może ich nakierować:'
         '<br>'
@@ -770,13 +843,19 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '</ol>'
         // Przebieg tury
         '<h1>Przebieg tury</h1>'
+        '<p style="text-align:justify;">'
+        'Każda tura odbywa się w konkretnym roku (lub przedziale lat). Jest to ważne, aby prowadzący tę turę przeprowadził odnosząc się do historycznych wydarzeń z tamtego okresu - w innym wypadku współzawodnictwo dużo straci z waloru edukacyjnego.'
+        '</p>'
         '<ol>'
-        '<li><p style="text-align:justify;"><b>Pozyskiwane kart wiedzy lub walut zagranicznych.</b></p></li>'
         '<li>'
-            '<p style="text-align:justify;">'
-            '<b>Rozmieszczenie nowych agentów</b>'
-            '<br>Rozmieszczenie na planszy agentów zalegendowanych w poprzedniej turze.'
-            '</p>'
+          '<p style="text-align:justify;">'
+          '<b>Rozmieszczenie nowych agentów</b>'
+          '<br>Rozmieszczenie na planszy agentów zalegendowanych w poprzedniej turze.'
+          '</p>'
+        '</li>'
+        '<li><p style="text-align:justify;"><b>Pozyskiwane przez każde ze stronnictw karty wiedzy lub walut zagranicznych (ten punkt można zagrać kilka razy z rzędu w każdej turze).</b></p></li>'
+        '<li>'
+          '<p style="text-align:justify;">Wprowadzenie prowadzącego do obecnych czasów historycznych</p>'
         '</li>'
         '<li>'
             '<p style="text-align:justify;">'
