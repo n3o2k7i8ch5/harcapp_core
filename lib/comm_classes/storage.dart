@@ -5,11 +5,20 @@ if(dart.library.html) 'storage_web.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
+Future<ByteData?> readByteDataFromAssets(String path) async {
+  try {
+    return await rootBundle.load(path);
+  } catch(e) {
+    return null;
+  }
+}
+
 Future<String?> readStringFromAssets(String path) async {
-  String nullStr = '幸福 喜 禧 顺 顺利 顺遂 甜水 顺手 和蔼 愃 顺当';
-  String result = await rootBundle.loadString(path).catchError((err) => nullStr);
-  if(result == nullStr) return null;
-  return result;
+  try {
+    return await rootBundle.loadString(path);
+  } catch(e) {
+    return null;
+  }
 }
 
 Future<dynamic> openAsset(String assetPath, {bool webOpenInNewTab = false}) async {

@@ -862,10 +862,10 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
   // final fontBold = await PdfGoogleFonts.latoBold();
   // final fontBoldItalic = await PdfGoogleFonts.latoBoldItalic();
 
-  final font = Font.ttf(File('packages/harcapp_core/fonts/Lato/Lato-Regular.ttf').readAsBytesSync().buffer.asByteData());
-  final fontItalic = Font.ttf(File('packages/harcapp_core/fonts/Lato/Lato-Italic.ttf').readAsBytesSync().buffer.asByteData());
-  final fontBold = Font.ttf(File('packages/harcapp_core/fonts/Lato/Lato-Bold.ttf').readAsBytesSync().buffer.asByteData());
-  final fontBoldItalic = Font.ttf(File('packages/harcapp_core/fonts/Lato/Lato-BoldItalic.ttf').readAsBytesSync().buffer.asByteData());
+  final font = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Lato/Lato-Regular.ttf'))!);
+  final fontItalic = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Lato/Lato-Italic.ttf'))!);
+  final fontBold = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Lato/Lato-Bold.ttf'))!);
+  final fontBoldItalic = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Lato/Lato-BoldItalic.ttf'))!);
 
   List<Widget> multiPage =  [];
 
