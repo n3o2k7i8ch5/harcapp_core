@@ -693,7 +693,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
             '<li><p style="text-align:justify;">Karta “Korumpowanie milicji” - zmniejsza poziom kontroli w województwie na czas strajku o 2 pkt.</p></li>'
             '<li><p style="text-align:justify;">Karta “Ewakuacja za winklem” - w przypadku przegranego strajku, agent nie zostaje zdemaskowany.</p></li>'
             '<li><p style="text-align:justify;">Karta “Wyciąganie wniosków” - w przypadku udanego strajku, agent otrzymuje na stałe +1 punkt skuteczności.</p></li>'
-        '</p>'
+        '</ul>'
         // Szczegóły gry - agenci wpływu - strajk
         '<h3>Strajk</h3>'
         '<p style="text-align:justify;">'
@@ -798,6 +798,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
             '<td style="padding-left: 8px; padding-right: 8px;"><p>...</p></td>'
           '</tr>'
         '</table>'
+        '<p style="text-align:justify;"><br></p>'
         // Szczegóły gry - karty wiedzy
         '<h1>Szczegóły gry</h1>'
         '<h2>Karty wiedzy</h2>'
@@ -806,7 +807,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<br>'
         '<br>Stronnictwa mogą zdobywać karty wiedzy (dostępne w załączniku $attach_html_karty_wiedzy) poprzez inwestowanie w nie odpowiednich środków. Karty wiedzy dostarczają dwóch rzeczy: zniżek na płatności w różnych walutach oraz (w niektórych przypadkach) punktów wpływu. Karty te są ciągle ogólnie dostępne na wspólnej dla stronnictw “tablicy rozwoju”.'
         '<br>'
-        '<br>Karty wiedzy dzielą się na trzy kategorie: pierwszą, drugą i trzecią:'
+        '<br>Karty wiedzy dzielą się na trzy kategorie: pierwszą, drugą i trzecią.'
         '</p>'
         '<ul>'
           '<li><p style="text-align:justify;">Kategoria pierwsza jest najtańsza i oferuje najmniej punktów wpływu za kartę (część kart pierwszej kategorii nie oferuje w ogóle punktów wpływu),</p></li>'

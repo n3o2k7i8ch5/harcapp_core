@@ -85,7 +85,7 @@ class KonspektHtmlWidget extends StatelessWidget{
             fontSize: Dimen.textSizeAppBar,
             fontWeight: weight.halfBold,
             decoration: TextDecoration.underline
-          ),
+          )
         );
       else if(element.localName == "h2")
         return Text(
@@ -93,7 +93,7 @@ class KonspektHtmlWidget extends StatelessWidget{
           style: AppTextStyle(
               fontSize: Dimen.textSizeAppBar,
               fontWeight: weight.halfBold
-          ),
+          )
         );
       else if(element.localName == "h3")
         return Text(
@@ -102,7 +102,7 @@ class KonspektHtmlWidget extends StatelessWidget{
               fontSize: Dimen.textSizeBig,
               fontWeight: weight.halfBold,
               decoration: TextDecoration.underline
-          ),
+          )
         );
       else if(element.localName == "h4")
         return Text(
@@ -110,7 +110,7 @@ class KonspektHtmlWidget extends StatelessWidget{
           style: AppTextStyle(
               fontSize: Dimen.textSizeBig,
               fontWeight: weight.halfBold,
-          ),
+          )
         );
       return null;
     },
