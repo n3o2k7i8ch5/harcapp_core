@@ -46,10 +46,7 @@ class KonspektMaterialTile extends StatelessWidget{
                       ),
 
                       if(material.amount != 0)
-                        SizedBox(
-                          width: 64,
-                          child: AmountWidget(material)
-                        ),
+                        AmountWidget(material),
 
                     ],
                   ),

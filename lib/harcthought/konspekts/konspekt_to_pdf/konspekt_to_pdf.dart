@@ -465,10 +465,7 @@ Widget MaterialWidget(KonspektMaterial material, Font font, Font fontBold, Font 
                       )
                   ),
                   if(material.amount != 0)
-                    SizedBox(
-                        width: 94,
-                        child: MaterialAmountWidget(material, font, fontBold, fontItalic)
-                    ),
+                    MaterialAmountWidget(material, font, fontBold, fontItalic),
                 ]
             ),
 
