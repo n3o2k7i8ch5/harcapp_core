@@ -4,12 +4,15 @@ import 'package:harcapp_core/values/people.dart';
 import '../../konspekt.dart';
 
 Konspekt druzynowe_przekazanie_bsp = const Konspekt(
-    name: 'gang_potencjalnych_porywaczy',
-    title: 'Gang potencjalnych porywaczy',
+    name: 'druzynowe_przekazanie_bsp',
+    title: 'Drużynowe przekazanie Betlejemskiego Światła Pokoju',
     category: KonspektCategory.harcerskie,
     type: KonspektType.projekt,
     spheres: {
-      KonspektSphere.umysl: null,
+      KonspektSphere.duch: KonspektSphereDetails(
+          level: [KonspektSphereLevel.duchPostawy, KonspektSphereLevel.duchWartosci],
+          mechanism: [KonspektSphereMechanism.duchNormalizacja, KonspektSphereMechanism.duchOtwartoscNaLudzi]
+      ),
       KonspektSphere.relacje: null
     },
 
@@ -25,7 +28,14 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
 
     summary: 'Harcerze w gronie drużyny przygotowują się, a nastepnie uczestniczą w przekazaniu Betlejemskiego Światła Pokoju.',
 
-    description: '<p style="text-align:justify;">'
+    description:
+        '<h1>Cel materiału</h1>'
+        '<ol>'
+        '<li><p style="text-align:justify;">Określenie tego, czym jest i jakie szanse wychowawcze stwarza BŚP.</p></li>'
+        '<li><p style="text-align:justify;">Zaproponowanie działań pozwalających skutecznie wykorzystać BŚP w pracy drużyny.</p></li>'
+        '<li><p style="text-align:justify;">Zaproponowanie działań dla ponad-drużynowych poziomów struktury ZHP w celu wsparcia drużyn w wykorzystaniu BŚP w pracy wychowawczej.</p></li>'
+        '</ol>'
+        '<p style="text-align:justify;">'
         'Betlejemskie Światło Pokoju jest corocznym wydarzeniem, w ramach którego Światło zapalane jest w Betlejem, w Grocie Narodzenia Pańskiego, skąd leci samolotem do Austrii, zaś dalej jest przekazywane jest w formie “sztafety” do innych krajów. Dla chrześcijan Światło jest symbolem narodzonego Chrystusa niosącego pokój dla całego świata. Jest to unikatowe przedsięwzięcie, co roku angażujące harcerzy i skautów z krajów z całego świata.'
         '</p>'
         '<h1>Cechy BŚP w kontekście przydatności wychowawczej</h1>'
