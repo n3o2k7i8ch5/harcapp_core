@@ -35,8 +35,10 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
         '<li><p style="text-align:justify;">Zaproponowanie działań pozwalających skutecznie wykorzystać BŚP w pracy drużyny.</p></li>'
         '<li><p style="text-align:justify;">Zaproponowanie działań dla ponad-drużynowych poziomów struktury ZHP w celu wsparcia drużyn w wykorzystaniu BŚP w pracy wychowawczej.</p></li>'
         '</ol>'
+
+        '<h1>Czym jest BŚP?</h1>'
         '<p style="text-align:justify;">'
-        'Betlejemskie Światło Pokoju jest corocznym wydarzeniem, w ramach którego Światło zapalane jest w Betlejem, w Grocie Narodzenia Pańskiego, skąd leci samolotem do Austrii, zaś dalej jest przekazywane jest w formie “sztafety” do innych krajów. Dla chrześcijan Światło jest symbolem narodzonego Chrystusa niosącego pokój dla całego świata. Jest to unikatowe przedsięwzięcie, co roku angażujące harcerzy i skautów z krajów z całego świata.'
+        'Betlejemskie Światło Pokoju jest corocznym wydarzeniem, w ramach którego Światło zapalane jest w Betlejem, w Grocie Narodzenia Pańskiego, skąd leci samolotem do Austrii, zaś dalej jest przekazywane jest w formie “sztafety” do innych krajów. Dla chrześcijan Światło jest symbolem narodzonego Chrystusa niosącego pokój dla całego świata. Jest to unikatowe przedsięwzięcie, co roku angażujące harcerzy i skautów z wielu krajów z całego świata.'
         '</p>'
         '<h1>Cechy BŚP w kontekście przydatności wychowawczej</h1>'
         '<ul>'
@@ -51,7 +53,7 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
             '<li><p style="text-align:justify;">chrześcijańskim miłosierdziem,</p></li>'
             '<li><p style="text-align:justify;">przybieraniem przyjaznych postaw względem ludzi,</p></li>'
             '<li><p style="text-align:justify;">pojęciem „bliźniego”,</p></li>'
-            '<li><p style="text-align:justify;">domniemaniem dobrych intencji drugiego człowieka w myśl Ignacego Loyoli: <i>„chrześcijanin winien być bardziej skory do ocalenia wypowiedzi bliźniego, niż do jej potępienia”</i>.</p></li>'
+            '<li><p style="text-align:justify;">domniemaniem dobrych intencji drugiego człowieka w myśl św. Ignacego Loyoli: <i>„chrześcijanin winien być bardziej skory do ocalenia wypowiedzi bliźniego, niż do jej potępienia”</i>.</p></li>'
           '</ul>'
           '</li>'
 
@@ -80,7 +82,7 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
           '<li>'
             '<p style="text-align:justify;">'
             '<b>Podniosłość świętowania</b>'
-            '<br>BŚP pozwala ugruntować wartość podniosłego świętowania i normalizować uroczysty charakter wydarzeń religijnych. Stwarza okazję do zorganizowania w katedrze lub innym ważnym kościele uroczystej Mszy Świętej, w oprawie której harcerze mogą uczestniczyć. Jeśli dobrze wykorzystana, cecha ta może skutecznie wywołać wśród harcerzy refleksję, że coś musi być w BŚP, narodzinach Chrystusa i zmianie, którą dał światu, skoro warto się ładnie ubrać, zorganizować chór i stawić tłumnie na uroczystości przekazania Światła.'
+            '<br>BŚP jest organizowane w formie podniosłego święta, co (jeśli dobrze wykorzystane) pozwala budować przekonanie o wartości płynącej z wydarzeń religijnych. Stwarza okazję do zorganizowania w katedrze lub innym ważnym kościele uroczystej Mszy Świętej, w oprawie której harcerze mogą uczestniczyć. Cecha ta może skutecznie nakłonić harcerzy do refleksji, że coś musi być w narodzinach Chrystusa i zmianie, którą dał światu, skoro warto się porządnie ubrać, zorganizować chór i stawić tłumnie na uroczystości przekazania Światła.'
             '</p>'
           '</li>'
 
@@ -101,7 +103,13 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
         '</ul>'
 
         '<h1>Co może zrobić drużyna, by dobrze przygotować się do BŚP?</h1>'
-
+        '<p style="text-align:justify;">'
+        'Przygotowań do BŚP nie można zacząć w grudniu - należy to uczynić z odpowiednim wyprzedzeniem.'
+        '<br>'
+        '<br>Przede wszystkim warto wpisać plany związane z BŚP oraz przygotowaniem się do niego do rocznego planu pracy drużyny.'
+        '<br>'
+        '<br>Przygotowania do BŚP mogą być podzielone na trzy etapy:'
+        '</p>'
         '<ul>'
 
           '<li>'
@@ -153,7 +161,7 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
         '<h1>Co może zrobić drużyna, by dobrze wziąć udział w BŚP?</h1>'
 
         '<p style="text-align:justify;">'
-        'Wartość wychowawcza BŚP zależy przede wszystkim od przygotowania członków drużyny do BŚP. Uczestnictwo drużyny w akcjach związanych z BŚP powinno być jak najbardziej aktywne – członkowie drużyny powinni być zaangażowani i pomoc przy mszy, mieć udział w roznoszeniu, służbie, podobnie jak wcześniej mieli przy wymyślaniu, planowaniu i przygotowywaniu. Samo „odstanie” w szeregu podczas mszy, czy podczas wręczania Światła burmistrzowi niesie ze sobą mizerne skutki wychowawcze.'
+        'Wartość wychowawcza BŚP zależy przede wszystkim od przygotowania członków drużyny do BŚP. Uczestnictwo drużyny w akcjach związanych z BŚP powinno być jak najbardziej aktywne – członkowie drużyny powinni być w nie możliwie bezpośrednio zaangażowani. Samo „odstanie” w szeregu podczas mszy, czy podczas wręczania Światła burmistrzowi niesie ze sobą mizerne skutki wychowawcze.'
         '</p>'
         '<ol>'
 
