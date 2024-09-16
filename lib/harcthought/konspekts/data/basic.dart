@@ -9,6 +9,7 @@ import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../konspekt.dart';
+import 'harcerskie/druzynowe_przekazanie_bsp.dart';
 import 'harcerskie/gang_potencjalnych_porywaczy.dart';
 
 
@@ -612,6 +613,7 @@ List<Konspekt> allBasicKonspekts = [
           '<br>Należy mieć na uwadze, że z czasem uczestnicy przyzwyczają się wskakiwać do zimnej wody. Wówczas forma ta przestanie spełniać swój cel.</p>'
   ),
 
+  druzynowe_przekazanie_bsp,
 
   // Done
   const Konspekt(
