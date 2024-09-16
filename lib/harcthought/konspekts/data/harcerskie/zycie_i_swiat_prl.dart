@@ -509,7 +509,6 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '</p>'
         '</li>'
         '</ol>'
-        '<br>'
         // Szczegóły gry - województwa
         '<h1>Szczegóły gry</h1>'
         '<h2>Województwa</h2>'
