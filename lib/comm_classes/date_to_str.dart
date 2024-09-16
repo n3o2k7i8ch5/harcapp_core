@@ -174,8 +174,12 @@ String durationToString(Duration? duration, {bool onlyBiggestTimeFactor = false}
   int minutes = duration.inMinutes % 60;
   int hours = duration.inHours % 24;
   int days = duration.inDays % 7;
+  int weeks = duration.inDays ~/ 7;
 
   List<String> resultParts = [];
+
+  if(weeks == 1) resultParts.add('$weeks tydz.');
+  else if(weeks > 1) resultParts.add('$weeks tyg.');
 
   if(days == 1) resultParts.add('$days dzień');
   else if(days > 1) resultParts.add('$days dni');
