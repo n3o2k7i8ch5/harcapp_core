@@ -3,7 +3,7 @@ import 'package:harcapp_core/values/people.dart';
 
 import '../../konspekt.dart';
 
-Konspekt gang_potencjalnych_porywaczy = const Konspekt(
+Konspekt druzynowe_przekazanie_bsp = const Konspekt(
     name: 'gang_potencjalnych_porywaczy',
     title: 'Gang potencjalnych porywaczy',
     category: KonspektCategory.harcerskie,
@@ -14,7 +14,7 @@ Konspekt gang_potencjalnych_porywaczy = const Konspekt(
     },
 
     metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
-    coverAuthor: '',
+    coverAuthor: 'PAP/M. Marek',
     author: Person(name: 'Zespół Wychowania Duchowego i Religijnego Chorągwi Stołecznej ZHP'),
     customDuration: Duration(days: 30),
     aims: [
