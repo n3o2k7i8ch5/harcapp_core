@@ -87,8 +87,8 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
 
             SvgImage(
               svg: (await readStringFromAssets(meto.iconSvgPath))!,
-              width: defTextSize + 3.0 + defTextTiny,
-              height: defTextSize + 3.0 + defTextTiny,
+              width: defTextSize + 3.0 + defTextSize,
+              height: defTextSize + 3.0 + defTextSize,
             ),
 
             SizedBox(width: 3.0),
@@ -113,7 +113,7 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
                   meto.age,
                   style: TextStyle(
                       font: fontBold,
-                      fontSize: defTextTiny,
+                      fontSize: defTextSize,
                       color: PdfColors.white
                   ),
                 )
@@ -121,7 +121,7 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
               ],
             ),
 
-            SizedBox(width: 3.0),
+            SizedBox(width: 6.0),
 
           ],
         )
@@ -180,7 +180,7 @@ Widget SphereWidget(KonspektSphere sphere, KonspektSphereDetails? details, Font 
   child: Container(
     color: cardColor,
     child: Padding(
-        padding: EdgeInsets.all(2*elementSmallSeparator),
+        padding: EdgeInsets.all(1.5*elementSmallSeparator),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
             children: [
