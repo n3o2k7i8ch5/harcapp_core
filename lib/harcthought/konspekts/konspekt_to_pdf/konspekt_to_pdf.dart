@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart' show Colors;
 import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
@@ -9,7 +7,6 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:htmltopdfwidgets/htmltopdfwidgets.dart';
-import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 
 import 'common.dart';
@@ -17,11 +14,6 @@ import 'common.dart';
 double elementBigSeparator = 24.0;
 double elementSmallSeparator = 6.0;
 double konspektSeparator = 48.0;
-
-double defTextTiny = 8.0;
-double defTextSize = 11.0;
-double headerTextSize = 14.0;
-double titleTextSize = 18.0;
 
 
 PdfColor cardColor = PdfColors.grey100;
