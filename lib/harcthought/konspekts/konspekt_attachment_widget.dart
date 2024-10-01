@@ -93,6 +93,7 @@ class KonspektAttachmentPrintWidget extends StatelessWidget{
                                 'Jak drukować?',
                                 style: AppTextStyle(color: iconEnab_(context)),
                               ),
+                              iconTheme: IconThemeData(color: iconEnab_(context)),
                             ),
 
                             Padding(
