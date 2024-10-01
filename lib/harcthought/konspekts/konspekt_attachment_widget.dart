@@ -89,8 +89,10 @@ class KonspektAttachmentPrintWidget extends StatelessWidget{
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             AppBarX(
-                              title: 'Jak drukować?',
-                              foregroundColor: Colors.black,
+                              titleWidget: Text(
+                                'Jak drukować?',
+                                style: AppTextStyle(color: iconEnab_(context)),
+                              ),
                             ),
 
                             Padding(
