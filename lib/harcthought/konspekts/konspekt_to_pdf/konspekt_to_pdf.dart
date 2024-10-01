@@ -824,23 +824,26 @@ Widget AuthorWidget(Konspekt konspekt, Font font, Font fontBold){
     return Container();
 
   return Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
 
       SizedBox(height: elementBigSeparator),
 
       Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
           HeaderWidget('Autor: ', fontBold),
 
-          Text(
+          Expanded(
+            child: Text(
               konspekt.author!.name,
               style: TextStyle(
-                  font: font,
-                  fontSize: headerTextSize
+                font: font,
+                fontSize: headerTextSize
               )
-          ),
+            )
+          )
 
         ],
       ),
