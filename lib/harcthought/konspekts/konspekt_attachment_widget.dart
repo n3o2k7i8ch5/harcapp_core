@@ -101,6 +101,7 @@ class KonspektAttachmentPrintWidget extends StatelessWidget{
                                 children: [
 
                                   Row(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(MdiIcons.circleMedium),
                                       SizedBox(width: Dimen.defMarg),
@@ -110,6 +111,7 @@ class KonspektAttachmentPrintWidget extends StatelessWidget{
 
                                   SizedBox(height: Dimen.defMarg),
                                   Row(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(MdiIcons.circleMedium),
                                       SizedBox(width: Dimen.defMarg),
