@@ -83,15 +83,15 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
         child: Row(
           children: [
 
-            SizedBox(width: Dimen.defMarg/2),
+            SizedBox(width: 3.0),
 
             SvgImage(
               svg: (await readStringFromAssets(meto.iconSvgPath))!,
-              width: iconSize,
-              height: iconSize,
+              width: defTextSize + 3.0 + defTextTiny,
+              height: defTextSize + 3.0 + defTextTiny,
             ),
 
-            SizedBox(width: Dimen.defMarg/2),
+            SizedBox(width: 3.0),
 
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,7 +102,7 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
                   meto.shortDisplayName,
                   style: TextStyle(
                       font: fontBold,
-                      fontSize: Dimen.textSizeNormal,
+                      fontSize: defTextSize,
                       color: PdfColors.white
                   ),
                 ),
@@ -113,7 +113,7 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
                   meto.age,
                   style: TextStyle(
                       font: fontBold,
-                      fontSize: Dimen.textSizeSmall,
+                      fontSize: defTextTiny,
                       color: PdfColors.white
                   ),
                 )
@@ -121,7 +121,7 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
               ],
             ),
 
-            SizedBox(width: Dimen.iconMarg),
+            SizedBox(width: 3.0),
 
           ],
         )
@@ -188,7 +188,10 @@ Widget SphereWidget(KonspektSphere sphere, KonspektSphereDetails? details, Font 
               Row(
                   children: [
 
-                    Icon(IconData(sphere.displayIcon.codePoint)),
+                    Icon(
+                      IconData(sphere.displayIcon.codePoint),
+                      size: 18.0
+                    ),
 
                     SizedBox(width: elementSmallSeparator),
 
