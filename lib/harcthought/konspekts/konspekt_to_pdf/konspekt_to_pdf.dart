@@ -18,10 +18,10 @@ double elementBigSeparator = 24.0;
 double elementSmallSeparator = 6.0;
 double konspektSeparator = 48.0;
 
-double defTextTiny = Dimen.textSizeTiny;
-double defTextSize = Dimen.textSizeSmall;
-double headerTextSize = Dimen.textSizeBig;
-double titleTextSize = Dimen.textSizeAppBar;
+double defTextTiny = 8.0;
+double defTextSize = 11.0;
+double headerTextSize = 14.0;
+double titleTextSize = 18.0;
 
 
 PdfColor cardColor = PdfColors.grey100;
@@ -30,7 +30,8 @@ PdfColor cardColor = PdfColors.grey100;
 Widget TitleWidget(Konspekt konspekt, Font fontBold) => Center(
   child: Text(
       konspekt.title,
-      style: TextStyle(font: fontBold, fontSize: titleTextSize)
+      style: TextStyle(font: fontBold, fontSize: titleTextSize),
+      textAlign: TextAlign.center
   ),
 );
 
