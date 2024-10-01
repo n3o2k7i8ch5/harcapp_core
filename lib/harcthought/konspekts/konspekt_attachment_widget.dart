@@ -39,13 +39,14 @@ class KonspektAttachmentFormatWidget extends StatelessWidget {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(right: 6.0),
-              child: Icon(
-                subIcon,
-                color: Colors.black,
+            if(subIcon != null)
+              Padding(
+                padding: const EdgeInsets.only(right: 6.0),
+                child: Icon(
+                  subIcon,
+                  color: Colors.black,
+                ),
               ),
-            ),
 
           ],
         )
