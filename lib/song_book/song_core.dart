@@ -40,7 +40,7 @@ abstract class SongCore{
   static const String PARAM_REL_DATE = 'release_date';
   static const String PARAM_SHOW_REL_DATE_MONTH = 'show_rel_date_month';
   static const String PARAM_SHOW_REL_DATE_DAY = 'show_rel_date_day';
-  static const String PARAM_YT_VIDEO_ID = 'yt_link';
+  static const String PARAM_YT_VIDEO_ID = 'yt_video_id';
   static const String PARAM_ADD_PERS = 'add_pers';
   static const String PARAM_TAGS = 'tags';
   static const String PARAM_REFREN = 'refren';

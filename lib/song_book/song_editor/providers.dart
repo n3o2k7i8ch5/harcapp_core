@@ -31,7 +31,7 @@ class CurrentItemProvider extends ChangeNotifier{
     composersController.texts = song.composers;
     performersController.texts = song.performers;
 
-    ytLinkController.text = song.youtubeVideoId==null?"":"youtube.com/watch?v=${song.youtubeVideoId}";
+    ytLinkController.text = song.youtubeVideoId==null?"":"www.youtube.com/watch?v=${song.youtubeVideoId}";
 
     addPersData = song.addPers.map((addPers) => Tuple3(
         TextEditingController(text: addPers.name),
