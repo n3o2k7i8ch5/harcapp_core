@@ -13,6 +13,7 @@ import 'package:implicitly_animated_reorderable_list_2/transitions.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../providers.dart';
 
@@ -179,7 +180,10 @@ class BasicDataWidget extends StatelessWidget{
                   multiHintTop: 'Autorzy słów:',
                   multiExpanded: true,
                   multiController: currItemProv.authorsController,
-                  onAnyChanged: onChangedAuthor,
+                  onAnyChanged: (values){
+                    currItemProv.setAuthors(values, notify: false);
+                    onChangedAuthor?.call(values);
+                  },
                 ),
 
                 AppTextFieldHint(
@@ -198,7 +202,10 @@ class BasicDataWidget extends StatelessWidget{
                   multiHintTop: 'Kompozytorzy muzyki:',
                   multiExpanded: true,
                   multiController: currItemProv.composersController,
-                  onAnyChanged: onChangedComposer,
+                  onAnyChanged: (values){
+                    currItemProv.setComposers(values, notify: false);
+                    onChangedComposer?.call(values);
+                  },
                 ),
 
                 AppTextFieldHint(
@@ -217,7 +224,10 @@ class BasicDataWidget extends StatelessWidget{
                   multiHintTop: 'Wykonawcy:',
                   multiExpanded: true,
                   multiController: currItemProv.performersController,
-                  onAnyChanged: onChangedPerformer,
+                  onAnyChanged: (values){
+                    currItemProv.setPerformers(values, notify: false);
+                    onChangedPerformer?.call(values);
+                  },
                 ),
 
                 Row(
@@ -243,7 +253,10 @@ class BasicDataWidget extends StatelessWidget{
                           fontSize: Dimen.textSizeBig,
                           color: hintEnab_(context),
                         ),
-                        onAnyChanged: (values) => onChangedYT?.call(values[0]),
+                        onAnyChanged: (values) {
+                          currItemProv.setYoutubeVideoId(YoutubePlayer.convertUrlToId(values[0]), notify: false);
+                          onChangedYT?.call(values[0]);
+                        }
                       ),
                     ),
 
