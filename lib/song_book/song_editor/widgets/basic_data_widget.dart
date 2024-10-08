@@ -16,7 +16,7 @@ import 'package:tuple/tuple.dart';
 
 import '../providers.dart';
 
-class TopCards extends StatelessWidget{
+class BasicDataWidget extends StatelessWidget{
 
   final Color? accentColor;
   final Function(String)? onChangedTitle;
@@ -27,7 +27,7 @@ class TopCards extends StatelessWidget{
   final Function(String?)? onChangedYT;
   final Function(DateTime?)? onChangedReleaseDate;
 
-  const TopCards({
+  const BasicDataWidget({
     this.accentColor,
     this.onChangedTitle,
     this.onChangedHiddenTitles,

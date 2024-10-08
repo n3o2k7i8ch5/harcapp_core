@@ -149,7 +149,7 @@ class CurrentItemProvider extends ChangeNotifier{
   }
 
   String? get youtubeVideoId => _song.youtubeVideoId;
-  setYoutubeLink(String? value, {bool notify = true}){
+  setYoutubeVideoId(String? value, {bool notify = true}){
     _song.youtubeVideoId = value;
     if(notify) notifyListeners();
   }
