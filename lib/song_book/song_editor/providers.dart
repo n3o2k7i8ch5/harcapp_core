@@ -31,7 +31,7 @@ class CurrentItemProvider extends ChangeNotifier{
     composersController.texts = song.composers;
     performersController.texts = song.performers;
 
-    ytLinkController.text = song.youtubeLink??'';
+    ytLinkController.text = song.youtubeVideoId==null?"":"youtube.com/watch?v=${song.youtubeVideoId}";
 
     addPersData = song.addPers.map((addPers) => Tuple3(
         TextEditingController(text: addPers.name),
@@ -49,7 +49,7 @@ class CurrentItemProvider extends ChangeNotifier{
     composersController = MultiTextFieldController(texts: song.composers);
     performersController = MultiTextFieldController(texts: song.performers);
 
-    ytLinkController = TextEditingController(text: song.youtubeLink??'');
+    ytLinkController = TextEditingController(text: song.youtubeVideoId==null?"":"youtube.com/watch?v=${song.youtubeVideoId}");
 
     if(song.addPers.isNotEmpty)
       addPersData = song.addPers.map((addPers) => Tuple3(
@@ -148,9 +148,9 @@ class CurrentItemProvider extends ChangeNotifier{
     if(notify) notifyListeners();
   }
 
-  String? get youtubeLink => _song.youtubeLink;
+  String? get youtubeVideoId => _song.youtubeVideoId;
   setYoutubeLink(String? value, {bool notify = true}){
-    _song.youtubeLink = value;
+    _song.youtubeVideoId = value;
     if(notify) notifyListeners();
   }
 

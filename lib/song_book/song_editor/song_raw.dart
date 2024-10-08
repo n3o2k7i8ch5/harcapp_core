@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../song_core.dart';
 import '../song_element.dart';
@@ -22,7 +23,7 @@ class SongRaw extends SongCore{
   bool showRelDateMonth;
   bool showRelDateDay;
   List<AddPerson> addPers;
-  String? youtubeLink;
+  String? youtubeVideoId;
 
   bool get isOwn => !isOfficial && !isConfid;
 
@@ -49,7 +50,7 @@ class SongRaw extends SongCore{
     this.showRelDateMonth = song.showRelDateMonth;
     this.showRelDateDay = song.showRelDateDay;
     this.addPers = song.addPers;
-    this.youtubeLink = song.youtubeLink;
+    this.youtubeVideoId = song.youtubeVideoId;
     this.tags = song.tags.toList();
 
     this.hasRefren = song.hasRefren;
@@ -69,7 +70,7 @@ class SongRaw extends SongCore{
     required this.showRelDateMonth,
     required this.showRelDateDay,
     required this.addPers,
-    required this.youtubeLink,
+    required this.youtubeVideoId,
 
     required this.tags,
 
@@ -92,7 +93,7 @@ class SongRaw extends SongCore{
     showRelDateMonth: true,
     showRelDateDay: true,
     addPers: [AddPerson()],
-    youtubeLink: '',
+    youtubeVideoId: null,
     tags: [],
     hasRefren: true,
     refrenPart: SongPart.empty(isRefrenTemplate: true),
@@ -118,7 +119,7 @@ class SongRaw extends SongCore{
     DateTime? releaseDate = DateTime.tryParse(respMap[SongCore.PARAM_REL_DATE]??'');
     bool showRelDateMonth = respMap[SongCore.PARAM_SHOW_REL_DATE_MONTH]??true;
     bool showRelDateDay = respMap[SongCore.PARAM_SHOW_REL_DATE_DAY]??true;
-    String youtubeLink = respMap[SongCore.PARAM_YT_LINK]??'';
+    String youtubeVideoId = respMap[SongCore.PARAM_YT_VIDEO_ID]??'';
     List<AddPerson> addPers = ((respMap[SongCore.PARAM_ADD_PERS]??[]) as List).map((map) => AddPerson.fromRespMap(map)).toList();
     List<String> tags = (respMap[SongCore.PARAM_TAGS] as List).cast<String>();
     SongPart refrenPart;
@@ -156,7 +157,7 @@ class SongRaw extends SongCore{
       showRelDateDay: showRelDateDay,
 
       addPers: addPers,
-      youtubeLink: youtubeLink,
+      youtubeVideoId: youtubeVideoId,
 
       tags: tags,
 
@@ -178,7 +179,7 @@ class SongRaw extends SongCore{
     showRelDateMonth: showRelDateMonth,
     showRelDateDay: showRelDateDay,
     addPers: addPers,
-    youtubeLink: youtubeLink,
+    youtubeVideoId: youtubeVideoId,
     tags: tags,
     hasRefren: hasRefren,
     refrenPart: refrenPart,
@@ -246,7 +247,7 @@ class SongRaw extends SongCore{
     map[SongCore.PARAM_REL_DATE] = releaseDate?.toIso8601String();
     map[SongCore.PARAM_SHOW_REL_DATE_MONTH] = showRelDateMonth;
     map[SongCore.PARAM_SHOW_REL_DATE_DAY] = showRelDateDay;
-    map[SongCore.PARAM_YT_LINK] = youtubeLink?.split('&')[0];
+    map[SongCore.PARAM_YT_VIDEO_ID] = youtubeVideoId;
     map[SongCore.PARAM_ADD_PERS] = addPers.where((addPers) => addPers.isNotEmpty)
         .map((addPers) => addPers.toMap()).toList();
 

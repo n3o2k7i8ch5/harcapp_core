@@ -94,8 +94,8 @@ class SongWidgetTemplate<TSong extends SongCore, TAddPersRes extends AddPersonRe
   final bool showSongExplanationButton;
   final void Function()? onSongExplanationTap;
 
-  final void Function(double position)? onYTLinkTap;
-  final void Function()? onYTLinkLongPress;
+  final void Function(double position)? onYtTap;
+  final void Function()? onYtLongPress;
 
   final void Function(BuildContext context, bool changedSize)? onMinusTap;
   final void Function(BuildContext context, bool changedSize)? onPlusTap;
@@ -156,8 +156,8 @@ class SongWidgetTemplate<TSong extends SongCore, TAddPersRes extends AddPersonRe
         this.showSongExplanationButton = false,
         this.onSongExplanationTap,
 
-        this.onYTLinkTap,
-        this.onYTLinkLongPress,
+        this.onYtTap,
+        this.onYtLongPress,
 
         this.onMinusTap,
         this.onPlusTap,
@@ -228,8 +228,8 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
   bool get showSongExplanationButton => widget.showSongExplanationButton;
   void Function()? get onSongExplanationTap => widget.onSongExplanationTap;
 
-  void Function(double position)? get onYTLinkTap => widget.onYTLinkTap;
-  void Function()? get onYTLinkLongPress => widget.onYTLinkLongPress;
+  void Function(double position)? get onYtTap => widget.onYtTap;
+  void Function()? get onYtLongPress => widget.onYtLongPress;
 
   void Function(BuildContext context, bool changedSize)? get onMinusTap => widget.onMinusTap;
   void Function(BuildContext context, bool changedSize)? get onPlusTap => widget.onPlusTap;
@@ -1000,17 +1000,17 @@ class _TopWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
             onPressed: parent.onSongExplanationTap,
           ),
 
-        if(song.youtubeLink != null && song.youtubeLink!.length!=0)
+        if(song.youtubeVideoId != null && song.youtubeVideoId!.length!=0)
           AppButton(
               icon: Icon(
                   FeatherIcons.youtube,
                   color: iconEnab_(context)
               ),
-              onLongPress: parent.onYTLinkLongPress,
-              onTap: parent.onYTLinkTap==null?null:(){
+              onLongPress: parent.onYtLongPress,
+              onTap: parent.onYtTap==null?null:(){
                 final RenderBox renderBox = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
                 final position = renderBox.localToGlobal(Offset.zero).dy; // - parent.widget.topScreenPadding;
-                parent.onYTLinkTap!(position);
+                parent.onYtTap!(position);
               }
           ),
 
