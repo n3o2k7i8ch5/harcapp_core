@@ -240,10 +240,10 @@ class SongRaw extends SongCore{
 
     Map map = {};
     map[SongCore.PARAM_TITLE] = title.trim();
-    map[SongCore.PARAM_HID_TITLES] = hidTitles.map((text) => text.trim()).toList();
-    map[SongCore.PARAM_TEXT_AUTHORS] = authors.map((text) => text.trim()).toList();
-    map[SongCore.PARAM_COMPOSERS] = composers.map((text) => text.trim()).toList();
-    map[SongCore.PARAM_PERFORMERS] = performers.map((text) => text.trim()).toList();
+    map[SongCore.PARAM_HID_TITLES] = hidTitles.map((text) => text.trim()).where((text) => text.isNotEmpty).toList();
+    map[SongCore.PARAM_TEXT_AUTHORS] = authors.map((text) => text.trim()).where((text) => text.isNotEmpty).toList();
+    map[SongCore.PARAM_COMPOSERS] = composers.map((text) => text.trim()).where((text) => text.isNotEmpty).toList();
+    map[SongCore.PARAM_PERFORMERS] = performers.map((text) => text.trim()).where((text) => text.isNotEmpty).toList();
     map[SongCore.PARAM_REL_DATE] = releaseDate?.toIso8601String();
     map[SongCore.PARAM_SHOW_REL_DATE_MONTH] = showRelDateMonth;
     map[SongCore.PARAM_SHOW_REL_DATE_DAY] = showRelDateDay;

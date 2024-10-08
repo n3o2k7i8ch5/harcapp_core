@@ -68,7 +68,10 @@ class BasicDataWidget extends StatelessWidget{
                           fontSize: Dimen.textSizeBig,
                           color: hintEnab_(context),
                         ),
-                        onAnyChanged: (values) => onChangedTitle?.call(values[0]),
+                        onAnyChanged: (values){
+                          currItemProv.setTitle(values[0], notify: false);
+                          onChangedTitle?.call(values[0]);
+                        },
                       ),
                     ),
 

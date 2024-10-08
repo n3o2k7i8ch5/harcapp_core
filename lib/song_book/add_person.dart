@@ -11,9 +11,9 @@ class AddPerson{
   const AddPerson({this.name, this.emailRef, this.userKeyRef});
 
   Map<String, dynamic> toMap() => {
-    PARAM_NAME: name==null?null:name!.isEmpty?null:name,
-    PARAM_EMAIL_REF: emailRef==null?null:emailRef!.isEmpty?null:emailRef,
-    PARAM_USER_KEY_REF: userKeyRef==null?null:userKeyRef!.isEmpty?null:userKeyRef,
+    PARAM_NAME: name==null || name!.trim().isEmpty?null:name!.trim(),
+    PARAM_EMAIL_REF: emailRef==null || emailRef!.trim().isEmpty?null:emailRef!.trim().toLowerCase(),
+    PARAM_USER_KEY_REF: userKeyRef==null || userKeyRef!.trim().isEmpty?null:userKeyRef!.trim(),
   };
 
   static AddPerson fromRespMap(Map<String, dynamic> respMap) => AddPerson(
@@ -22,30 +22,31 @@ class AddPerson{
     userKeyRef: respMap[PARAM_USER_KEY_REF],
   );
 
-  bool get isEmpty => (name == null || name!.isEmpty) &&
-      (emailRef == null || emailRef!.isEmpty) &&
-      (userKeyRef == null || userKeyRef!.isEmpty);
+  bool get isEmpty => (name == null || name!.trim().isEmpty) &&
+      (emailRef == null || emailRef!.trim().isEmpty) &&
+      (userKeyRef == null || userKeyRef!.trim().isEmpty);
 
   bool get isNotEmpty => !isEmpty;
 
   @override
   int get hashCode{
-    if(userKeyRef != null && userKeyRef!.isNotEmpty) return userKeyRef.hashCode;
-    if(emailRef != null && emailRef!.isNotEmpty) return emailRef.hashCode;
-    return name.hashCode;
+    if(userKeyRef != null && userKeyRef!.trim().isNotEmpty) return userKeyRef!.trim().hashCode;
+    if(emailRef != null && emailRef!.trim().isNotEmpty) return emailRef!.trim().hashCode;
+    if(name != null && name!.trim().isNotEmpty) return name!.trim().hashCode;
+    return null.hashCode;
   }
 
   @override
   bool operator == (Object other) {
     if(!(other is AddPerson)) return false;
 
-    if(userKeyRef != null && userKeyRef!.isNotEmpty && userKeyRef == other.userKeyRef)
+    if(userKeyRef != null && userKeyRef!.trim().isNotEmpty && userKeyRef!.trim() == other.userKeyRef?.trim())
       return true;
 
-    if(emailRef != null && emailRef!.isNotEmpty && emailRef == other.emailRef)
+    if(emailRef != null && emailRef!.trim().isNotEmpty && emailRef == other.emailRef?.trim())
       return true;
 
-    return name == other.name;
+    return name?.trim() == other.name?.trim();
   }
 
 }
