@@ -29,11 +29,20 @@ class CurrentItemProvider extends ChangeNotifier{
     if(ytLinkOrVideoId == null)
       return null;
 
+    ytLinkOrVideoId = ytLinkOrVideoId.trim();
+
+    if (!ytLinkOrVideoId.contains("http") && (ytLinkOrVideoId.length == 11))
+      // Already is video id.
+      return ytLinkOrVideoId;
+
+    if(!ytLinkOrVideoId.startsWith("https://"))
+      ytLinkOrVideoId = "https://$ytLinkOrVideoId";
+
     String? ytVideoId = YoutubePlayer.convertUrlToId(ytLinkOrVideoId);
     if(ytVideoId == null)
       return null;
 
-    return "www.youtube.com/watch?v=${ytVideoId}";
+    return "https://www.youtube.com/watch?v=${ytVideoId}";
   }
 
   void _updateControllers(SongRaw song){
