@@ -260,7 +260,7 @@ class BasicDataWidget extends StatelessWidget{
                           color: hintEnab_(context),
                         ),
                         onAnyChanged: (values) {
-                          currItemProv.setYoutubeVideoId(YoutubePlayer.convertUrlToId(values[0]), notify: false);
+                          currItemProv.setYoutubeVideoId(SongRaw.ytLinkToVideoId(values[0]), notify: false);
                           onChangedYT?.call(values[0]);
                         }
                       ),
