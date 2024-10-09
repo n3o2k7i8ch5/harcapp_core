@@ -1038,7 +1038,7 @@ const Person HUBERT_JANIK = Person(
   druzyna: '7. BDH „Białe Czaple”',
   hufiec: huf_zhp_bydgoszcz_miasto,
   org: Org.zhp,
-  email: ['hubert.janik@zhp.net.pl']
+  email: ['hubert.janik@zhp.net.pl', 'hubert.janik@zhp.pl']
 );
 const Person HUBERT_MILEROWICZ = Person(
   name: 'Hubert Milerowicz',
@@ -3028,7 +3028,7 @@ const Person ZUZANNA_ROMANISZYN = Person(
     name: 'Zuzanna Romaniszyn',
     druzyna: '321 Teraz',
     hufiec: huf_zhp_krakow_nowa_huta,
-    email: ['zuziarysia19@outlook.com']
+    email: ['zuziarysia19@outlook.com', 'zuziarysia19@gmail.com']
 );
 const Person ZUZANNA_RADKOWSKA = Person(
     name: 'Zuzanna Radkowska',
