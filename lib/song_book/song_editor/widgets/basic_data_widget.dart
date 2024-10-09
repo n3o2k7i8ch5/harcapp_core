@@ -8,6 +8,7 @@ import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
 import 'package:implicitly_animated_reorderable_list_2/transitions.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -238,7 +239,7 @@ class BasicDataWidget extends StatelessWidget{
                         icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
                         onPressed: () => AppScaffold.showMessage(context, 'Podaj link do piosenki na jutubie'),
                       )
-                    else if(currItemProv.ytLinkController.text.isNotEmpty && YoutubePlayer.convertUrlToId(currItemProv.ytLinkController.text) == null)
+                    else if(currItemProv.ytLinkController.text.isNotEmpty && SongRaw.ytLinkToVideoId(currItemProv.ytLinkController.text) == null)
                       IconButton(
                         icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
                         onPressed: () => AppScaffold.showMessage(context, 'Coś jest nie tak z linkiem do piosenki na jutubie'),
