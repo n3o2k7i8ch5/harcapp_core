@@ -2322,7 +2322,7 @@ const Person NINA_KESKA = Person(
     druzyna: '8. PDH „Widmo"',
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
-    email: ["keska.nina@gmail.com "]
+    email: ["keska.nina@gmail.com"]
 );
 const Person OLEKSII_OVCHYNNIKOV = Person(
     name: 'Oleksii Ovchynnikov',
@@ -2675,7 +2675,7 @@ const Person TADEUSZ_BRACHA = Person(
   hufiec: 'Hufiec Oświęcim',
   rankHarc: RankHarc.dhc,
   org: Org.zhp,
-  email: ["tadekbracha@gmail.com "]
+  email: ["tadekbracha@gmail.com"]
 );
 const Person TAMANACO_NORIEGA = Person(
     name: 'Tamanaco Noriega',
