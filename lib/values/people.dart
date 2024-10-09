@@ -2922,7 +2922,8 @@ const Person ZUZANNA_ANDRZEJCZAK = Person(
     email: ['zuzannaandrzejczak12@gmail.com']
 );
 const Person ZUZANNA_BIALA = Person(
-  name: 'Zuzanna Biała'
+  name: 'Zuzanna Biała',
+  email: ['zuzubiala08@gmail.com']
 );
 const Person ZUZANNA_CHMIEL = Person(
     name: 'Zuzanna Chmiel',
