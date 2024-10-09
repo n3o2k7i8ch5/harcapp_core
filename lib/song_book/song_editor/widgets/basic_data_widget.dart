@@ -237,6 +237,11 @@ class BasicDataWidget extends StatelessWidget{
                       IconButton(
                         icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
                         onPressed: () => AppScaffold.showMessage(context, 'Podaj link do piosenki na jutubie'),
+                      )
+                    else if(currItemProv.ytLinkController.text.isNotEmpty && YoutubePlayer.convertUrlToId(currItemProv.ytLinkController.text) == null)
+                      IconButton(
+                        icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
+                        onPressed: () => AppScaffold.showMessage(context, 'Coś jest nie tak z linkiem do piosenki na jutubie'),
                       ),
 
                     Expanded(
