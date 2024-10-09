@@ -396,6 +396,7 @@ List<Person> allPeople = [
   ZOFIA_ZAWADZKA,
   ZOFIA_ZBRUK,
   ZUZANNA_ANDRZEJCZAK,
+  ZUZANNA_BIALA,
   ZUZANNA_CHMIEL,
   ZUZANNA_DUDEK,
   ZUZANNA_DZIEDZIC,
@@ -2920,6 +2921,9 @@ const Person ZUZANNA_ANDRZEJCZAK = Person(
     hufiec: huf_zhp_zgierz,
     email: ['zuzannaandrzejczak12@gmail.com']
 );
+const Person ZUZANNA_BIALA = Person(
+  name: 'Zuzanna Biała'
+);
 const Person ZUZANNA_CHMIEL = Person(
     name: 'Zuzanna Chmiel',
     druzyna: '48. Lubelska Drużyna Harcerska ,,Araukanie"',
@@ -2935,18 +2939,18 @@ const Person ZUZANNA_DUDEK = Person(
     org: Org.zhp,
     email: ['z.dudek2011@gmail.com', 'zizigames2011@gmail.com']
 );
-const Person ZUZANNA_GRZESIAK = Person(
-    name: 'Zuzanna Grzesiak',
-    hufiec: huf_zhp_kepno,
-    org: Org.zhp,
-    email: ["gzuzia415@gmail.com"]
-);
 const Person ZUZANNA_DZIEDZIC = Person(
     name: 'Zuzia Dziedzic',
     druzyna: '128 WDH Orion',
     hufiec: huf_zhp_zary,
     org: Org.zhp,
     email: ['z_dziedzic@icloud.com', '5363@e-at.edu.pl']
+);
+const Person ZUZANNA_GRZESIAK = Person(
+    name: 'Zuzanna Grzesiak',
+    hufiec: huf_zhp_kepno,
+    org: Org.zhp,
+    email: ["gzuzia415@gmail.com"]
 );
 const Person ZUZANNA_GUGALA = Person(
     name: 'Zuzanna Gugała',
