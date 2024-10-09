@@ -25,26 +25,6 @@ class CurrentItemProvider extends ChangeNotifier{
 
   late List<Tuple3<TextEditingController, TextEditingController, TextEditingController>> addPersData;
 
-  String? ytLinkOrVideoIdToUrl(String? ytLinkOrVideoId){
-    if(ytLinkOrVideoId == null)
-      return null;
-
-    ytLinkOrVideoId = ytLinkOrVideoId.trim();
-
-    if (!ytLinkOrVideoId.startsWith("http") && ytLinkOrVideoId.length == 11)
-      // Already is video id.
-      return ytLinkOrVideoId;
-
-    if(!ytLinkOrVideoId.startsWith("https://"))
-      ytLinkOrVideoId = "https://$ytLinkOrVideoId";
-
-    String? ytVideoId = YoutubePlayer.convertUrlToId(ytLinkOrVideoId);
-    if(ytVideoId == null)
-      return null;
-
-    return "https://www.youtube.com/watch?v=${ytVideoId}";
-  }
-
   void _updateControllers(SongRaw song){
     titleController.text = song.title;
     hiddenTitlesController.texts = song.hidTitles;
@@ -52,7 +32,7 @@ class CurrentItemProvider extends ChangeNotifier{
     composersController.texts = song.composers;
     performersController.texts = song.performers;
 
-    ytLinkController.text = ytLinkOrVideoIdToUrl(song.youtubeVideoId)??'';
+    ytLinkController.text = song.youtubeUrl??'';
 
     addPersData = song.addPers.map((addPers) => Tuple3(
         TextEditingController(text: addPers.name),
@@ -70,7 +50,7 @@ class CurrentItemProvider extends ChangeNotifier{
     composersController = MultiTextFieldController(texts: song.composers);
     performersController = MultiTextFieldController(texts: song.performers);
 
-    ytLinkController = TextEditingController(text: ytLinkOrVideoIdToUrl(song.youtubeVideoId)??'');
+    ytLinkController = TextEditingController(text: song.youtubeUrl??'');
 
     if(song.addPers.isNotEmpty)
       addPersData = song.addPers.map((addPers) => Tuple3(
