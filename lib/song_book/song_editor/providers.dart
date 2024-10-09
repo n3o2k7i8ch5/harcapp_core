@@ -31,7 +31,7 @@ class CurrentItemProvider extends ChangeNotifier{
 
     ytLinkOrVideoId = ytLinkOrVideoId.trim();
 
-    if (!ytLinkOrVideoId.contains("http") && (ytLinkOrVideoId.length == 11))
+    if (!ytLinkOrVideoId.startsWith("http") && ytLinkOrVideoId.length == 11)
       // Already is video id.
       return ytLinkOrVideoId;
 
