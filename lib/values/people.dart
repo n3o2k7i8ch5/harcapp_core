@@ -191,6 +191,7 @@ List<Person> allPeople = [
   KAROL_MALINSKI,
   KAROL_MALUS,
   KATARZYNA_LISAK,
+  KATARZYNA_POLANSKA_WILK,
   KATARZYNA_STUDNICKA,
   KINGA_BABIARSKA,
   KINGA_ZEBRACKA,
@@ -243,6 +244,7 @@ List<Person> allPeople = [
   MALGORZATA_MASKO_HORYZA,
   MALGORZATA_SZMUK,
   MALWINA_TRUSZKOWSKA,
+  MARCEL_MICHALIK,
   MARCEL_RYCHTER,
   MARCEL_WOZNIAK,
   MARCELINA_WILCZAK,
@@ -293,6 +295,7 @@ List<Person> allPeople = [
   MIKOLAJ_MATUSZEWSKI,
   MIKOLAJ_SOBON,
   MIKOLAJ_WITKOWSKI,
+  NADIA_STOLAR,
   NADIA_OSSOWSKA,
   NADIA_WYSZOGRODZKA,
   NATALIA_STODOLNA,
@@ -396,6 +399,7 @@ List<Person> allPeople = [
   ZUZANNA_CHMIEL,
   ZUZANNA_DUDEK,
   ZUZANNA_DZIEDZIC,
+  ZUZANNA_GRZESIAK,
   ZUZANNA_GUGALA,
   ZUZANNA_JAWORSKA,
   ZUZANNA_KOLIS,
@@ -1593,6 +1597,12 @@ const Person KATARZYNA_LISAK = Person(
     org: Org.zhp,
     email: ['katarzyna.lisak@zhp.net.pl']
 );
+const Person KATARZYNA_POLANSKA_WILK = Person(
+  name: 'Katarzyna Polańska-Wilk',
+  druzyna: '36. DSH „Duchy Gór”',
+  rankInstr: RankInstr.pwd,
+  email: ["katarzyna.wilk1@zhp.net.pl"]
+);
 const Person KATARZYNA_STUDNICKA = Person(
     name: 'Katarzyna Studnicka',
     rankInstr: RankInstr.pwd,
@@ -1921,6 +1931,13 @@ const MALWINA_TRUSZKOWSKA = Person(
   hufiec: huf_zhp_warszawa_mokotow,
   org: Org.zhp,
   email: ['malwina.truszkowska@zhp.net.pl', 'malvisianna@gmail.com']
+);
+const Person MARCEL_MICHALIK = Person(
+    name: 'Marcel Michalik',
+    druzyna: '7. DSH „Kosogłos”',
+    hufiec: huf_zhp_glogow,
+    org: Org.zhp,
+    email: ["michalikmsp@gmail.com"]
 );
 const Person MARCEL_RYCHTER = Person(
   name: 'Marcel Rychter',
@@ -2269,6 +2286,13 @@ const Person MIKOLAJ_SOBON = Person(
 );
 const Person MIKOLAJ_WITKOWSKI = Person(
   name: 'Mikołaj Witkowski',
+);
+const Person NADIA_STOLAR = Person(
+    name: 'Nadia Stolar',
+    druzyna: '41. TDH „Astrum”',
+    hufiec: huf_zhp_tomaszow_mazowiecki,
+    rankHarc: RankHarc.zhpOchotniczka,
+    email: ["stolar.nadia14@gmail.com"]
 );
 const Person NADIA_OSSOWSKA = Person(
   name: 'Nadia Ossowska',
@@ -2910,6 +2934,12 @@ const Person ZUZANNA_DUDEK = Person(
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ['z.dudek2011@gmail.com', 'zizigames2011@gmail.com']
+);
+const Person ZUZANNA_GRZESIAK = Person(
+    name: 'Zuzanna Grzesiak',
+    hufiec: huf_zhp_kepno,
+    org: Org.zhp,
+    email: ["gzuzia415@gmail.com"]
 );
 const Person ZUZANNA_DZIEDZIC = Person(
     name: 'Zuzia Dziedzic',
