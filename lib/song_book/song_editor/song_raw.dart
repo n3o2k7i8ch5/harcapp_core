@@ -113,24 +113,20 @@ class SongRaw extends SongCore{
       Utf8Decoder().convert(Base64Codec().decode(code).toList())
   );
 
-  static String? ytLinkOrVideoIdToUrl(String? ytLinkOrVideoId){
-    if(ytLinkOrVideoId == null)
+  static String? ytLinkToVideoId(String? ytLink){
+    if(ytLink == null)
       return null;
 
-    ytLinkOrVideoId = ytLinkOrVideoId.trim();
+    ytLink = ytLink.trim();
 
-    if (!ytLinkOrVideoId.contains("http") && (ytLinkOrVideoId.length == 11))
+    if (!ytLink.contains("http") && (ytLink.length == 11))
       // Already is video id.
-      return ytLinkOrVideoId;
+      return ytLink;
 
-    if(!ytLinkOrVideoId.startsWith("https://"))
-      ytLinkOrVideoId = "https://$ytLinkOrVideoId";
+    if(!ytLink.startsWith("https://"))
+      ytLink = "https://$ytLink";
 
-    String? ytVideoId = YoutubePlayer.convertUrlToId(ytLinkOrVideoId);
-    if(ytVideoId == null)
-      return null;
-
-    return "https://www.youtube.com/watch?v=${ytVideoId}";
+    return YoutubePlayer.convertUrlToId(ytLink);
   }
 
   static SongRaw fromRespMap(String lclId, Map respMap){
@@ -144,7 +140,7 @@ class SongRaw extends SongCore{
     DateTime? releaseDate = DateTime.tryParse(respMap[SongCore.PARAM_REL_DATE]??'');
     bool showRelDateMonth = respMap[SongCore.PARAM_SHOW_REL_DATE_MONTH]??true;
     bool showRelDateDay = respMap[SongCore.PARAM_SHOW_REL_DATE_DAY]??true;
-    String? youtubeVideoId = respMap[SongCore.PARAM_YT_VIDEO_ID]??ytLinkOrVideoIdToUrl(respMap[SongCore.PARAM_YT_LINK]);
+    String? youtubeVideoId = respMap[SongCore.PARAM_YT_VIDEO_ID]??ytLinkToVideoId(respMap[SongCore.PARAM_YT_LINK]);
     List<AddPerson> addPers = ((respMap[SongCore.PARAM_ADD_PERS]??[]) as List).map((map) => AddPerson.fromRespMap(map)).toList();
     List<String> tags = (respMap[SongCore.PARAM_TAGS] as List).cast<String>();
     SongPart refrenPart;
