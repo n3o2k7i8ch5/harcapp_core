@@ -144,7 +144,7 @@ class SongRaw extends SongCore{
     DateTime? releaseDate = DateTime.tryParse(respMap[SongCore.PARAM_REL_DATE]??'');
     bool showRelDateMonth = respMap[SongCore.PARAM_SHOW_REL_DATE_MONTH]??true;
     bool showRelDateDay = respMap[SongCore.PARAM_SHOW_REL_DATE_DAY]??true;
-    String? youtubeVideoId = ytLinkOrVideoIdToUrl(respMap[SongCore.PARAM_YT_VIDEO_ID]);
+    String? youtubeVideoId = respMap[SongCore.PARAM_YT_VIDEO_ID]??ytLinkOrVideoIdToUrl(respMap[SongCore.PARAM_YT_LINK]);
     List<AddPerson> addPers = ((respMap[SongCore.PARAM_ADD_PERS]??[]) as List).map((map) => AddPerson.fromRespMap(map)).toList();
     List<String> tags = (respMap[SongCore.PARAM_TAGS] as List).cast<String>();
     SongPart refrenPart;
