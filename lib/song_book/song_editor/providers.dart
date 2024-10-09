@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:tuple/tuple.dart';
 import 'package:provider/provider.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../add_person.dart';
 import 'song_raw.dart';
@@ -24,6 +25,17 @@ class CurrentItemProvider extends ChangeNotifier{
 
   late List<Tuple3<TextEditingController, TextEditingController, TextEditingController>> addPersData;
 
+  String? ytLinkOrVideoIdToUrl(String? ytLinkOrVideoId){
+    if(ytLinkOrVideoId == null)
+      return null;
+
+    String? ytVideoId = YoutubePlayer.convertUrlToId(ytLinkOrVideoId);
+    if(ytVideoId == null)
+      return null;
+
+    return "www.youtube.com/watch?v=${ytVideoId}";
+  }
+
   void _updateControllers(SongRaw song){
     titleController.text = song.title;
     hiddenTitlesController.texts = song.hidTitles;
@@ -31,7 +43,7 @@ class CurrentItemProvider extends ChangeNotifier{
     composersController.texts = song.composers;
     performersController.texts = song.performers;
 
-    ytLinkController.text = song.youtubeVideoId==null?"":"www.youtube.com/watch?v=${song.youtubeVideoId}";
+    ytLinkController.text = ytLinkOrVideoIdToUrl(song.youtubeVideoId)??'';
 
     addPersData = song.addPers.map((addPers) => Tuple3(
         TextEditingController(text: addPers.name),
@@ -49,7 +61,7 @@ class CurrentItemProvider extends ChangeNotifier{
     composersController = MultiTextFieldController(texts: song.composers);
     performersController = MultiTextFieldController(texts: song.performers);
 
-    ytLinkController = TextEditingController(text: song.youtubeVideoId==null?"":"www.youtube.com/watch?v=${song.youtubeVideoId}");
+    ytLinkController = TextEditingController(text: ytLinkOrVideoIdToUrl(song.youtubeVideoId)??'');
 
     if(song.addPers.isNotEmpty)
       addPersData = song.addPers.map((addPers) => Tuple3(
