@@ -98,7 +98,7 @@ Future<List<Widget>> fromHtml({
             linkStyle: TextStyle(
                 font: font,
                 fontSize: fontSize??defTextSize,
-                color: PdfColors.blue700
+                color: PdfColors.blue800
             ),
             bulletListDotSize: 4.0,
             bulletListIconSize: 16.0,
