@@ -33,8 +33,10 @@ Widget HeaderWidget(String text, Font fontBold) => Text(
 Future<List<Widget>> fromHtml({
   required String htmlString,
   required Font font,
+  required Font fontHalfBold,
   required Font fontBold,
   required Font fontItalic,
+  required Font fontHalfBoldItalic,
   required Font fontBoldItalic,
   double? fontSize,
 }) async =>
@@ -62,25 +64,25 @@ Future<List<Widget>> fromHtml({
                 fontSize: fontSize??defTextSize
             ),
             h1Style: TextStyle(
-                font: fontBold,
-                fontBold: fontBold,
-                fontItalic: fontBoldItalic,
-                fontBoldItalic: fontBoldItalic,
+                font: fontHalfBold,
+                fontBold: fontHalfBold,
+                fontItalic: fontHalfBoldItalic,
+                fontBoldItalic: fontHalfBoldItalic,
                 fontSize: headerTextSize,
                 decoration: TextDecoration.underline
             ),
             h2Style: TextStyle(
-                font: fontBold,
-                fontBold: fontBold,
-                fontItalic: fontBoldItalic,
-                fontBoldItalic: fontBoldItalic,
+                font: fontHalfBold,
+                fontBold: fontHalfBold,
+                fontItalic: fontHalfBoldItalic,
+                fontBoldItalic: fontHalfBoldItalic,
                 fontSize: headerTextSize
             ),
             h3Style: TextStyle(
-                font: fontBold,
-                fontBold: fontBold,
-                fontItalic: fontBoldItalic,
-                fontBoldItalic: fontBoldItalic,
+                font: fontHalfBold,
+                fontBold: fontHalfBold,
+                fontItalic: fontHalfBoldItalic,
+                fontBoldItalic: fontHalfBoldItalic,
                 fontSize: defTextSize,
                 decoration: TextDecoration.underline
             ),
@@ -111,8 +113,10 @@ Future<List<Widget>> fromHtml({
 Future<List<Widget>> StringListWidget(
     List<String> data,
     Font font,
+    Font? fontHalfBold,
     Font fontBold,
     Font fontItalic,
+    Font? fontHalfBoldItalic,
     Font fontBoldItalic,
     {bool justify = true}
 ) async {
@@ -131,7 +135,9 @@ Future<List<Widget>> StringListWidget(
     htmlString: '<ul>$htmlString</ul>',
     font: font,
     fontBold: fontBold,
+    fontHalfBold: fontHalfBold??fontBold,
     fontItalic: fontItalic,
+    fontHalfBoldItalic: fontHalfBoldItalic??fontBoldItalic,
     fontBoldItalic: fontBoldItalic,
     fontSize: defTextSize
   );

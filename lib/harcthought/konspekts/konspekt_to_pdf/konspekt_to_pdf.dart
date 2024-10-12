@@ -347,8 +347,10 @@ Widget DurationWidget(Konspekt konspekt, Font font, Font fontBold){
 Future<List<Widget>> AimsWidget(
     Konspekt konspekt,
     Font font,
+    Font fontHalfBold,
     Font fontBold,
     Font fontItalic,
+    Font fontHalfBoldItalic,
     Font fontBoldItalic,
 ) async {
 
@@ -367,12 +369,14 @@ Future<List<Widget>> AimsWidget(
 
   widgets.addAll(
       await StringListWidget(
-      konspekt.aims,
-      font,
-      fontBold,
-      fontItalic,
-      fontBoldItalic
-  )
+        konspekt.aims,
+        font,
+        fontHalfBold,
+        fontBold,
+        fontItalic,
+        fontHalfBoldItalic,
+        fontBoldItalic
+      )
   );
 
   return widgets;
@@ -544,8 +548,10 @@ List<Widget> MaterialListWidget(Konspekt konspekt, Font font, Font fontBold, Fon
 Future<List<Widget>> IntroWidget(
     Konspekt konspekt,
     Font font,
+    Font fontHalfBold,
     Font fontBold,
     Font fontItalic,
+    Font fontHalfBoldItalic,
     Font fontBoldItalic,
 ) async {
 
@@ -566,8 +572,10 @@ Future<List<Widget>> IntroWidget(
       await fromHtml(
         htmlString: konspekt.intro!,
         font: font,
+        fontHalfBold: fontHalfBold,
         fontBold: fontBold,
         fontItalic: fontItalic,
+        fontHalfBoldItalic: fontHalfBoldItalic,
         fontBoldItalic: fontBoldItalic,
         fontSize: defTextSize
       )
@@ -580,8 +588,10 @@ Future<List<Widget>> IntroWidget(
 Future<List<Widget>> DescriptionWidget(
     Konspekt konspekt,
     Font font,
+    Font fontHalfBold,
     Font fontBold,
     Font fontItalic,
+    Font fontHalfBoldItalic,
     Font fontBoldItalic
 ) async {
 
@@ -602,8 +612,10 @@ Future<List<Widget>> DescriptionWidget(
       await fromHtml(
           htmlString: konspekt.description!,
           font: font,
+          fontHalfBold: fontHalfBold,
           fontBold: fontBold,
           fontItalic: fontItalic,
+          fontHalfBoldItalic: fontHalfBoldItalic,
           fontBoldItalic: fontBoldItalic,
           fontSize: defTextSize
       )
@@ -613,7 +625,16 @@ Future<List<Widget>> DescriptionWidget(
 
 }
 
-Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fontBold, Font fontItalic, Font fontBoldItalic,) async {
+Future<List<Widget>> StepWidget(
+    KonspektStep step,
+    int index,
+    Font font,
+    Font fontHalfBold,
+    Font fontBold,
+    Font fontItalic,
+    Font fontHalfBoldItalic,
+    Font fontBoldItalic
+) async {
   double numberFontSize = 16.0;
   double numberCircleSize = 2*elementSmallSeparator + numberFontSize;
 
@@ -725,8 +746,10 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
                               ...await StringListWidget(
                                   step.aims!,
                                   font,
+                                  fontHalfBold,
                                   fontBold,
                                   fontItalic,
+                                  fontHalfBoldItalic,
                                   fontBoldItalic
                               ),
 
@@ -741,8 +764,10 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
   List<Widget> htmlWidgets = await fromHtml(
       htmlString: step.content??step.contentBuilder!(isDark: false),
       font: font,
+      fontHalfBold: fontHalfBold,
       fontBold: fontBold,
       fontItalic: fontItalic,
+      fontHalfBoldItalic: fontHalfBoldItalic,
       fontBoldItalic: fontBoldItalic,
       fontSize: defTextSize
   );
@@ -762,7 +787,15 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
   return widgets;
 }
 
-Future<List<Widget>> StepListWidget(Konspekt konspekt, Font font, Font fontBold, Font fontItalic, Font fontBoldItalic) async {
+Future<List<Widget>> StepListWidget(
+    Konspekt konspekt,
+    Font font,
+    Font fontHalfBold,
+    Font fontBold,
+    Font fontItalic,
+    Font fontHalfBoldItalic,
+    Font fontBoldItalic
+) async {
 
   if(konspekt.steps == null)
     return [];
@@ -778,7 +811,18 @@ Future<List<Widget>> StepListWidget(Konspekt konspekt, Font font, Font fontBold,
   ];
 
   for(int i=0; i<konspekt.steps!.length; i++) {
-    stepWidgets.addAll(await StepWidget(konspekt.steps![i], i, font, fontBold, fontItalic, fontBoldItalic));
+    stepWidgets.addAll(
+        await StepWidget(
+            konspekt.steps![i],
+            i,
+            font,
+            fontHalfBold,
+            fontBold,
+            fontItalic,
+            fontHalfBoldItalic,
+            fontBoldItalic
+        )
+    );
     if(i<konspekt.steps!.length - 1)
       stepWidgets.add(SizedBox(height: 1.5*elementBigSeparator));
   }
@@ -790,8 +834,10 @@ Future<List<Widget>> StepListWidget(Konspekt konspekt, Font font, Font fontBold,
 Future<List<Widget>> HowToFailWidget(
     Konspekt konspekt,
     Font font,
+    Font fontHalfBold,
     Font fontBold,
     Font fontItalic,
+    Font fontHalfBoldItalic,
     Font fontBoldItalic,
 ) async {
 
@@ -812,8 +858,10 @@ Future<List<Widget>> HowToFailWidget(
       await StringListWidget(
         konspekt.howToFail!,
         font,
+        fontHalfBold,
         fontBold,
         fontItalic,
+        fontHalfBoldItalic,
         fontBoldItalic
       )
   );
@@ -861,10 +909,12 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
 
   final pdf = Document(pageMode: PdfPageMode.outlines);
 
-  final font = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Lato/Lato-Regular.ttf'))!);
-  final fontItalic = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Lato/Lato-Italic.ttf'))!);
-  final fontBold = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Lato/Lato-Bold.ttf'))!);
-  final fontBoldItalic = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Lato/Lato-BoldItalic.ttf'))!);
+  final font = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Ubuntu/Ubuntu-L.ttf'))!);
+  final fontHalfBold = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Ubuntu/Ubuntu-R.ttf'))!);
+  final fontBold = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Ubuntu/Ubuntu-M.ttf'))!);
+  final fontItalic = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Ubuntu/Ubuntu-LI.ttf'))!);
+  final fontHalfBoldItalic = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Ubuntu/Ubuntu-RI.ttf'))!);
+  final fontBoldItalic = Font.ttf((await readByteDataFromAssets('packages/harcapp_core/fonts/Ubuntu/Ubuntu-MI.ttf'))!);
 
   List<Widget> multiPage =  [];
 
@@ -889,17 +939,17 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
 
   multiPage.add(DurationWidget(konspekt, font, fontBold));
 
-  multiPage.addAll(await AimsWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
+  multiPage.addAll(await AimsWidget(konspekt, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
   multiPage.addAll(MaterialListWidget(konspekt, font, fontBold, fontItalic));
 
-  multiPage.addAll(await IntroWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
+  multiPage.addAll(await IntroWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
-  multiPage.addAll(await DescriptionWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
+  multiPage.addAll(await DescriptionWidget(konspekt, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
-  multiPage.addAll(await StepListWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
+  multiPage.addAll(await StepListWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
-  multiPage.addAll(await HowToFailWidget(konspekt, font, fontBold, fontItalic, fontBoldItalic));
+  multiPage.addAll(await HowToFailWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
   ByteData fontByteData = await rootBundle.load('packages/material_design_icons_flutter/lib/fonts/materialdesignicons-webfont.ttf');
 

@@ -144,3 +144,28 @@ flutter:
         - asset: fonts/Lato/Lato-BoldItalic.ttf
           weight: 700
           style: italic
+
+    - family: Ubuntu
+      fonts:
+        - asset: fonts/Ubuntu/Ubuntu-B.ttf
+          weight: 900
+        - asset: fonts/Ubuntu/Ubuntu-BI.ttf
+          weight: 900
+          style: italic
+        - asset: fonts/Ubuntu/Ubuntu-M.ttf
+          weight: 700
+        - asset: fonts/Ubuntu/Ubuntu-MI.ttf
+          weight: 700
+          style: italic
+        - asset: fonts/Ubuntu/Ubuntu-R.ttf
+          weight: 500
+        - asset: fonts/Ubuntu/Ubuntu-RI.ttf
+          weight: 500
+          style: italic
+        - asset: fonts/Ubuntu/Ubuntu-L.ttf
+          weight: 300
+        - asset: fonts/Ubuntu/Ubuntu-LI.ttf
+          weight: 300
+          style: italic
+        - asset: fonts/Ubuntu/Ubuntu-Th.ttf
+          weight: 100

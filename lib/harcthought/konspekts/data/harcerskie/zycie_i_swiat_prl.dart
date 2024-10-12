@@ -491,7 +491,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         // W skrócie
         '<h1>W skrócie</h1>'
         '<p style="text-align:justify;">'
-        '<br>Gra toczy się w turach. Dobrze, jeśli między turami zachowany jest znaczący odstęp czasu, np. jeśli każda tura rozgrywana jest kolejnego dnia.'
+        'Gra toczy się w turach. Dobrze, jeśli między turami zachowany jest znaczący odstęp czasu, np. jeśli każda tura rozgrywana jest kolejnego dnia.'
         '<br>'
         '<br>Zdobywanie punktów wpływu jest związane z poznawaniem przez uczestników realiów życia w PRL oraz strategicznym podejmowaniem działań. Punkty wpływu można zdobyć na dwa sposoby:'
         '</p>'
@@ -797,7 +797,6 @@ Konspekt zycie_i_swiat_prl = Konspekt(
             '<td style="padding-left: 8px; padding-right: 8px;"><p>...</p></td>'
           '</tr>'
         '</table>'
-        '<p style="text-align:justify;"><br></p>'
         // Szczegóły gry - karty wiedzy
         '<h1>Szczegóły gry</h1>'
         '<h2>Karty wiedzy</h2>'
