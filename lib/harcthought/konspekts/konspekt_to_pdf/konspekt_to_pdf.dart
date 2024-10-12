@@ -656,24 +656,26 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
 
                 Text(durationToString(step.duration), style: TextStyle(font: font, fontSize: defTextSize)),
 
-                SizedBox(width: 20),
+                SizedBox(width: 16),
 
                 Text(
                     step.activeForm?'Forma aktywna':'Forma pasywna',
                     style: TextStyle(
-                      color: color(step.activeForm?Colors.green:Colors.deepOrange),
                       font: fontBold,
+                      fontSize: defTextSize,
+                      color: color(step.activeForm?Colors.green:Colors.deepOrange),
                     )
                 ),
 
-                SizedBox(width: 20),
+                SizedBox(width: 16),
 
                 if(!step.required)
                   Text(
                       '[opcjonalnie]',
                       style: TextStyle(
-                          fontSize: defTextSize,
-                          color: PdfColors.grey
+                        font: font,
+                        fontSize: defTextSize,
+                        color: PdfColors.grey
                       )
                   ),
 
@@ -736,7 +738,8 @@ Future<List<Widget>> StepWidget(KonspektStep step, int index, Font font, Font fo
       font: font,
       fontBold: fontBold,
       fontItalic: fontItalic,
-      fontBoldItalic: fontBoldItalic
+      fontBoldItalic: fontBoldItalic,
+      fontSize: defTextSize
   );
 
   widgets.add(SizedBox(height: .5*elementBigSeparator));

@@ -276,7 +276,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
             'Przekonanie uczestników, że neutralność światopoglądowa w wychowaniu nie jest możliwa'
           ],
           content: '<p style="text-align:justify;">'
-              'Prowadzący przedstawia uczestnikom scenariusze z załącznika $attach_neutralnosc_duchowa_przyklady. Wszystkie scenariusze opisują sytuacje wychowawcze z udziałem instruktora harcerskiego. Zadaniem uczestników jest określenie:'
+              'Prowadzący przedstawia uczestnikom scenariusze z załącznika $attach_html_neutralnosc_duchowa_przyklady. Wszystkie scenariusze opisują sytuacje wychowawcze z udziałem instruktora harcerskiego. Zadaniem uczestników jest określenie:'
               '<br>'
               '<br><u>Czy zachowanie instruktora <b>było neutralne duchowo</b>, a jeśli nie, to <b>jakie wartości</b> lub postawy owa sytuacja wzmacnia?</u>'
               '<br>'
@@ -319,7 +319,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br><i>“Skoro wiadomo, że harcerstwo nie jest neutralne, to spróbujmy wgryźć się w esencję ducha harcerskiego wychowania. Może uda się to zrobić bez utonięcia w filozofii i teologii”</i>.'
               '<br>'
-              '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z załącznika $attach_neutralnosc_duchowa_przyklady - przykłady”. Prowadzący stawia przed nimi zadanie w formie pytania:'
+              '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z załącznika $attach_html_neutralnosc_duchowa_przyklady - przykłady”. Prowadzący stawia przed nimi zadanie w formie pytania:'
               '<br>'
               '<br><i>“Wszystkie przedstawione w scenariuszach wartości mają swoje odzwierciedlenie w PH. Ale przecież PH nie spadło z nieba na kamiennych tablicach! Z jakiego aksjomatu wynikają prezentowane w scenariuszu postawy, przekonania i wartości?”</i>'
               '<br>'
@@ -344,7 +344,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br><i>“Możliwe, że część z was na tym etapie zastanawia się, jakie są oraz skąd wypływają harcerskie wartości?”</i>.'
               '<br>'
-              '<br>Prowadzący przedstawia uczestnikom stosowny fragment statutu ZHP (załącznik $attach_cel_wychowania_duchowego_zhp_statut) oraz preambułę uchwały w sprawie wspierania rozwoju duchowego w ZHP (załącznik $attach_cel_wychowania_duchowego_zhp_uchwala). Zwraca uwagę na to, że w ZHP mamy ściśle określony zbiór wartości i postaw, do których wychowujemy.'
+              '<br>Prowadzący przedstawia uczestnikom stosowny fragment statutu ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_statut) oraz preambułę uchwały w sprawie wspierania rozwoju duchowego w ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_uchwala). Zwraca uwagę na to, że w ZHP mamy ściśle określony zbiór wartości i postaw, do których wychowujemy.'
               '</p>'
       ),
 
@@ -478,7 +478,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
           duration: Duration(minutes: 5),
           activeForm: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący przekazuje uczestnikom w grupach po jednym wydrukowanym egzemplarzu załącznika $attach_kratka_minimow_rozwoju_duchowego. Prowadzący tłumaczy uczestnikom co owa kratka reprezentuje - w każde pole odpowiada ogólnym zasadom, którymi prawidłowo rozwijający się w sferze duchowej harcerz powinien się cechować. Prowadzący informuje uczestników gdzie ten załącznik jest dostępny.'
+              'Prowadzący przekazuje uczestnikom w grupach po jednym wydrukowanym egzemplarzu załącznika $attach_html_kratka_minimow_rozwoju_duchowego. Prowadzący tłumaczy uczestnikom co owa kratka reprezentuje - w każde pole odpowiada ogólnym zasadom, którymi prawidłowo rozwijający się w sferze duchowej harcerz powinien się cechować. Prowadzący informuje uczestników gdzie ten załącznik jest dostępny.'
               '<br>'
               '<br>Kratka nie jest omawiana podczas zajęć ze względu na brak czasu. Jest prezentowana jedynie w celu uświadomienia, że taka pomoc merytoryczna jest dla nich, uczestników, dostępna.'
               '</p>'
