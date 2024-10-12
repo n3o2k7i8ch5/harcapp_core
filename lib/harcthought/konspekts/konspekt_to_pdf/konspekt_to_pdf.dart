@@ -907,16 +907,26 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
             ),
           ),
           build: (context) => multiPage,
-          footer: (context) => Align(
-            alignment: Alignment.bottomRight,
-            child: Text(
-              'Strona ${context.pageNumber} z ${context.pagesCount}',
-              style: TextStyle(
-                font: font,
-                fontSize: defTextSize,
-                color: PdfColors.grey,
+          footer: (context) => Row(
+            children: [
+              Text(
+                'Konspekt z aplikacji HarcApp',
+                style: TextStyle(
+                  font: font,
+                  fontSize: defTextSize,
+                  color: PdfColors.grey,
+                ),
               ),
-            ),
+              Expanded(child: Container()),
+              Text(
+                'Strona ${context.pageNumber} z ${context.pagesCount}',
+                style: TextStyle(
+                  font: font,
+                  fontSize: defTextSize,
+                  color: PdfColors.grey,
+                ),
+              )
+            ]
           ),
           maxPages: 100
       )
