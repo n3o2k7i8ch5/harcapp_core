@@ -319,7 +319,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br><i>“Skoro wiadomo, że harcerstwo nie jest neutralne, to spróbujmy wgryźć się w esencję ducha harcerskiego wychowania. Może uda się to zrobić bez utonięcia w filozofii i teologii”</i>.'
               '<br>'
-              '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z załącznika $attach_html_neutralnosc_duchowa_przyklady - przykłady”. Prowadzący stawia przed nimi zadanie w formie pytania:'
+              '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z załącznika $attach_html_neutralnosc_duchowa_przyklady. Prowadzący stawia przed nimi zadanie w formie pytania:'
               '<br>'
               '<br><i>“Wszystkie przedstawione w scenariuszach wartości mają swoje odzwierciedlenie w PH. Ale przecież PH nie spadło z nieba na kamiennych tablicach! Z jakiego aksjomatu wynikają prezentowane w scenariuszu postawy, przekonania i wartości?”</i>'
               '<br>'

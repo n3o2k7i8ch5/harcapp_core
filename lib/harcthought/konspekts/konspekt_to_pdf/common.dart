@@ -101,7 +101,7 @@ Future<List<Widget>> fromHtml({
                 color: PdfColors.blue800
             ),
             bulletListDotSize: 4.0,
-            bulletListIconSize: 16.0,
+            bulletListIconSize: defTextSize,
             listItemIndicatorPadding: EdgeInsets.symmetric(horizontal: 6.0),
             listItemVerticalSeparatorSize: 8.0
         )
@@ -116,6 +116,19 @@ Future<List<Widget>> StringListWidget(
     Font fontBoldItalic,
     {double? separatorHeight}
 ) async {
+
+  String htmlString = data.map(
+        (String element) => '<li><p style="text-align:justify;">$element</p></li>'
+  ).join('');
+
+  return await fromHtml(
+    htmlString: htmlString,
+    font: font,
+    fontBold: fontBold,
+    fontItalic: fontItalic,
+    fontBoldItalic: fontBoldItalic,
+    fontSize: defTextSize
+  );
 
   List<Widget> widgets = [];
 
