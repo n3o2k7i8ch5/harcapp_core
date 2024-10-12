@@ -122,7 +122,7 @@ Future<List<Widget>> StringListWidget(
   ).join('');
 
   return await fromHtml(
-    htmlString: htmlString,
+    htmlString: '<ul>$htmlString</ul>',
     font: font,
     fontBold: fontBold,
     fontItalic: fontItalic,
