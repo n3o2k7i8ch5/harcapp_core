@@ -114,11 +114,17 @@ Future<List<Widget>> StringListWidget(
     Font fontBold,
     Font fontItalic,
     Font fontBoldItalic,
-    {double? separatorHeight}
+    {bool justify = true}
 ) async {
 
+  String pTag;
+  if(justify)
+    pTag = '<p style="text-align:justify;">';
+  else
+    pTag = '<p>';
+
   String htmlString = data.map(
-        (String element) => '<li><p style="text-align:justify;">$element</p></li>'
+        (String element) => '<li>$pTag$element</p></li>'
   ).join('');
 
   return await fromHtml(
@@ -129,45 +135,5 @@ Future<List<Widget>> StringListWidget(
     fontBoldItalic: fontBoldItalic,
     fontSize: defTextSize
   );
-
-  List<Widget> widgets = [];
-
-  for(int i=0; i<data.length; i++){
-    widgets.add(
-        Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-
-              SizedBox(
-                  width: 36,
-                  child: Center(
-                      child: Text(
-                          '-',
-                          style: TextStyle(font: font, fontSize: defTextSize)
-                      )
-                  )
-              ),
-
-              Expanded(
-                child: Column(
-                  children: await fromHtml(
-                  htmlString: data[i],
-                  font: font,
-                  fontBold: fontBold,
-                  fontItalic: fontItalic,
-                  fontBoldItalic: fontBoldItalic,
-                  fontSize: defTextSize,
-                )
-              ),
-              )
-            ]
-        )
-    );
-
-    if(i<data.length - 1)
-      widgets.add(SizedBox(height: separatorHeight??elementSmallSeparator));
-  }
-
-  return widgets;
 
 }

@@ -53,6 +53,7 @@ class AppScaffold extends StatelessWidget{
         backgroundColor: backgroundColor,
         textColor: textColor,
         fontSize: 16.0,
+        fontAsset: 'packages/harcapp_core/fonts/Lato/Lato-Regular.ttf',
         webPosition: 'center',
         timeInSecForIosWeb: duration.inSeconds,
         webShowClose: true,
