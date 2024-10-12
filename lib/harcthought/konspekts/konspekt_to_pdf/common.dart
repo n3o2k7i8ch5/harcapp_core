@@ -138,6 +138,7 @@ Future<List<Widget>> StringListWidget(
                   fontBold: fontBold,
                   fontItalic: fontItalic,
                   fontBoldItalic: fontBoldItalic,
+                  fontSize: defTextSize,
                 )
               ),
               )

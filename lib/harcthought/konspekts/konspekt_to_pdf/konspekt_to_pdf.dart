@@ -264,6 +264,9 @@ Widget SphereWidget(KonspektSphere sphere, KonspektSphereDetails? details, Font 
 
 Widget SphereListWidget(Konspekt konspekt, Font font, Font fontBold){
 
+  if(konspekt.spheres.isEmpty)
+    return Container();
+
   List<Widget> widgets = [];
 
   for(int i=0; i<konspekt.spheres.length; i++) {
@@ -491,14 +494,14 @@ Widget MaterialWidget(KonspektMaterial material, Font font, Font fontBold, Font 
 
                               Text(
                                 'Wymagane dodatkowe przygotowanie:',
-                                style: TextStyle(font: fontBold)
+                                style: TextStyle(font: fontBold, fontSize: defTextSize),
                               ),
 
                               SizedBox(height: elementSmallSeparator),
 
                               Text(
                                   material.additionalPreparation!,
-                                  style: TextStyle(font: font),
+                                  style: TextStyle(font: font, fontSize: defTextSize),
                                   textAlign: TextAlign.justify
                               )
                             ]
@@ -565,7 +568,8 @@ Future<List<Widget>> IntroWidget(
         font: font,
         fontBold: fontBold,
         fontItalic: fontItalic,
-        fontBoldItalic: fontBoldItalic
+        fontBoldItalic: fontBoldItalic,
+        fontSize: defTextSize
       )
   );
 
@@ -600,7 +604,8 @@ Future<List<Widget>> DescriptionWidget(
           font: font,
           fontBold: fontBold,
           fontItalic: fontItalic,
-          fontBoldItalic: fontBoldItalic
+          fontBoldItalic: fontBoldItalic,
+          fontSize: defTextSize
       )
   );
 
