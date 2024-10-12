@@ -46,6 +46,21 @@ Future<List<Widget>> fromHtml({
             .replaceAll('&nbsp', '&zwnj;'),
         defaultFont: font,
         tagStyle: HtmlTagStyle(
+            boldStyle: TextStyle(
+                font: fontBold,
+                fontBold: fontBold,
+                fontSize: fontSize??defTextSize
+            ),
+            italicStyle: TextStyle(
+                font: fontItalic,
+                fontItalic: fontItalic,
+                fontSize: fontSize??defTextSize
+            ),
+            boldItalicStyle: TextStyle(
+                font: fontBoldItalic,
+                fontBoldItalic: fontBoldItalic,
+                fontSize: fontSize??defTextSize
+            ),
             h1Style: TextStyle(
                 font: fontBold,
                 fontBold: fontBold,
@@ -76,24 +91,14 @@ Future<List<Widget>> fromHtml({
                 fontBoldItalic: fontBoldItalic,
                 fontSize: fontSize??defTextSize
             ),
-            boldStyle: TextStyle(
-                font: fontBold,
-                fontBold: fontBold,
-                fontSize: fontSize??defTextSize
-            ),
-            italicStyle: TextStyle(
-                font: fontItalic,
-                fontItalic: fontItalic,
-                fontSize: fontSize??defTextSize
-            ),
-            boldItalicStyle: TextStyle(
-                font: fontBoldItalic,
-                fontBoldItalic: fontBoldItalic,
-                fontSize: fontSize??defTextSize
-            ),
             listIndexStyle: TextStyle(
                 font: font,
                 fontSize: fontSize??defTextSize
+            ),
+            linkStyle: TextStyle(
+                font: font,
+                fontSize: fontSize??defTextSize,
+                color: PdfColors.blue700
             ),
             bulletListDotSize: 4.0,
             bulletListIconSize: 16.0,
@@ -110,7 +115,7 @@ Future<List<Widget>> StringListWidget(
     Font fontItalic,
     Font fontBoldItalic,
     {double? separatorHeight}
-    ) async {
+) async {
 
   List<Widget> widgets = [];
 
@@ -125,7 +130,7 @@ Future<List<Widget>> StringListWidget(
                   child: Center(
                       child: Text(
                           '-',
-                          style: TextStyle(font: font)
+                          style: TextStyle(font: font, fontSize: defTextSize)
                       )
                   )
               ),
