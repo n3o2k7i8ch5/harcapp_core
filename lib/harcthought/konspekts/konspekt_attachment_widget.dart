@@ -178,7 +178,14 @@ class KonspektAttachmentPrintWidget extends StatelessWidget{
 
 class KonspektAttachmentWidget extends StatelessWidget{
 
-  static KonspektAttachmentWidget? from(BuildContext context, Konspekt konspekt, String name, {Color? color}) {
+  static KonspektAttachmentWidget? from(
+      BuildContext context,
+      Konspekt konspekt,
+      String name,
+      {
+        Color? color,
+        double? maxDialogWidth
+      }) {
     KonspektAttachment attachment;
     if(konspekt.attachments == null) return null;
 
@@ -188,10 +195,20 @@ class KonspektAttachmentWidget extends StatelessWidget{
       showAppToast(context, text: 'Załącznik o nazwie $name nie istnieje.');
       return null;
     }
-    return KonspektAttachmentWidget(konspekt, attachment, color: color);
+    return KonspektAttachmentWidget(
+        konspekt,
+        attachment,
+        color: color,
+        maxDialogWidth: maxDialogWidth
+    );
   }
 
-  static Future<void> openFirstFrom(BuildContext context, Konspekt konspekt, String attachmentName) async {
+  static Future<void> openFirstFrom(
+      BuildContext context,
+      Konspekt konspekt,
+      String attachmentName,
+      {double? maxDialogWidth}
+  ) async {
     KonspektAttachment attachment;
     if(konspekt.attachments == null) return null;
 
@@ -205,15 +222,23 @@ class KonspektAttachmentWidget extends StatelessWidget{
         context,
         konspekt.name,
         attachment.assets.keys.first,
-        konspekt.category
+        konspekt.category,
+        maxDialogWidth: maxDialogWidth
     );
   }
 
   final Konspekt konspekt;
   final KonspektAttachment attachment;
   final Color? color;
+  final double? maxDialogWidth;
 
-  const KonspektAttachmentWidget(this.konspekt, this.attachment, {this.color, super.key});
+  const KonspektAttachmentWidget(
+      this.konspekt,
+      this.attachment,
+      { this.color,
+        this.maxDialogWidth,
+        super.key
+      });
 
   @override
   Widget build(BuildContext context){
@@ -244,7 +269,8 @@ class KonspektAttachmentWidget extends StatelessWidget{
               context,
               konspekt.name,
               attachment.assets.keys.first,
-              konspekt.category
+              konspekt.category,
+              maxDialogWidth: maxDialogWidth
           )
       );
 
@@ -264,7 +290,8 @@ class KonspektAttachmentWidget extends StatelessWidget{
                     context,
                     konspekt.name,
                     format,
-                    konspekt.category
+                    konspekt.category,
+                    maxDialogWidth: maxDialogWidth
                 )
             ),
           )

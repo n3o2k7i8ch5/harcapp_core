@@ -79,13 +79,22 @@ void openKonspektSphereDuchLevelsInfoDialog(
     {double? maxWidth}
     ) => showDialog(
     context: context,
-    builder: (context) => Center(
-      child: Padding(
-          padding: const EdgeInsets.all(Dimen.defMarg),
-          child: SizedBox(
-              width: maxWidth,
-              child: KonspektSphereDuchLevelsInfoDialog()
-          )
-      ),
-    )
+    builder: (context){
+
+      Widget child = Padding(
+        padding: const EdgeInsets.all(Dimen.defMarg),
+        child: KonspektSphereDuchLevelsInfoDialog()
+      );
+
+      if(maxWidth == null)
+        return Center(child: child);
+      else
+        return Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: maxWidth),
+            child: child,
+          ),
+        );
+
+    }
 );

@@ -15,8 +15,9 @@ class KonspektMaterialTile extends StatelessWidget{
 
   final Konspekt konspekt;
   final KonspektMaterial material;
+  final double? maxDialogWidth;
 
-  const KonspektMaterialTile(this.konspekt, this.material, {super.key});
+  const KonspektMaterialTile(this.konspekt, this.material, {this.maxDialogWidth, super.key});
 
   @override
   Widget build(BuildContext context) => SimpleButton(
@@ -72,7 +73,8 @@ class KonspektMaterialTile extends StatelessWidget{
                       context,
                       konspekt,
                       material.attachmentName!,
-                      color: backgroundIcon_(context)
+                      color: backgroundIcon_(context),
+                      maxDialogWidth: maxDialogWidth,
                   );
 
                   if(attachmentWidget == null)

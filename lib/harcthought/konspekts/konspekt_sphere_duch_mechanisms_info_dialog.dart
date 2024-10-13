@@ -134,13 +134,22 @@ void openKonspektSphereDuchMechanismsInfoDialog(
     {double? maxWidth}
 ) => showDialog(
     context: context,
-    builder: (context) => Center(
-      child: Padding(
-          padding: const EdgeInsets.all(Dimen.defMarg),
-          child: SizedBox(
-              width: maxWidth,
-              child: KonspektSphereDuchMechanismsInfoDialog()
-          )
-      ),
-    )
+    builder: (context) {
+
+      Widget child = Padding(
+        padding: const EdgeInsets.all(Dimen.defMarg),
+        child: KonspektSphereDuchMechanismsInfoDialog()
+      );
+
+      if(maxWidth == null)
+        return Center(child: child);
+      else
+        return Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: maxWidth),
+            child: child,
+          ),
+        );
+
+    }
 );

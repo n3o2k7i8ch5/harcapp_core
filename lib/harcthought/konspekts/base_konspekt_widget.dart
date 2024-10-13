@@ -187,6 +187,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   Konspekt get konspekt => widget.konspekt;
   void Function()? get onDuchLevelInfoTap => widget.onDuchLevelInfoTap;
   void Function()? get onDuchMechanismInfoTap => widget.onDuchMechanismInfoTap;
+  double? get maxDialogWidth => maxDialogWidth;
 
   late bool showAppBarTitle;
 
@@ -284,7 +285,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 KonspektHtmlWidget(
                     konspekt,
                     '<b>W skrócie:</b> ${konspekt.summary!}',
-                    maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
+                    maxDialogWidth: widget.maxRelatedDialogWidth,
                     textSize: Dimen.textSizeBig,
                 )
               else if(!widget.oneLineSummary && konspekt.summary != null)
@@ -294,7 +295,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 KonspektHtmlWidget(
                   konspekt,
                   konspekt.summary!,
-                  maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
+                  maxDialogWidth: widget.maxRelatedDialogWidth,
                   textSize: Dimen.textSizeBig,
                 ),
 
@@ -451,7 +452,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 bottom: Dimen.sideMarg,
               ),
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                      (context, index) => KonspektMaterialTile(konspekt, konspekt.materials![index]),
+                  (context, index) => KonspektMaterialTile(
+                    konspekt,
+                    konspekt.materials![index],
+                    maxDialogWidth: maxDialogWidth,
+                  ),
                   separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
                   count: konspekt.materials!.length
               )),
@@ -473,7 +478,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   konspekt,
                   konspekt.intro!,
                   textSize: Dimen.textSizeBig,
-                  maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
+                  maxDialogWidth: widget.maxRelatedDialogWidth,
                 ),
 
               if(konspekt.description != null)
@@ -487,7 +492,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   konspekt,
                   konspekt.description!,
                   textSize: Dimen.textSizeBig,
-                  maxRelatedDialogWidth: widget.maxRelatedDialogWidth,
+                  maxDialogWidth: widget.maxRelatedDialogWidth,
                 ),
 
               if(konspekt.steps != null)
@@ -561,7 +566,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                      (context, index) => KonspektAttachmentWidget(konspekt, konspekt.attachments![index]),
+                  (context, index) => KonspektAttachmentWidget(
+                      konspekt,
+                      konspekt.attachments![index],
+                      maxDialogWidth: maxDialogWidth,
+                  ),
                   separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
                   count: konspekt.attachments!.length
               )),

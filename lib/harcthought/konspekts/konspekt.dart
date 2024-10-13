@@ -253,7 +253,13 @@ class KonspektAttachment{
       this.print
     });
 
-    Future<bool> open(BuildContext context, String konspektName, KonspektAttachmentFormat format, KonspektCategory konspektCategory) async {
+    Future<bool> open(
+        BuildContext context,
+        String konspektName,
+        KonspektAttachmentFormat format,
+        KonspektCategory konspektCategory,
+        {double? maxDialogWidth}
+    ) async {
       String? assetPath = assets[format];
       if(assetPath == null) return false;
 
@@ -286,24 +292,36 @@ class KonspektAttachment{
         case KonspektAttachmentFormat.png:
         case KonspektAttachmentFormat.webp:
           if(assetPath.contains('/'))
-            await openImageDialog(context, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false);
+            await openImageDialog(context, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false, maxWidth: maxDialogWidth);
           else
-            await openImageDialog(context, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false);
+            await openImageDialog(context, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false, maxWidth: maxDialogWidth);
 
           return true;
         case KonspektAttachmentFormat.svg:
           if(assetPath.contains('/'))
-            await openSvgImageDialog(context, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false);
+            await openSvgImageDialog(context, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false, maxWidth: maxDialogWidth);
           else
-            await openSvgImageDialog(context, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false);
+            await openSvgImageDialog(context, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false, maxWidth: maxDialogWidth);
 
           return true;
       }
 
     }
 
-    Future<bool> openOrShowMessage(BuildContext context, String konspektName, KonspektAttachmentFormat format, KonspektCategory konspektCategory) async {
-      bool result = await open(context, konspektName, format, konspektCategory);
+    Future<bool> openOrShowMessage(
+        BuildContext context,
+        String konspektName,
+        KonspektAttachmentFormat format,
+        KonspektCategory konspektCategory,
+        {double? maxDialogWidth}
+    ) async {
+      bool result = await open(
+        context,
+        konspektName,
+        format,
+        konspektCategory,
+        maxDialogWidth: maxDialogWidth
+      );
       if(!result) showAppToast(context, text: 'Nie udało się otworzyć pliku');
       return result;
     }

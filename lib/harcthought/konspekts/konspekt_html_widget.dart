@@ -17,7 +17,7 @@ class KonspektHtmlWidget extends StatelessWidget{
   final double textSize;
   final void Function()? onDuchLevelInfoTap;
   final void Function()? onDuchMechanismInfoTap;
-  final double? maxRelatedDialogWidth;
+  final double? maxDialogWidth;
 
   const KonspektHtmlWidget(
       this.konspekt,
@@ -25,7 +25,7 @@ class KonspektHtmlWidget extends StatelessWidget{
       { this.textSize = Dimen.textSizeNormal,
         this.onDuchLevelInfoTap,
         this.onDuchMechanismInfoTap,
-        this.maxRelatedDialogWidth,
+        this.maxDialogWidth,
         super.key
       });
 
@@ -45,7 +45,7 @@ class KonspektHtmlWidget extends StatelessWidget{
         openBaseGawedaDialog(
             context: context,
             gawedaName: gawedaName,
-            maxWidth: maxRelatedDialogWidth
+            maxWidth: maxDialogWidth
         );
       }else if(url.endsWith('@konspekt')){
         String konspektName = url.substring(0, url.length - '@konspekt'.length);
@@ -54,11 +54,16 @@ class KonspektHtmlWidget extends StatelessWidget{
           konspektName: konspektName,
           onDuchLevelInfoTap: onDuchLevelInfoTap,
           onDuchMechanismInfoTap: onDuchMechanismInfoTap,
-          maxWidth: maxRelatedDialogWidth
+          maxWidth: maxDialogWidth
         );
       }else if(url.endsWith('@attachment')){
         String formName = url.substring(0, url.length - '@attachment'.length);
-        KonspektAttachmentWidget.openFirstFrom(context, konspekt, formName);
+        KonspektAttachmentWidget.openFirstFrom(
+            context,
+            konspekt,
+            formName,
+            maxDialogWidth: maxDialogWidth
+        );
       }
       return false;
     },

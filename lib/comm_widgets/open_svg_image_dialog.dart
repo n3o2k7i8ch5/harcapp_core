@@ -8,8 +8,10 @@ import 'app_card.dart';
 Future<void> openSvgImageDialog(
     BuildContext context,
     String assetPath,
-    {required bool web}
-) async => showDialog(
+    {
+      required bool web,
+      double? maxWidth
+    }) async => showDialog(
     context: context,
     builder: (context) => ImageSvgDialog(assetPath, web)
 );
@@ -18,12 +20,14 @@ class ImageSvgDialog extends StatelessWidget{
 
   final String path;
   final bool web;
+  final double? maxWidth;
 
-  const ImageSvgDialog(this.path, this.web);
+  const ImageSvgDialog(this.path, this.web, {this.maxWidth});
 
   @override
-  Widget build(BuildContext context) => Center(
-    child: Padding(
+  Widget build(BuildContext context){
+
+    Widget child = Padding(
       padding: EdgeInsets.all(Dimen.sideMarg),
       child: Material(
         clipBehavior: Clip.hardEdge,
@@ -38,7 +42,18 @@ class ImageSvgDialog extends StatelessWidget{
           ],
         ),
       ),
-    ),
-  );
+    );
+
+    if(maxWidth == null)
+      return Center(child: child);
+    else
+      return Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: maxWidth!),
+          child: child,
+        ),
+      );
+
+  }
 
 }
