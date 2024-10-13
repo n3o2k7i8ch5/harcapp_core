@@ -65,11 +65,12 @@ class ImageSvgDialog extends StatelessWidget{
                   ),
 
                   SimpleButton.from(
-                      context: context,
-                      margin: EdgeInsets.zero,
-                      text: 'Otwórz w przeglądarce',
-                      icon: Icons.open_in_browser,
-                      onTap: () => launchURL(path)
+                    radius: 0,
+                    context: context,
+                    margin: EdgeInsets.zero,
+                    text: 'Otwórz w przeglądarce',
+                    icon: Icons.open_in_browser,
+                    onTap: () => launchURL(path)
                   )
 
                 ],

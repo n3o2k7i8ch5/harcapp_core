@@ -14,7 +14,7 @@ KonspektAttachment attach_mapa_glowna = KonspektAttachment(
     assets: {
       KonspektAttachmentFormat.urlPdf: urlFilePath(_konspekt_name, 'mapa_prl.pdf'),
       KonspektAttachmentFormat.urlPng: urlFilePath(_konspekt_name, 'mapa_prl.png'),
-      KonspektAttachmentFormat.urlWebp: urlFilePath(_konspekt_name, 'mapa_prl.webp')
+      KonspektAttachmentFormat.urlSvg: urlFilePath(_konspekt_name, 'mapa_prl.svg')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
