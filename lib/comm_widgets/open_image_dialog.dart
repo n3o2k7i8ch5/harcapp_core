@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
+import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:logger/logger.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../colors.dart';
 import '../comm_classes/app_text_style.dart';
+import '../comm_classes/common.dart';
 import 'app_card.dart';
 
 Future<void> openImageDialog(
@@ -62,13 +65,27 @@ class ImageDialog extends StatelessWidget{
                   Logger().w(stackTrace.toString());
                   return Center(
                     child: SizedBox(
-                      height: 64.0,
+                      height: 64.0 + 2*Dimen.sideMarg,
                       child: Center(
-                        child: SelectableText(
-                          'Błąd ładowania obrazka'
-                          '\n\n$path',
-                          style: AppTextStyle(),
-                        ),
+                        child: Column(
+                          children: [
+
+                            SelectableText(
+                              'Błąd ładowania obrazka'
+                                  '\n\n$path',
+                              style: AppTextStyle(),
+                              textAlign: TextAlign.center,
+                            ),
+
+                            SimpleButton.from(
+                              context: context,
+                              text: 'Otwórz w przeglądarce',
+                              icon: Icons.open_in_browser,
+                              onTap: () => launchURL(path)
+                            )
+
+                          ],
+                        )
                       ),
                     ),
                   );
