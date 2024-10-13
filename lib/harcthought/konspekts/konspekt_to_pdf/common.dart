@@ -102,10 +102,13 @@ Future<List<Widget>> fromHtml({
                 fontSize: fontSize??defTextSize,
                 color: PdfColors.blue800
             ),
+            listTopPadding: 8.0,
+            listBottomPadding: 8.0,
             bulletListDotSize: 4.0,
             bulletListIconSize: defTextSize,
             listItemIndicatorPadding: EdgeInsets.symmetric(horizontal: 6.0),
-            listItemVerticalSeparatorSize: 8.0
+            listItemVerticalSeparatorSize: 8.0,
+            headingBottomSpacing: 8.0,
         )
     );
 
