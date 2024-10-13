@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:logger/logger.dart';
 
 import '../colors.dart';
 import '../comm_classes/app_text_style.dart';
@@ -57,17 +58,20 @@ class ImageDialog extends StatelessWidget{
                     color: iconEnab_(context),
                   ),
                 ),
-                errorBuilder: (_, __, ___) => Center(
-                  child: SizedBox(
-                    height: 64.0,
-                    child: Center(
-                      child: Text(
-                        'Błąd ładowania obrazka',
-                        style: AppTextStyle(),
+                errorBuilder: (_, __, stackTrace){
+                  Logger().w(stackTrace.toString());
+                  return Center(
+                    child: SizedBox(
+                      height: 64.0,
+                      child: Center(
+                        child: Text(
+                          'Błąd ładowania obrazka',
+                          style: AppTextStyle(),
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                }
               )
             else
               Image.asset(path)

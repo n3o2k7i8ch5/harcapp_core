@@ -158,6 +158,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final void Function()? onDuchMechanismInfoTap;
   final double? maxDialogWidth;
   final ScrollPhysics physics;
+  final ScrollController? controller;
   final bool shrinkWrap;
   final Widget? leading;
   final bool oneLineSummary;
@@ -171,6 +172,7 @@ class BaseKonspektWidget extends StatefulWidget{
         required this.onDuchMechanismInfoTap,
         this.maxDialogWidth,
         this.physics = const BouncingScrollPhysics(),
+        this.controller,
         this.shrinkWrap = false,
         this.leading,
         this.oneLineSummary = false,
@@ -192,14 +194,17 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   late bool showAppBarTitle;
 
   late ValueNotifier<double> headerNotifier;
-  late ScrollController controller;
+  late ScrollController _controller;
+
+  ScrollController get controller => widget.controller??_controller;
 
   double? layoutWidth;
 
   @override
   void initState() {
     showAppBarTitle = false;
-    controller = ScrollController();
+    if(widget.controller == null)
+      _controller = ScrollController();
 
     controller.addListener((){
       double layoutWidth = this.layoutWidth??MediaQuery.of(context).size.width;
