@@ -50,46 +50,46 @@ class ImageDialog extends StatelessWidget{
               iconTheme: IconThemeData(color: iconEnab_(context)),
             ),
             if(web)
-              Image.network(
-                path,
-                loadingBuilder: (_, __, ___) => Padding(
-                  padding: EdgeInsets.all(Dimen.sideMarg),
-                  child: SpinKitChasingDots(
-                    size: 64.0,
-                    color: iconEnab_(context),
-                  ),
-                ),
-                errorBuilder: (_, __, stackTrace){
-                  Logger().w(stackTrace.toString());
-                  return Center(
-                    child: SizedBox(
-                      height: 64.0 + 2*Dimen.sideMarg,
-                      child: Column(
-                        children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
 
-                          Expanded(
-                            child: Center(
-                              child: SelectableText(
-                                'Błąd ładowania obrazka'
-                                    '\n\n$path',
-                                style: AppTextStyle(),
-                                textAlign: TextAlign.center,
+                  Image.network(
+                      path,
+                      loadingBuilder: (_, __, ___) => Padding(
+                        padding: EdgeInsets.all(Dimen.sideMarg),
+                        child: SpinKitChasingDots(
+                          size: 64.0,
+                          color: iconEnab_(context),
+                        ),
+                      ),
+                      errorBuilder: (_, __, stackTrace){
+                        Logger().w(stackTrace.toString());
+                        return Center(
+                          child: SizedBox(
+                              height: 64.0 + 2*Dimen.sideMarg,
+                              child: Center(
+                                child: SelectableText(
+                                  'Błąd ładowania obrazka'
+                                      '\n\n$path',
+                                  style: AppTextStyle(),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
-                            ),
                           ),
+                        );
+                      }
+                  ),
 
-                          SimpleButton.from(
-                              context: context,
-                              text: 'Otwórz w przeglądarce',
-                              icon: Icons.open_in_browser,
-                              onTap: () => launchURL(path)
-                          )
+                  SimpleButton.from(
+                      context: context,
+                      margin: EdgeInsets.zero,
+                      text: 'Otwórz w przeglądarce',
+                      icon: Icons.open_in_browser,
+                      onTap: () => launchURL(path)
+                  )
 
-                        ],
-                      )
-                    ),
-                  );
-                }
+                ],
               )
             else
               Image.asset(path)

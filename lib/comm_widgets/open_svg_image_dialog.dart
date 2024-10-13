@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
+import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
 
 import '../comm_classes/app_text_style.dart';
@@ -47,15 +49,30 @@ class ImageSvgDialog extends StatelessWidget{
               iconTheme: IconThemeData(color: iconEnab_(context)),
             ),
             if(web)
-              SvgPicture.network(
-                path,
-                placeholderBuilder: (_) => Padding(
-                  padding: EdgeInsets.all(Dimen.sideMarg),
-                  child: SpinKitChasingDots(
-                    size: 64.0,
-                    color: iconEnab_(context),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+
+                  SvgPicture.network(
+                    path,
+                    placeholderBuilder: (_) => Padding(
+                      padding: EdgeInsets.all(Dimen.sideMarg),
+                      child: SpinKitChasingDots(
+                        size: 64.0,
+                        color: iconEnab_(context),
+                      ),
+                    ),
                   ),
-                ),
+
+                  SimpleButton.from(
+                      context: context,
+                      margin: EdgeInsets.zero,
+                      text: 'Otwórz w przeglądarce',
+                      icon: Icons.open_in_browser,
+                      onTap: () => launchURL(path)
+                  )
+
+                ],
               )
             else
               SvgPicture.asset(path)
