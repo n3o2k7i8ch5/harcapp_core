@@ -51,6 +51,7 @@ class ImageDialog extends StatelessWidget{
             ),
             if(web)
               Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
 

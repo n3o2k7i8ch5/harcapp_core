@@ -40,6 +40,7 @@ class ImageSvgDialog extends StatelessWidget{
         clipBehavior: Clip.hardEdge,
         borderRadius: BorderRadius.circular(AppCard.bigRadius),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             AppBarX(
               titleWidget: Text(
@@ -50,6 +51,7 @@ class ImageSvgDialog extends StatelessWidget{
             ),
             if(web)
               Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
 
