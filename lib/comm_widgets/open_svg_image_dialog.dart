@@ -3,26 +3,30 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/dimen.dart';
 
+import '../comm_classes/app_text_style.dart';
+import '../comm_classes/color_pack.dart';
 import 'app_card.dart';
 
 Future<void> openSvgImageDialog(
     BuildContext context,
+    String title,
     String assetPath,
     {
       required bool web,
       double? maxWidth
     }) async => showDialog(
     context: context,
-    builder: (context) => ImageSvgDialog(assetPath, web)
+    builder: (context) => ImageSvgDialog(title, assetPath, web)
 );
 
 class ImageSvgDialog extends StatelessWidget{
 
+  final String title;
   final String path;
   final bool web;
   final double? maxWidth;
 
-  const ImageSvgDialog(this.path, this.web, {this.maxWidth});
+  const ImageSvgDialog(this.title, this.path, this.web, {this.maxWidth});
 
   @override
   Widget build(BuildContext context){
@@ -34,7 +38,13 @@ class ImageSvgDialog extends StatelessWidget{
         borderRadius: BorderRadius.circular(AppCard.bigRadius),
         child: Column(
           children: [
-            AppBarX(),
+            AppBarX(
+              titleWidget: Text(
+                title,
+                style: AppTextStyle(color: iconEnab_(context)),
+              ),
+              iconTheme: IconThemeData(color: iconEnab_(context)),
+            ),
             if(web)
               SvgPicture.network(path)
             else

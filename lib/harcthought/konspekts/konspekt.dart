@@ -275,10 +275,10 @@ class KonspektAttachment{
           return true;
         case KonspektAttachmentFormat.urlPng:
         case KonspektAttachmentFormat.urlWebp:
-          openImageDialog(context, assetPath, web: true);
+          openImageDialog(context, title, assetPath, web: true);
           return true;
         case KonspektAttachmentFormat.urlSvg:
-          openSvgImageDialog(context, assetPath, web: true);
+          openSvgImageDialog(context, title, assetPath, web: true);
           return true;
         case KonspektAttachmentFormat.pdf:
         case KonspektAttachmentFormat.docx:
@@ -292,16 +292,16 @@ class KonspektAttachment{
         case KonspektAttachmentFormat.png:
         case KonspektAttachmentFormat.webp:
           if(assetPath.contains('/'))
-            await openImageDialog(context, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false, maxWidth: maxDialogWidth);
+            await openImageDialog(context, title, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false, maxWidth: maxDialogWidth);
           else
-            await openImageDialog(context, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false, maxWidth: maxDialogWidth);
+            await openImageDialog(context, title, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false, maxWidth: maxDialogWidth);
 
           return true;
         case KonspektAttachmentFormat.svg:
           if(assetPath.contains('/'))
-            await openSvgImageDialog(context, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false, maxWidth: maxDialogWidth);
+            await openSvgImageDialog(context, title, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false, maxWidth: maxDialogWidth);
           else
-            await openSvgImageDialog(context, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false, maxWidth: maxDialogWidth);
+            await openSvgImageDialog(context,  title, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false, maxWidth: maxDialogWidth);
 
           return true;
       }

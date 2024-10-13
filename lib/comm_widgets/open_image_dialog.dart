@@ -4,26 +4,29 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/dimen.dart';
 
+import '../comm_classes/app_text_style.dart';
 import 'app_card.dart';
 
 Future<void> openImageDialog(
   BuildContext context,
+  String title,
   String assetPath,
   {
     double? maxWidth,
     required bool web
   }) async => showDialog(
     context: context,
-    builder: (context) => ImageDialog(assetPath, web)
+    builder: (context) => ImageDialog(title, assetPath, web)
 );
 
 class ImageDialog extends StatelessWidget{
 
+  final String title;
   final String path;
   final bool web;
   final double? maxWidth;
 
-  const ImageDialog(this.path, this.web, {this.maxWidth});
+  const ImageDialog(this.title, this.path, this.web, {this.maxWidth});
 
   @override
   Widget build(BuildContext context){
@@ -36,7 +39,13 @@ class ImageDialog extends StatelessWidget{
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AppBarX(),
+            AppBarX(
+              titleWidget: Text(
+                title,
+                style: AppTextStyle(color: iconEnab_(context)),
+              ),
+              iconTheme: IconThemeData(color: iconEnab_(context)),
+            ),
             if(web)
               Image.network(
                 path,
