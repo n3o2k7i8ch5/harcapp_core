@@ -108,6 +108,7 @@ Future<List<Widget>> fromHtml({
             bulletListIconSize: defTextSize,
             listItemIndicatorPadding: EdgeInsets.symmetric(horizontal: 6.0),
             listItemVerticalSeparatorSize: 8.0,
+            headingTopSpacing: 12.0,
             headingBottomSpacing: 8.0,
         )
     );
