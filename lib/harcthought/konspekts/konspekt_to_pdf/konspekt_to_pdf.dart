@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_classes/storage.dart';
-import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:htmltopdfwidgets/htmltopdfwidgets.dart';
@@ -14,6 +13,8 @@ import 'common.dart';
 double elementBigSeparator = 24.0;
 double elementSmallSeparator = 6.0;
 double konspektSeparator = 48.0;
+
+double defRadius = 4.5;
 
 
 PdfColor cardColor = PdfColors.grey100;
@@ -38,8 +39,8 @@ Future<Widget> CoverWidget(Konspekt konspekt, Font font, bool withCover) async {
         SizedBox(height: elementBigSeparator),
 
         ClipRRect(
-          horizontalRadius: AppCard.defRadius,
-          verticalRadius: AppCard.defRadius,
+          horizontalRadius: defRadius,
+          verticalRadius: defRadius,
           child: Stack(
             children: [
 
@@ -49,8 +50,8 @@ Future<Widget> CoverWidget(Konspekt konspekt, Font font, bool withCover) async {
                 bottom: elementSmallSeparator,
                 right: elementSmallSeparator,
                 child: ClipRRect(
-                    horizontalRadius: AppCard.defRadius,
-                    verticalRadius: AppCard.defRadius,
+                    horizontalRadius: defRadius,
+                    verticalRadius: defRadius,
                     child: Container(
                       color: PdfColors.white,
                       child: Padding(
@@ -76,8 +77,8 @@ Future<Widget> CoverWidget(Konspekt konspekt, Font font, bool withCover) async {
 }
 
 Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconSize}) async => ClipRRect(
-    horizontalRadius: AppCard.defRadius,
-    verticalRadius: AppCard.defRadius,
+    horizontalRadius: defRadius,
+    verticalRadius: defRadius,
     child: Container(
         color: color(meto.color),
         child: Row(
@@ -175,8 +176,8 @@ Widget TypeWidget(Konspekt konspekt, Font font, Font fontBold) => Column(
 );
 
 Widget SphereWidget(KonspektSphere sphere, KonspektSphereDetails? details, Font font, Font fontBold) => ClipRRect(
-  horizontalRadius: AppCard.defRadius,
-  verticalRadius: AppCard.defRadius,
+  horizontalRadius: defRadius,
+  verticalRadius: defRadius,
   child: Container(
     color: cardColor,
     child: Padding(
@@ -449,8 +450,8 @@ Widget MaterialAmountWidget(KonspektMaterial material, Font font, Font fontBold,
 }
 
 Widget MaterialWidget(KonspektMaterial material, Font font, Font fontBold, Font fontItalic) => ClipRRect(
-  horizontalRadius: AppCard.defRadius,
-  verticalRadius: AppCard.defRadius,
+  horizontalRadius: defRadius,
+  verticalRadius: defRadius,
   child: Container(
     color: cardColor,
     child: Padding(
@@ -486,8 +487,8 @@ Widget MaterialWidget(KonspektMaterial material, Font font, Font fontBold, Font 
 
             if(material.additionalPreparation != null)
               ClipRRect(
-                  horizontalRadius: AppCard.defRadius,
-                  verticalRadius: AppCard.defRadius,
+                  horizontalRadius: defRadius,
+                  verticalRadius: defRadius,
                   child: Container(
                       color: PdfColors.white,
                       child: Padding(
@@ -646,8 +647,8 @@ Future<List<Widget>> StepWidget(
             width: numberCircleSize,
             height: numberCircleSize,
             child: ClipRRect(
-                horizontalRadius: AppCard.defRadius,
-                verticalRadius: AppCard.defRadius,
+                horizontalRadius: defRadius,
+                verticalRadius: defRadius,
                 child: Container(
                   color: PdfColors.grey,
                   child: Center(
@@ -723,8 +724,8 @@ Future<List<Widget>> StepWidget(
               left: numberCircleSize + .5*elementBigSeparator,
             ),
             child: ClipRRect(
-                horizontalRadius: AppCard.defRadius,
-                verticalRadius: AppCard.defRadius,
+                horizontalRadius: defRadius,
+                verticalRadius: defRadius,
                 child: Container(
                     color: cardColor,
                     child: Padding(
@@ -961,6 +962,7 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
               icons: Font.ttf(fontByteData)
             ),
           ),
+          margin: EdgeInsets.only(top: 6.0),
           build: (context) => multiPage,
           footer: (context) => Row(
             children: [
