@@ -13,8 +13,8 @@ Future<void> openImageDialog(
   String title,
   String assetPath,
   {
+    required bool web,
     double? maxWidth,
-    required bool web
   }) async => showDialog(
     context: context,
     builder: (context) => ImageDialog(title, assetPath, web, maxWidth: maxWidth)
@@ -60,9 +60,11 @@ class ImageDialog extends StatelessWidget{
                 errorBuilder: (_, __, ___) => Center(
                   child: SizedBox(
                     height: 64.0,
-                    child: Text(
-                      'Błąd ładowania obrazka',
-                      style: AppTextStyle(color: AppColors.text_hint_enab),
+                    child: Center(
+                      child: Text(
+                        'Błąd ładowania obrazka',
+                        style: AppTextStyle(),
+                      ),
                     ),
                   ),
                 ),

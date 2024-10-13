@@ -275,10 +275,10 @@ class KonspektAttachment{
           return true;
         case KonspektAttachmentFormat.urlPng:
         case KonspektAttachmentFormat.urlWebp:
-          openImageDialog(context, title, assetPath, web: true);
+          openImageDialog(context, title, assetPath, web: true, maxWidth: maxDialogWidth);
           return true;
         case KonspektAttachmentFormat.urlSvg:
-          openSvgImageDialog(context, title, assetPath, web: true);
+          openSvgImageDialog(context, title, assetPath, web: true, maxWidth: maxDialogWidth);
           return true;
         case KonspektAttachmentFormat.pdf:
         case KonspektAttachmentFormat.docx:
