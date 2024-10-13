@@ -65,7 +65,8 @@ class ImageDialog extends StatelessWidget{
                       height: 64.0,
                       child: Center(
                         child: Text(
-                          'Błąd ładowania obrazka',
+                          'Błąd ładowania obrazka'
+                          '\n\n$path',
                           style: AppTextStyle(),
                         ),
                       ),
