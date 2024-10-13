@@ -14,7 +14,7 @@ double elementBigSeparator = 24.0;
 double elementSmallSeparator = 6.0;
 double konspektSeparator = 48.0;
 
-double defRadius = 4.5;
+double defRadius = 4;
 
 
 PdfColor cardColor = PdfColors.grey100;
