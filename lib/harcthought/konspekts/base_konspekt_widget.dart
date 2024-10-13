@@ -156,7 +156,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final bool withAppBar;
   final void Function()? onDuchLevelInfoTap;
   final void Function()? onDuchMechanismInfoTap;
-  final double? maxRelatedDialogWidth;
+  final double? maxDialogWidth;
   final ScrollPhysics physics;
   final bool shrinkWrap;
   final Widget? leading;
@@ -169,7 +169,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.withAppBar = true,
         required this.onDuchLevelInfoTap,
         required this.onDuchMechanismInfoTap,
-        this.maxRelatedDialogWidth,
+        this.maxDialogWidth,
         this.physics = const BouncingScrollPhysics(),
         this.shrinkWrap = false,
         this.leading,
@@ -187,7 +187,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   Konspekt get konspekt => widget.konspekt;
   void Function()? get onDuchLevelInfoTap => widget.onDuchLevelInfoTap;
   void Function()? get onDuchMechanismInfoTap => widget.onDuchMechanismInfoTap;
-  double? get maxDialogWidth => maxDialogWidth;
+  double? get maxDialogWidth => widget.maxDialogWidth;
 
   late bool showAppBarTitle;
 
@@ -285,7 +285,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 KonspektHtmlWidget(
                     konspekt,
                     '<b>W skrócie:</b> ${konspekt.summary!}',
-                    maxDialogWidth: widget.maxRelatedDialogWidth,
+                    maxDialogWidth: widget.maxDialogWidth,
                     textSize: Dimen.textSizeBig,
                 )
               else if(!widget.oneLineSummary && konspekt.summary != null)
@@ -295,7 +295,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 KonspektHtmlWidget(
                   konspekt,
                   konspekt.summary!,
-                  maxDialogWidth: widget.maxRelatedDialogWidth,
+                  maxDialogWidth: widget.maxDialogWidth,
                   textSize: Dimen.textSizeBig,
                 ),
 
@@ -478,7 +478,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   konspekt,
                   konspekt.intro!,
                   textSize: Dimen.textSizeBig,
-                  maxDialogWidth: widget.maxRelatedDialogWidth,
+                  maxDialogWidth: widget.maxDialogWidth,
                 ),
 
               if(konspekt.description != null)
@@ -492,7 +492,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   konspekt,
                   konspekt.description!,
                   textSize: Dimen.textSizeBig,
-                  maxDialogWidth: widget.maxRelatedDialogWidth,
+                  maxDialogWidth: widget.maxDialogWidth,
                 ),
 
               if(konspekt.steps != null)
