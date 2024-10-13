@@ -16,7 +16,7 @@ Future<void> openSvgImageDialog(
       double? maxWidth
     }) async => showDialog(
     context: context,
-    builder: (context) => ImageSvgDialog(title, assetPath, web)
+    builder: (context) => ImageSvgDialog(title, assetPath, web, maxWidth: maxWidth)
 );
 
 class ImageSvgDialog extends StatelessWidget{

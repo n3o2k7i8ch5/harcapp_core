@@ -16,7 +16,7 @@ Future<void> openImageDialog(
     required bool web
   }) async => showDialog(
     context: context,
-    builder: (context) => ImageDialog(title, assetPath, web)
+    builder: (context) => ImageDialog(title, assetPath, web, maxWidth: maxWidth)
 );
 
 class ImageDialog extends StatelessWidget{
