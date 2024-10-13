@@ -4,6 +4,7 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/dimen.dart';
 
+import '../colors.dart';
 import '../comm_classes/app_text_style.dart';
 import 'app_card.dart';
 
@@ -54,6 +55,15 @@ class ImageDialog extends StatelessWidget{
                   child: SpinKitChasingDots(
                     size: 64.0,
                     color: iconEnab_(context),
+                  ),
+                ),
+                errorBuilder: (_, __, ___) => Center(
+                  child: SizedBox(
+                    height: 64.0,
+                    child: Text(
+                      'Błąd ładowania obrazka',
+                      style: AppTextStyle(color: AppColors.text_hint_enab),
+                    ),
                   ),
                 ),
               )
