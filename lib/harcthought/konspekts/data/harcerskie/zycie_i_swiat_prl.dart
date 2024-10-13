@@ -935,7 +935,6 @@ Konspekt zycie_i_swiat_prl = Konspekt(
             '<ol>'
             '<li><p style="text-align:justify;">Dynamiczne reformy gospodarcze - pożyczki, inwestycje w przemysł i infrastrukturę.</p></li>'
             '<li><p style="text-align:justify;">Kryzys i rozczarowanie, rosnący dług</p></li>'
-            '<li><p style="text-align:justify;"></p></li>'
             '<li><p style="text-align:justify;">1980 r. - protesty, które zakończyły epokę Gierka</p></li>'
             '</ol>'
         '</li>'
