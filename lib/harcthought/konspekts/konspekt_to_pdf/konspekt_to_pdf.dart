@@ -962,28 +962,30 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
               icons: Font.ttf(fontByteData)
             ),
           ),
-          margin: EdgeInsets.only(top: 6.0),
           build: (context) => multiPage,
-          footer: (context) => Row(
-            children: [
-              Text(
-                'Konspekt z aplikacji HarcApp',
-                style: TextStyle(
-                  font: font,
-                  fontSize: defTextSize,
-                  color: PdfColors.grey,
-                ),
-              ),
-              Expanded(child: Container()),
-              Text(
-                'Strona ${context.pageNumber} z ${context.pagesCount}',
-                style: TextStyle(
-                  font: font,
-                  fontSize: defTextSize,
-                  color: PdfColors.grey,
-                ),
-              )
-            ]
+          footer: (context) => Padding(
+            padding: EdgeInsets.only(top: 6.0),
+            child: Row(
+                children: [
+                  Text(
+                    'Konspekt z aplikacji HarcApp',
+                    style: TextStyle(
+                      font: font,
+                      fontSize: defTextSize,
+                      color: PdfColors.grey,
+                    ),
+                  ),
+                  Expanded(child: Container()),
+                  Text(
+                    'Strona ${context.pageNumber} z ${context.pagesCount}',
+                    style: TextStyle(
+                      font: font,
+                      fontSize: defTextSize,
+                      color: PdfColors.grey,
+                    ),
+                  )
+                ]
+            )
           ),
           maxPages: 100
       )
