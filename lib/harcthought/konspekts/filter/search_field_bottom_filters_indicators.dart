@@ -40,8 +40,11 @@ class SearchFieldBottomHarcerskieFilterIndicatorsWidget extends SearchFieldBotto
               if(sortedSelectedMetos.isNotEmpty)
                 MetoRow(sortedSelectedMetos),
 
+              if(sortedSelectedSpheres.isNotEmpty)
+                SizedBox(width: MetoRow.separatorWidth),
+
               ...sortedSelectedSpheres.map<Widget>((sphere) => Padding(
-                padding: const EdgeInsets.only(left: MetoRow.separatorWidth),
+                padding: const EdgeInsets.only(right: MetoRow.separatorWidth),
                 child: Icon(sphere.displayIcon, size: 18.0),
               )),
 
