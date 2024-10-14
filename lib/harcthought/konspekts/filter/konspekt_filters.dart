@@ -5,7 +5,7 @@ abstract class KonspektFilters{
 
   String phrase;
 
-  KonspektFilters({required this.phrase});
+  KonspektFilters({this.phrase = ""});
 
   bool get isEmpty;
   bool get isNotEmpty => !isEmpty;
@@ -23,9 +23,9 @@ class KonspektHarcerskieFilters extends KonspektFilters{
   final Set<KonspektSphere> selectedSpheres;
 
   KonspektHarcerskieFilters({
-    required super.phrase,
-    required this.selectedMetos,
-    required this.selectedSpheres,
+    super.phrase,
+    this.selectedMetos = const {},
+    this.selectedSpheres = const {},
   });
 
   @override
@@ -47,8 +47,8 @@ class KonspektKsztalcenioweFilters extends KonspektFilters{
   final Set<Meto> selectedLevels;
 
   KonspektKsztalcenioweFilters({
-    required super.phrase,
-    required this.selectedLevels,
+    super.phrase,
+    this.selectedLevels = const {},
   });
 
   @override
