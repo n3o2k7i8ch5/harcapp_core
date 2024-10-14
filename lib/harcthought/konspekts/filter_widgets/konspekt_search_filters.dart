@@ -12,6 +12,10 @@ abstract class KonspektSearchFilters{
 
   bool get hideSearchFieldBottom;
 
+  void clear(){
+    phrase = '';
+  }
+
 }
 
 class KonspektHarcerskieSearchFilters extends KonspektSearchFilters{
@@ -30,6 +34,13 @@ class KonspektHarcerskieSearchFilters extends KonspektSearchFilters{
   @override
   bool get hideSearchFieldBottom => selectedMetos.isEmpty && selectedSpheres.isEmpty;
 
+  @override
+  void clear() {
+    super.clear();
+    selectedMetos.clear();
+    selectedSpheres.clear();
+  }
+
 }
 
 class KonspektKsztalcenioweSearchFilters extends KonspektSearchFilters{
@@ -45,5 +56,11 @@ class KonspektKsztalcenioweSearchFilters extends KonspektSearchFilters{
 
   @override
   bool get hideSearchFieldBottom => selectedLevels.isEmpty;
+
+  @override
+  void clear() {
+    super.clear();
+    selectedLevels.clear();
+  }
 
 }
