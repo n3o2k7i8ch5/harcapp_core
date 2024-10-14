@@ -99,7 +99,11 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
         Positioned.fill(
           child: GestureDetector(
               onTap: () => Navigator.pop(context),
-              child: Container()
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: Colors.transparent,
+              )
           ),
         ),
 
