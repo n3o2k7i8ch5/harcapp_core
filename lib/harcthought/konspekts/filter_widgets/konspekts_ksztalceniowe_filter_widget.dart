@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import '../../../comm_widgets/meto_row.dart';
+import '../data/ksztalcenie/all.dart';
 import 'level_selectable_grid_widget.dart';
 
 class KonspektsHarcerskieFilterWidget extends StatelessWidget{
@@ -65,5 +68,26 @@ class SearchFieldBottomKsztalcenioweFiltersWidget extends StatelessWidget{
     );
 
   }
+
+}
+
+List<Konspekt> runKonspektsKsztalcenioweSearch(String phrase, Set<Meto> selectedLevels){
+
+  if(phrase.isEmpty && selectedLevels.isEmpty)
+    return allKsztalcenieKonspekts;
+
+  List<Konspekt> searchedKonspekts = [];
+
+  for(Konspekt konspekt in allKsztalcenieKonspekts) {
+    if(!remPolChars(konspekt.title).contains(remPolChars(phrase)))
+      continue;
+
+    if(!konspekt.containsMetos(selectedLevels))
+      continue;
+
+    searchedKonspekts.add(konspekt);
+  }
+
+  return searchedKonspekts;
 
 }

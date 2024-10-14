@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_widgets/meto_row.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/basic.dart';
 import 'package:harcapp_core/tag/tags_widget.dart';
 
 import '../konspekt.dart';
@@ -94,5 +96,29 @@ class SearchFieldBottomHarcerskieFiltersWidget extends StatelessWidget{
     );
 
   }
+
+}
+
+List<Konspekt> runKonspektsHarcerskieSearch(String phrase, Set<Meto> selectedMetos, Set<KonspektSphere> selectedSpheres){
+
+  if(phrase.isEmpty && selectedMetos.isEmpty && selectedSpheres.isEmpty)
+    return allBasicKonspekts;
+
+  List<Konspekt> searchedKonspekts = [];
+
+  for(Konspekt konspekt in allBasicKonspekts) {
+    if(!remPolChars(konspekt.title).contains(remPolChars(phrase)))
+      continue;
+
+    if(!konspekt.containsMetos(selectedMetos))
+      continue;
+
+    if(!konspekt.containsSpheres(selectedSpheres))
+      continue;
+
+    searchedKonspekts.add(konspekt);
+  }
+
+  return searchedKonspekts;
 
 }
