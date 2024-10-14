@@ -24,9 +24,10 @@ class KonspektHarcerskieFilters extends KonspektFilters{
 
   KonspektHarcerskieFilters({
     super.phrase,
-    this.selectedMetos = const {},
-    this.selectedSpheres = const {},
-  });
+    Set<Meto>? selectedMetos,
+    Set<KonspektSphere>? selectedSpheres,
+  }): selectedMetos = selectedMetos ?? {},
+      selectedSpheres = selectedSpheres ?? {};
 
   @override
   bool get isEmpty => phrase.isEmpty && selectedMetos.isEmpty && selectedSpheres.isEmpty;
@@ -48,8 +49,8 @@ class KonspektKsztalcenioweFilters extends KonspektFilters{
 
   KonspektKsztalcenioweFilters({
     super.phrase,
-    this.selectedLevels = const {},
-  });
+    Set<Meto>? selectedLevels,
+  }): selectedLevels = selectedLevels ?? {};
 
   @override
   bool get isEmpty => phrase.isEmpty && selectedLevels.isEmpty;

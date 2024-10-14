@@ -15,36 +15,6 @@ abstract class SearchFieldBottomFilterIndicatorsWidget<T extends KonspektFilters
 
 }
 
-class SearchFieldBottomKsztalcenioweFilterIndicatorsWidget extends SearchFieldBottomFilterIndicatorsWidget<KonspektKsztalcenioweFilters>{
-
-  const SearchFieldBottomKsztalcenioweFilterIndicatorsWidget(super.filters, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-    List<Meto> sortedSelectedLevels = filters.selectedLevels.toList();
-    sortedSelectedLevels.sort((t1, t2) => t1.index - t2.index);
-
-    return SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.only(bottom: 6, left: Dimen.iconMarg, right: Dimen.iconMarg),
-        child: SizedBox(
-          height: 2*Dimen.defMarg + Dimen.textSizeNormal + 3,
-          child: Row(
-            children: [
-
-              MetoRow(sortedSelectedLevels),
-
-            ],
-          ),
-        )
-    );
-
-  }
-
-}
-
 class SearchFieldBottomHarcerskieFilterIndicatorsWidget extends SearchFieldBottomFilterIndicatorsWidget<KonspektHarcerskieFilters>{
 
   const SearchFieldBottomHarcerskieFilterIndicatorsWidget(super.filters, {super.key});
@@ -73,6 +43,36 @@ class SearchFieldBottomHarcerskieFilterIndicatorsWidget extends SearchFieldBotto
                 padding: const EdgeInsets.only(left: MetoRow.separatorWidth),
                 child: Icon(sphere.displayIcon, size: 18.0),
               )),
+
+            ],
+          ),
+        )
+    );
+
+  }
+
+}
+
+class SearchFieldBottomKsztalcenioweFilterIndicatorsWidget extends SearchFieldBottomFilterIndicatorsWidget<KonspektKsztalcenioweFilters>{
+
+  const SearchFieldBottomKsztalcenioweFilterIndicatorsWidget(super.filters, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    List<Meto> sortedSelectedLevels = filters.selectedLevels.toList();
+    sortedSelectedLevels.sort((t1, t2) => t1.index - t2.index);
+
+    return SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.only(bottom: 6, left: Dimen.iconMarg, right: Dimen.iconMarg),
+        child: SizedBox(
+          height: 2*Dimen.defMarg + Dimen.textSizeNormal + 3,
+          child: Row(
+            children: [
+
+              MetoRow(sortedSelectedLevels),
 
             ],
           ),
