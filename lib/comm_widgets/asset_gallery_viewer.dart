@@ -58,7 +58,7 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
             child: Hero(
                 tag: imageAssetPaths[index],
                 child: IntrinsicHeight(
-                  child: IgnorePointer(
+                  child: AbsorbPointer(
                     child: AppCard(
                         color: background_(context),
                         padding: const EdgeInsets.all(Dimen.sideMarg),
