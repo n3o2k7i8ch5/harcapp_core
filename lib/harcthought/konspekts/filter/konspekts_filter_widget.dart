@@ -9,9 +9,9 @@ import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/tag/tags_widget.dart';
 
-import 'konspekts_search_filters.dart';
+import 'konspekts_filters.dart';
 
-abstract class KonspektsFilterWidget<T extends KonspektsSearchFilters> extends StatelessWidget{
+abstract class KonspektsFilterWidget<T extends KonspektsFilters> extends StatelessWidget{
 
   final T filters;
   final void Function(T filters) onChanged;
@@ -20,7 +20,7 @@ abstract class KonspektsFilterWidget<T extends KonspektsSearchFilters> extends S
 
 }
 
-class KonspektsHarcerskieFilterWidget extends KonspektsFilterWidget<KonspektsHarcerskieSearchFilters>{
+class KonspektsHarcerskieFilterWidget extends KonspektsFilterWidget<KonspektsHarcerskieFilters>{
 
 
   const KonspektsHarcerskieFilterWidget(super.filters, {required super.onChanged, super.key});
@@ -41,7 +41,7 @@ class KonspektsHarcerskieFilterWidget extends KonspektsFilterWidget<KonspektsHar
           if(checked) _selectedMetos.remove(meto);
           else _selectedMetos.add(meto);
           onChanged(
-              KonspektsHarcerskieSearchFilters(
+              KonspektsHarcerskieFilters(
                 phrase: filters.phrase,
                 selectedMetos: _selectedMetos,
                 selectedSpheres: filters.selectedSpheres
@@ -63,7 +63,7 @@ class KonspektsHarcerskieFilterWidget extends KonspektsFilterWidget<KonspektsHar
           if(checked) _selectedSpheres.remove(sphere);
           else _selectedSpheres.add(sphere);
           onChanged(
-            KonspektsHarcerskieSearchFilters(
+            KonspektsHarcerskieFilters(
               phrase: filters.phrase,
               selectedMetos: filters.selectedMetos,
               selectedSpheres: _selectedSpheres
@@ -77,7 +77,7 @@ class KonspektsHarcerskieFilterWidget extends KonspektsFilterWidget<KonspektsHar
 
 }
 
-class KonspektsKsztalcenioweFilterWidget extends KonspektsFilterWidget<KonspektsKsztalcenioweSearchFilters>{
+class KonspektsKsztalcenioweFilterWidget extends KonspektsFilterWidget<KonspektsKsztalcenioweFilters>{
 
   const KonspektsKsztalcenioweFilterWidget(super.filters, {required super.onChanged, super.key});
 
@@ -96,7 +96,7 @@ class KonspektsKsztalcenioweFilterWidget extends KonspektsFilterWidget<Konspekts
           if(checked) _selectedLevels.remove(meto);
           else _selectedLevels.add(meto);
           onChanged(
-              KonspektsKsztalcenioweSearchFilters(
+              KonspektsKsztalcenioweFilters(
                 phrase: filters.phrase,
                 selectedLevels: _selectedLevels
               )

@@ -5,9 +5,9 @@ import 'package:harcapp_core/comm_widgets/meto_row.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
-import 'konspekts_search_filters.dart';
+import 'konspekts_filters.dart';
 
-abstract class SearchFieldBottomFilterIndicatosWidget<T extends KonspektsSearchFilters> extends StatelessWidget{
+abstract class SearchFieldBottomFilterIndicatosWidget<T extends KonspektsFilters> extends StatelessWidget{
 
   final T filters;
 
@@ -15,7 +15,7 @@ abstract class SearchFieldBottomFilterIndicatosWidget<T extends KonspektsSearchF
 
 }
 
-class SearchFieldBottomKsztalcenioweFiltersWidget extends SearchFieldBottomFilterIndicatosWidget<KonspektsKsztalcenioweSearchFilters>{
+class SearchFieldBottomKsztalcenioweFiltersWidget extends SearchFieldBottomFilterIndicatosWidget<KonspektsKsztalcenioweFilters>{
 
   const SearchFieldBottomKsztalcenioweFiltersWidget(super.filters, {super.key});
 
@@ -45,7 +45,7 @@ class SearchFieldBottomKsztalcenioweFiltersWidget extends SearchFieldBottomFilte
 
 }
 
-class SearchFieldBottomHarcerskieFiltersWidget extends SearchFieldBottomFilterIndicatosWidget<KonspektsHarcerskieSearchFilters>{
+class SearchFieldBottomHarcerskieFiltersWidget extends SearchFieldBottomFilterIndicatosWidget<KonspektsHarcerskieFilters>{
 
   const SearchFieldBottomHarcerskieFiltersWidget(super.filters, {super.key});
 
