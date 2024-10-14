@@ -34,12 +34,20 @@ class MetoTile extends StatelessWidget{
   final double iconSize;
   final Meto meto;
   final Widget? trailing;
+  final bool intrinsicWidth;
 
-  const MetoTile({required this.meto, this.iconSize = 24.0, this.trailing, super.key});
+  const MetoTile({
+    required this.meto,
+    this.iconSize = 24.0,
+    this.trailing,
+    this.intrinsicWidth = true,
+    super.key
+  });
 
   @override
-  Widget build(BuildContext context) => IntrinsicWidth(
-    child: Container(
+  Widget build(BuildContext context) {
+
+    Widget child = Container(
         decoration: BoxDecoration(
             color: meto.color,
             borderRadius: BorderRadius.circular(AppCard.defRadius)
@@ -92,7 +100,13 @@ class MetoTile extends StatelessWidget{
               trailing!,
           ],
         )
-    ),
-  );
+    );
+
+    if(intrinsicWidth)
+      return IntrinsicWidth(child: child);
+
+    return child;
+
+  }
 
 }
