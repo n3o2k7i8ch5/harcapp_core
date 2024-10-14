@@ -416,14 +416,14 @@ List<Konspekt> allHarcerskieKonspekts = [
             onTap: (context) => openAssetGalleryViewer(
                 context,
                 [
-                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_1.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_2.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_3.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_4.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_5.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_6.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_7.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_kapliczki/kapliczka_8.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_kapliczki/kapliczka_1.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_kapliczki/kapliczka_2.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_kapliczki/kapliczka_3.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_kapliczki/kapliczka_4.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_kapliczki/kapliczka_5.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_kapliczki/kapliczka_6.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_kapliczki/kapliczka_7.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_kapliczki/kapliczka_8.webp', ''),
                 ]
             )
         ),
@@ -522,17 +522,17 @@ List<Konspekt> allHarcerskieKonspekts = [
             onTap: (context) => openAssetGalleryViewer(
                 context,
                 [
-                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_1.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_2.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_3.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_4.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_5.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_6.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_7.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_8.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_9.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_10.webp', ''),
-                  ('packages/harcapp_core/assets/konspekty/budowanie_szopki_bozonarodzeniowej/szopka_11.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/szopka_1.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/szopka_2.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/szopka_3.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/szopka_4.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/szopka_5.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/szopka_6.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/szopka_7.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/szopka_8.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/szopka_9.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/szopka_10.webp', ''),
+                  ('packages/harcapp_core/assets/konspekty/harcerskie/budowanie_szopki_bozonarodzeniowej/szopka_11.webp', ''),
                 ]
             )
         ),
