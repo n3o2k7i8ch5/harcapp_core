@@ -1,11 +1,11 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
-abstract class KonspektSearchFilters{
+abstract class KonspektsSearchFilters{
 
   String phrase;
 
-  KonspektSearchFilters({required this.phrase});
+  KonspektsSearchFilters({required this.phrase});
 
   bool get isEmpty;
   bool get isNotEmpty => !isEmpty;
@@ -18,11 +18,11 @@ abstract class KonspektSearchFilters{
 
 }
 
-class KonspektHarcerskieSearchFilters extends KonspektSearchFilters{
+class KonspektsHarcerskieSearchFilters extends KonspektsSearchFilters{
   final Set<Meto> selectedMetos;
   final Set<KonspektSphere> selectedSpheres;
 
-  KonspektHarcerskieSearchFilters({
+  KonspektsHarcerskieSearchFilters({
     required super.phrase,
     required this.selectedMetos,
     required this.selectedSpheres,
@@ -43,10 +43,10 @@ class KonspektHarcerskieSearchFilters extends KonspektSearchFilters{
 
 }
 
-class KonspektKsztalcenioweSearchFilters extends KonspektSearchFilters{
+class KonspektsKsztalcenioweSearchFilters extends KonspektsSearchFilters{
   final Set<Meto> selectedLevels;
 
-  KonspektKsztalcenioweSearchFilters({
+  KonspektsKsztalcenioweSearchFilters({
     required super.phrase,
     required this.selectedLevels,
   });
