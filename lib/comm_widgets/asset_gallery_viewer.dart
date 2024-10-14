@@ -60,29 +60,31 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
                 child: Hero(
                   tag: imageAssetPaths[index],
                   child: IntrinsicHeight(
-                    child: AppCard(
-                        color: background_(context),
-                        padding: const EdgeInsets.all(Dimen.sideMarg),
-                        margin: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
-                        elevation: AppCard.bigElevation,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
+                    child: AbsorbPointer(
+                      child: AppCard(
+                          color: background_(context),
+                          padding: const EdgeInsets.all(Dimen.sideMarg),
+                          margin: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
+                          elevation: AppCard.bigElevation,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
 
-                            Expanded(child: Image.asset(imageAssetPath, fit: BoxFit.contain)),
+                              Expanded(child: Image.asset(imageAssetPath, fit: BoxFit.contain)),
 
-                            if(desc.isNotEmpty)
-                              SingleChildScrollView(
-                                padding: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
-                                physics: const BouncingScrollPhysics(),
-                                child: Text(
-                                  desc,
-                                  style: const TextStyle(fontFamily: 'Hand15'),
+                              if(desc.isNotEmpty)
+                                SingleChildScrollView(
+                                  padding: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
+                                  physics: const BouncingScrollPhysics(),
+                                  child: Text(
+                                    desc,
+                                    style: const TextStyle(fontFamily: 'Hand15'),
+                                  ),
                                 ),
-                              ),
 
-                          ],
-                        )
+                            ],
+                          )
+                      ),
                     ),
                   )
                 ),
