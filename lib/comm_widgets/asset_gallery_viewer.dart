@@ -59,29 +59,31 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
                 alignment: Alignment.center,
                 child: Hero(
                   tag: imageAssetPaths[index],
-                  child: AppCard(
-                      color: background_(context),
-                      padding: const EdgeInsets.all(Dimen.sideMarg),
-                      margin: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
-                      elevation: AppCard.bigElevation,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
+                  child: IntrinsicHeight(
+                    child: AppCard(
+                        color: background_(context),
+                        padding: const EdgeInsets.all(Dimen.sideMarg),
+                        margin: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
+                        elevation: AppCard.bigElevation,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
 
-                          Expanded(child: Image.asset(imageAssetPath, fit: BoxFit.contain)),
+                            Expanded(child: Image.asset(imageAssetPath, fit: BoxFit.contain)),
 
-                          if(desc.isNotEmpty)
-                            SingleChildScrollView(
-                              padding: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
-                              physics: const BouncingScrollPhysics(),
-                              child: Text(
-                                desc,
-                                style: const TextStyle(fontFamily: 'Hand15'),
+                            if(desc.isNotEmpty)
+                              SingleChildScrollView(
+                                padding: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
+                                physics: const BouncingScrollPhysics(),
+                                child: Text(
+                                  desc,
+                                  style: const TextStyle(fontFamily: 'Hand15'),
+                                ),
                               ),
-                            ),
 
-                        ],
-                      )
+                          ],
+                        )
+                    ),
                   )
                 ),
               );
@@ -104,6 +106,7 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
               alignment: Alignment.centerLeft,
               child: SimpleButton.from(
                 context: context,
+                elevation: AppCard.bigElevation,
                 color: background_(context),
                 icon: MdiIcons.arrowLeft,
                 onTap: () => controller.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
@@ -119,6 +122,7 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
               alignment: Alignment.centerRight,
               child: SimpleButton.from(
                 context: context,
+                elevation: AppCard.bigElevation,
                 color: background_(context),
                 icon: MdiIcons.arrowRight,
                 onTap: () => controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
@@ -134,6 +138,7 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
               alignment: Alignment.bottomCenter,
               child: SimpleButton.from(
                 context: context,
+                elevation: AppCard.bigElevation,
                 color: background_(context),
                 icon: MdiIcons.close,
                 onTap: () => Navigator.pop(context),
