@@ -30,7 +30,7 @@ List<Konspekt> runKonspektsHarcerskieSearch(KonspektHarcerskieFilters filters){
 
 }
 
-List<Konspekt> runKonspektsKsztalcenioweSearch(KonspektKsztalcenioweFilters filters){
+List<Konspekt> runKonspektsKsztalcenieSearch(KonspektKsztalcenieFilters filters){
 
   if(filters.phrase.trim().isEmpty && filters.selectedLevels.isEmpty)
     return allKsztalcenieKonspekts;

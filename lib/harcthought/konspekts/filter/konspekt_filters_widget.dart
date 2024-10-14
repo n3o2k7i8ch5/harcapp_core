@@ -56,6 +56,9 @@ class KonspektHarcerskieFiltersWidgetState extends State<KonspektHarcerskieFilte
                   selectedSpheres: filters.selectedSpheres
               )
           );
+          // `setState()` is needed here in case `onChanged` changes the values
+          // of objects used as argument of this widget while the widget is
+          // open in the dialog.
           setState(() {});
         },
       ),
@@ -79,6 +82,9 @@ class KonspektHarcerskieFiltersWidgetState extends State<KonspektHarcerskieFilte
                   selectedSpheres: _selectedSpheres
               )
           );
+          // `setState()` is needed here in case `onChanged` changes the values
+          // of objects used as argument of this widget while the widget is
+          // open in the dialog.
           setState(() {});
         },
       )
@@ -88,19 +94,19 @@ class KonspektHarcerskieFiltersWidgetState extends State<KonspektHarcerskieFilte
 
 }
 
-class KonspektKsztalcenioweFiltersWidget extends KonspektFiltersWidget<KonspektKsztalcenioweFilters>{
+class KonspektKsztalcenieFiltersWidget extends KonspektFiltersWidget<KonspektKsztalcenieFilters>{
 
-  const KonspektKsztalcenioweFiltersWidget(super.filters, {required super.onChanged, super.key});
+  const KonspektKsztalcenieFiltersWidget(super.filters, {required super.onChanged, super.key});
 
   @override
-  State<StatefulWidget> createState() => KonspektKsztalcenioweFiltersWidgetState();
+  State<StatefulWidget> createState() => KonspektKsztalcenieFiltersWidgetState();
 
 }
 
-class KonspektKsztalcenioweFiltersWidgetState extends State<KonspektKsztalcenioweFiltersWidget>{
+class KonspektKsztalcenieFiltersWidgetState extends State<KonspektKsztalcenieFiltersWidget>{
 
-  KonspektKsztalcenioweFilters get filters => widget.filters;
-  void Function(KonspektKsztalcenioweFilters filters) get onChanged => widget.onChanged;
+  KonspektKsztalcenieFilters get filters => widget.filters;
+  void Function(KonspektKsztalcenieFilters filters) get onChanged => widget.onChanged;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -117,11 +123,14 @@ class KonspektKsztalcenioweFiltersWidgetState extends State<KonspektKsztalceniow
           if(checked) _selectedLevels.remove(meto);
           else _selectedLevels.add(meto);
           onChanged(
-              KonspektKsztalcenioweFilters(
+              KonspektKsztalcenieFilters(
                   phrase: filters.phrase,
                   selectedLevels: _selectedLevels
               )
           );
+          // `setState()` is needed here in case `onChanged` changes the values
+          // of objects used as argument of this widget while the widget is
+          // open in the dialog.
           setState(() {});
         },
       ),

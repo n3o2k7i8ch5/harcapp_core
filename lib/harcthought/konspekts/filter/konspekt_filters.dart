@@ -44,10 +44,10 @@ class KonspektHarcerskieFilters extends KonspektFilters{
 
 }
 
-class KonspektKsztalcenioweFilters extends KonspektFilters{
+class KonspektKsztalcenieFilters extends KonspektFilters{
   final Set<Meto> selectedLevels;
 
-  KonspektKsztalcenioweFilters({
+  KonspektKsztalcenieFilters({
     super.phrase,
     Set<Meto>? selectedLevels,
   }): selectedLevels = selectedLevels ?? {};

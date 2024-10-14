@@ -53,9 +53,9 @@ class SearchFieldBottomHarcerskieFilterIndicatorsWidget extends SearchFieldBotto
 
 }
 
-class SearchFieldBottomKsztalcenioweFilterIndicatorsWidget extends SearchFieldBottomFilterIndicatorsWidget<KonspektKsztalcenioweFilters>{
+class SearchFieldBottomKsztalcenieFilterIndicatorsWidget extends SearchFieldBottomFilterIndicatorsWidget<KonspektKsztalcenieFilters>{
 
-  const SearchFieldBottomKsztalcenioweFilterIndicatorsWidget(super.filters, {super.key});
+  const SearchFieldBottomKsztalcenieFilterIndicatorsWidget(super.filters, {super.key});
 
   @override
   Widget build(BuildContext context) {
