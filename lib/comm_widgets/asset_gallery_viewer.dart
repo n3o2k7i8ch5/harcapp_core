@@ -61,28 +61,24 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
                   tag: imageAssetPaths[index],
                   child: AppCard(
                       color: background_(context),
-                      padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
+                      padding: const EdgeInsets.all(Dimen.sideMarg),
                       margin: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
                       elevation: AppCard.bigElevation,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
 
-                          const SizedBox(height: Dimen.sideMarg),
-
-                          Image.asset(imageAssetPath, fit: BoxFit.contain),
+                          Expanded(child: Image.asset(imageAssetPath, fit: BoxFit.contain)),
 
                           if(desc.isNotEmpty)
-                            Expanded(child: SingleChildScrollView(
+                            SingleChildScrollView(
                               padding: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
                               physics: const BouncingScrollPhysics(),
                               child: Text(
-                                imageAssetPaths[index].$2,
+                                desc,
                                 style: const TextStyle(fontFamily: 'Hand15'),
                               ),
-                            ))
-                          else
-                            const SizedBox(height: Dimen.sideMarg),
+                            ),
 
                         ],
                       )
