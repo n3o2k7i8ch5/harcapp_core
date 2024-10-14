@@ -9,7 +9,7 @@ import '../konspekt.dart';
 List<Konspekt> runKonspektsHarcerskieSearch(KonspektHarcerskieFilters filters){
 
   if(filters.isEmpty)
-    return allHarcerskieKonspekts;
+    return List.of(allHarcerskieKonspekts);
 
   List<Konspekt> searchedKonspekts = [];
 
@@ -33,7 +33,7 @@ List<Konspekt> runKonspektsHarcerskieSearch(KonspektHarcerskieFilters filters){
 List<Konspekt> runKonspektsKsztalcenieSearch(KonspektKsztalcenieFilters filters){
 
   if(filters.phrase.trim().isEmpty && filters.selectedLevels.isEmpty)
-    return allKsztalcenieKonspekts;
+    return List.of(allKsztalcenieKonspekts);
 
   List<Konspekt> searchedKonspekts = [];
 

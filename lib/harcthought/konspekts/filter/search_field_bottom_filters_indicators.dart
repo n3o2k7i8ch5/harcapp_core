@@ -37,7 +37,8 @@ class SearchFieldBottomHarcerskieFilterIndicatorsWidget extends SearchFieldBotto
           child: Row(
             children: [
 
-              MetoRow(sortedSelectedMetos),
+              if(sortedSelectedMetos.isNotEmpty)
+                MetoRow(sortedSelectedMetos),
 
               ...sortedSelectedSpheres.map<Widget>((sphere) => Padding(
                 padding: const EdgeInsets.only(left: MetoRow.separatorWidth),
@@ -72,7 +73,8 @@ class SearchFieldBottomKsztalcenieFilterIndicatorsWidget extends SearchFieldBott
           child: Row(
             children: [
 
-              MetoRow(sortedSelectedLevels),
+              if(sortedSelectedLevels.isNotEmpty)
+                MetoRow(sortedSelectedLevels),
 
             ],
           ),
