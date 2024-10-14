@@ -59,35 +59,34 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
                 alignment: Alignment.center,
                 child: Hero(
                   tag: imageAssetPaths[index],
-                  child: IntrinsicHeight(
-                    child: AppCard(
-                        padding: const EdgeInsets.symmetric(horizontal: Dimen.iconMarg),
-                        margin: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
-                        elevation: AppCard.bigElevation,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
+                  child: AppCard(
+                      color: background_(context),
+                      padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
+                      margin: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
+                      elevation: AppCard.bigElevation,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
 
+                          const SizedBox(height: Dimen.sideMarg),
+
+                          Image.asset(imageAssetPath, fit: BoxFit.contain),
+
+                          if(desc.isNotEmpty)
+                            Expanded(child: SingleChildScrollView(
+                              padding: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
+                              physics: const BouncingScrollPhysics(),
+                              child: Text(
+                                imageAssetPaths[index].$2,
+                                style: const TextStyle(fontFamily: 'Hand15'),
+                              ),
+                            ))
+                          else
                             const SizedBox(height: Dimen.sideMarg),
 
-                            Image.asset(imageAssetPath, fit: BoxFit.contain),
-
-                            if(desc.isNotEmpty)
-                              Expanded(child: SingleChildScrollView(
-                                padding: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
-                                physics: const BouncingScrollPhysics(),
-                                child: Text(
-                                  imageAssetPaths[index].$2,
-                                  style: const TextStyle(fontFamily: 'Hand15'),
-                                ),
-                              ))
-                            else
-                              const SizedBox(height: Dimen.sideMarg),
-
-                          ],
-                        )
-                    ),
-                  ),
+                        ],
+                      )
+                  )
                 ),
               );
             }
@@ -102,32 +101,47 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
         child,
 
         Positioned(
+            top: 0,
+            bottom: 0,
             left: Dimen.sideMarg,
-            child: SimpleButton.from(
-              context: context,
-              color: background_(context),
-              icon: MdiIcons.arrowLeft,
-              onTap: () => controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: SimpleButton.from(
+                context: context,
+                color: background_(context),
+                icon: MdiIcons.arrowLeft,
+                onTap: () => controller.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
+              ),
             )
         ),
 
         Positioned(
+            top: 0,
+            bottom: 0,
             right: Dimen.sideMarg,
-            child: SimpleButton.from(
-              context: context,
-              color: background_(context),
-              icon: MdiIcons.arrowRight,
-              onTap: () => controller.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: SimpleButton.from(
+                context: context,
+                color: background_(context),
+                icon: MdiIcons.arrowRight,
+                onTap: () => controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
+              ),
             )
         ),
 
         Positioned(
+            left: 0,
+            right: 0,
             bottom: Dimen.sideMarg,
-            child: SimpleButton.from(
-              context: context,
-              color: background_(context),
-              icon: MdiIcons.close,
-              onTap: () => Navigator.pop(context),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: SimpleButton.from(
+                context: context,
+                color: background_(context),
+                icon: MdiIcons.close,
+                onTap: () => Navigator.pop(context),
+              )
             )
         )
       ],
