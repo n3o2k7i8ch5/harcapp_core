@@ -1,5 +1,5 @@
 import 'package:harcapp_core/comm_classes/common.dart';
-import 'package:harcapp_core/harcthought/konspekts/data/basic.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/harcerskie.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/all.dart';
 import 'package:harcapp_core/harcthought/konspekts/filter/konspekt_filters.dart';
 
@@ -9,11 +9,11 @@ import '../konspekt.dart';
 List<Konspekt> runKonspektsHarcerskieSearch(KonspektHarcerskieFilters filters){
 
   if(filters.isEmpty)
-    return allBasicKonspekts;
+    return allHarcerskieKonspekts;
 
   List<Konspekt> searchedKonspekts = [];
 
-  for(Konspekt konspekt in allBasicKonspekts) {
+  for(Konspekt konspekt in allHarcerskieKonspekts) {
     if(!remPolChars(konspekt.title).contains(remPolChars(filters.phrase)))
       continue;
 
