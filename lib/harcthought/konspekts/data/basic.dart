@@ -345,11 +345,11 @@ List<Konspekt> allBasicKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.projekt,
       spheres: {
-        KonspektSphere.relacje: null,
         KonspektSphere.duch: KonspektSphereDetails(
             level: [KonspektSphereLevel.duchPostawy],
             mechanism: [KonspektSphereMechanism.duchHartDucha, KonspektSphereMechanism.duchOtwartoscNaLudzi, KonspektSphereMechanism.duchSumiennosc]
-        )
+        ),
+        KonspektSphere.relacje: null,
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
@@ -684,11 +684,11 @@ List<Konspekt> allBasicKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.emocje: null,
         KonspektSphere.duch: KonspektSphereDetails(
             level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
             mechanism: [KonspektSphereMechanism.duchBezposrednia]
         ),
+        KonspektSphere.emocje: null,
       },
       metos: [Meto.wedro],
       coverAuthor: 'Freepik (vecstock)',
@@ -1298,11 +1298,11 @@ List<Konspekt> allBasicKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
+        KonspektSphere.umysl: null,
         KonspektSphere.duch: KonspektSphereDetails(
             level: [KonspektSphereLevel.duchWartosci],
             mechanism: [KonspektSphereMechanism.duchWartoscWtorna]
         ),
-        KonspektSphere.umysl: null,
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
@@ -2553,11 +2553,11 @@ List<Konspekt> allBasicKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: null,
-        KonspektSphere.relacje: null,
         KonspektSphere.duch: KonspektSphereDetails(
             level: [KonspektSphereLevel.duchWartosci, KonspektSphereLevel.duchPostawy],
             mechanism: [KonspektSphereMechanism.duchHartDucha, KonspektSphereMechanism.duchOtwartoscNaLudzi]
-        )
+        ),
+        KonspektSphere.relacje: null,
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (frimufilms)',
@@ -2584,11 +2584,11 @@ List<Konspekt> allBasicKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
+        KonspektSphere.umysl: null,
         KonspektSphere.duch: KonspektSphereDetails(
             level: [KonspektSphereLevel.duchWartosci],
             mechanism: [KonspektSphereMechanism.duchWartoscWtorna]
         ),
-        KonspektSphere.umysl: null
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (hamimfadillah)',
