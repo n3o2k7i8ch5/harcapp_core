@@ -8,6 +8,7 @@ abstract class KonspektSearchFilters{
   KonspektSearchFilters({required this.phrase});
 
   bool get isEmpty;
+  bool get isNotEmpty => !isEmpty;
 
   bool get hideSearchFieldBottom;
 
