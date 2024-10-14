@@ -41,12 +41,13 @@ Future<List<Widget>> fromHtml({
   double? fontSize,
 }) async =>
     await HTMLToPdf().convert(
-        htmlString
-            // .replaceAll('<b>', '')
-            // .replaceAll('</b>', '')
-            // .replaceAll('<br>', '\n')
-            .replaceAll('&nbsp', '&zwnj;'),
-        defaultFont: font,
+        htmlString.replaceAll('&nbsp', '&zwnj;'),
+        fontResolver: (_, bold, italic){
+          if(bold && italic) return fontBoldItalic;
+          if(bold) return fontBold;
+          if(italic) return fontItalic;
+          return font;
+        },
         tagStyle: HtmlTagStyle(
             boldStyle: TextStyle(
                 font: fontBold,
