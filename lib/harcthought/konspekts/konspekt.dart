@@ -109,15 +109,15 @@ enum KonspektAttachmentFormat{
 }
 
 enum KonspektSphere{
-  cialo, umysl, duch, relacje, emocje;
+  cialo, umysl, duch, emocje, relacje;
 
   String get displayName{
     switch(this){
       case cialo: return 'Ciało';
       case umysl: return 'Umysł';
       case duch: return 'Duch';
-      case relacje: return 'Relacje';
       case emocje: return 'Emocje';
+      case relacje: return 'Relacje';
     }
   }
 
@@ -126,8 +126,8 @@ enum KonspektSphere{
       case cialo: return MdiIcons.armFlexOutline;
       case umysl: return MdiIcons.brain;
       case duch: return MdiIcons.flare;
-      case relacje: return MdiIcons.handshake;
       case emocje: return MdiIcons.dramaMasks;
+      case relacje: return MdiIcons.handshake;
     }
   }
 
