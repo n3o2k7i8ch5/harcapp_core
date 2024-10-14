@@ -5,19 +5,19 @@ import 'package:harcapp_core/comm_widgets/meto_row.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
-import 'konspekts_filters.dart';
+import 'konspekt_filters.dart';
 
-abstract class SearchFieldBottomFilterIndicatosWidget<T extends KonspektsFilters> extends StatelessWidget{
+abstract class SearchFieldBottomFilterIndicatorsWidget<T extends KonspektFilters> extends StatelessWidget{
 
   final T filters;
 
-  const SearchFieldBottomFilterIndicatosWidget(this.filters, {Key? key}) : super(key: key);
+  const SearchFieldBottomFilterIndicatorsWidget(this.filters, {Key? key}) : super(key: key);
 
 }
 
-class SearchFieldBottomKsztalcenioweFiltersWidget extends SearchFieldBottomFilterIndicatosWidget<KonspektsKsztalcenioweFilters>{
+class SearchFieldBottomKsztalcenioweFilterIndicatorsWidget extends SearchFieldBottomFilterIndicatorsWidget<KonspektKsztalcenioweFilters>{
 
-  const SearchFieldBottomKsztalcenioweFiltersWidget(super.filters, {super.key});
+  const SearchFieldBottomKsztalcenioweFilterIndicatorsWidget(super.filters, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +45,9 @@ class SearchFieldBottomKsztalcenioweFiltersWidget extends SearchFieldBottomFilte
 
 }
 
-class SearchFieldBottomHarcerskieFiltersWidget extends SearchFieldBottomFilterIndicatosWidget<KonspektsHarcerskieFilters>{
+class SearchFieldBottomHarcerskieFilterIndicatorsWidget extends SearchFieldBottomFilterIndicatorsWidget<KonspektHarcerskieFilters>{
 
-  const SearchFieldBottomHarcerskieFiltersWidget(super.filters, {super.key});
+  const SearchFieldBottomHarcerskieFilterIndicatorsWidget(super.filters, {super.key});
 
   @override
   Widget build(BuildContext context) {

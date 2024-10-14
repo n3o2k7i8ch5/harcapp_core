@@ -1,12 +1,12 @@
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/basic.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/all.dart';
-import 'package:harcapp_core/harcthought/konspekts/filter/konspekts_filters.dart';
+import 'package:harcapp_core/harcthought/konspekts/filter/konspekt_filters.dart';
 
 import '../konspekt.dart';
 
 
-List<Konspekt> runKonspektsHarcerskieSearch(KonspektsHarcerskieFilters filters){
+List<Konspekt> runKonspektsHarcerskieSearch(KonspektHarcerskieFilters filters){
 
   if(filters.isEmpty)
     return allBasicKonspekts;
@@ -30,7 +30,7 @@ List<Konspekt> runKonspektsHarcerskieSearch(KonspektsHarcerskieFilters filters){
 
 }
 
-List<Konspekt> runKonspektsKsztalcenioweSearch(KonspektsKsztalcenioweFilters filters){
+List<Konspekt> runKonspektsKsztalcenioweSearch(KonspektKsztalcenioweFilters filters){
 
   if(filters.phrase.trim().isEmpty && filters.selectedLevels.isEmpty)
     return allKsztalcenieKonspekts;
