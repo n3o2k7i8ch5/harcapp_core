@@ -43,54 +43,51 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
   @override
   Widget build(BuildContext context){
 
-    Widget child = GestureDetector(
-        onTap: () => Navigator.pop(context),
-        child: SlidingPageView.builder(
-            grow: true,
-            physics: const BouncingScrollPhysics(),
-            controller: controller,
-            itemCount: imageAssetPaths.length,
-            itemBuilder: (context, index){
+    Widget child = SlidingPageView.builder(
+        grow: true,
+        physics: const BouncingScrollPhysics(),
+        controller: controller,
+        itemCount: imageAssetPaths.length,
+        itemBuilder: (context, index){
 
-              String imageAssetPath = imageAssetPaths[index].$1;
-              String desc = imageAssetPaths[index].$2;
+          String imageAssetPath = imageAssetPaths[index].$1;
+          String desc = imageAssetPaths[index].$2;
 
-              return Align(
-                alignment: Alignment.center,
-                child: Hero(
-                  tag: imageAssetPaths[index],
-                  child: IntrinsicHeight(
-                    child: IgnorePointer(
-                      child: AppCard(
-                          color: background_(context),
-                          padding: const EdgeInsets.all(Dimen.sideMarg),
-                          margin: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
-                          elevation: AppCard.bigElevation,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
+          return Align(
+            alignment: Alignment.center,
+            child: Hero(
+                tag: imageAssetPaths[index],
+                child: IntrinsicHeight(
+                  child: IgnorePointer(
+                    child: AppCard(
+                        color: background_(context),
+                        padding: const EdgeInsets.all(Dimen.sideMarg),
+                        margin: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
+                        elevation: AppCard.bigElevation,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
 
-                              Expanded(child: Image.asset(imageAssetPath, fit: BoxFit.contain)),
+                            Expanded(child: Image.asset(imageAssetPath, fit: BoxFit.contain)),
 
-                              if(desc.isNotEmpty)
-                                SingleChildScrollView(
-                                  padding: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
-                                  physics: const BouncingScrollPhysics(),
-                                  child: Text(
-                                    desc,
-                                    style: const TextStyle(fontFamily: 'Hand15'),
-                                  ),
+                            if(desc.isNotEmpty)
+                              SingleChildScrollView(
+                                padding: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
+                                physics: const BouncingScrollPhysics(),
+                                child: Text(
+                                  desc,
+                                  style: const TextStyle(fontFamily: 'Hand15'),
                                 ),
+                              ),
 
-                            ],
-                          )
-                      ),
+                          ],
+                        )
                     ),
-                  )
-                ),
-              );
-            }
-        )
+                  ),
+                )
+            ),
+          );
+        }
     );
 
     if(!navigationButtons)
@@ -98,6 +95,14 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
 
     return Stack(
       children: [
+
+        Positioned.fill(
+          child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Container()
+          ),
+        ),
+
         child,
 
         Positioned(
