@@ -8,12 +8,12 @@ import '../../../comm_widgets/meto_row.dart';
 import '../data/ksztalcenie/all.dart';
 import 'level_selectable_grid_widget.dart';
 
-class KonspektsHarcerskieFilterWidget extends StatelessWidget{
+class KonspektsKsztalcenioweFilterWidget extends StatelessWidget{
 
   final Set<Meto> selectedLevels;
   final void Function(Set<Meto> selectedMetos) onChanged;
 
-  const KonspektsHarcerskieFilterWidget(this.selectedLevels, this.onChanged, {Key? key}) : super(key: key);
+  const KonspektsKsztalcenioweFilterWidget(this.selectedLevels, this.onChanged, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Column(
