@@ -11,7 +11,7 @@ import 'package:harcapp_core/tag/tags_widget.dart';
 
 import 'konspekt_filters.dart';
 
-abstract class KonspektFiltersWidget<T extends KonspektFilters> extends StatelessWidget{
+abstract class KonspektFiltersWidget<T extends KonspektFilters> extends StatefulWidget{
 
   final T filters;
   final void Function(T filters) onChanged;
@@ -22,8 +22,17 @@ abstract class KonspektFiltersWidget<T extends KonspektFilters> extends Stateles
 
 class KonspektHarcerskieFiltersWidget extends KonspektFiltersWidget<KonspektHarcerskieFilters>{
 
-
   const KonspektHarcerskieFiltersWidget(super.filters, {required super.onChanged, super.key});
+
+  @override
+  State<StatefulWidget> createState() => KonspektHarcerskieFiltersWidgetState();
+
+}
+
+class KonspektHarcerskieFiltersWidgetState extends State<KonspektHarcerskieFiltersWidget>{
+
+  KonspektHarcerskieFilters get filters => widget.filters;
+  void Function(KonspektHarcerskieFilters filters) get onChanged => widget.onChanged;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -42,11 +51,12 @@ class KonspektHarcerskieFiltersWidget extends KonspektFiltersWidget<KonspektHarc
           else _selectedMetos.add(meto);
           onChanged(
               KonspektHarcerskieFilters(
-                phrase: filters.phrase,
-                selectedMetos: _selectedMetos,
-                selectedSpheres: filters.selectedSpheres
-            )
+                  phrase: filters.phrase,
+                  selectedMetos: _selectedMetos,
+                  selectedSpheres: filters.selectedSpheres
+              )
           );
+          setState(() {});
         },
       ),
 
@@ -63,12 +73,13 @@ class KonspektHarcerskieFiltersWidget extends KonspektFiltersWidget<KonspektHarc
           if(checked) _selectedSpheres.remove(sphere);
           else _selectedSpheres.add(sphere);
           onChanged(
-            KonspektHarcerskieFilters(
-              phrase: filters.phrase,
-              selectedMetos: filters.selectedMetos,
-              selectedSpheres: _selectedSpheres
-            )
+              KonspektHarcerskieFilters(
+                  phrase: filters.phrase,
+                  selectedMetos: filters.selectedMetos,
+                  selectedSpheres: _selectedSpheres
+              )
           );
+          setState(() {});
         },
       )
 
@@ -80,6 +91,16 @@ class KonspektHarcerskieFiltersWidget extends KonspektFiltersWidget<KonspektHarc
 class KonspektKsztalcenioweFiltersWidget extends KonspektFiltersWidget<KonspektKsztalcenioweFilters>{
 
   const KonspektKsztalcenioweFiltersWidget(super.filters, {required super.onChanged, super.key});
+
+  @override
+  State<StatefulWidget> createState() => KonspektKsztalcenioweFiltersWidgetState();
+
+}
+
+class KonspektKsztalcenioweFiltersWidgetState extends State<KonspektKsztalcenioweFiltersWidget>{
+
+  KonspektKsztalcenioweFilters get filters => widget.filters;
+  void Function(KonspektKsztalcenioweFilters filters) get onChanged => widget.onChanged;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -97,10 +118,11 @@ class KonspektKsztalcenioweFiltersWidget extends KonspektFiltersWidget<KonspektK
           else _selectedLevels.add(meto);
           onChanged(
               KonspektKsztalcenioweFilters(
-                phrase: filters.phrase,
-                selectedLevels: _selectedLevels
+                  phrase: filters.phrase,
+                  selectedLevels: _selectedLevels
               )
           );
+          setState(() {});
         },
       ),
 
