@@ -27,47 +27,49 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
             fontSize: Dimen.textSizeAppBar
           ),
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(Dimen.sideMarg - Dimen.defMarg),
-          children: [
-            TitleShortcutRowWidget(
-                title: KonspektSphereLevel.duchAksjomaty.displayName,
-                titleColor: KonspektSphereLevel.duchAksjomaty.color,
-                textAlign: TextAlign.left
-            ),
+        body: SelectionArea(
+          child: ListView(
+            padding: const EdgeInsets.all(Dimen.sideMarg - Dimen.defMarg),
+            children: [
+              TitleShortcutRowWidget(
+                  title: KonspektSphereLevel.duchAksjomaty.displayName,
+                  titleColor: KonspektSphereLevel.duchAksjomaty.color,
+                  textAlign: TextAlign.left
+              ),
 
-            const AppText(
-              'Aksjomat duchowości jest jej fundamentem. Jest arbitralnie uznaną prawdą, której nie sposób zweryfikować. Aksjomaty definiują cel życia, najwyższe dobro, przyczynę istnienia, sposób, w jaki działa świat itd..',
-              size: Dimen.textSizeBig,
-            ),
+              const AppText(
+                'Aksjomat duchowości jest jej fundamentem. Jest arbitralnie uznaną prawdą, której nie sposób zweryfikować. Aksjomaty definiują cel życia, najwyższe dobro, przyczynę istnienia, sposób, w jaki działa świat itd..',
+                size: Dimen.textSizeBig,
+              ),
 
-            const SizedBox(height: Dimen.sideMarg),
+              const SizedBox(height: Dimen.sideMarg),
 
-            TitleShortcutRowWidget(
-                title: KonspektSphereLevel.duchWartosci.displayName,
-                titleColor: KonspektSphereLevel.duchWartosci.color,
-                textAlign: TextAlign.left
-            ),
+              TitleShortcutRowWidget(
+                  title: KonspektSphereLevel.duchWartosci.displayName,
+                  titleColor: KonspektSphereLevel.duchWartosci.color,
+                  textAlign: TextAlign.left
+              ),
 
-            const AppText(
-              'Wartości są preferowanym stanem rzeczywistości. Pozwalają oceniać działania - określają czy i na ile określone działanie zmienia rzeczywistość w kierunku wynikającym aksjomatu. Wartości definiują także hierarchię spraw, którym powinno się poświęcać najwięcej zasobów (czasu, energii, siły, pieniędzy, etc.).',
-              size: Dimen.textSizeBig,
-            ),
+              const AppText(
+                'Wartości są preferowanym stanem rzeczywistości. Pozwalają oceniać działania - określają czy i na ile określone działanie zmienia rzeczywistość w kierunku wynikającym aksjomatu. Wartości definiują także hierarchię spraw, którym powinno się poświęcać najwięcej zasobów (czasu, energii, siły, pieniędzy, etc.).',
+                size: Dimen.textSizeBig,
+              ),
 
-            const SizedBox(height: Dimen.sideMarg),
+              const SizedBox(height: Dimen.sideMarg),
 
-            TitleShortcutRowWidget(
-                title: KonspektSphereLevel.duchPostawy.displayName,
-                titleColor: KonspektSphereLevel.duchPostawy.color,
-                textAlign: TextAlign.left
-            ),
+              TitleShortcutRowWidget(
+                  title: KonspektSphereLevel.duchPostawy.displayName,
+                  titleColor: KonspektSphereLevel.duchPostawy.color,
+                  textAlign: TextAlign.left
+              ),
 
-            const AppText(
-              'Postawy to sposoby bycia, czyli skłonności do określonego postępowania.',
-              size: Dimen.textSizeBig,
-            ),
+              const AppText(
+                'Postawy to sposoby bycia, czyli skłonności do określonego postępowania.',
+                size: Dimen.textSizeBig,
+              ),
 
-          ],
+            ],
+          ),
         )
     ),
   );
