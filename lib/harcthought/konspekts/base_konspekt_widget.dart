@@ -281,7 +281,9 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               const SizedBox(height: Dimen.sideMarg),
 
-              TitleShortcutRowWidget(title: konspekt.title, titleColor: iconEnab_(context)),
+              SelectionArea(
+                child: TitleShortcutRowWidget(title: konspekt.title, titleColor: iconEnab_(context)),
+              ),
 
               if(konspekt.summary != null)
                 const SizedBox(height: Dimen.sideMarg),
