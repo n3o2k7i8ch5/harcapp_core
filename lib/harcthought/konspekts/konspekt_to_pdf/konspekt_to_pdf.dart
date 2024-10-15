@@ -5,7 +5,7 @@ import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
-import 'package:htmltopdfwidgets/htmltopdfwidgets.dart';
+import 'package:html_pdf_widgets/html_pdf_widgets.dart';
 import 'package:printing/printing.dart';
 
 import 'common.dart';

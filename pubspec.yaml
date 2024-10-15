@@ -21,9 +21,10 @@ dependencies:
   flutter_svg: ^2.0.10+1
   flutter_widget_from_html: ^0.15.1
   # htmltopdfwidgets: ^1.0.3
-  htmltopdfwidgets:
-    git:
-      url: https://github.com/n3o2k7i8ch5/htmltopdfwidgets
+  html_pdf_widgets: ^0.0.2
+  #  html_pdf_widgets:
+  #    git:
+  #      url: https://github.com/n3o2k7i8ch5/htmltopdfwidgets
 
   implicitly_animated_reorderable_list_2: ^0.6.0
   linked_scroll_controller: ^0.2.0

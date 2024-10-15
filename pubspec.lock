@@ -416,15 +416,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.15.4"
-  htmltopdfwidgets:
+  html_pdf_widgets:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "6082c1f5d55180f89d36098ff4243436b3300f87"
-      url: "https://github.com/n3o2k7i8ch5/htmltopdfwidgets"
-    source: git
-    version: "1.0.4"
+      name: html_pdf_widgets
+      sha256: "1dddea11ae13f9a803a59d9fbfe2552e3d90c52f319393ad727d9ef1a0c8b80d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   http:
     dependency: transitive
     description:
