@@ -17,6 +17,7 @@ class RText extends StatelessWidget{
   final double height;
   final double size;
   final Color? colorItalic;
+  final bool selectable;
 
   const RText(
       this.text,
@@ -28,6 +29,7 @@ class RText extends StatelessWidget{
         this.height = 1,
         this.size = Dimen.textSizeNormal,
         this.colorItalic,
+        this.selectable = false,
         super.key
       });
 
@@ -97,6 +99,13 @@ class RText extends StatelessWidget{
       }
     }
 
+    if(selectable)
+      return SelectableText.rich(
+        TextSpan(children: spans),
+        maxLines: maxLines,
+        textAlign: textAlign,
+      );
+
     return Text.rich(
       TextSpan(children: spans),
       maxLines: maxLines,
@@ -111,23 +120,14 @@ class AppText extends RText{
 
   const AppText(
       String text,
-      { bool globalBold = false,
-        Color? color,
-        TextAlign? textAlign,
-        int? maxLines,
-        double height = 1,
-        double size = Dimen.textSizeNormal,
-        Color? colorItalic,
-      }):super(
-    text,
-    'Ubuntu',
-    globalBold: globalBold,
-    color: color,
-    textAlign: textAlign,
-    maxLines: maxLines,
-    height: height,
-    size: size,
-    colorItalic: colorItalic,
-  );
+      { super.globalBold,
+        super.color,
+        super.textAlign,
+        super.maxLines,
+        super.height,
+        super.size,
+        super.colorItalic,
+        super.selectable,
+      }):super(text, 'Ubuntu');
 
 }

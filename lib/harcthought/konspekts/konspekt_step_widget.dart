@@ -57,7 +57,7 @@ class KonspektStepWidget extends StatelessWidget{
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
-                Text(
+                SelectableText(
                     step.title,
                     style: const AppTextStyle(fontWeight: weight.halfBold)
                 ),
@@ -67,11 +67,11 @@ class KonspektStepWidget extends StatelessWidget{
                 Row(
                   children: [
 
-                    Text(durationToString(step.duration), style: const AppTextStyle()),
+                    SelectableText(durationToString(step.duration), style: const AppTextStyle()),
 
                     const SizedBox(width: 20),
 
-                    Text(
+                    SelectableText(
                         step.activeForm?'Forma aktywna':'Forma pasywna',
                         style: AppTextStyle(
                             color: step.activeForm?Colors.green:Colors.deepOrange,
@@ -82,7 +82,7 @@ class KonspektStepWidget extends StatelessWidget{
                     const SizedBox(width: 20),
 
                     if(!step.required)
-                      Text('[opcjonalnie]', style: AppTextStyle(color: hintEnab_(context))),
+                      SelectableText('[opcjonalnie]', style: AppTextStyle(color: hintEnab_(context))),
 
                   ],
                 ),
@@ -110,7 +110,7 @@ class KonspektStepWidget extends StatelessWidget{
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
 
-                  const Text(
+                  const SelectableText(
                     'Cele kroku',
                     style: AppTextStyle(
                       fontSize: Dimen.textSizeNormal,
@@ -128,7 +128,13 @@ class KonspektStepWidget extends StatelessWidget{
                       children: [
                         Icon(MdiIcons.circleMedium, size: Dimen.textSizeNormal),
                         const SizedBox(width: Dimen.defMarg),
-                        Expanded(child: AppText(step.aims![aimIndex], size: Dimen.textSizeNormal))
+                        Expanded(
+                          child: AppText(
+                            step.aims![aimIndex],
+                            size: Dimen.textSizeNormal,
+                            selectable: true
+                          )
+                        )
                       ],
                     ),
                     separatorBuilder: (context, aimIndex) => const SizedBox(height: Dimen.defMarg),
