@@ -427,7 +427,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   children: [
                     Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
                     const SizedBox(width: Dimen.defMarg),
-                    Expanded(child: AppText(konspekt.aims[index], size: Dimen.textSizeBig))
+                    Expanded(child: AppText(konspekt.aims[index], size: Dimen.textSizeBig, selectable: true,))
                   ],
                 ),
                 separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
@@ -589,7 +589,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 const TitleShortcutRowWidget(title: 'Autor', textAlign: TextAlign.left),
 
               if(konspekt.author != null)
-                PersonCard(konspekt.author!)
+                PersonCard(konspekt.author!, selectable: true)
 
             ])),
           ),
