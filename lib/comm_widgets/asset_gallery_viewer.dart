@@ -53,39 +53,54 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
           String imageAssetPath = imageAssetPaths[index].$1;
           String desc = imageAssetPaths[index].$2;
 
-          return Align(
-            alignment: Alignment.center,
-            child: Hero(
-                tag: imageAssetPaths[index],
-                child: IntrinsicHeight(
-                  child: AbsorbPointer(
-                    child: AppCard(
-                        color: background_(context),
-                        padding: const EdgeInsets.all(Dimen.sideMarg),
-                        margin: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
-                        elevation: AppCard.bigElevation,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
+          return Stack(
+            children: [
 
-                            Expanded(child: Image.asset(imageAssetPath, fit: BoxFit.contain)),
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    color: Colors.transparent,
+                  )
+                ),
+              ),
 
-                            if(desc.isNotEmpty)
-                              SingleChildScrollView(
-                                padding: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
-                                physics: const BouncingScrollPhysics(),
-                                child: Text(
-                                  desc,
-                                  style: const TextStyle(fontFamily: 'Hand15'),
-                                ),
-                              ),
+              Center(
+                child: Hero(
+                    tag: imageAssetPaths[index],
+                    child: IntrinsicHeight(
+                      child: AbsorbPointer(
+                        absorbing: false,
+                        child: AppCard(
+                            color: background_(context),
+                            padding: const EdgeInsets.all(Dimen.sideMarg),
+                            margin: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
+                            elevation: AppCard.bigElevation,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
 
-                          ],
-                        )
-                    ),
-                  ),
-                )
-            ),
+                                Expanded(child: Image.asset(imageAssetPath, fit: BoxFit.contain)),
+
+                                if(desc.isNotEmpty)
+                                  SingleChildScrollView(
+                                    padding: const EdgeInsets.symmetric(vertical: Dimen.sideMarg),
+                                    physics: const BouncingScrollPhysics(),
+                                    child: Text(
+                                      desc,
+                                      style: const TextStyle(fontFamily: 'Hand15'),
+                                    ),
+                                  ),
+
+                              ],
+                            )
+                        ),
+                      ),
+                    )
+                ),
+              )
+
+            ],
           );
         }
     );
@@ -95,17 +110,6 @@ class AssetGalleryViewerState extends State<AssetGalleryViewer>{
 
     return Stack(
       children: [
-
-        Positioned.fill(
-          child: GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                color: Colors.transparent,
-              )
-          ),
-        ),
 
         child,
 
