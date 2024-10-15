@@ -29,6 +29,7 @@ class KonspektSphereDuchMechanismsInfoDialog extends StatelessWidget{
         ),
         body: SelectionArea(
           child: ListView(
+            shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.all(Dimen.sideMarg - Dimen.defMarg),
             children: [

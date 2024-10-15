@@ -29,6 +29,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
         ),
         body: SelectionArea(
           child: ListView(
+            shrinkWrap: true,
             padding: const EdgeInsets.all(Dimen.sideMarg - Dimen.defMarg),
             children: [
               TitleShortcutRowWidget(
