@@ -194,9 +194,9 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   late bool showAppBarTitle;
 
   late ValueNotifier<double> headerNotifier;
-  late ScrollController _controller;
+  ScrollController? _controller;
 
-  ScrollController get controller => widget.controller??_controller;
+  ScrollController get controller => widget.controller??_controller!;
 
   double? layoutWidth;
 
@@ -222,7 +222,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
   @override
   void dispose() {
-    controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
