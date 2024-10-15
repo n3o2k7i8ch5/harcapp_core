@@ -128,11 +128,11 @@ class KonspektStepWidget extends StatelessWidget{
                       children: [
                         Icon(MdiIcons.circleMedium, size: Dimen.textSizeNormal),
                         const SizedBox(width: Dimen.defMarg),
-                        Expanded(child: AppText(konspekt.aims[aimIndex], size: Dimen.textSizeNormal))
+                        Expanded(child: AppText(step.aims![aimIndex], size: Dimen.textSizeNormal))
                       ],
                     ),
                     separatorBuilder: (context, aimIndex) => const SizedBox(height: Dimen.defMarg),
-                    itemCount: konspekt.aims.length,
+                    itemCount: step.aims!.length,
                   ),
 
                 ],
