@@ -266,25 +266,68 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '</p>'
       ),
 
+      KonspektStep(
+          title: 'Przerwa',
+          duration: Duration(minutes: 5),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący zarządza przerwę celem rozprostowania starych kości, zażycia ruchu, skoczenia do toalety itd..'
+      ),
+
+      // Neutralność duchowa
+
+      KonspektStep(
+          title: 'Neutralność duchowa - wstęp',
+          duration: Duration(minutes: 10),
+          activeForm: false,
+          aims: [
+            'Przekazanie myśli, że "wychowanie to kształtowanie duchowości"',
+          ],
+          content: '<p style="text-align:justify;">'
+              'Prowadzący zaczyna od postawienia pytania:'
+              '<br>'
+              '<br><i>"Widząc już, czym jest duchowość, zejdźmy na chwilę na ziemię i pomówmy trochę o konkretach. Po co tworzymy harcerstwo? Oczywiście, żeby wychowywać młodego człowieka. Ale czym jest wychowanie?"</i>'
+              '<br>'
+              '<br>Prowadzący pozostawia przestrzeń na chwilę dyskusji, która powinna doprowadzić uczestników do wnioisku, że <b>wychowanie to kształtowanie duchowości</b>.'
+              '<br>'
+              '<br>Jeśli uczestnicy mają problem, by do owego wniosku dojść, prowadzący może podsuwać pytania (na które odpowiedź jest w sposób oczywisty twierdząca):'
+              '</p>'
+              '<ol>'
+              '<li><p style="text-align:justify;"><i>“Czy elementem wychowania jest kształtowanie zachowań?”</i></p></li>'
+              '<li><p style="text-align:justify;"><i>“Czy elementem wychowania jest kształtowanie postaw?”</i></p></li>'
+              '<li><p style="text-align:justify;"><i>“Czy elementem wychowania jest kształtowanie poglądów?”</i></p></li>'
+              '<li><p style="text-align:justify;"><i>“Czy elementem wychowania jest kształtowanie wartości?”</i></p></li>'
+              '<li><p style="text-align:justify;"><i>“Czy elementem wychowania jest zapoznawaniem z kulturą?”</i></p></li>'
+              '</ol>'
+
+              '<p style="text-align:justify;">'
+              'Po ewentualnej krótkiej dyskusji, prowadzący pyta:'
+              '<br>'
+              '<br><i>Skoro wychowanie to kształtowanie zachowań, postaw, poglądów, wartości... to czyż wychowanie nie jest po prostu kształtowaniem duchowości?</i>'
+              '</p>'
+      ),
+
       // Dodanie boldu itp.
       KonspektStep(
           title: 'Neutralność duchowa',
           duration: Duration(minutes: 25),
           activeForm: false,
           aims: [
-            'Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, wierność w związku, ew. modlitwa), które choć pozornie uniwersalne, wynikają ze ściśle określonego światopoglądu',
+            'Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, indywidualizm, ew. wierność w związku, modlitwa), które choć pozornie uniwersalne, wynikają ze ściśle określonego światopoglądu',
             'Przekonanie uczestników, że neutralność światopoglądowa w wychowaniu nie jest możliwa'
           ],
           content: '<p style="text-align:justify;">'
               'Prowadzący przedstawia uczestnikom scenariusze z załącznika $attach_html_neutralnosc_duchowa_przyklady. Wszystkie scenariusze opisują sytuacje wychowawcze z udziałem instruktora harcerskiego. Zadaniem uczestników jest określenie:'
               '<br>'
-              '<br><u>Czy zachowanie instruktora <b>było neutralne duchowo</b>, a jeśli nie, to <b>jakie wartości</b> lub postawy owa sytuacja wzmacnia?</u>'
+              '<br><u>Czy działanie instruktora miało wpływ na duchowość harcerzy? Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?</u>'
               '<br>'
-              '<br>Prowadzący prosi, by uczestnicy nie skupiali się na technikaliach, czyli czy instruktor zareagował w sposób efektywny. Ważniejsze jest, by uczestnicy skupili się na skutku duchowym jego działań - czyli na duchowości (postawa, wartościach), które działanie instruktora wzmocniło u wychowanków.'
+              '<br>Prowadzący prosi, by uczestnicy nie skupiali się na technikaliach (nie zastanawiali się, czy instruktor zareagował efektywnie). Ważniejsze jest, by uczestnicy skupili się na skutku działań - wpływie na duchowość (np. postawy lub wartości) wychowanków.'
               '<br>'
               '<br>Jeśli uczestników jest więcej niż 20, można podzielić ich na dwie grupy, które równolegle między sobą dyskutują o scenariuszach.'
-              '<br>'
+
               '<br>Gdy wszystkie grupy przedyskutują swoje scenariusze, prowadzący zadaje pytanie:'
+              '<br>'
+              '<br><b><i>“Czy działanie instruktora miało neutralny wpływ na duchowość?”</i></b>.'
               '<br>'
               '<br><b><i>“Czy w ogóle istnieje neutralność duchowa w wychowaniu?”</i></b>.'
               '<br>'
@@ -292,6 +335,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '</p>'
       ),
 
+      // Zmienić na krzew
       KonspektStep(
           title: 'Harcerstwo - fabryka wychowanych ludzi',
           duration: Duration(minutes: 5),
