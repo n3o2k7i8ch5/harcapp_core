@@ -16,6 +16,7 @@ import 'package:harcapp_core/dimen.dart';
 
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import 'common.dart';
 import 'konspekt.dart';
 import 'konspekt_attachment_widget.dart';
 import 'konspekt_html_widget.dart';
@@ -398,11 +399,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                           durationToString(konspekt.duration),
                           style: const AppTextStyle(fontSize: Dimen.textSizeAppBar)
                       ):
-                      Text(
-                          'od ${durationToString(konspekt.requiredDuration)}'
+                      AppText(
+                          'od <b>${durationToString(konspekt.requiredDuration)}</b>'
                               '${widget.oneLineMultiDuration?' ':'\n'}'
-                              'do ${durationToString(konspekt.duration)}',
-                          style: const AppTextStyle(fontSize: Dimen.textSizeAppBar)
+                              'do <b>${durationToString(konspekt.duration)}</b>',
+                          size: Dimen.textSizeAppBar,
                       ),
                     )
 
@@ -414,27 +415,14 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               const TitleShortcutRowWidget(title: 'Cele', textAlign: TextAlign.left),
 
-              SelectionArea(
-                child: ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(
-                      left: Dimen.sideMarg,
-                      right: Dimen.sideMarg,
-                      bottom: Dimen.sideMarg,
-                    ),
-                    itemBuilder: (context, index) => Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
-                        const SizedBox(width: Dimen.defMarg),
-                        Expanded(child: AppText(konspekt.aims[index], size: Dimen.textSizeBig))
-                      ],
-                    ),
-                    separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
-                    itemCount: konspekt.aims.length
+              StringListWidget(
+                konspekt.aims,
+                padding: const EdgeInsets.only(
+                  left: Dimen.sideMarg,
+                  right: Dimen.sideMarg,
+                  bottom: Dimen.sideMarg,
                 ),
-              )
+              ),
 
             ])),
           ),
@@ -517,7 +505,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             SliverPadding(
               padding: const EdgeInsets.only(bottom: Dimen.sideMarg),
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                      (context, index) => KonspektStepWidget(konspekt, index),
+                  (context, index) => KonspektStepWidget(konspekt, index),
                   separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
                   count: konspekt.steps!.length
               )),
@@ -533,28 +521,16 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
                 const TitleShortcutRowWidget(title: 'Jak to spartolić?', textAlign: TextAlign.left),
 
-              ])),
-            ),
-
-          if(konspekt.howToFail != null)
-            SliverPadding(
-              padding: const EdgeInsets.only(
-                left: Dimen.sideMarg,
-                right: Dimen.sideMarg,
-                bottom: Dimen.sideMarg,
-              ),
-              sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                  (context, index) => Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
-                      const SizedBox(width: Dimen.defMarg),
-                      Expanded(child: AppText(konspekt.howToFail![index], size: Dimen.textSizeBig))
-                    ],
+                StringListWidget(
+                  konspekt.howToFail!,
+                  padding: const EdgeInsets.only(
+                    left: Dimen.sideMarg,
+                    right: Dimen.sideMarg,
+                    bottom: Dimen.sideMarg,
                   ),
-                  separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
-                  count: konspekt.howToFail!.length
-              )),
+                ),
+
+              ])),
             ),
 
           if(konspekt.attachments != null)
