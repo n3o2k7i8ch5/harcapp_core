@@ -286,7 +286,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
           content: '<p style="text-align:justify;">'
               'Prowadzący zaczyna od postawienia pytania:'
               '<br>'
-              '<br><i>"Widząc już, czym jest duchowość, zejdźmy na chwilę na ziemię i pomówmy trochę o konkretach. Po co tworzymy harcerstwo? Oczywiście, żeby wychowywać młodego człowieka. Ale czym jest wychowanie?"</i>'
+              '<br><i>"Wiemy, czym jest duchowość, dlatego zejdźmy na moment na ziemię i pomówmy o konkretach. Po co tworzymy harcerstwo? Oczywiście: żeby wychowywać młodego człowieka. Ale czym jest wychowanie w kontekście duchowości?"</i>'
               '<br>'
               '<br>Prowadzący pozostawia przestrzeń na chwilę dyskusji, która powinna doprowadzić uczestników do wnioisku, że <b>wychowanie to kształtowanie duchowości</b>.'
               '<br>'
@@ -310,7 +310,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
       // Dodanie boldu itp.
       KonspektStep(
           title: 'Neutralność duchowa',
-          duration: Duration(minutes: 25),
+          duration: Duration(minutes: 30),
           activeForm: false,
           aims: [
             'Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, indywidualizm, ew. wierność w związku, modlitwa), które choć pozornie uniwersalne, wynikają ze ściśle określonego światopoglądu',
@@ -319,33 +319,55 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
           content: '<p style="text-align:justify;">'
               'Prowadzący przedstawia uczestnikom scenariusze z załącznika $attach_html_neutralnosc_duchowa_przyklady. Wszystkie scenariusze opisują sytuacje wychowawcze z udziałem instruktora harcerskiego. Zadaniem uczestników jest określenie:'
               '<br>'
-              '<br><u>Czy działanie instruktora miało wpływ na duchowość harcerzy? Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?</u>'
+              '<br><u><b>Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?</u>'
               '<br>'
-              '<br>Prowadzący prosi, by uczestnicy nie skupiali się na technikaliach (nie zastanawiali się, czy instruktor zareagował efektywnie). Ważniejsze jest, by uczestnicy skupili się na skutku działań - wpływie na duchowość (np. postawy lub wartości) wychowanków.'
+              '<br>Prowadzący prosi, by uczestnicy nie skupiali się na technikaliach (nie zastanawiali się, czy instruktor zareagował efektywnie), lecz na skutku działań - wpływie na duchowość (np. postawy lub wartości) wychowanków.'
               '<br>'
               '<br>Jeśli uczestników jest więcej niż 20, można podzielić ich na dwie grupy, które równolegle między sobą dyskutują o scenariuszach.'
-
+              '<br>'
               '<br>Gdy wszystkie grupy przedyskutują swoje scenariusze, prowadzący zadaje pytanie:'
               '<br>'
-              '<br><b><i>“Czy działanie instruktora miało neutralny wpływ na duchowość?”</i></b>.'
+              '<br><b><i>“Czy instruktor mógł zadziałać w sposób, który nie wpłynąłby na duchowość harcerzy?”</i></b>.'
               '<br>'
-              '<br><b><i>“Czy w ogóle istnieje neutralność duchowa w wychowaniu?”</i></b>.'
+              '<br><b><i>“Czy w ogóle istnieje neutralność w wychowaniu?”</i></b>.'
               '<br>'
               '<br>W toku próby odpowiedzi na to pytanie może wywiązać się między uczestnikami dyskusja. Nie powinna ona trwać zbyt długo. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.'
+
+      ),
+
+      KonspektStep(
+          title: 'Neutralność duchowa - w przypadku problemów',
+          duration: Duration(minutes: 5),
+          activeForm: false,
+          required: false,
+          content: '<p style="text-align:justify;">'
+              '<br>Jeśli uczestnicy nie są przekonani do tego, że neutralność nie jest możliwa, prowadzący może zadać pytanie:'
+              '<br>'
+              '<br><i>“Czy jeśli harcerz zawsze bije innych, którzy się z nim nie zgadzają, a instruktor nie reaguje, to czy postępuje neutralnie?”</i>'
+              '<br>'
+              '<br>Następnie może zapytać uczestników, jaka reakcja instruktora w tym wypadku była neutralna, po czym zadać pytanie:'
+              '<br>'
+              '<br><i>“Czy ta reakcja byłaby w istocie neutralna, czy po prostu mieści się w duchowości, którą prywatnie wyznajecie?”</i>'
+              '<br>'
+              '<br>Jeśli z kolei uczestnicy sądzą, że neutralne jest to, co jest zapisane w Prawie Harcerskim, prowadzący może zadać pytanie:'
+              '<br>'
+              '<br><i>“Ależ prawo harcerskie zmienia się pod wpływem poglądów Rady Naczelnej, poza tym skąd pomysł, że zasady jakiejś niewielkiej organizacyjki wychowawczej, z której zasadami nie wszyscy się w Polsce zgadzają, są prawdziwie neutralne?”</i>'
               '</p>'
       ),
 
-      // Zmienić na krzew
       KonspektStep(
-          title: 'Harcerstwo - fabryka wychowanych ludzi',
+          title: 'Harcerstwo - analogia do ogrodników wpływających na kształt krzewów',
           duration: Duration(minutes: 5),
           activeForm: false,
+          required: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący przedstawia uczestnikom przydatny sposób myślenia o tym, czym w swoim ogólnym charakterze jest harcerstwo:'
+              'Jeśli uczestnicy mają problem ze zrozumieniem, dlaczego wychowanie nie może być neutralne, prowadzący może przedstawić uczestnikom użyteczną analogię:'
               '<br>'
-              '<br><i>Harcerstwo jest fabryką wychowanych ludzi. Nasz Związek jest wielką, rozproszoną maszyną, do której na taśmie produkcyjnej z jednej strony wjeżdżają młodzi ludzie, a, z drugiej strony opuszczają ją ukształtowani, wyznający harcerskie wartości młodzi dorośli o silnym charakterze i silnych przekonaniach.</i>'
+              '<br><i>Nasz Związek jest wielką, rozproszoną organizacją ogrodniczą, zajmującą się kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instrktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im określony kształt.</i>'
               '<br>'
-              '<br>Tak nakreślona analogia pozwala zwrócić uwagę, że harcerstwo, jako proces kształtowania ludzi, w sposób oczywisty kształtuje ich według określonych zasad. Wokół faktu, że harcerstwo ma za zadanie m.in. zmieniać przekonania i wartości młodego człowieka w określonym kierunku narosła dziwna i niepotrzebna kontrowersja - ale <b>bez tej konstatcji nie jest możliwe żadne harcerskie działanie</b>.'
+              '<br>Owa analogia pozwala zwrócić uwagę na to, że niezależnie od działania ogrodnika, krzew zawsze ma jakiś kształt. Krzew nabywa określonego kształtu, gdy ogrodnik nic nie robi.'
+              '<br>'
+              '<br>Harcerstwo, jest przedsięwzięciem kształtowania ludzi i w sposób oczywisty kształtuje ich według określonych zasad (np. oduczamy bycia samolubem). Wokół faktu, że harcerstwo kształtuje m.in. przekonania i wartości młodego człowieka w określonym kierunku narosła dziwna i niepotrzebna kontrowersja - ale <b>bez tej konstatcji nie jest możliwe żadne harcerskie działanie</b>.'
               '</p>'
       ),
 
@@ -456,7 +478,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<p style="text-align:justify;">'
               '<b>Scenariusz 3.</b> Bezinteresowna pomoc bliźnim'
               '<br>'
-              '<br>Niezbywalna godność i równość każdego człowieka? W systemach konfucjańskich liczy się najpierw wspólnota i kolektyw, dopiero potem człowiek. Niektórzy buddyści widząc cierpienie drugiego człowieka powstrzymają innych od udzielenia pomocy - jeśli ktoś cierpi, to niewątpliwie pokutuje za grzechy popełnione w poprzednim życiu.'
+              '<br>Niezbywalna godność i równość każdego człowieka? W systemach konfucjańskich liczy się najpierw wspólnota i kolektyw, dopiero potem człowiek. Niektórzy wyznawcy hinduizmu widząc cierpienie drugiego człowieka powstrzymają innych od udzielenia mu pomocy - jeśli ktoś cierpi, to niewątpliwie pokutuje za grzechy popełnione w poprzednim życiu.'
               '<br>'
               '<br>A skąd pogląd, że wykształcony profesor z zasługami dla narodu ma takie same prawa jak półinteligentny osiedlowy cwaniaczek? Skąd pomysł, że prawo do życia i godnego traktowania ma każdy, niezależnie od wieku, pochodzenia, czy wyznania?</i>.'
               '<br>'
@@ -466,7 +488,19 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
 
               '<li>'
               '<p style="text-align:justify;">'
-              '<b>Scenariusz 4.</b> Wierność w związku'
+              '<b>Scenariusz 4.</b> Stawianie wyżej dobra jednostki nad kolektywem'
+              '<br>'
+              '<br>Immanentne poszanowanie jednostki i dobra indywidualnego człowieka? Niezbywalne wolności osobiste? Prawa człowieka nawet, gdy zbiorowości się to nie opłaca?'
+              '<br>'
+              '<br>W kulturze konfucjańskiej najpierw liczy się kolektyw, dobro zbiorowości, trwałość systemu państwowego - a dopiero potem dobro jednostki. W Chinach niedopuszczalne jest publiczne okazywanie sporów, ponieważ osłabia to wspólnotę. W kulturze japońskiej należy poświecić własne plany prywatne, jeśli kolidują one z wydarzeniem firmy, w której się pracuje.'
+              '<br>'
+              '<br>Skąd więc u nas "oczywiste" przekonanie, że należy zapewnić odszkodowanie rodzinie, której dom stoi na drodze nowej autostrady? Skąd przekonanie, że nie można zmusić kogoś do pracy, jeśli nie chce? Nasza kultura została ukształtowana przez wiarę, że Bóg stworzył każdego człowieka na swój obraz, że zginął za każdego, najmniejszego z ludzi, by ten mógł doświadczyć zbawienia. "Wszystko, coście uczynili jednemu z braci moich najmniejszych mnieście [Bogu] uczynili".'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>Scenariusz 5.</b> Wierność w związku'
               '<br>'
               '<br>Dlaczego kultura łacińska nalega na trwałe związki damsko-męskie?'
               '<br>'
