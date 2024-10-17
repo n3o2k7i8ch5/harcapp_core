@@ -414,30 +414,52 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               const TitleShortcutRowWidget(title: 'Cele', textAlign: TextAlign.left),
 
+              SelectionArea(
+                child: ListView.separated(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.only(
+                      left: Dimen.sideMarg,
+                      right: Dimen.sideMarg,
+                      bottom: Dimen.sideMarg,
+                    ),
+                    itemBuilder: (context, index) => Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
+                        const SizedBox(width: Dimen.defMarg),
+                        Expanded(child: AppText(konspekt.aims[index], size: Dimen.textSizeBig, selectable: true,))
+                      ],
+                    ),
+                    separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
+                    itemCount: konspekt.aims.length
+                ),
+              )
+
             ])),
           ),
 
-          SliverPadding(
-            padding: const EdgeInsets.only(
-              left: Dimen.sideMarg,
-              right: Dimen.sideMarg,
-              bottom: Dimen.sideMarg,
-            ),
-            sliver: SelectionArea(
-              child: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                      (context, index) => Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
-                      const SizedBox(width: Dimen.defMarg),
-                      Expanded(child: AppText(konspekt.aims[index], size: Dimen.textSizeBig, selectable: true,))
-                    ],
-                  ),
-                  separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
-                  count: konspekt.aims.length
-              )),
-            ),
-          ),
+          // SliverPadding(
+          //   padding: const EdgeInsets.only(
+          //     left: Dimen.sideMarg,
+          //     right: Dimen.sideMarg,
+          //     bottom: Dimen.sideMarg,
+          //   ),
+          //   sliver: SelectionArea(
+          //     child: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
+          //         (context, index) => Row(
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             Icon(MdiIcons.circleMedium, size: Dimen.textSizeBig),
+          //             const SizedBox(width: Dimen.defMarg),
+          //             Expanded(child: AppText(konspekt.aims[index], size: Dimen.textSizeBig, selectable: true,))
+          //           ],
+          //         ),
+          //         separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
+          //         count: konspekt.aims.length
+          //     )),
+          //   ),
+          // ),
 
           if(konspekt.materials != null)
             SliverPadding(
