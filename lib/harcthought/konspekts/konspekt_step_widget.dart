@@ -106,42 +106,43 @@ class KonspektStepWidget extends StatelessWidget{
             clipBehavior: Clip.hardEdge,
             child: Padding(
               padding: const EdgeInsets.all(Dimen.sideMarg),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+              child: SelectionArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
 
-                  const SelectableText(
-                    'Cele kroku',
-                    style: AppTextStyle(
-                      fontSize: Dimen.textSizeNormal,
-                      fontWeight: weight.halfBold
+                    const Text(
+                      'Cele kroku',
+                      style: AppTextStyle(
+                          fontSize: Dimen.textSizeNormal,
+                          fontWeight: weight.halfBold
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: Dimen.sideMarg),
+                    const SizedBox(height: Dimen.sideMarg),
 
-                  ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, aimIndex) => Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(MdiIcons.circleMedium, size: Dimen.textSizeNormal),
-                        const SizedBox(width: Dimen.defMarg),
-                        Expanded(
-                          child: AppText(
-                            step.aims![aimIndex],
-                            size: Dimen.textSizeNormal,
-                            selectable: true
+                    ListView.separated(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, aimIndex) => Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(MdiIcons.circleMedium, size: Dimen.textSizeNormal + 2),
+                          const SizedBox(width: Dimen.defMarg),
+                          Expanded(
+                              child: AppText(
+                                step.aims![aimIndex],
+                                size: Dimen.textSizeNormal,
+                              )
                           )
-                        )
-                      ],
+                        ],
+                      ),
+                      separatorBuilder: (context, aimIndex) => const SizedBox(height: Dimen.defMarg),
+                      itemCount: step.aims!.length,
                     ),
-                    separatorBuilder: (context, aimIndex) => const SizedBox(height: Dimen.defMarg),
-                    itemCount: step.aims!.length,
-                  ),
 
-                ],
+                  ],
+                ),
               ),
             )
           ),

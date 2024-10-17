@@ -207,7 +207,17 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
           contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
               'Prowadzący na podstawie załącznika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci opisuje <b>etapy rozwoju duchowego</b> - w pierwszym etapie dzieci są uczone jedynie zachowań, które budują u nich postawy, w wieku ok. 10 lat rozpoczyna się myślenie abstrakcyjne i konceptualizują się wartości, które następnie, w wieku ok. 15 lat są porządkowane w światopogląd i internalizowane jest pojęcie aksjomatu.'
               '<br>'
-              '<br>Ważne, by w procesie opisu prowadzący narysował we wspólnym miejscu odwróconą piramidę, tak jak poniżej:</p>'
+              '<br>Moment, w którym harcerze wychodzą z etapu integracji wstępnej i zaczynają świadomą integrację duchowości charakteryzowany jest często przez zainteresowanie lub przynajmniej zrozumienie wagi pytań w stylu:'
+              '</p>'
+
+              '<ul>'
+              '<li><p style="text-align:justify;">“Jaki jest sens życia, o ile w ogóle jakiś jest?”</p></li>'
+              '<li><p style="text-align:justify;">“Czy istnieje obiektywne dobro i zło, czy może wszystko jest jedynie subiektywne?”</p></li>'
+              '<li><p style="text-align:justify;">“Dlaczego powinienem wierzyć w Boga? Przecież gdybym urodził się w Iranie, wierzyłbym w Allaha?”</p></li>'
+              '</ul>'
+
+              '<p style="text-align:justify;">'
+              'Ważne, by w procesie opisu prowadzący narysował we wspólnym miejscu odwróconą piramidę, tak jak poniżej:</p>'
               '<br>${piramidaDuchowosciHtml(isDark: isDark)}'
               '<p style="text-align:justify;">'
               '<br>W dalszej kolejności prowadzący wprowadza pojęcie <b>integracji duchowości</b> - sposobu w jaki poziomy duchowości kształtują się w procesie rozwoju.'
@@ -313,7 +323,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
           duration: Duration(minutes: 30),
           activeForm: false,
           aims: [
-            'Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, indywidualizm, ew. wierność w związku, modlitwa), które choć pozornie uniwersalne, wynikają ze ściśle określonego światopoglądu',
+            'Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, indywidualizm, ew. wierność w związku, modlitwa), które choć pozornie uniwersalne, wcale nie są domyślne, oczywiste, czy neutralne',
             'Przekonanie uczestników, że neutralność światopoglądowa w wychowaniu nie jest możliwa'
           ],
           content: '<p style="text-align:justify;">'
@@ -343,7 +353,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
           content: '<p style="text-align:justify;">'
               '<br>Jeśli uczestnicy nie są przekonani do tego, że neutralność nie jest możliwa, prowadzący może zadać pytanie:'
               '<br>'
-              '<br><i>“Czy jeśli harcerz zawsze bije innych, którzy się z nim nie zgadzają, a instruktor nie reaguje, to czy postępuje neutralnie?”</i>'
+              '<br><i>“Czy jeśli harcerz zawsze bije kolegów, którzy się z nim nie zgadzają, a instruktor nie reaguje, to czy postępuje neutralnie?”</i>'
               '<br>'
               '<br>Następnie może zapytać uczestników, jaka reakcja instruktora w tym wypadku była neutralna, po czym zadać pytanie:'
               '<br>'
@@ -351,7 +361,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br>Jeśli z kolei uczestnicy sądzą, że neutralne jest to, co jest zapisane w Prawie Harcerskim, prowadzący może zadać pytanie:'
               '<br>'
-              '<br><i>“Ależ prawo harcerskie zmienia się pod wpływem poglądów Rady Naczelnej, poza tym skąd pomysł, że zasady jakiejś niewielkiej organizacyjki wychowawczej, z której zasadami nie wszyscy się w Polsce zgadzają, są prawdziwie neutralne?”</i>'
+              '<br><i>“Ależ prawo harcerskie zmienia się pod wpływem poglądów Rady Naczelnej, poza tym skąd pomysł, że zasady jakiejś niewielkiej organizacyjki wychowawczej, z której wartościami nie wszyscy się w Polsce zgadzają, są prawdziwie neutralne?”</i>'
               '</p>'
       ),
 
@@ -361,13 +371,13 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
           activeForm: false,
           required: false,
           content: '<p style="text-align:justify;">'
-              'Jeśli uczestnicy mają problem ze zrozumieniem, dlaczego wychowanie nie może być neutralne, prowadzący może przedstawić uczestnikom użyteczną analogię:'
+              'Jeśli uczestnicy mają problem ze zrozumieniem, dlaczego zarówno działanie wychowawcze jak i jego brak zawsze kształtuje duchowość wychowanków, prowadzący może przedstawić uczestnikom użyteczną analogię:'
               '<br>'
-              '<br><i>Nasz Związek jest wielką, rozproszoną organizacją ogrodniczą, zajmującą się kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instrktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im określony kształt.</i>'
+              '<br><i>Nasz Związek jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się ona kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instrktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im określony kształt.</i>'
               '<br>'
-              '<br>Owa analogia pozwala zwrócić uwagę na to, że niezależnie od działania ogrodnika, krzew zawsze ma jakiś kształt. Krzew nabywa określonego kształtu, gdy ogrodnik nic nie robi.'
+              '<br>W analogii należy podkreślić, że niezależnie od działania ogrodnika, <b>krzew zawsze ma jakiś kształt</b>. Krzew nabywa określonego kształtu, także wtedy, gdy ogrodnik nic nie robi.'
               '<br>'
-              '<br>Harcerstwo, jest przedsięwzięciem kształtowania ludzi i w sposób oczywisty kształtuje ich według określonych zasad (np. oduczamy bycia samolubem). Wokół faktu, że harcerstwo kształtuje m.in. przekonania i wartości młodego człowieka w określonym kierunku narosła dziwna i niepotrzebna kontrowersja - ale <b>bez tej konstatcji nie jest możliwe żadne harcerskie działanie</b>.'
+              '<br>Harcerstwo jest przedsięwzięciem kształtowania ludzi. W sposób oczywisty kształtuje ich według określonych zasad (np. zasad PH). Wokół faktu, że harcerstwo kształtuje przekonania i wartości młodego człowieka w określonym kierunku narosła dziwna i niepotrzebna kontrowersja - ale <b>bez celowej i planowej zmiany duchowości harcerzy harcerstwo nie ma najmniejszego sensu.</b>.'
               '</p>'
       ),
 
@@ -383,9 +393,9 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
           content: '<p style="text-align:justify;">'
               'Prowadzący zaczyna od stwierdzenia:'
               '<br>'
-              '<br><i>“Skoro wiadomo, że harcerstwo nie jest neutralne, to spróbujmy wgryźć się w esencję ducha harcerskiego wychowania. Może uda się to zrobić bez utonięcia w filozofii i teologii”</i>.'
+              '<br><i>“Skoro harcerstwo nie jest neutralne, to spróbujmy wgryźć się w esencję ducha harcerskiego wychowania. Może uda się to bez utonięcia w filozofii i teologii”</i>.'
               '<br>'
-              '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z załącznika $attach_html_neutralnosc_duchowa_przyklady. Prowadzący stawia przed nimi zadanie w formie pytania:'
+              '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z użytego już załącznika $attach_html_neutralnosc_duchowa_przyklady. Prowadzący stawia przed nimi zadanie w formie pytania:'
               '<br>'
               '<br><i>“Wszystkie przedstawione w scenariuszach wartości mają swoje odzwierciedlenie w PH. Ale przecież PH nie spadło z nieba na kamiennych tablicach! Z jakiego aksjomatu wynikają prezentowane w scenariuszu postawy, przekonania i wartości?”</i>'
               '<br>'
@@ -457,6 +467,8 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>Przebaczenie win nie jest moralnym standardem. W wielu kulturach jest to uważane za zachętę do bycia wykorzystywanym. Nietzsche uważał przebaczanie za wyraz słabości i element moralności niewolników. W tradycyjnej kulturze Japońskiej, po popełnieniu poważnej winy nie było drogi odpuszczenia winy: jedynym honorowym wyjściem było popełnienie rytualnego samobójstwa: seppuku (lub harakiri).'
               '<br>'
               '<br>Dlaczego więc w kulturze łacińskiej jest inaczej? Bo naszą kulturę ukształtowała wiara, że sam stwórca świata uznał za słuszne ponieść śmierć za człowieka, by ten doznał odpuszczenia win, a na pytanie św. Piotra o to ile razy ma wybaczyć komuś winę, usłyszał: zawsze.'
+              '<br>'
+              '<br>Z tego też powodu w zachodnim systemie prawnym po poniesieniu kary za popełnioną winę, zostaje ona zmazana i człowiek otrzymuje niejako "czystą kartę" - a przecież nie ma technicznego problemu, by za kradzież człowiek był skazywany i uznany winnym do końca życia.'
               '</p>'
               '</li>'
 
@@ -523,9 +535,9 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br>Nie trzeba być wierzącym, żeby przyznać, że harcerskie wartości są fundamentalnie chrześcijańskie, ani żeby dostrzec ogrom pozytywów, jaki to za sobą niesie.'
               '<br>'
-              '<br>Wychowanie duchowe na poziomie aksjomatu musi doprowadzić do świadomej, spójnej wiary w “coś”. Ignorowanie tej przestrzeni nie jest wyrazem inkluzywności i tolerancji, ale ignorancji i infantylizmu.'
+              '<br>Wychowanie duchowe na poziomie aksjomatu musi doprowadzić do świadomej, spójnej wiary w “coś”. Ignorowanie potrzeby posiadania spójnego aksjomatu nie jest wyrazem inkluzywności i tolerancji, ale ignorancji i infantylizmu.'
               '<br>'
-              '<br>Może drogą do przodu nie jest wymienianie cywilizacyjnych wartości, których się nie rozumiemy, ale próba ich zinternalizowania w nowych warunkach, w których przyszło nam żyć.'
+              '<br>Może drogą do przodu nie jest zmiana cywilizacyjnych wartości, których się nie rozumiemy, ale próba ich zinternalizowania w nowych warunkach, w których przyszło nam żyć.'
               '</p>'
       ),
 
