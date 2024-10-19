@@ -8,6 +8,9 @@ import '../common_attachments.dart';
 Konspekt wstep_do_wychowania_duchowego = Konspekt(
     name: 'wstep_do_wychowania_duchowego',
     title: 'Wstęp do wychowania duchowego',
+    additionalSearchPhrases: [
+      'wychowanie duchowe'
+    ],
     category: KonspektCategory.ksztalcenie,
     type: KonspektType.zajecia,
     spheres: {},
@@ -264,13 +267,13 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br>Religia jest duchowością powszechną. <b>Religia nie jest “dodatkiem” do duchowości, ale jest określoną duchowością</b> - ma określone aksjomaty i wartości, określone sposoby jej (religii jako duchowość) integracji.'
               '<br>'
-              '<br>Warto również, by prowadzący odniósł się do popularnego lecz zupełnie nietrafionego porównania, zgodnie z którym relacja między religią, a duchowością człowieka jest zdefiniowana jako relacja “zawierania”: <b>w obszernym zbiorze “duchowości” zawiera się mniejszy zbiór “religii”</b>, oraz że część osób ma duchowość “z religią”, a część “bez religii”. Relacja ta jest błędna: religia nie jest opcjonalną częścią duchowości, ale rodzajem, sposobem duchowości. Religia jest konkretną, całą duchowością.'
+              '<br>Warto również, by prowadzący zwrócił uwagę na to, że nie ma tu mowy o relacji “zawierania”: <b>w obszernym zbiorze “duchowości” nie zawiera się mniejszy zbiór “religii”</b>! Niie jest tak, że że część osób ma duchowość “z religią”, a część “bez religii”. Religia nie jest opcjonalną częścią duchowości, ale rodzajem, sposobem duchowości. Religia jest konkretną, całą duchowością.'
               '<br>'
-              '<br>Trafniejszą analogią jest przestrzeń, w której występuje nieskończenie wiele różnych duchowości, z których każda ma swój aksjomat, wartości, postawy, zachowania. W przestrzeni tej istnieje rodzina duchowości religijnych, wśród tych zaś, istnieje ogromna rodzina duchowości chrześcijańskich: (np. chrześcijańska duchowość ludowa, jezuicka, franciszkańska, charyzmatyczna, dominikańska, etc.). Nie można jednak z duchowości “wyjąć” elementu religijnego i dalej mieć do czynienia z duchowością, tak samo jak nie można z psa wyjąć elementu “jamnik” i dalej uważać, że jest to pies. Jamnik nie jest dodatkiem do psa, tylko jest rodzajem całego, spójnego psa.'
+              '<br>Trafniej jest myśleć o abstrakcyjnej przestrzeni, w której występuje nieskończenie wiele różnych duchowości, z których każda ma swój aksjomat, wartości, postawy, zachowania. W przestrzeni tej istnieje rodzina duchowości religijnych, wśród tych istnieje ogromna rodzina duchowości chrześcijańskich: (np. chrześcijańska duchowość ludowa, jezuicka, franciszkańska, charyzmatyczna, dominikańska, etc.). Nie można jednak z duchowości “wyjąć” elementu religijnego i dalej mieć do czynienia z duchowością, tak samo jak nie można z psa wyjąć elementu “jamnik” i dalej uważać, że pozostałość to pies. Jamnik nie jest dodatkiem do psa, tylko jest rodzajem całego, spójnego psa.'
               '<br>'
-              '<br>Oznacza to, że błędnym jest myślenie, że możliwe jest prowadzenie wychowania w drużynie w oparciu o jedną, wybraną duchowość, i “wzbogacania” jej dla niektórych religią, a dla innych nie. Wynika to z faktu, że jeśli ktoś jest wychowywany w duchowości religijnej, ma określone religijne aksjomaty, co stoi w zupełnym kontraście do aksjomatów osób niereligijnych!'
+              '<br>Oznacza to, że nie można prowadzenić wychowania w drużynie w oparciu o jedną, wybraną duchowość, i “wzbogacać” jej dla niektórych religią, a dla innych nie. Wynika to z faktu, że jeśli ktoś jest wychowywany w duchowości religijnej, ma określone religijne aksjomaty, co stoi w kontraście do aksjomatów osób niereligijnych! Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości'
               '<br>'
-              '<br>Podobnie, błędnym jest pogląd jakoby istniała automatyczna symetria, między duchowością osób religijnych i niereligijnych: osoby religijne mają z góry określone aksjomaty, jednak aksjomaty osób niereligijnych dopiero wymagają określenia i doprecyzowania.'
+              '<br>Podobnie, błędnym jest pogląd jakoby istniała symetria między duchowością osób religijnych i niereligijnych: osoby religijne mają z góry określone aksjomaty, jednak aksjomaty osób niereligijnych dopiero wymagają określenia i doprecyzowania.'
               '<br>'
               '<br><b>Religijność</b> jest zestawem zachowań i postaw wynikających z duchowości religijnej. Religijność nie jest jednak zbiorem wartości, ani całą duchowością - religijność to jedynie wierzchnia warstwa duchowości, która pozwala (lecz sama w sobie niekoniecznie wystarcza) by duchowość religijną skutecznie integrować.'
               '</p>'
@@ -285,7 +288,6 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
       ),
 
       // Neutralność duchowa
-
       KonspektStep(
           title: 'Neutralność duchowa - wstęp',
           duration: Duration(minutes: 10),

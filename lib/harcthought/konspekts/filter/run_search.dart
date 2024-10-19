@@ -14,7 +14,10 @@ List<Konspekt> runKonspektsHarcerskieSearch(KonspektHarcerskieFilters filters){
   List<Konspekt> searchedKonspekts = [];
 
   for(Konspekt konspekt in allHarcerskieKonspekts) {
-    if(!remPolChars(konspekt.title).contains(remPolChars(filters.phrase)))
+    if(
+      !remPolChars(konspekt.title).contains(remPolChars(filters.phrase)) &&
+      !konspekt.matchesAdditionalPhrase(filters.phrase)
+    )
       continue;
 
     if(!konspekt.containsMetos(filters.selectedMetos))

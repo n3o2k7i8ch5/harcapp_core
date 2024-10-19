@@ -383,6 +383,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   Konspekt(
       name: 'budowanie_kapliczki',
       title: 'Budowanie kapliczki',
+      additionalSearchPhrases: ['kapliczka', 'kaplica'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -489,6 +490,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   Konspekt(
       name: 'budowanie_szopki_bozonarodzeniowej',
       title: 'Budowanie szopki bożonarodzeniowej',
+      additionalSearchPhrases: ['szopka', 'boże narodzenie'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -591,6 +593,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'druzynowe_mycie_w_jeziorze',
       title: 'Drużynowe mycie w jeziorze',
+      additionalSearchPhrases: ['jezioro'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
@@ -619,6 +622,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'ekstremalna_droga_krzyzowa',
       title: 'Ekstremalna Droga Krzyżowa',
+      additionalSearchPhrases: ['edk'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -766,6 +770,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'kadrowe_msze',
       title: 'Kadrowe msze',
+      additionalSearchPhrases: ['msza', 'msza'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -795,6 +800,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'kalambury_z_prawa_harcerskiego',
       title: 'Kalambury z Prawa Harcerskiego',
+      additionalSearchPhrases: ['prawo harcerskie', 'ph'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -822,6 +828,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'kalambury_z_prawa_zucha',
       title: 'Kalambury z Prawa Zucha',
+      additionalSearchPhrases: ['prawo zucha', 'pz'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -849,6 +856,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'kilkutygodniowe_obozowanie_w_lesie',
       title: 'Kilkutygodniowe obozowanie w lesie',
+      additionalSearchPhrases: ['oboz', 'las'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.projekt,
       spheres: {
@@ -886,6 +894,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'koledowanie_z_quizem_interpretacyjnym',
       title: 'Kolędowanie z quizem interpretacyjnym',
+      additionalSearchPhrases: ['kolęda', 'kolędy'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -914,6 +923,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'kontrowersyjna_dyskusja',
       title: 'Kontrowersyjna dyskusja',
+      additionalSearchPhrases: ['debata', 'argument'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -1025,6 +1035,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'negocjowanie_koalicji_wlasnych_partii_politycznych',
       title: 'Negocjowanie koalicji własnych partii politycznych',
+      additionalSearchPhrases: ['polityka', 'koalicja', 'koalicje' 'negocjacje'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -1152,6 +1163,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
     name: 'nocne_podkradanie',
     title: 'Nocne podkradanie',
+    additionalSearchPhrases: ['podchody', 'noc'],
     category: KonspektCategory.harcerskie,
     type: KonspektType.zwyczaj,
     spheres: {
@@ -1208,6 +1220,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'opowiedzenie_gawedy_o_autorytecie',
       title: 'Opowiedzenie gawędy o autorytecie',
+      additionalSearchPhrases: ['gawęda'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -1295,6 +1308,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   Konspekt(
       name: 'podzial_pirackiego_lupu',
       title: 'Podział pirackiego łupu',
+      additionalSearchPhrases: ['piraci', 'pirat', 'zagadka', 'zagadki', 'zagadka logiczna'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -1577,6 +1591,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'rowerowe_nabozenstwo_majowe',
       title: 'Rowerowe nabożeństwo majowe',
+      additionalSearchPhrases: ['majowka'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -1634,6 +1649,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'sad_nad_postawa',
       title: 'Sąd nad postawą',
+      additionalSearchPhrases: ['debata'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -1671,6 +1687,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'savoir_vivre_urzadzen_mobilnych',
       title: 'Savoir-vivre urządzeń mobilnych',
+      additionalSearchPhrases: ['telefon', 'smartfon', 'komorka'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -1968,6 +1985,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
     name: 'spiewogranie_z_quizem_interpretacyjnym',
     title: 'Śpiewogranie z quizem interpretacyjnym',
+    additionalSearchPhrases: ['śpiewowisko', 'śpiewanie', 'piosenki', 'interpretacja', 'quiz'],
     category: KonspektCategory.harcerskie,
     type: KonspektType.zajecia,
     spheres: {
@@ -2031,6 +2049,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
     name: 'swieczka_prawa_harcerskiego',
     title: 'Świeczka Prawa Harcerskiego',
+    additionalSearchPhrases: ['prawo harcerskie', 'ph'],
     category: KonspektCategory.harcerskie,
     spheres: {
       KonspektSphere.umysl: null,
@@ -2065,6 +2084,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
     name: 'swieczka_prawa_zuchowego',
     title: 'Świeczka Prawa Zuchowego',
+    additionalSearchPhrases: ['prawo zucha', 'pz'],
     category: KonspektCategory.harcerskie,
     spheres: {
       KonspektSphere.umysl: null,
@@ -2099,6 +2119,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'staly_spowiednik',
       title: 'Stały spowiednik',
+      additionalSearchPhrases: ['spowiedź', 'ksiądz', 'duchowny'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
@@ -2348,6 +2369,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'wedrowka',
       title: 'Wędrówka',
+      additionalSearchPhrases: ['wedrowki'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -2377,6 +2399,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'wedrowka_bez_zasobow',
       title: 'Wędrówka bez zasobów',
+      additionalSearchPhrases: ['wedrowki'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -2406,6 +2429,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'wedrowka_medytacyjna',
       title: 'Wędrówka medytacyjna',
+      additionalSearchPhrases: ['wedrowki', 'medytacja'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -2460,6 +2484,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'wlasny_nagrobek',
       title: 'Własny nagrobek',
+      additionalSearchPhrases: ['grob', 'śmierć', 'cmentarz'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -2549,6 +2574,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'wspolna_minuta_czosnku',
       title: 'Wspólna minuta czosnku',
+      additionalSearchPhrases: ['czosnek'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
@@ -2581,6 +2607,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'zagadki_matematyczno_logiczne',
       title: 'Zagadki matematno-logiczne',
+      additionalSearchPhrases: ['zagadki', 'matematyka', 'logika'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {

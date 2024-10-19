@@ -6,6 +6,7 @@ import '../../konspekt.dart';
 Konspekt druzynowe_przekazanie_bsp = const Konspekt(
     name: 'druzynowe_przekazanie_bsp',
     title: 'Drużynowe przekazanie Betlejemskiego Światła Pokoju',
+    additionalSearchPhrases: ['bśp'],
     category: KonspektCategory.harcerskie,
     type: KonspektType.projekt,
     spheres: {

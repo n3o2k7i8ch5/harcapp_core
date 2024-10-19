@@ -383,6 +383,7 @@ class Konspekt{
 
   final String name;
   final String title;
+  final List<String> additionalSearchPhrases;
   final KonspektCategory category;
   final KonspektType type;
   final Map<KonspektSphere, KonspektSphereDetails?> spheres;
@@ -437,6 +438,7 @@ class Konspekt{
   const Konspekt({
     required this.name,
     required this.title,
+    this.additionalSearchPhrases = const [],
     required this.category,
     required this.type,
     required this.spheres,
@@ -455,6 +457,17 @@ class Konspekt{
 
     this.attachments,
   });
+
+  bool matchesAdditionalPhrase(String searchPhrase){
+
+    searchPhrase = remSpecChars(remPolChars(searchPhrase));
+
+    for (String addSearchPhrase in additionalSearchPhrases)
+      if(remSpecChars(remPolChars(addSearchPhrase)).contains(searchPhrase))
+        return true;
+
+    return false;
+  }
 
   bool containsMetos(Iterable<Meto> metos){
     if(this.metos.isEmpty && metos.isNotEmpty) return false;
