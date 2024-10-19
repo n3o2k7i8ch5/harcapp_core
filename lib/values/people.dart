@@ -47,6 +47,7 @@ List<Person> allPeople = [
   BARTOSZ_DABROWSKI,
   BARTOSZ_IGNASIAK,
   BENIAMIN_PLUCINSKI,
+  BLANKA_KARCZEWSKA,
   BLAZEJ_KLEBBA,
   BRUNO_BRONCEL,
   BRUNO_WALERYCH,
@@ -199,6 +200,7 @@ List<Person> allPeople = [
   KLAUDIA_STASINSKA,
   KLAUDIUSZ_PALUCH,
   KORDIAN_LATOCHA,
+  KORNEL_DABKOWSKI,
   KORNEL_GOLEBIEWSKI,
   KORNELIA_KASIBORSKA,
   KORNELIA_PRZYCZOLKA,
@@ -249,6 +251,7 @@ List<Person> allPeople = [
   MARCEL_WOZNIAK,
   MARCELINA_WILCZAK,
   MARCIN_JANKOWIAK,
+  MARCJANNA_NEY,
   MAREK_BIZON,
   MAREK_BOJARUN,
   MAREK_LEWANCZYK,
@@ -676,6 +679,12 @@ const Person BARTLOMIEJ_MALYJUREK = Person(
 );
 const Person BARTOSZ_DABROWSKI = Person(name: 'Bartosz Dąbrowski', rankHarc: RankHarc.zhpWywiadowca, org: Org.zhp);
 const Person BARTOSZ_IGNASIAK = Person(name: 'Bartosz Ignasiak', rankHarc: RankHarc.zhpHOc, rankInstr: RankInstr.pwd, druzyna: '8. Drużyna Wędrownicza „Kuźnia Płomienia”');
+const Person BLANKA_KARCZEWSKA = Person(
+    name: 'Blanka Karczewska',
+    druzyna: '56. WDS „Ignis”',
+    hufiec: huf_zhp_warszawa_zoliborz,
+    email: ["blankakarczewska10@gmail.com"]
+);
 const Person BENIAMIN_PLUCINSKI = Person(
   name: 'Beniamin Pluciński',
   druzyna: '17. ZODH',
@@ -1647,9 +1656,16 @@ const Person KORDIAN_LATOCHA = Person(
     org: Org.zhr,
     email: ["latochakordian@gmail.com"]
 );
+const Person KORNEL_DABKOWSKI = Person(
+    name: 'Kornel Dąbkowski',
+    druzyna: '0,5. Próbna Drużyna Wędrownicza „Włóczykije”',
+    hufiec: 'Trzcianka',
+    org: Org.zhp,
+    email: ["rener17011973@gmail.com"]
+);
 const Person KORNELIA_KASIBORSKA = Person(
     name: 'Kornelia Kasiborska',
-    druzyna: '45. WDH "Alias',
+    druzyna: '45. WDH „Alias”',
     hufiec: huf_zhp_wloclawek,
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
@@ -1963,6 +1979,14 @@ const Person MARCELINA_WILCZAK = Person(
     email: ['marcelina.wilczak@zhp.net.pl', 'wilczakmarcelina@gmail.com']
 );
 const Person MARCIN_JANKOWIAK = Person(name: 'Marcin Jankowiak', hufiec: huf_zhp_jarocin, org: Org.zhp,);
+const Person MARCJANNA_NEY = Person(
+    name: 'Marcjanna Ney',
+    druzyna: '16 EŻDH Lilie',
+    hufiec: huf_zhp_elblag,
+    rankHarc: RankHarc.zhpSamarytanka,
+    org: Org.zhp,
+    email: ["marcjanna199@gmail.com"]
+);
 const Person MAREK_BIZON = Person(
     name: 'Marek Bizoń',
     druzyna: '17. DH „Salamandra”',
@@ -2455,7 +2479,7 @@ const Person PIOTR_KUBOWICZ = Person(
 const Person PIOTR_KWAPIEN = Person(
     name: 'Piotr Kwapień',
     druzyna: '35 TDH "Ignis" im. Józefy Kantor',
-    hufiec: 'Toruń',
+    hufiec: huf_zhp_torun,
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
