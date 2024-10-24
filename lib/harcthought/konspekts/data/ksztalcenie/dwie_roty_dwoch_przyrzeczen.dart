@@ -4,7 +4,7 @@ import 'package:harcapp_core/values/people.dart';
 
 import '../common_attachments.dart';
 
-const konspekt_name_dwie_roty_dwoch_przyrzeczen = 'dwie_roty_dwoch_przyrzeczen';
+const konspekt_name_dwie_roty_dwoch_przyrzeczen = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
 
 const String attach_html_prawo_harcerskie = '<a href="$attach_name_prawo_harcerskie@attachment">$attach_title_prawo_harcerskie</a>';
 const String attach_name_prawo_harcerskie = 'o_strukturze_i_ksztaltowaniu_duchowosci';
