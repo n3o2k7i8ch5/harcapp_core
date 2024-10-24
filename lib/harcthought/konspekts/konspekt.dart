@@ -282,13 +282,13 @@ class KonspektAttachment{
           return true;
         case KonspektAttachmentFormat.pdf:
         case KonspektAttachmentFormat.docx:
-          OpenResult result;
+          OpenResult? result;
           if(assetPath.contains('/'))
             result = await openAsset('packages/harcapp_core/assets/konspekty/$assetPath', webOpenInNewTab: true);
           else
             result = await openAsset('packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', webOpenInNewTab: true);
 
-          return result.type == ResultType.done;
+          return result?.type == ResultType.done;
         case KonspektAttachmentFormat.png:
         case KonspektAttachmentFormat.webp:
           if(assetPath.contains('/'))

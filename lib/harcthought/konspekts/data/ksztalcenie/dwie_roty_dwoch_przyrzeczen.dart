@@ -68,6 +68,12 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
       ),
 
       KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_name_prawo_harcerskie”',
+          attachmentName: attach_name_prawo_harcerskie,
+          amount: 2
+      ),
+
+      KonspektMaterial(
           name: 'Wydrukowany załącznik “$attach_name_przyrzeczenie_harcerskie”',
           attachmentName: attach_name_przyrzeczenie_harcerskie,
           amount: 2
@@ -91,7 +97,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
 
       KonspektStep(
           title: 'Kto decyduje, do czego wychowujemy?',
-          duration: Duration(minutes: 5),
+          duration: Duration(minutes: 10),
           activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący stawia kolejny temat pod dyskusję: <i>“Kto decyduje o tym, do czego wychowujemy młodego człowieka w harcerstwie?”</i>.'
@@ -107,7 +113,10 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<p style="text-align:justify;">'
               '<br>Warto, aby prowadzacy zebrał od uczestników jak najwięcej różnych odpowiedzi.'
               '<br>'
-              '<br>Na koniec, jeśli ktoś wskazał poprawną odpowiedź, prowadzący ją potwierdza - jeśli zaś nikt jej nie wskazał, to sam ją podaje: <b>o tym, do czego wychowujemy młodego człowieka w harcerstwie decyduje <u>statut ZHP</u></b>, a w szczególności:'
+              '<br>Na koniec, jeśli ktoś wskazał poprawną odpowiedź, prowadzący ją potwierdza - jeśli zaś nikt jej nie wskazał, to sam ją podaje:'
+              '<br>'
+              '<br><b>o tym, do czego wychowujemy młodego człowieka w harcerstwie decyduje <u>statut ZHP</u></b>.'
+              '<br>W szczególności są to:'
               '</p>'
               '<ul>'
 
@@ -140,6 +149,54 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>'
               '<br>Prowadzący może także dodać wydrukowany fragment uchwały o celach wychowania duchowego ZHP ($attach_html_cel_wychowania_duchowego_zhp_uchwala).'
               '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Szybkie podsumowanie',
+          duration: Duration(minutes: 1),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący podsumowuje dotychczasowe (oczywiste) ustalenia:'
+              '<br>'
+              '<br><i><b>Harcerstwo jest po to, żeby <b>wychować młodego człowieka w konkretnym kierunku</b> określonym w statucie ZHP.</b></i>'
+              '<br>'
+              '<br>Warto, by prowadzący dodał, że harcerstwo nie jest platformą wychowawczą, w której rodzice, czy instruktorzy wybierają sobie dowolne wartości. Jeśli rodzice chcą posłać dziecko do harcerstwa, to muszą się zgodzić na wartości harcerskie, z kolei instrukotrzy są tymi, którzy dowożą wychowanie w tychże wartościach.'
+              '</p>'
+      ),
+
+      KonspektStep(
+        title: 'Po co jest Przyrzeczenie Harcerskie?',
+          duration: Duration(minutes: 10),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+            'Prowadzący zadaje uczestnikom kolejne pytanie: <i>“Po co jest Przyrzeczenie Harcerskie?”</i>.'
+            '<br>'
+            '<br>Dyskusja powinna doprowadzić do dwóch konkluzji:'
+            '</p>'
+            '<ul>'
+            '<li><p style="text-align:justify;">Po to, aby harcerz mógł dobrowolniie zadeklarować chać przynależności do harcerstwa.</p></li>'
+            '<li><p style="text-align:justify;">Po to, aby harcerz mógł zgodzić się i klarowne źródło zasad, które będą go kształtowały.</p></li>'
+            '</ul>'
+            '<p style="text-align:justify;">'
+            'Przyrzeczenie nie jest "świętą formułą", nie jest "podstawową wolnością", ani "niezbywalnym prawem harcerza". Przyrzeczenie jest <b>narzędziem wychowawczym</b> - takim samym jak mundur, namiot, sprawność, czy ognisko - służy temu, aby harcerza ukształtować w konkretnym kierunku.'
+            '</p>'
+      ),
+
+      KonspektStep(
+        title: 'Kto i kiedy wybiera treść Przyrzeczenia?',
+        duration: Duration(minutes: 10),
+        activeForm: false,
+        content: '<p style="text-align:justify;">'
+            'Prowadzący stawia pytanie: <i>“Kto wybiera treść Przyrzeczenia, które złoży harcerz?”</i>.'
+            '<br>'
+            '<br>Pierwszym rozróżnieniem, na które powinni wpaść uczestnicy jest: <i>"zależy o której metodyce mówimy"</i>.'
+            '<br>'
+            '<br>W przypadku metodyki wędrowniczej, treść Przyrzeczenia wybiera sam wędrownik.'
+            '<br>'
+            '<br>W przypadku metodyki harcerskiej i często starszoharcerskiej, treść przyrzeczenia powinna być zgodna z tym, czy harcerz jest wychowywany w wierze. Z tego względu warto, aby harcerz podjął taką decyzję wspólnie z rodzicem.'
+            '<br>'
+            '<br>'
+            '</p>'
       ),
 
     ]
