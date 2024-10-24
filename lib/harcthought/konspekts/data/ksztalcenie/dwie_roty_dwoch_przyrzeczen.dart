@@ -30,7 +30,7 @@ const KonspektAttachment attach_przyrzeczenie_harcerskie = KonspektAttachment(
   },
 );
 
-Konspekt wstep_do_wychowania_duchowego = Konspekt(
+Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
     name: konspekt_name_dwie_roty_dwoch_przyrzeczen,
     title: 'Dwie roty dwóch przyrzeczeń',
     additionalSearchPhrases: [
