@@ -55,4 +55,5 @@ class GradientIcon extends StatelessWidget {
         )
     );
   }
+
 }

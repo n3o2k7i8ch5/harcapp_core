@@ -6,6 +6,18 @@ import '../common_attachments.dart';
 
 const konspekt_name_dwie_roty_dwoch_przyrzeczen = 'dwie_roty_dwoch_przyrzeczen';
 
+const String attach_html_prawo_harcerskie = '<a href="$attach_name_prawo_harcerskie@attachment">$attach_title_prawo_harcerskie</a>';
+const String attach_name_prawo_harcerskie = 'o_strukturze_i_ksztaltowaniu_duchowosci';
+const String attach_title_prawo_harcerskie = 'O strukturze i ksztaltowaniu duchowosci';
+const KonspektAttachment attach_prawo_harcerskie = KonspektAttachment(
+  name: attach_name_prawo_harcerskie,
+  title: attach_title_prawo_harcerskie,
+  assets: {
+    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_prawo_harcerskie.pdf',
+    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_prawo_harcerskie.docx',
+  },
+);
+
 const String attach_html_przyrzeczenie_harcerskie = '<a href="$attach_name_przyrzeczenie_harcerskie@attachment">$attach_title_przyrzeczenie_harcerskie</a>';
 const String attach_name_przyrzeczenie_harcerskie = 'o_strukturze_i_ksztaltowaniu_duchowosci';
 const String attach_title_przyrzeczenie_harcerskie = 'O strukturze i ksztaltowaniu duchowosci';
@@ -39,6 +51,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
     attachments: [
       attach_cel_wychowania_duchowego_zhp_statut,
       attach_cel_wychowania_duchowego_zhp_uchwala,
+      attach_prawo_harcerskie,
       attach_przyrzeczenie_harcerskie
     ],
     materials: [
@@ -97,13 +110,35 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>Na koniec, jeśli ktoś wskazał poprawną odpowiedź, prowadzący ją potwierdza - jeśli zaś nikt jej nie wskazał, to sam ją podaje: <b>o tym, do czego wychowujemy młodego człowieka w harcerstwie decyduje <u>statut ZHP</u></b>, a w szczególności:'
               '</p>'
               '<ul>'
-              '<li><p style="text-align:justify;">Artykuł 3, w którym zdefiniowano zbiór wartości harcerskich</p></li>'
-              '<li><p style="text-align:justify;">Prawo Harcerskie</p></li>'
-              '<li><p style="text-align:justify;">Przyrzeczenie Harcerskie</p></li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Artykuł 3, w którym zdefiniowano zbiór wartości harcerskich'
+              '<br>$attach_html_cel_wychowania_duchowego_zhp_statut'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Prawo Harcerskie'
+              '<br>$attach_html_prawo_harcerskie'
+              '<br>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Przyrzeczenie Harcerskie'
+              '<br>$attach_html_przyrzeczenie_harcerskie'
+              '<br>'
+              '</p>'
+              '</li>'
+
               '</ul>'
               '<p style="text-align:justify;">'
-              'Prowadzący przekazuje uczestnikom treść wydrukowanych .'
-              '<br>Prowadzący może dodać'
+              'Prowadzący przekazuje uczestnikom treść wydrukowanych części statutu, by mogli się z nim zapoznać.'
+              '<br>'
+              '<br>Prowadzący może także dodać wydrukowany fragment uchwały o celach wychowania duchowego ZHP ($attach_html_cel_wychowania_duchowego_zhp_uchwala).'
               '</p>'
       ),
 
