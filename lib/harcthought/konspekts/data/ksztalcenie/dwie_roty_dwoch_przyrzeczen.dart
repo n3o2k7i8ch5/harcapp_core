@@ -87,9 +87,9 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           duration: Duration(minutes: 5),
           activeForm: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący rozpoczyna krótkiim wyjaśnieniem tego, co będzie na tych warsztatach:'
+              'Prowadzący rozpoczyna krótkim wyjaśnieniem tego, co będzie na tych warsztatach:'
               '<br>'
-              '<br><i>“Mniej więcej przez połowę tych zajęć będze bardzo niewiele o samym Przyrzeczeniu Harcerskim, ale jest to zabieg celowy. Po prostu, aby dobrze zrozumieć jaką pełni rolę, jak się nim posługiwać i co wynika z jego obecnego kształtu, najlepiej jest uporządkować kilka fundamentalnych, kluczowych dla całego wychowania harcerskiego aspektów związanych z duchowością.”</i>'
+              '<br><i>“Mniej więcej przez pierwszą połowę będzie niewiele o samym Przyrzeczeniu Harcerskim, ale jest to zabieg celowy. Aby dobrze zrozumieć jaką pełni rolę, jak się nim posługiwać i co wynika z jego obecnego kształtu, najlepiej jest uporządkować kilka fundamentalnych, kluczowych dla całego wychowania harcerskiego aspektów związanych z duchowością i wówczas pozowlić, aby Przyrzeczenie wjechało na gotowe.”</i>'
               '</p>'
       ),
 
@@ -98,9 +98,9 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           duration: Duration(minutes: 5),
           activeForm: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący rozpoczyna od pytania wstępnego: <i>“Po co jest harcerstwo?”</i>.'
+              'Prowadzący rozpoczyna od pytania w zasadzie retorycznego: <i>“Po co jest harcerstwo?”</i>.'
               '<br>'
-              '<br>Naturalnie, odpowiedź wynika z misji ZHP: Harcerstwo jest po to, żeby wychować młodego człowieka.'
+              '<br>Naturalnie, odpowiedź wynika z misji ZHP: <b>Harcerstwo jest po to, żeby wychować młodego człowieka.</b>'
               '<br>'
               '<br>Prowadzący może pozwolić na krótką dyskusję na ten temat, ale powinien tak nią moderować, aby w końcu padła prawidłowa odpowiedź.'
               '</p>'
@@ -111,7 +111,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           duration: Duration(minutes: 10),
           activeForm: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący stawia kolejny temat pod dyskusję: <i>“Kto decyduje o tym, do czego wychowujemy młodego człowieka w harcerstwie?”</i>.'
+              'Prowadzący rzuca kolejne pytanie: <i>“Kto decyduje o tym, do czego wychowujemy młodego człowieka w harcerstwie?”</i>.'
               '<br>'
               '<br>Odpowiedzi od uczestników mogą tutaj padać różne:'
               '</p>'
@@ -124,37 +124,36 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<p style="text-align:justify;">'
               '<br>Warto, aby prowadzacy zebrał od uczestników jak najwięcej różnych odpowiedzi.'
               '<br>'
-              '<br>Na koniec, jeśli ktoś wskazał poprawną odpowiedź, prowadzący ją potwierdza - jeśli zaś nikt jej nie wskazał, to sam ją podaje:'
+              '<br>Na koniec, jeśli ktoś wskazał poprawną odpowiedź, prowadzący ją potwierdza - jeśli nikt jej nie wskazał, to sam ją podaje:'
               '<br>'
-              '<br><b>o tym, do czego wychowujemy młodego człowieka w harcerstwie decyduje <u>statut ZHP</u></b>.'
-              '<br>W szczególności są to:'
+              '<br><u><b>O tym, do czego wychowujemy młodego człowieka w harcerstwie decyduje <u>statut ZHP</u></b>.'
+              '<br>W szczególności są to:</u>'
               '</p>'
               '<ul>'
 
               '<li>'
               '<p style="text-align:justify;">'
-              'Artykuł 3, w którym zdefiniowano zbiór wartości harcerskich'
-              '<br>$attach_html_cel_wychowania_duchowego_zhp_statut'
+              '<u>Artykuł 3, w którym zdefiniowano zbiór wartości harcerskich'
+              '<br>$attach_html_cel_wychowania_duchowego_zhp_statut</u>'
               '</p>'
               '</li>'
 
               '<li>'
               '<p style="text-align:justify;">'
-              'Prawo Harcerskie'
-              '<br>$attach_html_prawo_harcerskie'
-              '<br>'
+              '<u>Prawo Harcerskie'
+              '<br>$attach_html_prawo_harcerskie</u>'
               '</p>'
               '</li>'
 
               '<li>'
               '<p style="text-align:justify;">'
-              'Przyrzeczenie Harcerskie'
-              '<br>$attach_html_przyrzeczenie_harcerskie'
-              '<br>'
+              '<u>Przyrzeczenie Harcerskie'
+              '<br>$attach_html_przyrzeczenie_harcerskie</u>'
               '</p>'
               '</li>'
 
               '</ul>'
+
               '<p style="text-align:justify;">'
               'Prowadzący przekazuje uczestnikom treść wydrukowanych części statutu, by mogli się z nim zapoznać.'
               '<br>'
@@ -268,7 +267,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
             '<br>Dyskusja powinna doprowadzić do dwóch konkluzji:'
             '</p>'
             '<ul>'
-            '<li><p style="text-align:justify;">Po to, aby harcerz mógł dobrowolniie zadeklarować chać przynależności do harcerstwa.</p></li>'
+            '<li><p style="text-align:justify;">Po to, aby harcerz mógł dobrowolnie zadeklarować chać przynależności do harcerstwa.</p></li>'
             '<li><p style="text-align:justify;">Po to, aby harcerz mógł zgodzić się i klarowne źródło zasad, które będą go kształtowały.</p></li>'
             '</ul>'
             '<p style="text-align:justify;">'
