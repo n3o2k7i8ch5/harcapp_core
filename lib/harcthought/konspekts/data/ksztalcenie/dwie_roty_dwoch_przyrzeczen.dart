@@ -152,40 +152,82 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
       ),
 
       KonspektStep(
-          title: 'Kto decyduje, do czego wychowujemy? - Aksjomaty',
+          title: 'Kompatybilne aksjomaty',
           duration: Duration(minutes: 10),
           activeForm: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący zwraca uwagę na to, że statut ZHP określa wartości, do których harcerstwo wychowuje, ale nie określa jednego źródła wartości, z których mają one wynikać.'
-              '<br>'
-              '<br>Co to oznacza? Prowadzący przedstawia uczestnikom kilka scenariuszy do dyskusji:'
-              '<ol>'
+            'Prowadzący zwraca uwagę na to, że statut ZHP określa wartości, do których harcerstwo wychowuje, ale nie określa jednego źródła wartości, z których mają one wynikać.'
+            '<br>'
+            '<br>Co to oznacza? Prowadzący przedstawia uczestnikom kilka scenariuszy do dyskusji, które powinny tę konstrukcję wyjaśnić:'
+            '<ol>'
 
-              '<li><p style="text-align:justify;">'
-              '<b><i>Do ZHP trafia 9-latek, którego rodzice są katolikami i którym zależy na wychowaniu dzieci w wierze.'
-              '<br>Czy ów potencjalny zuch może rozwijać się w duchowości katolickiej w ZHP?</i></b>'
-              '<br>'
-              '<br>Odp.:'
-              '<br><b>Tak</b>. Wartości wynikające z wiary katolickiej są zgodne z wartościami harcerskimi - są z definicji, bo ZHP wychowuje do wartości wynikających z chrześcijaństwa.'
-              '</p></li>'
+            '<li><p style="text-align:justify;">'
+            '<i><b>Do ZHP trafia 9-latek, którego rodzice są katolikami i którym zależy na wychowaniu dzieci w wierze.</b>'
+            '<br>Czy ów potencjalny zuch może rozwijać się w duchowości katolickiej w ZHP?</i>'
+            '<br>'
+            '<br>Odp.: <b>Tak</b>. Wartości wynikające z wiary katolickiej są zgodne z wartościami harcerskimi - są z definicji, bo ZHP wychowuje do wartości wynikających z chrześcijaństwa.'
+            '</p></li>'
 
-              '<li><p style="text-align:justify;">'
-              '<b><i>Do ZHP trafia osoba, która jest dogmatycznym darwinistą. Wierzy, że jedynie dobry porządek świata wiedzie przez przetrwanie najsilniejszych, oraz że słabym nie wolno pomagać - to zaburza mechanizm selekcji naturalnej.'
-              '<br>Czy ów człowiek może liczyć na rozwój w rzeczonej duchowości w ZHP?</i></b>'
-              '<br>'
-              '<br>Odp.:'
-              '<br><b>Nie</b>. ZHP nie prowadzi wychowania do nie uznawania godności każdego człowieka lub widzenia bliźniego tylko w niektórych ludziach. Harcerstwo nie ma tu niczego do zaoferowania.'
-              '</p></li>'
+            '<li><p style="text-align:justify;">'
+            '<i><b>Do ZHP trafia dogmatyczny darwinista. Wierzy w to, że słabym nie wolno pomagać - to zaburza mechanizm selekcji naturalnej, przetrwać powinni tylko najsilniejsi.</b>'
+            '<br>Czy ów człowiek może liczyć na rozwój w rzeczonej duchowości w ZHP?</i>'
+            '<br>'
+            '<br>Odp.: <b>Nie</b>. ZHP nie prowadzi wychowania do nie uznawania godności każdego człowieka lub widzenia bliźniego tylko w niektórych ludziach. Harcerstwo nie ma tu niczego do zaoferowania.'
+            '</p></li>'
 
-              '<li><p style="text-align:justify;">'
-              '<b><i>Do ZHP trafia 12-latek, którego rodzice wierzą w energię kosmosu oraz w to, że Powszechna Deklaracja Praw Człowieka nie została napisana, ale została zesłana z wyższego wymiaru i że jest świętym wskazaniem tego, jak należy postępować w życiu.'
-              '<br>Czy ów 12-latek może rozwijać się w owej "kosmicznej" duchowości w ZHP?</i></b>'
-              '<br>'
-              '<br>Odp.:'
-              '<br><b>Tak</b>, pod warunkiem, że w kwestiach nie regulowanych Powszechną Deklaracją Praw Człowieka rodzice nie bedą się sprzeciwiali przyjęciu wartości harcerskich.'
-              '</p></li>'
+            '<li><p style="text-align:justify;">'
+            '<i><b>Do ZHP trafia 12-latek, którego rodzice wierzą w energię kosmosu oraz w to, że Powszechna Deklaracja Praw Człowieka nie została napisana, ale została zesłana z wyższego wymiaru i że jest świętym wskazaniem tego, jak należy postępować w życiu.</b>'
+            '<br>Czy ów 12-latek może rozwijać się w owej "kosmicznej" duchowości w ZHP?</i>'
+            '<br>'
+            '<br>Odp.: <b>Tak</b>, pod warunkiem, że w kwestiach nie regulowanych Powszechną Deklaracją Praw Człowieka rodzice nie bedą się sprzeciwiali przyjęciu wartości harcerskich.'
+            '</p></li>'
 
-              '</ol>'
+            '<li><p style="text-align:justify;">'
+            '<i><b>Do ZHP trafia 18-latek z Palestyny, ateista wierzący, że żydzi są i zawsze byli przyczyną wszelkiego zła na świecie.</b>'
+            '<br>Czy ów młodzian może dołączyć do ZHP?</i>'
+            '<br>'
+            '<br>Odp.: <b>Tak</b>. ZHP nie ogranicza nikomu możliwości dołączenia do organizacji. Ogranicza jedynie duchowości, do których wychowuje swoich członków. Jeśli ów Palestyńczyk zgodzi się porzucić swoją wiarę i zastąpić ją czymś, z czego wypływają wartości harcerskie, może z powodzeniem liczyć na wsparcie ZHP w swoim rozwoju. W przeciwnym wypadku ZHP nie ma mu niczego do zaoferowania.'
+            '</p></li>'
+
+            '</ol>'
+      ),
+
+      KonspektStep(
+          title: 'Konieczność pracy z aksjomatem',
+          duration: Duration(minutes: 10),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący zaczyna od stwierdzenia:'
+              '<br>'
+              '<br><i>Wychowanie na poziomie zucha czy harcerza może się ograniczyć do zachowań, postaw i wartości. Ale wychowanie HSa, czy wędrownika musi pójść dalej - musi umieć odpowiedzieć na pytanie o <b>źródło wartości</b></i>'
+              '<br>'
+              '<br>Prowadzący obrazuje to na przykładzie następującej sytuacji:'
+              '<br>'
+              '<br><i>Na obozie jeden z wędrowników zaszedł drugiemu za skórę, za co ten drugi zaczął go przy każdej nadażającej się okazji prześladować. Trwało to już kilka miesięcy. Drużynowy poszedł z nim porozmawiać i powiedział, że harcerską postawą jest wyjść z dobą wolą, spróbować się pogodzić i wzajemnie sobie przebaczyć winy.'
+              '<br>'
+              '<br>Gdyby drużynowy rozmawiał z zuchem, czy harcerzem, powołanie się na Prawo Zucha, czy Prawo Harcerza prawie zawsze wystarcza: skoro drużynowy, rodzice, księża i nauczyciele mówią, że jakaś wartość jest dobra - to dla zucha czy harcerza jest dobra i koniec.'
+              '<br>'
+              '<br>Ale tutaj mowa jest o wędrowniku, który na pewnym etapie swojego życia prawdopodobnie zada (w sposób werbalny lub nie) pytanie:'
+              '<br>'
+              '<br>Dlaczego niby mam komuś wybaczyć? Ja uważam, że wybaczanie jest oznaką słabości. Jeśli ktoś mi podpadł, uważam, że należy go przykładnie i doszczętnie zgnoić - dla mnie wartością jest siła, a nie przebaczenie. Dlaczego mam wierzyć w jakieś zapiski Prawa Harcerskiego, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat takie wartości są dobre?</i>'
+              '<br>'
+              '<br>Każdy dorastajacy człowiek w trakcie swojego rozwoju duchowego zada kiedyś pytanie "dlaczego mam wierzyć akurat w takie a nie inne wartości? Czemu te są lepsze od tamtych?"'
+              '<br>'
+              '<br>Na to pytanie nie istnieje powszechnie uznana za obiektywną odpowiedź. Odpowiedź na to pytanie zawsze wynika z aksjomatu duchowości, która harcerz wyznaje - z religii, filozofii, etc..'
+              '<br>'
+              '<br>W cywilizacji łacińskiej odpowiedzią na pytanie: "dlaczego mam komuś wymaczać" wynika z wiary, że jeśli sam Bóg zszedł na Ziemię i dobrowolnie zdecydwał dać się zabić za każdego, nawet najpodlejszego człowieka, żeby ten miał szansę doznać zbawienia i życia w pełni szczęścia, to prawdopodobnie my, ludzie tym bardziej powinniśmy zawsze odpuszczać winy tym, którzy o to proszą.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Kompatybilne aksjomaty - kto je wybiera?',
+          duration: Duration(minutes: 10),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący stawia pytanie:'
+              '<br>'
+              '<br>W jaki sposób okreslić który aksjomat leży u podstaw duchowości danego harcerza?</i>'
+              '</p>'
       ),
 
       KonspektStep(
@@ -215,7 +257,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
             '<li><p style="text-align:justify;">Po to, aby harcerz mógł zgodzić się i klarowne źródło zasad, które będą go kształtowały.</p></li>'
             '</ul>'
             '<p style="text-align:justify;">'
-            'Przyrzeczenie nie jest "świętą formułą", nie jest "podstawową wolnością", ani "niezbywalnym prawem harcerza". Przyrzeczenie jest <b>narzędziem wychowawczym</b> - takim samym jak mundur, namiot, sprawność, czy ognisko - służy temu, aby harcerza ukształtować w konkretnym kierunku.'
+            'Przyrzeczenie nie jest "świętą formułą", nie jest "podstawową wolnością", ani "niezbywalnym prawem harcerza". Przyrzeczenie jest <b>narzędziem wychowawczym</b> - tak jak mundur, gawęda, namiot, sprawność, czy ognisko - służy temu, aby harcerza ukształtować w konkretnym kierunku.'
             '</p>'
       ),
 
