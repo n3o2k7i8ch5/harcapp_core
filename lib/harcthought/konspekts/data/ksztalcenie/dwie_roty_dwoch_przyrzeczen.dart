@@ -159,30 +159,33 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               'Prowadzący zwraca uwagę na to, że statut ZHP określa wartości, do których harcerstwo wychowuje, ale nie określa jednego źródła wartości, z których mają one wynikać.'
               '<br>'
               '<br>Co to oznacza? Prowadzący przedstawia uczestnikom kilka scenariuszy do dyskusji:'
-              '<ul>'
+              '<ol>'
 
               '<li><p style="text-align:justify;">'
-              'Do ZHP trafia 9-latek, którego rodzice są katolikami i którym zależy na wychowaniu dzieci w wierze. Czy ów potencjalny zuch może rozwijać się w duchowości katolickiej w ZHP?'
+              '<i>Do ZHP trafia 9-latek, którego rodzice są katolikami i którym zależy na wychowaniu dzieci w wierze.'
+              '<br>Czy ów potencjalny zuch może rozwijać się w duchowości katolickiej w ZHP?</i>'
               '<br>'
               '<br>Odp.:'
-              '<br>Tak. Wartości wynikające z wiary katolickiej są zgodne z wartościami harcerskimi - są z definicji, bo ZHP wychowuje do wartości wynikających z chrześcijaństwa.'
+              '<br><u>Tak</u>. Wartości wynikające z wiary katolickiej są zgodne z wartościami harcerskimi - są z definicji, bo ZHP wychowuje do wartości wynikających z chrześcijaństwa.'
               '</p></li>'
 
               '<li><p style="text-align:justify;">'
-              'Do ZHP trafia osoba, która jest dogmatycznym darwinistą. Wierzy, że jedynie dobry porządek świata wiedzie przez przetrwanie najsilniejszych, oraz że słabym nie wolno pomagać - to zaburza mechanizm selekcji naturalnej. Czy ów człowiek może liczyć na rozwój w rzeczonej duchowości w ZHP?'
+              '<i>Do ZHP trafia osoba, która jest dogmatycznym darwinistą. Wierzy, że jedynie dobry porządek świata wiedzie przez przetrwanie najsilniejszych, oraz że słabym nie wolno pomagać - to zaburza mechanizm selekcji naturalnej.'
+              '<br>Czy ów człowiek może liczyć na rozwój w rzeczonej duchowości w ZHP?</i>'
               '<br>'
               '<br>Odp.:'
-              '<br>Nie. ZHP nie prowadzi wychowania do nie uznawania godności każdego człowieka lub widzenia bliźniego tylko w niektórych ludziach. Harcerstwo nie ma tu niczego do zaoferowania.'
+              '<br><u>Nie</u>. ZHP nie prowadzi wychowania do nie uznawania godności każdego człowieka lub widzenia bliźniego tylko w niektórych ludziach. Harcerstwo nie ma tu niczego do zaoferowania.'
               '</p></li>'
 
               '<li><p style="text-align:justify;">'
-              'Do ZHP trafia 12-latek, którego rodzice wierzą w energię kosmosu oraz w to, że Powszechna Deklaracja Praw Człowieka nie została napisana, ale została zesłana z wyższego wymiaru i że jest świętym wskazaniem tego, jak należy postępować w życiu. Czy ów 12-latek może rozwijać się w owej "kosmicznej" duchowości w ZHP?'
+              '<i>Do ZHP trafia 12-latek, którego rodzice wierzą w energię kosmosu oraz w to, że Powszechna Deklaracja Praw Człowieka nie została napisana, ale została zesłana z wyższego wymiaru i że jest świętym wskazaniem tego, jak należy postępować w życiu.'
+              '<br>Czy ów 12-latek może rozwijać się w owej "kosmicznej" duchowości w ZHP?</i>'
               '<br>'
               '<br>Odp.:'
-              '<br>Tak, pod warunkiem, że w kwestiach nie regulowanych Powszechną Deklaracją Praw Człowieka rodzice nie bedą się sprzeciwiali przyjęciu wartości harcerskich.'
+              '<br><u>Tak</u>, pod warunkiem, że w kwestiach nie regulowanych Powszechną Deklaracją Praw Człowieka rodzice nie bedą się sprzeciwiali przyjęciu wartości harcerskich.'
               '</p></li>'
 
-              '</ul>'
+              '</ol>'
       ),
 
       KonspektStep(
