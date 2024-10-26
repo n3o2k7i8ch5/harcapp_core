@@ -80,17 +80,23 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
       ),
 
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_name_prawo_harcerskie”',
+          name: 'Wydrukowany załącznik “$attach_title_prawo_harcerskie”',
           attachmentName: attach_name_prawo_harcerskie,
           amount: 2
       ),
 
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_name_przyrzeczenie_harcerskie”',
+          name: 'Wydrukowany załącznik “$attach_title_przyrzeczenie_harcerskie”',
           attachmentName: attach_name_przyrzeczenie_harcerskie,
           amount: 2
       ),
 
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_jak_przeprowadzic_przyrzeczenie”',
+          attachmentName: attach_name_jak_przeprowadzic_przyrzeczenie,
+          amount: 2,
+          additionalPreparation: 'Kartki pociąć wzdłuż przerywanych linii i potasować w ramach każdego zestawu.'
+      ),
     ],
     steps: [
 
@@ -285,7 +291,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
       KonspektStep(
           title: 'Przerwa',
           duration: Duration(minutes: 5),
-          activeForm: false,
+          activeForm: true,
           content: '<p style="text-align:justify;">'
               'Krótka przerwa.'
               '</p>'
@@ -342,7 +348,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
       KonspektStep(
           title: 'Jak przeprowadzić Przyrzeczenie Harcerskie?',
           duration: Duration(minutes: 10),
-          activeForm: false,
+          activeForm: true,
           content: '<p style="text-align:justify;">'
               'Prowadzący stawia pytanie: <i>“Jak przeprowadzić cały proces związany z Przyrzeczeniem Harcerskim?”</i>.'
               '<br>'
@@ -354,6 +360,72 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>'
               '<br>Zadaniem każdej grupy jest ułożenie w odpowiedniej kolejności kawałków załącznika, tak aby powstał z niego spójny scenariusz. Jeśli grupa ma pomysły jak ów scenariusz można wzbogacić, powinna to zapisać.'
               '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Omówienie',
+          duration: Duration(minutes: 10),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący omawia z grupami wyniki ich pracy oraz ich ewentualne pomysły na wzbogacenie procesu przeprowadzenia Przyrzeczenia.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Scenariusze',
+          duration: Duration(minutes: 10),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący przedstawia uczestnikom kilka scenariuszy związanych z problematyką dwóch możliwych do wyboru rot Przyrzeczenia.'
+              '</p>'
+              '<ol>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Scenariusz:'
+              '<br><i>Wędrownik w wieku 10 lat zlożył przyżeczenie "bez Boga". W trakcie nauki w liceum nawrócił się i stał się częścią Kościoła. Na początku obozu zapytał drużynowego, czy mógłby podczas obozu złożyć ponownie Przyrzeczenie Harcerskie. Jak powinien zadziałać drużynowy?</i>'
+              '<br>'
+              '<br>Ceremoniały w procesie wychowawczym mają znaczenie - z tego powodu obrzędowi złożenia Obietnicy Zucha, Przyrzeczenia Harcerskiego, nadania barw drużyny, czy złożenia zobowiązania instruktorskiego towarzyszy odpowiednia podniosłość.'
+              '<br>'
+              '<br>Jeżeli wędrownikowi zależy na tym, aby móc złożyć Przyrzeczenie w nowej formule, dobrze, aby drużynowy to zorganizował. Można to przykładowo połączyć z inną ważną ceremonią, np. nadania naramiennika wędrowniczego.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Scenariusz:'
+              '<br><i>Podczas biwaku dwie harcerki się posprzeczały. Jedna z nich zamiast wyrzucić śmieci do kosza, zostawiła je pod drzewem, na co druga, Zosia, zaczęła ją pouczać, że złamała 6. punkt PH. Pierwsza z dziewczyn się zdenerwowała i powiedziała kadrze, że od kiedy Zosia dostała krzyż, strasznie się wymądrza w sprawach harcerskich. Zosia odpowiedziała, że nie lubi tego robić, ale miesiąc temu złożyła Przyrzeczenie, że będzie <u>"stała na straży harcerskich zasad"</u> i traktuje to serio. Dodała też, że nie rozumie dlaczego inne dziewczyny, które składały Przyrzeczenie na służbę Bogu nie muszą stać na straży harcerskich zasad.'
+              '<br>'
+              '<br>Jak drużynowy powinien zareagować względem Zosi?</i>'
+              '<br>'
+              '<br>Dwie różne roty alternatywnych Przyrzeczeń Harcerskich w istocie fatalnie niesymetryczne. Wersja "z Bogiem" odwołuje się do osobowego Boga, będącego źródłem harcerskich wartości. Z kolei wersja "ze staniem na straży harcerskich zasad" nie dość, że nie odwołuje się w żaden sposób do poszukiwania źródła zasad, to jeszcze obliguje harcerza do obowiązku, któremu nie podlegają harcerze składający Przyrzeczenie "z Bogiem".'
+              '<br>'
+              '<br>W tej sytuacji najlepsze, co może zrobić drużynowy, to:'
+              '</p>'
+              '<ul>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Z jednej strony przyznać rację Zosi, że nie ma żadnej wymówki dla lekceważenia Prawa Harcerskiego.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Z drugiej strony, jeśli Zosia planuje jeszcze mieć jakiekolwiek koleżanki, dobrze będzie jeśli do czasu pełnienia funkcji zastępowej lub drużynowej, nie będzie sama wytykała innym ich błędów, tylko porozmawia o tym z przełożonym lub wspólnie z innymi harcerkami grzecznie zwróci komuś uwagę.'
+              '</p>'
+              '</li>'
+
+              '</ul>'
+
+              '<p style="text-align:justify;">'
+              'Najgorsze, co może zrobić w tej sytuacji drużynowy, to zrelatywizować Przyrzeczenie Harcerskie tekstem w stylu "tak naprawdę stania na straży nie można rozumieć tak dosłownie", czy "chodzi o to, żebyś pilnowała tylko samą siebie".'
+              '<br>'
+              '<br>Uczenie harcerzy, że mogą zmieniać sens tego, do czego się zadeklarowali tylko dlatego, że innym się to nie podoba jest <b>skrajnie demoralizujące</b>.'
+              '</p>'
+              '</li>'
+
+              '</ol>'
       ),
 
     ]
