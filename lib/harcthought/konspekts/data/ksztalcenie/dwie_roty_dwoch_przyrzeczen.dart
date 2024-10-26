@@ -64,7 +64,8 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
       attach_cel_wychowania_duchowego_zhp_statut,
       attach_cel_wychowania_duchowego_zhp_uchwala,
       attach_prawo_harcerskie,
-      attach_przyrzeczenie_harcerskie
+      attach_przyrzeczenie_harcerskie,
+      attach_jak_przeprowadzic_przyrzeczenie,
     ],
     materials: [
       KonspektMaterial(
