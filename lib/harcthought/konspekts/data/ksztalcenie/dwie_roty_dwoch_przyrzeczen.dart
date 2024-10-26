@@ -400,6 +400,8 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>'
               '<br>Dwie różne roty alternatywnych Przyrzeczeń Harcerskich w istocie fatalnie niesymetryczne. Wersja "z Bogiem" odwołuje się do osobowego Boga, będącego źródłem harcerskich wartości. Z kolei wersja "ze staniem na straży harcerskich zasad" nie dość, że nie odwołuje się w żaden sposób do poszukiwania źródła zasad, to jeszcze obliguje harcerza do obowiązku, któremu nie podlegają harcerze składający Przyrzeczenie "z Bogiem".'
               '<br>'
+              '<br>Gdyby Rada Naczelna potraktowała wychowanie duchowe związane z Przyrzeczeniem holistycznie, zamiast <i>"(...) stać na straży harcerskich zasad (...)"</i> znalazła by się tam formuła w stylu "(...) zawsze dążyć do prawdy i sensu (...)"'
+              '<br>'
               '<br>W tej sytuacji najlepsze, co może zrobić drużynowy, to:'
               '</p>'
               '<ul>'
