@@ -209,27 +209,29 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           content: '<p style="text-align:justify;">'
               'Prowadzący zaczyna od stwierdzenia:'
               '<br>'
-              '<br><i>Wychowanie na poziomie zucha czy harcerza może się ograniczyć do zachowań, postaw i wartości. Ale wychowanie HSa, czy wędrownika musi pójść dalej - włączyć do pracy wychowawczej <b>źródło wartości</b></i>.'
+              '<br><i>Wychowanie na poziomie zucha czy harcerza może się ograniczyć do zachowań, postaw i wartości. Ale wychowanie HSa, czy wędrownika musi pójść dalej - musi włączyć do pracy wychowawczej <b>źródło wartości</b></i>.'
               '<br>'
               '<br>Prowadzący obrazuje to na przykładzie następującej sytuacji:'
               '<br>'
               '<br><i>Na obozie jeden z wędrowników zaszedł drugiemu za skórę, za co ten drugi zaczął go notorycznie prześladować. Trwało to już kilka miesięcy. Drużynowy wziął go na rozmowę. Powiedział, że harcerską postawą jest wyjść z dobą wolą, spróbować się pogodzić i wzajemnie przebaczyć winy.'
               '<br>'
-              '<br>Gdyby drużynowy rozmawiał z zuchem, czy harcerzem, powołanie się na Prawo Zucha, czy Prawo Harcerskie by wystarczyło: skoro drużynowy, rodzice, księża i nauczyciele mówią, że jakaś wartość jest dobra - to dla zucha, czy harcerza jest dobra i cześć.'
+              '<br>Gdyby drużynowy rozmawiał z zuchem, czy harcerzem, powołanie się na Prawo Zucha, czy Prawo Harcerskie by wystarczyło: skoro drużynowy, rodzice, księża i nauczyciele mówią, że jakaś wartość jest dobra - to dla zucha, czy harcerza kończy to dyskusję.'
               '<br>'
-              '<br>Ale tutaj mowa jest o wędrowniku, który na pewnym etapie swojego życia może zadać (sobie lub komuś) pytanie:'
+              '<br>Ale tutaj mowa jest o wędrowniku, który na pewnym etapie swojego życia prawdopodobnie zada (sobie lub komuś) pytanie:'
               '<br>'
-              '<br>Dlaczego niby mam komuś wybaczyć? Ja uważam, że wybaczanie jest oznaką słabości. Jeśli ktoś mi podpadł, uważam, że należy go przykładnie i doszczętnie zgnoić - dla mnie wartością jest siła, a nie przebaczenie. Dlaczego mam wierzyć w jakieś zapiski Prawa Harcerskiego, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre?</i>'
+              '<br>Dlaczego mam komuś wybaczać? Dla mnie wybaczanie jest oznaką słabości. Jeśli ktoś mi podpadł, uważam, że należy go przykładnie i doszczętnie zgnoić - dla mnie wartością jest siła, a nie przebaczenie. Dlaczego mam wierzyć w jakieś zapiski Prawa Harcerskiego, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre?</i>'
               '<br>'
-              '<br>Każdy dorastajacy człowiek w trakcie swojego rozwoju duchowego zada kiedyś pytanie "dlaczego mam wierzyć akurat w takie a nie inne wartości? Czemu te są lepsze od tamtych?"'
+              '<br>Na pytanie o to <i>"dlaczego te wartości"</i>, albo <i>"które wartości są słuszne"</i> nie istnieje obiektywna odpowiedź. Odpowiedź ta zawsze wynika z <b>aksjomatu duchowości</b>, którą harcerz wyznaje - czyli z jego religii, filozofii, etc.. Aksjomaty są zawsze arbitralne, nie da się ich porównać, można po prostu wierzyć w ich słusznosć lub nie.'
               '<br>'
-              '<br>Na pytanie o to <i>"dlaczego te wartości"</i>, albo <i>"które wartości są lepsze"</i> nie istnieje obiektywna odpowiedź. Odpowiedź ta zawsze wynika z <b>aksjomatu duchowości</b>, którą harcerz wyznaje - czyli z jego religii, filozofii, etc.. Zawsze owe aksjomaty są arbitralne, nie da się ich porównać, można po prostu wierzyć w ich słusznosć lub nie.'
+              '<br>Dla wędrownika odpowiedź <i>"rób tak, bo tak mówi Prawo Harcerskie"</i> jest śmieszna. Wędrownik potrzebuje powiązania wartości z aksjomatem, w który wierzy.'
               '<br>'
-              '<br>Dla wędrownika odpowiedź "rób tak, bo tak mówi Prawo Harcerskie" jest śmieszna. Wędrownik potrzebuje powiązania wartości z aksjomatem, w który wierzy.'
+              '<br>Przykładowo, jeśli wędrownik wierzy, że Chrystus dobrowolnie umarł na krzyżu za każdego człowieka i zmartwychwstał, odpowiedzią na pytanie: <i>"dlaczego mam komuś wymaczać"</i> może być stwierdzenie:'
               '<br>'
-              '<br>Przykładowo, jeśli wędrownik wierzy w to, że Chrystus dobrowolnie umarł na krzyżu za każdego człowieka i powstał z martwych, odpowiedzią na pytanie: "dlaczego mam komuś wymaczać", którą uzna może być następujące stwierdzenie:'
+              '<br><i>Skoro Bóg zszedł na Ziemię i dobrowolnie zdecydwał dać się zabić za każdego, nawet najpodlejszego człowieka, żeby każdy, nawet najgorszy parszywiec miał szansę doznać zbawienia i życia w pełni szczęścia, to prawdopodobnie zarówno ja, jak i Ty, którzy sami jesteśmy tego beneficjentami, jesteśmy winni przebaczenia tym, którzy o to proszą.'
               '<br>'
-              '<br><i>Skoro Bóg zszedł na Ziemię i dobrowolnie zdecydwał dać się zabić za każdego, nawet najpodlejszego człowieka, żeby każdy, nawet ten najgorszy z ludzi miał szansę doznać zbawienia i życia w pełni szczęścia, to prawdopodobnie zarówno ja, jak i Ty, którzy sami zostaliśmy odkupieni przez Chrystusa, jesteśmy winni przebaczenia tym, którzy o nie proszą.'
+              '<br>Bo z jakiego innego powodu dorosły, wszechstronnie rozwinięty, myślący człowiek miałby kierować się jakimiś wartościami jeśli nie właśnie dlatego, że wynikają z najgłębszej prawdy o świecie, w którą wierzy?'
+              '<br>'
+              '<br><b>Jeśli harcerstwo ma być wychowawczo skuteczne, musi uwzględniać w wychowaniu pracę ze źródłami wartości!</b>'
               '</p>'
       ),
 
@@ -240,7 +242,15 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           content: '<p style="text-align:justify;">'
               'Prowadzący stawia pytanie:'
               '<br>'
-              '<br>W jaki sposób okreslić który aksjomat leży u podstaw duchowości danego harcerza?</i>'
+              '<br>Jak okreslić, który aksjomat powinien lec u podstaw wychowania danego harcerza?</i>'
+              '<br>'
+              '<br>Prowadzący powinien pozwolć uczestnikom na krótką dyskusję. Nie ma tu metody na wyklarowanie jednoznacznej odpowiedzi, ale jedyną racjalną wydaje się być następujący mechanizm:'
+              '</p>'
+              '<ul>'
+              '<li><p style="text-align:justify;">Dopóki to rodzice posyłają dziecko do harcerstwa, to oni decydują w jakiej wierze (aksjomatach) ma być wychowywany harcerz.</p></li>'
+              '<li><p style="text-align:justify;">Gdy harcerz jest dorosły i sam o sobie stanowi, to on sam decyduje o tym, w jakiej wierze (aksjomatach) będzie się dalej rozwijał.</p></li>'
+              '<li><p style="text-align:justify;">Jeśli wolą rodziców harcerza lub jego samego jest wychowanie w aksjomacie, z którego wypływają wartości niezgodne z wartościami harcerskimi, harcerstwo nie jest miejscem dla takiej osoby.</li>'
+              '</ul>'
               '</p>'
       ),
 
@@ -250,46 +260,88 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący podsumowuje dotychczasowe (oczywiste) ustalenia:'
-              '<br>'
-              '<br><i><b>Harcerstwo jest po to, żeby <b>wychować młodego człowieka w konkretnym kierunku</b> określonym w statucie ZHP.</b></i>'
-              '<br>'
-              '<br>Warto, by prowadzący dodał, że harcerstwo nie jest platformą wychowawczą, w której rodzice, czy instruktorzy wybierają sobie dowolne wartości. Jeśli rodzice chcą posłać dziecko do harcerstwa, to muszą się zgodzić na wartości harcerskie, z kolei instrukotrzy są tymi, którzy dowożą wychowanie w tychże wartościach.'
+              '</p>'
+              '<ul>'
+              '<li><p style="text-align:justify;">Harcerstwo jest po to, żeby wychować młodego człowieka w konkretnym kierunku.</p></li>'
+              '<li><p style="text-align:justify;">Kierunek harcerskiego wychowania jest ograniczony i określony w statucie ZHP.</p></li>'
+              '<li><p style="text-align:justify;">Poważne i skuteczne wychowanie musi uwzględniać pracę z aksjomatem duchowości (wiarą). Kształtu tego aksjomatu ZHP jednoznacznie nigdzie nie definiuje.</p></li>'
+              '</ul>'
+              'Warto, by prowadzący dodał, że harcerstwo nie jest platformą, w której rodzice wybierają sobie dowolne wartości i aksjomaty. Instrukotrzy również nie są od tego, by te wartości zmieniać - są tymi, którzy dowożą wychowanie w określonych statutem ramach.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Przerwa',
+          duration: Duration(minutes: 5),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Krótka przerwa.'
               '</p>'
       ),
 
       KonspektStep(
         title: 'Po co jest Przyrzeczenie Harcerskie?',
-          duration: Duration(minutes: 10),
-          activeForm: false,
-          content: '<p style="text-align:justify;">'
-            'Prowadzący zadaje uczestnikom kolejne pytanie: <i>“Po co jest Przyrzeczenie Harcerskie?”</i>.'
-            '<br>'
-            '<br>Dyskusja powinna doprowadzić do dwóch konkluzji:'
-            '</p>'
-            '<ul>'
-            '<li><p style="text-align:justify;">Po to, aby harcerz mógł dobrowolnie zadeklarować chać przynależności do harcerstwa.</p></li>'
-            '<li><p style="text-align:justify;">Po to, aby harcerz mógł zgodzić się i klarowne źródło zasad, które będą go kształtowały.</p></li>'
-            '</ul>'
-            '<p style="text-align:justify;">'
-            'Przyrzeczenie nie jest "świętą formułą", nie jest "podstawową wolnością", ani "niezbywalnym prawem harcerza". Przyrzeczenie jest <b>narzędziem wychowawczym</b> - tak jak mundur, gawęda, namiot, sprawność, czy ognisko - służy temu, aby harcerza ukształtować w konkretnym kierunku.'
-            '</p>'
+        duration: Duration(minutes: 10),
+        activeForm: false,
+        content: '<p style="text-align:justify;">'
+          'Prowadzący zadaje uczestnikom kolejne pytanie: <i>“Po co jest Przyrzeczenie Harcerskie?”</i>.'
+          '<br>'
+          '<br>Dyskusja powinna doprowadzić do dwóch konkluzji:'
+          '</p>'
+          '<ul>'
+          '<li><p style="text-align:justify;">Po to, aby harcerz mógł dobrowolnie zadeklarować chać przynależności do harcerstwa.</p></li>'
+          '<li><p style="text-align:justify;">Po to, aby harcerz mógł zgodzić się i klarowne źródło zasad, które będą go kształtowały.</p></li>'
+          '</ul>'
+          '<p style="text-align:justify;">'
+          'Przyrzeczenie nie jest "świętą formułą", nie jest "podstawową wolnością", ani "niezbywalnym prawem harcerza". Przyrzeczenie jest <b>narzędziem wychowawczym</b> - tak jak mundur, gawęda, namiot, sprawność, czy ognisko - służy temu, aby harcerza ukształtować w konkretnym kierunku.'
+          '</p>'
       ),
 
       KonspektStep(
-        title: 'Kto i kiedy wybiera treść Przyrzeczenia?',
-        duration: Duration(minutes: 10),
+        title: 'Kto wybiera treść Przyrzeczenia?',
+        duration: Duration(minutes: 5),
         activeForm: false,
         content: '<p style="text-align:justify;">'
             'Prowadzący stawia pytanie: <i>“Kto wybiera treść Przyrzeczenia, które złoży harcerz?”</i>.'
             '<br>'
-            '<br>Pierwszym rozróżnieniem, na które powinni wpaść uczestnicy jest: <i>"zależy o której metodyce mówimy"</i>.'
+            '<br>Bazując na poprzednich wnioskach, rozróżnieniem, na które powinni wpaść uczestnicy jest: <i>"zależy o której metodyce mówimy"</i>.'
             '<br>'
             '<br>W przypadku metodyki wędrowniczej, treść Przyrzeczenia wybiera sam wędrownik.'
             '<br>'
             '<br>W przypadku metodyki harcerskiej i często starszoharcerskiej, treść przyrzeczenia powinna być zgodna z tym, czy harcerz jest wychowywany w wierze. Z tego względu warto, aby harcerz podjął taką decyzję wspólnie z rodzicem.'
-            '<br>'
-            '<br>'
             '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Kiedy wybrana powinna być treść Przyrzeczenia?',
+          duration: Duration(minutes: 5),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący stawia pytanie: <i>“Kiedy powinna być wybrana treść Przyrzeczenia, które złoży harcerz?”</i>.'
+              '<br>'
+              '<br>Prowadzący może poprowadzić moderowaną dyskusję, która powinna doprowadzić do dwóch wniosków:'
+              '<ul>'
+              '<li><p style="text-align:justify;">Nigdy, ale to przenigdy harcerz nie powinien wybierać treści Przyrzeczenia stojąc przy ognisku, przy którym za 35 sekund złoży Przyrzeczenie.</p></li>'
+              '<li><p style="text-align:justify;">Wybór treści Przyrzeczenia powinien być dokonany w momencie zamykania Próby Harcerza.</p></li>'
+              '</ul>'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Jak przeprowadzić Przyrzeczenie Harcerskie?',
+          duration: Duration(minutes: 5),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący stawia pytanie: <i>“Jak przeprowadzić cały proces związany z Przyrzeczeniem Harcerskim?”</i>.'
+              '<br>'
+              '<br>Ponieważ składanie Przyrzeczenia dotyczy w ponad 90% metodyki harcerskiej, prowadzący informuje, że ta część skupi się na tylko jednym scenariuszu:'
+              '<br>'
+              '<br><i>Do drużyny przychodzi 10-latek, który właśnie rozpoczął 4-tą klasę podstawówki. Co teraz?</i>'
+              '<br>'
+              '<br>Prowadzący dzieli uczestników na dwie grupy i rozdaje im po jednym przygotowanym i pociętym załącznku “$attach_html_jak_przeprowadzic_przyrzeczenie”.'
+              '<br>'
+              '<br>Zadaniem każdej grupy jest ułożenie w odpowiedniej kolejności kawałków załącznika, tak aby powstał z niego spójny scenariusz. Jeśli grupa ma pomysły jak ów scenariusz można wzbogacić, powinna to zapisać.'
+              '</p>'
       ),
 
     ]
