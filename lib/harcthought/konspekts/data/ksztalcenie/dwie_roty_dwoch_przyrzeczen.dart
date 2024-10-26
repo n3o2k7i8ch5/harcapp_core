@@ -7,8 +7,8 @@ import '../common_attachments.dart';
 const konspekt_name_dwie_roty_dwoch_przyrzeczen = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
 
 const String attach_html_prawo_harcerskie = '<a href="$attach_name_prawo_harcerskie@attachment">$attach_title_prawo_harcerskie</a>';
-const String attach_name_prawo_harcerskie = 'o_strukturze_i_ksztaltowaniu_duchowosci';
-const String attach_title_prawo_harcerskie = 'O strukturze i ksztaltowaniu duchowosci';
+const String attach_name_prawo_harcerskie = 'prawo_harcerskie';
+const String attach_title_prawo_harcerskie = 'Prawo Harcerskie';
 const KonspektAttachment attach_prawo_harcerskie = KonspektAttachment(
   name: attach_name_prawo_harcerskie,
   title: attach_title_prawo_harcerskie,
@@ -19,14 +19,26 @@ const KonspektAttachment attach_prawo_harcerskie = KonspektAttachment(
 );
 
 const String attach_html_przyrzeczenie_harcerskie = '<a href="$attach_name_przyrzeczenie_harcerskie@attachment">$attach_title_przyrzeczenie_harcerskie</a>';
-const String attach_name_przyrzeczenie_harcerskie = 'o_strukturze_i_ksztaltowaniu_duchowosci';
-const String attach_title_przyrzeczenie_harcerskie = 'O strukturze i ksztaltowaniu duchowosci';
+const String attach_name_przyrzeczenie_harcerskie = 'przyrzeczenie_harcerskie';
+const String attach_title_przyrzeczenie_harcerskie = 'Przyrzeczenie Harcerskie';
 const KonspektAttachment attach_przyrzeczenie_harcerskie = KonspektAttachment(
   name: attach_name_przyrzeczenie_harcerskie,
   title: attach_title_przyrzeczenie_harcerskie,
   assets: {
     KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_przyrzeczenie_harcerskie.pdf',
     KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_przyrzeczenie_harcerskie.docx',
+  },
+);
+
+const String attach_html_jak_przeprowadzic_przyrzeczenie = '<a href="$attach_name_jak_przeprowadzic_przyrzeczenie@attachment">$attach_title_przyrzeczenie_harcerskie</a>';
+const String attach_name_jak_przeprowadzic_przyrzeczenie = 'jak_przeprowadzic_przyrzeczenie';
+const String attach_title_jak_przeprowadzic_przyrzeczenie = 'Jak przeprowadzić Przyrzeczenie';
+const KonspektAttachment attach_jak_przeprowadzic_przyrzeczenie = KonspektAttachment(
+  name: attach_name_jak_przeprowadzic_przyrzeczenie,
+  title: attach_title_jak_przeprowadzic_przyrzeczenie,
+  assets: {
+    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_jak_przeprowadzic_przyrzeczenie.pdf',
+    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_jak_przeprowadzic_przyrzeczenie.docx',
   },
 );
 
@@ -329,7 +341,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
 
       KonspektStep(
           title: 'Jak przeprowadzić Przyrzeczenie Harcerskie?',
-          duration: Duration(minutes: 5),
+          duration: Duration(minutes: 10),
           activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący stawia pytanie: <i>“Jak przeprowadzić cały proces związany z Przyrzeczeniem Harcerskim?”</i>.'
