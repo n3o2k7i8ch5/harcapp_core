@@ -37,8 +37,20 @@ const KonspektAttachment attach_jak_przeprowadzic_przyrzeczenie = KonspektAttach
   name: attach_name_jak_przeprowadzic_przyrzeczenie,
   title: attach_title_jak_przeprowadzic_przyrzeczenie,
   assets: {
-    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_jak_przeprowadzic_przyrzeczenie.pdf',
-    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_jak_przeprowadzic_przyrzeczenie.docx',
+    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_scenariusze.pdf',
+    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_scenariusze.docx',
+  },
+);
+
+const String attach_html_scenariusze = '<a href="$attach_name_scenariusze@attachment">$attach_title_scenariusze</a>';
+const String attach_name_scenariusze = 'scenariusze';
+const String attach_title_scenariusze = 'Jak przeprowadzić Przyrzeczenie';
+const KonspektAttachment attach_scenariusze = KonspektAttachment(
+  name: attach_name_scenariusze,
+  title: attach_title_scenariusze,
+  assets: {
+    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_scenariusze.pdf',
+    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_scenariusze.docx',
   },
 );
 
@@ -66,6 +78,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
       attach_prawo_harcerskie,
       attach_przyrzeczenie_harcerskie,
       attach_jak_przeprowadzic_przyrzeczenie,
+      attach_scenariusze,
     ],
     materials: [
       KonspektMaterial(
@@ -98,6 +111,12 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           amount: 2,
           additionalPreparation: 'Kartki pociąć wzdłuż przerywanych linii i potasować w ramach każdego zestawu.'
       ),
+
+      KonspektMaterial(
+        name: 'Wydrukowany załącznik “$attach_title_scenariusze”',
+        attachmentName: attach_name_scenariusze,
+      )
+
     ],
     steps: [
 
@@ -228,11 +247,11 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           content: '<p style="text-align:justify;">'
               'Prowadzący zaczyna od stwierdzenia:'
               '<br>'
-              '<br><i>Wychowanie na poziomie zucha czy harcerza może się ograniczyć do zachowań, postaw i wartości. Ale wychowanie HSa, czy wędrownika musi pójść dalej - musi włączyć do pracy wychowawczej <b>źródło wartości</b></i>.'
+              '<br>ZHP wybrało sobie konstrukcję wychowawczą, wedle której nie określa jednoznacznie źródeł wartości, tylko określa jakie wartości z owych źródeł mają wynikać. I teoretycznie to rozwiązanie powinno się sprawdzać - ale niestety sprawdza się tylko do czasu, aż wychowankowie wskoczą na poziom późnych HSów, tudzież wędrowników.'
               '<br>'
               '<br>Prowadzący obrazuje to na przykładzie następującej sytuacji:'
               '<br>'
-              '<br><i>Na obozie jeden z wędrowników zaszedł drugiemu za skórę, za co ten drugi zaczął go notorycznie prześladować. Trwało to już kilka miesięcy. Drużynowy wziął go na rozmowę. Powiedział, że harcerską postawą jest wyjść z dobą wolą, spróbować się pogodzić i wzajemnie przebaczyć winy.'
+              '<br><i>Wobraźcie sobie następującą sytuację: na obozie jeden z wędrowników zaszedł drugiemu za skórę, za co ten drugi zaczął go notorycznie prześladować. Trwało to już kilka miesięcy. Drużynowy wziął go na rozmowę. Powiedział, że harcerską postawą jest wyjść z dobą wolą, spróbować się pogodzić i wzajemnie przebaczyć winy.'
               '<br>'
               '<br>Gdyby drużynowy rozmawiał z zuchem, czy harcerzem, powołanie się na Prawo Zucha, czy Prawo Harcerskie by wystarczyło: skoro drużynowy, rodzice, księża i nauczyciele mówią, że jakaś wartość jest dobra - to dla zucha, czy harcerza kończy to dyskusję.'
               '<br>'
@@ -244,13 +263,15 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>'
               '<br>Dla wędrownika odpowiedź <i>"rób tak, bo tak mówi Prawo Harcerskie"</i> jest śmieszna. Wędrownik potrzebuje powiązania wartości z aksjomatem, w który wierzy.'
               '<br>'
-              '<br>Przykładowo, jeśli wędrownik wierzy, że Chrystus dobrowolnie umarł na krzyżu za każdego człowieka i zmartwychwstał, odpowiedzią na pytanie: <i>"dlaczego mam komuś wymaczać"</i> może być stwierdzenie:'
+              '<br>Przykładowo, jeśli wędrownik wierzy w śmierć i zmartwychwstanie Chrystusa, odpowiedzią na pytanie: <i>"dlaczego mam komuś wymaczać"</i> może być stwierdzenie:'
               '<br>'
-              '<br><i>Skoro Bóg zszedł na Ziemię i dobrowolnie zdecydwał dać się zabić za każdego, nawet najpodlejszego człowieka, żeby każdy, nawet najgorszy parszywiec miał szansę doznać zbawienia i życia w pełni szczęścia, to prawdopodobnie zarówno ja, jak i Ty, którzy sami jesteśmy tego beneficjentami, jesteśmy winni przebaczenia tym, którzy o to proszą.'
+              '<br><i>Skoro Bóg zszedł na Ziemię i dobrowolnie zdecydwał dać się zabić za każdego, nawet najpodlejszego człowieka, żeby każdy, nawet najgorszy parszywiec miał szansę doznać zbawienia i życia w pełni szczęścia, to prawdopodobnie zarówno ja, jak i Ty, którzy sami jesteśmy tego beneficjentami, jesteśmy winni przebaczenia tym, którzy o to proszą</i>.'
               '<br>'
               '<br>Bo z jakiego innego powodu dorosły, wszechstronnie rozwinięty, myślący człowiek miałby kierować się jakimiś wartościami jeśli nie właśnie dlatego, że wynikają z najgłębszej prawdy o świecie, w którą wierzy?'
               '<br>'
               '<br><b>Jeśli harcerstwo ma być wychowawczo skuteczne, musi uwzględniać w wychowaniu pracę ze źródłami wartości!</b>'
+              '<br>'
+              '<br>Jeżeli tego zaniecha, to owszem, do etapu zuchów i harcerzy nie będzie widać większych problemów, ale już HSi i wędrownicy nie będą mieli powodu traktować poważnie swojego wychowania tylko dlatego, że <i>"bo tak druh powiedział"</i>, albo <i>bo wszyscy tak robią</i>. Z kolei praca nad zinternalizowaniem źródeł wartości, askjomatow, filozofii i religii nie zaczyna się gdy ktoś ma lat 15, bo wtedy każdy jest święcie przekonany, że jest najmądrzejszy na świecie. Praca nad budowaniem fundamentów pod źródła wartości musi się zacząć od zucha. Chyba, że drużynowy, który wychowuje tego zucha, czy harcerza, zamiast jego źródła wartości ma do dyspozycji "nic".'
               '</p>'
       ),
 
@@ -377,7 +398,9 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           duration: Duration(minutes: 40),
           activeForm: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący przedstawia uczestnikom kilka scenariuszy związanych z problematyką dwóch możliwych do wyboru rot Przyrzeczenia.'
+              'Prowadzący po kolei przedstawia uczestnikom kilka scenariuszy z wydrukowanego załącznika $attach_html_scenariusze związanych z problematyką dwóch możliwych do wyboru rot Przyrzeczenia.'
+              '<br>'
+              '<br>Aby wprowadzić pewną dynamikę, warto, aby to uczestnicy czytali scenariusze.'
               '</p>'
               '<ol>'
 
@@ -394,7 +417,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>'
               '<br>Jeżeli wędrownikowi zależy na tym, aby móc złożyć Przyrzeczenie w nowej formule, dobrze, aby drużynowy to zorganizował. Można to przykładowo połączyć z inną ważną ceremonią, np. nadania naramiennika wędrowniczego.'
               '<br>'
-              '<br><b>Pytanie dodatkowe:</b>'
+              '<br><b>Pytanie dodatkowe 1.1:</b>'
               '<br><i>A czy nie jest tak, że nie ma po co powtarzać Przyrzeczenia, bo jest to tak, jakby ktoś złożył je w języku angielskim, a potem zdecydował się mieszkać w Polsce i z tego powodu chciał je złożyć ponownie w innym języku?</i>'
               '<br>'
               '<br><b>Rozwiązanie:</b>'
@@ -439,16 +462,14 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>'
               '<br>Uczenie harcerzy, że mogą zmieniać sens tego, do czego się zadeklarowali tylko dlatego, że innym się to nie podoba jest <b>skrajnie demoralizujące</b>.'
               '<br>'
-              '<br><b>Pytanie dodatkowe:</b>'
-              '<br>'
+              '<br><u>Pytanie dodatkowe 1.1:</u>'
               '<br>Po tej sytuacji przy kolacji wybucha dyskusja o tym, czy Zosia może mówić innym jak mają się zachowywać. Przecież Przyrzeczenie jest prywatną sprawą każdego harcerza. Czy tak jest w istocie?'
               '<br>'
-              '<br><b>Rozwiązanie:</b>'
+              '<br><u>Rozwiązanie:</u>'
               '<br>'
               '<br>Gdyby Przyrzeczenie było prywatną sprawą każdego harcerza, to powinien je sobie wyszeptać sam w zamkniętym pokoju. Przyrzeczenie jest, owszem, <b>kwestą <u>indywidualną</u> każdego harcerza, ale jest kwestią <u>publiczną</u></b> - jest składane w obecności drużyny i dotyczy drużyny oraz wspólnoty harcerskiej.'
               '<br>'
-              '<br><b>Pytanie dodatkowe:</b>'
-              '<br>'
+              '<br><b>Pytanie dodatkowe 1.2:</b>'
               '<br>Czy skoro Zosia złożyła Przyrzeczenie "ze staniem na straży harcerskich zasad", to czy oznacza to, że powinna chodzić po szkole i pilnować, żeby każdy kogo spotka zachowywał harcerskie zasady?'
               '<br>'
               '<br><b>Rozwiązanie:</b>'
@@ -476,7 +497,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
 
               '<li>'
               '<p style="text-align:justify;">'
-              '<b>Scenariusz 3:</b>'
+              '<b>Scenariusz 4:</b>'
               '<br><i>W jednej z Warszawskich drużyn wszystkie nowe osoby chcą złożyć przyżeczenie "bez Boga" poza jednym harcerzem. Po miesiącu ów harcerz zaczął mówić, że i on woli wersję "bez Boga", choć wcześniej twierdził inaczej - drużynowy łatwo wybadał, że po prostu uległ presji większości grupy (zadziałała wzajemność oddziaływań).'
               '<br>'
               '<br>Jak powinien zadziałać drużynowy?</i>'
@@ -489,8 +510,8 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
 
               '<li>'
               '<p style="text-align:justify;">'
-              '<b>Zagwozdka:</b>'
-              '<br><i>Czy nie jest tak, że pozwalanie na to, aby harcerz najpierw złożył jedno Przyrzeczenie, a potem po czasie doszedł do wniosku, że woli drugie, jest uczeniem tego, że można dać komuś słowo, coś przyrzec, lub wziąć z kimś ślub, a potem się wykręcić tekstem <i>"no ale teraz jestem innym człowiekiem, zmiłem zdanie?"</i>'
+              '<b>Scenariusz 5:</b>'
+              '<br><i>Harcerz najpierw złożył Przyrzeczenie o jednym brzmieniu, a potem po latach doszedł do wniosku, że woli drugie. Czy pozwalanie na to, aby harcerz zmienił Przyrzeczenie, nie jest uczeniem tego, że można dać komuś słowo, coś przyrzec, lub wziąć z kimś ślub, a potem się wykręcić tekstem <i>"no ale teraz jestem innym człowiekiem, zmiłem zdanie, sory!"?</i>'
               '<br>'
               '<br><b>Rozwiązanie:</b>'
               '<br>'
