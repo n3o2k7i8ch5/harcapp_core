@@ -30,7 +30,7 @@ const KonspektAttachment attach_przyrzeczenie_harcerskie = KonspektAttachment(
   },
 );
 
-const String attach_html_jak_przeprowadzic_przyrzeczenie = '<a href="$attach_name_jak_przeprowadzic_przyrzeczenie@attachment">$attach_title_przyrzeczenie_harcerskie</a>';
+const String attach_html_jak_przeprowadzic_przyrzeczenie = '<a href="$attach_name_jak_przeprowadzic_przyrzeczenie@attachment">$attach_title_jak_przeprowadzic_przyrzeczenie</a>';
 const String attach_name_jak_przeprowadzic_przyrzeczenie = 'jak_przeprowadzic_przyrzeczenie';
 const String attach_title_jak_przeprowadzic_przyrzeczenie = 'Jak przeprowadzić Przyrzeczenie';
 const KonspektAttachment attach_jak_przeprowadzic_przyrzeczenie = KonspektAttachment(

@@ -141,7 +141,14 @@ class KonspektMaterialTile extends StatelessWidget{
                           child: Column(
                             children: [
 
-                              AppBarX(title: 'Przygotowanie materiału'),
+                              AppBarX(
+                                title: 'Przygotowanie materiału',
+                                iconTheme: IconThemeData(color: iconEnab_(context)),
+                                titleTextStyle: AppTextStyle(
+                                    color: iconEnab_(context),
+                                    fontSize: Dimen.textSizeAppBar
+                                ),
+                              ),
 
                               Expanded(
                                 child: SingleChildScrollView(
