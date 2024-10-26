@@ -103,7 +103,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
 
       KonspektStep(
           title: 'Wstęp',
-          duration: Duration(minutes: 5),
+          duration: Duration(minutes: 1),
           activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący rozpoczyna krótkim wyjaśnieniem tego, co będzie na tych warsztatach:'
@@ -341,7 +341,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>Prowadzący może poprowadzić moderowaną dyskusję, która powinna doprowadzić do dwóch wniosków:'
               '<ul>'
               '<li><p style="text-align:justify;">Nigdy, ale to przenigdy harcerz nie powinien wybierać treści Przyrzeczenia stojąc przy ognisku, przy którym za 35 sekund złoży Przyrzeczenie.</p></li>'
-              '<li><p style="text-align:justify;">Wybór treści Przyrzeczenia powinien być dokonany w momencie zamykania Próby Harcerza.</p></li>'
+              '<li><p style="text-align:justify;">Wybór treści Przyrzeczenia powinien być dokonany najpóźniej w momencie zamykania Próby Harcerza.</p></li>'
               '</ul>'
               '</p>'
       ),
@@ -366,7 +366,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
       KonspektStep(
           title: 'Omówienie',
           duration: Duration(minutes: 10),
-          activeForm: true,
+          activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący omawia z grupami wyniki ich pracy oraz ich ewentualne pomysły na wzbogacenie procesu przeprowadzenia Przyrzeczenia.'
               '</p>'
@@ -374,8 +374,8 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
 
       KonspektStep(
           title: 'Scenariusze',
-          duration: Duration(minutes: 10),
-          activeForm: true,
+          duration: Duration(minutes: 40),
+          activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący przedstawia uczestnikom kilka scenariuszy związanych z problematyką dwóch możliwych do wyboru rot Przyrzeczenia.'
               '</p>'
@@ -393,6 +393,13 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>Ceremoniały w procesie wychowawczym mają znaczenie - z tego powodu obrzędowi złożenia Obietnicy Zucha, Przyrzeczenia Harcerskiego, nadania barw drużyny, czy złożenia zobowiązania instruktorskiego towarzyszy odpowiednia podniosłość.'
               '<br>'
               '<br>Jeżeli wędrownikowi zależy na tym, aby móc złożyć Przyrzeczenie w nowej formule, dobrze, aby drużynowy to zorganizował. Można to przykładowo połączyć z inną ważną ceremonią, np. nadania naramiennika wędrowniczego.'
+              '<br>'
+              '<br><b>Pytanie dodatkowe:</b>'
+              '<br><i>A czy nie jest tak, że nie ma po co powtarzać Przyrzeczenia, bo jest to tak, jakby ktoś złożył je w języku angielskim, a potem zdecydował się mieszkać w Polsce i z tego powodu chciał je złożyć ponownie w innym języku?</i>'
+              '<br>'
+              '<br><b>Rozwiązanie:</b>'
+              '<br>'
+              '<br>Nie. Zmiana języka jest jedynie zmianą formy wygłodzenia tej samej treści. W przypadku alternatywnych Przyrzeczeń mamy do czynienia z dwoma różnymi treściami, które istotnie się różnią. Jeśli harcerz zmienia swoje przekonania, zmiana Przyrzeczenia jest uzasadniona.'
               '</p>'
               '</li>'
 
@@ -431,13 +438,29 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               'Najgorsze, co może zrobić w tej sytuacji drużynowy, to zrelatywizować Przyrzeczenie Harcerskie tekstem w stylu <i>"tak naprawdę stania na straży nie można rozumieć tak dosłownie"</i>, czy </i>"chodzi o to, żebyś pilnowała tylko samą siebie"</i>. Jeśli w Przyrzeczeniu miało chodzić o coś innego, to powinno się to tam było znaleźć.'
               '<br>'
               '<br>Uczenie harcerzy, że mogą zmieniać sens tego, do czego się zadeklarowali tylko dlatego, że innym się to nie podoba jest <b>skrajnie demoralizujące</b>.'
+              '<br>'
+              '<br><b>Pytanie dodatkowe:</b>'
+              '<br>'
+              '<br>Po tej sytuacji przy kolacji wybucha dyskusja o tym, czy Zosia może mówić innym jak mają się zachowywać. Przecież Przyrzeczenie jest prywatną sprawą każdego harcerza. Czy tak jest w istocie?'
+              '<br>'
+              '<br><b>Rozwiązanie:</b>'
+              '<br>'
+              '<br>Gdyby Przyrzeczenie było prywatną sprawą każdego harcerza, to powinien je sobie wyszeptać sam w zamkniętym pokoju. Przyrzeczenie jest, owszem, <b>kwestą <u>indywidualną</u> każdego harcerza, ale jest kwestią <u>publiczną</u></b> - jest składane w obecności drużyny i dotyczy drużyny oraz wspólnoty harcerskiej.'
+              '<br>'
+              '<br><b>Pytanie dodatkowe:</b>'
+              '<br>'
+              '<br>Czy skoro Zosia złożyła Przyrzeczenie "ze staniem na straży harcerskich zasad", to czy oznacza to, że powinna chodzić po szkole i pilnować, żeby każdy kogo spotka zachowywał harcerskie zasady?'
+              '<br>'
+              '<br><b>Rozwiązanie:</b>'
+              '<br>'
+              '<br>Jeśli będzie umiała to robić skutecznie - czemu nie. W praktyce jednak jej nieharcerscy znajomi nigdy nie deklarowali, że będą przestrzegali harcerskich zasad - dlatego w zupełności wystarczy, jeśli będzie stała na ich straży w drużynie.'
               '</p>'
               '</li>'
 
               '<li>'
               '<p style="text-align:justify;">'
               '<b>Scenariusz 3:</b>'
-              '<br><i>Rodzice harcerza chcą, aby złożył on Przyrzeczenie "z Bogiem", lecz sam harcerz się uparł i chce złożyć przyżeczenie "bez Boga".'
+              '<br><i>Rodzice 11-letniego harcerza chcą, aby złożył on Przyrzeczenie "z Bogiem", lecz sam harcerz się uparł i chce złożyć przyżeczenie "bez Boga".'
               '<br>'
               '<br>Jak powinien zadziałać drużynowy?</i>'
               '<br>'
@@ -460,7 +483,18 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>'
               '<br><b>Rozwiązanie:</b>'
               '<br>'
-              '<br>Wybór roty Przyrzeczenia powinien odbyć się we współpracy rodziców i harcerza właśnie po to, żeby to oni, a nie grupa, miała największy wpływ na decyzję. Uleganie presji jest normalnym zjawiskiem, często korzystym wychowawczo - jednak w niektórych przypadkach rolą drużynowego jak tak moderować dynamikę relacji w drużynie, aby harcerz nauczył się jej nie podlegać.'
+              '<br>Wybór roty Przyrzeczenia powinien odbyć się we współpracy rodziców i harcerza właśnie po to, żeby to oni, a nie grupa, miała największy wpływ na decyzję. Uleganie presji jest normalnym zjawiskiem, często korzystym wychowawczo - jednak w niektórych przypadkach rolą drużynowego jest tak moderować dynamikę relacji w drużynie, aby harcerz nauczył się jej nie podlegać.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>Zagwozdka:</b>'
+              '<br><i>Czy nie jest tak, że pozwalanie na to, aby harcerz najpierw złożył jedno Przyrzeczenie, a potem po czasie doszedł do wniosku, że woli drugie, jest uczeniem tego, że można dać komuś słowo, coś przyrzec, lub wziąć z kimś ślub, a potem się wykręcić tekstem <i>"no ale teraz jestem innym człowiekiem, zmiłem zdanie?"</i>'
+              '<br>'
+              '<br><b>Rozwiązanie:</b>'
+              '<br>'
+              '<br>Nie. Nazywanie Przyrzeczenia Harcerskiego "Przyrzeczeniem" jest w istocie semantycznym błędem - zawsze zaczyna się ono bowiem nie od "przyrzekam", ale od "mam szczerą wolę". W istocie jest to zatem raczej Deklaracja Harcerska niż Przyrzeczenie Harcerskie - nie jest daniem słowa, a jedynie wyrażeniem woli.'
               '</p>'
               '</li>'
 
