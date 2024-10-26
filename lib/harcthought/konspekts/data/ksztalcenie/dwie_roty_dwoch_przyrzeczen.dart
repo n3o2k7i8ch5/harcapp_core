@@ -44,7 +44,7 @@ const KonspektAttachment attach_jak_przeprowadzic_przyrzeczenie = KonspektAttach
 
 const String attach_html_scenariusze = '<a href="$attach_name_scenariusze@attachment">$attach_title_scenariusze</a>';
 const String attach_name_scenariusze = 'scenariusze';
-const String attach_title_scenariusze = 'Jak przeprowadzić Przyrzeczenie';
+const String attach_title_scenariusze = 'Scenariusze';
 const KonspektAttachment attach_scenariusze = KonspektAttachment(
   name: attach_name_scenariusze,
   title: attach_title_scenariusze,
