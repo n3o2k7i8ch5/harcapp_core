@@ -37,8 +37,8 @@ const KonspektAttachment attach_jak_przeprowadzic_przyrzeczenie = KonspektAttach
   name: attach_name_jak_przeprowadzic_przyrzeczenie,
   title: attach_title_jak_przeprowadzic_przyrzeczenie,
   assets: {
-    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_scenariusze.pdf',
-    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_scenariusze.docx',
+    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_jak_przeprowadzic_przyrzeczenie.pdf',
+    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_jak_przeprowadzic_przyrzeczenie.docx',
   },
 );
 
