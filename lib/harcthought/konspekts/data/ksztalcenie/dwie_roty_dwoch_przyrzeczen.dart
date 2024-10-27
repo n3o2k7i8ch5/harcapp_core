@@ -133,7 +133,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
 
       KonspektStep(
           title: 'Po co jest harcerstwo?',
-          duration: Duration(minutes: 5),
+          duration: Duration(minutes: 3),
           activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący rozpoczyna od pytania w zasadzie retorycznego: <i>“Po co jest harcerstwo?”</i>.'
@@ -242,7 +242,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
 
       KonspektStep(
           title: 'Konieczność pracy z aksjomatem',
-          duration: Duration(minutes: 10),
+          duration: Duration(minutes: 15),
           activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący zaczyna od stwierdzenia:'
@@ -258,6 +258,8 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>"Ale dlaczego mam komuś wybaczać? Dla mnie wybaczanie jest oznaką słabości. Jeśli ktoś mi podpadł, uważam, że należy go przykładnie i doszczętnie zgnoić - dla mnie wartością jest siła, a nie przebaczenie. Dlaczego mam wierzyć w jakieś zapiski Prawa Harcerskiego, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre?".</i>'
               '<br>'
               '<br>Prowadzący powinien pozwolić tutaj na to, aby <b>uczestnicy zaproponowali, jak owego wędrownika przekonać</b>.'
+              '<br>'
+              '<br>W toku dyskusji, prowadzący powinien przywołać następującą odpowiedź:'
               '<br>'
               '<br>Na pytanie o to <i>"dlaczego te wartości"</i>, albo <i>"które wartości są słuszne"</i> nie istnieje obiektywna odpowiedź. Odpowiedź ta zawsze wynika z <b>aksjomatu duchowości</b>, którą harcerz wyznaje - czyli z jego religii, filozofii, etc.. Aksjomaty są zawsze arbitralne, nie da się ich porównać, można po prostu wierzyć w ich słuszność lub nie.'
               '<br>'
@@ -420,11 +422,11 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>Jeżeli wędrownikowi zależy na tym, aby móc złożyć Przyrzeczenie w nowej formule, dobrze, aby drużynowy to zorganizował. Można to przykładowo połączyć z inną ważną ceremonią, np. nadania naramiennika wędrowniczego.'
               '<br>'
               '<br><u>Pytanie dodatkowe 1.1:</u>'
-              '<br><i>A czy nie jest tak, że nie ma po co powtarzać Przyrzeczenia, bo jest to tak, jakby ktoś złożył je w języku angielskim, a potem zdecydował się mieszkać w Polsce i z tego powodu chciał je złożyć ponownie w innym języku?</i>'
+              '<br><i>A może nie ma co powtarzać Przyrzeczenia, bo to tak, jakby ktoś złożył je w języku angielskim, a potem przeprowadził do Polski i z tego powodu chciał je złożyć w innym języku?</i>'
               '<br>'
               '<br><u>Rozwiązanie:</u>'
               '<br>'
-              '<br>Nie. Zmiana języka jest jedynie zmianą formy wygłodzenia tej samej treści. W przypadku alternatywnych Przyrzeczeń mamy do czynienia z dwoma różnymi treściami, które istotnie się różnią. Jeśli harcerz zmienia swoje przekonania, zmiana Przyrzeczenia jest uzasadniona.'
+              '<br>Nie. Zmiana języka jest jedynie zmianą formy wygłoszenia tej samej treści. W przypadku alternatywnych Przyrzeczeń mamy do czynienia z dwoma różnymi treściami, które istotnie się różnią. Jeśli harcerz zmienia swoje przekonania, zmiana Przyrzeczenia jest uzasadniona.'
               '</p>'
               '</li>'
 
@@ -567,7 +569,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
 
               '<li>'
               '<p style="text-align:justify;">'
-              'Przyrzeczenie nie jest prywatną sprawą harcerza. Jest sprawą indywidualną, ale dotyczy całej wspólnoty.'
+              'Przyrzeczenie <b>nie jest prywatną sprawą harcerza</b>. Jest sprawą indywidualną, ale dotyczy całej wspólnoty.'
               '</p>'
               '</li>'
 
