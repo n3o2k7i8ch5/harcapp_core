@@ -247,21 +247,21 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           content: '<p style="text-align:justify;">'
               'Prowadzący zaczyna od stwierdzenia:'
               '<br>'
-              '<br>ZHP wybrało sobie konstrukcję wychowawczą, wedle której nie określa jednoznacznie źródeł wartości, tylko określa jakie wartości z owych źródeł mają wynikać. I teoretycznie to rozwiązanie powinno się sprawdzać - ale niestety sprawdza się tylko do czasu, aż wychowankowie wskoczą na poziom późnych HSów, tudzież wędrowników.'
+              '<br><i>ZHP wybrało sobie konstrukcję wychowawczą, wedle której nie określa jednoznacznie źródeł wartości, tylko określa jakie wartości z owych źródeł mają wynikać. I teoretycznie to rozwiązanie powinno się sprawdzać - ale niestety sprawdza się tylko do czasu, aż wychowankowie wskoczą na poziom późnych HSów, tudzież wędrowników.</i>'
               '<br>'
               '<br>Prowadzący obrazuje to na przykładzie następującej sytuacji:'
               '<br>'
               '<br><i>Wyobraźcie sobie następującą sytuację: na obozie jeden z wędrowników zaszedł drugiemu za skórę, za co ten drugi zaczął go notorycznie prześladować. Trwało to już kilka miesięcy. Drużynowy wziął go na rozmowę. Powiedział, że harcerską postawą jest wyjść z dobrą wolą, spróbować się pogodzić i wzajemnie przebaczyć winy.'
               '<br>'
-              '<br>Gdyby drużynowy rozmawiał z zuchem, czy harcerzem, powołanie się na Prawo Zucha, czy Prawo Harcerskie by wystarczyło: skoro drużynowy, rodzice, księża i nauczyciele mówią, że jakaś wartość jest dobra - to dla zucha, czy harcerza kończy to dyskusję.'
+              '<br>Ale wędrownik stwierdza:'
               '<br>'
-              '<br>Ale tutaj mowa jest o wędrowniku, który na pewnym etapie swojego życia prawdopodobnie zada (sobie lub komuś) pytanie:'
+              '<br>"Ale dlaczego mam komuś wybaczać? Dla mnie wybaczanie jest oznaką słabości. Jeśli ktoś mi podpadł, uważam, że należy go przykładnie i doszczętnie zgnoić - dla mnie wartością jest siła, a nie przebaczenie. Dlaczego mam wierzyć w jakieś zapiski Prawa Harcerskiego, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre?".</i>'
               '<br>'
-              '<br>Dlaczego mam komuś wybaczać? Dla mnie wybaczanie jest oznaką słabości. Jeśli ktoś mi podpadł, uważam, że należy go przykładnie i doszczętnie zgnoić - dla mnie wartością jest siła, a nie przebaczenie. Dlaczego mam wierzyć w jakieś zapiski Prawa Harcerskiego, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre?</i>'
+              '<br>Prowadzący powinien pozwolić tutaj na to, aby <b>uczestnicy zaproponowali, jak owego wędrownika przekonać</b>.'
               '<br>'
               '<br>Na pytanie o to <i>"dlaczego te wartości"</i>, albo <i>"które wartości są słuszne"</i> nie istnieje obiektywna odpowiedź. Odpowiedź ta zawsze wynika z <b>aksjomatu duchowości</b>, którą harcerz wyznaje - czyli z jego religii, filozofii, etc.. Aksjomaty są zawsze arbitralne, nie da się ich porównać, można po prostu wierzyć w ich słuszność lub nie.'
               '<br>'
-              '<br>Dla wędrownika odpowiedź <i>"rób tak, bo tak mówi Prawo Harcerskie"</i> jest śmieszna. Wędrownik potrzebuje powiązania wartości z aksjomatem, w który wierzy.'
+              '<br>Dla wędrownika odpowiedź <i>"bo tak mówi Prawo Harcerskie"</i> lub <i>"bo inni tak robią"</i> jest śmieszna. Owszem, zuchom i harcerzom wystarczy sam fakt, że "drużynowy tak powiedział". Wędrownik potrzebuje powiązania wartości z aksjomatem, w który wierzy.'
               '<br>'
               '<br>Przykładowo, jeśli wędrownik wierzy w śmierć i zmartwychwstanie Chrystusa, odpowiedzią na pytanie: <i>"dlaczego mam komuś wybaczać"</i> może być stwierdzenie:'
               '<br>'
@@ -271,7 +271,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>'
               '<br><b>Jeśli harcerstwo ma być wychowawczo skuteczne, musi uwzględniać w wychowaniu pracę ze źródłami wartości!</b>'
               '<br>'
-              '<br>Jeżeli tego zaniecha, to owszem, do etapu zuchów i harcerzy nie będzie widać większych problemów, ale już HSi i wędrownicy nie będą mieli powodu traktować poważnie swojego wychowania tylko dlatego, że <i>"bo tak druh powiedział"</i>, albo <i>bo wszyscy tak robią</i>. Z kolei praca nad zinternalizowaniem źródeł wartości, askjomatow, filozofii i religii nie zaczyna się gdy ktoś ma lat 15, bo wtedy każdy jest święcie przekonany, że jest najmądrzejszy na świecie. Praca nad budowaniem fundamentów pod źródła wartości musi się zacząć od zucha. Chyba, że drużynowy, który wychowuje tego zucha, czy harcerza, zamiast jego źródła wartości ma do dyspozycji "nic".'
+              '<br>Jeżeli harcerstwo tego zaniecha, to owszem, do etapu zuchów i harcerzy nie będzie widać większych problemów, ale już HSi i wędrownicy nie traktowali poważnie wartości, które "są, bo tak". Z kolei praca nad zinternalizowaniem źródeł wartości, aksjomatow, filozofii i religii nie zaczyna się gdy ktoś ma lat 15, bo wtedy każdy jest święcie przekonany, że jest najmądrzejszy na świecie. Praca nad budowaniem fundamentów pod źródła wartości musi się zacząć od zucha.'
               '</p>'
       ),
 
@@ -282,7 +282,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           content: '<p style="text-align:justify;">'
               'Prowadzący stawia pytanie:'
               '<br>'
-              '<br>Jak określić, który aksjomat powinien lec u podstaw wychowania danego harcerza?</i>'
+              '<br><i>Przychodzi do nas do drużyny nowy harcerz. Jak określić, który aksjomat powinien lec u podstaw jego wychowania, aby w przyszłości potrafił sam z niego czerpać?</i>'
               '<br>'
               '<br>Prowadzący powinien pozwolić uczestnikom na krótką dyskusję. Nie ma tu metody na wyklarowanie jednoznacznej odpowiedzi, ale jedyną racjonalną wydaje się być następujący mechanizm:'
               '</p>'
@@ -303,7 +303,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '</p>'
               '<ul>'
               '<li><p style="text-align:justify;">Harcerstwo jest po to, żeby wychować młodego człowieka w konkretnym kierunku.</p></li>'
-              '<li><p style="text-align:justify;">Kierunek harcerskiego wychowania jest ograniczony i określony w statucie ZHP.</p></li>'
+              '<li><p style="text-align:justify;">Harcerstwo wychowuje do określonych wartości, które są opisane w statucie ZHP.</p></li>'
               '<li><p style="text-align:justify;">Poważne i skuteczne wychowanie musi uwzględniać pracę z aksjomatem duchowości (wiarą). Kształtu tego aksjomatu ZHP jednoznacznie nigdzie nie definiuje.</p></li>'
               '</ul>'
               'Warto, by prowadzący dodał, że harcerstwo nie jest platformą, w której rodzice wybierają sobie dowolne wartości i aksjomaty. Instruktorzy również nie są od tego, by te wartości zmieniać - są tymi, którzy dowożą wychowanie w określonych statutem ramach.'
@@ -524,5 +524,55 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '</ol>'
       ),
 
-    ]
+      KonspektStep(
+          title: 'Podsumowanie i wnioski',
+          duration: Duration(minutes: 5),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący krótko podsumowuje wnioski:'
+              '</p>'
+              '<ul>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Przyrzeczenie Harcerskie w istocie nie jest przyrzeczeniem, tylko <b>deklaracją chęci</b>. Zaczyna się to od <i>"mam szczerą wolę"</i>, a wola może uleć zmianie. Jeśli to możliwe, <b>warto, by członek ZHP złożył je drugi raz w innej formule</b>, gdy dojdzie do wniosku, że takowe woli.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Przyrzeczenie jest narzędziem wychowawczym do kształtowania duchowości harcerza i jest jedynie pierwszym krokiem maratonu wychowania duchowego, które harcerz powinien w harcerstwie otrzymać.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Wybór Przyrzeczenia w wieku przed-wędrowniczym, które złoży harcerz powinien być dokonany przede wszystkim <b>przez jego rodziców z jego udziałem</b>.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Wybór Przyrzeczenia, które złoży harcerz powinien być dokonany <b>przed obrzędem jego złożenia</b>. Absolutnie nigdy przy ognisku.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Przyrzeczenie "z Bogiem" oraz Przyrzeczenie "bez Boga" to nie są dwie formy tego samego Przyrzeczenia. To <b>dwa różne Przyrzeczenia</b>, z których wynikają nieco inne powinności, ale z których przede wszystkim to pierwsze definiuje źródło wartości (aksjomat), zaś to drugie nawet się do niego nie odnosi.'
+              '<br>'
+              '<br>Drużynowy, którego harcerz składa Przyrzeczenie "bez Boga" <b>musi dopiero ustalić źródło</b>, na podstawie którego ów harcerz ma w przyszłości budować swoją duchowość.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              'Przyrzeczenie nie jest prywatną sprawą harcerza. Jest sprawą indywidualną, ale dotyczy całej wspólnoty.'
+              '</p>'
+              '</li>'
+
+              '</ul>'
+      )
+
+]
 );
