@@ -157,6 +157,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<li><p style="text-align:justify;">Drużynowy</p></li>'
               '<li><p style="text-align:justify;">Rodzice</p></li>'
               '<li><p style="text-align:justify;">Harcerz</p></li>'
+              '<li><p style="text-align:justify;">Szkoła</p></li>'
               '<li><p style="text-align:justify;">...</p></li>'
               '</ul>'
               '<p style="text-align:justify;">'
@@ -200,15 +201,99 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
       ),
 
       KonspektStep(
-          title: 'Kompatybilne aksjomaty',
+          title: 'Konieczność pracy ze źródłem wartości - aksjomatem',
           duration: Duration(minutes: 10),
           activeForm: false,
           content: '<p style="text-align:justify;">'
-            'Prowadzący zwraca uwagę na to, że statut ZHP określa wartości, do których harcerstwo wychowuje, ale nie określa jednego źródła wartości, z których mają one wynikać.'
-            '<br>'
-            '<br>Co to oznacza? Prowadzący przedstawia uczestnikom kilka scenariuszy do dyskusji, które powinny tę konstrukcję wyjaśnić:'
-            '<ol>'
+              'Prowadzący przedstawia historię:'
+              '<br>'
+              '<br><i>Na obozie jeden z wędrowników, Radek, zaszedł drugiemu, Adamowi, za skórę. W odwecie Adam już od miesiąca prześladował Rafała. Drużynowy wziął Adama na rozmowę. Powiedział, że zgodnie z harcerskimi wartościami mamy traktować innych jak bliźnich i braci, dlatego uważa, że powinien przebaczyć Rafałowi ich niedawną sprzeczkę.'
+              '<br>'
+              '<br>Adam jednak stwierdził:'
+              '<br>'
+              '<br>"Okej. Mogę dać mu spokój, ale żadnego wybaczania. Wybaczanie jest oznaką słabości i zachęca do łamania zasad. Uważam, że winowajców należy przykładnie i doszczętnie zgnoić. Mówisz o tym, że wybaczanie jest harcerską wartością. Ale ja już nie jestem dzieckiem, dlaczego mam wierzyć w jakieś zapiski Prawa Harcerskiego, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre? Przecież to banda starych dziadów rodem z poprzedniej epoki".</i>'
+              '<br>'
+              '<br>Prowadzący powinien zwrócić uwagę na następujące możliwości i ich konsekwencje:'
+              '</p>'
 
+              '<ol>'
+              '<li><p style="text-align:justify;">Drużynowy może machnąć ręką na tę sytuację, ale wtedy utwierdzi wędrownika w przekonaniu, że można łamać Prawo Harcerskie, gdzie mowa jest o traktowaniu każdego jak bliźniego, a innych harcerzy jak braci. Ewidentna porażka wychowawcza.</p></li>'
+              '<li><p style="text-align:justify;">Z drugiej strony drużynowy może powiedzieć: <i>"kolego - w ZHP takie są zasady, że wybaczamy. Jeśli tego nie akceptujesz - to nie miejsce dla Ciebie"</i>. Jeśli jednak Adam odejdzie, to ZHP poniesie porażkę - harcerstwo ma wychowywać, zmieniać ludzi - a nie być skupiskiem dla ludzi już wychowanych.</p></li>'
+              '</ol>'
+
+              '<p style="text-align:justify;">'
+              '<br>Prowadzący wciela się w postać Adama i prosi uczestników, aby przedstawili Adamowi: dorosłemu, wykształconemu, inteligentnemu wędrownikowi powód, dla którego <b>powinien w życiu kierować się wartością przebaczania</b>.'
+              '<br>'
+              '<br>Zadaniem prowadzącego jest relatywizowanie argumentów uczestników, w stylu:'
+              '</p>'
+
+              '<ul>'
+              '<li><p style="text-align:justify;">Okej, dla was wybaczanie jest ważne - uważajcie sobie co chcecie. Ja uważam inaczej.</p></li>'
+              '<li><p style="text-align:justify;">To, że akurat w waszej kulturze większość uważa, że warto wybaczać o niczym nie świadczy. W innych kultrach, na przykład japońskiej, honorowym wyjściem z popełnienia znaczącego błędu jest sepuku - dzięki temu ludzie robią wszystko, by nie czynić zła. Wybaczanie tylko zachęca do łamania zasad.</p></li>'
+              '<li><p style="text-align:justify;">Niby dlaczego uważacie, że wasze wartości są lepsze? Dlaczego mam się do nich stosować?</p></li>'
+              '</ul>'
+
+              '<p style="text-align:justify;">'
+              'Wniosek z tego eksperymentu myślowego jest następujący:'
+              '<br>'
+              '<br>Świadomy człowiek nie będzie miał powodu uznawać wartości tylko dlatego, że ktoś mu tak powiedział. Musi wiedzieć, <b>dlaczego warto zgodnie z nimi żyć</b>, a to oznacza, że muszą wypływać ze <b>źródła wartości</b>, w które ów człowiek wierzy, czyli z <b>aksjomatu jego duchowości</b>: najgłębszej prawdy, którą kieruje się w życiu, np. filozofią, czy religią.'
+              '<br>'
+              '<br>Przykładowo, jeśli wędrownik wierzy w zbawczą śmierć i zmartwychwstanie Chrystusa, odpowiedzią na pytanie: <i>"dlaczego mam komuś wybaczać"</i> może być stwierdzenie:'
+              '<br>'
+              '<br><i>Skoro Bóg zszedł na Ziemię i dobrowolnie dał się zabić za każdego, nawet najpodlejszego człowieka, by dać każdemu szansę doznać zbawienia i życia w pełni szczęścia, to prawdopodobnie my także, jesteśmy winni przebaczenia tym, którzy o to proszą</i>.'
+              '<br>'
+              '<br>Jeśli jednak wędrownik nie wierzy w śmierć i zmartychwstanie Chrystusa, to nie przekona go do przebaczania.'
+              '<br>'
+              '<br>Być może większość osób w społeczeństwie kieruje się w życiu tymi wartościami, które wyznaje większość ich otoczenia: bo to wygodne, łatwe, nie wymaga myślenia i gwarantuje akceptację grupy. Tylko co z tego? ZHP nie wychowuje idących na łatwiznę ludzi podlegających owczemu pędowi. ZHP wychowuje silne, świadome, wszechstronnie rozwinięte jednostki, które wiedzą czemu wartości, w które wierzą są dobre, umieją ich bronić i zgodnie z nimi żyć pomimo trudności!'
+              '<br>'
+              '<br>Wniosek z tego punktu jest następujący:'
+              '<br>'
+              '<br><b>Jeśli harcerstwo ma być wychowawczo skuteczne, musi uwzględniać w wychowaniu pracę z aksjomatami: wiarą, religią, filozofią itd.!</b>'
+              '<br>'
+              '<br>Jeżeli harcerstwo tego zaniecha, to owszem, w rozwoju zuchów i harcerzy nie będzie widać większych problemów. Ale już HSi i wędrownicy nie będą traktowali poważnie wartości, które "są, bo tak".'
+              '<br>'
+              '<br>Praca z aksjomatami nie zaczyna się, gdy ktoś ma lat 15 (wtedy bowiem każdy jest święcie przekonany, że jest najmądrzejszy na świecie). Praca nad budowaniem fundamentów pod aksjomaty musi się zacząć od zucha, by potem było się do czego odnieść.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Aksjomaty - przykłady i pytania',
+          duration: Duration(minutes: 5),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący szybko podaje kilka przykładów tego, co może być aksjomatem, aby uczestnicy mogli zbudować wokół pojęcia aksjomatu intuicję:'
+              '</p>'
+              '<ul>'
+              '<li><p style="text-align:justify;">Świat stworzył przypadek. Świadomość człowieka jest iluzją fizyki, nie ma żadnego celu.</p></li>'
+              '<li><p style="text-align:justify;">Świat stworzyła wróżka. Ludzie są powiewami meta-powietrza jej tchnienia.</p></li>'
+              '<li><p style="text-align:justify;">Wszystko jest iluzją. Istnieję tylko ja, reszta to zaprogramowane postaci w mojej głowie.</p></li>'
+              '<li><p style="text-align:justify;">Świat stworzył trójjedyny Bóg, powołał człowieka na swój obraz, by doświadczył miłości.</p></li>'
+              '<p style="text-align:justify;">'
+              'Jeśli uczestnicy pytania, to dobry moment, by je zadali.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Kompatybilne aksjomaty',
+          duration: Duration(minutes: 5),
+          activeForm: false,
+          content: 'Prowadzący zauważa, że:'
+              '<br>'
+              '<br><i>Każde dalekosiężne, holistyczne wychowanie musi zakładać pracę nad aksjomatem ducha (czyli źródłem wartości) młodego człowieka. Jakie więc są aksjomaty, z których wypływa harcerskie wychowanie? Niestety, model wychowawczy w ZHP ich nie nazywa. Zamiast tego ogranicza dopuszczalne aksjomaty poprzez narzucenie, jakie wartości mają z nich wynikać. Z pozoru to rozwiązanie może działać, ale w praktyce, wyobraźcie sobie pewną sytuację wychowawczą.</i>'
+              '<br>'
+      ),
+
+      KonspektStep(
+          title: 'Kompatybilne aksjomaty - przykłady',
+          duration: Duration(minutes: 10),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+            'Prowadzący zauważa, że:'
+            '<br>'
+            '<br><i>Każde dalekosiężne, holistyczne wychowanie musi zakładać pracę nad aksjomatem ducha (czyli źródłem wartości) młodego człowieka. Jakie więc są aksjomaty, z których wypływa harcerskie wychowanie? Niestety, model wychowawczy w ZHP ich nie nazywa. Zamiast tego ogranicza dopuszczalne aksjomaty poprzez narzucenie, jakie wartości mają z nich wynikać.</i>'
+            '<br>'
+            '<br>Jakie ma to przełożenie na praktykę? Prowadzący przedstawia uczestnikom kilka scenariuszy do dyskusji, które powinny tę konstrukcję wyjaśnić:'
+            '<ol>'
             '<li><p style="text-align:justify;">'
             '<i><b>Do ZHP trafia 7-latek, którego rodzice są katolikami i którym zależy na wychowaniu dzieci w wierze.</b>'
             '<br>Czy ów potencjalny zuch może rozwijać się w duchowości katolickiej w ZHP?</i>'
@@ -241,43 +326,6 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
       ),
 
       KonspektStep(
-          title: 'Konieczność pracy z aksjomatem',
-          duration: Duration(minutes: 15),
-          activeForm: false,
-          content: '<p style="text-align:justify;">'
-              'Prowadzący zaczyna od stwierdzenia:'
-              '<br>'
-              '<br><i>ZHP wybrało sobie konstrukcję wychowawczą, wedle której nie określa jednoznacznie źródeł wartości, tylko określa jakie wartości z owych źródeł mają wynikać. I teoretycznie to rozwiązanie powinno się sprawdzać - ale niestety sprawdza się tylko do czasu, aż wychowankowie wskoczą na poziom późnych HSów, tudzież wędrowników.</i>'
-              '<br>'
-              '<br>Prowadzący obrazuje to na przykładzie następującej sytuacji:'
-              '<br>'
-              '<br><i>Wyobraźcie sobie następującą sytuację: na obozie jeden z wędrowników zaszedł drugiemu za skórę, za co ten drugi zaczął go notorycznie prześladować. Trwało to już kilka miesięcy. Drużynowy wziął go na rozmowę. Powiedział, że harcerską postawą jest wyjść z dobrą wolą, spróbować się pogodzić i wzajemnie przebaczyć winy.'
-              '<br>'
-              '<br>Ale wędrownik stwierdza:'
-              '<br>'
-              '<br>"Ale dlaczego mam komuś wybaczać? Dla mnie wybaczanie jest oznaką słabości. Jeśli ktoś mi podpadł, uważam, że należy go przykładnie i doszczętnie zgnoić - dla mnie wartością jest siła, a nie przebaczenie. Dlaczego mam wierzyć w jakieś zapiski Prawa Harcerskiego, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre?".</i>'
-              '<br>'
-              '<br>Prowadzący powinien pozwolić tutaj na to, aby <b>uczestnicy zaproponowali, jak owego wędrownika przekonać</b>.'
-              '<br>'
-              '<br>W toku dyskusji, prowadzący powinien przywołać następującą odpowiedź:'
-              '<br>'
-              '<br>Na pytanie o to <i>"dlaczego te wartości"</i>, albo <i>"które wartości są słuszne"</i> nie istnieje obiektywna odpowiedź. Odpowiedź ta zawsze wynika z <b>aksjomatu duchowości</b>, którą harcerz wyznaje - czyli z jego religii, filozofii, etc.. Aksjomaty są zawsze arbitralne, nie da się ich porównać, można po prostu wierzyć w ich słuszność lub nie.'
-              '<br>'
-              '<br>Dla wędrownika odpowiedź <i>"bo tak mówi Prawo Harcerskie"</i> lub <i>"bo inni tak robią"</i> jest śmieszna. Owszem, zuchom i harcerzom wystarczy sam fakt, że "drużynowy tak powiedział". Wędrownik potrzebuje powiązania wartości z aksjomatem, w który wierzy.'
-              '<br>'
-              '<br>Przykładowo, jeśli wędrownik wierzy w śmierć i zmartwychwstanie Chrystusa, odpowiedzią na pytanie: <i>"dlaczego mam komuś wybaczać"</i> może być stwierdzenie:'
-              '<br>'
-              '<br><i>Skoro Bóg zszedł na Ziemię i dobrowolnie zdecydował dać się zabić za każdego, nawet najpodlejszego człowieka, żeby każdy, nawet najgorszy parszywiec miał szansę doznać zbawienia i życia w pełni szczęścia, to prawdopodobnie zarówno ja, jak i Ty, którzy sami jesteśmy tego beneficjentami, jesteśmy winni przebaczenia tym, którzy o to proszą</i>.'
-              '<br>'
-              '<br>Bo z jakiego innego powodu dorosły, wszechstronnie rozwinięty, myślący człowiek miałby kierować się jakimiś wartościami jeśli nie właśnie dlatego, że wynikają z najgłębszej prawdy o świecie, w którą wierzy?'
-              '<br>'
-              '<br><b>Jeśli harcerstwo ma być wychowawczo skuteczne, musi uwzględniać w wychowaniu pracę ze źródłami wartości!</b>'
-              '<br>'
-              '<br>Jeżeli harcerstwo tego zaniecha, to owszem, do etapu zuchów i harcerzy nie będzie widać większych problemów, ale już HSi i wędrownicy nie traktowali poważnie wartości, które "są, bo tak". Z kolei praca nad zinternalizowaniem źródeł wartości, aksjomatow, filozofii i religii nie zaczyna się gdy ktoś ma lat 15, bo wtedy każdy jest święcie przekonany, że jest najmądrzejszy na świecie. Praca nad budowaniem fundamentów pod źródła wartości musi się zacząć od zucha.'
-              '</p>'
-      ),
-
-      KonspektStep(
           title: 'Kompatybilne aksjomaty - kto je wybiera?',
           duration: Duration(minutes: 10),
           activeForm: false,
@@ -288,12 +336,12 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>'
               '<br>Prowadzący powinien pozwolić uczestnikom na krótką dyskusję. Nie ma tu metody na wyklarowanie jednoznacznej odpowiedzi, ale jedyną racjonalną wydaje się być następujący mechanizm:'
               '</p>'
+
               '<ul>'
               '<li><p style="text-align:justify;">Dopóki to rodzice posyłają dziecko do harcerstwa, to oni decydują w jakiej wierze (aksjomatach) ma być wychowywany harcerz.</p></li>'
               '<li><p style="text-align:justify;">Gdy harcerz jest dorosły i sam o sobie stanowi, to on sam decyduje o tym, w jakiej wierze (aksjomatach) będzie się dalej rozwijał.</p></li>'
               '<li><p style="text-align:justify;">Jeśli wolą rodziców harcerza lub jego samego jest wychowanie w aksjomacie, z którego wypływają wartości niezgodne z wartościami harcerskimi, harcerstwo nie jest miejscem dla takiej osoby.</li>'
               '</ul>'
-              '</p>'
       ),
 
       KonspektStep(
@@ -303,11 +351,14 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           content: '<p style="text-align:justify;">'
               'Prowadzący podsumowuje dotychczasowe (oczywiste) ustalenia:'
               '</p>'
+
               '<ul>'
               '<li><p style="text-align:justify;">Harcerstwo jest po to, żeby wychować młodego człowieka w konkretnym kierunku.</p></li>'
               '<li><p style="text-align:justify;">Harcerstwo wychowuje do określonych wartości, które są opisane w statucie ZHP.</p></li>'
               '<li><p style="text-align:justify;">Poważne i skuteczne wychowanie musi uwzględniać pracę z aksjomatem duchowości (wiarą). Kształtu tego aksjomatu ZHP jednoznacznie nigdzie nie definiuje.</p></li>'
               '</ul>'
+
+              '<p style="text-align:justify;">'
               'Warto, by prowadzący dodał, że harcerstwo nie jest platformą, w której rodzice wybierają sobie dowolne wartości i aksjomaty. Instruktorzy również nie są od tego, by te wartości zmieniać - są tymi, którzy dowożą wychowanie w określonych statutem ramach.'
               '</p>'
       ),
