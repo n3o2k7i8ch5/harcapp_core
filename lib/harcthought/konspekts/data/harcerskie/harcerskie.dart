@@ -10,6 +10,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../konspekt.dart';
 import 'druzynowe_przekazanie_bsp.dart';
+import 'dwie_roty_dwoch_przyrzeczen_harcerskich.dart';
 import 'gang_potencjalnych_porywaczy.dart';
 
 
@@ -617,6 +618,8 @@ List<Konspekt> allHarcerskieKonspekts = [
   ),
 
   druzynowe_przekazanie_bsp,
+
+  dwie_roty_dwoch_przyrzeczen_harcerskich,
 
   // Done
   const Konspekt(

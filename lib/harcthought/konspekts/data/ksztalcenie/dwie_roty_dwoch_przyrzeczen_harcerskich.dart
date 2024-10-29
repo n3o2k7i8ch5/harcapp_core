@@ -4,7 +4,7 @@ import 'package:harcapp_core/values/people.dart';
 
 import '../common_attachments.dart';
 
-const konspekt_name_dwie_roty_dwoch_przyrzeczen = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
+const konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
 
 const String attach_html_prawo_harcerskie = '<a href="$attach_name_prawo_harcerskie@attachment">$attach_title_prawo_harcerskie</a>';
 const String attach_name_prawo_harcerskie = 'prawo_harcerskie';
@@ -13,8 +13,8 @@ const KonspektAttachment attach_prawo_harcerskie = KonspektAttachment(
   name: attach_name_prawo_harcerskie,
   title: attach_title_prawo_harcerskie,
   assets: {
-    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_prawo_harcerskie.pdf',
-    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_prawo_harcerskie.docx',
+    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_prawo_harcerskie.pdf',
+    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_prawo_harcerskie.docx',
   },
 );
 
@@ -25,8 +25,8 @@ const KonspektAttachment attach_przyrzeczenie_harcerskie = KonspektAttachment(
   name: attach_name_przyrzeczenie_harcerskie,
   title: attach_title_przyrzeczenie_harcerskie,
   assets: {
-    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_przyrzeczenie_harcerskie.pdf',
-    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_przyrzeczenie_harcerskie.docx',
+    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_przyrzeczenie_harcerskie.pdf',
+    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_przyrzeczenie_harcerskie.docx',
   },
 );
 
@@ -37,8 +37,8 @@ const KonspektAttachment attach_jak_przeprowadzic_przyrzeczenie = KonspektAttach
   name: attach_name_jak_przeprowadzic_przyrzeczenie,
   title: attach_title_jak_przeprowadzic_przyrzeczenie,
   assets: {
-    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_jak_przeprowadzic_przyrzeczenie.pdf',
-    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_jak_przeprowadzic_przyrzeczenie.docx',
+    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_jak_przeprowadzic_przyrzeczenie.pdf',
+    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_jak_przeprowadzic_przyrzeczenie.docx',
   },
 );
 
@@ -49,13 +49,13 @@ const KonspektAttachment attach_scenariusze = KonspektAttachment(
   name: attach_name_scenariusze,
   title: attach_title_scenariusze,
   assets: {
-    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_scenariusze.pdf',
-    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen/$attach_name_scenariusze.docx',
+    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_scenariusze.pdf',
+    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_scenariusze.docx',
   },
 );
 
-Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
-    name: konspekt_name_dwie_roty_dwoch_przyrzeczen,
+Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
+    name: konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich,
     title: 'Dwie roty dwóch przyrzeczeń',
     additionalSearchPhrases: [
       'przyrzeczenie harcerskie',
@@ -207,7 +207,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
           content: '<p style="text-align:justify;">'
               'Prowadzący przedstawia historię:'
               '<br>'
-              '<br><i>Na obozie jeden z wędrowników, Radek, zaszedł drugiemu, Adamowi, za skórę. W odwecie Adam już od miesiąca prześladował Rafała. Drużynowy wziął Adama na rozmowę. Powiedział, że zgodnie z harcerskimi wartościami mamy traktować innych jak bliźnich i braci, dlatego uważa, że powinien przebaczyć Rafałowi ich niedawną sprzeczkę.'
+              '<br><i>Na obozie jeden z wędrowników, Radek, zaszedł drugiemu, Adamowi, za skórę. W odwecie Adam już od miesiąca prześladował Radka. Drużynowy wziął Adama na rozmowę. Powiedział, że zgodnie z harcerskimi wartościami mamy traktować innych jak bliźnich i braci, dlatego uważa, że Adam powinien przebaczyć Radkowi ich niedawną sprzeczkę.'
               '<br>'
               '<br>Adam jednak stwierdził:'
               '<br>'
@@ -217,26 +217,26 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '</p>'
 
               '<ol>'
-              '<li><p style="text-align:justify;">Drużynowy może machnąć ręką na tę sytuację, ale wtedy utwierdzi wędrownika w przekonaniu, że można łamać Prawo Harcerskie, gdzie mowa jest o traktowaniu każdego jak bliźniego, a innych harcerzy jak braci. Ewidentna porażka wychowawcza.</p></li>'
-              '<li><p style="text-align:justify;">Z drugiej strony drużynowy może powiedzieć: <i>"kolego - w ZHP takie są zasady, że wybaczamy. Jeśli tego nie akceptujesz - to nie miejsce dla Ciebie"</i>. Jeśli jednak Adam odejdzie, to ZHP poniesie porażkę - harcerstwo ma wychowywać, zmieniać ludzi - a nie być skupiskiem dla ludzi już wychowanych.</p></li>'
+              '<li><p style="text-align:justify;">Drużynowy może machnąć ręką na tę sytuację, ale wtedy <b>utwierdzi wędrownika w przekonaniu, że można łamać Prawo Harcerskie</b> i że nie ma to żadnego znaczenia. Ewidentna porażka wychowawcza.</p></li>'
+              '<li><p style="text-align:justify;">Z drugiej strony drużynowy może powiedzieć: <i>"kolego - w ZHP takie są zasady, że wybaczamy. Jeśli tego nie akceptujesz - to nie miejsce dla Ciebie"</i>. Jeśli jednak Adam odejdzie, to ZHP również poniesie porażkę: <b>harcerstwo ma wychowywać, zmieniać ludzi - a nie być skupiskiem dla ludzi już wychowanych</b>.</p></li>'
               '</ol>'
 
               '<p style="text-align:justify;">'
               '<br>Prowadzący wciela się w postać Adama i prosi uczestników, aby przedstawili Adamowi: dorosłemu, wykształconemu, inteligentnemu wędrownikowi powód, dla którego <b>powinien w życiu kierować się wartością przebaczania</b>.'
               '<br>'
-              '<br>Zadaniem prowadzącego jest relatywizowanie argumentów uczestników, w stylu:'
+              '<br>Zadaniem prowadzącego jest relatywizowanie argumentów uczestników, odpowiedziami w stylu:'
               '</p>'
 
               '<ul>'
               '<li><p style="text-align:justify;">Okej, dla was wybaczanie jest ważne - uważajcie sobie co chcecie. Ja uważam inaczej.</p></li>'
-              '<li><p style="text-align:justify;">To, że akurat w waszej kulturze większość uważa, że warto wybaczać o niczym nie świadczy. W innych kultrach, na przykład japońskiej, honorowym wyjściem z popełnienia znaczącego błędu jest sepuku - dzięki temu ludzie robią wszystko, by nie czynić zła. Wybaczanie tylko zachęca do łamania zasad.</p></li>'
+              '<li><p style="text-align:justify;">To, że akurat w waszej kulturze większość uważa, że warto wybaczać o niczym nie świadczy. W innych kultrach, na przykład japońskiej, honorowym wyjściem z popełnienia znaczącego błędu jest sepuku, rytualne samobójstwo. Dzięki temu ludzie robią wszystko, by nie czynić zła. Wybaczanie tylko zachęca do łamania zasad.</p></li>'
               '<li><p style="text-align:justify;">Niby dlaczego uważacie, że wasze wartości są lepsze? Dlaczego mam się do nich stosować?</p></li>'
               '</ul>'
 
               '<p style="text-align:justify;">'
-              'Wniosek z tego eksperymentu myślowego jest następujący:'
+              'Gdy uczestnicy wyraźnie dojdą do ściany, prowadzący może przedstawić im wniosek i rozwiązanie:'
               '<br>'
-              '<br>Świadomy człowiek nie będzie miał powodu uznawać wartości tylko dlatego, że ktoś mu tak powiedział. Musi wiedzieć, <b>dlaczego warto zgodnie z nimi żyć</b>, a to oznacza, że muszą wypływać ze <b>źródła wartości</b>, w które ów człowiek wierzy, czyli z <b>aksjomatu jego duchowości</b>: najgłębszej prawdy, którą kieruje się w życiu, np. filozofią, czy religią.'
+              '<br>Świadomy człowiek nie będzie miał powodu uznawać wartości tylko dlatego, że ktoś mu tak powiedział. Musi wiedzieć, <b>dlaczego warto zgodnie z nimi żyć</b>, a to oznacza, że muszą one wypływać ze <b>źródła wartości</b>, w które ów człowiek wierzy, czyli z <b>aksjomatu jego duchowości</b>: najgłębszej prawdy, którą kieruje się w życiu, np. filozofią, czy religią.'
               '<br>'
               '<br>Przykładowo, jeśli wędrownik wierzy w zbawczą śmierć i zmartwychwstanie Chrystusa, odpowiedzią na pytanie: <i>"dlaczego mam komuś wybaczać"</i> może być stwierdzenie:'
               '<br>'
@@ -248,7 +248,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<br>'
               '<br>Wniosek z tego punktu jest następujący:'
               '<br>'
-              '<br><b>Jeśli harcerstwo ma być wychowawczo skuteczne, musi uwzględniać w wychowaniu pracę z aksjomatami: wiarą, religią, filozofią itd.!</b>'
+              '<br><b>Jeśli harcerstwo ma być wychowawczo skuteczne, musi uwzględniać w wychowaniu pracę z aksjomatami: budowanie swojej tożsamości na podstawie wiary, religii, filozofii itd.!</b>'
               '<br>'
               '<br>Jeżeli harcerstwo tego zaniecha, to owszem, w rozwoju zuchów i harcerzy nie będzie widać większych problemów. Ale już HSi i wędrownicy nie będą traktowali poważnie wartości, które "są, bo tak".'
               '<br>'
@@ -268,18 +268,21 @@ Konspekt dwie_roty_dwoch_przyrzeczen = Konspekt(
               '<li><p style="text-align:justify;">Świat stworzyła wróżka. Ludzie są powiewami meta-powietrza jej tchnienia.</p></li>'
               '<li><p style="text-align:justify;">Wszystko jest iluzją. Istnieję tylko ja, reszta to zaprogramowane postaci w mojej głowie.</p></li>'
               '<li><p style="text-align:justify;">Świat stworzył trójjedyny Bóg, powołał człowieka na swój obraz, by doświadczył miłości.</p></li>'
+              '<li><p style="text-align:justify;">Świat został stworzony przez Gigantów. Ludzie będą zbawieni, jeśli będą im składali ofiary. Kto tego nie robi musi się nawrócić lub zostać samemu złożonym w ofierze - tylko w ten sposób uniknie wiecznej nicości.</p></li>'
+              '</ul>'
+
               '<p style="text-align:justify;">'
-              'Jeśli uczestnicy pytania, to dobry moment, by je zadali.'
+              'Nie wszystkie przykłady aksjomatów są kompatybilne z wychowaniem w ZHP.'
+              '<br>'
+              '<br>Jeśli uczestnicy pytania, to dobry moment, by je zadali.'
               '</p>'
       ),
 
       KonspektStep(
-          title: 'Kompatybilne aksjomaty',
+          title: 'Kompatybilne aksjomaty - jak to działa w ZHP?',
           duration: Duration(minutes: 5),
           activeForm: false,
-          content: 'Prowadzący zauważa, że:'
-              '<br>'
-              '<br><i>Każde dalekosiężne, holistyczne wychowanie musi zakładać pracę nad aksjomatem ducha (czyli źródłem wartości) młodego człowieka. Jakie więc są aksjomaty, z których wypływa harcerskie wychowanie? Niestety, model wychowawczy w ZHP ich nie nazywa. Zamiast tego ogranicza dopuszczalne aksjomaty poprzez narzucenie, jakie wartości mają z nich wynikać. Z pozoru to rozwiązanie może działać, ale w praktyce, wyobraźcie sobie pewną sytuację wychowawczą.</i>'
+          content: 'Prowadzący zauważa, że każde dalekosiężne, holistyczne wychowanie musi zakładać pracę nad aksjomatem ducha (czyli źródłem wartości) młodego człowieka. Jakie więc są aksjomaty, z których wypływa harcerskie wychowanie? Niestety, model wychowawczy w ZHP ich nie nazywa. Zamiast tego ogranicza dopuszczalne aksjomaty poprzez narzucenie, jakie wartości mają z nich wynikać. Z pozoru to rozwiązanie może działać, ale w praktyce, wyobraźcie sobie pewną sytuację wychowawczą.'
               '<br>'
       ),
 
