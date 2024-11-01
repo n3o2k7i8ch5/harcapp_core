@@ -919,7 +919,7 @@ List<Konspekt> allHarcerskieKonspekts = [
           name: 'Teksty śpiewanych piosenek',
         ),
       ],
-      description: '<p style="text-align:justify;">Szczególna wersja formy <a href="spiewogranie_z_quizem_interpretacyjnym@konspekt">Śpiewogranie z quizem interpretacyjnym</a>, gdzie zbiorem piosenek są kolędy.</p>'
+      description: '<p style="text-align:justify;">Szczególna wersja formy <a href="spiewogranie_z_quizem_interpretacyjnym@harcerskie.konspekt">Śpiewogranie z quizem interpretacyjnym</a>, gdzie zbiorem piosenek są kolędy.</p>'
   ),
 
   // Done
@@ -987,7 +987,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Budowanie przekonania o ważności modlitwy',
         'Budowanie wspólnoty wiary',
       ],
-      description: '<p style="text-align:justify;">Forma jest pokrewna do formy <a href="rozpoczynanie_posilku_wspolnym_spiewaniem@konspekt">Rozpoczynanie posiłku wspólnym śpiewaniem</a>.'
+      description: '<p style="text-align:justify;">Forma jest pokrewna do formy <a href="rozpoczynanie_posilku_wspolnym_spiewaniem@harcerskie.konspekt">Rozpoczynanie posiłku wspólnym śpiewaniem</a>.'
           '<br>'
           '<br>W przypadku zuchów lub harcerzy modlitwa przed posiłkiem pełni przede wszystkim rolę normalizacyjną - buduje przekonanie, że modlitwa jest ważna. Warto jednak mieć na uwadze, że sprowadzanie modlitwy do roli konkursu piosenki "kto głośniej zaśpiewa" jest niewychowawcze i normalizuje przekonanie, że modlitwa to folklor.'
           '<br>'
@@ -1297,7 +1297,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         aimHartDuchaWedrowanie,
         aimUmiejetnoscWedrowania,
       ],
-      description: '<p style="text-align:justify;">Wariant <a href="wedrowka@konspekt">Wędrówki</a> lub <a href="wedrowka_medytacyjna@konspekt">Wędrówki medytacyjnej</a> o tematyce religijnej.'
+      description: '<p style="text-align:justify;">Wariant <a href="wedrowka@konspekt">Wędrówki</a> lub <a href="wedrowka_medytacyjna@harcerskie.konspekt">Wędrówki medytacyjnej</a> o tematyce religijnej.'
           '<br>'
           '<br>Wskazane jest, by cel pielgrzymki był określony i w jakiś sposób religijnie istotny. Samą wędrówkę warto podzielić na części i dywersyfikować ich formy wykorzystując np.: śpiewanie, rozważania, luźne rozmowy, milczenie.'
           '<br>'
@@ -2364,7 +2364,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       ],
       description: '<p style="text-align:justify;">Harcerze w dwuosobowych grupach podczas formy wyjazdowej pełnią wartę na terenie obozowania w celu zapewnienia bezpieczeństwa śpiącym uczestnikom od zewnętrznych czynników.'
           '<br>'
-          '<br>Formę można z korzyścią połączyć z <a href="nocne_podkradanie@konspekt">nocnym podkradaniem</a>.</p>'
+          '<br>Formę można z korzyścią połączyć z <a href="nocne_podkradanie@harcerskie.konspekt">nocnym podkradaniem</a>.</p>'
   ),
 
 
@@ -2422,7 +2422,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         aimWlasnaSprawczosc,
         aimOtwartoscNaInterakcje,
       ],
-      description: '<p style="text-align:justify;">Wariant <a href="wedrowka@konspekt">Wędrówki</a>.'
+      description: '<p style="text-align:justify;">Wariant <a href="wedrowka@harcerskie.konspekt">Wędrówki</a>.'
           '<br>'
           '<br>Uczestnicy wędrują po terenie zamieszkałym (wsiach, miasteczkach) z ograniczonymi zasobami w celu zmuszenia uczestników do wejścia w interakcję z lokalną społecznością. Cel ów można osiągnąć przykładowo przez zaopatrzenie harcerzy w butelki lub bidony na wodę nie większe niż 0.5l (prowadzący powinien mieć w plecaku większy zapas wody dla uczestników na wszelki wypadek) lub poprzez określenie jedynie celu wędrówki bez zaopatrzenia ich w mapę. Mechanizmy te w sposób naturalny prowadzą uczestników do konieczności proszenia mieszkańców o uzupełnienie wody w pobliskich domach i do pytania o drogę napotykanych po drodze ludzi.</p>'
   ),

@@ -57,6 +57,26 @@ class KonspektHtmlWidget extends StatelessWidget{
               onDuchMechanismInfoTap: onDuchMechanismInfoTap,
               maxWidth: maxDialogWidth
           );
+        }else if(url.endsWith('@harcerskie.konspekt')){
+          String konspektName = url.substring(0, url.length - '@konspekt'.length);
+          openBaseKonspektDialog(
+              context: context,
+              konspektName: konspektName,
+              category: KonspektCategory.harcerskie,
+              onDuchLevelInfoTap: onDuchLevelInfoTap,
+              onDuchMechanismInfoTap: onDuchMechanismInfoTap,
+              maxWidth: maxDialogWidth
+          );
+        }else if(url.endsWith('@ksztalcenie.konspekt')){
+          String konspektName = url.substring(0, url.length - '@konspekt'.length);
+          openBaseKonspektDialog(
+              context: context,
+              konspektName: konspektName,
+              category: KonspektCategory.ksztalcenie,
+              onDuchLevelInfoTap: onDuchLevelInfoTap,
+              onDuchMechanismInfoTap: onDuchMechanismInfoTap,
+              maxWidth: maxDialogWidth
+          );
         }else if(url.endsWith('@attachment')){
           String formName = url.substring(0, url.length - '@attachment'.length);
           KonspektAttachmentWidget.openFirstFrom(

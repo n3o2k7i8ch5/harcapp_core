@@ -3,6 +3,7 @@ import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
 import '../common_attachments.dart';
+import '../harcerskie/dwie_roty_dwoch_przyrzeczen_harcerskich.dart';
 
 const konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
 
@@ -207,23 +208,24 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
           content: '<p style="text-align:justify;">'
               'Prowadzący przedstawia historię:'
               '<br>'
-              '<br><i>Na obozie jeden z wędrowników, Radek, zaszedł drugiemu, Adamowi, za skórę. W odwecie Adam już od miesiąca prześladował Radka. Drużynowy wziął Adama na rozmowę. Powiedział, że zgodnie z harcerskimi wartościami mamy traktować innych jak bliźnich i braci, dlatego uważa, że Adam powinien przebaczyć Radkowi ich niedawną sprzeczkę.'
+              '<br><i>Na obozie jeden z wędrowników, Radek, zaszedł drugiemu, Adamowi, za skórę. W odwecie Adam zaczął prześladować Radka. Trwało to już od miesiąca. Drużynowy wziął Adama na rozmowę. Powiedział, że zgodnie z harcerskimi wartościami należy traktować innych jak bliźnich i braci, dlatego uważa, że Adam powinien przebaczyć Radkowi ich niedawną sprzeczkę.'
               '<br>'
               '<br>Adam jednak stwierdził:'
               '<br>'
-              '<br>"Okej. Mogę dać mu spokój, ale żadnego wybaczania. Wybaczanie jest oznaką słabości i zachęca do łamania zasad. Uważam, że winowajców należy przykładnie i doszczętnie zgnoić. Mówisz o tym, że wybaczanie jest harcerską wartością. Ale ja już nie jestem dzieckiem, dlaczego mam wierzyć w jakieś zapiski Prawa Harcerskiego, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre? Przecież to banda starych dziadów rodem z poprzedniej epoki".</i>'
+              '<br>"Okej. Mogę dać mu spokój, ale po tym, co Radek zrobił, nie zasługuje na traktowanie jak brata. Ja zresztą nie jestem już dzieckiem, dlaczego mam wierzyć w jakieś Prawo Harcerskie, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre? Przecież to banda starych dziadów rodem z poprzedniej epoki".</i>'
+
+              '<br>Prowadzący wciela się w postać Adama i prosi uczestników, aby przedstawili Adamowi: dorosłemu, wykształconemu, inteligentnemu wędrownikowi powód, dla którego <b>powinien w życiu kierować się wartością przebaczania</b>.'
               '<br>'
-              '<br>Prowadzący powinien zwrócić uwagę na następujące możliwości i ich konsekwencje:'
+              '<br>'
+              '<br>Wcześniej jednak prowadzący powinien zwrócić uwagę na następujące możliwości i ich konsekwencje:'
               '</p>'
 
               '<ol>'
-              '<li><p style="text-align:justify;">Drużynowy może machnąć ręką na tę sytuację, ale wtedy <b>utwierdzi wędrownika w przekonaniu, że można łamać Prawo Harcerskie</b> i że nie ma to żadnego znaczenia. Ewidentna porażka wychowawcza.</p></li>'
-              '<li><p style="text-align:justify;">Z drugiej strony drużynowy może powiedzieć: <i>"kolego - w ZHP takie są zasady, że wybaczamy. Jeśli tego nie akceptujesz - to nie miejsce dla Ciebie"</i>. Jeśli jednak Adam odejdzie, to ZHP również poniesie porażkę: <b>harcerstwo ma wychowywać, zmieniać ludzi - a nie być skupiskiem dla ludzi już wychowanych</b>.</p></li>'
+              '<li><p style="text-align:justify;">Drużynowy może machnąć ręką na tę sytuację, ale wtedy <b>utwierdzi wędrownika w przekonaniu, że można łamać Prawo Harcerskie</b> i że nie ma to żadnego znaczenia. Ewidentna <b>porażka wychowawcza</b>.</p></li>'
+              '<li><p style="text-align:justify;">Z drugiej strony drużynowy może powiedzieć: <i>"kolego - w ZHP takie są zasady, że wybaczamy. Jeśli tego nie akceptujesz - to nie miejsce dla Ciebie"</i>. Jeśli jednak Adam odejdzie, to <b>ZHP również poniesie porażkę</b>: harcerstwo ma wychowywać, zmieniać ludzi - a nie być skupiskiem dla ludzi już wychowanych.</p></li>'
               '</ol>'
 
               '<p style="text-align:justify;">'
-              '<br>Prowadzący wciela się w postać Adama i prosi uczestników, aby przedstawili Adamowi: dorosłemu, wykształconemu, inteligentnemu wędrownikowi powód, dla którego <b>powinien w życiu kierować się wartością przebaczania</b>.'
-              '<br>'
               '<br>Zadaniem prowadzącego jest relatywizowanie argumentów uczestników, odpowiedziami w stylu:'
               '</p>'
 
@@ -446,6 +448,10 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
           activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący omawia z grupami wyniki ich pracy oraz ich ewentualne pomysły na wzbogacenie procesu przeprowadzenia Przyrzeczenia.'
+              '<br>'
+              '<br>Na końcu prowadzący może zaznaczyć, że cały materiał, którego fragmenty właśnie układali wraz z szablonem listu do harcerza i rodzica jest dostępny jako konspekt w HarcAppce.'
+              '<br>'
+              '<br><a href="$konspekt_harc_name_dwie_roty_dwoch_przyrzeczen_harcerskich@harcerskie.konspekt">$konspekt_harc_title_dwie_roty_dwoch_przyrzeczen_harcerskich</a>'
               '</p>'
       ),
 

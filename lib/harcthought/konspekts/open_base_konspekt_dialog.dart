@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/all.dart' as all;
+import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/all.dart' as harcerskie;
+import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/all.dart' as ksztalcenie;
+
 
 import 'konspekt.dart';
 import 'base_konspekt_widget.dart';
@@ -9,6 +12,7 @@ import 'base_konspekt_widget.dart';
 Future<void> openBaseKonspektDialog({
   required BuildContext context,
   required String konspektName,
+  KonspektCategory? category,
   List<Konspekt>? allKonspekts,
   final void Function()? onDuchLevelInfoTap,
   final void Function()? onDuchMechanismInfoTap,
@@ -17,7 +21,12 @@ Future<void> openBaseKonspektDialog({
 
   Konspekt konspekt;
 
-  allKonspekts ??= all.allKonspekts;
+  if(category == KonspektCategory.harcerskie)
+    allKonspekts ??= harcerskie.allHarcerskieKonspekts;
+  if(category == KonspektCategory.harcerskie)
+    allKonspekts ??= ksztalcenie.allKsztalcenieKonspekts;
+  else
+    allKonspekts ??= all.allKonspekts;
 
   try {
     konspekt = allKonspekts.firstWhere((element) => element.name == konspektName);

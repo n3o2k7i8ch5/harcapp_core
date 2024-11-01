@@ -2,11 +2,24 @@ import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
-const konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
+const konspekt_harc_name_dwie_roty_dwoch_przyrzeczen_harcerskich = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
+const konspekt_harc_title_dwie_roty_dwoch_przyrzeczen_harcerskich = 'Dwie roty dwóch przyrzeczeń';
+
+const String attach_html_list_do_harcerza_i_rodzicow = '<a href="$attach_name_list_do_harcerza_i_rodzicow@attachment">$attach_title_list_do_harcerza_i_rodzicow</a>';
+const String attach_name_list_do_harcerza_i_rodzicow = 'list_do_harcerza_i_rodzicow';
+const String attach_title_list_do_harcerza_i_rodzicow = 'List do harcerza i rodziców';
+const KonspektAttachment attach_list_do_harcerza_i_rodzicow = KonspektAttachment(
+  name: attach_name_list_do_harcerza_i_rodzicow,
+  title: attach_title_list_do_harcerza_i_rodzicow,
+  assets: {
+    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_harc_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_list_do_harcerza_i_rodzicow.pdf',
+    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_harc_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_list_do_harcerza_i_rodzicow.docx',
+  },
+);
 
 Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
-  name: konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich,
-  title: 'Dwie roty dwóch przyrzeczeń',
+  name: konspekt_harc_name_dwie_roty_dwoch_przyrzeczen_harcerskich,
+  title: konspekt_harc_title_dwie_roty_dwoch_przyrzeczen_harcerskich,
   additionalSearchPhrases: [
     'przyrzeczenie harcerskie',
   ],
@@ -25,6 +38,15 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
   aims: [
     'Wyłonienie roty Przyrzeczenia Harcerskiego, które złoży harcerz.',
     'Uświadomienie harcerza co wynika z treści rot Przyrzeczenia Harcerskiego.'
+  ],
+  attachments: [
+    attach_list_do_harcerza_i_rodzicow,
+  ],
+  materials: [
+    KonspektMaterial(
+        name: 'Wydrukowany list na podstawie załącznika “$attach_title_list_do_harcerza_i_rodzicow”',
+        attachmentName: attach_name_list_do_harcerza_i_rodzicow,
+    ),
   ],
   steps: [
 
@@ -81,7 +103,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
         content: '<p style="text-align:justify;">'
             'Drużynowy wręcza „nowym harcerzom” po kopercie zaadresowanej do nich i ich rodziców.'
             '<br>'
-            '<br>W każdej kopercie są dwie rzeczy: pusta kartka i list. Drużynowy zwraca się w nim jednocześnie do harcerza i jego rodziców. Pisze, z czym wiąże się złożenie Przyrzeczenia i przytacza dwa warianty, w jakich może ono być złożone. Prosi, aby harcerz i rodzice wspólnie pomówili o tym, który z wariantów jest dla harcerza stosowny.'
+            '<br>W każdej kopercie są dwie rzeczy: pusta kartka i list na podstawie załącznika $attach_html_list_do_harcerza_i_rodzicow. Drużynowy zwraca się w nim jednocześnie do harcerza i jego rodziców. Pisze, z czym wiąże się złożenie Przyrzeczenia i przytacza dwa warianty, w jakich może ono być złożone. Prosi, aby harcerz i rodzice wspólnie pomówili o tym, który z wariantów jest dla harcerza stosowny.'
             '<br>'
             '<br>Gdy dokonają wyboru, harcerz powinien własnoręcznie zapisać pełną treść wybranego Przyrzeczenia na pustej kartce załączonej do listu i oddać ją na zbiórce drużynowemu.'
             '</p>'

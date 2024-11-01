@@ -1,5 +1,5 @@
 import '../konspekt.dart';
-import 'harcerskie/harcerskie.dart';
+import 'harcerskie/all.dart';
 import 'ksztalcenie/all.dart';
 
 List<Konspekt> get allKonspekts{
