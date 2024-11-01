@@ -388,7 +388,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
           '</p>'
           '<ul>'
           '<li><p style="text-align:justify;">Po to, aby harcerz mógł dobrowolnie zadeklarować chęć przynależności do harcerstwa.</p></li>'
-          '<li><p style="text-align:justify;">Po to, aby harcerz mógł zgodzić się i klarowne źródło zasad, które będą go kształtowały.</p></li>'
+          '<li><p style="text-align:justify;">Po to, aby harcerz mógł zgodzić się na klarowne źródło zasad, które będą go kształtowały.</p></li>'
           '</ul>'
           '<p style="text-align:justify;">'
           'Przyrzeczenie nie jest "świętą formułą", nie jest "podstawową wolnością", ani "niezbywalnym prawem harcerza". Przyrzeczenie jest <b>narzędziem wychowawczym</b> - tak jak mundur, gawęda, namiot, sprawność, czy ognisko - służy temu, aby harcerza ukształtować w konkretnym kierunku.'
