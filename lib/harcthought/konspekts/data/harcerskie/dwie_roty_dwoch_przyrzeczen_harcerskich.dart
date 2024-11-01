@@ -3,7 +3,7 @@ import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
 const konspekt_harc_name_dwie_roty_dwoch_przyrzeczen_harcerskich = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
-const konspekt_harc_title_dwie_roty_dwoch_przyrzeczen_harcerskich = 'Dwie roty dwóch przyrzeczeń';
+const konspekt_harc_title_dwie_roty_dwoch_przyrzeczen_harcerskich = 'Dwie roty dwóch Przyrzeczeń';
 
 const String attach_html_list_do_harcerza_i_rodzicow = '<a href="$attach_name_list_do_harcerza_i_rodzicow@attachment">$attach_title_list_do_harcerza_i_rodzicow</a>';
 const String attach_name_list_do_harcerza_i_rodzicow = 'list_do_harcerza_i_rodzicow';

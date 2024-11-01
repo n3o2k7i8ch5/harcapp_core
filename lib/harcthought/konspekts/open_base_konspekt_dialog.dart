@@ -23,7 +23,7 @@ Future<void> openBaseKonspektDialog({
 
   if(category == KonspektCategory.harcerskie)
     allKonspekts ??= harcerskie.allHarcerskieKonspekts;
-  if(category == KonspektCategory.ksztalcenie)
+  else if(category == KonspektCategory.ksztalcenie)
     allKonspekts ??= ksztalcenie.allKsztalcenieKonspekts;
   else
     allKonspekts ??= all.allKonspekts;
