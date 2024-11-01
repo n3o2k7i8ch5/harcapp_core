@@ -58,7 +58,7 @@ class KonspektHtmlWidget extends StatelessWidget{
               maxWidth: maxDialogWidth
           );
         }else if(url.endsWith('@harcerskie.konspekt')){
-          String konspektName = url.substring(0, url.length - '@konspekt'.length);
+          String konspektName = url.substring(0, url.length - '@harcerskie.konspekt'.length);
           openBaseKonspektDialog(
               context: context,
               konspektName: konspektName,
@@ -68,7 +68,7 @@ class KonspektHtmlWidget extends StatelessWidget{
               maxWidth: maxDialogWidth
           );
         }else if(url.endsWith('@ksztalcenie.konspekt')){
-          String konspektName = url.substring(0, url.length - '@konspekt'.length);
+          String konspektName = url.substring(0, url.length - '@ksztalcenie.konspekt'.length);
           openBaseKonspektDialog(
               context: context,
               konspektName: konspektName,
