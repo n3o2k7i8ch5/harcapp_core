@@ -22,7 +22,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
         elevation: elevation,
         child: Stack(
           children: <Widget>[
-            Image.asset('assets/poradnik/${poradnik.name}/cover_raw.webp'),
+            Image.asset('packages/harcapp_core/assets/poradnik/${poradnik.name}/cover_raw.webp'),
             Text(poradnik.title),
           ],
         ),
