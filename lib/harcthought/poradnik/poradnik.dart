@@ -29,6 +29,6 @@ class Poradnik{
     required this.formats
   });
 
-  String getDownloadUrl(PoradnikFormat format) => "https://gitlab.com/n3o2k7i8ch5/harcapp_data/raw/master/poradnik/$name/$name.${format.extension}";
+  String getDownloadUrl(PoradnikFormat format) => "https://gitlab.com/n3o2k7i8ch5/harcapp_data/raw/master/poradniki/$name/$name.${format.extension}";
 
 }
