@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
@@ -11,19 +13,51 @@ class PoradnikThumbnailWidget extends StatelessWidget {
   final double height;
   final double elevation;
 
-  PoradnikThumbnailWidget(this.poradnik, {this.width = 100, this.height = 200, this.elevation = 0});
+  final double titleHeightPaddingFraction;
+  final double titleHorizontalPaddingFraction;
+
+  PoradnikThumbnailWidget(
+      this.poradnik,
+      { this.width = 100,
+        this.height = 142,
+        this.elevation = 0,
+        this.titleHeightPaddingFraction = 0.2,
+        this.titleHorizontalPaddingFraction = 0.2
+      });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: width,
+      height: height,
       child: SimpleButton(
         radius: AppCard.bigRadius,
         clipBehavior: Clip.hardEdge,
         elevation: elevation,
         child: Stack(
+          fit: StackFit.expand,
           children: <Widget>[
-            Image.asset('packages/harcapp_core/assets/poradnik/${poradnik.name}/cover_raw.webp'),
-            Text(poradnik.title),
+
+            Image.asset(
+              'packages/harcapp_core/assets/poradnik/${poradnik.name}/cover_raw.webp',
+              fit: BoxFit.cover,
+            ),
+            Positioned(
+              top: height*titleHeightPaddingFraction,
+              left: width*titleHorizontalPaddingFraction,
+              right: width*titleHorizontalPaddingFraction,
+              child: Center(
+                child: AutoSizeText(
+                  poradnik.coverTitle??poradnik.title,
+                  style: AppTextStyle(
+                    color: poradnik.titleColor??Colors.black,
+                    fontSize: 48,
+                  ),
+                  maxLines: (poradnik.coverTitle??poradnik.title).split('\n').length,
+                  textAlign: TextAlign.center,
+                ),
+              )
+            )
           ],
         ),
         onTap: () => launchURL(poradnik.getDownloadUrl(poradnik.formats[0])),
