@@ -12,6 +12,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
   final double width;
   final double height;
   final double elevation;
+  final double radius;
 
   final double titleHeightPaddingFraction;
   final double titleHorizontalPaddingFraction;
@@ -21,8 +22,9 @@ class PoradnikThumbnailWidget extends StatelessWidget {
       { this.width = 100,
         this.height = 142,
         this.elevation = 0,
-        this.titleHeightPaddingFraction = 0.2,
-        this.titleHorizontalPaddingFraction = 0.2
+        this.radius = AppCard.defRadius,
+        this.titleHeightPaddingFraction = 0.1,
+        this.titleHorizontalPaddingFraction = 0.15
       });
 
   @override
@@ -31,7 +33,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
       width: width,
       height: height,
       child: SimpleButton(
-        radius: AppCard.bigRadius,
+        radius: radius,
         clipBehavior: Clip.hardEdge,
         elevation: elevation,
         child: Stack(

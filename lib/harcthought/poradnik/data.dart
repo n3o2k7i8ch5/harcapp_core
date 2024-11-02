@@ -7,7 +7,7 @@ const List<Poradnik> allPoradniks = [
   const Poradnik(
     name: 'dwie_roty_dwoch_przyrzeczen_harcerskich',
     title: 'Dwie roty dwóch Przyrzeczeń',
-    coverTitle: 'Dwie roty\ndwóch Przyrzeczeń',
+    coverTitle: 'DWIE ROTY\nDWÓCH PRZYRZECZEŃ',
     formats: [PoradnikFormat.pdf, PoradnikFormat.docx],
     titleColor: Colors.white,
   )
