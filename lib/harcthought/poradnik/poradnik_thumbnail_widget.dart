@@ -58,7 +58,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
     }
 
     return Material(
-      borderRadius: BorderRadius.circular(AppCard.defRadius),
+      borderRadius: BorderRadius.circular(radius),
       clipBehavior: Clip.hardEdge,
       elevation: elevation,
       child: IntrinsicWidth(
