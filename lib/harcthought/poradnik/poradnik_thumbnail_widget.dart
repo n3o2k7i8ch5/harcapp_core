@@ -27,8 +27,8 @@ class PoradnikThumbnailWidget extends StatelessWidget {
 
   PoradnikThumbnailWidget(
       this.poradnik,
-      { this.width = defWidth,
-        this.height = defHeight,
+      { this.width,
+        this.height,
         this.elevation = 0,
         this.radius = AppCard.defRadius,
         this.titleHeightPaddingFraction = 0.11,
