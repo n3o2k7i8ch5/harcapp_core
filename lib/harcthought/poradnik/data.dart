@@ -20,6 +20,7 @@ List<Poradnik> allPoradniks = [
           style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
             fontSize: height*Poradnik.mainTitleHeightFactor,
+            fontWeight: weight.halfBold
           ),
           textAlign: TextAlign.center,
         ),
@@ -28,7 +29,8 @@ List<Poradnik> allPoradniks = [
 
         Container(
           width: width*0.5,
-          height: height*0.005,
+          height: height*0.01,
+          color: poradnik.titleColor??Colors.black,
         ),
 
         SizedBox(height: height*Poradnik.titlePaddingFactor),
