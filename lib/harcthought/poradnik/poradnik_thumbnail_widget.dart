@@ -61,54 +61,55 @@ class PoradnikThumbnailWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(AppCard.defRadius),
       clipBehavior: Clip.hardEdge,
       elevation: elevation,
-      child: Column(
-        children: [
+      child: IntrinsicWidth(
+        child: Column(
+          children: [
 
-          SizedBox(
-            width: width,
-            height: height,
-            child: SimpleButton(
-              radius: 0,
-              child: Stack(
-                fit: StackFit.expand,
-                children: <Widget>[
+            SizedBox(
+              width: width,
+              height: height,
+              child: SimpleButton(
+                radius: 0,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: <Widget>[
 
-                  Image.asset(
-                    'packages/harcapp_core/assets/poradnik/${poradnik.name}/cover_raw.webp',
-                    fit: BoxFit.cover,
-                  ),
-                  Positioned(
-                      top: height*titleHeightPaddingFraction,
-                      left: width*titleHorizontalPaddingFraction,
-                      right: width*titleHorizontalPaddingFraction,
-                      child: Center(
-                        child:
-                        poradnik.coverTitleBuilder?.call(context, poradnik, width, height)??
-                            AutoSizeText(
-                              poradnik.coverTitle??poradnik.title,
-                              style: AppTextStyle(
-                                color: poradnik.titleColor??Colors.black,
-                                fontSize: 48,
+                    Image.asset(
+                      'packages/harcapp_core/assets/poradnik/${poradnik.name}/cover_raw.webp',
+                      fit: BoxFit.cover,
+                    ),
+                    Positioned(
+                        top: height*titleHeightPaddingFraction,
+                        left: width*titleHorizontalPaddingFraction,
+                        right: width*titleHorizontalPaddingFraction,
+                        child: Center(
+                          child:
+                          poradnik.coverTitleBuilder?.call(context, poradnik, width, height)??
+                              AutoSizeText(
+                                poradnik.coverTitle??poradnik.title,
+                                style: AppTextStyle(
+                                  color: poradnik.titleColor??Colors.black,
+                                  fontSize: 48,
+                                ),
+                                maxLines: (poradnik.coverTitle??poradnik.title).split('\n').length,
+                                textAlign: TextAlign.center,
                               ),
-                              maxLines: (poradnik.coverTitle??poradnik.title).split('\n').length,
-                              textAlign: TextAlign.center,
-                            ),
-                      )
-                  )
-                ],
+                        )
+                    )
+                  ],
+                ),
+                onTap: onTap,
               ),
-              onTap: onTap,
             ),
-          ),
 
-          if(showDownloadFormats)
-            FileFormatSelectorRowWidget(
-              poradnik.formats,
-              expanded: false,
-              onTap: onFormatTap??(format) => launchURL(poradnik.getDownloadUrl(poradnik.formats[0])),
-            )
+            if(showDownloadFormats)
+              FileFormatSelectorRowWidget(
+                poradnik.formats,
+                onTap: onFormatTap??(format) => launchURL(poradnik.getDownloadUrl(poradnik.formats[0])),
+              )
 
-        ],
+          ],
+        ),
       ),
     );
   }
