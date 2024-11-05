@@ -21,8 +21,8 @@ enum PoradnikFormat{
 
 class Poradnik{
 
-  static const double mainTitleHeightFactor = 0.05;
-  static const double subTitleHeightFactor = 0.03;
+  static const double mainTitleHeightFactor = 0.04;
+  static const double subTitleHeightFactor = 0.02;
   static const double titlePaddingFactor = 0.01;
 
   final String name;

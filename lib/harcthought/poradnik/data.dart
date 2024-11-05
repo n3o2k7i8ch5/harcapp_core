@@ -26,11 +26,18 @@ List<Poradnik> allPoradniks = [
 
         SizedBox(height: height*Poradnik.titlePaddingFactor),
 
+        Container(
+          width: width*0.5,
+          height: height*0.005,
+        ),
+
+        SizedBox(height: height*Poradnik.titlePaddingFactor),
+
         Text(
           'Poradnik dla drużynowych ZHP',
           style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
-            fontSize: height*Poradnik.mainTitleHeightFactor,
+            fontSize: height*Poradnik.subTitleHeightFactor,
           ),
           textAlign: TextAlign.center,
         ),
