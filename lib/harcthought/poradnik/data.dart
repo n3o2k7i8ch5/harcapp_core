@@ -28,7 +28,7 @@ List<Poradnik> allPoradniks = [
         SizedBox(height: height*Poradnik.titlePaddingFactor),
 
         Container(
-          width: width*0.65,
+          width: width*0.63,
           height: height*0.003,
           color: poradnik.titleColor??Colors.black,
         ),
