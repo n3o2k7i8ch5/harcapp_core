@@ -41,20 +41,20 @@ class PoradnikThumbnailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    double? width = this.width;
-    if(width == null){
-      if(this.height == null)
-        width = defWidth;
-      else
-        width = this.height!/1.42;
-    }
-
-    double? height = this.height;
-    if(height == null){
-      if(this.width == null)
-        height = defHeight;
-      else
-        height = this.width!*1.42;
+    double width;
+    double height;
+    if(this.width == null && this.height == null){
+      width = defWidth;
+      height = defHeight;
+    }else if(this.width == null && this.height != null){
+      width = this.height!/1.42;
+      height = this.height!;
+    }else if(this.width != null && this.height == null){
+      height = this.width!*1.42;
+      width = this.width!;
+    }else{
+      width = this.width!;
+      height = this.height!;
     }
 
     return Material(
