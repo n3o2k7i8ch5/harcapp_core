@@ -104,6 +104,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
           if(showDownloadFormats)
             FileFormatSelectorRowWidget(
               poradnik.formats,
+              expanded: false,
               onTap: onFormatTap??(format) => launchURL(poradnik.getDownloadUrl(poradnik.formats[0])),
             )
 

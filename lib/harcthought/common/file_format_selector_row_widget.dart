@@ -57,12 +57,15 @@ class FileFormatWidget extends StatelessWidget {
 class FileFormatSelectorRowWidget extends StatelessWidget{
 
   final Iterable<FileFormat> fileFormats;
+  final bool expanded;
   final void Function(FileFormat) onTap;
 
   const FileFormatSelectorRowWidget(
     this.fileFormats,
-    {required this.onTap, super.key}
-  );
+    { this.expanded = false,
+      required this.onTap,
+      super.key
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +88,14 @@ class FileFormatSelectorRowWidget extends StatelessWidget{
       );
     }
 
-    return Row(children: formatButtons);
+    if(expanded)
+      return Row(children: formatButtons);
+    else
+      return IntrinsicWidth(
+        child: Row(
+          children: formatButtons,
+        ),
+      );
 
   }
 
