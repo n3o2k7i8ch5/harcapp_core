@@ -4,6 +4,8 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
+import 'package:harcapp_core/harcthought/common/file_format.dart';
+import 'package:harcapp_core/harcthought/common/file_format_selector_row_widget.dart';
 import 'package:harcapp_core/harcthought/poradnik/poradnik.dart';
 
 class PoradnikThumbnailWidget extends StatelessWidget {
@@ -17,6 +19,8 @@ class PoradnikThumbnailWidget extends StatelessWidget {
   final double elevation;
   final double radius;
   final void Function()? onTap;
+  final void Function(FileFormat format)? onFormatTap;
+  final bool showDownloadFormats;
 
   final double titleHeightPaddingFraction;
   final double titleHorizontalPaddingFraction;
@@ -29,7 +33,9 @@ class PoradnikThumbnailWidget extends StatelessWidget {
         this.radius = AppCard.defRadius,
         this.titleHeightPaddingFraction = 0.11,
         this.titleHorizontalPaddingFraction = 0.15,
-        this.onTap
+        this.onTap,
+        this.onFormatTap,
+        this.showDownloadFormats = true
       });
 
   @override
@@ -51,43 +57,55 @@ class PoradnikThumbnailWidget extends StatelessWidget {
         height = this.width!*1.42;
     }
 
-    return SizedBox(
-      width: width,
-      height: height,
-      child: SimpleButton(
-        radius: radius,
-        clipBehavior: Clip.hardEdge,
-        elevation: elevation,
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
+    return Column(
+      children: [
 
-            Image.asset(
-              'packages/harcapp_core/assets/poradnik/${poradnik.name}/cover_raw.webp',
-              fit: BoxFit.cover,
-            ),
-            Positioned(
-              top: height*titleHeightPaddingFraction,
-              left: width*titleHorizontalPaddingFraction,
-              right: width*titleHorizontalPaddingFraction,
-              child: Center(
-                child:
-                poradnik.coverTitleBuilder?.call(context, poradnik, width, height)??
-                AutoSizeText(
-                  poradnik.coverTitle??poradnik.title,
-                  style: AppTextStyle(
-                    color: poradnik.titleColor??Colors.black,
-                    fontSize: 48,
-                  ),
-                  maxLines: (poradnik.coverTitle??poradnik.title).split('\n').length,
-                  textAlign: TextAlign.center,
+        SizedBox(
+          width: width,
+          height: height,
+          child: SimpleButton(
+            radius: radius,
+            clipBehavior: Clip.hardEdge,
+            elevation: elevation,
+            child: Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+
+                Image.asset(
+                  'packages/harcapp_core/assets/poradnik/${poradnik.name}/cover_raw.webp',
+                  fit: BoxFit.cover,
                 ),
-              )
-            )
-          ],
+                Positioned(
+                    top: height*titleHeightPaddingFraction,
+                    left: width*titleHorizontalPaddingFraction,
+                    right: width*titleHorizontalPaddingFraction,
+                    child: Center(
+                      child:
+                      poradnik.coverTitleBuilder?.call(context, poradnik, width, height)??
+                          AutoSizeText(
+                            poradnik.coverTitle??poradnik.title,
+                            style: AppTextStyle(
+                              color: poradnik.titleColor??Colors.black,
+                              fontSize: 48,
+                            ),
+                            maxLines: (poradnik.coverTitle??poradnik.title).split('\n').length,
+                            textAlign: TextAlign.center,
+                          ),
+                    )
+                )
+              ],
+            ),
+            onTap: onTap,
+          ),
         ),
-        onTap: onTap??() => launchURL(poradnik.getDownloadUrl(poradnik.formats[0])),
-      ),
+
+        if(showDownloadFormats)
+        FileFormatSelectorRowWidget(
+          poradnik.formats,
+          onTap: onFormatTap??(format) => launchURL(poradnik.getDownloadUrl(poradnik.formats[0])),
+        )
+        
+      ],
     );
   }
 }

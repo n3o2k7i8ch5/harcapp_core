@@ -1,23 +1,5 @@
 import 'package:flutter/material.dart';
-
-enum PoradnikFormat{
-  pdf,
-  docx;
-
-  String get title{
-    switch(this){
-      case PoradnikFormat.pdf: return 'PDF';
-      case PoradnikFormat.docx: return 'DOCX';
-    }
-  }
-
-  String get extension{
-    switch(this){
-      case PoradnikFormat.pdf: return 'pdf';
-      case PoradnikFormat.docx: return 'docx';
-    }
-  }
-}
+import 'package:harcapp_core/harcthought/common/file_format.dart';
 
 class Poradnik{
 
@@ -28,7 +10,7 @@ class Poradnik{
   final String name;
   final String title;
   final String? coverTitle;
-  final List<PoradnikFormat> formats;
+  final List<FileFormat> formats;
   final Color? titleColor;
   final Widget Function(BuildContext context, Poradnik poradnik, double width, double height)? coverTitleBuilder;
   
@@ -41,6 +23,6 @@ class Poradnik{
     this.coverTitleBuilder
   });
 
-  String getDownloadUrl(PoradnikFormat format) => "https://gitlab.com/n3o2k7i8ch5/harcapp_data/raw/master/poradniki/$name/$name.${format.extension}";
+  String getDownloadUrl(FileFormat format) => "https://gitlab.com/n3o2k7i8ch5/harcapp_data/raw/master/poradniki/$name/$name.${format.extension}";
 
 }

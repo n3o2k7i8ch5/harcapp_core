@@ -4,6 +4,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/asset_gallery_viewer.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/zycie_i_swiat_prl.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -199,24 +200,24 @@ List<Konspekt> allHarcerskieKonspekts = [
           name: 'fragment_przykladowy_1',
           title: 'Przykładowy fragment Pisma Świętego (nr 1)',
           assets: {
-            KonspektAttachmentFormat.pdf: 'fragment_przykladowy_1.pdf',
-            KonspektAttachmentFormat.docx: 'fragment_przykladowy_1.docx'
+            FileFormat.pdf: 'fragment_przykladowy_1.pdf',
+            FileFormat.docx: 'fragment_przykladowy_1.docx'
           },
         ),
         KonspektAttachment(
           name: 'fragment_przykladowy_2',
           title: 'Przykładowy fragment Pisma Świętego (nr 2)',
           assets: {
-            KonspektAttachmentFormat.pdf: 'fragment_przykladowy_2.pdf',
-            KonspektAttachmentFormat.docx: 'fragment_przykladowy_2.docx'
+            FileFormat.pdf: 'fragment_przykladowy_2.pdf',
+            FileFormat.docx: 'fragment_przykladowy_2.docx'
           },
         ),
         KonspektAttachment(
           name: 'fragment_przykladowy_3',
           title: 'Przykładowy fragment Pisma Świętego (nr 3)',
           assets: {
-            KonspektAttachmentFormat.pdf: 'fragment_przykladowy_3.pdf',
-            KonspektAttachmentFormat.docx: 'fragment_przykladowy_3.docx'
+            FileFormat.pdf: 'fragment_przykladowy_3.pdf',
+            FileFormat.docx: 'fragment_przykladowy_3.docx'
           },
         )
       ],
@@ -761,8 +762,8 @@ List<Konspekt> allHarcerskieKonspekts = [
           name: 'kroki',
           title: 'Kroki',
           assets: {
-            KonspektAttachmentFormat.pdf: 'kroki.pdf',
-            KonspektAttachmentFormat.docx: 'kroki.docx'
+            FileFormat.pdf: 'kroki.pdf',
+            FileFormat.docx: 'kroki.docx'
           },
         ),
       ]
@@ -1582,8 +1583,8 @@ List<Konspekt> allHarcerskieKonspekts = [
         name: 'pytania',
         title: 'Pytania',
         assets: {
-          KonspektAttachmentFormat.pdf: 'pytania.pdf',
-          KonspektAttachmentFormat.docx: 'pytania.docx'
+          FileFormat.pdf: 'pytania.pdf',
+          FileFormat.docx: 'pytania.docx'
         },
       )
     ],
@@ -1714,8 +1715,8 @@ List<Konspekt> allHarcerskieKonspekts = [
           name: 'komputer',
           title: 'Symulator komputera',
           assets: {
-            KonspektAttachmentFormat.pdf: 'komputer.pdf',
-            KonspektAttachmentFormat.docx: 'komputer.docx',
+            FileFormat.pdf: 'komputer.pdf',
+            FileFormat.docx: 'komputer.docx',
           },
         ),
       ],
@@ -2319,24 +2320,24 @@ List<Konspekt> allHarcerskieKonspekts = [
         name: 'sznury',
         title: 'Sznury',
         assets: {
-          KonspektAttachmentFormat.pdf: 'sznury.pdf',
-          KonspektAttachmentFormat.docx: 'sznury.docx',
+          FileFormat.pdf: 'sznury.pdf',
+          FileFormat.docx: 'sznury.docx',
         },
       ),
       KonspektAttachment(
           name: 'nieistniejace_sznury',
           title: 'Nieistniejące sznury',
           assets: {
-            KonspektAttachmentFormat.pdf: 'nieistniejace_sznury.pdf',
-            KonspektAttachmentFormat.docx: 'nieistniejace_sznury.docx',
+            FileFormat.pdf: 'nieistniejace_sznury.pdf',
+            FileFormat.docx: 'nieistniejace_sznury.docx',
           }
       ),
       KonspektAttachment(
           name: 'stopnie_instruktorskie_pytania',
           title: 'Stopnie instruktorskie - pytania',
           assets: {
-            KonspektAttachmentFormat.pdf: 'stopnie_instruktorskie_pytania.pdf',
-            KonspektAttachmentFormat.docx: 'stopnie_instruktorskie_pytania.docx',
+            FileFormat.pdf: 'stopnie_instruktorskie_pytania.pdf',
+            FileFormat.docx: 'stopnie_instruktorskie_pytania.docx',
           }
       ),
     ],

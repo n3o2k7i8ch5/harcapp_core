@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
+import 'package:harcapp_core/harcthought/common/file_format.dart';
 
 import 'poradnik.dart';
 
@@ -9,7 +10,7 @@ List<Poradnik> allPoradniks = [
     name: 'dwie_roty_dwoch_przyrzeczen_harcerskich',
     title: 'Dwie roty dwóch Przyrzeczeń',
     coverTitle: 'DWIE ROTY\nDWÓCH PRZYRZECZEŃ',
-    formats: [PoradnikFormat.pdf, PoradnikFormat.docx],
+    formats: [FileFormat.pdf, FileFormat.docx],
     titleColor: Colors.white,
     coverTitleBuilder: (context, poradnik, width, height) => Column(
       mainAxisAlignment: MainAxisAlignment.center,

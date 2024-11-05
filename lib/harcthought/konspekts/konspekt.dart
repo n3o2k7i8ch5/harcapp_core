@@ -7,6 +7,7 @@ import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/open_image_dialog.dart';
 import 'package:harcapp_core/comm_widgets/open_svg_image_dialog.dart';
+import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:open_filex/open_filex.dart';
@@ -50,59 +51,6 @@ enum KonspektType{
       case projekt: return isDark(context)?Colors.purple[900]!:Colors.deepPurple[200]!;
       case wspolzawoIndywidualne: return isDark(context)?Colors.deepOrange[900]!:Colors.deepOrange[200]!;
       case wspolzawoGrupowe: return isDark(context)?Colors.orange[900]!:Colors.orange[200]!;
-    }
-  }
-
-}
-
-enum KonspektAttachmentFormat{
-  pdf, docx, png, webp, svg, url, urlPdf, urlDocx, urlPng, urlWebp, urlSvg;
-  
-  Color get color{
-    switch(this){
-      case pdf: return Colors.red;
-      case docx: return Colors.blue;
-      case png: return Colors.yellow[600]!;
-      case webp: return Colors.orange;
-      case svg: return Colors.deepPurpleAccent;
-      case url: return Colors.grey;
-      case urlPdf: return Colors.red;
-      case urlDocx: return Colors.blue;
-      case urlPng: return Colors.yellow[600]!;
-      case urlWebp: return Colors.orange;
-      case urlSvg: return Colors.deepPurpleAccent;
-    }
-  }
-
-  String get displayName{
-    switch(this){
-      case pdf: return 'PDF';
-      case docx: return 'DOC';
-      case png: return 'PNG';
-      case webp: return 'WEBP';
-      case svg: return 'SVG';
-      case url: return 'URL';
-      case urlPdf: return 'PDF';
-      case urlDocx: return 'DOC';
-      case urlPng: return 'PNG';
-      case urlWebp: return 'WEBP';
-      case urlSvg: return 'SVG';
-    }
-  }
-
-  IconData? get subIcon{
-    switch(this){
-      case pdf:
-      case docx:
-      case png:
-      case webp:
-      case svg:
-      case url: return null;
-      case urlPdf:
-      case urlDocx:
-      case urlPng:
-      case urlWebp:
-      case urlSvg: return MdiIcons.web;
     }
   }
 
@@ -243,7 +191,7 @@ class KonspektAttachment{
 
     final String name;
     final String title;
-    final Map<KonspektAttachmentFormat, String> assets;
+    final Map<FileFormat, String> assets;
     final KonspektAttachmentPrint? print;
 
     const KonspektAttachment({
@@ -256,7 +204,7 @@ class KonspektAttachment{
     Future<bool> open(
         BuildContext context,
         String konspektName,
-        KonspektAttachmentFormat format,
+        FileFormat format,
         KonspektCategory konspektCategory,
         {double? maxDialogWidth}
     ) async {
@@ -264,24 +212,24 @@ class KonspektAttachment{
       if(assetPath == null) return false;
 
       switch(format){
-        case KonspektAttachmentFormat.url:
+        case FileFormat.url:
           launchURL(assetPath);
           return true;
-        case KonspektAttachmentFormat.urlPdf:
+        case FileFormat.urlPdf:
           launchURL(assetPath);
           return true;
-        case KonspektAttachmentFormat.urlDocx:
+        case FileFormat.urlDocx:
           launchURL(assetPath);
           return true;
-        case KonspektAttachmentFormat.urlPng:
-        case KonspektAttachmentFormat.urlWebp:
+        case FileFormat.urlPng:
+        case FileFormat.urlWebp:
           openImageDialog(context, title, assetPath, web: true, maxWidth: maxDialogWidth);
           return true;
-        case KonspektAttachmentFormat.urlSvg:
+        case FileFormat.urlSvg:
           openSvgImageDialog(context, title, assetPath, web: true, maxWidth: maxDialogWidth);
           return true;
-        case KonspektAttachmentFormat.pdf:
-        case KonspektAttachmentFormat.docx:
+        case FileFormat.pdf:
+        case FileFormat.docx:
           OpenResult? result;
           if(assetPath.contains('/'))
             result = await openAsset('packages/harcapp_core/assets/konspekty/$assetPath', webOpenInNewTab: true);
@@ -289,15 +237,15 @@ class KonspektAttachment{
             result = await openAsset('packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', webOpenInNewTab: true);
 
           return result?.type == ResultType.done;
-        case KonspektAttachmentFormat.png:
-        case KonspektAttachmentFormat.webp:
+        case FileFormat.png:
+        case FileFormat.webp:
           if(assetPath.contains('/'))
             await openImageDialog(context, title, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false, maxWidth: maxDialogWidth);
           else
             await openImageDialog(context, title, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false, maxWidth: maxDialogWidth);
 
           return true;
-        case KonspektAttachmentFormat.svg:
+        case FileFormat.svg:
           if(assetPath.contains('/'))
             await openSvgImageDialog(context, title, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false, maxWidth: maxDialogWidth);
           else
@@ -311,7 +259,7 @@ class KonspektAttachment{
     Future<bool> openOrShowMessage(
         BuildContext context,
         String konspektName,
-        KonspektAttachmentFormat format,
+        FileFormat format,
         KonspektCategory konspektCategory,
         {double? maxDialogWidth}
     ) async {

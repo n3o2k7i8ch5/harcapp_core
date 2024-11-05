@@ -1,3 +1,4 @@
+import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
 const String attach_html_o_strukturze_i_ksztaltowaniu_duchowosci = '<a href="$attach_name_o_strukturze_i_ksztaltowaniu_duchowosci@attachment">$attach_title_o_strukturze_i_ksztaltowaniu_duchowosci</a>';
@@ -7,8 +8,8 @@ const KonspektAttachment attach_o_strukturze_i_ksztaltowaniu_duchowosci = Konspe
   name: attach_name_o_strukturze_i_ksztaltowaniu_duchowosci,
   title: attach_title_o_strukturze_i_ksztaltowaniu_duchowosci,
   assets: {
-    KonspektAttachmentFormat.pdf: 'common/warsztaty_duchowe/$attach_name_o_strukturze_i_ksztaltowaniu_duchowosci.pdf',
-    KonspektAttachmentFormat.docx: 'common/warsztaty_duchowe/$attach_name_o_strukturze_i_ksztaltowaniu_duchowosci.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_o_strukturze_i_ksztaltowaniu_duchowosci.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_o_strukturze_i_ksztaltowaniu_duchowosci.docx',
   },
 );
 
@@ -19,8 +20,8 @@ const KonspektAttachment attach_neutralnosc_duchowa_przyklady = KonspektAttachme
   name: attach_name_neutralnosc_duchowa_przyklady,
   title: attach_title_neutralnosc_duchowa_przyklady,
   assets: {
-    KonspektAttachmentFormat.pdf: 'common/warsztaty_duchowe/$attach_name_neutralnosc_duchowa_przyklady.pdf',
-    KonspektAttachmentFormat.docx: 'common/warsztaty_duchowe/$attach_name_neutralnosc_duchowa_przyklady.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_neutralnosc_duchowa_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_neutralnosc_duchowa_przyklady.docx',
   },
 );
 
@@ -31,8 +32,8 @@ const KonspektAttachment attach_cel_wychowania_duchowego_zhp_statut = KonspektAt
   name: attach_name_cel_wychowania_duchowego_zhp_statut,
   title: attach_title_cel_wychowania_duchowego_zhp_statut,
   assets: {
-    KonspektAttachmentFormat.pdf: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_statut.pdf',
-    KonspektAttachmentFormat.docx: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_statut.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_statut.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_statut.docx',
   },
 );
 
@@ -43,8 +44,8 @@ const KonspektAttachment attach_cel_wychowania_duchowego_zhp_uchwala = KonspektA
   name: attach_name_cel_wychowania_duchowego_zhp_uchwala,
   title: attach_title_cel_wychowania_duchowego_zhp_uchwala,
   assets: {
-    KonspektAttachmentFormat.pdf: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_uchwala.pdf',
-    KonspektAttachmentFormat.docx: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_uchwala.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_uchwala.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_uchwala.docx',
   },
 );
 
@@ -55,7 +56,7 @@ const KonspektAttachment attach_kratka_minimow_rozwoju_duchowego = KonspektAttac
   name: attach_name_kratka_minimow_rozwoju_duchowego,
   title: attach_title_kratka_minimow_rozwoju_duchowego,
   assets: {
-    KonspektAttachmentFormat.pdf: 'common/warsztaty_duchowe/$attach_name_kratka_minimow_rozwoju_duchowego.pdf',
-    KonspektAttachmentFormat.docx: 'common/warsztaty_duchowe/$attach_name_kratka_minimow_rozwoju_duchowego.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_kratka_minimow_rozwoju_duchowego.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_kratka_minimow_rozwoju_duchowego.docx',
   },
 );

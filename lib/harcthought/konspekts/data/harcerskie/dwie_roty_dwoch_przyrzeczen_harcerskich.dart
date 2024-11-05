@@ -1,4 +1,5 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
+import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
@@ -12,8 +13,8 @@ const KonspektAttachment attach_list_do_harcerza_i_rodzicow = KonspektAttachment
   name: attach_name_list_do_harcerza_i_rodzicow,
   title: attach_title_list_do_harcerza_i_rodzicow,
   assets: {
-    KonspektAttachmentFormat.pdf: 'ksztalcenie/$konspekt_harc_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_list_do_harcerza_i_rodzicow.pdf',
-    KonspektAttachmentFormat.docx: 'ksztalcenie/$konspekt_harc_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_list_do_harcerza_i_rodzicow.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_list_do_harcerza_i_rodzicow.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_list_do_harcerza_i_rodzicow.docx',
   },
 );
 

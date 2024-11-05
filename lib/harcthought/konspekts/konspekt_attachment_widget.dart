@@ -6,56 +6,10 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/harcthought/common/file_format_selector_row_widget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'konspekt.dart';
-
-class KonspektAttachmentFormatWidget extends StatelessWidget {
-
-  final KonspektAttachmentFormat format;
-
-  const KonspektAttachmentFormatWidget(this.format, {super.key});
-
-  @override
-  Widget build(BuildContext context){
-
-    IconData? subIcon = format.subIcon;
-
-    return Material(
-        color: format.color,
-        borderRadius: BorderRadius.circular(AppCard.defRadius),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-
-            Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Text(
-                  format.displayName,
-                  style: const AppTextStyle(
-                    color: Colors.black,
-                    fontWeight: weight.halfBold,
-                  )
-              ),
-            ),
-
-            if(subIcon != null)
-              Padding(
-                padding: const EdgeInsets.only(right: 6.0),
-                child: Icon(
-                  subIcon,
-                  size: 20.0,
-                  color: Colors.black,
-                ),
-              ),
-
-          ],
-        )
-    );
-
-  }
-
-}
 
 class KonspektAttachmentPrintWidget extends StatelessWidget{
 
@@ -260,7 +214,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
                     )
                 )),
 
-                KonspektAttachmentFormatWidget(attachment.assets.keys.first),
+                FileFormatWidget(attachment.assets.keys.first),
 
               ],
             ),
@@ -273,30 +227,6 @@ class KonspektAttachmentWidget extends StatelessWidget{
               maxDialogWidth: maxDialogWidth
           )
       );
-
-    List<Widget> formatButtons = [];
-
-    for(KonspektAttachmentFormat format in attachment.assets.keys){
-      formatButtons.add(
-          Expanded(
-            child: SimpleButton(
-                padding: const EdgeInsets.all(Dimen.defMarg),
-                radius: 0,
-                color: format.color.withOpacity(.5),
-                child: Center(
-                  child: KonspektAttachmentFormatWidget(format),
-                ),
-                onTap: () => attachment.openOrShowMessage(
-                    context,
-                    konspekt.name,
-                    format,
-                    konspekt.category,
-                    maxDialogWidth: maxDialogWidth
-                )
-            ),
-          )
-      );
-    }
 
     return Material(
       clipBehavior: Clip.hardEdge,
@@ -315,8 +245,15 @@ class KonspektAttachmentWidget extends StatelessWidget{
                 )
             ),
           ),
-          Row(
-            children: formatButtons,
+          FileFormatSelectorRowWidget(
+              attachment.assets.keys,
+              onTap: (format) => attachment.openOrShowMessage(
+                  context,
+                  konspekt.name,
+                  format,
+                  konspekt.category,
+                  maxDialogWidth: maxDialogWidth
+              )
           ),
         ],
       ),
