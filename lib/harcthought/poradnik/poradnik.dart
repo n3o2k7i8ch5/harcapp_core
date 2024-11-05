@@ -23,7 +23,7 @@ class Poradnik{
 
   static const double mainTitleHeightFactor = 0.041;
   static const double subTitleHeightFactor = 0.028;
-  static const double titlePaddingFactor = 0.018;
+  static const double titlePaddingFactor = 0.020;
 
   final String name;
   final String title;
