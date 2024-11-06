@@ -9,6 +9,7 @@ class Poradnik{
 
   final String name;
   final String title;
+  final String description;
   final String? coverTitle;
   final List<FileFormat> formats;
   final Color? titleColor;
@@ -17,6 +18,7 @@ class Poradnik{
   const Poradnik({
     required this.name,
     required this.title,
+    required this.description,
     this.coverTitle,
     required this.formats,
     this.titleColor,
