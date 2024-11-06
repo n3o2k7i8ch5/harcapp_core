@@ -10,6 +10,8 @@ import 'package:harcapp_core/harcthought/poradnik/poradnik.dart';
 
 class PoradnikThumbnailWidget extends StatelessWidget {
 
+  static String heroTag(Poradnik poradnik) => 'poradnikThumbnailWidgetHeroTag${poradnik.name}';
+
   static const double defWidth = 100.0;
   static const double defHeight = 142.0;
 
@@ -21,6 +23,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
   final void Function()? onTap;
   final void Function(FileFormat format)? onFormatTap;
   final bool showDownloadFormats;
+  final bool withHero;
 
   final double titleHeightPaddingFraction;
   final double titleHorizontalPaddingFraction;
@@ -35,7 +38,8 @@ class PoradnikThumbnailWidget extends StatelessWidget {
         this.titleHorizontalPaddingFraction = 0.15,
         this.onTap,
         this.onFormatTap,
-        this.showDownloadFormats = true
+        this.showDownloadFormats = true,
+        this.withHero = true
       });
 
   @override
@@ -57,7 +61,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
       height = this.height!;
     }
 
-    return Material(
+    Widget widget = Material(
       borderRadius: BorderRadius.circular(radius),
       clipBehavior: Clip.hardEdge,
       elevation: elevation,
@@ -112,5 +116,15 @@ class PoradnikThumbnailWidget extends StatelessWidget {
         ),
       ),
     );
+
+    if(withHero)
+      return Hero(
+        tag: heroTag(poradnik),
+        child: widget,
+      );
+
+    return widget;
+
+
   }
 }
