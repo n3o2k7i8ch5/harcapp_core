@@ -56,6 +56,62 @@ List<Poradnik> allPoradniks = [
 
       ],
     ),
-  )
-  
+  ),
+
+  Poradnik(
+    name: 'o_strukturze_i_ksztaltowaniu_duchowosci',
+    title: 'O strukturze i kształtowaniu duchowości',
+    description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące m.in. zagadnienia:'
+        '\n'
+        '\nCzym jest duchowość?'
+        '\n'
+        '\nJaka jest relacja między duchowością a wychowaniem?'
+        '\n'
+        '\nJaka jest relacja między duchowością a innymi sferami rozwoju człowieka?'
+        '\n'
+        '\nJaka jest relacja między duchowością a religijnością i religią?'
+        '\n'
+        '\nJakie mechanizmy i zjawiska wpływają na rozwój duchowy?'
+        '\n'
+        '\nJak w sposób skuteczny pracować nad duchowością młodego człowieka?',
+    coverTitle: 'O STRUKTURZE\nI KSZTAŁTOWANIU\nDUCHOWOŚCI',
+    formats: [FileFormat.pdf, FileFormat.docx],
+    titleColor: Colors.black,
+    coverTitleBuilder: (context, poradnik, width, height) => Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+
+        Text(
+          'O STRUKTURZE\nI KSZTAŁTOWANIU\nDUCHOWOŚCI',
+          style: AppTextStyle(
+              color: poradnik.titleColor??Colors.black,
+              fontSize: height*Poradnik.mainTitleHeightFactor,
+              fontWeight: weight.halfBold
+          ),
+          textAlign: TextAlign.center,
+        ),
+
+        SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+        Container(
+          width: width*0.63,
+          height: height*0.003,
+          color: poradnik.titleColor??Colors.black,
+        ),
+
+        SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+        Text(
+          'Poradnik w pracy wychowawczej',
+          style: AppTextStyle(
+            color: poradnik.titleColor??Colors.black,
+            fontSize: height*Poradnik.subTitleHeightFactor,
+          ),
+          textAlign: TextAlign.center,
+        ),
+
+      ],
+    ),
+  ),
+
 ];
