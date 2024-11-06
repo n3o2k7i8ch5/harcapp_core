@@ -11,7 +11,7 @@ KonspektAttachment attach_o_strukturze_i_ksztaltowaniu_duchowosci = KonspektAtta
   name: attach_name_o_strukturze_i_ksztaltowaniu_duchowosci,
   title: attach_title_o_strukturze_i_ksztaltowaniu_duchowosci,
   assets: {
-    FileFormat.urlPdf: urlToPoradnikFile(poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci, "$poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci.pdf"), // 'common/warsztaty_duchowe/$attach_name_o_strukturze_i_ksztaltowaniu_duchowosci.pdf',
+    FileFormat.urlPdf: urlToPoradnikFile(poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci, "$poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci.pdf"),
     FileFormat.urlDocx: urlToPoradnikFile(poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci, "$poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci.docx"),
   },
 );
