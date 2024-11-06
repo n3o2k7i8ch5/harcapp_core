@@ -13,9 +13,9 @@ KonspektAttachment attach_mapa_glowna = KonspektAttachment(
     name: attach_name_mapa_glowna,
     title: attach_title_mapa_glowna,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'mapa_prl.pdf'),
-      FileFormat.urlPng: urlFilePath(_konspekt_name, 'mapa_prl.png'),
-      FileFormat.urlSvg: urlFilePath(_konspekt_name, 'mapa_prl.svg')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'mapa_prl.pdf'),
+      FileFormat.urlPng: urlToGitlabFile(_konspekt_name, 'mapa_prl.png'),
+      FileFormat.urlSvg: urlToGitlabFile(_konspekt_name, 'mapa_prl.svg')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
@@ -29,9 +29,9 @@ KonspektAttachment attach_banknot_csk_1 = KonspektAttachment(
     name: attach_name_banknot_csk_1,
     title: attach_title_banknot_csk_1,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_csk_1.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_csk_1.docx'),
-      FileFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_csk_1.webp')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_csk_1.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_csk_1.docx'),
+      FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'banknot_csk_1.webp')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
@@ -43,9 +43,9 @@ KonspektAttachment attach_banknot_ddm_1 = KonspektAttachment(
     name: attach_name_banknot_ddm_1,
     title: attach_title_banknot_ddm_1,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_ddm_1.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_ddm_1.docx'),
-      FileFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_ddm_1.webp')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_ddm_1.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_ddm_1.docx'),
+      FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'banknot_ddm_1.webp')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
@@ -57,9 +57,9 @@ KonspektAttachment attach_banknot_sur_1 = KonspektAttachment(
     name: attach_name_banknot_sur_1,
     title: attach_title_banknot_sur_1,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_sur_1.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_sur_1.docx'),
-      FileFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_sur_1.webp')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_sur_1.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_sur_1.docx'),
+      FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'banknot_sur_1.webp')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
@@ -71,9 +71,9 @@ KonspektAttachment attach_banknot_usd_1 = KonspektAttachment(
     name: attach_name_banknot_usd_1,
     title: attach_title_banknot_usd_1,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_usd_1.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_usd_1.docx'),
-      FileFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_usd_1.webp')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_usd_1.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_usd_1.docx'),
+      FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'banknot_usd_1.webp')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
@@ -85,9 +85,9 @@ KonspektAttachment attach_banknot_plz_1_mln = KonspektAttachment(
     name: attach_name_banknot_plz_1_mln,
     title: attach_title_banknot_plz_1_mln,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_plz_1_mln.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_plz_1_mln.docx'),
-      FileFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_plz_1_mln.webp')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_plz_1_mln.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_plz_1_mln.docx'),
+      FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'banknot_plz_1_mln.webp')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
@@ -99,9 +99,9 @@ KonspektAttachment attach_banknot_plz_2_mln = KonspektAttachment(
     name: attach_name_banknot_plz_2_mln,
     title: attach_title_banknot_plz_2_mln,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_plz_2_mln.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_plz_2_mln.docx'),
-      FileFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_plz_2_mln.webp')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_plz_2_mln.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_plz_2_mln.docx'),
+      FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'banknot_plz_2_mln.webp')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
@@ -113,9 +113,9 @@ KonspektAttachment attach_banknot_plz_5_mln = KonspektAttachment(
     name: attach_name_banknot_plz_5_mln,
     title: attach_title_banknot_plz_5_mln,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'banknot_plz_5_mln.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'banknot_plz_5_mln.docx'),
-      FileFormat.urlWebp: urlFilePath(_konspekt_name, 'banknot_plz_5_mln.webp')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_plz_5_mln.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_plz_5_mln.docx'),
+      FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'banknot_plz_5_mln.webp')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
@@ -129,8 +129,8 @@ KonspektAttachment attach_wydarzenia_codzienne = KonspektAttachment(
   name: attach_name_wydarzenia_codzienne,
   title: attach_title_wydarzenia_codzienne,
   assets: {
-    FileFormat.urlPdf: urlFilePath(_konspekt_name, 'wydarzenia_codzienne.pdf'),
-    FileFormat.urlDocx: urlFilePath(_konspekt_name, 'wydarzenia_codzienne.docx')
+    FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'wydarzenia_codzienne.pdf'),
+    FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'wydarzenia_codzienne.docx')
   },
   print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
@@ -142,8 +142,8 @@ KonspektAttachment attach_raporty_obserwacji_obywatelskich = KonspektAttachment(
     name: attach_name_raporty_obserwacji_obywatelskich,
     title: attach_title_raporty_obserwacji_obywatelskich,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'raporty_obserwacji_obywatelskich.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'raporty_obserwacji_obywatelskich.docx')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'raporty_obserwacji_obywatelskich.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'raporty_obserwacji_obywatelskich.docx')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
@@ -155,8 +155,8 @@ KonspektAttachment attach_raporty_realiow_zycia = KonspektAttachment(
     name: attach_name_raporty_realiow_zycia,
     title: attach_title_raporty_realiow_zycia,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'raporty_realiow_zycia.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'raporty_realiow_zycia.docx')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'raporty_realiow_zycia.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'raporty_realiow_zycia.docx')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
@@ -168,8 +168,8 @@ KonspektAttachment attach_wniosek_o_zalegendowanie_agenta = KonspektAttachment(
     name: attach_name_wniosek_o_zalegendowanie_agenta,
     title: attach_title_wniosek_o_zalegendowanie_agenta,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'wniosek_o_zalegendowanie_agenta.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'wniosek_o_zalegendowanie_agenta.docx')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'wniosek_o_zalegendowanie_agenta.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'wniosek_o_zalegendowanie_agenta.docx')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
@@ -181,8 +181,8 @@ KonspektAttachment attach_wydarzenia_specjalne = KonspektAttachment(
     name: attach_name_wydarzenia_specjalne,
     title: attach_title_wydarzenia_specjalne,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'wydarzenia_specjalne.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'wydarzenia_specjalne.docx')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'wydarzenia_specjalne.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'wydarzenia_specjalne.docx')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
@@ -194,8 +194,8 @@ KonspektAttachment attach_sciaga_dla_uczestnikow = KonspektAttachment(
     name: attach_name_sciaga_dla_uczestnikow,
     title: attach_title_sciaga_dla_uczestnikow,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'sciaga_dla_uczestnikow.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'sciaga_dla_uczestnikow.docx')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'sciaga_dla_uczestnikow.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'sciaga_dla_uczestnikow.docx')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
@@ -207,8 +207,8 @@ KonspektAttachment attach_znaczniki_statystyk_wojewodztw = KonspektAttachment(
     name: attach_name_znaczniki_statystyk_wojewodztw,
     title: attach_title_znaczniki_statystyk_wojewodztw,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'znaczniki_statystyk_wojewodztw.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'znaczniki_statystyk_wojewodztw.docx')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'znaczniki_statystyk_wojewodztw.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'znaczniki_statystyk_wojewodztw.docx')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
@@ -220,8 +220,8 @@ KonspektAttachment attach_karty_wiedzy = KonspektAttachment(
     name: attach_name_karty_wiedzy,
     title: attach_title_karty_wiedzy,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'karty_wiedzy.pdf'),
-      FileFormat.urlDocx: urlFilePath(_konspekt_name, 'karty_wiedzy.docx')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'karty_wiedzy.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'karty_wiedzy.docx')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
@@ -235,8 +235,8 @@ KonspektAttachment attach_sekretarz_bierut = KonspektAttachment(
     name: attach_name_sekretarz_bierut,
     title: attach_title_sekretarz_bierut,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'sekretarz_bierut.pdf'),
-      FileFormat.urlWebp: urlFilePath(_konspekt_name, 'sekretarz_bierut.webp')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'sekretarz_bierut.pdf'),
+      FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'sekretarz_bierut.webp')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
 );
@@ -248,8 +248,8 @@ KonspektAttachment attach_sekretarz_gomulka = KonspektAttachment(
     name: attach_name_sekretarz_gomulka,
     title: attach_title_sekretarz_gomulka,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'sekretarz_gomulka.pdf'),
-      FileFormat.urlWebp: urlFilePath(_konspekt_name, 'sekretarz_gomulka.webp')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'sekretarz_gomulka.pdf'),
+      FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'sekretarz_gomulka.webp')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
 );
@@ -261,8 +261,8 @@ KonspektAttachment attach_sekretarz_gierek = KonspektAttachment(
     name: attach_name_sekretarz_gierek,
     title: attach_title_sekretarz_gierek,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'sekretarz_gierek.pdf'),
-      FileFormat.urlWebp: urlFilePath(_konspekt_name, 'sekretarz_gierek.webp')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'sekretarz_gierek.pdf'),
+      FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'sekretarz_gierek.webp')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
 );
@@ -274,8 +274,8 @@ KonspektAttachment attach_sekretarz_jaruzelski = KonspektAttachment(
     name: attach_name_sekretarz_jaruzelski,
     title: attach_title_sekretarz_jaruzelski,
     assets: {
-      FileFormat.urlPdf: urlFilePath(_konspekt_name, 'sekretarz_jaruzelski.pdf'),
-      FileFormat.urlWebp: urlFilePath(_konspekt_name, 'sekretarz_jaruzelski.webp')
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'sekretarz_jaruzelski.pdf'),
+      FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'sekretarz_jaruzelski.webp')
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
 );
