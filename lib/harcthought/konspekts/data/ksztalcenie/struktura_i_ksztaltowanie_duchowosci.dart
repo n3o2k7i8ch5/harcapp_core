@@ -4,6 +4,8 @@ import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/wstep_do_wyc
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
+import 'common_wychowanie_duchowe.dart';
+
 Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
   name: 'struktura_i_ksztaltowanie_duchowosci',
   title: 'Struktura i kształtowanie duchowości',
@@ -96,136 +98,36 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '</ol>'
       ),
 
-      KonspektStep(
-          title: 'Sfery rozwoju',
-          duration: Duration(minutes: 10),
-          activeForm: false,
-          content: '<p style="text-align:justify;">'
-              'Prowadzący opierając się na wiedzy z załącznika “o strukturze i kształtowaniu duchowości” wprowadza podział człowieka na 5 sfer rozwoju - 4 sfery funkcjonalne: <b>ciało</b>, <b>umysł</b>, <b>emocje</b>, <b>relacje</b> i jedną sferę centralną: sferę <b>ducha</b>.'
-              '<br>'
-              '<br>Prowadzący opisuje zależności między sferami - sfery funkcjonalne dostarczają człowiekowi <b>zdolności</b>, zaś sfera ducha jest <b>sposobem</b> ich zarządzania.'
-              '<br>'
-              '<br>Jeżeli prowadzący uzna, że poprawi to poziom zrozumienia, może skorzystać z analogii opisanej sfer funkcjonalnych i centralnych do samochodu i kierowcy opisanego w poradniku $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci.'
-              '<br>'
-              '<br>Następnie prowadzący hasłowo wymienia uczestnikom kilka elementów poszczególnych sfer i prosi uczestników o podanie do jakiej sfery należą, np.:'
-              '</p>'
-
-              '<table border="1" style="border-collapse: collapse; width: 100%;">'
-              '<tr>'
-              '<th style="padding-left: 8px; padding-right: 8px;"><p>Hasło</p></th>'
-              '<th style="padding-left: 8px; padding-right: 8px;"><p>Sfera rozwoju</p></th>'
-              '</tr>'
-              '<tr>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Umiejętność gry na trąbce</p></td>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Sfera umysłu (koordynacja) i ciała (płuca)</p></td>'
-              '</tr>'
-              '<tr>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Zdolność marszu przez tydzień przy -20°C</p></td>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Sfera ciała</p></td>'
-              '</tr>'
-              '<tr>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Kontrolowanie swoich reakcji będąc wściekłym</p></td>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Sfera emocji</p></td>'
-              '</tr>'
-              '<tr>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Umiejętność zdyskredytowania kogoś w oczach wspólnoty</p></td>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Sfera relacji</p></td>'
-              '</tr>'
-              '<tr>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Postępowanie zgodnie ze swoimi przekonaniami w środowisku stresogennym</p></td>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Sfera ducha (chęć postępowania) i emocji (panowanie nad stresem)</p></td>'
-              '</tr>'
-              '<tr>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Posiadanie spójnego światopoglądu</p></td>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Sfera ducha</p></td>'
-              '</tr>'
-              '<tr>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Zdolność zbudowania ładnej bramy obozowej</p></td>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Sfera umysłu</p></td>'
-              '</tr>'
-              '</table>'
-
-              '<p style="text-align:justify;">'
-              'Jest różnica między <b>emocjami</b>, a <b>doświadczeniem duchowym</b> - to drugie często rodzi silne emocje, ale jest doświadczeniem najgłębszego sensu bycia, jedności z Bogiem, etc..'
-              '<br>'
-              '<br>Ważne, by prowadzący na końcu wprowadzenia zaznaczył:'
-              '<br>'
-              '<br><b><i>“Duchowość nie jest umiejętnością, dlatego nie należy sądzić że można ją rozwinąć tymi samymi metodami co intelekt, ciało, czy emocje.”</i></b>'
-              '<br>'
-              '<br>Przechodząc do kolejnego punktu prowadzący oświadcza, że <b>przedmiotem tych zajęć będzie jedynie sfera ducha</b>.'
-              '</p>'
-      ),
+      step_poziomy_duchowosci,
 
       KonspektStep(
-          title: 'Poziomy (warstwy) rozwoju duchowego',
+          title: 'Poziomy duchowości - sprawdzenie',
           duration: Duration(minutes: 15),
           activeForm: false,
           required: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący na podstawie pradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom aksjomatu, poziom wartości, poziom postaw i poziom zachowań (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika “poziomy duchowości”. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
+              'Na końcu prowadzący dzieli uczestników na około pięcioosobowe grupy. Rozdaje każdej grupie po jednym komplecie przygotowanych kartek z załącznika “przykłady poziomów duchowości” i prosi grupy o <b>posegregowanie kartek na zachowania, postawy, wartości i aksjomaty.</b>'
               '<br>'
-              '<br>Dodatkowo prowadzący definiuje duchowość <b>wymierną</b> (poziom zachowań i postaw) i <b>głęboką</b> (poziom wartości i aksjomatów).'
-              '<br>'
-              '<br>Prowadzący powinien wyraźnie zaznaczyć, że “poziom duchowości” nie odnosi się do słowa “poziom” w sensie poziomu zaawansowania, np. poziom w grze komputerowej, ale poziomu w sensie warstwy, piętra, hierarchii etc..'
-              '<br>'
-              '<br>Prowadzący może w procesie definiowania posiłkować się przykładem:'
+              '<br>Gdy dana grupa jest gotowa, zgłasza się do prowadzącego, który podchodzi i sprawdza. Jeśli coś jest nie tak, prowadzący mówi który poziom duchowości wymaga poprawy. Gdy wszystkie grupy są gotowe, niezależnie od poprawności segregacji, prowadzący omawia na forum poprawne przyporządkowanie.'
               '</p>'
-
-              '<table border="1" style="border-collapse: collapse; width: 100%;">'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Zachowanie</p></td>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Oddanie własnego obiadu bezdomnemu</p></td>'
-              '</tr>'
-              '<tr>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Postawa</p></td>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Ofiarność</p></td>'
-              '</tr>'
-              '<tr>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Wartość</p></td>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Godne życie każdego człowieka</p></td>'
-              '</tr>'
-              '<tr>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Aksjomat</p></td>'
-              '<td style="padding-left: 8px; padding-right: 8px;"><p>Bóg z miłości stworzył każdego człowieka na swój obraz</p></td>'
-              '</tr>'
-              '</table>'
-
-              '<p style="text-align:justify;">'
-              'Po zdefiniowaniu poziomów prowadzący prosi uczestników o podanie kilku przykładowych elementów do każdego z poziomów duchowości. Prowadzący każdorazowo ocenia, czy przykłady są trafne - jeśli nie, podaje powód, dla którego nie są.'
-              '<br>'
-              '<br><u>Uwagi o wartościach:</u>'
-              '</p>'
-
-              '<ul>'
-
-              '<li>'
-              '<p style="text-align:justify;">'
-              'Stwierdzenie pokroju: <i>“dla mnie wartością jest czytanie książek swoim dzieciom”</i> w istocie nie jest deklaracją wartości, a deklaracją czynu, który warto podjąć. Wartością jest stan, do którego ów czyn prowadzi. <i>“Warto czytać książki dzieciom, bo zacieśnia to więzi w rodzinie”</i> - zatem wartością w tym przypadku jest stan trwania bliskich relacji rodzinnych.'
-              '</p>'
-              '</li>'
-
-              '<li>'
-              '<p style="text-align:justify;">'
-              'Potoczne określenie <i>“wartością jest dla mnie rodzina”</i> nie jest deklaracją wartości, bowiem nie określa preferowanego stanu z nią związanego: czy chodzi o posiadanie rodziny, o jej majętność, długowieczność, szczęście, dużą liczebność, przyjemność członków rodziny? W sposób domyślny podanie jedynie przedmiotu wartości oznacza: <i>“w staraniach o preferowany stan rzeczywistości wynikający z moich aksjomatów, najbardziej interesuje mnie poprawa fragmentu rzeczywistości związana z moją rodziną”</i>.'
-              '</p>'
-              '</li>'
-
-              '<li>'
-              '<p style="text-align:justify;">'
-              'Stwierdzenie pokroju: <i>“dla mnie wartością jest czytanie książek swoim dzieciom”</i> w istocie nie jest deklaracją wartości, a deklaracją czynu, który warto podjąć. Wartością jest stan, do którego ów czyn prowadzi. <i>“Warto czytać książki dzieciom, bo zacieśnia to więzi w rodzinie”</i> - zatem wartością w tym przypadku jest stan trwania bliskich relacji rodzinnych.'
-              '</p>'
-              '</li>'
-
-              '<li>'
-              '<p style="text-align:justify;">'
-              'Wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Chwilowo człowiek może jako preferowany stan określić stan przyjemności wynikający ze zjedzenia cukierka, zaśnięcie, czy euforię po kupieniu nowych ciuchów.'
-              '<br>'
-              '<br>To także są wartości wpisane w strukturę wartości człowieka.'
-              '</p>'
-              '</li>'
-
-              '</ul>'
-
       ),
+
+      step_integracja_duchowosci,
+
+      KonspektStep(
+          title: 'Przerwa',
+          duration: Duration(minutes: 10),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Przerwa na rozprostowanie nóg, przewietrzenie się, siku itp..'
+              '</p>'
+      ),
+
+      step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
+
+      step_duchowosc_religia_religijnosc_opinie_uczestnikow,
+
+      step_duchowosc_religia_religijnosc,
 
       KonspektStep(
           title: 'Sfery rozwoju',
@@ -233,6 +135,6 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           activeForm: false,
           content: '<p style="text-align:justify;">'
               '</p>'
-      )
+      ),
     ]
 );

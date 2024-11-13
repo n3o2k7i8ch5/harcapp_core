@@ -4,6 +4,7 @@ import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
 import '../common_attachments.dart';
+import 'common_wychowanie_duchowe.dart';
 
 List<String> wstep_do_wychowania_duchowego_aims = [
   'Przekazanie uczestnikom różnicy między rozwojem sfer funkcjonalnych od sfery ducha',
@@ -128,156 +129,17 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '</p>'
       ),
 
-      KonspektStep(
-          title: 'Sfery rozwoju i ich relacje',
-          duration: Duration(minutes: 15),
-          activeForm: false,
-          content: '<p style="text-align:justify;">'
-              'Prowadzący opierając się na wiedzy z załącznika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci wprowadza podział człowieka na 5 sfer rozwoju - 4 sfery funkcjonalne: <b>ciało</b>, <b>umysł</b>, <b>emocje</b>, <b>relacje</b> i jedną sferę centralną: sferę <b>ducha</b>.'
-              '<br>'
-              '<br>Prowadzący opisuje zależności między sferami - sfery funkcjonalne dostarczają człowiekowi <b>zdolności</b>, zaś sfera ducha jest <b>sposobem</b> ich zarządzania.'
-              '<br>'
-              '<br>Jeżeli prowadzący uzna, że poprawi to poziom zrozumienia, może skorzystać z analogii opisanej sfer funkcjonalnych i centralnych do samochodu i kierowcy opisanego w załączniku $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci.'
-              '<br>'
-              '<br>Następnie prowadzący hasłowo wymienia uczestnikom kilka elementów poszczególnych sfer i prosi uczestników o podanie do jakiej sfery należą, np.:'
-              '</p>'
+      step_sfery_rozwoju_i_ich_relacje,
 
-              '<ul>'
+      step_poziomy_duchowosci,
 
-              '<li>'
-              '<p style="text-align:justify;">'
-              'Umiejętność gry na trąbce'
-              '<br><i>Sfera umysłu (koordynacja) i ciała (płuca)</i>'
-              '</p>'
-              '</li>'
+      step_integracja_duchowosci,
 
-              '<li>'
-              '<p style="text-align:justify;">'
-              'Zdolność marszu przez tydzień przy -20°C'
-              '<br><i>Sfera ciała</i>'
-              '</p>'
-              '</li>'
+      step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
 
-              '<li>'
-              '<p style="text-align:justify;">'
-              'Kontrolowanie swoich reakcji będąc wściekłym'
-              '<br><i>Sfera emocji</i>'
-              '</p>'
-              '</li>'
+      step_duchowosc_religia_religijnosc_opinie_uczestnikow,
 
-              '<li>'
-              '<p style="text-align:justify;">'
-              'Umiejętność zdyskredytowania kogoś w oczach wspólnoty'
-              '<br><i>Sfera relacji</i>'
-              '</p>'
-              '</li>'
-
-              '<li>'
-              '<p style="text-align:justify;">'
-              'Postępowanie zgodnie ze swoimi przekonaniami w środowisku stresogennym'
-              '<br><i>Sfera ducha (chęć postępowania) i emocji (panowanie nad stresem)</i>'
-              '</p>'
-              '</li>'
-
-              '<li>'
-              '<p style="text-align:justify;">'
-              'Posiadanie spójnego światopoglądu'
-              '<br><i>Sfera ducha</i>'
-              '</p>'
-              '</li>'
-
-              '<li>'
-              '<p style="text-align:justify;">'
-              'Zdolność zbudowania ładnej bramy obozowej'
-              '<br><i>Sfera umysłu</i>'
-              '</p>'
-              '</li>'
-
-              '</ul>'
-              '<p style="text-align:justify;">'
-              'Prowadzący może zwrócić uwagę na fakt, że jest różnica między <b>emocjami</b> a <b>doświadczeniem duchowym</b>. Czasami przestrzenie te są mylone, ponieważ doświadczenie duchowe często rodzi silne emocje, ale jest doświadczeniem najgłębszego sensu bycia, jedności z Bogiem, etc..'
-              '<br>'
-              '<br>Ważne, by prowadzący na końcu wprowadzenia zaznaczył:'
-              '<br>'
-              '<br><b><i>“Duchowość nie jest umiejętnością, dlatego nie należy sądzić że można ją rozwinąć tymi samymi metodami co intelekt, ciało, czy emocje.”</i></b>'
-              '<br>'
-              '<br>Przechodząc do kolejnego punktu prowadzący oświadcza, że <b>przedmiotem tych zajęć będzie jedynie sfera ducha</b>. Inne sfery nie będą tutaj głębiej rozpatrywane.'
-              '</p>'
-      ),
-
-      KonspektStep(
-          title: 'Poziomy i etapy rozwoju duchowości',
-          duration: Duration(minutes: 20),
-          activeForm: false,
-          contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
-              'Prowadzący na podstawie załącznika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci opisuje <b>etapy rozwoju duchowego</b> - w pierwszym etapie dzieci są uczone jedynie zachowań, które budują u nich postawy, w wieku ok. 10 lat rozpoczyna się myślenie abstrakcyjne i konceptualizują się wartości, które następnie, w wieku ok. 15 lat są porządkowane w światopogląd i internalizowane jest pojęcie aksjomatu.'
-              '<br>'
-              '<br>Moment, w którym harcerze wychodzą z etapu integracji wstępnej i zaczynają świadomą integrację duchowości charakteryzowany jest często przez zainteresowanie lub przynajmniej zrozumienie wagi pytań w stylu:'
-              '</p>'
-
-              '<ul>'
-              '<li><p style="text-align:justify;">“Jaki jest sens życia, o ile w ogóle jakiś jest?”</p></li>'
-              '<li><p style="text-align:justify;">“Czy istnieje obiektywne dobro i zło, czy może wszystko jest jedynie subiektywne?”</p></li>'
-              '<li><p style="text-align:justify;">“Dlaczego powinienem wierzyć w Boga? Przecież gdybym urodził się w Iranie, wierzyłbym w Allaha?”</p></li>'
-              '</ul>'
-
-              '<p style="text-align:justify;">'
-              'Ważne, by w procesie opisu prowadzący narysował we wspólnym miejscu odwróconą piramidę, tak jak poniżej:</p>'
-              '<br>${piramidaDuchowosciHtml(isDark: isDark)}'
-              '<p style="text-align:justify;">'
-              '<br>W dalszej kolejności prowadzący wprowadza pojęcie <b>integracji duchowości</b> - sposobu w jaki poziomy duchowości kształtują się w procesie rozwoju.'
-              '<br>'
-              '<br>Ważne, by prowadzący zaznaczył, że struktura wartości nie zależy jedynie od środowiska i wychowania, ale także od <b>natury człowieka</b>, m.in. od jego <b>temperamentu</b>.'
-              '</p>'
-      ),
-
-      KonspektStep(
-          title: 'Duchowość powszechna, mądrość, kultura i tradycja',
-          duration: Duration(minutes: 15),
-          activeForm: false,
-          content: '<p style="text-align:justify;">'
-              'Prowadzący na podstawie załącznika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej implementacją i formą przekazu - <b>kulturą</b> i jej elementami - <b>tradycjami</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
-              '<br>'
-              '<br>Prowadzący może zobrazować dylemat tego <i>"jak ściśle trzymać się tradycji"</i> w sposób następujący:'
-              '<br>'
-              '<br><i>Gdybyśmy zanegowali na raz wszystkie tradycje, w ciągu jednego pokolenia wrócilibyśmy do jaskiń. Ale gdybyśmy nigdy nie podważyli żadnej tradycji, nigdy z tych jaskiń byśmy nie wyszli.</i>'
-              '</p>'
-      ),
-
-      KonspektStep(
-          title: 'Duchowość, religia, religijność - opinie uczestników',
-          duration: Duration(minutes: 10),
-          activeForm: true,
-          required: false,
-          content: '<p style="text-align:justify;">'
-              'Prowadzący zadaje publicznie pytanie:'
-              '<br>'
-              '<br><b><i>“Jaka jest relacja między duchowością, religią, a religijnością?”</i></b>.'
-              '<br>'
-              '<br>Uczestnicy indywidualnie przez kilka minut na mini-kartkach zapisują hasłowo swoje odpowiedzi, które potem będą mogli rozwinąć.'
-              '<br>'
-              '<br>Prowadzący prosi uczestników kolejno o zaprezentowanie po jednej kartce i położeniu jej na środku - prezentacja w kręgu zachodzi dopóki ktoś jeszcze ma jakąś kartkę. Jeśli jakaś myśl została już przedstawiona, nie ma potrzeby jej ponownego rozwijania - można po prostu dołożyć kartkę do już położnej.'
-              '</p>'
-      ),
-
-      KonspektStep(
-          title: 'Duchowość, religia, religijność',
-          duration: Duration(minutes: 20),
-          activeForm: false,
-          content: '<p style="text-align:justify;">'
-              'Prowadzący na podstawie załącznika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci definiuje religię:'
-              '<br>'
-              '<br>Religia jest duchowością powszechną. <b>Religia nie jest “dodatkiem” do duchowości, ale jest określoną duchowością</b> - ma określone aksjomaty i wartości, określone sposoby jej (religii jako duchowość) integracji.'
-              '<br>'
-              '<br>Prowadzący powinien zwrócić uwagę, że nie ma tu mowy o relacji “zawierania”: <b>w obszernym zbiorze “duchowości” <u>nie zawiera się</u> mniejszy zbiór “religii”</b>! Nie jest tak, że część osób ma duchowość “z religią”, a część “bez religii”. Religia jest rodzajem, sposobem duchowości. Nie można z duchowości “wyjąć” elementu religijnego i dalej mieć do czynienia z duchowością, tak samo jak nie można z psa wyjąć elementu “jamnik” i dalej uważać, że pozostałość to pies. Jamnik nie jest dodatkiem do psa, tylko jest rodzajem całego, spójnego psa.'
-              '<br>'
-              '<br>Oznacza to, że nie można prowadzenić wychowania w drużynie w oparciu o jedną, wybraną duchowość, i “wzbogacać” jej dla niektórych religią, a dla innych nie. Wynika to z faktu, że jeśli ktoś jest wychowywany w duchowości religijnej, ma określone religijne aksjomaty, co stoi w kontraście do aksjomatów osób niereligijnych! Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości'
-              '<br>'
-              '<br>Podobnie, błędnym jest pogląd jakoby istniała symetria między duchowością osób religijnych i niereligijnych: osoby religijne mają z góry określone aksjomaty, jednak aksjomaty osób niereligijnych dopiero wymagają określenia i doprecyzowania.'
-              '<br>'
-              '<br><b>Religijność</b> jest zestawem zachowań i postaw wynikających z duchowości religijnej. Religijność nie jest jednak zbiorem wartości, ani całą duchowością - religijność to jedynie wierzchnia warstwa duchowości, która pozwala (lecz sama w sobie niekoniecznie wystarcza) by duchowość religijną skutecznie integrować.'
-              '</p>'
-      ),
+      step_duchowosc_religia_religijnosc,
 
       KonspektStep(
           title: 'Przerwa',
