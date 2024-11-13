@@ -114,6 +114,12 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
 
       step_integracja_duchowosci,
 
+      step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
+
+      step_duchowosc_religia_religijnosc_opinie_uczestnikow,
+
+      step_duchowosc_religia_religijnosc,
+
       KonspektStep(
           title: 'Przerwa',
           duration: Duration(minutes: 10),
@@ -123,11 +129,21 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '</p>'
       ),
 
-      step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
+      // Neutralność
 
-      step_duchowosc_religia_religijnosc_opinie_uczestnikow,
+      step_neutralnosc_duchowa,
 
-      step_duchowosc_religia_religijnosc,
+      step_neutralnosc_duchowa_w_przypadku_problemow,
+
+      step_harcerstwo_analogia_do_ogrodnikow,
+
+      step_zrodla_wartosci_w_zhp_dyskusja_o_scenariuszach,
+
+      step_zrodla_wartosci_w_zhp_okreslonosc_wartosci,
+
+      step_zrodla_wartosci_w_zhp_aksjoamty,
+
+      step_neutralnosc_podsumowanie,
 
       KonspektStep(
           title: 'Sfery rozwoju',
