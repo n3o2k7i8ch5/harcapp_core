@@ -1,10 +1,27 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
+import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common_attachments.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/wstep_do_wychowania_duchowego.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
 import 'common_wychowanie_duchowe.dart';
+
+
+const konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci = 'struktura_i_ksztaltowanie_duchowosci';
+const konspekt_harc_title_struktura_i_ksztaltowanie_duchowosci = 'Struktura i kształtowanie duchowości';
+
+const String attach_html_formy = '<a href="$attach_name_formy@attachment">$attach_title_formy</a>';
+const String attach_name_formy = 'formy';
+const String attach_title_formy = 'Formy';
+KonspektAttachment attach_formy = KonspektAttachment(
+  name: attach_name_formy,
+  title: attach_title_formy,
+  assets: {
+    FileFormat.urlPdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.pdf',
+    FileFormat.urlDocx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.docx',
+  },
+);
 
 Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
   name: 'struktura_i_ksztaltowanie_duchowosci',
@@ -31,6 +48,8 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       attach_cel_wychowania_duchowego_zhp_statut,
       attach_cel_wychowania_duchowego_zhp_uchwala,
       attach_kratka_minimow_rozwoju_duchowego,
+
+      attach_formy
     ],
     materials: [
 
@@ -45,6 +64,11 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       ),
 
       // TODO: add more materials
+
+      KonspektMaterial(
+        name: 'Wydrukowany i pocięty załącznik “$attach_title_formy”',
+        attachmentName: attach_name_formy,
+      ),
     ],
     steps: [
 
@@ -201,29 +225,56 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '<li>'
               '<p style="text-align:justify;">'
               '<b>[Wzajemność oddziaływań]</b>'
-              '<i>Mamy harcerza z blokowisk z Łódzkiego Widzewa. Chcemy wychować go w duchu szacunku dla prawa. Czy zwiększenie wśród jego bliskich znajomych liczby osób, które szanują prawo w tym pomoże, czy nie? Dlaczego?</i>'
+              '<br>'
+              '<br><i>Mamy harcerza z blokowisk z Łódzkiego Widzewa. Chcemy wychować go w duchu szacunku dla prawa. Czy zwiększenie wśród jego bliskich znajomych liczby osób, które szanują prawo w tym pomoże, czy nie? Dlaczego?</i>'
               '</p>'
               '</li>'
 
               '<li>'
               '<p style="text-align:justify;">'
               '<b>[Wspólnota zasad, wspólnota wartości i wspólnota aksjomatu]</b>'
-              'Mamy białoruskiego, prawosławnego harcerza, którego najbliższe otoczenie (poza rodziną) jest laickie. Chcemy wychować go w wierze prawosławnej. W harcerstwie część wartości i postaw jest z jego wiarą zgodna, część niekoniecznie. Czy sprawienie, że pozna i polubi ludzi z prawosławnego duszpasterstwa w cerkwii i będzie częścią ich wspólnoty pomoże w osiągnięciu celu wychowawczego? Dlaczego?'
+              '<br>'
+              '<br><i>Mamy białoruskiego, prawosławnego harcerza, którego najbliższe otoczenie (poza rodziną) jest laickie. Chcemy wychować go w wierze prawosławnej. W harcerstwie część wartości i postaw jest z jego wiarą zgodna, część niekoniecznie. Czy sprawienie, że pozna i polubi ludzi z prawosławnego duszpasterstwa w cerkwii i będzie częścią ich wspólnoty pomoże w osiągnięciu celu wychowawczego? Dlaczego?</i>'
               '</p>'
               '</li>'
 
               '<li>'
               '<p style="text-align:justify;">'
               '<b>[Formy kultury]</b>'
-              '<i>Mamy harcerskę starszą, która od kiedy poszła do technikum zaczęła tak jak jej nowe koleżanki oglądać Netflixa, oglądać kiczowate reality-show typu “Trudne sprawy” i słuchać depresyjnej muzyki - w szkole idzie jej średnio, marnuje dużo czasu na fejsie i Tick-Tock. Chcemy wychować ją do postawy pozytywnego myślenia, zaradności i sumienności. Czy sprawienie, że z Netflixa i “Trudnych spraw” przerzuci się na “Ojca Mateusza” i “Pingwiny z Madagaskaru", drużyna zainspiruje ją szantami, T.Love i Kaczmarskim, a w miejsce fejsa i Tick-Tocka zacznie czytać Dukaja pomoże w osiągnięciu celu wychowawczego? Dlaczego?</i>'
+              '<br>'
+              '<br><i>Mamy harcerskę starszą, która od kiedy poszła do technikum zaczęła tak jak jej nowe koleżanki oglądać Netflixa, oglądać kiczowate reality-show typu “Trudne sprawy” i słuchać depresyjnej muzyki - w szkole idzie jej średnio, marnuje dużo czasu na fejsie i Tick-Tock. Chcemy wychować ją do postawy pozytywnego myślenia, zaradności i sumienności. Czy sprawienie, że z Netflixa i “Trudnych spraw” przerzuci się na “Ojca Mateusza” i “Pingwiny z Madagaskaru", drużyna zainspiruje ją szantami, T.Love i Kaczmarskim, a w miejsce fejsa i Tick-Tocka zacznie czytać Dukaja pomoże w osiągnięciu celu wychowawczego? Dlaczego?</i>'
               '</p>'
               '</li>'
 
               '</ul>'
 
               '<p style="text-align:justify;">'
-              'Jako ostatni element, już bez scenariusza, prowadzący opisuje metodę pośrednią jaką jest zaproponowanie <b>Opowieści Przewodniej</b> na podstawie załącznika “o strukturze i kształtowaniu duchowości”.'
+              'Jako ostatni element, już bez scenariusza, prowadzący opisuje metodę pośrednią jaką jest zaproponowanie <b>Opowieści Przewodniej</b> na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci.'
               '</p>'
       ),
+
+      KonspektStep(
+          title: 'Praktyka wychowania duchowego - kratka',
+          duration: Duration(minutes: 45),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Wstęp - przedstawienie tego jakie cechy mogą spełniać poszczególne formy.'
+              '</p>'
+
+              '<ul>'
+              '<li><p style="text-align:justify;">Hartowanie ducha</p></li>'
+              '<li><p style="text-align:justify;">Kształtowanie postaw</p></li>'
+              '<li><p style="text-align:justify;">Kształtowanie wartości (normalizacja, wartości wtórne)</p></li>'
+              '<li><p style="text-align:justify;">Kształtowanie aksjomatów</p></li>'
+              '</ul>'
+
+              '<p style="text-align:justify;">'
+              'Uczestnicy otrzymują w grupach po jednym załączniku $attach_html_kratka_minimow_rozwoju_duchowego.'
+              '<br>'
+              '<br>Otrzymują również wydrukowane i wycięte formy z załącznika $attach_html_formy. Na tej podstawie ich zadaniem jest przyporządkowanie poszczególnych form do grupy lub <b>grup wiekowych</b> oraz do określenia jakie <b>poziomy duchowości</b> rozwijają oraz, jeśli to możliwe, w jaki <b>mechanizm</b> wykorzystują.'
+              '</p>'
+      ),
+
+      step_szybkie_strzaly_dyskusyjne,
     ]
 );
