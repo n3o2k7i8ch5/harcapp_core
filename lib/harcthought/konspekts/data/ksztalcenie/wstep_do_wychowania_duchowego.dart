@@ -6,10 +6,10 @@ import '../common_attachments.dart';
 import 'common_wychowanie_duchowe.dart';
 
 List<String> wstep_do_wychowania_duchowego_aims = [
-  'Przekazanie uczestnikom różnicy między rozwojem sfer funkcjonalnych od sfery ducha',
-  'Przekazanie uczestnikom rozróżnienia poziomów i etapów rozwoju sfery ducha',
-  'Zwrócenie uwagi uczestników na brak możliwości neutralności rozwoju duchowego',
-  'Przekazanie uczestnikom skutków wynikających z oparcia wartości ZHP o chrześcijaństwo',
+  'Przekazanie uczestnikom różnicy między rozwojem sfer funkcjonalnych od sfery ducha.',
+  'Przekazanie uczestnikom rozróżnienia poziomów i etapów rozwoju sfery ducha.',
+  'Zwrócenie uwagi uczestników na brak możliwości neutralności rozwoju duchowego.',
+  'Przekazanie uczestnikom skutków wynikających z oparcia wartości ZHP o chrześcijaństwo.',
 ];
 
 Konspekt wstep_do_wychowania_duchowego = Konspekt(

@@ -84,7 +84,7 @@ KonspektStep step_poziomy_duchowosci = KonspektStep(
     duration: Duration(minutes: 15),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie pradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom aksjomatu, poziom wartości, poziom postaw i poziom zachowań (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika “poziomy duchowości”. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
+        'Prowadzący na podstawie pradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>aksjomatu</b>, poziom <b>wartości</b>, poziom <b>postaw</b> i poziom <b>zachowań</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika $attach_html_poziomy_duchowosci. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
         '<br>'
         '<br>Dodatkowo prowadzący definiuje duchowość <b>wymierną</b> (poziom zachowań i postaw) i <b>głęboką</b> (poziom wartości i aksjomatów).'
         '<br>'

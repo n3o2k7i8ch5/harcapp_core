@@ -16,6 +16,18 @@ KonspektAttachment attach_o_strukturze_i_ksztaltowaniu_duchowosci = KonspektAtta
   },
 );
 
+const String attach_html_poziomy_duchowosci = '<a href="$attach_name_poziomy_duchowosci@attachment">$attach_title_poziomy_duchowosci</a>';
+const String attach_name_poziomy_duchowosci = 'poziomy_duchowosci';
+const String attach_title_poziomy_duchowosci = 'Poziomy duchowości';
+KonspektAttachment attach_poziomy_duchowosci = KonspektAttachment(
+  name: attach_name_poziomy_duchowosci,
+  title: attach_title_poziomy_duchowosci,
+  assets: {
+    FileFormat.urlPdf: 'common/warsztaty_duchowe/$attach_name_poziomy_duchowosci.pdf',
+    FileFormat.urlDocx: 'common/warsztaty_duchowe/$attach_name_poziomy_duchowosci.docx',
+  },
+);
+
 const String attach_html_neutralnosc_duchowa_przyklady = '<a href="$attach_name_neutralnosc_duchowa_przyklady@attachment">$attach_title_neutralnosc_duchowa_przyklady</a>';
 const String attach_name_neutralnosc_duchowa_przyklady = 'neutralnosc_duchowa_przyklady';
 const String attach_title_neutralnosc_duchowa_przyklady = 'Neutralność duchowa - przykłady';
