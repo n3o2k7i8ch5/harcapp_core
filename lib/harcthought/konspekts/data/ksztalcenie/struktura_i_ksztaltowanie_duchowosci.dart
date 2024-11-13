@@ -146,10 +146,83 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       step_neutralnosc_podsumowanie,
 
       KonspektStep(
-          title: 'Sfery rozwoju',
+          title: 'Obiad',
+          duration: Duration(minutes: 45),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Najlepiej zamówić pizzę, żeby jedzenie trwało niewiele czasu i by można było po nim chwilę odpocząć.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Praktyka wychowania duchowego - co pomaga?',
           duration: Duration(minutes: 10),
           activeForm: false,
           content: '<p style="text-align:justify;">'
+              'Prowadzący zaczyna od zadania oczywistego pytania:'
+              '<br>'
+              '<br><b><i>“Czyli tak: ustaliliśmy czym jest duchowość, jej poziomy i jej integracja, cel wychowania duchowego w ZHP - czyli wystarczy teraz powiedzieć zuchom jakie postawy, harcerzom jakie wartości, a wędrownikom jakie aksjomaty są dobre i essa? Co nie? Czy nie?”</i></b>'
+              '<br>'
+              '<br>Oczywiście ta propozycja jest absurdalna - celem jest rozpoczęcie dyskusji prowadzącej do wniosku, że od różnych pionów należy oczekiwać różnych celów w rozwoju duchowym.'
+              '<br>'
+              '<br><b><i>“Duchowość nie jest umiejętnością, dlatego nie należy sądzić że można ją rozwinąć tymi samymi metodami co intelekt, ciało, czy emocje.”</i></b>'
+              '<br>'
+              '<br>Wychowanie duchowe zaczyna się od sposobu myślenia:'
+              '</p>'
+
+              '<ol>'
+              '<li><p style="text-align:justify;">Duchowość jest najważniejszą sferą rozwoju - to ona nadaje sens i daje możliwość pełnego życia.</p></li>'
+              '<li><p style="text-align:justify;">Nie istnieje próżnia wychowawcza. Jeśli duchowości nie przekażą dziecku rodzice, harcerstwo, czy Kościół, to zrobi to ulica, reklamy i internet.</p></li>'
+              '<li><p style="text-align:justify;">Duchowość nie jest sprawą prywatną i nie należy jej cenzurować.</p></li>'
+              '</ol>'
+
+              '<p style="text-align:justify;">'
+              'Prowadzący w celu wejścia w interakcję z uczestnikami przedstawia krótkie scenariusze na podstawie których uczestnicy powinni wywnioskować metody pośrednie:'
+              '</p>'
+
+              '<ul>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>[Przykład własny instruktora]</b>'
+              '<br>'
+              '<br><i>Mamy harcerza z domu, gdzie poruszenie tematu światopoglądowego lub politycznego zawsze kończy się gigantyczną kłótnią. Chcemy wychować go w przekonaniu, że warto wyrażać swoje zdanie oraz dyskutować na ważne sprawy, zwłaszcza dotyczące Polski, geopolityki, społeczeństwa i wiary. Czy jeżeli ów harcerz będzie świadkiem jak jego drużynowy prowadzi takie dyskusje ze swoimi kumplami z kadry szczepu, to czy pomoże to w osiągnięciu założonego celu wychowawczego, czy nie? Dlaczego?</i>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>[Rola rodziców]</b>'
+              '<br>'
+              '<br><i>Mamy harcerza, którego chcemy wychować w sumienności i odpowiedzialności za powierzone mu zadania. Kadra drużyny robi w tym kierunku ile może, ale gdy młody wraca do domu, rodzice za niego sprzątają, gotują mu i pozwalają mu nie robić zadań domowych gdy mówi, że jest zmęczony. Czy doprowadzenie do sytuacji w której rodzice zaczynają koordynować swoje działania tym aspekcie wychowania z kadrą drużyny pomoże  w osiągnięciu założonego celu wychowawczego, czy nie? Dlaczego?</i>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>[Wzajemność oddziaływań]</b>'
+              '<i>Mamy harcerza z blokowisk z Łódzkiego Widzewa. Chcemy wychować go w duchu szacunku dla prawa. Czy zwiększenie wśród jego bliskich znajomych liczby osób, które szanują prawo w tym pomoże, czy nie? Dlaczego?</i>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>[Wspólnota zasad, wspólnota wartości i wspólnota aksjomatu]</b>'
+              'Mamy białoruskiego, prawosławnego harcerza, którego najbliższe otoczenie (poza rodziną) jest laickie. Chcemy wychować go w wierze prawosławnej. W harcerstwie część wartości i postaw jest z jego wiarą zgodna, część niekoniecznie. Czy sprawienie, że pozna i polubi ludzi z prawosławnego duszpasterstwa w cerkwii i będzie częścią ich wspólnoty pomoże w osiągnięciu celu wychowawczego? Dlaczego?'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>[Formy kultury]</b>'
+              '<i>Mamy harcerskę starszą, która od kiedy poszła do technikum zaczęła tak jak jej nowe koleżanki oglądać Netflixa, oglądać kiczowate reality-show typu “Trudne sprawy” i słuchać depresyjnej muzyki - w szkole idzie jej średnio, marnuje dużo czasu na fejsie i Tick-Tock. Chcemy wychować ją do postawy pozytywnego myślenia, zaradności i sumienności. Czy sprawienie, że z Netflixa i “Trudnych spraw” przerzuci się na “Ojca Mateusza” i “Pingwiny z Madagaskaru", drużyna zainspiruje ją szantami, T.Love i Kaczmarskim, a w miejsce fejsa i Tick-Tocka zacznie czytać Dukaja pomoże w osiągnięciu celu wychowawczego? Dlaczego?</i>'
+              '</p>'
+              '</li>'
+
+              '</ul>'
+
+              '<p style="text-align:justify;">'
+              'Jako ostatni element, już bez scenariusza, prowadzący opisuje metodę pośrednią jaką jest zaproponowanie <b>Opowieści Przewodniej</b> na podstawie załącznika “o strukturze i kształtowaniu duchowości”.'
               '</p>'
       ),
     ]
