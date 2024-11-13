@@ -122,8 +122,9 @@ flutter:
     - assets/konspekty/harcerskie/zycie_i_swiat_prl/
 
     - assets/konspekty/ksztalcenie/
-    - assets/konspekty/ksztalcenie/wstep_do_wychowania_duchowego/
     - assets/konspekty/ksztalcenie/dwie_roty_dwoch_przyrzeczen_harcerskich/
+    - assets/konspekty/ksztalcenie/struktura_i_ksztaltowanie_duchowosci/
+    - assets/konspekty/ksztalcenie/wstep_do_wychowania_duchowego/
 
     - assets/poradnik/dwie_roty_dwoch_przyrzeczen_harcerskich/
     - assets/poradnik/o_strukturze_i_ksztaltowaniu_duchowosci/

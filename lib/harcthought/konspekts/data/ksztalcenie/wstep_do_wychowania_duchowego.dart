@@ -5,6 +5,13 @@ import 'package:harcapp_core/values/people.dart';
 
 import '../common_attachments.dart';
 
+List<String> wstep_do_wychowania_duchowego_aims = [
+  'Przekazanie uczestnikom różnicy między rozwojem sfer funkcjonalnych od sfery ducha',
+  'Przekazanie uczestnikom rozróżnienia poziomów i etapów rozwoju sfery ducha',
+  'Zwrócenie uwagi uczestników na brak możliwości neutralności rozwoju duchowego',
+  'Przekazanie uczestnikom skutków wynikających z oparcia wartości ZHP o chrześcijaństwo',
+];
+
 Konspekt wstep_do_wychowania_duchowego = Konspekt(
     name: 'wstep_do_wychowania_duchowego',
     title: 'Wstęp do wychowania duchowego',
@@ -17,12 +24,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
     metos: [Meto.kadra],
     coverAuthor: 'Freepik (al17)',
     author: DANIEL_IWANICKI,
-    aims: [
-      'Przekazanie uczestnikom różnicy między rozwojem sfer funkcjonalnych od sfery ducha',
-      'Przekazanie uczestnikom rozróżnienia poziomów i etapów rozwoju sfery ducha',
-      'Zwrócenie uwagi uczestników na brak możliwości neutralności rozwoju duchowego',
-      'Zrozumienie co wynika z oparcia wartości ZHP o chrześcijaństwo'
-    ],
+    aims: wstep_do_wychowania_duchowego_aims,
     attachments: [
       attach_o_strukturze_i_ksztaltowaniu_duchowosci,
       attach_neutralnosc_duchowa_przyklady,
@@ -33,7 +35,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
     materials: [
 
       KonspektMaterial(
-        name: 'Dostępny do przygotowania merytorycznego załącznik “$attach_title_o_strukturze_i_ksztaltowaniu_duchowosci”',
+        name: 'Dostępny do przygotowania merytorycznego poradnik “$attach_title_o_strukturze_i_ksztaltowaniu_duchowosci”',
         attachmentName: attach_name_o_strukturze_i_ksztaltowaniu_duchowosci,
       ),
 
@@ -361,7 +363,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<br>'
               '<br>Jeśli z kolei uczestnicy sądzą, że neutralne jest to, co jest zapisane w Prawie Harcerskim, prowadzący może zadać pytanie:'
               '<br>'
-              '<br><i>“Ależ prawo harcerskie zmienia się pod wpływem poglądów Rady Naczelnej, poza tym skąd pomysł, że zasady jakiejś niewielkiej organizacyjki wychowawczej, z której wartościami nie wszyscy się w Polsce zgadzają, są prawdziwie neutralne?”</i>'
+              '<br><i>“Ależ Prawo Harcerskie zmienia się pod wpływem poglądów Rady Naczelnej, poza tym skąd pomysł, że zasady jakiejś niewielkiej organizacyjki wychowawczej, z której wartościami nie wszyscy się w Polsce zgadzają, są prawdziwie neutralne?”</i>'
               '</p>'
       ),
 
@@ -559,7 +561,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
               '<b>Podsumowanie dodatkowe (dla podharcmistrzów)</b>'
               '</p>'
               '<ul>'
-              '<li><p style="text-align:justify;">Mamy w ZHP niechlubną tradycję zmieniania harcerskich zasad i ideałów, gdy okazuje się że postawy harcerzy się z nimi nie spotykają. W pierwszej kolejności to harcerstwo powinno zmieniać ludzi, nie zaś się do nich dostosowywać.</p></li>'
+              '<li><p style="text-align:justify;">Mamy w ZHP niechlubną tradycję zmieniania harcerskich zasad i ideałów, gdy okazuje się że postawy harcerzy się z nimi nie spotykają. A przecież to harcerstwo powinno zmieniać ludzi, a nie się do nich dostosowywać.</p></li>'
               '</ul>'
       ),
 
