@@ -23,8 +23,8 @@ KonspektAttachment attach_poziomy_duchowosci = KonspektAttachment(
   name: attach_name_poziomy_duchowosci,
   title: attach_title_poziomy_duchowosci,
   assets: {
-    FileFormat.urlPdf: 'common/warsztaty_duchowe/$attach_name_poziomy_duchowosci.pdf',
-    FileFormat.urlDocx: 'common/warsztaty_duchowe/$attach_name_poziomy_duchowosci.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_poziomy_duchowosci.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_poziomy_duchowosci.docx',
   },
 );
 
