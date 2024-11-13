@@ -23,6 +23,18 @@ KonspektAttachment attach_formy = KonspektAttachment(
   },
 );
 
+const String attach_html_scenariusze = '<a href="$attach_name_scenariusze@attachment">$attach_title_scenariusze</a>';
+const String attach_name_scenariusze = 'scenariusze';
+const String attach_title_scenariusze = 'Scenariusze';
+KonspektAttachment attach_scenariusze = KonspektAttachment(
+  name: attach_name_scenariusze,
+  title: attach_title_scenariusze,
+  assets: {
+    FileFormat.urlPdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.pdf',
+    FileFormat.urlDocx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.docx',
+  },
+);
+
 Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
   name: 'struktura_i_ksztaltowanie_duchowosci',
   title: 'Struktura i kształtowanie duchowości',
@@ -49,7 +61,8 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       attach_cel_wychowania_duchowego_zhp_uchwala,
       attach_kratka_minimow_rozwoju_duchowego,
 
-      attach_formy
+      attach_formy,
+      attach_scenariusze
     ],
     materials: [
 
@@ -66,9 +79,19 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       // TODO: add more materials
 
       KonspektMaterial(
-        name: 'Wydrukowany i pocięty załącznik “$attach_title_formy”',
+        name: 'Wydrukowany załącznik “$attach_title_formy”',
         attachmentName: attach_name_formy,
+        additionalPreparation: 'Karty należy wyciąć wzdłuż przerywanych linii.',
+        amount: 1
       ),
+
+      KonspektMaterial(
+        name: 'Wydrukowany załącznik “$attach_title_scenariusze”',
+        attachmentName: attach_name_scenariusze,
+        additionalPreparation: 'Karty należy wyciąć wzdłuż przerywanych linii.',
+        amount: 1
+      ),
+
     ],
     steps: [
 
@@ -273,6 +296,90 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '<br>'
               '<br>Otrzymują również wydrukowane i wycięte formy z załącznika $attach_html_formy. Na tej podstawie ich zadaniem jest przyporządkowanie poszczególnych form do grupy lub <b>grup wiekowych</b> oraz do określenia jakie <b>poziomy duchowości</b> rozwijają oraz, jeśli to możliwe, w jaki <b>mechanizm</b> wykorzystują.'
               '</p>'
+      ),
+
+      // TODO: wywalić ten opis do załącznika
+      KonspektStep(
+          title: 'Fantomowe działania wychowawcze i skuteczność wychowawcza',
+          duration: Duration(minutes: 10),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący prezentuje krótki opis obozu drużyny i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zapoczątkowuje krótką dyskusję zadając pytanie: “co jest nie tak z tą strategią?”. Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
+              '<br>'
+              '<br>W oparciu o dotychczasowe pojęcia powinno paść hasło “<b>skuteczności wychowawczej</b>”.'
+              '<br>'
+              '<br>Opis:'
+              '<br>'
+              '<br><i>Obóz szczepu, plan rozwoju duchowego drużyny.'
+              '<br>Pierwszego dnia obozu kominek dotyczący tego, że nikt nie ma prawa zmuszać harcerzy do robienia rzeczy, na które nie mają ochoty. Raz w tygodniu o świcie medytacja nad fragmentem poezji dotyczącej natury. Co wieczór odśpiewanie przez drużynę “Roty” podczas opuszczania flagi państwowej w podobozie w celu wychowania patriotycznego. W niedzielę msza dla chętnych. Podczas olimpiady obozowej musztra w wodzie oraz czołganie w błocie w celu budowania hartu ducha. Dalej na obozie “Dzień Tolerancji” i zajęcia o stereotypach. Planowany jest także na obozie “Dzień Wspólnej Europy” w celu zbudowania świadomości korzyści wynikających z członkostwa Polski w UE. Na koniec obozu dwudniowa służba na rzecz zuchów.</i>'
+              '<br>'
+              '<br><b>Czy któraś z tych form nie kształtuje duchowości?</b>'
+              '<br>'
+              '<br><b>Jaki jest problem z tak skonstruowanym planem wychowania duchowego?</b>'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Zaplanowanie strategii rozwoju duchowego i działań',
+          duration: Duration(minutes: 40),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Uczestnicy w grupach są dzieleni na grupy po ok. 4 osoby i otrzymują krótki opis drużyny z załącznika “planowanie strategii i działań”. Ich zadaniem jest stworzyć plan rozwoju duchowego jednostki z uwzględnieniem osobistej <b>roli drużynowego</b>, <b>działań śródrocznych</b> i <b>obozu</b> z uwzględnieniem <b>niedzieli na obozie</b>.'
+              '<br>'
+              '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, ważne by zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
+              '<br>'
+              '<br>Grupy pracujące na opisie jednostek H, HS i W mogą także określić oczekiwania wychowawcze od jednostek niższego pionu, które przekazują im harcerzy w ciągu wychowawczym.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Prezentacja strategii rozwoju duchowego i działań',
+          duration: Duration(minutes: 30),
+          activeForm: true,
+          content: '<b style="text-align:justify;">'
+              '<b>Prezentacja</b> powyższego. Krótka dyskusja nad każdą z jednostek - pozostałe zespoły <b>recenzują</b> w dyskusji prezentowane plany.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Niedziela na obozie',
+          duration: Duration(minutes: 20),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący zanotowawszy plany i strategie rozwoju duchowego związane z niedzielą obozową prezentowane w poprzednim punkcie przez grupy podsumowuje je. Uczestnicy mają możliwość dodania proponowanych form - ważne, by prowadzący prosił o podanie mechanizmu ich działania.'
+              '<br>'
+              '<br>Na końcu prowadzący uzupełnia zbiorczy plan niedzieli o elementy obecne w formie <i>“Msza (obozowa, lecz nie tylko)”</i> z załącznika $attach_html_formy i krótko je omawia.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Scenariusze w grupach',
+          duration: Duration(minutes: 40),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący dzieli uczestników na grupy po ok. 4 osób. Każda z grup otrzymuje po 2-4 scenariusze z załącznika “scenariusze” i w swoim gronie je omawia. Celem omówienia każdego scenariusza jest zaproponowanie rozwiązania zgodnego z harcerskimi celami wychowania duchowego. Na jeden scenariusz grupa powinna poświęcić 10-15 min. Ważne, by prowadzący zaznaczył, że <b>grupy nie muszą osiągnąć jednomyślności</b>.'
+              '<br>'
+              '<br>Po zakończeniu dyskusji grupy referują scenariusze i wnioski z nich płynące na forum wszystkich uczestników. Jeżeli któryś scenariusz zakończył się różnicą stanowisk dyskutujących, może zostać poruszony wspólnie przez wszystkich uczestników.'
+              '<br>'
+              '<br><i>Prowadzący, w przypadku gdy zaczyna brakować czasu, może skrócić czas tej formy</i>.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Podsumowanie warsztatów',
+          duration: Duration(minutes: 20),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący zaprasza uczestników do wspólnego kręgu w celu podsumowania warstztaów. Przy tej okazji warto skupić się na następujących rzeczach:'
+              '</p>'
+
+              '<ul>'
+              '<li><p style="text-align:justify;">Rozdanie dyplomów i pinów uczestnikom.</p></li>'
+              '<li><p style="text-align:justify;">Poproszenie uczestników o podzielenie się wrażeniami związanymi z warsztatami.</p></li>'
+              '<li><p style="text-align:justify;">Prośba o uzupełnienie szczegółowej ankiety ewaluacyjnej - przesłanie jej uczestnikom na maila.</p></li>'
+              '<li><p style="text-align:justify;">Wspólne zdjęcie.</p></li>'
+              '<li><p style="text-align:justify;">Oddanie indetyfikatorów przez uczestników.</p></li>'
+              '</ul>'
       ),
 
       step_szybkie_strzaly_dyskusyjne,
