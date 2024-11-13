@@ -58,6 +58,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
   ],
     attachments: [
       attach_o_strukturze_i_ksztaltowaniu_duchowosci,
+      attach_poziomy_duchowosci,
       attach_neutralnosc_duchowa_przyklady,
       attach_cel_wychowania_duchowego_zhp_statut,
       attach_cel_wychowania_duchowego_zhp_uchwala,
@@ -137,6 +138,12 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       ),
 
       // TODO: add more materials
+
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_poziomy_duchowosci”',
+          attachmentName: attach_name_poziomy_duchowosci,
+          amount: 1
+      ),
 
       KonspektMaterial(
         name: 'Wydrukowany załącznik “$attach_title_formy”',

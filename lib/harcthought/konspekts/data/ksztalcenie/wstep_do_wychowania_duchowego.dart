@@ -27,6 +27,7 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
     aims: wstep_do_wychowania_duchowego_aims,
     attachments: [
       attach_o_strukturze_i_ksztaltowaniu_duchowosci,
+      attach_poziomy_duchowosci,
       attach_neutralnosc_duchowa_przyklady,
       attach_cel_wychowania_duchowego_zhp_statut,
       attach_cel_wychowania_duchowego_zhp_uchwala,
@@ -57,6 +58,12 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
       KonspektMaterial(
         name: 'Długopis',
         amount: 4,
+      ),
+
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_poziomy_duchowosci”',
+          attachmentName: attach_name_poziomy_duchowosci,
+          amount: 1
       ),
 
       KonspektMaterial(
