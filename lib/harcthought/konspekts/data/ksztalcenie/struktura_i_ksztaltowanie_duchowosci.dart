@@ -91,6 +91,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
 
       attach_przyklady_poziomow_duchowosci,
       attach_formy,
+      attach_planowanie_strategii_i_dzialan,
       attach_scenariusze
     ],
     materials: [
@@ -186,6 +187,12 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       ),
 
       KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_planowanie_strategii_i_dzialan”',
+          attachmentName: attach_name_planowanie_strategii_i_dzialan,
+          amount: 1
+      ),
+
+      KonspektMaterial(
         name: 'Wydrukowany załącznik “$attach_title_scenariusze”',
         attachmentName: attach_name_scenariusze,
         additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
@@ -275,7 +282,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       KonspektStep(
           title: 'Przerwa',
           duration: Duration(minutes: 10),
-          activeForm: false,
+          activeForm: true,
           content: '<p style="text-align:justify;">'
               'Przerwa na rozprostowanie nóg, przewietrzenie się, siku itp..'
               '</p>'
@@ -425,24 +432,69 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       ),
 
       KonspektStep(
-          title: 'Zaplanowanie strategii rozwoju duchowego i działań',
-          duration: Duration(minutes: 40),
+          title: 'Planowanie strategii rozwoju duchowego - podział na grupy',
+          duration: Duration(minutes: 10),
           activeForm: true,
           content: '<p style="text-align:justify;">'
-              'Uczestnicy w grupach są dzieleni na grupy po ok. 4 osoby i otrzymują krótki opis drużyny z załącznika $attach_html_planowanie_strategii_i_dzialan. Ich zadaniem jest stworzyć plan rozwoju duchowego jednostki z uwzględnieniem osobistej <b>roli drużynowego</b>, <b>działań śródrocznych</b> i <b>obozu</b> z uwzględnieniem <b>niedzieli na obozie</b>.'
+              'Uczestnicy w grupach są dzieleni na 4 grupy. Każda grupa otrzymuje krótki opis drużyny z załącznika $attach_html_planowanie_strategii_i_dzialan. Zadaniem każdej grupy jest stworzyć plan rozwoju duchowego jednostki.'
               '<br>'
-              '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, ważne by zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
+              '<br>Każda z opisanych na karce drużyn jest w innej metodyce (Z, H, HS, W). Prowadzący może podzielić uczestników tak, by każdy był w grupie pracującej nad metodyką, która jest uczestnikom najbliższa.'
+              '<br>'
+              '<br>Na początku prowadzący prosi każdą z grup, by zapoznałą się z opisami.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Planowanie strategii rozwoju duchowego - cele',
+          duration: Duration(minutes: 10),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący prosi każdą z grup, by wskazała, jakie <b>cele w pracy duchowej</b> chce osiągnąć dla opisanej drużyny. Należy założyć, że praca z opisaną grupą bedzie trwała 3 lata.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Planowanie strategii rozwoju duchowego - działania pośrednie',
+          duration: Duration(minutes: 30),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący prosi każdą z grup, by skupiła się na trzech przestrzeniach i wskazała, jakie działania, zwyczaje, czy normy należy podjąć lub wprowadzić, aby zrealizować wyłonione uprzednio cele.'
+              '<br>'
+              '<br>Zadane przestrzenie, które należy odpowiednio ukształtować, to:'
+              '</p>'
+
+              '<ul>'
+              '<li><p style="text-align:justify;">Wpływ rodziców na harcerzy</p></li>'
+              '<li><p style="text-align:justify;">Wpływ osobistego przykładu kadry na harcerzy</p></li>'
+              '<li><p style="text-align:justify;">Wpływ kultury, mediów i technologii na harcerzy</p></li>'
+              '</ul>'
+
+              '<p style="text-align:justify;">'
+              '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, należy zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Planowanie strategii rozwoju duchowego - działania bezpośrednie',
+          duration: Duration(minutes: 20),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący prosi każdą z grup, by jako ostatni element planowania strategii rozwoju duchowego wskazała <b>działania śródroczne</b> i <b>działania obozowe</b> z uwzględnieniem <b>niedzieli na obozie</b>. Można się w tym celu posiłkować pomysłami z załącznika $attach_html_formy, które są dostępne w apliakcji <b>HarcApp</b>.'
+              '<br>'
+              '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, należy zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
               '<br>'
               '<br>Grupy pracujące na opisie jednostek H, HS i W mogą także określić oczekiwania wychowawcze od jednostek niższego pionu, które przekazują im harcerzy w ciągu wychowawczym.'
               '</p>'
       ),
 
       KonspektStep(
-          title: 'Prezentacja strategii rozwoju duchowego i działań',
-          duration: Duration(minutes: 30),
+          title: 'Planowanie strategii rozwoju duchowego - prezentacja',
+          duration: Duration(minutes: 40),
           activeForm: true,
           content: '<p style="text-align:justify;">'
-              '<b>Prezentacja</b> powyższego. Krótka dyskusja nad każdą z jednostek - pozostałe zespoły <b>recenzują</b> w dyskusji prezentowane plany.'
+              'Każda z grup ma kilka minut, aby <b>zaprezentować</b> swoje strategie i działania.'
+              '<br>'
+              '<br>Po każdej z prezentacji może się odbyć krótka dyskusja nad planami - prowadzący powinien zachęcać do krytyki, jeżeli ktoś się z czymś nie zgadza.'
               '</p>'
       ),
 
