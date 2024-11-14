@@ -121,19 +121,13 @@ KonspektStep step_poziomy_duchowosci = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Stwierdzenie pokroju: <i>“dla mnie wartością jest czytanie książek swoim dzieciom”</i> w istocie nie jest deklaracją wartości, a deklaracją czynu, który warto podjąć. Wartością jest stan, do którego ów czyn prowadzi. <i>“Warto czytać książki dzieciom, bo zacieśnia to więzi w rodzinie”</i> - zatem wartością w tym przypadku jest stan trwania bliskich relacji rodzinnych.'
+        'Stwierdzenie pokroju: <i>“dla mnie wartością jest czytanie książek swoim dzieciom”</i> w istocie nie jest deklaracją wartości, a oceną słuszności czynu. Wartością jest stan, do którego ów czyn prowadzi. <i>“Warto czytać książki dzieciom, bo zacieśnia to więzi w rodzinie”</i> - zatem wartością w tym przypadku jest stan trwania bliskich relacji rodzinnych.'
         '</p>'
         '</li>'
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Potoczne określenie <i>“wartością jest dla mnie rodzina”</i> nie jest deklaracją wartości, bowiem nie określa preferowanego stanu z nią związanego: czy chodzi o posiadanie rodziny, o jej majętność, długowieczność, szczęście, dużą liczebność, przyjemność członków rodziny? W sposób domyślny podanie jedynie przedmiotu wartości oznacza: <i>“w staraniach o preferowany stan rzeczywistości wynikający z moich aksjomatów, najbardziej interesuje mnie poprawa fragmentu rzeczywistości związana z moją rodziną”</i>.'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Stwierdzenie pokroju: <i>“dla mnie wartością jest czytanie książek swoim dzieciom”</i> w istocie nie jest deklaracją wartości, a deklaracją czynu, który warto podjąć. Wartością jest stan, do którego ów czyn prowadzi. <i>“Warto czytać książki dzieciom, bo zacieśnia to więzi w rodzinie”</i> - zatem wartością w tym przypadku jest stan trwania bliskich relacji rodzinnych.'
+        'Potoczne określenie <i>“wartością jest dla mnie rodzina”</i> nie jest deklaracją wartości, bowiem nie określa preferowanego stanu z nią związanego: czy chodzi o posiadanie rodziny, o jej majętność, długowieczność, szczęście, dużą liczebność, poczucie przyjemności członków rodziny? W sposób domyślny podanie jedynie przedmiotu wartości oznacza: <i>“w staraniach o preferowany stan rzeczywistości wynikający z moich aksjomatów, najbardziej interesuje mnie poprawa fragmentu rzeczywistości związana z moją rodziną”</i>.'
         '</p>'
         '</li>'
 
@@ -154,7 +148,7 @@ KonspektStep step_integracja_duchowosci = KonspektStep(
     duration: Duration(minutes: 20),
     activeForm: false,
     contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci opisuje <b>etapy rozwoju duchowego</b> - w pierwszym etapie dzieci są uczone jedynie zachowań, które budują u nich postawy, w wieku ok. 10 lat rozpoczyna się myślenie abstrakcyjne i konceptualizują się wartości, które następnie, w wieku ok. 15 lat są porządkowane w światopogląd i internalizowane jest pojęcie aksjomatu.'
+        'Prowadzący na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci opisuje <b>etapy rozwoju duchowego</b> - w pierwszym etapie dzieci są zdolne rozumieć właściwe zachowania, na podstawie których kregują swoje postawy, w wieku ok. 10 lat pojawia się u nich zdolność myślenia abstrakcyjnego i operowanie na poziomie wartości, które następnie, w wieku ok. 15 lat są porządkowane w światopogląd i internalizowane jest pojęcie aksjomatu.'
         '<br>'
         '<br>Moment, w którym harcerze wychodzą z etapu integracji wstępnej i zaczynają świadomą integrację duchowości charakteryzowany jest często przez zainteresowanie lub przynajmniej zrozumienie wagi pytań w stylu:'
         '</p>'
@@ -331,7 +325,7 @@ KonspektStep step_zrodla_wartosci_w_zhp_okreslonosc_wartosci = KonspektStep(
 
 KonspektStep step_zrodla_wartosci_w_zhp_aksjoamty = KonspektStep(
     title: 'Źródła wartości w ZHP - aksjomaty',
-    duration: Duration(minutes: 15),
+    duration: Duration(minutes: 20),
     activeForm: false,
     aims: [
       'Uświadomienie uczestnikom, że do wspierania rozwoju duchowego na poziomie Z i H wystarczy poziom postaw i wartości, ale rozwój duchowy z HS i W wymaga pracy na poziomie aksjomatu',
@@ -446,7 +440,7 @@ KonspektStep step_zrodla_wartosci_w_zhp_aksjoamty = KonspektStep(
 );
 
 KonspektStep step_neutralnosc_podsumowanie = KonspektStep(
-    title: 'Podsumowanie',
+    title: 'Neutralność duchowa - podsumowanie',
     duration: Duration(minutes: 5),
     activeForm: false,
     content: '<p style="text-align:justify;">'

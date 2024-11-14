@@ -11,6 +11,19 @@ import 'common_wychowanie_duchowe.dart';
 const konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci = 'struktura_i_ksztaltowanie_duchowosci';
 const konspekt_harc_title_struktura_i_ksztaltowanie_duchowosci = 'Struktura i kształtowanie duchowości';
 
+
+const String attach_html_przyklady_poziomow_duchowosci = '<a href="$attach_name_przyklady_poziomow_duchowosci@attachment">$attach_title_przyklady_poziomow_duchowosci</a>';
+const String attach_name_przyklady_poziomow_duchowosci = 'przyklady_poziomow_duchowosci';
+const String attach_title_przyklady_poziomow_duchowosci = 'Przykłady poziomów duchowości';
+KonspektAttachment attach_przyklady_poziomow_duchowosci = KonspektAttachment(
+  name: attach_name_przyklady_poziomow_duchowosci,
+  title: attach_title_przyklady_poziomow_duchowosci,
+  assets: {
+    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_przyklady_poziomow_duchowosci.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_przyklady_poziomow_duchowosci.docx',
+  },
+);
+
 const String attach_html_formy = '<a href="$attach_name_formy@attachment">$attach_title_formy</a>';
 const String attach_name_formy = 'formy';
 const String attach_title_formy = 'Formy';
@@ -18,8 +31,8 @@ KonspektAttachment attach_formy = KonspektAttachment(
   name: attach_name_formy,
   title: attach_title_formy,
   assets: {
-    FileFormat.urlPdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.pdf',
-    FileFormat.urlDocx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.docx',
   },
 );
 
@@ -30,8 +43,8 @@ KonspektAttachment attach_scenariusze = KonspektAttachment(
   name: attach_name_scenariusze,
   title: attach_title_scenariusze,
   assets: {
-    FileFormat.urlPdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.pdf',
-    FileFormat.urlDocx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.docx',
   },
 );
 
@@ -64,6 +77,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       attach_cel_wychowania_duchowego_zhp_uchwala,
       attach_kratka_minimow_rozwoju_duchowego,
 
+      attach_przyklady_poziomow_duchowosci,
       attach_formy,
       attach_scenariusze
     ],
@@ -146,16 +160,23 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       ),
 
       KonspektMaterial(
+        name: 'Wydrukowany załącznik “$attach_title_przyklady_poziomow_duchowosci”',
+        attachmentName: attach_name_przyklady_poziomow_duchowosci,
+        additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i potasować w ramach wyciętych czwórek.',
+        amount: 1
+      ),
+
+      KonspektMaterial(
         name: 'Wydrukowany załącznik “$attach_title_formy”',
         attachmentName: attach_name_formy,
-        additionalPreparation: 'Karty należy wyciąć wzdłuż przerywanych linii.',
+        additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
         amount: 1
       ),
 
       KonspektMaterial(
         name: 'Wydrukowany załącznik “$attach_title_scenariusze”',
         attachmentName: attach_name_scenariusze,
-        additionalPreparation: 'Karty należy wyciąć wzdłuż przerywanych linii.',
+        additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
         amount: 1
       ),
 
@@ -222,10 +243,10 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       KonspektStep(
           title: 'Poziomy duchowości - sprawdzenie',
           duration: Duration(minutes: 15),
-          activeForm: false,
+          activeForm: true,
           required: false,
           content: '<p style="text-align:justify;">'
-              'Na końcu prowadzący dzieli uczestników na około pięcioosobowe grupy. Rozdaje każdej grupie po jednym komplecie przygotowanych kartek z załącznika “przykłady poziomów duchowości” i prosi grupy o <b>posegregowanie kartek na zachowania, postawy, wartości i aksjomaty.</b>'
+              'Prowadzący dzieli uczestników na pięć grup. Rozdaje każdej grupie po jednym komplecie przygotowanych kartek z załącznika $attach_html_przyklady_poziomow_duchowosci i prosi grupy o <b>posegregowanie kartek na zachowania, postawy, wartości i aksjomaty.</b>'
               '<br>'
               '<br>Gdy dana grupa jest gotowa, zgłasza się do prowadzącego, który podchodzi i sprawdza. Jeśli coś jest nie tak, prowadzący mówi który poziom duchowości wymaga poprawy. Gdy wszystkie grupy są gotowe, niezależnie od poprawności segregacji, prowadzący omawia na forum poprawne przyporządkowanie.'
               '</p>'
@@ -269,7 +290,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           duration: Duration(minutes: 45),
           activeForm: true,
           content: '<p style="text-align:justify;">'
-              'Najlepiej zamówić pizzę, żeby jedzenie trwało niewiele czasu i by można było po nim chwilę odpocząć.'
+              'Najlepiej już wcześniej zamówić pizzę, żeby jedzenie trwało niewiele czasu i by można było po nim chwilę odpocząć.'
               '</p>'
       ),
 
