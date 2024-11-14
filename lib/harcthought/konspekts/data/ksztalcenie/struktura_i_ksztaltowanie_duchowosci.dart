@@ -522,6 +522,8 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '</p>'
       ),
 
+      step_szybkie_strzaly_dyskusyjne,
+
       KonspektStep(
           title: 'Podsumowanie warsztatów',
           duration: Duration(minutes: 20),
@@ -539,6 +541,5 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '</ul>'
       ),
 
-      step_szybkie_strzaly_dyskusyjne,
     ]
 );
