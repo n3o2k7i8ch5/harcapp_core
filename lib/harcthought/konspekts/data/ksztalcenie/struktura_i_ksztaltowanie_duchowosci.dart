@@ -484,7 +484,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
 
       KonspektStep(
           title: 'Planowanie strategii rozwoju duchowego - mechanizmy pośrednie',
-          duration: Duration(minutes: 30),
+          duration: Duration(minutes: 20),
           activeForm: true,
           content: '<p style="text-align:justify;">'
               'Prowadzący prosi każdą z grup, by skupiła się na trzech przestrzeniach i wskazała, jakie działania, zwyczaje, czy normy należy podjąć lub wprowadzić, aby zrealizować wyłonione uprzednio cele.'
@@ -500,6 +500,17 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
 
               '<p style="text-align:justify;">'
               '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, należy zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Planowanie strategii rozwoju duchowego - omówienie postępu prac',
+          duration: Duration(minutes: 10),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący zbiera każdą z grup, by przedstawiła swoje opisane cele i mechanizmy pośrednie. Po każdej z prezentacji może się odbyć krótka dyskusja nad planami.'
+              '<br>'
+              '<br>Ten punkt służy temu, aby prowadzący miał możliwość zareagować, jeśli któraś z grup zacznie błądzić w założeniach.'
               '</p>'
       ),
 
