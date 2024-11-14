@@ -36,6 +36,18 @@ KonspektAttachment attach_formy = KonspektAttachment(
   },
 );
 
+const String attach_html_planowanie_strategii_i_dzialan = '<a href="$attach_name_planowanie_strategii_i_dzialan@attachment">$attach_title_planowanie_strategii_i_dzialan</a>';
+const String attach_name_planowanie_strategii_i_dzialan = 'planowanie_strategii_i_dzialan';
+const String attach_title_planowanie_strategii_i_dzialan = 'Planowanie strategii i działań';
+KonspektAttachment attach_planowanie_strategii_i_dzialan = KonspektAttachment(
+  name: attach_name_planowanie_strategii_i_dzialan,
+  title: attach_title_planowanie_strategii_i_dzialan,
+  assets: {
+    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_planowanie_strategii_i_dzialan.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_planowanie_strategii_i_dzialan.docx',
+  },
+);
+
 const String attach_html_scenariusze = '<a href="$attach_name_scenariusze@attachment">$attach_title_scenariusze</a>';
 const String attach_name_scenariusze = 'scenariusze';
 const String attach_title_scenariusze = 'Scenariusze';
@@ -417,7 +429,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           duration: Duration(minutes: 40),
           activeForm: true,
           content: '<p style="text-align:justify;">'
-              'Uczestnicy w grupach są dzieleni na grupy po ok. 4 osoby i otrzymują krótki opis drużyny z załącznika “planowanie strategii i działań”. Ich zadaniem jest stworzyć plan rozwoju duchowego jednostki z uwzględnieniem osobistej <b>roli drużynowego</b>, <b>działań śródrocznych</b> i <b>obozu</b> z uwzględnieniem <b>niedzieli na obozie</b>.'
+              'Uczestnicy w grupach są dzieleni na grupy po ok. 4 osoby i otrzymują krótki opis drużyny z załącznika $attach_html_planowanie_strategii_i_dzialan. Ich zadaniem jest stworzyć plan rozwoju duchowego jednostki z uwzględnieniem osobistej <b>roli drużynowego</b>, <b>działań śródrocznych</b> i <b>obozu</b> z uwzględnieniem <b>niedzieli na obozie</b>.'
               '<br>'
               '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, ważne by zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
               '<br>'
@@ -429,7 +441,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           title: 'Prezentacja strategii rozwoju duchowego i działań',
           duration: Duration(minutes: 30),
           activeForm: true,
-          content: '<b style="text-align:justify;">'
+          content: '<p style="text-align:justify;">'
               '<b>Prezentacja</b> powyższego. Krótka dyskusja nad każdą z jednostek - pozostałe zespoły <b>recenzują</b> w dyskusji prezentowane plany.'
               '</p>'
       ),
@@ -450,7 +462,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           duration: Duration(minutes: 40),
           activeForm: true,
           content: '<p style="text-align:justify;">'
-              'Prowadzący dzieli uczestników na grupy po ok. 4 osób. Każda z grup otrzymuje po 2-4 scenariusze z załącznika “scenariusze” i w swoim gronie je omawia. Celem omówienia każdego scenariusza jest zaproponowanie rozwiązania zgodnego z harcerskimi celami wychowania duchowego. Na jeden scenariusz grupa powinna poświęcić 10-15 min. Ważne, by prowadzący zaznaczył, że <b>grupy nie muszą osiągnąć jednomyślności</b>.'
+              'Prowadzący dzieli uczestników na grupy po ok. 4 osób. Każda z grup otrzymuje po 2-4 scenariusze z $attach_html_scenariusze i w swoim gronie je omawia. Celem omówienia każdego scenariusza jest zaproponowanie rozwiązania zgodnego z harcerskimi celami wychowania duchowego. Na jeden scenariusz grupa powinna poświęcić 10-15 min. Ważne, by prowadzący zaznaczył, że <b>grupy nie muszą osiągnąć jednomyślności</b>.'
               '<br>'
               '<br>Po zakończeniu dyskusji grupy referują scenariusze i wnioski z nich płynące na forum wszystkich uczestników. Jeżeli któryś scenariusz zakończył się różnicą stanowisk dyskutujących, może zostać poruszony wspólnie przez wszystkich uczestników.'
               '<br>'
