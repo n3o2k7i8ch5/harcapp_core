@@ -189,7 +189,8 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       KonspektMaterial(
           name: 'Wydrukowany załącznik “$attach_title_planowanie_strategii_i_dzialan”',
           attachmentName: attach_name_planowanie_strategii_i_dzialan,
-          amount: 1
+          amount: 2,
+          comment: 'Może się okazać, że chętni na jedną z metodyk będą tak liczni, że warto ich podzielić na dwie osobne grupy - dlatego warto wydrukować dwa razy.'
       ),
 
       KonspektMaterial(
@@ -314,8 +315,8 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       ),
 
       KonspektStep(
-          title: 'Praktyka wychowania duchowego - co pomaga?',
-          duration: Duration(minutes: 10),
+          title: 'Praktyka wychowania duchowego - mechanizmy pośrednie',
+          duration: Duration(minutes: 20),
           activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący zaczyna od zadania oczywistego pytania:'
@@ -361,7 +362,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '<p style="text-align:justify;">'
               '<b>[Wzajemność oddziaływań]</b>'
               '<br>'
-              '<br><i>Mamy harcerza z blokowisk z Łódzkiego Widzewa. Chcemy wychować go w duchu szacunku dla prawa. Czy zwiększenie wśród jego bliskich znajomych liczby osób, które szanują prawo w tym pomoże, czy nie? Dlaczego?</i>'
+              '<br><i>Mamy harcerza z blokowisk z Łódzkiego Widzewa. Jego typowi koledzy albo siedzą w domu i grają na kompie, albo chodzą na mecze, organizują ustawki, dealują marychą i piją wódkę za szkołą. Chcemy wychować go w duchu szacunku dla prawa. Czy zwiększenie wśród jego bliskich znajomych liczby osób, które szanują prawo w tym pomoże, czy nie? Dlaczego?</i>'
               '</p>'
               '</li>'
 
@@ -375,16 +376,44 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
 
               '<li>'
               '<p style="text-align:justify;">'
-              '<b>[Formy kultury]</b>'
+              '<b>[Formy kultury, media i technologia]</b>'
               '<br>'
-              '<br><i>Mamy harcerskę starszą, która od kiedy poszła do technikum zaczęła tak jak jej nowe koleżanki oglądać Netflixa, oglądać kiczowate reality-show typu “Trudne sprawy” i słuchać depresyjnej muzyki - w szkole idzie jej średnio, marnuje dużo czasu na fejsie i Tick-Tock. Chcemy wychować ją do postawy pozytywnego myślenia, zaradności i sumienności. Czy sprawienie, że z Netflixa i “Trudnych spraw” przerzuci się na “Ojca Mateusza” i “Pingwiny z Madagaskaru", drużyna zainspiruje ją szantami, T.Love i Kaczmarskim, a w miejsce fejsa i Tick-Tocka zacznie czytać Dukaja pomoże w osiągnięciu celu wychowawczego? Dlaczego?</i>'
+              '<br><i>Mamy harcerskę starszą, która od kiedy poszła do technikum zaczęła tak jak jej nowe koleżanki oglądać Netflixa, oglądać kiczowate reality-show typu “Trudne sprawy” i słuchać depresyjnej muzyki - w szkole idzie jej średnio, marnuje dużo czasu na fejsie i Tick-Tock. Chcemy wychować ją do postawy pozytywnego myślenia, zaradności i sumienności. Czy sprawienie, że z Netflixa i “Trudnych spraw” przerzuci się na “Ojca Mateusza” i “Pingwiny z Madagaskaru", drużyna zainspiruje ją szantami, T.Love i Kaczmarskim, a w miejsce fejsa i tik-toka zacznie czytać Dukaja pomoże w osiągnięciu celu wychowawczego? Dlaczego?</i>'
               '</p>'
               '</li>'
 
               '</ul>'
 
               '<p style="text-align:justify;">'
-              'Jako ostatni element, już bez scenariusza, prowadzący opisuje metodę pośrednią jaką jest zaproponowanie <b>Opowieści Przewodniej</b> na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci.'
+              'Jako ostatni element, już bez scenariusza, prowadzący opisuje zjawisko "<b>trzeciego miejsca</b>", z którym wychowanek może być zwiazany, które może budować jego tożsamość, które nie jest ani jego pracą (obowiazkiem), ani jego domem. Miejscem takim może być wspólnota religijna, drużyna, zespół muzyczny, czy hipisowski skłot.'
+              '<br>'
+              '<br>Na końcu prowadzący może dodać, że wszystkie te mechanizmy nie są wzięte z sufitu - są obecne w <b>stopniach harcerskich</b>.'
+              '</p>'
+      ),
+
+      KonspektStep(
+          title: 'Praktyka wychowania duchowego - Opowieść Przewodnia',
+          duration: Duration(minutes: 10),
+          activeForm: false,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący opisuje pośredni mechanizm kształtowania duchowości, czyli <b>Opowieść Przewodnią</b> na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci.'
+              '<br>'
+              '<br>Opowieść Przewodnia jest szczególnie silnym mechanizmem w momencie <b>rozpoczęcia integracji świadomej</b>, jednak gra rolę także później. Jest to opowieść, nadająca człowiekowi tożsamość, sens i cel.'
+              '<br>'
+              '<br>Na przykład:'
+              '</p>'
+
+              '<ul>'
+              '<li><p style="text-align:justify;">“Bóg umarł z miłości do każdego człowieka. Za mnie także. Tego doświadczenia raz poznanego nie da się zakopać - jest tak głębokie i dojmujące, że muszę się nim podzielić z każdym człowiekiem.”</p></li>'
+              '<li><p style="text-align:justify;">“Jesteśmy na skraju katastrofy klimatycznej - jeżeli nie zrobimy czegoś natychmiast, cały świat spłonie i na Ziemi nie będzie się dało dłużej żyć. Muszę działać. Natychmiast.”</p></li>'
+              '<li><p style="text-align:justify;">“Jestem Polakiem. Spadkobiercą tysiącletniego narodu i wielo-tysiącletniej cywilizacji judeo-chrześcijańskiej. Potomkiem poległych w obronie ojczyzny mężów i kobiet. Muszę od siebie wymagać, by kiedyś dźwignąć naszą polską, poszarpaną państwowość - w obecnej sytuacji geopolitycznej to jest być albo nie być polskiego narodu.”</p></li>'
+              '<li><p style="text-align:justify;">“Społeczeństwo jest rasistowskie, mizoginiczne i homofobiczne do szpiku kości. Codziennie przez falę hejtu i działań eksterminacyjnych giną niewinne kobiety, geje, osoby trans i inni ludzie LGBTQIAP2+. Muszę coś z tym zrobić. Muszę manifestować, zmienić język, obalić patriarchat i heteronormatywność, zmienić społeczeństwo nawet jeśli oznaczałoby to poświęcenie temu całego swojego życia. Krew się leje w tym momencie.”</p></li>'
+              '</ul>'
+
+              '<p style="text-align:justify;">'
+              'Prowadzący zwraca uwagę, że harcerstwo też może nosić znaczenie Opowieści Przewodniej, szczególnie dla młodej kadry i instruktorów, którzy wierzą, że na ich barkach spoczywa wychowanie i szczęście młodych ludzi.'
+              '<br>'
+              '<br>Warto także zwrócić uwagę, że harcerstwo może nosić znamiona subkutlury: ma swoje obrzędy, symbole, wartości i ścisłe gorono. Widać to przykładowo po harcerzach, którzy chodzą na każdą zbiórkę, jeżdżą na każdy wyjazd, uczą się po nocach grać Kaczmarskiego na gitarze, a do szkoły w bojówkach i harcerskim pasie. Owo zaangażowanie i tożsamość może być niezwykle efektywnym mechanizmem kształtowania duchowości.'
               '</p>'
       ),
 
@@ -414,7 +443,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       KonspektStep(
           title: 'Fantomowe działania wychowawcze i skuteczność wychowawcza',
           duration: Duration(minutes: 10),
-          activeForm: true,
+          activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący prezentuje krótki opis obozu drużyny i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zapoczątkowuje krótką dyskusję zadając pytanie: “co jest nie tak z tą strategią?”. Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
               '<br>'
@@ -446,7 +475,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
 
       KonspektStep(
           title: 'Planowanie strategii rozwoju duchowego - cele',
-          duration: Duration(minutes: 10),
+          duration: Duration(minutes: 15),
           activeForm: true,
           content: '<p style="text-align:justify;">'
               'Prowadzący prosi każdą z grup, by wskazała, jakie <b>cele w pracy duchowej</b> chce osiągnąć dla opisanej drużyny. Należy założyć, że praca z opisaną grupą bedzie trwała 3 lata.'
@@ -454,7 +483,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       ),
 
       KonspektStep(
-          title: 'Planowanie strategii rozwoju duchowego - działania pośrednie',
+          title: 'Planowanie strategii rozwoju duchowego - mechanizmy pośrednie',
           duration: Duration(minutes: 30),
           activeForm: true,
           content: '<p style="text-align:justify;">'
