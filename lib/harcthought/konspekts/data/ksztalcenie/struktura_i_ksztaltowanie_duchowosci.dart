@@ -36,6 +36,18 @@ KonspektAttachment attach_mechanizmy_posrednie = KonspektAttachment(
   },
 );
 
+const String attach_html_scenariusz_fantomowe_dzialania_wychowawcze = '<a href="$attach_name_scenariusz_fantomowe_dzialania_wychowawcze@attachment">$attach_title_scenariusz_fantomowe_dzialania_wychowawcze</a>';
+const String attach_name_scenariusz_fantomowe_dzialania_wychowawcze = 'scenariusz_fantomowe_dzialania_wychowawcze';
+const String attach_title_scenariusz_fantomowe_dzialania_wychowawcze = 'Formy';
+KonspektAttachment attach_scenariusz_fantomowe_dzialania_wychowawcze = KonspektAttachment(
+  name: attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
+  title: attach_title_scenariusz_fantomowe_dzialania_wychowawcze,
+  assets: {
+    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.docx',
+  },
+);
+
 const String attach_html_formy = '<a href="$attach_name_formy@attachment">$attach_title_formy</a>';
 const String attach_name_formy = 'formy';
 const String attach_title_formy = 'Formy';
@@ -103,6 +115,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
 
       attach_przyklady_poziomow_duchowosci,
       attach_mechanizmy_posrednie,
+      attach_scenariusz_fantomowe_dzialania_wychowawcze,
       attach_formy,
       attach_planowanie_strategii_i_dzialan,
       attach_scenariusze
@@ -196,6 +209,13 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           name: 'Wydrukowany załącznik “$attach_title_mechanizmy_posrednie”',
           attachmentName: attach_name_mechanizmy_posrednie,
           additionalPreparation: 'Kartki należy przeciąć na pół wzdłuż przerywanych linii.',
+          amount: 1
+      ),
+
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_scenariusz_fantomowe_dzialania_wychowawcze”',
+          attachmentName: attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
+          additionalPreparation: 'Kartkę należy przeciąć na pół wzdłuż przerywanych linii.',
           amount: 1
       ),
 
@@ -375,7 +395,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '</ol>'
 
               '<p style="text-align:justify;">'
-              'Następnie prowadzący przedstawia <b>mechanizmy pośrednie</b>, które wpływają na duchowość. W celu wejścia w interakcję z uczestnikami przedstawia krótkie scenariusze na podstawie których uczestnicy powinni wywnioskować określony mechanizm (podobnie jak poprzednio, gdy uczestnicy poprawnie nazwą mechanizm, prowadzący kładzie w widocznym miejscu odpowiadającą mu kartkę z załącznika $attach_html_mechanizmy_posrednie.):'
+              'Następnie prowadzący przedstawia <b>mechanizmy pośrednie</b>, które wpływają na duchowość. W celu wejścia w interakcję z uczestnikami przedstawia krótkie scenariusze na podstawie których uczestnicy powinni wywnioskować określony mechanizm (podobnie jak poprzednio, gdy uczestnicy poprawnie nazwą mechanizm, prowadzący kładzie w widocznym miejscu odpowiadającą mu kartkę z załącznika $attach_html_mechanizmy_posrednie):'
               '</p>'
 
               '<ul>'
@@ -483,14 +503,11 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           duration: Duration(minutes: 10),
           activeForm: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący prezentuje krótki opis obozu drużyny i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zapoczątkowuje krótką dyskusję zadając pytanie: “co jest nie tak z tą strategią?”. Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
+              'Prowadzący prezentuje krótki opis obozu drużyny z załącznika $attach_html_scenariusz_fantomowe_dzialania_wychowawcze i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zapoczątkowuje krótką dyskusję zadając pytanie: “co jest nie tak z tą strategią?”. Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
               '<br>'
               '<br>W oparciu o dotychczasowe pojęcia powinno paść hasło “<b>skuteczności wychowawczej</b>”.'
               '<br>'
-              '<br>Opis:'
-              '<br>'
-              '<br><i>Obóz szczepu, plan rozwoju duchowego drużyny.'
-              '<br>Pierwszego dnia obozu kominek dotyczący tego, że nikt nie ma prawa zmuszać harcerzy do robienia rzeczy, na które nie mają ochoty. Raz w tygodniu o świcie medytacja nad fragmentem poezji dotyczącej natury. Co wieczór odśpiewanie przez drużynę “Roty” podczas opuszczania flagi państwowej w podobozie w celu wychowania patriotycznego. W niedzielę msza dla chętnych. Podczas olimpiady obozowej musztra w wodzie oraz czołganie w błocie w celu budowania hartu ducha. Dalej na obozie “Dzień Tolerancji” i zajęcia o stereotypach. Planowany jest także na obozie “Dzień Wspólnej Europy” w celu zbudowania świadomości korzyści wynikających z członkostwa Polski w UE. Na koniec obozu dwudniowa służba na rzecz zuchów.</i>'
+              '<br>Prowadzący może posiłkować się pytaniami:'
               '<br>'
               '<br><b>Czy któraś z tych form nie kształtuje duchowości?</b>'
               '<br>'
@@ -585,7 +602,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       KonspektStep(
           title: 'Niedziela na obozie',
           duration: Duration(minutes: 20),
-          activeForm: true,
+          activeForm: false,
           content: '<p style="text-align:justify;">'
               'Prowadzący zanotowawszy plany i strategie rozwoju duchowego związane z niedzielą obozową prezentowane w poprzednim punkcie przez grupy podsumowuje je. Uczestnicy mają możliwość dodania proponowanych form - ważne, by prowadzący prosił o podanie mechanizmu ich działania.'
               '<br>'
