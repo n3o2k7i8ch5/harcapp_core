@@ -204,6 +204,29 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       ),
 
       KonspektMaterial(
+        name: 'Wydrukowany załącznik “$attach_title_neutralnosc_duchowa_przyklady”',
+        attachmentName: attach_name_neutralnosc_duchowa_przyklady,
+      ),
+
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_cel_wychowania_duchowego_zhp_statut”',
+          attachmentName: attach_name_cel_wychowania_duchowego_zhp_statut,
+          amount: 4
+      ),
+
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_cel_wychowania_duchowego_zhp_uchwala”',
+          attachmentName: attach_name_cel_wychowania_duchowego_zhp_uchwala,
+          amount: 4
+      ),
+
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_kratka_minimow_rozwoju_duchowego”',
+          attachmentName: attach_name_kratka_minimow_rozwoju_duchowego,
+          amount: 4
+      ),
+
+      KonspektMaterial(
           name: 'Wydrukowany załącznik “$attach_title_mechanizmy_posrednie”',
           attachmentName: attach_name_mechanizmy_posrednie,
           additionalPreparation: 'Kartki należy przeciąć na pół wzdłuż przerywanych linii.',

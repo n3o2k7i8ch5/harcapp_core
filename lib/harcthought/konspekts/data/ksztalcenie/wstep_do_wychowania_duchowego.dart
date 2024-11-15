@@ -46,11 +46,6 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
       ),
 
       KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_neutralnosc_duchowa_przyklady”',
-        attachmentName: attach_name_neutralnosc_duchowa_przyklady,
-      ),
-
-      KonspektMaterial(
         name: 'Kartka A4',
         amount: 4,
       ),
@@ -64,6 +59,11 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
           name: 'Wydrukowany załącznik “$attach_title_poziomy_duchowosci”',
           attachmentName: attach_name_poziomy_duchowosci,
           amount: 1
+      ),
+
+      KonspektMaterial(
+        name: 'Wydrukowany załącznik “$attach_title_neutralnosc_duchowa_przyklady”',
+        attachmentName: attach_name_neutralnosc_duchowa_przyklady,
       ),
 
       KonspektMaterial(
