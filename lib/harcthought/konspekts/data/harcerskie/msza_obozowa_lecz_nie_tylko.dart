@@ -11,8 +11,10 @@ Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
   category: KonspektCategory.harcerskie,
   type: KonspektType.projekt,
   spheres: {
-    KonspektSphere.umysl: null,
-    KonspektSphere.relacje: null
+    KonspektSphere.duch: KonspektSphereDetails(
+        level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
+        mechanism: [KonspektSphereMechanism.duchBezposrednia, KonspektSphereMechanism.duchNormalizacja]
+    ),
   },
   metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
   coverAuthor: 'Daniel Iwanicki',
