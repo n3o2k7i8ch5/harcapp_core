@@ -24,6 +24,18 @@ KonspektAttachment attach_przyklady_poziomow_duchowosci = KonspektAttachment(
   },
 );
 
+const String attach_html_mechanizmy_posrednie = '<a href="$attach_name_mechanizmy_posrednie@attachment">$attach_title_mechanizmy_posrednie</a>';
+const String attach_name_mechanizmy_posrednie = 'mechanizmy_posrednie';
+const String attach_title_mechanizmy_posrednie = 'Mechanizmy pośrednie';
+KonspektAttachment attach_mechanizmy_posrednie = KonspektAttachment(
+  name: attach_name_mechanizmy_posrednie,
+  title: attach_title_mechanizmy_posrednie,
+  assets: {
+    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_mechanizmy_posrednie.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_mechanizmy_posrednie.docx',
+  },
+);
+
 const String attach_html_formy = '<a href="$attach_name_formy@attachment">$attach_title_formy</a>';
 const String attach_name_formy = 'formy';
 const String attach_title_formy = 'Formy';
@@ -90,6 +102,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       attach_kratka_minimow_rozwoju_duchowego,
 
       attach_przyklady_poziomow_duchowosci,
+      attach_mechanizmy_posrednie,
       attach_formy,
       attach_planowanie_strategii_i_dzialan,
       attach_scenariusze
@@ -177,6 +190,13 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
         attachmentName: attach_name_przyklady_poziomow_duchowosci,
         additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i potasować w ramach wyciętych czwórek.',
         amount: 1
+      ),
+
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_mechanizmy_posrednie”',
+          attachmentName: attach_name_mechanizmy_posrednie,
+          additionalPreparation: 'Kartki należy przeciąć na pół wzdłuż przerywanych linii.',
+          amount: 1
       ),
 
       KonspektMaterial(
@@ -327,24 +347,42 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '<br>'
               '<br><b><i>“Duchowość nie jest umiejętnością, dlatego nie należy sądzić że można ją rozwinąć tymi samymi metodami co intelekt, ciało, czy emocje.”</i></b>'
               '<br>'
-              '<br>Wychowanie duchowe zaczyna się od sposobu myślenia:'
+              '<br>Prowadzący zwraca uwagę, że wychowanie duchowe zaczyna się od sposobu myślenia. Przedstawia trzy punkty wyjścia i przy omawianiu każdego kładzie w widocznym miejscu odpowiadającą mu kartkę z załącznika $attach_html_mechanizmy_posrednie.'
               '</p>'
 
               '<ol>'
-              '<li><p style="text-align:justify;">Duchowość jest najważniejszą sferą rozwoju - to ona nadaje sens i daje możliwość pełnego życia.</p></li>'
-              '<li><p style="text-align:justify;">Nie istnieje próżnia wychowawcza. Jeśli duchowości nie przekażą dziecku rodzice, harcerstwo, czy Kościół, to zrobi to ulica, reklamy i internet.</p></li>'
-              '<li><p style="text-align:justify;">Duchowość nie jest sprawą prywatną i nie należy jej cenzurować.</p></li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>Duchowość jest najważniejszą sferą człowieka</b>.'
+              '<br>Nadaje sens każdemu działaniu.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>Nie istnieje próżnia duchowa</b>.'
+              '<br>Jeśli duchowości nie ukształtuja rodzice, harcerstwo, czy Kościół, to zrobi to ulica, reklamy i internet.'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>Duchowość nie jest sprawą prywatną. Nie należy jej cenzurować.</b>'
+              '<br>Duchowość jest sprawą indywidualną i osobistą, ale dotyczy całego otoczenia, w którym człowiek żyje.'
+              '</p>'
+              '</li>'
               '</ol>'
 
               '<p style="text-align:justify;">'
-              'Prowadzący w celu wejścia w interakcję z uczestnikami przedstawia krótkie scenariusze na podstawie których uczestnicy powinni wywnioskować metody pośrednie:'
+              'Następnie prowadzący przedstawia <b>mechanizmy pośrednie</b>, które wpływają na duchowość. W celu wejścia w interakcję z uczestnikami przedstawia krótkie scenariusze na podstawie których uczestnicy powinni wywnioskować określony mechanizm (podobnie jak poprzednio, gdy uczestnicy poprawnie nazwą mechanizm, prowadzący kładzie w widocznym miejscu odpowiadającą mu kartkę z załącznika $attach_html_mechanizmy_posrednie.):'
               '</p>'
 
               '<ul>'
 
               '<li>'
               '<p style="text-align:justify;">'
-              '<b>[Przykład własny instruktora]</b>'
+              '<b>[Przykład własny kadry]</b>'
               '<br>'
               '<br><i>Mamy harcerza z domu, gdzie poruszenie tematu światopoglądowego lub politycznego zawsze kończy się gigantyczną kłótnią. Chcemy wychować go w przekonaniu, że warto wyrażać swoje zdanie oraz dyskutować na ważne sprawy, zwłaszcza dotyczące Polski, geopolityki, społeczeństwa i wiary. Czy jeżeli ów harcerz będzie świadkiem jak jego drużynowy prowadzi takie dyskusje ze swoimi kumplami z kadry szczepu, to czy pomoże to w osiągnięciu założonego celu wychowawczego, czy nie? Dlaczego?</i>'
               '</p>'
@@ -352,7 +390,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
 
               '<li>'
               '<p style="text-align:justify;">'
-              '<b>[Rola rodziców]</b>'
+              '<b>[Wpływ rodziców]</b>'
               '<br>'
               '<br><i>Mamy harcerza, którego chcemy wychować w sumienności i odpowiedzialności za powierzone mu zadania. Kadra drużyny robi w tym kierunku ile może, ale gdy młody wraca do domu, rodzice za niego sprzątają, gotują mu i pozwalają mu nie robić zadań domowych gdy mówi, że jest zmęczony. Czy doprowadzenie do sytuacji w której rodzice zaczynają koordynować swoje działania tym aspekcie wychowania z kadrą drużyny pomoże  w osiągnięciu założonego celu wychowawczego, czy nie? Dlaczego?</i>'
               '</p>'
@@ -376,7 +414,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
 
               '<li>'
               '<p style="text-align:justify;">'
-              '<b>[Formy kultury, media i technologia]</b>'
+              '<b>[Kultura, media i technologia]</b>'
               '<br>'
               '<br><i>Mamy harcerskę starszą, która od kiedy poszła do technikum zaczęła tak jak jej nowe koleżanki oglądać Netflixa, oglądać kiczowate reality-show typu “Trudne sprawy” i słuchać depresyjnej muzyki - w szkole idzie jej średnio, marnuje dużo czasu na fejsie i Tick-Tock. Chcemy wychować ją do postawy pozytywnego myślenia, zaradności i sumienności. Czy sprawienie, że z Netflixa i “Trudnych spraw” przerzuci się na “Ojca Mateusza” i “Pingwiny z Madagaskaru", drużyna zainspiruje ją szantami, T.Love i Kaczmarskim, a w miejsce fejsa i tik-toka zacznie czytać Dukaja pomoże w osiągnięciu celu wychowawczego? Dlaczego?</i>'
               '</p>'
@@ -396,18 +434,18 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           duration: Duration(minutes: 10),
           activeForm: false,
           content: '<p style="text-align:justify;">'
-              'Prowadzący opisuje pośredni mechanizm kształtowania duchowości, czyli <b>Opowieść Przewodnią</b> na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci.'
+              'Prowadzący opisuje ostatni pośredni mechanizm kształtowania duchowości, czyli <b>Opowieść Przewodnią</b> na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci. Podobnie jak w przypadku poprzednich mechanizmów, do pozostałych dodaje przy tym odpowiadającą kartkę z załącznika $attach_html_mechanizmy_posrednie'
               '<br>'
-              '<br>Opowieść Przewodnia jest szczególnie silnym mechanizmem w momencie <b>rozpoczęcia integracji świadomej</b>, jednak gra rolę także później. Jest to opowieść, nadająca człowiekowi tożsamość, sens i cel.'
+              '<br><i>Opowieść Przewodnia jest szczególnie silnym mechanizmem w momencie <b>rozpoczęcia integracji świadomej</b>, jednak gra rolę także później. Jest to opowieść, nadająca człowiekowi tożsamość, sens i cel.'
               '<br>'
-              '<br>Na przykład:'
+              '<br>Na przykład:</i>'
               '</p>'
 
               '<ul>'
-              '<li><p style="text-align:justify;">“Bóg umarł z miłości do każdego człowieka. Za mnie także. Tego doświadczenia raz poznanego nie da się zakopać - jest tak głębokie i dojmujące, że muszę się nim podzielić z każdym człowiekiem.”</p></li>'
-              '<li><p style="text-align:justify;">“Jesteśmy na skraju katastrofy klimatycznej - jeżeli nie zrobimy czegoś natychmiast, cały świat spłonie i na Ziemi nie będzie się dało dłużej żyć. Muszę działać. Natychmiast.”</p></li>'
-              '<li><p style="text-align:justify;">“Jestem Polakiem. Spadkobiercą tysiącletniego narodu i wielo-tysiącletniej cywilizacji judeo-chrześcijańskiej. Potomkiem poległych w obronie ojczyzny mężów i kobiet. Muszę od siebie wymagać, by kiedyś dźwignąć naszą polską, poszarpaną państwowość - w obecnej sytuacji geopolitycznej to jest być albo nie być polskiego narodu.”</p></li>'
-              '<li><p style="text-align:justify;">“Społeczeństwo jest rasistowskie, mizoginiczne i homofobiczne do szpiku kości. Codziennie przez falę hejtu i działań eksterminacyjnych giną niewinne kobiety, geje, osoby trans i inni ludzie LGBTQIAP2+. Muszę coś z tym zrobić. Muszę manifestować, zmienić język, obalić patriarchat i heteronormatywność, zmienić społeczeństwo nawet jeśli oznaczałoby to poświęcenie temu całego swojego życia. Krew się leje w tym momencie.”</p></li>'
+              '<li><p style="text-align:justify;"><i>“Bóg umarł z miłości do każdego człowieka. Za mnie także. Tego doświadczenia raz poznanego nie da się zakopać - jest tak głębokie i dojmujące, że muszę się nim podzielić z każdym człowiekiem.”</i></p></li>'
+              '<li><p style="text-align:justify;"><i>“Jesteśmy na skraju katastrofy klimatycznej - jeżeli nie zrobimy czegoś natychmiast, cały świat spłonie i na Ziemi nie będzie się dało dłużej żyć. Muszę działać. Natychmiast.”</i></p></li>'
+              '<li><p style="text-align:justify;"><i>“Jestem Polakiem. Spadkobiercą tysiącletniego narodu i wielo-tysiącletniej cywilizacji judeo-chrześcijańskiej. Potomkiem poległych w obronie ojczyzny mężów i kobiet. Muszę od siebie wymagać, by kiedyś dźwignąć naszą polską, poszarpaną państwowość - w obecnej sytuacji geopolitycznej to jest być albo nie być polskiego narodu.”</i></p></li>'
+              '<li><p style="text-align:justify;"><i>“Społeczeństwo jest rasistowskie, mizoginiczne i homofobiczne do szpiku kości. Codziennie przez falę hejtu i działań eksterminacyjnych giną niewinne kobiety, geje, osoby trans i inni ludzie LGBTQIAP2+. Muszę coś z tym zrobić. Muszę manifestować, zmienić język, obalić patriarchat i heteronormatywność, zmienić społeczeństwo nawet jeśli oznaczałoby to poświęcenie temu całego swojego życia. Krew się leje w tym momencie.”</i></p></li>'
               '</ul>'
 
               '<p style="text-align:justify;">'
@@ -487,9 +525,13 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           duration: Duration(minutes: 20),
           activeForm: true,
           content: '<p style="text-align:justify;">'
-              'Prowadzący prosi każdą z grup, by skupiła się na trzech przestrzeniach i wskazała, jakie działania, zwyczaje, czy normy należy podjąć lub wprowadzić, aby zrealizować wyłonione uprzednio cele.'
+              'Prowadzący prosi każdą z grup, by skupiła się na trzech mechanizmach pośrednich i aby grupy wskazały, jakie działania, zwyczaje, czy normy należy podjąć lub wprowadzić, aby zrealizować wyłonione uprzednio cele.'
               '<br>'
-              '<br>Zadane przestrzenie, które należy odpowiednio ukształtować, to:'
+              '<br>Wszystkie mechanizmy pośrednie powinny być wyłożone w widocznym miejscu na kartkach z załącznika $attach_html_mechanizmy_posrednie.'
+              '<br>'
+              '<br>Na tym etapie zadaniem grup <b>nie jest wymyślanie żadnych zajęć</b> dla harcerzy. Chodzi o podjęcie działania w stylu: <i>przekonanie rodziców zuchów, aby do 14 roku życia miały one na wyłączność dostęp tylko do prostych telefonów bez funkcji dotykowych, aby zwiększyć częstotliwość ich interakcji z niecyfrowym światem, który stawia większe wyzwania.</i>'
+              '<br>'
+              '<br>Prowadzący może zasugerować, by grupy skoncentrowały się na następujących mechanizmach:'
               '</p>'
 
               '<ul>'
@@ -499,6 +541,8 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '</ul>'
 
               '<p style="text-align:justify;">'
+              'Jeżeli jednak grupy uznają, że są w stanie wykorzystać inne mechanizmy do osiągnięcia celów, mogą ich użyć.'
+              '<br>'
               '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, należy zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
               '</p>'
       ),
@@ -508,7 +552,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           duration: Duration(minutes: 10),
           activeForm: true,
           content: '<p style="text-align:justify;">'
-              'Prowadzący zbiera każdą z grup, by przedstawiła swoje opisane cele i mechanizmy pośrednie. Po każdej z prezentacji może się odbyć krótka dyskusja nad planami.'
+              'Prowadzący zbiera na chwilę w jedno miejsce wszystkich uczestników i prosi każdą z grup, by przedstawiła swoje opisane cele i mechanizmy pośrednie. Po każdej z prezentacji może się odbyć krótka dyskusja nad planami.'
               '<br>'
               '<br>Ten punkt służy temu, aby prowadzący miał możliwość zareagować, jeśli któraś z grup zacznie błądzić w założeniach.'
               '</p>'
