@@ -190,8 +190,6 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
         amount: 1,
       ),
 
-      // TODO: add more materials
-
       KonspektMaterial(
           name: 'Wydrukowany załącznik “$attach_title_poziomy_duchowosci”',
           attachmentName: attach_name_poziomy_duchowosci,
@@ -497,7 +495,6 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '</p>'
       ),
 
-      // TODO: wywalić ten opis do załącznika
       KonspektStep(
           title: 'Fantomowe działania wychowawcze i skuteczność wychowawcza',
           duration: Duration(minutes: 10),

@@ -5,6 +5,7 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/asset_gallery_viewer.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/spiewogranie_z_quizem_interpretacyjnym.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/zycie_i_swiat_prl.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -13,6 +14,8 @@ import '../../konspekt.dart';
 import 'druzynowe_przekazanie_bsp.dart';
 import 'dwie_roty_dwoch_przyrzeczen_harcerskich.dart';
 import 'gang_potencjalnych_porywaczy.dart';
+import 'msza_obozowa_lecz_nie_tylko.dart';
+import 'refleksja_nad_aksjomatem_ducha.dart';
 
 
 const String aimPraktykaModlitwy = 'Praktyka modlitwy przez uczestników';
@@ -920,7 +923,7 @@ List<Konspekt> allHarcerskieKonspekts = [
           name: 'Teksty śpiewanych piosenek',
         ),
       ],
-      description: '<p style="text-align:justify;">Szczególna wersja formy <a href="spiewogranie_z_quizem_interpretacyjnym@harcerskie.konspekt">Śpiewogranie z quizem interpretacyjnym</a>, gdzie zbiorem piosenek są kolędy.</p>'
+      description: '<p style="text-align:justify;">Szczególna wersja formy $konspekt_harc_html_spiewogranie_z_quizem_interpretacyjnym, gdzie zbiorem piosenek są kolędy.</p>'
   ),
 
   // Done
@@ -1005,6 +1008,7 @@ List<Konspekt> allHarcerskieKonspekts = [
           '</ul>'
   ),
 
+  msza_obozowa_lecz_nie_tylko,
 
   // Done
   const Konspekt(
@@ -1298,7 +1302,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         aimHartDuchaWedrowanie,
         aimUmiejetnoscWedrowania,
       ],
-      description: '<p style="text-align:justify;">Wariant <a href="wedrowka@konspekt">Wędrówki</a> lub <a href="wedrowka_medytacyjna@harcerskie.konspekt">Wędrówki medytacyjnej</a> o tematyce religijnej.'
+      description: '<p style="text-align:justify;">Wariant <a href="wedrowka@harcerskie.konspekt">Wędrówki</a> lub <a href="wedrowka_medytacyjna@harcerskie.konspekt">Wędrówki medytacyjnej</a> o tematyce religijnej.'
           '<br>'
           '<br>Wskazane jest, by cel pielgrzymki był określony i w jakiś sposób religijnie istotny. Samą wędrówkę warto podzielić na części i dywersyfikować ich formy wykorzystując np.: śpiewanie, rozważania, luźne rozmowy, milczenie.'
           '<br>'
@@ -1540,55 +1544,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
-    name: 'refleksja_nad_aksjomatem_ducha',
-    title: 'Refleksja nad aksjomatem ducha',
-    category: KonspektCategory.harcerskie,
-    type: KonspektType.zajecia,
-    spheres: {
-      KonspektSphere.duch: KonspektSphereDetails(
-          level: [KonspektSphereLevel.duchAksjomaty],
-          mechanism: [KonspektSphereMechanism.duchBezposrednia]
-      )
-    },
-    metos: [Meto.hs, Meto.wedro],
-    coverAuthor: 'freepik.com (vectorpouch)',
-    author: DANIEL_IWANICKI,
-    customDuration: Duration(minutes: 4 * 20 + 30),
-    aims: [
-      'Refleksja nad poziomem aksjomatycznym swojej duchowości',
-    ],
-    materials: [
-      KonspektMaterial(
-          amountAttendantFactor: 2,
-          name: 'Wydrukowany załącznik "pytania".',
-          attachmentName: 'pytania',
-          additionalPreparation: 'Każdy uczestnik powinien dostać 5 przygotowanych elementów: jeden "wstęp" oraz 4 "pytania".'
-              '\n'
-              '\nWydrukowany załącznik należy pociąć na części i zagiąć we wskazanych miejscach tak, by dolna część każdej wyciętej części kartki przykrywała treść pytania, lecz by odsłaniała nagłówek.'
-      ),
-    ],
-    summary: 'Uczestnicy indywidualnie i w ciszy podejmują refleksję nad pytaniami dotyczącymi sensu ich życia. Po zakończeniu podsumowują je między sobą.',
-    description: '<p>Harcerze otrzymują wydrukowane i pocięte pytania z załącznika <a href="pytania@attachment">pytania</a>.'
-        '<br>'
-        '<br>Każdy uczestnik znajduje ustronne miejsce, gdzie może w spokoju pomyśleć bez rozpraszania swojej uwagi. Może również udać się na spacer.'
-        '<br>'
-        '<br>Harcerze otwierają pierwsze pytanie, czytają je i przez kolejne 20 minut podejmują nad nim refleksję. Gdy czas ten upłynie, przechodzą do kolejnego pytania, nad którym również spędzają 20 minut. Proces ten jest powtarzany analogicznie dla trzeciego i czwartego pytania.'
-        '<br>'
-        '<br>Gdy skończą, wszyscy wracają w jedno miejsce i w zastępach, lub innych małych grupach (najlepiej po około 4 osoby) omawiają swoje refleksje. Jeżeli nie chcą się czymś dzielić - nie ma takiej konieczności.'
-        '<br>'
-        '<br>Forma ta ma na celu pracę nad duchowością na poziomie aksjomatu (a więc na poziomie najgłębszym, w przeciwieństwie do poziomu zachowań, postaw i wartości). Forma ta może być stosowana jako forma zastępca dla osób które na obozie nie uczestniczą we Mszy Świętej.</p>',
-    attachments: [
-      KonspektAttachment(
-        name: 'pytania',
-        title: 'Pytania',
-        assets: {
-          FileFormat.pdf: 'pytania.pdf',
-          FileFormat.docx: 'pytania.docx'
-        },
-      )
-    ],
-  ),
+  refleksja_nad_aksjomatem_ducha,
 
 
   // Done
@@ -1985,68 +1941,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   ),
 
 
-  // Done
-  const Konspekt(
-    name: 'spiewogranie_z_quizem_interpretacyjnym',
-    title: 'Śpiewogranie z quizem interpretacyjnym',
-    additionalSearchPhrases: ['śpiewowisko', 'śpiewanie', 'piosenki', 'interpretacja', 'quiz'],
-    category: KonspektCategory.harcerskie,
-    type: KonspektType.zajecia,
-    spheres: {
-      KonspektSphere.duch: KonspektSphereDetails(
-          level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-          mechanism: [KonspektSphereMechanism.duchBezposrednia, KonspektSphereMechanism.duchNormalizacja]
-      )
-    },
-    metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
-    coverAuthor: 'freepik.com (artefacti)',
-    author: DANIEL_IWANICKI,
-    customDuration: Duration(minutes: 90),
-    aims: [
-      'Refleksja nad historiami i wynikającymi z nich wartościami i postawami w piosenkach.',
-    ],
-    materials: [
-      KonspektMaterial(
-        amountAttendantFactor: 1,
-        name: 'Teksty śpiewanych piosenek',
-      ),
-    ],
-    description: '<p style="text-align:justify;">Prowadzący wybiera kilka piosenek, które niosą nieoczywiste na pierwszy “rzut oka (ucha?)” przesłanie w swojej treści lub które wymagają do ich zrozumienia znajomości kontekstu historycznego lub kulturowego.'
-        '<br>'
-        '<br>Uczestnicy otrzymują wydrukowane wybranych piosenek (by oszczędzić zasoby i wprowadzić element współpracy można wprowadzić rozdać teksty po jednym komplecie na dwie osoby).'
-        '<br>'
-        '<br>Uczestnicy dzieleni są na grupy. Dla każdej piosenki uczestnicy najpierw się jej uczą poprzez wspólnie zaśpiewanie jej z prowadzącym, po czym prowadzący przeprowadza quiz z tematu dotyczącego treści piosenki.'
-        '<br>'
-        '<br>Quiz może dotyczyć znaczenia różnych niecodziennych słów, wyrażeń, czy tego, co autor piosenki miał na myśli używając pewnego wyrażenia. Na końcu quizu uczestnicy wspólnie próbują podsumować sens piosenki.'
-        '<br>'
-        '<br>Wskazane jest, by kilka razy przeprowadzeniem formy uczestnicy mieli okazję zaśpiewać piosenki, które będą interpretowane.'
-        '<br>'
-        '<br>Szczególną wersją tej formy jest “kolędowanie z quizem interpretacyjnym”, gdzie zbiorem piosenek są kolędy.'
-        '<br>'
-        '<br><b>Przykładowe piosenki dla zuchów</b>:</p>'
-        '<ul>'
-        '<li><p style="text-align:justify;">Hej przyjaciele <i>(Zayazd)</i></p></li>'
-        '<li><p style="text-align:justify;">Wieczorne śpiewogranie</p></li>'
-        '</ul>'
-        '<br><p style="text-align:justify;"><b>Przykładowe piosenki dla harcerzy</b>:</p>'
-        '<ul>'
-        '<li><p style="text-align:justify;">A my nie chcemy uciekać stąd <i>(P. Gintrowski)</i></p></li>'
-        '<li><p style="text-align:justify;">Czarny chleb i czarna kawa <i>(Strachy na lachy)</i></p></li>'
-        '<li><p style="text-align:justify;">Dni, których nie znamy <i>(Marek Grechuta)</i></p></li>'
-        '<li><p style="text-align:justify;">Eldorado <i>(Sanah, D. Zawiałow)</i></p></li>'
-        '<li><p style="text-align:justify;">Hej przyjaciele <i>(Zayazd)</i></p></li>'
-        '<li><p style="text-align:justify;">Hymn <i>(J. Słowacki, Sanah)</i></p></li>'
-        '<li><p style="text-align:justify;">Major ponury</p></li>'
-        '<li><p style="text-align:justify;">Moja litania <i>(Leszek Wójtowicz)</i></p></li>'
-        '<li><p style="text-align:justify;">Niebieski cyrkiel <i>(Stare Dobre Małżeństwo)</i></p></li>'
-        '<li><p style="text-align:justify;">Pójdę boso <i>(Zakopower)</i></p></li>'
-        '<li><p style="text-align:justify;">Rozwijając Rilkego <i>(Sahan)</i></p></li>'
-        '<li><p style="text-align:justify;">Zielony dom <i>(Stare Dobre Małżeństwo)</i></p></li>'
-        '</ul>'
-        '<p style="text-align:justify;">Forma, aby miała sens, powinna być prowadzona przez osobę, które umie i lubi grać na gitarze i która przynajmniej minimalnie "czuje" temat interpretacji sztuki. Osoba prowadząca powinna się do niej zawczasu przygotować - rozpoczęcie przygotowań godzinę przed rozpoczęciem nie ma sensu.'
-        '<br>'
-        '<br>Forma ta ma na celu pracę nad duchowością na poziomie aksjomatu i wartości poprzez normalizację. Forma ta może być stosowana jako forma zastępcza dla osób w pionie Z i H, które na obozie nie uczestniczą we Mszy Świętej.</p>',
-  ),
+  spiewogranie_z_quizem_interpretacyjnym,
 
 
   // Done
