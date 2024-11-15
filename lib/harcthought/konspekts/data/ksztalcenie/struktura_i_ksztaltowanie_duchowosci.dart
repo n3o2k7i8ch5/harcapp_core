@@ -38,7 +38,7 @@ KonspektAttachment attach_mechanizmy_posrednie = KonspektAttachment(
 
 const String attach_html_scenariusz_fantomowe_dzialania_wychowawcze = '<a href="$attach_name_scenariusz_fantomowe_dzialania_wychowawcze@attachment">$attach_title_scenariusz_fantomowe_dzialania_wychowawcze</a>';
 const String attach_name_scenariusz_fantomowe_dzialania_wychowawcze = 'scenariusz_fantomowe_dzialania_wychowawcze';
-const String attach_title_scenariusz_fantomowe_dzialania_wychowawcze = 'Formy';
+const String attach_title_scenariusz_fantomowe_dzialania_wychowawcze = 'Scenariusz fantomowe działania wychowawcze';
 KonspektAttachment attach_scenariusz_fantomowe_dzialania_wychowawcze = KonspektAttachment(
   name: attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
   title: attach_title_scenariusz_fantomowe_dzialania_wychowawcze,
