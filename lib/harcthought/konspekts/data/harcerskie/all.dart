@@ -731,31 +731,31 @@ List<Konspekt> allHarcerskieKonspekts = [
       steps: [
         KonspektStep(
             title: 'Dziękowanie Bogu za otrzymane dobro',
-            duration: Duration(minutes: 15),
+            duration: Duration(minutes: 3),
             activeForm: false,
             content: 'Podziękuj Bogu za to co masz: za łaski, relacje, naturalne zdolności. Każdą czynność warto w życiu rozpoczynać od westchnienia z wdzięcznością do Boga.'
         ),
         KonspektStep(
             title: 'Prośba o łaskę poznania grzechów',
-            duration: Duration(minutes: 15),
+            duration: Duration(minutes: 3),
             activeForm: false,
             content: 'Poproś Boga o skuteczne dostrzeżenie swoich poruszeń duchowych, ograniczeń i grzechów. Łatwiej jest wielbłądowi przejść przez ucho igielne, niż Tobie, zwykłemu śmiertelnikowi przyłapać się na „wypieraniu, intelektualizowaniu czy projekcji”.'
         ),
         KonspektStep(
             title: 'Żądanie od swojej duszy zdania sprawy',
-            duration: Duration(minutes: 15),
+            duration: Duration(minutes: 3),
             activeForm: false,
             content: 'Skup się na swoich uczuciach takich jak smutek, agresja, czy zazdrość, które mogą być powodem głupich działań i decyzji (czyli grzechu). Zdystansuj się od nich, spójrz na nie szczerze i uświadom sobie co w Tobie siedzi.'
         ),
         KonspektStep(
             title: 'Prośba o przebaczenie win',
-            duration: Duration(minutes: 15),
+            duration: Duration(minutes: 3),
             activeForm: false,
             content: 'Proś Boga o przebaczenie za popełnione grzechy. Odróżnij poczucie winy od żalu za grzechy - Bóg oczekuje od nas żalu za grzechy, a nie poczucia winy.'
         ),
         KonspektStep(
             title: 'Postanowienie poprawy przy Jego łasce',
-            duration: Duration(minutes: 15),
+            duration: Duration(minutes: 3),
             activeForm: false,
             content: 'Co musisz zmienić, by Twoje życie stało się lepsze? Skup się znowu na swoich uczuciach - przy odpowiedniej pokorze i subtelności pozwala się to wewnętrznie uporządkować. Świat wokół Ciebie wymaga radykalnej poprawy - zacznij od wyjęcia belki z własnego oka.'
         ),
