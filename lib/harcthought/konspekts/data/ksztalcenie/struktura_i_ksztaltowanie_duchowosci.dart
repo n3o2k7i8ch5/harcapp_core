@@ -84,7 +84,116 @@ KonspektAttachment attach_scenariusze = KonspektAttachment(
   },
 );
 
+KonspektMaterial material_poradnik_o_strukturze_i_ksztaltowaniu_duchowosci = KonspektMaterial(
+  name: 'Dostępny do przygotowania merytorycznego poradnik “$attach_title_o_strukturze_i_ksztaltowaniu_duchowosci”',
+  attachmentName: attach_name_o_strukturze_i_ksztaltowaniu_duchowosci,
+);
 
+KonspektMaterial material_identyfikator = KonspektMaterial(
+  name: 'Identyfikator',
+  amountAttendantFactor: 1,
+);
+
+KonspektMaterial material_dlugopis = KonspektMaterial(
+  name: 'Długopis',
+  amountAttendantFactor: 1,
+);
+
+KonspektMaterial material_notatnik = KonspektMaterial(
+  name: 'Notatnik',
+  amountAttendantFactor: 1,
+);
+
+KonspektMaterial material_nozyczki = KonspektMaterial(
+  name: 'Nożyczki',
+  amount: 2,
+);
+
+KonspektMaterial material_kartka_a4 = KonspektMaterial(
+  name: 'Kartka A4',
+  amount: 4,
+);
+
+KonspektMaterial material_obiad = KonspektMaterial(
+  name: 'Obiad',
+  amountAttendantFactor: 1,
+);
+
+KonspektMaterial material_przekaski = KonspektMaterial(
+  name: 'Przekąski (jabłka, marchewki, ciastka)',
+);
+
+KonspektMaterial material_miski_na_przekaski = KonspektMaterial(
+  name: 'Miski na przekąski',
+  amount: 3
+);
+
+KonspektMaterial material_herbata = KonspektMaterial(
+  name: 'Herbata',
+);
+
+KonspektMaterial material_kubek = KonspektMaterial(
+  name: 'Kubek',
+  amountAttendantFactor: 1,
+);
+
+KonspektMaterial material_czajnik = KonspektMaterial(
+  name: 'Czajnik',
+  amount: 1,
+);
+
+KonspektMaterial material_zal_przyklady_poziomow_duchowosci = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_przyklady_poziomow_duchowosci”',
+    attachmentName: attach_name_przyklady_poziomow_duchowosci,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i potasować w ramach wyciętych czwórek.',
+    amount: 1
+);
+
+KonspektMaterial material_zal_kratka_minimow_rozwoju_duchowego = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_kratka_minimow_rozwoju_duchowego”',
+    attachmentName: attach_name_kratka_minimow_rozwoju_duchowego,
+    amount: 4
+);
+
+KonspektMaterial material_zal_mechanizmy_posrednie = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_mechanizmy_posrednie”',
+    attachmentName: attach_name_mechanizmy_posrednie,
+    additionalPreparation: 'Kartki należy przeciąć na pół wzdłuż przerywanych linii.',
+    amount: 1
+);
+
+KonspektMaterial material_zal_scenariusz_fantomowe_dzialania_wychowawcze = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_scenariusz_fantomowe_dzialania_wychowawcze”',
+    attachmentName: attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
+    additionalPreparation: 'Kartkę należy przeciąć na pół wzdłuż przerywanych linii.',
+    amount: 1
+);
+
+KonspektMaterial material_zal_formy = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_formy”',
+    attachmentName: attach_name_formy,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
+    amount: 1
+);
+
+KonspektMaterial material_zal_planowanie_strategii_i_dzialan = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_planowanie_strategii_i_dzialan”',
+    attachmentName: attach_name_planowanie_strategii_i_dzialan,
+    amount: 2,
+    comment: 'Może się okazać, że chętni na jedną z metodyk będą tak liczni, że warto ich podzielić na dwie osobne grupy - dlatego warto wydrukować dwa razy.'
+);
+
+KonspektMaterial material_zal_scenariusze = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_scenariusze”',
+    attachmentName: attach_name_scenariusze,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
+    amount: 1
+);
+
+KonspektMaterial material_zal_przypinki = KonspektMaterial(
+    name: 'Przypinki z logiem warsztatów',
+    amountAttendantFactor: 1
+);
 
 Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
   name: 'struktura_i_ksztaltowanie_duchowosci',
@@ -122,149 +231,59 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
     ],
     materials: [
 
-      KonspektMaterial(
-        name: 'Dostępny do przygotowania merytorycznego poradnik “$attach_title_o_strukturze_i_ksztaltowaniu_duchowosci”',
-        attachmentName: attach_name_o_strukturze_i_ksztaltowaniu_duchowosci,
-      ),
+      material_poradnik_o_strukturze_i_ksztaltowaniu_duchowosci,
 
-      KonspektMaterial(
-        name: 'Duży arkusz papieru (flipchart)',
-        amount: 1,
-      ),
+      material_identyfikator,
 
-      KonspektMaterial(
-        name: 'Identyfikator',
-        amountAttendantFactor: 1,
-      ),
+      material_dlugopis,
 
-      KonspektMaterial(
-        name: 'Długopis',
-        amountAttendantFactor: 1,
-      ),
+      material_notatnik,
 
-      KonspektMaterial(
-        name: 'Notatnik',
-        amountAttendantFactor: 1,
-      ),
+      material_nozyczki,
 
-      KonspektMaterial(
-        name: 'Kartka A4',
-        amount: 50,
-      ),
+      material_mini_kartki_biurowe,
 
-      KonspektMaterial(
-        name: 'Marker',
-        amount: 5,
-      ),
+      material_kartka_a4,
 
-      KonspektMaterial(
-        name: 'Nożyczki',
-        amount: 2,
-      ),
+      material_flipchart,
 
-      KonspektMaterial(
-        name: 'Obiad',
-        amountAttendantFactor: 1,
-      ),
+      material_marker,
 
-      KonspektMaterial(
-        name: 'Przekąski (jabłka, marchewki, ciastka)',
-      ),
+      material_obiad,
 
-      KonspektMaterial(
-        name: 'Miski na przekąski',
-        amount: 3
-      ),
+      material_przekaski,
 
-      KonspektMaterial(
-        name: 'Herbata',
-      ),
+      material_miski_na_przekaski,
 
-      KonspektMaterial(
-        name: 'Kubek',
-        amountAttendantFactor: 1,
-      ),
+      material_herbata,
 
-      KonspektMaterial(
-        name: 'Czajnik',
-        amount: 1,
-      ),
+      material_kubek,
 
-      KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_poziomy_duchowosci”',
-          attachmentName: attach_name_poziomy_duchowosci,
-          amount: 1
-      ),
+      material_czajnik,
 
-      KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_przyklady_poziomow_duchowosci”',
-        attachmentName: attach_name_przyklady_poziomow_duchowosci,
-        additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i potasować w ramach wyciętych czwórek.',
-        amount: 1
-      ),
+      material_zal_poziomy_duchowosci,
 
-      KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_neutralnosc_duchowa_przyklady”',
-        attachmentName: attach_name_neutralnosc_duchowa_przyklady,
-      ),
+      material_zal_przyklady_poziomow_duchowosci,
 
-      KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_cel_wychowania_duchowego_zhp_statut”',
-          attachmentName: attach_name_cel_wychowania_duchowego_zhp_statut,
-          amount: 4
-      ),
+      material_zal_neutralnosc_duchowa_przyklady,
 
-      KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_cel_wychowania_duchowego_zhp_uchwala”',
-          attachmentName: attach_name_cel_wychowania_duchowego_zhp_uchwala,
-          amount: 4
-      ),
+      material_zal_cel_wychowania_duchowego_zhp_statut,
 
-      KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_kratka_minimow_rozwoju_duchowego”',
-          attachmentName: attach_name_kratka_minimow_rozwoju_duchowego,
-          amount: 4
-      ),
+      material_zal_cel_wychowania_duchowego_zhp_uchwala,
 
-      KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_mechanizmy_posrednie”',
-          attachmentName: attach_name_mechanizmy_posrednie,
-          additionalPreparation: 'Kartki należy przeciąć na pół wzdłuż przerywanych linii.',
-          amount: 1
-      ),
+      material_zal_kratka_minimow_rozwoju_duchowego,
 
-      KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_scenariusz_fantomowe_dzialania_wychowawcze”',
-          attachmentName: attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
-          additionalPreparation: 'Kartkę należy przeciąć na pół wzdłuż przerywanych linii.',
-          amount: 1
-      ),
+      material_zal_mechanizmy_posrednie,
 
-      KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_formy”',
-        attachmentName: attach_name_formy,
-        additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
-        amount: 1
-      ),
+      material_zal_scenariusz_fantomowe_dzialania_wychowawcze,
 
-      KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_planowanie_strategii_i_dzialan”',
-          attachmentName: attach_name_planowanie_strategii_i_dzialan,
-          amount: 2,
-          comment: 'Może się okazać, że chętni na jedną z metodyk będą tak liczni, że warto ich podzielić na dwie osobne grupy - dlatego warto wydrukować dwa razy.'
-      ),
+      material_zal_formy,
 
-      KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_scenariusze”',
-        attachmentName: attach_name_scenariusze,
-        additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
-        amount: 1
-      ),
+      material_zal_planowanie_strategii_i_dzialan,
 
-      KonspektMaterial(
-          name: 'Przypinki z logiem warsztatów',
-          amountAttendantFactor: 1
-      ),
+      material_zal_scenariusze,
+
+      material_zal_przypinki,
 
     ],
     steps: [
@@ -296,8 +315,14 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '</ol>'
 
               '<p style="text-align:justify;">'
-              'Uczestnicy zapisują przedstawione frazy (skojarzenia z duchowością) na mini-kartkach, które następnie są umieszczane na wspólnej, widocznej przestrzeni.'
-              '</p>'
+              'Uczestnicy zapisują przedstawione frazy (skojarzenia z duchowością) na <b>mini-kartkach</b>, które następnie są umieszczane na wspólnej, widocznej przestrzeni.'
+              '</p>',
+          materials: [
+            material_identyfikator,
+            material_dlugopis,
+            material_notatnik,
+            material_mini_kartki_biurowe,
+          ]
       ),
 
       KonspektStep(
@@ -316,7 +341,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '<li><p style="text-align:justify;">Pojęcia i opis rozwoju duchowego - forma statyczna.</p></li>'
               '<li><p style="text-align:justify;">Duchowość w kontekście wychowania harcerskiego - forma dyskusyjna.</p></li>'
               '<li><p style="text-align:justify;">Praca z duchowością w poszczególnych metodykach - forma pracy w małych grupach.</p></li>'
-              '</ol>'
+              '</ol>',
       ),
 
       step_poziomy_duchowosci,
@@ -330,7 +355,10 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               'Prowadzący dzieli uczestników na pięć grup. Rozdaje każdej grupie po jednym komplecie przygotowanych kartek z załącznika $attach_html_przyklady_poziomow_duchowosci i prosi grupy o <b>posegregowanie kartek na zachowania, postawy, wartości i aksjomaty.</b>'
               '<br>'
               '<br>Gdy dana grupa jest gotowa, zgłasza się do prowadzącego, który podchodzi i sprawdza. Jeśli coś jest nie tak, prowadzący mówi który poziom duchowości wymaga poprawy. Gdy wszystkie grupy są gotowe, niezależnie od poprawności segregacji, prowadzący omawia na forum poprawne przyporządkowanie.'
-              '</p>'
+              '</p>',
+          materials: [
+            material_zal_przyklady_poziomow_duchowosci,
+          ]
       ),
 
       step_integracja_duchowosci,
@@ -372,7 +400,10 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           activeForm: true,
           content: '<p style="text-align:justify;">'
               'Najlepiej już wcześniej zamówić pizzę, żeby jedzenie trwało niewiele czasu i by można było po nim chwilę odpocząć.'
-              '</p>'
+              '</p>',
+          materials: [
+            material_obiad,
+          ]
       ),
 
       KonspektStep(
@@ -457,7 +488,15 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '<p style="text-align:justify;">'
               '<b>[Kultura, media i technologia]</b>'
               '<br>'
-              '<br><i>Mamy harcerskę starszą, która od kiedy poszła do technikum zaczęła tak jak jej nowe koleżanki oglądać Netflixa, oglądać kiczowate reality-show typu “Trudne sprawy” i słuchać depresyjnej muzyki - w szkole idzie jej średnio, marnuje dużo czasu na fejsie i Tick-Tock. Chcemy wychować ją do postawy pozytywnego myślenia, zaradności i sumienności. Czy sprawienie, że z Netflixa i “Trudnych spraw” przerzuci się na “Ojca Mateusza” i “Pingwiny z Madagaskaru", drużyna zainspiruje ją szantami, T.Love i Kaczmarskim, a w miejsce fejsa i tik-toka zacznie czytać Dukaja pomoże w osiągnięciu celu wychowawczego? Dlaczego?</i>'
+              '<br><i>Mamy harcerkę starszą, która, od kiedy poszła do technikum, zaczęła tak jak jej nowe koleżanki oglądać Netflixa, kiczowate reality-show typu “Trudne sprawy” i słuchać depresyjnej muzyki. W szkole idzie jej średnio, marnuje dużo czasu na fejsie i tik-toku. Chcemy wychować ją do pozytywnego myślenia, zaradności i sumienności. Czy sprawienie, że z Netflixa i “Trudnych spraw” przerzuci się na “Ojca Mateusza” i “Pingwiny z Madagaskaru", oraz że drużyna zainspiruje ją szantami, T.Love i Kaczmarskim, a w miejsce fejsa i tik-toka zacznie czytać Dukaja pomoże w osiągnięciu celu wychowawczego? Dlaczego?</i>'
+              '</p>'
+              '</li>'
+
+              '<li>'
+              '<p style="text-align:justify;">'
+              '<b>[Normalizacja]</b>'
+              '<br>'
+              '<br><i>Jeden z naszych harcerzy, pochodzi z Białorusi i jest wychowywany w wierze prawosławnej. Na razie jest jednak zbyt młody, aby w pełni rozumieć sens i esencję swojej wiary. Czy jeśli ów harcerz będzie śpiewał z kolegami prawosławne piosenki dla dzieci, zaś w harcówce będzie wisiała ikona świętego Jerzego, to czy pomoże mu to w przyszłości poważnie potraktować i zrozumieć swoją wiarę? Dlaczego?</i>'
               '</p>'
               '</li>'
 
@@ -467,7 +506,10 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               'Jako ostatni element, już bez scenariusza, prowadzący opisuje zjawisko "<b>trzeciego miejsca</b>", z którym wychowanek może być zwiazany, które może budować jego tożsamość, które nie jest ani jego pracą (obowiazkiem), ani jego domem. Miejscem takim może być wspólnota religijna, drużyna, zespół muzyczny, czy hipisowski skłot.'
               '<br>'
               '<br>Na końcu prowadzący może dodać, że wszystkie te mechanizmy nie są wzięte z sufitu - są obecne w <b>stopniach harcerskich</b>.'
-              '</p>'
+              '</p>',
+          materials: [
+            material_zal_mechanizmy_posrednie,
+          ]
       ),
 
       KonspektStep(
@@ -493,28 +535,45 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               'Prowadzący zwraca uwagę, że harcerstwo też może nosić znaczenie Opowieści Przewodniej, szczególnie dla młodej kadry i instruktorów, którzy wierzą, że na ich barkach spoczywa wychowanie i szczęście młodych ludzi.'
               '<br>'
               '<br>Warto także zwrócić uwagę, że harcerstwo może nosić znamiona subkutlury: ma swoje obrzędy, symbole, wartości i ścisłe gorono. Widać to przykładowo po harcerzach, którzy chodzą na każdą zbiórkę, jeżdżą na każdy wyjazd, uczą się po nocach grać Kaczmarskiego na gitarze, a do szkoły w bojówkach i harcerskim pasie. Owo zaangażowanie i tożsamość może być niezwykle efektywnym mechanizmem kształtowania duchowości.'
-              '</p>'
+              '</p>',
+          materials: [
+            material_zal_mechanizmy_posrednie,
+          ]
       ),
 
       KonspektStep(
-          title: 'Praktyka wychowania duchowego - kratka',
+          title: 'Praktyka wychowania duchowego - kratka i formy',
           duration: Duration(minutes: 45),
           activeForm: true,
           content: '<p style="text-align:justify;">'
-              'Wstęp - przedstawienie tego jakie cechy mogą spełniać poszczególne formy.'
+              'Uczestnicy otrzymują w grupach po jednym załączniku $attach_html_kratka_minimow_rozwoju_duchowego. Otrzymują również wydrukowane i wycięte formy z załącznika $attach_html_formy.'
+              '<br>'
+              '<br>Na podstawie zdobytej dotychczas wiedzy oraz załącznika $attach_html_kratka_minimow_rozwoju_duchowego, zadaniem uczestników jest przyporządkowanie poszczególnych form do <b>grupy</b> lub <b>grup wiekowych</b>, określenie jakie <b>poziomy duchowości</b> rozwijają oraz, jeśli to możliwe, w jaki <b>mechanizm</b> wykorzystują.'
+              '<br>'
+              '<br>Warto uczestników podzielić na grupy po 3-4 osoby, aby jak najbardziej zaangażować ich w dyskusję nad formami.'
+              '</p>',
+          materials: [
+            material_zal_kratka_minimow_rozwoju_duchowego,
+            material_zal_formy,
+          ]
+      ),
+
+      KonspektStep(
+          title: 'Praktyka wychowania duchowego - kratka i formy - podsumowanie',
+          duration: Duration(minutes: 10),
+          activeForm: true,
+          content: '<p style="text-align:justify;">'
+              'Prowadzący zbiera na powrót wszystkie grupy w jedno miejsce i prosi, by każda z grup przestawiła po kilka wybranych form które:'
               '</p>'
 
               '<ul>'
-              '<li><p style="text-align:justify;">Hartowanie ducha</p></li>'
-              '<li><p style="text-align:justify;">Kształtowanie postaw</p></li>'
-              '<li><p style="text-align:justify;">Kształtowanie wartości (normalizacja, wartości wtórne)</p></li>'
-              '<li><p style="text-align:justify;">Kształtowanie aksjomatów</p></li>'
+              '<li><p style="text-align:justify;">Najbardziej przypadły im do gustu.</p></li>'
+              '<li><p style="text-align:justify;">Najbardziej ich zaskoczyły.</p></li>'
+              '<li><p style="text-align:justify;">Wydały im się najbardziej kontrowersyjne.</p></li>'
               '</ul>'
 
               '<p style="text-align:justify;">'
-              'Uczestnicy otrzymują w grupach po jednym załączniku $attach_html_kratka_minimow_rozwoju_duchowego.'
-              '<br>'
-              '<br>Otrzymują również wydrukowane i wycięte formy z załącznika $attach_html_formy. Na tej podstawie ich zadaniem jest przyporządkowanie poszczególnych form do grupy lub <b>grup wiekowych</b> oraz do określenia jakie <b>poziomy duchowości</b> rozwijają oraz, jeśli to możliwe, w jaki <b>mechanizm</b> wykorzystują.'
+              'Prowadzący może skorzystać z okazji, po przedstawieniu najbardziej kontrowesyjnych form zauważyć, że harcerstwo opiera się na <b>wychowaniu poprzez stawianie wyzwań</b> i nie należy się łudzić, że można wychować kogoś w ciągłym, bezgranicznym bezpieczeństwie i komforcie. Lepiej, aby rozwój duchowy zakładał budowanie odporności na trudy i nieprzyjemne sytuacje, niż od nich izolował - harcerstwo nie wychowuje <b>pod kloszem</b>.'
               '</p>'
       ),
 
@@ -532,12 +591,15 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '<br><b>Czy któraś z tych form nie kształtuje duchowości?</b>'
               '<br>'
               '<br><b>Jaki jest problem z tak skonstruowanym planem wychowania duchowego?</b>'
-              '</p>'
+              '</p>',
+          materials: [
+            material_zal_scenariusz_fantomowe_dzialania_wychowawcze,
+          ]
       ),
 
       KonspektStep(
           title: 'Planowanie strategii rozwoju duchowego - podział na grupy',
-          duration: Duration(minutes: 10),
+          duration: Duration(minutes: 5),
           activeForm: true,
           content: '<p style="text-align:justify;">'
               'Uczestnicy w grupach są dzieleni na 4 grupy. Każda grupa otrzymuje krótki opis drużyny z załącznika $attach_html_planowanie_strategii_i_dzialan. Zadaniem każdej grupy jest stworzyć plan rozwoju duchowego jednostki.'
@@ -545,7 +607,10 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '<br>Każda z opisanych na karce drużyn jest w innej metodyce (Z, H, HS, W). Prowadzący może podzielić uczestników tak, by każdy był w grupie pracującej nad metodyką, która jest uczestnikom najbliższa.'
               '<br>'
               '<br>Na początku prowadzący prosi każdą z grup, by zapoznałą się z opisami.'
-              '</p>'
+              '</p>',
+          materials: [
+            material_zal_planowanie_strategii_i_dzialan,
+          ]
       ),
 
       KonspektStep(
@@ -554,12 +619,15 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           activeForm: true,
           content: '<p style="text-align:justify;">'
               'Prowadzący prosi każdą z grup, by wskazała, jakie <b>cele w pracy duchowej</b> chce osiągnąć dla opisanej drużyny. Należy założyć, że praca z opisaną grupą bedzie trwała 3 lata.'
-              '</p>'
+              '</p>',
+          materials: [
+            material_zal_planowanie_strategii_i_dzialan,
+          ]
       ),
 
       KonspektStep(
           title: 'Planowanie strategii rozwoju duchowego - mechanizmy pośrednie',
-          duration: Duration(minutes: 20),
+          duration: Duration(minutes: 15),
           activeForm: true,
           content: '<p style="text-align:justify;">'
               'Prowadzący prosi każdą z grup, by skupiła się na trzech mechanizmach pośrednich i aby grupy wskazały, jakie działania, zwyczaje, czy normy należy podjąć lub wprowadzić, aby zrealizować wyłonione uprzednio cele.'
@@ -581,7 +649,11 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               'Jeżeli jednak grupy uznają, że są w stanie wykorzystać inne mechanizmy do osiągnięcia celów, mogą ich użyć.'
               '<br>'
               '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, należy zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
-              '</p>'
+              '</p>',
+          materials: [
+            material_zal_planowanie_strategii_i_dzialan,
+            material_zal_mechanizmy_posrednie,
+          ]
       ),
 
       KonspektStep(
@@ -605,7 +677,10 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, należy zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
               '<br>'
               '<br>Grupy pracujące na opisie jednostek H, HS i W mogą także określić oczekiwania wychowawcze od jednostek niższego pionu, które przekazują im harcerzy w ciągu wychowawczym.'
-              '</p>'
+              '</p>',
+          materials: [
+            material_zal_formy,
+          ]
       ),
 
       KonspektStep(
@@ -640,7 +715,10 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '<br>Po zakończeniu dyskusji grupy referują scenariusze i wnioski z nich płynące na forum wszystkich uczestników. Jeżeli któryś scenariusz zakończył się różnicą stanowisk dyskutujących, może zostać poruszony wspólnie przez wszystkich uczestników.'
               '<br>'
               '<br><i>Prowadzący, w przypadku gdy zaczyna brakować czasu, może skrócić czas tej formy</i>.'
-              '</p>'
+              '</p>',
+        materials: [
+          material_zal_scenariusze,
+        ]
       ),
 
       step_szybkie_strzaly_dyskusyjne,

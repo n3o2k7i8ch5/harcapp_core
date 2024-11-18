@@ -2,6 +2,46 @@ import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common_attachments.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
+KonspektMaterial material_mini_kartki_biurowe = KonspektMaterial(
+  name: 'Mini kartki biurowe (ok. 10x10 cm)',
+  amountAttendantFactor: 3,
+);
+
+KonspektMaterial material_zal_poziomy_duchowosci = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_poziomy_duchowosci”',
+    attachmentName: attach_name_poziomy_duchowosci,
+    amount: 1
+);
+
+KonspektMaterial material_flipchart = KonspektMaterial(
+  name: 'Duży arkusz papieru (flipchart)',
+  amount: 1,
+);
+
+KonspektMaterial material_marker = KonspektMaterial(
+  name: 'Marker',
+  amount: 5,
+);
+
+KonspektMaterial material_zal_neutralnosc_duchowa_przyklady = KonspektMaterial(
+  name: 'Wydrukowany załącznik “$attach_title_neutralnosc_duchowa_przyklady”',
+  attachmentName: attach_name_neutralnosc_duchowa_przyklady,
+);
+
+KonspektMaterial material_zal_cel_wychowania_duchowego_zhp_statut = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_cel_wychowania_duchowego_zhp_statut”',
+    attachmentName: attach_name_cel_wychowania_duchowego_zhp_statut,
+    amount: 4
+);
+
+KonspektMaterial material_zal_cel_wychowania_duchowego_zhp_uchwala = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_cel_wychowania_duchowego_zhp_uchwala”',
+    attachmentName: attach_name_cel_wychowania_duchowego_zhp_uchwala,
+    amount: 4
+);
+
+// ---
+
 KonspektStep step_sfery_rozwoju_i_ich_relacje = KonspektStep(
     title: 'Sfery rozwoju i ich relacje',
     duration: Duration(minutes: 15),
@@ -139,7 +179,10 @@ KonspektStep step_poziomy_duchowosci = KonspektStep(
         '</p>'
         '</li>'
 
-        '</ul>'
+        '</ul>',
+    materials: [
+      material_zal_poziomy_duchowosci,
+    ]
 
 );
 
@@ -166,7 +209,11 @@ KonspektStep step_integracja_duchowosci = KonspektStep(
         '<br>W dalszej kolejności prowadzący wprowadza pojęcie <b>integracji duchowości</b> - sposobu w jaki poziomy duchowości kształtują się w procesie rozwoju.'
         '<br>'
         '<br>Ważne, by prowadzący zaznaczył, że struktura wartości nie zależy jedynie od środowiska i wychowania, ale także od <b>natury człowieka</b>, m.in. od jego <b>temperamentu</b>.'
-        '</p>'
+        '</p>',
+    materials: [
+      material_flipchart,
+      material_marker,
+    ]
 );
 
 KonspektStep step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektStep(
@@ -192,10 +239,13 @@ KonspektStep step_duchowosc_religia_religijnosc_opinie_uczestnikow = KonspektSte
         '<br>'
         '<br><b><i>“Jaka jest relacja między duchowością, religią, a religijnością?”</i></b>.'
         '<br>'
-        '<br>Uczestnicy indywidualnie przez kilka minut na mini-kartkach zapisują hasłowo swoje odpowiedzi, które potem będą mogli rozwinąć.'
+        '<br>Uczestnicy indywidualnie przez kilka minut na <b>mini-kartkach</b> zapisują hasłowo swoje odpowiedzi, które potem będą mogli rozwinąć.'
         '<br>'
         '<br>Prowadzący prosi uczestników kolejno o zaprezentowanie po jednej kartce i położeniu jej na środku - prezentacja w kręgu zachodzi dopóki ktoś jeszcze ma jakąś kartkę. Jeśli jakaś myśl została już przedstawiona, nie ma potrzeby jej ponownego rozwijania - można po prostu dołożyć kartkę do już położnej.'
-        '</p>'
+        '</p>',
+    materials: [
+      material_mini_kartki_biurowe
+    ]
 );
 
 KonspektStep step_duchowosc_religia_religijnosc = KonspektStep(
@@ -242,7 +292,10 @@ KonspektStep step_neutralnosc_duchowa = KonspektStep(
         '<br>'
         '<br><b><i>“Czy w ogóle istnieje neutralność w wychowaniu?”</i></b>.'
         '<br>'
-        '<br>W toku próby odpowiedzi na to pytanie może wywiązać się między uczestnikami dyskusja. Nie powinna ona trwać zbyt długo. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.'
+        '<br>W toku próby odpowiedzi na to pytanie może wywiązać się między uczestnikami dyskusja. Nie powinna ona trwać zbyt długo. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.',
+    materials: [
+      material_zal_neutralnosc_duchowa_przyklady
+    ]
 
 );
 
@@ -304,7 +357,10 @@ KonspektStep step_zrodla_wartosci_w_zhp_dyskusja_o_scenariuszach = KonspektStep(
         '<br>Wskazane jest, by uczestnicy mieli możliwość swobodnej dyskusji. Dlatego, jeśli to możliwe, warto podzielić uczestników na grupy po nie więcej niż 7 osób i dać im po jednym ze scenariuszy. Dodatkowo każda grupa powinna dostać kartkę, na której powinna spisać swoje wnioski.'
         '<br>'
         '<br>Na końcu każda grupa w ciągu minuty prezentuje wyniki swojej pracy. Gdy skończy, prowadzący prosi, by położyli omawiany scenariusz oraz kartkę z aksjomatem przed sobą.'
-        '</p>'
+        '</p>',
+    materials: [
+      material_zal_neutralnosc_duchowa_przyklady
+    ]
 );
 
 KonspektStep step_zrodla_wartosci_w_zhp_okreslonosc_wartosci = KonspektStep(
@@ -320,7 +376,11 @@ KonspektStep step_zrodla_wartosci_w_zhp_okreslonosc_wartosci = KonspektStep(
         '<br><i>“Możliwe, że część z was na tym etapie zastanawia się, jakie są oraz skąd wypływają harcerskie wartości?”</i>.'
         '<br>'
         '<br>Prowadzący przedstawia uczestnikom stosowny fragment statutu ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_statut) oraz preambułę uchwały w sprawie wspierania rozwoju duchowego w ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_uchwala). Zwraca uwagę na to, że w ZHP mamy ściśle określony zbiór wartości i postaw, do których wychowujemy.'
-        '</p>'
+        '</p>',
+  materials: [
+    material_zal_cel_wychowania_duchowego_zhp_statut,
+    material_zal_cel_wychowania_duchowego_zhp_uchwala
+  ]
 );
 
 KonspektStep step_zrodla_wartosci_w_zhp_aksjoamty = KonspektStep(
