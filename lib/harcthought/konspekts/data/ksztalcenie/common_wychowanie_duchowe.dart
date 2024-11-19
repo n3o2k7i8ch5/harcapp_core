@@ -43,6 +43,13 @@ KonspektMaterial material_zal_cel_wychowania_duchowego_zhp_uchwala = KonspektMat
 
 // ---
 
+String aksjomaty_przyklady = '<ul>'
+    '<li><p style="text-align:justify;">“Świat stworzył przypadek. Świadomość człowieka jest iluzją fizyki, nie ma żadnego celu.”</p></li>'
+    '<li><p style="text-align:justify;">“Świat stworzyła wróżka. Ludzie są powiewami meta-powietrza jej tchnienia. Po śmierci człowiek może również stać się wróżką, jeśli wchłonie odpowiednio dużo energii wszechświata poprzez medytację.”</p></li>'
+    '<li><p style="text-align:justify;">“Wszystko jest iluzją. Istnieję tylko ja, reszta to zaprogramowane postaci w mojej głowie. Iluzja ta pryśnie, jeśli wszyscy ludzie uwierzą, że w niej żyją.”</p></li>'
+    '<li><p style="text-align:justify;">“Świat stworzył trójjedyny Bóg, powołał człowieka na swój obraz, by doświadczył miłości.”</p></li>'
+    '</ul>';
+
 KonspektStep step_sfery_rozwoju_i_ich_relacje = KonspektStep(
     title: 'Sfery rozwoju i ich relacje',
     duration: Duration(minutes: 15),
@@ -192,26 +199,21 @@ KonspektStep step_poziomy_duchowosci_aksjomat = KonspektStep(
   duration: Duration(minutes: 5),
   activeForm: false,
   content: '<p style="text-align:justify;">'
-      'Poziom zachowań, postaw i wartości są dla większości osób zrozumiałe, jednak poziom aksjomatu może być nieintuicyjny. Z tego względu, po zdefiniowaniu wszystkich czterech poziomów duchowości, prowadzący zatrzymuje się dłużej nad tym zagadnieniem.'
+      'Poziom zachowań, postaw i wartości są dla większości osób zrozumiałe, jednak poziom aksjomatu może być nieintuicyjny. Z tego względu, po zdefiniowaniu wszystkich czterech poziomów duchowości, prowadzący zatrzymuje się dłużej nad aksjomatami.'
       '<br>'
       '<br>Prowadzący podaje kilka przykładów aksjomatów, np.:'
       '</p>'
 
-      '<ul>'
-      '<li><p style="text-align:justify;">“Świat stworzył przypadek. Świadomość człowieka jest iluzją fizyki, nie ma żadnego celu.”</p></li>'
-      '<li><p style="text-align:justify;">“Świat stworzyła wróżka. Ludzie są powiewami meta-powietrza jej tchnienia. Po śmierci człowiek może również stać się wróżką, jeśli wchłonie odpowiednio dużo energii wszechświata poprzez medytację.”</p></li>'
-      '<li><p style="text-align:justify;">“Wszystko jest iluzją. Istnieję tylko ja, reszta to zaprogramowane postaci w mojej głowie. Iluzja ta pryśnie, jeśli wszyscy ludzie uwierzą, że w niej żyją.”</p></li>'
-      '<li><p style="text-align:justify;">“Świat stworzył trójjedyny Bóg, powołał człowieka na swój obraz, by doświadczył miłości.”</p></li>'
-      '</ul>'
+      '$aksjomaty_przyklady'
 
       '<p style="text-align:justify;">'
-      '<b>Aksjomat porządkuje w sposób całkowity postrzeganie rzeczywistości</b>. Aby to zobrazować, prowadzący może posłużyć się przykładem:'
+      '<b>Aksjomat zawsze jest pewną fundamentalną niesprawdzalną wiarą</b> w określony porządek rzeczy.'
       '<br>'
-      '<br><i>"Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie.'
+      '<br><b>Aksjomaty całkowicie porządkują postrzeganie rzeczywistości</b>. Aby to zobrazować, prowadzący może posłużyć się przykładem:'
       '<br>'
-      '<br>Przykładowo, jeśli zobaczy dowód na to, że Ziemia jest kulą, to wniosek będzie tylko jeden: narzędzia użyte przy tych dowodach były wadliwe.'
+      '<br><i>"Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Również, jeśli ów człowiek zobaczy dowód na kulistość Ziemi, to wniosek będzie miał tylko jeden: narzędzia użyte przy tych dowodach były wadliwe.'
       '<br>'
-      '<br>Czy to powinno zaskakiwać? Przecież my, gdybyśmy zobaczyli spójny dowód na to, światem rządzą reptilianie, też uznalibyśmy, że ktoś musiał się pomylić."</i>'
+      '<br>Czy to powinno zaskakiwać? Przecież my, gdy nam przedstawiono nagranie, że księżyc jest jedynie wyświetlanym hologramem, też uznalibyśmy, że to nagranie musi być błędne. Nie zakładalibyśmy, że cała nauka się pomyliła - a przecież nauka mogła się pomylić, my jedynie wierzymy, że ona dobrze opisuje rzeczywistość.".</i>'
       '</p>'
 );
 
@@ -223,16 +225,16 @@ KonspektStep step_integracja_duchowosci = KonspektStep(
         'Prowadzący na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci opisuje <b>etapy rozwoju duchowego</b>:'
         '</p>'
         '<ul>'
-        '<li><p style="text-align:justify;">Do 9. roku życia dzieci są zdolne rozumieć jedynie <b>właściwe zachowania</b>, na podstawie których kregują swoje <b>postawy</b>.</p></li>'
+        '<li><p style="text-align:justify;">Do 9. roku życia dzieci są zdolne rozumieć jedynie właściwe <b>zachowania</b>, na podstawie których kregują swoje <b>postawy</b>.</p></li>'
         '<li><p style="text-align:justify;">W wieku ok. 10 lat pojawia się zdolność myślenia abstrakcyjnego. Człowiek zaczyna wówczas rozumieć, że zachowania wynikają z pewnej abstrakcyjnej zasady którą są <b>wartości</b>. Nie trzeba wtedy już mówić: "przywitaj się grzecznie i podziękuj", można zamiast tego powiedzieć: "odnoś się z szacunkiem".</p></li>'
         '<li><p style="text-align:justify;">W wieku ok. 15 lat są wartości porządkowane w światopogląd i internalizowane jest pojęcie <b>aksjomatu</b>. Pojawia się zrozumienie, że różni ludzie mogą mieć różny światopogląd i czerpać swoje wartości z różnych źródeł.</p></li>'
         '</ul>'
 
         '<p style="text-align:justify;">'
-        '<br>Prowadzący opisując przejście między kolejnymi etapami rozwoju duchowego rysuje kolejno piętra piramidy na flipcharcie, tak jak poniżej:'
+        'Prowadzący opisując przejście między kolejnymi etapami rozwoju duchowego rysuje kolejno piętra piramidy na flipcharcie, tak jak poniżej:'
         '<br>${piramidaDuchowosciHtml(isDark: isDark)}'
         '<br>'
-        '<br>Następnie prowadzący opisuje zjawisko <b>integracji duchowości</b> - sposobu w jaki przejście do lub zmiana w jednym z poziomów duchowości wpływa na wszystkie pozostałe:'
+        '<br>Następnie prowadzący opisuje zjawisko <b>integracji duchowości</b>, czyli sposobu w jaki kształtowana jest duchowość człowieka:'
         '<br>'
         '<br><i>Jeżeli młody człowiek w wieku 10 lat zacznie rozumieć, że jego zachowania powinny wynikać z określonych wartości, zazwyczaj orientuje się, że niektóre z jego dotychczasowych zachowań były niezgodne z jego wartościami i zaczyna je zmieniać. Zmiana zachowań sprawia, że zaczyna inaczej funkcjonować - zaczyna inaczej doświadczać rzeczywistości, a to weryfikuje przyjętą hierarchię wartości. Nowe wartości wpływają z powrotem na nowe zachowania, zachowania na wartości i tak w kółko.'
         '<br>'
@@ -240,13 +242,13 @@ KonspektStep step_integracja_duchowosci = KonspektStep(
         '<br>'
         '<br>Podobnie rzecz się ma w przypadku przejścia z poziomu wartości na poziomem aksjomatu - gdy człowiek w pełni zrozumie, że musi opierzeć swoje życie o konkretną, arbitralną wiarę, zaczyna rozumieć, że część jego dotychczasowych poglądów, wartości i zachowań jest z nią niezgodna. Z czasem jego wiara będzie pogłębiana, będzie ewoluowała pod wpływem doświadczeń, co z powrotem będzie rzutować na resztę struktury duchowości.</i>'
         '<br>'
-        '<br>Prowadzący, opisując zjawisko integracji duchowości rysuje na flipcharchie z piramidą duchowości strzałkę "integracji wstępnej". Następnie wprowadza rozróżnienie między <b>integracją wstępną</b> a <b>świadomą integracją duchowości</b>:'
+        '<br>Prowadzący, opisując zjawisko integracji duchowości rysuje na flipcharchie z piramidą duchowości strzałkę "integracji wstępnej". Następnie wprowadza rozróżnienie między <b>integracją wstępną</b> a <b>integracją świadomą</b> duchowości:'
         '<br>'
-        '<br><i>Do momentu, w którym człowiek nie zinternalizował pojęcia aksjomatu, czyli do wieku ok. 15 lat, jego duchowość jest kształtowana "po raz pierwszy". Integracja duchowości na tym etapie jest przede wszystkim zależna od otoczenia i temperamentu człowieka i nosi nazwę "<b>integracji wstępnej</b>".'
+        '<br><i>Do momentu, aż człowiek nie zinternalizowuje pojęcia aksjomatu, jego duchowość jest integrowana "po raz pierwszy". <b>Wartości, które przyjmie będą wynikały z nauczonych zachowań</b>. <b>Aksjomaty, które przyjmie, będą wynikały z wartości</b>, które wyznaje. Kształt duchowości zależy tu przede wszystkim od <b>otoczenia</b> i <b>temperamentu</b> człowieka. Jest to etap "<b>integracji wstępnej</b>".'
         '<br>'
-        '<br>W momencie, gdy człowiek zaczyna poważnie martwić się pytaniami o sens istnienia i zaczyna rozumieć, że odpowiedzi na te pytania są kluczowe dla jego życia, rozpoczyna się etap "<b>integracji świadomej</b>". Na tym etapie człowiek zyskuje świadomość własnej, pełnej duchowości i staje się zdolny do wpływania na jej kształt. Wciąż jest uwarunkowany licznymi zewnętrznymi czynnikami, on sam staje się wówczas czynnikiem wpływu.</i>'
+        '<br>Gdy człowiek zaczyna poważnie martwić się pytaniami o sens istnienia i zaczyna rozumieć, że odpowiedzi na te pytania są kluczowe dla jego życia, rozpoczyna etap "<b>integracji świadomej</b>". Zyskuje w pełni świadomość własnej duchowości i staje się zdolny do wpływania na jej kształt. Wciąż jest uwarunkowany czynnikami zewnętrznymi, jednak on sam staje się czynnikiem.</i>'
         '<br>'
-        '<br>Prowadzący może zaznaczyć, że punkt rozpoczęcia integracji świadomej zazwyczaj wiąże się z zadaniem lub przynajmniej zrozumieniem wagi pytań w stylu:'
+        '<br>Prowadzący może zaznaczyć, że rozpoczęcie integracji świadomej łatwo poznać po pytaniach w stylu:'
         '</p>'
 
         '<ul>'
@@ -256,7 +258,7 @@ KonspektStep step_integracja_duchowosci = KonspektStep(
         '</ul>'
 
         '<p style="text-align:justify;">'
-        'Na koniec ważne jest, aby prowadzący zaznaczył, że o ile można skutecznie wpływać na wartości, zachowania i postawy młodego człowieka, o tyle wpływ na aksjomat jest już bardziej subtelny. Do aksjomatów można młodego człowieka "podprowadzić": zawsze są one kształtowane na podstawie własnych doświadczeń, znanych poglądów i przyjętych uprzednio wartości, jednak przyjąć aksjomat za własny można jedynie samemu, wedle własnego, osobistego przekonania. W tym procesie nie da się komuś towarzyszyć do końca.'
+        'Na koniec ważne jest, aby prowadzący zaznaczył, że o ile można skutecznie wpływać na wartości, zachowania i postawy młodego człowieka, o tyle wpływ na aksjomat jest już bardziej subtelny. Do aksjomatów można młodego człowieka najwyżej "podprowadzić": owszem, są one kształtowane na podstawie własnych doświadczeń, znanych poglądów i przyjętych uprzednio wartości, jednak przyjąć aksjomat za własny można jedynie samemu, wedle własnego, osobistego przekonania. W tym procesie nie da się komuś towarzyszyć do końca.'
         '</p>',
     materials: [
       material_flipchart,
@@ -400,9 +402,15 @@ KonspektStep step_zrodla_wartosci_w_zhp_dyskusja_o_scenariuszach = KonspektStep(
         '<br>'
         '<br><i>“Wszystkie przedstawione w scenariuszach wartości mają swoje odzwierciedlenie w PH. Ale przecież PH nie spadło z nieba na kamiennych tablicach! Z jakiego aksjomatu wynikają prezentowane w scenariuszu postawy, przekonania i wartości?”</i>'
         '<br>'
-        '<br>Prowadzący prosi uczestników, by dokopali się do najgłębszego źródła wartości (aksjomatu). Uczestnicy nie powinni bać się zanurkowania w przestrzeń <b>religii</b> i <b>filozofii</b>, a czasami <b>selekcji naturalnej</b>. Grupa nie musi być zgodna we wnioskach - może zaproponować zapisać kilka różnych aksjomatów, z których wynikają omawiane wcześniej wartości.'
+        '<br>Prowadzący prosi uczestników, by dokopali się do najgłębszego źródła wartości (aksjomatu), funkcjonującego w naszym kręgu cywilizacyjnym. Uczestnicy nie powinni bać się zanurkowania w przestrzeń <b>religii</b> i <b>filozofii</b>, a czasami <b>selekcji naturalnej</b>. Grupa nie musi być zgodna we wnioskach - może zaproponować zapisać kilka różnych aksjomatów, z których wynikają omawiane wcześniej wartości.'
         '<br>'
-        '<br>Wskazane jest, by uczestnicy mieli możliwość swobodnej dyskusji. Dlatego, jeśli to możliwe, warto podzielić uczestników na grupy po nie więcej niż 7 osób i dać im po jednym ze scenariuszy. Dodatkowo każda grupa powinna dostać kartkę, na której powinna spisać swoje wnioski.'
+        '<br>Warto, by prowadzący przedstawił kilka przykładowych aksjomatów, jeśli uczestnicy jeszcze nie do końca je "czują":'
+        '</p>'
+
+        '$aksjomaty_przyklady'
+
+        '<p style="text-align:justify;">'
+        'Wskazane jest, by uczestnicy mieli możliwość swobodnej dyskusji. Dlatego, jeśli to możliwe, warto podzielić uczestników na grupy po nie więcej niż 5 osób i dać im po jednym ze scenariuszy. Dodatkowo każda grupa powinna dostać kartkę, na której powinna spisać swoje wnioski.'
         '<br>'
         '<br>Na końcu każda grupa w ciągu minuty prezentuje wyniki swojej pracy. Gdy skończy, prowadzący prosi, by położyli omawiany scenariusz oraz kartkę z aksjomatem przed sobą.'
         '</p>',
