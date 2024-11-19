@@ -16,9 +16,10 @@ class KonspektStepWidget extends StatelessWidget{
 
   final int index;
   final Konspekt konspekt;
+  final double? maxDialogWidth;
   KonspektStep get step => konspekt.steps![index];
 
-  const KonspektStepWidget(this.konspekt, this.index, {super.key});
+  const KonspektStepWidget(this.konspekt, this.index, {this.maxDialogWidth, super.key});
 
   @override
   Widget build(BuildContext context) => Column(
@@ -183,8 +184,10 @@ class KonspektStepWidget extends StatelessWidget{
                         itemBuilder: (context, materialIndex) => KonspektMaterialTile(
                           konspekt,
                           step.materials![materialIndex],
+                          backgroundColor: background_(context),
                           showAttachment: false,
                           showAdditionalPreparation: false,
+                          maxDialogWidth: maxDialogWidth
                         ),
                         separatorBuilder: (context, aimIndex) => const SizedBox(height: Dimen.defMarg),
                         itemCount: step.materials!.length,
@@ -202,7 +205,8 @@ class KonspektStepWidget extends StatelessWidget{
         child: KonspektHtmlWidget(
             konspekt,
             step.content??step.contentBuilder!.call(isDark: isDark(context)),
-            textSize: Dimen.textSizeNormal
+            textSize: Dimen.textSizeNormal,
+            maxDialogWidth: maxDialogWidth,
         )
       )
     ],

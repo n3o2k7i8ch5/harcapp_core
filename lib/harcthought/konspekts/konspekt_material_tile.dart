@@ -15,16 +15,18 @@ class KonspektMaterialTile extends StatelessWidget{
 
   final Konspekt konspekt;
   final KonspektMaterial material;
-  final double? maxDialogWidth;
+  final Color? backgroundColor;
   final bool showAttachment;
   final bool showAdditionalPreparation;
+  final double? maxDialogWidth;
 
   const KonspektMaterialTile(
       this.konspekt,
       this.material,
-      { this.maxDialogWidth,
+      { this.backgroundColor,
         this.showAttachment = true,
         this.showAdditionalPreparation = true,
+        this.maxDialogWidth,
         super.key
       });
 
@@ -35,7 +37,7 @@ class KonspektMaterialTile extends StatelessWidget{
     null:
     () => material.onTap!.call(context),
     borderRadius: BorderRadius.circular(AppCard.defRadius),
-    color: cardEnab_(context),
+    color: backgroundColor??cardEnab_(context),
     child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -74,7 +76,7 @@ class KonspektMaterialTile extends StatelessWidget{
               )
           ),
 
-          if(material.attachmentName != null)
+          if(material.attachmentName != null && showAttachment)
             Builder(
                 builder: (context){
 
@@ -118,7 +120,7 @@ class KonspektMaterialTile extends StatelessWidget{
                 }
             ),
 
-          if(material.additionalPreparation != null)
+          if(material.additionalPreparation != null && showAdditionalPreparation)
             SimpleButton(
               color: backgroundIcon_(context),
               child: Padding(

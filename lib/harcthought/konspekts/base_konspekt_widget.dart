@@ -505,7 +505,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             SliverPadding(
               padding: const EdgeInsets.only(bottom: Dimen.sideMarg),
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                  (context, index) => KonspektStepWidget(konspekt, index),
+                  (context, index) => KonspektStepWidget(konspekt, index, maxDialogWidth: maxDialogWidth),
                   separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
                   count: konspekt.steps!.length
               )),
