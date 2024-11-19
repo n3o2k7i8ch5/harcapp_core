@@ -98,9 +98,9 @@ class KonspektStepWidget extends StatelessWidget{
       if(step.aims != null && step.aims!.isNotEmpty)
         Padding(
           padding: const EdgeInsets.only(
-            top: Dimen.sideMarg,
-            left: Dimen.sideMarg,
-            right: Dimen.sideMarg,
+            top: Dimen.defMarg,
+            left: Dimen.defMarg,
+            right: Dimen.defMarg,
           ),
           child: Material(
             color: cardEnab_(context),
@@ -153,9 +153,9 @@ class KonspektStepWidget extends StatelessWidget{
       if(step.materials != null && step.materials!.isNotEmpty)
         Padding(
           padding: const EdgeInsets.only(
-            top: Dimen.sideMarg,
-            left: Dimen.sideMarg,
-            right: Dimen.sideMarg,
+            top: Dimen.defMarg,
+            left: Dimen.defMarg,
+            right: Dimen.defMarg,
           ),
           child: Material(
               color: cardEnab_(context),

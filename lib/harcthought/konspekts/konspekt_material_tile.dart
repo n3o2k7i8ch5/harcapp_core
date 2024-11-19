@@ -16,6 +16,7 @@ class KonspektMaterialTile extends StatelessWidget{
   final Konspekt konspekt;
   final KonspektMaterial material;
   final Color? backgroundColor;
+  final double textSize;
   final bool showAttachment;
   final bool showAdditionalPreparation;
   final double? maxDialogWidth;
@@ -24,6 +25,7 @@ class KonspektMaterialTile extends StatelessWidget{
       this.konspekt,
       this.material,
       { this.backgroundColor,
+        this.textSize = Dimen.textSizeBig,
         this.showAttachment = true,
         this.showAdditionalPreparation = true,
         this.maxDialogWidth,
@@ -53,7 +55,7 @@ class KonspektMaterialTile extends StatelessWidget{
                       Expanded(
                         child: Text(
                           material.name,
-                          style: const AppTextStyle(fontSize: Dimen.textSizeBig, height: 1.2)
+                          style: AppTextStyle(fontSize: textSize, height: 1.2)
                         )
                       ),
 
@@ -69,7 +71,7 @@ class KonspektMaterialTile extends StatelessWidget{
                   if(material.comment != null)
                     Text(
                         material.comment!,
-                        style: AppTextStyle(fontSize: Dimen.textSizeBig, height: 1.2, color: hintEnab_(context))
+                        style: AppTextStyle(fontSize: textSize, height: 1.2, color: hintEnab_(context))
                     ),
 
                 ],
