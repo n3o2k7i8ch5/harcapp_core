@@ -113,15 +113,20 @@ class KonspektStepWidget extends StatelessWidget{
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
 
-                    const Text(
-                      'Cele kroku',
-                      style: AppTextStyle(
-                          fontSize: Dimen.textSizeNormal,
-                          fontWeight: weight.halfBold
+                    const Padding(
+                      padding: EdgeInsets.only(
+                          top: Dimen.sideMarg - Dimen.defMarg,
+                          left: Dimen.sideMarg - Dimen.defMarg,
+                          bottom: Dimen.sideMarg
+                      ),
+                      child: Text(
+                        'Cele kroku',
+                        style: AppTextStyle(
+                            fontSize: Dimen.textSizeNormal,
+                            fontWeight: weight.halfBold
+                        ),
                       ),
                     ),
-
-                    const SizedBox(height: Dimen.sideMarg),
 
                     ListView.separated(
                       physics: NeverScrollableScrollPhysics(),
@@ -168,15 +173,20 @@ class KonspektStepWidget extends StatelessWidget{
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
 
-                      const Text(
-                        'Materiały kroku',
-                        style: AppTextStyle(
-                            fontSize: Dimen.textSizeNormal,
-                            fontWeight: weight.halfBold
+                      const Padding(
+                        padding: EdgeInsets.only(
+                          top: Dimen.sideMarg - Dimen.defMarg,
+                          left: Dimen.sideMarg - Dimen.defMarg,
+                          bottom: Dimen.sideMarg
+                        ),
+                        child: Text(
+                          'Materiały kroku',
+                          style: AppTextStyle(
+                              fontSize: Dimen.textSizeNormal,
+                              fontWeight: weight.halfBold
+                          ),
                         ),
                       ),
-
-                      const SizedBox(height: Dimen.sideMarg),
 
                       ListView.separated(
                         physics: NeverScrollableScrollPhysics(),
@@ -185,6 +195,7 @@ class KonspektStepWidget extends StatelessWidget{
                           konspekt,
                           step.materials![materialIndex],
                           backgroundColor: background_(context),
+                          textSize: Dimen.textSizeNormal,
                           showAttachment: false,
                           showAdditionalPreparation: false,
                           maxDialogWidth: maxDialogWidth

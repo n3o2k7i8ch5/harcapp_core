@@ -26,6 +26,7 @@ KonspektMaterial material_marker = KonspektMaterial(
 KonspektMaterial material_zal_neutralnosc_duchowa_przyklady = KonspektMaterial(
   name: 'Wydrukowany załącznik “$attach_title_neutralnosc_duchowa_przyklady”',
   attachmentName: attach_name_neutralnosc_duchowa_przyklady,
+  amount: 1
 );
 
 KonspektMaterial material_zal_cel_wychowania_duchowego_zhp_statut = KonspektMaterial(
