@@ -87,8 +87,8 @@ Future<Widget> MetoTile(Meto meto, Font fontBold) async => ClipRRect(
 
             SvgImage(
               svg: (await readStringFromAssets(meto.iconSvgPath))!,
-              width: defTextSize + 1 + defTextSize + 3,
-              height: defTextSize + 1 + defTextSize + 3,
+              width: defTextSize + 1 + defTextSize + 2*3,
+              height: defTextSize + 1 + defTextSize + 2*3,
             ),
 
             SizedBox(width: 3.0),
@@ -591,7 +591,7 @@ List<Widget> MaterialListWidget(
             fontBoldItalic,
             showComment: showComment,
             showAdditionalPreparation: showAdditionalPreparation,
-            backgroundColor: PdfColors.white
+            backgroundColor: backgroundColor
         )
     );
     if(i < materials.length - 1)
@@ -785,20 +785,27 @@ Future<List<Widget>> StepWidget(
                 child: Container(
                     color: cardColor,
                     child: Padding(
-                        padding: EdgeInsets.all(1.5*elementSmallSeparator),
+                        padding: EdgeInsets.all(elementSmallSeparator),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
 
-                              Text(
-                                  'Cele kroku',
-                                  style: TextStyle(
-                                    font: fontBold,
-                                    fontSize: defTextSize,
-                                  )
-                              ),
+                            SizedBox(height: .5*elementSmallSeparator),
 
-                              SizedBox(height: 1.5*elementSmallSeparator),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                  top: .5*elementSmallSeparator,
+                                  left: .5*elementSmallSeparator,
+                                  bottom: 1.5*elementSmallSeparator,
+                                ),
+                                child: Text(
+                                    'Cele kroku',
+                                    style: TextStyle(
+                                      font: fontBold,
+                                      fontSize: defTextSize,
+                                    )
+                                )
+                            ),
 
                               ...await StringListWidget(
                                   step.aims!,
@@ -831,20 +838,25 @@ Future<List<Widget>> StepWidget(
                 child: Container(
                     color: cardColor,
                     child: Padding(
-                        padding: EdgeInsets.all(1.5*elementSmallSeparator),
+                        padding: EdgeInsets.all(elementSmallSeparator),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
 
-                              Text(
-                                  'Materiały kroku',
-                                  style: TextStyle(
-                                    font: fontBold,
-                                    fontSize: defTextSize,
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                    top: .5*elementSmallSeparator,
+                                    left: .5*elementSmallSeparator,
+                                    bottom: 1.5*elementSmallSeparator,
+                                  ),
+                                  child: Text(
+                                      'Materiały kroku',
+                                      style: TextStyle(
+                                        font: fontBold,
+                                        fontSize: defTextSize,
+                                      )
                                   )
                               ),
-
-                              SizedBox(height: 1.5*elementSmallSeparator),
 
                               ...await MaterialListWidget(
                                   step.materials!,
@@ -856,7 +868,7 @@ Future<List<Widget>> StepWidget(
                                   fontBoldItalic,
                                   showComment: false,
                                   showAdditionalPreparation: false,
-                                  backgroundColor: cardColor,
+                                  backgroundColor: PdfColors.white,
                                   withHeader: false
                               ),
 
