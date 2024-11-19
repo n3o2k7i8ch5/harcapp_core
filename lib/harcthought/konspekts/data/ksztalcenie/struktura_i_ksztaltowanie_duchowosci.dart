@@ -346,6 +346,8 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
 
       step_poziomy_duchowosci,
 
+      step_poziomy_duchowosci_aksjomat,
+
       KonspektStep(
           title: 'Poziomy duchowości - sprawdzenie',
           duration: Duration(minutes: 15),

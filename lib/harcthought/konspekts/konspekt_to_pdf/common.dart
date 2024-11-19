@@ -6,7 +6,7 @@ double elementBigSeparator = 24.0;
 double elementSmallSeparator = 6.0;
 double konspektSeparator = 48.0;
 
-double defTextTiny = 7.0;
+double defTextTiny = 6;
 double defTextSize = 11.0;
 double headerTextSize = 14.0;
 double titleTextSize = 18.0;

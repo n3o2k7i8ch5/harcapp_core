@@ -189,7 +189,7 @@ KonspektStep step_poziomy_duchowosci = KonspektStep(
 
 KonspektStep step_poziomy_duchowosci_aksjomat = KonspektStep(
   title: 'Poziomy (warstwy) rozwoju duchowego - aksjomat',
-  duration: Duration(minutes: 15),
+  duration: Duration(minutes: 5),
   activeForm: false,
   content: '<p style="text-align:justify;">'
       'Poziom zachowań, postaw i wartości są dla większości osób zrozumiałe, jednak poziom aksjomatu może być nieintuicyjny. Z tego względu, po zdefiniowaniu wszystkich czterech poziomów duchowości, prowadzący zatrzymuje się dłużej nad tym zagadnieniem.'
@@ -220,9 +220,33 @@ KonspektStep step_integracja_duchowosci = KonspektStep(
     duration: Duration(minutes: 15),
     activeForm: false,
     contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci opisuje <b>etapy rozwoju duchowego</b> - w pierwszym etapie dzieci są zdolne rozumieć właściwe zachowania, na podstawie których kregują swoje postawy, w wieku ok. 10 lat pojawia się u nich zdolność myślenia abstrakcyjnego i operowanie na poziomie wartości, które następnie, w wieku ok. 15 lat są porządkowane w światopogląd i internalizowane jest pojęcie aksjomatu.'
+        'Prowadzący na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci opisuje <b>etapy rozwoju duchowego</b>:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">Do 9. roku życia dzieci są zdolne rozumieć jedynie <b>właściwe zachowania</b>, na podstawie których kregują swoje <b>postawy</b>.</p></li>'
+        '<li><p style="text-align:justify;">W wieku ok. 10 lat pojawia się zdolność myślenia abstrakcyjnego. Człowiek zaczyna wówczas rozumieć, że zachowania wynikają z pewnej abstrakcyjnej zasady którą są <b>wartości</b>. Nie trzeba wtedy już mówić: "przywitaj się grzecznie i podziękuj", można zamiast tego powiedzieć: "odnoś się z szacunkiem".</p></li>'
+        '<li><p style="text-align:justify;">W wieku ok. 15 lat są wartości porządkowane w światopogląd i internalizowane jest pojęcie <b>aksjomatu</b>. Pojawia się zrozumienie, że różni ludzie mogą mieć różny światopogląd i czerpać swoje wartości z różnych źródeł.</p></li>'
+        '</ul>'
+
+        '<p style="text-align:justify;">'
+        '<br>Prowadzący opisując przejście między kolejnymi etapami rozwoju duchowego rysuje kolejno piętra piramidy na flipcharcie, tak jak poniżej:'
+        '<br>${piramidaDuchowosciHtml(isDark: isDark)}'
         '<br>'
-        '<br>Moment, w którym harcerze wychodzą z etapu integracji wstępnej i zaczynają świadomą integrację duchowości charakteryzowany jest często przez zainteresowanie lub przynajmniej zrozumienie wagi pytań w stylu:'
+        '<br>Następnie prowadzący opisuje zjawisko <b>integracji duchowości</b> - sposobu w jaki przejście do lub zmiana w jednym z poziomów duchowości wpływa na wszystkie pozostałe:'
+        '<br>'
+        '<br><i>Jeżeli młody człowiek w wieku 10 lat zacznie rozumieć, że jego zachowania powinny wynikać z określonych wartości, zazwyczaj orientuje się, że niektóre z jego dotychczasowych zachowań były niezgodne z jego wartościami i zaczyna je zmieniać. Zmiana zachowań sprawia, że zaczyna inaczej funkcjonować - zaczyna inaczej doświadczać rzeczywistości, a to weryfikuje przyjętą hierarchię wartości. Nowe wartości wpływają z powrotem na nowe zachowania, zachowania na wartości i tak w kółko.'
+        '<br>'
+        '<br>Rozwoju duchowego nie należy postrzegać jako budowanie kolejnych pięter. Rozwój duchowy polega na <b>integracji</b> i uspójnianiu między sobą kolejnych pięter duchowości.'
+        '<br>'
+        '<br>Podobnie rzecz się ma w przypadku przejścia z poziomu wartości na poziomem aksjomatu - gdy człowiek w pełni zrozumie, że musi opierzeć swoje życie o konkretną, arbitralną wiarę, zaczyna rozumieć, że część jego dotychczasowych poglądów, wartości i zachowań jest z nią niezgodna. Z czasem jego wiara będzie pogłębiana, będzie ewoluowała pod wpływem doświadczeń, co z powrotem będzie rzutować na resztę struktury duchowości.</i>'
+        '<br>'
+        '<br>Prowadzący, opisując zjawisko integracji duchowości rysuje na flipcharchie z piramidą duchowości strzałkę "integracji wstępnej". Następnie wprowadza rozróżnienie między <b>integracją wstępną</b> a <b>świadomą integracją duchowości</b>:'
+        '<br>'
+        '<br><i>Do momentu, w którym człowiek nie zinternalizował pojęcia aksjomatu, czyli do wieku ok. 15 lat, jego duchowość jest kształtowana "po raz pierwszy". Integracja duchowości na tym etapie jest przede wszystkim zależna od otoczenia i temperamentu człowieka i nosi nazwę "<b>integracji wstępnej</b>".'
+        '<br>'
+        '<br>W momencie, gdy człowiek zaczyna poważnie martwić się pytaniami o sens istnienia i zaczyna rozumieć, że odpowiedzi na te pytania są kluczowe dla jego życia, rozpoczyna się etap "<b>integracji świadomej</b>". Na tym etapie człowiek zyskuje świadomość własnej, pełnej duchowości i staje się zdolny do wpływania na jej kształt. Wciąż jest uwarunkowany licznymi zewnętrznymi czynnikami, on sam staje się wówczas czynnikiem wpływu.</i>'
+        '<br>'
+        '<br>Prowadzący może zaznaczyć, że punkt rozpoczęcia integracji świadomej zazwyczaj wiąże się z zadaniem lub przynajmniej zrozumieniem wagi pytań w stylu:'
         '</p>'
 
         '<ul>'
@@ -232,12 +256,7 @@ KonspektStep step_integracja_duchowosci = KonspektStep(
         '</ul>'
 
         '<p style="text-align:justify;">'
-        'Ważne, by w procesie opisu prowadzący narysował we wspólnym miejscu odwróconą piramidę, tak jak poniżej:</p>'
-        '<br>${piramidaDuchowosciHtml(isDark: isDark)}'
-        '<p style="text-align:justify;">'
-        '<br>W dalszej kolejności prowadzący wprowadza pojęcie <b>integracji duchowości</b> - sposobu w jaki poziomy duchowości kształtują się w procesie rozwoju.'
-        '<br>'
-        '<br>Ważne, by prowadzący zaznaczył, że struktura wartości nie zależy jedynie od środowiska i wychowania, ale także od <b>natury człowieka</b>, m.in. od jego <b>temperamentu</b>.'
+        'Na koniec ważne jest, aby prowadzący zaznaczył, że o ile można skutecznie wpływać na wartości, zachowania i postawy młodego człowieka, o tyle wpływ na aksjomat jest już bardziej subtelny. Do aksjomatów można młodego człowieka "podprowadzić": zawsze są one kształtowane na podstawie własnych doświadczeń, znanych poglądów i przyjętych uprzednio wartości, jednak przyjąć aksjomat za własny można jedynie samemu, wedle własnego, osobistego przekonania. W tym procesie nie da się komuś towarzyszyć do końca.'
         '</p>',
     materials: [
       material_flipchart,
