@@ -278,7 +278,7 @@ class KonspektAttachment{
 
 class KonspektMaterial{
 
-  final int amount;
+  final int? amount;
   final int? amountAttendantFactor;
   final String name;
   final String? comment;
@@ -287,8 +287,10 @@ class KonspektMaterial{
   final void Function(BuildContext)? onTap;
   final Widget Function(BuildContext)? bottomBuilder;
 
+  bool get hasAmount => amount != null && amount! > 0 && amountAttendantFactor != null && amountAttendantFactor! > 0;
+
   const KonspektMaterial({
-    this.amount = 1,
+    this.amount,
     this.amountAttendantFactor,
     required this.name,
     this.comment,
