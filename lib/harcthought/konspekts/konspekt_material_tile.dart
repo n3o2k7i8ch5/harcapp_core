@@ -16,8 +16,17 @@ class KonspektMaterialTile extends StatelessWidget{
   final Konspekt konspekt;
   final KonspektMaterial material;
   final double? maxDialogWidth;
+  final bool showAttachment;
+  final bool showAdditionalPreparation;
 
-  const KonspektMaterialTile(this.konspekt, this.material, {this.maxDialogWidth, super.key});
+  const KonspektMaterialTile(
+      this.konspekt,
+      this.material,
+      { this.maxDialogWidth,
+        this.showAttachment = true,
+        this.showAdditionalPreparation = true,
+        super.key
+      });
 
   @override
   Widget build(BuildContext context) => SimpleButton(

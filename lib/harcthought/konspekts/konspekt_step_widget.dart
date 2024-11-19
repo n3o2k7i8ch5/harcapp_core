@@ -6,6 +6,7 @@ import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/harcthought/konspekts/konspekt_material_tile.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'konspekt.dart';
@@ -93,7 +94,7 @@ class KonspektStepWidget extends StatelessWidget{
         ),
       ),
 
-      if(step.aims != null)
+      if(step.aims != null && step.aims!.isNotEmpty)
         Padding(
           padding: const EdgeInsets.only(
             top: Dimen.sideMarg,
@@ -145,6 +146,54 @@ class KonspektStepWidget extends StatelessWidget{
                 ),
               ),
             )
+          ),
+        ),
+
+      if(step.materials != null && step.materials!.isNotEmpty)
+        Padding(
+          padding: const EdgeInsets.only(
+            top: Dimen.sideMarg,
+            left: Dimen.sideMarg,
+            right: Dimen.sideMarg,
+          ),
+          child: Material(
+              color: cardEnab_(context),
+              borderRadius: BorderRadius.circular(AppCard.defRadius),
+              clipBehavior: Clip.hardEdge,
+              child: Padding(
+                padding: const EdgeInsets.all(Dimen.sideMarg),
+                child: SelectionArea(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+
+                      const Text(
+                        'Materiały kroku',
+                        style: AppTextStyle(
+                            fontSize: Dimen.textSizeNormal,
+                            fontWeight: weight.halfBold
+                        ),
+                      ),
+
+                      const SizedBox(height: Dimen.sideMarg),
+
+                      ListView.separated(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, materialIndex) => KonspektMaterialTile(
+                          konspekt,
+                          step.materials![materialIndex],
+                          showAttachment: false,
+                          showAdditionalPreparation: false,
+                        ),
+                        separatorBuilder: (context, aimIndex) => const SizedBox(height: Dimen.defMarg),
+                        itemCount: step.materials!.length,
+                      ),
+
+                    ],
+                  ),
+                ),
+              )
           ),
         ),
 
