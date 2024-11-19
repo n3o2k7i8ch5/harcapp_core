@@ -473,12 +473,14 @@ Widget MaterialWidget(
     Font fontHalfBoldItalic,
     Font fontBoldItalic,
     { bool showComment = true,
-      bool showAdditionalPreparation = true}
+      bool showAdditionalPreparation = true,
+      PdfColor? backgroundColor
+    }
 ) => ClipRRect(
   horizontalRadius: defRadius,
   verticalRadius: defRadius,
   child: Container(
-    color: cardColor,
+    color: backgroundColor??cardColor,
     child: Padding(
       padding: EdgeInsets.all(elementSmallSeparator),
       child: Column(
@@ -557,6 +559,7 @@ List<Widget> MaterialListWidget(
     Font fontBoldItalic,
     { bool showComment = true,
       bool showAdditionalPreparation = true,
+      PdfColor? backgroundColor
     }
 ){
 
@@ -581,7 +584,8 @@ List<Widget> MaterialListWidget(
             fontHalfBoldItalic,
             fontBoldItalic,
             showComment: showComment,
-            showAdditionalPreparation: showAdditionalPreparation
+            showAdditionalPreparation: showAdditionalPreparation,
+            backgroundColor: PdfColors.white
         )
     );
     if(i < materials.length - 1)
@@ -845,7 +849,8 @@ Future<List<Widget>> StepWidget(
                                   fontHalfBoldItalic,
                                   fontBoldItalic,
                                   showComment: false,
-                                  showAdditionalPreparation: false
+                                  showAdditionalPreparation: false,
+                                  backgroundColor: cardColor,
                               ),
 
                             ]
