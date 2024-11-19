@@ -287,7 +287,7 @@ class KonspektMaterial{
   final void Function(BuildContext)? onTap;
   final Widget Function(BuildContext)? bottomBuilder;
 
-  bool get hasAmount => amount != null && amount! > 0 && amountAttendantFactor != null && amountAttendantFactor! > 0;
+  bool get hasAmount => (amount != null && amount! > 0) || (amountAttendantFactor != null && amountAttendantFactor! > 0);
 
   const KonspektMaterial({
     this.amount,

@@ -98,16 +98,16 @@ class KonspektStepWidget extends StatelessWidget{
       if(step.aims != null && step.aims!.isNotEmpty)
         Padding(
           padding: const EdgeInsets.only(
-            top: Dimen.defMarg,
-            left: Dimen.defMarg,
-            right: Dimen.defMarg,
+            top: Dimen.sideMarg,
+            left: Dimen.sideMarg,
+            right: Dimen.sideMarg,
           ),
           child: Material(
             color: cardEnab_(context),
             borderRadius: BorderRadius.circular(AppCard.defRadius),
             clipBehavior: Clip.hardEdge,
             child: Padding(
-              padding: const EdgeInsets.all(Dimen.sideMarg),
+              padding: const EdgeInsets.all(Dimen.defMarg),
               child: SelectionArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -153,16 +153,16 @@ class KonspektStepWidget extends StatelessWidget{
       if(step.materials != null && step.materials!.isNotEmpty)
         Padding(
           padding: const EdgeInsets.only(
-            top: Dimen.defMarg,
-            left: Dimen.defMarg,
-            right: Dimen.defMarg,
+            top: Dimen.sideMarg,
+            left: Dimen.sideMarg,
+            right: Dimen.sideMarg,
           ),
           child: Material(
               color: cardEnab_(context),
               borderRadius: BorderRadius.circular(AppCard.defRadius),
               clipBehavior: Clip.hardEdge,
               child: Padding(
-                padding: const EdgeInsets.all(Dimen.sideMarg),
+                padding: const EdgeInsets.all(Dimen.defMarg),
                 child: SelectionArea(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
