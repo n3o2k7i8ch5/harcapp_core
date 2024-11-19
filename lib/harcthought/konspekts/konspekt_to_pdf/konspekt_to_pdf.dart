@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_classes/storage.dart';
-import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart';
 import 'package:printing/printing.dart';
@@ -76,7 +75,7 @@ Future<Widget> CoverWidget(Konspekt konspekt, Font font, bool withCover) async {
   );
 }
 
-Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconSize}) async => ClipRRect(
+Future<Widget> MetoTile(Meto meto, Font fontBold) async => ClipRRect(
     horizontalRadius: defRadius,
     verticalRadius: defRadius,
     child: Container(
@@ -88,8 +87,8 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
 
             SvgImage(
               svg: (await readStringFromAssets(meto.iconSvgPath))!,
-              width: defTextSize + 1.5 + defTextSize + 2,
-              height: defTextSize + 1.5 + defTextSize + 2,
+              width: defTextSize + 1 + defTextSize + 3,
+              height: defTextSize + 1 + defTextSize + 3,
             ),
 
             SizedBox(width: 3.0),
@@ -108,7 +107,7 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
                   ),
                 ),
 
-                SizedBox(height: 1.5),
+                SizedBox(height: 1),
 
                 Text(
                   meto.age,
@@ -132,27 +131,27 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
 Future<Widget> MetoListWidget(Konspekt konspekt, Font fontBold) async => Row(
   children: [
     if(konspekt.metos.contains(Meto.zuch))
-      await MetoTile(Meto.zuch, fontBold, iconSize: 42.0),
+      await MetoTile(Meto.zuch, fontBold),
     if(konspekt.metos.contains(Meto.zuch))
       SizedBox(width: elementSmallSeparator),
 
     if(konspekt.metos.contains(Meto.harc))
-      await MetoTile(Meto.harc, fontBold, iconSize: 42.0),
+      await MetoTile(Meto.harc, fontBold),
     if(konspekt.metos.contains(Meto.harc))
       SizedBox(width: elementSmallSeparator),
 
     if(konspekt.metos.contains(Meto.hs))
-      await MetoTile(Meto.hs, fontBold, iconSize: 42.0),
+      await MetoTile(Meto.hs, fontBold),
     if(konspekt.metos.contains(Meto.hs))
       SizedBox(width: elementSmallSeparator),
 
     if(konspekt.metos.contains(Meto.wedro))
-      await MetoTile(Meto.wedro, fontBold, iconSize: 42.0),
+      await MetoTile(Meto.wedro, fontBold),
     if(konspekt.metos.contains(Meto.wedro))
       SizedBox(width: elementSmallSeparator),
 
     if(konspekt.metos.contains(Meto.kadra))
-      await MetoTile(Meto.kadra, fontBold, iconSize: 42.0),
+      await MetoTile(Meto.kadra, fontBold),
 
   ],
 );
@@ -559,19 +558,26 @@ List<Widget> MaterialListWidget(
     Font fontBoldItalic,
     { bool showComment = true,
       bool showAdditionalPreparation = true,
-      PdfColor? backgroundColor
+      PdfColor? backgroundColor,
+      bool withHeader = true,
     }
 ){
 
-  List<Widget> widgets = [
+  List<Widget> widgets = [];
 
-    SizedBox(height: elementBigSeparator),
+  if(withHeader)
+    widgets.addAll(
+        [
 
-    HeaderWidget('Materiały', fontBold),
+          SizedBox(height: elementBigSeparator),
 
-    SizedBox(height: elementSmallSeparator),
+          HeaderWidget('Materiały', fontBold),
 
-  ];
+          SizedBox(height: elementSmallSeparator),
+
+        ]
+    );
+
 
   for(int i=0; i<materials.length; i++){
     widgets.add(
@@ -851,6 +857,7 @@ Future<List<Widget>> StepWidget(
                                   showComment: false,
                                   showAdditionalPreparation: false,
                                   backgroundColor: cardColor,
+                                  withHeader: false
                               ),
 
                             ]
