@@ -17,6 +17,7 @@ class KonspektMaterialTile extends StatelessWidget{
   final KonspektMaterial material;
   final Color? backgroundColor;
   final double textSize;
+  final bool showComment;
   final bool showAttachment;
   final bool showAdditionalPreparation;
   final double? maxDialogWidth;
@@ -26,6 +27,7 @@ class KonspektMaterialTile extends StatelessWidget{
       this.material,
       { this.backgroundColor,
         this.textSize = Dimen.textSizeBig,
+        this.showComment = true,
         this.showAttachment = true,
         this.showAdditionalPreparation = true,
         this.maxDialogWidth,
@@ -68,10 +70,10 @@ class KonspektMaterialTile extends StatelessWidget{
                     ],
                   ),
 
-                  if(material.comment != null)
+                  if(material.comment != null && showComment)
                     const SizedBox(height: Dimen.defMarg),
 
-                  if(material.comment != null)
+                  if(material.comment != null && showComment)
                     Text(
                         material.comment!,
                         style: AppTextStyle(fontSize: textSize, height: 1.2, color: hintEnab_(context))

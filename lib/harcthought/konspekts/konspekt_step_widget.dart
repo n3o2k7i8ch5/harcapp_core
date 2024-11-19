@@ -107,7 +107,12 @@ class KonspektStepWidget extends StatelessWidget{
             borderRadius: BorderRadius.circular(AppCard.defRadius),
             clipBehavior: Clip.hardEdge,
             child: Padding(
-              padding: const EdgeInsets.all(Dimen.defMarg),
+              padding: const EdgeInsets.only(
+                top: Dimen.defMarg,
+                left: Dimen.defMarg,
+                right: Dimen.defMarg,
+                bottom: Dimen.sideMarg
+              ),
               child: SelectionArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -134,6 +139,7 @@ class KonspektStepWidget extends StatelessWidget{
                       itemBuilder: (context, aimIndex) => Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          const SizedBox(width: Dimen.sideMarg - Dimen.defMarg),
                           Icon(MdiIcons.circleMedium, size: Dimen.textSizeNormal + 2),
                           const SizedBox(width: Dimen.defMarg),
                           Expanded(
@@ -196,6 +202,7 @@ class KonspektStepWidget extends StatelessWidget{
                           step.materials![materialIndex],
                           backgroundColor: background_(context),
                           textSize: Dimen.textSizeNormal,
+                          showComment: false,
                           showAttachment: false,
                           showAdditionalPreparation: false,
                           maxDialogWidth: maxDialogWidth

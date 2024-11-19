@@ -88,8 +88,8 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
 
             SvgImage(
               svg: (await readStringFromAssets(meto.iconSvgPath))!,
-              width: defTextSize + 3.0 + defTextSize,
-              height: defTextSize + 3.0 + defTextSize,
+              width: defTextSize + 1.5 + defTextSize + 2,
+              height: defTextSize + 1.5 + defTextSize + 2,
             ),
 
             SizedBox(width: 3.0),
@@ -108,7 +108,7 @@ Future<Widget> MetoTile(Meto meto, Font fontBold, {double iconSize = Dimen.iconS
                   ),
                 ),
 
-                SizedBox(height: 3.0),
+                SizedBox(height: 1.5),
 
                 Text(
                   meto.age,
@@ -335,7 +335,14 @@ Widget DurationWidget(Konspekt konspekt, Font font, Font fontBold){
               if(konspekt.duration == konspekt.requiredDuration)
                 Text(durationToString(konspekt.duration), style: TextStyle(font: font, fontSize: headerTextSize))
               else
-                Text('od ${durationToString(konspekt.requiredDuration)} do ${durationToString(konspekt.duration)}', style: TextStyle(font: font, fontSize: headerTextSize))
+                Row(
+                  children: [
+                    Text('od ', style: TextStyle(font: font, fontSize: headerTextSize)),
+                    Text('${durationToString(konspekt.requiredDuration)}', style: TextStyle(font: fontBold, fontSize: headerTextSize)),
+                    Text(' do ', style: TextStyle(font: font, fontSize: headerTextSize)),
+                    Text('${durationToString(konspekt.duration)}', style: TextStyle(font: fontBold, fontSize: headerTextSize))
+                  ]
+                )
 
             ]
         )
@@ -384,7 +391,15 @@ Future<List<Widget>> AimsWidget(
 
 }
 
-Widget MaterialAmountWidget(KonspektMaterial material, Font font, Font fontBold, Font fontItalic){
+Widget MaterialAmountWidget(
+    KonspektMaterial material,
+    Font font,
+    Font fontHalfBold,
+    Font fontBold,
+    Font fontItalic,
+    Font fontHalfBoldItalic,
+    Font fontBoldItalic,
+  ){
 
   if(material.amountAttendantFactor != null)
     return Row(
@@ -394,17 +409,17 @@ Widget MaterialAmountWidget(KonspektMaterial material, Font font, Font fontBold,
         Text(
           'x',
           style: TextStyle(
-            font: fontBold,
+            font: fontHalfBold,
             fontSize: headerTextSize,
           ),
         ),
 
-        SizedBox(width: elementSmallSeparator),
+        SizedBox(width: elementSmallSeparator/2),
 
         Text(
           '${material.amountAttendantFactor}',
           style: TextStyle(
-            font: fontBold,
+            font: fontHalfBold,
             fontSize: headerTextSize,
           ),
         ),
@@ -414,7 +429,7 @@ Widget MaterialAmountWidget(KonspektMaterial material, Font font, Font fontBold,
         Text(
           'Liczba\nuczest.',
           style: TextStyle(
-            font: fontBold,
+            font: fontHalfBold,
             fontSize: defTextTiny,
           ),
         )
@@ -449,7 +464,17 @@ Widget MaterialAmountWidget(KonspektMaterial material, Font font, Font fontBold,
 
 }
 
-Widget MaterialWidget(KonspektMaterial material, Font font, Font fontBold, Font fontItalic) => ClipRRect(
+Widget MaterialWidget(
+    KonspektMaterial material,
+    Font font,
+    Font fontHalfBold,
+    Font fontBold,
+    Font fontItalic,
+    Font fontHalfBoldItalic,
+    Font fontBoldItalic,
+    { bool showComment = true,
+      bool showAdditionalPreparation = true}
+) => ClipRRect(
   horizontalRadius: defRadius,
   verticalRadius: defRadius,
   child: Container(
@@ -468,24 +493,26 @@ Widget MaterialWidget(KonspektMaterial material, Font font, Font fontBold, Font 
                           style: TextStyle(font: font, fontSize: defTextSize)
                       )
                   ),
-                  if(material.amount != 0)
-                    MaterialAmountWidget(material, font, fontBold, fontItalic),
+                  if(material.hasAmount)
+                    SizedBox(width: elementSmallSeparator),
+                  if(material.hasAmount)
+                    MaterialAmountWidget(material, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic),
                 ]
             ),
 
-            if(material.comment != null)
+            if(material.comment != null && showComment)
               SizedBox(height: elementSmallSeparator),
 
-            if(material.comment != null)
+            if(material.comment != null && showComment)
               Text(
                   material.comment!,
                   style: TextStyle(font: font, fontSize: defTextSize, height: 1.2, color: PdfColors.grey)
               ),
 
-            if(material.additionalPreparation != null)
+            if(material.additionalPreparation != null && showAdditionalPreparation)
               SizedBox(height: elementSmallSeparator),
 
-            if(material.additionalPreparation != null)
+            if(material.additionalPreparation != null && showAdditionalPreparation)
               ClipRRect(
                   horizontalRadius: defRadius,
                   verticalRadius: defRadius,
@@ -514,17 +541,24 @@ Widget MaterialWidget(KonspektMaterial material, Font font, Font fontBold, Font 
                       )
                   )
               )
-
-]
+          ]
       )
     )
   )
 );
 
-List<Widget> MaterialListWidget(Konspekt konspekt, Font font, Font fontBold, Font fontItalic){
-
-  if(konspekt.materials == null)
-    return [];
+List<Widget> MaterialListWidget(
+    List<KonspektMaterial> materials,
+    Font font,
+    Font fontHalfBold,
+    Font fontBold,
+    Font fontItalic,
+    Font fontHalfBoldItalic,
+    Font fontBoldItalic,
+    { bool showComment = true,
+      bool showAdditionalPreparation = true,
+    }
+){
 
   List<Widget> widgets = [
 
@@ -536,9 +570,21 @@ List<Widget> MaterialListWidget(Konspekt konspekt, Font font, Font fontBold, Fon
 
   ];
 
-  for(int i=0; i<konspekt.materials!.length; i++){
-    widgets.add(MaterialWidget(konspekt.materials![i], font, fontBold, fontItalic));
-    if(i < konspekt.materials!.length - 1)
+  for(int i=0; i<materials.length; i++){
+    widgets.add(
+        MaterialWidget(
+            materials[i],
+            font,
+            fontHalfBold,
+            fontBold,
+            fontItalic,
+            fontHalfBoldItalic,
+            fontBoldItalic,
+            showComment: showComment,
+            showAdditionalPreparation: showAdditionalPreparation
+        )
+    );
+    if(i < materials.length - 1)
       widgets.add(SizedBox(height: elementSmallSeparator));
   }
 
@@ -729,7 +775,7 @@ Future<List<Widget>> StepWidget(
                 child: Container(
                     color: cardColor,
                     child: Padding(
-                        padding: EdgeInsets.all(2*elementSmallSeparator),
+                        padding: EdgeInsets.all(1.5*elementSmallSeparator),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -742,7 +788,7 @@ Future<List<Widget>> StepWidget(
                                   )
                               ),
 
-                              SizedBox(height: elementSmallSeparator),
+                              SizedBox(height: 1.5*elementSmallSeparator),
 
                               ...await StringListWidget(
                                   step.aims!,
@@ -752,6 +798,54 @@ Future<List<Widget>> StepWidget(
                                   fontItalic,
                                   fontHalfBoldItalic,
                                   fontBoldItalic
+                              ),
+
+                            ]
+                        )
+                    )
+                )
+            )
+        )
+    );
+
+  if(step.materials != null)
+    widgets.add(
+        Padding(
+            padding: EdgeInsets.only(
+              top: .5*elementBigSeparator,
+              left: numberCircleSize + .5*elementBigSeparator,
+            ),
+            child: ClipRRect(
+                horizontalRadius: defRadius,
+                verticalRadius: defRadius,
+                child: Container(
+                    color: cardColor,
+                    child: Padding(
+                        padding: EdgeInsets.all(1.5*elementSmallSeparator),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+
+                              Text(
+                                  'Materiały kroku',
+                                  style: TextStyle(
+                                    font: fontBold,
+                                    fontSize: defTextSize,
+                                  )
+                              ),
+
+                              SizedBox(height: 1.5*elementSmallSeparator),
+
+                              ...await MaterialListWidget(
+                                  step.materials!,
+                                  font,
+                                  fontHalfBold,
+                                  fontBold,
+                                  fontItalic,
+                                  fontHalfBoldItalic,
+                                  fontBoldItalic,
+                                  showComment: false,
+                                  showAdditionalPreparation: false
                               ),
 
                             ]
@@ -942,7 +1036,8 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
 
   multiPage.addAll(await AimsWidget(konspekt, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
-  multiPage.addAll(MaterialListWidget(konspekt, font, fontBold, fontItalic));
+  if(konspekt.materials != null)
+    multiPage.addAll(MaterialListWidget(konspekt.materials!, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
   multiPage.addAll(await IntroWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
