@@ -187,9 +187,37 @@ KonspektStep step_poziomy_duchowosci = KonspektStep(
 
 );
 
+KonspektStep step_poziomy_duchowosci_aksjomat = KonspektStep(
+  title: 'Poziomy (warstwy) rozwoju duchowego - aksjomat',
+  duration: Duration(minutes: 15),
+  activeForm: false,
+  content: '<p style="text-align:justify;">'
+      'Poziom zachowań, postaw i wartości są dla większości osób zrozumiałe, jednak poziom aksjomatu może być nieintuicyjny. Z tego względu, po zdefiniowaniu wszystkich czterech poziomów duchowości, prowadzący zatrzymuje się dłużej nad tym zagadnieniem.'
+      '<br>'
+      '<br>Prowadzący podaje kilka przykładów aksjomatów, np.:'
+      '</p>'
+
+      '<ul>'
+      '<li><p style="text-align:justify;">“Świat stworzył przypadek. Świadomość człowieka jest iluzją fizyki, nie ma żadnego celu.”</p></li>'
+      '<li><p style="text-align:justify;">“Świat stworzyła wróżka. Ludzie są powiewami meta-powietrza jej tchnienia. Po śmierci człowiek może również stać się wróżką, jeśli wchłonie odpowiednio dużo energii wszechświata poprzez medytację.”</p></li>'
+      '<li><p style="text-align:justify;">“Wszystko jest iluzją. Istnieję tylko ja, reszta to zaprogramowane postaci w mojej głowie. Iluzja ta pryśnie, jeśli wszyscy ludzie uwierzą, że w niej żyją.”</p></li>'
+      '<li><p style="text-align:justify;">“Świat stworzył trójjedyny Bóg, powołał człowieka na swój obraz, by doświadczył miłości.”</p></li>'
+      '</ul>'
+
+      '<p style="text-align:justify;">'
+      '<b>Aksjomat porządkuje w sposób całkowity postrzeganie rzeczywistości</b>. Aby to zobrazować, prowadzący może posłużyć się przykładem:'
+      '<br>'
+      '<br><i>"Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie.'
+      '<br>'
+      '<br>Przykładowo, jeśli zobaczy dowód na to, że Ziemia jest kulą, to wniosek będzie tylko jeden: narzędzia użyte przy tych dowodach były wadliwe.'
+      '<br>'
+      '<br>Czy to powinno zaskakiwać? Przecież my, gdybyśmy zobaczyli spójny dowód na to, światem rządzą reptilianie, też uznalibyśmy, że ktoś musiał się pomylić."</i>'
+      '</p>'
+);
+
 KonspektStep step_integracja_duchowosci = KonspektStep(
     title: 'Integracja duchowości',
-    duration: Duration(minutes: 20),
+    duration: Duration(minutes: 15),
     activeForm: false,
     contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
         'Prowadzący na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci opisuje <b>etapy rozwoju duchowego</b> - w pierwszym etapie dzieci są zdolne rozumieć właściwe zachowania, na podstawie których kregują swoje postawy, w wieku ok. 10 lat pojawia się u nich zdolność myślenia abstrakcyjnego i operowanie na poziomie wartości, które następnie, w wieku ok. 15 lat są porządkowane w światopogląd i internalizowane jest pojęcie aksjomatu.'
