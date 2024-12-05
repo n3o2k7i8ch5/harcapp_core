@@ -225,7 +225,8 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
                 style: AppTextStyle(
                   fontWeight: weight.halfBold,
                   color: hintEnab_(context),
-                  fontSize: Dimen.textSizeBig
+                  fontSize: Dimen.textSizeBig,
+                  height: 1.2
                 ),
                 textAlign: TextAlign.center,
               ),
