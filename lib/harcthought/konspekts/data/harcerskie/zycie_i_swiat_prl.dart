@@ -280,6 +280,18 @@ KonspektAttachment attach_sekretarz_jaruzelski = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
 );
 
+const String attach_html_plakaty = '<a href="${attach_name_plakaty}@attachment">${attach_title_plakaty}</a>';
+const String attach_name_plakaty = "plakaty";
+const String attach_title_plakaty = "Plakaty propagandowe";
+KonspektAttachment attach_plakaty = KonspektAttachment(
+    name: attach_name_plakaty,
+    title: attach_title_plakaty,
+    assets: {
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'plakaty.pdf'),
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
+);
+
 Konspekt zycie_i_swiat_prl = Konspekt(
     name: _konspekt_name,
     title: 'Życie i świat PRL',
@@ -363,7 +375,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
       ),
 
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_mapa_glowna"',
+          name: 'Wydrukowany załącznik “$attach_title_mapa_glowna"',
           attachmentName: attach_name_mapa_glowna,
           amount: 1,
           comment: "Załącznik stworzony przy użyciu strony rasterbator.net",
@@ -477,6 +489,13 @@ Konspekt zycie_i_swiat_prl = Konspekt(
           attachmentName: attach_name_sekretarz_jaruzelski,
           amount: 1
       ),
+
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$attach_title_plakaty"',
+          attachmentName: attach_name_plakaty,
+          amount: 1,
+          comment: 'Plakaty są jedynie elementem dekoracyjnym. Można je porozwieszać w różnych miejscach.'
+      )
 
     ],
     intro: '<p style="text-align:justify;">'
