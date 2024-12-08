@@ -1012,6 +1012,8 @@ Konspekt zycie_i_swiat_prl = Konspekt(
       attach_sekretarz_bierut,
       attach_sekretarz_gomulka,
       attach_sekretarz_gierek,
-      attach_sekretarz_jaruzelski
+      attach_sekretarz_jaruzelski,
+
+      attach_plakaty,
     ]
 );
