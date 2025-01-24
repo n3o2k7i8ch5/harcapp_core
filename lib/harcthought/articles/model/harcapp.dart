@@ -6,12 +6,12 @@ import 'article.dart';
 import 'common.dart';
 
 
-class ArticleHarcApp extends Article{
+class CoreArticleHarcApp extends CoreArticle{
 
   @override
   ArticleSource get source => ArticleSource.harcApp;
 
-  ArticleHarcApp(
+  CoreArticleHarcApp(
       super.localId,
       { required super.title,
         super.tags,
@@ -51,16 +51,16 @@ class ArticleHarcApp extends Article{
   //
   // }
 
-  static ArticleHarcApp fromJson(String id, String code) {
+  static CoreArticleHarcApp fromJson(String id, String code) {
 
     Map<String, Object> map = jsonDecode(code);
 
-    final String title = map[Article.paramTitle] as String;
-    final List<String> tags = map[Article.paramTags] as List<String>;
-    final String author = map[Article.paramAuthor] as String;
-    final DateTime date = DateTime.parse(map[Article.paramDate] as String);
+    final String title = map[CoreArticle.paramTitle] as String;
+    final List<String> tags = map[CoreArticle.paramTags] as List<String>;
+    final String author = map[CoreArticle.paramAuthor] as String;
+    final DateTime date = DateTime.parse(map[CoreArticle.paramDate] as String);
 
-    final List<dynamic> items = map[Article.paramArtclItems] as List<dynamic>;
+    final List<dynamic> items = map[CoreArticle.paramArtclItems] as List<dynamic>;
 
     List<ArticleElement> articleElements = [];
     for(dynamic item in items){
@@ -68,8 +68,8 @@ class ArticleHarcApp extends Article{
       if(element != null) articleElements.add(element);
     }
 
-    return ArticleHarcApp(
-      id.split(Article.uniqNameSep)[1],
+    return CoreArticleHarcApp(
+      id.split(CoreArticle.uniqNameSep)[1],
       title: title,
       tags: tags,
       date: date,

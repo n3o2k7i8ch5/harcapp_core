@@ -51,7 +51,7 @@ enum ArticleSource{
 
 }
 
-abstract class Article{
+abstract class CoreArticle{
 
   static Map<String, Tuple2<String, int>>? altCoverUrls;
 
@@ -185,7 +185,7 @@ abstract class Article{
   //   return file;
   // }
 
-  Article(
+  CoreArticle(
       String localId,
       { required this.title,
         required this.tags,
@@ -416,7 +416,7 @@ abstract class Article{
   int get hashCode => uniqName.hashCode;
 
   @override
-  bool operator == (Object other) => other is Article && uniqName == other.uniqName;
+  bool operator == (Object other) => other is CoreArticle && uniqName == other.uniqName;
 
 }
 

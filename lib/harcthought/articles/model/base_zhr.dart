@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,7 @@ class BaseZhrArticleData{
 
 }
 
-abstract class BaseZhrArticle extends Article{
+abstract class BaseZhrArticle extends CoreArticle{
 
   final String link;
 
@@ -159,12 +158,12 @@ abstract class BaseZhrArticle extends Article{
 
     Map<String, dynamic> map = jsonDecode(code);
 
-    final String title = map[Article.paramTitle] as String;
-    final List<String> tags = ((map[Article.paramTags]??[]) as List).cast<String>();
-    final String author = map[Article.paramAuthor] as String;
-    final DateTime date = DateTime.parse(map[Article.paramDate] as String);
-    final String link = map[Article.paramLink] as String;
-    final List<dynamic> items = map[Article.paramArtclItems] as List<dynamic>;
+    final String title = map[CoreArticle.paramTitle] as String;
+    final List<String> tags = ((map[CoreArticle.paramTags]??[]) as List).cast<String>();
+    final String author = map[CoreArticle.paramAuthor] as String;
+    final DateTime date = DateTime.parse(map[CoreArticle.paramDate] as String);
+    final String link = map[CoreArticle.paramLink] as String;
+    final List<dynamic> items = map[CoreArticle.paramArtclItems] as List<dynamic>;
 
 
     List<ArticleElement> articleElements = [];
@@ -177,7 +176,7 @@ abstract class BaseZhrArticle extends Article{
       articleElements.removeAt(articleElements.length-1);
 
     return BaseZhrArticleData(
-      id.split(Article.uniqNameSep)[1],
+      id.split(CoreArticle.uniqNameSep)[1],
       title: title,
       tags: tags,
       date: date,
@@ -190,7 +189,7 @@ abstract class BaseZhrArticle extends Article{
 
   static Future<img.Image?> _coverFromHtmlLink(String link) async{
     try{
-      String htmlFile = await Article.downloadFile(link);
+      String htmlFile = await CoreArticle.downloadFile(link);
 
       String imageLink = htmlFile.split('<meta property="og:image" content="')[1];
       imageLink = imageLink.split('" />')[0];
