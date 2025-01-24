@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'storage_io.dart'
 if(dart.library.io) 'storage_io.dart'
 if(dart.library.html) 'storage_web.dart';
@@ -26,4 +29,12 @@ Future<dynamic> openAsset(String assetPath, {bool webOpenInNewTab = false}) asyn
     return openAssetImpl(assetPath, webOpenInNewTab: webOpenInNewTab);
   else
     return openAssetImpl(assetPath);
+}
+
+Future<String> downloadFileAsString(String url) async {
+  var httpClient = HttpClient();
+  var request = await httpClient.getUrl(Uri.parse(url));
+  var response = await request.close();
+  var bytes = await consolidateHttpClientResponseBytes(response);
+  return utf8.decode(bytes);
 }

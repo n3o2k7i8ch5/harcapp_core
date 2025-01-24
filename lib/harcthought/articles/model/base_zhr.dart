@@ -1,0 +1,245 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:html/dom.dart' as html_dom;
+import 'package:html/parser.dart';
+import 'package:webfeed_plus/domain/atom_item.dart';
+import 'package:http/http.dart' show get;
+import 'package:image/image.dart' as img;
+
+import 'article.dart';
+import 'common.dart';
+
+class BaseZhrArticleData{
+
+  final String localId;
+  final String title;
+  final List<String> tags;
+  final DateTime date;
+  final String author;
+  final String link;
+  final List<ArticleElement> articleElements;
+
+  const BaseZhrArticleData(
+      this.localId,
+      {required this.title,
+        required this.tags,
+        required this.date,
+        required this.author,
+        required this.link,
+        required this.articleElements
+      });
+
+}
+
+abstract class BaseZhrArticle extends Article{
+
+  final String link;
+
+  BaseZhrArticle(
+      super.localId,
+      {required super.title,
+        required List<String> super.tags,
+        required super.date,
+        required super.author,
+        required this.link,
+        required super.articleElements
+      });
+
+  static List<ArticleElement>? _noteToArticleElement(var node){
+
+    if(node is html_dom.Comment) {
+      if(node.data == null || node.data!.replaceAll('\n', '').isEmpty) return null;
+      return [ParagraphArticleElement(text: node.data!)];
+    }
+
+    else if(node is html_dom.Text) {
+      if(node.text.replaceAll('\n', '').isEmpty) return null;
+      return [ParagraphArticleElement(text: node.text)];
+
+    } else if(node is html_dom.Element) {
+      if (node.localName == 'p') {
+        if(node.text.replaceAll('\n', '').isEmpty) return null;
+        return [ParagraphArticleElement(text: node.text)];
+
+      }else if (node.localName!.startsWith('h')) {
+        if(node.text.isEmpty) return null;
+        return [HeaderArticleElement(text: node.text)];
+
+      }else if (node.localName == 'ul') {
+
+        List<ListItemArticleElement> result = [];
+        for(var subNode in node.nodes){
+          if(subNode is! html_dom.Element) continue;
+          if(subNode.localName != 'li') continue;
+          if(subNode.text.replaceAll('\n', '').isEmpty) continue;
+          result.add(ListItemArticleElement(index: null, text: subNode.text));
+        }
+        return result;
+
+      }else if (node.localName == 'ol') {
+
+        int index = int.tryParse(node.attributes['start']??'')??1;
+
+        List<ListItemArticleElement> result = [];
+        for(var subNode in node.nodes){
+          if(subNode is! html_dom.Element) continue;
+          if(subNode.localName != 'li') continue;
+          if(subNode.text.replaceAll('\n', '').isEmpty) continue;
+          result.add(ListItemArticleElement(index: index++, text: subNode.text));
+        }
+        return result;
+
+      }else if (node.localName == 'div' && node.attributes['class'] == 'wp-block-image') {
+
+        var figureNode = node.nodes.firstWhere((subNode) =>
+        subNode is html_dom.Element && subNode.localName == 'figure');
+
+        String? imageLink;
+        String? desc;
+        for (var subNode in figureNode.nodes) {
+          subNode as html_dom.Element;
+          if (subNode.localName == 'img') imageLink = subNode.attributes['src'];
+          if (subNode.localName == 'figcaption') desc = subNode.text;
+        }
+
+        if (imageLink != null)
+          return [PictureArticleElement(link: imageLink, desc: desc)];
+        else
+          return null;
+
+      } else
+        return [CustomArticleElement(html: node.outerHtml)];
+
+    } else
+      return null;
+
+  }
+
+  static BaseZhrArticleData fromAtomItem(AtomItem item){
+
+    List<String> tags = item.categories!.map((cat) => '#${cat.term!.toUpperCase()}').toList();
+
+    String text = item.content!.replaceAll('<br>', '\n');
+
+    var nodes = parse(text).nodes[0].nodes[1].nodes;
+    nodes.removeWhere((node) => node is html_dom.Text && node.text.replaceAll('\n', '').isEmpty);
+
+    try {
+      // Remove "pobierz PDF"
+      nodes.removeAt(0);
+
+      // Remove "artykuł pobrano z ..."
+      nodes.removeLast();
+    }catch(e){}
+
+    List<ArticleElement> artElements = [];
+    for(var node in nodes){
+      List<ArticleElement>? elements = _noteToArticleElement(node);
+      if(elements != null)
+        artElements.addAll(elements);
+    }
+
+    String localId = item.id!.split("?p=")[1];
+
+    return BaseZhrArticleData(
+      localId,
+      title: item.title??(throw Exception('No title in atom item')),
+      tags: tags,
+      author: item.authors![0].name??(throw Exception('No author name in atom item')),
+      date: DateTime.tryParse(item.published!)??(throw Exception('No publish date in atom item')),
+      link: item.links![0].href!,
+      articleElements: artElements,
+    );
+  }
+
+  static BaseZhrArticleData fromJson(String id, String code) {
+
+    Map<String, dynamic> map = jsonDecode(code);
+
+    final String title = map[Article.paramTitle] as String;
+    final List<String> tags = ((map[Article.paramTags]??[]) as List).cast<String>();
+    final String author = map[Article.paramAuthor] as String;
+    final DateTime date = DateTime.parse(map[Article.paramDate] as String);
+    final String link = map[Article.paramLink] as String;
+    final List<dynamic> items = map[Article.paramArtclItems] as List<dynamic>;
+
+
+    List<ArticleElement> articleElements = [];
+    for(dynamic item in items){
+      ArticleElement? element = ArticleElement.decode(item);
+      if(element != null) articleElements.add(element);
+    }
+
+    if(articleElements.isNotEmpty)
+      articleElements.removeAt(articleElements.length-1);
+
+    return BaseZhrArticleData(
+      id.split(Article.uniqNameSep)[1],
+      title: title,
+      tags: tags,
+      date: date,
+      link: link,
+      author: author,
+      articleElements: articleElements,
+    );
+
+  }
+
+  static Future<img.Image?> _coverFromHtmlLink(String link) async{
+    try{
+      String htmlFile = await Article.downloadFile(link);
+
+      String imageLink = htmlFile.split('<meta property="og:image" content="')[1];
+      imageLink = imageLink.split('" />')[0];
+      imageLink = imageLink.split('"/>')[0];
+      var response = await get(Uri.parse(imageLink));
+
+      img.Image image = img.decodeImage(response.bodyBytes.buffer.asUint8List())!;
+
+      image = img.copyResize(image, width: 1000);
+      return image;
+    }catch(_){
+      return null;
+    }
+  }
+
+  @override
+  @protected
+  Future<ImageProvider?> downloadCover() async {
+    img.Image? image = await compute(_coverFromHtmlLink, link);
+    if(image == null) return null;
+    return MemoryImage(Uint8List.fromList(img.encodeJpg(image, quality: 80)));
+  }
+
+  // @override
+  // @protected
+  // Future<ImageProvider<Object>?> handleLoadCover() async {
+  //   File file = File(getArticleCoverPath(source, uniqName));
+  //   if(file.existsSync())
+  //     return MemoryImage(file.readAsBytesSync());
+  //
+  //   img.Image? image;
+  //   if(Article.altCoverUrls != null && Article.altCoverUrls!.containsKey(uniqName)) {
+  //     File imageFile = await Article.downloadSaveCover(
+  //         source: source,
+  //         id: uniqName,
+  //         url: Article.altCoverUrls![uniqName]!.item1,
+  //         version: Article.altCoverUrls![uniqName]!.item2
+  //     );
+  //     return MemoryImage(imageFile.readAsBytesSync());
+  //   }
+  //   else {
+  //     image = await compute(_coverFromHtmlLink, link);
+  //     if(image == null) return null;
+  //
+  //     file.createSync(recursive: true);
+  //     file.writeAsBytesSync(Uint8List.fromList(img.encodeJpg(image, quality: 80)));
+  //     logger.d('Saved article cover to ${basename(file.path)}');
+  //     return MemoryImage(file.readAsBytesSync());
+  //   }
+  // }
+
+}

@@ -40,6 +40,7 @@ dependencies:
   tuple: ^2.0.2
   url_launcher: ^6.1.11
   uuid: ^3.0.7
+  webfeed_plus: ^1.0.1+1
   youtube_player_flutter: ^9.1.1
 
 dev_dependencies:
