@@ -1,15 +1,12 @@
 import 'dart:convert';
 
 import 'article.dart';
+import 'article_identifier.dart';
 import 'article_source.dart';
 import 'common.dart';
 
-class ArticleData{
+class ArticleData extends ArticleIdentifier{
 
-  static const String uniqNameSep = '@';
-
-  final String localId;
-  final ArticleSource source;
   final String title;
   final List<String> tags;
   final DateTime date;
@@ -18,8 +15,8 @@ class ArticleData{
   final List<ArticleElement> articleElements;
 
   const ArticleData(
-      this.localId,
-      this.source,
+      super.localId,
+      super.source,
       { required this.title,
         required this.tags,
         required this.date,
@@ -50,9 +47,9 @@ class ArticleData{
       articleElements.removeAt(articleElements.length-1);
 
     return ArticleData(
-      id.split(CoreArticle.uniqNameSep)[1],
-      ArticleSource.fromName(id.split(CoreArticle.uniqNameSep)[0])??
-          (throw NoSuchArticleSourceException(id.split(CoreArticle.uniqNameSep)[0])),
+      id.split(ArticleIdentifier.uniqNameSep)[1],
+      ArticleSource.fromName(id.split(ArticleIdentifier.uniqNameSep)[0])??
+          (throw NoSuchArticleSourceException(id.split(ArticleIdentifier.uniqNameSep)[0])),
       title: title,
       tags: tags,
       date: date,

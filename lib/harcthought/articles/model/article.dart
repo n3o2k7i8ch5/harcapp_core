@@ -4,6 +4,7 @@ import 'package:tuple/tuple.dart';
 import 'package:image/image.dart' as img;
 
 import 'article_data.dart';
+import 'article_identifier.dart';
 
 
 abstract class CoreArticle extends ArticleData{
@@ -53,8 +54,6 @@ abstract class CoreArticle extends ArticleData{
   //   }
   // }
 
-  static const String uniqNameSep = '@';
-
   static const String paramTitle = 'title';
   static const String paramTags = 'tags';
   static const String paramAuthor = 'author';
@@ -72,7 +71,7 @@ abstract class CoreArticle extends ArticleData{
   static const String paramBookmarked = 'bookmarked';
   static const String paramSeen = 'seen';
 
-  String get uniqName => source.name + uniqNameSep + localId;
+  String get uniqName => source.name + ArticleIdentifier.uniqNameSep + localId;
 
   String get dateString => dateToString(date, shortMonth: true, yearAbbr: 'A.D.');
 
@@ -139,7 +138,7 @@ abstract class CoreArticle extends ArticleData{
         required super.date,
         required super.link,
         required super.articleElements,
-      }): assert(!localId.contains(uniqNameSep));
+      }): assert(!localId.contains(ArticleIdentifier.uniqNameSep));
         // _localId = localId;
 
   // bool get downloaded => File(getArticleCorePath(source, uniqName)).existsSync();
