@@ -71,8 +71,6 @@ abstract class CoreArticle extends ArticleData{
   static const String paramBookmarked = 'bookmarked';
   static const String paramSeen = 'seen';
 
-  String get uniqName => source.name + ArticleIdentifier.uniqNameSep + localId;
-
   String get dateString => dateToString(date, shortMonth: true, yearAbbr: 'A.D.');
 
   // int? seenCount;
