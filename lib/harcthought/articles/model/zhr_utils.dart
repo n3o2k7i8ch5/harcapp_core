@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:html/dom.dart' as html_dom;
 import 'package:html/parser.dart';
@@ -138,10 +137,10 @@ abstract class ZHRUtils{
     }
   }
 
-  static Future<ImageProvider?> downloadCover(String link) async {
+  static Future<img.Image?> downloadCover(String link) async {
     img.Image? image = await compute(_coverFromHtmlLink, link);
     if(image == null) return null;
-    return MemoryImage(Uint8List.fromList(img.encodeJpg(image, quality: 80)));
+    return image;
   }
 
   // @override

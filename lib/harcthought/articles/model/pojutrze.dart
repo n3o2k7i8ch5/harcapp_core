@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:webfeed_plus/domain/atom_item.dart';
+import 'package:image/image.dart' as img;
 
 import 'article.dart';
 import 'article_data.dart';
@@ -15,7 +16,7 @@ mixin ArticlePojutrzeMixin on CoreArticle{
 
   @override
   @protected
-  Future<ImageProvider?> downloadCover() async {
+  Future<img.Image?> downloadCover() async {
     return ZHRUtils.downloadCover(link);
   }
 

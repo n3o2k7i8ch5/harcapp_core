@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:tuple/tuple.dart';
+import 'package:image/image.dart' as img;
 
 import 'article_source.dart';
 import 'common.dart';
@@ -308,7 +309,7 @@ abstract class CoreArticle{
   // Future<ImageProvider?>? handleLoadCover();
 
   @protected
-  Future<ImageProvider?> downloadCover();
+  Future<img.Image?> downloadCover();
 
 
   // Future<ImageProvider?> loadCover() async{
