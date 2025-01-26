@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:harcapp_core/comm_classes/storage.dart';
+import 'package:harcapp_core/harcthought/articles/model/article_source.dart';
 import 'package:html/dom.dart' as html_dom;
 import 'package:html/parser.dart';
 import 'package:webfeed_plus/domain/atom_item.dart';
@@ -82,7 +83,7 @@ abstract class ZHRUtils{
 
   }
 
-  static ArticleData fromAtomItem(AtomItem item){
+  static ArticleData fromAtomItem(ArticleSource source, AtomItem item){
 
     List<String> tags = item.categories!.map((cat) => '#${cat.term!.toUpperCase()}').toList();
 
@@ -110,6 +111,7 @@ abstract class ZHRUtils{
 
     return ArticleData(
       localId,
+      source,
       title: item.title??(throw Exception('No title in atom item')),
       tags: tags,
       author: item.authors![0].name??(throw Exception('No author name in atom item')),

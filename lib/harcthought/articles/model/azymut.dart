@@ -9,14 +9,12 @@ import 'zhr_utils.dart';
 
 mixin ArticleAzymutMixin on CoreArticle{
 
-  @override
-  ArticleSource get source => ArticleSource.azymut;
-
-  static ArticleData fromAtomItem(AtomItem item) => ZHRUtils.fromAtomItem(item);
+  static ArticleData fromAtomItem(AtomItem item) => ZHRUtils.fromAtomItem(
+      ArticleSource.azymut, item
+  );
 
   @override
   @protected
   Future<img.Image?> downloadCover() async => ZHRUtils.downloadCover(link);
-
 
 }

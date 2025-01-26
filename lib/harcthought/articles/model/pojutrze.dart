@@ -9,10 +9,9 @@ import 'zhr_utils.dart';
 
 mixin ArticlePojutrzeMixin on CoreArticle{
 
-  @override
-  ArticleSource get source => ArticleSource.pojutrze;
-
-  static ArticleData fromAtomItem(AtomItem item) => ZHRUtils.fromAtomItem(item);
+  static ArticleData fromAtomItem(AtomItem item) => ZHRUtils.fromAtomItem(
+      ArticleSource.pojutrze, item
+  );
 
   @override
   @protected

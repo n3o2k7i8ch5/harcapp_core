@@ -43,3 +43,12 @@ enum ArticleSource{
   static Widget get icon => Icon(MdiIcons.bookOpenBlankVariant, size: 16.0);
 
 }
+
+class NoSuchArticleSourceException implements Exception{
+  final String sourceName;
+
+  NoSuchArticleSourceException(this.sourceName);
+
+  @override
+  String toString() => 'No such article source: $sourceName';
+}

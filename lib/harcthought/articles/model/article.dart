@@ -4,8 +4,6 @@ import 'package:tuple/tuple.dart';
 import 'package:image/image.dart' as img;
 
 import 'article_data.dart';
-import 'article_source.dart';
-import 'common.dart';
 
 
 abstract class CoreArticle extends ArticleData{
@@ -76,17 +74,7 @@ abstract class CoreArticle extends ArticleData{
 
   String get uniqName => source.name + uniqNameSep + localId;
 
-  // final String _localId;
-  //
-  // final String title;
-  // final List<String> tags;
-  // final DateTime date;
-  // final String author;
   String get dateString => dateToString(date, shortMonth: true, yearAbbr: 'A.D.');
-  // final String link;
-  // final List<ArticleElement> articleElements;
-
-  ArticleSource get source;
 
   // int? seenCount;
   // int? likeCount;
@@ -144,6 +132,7 @@ abstract class CoreArticle extends ArticleData{
 
   CoreArticle(
       super.localId,
+      super.source,
       { required super.title,
         required super.tags,
         required super.author,
