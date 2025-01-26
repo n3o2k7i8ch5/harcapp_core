@@ -86,7 +86,7 @@ abstract class CoreArticle{
   final DateTime date;
   final String author;
   String get dateString => dateToString(date, shortMonth: true, yearAbbr: 'A.D.');
-  final String? link;
+  final String link;
   final List<ArticleElement> articleElements;
 
   ArticleSource get source;
@@ -151,7 +151,7 @@ abstract class CoreArticle{
         required this.tags,
         required this.author,
         required this.date,
-        this.link,
+        required this.link,
         required this.articleElements,
       }): assert(!localId.contains(uniqNameSep)),
         _localId = localId;

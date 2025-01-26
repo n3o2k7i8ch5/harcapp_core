@@ -1,49 +1,22 @@
+import 'package:flutter/widgets.dart';
 import 'package:webfeed_plus/domain/atom_item.dart';
 
+import 'article.dart';
+import 'article_data.dart';
 import 'article_source.dart';
-import 'base_zhr.dart';
+import 'zhr_utils.dart';
 
-class ArticleAzymut extends BaseZhrArticle{
+mixin ArticleAzymut on CoreArticle{
 
   @override
   ArticleSource get source => ArticleSource.azymut;
 
-  ArticleAzymut(
-      super.localId,
-      { required super.title,
-        required super.tags,
-        required super.date,
-        required super.author,
-        required super.link,
-        required super.articleElements
-      });
+  static ArticleData fromAtomItem(AtomItem item) => ZHRUtils.fromAtomItem(item);
 
-  static ArticleAzymut fromJson(String id, String code) {
-    BaseZhrArticleData data = BaseZhrArticle.fromJson(id, code);
-
-    return ArticleAzymut(
-        data.localId,
-        title: data.title,
-        tags: data.tags,
-        date: data.date,
-        author: data.author,
-        link: data.link,
-        articleElements: data.articleElements
-    );
-  }
-
-  static ArticleAzymut fromAtomItem(AtomItem item){
-    BaseZhrArticleData data = BaseZhrArticle.fromAtomItem(item);
-
-    return ArticleAzymut(
-      data.localId,
-      title: data.title,
-      tags: data.tags,
-      date: data.date,
-      author: data.author,
-      link: data.link,
-      articleElements: data.articleElements
-    );
+  @override
+  @protected
+  Future<ImageProvider?> downloadCover() async {
+    return ZHRUtils.downloadCover(link);
   }
 
 }
