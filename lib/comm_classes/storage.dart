@@ -38,3 +38,11 @@ Future<String> downloadFileAsString(String url) async {
   var bytes = await consolidateHttpClientResponseBytes(response);
   return utf8.decode(bytes);
 }
+
+Future<String> downloadFile(String url) async {
+  var httpClient = HttpClient();
+  var request = await httpClient.getUrl(Uri.parse(url));
+  var response = await request.close();
+  var bytes = await consolidateHttpClientResponseBytes(response);
+  return utf8.decode(bytes);
+}

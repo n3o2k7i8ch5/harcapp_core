@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:html/dom.dart' as html_dom;
 import 'package:html/parser.dart';
 import 'package:webfeed_plus/domain/atom_item.dart';
 import 'package:http/http.dart' show get;
 import 'package:image/image.dart' as img;
 
-import 'article.dart';
 import 'article_data.dart';
 import 'common.dart';
 
@@ -122,7 +122,7 @@ abstract class ZHRUtils{
 
   static Future<img.Image?> _coverFromHtmlLink(String link) async{
     try{
-      String htmlFile = await CoreArticle.downloadFile(link);
+      String htmlFile = await downloadFile(link);
 
       String imageLink = htmlFile.split('<meta property="og:image" content="')[1];
       imageLink = imageLink.split('" />')[0];

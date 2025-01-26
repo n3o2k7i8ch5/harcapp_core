@@ -6,7 +6,7 @@ import 'article_data.dart';
 import 'article_source.dart';
 import 'zhr_utils.dart';
 
-mixin ArticleAzymut on CoreArticle{
+mixin ArticleAzymutMixin on CoreArticle{
 
   @override
   ArticleSource get source => ArticleSource.azymut;

@@ -6,7 +6,7 @@ import 'article_data.dart';
 import 'article_source.dart';
 import 'zhr_utils.dart';
 
-mixin ArticlePojutrze on CoreArticle{
+mixin ArticlePojutrzeMixin on CoreArticle{
 
   @override
   ArticleSource get source => ArticleSource.pojutrze;
