@@ -23,7 +23,7 @@ class BaseZhrArticleData{
 
   const BaseZhrArticleData(
       this.localId,
-      {required this.title,
+      { required this.title,
         required this.tags,
         required this.date,
         required this.author,
@@ -47,7 +47,7 @@ abstract class BaseZhrArticle extends CoreArticle{
         required super.articleElements
       });
 
-  static List<ArticleElement>? _noteToArticleElement(var node){
+  static List<ArticleElement>? _nodeToArticleElement(var node){
 
     if(node is html_dom.Comment) {
       if(node.data == null || node.data!.replaceAll('\n', '').isEmpty) return null;
@@ -136,7 +136,7 @@ abstract class BaseZhrArticle extends CoreArticle{
 
     List<ArticleElement> artElements = [];
     for(var node in nodes){
-      List<ArticleElement>? elements = _noteToArticleElement(node);
+      List<ArticleElement>? elements = _nodeToArticleElement(node);
       if(elements != null)
         artElements.addAll(elements);
     }

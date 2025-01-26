@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart' hide Element;
 
 import 'article.dart';
+import 'article_source.dart';
 import 'common.dart';
 
 
@@ -100,9 +100,9 @@ class CoreArticleHarcApp extends CoreArticle{
 
   @override
   @override
-  Future<ImageProvider?> downloadCover() {
-    // TODO: implement getCover
-    throw UnimplementedError();
+  Future<ImageProvider?> downloadCover() async {
+    String downloadUrl = "https://gitlab.com/n3o2k7i8ch5/harcapp_data/raw/master/...";
+    return null;
   }
 
 }

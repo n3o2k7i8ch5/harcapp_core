@@ -1,6 +1,6 @@
 import 'package:webfeed_plus/domain/atom_item.dart';
 
-import 'article.dart';
+import 'article_source.dart';
 import 'base_zhr.dart';
 
 class ArticleAzymut extends BaseZhrArticle{
