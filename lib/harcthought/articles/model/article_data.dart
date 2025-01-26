@@ -23,7 +23,6 @@ class ArticleData{
         required this.articleElements
       });
 
-
   static ArticleData fromJson(String id, String code) {
 
     Map<String, dynamic> map = jsonDecode(code);
@@ -56,5 +55,14 @@ class ArticleData{
     );
 
   }
+
+  Map toJson() => {
+    CoreArticle.paramTitle: title,
+    CoreArticle.paramTags: tags,
+    CoreArticle.paramAuthor: author,
+    CoreArticle.paramDate: date.toIso8601String(),
+    CoreArticle.paramLink: link,
+    CoreArticle.paramArtclItems: articleElements.map((item) => item.toJsonObject()).toList()
+  };
 
 }

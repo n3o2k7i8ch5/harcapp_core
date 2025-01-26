@@ -3,11 +3,12 @@ import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:tuple/tuple.dart';
 import 'package:image/image.dart' as img;
 
+import 'article_data.dart';
 import 'article_source.dart';
 import 'common.dart';
 
 
-abstract class CoreArticle{
+abstract class CoreArticle extends ArticleData{
 
   static Map<String, Tuple2<String, int>>? altCoverUrls;
 
@@ -73,17 +74,17 @@ abstract class CoreArticle{
   static const String paramBookmarked = 'bookmarked';
   static const String paramSeen = 'seen';
 
-  String get uniqName => source.name + uniqNameSep + _localId;
+  String get uniqName => source.name + uniqNameSep + localId;
 
-  final String _localId;
-
-  final String title;
-  final List<String>? tags;
-  final DateTime date;
-  final String author;
+  // final String _localId;
+  //
+  // final String title;
+  // final List<String> tags;
+  // final DateTime date;
+  // final String author;
   String get dateString => dateToString(date, shortMonth: true, yearAbbr: 'A.D.');
-  final String link;
-  final List<ArticleElement> articleElements;
+  // final String link;
+  // final List<ArticleElement> articleElements;
 
   ArticleSource get source;
 
@@ -142,15 +143,15 @@ abstract class CoreArticle{
   // }
 
   CoreArticle(
-      String localId,
-      { required this.title,
-        required this.tags,
-        required this.author,
-        required this.date,
-        required this.link,
-        required this.articleElements,
-      }): assert(!localId.contains(uniqNameSep)),
-        _localId = localId;
+      super.localId,
+      { required super.title,
+        required super.tags,
+        required super.author,
+        required super.date,
+        required super.link,
+        required super.articleElements,
+      }): assert(!localId.contains(uniqNameSep));
+        // _localId = localId;
 
   // bool get downloaded => File(getArticleCorePath(source, uniqName)).existsSync();
   // String get imagePath => getArticleCoverPath(source, uniqName);
@@ -310,7 +311,6 @@ abstract class CoreArticle{
 
   @protected
   Future<img.Image?> downloadCover();
-
 
   // Future<ImageProvider?> loadCover() async{
   //   await semaphore.acquire();
