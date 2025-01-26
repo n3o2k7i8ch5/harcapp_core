@@ -4,7 +4,6 @@ import 'package:tuple/tuple.dart';
 import 'package:image/image.dart' as img;
 
 import 'article_data.dart';
-import 'article_identifier.dart';
 
 
 abstract class CoreArticle extends ArticleData{
@@ -136,8 +135,7 @@ abstract class CoreArticle extends ArticleData{
         required super.date,
         required super.link,
         required super.articleElements,
-      }): assert(!localId.contains(ArticleIdentifier.uniqNameSep));
-        // _localId = localId;
+      });
 
   // bool get downloaded => File(getArticleCorePath(source, uniqName)).existsSync();
   // String get imagePath => getArticleCoverPath(source, uniqName);

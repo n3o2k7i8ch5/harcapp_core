@@ -25,7 +25,7 @@ class ArticleData extends ArticleIdentifier{
         required this.articleElements
       });
 
-  static ArticleData fromJson(String id, String code) {
+  static ArticleData fromJson(String uniqName, String code) {
 
     Map<String, dynamic> map = jsonDecode(code);
 
@@ -46,10 +46,16 @@ class ArticleData extends ArticleIdentifier{
     if(articleElements.isNotEmpty)
       articleElements.removeAt(articleElements.length-1);
 
+    List<String> uniqNameParts = uniqName.split(ArticleIdentifier.uniqNameSep);
+    String localId = uniqNameParts[1];
+    String sourceString = uniqNameParts[0];
+
+    ArticleSource source = ArticleSource.fromName(sourceString)??
+        (throw NoSuchArticleSourceException(sourceString));
+
     return ArticleData(
-      id.split(ArticleIdentifier.uniqNameSep)[1],
-      ArticleSource.fromName(id.split(ArticleIdentifier.uniqNameSep)[0])??
-          (throw NoSuchArticleSourceException(id.split(ArticleIdentifier.uniqNameSep)[0])),
+      localId,
+      source,
       title: title,
       tags: tags,
       date: date,
