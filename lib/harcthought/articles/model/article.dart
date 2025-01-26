@@ -1,11 +1,7 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:tuple/tuple.dart';
 
-import 'article_data.dart';
 import 'article_source.dart';
 import 'common.dart';
 
@@ -305,38 +301,6 @@ abstract class CoreArticle{
   //   if(!localOnly) synchronizer.post();
   // }
 
-  static ArticleData fromJson(String id, String code) {
-
-    Map<String, dynamic> map = jsonDecode(code);
-
-    final String title = map[CoreArticle.paramTitle] as String;
-    final List<String> tags = ((map[CoreArticle.paramTags]??[]) as List).cast<String>();
-    final String author = map[CoreArticle.paramAuthor] as String;
-    final DateTime date = DateTime.parse(map[CoreArticle.paramDate] as String);
-    final String link = map[CoreArticle.paramLink] as String;
-    final List<dynamic> items = map[CoreArticle.paramArtclItems] as List<dynamic>;
-
-
-    List<ArticleElement> articleElements = [];
-    for(dynamic item in items){
-      ArticleElement? element = ArticleElement.decode(item);
-      if(element != null) articleElements.add(element);
-    }
-
-    if(articleElements.isNotEmpty)
-      articleElements.removeAt(articleElements.length-1);
-
-    return ArticleData(
-      id.split(CoreArticle.uniqNameSep)[1],
-      title: title,
-      tags: tags,
-      date: date,
-      link: link,
-      author: author,
-      articleElements: articleElements,
-    );
-
-  }
 
   // static LocalSemaphore semaphore = LocalSemaphore(3);
 
