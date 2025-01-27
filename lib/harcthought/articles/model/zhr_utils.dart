@@ -145,32 +145,4 @@ abstract class ZHRUtils{
     return image;
   }
 
-  // @override
-  // @protected
-  // Future<ImageProvider<Object>?> handleLoadCover() async {
-  //   File file = File(getArticleCoverPath(source, uniqName));
-  //   if(file.existsSync())
-  //     return MemoryImage(file.readAsBytesSync());
-  //
-  //   img.Image? image;
-  //   if(Article.altCoverUrls != null && Article.altCoverUrls!.containsKey(uniqName)) {
-  //     File imageFile = await Article.downloadSaveCover(
-  //         source: source,
-  //         id: uniqName,
-  //         url: Article.altCoverUrls![uniqName]!.item1,
-  //         version: Article.altCoverUrls![uniqName]!.item2
-  //     );
-  //     return MemoryImage(imageFile.readAsBytesSync());
-  //   }
-  //   else {
-  //     image = await compute(_coverFromHtmlLink, link);
-  //     if(image == null) return null;
-  //
-  //     file.createSync(recursive: true);
-  //     file.writeAsBytesSync(Uint8List.fromList(img.encodeJpg(image, quality: 80)));
-  //     logger.d('Saved article cover to ${basename(file.path)}');
-  //     return MemoryImage(file.readAsBytesSync());
-  //   }
-  // }
-
 }
