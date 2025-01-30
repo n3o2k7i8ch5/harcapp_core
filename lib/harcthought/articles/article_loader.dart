@@ -26,15 +26,18 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
   static const String _indexUrl = 'https://gitlab.com/api/v4/projects/n3o2k7i8ch5%2Fharcapp_data/repository/tree?path=articles';
   static String _articleUrl(String localId) => 'https://gitlab.com/n3o2k7i8ch5/harcapp_data/-/raw/master/articles/$localId.hrcpartcl';
 
-  Future<List<String>> allLocalIds() async {
-    Response response = await defDio.get(_indexUrl);
+  Future<List<String>?> allLocalIds() async {
+    try {
+      Response response = await defDio.get(_indexUrl);
 
-    if (response.statusCode != 200)
-      return [];
+      if (response.statusCode != 200)
+        return [];
 
-    return List.from(response.data).map(
-        (dynamic entry) => Map.from(entry)['name']
-    ).toList().cast<String>();
+      return List.from(response.data).map((dynamic entry) =>
+      Map.from(entry)['name']).toList().cast<String>();
+    } catch (_) {
+      return null;
+    }
   }
 
   @override
@@ -48,8 +51,6 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
         return null;
 
       return ArticleData.fromJson(localId, source, response.data);
-    } on DioException{
-      return null;
     } catch(_){
       return null;
     }
@@ -57,7 +58,8 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
 
   @override
   Future<(List<ArticleData>, String?)> download(String? newestLocalIdSeen) async {
-    List<String> allIds = await allLocalIds();
+    List<String>? allIds = await allLocalIds();
+    if(allIds == null) return (<ArticleData>[], null);
 
     List<String> unloadedIds;
     if(newestLocalIdSeen == null)
@@ -118,6 +120,8 @@ abstract class ArticleZhrLoader extends ArticleLoader{
     } on DioException catch(e){
       if(e.response == null) return null;
       return _responseToArticleData(e.response!, _pageUrl);
+    } catch(_){
+      return null;
     }
 
   }
