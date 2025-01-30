@@ -11,15 +11,6 @@ Dio get defDio{
     sendTimeout: defSendTimeout,
   ));
 
-  dio.interceptors.add(
-    InterceptorsWrapper(
-      onError: (error, handler) {
-        // Do stuff here
-        handler.reject(error); // Added this line to let error propagate outside the interceptor
-      },
-    ),
-  );
-
   return dio;
 }
 
