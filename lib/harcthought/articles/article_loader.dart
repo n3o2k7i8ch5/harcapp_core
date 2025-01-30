@@ -22,7 +22,7 @@ abstract class ArticleLoader{
 
 }
 
-abstract class ArticleHarcAppLoader extends ArticleLoader{
+abstract class BaseArticleHarcAppLoader extends ArticleLoader{
 
   static const String _indexUrl = 'https://gitlab.com/api/v4/projects/n3o2k7i8ch5%2Fharcapp_data/repository/tree?path=articles';
   static String _articleUrl(String localId) => 'https://gitlab.com/n3o2k7i8ch5/harcapp_data/-/raw/master/articles/$localId.hrcpartcl';
