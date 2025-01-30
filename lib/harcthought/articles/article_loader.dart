@@ -48,7 +48,7 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
         return null;
 
       return ArticleData.fromJson(localId, source, response.data);
-    } on DioException{
+    } on Exception{
       return null;
     }
   }
