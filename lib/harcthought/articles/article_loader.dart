@@ -154,10 +154,13 @@ abstract class ArticleZhrLoader extends ArticleLoader{
     return (result, result.isEmpty?null:result.last.uniqName);
   }
 
+  @override
+  FutureOr<ArticleData?> getCached(String localId) => null;
+
 }
 
 
-abstract class ArticleAzymutLoader extends ArticleZhrLoader{
+class ArticleAzymutLoader extends ArticleZhrLoader{
 
   @override
   ArticleSource get source => ArticleSource.azymut;
@@ -167,7 +170,7 @@ abstract class ArticleAzymutLoader extends ArticleZhrLoader{
 
 }
 
-abstract class ArticlePojutrzeLoader extends ArticleZhrLoader{
+class ArticlePojutrzeLoader extends ArticleZhrLoader{
 
   @override
   ArticleSource get source => ArticleSource.pojutrze;
