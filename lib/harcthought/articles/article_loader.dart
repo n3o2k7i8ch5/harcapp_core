@@ -74,12 +74,13 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
     String? updatedNewestLocalIdSeen;
     for(String localId in unloadedIds){
       ArticleData? articleData = (await getCached(localId))??await _downloadSingle(localId);
-      if(articleData != null)
+      if(articleData != null) {
         articles.add(articleData);
-      else if(articleData == null && updatedNewestLocalIdSeen == null)
+        previousLocalId = localId;
+      } else if(articleData == null && updatedNewestLocalIdSeen == null)
         updatedNewestLocalIdSeen = previousLocalId;
 
-      previousLocalId = localId;
+
     }
 
     return (articles, updatedNewestLocalIdSeen);
