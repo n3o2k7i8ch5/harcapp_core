@@ -80,7 +80,6 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
       } else if(articleData == null && updatedNewestLocalIdSeen == null)
         updatedNewestLocalIdSeen = previousLocalId;
 
-
     }
 
     return (articles, updatedNewestLocalIdSeen);
