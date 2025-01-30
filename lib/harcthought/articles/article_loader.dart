@@ -33,8 +33,9 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
     if (response.statusCode != 200)
       return [];
 
-    dynamic articleEntries = response.data;
-    List<String> localIds = articleEntries.map((dynamic entry) => entry['name']).toList().cast();
+    String data = response.data.toString();
+    List<Map> articleEntries = jsonDecode(data);
+    List<String> localIds = articleEntries.map((Map entry) => entry['name']).toList().cast();
 
     return localIds;
   }
