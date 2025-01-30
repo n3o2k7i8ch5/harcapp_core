@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'article.dart';
 import 'article_identifier.dart';
 import 'article_source.dart';
@@ -25,16 +23,14 @@ class ArticleData extends ArticleIdentifier{
         required this.articleElements
       });
 
-  static ArticleData fromJson(String localId, ArticleSource source, String code) {
+  static ArticleData fromJson(String localId, ArticleSource source, Map jsonMap) {
 
-    Map<String, dynamic> map = jsonDecode(code);
-
-    final String title = map[CoreArticle.paramTitle] as String;
-    final List<String> tags = ((map[CoreArticle.paramTags]??[]) as List).cast<String>();
-    final String author = map[CoreArticle.paramAuthor] as String;
-    final DateTime date = DateTime.parse(map[CoreArticle.paramDate] as String);
-    final String link = map[CoreArticle.paramLink] as String;
-    final List<dynamic> items = map[CoreArticle.paramArtclItems] as List<dynamic>;
+    final String title = jsonMap[CoreArticle.paramTitle] as String;
+    final List<String> tags = ((jsonMap[CoreArticle.paramTags]??[]) as List).cast<String>();
+    final String author = jsonMap[CoreArticle.paramAuthor] as String;
+    final DateTime date = DateTime.parse(jsonMap[CoreArticle.paramDate] as String);
+    final String link = jsonMap[CoreArticle.paramLink] as String;
+    final List<dynamic> items = jsonMap[CoreArticle.paramArtclItems] as List<dynamic>;
 
 
     List<ArticleElement> articleElements = [];

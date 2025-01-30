@@ -33,11 +33,10 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
     if (response.statusCode != 200)
       return [];
 
-    String data = response.data.toString();
-    List<Map> articleEntries = jsonDecode(data);
-    List<String> localIds = articleEntries.map((Map entry) => entry['name']).toList().cast();
-
-    return localIds;
+    dynamic data = response.data.toString();
+    return List.from(data).map(
+        (dynamic entry) => Map.from(entry)['name']
+    ).toList().cast<String>();
   }
 
   @override
@@ -49,8 +48,7 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
     if(response.statusCode != 200)
       return null;
 
-    String articleCode = response.data;
-    return ArticleData.fromJson(localId, source, articleCode);
+    return ArticleData.fromJson(localId, source, response.data);
   }
 
   @override
