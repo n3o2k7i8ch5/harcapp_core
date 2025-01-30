@@ -39,8 +39,7 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
       Map.from(entry)['name']).toList().cast<String>();
 
       allFileNames.removeWhere((String fileName) => !fileName.endsWith(".$fileExtension"));
-      allFileNames.map((name) => name.substring(0, name.length - fileExtension.length));
-      return allFileNames;
+      return allFileNames.map((name) => name.substring(0, name.length - fileExtension.length)).toList();
     } catch (_) {
       return null;
     }
