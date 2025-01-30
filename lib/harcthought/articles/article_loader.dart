@@ -23,8 +23,10 @@ abstract class ArticleLoader{
 
 abstract class BaseArticleHarcAppLoader extends ArticleLoader{
 
+  static const fileExtension = "hrcpartcl";
+
   static const String _indexUrl = 'https://gitlab.com/api/v4/projects/n3o2k7i8ch5%2Fharcapp_data/repository/tree?path=articles';
-  static String _articleUrl(String localId) => 'https://gitlab.com/n3o2k7i8ch5/harcapp_data/-/raw/master/articles/$localId.hrcpartcl';
+  static String _articleUrl(String localId) => 'https://gitlab.com/n3o2k7i8ch5/harcapp_data/-/raw/master/articles/$localId.$fileExtension';
 
   Future<List<String>?> allLocalIds() async {
     try {
@@ -33,8 +35,12 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
       if (response.statusCode != 200)
         return [];
 
-      return List.from(response.data).map((dynamic entry) =>
+      List<String> allFileNames = List.from(response.data).map((dynamic entry) =>
       Map.from(entry)['name']).toList().cast<String>();
+
+      allFileNames.removeWhere((String fileName) => !fileName.endsWith(".$fileExtension"));
+      allFileNames.map((name) => name.substring(0, name.length - fileExtension.length));
+      return allFileNames;
     } catch (_) {
       return null;
     }
