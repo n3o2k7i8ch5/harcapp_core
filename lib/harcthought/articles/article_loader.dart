@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -42,12 +41,16 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
   ArticleSource get source => ArticleSource.harcApp;
 
   Future<ArticleData?> _downloadSingle(String localId) async {
-    Response response = await defDio.get(_articleUrl(localId));
+    try {
+      Response response = await defDio.get(_articleUrl(localId));
 
-    if(response.statusCode != 200)
+      if(response.statusCode != HttpStatus.ok)
+        return null;
+
+      return ArticleData.fromJson(localId, source, response.data);
+    } on DioException{
       return null;
-
-    return ArticleData.fromJson(localId, source, response.data);
+    }
   }
 
   @override
