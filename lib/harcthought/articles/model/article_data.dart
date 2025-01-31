@@ -5,11 +5,13 @@ import 'common.dart';
 
 class ArticleData extends ArticleIdentifier{
 
+  String get link => _link??"https://harcapp.web.app/article/${source.name}/$localId";
+
   final String title;
   final List<String> tags;
   final DateTime date;
   final String author;
-  final String link;
+  final String? _link;
   final List<ArticleElement> articleElements;
 
   const ArticleData(
@@ -19,9 +21,9 @@ class ArticleData extends ArticleIdentifier{
         required this.tags,
         required this.date,
         required this.author,
-        required this.link,
+        required String? link,
         required this.articleElements
-      });
+      }): _link = link;
 
   static ArticleData fromJson(String localId, ArticleSource source, Map jsonMap) {
 
@@ -29,9 +31,8 @@ class ArticleData extends ArticleIdentifier{
     final List<String> tags = ((jsonMap[CoreArticle.paramTags]??[]) as List).cast<String>();
     final String author = jsonMap[CoreArticle.paramAuthor] as String;
     final DateTime date = DateTime.parse(jsonMap[CoreArticle.paramDate] as String);
-    final String link = jsonMap[CoreArticle.paramLink] as String;
+    final String? link = jsonMap[CoreArticle.paramLink] as String;
     final List<dynamic> items = jsonMap[CoreArticle.paramArtclItems] as List<dynamic>;
-
 
     List<ArticleElement> articleElements = [];
     for(dynamic item in items){
