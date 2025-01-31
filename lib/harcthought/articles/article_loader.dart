@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:harcapp_core/comm_classes/dio.dart';
@@ -32,9 +31,6 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
     try {
       Response response = await defDio.get(_indexUrl);
 
-      if (response.statusCode != 200)
-        return [];
-
       List<String> allFileNames = List.from(response.data).map((dynamic entry) =>
       Map.from(entry)['name']).toList().cast<String>();
 
@@ -51,9 +47,6 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
   Future<ArticleData?> _downloadSingle(String localId) async {
     try {
       Response response = await defDio.get(_articleUrl(localId));
-
-      if(response.statusCode != HttpStatus.ok)
-        return null;
 
       return ArticleData.fromJson(localId, source, response.data);
     } catch(_){
@@ -118,9 +111,6 @@ abstract class ArticleZhrLoader extends ArticleLoader{
     String _pageUrl = pageUrl(page);
     try {
       Response response = await defDio.get(_pageUrl);
-      if(response.statusCode != HttpStatus.ok)
-        return null;
-
       return _responseToArticleData(response, _pageUrl);
     } on DioException catch(e){
       if(e.response == null) return null;
