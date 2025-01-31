@@ -31,7 +31,7 @@ class ArticleData extends ArticleIdentifier{
     final List<String> tags = ((jsonMap[CoreArticle.paramTags]??[]) as List).cast<String>();
     final String author = jsonMap[CoreArticle.paramAuthor] as String;
     final DateTime date = DateTime.parse(jsonMap[CoreArticle.paramDate] as String);
-    final String? link = jsonMap[CoreArticle.paramLink] as String;
+    final String? link = jsonMap[CoreArticle.paramLink] as String?;
     final List<dynamic> items = jsonMap[CoreArticle.paramArtclItems] as List<dynamic>;
 
     List<ArticleElement> articleElements = [];
