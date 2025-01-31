@@ -67,7 +67,8 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
       unloadedIds = allIds;
     else {
       int newestLocalIdSeenIdx = allIds.indexOf(newestLocalIdSeen);
-      unloadedIds = allIds.sublist(newestLocalIdSeenIdx);
+      if(newestLocalIdSeenIdx == -1) unloadedIds = allIds;
+      else unloadedIds = allIds.sublist(newestLocalIdSeenIdx);
     }
 
     List<ArticleData> articles = [];
