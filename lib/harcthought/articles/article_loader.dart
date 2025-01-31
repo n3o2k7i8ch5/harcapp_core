@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:harcapp_core/comm_classes/dio.dart';
@@ -49,7 +50,8 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
     try {
       Response response = await defDio.get(_articleUrl(localId));
 
-      return ArticleData.fromJson(localId, source, response.data);
+      Map jsonMap = jsonDecode(response.data);
+      return ArticleData.fromJson(localId, source, jsonMap);
     } catch(_){
       return null;
     }
