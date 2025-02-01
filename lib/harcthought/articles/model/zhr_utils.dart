@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:harcapp_core/comm_classes/dio.dart';
 import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:harcapp_core/harcthought/articles/model/article_source.dart';
 import 'package:html/dom.dart' as html_dom;
@@ -128,7 +129,7 @@ abstract class ZHRUtils{
       String imageLink = htmlFile.split('<meta property="og:image" content="')[1];
       imageLink = imageLink.split('" />')[0];
       imageLink = imageLink.split('"/>')[0];
-      var response = await get(Uri.parse(imageLink));
+      var response = await get(Uri.parse(webCorsProxy(imageLink)));
 
       img.Image image = img.decodeImage(response.bodyBytes.buffer.asUint8List())!;
 
