@@ -71,7 +71,6 @@ abstract class BaseArticleHarcAppLoader extends BaseArticleLoader{
       return null;
     }
   }
-
   @override
   Future<(List<ArticleData>, String?)> download(String? newestLocalIdSeen) async {
     List<String>? allIds = await downloadAllLocalIds();
@@ -90,7 +89,7 @@ abstract class BaseArticleHarcAppLoader extends BaseArticleLoader{
     String? previousLocalId = newestLocalIdSeen;
     String? updatedNewestLocalIdSeen;
     for(String localId in unloadedIds){
-      ArticleData? articleData = (await getCached(localId))??await _downloadSingle(localId);
+      ArticleData? articleData = await _downloadSingle(localId);
       if(articleData != null) {
         articles.add(articleData);
         previousLocalId = localId;
