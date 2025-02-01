@@ -19,6 +19,21 @@ abstract class ArticleLoader{
 
   FutureOr<ArticleData?> getCached(String localId);
 
+  FutureOr<List<String>> getAllCachedIds();
+
+  FutureOr<(List<ArticleData>, List<String>)> getAllCached() async {
+    List<String> cachedIds = await getAllCachedIds();
+    List<ArticleData> cachedArticles = [];
+    List<String> invalidCacheIds = [];
+    for(String localId in cachedIds){
+      ArticleData? articleData = await getCached(localId);
+      if(articleData != null) cachedArticles.add(articleData);
+      else invalidCacheIds.add(localId);
+    }
+
+    return (cachedArticles, invalidCacheIds);
+  }
+
 }
 
 abstract class BaseArticleHarcAppLoader extends ArticleLoader{
@@ -28,7 +43,7 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
   static const String _indexUrl = 'https://gitlab.com/api/v4/projects/n3o2k7i8ch5%2Fharcapp_data/repository/tree?path=articles';
   static String _articleUrl(String localId) => 'https://gitlab.com/n3o2k7i8ch5/harcapp_data/-/raw/master/articles/$localId.$fileExtension';
 
-  Future<List<String>?> allLocalIds() async {
+  Future<List<String>?> downloadAllLocalIds() async {
     try {
       Response response = await defDio.get(_indexUrl);
 
@@ -59,7 +74,7 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
 
   @override
   Future<(List<ArticleData>, String?)> download(String? newestLocalIdSeen) async {
-    List<String>? allIds = await allLocalIds();
+    List<String>? allIds = await downloadAllLocalIds();
     if(allIds == null) return (<ArticleData>[], null);
 
     List<String> unloadedIds;
@@ -90,7 +105,7 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
 }
 
 
-abstract class ArticleZhrLoader extends ArticleLoader{
+abstract class _ArticleZhrLoader extends ArticleLoader{
 
   String pageUrl(int page);
 
@@ -159,13 +174,10 @@ abstract class ArticleZhrLoader extends ArticleLoader{
     return (result, result.isEmpty?null:result.last.localId);
   }
 
-  @override
-  FutureOr<ArticleData?> getCached(String localId) => null;
-
 }
 
 
-class ArticleAzymutLoader extends ArticleZhrLoader{
+abstract class ArticleAzymutLoader extends _ArticleZhrLoader{
 
   @override
   ArticleSource get source => ArticleSource.azymut;
@@ -175,7 +187,7 @@ class ArticleAzymutLoader extends ArticleZhrLoader{
 
 }
 
-class ArticlePojutrzeLoader extends ArticleZhrLoader{
+abstract class ArticlePojutrzeLoader extends _ArticleZhrLoader{
 
   @override
   ArticleSource get source => ArticleSource.pojutrze;
