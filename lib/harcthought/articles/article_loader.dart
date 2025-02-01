@@ -11,7 +11,7 @@ import 'package:html_unescape/html_unescape.dart';
 
 import 'model/article_data.dart';
 
-abstract class ArticleLoader{
+abstract class BaseArticleLoader{
 
   ArticleSource get source;
 
@@ -36,7 +36,7 @@ abstract class ArticleLoader{
 
 }
 
-abstract class BaseArticleHarcAppLoader extends ArticleLoader{
+abstract class BaseArticleHarcAppLoader extends BaseArticleLoader{
 
   static const fileExtension = "hrcpartcl";
 
@@ -105,7 +105,7 @@ abstract class BaseArticleHarcAppLoader extends ArticleLoader{
 }
 
 
-abstract class _ArticleZhrLoader extends ArticleLoader{
+abstract class _ArticleZhrLoader extends BaseArticleLoader{
 
   String pageUrl(int page);
 
