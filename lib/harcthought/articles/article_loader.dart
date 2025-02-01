@@ -156,7 +156,7 @@ abstract class ArticleZhrLoader extends ArticleLoader{
       page++;
     }
 
-    return (result, result.isEmpty?null:result.last.uniqName);
+    return (result, result.isEmpty?null:result.last.localId);
   }
 
   @override
