@@ -34,6 +34,13 @@ abstract class BaseArticleLoader{
     return (cachedArticles, invalidCacheIds);
   }
 
+  FutureOr<void> cache(ArticleData articleData);
+
+  FutureOr<void> cacheAll(List<ArticleData> articleDataList) async {
+    for (ArticleData articleData in articleDataList)
+      await cache(articleData);
+  }
+
 }
 
 abstract class BaseArticleHarcAppLoader extends BaseArticleLoader{
