@@ -12,9 +12,8 @@ class ShaPref{
 
   ShaPref();
 
-  static Future<void> init() async {
+  static Future<void> init() async =>
     _preferences = await SharedPreferences.getInstance();
-  }
 
   static void setLogger(Logger? logger) => _logger = logger;
 

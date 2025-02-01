@@ -12,6 +12,7 @@ class ArticleData extends ArticleIdentifier{
   final DateTime date;
   final String author;
   final String? _link;
+  final String? imageUrl;
   final List<ArticleElement> articleElements;
 
   const ArticleData(
@@ -22,6 +23,7 @@ class ArticleData extends ArticleIdentifier{
         required this.date,
         required this.author,
         required String? link,
+        required this.imageUrl,
         required this.articleElements
       }): _link = link;
 
@@ -32,7 +34,8 @@ class ArticleData extends ArticleIdentifier{
     final String author = jsonMap[CoreArticle.paramAuthor] as String;
     final DateTime date = DateTime.parse(jsonMap[CoreArticle.paramDate] as String);
     final String? link = jsonMap[CoreArticle.paramLink] as String?;
-    final List<dynamic> items = jsonMap[CoreArticle.paramArtclItems] as List<dynamic>;
+    final String? imageUrl = jsonMap[CoreArticle.paramImageUrl] as String?;
+    final List<dynamic> items = jsonMap[CoreArticle.paramItems] as List<dynamic>;
 
     List<ArticleElement> articleElements = [];
     for(dynamic item in items){
@@ -50,6 +53,7 @@ class ArticleData extends ArticleIdentifier{
       tags: tags,
       date: date,
       link: link,
+      imageUrl: imageUrl,
       author: author,
       articleElements: articleElements,
     );
@@ -62,7 +66,8 @@ class ArticleData extends ArticleIdentifier{
     CoreArticle.paramAuthor: author,
     CoreArticle.paramDate: date.toIso8601String(),
     CoreArticle.paramLink: link,
-    CoreArticle.paramArtclItems: articleElements.map((item) => item.toJsonObject()).toList()
+    CoreArticle.paramImageUrl: imageUrl,
+    CoreArticle.paramItems: articleElements.map((item) => item.toJsonObject()).toList()
   };
 
 }

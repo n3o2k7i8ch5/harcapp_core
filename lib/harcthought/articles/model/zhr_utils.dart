@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:harcapp_core/comm_classes/dio.dart';
@@ -120,23 +118,27 @@ abstract class ZHRUtils{
       author: item.authors![0].name??(throw Exception('No author name in atom item')),
       date: DateTime.tryParse(item.published!)??(throw Exception('No publish date in atom item')),
       link: item.links![0].href!,
+      imageUrl: null,
       articleElements: artElements,
     );
   }
 
-  static Future<img.Image?> _coverFromHtmlLink(String link) async{
-    try{
-      String? htmlFile = await downloadFile(link, webCors: true);
-      if(htmlFile == null) return null;
-
+  static Future<String> _coverLinkFromHtmlLink(String link){
+    return downloadFile(link, webCors: true).then((htmlFile) {
+      if(htmlFile == null) return '';
       String imageLink = htmlFile.split('<meta property="og:image" content="')[1];
       imageLink = imageLink.split('" />')[0];
       imageLink = imageLink.split('"/>')[0];
+      return imageLink;
+    });
+  }
 
-      Dio dio = defDio;
-      Response response = await defDio.get(webCorsProxy(imageLink));
-      Uint8List bytes = Uint8List.fromList(utf8.encode(response.data));
-      img.Image image = img.decodeImage(bytes)!;
+  static Future<img.Image?> _coverFromHtmlLink(String link) async{
+    try{
+      String imageLink = await _coverLinkFromHtmlLink(link);
+
+      Response response = await defDio.get(webCorsProxy(imageLink), options: Options(responseType: ResponseType.bytes));
+      img.Image image = img.decodeImage(response.data)!;
 
       image = img.copyResize(image, width: 1000);
       return image;

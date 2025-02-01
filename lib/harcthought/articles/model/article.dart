@@ -20,11 +20,11 @@ abstract class CoreArticle extends ArticleData{
   static const String paramDate = 'date';
   static const String paramLink = 'link';
 
-  static const String paramImage = 'image';
-  static const String paramImageSource = 'image_source';
-  static const String paramAuthCode = 'auth_code';
+  static const String paramImageUrl = 'imageUrl';
+  static const String paramImageSource = 'imageSource';
+  static const String paramAuthCode = 'authorCode';
 
-  static const String paramArtclItems = 'items';
+  static const String paramItems = 'items';
   static const String paramOtherArtCores = 'other_art_cores';
 
   static const String paramLiked = 'liked';
@@ -41,18 +41,19 @@ abstract class CoreArticle extends ArticleData{
         required super.author,
         required super.date,
         required super.link,
+        required super.imageUrl,
         required super.articleElements,
       });
 
   @protected
   Future<img.Image?> downloadCover();
 
-  static LocalSemaphore _semaphore = LocalSemaphore(3);
+  static LocalSemaphore loadCoverSemaphore = LocalSemaphore(3);
 
   Future<ImageProvider?> loadCover() async {
-    await _semaphore.acquire();
+    await loadCoverSemaphore.acquire();
     img.Image? image = await downloadCover();
-    _semaphore.release();
+    loadCoverSemaphore.release();
     if (image == null) return null;
     Uint8List encodedImage = img.encodeJpg(image, quality: 80);
     return MemoryImage(encodedImage);

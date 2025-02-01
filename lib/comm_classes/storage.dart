@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 
@@ -36,33 +35,24 @@ Future<dynamic> openAsset(String assetPath, {bool webOpenInNewTab = false}) asyn
 
 Future<String?> downloadFileAsString(String url, {bool webCors = false}) async {
   try {
-    Dio dio = defDio;
-    dio.options.responseType = ResponseType.plain;
-    Response response = await defDio.get(webCors ? corsProxy(url) : url);
-    return response.data;
+    Response response = await defDio.get(
+      webCors ? corsProxy(url) : url,
+      options: Options(responseType: ResponseType.bytes)
+    );
+    return utf8.decode(response.data);
   } catch(e){
     return null;
   }
-  var httpClient = HttpClient();
-  var request = await httpClient.getUrl(webCors ? Uri.parse(corsProxy(url)) : Uri.parse(url));
-  var response = await request.close();
-  var bytes = await consolidateHttpClientResponseBytes(response);
-  return utf8.decode(bytes);
 }
 
 Future<String?> downloadFile(String url, {bool webCors = false}) async {
   try {
-    Dio dio = defDio;
-    dio.options.responseType = ResponseType.plain;
-    Response response = await defDio.get(webCors ? corsProxy(url) : url);
+    Response response = await defDio.get(
+      webCors ? corsProxy(url) : url,
+      options: Options(responseType: ResponseType.plain)
+    );
     return response.data;
   } catch(e){
     return null;
   }
-
-  var httpClient = HttpClient();
-  var request = await httpClient.getUrl(webCors ? Uri.parse(corsProxy(url)) : Uri.parse(url));
-  var response = await request.close();
-  var bytes = await consolidateHttpClientResponseBytes(response);
-  return utf8.decode(bytes);
 }

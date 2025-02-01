@@ -143,7 +143,6 @@ abstract class _ArticleZhrLoader extends BaseArticleLoader{
     } catch(_){
       return null;
     }
-
   }
 
   @override
