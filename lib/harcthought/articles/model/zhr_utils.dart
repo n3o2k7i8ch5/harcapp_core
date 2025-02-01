@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:harcapp_core/comm_classes/dio.dart';
@@ -132,9 +134,9 @@ abstract class ZHRUtils{
       imageLink = imageLink.split('"/>')[0];
 
       Dio dio = defDio;
-      dio.options.responseType = ResponseType.bytes;
       Response response = await defDio.get(webCorsProxy(imageLink));
-      img.Image image = img.decodeImage(response.data)!;
+      Uint8List bytes = Uint8List.fromList(utf8.encode(response.data));
+      img.Image image = img.decodeImage(bytes)!;
 
       image = img.copyResize(image, width: 1000);
       return image;
