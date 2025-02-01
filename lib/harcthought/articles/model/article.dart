@@ -43,6 +43,8 @@ abstract class CoreArticle extends ArticleData{
   @protected
   Future<img.Image?> downloadCover();
 
+  Future<ImageProvider?> loadCover();
+
   @override
   int get hashCode => uniqName.hashCode;
 
