@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+
 import 'dio.dart';
 import 'storage_io.dart'
 if(dart.library.io) 'storage_io.dart'
@@ -33,6 +35,14 @@ Future<dynamic> openAsset(String assetPath, {bool webOpenInNewTab = false}) asyn
 }
 
 Future<String> downloadFileAsString(String url, {bool webCors = false}) async {
+  try {
+    Dio dio = defDio;
+    dio.options.responseType = ResponseType.plain;
+    Response response = await defDio.get(webCors ? corsProxy(url) : url);
+    return response.data;
+  } catch(e){
+    return '';
+  }
   var httpClient = HttpClient();
   var request = await httpClient.getUrl(webCors ? Uri.parse(corsProxy(url)) : Uri.parse(url));
   var response = await request.close();
@@ -41,6 +51,15 @@ Future<String> downloadFileAsString(String url, {bool webCors = false}) async {
 }
 
 Future<String> downloadFile(String url, {bool webCors = false}) async {
+  try {
+    Dio dio = defDio;
+    dio.options.responseType = ResponseType.bytes;
+    Response response = await defDio.get(webCors ? corsProxy(url) : url);
+    return utf8.decode(response.data);
+  } catch(e){
+    return '';
+  }
+
   var httpClient = HttpClient();
   var request = await httpClient.getUrl(webCors ? Uri.parse(corsProxy(url)) : Uri.parse(url));
   var response = await request.close();
