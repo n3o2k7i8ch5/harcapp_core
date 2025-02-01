@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
+import 'package:semaphore_plus/semaphore_plus.dart';
 import 'package:tuple/tuple.dart';
 import 'package:image/image.dart' as img;
 
@@ -46,8 +47,12 @@ abstract class CoreArticle extends ArticleData{
   @protected
   Future<img.Image?> downloadCover();
 
+  static LocalSemaphore _semaphore = LocalSemaphore(3);
+
   Future<ImageProvider?> loadCover() async {
+    await _semaphore.acquire();
     img.Image? image = await downloadCover();
+    _semaphore.release();
     if (image == null) return null;
     Uint8List encodedImage = img.encodeJpg(image, quality: 80);
     return MemoryImage(encodedImage);
