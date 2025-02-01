@@ -6,7 +6,6 @@ import 'package:harcapp_core/harcthought/articles/model/article_source.dart';
 import 'package:html/dom.dart' as html_dom;
 import 'package:html/parser.dart';
 import 'package:webfeed_plus/domain/atom_item.dart';
-import 'package:http/http.dart' show get;
 import 'package:image/image.dart' as img;
 
 import 'article_data.dart';
@@ -125,7 +124,8 @@ abstract class ZHRUtils{
 
   static Future<img.Image?> _coverFromHtmlLink(String link) async{
     try{
-      String htmlFile = await downloadFile(link, webCors: true);
+      String? htmlFile = await downloadFile(link, webCors: true);
+      if(htmlFile == null) return null;
 
       String imageLink = htmlFile.split('<meta property="og:image" content="')[1];
       imageLink = imageLink.split('" />')[0];

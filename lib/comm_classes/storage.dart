@@ -34,14 +34,14 @@ Future<dynamic> openAsset(String assetPath, {bool webOpenInNewTab = false}) asyn
     return openAssetImpl(assetPath);
 }
 
-Future<String> downloadFileAsString(String url, {bool webCors = false}) async {
+Future<String?> downloadFileAsString(String url, {bool webCors = false}) async {
   try {
     Dio dio = defDio;
     dio.options.responseType = ResponseType.plain;
     Response response = await defDio.get(webCors ? corsProxy(url) : url);
     return response.data;
   } catch(e){
-    return '';
+    return null;
   }
   var httpClient = HttpClient();
   var request = await httpClient.getUrl(webCors ? Uri.parse(corsProxy(url)) : Uri.parse(url));
@@ -50,14 +50,14 @@ Future<String> downloadFileAsString(String url, {bool webCors = false}) async {
   return utf8.decode(bytes);
 }
 
-Future<String> downloadFile(String url, {bool webCors = false}) async {
+Future<String?> downloadFile(String url, {bool webCors = false}) async {
   try {
     Dio dio = defDio;
-    dio.options.responseType = ResponseType.bytes;
+    dio.options.responseType = ResponseType.plain;
     Response response = await defDio.get(webCors ? corsProxy(url) : url);
-    return utf8.decode(response.data);
+    return response.data;
   } catch(e){
-    return '';
+    return null;
   }
 
   var httpClient = HttpClient();
