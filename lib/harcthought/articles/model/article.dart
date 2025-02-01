@@ -1,3 +1,6 @@
+
+import 'dart:typed_data';
+
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:tuple/tuple.dart';
@@ -43,7 +46,12 @@ abstract class CoreArticle extends ArticleData{
   @protected
   Future<img.Image?> downloadCover();
 
-  Future<ImageProvider?> loadCover();
+  Future<ImageProvider?> loadCover() async {
+    img.Image? image = await downloadCover();
+    if (image == null) return null;
+    Uint8List encodedImage = img.encodeJpg(image, quality: 80);
+    return MemoryImage(encodedImage);
+  }
 
   @override
   int get hashCode => uniqName.hashCode;
