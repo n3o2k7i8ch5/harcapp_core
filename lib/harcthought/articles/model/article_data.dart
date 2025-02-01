@@ -44,8 +44,8 @@ class ArticleData extends ArticleIdentifier{
       articleElements.removeAt(articleElements.length-1);
 
     return ArticleData(
-      localId,
       source,
+      localId,
       title: title,
       tags: tags,
       date: date,

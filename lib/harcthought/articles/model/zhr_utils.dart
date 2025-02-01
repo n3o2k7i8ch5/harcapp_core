@@ -110,8 +110,8 @@ abstract class ZHRUtils{
     String localId = item.id!.split("?p=")[1];
 
     return ArticleData(
-      localId,
       source,
+      localId,
       title: item.title??(throw Exception('No title in atom item')),
       tags: tags,
       author: item.authors![0].name??(throw Exception('No author name in atom item')),
