@@ -177,7 +177,7 @@ abstract class _ArticleZhrLoader extends BaseArticleLoader{
 }
 
 
-abstract class ArticleAzymutLoader extends _ArticleZhrLoader{
+abstract class BaseArticleAzymutLoader extends _ArticleZhrLoader{
 
   @override
   ArticleSource get source => ArticleSource.azymut;
@@ -187,7 +187,7 @@ abstract class ArticleAzymutLoader extends _ArticleZhrLoader{
 
 }
 
-abstract class ArticlePojutrzeLoader extends _ArticleZhrLoader{
+abstract class BaseArticlePojutrzeLoader extends _ArticleZhrLoader{
 
   @override
   ArticleSource get source => ArticleSource.pojutrze;
