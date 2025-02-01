@@ -24,6 +24,7 @@ class ArticleCardWidget extends StatelessWidget{
   final EdgeInsets margin;
   final bool disableHeroTag;
   final double elevation;
+  final Widget? infoBottomTrailing;
 
   double get padding => 2*Dimen.iconMarg;
 
@@ -35,6 +36,7 @@ class ArticleCardWidget extends StatelessWidget{
         this.margin=EdgeInsets.zero,
         this.disableHeroTag=false,
         this.elevation=0,
+        this.infoBottomTrailing,
       });
 
   @override
@@ -91,7 +93,7 @@ class ArticleCardWidget extends StatelessWidget{
                       padding: const EdgeInsets.all(Dimen.iconMarg).subtract(
                           const EdgeInsets.only(top: (1.2 - 1)*Dimen.textSizeBig)
                       ),
-                      child: ArticleInfoWidget(article),
+                      child: ArticleInfoWidget(article, infoBottomTrailing: infoBottomTrailing),
                     ),
                   ),
                 ),

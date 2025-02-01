@@ -37,10 +37,16 @@ class ArticleInfoAuthorDateWidget extends StatelessWidget{
 
   final CoreArticle article;
   final double fontSize;
-  final bool showStats;
   final Color? authorThumbnailColor;
+  final Widget? trailing;
 
-  const ArticleInfoAuthorDateWidget(this.article, {super.key, this.fontSize = Dimen.textSizeNormal, this.showStats = true, this.authorThumbnailColor});
+  const ArticleInfoAuthorDateWidget(
+      this.article,
+      { super.key,
+        this.fontSize = Dimen.textSizeNormal,
+        this.authorThumbnailColor,
+        this.trailing,
+      });
 
   @override
   Widget build(BuildContext context) => Row(
@@ -82,6 +88,8 @@ class ArticleInfoAuthorDateWidget extends StatelessWidget{
       ),
 
       Expanded(child: Container()),
+
+      if(trailing != null) trailing!,
 
       // if(showStats && (AccountData.loggedIn || (!AccountData.loggedIn && article.isSeen)))
       //   Icon(
@@ -143,9 +151,9 @@ class ArticleInfoWidget extends StatelessWidget{
 
   final CoreArticle article;
   final bool titleCenter;
-  final bool showStats;
+  final Widget? infoBottomTrailing;
 
-  const ArticleInfoWidget(this.article, {super.key, this.titleCenter = true, this.showStats = true});
+  const ArticleInfoWidget(this.article, {super.key, this.titleCenter = true, this.infoBottomTrailing});
 
   @override
   Widget build(BuildContext context) => Material(
@@ -157,7 +165,7 @@ class ArticleInfoWidget extends StatelessWidget{
 
         const SizedBox(height: 1*Dimen.iconMarg),
 
-        ArticleInfoAuthorDateWidget(article, showStats: showStats)
+        ArticleInfoAuthorDateWidget(article, trailing: infoBottomTrailing)
 
       ],
     ),
