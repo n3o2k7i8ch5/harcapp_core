@@ -124,7 +124,7 @@ abstract class ZHRUtils{
 
   static Future<img.Image?> _coverFromHtmlLink(String link) async{
     try{
-      String htmlFile = await downloadFile(link);
+      String htmlFile = await downloadFile(link, webCors: true);
 
       String imageLink = htmlFile.split('<meta property="og:image" content="')[1];
       imageLink = imageLink.split('" />')[0];
