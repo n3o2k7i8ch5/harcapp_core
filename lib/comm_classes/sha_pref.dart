@@ -7,26 +7,25 @@ import 'package:tuple/tuple.dart';
 
 class ShaPref{
 
-  final SharedPreferences _preferences;
-  Logger? _logger;
+  static late SharedPreferences _preferences;
+  static Logger? _logger;
 
-  ShaPref(this._preferences);
+  ShaPref();
 
-  static Future<ShaPref> init() async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
-    return ShaPref(_preferences);
+  static Future<void> init() async {
+    _preferences = await SharedPreferences.getInstance();
   }
 
-  void setLogger(Logger? logger) => this._logger = logger;
-  
-  Map<String, dynamic> toMap(){
+  static void setLogger(Logger? logger) => _logger = logger;
+
+  static Map<String, dynamic> toMap(){
     final Map<String, dynamic> prefsMap = {};
     for(String key in _preferences.getKeys())
       prefsMap[key] = _preferences.get(key);
     return prefsMap;
   }
 
-  void setCustomMethods({
+  static void setCustomMethods({
     required bool? Function(String key)? customGetBoolOrNull,
     required FutureOr<void> Function(String key, bool value)? customSetBool,
 
@@ -53,33 +52,33 @@ class ShaPref{
     required void Function()? customClear,
 
   }){
-    this.customGetBoolOrNull = customGetBoolOrNull;
-    this.customSetBool = customSetBool;
+    ShaPref.customGetBoolOrNull = customGetBoolOrNull;
+    ShaPref.customSetBool = customSetBool;
 
-    this.customGetStringOrNull = customGetStringOrNull;
-    this.customSetString = customSetString;
+    ShaPref.customGetStringOrNull = customGetStringOrNull;
+    ShaPref.customSetString = customSetString;
 
-    this.customGetStringListOrNull = customGetStringListOrNull;
-    this.customSetStringList = customSetStringList;
+    ShaPref.customGetStringListOrNull = customGetStringListOrNull;
+    ShaPref.customSetStringList = customSetStringList;
 
-    this.customGetMapJsonStrOrNull = customGetMapJsonStrOrNull;
-    this.customSetMap = customSetMap;
+    ShaPref.customGetMapJsonStrOrNull = customGetMapJsonStrOrNull;
+    ShaPref.customSetMap = customSetMap;
 
-    this.customGetIntOrNull = customGetIntOrNull;
-    this.customSetInt = customSetInt;
+    ShaPref.customGetIntOrNull = customGetIntOrNull;
+    ShaPref.customSetInt = customSetInt;
 
-    this.customGetDoubleOrNull = customGetDoubleOrNull;
-    this.customSetDouble = customSetDouble;
+    ShaPref.customGetDoubleOrNull = customGetDoubleOrNull;
+    ShaPref.customSetDouble = customSetDouble;
 
-    this.customGetDateStrTimeOrNull = customGetDateTimeStrOrNull;
-    this.customSetDateTime = customSetDateTime;
+    ShaPref.customGetDateStrTimeOrNull = customGetDateTimeStrOrNull;
+    ShaPref.customSetDateTime = customSetDateTime;
 
-    this.customExists = customExists;
-    this.customRemove = customRemove;
-    this.customClear = customClear;
+    ShaPref.customExists = customExists;
+    ShaPref.customRemove = customRemove;
+    ShaPref.customClear = customClear;
   }
 
-  void setCustomMethodsWithMap(Map shaPrefMap, {SendPort? sendPort}) => setCustomMethods(
+  static void setCustomMethodsWithMap(Map shaPrefMap, {SendPort? sendPort}) => setCustomMethods(
       customGetBoolOrNull: (String key) => shaPrefMap[key],
       customSetBool: (String key, bool value){
         shaPrefMap[key] = value;
@@ -125,7 +124,7 @@ class ShaPref{
 
   static String badTypeErrMess(String key, dynamic e) => 'Tried to read value from shaPref key $key as incorrect type: ${e.toString()}';
 
-  FutureOr<void> set(String key, dynamic value){
+  static FutureOr<void> set(String key, dynamic value){
     if(value == null)
       remove(key);
     else if(value is bool)
@@ -144,8 +143,8 @@ class ShaPref{
       setDateTime(key, value);
   }
 
-  bool? Function(String key)? customGetBoolOrNull;
-  bool? getBoolOrNull(String key) {
+  static bool? Function(String key)? customGetBoolOrNull;
+  static bool? getBoolOrNull(String key) {
     try {
       if(customGetBoolOrNull != null) return customGetBoolOrNull?.call(key);
       return _preferences.getBool(key);
@@ -156,17 +155,17 @@ class ShaPref{
     }
   }
 
-  bool getBool(String key, bool def) => getBoolOrNull(key)??def;
+  static bool getBool(String key, bool def) => getBoolOrNull(key)??def;
 
-  FutureOr<void> Function(String key, bool value)? customSetBool;
-  Future<void> setBool(String key, bool value) async {
+  static FutureOr<void> Function(String key, bool value)? customSetBool;
+  static Future<void> setBool(String key, bool value) async {
     if(customSetBool != null) return await customSetBool!.call(key, value);
     _preferences.setBool(key, value);
   }
 
 
-  String? Function(String key)? customGetStringOrNull;
-  String? getStringOrNull(String key) {
+  static String? Function(String key)? customGetStringOrNull;
+  static String? getStringOrNull(String key) {
     try {
       if(customGetStringOrNull != null) return customGetStringOrNull?.call(key);
       return _preferences.getString(key);
@@ -177,17 +176,17 @@ class ShaPref{
     }
   }
 
-  String getString(String key, String def) => getStringOrNull(key)??def;
+  static String getString(String key, String def) => getStringOrNull(key)??def;
 
-  FutureOr<void> Function(String key, String value)? customSetString;
-  Future<void> setString(String key, String value) async {
+  static FutureOr<void> Function(String key, String value)? customSetString;
+  static Future<void> setString(String key, String value) async {
     if(customSetString != null) return await customSetString!.call(key, value);
     _preferences.setString(key, value);
   }
 
 
-  List<String>? Function(String key)? customGetStringListOrNull;
-  List<String>? getStringListOrNull(String key) {
+  static List<String>? Function(String key)? customGetStringListOrNull;
+  static List<String>? getStringListOrNull(String key) {
     try {
       if(customGetStringListOrNull != null) return customGetStringListOrNull!.call(key);
       return _preferences.getStringList(key);
@@ -198,17 +197,17 @@ class ShaPref{
     }
   }
 
-  List<String> getStringList(String key, List<String> def) => getStringListOrNull(key)??def;
+  static List<String> getStringList(String key, List<String> def) => getStringListOrNull(key)??def;
 
-  FutureOr<void> Function(String key, List<String> value)? customSetStringList;
-  Future<void> setStringList(String key, List<String> value) async {
+  static FutureOr<void> Function(String key, List<String> value)? customSetStringList;
+  static Future<void> setStringList(String key, List<String> value) async {
     if(customSetStringList != null) return await customSetStringList!.call(key, value);
     _preferences.setStringList(key, value);
   }
 
 
-  String? Function(String key)? customGetMapJsonStrOrNull;
-  Map<T_KEY, T_VAL>? getMapOrNull<T_KEY, T_VAL>(String key){
+  static String? Function(String key)? customGetMapJsonStrOrNull;
+  static Map<T_KEY, T_VAL>? getMapOrNull<T_KEY, T_VAL>(String key){
     try {
       if(customGetMapJsonStrOrNull != null){
         String? result = customGetMapJsonStrOrNull!(key);
@@ -226,18 +225,18 @@ class ShaPref{
     }
   }
 
-  Map<T_KEY, T_VAL> getMap<T_KEY, T_VAL>(String key, Map<T_KEY, T_VAL> def) =>
+  static Map<T_KEY, T_VAL> getMap<T_KEY, T_VAL>(String key, Map<T_KEY, T_VAL> def) =>
       getMapOrNull(key)??def;
 
-  FutureOr<void>? Function(String key, Map value)? customSetMap;
-  Future<void> setMap(String key, Map value) async {
+  static FutureOr<void>? Function(String key, Map value)? customSetMap;
+  static Future<void> setMap(String key, Map value) async {
     if(customSetMap != null) return await customSetMap!.call(key, value);
     _preferences.setString(key, jsonEncode(value));
   }
 
 
-  int? Function(String key)? customGetIntOrNull;
-  int? getIntOrNull(String key) {
+  static int? Function(String key)? customGetIntOrNull;
+  static int? getIntOrNull(String key) {
     try {
       if(customGetIntOrNull != null) return customGetIntOrNull!.call(key);
       return _preferences.getInt(key);
@@ -248,16 +247,16 @@ class ShaPref{
     }
   }
 
-  int getInt(String key, int def) => getIntOrNull(key)??def;
+  static int getInt(String key, int def) => getIntOrNull(key)??def;
 
-  FutureOr<void> Function(String key, int value)? customSetInt;
-  Future<void> setInt(String key, int value) async {
+  static FutureOr<void> Function(String key, int value)? customSetInt;
+  static Future<void> setInt(String key, int value) async {
     if(customSetInt != null) return await customSetInt!.call(key, value);
     _preferences.setInt(key, value);
   }
 
-  double? Function(String key)? customGetDoubleOrNull;
-  double? getDoubleOrNull(String key) {
+  static double? Function(String key)? customGetDoubleOrNull;
+  static double? getDoubleOrNull(String key) {
     try {
       if(customGetDoubleOrNull != null) return customGetDoubleOrNull!.call(key);
       return _preferences.getDouble(key);
@@ -268,17 +267,17 @@ class ShaPref{
     }
   }
 
-  double getDouble(String key, double def) => getDoubleOrNull(key)??def;
+  static double getDouble(String key, double def) => getDoubleOrNull(key)??def;
 
-  FutureOr<void> Function(String key, double value)? customSetDouble;
-  Future<void> setDouble(String key, double value) async {
+  static FutureOr<void> Function(String key, double value)? customSetDouble;
+  static Future<void> setDouble(String key, double value) async {
     if(customSetDouble != null) return await customSetDouble!.call(key, value);
     _preferences.setDouble(key, value);
   }
 
 
-  String? Function(String key)? customGetDateStrTimeOrNull;
-  DateTime? getDateTimeOrNull(String key){
+  static String? Function(String key)? customGetDateStrTimeOrNull;
+  static DateTime? getDateTimeOrNull(String key){
     try {
       if(customGetDateStrTimeOrNull != null) return DateTime.tryParse(customGetDateStrTimeOrNull!(key)??'');
       String? dateTimeStr = getString(key, 'nic');
@@ -291,27 +290,27 @@ class ShaPref{
     }
   }
 
-  DateTime? getDateTime(String key, DateTime? def) => getDateTimeOrNull(key)??def;
+  static DateTime? getDateTime(String key, DateTime? def) => getDateTimeOrNull(key)??def;
 
-  FutureOr<void> Function(String key, DateTime? value)? customSetDateTime;
-  Future<void> setDateTime(String key, DateTime? value) async {
+  static FutureOr<void> Function(String key, DateTime? value)? customSetDateTime;
+  static Future<void> setDateTime(String key, DateTime? value) async {
     if(customSetDateTime != null) return await customSetDateTime!(key, value);
     if(value == null) await remove(key);
     else await setString(key, value.toIso8601String());
   }
 
 
-  bool Function(String key)? customExists;
-  bool exists(String key) =>
+  static bool Function(String key)? customExists;
+  static bool exists(String key) =>
       customExists?.call(key)??_preferences.get(key) != null;
 
 
-  FutureOr<void> Function(String key)? customRemove;
-  Future<void> remove(String key) async =>
+  static FutureOr<void> Function(String key)? customRemove;
+  static Future<void> remove(String key) async =>
       await (customRemove?.call(key)??_preferences.remove(key));
 
-  void Function()? customClear;
-  void clear(){
+  static void Function()? customClear;
+  static void clear(){
     if(customClear != null) return customClear!();
     _preferences.clear();
   }
