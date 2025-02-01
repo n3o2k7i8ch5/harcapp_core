@@ -70,7 +70,7 @@ abstract class BaseArticleHarcAppLoader extends BaseArticleLoader{
 
   Future<ArticleData?> _downloadSingle(String localId) async {
     try {
-      Response response = await defDio.get(_articleUrl(localId));
+      Response response = await defDio.get(webCorsProxy(_articleUrl(localId)));
 
       Map jsonMap = jsonDecode(response.data);
       return ArticleData.fromJson(localId, source, jsonMap);
@@ -135,7 +135,7 @@ abstract class _ArticleZhrLoader extends BaseArticleLoader{
   Future<List<ArticleData>?> _downloadPage(int page) async {
     String _pageUrl = pageUrl(page);
     try {
-      Response response = await defDio.get(_pageUrl);
+      Response response = await defDio.get(webCorsProxy(_pageUrl));
       return _responseToArticleData(response, _pageUrl);
     } on DioException catch(e){
       if(e.response == null) return null;
