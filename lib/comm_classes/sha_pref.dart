@@ -1,21 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:isolate';
-import 'package:logger/logger.dart';
+import 'package:harcapp_core/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuple/tuple.dart';
 
 class ShaPref{
 
   static late SharedPreferences _preferences;
-  static Logger? _logger;
 
   ShaPref();
 
   static Future<void> init() async =>
     _preferences = await SharedPreferences.getInstance();
-
-  static void setLogger(Logger? logger) => _logger = logger;
 
   static Map<String, dynamic> toMap(){
     final Map<String, dynamic> prefsMap = {};
@@ -148,7 +145,7 @@ class ShaPref{
       if(customGetBoolOrNull != null) return customGetBoolOrNull?.call(key);
       return _preferences.getBool(key);
     } catch (e){
-      _logger?.w(badTypeErrMess(key, e));
+      logger?.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -169,7 +166,7 @@ class ShaPref{
       if(customGetStringOrNull != null) return customGetStringOrNull?.call(key);
       return _preferences.getString(key);
     } catch (e){
-      _logger?.w(badTypeErrMess(key, e));
+      logger?.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -190,7 +187,7 @@ class ShaPref{
       if(customGetStringListOrNull != null) return customGetStringListOrNull!.call(key);
       return _preferences.getStringList(key);
     } catch (e){
-      _logger?.w(badTypeErrMess(key, e));
+      logger?.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -218,7 +215,7 @@ class ShaPref{
       if(code == null) return null;
       return (jsonDecode(code) as Map).cast<T_KEY, T_VAL>();
     } catch (e){
-      _logger?.w(badTypeErrMess(key, e));
+      logger?.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -240,7 +237,7 @@ class ShaPref{
       if(customGetIntOrNull != null) return customGetIntOrNull!.call(key);
       return _preferences.getInt(key);
     } catch (e){
-      _logger?.w(badTypeErrMess(key, e));
+      logger?.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -260,7 +257,7 @@ class ShaPref{
       if(customGetDoubleOrNull != null) return customGetDoubleOrNull!.call(key);
       return _preferences.getDouble(key);
     } catch (e){
-      _logger?.w(badTypeErrMess(key, e));
+      logger?.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -283,7 +280,7 @@ class ShaPref{
       if(dateTimeStr == 'nic') return null;
       return DateTime.tryParse(dateTimeStr);
     } on Exception catch (e){
-      _logger?.w(badTypeErrMess(key, e));
+      logger?.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
