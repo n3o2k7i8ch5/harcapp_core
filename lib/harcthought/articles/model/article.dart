@@ -46,19 +46,19 @@ abstract class CoreArticle extends ArticleData{
       });
 
   @protected
-  Future<img.Image?> downloadCover();
+  Future<(img.Image?, img.Image?)> downloadCover(bool? big);
 
   static Uint8List encodeCover(img.Image image) => img.encodeJpg(image, quality: 80);
 
   static LocalSemaphore loadCoverSemaphore = LocalSemaphore(3);
 
-  Future<Uint8List?> loadCover() async {
+  Future<Uint8List?> loadCover(bool big) async {
     await loadCoverSemaphore.acquire();
-    img.Image? image = await downloadCover();
+    var (bigImage, smallImage) = await downloadCover(big);
     loadCoverSemaphore.release();
-    if (image == null) return null;
+    if ((big && bigImage == null) || (!big && smallImage == null)) return null;
     try {
-      return await compute(encodeCover, image);
+      return await compute(encodeCover, big?bigImage!:smallImage!);
     } catch(_){
       return null;
     }

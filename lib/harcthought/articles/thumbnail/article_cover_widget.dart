@@ -9,16 +9,14 @@ import 'package:harcapp_core/harcthought/articles/model/article.dart';
 class ArticleCoverWidget extends StatelessWidget{
 
   final CoreArticle article;
-  final ImageProvider? cover;
+  final bool big;
   final void Function(Uint8List cover)? onCoverLoaded;
 
-  const ArticleCoverWidget(this.article, {super.key, this.cover, this.onCoverLoaded});
+  const ArticleCoverWidget(this.article, {super.key, required this.big, this.onCoverLoaded});
 
   @override
-  Widget build(BuildContext context) => cover != null?
-  Image(image: cover!, fit: BoxFit.cover):
-  FutureBuilder<Uint8List?>(
-      future: article.loadCover(), // async work
+  Widget build(BuildContext context) => FutureBuilder<Uint8List?>(
+      future: article.loadCover(big), // async work
       builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:

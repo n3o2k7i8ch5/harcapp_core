@@ -15,6 +15,6 @@ mixin ArticlePojutrzeMixin on CoreArticle{
 
   @override
   @protected
-  Future<img.Image?> downloadCover() => ZHRUtils.downloadCover(link);
+  Future<(img.Image?, img.Image?)> downloadCover(bool? big) => ZHRUtils.downloadCover(link);
 
 }

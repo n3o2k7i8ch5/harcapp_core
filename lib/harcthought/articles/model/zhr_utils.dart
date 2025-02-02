@@ -133,24 +133,23 @@ abstract class ZHRUtils{
     });
   }
 
-  static Future<img.Image?> _coverFromHtmlLink(String link) async{
+  static Future<(img.Image?, img.Image?)> _coverFromHtmlLink(String link) async{
     try{
       String imageLink = await _coverLinkFromHtmlLink(link);
 
       Response response = await defDio.get(webCorsProxy(imageLink), options: Options(responseType: ResponseType.bytes));
       img.Image image = img.decodeImage(response.data)!;
 
-      image = img.copyResize(image, width: 1000);
-      return image;
+      img.Image bigImage = img.copyResize(image, width: 1000);
+      img.Image smallImage = img.copyResize(image, width: 320);
+      return (bigImage, smallImage);
     }catch(_){
-      return null;
+      return (null, null);
     }
   }
 
-  static Future<img.Image?> downloadCover(String link) async {
-    img.Image? image = await compute(_coverFromHtmlLink, link);
-    if(image == null) return null;
-    return image;
+  static Future<(img.Image?, img.Image?)> downloadCover(String link) async {
+    return await compute(_coverFromHtmlLink, link);
   }
 
 }

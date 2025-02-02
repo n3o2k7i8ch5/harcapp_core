@@ -15,6 +15,6 @@ mixin ArticleAzymutMixin on CoreArticle{
 
   @override
   @protected
-  Future<img.Image?> downloadCover() async => ZHRUtils.downloadCover(link);
+  Future<(img.Image?, img.Image?)> downloadCover(bool? big) async => ZHRUtils.downloadCover(link);
 
 }

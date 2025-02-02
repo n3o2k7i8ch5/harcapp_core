@@ -11,9 +11,9 @@ mixin ArticleHarcAppMixin on CoreArticle{
 
   @override
   @override
-  Future<img.Image?> downloadCover() async {
+  Future<(img.Image?, img.Image?)> downloadCover(bool? big) async {
     String downloadUrl = "https://gitlab.com/n3o2k7i8ch5/harcapp_data/raw/master/...";
-    return null;
+    return (null, null);
   }
 
 }
