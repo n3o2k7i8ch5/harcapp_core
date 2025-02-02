@@ -140,8 +140,8 @@ abstract class ZHRUtils{
       Response response = await defDio.get(webCorsProxy(imageLink), options: Options(responseType: ResponseType.bytes));
       img.Image image = img.decodeImage(response.data)!;
 
-      img.Image bigImage = img.copyResize(image, width: 1000);
-      img.Image smallImage = img.copyResize(image, width: 320);
+      img.Image bigImage = img.copyResize(image, width: 1000, interpolation: img.Interpolation.cubic);
+      img.Image smallImage = img.copyResize(image, width: 480);
       return (bigImage, smallImage);
     }catch(_){
       return (null, null);
