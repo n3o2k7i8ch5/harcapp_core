@@ -1,7 +1,4 @@
-import 'dart:typed_data';
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:semaphore_plus/semaphore_plus.dart';
 import 'package:tuple/tuple.dart';
@@ -46,7 +43,7 @@ abstract class CoreArticle extends ArticleData{
       });
 
   @protected
-  Future<(img.Image?, img.Image?)> downloadCover(bool? big);
+  Future<(img.Image?, img.Image?)> downloadCover();
 
   static Uint8List encodeCover(img.Image image) => img.encodeJpg(image, quality: 80);
 
@@ -54,7 +51,7 @@ abstract class CoreArticle extends ArticleData{
 
   Future<Uint8List?> loadCover(bool big) async {
     await loadCoverSemaphore.acquire();
-    var (bigImage, smallImage) = await downloadCover(big);
+    var (bigImage, smallImage) = await downloadCover();
     loadCoverSemaphore.release();
     if ((big && bigImage == null) || (!big && smallImage == null)) return null;
     try {
