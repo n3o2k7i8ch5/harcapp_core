@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:semaphore_plus/semaphore_plus.dart';
@@ -45,6 +47,8 @@ abstract class CoreArticle extends ArticleData{
   @protected
   Future<(img.Image?, img.Image?)> downloadCover();
 
+  FutureOr<void> onCoverDownloaded(img.Image? bigImage, img.Image? smallImage){}
+
   static Uint8List encodeCover(img.Image image) => img.encodeJpg(image, quality: 80);
 
   static LocalSemaphore loadCoverSemaphore = LocalSemaphore(3);
@@ -52,6 +56,7 @@ abstract class CoreArticle extends ArticleData{
   Future<Uint8List?> loadCover(bool big) async {
     await loadCoverSemaphore.acquire();
     var (bigImage, smallImage) = await downloadCover();
+    await onCoverDownloaded(bigImage, smallImage);
     loadCoverSemaphore.release();
     if ((big && bigImage == null) || (!big && smallImage == null)) return null;
     try {
