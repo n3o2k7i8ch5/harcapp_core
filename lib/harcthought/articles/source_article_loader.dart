@@ -18,7 +18,7 @@ abstract class BaseSourceArticleLoader{
   static void sortByDate(List<ArticleData> articles) =>
       articles.sort((art1, art2) => art1.date.isBefore(art2.date)?1:-1);
 
-  Future<(List<ArticleData>, String?)> download(String? newestLocalIdSeen);
+  Future<(List<ArticleData>?, String?)> download(String? newestLocalIdSeen);
 
   FutureOr<ArticleData?> getCached(String localId);
 
@@ -87,9 +87,9 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
     }
   }
   @override
-  Future<(List<ArticleData>, String?)> download(String? newestLocalIdSeen) async {
+  Future<(List<ArticleData>?, String?)> download(String? newestLocalIdSeen) async {
     List<String>? allIds = await downloadAllLocalIds();
-    if(allIds == null) return (<ArticleData>[], null);
+    if(allIds == null) return (null, null);
 
     List<String> unloadedIds;
     if(newestLocalIdSeen == null)
@@ -154,7 +154,7 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
   }
 
   @override
-  Future<(List<ArticleData>, String?)> download(String? newestLocalIdSeen) async {
+  Future<(List<ArticleData>?, String?)> download(String? newestLocalIdSeen) async {
 
     Set<String> downloadedIds = {};
     List<ArticleData> result = [];
