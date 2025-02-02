@@ -46,6 +46,9 @@ abstract class BaseSourceArticleLoader{
       await cache(articleData);
   }
 
+  FutureOr<void> saveNewestLocalIdSeen(String localId);
+  FutureOr<String?> getNewestLocalIdSeen();
+
 }
 
 abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
