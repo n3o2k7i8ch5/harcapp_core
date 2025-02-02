@@ -15,6 +15,9 @@ abstract class BaseArticleLoader{
 
   ArticleSource get source;
 
+  static void sortByDate(List<ArticleData> articles) =>
+      articles.sort((art1, art2) => art1.date.isBefore(art2.date)?1:-1);
+
   FutureOr<(List<ArticleData>, String?)> download(String? newestLocalIdSeen);
 
   FutureOr<ArticleData?> getCached(String localId);
@@ -30,6 +33,8 @@ abstract class BaseArticleLoader{
       if(articleData != null) cachedArticles.add(articleData);
       else invalidCacheIds.add(localId);
     }
+
+    sortByDate(cachedArticles);
 
     return (cachedArticles, invalidCacheIds);
   }
