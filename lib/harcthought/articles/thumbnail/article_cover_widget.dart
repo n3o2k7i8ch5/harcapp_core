@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
@@ -8,16 +10,16 @@ class ArticleCoverWidget extends StatelessWidget{
 
   final CoreArticle article;
   final ImageProvider? cover;
-  final void Function(ImageProvider cover)? onCoverLoaded;
+  final void Function(Uint8List cover)? onCoverLoaded;
 
   const ArticleCoverWidget(this.article, {super.key, this.cover, this.onCoverLoaded});
 
   @override
   Widget build(BuildContext context) => cover != null?
   Image(image: cover!, fit: BoxFit.cover):
-  FutureBuilder<ImageProvider?>(
+  FutureBuilder<Uint8List?>(
       future: article.loadCover(), // async work
-      builder: (BuildContext context, AsyncSnapshot<ImageProvider?> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
             return Center(
@@ -32,7 +34,7 @@ class ArticleCoverWidget extends StatelessWidget{
             if(snapshot.data == null)
               return const CoverProblemWidget();
             onCoverLoaded?.call(snapshot.data!);
-            return Image(image: snapshot.data!, fit: BoxFit.cover);
+            return Image(image: MemoryImage(snapshot.data!), fit: BoxFit.cover);
         }
 
       });

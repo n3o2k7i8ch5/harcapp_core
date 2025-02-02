@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:semaphore_plus/semaphore_plus.dart';
@@ -47,15 +48,20 @@ abstract class CoreArticle extends ArticleData{
   @protected
   Future<img.Image?> downloadCover();
 
+  static Uint8List encodeCover(img.Image image) => img.encodeJpg(image, quality: 80);
+
   static LocalSemaphore loadCoverSemaphore = LocalSemaphore(3);
 
-  Future<ImageProvider?> loadCover() async {
+  Future<Uint8List?> loadCover() async {
     await loadCoverSemaphore.acquire();
     img.Image? image = await downloadCover();
     loadCoverSemaphore.release();
     if (image == null) return null;
-    Uint8List encodedImage = img.encodeJpg(image, quality: 80);
-    return MemoryImage(encodedImage);
+    try {
+      return await compute(encodeCover, image);
+    } catch(_){
+      return null;
+    }
   }
 
   @override
