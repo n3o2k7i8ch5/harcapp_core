@@ -19,7 +19,7 @@ abstract class BaseSourceArticleLoader{
   static void sortByDate(List<ArticleData> articles) =>
       articles.sort((art1, art2) => art1.date.isBefore(art2.date)?1:-1);
 
-  Future<(List<ArticleData>?, String?)> download(String? newestLocalIdSeen);
+  Stream<(ArticleData, String?)> download(String? newestLocalIdSeen);
 
   FutureOr<ArticleData?> getCached(String localId);
 
@@ -88,9 +88,9 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
     }
   }
   @override
-  Future<(List<ArticleData>?, String?)> download(String? newestLocalIdSeen) async {
+  Stream<(ArticleData, String?)> download(String? newestLocalIdSeen) async* {
     List<String>? allIds = await downloadAllLocalIds();
-    if(allIds == null) return (null, null);
+    if(allIds == null) return;
 
     List<String> unloadedIds;
     if(newestLocalIdSeen == null)
@@ -104,17 +104,25 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
     List<ArticleData> articles = [];
     String? previousLocalId = newestLocalIdSeen;
     String? updatedNewestLocalIdSeen;
+    bool updatedNewestLocalIdSeenReturned = false;
+
     for(String localId in unloadedIds){
       ArticleData? articleData = await _downloadSingle(localId);
+
       if(articleData != null) {
         articles.add(articleData);
         previousLocalId = localId;
+        updatedNewestLocalIdSeenReturned = false;
       } else if(articleData == null && updatedNewestLocalIdSeen == null)
         updatedNewestLocalIdSeen = previousLocalId;
+      else if (articleData == null)
+        continue;
 
+      yield (articleData!, updatedNewestLocalIdSeenReturned?null:updatedNewestLocalIdSeen);
+      updatedNewestLocalIdSeenReturned = true;
     }
 
-    return (articles, updatedNewestLocalIdSeen);
+    // return (articles, updatedNewestLocalIdSeen);
   }
 
 }
@@ -152,7 +160,7 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
     String _pageUrl = pageUrl(page);
     try {
       Response response = await defDio.get(webCorsProxy(_pageUrl));
-      logger.d('Downloaded page: $page for ${source.name}');
+      logger.d('Downloaded page $page for ${source.name}');
       return await _responseToArticleData(response, _pageUrl);
     } on DioException catch(e){
       if(e.response == null) return null;
@@ -163,37 +171,53 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
   }
 
   @override
-  Future<(List<ArticleData>?, String?)> download(String? newestLocalIdSeen) async {
+  Stream<(ArticleData, String?)> download(String? newestLocalIdSeen) async* {
 
     Set<String> downloadedIds = {};
-    List<ArticleData> result = [];
+    // List<ArticleData> result = [];
 
     int page = 0;
+    String? updatedNewestLocalIdSeen = null;
+    bool updatedNewestLocalIdSeenReturned = false;
     while(true) {
-      List<ArticleData> articles = await _downloadPage(page) ?? [];
+      List<ArticleData>? articles = await _downloadPage(page);
 
-      if (articles.isEmpty) break;
+      if (articles == null) break;
 
-      bool doBreak = false;
+      if (updatedNewestLocalIdSeen == null && articles.isNotEmpty)
+        updatedNewestLocalIdSeen = articles.first.localId;
+
+      // bool doBreak = false;
       for (ArticleData article in articles) {
-        if(newestLocalIdSeen != null && newestLocalIdSeen == article.uniqName){
-          doBreak = true;
-          break;
-        }
+        if(newestLocalIdSeen != null && newestLocalIdSeen == article.uniqName)
+          return;
 
         if(downloadedIds.contains(article.uniqName))
           continue;
 
         downloadedIds.add(article.uniqName);
-        result.add(article);
+        yield (article, updatedNewestLocalIdSeenReturned?null:updatedNewestLocalIdSeen);
+        updatedNewestLocalIdSeenReturned = true;
+        // ---
+        // if(newestLocalIdSeen != null && newestLocalIdSeen == article.uniqName){
+        //   doBreak = true;
+        //   break;
+        // }
+        //
+        // if(downloadedIds.contains(article.uniqName))
+        //   continue;
+        //
+        // downloadedIds.add(article.uniqName);
+        // yield (articles, updatedNewestLocalIdSeen);
+        // result.add(article);
       }
 
-      if(doBreak || page == -1) break;
+      // if(doBreak || page == -1) break;
 
       page++;
     }
 
-    return (result, result.isEmpty?null:result.last.localId);
+    // return (result, result.isEmpty?null:result.last.localId);
   }
 
 }

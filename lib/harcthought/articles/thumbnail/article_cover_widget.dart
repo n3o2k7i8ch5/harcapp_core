@@ -11,19 +11,26 @@ import 'package:harcapp_core/logger.dart';
 class ArticleCoverWidget extends StatelessWidget{
 
   final CoreArticle article;
-  final bool big;
+  final bool bigResolution;
+  final bool loadWebImage;
 
-  const ArticleCoverWidget(this.article, {super.key, required this.big});
+  const ArticleCoverWidget(
+      this.article,
+      { super.key,
+        required this.bigResolution,
+        this.loadWebImage = false, // Web images are huge. Don't load them by default.
+      });
 
   @override
-  Widget build(BuildContext context) => article.imageUrl == null?
-  _FallbackCoverWidget(article, big: big):
+  Widget build(BuildContext context) =>
+  !loadWebImage || article.imageUrl == null?
+  _FallbackCoverWidget(article, big: bigResolution):
   CachedNetworkImage(
     imageUrl: article.imageUrl!,
     placeholder: (context, url) => _LoadingWidget(),
     errorWidget: (context, url, error){
       logger.w('Error loading article cover from ${article.uniqName}: $error. Loading fallback cover.');
-      return _FallbackCoverWidget(article, big: big);
+      return _FallbackCoverWidget(article, big: bigResolution);
     },
   );
 
