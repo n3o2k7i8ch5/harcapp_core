@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:harcapp_core/comm_classes/dio.dart';
 import 'package:harcapp_core/harcthought/articles/model/article_source.dart';
 import 'package:harcapp_core/harcthought/articles/model/zhr_utils.dart';
+import 'package:harcapp_core/logger.dart';
 import 'package:webfeed_plus/domain/atom_feed.dart';
 import 'package:webfeed_plus/domain/atom_item.dart';
 import 'package:html_unescape/html_unescape.dart';
@@ -151,6 +152,7 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
     String _pageUrl = pageUrl(page);
     try {
       Response response = await defDio.get(webCorsProxy(_pageUrl));
+      logger.d('Downloaded page: $page for ${source.name}');
       return await _responseToArticleData(response, _pageUrl);
     } on DioException catch(e){
       if(e.response == null) return null;
