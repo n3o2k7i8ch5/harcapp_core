@@ -62,7 +62,7 @@ abstract class SingleComputer<TErr, TListener extends SingleComputerListener<TEr
 
     logger.i('Single computer $computerName called. ${_running?'Computer was already running - run merged.':'Computer was idle - run started.'}');
 
-    if(running){
+    if(_running){
       _runRequested = false;
       checkRunningSemaphore.release();
 
