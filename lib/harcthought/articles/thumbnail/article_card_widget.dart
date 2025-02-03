@@ -51,7 +51,7 @@ class ArticleCardWidget extends StatelessWidget{
             fit: StackFit.expand,
             children: [
 
-              ArticleCoverWidget(article, big: false),
+              ArticleCoverWidget(article, big: true),
 
               Positioned(
                   top: Dimen.defMarg,
