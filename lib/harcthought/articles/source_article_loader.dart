@@ -50,6 +50,8 @@ abstract class BaseSourceArticleLoader{
   FutureOr<void> saveNewestLocalIdSeen(String localId);
   FutureOr<String?> getNewestLocalIdSeen();
 
+  const BaseSourceArticleLoader();
+
 }
 
 abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
@@ -132,6 +134,10 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
 
   String pageUrl(int page);
 
+  final bool downloadCoverLinks;
+
+  const _ArticleZhrLoader({this.downloadCoverLinks = false});
+
   Future<List<ArticleData>> _responseToArticleData(Response response, String pageUrl) async {
     AtomFeed atomFeed;
     try {
@@ -143,11 +149,12 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
     List<ArticleData> articles = [];
     for(AtomItem item in atomFeed.items??[]) {
       String? imageUrl;
-      try{
-        String? articleLink = ZHRUtils.linkFromAtom(item);
-        if(articleLink != null)
-          imageUrl = await ZHRUtils.coverLinkFromHtmlLink(articleLink);
-      } catch (_) {}
+      if(downloadCoverLinks)
+        try{
+          String? articleLink = ZHRUtils.linkFromAtom(item);
+          if(articleLink != null)
+            imageUrl = await ZHRUtils.coverLinkFromHtmlLink(articleLink);
+        } catch (_) {}
 
       try {
         articles.add(ZHRUtils.fromAtomItem(source, item, imageUrl: imageUrl));
