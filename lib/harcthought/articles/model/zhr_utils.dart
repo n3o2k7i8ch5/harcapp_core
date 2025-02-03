@@ -84,7 +84,9 @@ abstract class ZHRUtils{
 
   }
 
-  static ArticleData fromAtomItem(ArticleSource source, AtomItem item){
+  static String? linkFromAtom(AtomItem item) => item.links?[0].href;
+
+  static ArticleData fromAtomItem(ArticleSource source, AtomItem item, {String? imageUrl}){
 
     List<String> tags = item.categories!.map((cat) => '#${cat.term!.toUpperCase()}').toList();
 
@@ -117,13 +119,13 @@ abstract class ZHRUtils{
       tags: tags,
       author: item.authors![0].name??(throw Exception('No author name in atom item')),
       date: DateTime.tryParse(item.published!)??(throw Exception('No publish date in atom item')),
-      link: item.links![0].href!,
-      imageUrl: null,
+      link: linkFromAtom(item)??(throw Exception('No link in atom item')),
+      imageUrl: imageUrl,
       articleElements: artElements,
     );
   }
 
-  static Future<String> _coverLinkFromHtmlLink(String link){
+  static Future<String> coverLinkFromHtmlLink(String link){
     return downloadFile(link, webCors: true).then((htmlFile) {
       if(htmlFile == null) return '';
       String imageLink = htmlFile.split('<meta property="og:image" content="')[1];
@@ -135,7 +137,7 @@ abstract class ZHRUtils{
 
   static Future<(img.Image?, img.Image?)> _coverFromHtmlLink(String link) async{
     try{
-      String imageLink = await _coverLinkFromHtmlLink(link);
+      String imageLink = await coverLinkFromHtmlLink(link);
 
       Response response = await defDio.get(webCorsProxy(imageLink), options: Options(responseType: ResponseType.bytes));
       img.Image image = img.decodeImage(response.data)!;

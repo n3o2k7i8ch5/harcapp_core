@@ -123,7 +123,7 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
 
   String pageUrl(int page);
 
-  List<ArticleData> _responseToArticleData(Response response, String pageUrl){
+  Future<List<ArticleData>> _responseToArticleData(Response response, String pageUrl) async {
     AtomFeed atomFeed;
     try {
       atomFeed = AtomFeed.parse(HtmlUnescape().convert(response.data));
@@ -132,11 +132,18 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
     }
 
     List<ArticleData> articles = [];
-    for(AtomItem item in atomFeed.items??[])
-      try {
-        articles.add(ZHRUtils.fromAtomItem(source, item));
+    for(AtomItem item in atomFeed.items??[]) {
+      String? imageUrl;
+      try{
+        String? articleLink = ZHRUtils.linkFromAtom(item);
+        if(articleLink != null)
+          imageUrl = await ZHRUtils.coverLinkFromHtmlLink(articleLink);
       } catch (_) {}
 
+      try {
+        articles.add(ZHRUtils.fromAtomItem(source, item, imageUrl: imageUrl));
+      } catch (_) {}
+    }
     return articles;
   }
 
@@ -144,7 +151,7 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
     String _pageUrl = pageUrl(page);
     try {
       Response response = await defDio.get(webCorsProxy(_pageUrl));
-      return _responseToArticleData(response, _pageUrl);
+      return await _responseToArticleData(response, _pageUrl);
     } on DioException catch(e){
       if(e.response == null) return null;
       return _responseToArticleData(e.response!, _pageUrl);
