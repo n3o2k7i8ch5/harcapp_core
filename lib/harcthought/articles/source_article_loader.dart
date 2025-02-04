@@ -26,6 +26,8 @@ class ArticleDataOrList {
 
   ArticleData get articleData => _articleData!;
   List<ArticleData> get list => _list!;
+
+  List<ArticleData> toList() => isList?_list!:[_articleData!];
 }
 
 abstract class BaseSourceArticleLoader{
