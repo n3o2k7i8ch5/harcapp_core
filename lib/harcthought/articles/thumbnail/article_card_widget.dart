@@ -16,6 +16,7 @@ class ArticleCardWidget extends StatelessWidget{
   static const double height = 242;
 
   final CoreArticle article;
+  final Key? coverKey;
   final void Function(
       BuildContext context,
       CoreArticle article
@@ -31,6 +32,7 @@ class ArticleCardWidget extends StatelessWidget{
   const ArticleCardWidget(
       this.article,
       { super.key,
+        this.coverKey,
         this.onTap,
         this.radius=0,
         this.margin=EdgeInsets.zero,
@@ -52,9 +54,9 @@ class ArticleCardWidget extends StatelessWidget{
             children: [
 
               ArticleCoverWidget(
+                  key: coverKey,
                   article,
                   bigResolution: true,
-                  key: ValueKey(('articleCover', article.uniqName))
               ),
 
               Positioned(
