@@ -9,7 +9,7 @@ import 'package:harcapp_core/harcthought/articles/model/article.dart';
 import 'package:harcapp_core/logger.dart';
 
 // This is a stateful widget for a reason. It's to prevent re-loading the image.
-class ArticleCoverWidget extends StatefulWidget {
+class ArticleCoverWidget extends StatelessWidget {
 
   final CoreArticle article;
   final bool bigResolution;
@@ -20,17 +20,6 @@ class ArticleCoverWidget extends StatefulWidget {
         required this.bigResolution,
         this.loadWebImage = false, // Web images are huge. Don't load them by default.
       });
-
-  @override
-  ArticleCoverWidgetState createState() => ArticleCoverWidgetState();
-
-}
-
-class ArticleCoverWidgetState extends State<ArticleCoverWidget>{
-
-  CoreArticle get article => widget.article;
-  bool get bigResolution => widget.bigResolution;
-  bool get loadWebImage => widget.loadWebImage;
 
   @override
   Widget build(BuildContext context) =>
@@ -62,7 +51,7 @@ class _LoadingWidget extends StatelessWidget{
 
 }
 
-class _FallbackCoverWidget extends StatelessWidget{
+class _FallbackCoverWidget extends StatefulWidget{
 
   final CoreArticle article;
   final bool big;
@@ -70,20 +59,44 @@ class _FallbackCoverWidget extends StatelessWidget{
   const _FallbackCoverWidget(this.article, {super.key, required this.big});
 
   @override
-  Widget build(BuildContext context) => FutureBuilder<Uint8List?>(
-      future: article.loadCover(big), // async work
-      builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-            return _LoadingWidget();
-          default:
-            if (snapshot.hasError)
-              return const CoverProblemWidget();
-            if(snapshot.data == null)
-              return const CoverProblemWidget();
-            return Image(image: MemoryImage(snapshot.data!), fit: BoxFit.cover);
+  State<StatefulWidget> createState() => _FallbackCoverWidgetState();
+
+}
+
+class _FallbackCoverWidgetState extends State<_FallbackCoverWidget>{
+
+  CoreArticle get article => widget.article;
+  bool get big => widget.big;
+
+  Uint8List? cover;
+
+  @override
+  void initState() {
+    cover = null;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      cover != null?
+      Image(image: MemoryImage(cover!), fit: BoxFit.cover):
+      FutureBuilder<Uint8List?>(
+        future: article.loadCover(big), // async work
+        builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return _LoadingWidget();
+            default:
+              if (snapshot.hasError)
+                return const CoverProblemWidget();
+              if(snapshot.data == null)
+                return const CoverProblemWidget();
+
+              cover = snapshot.data;
+              return Image(image: MemoryImage(snapshot.data!), fit: BoxFit.cover);
+          }
         }
-      });
+        );
 
 }
 
