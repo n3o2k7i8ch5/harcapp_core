@@ -8,18 +8,29 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/harcthought/articles/model/article.dart';
 import 'package:harcapp_core/logger.dart';
 
-class ArticleCoverWidget extends StatelessWidget{
+// This is a stateful widget for a reason. It's to prevent re-loading the image.
+class ArticleCoverWidget extends StatefulWidget {
 
   final CoreArticle article;
   final bool bigResolution;
   final bool loadWebImage;
 
-  const ArticleCoverWidget(
-      this.article,
+  const ArticleCoverWidget(this.article,
       { super.key,
         required this.bigResolution,
         this.loadWebImage = false, // Web images are huge. Don't load them by default.
       });
+
+  @override
+  ArticleCoverWidgetState createState() => ArticleCoverWidgetState();
+
+}
+
+class ArticleCoverWidgetState extends State<ArticleCoverWidget>{
+
+  CoreArticle get article => widget.article;
+  bool get bigResolution => widget.bigResolution;
+  bool get loadWebImage => widget.loadWebImage;
 
   @override
   Widget build(BuildContext context) =>
