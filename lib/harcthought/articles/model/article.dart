@@ -55,9 +55,14 @@ abstract class CoreArticle extends ArticleData{
 
   Future<Uint8List?> loadCover(bool big) async {
     await downloadCoverSemaphore.acquire();
-    var (bigImage, smallImage) = await downloadCover();
-    await onCoverDownloaded(bigImage, smallImage);
-    downloadCoverSemaphore.release();
+    img.Image? bigImage;
+    img.Image? smallImage;
+    try {
+      (bigImage, smallImage) = await downloadCover();
+      await onCoverDownloaded(bigImage, smallImage);
+    }finally{
+      downloadCoverSemaphore.release();
+    }
     if ((big && bigImage == null) || (!big && smallImage == null)) return null;
     try {
       return await compute(encodeCover, big?bigImage!:smallImage!);
