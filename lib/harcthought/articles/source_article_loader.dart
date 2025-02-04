@@ -37,7 +37,21 @@ abstract class BaseSourceArticleLoader{
   static void sortByDate(List<ArticleData> articles) =>
       articles.sort((art1, art2) => art1.date.isBefore(art2.date)?1:-1);
 
-  Stream<(ArticleDataOrList, String?)> download(
+  Stream<(
+    ArticleDataOrList,
+
+    // First non-null localId if all subsequent articles until the current
+    // newestLocalIdSeen are non-null. Else should return null.
+    String? newestLocalIdSeen,
+
+    // Last non-null localId after the current oldestLocalIdSeen. Else should
+    // return null.
+    String? oldestLocalIdSeen,
+
+    // Should return true if all articles after the current oldestLocalIdSeen
+    // are non-null and the last one is returned. Else should return false.
+    bool? isAllHistoryLoaded
+  )> download(
     String? newestLocalIdSeen,
     String? oldestLocalIdSeen,
     bool isAllHistoryLoaded
@@ -118,18 +132,18 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
     }
   }
 
-  static List<String> getUnloadedIds(
+  static (List<String>, List<String>) getUnloadedIds(
     List<String> allIds,
     String? newestLocalIdSeen,
     String? oldestLocalIdSeen,
     bool isAllHistoryLoaded
   ){
-    if(newestLocalIdSeen == null || oldestLocalIdSeen == null) return allIds;
+    if(newestLocalIdSeen == null || oldestLocalIdSeen == null) return (allIds, []);
 
     if(isAllHistoryLoaded){
       int newestLocalIdSeenIdx = allIds.indexOf(newestLocalIdSeen);
-      if(newestLocalIdSeenIdx == -1) return allIds;
-      else return allIds.sublist(newestLocalIdSeenIdx);
+      if(newestLocalIdSeenIdx == -1) return (allIds, []);
+      else return (allIds.sublist(newestLocalIdSeenIdx), []);
     }
 
     int oldestLocalIdSeenIdx = allIds.indexOf(oldestLocalIdSeen);
@@ -138,14 +152,26 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
     List<String> newUnseenIds = allIds.sublist(oldestLocalIdSeenIdx + 1);
     List<String> oldUnseenIds = allIds.sublist(0, newestLocalIdSeenIdx);
 
-    List<String> unloadedIds = newUnseenIds + oldUnseenIds;
-
-    return unloadedIds;
+    return (newUnseenIds, oldUnseenIds);
 
   }
 
   @override
-  Stream<(ArticleDataOrList, String?)> download(
+  Stream<(
+    ArticleDataOrList,
+
+    // First non-null localId if all subsequent articles until the current
+    // newestLocalIdSeen are non-null. Else should return null.
+    String? newestLocalIdSeen,
+
+    // Last non-null localId after the current oldestLocalIdSeen. Else should
+    // return null.
+    String? oldestLocalIdSeen,
+
+    // Should return true if all articles after the current oldestLocalIdSeen
+    // are non-null and the last one is returned. Else should return false.
+    bool? isAllHistoryLoaded
+  )> download(
     String? newestLocalIdSeen,
     String? oldestLocalIdSeen,
     bool isAllHistoryLoaded
@@ -155,38 +181,72 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
     List<String>? allIds = await downloadAllLocalIds();
     if(allIds == null) return;
 
-    List<String> unloadedIds = getUnloadedIds(
+    var (unloadedNewerIds, unloadedOlderIds) = getUnloadedIds(
       allIds,
       newestLocalIdSeen,
       oldestLocalIdSeen,
       isAllHistoryLoaded
     );
 
-    List<ArticleData> articles = [];
-    String? previousLocalId = newestLocalIdSeen;
-    String? updatedNewestLocalIdSeen;
-    bool updatedNewestLocalIdSeenReturned = false;
-
-    for(String localId in unloadedIds){
+    // Go through all newer unloaded articles
+    String? newestUninterruptedLocalIdSeen = unloadedNewerIds.isEmpty?null:unloadedNewerIds.first;
+    bool previousWasNull = false;
+    for(String localId in unloadedNewerIds){
       ArticleData? articleData = await _downloadSingle(localId);
 
-      if(articleData != null) {
-        articles.add(articleData);
-        previousLocalId = localId;
-        updatedNewestLocalIdSeenReturned = false;
-      } else if(articleData == null && updatedNewestLocalIdSeen == null)
-        updatedNewestLocalIdSeen = previousLocalId;
-      else if (articleData == null)
+      if(articleData == null) {
+        previousWasNull = true;
         continue;
+      }
+
+      if(previousWasNull)
+        newestUninterruptedLocalIdSeen = localId;
 
       yield (
-        ArticleDataOrList.asSingle(articleData!),
-
-        updatedNewestLocalIdSeenReturned?
-        null:
-        updatedNewestLocalIdSeen
+        ArticleDataOrList.asSingle(articleData),
+        localId == unloadedNewerIds.last?newestUninterruptedLocalIdSeen:null,
+        null,
+        null
       );
-      updatedNewestLocalIdSeenReturned = true;
+    }
+
+    // Go through all older unloaded articles
+    String? previousNonNullLocalId = null;
+    bool oldestLocalIdSeenReturned = false;
+    for(String localId in unloadedOlderIds){
+      ArticleData? articleData = await _downloadSingle(localId);
+
+      if(articleData == null) {
+
+        if(!oldestLocalIdSeenReturned)
+          yield (
+            ArticleDataOrList.asList([]),
+            null,
+            previousNonNullLocalId,
+            null
+          );
+
+        oldestLocalIdSeenReturned = true;
+        continue;
+      }
+
+      previousNonNullLocalId = localId;
+
+      yield (
+        ArticleDataOrList.asSingle(articleData),
+
+        null,
+
+        // If last and not returned yet
+        localId == unloadedOlderIds.last && !oldestLocalIdSeenReturned?
+        previousNonNullLocalId:
+        null,
+
+        // If last and not returned yet
+        localId == unloadedOlderIds.last && !oldestLocalIdSeenReturned?
+        true:
+        null
+      );
     }
 
   }
@@ -195,6 +255,8 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
 
 
 abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
+
+  static const fullPageSize = 20;
 
   String pageUrl(int page);
 
@@ -242,9 +304,14 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
   }
 
   @override
-  Stream<(ArticleDataOrList, String?)> download(
+  Stream<(
+    ArticleDataOrList,
     String? newestLocalIdSeen,
     String? oldestLocalIdSeen,
+    bool? isAllHistoryLoaded
+  )> download(
+    String? newestLocalIdSeen,
+    String? oldestLocalIdSeen, // Not used
     bool isAllHistoryLoaded
   ) async* {
     if(!isAllHistoryLoaded) newestLocalIdSeen = null;
@@ -262,6 +329,8 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
       if (updatedNewestLocalIdSeen == null && articles.isNotEmpty)
         updatedNewestLocalIdSeen = articles.first.localId;
 
+      bool isLastPage = articles.length < fullPageSize;
+
       articles = articles.where((article) => !downloadedIds.contains(article.uniqName)).toList();
       downloadedIds.addAll(articles.map((article) => article.uniqName));
 
@@ -271,14 +340,18 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
             articles = articles!.sublist(0, articles.indexOf(article));
             yield (
               ArticleDataOrList.asList(articles),
-              updatedNewestLocalIdSeenReturned ? null : updatedNewestLocalIdSeen
+              updatedNewestLocalIdSeenReturned ? null : updatedNewestLocalIdSeen,
+              null,
+              isLastPage && !isAllHistoryLoaded?true:null,
             );
             return;
           }
 
       yield (
         ArticleDataOrList.asList(articles!),
-        updatedNewestLocalIdSeenReturned?null:updatedNewestLocalIdSeen
+        updatedNewestLocalIdSeenReturned?null:updatedNewestLocalIdSeen,
+        null,
+        isLastPage && !isAllHistoryLoaded?true:null,
       );
 
       updatedNewestLocalIdSeenReturned = true;
