@@ -211,7 +211,7 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
     while(true) {
       List<ArticleData>? articles = await _downloadPage(page);
 
-      if (articles == null) return;
+      if (articles == null || articles.isEmpty) return;
 
       if (updatedNewestLocalIdSeen == null && articles.isNotEmpty)
         updatedNewestLocalIdSeen = articles.first.localId;
