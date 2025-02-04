@@ -51,13 +51,13 @@ abstract class CoreArticle extends ArticleData{
 
   static Uint8List encodeCover(img.Image image) => img.encodeJpg(image, quality: 80);
 
-  static LocalSemaphore loadCoverSemaphore = LocalSemaphore(3);
+  static LocalSemaphore downloadCoverSemaphore = LocalSemaphore(3);
 
   Future<Uint8List?> loadCover(bool big) async {
-    await loadCoverSemaphore.acquire();
+    await downloadCoverSemaphore.acquire();
     var (bigImage, smallImage) = await downloadCover();
     await onCoverDownloaded(bigImage, smallImage);
-    loadCoverSemaphore.release();
+    downloadCoverSemaphore.release();
     if ((big && bigImage == null) || (!big && smallImage == null)) return null;
     try {
       return await compute(encodeCover, big?bigImage!:smallImage!);
