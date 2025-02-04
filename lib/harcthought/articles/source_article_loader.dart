@@ -161,12 +161,12 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
 
   const _ArticleZhrLoader({this.downloadCoverLinks = false});
 
-  Future<List<ArticleData>> _responseToArticleData(Response response, String pageUrl) async {
+  Future<List<ArticleData>?> _responseToArticleData(Response response, String pageUrl) async {
     AtomFeed atomFeed;
     try {
       atomFeed = AtomFeed.parse(HtmlUnescape().convert(response.data));
     } catch (_){
-      return [];
+      return null;
     }
 
     List<ArticleData> articles = [];
