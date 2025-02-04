@@ -211,7 +211,7 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
     while(true) {
       List<ArticleData>? articles = await _downloadPage(page);
 
-      if (articles == null) break;
+      if (articles == null) return;
 
       if (updatedNewestLocalIdSeen == null && articles.isNotEmpty)
         updatedNewestLocalIdSeen = articles.first.localId;
@@ -222,7 +222,7 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
       if(newestLocalIdSeen != null)
         for (ArticleData article in articles)
           if (newestLocalIdSeen == article.localId) {
-            articles.sublist(0, articles.indexOf(article));
+            articles = articles!.sublist(0, articles.indexOf(article));
             yield (
               ArticleDataOrList.asList(articles),
               updatedNewestLocalIdSeenReturned ? null : updatedNewestLocalIdSeen
@@ -231,7 +231,7 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
           }
 
       yield (
-        ArticleDataOrList.asList(articles),
+        ArticleDataOrList.asList(articles!),
         updatedNewestLocalIdSeenReturned?null:updatedNewestLocalIdSeen
       );
 
