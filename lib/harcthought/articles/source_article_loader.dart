@@ -12,6 +12,22 @@ import 'package:html_unescape/html_unescape.dart';
 
 import 'model/article_data.dart';
 
+class ArticleDataOrList {
+  final ArticleData? _articleData;
+  final List<ArticleData>? _list;
+
+  const ArticleDataOrList(this._articleData, this._list);
+
+  static ArticleDataOrList asList(List<ArticleData> list) => ArticleDataOrList(null, list);
+  static ArticleDataOrList asSingle(ArticleData articleData) => ArticleDataOrList(articleData, null);
+
+  bool get isList => _list != null;
+  bool get isSingle => _articleData != null;
+
+  ArticleData get articleData => _articleData!;
+  List<ArticleData> get list => _list!;
+}
+
 abstract class BaseSourceArticleLoader{
 
   ArticleSource get source;
@@ -19,7 +35,7 @@ abstract class BaseSourceArticleLoader{
   static void sortByDate(List<ArticleData> articles) =>
       articles.sort((art1, art2) => art1.date.isBefore(art2.date)?1:-1);
 
-  Stream<(ArticleData, String?)> download(String? newestLocalIdSeen);
+  Stream<(ArticleDataOrList, String?)> download(String? newestLocalIdSeen);
 
   FutureOr<ArticleData?> getCached(String localId);
 
@@ -90,7 +106,7 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
     }
   }
   @override
-  Stream<(ArticleData, String?)> download(String? newestLocalIdSeen) async* {
+  Stream<(ArticleDataOrList, String?)> download(String? newestLocalIdSeen) async* {
     List<String>? allIds = await downloadAllLocalIds();
     if(allIds == null) return;
 
@@ -120,11 +136,16 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
       else if (articleData == null)
         continue;
 
-      yield (articleData!, updatedNewestLocalIdSeenReturned?null:updatedNewestLocalIdSeen);
+      yield (
+        ArticleDataOrList.asSingle(articleData!),
+
+        updatedNewestLocalIdSeenReturned?
+        null:
+        updatedNewestLocalIdSeen
+      );
       updatedNewestLocalIdSeenReturned = true;
     }
 
-    // return (articles, updatedNewestLocalIdSeen);
   }
 
 }
@@ -178,10 +199,9 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
   }
 
   @override
-  Stream<(ArticleData, String?)> download(String? newestLocalIdSeen) async* {
+  Stream<(ArticleDataOrList, String?)> download(String? newestLocalIdSeen) async* {
 
     Set<String> downloadedIds = {};
-    // List<ArticleData> result = [];
 
     int page = 0;
     String? updatedNewestLocalIdSeen = null;
@@ -194,37 +214,29 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
       if (updatedNewestLocalIdSeen == null && articles.isNotEmpty)
         updatedNewestLocalIdSeen = articles.first.localId;
 
-      // bool doBreak = false;
-      for (ArticleData article in articles) {
-        if(newestLocalIdSeen != null && newestLocalIdSeen == article.uniqName)
-          return;
+      articles = articles.where((article) => !downloadedIds.contains(article.uniqName)).toList();
+      downloadedIds.addAll(articles.map((article) => article.uniqName));
 
-        if(downloadedIds.contains(article.uniqName))
-          continue;
+      if(newestLocalIdSeen != null)
+        for (ArticleData article in articles)
+          if (newestLocalIdSeen == article.localId) {
+            articles.sublist(0, articles.indexOf(article));
+            yield (
+              ArticleDataOrList.asList(articles),
+              updatedNewestLocalIdSeenReturned ? null : updatedNewestLocalIdSeen
+            );
+            return;
+          }
 
-        downloadedIds.add(article.uniqName);
-        yield (article, updatedNewestLocalIdSeenReturned?null:updatedNewestLocalIdSeen);
-        updatedNewestLocalIdSeenReturned = true;
-        // ---
-        // if(newestLocalIdSeen != null && newestLocalIdSeen == article.uniqName){
-        //   doBreak = true;
-        //   break;
-        // }
-        //
-        // if(downloadedIds.contains(article.uniqName))
-        //   continue;
-        //
-        // downloadedIds.add(article.uniqName);
-        // yield (articles, updatedNewestLocalIdSeen);
-        // result.add(article);
-      }
+      yield (
+        ArticleDataOrList.asList(articles),
+        updatedNewestLocalIdSeenReturned?null:updatedNewestLocalIdSeen
+      );
 
-      // if(doBreak || page == -1) break;
-
+      updatedNewestLocalIdSeenReturned = true;
       page++;
     }
 
-    // return (result, result.isEmpty?null:result.last.localId);
   }
 
 }
