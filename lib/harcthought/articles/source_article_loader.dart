@@ -37,7 +37,7 @@ abstract class BaseSourceArticleLoader{
   static void sortByDate(List<ArticleData> articles) =>
       articles.sort((art1, art2) => art1.date.isBefore(art2.date)?1:-1);
 
-  Stream<(ArticleDataOrList, String?)> download(String? newestLocalIdSeen);
+  Stream<(ArticleDataOrList, String?)> download(String? newestLocalIdSeen, bool isAllHistoryLoaded);
 
   FutureOr<ArticleData?> getCached(String localId);
 
@@ -67,6 +67,8 @@ abstract class BaseSourceArticleLoader{
 
   FutureOr<void> saveNewestLocalIdSeen(String localId);
   FutureOr<String?> getNewestLocalIdSeen();
+
+  FutureOr<bool> getIsAllHistoryLoaded();
 
   const BaseSourceArticleLoader();
 
@@ -108,7 +110,12 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
     }
   }
   @override
-  Stream<(ArticleDataOrList, String?)> download(String? newestLocalIdSeen) async* {
+  Stream<(ArticleDataOrList, String?)> download(
+    String? newestLocalIdSeen,
+    bool isAllHistoryLoaded
+  ) async* {
+    if(!isAllHistoryLoaded) newestLocalIdSeen = null;
+
     List<String>? allIds = await downloadAllLocalIds();
     if(allIds == null) return;
 
@@ -201,7 +208,11 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
   }
 
   @override
-  Stream<(ArticleDataOrList, String?)> download(String? newestLocalIdSeen) async* {
+  Stream<(ArticleDataOrList, String?)> download(
+    String? newestLocalIdSeen,
+    bool isAllHistoryLoaded
+  ) async* {
+    if(!isAllHistoryLoaded) newestLocalIdSeen = null;
 
     Set<String> downloadedIds = {};
 
