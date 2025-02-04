@@ -54,7 +54,7 @@ class ArticleCardWidget extends StatelessWidget{
             children: [
 
               ArticleCoverWidget(
-                  key: coverKey,
+                  fallbackCoverKey: coverKey,
                   article,
                   bigResolution: true,
               ),
