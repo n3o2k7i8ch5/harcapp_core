@@ -75,6 +75,7 @@ abstract class BaseSourceArticleLoader{
   FutureOr<void> saveOldestLocalIdSeen(String localId);
   FutureOr<String?> getOldestLocalIdSeen();
 
+  FutureOr<void> saveIsAllHistoryLoaded(bool value);
   FutureOr<bool> getIsAllHistoryLoaded();
 
   const BaseSourceArticleLoader();
