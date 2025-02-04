@@ -256,7 +256,7 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
 
 abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
 
-  static const fullPageSize = 20;
+  static const fullPageSize = 40;
 
   String pageUrl(int page);
 
