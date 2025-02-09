@@ -22,12 +22,12 @@ class ArticleLoaderListener extends SingleComputerListener<String>{
 
 }
 
-class BaseArticleLoader extends SingleComputer<String, ArticleLoaderListener>{
+class ArticleLoader extends SingleComputer<String, ArticleLoaderListener>{
 
   final Map<ArticleSource, BaseSourceArticleLoader> sourceArticleLoaders;
   final Function(ArticleSource source, List<ArticleData> articleDataList) onNewArticles;
 
-  BaseArticleLoader({
+  ArticleLoader({
     required this.sourceArticleLoaders,
     required this.onNewArticles,
   });
