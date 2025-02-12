@@ -1163,6 +1163,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       howToFail: [
         'Jako prowadzący być stronniczym',
         'Pozwolić, by któraś z grup przybrała obojętną postawę.',
+        'Pozwolić, by negocjacje zamieniły się w śmieszkowanie i aby rozkręciła się spirala absurdu bazująca na karykaturalnym naśladowaniu obecnych polityków.',
       ]
   ),
 
