@@ -1096,11 +1096,11 @@ List<Konspekt> allHarcerskieKonspekts = [
             title: 'Negocjacje - wstęp',
             duration: Duration(minutes: 5),
             activeForm: false,
-            content: '<p style="text-align:justify;">Prowadzący informuje uczestników, że ich zadaniem jest zawiązanie koalicji. Koalicja może być zawiązana tylko, jeśli wszystkie partie zgodzą się na wspólną listę postulatów politycznych, społecznych i gospodarczych w państwie którym rządzą. Żadne postulaty poza tymi koalicyjnymi nie będą zrealizowane.'
+            content: '<p style="text-align:justify;">Prowadzący prosi do siebie wszystkie grupy i na forum wita ich jako partie polityczne w Parlamencie Rzeczpospolitej. Informuje, że ich zadaniem jest zawiązanie koalicji. Koalicja może być zawiązana tylko, jeśli wszystkie partie zgodzą się na wspólną listę postulatów politycznych, społecznych i gospodarczych. Żadne postulaty poza tymi koalicyjnymi nie będą zrealizowane.'
                 '<br>'
                 '<br>Umowa koalicyjna musi zostać spisana do czasu zakończenia ostatniej rundy negocjacji i podpisana przez przedstawicieli wszystkich partii. W przeciwnym razie <b>państwo pogrąży się w chaosie</b>.'
                 '<br>'
-                '<br>Prowadzący informuje uczestników, że negocjacje odbędą się w trzech rundach, między którymi odbędą się przerwy na naradę wewnątrz partii.'
+                '<br>Prowadzący informuje, że negocjacje odbędą się w trzech rundach, między którymi odbędą się przerwy na naradę wewnątrz partii.'
                 '<br>'
                 '<br>Podczas pierwszej rundy wszystkie strony przedstawią swoje postulaty.'
                 '<br>'
@@ -1132,7 +1132,7 @@ List<Konspekt> allHarcerskieKonspekts = [
             title: 'Negocjacje - runda 2',
             duration: Duration(minutes: 30),
             activeForm: false,
-            content: '<p style="text-align:justify;">Partie siadają naprzeciw siebie i przedstawiciele przy współudziale i konsultowaniu się z pozostałymi członkami partii negocjują między sobą koalicję.'
+            content: '<p style="text-align:justify;">Partie zbierają się we wspólnej przestrzeni. Przedstawiciele każdej z partii (konsultując się z członkami swoich partii) negocjują między sobą koalicję.'
                 '<br>'
                 '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca rundy negocjacji.</p>'
         ),
@@ -1152,17 +1152,17 @@ List<Konspekt> allHarcerskieKonspekts = [
             title: 'Negocjacje - runda 2',
             duration: Duration(minutes: 45),
             activeForm: false,
-            content: '<p style="text-align:justify;">Partie siadają naprzeciw siebie i przedstawiciele przy współudziale i konsultowaniu się z pozostałymi członkami partii negocjują między sobą koalicję.'
+            content: '<p style="text-align:justify;">Partie zbierają się we wspólnej przestrzeni. Przedstawiciele każdej z partii (konsultując się z członkami swoich partii) negocjują między sobą koalicję.'
                 '<br>'
                 '<br>Na końcu tej rundy musi powstać umowa koalicyjna - w przeciwnym razie państwo pogrąży się w chaosie.'
                 '<br>'
                 '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca rundy negocjacji.</p>'
         ),
 
-
       ],
       howToFail: [
-        'Jako prowadzący być stronniczym'
+        'Jako prowadzący być stronniczym',
+        'Pozwolić, by któraś z grup przybrała obojętną postawę.',
       ]
   ),
 
