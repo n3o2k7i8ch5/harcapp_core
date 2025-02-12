@@ -107,13 +107,13 @@ class PoradnikThumbnailWidget extends StatelessWidget {
 
                     if(showPageCount)
                       Positioned(
-                        bottom: Dimen.defMarg,
-                        right: Dimen.defMarg,
+                        bottom: 2*Dimen.defMarg,
+                        right: 2*Dimen.defMarg,
                         child: Container(
                           clipBehavior: Clip.hardEdge,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(AppCard.defRadius),
-                            color: Colors.white.withOpacity(0.5),
+                            color: Colors.white.withValues(alpha: 0.7),
                           ),
                           child: Blur(
                             child: Padding(
@@ -122,6 +122,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
                                 '${poradnik.pageCount} stron',
                                 style: AppTextStyle(
                                   color: Colors.black,
+                                  fontWeight: weight.halfBold,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
