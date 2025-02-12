@@ -23,6 +23,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
   final void Function()? onTap;
   final void Function(FileFormat format)? onFormatTap;
   final bool showDownloadFormats;
+  final bool showPageCount;
   final bool withHero;
 
   final double titleHeightPaddingFraction;
@@ -39,6 +40,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
         this.onTap,
         this.onFormatTap,
         this.showDownloadFormats = true,
+        this.showPageCount = true,
         this.withHero = true
       });
 
@@ -99,7 +101,29 @@ class PoradnikThumbnailWidget extends StatelessWidget {
                                 textAlign: TextAlign.center,
                               ),
                         )
-                    )
+                    ),
+
+                    if(showPageCount)
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          color: Colors.white.withOpacity(0.5),
+                          child: Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Text(
+                              '${poradnik.pageCount} stron',
+                              style: AppTextStyle(
+                                color: Colors.white,
+                                fontSize: 12.0,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      )
+
                   ],
                 ),
                 onTap: onTap,

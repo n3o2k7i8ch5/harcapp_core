@@ -8,6 +8,7 @@ const String poradnik_name_dwie_roty_dwoch_przyrzeczen_harcerskich = "dwie_roty_
 Poradnik poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich = Poradnik(
   name: poradnik_name_dwie_roty_dwoch_przyrzeczen_harcerskich,
   title: 'Dwie roty dwóch Przyrzeczeń',
+  pageCount: 16,
   description: 'Poradnik dla drużynowych ZHP poruszający następujące m.in. zagadnienia:'
       '\n'
       '\nCzym jest i do czego służy Przyrzeczenie Harcerskie?'
@@ -61,6 +62,7 @@ const String poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci = "o_struktur
 Poradnik poradnik_o_strukturze_i_ksztaltowaniu_duchowosci = Poradnik(
   name: poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci,
   title: 'O strukturze i kształtowaniu duchowości',
+  pageCount: 30,
   description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące m.in. zagadnienia:'
       '\n'
       '\nCzym jest duchowość?'
