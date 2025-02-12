@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
+import 'package:harcapp_core/comm_widgets/blur.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
+import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/common/file_format_selector_row_widget.dart';
 import 'package:harcapp_core/harcthought/poradnik/poradnik.dart';
@@ -105,22 +107,26 @@ class PoradnikThumbnailWidget extends StatelessWidget {
 
                     if(showPageCount)
                       Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
+                        bottom: Dimen.defMarg,
+                        right: Dimen.defMarg,
                         child: Container(
-                          color: Colors.white.withOpacity(0.5),
-                          child: Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Text(
-                              '${poradnik.pageCount} stron',
-                              style: AppTextStyle(
-                                color: Colors.white,
-                                fontSize: 12.0,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(AppCard.defRadius),
+                            color: Colors.white.withOpacity(0.5),
                           ),
+                          child: Blur(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                '${poradnik.pageCount} stron',
+                                style: AppTextStyle(
+                                  color: Colors.black,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          )
                         ),
                       )
 
