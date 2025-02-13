@@ -116,6 +116,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
                             color: Colors.white.withValues(alpha: 0.7),
                           ),
                           child: Blur(
+                            sigma: 2,
                             child: Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
