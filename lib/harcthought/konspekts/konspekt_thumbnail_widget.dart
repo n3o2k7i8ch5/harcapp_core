@@ -18,6 +18,7 @@ class KonspektThumbnailWidget extends StatelessWidget{
   final Color? background;
   final bool colorizeLeftSide;
   final double radius;
+  final bool showSummary;
   final void Function()? onTap;
 
   const KonspektThumbnailWidget(
@@ -26,6 +27,7 @@ class KonspektThumbnailWidget extends StatelessWidget{
         this.background,
         this.colorizeLeftSide = true,
         this.radius = AppCard.bigRadius,
+        this.showSummary = true,
         this.onTap, 
         super.key
       });
@@ -87,16 +89,24 @@ class KonspektThumbnailWidget extends StatelessWidget{
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
 
-                        Expanded(
-                          child: AutoSizeText(
-                            konspekt.title,
-                            style: const AppTextStyle(
-                              fontSize: Dimen.textSizeBig,
-                              fontWeight: weight.halfBold,
-                            ),
-                            maxLines: konspekt.title.split(' ').length,
+                        AutoSizeText(
+                          konspekt.title,
+                          style: const AppTextStyle(
+                            fontSize: Dimen.textSizeBig,
+                            fontWeight: weight.halfBold,
                           ),
+                          maxLines: konspekt.title.split(' ').length,
                         ),
+
+                        if(showSummary && konspekt.summary != null)
+                          Text(
+                            konspekt.summary!,
+                            style: AppTextStyle(fontSize: Dimen.textSizeSmall),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+
+                        Expanded(child: Container()),
 
                         KonspektSphereList(konspekt)
 
