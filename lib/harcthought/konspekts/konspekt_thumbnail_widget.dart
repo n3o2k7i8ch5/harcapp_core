@@ -22,7 +22,7 @@ class KonspektThumbnailWidget extends StatelessWidget{
   final void Function()? onTap;
 
   const KonspektThumbnailWidget(
-      this.konspekt, 
+      this.konspekt,
       { this.elevation = 0, 
         this.background,
         this.colorizeLeftSide = true,
@@ -99,11 +99,17 @@ class KonspektThumbnailWidget extends StatelessWidget{
                         ),
 
                         if(showSummary && konspekt.summary != null)
-                          Text(
-                            konspekt.summary!,
-                            style: AppTextStyle(fontSize: Dimen.textSizeSmall),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
+                          Padding(
+                            padding: EdgeInsets.only(top: 6.0),
+                            child: Text(
+                              konspekt.summary!,
+                              style: AppTextStyle(
+                                fontSize: Dimen.textSizeNormal,
+                                color: textDisab_(context),
+                              ),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
 
                         Expanded(child: Container()),
