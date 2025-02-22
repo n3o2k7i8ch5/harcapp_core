@@ -126,6 +126,8 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                 height: 1.2,
               ),
 
+              const SizedBox(height: Dimen.sideMarg),
+
               Text(
                 KonspektSphereLevel.duchZdolnoscRefleksyjna.displayName,
                 style: AppTextStyle(
