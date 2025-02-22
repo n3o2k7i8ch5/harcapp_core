@@ -45,17 +45,36 @@ const String aksjoAksjomatyChrzescijanskie = "Aksjomaty chrześcijańskie";
 
 // Cialo
 const String cialoZdolnoscMarszu = "Zdolność marszu";
+const String cialoWzmacnianieOdpornosciOrganizmu = "Wzmacnianie odporności organizmu";
+const String cialoKoordynacjaRuchowa = "Kształtowanie koordynacji ruchowej";
 
 // Umysl
 const String umyslDyskusja = "Umiejętność dyskusji";
 const String umyslKoncentracja = "Zdolność koncentracji";
 const String umyslLogiczneMyslenie = "Zdolność logicznego myślenia";
-
+const String umyslFormulowanieArgumentow = "Zdolność formułowania argumentów";
+const String umyslZnajomoscPZ = "Znajomość i rozumienie Prawa Zucha";
+const String umyslZnajomoscPH = "Znajomość i rozumienie Prawa Harcerskiego";
+const String umyslZnajomoscPIP = "Znajomość i rozumienie Prawa i Przyrzeczenia Harcerskiego";
+const String umyslZnajomoscSznurowFunkcjiStopniZHP = "Znajomość sznurów, funkcji i stopni ZHP";
+const String umyslZnajomoscHistorii = "Znajomość historii";
+const String umyslZnajomoscSkutkowUrzadzenMobilnych = "Znajomość skutków nadmiernego używania urządzeń mobilnych";
 
 // Emocje
 const String emoOdczytywanieWlasnychEmocji = "Zdolność odczytywania własnych emocji";
 const String emoPanowanieNadEmocjami = "Zdolność panowania nad emocjami";
 
+// Relacje
+const String relWspolpracaWGrupie = "Umiejętność skutecznej współpracy w grupie";
+const String relFunkcjonowanieWRoznychRolach = "Umiejętnosć funkcjonowania w różnych rolach społecznych";
+const String relNegocjowanieRoliWGrupie = "Umiejętność negocjowania swojej roli w grupie";
+const String relRozmowaOObcychPogladach = "Umiejętnosć rozmowy o obcych sobie poglądach";
+const String relRozmowaOWlasnychDoswiadczeniach = "Umiejętność rozmowy o własnych doświadczeniach";
+const String relPrzedstawianieWlasnychPogladow = "Umiejętność przedstawiania własnych poglądów";
+const String relBudowanieRelacjiZaufania = "Umiejętność budowania relacji zaufania";
+const String relPrzyznanieSieDoBledow = "Umiejętność przyznania się do błędu";
+const String relBudowanieWspolnotyPrzezIntensywneDoswiadczenia = "Budowanie wspólnoty przez intensywne doświadczenia";
+const String relBudowanieWspolnotyAksjomatu = "Budowanie wspólnoty aksjomatu";
 
 // Hart ducha
 const String hartFuncjonowanieMimoNiewygody = "Funkcjonowanie mimo niewygody";

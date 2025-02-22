@@ -4,6 +4,8 @@ import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
+import '../level_examples.dart';
+
 const String _konspekt_name = 'zycie_i_swiat_prl';
 
 const String attach_html_mapa_glowna = '<a href="${attach_name_mapa_glowna}@attachment">${attach_title_mapa_glowna}</a>';
@@ -298,7 +300,13 @@ Konspekt zycie_i_swiat_prl = Konspekt(
     category: KonspektCategory.harcerskie,
     type: KonspektType.wspolzawoGrupowe,
     spheres: {
-      KonspektSphere.umysl: null,
+      KonspektSphere.umysl: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              umyslZnajomoscHistorii: null,
+            }
+          }
+      ),
     },
     metos: [Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',

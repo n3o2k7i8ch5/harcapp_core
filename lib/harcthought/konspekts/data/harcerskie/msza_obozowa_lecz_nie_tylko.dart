@@ -40,7 +40,14 @@ Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
         }
       }
     ),
-    KonspektSphere.relacje: null,
+    KonspektSphere.relacje: KonspektSphereDetails(
+      levels: {
+        KonspektSphereLevel.other: {
+          relBudowanieRelacjiZaufania: null,
+          relBudowanieWspolnotyAksjomatu: null,
+        }
+      }
+    ),
   },
   metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
   coverAuthor: 'Daniel Iwanicki',

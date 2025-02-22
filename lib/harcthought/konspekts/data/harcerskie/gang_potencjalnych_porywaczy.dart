@@ -3,6 +3,8 @@ import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
+import '../level_examples.dart';
+
 const String attach_html_wycinki_informacji = '<a href="${attach_name_wycinki_informacji}@attachment">${attach_title_wycinki_informacji}</a>';
 const String attach_name_wycinki_informacji = "wycinki_informacji";
 const String attach_title_wycinki_informacji = "Wycinki informacji";
@@ -20,8 +22,20 @@ Konspekt gang_potencjalnych_porywaczy = const Konspekt(
   category: KonspektCategory.harcerskie,
   type: KonspektType.zajecia,
   spheres: {
-    KonspektSphere.umysl: null,
-    KonspektSphere.relacje: null
+    KonspektSphere.umysl: KonspektSphereDetails(
+      levels: {
+        KonspektSphereLevel.other: {
+          umyslLogiczneMyslenie: null,
+        }
+      },
+    ),
+    KonspektSphere.relacje: KonspektSphereDetails(
+      levels: {
+        KonspektSphereLevel.other: {
+          relWspolpracaWGrupie: null,
+        }
+      },
+    )
   },
 
   metos: [Meto.harc, Meto.hs],

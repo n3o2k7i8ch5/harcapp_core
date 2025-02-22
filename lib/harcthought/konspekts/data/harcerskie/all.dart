@@ -39,8 +39,6 @@ const String aimSzacunekDlaSprawnosciFizycznej = 'Kształtowanie u uczestników 
 const String aimSzacunekDlaSkutecznegoDzialania = 'Kształtowanie u uczestników szacunku dla skuteczności w działaniu';
 
 
-
-
 List<Konspekt> allHarcerskieKonspekts = [
 
 
@@ -51,7 +49,9 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.cialo: null,
+        KonspektSphere.cialo: KonspektSphereDetails(levels: {
+          KonspektSphereLevel.other: {cialoKoordynacjaRuchowa: null}
+        }),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: {
@@ -389,7 +389,14 @@ List<Konspekt> allHarcerskieKonspekts = [
             ...levelHartDucha
           }
         ),
-        KonspektSphere.relacje: null,
+        KonspektSphere.relacje: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              relWspolpracaWGrupie: null,
+              relNegocjowanieRoliWGrupie: null,
+            }
+          },
+        )
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
@@ -402,7 +409,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Kształtowanie u uczestników umiejętności komunikacji i podziału zadań',
       ],
 
-      summary: 'Harcerze bez udziału kadry organizują biwak, na który jadą (kadra jedzie jako opieka) i ponoszą wszystkie konsekwencje swoich niedociągnięć.',
+      summary: 'Uczestnicy bez udziału kadry organizują biwak, na który jadą (kadra jedzie jako opieka) i ponoszą wszystkie konsekwencje swoich niedociągnięć.',
       description: '<p style="text-align:justify;">Forma polega na przeprowadzeniu biwaku drużyny (lub zastępu), tyle że z niemal zerowym zaangażowaniem kadry drużyny. Rola kadry powinna się ograniczyć do przeprowadzenia zbiórki, podczas której pomogą ustalić w drużynie (lub zastępie), co trzeba zrobić, by zorganizować biwak oraz pomogą rozdzielić zadania i wybrać spośród uczestników głównego koordynatora biwaku.'
           '<br>'
           '<br>Forma swoje główne walory czerpie z tego, że liczba i poziom skomplikowania problemów, z którymi uczestnicy się zmierzą jest ściśle zależna od tego jak skutecznie zorganizują biwak jako grupa:</p>'
@@ -644,11 +651,24 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
-        KonspektSphere.cialo: null,
-        KonspektSphere.duch: KonspektSphereDetails(
+        KonspektSphere.cialo: KonspektSphereDetails(
             levels: {
-              ...levelHartDucha
+              KonspektSphereLevel.other: {
+                cialoWzmacnianieOdpornosciOrganizmu: null
+              }
             }
+        ),
+        KonspektSphere.duch: KonspektSphereDetails(
+          levels: {
+            ...levelHartDucha
+          }
+        ),
+        KonspektSphere.relacje: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              relBudowanieWspolnotyPrzezIntensywneDoswiadczenia: null
+            }
+          }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -895,7 +915,13 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.umysl: null,
+        KonspektSphere.umysl: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              umyslZnajomoscPH: null,
+            }
+          }
+        ),
         KonspektSphere.duch: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.duchPostawy: {
@@ -929,7 +955,13 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.umysl: null,
+        KonspektSphere.umysl: KonspektSphereDetails(
+            levels: {
+              KonspektSphereLevel.other: {
+                umyslZnajomoscPZ: null,
+              }
+            }
+        ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: {
@@ -1213,15 +1245,31 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.umysl: null,
+        KonspektSphere.umysl: KonspektSphereDetails(
+            levels: {
+              KonspektSphereLevel.other: {
+                umyslLogiczneMyslenie: null,
+                umyslFormulowanieArgumentow: null
+              }
+            }
+        ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchWartosci: {
-              "Wartości własne i współuczestników": {KonspektSphereFactor.duchWlasnaRefleksja}
+              "Wartości własne i współuczestników": {KonspektSphereFactor.duchWlasnaRefleksja},
+              postawaRozumienieObcychPogladow: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
             }
           },
         ),
-        KonspektSphere.relacje: null,
+        KonspektSphere.relacje: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              relPrzedstawianieWlasnychPogladow: null,
+              relRozmowaOObcychPogladach: null,
+              relWspolpracaWGrupie: null
+            }
+          }
+        ),
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
@@ -1784,7 +1832,14 @@ List<Konspekt> allHarcerskieKonspekts = [
             },
           }
         ),
-        KonspektSphere.relacje: null,
+        KonspektSphere.relacje: KonspektSphereDetails(
+            levels: {
+              KonspektSphereLevel.other: {
+                relRozmowaOObcychPogladach: null,
+                relFunkcjonowanieWRoznychRolach: null,
+              },
+            }
+        ),
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (vector_corp)',
@@ -1813,7 +1868,11 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.cialo: null,
+        KonspektSphere.cialo: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {cialoKoordynacjaRuchowa: null}
+          }
+        ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: {
@@ -1965,7 +2024,13 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.umysl: null,
+        KonspektSphere.umysl: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              umyslZnajomoscSkutkowUrzadzenMobilnych: null,
+            }
+          }
+        ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchWartosci: {
@@ -2270,7 +2335,13 @@ List<Konspekt> allHarcerskieKonspekts = [
     additionalSearchPhrases: ['prawo harcerskie', 'ph'],
     category: KonspektCategory.harcerskie,
     spheres: {
-      KonspektSphere.umysl: null,
+      KonspektSphere.umysl: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              umyslZnajomoscPH: null,
+            }
+          }
+      ),
       KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: {
@@ -2310,7 +2381,13 @@ List<Konspekt> allHarcerskieKonspekts = [
     additionalSearchPhrases: ['prawo zucha', 'pz'],
     category: KonspektCategory.harcerskie,
     spheres: {
-      KonspektSphere.umysl: null,
+      KonspektSphere.umysl: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              umyslZnajomoscPZ: null,
+            }
+          }
+      ),
       KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: {
@@ -2366,7 +2443,11 @@ List<Konspekt> allHarcerskieKonspekts = [
               },
             }
         ),
-        KonspektSphere.relacje: null,
+        KonspektSphere.relacje: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {relBudowanieRelacjiZaufania: null}
+          }
+        ),
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (DenisW)',
@@ -2385,7 +2466,13 @@ List<Konspekt> allHarcerskieKonspekts = [
     category: KonspektCategory.harcerskie,
     type: KonspektType.zajecia,
     spheres: {
-      KonspektSphere.umysl: null,
+      KonspektSphere.umysl: KonspektSphereDetails(
+        levels: {
+          KonspektSphereLevel.other: {
+            umyslZnajomoscSznurowFunkcjiStopniZHP: null,
+          }
+        }
+      ),
       KonspektSphere.duch: KonspektSphereDetails(
         levels: {
           KonspektSphereLevel.duchWartosci: {
@@ -2772,7 +2859,14 @@ List<Konspekt> allHarcerskieKonspekts = [
             },
           }
         ),
-        KonspektSphere.relacje: null,
+        KonspektSphere.relacje: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              relPrzyznanieSieDoBledow: null,
+              relBudowanieRelacjiZaufania: null,
+            }
+          }
+        )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: '',
@@ -2896,26 +2990,39 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.cialo: null,
-        KonspektSphere.duch: KonspektSphereDetails(
-            levels: {
-              KonspektSphereLevel.duchPostawy: {
-                postawaOtwartoscNaLudzi: {
-                  KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                  KonspektSphereFactor.duchWzajemnoscOddzialywan
-                }
-              },
-              KonspektSphereLevel.duchWartosci: {
-                wartoscZdrowie: {
-                  KonspektSphereFactor.duchNormalizacja,
-                  KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                  KonspektSphereFactor.duchWzajemnoscOddzialywan
-                },
-              },
-              ...levelHartDucha
+        KonspektSphere.cialo: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              cialoWzmacnianieOdpornosciOrganizmu: null
             }
+          }
         ),
-        KonspektSphere.relacje: null,
+        KonspektSphere.duch: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaOtwartoscNaLudzi: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan
+              }
+            },
+            KonspektSphereLevel.duchWartosci: {
+              wartoscZdrowie: {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan
+              },
+            },
+            ...levelHartDucha
+          }
+        ),
+        KonspektSphere.relacje: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              relRozmowaOWlasnychDoswiadczeniach: null,
+              relBudowanieWspolnotyPrzezIntensywneDoswiadczenia: null
+            }
+          }
+        )
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (frimufilms)',

@@ -28,7 +28,6 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
             },
           },
       ),
-      KonspektSphere.relacje: null
     },
 
     metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],

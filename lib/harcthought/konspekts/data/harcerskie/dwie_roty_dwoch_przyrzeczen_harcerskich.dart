@@ -40,7 +40,13 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
           }
         }
       ),
-      KonspektSphere.umysl: null,
+      KonspektSphere.umysl: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              umyslZnajomoscPIP: null,
+            }
+          }
+      ),
     },
   metos: [Meto.kadra],
   coverAuthor: 'Daniel Iwanicki',
