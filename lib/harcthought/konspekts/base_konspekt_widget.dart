@@ -33,18 +33,17 @@ class KonspektSphereDetailFactorWidget extends StatelessWidget{
     children: [
       Text(detail, style: AppTextStyle(fontWeight: weight.bold)),
       if(factors != null && factors!.length > 0)
-        Text(
-            factors!.length == 1?
-            'Wykorzystywany czynnik':
-            'Wykorzystywane czynniki',
-            style: AppTextStyle()
-        ),
-
-      if(factors != null)
         Wrap(
             spacing: 2*Dimen.defMarg,
             runSpacing: Dimen.defMarg,
-            children: factors!.map((f) => f.textWidget).toList()
+            children: <Widget>[
+              Text(
+                factors!.length == 1?
+                'Wykorzystywany czynnik:':
+                'Wykorzystywane czynniki:',
+                style: AppTextStyle()
+              )
+            ] + factors!.map((f) => f.textWidget).toList()
         )
     ],
   );
@@ -71,9 +70,9 @@ class KonspektSphereDetailLevelWidget extends StatelessWidget{
         ],
       ),
       const SizedBox(height: .5*Dimen.defMarg),
-      Wrap(
-        spacing: 2*Dimen.defMarg,
-        runSpacing: Dimen.defMarg,
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: Dimen.defMarg,
         children: data.keys.map((detail) => KonspektSphereDetailFactorWidget(detail, data[detail])).toList(),
       ),
     ],
@@ -90,32 +89,28 @@ class KonspektSphereDetailsWidget extends StatelessWidget{
 
   const KonspektSphereDetailsWidget(this.details, {super.key, this.levelName, this.onLevelTap, this.onMechanismTap});
 
-  MapEntry? entryAt(int index) => details.levels!.entries.elementAtOrNull(index);
-
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
+  Widget build(BuildContext context){
 
-      if(details.levels != null && details.levels!.isNotEmpty)
-        SimpleButton(
-            radius: 0,
-            padding: const EdgeInsets.all(2*Dimen.defMarg),
-            onTap: onLevelTap,
-            child: ListView.separated(
-              itemBuilder: (context, index) => KonspektSphereDetailLevelWidget(
-                  entryAt(index)!.key,
-                  entryAt(index)!.value,
-              ),
-              separatorBuilder: (context, index) => SizedBox(height: 0.5*Dimen.defMarg),
-              itemCount: details.levels!.length,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-            ),
-        ),
+    if(details.levels == null || details.levels!.isEmpty)
+      return Container();
 
-    ],
-  );
+    return SimpleButton(
+      radius: 0,
+      padding: const EdgeInsets.all(2*Dimen.defMarg),
+      onTap: onLevelTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: 2*Dimen.defMarg,
+        children: details.levels!.keys.map((level) => KonspektSphereDetailLevelWidget(
+            level,
+            details.levels![level]!,
+            levelName: levelName
+        )).toList(),
+      ),
+    );
+
+  }
 
 }
 
