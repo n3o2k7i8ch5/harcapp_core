@@ -19,9 +19,9 @@ const double titleTextSize = 18.0;
 PdfColor cardColor = color(Colors.grey[100]!);
 PdfColor color(Color color){
   PdfColor pdfColor = PdfColor(
-      color.r/256,
-      color.g/256,
-      color.b/256
+      color.r,
+      color.g,
+      color.b
   );
 
   return pdfColor;
