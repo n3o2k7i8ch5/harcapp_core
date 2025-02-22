@@ -443,7 +443,7 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
 
   multiPage.add(TypeWidget(konspekt, font, fontBold));
 
-  multiPage.add(SphereListWidget(konspekt, font, fontBold));
+  multiPage.addAll(SphereListWidget(konspekt, font, fontBold));
 
   multiPage.add(AuthorWidget(konspekt, font, fontBold));
 

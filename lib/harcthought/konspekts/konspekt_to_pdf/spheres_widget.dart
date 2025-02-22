@@ -4,10 +4,10 @@ import 'package:html_pdf_widgets/html_pdf_widgets.dart';
 
 import 'common.dart';
 
-Widget SphereListWidget(Konspekt konspekt, Font font, Font fontBold){
+List<Widget> SphereListWidget(Konspekt konspekt, Font font, Font fontBold){
 
   if(konspekt.spheres.isEmpty)
-    return Container();
+    return [Container()];
 
   List<Widget> widgets = [];
 
@@ -17,23 +17,19 @@ Widget SphereListWidget(Konspekt konspekt, Font font, Font fontBold){
     widgets.add(SphereWidget(sphere, details, font, fontBold));
   }
 
-  return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+  return [
 
-        SizedBox(height: elementBigSeparator),
+    SizedBox(height: elementBigSeparator),
 
-        HeaderWidget('Sfery rozwoju', fontBold),
+    HeaderWidget('Sfery rozwoju', fontBold),
 
-        SizedBox(height: elementSmallSeparator),
+    SizedBox(height: elementSmallSeparator),
 
-        ColumnSpacing(
-          children: widgets,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: elementSmallSeparator
-        )
+    ...spaceWidgets(
+        children: widgets,
+        spacing: elementSmallSeparator
+    )
 
-      ]
-  );
+  ];
 
 }

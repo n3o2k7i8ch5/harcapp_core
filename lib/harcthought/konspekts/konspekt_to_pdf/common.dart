@@ -165,11 +165,7 @@ Widget Material({
   child: child,
 );
 
-Widget ColumnSpacing({
-  MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
-  MainAxisSize mainAxisSize = MainAxisSize.max,
-  CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
-  VerticalDirection verticalDirection = VerticalDirection.down,
+List<Widget> spaceWidgets({
   List<Widget> children = const <Widget>[],
   required double spacing,
 }){
@@ -181,12 +177,6 @@ Widget ColumnSpacing({
       resultChildren.add(SizedBox(height: spacing));
   }
 
-  return Column(
-    mainAxisAlignment: mainAxisAlignment,
-    mainAxisSize: mainAxisSize,
-    crossAxisAlignment: crossAxisAlignment,
-    verticalDirection: verticalDirection,
-    children: resultChildren,
-  );
+  return resultChildren;
 
 }

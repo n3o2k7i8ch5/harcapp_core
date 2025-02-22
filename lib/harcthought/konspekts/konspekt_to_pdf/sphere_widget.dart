@@ -38,8 +38,7 @@ Widget SphereDetailLevelWidget(KonspektSphereLevel level, Map<String, Set<Konspe
       if(level != KonspektSphereLevel.other)
         SizedBox(height: .5*defMarg),
 
-      ColumnSpacing(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      ...spaceWidgets(
         spacing: defMarg,
         children: data.keys.map((detail) => Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,17 +67,19 @@ Widget SphereDetailsWidget(KonspektSphereDetails details, Font font, Font fontBo
 
   return Padding(
     padding: const EdgeInsets.all(2*defMarg),
-    child: ColumnSpacing(
+    child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      spacing: 2*defMarg,
-      children: details.levels!.keys.map((level) =>
-          SphereDetailLevelWidget(
-            level,
-            details.levels![level]!,
-            font,
-            fontBold
-          )
-      ).toList(),
+      children: spaceWidgets(
+        spacing: 2*defMarg,
+        children: details.levels!.keys.map((level) =>
+            SphereDetailLevelWidget(
+                level,
+                details.levels![level]!,
+                font,
+                fontBold
+            )
+        ).toList(),
+      )
     ),
   );
 
@@ -124,93 +125,3 @@ Widget SphereWidget(KonspektSphere sphere, KonspektSphereDetails? details, Font 
     ],
   ),
 );
-
-
-//
-// Widget SphereWidget(KonspektSphere sphere, KonspektSphereDetails? details, Font font, Font fontBold) => ClipRRect(
-//   horizontalRadius: defRadius,
-//   verticalRadius: defRadius,
-//   child: Container(
-//     color: cardColor,
-//     child: Padding(
-//         padding: EdgeInsets.all(1.5*elementSmallSeparator),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//
-//               Row(
-//                   children: [
-//
-//                     Icon(
-//                       IconData(sphere.displayIcon.codePoint),
-//                       size: 18.0
-//                     ),
-//
-//                     SizedBox(width: elementSmallSeparator),
-//
-//                     Text(sphere.displayName, style: TextStyle(font: font))
-//
-//                   ]
-//               ),
-//
-//               if(details != null)
-//                 SizedBox(height: 2*elementSmallSeparator),
-//
-//               if(details != null && details.level.isNotEmpty)
-//                 Text(sphere == KonspektSphere.duch?'Poziom duchowości:':'Poziom:', style: TextStyle(font: font)),
-//
-//               if(details != null && details.level.isNotEmpty)
-//                 Builder(
-//                     builder: (context){
-//
-//                       List<Widget> widgets = [];
-//                       for(int i=0; i<details.level.length; i++){
-//                         widgets.add(
-//                             Text(
-//                                 details.level[i].displayName,
-//                                 style: TextStyle(
-//                                     font: fontBold,
-//                                     color: color(details.level[i].color)
-//                                 )
-//                             )
-//                         );
-//                         if(i<details.level.length -1)
-//                           widgets.add(SizedBox(width: elementSmallSeparator));
-//                       }
-//
-//                       return Padding(
-//                         padding: EdgeInsets.only(top: elementSmallSeparator/2),
-//                         child: Row(children: widgets)
-//                       );
-//                     }
-//                 ),
-//
-//               if(details != null && details.level.isNotEmpty)
-//                 SizedBox(height: 2*elementSmallSeparator),
-//
-//               if(details != null && details.mechanism.isNotEmpty)
-//                 Text('Mechanizmy:'),
-//
-//               if(details != null && details.mechanism.isNotEmpty)
-//                 Builder(
-//                   builder: (context){
-//
-//                     List<Widget> widgets = [];
-//                     for(int i=0; i<details.mechanism.length; i++){
-//                       widgets.add(Text(details.mechanism[i].displayName, style: TextStyle(font: fontBold)));
-//                       if(i<details.mechanism.length -1)
-//                         widgets.add(SizedBox(width: elementSmallSeparator));
-//                     }
-//
-//                     return Padding(
-//                       padding: EdgeInsets.only(top: elementSmallSeparator/2),
-//                       child: Row(children: widgets)
-//                     );
-//                   }
-//                 )
-//
-//             ]
-//         )
-//     )
-//   )
-// );
