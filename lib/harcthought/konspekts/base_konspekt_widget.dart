@@ -58,7 +58,7 @@ class KonspektSphereDetailFactorWidget extends StatelessWidget{
 class KonspektSphereDetailLevelWidget extends StatelessWidget{
   
   final KonspektSphereLevel level;
-  final Map<String, Set<KonspektSphereFactor>>? data;
+  final Map<String, Set<KonspektSphereFactor>?> data;
   final String? levelName;
   
   const KonspektSphereDetailLevelWidget(this.level, this.data, {this.levelName});
@@ -67,30 +67,30 @@ class KonspektSphereDetailLevelWidget extends StatelessWidget{
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      level.textWidget,
+      if(level != KonspektSphereLevel.other)
+        level.textWidget,
 
-      if(data != null)
-        Padding(
-          padding: EdgeInsets.only(top: .5*Dimen.defMarg),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: Dimen.defMarg,
-            children: data!.keys.map((detail) => Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+      if(level != KonspektSphereLevel.other)
+        SizedBox(height: .5*Dimen.defMarg),
 
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 2.0),
-                  child: Icon(MdiIcons.circleMedium, size: AppTextStyle.defFontSize),
-                ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: Dimen.defMarg,
+        children: data.keys.map((detail) => Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
 
-                Expanded(
-                  child: KonspektSphereDetailFactorWidget(detail, data![detail]),
-                ),
-              ],
-            )).toList(),
-          ),
-        ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2.0),
+              child: Icon(MdiIcons.circleMedium, size: AppTextStyle.defFontSize),
+            ),
+
+            Expanded(
+              child: KonspektSphereDetailFactorWidget(detail, data[detail]),
+            ),
+          ],
+        )).toList(),
+      )
     ],
   );
 
@@ -121,7 +121,7 @@ class KonspektSphereDetailsWidget extends StatelessWidget{
         children: details.levels!.keys.map((level) =>
           KonspektSphereDetailLevelWidget(
             level,
-            details.levels![level],
+            details.levels![level]!,
             levelName: levelName
           )
         ).toList(),

@@ -83,7 +83,7 @@ enum KonspektSphere{
 
 class KonspektSphereDetails{
 
-  final Map<KonspektSphereLevel, Map<String, Set<KonspektSphereFactor>>?>? levels;
+  final Map<KonspektSphereLevel, Map<String, Set<KonspektSphereFactor>?>>? levels;
 
   // final List<KonspektSphereLevel> level;
   // final List<KonspektSphereMechanism> mechanism;
@@ -99,14 +99,7 @@ enum KonspektSphereLevel{
   duchPostawy,
   duchHartDucha,
 
-  cialoZdolnoscMarszu,
-
-  umyslDyskusja,
-  umyslKoncentracja,
-  umyslLogiczneMyslenie,
-
-  emoOdczytywanieWlasnychEmocji,
-  emoPanowanieNadEmocjami;
+  other;
 
   String get displayName{
     switch(this){
@@ -115,14 +108,8 @@ enum KonspektSphereLevel{
       case duchPostawy: return 'Postawy';
       case duchHartDucha: return 'Hart Ducha';
 
-      case cialoZdolnoscMarszu: return 'Zdolność marszu';
+      case other: return 'Inne';
 
-      case umyslDyskusja: return 'Umiejętność dyskusji';
-      case umyslKoncentracja: return 'Zdolność koncentracji';
-      case umyslLogiczneMyslenie: return 'Zdolność logicznego myślenia';
-
-      case emoOdczytywanieWlasnychEmocji: return 'Zdolność odczytywania własnych emocji';
-      case emoPanowanieNadEmocjami: return 'Zdolność panowania nad emocjami';
     }
   }
 
@@ -133,14 +120,7 @@ enum KonspektSphereLevel{
       case duchPostawy: return Colors.deepPurpleAccent;
       case duchHartDucha: return Colors.red;
 
-      case cialoZdolnoscMarszu: return Colors.black;
-
-      case umyslDyskusja: return Colors.black;
-      case umyslKoncentracja: return Colors.black;
-      case umyslLogiczneMyslenie: return Colors.black;
-
-      case emoOdczytywanieWlasnychEmocji: return Colors.black;
-      case emoPanowanieNadEmocjami: return Colors.black;
+      case other: return Colors.transparent;
     }
   }
 

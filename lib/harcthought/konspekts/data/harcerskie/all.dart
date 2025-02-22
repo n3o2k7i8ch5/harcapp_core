@@ -769,7 +769,9 @@ List<Konspekt> allHarcerskieKonspekts = [
         ),
         KonspektSphere.emocje: KonspektSphereDetails(
           levels: {
-            KonspektSphereLevel.emoOdczytywanieWlasnychEmocji: null
+            KonspektSphereLevel.other: {
+              emoOdczytywanieWlasnychEmocji: null
+            }
           }
         ),
       },
@@ -778,7 +780,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       author: DANIEL_IWANICKI,
       aims: [
         'Poznanie przez uczestników własnych emocji i ich motywacji',
-        'Uświadomienie sobie przez uczestników związku między ich emocjami a czynami'
+        'Uświadomienie uczestnikom związku między ich emocjami a czynami'
       ],
       materials: [
         KonspektMaterial(
@@ -1041,8 +1043,8 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.umysl: KonspektSphereDetails(
             levels: {
-              KonspektSphereLevel.umyslDyskusja: null
-            }
+              KonspektSphereLevel.other: {umyslDyskusja: null}
+        }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
@@ -1509,7 +1511,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.cialo: KonspektSphereDetails(
           levels: {
-            KonspektSphereLevel.cialoZdolnoscMarszu: null,
+            KonspektSphereLevel.other: {cialoZdolnoscMarszu: null},
           }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
@@ -1898,8 +1900,8 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.umysl: KonspektSphereDetails(
           levels: {
-            KonspektSphereLevel.umyslDyskusja: null
-          }
+            KonspektSphereLevel.other: {umyslDyskusja: null}
+        }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
@@ -2628,7 +2630,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.cialo: KonspektSphereDetails(
           levels: {
-            KonspektSphereLevel.cialoZdolnoscMarszu: null
+            KonspektSphereLevel.other: {cialoZdolnoscMarszu: null}
           },
         ),
         KonspektSphere.duch: KonspektSphereDetails(
@@ -2643,7 +2645,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         ),
         KonspektSphere.umysl: KonspektSphereDetails(
           levels: {
-            KonspektSphereLevel.umyslKoncentracja: null
+            KonspektSphereLevel.other: {umyslKoncentracja: null}
           },
         )
       },
@@ -2673,7 +2675,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.cialo: KonspektSphereDetails(
           levels: {
-            KonspektSphereLevel.cialoZdolnoscMarszu: null
+            KonspektSphereLevel.other: {cialoZdolnoscMarszu: null}
           },
         ),
         KonspektSphere.duch: KonspektSphereDetails(
@@ -2689,7 +2691,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         ),
         KonspektSphere.umysl: KonspektSphereDetails(
           levels: {
-            KonspektSphereLevel.umyslKoncentracja: null
+            KonspektSphereLevel.other: {umyslKoncentracja: null}
           },
         )
       },
@@ -2719,7 +2721,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.cialo: KonspektSphereDetails(
           levels: {
-            KonspektSphereLevel.cialoZdolnoscMarszu: null
+            KonspektSphereLevel.other: {cialoZdolnoscMarszu: null}
           },
         ),
         KonspektSphere.duch: KonspektSphereDetails(

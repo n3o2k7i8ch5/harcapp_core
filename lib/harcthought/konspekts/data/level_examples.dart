@@ -1,6 +1,6 @@
 import '../konspekt.dart';
 
-// Postawy
+// Duch - Postawy
 const String postawaMyslenieOInnych = "Myślenie o innych";
 const String postawaKarnosc = "Karność";
 const String postawaOdpowiedzialnosc = "Odpowiedzialność";
@@ -19,7 +19,7 @@ const String postawaUwaznosc = "Uważność";
 const String postawaWdziecznosc = "Wdzięczność";
 const String postawaWyciszenie = "Wyciszenie";
 
-// Warości
+// Duch - Warości
 const String wartoscBliskoscZBogiem = "Bliskość z Bogiem";
 const String wartoscBystrosc = "Bystrość";
 const String wartoscPokoj = "Pokój";
@@ -32,7 +32,7 @@ const String wartoscWspolnota = "Wspólnota";
 const String wartoscWyciszenie = "Wyciszenie";
 const String wartoscZdrowie = "Zdrowie";
 
-// Aksjomaty
+// Duch - Aksjomaty
 const String aksjoPrzezycieHistoriiBiblijnej = "Przeżycie historii biblijnej";
 const String aksjoRozwazanieSensuICeluZycia = "Rozważanie sensu i celu życia";
 const String aksjoSpotkanieBogaWeMszySw = "Spotkanie Boga we Mszy Świętej";
@@ -42,6 +42,19 @@ const String aksjoZbawczaRolaChrystusa = "Zbawcza rola Chrystusa";
 const String aksjoZbawienie = "Historia zbawienia";
 const String aksjoModlitwa = "Modlitwa";
 const String aksjoAksjomatyChrzescijanskie = "Aksjomaty chrześcijańskie";
+
+// Cialo
+const String cialoZdolnoscMarszu = "Zdolność marszu";
+
+// Umysl
+const String umyslDyskusja = "Umiejętność dyskusji";
+const String umyslKoncentracja = "Zdolność koncentracji";
+const String umyslLogiczneMyslenie = "Zdolność logicznego myślenia";
+
+
+// Emocje
+const String emoOdczytywanieWlasnychEmocji = "Zdolność odczytywania własnych emocji";
+const String emoPanowanieNadEmocjami = "Zdolność panowania nad emocjami";
 
 
 // Hart ducha
@@ -58,8 +71,10 @@ const Map levelHartDucha = {
 const Map<KonspektSphere, KonspektSphereDetails> spheresLogiczne = {
   KonspektSphere.umysl: KonspektSphereDetails(
       levels: {
-        KonspektSphereLevel.umyslLogiczneMyslenie: null
-      }
+        KonspektSphereLevel.other: {
+          umyslLogiczneMyslenie: null
+        }
+  }
   ),
   KonspektSphere.duch: KonspektSphereDetails(
       levels: {
