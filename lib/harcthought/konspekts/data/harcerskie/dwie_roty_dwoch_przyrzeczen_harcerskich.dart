@@ -65,6 +65,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
         attachmentName: attach_name_list_do_harcerza_i_rodzicow,
     ),
   ],
+  summary: 'Harcerze wraz ze swoimi rodzicami poznają treść i sens PH oraz wybierają rotę PH, które złoży harcerz.',
   steps: [
 
     KonspektStep(
@@ -101,7 +102,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     ),
 
     KonspektStep(
-        title: 'Zbiórka o Prawie i Przyrzeczeniu',
+        title: 'Poinformowanie rodziców o Próbie Harcerza',
         duration: Duration(hours: 2),
         activeForm: false,
         content: '<p style="text-align:justify;">'

@@ -34,6 +34,7 @@ Konspekt spiewogranie_z_quizem_interpretacyjnym = const Konspekt(
       name: 'Teksty śpiewanych piosenek',
     ),
   ],
+  summary: 'Prowadzący wybiera piosenki opowiadające o postawach i wartościach, które chce przybliżyć uczestnikom - uczestnicy owe piosenki poznają, po czym dokonują interpretacji ich słów.',
   description: '<p style="text-align:justify;">Prowadzący wybiera kilka piosenek, które niosą nieoczywiste na pierwszy “rzut oka (ucha?)” przesłanie w swojej treści lub które wymagają do ich zrozumienia znajomości kontekstu historycznego lub kulturowego.'
       '<br>'
       '<br>Uczestnicy otrzymują wydrukowane wybranych piosenek (by oszczędzić zasoby i wprowadzić element współpracy można wprowadzić rozdać teksty po jednym komplecie na dwie osoby).'

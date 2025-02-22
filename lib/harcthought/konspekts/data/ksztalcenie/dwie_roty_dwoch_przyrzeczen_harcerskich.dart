@@ -120,6 +120,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       )
 
     ],
+    summary: 'Uczestnicy warsztatów poznają rolę PH, różnice i ich konsekwencje między dwiema rotami PH, oraz praktyczne metody pracy z PH w drużynach.',
     steps: [
 
       KonspektStep(

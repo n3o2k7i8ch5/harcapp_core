@@ -506,6 +506,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
       )
 
     ],
+    summary: 'Uczestnicy wcielają się we frakcje polityczne chcące obalić w Polsce komunizm - muszą zdobyć zasoby, wiedzę i wpływy, by osiągnąć swój cel.',
     intro: '<p style="text-align:justify;">'
         'Skończyła się II wojna światowa. Polska jest zniszczona po okupacji niemieckiej i po przejściu radzieckiego frontu. Po pokoju w Jałcie nasz kraj znalazł się w sowieckiej strefie wpływów i w Warszawie zostali zainstalowani komuniści.'
         '<br>'

@@ -49,7 +49,7 @@ Future<Widget> CoverWidget(Konspekt konspekt, Font font, bool withCover) async {
                       child: Padding(
                         padding: EdgeInsets.all(elementSmallSeparator),
                         child: Text(
-                          "Żródło: ${konspekt.coverAuthor}",
+                          "Źródło: ${konspekt.coverAuthor}",
                           style: TextStyle(
                             font: font,
                             fontSize: defTextSize

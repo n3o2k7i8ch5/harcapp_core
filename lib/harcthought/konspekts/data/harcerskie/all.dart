@@ -769,7 +769,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       aims: [
         'Przedstawienie uczestnikom kokretnych sposobów postępowań charakteryzujących świętych'
       ],
-
+      summary: 'Prowadzący przygotowuje i opowiada gawędę o wybranym świętym, którego postawa lub inne cechy są dla uczestników w szczególny sposób godne naśladowania',
       description: '<p style="text-align:justify;">Prowadzący przygotowuje i opowiada (najlepiej przy ognisku) gawędę o wybranym świętym, którego postawa lub inne cechy są dla uczestników w szczególny sposób godne naśladowania.'
           '<br>'
           '<br>Kluczowe jest, by opowiedzieć o bohaterze i realiach jego życia w sposób aktualnie zrozumiały, aby uczestnicy formy mogli się z nim utożsamić.</p>',
@@ -955,6 +955,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Utrwalenie wśród uczestników treści Prawa Harcerskiego',
         'Lepsze zrozumienie przez uczestników Prawa Harcerskiego'
       ],
+      summary: 'Uczestnicy podzieleni na grupy losują jeden z punktów Prawa Harcerskiego i przygotowują kalambury przedstawiające to prawo.',
       description: '<p style="text-align:justify;">Uczestnicy są dzieleni na grupy (np. na zastępy) i otrzymują po jednym punkcie Prawie Harcerskiego na kartce. Ich zadaniem jest przygotować kalambury przedstawiające owe prawo, które zaprezentują pozostałej części uczestników.'
           '<br>'
           '<br>Grupa, której członek poprawie zgarnie prezentowany punkt Prawa jako kolejna prezentuje. Jeżeli już prezentowała, osoba, która zgadła wskazuje kolejną prezentującą grupę.</p>'
@@ -995,6 +996,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Utrwalenie wśród uczestników treści Prawa Zucha',
         'Lepsze zrozumienie przez uczestników Prawa Zucha'
       ],
+      summary: 'Uczestnicy podzieleni na grupy losują jeden z punktów Prawa Zucha i przygotowują kalambury przedstawiające to prawo.',
       description: '<p style="text-align:justify;">Uczestnicy są dzieleni na grupy (np. na szóstki zuchowe) i otrzymują po jednym punkcie Prawie Zucha na kartce. Ich zadaniem jest przygotować kalambury przedstawiające owe prawo, które zaprezentują pozostałej części uczestników.'
           '<br>'
           '<br>Grupa, której członek poprawie zgarnie prezentowany punkt Prawa jako kolejna prezentuje. Jeżeli już prezentowała, osoba, która zgadła wskazuje kolejną prezentującą grupę.</p>'
@@ -1031,6 +1033,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Kształtowanie uważności poprzez niemal całkowitą możliwość eliminacji szumu informacyjnego i technologii',
         'Stworzenie przestrzeni na realizację znaczącej liczby zajęć',
       ],
+      summary: 'Uczestnicy wyjeżdżają na obóz do lasu, gdzie spędzają czas z ograniczonym dostępem do technologii, blisko natury, pozbawieni wygód miasta, tworząc z rówieśnikami, pod opieką kadry wspólną przestrzeń życia.',
       description: '<p style="text-align:justify;">Drużyna, najczęściej w okresie letnich wakacji i najlepiej razem z innymi drużynami (np. szczepu) wyjeżdża na obóz do lasu, gdzie buduje infrastrukturę obozową (sanitariaty, kuchnię, magazyn, etc.) i spędza kilka tygodni pod namiotami.'
           '<br>Forma ta jest jedną z najskuteczniejszych harcerskich form wychowawczych i stwarza możliwość realizacji licznych zajęć i zwyczajów podczas jej trwania.'
           '<br>'
@@ -1076,6 +1079,7 @@ List<Konspekt> allHarcerskieKonspekts = [
           name: 'Teksty śpiewanych piosenek',
         ),
       ],
+      summary: 'Prowadzący wybiera kolędy, w celu przybliżenia historii chrześcijańskiego zbawienia - uczestnicy owe kolędy poznają, po czym dokonują interpretacji ich słów.',
       description: '<p style="text-align:justify;">Szczególna wersja formy $konspekt_harc_html_spiewogranie_z_quizem_interpretacyjnym, gdzie zbiorem piosenek są kolędy.</p>'
   ),
 
@@ -1487,6 +1491,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektMaterial(amountAttendantFactor: 1, name: 'Ziemia do roślin'),
         KonspektMaterial(amountAttendantFactor: 5, name: 'Nasiona roślin'),
       ],
+      summary: 'Uczestnicy na zbiórce sadzą roślinki do doniczki, po czym ich zadaniem jest o nie regularnie dbać w domu. Na końcu rośliny są przynoszone do harcówki i upiększają to miejsce.',
       description: '<p style="text-align:justify;">Prowadzący na zbiórce daje uczestnikom doniczki, ziemię do roślin i nasiona. Uczestnicy sadzą roślinki do doniczki oraz dowiadują się jak o nie dbać. Uczestnicy dowiadują się, że po ustalonym czasie roślinki wrócą do harcówki, dlatego ważne, by harcerze zatroszczyli się o nie jak najlepiej.'
           '<br>'
           '<br>Po czym zabierają je do domu. Przez następny okres (między pół roku a rok) zadaniem uczestników jest regularnie dbać o roślinkę. Po tym czasie roślinki są przynoszone do harcówki, gdzie dalej dba o nią w każdym tygodniu zastęp służbowy.</p>'
@@ -1519,6 +1524,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       aims: [
         'Refleksja nad życiem i wartościami autorytetu'
       ],
+      summary: 'Uczestnik przygotowuje gawędę o autorytecie, konsultuje to z prowadzącym, po czym opowiada ją pozostałym uczestnikom.',
       description: '<p style="text-align:justify;">Forma nie polega na tym, że prowadzący opowiada gawędę. Forma polega na tym, by prowadzący przygotował uczestnika do opowiedzenia gawędy.'
           '<br>'
           '<br>Zazwyczaj twórca dzieła więcej na nim korzysta niż jego odbiorca - tak samo jest z dobrą gawędą. Forma polega na znalezieniu postaci, która dla słuchaczy będzie autorytetem, zanurzeniu się w historię jej życia i pod okiem doświadczonego instruktora przygotowanie gawędy dla zuchów lub harcerzy, która pozwoli im się utożsamić z bohaterem.</p>',
@@ -2380,6 +2386,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         name: 'Świeczka',
       ),
     ],
+    summary: 'Prowadzący zapala 10 świeczek i uczestnicy zbierają się wokół nich. Gdy któryś z uczestników poprawnie wymieni punkt Prawa Harcerskiego, może zdmuchnąć jedną ze świeczek.',
     description: '<p style="text-align:justify;">Prowadzący ustawia na podłodze lub na ziemi 10 świeczek. Świeczki mogą być ustawione jedna za drugą lub w okręgu - jeśli jest to okrąg, należy wyraźnie zaznaczyć która świeczka jest pierwsza.'
         '<br>'
         '<br>Między świeczkami należy zachować stosowną odległość min. 20 cm, tak, aby zminimalizować ryzyko, że podczas próby zdmuchnięcia jednej z nich zdmuchnięte zostaną sąsiednie.'
@@ -2426,6 +2433,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         name: 'Świeczka',
       ),
     ],
+    summary: 'Prowadzący zapala 6 świeczek i uczestnicy zbierają się wokół nich. Gdy któryś z uczestników poprawnie wymieni punkt Prawa Zucha, może zdmuchnąć jedną ze świeczek.',
     description: '<p style="text-align:justify;">Prowadzący ustawia na podłodze lub na ziemi 6 świeczek. Świeczki mogą być ustawione jedna za drugą lub w okręgu - jeśli jest to okrąg, należy wyraźnie zaznaczyć która świeczka jest pierwsza.'
         '<br>'
         '<br>Między świeczkami należy zachować stosowną odległość min. 20 cm, tak, aby zminimalizować ryzyko, że podczas próby zdmuchnięcia jednej z nich zdmuchnięte zostaną sąsiednie.'
@@ -3048,6 +3056,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Stwarzanie prowadzącemu okazji do wyśmiania alkoholu',
         'Kształtowanie u uczestników postaw dbania o zdrowie',
       ],
+      summary: 'Uczestnicy wspólnie jedzą po jednym ząbku czosnku, jednak po jego rozgryzieniu nie mogą go przełknąć przez jedną minutę.',
       description: '<p style="text-align:justify;">Grupa osób bierze po ząbku czosnku i staje w kręgu. Na dany znak wszyscy zaczynają jeść ząbek czosnku (rozgryzając go), jednak przełknąć i popić go można dopiero po minucie. Przegrywają Ci, którzy przełkną czosnek wcześniej. Ponieważ jest to forma wspólnego trudu, kształtuje też wartości związane ze wspólnotą.'
           '<br>'
           '<br>Jeśli prowadzący uzna to za stosowne, a uczestnicy są odpowiednio duzi (ok, 15+), może w ten sposób naturalnie skomentować podobieństwo jedzenia czosnku do picia wódki - oba pieką, oba trzeba popić, oba dezynfekują, ale jeden wzmacnia odporność, a drugi niszczy wątrobę i mózg.'
@@ -3073,6 +3082,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       aims: [
         'Kształtowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
       ],
+      summary: 'Uczestnicy otrzymują jedną zagadkę matematyczno-logiczną na dzień, którą mogą rozwiązać do końca dnia.',
       description: '<p style="text-align:justify;">'
           'Prowadzący formę regularnie (np. codziennie na apelu na obozie) przedstawia uczestnikom jedną zagadkę matematyczną, która jest w zasięgu ich możliwości intelektualnych, np:'
           '</p>'
@@ -3147,7 +3157,7 @@ List<Konspekt> allHarcerskieKonspekts = [
           '</ul>'
 
           '<p style="text-align:justify;">'
-          'Forma ta jest przykładem zjawiska wpływu sfer funkcjonalnych na sferę ducha przy udziale wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..'
+          'Forma wykorzystuje wpływ sfer funkcjonalnych na sferę ducha korzystając z czynnika wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..'
           '</p>',
   ),
 
@@ -3239,6 +3249,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Kształtowanie u uczestników otwartości na kontakt z drugim człowiekiem',
         aimSzacunekDlaSkutecznegoDzialania
       ],
+      summary: 'Uczestnicy w grupach udają się na rozpoznanie okolicy biwaku lub obozu, zbierają informacje na temat ciekawych, przydatnych lub ważnych miejsc w najbliższym otoczeniu.',
       description: '<p style="text-align:justify;">Harcerze w zastępach otrzymują zadanie, by rozpoznać okolicę biwaku lub obozu i zebrać informacje na temat ciekawych, przydatnych lub ważnych miejsc w najbliższym otoczeniu.'
           '<br>'
           '<br>Jednocześnie harcerze mają za zadanie zrealizowanie szeregu zadań związanych z lepszym poznaniem lokalnej społeczności. Przykładowe zadania służące temu celowi to:</p>'
