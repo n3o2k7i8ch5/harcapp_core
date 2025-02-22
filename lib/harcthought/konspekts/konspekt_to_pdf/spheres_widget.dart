@@ -15,8 +15,6 @@ Widget SphereListWidget(Konspekt konspekt, Font font, Font fontBold){
     KonspektSphere sphere = konspekt.spheres.keys.toList()[i];
     KonspektSphereDetails? details = konspekt.spheres[sphere];
     widgets.add(SphereWidget(sphere, details, font, fontBold));
-    if(i<konspekt.spheres.length-1)
-      widgets.add(SizedBox(width: elementSmallSeparator));
   }
 
   return Column(
@@ -29,7 +27,11 @@ Widget SphereListWidget(Konspekt konspekt, Font font, Font fontBold){
 
         SizedBox(height: elementSmallSeparator),
 
-        Row(children: widgets, crossAxisAlignment: CrossAxisAlignment.start)
+        ColumnSpacing(
+          children: widgets,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: elementSmallSeparator
+        )
 
       ]
   );
