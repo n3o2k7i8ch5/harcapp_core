@@ -19,9 +19,9 @@ Widget SphereDetailFactorWidget(String detail, Set<KonspektSphereFactor>? factor
                   factors.length == 1?
                   'Metoda:':
                   'Metody:',
-                  style: TextStyle(font: font)
+                  style: TextStyle(font: font, fontSize: defTextSize)
               )
-            ] + factors.map((f) => f.pdfWidget(font)).toList()
+            ] + factors.map((f) => f.pdfWidget(font, defTextSize)).toList()
         ),
       )
   ],
@@ -33,7 +33,7 @@ Widget SphereDetailLevelWidget(KonspektSphereLevel level, Map<String, Set<Konspe
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       if(level != KonspektSphereLevel.other)
-        level.pdfWidget(fontBold),
+        level.pdfWidget(fontBold, defTextSize),
 
       if(level != KonspektSphereLevel.other)
         SizedBox(height: .5*defMarg),
@@ -46,7 +46,7 @@ Widget SphereDetailLevelWidget(KonspektSphereLevel level, Map<String, Set<Konspe
 
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 2.0),
-              child: Icon(IconData(MdiIcons.circleMedium.codePoint), size: TextStyle.defaultStyle().fontSize),
+              child: Icon(IconData(MdiIcons.circleMedium.codePoint), size: defTextSize),
             ),
 
             Expanded(
@@ -72,12 +72,12 @@ Widget SphereDetailsWidget(KonspektSphereDetails details, Font font, Font fontBo
       children: spaceWidgets(
         spacing: 2*defMarg,
         children: details.levels!.keys.map((level) =>
-            SphereDetailLevelWidget(
-                level,
-                details.levels![level]!,
-                font,
-                fontBold
-            )
+          SphereDetailLevelWidget(
+            level,
+            details.levels![level]!,
+            font,
+            fontBold
+          )
         ).toList(),
       )
     ),
@@ -100,7 +100,7 @@ Widget SphereWidget(KonspektSphere sphere, KonspektSphereDetails? details, Font 
           child: Row(
             children: [
 
-              Icon(IconData(sphere.displayIcon.codePoint)),
+              Icon(IconData(sphere.displayIcon.codePoint), size: iconSize),
 
               SizedBox(width: iconMarg),
 

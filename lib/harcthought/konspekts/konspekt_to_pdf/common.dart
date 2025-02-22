@@ -8,7 +8,8 @@ const double konspektSeparator = 48.0;
 
 const double defRadius = 4;
 const double defMarg = 6.0;
-const double iconMarg = 12.0;
+const double iconMarg = 10.0;
+const double iconSize = 18.0;
 
 const double defTextTiny = 6;
 const double defTextSize = 11.0;

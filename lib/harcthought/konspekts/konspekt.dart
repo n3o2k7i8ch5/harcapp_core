@@ -139,10 +139,11 @@ enum KonspektSphereLevel{
     style: AppTextStyle(color: color, fontWeight: weight.bold),
   );
 
-  pdf.Widget pdfWidget(pdf.Font fontBold) => pdf.Text(
+  pdf.Widget pdfWidget(pdf.Font fontBold, double fontSize) => pdf.Text(
     displayName,
     style: pdf.TextStyle(
       font: fontBold,
+      fontSize: fontSize,
       color: pdfColor,
     ),
   );
@@ -183,10 +184,11 @@ enum KonspektSphereFactor{
     ),
   );
 
-  pdf.Widget pdfWidget(pdf.Font font) => pdf.Text(
+  pdf.Widget pdfWidget(pdf.Font font, double fontSize) => pdf.Text(
     displayName,
     style: pdf.TextStyle(
       font: font,
+      fontSize: fontSize,
       fontWeight: pdf.FontWeight.normal,
       decoration: pdf.TextDecoration.underline
     ),
