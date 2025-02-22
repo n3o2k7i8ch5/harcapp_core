@@ -30,6 +30,7 @@ class KonspektSphereDetailFactorWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       Text(detail, style: AppTextStyle(fontWeight: weight.bold)),
       if(factors != null && factors!.length > 0)
