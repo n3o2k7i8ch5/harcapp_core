@@ -6,7 +6,6 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'konspekt.dart';
 
@@ -39,7 +38,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               ),
 
               const AppText(
-                'Duchowość jest sposobem, w jaki człowiek żyje. Każda duchowość jest w pełni definiowana przez zachowania, postawy, wartości i aksjomaty, w które wierzy.',
+                'Duchowość jest sposobem, w jaki człowiek żyje. Każda duchowość jest w pełni definiowana przez zachowania, postawy, wartości i aksjomaty, w które człowiek wierzy.',
                 size: Dimen.textSizeBig,
                 height: 1.2,
               ),
@@ -105,7 +104,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               const AppText(
                 'Ksztaltowanie duchowości odbywa się przez proces zwany "integracją duchowości". Polega na stopniowym dostosowywaniu postaw, wartości i aksjomatów do siebie nawzajem tak, by były spójne zarówno między sobą, jak i z doświadczeniem otaczającego człowieka świata.'
                 '\n'
-                '\nIntegracja duchowości wymaga od człowieka zdolności do refleksji, podejmowania wysiłku i przekraczania swoich granic. Zdolność ta to hart ducha.',
+                '\nIntegracja duchowości wymaga od człowieka zdolności do refleksji, podejmowania wysiłku i przekraczania swoich granic.',
                 size: Dimen.textSizeBig,
                 height: 1.2,
               ),
@@ -122,7 +121,22 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               ),
               const SizedBox(height: Dimen.defMarg),
               const AppText(
-                'Hart ducha to zdolność do postępowania zgodnie z tym, co uważa się za słuszne pomimo niesprzyjających okoliczności: fizycznego trudu, kosztu finansowego, ostracyzmu społecznego, itd..',
+                'Hart ducha (siła charakteru) to zdolność do postępowania zgodnie z tym, co uważa się za słuszne pomimo niesprzyjających okoliczności: fizycznego trudu, kosztu finansowego, ostracyzmu społecznego, itd..',
+                size: Dimen.textSizeBig,
+                height: 1.2,
+              ),
+
+              Text(
+                KonspektSphereLevel.duchZdolnoscRefleksyjna.displayName,
+                style: AppTextStyle(
+                    color: KonspektSphereLevel.duchZdolnoscRefleksyjna.color,
+                    fontWeight: weight.bold,
+                    fontSize: Dimen.textSizeBig
+                ),
+              ),
+              const SizedBox(height: Dimen.defMarg),
+              const AppText(
+                'Zdolność refleksyjna określa zdolność do trafnego wnioskowania prawidłowych zachowań, postaw i wartości z aksjomatów oraz weryfikacji przyjętych aksjomatów na podstawie doświadczeń. Pozwala na analizę własnej duchowości i na ocenę czy i w jakim kierunku powinna ulec zmianie.',
                 size: Dimen.textSizeBig,
                 height: 1.2,
               ),

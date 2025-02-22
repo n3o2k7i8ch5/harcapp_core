@@ -96,7 +96,9 @@ enum KonspektSphereLevel{
   duchAksjomaty,
   duchWartosci,
   duchPostawy,
+
   duchHartDucha,
+  duchZdolnoscRefleksyjna,
 
   other;
 
@@ -105,7 +107,9 @@ enum KonspektSphereLevel{
       case duchAksjomaty: return 'Aksjomaty';
       case duchWartosci: return 'Wartości';
       case duchPostawy: return 'Postawy';
+
       case duchHartDucha: return 'Hart Ducha';
+      case duchZdolnoscRefleksyjna: return 'Zdolność Refleksyjna';
 
       case other: return 'Inne';
 
@@ -117,7 +121,9 @@ enum KonspektSphereLevel{
       case duchAksjomaty: return Colors.blue;
       case duchWartosci: return Colors.orange;
       case duchPostawy: return Colors.deepPurpleAccent;
+
       case duchHartDucha: return Colors.red;
+      case duchZdolnoscRefleksyjna: return Colors.teal;
 
       case other: return Colors.black;
     }
@@ -128,7 +134,9 @@ enum KonspektSphereLevel{
       case duchAksjomaty: return pdf.PdfColors.blue;
       case duchWartosci: return pdf.PdfColors.orange;
       case duchPostawy: return pdf.PdfColors.deepPurpleAccent;
+
       case duchHartDucha: return pdf.PdfColors.red;
+      case duchZdolnoscRefleksyjna: return pdf.PdfColors.teal;
 
       case other: return pdf.PdfColors.black;
     }
