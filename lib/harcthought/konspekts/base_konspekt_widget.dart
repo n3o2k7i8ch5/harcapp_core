@@ -31,7 +31,7 @@ class KonspektSphereDetailFactorWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) => Column(
     children: [
-      Text(detail, style: AppTextStyle()),
+      Text(detail, style: AppTextStyle(fontWeight: weight.bold)),
       if(factors != null && factors!.length > 0)
         Text(
             factors!.length == 1?
@@ -63,7 +63,13 @@ class KonspektSphereDetailLevelWidget extends StatelessWidget{
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      Text(levelName??'Poziom:', style: const AppTextStyle()),
+      Row(
+        children: [
+          Text(levelName??'Poziom:', style: const AppTextStyle()),
+          Text(' ', style: const AppTextStyle()),
+          level.textWidget,
+        ],
+      ),
       const SizedBox(height: .5*Dimen.defMarg),
       Wrap(
         spacing: 2*Dimen.defMarg,
@@ -84,6 +90,8 @@ class KonspektSphereDetailsWidget extends StatelessWidget{
 
   const KonspektSphereDetailsWidget(this.details, {super.key, this.levelName, this.onLevelTap, this.onMechanismTap});
 
+  MapEntry? entryAt(int index) => details.levels!.entries.elementAtOrNull(index);
+
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -94,21 +102,16 @@ class KonspektSphereDetailsWidget extends StatelessWidget{
             radius: 0,
             padding: const EdgeInsets.all(2*Dimen.defMarg),
             onTap: onLevelTap,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(levelName??'Poziom:', style: const AppTextStyle()),
-                const SizedBox(height: .5*Dimen.defMarg),
-                Column(
-                  children: details.levels!.keys.map((level) => KonspektSphereDetailLevelWidget(level, details.levels![level]!)).toList(),
-                ),
-                // Wrap(
-                //   spacing: 2*Dimen.defMarg,
-                //   runSpacing: Dimen.defMarg,
-                //   children: details.level.map((l) => l.textWidget).toList(),
-                // ),
-              ],
-            )
+            child: ListView.separated(
+              itemBuilder: (context, index) => KonspektSphereDetailLevelWidget(
+                  entryAt(index)!.key,
+                  entryAt(index)!.value,
+              ),
+              separatorBuilder: (context, index) => SizedBox(height: 0.5*Dimen.defMarg),
+              itemCount: details.levels!.length,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+            ),
         ),
 
     ],
