@@ -35,17 +35,20 @@ class KonspektSphereDetailFactorWidget extends StatelessWidget{
     children: [
       Text(detail, style: AppTextStyle(fontWeight: weight.bold)),
       if(factors != null && factors!.length > 0)
-        Wrap(
-            spacing: 2*Dimen.defMarg,
-            runSpacing: Dimen.defMarg,
-            children: <Widget>[
-              Text(
-                factors!.length == 1?
-                'Metoda:':
-                'Metody:',
-                style: AppTextStyle()
-              )
-            ] + factors!.map((f) => f.textWidget).toList()
+        Padding(
+          padding: EdgeInsets.only(top: 2.0),
+          child: Wrap(
+              spacing: Dimen.defMarg,
+              runSpacing: Dimen.defMarg,
+              children: <Widget>[
+                Text(
+                    factors!.length == 1?
+                    'Metoda:':
+                    'Metody:',
+                    style: AppTextStyle()
+                )
+              ] + factors!.map((f) => f.textWidget).toList()
+          ),
         )
     ],
   );
@@ -70,6 +73,7 @@ class KonspektSphereDetailLevelWidget extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: Dimen.defMarg,
         children: data.keys.map((detail) => Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
             Padding(

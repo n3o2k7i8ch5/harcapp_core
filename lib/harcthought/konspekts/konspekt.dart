@@ -179,7 +179,7 @@ enum KonspektSphereFactor{
 
   Widget get textWidget => Text(
     displayName,
-    style: const AppTextStyle(fontWeight: weight.halfBold),
+    style: const AppTextStyle(fontWeight: weight.normal),
   );
 
 }
