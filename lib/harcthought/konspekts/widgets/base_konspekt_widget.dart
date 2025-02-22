@@ -25,7 +25,6 @@ class BaseKonspektWidget extends StatefulWidget{
   final Konspekt konspekt;
   final bool withAppBar;
   final void Function()? onDuchLevelInfoTap;
-  final void Function()? onDuchMechanismInfoTap;
   final double? maxDialogWidth;
   final ScrollPhysics physics;
   final ScrollController? controller;
@@ -39,7 +38,6 @@ class BaseKonspektWidget extends StatefulWidget{
       { super.key,
         this.withAppBar = true,
         required this.onDuchLevelInfoTap,
-        required this.onDuchMechanismInfoTap,
         this.maxDialogWidth,
         this.physics = const BouncingScrollPhysics(),
         this.controller,
@@ -58,7 +56,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
   Konspekt get konspekt => widget.konspekt;
   void Function()? get onDuchLevelInfoTap => widget.onDuchLevelInfoTap;
-  void Function()? get onDuchMechanismInfoTap => widget.onDuchMechanismInfoTap;
   double? get maxDialogWidth => widget.maxDialogWidth;
 
   late bool showAppBarTitle;
@@ -247,7 +244,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 KonspektSpheresWidget(
                   konspekt.spheres,
                   onDuchLevelInfoTap: onDuchLevelInfoTap,
-                  onDuchMechanismInfoTap: onDuchMechanismInfoTap,
                 ),
 
               const SizedBox(height: Dimen.sideMarg),

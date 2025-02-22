@@ -6,6 +6,7 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'konspekt.dart';
 
@@ -68,6 +69,24 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
 
               const AppText(
                 'Postawy to sposoby bycia, czyli skłonności do określonego postępowania.',
+                size: Dimen.textSizeBig,
+                height: 1.2,
+              ),
+
+              const SizedBox(height: Dimen.sideMarg),
+
+              Center(child: Icon(MdiIcons.circleMedium, color: hintEnab_(context))),
+
+              const SizedBox(height: Dimen.sideMarg),
+
+              TitleShortcutRowWidget(
+                  title: KonspektSphereLevel.duchHartDucha.displayName,
+                  titleColor: KonspektSphereLevel.duchHartDucha.color,
+                  textAlign: TextAlign.left
+              ),
+
+              const AppText(
+                'Hart ducha to zdolność do postępowania zgodnie z tym, co uważa się za słuszne pomimo niesprzyjających okoliczności: fizycznego trudu, kosztu finansowego, ostracyzmu społecznego, itd..',
                 size: Dimen.textSizeBig,
                 height: 1.2,
               ),

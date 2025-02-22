@@ -15,7 +15,6 @@ Future<void> openBaseKonspektDialog({
   KonspektCategory? category,
   List<Konspekt>? allKonspekts,
   final void Function()? onDuchLevelInfoTap,
-  final void Function()? onDuchMechanismInfoTap,
   double? maxWidth,
 }) async {
 
@@ -46,7 +45,6 @@ Future<void> openBaseKonspektDialog({
               child: BaseKonspektWidget(
                   konspekt,
                   onDuchLevelInfoTap: onDuchLevelInfoTap,
-                  onDuchMechanismInfoTap: onDuchMechanismInfoTap
               )
           ),
         );

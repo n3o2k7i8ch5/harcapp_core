@@ -16,7 +16,6 @@ class KonspektHtmlWidget extends StatelessWidget{
   final String text;
   final double textSize;
   final void Function()? onDuchLevelInfoTap;
-  final void Function()? onDuchMechanismInfoTap;
   final double? maxDialogWidth;
 
   const KonspektHtmlWidget(
@@ -24,7 +23,6 @@ class KonspektHtmlWidget extends StatelessWidget{
       this.text,
       { this.textSize = Dimen.textSizeNormal,
         this.onDuchLevelInfoTap,
-        this.onDuchMechanismInfoTap,
         this.maxDialogWidth,
         super.key
       });
@@ -54,7 +52,6 @@ class KonspektHtmlWidget extends StatelessWidget{
               context: context,
               konspektName: konspektName,
               onDuchLevelInfoTap: onDuchLevelInfoTap,
-              onDuchMechanismInfoTap: onDuchMechanismInfoTap,
               maxWidth: maxDialogWidth
           );
         }else if(url.endsWith('@harcerskie.konspekt')){
@@ -64,7 +61,6 @@ class KonspektHtmlWidget extends StatelessWidget{
               konspektName: konspektName,
               category: KonspektCategory.harcerskie,
               onDuchLevelInfoTap: onDuchLevelInfoTap,
-              onDuchMechanismInfoTap: onDuchMechanismInfoTap,
               maxWidth: maxDialogWidth
           );
         }else if(url.endsWith('@ksztalcenie.konspekt')){
@@ -74,7 +70,6 @@ class KonspektHtmlWidget extends StatelessWidget{
               konspektName: konspektName,
               category: KonspektCategory.ksztalcenie,
               onDuchLevelInfoTap: onDuchLevelInfoTap,
-              onDuchMechanismInfoTap: onDuchMechanismInfoTap,
               maxWidth: maxDialogWidth
           );
         }else if(url.endsWith('@attachment')){

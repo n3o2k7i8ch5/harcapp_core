@@ -85,9 +85,8 @@ class KonspektSphereDetailsWidget extends StatelessWidget{
 
   final KonspektSphereDetails details;
   final void Function()? onLevelTap;
-  final void Function()? onMechanismTap;
 
-  const KonspektSphereDetailsWidget(this.details, {super.key, this.onLevelTap, this.onMechanismTap});
+  const KonspektSphereDetailsWidget(this.details, {super.key, this.onLevelTap});
 
   @override
   Widget build(BuildContext context){
@@ -120,7 +119,6 @@ class KonspektSphereWidget extends StatelessWidget{
   final KonspektSphere sphere;
   final KonspektSphereDetails? details;
   final void Function()? onDuchLevelInfoTap;
-  final void Function()? onDuchMechanismInfoTap;
 
 
   const KonspektSphereWidget(
@@ -128,7 +126,6 @@ class KonspektSphereWidget extends StatelessWidget{
       this.details,
       { super.key,
         this.onDuchLevelInfoTap,
-        this.onDuchMechanismInfoTap,
       });
 
   @override
@@ -168,7 +165,6 @@ class KonspektSphereWidget extends StatelessWidget{
           KonspektSphereDetailsWidget(
               details!,
               onLevelTap: onDuchLevelInfoTap,
-              onMechanismTap: onDuchMechanismInfoTap
           )
         else if(details != null)
           KonspektSphereDetailsWidget(details!)
@@ -183,13 +179,11 @@ class KonspektSpheresWidget extends StatelessWidget{
 
   final Map<KonspektSphere, KonspektSphereDetails?> spheres;
   final void Function()? onDuchLevelInfoTap;
-  final void Function()? onDuchMechanismInfoTap;
 
   const KonspektSpheresWidget(
       this.spheres,
       { super.key,
         this.onDuchLevelInfoTap,
-        this.onDuchMechanismInfoTap,
       });
 
   @override
@@ -203,7 +197,6 @@ class KonspektSpheresWidget extends StatelessWidget{
           sphere,
           spheres[sphere],
           onDuchLevelInfoTap: onDuchLevelInfoTap,
-          onDuchMechanismInfoTap: onDuchMechanismInfoTap
       );
     },
     itemCount: spheres.length,
