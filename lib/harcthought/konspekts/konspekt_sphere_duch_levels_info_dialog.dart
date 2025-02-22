@@ -39,8 +39,9 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               ),
 
               const AppText(
-                'Aksjomat duchowości jest jej fundamentem. Jest arbitralnie uznaną prawdą, której nie sposób zweryfikować. Aksjomaty definiują cel życia, najwyższe dobro, przyczynę istnienia, sposób, w jaki działa świat itd..',
+                'Aksjomaty są fundamentem duchowości. Są to arbitralnie uznane prawdą, których nie sposób zweryfikować. Definiują cel życia, najwyższe dobro, przyczynę istnienia, sposób, w jaki działa świat itd..',
                 size: Dimen.textSizeBig,
+                height: 1.2,
               ),
 
               const SizedBox(height: Dimen.sideMarg),
@@ -54,6 +55,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               const AppText(
                 'Wartości są preferowanym stanem rzeczywistości. Pozwalają oceniać działania - określają czy i na ile określone działanie zmienia rzeczywistość w kierunku wynikającym aksjomatu. Wartości definiują także hierarchię spraw, którym powinno się poświęcać najwięcej zasobów (czasu, energii, siły, pieniędzy, etc.).',
                 size: Dimen.textSizeBig,
+                height: 1.2,
               ),
 
               const SizedBox(height: Dimen.sideMarg),
@@ -67,6 +69,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               const AppText(
                 'Postawy to sposoby bycia, czyli skłonności do określonego postępowania.',
                 size: Dimen.textSizeBig,
+                height: 1.2,
               ),
 
             ],

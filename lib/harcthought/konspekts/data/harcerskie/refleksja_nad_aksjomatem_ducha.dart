@@ -1,5 +1,6 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/level_examples.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
@@ -14,8 +15,11 @@ Konspekt refleksja_nad_aksjomatem_ducha = const Konspekt(
   type: KonspektType.zajecia,
   spheres: {
     KonspektSphere.duch: KonspektSphereDetails(
-        level: [KonspektSphereLevel.duchAksjomaty],
-        mechanism: [KonspektSphereMechanism.duchBezposrednia]
+        levels: {
+          KonspektSphereLevel.duchAksjomaty: {
+            aksjoRozwazanieSensuICeluZycia: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+          },
+        }
     )
   },
   metos: [Meto.hs, Meto.wedro],

@@ -14,8 +14,6 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
 
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
 import 'common.dart';
 import 'konspekt.dart';
 import 'konspekt_attachment_widget.dart';
@@ -23,21 +21,75 @@ import 'konspekt_html_widget.dart';
 import 'konspekt_material_tile.dart';
 import 'konspekt_step_widget.dart';
 
-class KonspektSphereDetailWidget extends StatelessWidget{
+class KonspektSphereDetailFactorWidget extends StatelessWidget{
+
+  final String detail;
+  final Set<KonspektSphereFactor>? factors;
+
+  const KonspektSphereDetailFactorWidget(this.detail, this.factors);
+
+  @override
+  Widget build(BuildContext context) => Column(
+    children: [
+      Text(detail, style: AppTextStyle()),
+      if(factors != null && factors!.length > 0)
+        Text(
+            factors!.length == 1?
+            'Wykorzystywany czynnik':
+            'Wykorzystywane czynniki',
+            style: AppTextStyle()
+        ),
+
+      if(factors != null)
+        Wrap(
+            spacing: 2*Dimen.defMarg,
+            runSpacing: Dimen.defMarg,
+            children: factors!.map((f) => f.textWidget).toList()
+        )
+    ],
+  );
+
+}
+
+class KonspektSphereDetailLevelWidget extends StatelessWidget{
+  
+  final KonspektSphereLevel level;
+  final Map<String, Set<KonspektSphereFactor>> data;
+  final String? levelName;
+  
+  const KonspektSphereDetailLevelWidget(this.level, this.data, {this.levelName});
+  
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Text(levelName??'Poziom:', style: const AppTextStyle()),
+      const SizedBox(height: .5*Dimen.defMarg),
+      Wrap(
+        spacing: 2*Dimen.defMarg,
+        runSpacing: Dimen.defMarg,
+        children: data.keys.map((detail) => KonspektSphereDetailFactorWidget(detail, data[detail])).toList(),
+      ),
+    ],
+  );
+
+}
+
+class KonspektSphereDetailsWidget extends StatelessWidget{
 
   final KonspektSphereDetails details;
   final String? levelName;
   final void Function()? onLevelTap;
   final void Function()? onMechanismTap;
 
-  const KonspektSphereDetailWidget(this.details, {super.key, this.levelName, this.onLevelTap, this.onMechanismTap});
+  const KonspektSphereDetailsWidget(this.details, {super.key, this.levelName, this.onLevelTap, this.onMechanismTap});
 
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
 
-      if(details.level.isNotEmpty)
+      if(details.levels != null && details.levels!.isNotEmpty)
         SimpleButton(
             radius: 0,
             padding: const EdgeInsets.all(2*Dimen.defMarg),
@@ -47,30 +99,14 @@ class KonspektSphereDetailWidget extends StatelessWidget{
               children: [
                 Text(levelName??'Poziom:', style: const AppTextStyle()),
                 const SizedBox(height: .5*Dimen.defMarg),
-                Wrap(
-                  spacing: 2*Dimen.defMarg,
-                  runSpacing: Dimen.defMarg,
-                  children: details.level.map((l) => l.textWidget).toList(),
+                Column(
+                  children: details.levels!.keys.map((level) => KonspektSphereDetailLevelWidget(level, details.levels![level]!)).toList(),
                 ),
-              ],
-            )
-        ),
-
-      if(details.mechanism.isNotEmpty)
-        SimpleButton(
-            radius: 0,
-            padding: const EdgeInsets.all(2*Dimen.defMarg),
-            onTap: onMechanismTap,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text('Mechanizmy:', style: AppTextStyle()),
-                const SizedBox(height: .5*Dimen.defMarg),
-                Wrap(
-                  spacing: 2*Dimen.defMarg,
-                  runSpacing: Dimen.defMarg,
-                  children: details.mechanism.map((m) => m.textWidget).toList(),
-                )
+                // Wrap(
+                //   spacing: 2*Dimen.defMarg,
+                //   runSpacing: Dimen.defMarg,
+                //   children: details.level.map((l) => l.textWidget).toList(),
+                // ),
               ],
             )
         ),
@@ -133,14 +169,14 @@ class KonspektSpheresWidget extends StatelessWidget{
             const SizedBox(height: 2*Dimen.defMarg),
 
             if(spheres[sphere] != null && sphere == KonspektSphere.duch)
-              KonspektSphereDetailWidget(
+              KonspektSphereDetailsWidget(
                   spheres[sphere]!,
                   levelName: 'Poziom duchowości:',
                   onLevelTap: onDuchLevelInfoTap,
                   onMechanismTap: onDuchMechanismInfoTap
               )
             else if(spheres[sphere] != null)
-              KonspektSphereDetailWidget(spheres[sphere]!)
+              KonspektSphereDetailsWidget(spheres[sphere]!)
 
           ],
         ),

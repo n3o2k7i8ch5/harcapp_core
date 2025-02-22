@@ -3,6 +3,7 @@ import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/spiewogranie_
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
+import '../level_examples.dart';
 import 'refleksja_nad_aksjomatem_ducha.dart';
 
 Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
@@ -12,9 +13,34 @@ Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
   type: KonspektType.projekt,
   spheres: {
     KonspektSphere.duch: KonspektSphereDetails(
-        level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-        mechanism: [KonspektSphereMechanism.duchBezposrednia, KonspektSphereMechanism.duchNormalizacja]
+      levels: {
+        KonspektSphereLevel.duchAksjomaty: {
+          aksjoSpotkanieBogaWeMszySw: {
+            KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+            KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+            KonspektSphereFactor.duchWzajemnoscOddzialywan,
+            KonspektSphereFactor.duchNormalizacja,
+          },
+        },
+        KonspektSphereLevel.duchWartosci: {
+          wartoscBliskoscZBogiem: {
+            KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+            KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+            KonspektSphereFactor.duchWzajemnoscOddzialywan,
+            KonspektSphereFactor.duchNormalizacja,
+          }
+        },
+        KonspektSphereLevel.duchPostawy: {
+          postawaPrzebaczenie: {
+            KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+            KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+            KonspektSphereFactor.duchWzajemnoscOddzialywan,
+            KonspektSphereFactor.duchNormalizacja,
+          }
+        }
+      }
     ),
+    KonspektSphere.relacje: null,
   },
   metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
   coverAuthor: 'Daniel Iwanicki',

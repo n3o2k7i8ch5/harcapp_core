@@ -3,6 +3,8 @@ import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
+import '../level_examples.dart';
+
 const konspekt_harc_name_dwie_roty_dwoch_przyrzeczen_harcerskich = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
 const konspekt_harc_title_dwie_roty_dwoch_przyrzeczen_harcerskich = 'Dwie roty dwóch Przyrzeczeń';
 
@@ -28,9 +30,17 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
   type: KonspektType.projekt,
     spheres: {
       KonspektSphere.duch: KonspektSphereDetails(
-          level: [KonspektSphereLevel.duchPostawy, KonspektSphereLevel.duchWartosci],
-          mechanism: [KonspektSphereMechanism.duchBezposrednia]
-      )
+        levels: {
+          KonspektSphereLevel.duchPostawy: {
+            postawaPostepowanieZgodnieZPH: {
+              KonspektSphereFactor.duchNormalizacja,
+              KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+              KonspektSphereFactor.duchWzajemnoscOddzialywan
+            }
+          }
+        }
+      ),
+      KonspektSphere.umysl: null,
     },
   metos: [Meto.kadra],
   coverAuthor: 'Daniel Iwanicki',

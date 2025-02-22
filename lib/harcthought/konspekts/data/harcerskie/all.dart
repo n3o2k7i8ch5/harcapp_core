@@ -7,6 +7,7 @@ import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/spiewogranie_z_quizem_interpretacyjnym.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/zycie_i_swiat_prl.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/level_examples.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -52,8 +53,25 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.cialo: null,
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha, KonspektSphereMechanism.duchOtwartoscNaLudzi]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaOtwartoscNaLudzi: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchNormalizacja
+              }
+            },
+
+            KonspektSphereLevel.duchWartosci: {
+              wartoscSprawnoscFizyczna: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchNormalizacja
+              }
+            },
+
+            ...levelHartDucha
+          }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -170,8 +188,11 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia]
+          levels: {
+            KonspektSphereLevel.duchAksjomaty: {
+              aksjoPrzezycieHistoriiBiblijnej: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+            },
+          }
         )
       },
 
@@ -351,8 +372,22 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.projekt,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha, KonspektSphereMechanism.duchOtwartoscNaLudzi, KonspektSphereMechanism.duchSumiennosc]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaSkuteczneDzialanie: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+              postawaSumiennosc: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+            },
+            KonspektSphereLevel.duchWartosci: {
+              wartoscWspolnota: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+            },
+            ...levelHartDucha
+          }
         ),
         KonspektSphere.relacje: null,
       },
@@ -393,8 +428,12 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: const KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty],
-            mechanism: [KonspektSphereMechanism.duchNormalizacja]
+          levels: {
+            KonspektSphereLevel.duchAksjomaty: {
+              aksjoZbawienie: {KonspektSphereFactor.duchNormalizacja},
+              aksjoModlitwa: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+            }
+          },
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -500,8 +539,11 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: const KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty],
-            mechanism: [KonspektSphereMechanism.duchNormalizacja]
+          levels: {
+            KonspektSphereLevel.duchAksjomaty: {
+              aksjoZbawienie: {KonspektSphereFactor.duchNormalizacja},
+            }
+          },
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -604,8 +646,9 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.cialo: null,
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha]
+            levels: {
+              ...levelHartDucha
+            }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -634,8 +677,15 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia]
+          levels: {
+            KonspektSphereLevel.duchAksjomaty: {
+              aksjoModlitwa: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+              },
+            },
+            ...levelHartDucha
+          },
         )
       },
       metos: [Meto.wedro],
@@ -668,8 +718,15 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-            mechanism: [KonspektSphereMechanism.duchNormalizacja]
+            levels: {
+              KonspektSphereLevel.duchWartosci: {
+                "Wartości wynikajace z gawędy": {
+                  KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                  KonspektSphereFactor.duchWlasnaRefleksja,
+                  KonspektSphereFactor.duchNormalizacja,
+                }
+              },
+            }
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -696,10 +753,25 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaSpojnoscZWartosciamiChrzescijanskimi: {
+                KonspektSphereFactor.duchWlasnaRefleksja,
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+            },
+            KonspektSphereLevel.duchAksjomaty: {
+              aksjoAksjomatyChrzescijanskie: {
+                KonspektSphereFactor.duchWlasnaRefleksja,
+              },
+            },
+          }
         ),
-        KonspektSphere.emocje: null,
+        KonspektSphere.emocje: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.emoOdczytywanieWlasnychEmocji: null
+          }
+        ),
       },
       metos: [Meto.wedro],
       coverAuthor: 'Freepik (vecstock)',
@@ -782,8 +854,18 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia]
+          levels: {
+            KonspektSphereLevel.duchAksjomaty: {
+              aksjoModlitwa: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow
+              },
+            },
+            KonspektSphereLevel.duchWartosci: {
+              wartoscWspolnota: {KonspektSphereFactor.duchNormalizacja},
+            }
+          }
         )
       },
       metos: [Meto.wedro],
@@ -813,8 +895,14 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.umysl: null,
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchWartosci],
-            mechanism: [KonspektSphereMechanism.duchNormalizacja]
+            levels: {
+              KonspektSphereLevel.duchPostawy: {
+                "Postawy wynikające z Prawa Harcerskiego": {KonspektSphereFactor.duchNormalizacja},
+              },
+              KonspektSphereLevel.duchWartosci: {
+                "Wartości wynikające z Prawa Harcerskiego": {KonspektSphereFactor.duchNormalizacja},
+              }
+            },
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -841,8 +929,14 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.umysl: null,
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchWartosci],
-            mechanism: [KonspektSphereMechanism.duchNormalizacja]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              "Postawy wynikające z Prawa Zucha": {KonspektSphereFactor.duchNormalizacja},
+            },
+            KonspektSphereLevel.duchWartosci: {
+              "Wartości wynikające z Prawa Zucha": {KonspektSphereFactor.duchNormalizacja},
+            }
+          },
         )
       },
       metos: [Meto.zuch],
@@ -868,12 +962,17 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.projekt,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy, KonspektSphereLevel.duchWartosci],
-            mechanism: [
-              KonspektSphereMechanism.duchHartDucha,
-              KonspektSphereMechanism.duchOtwartoscNaLudzi,
-              KonspektSphereMechanism.duchKsztaltowanieUwaznosci
-            ]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaOtwartoscNaLudzi: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+              postawaWyciszenie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+              postawaTolerowaniaRyzyka: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+            },
+            KonspektSphereLevel.duchWartosci: {
+              wartoscWspolnota: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+            },
+            ...levelHartDucha
+          }
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -901,13 +1000,19 @@ List<Konspekt> allHarcerskieKonspekts = [
   const Konspekt(
       name: 'koledowanie_z_quizem_interpretacyjnym',
       title: 'Kolędowanie z quizem interpretacyjnym',
-      additionalSearchPhrases: ['kolęda', 'kolędy'],
+      additionalSearchPhrases: ['kolęda', 'kolędy', 'święta'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia, KonspektSphereMechanism.duchNormalizacja]
+            levels: {
+              KonspektSphereLevel.duchWartosci: {
+                'Wartości zawarte w kolędach': {KonspektSphereFactor.duchNormalizacja},
+              },
+              KonspektSphereLevel.duchAksjomaty: {
+                aksjoNarodzinyChrystusa: {KonspektSphereFactor.duchNormalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow}
+              }
+            },
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -934,11 +1039,39 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.umysl: null,
-        KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-            mechanism: [KonspektSphereMechanism.duchNormalizacja]
+        KonspektSphere.umysl: KonspektSphereDetails(
+            levels: {
+              KonspektSphereLevel.umyslDyskusja: null
+            }
         ),
+        KonspektSphere.duch: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaRozumienieObcychPogladow: {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+              "Dyskutowane postawy": {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+              }
+            },
+            KonspektSphereLevel.duchWartosci: {
+              wartoscUwaznosc: {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+              wartoscBystrosc: {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+              "Dyskutowane wartości": {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+              }
+            },
+          },
+        )
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
@@ -948,7 +1081,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Nienahalne zwrócenie uwagi harcerzy na naturę skomplikowanych rzeczywistości',
         'Kształtowanie poglądów harcerzy'
       ],
-      description: '<p style="text-align:justify;">Harcerze (lub kadra) wybierają kontrowersyjny temat i rozpoczyna się dyskusja. Dobrym pomysłem jest zainicjować tę dyskusję przy okazji - na przykład wieczorem na obozie, czy podczas wędrówki - niekoniecznie w formalny sposób. Rolą prowadzącego formę jest moderowanie dyskusji - niekoniecznie granie w niej pierwszych skrzypiec. Zamiast narzucać swoją opinię, drużynowy powinien raczej wpływać na dyskusję kierując rozmową i odpowiednio stawiając pytania, zaś na końcu ją podsumować. Pozwoli mu to także określić poglądy harcerzy na różne tematy.'
+      description: '<p style="text-align:justify;">Harcerze (lub kadra) wybierają kontrowersyjny temat i rozpoczynają dyskusję. Dobrym pomysłem jest zainicjować tę dyskusję "przy okazji" - na przykład wieczorem na obozie, czy podczas wędrówki - niekoniecznie w formalny sposób. Rolą prowadzącego formę jest moderowanie dyskusji - niekoniecznie granie w niej pierwszych skrzypiec. Zamiast narzucać swoją opinię, drużynowy powinien raczej wpływać na dyskusję kierując rozmową i odpowiednio stawiając pytania, zaś na końcu ją podsumować. Pozwoli mu to także określić poglądy harcerzy na różne tematy.'
           '<br>'
           '<br>Jeżeli drużyna nie ma znormalizowanych postaw religijnych, drużynowy nie powinien odnosić się do argumentów teologicznych (jeżeli uczestnicy chcą, mogą się odnosić). Jeżeli drużyna ma znormalizowane postawy religijne - kwestie wiary są dopuszczalnym a nawet pożądanym argumentem, jednak nie powinny być argumentem wyłącznym.'
           '<br>'
@@ -979,8 +1112,29 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci, KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchNormalizacja]
+            levels: {
+              KonspektSphereLevel.duchAksjomaty: {
+                aksjoModlitwa: {
+                  KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                  KonspektSphereFactor.duchNormalizacja,
+                  KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                },
+              },
+              KonspektSphereLevel.duchPostawy: {
+                postawaMyslenieOInnych: {
+                  KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                  KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                  KonspektSphereFactor.duchNormalizacja,
+                }
+              },
+              KonspektSphereLevel.duchWartosci: {
+                wartoscWspolnota: {
+                  KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                  KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                  KonspektSphereFactor.duchNormalizacja,
+                }
+              },
+            }
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -1018,8 +1172,18 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchWartosci, KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaSumiennosc: {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie
+              }
+            },
+            ...levelHartDucha
+          }
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -1049,8 +1213,11 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.umysl: null,
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchWartosci],
-            mechanism: []
+          levels: {
+            KonspektSphereLevel.duchWartosci: {
+              "Wartości własne i współuczestników": {KonspektSphereFactor.duchWlasnaRefleksja}
+            }
+          },
         ),
         KonspektSphere.relacje: null,
       },
@@ -1177,8 +1344,38 @@ List<Konspekt> allHarcerskieKonspekts = [
     type: KonspektType.zwyczaj,
     spheres: {
       KonspektSphere.duch: KonspektSphereDetails(
-          level: [KonspektSphereLevel.duchPostawy],
-          mechanism: []
+        levels: {
+          KonspektSphereLevel.duchPostawy: {
+            postawaUwaznosc: {
+              KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              KonspektSphereFactor.duchWzajemnoscOddzialywan,
+              KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+            },
+            postawaSkupienie: {
+              KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              KonspektSphereFactor.duchWzajemnoscOddzialywan,
+              KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+            },
+            postawaSkuteczneDzialanie: {
+              KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              KonspektSphereFactor.duchWzajemnoscOddzialywan,
+              KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+            },
+            postawaTolerowaniaRyzyka: {
+              KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              KonspektSphereFactor.duchWzajemnoscOddzialywan,
+              KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+            },
+          },
+          KonspektSphereLevel.duchWartosci: {
+            wartoscWspolnota: {
+              KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              KonspektSphereFactor.duchWzajemnoscOddzialywan,
+              KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+            }
+          },
+          ...levelHartDucha
+        }
       )
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -1204,8 +1401,15 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.projekt,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchSumiennosc]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaSumiennosc: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+              }
+            }
+          }
         )
       },
       metos: [Meto.zuch, Meto.harc],
@@ -1234,8 +1438,15 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchWartosci],
-            mechanism: []
+          levels: {
+            KonspektSphereLevel.duchWartosci: {
+              "Wartości wynikajace z gawędy": {
+                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                KonspektSphereFactor.duchWlasnaRefleksja,
+                KonspektSphereFactor.duchNormalizacja,
+              }
+            },
+          }
         )
       },
       metos: [Meto.hs, Meto.wedro],
@@ -1262,8 +1473,15 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaKarnosc: {KonspektSphereFactor.duchOczekiwaniaAutorytetu, KonspektSphereFactor.duchWzajemnoscOddzialywan},
+              postawaPunktualnosc: {KonspektSphereFactor.duchOczekiwaniaAutorytetu, KonspektSphereFactor.duchWzajemnoscOddzialywan}
+            },
+            KonspektSphereLevel.duchWartosci: {
+              wartoscWspolnota: {KonspektSphereFactor.duchOczekiwaniaAutorytetu, KonspektSphereFactor.duchWzajemnoscOddzialywan}
+            }
+          }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -1289,10 +1507,40 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.cialo: null,
+        KonspektSphere.cialo: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.cialoZdolnoscMarszu: null,
+          }
+        ),
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia, KonspektSphereMechanism.duchHartDucha, KonspektSphereMechanism.duchKsztaltowanieUwaznosci]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaUwaznosc: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie
+              },
+              postawaSkupienie: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie
+              },
+              postawaOtwartoscNaLudzi: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie
+              },
+            },
+            KonspektSphereLevel.duchAksjomaty: {
+              aksjoModlitwa: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchNormalizacja,
+              }
+            },
+            KonspektSphereLevel.duchWartosci: {
+              wartoscWspolnota: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchNormalizacja,
+              }
+            },
+            ...levelHartDucha
+          }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -1314,18 +1562,14 @@ List<Konspekt> allHarcerskieKonspekts = [
   ),
 
 
-  Konspekt(
+  const Konspekt(
       name: 'podzial_pirackiego_lupu',
       title: 'Podział pirackiego łupu',
       additionalSearchPhrases: ['piraci', 'pirat', 'zagadka', 'zagadki', 'zagadka logiczna'],
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.umysl: null,
-        KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchWartosci],
-            mechanism: [KonspektSphereMechanism.duchWartoscWtorna]
-        ),
+        ...spheresLogiczne
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
@@ -1500,8 +1744,9 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha]
+          levels: {
+            ...levelHartDucha
+          }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -1524,8 +1769,18 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-            mechanism: []
+          levels: {
+            KonspektSphereLevel.duchAksjomaty: {
+              aksjoRozwazanieSensuICeluZycia: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              }
+            },
+            KonspektSphereLevel.duchWartosci: {
+              "Wartości własne i rozmówcy": {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              }
+            },
+          }
         ),
         KonspektSphere.relacje: null,
       },
@@ -1558,8 +1813,26 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.cialo: null,
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia, KonspektSphereMechanism.duchKsztaltowanieUwaznosci]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaWyciszenie: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+              },
+              postawaUwaznosc: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+              },
+            },
+            KonspektSphereLevel.duchAksjomaty: {
+              aksjoModlitwa: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                KonspektSphereFactor.duchNormalizacja,
+              },
+            }
+          },
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -1584,13 +1857,22 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchWartosci, KonspektSphereLevel.duchPostawy],
-            mechanism: [
-              KonspektSphereMechanism.duchBezposrednia,
-              KonspektSphereMechanism.duchNormalizacja,
-              KonspektSphereMechanism.duchHartDucha,
-              KonspektSphereMechanism.duchOtwartoscNaLudzi
-            ]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaMyslenieOInnych: {
+                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchNormalizacja,
+              }
+            },
+            KonspektSphereLevel.duchWartosci: {
+              wartoscWspolnota: {
+                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchNormalizacja,
+              }
+            },
+          }
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -1600,7 +1882,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Budowanie wspólnoty u uczestników poprzez przekonanie, że jest ona na tyle ważna, że tylko wspólnie można rozpocząć posiłek',
         'Budowanie wspólnoty u uczestników poprzez rywalizację z innymi śpiewającymi przed posiłkiem drużynami na to, kto głośniej zaśpiewa'
       ],
-      description: '<p style="text-align:justify;">Forma polega na rozpoczęciu posiłku wspólnym zaśpiewaniem krótkiej piosenki, przed którą żaden z uczestników nie może rozpocząć posiłku.'
+      description: '<p style="text-align:justify;">Uczestnicy rozpoczynają posiłek wspólnym zaśpiewaniem krótkiej piosenki, przed którą żaden z uczestników nie może rozpocząć posiłku.'
           '<br>'
           '<br>Warto mieć świadomość, że tradycje śpiewania przed posiłkiem w harcerstwie wywodzą się tradycji wspólnej modlitwy przed posiłkiem (tradycja ta została powszechnie zmieniona w ZHP na skutek czasowego wcielenia ZHP do struktur komunistycznych).</p>'
   ),
@@ -1614,10 +1896,38 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.umysl: null,
+        KonspektSphere.umysl: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.umyslDyskusja: null
+          }
+        ),
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaRozumienieObcychPogladow: {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+              "Dyskutowane postawy": {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+              }
+            },
+            KonspektSphereLevel.duchWartosci: {
+              wartoscUwaznosc: {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+              wartoscBystrosc: {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+              "Dyskutowane wartości": {
+                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+              }
+            },
+          },
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -1627,6 +1937,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       aims: [
         'Stworzenie naturalnej okazji do poruszenia kluczowych aspektów dot. wartości i postaw',
         'Refleksja uczestników nad słusznością działań i postaw z perspektywy obserwatora',
+        'Stworzenie prowadzącemu okazji do przemycenia swojej opinii na temat omawianych wartości i postaw',
         aimUmiejetnoscDyskusji,
       ],
       description: '<p style="text-align:justify;">Prowadzący opisuje hipotetyczną, problematyczną sytuację z perspektywy jakiejś osoby oraz sposób, w jaki jej uczestnicy ją rozwiązali. Następnie harcerze muszą ocenić jak owa sytuacja powinna zostać prawidłowo rozwiązana i dlaczego.'
@@ -1654,8 +1965,13 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.umysl: null,
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchWartosci, KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia]
+          levels: {
+            KonspektSphereLevel.duchWartosci: {
+              wartoscUwaznosc: {KonspektSphereFactor.duchNormalizacja},
+              wartoscWspolnota: {KonspektSphereFactor.duchNormalizacja},
+              wartoscWyciszenie: {KonspektSphereFactor.duchNormalizacja},
+            },
+          },
         )
       },
       metos: [Meto.hs, Meto.wedro],
@@ -1954,8 +2270,13 @@ List<Konspekt> allHarcerskieKonspekts = [
     spheres: {
       KonspektSphere.umysl: null,
       KonspektSphere.duch: KonspektSphereDetails(
-          level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-          mechanism: [KonspektSphereMechanism.duchNormalizacja]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaPostepowanieZgodnieZPH: {
+                KonspektSphereFactor.duchNormalizacja
+              }
+            }
+          }
       )
     },
     type: KonspektType.zwyczaj,
@@ -1989,8 +2310,13 @@ List<Konspekt> allHarcerskieKonspekts = [
     spheres: {
       KonspektSphere.umysl: null,
       KonspektSphere.duch: KonspektSphereDetails(
-          level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-          mechanism: [KonspektSphereMechanism.duchNormalizacja]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaPostepowanieZgodnieZPZ: {
+                KonspektSphereFactor.duchNormalizacja
+              }
+            }
+          }
       )
     },
     type: KonspektType.zwyczaj,
@@ -2024,8 +2350,19 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia]
+            levels: {
+              KonspektSphereLevel.duchPostawy: {
+                postawaSpojnoscZWartosciamiChrzescijanskimi: {
+                  KonspektSphereFactor.duchWlasnaRefleksja,
+                  KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                },
+              },
+              KonspektSphereLevel.duchAksjomaty: {
+                aksjoAksjomatyChrzescijanskie: {
+                  KonspektSphereFactor.duchWlasnaRefleksja,
+                },
+              },
+            }
         ),
         KonspektSphere.relacje: null,
       },
@@ -2047,6 +2384,15 @@ List<Konspekt> allHarcerskieKonspekts = [
     type: KonspektType.zajecia,
     spheres: {
       KonspektSphere.umysl: null,
+      KonspektSphere.duch: KonspektSphereDetails(
+        levels: {
+          KonspektSphereLevel.duchWartosci: {
+            wartoscPrzynaleznoscDoHarcerstwa: {
+              KonspektSphereFactor.duchNormalizacja
+            }
+          }
+        }
+      )
     },
     metos: [Meto.harc, Meto.hs],
     coverAuthor: 'freepik.com (WangXiNa)',
@@ -2248,8 +2594,15 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha, KonspektSphereMechanism.duchKsztaltowanieUwaznosci]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaOdpowiedzialnosc: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan
+              }
+            },
+            ...levelHartDucha
+          }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -2273,10 +2626,25 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.cialo: null,
+        KonspektSphere.cialo: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.cialoZdolnoscMarszu: null
+          },
+        ),
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha, KonspektSphereMechanism.duchKsztaltowanieUwaznosci]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaSkupienie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+              postawaUwaznosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+              postawaOdpowiedzialnosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
+            },
+            ...levelHartDucha
+          }
+        ),
+        KonspektSphere.umysl: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.umyslKoncentracja: null
+          },
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -2303,10 +2671,26 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.cialo: null,
+        KonspektSphere.cialo: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.cialoZdolnoscMarszu: null
+          },
+        ),
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha, KonspektSphereMechanism.duchKsztaltowanieUwaznosci, KonspektSphereMechanism.duchOtwartoscNaLudzi]
+            levels: {
+              KonspektSphereLevel.duchPostawy: {
+                postawaSkupienie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                postawaUwaznosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                postawaOdpowiedzialnosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                postawaOtwartoscNaLudzi: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
+              },
+              ...levelHartDucha
+            }
+        ),
+        KonspektSphere.umysl: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.umyslKoncentracja: null
+          },
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -2333,10 +2717,19 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zajecia,
       spheres: {
-        KonspektSphere.cialo: null,
+        KonspektSphere.cialo: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.cialoZdolnoscMarszu: null
+          },
+        ),
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia, KonspektSphereMechanism.duchKsztaltowanieUwaznosci]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaSkupienie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+              postawaUwaznosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+            },
+            ...levelHartDucha
+          },
         )
       },
       metos: [Meto.hs, Meto.wedro],
@@ -2357,8 +2750,25 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchWartosci, KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchNormalizacja, KonspektSphereMechanism.duchWartoscWtorna, KonspektSphereMechanism.duchOtwartoscNaLudzi]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaPrzebaczenie: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchNormalizacja
+              },
+              postawaWdziecznosc: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchNormalizacja
+              },
+              postawaOtwartoscNaLudzi: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan,
+                KonspektSphereFactor.duchNormalizacja
+              },
+            },
+          }
         ),
         KonspektSphere.relacje: null,
       },
@@ -2389,8 +2799,14 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchAksjomaty, KonspektSphereLevel.duchWartosci],
-            mechanism: [KonspektSphereMechanism.duchBezposrednia]
+          levels: {
+            KonspektSphereLevel.duchAksjomaty: {
+              aksjoRozwazanieSensuICeluZycia: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchNormalizacja
+              },
+            }
+          },
         )
       },
       metos: [Meto.hs, Meto.wedro],
@@ -2480,8 +2896,22 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.cialo: null,
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchWartosci, KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha, KonspektSphereMechanism.duchOtwartoscNaLudzi]
+            levels: {
+              KonspektSphereLevel.duchPostawy: {
+                postawaOtwartoscNaLudzi: {
+                  KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                  KonspektSphereFactor.duchWzajemnoscOddzialywan
+                }
+              },
+              KonspektSphereLevel.duchWartosci: {
+                wartoscZdrowie: {
+                  KonspektSphereFactor.duchNormalizacja,
+                  KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                  KonspektSphereFactor.duchWzajemnoscOddzialywan
+                },
+              },
+              ...levelHartDucha
+            }
         ),
         KonspektSphere.relacje: null,
       },
@@ -2511,11 +2941,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.zwyczaj,
       spheres: {
-        KonspektSphere.umysl: null,
-        KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchWartosci],
-            mechanism: [KonspektSphereMechanism.duchWartoscWtorna]
-        ),
+        ...spheresLogiczne
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (hamimfadillah)',
@@ -2611,8 +3037,21 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha, KonspektSphereMechanism.duchOtwartoscNaLudzi]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaOtwartoscNaLudzi: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan
+              }
+            },
+            KonspektSphereLevel.duchWartosci: {
+              wartoscWspolnota: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWzajemnoscOddzialywan
+              }
+            },
+            ...levelHartDucha
+          },
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -2634,8 +3073,9 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchHartDucha]
+          levels: {
+            ...levelHartDucha
+          },
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -2658,8 +3098,14 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            level: [KonspektSphereLevel.duchPostawy],
-            mechanism: [KonspektSphereMechanism.duchOtwartoscNaLudzi]
+            levels: {
+              KonspektSphereLevel.duchPostawy: {
+                postawaOtwartoscNaLudzi: {
+                  KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                  KonspektSphereFactor.duchWzajemnoscOddzialywan
+                }
+              }
+            }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],

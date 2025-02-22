@@ -83,25 +83,46 @@ enum KonspektSphere{
 
 class KonspektSphereDetails{
 
-  final List<KonspektSphereLevel> level;
-  final List<KonspektSphereMechanism> mechanism;
+  final Map<KonspektSphereLevel, Map<String, Set<KonspektSphereFactor>>?>? levels;
+
+  // final List<KonspektSphereLevel> level;
+  // final List<KonspektSphereMechanism> mechanism;
 
   const KonspektSphereDetails({
-    required this.level,
-    required this.mechanism
+    required this.levels,
   });
 }
 
 enum KonspektSphereLevel{
   duchAksjomaty,
   duchWartosci,
-  duchPostawy;
+  duchPostawy,
+  duchHartDucha,
+
+  cialoZdolnoscMarszu,
+
+  umyslDyskusja,
+  umyslKoncentracja,
+  umyslLogiczneMyslenie,
+
+  emoOdczytywanieWlasnychEmocji,
+  emoPanowanieNadEmocjami;
 
   String get displayName{
     switch(this){
       case duchAksjomaty: return 'Aksjomaty';
       case duchWartosci: return 'Wartości';
       case duchPostawy: return 'Postawy';
+      case duchHartDucha: return 'Hart Ducha';
+
+      case cialoZdolnoscMarszu: return 'Zdolność marszu';
+
+      case umyslDyskusja: return 'Umiejętność dyskusji';
+      case umyslKoncentracja: return 'Zdolność koncentracji';
+      case umyslLogiczneMyslenie: return 'Zdolność logicznego myślenia';
+
+      case emoOdczytywanieWlasnychEmocji: return 'Zdolność odczytywania własnych emocji';
+      case emoPanowanieNadEmocjami: return 'Zdolność panowania nad emocjami';
     }
   }
 
@@ -110,6 +131,16 @@ enum KonspektSphereLevel{
       case duchAksjomaty: return Colors.blue;
       case duchWartosci: return Colors.orange;
       case duchPostawy: return Colors.deepPurpleAccent;
+      case duchHartDucha: return Colors.red;
+
+      case cialoZdolnoscMarszu: return Colors.black;
+
+      case umyslDyskusja: return Colors.black;
+      case umyslKoncentracja: return Colors.black;
+      case umyslLogiczneMyslenie: return Colors.black;
+
+      case emoOdczytywanieWlasnychEmocji: return Colors.black;
+      case emoPanowanieNadEmocjami: return Colors.black;
     }
   }
 
@@ -120,26 +151,30 @@ enum KonspektSphereLevel{
 
 }
 
-enum KonspektSphereMechanism{
-  duchBezposrednia,
+enum KonspektSphereFactor{
+  duchBiologia,
+  duchBezposrednieDoswiadczenie,
   duchNormalizacja,
-  duchHartDucha,
-  duchKsztaltowanieUwaznosci,
-  duchOtwartoscNaLudzi,
-  duchWartoscWtorna,
-  duchSumiennosc;
-
+  duchOczekiwaniaAutorytetu,
+  duchOpowiescPrzewodnia,
+  duchPrzykladWlasnyAutorytetow,
+  duchWartosciWtorne,
+  duchWlasnaRefleksja,
+  duchWzajemnoscOddzialywan;
 
   String get displayName{
     switch(this){
-      case duchBezposrednia: return 'Forma Bezpośrednia';
+      case duchBiologia: return 'Biologia';
+      case duchBezposrednieDoswiadczenie: return 'Bezpośrednie Doświadczenie';
       case duchNormalizacja: return 'Normalizacja';
-      case duchHartDucha: return 'Hart Ducha';
-      case duchKsztaltowanieUwaznosci: return 'Kształtowanie Uważności';
-      case duchOtwartoscNaLudzi: return 'Otwartość Na Ludzi';
-      case duchWartoscWtorna: return 'Wartość Wtórna';
-      case duchSumiennosc: return 'Sumienność';
+      case duchOczekiwaniaAutorytetu: return 'Oczekiwania Uznanego Autorytetu';
+      case duchOpowiescPrzewodnia: return 'Opowieść Przewodnia';
+      case duchPrzykladWlasnyAutorytetow: return 'Przykład Własny Autorytetów';
+      case duchWartosciWtorne: return 'Wartości Wtórne';
+      case duchWlasnaRefleksja: return 'Własna Refleksja';
+      case duchWzajemnoscOddzialywan: return 'Wzajemność Oddziaływań';
     }
+
   }
 
   Widget get textWidget => Text(

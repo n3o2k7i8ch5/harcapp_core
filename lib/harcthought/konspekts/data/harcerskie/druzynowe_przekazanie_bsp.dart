@@ -1,4 +1,5 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/level_examples.dart';
 import 'package:harcapp_core/values/people.dart';
 
 import '../../konspekt.dart';
@@ -11,8 +12,21 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
     type: KonspektType.projekt,
     spheres: {
       KonspektSphere.duch: KonspektSphereDetails(
-          level: [KonspektSphereLevel.duchPostawy, KonspektSphereLevel.duchWartosci],
-          mechanism: [KonspektSphereMechanism.duchNormalizacja, KonspektSphereMechanism.duchOtwartoscNaLudzi]
+          levels: {
+            KonspektSphereLevel.duchPostawy: {
+              postawaOtwartoscNaLudzi: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+              postawaPrzebaczenie: {KonspektSphereFactor.duchNormalizacja}
+            },
+            KonspektSphereLevel.duchWartosci: {
+              wartoscPokoj: {KonspektSphereFactor.duchNormalizacja},
+              wartoscPrzynaleznoscDoHarcerstwa: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+            },
+            KonspektSphereLevel.duchAksjomaty: {
+              aksjoNarodzinyChrystusa: {KonspektSphereFactor.duchNormalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow},
+              aksjoZbawczaRolaChrystusa: {KonspektSphereFactor.duchNormalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow},
+              aksjoZbawienie: {KonspektSphereFactor.duchNormalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow}
+            },
+          },
       ),
       KonspektSphere.relacje: null
     },
@@ -22,9 +36,14 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
     author: Person(name: 'Zespół Wychowania Duchowego i Religijnego Chorągwi Stołecznej ZHP'),
     customDuration: Duration(days: 30),
     aims: [
-      'Poprawa umiejętności pracy w zespole i przyjmowania potrzebnych w zespole ról.',
-      'Poprawa umiejętności koordynowania działań w zespole.',
-      'Poprawa umiejętności analizy i dyskryminowania między informacjami ważnymi i nieważnymi.',
+      'Kształtowanie postawy przebaczenia',
+      'Kształtowanie postawy otwartości na ludzi',
+      'Kształtowanie wartości pokoju',
+      'Zapoznanie z historią narodzin Chrystusa',
+      'Zapoznanie ze zbawczą rolą Chrystusa',
+      'Zapoznanie z historią zbawienia człowieka',
+
+      'Kształtowanie poczucia przynależności do wspólnoty harcerskiej i skautowej',
     ],
 
     summary: 'Harcerze w gronie drużyny przygotowują się, a nastepnie uczestniczą w przekazaniu Betlejemskiego Światła Pokoju.',
