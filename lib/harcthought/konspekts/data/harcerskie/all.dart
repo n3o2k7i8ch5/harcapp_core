@@ -1133,7 +1133,8 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Nienahalne zwrócenie uwagi harcerzy na naturę skomplikowanych rzeczywistości',
         'Kształtowanie poglądów harcerzy'
       ],
-      description: '<p style="text-align:justify;">Harcerze (lub kadra) wybierają kontrowersyjny temat i rozpoczynają dyskusję. Dobrym pomysłem jest zainicjować tę dyskusję "przy okazji" - na przykład wieczorem na obozie, czy podczas wędrówki - niekoniecznie w formalny sposób. Rolą prowadzącego formę jest moderowanie dyskusji - niekoniecznie granie w niej pierwszych skrzypiec. Zamiast narzucać swoją opinię, drużynowy powinien raczej wpływać na dyskusję kierując rozmową i odpowiednio stawiając pytania, zaś na końcu ją podsumować. Pozwoli mu to także określić poglądy harcerzy na różne tematy.'
+      summary: 'Uczestnicy (lub prowadzący) wybierają kontrowersyjny temat i rozpoczynają dyskusję. Warto zainicjować dyskusję "przy okazji" - wieczorem na obozie lub podczas wędrówki, niekoniecznie w formalny sposób.',
+      description: '<p style="text-align:justify;">Uczestnicy (lub prowadzący) wybierają kontrowersyjny temat i rozpoczynają dyskusję. Dobrym pomysłem jest zainicjować tę dyskusję "przy okazji" - na przykład wieczorem na obozie, czy podczas wędrówki - niekoniecznie w formalny sposób. Rolą prowadzącego formę jest moderowanie dyskusji - niekoniecznie granie w niej pierwszych skrzypiec. Zamiast narzucać swoją opinię, drużynowy powinien raczej wpływać na dyskusję kierując rozmową i odpowiednio stawiając pytania, zaś na końcu ją podsumować. Pozwoli mu to także określić poglądy harcerzy na różne tematy.'
           '<br>'
           '<br>Jeżeli drużyna nie ma znormalizowanych postaw religijnych, drużynowy nie powinien odnosić się do argumentów teologicznych (jeżeli uczestnicy chcą, mogą się odnosić). Jeżeli drużyna ma znormalizowane postawy religijne - kwestie wiary są dopuszczalnym a nawet pożądanym argumentem, jednak nie powinny być argumentem wyłącznym.'
           '<br>'
@@ -1454,7 +1455,8 @@ List<Konspekt> allHarcerskieKonspekts = [
       'Budowanie u uczestników wspólnoty poprzez mechanizm rywalizacji',
       'Kształtowanie u uczestników szacunku dla skuteczności w działaniu',
     ],
-    description: '<p style="text-align:justify;">Uczestnicy podczas formy wyjazdowej podczas której śpią w grupach osobnych miejscach (np. w osobnych podobozach podczas obozu letniego) w nocy podkradają się do drugiej grupy. Ich celem jest dostać się na teren obozowania przeciwnej grupy nie będąc zauważonymi przez wartę nocna i podkraść rzeczy jakieś symboliczne rzeczy (np. proporce zastępów, menażki, chusty z mundurów).'
+    summary: 'Uczestnicy nocą podkradają się do innego obozu. Ich celem jest dostać się tam nie będąc zauważonymi przez wartę nocna i podkraść jakieś symboliczne przedmioty.',
+    description: '<p style="text-align:justify;">Uczestnicy podczas formy wyjazdowej podczas której śpią w grupach osobnych miejscach (np. w osobnych podobozach podczas obozu letniego) w nocy podkradają się do drugiej grupy. Ich celem jest dostać się na teren obozowania przeciwnej grupy nie będąc zauważonymi przez wartę nocna i podkraść jakieś symboliczne przedmioty (np. proporce zastępów, menażki, chusty z mundurów).'
         '<br>'
         '<br>Podkradanie do innej grupy powinno zostać poprzedzone skonsultowaniem tego zamiaru z kadrą owej grupy (np. z kadrą podobozu), tak, by nie zaszło podejrzenie, że zupełnie obce osoby próbują się dostać na teren obozowania.'
         '<br>'
@@ -1551,7 +1553,8 @@ List<Konspekt> allHarcerskieKonspekts = [
             },
             KonspektSphereLevel.duchWartosci: {
               wartoscWspolnota: {KonspektSphereFactor.duchOczekiwaniaAutorytetu, KonspektSphereFactor.duchWzajemnoscOddzialywan}
-            }
+            },
+            ...levelHartDucha
           }
         )
       },
@@ -1563,7 +1566,8 @@ List<Konspekt> allHarcerskieKonspekts = [
         aimSzacunekDlaSkutecznegoDzialania,
         aimPostawaWspolpracy,
       ],
-      description: '<p style="text-align:justify;">Prowadzący po wydaniu komendy “zbiórka” (np. w szeregu), jeśli widzi, że harcerze się ociągają i nie traktują jego komendy z należytą powagą i dyscypliną odlicza od siedmiu do zera. Jeśli do tego czasu harcerze nie ustawią się na zbiórce, prowadzący wydaje całej drużynie komendę “padnij” (czyli przejście do podporu przodem).'
+      summary: 'Prowadzący po wydaniu komendy “zbiórka”, jeśli widzi, że harcerze się ociągają, odlicza od siedmiu do zera. Jeśli harcerze nie zdążą się ustawić, pada komenda “padnij”.',
+      description: '<p style="text-align:justify;">Prowadzący po wydaniu komendy “zbiórka” (np. w szeregu), jeśli widzi, że harcerze się ociągają i nie traktują jego komendy z należytą powagą i dyscypliną, odlicza od siedmiu do zera. Jeśli do tego czasu harcerze nie ustawią się na zbiórce, prowadzący wydaje całej drużynie komendę “padnij” (czyli przejście do podporu przodem).'
           '<br>'
           '<br>Forma ma na celu zbudowanie postawy szacunku dla wydawanych przez kadrę komend i postawy sprawnego działania - w przeciwnym razie w naturalny sposób harcerze, którzy sprawnie stawiają się na zbiórce są poszkodowani, gdyż czekają bezczynnie na tych, którzy komendę zignorowali. Jednocześnie forma pozwala zbudować przekonanie, że konieczność położenia trzymanych w ręku rzeczy na ziemi w celu wykonania komendy “padnij” oraz dotknięcie rękami podłogi lub ziemi nie jest “końcem świata”.'
           '<br>'
@@ -1826,6 +1830,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       aims: [
         'Kształtowanie u uczestników hartu ducha'
       ],
+      summary: 'Uczestnicy dobrowolnie wstrzymują się od jedzenia przez określony czas.',
       description: '<p style="text-align:justify;">Uczestnicy dobrowolnie wstrzymują się od jedzenia przez określony czas (np. przez dobę) w otoczeniu osób jedzących. Celem formy jest kształtowanie hartu ducha i siły woli - jest, przykładowo, częścią sprawności “trzy pióra”.'
           '<br>'
           '<br>Post nie musi dotyczyć całkowitego powstrzymania się od jedzenia. Może np. być realizowany poprzez jedzenie jedynie warzyw, jedzenie jedynie chleba, albo niejedzenie cukru.</p>'
@@ -1868,6 +1873,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       aims: [
         'Podjęcie przez uczestników refleksji nad sensem i celem życia'
       ],
+      summary: 'Uczestnik rozmawia z różnymi osobami w podeszłym wieku na temat ich życia, tego co było dla nich najważniejsze, czego żałowali.',
       description: '<p style="text-align:justify;">Uczestnik znajduje pięć osób po 60. roku życia o różnych przeszłościach i odbywa z nimi rozmowy na temat ich życia oraz (zwłaszcza!) tego, co według nich jest w życiu najważniejsze, z czego się najbardziej cieszą, czego najbardziej żałują. Forma ma na celu dać uczestnikowi możliwość spojrzenia na rzeczywistość oczami kogoś, kto dobrze ją zna i kto większość swojego życia ma już za sobą.'
           '<br>'
           '<br>Uczestnicy do tej formy muszą posiadać potrzebne umiejętności komunikacyjne, by umieli prowadzić rozmowę, a nie tylko “odpytkę”. Jeżeli nie uda im się nawiązać szczerej, mimo, że krótkiej relacji, forma będzie bezcelowa. Wskazane jest z tego względu, by wybrane osoby były otwarte na rozmowy z harcerzami - byli instruktorzy, kombatanci, osoby, które pełniły w ZHP w państwie Polskim funkcje. Wskazane jest także, aby uczestnik formy przygotował strategię rozmowy, która pozwoli mu przejść od tego, czym rozmówca się zajmował do jego ducha.</p>',
