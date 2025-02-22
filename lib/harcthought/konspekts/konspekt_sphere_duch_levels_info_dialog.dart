@@ -35,7 +35,6 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
             children: [
               TitleShortcutRowWidget(
                   title: 'Poziomy duchowości',
-                  titleColor: KonspektSphereLevel.duchAksjomaty.color,
                   textAlign: TextAlign.left
               ),
 
@@ -51,10 +50,11 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                 KonspektSphereLevel.duchAksjomaty.displayName,
                 style: AppTextStyle(
                   color: KonspektSphereLevel.duchAksjomaty.color,
-                  fontWeight: weight.bold
+                  fontWeight: weight.bold,
+                  fontSize: Dimen.textSizeBig
                 ),
               ),
-
+              const SizedBox(height: Dimen.defMarg),
               const AppText(
                 'Aksjomaty są fundamentem duchowości. Są to arbitralnie uznane prawdą, których nie sposób zweryfikować. Definiują cel życia, najwyższe dobro, przyczynę istnienia, sposób, w jaki działa świat itd..',
                 size: Dimen.textSizeBig,
@@ -66,11 +66,12 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               Text(
                 KonspektSphereLevel.duchWartosci.displayName,
                 style: AppTextStyle(
-                    color: KonspektSphereLevel.duchWartosci.color,
-                    fontWeight: weight.bold
+                  color: KonspektSphereLevel.duchWartosci.color,
+                  fontWeight: weight.bold,
+                  fontSize: Dimen.textSizeBig
                 ),
               ),
-
+              const SizedBox(height: Dimen.defMarg),
               const AppText(
                 'Wartości są preferowanym stanem rzeczywistości. Pozwalają oceniać działania - określają czy i na ile określone działanie zmienia rzeczywistość w kierunku wynikającym aksjomatu. Wartości definiują także hierarchię spraw, którym powinno się poświęcać najwięcej zasobów (czasu, energii, siły, pieniędzy, etc.).',
                 size: Dimen.textSizeBig,
@@ -82,11 +83,12 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               Text(
                 KonspektSphereLevel.duchPostawy.displayName,
                 style: AppTextStyle(
-                    color: KonspektSphereLevel.duchPostawy.color,
-                    fontWeight: weight.bold
+                  color: KonspektSphereLevel.duchPostawy.color,
+                  fontWeight: weight.bold,
+                  fontSize: Dimen.textSizeBig
                 ),
               ),
-
+              const SizedBox(height: Dimen.defMarg),
               const AppText(
                 'Postawy to sposoby bycia, czyli skłonności do określonego postępowania.',
                 size: Dimen.textSizeBig,
@@ -97,7 +99,6 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
 
               TitleShortcutRowWidget(
                   title: 'Zdolność kształtowania duchowości',
-                  titleColor: KonspektSphereLevel.duchAksjomaty.color,
                   textAlign: TextAlign.left
               ),
 
@@ -114,11 +115,12 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               Text(
                 KonspektSphereLevel.duchHartDucha.displayName,
                 style: AppTextStyle(
-                    color: KonspektSphereLevel.duchHartDucha.color,
-                    fontWeight: weight.bold
+                  color: KonspektSphereLevel.duchHartDucha.color,
+                  fontWeight: weight.bold,
+                  fontSize: Dimen.textSizeBig
                 ),
               ),
-
+              const SizedBox(height: Dimen.defMarg),
               const AppText(
                 'Hart ducha to zdolność do postępowania zgodnie z tym, co uważa się za słuszne pomimo niesprzyjających okoliczności: fizycznego trudu, kosztu finansowego, ostracyzmu społecznego, itd..',
                 size: Dimen.textSizeBig,
