@@ -112,10 +112,12 @@ class KonspektSphereDetailsWidget extends StatelessWidget{
               child: Icon(MdiIcons.circleMedium, size: AppTextStyle.defFontSize),
             ),
 
-            KonspektSphereDetailLevelWidget(
-                level,
-                details.levels![level]!,
-                levelName: levelName
+            Expanded(
+              child: KonspektSphereDetailLevelWidget(
+                  level,
+                  details.levels![level]!,
+                  levelName: levelName
+              ),
             )
 
           ],
