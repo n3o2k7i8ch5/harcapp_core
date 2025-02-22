@@ -19,7 +19,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
     color: background_(context),
     child: Scaffold(
         appBar: AppBarX(
-          title: 'Poziomy duchowości',
+          title: 'O co tu chodzi?',
           scrolledUnderElevation: 0,
           backgroundColor: Colors.transparent,
           iconTheme: IconThemeData(color: iconEnab_(context)),
@@ -34,9 +34,25 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
             padding: const EdgeInsets.all(Dimen.sideMarg - Dimen.defMarg),
             children: [
               TitleShortcutRowWidget(
-                  title: KonspektSphereLevel.duchAksjomaty.displayName,
+                  title: 'Poziomy duchowości',
                   titleColor: KonspektSphereLevel.duchAksjomaty.color,
                   textAlign: TextAlign.left
+              ),
+
+              const AppText(
+                'Duchowość jest sposobem, w jaki człowiek żyje. Każda duchowość jest w pełni definiowana przez zachowania, postawy, wartości i aksjomaty, w które wierzy.',
+                size: Dimen.textSizeBig,
+                height: 1.2,
+              ),
+
+              const SizedBox(height: Dimen.sideMarg),
+
+              Text(
+                KonspektSphereLevel.duchAksjomaty.displayName,
+                style: AppTextStyle(
+                  color: KonspektSphereLevel.duchAksjomaty.color,
+                  fontWeight: weight.bold
+                ),
               ),
 
               const AppText(
@@ -47,10 +63,12 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
 
               const SizedBox(height: Dimen.sideMarg),
 
-              TitleShortcutRowWidget(
-                  title: KonspektSphereLevel.duchWartosci.displayName,
-                  titleColor: KonspektSphereLevel.duchWartosci.color,
-                  textAlign: TextAlign.left
+              Text(
+                KonspektSphereLevel.duchWartosci.displayName,
+                style: AppTextStyle(
+                    color: KonspektSphereLevel.duchWartosci.color,
+                    fontWeight: weight.bold
+                ),
               ),
 
               const AppText(
@@ -61,10 +79,12 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
 
               const SizedBox(height: Dimen.sideMarg),
 
-              TitleShortcutRowWidget(
-                  title: KonspektSphereLevel.duchPostawy.displayName,
-                  titleColor: KonspektSphereLevel.duchPostawy.color,
-                  textAlign: TextAlign.left
+              Text(
+                KonspektSphereLevel.duchPostawy.displayName,
+                style: AppTextStyle(
+                    color: KonspektSphereLevel.duchPostawy.color,
+                    fontWeight: weight.bold
+                ),
               ),
 
               const AppText(
@@ -75,14 +95,28 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
 
               const SizedBox(height: Dimen.sideMarg),
 
-              Center(child: Icon(MdiIcons.circleMedium, color: hintEnab_(context))),
+              TitleShortcutRowWidget(
+                  title: 'Zdolność kształtowania duchowości',
+                  titleColor: KonspektSphereLevel.duchAksjomaty.color,
+                  textAlign: TextAlign.left
+              ),
+
+              const AppText(
+                'Ksztaltowanie duchowości odbywa się przez proces zwany "integracją duchowości". Polega na stopniowym dostosowywaniu postaw, wartości i aksjomatów do siebie nawzajem tak, by były spójne zarówno między sobą, jak i z doświadczeniem otaczającego człowieka świata.'
+                '\n'
+                '\nIntegracja duchowości wymaga od człowieka zdolności do refleksji, podejmowania wysiłku i przekraczania swoich granic. Zdolność ta to hart ducha.',
+                size: Dimen.textSizeBig,
+                height: 1.2,
+              ),
 
               const SizedBox(height: Dimen.sideMarg),
 
-              TitleShortcutRowWidget(
-                  title: KonspektSphereLevel.duchHartDucha.displayName,
-                  titleColor: KonspektSphereLevel.duchHartDucha.color,
-                  textAlign: TextAlign.left
+              Text(
+                KonspektSphereLevel.duchHartDucha.displayName,
+                style: AppTextStyle(
+                    color: KonspektSphereLevel.duchHartDucha.color,
+                    fontWeight: weight.bold
+                ),
               ),
 
               const AppText(
