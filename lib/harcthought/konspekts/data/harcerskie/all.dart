@@ -371,6 +371,14 @@ List<Konspekt> allHarcerskieKonspekts = [
       category: KonspektCategory.harcerskie,
       type: KonspektType.projekt,
       spheres: {
+        KonspektSphere.umysl: KonspektSphereDetails(
+          levels: {
+            KonspektSphereLevel.other: {
+              umyslPlanowanie: null,
+              umyslPodzialZadan: null
+            }
+          }
+        ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: {
@@ -378,6 +386,12 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
               },
               postawaSumiennosc: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+              postawaOdpowiedzialnosc: {
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              },
+              postawaUwaznosc: {
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
               },
             },

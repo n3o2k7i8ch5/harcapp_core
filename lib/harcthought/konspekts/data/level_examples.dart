@@ -49,6 +49,8 @@ const String cialoWzmacnianieOdpornosciOrganizmu = "Wzmacnianie odporności orga
 const String cialoKoordynacjaRuchowa = "Kształtowanie koordynacji ruchowej";
 
 // Umysl
+const String umyslPlanowanie = "Umiejętność planowania";
+const String umyslPodzialZadan = "Umiejętność podziału zadań w grupie";
 const String umyslDyskusja = "Umiejętność dyskusji";
 const String umyslKoncentracja = "Zdolność koncentracji";
 const String umyslLogiczneMyslenie = "Zdolność logicznego myślenia";

@@ -7,7 +7,7 @@ import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/all.dart' as
 
 
 import 'konspekt.dart';
-import 'base_konspekt_widget.dart';
+import 'widgets/base_konspekt_widget.dart';
 
 Future<void> openBaseKonspektDialog({
   required BuildContext context,

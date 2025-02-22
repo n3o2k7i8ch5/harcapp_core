@@ -6,10 +6,10 @@ import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/dimen.dart';
-import 'package:harcapp_core/harcthought/konspekts/konspekt_material_tile.dart';
+import 'package:harcapp_core/harcthought/konspekts/widgets/material_tile.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'konspekt.dart';
+import '../konspekt.dart';
 import 'konspekt_html_widget.dart';
 
 class KonspektStepWidget extends StatelessWidget{

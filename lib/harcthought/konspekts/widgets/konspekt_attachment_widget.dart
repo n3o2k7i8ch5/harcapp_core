@@ -9,7 +9,7 @@ import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/common/file_format_selector_row_widget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'konspekt.dart';
+import '../konspekt.dart';
 
 class KonspektAttachmentPrintWidget extends StatelessWidget{
 

@@ -2,22 +2,26 @@ import 'package:flutter/material.dart' show Color, Colors;
 import 'package:html_pdf_widgets/html_pdf_widgets.dart';
 import 'package:pdf/widgets.dart';
 
-double elementBigSeparator = 24.0;
-double elementSmallSeparator = 6.0;
-double konspektSeparator = 48.0;
+const double elementBigSeparator = 24.0;
+const double elementSmallSeparator = 6.0;
+const double konspektSeparator = 48.0;
 
-double defTextTiny = 6;
-double defTextSize = 11.0;
-double headerTextSize = 14.0;
-double titleTextSize = 18.0;
+const double defRadius = 4;
+const double defMarg = 6.0;
+const double iconMarg = 12.0;
+
+const double defTextTiny = 6;
+const double defTextSize = 11.0;
+const double headerTextSize = 14.0;
+const double titleTextSize = 18.0;
 
 
 PdfColor cardColor = color(Colors.grey[100]!);
 PdfColor color(Color color){
   PdfColor pdfColor = PdfColor(
-      color.red/256,
-      color.green/256,
-      color.blue/256
+      color.r/256,
+      color.g/256,
+      color.b/256
   );
 
   return pdfColor;
@@ -145,6 +149,44 @@ Future<List<Widget>> StringListWidget(
     fontHalfBoldItalic: fontHalfBoldItalic??fontBoldItalic,
     fontBoldItalic: fontBoldItalic,
     fontSize: defTextSize
+  );
+
+}
+
+Widget Material({
+  BorderRadius borderRadius = BorderRadius.zero,
+  PdfColor? color,
+  required Widget child,
+}) => Container(
+  decoration: BoxDecoration(
+    borderRadius: borderRadius,
+    color: color ?? cardColor,
+  ),
+  child: child,
+);
+
+Widget ColumnSpacing({
+  MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+  MainAxisSize mainAxisSize = MainAxisSize.max,
+  CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+  VerticalDirection verticalDirection = VerticalDirection.down,
+  List<Widget> children = const <Widget>[],
+  required double spacing,
+}){
+
+  List<Widget> resultChildren = [];
+  for(int i = 0; i < children.length; i++){
+    resultChildren.add(children[i]);
+    if(i < children.length - 1)
+      resultChildren.add(SizedBox(height: spacing));
+  }
+
+  return Column(
+    mainAxisAlignment: mainAxisAlignment,
+    mainAxisSize: mainAxisSize,
+    crossAxisAlignment: crossAxisAlignment,
+    verticalDirection: verticalDirection,
+    children: resultChildren,
   );
 
 }

@@ -6,9 +6,9 @@ import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/gawedy/open_base_gaweda_dialog.dart';
 import 'package:harcapp_core/harcthought/harc_forms/open_base_harc_form_dialog.dart';
 
-import 'konspekt.dart';
+import '../konspekt.dart';
 import 'konspekt_attachment_widget.dart';
-import 'open_base_konspekt_dialog.dart';
+import '../open_base_konspekt_dialog.dart';
 
 class KonspektHtmlWidget extends StatelessWidget{
 

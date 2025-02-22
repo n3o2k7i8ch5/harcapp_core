@@ -11,6 +11,8 @@ import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/values/people.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:open_filex/open_filex.dart';
+import 'package:html_pdf_widgets/html_pdf_widgets.dart' as pdf;
+
 
 enum KonspektCategory{
   harcerskie, ksztalcenie;
@@ -85,9 +87,6 @@ class KonspektSphereDetails{
 
   final Map<KonspektSphereLevel, Map<String, Set<KonspektSphereFactor>?>>? levels;
 
-  // final List<KonspektSphereLevel> level;
-  // final List<KonspektSphereMechanism> mechanism;
-
   const KonspektSphereDetails({
     required this.levels,
   });
@@ -120,13 +119,32 @@ enum KonspektSphereLevel{
       case duchPostawy: return Colors.deepPurpleAccent;
       case duchHartDucha: return Colors.red;
 
-      case other: return Colors.transparent;
+      case other: return Colors.black;
+    }
+  }
+
+  pdf.PdfColor get pdfColor{
+    switch(this){
+      case duchAksjomaty: return pdf.PdfColors.blue;
+      case duchWartosci: return pdf.PdfColors.orange;
+      case duchPostawy: return pdf.PdfColors.deepPurpleAccent;
+      case duchHartDucha: return pdf.PdfColors.red;
+
+      case other: return pdf.PdfColors.black;
     }
   }
 
   Widget get textWidget => Text(
     displayName,
     style: AppTextStyle(color: color, fontWeight: weight.bold),
+  );
+
+  pdf.Widget pdfWidget(pdf.Font fontBold) => pdf.Text(
+    displayName,
+    style: pdf.TextStyle(
+      font: fontBold,
+      color: pdfColor,
+    ),
   );
 
 }
@@ -162,6 +180,15 @@ enum KonspektSphereFactor{
     style: const AppTextStyle(
       fontWeight: weight.normal,
       decoration: TextDecoration.underline
+    ),
+  );
+
+  pdf.Widget pdfWidget(pdf.Font font) => pdf.Text(
+    displayName,
+    style: pdf.TextStyle(
+      font: font,
+      fontWeight: pdf.FontWeight.normal,
+      decoration: pdf.TextDecoration.underline
     ),
   );
 
