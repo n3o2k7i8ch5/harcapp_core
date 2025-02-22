@@ -27,7 +27,7 @@ const String aimUmiejetnoscNegocjowania = 'Kształtowanie u uczestników umiejet
 const String aimUmiejetnoscWedrowania = 'Kształtowanie u uczestników umiejętności sprawnego wędrowania';
 
 
-const String aimHartDuchaWedrowanie = 'Hartowanie uczestników hartu ducha przez trudy wędrówki (dystans, pogoda, noszenie plecaków)';
+const String aimHartDuchaWedrowanie = 'Kształtowanie u uczestników hartu ducha przez trudy wędrówki (dystans, pogoda, noszenie plecaków)';
 const String aimHartDuchaZimno = 'Kształtowanie u uczestników hartu ducha przez wychodzenie z komfortu termicznego';
 const String aimPostawaOdpowiedzialnosciZaCzynny = 'Kształtowanie u uczestników postawy odpowiedzialności za swoje czyny i decyzje';
 const String aimWlasnaSprawczosc = 'Kształtowanie u uczestników wiary w swoją sprawczość';
@@ -1197,6 +1197,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Budowanie przekonania o ważności modlitwy',
         'Budowanie wspólnoty wiary',
       ],
+      summary: 'Uczestnicy w czasie posiłku rozpoczynają jedzenie dopiero po wspólnej modlitwie, gdy wszyscy mają już jedzenie.',
       description: '<p style="text-align:justify;">Forma jest pokrewna do formy <a href="rozpoczynanie_posilku_wspolnym_spiewaniem@harcerskie.konspekt">Rozpoczynanie posiłku wspólnym śpiewaniem</a>.'
           '<br>'
           '<br>W przypadku zuchów lub harcerzy modlitwa przed posiłkiem pełni przede wszystkim rolę normalizacyjną - buduje przekonanie, że modlitwa jest ważna. Warto jednak mieć na uwadze, że sprowadzanie modlitwy do roli konkursu piosenki "kto głośniej zaśpiewa" jest niewychowawcze i normalizuje przekonanie, że modlitwa to folklor.'
@@ -1963,6 +1964,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Budowanie wspólnoty u uczestników poprzez przekonanie, że jest ona na tyle ważna, że tylko wspólnie można rozpocząć posiłek',
         'Budowanie wspólnoty u uczestników poprzez rywalizację z innymi śpiewającymi przed posiłkiem drużynami na to, kto głośniej zaśpiewa'
       ],
+      summary: 'Uczestnicy w czasie posiłku rozpoczynają jedzenie dopiero po wspólnym zaśpiewaniu krótkiej piosenki, gdy wszyscy mają już jedzenie.',
       description: '<p style="text-align:justify;">Uczestnicy rozpoczynają posiłek wspólnym zaśpiewaniem krótkiej piosenki, przed którą żaden z uczestników nie może rozpocząć posiłku.'
           '<br>'
           '<br>Warto mieć świadomość, że tradycje śpiewania przed posiłkiem w harcerstwie wywodzą się tradycji wspólnej modlitwy przed posiłkiem (tradycja ta została powszechnie zmieniona w ZHP na skutek czasowego wcielenia ZHP do struktur komunistycznych).</p>'
@@ -2766,6 +2768,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         aimUmiejetnoscWedrowania,
         'Stworzenie naturalnej okazji do dyskusji na ważne tematy'
       ],
+      summary: 'Uczestnicy udają się wspólnie na wędrówkę do wyznaczonego miejsca, podczas której powstają natualne okazje do rozmów, wzajemnej pomocy i sprawdzenia zdolności terenoznawczych.',
       description: '<p style="text-align:justify;">Prowadzący wyznacza określoną trasę (samemu lub we współudziale uczestników), uczestnicy przygotowują niezbędny ekwipunek potrzebny do marszu i ew. obozowania, po czym uczestnicy wraz z prowadzącym udają się w trasę.'
           '<br>'
           '<br>Forma, jeżeli odbywa się w odpowiednio dostosowanych warunkach, wpływa znakomicie na hart ducha zwłaszcza, jeśli pomimo trudności nie ma możliwości skrócenia trasy, bo celem jest dojście do noclegu. Głównym mechanizmem hartu ducha jest konfrontacja uczestnika z własnymi oporami (takimi jak: zmęczenie, spocenie, dyskomfort termiczny, ciążenie plecaka), które musi przezwyciężyć, by nie znaleźć się w sytuacji dużo trudniejszej niż ta w której jest teraz (perspektywa przedłużenia obecnego stanu bez uzyskania czegokolwiek w zamian).'
@@ -2814,6 +2817,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         aimWlasnaSprawczosc,
         aimOtwartoscNaInterakcje,
       ],
+      summary: 'Uczestnicy wyruszają na wędrówkę mając jedynie plecak i trochę wody. Muszą wejść w interakcję z lokalną społecznością, jeśli chcą zdobyć coś do jedzenia, picia, lub poznać kierunek, w którym powinni iść.',
       description: '<p style="text-align:justify;">Wariant <a href="wedrowka@harcerskie.konspekt">Wędrówki</a>.'
           '<br>'
           '<br>Uczestnicy wędrują po terenie zamieszkałym (wsiach, miasteczkach) z ograniczonymi zasobami w celu zmuszenia uczestników do wejścia w interakcję z lokalną społecznością. Cel ów można osiągnąć przykładowo przez zaopatrzenie harcerzy w butelki lub bidony na wodę nie większe niż 0.5l (prowadzący powinien mieć w plecaku większy zapas wody dla uczestników na wszelki wypadek) lub poprzez określenie jedynie celu wędrówki bez zaopatrzenia ich w mapę. Mechanizmy te w sposób naturalny prowadzą uczestników do konieczności proszenia mieszkańców o uzupełnienie wody w pobliskich domach i do pytania o drogę napotykanych po drodze ludzi.</p>'
@@ -2849,6 +2853,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       aims: [
         'Wyciszenie uczestników i refleksja nad wybranym zagadnieniem'
       ],
+      summary: 'Uczestnicy wyruszają na wędrówkę w ciszy, otrzymując od prowadzącego zagadnienie, które powinni rozważać w trakcie drogi.',
       description: '<p style="text-align:justify;">Harcerze wybierają lub otrzymują jakiś temat do przemyślenia (np. “z jakiego powodu i po co są harcerzami”, “co by zrobili w jakimś przypadku”, “kim jest dla nich Bóg”), fragment rozważania lub Pisma Świętego i wybierają się na całodniową wędrówkę. Forma realizowana jest pojedynczo, trasa powinna zapewniać ciszę i możliwą minimalizację kontaków z ludźmi. Po powrocie harcerze mogą, ale nie muszą opowiedzieć o swoich przemyśleniach i wnioskach np. drużynowemu, opiekunowi próby, zastępowi lub całej drużynie.</p>'
   ),
 
@@ -2901,6 +2906,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Kształtowanie u uczestników wartości odpuszczania win',
         'Kształtowanie u uczestników wartości rozmowy o relacjach z bliskimi ludźmi'
       ],
+      summary: 'Pod koniec dnia uczestnicy mają kilka minut przed położeniem się spać, w trakcie których mogą do siebie podejść, podziękować za coś lub przeprosić.',
       description: '<p style="text-align:justify;">Podczas formy wyjazdowej pod koniec każdego dnia (np. po obrzędowym zakończeniu dnia w kręgu) wszyscy zostają jeszcze na chwilę na wspólnej przestrzeni (np. na placu apelowym). Każda osoba może w tym czasie podejść do wybranych osób i podziękować im za coś, co się tego dnia działo lub za coś przeprosić. Ważne jest, by uczestnictwo w tej formie zawsze pozostawiać dobrowolnym.</p>',
       howToFail: [
         'Uczynić formę obowiązkową, np. "każdy musi podejść do min. jednej osoby"',
