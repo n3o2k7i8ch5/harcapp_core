@@ -116,10 +116,10 @@ Widget SphereWidget(KonspektSphere sphere, KonspektSphereDetails? details, Font 
 
       SizedBox(height: 2*defMarg),
 
-      if(details != null && sphere == KonspektSphere.duch)
-        SphereDetailsWidget(details, font, fontBold)
-      else if(details != null)
-        SphereDetailsWidget(details, font, fontBold)
+      // if(details != null && sphere == KonspektSphere.duch)
+      //   SphereDetailsWidget(details, font, fontBold)
+      // else if(details != null)
+      //   SphereDetailsWidget(details, font, fontBold)
 
     ],
   ),
