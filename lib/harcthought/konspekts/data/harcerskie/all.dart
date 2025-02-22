@@ -93,7 +93,7 @@ List<Konspekt> allHarcerskieKonspekts = [
           name: 'Znacznik przynależności do grupy',
         ),
       ],
-      summary: 'Leśna gra harcerska, w której drużyny mają za zadanie wyeliminować przeciwne drużyny ściągając im berety z głów.',
+      summary: 'Leśna gra, w której drużyny mają za zadanie wyeliminować przeciwne drużyny ściągając im berety z głów.',
       description: '<p style="text-align:justify;">Aby forma była skuteczna, uczestnicy muszą być w nią zaangażowani i nie mieć nic przeciwko rywalizacji (częściej jest to domeną chłopców niż dziewczyn). Forma bywa kontuzjogenna.'
           '<br>'
           '<br>Forma powinna być toczona na dużym terenie lesistym zapewniającym możliwość łatwego skrycia się.'

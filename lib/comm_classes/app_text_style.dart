@@ -8,11 +8,13 @@ enum weight{thin, normal, halfBold, bold, heavy}
 
 class CustTextStyle extends TextStyle{
 
+  static const double defFontSize = Dimen.textSizeNormal;
+
   const CustTextStyle(
       String familyName,
       { Color? color = AppColors.text_def_enab,
         weight fontWeight = weight.normal,
-        fontSize = Dimen.textSizeNormal,
+        fontSize = defFontSize,
         bool? shadow = false,
         FontStyle? fontStyle,
         double height = 1.0,
@@ -43,6 +45,8 @@ class CustTextStyle extends TextStyle{
 }
 
 class AppTextStyle extends CustTextStyle{
+
+  static const double defFontSize = CustTextStyle.defFontSize;
 
   const AppTextStyle({Color? color, weight fontWeight = weight.normal, fontSize, bool? shadow, FontStyle? fontStyle, double height = 1.0, TextDecoration? decoration, TextDecorationStyle? decorationStyle, double? decorationThickness}):super(
     'Ubuntu',

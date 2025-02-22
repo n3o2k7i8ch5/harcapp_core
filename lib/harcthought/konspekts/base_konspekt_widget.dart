@@ -13,6 +13,7 @@ import 'package:harcapp_core/comm_widgets/person_card.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'common.dart';
 import 'konspekt.dart';
@@ -40,8 +41,8 @@ class KonspektSphereDetailFactorWidget extends StatelessWidget{
             children: <Widget>[
               Text(
                 factors!.length == 1?
-                'Wykorzystywany czynnik:':
-                'Wykorzystywane czynniki:',
+                'Metoda:':
+                'Metody:',
                 style: AppTextStyle()
               )
             ] + factors!.map((f) => f.textWidget).toList()
@@ -103,10 +104,21 @@ class KonspektSphereDetailsWidget extends StatelessWidget{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: 2*Dimen.defMarg,
-        children: details.levels!.keys.map((level) => KonspektSphereDetailLevelWidget(
-            level,
-            details.levels![level]!,
-            levelName: levelName
+        children: details.levels!.keys.map((level) => Row(
+          children: [
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2.0),
+              child: Icon(MdiIcons.circleMedium, size: AppTextStyle.defFontSize),
+            ),
+
+            KonspektSphereDetailLevelWidget(
+                level,
+                details.levels![level]!,
+                levelName: levelName
+            )
+
+          ],
         )).toList(),
       ),
     );
