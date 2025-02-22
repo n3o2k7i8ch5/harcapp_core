@@ -7,7 +7,7 @@ import 'common.dart';
 Widget SphereDetailFactorWidget(String detail, Set<KonspektSphereFactor>? factors, Font font, Font fontBold) => Column(
   crossAxisAlignment: CrossAxisAlignment.stretch,
   children: [
-    Text(detail, style: TextStyle(font: fontBold)),
+    Text(detail, style: TextStyle(font: fontBold, fontSize: defTextSize)),
     if(factors != null && factors.length > 0)
       Padding(
         padding: EdgeInsets.only(top: 2.0),

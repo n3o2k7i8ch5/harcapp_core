@@ -118,7 +118,7 @@ List<Konspekt> allHarcerskieKonspekts = [
             activeForm: false,
             content: '<p style="text-align:justify;">Prowadzący przedstawia uczestnikom zasady gry:</p>'
                 '<ul>'
-                '<li><p style="text-align:justify;">W brze biorą udział co najmniej dwie grupy. Wygrywa grupa, której w której jako ostatniej zostaną "żywi" uczestnicy.</p></li>'
+                '<li><p style="text-align:justify;">W grze biorą udział co najmniej dwie grupy. Wygrywa grupa, której w której jako ostatniej zostaną "żywi" uczestnicy.</p></li>'
                 '<li><p style="text-align:justify;">Każdy uczestnik rozpoczyna mając na głowie beret. Jak uczestnik ma na głowie beret, tak długo jest "żywy".</p></li>'
                 '<li><p style="text-align:justify;">Berety można (a nawet trzeba) sobie wzajemnie ściągać z głowy.</p></li>'
                 '<li><p style="text-align:justify;">W grze nie wolno uderzać, gryźć, kopać, ani dotykać twarzy drugiej osoby.</p></li>'

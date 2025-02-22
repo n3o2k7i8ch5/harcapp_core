@@ -3,11 +3,11 @@ import 'package:html_pdf_widgets/html_pdf_widgets.dart';
 import 'package:pdf/widgets.dart';
 
 const double elementBigSeparator = 24.0;
-const double elementSmallSeparator = 6.0;
+const double elementSmallSeparator = 5.0;
 const double konspektSeparator = 48.0;
 
 const double defRadius = 4;
-const double defMarg = 6.0;
+const double defMarg = 5.0;
 const double iconMarg = 10.0;
 const double iconSize = 18.0;
 
