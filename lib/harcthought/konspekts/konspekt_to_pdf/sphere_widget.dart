@@ -61,6 +61,7 @@ List<Widget> SphereDetailsWidget(KonspektSphereDetails details, Font font, Font 
   List<Widget> result = [];
 
   result.add(SizedBox(height: 2*defMarg));
+
   for(MapEntry entry in details.levels!.entries){
     KonspektSphereLevel level = entry.key;
     Map<String, Set<KonspektSphereFactor>?> data = entry.value;
@@ -72,6 +73,7 @@ List<Widget> SphereDetailsWidget(KonspektSphereDetails details, Font font, Font 
         child: child
       )
     ).toList();
+
     result.addAll(children);
     result.add(SizedBox(height: 2*defMarg));
   }
@@ -110,7 +112,7 @@ Widget SphereWidget(KonspektSphere sphere, KonspektSphereDetails? details, Font 
           )
       ),
 
-      SizedBox(height: 1.5*defMarg),
+      SizedBox(height: defMarg),
 
       if(details != null && sphere == KonspektSphere.duch)
         ...SphereDetailsWidget(details, font, fontBold)
