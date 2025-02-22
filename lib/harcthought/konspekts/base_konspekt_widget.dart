@@ -64,18 +64,24 @@ class KonspektSphereDetailLevelWidget extends StatelessWidget{
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      Row(
-        children: [
-          Text(levelName??'Poziom:', style: const AppTextStyle()),
-          Text(' ', style: const AppTextStyle()),
-          level.textWidget,
-        ],
-      ),
+      level.textWidget,
       const SizedBox(height: .5*Dimen.defMarg),
       Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: Dimen.defMarg,
-        children: data.keys.map((detail) => KonspektSphereDetailFactorWidget(detail, data[detail])).toList(),
+        children: data.keys.map((detail) => Row(
+          children: [
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2.0),
+              child: Icon(MdiIcons.circleMedium, size: AppTextStyle.defFontSize),
+            ),
+
+            Expanded(
+              child: KonspektSphereDetailFactorWidget(detail, data[detail]),
+            ),
+          ],
+        )).toList(),
       ),
     ],
   );
@@ -104,24 +110,13 @@ class KonspektSphereDetailsWidget extends StatelessWidget{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: 2*Dimen.defMarg,
-        children: details.levels!.keys.map((level) => Row(
-          children: [
-
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 2.0),
-              child: Icon(MdiIcons.circleMedium, size: AppTextStyle.defFontSize),
-            ),
-
-            Expanded(
-              child: KonspektSphereDetailLevelWidget(
-                  level,
-                  details.levels![level]!,
-                  levelName: levelName
-              ),
-            )
-
-          ],
-        )).toList(),
+        children: details.levels!.keys.map((level) =>
+          KonspektSphereDetailLevelWidget(
+            level,
+            details.levels![level]!,
+            levelName: levelName
+          )
+        ).toList(),
       ),
     );
 
