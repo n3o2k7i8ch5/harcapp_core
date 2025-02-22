@@ -33,7 +33,7 @@ const String wartoscWyciszenie = "Wyciszenie";
 const String wartoscZdrowie = "Zdrowie";
 
 // Duch - Aksjomaty
-const String aksjoPrzezycieHistoriiBiblijnej = "Przeżycie historii biblijnej";
+const String aksjoSwietoscHistoriiBiblijnych = "Świętość historii biblijnych";
 const String aksjoRozwazanieSensuICeluZycia = "Rozważanie sensu i celu życia";
 const String aksjoSpotkanieBogaWeMszySw = "Spotkanie Boga we Mszy Świętej";
 

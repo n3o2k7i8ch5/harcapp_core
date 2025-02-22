@@ -190,7 +190,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchAksjomaty: {
-              aksjoPrzezycieHistoriiBiblijnej: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+              aksjoSwietoscHistoriiBiblijnych: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
             },
           }
         )
