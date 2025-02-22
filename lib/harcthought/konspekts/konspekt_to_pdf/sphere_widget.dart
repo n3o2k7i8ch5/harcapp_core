@@ -73,8 +73,8 @@ List<Widget> SphereDetailsWidget(KonspektSphereDetails details, Font font, Font 
       )
     ).toList();
     result.addAll(children);
+    result.add(SizedBox(height: 2*defMarg));
   }
-  result.add(SizedBox(height: 2*defMarg));
 
   return result;
 
@@ -110,7 +110,7 @@ Widget SphereWidget(KonspektSphere sphere, KonspektSphereDetails? details, Font 
           )
       ),
 
-      SizedBox(height: 2*defMarg),
+      SizedBox(height: 1.5*defMarg),
 
       if(details != null && sphere == KonspektSphere.duch)
         ...SphereDetailsWidget(details, font, fontBold)
