@@ -59,28 +59,6 @@ class KonspektThumbnailWidget extends StatelessWidget{
 
                   KonspektCoverWidget(konspekt),
 
-                  if(konspekt.partOf != null)
-                    Positioned(
-                      top: Dimen.iconMarg,
-                      right: -Dimen.iconMarg,
-                      left: 3*Dimen.iconMarg,
-                      bottom: 0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Expanded(
-                            child: Material(
-                              elevation: AppCard.bigElevation,
-                              clipBehavior: Clip.hardEdge,
-                              borderRadius: BorderRadius.circular(radius),
-                              child: KonspektCoverWidget(konspekt.partOf!)
-                            )
-                          ),
-                          Expanded(child: Container())
-                        ],
-                      )
-                    ),
-                  
                   Positioned(
                     bottom: Dimen.iconMarg,
                     right: Dimen.iconMarg,
@@ -110,13 +88,32 @@ class KonspektThumbnailWidget extends StatelessWidget{
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
 
-                        AutoSizeText(
-                          konspekt.title,
-                          style: const AppTextStyle(
-                            fontSize: Dimen.textSizeBig,
-                            fontWeight: weight.halfBold,
-                          ),
-                          maxLines: konspekt.title.split(' ').length,
+                        Row(
+                          children: [
+
+                            AutoSizeText(
+                              konspekt.title,
+                              style: const AppTextStyle(
+                                fontSize: Dimen.textSizeBig,
+                                fontWeight: weight.halfBold,
+                              ),
+                              maxLines: konspekt.title.split(' ').length,
+                            ),
+
+                            if(konspekt.partOf != null)
+                              SizedBox(
+                                width: 1.5*2*Dimen.textSizeBig,
+                                height: 2*Dimen.textSizeBig,
+                                child: Material(
+                                    elevation: AppCard.bigElevation,
+                                    clipBehavior: Clip.hardEdge,
+                                    borderRadius: BorderRadius.circular(radius),
+                                    child: KonspektCoverWidget(konspekt.partOf!)
+                                ),
+                              )
+
+
+                          ],
                         ),
 
                         if(showSummary && konspekt.summary != null)
