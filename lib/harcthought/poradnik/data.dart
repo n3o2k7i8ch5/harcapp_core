@@ -6,9 +6,9 @@ import 'poradnik.dart';
 
 const String poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci = "czynniki_i_mechanizmy_ksztaltowania_duchowosci";
 Poradnik poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Poradnik(
-  name: poradnik_name_dwie_roty_dwoch_przyrzeczen_harcerskich,
+  name: poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   title: 'Czynniki i mechanizmy kształtowania duchowości',
-  pageCount: 16,
+  pageCount: 12,
   description: 'Poradnik dla pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące zagadnienia:'
       '\n'
       '\nJakie prawa rządzą kształtowaniem duchowości?'
