@@ -91,13 +91,15 @@ class KonspektThumbnailWidget extends StatelessWidget{
                         Row(
                           children: [
 
-                            AutoSizeText(
-                              konspekt.title,
-                              style: const AppTextStyle(
-                                fontSize: Dimen.textSizeBig,
-                                fontWeight: weight.halfBold,
+                            Expanded(
+                              child: AutoSizeText(
+                                konspekt.title,
+                                style: const AppTextStyle(
+                                  fontSize: Dimen.textSizeBig,
+                                  fontWeight: weight.halfBold,
+                                ),
+                                maxLines: konspekt.title.split(' ').length,
                               ),
-                              maxLines: konspekt.title.split(' ').length,
                             ),
 
                             if(konspekt.partOf != null)
