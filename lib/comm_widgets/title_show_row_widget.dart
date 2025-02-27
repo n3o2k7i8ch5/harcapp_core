@@ -65,7 +65,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
                 fontSize: Dimen.textSizeAppBar,
                 fontWeight: weight.bold,
                 fontColor: titleColor,
-                pulseColor: pulseShadowColor??titleColor?.withOpacity((titleColor?.opacity??1)*0.7),
+                pulseColor: pulseShadowColor??titleColor?.withValues(alpha: (titleColor?.a??1)*0.7),
                 textAlign: textAlign,
               ),
             ):

@@ -132,7 +132,7 @@ class AccountThumbnailWidget extends StatelessWidget{
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: borderColor??backgroundIcon_(context).withOpacity(.02),
+                      color: borderColor??backgroundIcon_(context).withValues(alpha: .02),
                       width: .098*size,
                       style: BorderStyle.solid
                   ),

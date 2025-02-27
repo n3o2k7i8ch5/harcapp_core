@@ -14,7 +14,6 @@ import 'package:implicitly_animated_reorderable_list_2/transitions.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../providers.dart';
 

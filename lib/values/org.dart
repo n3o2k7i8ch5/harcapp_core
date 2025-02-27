@@ -209,9 +209,9 @@ class OrgColors{
 
     return Color.fromARGB(
         255,
-        (colorMain.red + colorAccent.red)~/2,
-        (colorMain.green + colorAccent.green)~/2,
-        (colorMain.blue + colorAccent.blue)~/2
+        256*(colorMain.r + colorAccent.r)~/2,
+        256*(colorMain.g + colorAccent.g)~/2,
+        256*(colorMain.b + colorAccent.b)~/2
     );
   }
 

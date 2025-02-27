@@ -291,7 +291,6 @@ class _PageViewState extends State<PreloadPageView> {
       case Axis.vertical:
         return widget.reverse ? AxisDirection.up : AxisDirection.down;
     }
-    return null;
   }
 
   @override

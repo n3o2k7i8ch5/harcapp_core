@@ -69,7 +69,7 @@ class ArticleCardWidget extends StatelessWidget{
                     ),
                     child: Blur(
                       child: Container(
-                        color: cardEnab_(context).withOpacity(.85),
+                        color: cardEnab_(context).withValues(alpha: .85),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: Dimen.defMarg, horizontal: Dimen.iconMarg),
                           child: Row(
@@ -94,7 +94,7 @@ class ArticleCardWidget extends StatelessWidget{
                 right: -.1,
                 child: Blur(
                   child: Container(
-                    color: cardEnab_(context).withOpacity(.85),
+                    color: cardEnab_(context).withValues(alpha: .85),
                     child: Padding(
                       padding: const EdgeInsets.all(Dimen.iconMarg).subtract(
                           const EdgeInsets.only(top: (1.2 - 1)*Dimen.textSizeBig)

@@ -1,5 +1,3 @@
-
-import 'package:harcapp_core/comm_classes/primitive_wrapper.dart';
 import 'song_core.dart';
 
 class SongElement{

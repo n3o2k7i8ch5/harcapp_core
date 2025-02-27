@@ -71,7 +71,7 @@ class PulsingTextState extends State<PulsingText> {
           style: AppTextStyle(
             fontSize: widget.fontSize,
             fontWeight: widget.fontWeight,
-            color: widget.pulseColor??iconEnab_(context).withOpacity(0.7),
+            color: widget.pulseColor??iconEnab_(context).withValues(alpha: 0.7),
           ),
         ),
       ),

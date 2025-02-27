@@ -61,7 +61,7 @@ abstract class ColorPack{
   Color get backgroundStart => background;
   // Bottom navigation bar color
   Color get backgroundEnd => background;
-  Color get backgroundIcon => Colors.black.withOpacity(0.05);
+  Color get backgroundIcon => Colors.black.withValues(alpha: 0.05);
 
   Color get accent;
   Color get iconEnabled;
@@ -93,7 +93,7 @@ abstract class ColorPack{
         unselectedLabelColor: iconDisabled,
         labelStyle: AppTextStyle(fontWeight: weight.halfBold),
         unselectedLabelStyle: AppTextStyle(fontWeight: weight.halfBold),
-        overlayColor: MaterialStateColor.resolveWith((states) => accent.withOpacity(.2))
+        overlayColor: MaterialStateColor.resolveWith((states) => accent.withValues(alpha: .2))
     ),
     timePickerTheme: TimePickerThemeData(
       backgroundColor: background,
@@ -113,7 +113,7 @@ abstract class ColorPack{
 
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: accent,
-      selectionColor: accent.withOpacity(0.5),
+      selectionColor: accent.withValues(alpha: 0.5),
       selectionHandleColor: accent,
     ),
 
@@ -127,7 +127,6 @@ abstract class ColorPack{
       primary: accent,
       secondary: accent,
       surface: background,
-      background: background,
       primaryContainer: backgroundIcon,
       error: Colors.red,
       onPrimary: accent,
@@ -192,9 +191,9 @@ abstract class ColorPack{
           if (states.contains(MaterialState.selected)) { return accent; }
           return null;
         }),
-        trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+        trackColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
           if (states.contains(MaterialState.disabled)) { return null; }
-          if (states.contains(MaterialState.selected)) { return accent.withOpacity(.5); }
+          if (states.contains(MaterialState.selected)) { return accent.withValues(alpha: .5); }
           return null;
         }),
     ),

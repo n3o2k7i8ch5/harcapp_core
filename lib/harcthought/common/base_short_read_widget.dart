@@ -93,8 +93,8 @@ class BaseShortReadWidgetState extends State<BaseShortReadWidget>{
                           end: Alignment.topCenter,
                           colors: [
                             background_(context),
-                            background_(context).withOpacity(0.7),
-                            background_(context).withOpacity(0)
+                            background_(context).withValues(alpha: 0.7),
+                            background_(context).withValues(alpha: 0)
                           ], // red to yellow
                           tileMode: TileMode.repeated, // repeats the gradient over the canvas
                         ),

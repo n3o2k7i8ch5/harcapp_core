@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart' show Color, Colors;
 import 'package:html_pdf_widgets/html_pdf_widgets.dart';
-import 'package:pdf/widgets.dart';
 
 const double elementBigSeparator = 24.0;
 const double elementSmallSeparator = 5.0;

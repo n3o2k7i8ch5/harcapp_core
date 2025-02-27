@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:tuple/tuple.dart';
 import 'package:provider/provider.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../add_person.dart';
 import 'song_raw.dart';

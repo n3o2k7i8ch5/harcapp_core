@@ -145,7 +145,7 @@ class ShaPref{
       if(customGetBoolOrNull != null) return customGetBoolOrNull?.call(key);
       return _preferences.getBool(key);
     } catch (e){
-      logger?.w(badTypeErrMess(key, e));
+      logger.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -166,7 +166,7 @@ class ShaPref{
       if(customGetStringOrNull != null) return customGetStringOrNull?.call(key);
       return _preferences.getString(key);
     } catch (e){
-      logger?.w(badTypeErrMess(key, e));
+      logger.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -187,7 +187,7 @@ class ShaPref{
       if(customGetStringListOrNull != null) return customGetStringListOrNull!.call(key);
       return _preferences.getStringList(key);
     } catch (e){
-      logger?.w(badTypeErrMess(key, e));
+      logger.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -215,7 +215,7 @@ class ShaPref{
       if(code == null) return null;
       return (jsonDecode(code) as Map).cast<T_KEY, T_VAL>();
     } catch (e){
-      logger?.w(badTypeErrMess(key, e));
+      logger.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -237,7 +237,7 @@ class ShaPref{
       if(customGetIntOrNull != null) return customGetIntOrNull!.call(key);
       return _preferences.getInt(key);
     } catch (e){
-      logger?.w(badTypeErrMess(key, e));
+      logger.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -257,7 +257,7 @@ class ShaPref{
       if(customGetDoubleOrNull != null) return customGetDoubleOrNull!.call(key);
       return _preferences.getDouble(key);
     } catch (e){
-      logger?.w(badTypeErrMess(key, e));
+      logger.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }
@@ -280,7 +280,7 @@ class ShaPref{
       if(dateTimeStr == 'nic') return null;
       return DateTime.tryParse(dateTimeStr);
     } on Exception catch (e){
-      logger?.w(badTypeErrMess(key, e));
+      logger.w(badTypeErrMess(key, e));
       remove(key);
       return null;
     }

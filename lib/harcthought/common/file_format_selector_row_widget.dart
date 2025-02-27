@@ -76,7 +76,7 @@ class FileFormatSelectorRowWidget extends StatelessWidget{
             child: SimpleButton(
                 padding: const EdgeInsets.all(Dimen.defMarg),
                 radius: 0,
-                color: format.color.withOpacity(.5),
+                color: format.color.withValues(alpha: .5),
                 child: Center(
                   child: FileFormatWidget(format),
                 ),

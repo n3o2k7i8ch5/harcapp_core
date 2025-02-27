@@ -545,7 +545,7 @@ class ChordPresenceWarning extends StatelessWidget{
         lineWidgets.add(
             WarningShade(
                 error==null?
-                background_(context).withOpacity(0):
+                background_(context).withValues(alpha: 0):
                 error.color
             )
         );
@@ -599,7 +599,7 @@ class TextLengthWarning extends StatelessWidget{
           lineWidgets.add(
               WarningShade(
                   error==null?
-                  background_(context).withOpacity(0):
+                  background_(context).withValues(alpha: 0):
                   error.color
               )
           );

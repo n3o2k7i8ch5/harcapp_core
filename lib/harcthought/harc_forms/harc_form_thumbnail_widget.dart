@@ -66,11 +66,11 @@ class FormThumbnailWidget extends StatelessWidget{
         tag: form,
         child: GradientWidget(
           elevation: elevation,
-          colorStart: form.colorStart.withOpacity(.25),
-          colorEnd: form.colorEnd.withOpacity(.25),
+          colorStart: form.colorStart.withValues(alpha: .25),
+          colorEnd: form.colorEnd.withValues(alpha: .25),
           radius: AppCard.bigRadius,
           child: InkWell(
-              onTap: onTap, // () => pushPage(context, builder: (context) => HarcFormPage(form)),
+              onTap: onTap,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
