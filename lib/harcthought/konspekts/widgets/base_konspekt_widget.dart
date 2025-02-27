@@ -36,6 +36,9 @@ class BaseKonspektWidget extends StatefulWidget{
   final bool oneLineMultiDuration;
   final double? thumbnailWidth;
   final Color? thumbnailBackground;
+  final bool thumbnailShowSummary;
+  final bool thumbnailShowPartOf;
+  final void Function()? onThumbnailTap;
 
   const BaseKonspektWidget(
       this.konspekt,
@@ -51,6 +54,9 @@ class BaseKonspektWidget extends StatefulWidget{
         this.oneLineMultiDuration = false,
         this.thumbnailWidth,
         this.thumbnailBackground,
+        this.thumbnailShowSummary = true,
+        this.thumbnailShowPartOf = true,
+        this.onThumbnailTap,
       });
 
   @override
@@ -183,13 +189,17 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 const TitleShortcutRowWidget(title: 'Część większego konspektu:', textAlign: TextAlign.left),
 
               if(konspekt.partOf != null)
-                SizedBox(
-                  height: KonspektThumbnailWidget.defHeight,
-                  width: widget.thumbnailWidth,
-                  child: KonspektThumbnailWidget(
-                      konspekt.partOf!,
-                      background: widget.thumbnailBackground,
-                      showSummary: false
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: SizedBox(
+                    height: KonspektThumbnailWidget.defHeight,
+                    width: widget.thumbnailWidth,
+                    child: KonspektThumbnailWidget(
+                        konspekt.partOf!,
+                        background: widget.thumbnailBackground,
+                        showSummary: false,
+                        onTap: widget.onThumbnailTap,
+                    ),
                   ),
                 ),
 
