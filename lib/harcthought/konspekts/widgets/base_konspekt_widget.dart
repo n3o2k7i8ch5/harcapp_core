@@ -34,6 +34,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final Widget? leading;
   final bool oneLineSummary;
   final bool oneLineMultiDuration;
+  final double? thumbnailWidth;
   final Color? thumbnailBackground;
 
   const BaseKonspektWidget(
@@ -48,6 +49,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.leading,
         this.oneLineSummary = false,
         this.oneLineMultiDuration = false,
+        this.thumbnailWidth,
         this.thumbnailBackground,
       });
 
@@ -183,6 +185,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               if(konspekt.partOf != null)
                 SizedBox(
                   height: KonspektThumbnailWidget.defHeight,
+                  width: widget.thumbnailWidth,
                   child: KonspektThumbnailWidget(
                       konspekt.partOf!,
                       background: widget.thumbnailBackground,
