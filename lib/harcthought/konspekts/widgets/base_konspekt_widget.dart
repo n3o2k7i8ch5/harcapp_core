@@ -38,7 +38,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final Color? thumbnailBackground;
   final bool thumbnailShowSummary;
   final bool thumbnailShowPartOf;
-  final void Function()? onThumbnailTap;
+  final void Function(Konspekt)? onThumbnailTap;
 
   const BaseKonspektWidget(
       this.konspekt,
@@ -198,7 +198,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                         konspekt.partOf!,
                         background: widget.thumbnailBackground,
                         showSummary: false,
-                        onTap: widget.onThumbnailTap,
+                        onTap: widget.onThumbnailTap == null?null:() => widget.onThumbnailTap!.call(konspekt.partOf!),
                     ),
                   ),
                 ),
