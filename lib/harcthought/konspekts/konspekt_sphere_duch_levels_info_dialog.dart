@@ -46,6 +46,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               const SizedBox(height: Dimen.sideMarg),
 
               Material(
+                color: cardEnab_(context),
                 borderRadius: BorderRadius.circular(AppCard.defRadius),
                 child: Padding(
                   padding: EdgeInsets.all(Dimen.defMarg),
@@ -125,6 +126,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               const SizedBox(height: Dimen.sideMarg),
 
               Material(
+                color: cardEnab_(context),
                 borderRadius: BorderRadius.circular(AppCard.defRadius),
                 child: Padding(
                   padding: EdgeInsets.all(Dimen.defMarg),
