@@ -45,53 +45,66 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
 
               const SizedBox(height: Dimen.sideMarg),
 
-              Text(
-                KonspektSphereLevel.duchAksjomaty.displayName,
-                style: AppTextStyle(
-                  color: KonspektSphereLevel.duchAksjomaty.color,
-                  fontWeight: weight.bold,
-                  fontSize: Dimen.textSizeBig
-                ),
-              ),
-              const SizedBox(height: Dimen.defMarg),
-              const AppText(
-                'Aksjomaty są fundamentem duchowości. Są to arbitralnie uznane prawdą, których nie sposób zweryfikować. Definiują cel życia, najwyższe dobro, przyczynę istnienia, sposób, w jaki działa świat itd..',
-                size: Dimen.textSizeBig,
-                height: 1.2,
-              ),
+              Material(
+                borderRadius: BorderRadius.circular(AppCard.defRadius),
+                child: Padding(
+                  padding: EdgeInsets.all(Dimen.defMarg),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
 
-              const SizedBox(height: Dimen.sideMarg),
+                      Text(
+                        KonspektSphereLevel.duchAksjomaty.displayName,
+                        style: AppTextStyle(
+                            color: KonspektSphereLevel.duchAksjomaty.color,
+                            fontWeight: weight.bold,
+                            fontSize: Dimen.textSizeBig
+                        ),
+                      ),
+                      const SizedBox(height: Dimen.defMarg),
+                      const AppText(
+                        'Aksjomaty są fundamentem duchowości. Są to arbitralnie uznane prawdą, których nie sposób zweryfikować. Definiują cel życia, najwyższe dobro, przyczynę istnienia, sposób, w jaki działa świat itd..',
+                        size: Dimen.textSizeBig,
+                        height: 1.2,
+                      ),
 
-              Text(
-                KonspektSphereLevel.duchWartosci.displayName,
-                style: AppTextStyle(
-                  color: KonspektSphereLevel.duchWartosci.color,
-                  fontWeight: weight.bold,
-                  fontSize: Dimen.textSizeBig
-                ),
-              ),
-              const SizedBox(height: Dimen.defMarg),
-              const AppText(
-                'Wartości są preferowanym stanem rzeczywistości. Pozwalają oceniać działania - określają czy i na ile określone działanie zmienia rzeczywistość w kierunku wynikającym aksjomatu. Wartości definiują także hierarchię spraw, którym powinno się poświęcać najwięcej zasobów (czasu, energii, siły, pieniędzy, etc.).',
-                size: Dimen.textSizeBig,
-                height: 1.2,
-              ),
+                      const SizedBox(height: Dimen.sideMarg),
 
-              const SizedBox(height: Dimen.sideMarg),
+                      Text(
+                        KonspektSphereLevel.duchWartosci.displayName,
+                        style: AppTextStyle(
+                            color: KonspektSphereLevel.duchWartosci.color,
+                            fontWeight: weight.bold,
+                            fontSize: Dimen.textSizeBig
+                        ),
+                      ),
+                      const SizedBox(height: Dimen.defMarg),
+                      const AppText(
+                        'Wartości są preferowanym stanem rzeczywistości. Pozwalają oceniać działania - określają czy i na ile określone działanie zmienia rzeczywistość w kierunku wynikającym aksjomatu. Wartości definiują także hierarchię spraw, którym powinno się poświęcać najwięcej zasobów (czasu, energii, siły, pieniędzy, etc.).',
+                        size: Dimen.textSizeBig,
+                        height: 1.2,
+                      ),
 
-              Text(
-                KonspektSphereLevel.duchPostawy.displayName,
-                style: AppTextStyle(
-                  color: KonspektSphereLevel.duchPostawy.color,
-                  fontWeight: weight.bold,
-                  fontSize: Dimen.textSizeBig
-                ),
-              ),
-              const SizedBox(height: Dimen.defMarg),
-              const AppText(
-                'Postawy to sposoby bycia, czyli skłonności do określonego postępowania.',
-                size: Dimen.textSizeBig,
-                height: 1.2,
+                      const SizedBox(height: Dimen.sideMarg),
+
+                      Text(
+                        KonspektSphereLevel.duchPostawy.displayName,
+                        style: AppTextStyle(
+                            color: KonspektSphereLevel.duchPostawy.color,
+                            fontWeight: weight.bold,
+                            fontSize: Dimen.textSizeBig
+                        ),
+                      ),
+                      const SizedBox(height: Dimen.defMarg),
+                      const AppText(
+                        'Postawy to sposoby bycia, czyli skłonności do określonego postępowania.',
+                        size: Dimen.textSizeBig,
+                        height: 1.2,
+                      ),
+
+                    ],
+                  )
+                )
               ),
 
               const SizedBox(height: Dimen.sideMarg),
@@ -111,36 +124,48 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
 
               const SizedBox(height: Dimen.sideMarg),
 
-              Text(
-                KonspektSphereLevel.duchHartDucha.displayName,
-                style: AppTextStyle(
-                  color: KonspektSphereLevel.duchHartDucha.color,
-                  fontWeight: weight.bold,
-                  fontSize: Dimen.textSizeBig
-                ),
-              ),
-              const SizedBox(height: Dimen.defMarg),
-              const AppText(
-                'Hart ducha (siła charakteru) to zdolność do postępowania zgodnie z tym, co uważa się za słuszne pomimo niesprzyjających okoliczności: fizycznego trudu, kosztu finansowego, ostracyzmu społecznego, itd..',
-                size: Dimen.textSizeBig,
-                height: 1.2,
-              ),
+              Material(
+                child: Padding(
+                  padding: EdgeInsets.all(Dimen.defMarg),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
 
-              const SizedBox(height: Dimen.sideMarg),
+                      Text(
+                        KonspektSphereLevel.duchHartDucha.displayName,
+                        style: AppTextStyle(
+                            color: KonspektSphereLevel.duchHartDucha.color,
+                            fontWeight: weight.bold,
+                            fontSize: Dimen.textSizeBig
+                        ),
+                      ),
+                      const SizedBox(height: Dimen.defMarg),
+                      const AppText(
+                        'Hart ducha (siła charakteru) to zdolność do postępowania zgodnie z tym, co uważa się za słuszne pomimo niesprzyjających okoliczności: fizycznego trudu, kosztu finansowego, ostracyzmu społecznego, itd..',
+                        size: Dimen.textSizeBig,
+                        height: 1.2,
+                      ),
 
-              Text(
-                KonspektSphereLevel.duchZdolnoscRefleksyjna.displayName,
-                style: AppTextStyle(
-                    color: KonspektSphereLevel.duchZdolnoscRefleksyjna.color,
-                    fontWeight: weight.bold,
-                    fontSize: Dimen.textSizeBig
+                      const SizedBox(height: Dimen.sideMarg),
+
+                      Text(
+                        KonspektSphereLevel.duchZdolnoscRefleksyjna.displayName,
+                        style: AppTextStyle(
+                            color: KonspektSphereLevel.duchZdolnoscRefleksyjna.color,
+                            fontWeight: weight.bold,
+                            fontSize: Dimen.textSizeBig
+                        ),
+                      ),
+                      const SizedBox(height: Dimen.defMarg),
+                      const AppText(
+                        'Zdolność refleksyjna określa zdolność do trafnego wnioskowania prawidłowych zachowań, postaw i wartości z aksjomatów oraz weryfikacji przyjętych aksjomatów na podstawie doświadczeń. Pozwala na analizę własnej duchowości i na ocenę czy i w jakim kierunku powinna ulec zmianie.',
+                        size: Dimen.textSizeBig,
+                        height: 1.2,
+                      ),
+
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: Dimen.defMarg),
-              const AppText(
-                'Zdolność refleksyjna określa zdolność do trafnego wnioskowania prawidłowych zachowań, postaw i wartości z aksjomatów oraz weryfikacji przyjętych aksjomatów na podstawie doświadczeń. Pozwala na analizę własnej duchowości i na ocenę czy i w jakim kierunku powinna ulec zmianie.',
-                size: Dimen.textSizeBig,
-                height: 1.2,
               ),
 
             ],
