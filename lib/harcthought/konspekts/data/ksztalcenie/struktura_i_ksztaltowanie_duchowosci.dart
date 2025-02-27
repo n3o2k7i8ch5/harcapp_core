@@ -85,7 +85,7 @@ KonspektAttachment attach_scenariusze = KonspektAttachment(
 );
 
 KonspektMaterial material_poradnik_o_strukturze_i_ksztaltowaniu_duchowosci = KonspektMaterial(
-  name: 'Dostępny do przygotowania merytorycznego poradnik “$attach_title_o_strukturze_i_ksztaltowaniu_duchowosci”',
+  name: 'Dostępny do przygotowania merytorycznego $attach_title_o_strukturze_i_ksztaltowaniu_duchowosci',
   attachmentName: attach_name_o_strukturze_i_ksztaltowaniu_duchowosci,
 );
 

@@ -37,7 +37,7 @@ const KonspektAttachment attach_scenariusze_czynnikow_duchowosci = KonspektAttac
 // Materials
 
 KonspektMaterial material_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = KonspektMaterial(
-    name: 'Wydrukowany poradnik “$attach_title_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci”',
+    name: 'Wydrukowany $attach_title_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci',
     attachmentName: attach_name_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
     amount: 2
 );
