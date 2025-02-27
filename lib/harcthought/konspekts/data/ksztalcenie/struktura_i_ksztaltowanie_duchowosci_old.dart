@@ -1,12 +1,8 @@
-import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common_attachments.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/struktura_i_ksztaltowanie_duchowosci.dart';
-import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/wstep_do_wychowania_duchowego.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
-import 'package:harcapp_core/values/people.dart';
 
-import 'common_wychowanie_duchowe.dart';
 
 
 const konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci_old = 'struktura_i_ksztaltowanie_duchowosci_unused_forms';
@@ -24,6 +20,18 @@ KonspektAttachment attach_mechanizmy_posrednie = KonspektAttachment(
   },
 );
 
+const String attach_html_antyprzyklady = '<a href="$attach_name_antyprzyklady@attachment">$attach_title_antyprzyklady</a>';
+const String attach_name_antyprzyklady = 'antyprzyklady';
+const String attach_title_antyprzyklady = 'Antyprzykłady';
+KonspektAttachment attach_antyprzyklady = KonspektAttachment(
+  name: attach_name_antyprzyklady,
+  title: attach_title_antyprzyklady,
+  assets: {
+    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_antyprzyklady.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_antyprzyklady.docx',
+  },
+);
+
 KonspektMaterial material_zal_mechanizmy_posrednie = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_mechanizmy_posrednie”',
     attachmentName: attach_name_mechanizmy_posrednie,
@@ -31,20 +39,32 @@ KonspektMaterial material_zal_mechanizmy_posrednie = KonspektMaterial(
     amount: 1
 );
 
+KonspektMaterial material_zal_antyprzyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_antyprzyklady”',
+    attachmentName: attach_name_antyprzyklady,
+    amount: 1
+);
+
 Konspekt struktura_i_ksztaltowanie_duchowosci_old = Konspekt.oldFrom(
   struktura_i_ksztaltowanie_duchowosci,
   attachments: [
     attach_mechanizmy_posrednie,
+    attach_antyprzyklady,
   ],
   materials: [
     material_zal_mechanizmy_posrednie,
+    material_zal_antyprzyklady,
   ],
   steps: [
 
+    // Mechanizmy pośrednie
     KonspektStep(
         title: 'Praktyka wychowania duchowego - mechanizmy pośrednie',
         duration: Duration(minutes: 20),
         activeForm: false,
+        materials: [
+          material_zal_mechanizmy_posrednie,
+        ],
         content: '<p style="text-align:justify;">'
             'Prowadzący zaczyna od zadania oczywistego pytania:'
             '<br>'
@@ -142,15 +162,15 @@ Konspekt struktura_i_ksztaltowanie_duchowosci_old = Konspekt.oldFrom(
             '<br>'
             '<br>Na końcu prowadzący może dodać, że wszystkie te mechanizmy nie są wzięte z sufitu - są obecne w <b>stopniach harcerskich</b>.'
             '</p>',
-        materials: [
-          material_zal_mechanizmy_posrednie,
-        ]
     ),
 
     KonspektStep(
         title: 'Praktyka wychowania duchowego - Opowieść Przewodnia',
         duration: Duration(minutes: 10),
         activeForm: false,
+        materials: [
+          material_zal_mechanizmy_posrednie,
+        ],
         content: '<p style="text-align:justify;">'
             'Prowadzący opisuje ostatni pośredni mechanizm kształtowania duchowości, czyli <b>Opowieść Przewodnią</b> na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci. Podobnie jak w przypadku poprzednich mechanizmów, do pozostałych dodaje przy tym odpowiadającą kartkę z załącznika $attach_html_mechanizmy_posrednie'
             '<br>'
@@ -171,10 +191,19 @@ Konspekt struktura_i_ksztaltowanie_duchowosci_old = Konspekt.oldFrom(
             '<br>'
             '<br>Warto także zwrócić uwagę, że harcerstwo może nosić znamiona subkutlury: ma swoje obrzędy, symbole, wartości i ścisłe gorono. Widać to przykładowo po harcerzach, którzy chodzą na każdą zbiórkę, jeżdżą na każdy wyjazd, uczą się po nocach grać Kaczmarskiego na gitarze, a do szkoły w bojówkach i harcerskim pasie. Owo zaangażowanie i tożsamość może być niezwykle efektywnym mechanizmem kształtowania duchowości.'
             '</p>',
-        materials: [
-          material_zal_mechanizmy_posrednie,
-        ]
     ),
 
+    // Antyprzykłady
+    KonspektStep(
+        title: 'Antyprzykłady',
+        duration: Duration(minutes: 30),
+        activeForm: false,
+        materials: [
+          material_zal_antyprzyklady,
+        ],
+        content: '<p style="text-align:justify;">'
+            'Prowadzący dzieli uczestników na dwie grupy i daje im po jednej kartce z załącznika $attach_html_antyprzyklady. Zadaniem uczestników jest szczegółowo przeanalizować opisaną w nim postać i wskazać jakie są problemy z duchowością, którą kształtuje u swoich wychowanków opisana postać.'
+            '</p>',
+    ),
   ]
 );

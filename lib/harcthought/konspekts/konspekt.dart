@@ -382,6 +382,30 @@ class KonspektStep{
   }):
     assert (content != null || contentBuilder != null);
 
+  KonspektStep copyWith({
+    String? title,
+    Duration? duration,
+    bool? activeForm,
+    bool? required,
+    String? content,
+    List<String>? aims,
+    List<KonspektMaterial>? materials,
+    String Function({required bool isDark})? contentBuilder,
+  }) => KonspektStep(
+    title: title??this.title,
+    duration: duration??this.duration,
+    activeForm: activeForm??this.activeForm,
+    required: required??this.required,
+    content: content??this.content,
+    aims: aims??this.aims,
+    materials: materials??this.materials,
+    contentBuilder: contentBuilder??this.contentBuilder
+  );
+
+  KonspektStep copyWithNamePrefix(String prefix) => copyWith(
+    title: prefix + title[0].toLowerCase() + title.substring(1)
+  );
+
 }
 
 class Konspekt{
@@ -424,11 +448,11 @@ class Konspekt{
       coverAuthor: upToDateKonspekt.coverAuthor,
       customCoverDirName: upToDateKonspekt.name,
       aims: [
-        'Miejsce, w którym można znaleźć nieuzywane elementy konspektu "${upToDateKonspekt.name}", które z niego wyleciały.',
+        'Miejsce, w którym można znaleźć nieuzywane elementy konspektu "${upToDateKonspekt.title}", które z niego wyleciały.',
       ],
       materials: materials,
       attachments: attachments,
-      summary: 'Stare elementy konspektu "${upToDateKonspekt.name}}", które z niego wyleciały.',
+      summary: 'Stare elementy konspektu "${upToDateKonspekt.title}", które z niego wyleciały.',
       steps: steps,
       upToDate: false
   );

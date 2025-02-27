@@ -36,13 +36,13 @@ const KonspektAttachment attach_scenariusze_czynnikow_duchowosci = KonspektAttac
 
 // Materials
 
-KonspektMaterial material_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = KonspektMaterial(
+KonspektMaterial material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = KonspektMaterial(
     name: 'Wydrukowany $attach_title_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci',
     attachmentName: attach_name_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
     amount: 2
 );
 
-KonspektMaterial material_scenariusze_czynnikow_duchowosci = KonspektMaterial(
+KonspektMaterial material_zal_scenariusze_czynnikow_duchowosci = KonspektMaterial(
   name: 'Dostępny załącznik “$attach_title_scenariusze_czynnikow_duchowosci”',
   attachmentName: attach_name_scenariusze_czynnikow_duchowosci,
   amount: 1
@@ -60,7 +60,7 @@ KonspektMaterial material_nagroda = KonspektMaterial(
 
 // Konspekt
 
-Konspekt czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt(
+Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt(
   name: konspekt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   title: 'Czynniki i mechanizmy kształtowania duchowości',
   category: KonspektCategory.ksztalcenie,
@@ -78,8 +78,8 @@ Konspekt czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt(
     attach_scenariusze_czynnikow_duchowosci,
   ],
   materials: [
-    material_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-    material_scenariusze_czynnikow_duchowosci,
+    material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+    material_zal_scenariusze_czynnikow_duchowosci,
     material_totem,
     material_nagroda,
   ],
@@ -87,11 +87,11 @@ Konspekt czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt(
   steps: [
 
     KonspektStep(
-        title: 'Czynniki duchowości - wyjaśnienie',
+        title: 'Wyjaśnienie merytoryczne',
         duration: Duration(minutes: 5),
         activeForm: false,
         materials: [
-          material_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+          material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
         ],
         content: '<p style="text-align:justify;">'
             'Prowadzący, na podstawie załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci wyjaśnia uczestnikom czym są czynniki duchowości.'
@@ -140,7 +140,7 @@ Konspekt czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt(
         duration: Duration(minutes: 40),
         activeForm: true,
         materials: [
-          material_scenariusze_czynnikow_duchowosci,
+          material_zal_scenariusze_czynnikow_duchowosci,
           material_totem,
         ],
         content: '<p style="text-align:justify;">'

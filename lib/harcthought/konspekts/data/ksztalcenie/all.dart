@@ -11,5 +11,5 @@ List<Konspekt> allKsztalcenieKonspekts = [
   struktura_i_ksztaltowanie_duchowosci,
   struktura_i_ksztaltowanie_duchowosci_old,
   wstep_do_wychowania_duchowego,
-  czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
 ];
