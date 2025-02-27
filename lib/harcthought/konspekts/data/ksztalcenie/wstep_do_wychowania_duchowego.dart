@@ -1,4 +1,5 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/struktura_i_ksztaltowanie_duchowosci.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
@@ -12,7 +13,7 @@ List<String> wstep_do_wychowania_duchowego_aims = [
   'Przekazanie uczestnikom skutków wynikających z oparcia wartości ZHP o chrześcijaństwo.',
 ];
 
-Konspekt wstep_do_wychowania_duchowego = Konspekt(
+Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
     name: 'wstep_do_wychowania_duchowego',
     title: 'Wstęp do wychowania duchowego',
     additionalSearchPhrases: [
@@ -216,5 +217,6 @@ Konspekt wstep_do_wychowania_duchowego = Konspekt(
 
       step_szybkie_strzaly_dyskusyjne
 
-    ]
+    ],
+  partOf: konspekt_kszt_struktura_i_ksztaltowanie_duchowosci
 );

@@ -5,7 +5,7 @@ import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
 
 
-const konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci_old = 'struktura_i_ksztaltowanie_duchowosci_unused_forms';
+const konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old = 'struktura_i_ksztaltowanie_duchowosci_unused_forms';
 
 
 const String attach_html_mechanizmy_posrednie = '<a href="$attach_name_mechanizmy_posrednie@attachment">$attach_title_mechanizmy_posrednie</a>';
@@ -15,8 +15,8 @@ KonspektAttachment attach_mechanizmy_posrednie = KonspektAttachment(
   name: attach_name_mechanizmy_posrednie,
   title: attach_title_mechanizmy_posrednie,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_mechanizmy_posrednie.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_mechanizmy_posrednie.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_mechanizmy_posrednie.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_mechanizmy_posrednie.docx',
   },
 );
 
@@ -27,8 +27,8 @@ KonspektAttachment attach_antyprzyklady = KonspektAttachment(
   name: attach_name_antyprzyklady,
   title: attach_title_antyprzyklady,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_antyprzyklady.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_antyprzyklady.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_antyprzyklady.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_antyprzyklady.docx',
   },
 );
 
@@ -46,7 +46,7 @@ KonspektMaterial material_zal_antyprzyklady = KonspektMaterial(
 );
 
 Konspekt struktura_i_ksztaltowanie_duchowosci_old = Konspekt.oldFrom(
-  struktura_i_ksztaltowanie_duchowosci,
+  konspekt_kszt_struktura_i_ksztaltowanie_duchowosci,
   attachments: [
     attach_mechanizmy_posrednie,
     attach_antyprzyklady,

@@ -58,6 +58,19 @@ class KonspektThumbnailWidget extends StatelessWidget{
 
                   KonspektCoverWidget(konspekt),
 
+                  if(konspekt.partOf != null)
+                    Positioned(
+                      top: Dimen.iconMarg,
+                      right: Dimen.iconMarg,
+                      left: Dimen.iconMarg,
+                      child: Column(
+                        children: [
+                          Expanded(child: Material(borderRadius: BorderRadius.circular(radius), child: KonspektCoverWidget(konspekt.partOf!))),
+                          Expanded(child: Container())
+                        ],
+                      )
+                    ),
+                  
                   Positioned(
                     bottom: Dimen.iconMarg,
                     right: Dimen.iconMarg,

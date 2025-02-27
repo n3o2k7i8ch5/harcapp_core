@@ -431,6 +431,7 @@ class Konspekt{
   final List<KonspektStep>? steps;
 
   final List<KonspektAttachment>? attachments;
+  final Konspekt? partOf;
   final bool upToDate;
 
   static Konspekt oldFrom(
@@ -512,6 +513,7 @@ class Konspekt{
     this.steps,
 
     this.attachments,
+    this.partOf,
     this.upToDate = true,
   });
 

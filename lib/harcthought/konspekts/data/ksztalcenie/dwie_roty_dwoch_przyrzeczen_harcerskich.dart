@@ -6,7 +6,7 @@ import 'package:harcapp_core/values/people.dart';
 import '../common_attachments.dart';
 import '../harcerskie/dwie_roty_dwoch_przyrzeczen_harcerskich.dart';
 
-const konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
+const konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
 
 const String attach_html_prawo_harcerskie = '<a href="$attach_name_prawo_harcerskie@attachment">$attach_title_prawo_harcerskie</a>';
 const String attach_name_prawo_harcerskie = 'prawo_harcerskie';
@@ -15,8 +15,8 @@ const KonspektAttachment attach_prawo_harcerskie = KonspektAttachment(
   name: attach_name_prawo_harcerskie,
   title: attach_title_prawo_harcerskie,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_prawo_harcerskie.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_prawo_harcerskie.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_prawo_harcerskie.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_prawo_harcerskie.docx',
   },
 );
 
@@ -27,8 +27,8 @@ const KonspektAttachment attach_przyrzeczenie_harcerskie = KonspektAttachment(
   name: attach_name_przyrzeczenie_harcerskie,
   title: attach_title_przyrzeczenie_harcerskie,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_przyrzeczenie_harcerskie.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_przyrzeczenie_harcerskie.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_przyrzeczenie_harcerskie.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_przyrzeczenie_harcerskie.docx',
   },
 );
 
@@ -39,8 +39,8 @@ const KonspektAttachment attach_jak_przeprowadzic_przyrzeczenie = KonspektAttach
   name: attach_name_jak_przeprowadzic_przyrzeczenie,
   title: attach_title_jak_przeprowadzic_przyrzeczenie,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_jak_przeprowadzic_przyrzeczenie.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_jak_przeprowadzic_przyrzeczenie.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_jak_przeprowadzic_przyrzeczenie.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_jak_przeprowadzic_przyrzeczenie.docx',
   },
 );
 
@@ -51,13 +51,13 @@ const KonspektAttachment attach_scenariusze = KonspektAttachment(
   name: attach_name_scenariusze,
   title: attach_title_scenariusze,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_scenariusze.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_scenariusze.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_scenariusze.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_scenariusze.docx',
   },
 );
 
-Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
-    name: konspekt_name_dwie_roty_dwoch_przyrzeczen_harcerskich,
+Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
+    name: konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich,
     title: 'Dwie roty dwóch przyrzeczeń',
     additionalSearchPhrases: [
       'przyrzeczenie harcerskie',

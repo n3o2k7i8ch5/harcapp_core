@@ -177,7 +177,7 @@ KonspektMaterial material_zal_przypinki = KonspektMaterial(
     amountAttendantFactor: 1
 );
 
-Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
+Konspekt konspekt_kszt_struktura_i_ksztaltowanie_duchowosci = Konspekt(
   name: konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci,
   title: konspekt_kszt_title_struktura_i_ksztaltowanie_duchowosci,
   additionalSearchPhrases: [

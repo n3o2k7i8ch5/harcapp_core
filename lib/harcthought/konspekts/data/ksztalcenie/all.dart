@@ -7,9 +7,9 @@ import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'czynniki_i_mechanizmy_ksztaltowania_duchowosci.dart';
 
 List<Konspekt> allKsztalcenieKonspekts = [
-  dwie_roty_dwoch_przyrzeczen_harcerskich,
-  struktura_i_ksztaltowanie_duchowosci,
+  konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich,
+  konspekt_kszt_struktura_i_ksztaltowanie_duchowosci,
   struktura_i_ksztaltowanie_duchowosci_old,
-  wstep_do_wychowania_duchowego,
+  konspekt_kszt_wstep_do_wychowania_duchowego,
   konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
 ];

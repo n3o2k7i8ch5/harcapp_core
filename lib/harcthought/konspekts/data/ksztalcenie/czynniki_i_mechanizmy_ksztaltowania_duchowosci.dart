@@ -1,11 +1,12 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/struktura_i_ksztaltowanie_duchowosci.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/poradnik/data.dart';
 import 'package:harcapp_core/values/people.dart';
 
-const konspekt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci = 'czynniki_i_mechanizmy_ksztaltowania_duchowosci';
+const konspekt_kszt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci = 'czynniki_i_mechanizmy_ksztaltowania_duchowosci';
 
 // Attachments
 
@@ -28,8 +29,8 @@ const KonspektAttachment attach_scenariusze_czynnikow_duchowosci = KonspektAttac
   name: attach_name_scenariusze_czynnikow_duchowosci,
   title: attach_title_scenariusze_czynnikow_duchowosci,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci/$attach_name_scenariusze_czynnikow_duchowosci.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci/$attach_name_scenariusze_czynnikow_duchowosci.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci/$attach_name_scenariusze_czynnikow_duchowosci.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci/$attach_name_scenariusze_czynnikow_duchowosci.docx',
   },
 );
 
@@ -61,7 +62,7 @@ KonspektMaterial material_nagroda = KonspektMaterial(
 // Konspekt
 
 Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt(
-  name: konspekt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  name: konspekt_kszt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   title: 'Czynniki i mechanizmy kształtowania duchowości',
   category: KonspektCategory.ksztalcenie,
   type: KonspektType.zajecia,
@@ -178,5 +179,6 @@ Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt
             '</p>'
     ),
 
-  ]
+  ],
+  partOf: konspekt_kszt_struktura_i_ksztaltowanie_duchowosci
 );
