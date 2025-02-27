@@ -14,6 +14,8 @@ import 'konspekt.dart';
 
 class KonspektThumbnailWidget extends StatelessWidget{
 
+  static const double defHeight = 140;
+
   final Konspekt konspekt;
   final double elevation;
   final Color? background;

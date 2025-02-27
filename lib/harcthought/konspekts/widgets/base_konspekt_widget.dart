@@ -179,7 +179,10 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 const TitleShortcutRowWidget(title: 'Część większego konspektu:', textAlign: TextAlign.left),
 
               if(konspekt.partOf != null)
-                KonspektThumbnailWidget(konspekt.partOf!, showSummary: false),
+                SizedBox(
+                  height: KonspektThumbnailWidget.defHeight,
+                  child: KonspektThumbnailWidget(konspekt.partOf!, showSummary: false),
+                ),
 
               const SizedBox(height: Dimen.sideMarg),
 
