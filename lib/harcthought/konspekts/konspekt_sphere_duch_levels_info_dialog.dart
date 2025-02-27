@@ -39,7 +39,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
 
               const AppText(
                 'Duchowość jest sposobem, w jaki człowiek żyje. Każda duchowość jest w pełni definiowana przez zachowania, postawy, wartości i aksjomaty, w które człowiek wierzy.',
-                size: Dimen.textSizeBig,
+                size: Dimen.textSizeNormal,
                 height: 1.2,
               ),
 
@@ -49,7 +49,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                 color: cardEnab_(context),
                 borderRadius: BorderRadius.circular(AppCard.defRadius),
                 child: Padding(
-                  padding: EdgeInsets.all(Dimen.defMarg),
+                  padding: EdgeInsets.all(Dimen.sideMarg),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -65,7 +65,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                       const SizedBox(height: Dimen.defMarg),
                       const AppText(
                         'Aksjomaty są fundamentem duchowości. Są to arbitralnie uznane prawdą, których nie sposób zweryfikować. Definiują cel życia, najwyższe dobro, przyczynę istnienia, sposób, w jaki działa świat itd..',
-                        size: Dimen.textSizeBig,
+                        size: Dimen.textSizeNormal,
                         height: 1.2,
                       ),
 
@@ -82,7 +82,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                       const SizedBox(height: Dimen.defMarg),
                       const AppText(
                         'Wartości są preferowanym stanem rzeczywistości. Pozwalają oceniać działania - określają czy i na ile określone działanie zmienia rzeczywistość w kierunku wynikającym aksjomatu. Wartości definiują także hierarchię spraw, którym powinno się poświęcać najwięcej zasobów (czasu, energii, siły, pieniędzy, etc.).',
-                        size: Dimen.textSizeBig,
+                        size: Dimen.textSizeNormal,
                         height: 1.2,
                       ),
 
@@ -99,7 +99,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                       const SizedBox(height: Dimen.defMarg),
                       const AppText(
                         'Postawy to sposoby bycia, czyli skłonności do określonego postępowania.',
-                        size: Dimen.textSizeBig,
+                        size: Dimen.textSizeNormal,
                         height: 1.2,
                       ),
 
@@ -119,7 +119,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                 'Ksztaltowanie duchowości odbywa się przez proces zwany "integracją duchowości". Polega na stopniowym dostosowywaniu postaw, wartości i aksjomatów do siebie nawzajem tak, by były spójne zarówno między sobą, jak i z doświadczeniem otaczającego człowieka świata.'
                 '\n'
                 '\nIntegracja duchowości wymaga od człowieka zdolności do refleksji, podejmowania wysiłku i przekraczania swoich granic.',
-                size: Dimen.textSizeBig,
+                size: Dimen.textSizeNormal,
                 height: 1.2,
               ),
 
@@ -129,7 +129,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                 color: cardEnab_(context),
                 borderRadius: BorderRadius.circular(AppCard.defRadius),
                 child: Padding(
-                  padding: EdgeInsets.all(Dimen.defMarg),
+                  padding: EdgeInsets.all(Dimen.sideMarg),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -145,7 +145,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                       const SizedBox(height: Dimen.defMarg),
                       const AppText(
                         'Hart ducha (siła charakteru) to zdolność do postępowania zgodnie z tym, co uważa się za słuszne pomimo niesprzyjających okoliczności: fizycznego trudu, kosztu finansowego, ostracyzmu społecznego, itd..',
-                        size: Dimen.textSizeBig,
+                        size: Dimen.textSizeNormal,
                         height: 1.2,
                       ),
 
@@ -162,7 +162,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                       const SizedBox(height: Dimen.defMarg),
                       const AppText(
                         'Zdolność refleksyjna określa zdolność do trafnego wnioskowania prawidłowych zachowań, postaw i wartości z aksjomatów oraz weryfikacji przyjętych aksjomatów na podstawie doświadczeń. Pozwala na analizę własnej duchowości i na ocenę czy i w jakim kierunku powinna ulec zmianie.',
-                        size: Dimen.textSizeBig,
+                        size: Dimen.textSizeNormal,
                         height: 1.2,
                       ),
 
