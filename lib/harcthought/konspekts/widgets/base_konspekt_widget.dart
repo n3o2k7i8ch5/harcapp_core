@@ -199,7 +199,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                     child: KonspektThumbnailWidget(
                         konspekt.partOf!,
                         background: widget.thumbnailBackground,
-                        radius: widget.thumbnailRadius,
+                        radius: widget.thumbnailRadius??KonspektThumbnailWidget.defRadius,
                         showSummary: false,
                         onTap: widget.onThumbnailTap == null?null:() => widget.onThumbnailTap!.call(konspekt.partOf!),
                     ),

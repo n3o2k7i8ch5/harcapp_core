@@ -15,6 +15,7 @@ import 'konspekt.dart';
 class KonspektThumbnailWidget extends StatelessWidget{
 
   static const double defHeight = 140;
+  static const double defRadius = AppCard.bigRadius;
 
   final Konspekt konspekt;
   final double elevation;
@@ -30,7 +31,7 @@ class KonspektThumbnailWidget extends StatelessWidget{
       { this.elevation = 0, 
         this.background,
         this.colorizeLeftSide = true,
-        this.radius = AppCard.bigRadius,
+        this.radius = defRadius,
         this.showSummary = true,
         this.showPartOf = true,
         this.onTap, 
