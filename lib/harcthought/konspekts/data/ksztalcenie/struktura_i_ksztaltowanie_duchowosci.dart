@@ -205,7 +205,7 @@ Konspekt konspekt_kszt_struktura_i_ksztaltowanie_duchowosci = Konspekt(
       attach_kratka_minimow_rozwoju_duchowego,
 
       attach_przyklady_poziomow_duchowosci,
-      ...konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci.attachments!,
+      ...attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
       attach_scenariusz_fantomowe_dzialania_wychowawcze,
       attach_formy,
       attach_planowanie_strategii_i_dzialan,
@@ -255,7 +255,7 @@ Konspekt konspekt_kszt_struktura_i_ksztaltowanie_duchowosci = Konspekt(
 
       material_zal_kratka_minimow_rozwoju_duchowego,
 
-      ...konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci.materials!,
+      ...materials_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
 
       material_zal_scenariusz_fantomowe_dzialania_wychowawcze,
 
@@ -390,7 +390,7 @@ Konspekt konspekt_kszt_struktura_i_ksztaltowanie_duchowosci = Konspekt(
           ]
       ),
 
-      ...konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci.steps!.map((step) => step.copyWithNamePrefix('Czynniki duchowości - ')).toList(),
+      ...steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci.map((step) => step.copyWithNamePrefix('Czynniki duchowości - ')).toList(),
 
       KonspektStep(
           title: 'Praktyka wychowania duchowego - kratka i formy',
@@ -590,6 +590,5 @@ Konspekt konspekt_kszt_struktura_i_ksztaltowanie_duchowosci = Konspekt(
               '<li><p style="text-align:justify;">Oddanie indetyfikatorów przez uczestników.</p></li>'
               '</ul>'
       ),
-
     ]
 );

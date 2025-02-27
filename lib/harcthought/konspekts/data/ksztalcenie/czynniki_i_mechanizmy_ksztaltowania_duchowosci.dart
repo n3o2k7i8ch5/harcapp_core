@@ -34,6 +34,10 @@ const KonspektAttachment attach_scenariusze_czynnikow_duchowosci = KonspektAttac
   },
 );
 
+List<KonspektAttachment> attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
+  attach_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  attach_scenariusze_czynnikow_duchowosci,
+];
 
 // Materials
 
@@ -59,8 +63,111 @@ KonspektMaterial material_nagroda = KonspektMaterial(
   amount: 1
 );
 
-// Konspekt
+List<KonspektMaterial> materials_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
+  material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  material_zal_scenariusze_czynnikow_duchowosci,
+  material_totem,
+  material_nagroda,
+];
 
+// Steps
+List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
+
+  KonspektStep(
+      title: 'Wyjaśnienie merytoryczne',
+      duration: Duration(minutes: 5),
+      activeForm: false,
+      materials: [
+        material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+      ],
+      content: '<p style="text-align:justify;">'
+          'Prowadzący, na podstawie załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci wyjaśnia uczestnikom czym są czynniki duchowości.'
+          '<br>'
+          '<br>Kwestie te są opisane w części "wstęp", oraz "analogie" poradnika i wystarczy je opowiedzieć uczestnikom własnymi słowami.'
+          '</p>'
+  ),
+
+  KonspektStep(
+      title: 'Zasady bieganej familiady',
+      duration: Duration(minutes: 5),
+      activeForm: false,
+      content: '<p style="text-align:justify;">'
+          'Prowadzący wyjaśnia uczestnikom zasady gry, ktorą za chwilę rozegrają:'
+          '<br>'
+          '<br>Uczestnicy zostaną podzieleni na dwie grupy. Co turę grupy będą wyznaczały kolejnego swojego uczestnika, ktory będzie ich reprezentował. Następnie prowadzący przeczyta którką historię.'
+          '<br>'
+          '<br>Gdy prowadzący skończy czytać,  będą mieli za zadanie określić, ktore czynniki rozwoju duchowego są w niej opisane.'
+          '</p>'
+  ),
+
+  KonspektStep(
+      title: 'Podział na grupy',
+      duration: Duration(minutes: 5),
+      activeForm: false,
+      content: '<p style="text-align:justify;">'
+          'Prowadzący dzieli uczestników na dwie grupy.'
+          '</p>'
+  ),
+
+  KonspektStep(
+      title: 'Zapoznanie się z poradnikami',
+      duration: Duration(minutes: 10),
+      activeForm: false,
+      content: '<style="text-align:justify;">'
+          'Prowadzący wręcza każdej z grup po jednym egzemplarzu poradnika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci.'
+          '<br>'
+          '<br>Jeśli poradnik jest wydrukowany w formie luźnych kartek, uczestnicy mogą czytać "każdy po jednej kartce", po czym się nimi okrężnie wymieniać.'
+          '<br>'
+          '<br>Uczestnicy mają 10 minut na zapoznanie się z poradnikiem. Gdy to zrobią, mogą zostawić go na widoku, by móc do niego wracać w trakcie gry.'
+          '</p>'
+  ),
+
+  KonspektStep(
+      title: 'Biegana familiada',
+      duration: Duration(minutes: 40),
+      activeForm: true,
+      materials: [
+        material_zal_scenariusze_czynnikow_duchowosci,
+        material_totem,
+      ],
+      content: '<p style="text-align:justify;">'
+          'Prowadzący prosi uczestników, by zajęli w grupach dwie strony wspólnej przestrzeni. Sam prowadzący staje na srodku i kładzie ok. 1-2 metry od siebie totem, tak, by każda grupa miała do niego taki sam dystans.'
+          '<br>'
+          '<br>Uczestnicy ustawiają się w dwóch "kolejkach", a pierwsza osoba w każdej z kolejek zostaje pierwszym <b>reprezentantem</b> swojej grupy.'
+          '<br>'
+          '<br>Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_czynnikow_duchowosci. Gdy skończy czytać, robi krótką przerwę i zadaje pytanie zapisane pod historią.'
+          '<br>'
+          '<br>W tym momencie reprezentanci każdej z grup mogą wystartować w kierunku totemu. Ten, który pierwszy dotknie totemu, ma prawo odpowiedzieć na pytanie.'
+          '<br>'
+          '<br>Udzielić odpowiedzi należy na pytanie zadane przez prowadzacego, który następnie pyta o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
+          '<br>'
+          '<br>Jeśli reprezentant odpowie poprawnie, jego drużyna otrzymuje jeden punkt. Jeśli odpowiedź jest błędna, prawo do odpowiedzi na to pytanie ma reprezentant drużyny przeciwnej i jeśli mu się uda, to jego drużyna otrzymuje punkt.'
+          '<br>'
+          '<br>Po każdej turze reprezentanci wracają na końce swoich kolejek, a kolejna osoba z przodu kolejki zostaje reprezentantem swojej grupy.'
+          '<br>'
+          '<br>Gdy reprezentanci wrócą na swoje miejsca, mogą z prowadzącym wspólnie <b>omówić niejasności</b> wynikające z przeczytanej historii. Następnie prowadzący może jeszcze zapytać o to, <b>jakiego poziomu (warstwy) duchowości</b> dotyczyła przeczytana historia, jednak za to pytanie nie przewidziane są punkty.'
+          '<br>'
+          '<br>Gra trwa do momentu, gdy prowadzący przeczyta wszystkie historie.'
+          '<br>'
+          '<br>Warto, aby prowadzący nie czytał historii po kolei, jako że są ułożone w tej samej kolejności, co czynniki opisane w poradnikach.'
+          '</p>'
+  ),
+
+  KonspektStep(
+      title: 'Wręcznie nagrody',
+      duration: Duration(minutes: 5),
+      activeForm: false,
+      materials: [
+        material_nagroda,
+      ],
+      content: '<p style="text-align:justify;">'
+          'Prowadzący zlicza punkty każdej z grup i wyłania zwycięzką grupę, następnie wręcza nagrodę.'
+          '</p>'
+  ),
+
+];
+
+// Konspekt
 Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt(
   name: konspekt_kszt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   title: 'Czynniki i mechanizmy kształtowania duchowości',
@@ -74,111 +181,9 @@ Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt
     'Przedstawienie uczestnikom czynników duchowości.',
     'Przedstawienie uczestnikom mechanizmów kształtowania duchowości.',
   ],
-  attachments: [
-    attach_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-    attach_scenariusze_czynnikow_duchowosci,
-  ],
-  materials: [
-    material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-    material_zal_scenariusze_czynnikow_duchowosci,
-    material_totem,
-    material_nagroda,
-  ],
+  attachments: attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  materials: materials_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   summary: 'Uczestnicy rozgrywają między sobą bieganą familiadę, by na podstawie krótkich historii określić, które czynniki rozwoju duchowości są w nich opisane.',
-  steps: [
-
-    KonspektStep(
-        title: 'Wyjaśnienie merytoryczne',
-        duration: Duration(minutes: 5),
-        activeForm: false,
-        materials: [
-          material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-        ],
-        content: '<p style="text-align:justify;">'
-            'Prowadzący, na podstawie załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci wyjaśnia uczestnikom czym są czynniki duchowości.'
-            '<br>'
-            '<br>Kwestie te są opisane w części "wstęp", oraz "analogie" poradnika i wystarczy je opowiedzieć uczestnikom własnymi słowami.'
-            '</p>'
-    ),
-
-    KonspektStep(
-        title: 'Zasady bieganej familiady',
-        duration: Duration(minutes: 5),
-        activeForm: false,
-        content: '<p style="text-align:justify;">'
-            'Prowadzący wyjaśnia uczestnikom zasady gry, ktorą za chwilę rozegrają:'
-            '<br>'
-            '<br>Uczestnicy zostaną podzieleni na dwie grupy. Co turę grupy będą wyznaczały kolejnego swojego uczestnika, ktory będzie ich reprezentował. Następnie prowadzący przeczyta którką historię.'
-            '<br>'
-            '<br>Gdy prowadzący skończy czytać,  będą mieli za zadanie określić, ktore czynniki rozwoju duchowego są w niej opisane.'
-            '</p>'
-    ),
-
-    KonspektStep(
-        title: 'Podział na grupy',
-        duration: Duration(minutes: 5),
-        activeForm: false,
-        content: '<p style="text-align:justify;">'
-            'Prowadzący dzieli uczestników na dwie grupy.'
-            '</p>'
-    ),
-
-    KonspektStep(
-        title: 'Zapoznanie się z poradnikami',
-        duration: Duration(minutes: 10),
-        activeForm: false,
-        content: '<style="text-align:justify;">'
-            'Prowadzący wręcza każdej z grup po jednym egzemplarzu poradnika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci.'
-            '<br>'
-            '<br>Jeśli poradnik jest wydrukowany w formie luźnych kartek, uczestnicy mogą czytać "każdy po jednej kartce", po czym się nimi okrężnie wymieniać.'
-            '<br>'
-            '<br>Uczestnicy mają 10 minut na zapoznanie się z poradnikiem. Gdy to zrobią, mogą zostawić go na widoku, by móc do niego wracać w trakcie gry.'
-            '</p>'
-    ),
-
-    KonspektStep(
-        title: 'Biegana familiada',
-        duration: Duration(minutes: 40),
-        activeForm: true,
-        materials: [
-          material_zal_scenariusze_czynnikow_duchowosci,
-          material_totem,
-        ],
-        content: '<p style="text-align:justify;">'
-            'Prowadzący prosi uczestników, by zajęli w grupach dwie strony wspólnej przestrzeni. Sam prowadzący staje na srodku i kładzie ok. 1-2 metry od siebie totem, tak, by każda grupa miała do niego taki sam dystans.'
-            '<br>'
-            '<br>Uczestnicy ustawiają się w dwóch "kolejkach", a pierwsza osoba w każdej z kolejek zostaje pierwszym <b>reprezentantem</b> swojej grupy.'
-            '<br>'
-            '<br>Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_czynnikow_duchowosci. Gdy skończy czytać, robi krótką przerwę i zadaje pytanie zapisane pod historią.'
-            '<br>'
-            '<br>W tym momencie reprezentanci każdej z grup mogą wystartować w kierunku totemu. Ten, który pierwszy dotknie totemu, ma prawo odpowiedzieć na pytanie.'
-            '<br>'
-            '<br>Udzielić odpowiedzi należy na pytanie zadane przez prowadzacego, który następnie pyta o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
-            '<br>'
-            '<br>Jeśli reprezentant odpowie poprawnie, jego drużyna otrzymuje jeden punkt. Jeśli odpowiedź jest błędna, prawo do odpowiedzi na to pytanie ma reprezentant drużyny przeciwnej i jeśli mu się uda, to jego drużyna otrzymuje punkt.'
-            '<br>'
-            '<br>Po każdej turze reprezentanci wracają na końce swoich kolejek, a kolejna osoba z przodu kolejki zostaje reprezentantem swojej grupy.'
-            '<br>'
-            '<br>Gdy reprezentanci wrócą na swoje miejsca, mogą z prowadzącym wspólnie <b>omówić niejasności</b> wynikające z przeczytanej historii. Następnie prowadzący może jeszcze zapytać o to, <b>jakiego poziomu (warstwy) duchowości</b> dotyczyła przeczytana historia, jednak za to pytanie nie przewidziane są punkty.'
-            '<br>'
-            '<br>Gra trwa do momentu, gdy prowadzący przeczyta wszystkie historie.'
-            '<br>'
-            '<br>Warto, aby prowadzący nie czytał historii po kolei, jako że są ułożone w tej samej kolejności, co czynniki opisane w poradnikach.'
-            '</p>'
-    ),
-
-    KonspektStep(
-        title: 'Wręcznie nagrody',
-        duration: Duration(minutes: 5),
-        activeForm: false,
-        materials: [
-          material_nagroda,
-        ],
-        content: '<p style="text-align:justify;">'
-            'Prowadzący zlicza punkty każdej z grup i wyłania zwycięzką grupę, następnie wręcza nagrodę.'
-            '</p>'
-    ),
-
-  ],
+  steps: steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   partOf: konspekt_kszt_struktura_i_ksztaltowanie_duchowosci
 );

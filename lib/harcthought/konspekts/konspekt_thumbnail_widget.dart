@@ -48,6 +48,7 @@ class KonspektThumbnailWidget extends StatelessWidget{
             SizedBox(
               width: 24*4 + 3*MetoRow.separatorWidth + 2*Dimen.iconMarg,
               child: Stack(
+                clipBehavior: Clip.none,
                 fit: StackFit.expand,
                 children: [
 
@@ -62,10 +63,16 @@ class KonspektThumbnailWidget extends StatelessWidget{
                     Positioned(
                       top: Dimen.iconMarg,
                       right: Dimen.iconMarg,
-                      left: Dimen.iconMarg,
+                      left: -Dimen.iconMarg,
                       child: Column(
                         children: [
-                          Expanded(child: Material(borderRadius: BorderRadius.circular(radius), child: KonspektCoverWidget(konspekt.partOf!))),
+                          Expanded(
+                            child: Material(
+                              elevation: AppCard.bigElevation,
+                              borderRadius: BorderRadius.circular(radius),
+                              child: KonspektCoverWidget(konspekt.partOf!)
+                            )
+                          ),
                           Expanded(child: Container())
                         ],
                       )
