@@ -63,9 +63,9 @@ class KonspektThumbnailWidget extends StatelessWidget{
                     Positioned(
                       top: Dimen.iconMarg,
                       right: -Dimen.iconMarg,
-                      left: Dimen.iconMarg,
                       bottom: 0,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Expanded(
                             child: Material(
