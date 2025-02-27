@@ -114,7 +114,6 @@ class KonspektThumbnailWidget extends StatelessWidget{
                                 ),
                               )
 
-
                           ],
                         ),
 

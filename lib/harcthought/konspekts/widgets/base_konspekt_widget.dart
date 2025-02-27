@@ -11,6 +11,7 @@ import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/person_card.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/harcthought/konspekts/konspekt_thumbnail_widget.dart';
 
 import '../common.dart';
 import '../konspekt.dart';
@@ -170,6 +171,15 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   maxDialogWidth: widget.maxDialogWidth,
                   textSize: Dimen.textSizeBig,
                 ),
+
+              if(konspekt.partOf != null)
+                const SizedBox(height: Dimen.sideMarg),
+
+              if(konspekt.partOf != null)
+                const TitleShortcutRowWidget(title: 'Część większego konspektu:', textAlign: TextAlign.left),
+
+              if(konspekt.partOf != null)
+                KonspektThumbnailWidget(konspekt.partOf!, showSummary: false),
 
               const SizedBox(height: Dimen.sideMarg),
 
