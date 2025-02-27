@@ -36,6 +36,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final bool oneLineMultiDuration;
   final double? thumbnailWidth;
   final Color? thumbnailBackground;
+  final double? thumbnailRadius;
   final bool thumbnailShowSummary;
   final bool thumbnailShowPartOf;
   final void Function(Konspekt)? onThumbnailTap;
@@ -54,6 +55,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.oneLineMultiDuration = false,
         this.thumbnailWidth,
         this.thumbnailBackground,
+        this.thumbnailRadius,
         this.thumbnailShowSummary = true,
         this.thumbnailShowPartOf = true,
         this.onThumbnailTap,
@@ -197,6 +199,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                     child: KonspektThumbnailWidget(
                         konspekt.partOf!,
                         background: widget.thumbnailBackground,
+                        radius: widget.thumbnailRadius,
                         showSummary: false,
                         onTap: widget.onThumbnailTap == null?null:() => widget.onThumbnailTap!.call(konspekt.partOf!),
                     ),
