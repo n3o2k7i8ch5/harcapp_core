@@ -125,6 +125,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
               const SizedBox(height: Dimen.sideMarg),
 
               Material(
+                borderRadius: BorderRadius.circular(AppCard.defRadius),
                 child: Padding(
                   padding: EdgeInsets.all(Dimen.defMarg),
                   child: Column(
