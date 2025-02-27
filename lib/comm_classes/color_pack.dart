@@ -93,7 +93,7 @@ abstract class ColorPack{
         unselectedLabelColor: iconDisabled,
         labelStyle: AppTextStyle(fontWeight: weight.halfBold),
         unselectedLabelStyle: AppTextStyle(fontWeight: weight.halfBold),
-        overlayColor: MaterialStateColor.resolveWith((states) => accent.withValues(alpha: .2))
+        overlayColor: WidgetStateColor.resolveWith((states) => accent.withValues(alpha: .2))
     ),
     timePickerTheme: TimePickerThemeData(
       backgroundColor: background,
@@ -170,29 +170,29 @@ abstract class ColorPack{
       color: iconEnabled,
     ),
     checkboxTheme: CheckboxThemeData(
-      checkColor: MaterialStateProperty.all(background),
+      checkColor: WidgetStateProperty.all(background),
     ).copyWith(
-      fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) { return null; }
-        if (states.contains(MaterialState.selected)) { return accent; }
+      fillColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) { return null; }
+        if (states.contains(WidgetState.selected)) { return accent; }
         return null;
       }),
     ), radioTheme: RadioThemeData(
-    fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) { return null; }
-      if (states.contains(MaterialState.selected)) { return accent; }
+    fillColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) { return null; }
+      if (states.contains(WidgetState.selected)) { return accent; }
       return null;
     }),
     ),
       switchTheme: SwitchThemeData(
-        thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) { return null; }
-          if (states.contains(MaterialState.selected)) { return accent; }
+        thumbColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) { return null; }
+          if (states.contains(WidgetState.selected)) { return accent; }
           return null;
         }),
         trackColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-          if (states.contains(MaterialState.disabled)) { return null; }
-          if (states.contains(MaterialState.selected)) { return accent.withValues(alpha: .5); }
+          if (states.contains(WidgetState.disabled)) { return null; }
+          if (states.contains(WidgetState.selected)) { return accent.withValues(alpha: .5); }
           return null;
         }),
     ),
