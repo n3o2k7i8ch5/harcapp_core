@@ -5,7 +5,7 @@ import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
 
 
-const konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old = 'struktura_i_ksztaltowanie_duchowosci_unused_forms';
+const konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old = 'struktura_i_ksztaltowanie_duchowosci_old';
 
 
 const String attach_html_mechanizmy_posrednie = '<a href="$attach_name_mechanizmy_posrednie@attachment">$attach_title_mechanizmy_posrednie</a>';
