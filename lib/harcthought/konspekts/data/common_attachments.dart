@@ -6,7 +6,7 @@ import 'common.dart';
 
 const String attach_html_o_strukturze_i_ksztaltowaniu_duchowosci = '<a href="$attach_name_o_strukturze_i_ksztaltowaniu_duchowosci@attachment">$attach_title_o_strukturze_i_ksztaltowaniu_duchowosci</a>';
 const String attach_name_o_strukturze_i_ksztaltowaniu_duchowosci = 'o_strukturze_i_ksztaltowaniu_duchowosci';
-const String attach_title_o_strukturze_i_ksztaltowaniu_duchowosci = 'O strukturze i ksztaltowaniu duchowosci';
+const String attach_title_o_strukturze_i_ksztaltowaniu_duchowosci = 'Poradnik "$poradnik_title_o_strukturze_i_ksztaltowaniu_duchowosci"';
 KonspektAttachment attach_o_strukturze_i_ksztaltowaniu_duchowosci = KonspektAttachment(
   name: attach_name_o_strukturze_i_ksztaltowaniu_duchowosci,
   title: attach_title_o_strukturze_i_ksztaltowaniu_duchowosci,

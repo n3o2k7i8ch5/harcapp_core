@@ -5,9 +5,10 @@ import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'poradnik.dart';
 
 const String poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci = "czynniki_i_mechanizmy_ksztaltowania_duchowosci";
+const String poradnik_title_czynniki_i_mechanizmy_ksztaltowania_duchowosci = "Czynniki i mechanizmy kształtowania duchowości";
 Poradnik poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Poradnik(
   name: poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-  title: 'Czynniki i mechanizmy kształtowania duchowości',
+  title: poradnik_title_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   pageCount: 12,
   description: 'Poradnik dla pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące zagadnienia:'
       '\n'
@@ -56,9 +57,10 @@ Poradnik poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Poradnik(
 
 
 const String poradnik_name_dwie_roty_dwoch_przyrzeczen_harcerskich = "dwie_roty_dwoch_przyrzeczen_harcerskich";
+const String poradnik_title_dwie_roty_dwoch_przyrzeczen_harcerskich = "Dwie roty dwóch Przyrzeczeń";
 Poradnik poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich = Poradnik(
   name: poradnik_name_dwie_roty_dwoch_przyrzeczen_harcerskich,
-  title: 'Dwie roty dwóch Przyrzeczeń',
+  title: poradnik_title_dwie_roty_dwoch_przyrzeczen_harcerskich,
   pageCount: 16,
   description: 'Poradnik dla drużynowych ZHP poruszający następujące m.in. zagadnienia:'
       '\n'
@@ -110,9 +112,10 @@ Poradnik poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich = Poradnik(
 );
 
 const String poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci = "o_strukturze_i_ksztaltowaniu_duchowosci";
+const String poradnik_title_o_strukturze_i_ksztaltowaniu_duchowosci = "O strukturze i kształtowaniu duchowości";
 Poradnik poradnik_o_strukturze_i_ksztaltowaniu_duchowosci = Poradnik(
   name: poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci,
-  title: 'O strukturze i kształtowaniu duchowości',
+  title: poradnik_title_o_strukturze_i_ksztaltowaniu_duchowosci,
   pageCount: 30,
   description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące m.in. zagadnienia:'
       '\n'
