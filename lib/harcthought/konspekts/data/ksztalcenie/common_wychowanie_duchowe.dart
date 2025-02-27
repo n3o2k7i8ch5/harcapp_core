@@ -370,7 +370,7 @@ KonspektStep step_neutralnosc_duchowa_w_przypadku_problemow = KonspektStep(
 );
 
 KonspektStep step_harcerstwo_analogia_do_ogrodnikow = KonspektStep(
-    title: 'Harcerstwo - analogia do ogrodników wpływających na kształt krzewów',
+    title: 'Neutralność duchowa - analogia harcerstwa z ogrodnikami',
     duration: Duration(minutes: 5),
     activeForm: false,
     required: false,
@@ -386,7 +386,7 @@ KonspektStep step_harcerstwo_analogia_do_ogrodnikow = KonspektStep(
 );
 
 KonspektStep step_zrodla_wartosci_w_zhp_dyskusja_o_scenariuszach = KonspektStep(
-    title: 'Źródła wartości - dyskusje o scenariuszach',
+    title: 'Neutralność duchowa - źródła wartości - dyskusje o scenariuszach',
     duration: Duration(minutes: 15),
     activeForm: false,
     aims: [
@@ -420,7 +420,7 @@ KonspektStep step_zrodla_wartosci_w_zhp_dyskusja_o_scenariuszach = KonspektStep(
 );
 
 KonspektStep step_zrodla_wartosci_w_zhp_okreslonosc_wartosci = KonspektStep(
-    title: 'Źródła wartości w ZHP - określoność wartości',
+    title: 'Neutralność duchowa - źródła wartości w ZHP - określoność wartości',
     duration: Duration(minutes: 5),
     activeForm: false,
     aims: [
@@ -440,7 +440,7 @@ KonspektStep step_zrodla_wartosci_w_zhp_okreslonosc_wartosci = KonspektStep(
 );
 
 KonspektStep step_zrodla_wartosci_w_zhp_aksjoamty = KonspektStep(
-    title: 'Źródła wartości w ZHP - aksjomaty',
+    title: 'Neutralność duchowa - źródła wartości w ZHP - aksjomaty',
     duration: Duration(minutes: 20),
     activeForm: false,
     aims: [

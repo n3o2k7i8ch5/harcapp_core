@@ -331,7 +331,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
       step_poziomy_duchowosci_aksjomat,
 
       KonspektStep(
-          title: 'Poziomy duchowości - sprawdzenie',
+          title: 'Poziomy (warstwy) rozwoju duchowego - sprawdzenie',
           duration: Duration(minutes: 15),
           activeForm: true,
           required: false,
@@ -512,7 +512,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
           duration: Duration(minutes: 10),
           activeForm: true,
           content: '<p style="text-align:justify;">'
-              'Prowadzący zbiera na chwilę w jedno miejsce wszystkich uczestników i prosi każdą z grup, by przedstawiła swoje opisane cele i mechanizmy pośrednie. Po każdej z prezentacji może się odbyć krótka dyskusja nad planami.'
+              'Prowadzący zbiera na chwilę w jedno miejsce wszystkich uczestników i prosi każdą z grup, by przedstawiła swoje opisane cele, wybrane czynniki duchowości i mechanizmy kształtowania duchowości. Po każdej z prezentacji może się odbyć krótka dyskusja nad planami.'
               '<br>'
               '<br>Ten punkt służy temu, aby prowadzący miał możliwość zareagować, jeśli któraś z grup zacznie błądzić w założeniach.'
               '</p>'

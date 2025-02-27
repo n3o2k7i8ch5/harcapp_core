@@ -101,7 +101,7 @@ Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt
     ),
 
     KonspektStep(
-        title: 'Tłumaczenie zasad',
+        title: 'Zasady bieganej familiady',
         duration: Duration(minutes: 5),
         activeForm: false,
         content: '<p style="text-align:justify;">'
@@ -123,7 +123,7 @@ Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt
     ),
 
     KonspektStep(
-        title: 'Zapoznanie się uczestników z poradnikami',
+        title: 'Zapoznanie się z poradnikami',
         duration: Duration(minutes: 10),
         activeForm: false,
         content: '<style="text-align:justify;">'
@@ -136,7 +136,7 @@ Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt
     ),
 
     KonspektStep(
-        title: 'Familiada',
+        title: 'Biegana familiada',
         duration: Duration(minutes: 40),
         activeForm: true,
         materials: [
