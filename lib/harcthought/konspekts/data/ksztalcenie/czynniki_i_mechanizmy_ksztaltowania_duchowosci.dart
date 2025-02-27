@@ -138,7 +138,7 @@ Konspekt czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt(
     KonspektStep(
         title: 'Familiada',
         duration: Duration(minutes: 40),
-        activeForm: false,
+        activeForm: true,
         materials: [
           material_scenariusze_czynnikow_duchowosci,
           material_totem,
