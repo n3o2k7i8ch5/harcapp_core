@@ -34,6 +34,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final Widget? leading;
   final bool oneLineSummary;
   final bool oneLineMultiDuration;
+  final Color? thumbnailBackground;
 
   const BaseKonspektWidget(
       this.konspekt,
@@ -47,6 +48,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.leading,
         this.oneLineSummary = false,
         this.oneLineMultiDuration = false,
+        this.thumbnailBackground,
       });
 
   @override
@@ -181,7 +183,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               if(konspekt.partOf != null)
                 SizedBox(
                   height: KonspektThumbnailWidget.defHeight,
-                  child: KonspektThumbnailWidget(konspekt.partOf!, showSummary: false),
+                  child: KonspektThumbnailWidget(
+                      konspekt.partOf!,
+                      background: widget.thumbnailBackground,
+                      showSummary: false
+                  ),
                 ),
 
               const SizedBox(height: Dimen.sideMarg),
