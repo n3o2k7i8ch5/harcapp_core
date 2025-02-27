@@ -9,7 +9,7 @@ import 'package:harcapp_core/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../konspekt.dart';
-import 'konspekt_attachment_widget.dart';
+import 'attachment_widget.dart';
 
 class KonspektMaterialTile extends StatelessWidget{
 

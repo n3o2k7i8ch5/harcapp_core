@@ -14,8 +14,9 @@ import 'package:harcapp_core/dimen.dart';
 
 import '../common.dart';
 import '../konspekt.dart';
-import 'konspekt_attachment_widget.dart';
-import 'konspekt_html_widget.dart';
+import 'attachment_widget.dart';
+import 'cover_widget.dart';
+import 'html_widget.dart';
 import 'material_tile.dart';
 import 'spheres_widget.dart';
 import 'step_widget.dart';
@@ -116,20 +117,17 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   opacity: showAppBarTitle?1:0,
                   duration: const Duration(milliseconds: 300),
                   child: Text(
-                      konspekt.title,
-                      style: AppTextStyle(color: iconEnab_(context)),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis
+                    konspekt.title,
+                    style: AppTextStyle(color: iconEnab_(context)),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis
                   ),
                 ),
                 background: GestureDetector(
                   onTap: () => showAppToast(context, text: 'Źródło: <b>${konspekt.coverAuthor}</b>'),
                   child: Hero(
-                      tag: konspekt.coverPath,
-                      child: Image(
-                        image: AssetImage(konspekt.coverPath),
-                        fit: BoxFit.cover,
-                      )
+                    tag: konspekt.coverPath,
+                    child: KonspektCoverWidget(konspekt)
                   ),
                 ),
                 stretchModes: const [

@@ -395,6 +395,7 @@ class Konspekt{
 
   final List<Meto> metos;
   final String coverAuthor;
+  final String? customCoverDirName;
   final Person? author;
   final Duration? customDuration;
   final List<String> aims;
@@ -406,8 +407,33 @@ class Konspekt{
   final List<KonspektStep>? steps;
 
   final List<KonspektAttachment>? attachments;
+  final bool upToDate;
 
-  String get coverPath => 'packages/harcapp_core/assets/konspekty/${category.path}/$name/cover.webp';
+  static Konspekt oldFrom(
+    Konspekt upToDateKonspekt, {
+      List<KonspektMaterial> materials = const [],
+      List<KonspektAttachment> attachments = const [],
+      List<KonspektStep> steps = const [],
+  }) => Konspekt(
+      name: upToDateKonspekt.name + "_old",
+      title: upToDateKonspekt.title + " (stare elementy)",
+      category: upToDateKonspekt.category,
+      type: upToDateKonspekt.type,
+      spheres: upToDateKonspekt.spheres,
+      metos: upToDateKonspekt.metos,
+      coverAuthor: upToDateKonspekt.coverAuthor,
+      customCoverDirName: upToDateKonspekt.name,
+      aims: [
+        'Miejsce, w którym można znaleźć nieuzywane elementy konspektu "${upToDateKonspekt.name}", które z niego wyleciały.',
+      ],
+      materials: materials,
+      attachments: attachments,
+      summary: 'Stare elementy konspektu "${upToDateKonspekt.name}}", które z niego wyleciały.',
+      steps: steps,
+      upToDate: false
+  );
+
+  String get coverPath => 'packages/harcapp_core/assets/konspekty/${category.path}/${customCoverDirName??name}/cover.webp';
 
   Duration? get duration{
     if(customDuration != null) return customDuration;
@@ -450,6 +476,7 @@ class Konspekt{
 
     required this.metos,
     required this.coverAuthor,
+    this.customCoverDirName,
     this.author,
     this.customDuration,  // if null, `duration` will be calculated from the steps' duration.
     required this.aims,
@@ -461,6 +488,7 @@ class Konspekt{
     this.steps,
 
     this.attachments,
+    this.upToDate = true,
   });
 
   bool matchesAdditionalPhrase(String searchPhrase){

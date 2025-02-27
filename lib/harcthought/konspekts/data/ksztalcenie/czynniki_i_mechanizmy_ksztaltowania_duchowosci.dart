@@ -83,7 +83,7 @@ Konspekt czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt(
     material_totem,
     material_nagroda,
   ],
-  summary: 'Uczestnicy rozgrywają między sobą familiadę, by na podstawie krótkich historii określić, które czynniki rozwoju duchowości są w nich opisane.',
+  summary: 'Uczestnicy rozgrywają między sobą bieganą familiadę, by na podstawie krótkich historii określić, które czynniki rozwoju duchowości są w nich opisane.',
   steps: [
 
     KonspektStep(

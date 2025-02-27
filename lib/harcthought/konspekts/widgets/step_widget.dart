@@ -10,7 +10,7 @@ import 'package:harcapp_core/harcthought/konspekts/widgets/material_tile.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../konspekt.dart';
-import 'konspekt_html_widget.dart';
+import 'html_widget.dart';
 
 class KonspektStepWidget extends StatelessWidget{
 

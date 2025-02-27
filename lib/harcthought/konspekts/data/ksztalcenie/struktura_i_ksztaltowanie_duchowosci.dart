@@ -8,8 +8,8 @@ import 'package:harcapp_core/values/people.dart';
 import 'common_wychowanie_duchowe.dart';
 
 
-const konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci = 'struktura_i_ksztaltowanie_duchowosci';
-const konspekt_harc_title_struktura_i_ksztaltowanie_duchowosci = 'Struktura i kształtowanie duchowości';
+const konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci = 'struktura_i_ksztaltowanie_duchowosci';
+const konspekt_kszt_title_struktura_i_ksztaltowanie_duchowosci = 'Struktura i kształtowanie duchowości';
 
 
 const String attach_html_przyklady_poziomow_duchowosci = '<a href="$attach_name_przyklady_poziomow_duchowosci@attachment">$attach_title_przyklady_poziomow_duchowosci</a>';
@@ -19,8 +19,8 @@ KonspektAttachment attach_przyklady_poziomow_duchowosci = KonspektAttachment(
   name: attach_name_przyklady_poziomow_duchowosci,
   title: attach_title_przyklady_poziomow_duchowosci,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_przyklady_poziomow_duchowosci.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_przyklady_poziomow_duchowosci.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_przyklady_poziomow_duchowosci.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_przyklady_poziomow_duchowosci.docx',
   },
 );
 
@@ -31,8 +31,8 @@ KonspektAttachment attach_mechanizmy_posrednie = KonspektAttachment(
   name: attach_name_mechanizmy_posrednie,
   title: attach_title_mechanizmy_posrednie,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_mechanizmy_posrednie.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_mechanizmy_posrednie.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_mechanizmy_posrednie.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_mechanizmy_posrednie.docx',
   },
 );
 
@@ -43,8 +43,8 @@ KonspektAttachment attach_scenariusz_fantomowe_dzialania_wychowawcze = KonspektA
   name: attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
   title: attach_title_scenariusz_fantomowe_dzialania_wychowawcze,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.docx',
   },
 );
 
@@ -55,8 +55,8 @@ KonspektAttachment attach_formy = KonspektAttachment(
   name: attach_name_formy,
   title: attach_title_formy,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.docx',
   },
 );
 
@@ -67,8 +67,8 @@ KonspektAttachment attach_planowanie_strategii_i_dzialan = KonspektAttachment(
   name: attach_name_planowanie_strategii_i_dzialan,
   title: attach_title_planowanie_strategii_i_dzialan,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_planowanie_strategii_i_dzialan.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_planowanie_strategii_i_dzialan.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_planowanie_strategii_i_dzialan.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_planowanie_strategii_i_dzialan.docx',
   },
 );
 
@@ -79,8 +79,8 @@ KonspektAttachment attach_scenariusze = KonspektAttachment(
   name: attach_name_scenariusze,
   title: attach_title_scenariusze,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_harc_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.docx',
   },
 );
 
@@ -196,8 +196,8 @@ KonspektMaterial material_zal_przypinki = KonspektMaterial(
 );
 
 Konspekt struktura_i_ksztaltowanie_duchowosci = Konspekt(
-  name: 'struktura_i_ksztaltowanie_duchowosci',
-  title: 'Struktura i kształtowanie duchowości',
+  name: konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci,
+  title: konspekt_kszt_title_struktura_i_ksztaltowanie_duchowosci,
   additionalSearchPhrases: [
     'wychowanie duchowe'
   ],
