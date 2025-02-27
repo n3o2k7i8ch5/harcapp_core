@@ -22,6 +22,7 @@ class KonspektThumbnailWidget extends StatelessWidget{
   final bool colorizeLeftSide;
   final double radius;
   final bool showSummary;
+  final bool showPartOf;
   final void Function()? onTap;
 
   const KonspektThumbnailWidget(
@@ -31,6 +32,7 @@ class KonspektThumbnailWidget extends StatelessWidget{
         this.colorizeLeftSide = true,
         this.radius = AppCard.bigRadius,
         this.showSummary = true,
+        this.showPartOf = true,
         this.onTap, 
         super.key
       });
@@ -104,7 +106,7 @@ class KonspektThumbnailWidget extends StatelessWidget{
                               ),
                             ),
 
-                            if(konspekt.partOf != null)
+                            if(showPartOf && konspekt.partOf != null)
                               SizedBox(
                                 width: 1.5*2*Dimen.textSizeBig,
                                 height: 2*Dimen.textSizeBig,
