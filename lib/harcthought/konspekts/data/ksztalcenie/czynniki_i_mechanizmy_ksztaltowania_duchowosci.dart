@@ -83,7 +83,7 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
       content: '<p style="text-align:justify;">'
           'Prowadzący, na podstawie załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci wyjaśnia uczestnikom czym są czynniki duchowości.'
           '<br>'
-          '<br>Kwestie te są opisane w części "wstęp", oraz "analogie" poradnika i wystarczy je opowiedzieć uczestnikom własnymi słowami.'
+          '<br>Kwestie te są opisane w części "wstęp" poradnika i wystarczy je opowiedzieć uczestnikom własnymi słowami.'
           '</p>'
   ),
 
