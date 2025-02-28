@@ -207,16 +207,6 @@ List<HarcForm> allForms = [
   ),
 
   HarcForm(
-      filename: 'beretowa',
-      title: 'Beretówa',
-      icon: MdiIcons.accountCowboyHatOutline,
-      metos: [Meto.harc, Meto.hs, Meto.wedro],
-      tags: [HarcFormTag.zespolowe, HarcFormTag.ruchowe, HarcFormTag.kontuzjogenne],
-      colorStart: Colors.green,
-      colorEnd: Colors.deepPurple
-  ),
-
-  HarcForm(
       filename: 'dzwig_zespolowy',
       title: 'Dźwig zespołowy',
       icon: MdiIcons.crane,
