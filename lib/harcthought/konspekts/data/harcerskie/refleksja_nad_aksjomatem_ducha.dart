@@ -17,7 +17,10 @@ Konspekt refleksja_nad_aksjomatem_ducha = const Konspekt(
     KonspektSphere.duch: KonspektSphereDetails(
         levels: {
           KonspektSphereLevel.duchAksjomaty: {
-            aksjoRozwazanieSensuICeluZycia: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+            aksjoRozwazanieSensuICeluZycia: {
+              KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+              KonspektSphereFactor.duchWlasnaRefleksja,
+            },
           },
         }
     )
