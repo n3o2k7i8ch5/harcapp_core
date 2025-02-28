@@ -164,6 +164,7 @@ enum KonspektSphereFactor{
   duchNormalizacja,
   duchOczekiwaniaAutorytetu,
   duchOpowiescPrzewodnia,
+  duchPrzestrzenSemantyczna,
   duchPrzykladWlasnyAutorytetow,
   duchWartosciWtorne,
   duchWlasnaRefleksja,
@@ -176,6 +177,7 @@ enum KonspektSphereFactor{
       case duchNormalizacja: return 'Normalizacja';
       case duchOczekiwaniaAutorytetu: return 'Oczekiwania Uznanego Autorytetu';
       case duchOpowiescPrzewodnia: return 'Opowieść Przewodnia';
+      case duchPrzestrzenSemantyczna: return 'Przestrzeń Semantyczna';
       case duchPrzykladWlasnyAutorytetow: return 'Przykład Własny Autorytetów';
       case duchWartosciWtorne: return 'Wartości Wtórne';
       case duchWlasnaRefleksja: return 'Własna Refleksja';

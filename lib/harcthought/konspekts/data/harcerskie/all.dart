@@ -758,6 +758,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                   KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                   KonspektSphereFactor.duchWlasnaRefleksja,
                   KonspektSphereFactor.duchNormalizacja,
+                  KonspektSphereFactor.duchPrzestrzenSemantyczna,
                 }
               },
             }
@@ -1120,6 +1121,7 @@ List<Konspekt> allHarcerskieKonspekts = [
               "Dyskutowane wartości": {
                 KonspektSphereFactor.duchNormalizacja,
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                KonspektSphereFactor.duchPrzestrzenSemantyczna,
               }
             },
           },
@@ -1276,7 +1278,10 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchWartosci: {
-              "Wartości własne i współuczestników": {KonspektSphereFactor.duchWlasnaRefleksja},
+              "Wartości własne i współuczestników": {
+                KonspektSphereFactor.duchWlasnaRefleksja,
+                KonspektSphereFactor.duchPrzestrzenSemantyczna,
+              },
               postawaRozumienieObcychPogladow: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
             }
           },
@@ -1516,6 +1521,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                 KonspektSphereFactor.duchWlasnaRefleksja,
                 KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPrzestrzenSemantyczna,
               }
             },
           }
@@ -1951,6 +1957,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
                 KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPrzestrzenSemantyczna,
               }
             },
             KonspektSphereLevel.duchWartosci: {
@@ -1958,6 +1965,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
                 KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPrzestrzenSemantyczna,
               }
             },
           }
@@ -2014,6 +2022,7 @@ List<Konspekt> allHarcerskieKonspekts = [
               "Dyskutowane wartości": {
                 KonspektSphereFactor.duchNormalizacja,
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                KonspektSphereFactor.duchPrzestrzenSemantyczna,
               }
             },
           },
