@@ -126,13 +126,13 @@ flutter:
     - assets/konspekty/ksztalcenie/
     - assets/konspekty/ksztalcenie/czynniki_i_mechanizmy_ksztaltowania_duchowosci/
     - assets/konspekty/ksztalcenie/dwie_roty_dwoch_przyrzeczen_harcerskich/
-    - assets/konspekty/ksztalcenie/struktura_i_ksztaltowanie_duchowosci/
-    - assets/konspekty/ksztalcenie/struktura_i_ksztaltowanie_duchowosci_old/
+    - assets/konspekty/ksztalcenie/struktura_duchowosci/
+    - assets/konspekty/ksztalcenie/struktura_duchowosci_old/
     - assets/konspekty/ksztalcenie/wstep_do_wychowania_duchowego/
 
     - assets/poradnik/czynniki_i_mechanizmy_ksztaltowania_duchowosci/
     - assets/poradnik/dwie_roty_dwoch_przyrzeczen_harcerskich/
-    - assets/poradnik/o_strukturze_i_ksztaltowaniu_duchowosci/
+    - assets/poradnik/o_strukturze_duchowosci/
 
     - assets/wiersze/
 

@@ -1,5 +1,5 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
-import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/struktura_i_ksztaltowanie_duchowosci.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/warsztaty_wychowania_duchowego.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people.dart';
 
@@ -27,7 +27,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
     author: DANIEL_IWANICKI,
     aims: wstep_do_wychowania_duchowego_aims,
     attachments: [
-      attach_o_strukturze_i_ksztaltowaniu_duchowosci,
+      attach_o_strukturze_duchowosci,
       attach_poziomy_duchowosci,
       attach_neutralnosc_duchowa_przyklady,
       attach_cel_wychowania_duchowego_zhp_statut,
@@ -37,8 +37,8 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
     materials: [
 
       KonspektMaterial(
-        name: 'Dostępny do przygotowania merytorycznego $attach_title_o_strukturze_i_ksztaltowaniu_duchowosci',
-        attachmentName: attach_name_o_strukturze_i_ksztaltowaniu_duchowosci,
+        name: 'Dostępny do przygotowania merytorycznego $attach_title_o_strukturze_duchowosci',
+        attachmentName: attach_name_o_strukturze_duchowosci,
       ),
 
       KonspektMaterial(
@@ -218,5 +218,5 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       step_szybkie_strzaly_dyskusyjne
 
     ],
-  partOf: konspekt_kszt_struktura_i_ksztaltowanie_duchowosci
+  partOf: konspekt_kszt_warsztaty_wychowania_duchowego
 );

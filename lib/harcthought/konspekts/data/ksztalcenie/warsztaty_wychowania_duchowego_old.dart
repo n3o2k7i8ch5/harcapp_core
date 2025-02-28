@@ -1,11 +1,11 @@
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common_attachments.dart';
-import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/struktura_i_ksztaltowanie_duchowosci.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/warsztaty_wychowania_duchowego.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
 
 
-const konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old = 'struktura_i_ksztaltowanie_duchowosci_old';
+const konspekt_kszt_name_warsztaty_wychowania_duchowego_old = 'warsztaty_wychowania_duchowego_old';
 
 
 const String attach_html_mechanizmy_posrednie = '<a href="$attach_name_mechanizmy_posrednie@attachment">$attach_title_mechanizmy_posrednie</a>';
@@ -15,8 +15,8 @@ KonspektAttachment attach_mechanizmy_posrednie = KonspektAttachment(
   name: attach_name_mechanizmy_posrednie,
   title: attach_title_mechanizmy_posrednie,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_mechanizmy_posrednie.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_mechanizmy_posrednie.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_mechanizmy_posrednie.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_mechanizmy_posrednie.docx',
   },
 );
 
@@ -27,8 +27,8 @@ KonspektAttachment attach_antyprzyklady = KonspektAttachment(
   name: attach_name_antyprzyklady,
   title: attach_title_antyprzyklady,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_antyprzyklady.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci_old/$attach_name_antyprzyklady.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_antyprzyklady.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_antyprzyklady.docx',
   },
 );
 
@@ -45,8 +45,8 @@ KonspektMaterial material_zal_antyprzyklady = KonspektMaterial(
     amount: 1
 );
 
-Konspekt struktura_i_ksztaltowanie_duchowosci_old = Konspekt.oldFrom(
-  konspekt_kszt_struktura_i_ksztaltowanie_duchowosci,
+Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
+  konspekt_kszt_warsztaty_wychowania_duchowego,
   attachments: [
     attach_mechanizmy_posrednie,
     attach_antyprzyklady,
@@ -172,7 +172,7 @@ Konspekt struktura_i_ksztaltowanie_duchowosci_old = Konspekt.oldFrom(
           material_zal_mechanizmy_posrednie,
         ],
         content: '<p style="text-align:justify;">'
-            'Prowadzący opisuje ostatni pośredni mechanizm kształtowania duchowości, czyli <b>Opowieść Przewodnią</b> na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci. Podobnie jak w przypadku poprzednich mechanizmów, do pozostałych dodaje przy tym odpowiadającą kartkę z załącznika $attach_html_mechanizmy_posrednie'
+            'Prowadzący opisuje ostatni pośredni mechanizm kształtowania duchowości, czyli <b>Opowieść Przewodnią</b> na podstawie poradnika $attach_html_o_strukturze_duchowosci. Podobnie jak w przypadku poprzednich mechanizmów, do pozostałych dodaje przy tym odpowiadającą kartkę z załącznika $attach_html_mechanizmy_posrednie'
             '<br>'
             '<br><i>Opowieść Przewodnia jest szczególnie silnym mechanizmem w momencie <b>rozpoczęcia integracji świadomej</b>, jednak gra rolę także później. Jest to opowieść, nadająca człowiekowi tożsamość, sens i cel.'
             '<br>'

@@ -9,8 +9,8 @@ import 'common_wychowanie_duchowe.dart';
 import 'czynniki_i_mechanizmy_ksztaltowania_duchowosci.dart';
 
 
-const konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci = 'struktura_i_ksztaltowanie_duchowosci';
-const konspekt_kszt_title_struktura_i_ksztaltowanie_duchowosci = 'Struktura i kształtowanie duchowości';
+const konspekt_kszt_name_warsztaty_wychowania_duchowego = 'warsztaty_wychowania_duchowego';
+const konspekt_kszt_title_warsztaty_wychowania_duchowego = 'Warsztaty wychowania duchowego';
 
 
 const String attach_html_przyklady_poziomow_duchowosci = '<a href="$attach_name_przyklady_poziomow_duchowosci@attachment">$attach_title_przyklady_poziomow_duchowosci</a>';
@@ -20,8 +20,8 @@ KonspektAttachment attach_przyklady_poziomow_duchowosci = KonspektAttachment(
   name: attach_name_przyklady_poziomow_duchowosci,
   title: attach_title_przyklady_poziomow_duchowosci,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_przyklady_poziomow_duchowosci.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_przyklady_poziomow_duchowosci.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_przyklady_poziomow_duchowosci.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_przyklady_poziomow_duchowosci.docx',
   },
 );
 
@@ -32,8 +32,8 @@ KonspektAttachment attach_scenariusz_fantomowe_dzialania_wychowawcze = KonspektA
   name: attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
   title: attach_title_scenariusz_fantomowe_dzialania_wychowawcze,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.docx',
   },
 );
 
@@ -44,8 +44,8 @@ KonspektAttachment attach_formy = KonspektAttachment(
   name: attach_name_formy,
   title: attach_title_formy,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_formy.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_formy.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_formy.docx',
   },
 );
 
@@ -56,8 +56,8 @@ KonspektAttachment attach_planowanie_strategii_i_dzialan = KonspektAttachment(
   name: attach_name_planowanie_strategii_i_dzialan,
   title: attach_title_planowanie_strategii_i_dzialan,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_planowanie_strategii_i_dzialan.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_planowanie_strategii_i_dzialan.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_planowanie_strategii_i_dzialan.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_planowanie_strategii_i_dzialan.docx',
   },
 );
 
@@ -68,14 +68,14 @@ KonspektAttachment attach_scenariusze = KonspektAttachment(
   name: attach_name_scenariusze,
   title: attach_title_scenariusze,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci/$attach_name_scenariusze.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_scenariusze.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_scenariusze.docx',
   },
 );
 
-KonspektMaterial material_poradnik_o_strukturze_i_ksztaltowaniu_duchowosci = KonspektMaterial(
-  name: 'Dostępny do przygotowania merytorycznego $attach_title_o_strukturze_i_ksztaltowaniu_duchowosci',
-  attachmentName: attach_name_o_strukturze_i_ksztaltowaniu_duchowosci,
+KonspektMaterial material_poradnik_o_strukturze_duchowosci = KonspektMaterial(
+  name: 'Dostępny do przygotowania merytorycznego $attach_title_o_strukturze_duchowosci',
+  attachmentName: attach_name_o_strukturze_duchowosci,
 );
 
 KonspektMaterial material_identyfikator = KonspektMaterial(
@@ -177,9 +177,9 @@ KonspektMaterial material_zal_przypinki = KonspektMaterial(
     amountAttendantFactor: 1
 );
 
-Konspekt konspekt_kszt_struktura_i_ksztaltowanie_duchowosci = Konspekt(
-  name: konspekt_kszt_name_struktura_i_ksztaltowanie_duchowosci,
-  title: konspekt_kszt_title_struktura_i_ksztaltowanie_duchowosci,
+Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
+  name: konspekt_kszt_name_warsztaty_wychowania_duchowego,
+  title: konspekt_kszt_title_warsztaty_wychowania_duchowego,
   additionalSearchPhrases: [
     'wychowanie duchowe'
   ],
@@ -197,7 +197,7 @@ Konspekt konspekt_kszt_struktura_i_ksztaltowanie_duchowosci = Konspekt(
     'Wykształcenie u uczestników zrozumienia i zdolności do tworzenia strategii rozwoju duchowego.',
   ],
     attachments: [
-      attach_o_strukturze_i_ksztaltowaniu_duchowosci,
+      attach_o_strukturze_duchowosci,
       attach_poziomy_duchowosci,
       attach_neutralnosc_duchowa_przyklady,
       attach_cel_wychowania_duchowego_zhp_statut,
@@ -213,7 +213,7 @@ Konspekt konspekt_kszt_struktura_i_ksztaltowanie_duchowosci = Konspekt(
     ],
     materials: [
 
-      material_poradnik_o_strukturze_i_ksztaltowaniu_duchowosci,
+      material_poradnik_o_strukturze_duchowosci,
 
       material_identyfikator,
 

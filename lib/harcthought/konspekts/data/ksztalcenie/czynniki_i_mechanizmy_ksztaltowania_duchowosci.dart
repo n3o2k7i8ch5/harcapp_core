@@ -1,7 +1,7 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
-import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/struktura_i_ksztaltowanie_duchowosci.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/warsztaty_wychowania_duchowego.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/poradnik/data.dart';
 import 'package:harcapp_core/values/people.dart';
@@ -185,5 +185,5 @@ Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt
   materials: materials_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   summary: 'Uczestnicy rozgrywają między sobą bieganą familiadę, by na podstawie krótkich historii określić, które czynniki rozwoju duchowości są w nich opisane.',
   steps: steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-  partOf: konspekt_kszt_struktura_i_ksztaltowanie_duchowosci
+  partOf: konspekt_kszt_warsztaty_wychowania_duchowego
 );

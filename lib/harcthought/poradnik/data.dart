@@ -111,11 +111,11 @@ Poradnik poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich = Poradnik(
   ),
 );
 
-const String poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci = "o_strukturze_i_ksztaltowaniu_duchowosci";
-const String poradnik_title_o_strukturze_i_ksztaltowaniu_duchowosci = "O strukturze i kształtowaniu duchowości";
-Poradnik poradnik_o_strukturze_i_ksztaltowaniu_duchowosci = Poradnik(
-  name: poradnik_name_o_strukturze_i_ksztaltowaniu_duchowosci,
-  title: poradnik_title_o_strukturze_i_ksztaltowaniu_duchowosci,
+const String poradnik_name_o_strukturze_duchowosci = "o_strukturze_duchowosci";
+const String poradnik_title_o_strukturze_duchowosci = "O strukturze duchowości";
+Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
+  name: poradnik_name_o_strukturze_duchowosci,
+  title: poradnik_title_o_strukturze_duchowosci,
   pageCount: 30,
   description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące m.in. zagadnienia:'
       '\n'
@@ -130,7 +130,7 @@ Poradnik poradnik_o_strukturze_i_ksztaltowaniu_duchowosci = Poradnik(
       '\nJakie mechanizmy i zjawiska wpływają na rozwój duchowy?'
       '\n'
       '\nJak w sposób skuteczny pracować nad duchowością młodego człowieka?',
-  coverTitle: 'O STRUKTURZE\nI KSZTAŁTOWANIU\nDUCHOWOŚCI',
+  coverTitle: 'O STRUKTURZE\nDUCHOWOŚCI',
   formats: [FileFormat.pdf, FileFormat.docx],
   titleColor: Colors.black,
   coverTitleBuilder: (context, poradnik, width, height) => Column(
@@ -138,7 +138,7 @@ Poradnik poradnik_o_strukturze_i_ksztaltowaniu_duchowosci = Poradnik(
     children: [
 
       Text(
-        'O STRUKTURZE\nI KSZTAŁTOWANIU\nDUCHOWOŚCI',
+        'O STRUKTURZE\nDUCHOWOŚCI',
         style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
             fontSize: height*Poradnik.mainTitleHeightFactor,
@@ -173,5 +173,5 @@ Poradnik poradnik_o_strukturze_i_ksztaltowaniu_duchowosci = Poradnik(
 List<Poradnik> allPoradniks = [
   poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich,
-  poradnik_o_strukturze_i_ksztaltowaniu_duchowosci
+  poradnik_o_strukturze_duchowosci
 ];

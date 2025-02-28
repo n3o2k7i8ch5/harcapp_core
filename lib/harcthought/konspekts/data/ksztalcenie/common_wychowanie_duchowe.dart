@@ -55,11 +55,11 @@ KonspektStep step_sfery_rozwoju_i_ich_relacje = KonspektStep(
     duration: Duration(minutes: 15),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci wprowadza podział człowieka na 5 sfer rozwoju - 4 sfery funkcjonalne: <b>ciało</b>, <b>umysł</b>, <b>emocje</b>, <b>relacje</b> i jedną sferę centralną: sferę <b>ducha</b>.'
+        'Prowadzący na podstawie poradnika $attach_html_o_strukturze_duchowosci wprowadza podział człowieka na 5 sfer rozwoju - 4 sfery funkcjonalne: <b>ciało</b>, <b>umysł</b>, <b>emocje</b>, <b>relacje</b> i jedną sferę centralną: sferę <b>ducha</b>.'
         '<br>'
         '<br>Prowadzący opisuje zależności między sferami - sfery funkcjonalne dostarczają człowiekowi <b>zdolności</b>, zaś sfera ducha jest <b>sposobem</b> ich zarządzania.'
         '<br>'
-        '<br>Jeżeli prowadzący uzna, że poprawi to poziom zrozumienia, może skorzystać z analogii opisanej sfer funkcjonalnych i centralnych do samochodu i kierowcy opisanego w załączniku $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci.'
+        '<br>Jeżeli prowadzący uzna, że poprawi to poziom zrozumienia, może skorzystać z analogii opisanej sfer funkcjonalnych i centralnych do samochodu i kierowcy opisanego w załączniku $attach_html_o_strukturze_duchowosci.'
         '<br>'
         '<br>Następnie prowadzący hasłowo wymienia uczestnikom kilka elementów poszczególnych sfer i prosi uczestników o podanie do jakiej sfery należą, np.:'
         '</p>'
@@ -132,7 +132,7 @@ KonspektStep step_poziomy_duchowosci = KonspektStep(
     duration: Duration(minutes: 15),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie pradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>aksjomatu</b>, poziom <b>wartości</b>, poziom <b>postaw</b> i poziom <b>zachowań</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika $attach_html_poziomy_duchowosci. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
+        'Prowadzący na podstawie pradnika $attach_html_o_strukturze_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>aksjomatu</b>, poziom <b>wartości</b>, poziom <b>postaw</b> i poziom <b>zachowań</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika $attach_html_poziomy_duchowosci. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
         '<br>'
         '<br>Dodatkowo prowadzący definiuje duchowość <b>wymierną</b> (poziom zachowań i postaw) i <b>głęboką</b> (poziom wartości i aksjomatów).'
         '<br>'
@@ -222,7 +222,7 @@ KonspektStep step_integracja_duchowosci = KonspektStep(
     duration: Duration(minutes: 15),
     activeForm: false,
     contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci opisuje <b>etapy rozwoju duchowego</b>:'
+        'Prowadzący na podstawie poradnika $attach_html_o_strukturze_duchowosci opisuje <b>etapy rozwoju duchowego</b>:'
         '</p>'
         '<ul>'
         '<li><p style="text-align:justify;">Do 9. roku życia dzieci są zdolne rozumieć jedynie właściwe <b>zachowania</b>, na podstawie których kregują swoje <b>postawy</b>.</p></li>'
@@ -271,7 +271,7 @@ KonspektStep step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektStep
     duration: Duration(minutes: 15),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej implementacją i formą przekazu - <b>kulturą</b> i jej elementami - <b>tradycjami</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
+        'Prowadzący na podstawie poradnika $attach_html_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej implementacją i formą przekazu - <b>kulturą</b> i jej elementami - <b>tradycjami</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
         '<br>'
         '<br>Prowadzący może zobrazować dylemat tego <i>"jak ściśle trzymać się tradycji"</i> w sposób następujący:'
         '<br>'
@@ -303,7 +303,7 @@ KonspektStep step_duchowosc_religia_religijnosc = KonspektStep(
     duration: Duration(minutes: 20),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie załącznika $attach_html_o_strukturze_i_ksztaltowaniu_duchowosci definiuje religię:'
+        'Prowadzący na podstawie załącznika $attach_html_o_strukturze_duchowosci definiuje religię:'
         '<br>'
         '<br>Religia jest duchowością powszechną. <b>Religia nie jest “dodatkiem” do duchowości, ale jest określoną duchowością</b> - ma określone aksjomaty i wartości, określone sposoby jej (religii jako duchowość) integracji.'
         '<br>'
