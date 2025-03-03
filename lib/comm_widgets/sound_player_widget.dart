@@ -46,13 +46,12 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
   bool get isWeb => widget.isWebAsset;
 
   late AudioPlayer audioPlayer;
-  late Duration totalDuration;
 
   void _initAudioTrack() async {
     if(isWeb)
-      totalDuration = (await audioPlayer.setUrl(source))??Duration.zero;
+      await audioPlayer.setUrl(source);
     else
-      totalDuration = (await audioPlayer.setAsset(source))??Duration.zero;
+      await audioPlayer.setAsset(source);
 
     setState(() {});
   }
@@ -99,13 +98,14 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
                   final PositionData? positionData = snapshot.data;
                   if(positionData == null)
                     return Container();
-                  
+
+
                   return Align(
                     alignment: Alignment.topLeft,
                     child: Container(
                       color: backgroundIcon_(context),
                       height: Dimen.iconFootprint,
-                      width: (positionData.position.inMicroseconds/totalDuration.inMilliseconds)*constraints.maxWidth,
+                      width: (positionData.position.inMicroseconds/audioPlayer.duration!.inMilliseconds)*constraints.maxWidth,
                     ),
                   );
                 },
