@@ -105,7 +105,7 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
                     child: Container(
                       color: backgroundIcon_(context),
                       height: Dimen.iconFootprint,
-                      width: (positionData.position.inMicroseconds/audioPlayer.duration!.inMilliseconds)*constraints.maxWidth,
+                      width: (positionData.position.inMilliseconds/audioPlayer.duration!.inMilliseconds)*constraints.maxWidth,
                     ),
                   );
                 },
