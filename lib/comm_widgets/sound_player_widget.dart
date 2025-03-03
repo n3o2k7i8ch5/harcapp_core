@@ -1,13 +1,16 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/network.dart';
 import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
+import 'package:harcapp_core/comm_widgets/seek_bar.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/values/strings.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import 'package:rxdart/rxdart.dart';
 
 class SoundPlayerWidget extends StatefulWidget{
 
@@ -16,14 +19,11 @@ class SoundPlayerWidget extends StatefulWidget{
   final String source;
   final String? name;
   final bool isWebAsset;
-  final bool autoStart;
 
   const SoundPlayerWidget({
     required this.source,
     required this.name,
     required this.isWebAsset,
-    this.autoStart = false,
-
     super.key
   });
 
@@ -37,32 +37,41 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
   String get source => widget.source;
   String? get name => widget.name;
   bool get isWeb => widget.isWebAsset;
-  bool get autoStart => widget.autoStart;
 
-  late AssetsAudioPlayer assetsAudioPlayer;
+  late AudioPlayer audioPlayer;
 
   @override
   void initState() {
 
-    assetsAudioPlayer = AssetsAudioPlayer();
-    assetsAudioPlayer.open(
-        isWeb?
-        Audio.network(source):
-        Audio(source),
-        autoStart: autoStart
-    );
-    assetsAudioPlayer.playlistAudioFinished.listen((Playing playing) {
-      if (mounted) setState(() {});
+    audioPlayer = AudioPlayer();
+    if(isWeb)
+      audioPlayer.setUrl(source);
+    else
+      audioPlayer.setAsset(source);
+
+    audioPlayer.playerStateStream.listen((state) {
+      if (state == ProcessingState.completed && mounted) setState(() {});
     });
+
     super.initState();
   }
 
   @override
   void dispose() {
-    assetsAudioPlayer.stop();
-    assetsAudioPlayer.dispose();
+    audioPlayer.stop();
+    audioPlayer.dispose();
     super.dispose();
   }
+
+  /// Collects the data useful for displaying in a seek bar, using a handy
+  /// feature of rx_dart to combine the 3 streams of interest into one.
+  Stream<PositionData> get _positionDataStream =>
+      Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
+          audioPlayer.positionStream,
+          audioPlayer.bufferedPositionStream,
+          audioPlayer.durationStream,
+              (position, bufferedPosition, duration) => PositionData(
+              position, bufferedPosition, duration ?? Duration.zero));
 
   @override
   Widget build(BuildContext context) =>
@@ -70,32 +79,46 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
           builder: (BuildContext context, BoxConstraints constraints) => Stack(
             children: [
 
-              if(assetsAudioPlayer.current.valueOrNull != null)
-                PlayerBuilder.currentPosition(
-                    player: assetsAudioPlayer,
-                    builder: (context, duration) => Container(
-                      color: backgroundIcon_(context),
-                      height: Dimen.iconFootprint,
-                      width: (duration.inMilliseconds/assetsAudioPlayer.current.value!.audio.duration.inMilliseconds)*constraints.maxWidth,
-                    )
-                ),
+              StreamBuilder<PositionData>(
+                stream: _positionDataStream,
+                builder: (context, snapshot) {
+                  final positionData = snapshot.data;
+                  return SeekBar(
+                    duration: positionData?.duration ?? Duration.zero,
+                    position: positionData?.position ?? Duration.zero,
+                    bufferedPosition:
+                    positionData?.bufferedPosition ?? Duration.zero,
+                    onChangeEnd: audioPlayer.seek,
+                  );
+                },
+              ),
+
+              // if(audioPlayer.current.valueOrNull != null)
+              //   PlayerBuilder.currentPosition(
+              //       player: audioPlayer,
+              //       builder: (context, duration) => Container(
+              //         color: backgroundIcon_(context),
+              //         height: Dimen.iconFootprint,
+              //         width: (duration.inMilliseconds/audioPlayer.current.value!.audio.duration.inMilliseconds)*constraints.maxWidth,
+              //       )
+              //   ),
 
               Row(
                 children: [
 
                   AppButton(
                     icon: Icon(
-                        assetsAudioPlayer.isPlaying.value?
+                        audioPlayer.playing?
                         MdiIcons.pause:
                         MdiIcons.play
                     ),
                     onTap: () async {
-                      if(isWeb && !await isNetworkAvailable() && !assetsAudioPlayer.isPlaying.value) {
+                      if(isWeb && !await isNetworkAvailable() && !audioPlayer.playing) {
                         showAppToast(context, text: noInternetMessage);
                         return;
                       }
 
-                      await assetsAudioPlayer.playOrPause();
+                      await audioPlayer.playing?audioPlayer.pause():audioPlayer.play();
                       if(mounted) setState((){});
                     },
                   ),
@@ -106,15 +129,15 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
 
                   AppButton(
                     icon: Icon(MdiIcons.rewind),
-                    onLongPress: assetsAudioPlayer.isPlaying.value?
+                    onLongPress: audioPlayer.playing?
                     (){
-                      assetsAudioPlayer.seek(Duration.zero);
+                      audioPlayer.seek(Duration.zero);
                       if(mounted) showAppToast(context, text: 'Od początku!', duration: const Duration(seconds: 1));
                       if(mounted) setState((){});
                     }: null,
-                    onTap: assetsAudioPlayer.isPlaying.value?
+                    onTap: audioPlayer.playing?
                     () async {
-                      await assetsAudioPlayer.seekBy(const Duration(seconds: -2));
+                      await audioPlayer.seek(audioPlayer.position - const Duration(seconds: 2));
                       if(mounted) showAppToast(context, text: '-2 sekundy', duration: const Duration(seconds: 1));
                       if(mounted) setState((){});
                     }: null,
@@ -123,9 +146,9 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
                   AppButton(
                     icon: Icon(MdiIcons.fastForward),
                     onTap:
-                    assetsAudioPlayer.isPlaying.value?
+                    audioPlayer.playing?
                     () async {
-                      await assetsAudioPlayer.seekBy(const Duration(seconds: 2));
+                      await audioPlayer.seek(audioPlayer.position + const Duration(seconds: 2));
                       if(mounted) showAppToast(context, text: '+2 sekundy', duration: const Duration(seconds: 1));
                       if(mounted) setState((){});
                     }: null,
