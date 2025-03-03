@@ -100,10 +100,13 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
                   if(positionData == null)
                     return Container();
                   
-                  return Container(
-                    color: backgroundIcon_(context),
-                    height: Dimen.iconFootprint,
-                    width: (positionData.position.inMicroseconds/totalDuration.inMilliseconds)*constraints.maxWidth,
+                  return Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      color: backgroundIcon_(context),
+                      height: Dimen.iconFootprint,
+                      width: (positionData.position.inMicroseconds/totalDuration.inMilliseconds)*constraints.maxWidth,
+                    ),
                   );
                 },
               ),
