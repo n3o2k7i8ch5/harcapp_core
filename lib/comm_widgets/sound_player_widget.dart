@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/network.dart';
 import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
-import 'package:harcapp_core/comm_widgets/seek_bar.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/values/strings.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:rxdart/rxdart.dart';
+
+class PositionData {
+  final Duration position;
+  final Duration bufferedPosition;
+  final Duration duration;
+
+  PositionData(this.position, this.bufferedPosition, this.duration);
+}
 
 class SoundPlayerWidget extends StatefulWidget{
 
@@ -38,15 +46,22 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
   bool get isWeb => widget.isWebAsset;
 
   late AudioPlayer audioPlayer;
+  late Duration totalDuration;
 
+  void _initAudioTrack() async {
+    if(isWeb)
+      totalDuration = (await audioPlayer.setUrl(source))??Duration.zero;
+    else
+      totalDuration = (await audioPlayer.setAsset(source))??Duration.zero;
+
+    setState(() {});
+  }
+  
   @override
   void initState() {
 
     audioPlayer = AudioPlayer();
-    if(isWeb)
-      audioPlayer.setUrl(source);
-    else
-      audioPlayer.setAsset(source);
+    _initAudioTrack();
 
     audioPlayer.playerStateStream.listen((state) {
       if (state == ProcessingState.completed && mounted) setState(() {});
@@ -81,26 +96,17 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
               StreamBuilder<PositionData>(
                 stream: _positionDataStream,
                 builder: (context, snapshot) {
-                  final positionData = snapshot.data;
-                  return SeekBar(
-                    duration: positionData?.duration ?? Duration.zero,
-                    position: positionData?.position ?? Duration.zero,
-                    bufferedPosition:
-                    positionData?.bufferedPosition ?? Duration.zero,
-                    onChangeEnd: audioPlayer.seek,
+                  final PositionData? positionData = snapshot.data;
+                  if(positionData == null)
+                    return Container();
+                  
+                  return Container(
+                    color: backgroundIcon_(context),
+                    height: Dimen.iconFootprint,
+                    width: (positionData.position.inMicroseconds/totalDuration.inMilliseconds)*constraints.maxWidth,
                   );
                 },
               ),
-
-              // if(audioPlayer.current.valueOrNull != null)
-              //   PlayerBuilder.currentPosition(
-              //       player: audioPlayer,
-              //       builder: (context, duration) => Container(
-              //         color: backgroundIcon_(context),
-              //         height: Dimen.iconFootprint,
-              //         width: (duration.inMilliseconds/audioPlayer.current.value!.audio.duration.inMilliseconds)*constraints.maxWidth,
-              //       )
-              //   ),
 
               Row(
                 children: [
