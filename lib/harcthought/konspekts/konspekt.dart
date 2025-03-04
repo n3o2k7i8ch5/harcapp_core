@@ -508,7 +508,7 @@ class Konspekt{
     this.customDuration,  // if null, `duration` will be calculated from the steps' duration.
     required this.aims,
     this.materials,
-    this.summary,
+    required this.summary,
     this.intro,
     this.description,
     this.howToFail,

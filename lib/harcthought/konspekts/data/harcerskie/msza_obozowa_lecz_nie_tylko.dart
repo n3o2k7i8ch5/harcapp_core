@@ -58,7 +58,7 @@ Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
     'Zaangażowanie uczestników w przygotowanie Mszy Świętej.',
     'Świadome przeżycie Mszy Świętej'
   ],
-
+  summary: 'Uczestnicy przygotowują oprawę Mszy (ołtarz, krzyż, pieśni, czytania, służbę liturgiczną), zaś przed samą mszą zapoznają się z ewangelią i krótko o niej rozmawiają.',
   description: '<p style="text-align:justify;">'
       'Sens wychowawczy Mszy leży zarówno w samym <b>uczestnictwie</b> we Mszy Świętej jak i w <b>przygotowaniu</b> się do niej. '
       '<br>'

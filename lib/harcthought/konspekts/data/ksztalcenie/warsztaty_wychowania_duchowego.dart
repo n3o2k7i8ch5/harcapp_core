@@ -268,6 +268,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_zal_przypinki,
 
     ],
+    summary: 'Uczestnicy pochylają się nad zagadnieniem tego, czym jest duchowość, jakie mechanizmy nią rządzą oraz czy może być ona "neutralna".',
     steps: [
 
       KonspektStep(

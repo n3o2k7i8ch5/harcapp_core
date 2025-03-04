@@ -86,6 +86,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       ),
 
     ],
+    summary: 'Uczestnicy pochylają się nad zagadnieniem tego, czym jest duchowość, jakie mechanizmy nią rządzą i jak w praktyce prowadzić wychowanie duchowe.',
     steps: [
 
       KonspektStep(
@@ -218,5 +219,5 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       step_szybkie_strzaly_dyskusyjne
 
     ],
-  partOf: konspekt_kszt_warsztaty_wychowania_duchowego
+    partOf: konspekt_kszt_warsztaty_wychowania_duchowego
 );

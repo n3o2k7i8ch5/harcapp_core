@@ -914,6 +914,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Stworzenie możliwości znalezienia potencjalnego kapelana'
       ],
       customDuration: Duration(hours: 2),
+      summary: 'Kadra drużyny (drużynowy, przyboczni, zastępowi) co jakiś czas uczestniczy wspólnie we Mszy w trakcie roku harcerskiego "po cywilu".',
       description: '<p style="text-align:justify;">Forma polega na wspólnym, okresowym (np. co drugi tydzień lub raz na miesiąc) wyjściu kadrą drużyny (drużynowy, przyboczni, zastępowi) na mszę. Forma ma sens tylko, jeśli relacje w drużynie są ku temu stosowne.'
           '<br>'
           '<br>Sens formy polega przede wszystkim na wyniesieniu religii ze sfery “prywatnej” to “wspólnej” oraz na możliwości zbudowania wokół formy tradycji (gadanie o wrażeniach po mszy na kebaba, frytach, lodach - np. za fundusze drużyny).'
@@ -1251,6 +1252,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Budowanie u uczestników poczucia elitarności środowiska',
         'Budowanie reprezentatywności środowiska'
       ],
+      summary: 'Uczestnicy otrzymują osobisty mundur harcerski i stają się odpowiedzialni, by na czas uroczystości (codzienny apel, Msza, wydarzenia harcerskie) wyglądać w nim schludnie oraz by dbać o mundur gdy nie noszą go na sobie.',
       description: '<p style="text-align:justify;">Dbałość o musztrę odbywa się poprzez jej regularną praktykę, oczekiwanie od harcerzy wysokich standardów i dbanie o to, by znaczenie komend było dla nich jasne, klarowne i zrozumiałe.'
           '<br>'
           '<br>Dbałość o umundurowanie odbywa się po pierwsze przez przykład własny kadry, po drugie przez regularne sprawdzanie jakości umundurowania harcerzy (np. noszenie jednolitych spodni, butów, posiadanie beretów, pierścieni, porządne przyszywanie plakietek i sprawności, odpowiednie wkładanie dołu noszonej koszulki mundurowej do spodni lub spódnicy, zapinanie wszystkich guzików, także w spodniach). Można uwzględniać z tego tytułu punkty do współzawodnictwa indywidualnego.'
@@ -1632,6 +1634,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         aimHartDuchaWedrowanie,
         aimUmiejetnoscWedrowania,
       ],
+      summary: 'Uczestnicy udają się na wędrówkę do miejsca związanego w jakiś sposób z wiarą. Po drodze odbywają się formy zwiazane z refleksją, modlitwą itp..',
       description: '<p style="text-align:justify;">Wariant <a href="wedrowka@harcerskie.konspekt">Wędrówki</a> lub <a href="wedrowka_medytacyjna@harcerskie.konspekt">Wędrówki medytacyjnej</a> o tematyce religijnej.'
           '<br>'
           '<br>Wskazane jest, by cel pielgrzymki był określony i w jakiś sposób religijnie istotny. Samą wędrówkę warto podzielić na części i dywersyfikować ich formy wykorzystując np.: śpiewanie, rozważania, luźne rozmowy, milczenie.'
@@ -1937,6 +1940,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         aimPraktykaModlitwy,
       ],
       customDuration: Duration(hours: 36),
+      summary: 'Uczestnicy udają się na rajd rowerowy do miejsca noclegu. Po drodze odbywają odwiedzają znalezione wcześniej przydrożne kapliczki, przy których kolejno inne osoby prowadzą krótką modlitwę wspólnie z drużyną.',
       description: '<p style="text-align:justify;">Uczestnicy udają się na rowerach na wycieczkę po zaplanowanej trasie, podczas której odwiedzają znalezione wcześniej kapliczki. Przy każdej z kapliczek drużyna się zatrzymuje i kolejna z osób prowadzi krótką modlitwę.'
           '<br>'
           '<br>Warto, aby docelowym punktem podróży było miejsce, gdzie będzie można przenocować - szkoła, chata, las na hamakowisko, pole namiotowe nad rzeką, etc..</p>'
@@ -2038,6 +2042,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Stworzenie prowadzącemu okazji do przemycenia swojej opinii na temat omawianych wartości i postaw',
         aimUmiejetnoscDyskusji,
       ],
+      summary: 'Uczestnicy wcielają się w adwokatów i oskarżycieli, by rozstrzygnąć hipotetyczną, problematyczną sytuację opisaną z perspektywy osoby trzeciej.',
       description: '<p style="text-align:justify;">Prowadzący opisuje hipotetyczną, problematyczną sytuację z perspektywy jakiejś osoby oraz sposób, w jaki jej uczestnicy ją rozwiązali. Następnie harcerze muszą ocenić jak owa sytuacja powinna zostać prawidłowo rozwiązana i dlaczego.'
           '<br>'
           '<br>Prowadzący powinien w ramach tej formy przygotować mównicę. Polemika powinna odbywać się jedynie z mównicy, zaś rolą prowadzącego jest pilnowanie porządku, udzielenia głosu i w kluczowych momentach zadawanie pytań kierujących uczestników na pomijane przez nich aspekty omawianego dylematu.'
@@ -2122,6 +2127,7 @@ List<Konspekt> allHarcerskieKonspekts = [
             amount: 5
         ),
       ],
+      summary: 'Uczestnicy próbują przesłać sobie zaszyfrowaną wiadomość w środowisku odwzorowującym internet, po czym spisują zasady odpowiedzialnego korzystania z urządzeń mobilnych (smartfonów).',
       intro: '<p style="text-align:justify;">Zajęcia i ich cele opierają się na założeniu, że zarówno z punktu widzenia procesu wychowawczego jak i z atrakcyjności harcerstwa i relacji dla samych harcerzy, sytuacja w której członkowie drużyny domyślnie spędzają czas na telefonie by szukać rozrywki jest gorsza względem sytuacji w której uczestnicy są skupieni na sobie.</p>',
       steps: [
         KonspektStep(
@@ -2494,6 +2500,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       aims: [
         'Uporządkowanie życia i pomoc w pracy nad sobą przez uczestników'
       ],
+      summary: 'Uczestnik wybiera księdza, u którego chciałby się regularnie spowiadać.',
       description: '<p style="text-align:justify;">Uczestnik znajduje duchownego, u którego będzie mógł się regularnie spowiadać. Forma ta jest "spowiedzią dla zaawansowanych". Ważne, by nie był to pierwszy napotkany ksiądz, ale by była to osoba, z którą uczestnik dobrze się rozumie i której ufa - najlepiej jeżeli będzie uczestnik formy będzie miał okazję poznać duchownego także prywatnie, nie tylko jako “dostarczyciela sakramentów”.</p>'
   ),
 
@@ -2559,7 +2566,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       ),
 
     ],
-    description: null,
+    summary: 'Uczestnicy w dwóch grupach rozgrywają "warunkowe warcaby" - mogą zrobić ruch jesli dobrze przypiszą sznur do funkcji.',
     steps: [
       KonspektStep(
           title: 'Podział na grupy',
@@ -2740,6 +2747,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Kształtowanie u uczestników hartu ducha poprzez wstawanie w nocy na wartę, walkę z sennością, wartowaniem w chłodnej temperaturze',
         'Kształtowanie uważności uczestników poprzez spędzenie czasu w ciszy, w izolacji od bodźców dnia codziennego'
       ],
+      summary: 'Uczestnicy w min. dwuosobowych grupach pełnią wymiennie nocną wartę, strzegąc obozowiska przed nieproszonymi gośćmi.',
       description: '<p style="text-align:justify;">Harcerze w dwuosobowych grupach podczas formy wyjazdowej pełnią wartę na terenie obozowania w celu zapewnienia bezpieczeństwa śpiącym uczestnikom od zewnętrznych czynników.'
           '<br>'
           '<br>Formę można z korzyścią połączyć z <a href="nocne_podkradanie@harcerskie.konspekt">nocnym podkradaniem</a>.</p>'
@@ -3215,6 +3223,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Kształtowanie u uczestników hartu ducha poprzez funkcjonowanie w warunkach obniżonego komfortu',
         'Budowanie u uczestników wspólnoty poprzez codzienne funkcjonowanie na ograniczonej przestrzeni'
       ],
+      summary: 'Uczestnicy spędzają formę obozową lub biwakową pod namiotem nie mając dostępu do bieżącej wody, prądu, czy wygód życia w budynku.',
       description: '<p style="text-align:justify;">Głównym źródłem skuteczności formy jest funkcjonowanie uczestników w warunkach obniżonego komfortu: brak możliwości ogrzania namiotu, brak dobrego światła w namiocie, brak całkowitej izolacji od warunków atmosferycznych (głównie deszczu i upału), obecność robaczków, komarów, pająków, wszechobecność ściółki i kurzu, konieczność korzystania z zewnętrznej latryny, ograniczona przestrzeń na rzeczy w namiocie i brak możliwości całkowitego odizolowania się od pozostałych mieszkańców namiotu.</p>'
   ),
 
@@ -3238,6 +3247,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       aims: [
         aimHartDuchaZimno
       ],
+      summary: 'Uczestnicy odbywają w trakcie zimowiska apel przed ośrodkiem mając na sobie jedynie mundury.',
       description: '<p style="text-align:justify;">Podczas zimowej formy wyjazdowej (obóz lub zimowisko) drużyna codziennie przeprowadza apele na zewnątrz na śniegu. Ponadto w bardzo czytelny sposób obrazuje harcerzom dlaczego dyscyplina jest ważna - jeżeli nie chcą marznąć, muszą sprawnie działać.'
           '<br>'
           '<br>Warto także rozważyć prowadzenie apelu bez kurtek z widocznym mundurem, jeśli mróz nie jest za duży.</p>'
