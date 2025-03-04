@@ -11,7 +11,7 @@ import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/person_card.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
-import 'package:harcapp_core/harcthought/konspekts/konspekt_thumbnail_widget.dart';
+import 'package:harcapp_core/harcthought/konspekts/konspekt_tile_widget.dart';
 
 import '../common.dart';
 import '../konspekt.dart';
@@ -198,12 +198,12 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 Align(
                   alignment: Alignment.centerLeft,
                   child: SizedBox(
-                    height: KonspektThumbnailWidget.defHeight,
+                    height: KonspektTileWidget.defHeight,
                     width: widget.thumbnailWidth,
-                    child: KonspektThumbnailWidget(
+                    child: KonspektTileWidget(
                         konspekt.partOf!,
                         background: widget.thumbnailBackground,
-                        radius: widget.thumbnailRadius??KonspektThumbnailWidget.defRadius,
+                        radius: widget.thumbnailRadius??KonspektTileWidget.defRadius,
                         showSummary: false,
                         onTap: widget.onThumbnailTap == null?null:() => widget.onThumbnailTap!.call(konspekt.partOf!),
                     ),

@@ -12,7 +12,7 @@ import 'package:harcapp_core/tag/tags_widget.dart';
 
 import 'konspekt.dart';
 
-class KonspektThumbnailWidget extends StatelessWidget{
+class KonspektTileWidget extends StatelessWidget{
 
   static const double defHeight = 140;
   static const double defRadius = AppCard.bigRadius;
@@ -24,9 +24,10 @@ class KonspektThumbnailWidget extends StatelessWidget{
   final double radius;
   final bool showSummary;
   final bool showPartOf;
+  final bool showSpheres;
   final void Function()? onTap;
 
-  const KonspektThumbnailWidget(
+  const KonspektTileWidget(
       this.konspekt,
       { this.elevation = 0, 
         this.background,
@@ -34,6 +35,7 @@ class KonspektThumbnailWidget extends StatelessWidget{
         this.radius = defRadius,
         this.showSummary = true,
         this.showPartOf = true,
+        this.showSpheres = true,
         this.onTap, 
         super.key
       });
@@ -138,7 +140,8 @@ class KonspektThumbnailWidget extends StatelessWidget{
 
                         Expanded(child: Container()),
 
-                        KonspektSphereList(konspekt)
+                        if(showSpheres)
+                          KonspektSphereList(konspekt)
 
                       ],
                     )
