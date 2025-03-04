@@ -150,12 +150,14 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               ),
             ),
 
+          if(widget.leading != null)
+            SliverList(delegate: SliverChildListDelegate([
+              widget.leading!
+            ])),
+
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
             sliver: SliverList(delegate: SliverChildListDelegate([
-
-              if(widget.leading != null)
-                widget.leading!,
 
               const SizedBox(height: Dimen.sideMarg),
 

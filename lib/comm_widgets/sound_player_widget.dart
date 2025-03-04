@@ -79,12 +79,14 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
   /// Collects the data useful for displaying in a seek bar, using a handy
   /// feature of rx_dart to combine the 3 streams of interest into one.
   Stream<PositionData> get _positionDataStream =>
-      Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
-          audioPlayer.positionStream,
-          audioPlayer.bufferedPositionStream,
-          audioPlayer.durationStream,
-              (position, bufferedPosition, duration) => PositionData(
-              position, bufferedPosition, duration ?? Duration.zero));
+    Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
+      audioPlayer.positionStream,
+      audioPlayer.bufferedPositionStream,
+      audioPlayer.durationStream,
+      (position, bufferedPosition, duration) => PositionData(
+        position, bufferedPosition, duration ?? Duration.zero
+      )
+    );
 
   @override
   Widget build(BuildContext context) =>
@@ -98,7 +100,6 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
                   final PositionData? positionData = snapshot.data;
                   if(positionData == null)
                     return Container();
-
 
                   return Align(
                     alignment: Alignment.topLeft,
