@@ -24,6 +24,8 @@ import 'step_widget.dart';
 
 class BaseKonspektWidget extends StatefulWidget{
 
+  static const double horizontalPadding = Dimen.sideMarg;
+
   final Konspekt konspekt;
   final bool withAppBar;
   final void Function()? onDuchLevelInfoTap;
@@ -156,7 +158,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             ])),
 
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
+            padding: const EdgeInsets.symmetric(horizontal: BaseKonspektWidget.horizontalPadding),
             sliver: SliverList(delegate: SliverChildListDelegate([
 
               const SizedBox(height: Dimen.sideMarg),
