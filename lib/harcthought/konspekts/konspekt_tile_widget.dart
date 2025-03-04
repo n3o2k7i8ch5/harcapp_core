@@ -124,12 +124,12 @@ class KonspektTileWidget extends StatelessWidget{
                           ],
                         ),
 
-                        if(showSummary && konspekt.summary != null)
+                        if(showSummary)
                           Expanded(
                               child: Padding(
                                 padding: EdgeInsets.only(top: 6.0),
                                 child: Text(
-                                  konspekt.summary!,
+                                  konspekt.summary,
                                   style: AppTextStyle(
                                     fontSize: Dimen.textSizeNormal,
                                     color: textDisab_(context),

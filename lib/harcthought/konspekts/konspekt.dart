@@ -426,7 +426,7 @@ class Konspekt{
   final Duration? customDuration;
   final List<String> aims;
   final List<KonspektMaterial>? materials;
-  final String? summary;
+  final String summary;
   final String? intro;
   final String? description;
   final List<String>? howToFail;
