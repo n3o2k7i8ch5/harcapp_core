@@ -134,7 +134,7 @@ class KonspektTileWidget extends StatelessWidget{
                                     fontSize: Dimen.textSizeNormal,
                                     color: textDisab_(context),
                                   ),
-                                  maxLines: null,
+                                  maxLines: 4,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               )
