@@ -97,7 +97,7 @@ enum KonspektSphereLevel{
   duchWartosci,
   duchPostawy,
 
-  duchHartDucha,
+  duchSilaCharakteru,
   duchZdolnoscRefleksyjna,
 
   other;
@@ -108,7 +108,7 @@ enum KonspektSphereLevel{
       case duchWartosci: return 'Wartości';
       case duchPostawy: return 'Postawy';
 
-      case duchHartDucha: return 'Hart Ducha';
+      case duchSilaCharakteru: return 'Siła Charakteru';
       case duchZdolnoscRefleksyjna: return 'Zdolność Refleksyjna';
 
       case other: return 'Inne';
@@ -122,7 +122,7 @@ enum KonspektSphereLevel{
       case duchWartosci: return Colors.orange;
       case duchPostawy: return Colors.deepPurpleAccent;
 
-      case duchHartDucha: return Colors.red;
+      case duchSilaCharakteru: return Colors.red;
       case duchZdolnoscRefleksyjna: return Colors.teal;
 
       case other: return Colors.black;
@@ -135,7 +135,7 @@ enum KonspektSphereLevel{
       case duchWartosci: return pdf.PdfColors.orange;
       case duchPostawy: return pdf.PdfColors.deepPurpleAccent;
 
-      case duchHartDucha: return pdf.PdfColors.red;
+      case duchSilaCharakteru: return pdf.PdfColors.red;
       case duchZdolnoscRefleksyjna: return pdf.PdfColors.teal;
 
       case other: return pdf.PdfColors.black;
@@ -163,7 +163,7 @@ enum KonspektSphereFactor{
   duchBezposrednieDoswiadczenie,
   duchNormalizacja,
   duchOczekiwaniaAutorytetu,
-  duchOpowiescPrzewodnia,
+  duchMetanarracja,
   duchPrzestrzenSemantyczna,
   duchPrzykladWlasnyAutorytetow,
   duchWartosciWtorne,
@@ -176,7 +176,7 @@ enum KonspektSphereFactor{
       case duchBezposrednieDoswiadczenie: return 'Bezpośrednie Doświadczenie';
       case duchNormalizacja: return 'Normalizacja';
       case duchOczekiwaniaAutorytetu: return 'Oczekiwania Uznanego Autorytetu';
-      case duchOpowiescPrzewodnia: return 'Opowieść Przewodnia';
+      case duchMetanarracja: return 'Metanarracja';
       case duchPrzestrzenSemantyczna: return 'Przestrzeń Semantyczna';
       case duchPrzykladWlasnyAutorytetow: return 'Przykład Własny Autorytetów';
       case duchWartosciWtorne: return 'Wartości Wtórne';

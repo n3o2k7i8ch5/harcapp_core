@@ -27,8 +27,8 @@ const String aimUmiejetnoscNegocjowania = 'Kształtowanie u uczestników umiejet
 const String aimUmiejetnoscWedrowania = 'Kształtowanie u uczestników umiejętności sprawnego wędrowania';
 
 
-const String aimHartDuchaWedrowanie = 'Kształtowanie u uczestników hartu ducha przez trudy wędrówki (dystans, pogoda, noszenie plecaków)';
-const String aimHartDuchaZimno = 'Kształtowanie u uczestników hartu ducha przez wychodzenie z komfortu termicznego';
+const String aimSilaCharakteruWedrowanie = 'Kształtowanie u uczestników siły charakteru przez trudy wędrówki (dystans, pogoda, noszenie plecaków)';
+const String aimSilaCharakteruZimno = 'Kształtowanie u uczestników siły charakteru przez wychodzenie z komfortu termicznego';
 const String aimPostawaOdpowiedzialnosciZaCzynny = 'Kształtowanie u uczestników postawy odpowiedzialności za swoje czyny i decyzje';
 const String aimWlasnaSprawczosc = 'Kształtowanie u uczestników wiary w swoją sprawczość';
 const String aimOtwartoscNaInterakcje = 'Kształtowanie u uczestników postawy otwartości na interakcję z innymi ludźmi';
@@ -70,7 +70,7 @@ List<Konspekt> allHarcerskieKonspekts = [
               }
             },
 
-            ...levelHartDucha
+            ...levelSilaCharakteru
           }
         )
       },
@@ -81,7 +81,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         aimPostawaWspolpracy,
         aimSzacunekDlaSprawnosciFizycznej,
         aimSzacunekDlaSkutecznegoDzialania,
-        'Kształtowanie u uczestników hartu ducha - działania pomimo drobnych zadrapań, wybitych palców, etc.'
+        'Kształtowanie u uczestników siły charakteru - działania pomimo drobnych zadrapań, wybitych palców, etc.'
       ],
       materials: [
         KonspektMaterial(
@@ -400,7 +400,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
               },
             },
-            ...levelHartDucha
+            ...levelSilaCharakteru
           }
         ),
         KonspektSphere.relacje: KonspektSphereDetails(
@@ -674,7 +674,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
-            ...levelHartDucha
+            ...levelSilaCharakteru
           }
         ),
         KonspektSphere.relacje: KonspektSphereDetails(
@@ -689,11 +689,11 @@ List<Konspekt> allHarcerskieKonspekts = [
       coverAuthor: '',
       author: DANIEL_IWANICKI,
       aims: [
-        aimHartDuchaZimno
+        aimSilaCharakteruZimno
       ],
       summary: 'Drużyna podczas wyjazdu myje się w jeziorze zamiast w cywilizowanych warunkach.',
 
-      description: '<p style="text-align:justify;">Podczas formy wyjazdowej (obóz lub zimowisko) drużyna aby się umyć kąpie się w jeziorze. Jeziora w Polsce są wieczorami chłodne co kształtuje hart ducha. Forma ta pozwala także zaobserwować prowadzącemu łatwość, z jaką harcerze przełamują się i wskakują do wody, działa przy tym efekt wzajemności oddziaływań.'
+      description: '<p style="text-align:justify;">Podczas formy wyjazdowej (obóz lub zimowisko) drużyna aby się umyć kąpie się w jeziorze. Jeziora w Polsce są wieczorami chłodne co kształtuje siłę charakteru. Forma ta pozwala także zaobserwować prowadzącemu łatwość, z jaką harcerze przełamują się i wskakują do wody, działa przy tym efekt wzajemności oddziaływań.'
           '<br>'
           '<br>Należy mieć na uwadze, że z czasem uczestnicy przyzwyczają się wskakiwać do zimnej wody. Wówczas forma ta przestanie spełniać swój cel.</p>'
   ),
@@ -718,7 +718,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
               },
             },
-            ...levelHartDucha
+            ...levelSilaCharakteru
           },
         )
       },
@@ -727,7 +727,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       author: DANIEL_IWANICKI,
       aims: [
         aimUmiejetnoscWedrowania,
-        aimHartDuchaWedrowanie,
+        aimSilaCharakteruWedrowanie,
         aimPraktykaModlitwy
       ],
       summary: 'Uczestnicy przechodzą w nocy drogę krzyżową rozłożoną na dystansie kilkudziesięciu kilometrów.',
@@ -1023,14 +1023,14 @@ List<Konspekt> allHarcerskieKonspekts = [
             KonspektSphereLevel.duchWartosci: {
               wartoscWspolnota: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
             },
-            ...levelHartDucha
+            ...levelSilaCharakteru
           }
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
       aims: [
-        'Hart ducha poprzez funkcjonowanie w warunkach trudów lasu',
+        'Kształtowanie siły charakteru poprzez funkcjonowanie w warunkach trudów lasu',
         'Budowanie wspólnoty poprzez eliminację elektroniki i ciągłe funkcjonowanie w grupie',
         'Kształtowanie uważności poprzez niemal całkowitą możliwość eliminacji szumu informacyjnego i technologii',
         'Stworzenie przestrzeni na realizację znaczącej liczby zajęć',
@@ -1239,7 +1239,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie
               }
             },
-            ...levelHartDucha
+            ...levelSilaCharakteru
           }
         )
       },
@@ -1451,7 +1451,7 @@ List<Konspekt> allHarcerskieKonspekts = [
               KonspektSphereFactor.duchOczekiwaniaAutorytetu,
             }
           },
-          ...levelHartDucha
+          ...levelSilaCharakteru
         }
       )
     },
@@ -1562,7 +1562,7 @@ List<Konspekt> allHarcerskieKonspekts = [
             KonspektSphereLevel.duchWartosci: {
               wartoscWspolnota: {KonspektSphereFactor.duchOczekiwaniaAutorytetu, KonspektSphereFactor.duchWzajemnoscOddzialywan}
             },
-            ...levelHartDucha
+            ...levelSilaCharakteru
           }
         )
       },
@@ -1622,7 +1622,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchNormalizacja,
               }
             },
-            ...levelHartDucha
+            ...levelSilaCharakteru
           }
         )
       },
@@ -1631,7 +1631,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       author: DANIEL_IWANICKI,
       aims: [
         aimPraktykaModlitwy,
-        aimHartDuchaWedrowanie,
+        aimSilaCharakteruWedrowanie,
         aimUmiejetnoscWedrowania,
       ],
       summary: 'Uczestnicy udają się na wędrówkę do miejsca związanego w jakiś sposób z wiarą. Po drodze odbywają się formy zwiazane z refleksją, modlitwą itp..',
@@ -1829,7 +1829,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
-            ...levelHartDucha
+            ...levelSilaCharakteru
           }
         )
       },
@@ -1837,10 +1837,10 @@ List<Konspekt> allHarcerskieKonspekts = [
       coverAuthor: 'Freepik (QuadGraphics)',
       author: DANIEL_IWANICKI,
       aims: [
-        'Kształtowanie u uczestników hartu ducha'
+        'Kształtowanie u uczestników siły charakteru'
       ],
       summary: 'Uczestnicy dobrowolnie wstrzymują się od jedzenia przez określony czas.',
-      description: '<p style="text-align:justify;">Uczestnicy dobrowolnie wstrzymują się od jedzenia przez określony czas (np. przez dobę) w otoczeniu osób jedzących. Celem formy jest kształtowanie hartu ducha i siły woli - jest, przykładowo, częścią sprawności “trzy pióra”.'
+      description: '<p style="text-align:justify;">Uczestnicy dobrowolnie wstrzymują się od jedzenia przez określony czas (np. przez dobę) w otoczeniu osób jedzących. Celem formy jest kształtowanie siły charakteru i siły woli - jest, przykładowo, częścią sprawności “trzy pióra”.'
           '<br>'
           '<br>Post nie musi dotyczyć całkowitego powstrzymania się od jedzenia. Może np. być realizowany poprzez jedzenie jedynie warzyw, jedzenie jedynie chleba, albo niejedzenie cukru.</p>'
   ),
@@ -2736,7 +2736,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchWzajemnoscOddzialywan
               }
             },
-            ...levelHartDucha
+            ...levelSilaCharakteru
           }
         )
       },
@@ -2744,7 +2744,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       coverAuthor: 'Daniel Iwanicki',
       author: DANIEL_IWANICKI,
       aims: [
-        'Kształtowanie u uczestników hartu ducha poprzez wstawanie w nocy na wartę, walkę z sennością, wartowaniem w chłodnej temperaturze',
+        'Kształtowanie u uczestników siły charakteru poprzez wstawanie w nocy na wartę, walkę z sennością, wartowaniem w chłodnej temperaturze',
         'Kształtowanie uważności uczestników poprzez spędzenie czasu w ciszy, w izolacji od bodźców dnia codziennego'
       ],
       summary: 'Uczestnicy w min. dwuosobowych grupach pełnią wymiennie nocną wartę, strzegąc obozowiska przed nieproszonymi gośćmi.',
@@ -2774,7 +2774,7 @@ List<Konspekt> allHarcerskieKonspekts = [
               postawaUwaznosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
               postawaOdpowiedzialnosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
             },
-            ...levelHartDucha
+            ...levelSilaCharakteru
           }
         ),
         KonspektSphere.umysl: KonspektSphereDetails(
@@ -2787,14 +2787,14 @@ List<Konspekt> allHarcerskieKonspekts = [
       coverAuthor: 'Daniel Iwanicki',
       author: DANIEL_IWANICKI,
       aims: [
-        aimHartDuchaWedrowanie,
+        aimSilaCharakteruWedrowanie,
         aimUmiejetnoscWedrowania,
         'Stworzenie naturalnej okazji do dyskusji na ważne tematy'
       ],
       summary: 'Uczestnicy udają się wspólnie na wędrówkę do wyznaczonego miejsca, podczas której powstają natualne okazje do rozmów, wzajemnej pomocy i sprawdzenia zdolności terenoznawczych.',
       description: '<p style="text-align:justify;">Prowadzący wyznacza określoną trasę (samemu lub we współudziale uczestników), uczestnicy przygotowują niezbędny ekwipunek potrzebny do marszu i ew. obozowania, po czym uczestnicy wraz z prowadzącym udają się w trasę.'
           '<br>'
-          '<br>Forma, jeżeli odbywa się w odpowiednio dostosowanych warunkach, wpływa znakomicie na hart ducha zwłaszcza, jeśli pomimo trudności nie ma możliwości skrócenia trasy, bo celem jest dojście do noclegu. Głównym mechanizmem hartu ducha jest konfrontacja uczestnika z własnymi oporami (takimi jak: zmęczenie, spocenie, dyskomfort termiczny, ciążenie plecaka), które musi przezwyciężyć, by nie znaleźć się w sytuacji dużo trudniejszej niż ta w której jest teraz (perspektywa przedłużenia obecnego stanu bez uzyskania czegokolwiek w zamian).'
+          '<br>Forma, jeżeli odbywa się w odpowiednio dostosowanych warunkach, wpływa znakomicie na siłę charakteru zwłaszcza, jeśli pomimo trudności nie ma możliwości skrócenia trasy, bo celem jest dojście do noclegu. Głównym mechanizmem kształtowania siły charakteru jest konfrontacja uczestnika z własnymi oporami (takimi jak: zmęczenie, spocenie, dyskomfort termiczny, ciążenie plecaka), które musi przezwyciężyć, by nie znaleźć się w sytuacji dużo trudniejszej niż ta w której jest teraz (perspektywa przedłużenia obecnego stanu bez uzyskania czegokolwiek w zamian).'
           '<br>'
           '<br>Odpowiednio długa wędrówka pozwala także wpaść w swego rodzaju trans, mantrę stawiania kroków i wyciszenia umysłu. W sposób oczywisty wpływa także na rozwój sfery ciała.</p>'
   ),
@@ -2821,7 +2821,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 postawaOdpowiedzialnosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
                 postawaOtwartoscNaLudzi: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
               },
-              ...levelHartDucha
+              ...levelSilaCharakteru
             }
         ),
         KonspektSphere.umysl: KonspektSphereDetails(
@@ -2834,7 +2834,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       coverAuthor: 'Freepik (DenisW)',
       author: DANIEL_IWANICKI,
       aims: [
-        aimHartDuchaWedrowanie,
+        aimSilaCharakteruWedrowanie,
         aimUmiejetnoscWedrowania,
         aimPostawaOdpowiedzialnosciZaCzynny,
         aimWlasnaSprawczosc,
@@ -2866,7 +2866,7 @@ List<Konspekt> allHarcerskieKonspekts = [
               postawaSkupienie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
               postawaUwaznosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
             },
-            ...levelHartDucha
+            ...levelSilaCharakteru
           },
         )
       },
@@ -3063,7 +3063,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchWzajemnoscOddzialywan
               },
             },
-            ...levelHartDucha
+            ...levelSilaCharakteru
           }
         ),
         KonspektSphere.relacje: KonspektSphereDetails(
@@ -3080,7 +3080,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       author: DANIEL_IWANICKI,
       customDuration: Duration(minutes: 1),
       aims: [
-        'Kształtowanie u uczestników hartu ducha poprzez nieprzyjemne praktyki',
+        'Kształtowanie u uczestników siły charakteru poprzez nieprzyjemne praktyki',
         'Kształtowanie u uczestników wartości funkcjonowania we wspólnocie poprzez wspólny trud',
         'Stwarzanie prowadzącemu okazji do wyśmiania alkoholu',
         'Kształtowanie u uczestników postaw dbania o zdrowie',
@@ -3212,7 +3212,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchWzajemnoscOddzialywan
               }
             },
-            ...levelHartDucha
+            ...levelSilaCharakteru
           },
         )
       },
@@ -3220,7 +3220,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       coverAuthor: 'Daniel Iwanicki',
       author: DANIEL_IWANICKI,
       aims: [
-        'Kształtowanie u uczestników hartu ducha poprzez funkcjonowanie w warunkach obniżonego komfortu',
+        'Kształtowanie u uczestników siły charakteru poprzez funkcjonowanie w warunkach obniżonego komfortu',
         'Budowanie u uczestników wspólnoty poprzez codzienne funkcjonowanie na ograniczonej przestrzeni'
       ],
       summary: 'Uczestnicy spędzają formę obozową lub biwakową pod namiotem nie mając dostępu do bieżącej wody, prądu, czy wygód życia w budynku.',
@@ -3237,7 +3237,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
-            ...levelHartDucha
+            ...levelSilaCharakteru
           },
         )
       },
@@ -3245,7 +3245,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       coverAuthor: 'Daniel Iwanicki',
       author: DANIEL_IWANICKI,
       aims: [
-        aimHartDuchaZimno
+        aimSilaCharakteruZimno
       ],
       summary: 'Uczestnicy odbywają w trakcie zimowiska apel przed ośrodkiem mając na sobie jedynie mundury.',
       description: '<p style="text-align:justify;">Podczas zimowej formy wyjazdowej (obóz lub zimowisko) drużyna codziennie przeprowadza apele na zewnątrz na śniegu. Ponadto w bardzo czytelny sposób obrazuje harcerzom dlaczego dyscyplina jest ważna - jeżeli nie chcą marznąć, muszą sprawnie działać.'

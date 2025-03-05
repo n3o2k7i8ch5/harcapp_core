@@ -78,12 +78,12 @@ const String relPrzyznanieSieDoBledow = "Umiejętność przyznania się do błę
 const String relBudowanieWspolnotyPrzezIntensywneDoswiadczenia = "Budowanie wspólnoty przez intensywne doświadczenia";
 const String relBudowanieWspolnotyAksjomatu = "Budowanie wspólnoty aksjomatu";
 
-// Hart ducha
-const String hartFuncjonowanieMimoNiewygody = "Funkcjonowanie mimo niewygody";
+// Siła charakteru
+const String silaCharakteruFuncjonowanieMimoNiewygody = "Funkcjonowanie mimo niewygody";
 
-const Map levelHartDucha = {
-  KonspektSphereLevel.duchHartDucha: {
-    hartFuncjonowanieMimoNiewygody: {
+const Map levelSilaCharakteru = {
+  KonspektSphereLevel.duchSilaCharakteru: {
+    silaCharakteruFuncjonowanieMimoNiewygody: {
       KonspektSphereFactor.duchBezposrednieDoswiadczenie,
     }
   }
@@ -115,7 +115,7 @@ const Map<KonspektSphere, KonspektSphereDetails> spheresLogiczne = {
             KonspektSphereFactor.duchWzajemnoscOddzialywan
           },
         },
-        ...levelHartDucha
+        ...levelSilaCharakteru
       }
   ),
 };

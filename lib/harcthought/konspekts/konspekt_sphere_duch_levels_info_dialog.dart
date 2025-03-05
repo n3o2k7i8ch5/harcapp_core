@@ -135,16 +135,16 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                     children: [
 
                       Text(
-                        KonspektSphereLevel.duchHartDucha.displayName,
+                        KonspektSphereLevel.duchSilaCharakteru.displayName,
                         style: AppTextStyle(
-                            color: KonspektSphereLevel.duchHartDucha.color,
+                            color: KonspektSphereLevel.duchSilaCharakteru.color,
                             fontWeight: weight.bold,
                             fontSize: Dimen.textSizeBig
                         ),
                       ),
                       const SizedBox(height: Dimen.defMarg),
                       const AppText(
-                        'Hart ducha (siła charakteru) to zdolność do postępowania zgodnie z tym, co uważa się za słuszne pomimo niesprzyjających okoliczności: fizycznego trudu, kosztu finansowego, ostracyzmu społecznego, itd..',
+                        'Siła charakteru (hart ducha) to zdolność do postępowania zgodnie z tym, co uważa się za słuszne pomimo niesprzyjających okoliczności: fizycznego trudu, kosztu finansowego, ostracyzmu społecznego, itd..',
                         size: Dimen.textSizeNormal,
                         height: 1.2,
                       ),

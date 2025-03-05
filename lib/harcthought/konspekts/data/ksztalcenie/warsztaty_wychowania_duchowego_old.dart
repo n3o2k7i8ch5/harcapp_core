@@ -165,16 +165,16 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
     ),
 
     KonspektStep(
-        title: 'Praktyka wychowania duchowego - Opowieść Przewodnia',
+        title: 'Praktyka wychowania duchowego - Metanarracja',
         duration: Duration(minutes: 10),
         activeForm: false,
         materials: [
           material_zal_mechanizmy_posrednie,
         ],
         content: '<p style="text-align:justify;">'
-            'Prowadzący opisuje ostatni pośredni mechanizm kształtowania duchowości, czyli <b>Opowieść Przewodnią</b> na podstawie poradnika $attach_html_o_strukturze_duchowosci. Podobnie jak w przypadku poprzednich mechanizmów, do pozostałych dodaje przy tym odpowiadającą kartkę z załącznika $attach_html_mechanizmy_posrednie'
+            'Prowadzący opisuje ostatni pośredni mechanizm kształtowania duchowości, czyli <b>Metanarrację</b> na podstawie poradnika $attach_html_o_strukturze_duchowosci. Podobnie jak w przypadku poprzednich mechanizmów, do pozostałych dodaje przy tym odpowiadającą kartkę z załącznika $attach_html_mechanizmy_posrednie'
             '<br>'
-            '<br><i>Opowieść Przewodnia jest szczególnie silnym mechanizmem w momencie <b>rozpoczęcia integracji świadomej</b>, jednak gra rolę także później. Jest to opowieść, nadająca człowiekowi tożsamość, sens i cel.'
+            '<br><i>Metanarracja jest szczególnie silnym mechanizmem w momencie <b>rozpoczęcia integracji świadomej</b>, jednak gra rolę także później. Jest to opowieść, nadająca człowiekowi tożsamość, sens i cel.'
             '<br>'
             '<br>Na przykład:</i>'
             '</p>'
@@ -187,7 +187,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
             '</ul>'
 
             '<p style="text-align:justify;">'
-            'Prowadzący zwraca uwagę, że harcerstwo też może nosić znaczenie Opowieści Przewodniej, szczególnie dla młodej kadry i instruktorów, którzy wierzą, że na ich barkach spoczywa wychowanie i szczęście młodych ludzi.'
+            'Prowadzący zwraca uwagę, że harcerstwo też może nosić znamiona elementów <b>metanarracji</b>, szczególnie dla młodej kadry i instruktorów, którzy wierzą, że na ich barkach spoczywa wychowanie i szczęście młodych ludzi.'
             '<br>'
             '<br>Warto także zwrócić uwagę, że harcerstwo może nosić znamiona subkutlury: ma swoje obrzędy, symbole, wartości i ścisłe gorono. Widać to przykładowo po harcerzach, którzy chodzą na każdą zbiórkę, jeżdżą na każdy wyjazd, uczą się po nocach grać Kaczmarskiego na gitarze, a do szkoły w bojówkach i harcerskim pasie. Owo zaangażowanie i tożsamość może być niezwykle efektywnym mechanizmem kształtowania duchowości.'
             '</p>',
