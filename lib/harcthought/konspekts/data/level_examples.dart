@@ -101,7 +101,7 @@ const Map<KonspektSphere, KonspektSphereDetails> spheresLogiczne = {
       levels: {
         KonspektSphereLevel.duchPostawy: {
           postawaUwaznosc: {
-            KonspektSphereFactor.duchNormalizacja,
+            KonspektSphereFactor.duchPerspektywa_Normalizacja,
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchWartosciWtorne,
             KonspektSphereFactor.duchWzajemnoscOddzialywan
@@ -109,7 +109,7 @@ const Map<KonspektSphere, KonspektSphereDetails> spheresLogiczne = {
         },
         KonspektSphereLevel.duchWartosci: {
           wartoscBystrosc: {
-            KonspektSphereFactor.duchNormalizacja,
+            KonspektSphereFactor.duchPerspektywa_Normalizacja,
             KonspektSphereFactor.duchWartosciWtorne,
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchWzajemnoscOddzialywan

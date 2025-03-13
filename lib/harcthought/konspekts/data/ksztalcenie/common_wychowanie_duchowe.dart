@@ -13,6 +13,18 @@ KonspektMaterial material_zal_poziomy_duchowosci = KonspektMaterial(
     amount: 1
 );
 
+KonspektMaterial material_zal_meta_narracja_opis = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_meta_narracja_opis”',
+    attachmentName: attach_name_meta_narracja_opis,
+    amount: 1
+);
+
+KonspektMaterial material_zal_meta_narracja_przyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_meta_narracja_przyklady”',
+    attachmentName: attach_name_meta_narracja_przyklady,
+    amount: 1
+);
+
 KonspektMaterial material_flipchart = KonspektMaterial(
   name: 'Duży arkusz papieru (flipchart)',
   amount: 1,
@@ -26,7 +38,8 @@ KonspektMaterial material_marker = KonspektMaterial(
 KonspektMaterial material_zal_neutralnosc_duchowa_przyklady = KonspektMaterial(
   name: 'Wydrukowany załącznik “$attach_title_neutralnosc_duchowa_przyklady”',
   attachmentName: attach_name_neutralnosc_duchowa_przyklady,
-  amount: 1
+  amount: 1,
+  additionalPreparation: 'Załącznik należy pociąć na 4 części zgodnie z ramkami.'
 );
 
 KonspektMaterial material_zal_cel_wychowania_duchowego_zhp_statut = KonspektMaterial(
@@ -132,11 +145,11 @@ KonspektStep step_poziomy_duchowosci = KonspektStep(
     duration: Duration(minutes: 15),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie pradnika $attach_html_o_strukturze_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>aksjomatu</b>, poziom <b>wartości</b>, poziom <b>postaw</b> i poziom <b>zachowań</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika $attach_html_poziomy_duchowosci. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
+        'Prowadzący na podstawie poradnika $attach_html_o_strukturze_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>zachowań</b>, poziom <b>postaw</b>, poziom <b>wartości</b> i poziom <b>aksjomatu</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika $attach_html_poziomy_duchowosci. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
         '<br>'
         '<br>Dodatkowo prowadzący definiuje duchowość <b>wymierną</b> (poziom zachowań i postaw) i <b>głęboką</b> (poziom wartości i aksjomatów).'
         '<br>'
-        '<br>Prowadzący powinien wyraźnie zaznaczyć, że “poziom duchowości” nie odnosi się do słowa “poziom” w sensie poziomu zaawansowania, np. poziom w grze komputerowej, ale poziomu w sensie warstwy, piętra, hierarchii etc..'
+        '<br>Prowadzący powinien wyraźnie zaznaczyć, że “poziom duchowości” nie odnosi się do słowa “poziom” w sensie poziomu zaawansowania (np. poziom w grze komputerowej), ale poziomu w sensie warstwy, piętra, hierarchii etc..'
         '<br>'
         '<br>Prowadzący może w procesie definiowania posiłkować się przykładem:'
         '</p>'
@@ -213,8 +226,46 @@ KonspektStep step_poziomy_duchowosci_aksjomat = KonspektStep(
       '<br>'
       '<br><i>"Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Również, jeśli ów człowiek zobaczy dowód na kulistość Ziemi, to wniosek będzie miał tylko jeden: narzędzia użyte przy tych dowodach były wadliwe.'
       '<br>'
-      '<br>Czy to powinno zaskakiwać? Przecież my, gdy nam przedstawiono nagranie, że księżyc jest jedynie wyświetlanym hologramem, też uznalibyśmy, że to nagranie musi być błędne. Nie zakładalibyśmy, że cała nauka się pomyliła - a przecież nauka mogła się pomylić, my jedynie wierzymy, że ona dobrze opisuje rzeczywistość.".</i>'
+      '<br>Czy to powinno zaskakiwać? Przecież my, gdy nam przedstawiono nagranie dodzące, że księżyc jest jedynie wyświetlanym hologramem, też uznalibyśmy, że to nagranie musi być błędne. Nie zakładalibyśmy, że cała nauka się pomyliła - a przecież nauka mogła się pomylić, my jedynie wierzymy, że ona dobrze opisuje rzeczywistość.".</i>'
+      '<br>'
+      '<br>Prowadzący dzieli aksjomaty na dwie nierozłączne grupy (tzn. każdy aksjomat może należeć do jednej z grup lub wszystkich na raz): <b>aksjomaty opisu</b> oraz <b>aksjomaty sensu</b> na podstawie poradnika $attach_html_o_strukturze_duchowosci.'
       '</p>'
+);
+
+KonspektStep step_poziomy_duchowosci_meta_narracja = KonspektStep(
+    title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja',
+    duration: Duration(minutes: 10),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przedstawia definicję meta-narracji na podstawie poradnika $attach_html_o_strukturze_duchowosci i kładzie przed uczestnikami (obok kartki "aksjomat") opis meta-narracji z załącznika $attach_meta_narracja_opis.'
+        '<br>'
+        '<br>Meta-narracja to <i>zbiór spójnych aksjomatów dających się wyrazić jako opowieść o świecie, jego aktorach, z której bezpośrednio wynika definicja dobra, celu, sensu, osobistej roli przyjmującej ją człowieka, która stanowi źródło motywacji i tożsamości. Meta-narracje mogą zawierać aksjomaty opisu, jednak zawsze muszą zawierać aksjomaty sensu.</i>.'
+        '<br>'
+        '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_meta_narracja_przyklady.'
+        '</p>'
+);
+
+KonspektStep step_poziomy_duchowosci_meta_narracja_wyjasnienie = KonspektStep(
+    title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja - wyjaśnienie',
+    duration: Duration(minutes: 10),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący wyjaśnia uczestnikom po co w ogóle zawraca im głowę meta-narracjami. W tym celu posługuje się następującą hipotetyczną sytuacją:'
+        '<br>'
+        '<i>'
+        'Na obozie jeden z wędrowników, Radek, zaszedł drugiemu, Adamowi, za skórę. W odwecie Adam zaczął Radka prześladować. Trwało to już od miesiąca. Drużynowy wziął Adama na rozmowę. Powiedział, że zgodnie z harcerskimi wartościami należy traktować innych jak bliźnich i braci, dlatego uważa, że Adam powinien przebaczyć Radkowi ich sprzeczkę.'
+        '<br>'
+        '<br>Adam jednak stwierdził:'
+        '<br>'
+        '<br>"Okej. Mogę dać mu spokój, ale po tym, co Radek zrobił, nie zasługuje na traktowanie jak brata. Ja zresztą nie jestem już dzieckiem, dlaczego mam wierzyć w jakieś Prawo Harcerskie, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre? Przecież Rada Naczelna to banda starych dziadów rodem z poprzedniej epoki".'
+        '</i>'
+        '<br>'
+        '<br>Po opowiedzeniu tej historii prowadzący może zapytać uczestników <i>"Dlaczego Adam miałby uznać w swoim życiu wartości wynikające z Prawa Harcerskiego?"</i> przy założeniu, że jest w pełni dojrzałym człowiekiem.'
+        '<br>'
+        '<br>Wniosek z dyskusji powinien prowadzić do jedynej możliwej odpowiedzi: <b>“Nie ma powodu, by Adam arbitalnie przyjął wartości PH. Jeśli Adam ma traktować Prawo Harcerskie poważnie, musi przyjąć wiarę w meta-narrację, z której owe wartości będą wypływały - np. w to, że jest winien przebaczenie każdemu bliźniemu, bo Chystus zbawił go przez przebaczenie mu win wyrażonej w śmierci na krzyżu.”</b>.'
+        '<br>'
+        '<br>Bez aksjomatów ułożonych w meta-narrację <b>nie ma żadnej drogi do wychowania dojrzałego, spójnego człowieka w harcerskich (lub jakichkolwiek innych) wartościach!</b>'
+        '</p>'
 );
 
 KonspektStep step_integracja_duchowosci = KonspektStep(

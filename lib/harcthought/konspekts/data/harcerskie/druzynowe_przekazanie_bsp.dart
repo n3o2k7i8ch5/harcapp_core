@@ -15,16 +15,16 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
           levels: {
             KonspektSphereLevel.duchPostawy: {
               postawaOtwartoscNaLudzi: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-              postawaPrzebaczenie: {KonspektSphereFactor.duchNormalizacja}
+              postawaPrzebaczenie: {KonspektSphereFactor.duchPerspektywa_Normalizacja}
             },
             KonspektSphereLevel.duchWartosci: {
-              wartoscPokoj: {KonspektSphereFactor.duchNormalizacja},
+              wartoscPokoj: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
               wartoscPrzynaleznoscDoHarcerstwa: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
             },
             KonspektSphereLevel.duchAksjomaty: {
-              aksjoNarodzinyChrystusa: {KonspektSphereFactor.duchNormalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow},
-              aksjoZbawczaRolaChrystusa: {KonspektSphereFactor.duchNormalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow},
-              aksjoZbawienie: {KonspektSphereFactor.duchNormalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow}
+              aksjoNarodzinyChrystusa: {KonspektSphereFactor.duchPerspektywa_Normalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow},
+              aksjoZbawczaRolaChrystusa: {KonspektSphereFactor.duchPerspektywa_Normalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow},
+              aksjoZbawienie: {KonspektSphereFactor.duchPerspektywa_Normalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow}
             },
           },
       ),

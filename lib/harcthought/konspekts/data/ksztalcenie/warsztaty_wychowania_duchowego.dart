@@ -199,6 +199,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
     attachments: [
       attach_o_strukturze_duchowosci,
       attach_poziomy_duchowosci,
+      attach_meta_narracja_opis,
+      attach_meta_narracja_przyklady,
       attach_neutralnosc_duchowa_przyklady,
       attach_cel_wychowania_duchowego_zhp_statut,
       attach_cel_wychowania_duchowego_zhp_uchwala,
@@ -244,6 +246,10 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_czajnik,
 
       material_zal_poziomy_duchowosci,
+
+      material_zal_meta_narracja_opis,
+
+      material_zal_meta_narracja_przyklady,
 
       material_zal_przyklady_poziomow_duchowosci,
 
@@ -330,6 +336,10 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       step_poziomy_duchowosci,
 
       step_poziomy_duchowosci_aksjomat,
+
+      step_poziomy_duchowosci_meta_narracja,
+
+      step_poziomy_duchowosci_meta_narracja_wyjasnienie,
 
       KonspektStep(
           title: 'Poziomy (warstwy) rozwoju duchowego - sprawdzenie',

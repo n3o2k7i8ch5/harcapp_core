@@ -161,10 +161,10 @@ enum KonspektSphereLevel{
 enum KonspektSphereFactor{
   duchBiologia,
   duchBezposrednieDoswiadczenie,
-  duchNormalizacja,
+  duchPerspektywa_Normalizacja,
   duchOczekiwaniaAutorytetu,
   duchMetanarracja,
-  duchPrzestrzenSemantyczna,
+  duchPerspektwa_PrzestrzenSemantyczna,
   duchPrzykladWlasnyAutorytetow,
   duchWartosciWtorne,
   duchWlasnaRefleksja,
@@ -174,10 +174,10 @@ enum KonspektSphereFactor{
     switch(this){
       case duchBiologia: return 'Biologia';
       case duchBezposrednieDoswiadczenie: return 'Bezpośrednie Doświadczenie';
-      case duchNormalizacja: return 'Normalizacja';
+      case duchPerspektywa_Normalizacja: return 'Perspektywa (Normalizacja)';
       case duchOczekiwaniaAutorytetu: return 'Oczekiwania Uznanego Autorytetu';
       case duchMetanarracja: return 'Metanarracja';
-      case duchPrzestrzenSemantyczna: return 'Przestrzeń Semantyczna';
+      case duchPerspektwa_PrzestrzenSemantyczna: return 'Perspektywa (Przestrzeń Semantyczna)';
       case duchPrzykladWlasnyAutorytetow: return 'Przykład Własny Autorytetów';
       case duchWartosciWtorne: return 'Wartości Wtórne';
       case duchWlasnaRefleksja: return 'Własna Refleksja';

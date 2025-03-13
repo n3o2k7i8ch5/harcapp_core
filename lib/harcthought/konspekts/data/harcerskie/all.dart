@@ -58,7 +58,7 @@ List<Konspekt> allHarcerskieKonspekts = [
               postawaOtwartoscNaLudzi: {
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
-                KonspektSphereFactor.duchNormalizacja
+                KonspektSphereFactor.duchPerspektywa_Normalizacja
               }
             },
 
@@ -66,7 +66,7 @@ List<Konspekt> allHarcerskieKonspekts = [
               wartoscSprawnoscFizyczna: {
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
-                KonspektSphereFactor.duchNormalizacja
+                KonspektSphereFactor.duchPerspektywa_Normalizacja
               }
             },
 
@@ -451,7 +451,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: const KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchAksjomaty: {
-              aksjoZbawienie: {KonspektSphereFactor.duchNormalizacja},
+              aksjoZbawienie: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
               aksjoModlitwa: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
             }
           },
@@ -562,7 +562,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: const KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchAksjomaty: {
-              aksjoZbawienie: {KonspektSphereFactor.duchNormalizacja},
+              aksjoZbawienie: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
             }
           },
         )
@@ -757,8 +757,8 @@ List<Konspekt> allHarcerskieKonspekts = [
                 "Wartości wynikajace z gawędy": {
                   KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                   KonspektSphereFactor.duchWlasnaRefleksja,
-                  KonspektSphereFactor.duchNormalizacja,
-                  KonspektSphereFactor.duchPrzestrzenSemantyczna,
+                  KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                  KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
                 }
               },
             }
@@ -900,7 +900,7 @@ List<Konspekt> allHarcerskieKonspekts = [
               },
             },
             KonspektSphereLevel.duchWartosci: {
-              wartoscWspolnota: {KonspektSphereFactor.duchNormalizacja},
+              wartoscWspolnota: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
             }
           }
         )
@@ -941,10 +941,10 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.duchPostawy: {
-                "Postawy wynikające z Prawa Harcerskiego": {KonspektSphereFactor.duchNormalizacja},
+                "Postawy wynikające z Prawa Harcerskiego": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
               },
               KonspektSphereLevel.duchWartosci: {
-                "Wartości wynikające z Prawa Harcerskiego": {KonspektSphereFactor.duchNormalizacja},
+                "Wartości wynikające z Prawa Harcerskiego": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
               }
             },
         )
@@ -982,10 +982,10 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: {
-              "Postawy wynikające z Prawa Zucha": {KonspektSphereFactor.duchNormalizacja},
+              "Postawy wynikające z Prawa Zucha": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
             },
             KonspektSphereLevel.duchWartosci: {
-              "Wartości wynikające z Prawa Zucha": {KonspektSphereFactor.duchNormalizacja},
+              "Wartości wynikające z Prawa Zucha": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
             }
           },
         )
@@ -1060,10 +1060,10 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.duchWartosci: {
-                'Wartości zawarte w kolędach': {KonspektSphereFactor.duchNormalizacja},
+                'Wartości zawarte w kolędach': {KonspektSphereFactor.duchPerspektywa_Normalizacja},
               },
               KonspektSphereLevel.duchAksjomaty: {
-                aksjoNarodzinyChrystusa: {KonspektSphereFactor.duchNormalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow}
+                aksjoNarodzinyChrystusa: {KonspektSphereFactor.duchPerspektywa_Normalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow}
               }
             },
         )
@@ -1102,27 +1102,27 @@ List<Konspekt> allHarcerskieKonspekts = [
           levels: {
             KonspektSphereLevel.duchPostawy: {
               postawaRozumienieObcychPogladow: {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
               },
               "Dyskutowane postawy": {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
               }
             },
             KonspektSphereLevel.duchWartosci: {
               wartoscUwaznosc: {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
               },
               wartoscBystrosc: {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
               },
               "Dyskutowane wartości": {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                KonspektSphereFactor.duchPrzestrzenSemantyczna,
+                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
               }
             },
           },
@@ -1172,7 +1172,7 @@ List<Konspekt> allHarcerskieKonspekts = [
               KonspektSphereLevel.duchAksjomaty: {
                 aksjoModlitwa: {
                   KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                  KonspektSphereFactor.duchNormalizacja,
+                  KonspektSphereFactor.duchPerspektywa_Normalizacja,
                   KonspektSphereFactor.duchWzajemnoscOddzialywan,
                 },
               },
@@ -1180,14 +1180,14 @@ List<Konspekt> allHarcerskieKonspekts = [
                 postawaMyslenieOInnych: {
                   KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                   KonspektSphereFactor.duchWzajemnoscOddzialywan,
-                  KonspektSphereFactor.duchNormalizacja,
+                  KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 }
               },
               KonspektSphereLevel.duchWartosci: {
                 wartoscWspolnota: {
                   KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                   KonspektSphereFactor.duchWzajemnoscOddzialywan,
-                  KonspektSphereFactor.duchNormalizacja,
+                  KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 }
               },
             }
@@ -1232,7 +1232,7 @@ List<Konspekt> allHarcerskieKonspekts = [
           levels: {
             KonspektSphereLevel.duchPostawy: {
               postawaSumiennosc: {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchOczekiwaniaAutorytetu,
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
@@ -1282,7 +1282,7 @@ List<Konspekt> allHarcerskieKonspekts = [
             KonspektSphereLevel.duchWartosci: {
               "Wartości własne i współuczestników": {
                 KonspektSphereFactor.duchWlasnaRefleksja,
-                KonspektSphereFactor.duchPrzestrzenSemantyczna,
+                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
               },
               postawaRozumienieObcychPogladow: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
             }
@@ -1522,8 +1522,8 @@ List<Konspekt> allHarcerskieKonspekts = [
               "Wartości wynikajace z gawędy": {
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                 KonspektSphereFactor.duchWlasnaRefleksja,
-                KonspektSphereFactor.duchNormalizacja,
-                KonspektSphereFactor.duchPrzestrzenSemantyczna,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
               }
             },
           }
@@ -1613,13 +1613,13 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
               }
             },
             KonspektSphereLevel.duchWartosci: {
               wartoscWspolnota: {
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
               }
             },
             ...levelSilaCharakteru
@@ -1926,7 +1926,7 @@ List<Konspekt> allHarcerskieKonspekts = [
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
               },
             }
           },
@@ -1960,16 +1960,16 @@ List<Konspekt> allHarcerskieKonspekts = [
               postawaMyslenieOInnych: {
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
-                KonspektSphereFactor.duchNormalizacja,
-                KonspektSphereFactor.duchPrzestrzenSemantyczna,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
               }
             },
             KonspektSphereLevel.duchWartosci: {
               wartoscWspolnota: {
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
-                KonspektSphereFactor.duchNormalizacja,
-                KonspektSphereFactor.duchPrzestrzenSemantyczna,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
               }
             },
           }
@@ -2006,27 +2006,27 @@ List<Konspekt> allHarcerskieKonspekts = [
           levels: {
             KonspektSphereLevel.duchPostawy: {
               postawaRozumienieObcychPogladow: {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
               },
               "Dyskutowane postawy": {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
               }
             },
             KonspektSphereLevel.duchWartosci: {
               wartoscUwaznosc: {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
               },
               wartoscBystrosc: {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
               },
               "Dyskutowane wartości": {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                KonspektSphereFactor.duchPrzestrzenSemantyczna,
+                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
               }
             },
           },
@@ -2076,9 +2076,9 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchWartosci: {
-              wartoscUwaznosc: {KonspektSphereFactor.duchNormalizacja},
-              wartoscWspolnota: {KonspektSphereFactor.duchNormalizacja},
-              wartoscWyciszenie: {KonspektSphereFactor.duchNormalizacja},
+              wartoscUwaznosc: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+              wartoscWspolnota: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+              wartoscWyciszenie: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
             },
           },
         )
@@ -2389,7 +2389,7 @@ List<Konspekt> allHarcerskieKonspekts = [
           levels: {
             KonspektSphereLevel.duchPostawy: {
               postawaPostepowanieZgodnieZPH: {
-                KonspektSphereFactor.duchNormalizacja
+                KonspektSphereFactor.duchPerspektywa_Normalizacja
               }
             }
           }
@@ -2436,7 +2436,7 @@ List<Konspekt> allHarcerskieKonspekts = [
           levels: {
             KonspektSphereLevel.duchPostawy: {
               postawaPostepowanieZgodnieZPZ: {
-                KonspektSphereFactor.duchNormalizacja
+                KonspektSphereFactor.duchPerspektywa_Normalizacja
               }
             }
           }
@@ -2523,7 +2523,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         levels: {
           KonspektSphereLevel.duchWartosci: {
             wartoscPrzynaleznoscDoHarcerstwa: {
-              KonspektSphereFactor.duchNormalizacja
+              KonspektSphereFactor.duchPerspektywa_Normalizacja
             }
           }
         }
@@ -2894,17 +2894,17 @@ List<Konspekt> allHarcerskieKonspekts = [
               postawaPrzebaczenie: {
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
-                KonspektSphereFactor.duchNormalizacja
+                KonspektSphereFactor.duchPerspektywa_Normalizacja
               },
               postawaWdziecznosc: {
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
-                KonspektSphereFactor.duchNormalizacja
+                KonspektSphereFactor.duchPerspektywa_Normalizacja
               },
               postawaOtwartoscNaLudzi: {
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan,
-                KonspektSphereFactor.duchNormalizacja
+                KonspektSphereFactor.duchPerspektywa_Normalizacja
               },
             },
           }
@@ -2950,7 +2950,7 @@ List<Konspekt> allHarcerskieKonspekts = [
             KonspektSphereLevel.duchAksjomaty: {
               aksjoRozwazanieSensuICeluZycia: {
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchNormalizacja
+                KonspektSphereFactor.duchPerspektywa_Normalizacja
               },
             }
           },
@@ -3058,7 +3058,7 @@ List<Konspekt> allHarcerskieKonspekts = [
             },
             KonspektSphereLevel.duchWartosci: {
               wartoscZdrowie: {
-                KonspektSphereFactor.duchNormalizacja,
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
                 KonspektSphereFactor.duchBezposrednieDoswiadczenie,
                 KonspektSphereFactor.duchWzajemnoscOddzialywan
               },

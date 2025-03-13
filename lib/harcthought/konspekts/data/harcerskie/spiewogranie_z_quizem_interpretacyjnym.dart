@@ -16,7 +16,7 @@ Konspekt spiewogranie_z_quizem_interpretacyjnym = const Konspekt(
     KonspektSphere.duch: KonspektSphereDetails(
       levels: {
         KonspektSphereLevel.duchWartosci: {
-          'Wartości zawarte w piosenkach': {KonspektSphereFactor.duchNormalizacja},
+          'Wartości zawarte w piosenkach': {KonspektSphereFactor.duchPerspektywa_Normalizacja},
         },
       },
     )

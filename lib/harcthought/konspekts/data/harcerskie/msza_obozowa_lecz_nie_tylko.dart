@@ -19,7 +19,7 @@ Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
             KonspektSphereFactor.duchWzajemnoscOddzialywan,
-            KonspektSphereFactor.duchNormalizacja,
+            KonspektSphereFactor.duchPerspektywa_Normalizacja,
           },
         },
         KonspektSphereLevel.duchWartosci: {
@@ -27,7 +27,7 @@ Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
             KonspektSphereFactor.duchWzajemnoscOddzialywan,
-            KonspektSphereFactor.duchNormalizacja,
+            KonspektSphereFactor.duchPerspektywa_Normalizacja,
           }
         },
         KonspektSphereLevel.duchPostawy: {
@@ -35,7 +35,7 @@ Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
             KonspektSphereFactor.duchWzajemnoscOddzialywan,
-            KonspektSphereFactor.duchNormalizacja,
+            KonspektSphereFactor.duchPerspektywa_Normalizacja,
           }
         }
       }
