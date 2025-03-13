@@ -237,11 +237,11 @@ KonspektStep step_poziomy_duchowosci_meta_narracja = KonspektStep(
     duration: Duration(minutes: 10),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący przedstawia definicję meta-narracji na podstawie poradnika $attach_html_o_strukturze_duchowosci i kładzie przed uczestnikami (obok kartki "aksjomat") opis meta-narracji z załącznika $attach_meta_narracja_opis.'
+        'Prowadzący przedstawia definicję meta-narracji na podstawie poradnika $attach_html_o_strukturze_duchowosci i kładzie przed uczestnikami (obok kartki "aksjomat") opis meta-narracji z załącznika $attach_html_meta_narracja_opis.'
         '<br>'
         '<br>Meta-narracja to <i>zbiór spójnych aksjomatów dających się wyrazić jako opowieść o świecie, jego aktorach, z której bezpośrednio wynika definicja dobra, celu, sensu, osobistej roli przyjmującej ją człowieka, która stanowi źródło motywacji i tożsamości. Meta-narracje mogą zawierać aksjomaty opisu, jednak zawsze muszą zawierać aksjomaty sensu.</i>.'
         '<br>'
-        '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_meta_narracja_przyklady.'
+        '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady.'
         '</p>'
 );
 
