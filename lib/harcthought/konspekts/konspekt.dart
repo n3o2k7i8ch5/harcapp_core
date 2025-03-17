@@ -410,6 +410,17 @@ class KonspektStep{
 
 }
 
+class KonspektStepGroup{
+
+  final String title;
+  final List<KonspektStep> steps;
+
+  const KonspektStepGroup({
+    required this.title,
+    required this.steps
+  });
+}
+
 class Konspekt{
 
   final String name;
@@ -431,6 +442,7 @@ class Konspekt{
   final String? description;
   final List<String>? howToFail;
   final List<KonspektStep>? steps;
+  final List<KonspektStepGroup>? stepGroups;
 
   final List<KonspektAttachment>? attachments;
   final Konspekt? partOf;
@@ -513,6 +525,7 @@ class Konspekt{
     this.description,
     this.howToFail,
     this.steps,
+    this.stepGroups,
 
     this.attachments,
     this.partOf,

@@ -12,6 +12,7 @@ import 'package:harcapp_core/comm_widgets/person_card.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt_tile_widget.dart';
+import 'package:harcapp_core/harcthought/konspekts/widgets/step_group_widget.dart';
 
 import '../common.dart';
 import '../konspekt.dart';
@@ -41,6 +42,8 @@ class BaseKonspektWidget extends StatefulWidget{
   final double? thumbnailRadius;
   final bool thumbnailShowSummary;
   final bool thumbnailShowPartOf;
+  final bool showStepGroupBackground;
+  final bool showStepGroupBorder;
   final void Function(Konspekt)? onThumbnailTap;
 
   const BaseKonspektWidget(
@@ -60,6 +63,8 @@ class BaseKonspektWidget extends StatefulWidget{
         this.thumbnailRadius,
         this.thumbnailShowSummary = true,
         this.thumbnailShowPartOf = true,
+        this.showStepGroupBackground = false,
+        this.showStepGroupBorder = false,
         this.onThumbnailTap,
       });
 
@@ -167,23 +172,22 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 child: TitleShortcutRowWidget(title: konspekt.title, titleColor: iconEnab_(context)),
               ),
 
-              if(konspekt.summary != null)
-                const SizedBox(height: Dimen.sideMarg),
+              const SizedBox(height: Dimen.sideMarg),
 
-              if(widget.oneLineSummary && konspekt.summary != null)
+              if(widget.oneLineSummary)
                 KonspektHtmlWidget(
                     konspekt,
-                    '<b>W skrócie:</b> ${konspekt.summary!}',
+                    '<b>W skrócie:</b> ${konspekt.summary}',
                     maxDialogWidth: widget.maxDialogWidth,
                     textSize: Dimen.textSizeBig,
                 )
-              else if(!widget.oneLineSummary && konspekt.summary != null)
+              else if(!widget.oneLineSummary)
                 const TitleShortcutRowWidget(title: 'W skrócie', textAlign: TextAlign.left),
 
-              if(!widget.oneLineSummary && konspekt.summary != null)
+              if(!widget.oneLineSummary)
                 KonspektHtmlWidget(
                   konspekt,
-                  konspekt.summary!,
+                  konspekt.summary,
                   maxDialogWidth: widget.maxDialogWidth,
                   textSize: Dimen.textSizeBig,
                 ),
@@ -403,11 +407,30 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             ])),
           ),
 
-          if(konspekt.steps != null)
+          if(konspekt.stepGroups != null)
             SliverPadding(
               padding: const EdgeInsets.only(bottom: Dimen.sideMarg),
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                  (context, index) => KonspektStepWidget(konspekt, index, maxDialogWidth: maxDialogWidth),
+                (context, index) => KonspektStepGroupWidget(
+                  konspekt,
+                  index,
+                  showBackground: widget.showStepGroupBackground,
+                  showBorder: widget.showStepGroupBorder,
+                  maxDialogWidth: maxDialogWidth
+                ),
+              separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
+              count: konspekt.stepGroups!.length
+              )),
+            )
+          else if(konspekt.steps != null)
+            SliverPadding(
+              padding: const EdgeInsets.only(bottom: Dimen.sideMarg),
+              sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
+                  (context, index) => KonspektStepWidget(
+                    konspekt,
+                    index,
+                    maxDialogWidth: maxDialogWidth
+                  ),
                   separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
                   count: konspekt.steps!.length
               )),

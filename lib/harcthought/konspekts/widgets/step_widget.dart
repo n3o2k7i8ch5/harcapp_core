@@ -15,11 +15,12 @@ import 'html_widget.dart';
 class KonspektStepWidget extends StatelessWidget{
 
   final int index;
+  final int? groupIndex;
   final Konspekt konspekt;
   final double? maxDialogWidth;
   KonspektStep get step => konspekt.steps![index];
 
-  const KonspektStepWidget(this.konspekt, this.index, {this.maxDialogWidth, super.key});
+  const KonspektStepWidget(this.konspekt, this.index, {this.groupIndex, this.maxDialogWidth, super.key});
 
   @override
   Widget build(BuildContext context) => Column(
@@ -35,21 +36,25 @@ class KonspektStepWidget extends StatelessWidget{
           children: [
 
             SizedBox(
-                width: 2*Dimen.textSizeNormal + Dimen.defMarg + 4,
                 height: 2*Dimen.textSizeNormal + Dimen.defMarg + 4,
                 child: Material(
-                  borderRadius: BorderRadius.circular(40),
+                  borderRadius: BorderRadius.circular(AppCard.defRadius),
                   color: hintEnab_(context),
-                  child: Center(
-                    child: Text(
-                        '${index + 1}.',
-                        style: AppTextStyle(
-                            fontSize: Dimen.textSizeAppBar,
-                            fontWeight: weight.halfBold,
-                            color: background_(context)
-                        )
+                  child: Container(
+                    constraints: BoxConstraints(
+                      minWidth: 2*Dimen.textSizeNormal + Dimen.defMarg + 4
                     ),
-                  ),
+                    child: Center(
+                      child: Text(
+                          '${groupIndex==null?'':'${groupIndex! + 1}.'}${index + 1}.',
+                          style: AppTextStyle(
+                              fontSize: Dimen.textSizeAppBar,
+                              fontWeight: weight.halfBold,
+                              color: background_(context)
+                          )
+                      ),
+                    ),
+                  )
                 )
             ),
 
