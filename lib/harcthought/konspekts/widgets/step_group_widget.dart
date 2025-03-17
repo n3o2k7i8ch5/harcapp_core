@@ -26,6 +26,7 @@ class KonspektStepGroupWidget extends StatelessWidget{
       );
 
     Widget child = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: children
     );
 
