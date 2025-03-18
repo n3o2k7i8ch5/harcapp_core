@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/border_material.dart';
+import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/konspekts/widgets/step_widget.dart';
@@ -21,7 +22,7 @@ class KonspektStepGroupWidget extends StatelessWidget{
   Widget build(BuildContext context){
 
     List<Widget> children = [];
-    for (int stepIndex = 0; stepIndex < stepGroup.steps!.length; stepIndex++)
+    for (int stepIndex = 0; stepIndex < stepGroup.steps.length; stepIndex++)
       children.add(
         KonspektStepWidget(konspekt, stepGroup, stepIndex, groupIndex: index, maxDialogWidth: maxDialogWidth)
       );
@@ -36,7 +37,22 @@ class KonspektStepGroupWidget extends StatelessWidget{
     );
 
     if(showBorder)
-      return BorderMaterial(child: child);
+      return BorderMaterial(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+
+            TitleShortcutRowWidget(
+              title: stepGroup.title,
+              textAlign: TextAlign.left,
+              titleColor: textEnab_(context),
+            ),
+            
+            child
+            
+          ],
+        ),
+      );
 
     if(showBackground)
       return Container(
