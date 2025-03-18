@@ -20,9 +20,9 @@ class KonspektStepGroupWidget extends StatelessWidget{
   Widget build(BuildContext context){
 
     List<Widget> children = [];
-    for (int stepIndex = 0; stepIndex < stepGroup.steps.length; stepIndex++)
+    for (int stepIndex = 0; stepIndex < stepGroup.steps!.length; stepIndex++)
       children.add(
-        KonspektStepWidget(konspekt, stepIndex, groupIndex: index, maxDialogWidth: maxDialogWidth)
+        KonspektStepWidget(konspekt, stepGroup, stepIndex, groupIndex: index, maxDialogWidth: maxDialogWidth)
       );
 
     Widget child = Column(

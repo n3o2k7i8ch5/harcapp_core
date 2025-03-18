@@ -428,6 +428,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
                   (context, index) => KonspektStepWidget(
                     konspekt,
+                    konspekt,
                     index,
                     maxDialogWidth: maxDialogWidth
                   ),

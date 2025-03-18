@@ -410,18 +410,27 @@ class KonspektStep{
 
 }
 
-class KonspektStepGroup{
+class KonspektStepsContainer{
 
-  final String title;
-  final List<KonspektStep> steps;
+  final List<KonspektStep>? steps;
 
-  const KonspektStepGroup({
-    required this.title,
-    required this.steps
+  const KonspektStepsContainer({
+    required this.steps,
   });
 }
 
-class Konspekt{
+class KonspektStepGroup extends KonspektStepsContainer{
+
+  final String title;
+  // final List<KonspektStep> steps;
+
+  const KonspektStepGroup({
+    required this.title,
+    required super.steps
+  });
+}
+
+class Konspekt extends KonspektStepsContainer{
 
   final String name;
   final String title;
@@ -441,7 +450,7 @@ class Konspekt{
   final String? intro;
   final String? description;
   final List<String>? howToFail;
-  final List<KonspektStep>? steps;
+  // final List<KonspektStep>? steps;
   final List<KonspektStepGroup>? stepGroups;
 
   final List<KonspektAttachment>? attachments;
@@ -524,7 +533,7 @@ class Konspekt{
     this.intro,
     this.description,
     this.howToFail,
-    this.steps,
+    super.steps,
     this.stepGroups,
 
     this.attachments,

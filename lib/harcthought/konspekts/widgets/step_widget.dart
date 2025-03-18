@@ -14,13 +14,14 @@ import 'html_widget.dart';
 
 class KonspektStepWidget extends StatelessWidget{
 
+  final Konspekt konspekt;
+  final KonspektStepsContainer stepsContainer;
   final int index;
   final int? groupIndex;
-  final Konspekt konspekt;
   final double? maxDialogWidth;
-  KonspektStep get step => konspekt.steps![index];
+  KonspektStep get step => stepsContainer.steps![index];
 
-  const KonspektStepWidget(this.konspekt, this.index, {this.groupIndex, this.maxDialogWidth, super.key});
+  const KonspektStepWidget(this.konspekt, this.stepsContainer, this.index, {this.groupIndex, this.maxDialogWidth, super.key});
 
   @override
   Widget build(BuildContext context) => Column(
