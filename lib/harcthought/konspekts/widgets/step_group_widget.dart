@@ -24,23 +24,29 @@ class KonspektStepGroupWidget extends StatelessWidget{
   Widget build(BuildContext context){
 
     List<Widget> children = [];
-    for (int stepIndex = 0; stepIndex < stepGroup.steps.length; stepIndex++)
-      children.add(
-        KonspektStepWidget(konspekt, stepGroup, stepIndex, groupIndex: index, maxDialogWidth: maxDialogWidth)
+    for (int stepIndex = 0; stepIndex < stepGroup.steps.length; stepIndex++) {
+      Widget child = Padding(
+        padding: EdgeInsets.all(Dimen.sideMarg),
+        child: KonspektStepWidget(
+            konspekt, stepGroup, stepIndex, groupIndex: index,
+            maxDialogWidth: maxDialogWidth),
       );
 
-    Widget child = ListView.separated(
-      padding: EdgeInsets.symmetric(vertical: Dimen.sideMarg),
-      itemBuilder: (context, index) => index%2==1 && showBackground?
-        Container(
-          child: children[index],
-          color: backgroundIcon_(context).withValues(alpha: 0.05),
-        ):
-        children[index],
-      separatorBuilder: (context, index) => SizedBox(height: 2*Dimen.sideMarg),
-      itemCount: children.length,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      if(index%2==1 && showBackground)
+        children.add(
+          Container(
+            child: children[index],
+            color: backgroundIcon_(context).withValues(alpha: 0.02),
+          )
+        );
+      else
+        children.add(children[index]);
+
+    }
+
+    Widget child = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: children,
     );
 
     if(showBorder)
