@@ -171,7 +171,7 @@ Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
 );
 
 List<Poradnik> allPoradniks = [
+  poradnik_o_strukturze_duchowosci,
   poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich,
-  poradnik_o_strukturze_duchowosci
 ];

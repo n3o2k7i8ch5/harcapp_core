@@ -101,9 +101,10 @@ class KonspektTileWidget extends StatelessWidget{
                             Expanded(
                               child: AutoSizeText(
                                 konspekt.title,
-                                style: const AppTextStyle(
+                                style: AppTextStyle(
                                   fontSize: Dimen.textSizeBig,
                                   fontWeight: weight.halfBold,
+                                  color: konspekt.upToDate?textEnab_(context):textDisab_(context),
                                 ),
                                 maxLines: konspekt.title.split(' ').length,
                               ),
