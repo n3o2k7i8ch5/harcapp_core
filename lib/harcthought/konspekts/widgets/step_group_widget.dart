@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_widgets/border_material.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
@@ -42,10 +44,21 @@ class KonspektStepGroupWidget extends StatelessWidget{
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
 
-            TitleShortcutRowWidget(
-              title: stepGroup.title,
-              textAlign: TextAlign.left,
-              titleColor: textEnab_(context),
+            if(stepGroup.title != null)
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
+              child: TitleShortcutRowWidget(
+                title: stepGroup.title!,
+                textAlign: TextAlign.left,
+                titleColor: textDisab_(context),
+                trailing: Text(
+                  durationToString(stepGroup.duration),
+                  style: AppTextStyle(
+                    fontSize: Dimen.textSizeAppBar,
+                    color: textDisab_(context)
+                  ),
+                ),
+              ),
             ),
             
             child

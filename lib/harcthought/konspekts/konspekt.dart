@@ -421,11 +421,20 @@ class KonspektStepsContainer{
 
 class KonspektStepGroup extends KonspektStepsContainer{
 
-  final String title;
+  final String? title;
   // final List<KonspektStep> steps;
 
+  Duration get duration{
+    Duration resultDuration = Duration.zero;
+
+    for(KonspektStep step in steps)
+      resultDuration += step.duration;
+
+    return resultDuration;
+  }
+
   const KonspektStepGroup({
-    required this.title,
+    this.title,
     required super.steps
   });
 }

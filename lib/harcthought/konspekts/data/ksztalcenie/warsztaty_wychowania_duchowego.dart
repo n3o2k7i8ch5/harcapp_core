@@ -368,7 +368,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       ),
 
       KonspektStepGroup(
-          title: 'Integracja duchowości',
           steps: [
             step_integracja_duchowosci,
           ]
@@ -386,7 +385,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       ),
 
       KonspektStepGroup(
-          title: 'Przerwa',
           steps: [
             KonspektStep(
                 title: 'Przerwa',
@@ -426,7 +424,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       ),
 
       KonspektStepGroup(
-          title: 'Obiad',
           steps: [
             KonspektStep(
                 title: 'Obiad',
@@ -624,7 +621,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       ),
 
       KonspektStepGroup(
-          title: 'Zakończenie',
           steps: [
 
             KonspektStep(
