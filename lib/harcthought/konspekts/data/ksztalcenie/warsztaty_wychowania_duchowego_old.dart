@@ -172,7 +172,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
           material_zal_mechanizmy_posrednie,
         ],
         content: '<p style="text-align:justify;">'
-            'Prowadzący opisuje ostatni pośredni mechanizm kształtowania duchowości, czyli <b>Metanarrację</b> na podstawie poradnika $attach_html_o_strukturze_duchowosci. Podobnie jak w przypadku poprzednich mechanizmów, do pozostałych dodaje przy tym odpowiadającą kartkę z załącznika $attach_html_mechanizmy_posrednie'
+            'Prowadzący opisuje ostatni pośredni mechanizm kształtowania duchowości, czyli <b>Metanarrację</b> na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci. Podobnie jak w przypadku poprzednich mechanizmów, do pozostałych dodaje przy tym odpowiadającą kartkę z załącznika $attach_html_mechanizmy_posrednie'
             '<br>'
             '<br><i>Metanarracja jest szczególnie silnym mechanizmem w momencie <b>rozpoczęcia integracji świadomej</b>, jednak gra rolę także później. Jest to opowieść, nadająca człowiekowi tożsamość, sens i cel.'
             '<br>'

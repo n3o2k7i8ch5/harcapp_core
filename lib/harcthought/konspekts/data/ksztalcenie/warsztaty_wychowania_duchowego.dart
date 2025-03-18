@@ -74,8 +74,8 @@ KonspektAttachment attach_scenariusze = KonspektAttachment(
 );
 
 KonspektMaterial material_poradnik_o_strukturze_duchowosci = KonspektMaterial(
-  name: 'Dostępny do przygotowania merytorycznego $attach_title_o_strukturze_duchowosci',
-  attachmentName: attach_name_o_strukturze_duchowosci,
+  name: 'Dostępny do przygotowania merytorycznego $attach_title_poradnik_o_strukturze_duchowosci',
+  attachmentName: attach_name_poradnik_o_strukturze_duchowosci,
 );
 
 KonspektMaterial material_identyfikator = KonspektMaterial(
@@ -113,8 +113,8 @@ KonspektMaterial material_przekaski = KonspektMaterial(
 );
 
 KonspektMaterial material_miski_na_przekaski = KonspektMaterial(
-  name: 'Miski na przekąski',
-  amount: 3
+    name: 'Miski na przekąski',
+    amount: 3
 );
 
 KonspektMaterial material_herbata = KonspektMaterial(
@@ -178,26 +178,26 @@ KonspektMaterial material_zal_przypinki = KonspektMaterial(
 );
 
 Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
-  name: konspekt_kszt_name_warsztaty_wychowania_duchowego,
-  title: konspekt_kszt_title_warsztaty_wychowania_duchowego,
-  additionalSearchPhrases: [
-    'wychowanie duchowe'
-  ],
-  category: KonspektCategory.ksztalcenie,
-  type: KonspektType.zajecia,
-  spheres: {},
-  metos: [Meto.kadra],
-  coverAuthor: 'Daniel Iwanicki',
-  author: DANIEL_IWANICKI,
-  aims: [
-    ...wstep_do_wychowania_duchowego_aims,
-    'Zapoznanie uczestników z mechanizmami i narzędziami kształtowania duchowości.',
-    'Przekazanie uczestnikom wiedzy o oczekiwanych efektach wychowania duchowego w zależności od wieku.',
-    'Przekazanie uczestnikom wiedzy o formach praktycznej pracy nad duchowością harcerzy w zależności od wieku.',
-    'Wykształcenie u uczestników zrozumienia i zdolności do tworzenia strategii rozwoju duchowego.',
-  ],
+    name: konspekt_kszt_name_warsztaty_wychowania_duchowego,
+    title: konspekt_kszt_title_warsztaty_wychowania_duchowego,
+    additionalSearchPhrases: [
+      'wychowanie duchowe'
+    ],
+    category: KonspektCategory.ksztalcenie,
+    type: KonspektType.zajecia,
+    spheres: {},
+    metos: [Meto.kadra],
+    coverAuthor: 'Daniel Iwanicki',
+    author: DANIEL_IWANICKI,
+    aims: [
+      ...wstep_do_wychowania_duchowego_aims,
+      'Zapoznanie uczestników z mechanizmami i narzędziami kształtowania duchowości.',
+      'Przekazanie uczestnikom wiedzy o oczekiwanych efektach wychowania duchowego w zależności od wieku.',
+      'Przekazanie uczestnikom wiedzy o formach praktycznej pracy nad duchowością harcerzy w zależności od wieku.',
+      'Wykształcenie u uczestników zrozumienia i zdolności do tworzenia strategii rozwoju duchowego.',
+    ],
     attachments: [
-      attach_o_strukturze_duchowosci,
+      attach_poradnik_o_strukturze_duchowosci,
       attach_poziomy_duchowosci,
       attach_meta_narracja_opis,
       attach_meta_narracja_przyklady,
@@ -337,6 +337,133 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             ),
           ]
       ),
+
+      KonspektStepGroup(
+          title: 'Sfery człowieka (sfery rozwoju)',
+          steps: [
+
+            KonspektStep(
+                title: 'Podział człowieka na sfery',
+                duration: Duration(minutes: 2),
+                activeForm: false,
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący zapoznaje uczestników z podziałem człowieka na pięć sfer zgodnie z poradnikiem $attach_html_poradnik_o_strukturze_duchowosci.'
+                    '<br>'
+                    '<br>Jeżeli uczestnicy mają szansę znać pięcioelementowy podział człowieka na sfery rozwoju definiowany przez statut ZHP, może poprosić ich o wymienienie kolejno wszystkich, czyli:'
+                    '</p>'
+                    '<ul>'
+                    '<li><p style="text-align:justify;">Sfera ciała (fizyczna)</p></li>'
+                    '<li><p style="text-align:justify;">Sfera umysłu (intelektualna)</p></li>'
+                    '<li><p style="text-align:justify;">Sfera emocjonalna</p></li>'
+                    '<li><p style="text-align:justify;">Sfera relacji (społeczna)</p></li>'
+                    '<li><p style="text-align:justify;">Sfera ducha</p></li>'
+                    '</ul>'
+            ),
+
+            KonspektStep(
+                title: 'Sfera ciała (fizyczna)',
+                duration: Duration(minutes: 1),
+                activeForm: false,
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera ciała:'
+                    '<br>'
+                    '<br><i>Sfera ciała jest wszystkim tym, co stwarza <b>zdolności</b> fizycznej interakcji z rzeczywistością, np.:</i>'
+                    '</p>'
+                    '<ul>'
+                    '<li><p style="text-align:justify;"><i>Zdolność biegania</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Zdolność skakania</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Zdrowie</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Zdolność wyraźnego mówienia</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Zdolność widzenia, słyszenia, wąchania</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Zdolność wytrzymania w niskiej temperaturze</i></p></li>'
+                    '</ul>'
+            ),
+
+            KonspektStep(
+                title: 'Sfera umysłu (intelektualna)',
+                duration: Duration(minutes: 1),
+                activeForm: false,
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera umysłu:'
+                    '<br>'
+                    '<br><i>Sfera umysłu jest wszystkim tym, co stwarza <b>zdolności</b> analizy, rozumienia, syntezy, wiedzy np.:</i>'
+                    '</p>'
+                    '<ul>'
+                    '<li><p style="text-align:justify;"><i>Zdolność analitycznego myślenia</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Zdolność klarownego wysławiania się</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Umiejętność czytania</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Umiejętność szukania i zdobywania wiedzy</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Znajomość faktów</i></p></li>'
+                    '</ul>'
+            ),
+
+            KonspektStep(
+                title: 'Sfera relacji (społeczna)',
+                duration: Duration(minutes: 1),
+                activeForm: false,
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera relacji:'
+                    '<br>'
+                    '<br><i>Sfera relacji jest wszystkim tym, co stwarza <b>zdolności</b> do skutecznego życia w społeczności (we wspólnocie wiedzy, we wspólnocie ekonomicznej, w rodzinie) np.:</i>'
+                    '</p>'
+                    '<ul>'
+                    '<li><p style="text-align:justify;"><i>Zdolność negocjowania swojej roli społecznej</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Zdolność budowania więzi zależności i wsparcia</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Zdolność kompromitacji pozycji drugiej osoby w oczach społeczności</i></p></li>'
+                    '</ul>'
+            ),
+
+            KonspektStep(
+                title: 'Sfera emocji',
+                duration: Duration(minutes: 1),
+                activeForm: false,
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera emocji:'
+                    '<br>'
+                    '<br><i>Sfera emocji jest wszystkim tym, co stwarza <b>zdolności</b> do skutecznego życia w społeczności (we wspólnocie wiedzy, we wspólnocie ekonomicznej, w rodzinie) np.:</i>'
+                    '</p>'
+                    '<ul>'
+                    '<li><p style="text-align:justify;"><i>Zdolność określenia własnego stanu emocjonalnego</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Zdolność określenia przyczyn własnego stanu emocjonalnego</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Umiejętność panowania nad swoimi emocjami (np. hamowania złości, działania mimo stresu)</i></p></li>'
+                    '</ul>'
+            ),
+
+            KonspektStep(
+                title: 'Sfery funkcjonalne',
+                duration: Duration(minutes: 2),
+                activeForm: false,
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący zwraca uwagę, że wszystkie wymienione przezeń sfery są umiejętnościami i zdolnościami. Sprawiają, że człowiek "może więcej", jednak żadna z tych sfer, nawet gdyby była rozwinięta do perfekcji, <b>nie określa kiedy i czy należy jakąś zdolność wykorzystać</b>.'
+                    '<br>'
+                    '<br>Z tego powodu sfery <b>ciała</b>, <b>umysłu</b>, <b>relacji</b> i <b>emocji</b> są <b>sferami funkcjonalnymi</b> - są jak zestaw narzędzi leżących w garażu.'
+                    '</p>'
+            ),
+
+            KonspektStep(
+                title: 'Sfera ducha',
+                duration: Duration(minutes: 1),
+                activeForm: false,
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący definiuje sferę ducha:'
+                    '<br>'
+                    '<br><i>Sfera ducha jest wszystkim tym, co nadaje cel - określa kiedy jak postępować, jak korzystać z dostępnych zdolności, które dają sfery funkcjonalne. Co ważne, <b>sfera ducha sama w sobie nie stwarza żadnych zdolności</b> - rozwinięty duch nie pozwala ani dalej skakać, ani lepiej widzieć, ani więcej rozumieć.</i>'
+                    '</p>'
+            ),
+
+            KonspektStep(
+                title: 'Analogia samochodu',
+                duration: Duration(minutes: 1),
+                activeForm: false,
+                required: false,
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący, jeśli uważa, że pomoże to lepiej zrozumieć relację między sferami funkcjonalnymi, a sferą ducha, może posłużyć się następującą analogią:'
+                    '<br>'
+                    '<br><i>Sfera ducha może być porównana do kierowcy samochodu: kierowca, w ramach ograniczeń stwarzanych przez sfery funkcjonalne samochodu wybiera kierunek jazdy, prędkość, muzykę, jasność świateł, odczytuje prędkość i awarie poprzez tablicę rozdzielczą. Samochód może działać półautomatycznie, np. ograniczając kąt skrętu przy dużej prędkości, jednak to kierowca w ramach ograniczeń samochodu decyduje o jego losie.</i>'
+                    '</p>'
+            ),
+
+          ]),
 
       KonspektStepGroup(
           title: 'Poziomy (warstwy) duchowości',

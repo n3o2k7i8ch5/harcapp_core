@@ -27,7 +27,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
     author: DANIEL_IWANICKI,
     aims: wstep_do_wychowania_duchowego_aims,
     attachments: [
-      attach_o_strukturze_duchowosci,
+      attach_poradnik_o_strukturze_duchowosci,
       attach_poziomy_duchowosci,
       attach_neutralnosc_duchowa_przyklady,
       attach_cel_wychowania_duchowego_zhp_statut,
@@ -37,8 +37,8 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
     materials: [
 
       KonspektMaterial(
-        name: 'Dostępny do przygotowania merytorycznego $attach_title_o_strukturze_duchowosci',
-        attachmentName: attach_name_o_strukturze_duchowosci,
+        name: 'Dostępny do przygotowania merytorycznego $attach_title_poradnik_o_strukturze_duchowosci',
+        attachmentName: attach_name_poradnik_o_strukturze_duchowosci,
       ),
 
       KonspektMaterial(
