@@ -32,15 +32,15 @@ class KonspektStepGroupWidget extends StatelessWidget{
             maxDialogWidth: maxDialogWidth),
       );
 
-      if(index%2==1 && showBackground)
+      if(stepIndex%2==1 && showBackground)
         children.add(
           Container(
-            child: children[index],
+            child: child,
             color: backgroundIcon_(context).withValues(alpha: 0.02),
           )
         );
       else
-        children.add(children[index]);
+        children.add(child);
 
     }
 
