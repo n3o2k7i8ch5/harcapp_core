@@ -434,7 +434,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 2),
                 activeForm: false,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący zwraca uwagę, że wszystkie wymienione przezeń sfery są umiejętnościami i zdolnościami. Sprawiają, że człowiek "może więcej", jednak żadna z tych sfer, nawet gdyby była rozwinięta do perfekcji, <b>nie określa kiedy i czy należy jakąś zdolność wykorzystać</b>.'
+                    'Prowadzący zwraca uwagę, że wszystkie wymienione przezeń sfery są umiejętnościami i zdolnościami. Sprawiają, że człowiek "może więcej", jednak żadna z tych sfer, nawet gdyby była rozwinięta do perfekcji, <b>nie określa kiedy, czy i jak należy jakąś zdolność wykorzystać</b>.'
                     '<br>'
                     '<br>Z tego powodu sfery <b>ciała</b>, <b>umysłu</b>, <b>relacji</b> i <b>emocji</b> są <b>sferami funkcjonalnymi</b> - są jak zestaw narzędzi leżących w garażu.'
                     '</p>'

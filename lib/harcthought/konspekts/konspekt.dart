@@ -507,6 +507,17 @@ class Konspekt extends KonspektStepsContainer{
   Duration? get duration{
     if(customDuration != null) return customDuration;
 
+    if(stepGroups != null){
+      if(stepGroups!.isEmpty) return null;
+
+      Duration resultDuration = Duration.zero;
+
+      for(KonspektStepGroup stepGroup in stepGroups!)
+        resultDuration += stepGroup.duration;
+
+      return resultDuration;
+    }
+
     if(steps.isEmpty)
       return null;
 
