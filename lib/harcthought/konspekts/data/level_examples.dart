@@ -104,7 +104,7 @@ const Map<KonspektSphere, KonspektSphereDetails> spheresLogiczne = {
             KonspektSphereFactor.duchPerspektywa_Normalizacja,
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchWartosciWtorne,
-            KonspektSphereFactor.duchWzajemnoscOddzialywan
+            KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
           }
         },
         KonspektSphereLevel.duchWartosci: {
@@ -112,7 +112,7 @@ const Map<KonspektSphere, KonspektSphereDetails> spheresLogiczne = {
             KonspektSphereFactor.duchPerspektywa_Normalizacja,
             KonspektSphereFactor.duchWartosciWtorne,
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-            KonspektSphereFactor.duchWzajemnoscOddzialywan
+            KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
           },
         },
         ...levelSilaCharakteru

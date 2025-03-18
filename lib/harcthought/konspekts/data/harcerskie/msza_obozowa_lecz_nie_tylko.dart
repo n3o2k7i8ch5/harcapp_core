@@ -18,7 +18,7 @@ Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
           aksjoSpotkanieBogaWeMszySw: {
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-            KonspektSphereFactor.duchWzajemnoscOddzialywan,
+            KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
             KonspektSphereFactor.duchPerspektywa_Normalizacja,
           },
         },
@@ -26,7 +26,7 @@ Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
           wartoscBliskoscZBogiem: {
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-            KonspektSphereFactor.duchWzajemnoscOddzialywan,
+            KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
             KonspektSphereFactor.duchPerspektywa_Normalizacja,
           }
         },
@@ -34,7 +34,7 @@ Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
           postawaPrzebaczenie: {
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-            KonspektSphereFactor.duchWzajemnoscOddzialywan,
+            KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
             KonspektSphereFactor.duchPerspektywa_Normalizacja,
           }
         }

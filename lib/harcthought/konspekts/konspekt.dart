@@ -168,7 +168,7 @@ enum KonspektSphereFactor{
   duchPrzykladWlasnyAutorytetow,
   duchWartosciWtorne,
   duchWlasnaRefleksja,
-  duchWzajemnoscOddzialywan;
+  duchWspolnota_WzajemnoscOddzialywan;
 
   String get displayName{
     switch(this){
@@ -181,7 +181,7 @@ enum KonspektSphereFactor{
       case duchPrzykladWlasnyAutorytetow: return 'Przykład Własny Autorytetów';
       case duchWartosciWtorne: return 'Wartości Wtórne';
       case duchWlasnaRefleksja: return 'Własna Refleksja';
-      case duchWzajemnoscOddzialywan: return 'Wzajemność Oddziaływań';
+      case duchWspolnota_WzajemnoscOddzialywan: return 'Wspólnota (Wzajemność Oddziaływań)';
     }
 
   }

@@ -35,7 +35,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
             postawaPostepowanieZgodnieZPH: {
               KonspektSphereFactor.duchPerspektywa_Normalizacja,
               KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-              KonspektSphereFactor.duchWzajemnoscOddzialywan
+              KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
             }
           }
         }
