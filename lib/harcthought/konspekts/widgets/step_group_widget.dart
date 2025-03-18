@@ -27,8 +27,9 @@ class KonspektStepGroupWidget extends StatelessWidget{
       );
 
     Widget child = ListView.separated(
+      padding: EdgeInsets.symmetric(vertical: Dimen.sideMarg),
       itemBuilder: (context, index) => children[index],
-      separatorBuilder: (context, index) => SizedBox(height: 1.5*Dimen.sideMarg),
+      separatorBuilder: (context, index) => SizedBox(height: 2*Dimen.sideMarg),
       itemCount: children.length,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
