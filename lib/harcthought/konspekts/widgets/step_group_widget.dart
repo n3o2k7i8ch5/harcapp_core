@@ -26,7 +26,7 @@ class KonspektStepGroupWidget extends StatelessWidget{
     List<Widget> children = [];
     for (int stepIndex = 0; stepIndex < stepGroup.steps.length; stepIndex++) {
       Widget child = Padding(
-        padding: EdgeInsets.all(Dimen.sideMarg),
+        padding: EdgeInsets.symmetric(vertical: Dimen.sideMarg),
         child: KonspektStepWidget(
             konspekt, stepGroup, stepIndex, groupIndex: index,
             maxDialogWidth: maxDialogWidth),
