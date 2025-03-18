@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/border_material.dart';
+import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/konspekts/widgets/step_widget.dart';
 
@@ -25,9 +26,12 @@ class KonspektStepGroupWidget extends StatelessWidget{
         KonspektStepWidget(konspekt, stepGroup, stepIndex, groupIndex: index, maxDialogWidth: maxDialogWidth)
       );
 
-    Widget child = Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: children
+    Widget child = ListView.separated(
+      itemBuilder: (context, index) => children[index],
+      separatorBuilder: (context, index) => SizedBox(height: 1.5*Dimen.sideMarg),
+      itemCount: children.length,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
     );
 
     if(showBorder)

@@ -18,10 +18,11 @@ class KonspektStepWidget extends StatelessWidget{
   final KonspektStepsContainer stepsContainer;
   final int index;
   final int? groupIndex;
+  final double horizontalPadding;
   final double? maxDialogWidth;
   KonspektStep get step => stepsContainer.steps![index];
 
-  const KonspektStepWidget(this.konspekt, this.stepsContainer, this.index, {this.groupIndex, this.maxDialogWidth, super.key});
+  const KonspektStepWidget(this.konspekt, this.stepsContainer, this.index, {this.groupIndex, this.horizontalPadding = Dimen.sideMarg, this.maxDialogWidth, super.key});
 
   @override
   Widget build(BuildContext context) => Column(
@@ -30,7 +31,7 @@ class KonspektStepWidget extends StatelessWidget{
     children: [
 
       SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
+        padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         child: Row(
@@ -103,10 +104,10 @@ class KonspektStepWidget extends StatelessWidget{
 
       if(step.aims != null && step.aims!.isNotEmpty)
         Padding(
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
             top: Dimen.sideMarg,
-            left: Dimen.sideMarg,
-            right: Dimen.sideMarg,
+            left: horizontalPadding,
+            right: horizontalPadding,
           ),
           child: Material(
             color: cardEnab_(context),
@@ -169,10 +170,10 @@ class KonspektStepWidget extends StatelessWidget{
 
       if(step.materials != null && step.materials!.isNotEmpty)
         Padding(
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
             top: Dimen.sideMarg,
-            left: Dimen.sideMarg,
-            right: Dimen.sideMarg,
+            left: horizontalPadding,
+            right: horizontalPadding
           ),
           child: Material(
               color: cardEnab_(context),
@@ -225,7 +226,11 @@ class KonspektStepWidget extends StatelessWidget{
         ),
 
       Padding(
-        padding: const EdgeInsets.all(Dimen.sideMarg),
+        padding: EdgeInsets.only(
+          top: Dimen.sideMarg,
+          left: horizontalPadding,
+          right: horizontalPadding,
+        ),
         child: KonspektHtmlWidget(
             konspekt,
             step.content??step.contentBuilder!.call(isDark: isDark(context)),
