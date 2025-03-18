@@ -433,6 +433,16 @@ class KonspektStepGroup extends KonspektStepsContainer{
     return resultDuration;
   }
 
+  Duration get requiredDuration{
+    Duration resultDuration = Duration.zero;
+
+    for(KonspektStep step in steps)
+      if(step.required)
+        resultDuration += step.duration;
+
+    return resultDuration;
+  }
+
   const KonspektStepGroup({
     this.title,
     required super.steps
@@ -532,6 +542,17 @@ class Konspekt extends KonspektStepsContainer{
 
   Duration? get requiredDuration{
     if(customDuration != null) return customDuration;
+
+    if(stepGroups != null){
+      if(stepGroups!.isEmpty) return null;
+
+      Duration resultDuration = Duration.zero;
+
+      for(KonspektStepGroup stepGroup in stepGroups!)
+        resultDuration += stepGroup.requiredDuration;
+
+      return resultDuration;
+    }
 
     if(steps.isEmpty)
       return null;
