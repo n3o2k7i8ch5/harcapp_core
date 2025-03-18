@@ -412,7 +412,7 @@ class KonspektStep{
 
 class KonspektStepsContainer{
 
-  final List<KonspektStep>? steps;
+  final List<KonspektStep> steps;
 
   const KonspektStepsContainer({
     required this.steps,
@@ -450,12 +450,24 @@ class Konspekt extends KonspektStepsContainer{
   final String? intro;
   final String? description;
   final List<String>? howToFail;
-  // final List<KonspektStep>? steps;
+  // If stepGroups is not null, steps will be ignored.
   final List<KonspektStepGroup>? stepGroups;
+  // final List<KonspektStep>? steps;
 
   final List<KonspektAttachment>? attachments;
   final Konspekt? partOf;
   final bool upToDate;
+
+  List<KonspektStep> get allSteps{
+    List<KonspektStep> result = [];
+    if(stepGroups != null)
+      for(KonspektStepGroup group in stepGroups!)
+        result.addAll(group.steps);
+    else
+      result.addAll(steps);
+
+    return result;
+  }
 
   static Konspekt oldFrom(
     Konspekt upToDateKonspekt, {
@@ -486,12 +498,12 @@ class Konspekt extends KonspektStepsContainer{
   Duration? get duration{
     if(customDuration != null) return customDuration;
 
-    if(steps == null)
+    if(steps.isEmpty)
       return null;
 
     Duration resultDuration = Duration.zero;
 
-    for(KonspektStep step in steps!)
+    for(KonspektStep step in steps)
       resultDuration += step.duration;
 
     return resultDuration;
@@ -501,12 +513,12 @@ class Konspekt extends KonspektStepsContainer{
   Duration? get requiredDuration{
     if(customDuration != null) return customDuration;
 
-    if(steps == null)
+    if(steps.isEmpty)
       return null;
 
     Duration resultDuration = Duration.zero;
 
-    for(KonspektStep step in steps!)
+    for(KonspektStep step in steps)
       if(step.required)
         resultDuration += step.duration;
 
@@ -533,8 +545,8 @@ class Konspekt extends KonspektStepsContainer{
     this.intro,
     this.description,
     this.howToFail,
-    super.steps,
     this.stepGroups,
+    super.steps = const [],
 
     this.attachments,
     this.partOf,

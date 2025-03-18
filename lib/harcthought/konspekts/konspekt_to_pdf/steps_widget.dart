@@ -14,7 +14,9 @@ Future<List<Widget>> StepsWidget(
     Font fontBoldItalic
     ) async {
 
-  if(konspekt.steps == null)
+  List<KonspektStep> steps = konspekt.allSteps;
+
+  if(steps.isEmpty)
     return [];
 
   List<Widget> stepWidgets = [
@@ -27,10 +29,10 @@ Future<List<Widget>> StepsWidget(
 
   ];
 
-  for(int i=0; i<konspekt.steps!.length; i++) {
+  for(int i=0; i<steps.length; i++) {
     stepWidgets.addAll(
         await StepWidget(
-            konspekt.steps![i],
+            steps[i],
             i,
             font,
             fontHalfBold,
@@ -40,7 +42,7 @@ Future<List<Widget>> StepsWidget(
             fontBoldItalic
         )
     );
-    if(i<konspekt.steps!.length - 1)
+    if(i<steps.length - 1)
       stepWidgets.add(SizedBox(height: 1.5*elementBigSeparator));
   }
 

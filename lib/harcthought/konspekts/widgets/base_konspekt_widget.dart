@@ -422,7 +422,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               count: konspekt.stepGroups!.length
               )),
             )
-          else if(konspekt.steps != null)
+          else if(konspekt.steps.isNotEmpty)
             SliverPadding(
               padding: const EdgeInsets.only(bottom: Dimen.sideMarg),
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
@@ -433,7 +433,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                     maxDialogWidth: maxDialogWidth
                   ),
                   separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
-                  count: konspekt.steps!.length
+                  count: konspekt.steps.length
               )),
             ),
 
