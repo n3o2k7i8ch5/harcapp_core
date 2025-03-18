@@ -36,7 +36,7 @@ class KonspektStepGroupWidget extends StatelessWidget{
         children.add(
           Container(
             child: child,
-            color: backgroundIcon_(context).withValues(alpha: 0.02),
+            color: backgroundIcon_(context).withValues(alpha: 0.03),
           )
         );
       else
