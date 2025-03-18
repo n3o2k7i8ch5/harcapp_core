@@ -20,7 +20,7 @@ class KonspektStepWidget extends StatelessWidget{
   final int? groupIndex;
   final double horizontalPadding;
   final double? maxDialogWidth;
-  KonspektStep get step => stepsContainer.steps![index];
+  KonspektStep get step => stepsContainer.steps[index];
 
   const KonspektStepWidget(this.konspekt, this.stepsContainer, this.index, {this.groupIndex, this.horizontalPadding = Dimen.sideMarg, this.maxDialogWidth, super.key});
 
@@ -46,15 +46,18 @@ class KonspektStepWidget extends StatelessWidget{
                     constraints: BoxConstraints(
                       minWidth: 2*Dimen.textSizeNormal + Dimen.defMarg + 4
                     ),
-                    child: Center(
-                      child: Text(
-                          '${groupIndex==null?'':'${groupIndex! + 1}.'}${index + 1}.',
-                          style: AppTextStyle(
-                              fontSize: Dimen.textSizeAppBar,
-                              fontWeight: weight.halfBold,
-                              color: background_(context)
-                          )
-                      ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: Dimen.defMarg),
+                      child: Center(
+                        child: Text(
+                            '${groupIndex==null?'':'${groupIndex! + 1}.'}${index + 1}.',
+                            style: AppTextStyle(
+                                fontSize: Dimen.textSizeAppBar,
+                                fontWeight: weight.halfBold,
+                                color: background_(context)
+                            )
+                        ),
+                      )
                     ),
                   )
                 )
