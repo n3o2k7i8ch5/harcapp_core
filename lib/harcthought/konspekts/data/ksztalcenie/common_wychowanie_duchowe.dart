@@ -1,6 +1,5 @@
 import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common_attachments.dart';
-import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/warsztaty_wychowania_duchowego.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
 KonspektMaterial material_mini_kartki_biurowe = KonspektMaterial(
@@ -38,6 +37,13 @@ KonspektMaterial material_zal_aksjomaty_opisu_i_sensu_przyklady = KonspektMateri
 KonspektMaterial material_zal_aksjomaty_sensu_przyklady = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_aksjomaty_sensu_przyklady”',
     attachmentName: attach_name_aksjomaty_sensu_przyklady,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
+    amount: 1
+);
+
+KonspektMaterial material_zal_aksjomaty_bledne_przyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_aksjomaty_bledne_przyklady”',
+    attachmentName: attach_name_aksjomaty_bledne_przyklady,
     additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
     amount: 1
 );
@@ -270,17 +276,18 @@ KonspektStep step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = KonspektS
       material_zal_aksjomaty_opisu_przyklady,
       material_zal_aksjomaty_opisu_i_sensu_przyklady,
       material_zal_aksjomaty_sensu_przyklady,
+      material_zal_aksjomaty_bledne_przyklady,
     ],
     duration: Duration(minutes: 15),
     activeForm: true,
     content: '<p style="text-align:justify;">'
-        'Aby uczestnicy mieli okazję sami obyć się z aksjomatami, prowadzący rozdaje im wycięte prostokątne kartki z przykładami aksjomatów z załącznika $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_opisu_i_sensu_przyklady i $attach_html_aksjomaty_sensu_przyklady.'
+        'Aby uczestnicy mieli okazję sami obyć się z aksjomatami, prowadzący rozdaje im wycięte prostokątne kartki z przykładami aksjomatów z załącznika $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_opisu_i_sensu_przyklady, $attach_html_aksjomaty_sensu_przyklady i attach_html_aksjomaty_bledne_przyklady.'
         '<br>'
-        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio do jako <b>aksjomaty opisu</b>, <b>aksjomaty opisu i sensu</b> oraz <b>aksjomaty sensu</b>.'
+        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio do jako <b>aksjomaty opisu</b>, <b>aksjomaty opisu i sensu</b> oraz <b>aksjomaty sensu</b>. Muszą mieć też na uwadze, że kilka przykładów nie jest aksjomatem w ogóle.'
         '<br>'
         '<br>W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
         '<br>'
-        '<br>Kartki z przykładowymi aksjomatami powinny zostać ułożone w trzech kolumnach pod wyłożoną podczas prezentowania poziomów duchowości kartką "Aksjomat".'
+        '<br>Kartki z przykładowymi aksjomatami powinny zostać ułożone w trzech kolumnach pod wyłożoną podczas prezentowania poziomów duchowości kartką "Aksjomat". Przykłady, które nie są aksjomatami należy odłożyć gdzies z boku.'
         '<br>'
         '<br>Na końcu prowadzący po krótce omawia z uczestnikami poprawność ich dopasowania.'
         '</p>'

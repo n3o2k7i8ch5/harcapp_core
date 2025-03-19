@@ -78,6 +78,18 @@ KonspektAttachment attach_aksjomaty_sensu_przyklady = KonspektAttachment(
   },
 );
 
+const String attach_html_aksjomaty_bledne_przyklady = '<a href="$attach_name_aksjomaty_bledne_przyklady@attachment">$attach_title_aksjomaty_bledne_przyklady</a>';
+const String attach_name_aksjomaty_bledne_przyklady = 'aksjomaty_bledne_przyklady';
+const String attach_title_aksjomaty_bledne_przyklady = 'Aksjomaty błedne przykłady';
+KonspektAttachment attach_aksjomaty_bledne_przyklady = KonspektAttachment(
+  name: attach_name_aksjomaty_bledne_przyklady,
+  title: attach_title_aksjomaty_bledne_przyklady,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_aksjomaty_bledne_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_aksjomaty_bledne_przyklady.docx',
+  },
+);
+
 // Meta-narracja
 
 const String attach_html_meta_narracja_opis = '<a href="$attach_name_meta_narracja_opis@attachment">$attach_title_meta_narracja_opis</a>';
