@@ -281,9 +281,9 @@ KonspektStep step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = KonspektS
     duration: Duration(minutes: 15),
     activeForm: true,
     content: '<p style="text-align:justify;">'
-        'Aby uczestnicy mieli okazję sami obyć się z aksjomatami, prowadzący rozdaje im wycięte prostokątne kartki z przykładami aksjomatów z załącznika $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_opisu_i_sensu_przyklady, $attach_html_aksjomaty_sensu_przyklady i attach_html_aksjomaty_bledne_przyklady.'
+        'Aby uczestnicy mieli okazję sami obyć się z aksjomatami, prowadzący rozdaje im wycięte prostokątne kartki z przykładami aksjomatów z załącznika $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_opisu_i_sensu_przyklady, $attach_html_aksjomaty_sensu_przyklady i $attach_html_aksjomaty_bledne_przyklady.'
         '<br>'
-        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio do jako <b>aksjomaty opisu</b>, <b>aksjomaty opisu i sensu</b> oraz <b>aksjomaty sensu</b>. Muszą mieć też na uwadze, że kilka przykładów nie jest aksjomatem w ogóle.'
+        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio do jako <b>aksjomaty opisu</b>, <b>aksjomaty opisu i sensu</b> oraz <b>aksjomaty sensu</b>. Muszą mieć też na uwadze, że <b>kilka przykładów nie jest aksjomatem</b> w ogóle.'
         '<br>'
         '<br>W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
         '<br>'
