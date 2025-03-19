@@ -220,7 +220,7 @@ KonspektStep step_poziomy_duchowosci_aksjomat = KonspektStep(
       '$aksjomaty_przyklady'
 
       '<p style="text-align:justify;">'
-      '<b>Aksjomat zawsze jest pewną fundamentalną niesprawdzalną wiarą</b> w określony porządek rzeczy.'
+      '<b>Aksjomat zawsze jest fundamentalną, niesprawdzalną wiarą</b> w określony porządek rzeczy.'
       '<br>'
       '<br><b>Aksjomaty całkowicie porządkują postrzeganie rzeczywistości</b>. Aby to zobrazować, prowadzący może posłużyć się przykładem:'
       '<br>'
