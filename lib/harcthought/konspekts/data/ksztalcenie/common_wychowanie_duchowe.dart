@@ -1,5 +1,6 @@
 import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common_attachments.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/warsztaty_wychowania_duchowego.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
 KonspektMaterial material_mini_kartki_biurowe = KonspektMaterial(
@@ -10,6 +11,34 @@ KonspektMaterial material_mini_kartki_biurowe = KonspektMaterial(
 KonspektMaterial material_zal_poziomy_duchowosci = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_poziomy_duchowosci”',
     attachmentName: attach_name_poziomy_duchowosci,
+    amount: 1
+);
+
+KonspektMaterial material_zal_przyklady_poziomow_duchowosci = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_przyklady_poziomow_duchowosci”',
+    attachmentName: attach_name_przyklady_poziomow_duchowosci,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i potasować w ramach wyciętych czwórek.',
+    amount: 1
+);
+
+KonspektMaterial material_zal_aksjomaty_opisu_przyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_aksjomaty_opisu_przyklady”',
+    attachmentName: attach_name_aksjomaty_opisu_przyklady,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
+    amount: 1
+);
+
+KonspektMaterial material_zal_aksjomaty_opisu_i_sensu_przyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_aksjomaty_opisu_i_sensu_przyklady”',
+    attachmentName: attach_name_aksjomaty_opisu_i_sensu_przyklady,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
+    amount: 1
+);
+
+KonspektMaterial material_zal_aksjomaty_sensu_przyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_aksjomaty_sensu_przyklady”',
+    attachmentName: attach_name_aksjomaty_sensu_przyklady,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
     amount: 1
 );
 
@@ -230,6 +259,31 @@ KonspektStep step_poziomy_duchowosci_aksjomat = KonspektStep(
       '<br>'
       '<br>Prowadzący dzieli aksjomaty na dwie nierozłączne grupy (tzn. każdy aksjomat może należeć do jednej z grup lub wszystkich na raz): <b>aksjomaty opisu</b> oraz <b>aksjomaty sensu</b> na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci.'
       '</p>'
+);
+
+KonspektStep step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = KonspektStep(
+    title: 'Poziomy (warstwy) rozwoju duchowego - aksjomat - dopasowanie przykładów',
+    aims: [
+      'Zrozumienie przez uczestników w praktice różnicy między aksjomatami opisu, a aksjomatami sensu.',
+    ],
+    materials: [
+      material_zal_aksjomaty_opisu_przyklady,
+      material_zal_aksjomaty_opisu_i_sensu_przyklady,
+      material_zal_aksjomaty_sensu_przyklady,
+    ],
+    duration: Duration(minutes: 15),
+    activeForm: true,
+    content: '<p style="text-align:justify;">'
+        'Aby uczestnicy mieli okazję sami obyć się z aksjomatami, prowadzący rozdaje im wycięte prostokątne kartki z przykładami aksjomatów z załącznika $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_opisu_i_sensu_przyklady i $attach_html_aksjomaty_sensu_przyklady.'
+        '<br>'
+        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio do jako <b>aksjomaty opisu</b>, <b>aksjomaty opisu i sensu</b> oraz <b>aksjomaty sensu</b>.'
+        '<br>'
+        '<br>W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
+        '<br>'
+        '<br>Kartki z przykładowymi aksjomatami powinny zostać ułożone w trzech kolumnach pod wyłożoną podczas prezentowania poziomów duchowości kartką "Aksjomat".'
+        '<br>'
+        '<br>Na końcu prowadzący po krótce omawia z uczestnikami poprawność ich dopasowania.'
+        '</p>'
 );
 
 KonspektStep step_poziomy_duchowosci_meta_narracja = KonspektStep(

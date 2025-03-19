@@ -13,18 +13,6 @@ const konspekt_kszt_name_warsztaty_wychowania_duchowego = 'warsztaty_wychowania_
 const konspekt_kszt_title_warsztaty_wychowania_duchowego = 'Warsztaty wychowania duchowego';
 
 
-const String attach_html_przyklady_poziomow_duchowosci = '<a href="$attach_name_przyklady_poziomow_duchowosci@attachment">$attach_title_przyklady_poziomow_duchowosci</a>';
-const String attach_name_przyklady_poziomow_duchowosci = 'przyklady_poziomow_duchowosci';
-const String attach_title_przyklady_poziomow_duchowosci = 'Przykłady poziomów duchowości';
-KonspektAttachment attach_przyklady_poziomow_duchowosci = KonspektAttachment(
-  name: attach_name_przyklady_poziomow_duchowosci,
-  title: attach_title_przyklady_poziomow_duchowosci,
-  assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_przyklady_poziomow_duchowosci.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_przyklady_poziomow_duchowosci.docx',
-  },
-);
-
 const String attach_html_scenariusz_fantomowe_dzialania_wychowawcze = '<a href="$attach_name_scenariusz_fantomowe_dzialania_wychowawcze@attachment">$attach_title_scenariusz_fantomowe_dzialania_wychowawcze</a>';
 const String attach_name_scenariusz_fantomowe_dzialania_wychowawcze = 'scenariusz_fantomowe_dzialania_wychowawcze';
 const String attach_title_scenariusz_fantomowe_dzialania_wychowawcze = 'Scenariusz fantomowe działania wychowawcze';
@@ -131,13 +119,6 @@ KonspektMaterial material_czajnik = KonspektMaterial(
   amount: 1,
 );
 
-KonspektMaterial material_zal_przyklady_poziomow_duchowosci = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_przyklady_poziomow_duchowosci”',
-    attachmentName: attach_name_przyklady_poziomow_duchowosci,
-    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i potasować w ramach wyciętych czwórek.',
-    amount: 1
-);
-
 KonspektMaterial material_zal_kratka_minimow_rozwoju_duchowego = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_kratka_minimow_rozwoju_duchowego”',
     attachmentName: attach_name_kratka_minimow_rozwoju_duchowego,
@@ -198,7 +179,13 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
     ],
     attachments: [
       attach_poradnik_o_strukturze_duchowosci,
+
       attach_poziomy_duchowosci,
+
+      attach_aksjomaty_opisu_przyklady,
+      attach_aksjomaty_opisu_i_sensu_przyklady,
+      attach_aksjomaty_sensu_przyklady,
+
       attach_meta_narracja_opis,
       attach_meta_narracja_przyklady,
       attach_neutralnosc_duchowa_przyklady,
@@ -206,7 +193,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       attach_cel_wychowania_duchowego_zhp_uchwala,
       attach_kratka_minimow_rozwoju_duchowego,
 
-      attach_przyklady_poziomow_duchowosci,
       ...attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
       attach_scenariusz_fantomowe_dzialania_wychowawcze,
       attach_formy,
@@ -246,6 +232,10 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_czajnik,
 
       material_zal_poziomy_duchowosci,
+
+      material_zal_aksjomaty_opisu_przyklady,
+      material_zal_aksjomaty_opisu_i_sensu_przyklady,
+      material_zal_aksjomaty_sensu_przyklady,
 
       material_zal_meta_narracja_opis,
 
@@ -472,6 +462,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             step_poziomy_duchowosci,
 
             step_poziomy_duchowosci_aksjomat,
+
+            step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow,
 
             step_poziomy_duchowosci_meta_narracja,
 

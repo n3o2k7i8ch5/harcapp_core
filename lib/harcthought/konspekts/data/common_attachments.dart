@@ -28,6 +28,58 @@ KonspektAttachment attach_poziomy_duchowosci = KonspektAttachment(
   },
 );
 
+const String attach_html_przyklady_poziomow_duchowosci = '<a href="$attach_name_przyklady_poziomow_duchowosci@attachment">$attach_title_przyklady_poziomow_duchowosci</a>';
+const String attach_name_przyklady_poziomow_duchowosci = 'przyklady_poziomow_duchowosci';
+const String attach_title_przyklady_poziomow_duchowosci = 'Przykłady poziomów duchowości';
+KonspektAttachment attach_przyklady_poziomow_duchowosci = KonspektAttachment(
+  name: attach_name_przyklady_poziomow_duchowosci,
+  title: attach_title_przyklady_poziomow_duchowosci,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_przyklady_poziomow_duchowosci.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_przyklady_poziomow_duchowosci.docx',
+  },
+);
+
+// Przykłady aksjomatów
+
+const String attach_html_aksjomaty_opisu_przyklady = '<a href="$attach_name_aksjomaty_opisu_przyklady@attachment">$attach_title_aksjomaty_opisu_przyklady</a>';
+const String attach_name_aksjomaty_opisu_przyklady = 'aksjomaty_opisu_przyklady';
+const String attach_title_aksjomaty_opisu_przyklady = 'Aksjomaty opisu przykłady';
+KonspektAttachment attach_aksjomaty_opisu_przyklady = KonspektAttachment(
+  name: attach_name_aksjomaty_opisu_przyklady,
+  title: attach_title_aksjomaty_opisu_przyklady,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_aksjomaty_opisu_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_aksjomaty_opisu_przyklady.docx',
+  },
+);
+
+const String attach_html_aksjomaty_opisu_i_sensu_przyklady = '<a href="$attach_name_aksjomaty_opisu_i_sensu_przyklady@attachment">$attach_title_aksjomaty_opisu_i_sensu_przyklady</a>';
+const String attach_name_aksjomaty_opisu_i_sensu_przyklady = 'aksjomaty_opisu_i_sensu_przyklady';
+const String attach_title_aksjomaty_opisu_i_sensu_przyklady = 'Aksjomaty opisu i sensu przykłady';
+KonspektAttachment attach_aksjomaty_opisu_i_sensu_przyklady = KonspektAttachment(
+  name: attach_name_aksjomaty_opisu_i_sensu_przyklady,
+  title: attach_title_aksjomaty_opisu_i_sensu_przyklady,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_aksjomaty_opisu_i_sensu_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_aksjomaty_opisu_i_sensu_przyklady.docx',
+  },
+);
+
+const String attach_html_aksjomaty_sensu_przyklady = '<a href="$attach_name_aksjomaty_sensu_przyklady@attachment">$attach_title_aksjomaty_sensu_przyklady</a>';
+const String attach_name_aksjomaty_sensu_przyklady = 'aksjomaty_sensu_przyklady';
+const String attach_title_aksjomaty_sensu_przyklady = 'Aksjomaty sensu przykłady';
+KonspektAttachment attach_aksjomaty_sensu_przyklady = KonspektAttachment(
+  name: attach_name_aksjomaty_sensu_przyklady,
+  title: attach_title_aksjomaty_sensu_przyklady,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_aksjomaty_sensu_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_aksjomaty_sensu_przyklady.docx',
+  },
+);
+
+// Meta-narracja
+
 const String attach_html_meta_narracja_opis = '<a href="$attach_name_meta_narracja_opis@attachment">$attach_title_meta_narracja_opis</a>';
 const String attach_name_meta_narracja_opis = 'meta_narracja_opis';
 const String attach_title_meta_narracja_opis = 'Meta-narracja opis';
