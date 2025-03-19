@@ -241,8 +241,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       material_zal_meta_narracja_przyklady,
 
-      material_zal_przyklady_poziomow_duchowosci,
-
       material_zal_neutralnosc_duchowa_przyklady,
 
       material_zal_cel_wychowania_duchowego_zhp_statut,
