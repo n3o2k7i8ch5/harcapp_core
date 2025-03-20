@@ -133,6 +133,16 @@ class KonspektHtmlWidget extends StatelessWidget{
                 fontWeight: weight.halfBold,
               )
           );
+        else if(element.localName == "a")
+          return Text(
+              element.innerHtml,
+              style: AppTextStyle(
+                fontSize: textSize,
+                fontWeight: weight.halfBold,
+                color: Colors.indigoAccent
+              )
+          );
+
         return null;
       },
     ),
