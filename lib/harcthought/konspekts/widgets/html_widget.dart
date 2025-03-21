@@ -101,12 +101,12 @@ class KonspektHtmlWidget extends StatelessWidget{
             return Image.network(src);
         }else if(element.localName == "h1")
           return Text(
-              element.innerHtml,
-              style: AppTextStyle(
-                  fontSize: Dimen.textSizeAppBar,
-                  fontWeight: weight.halfBold,
-                  decoration: TextDecoration.underline
-              )
+            element.innerHtml,
+            style: AppTextStyle(
+              fontSize: Dimen.textSizeAppBar,
+              fontWeight: weight.halfBold,
+              decoration: TextDecoration.underline
+            )
           );
         else if(element.localName == "h2")
           return Text(
@@ -131,15 +131,6 @@ class KonspektHtmlWidget extends StatelessWidget{
               style: AppTextStyle(
                 fontSize: Dimen.textSizeBig,
                 fontWeight: weight.halfBold,
-              )
-          );
-        else if(element.localName == "a")
-          return Text(
-              element.innerHtml,
-              style: AppTextStyle(
-                fontSize: textSize,
-                fontWeight: weight.halfBold,
-                color: Colors.indigoAccent
               )
           );
 

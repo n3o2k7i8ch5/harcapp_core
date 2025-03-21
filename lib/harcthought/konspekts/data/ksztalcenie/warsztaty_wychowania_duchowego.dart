@@ -486,11 +486,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           ]
       ),
 
-      KonspektStepGroup(
-          steps: [
-            step_integracja_duchowosci,
-          ]
-      ),
+      step_group_integracja_duchowosci,
 
       KonspektStepGroup(
           title: 'Duchowość powszechna, mądrość, kultura i tradycja',

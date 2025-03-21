@@ -152,7 +152,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
 
       step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow,
 
-      step_integracja_duchowosci,
+      ...step_group_integracja_duchowosci.steps,
 
       step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
 
