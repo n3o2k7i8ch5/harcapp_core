@@ -401,7 +401,6 @@ KonspektStep step_integracja_duchowosci_wstepna = KonspektStep(
         '<p style="text-align:justify;">'
         'Prowadzący opisując przejście między kolejnymi etapami rozwoju duchowego rysuje <b>kolejne poziomy duchowości</b> na flipcharcie, tak jak poniżej:'
         '<br>${piramidaDuchowosciPartHtml(isDark: isDark)}'
-        '<br>'
         '<br>Następnie prowadzący opisuje zjawisko <b>integracji wstępnej duchowości</b>, czyli sposobu w jaki kształtowana jest duchowość człowieka od urodzenia aż do wieku ok. 13-15, gdy człowiek internalizuje poziom aksjomatów:'
         '<br>'
         '<br><i>Od momentu urodzenia człowiek ma określone zachowania - nie muszą być nawet ze sobą spójne. W trakcie, gdy dorasta, jego otoczenie buduje w nim przekonanie, że niektóre zachowania są dobre, a inne są złe. W wieku 10 lat zacznie rozumieć związek zachowań z wartościami i stopniowo orientuje się, że część z jego dotychczasowych zachowań była niezgodna z jego wartościami, więc zaczyna je zmieniać swoje zachowania. Zmiana zachowań sprawia, że zaczyna inaczej funkcjonować i inaczej doświadczać rzeczywistości, a to weryfikuje przyjętą hierarchię wartości. Nowe wartości wpływają z powrotem na nowe zachowania, zachowania na wartości i tak w kółko.'
@@ -443,7 +442,6 @@ KonspektStep step_integracja_duchowosci_swiadoma = KonspektStep(
         '<p style="text-align:justify;">'
         'Prowadzący opisując to, rysuje rysuje na flipcharcie liczne "oscylujące" strzałki i podpisuje je jako "integracja świadoma", tak jak poniżej:'
         '<br>${piramidaDuchowosciHtml(isDark: isDark)}'
-        '<br>'
         '<br>Na koniec ważne jest, aby prowadzący zaznaczył, że o ile można skutecznie wpływać na wartości, zachowania i postawy młodego człowieka, o tyle wpływ na aksjomat jest już bardziej subtelny. Do aksjomatów można młodego człowieka najwyżej "podprowadzić": owszem, są one kształtowane na podstawie własnych doświadczeń, znanych poglądów i przyjętych uprzednio wartości, jednak przyjąć aksjomat za własny można jedynie samemu, wedle własnego, osobistego przekonania. W tym procesie nie da się komuś towarzyszyć do końca.'
         '</p>',
 );
