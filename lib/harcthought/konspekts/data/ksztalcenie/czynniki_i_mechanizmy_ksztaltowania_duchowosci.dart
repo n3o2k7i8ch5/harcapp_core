@@ -53,9 +53,9 @@ KonspektMaterial material_zal_scenariusze_czynnikow_duchowosci = KonspektMateria
   amount: 1
 );
 
-KonspektMaterial material_totem = KonspektMaterial(
-    name: 'Totem do chwytania (np. czapka, chusta harcerska, maskotka)',
-    amount: 1
+KonspektMaterial material_zetony = KonspektMaterial(
+    name: 'Żetony (np. zapałki, akrylowe kryształki, pieniądze z monopoly)',
+    amount: 200
 );
 
 KonspektMaterial material_nagroda = KonspektMaterial(
@@ -66,7 +66,7 @@ KonspektMaterial material_nagroda = KonspektMaterial(
 List<KonspektMaterial> materials_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
   material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   material_zal_scenariusze_czynnikow_duchowosci,
-  material_totem,
+  material_zetony,
   material_nagroda,
 ];
 
@@ -88,15 +88,19 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
   ),
 
   KonspektStep(
-      title: 'Zasady bieganej familiady',
+      title: 'Zasady postaw na milion',
       duration: Duration(minutes: 5),
       activeForm: false,
       content: '<p style="text-align:justify;">'
           'Prowadzący wyjaśnia uczestnikom zasady gry, ktorą za chwilę rozegrają:'
           '<br>'
-          '<br>Uczestnicy zostaną podzieleni na dwie grupy. Co turę grupy będą wyznaczały kolejnego swojego uczestnika, ktory będzie ich reprezentował. Następnie prowadzący przeczyta którką historię.'
+          '<br>Uczestnicy zostaną podzieleni na grupy. Każda grupa otrzyma na początku 5 żetonów i karty z możliwymi do obstawienia odpowiedziami dotyczącymi czynników duchowości.'
           '<br>'
-          '<br>Gdy prowadzący skończy czytać,  będą mieli za zadanie określić, ktore czynniki rozwoju duchowego są w niej opisane.'
+          '<br>Co turę prowadzący będzie czytał krótką historię. Gdy skończy, każda grupa będzie miała możliwość zastanowić się, które czynniki rozwoju duchowego są w niej opisane - może być ich więcej niż jeden.'
+          '<br>'
+          '<br>Gdy grupy się zastanowią, mogą na każdej z kart położyć od 0 do 3 żetonów, obstawiając prawidłowe odpowiedzi. Gdy żetony zostaną rozdysponowane na kartach, grupy pokazują sobie nazwajem obstawione karty i prowadzący odczytuje odpowiedzi. Dobrze obstawione żetony są podwajane, źle obstawione są zabierane.'
+          '<br>'
+          '<br>Grupa, która zdobędzie najwięcej punktów, wygrywa.'
           '</p>'
   ),
 
@@ -114,40 +118,32 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
       duration: Duration(minutes: 10),
       activeForm: false,
       content: '<style="text-align:justify;">'
-          'Prowadzący wręcza każdej z grup po jednym egzemplarzu poradnika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci.'
+          'Prowadzący wręcza każdej z grup po jednym egzemplarzu poradnika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci. Ważne, aby dało się go rozłożyć na osobne kartki - na tych kartkach każda grupa będzie kładła swoje żetony.'
           '<br>'
-          '<br>Jeśli poradnik jest wydrukowany w formie luźnych kartek, uczestnicy mogą czytać "każdy po jednej kartce", po czym się nimi okrężnie wymieniać.'
+          '<br>Uczestnicy mają czas, aby zapoznać się z treściami kartek. Mogą przeczytać je sobie na głos, po cichu na raz, każdy po jednej kartce, po czym się nimi okrężnie wymieniać.'
           '<br>'
-          '<br>Uczestnicy mają 10 minut na zapoznanie się z poradnikiem. Gdy to zrobią, mogą zostawić go na widoku, by móc do niego wracać w trakcie gry.'
+          '<br>Gdy to zrobią, uczestnicy kładą kartki w rzędzie przed sobą na widoku, by móc do nich wracać w trakcie gry oraz obstawiać kartki z poprawnymi czynnikami za pomocą żetonów.'
           '</p>'
   ),
 
   KonspektStep(
-      title: 'Biegana familiada',
+      title: 'Postaw na milion',
       duration: Duration(minutes: 40),
       activeForm: true,
       materials: [
         material_zal_scenariusze_czynnikow_duchowosci,
-        material_totem,
+        material_zetony,
       ],
       content: '<p style="text-align:justify;">'
-          'Prowadzący prosi uczestników, by zajęli w grupach dwie strony wspólnej przestrzeni. Sam prowadzący staje na srodku i kładzie ok. 1-2 metry od siebie totem, tak, by każda grupa miała do niego taki sam dystans.'
+          'Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_czynnikow_duchowosci. Gdy skończy czytać, robi krótką przerwę, następnie zadaje niepunktowane <b>pytanie kontrolne</b> zapisane pod historią.'
           '<br>'
-          '<br>Uczestnicy ustawiają się w dwóch "kolejkach", a pierwsza osoba w każdej z kolejek zostaje pierwszym <b>reprezentantem</b> swojej grupy.'
+          '<br>Gdy prowadzący na podstawie pytania kontrolnego zyska pewność, że grupy rozumieją opisaną historię, zadaje pytanie punktowane o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
           '<br>'
-          '<br>Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_czynnikow_duchowosci. Gdy skończy czytać, robi krótką przerwę i zadaje pytanie zapisane pod historią.'
+          '<br>Grupy obstawiają swoje odpowiedzi. Gdy wszyscy skończą, odsłaniają je i prowadzący odczytuje poprawną odpowiedź, po czym przyznaje żetony za poprawne odpowiedzi i zabiera żetony za błędne wskazania.'
           '<br>'
-          '<br>W tym momencie reprezentanci każdej z grup mogą wystartować w kierunku totemu. Ten, który pierwszy dotknie totemu, ma prawo odpowiedzieć na pytanie.'
+          '<br>Po każdym rozdaniu punktów jest chwila na wspólne <b>omówienie niejasności</b> wynikających z przeczytanej historii i udzielonych odpowiedzi. Następnie, jeśli jest na to czas, prowadzący może jeszcze zapytać o to, <b>jakiego poziomu (warstwy) duchowości</b> dotyczyła przeczytana historia, jednak za to pytanie nie przewidziane są punkty.'
           '<br>'
-          '<br>Udzielić odpowiedzi należy na pytanie zadane przez prowadzacego, który następnie pyta o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
-          '<br>'
-          '<br>Jeśli reprezentant odpowie poprawnie, jego drużyna otrzymuje jeden punkt. Jeśli odpowiedź jest błędna, prawo do odpowiedzi na to pytanie ma reprezentant drużyny przeciwnej i jeśli mu się uda, to jego drużyna otrzymuje punkt.'
-          '<br>'
-          '<br>Po każdej turze reprezentanci wracają na końce swoich kolejek, a kolejna osoba z przodu kolejki zostaje reprezentantem swojej grupy.'
-          '<br>'
-          '<br>Gdy reprezentanci wrócą na swoje miejsca, mogą z prowadzącym wspólnie <b>omówić niejasności</b> wynikające z przeczytanej historii. Następnie prowadzący może jeszcze zapytać o to, <b>jakiego poziomu (warstwy) duchowości</b> dotyczyła przeczytana historia, jednak za to pytanie nie przewidziane są punkty.'
-          '<br>'
-          '<br>Gra trwa do momentu, gdy prowadzący przeczyta wszystkie historie.'
+          '<br>Gra trwa do momentu, gdy prowadzący przeczyta wszystkie historie, lub aż skończy się czas.'
           '<br>'
           '<br>Warto, aby prowadzący nie czytał historii po kolei, jako że są ułożone w tej samej kolejności, co czynniki opisane w poradnikach.'
           '</p>'

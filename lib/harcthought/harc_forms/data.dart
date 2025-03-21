@@ -246,4 +246,24 @@ List<HarcForm> allForms = [
       colorEnd: Colors.brown
   ),
 
+  HarcForm(
+      filename: 'postaw_na_milion',
+      title: 'Postaw na milion',
+      icon: MdiIcons.cashMultiple,
+      metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
+      tags: [HarcFormTag.zespolowe, HarcFormTag.sprawdzanieWiedzy],
+      colorStart: Colors.teal,
+      colorEnd: Colors.yellow[700]!
+  ),
+
+  HarcForm(
+      filename: 'wyscig_po_totem',
+      title: 'Wyścig po totem',
+      icon: MdiIcons.horseshoe,
+      metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
+      tags: [HarcFormTag.zespolowe, HarcFormTag.sprawdzanieWiedzy, HarcFormTag.ruchowe, HarcFormTag.kontuzjogenne],
+      colorStart: Colors.red,
+      colorEnd: Colors.deepPurple[700]!
+  ),
+
 ];
