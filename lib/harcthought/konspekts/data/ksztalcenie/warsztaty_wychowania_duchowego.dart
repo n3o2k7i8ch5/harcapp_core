@@ -180,7 +180,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
     attachments: [
       attach_poradnik_o_strukturze_duchowosci,
 
-      attach_poziomy_duchowosci,
+      attach_karty_poziomow_duchowosci,
+      attach_karty_zdolnosci_integracji_duchowosci,
 
       attach_aksjomaty_opisu_przyklady,
       attach_aksjomaty_opisu_i_sensu_przyklady,
@@ -232,7 +233,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       material_czajnik,
 
-      material_zal_poziomy_duchowosci,
+      material_zal_karty_poziomow_duchowosci,
+      material_zal_karty_zdolnosci_integracji_duchowosci,
 
       material_zal_aksjomaty_opisu_przyklady,
       material_zal_aksjomaty_opisu_i_sensu_przyklady,
@@ -458,6 +460,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       step_group_poziomy_duchowosci,
 
       step_group_integracja_duchowosci,
+
+      step_group_zdolnosc_integracji_duchowosci,
 
       KonspektStepGroup(
           title: 'Duchowość powszechna, mądrość, kultura i tradycja',

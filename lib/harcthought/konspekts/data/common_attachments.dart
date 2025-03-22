@@ -16,15 +16,27 @@ KonspektAttachment attach_poradnik_o_strukturze_duchowosci = KonspektAttachment(
   },
 );
 
-const String attach_html_poziomy_duchowosci = '<a href="$attach_name_poziomy_duchowosci@attachment">$attach_title_poziomy_duchowosci</a>';
-const String attach_name_poziomy_duchowosci = 'poziomy_duchowosci';
-const String attach_title_poziomy_duchowosci = 'Poziomy duchowości';
-KonspektAttachment attach_poziomy_duchowosci = KonspektAttachment(
-  name: attach_name_poziomy_duchowosci,
-  title: attach_title_poziomy_duchowosci,
+const String attach_html_karty_poziomow_duchowosci = '<a href="$attach_name_karty_poziomow_duchowosci@attachment">$attach_title_karty_poziomow_duchowosci</a>';
+const String attach_name_karty_poziomow_duchowosci = 'karty_poziomow_duchowosci';
+const String attach_title_karty_poziomow_duchowosci = 'Karty poziomów duchowości';
+KonspektAttachment attach_karty_poziomow_duchowosci = KonspektAttachment(
+  name: attach_html_karty_poziomow_duchowosci,
+  title: attach_name_karty_poziomow_duchowosci,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_poziomy_duchowosci.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_poziomy_duchowosci.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_karty_poziomow_duchowosci.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_karty_poziomow_duchowosci.docx',
+  },
+);
+
+const String attach_html_karty_zdolnosci_integracji_duchowosci = '<a href="$attach_name_karty_zdolnosci_integracji_duchowosci@attachment">$attach_title_karty_zdolnosci_integracji_duchowosci</a>';
+const String attach_name_karty_zdolnosci_integracji_duchowosci = 'karty_zdolnosci_integracji_duchowosci';
+const String attach_title_karty_zdolnosci_integracji_duchowosci = 'Karty zdolności integracji duchowości';
+KonspektAttachment attach_karty_zdolnosci_integracji_duchowosci = KonspektAttachment(
+  name: attach_name_karty_zdolnosci_integracji_duchowosci,
+  title: attach_title_karty_zdolnosci_integracji_duchowosci,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_karty_zdolnosci_integracji_duchowosci.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_karty_zdolnosci_integracji_duchowosci.docx',
   },
 );
 

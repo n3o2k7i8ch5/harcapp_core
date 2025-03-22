@@ -28,7 +28,9 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
     aims: wstep_do_wychowania_duchowego_aims,
     attachments: [
       attach_poradnik_o_strukturze_duchowosci,
-      attach_poziomy_duchowosci,
+
+      attach_karty_poziomow_duchowosci,
+      attach_karty_zdolnosci_integracji_duchowosci,
 
       attach_aksjomaty_opisu_przyklady,
       attach_aksjomaty_opisu_i_sensu_przyklady,
@@ -62,7 +64,8 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
         amount: 4,
       ),
 
-      material_zal_poziomy_duchowosci,
+      material_zal_karty_poziomow_duchowosci,
+      material_zal_karty_zdolnosci_integracji_duchowosci,
 
       material_zal_aksjomaty_opisu_przyklady,
       material_zal_aksjomaty_opisu_i_sensu_przyklady,

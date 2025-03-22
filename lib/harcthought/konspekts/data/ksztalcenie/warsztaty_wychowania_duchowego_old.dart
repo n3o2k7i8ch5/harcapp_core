@@ -14,8 +14,8 @@ KonspektAttachment attach_przyklady_poziomow_duchowosci = KonspektAttachment(
   name: attach_name_przyklady_poziomow_duchowosci,
   title: attach_title_przyklady_poziomow_duchowosci,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_przyklady_poziomow_duchowosci.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_przyklady_poziomow_duchowosci.docx',
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_przyklady_poziomow_duchowosci.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_przyklady_poziomow_duchowosci.docx',
   },
 );
 

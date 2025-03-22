@@ -7,11 +7,18 @@ KonspektMaterial material_mini_kartki_biurowe = KonspektMaterial(
   amountAttendantFactor: 3,
 );
 
-KonspektMaterial material_zal_poziomy_duchowosci = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_poziomy_duchowosci”',
-    attachmentName: attach_name_poziomy_duchowosci,
+KonspektMaterial material_zal_karty_poziomow_duchowosci = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_karty_poziomow_duchowosci”',
+    attachmentName: attach_name_karty_poziomow_duchowosci,
     amount: 1
 );
+
+KonspektMaterial material_zal_karty_zdolnosci_integracji_duchowosci = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_karty_zdolnosci_integracji_duchowosci”',
+    attachmentName: attach_name_karty_zdolnosci_integracji_duchowosci,
+    amount: 1
+);
+
 
 KonspektMaterial material_zal_aksjomaty_opisu_przyklady = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_aksjomaty_opisu_przyklady”',
@@ -170,12 +177,12 @@ KonspektStep step_sfery_rozwoju_i_ich_relacje = KonspektStep(
 
 // Poziomy (warstwy) duchowości
 
-KonspektStep step_poziomy_duchowosci = KonspektStep(
+KonspektStep _step_poziomy_duchowosci = KonspektStep(
     title: 'Poziomy (warstwy) rozwoju duchowego',
     duration: Duration(minutes: 10),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>zachowań</b>, poziom <b>postaw</b>, poziom <b>wartości</b> i poziom <b>aksjomatu</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika $attach_html_poziomy_duchowosci. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>zachowań</b>, poziom <b>postaw</b>, poziom <b>wartości</b> i poziom <b>aksjomatu</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika $attach_html_karty_poziomow_duchowosci. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
         '<br>'
         '<br>Dodatkowo prowadzący definiuje duchowość <b>wymierną</b> (poziom zachowań i postaw) i <b>głęboką</b> (poziom wartości i aksjomatów).'
         '<br>'
@@ -204,7 +211,7 @@ KonspektStep step_poziomy_duchowosci = KonspektStep(
 
 );
 
-KonspektStep step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
     title: 'Poziomy (warstwy) rozwoju duchowego - przykłady uczestników',
     duration: Duration(minutes: 5),
     required: false,
@@ -241,12 +248,12 @@ KonspektStep step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
 
         '</ul>',
     materials: [
-      material_zal_poziomy_duchowosci,
+      material_zal_karty_poziomow_duchowosci,
     ]
 
 );
 
-KonspektStep step_poziomy_duchowosci_aksjomat = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_aksjomat = KonspektStep(
   title: 'Poziomy (warstwy) rozwoju duchowego - aksjomat',
   duration: Duration(minutes: 5),
   activeForm: false,
@@ -271,7 +278,7 @@ KonspektStep step_poziomy_duchowosci_aksjomat = KonspektStep(
       '</p>'
 );
 
-KonspektStep step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = KonspektStep(
     title: 'Poziomy (warstwy) rozwoju duchowego - aksjomat - dopasowanie przykładów',
     aims: [
       'Zrozumienie przez uczestników w praktice różnicy między aksjomatami opisu, a aksjomatami sensu.',
@@ -297,7 +304,7 @@ KonspektStep step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = KonspektS
         '</p>'
 );
 
-KonspektStep step_poziomy_duchowosci_meta_narracja = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_meta_narracja = KonspektStep(
     title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja',
     duration: Duration(minutes: 10),
     activeForm: false,
@@ -310,7 +317,7 @@ KonspektStep step_poziomy_duchowosci_meta_narracja = KonspektStep(
         '</p>'
 );
 
-KonspektStep step_poziomy_duchowosci_meta_narracja_wyjasnienie = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_meta_narracja_wyjasnienie = KonspektStep(
     title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja - wyjaśnienie',
     duration: Duration(minutes: 10),
     activeForm: false,
@@ -336,18 +343,18 @@ KonspektStep step_poziomy_duchowosci_meta_narracja_wyjasnienie = KonspektStep(
 KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
     title: 'Poziomy (warstwy) duchowości',
     steps: [
-      step_poziomy_duchowosci,
-      step_poziomy_duchowosci_przyklady_uczestnikow,
-      step_poziomy_duchowosci_aksjomat,
-      step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow,
-      step_poziomy_duchowosci_meta_narracja,
-      step_poziomy_duchowosci_meta_narracja_wyjasnienie
+      _step_poziomy_duchowosci,
+      _step_poziomy_duchowosci_przyklady_uczestnikow,
+      _step_poziomy_duchowosci_aksjomat,
+      _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow,
+      _step_poziomy_duchowosci_meta_narracja,
+      _step_poziomy_duchowosci_meta_narracja_wyjasnienie
     ]
 );
 
 // Integracja duchowości
 
-KonspektStep step_integracja_duchowosci_osie = KonspektStep(
+KonspektStep _step_integracja_duchowosci_osie = KonspektStep(
     title: 'Integracja duchowości - osie współrzędnych',
     duration: Duration(minutes: 1),
     activeForm: false,
@@ -356,7 +363,7 @@ KonspektStep step_integracja_duchowosci_osie = KonspektStep(
         '</p>',
 );
 
-KonspektStep step_integracja_duchowosci_jak_nie = KonspektStep(
+KonspektStep _step_integracja_duchowosci_jak_nie = KonspektStep(
     title: 'Integracja duchowości - jak duchowość nie jest kształtowana',
     duration: Duration(minutes: 2),
     activeForm: false,
@@ -375,7 +382,7 @@ KonspektStep step_integracja_duchowosci_jak_nie = KonspektStep(
         '</p>'
 );
 
-KonspektStep step_integracja_duchowosci_wstepna = KonspektStep(
+KonspektStep _step_integracja_duchowosci_wstepna = KonspektStep(
     title: 'Integracja duchowości - integracja wstępna',
     duration: Duration(minutes: 6),
     activeForm: false,
@@ -431,7 +438,7 @@ KonspektStep step_integracja_duchowosci_wstepna = KonspektStep(
 
 );
 
-KonspektStep step_integracja_duchowosci_swiadoma = KonspektStep(
+KonspektStep _step_integracja_duchowosci_swiadoma = KonspektStep(
     title: 'Integracja duchowości - integracja świadoma',
     duration: Duration(minutes: 6),
     activeForm: false,
@@ -465,10 +472,98 @@ KonspektStep step_integracja_duchowosci_swiadoma = KonspektStep(
 KonspektStepGroup step_group_integracja_duchowosci = KonspektStepGroup(
     title: 'Integracja duchowości',
     steps: [
-      step_integracja_duchowosci_osie,
-      step_integracja_duchowosci_jak_nie,
-      step_integracja_duchowosci_wstepna,
-      step_integracja_duchowosci_swiadoma,
+      _step_integracja_duchowosci_osie,
+      _step_integracja_duchowosci_jak_nie,
+      _step_integracja_duchowosci_wstepna,
+      _step_integracja_duchowosci_swiadoma,
+    ]
+);
+
+// Zdolności integracji duchowości
+
+KonspektStep _step_zdolnosci_integracji_duchowosci = KonspektStep(
+  title: 'Zdolności integracji duchowości',
+  duration: Duration(minutes: 5),
+  activeForm: false,
+  materials: [
+    material_zal_karty_zdolnosci_integracji_duchowosci
+  ],
+  content: '<p style="text-align:justify;">'
+      'Prowadzący bierze obie kartki z załącznika $attach_html_karty_zdolnosci_integracji_duchowosci i kładzie je zakryte przed uczestnikami przed nimi (rewersem do góry). Następnie zadaje im pytanie:'
+      '<br>'
+      '<br><i>“Ustaliliśmy już w jaki sposób modelowo przebiega proces kształtowania duchowości człowieka. Ale! Wiedzieć, to jedno, a móc, to drugie. Jakie dwie, ogólne, fundamentalnie, kluczowe zdolności musi każdy człowiek posiadać (poza wiedzą o mechanizmie kształtowania duchowości), aby móc skutecznie rozwijać swoją duchowość?”</i>'
+      '<br>'
+      '<br>Prowadzący wdaje się z uczestnikami w dyskusję na temat postawionego pytania. Rolą prowadzącego jest tu podchwytywać wątki i zadawać takie pytania pomocnicze, które pomogą uczestnikom dojść do odpowiedzi zapisanych na kartkach. Jeśli uczestnicy utkną, prowadzący może zadać dwa pytania pomocnicze:'
+      '</p>'
+      '<ul>'
+
+      '<li>'
+      '<p style="text-align:justify;">'
+      'Pytanie pomocnicze do <b>zdolności refleksyjnej</b>:'
+      '<br><i>“Dlaczego ludzie, którzy biegną przez życie zajęci mnóstwem codziennych, prozaicznych spraw, często budzą się po latach i odkrywają, że zmarnowali swoje życie?”</i>'
+      '</p>'
+      '</li>'
+
+      '<li>'
+      '<p style="text-align:justify;">'
+      'Pytanie pomocnicze do <b>siły charakteru</b>:'
+      '<br><i>“Dlaczego ludzie, którzy często doskonale wiedzą, jak należy postępować i tak tkwią w starych, niszczących schematach działania?”</i>'
+      '</p>'
+      '</li>'
+
+      '<p style="text-align:justify;">'
+      'Gdy uczestnicy (z pomocą prowadzącego) dojdą do odpowiedzi, prowadzący odkrywa kartki i kładzie je <b>obok</b> kolumny kart z poziomami duchowości.'
+      '</p>'
+
+      '</ul>'
+);
+
+KonspektStep _step_zdolnosci_integracji_duchowosci_wyjasnienie_przyklady = KonspektStep(
+    title: 'Zdolności integracji duchowości - wyjaśnienie na przykładach',
+    duration: Duration(minutes: 2),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący, na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci podaje przykłady różnic między dwiema dodanymi kartami:'
+        '<br>'
+        '<br><i>Siła charakteru to:</i>'
+        '</p>'
+
+        '<ul>'
+        '<li><p style="text-align:justify;"><i>zdolność do porzucenia wspólnoty, gdy jej wpływ jest destrukcyjny;</i></p></li>'
+        '<li><p style="text-align:justify;"><i>zdolność pojechania w nieznane wskutek wniosku, że to konieczne;</i></p></li>'
+        '<li><p style="text-align:justify;"><i>zdolność wyczerpującej pracy wskutek wniosku, że jest ona wymagana by zmienić swoje otoczenie na lepsze.</i></p></li>'
+        '</ul>'
+
+        '<p style="text-align:justify;">'
+        '<i>Zdolność refleksyjna to:</i>'
+        '</p>'
+
+        '<ul>'
+        '<li><p style="text-align:justify;"><i>zdolność do zrozumienia, że wpływ wspólnoty jest destrukcyjny;</i></p></li>'
+        '<li><p style="text-align:justify;"><i>zdolność uświadomienia sobie, że konieczne jest pojechanie w nieznane;</i></p></li>'
+        '<li><p style="text-align:justify;"><i>rozeznanie, że konieczne jest podjęcie wyczerpującej pracy.</i></p></li>'
+        '</ul>'
+);
+
+KonspektStep _step_zdolnosci_integracji_duchowosci_podsumowanie = KonspektStep(
+    title: 'Zdolności integracji duchowości',
+    duration: Duration(minutes: 3),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący podsumowuje strukturę i sposób ksztaltowania duchowości:'
+        '<br>'
+        '<br><i>Duchowość człowieka to sposób, w jaki żyje i któremu podporządkowuje wszystkie inne sfery siebie i swojego życia. Duchowość to <b>zachowania</b> człowieka, które powinny reprezentować <b>spójne postawy</b>, wynikające ze <b>spójnych wartości</b> płynących z <b>aksjomatów</b>, czyli przyjętej spójnej wiary na temat rzeczywistości. Duchowość kształtuje się poprzez stałe <b>integrowanie</b> ze sobą różnych jej elementów, a żeby mogło się to odbywać skutecznie, za tą integracją musi stać <b>zdolność do określania kierunku integracji duchowości</b> oraz <b>zdolność do jej przeprowadzenia pomimo przeciwności</b>.</i>'
+        '<br>'
+        '<br>Prowadzący sprawdza, czy jest to jasne i czy są pytania od uczestników, które chcieliby przedyskutować.'
+        '</p>'
+);
+
+KonspektStepGroup step_group_zdolnosc_integracji_duchowosci = KonspektStepGroup(
+    title: 'Zdolności integracji duchowości',
+    steps: [
+      _step_zdolnosci_integracji_duchowosci,
+      _step_zdolnosci_integracji_duchowosci_wyjasnienie_przyklady,
+      _step_zdolnosci_integracji_duchowosci_podsumowanie
     ]
 );
 
