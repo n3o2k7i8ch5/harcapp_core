@@ -7,6 +7,17 @@ import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
 const konspekt_kszt_name_warsztaty_wychowania_duchowego_old = 'warsztaty_wychowania_duchowego_old';
 
+const String attach_html_przyklady_poziomow_duchowosci = '<a href="$attach_name_przyklady_poziomow_duchowosci@attachment">$attach_title_przyklady_poziomow_duchowosci</a>';
+const String attach_name_przyklady_poziomow_duchowosci = 'przyklady_poziomow_duchowosci';
+const String attach_title_przyklady_poziomow_duchowosci = 'Przykłady poziomów duchowości';
+KonspektAttachment attach_przyklady_poziomow_duchowosci = KonspektAttachment(
+  name: attach_name_przyklady_poziomow_duchowosci,
+  title: attach_title_przyklady_poziomow_duchowosci,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_przyklady_poziomow_duchowosci.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_przyklady_poziomow_duchowosci.docx',
+  },
+);
 
 const String attach_html_mechanizmy_posrednie = '<a href="$attach_name_mechanizmy_posrednie@attachment">$attach_title_mechanizmy_posrednie</a>';
 const String attach_name_mechanizmy_posrednie = 'mechanizmy_posrednie';
@@ -32,6 +43,13 @@ KonspektAttachment attach_antyprzyklady = KonspektAttachment(
   },
 );
 
+KonspektMaterial material_zal_przyklady_poziomow_duchowosci = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_przyklady_poziomow_duchowosci”',
+    attachmentName: attach_name_przyklady_poziomow_duchowosci,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i potasować w ramach wyciętych czwórek.',
+    amount: 1
+);
+
 KonspektMaterial material_zal_mechanizmy_posrednie = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_mechanizmy_posrednie”',
     attachmentName: attach_name_mechanizmy_posrednie,
@@ -48,14 +66,32 @@ KonspektMaterial material_zal_antyprzyklady = KonspektMaterial(
 Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
   konspekt_kszt_warsztaty_wychowania_duchowego,
   attachments: [
+    attach_przyklady_poziomow_duchowosci,
     attach_mechanizmy_posrednie,
     attach_antyprzyklady,
   ],
   materials: [
+    material_zal_przyklady_poziomow_duchowosci,
     material_zal_mechanizmy_posrednie,
     material_zal_antyprzyklady,
   ],
   steps: [
+
+    // Poziomy duchowości
+    KonspektStep(
+        title: 'Poziomy (warstwy) rozwoju duchowego - sprawdzenie',
+        duration: Duration(minutes: 15),
+        activeForm: true,
+        required: false,
+        content: '<p style="text-align:justify;">'
+            'Prowadzący dzieli uczestników na pięć grup. Rozdaje każdej grupie po jednym komplecie przygotowanych kartek z załącznika $attach_html_przyklady_poziomow_duchowosci i prosi grupy o <b>posegregowanie kartek na zachowania, postawy, wartości i aksjomaty.</b>'
+            '<br>'
+            '<br>Gdy dana grupa jest gotowa, zgłasza się do prowadzącego, który podchodzi i sprawdza. Jeśli coś jest nie tak, prowadzący mówi który poziom duchowości wymaga poprawy. Gdy wszystkie grupy są gotowe, niezależnie od poprawności segregacji, prowadzący omawia na forum poprawne przyporządkowanie.'
+            '</p>',
+        materials: [
+          material_zal_przyklady_poziomow_duchowosci,
+        ]
+    ),
 
     // Mechanizmy pośrednie
     KonspektStep(

@@ -13,13 +13,6 @@ KonspektMaterial material_zal_poziomy_duchowosci = KonspektMaterial(
     amount: 1
 );
 
-KonspektMaterial material_zal_przyklady_poziomow_duchowosci = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_przyklady_poziomow_duchowosci”',
-    attachmentName: attach_name_przyklady_poziomow_duchowosci,
-    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i potasować w ramach wyciętych czwórek.',
-    amount: 1
-);
-
 KonspektMaterial material_zal_aksjomaty_opisu_przyklady = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_aksjomaty_opisu_przyklady”',
     attachmentName: attach_name_aksjomaty_opisu_przyklady,
@@ -175,9 +168,11 @@ KonspektStep step_sfery_rozwoju_i_ich_relacje = KonspektStep(
         '</p>'
 );
 
+// Poziomy (warstwy) duchowości
+
 KonspektStep step_poziomy_duchowosci = KonspektStep(
     title: 'Poziomy (warstwy) rozwoju duchowego',
-    duration: Duration(minutes: 15),
+    duration: Duration(minutes: 10),
     activeForm: false,
     content: '<p style="text-align:justify;">'
         'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>zachowań</b>, poziom <b>postaw</b>, poziom <b>wartości</b> i poziom <b>aksjomatu</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika $attach_html_poziomy_duchowosci. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
@@ -206,6 +201,15 @@ KonspektStep step_poziomy_duchowosci = KonspektStep(
         '<td style="padding-left: 8px; padding-right: 8px;"><p>Bóg z miłości stworzył każdego człowieka na swój obraz</p></td>'
         '</tr>'
         '</table>'
+
+);
+
+KonspektStep step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
+    title: 'Poziomy (warstwy) rozwoju duchowego - przykłady uczestników',
+    duration: Duration(minutes: 5),
+    required: false,
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
 
         '<p style="text-align:justify;">'
         'Po zdefiniowaniu poziomów prowadzący prosi uczestników o podanie kilku przykładowych elementów do każdego z poziomów duchowości. Prowadzący każdorazowo ocenia, czy przykłady są trafne - jeśli nie, podaje powód, dla którego nie są.'
@@ -329,6 +333,18 @@ KonspektStep step_poziomy_duchowosci_meta_narracja_wyjasnienie = KonspektStep(
         '</p>'
 );
 
+KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
+    title: 'Poziomy (warstwy) duchowości',
+    steps: [
+      step_poziomy_duchowosci,
+      step_poziomy_duchowosci_przyklady_uczestnikow,
+      step_poziomy_duchowosci_aksjomat,
+      step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow,
+      step_poziomy_duchowosci_meta_narracja,
+      step_poziomy_duchowosci_meta_narracja_wyjasnienie
+    ]
+);
+
 // Integracja duchowości
 
 KonspektStep step_integracja_duchowosci_osie = KonspektStep(
@@ -411,7 +427,7 @@ KonspektStep step_integracja_duchowosci_wstepna = KonspektStep(
         '<br>'
         '<br>Kolejne poziomy duchowości zależą w tym procesie od kształtu poprzednich. Prowadzący rysuje na flipcharchie strzałkę "integracji wstępnej".'
         '<br>'
-        '<br><i>Do momentu, aż człowiek nie zinternalizuje pojęcia aksjomatu, jego duchowość jest integrowana "po raz pierwszy". <b>Wartości, które przyjmie będą wynikały z nauczonych zachowań</b>. <b>Aksjomaty, które przyjmie, będą wynikały z wartości</b>, które wyznaje. Kształt duchowości zależy tu przede wszystkim od <b>otoczenia</b> i <b>temperamentu</b> człowieka. Jest to etap "<b>integracji wstępnej</b>".',
+        '<br><i>Do momentu internalizacji pojęcia aksjomatu, duchowość człowieka jest integrowana "po raz pierwszy". <b>Wartości, które przyjmie będą wynikały z nauczonych zachowań</b>. <b>Aksjomaty, które przyjmie, będą wynikały z wartości</b>, które wyznaje. Kształt duchowości zależy tu przede wszystkim od <b>otoczenia</b> i <b>temperamentu</b> człowieka. Jest to etap "<b>integracji wstępnej</b>".',
 
 );
 

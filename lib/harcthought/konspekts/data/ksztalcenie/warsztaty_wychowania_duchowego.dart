@@ -339,7 +339,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 content: '<p style="text-align:justify;">'
                     'Prowadzący zapoznaje uczestników z podziałem człowieka na pięć sfer zgodnie z poradnikiem $attach_html_poradnik_o_strukturze_duchowosci.'
                     '<br>'
-                    '<br>Jeżeli uczestnicy mają szansę znać pięcioelementowy podział człowieka na sfery rozwoju definiowany przez statut ZHP, może poprosić ich o wymienienie kolejno wszystkich, czyli:'
+                    '<br>Jeżeli uczestnicy mają szansę znać pięcioelementowy podział człowieka na sfery rozwoju definiowany przez statut ZHP, prowadzący może poprosić ich o wymienienie kolejno wszystkich, czyli:'
                     '</p>'
                     '<ul>'
                     '<li><p style="text-align:justify;">Sfera ciała (fizyczna)</p></li>'
@@ -455,36 +455,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
           ]),
 
-      KonspektStepGroup(
-          title: 'Poziomy (warstwy) duchowości',
-          steps: [
-
-            step_poziomy_duchowosci,
-
-            step_poziomy_duchowosci_aksjomat,
-
-            step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow,
-
-            step_poziomy_duchowosci_meta_narracja,
-
-            step_poziomy_duchowosci_meta_narracja_wyjasnienie,
-
-            KonspektStep(
-                title: 'Poziomy (warstwy) rozwoju duchowego - sprawdzenie',
-                duration: Duration(minutes: 15),
-                activeForm: true,
-                required: false,
-                content: '<p style="text-align:justify;">'
-                    'Prowadzący dzieli uczestników na pięć grup. Rozdaje każdej grupie po jednym komplecie przygotowanych kartek z załącznika $attach_html_przyklady_poziomow_duchowosci i prosi grupy o <b>posegregowanie kartek na zachowania, postawy, wartości i aksjomaty.</b>'
-                    '<br>'
-                    '<br>Gdy dana grupa jest gotowa, zgłasza się do prowadzącego, który podchodzi i sprawdza. Jeśli coś jest nie tak, prowadzący mówi który poziom duchowości wymaga poprawy. Gdy wszystkie grupy są gotowe, niezależnie od poprawności segregacji, prowadzący omawia na forum poprawne przyporządkowanie.'
-                    '</p>',
-                materials: [
-                  material_zal_przyklady_poziomow_duchowosci,
-                ]
-            ),
-          ]
-      ),
+      step_group_poziomy_duchowosci,
 
       step_group_integracja_duchowosci,
 

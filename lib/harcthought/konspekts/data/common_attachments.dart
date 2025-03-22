@@ -28,18 +28,6 @@ KonspektAttachment attach_poziomy_duchowosci = KonspektAttachment(
   },
 );
 
-const String attach_html_przyklady_poziomow_duchowosci = '<a href="$attach_name_przyklady_poziomow_duchowosci@attachment">$attach_title_przyklady_poziomow_duchowosci</a>';
-const String attach_name_przyklady_poziomow_duchowosci = 'przyklady_poziomow_duchowosci';
-const String attach_title_przyklady_poziomow_duchowosci = 'Przykłady poziomów duchowości';
-KonspektAttachment attach_przyklady_poziomow_duchowosci = KonspektAttachment(
-  name: attach_name_przyklady_poziomow_duchowosci,
-  title: attach_title_przyklady_poziomow_duchowosci,
-  assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_przyklady_poziomow_duchowosci.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_przyklady_poziomow_duchowosci.docx',
-  },
-);
-
 // Przykłady aksjomatów
 
 const String attach_html_aksjomaty_opisu_przyklady = '<a href="$attach_name_aksjomaty_opisu_przyklady@attachment">$attach_title_aksjomaty_opisu_przyklady</a>';
