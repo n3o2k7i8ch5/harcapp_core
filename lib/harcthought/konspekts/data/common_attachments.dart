@@ -20,8 +20,8 @@ const String attach_html_karty_poziomow_duchowosci = '<a href="$attach_name_kart
 const String attach_name_karty_poziomow_duchowosci = 'karty_poziomow_duchowosci';
 const String attach_title_karty_poziomow_duchowosci = 'Karty poziomów duchowości';
 KonspektAttachment attach_karty_poziomow_duchowosci = KonspektAttachment(
-  name: attach_html_karty_poziomow_duchowosci,
-  title: attach_name_karty_poziomow_duchowosci,
+  name: attach_name_karty_poziomow_duchowosci,
+  title: attach_title_karty_poziomow_duchowosci,
   assets: {
     FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_karty_poziomow_duchowosci.pdf',
     FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_karty_poziomow_duchowosci.docx',
