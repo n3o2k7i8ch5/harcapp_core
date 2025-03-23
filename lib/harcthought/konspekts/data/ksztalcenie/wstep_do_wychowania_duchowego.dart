@@ -199,19 +199,9 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
               '</p>'
       ),
 
-      step_neutralnosc_duchowa,
+      ...step_group_neutralnosc_duchowa.steps,
 
-      step_neutralnosc_duchowa_w_przypadku_problemow,
-
-      step_harcerstwo_analogia_do_ogrodnikow,
-
-      step_zrodla_wartosci_w_zhp_dyskusja_o_scenariuszach,
-
-      step_zrodla_wartosci_w_zhp_okreslonosc_wartosci,
-
-      step_zrodla_wartosci_w_zhp_aksjoamty,
-
-      step_neutralnosc_podsumowanie,
+      ...step_group_duchowosc_w_zhp.steps,
 
       KonspektStep(
           title: 'Kratka minimów rozwoju duchowego',

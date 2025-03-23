@@ -464,16 +464,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       step_group_duchowosc_powszechna_madrosc_kultura_tradycja,
 
       // Neutralność
-      KonspektStepGroup(
-          title: 'Neutralność duchowa',
-          steps: [
-            step_neutralnosc_duchowa,
-
-            step_neutralnosc_duchowa_w_przypadku_problemow,
-
-            step_harcerstwo_analogia_do_ogrodnikow,
-          ]
-      ),
+      step_group_neutralnosc_duchowa,
 
       KonspektStepGroup(
           steps: [
@@ -491,18 +482,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           ]
       ),
 
-      KonspektStepGroup(
-          title: 'Duchowość w ZHP',
-          steps: [
-            step_zrodla_wartosci_w_zhp_dyskusja_o_scenariuszach,
-
-            step_zrodla_wartosci_w_zhp_okreslonosc_wartosci,
-
-            step_zrodla_wartosci_w_zhp_aksjoamty,
-
-            step_neutralnosc_podsumowanie,
-          ]
-      ),
+      step_group_duchowosc_w_zhp,
 
       KonspektStepGroup(
           title: 'Czynniki i mechanizmy kształtowania duchowości',

@@ -683,7 +683,7 @@ KonspektStepGroup step_group_duchowosc_powszechna_madrosc_kultura_tradycja = Kon
 
 // Neutralność
 
-KonspektStep step_neutralnosc_duchowa = KonspektStep(
+KonspektStep _step_neutralnosc_duchowa = KonspektStep(
     title: 'Neutralność duchowa',
     duration: Duration(minutes: 30),
     activeForm: false,
@@ -713,7 +713,7 @@ KonspektStep step_neutralnosc_duchowa = KonspektStep(
 
 );
 
-KonspektStep step_neutralnosc_duchowa_w_przypadku_problemow = KonspektStep(
+KonspektStep _step_neutralnosc_duchowa_w_przypadku_problemow = KonspektStep(
     title: 'Neutralność duchowa - w przypadku problemów',
     duration: Duration(minutes: 5),
     activeForm: false,
@@ -733,7 +733,7 @@ KonspektStep step_neutralnosc_duchowa_w_przypadku_problemow = KonspektStep(
         '</p>'
 );
 
-KonspektStep step_harcerstwo_analogia_do_ogrodnikow = KonspektStep(
+KonspektStep _step_neutralnosc_analogia_do_ogrodnikow = KonspektStep(
     title: 'Neutralność duchowa - analogia harcerstwa z ogrodnikami',
     duration: Duration(minutes: 5),
     activeForm: false,
@@ -749,53 +749,26 @@ KonspektStep step_harcerstwo_analogia_do_ogrodnikow = KonspektStep(
         '</p>'
 );
 
-KonspektStep step_zrodla_wartosci_w_zhp_dyskusja_o_scenariuszach = KonspektStep(
-    title: 'Neutralność duchowa - źródła wartości - dyskusje o scenariuszach',
-    duration: Duration(minutes: 15),
-    activeForm: false,
-    aims: [
-      'Zbudowanie u uczestników zdolności wiązania wartości harcerskich z ich aksjomatami',
-      'Przebicie bańki fałszywej tezy relatywizmu wyznawanych w harcerstwie wartości'
-    ],
-    content: '<p style="text-align:justify;">'
-        'Prowadzący zaczyna od stwierdzenia:'
-        '<br>'
-        '<br><i>“Skoro harcerstwo nie jest neutralne, to spróbujmy wgryźć się w esencję ducha harcerskiego wychowania. Może uda się to bez utonięcia w filozofii i teologii”</i>.'
-        '<br>'
-        '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z użytego już załącznika $attach_html_neutralnosc_duchowa_przyklady. Prowadzący stawia przed nimi zadanie w formie pytania:'
-        '<br>'
-        '<br><i>“Wszystkie przedstawione w scenariuszach wartości mają swoje odzwierciedlenie w PH. Ale przecież PH nie spadło z nieba na kamiennych tablicach! Z jakiego aksjomatu wynikają prezentowane w scenariuszu postawy, przekonania i wartości?”</i>'
-        '<br>'
-        '<br>Prowadzący prosi uczestników, by dokopali się do najgłębszego źródła wartości (aksjomatu), funkcjonującego w naszym kręgu cywilizacyjnym. Uczestnicy nie powinni bać się zanurkowania w przestrzeń <b>religii</b> i <b>filozofii</b>, a czasami <b>selekcji naturalnej</b>. Grupa nie musi być zgodna we wnioskach - może zaproponować zapisać kilka różnych aksjomatów, z których wynikają omawiane wcześniej wartości.'
-        '<br>'
-        '<br>Warto, by prowadzący przedstawił kilka przykładowych aksjomatów, jeśli uczestnicy jeszcze nie do końca je "czują":'
-        '</p>'
-
-        '$aksjomaty_przyklady'
-
-        '<p style="text-align:justify;">'
-        'Wskazane jest, by uczestnicy mieli możliwość swobodnej dyskusji. Dlatego, jeśli to możliwe, warto podzielić uczestników na grupy po nie więcej niż 5 osób i dać im po jednym ze scenariuszy. Dodatkowo każda grupa powinna dostać kartkę, na której powinna spisać swoje wnioski.'
-        '<br>'
-        '<br>Na końcu każda grupa w ciągu minuty prezentuje wyniki swojej pracy. Gdy skończy, prowadzący prosi, by położyli omawiany scenariusz oraz kartkę z aksjomatem przed sobą.'
-        '</p>',
-    materials: [
-      material_zal_neutralnosc_duchowa_przyklady
+KonspektStepGroup step_group_neutralnosc_duchowa = KonspektStepGroup(
+    title: 'Neutralność duchowa',
+    steps: [
+      _step_neutralnosc_duchowa,
+      _step_neutralnosc_duchowa_w_przypadku_problemow,
+      _step_neutralnosc_analogia_do_ogrodnikow
     ]
 );
 
-KonspektStep step_zrodla_wartosci_w_zhp_okreslonosc_wartosci = KonspektStep(
-    title: 'Neutralność duchowa - źródła wartości w ZHP - określoność wartości',
+// Duchowość w ZHP
+
+KonspektStep _step_duchowosc_w_zhp_dokumenty = KonspektStep(
+    title: 'Duchowość w ZHP - dokumenty',
     duration: Duration(minutes: 5),
     activeForm: false,
     aims: [
-      'Uświadomienie uczestnikom, że harcerstwo jest dla wszystkich, ale nie wychowuje do wszystkiego - ma ściśle określone wartości, którymi się kieruje'
+      'Wskazanie uczestnikom formalnych źródeł stanowiących, że harcerstwo jest dla wszystkich, ale nie wychowuje do wszystkiego - ma ściśle określone wartości, do których krztałtuje'
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący zaczyna od zadania pytania:'
-        '<br>'
-        '<br><i>“Możliwe, że część z was na tym etapie zastanawia się, jakie są oraz skąd wypływają harcerskie wartości?”</i>.'
-        '<br>'
-        '<br>Prowadzący przedstawia uczestnikom stosowny fragment statutu ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_statut) oraz preambułę uchwały w sprawie wspierania rozwoju duchowego w ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_uchwala). Zwraca uwagę na to, że w ZHP mamy ściśle określony zbiór wartości i postaw, do których wychowujemy.'
+        'Prowadzący przedstawia uczestnikom stosowny fragment statutu ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_statut) oraz preambułę uchwały w sprawie wspierania rozwoju duchowego w ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_uchwala). Zwraca uwagę na to, że w ZHP mamy ściśle określony zbiór wartości i postaw, do których wychowujemy oraz ramy źródeł wartości. Jeśli uczestnicy będą chcieli - mogą potem do nich zajrzeć.'
         '</p>',
   materials: [
     material_zal_cel_wychowania_duchowego_zhp_statut,
@@ -803,8 +776,8 @@ KonspektStep step_zrodla_wartosci_w_zhp_okreslonosc_wartosci = KonspektStep(
   ]
 );
 
-KonspektStep step_zrodla_wartosci_w_zhp_aksjoamty = KonspektStep(
-    title: 'Neutralność duchowa - źródła wartości w ZHP - aksjomaty',
+KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
+    title: 'Duchowość w ZHP - aksjomaty',
     duration: Duration(minutes: 20),
     activeForm: false,
     aims: [
@@ -812,28 +785,11 @@ KonspektStep step_zrodla_wartosci_w_zhp_aksjoamty = KonspektStep(
       'Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej'
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący stawia pytanie:'
+        '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z użytego już załącznika $attach_html_neutralnosc_duchowa_przyklady. Prowadzący stawia przed nimi zadanie w formie pytania:'
         '<br>'
-        '<br><i>“Przychodzi do Was HS i pyta: dlaczego mam nie prześladować kogoś, kto wyrządził mi krzywdę? Uważam, że należy go przykładnie i doszczętnie zgnębić. Inni niech robią co chcą na moim miejscu, ale dlaczego mam wierzyć w jakieś arbitralnie wymyślone dyrdymały o godności każdego człowieka?”</i>.'
+        '<br><i>“We wszystkich scenariuszach mowa jest o wartościach obecnych w PH. Ale przecież żaden wędrownik (mam nadzieję!) nie będzie przestrzegał PH wierząc, że spadło z nieba na kamiennych tablicach! Jakie aksjomaty (lub meta-narracja) ukształtowały świat, dla którego te wartości w sposób oczywisty dobre?”</i>'
         '<br>'
-        '<br>Prowadzący zauważa, że nawet jeśli niewerbalnie, to rozwój duchowy prowadzi przez pytanie “dlaczego mam wierzyć w takie a nie inne wartości?”. Jako instruktorzy organizacji wychowawczej mamy wówczas dwa wyjścia:'
-        '</p>'
-        '<ul>'
-        '<li><p style="text-align:justify;">Zignorować aksjomatyczne poszukiwania harcerzy (pozwolić innym czynnikom wpłynąć na decyzję harcerza),</p></li>'
-        '<li><p style="text-align:justify;">Świadomie pomóc w znalezieniu odpowiedzi</p></li>'
-        '</ul>'
-        '<p style="text-align:justify;">'
-        'Żadne z tych rozwiązań nie jest neutralne światopoglądowo!'
-        '<br>'
-        '<br>Prowadzący stawia w tym miejscu trzy tezy:'
-        '</p>'
-        '<ol>'
-        '<li><p style="text-align:justify;">Jeśli harcerstwo chce być skuteczne wychowawczo, nie powinno abdykować ze rozwoju duchowego na poziomie aksjomatu.</p></li>'
-        '<li><p style="text-align:justify;">Harcerstwo w samym swoim założeniu jest stronnicze. Tak samo każda forma pracy z aksjomatem ducha jest stronnicza i jest związana z wiarą, filozofią i arbitralnością.</p></li>'
-        '<li><p style="text-align:justify;">System wartości harcerskich wynika w głównej mierze z wiary chrześcijańskiej i nie warto tego zmieniać.</p></li>'
-        '</ol>'
-        '<p style="text-align:justify;">'
-        'Prowadzący omawia źródła wartości w poszczególnych scenariuszach, odnosząc się w razie potrzeby do wniosków uczestników.'
+        '<br>Prowadzący wchodzi z uczestnikami w dyskusję na temat kolejnych wartości opisanych w załączniku $attach_html_neutralnosc_duchowa_przyklady i omawia źródła wartości w poszczególnych scenariuszach, odnosząc się w razie potrzeby do wniosków uczestników.'
         '</p>'
 
         '<ol>'
@@ -919,26 +875,45 @@ KonspektStep step_zrodla_wartosci_w_zhp_aksjoamty = KonspektStep(
         '</p>'
 );
 
-KonspektStep step_neutralnosc_podsumowanie = KonspektStep(
-    title: 'Neutralność duchowa - podsumowanie',
+KonspektStep _step_duchowosc_w_zhp_podsumowanie = KonspektStep(
+    title: 'Duchowość w ZHP - podsumowanie',
     duration: Duration(minutes: 5),
     activeForm: false,
     content: '<p style="text-align:justify;">'
         '<b>Podsumowanie (dla przewodników)</b>'
         '</p>'
+
         '<ul>'
         '<li><p style="text-align:justify;">Nie istnieje neutralne wychowanie.</p></li>'
+        '<li><p style="text-align:justify;">Jeśli harcerstwo chce być skuteczne wychowawczo, nie może abdykować z rozwoju duchowego na poziomie aksjomatu.</p></li>'
         '<li><p style="text-align:justify;">Harcerskie wychowanie jest fundamentalnie chrześcijańskie, nawet jeśli jego członkowie są innego wyznania.</p></li>'
-        '<li><p style="text-align:justify;">Jeśli są w harcerskiej duchowości i ideałach wartości, których jako kadra nie rozumiemy, to warto je zgłębić zamiast je pomijać lub się ich pozbyć. Zazwyczaj za tymi wartościami stoją dziesiątki wieków cywilizacyjnej mądrości.</p></li>'
-        '<li><p style="text-align:justify;">Harcerstwo powinno mieć wysokie standardy nie po to, by prowadzić selekcję osób mogących harcerzami zostać, ale po to, by wychować ludzi w szacunku do wartości, postaw, a często również wiary, która dała nam świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, itd..</p></li>'
+        '<li><p style="text-align:justify;">Nie należy zbyt łatwo pomijać elementów tradycyjnej duchowości, których jako kadra nie rozumiemy (jako kadra). Zazwyczaj stoją za nimi dziesiątki wieków mądrości.</p></li>'
+        '<li><p style="text-align:justify;">Harcerstwo powinno mieć wysokie standardy. Nie po to, by prowadzić selekcję osób mogących harcerzami zostać, ale po to, by wychować ludzi w szacunku do wartości, postaw, a często również wiary, która dała nam świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, itd..</p></li>'
         '</ul>'
+
         '<p style="text-align:justify;">'
         '<br>'
         '<b>Podsumowanie dodatkowe (dla podharcmistrzów)</b>'
         '</p>'
+
         '<ul>'
-        '<li><p style="text-align:justify;">Mamy w ZHP niechlubną tradycję zmieniania harcerskich zasad i ideałów, gdy okazuje się że postawy harcerzy się z nimi nie spotykają. A przecież to harcerstwo powinno zmieniać ludzi, a nie się do nich dostosowywać.</p></li>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Mamy w ZHP niechlubną tradycję zmieniania harcerskich zasad i ideałów, gdy okazuje się że postawy harcerzy się z nimi nie spotykają. A przecież to harcerstwo powinno zmieniać ludzi, a nie się do nich dostosowywać.'
+        '</p>'
+        '</li>'
         '</ul>'
+);
+
+KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
+    title: 'Duchowość w ZHP',
+    steps: [
+      _step_duchowosc_w_zhp_aksjoamty,
+
+      _step_duchowosc_w_zhp_dokumenty,
+
+      _step_duchowosc_w_zhp_podsumowanie,
+    ]
 );
 
 // Szybkie strzały dyskusyjne
@@ -1035,14 +1010,14 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
         '<p style="text-align:justify;">'
         '<u>W ramach działań drużyny nie powinno być aktywności religijnych, gdyż te wykluczają niewierzących.</u>'
         '<br>'
-        '<br><i>Osoby wyznające wiarę w osobowego Boga, aby móc rozwijać swoją duchowość muszą brać udział w formach, w które są niecelowe dla osób niereligijnych. Ograniczanie osobom wychowywanym w wierze form religijnych, tabuizowanie tematu wiary i religii jest dla nich krzywdzące. Skuteczne wychowanie osób o różnych aksjomatach w jednej drużynie <b>zawsze prowadzi przez formy, które są nie inkluzywne dla wszystkich</b> - zjawisko to jest normalne i pożądane. Uciekanie od tego faktu skutkuje zjawiskiem <b>weganizacji procesu wychowawczego</b>.</i>'
+        '<br><i>Osoby wyznające wiarę w osobowego Boga, aby móc rozwijać swoją duchowość muszą brać udział w formach, w które są niecelowe dla osób niereligijnych. Ograniczanie osobom wychowywanym w wierze form religijnych, tabuizowanie tematu wiary i religii jest dla nich krzywdzące. Skuteczne wychowanie osób o różnych aksjomatach w jednej drużynie <b>zawsze prowadzi przez formy, które są nieinkluzywne</b> - zjawisko to jest normalne i pożądane. Uciekanie od tego faktu skutkuje zjawiskiem <b>weganizacji procesu wychowawczego</b>.</i>'
         '</p>'
         '</li>'
 
         '</ul>'
 
         '<p style="text-align:justify;">'
-        '<u>Na końcu, jeśli starczy czasu, prowadzący może sam przedstawić jeszcze trzy "strzały":</u>'
+        'Na końcu, jeśli starczy czasu, prowadzący może sam przedstawić jeszcze trzy "strzały":'
         '</p>'
 
         '<ul>'
