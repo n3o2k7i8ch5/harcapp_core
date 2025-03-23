@@ -741,7 +741,7 @@ KonspektStep step_harcerstwo_analogia_do_ogrodnikow = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Jeśli uczestnicy mają problem ze zrozumieniem, dlaczego zarówno działanie wychowawcze jak i jego brak zawsze kształtuje duchowość wychowanków, prowadzący może przedstawić uczestnikom użyteczną analogię:'
         '<br>'
-        '<br><i>Nasz Związek jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się ona kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instrktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im określony kształt.</i>'
+        '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się ona kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instrktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im określony kształt.</i>'
         '<br>'
         '<br>W analogii należy podkreślić, że niezależnie od działania ogrodnika, <b>krzew zawsze ma jakiś kształt</b>. Krzew nabywa określonego kształtu, także wtedy, gdy ogrodnik nic nie robi.'
         '<br>'
@@ -952,7 +952,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
       material_zal_szybkie_strzaly_dyskusyjne
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący rozkłada na podłodze kartki rewersem do góry (zakryte). Zadaniem uczestników jest kolejno podchodzić do kartek, wybierać losową i odczytać jej treść.'
+        'Prowadzący rozkłada na podłodze kartki z załącznika $attach_html_szybkie_strzaly_dyskusyjne rewersem do góry (zakryte). Zadaniem uczestników jest kolejno podchodzić do kartek, wybierać losową i odczytać jej treść.'
         '<br>'
         '<br>Po odczytaniu każdej kartki uczestnicy mają krótką chwilę na dyskusję. Prowadzący może w trakcie dyskusji zadawać pytania, jednak do jej końca nie prezentuje swojego stanowiska. Dojście do wspólnej konkluzji przez uczestników nie jest ważne. Na końcu każdej dyskusji prowadzący może powiedzieć krótko co uważa na wywołany temat.'
         '<br>'
@@ -962,7 +962,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Nie powinno się wychowywać człowieka w konkretnym celu.'
+        '<u>Nie powinno się wychowywać człowieka w konkretnym celu.</u>'
         '<br>'
         '<br><i>Nie da się wychować człowieka w sposób "neutralny" - każde działanie wychowawcze kształtuje duchowość człowieka w jakimś kierunku. Zamiast robić fikołki siląc się na nieosiągalną neutralność, lepiej świadomie określić zawczasu cele wychowawcze.</i>'
         '</p>'
@@ -970,7 +970,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Religia jest dodatkiem do duchowości i nie każdy musi ją mieć.'
+        '<u>Religia jest dodatkiem do duchowości i nie każdy musi ją mieć.</u>'
         '<br>'
         '<br><i>Religia nie jest "dodatkiem" do duchowości - religia jest konkretną duchowością. Niektóre duchowości nie są religią, jednak nie zmienia to faktu, że tak jak każda religia mają określone arbitralne, dogamtyczne prawdy na temat świata.</i>'
         '</p>'
@@ -978,7 +978,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Jeśli ktoś chce kościelnego harcerstwa, powinien pójść do ZHRu.'
+        '<u>Jeśli ktoś chce kościelnego harcerstwa, powinien pójść do ZHRu.</u>'
         '<br>'
         '<br><i>Cywilizacja łacińska, powszechne na zachodzie normy moralne i Prawo Harcerskie wszystkie są bezpośrednio spadkobiercami chrześcijaństwa. ZHP zapewnia pełnowartościowe wychowanie duchowe osobom wierzącym, a uwzględnianie w procesie wychowawczym roli wspólnoty Kościoła jest tego kluczowym elementem.</i>'
         '</p>'
@@ -986,7 +986,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Religia to prywatna sprawa każdego człowieka i nie powinien się z nią afiszować.'
+        '<u>Religia to prywatna sprawa każdego człowieka i nie powinien się z nią afiszować.</u>'
         '<br>'
         '<br><i>Życie religijne człowieka jest sprawą indywidualną i fundamentalnie osobistą, ale jest jednocześnie sprawą publiczną - można o niej rozmawiać, można ją praktykować we wspólnocie, co więcej: z religii wynika długa lista spraw takich jak zachowania, postawy i wartości, które dotyczą i wpływają na całe otoczenie, w którym człowiek żyje.</i>'
         '</p>'
@@ -994,7 +994,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Patriotyzm to duchowość.'
+        '<u>Patriotyzm to duchowość.</u>'
         '<br>'
         '<br><i>Patriotyzm to postawa, a postawy są elementem duchowości.</i>'
         '</p>'
@@ -1002,14 +1002,14 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Wszystkie niebezpieczne działania są niewychowawcze i nieodpowiedzialne.'
+        '<u>Wszystkie niebezpieczne działania są niewychowawcze i nieodpowiedzialne.</u>'
         '<br>'
         '<br><i>Życie jest niebezpieczne i nie da się odizolować od tego człowieka. Zmiast chować go pod kloszem i wychowywać do życia w nieistniejącym świecie, lepiej dawkować młodemu człowiekowi doświadczenie braku bezpieczeństwa - takie działania mogą być ryzykowne, ale są wychowawcze i są wyrazem odpowiedzialności za przyszlość młodego człowieka.</i>'
         '</p></li>'
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Każdy harcerz powinien mieć dowolność w tym, jak chce się rozwijać duchowo.'
+        '<u>Każdy harcerz powinien mieć dowolność w tym, jak chce się rozwijać duchowo.</u>'
         '<br>'
         '<br><i>Harcerstwo jest ruchem, który wychowuje do określonych zachowań, postaw i wartości, co jest możliwe tylko drogą wpływania na określone aksjomaty człowieka. Harcerstwo wychowuje z zachowaniem indywidualności, ale robi to we wspólnym dla wszystkich kierunku, który jest określony w statucie i tradycji harcerskiej. Elementy dobrowolności są narzędziem do skutecznego budowania harcerskiego ducha.</i>'
         '</p>'
@@ -1017,7 +1017,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'W ZHP nie wolno narzucać poglądów.'
+        '<u>W ZHP nie wolno narzucać poglądów.</u>'
         '<br>'
         '<br><i>Harcerstwo jest ruchem, który wychowuje do określonych zachowań, postaw i wartości, co jest możliwe tylko drogą wpływania na określone aksjomaty człowieka. Poglądy, do których wychowuje harcerstwo są określone w statucie i tradycji harcerskiej. Powinno się to odbywać w sposób nienachalny, aby wychowanie było skuteczniejsze, nie dlatego, że harcerstwo jest wolne od konkretnych poglądów.</i>'
         '</p>'
@@ -1025,7 +1025,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Możliwość zamknięcia próby instruktorskiej powinna zależeć od poglądów kandydata.'
+        '<u>Możliwość zamknięcia próby instruktorskiej powinna zależeć od poglądów kandydata.</u>'
         '<br>'
         '<br><i>Tak. Instruktorzy wychowuję również poprzez przykład własny i pełnią rolę autorytetów, dlatego ma to znaczenie, jakie poglądy reprezentuje instruktor. Nie każdy człowiek powinien nim być.</i>'
         '</p>'
@@ -1033,7 +1033,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'W ramach działań drużyny nie powinno być aktywności religijnych, gdyż te wykluczają niewierzących.'
+        '<u>W ramach działań drużyny nie powinno być aktywności religijnych, gdyż te wykluczają niewierzących.</u>'
         '<br>'
         '<br><i>Osoby wyznające wiarę w osobowego Boga, aby móc rozwijać swoją duchowość muszą brać udział w formach, w które są niecelowe dla osób niereligijnych. Ograniczanie osobom wychowywanym w wierze form religijnych, tabuizowanie tematu wiary i religii jest dla nich krzywdzące. Skuteczne wychowanie osób o różnych aksjomatach w jednej drużynie <b>zawsze prowadzi przez formy, które są nie inkluzywne dla wszystkich</b> - zjawisko to jest normalne i pożądane. Uciekanie od tego faktu skutkuje zjawiskiem <b>weganizacji procesu wychowawczego</b>.</i>'
         '</p>'
@@ -1042,7 +1042,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
         '</ul>'
 
         '<p style="text-align:justify;">'
-        'Na końcu, jeśli starczy czasu, prowadzący może sam przedstawić jeszcze trzy "strzały":'
+        '<u>Na końcu, jeśli starczy czasu, prowadzący może sam przedstawić jeszcze trzy "strzały":</u>'
         '</p>'
 
         '<ul>'
@@ -1052,6 +1052,6 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
         '</ul>'
 
         '<p style="text-align:justify;">'
-        'Celem tych trzech "strzałów" jest zwrócenie uwagi na to, że harcerstwo nie ma technicznej możliwości wychowywać do zbyt szerokiej puli poglądów, ponieważ przestanie wówczas wychowywać do czegokolwiek.'
+        'Celem tych trzech "strzałów" jest zwrócenie uwagi, że harcerstwo nie ma technicznej możliwości wychowywać do zbyt szerokiej puli poglądów, ponieważ przestanie wówczas wychowywać do czegokolwiek.'
         '</p>'
 );
