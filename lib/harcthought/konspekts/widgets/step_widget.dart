@@ -3,6 +3,7 @@ import 'package:harcapp_core/color_pack_app.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
+import 'package:harcapp_core/comm_classes/time_of_day_extension.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/dimen.dart';
@@ -19,11 +20,12 @@ class KonspektStepWidget extends StatelessWidget{
   final int index;
   final int? groupIndex;
   final TimeOfDay? startTime;
+  final Widget? trailingTop;
   final double horizontalPadding;
   final double? maxDialogWidth;
   KonspektStep get step => stepsContainer.steps[index];
 
-  const KonspektStepWidget(this.konspekt, this.stepsContainer, this.index, {this.groupIndex, this.startTime, this.horizontalPadding = Dimen.sideMarg, this.maxDialogWidth, super.key});
+  const KonspektStepWidget(this.konspekt, this.stepsContainer, this.index, {this.groupIndex, this.startTime, this.trailingTop, this.horizontalPadding = Dimen.sideMarg, this.maxDialogWidth, super.key});
 
   @override
   Widget build(BuildContext context) => Column(
@@ -84,6 +86,17 @@ class KonspektStepWidget extends StatelessWidget{
 
                     const SizedBox(width: 20),
 
+                    if(startTime != null)
+                      const SizedBox(width: 20),
+
+                    if(startTime != null)
+                      SelectableText(
+                          '(${timeOfDayRangeToString(startTime!, startTime! + step.duration)})',
+                          style: AppTextStyle(
+                              color: hintEnab_(context)
+                          )
+                      ),
+
                     SelectableText(
                         step.activeForm?'Forma aktywna':'Forma statyczna',
                         style: AppTextStyle(
@@ -101,7 +114,13 @@ class KonspektStepWidget extends StatelessWidget{
                 ),
 
               ],
-            )
+            ),
+
+            Expanded(child: Container()),
+
+            if(trailingTop != null)
+              trailingTop!
+
           ],
         ),
       ),

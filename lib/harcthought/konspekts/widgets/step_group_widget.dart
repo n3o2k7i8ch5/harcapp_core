@@ -79,6 +79,15 @@ class KonspektStepGroupWidgetState extends State<KonspektStepGroupWidget>{
       children: children,
     );
 
+    String durationStr = durationToString(stepGroup.duration);
+
+    String? timeRangeStr = startTime == null? null: timeOfDayRangeToString(
+      stepsTimeTable!.first,
+      stepsTimeTable!.last,
+    );
+
+    String timeStr = timeRangeStr == null? durationStr: '$timeRangeStr ($durationStr)';
+
     if(showBorder)
       return BorderMaterial(
         child: Column(
@@ -93,7 +102,7 @@ class KonspektStepGroupWidgetState extends State<KonspektStepGroupWidget>{
                   textAlign: TextAlign.left,
                   titleColor: textDisab_(context),
                   trailing: Text(
-                    durationToString(stepGroup.duration),
+                    timeStr,
                     style: AppTextStyle(
                         fontSize: Dimen.textSizeAppBar,
                         color: textDisab_(context)
