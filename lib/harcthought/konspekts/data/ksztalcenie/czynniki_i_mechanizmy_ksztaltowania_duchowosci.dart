@@ -107,7 +107,7 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
   KonspektStep(
       title: 'Podział na grupy',
       duration: Duration(minutes: 5),
-      activeForm: false,
+      activeForm: true,
       content: '<p style="text-align:justify;">'
           'Prowadzący dzieli uczestników na dwie grupy.'
           '</p>'

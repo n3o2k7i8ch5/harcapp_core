@@ -284,7 +284,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomat = KonspektStep(
       '<br>'
       '<br><i>"Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Również, jeśli ów człowiek zobaczy dowód na kulistość Ziemi, to wniosek będzie miał tylko jeden: narzędzia użyte przy tych dowodach były wadliwe.'
       '<br>'
-      '<br>Czy to powinno zaskakiwać? Przecież my, gdy nam przedstawiono nagranie dodzące, że księżyc jest jedynie wyświetlanym hologramem, też uznalibyśmy, że to nagranie musi być błędne. Nie zakładalibyśmy, że cała nauka się pomyliła - a przecież nauka mogła się pomylić, my jedynie wierzymy, że ona dobrze opisuje rzeczywistość.".</i>'
+      '<br>Czy to powinno zaskakiwać? Przecież my, gdy nam przedstawiono nagranie dowodzące, że księżyc jest jedynie wyświetlanym hologramem, też uznalibyśmy, że to nagranie musi być błędne. Nie zakładalibyśmy, że cała nauka się pomyliła - a przecież nauka mogła się pomylić, my jedynie wierzymy, że ona dobrze opisuje rzeczywistość.".</i>'
       '<br>'
       '<br>Prowadzący dzieli aksjomaty na dwie nierozłączne grupy (tzn. każdy aksjomat może należeć do jednej z grup lub wszystkich na raz): <b>aksjomaty opisu</b> oraz <b>aksjomaty sensu</b> na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci.'
       '</p>'
@@ -293,7 +293,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomat = KonspektStep(
 KonspektStep _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = KonspektStep(
     title: 'Poziomy (warstwy) rozwoju duchowego - aksjomat - dopasowanie przykładów',
     aims: [
-      'Zrozumienie przez uczestników w praktice różnicy między aksjomatami opisu, a aksjomatami sensu.',
+      'Zrozumienie przez uczestników w praktyce różnicy między aksjomatami opisu, a aksjomatami sensu.',
     ],
     materials: [
       material_zal_aksjomaty_opisu_przyklady,
@@ -310,7 +310,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = Konspekt
         '<br>'
         '<br>W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
         '<br>'
-        '<br>Kartki z przykładowymi aksjomatami powinny zostać ułożone w trzech kolumnach pod wyłożoną podczas prezentowania poziomów duchowości kartką "Aksjomat". Przykłady, które nie są aksjomatami należy odłożyć gdzies z boku.'
+        '<br>Kartki z przykładowymi aksjomatami powinny zostać ułożone w trzech kolumnach pod wyłożoną podczas prezentowania poziomów duchowości kartką "Aksjomat". Przykłady, które nie są aksjomatami należy odłożyć gdzieś z boku.'
         '<br>'
         '<br>Na końcu prowadzący po krótce omawia z uczestnikami poprawność ich dopasowania.'
         '</p>'
@@ -346,7 +346,7 @@ KonspektStep _step_integracja_duchowosci_jak_nie = KonspektStep(
       material_marker,
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje <b>dla zbudowania kontekstu</b> intucyjny sposób kształtowania duchowości, który jest zupełnie nieprawdziwy. Zaczyna od zwrócenia uwagi:'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje <b>dla zbudowania kontekstu</b> intuicyjny sposób kształtowania duchowości, który jest zupełnie nieprawdziwy. Zaczyna od zwrócenia uwagi:'
         '<br>'
         '<br><i>Najlepiej byłoby, gdyby każdy człowiek najpierw ustalał swoje aksjomaty - czyli fundament duchowości, następnie wnioskował z nich słuszne wartości, zaś z wartości wnioskował właściwe postawy i zachowania. Potem żyłby długo i szczęśliwie, postępując zawsze w zgodzie z samym sobą, czasem tylko odkryłby jakąś nową wartość, albo nowe właściwe zachowanie.'
         '<br>'
@@ -365,7 +365,7 @@ KonspektStep _step_integracja_duchowosci_wstepna = KonspektStep(
       material_marker,
     ],
     contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje właściwe <b>etapy rozwoju duchowego</b> rysując je przy tym na arkuszu papieru. Przy każdym opisywanym poziomie duchowości prowadzący zaznacza na osi czasu <b>wiek człowieka</b>, w którym jego duchowość zaczyna być możliwa do analizy przez pryzmat danego poziomu duchwości.'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje właściwe <b>etapy rozwoju duchowego</b> rysując je przy tym na arkuszu papieru. Przy każdym opisywanym poziomie duchowości prowadzący zaznacza na osi czasu <b>wiek człowieka</b>, w którym jego duchowość zaczyna być możliwa do analizy przez pryzmat danego poziomu duchowości.'
         '</p>'
 
         '<ul>'
@@ -402,7 +402,7 @@ KonspektStep _step_integracja_duchowosci_wstepna = KonspektStep(
         '<br>'
         '<br><i>Od momentu urodzenia człowiek ma określone zachowania - nie muszą być nawet ze sobą spójne. W trakcie, gdy dorasta, jego otoczenie buduje w nim przekonanie, że niektóre zachowania są dobre, a inne są złe. W wieku 10 lat zacznie rozumieć związek zachowań z wartościami i stopniowo orientuje się, że część z jego dotychczasowych zachowań była niezgodna z jego wartościami, więc zaczyna je zmieniać swoje zachowania. Zmiana zachowań sprawia, że zaczyna inaczej funkcjonować i inaczej doświadczać rzeczywistości, a to weryfikuje przyjętą hierarchię wartości. Nowe wartości wpływają z powrotem na nowe zachowania, zachowania na wartości i tak w kółko.'
         '<br>'
-        '<br>Dalej, w wieku ok. 13-15 lat, człowiek zaczyna w pełni zrozumieć czym są aksjomaty - nawet jeśli nie nazywa ich słowem "aksjomaty". Przyjmuje w życiu jakieś fundamentalne zasady i zazwyczaj stopniowo dostrzega, że część jego dotychczasowych poglądów, wartości i zachowań jest z nią niezgodna i rozpoczyna się gigantyczy proces ich uspójniania.</i>'
+        '<br>Dalej, w wieku ok. 13-15 lat, człowiek zaczyna w pełni zrozumieć czym są aksjomaty - nawet jeśli nie nazywa ich słowem "aksjomaty". Przyjmuje w życiu jakieś fundamentalne zasady i zazwyczaj stopniowo dostrzega, że część jego dotychczasowych poglądów, wartości i zachowań jest z nią niezgodna i rozpoczyna się gigantyczny proces ich uspójniania.</i>'
         '<br>'
         '<br>Prowadzący, opisując to wyjaśnia, że jest to mechanizm w jaki kształtowana jest duchowość: nie jest ona <b>budowana</b>, ani <b>wznoszona</b>, ale raczej <b>uspójniana</b> w procesie włączania kolejnych poziomów abstrakcji jej rozumienia, czyli <b>integrowana</b>. Cały ten proces nosi nazwę <b>integracji wstępnej duchowości</b> (od słowa wstęp, jak początek).'
         '<br>'
@@ -477,14 +477,14 @@ KonspektStep _step_meta_narracja_scenka = KonspektStep(
         '<br>'
         '<br>Następnie prowadzący ustawia budzik na 10 minut i wciela się w Adama. Zadaniem uczestników jest przekonać go, że Adam powinien być posłusznym PH i przebaczyć Radkowi ich sprzeczkę.'
         '<br>'
-        '<br>Prowadzący w roli Adama aż do końca ma nie dać się przekonać. Kluczowe jest to, by stał ciągle na stanowisku, że <b>uczestnicy moga sobie wierzyć w PH, ale według Adama ono jest bez sensu i jest wyrazem słabości</b>.'
+        '<br>Prowadzący w roli Adama aż do końca ma nie dać się przekonać. Kluczowe jest to, by stał ciągle na stanowisku, że <b>uczestnicy mogą sobie wierzyć w PH, ale według Adama ono jest bez sensu i jest wyrazem słabości</b>.'
         '<br>'
         '<br>Uwagi:'
         '</p>'
         '<ul>'
         '<li><p style="text-align:justify;">Jeśli prowadzący nie jest sam, najlepiej, jeśli aktorem grającym Adama będzie ktoś inny niż osoba czytająca opis.</p></li>'
         '<li><p style="text-align:justify;">Jeśli uczestników jest wielu (ponad 12), a prowadzący nie jest sam, można podzielić uczestników na grupy i odegrać scenkę niezależnie w grupach przez różnych prowadzących.</p></li>'
-        '<li><p style="text-align:justify;">Jeśli prowadzący bardzo nie chce wcielać się w rolę, formę można przeprowadzić w postaci aktywnej dyskusju, gdzie prowadzący wciela się w "adwokata diabła" i stara się argumentować tak, jak robiłby Adam.</p></li>'
+        '<li><p style="text-align:justify;">Jeśli prowadzący bardzo nie chce wcielać się w rolę, formę można przeprowadzić w postaci aktywnej dyskusji, gdzie prowadzący wciela się w "adwokata diabła" i stara się argumentować tak, jak robiłby Adam.</p></li>'
         '</ul>'
 );
 
@@ -497,7 +497,7 @@ KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
         '<br>'
         '<br>Oczywiście poszło im <b>fatalnie</b> - nie przekonali Adama. Prowadzący inicjuje krótką dyskusję na temat tego, co poszło nie tak.'
         '<br>'
-        '<br>Wniosek z dyskusji powinien prowadzić do jedynej możliwej odpowiedzi: <b>“To się nie mogło udać, bo nie ma powodu, by Adam <u>arbitalnie</u> przyjął wartości PH. Jeśli dorosły czlowiek ma traktować Prawo Harcerskie poważnie, musi przyjąć wiarę w coś, z czego owe wartości będą wypływały - np. w to, że jest winien przebaczenie każdemu bliźniemu, bo Chystus zbawił go przez przebaczenie mu win wyrażonej w śmierci na krzyżu.”</b>.'
+        '<br>Wniosek z dyskusji powinien prowadzić do jedynej możliwej odpowiedzi: <b>“To się nie mogło udać, bo nie ma powodu, by Adam <u>arbitalnie</u> przyjął wartości PH. Jeśli dorosły czlowiek ma traktować Prawo Harcerskie poważnie, musi przyjąć wiarę w coś, z czego owe wartości będą wypływały - np. w to, że jest winien przebaczenie każdemu bliźniemu, bo Chrystus zbawił go przez przebaczenie mu win wyrażonej w śmierci na krzyżu.”</b>.'
         '<br>'
         '<br>Bez wiary w odpowiedni spójny zbiór aksjomatów, w którym Adam może odnaleźć swoją tożsamość, swój cel, swoje źródło dobra, <b>nie ma żadnej drogi by udało się Adama wychować na dojrzałego, spójnego człowieka w harcerskich (lub jakichkolwiek innych) wartościach!</b>'
         '</p>'
@@ -516,7 +516,7 @@ KonspektStep _step_meta_narracja = KonspektStep(
         '<br>'
         '<br>Prowadzący kończy stwierdzeniem:'
         '<br>'
-        '<br><i>Mówię o tym, ponieważ pracując jedynie z postawami i wartościami można kształtować jedynie ludzi do etapu <b>wstępnej integracji duchowości</b>. Później, świadomy młody człowiek musi kontynuować swój rozwój w oparciu o <b>meta-narrację</b>: poznaną wcześniej historię, w której będzie mógł się odnaleźć, która upowrządkuje świat, która jest wielką opowieścią o świecie i o sensie. Oznacza to, że w procesie wychowawczym <b>nie można abstrahować od kwestii najbardziej osobistych</b> - trzeba wejść z nimi w interakcję.</i>'
+        '<br><i>Mówię o tym, ponieważ pracując jedynie z postawami i wartościami można kształtować jedynie ludzi do etapu <b>wstępnej integracji duchowości</b>. Później, świadomy młody człowiek musi kontynuować swój rozwój w oparciu o <b>meta-narrację</b>: poznaną wcześniej historię, w której będzie mógł się odnaleźć, która porządkuje świat, która jest wielką opowieścią o świecie i o sensie. Oznacza to, że w procesie wychowawczym <b>nie można abstrahować od kwestii najbardziej osobistych</b> - trzeba wejść z nimi w interakcję.</i>'
         '</p>'
 );
 
@@ -600,7 +600,7 @@ KonspektStep _step_zdolnosci_integracji_duchowosci_podsumowanie = KonspektStep(
     duration: Duration(minutes: 3),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący podsumowuje strukturę i sposób ksztaltowania duchowości:'
+        'Prowadzący podsumowuje strukturę i sposób kształtowania duchowości:'
         '<br>'
         '<br><i>Duchowość człowieka to sposób, w jaki żyje i któremu podporządkowuje wszystkie inne sfery siebie i swojego życia. Duchowość to <b>zachowania</b> człowieka, które powinny reprezentować <b>spójne postawy</b>, wynikające ze <b>spójnych wartości</b> płynących z <b>aksjomatów</b>, czyli przyjętej spójnej wiary na temat rzeczywistości. Duchowość kształtuje się poprzez stałe <b>integrowanie</b> ze sobą różnych jej elementów, a żeby mogło się to odbywać skutecznie, za tą integracją musi stać <b>zdolność do określania kierunku integracji duchowości</b> oraz <b>zdolność do jej przeprowadzenia pomimo przeciwności</b>.</i>'
         '<br>'
@@ -662,7 +662,7 @@ KonspektStep _step_duchowosc_religia_religijnosc = KonspektStep(
         '<br>'
         '<br>Prowadzący powinien zwrócić uwagę, że nie ma tu mowy o relacji “zawierania”: <b>w obszernym zbiorze “duchowości” <u>nie zawiera się</u> mniejszy zbiór “religii”</b>! Nie jest tak, że część osób ma duchowość “z religią”, a część “bez religii”. Religia jest rodzajem, sposobem duchowości. Nie można z duchowości “wyjąć” elementu religijnego i dalej mieć do czynienia z duchowością, tak samo jak nie można z psa wyjąć elementu “jamnik” i dalej uważać, że pozostałość to pies. Jamnik nie jest dodatkiem do psa, tylko jest rodzajem całego, spójnego psa.'
         '<br>'
-        '<br>Oznacza to, że nie można prowadzenić wychowania w drużynie w oparciu o jedną, wybraną duchowość, i “wzbogacać” jej dla niektórych religią, a dla innych nie. Wynika to z faktu, że jeśli ktoś jest wychowywany w duchowości religijnej, ma określone religijne aksjomaty, co stoi w kontraście do aksjomatów osób niereligijnych! Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości'
+        '<br>Oznacza to, że nie można prowadzić wychowania w drużynie w oparciu o jedną, wybraną duchowość, i “wzbogacać” jej dla niektórych religią, a dla innych nie. Wynika to z faktu, że jeśli ktoś jest wychowywany w duchowości religijnej, ma określone religijne aksjomaty, co stoi w kontraście do aksjomatów osób niereligijnych! Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości'
         '<br>'
         '<br>Podobnie, błędnym jest pogląd jakoby istniała symetria między duchowością osób religijnych i niereligijnych: osoby religijne mają z góry określone aksjomaty, jednak aksjomaty osób niereligijnych dopiero wymagają określenia i doprecyzowania.'
         '<br>'
@@ -741,7 +741,7 @@ KonspektStep _step_neutralnosc_analogia_do_ogrodnikow = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Jeśli uczestnicy mają problem ze zrozumieniem, dlaczego zarówno działanie wychowawcze jak i jego brak zawsze kształtuje duchowość wychowanków, prowadzący może przedstawić uczestnikom użyteczną analogię:'
         '<br>'
-        '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się ona kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instrktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im określony kształt.</i>'
+        '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się ona kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instruktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im określony kształt.</i>'
         '<br>'
         '<br>W analogii należy podkreślić, że niezależnie od działania ogrodnika, <b>krzew zawsze ma jakiś kształt</b>. Krzew nabywa określonego kształtu, także wtedy, gdy ogrodnik nic nie robi.'
         '<br>'
@@ -765,7 +765,7 @@ KonspektStep _step_duchowosc_w_zhp_dokumenty = KonspektStep(
     duration: Duration(minutes: 5),
     activeForm: false,
     aims: [
-      'Wskazanie uczestnikom formalnych źródeł stanowiących, że harcerstwo jest dla wszystkich, ale nie wychowuje do wszystkiego - ma ściśle określone wartości, do których krztałtuje'
+      'Wskazanie uczestnikom formalnych źródeł stanowiących, że harcerstwo jest dla wszystkich, ale nie wychowuje do wszystkiego - ma ściśle określone wartości, do których kształtuje'
     ],
     content: '<p style="text-align:justify;">'
         'Prowadzący przedstawia uczestnikom stosowny fragment statutu ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_statut) oraz preambułę uchwały w sprawie wspierania rozwoju duchowego w ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_uchwala). Zwraca uwagę na to, że w ZHP mamy ściśle określony zbiór wartości i postaw, do których wychowujemy oraz ramy źródeł wartości. Jeśli uczestnicy będą chcieli - mogą potem do nich zajrzeć.'
@@ -787,7 +787,9 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
     content: '<p style="text-align:justify;">'
         '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z użytego już załącznika $attach_html_neutralnosc_duchowa_przyklady. Prowadzący stawia przed nimi zadanie w formie pytania:'
         '<br>'
-        '<br><i>“We wszystkich scenariuszach mowa jest o wartościach obecnych w PH. Ale przecież żaden wędrownik (mam nadzieję!) nie będzie przestrzegał PH wierząc, że spadło z nieba na kamiennych tablicach! Jakie aksjomaty (lub meta-narracja) ukształtowały świat, dla którego te wartości w sposób oczywisty dobre?”</i>'
+        '<br><i>“We wszystkich scenariuszach mowa jest o wartościach obecnych w PH. Ale przecież żaden wędrownik (mam nadzieję!) nie będzie przestrzegał PH wierząc, że spadło z nieba na kamiennych tablicach!'
+        '<br>'
+        '<br>Jakie aksjomaty, lub szerzej: meta-narracje ukształtowały ludzi, dla którego te wartości w sposób oczywisty dobre i do których mogą się dziś odnieść wędrownicy, by wierzyć w słuszność tych wartości?”</i>'
         '<br>'
         '<br>Prowadzący wchodzi z uczestnikami w dyskusję na temat kolejnych wartości opisanych w załączniku $attach_html_neutralnosc_duchowa_przyklady i omawia źródła wartości w poszczególnych scenariuszach, odnosząc się w razie potrzeby do wniosków uczestników.'
         '</p>'
@@ -838,7 +840,7 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
         '<br>'
         '<br>Immanentne poszanowanie jednostki i dobra indywidualnego człowieka? Niezbywalne wolności osobiste? Prawa człowieka nawet, gdy zbiorowości się to nie opłaca?'
         '<br>'
-        '<br>W kulturze konfucjańskiej najpierw liczy się kolektyw, dobro zbiorowości, trwałość systemu państwowego - a dopiero potem dobro jednostki. W Chinach niedopuszczalne jest publiczne okazywanie sporów, ponieważ osłabia to wspólnotę. W kulturze japońskiej należy poświecić własne plany prywatne, jeśli kolidują one z wydarzeniem firmy, w której się pracuje.'
+        '<br>W kulturze konfucjańskiej najpierw liczy się kolektyw, dobro zbiorowości, trwałość systemu państwowego - a dopiero potem dobro jednostki. W Chinach niedopuszczalne jest publiczne okazywanie sporów, ponieważ osłabia to wspólnotę. W kulturze japońskiej należy poświęcić własne plany prywatne, jeśli kolidują one z wydarzeniem firmy, w której się pracuje.'
         '<br>'
         '<br>Skąd więc u nas "oczywiste" przekonanie, że należy zapewnić odszkodowanie rodzinie, której dom stoi na drodze nowej autostrady? Skąd przekonanie, że nie można zmusić kogoś do pracy, jeśli nie chce? Nasza kultura została ukształtowana przez wiarę, że Bóg stworzył każdego człowieka na swój obraz, że zginął za każdego, najmniejszego z ludzi, by ten mógł doświadczyć zbawienia. "Wszystko, coście uczynili jednemu z braci moich najmniejszych mnieście [Bogu] uczynili".'
         '</p>'
@@ -916,6 +918,63 @@ KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
     ]
 );
 
+// Strategia wychowania duchowego
+
+KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
+    title: 'Strategia wychowania duchowego',
+    duration: Duration(minutes: 15),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący informuje uczestników, że za kilka chwil ich zadaniem będzie zaprojektować proces wychowania duchowego dla konkretnej jednostki.'
+        '<br>'
+        '<br>Zanim uczestnicy przejdą do planowania, trzeba ustalić kilka kwestii strategicznych dotyczących filozofii, której jako instruktorzy harcerscy chcą podporządkować styl swojej pracy.'
+        '<br>'
+        '<br>Prowadzący wydziela następujące przestrzenie do omówienia:'
+        '</p>'
+        '<ul>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<b>Polityka trzymania wychowanków pod ideowym kloszem</b>'
+        '<br>Czy i na jakim etapie duchowość wychowanków ma być kontestowana? Do jakiego stopnia? W jakim celu?'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<b>Polityka fizycznego i emocjonalnego bezpieczeństwa wychowanków</b>'
+        '<br>Czy, kiedy i w jakim celu można wystawiać wychowanków na ryzyko? Czy, kiedy i w jakim celu należy wystawiać wychowanków na doświadczenie bezradności, agresji wobec nich, frustracji, etc.?'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<b>Polityka inkluzywności form w sytuacji różnicy aksjomatycznej wychowanków</b>'
+        '<br>Czy wszystkie formy muszą być tak skonstruowane, aby każdy wychowanek, niezależnie od aksjomatów swojej duchowości, mógł wziąć w nich udział?'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<b>Polityka prywatności życia duchowego wychowanków</b>'
+        '<br>Czy symbolika, obrzędy, tradycje, język religijny może być obecny w przestrzeni publicznej drużyny?'
+        '</p>'
+        '</li>'
+
+        '</ul>',
+    materials: [
+      material_zal_cel_wychowania_duchowego_zhp_statut,
+      material_zal_cel_wychowania_duchowego_zhp_uchwala
+    ]
+);
+
+KonspektStepGroup step_strategia_wychowania_duchowego = KonspektStepGroup(
+    title: 'Strategia wychowania duchowego',
+    steps: [
+      _step_strategia_wychowania_duchowego
+    ]
+);
+
 // Szybkie strzały dyskusyjne
 
 KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
@@ -947,7 +1006,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
         '<p style="text-align:justify;">'
         '<u>Religia jest dodatkiem do duchowości i nie każdy musi ją mieć.</u>'
         '<br>'
-        '<br><i>Religia nie jest "dodatkiem" do duchowości - religia jest konkretną duchowością. Niektóre duchowości nie są religią, jednak nie zmienia to faktu, że tak jak każda religia mają określone arbitralne, dogamtyczne prawdy na temat świata.</i>'
+        '<br><i>Religia nie jest "dodatkiem" do duchowości - religia jest konkretną duchowością. Niektóre duchowości nie są religią, jednak nie zmienia to faktu, że tak jak każda religia mają określone arbitralne, dogmatyczne prawdy na temat świata.</i>'
         '</p>'
         '</li>'
 
@@ -979,7 +1038,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
         '<p style="text-align:justify;">'
         '<u>Wszystkie niebezpieczne działania są niewychowawcze i nieodpowiedzialne.</u>'
         '<br>'
-        '<br><i>Życie jest niebezpieczne i nie da się odizolować od tego człowieka. Zmiast chować go pod kloszem i wychowywać do życia w nieistniejącym świecie, lepiej dawkować młodemu człowiekowi doświadczenie braku bezpieczeństwa - takie działania mogą być ryzykowne, ale są wychowawcze i są wyrazem odpowiedzialności za przyszlość młodego człowieka.</i>'
+        '<br><i>Życie jest niebezpieczne i nie da się odizolować od tego człowieka. Zamiast chować go pod kloszem i wychowywać do życia w nieistniejącym świecie, lepiej dawkować młodemu człowiekowi doświadczenie braku bezpieczeństwa - takie działania mogą być ryzykowne, ale są wychowawcze i są wyrazem odpowiedzialności za przyszłość młodego człowieka.</i>'
         '</p></li>'
 
         '<li>'

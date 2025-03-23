@@ -482,12 +482,12 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           ]
       ),
 
-      step_group_duchowosc_w_zhp,
-
       KonspektStepGroup(
           title: 'Czynniki i mechanizmy kształtowania duchowości',
           steps: steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci.map((step) => step.copyWithNamePrefix('Czynniki duchowości - ')).toList()
       ),
+
+      step_group_duchowosc_w_zhp,
 
       KonspektStepGroup(
           title: 'Praktyka wychowania duchowego',
@@ -550,8 +550,10 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           ]
       ),
 
+      step_strategia_wychowania_duchowego,
+
       KonspektStepGroup(
-          title: 'Planowanie wychowania duchowości',
+          title: 'Planowanie wychowania duchowego',
           steps: [
 
             KonspektStep(
