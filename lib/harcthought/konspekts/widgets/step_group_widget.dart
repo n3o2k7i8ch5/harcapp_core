@@ -9,7 +9,7 @@ import 'package:harcapp_core/harcthought/konspekts/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/konspekts/widgets/step_widget.dart';
 
-class KonspektStepGroupWidget extends StatefulWidget{
+class KonspektStepGroupWidget extends StatelessWidget{
 
   final Konspekt konspekt;
   final int index;
@@ -17,33 +17,12 @@ class KonspektStepGroupWidget extends StatefulWidget{
   final bool showBorder;
   final bool showBackground;
   final double? maxDialogWidth;
+  final List<TimeOfDay>? stepsTimeTable;
 
-  const KonspektStepGroupWidget(this.konspekt, this.index, {this.startTime, this.showBorder = false, this.showBackground = false, this.maxDialogWidth, super.key});
-
-  @override
-  State<StatefulWidget> createState() => KonspektStepGroupWidgetState();
-
-}
-
-class KonspektStepGroupWidgetState extends State<KonspektStepGroupWidget>{
-
-  Konspekt get konspekt => widget.konspekt;
-  int get index => widget.index;
-  TimeOfDay? get startTime => widget.startTime;
-  bool get showBorder => widget.showBorder;
-  bool get showBackground => widget.showBackground;
-  double? get maxDialogWidth => widget.maxDialogWidth;
+  KonspektStepGroupWidget(this.konspekt, this.index, {this.startTime, this.showBorder = false, this.showBackground = false, this.maxDialogWidth, super.key})
+    :stepsTimeTable = buildTimeTable(konspekt.stepGroups![index].steps, startTime!);
 
   KonspektStepGroup get stepGroup => konspekt.stepGroups![index];
-
-  List<TimeOfDay>? stepsTimeTable;
-
-  @override
-  void initState() {
-    if(startTime != null)
-      stepsTimeTable = buildTimeTable(stepGroup.steps, startTime!);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context){

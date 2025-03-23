@@ -28,6 +28,8 @@ class BaseKonspektWidget extends StatefulWidget{
   static const double horizontalPadding = Dimen.sideMarg;
 
   final Konspekt konspekt;
+  final TimeOfDay? startTime;
+  final List<TimeOfDay>? stepsTimeTable;
   final bool withAppBar;
   final void Function()? onDuchLevelInfoTap;
   final double? maxDialogWidth;
@@ -46,9 +48,10 @@ class BaseKonspektWidget extends StatefulWidget{
   final bool showStepGroupBorder;
   final void Function(Konspekt)? onThumbnailTap;
 
-  const BaseKonspektWidget(
+  BaseKonspektWidget(
       this.konspekt,
       { super.key,
+        this.startTime,
         this.withAppBar = true,
         required this.onDuchLevelInfoTap,
         this.maxDialogWidth,
@@ -66,7 +69,8 @@ class BaseKonspektWidget extends StatefulWidget{
         this.showStepGroupBackground = false,
         this.showStepGroupBorder = false,
         this.onThumbnailTap,
-      });
+      }):
+        stepsTimeTable = buildTimeTable(konspekt.stepGroups??konspekt.steps, startTime!);
 
   @override
   State<StatefulWidget> createState() => BaseKonspektWidgetState();
@@ -76,6 +80,7 @@ class BaseKonspektWidget extends StatefulWidget{
 class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
   Konspekt get konspekt => widget.konspekt;
+  List<TimeOfDay>? get stepsTimeTable => widget.stepsTimeTable;
   void Function()? get onDuchLevelInfoTap => widget.onDuchLevelInfoTap;
   double? get maxDialogWidth => widget.maxDialogWidth;
 
@@ -85,9 +90,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   ScrollController? _controller;
 
   ScrollController get controller => widget.controller??_controller!;
-
-  TimeOfDay? startTime;
-  List<TimeOfDay>? stepsTimeTable;
 
   double? layoutWidth;
 
@@ -107,13 +109,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
         setState(() => showAppBarTitle = shouldBeVisible);
 
     });
-
-    if(startTime != null) {
-      if(konspekt.stepGroups != null)
-        stepsTimeTable = buildTimeTable(konspekt.stepGroups!, startTime!);
-      else
-        stepsTimeTable = buildTimeTable(konspekt.steps, startTime!);
-    }
 
     super.initState();
   }
@@ -426,9 +421,9 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                           showBackground: widget.showStepGroupBackground,
                           showBorder: widget.showStepGroupBorder,
                           maxDialogWidth: maxDialogWidth,
-                          key: ValueKey(
-                              (konspekt, index, stepsTimeTable?[index])
-                          ),
+                            key: ValueKey(
+                                (konspekt, index, stepsTimeTable?[index])
+                            ),
                       ),
                       separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
                       count: konspekt.stepGroups!.length
