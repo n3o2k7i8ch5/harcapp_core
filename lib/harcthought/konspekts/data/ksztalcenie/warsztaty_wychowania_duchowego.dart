@@ -241,8 +241,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_zal_aksjomaty_sensu_przyklady,
       material_zal_aksjomaty_bledne_przyklady,
 
+      material_budzik,
       material_zal_meta_narracja_opis,
-
       material_zal_meta_narracja_przyklady,
 
       material_zal_neutralnosc_duchowa_przyklady,
@@ -461,18 +461,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       step_group_integracja_duchowosci,
 
+      step_group_metanarracja,
+
       step_group_zdolnosc_integracji_duchowosci,
-
-      KonspektStepGroup(
-          title: 'Duchowość powszechna, mądrość, kultura i tradycja',
-          steps: [
-            step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
-
-            step_duchowosc_religia_religijnosc_opinie_uczestnikow,
-
-            step_duchowosc_religia_religijnosc,
-          ]
-      ),
 
       KonspektStepGroup(
           steps: [
@@ -487,6 +478,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           ]
       ),
 
+      step_group_duchowosc_powszechna_madrosc_kultura_tradycja,
 
       // Neutralność
       KonspektStepGroup(
@@ -497,19 +489,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             step_neutralnosc_duchowa_w_przypadku_problemow,
 
             step_harcerstwo_analogia_do_ogrodnikow,
-          ]
-      ),
-
-      KonspektStepGroup(
-          title: 'Duchowość w ZHP',
-          steps: [
-            step_zrodla_wartosci_w_zhp_dyskusja_o_scenariuszach,
-
-            step_zrodla_wartosci_w_zhp_okreslonosc_wartosci,
-
-            step_zrodla_wartosci_w_zhp_aksjoamty,
-
-            step_neutralnosc_podsumowanie,
           ]
       ),
 
@@ -526,6 +505,19 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                   material_obiad,
                 ]
             ),
+          ]
+      ),
+
+      KonspektStepGroup(
+          title: 'Duchowość w ZHP',
+          steps: [
+            step_zrodla_wartosci_w_zhp_dyskusja_o_scenariuszach,
+
+            step_zrodla_wartosci_w_zhp_okreslonosc_wartosci,
+
+            step_zrodla_wartosci_w_zhp_aksjoamty,
+
+            step_neutralnosc_podsumowanie,
           ]
       ),
 

@@ -48,6 +48,11 @@ KonspektMaterial material_zal_aksjomaty_bledne_przyklady = KonspektMaterial(
     amount: 1
 );
 
+KonspektMaterial material_budzik = KonspektMaterial(
+  name: "Budzik (np. w telefonie)",
+  amount: 1
+);
+
 KonspektMaterial material_zal_meta_narracja_opis = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_meta_narracja_opis”',
     attachmentName: attach_name_meta_narracja_opis,
@@ -304,51 +309,13 @@ KonspektStep _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = Konspekt
         '</p>'
 );
 
-KonspektStep _step_poziomy_duchowosci_meta_narracja = KonspektStep(
-    title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja',
-    duration: Duration(minutes: 10),
-    activeForm: false,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący przedstawia definicję meta-narracji na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci i kładzie przed uczestnikami (obok kartki "Aksjomat") opis meta-narracji z załącznika $attach_html_meta_narracja_opis.'
-        '<br>'
-        '<br>Meta-narracja to <i>zbiór spójnych aksjomatów dających się wyrazić jako opowieść o świecie, jego aktorach, z której bezpośrednio wynika definicja dobra, celu, sensu, osobistej roli przyjmującej ją człowieka, która stanowi źródło motywacji i tożsamości. Meta-narracje mogą zawierać aksjomaty opisu, jednak zawsze muszą zawierać aksjomaty sensu.</i>.'
-        '<br>'
-        '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady.'
-        '</p>'
-);
-
-KonspektStep _step_poziomy_duchowosci_meta_narracja_wyjasnienie = KonspektStep(
-    title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja - wyjaśnienie',
-    duration: Duration(minutes: 10),
-    activeForm: false,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący wyjaśnia uczestnikom po co w ogóle zawraca im głowę meta-narracjami. W tym celu posługuje się następującą hipotetyczną sytuacją:'
-        '<br>'
-        '<i>'
-        'Na obozie jeden z wędrowników, Radek, zaszedł drugiemu, Adamowi, za skórę. W odwecie Adam zaczął Radka prześladować. Trwało to już od miesiąca. Drużynowy wziął Adama na rozmowę. Powiedział, że zgodnie z harcerskimi wartościami należy traktować innych jak bliźnich i braci, dlatego uważa, że Adam powinien przebaczyć Radkowi ich sprzeczkę.'
-        '<br>'
-        '<br>Adam jednak stwierdził:'
-        '<br>'
-        '<br>"Okej. Mogę dać mu spokój, ale po tym, co Radek zrobił, nie zasługuje na traktowanie jak brata. Ja zresztą nie jestem już dzieckiem, dlaczego mam wierzyć w jakieś Prawo Harcerskie, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre? Przecież Rada Naczelna to banda starych dziadów rodem z poprzedniej epoki".'
-        '</i>'
-        '<br>'
-        '<br>Po opowiedzeniu tej historii prowadzący może zapytać uczestników <i>"Dlaczego Adam miałby uznać w swoim życiu wartości wynikające z Prawa Harcerskiego?"</i> przy założeniu, że jest w pełni dojrzałym człowiekiem.'
-        '<br>'
-        '<br>Wniosek z dyskusji powinien prowadzić do jedynej możliwej odpowiedzi: <b>“Nie ma powodu, by Adam arbitalnie przyjął wartości PH. Jeśli Adam ma traktować Prawo Harcerskie poważnie, musi przyjąć wiarę w meta-narrację, z której owe wartości będą wypływały - np. w to, że jest winien przebaczenie każdemu bliźniemu, bo Chystus zbawił go przez przebaczenie mu win wyrażonej w śmierci na krzyżu.”</b>.'
-        '<br>'
-        '<br>Bez aksjomatów ułożonych w meta-narrację <b>nie ma żadnej drogi do wychowania dojrzałego, spójnego człowieka w harcerskich (lub jakichkolwiek innych) wartościach!</b>'
-        '</p>'
-);
-
 KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
     title: 'Poziomy (warstwy) duchowości',
     steps: [
       _step_poziomy_duchowosci,
       _step_poziomy_duchowosci_przyklady_uczestnikow,
       _step_poziomy_duchowosci_aksjomat,
-      _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow,
-      _step_poziomy_duchowosci_meta_narracja,
-      _step_poziomy_duchowosci_meta_narracja_wyjasnienie
+      _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow
     ]
 );
 
@@ -479,6 +446,82 @@ KonspektStepGroup step_group_integracja_duchowosci = KonspektStepGroup(
     ]
 );
 
+// Meta-narracja
+
+KonspektStep _step_meta_narracja_scenka = KonspektStep(
+    title: 'Meta-narracja - scenka',
+    duration: Duration(minutes: 15),
+    activeForm: true,
+    materials: [
+      material_budzik
+    ],
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przedstawia uczestnikom krótką historię:'
+        '<br>'
+        '<br>'
+        '<i>Na obozie jeden z wędrowników, Radek, zaszedł drugiemu, Adamowi, za skórę. W odwecie Adam zaczął Radka prześladować. Trwało to już od miesiąca. Drużynowy wziął Adama na rozmowę. Powiedział, że zgodnie z harcerskimi wartościami należy traktować innych jak bliźnich i braci, dlatego uważa, że Adam powinien przebaczyć Radkowi ich sprzeczkę.'
+        '<br>'
+        '<br>Adam jednak stwierdził:'
+        '<br>'
+        '<br>"Okej. Mogę dać mu spokój, ale po tym, co Radek zrobił, nie zasługuje na traktowanie jak brata. Ja zresztą nie jestem już dzieckiem, dlaczego mam wierzyć w jakieś Prawo Harcerskie, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre? Przecież Rada Naczelna to banda starych dziadów rodem z poprzedniej epoki".'
+        '</i>'
+        '<br>'
+        '<br>Prowadzący zwraca uwagę uczestników (może to zrobić w formie pytania), że postawa Adama jest zupełnie nieharcerska (niezgodna z 4. punktem PH "Harcerz w każdym widzi bliźniego, a za brata uważa każdego innego harcerza").'
+        '<br>'
+        '<br>Następnie prowadzący ustawia budzik na 10 minut i wciela się w Adama. Zadaniem uczestników jest przekonać go, że Adam powinien być posłusznym PH i przebaczyć Radkowi ich sprzeczkę.'
+        '<br>'
+        '<br>Prowadzący w roli Adama aż do końca ma nie dać się przekonać. Kluczowe jest to, by stał ciągle na stanowisku, że <b>uczestnicy moga sobie wierzyć w PH, ale według Adama ono jest bez sensu i jest wyrazem słabości</b>.'
+        '<br>'
+        '<br>Uwagi:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">Jeśli prowadzący nie jest sam, najlepiej, jeśli aktorem grającym Adama będzie ktoś inny niż osoba czytająca opis.</p></li>'
+        '<li><p style="text-align:justify;">Jeśli uczestników jest wielu (ponad 12), a prowadzący nie jest sam, można podzielić uczestników na grupy i odegrać scenkę niezależnie w grupach przez różnych prowadzących.</p></li>'
+        '<li><p style="text-align:justify;">Jeśli prowadzący bardzo nie chce wcielać się w rolę, formę można przeprowadzić w postaci aktywnej dyskusju, gdzie prowadzący wciela się w "adwokata diabła" i stara się argumentować tak, jak robiłby Adam.</p></li>'
+        '</ul>'
+);
+
+KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
+    title: 'Meta-narracja - omówienie scenki',
+    duration: Duration(minutes: 10),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący pyta uczestników <i>"jak Wam poszło?"</i>.'
+        '<br>'
+        '<br>Oczywiście poszło im <b>fatalnie</b> - nie przekonali Adama. Prowadzący inicjuje krótką dyskusję na temat tego, co poszło nie tak.'
+        '<br>'
+        '<br>Wniosek z dyskusji powinien prowadzić do jedynej możliwej odpowiedzi: <b>“To się nie mogło udać, bo nie ma powodu, by Adam <u>arbitalnie</u> przyjął wartości PH. Jeśli dorosły czlowiek ma traktować Prawo Harcerskie poważnie, musi przyjąć wiarę w coś, z czego owe wartości będą wypływały - np. w to, że jest winien przebaczenie każdemu bliźniemu, bo Chystus zbawił go przez przebaczenie mu win wyrażonej w śmierci na krzyżu.”</b>.'
+        '<br>'
+        '<br>Bez wiary w odpowiedni spójny zbiór aksjomatów, w którym Adam może odnaleźć swoją tożsamość, swój cel, swoje źródło dobra, <b>nie ma żadnej drogi by udało się Adama wychować na dojrzałego, spójnego człowieka w harcerskich (lub jakichkolwiek innych) wartościach!</b>'
+        '</p>'
+);
+
+KonspektStep _step_meta_narracja = KonspektStep(
+    title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja',
+    duration: Duration(minutes: 5),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przedstawia definicję meta-narracji na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci i kładzie przed uczestnikami (obok kartki "Aksjomat") opis meta-narracji z załącznika $attach_html_meta_narracja_opis.'
+        '<br>'
+        '<br>Meta-narracja to <i>zbiór spójnych aksjomatów dających się wyrazić jako opowieść o świecie, jego aktorach, z której bezpośrednio wynika definicja dobra, celu, sensu, osobistej roli przyjmującej ją człowieka, która stanowi źródło motywacji i tożsamości. Meta-narracje mogą zawierać aksjomaty opisu, jednak zawsze muszą zawierać aksjomaty sensu.</i>.'
+        '<br>'
+        '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady.'
+        '<br>'
+        '<br>Prowadzący kończy stwierdzeniem:'
+        '<br>'
+        '<br><i>Mówię o tym, ponieważ pracując jedynie z postawami i wartościami można kształtować jedynie ludzi do etapu <b>wstępnej integracji duchowości</b>. Później, świadomy młody człowiek musi kontynuować swój rozwój w oparciu o poznaną wcześniej historię, w której będzie mógł się odnaleźć, która upowrządkuje świat, która jest wielką opowieścią o świecie i o sensie.</i>'
+        '</p>'
+);
+
+KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
+    title: 'Meta-narracja',
+    steps: [
+      _step_meta_narracja_scenka,
+      _step_meta_narracja_omowienie_scenki,
+      _step_meta_narracja
+    ]
+);
+
 // Zdolności integracji duchowości
 
 KonspektStep _step_zdolnosci_integracji_duchowosci = KonspektStep(
@@ -569,9 +612,9 @@ KonspektStepGroup step_group_zdolnosc_integracji_duchowosci = KonspektStepGroup(
 
 // Duchowość powszechna etc.
 
-KonspektStep step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektStep(
+KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektStep(
     title: 'Duchowość powszechna, mądrość, kultura i tradycja',
-    duration: Duration(minutes: 15),
+    duration: Duration(minutes: 10),
     activeForm: false,
     content: '<p style="text-align:justify;">'
         'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej implementacją i formą przekazu - <b>kulturą</b> i jej elementami - <b>tradycjami</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
@@ -582,7 +625,7 @@ KonspektStep step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektStep
         '</p>'
 );
 
-KonspektStep step_duchowosc_religia_religijnosc_opinie_uczestnikow = KonspektStep(
+KonspektStep _step_duchowosc_religia_religijnosc_opinie_uczestnikow = KonspektStep(
     title: 'Duchowość, religia, religijność - opinie uczestników',
     duration: Duration(minutes: 10),
     activeForm: true,
@@ -601,9 +644,9 @@ KonspektStep step_duchowosc_religia_religijnosc_opinie_uczestnikow = KonspektSte
     ]
 );
 
-KonspektStep step_duchowosc_religia_religijnosc = KonspektStep(
+KonspektStep _step_duchowosc_religia_religijnosc = KonspektStep(
     title: 'Duchowość, religia, religijność',
-    duration: Duration(minutes: 20),
+    duration: Duration(minutes: 10),
     activeForm: false,
     content: '<p style="text-align:justify;">'
         'Prowadzący na podstawie załącznika $attach_html_poradnik_o_strukturze_duchowosci definiuje religię:'
@@ -618,6 +661,17 @@ KonspektStep step_duchowosc_religia_religijnosc = KonspektStep(
         '<br>'
         '<br><b>Religijność</b> jest zestawem zachowań i postaw wynikających z duchowości religijnej. Religijność nie jest jednak zbiorem wartości, ani całą duchowością - religijność to jedynie wierzchnia warstwa duchowości, która pozwala (lecz sama w sobie niekoniecznie wystarcza) by duchowość religijną skutecznie integrować.'
         '</p>'
+);
+
+KonspektStepGroup step_group_duchowosc_powszechna_madrosc_kultura_tradycja = KonspektStepGroup(
+    title: 'Duchowość powszechna, mądrość, kultura i tradycja',
+    steps: [
+      _step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
+
+      _step_duchowosc_religia_religijnosc_opinie_uczestnikow,
+
+      _step_duchowosc_religia_religijnosc,
+    ]
 );
 
 // Neutralność
@@ -658,7 +712,7 @@ KonspektStep step_neutralnosc_duchowa_w_przypadku_problemow = KonspektStep(
     activeForm: false,
     required: false,
     content: '<p style="text-align:justify;">'
-        '<br>Jeśli uczestnicy nie są przekonani do tego, że neutralność nie jest możliwa, prowadzący może zadać pytanie:'
+        '<br>Jeśli uczestnicy nie są przekonani, że neutralność nie jest możliwa, prowadzący może zadać pytanie:'
         '<br>'
         '<br><i>“Czy jeśli harcerz zawsze bije kolegów, którzy się z nim nie zgadzają, a instruktor nie reaguje, to czy postępuje neutralnie?”</i>'
         '<br>'

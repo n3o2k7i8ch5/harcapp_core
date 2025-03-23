@@ -153,11 +153,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
 
       ...step_group_integracja_duchowosci.steps,
 
-      step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
-
-      step_duchowosc_religia_religijnosc_opinie_uczestnikow,
-
-      step_duchowosc_religia_religijnosc,
+      ...step_group_duchowosc_powszechna_madrosc_kultura_tradycja.steps,
 
       KonspektStep(
           title: 'Przerwa',
