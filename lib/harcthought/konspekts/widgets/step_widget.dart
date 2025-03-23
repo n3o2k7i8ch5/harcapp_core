@@ -33,96 +33,102 @@ class KonspektStepWidget extends StatelessWidget{
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
 
-      SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        child: Row(
-          children: [
+      Row(
+        children: [
 
-            SizedBox(
-                height: 2*Dimen.textSizeNormal + Dimen.defMarg + 4,
-                child: Material(
-                  borderRadius: BorderRadius.circular(AppCard.defRadius),
-                  color: hintEnab_(context),
-                  child: Container(
-                    constraints: BoxConstraints(
-                      minWidth: 2*Dimen.textSizeNormal + Dimen.defMarg + 4
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Dimen.defMarg),
-                      child: Center(
-                        child: Text(
-                            '${groupIndex==null?'':'${groupIndex! + 1}.'}${index + 1}.',
-                            style: AppTextStyle(
-                                fontSize: Dimen.textSizeAppBar,
-                                fontWeight: weight.halfBold,
-                                color: background_(context)
-                            )
-                        ),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              child: Row(
+                children: [
+
+                  SizedBox(
+                      height: 2*Dimen.textSizeNormal + Dimen.defMarg + 4,
+                      child: Material(
+                          borderRadius: BorderRadius.circular(AppCard.defRadius),
+                          color: hintEnab_(context),
+                          child: Container(
+                            constraints: BoxConstraints(
+                                minWidth: 2*Dimen.textSizeNormal + Dimen.defMarg + 4
+                            ),
+                            child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: Dimen.defMarg),
+                                child: Center(
+                                  child: Text(
+                                      '${groupIndex==null?'':'${groupIndex! + 1}.'}${index + 1}.',
+                                      style: AppTextStyle(
+                                          fontSize: Dimen.textSizeAppBar,
+                                          fontWeight: weight.halfBold,
+                                          color: background_(context)
+                                      )
+                                  ),
+                                )
+                            ),
+                          )
                       )
-                    ),
-                  )
-                )
-            ),
+                  ),
 
-            const SizedBox(width: Dimen.iconMarg),
+                  const SizedBox(width: Dimen.iconMarg),
 
-            Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
 
-                    SelectableText(
-                        step.title,
-                        style: const AppTextStyle(fontWeight: weight.halfBold)
-                    ),
+                      SelectableText(
+                          step.title,
+                          style: const AppTextStyle(fontWeight: weight.halfBold)
+                      ),
 
-                    const SizedBox(height: Dimen.defMarg),
+                      const SizedBox(height: Dimen.defMarg),
 
-                    Row(
-                      children: [
+                      Row(
+                        children: [
 
-                        SelectableText(durationToString(step.duration), style: const AppTextStyle()),
+                          SelectableText(durationToString(step.duration), style: const AppTextStyle()),
 
-                        const SizedBox(width: 20),
-
-                        if(startTime != null)
                           const SizedBox(width: 20),
 
-                        if(startTime != null)
+                          if(startTime != null)
+                            const SizedBox(width: 20),
+
+                          if(startTime != null)
+                            SelectableText(
+                                '(${timeOfDayRangeToString(startTime!, startTime! + step.duration)})',
+                                style: AppTextStyle(
+                                    color: hintEnab_(context)
+                                )
+                            ),
+
                           SelectableText(
-                              '(${timeOfDayRangeToString(startTime!, startTime! + step.duration)})',
+                              step.activeForm?'Forma aktywna':'Forma statyczna',
                               style: AppTextStyle(
-                                  color: hintEnab_(context)
+                                  color: step.activeForm?Colors.green:Colors.deepOrange,
+                                  fontWeight: weight.halfBold
                               )
                           ),
 
-                        SelectableText(
-                            step.activeForm?'Forma aktywna':'Forma statyczna',
-                            style: AppTextStyle(
-                                color: step.activeForm?Colors.green:Colors.deepOrange,
-                                fontWeight: weight.halfBold
-                            )
-                        ),
+                          const SizedBox(width: 20),
 
-                        const SizedBox(width: 20),
+                          if(!step.required)
+                            SelectableText('[opcjonalnie]', style: AppTextStyle(color: hintEnab_(context))),
 
-                        if(!step.required)
-                          SelectableText('[opcjonalnie]', style: AppTextStyle(color: hintEnab_(context))),
+                        ],
+                      ),
 
-                      ],
-                    ),
+                    ],
+                  )
 
-                  ],
-                )
+                ],
+              ),
             ),
+          ),
 
-            if(trailingTop != null)
-              trailingTop!
+          if(trailingTop != null)
+            trailingTop!
 
-          ],
-        ),
+        ]
       ),
 
       if(step.aims != null && step.aims!.isNotEmpty)
