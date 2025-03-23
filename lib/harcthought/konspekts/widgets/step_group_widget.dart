@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
+import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/comm_widgets/border_material.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
@@ -66,7 +66,7 @@ class KonspektStepGroupWidget extends StatelessWidget{
       stepsTimeTable!.last,
     );
 
-    String timeStr = timeRangeStr == null? durationStr: '$durationStr ($timeRangeStr)';
+    String timeStr = timeRangeStr == null? durationStr: '<b>$durationStr</b> ($timeRangeStr)';
 
     if(showBorder)
       return BorderMaterial(
@@ -81,12 +81,10 @@ class KonspektStepGroupWidget extends StatelessWidget{
                   title: stepGroup.title!,
                   textAlign: TextAlign.left,
                   titleColor: textDisab_(context),
-                  trailing: Text(
+                  trailing: AppText(
                     timeStr,
-                    style: AppTextStyle(
-                        fontSize: Dimen.textSizeAppBar,
-                        color: textDisab_(context)
-                    ),
+                    size: Dimen.textSizeAppBar,
+                    color: textDisab_(context),
                   ),
                 ),
               ),

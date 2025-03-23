@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 String _monthToStr(DateTime date, {bool shortMonth = false, bool showDay = true}){
     switch (date.month) {
@@ -168,12 +169,19 @@ String dateRangeToString(
 
 }
 
+String timeOfDayToString(TimeOfDay timeOfDay){
+  NumberFormat format = NumberFormat('00');
+  String hourStr = format.format(timeOfDay.hour);
+  String minuteStr = format.format(timeOfDay.minute);
+
+  return '${hourStr}:${minuteStr}';
+}
+
+
 String timeOfDayRangeToString(
   TimeOfDay startTime,
   TimeOfDay endTime,
-){
-  return '${startTime.hour}:${startTime.minute} - ${endTime.hour}:${endTime.minute}';
-}
+) => '${timeOfDayToString(startTime)} - ${timeOfDayToString(endTime)}';
 
 String durationToString(Duration? duration, {bool onlyBiggestTimeFactor = false}){
 
