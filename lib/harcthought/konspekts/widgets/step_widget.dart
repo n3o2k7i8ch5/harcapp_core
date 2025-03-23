@@ -15,14 +15,15 @@ import 'html_widget.dart';
 class KonspektStepWidget extends StatelessWidget{
 
   final Konspekt konspekt;
-  final KonspektStepsContainer stepsContainer;
+  final KonspektStepsContainerMixin stepsContainer;
   final int index;
   final int? groupIndex;
+  final TimeOfDay? startTime;
   final double horizontalPadding;
   final double? maxDialogWidth;
   KonspektStep get step => stepsContainer.steps[index];
 
-  const KonspektStepWidget(this.konspekt, this.stepsContainer, this.index, {this.groupIndex, this.horizontalPadding = Dimen.sideMarg, this.maxDialogWidth, super.key});
+  const KonspektStepWidget(this.konspekt, this.stepsContainer, this.index, {this.groupIndex, this.startTime, this.horizontalPadding = Dimen.sideMarg, this.maxDialogWidth, super.key});
 
   @override
   Widget build(BuildContext context) => Column(

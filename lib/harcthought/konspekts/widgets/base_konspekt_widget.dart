@@ -86,6 +86,9 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
   ScrollController get controller => widget.controller??_controller!;
 
+  TimeOfDay? startTime;
+  List<TimeOfDay>? stepsTimeTable;
+
   double? layoutWidth;
 
   @override
@@ -104,6 +107,13 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
         setState(() => showAppBarTitle = shouldBeVisible);
 
     });
+
+    if(startTime != null) {
+      if(konspekt.stepGroups != null)
+        stepsTimeTable = buildTimeTable(konspekt.stepGroups!, startTime!);
+      else
+        stepsTimeTable = buildTimeTable(konspekt.steps, startTime!);
+    }
 
     super.initState();
   }
@@ -398,11 +408,9 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   maxDialogWidth: widget.maxDialogWidth,
                 ),
 
-              if(konspekt.steps != null)
-                const SizedBox(height: Dimen.sideMarg),
+              const SizedBox(height: Dimen.sideMarg),
 
-              if(konspekt.steps != null)
-                const TitleShortcutRowWidget(title: 'Plan', textAlign: TextAlign.left),
+              const TitleShortcutRowWidget(title: 'Plan', textAlign: TextAlign.left),
 
             ])),
           ),
@@ -411,30 +419,37 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             SliverPadding(
               padding: const EdgeInsets.only(bottom: Dimen.sideMarg),
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                (context, index) => KonspektStepGroupWidget(
-                  konspekt,
-                  index,
-                  showBackground: widget.showStepGroupBackground,
-                  showBorder: widget.showStepGroupBorder,
-                  maxDialogWidth: maxDialogWidth
-                ),
-              separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
-              count: konspekt.stepGroups!.length
-              )),
+                          (context, index) => KonspektStepGroupWidget(
+                          konspekt,
+                          index,
+                          startTime: startTime,
+                          showBackground: widget.showStepGroupBackground,
+                          showBorder: widget.showStepGroupBorder,
+                          maxDialogWidth: maxDialogWidth,
+                      ),
+                      separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
+                      count: konspekt.stepGroups!.length
+                  )),
             )
           else if(konspekt.steps.isNotEmpty)
             SliverPadding(
               padding: const EdgeInsets.only(bottom: Dimen.sideMarg),
-              sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
+              sliver: SliverList(
+                  delegate: SliverChildSeparatedBuilderDelegate(
                   (context, index) => KonspektStepWidget(
                     konspekt,
                     konspekt,
                     index,
-                    maxDialogWidth: maxDialogWidth
+                    startTime: stepsTimeTable?[index],
+                    maxDialogWidth: maxDialogWidth,
+                    key: ValueKey(
+                        (konspekt, index, stepsTimeTable?[index])
+                    ),
                   ),
                   separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
                   count: konspekt.steps.length
-              )),
+              )
+              ),
             ),
 
           if(konspekt.howToFail != null)

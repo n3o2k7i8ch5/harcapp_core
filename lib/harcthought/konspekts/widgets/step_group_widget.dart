@@ -5,20 +5,45 @@ import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_widgets/border_material.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/harcthought/konspekts/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/konspekts/widgets/step_widget.dart';
 
-class KonspektStepGroupWidget extends StatelessWidget{
+class KonspektStepGroupWidget extends StatefulWidget{
 
   final Konspekt konspekt;
   final int index;
+  final TimeOfDay? startTime;
   final bool showBorder;
   final bool showBackground;
   final double? maxDialogWidth;
 
-  const KonspektStepGroupWidget(this.konspekt, this.index, {this.showBorder = false, this.showBackground = false, this.maxDialogWidth, super.key});
+  const KonspektStepGroupWidget(this.konspekt, this.index, {this.startTime, this.showBorder = false, this.showBackground = false, this.maxDialogWidth, super.key});
+
+  @override
+  State<StatefulWidget> createState() => KonspektStepGroupWidgetState();
+
+}
+
+class KonspektStepGroupWidgetState extends State<KonspektStepGroupWidget>{
+
+  Konspekt get konspekt => widget.konspekt;
+  int get index => widget.index;
+  TimeOfDay? get startTime => widget.startTime;
+  bool get showBorder => widget.showBorder;
+  bool get showBackground => widget.showBackground;
+  double? get maxDialogWidth => widget.maxDialogWidth;
 
   KonspektStepGroup get stepGroup => konspekt.stepGroups![index];
+
+  List<TimeOfDay>? stepsTimeTable;
+
+  @override
+  void initState() {
+    if(startTime != null)
+      stepsTimeTable = buildTimeTable(stepGroup.steps, startTime!);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context){
@@ -28,16 +53,21 @@ class KonspektStepGroupWidget extends StatelessWidget{
       Widget child = Padding(
         padding: EdgeInsets.symmetric(vertical: Dimen.sideMarg),
         child: KonspektStepWidget(
-            konspekt, stepGroup, stepIndex, groupIndex: index,
-            maxDialogWidth: maxDialogWidth),
+            konspekt,
+            stepGroup,
+            stepIndex,
+            groupIndex: index,
+            startTime: stepsTimeTable?[stepIndex],
+            maxDialogWidth: maxDialogWidth
+        ),
       );
 
       if(stepIndex%2==1 && showBackground)
         children.add(
-          Container(
-            child: child,
-            color: backgroundIcon_(context).withValues(alpha: 0.025),
-          )
+            Container(
+              child: child,
+              color: backgroundIcon_(context).withValues(alpha: 0.025),
+            )
         );
       else
         children.add(child);
@@ -56,24 +86,24 @@ class KonspektStepGroupWidget extends StatelessWidget{
           children: [
 
             if(stepGroup.title != null)
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
-              child: TitleShortcutRowWidget(
-                title: stepGroup.title!,
-                textAlign: TextAlign.left,
-                titleColor: textDisab_(context),
-                trailing: Text(
-                  durationToString(stepGroup.duration),
-                  style: AppTextStyle(
-                    fontSize: Dimen.textSizeAppBar,
-                    color: textDisab_(context)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
+                child: TitleShortcutRowWidget(
+                  title: stepGroup.title!,
+                  textAlign: TextAlign.left,
+                  titleColor: textDisab_(context),
+                  trailing: Text(
+                    durationToString(stepGroup.duration),
+                    style: AppTextStyle(
+                        fontSize: Dimen.textSizeAppBar,
+                        color: textDisab_(context)
+                    ),
                   ),
                 ),
               ),
-            ),
-            
+
             child
-            
+
           ],
         ),
       );

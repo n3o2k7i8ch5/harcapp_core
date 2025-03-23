@@ -447,7 +447,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 title: 'Analogia samochodu',
                 duration: Duration(minutes: 1),
                 activeForm: false,
-                required: false,
+                required: true,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący, jeśli uważa, że pomoże to lepiej zrozumieć relację między sferami funkcjonalnymi, a sferą ducha, może posłużyć się następującą analogią:'
                     '<br>'

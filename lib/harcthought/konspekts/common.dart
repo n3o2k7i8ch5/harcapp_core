@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/time_of_day_extension.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import 'konspekt.dart';
 
 class StringListWidget extends StatelessWidget{
 
@@ -33,4 +36,19 @@ class StringListWidget extends StatelessWidget{
     ),
   );
 
+}
+
+List<TimeOfDay> buildTimeTable(List<KonspektDurationElementMixin> steps, TimeOfDay startTime){
+  List<TimeOfDay> timeTable = [];
+
+  TimeOfDay currentTime = startTime;
+
+  for(KonspektDurationElementMixin step in steps){
+    TimeOfDay stepStartTime = currentTime;
+    TimeOfDay stepEndTime = currentTime + step.duration;
+    timeTable.add(stepStartTime);
+    currentTime = stepEndTime;
+  }
+
+  return timeTable;
 }

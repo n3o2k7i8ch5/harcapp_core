@@ -361,7 +361,13 @@ class KonspektMaterial{
 
 }
 
-class KonspektStep{
+mixin KonspektDurationElementMixin{
+
+  Duration get duration;
+
+}
+
+class KonspektStep with KonspektDurationElementMixin{
 
   final String title;
   final Duration duration;
@@ -410,19 +416,16 @@ class KonspektStep{
 
 }
 
-class KonspektStepsContainer{
+mixin KonspektStepsContainerMixin{
 
-  final List<KonspektStep> steps;
+  List<KonspektStep> get steps;
 
-  const KonspektStepsContainer({
-    required this.steps,
-  });
 }
 
-class KonspektStepGroup extends KonspektStepsContainer{
+class KonspektStepGroup with KonspektDurationElementMixin, KonspektStepsContainerMixin{
 
   final String? title;
-  // final List<KonspektStep> steps;
+  final List<KonspektStep> steps;
 
   Duration get duration{
     Duration resultDuration = Duration.zero;
@@ -445,11 +448,11 @@ class KonspektStepGroup extends KonspektStepsContainer{
 
   const KonspektStepGroup({
     this.title,
-    required super.steps
+    required this.steps
   });
 }
 
-class Konspekt extends KonspektStepsContainer{
+class Konspekt with KonspektStepsContainerMixin{
 
   final String name;
   final String title;
@@ -471,7 +474,7 @@ class Konspekt extends KonspektStepsContainer{
   final List<String>? howToFail;
   // If stepGroups is not null, steps will be ignored.
   final List<KonspektStepGroup>? stepGroups;
-  // final List<KonspektStep>? steps;
+  final List<KonspektStep> steps;
 
   final List<KonspektAttachment>? attachments;
   final Konspekt? partOf;
@@ -587,7 +590,7 @@ class Konspekt extends KonspektStepsContainer{
     this.description,
     this.howToFail,
     this.stepGroups,
-    super.steps = const [],
+    this.steps = const [],
 
     this.attachments,
     this.partOf,
