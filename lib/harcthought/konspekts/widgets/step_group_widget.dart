@@ -66,7 +66,7 @@ class KonspektStepGroupWidget extends StatelessWidget{
       stepsTimeTable!.last,
     );
 
-    String timeStr = timeRangeStr == null? durationStr: '$timeRangeStr ($durationStr)';
+    String timeStr = timeRangeStr == null? durationStr: '$durationStr ($timeRangeStr)';
 
     if(showBorder)
       return BorderMaterial(
