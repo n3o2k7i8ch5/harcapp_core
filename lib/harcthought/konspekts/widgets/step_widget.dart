@@ -68,55 +68,55 @@ class KonspektStepWidget extends StatelessWidget{
 
             const SizedBox(width: Dimen.iconMarg),
 
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-
-                SelectableText(
-                    step.title,
-                    style: const AppTextStyle(fontWeight: weight.halfBold)
-                ),
-
-                const SizedBox(height: Dimen.defMarg),
-
-                Row(
+            Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                    SelectableText(durationToString(step.duration), style: const AppTextStyle()),
-
-                    const SizedBox(width: 20),
-
-                    if(startTime != null)
-                      const SizedBox(width: 20),
-
-                    if(startTime != null)
-                      SelectableText(
-                          '(${timeOfDayRangeToString(startTime!, startTime! + step.duration)})',
-                          style: AppTextStyle(
-                              color: hintEnab_(context)
-                          )
-                      ),
-
                     SelectableText(
-                        step.activeForm?'Forma aktywna':'Forma statyczna',
-                        style: AppTextStyle(
-                            color: step.activeForm?Colors.green:Colors.deepOrange,
-                            fontWeight: weight.halfBold
-                        )
+                        step.title,
+                        style: const AppTextStyle(fontWeight: weight.halfBold)
                     ),
 
-                    const SizedBox(width: 20),
+                    const SizedBox(height: Dimen.defMarg),
 
-                    if(!step.required)
-                      SelectableText('[opcjonalnie]', style: AppTextStyle(color: hintEnab_(context))),
+                    Row(
+                      children: [
+
+                        SelectableText(durationToString(step.duration), style: const AppTextStyle()),
+
+                        const SizedBox(width: 20),
+
+                        if(startTime != null)
+                          const SizedBox(width: 20),
+
+                        if(startTime != null)
+                          SelectableText(
+                              '(${timeOfDayRangeToString(startTime!, startTime! + step.duration)})',
+                              style: AppTextStyle(
+                                  color: hintEnab_(context)
+                              )
+                          ),
+
+                        SelectableText(
+                            step.activeForm?'Forma aktywna':'Forma statyczna',
+                            style: AppTextStyle(
+                                color: step.activeForm?Colors.green:Colors.deepOrange,
+                                fontWeight: weight.halfBold
+                            )
+                        ),
+
+                        const SizedBox(width: 20),
+
+                        if(!step.required)
+                          SelectableText('[opcjonalnie]', style: AppTextStyle(color: hintEnab_(context))),
+
+                      ],
+                    ),
 
                   ],
-                ),
-
-              ],
+                )
             ),
-
-            Expanded(child: Container()),
 
             if(trailingTop != null)
               trailingTop!
