@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
+import 'package:harcapp_core/comm_classes/time_of_day_extension.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/comm_widgets/border_material.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
@@ -63,7 +64,7 @@ class KonspektStepGroupWidget extends StatelessWidget{
 
     String? timeRangeStr = startTime == null? null: timeOfDayRangeToString(
       stepsTimeTable!.first,
-      stepsTimeTable!.last,
+      stepsTimeTable!.first + stepGroup.duration,
     );
 
     String timeStr = timeRangeStr == null? durationStr: '<b>$durationStr</b> ($timeRangeStr)';
