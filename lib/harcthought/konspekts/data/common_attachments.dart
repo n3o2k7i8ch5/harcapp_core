@@ -163,3 +163,15 @@ const KonspektAttachment attach_kratka_minimow_rozwoju_duchowego = KonspektAttac
     FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_kratka_minimow_rozwoju_duchowego.docx',
   },
 );
+
+const String attach_html_szybkie_strzaly_dyskusyjne = '<a href="$attach_name_szybkie_strzaly_dyskusyjne@attachment">$attach_title_szybkie_strzaly_dyskusyjne</a>';
+const String attach_name_szybkie_strzaly_dyskusyjne = 'szybkie_strzaly_dyskusyjne';
+const String attach_title_szybkie_strzaly_dyskusyjne = 'Szybkie strzały dyskusyjne';
+const KonspektAttachment attach_szybkie_strzaly_dyskusyjne = KonspektAttachment(
+  name: attach_name_szybkie_strzaly_dyskusyjne,
+  title: attach_title_szybkie_strzaly_dyskusyjne,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_szybkie_strzaly_dyskusyjne.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_szybkie_strzaly_dyskusyjne.docx',
+  },
+);

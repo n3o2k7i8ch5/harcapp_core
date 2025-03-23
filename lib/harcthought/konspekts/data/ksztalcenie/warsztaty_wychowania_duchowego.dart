@@ -49,17 +49,6 @@ KonspektAttachment attach_planowanie_strategii_i_dzialan = KonspektAttachment(
   },
 );
 
-const String attach_html_scenariusze = '<a href="$attach_name_scenariusze@attachment">$attach_title_scenariusze</a>';
-const String attach_name_scenariusze = 'scenariusze';
-const String attach_title_scenariusze = 'Scenariusze';
-KonspektAttachment attach_scenariusze = KonspektAttachment(
-  name: attach_name_scenariusze,
-  title: attach_title_scenariusze,
-  assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_scenariusze.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_scenariusze.docx',
-  },
-);
 
 KonspektMaterial material_poradnik_o_strukturze_duchowosci = KonspektMaterial(
   name: 'Dostępny do przygotowania merytorycznego $attach_title_poradnik_o_strukturze_duchowosci',
@@ -146,13 +135,6 @@ KonspektMaterial material_zal_planowanie_strategii_i_dzialan = KonspektMaterial(
     comment: 'Może się okazać, że chętni na jedną z metodyk będą tak liczni, że warto ich podzielić na dwie osobne grupy - dlatego warto wydrukować dwa razy.'
 );
 
-KonspektMaterial material_zal_scenariusze = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_scenariusze”',
-    attachmentName: attach_name_scenariusze,
-    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
-    amount: 1
-);
-
 KonspektMaterial material_zal_przypinki = KonspektMaterial(
     name: 'Przypinki z logiem warsztatów',
     amountAttendantFactor: 1
@@ -199,7 +181,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       attach_scenariusz_fantomowe_dzialania_wychowawcze,
       attach_formy,
       attach_planowanie_strategii_i_dzialan,
-      attach_scenariusze
+
+      attach_szybkie_strzaly_dyskusyjne
     ],
     materials: [
 
@@ -261,7 +244,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       material_zal_planowanie_strategii_i_dzialan,
 
-      material_zal_scenariusze,
+      material_zal_szybkie_strzaly_dyskusyjne,
 
       material_zal_przypinki,
 
@@ -588,11 +571,11 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       ),
 
       KonspektStepGroup(
-          title: 'Planowanie strategii kształtowania duchowości',
+          title: 'Planowanie wychowania duchowości',
           steps: [
 
             KonspektStep(
-                title: 'Planowanie strategii rozwoju duchowego - podział na grupy',
+                title: 'Planowanie wychowania duchowego - podział na grupy',
                 duration: Duration(minutes: 5),
                 activeForm: true,
                 content: '<p style="text-align:justify;">'
@@ -608,7 +591,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             ),
 
             KonspektStep(
-                title: 'Planowanie strategii rozwoju duchowego - cele',
+                title: 'Planowanie wychowania duchowego - cele',
                 duration: Duration(minutes: 15),
                 activeForm: true,
                 content: '<p style="text-align:justify;">'
@@ -620,7 +603,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             ),
 
             KonspektStep(
-                title: 'Planowanie strategii rozwoju duchowego - czynniki duchowości',
+                title: 'Planowanie wychowania duchowego - czynniki duchowości',
                 duration: Duration(minutes: 15),
                 activeForm: true,
                 content: '<p style="text-align:justify;">'
@@ -651,7 +634,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             ),
 
             KonspektStep(
-                title: 'Planowanie strategii rozwoju duchowego - omówienie postępu prac',
+                title: 'Planowanie wychowania duchowego - omówienie postępu prac',
                 duration: Duration(minutes: 10),
                 activeForm: true,
                 content: '<p style="text-align:justify;">'
@@ -662,7 +645,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             ),
 
             KonspektStep(
-                title: 'Planowanie strategii rozwoju duchowego - działania bezpośrednie',
+                title: 'Planowanie wychowania duchowego - działania bezpośrednie',
                 duration: Duration(minutes: 20),
                 activeForm: true,
                 content: '<p style="text-align:justify;">'
@@ -678,7 +661,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             ),
 
             KonspektStep(
-                title: 'Planowanie strategii rozwoju duchowego - prezentacja',
+                title: 'Planowanie wychowania duchowego - prezentacja',
                 duration: Duration(minutes: 40),
                 activeForm: true,
                 content: '<p style="text-align:justify;">'
@@ -704,22 +687,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       KonspektStepGroup(
           steps: [
-
-            KonspektStep(
-                title: 'Scenariusze w grupach',
-                duration: Duration(minutes: 40),
-                activeForm: true,
-                content: '<p style="text-align:justify;">'
-                    'Prowadzący dzieli uczestników na grupy po ok. 4 osób. Każda z grup otrzymuje po 2-4 scenariusze z $attach_html_scenariusze i w swoim gronie je omawia. Celem omówienia każdego scenariusza jest zaproponowanie rozwiązania zgodnego z harcerskimi celami wychowania duchowego. Na jeden scenariusz grupa powinna poświęcić 10-15 min. Ważne, by prowadzący zaznaczył, że <b>grupy nie muszą osiągnąć jednomyślności</b>.'
-                    '<br>'
-                    '<br>Po zakończeniu dyskusji grupy referują scenariusze i wnioski z nich płynące na forum wszystkich uczestników. Jeżeli któryś scenariusz zakończył się różnicą stanowisk dyskutujących, może zostać poruszony wspólnie przez wszystkich uczestników.'
-                    '<br>'
-                    '<br><i>Prowadzący, w przypadku gdy zaczyna brakować czasu, może skrócić czas tej formy</i>.'
-                    '</p>',
-                materials: [
-                  material_zal_scenariusze,
-                ]
-            ),
 
             step_szybkie_strzaly_dyskusyjne,
 

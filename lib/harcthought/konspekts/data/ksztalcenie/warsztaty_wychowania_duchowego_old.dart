@@ -43,6 +43,18 @@ KonspektAttachment attach_antyprzyklady = KonspektAttachment(
   },
 );
 
+const String attach_html_scenariusze = '<a href="$attach_name_scenariusze@attachment">$attach_title_scenariusze</a>';
+const String attach_name_scenariusze = 'scenariusze';
+const String attach_title_scenariusze = 'Scenariusze';
+KonspektAttachment attach_scenariusze = KonspektAttachment(
+  name: attach_name_scenariusze,
+  title: attach_title_scenariusze,
+  assets: {
+    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_scenariusze.pdf',
+    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_scenariusze.docx',
+  },
+);
+
 KonspektMaterial material_zal_przyklady_poziomow_duchowosci = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_przyklady_poziomow_duchowosci”',
     attachmentName: attach_name_przyklady_poziomow_duchowosci,
@@ -63,17 +75,26 @@ KonspektMaterial material_zal_antyprzyklady = KonspektMaterial(
     amount: 1
 );
 
+KonspektMaterial material_zal_scenariusze = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_scenariusze”',
+    attachmentName: attach_name_scenariusze,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
+    amount: 1
+);
+
 Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
   konspekt_kszt_warsztaty_wychowania_duchowego,
   attachments: [
     attach_przyklady_poziomow_duchowosci,
     attach_mechanizmy_posrednie,
     attach_antyprzyklady,
+    attach_scenariusze
   ],
   materials: [
     material_zal_przyklady_poziomow_duchowosci,
     material_zal_mechanizmy_posrednie,
     material_zal_antyprzyklady,
+    material_zal_scenariusze,
   ],
   steps: [
 
@@ -240,6 +261,21 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
         content: '<p style="text-align:justify;">'
             'Prowadzący dzieli uczestników na dwie grupy i daje im po jednej kartce z załącznika $attach_html_antyprzyklady. Zadaniem uczestników jest szczegółowo przeanalizować opisaną w nim postać i wskazać jakie są problemy z duchowością, którą kształtuje u swoich wychowanków opisana postać.'
             '</p>',
+    ),
+
+    // Scenariusze
+    KonspektStep(
+        title: 'Scenariusze w grupach',
+        duration: Duration(minutes: 40),
+        activeForm: true,
+        content: '<p style="text-align:justify;">'
+            'Prowadzący dzieli uczestników na grupy po ok. 4 osób. Każda z grup otrzymuje po 2-4 scenariusze z $attach_html_scenariusze i w swoim gronie je omawia. Celem omówienia każdego scenariusza jest zaproponowanie rozwiązania zgodnego z harcerskimi celami wychowania duchowego. Na jeden scenariusz grupa powinna poświęcić 10-15 min. Ważne, by prowadzący zaznaczył, że <b>grupy nie muszą osiągnąć jednomyślności</b>.'
+            '<br>'
+            '<br>Po zakończeniu dyskusji grupy referują scenariusze i wnioski z nich płynące na forum wszystkich uczestników. Jeżeli któryś scenariusz zakończył się różnicą stanowisk dyskutujących, może zostać poruszony wspólnie przez wszystkich uczestników.'
+            '</p>',
+        materials: [
+          material_zal_scenariusze,
+        ]
     ),
   ]
 );

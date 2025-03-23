@@ -94,6 +94,13 @@ KonspektMaterial material_zal_cel_wychowania_duchowego_zhp_uchwala = KonspektMat
     amount: 4
 );
 
+KonspektMaterial material_zal_szybkie_strzaly_dyskusyjne = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_szybkie_strzaly_dyskusyjne”',
+    attachmentName: attach_name_szybkie_strzaly_dyskusyjne,
+    amount: 1,
+    additionalPreparation: 'Załącznik należy pociąć na 10 kartek wzdłuż przerywach linii.'
+);
+
 // ---
 
 String aksjomaty_przyklady = '<ul>'
@@ -509,7 +516,7 @@ KonspektStep _step_meta_narracja = KonspektStep(
         '<br>'
         '<br>Prowadzący kończy stwierdzeniem:'
         '<br>'
-        '<br><i>Mówię o tym, ponieważ pracując jedynie z postawami i wartościami można kształtować jedynie ludzi do etapu <b>wstępnej integracji duchowości</b>. Później, świadomy młody człowiek musi kontynuować swój rozwój w oparciu o poznaną wcześniej historię, w której będzie mógł się odnaleźć, która upowrządkuje świat, która jest wielką opowieścią o świecie i o sensie.</i>'
+        '<br><i>Mówię o tym, ponieważ pracując jedynie z postawami i wartościami można kształtować jedynie ludzi do etapu <b>wstępnej integracji duchowości</b>. Później, świadomy młody człowiek musi kontynuować swój rozwój w oparciu o <b>meta-narrację</b>: poznaną wcześniej historię, w której będzie mógł się odnaleźć, która upowrządkuje świat, która jest wielką opowieścią o świecie i o sensie. Oznacza to, że w procesie wychowawczym <b>nie można abstrahować od kwestii najbardziej osobistych</b> - trzeba wejść z nimi w interakcję.</i>'
         '</p>'
 );
 
@@ -941,22 +948,110 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
     duration: Duration(minutes: 30),
     activeForm: true,
     required: false,
+    materials: [
+      material_zal_szybkie_strzaly_dyskusyjne
+    ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący rzuca krótkie frazy z listy poniżej i nad każdą przez kilka minut trwa dyskusja. Prowadzący może w trakcie dyskusji zadawać pytania, jednak do jej końca nie prezentuje swojego stanowiska. Dojście do wspólnej konkluzji przez uczestników nie jest ważne. Na końcu każdej dyskusji prowadzący może powiedzieć krótko co uważa na wywołany temat.'
+        'Prowadzący rozkłada na podłodze kartki rewersem do góry (zakryte). Zadaniem uczestników jest kolejno podchodzić do kartek, wybierać losową i odczytać jej treść.'
+        '<br>'
+        '<br>Po odczytaniu każdej kartki uczestnicy mają krótką chwilę na dyskusję. Prowadzący może w trakcie dyskusji zadawać pytania, jednak do jej końca nie prezentuje swojego stanowiska. Dojście do wspólnej konkluzji przez uczestników nie jest ważne. Na końcu każdej dyskusji prowadzący może powiedzieć krótko co uważa na wywołany temat.'
+        '<br>'
+        '<br>Sugestie do kartek:'
         '</p>'
-        '<ol>'
-        '<li><p style="text-align:justify;">Nie powinno się wychowywać człowieka w konkretnym celu.</p></li>'
-        '<li><p style="text-align:justify;">Religijność jest dodatkiem do duchowości i nie każdy musi ją mieć.</p></li>'
-        '<li><p style="text-align:justify;">Jeśli ktoś chce kościelnego harcerstwa, powinien pójść do ZHRu.</p></li>'
-        '<li><p style="text-align:justify;">Religia to prywatna sprawa każdego człowieka i nie powinien się z nią afiszować.</p></li>'
-        '<li><p style="text-align:justify;">Patriotyzm to duchowość.</p></li>'
-        '<li><p style="text-align:justify;">Wszystkie niebezpieczne działania są niewychowawcze i nieodpowiedzialne.</p></li>'
-        '<li><p style="text-align:justify;">Każdy harcerz powinien mieć dowolność w tym, jak chce się rozwijać duchowo.</p></li>'
-        '<li><p style="text-align:justify;">W ZHP nie wolno narzucać poglądów.</p></li>'
-        '<li><p style="text-align:justify;">Możliwość zamknięcia próby instruktorskiej powinna zależeć od poglądów kandydata.</p></li>'
-        '<li><p style="text-align:justify;">W ramach działań drużyny nie powinno być aktywności religijnych, gdyż te wykluczają niewierzących.</p></li>'
+        '<ul>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Nie powinno się wychowywać człowieka w konkretnym celu.'
+        '<br>'
+        '<br><i>Nie da się wychować człowieka w sposób "neutralny" - każde działanie wychowawcze kształtuje duchowość człowieka w jakimś kierunku. Zamiast robić fikołki siląc się na nieosiągalną neutralność, lepiej świadomie określić zawczasu cele wychowawcze.</i>'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Religia jest dodatkiem do duchowości i nie każdy musi ją mieć.'
+        '<br>'
+        '<br><i>Religia nie jest "dodatkiem" do duchowości - religia jest konkretną duchowością. Niektóre duchowości nie są religią, jednak nie zmienia to faktu, że tak jak każda religia mają określone arbitralne, dogamtyczne prawdy na temat świata.</i>'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Jeśli ktoś chce kościelnego harcerstwa, powinien pójść do ZHRu.'
+        '<br>'
+        '<br><i>Cywilizacja łacińska, powszechne na zachodzie normy moralne i Prawo Harcerskie wszystkie są bezpośrednio spadkobiercami chrześcijaństwa. ZHP zapewnia pełnowartościowe wychowanie duchowe osobom wierzącym, a uwzględnianie w procesie wychowawczym roli wspólnoty Kościoła jest tego kluczowym elementem.</i>'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Religia to prywatna sprawa każdego człowieka i nie powinien się z nią afiszować.'
+        '<br>'
+        '<br><i>Życie religijne człowieka jest sprawą indywidualną i fundamentalnie osobistą, ale jest jednocześnie sprawą publiczną - można o niej rozmawiać, można ją praktykować we wspólnocie, co więcej: z religii wynika długa lista spraw takich jak zachowania, postawy i wartości, które dotyczą i wpływają na całe otoczenie, w którym człowiek żyje.</i>'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Patriotyzm to duchowość.'
+        '<br>'
+        '<br><i>Patriotyzm to postawa, a postawy są elementem duchowości.</i>'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Wszystkie niebezpieczne działania są niewychowawcze i nieodpowiedzialne.'
+        '<br>'
+        '<br><i>Życie jest niebezpieczne i nie da się odizolować od tego człowieka. Zmiast chować go pod kloszem i wychowywać do życia w nieistniejącym świecie, lepiej dawkować młodemu człowiekowi doświadczenie braku bezpieczeństwa - takie działania mogą być ryzykowne, ale są wychowawcze i są wyrazem odpowiedzialności za przyszlość młodego człowieka.</i>'
+        '</p></li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Każdy harcerz powinien mieć dowolność w tym, jak chce się rozwijać duchowo.'
+        '<br>'
+        '<br><i>Harcerstwo jest ruchem, który wychowuje do określonych zachowań, postaw i wartości, co jest możliwe tylko drogą wpływania na określone aksjomaty człowieka. Harcerstwo wychowuje z zachowaniem indywidualności, ale robi to we wspólnym dla wszystkich kierunku, który jest określony w statucie i tradycji harcerskiej. Elementy dobrowolności są narzędziem do skutecznego budowania harcerskiego ducha.</i>'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'W ZHP nie wolno narzucać poglądów.'
+        '<br>'
+        '<br><i>Harcerstwo jest ruchem, który wychowuje do określonych zachowań, postaw i wartości, co jest możliwe tylko drogą wpływania na określone aksjomaty człowieka. Poglądy, do których wychowuje harcerstwo są określone w statucie i tradycji harcerskiej. Powinno się to odbywać w sposób nienachalny, aby wychowanie było skuteczniejsze, nie dlatego, że harcerstwo jest wolne od konkretnych poglądów.</i>'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Możliwość zamknięcia próby instruktorskiej powinna zależeć od poglądów kandydata.'
+        '<br>'
+        '<br><i>Tak. Instruktorzy wychowuję również poprzez przykład własny i pełnią rolę autorytetów, dlatego ma to znaczenie, jakie poglądy reprezentuje instruktor. Nie każdy człowiek powinien nim być.</i>'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'W ramach działań drużyny nie powinno być aktywności religijnych, gdyż te wykluczają niewierzących.'
+        '<br>'
+        '<br><i>Osoby wyznające wiarę w osobowego Boga, aby móc rozwijać swoją duchowość muszą brać udział w formach, w które są niecelowe dla osób niereligijnych. Ograniczanie osobom wychowywanym w wierze form religijnych, tabuizowanie tematu wiary i religii jest dla nich krzywdzące. Skuteczne wychowanie osób o różnych aksjomatach w jednej drużynie <b>zawsze prowadzi przez formy, które są nie inkluzywne dla wszystkich</b> - zjawisko to jest normalne i pożądane. Uciekanie od tego faktu skutkuje zjawiskiem <b>weganizacji procesu wychowawczego</b>.</i>'
+        '</p>'
+        '</li>'
+
+        '</ul>'
+
+        '<p style="text-align:justify;">'
+        'Na końcu, jeśli starczy czasu, prowadzący może sam przedstawić jeszcze trzy "strzały":'
+        '</p>'
+
+        '<ul>'
         '<li><p style="text-align:justify;">Boga nie powinno być w Przyrzeczeniu, bo niektórzy harcerze składaliby Przyrzeczenie wbrew swoim przekonaniom.</p></li>'
         '<li><p style="text-align:justify;">Polski nie powinno być w Przyrzeczeniu, bo niektórzy harcerze składaliby Przyrzeczenie wbrew swoim przekonaniom.</p></li>'
         '<li><p style="text-align:justify;">Pomoc bliźnim nie powinna być w Przyrzeczeniu, bo niektórzy harcerze składaliby Przyrzeczenie wbrew swoim przekonaniom.</p></li>'
-        '</ol>'
+        '</ul>'
+
+        '<p style="text-align:justify;">'
+        'Celem tych trzech "strzałów" jest zwrócenie uwagi na to, że harcerstwo nie ma technicznej możliwości wychowywać do zbyt szerokiej puli poglądów, ponieważ przestanie wówczas wychowywać do czegokolwiek.'
+        '</p>'
 );

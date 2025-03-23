@@ -41,6 +41,8 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       attach_cel_wychowania_duchowego_zhp_statut,
       attach_cel_wychowania_duchowego_zhp_uchwala,
       attach_kratka_minimow_rozwoju_duchowego,
+
+      attach_szybkie_strzaly_dyskusyjne,
     ],
     materials: [
 
@@ -94,6 +96,8 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
           attachmentName: attach_name_kratka_minimow_rozwoju_duchowego,
           amount: 4
       ),
+
+      material_zal_szybkie_strzaly_dyskusyjne,
 
     ],
     summary: 'Uczestnicy pochylają się nad zagadnieniem tego, czym jest duchowość, jakie mechanizmy nią rządzą i jak w praktyce prowadzić wychowanie duchowe.',
