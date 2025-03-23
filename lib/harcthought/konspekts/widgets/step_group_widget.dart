@@ -20,7 +20,8 @@ class KonspektStepGroupWidget extends StatelessWidget{
   final List<TimeOfDay>? stepsTimeTable;
 
   KonspektStepGroupWidget(this.konspekt, this.index, {this.startTime, this.showBorder = false, this.showBackground = false, this.maxDialogWidth, super.key})
-    :stepsTimeTable = buildTimeTable(konspekt.stepGroups![index].steps, startTime!);
+    : assert(konspekt.stepGroups != null),
+        stepsTimeTable = startTime==null?null:buildTimeTable(konspekt.stepGroups![index].steps, startTime);
 
   KonspektStepGroup get stepGroup => konspekt.stepGroups![index];
 

@@ -70,7 +70,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.showStepGroupBorder = false,
         this.onThumbnailTap,
       }):
-        stepsTimeTable = buildTimeTable(konspekt.stepGroups??konspekt.steps, startTime!);
+        stepsTimeTable = startTime==null?null:buildTimeTable(konspekt.stepGroups??konspekt.steps, startTime);
 
   @override
   State<StatefulWidget> createState() => BaseKonspektWidgetState();
