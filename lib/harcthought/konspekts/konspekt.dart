@@ -491,6 +491,8 @@ class Konspekt with KonspektStepsContainerMixin{
     return result;
   }
 
+  bool get anySteps => stepGroups != null || steps.isNotEmpty;
+
   static Konspekt oldFrom(
     Konspekt upToDateKonspekt, {
       List<KonspektMaterial> materials = const [],
