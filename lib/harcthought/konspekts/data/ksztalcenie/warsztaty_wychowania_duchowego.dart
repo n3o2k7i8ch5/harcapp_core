@@ -204,6 +204,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       material_marker,
 
+      material_tasma_klejaca,
+
       material_obiad,
 
       material_przekaski,

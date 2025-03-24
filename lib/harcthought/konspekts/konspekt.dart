@@ -357,7 +357,25 @@ class KonspektMaterial{
     this.bottomBuilder,
   });
 
-
+  KonspektMaterial copyWith({
+    int? amount,
+    int? amountAttendantFactor,
+    String? name,
+    String? comment,
+    String? additionalPreparation,
+    String? attachmentName,
+    void Function(BuildContext)? onTap,
+    Widget Function(BuildContext)? bottomBuilder,
+  }) => KonspektMaterial(
+    amount: amount??this.amount,
+    amountAttendantFactor: amountAttendantFactor??this.amountAttendantFactor,
+    name: name??this.name,
+    comment: comment??this.comment,
+    additionalPreparation: additionalPreparation??this.additionalPreparation,
+    attachmentName: attachmentName??this.attachmentName,
+    onTap: onTap??this.onTap,
+    bottomBuilder: bottomBuilder??this.bottomBuilder,
+  );
 
 }
 

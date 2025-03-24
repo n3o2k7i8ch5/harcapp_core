@@ -66,6 +66,8 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
         amount: 4,
       ),
 
+      material_tasma_klejaca,
+
       material_zal_karty_poziomow_duchowosci,
       material_zal_karty_zdolnosci_integracji_duchowosci,
 

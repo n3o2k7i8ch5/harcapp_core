@@ -62,7 +62,8 @@ KonspektMaterial material_zal_meta_narracja_opis = KonspektMaterial(
 KonspektMaterial material_zal_meta_narracja_przyklady = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_meta_narracja_przyklady”',
     attachmentName: attach_name_meta_narracja_przyklady,
-    amount: 1
+    amount: 1,
+    additionalPreparation: "Załącznik należy pociąć na 4 kartki wzdłuż przerywanych linii."
 );
 
 KonspektMaterial material_flipchart = KonspektMaterial(
@@ -73,6 +74,11 @@ KonspektMaterial material_flipchart = KonspektMaterial(
 KonspektMaterial material_marker = KonspektMaterial(
   name: 'Marker',
   amount: 5,
+);
+
+KonspektMaterial material_tasma_klejaca = KonspektMaterial(
+  name: 'Taśma klejąca',
+  amount: 1,
 );
 
 KonspektMaterial material_zal_neutralnosc_duchowa_przyklady = KonspektMaterial(
@@ -510,9 +516,9 @@ KonspektStep _step_meta_narracja = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Prowadzący przedstawia definicję meta-narracji na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci i kładzie przed uczestnikami (obok kartki "Aksjomat") opis meta-narracji z załącznika $attach_html_meta_narracja_opis.'
         '<br>'
-        '<br>Meta-narracja to <i>zbiór spójnych aksjomatów dających się wyrazić jako opowieść o świecie, jego aktorach, z której bezpośrednio wynika definicja dobra, celu, sensu, osobistej roli przyjmującej ją człowieka, która stanowi źródło motywacji i tożsamości. Meta-narracje mogą zawierać aksjomaty opisu, jednak zawsze muszą zawierać aksjomaty sensu.</i>.'
+        '<br><i>Meta-narracja to zbiór spójnych aksjomatów dających się wyrazić jako opowieść o świecie, jego aktorach, z której bezpośrednio wynika definicja dobra, celu, sensu, osobistej roli przyjmującej ją człowieka, która stanowi źródło motywacji i tożsamości. Meta-narracje mogą zawierać aksjomaty opisu, jednak zawsze muszą zawierać aksjomaty sensu.</i>.'
         '<br>'
-        '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady.'
+        '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady i kładzie je obok karty "Meta-narracja".'
         '<br>'
         '<br>Prowadzący kończy stwierdzeniem:'
         '<br>'
@@ -539,7 +545,7 @@ KonspektStep _step_zdolnosci_integracji_duchowosci = KonspektStep(
     material_zal_karty_zdolnosci_integracji_duchowosci
   ],
   content: '<p style="text-align:justify;">'
-      'Prowadzący bierze obie kartki z załącznika $attach_html_karty_zdolnosci_integracji_duchowosci i kładzie je zakryte przed uczestnikami przed nimi (rewersem do góry). Następnie zadaje im pytanie:'
+      'Prowadzący bierze obie kartki z załącznika $attach_html_karty_zdolnosci_integracji_duchowosci i kładzie je zakryte przed uczestnikami przed nimi (rewersem do góry). Następnie zadaje pytanie:'
       '<br>'
       '<br><i>“Ustaliliśmy już w jaki sposób modelowo przebiega proces kształtowania duchowości człowieka. Ale! Wiedzieć, to jedno, a móc, to drugie. Jakie dwie, ogólne, fundamentalnie, kluczowe zdolności musi każdy człowiek posiadać (poza wiedzą o mechanizmie kształtowania duchowości), aby móc skutecznie rozwijać swoją duchowość?”</i>'
       '<br>'
@@ -624,9 +630,11 @@ KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektSte
     duration: Duration(minutes: 10),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej implementacją i formą przekazu - <b>kulturą</b> i jej elementami - <b>tradycjami</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej formą przekazu - <b>kulture</b> i <b>tradycje</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
         '<br>'
         '<br>Prowadzący może zobrazować dylemat tego <i>"jak ściśle trzymać się tradycji"</i> w sposób następujący:'
+        '<br>'
+        '<br><i>Kultura i tradycja są mądrością miliona lat żyć, pamięcią miliona umysłów, wiedzą o skutkach miliona głupich prób – wszystkie dostępne dla człowieka żyjącego raptem kilkadziesiąt lat.</i>'
         '<br>'
         '<br><i>Gdybyśmy zanegowali na raz wszystkie tradycje, w ciągu jednego pokolenia wrócilibyśmy do jaskiń. Ale gdybyśmy nigdy nie podważyli żadnej tradycji, nigdy z tych jaskiń byśmy nie wyszli.</i>'
         '</p>'
@@ -662,7 +670,7 @@ KonspektStep _step_duchowosc_religia_religijnosc = KonspektStep(
         '<br>'
         '<br>Prowadzący powinien zwrócić uwagę, że nie ma tu mowy o relacji “zawierania”: <b>w obszernym zbiorze “duchowości” <u>nie zawiera się</u> mniejszy zbiór “religii”</b>! Nie jest tak, że część osób ma duchowość “z religią”, a część “bez religii”. Religia jest rodzajem, sposobem duchowości. Nie można z duchowości “wyjąć” elementu religijnego i dalej mieć do czynienia z duchowością, tak samo jak nie można z psa wyjąć elementu “jamnik” i dalej uważać, że pozostałość to pies. Jamnik nie jest dodatkiem do psa, tylko jest rodzajem całego, spójnego psa.'
         '<br>'
-        '<br>Oznacza to, że nie można prowadzić wychowania w drużynie w oparciu o jedną, wybraną duchowość, i “wzbogacać” jej dla niektórych religią, a dla innych nie. Wynika to z faktu, że jeśli ktoś jest wychowywany w duchowości religijnej, ma określone religijne aksjomaty, co stoi w kontraście do aksjomatów osób niereligijnych! Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości'
+        '<br>Oznacza to, że nie można prowadzić wychowania w drużynie w oparciu o jedną, wybraną duchowość, i “wzbogacać” jej dla niektórych religią, a dla innych nie. Wynika to z faktu, że jeśli ktoś jest wychowywany w duchowości religijnej, ma określone religijne aksjomaty, co stoi w kontraście do aksjomatów osób niereligijnych! Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości.'
         '<br>'
         '<br>Podobnie, błędnym jest pogląd jakoby istniała symetria między duchowością osób religijnych i niereligijnych: osoby religijne mają z góry określone aksjomaty, jednak aksjomaty osób niereligijnych dopiero wymagają określenia i doprecyzowania.'
         '<br>'
@@ -683,32 +691,61 @@ KonspektStepGroup step_group_duchowosc_powszechna_madrosc_kultura_tradycja = Kon
 
 // Neutralność
 
-KonspektStep _step_neutralnosc_duchowa = KonspektStep(
-    title: 'Neutralność duchowa',
-    duration: Duration(minutes: 30),
-    activeForm: false,
+KonspektStep _step_neutralnosc_duchowa_galeria_sztuki = KonspektStep(
+    title: 'Neutralność duchowa - galeria sztuki',
+    duration: Duration(minutes: 15),
+    activeForm: true,
     aims: [
       'Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, indywidualizm, ew. wierność w związku, modlitwa), które choć pozornie uniwersalne, wcale nie są domyślne, oczywiste, czy neutralne',
       'Przekonanie uczestników, że neutralność światopoglądowa w wychowaniu nie jest możliwa'
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący przedstawia uczestnikom scenariusze z załącznika $attach_html_neutralnosc_duchowa_przyklady. Wszystkie scenariusze opisują sytuacje wychowawcze z udziałem instruktora harcerskiego. Zadaniem uczestników jest określenie:'
+        'Prowadzący (najlepiej przed przystąpieniem do formy) rozwiesza na różnych ścianach kartki z załącznika $attach_html_neutralnosc_duchowa_przyklady. Wszystkie kartki zawierają scenariusze sytuacji wychowawczych z udziałem instruktora harcerskiego.'
         '<br>'
-        '<br><u><b>Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?</u>'
+        '<br>Uczestnicy mają 15 minut, aby przejść się między wszystkimi scenariuszami, przeczytać je, po czym odpowiedzieć do każdego na dwa pytania:'
         '<br>'
-        '<br>Prowadzący prosi, by uczestnicy nie skupiali się na technikaliach (nie zastanawiali się, czy instruktor zareagował efektywnie), lecz na skutku działań - wpływie na duchowość (np. postawy lub wartości) wychowanków.'
+        '<br><u><b>1. Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?</u>'
         '<br>'
-        '<br>Jeśli uczestników jest więcej niż 20, można podzielić ich na dwie grupy, które równolegle między sobą dyskutują o scenariuszach.'
+        '<br><u><b>2. Jak należałoby postąpić, by zachować w opisanych scenariuszu neutralność w aspekcie duchowym?</u>'
         '<br>'
-        '<br>Gdy wszystkie grupy przedyskutują swoje scenariusze, prowadzący zadaje pytanie:'
+        '<br>Uczestnicy mogą chodzić pojedynczo i zastanawiać się w ciszy lub, jeśli chcą, w parach i dyskutować między sobą.'
         '<br>'
-        '<br><b><i>“Czy instruktor mógł zadziałać w sposób, który nie wpłynąłby na duchowość harcerzy?”</i></b>.'
+        '<br>Prowadzący prosi, by uczestnicy <b>nie skupiali się na technikaliach</b> (nie zastanawiali się, czy instruktor zareagował efektywnie), lecz jedynie na skutku działań - wpływie na duchowość (np. postawy lub wartości) wychowanków.'
         '<br>'
-        '<br><b><i>“Czy w ogóle istnieje neutralność w wychowaniu?”</i></b>.'
+        '<br>Uczestnicy mogą notować swoje odpowiedzi, by łatwiej móc do nich wrócić.'
+);
+
+KonspektStep _step_neutralnosc_duchowa_omowienie_wnioskow = KonspektStep(
+    title: 'Neutralność duchowa - omówienie wniosków',
+    duration: Duration(minutes: 15),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Gdy wszyscy uczestnicy skonczą swoje rozważania nad scenariuszami, wracają do wspólnego miejsca i prowadzący prosi uczestników, by doszli do porozumienia w sprawie odpowiedzi na pierwsze pytanie, czyli:'
+        '<br>'
+        '<br><u><b>1. Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?</u>'
+        '<br>'
+        '<br>Prowadzący czeka, aż uczestnicy podyskutują - swoją rolę ogranicza jedynie do notowania ich wspólnych wniosków do każdego ze scenariuszy. Uczestnicy powinni zwrócić uwagę, że każdy ze scenariuszy kształtuje duchowość harcerzy w określonym kierunku:'
+        '</p>'
+
+        '<ul>'
+        '<li><p style="text-align:justify;">Scenariusz 1 - postawa wybaczenia</p></li>'
+        '<li><p style="text-align:justify;">Scenariusz 2 - życie w prawdzie</p></li>'
+        '<li><p style="text-align:justify;">Scenariusz 3 - bezinteresowna pomoc bliźnim</p></li>'
+        '<li><p style="text-align:justify;">Scenariusz 4 - wyższość dobra jednostki nad wizerunkiem wspólnoty</p></li>'
+        '<li><p style="text-align:justify;">Scenariusz 5 (opcjonalny) - wierność w związkach romantycznych</p></li>'
+        '<li><p style="text-align:justify;">Scenariusz 6 (opcjonalny) - modlitwa</p></li>'
+
+        '</ul>'
+
+        '<p style="text-align:justify;">'
+        '<br>'
+        '<br>Gdy dyskusje dobiegną końca, prowadzący może dorzucić kilka swoich niezobowiązujacych uwag na temat wniosków uczestników. Ważniejsze jest jednak, aby szybko przejść do drugiego pytania:'
+        '<br>'
+        '<br><b><i>“Czy w którymkolwiek scenariuszu instruktor mógł postąpić neutralnie z perspektywy kształtowania duchowości?”</i></b>.'
         '<br>'
         '<br>W toku próby odpowiedzi na to pytanie może wywiązać się między uczestnikami dyskusja. Nie powinna ona trwać zbyt długo. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.',
     materials: [
-      material_zal_neutralnosc_duchowa_przyklady
+      material_zal_neutralnosc_duchowa_przyklady,
     ]
 
 );
@@ -719,7 +756,7 @@ KonspektStep _step_neutralnosc_duchowa_w_przypadku_problemow = KonspektStep(
     activeForm: false,
     required: false,
     content: '<p style="text-align:justify;">'
-        '<br>Jeśli uczestnicy nie są przekonani, że neutralność nie jest możliwa, prowadzący może zadać pytanie:'
+        '<br>Jeśli uczestnicy sądzą, że neutralność jest możliwa, prowadzący może zadać pytanie:'
         '<br>'
         '<br><i>“Czy jeśli harcerz zawsze bije kolegów, którzy się z nim nie zgadzają, a instruktor nie reaguje, to czy postępuje neutralnie?”</i>'
         '<br>'
@@ -752,7 +789,8 @@ KonspektStep _step_neutralnosc_analogia_do_ogrodnikow = KonspektStep(
 KonspektStepGroup step_group_neutralnosc_duchowa = KonspektStepGroup(
     title: 'Neutralność duchowa',
     steps: [
-      _step_neutralnosc_duchowa,
+      _step_neutralnosc_duchowa_galeria_sztuki,
+      _step_neutralnosc_duchowa_omowienie_wnioskow,
       _step_neutralnosc_duchowa_w_przypadku_problemow,
       _step_neutralnosc_analogia_do_ogrodnikow
     ]
@@ -938,7 +976,7 @@ KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
         '<b>Polityka trzymania wychowanków pod ideowym kloszem</b>'
         '<br>Czy i na jakim etapie duchowość wychowanków ma być kontestowana? Do jakiego stopnia? W jakim celu?'
         '<br>'
-        '<br>Sugestia prowadzącego:'
+        '<br><u>Sugestia prowadzącego:</u>'
         '<br><i>Początkowo harcerze powinni mieć jednoznaczny, niepodważany, niezmącony przekaz dotyczący tego, co jest dobre, a co złe. Stan ten powinien trwać mniej więcej do początku etapu świadomej integracji duchowości. W dalszej kolejności harcerze powinni być stopniowo wystawiani na inne perspektywy, inne postawy, inne wspólnoty, jednak nie po to, żeby przyjęli ich duchowość, tylko żeby wobec niej utwierdzili swoją własną oraz by nauczyli się funkcjonować w świecie, w którym nie ma jednorodności duchowej.</i>'
         '</p>'
         '</li>'
@@ -948,7 +986,7 @@ KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
         '<b>Polityka fizycznego i emocjonalnego bezpieczeństwa wychowanków</b>'
         '<br>Czy, kiedy i w jakim celu można wystawiać wychowanków na ryzyko? Czy, kiedy i w jakim celu należy wystawiać wychowanków na doświadczenie bezradności, agresji wobec nich, frustracji, etc.?'
         '<br>'
-        '<br>Sugestia prowadzącego:'
+        '<br><u>Sugestia prowadzącego:</u>'
         '<br><i>Po pierwsze, niektóre niezwykle skuteczne formy wychowawcze mają w sobie element ryzyka: chodzenie w góry, jeżdżenie autostopem, podróże po innych krajach, etc.. Po drugie, świat jest w sposób immanentny niebezpieczny. Niemal na pewno nasi wychowankowie zetkną się w życiu z agresją, bezradnością, frustracją. Lepiej jest ich do tego skutecznie przygotować w kontrolowanych warunkach. To właśnie jest chartem ducha.</i>'
         '</p>'
         '</li>'
@@ -958,7 +996,7 @@ KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
         '<b>Polityka inkluzywności form w sytuacji różnicy aksjomatycznej wychowanków</b>'
         '<br>Czy wszystkie formy muszą być tak skonstruowane, aby każdy wychowanek, niezależnie od aksjomatów swojej duchowości, mógł wziąć w nich udział?'
         '<br>'
-        '<br>Sugestia prowadzącego:'
+        '<br><u>Sugestia prowadzącego:</u>'
         '<br><i>Absolutnie nie - prowadzi to do zjawiska <b>weganizacji wychowania duchowego</b>, czyli do zjawiska ograniczenia wychowania do najmniejszego wspólnego mianownika duchowości osób o różnych aksjomatach. Ludzie wychowywani w różnych wiarach wymagają różnych form pracy nad swoją duchowością. To, że formy te będa wykluczające dla części osób jest normalne, konieczne i nie należy się tego bać.</i>'
         '</p>'
         '</li>'
@@ -968,7 +1006,7 @@ KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
         '<b>Polityka prywatności życia duchowego wychowanków</b>'
         '<br>Czy symbolika, obrzędy, tradycje, język religijny wychowanków może być obecny w przestrzeni publicznej drużyny, w której nie wszyscy są wspólnego wyznania?'
         '<br>'
-        '<br>Sugestia prowadzącego:'
+        '<br><u>Sugestia prowadzącego:</u>'
         '<br><i>Duchowość to sprawa indywidualna i fundamentalnie osobista, <b>ale</b> jest jednocześnie sprawą publiczna - z duchowości wynika długa lista spraw (zachowania, postawy i wartości), które dotyczą i wpływają na całe otoczenie, w którym człowiek żyje. O wierze można i trzeba o niej rozmawiać, robić dla niej miejsce, można ją publicznie praktykować, także w formie tradycji, czy w warstwie symbolicznej.</i>'
         '</p>'
         '</li>'
