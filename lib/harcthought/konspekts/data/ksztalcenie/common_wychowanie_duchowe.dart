@@ -699,6 +699,10 @@ KonspektStep _step_neutralnosc_duchowa_galeria_sztuki = KonspektStep(
       'Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, indywidualizm, ew. wierność w związku, modlitwa), które choć pozornie uniwersalne, wcale nie są domyślne, oczywiste, czy neutralne',
       'Przekonanie uczestników, że neutralność światopoglądowa w wychowaniu nie jest możliwa'
     ],
+    materials: [
+      material_zal_neutralnosc_duchowa_przyklady,
+      material_tasma_klejaca,
+    ],
     content: '<p style="text-align:justify;">'
         'Prowadzący (najlepiej przed przystąpieniem do formy) rozwiesza na różnych ścianach kartki z załącznika $attach_html_neutralnosc_duchowa_przyklady. Wszystkie kartki zawierają scenariusze sytuacji wychowawczych z udziałem instruktora harcerskiego.'
         '<br>'
@@ -706,7 +710,7 @@ KonspektStep _step_neutralnosc_duchowa_galeria_sztuki = KonspektStep(
         '<br>'
         '<br><u><b>1. Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?</u>'
         '<br>'
-        '<br><u><b>2. Jak należałoby postąpić, by zachować w opisanych scenariuszu neutralność w aspekcie duchowym?</u>'
+        '<br><u><b>2. Jak należałoby postąpić, by zachować w opisanych scenariuszu neutralność w aspekcie duchowym?</b></u>'
         '<br>'
         '<br>Uczestnicy mogą chodzić pojedynczo i zastanawiać się w ciszy lub, jeśli chcą, w parach i dyskutować między sobą.'
         '<br>'
@@ -738,8 +742,7 @@ KonspektStep _step_neutralnosc_duchowa_omowienie_wnioskow = KonspektStep(
         '</ul>'
 
         '<p style="text-align:justify;">'
-        '<br>'
-        '<br>Gdy dyskusje dobiegną końca, prowadzący może dorzucić kilka swoich niezobowiązujacych uwag na temat wniosków uczestników. Ważniejsze jest jednak, aby szybko przejść do drugiego pytania:'
+        'Gdy dyskusje dobiegną końca, prowadzący może dorzucić kilka swoich niezobowiązujacych uwag na temat wniosków uczestników. Ważniejsze jest jednak, aby szybko przejść do drugiego pytania:'
         '<br>'
         '<br><b><i>“Czy w którymkolwiek scenariuszu instruktor mógł postąpić neutralnie z perspektywy kształtowania duchowości?”</i></b>.'
         '<br>'
