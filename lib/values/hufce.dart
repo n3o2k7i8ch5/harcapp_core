@@ -31,6 +31,7 @@ const String huf_zhp_kalisz = 'Hufiec ZHP Kalisz';
 const String huf_zhp_karkonoski = 'Karkonoski Hufiec ZHP';
 const String huf_zhp_kartuzy = 'Hufiec ZHP Kartuzy';
 const String huf_zhp_kepno = 'Hufiec ZHP Kępno im. Wojska Polskiego';
+const String huf_zhp_kedzierzyn_kozle = 'Hufiec ZHP Kędzierzyn-Koźle';
 const String huf_zhp_kielce_poludnie = 'Hufiec ZHP Kielce-Południe';
 const String huf_zhp_kielce_miasto = 'Hufiec ZHP Kielce-Miasto';
 const String huf_zhp_klobuck = 'Kłobuck';
@@ -132,6 +133,7 @@ const String huf_zhp_ziemi_zawiercianskiej = 'Hufiec ZHP Ziemi Zawierciańskiej'
 const String huf_zhp_zielona_gora = 'Hufiec ZHP Zielona Góra';
 const String huf_zhp_zielonka = 'Hufiec ZHP Zielonka im. Janusza Korczaka';
 const String huf_zhp_zgierz = 'Hufiec ZHP Zgierz im. Wojska Polskiego';
+const String huf_zhp_zory = 'Hufiec ZHP Żory';
 const String huf_zhp_zyrardow = 'Hufiec ZHP Żyrardów';
 const String huf_zhp_zywiec = 'Hufiec ZHP Żywiec';
 
@@ -140,6 +142,7 @@ const String huf_zhr_harcerzy_krakow_srodmiescie = 'Hufiec Harcerzy Kraków Śr�
 const String huf_zhr_harcerzy_krakow_stare_miasto = 'Hufiec Harcerzy Kraków Stare Miasto';
 const String huf_zhr_lodz = 'Hufiec „Szaniec” - Okręg Łódzki ZHR';
 const String huf_zhr_lodz_polesie = 'Łódzki Hufiec Harcerzy „Polesie”';
+const String huf_zhr_lubelski_hufiec_harcerek_harmonia = 'Lubelski Hufiec Harcerek Harmonia';
 const String huf_zhr_urynowski_hufiec_rawicz = 'Ursynowski Hufiec Harcerzy „Rawicz”';
 const String huf_zhr_zielonagora_topor = 'Zielonogórski Hufiec Harcerzy „Topór”';
 
