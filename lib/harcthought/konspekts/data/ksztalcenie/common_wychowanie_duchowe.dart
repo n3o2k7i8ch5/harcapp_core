@@ -746,7 +746,7 @@ KonspektStep _step_neutralnosc_duchowa_omowienie_wnioskow = KonspektStep(
         '<br>'
         '<br><b><i>“Czy w którymkolwiek scenariuszu instruktor mógł postąpić neutralnie z perspektywy kształtowania duchowości?”</i></b>.'
         '<br>'
-        '<br>W toku próby odpowiedzi na to pytanie może wywiązać się między uczestnikami dyskusja. Nie powinna ona trwać zbyt długo. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.',
+        '<br>Uczestnicy ponownie wracają do dyskusji dyskusja. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.',
     materials: [
       material_zal_neutralnosc_duchowa_przyklady,
     ]
@@ -759,7 +759,7 @@ KonspektStep _step_neutralnosc_duchowa_w_przypadku_problemow = KonspektStep(
     activeForm: false,
     required: false,
     content: '<p style="text-align:justify;">'
-        '<br>Jeśli uczestnicy sądzą, że neutralność jest możliwa, prowadzący może zadać pytanie:'
+        '<br>Rolą prowadzącego jest kształtowanie dyskusji uczestników poprzez zadawania pytań. Jeśli uczestnicy sądzą, że neutralność jest możliwa, prowadzący może zapytać:'
         '<br>'
         '<br><i>“Czy jeśli harcerz zawsze bije kolegów, którzy się z nim nie zgadzają, a instruktor nie reaguje, to czy postępuje neutralnie?”</i>'
         '<br>'
@@ -967,7 +967,7 @@ KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
     activeForm: false,
     materials: [
       material_flipchart.copyWith(amount: 1),
-      material_marker,
+      material_marker.copyWith(amount: 2),
     ],
     content: '<p style="text-align:justify;">'
         'Prowadzący informuje uczestników, że za kilka chwil ich zadaniem będzie zaprojektować proces wychowania duchowego dla konkretnej jednostki.'
@@ -1000,7 +1000,7 @@ KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
         '<p style="text-align:justify;">'
         'Prowadzący, jeśli uzna to za stosowne, może rzucić żartem, że będziemy teraz rozmawiać o polityce.'
         '<br>'
-        '<br>Prawdopodobnie uczestnicy nie będą od razu rozumieli "o co chodzi" widzac jedynie zapisane na arkuszu ogólne zdania. Rolą prowadzącego jest <b>wyjaśnienie</b> każdego z omawianych punktów (można się posłużyć opisami z listy poniżej) oraz takie poprowadzenie dyskusji (poprzez zadawanie pytań, rzucanie przykładów), aby przekonać uczestników do przyjęcia strategii z listy poniżej:'
+        '<br>Prawdopodobnie uczestnicy nie będą od razu rozumieli "o co chodzi" widzac jedynie zapisane na arkuszu ogólne zdania. Rolą prowadzącego jest <b>wyjaśnienie</b> każdego z omawianych punktów (można się posłużyć opisami z listy poniżej) oraz takie poprowadzenie dyskusji (poprzez zadawanie pytań, rzucanie przykładów), aby <b>przekonać uczestników</b> do przyjęcia strategii z listy poniżej.'
         '<br>'
         '<br>Najlepiej, jeśli ostateczny wniosek dotyczący stosownej strategii pod każdym z punktow będzie zapisywał któryś z uczestników.'
         '</p>'
