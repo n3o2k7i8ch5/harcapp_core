@@ -68,7 +68,7 @@ KonspektMaterial material_zal_meta_narracja_przyklady = KonspektMaterial(
 
 KonspektMaterial material_flipchart = KonspektMaterial(
   name: 'Duży arkusz papieru (flipchart)',
-  amount: 1,
+  amount: 2,
 );
 
 KonspektMaterial material_marker = KonspektMaterial(
@@ -348,7 +348,7 @@ KonspektStep _step_integracja_duchowosci_jak_nie = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: false,
     materials: [
-      material_flipchart,
+      material_flipchart.copyWith(amount: 1),
       material_marker,
     ],
     content: '<p style="text-align:justify;">'
@@ -965,13 +965,46 @@ KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
     title: 'Strategia wychowania duchowego',
     duration: Duration(minutes: 15),
     activeForm: false,
+    materials: [
+      material_flipchart.copyWith(amount: 1),
+      material_marker,
+    ],
     content: '<p style="text-align:justify;">'
         'Prowadzący informuje uczestników, że za kilka chwil ich zadaniem będzie zaprojektować proces wychowania duchowego dla konkretnej jednostki.'
         '<br>'
         '<br>Zanim uczestnicy przejdą do planowania, trzeba ustalić kilka kwestii strategicznych dotyczących filozofii, której jako instruktorzy harcerscy chcą podporządkować styl swojej pracy.'
         '<br>'
-        '<br>Prowadzący wydziela następujące przestrzenie do omówienia:'
+        '<br>Prowadzący rozklada przed uczestnikami duży arkusz papieru (flipchart), na którym są już napisane (w odstępach) cztery przestrzenie do strategicznego omówienia:'
         '</p>'
+
+        '<ul>'
+
+        '<li>'
+        '<p style="text-align:justify;">Polityka trzymania wychowanków pod ideowym kloszem</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">Polityka fizycznego i emocjonalnego bezpieczeństwa wychowanków</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">Polityka inkluzywności form w sytuacji różnicy aksjomatycznej wychowanków</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">Polityka prywatności życia duchowego wychowanków</p>'
+        '</li>'
+
+        '</ul>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący, jeśli uzna to za stosowne, może rzucić żartem, że będziemy teraz rozmawiać o polityce.'
+        '<br>'
+        '<br>Prawdopodobnie uczestnicy nie będą od razu rozumieli "o co chodzi" widzac jedynie zapisane na arkuszu ogólne zdania. Rolą prowadzącego jest <b>wyjaśnienie</b> każdego z omawianych punktów (można się posłużyć opisami z listy poniżej) oraz takie poprowadzenie dyskusji (poprzez zadawanie pytań, rzucanie przykładów), aby przekonać uczestników do przyjęcia strategii z listy poniżej:'
+        '<br>'
+        '<br>Najlepiej, jeśli ostateczny wniosek dotyczący stosownej strategii pod każdym z punktow będzie zapisywał któryś z uczestników.'
+        '</p>'
+
         '<ul>'
 
         '<li>'
@@ -1015,10 +1048,6 @@ KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
         '</li>'
 
         '</ul>',
-    materials: [
-      material_zal_cel_wychowania_duchowego_zhp_statut,
-      material_zal_cel_wychowania_duchowego_zhp_uchwala
-    ]
 );
 
 KonspektStepGroup step_strategia_wychowania_duchowego = KonspektStepGroup(
