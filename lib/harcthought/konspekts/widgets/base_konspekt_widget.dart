@@ -37,6 +37,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final ScrollController? controller;
   final bool shrinkWrap;
   final Widget? leading;
+  final Widget? planHeaderTrailing;
   final bool oneLineSummary;
   final bool oneLineMultiDuration;
   final double? thumbnailWidth;
@@ -59,6 +60,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.controller,
         this.shrinkWrap = false,
         this.leading,
+        this.planHeaderTrailing,
         this.oneLineSummary = false,
         this.oneLineMultiDuration = false,
         this.thumbnailWidth,
@@ -405,7 +407,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               const SizedBox(height: Dimen.sideMarg),
 
-              const TitleShortcutRowWidget(title: 'Plan', textAlign: TextAlign.left),
+              TitleShortcutRowWidget(
+                title: 'Plan',
+                textAlign: TextAlign.left,
+                trailing: widget.planHeaderTrailing,
+              ),
 
             ])),
           ),
