@@ -605,16 +605,9 @@ class StartTimeButton extends StatelessWidget{
             );
             if(newStartTime == null) return;
 
-            List<KonspektDurationElementMixin> steps;
-            if(konspekt.stepGroups != null){
-              if(expandStepGroups) steps = konspekt.stepGroups!.expand((group) => group.steps).toList();
-              else steps = konspekt.stepGroups!;
-            } else
-              steps = konspekt.steps;
-
             onStartTimeChanged?.call(
                 newStartTime,
-                buildTimeTable(steps, newStartTime)
+                konspekt.stepsTimeTable(newStartTime, expandStepGroups)
             );
           }
       ),

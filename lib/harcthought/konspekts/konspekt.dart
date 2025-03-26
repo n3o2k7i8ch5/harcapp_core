@@ -13,6 +13,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:open_filex/open_filex.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart' as pdf;
 
+import 'common.dart';
+
 
 enum KonspektCategory{
   harcerskie, ksztalcenie;
@@ -503,6 +505,17 @@ class Konspekt with KonspektStepsContainerMixin{
       return stepGroups!.expand((group) => group.steps).toList();
     else
       return steps;
+  }
+
+  List<TimeOfDay> stepsTimeTable(TimeOfDay startTime, {bool expandStepGroups = false}){
+    List<KonspektDurationElementMixin> _steps;
+    if(stepGroups != null){
+      if(expandStepGroups) _steps = allSteps;
+      else _steps = stepGroups!;
+    } else
+      _steps = steps;
+
+    return buildTimeTable(_steps, startTime);
   }
 
   bool get anySteps => stepGroups != null || steps.isNotEmpty;
