@@ -408,20 +408,21 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               const SizedBox(height: Dimen.sideMarg),
 
-              TitleShortcutRowWidget(
-                title: 'Plan',
-                textAlign: TextAlign.left,
-                trailing: konspekt.anySteps?StartTimeButton(
-                  konspekt,
-                  startTime: startTime,
-                  onStartTimeChanged: (startTime, stepsTimeTable){
-                    widget.onStartTimeChanged?.call(startTime, stepsTimeTable);
-                    setState(() {
-                      this.startTime = startTime;
-                      this.stepsTimeTable = stepsTimeTable;
-                    });
-                  }
-                ):null,
+              if(konspekt.anySteps)
+                TitleShortcutRowWidget(
+                  title: 'Plan',
+                  textAlign: TextAlign.left,
+                  trailing: StartTimeButton(
+                    konspekt,
+                    startTime: startTime,
+                    onStartTimeChanged: (startTime, stepsTimeTable){
+                      widget.onStartTimeChanged?.call(startTime, stepsTimeTable);
+                      setState(() {
+                        this.startTime = startTime;
+                        this.stepsTimeTable = stepsTimeTable;
+                      });
+                    }
+                  ),
 
 
                 // Row(
