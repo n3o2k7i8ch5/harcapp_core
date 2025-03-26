@@ -210,6 +210,8 @@ Future<List<Widget>> StepWidget(
         )
     );
 
+  widgets.add(SizedBox(height: .5*elementBigSeparator));
+
   List<Widget> htmlWidgets = await fromHtml(
       htmlString: step.content??step.contentBuilder!(isDark: false),
       font: font,
@@ -220,8 +222,6 @@ Future<List<Widget>> StepWidget(
       fontBoldItalic: fontBoldItalic,
       fontSize: defTextSize
   );
-
-  widgets.add(SizedBox(height: .5*elementBigSeparator));
 
   widgets.addAll(htmlWidgets);
 
