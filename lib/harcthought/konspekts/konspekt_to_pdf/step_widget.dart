@@ -109,51 +109,45 @@ Future<List<Widget>> StepWidget(
 
   if(step.aims != null)
     widgets.add(
-        Padding(
-            padding: EdgeInsets.only(
-              top: .5*elementBigSeparator,
-              left: numberCircleSize + .5*elementBigSeparator,
-            ),
-            child: ClipRRect(
-                horizontalRadius: defRadius,
-                verticalRadius: defRadius,
-                child: Container(
-                    color: cardColor,
-                    child: Padding(
-                        padding: EdgeInsets.all(elementSmallSeparator),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
+        ClipRRect(
+            horizontalRadius: defRadius,
+            verticalRadius: defRadius,
+            child: Container(
+                color: cardColor,
+                child: Padding(
+                    padding: EdgeInsets.all(elementSmallSeparator),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
 
-                              SizedBox(height: .5*elementSmallSeparator),
+                          SizedBox(height: .5*elementSmallSeparator),
 
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                    top: .5*elementSmallSeparator,
-                                    left: .5*elementSmallSeparator,
-                                    bottom: 1.5*elementSmallSeparator,
-                                  ),
-                                  child: Text(
-                                      'Cele kroku',
-                                      style: TextStyle(
-                                        font: fontBold,
-                                        fontSize: defTextSize,
-                                      )
+                          Padding(
+                              padding: EdgeInsets.only(
+                                top: .5*elementSmallSeparator,
+                                left: .5*elementSmallSeparator,
+                                bottom: 1.5*elementSmallSeparator,
+                              ),
+                              child: Text(
+                                  'Cele kroku',
+                                  style: TextStyle(
+                                    font: fontBold,
+                                    fontSize: defTextSize,
                                   )
-                              ),
+                              )
+                          ),
 
-                              ...await StringListWidget(
-                                  step.aims!,
-                                  font,
-                                  fontHalfBold,
-                                  fontBold,
-                                  fontItalic,
-                                  fontHalfBoldItalic,
-                                  fontBoldItalic
-                              ),
+                          ...await StringListWidget(
+                              step.aims!,
+                              font,
+                              fontHalfBold,
+                              fontBold,
+                              fontItalic,
+                              fontHalfBoldItalic,
+                              fontBoldItalic
+                          ),
 
-                            ]
-                        )
+                        ]
                     )
                 )
             )
@@ -162,53 +156,47 @@ Future<List<Widget>> StepWidget(
 
   if(step.materials != null)
     widgets.add(
-        Padding(
-            padding: EdgeInsets.only(
-              top: .5*elementBigSeparator,
-              left: numberCircleSize + .5*elementBigSeparator,
-            ),
-            child: ClipRRect(
-                horizontalRadius: defRadius,
-                verticalRadius: defRadius,
-                child: Container(
-                    color: cardColor,
-                    child: Padding(
-                        padding: EdgeInsets.all(elementSmallSeparator),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
+        ClipRRect(
+            horizontalRadius: defRadius,
+            verticalRadius: defRadius,
+            child: Container(
+                color: cardColor,
+                child: Padding(
+                    padding: EdgeInsets.all(elementSmallSeparator),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
 
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                    top: .5*elementSmallSeparator,
-                                    left: .5*elementSmallSeparator,
-                                    bottom: 1.5*elementSmallSeparator,
-                                  ),
-                                  child: Text(
-                                      'Materiały kroku',
-                                      style: TextStyle(
-                                        font: fontBold,
-                                        fontSize: defTextSize,
-                                      )
+                          Padding(
+                              padding: EdgeInsets.only(
+                                top: .5*elementSmallSeparator,
+                                left: .5*elementSmallSeparator,
+                                bottom: 1.5*elementSmallSeparator,
+                              ),
+                              child: Text(
+                                  'Materiały kroku',
+                                  style: TextStyle(
+                                    font: fontBold,
+                                    fontSize: defTextSize,
                                   )
-                              ),
+                              )
+                          ),
 
-                              ...await MaterialTiles(
-                                  step.materials!,
-                                  font,
-                                  fontHalfBold,
-                                  fontBold,
-                                  fontItalic,
-                                  fontHalfBoldItalic,
-                                  fontBoldItalic,
-                                  showComment: false,
-                                  showAdditionalPreparation: false,
-                                  backgroundColor: PdfColors.white,
-                                  withHeader: false
-                              ),
+                          ...await MaterialTiles(
+                              step.materials!,
+                              font,
+                              fontHalfBold,
+                              fontBold,
+                              fontItalic,
+                              fontHalfBoldItalic,
+                              fontBoldItalic,
+                              showComment: false,
+                              showAdditionalPreparation: false,
+                              backgroundColor: PdfColors.white,
+                              withHeader: false
+                          ),
 
-                            ]
-                        )
+                        ]
                     )
                 )
             )
@@ -229,16 +217,6 @@ Future<List<Widget>> StepWidget(
   widgets.add(SizedBox(height: .5*elementBigSeparator));
 
   widgets.addAll(htmlWidgets);
-
-  // for(Widget widget in htmlWidgets)
-  //   widgets.add(
-  //       Padding(
-  //           padding: EdgeInsets.only(
-  //               left: numberCircleSize + .5*elementBigSeparator
-  //           ),
-  //           child: widget
-  //       )
-  //   );
 
   return widgets;
 }
