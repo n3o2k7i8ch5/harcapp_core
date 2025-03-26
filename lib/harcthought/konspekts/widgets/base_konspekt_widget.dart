@@ -409,7 +409,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               TitleShortcutRowWidget(
                 title: 'Plan',
                 textAlign: TextAlign.left,
-                trailing: StartTimeButton(
+                trailing: konspekt.anySteps?StartTimeButton(
                   konspekt,
                   startTime: startTime,
                   onStartTimeChanged: (startTime, stepsTimeTable) =>
@@ -417,7 +417,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                       this.startTime = startTime;
                       this.stepsTimeTable = stepsTimeTable;
                     })
-                ),
+                ):null,
 
 
                 // Row(
@@ -596,10 +596,10 @@ class StartTimeButton extends StatelessWidget{
             );
             if(newStartTime == null) return;
 
-            List<TimeOfDay>? stepsTimeTable = null;
-            if(startTime != null) stepsTimeTable = buildTimeTable(konspekt.stepGroups??konspekt.steps, newStartTime);
-
-            onStartTimeChanged?.call(newStartTime, stepsTimeTable);
+            onStartTimeChanged?.call(
+                newStartTime,
+                buildTimeTable(konspekt.stepGroups??konspekt.steps, newStartTime)
+            );
           }
       ),
 
