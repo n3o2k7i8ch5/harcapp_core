@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_widgets/meto.dart';
+import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/comm_widgets/sliver_child_builder_separated_delegate.dart';
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
@@ -13,7 +14,9 @@ import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt_tile_widget.dart';
 import 'package:harcapp_core/harcthought/konspekts/widgets/step_group_widget.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../../comm_widgets/app_card.dart';
 import '../common.dart';
 import '../konspekt.dart';
 import 'attachment_widget.dart';
@@ -28,8 +31,6 @@ class BaseKonspektWidget extends StatefulWidget{
   static const double horizontalPadding = Dimen.sideMarg;
 
   final Konspekt konspekt;
-  final TimeOfDay? startTime;
-  final List<TimeOfDay>? stepsTimeTable;
   final bool withAppBar;
   final void Function()? onDuchLevelInfoTap;
   final double? maxDialogWidth;
@@ -37,7 +38,6 @@ class BaseKonspektWidget extends StatefulWidget{
   final ScrollController? controller;
   final bool shrinkWrap;
   final Widget? leading;
-  final Widget? planHeaderTrailing;
   final bool oneLineSummary;
   final bool oneLineMultiDuration;
   final double? thumbnailWidth;
@@ -52,7 +52,6 @@ class BaseKonspektWidget extends StatefulWidget{
   BaseKonspektWidget(
       this.konspekt,
       { super.key,
-        this.startTime,
         this.withAppBar = true,
         required this.onDuchLevelInfoTap,
         this.maxDialogWidth,
@@ -60,7 +59,6 @@ class BaseKonspektWidget extends StatefulWidget{
         this.controller,
         this.shrinkWrap = false,
         this.leading,
-        this.planHeaderTrailing,
         this.oneLineSummary = false,
         this.oneLineMultiDuration = false,
         this.thumbnailWidth,
@@ -71,8 +69,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.showStepGroupBackground = false,
         this.showStepGroupBorder = false,
         this.onThumbnailTap,
-      }):
-        stepsTimeTable = startTime==null?null:buildTimeTable(konspekt.stepGroups??konspekt.steps, startTime);
+      });
 
   @override
   State<StatefulWidget> createState() => BaseKonspektWidgetState();
@@ -82,7 +79,6 @@ class BaseKonspektWidget extends StatefulWidget{
 class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
   Konspekt get konspekt => widget.konspekt;
-  List<TimeOfDay>? get stepsTimeTable => widget.stepsTimeTable;
   void Function()? get onDuchLevelInfoTap => widget.onDuchLevelInfoTap;
   double? get maxDialogWidth => widget.maxDialogWidth;
 
@@ -94,6 +90,9 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   ScrollController get controller => widget.controller??_controller!;
 
   double? layoutWidth;
+
+  TimeOfDay? startTime;
+  List<TimeOfDay>? stepsTimeTable;
 
   @override
   void initState() {
@@ -410,7 +409,42 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               TitleShortcutRowWidget(
                 title: 'Plan',
                 textAlign: TextAlign.left,
-                trailing: widget.planHeaderTrailing,
+                trailing: Row(
+                  children: [
+                    SimpleButton.from(
+                        context: context,
+                        color: cardEnab_(context),
+                        radius: AppCard.defRadius,
+                        margin: EdgeInsets.zero,
+                        icon: MdiIcons.clockStart,
+                        text: startTime==null?'Dodaj czas rozpoczęcia':'Czas rozpoczęcia: ${timeOfDayToString(startTime!)}',
+                        onTap: () async {
+                          startTime = await showTimePicker(
+                            context: context,
+                            initialTime: startTime??TimeOfDay.now(),
+                          );
+                          stepsTimeTable = startTime==null?null:buildTimeTable(konspekt.stepGroups??konspekt.steps, startTime!);
+                          setState(() {});
+                        }
+                    ),
+
+                    if(startTime != null && konspekt.anySteps)
+                      SizedBox(width: Dimen.defMarg),
+
+                    if(startTime != null && konspekt.anySteps)
+                      SimpleButton.from(
+                        context: context,
+                        color: cardEnab_(context),
+                        radius: AppCard.defRadius,
+                        margin: EdgeInsets.zero,
+                        icon: MdiIcons.close,
+                        onTap: () => setState((){
+                          startTime = null;
+                          stepsTimeTable = null;
+                        }),
+                      ),
+                  ],
+                ),
               ),
 
             ])),
