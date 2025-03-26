@@ -48,6 +48,7 @@ class BaseKonspektWidget extends StatefulWidget{
   final bool showStepGroupBackground;
   final bool showStepGroupBorder;
   final void Function(Konspekt)? onThumbnailTap;
+  final void Function(TimeOfDay?)? onStartTimeChanged;
 
   BaseKonspektWidget(
       this.konspekt,
@@ -69,6 +70,7 @@ class BaseKonspektWidget extends StatefulWidget{
         this.showStepGroupBackground = false,
         this.showStepGroupBorder = false,
         this.onThumbnailTap,
+        this.onStartTimeChanged,
       });
 
   @override
@@ -412,11 +414,13 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 trailing: konspekt.anySteps?StartTimeButton(
                   konspekt,
                   startTime: startTime,
-                  onStartTimeChanged: (startTime, stepsTimeTable) =>
+                  onStartTimeChanged: (startTime, stepsTimeTable){
+                    widget.onStartTimeChanged?.call(startTime);
                     setState(() {
                       this.startTime = startTime;
                       this.stepsTimeTable = stepsTimeTable;
-                    })
+                    });
+                  }
                 ):null,
 
 
