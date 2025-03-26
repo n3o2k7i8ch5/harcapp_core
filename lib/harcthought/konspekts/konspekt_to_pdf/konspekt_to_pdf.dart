@@ -368,6 +368,7 @@ Widget AuthorWidget(Konspekt konspekt, Font font, Font fontBold){
 Future<Uint8List> konspektToPdf(
     Konspekt konspekt,
     { bool withCover = true,
+      bool withMaterials = true,
       List<TimeOfDay>? stepsTimeTable
     }
 ) async {
@@ -406,7 +407,7 @@ Future<Uint8List> konspektToPdf(
 
   multiPage.addAll(await AimsWidget(konspekt, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
-  if(konspekt.materials != null)
+  if(konspekt.materials != null && withMaterials)
     multiPage.addAll(MaterialTiles(konspekt.materials!, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
   multiPage.addAll(await IntroWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
