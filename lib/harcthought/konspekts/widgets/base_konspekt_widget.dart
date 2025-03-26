@@ -575,9 +575,13 @@ class StartTimeButton extends StatelessWidget{
 
   final Konspekt konspekt;
   final TimeOfDay? startTime;
-  final void Function(TimeOfDay? startTime, List<TimeOfDay>? stepsTimeTable)? onStartTimeChanged;
+  final bool expandStepGroups;
+  final void Function(
+      TimeOfDay? startTime,
+      List<TimeOfDay>? stepsTimeTable
+  )? onStartTimeChanged;
 
-  const StartTimeButton(this.konspekt, {this.startTime, this.onStartTimeChanged});
+  const StartTimeButton(this.konspekt, {this.startTime, this.expandStepGroups = false, this.onStartTimeChanged});
 
   @override
   Widget build(BuildContext context) => Row(
@@ -597,9 +601,16 @@ class StartTimeButton extends StatelessWidget{
             );
             if(newStartTime == null) return;
 
+            List<KonspektDurationElementMixin> steps;
+            if(konspekt.stepGroups != null){
+              if(expandStepGroups) steps = konspekt.stepGroups!.expand((group) => group.steps).toList();
+              else steps = konspekt.stepGroups!;
+            } else
+              steps = konspekt.steps;
+
             onStartTimeChanged?.call(
                 newStartTime,
-                buildTimeTable(konspekt.stepGroups??konspekt.steps, newStartTime)
+                buildTimeTable(steps, newStartTime)
             );
           }
       ),
