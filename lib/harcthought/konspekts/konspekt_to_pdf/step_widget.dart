@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart' show Colors;
+import 'package:flutter/material.dart' show Colors, TimeOfDay;
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
+import 'package:harcapp_core/comm_classes/time_of_day_extension.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart';
 
@@ -8,6 +9,7 @@ import 'material_tiles.dart';
 
 Future<List<Widget>> StepWidget(
     KonspektStep step,
+    TimeOfDay? startTime,
     int index,
     Font font,
     Font fontHalfBold,
@@ -62,6 +64,15 @@ Future<List<Widget>> StepWidget(
               children: [
 
                 Text(durationToString(step.duration), style: TextStyle(font: font, fontSize: defTextSize)),
+
+                if(startTime != null)
+                  SizedBox(width: 8),
+
+                if(startTime != null)
+                  Text(
+                      '(${timeOfDayRangeToString(startTime, startTime + step.duration)})',
+                      style: TextStyle(font: font, fontSize: defTextSize)
+                  ),
 
                 SizedBox(width: 16),
 

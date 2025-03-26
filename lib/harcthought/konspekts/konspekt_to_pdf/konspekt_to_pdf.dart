@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' show TimeOfDay;
 import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
@@ -120,12 +121,8 @@ Widget TypeWidget(Konspekt konspekt, Font font, Font fontBold) => Column(
   ]
 );
 
-List<Widget> SummaryWidget(Konspekt konspekt, Font font, Font fontBold){
-
-  if(konspekt.summary == null)
-    return [];
-
-  return [
+List<Widget> SummaryWidget(Konspekt konspekt, Font font, Font fontBold) =>
+  [
     SizedBox(height: elementBigSeparator),
 
     HeaderWidget('W skrócie', fontBold),
@@ -133,13 +130,11 @@ List<Widget> SummaryWidget(Konspekt konspekt, Font font, Font fontBold){
     SizedBox(height: elementSmallSeparator),
 
     Text(
-        konspekt.summary!,
+        konspekt.summary,
         style: TextStyle(font: font, fontSize: defTextSize),
         textAlign: TextAlign.justify
     ),
   ];
-
-}
 
 Widget DurationWidget(Konspekt konspekt, Font font, Font fontBold){
 
@@ -370,7 +365,12 @@ Widget AuthorWidget(Konspekt konspekt, Font font, Font fontBold){
 
 }
 
-Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) async {
+Future<Uint8List> konspektToPdf(
+    Konspekt konspekt,
+    { bool withCover = true,
+      List<TimeOfDay>? stepsTimeTable
+    }
+) async {
 
   final pdf = Document(pageMode: PdfPageMode.outlines);
 
@@ -413,7 +413,7 @@ Future<Uint8List> konspektToPdf(Konspekt konspekt, {bool withCover = true}) asyn
 
   multiPage.addAll(await DescriptionWidget(konspekt, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
-  multiPage.addAll(await StepsWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
+  multiPage.addAll(await StepsWidget(konspekt, stepsTimeTable, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
   multiPage.addAll(await HowToFailWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' show TimeOfDay;
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt_to_pdf/step_widget.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart';
@@ -6,6 +7,7 @@ import 'common.dart';
 
 Future<List<Widget>> StepsWidget(
     Konspekt konspekt,
+    List<TimeOfDay>? stepsTimeTable,
     Font font,
     Font fontHalfBold,
     Font fontBold,
@@ -33,6 +35,7 @@ Future<List<Widget>> StepsWidget(
     stepWidgets.addAll(
         await StepWidget(
             steps[i],
+            stepsTimeTable?[i],
             i,
             font,
             fontHalfBold,
