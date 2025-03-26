@@ -607,7 +607,7 @@ class StartTimeButton extends StatelessWidget{
 
             onStartTimeChanged?.call(
                 newStartTime,
-                konspekt.stepsTimeTable(newStartTime, expandStepGroups)
+                konspekt.stepsTimeTable(newStartTime, expandStepGroups: expandStepGroups)
             );
           }
       ),
