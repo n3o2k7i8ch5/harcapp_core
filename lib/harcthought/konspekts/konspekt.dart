@@ -499,14 +499,10 @@ class Konspekt with KonspektStepsContainerMixin{
   final bool upToDate;
 
   List<KonspektStep> get allSteps{
-    List<KonspektStep> result = [];
     if(stepGroups != null)
-      for(KonspektStepGroup group in stepGroups!)
-        result.addAll(group.steps);
+      return stepGroups!.expand((group) => group.steps).toList();
     else
-      result.addAll(steps);
-
-    return result;
+      return steps;
   }
 
   bool get anySteps => stepGroups != null || steps.isNotEmpty;
