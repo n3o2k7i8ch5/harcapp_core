@@ -368,6 +368,8 @@ Widget AuthorWidget(Konspekt konspekt, Font font, Font fontBold){
 Future<Uint8List> konspektToPdf(
     Konspekt konspekt,
     { bool withCover = true,
+      bool withMetadata = true,
+      bool withAims = true,
       bool withMaterials = true,
       List<TimeOfDay>? stepsTimeTable
     }
@@ -393,30 +395,39 @@ Future<Uint8List> konspektToPdf(
   else
     multiPage.add(SizedBox(height: elementBigSeparator));
 
-  multiPage.add(await MetoListWidget(konspekt, fontBold));
+  if(withMetadata)
+    multiPage.add(await MetoListWidget(konspekt, fontBold));
 
-  multiPage.add(TypeWidget(konspekt, font, fontBold));
+  if(withMetadata)
+    multiPage.add(TypeWidget(konspekt, font, fontBold));
 
-  multiPage.addAll(SphereListWidget(konspekt, font, fontBold));
+  if(withMetadata)
+    multiPage.addAll(SphereListWidget(konspekt, font, fontBold));
 
-  multiPage.add(AuthorWidget(konspekt, font, fontBold));
+  if(withMetadata)
+    multiPage.add(AuthorWidget(konspekt, font, fontBold));
 
-  multiPage.addAll(SummaryWidget(konspekt, font, fontBold));
+  if(withMetadata)
+    multiPage.addAll(SummaryWidget(konspekt, font, fontBold));
 
-  multiPage.add(DurationWidget(konspekt, font, fontBold));
+  if(withMetadata)
+    multiPage.add(DurationWidget(konspekt, font, fontBold));
 
-  multiPage.addAll(await AimsWidget(konspekt, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
+  if(withAims)
+    multiPage.addAll(await AimsWidget(konspekt, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
   if(konspekt.materials != null && withMaterials)
     multiPage.addAll(MaterialTiles(konspekt.materials!, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
-  multiPage.addAll(await IntroWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
+  if(withMetadata)
+    multiPage.addAll(await IntroWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
   multiPage.addAll(await DescriptionWidget(konspekt, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
   multiPage.addAll(await StepsWidget(konspekt, stepsTimeTable, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
-  multiPage.addAll(await HowToFailWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
+  if(withMetadata)
+    multiPage.addAll(await HowToFailWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
   ByteData fontByteData = await rootBundle.load('packages/material_design_icons_flutter/lib/fonts/materialdesignicons-webfont.ttf');
 
