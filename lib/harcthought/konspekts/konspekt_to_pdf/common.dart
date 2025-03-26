@@ -5,7 +5,7 @@ const double elementBigSeparator = 24.0;
 const double elementSmallSeparator = 5.0;
 const double konspektSeparator = 48.0;
 
-const double defRadius = 4;
+const double defRadius = 4.5;
 const double defMarg = 5.0;
 const double iconMarg = 10.0;
 const double iconSize = 18.0;
