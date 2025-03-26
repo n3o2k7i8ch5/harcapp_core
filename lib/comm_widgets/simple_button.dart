@@ -92,6 +92,7 @@ class SimpleButton extends StatelessWidget{
 
   static SimpleButton from({
     BuildContext? context,
+    Widget? iconWidget,
     IconData? icon,
     String? text,
     required void Function()? onTap,
@@ -122,8 +123,8 @@ class SimpleButton extends StatelessWidget{
     List<Widget> children;
 
     if(direction == Axis.horizontal) children = [
-      if(iconLeading && icon != null)
-        Icon(icon, color: iconColor??textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.iconSize)),
+      if(iconLeading && (iconWidget != null || icon != null))
+        iconWidget??Icon(icon, color: iconColor??textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.iconSize)),
 
       if(text != null)
         SizedBox(height: Dimen.iconSize, width: dense?Dimen.defMarg:Dimen.iconMarg),
@@ -141,14 +142,14 @@ class SimpleButton extends StatelessWidget{
       if(text != null)
         SizedBox(width: dense?Dimen.defMarg:Dimen.iconMarg),
 
-      if(!iconLeading && icon != null)
-        Icon(icon, color: textColor??iconEnab_(context!)),
+      if(!iconLeading && (iconWidget != null || icon != null))
+        iconWidget??Icon(icon, color: textColor??iconEnab_(context!)),
 
     ];
     else
       children = [
-        if(iconLeading && icon != null)
-          Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.iconSize)),
+        if(iconLeading && (iconWidget != null || icon != null))
+          iconWidget??Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.iconSize)),
 
         if(text != null)
           SizedBox(height: dense?Dimen.defMarg:Dimen.iconMarg),
@@ -166,8 +167,8 @@ class SimpleButton extends StatelessWidget{
         if(text != null && !iconLeading)
           SizedBox(height: dense?Dimen.defMarg:Dimen.iconMarg),
 
-        if(!iconLeading && icon != null)
-          Icon(icon, color: textColor??iconEnab_(context!)),
+        if(!iconLeading && (iconWidget != null || icon != null))
+          iconWidget??Icon(icon, color: textColor??iconEnab_(context!)),
       ];
 
     return SimpleButton(
