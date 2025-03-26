@@ -594,8 +594,10 @@ class StartTimeButton extends StatelessWidget{
               context: context,
               initialTime: startTime??TimeOfDay.now(),
             );
+            if(newStartTime == null) return;
+
             List<TimeOfDay>? stepsTimeTable = null;
-            if(startTime != null) stepsTimeTable = buildTimeTable(konspekt.stepGroups??konspekt.steps, startTime!);
+            if(startTime != null) stepsTimeTable = buildTimeTable(konspekt.stepGroups??konspekt.steps, newStartTime);
 
             onStartTimeChanged?.call(newStartTime, stepsTimeTable);
           }
