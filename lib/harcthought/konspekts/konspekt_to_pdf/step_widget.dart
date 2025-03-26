@@ -228,15 +228,17 @@ Future<List<Widget>> StepWidget(
 
   widgets.add(SizedBox(height: .5*elementBigSeparator));
 
-  for(Widget widget in htmlWidgets)
-    widgets.add(
-        Padding(
-            padding: EdgeInsets.only(
-                left: numberCircleSize + .5*elementBigSeparator
-            ),
-            child: widget
-        )
-    );
+  widgets.addAll(htmlWidgets);
+
+  // for(Widget widget in htmlWidgets)
+  //   widgets.add(
+  //       Padding(
+  //           padding: EdgeInsets.only(
+  //               left: numberCircleSize + .5*elementBigSeparator
+  //           ),
+  //           child: widget
+  //       )
+  //   );
 
   return widgets;
 }
