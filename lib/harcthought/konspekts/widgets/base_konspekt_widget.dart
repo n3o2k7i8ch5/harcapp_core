@@ -406,7 +406,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   maxDialogWidth: widget.maxDialogWidth,
                 ),
 
-              const SizedBox(height: Dimen.sideMarg),
+              if(konspekt.anySteps)
+                const SizedBox(height: Dimen.sideMarg),
 
               if(konspekt.anySteps)
                 TitleShortcutRowWidget(
