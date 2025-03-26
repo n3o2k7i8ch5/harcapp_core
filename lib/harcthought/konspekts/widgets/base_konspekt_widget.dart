@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
@@ -409,42 +411,53 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               TitleShortcutRowWidget(
                 title: 'Plan',
                 textAlign: TextAlign.left,
-                trailing: Row(
-                  children: [
-                    SimpleButton.from(
-                        context: context,
-                        color: cardEnab_(context),
-                        radius: AppCard.defRadius,
-                        margin: EdgeInsets.zero,
-                        icon: MdiIcons.clockStart,
-                        text: startTime==null?'Dodaj czas rozpoczęcia':'Czas rozpoczęcia: ${timeOfDayToString(startTime!)}',
-                        onTap: () async {
-                          startTime = await showTimePicker(
-                            context: context,
-                            initialTime: startTime??TimeOfDay.now(),
-                          );
-                          stepsTimeTable = startTime==null?null:buildTimeTable(konspekt.stepGroups??konspekt.steps, startTime!);
-                          setState(() {});
-                        }
-                    ),
-
-                    if(startTime != null && konspekt.anySteps)
-                      SizedBox(width: Dimen.defMarg),
-
-                    if(startTime != null && konspekt.anySteps)
-                      SimpleButton.from(
-                        context: context,
-                        color: cardEnab_(context),
-                        radius: AppCard.defRadius,
-                        margin: EdgeInsets.zero,
-                        icon: MdiIcons.close,
-                        onTap: () => setState((){
-                          startTime = null;
-                          stepsTimeTable = null;
-                        }),
-                      ),
-                  ],
+                trailing: StartTimeButton(
+                  konspekt,
+                  startTime: startTime,
+                  onStartTimeChanged: (startTime, stepsTimeTable) =>
+                    setState(() {
+                      this.startTime = startTime;
+                      this.stepsTimeTable = stepsTimeTable;
+                    })
                 ),
+
+
+                // Row(
+                //   children: [
+                //     SimpleButton.from(
+                //         context: context,
+                //         color: cardEnab_(context),
+                //         radius: AppCard.defRadius,
+                //         margin: EdgeInsets.zero,
+                //         icon: MdiIcons.clockStart,
+                //         text: startTime==null?'Dodaj czas rozpoczęcia':'Rozpoczęcie: ${timeOfDayToString(startTime!)}',
+                //         onTap: () async {
+                //           startTime = await showTimePicker(
+                //             context: context,
+                //             initialTime: startTime??TimeOfDay.now(),
+                //           );
+                //           stepsTimeTable = startTime==null?null:buildTimeTable(konspekt.stepGroups??konspekt.steps, startTime!);
+                //           setState(() {});
+                //         }
+                //     ),
+                //
+                //     if(startTime != null && konspekt.anySteps)
+                //       SizedBox(width: Dimen.defMarg),
+                //
+                //     if(startTime != null && konspekt.anySteps)
+                //       SimpleButton.from(
+                //         context: context,
+                //         color: cardEnab_(context),
+                //         radius: AppCard.defRadius,
+                //         margin: EdgeInsets.zero,
+                //         icon: MdiIcons.close,
+                //         onTap: () => setState((){
+                //           startTime = null;
+                //           stepsTimeTable = null;
+                //         }),
+                //       ),
+                //   ],
+                // ),
               ),
 
             ])),
@@ -560,4 +573,50 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
 }
 
+class StartTimeButton extends StatelessWidget{
 
+  final Konspekt konspekt;
+  final TimeOfDay? startTime;
+  final void Function(TimeOfDay? startTime, List<TimeOfDay>? stepsTimeTable)? onStartTimeChanged;
+
+  const StartTimeButton(this.konspekt, {this.startTime, this.onStartTimeChanged});
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      SimpleButton.from(
+          context: context,
+          color: cardEnab_(context),
+          radius: AppCard.defRadius,
+          margin: EdgeInsets.zero,
+          icon: MdiIcons.clockStart,
+          text: startTime==null?'Dodaj czas rozpoczęcia':'Rozpoczęcie: ${timeOfDayToString(startTime!)}',
+          onTap: () async {
+            TimeOfDay? newStartTime = await showTimePicker(
+              context: context,
+              initialTime: startTime??TimeOfDay.now(),
+            );
+            List<TimeOfDay>? stepsTimeTable = null;
+            if(startTime != null) stepsTimeTable = buildTimeTable(konspekt.stepGroups??konspekt.steps, startTime!);
+
+            onStartTimeChanged?.call(newStartTime, stepsTimeTable);
+          }
+      ),
+
+      if(startTime != null && konspekt.anySteps)
+        SizedBox(width: Dimen.defMarg),
+
+      if(startTime != null && konspekt.anySteps)
+        SimpleButton.from(
+          context: context,
+          color: cardEnab_(context),
+          radius: AppCard.defRadius,
+          margin: EdgeInsets.zero,
+          icon: MdiIcons.close,
+          onTap: () => onStartTimeChanged?.call(null, null),
+        ),
+    ],
+  );
+
+
+}
