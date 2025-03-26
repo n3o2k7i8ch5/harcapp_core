@@ -20,7 +20,7 @@ Widget MaterialTile(
     child: Container(
         color: backgroundColor??cardColor,
         child: Padding(
-            padding: EdgeInsets.all(elementSmallSeparator),
+            padding: EdgeInsets.all(6.0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
