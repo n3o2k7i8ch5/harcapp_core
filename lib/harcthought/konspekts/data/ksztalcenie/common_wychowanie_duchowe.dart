@@ -481,7 +481,7 @@ KonspektStep _step_meta_narracja_scenka = KonspektStep(
         '<br>'
         '<br>Prowadzący zwraca uwagę uczestników (może to zrobić w formie pytania), że postawa Adama jest zupełnie nieharcerska (niezgodna z 4. punktem PH "Harcerz w każdym widzi bliźniego, a za brata uważa każdego innego harcerza").'
         '<br>'
-        '<br>Następnie prowadzący ustawia budzik na 10 minut i wciela się w Adama. Zadaniem uczestników jest przekonać go, że Adam powinien być posłusznym PH i przebaczyć Radkowi ich sprzeczkę.'
+        '<br>Następnie prowadzący ustawia budzik na 10 minut i wciela się w Adama. Zadaniem uczestników jest wcielić się w najlepszej klasy instruktorów harcerskich i przekonać prowadzącego, że Adam powinien być posłusznym PH i przebaczyć Radkowi ich sprzeczkę. Prowadzący informuje uczestników, że jeżeli uda im się to zrobić przed upłyem 10 minut, to wyłączy on stoper wcześniej. Jeśli zaś uczestnicy dojdą do wniosku, że nie jest to w ich wykonaniu możliwe, to oni moga zatrzymać stoper.'
         '<br>'
         '<br>Prowadzący w roli Adama aż do końca ma nie dać się przekonać. Kluczowe jest to, by stał ciągle na stanowisku, że <b>uczestnicy mogą sobie wierzyć w PH, ale według Adama ono jest bez sensu i jest wyrazem słabości</b>.'
         '<br>'

@@ -463,10 +463,12 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           ]
       ),
 
-      step_group_duchowosc_powszechna_madrosc_kultura_tradycja,
+      KonspektStepGroup(
+          title: 'Czynniki i mechanizmy kształtowania duchowości',
+          steps: steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci.map((step) => step.copyWithNamePrefix('Czynniki duchowości - ')).toList()
+      ),
 
-      // Neutralność
-      step_group_neutralnosc_duchowa,
+      step_group_duchowosc_powszechna_madrosc_kultura_tradycja,
 
       KonspektStepGroup(
           steps: [
@@ -484,10 +486,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           ]
       ),
 
-      KonspektStepGroup(
-          title: 'Czynniki i mechanizmy kształtowania duchowości',
-          steps: steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci.map((step) => step.copyWithNamePrefix('Czynniki duchowości - ')).toList()
-      ),
+      step_group_neutralnosc_duchowa,
 
       step_group_duchowosc_w_zhp,
 
@@ -552,6 +551,19 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           ]
       ),
 
+      KonspektStepGroup(
+          steps: [
+            KonspektStep(
+                title: 'Przerwa',
+                duration: Duration(minutes: 10),
+                activeForm: true,
+                content: '<p style="text-align:justify;">'
+                    'Przerwa na rozprostowanie nóg, przewietrzenie się, siku itp..'
+                    '</p>'
+            ),
+          ]
+      ),
+
       step_strategia_wychowania_duchowego,
 
       KonspektStepGroup(
@@ -593,7 +605,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 content: '<p style="text-align:justify;">'
                     'Prowadzący prosi każdą z grup, by wskazała mechanizmy oparte o trzy czynniki duchowości, za pomocą których można zrealizować wyłonione uprzednio cele.'
                     '<br>'
-                    '<br>Wszystkie czynniki duchowości powinny być wyłożone w widocznym miejscu na kartkach z załącznika $material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci.'
+                    '<br>Wszystkie czynniki duchowości powinny być wyłożone w widocznym miejscu na kartkach z załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci.'
                     '<br>'
                     '<br>Na tym etapie zadaniem grup <b>nie jest wymyślanie żadnych zajęć</b> dla harcerzy. Chodzi o podjęcie działania w stylu: <i>przekonanie rodziców zuchów, aby do 14 roku życia miały one na wyłączność dostęp tylko do prostych telefonów bez funkcji dotykowych, aby zwiększyć częstotliwość ich interakcji z niecyfrowym światem, który stawia większe wyzwania.</i>'
                     '<br>'
