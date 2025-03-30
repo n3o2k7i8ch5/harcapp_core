@@ -259,7 +259,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           steps: [
             KonspektStep(
                 title: 'Przyjście i ogarnięcie się',
-                duration: Duration(minutes: 20),
+                duration: Duration(minutes: 15),
                 required: false,
                 activeForm: true,
                 content: '<p style="text-align:justify;">'
@@ -533,6 +533,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 title: 'Fantomowe działania wychowawcze i skuteczność wychowawcza',
                 duration: Duration(minutes: 10),
                 activeForm: false,
+                required: false,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący prezentuje krótki opis obozu drużyny z załącznika $attach_html_scenariusz_fantomowe_dzialania_wychowawcze i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zapoczątkowuje krótką dyskusję zadając pytanie: “co jest nie tak z tą strategią?”. Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
                     '<br>'

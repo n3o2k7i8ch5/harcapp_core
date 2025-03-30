@@ -461,6 +461,47 @@ KonspektStepGroup step_group_integracja_duchowosci = KonspektStepGroup(
 
 // Meta-narracja
 
+KonspektStep _step_meta_narracja_scenka_wprowadzenie = KonspektStep(
+    title: 'Meta-narracja - scenka - wprowadzenie',
+    duration: Duration(minutes: 5),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przedstawia uczestnikom krótką historię:'
+        '<br>'
+        '<br>'
+        '<i>Na obozie jeden z wędrowników, Radek, zaszedł drugiemu, Adamowi, za skórę. Zaczęło się od żartów i docinków, jednak w ciągu paru tygodni eskalowało to w celowe, wzajemne robienie sobie na złość. Pewnego razu na biwaku Radek podciął Adamowi linki do hamaka - wieczorem, gdy Adam kładkł się spać, cały jego hamak runął. Wybuchła z tego afera.'
+        '<br>'
+        '<br>Drużynowy zainterweniował - wziął chłopaków na bok i odbył z nimi poważną rozmowę. Radkowi było głupio - wiedział, że przesadził podcinając linki. Po kilku dniach podszedł do Adama i go przeprosił za wszystkie dotychczasowe niesnaski, jednak Adam wzruszył tylko ramionami.'
+        '<br>'
+        '<br>Radek zaprzestał wszelkich docinków, jednak Adam wciąż go ignorował i co jakiś tylko czas rzucał pod jego adresem kąśliwe uwagi. Sytuacja ta trwała już miesiąc, więc drużynowy wziął Adama na rozmowę. Powiedział, że zgodnie z Prawem Harcerskim należy traktować innych jak bliźnich i braci, a skoro Radek przeprosił Adama za swoje "akcje", to chyba Adam powinien odpuścić już Radkowi.'
+        '<br>'
+        '<br>Adam jednak stwierdził:'
+        '<br>'
+        '<br>"Okej. Mogę dać mu spokój, ale po tym, co Radek zrobił, nie zasługuje na traktowanie jak brata. Jedną sprawą jest trochę się zagalopować, a inną celowo robić komuś na złość. Zresztą ,nie jestem już dzieckiem: dlaczego mam wierzyć w jakieś Prawo Harcerskie, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre? Przecież Rada Naczelna to banda starych dziadów rodem z poprzedniej epoki. Braterstwo jest dla niekumatych dzieci. Ja mam inne zasady - nie ma drugiej szansy, to tylko zachęca do nadużywania zasad z myślą, że potem wystarczy przeprosić. Konsekwencje winy są na całe życie.".'
+        '</i>'
+        '<br>'
+        '<br>Prowadzący informuje uczestników, że za chwilę wcielą się oni w najlepszej jakości, światowej klasy kadrę wędrowniczą. Ich zadaniem będzie odbyć rozmowę z Adamem i spróbować <b>przekonać go w ciągu 15 minut, że harcerską postawą jest wybaczyć Radkowi, kierując sie 4. punktem PH.</b>'
+        '<br>'
+        '<br>Prowadzący informuje uczestników, że jeżeli uda im się przekonać Adma przed upływem 15 minut, to wyłączy on stoper wcześniej. Jeśli zaś uczestnicy dojdą do wniosku, że nie jest to w ich wykonaniu możliwe, to oni moga zatrzymać stoper.'
+        '<br>'
+        '<br>Uwagi:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">Jeśli prowadzący nie jest sam, najlepiej, jeśli aktorem grającym Adama będzie ktoś inny niż osoba czytająca opis.</p></li>'
+        '<li><p style="text-align:justify;">Jeśli uczestników jest wielu (ponad 10), a prowadzący nie jest sam, można podzielić uczestników na grupy i odegrać scenkę niezależnie w grupach przez różnych prowadzących.</p></li>'
+        '<li><p style="text-align:justify;">Jeśli prowadzący bardzo nie chce wcielać się w rolę, formę można przeprowadzić w postaci aktywnej dyskusji, gdzie prowadzący wciela się w "adwokata diabła" i stara się argumentować tak, jak robiłby Adam.</p></li>'
+        '</ul>'
+);
+
+KonspektStep _step_meta_narracja_scenka_przygotowanie = KonspektStep(
+    title: 'Meta-narracja - scenka - przygotowanie',
+    duration: Duration(minutes: 5),
+    activeForm: true,
+    content: '<p style="text-align:justify;">'
+        'Uczestnicy mają pięć minut, aby ustalić między sobą strategię rozmowy.'
+        '</p>'
+);
+
 KonspektStep _step_meta_narracja_scenka = KonspektStep(
     title: 'Meta-narracja - scenka',
     duration: Duration(minutes: 15),
@@ -469,29 +510,14 @@ KonspektStep _step_meta_narracja_scenka = KonspektStep(
       material_budzik
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący przedstawia uczestnikom krótką historię:'
+        'Prowadzący ustawia budzik na 15 minut i wciela się w Adama. Zadaniem uczestników jest wcielić się w najlepszej klasy instruktorów harcerskich i przekonać prowadzącego, że powinien (jako Adam) być posłusznym PH i przebaczyć Radkowi ich sprzeczkę.'
         '<br>'
+        '<br>Prowadzący w roli Adama aż do końca ma <b>nie dać się przekonać</b>. Kluczowe jest to, by stał ciągle na stanowisku, że <b>uczestnicy mogą sobie wierzyć w PH, ale według Adama ono jest bez sensu i jest wyrazem słabości</b>.'
         '<br>'
-        '<i>Na obozie jeden z wędrowników, Radek, zaszedł drugiemu, Adamowi, za skórę. W odwecie Adam zaczął Radka prześladować. Trwało to już od miesiąca. Drużynowy wziął Adama na rozmowę. Powiedział, że zgodnie z harcerskimi wartościami należy traktować innych jak bliźnich i braci, dlatego uważa, że Adam powinien przebaczyć Radkowi ich sprzeczkę.'
+        '<br>Filozofia (aksjomatyczne przekonanie) Adama jest następująca:'
         '<br>'
-        '<br>Adam jednak stwierdził:'
-        '<br>'
-        '<br>"Okej. Mogę dać mu spokój, ale po tym, co Radek zrobił, nie zasługuje na traktowanie jak brata. Ja zresztą nie jestem już dzieckiem, dlaczego mam wierzyć w jakieś Prawo Harcerskie, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre? Przecież Rada Naczelna to banda starych dziadów rodem z poprzedniej epoki".'
-        '</i>'
-        '<br>'
-        '<br>Prowadzący zwraca uwagę uczestników (może to zrobić w formie pytania), że postawa Adama jest zupełnie nieharcerska (niezgodna z 4. punktem PH "Harcerz w każdym widzi bliźniego, a za brata uważa każdego innego harcerza").'
-        '<br>'
-        '<br>Następnie prowadzący ustawia budzik na 10 minut i wciela się w Adama. Zadaniem uczestników jest wcielić się w najlepszej klasy instruktorów harcerskich i przekonać prowadzącego, że Adam powinien być posłusznym PH i przebaczyć Radkowi ich sprzeczkę. Prowadzący informuje uczestników, że jeżeli uda im się to zrobić przed upłyem 10 minut, to wyłączy on stoper wcześniej. Jeśli zaś uczestnicy dojdą do wniosku, że nie jest to w ich wykonaniu możliwe, to oni moga zatrzymać stoper.'
-        '<br>'
-        '<br>Prowadzący w roli Adama aż do końca ma nie dać się przekonać. Kluczowe jest to, by stał ciągle na stanowisku, że <b>uczestnicy mogą sobie wierzyć w PH, ale według Adama ono jest bez sensu i jest wyrazem słabości</b>.'
-        '<br>'
-        '<br>Uwagi:'
+        '<br>Kultura wybaczania jest kulturą słabości. Zachęca do wyrządzania innym krzywd wiedząc, że można potem przeprosić, trochę zadośćuczynić, a po jakimś czasie znowu wrocić do nadużyć. Prowadzi to patologi, nadużyć, niszczenia zaufania i niszczenia tkanki społecznej. Jedynym wyjściem z tego dylematu jest nie dawać drugiej szansy nikomu, kto świadomie i z premedytacją przekracza granice. Wina raz popełniona nie może być nigdy zmazana - tylko to będzie motywowało ludzi to przestrzegania zasad.'
         '</p>'
-        '<ul>'
-        '<li><p style="text-align:justify;">Jeśli prowadzący nie jest sam, najlepiej, jeśli aktorem grającym Adama będzie ktoś inny niż osoba czytająca opis.</p></li>'
-        '<li><p style="text-align:justify;">Jeśli uczestników jest wielu (ponad 12), a prowadzący nie jest sam, można podzielić uczestników na grupy i odegrać scenkę niezależnie w grupach przez różnych prowadzących.</p></li>'
-        '<li><p style="text-align:justify;">Jeśli prowadzący bardzo nie chce wcielać się w rolę, formę można przeprowadzić w postaci aktywnej dyskusji, gdzie prowadzący wciela się w "adwokata diabła" i stara się argumentować tak, jak robiłby Adam.</p></li>'
-        '</ul>'
 );
 
 KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
@@ -529,6 +555,8 @@ KonspektStep _step_meta_narracja = KonspektStep(
 KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
     title: 'Meta-narracja',
     steps: [
+      _step_meta_narracja_scenka_wprowadzenie,
+      _step_meta_narracja_scenka_przygotowanie,
       _step_meta_narracja_scenka,
       _step_meta_narracja_omowienie_scenki,
       _step_meta_narracja
@@ -716,7 +744,7 @@ KonspektStep _step_neutralnosc_duchowa_galeria_sztuki = KonspektStep(
         '<br>'
         '<br>Prowadzący prosi, by uczestnicy <b>nie skupiali się na technikaliach</b> (nie zastanawiali się, czy instruktor zareagował efektywnie), lecz jedynie na skutku działań - wpływie na duchowość (np. postawy lub wartości) wychowanków.'
         '<br>'
-        '<br>Uczestnicy mogą notować swoje odpowiedzi, by łatwiej móc do nich wrócić.'
+        '<br>Uczestnicy mogą notować swoje odpowiedzi, by móc łatwiej do nich wrócić.'
 );
 
 KonspektStep _step_neutralnosc_duchowa_omowienie_wnioskow = KonspektStep(
@@ -963,7 +991,7 @@ KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
 
 KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
     title: 'Strategia wychowania duchowego',
-    duration: Duration(minutes: 15),
+    duration: Duration(minutes: 20),
     activeForm: false,
     materials: [
       material_flipchart.copyWith(amount: 1),
