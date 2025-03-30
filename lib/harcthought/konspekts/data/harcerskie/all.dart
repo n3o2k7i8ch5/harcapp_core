@@ -2049,11 +2049,13 @@ List<Konspekt> allHarcerskieKonspekts = [
           '<br>'
           '<br>Jeżeli prowadzącemu zależy na pracy z aksjomatem, drąży pytaniami “dlaczego” tak długo, aż harcerze osiągną poziom aksjomatu duchowego - i wówczas rozpoczyna się dyskusja o tym, jakie aksjomaty jak do tego podchodzą i dlaczego.'
           '<br>'
+          '<br>Jeśli uczestnicy w trakcie rozmowy "zadryfują" w rejony wartości, czy aksjomatów, które nie są wychowawcze, prowadzący powinien je podważyć poprzez zadawanie pytań rzucających określone światło na prezentowane stanowiska.'
+          '<br>'
           '<br>Przykładowa treść sądu:'
           '<br>'
           '<br><i>“Na obozie jeden z zastępów harcerzy nie mył menażek. Drużynowa z powodów ideologicznych nigdy nie stosowała kar - jedynie rozmowy wychowawcze, jednak zastęp je ignorował. Po tygodniu obozu dwójka harcerzy się zatruła, zaś po półtorej tygodnia była to już połowa zastępu. Wskutek tych wydarzeń na obóz przyjechała kontrola sanepidu i nałożyła karę na komendanta obozu oraz rozwiązał obóz przed terminem, co zmusiło większość rodziców do zmiany swoich planów urlopowych i spowodowało nieprzyjemności w pracy. Komendant obarczył winą drużynową zastępu nie myjącego garów, jednak ona uparcie twierdziła, że kary są znęcaniem się i patologią.”</i></p>',
       howToFail: [
-        'Jako prowadzący polemizować z uczestnikami występującymi na mównicy',
+        'Jako prowadzący polemizować z uczestnikami występującymi na mównicy.',
         'Pozwolić, by uczestnicy robili sobie jaja z formy poprzez odkrywanie ról wielkich mówców i posługiwanie się nienaturalnie pompatycznym językiem'
       ]
   ),
@@ -3027,7 +3029,6 @@ List<Konspekt> allHarcerskieKonspekts = [
             activeForm: false,
             content: '<p style="text-align:justify;">Uczestnicy wspólnie z prowadzącym podsumowują swoje nagrobki idealne. Nie ma konieczności prezentowania swojego przygotowanego nagrobka.</p>'
         ),
-
 
       ]
   ),
