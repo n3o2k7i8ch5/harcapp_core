@@ -552,7 +552,18 @@ KonspektStep _step_meta_narracja = KonspektStep(
         '<br>'
         '<br>Prowadzący kończy wyjaśnieniem powodu, dla którego porusza ten temat:'
         '<br>'
-        '<br><i>Pracując jedynie nad postawami i wartościami wychowanków można kształtować ich tylko do etapu <b>wstępnej integracji duchowości</b>. Później, na etapie <b>świadomej integracji duchowości</b>, duchowo dojrzały człowiek będzie potrzebował <b>powodu</b> aby przyjąć określone wartości i postawy, <b>źródła wartości</b>, na którym będzie mógł oprzeć swoją duchowość. Akurat tak się składa, że człowiek ewolował postrzegając świat jako pewną opowieść (np. mitologię) i owa ludzka cecha nie uległa najmniejszej zmianie. Oznacza to, że w procesie wychowawczym <b>nie można abstrahować od kwestii najbardziej osobistych</b> - jeśli jako wychowawcy chcemy skutecznie i długotrwale ukształtować młodego czlowieka, musimy wejść w interakcję z opowieścią, która będzie dla niego najbardziej fundamentalnym rdzeniem jego osoby.</i>'
+        '<br><i>Ograniczając się do pracy jedynie nad postawami i wartościami wychowanków można jedynie do etapu <b>wstępnej integracji duchowości</b>. Później, na etapie <b>świadomej integracji duchowości</b>, dojrzały duchowo człowiek nie przyjmie zbioru wartości "bo tak". Będzie potrzebował <b>powodu</b> by je przyjąć - <b>źródła wartości</b>, na którym będzie mógł oprzeć swoją duchowość.'
+        '<br>'
+        '<br>Człowiek ewolował setki tysięcy lat postrzegając świat jako pewną opowieść (np. mitologię) i do dziś nie uległo to w najmniejszym stopniu zmianie. Jeśli chcemy, jako wychowawcy, skutecznie i długotrwale ukształtować młodego czlowieka <b>nie możemy abstrahować od kwestii najbardziej osobistych</b>. Musimy wejść w interakcję z jego przestrzenią aksjomatyczną: opowieścią, która stanie się dla niego najbardziej fundamentalnym rdzeniem jego osoby.</i>'
+        '</p>'
+);
+
+KonspektStep _step_meta_narracja_pytania = KonspektStep(
+    title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja - pytania',
+    duration: Duration(minutes: 10),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Uczestnicy mogą dopytać o niejasne kwestie związane z meta-narracją.'
         '</p>'
 );
 
@@ -563,7 +574,8 @@ KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
       _step_meta_narracja_scenka_przygotowanie,
       _step_meta_narracja_scenka,
       _step_meta_narracja_omowienie_scenki,
-      _step_meta_narracja
+      _step_meta_narracja,
+      _step_meta_narracja_pytania
     ]
 );
 
