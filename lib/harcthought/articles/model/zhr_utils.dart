@@ -125,14 +125,13 @@ abstract class ZHRUtils{
     );
   }
 
-  static Future<String> coverLinkFromHtmlLink(String link){
-    return downloadFile(link, webCors: true).then((htmlFile) {
-      if(htmlFile == null) return '';
-      String imageLink = htmlFile.split('<meta property="og:image" content="')[1];
-      imageLink = imageLink.split('" />')[0];
-      imageLink = imageLink.split('"/>')[0];
-      return imageLink;
-    });
+  static Future<String> coverLinkFromHtmlLink(String link) async {
+    String? htmlFile = await downloadFile(link, webCors: true);
+    if(htmlFile == null) return '';
+    String imageLink = htmlFile.split('<meta property="og:image" content="')[1];
+    imageLink = imageLink.split('" />')[0];
+    imageLink = imageLink.split('"/>')[0];
+    return imageLink;
   }
 
   static Future<(img.Image?, img.Image?)> _coverFromHtmlLink(String link) async{
