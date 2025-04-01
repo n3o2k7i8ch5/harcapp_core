@@ -539,6 +539,10 @@ KonspektStep _step_meta_narracja = KonspektStep(
     title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja',
     duration: Duration(minutes: 5),
     activeForm: false,
+    materials: [
+      material_zal_meta_narracja_opis,
+      material_zal_meta_narracja_przyklady,
+    ],
     content: '<p style="text-align:justify;">'
         'Prowadzący przedstawia definicję meta-narracji na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci i kładzie przed uczestnikami (obok kartki "Aksjomat") opis meta-narracji z załącznika $attach_html_meta_narracja_opis.'
         '<br>'
@@ -865,6 +869,9 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
     title: 'Duchowość w ZHP - aksjomaty',
     duration: Duration(minutes: 20),
     activeForm: false,
+    materials: [
+      material_zal_neutralnosc_duchowa_przyklady
+    ],
     aims: [
       'Uświadomienie uczestnikom, że do wspierania rozwoju duchowego na poziomie Z i H wystarczy poziom postaw i wartości, ale rozwój duchowy z HS i W wymaga pracy na poziomie aksjomatu',
       'Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej'
