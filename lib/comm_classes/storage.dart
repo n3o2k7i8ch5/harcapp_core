@@ -36,7 +36,7 @@ Future<dynamic> openAsset(String assetPath, {bool webOpenInNewTab = false}) asyn
 Future<String?> downloadFileAsString(String url, {bool webCors = false}) async {
   try {
     Response response = await defDio.get(
-      webCors ? corsProxy(url) : url,
+      webCors ? webCorsProxy(url) : url,
       options: Options(responseType: ResponseType.bytes)
     );
     return utf8.decode(response.data);
@@ -48,7 +48,7 @@ Future<String?> downloadFileAsString(String url, {bool webCors = false}) async {
 Future<String?> downloadFile(String url, {bool webCors = false}) async {
   try {
     Response response = await defDio.get(
-      webCors ? corsProxy(url) : url,
+      webCors ? webCorsProxy(url) : url,
       options: Options(responseType: ResponseType.plain)
     );
     return response.data;
