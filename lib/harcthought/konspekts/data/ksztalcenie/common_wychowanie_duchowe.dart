@@ -578,7 +578,7 @@ KonspektStep _step_meta_narracja_ocena_metanarracji_i_duchowosci = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Na koniec prowadzący stawia pytanie, które rozpoczyna kolejny wątek:'
         '<br>'
-        '<br><i>To teraz skupmy się na niezwykle nieliberalnym pytaniu: czy istnieją metanarracj, tudzież duchowości lepsze oraz gorsze?</i>'
+        '<br><i>To teraz skupmy się na niezwykle nieliberalnym pytaniu: czy istnieją meta-narracje, tudzież duchowości lepsze oraz gorsze?</i>'
         '</p>'
 );
 
