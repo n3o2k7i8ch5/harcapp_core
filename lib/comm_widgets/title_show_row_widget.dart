@@ -21,6 +21,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
   final void Function()? onOpen;
   final IconData? onOpenIcon;
   final Color? onOpenIconColor;
+  final bool selectable;
 
   const TitleShortcutRowWidget({
     this.icon,
@@ -35,10 +36,17 @@ class TitleShortcutRowWidget extends StatelessWidget{
     this.onOpen,
     this.onOpenIcon,
     this.onOpenIconColor,
+    this.selectable = false
   });
   
   @override
   Widget build(BuildContext context) {
+
+    AppTextStyle style = AppTextStyle(
+        fontSize: Dimen.textSizeAppBar,
+        fontWeight: weight.bold,
+        color: titleColor
+    );
 
     Widget widget = Row(
       children: [
@@ -55,7 +63,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
         else if(onOpen != null && textAlign == TextAlign.center)
             SizedBox(width: Dimen.iconFootprint)
         else if(textAlign == TextAlign.start)
-              SizedBox(width: textStartPadding),
+            SizedBox(width: textStartPadding),
 
         Expanded(
             child: pulseTitle?
@@ -67,15 +75,18 @@ class TitleShortcutRowWidget extends StatelessWidget{
                 fontColor: titleColor,
                 pulseColor: pulseShadowColor??titleColor?.withValues(alpha: (titleColor?.a??1)*0.7),
                 textAlign: textAlign,
+                selectable: selectable,
               ),
             ):
+            selectable?
             Text(
               title,
-              style: AppTextStyle(
-                  fontSize: Dimen.textSizeAppBar,
-                  fontWeight: weight.bold,
-                  color: titleColor
-              ),
+              style: style,
+              textAlign: textAlign,
+            ):
+            SelectableText(
+              title,
+              style: style,
               textAlign: textAlign,
             ),
         ),

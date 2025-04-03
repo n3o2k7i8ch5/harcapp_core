@@ -86,7 +86,9 @@ class KonspektStepGroupWidget extends StatelessWidget{
                     timeStr,
                     size: Dimen.textSizeAppBar,
                     color: textDisab_(context),
+                    selectable: true,
                   ),
+                  selectable: true,
                 ),
               ),
 

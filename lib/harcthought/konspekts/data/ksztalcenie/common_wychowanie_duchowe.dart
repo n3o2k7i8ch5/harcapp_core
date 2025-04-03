@@ -563,11 +563,22 @@ KonspektStep _step_meta_narracja = KonspektStep(
 );
 
 KonspektStep _step_meta_narracja_pytania = KonspektStep(
-    title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja - pytania',
+    title: 'Meta-narracja - pytania',
     duration: Duration(minutes: 10),
     activeForm: false,
     content: '<p style="text-align:justify;">'
         'Uczestnicy mogą dopytać o niejasne kwestie związane z meta-narracją.'
+        '</p>'
+);
+
+KonspektStep _step_meta_narracja_ocena_metanarracji_i_duchowosci = KonspektStep(
+    title: 'Meta-narracja - pytanie końcowe',
+    duration: Duration(minutes: 5),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Na koniec prowadzący stawia pytanie, które rozpoczyna kolejny wątek:'
+        '<br>'
+        '<br><i>To teraz skupmy się na niezwykle nieliberalnym pytaniu: czy istnieją metanarracj, tudzież duchowości lepsze oraz gorsze?</i>'
         '</p>'
 );
 
@@ -579,7 +590,8 @@ KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
       _step_meta_narracja_scenka,
       _step_meta_narracja_omowienie_scenki,
       _step_meta_narracja,
-      _step_meta_narracja_pytania
+      _step_meta_narracja_pytania,
+      _step_meta_narracja_ocena_metanarracji_i_duchowosci,
     ]
 );
 
@@ -678,7 +690,7 @@ KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektSte
     duration: Duration(minutes: 10),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej formą przekazu - <b>kulture</b> i <b>tradycje</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej formą przekazu - <b>kulturę</b> i <b>tradycje</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
         '<br>'
         '<br>Prowadzący może zobrazować dylemat tego <i>"jak ściśle trzymać się tradycji"</i> w sposób następujący:'
         '<br>'
@@ -693,15 +705,15 @@ KonspektStep _step_duchowosc_religia_religijnosc = KonspektStep(
     duration: Duration(minutes: 10),
     activeForm: false,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie załącznika $attach_html_poradnik_o_strukturze_duchowosci definiuje religię:'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci definiuje religię:'
         '<br>'
         '<br>Religia jest duchowością powszechną. <b>Religia nie jest “dodatkiem” do duchowości, ale jest określoną duchowością</b> - ma określone aksjomaty i wartości, określone sposoby jej (religii jako duchowość) integracji.'
         '<br>'
         '<br>Prowadzący powinien zwrócić uwagę, że nie ma tu mowy o relacji “zawierania”: <b>w obszernym zbiorze “duchowości” <u>nie zawiera się</u> mniejszy zbiór “religii”</b>! Nie jest tak, że część osób ma duchowość “z religią”, a część “bez religii”. Religia jest rodzajem, sposobem duchowości. Nie można z duchowości “wyjąć” elementu religijnego i dalej mieć do czynienia z duchowością, tak samo jak nie można z psa wyjąć elementu “jamnik” i dalej uważać, że pozostałość to pies. Jamnik nie jest dodatkiem do psa, tylko jest rodzajem całego, spójnego psa.'
         '<br>'
-        '<br>Oznacza to, że nie można prowadzić wychowania w drużynie w oparciu o jedną, wybraną duchowość, i “wzbogacać” jej dla niektórych religią, a dla innych nie. Wynika to z faktu, że jeśli ktoś jest wychowywany w duchowości religijnej, ma określone religijne aksjomaty, co stoi w kontraście do aksjomatów osób niereligijnych! Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości.'
+        '<br>Oznacza to, że nie można prowadzić wychowania w drużynie w oparciu o ogólną, inkluzywną duchowość, i ewentualnie “wzbogacać” ją dla niektórych religią. Duchowość religijna i duchowość niereligijna są dwiema zupełnie różnymi duchowościami! Każda religia ma określone aksjomaty, inne niż duchowości niereligjne. Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości.'
         '<br>'
-        '<br>Podobnie, błędnym jest pogląd jakoby istniała symetria między duchowością osób religijnych i niereligijnych: osoby religijne mają z góry określone aksjomaty, jednak aksjomaty osób niereligijnych dopiero wymagają określenia i doprecyzowania.'
+        '<br>Podobnie, błędnym jest pogląd jakoby istniała symetria między duchowością osób religijnych i niereligijnych: osoby religijne mają z góry określone aksjomaty, jednak aksjomaty osób niereligijnych dopiero wymagają określenia i doprecyzowania. Analogicznie rzecz się ma z nauczaniem jednych uczniów języka polskiego, zaś innych języka nie-polskiego - w przypadku pierwszych wiadomo, czego uczyć, jednak w drugim przypadku trzeba to dopiero ustalić!'
         '<br>'
         '<br><b>Religijność</b> jest zestawem zachowań i postaw wynikających z duchowości religijnej. Religijność nie jest jednak zbiorem wartości, ani całą duchowością - religijność to jedynie wierzchnia warstwa duchowości, która pozwala (lecz sama w sobie niekoniecznie wystarcza) by duchowość religijną skutecznie integrować.'
         '</p>'
