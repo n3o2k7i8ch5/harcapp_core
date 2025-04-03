@@ -688,25 +688,6 @@ KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektSte
         '</p>'
 );
 
-KonspektStep _step_duchowosc_religia_religijnosc_opinie_uczestnikow = KonspektStep(
-    title: 'Duchowość, religia, religijność - opinie uczestników',
-    duration: Duration(minutes: 10),
-    activeForm: true,
-    required: false,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący zadaje publicznie pytanie:'
-        '<br>'
-        '<br><b><i>“Jaka jest relacja między duchowością, religią, a religijnością?”</i></b>.'
-        '<br>'
-        '<br>Uczestnicy indywidualnie przez kilka minut na <b>mini-kartkach</b> zapisują hasłowo swoje odpowiedzi, które potem będą mogli rozwinąć.'
-        '<br>'
-        '<br>Prowadzący prosi uczestników kolejno o zaprezentowanie po jednej kartce i położeniu jej na środku - prezentacja w kręgu zachodzi dopóki ktoś jeszcze ma jakąś kartkę. Jeśli jakaś myśl została już przedstawiona, nie ma potrzeby jej ponownego rozwijania - można po prostu dołożyć kartkę do już położnej.'
-        '</p>',
-    materials: [
-      material_mini_kartki_biurowe
-    ]
-);
-
 KonspektStep _step_duchowosc_religia_religijnosc = KonspektStep(
     title: 'Duchowość, religia, religijność',
     duration: Duration(minutes: 10),
@@ -730,8 +711,6 @@ KonspektStepGroup step_group_duchowosc_powszechna_madrosc_kultura_tradycja = Kon
     title: 'Duchowość powszechna, mądrość, kultura i tradycja',
     steps: [
       _step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
-
-      _step_duchowosc_religia_religijnosc_opinie_uczestnikow,
 
       _step_duchowosc_religia_religijnosc,
     ]

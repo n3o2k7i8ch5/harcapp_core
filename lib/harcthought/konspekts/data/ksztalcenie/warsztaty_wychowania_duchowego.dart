@@ -310,7 +310,13 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                   '<li><p style="text-align:justify;">Pojęcia i opis rozwoju duchowego - forma statyczna.</p></li>'
                   '<li><p style="text-align:justify;">Duchowość w kontekście wychowania harcerskiego - forma dyskusyjna.</p></li>'
                   '<li><p style="text-align:justify;">Praca z duchowością w poszczególnych metodykach - forma pracy w małych grupach.</p></li>'
-                  '</ol>',
+                  '</ol>'
+
+                  '<p style="text-align:justify;">'
+                  'Następnie prowadzący informuje uczestników o charakterze, w jaki chce, aby warsztaty były rozumiane:'
+                  '<br>'
+                  '<br><b><i>Zaproponowany podczas warsztatów opis duchowości i wynikające z niego logiczne konsekwencje są <u>propozycją perspektywy</u> rozumienia duchowości i rozwoju duchowego. Nie jest to mądrość dana z niebios, wyryta w kamieniu - jest to efekt wielu lat doświadczeń, rozmów i analiz, który podlega dalszemu rozwojowi.<i></b>'
+                  '</p>',
             ),
           ]
       ),
@@ -448,6 +454,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       step_group_metanarracja,
 
+      step_group_duchowosc_powszechna_madrosc_kultura_tradycja,
+
       step_group_zdolnosc_integracji_duchowosci,
 
       KonspektStepGroup(
@@ -467,8 +475,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           title: 'Czynniki i mechanizmy kształtowania duchowości',
           steps: steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci.map((step) => step.copyWithNamePrefix('Czynniki duchowości - ')).toList()
       ),
-
-      step_group_duchowosc_powszechna_madrosc_kultura_tradycja,
 
       KonspektStepGroup(
           steps: [
