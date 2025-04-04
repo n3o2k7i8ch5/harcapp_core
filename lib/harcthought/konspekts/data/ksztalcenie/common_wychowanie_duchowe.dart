@@ -861,7 +861,11 @@ KonspektStep _step_duchowosc_w_zhp_dokumenty = KonspektStep(
       'Wskazanie uczestnikom formalnych źródeł stanowiących, że harcerstwo jest dla wszystkich, ale nie wychowuje do wszystkiego - ma ściśle określone wartości, do których kształtuje'
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący przedstawia uczestnikom stosowny fragment statutu ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_statut) oraz preambułę uchwały w sprawie wspierania rozwoju duchowego w ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_uchwala). Zwraca uwagę na to, że w ZHP mamy ściśle określony zbiór wartości i postaw, do których wychowujemy oraz ramy źródeł wartości. Jeśli uczestnicy będą chcieli - mogą potem do nich zajrzeć.'
+        'Prowadzący przedstawia uczestnikom stosowny fragment statutu ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_statut) oraz preambułę uchwały w sprawie wspierania rozwoju duchowego w ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_uchwala). Zwraca uwagę na to, że w ZHP mamy określony zbiór wartości i postaw, do których wychowujemy, ale <b>nie mamy jako określonych aksjomatów</b> na podstawie których te wartości są wywodzone.'
+        '<br>'
+        '<br>Prowadzący kończy stwierdzeniem:'
+        '<br>'
+        '<br><i>To oczywiste, że nie da się wychować młodego człowieka bez pracy z aksjomatami. Skoro zaś ZHP nie określa skąd harcerskie wartości maja być wywodzone, to spróbujmy rozszyfrować dlaczego te wartości są tak oczywiste w naszej cywilizacji.</i>'
         '</p>',
   materials: [
     material_zal_cel_wychowania_duchowego_zhp_statut,
@@ -881,7 +885,7 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
       'Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej'
     ],
     content: '<p style="text-align:justify;">'
-        '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z użytego już załącznika $attach_html_neutralnosc_duchowa_przyklady. Prowadzący stawia przed nimi zadanie w formie pytania:'
+        '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z użytego już załącznika $attach_html_neutralnosc_duchowa_przyklady. Stawia przed nimi zadanie w formie pytania:'
         '<br>'
         '<br><i>“We wszystkich scenariuszach mowa jest o wartościach obecnych w PH. Ale przecież żaden wędrownik (mam nadzieję!) nie będzie przestrzegał PH wierząc, że spadło z nieba na kamiennych tablicach!'
         '<br>'
