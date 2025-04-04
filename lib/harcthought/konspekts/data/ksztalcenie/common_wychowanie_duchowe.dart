@@ -968,9 +968,9 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
         '<br>'
         '<br>Prowadzący może zacząć od kilku refleksji:'
         '<br>'
-        '<br>Po pierwsze - fakt, że chrześcijańska myśl dała naszej cywilizacji (i przy okazji harcerstwu) zbiór wartości nie zależy od tego, czy rozmyśla o nich osoba wierząca, czy niewierząca.'
+        '<br><i>Po pierwsze - fakt, że chrześcijańska myśl dała naszej cywilizacji (i przy okazji harcerstwu) zbiór wartości nie zależy od tego, czy rozmyśla o nich osoba wierząca, czy niewierząca.'
         '<br>'
-        '<br>Po drugie - na czym miałoby polegać wychowanie “z dala” od chrześcijańskich aksjomatów? Na porzuceniu idei mówienia prawdy, miłości bliźniego, szacunku wobec każdego człowieka, idei przebaczenia, miłosierdzia, sprawiedliwości, równości i relacji z absolutem?'
+        '<br>Po drugie - na czym miałoby polegać wychowanie “z dala” od chrześcijańskich aksjomatów? Na porzuceniu idei mówienia prawdy, miłości bliźniego, szacunku wobec każdego człowieka, idei przebaczenia, miłosierdzia, sprawiedliwości, równości i relacji z absolutem?</i>'
         '<br>'
         '<br>Dalej, prowadzący powinien odpowiedzieć na wyjściowe pytanie zwracając uwagę na dwa aspekty:'
         '</p>'
@@ -980,7 +980,7 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
         '<li>'
         '<p style="text-align:justify;">'
         '<i>'
-        '<u>Co, jeśli ktoś nie jest zainteresowany egzystencjalnymi pytaniami? Co jeśli ktoś uważa, ze należy być dobrym "bo tak"?</b>'
+        '<u>Co, jeśli ktoś nie jest zainteresowany egzystencjalnymi pytaniami? Co jeśli ktoś uważa, ze należy być dobrym "bo tak"?</u>'
         '<br>'
         '<br>Harcerstwo stawia za cel wychowanie osób świadomych swoich wartości, potrafiących je uzasadnić i ich bronić. Faktycznie jednak należy liczyć się z tym, że niektórzy zwyczajnie nie będą sobie zadawali trudu refleksji nad swoim życiem i duchem. Część osób może konformistycznie, na bieżąco dopasowywać się do poglądów otoczenia, mieć przez to kolegów i czuć się z tym dobrze, jednak <b>jest to wyraz niedojrzałości</b>.'
         '<br>'
@@ -1004,7 +1004,7 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
         '</ol>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący powinien pozwolić, by fundamentalny brak odpowiedzi na pytanie "co dla ateistów" wybrzmiał wsród uczestników. <b>Odpowiedź na nie padnie na warsztatach, nie dlatego, że ktoś chce ją ukryć. Nie padnie, bo próba potraktowania tego pytania poważnie ma karkołomne, a być może niemożliwe do utrzymania konsekwencje</b>, niezależnie od poglądów obecnych tu osób.'
+        'Prowadzący powinien pozwolić, by fundamentalny brak odpowiedzi na pytanie "co dla ateistów" wybrzmiał wsród uczestników. <b>Odpowiedź na nie padnie na warsztatach</b>, nie dlatego, że ktoś chce ją ukryć. Nie padnie, bo próba potraktowania tego pytania poważnie ma karkołomne, a być może niemożliwe do utrzymania konsekwencje, niezależnie od poglądów obecnych tu osób.'
         '</p>'
 );
 
