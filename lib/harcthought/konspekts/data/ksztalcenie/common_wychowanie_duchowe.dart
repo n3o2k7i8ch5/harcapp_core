@@ -573,12 +573,12 @@ KonspektStep _step_meta_narracja_pytania = KonspektStep(
 
 KonspektStep _step_meta_narracja_ocena_metanarracji_i_duchowosci = KonspektStep(
     title: 'Meta-narracja - pytanie końcowe',
-    duration: Duration(minutes: 5),
+    duration: Duration(minutes: 0),
     activeForm: false,
     content: '<p style="text-align:justify;">'
         'Na koniec prowadzący stawia pytanie, które rozpoczyna kolejny wątek:'
         '<br>'
-        '<br><i>To teraz skupmy się na niezwykle nieliberalnym pytaniu: czy istnieją meta-narracje, tudzież duchowości lepsze oraz gorsze?</i>'
+        '<br><i>To teraz skupmy się na niezwykle nieliberalnym pytaniu: czy istnieją meta-narracje, tudzież duchowości <b>lepsze</b> oraz <b>gorsze</b>?</i>'
         '</p>'
 );
 
@@ -592,6 +592,64 @@ KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
       _step_meta_narracja,
       _step_meta_narracja_pytania,
       _step_meta_narracja_ocena_metanarracji_i_duchowosci,
+    ]
+);
+
+// Duchowość powszechna etc.
+
+KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektStep(
+    title: 'Duchowość powszechna, mądrość, kultura i tradycja',
+    duration: Duration(minutes: 10),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej formą przekazu - <b>kulturę</b> i <b>tradycje</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
+        '<br>'
+        '<br>Prowadzący może zobrazować dylemat tego <i>"jak ściśle trzymać się tradycji"</i> w sposób następujący:'
+        '<br>'
+        '<br><i>Kultura i tradycja są mądrością miliona lat żyć, pamięcią miliona umysłów, wiedzą o skutkach miliona głupich prób – wszystkie dostępne dla człowieka żyjącego raptem kilkadziesiąt lat.</i>'
+        '<br>'
+        '<br><i>Gdybyśmy zanegowali na raz wszystkie tradycje, w ciągu jednego pokolenia wrócilibyśmy do jaskiń. Ale gdybyśmy nigdy nie podważyli żadnej tradycji, nigdy z tych jaskiń byśmy nie wyszli.</i>'
+        '</p>'
+);
+
+KonspektStep _step_duchowosc_religia_religijnosc = KonspektStep(
+    title: 'Duchowość, religia, religijność',
+    duration: Duration(minutes: 10),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci definiuje religię:'
+        '<br>'
+        '<br>Religia jest duchowością powszechną. <b>Religia nie jest “dodatkiem” do duchowości, ale jest określoną duchowością</b> - ma określone aksjomaty i wartości, określone sposoby jej (religii jako duchowość) integracji.'
+        '<br>'
+        '<br>Prowadzący powinien zwrócić uwagę, że nie ma tu mowy o relacji “zawierania”: <b>w obszernym zbiorze “duchowości” <u>nie zawiera się</u> mniejszy zbiór “religii”</b>! Nie jest tak, że część osób ma duchowość “z religią”, a część “bez religii”. Religia jest rodzajem, sposobem duchowości. Nie można z duchowości “wyjąć” elementu religijnego i dalej mieć do czynienia z duchowością, tak samo jak nie można z psa wyjąć elementu “jamnik” i dalej uważać, że pozostałość to pies. Jamnik nie jest dodatkiem do psa, tylko jest rodzajem całego, spójnego psa.'
+        '<br>'
+        '<br>Oznacza to, że nie można prowadzić wychowania w drużynie w oparciu o ogólną, inkluzywną duchowość, i ewentualnie “wzbogacać” ją dla niektórych religią. Duchowość religijna i duchowość niereligijna są dwiema zupełnie różnymi duchowościami! Każda religia ma określone aksjomaty, inne niż duchowości niereligjne. Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości.'
+        '<br>'
+        '<br>Podobnie, błędnym jest pogląd jakoby istniała symetria między duchowością osób religijnych i niereligijnych: osoby religijne mają z góry określone aksjomaty, jednak aksjomaty osób niereligijnych dopiero wymagają określenia i doprecyzowania. Analogicznie rzecz się ma z nauczaniem jednych uczniów języka polskiego, zaś innych języka nie-polskiego - w przypadku pierwszych wiadomo, czego uczyć, jednak w drugim przypadku trzeba to dopiero ustalić!'
+        '<br>'
+        '<br><b>Religijność</b> jest zestawem zachowań i postaw wynikających z duchowości religijnej. Religijność nie jest jednak zbiorem wartości, ani całą duchowością - religijność to jedynie wierzchnia warstwa duchowości, która pozwala (lecz sama w sobie niekoniecznie wystarcza) by duchowość religijną skutecznie integrować.'
+        '</p>'
+);
+
+KonspektStep _step_ocena_metanarracji_i_duchowosci_odpowiedz = KonspektStep(
+    title: 'Meta-narracja - pytanie końcowe - odpowiedź',
+    duration: Duration(minutes: 0),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Na koniec prowadzący odpowiada na postawione pod koniec omawiania "meta-narracji" pytanie: <i>Czy istnieją meta-narracje, tudzież duchowości <b>lepsze</b> oraz <b>gorsze</b>?</i>'
+        '<br>'
+        '<br><i>Niektóre duchowości wyraźnie skuteczniej prowadzą do szczęścia i rozwoju człowieka oraz jego otoczenia od pozostałych. Niektóre duchowości czynią to w sposób stabilny od tysięcy lat, inne działają dobrze przez pół pokolenia, po czym prowadzą do katastrofy.</i>'
+        '</p>'
+);
+
+KonspektStepGroup step_group_duchowosc_powszechna_madrosc_kultura_tradycja = KonspektStepGroup(
+    title: 'Duchowość powszechna, mądrość, kultura i tradycja',
+    steps: [
+      _step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
+
+      _step_duchowosc_religia_religijnosc,
+
+      _step_ocena_metanarracji_i_duchowosci_odpowiedz,
     ]
 );
 
@@ -680,51 +738,6 @@ KonspektStepGroup step_group_zdolnosc_integracji_duchowosci = KonspektStepGroup(
       _step_zdolnosci_integracji_duchowosci,
       _step_zdolnosci_integracji_duchowosci_wyjasnienie_przyklady,
       _step_zdolnosci_integracji_duchowosci_podsumowanie
-    ]
-);
-
-// Duchowość powszechna etc.
-
-KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektStep(
-    title: 'Duchowość powszechna, mądrość, kultura i tradycja',
-    duration: Duration(minutes: 10),
-    activeForm: false,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej formą przekazu - <b>kulturę</b> i <b>tradycje</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
-        '<br>'
-        '<br>Prowadzący może zobrazować dylemat tego <i>"jak ściśle trzymać się tradycji"</i> w sposób następujący:'
-        '<br>'
-        '<br><i>Kultura i tradycja są mądrością miliona lat żyć, pamięcią miliona umysłów, wiedzą o skutkach miliona głupich prób – wszystkie dostępne dla człowieka żyjącego raptem kilkadziesiąt lat.</i>'
-        '<br>'
-        '<br><i>Gdybyśmy zanegowali na raz wszystkie tradycje, w ciągu jednego pokolenia wrócilibyśmy do jaskiń. Ale gdybyśmy nigdy nie podważyli żadnej tradycji, nigdy z tych jaskiń byśmy nie wyszli.</i>'
-        '</p>'
-);
-
-KonspektStep _step_duchowosc_religia_religijnosc = KonspektStep(
-    title: 'Duchowość, religia, religijność',
-    duration: Duration(minutes: 10),
-    activeForm: false,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci definiuje religię:'
-        '<br>'
-        '<br>Religia jest duchowością powszechną. <b>Religia nie jest “dodatkiem” do duchowości, ale jest określoną duchowością</b> - ma określone aksjomaty i wartości, określone sposoby jej (religii jako duchowość) integracji.'
-        '<br>'
-        '<br>Prowadzący powinien zwrócić uwagę, że nie ma tu mowy o relacji “zawierania”: <b>w obszernym zbiorze “duchowości” <u>nie zawiera się</u> mniejszy zbiór “religii”</b>! Nie jest tak, że część osób ma duchowość “z religią”, a część “bez religii”. Religia jest rodzajem, sposobem duchowości. Nie można z duchowości “wyjąć” elementu religijnego i dalej mieć do czynienia z duchowością, tak samo jak nie można z psa wyjąć elementu “jamnik” i dalej uważać, że pozostałość to pies. Jamnik nie jest dodatkiem do psa, tylko jest rodzajem całego, spójnego psa.'
-        '<br>'
-        '<br>Oznacza to, że nie można prowadzić wychowania w drużynie w oparciu o ogólną, inkluzywną duchowość, i ewentualnie “wzbogacać” ją dla niektórych religią. Duchowość religijna i duchowość niereligijna są dwiema zupełnie różnymi duchowościami! Każda religia ma określone aksjomaty, inne niż duchowości niereligjne. Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości.'
-        '<br>'
-        '<br>Podobnie, błędnym jest pogląd jakoby istniała symetria między duchowością osób religijnych i niereligijnych: osoby religijne mają z góry określone aksjomaty, jednak aksjomaty osób niereligijnych dopiero wymagają określenia i doprecyzowania. Analogicznie rzecz się ma z nauczaniem jednych uczniów języka polskiego, zaś innych języka nie-polskiego - w przypadku pierwszych wiadomo, czego uczyć, jednak w drugim przypadku trzeba to dopiero ustalić!'
-        '<br>'
-        '<br><b>Religijność</b> jest zestawem zachowań i postaw wynikających z duchowości religijnej. Religijność nie jest jednak zbiorem wartości, ani całą duchowością - religijność to jedynie wierzchnia warstwa duchowości, która pozwala (lecz sama w sobie niekoniecznie wystarcza) by duchowość religijną skutecznie integrować.'
-        '</p>'
-);
-
-KonspektStepGroup step_group_duchowosc_powszechna_madrosc_kultura_tradycja = KonspektStepGroup(
-    title: 'Duchowość powszechna, mądrość, kultura i tradycja',
-    steps: [
-      _step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
-
-      _step_duchowosc_religia_religijnosc,
     ]
 );
 
@@ -824,7 +837,7 @@ KonspektStep _step_neutralnosc_analogia_do_ogrodnikow = KonspektStep(
         '<br>'
         '<br>W analogii należy podkreślić, że niezależnie od działania ogrodnika, <b>krzew zawsze ma jakiś kształt</b>. Krzew nabywa określonego kształtu, także wtedy, gdy ogrodnik nic nie robi.'
         '<br>'
-        '<br>Harcerstwo jest przedsięwzięciem kształtowania ludzi. W sposób oczywisty kształtuje ich według określonych zasad (np. zasad PH). Wokół faktu, że harcerstwo kształtuje przekonania i wartości młodego człowieka w określonym kierunku narosła dziwna i niepotrzebna kontrowersja - ale <b>bez celowej i planowej zmiany duchowości harcerzy harcerstwo nie ma najmniejszego sensu.</b>.'
+        '<br>Harcerstwo jest przedsięwzięciem kształtowania ludzi. W sposób oczywisty kształtuje ich według określonych zasad (np. zasad PH). Wokół faktu, że harcerstwo kształtuje przekonania i wartości młodego człowieka w określonym kierunku narosła dziwna i niepotrzebna kontrowersja - ale <b>bez celowego kształtowania duchowości harcerzy harcerstwo nie ma najmniejszego sensu.</b>.'
         '</p>'
 );
 
@@ -942,21 +955,56 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
         '</li>'
 
         '</ol>'
+);
 
-        '<p style="text-align:justify;">'
-        '<b>Ale przecież te aksjomaty są religijne - co z tzw. “niewierzącymi” harcerzami?</b>'
+KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
+    title: 'Duchowość w ZHP - co dla ateistów?',
+    duration: Duration(minutes: 10),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący zwraca uczestnikom uwagę na pewien problem (jest szansa, że któryś z uczestników sam zwróci na niego uwagę):'
         '<br>'
-        '<br>Po pierwsze - to, że chrześcijańska myśl dała naszej cywilizacji (i przy okazji harcerstwu) zbiór wartości nie zależy od tego, czy rozmyśla o nich osoba wierząca, czy niewierząca.'
+        '<br><i>Ale przecież te aksjomaty są religijne - <b>co z tzw. “niewierzącymi” harcerzami?</b> Jakie aksjomaty powinny lec u podstaw ich wychowania duchowego?</i>'
+        '<br>'
+        '<br>Prowadzący może zacząć od kilku refleksji:'
+        '<br>'
+        '<br>Po pierwsze - fakt, że chrześcijańska myśl dała naszej cywilizacji (i przy okazji harcerstwu) zbiór wartości nie zależy od tego, czy rozmyśla o nich osoba wierząca, czy niewierząca.'
         '<br>'
         '<br>Po drugie - na czym miałoby polegać wychowanie “z dala” od chrześcijańskich aksjomatów? Na porzuceniu idei mówienia prawdy, miłości bliźniego, szacunku wobec każdego człowieka, idei przebaczenia, miłosierdzia, sprawiedliwości, równości i relacji z absolutem?'
         '<br>'
-        '<br>Po trzecie -  jaki inny aksjomat, który jest wewnętrznie spójny, z którego wynikają wartości zgodne z tymi przyjętymi przez ruch harcerski i który nie zapadnie się pod własnymi założeniami w ciągu dwóch pokoleń chcemy tym harcerzom zaproponować?'
+        '<br>Dalej, prowadzący powinien odpowiedzieć na wyjściowe pytanie zwracając uwagę na dwa aspekty:'
+        '</p>'
+
+        '<ol>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<i>'
+        '<u>Co, jeśli ktoś nie jest zainteresowany egzystencjalnymi pytaniami? Co jeśli ktoś uważa, ze należy być dobrym "bo tak"?</b>'
         '<br>'
-        '<br>Nie trzeba być wierzącym, żeby przyznać, że harcerskie wartości są fundamentalnie chrześcijańskie, ani żeby dostrzec ogrom pozytywów, jaki to za sobą niesie.'
+        '<br>Harcerstwo stawia za cel wychowanie osób świadomych swoich wartości, potrafiących je uzasadnić i ich bronić. Faktycznie jednak należy liczyć się z tym, że niektórzy zwyczajnie nie będą sobie zadawali trudu refleksji nad swoim życiem i duchem. Część osób może konformistycznie, na bieżąco dopasowywać się do poglądów otoczenia, mieć przez to kolegów i czuć się z tym dobrze, jednak <b>jest to wyraz niedojrzałości</b>.'
         '<br>'
-        '<br>Wychowanie duchowe na poziomie aksjomatu musi doprowadzić do świadomej, spójnej wiary w “coś”. Ignorowanie potrzeby posiadania spójnego aksjomatu nie jest wyrazem inkluzywności i tolerancji, ale ignorancji i infantylizmu.'
+        '<br>Ludzie mogą być też motywowani różnymi meta-narracjami. Niektóre mogą być absurdalne, czy trywialne, np.: "Musimy dzielić się bogactwem, bo był kiedyś kolonializm". Nie zmienia to faktu, że dla kogoś może być to odpowiedzią na wszystkie życiowe rozterki. Nie należy jednak sądzić, że w ogólności ludzie pójdą za każdą meta-narracją. Nie wszystkie meta-narracja kończą się dla człowieka dobrze. Nie bez przyczyny za niektórymi meta-narracjami poszły miliardy ludzi, a inne wygasły po dwóch pokoleniach.'
+        '</i>'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<i>'
+        '<u>Jakie aksjomaty powinny być podstawą duchowości ateistów w ZHP?</u>'
         '<br>'
-        '<br>Może drogą do przodu nie jest zmiana cywilizacyjnych wartości, których się nie rozumiemy, ale próba ich zinternalizowania w nowych warunkach, w których przyszło nam żyć.'
+        '<br>Nie wiem. I prawdopodobnie nikt nie wie. Cała nasza zachodnia cywilizacja została zbudowana na aksjomatach chrześcijańskich. Została uksztaltowana przez życia miliardów ludzi, na przestrzeni tysięcy lat, przez myślicieli i filozofów większych od wszystkich tu obecnych. Czy można to wszystko porzucić i liczyć na to, że "wymyśli się" coś równie dobrego w kilka lat?'
+        '<br>'
+        '<br>Myśl, że można utrzymać świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, ale pozbyć się fundamentów, na których powstały wydaje się być <b>co najmniej wielką nieodpowiedzialnością</b>.'
+        '</i>'
+        '</p>'
+        '</li>'
+
+        '</ol>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący powinien pozwolić, by fundamentalny brak odpowiedzi na pytanie "co dla ateistów" wybrzmiał wsród uczestników. <b>Odpowiedź na nie padnie na warsztatach, nie dlatego, że ktoś chce ją ukryć. Nie padnie, bo próba potraktowania tego pytania poważnie ma karkołomne, a być może niemożliwe do utrzymania konsekwencje</b>, niezależnie od poglądów obecnych tu osób.'
         '</p>'
 );
 
@@ -972,7 +1020,7 @@ KonspektStep _step_duchowosc_w_zhp_podsumowanie = KonspektStep(
         '<li><p style="text-align:justify;">Nie istnieje neutralne wychowanie.</p></li>'
         '<li><p style="text-align:justify;">Jeśli harcerstwo chce być skuteczne wychowawczo, nie może abdykować z rozwoju duchowego na poziomie aksjomatu.</p></li>'
         '<li><p style="text-align:justify;">Harcerskie wychowanie jest fundamentalnie chrześcijańskie, nawet jeśli jego członkowie są innego wyznania.</p></li>'
-        '<li><p style="text-align:justify;">Nie należy zbyt łatwo pomijać elementów tradycyjnej duchowości, których jako kadra nie rozumiemy (jako kadra). Zazwyczaj stoją za nimi dziesiątki wieków mądrości.</p></li>'
+        '<li><p style="text-align:justify;">Nie należy zbyt łatwo pomijać elementów tradycyjnej duchowości, których jako kadra nie rozumiemy. Zazwyczaj stoją za nimi dziesiątki wieków mądrości.</p></li>'
         '<li><p style="text-align:justify;">Harcerstwo powinno mieć wysokie standardy. Nie po to, by prowadzić selekcję osób mogących harcerzami zostać, ale po to, by wychować ludzi w szacunku do wartości, postaw, a często również wiary, która dała nam świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, itd..</p></li>'
         '</ul>'
 
@@ -993,9 +1041,11 @@ KonspektStep _step_duchowosc_w_zhp_podsumowanie = KonspektStep(
 KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
     title: 'Duchowość w ZHP',
     steps: [
+      _step_duchowosc_w_zhp_dokumenty,
+
       _step_duchowosc_w_zhp_aksjoamty,
 
-      _step_duchowosc_w_zhp_dokumenty,
+      _step_duchowosc_w_zhp_ateisci,
 
       _step_duchowosc_w_zhp_podsumowanie,
     ]

@@ -501,7 +501,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           steps: [
             KonspektStep(
                 title: 'Praktyka wychowania duchowego - kratka i formy',
-                duration: Duration(minutes: 45),
+                duration: Duration(minutes: 30),
                 activeForm: true,
                 content: '<p style="text-align:justify;">'
                     'Uczestnicy otrzymują w grupach po jednym załączniku $attach_html_kratka_minimow_rozwoju_duchowego. Otrzymują również wydrukowane i wycięte formy z załącznika $attach_html_formy.'

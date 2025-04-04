@@ -79,16 +79,16 @@ class TitleShortcutRowWidget extends StatelessWidget{
               ),
             ):
             selectable?
-            Text(
-              title,
-              style: style,
-              textAlign: textAlign,
-            ):
             SelectableText(
               title,
               style: style,
               textAlign: textAlign,
-            ),
+            ):
+            Text(
+              title,
+              style: style,
+              textAlign: textAlign,
+            )
         ),
 
         if(trailing != null)
