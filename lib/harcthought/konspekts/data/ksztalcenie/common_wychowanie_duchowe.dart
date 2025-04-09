@@ -756,7 +756,7 @@ KonspektStep _step_neutralnosc_duchowa_galeria_sztuki = KonspektStep(
       material_tasma_klejaca,
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący (najlepiej przed przystąpieniem do formy) rozwiesza na różnych ścianach kartki z załącznika $attach_html_neutralnosc_duchowa_przyklady. Wszystkie kartki zawierają scenariusze sytuacji wychowawczych z udziałem instruktora harcerskiego.'
+        'Prowadzący (najlepiej przed przystąpieniem do formy) rozwiesza na różnych ścianach kartki z załącznika $attach_html_neutralnosc_duchowa_przyklady (jeśli jest taka możliwość i pogoda temu sprzyja, warto rozwiesić kartki na zewnątrz, żeby przewietrzyć uczestników!). Wszystkie kartki zawierają scenariusze sytuacji wychowawczych z udziałem instruktora harcerskiego.'
         '<br>'
         '<br>Uczestnicy mają 15 minut, aby przejść się między wszystkimi scenariuszami, przeczytać je, po czym odpowiedzieć do każdego na dwa pytania:'
         '<br>'
@@ -833,11 +833,11 @@ KonspektStep _step_neutralnosc_analogia_do_ogrodnikow = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Jeśli uczestnicy mają problem ze zrozumieniem, dlaczego zarówno działanie wychowawcze jak i jego brak zawsze kształtuje duchowość wychowanków, prowadzący może przedstawić uczestnikom użyteczną analogię:'
         '<br>'
-        '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się ona kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instruktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im określony kształt.</i>'
+        '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instruktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im kształt w określonym stylu.</i>'
         '<br>'
-        '<br>W analogii należy podkreślić, że niezależnie od działania ogrodnika, <b>krzew zawsze ma jakiś kształt</b>. Krzew nabywa określonego kształtu, także wtedy, gdy ogrodnik nic nie robi.'
+        '<br>Krzew <b>zawsze nabywa jakiegoś kształtu</b>, także wtedy, gdy ogrodnik nic nie robi. Nie da się być rośliną nie mając jakiegoś kształtu. Tak samo, jak nie nie da się mówić nie użyjąc jakiegoś języka.'
         '<br>'
-        '<br>Harcerstwo jest przedsięwzięciem kształtowania ludzi. W sposób oczywisty kształtuje ich według określonych zasad (np. zasad PH). Wokół faktu, że harcerstwo kształtuje przekonania i wartości młodego człowieka w określonym kierunku narosła dziwna i niepotrzebna kontrowersja - ale <b>bez celowego kształtowania duchowości harcerzy harcerstwo nie ma najmniejszego sensu.</b>.'
+        '<br>Harcerstwo jest przedsięwzięciem kształtowania ludzi. Wokół faktu, że harcerstwo kształtuje przekonania i wartości młodego człowieka w określonym kierunku narosła dziwna i niepotrzebna kontrowersja - ale <b>bez celowego kształtowania duchowości harcerzy harcerstwo nie ma najmniejszego sensu.</b>.'
         '</p>'
 );
 
@@ -871,6 +871,27 @@ KonspektStep _step_duchowosc_w_zhp_dokumenty = KonspektStep(
     material_zal_cel_wychowania_duchowego_zhp_statut,
     material_zal_cel_wychowania_duchowego_zhp_uchwala
   ]
+);
+
+KonspektStep _step_duchowosc_w_zhp_dobrowolnosc = KonspektStep(
+    title: 'Duchowość w ZHP - dobrowolność',
+    duration: Duration(minutes: 5),
+    activeForm: false,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący zwraca uwagę uczestników na następujący dylemat:'
+        '<br>'
+        '<br><i>Czyli mamy w ZHP określoną duchowość zapisaną w statucie - fajnie. Ale jak się to ma do faktu, że cechą metody harcerskiej jest dobrowolność?</i>'
+        '<br>'
+        '<br>Uczestnicy powinni znać rozwiązanie tego dylamatu, jeśli byli na kursie przewodnikowskim. Po krótkiej dyskusji prowadzący rozwiązuje zagadkę, o ile któryś z uczestników nie rozwiązał jej poprawnie wcześniej:'
+        '<br>'
+        '<br><i>Dobrowolność nie <b>cechą celu wychowania</b> w ZHP, tylko <b>cechą metody</b>, czyli cechą narzędzi, które mają doprowadzić do celu.'
+        '<br>'
+        '<br>Dobrowolność jest stosowana w ZHP, ponieważ jest skuteczniej jest wychować młodego człowieka do określonych wartości jeśli ma poczucie, że to on je wybiera, niż kiedy ma poczucie, że jest mu to zadane. Nie oznacza to jednak, że w ZHP istnieje dobrowolność celu wychowania.</i>'
+        '</p>',
+    materials: [
+      material_zal_cel_wychowania_duchowego_zhp_statut,
+      material_zal_cel_wychowania_duchowego_zhp_uchwala
+    ]
 );
 
 KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
@@ -1046,6 +1067,8 @@ KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
     title: 'Duchowość w ZHP',
     steps: [
       _step_duchowosc_w_zhp_dokumenty,
+
+      _step_duchowosc_w_zhp_dobrowolnosc,
 
       _step_duchowosc_w_zhp_aksjoamty,
 
