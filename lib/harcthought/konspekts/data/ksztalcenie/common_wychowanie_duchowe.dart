@@ -886,7 +886,11 @@ KonspektStep _step_duchowosc_w_zhp_dobrowolnosc = KonspektStep(
         '<br>'
         '<br><i>Dobrowolność nie <b>cechą celu wychowania</b> w ZHP, tylko <b>cechą metody</b>, czyli cechą narzędzi, które mają doprowadzić do celu.'
         '<br>'
-        '<br>Dobrowolność jest stosowana w ZHP, ponieważ jest skuteczniej jest wychować młodego człowieka do określonych wartości jeśli ma poczucie, że to on je wybiera, niż kiedy ma poczucie, że jest mu to zadane. Nie oznacza to jednak, że w ZHP istnieje dobrowolność celu wychowania.</i>'
+        '<br>Dobrowolność jest stosowana w ZHP, ponieważ skuteczniej jest wychować młodego człowieka do określonych wartości, gdy ma poczucie, że to on je wybiera, niż kiedy ma poczucie, że jest mu to zadane. Nie oznacza to jednak, że w ZHP istnieje dobrowolność celu wychowania.</i>'
+        '<br>'
+        '<br>Dobrowolność jako narzędzie ma także drugą rolę:'
+        '<br>'
+        '<br><i>Jeśli jakieś działanie wychowawcze nie cieszy się entuzjazmem wychowanków, to jest to sygnał, że jego forma nie jest atrakcyjna, a przez to jest mniej skuteczna. Skonstatowanie tego w sytuacji braku dobrowolności byłoby dużo trudniejsze.</i>'
         '</p>',
     materials: [
       material_zal_cel_wychowania_duchowego_zhp_statut,
