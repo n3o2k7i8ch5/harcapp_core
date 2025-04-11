@@ -3,12 +3,13 @@ import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 enum HarcFormTag{
-  argumentacja, integracja, kara, kontuzjogenne, muzyczne, orientacjaWTerenie,
+  argumentacja, depolaryzacja, integracja, kara, kontuzjogenne, muzyczne, orientacjaWTerenie,
   podzialNaGrupy, ruchowe, sprawdzanieWiedzy, wspolzawodnictwo, wyjazdowe, zespolowe;
 
   String get text{
    switch(this){
      case argumentacja: return 'Argumentacja';
+     case depolaryzacja: return 'Depolaryzacja';
      case integracja: return 'Integracja';
      case kara: return 'Kara';
      case kontuzjogenne: return 'Kontuzjogenne';
@@ -26,6 +27,7 @@ enum HarcFormTag{
   IconData get icon{
     switch(this){
       case argumentacja: return MdiIcons.commentText;
+      case depolaryzacja: return MdiIcons.hexagonMultiple;
       case integracja: return MdiIcons.handshake;
       case kara: return MdiIcons.alertCircle;
       case kontuzjogenne: return MdiIcons.accountInjury;

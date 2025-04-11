@@ -266,4 +266,14 @@ List<HarcForm> allForms = [
       colorEnd: Colors.deepPurple[700]!
   ),
 
+  HarcForm(
+      filename: 'wykrecona_dyskusja',
+      title: 'Wykręcona dyskusja',
+      icon: MdiIcons.forumOutline,
+      metos: [Meto.hs, Meto.wedro],
+      tags: [HarcFormTag.zespolowe, HarcFormTag.depolaryzacja],
+      colorStart: Colors.grey[200]!,
+      colorEnd: Colors.grey[800]!
+  ),
+
 ];
