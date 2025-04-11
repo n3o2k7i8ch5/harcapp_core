@@ -393,6 +393,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                     '<li><p style="text-align:justify;"><i>Zdolność negocjowania swojej roli społecznej</i></p></li>'
                     '<li><p style="text-align:justify;"><i>Zdolność budowania więzi zależności i wsparcia</i></p></li>'
                     '<li><p style="text-align:justify;"><i>Zdolność kompromitacji pozycji drugiej osoby w oczach społeczności</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Posiadanie rodziny</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Posiadanie znajomych</i></p></li>'
+                    '<li><p style="text-align:justify;"><i>Bycie w związku</i></p></li>'
                     '</ul>'
             ),
 
