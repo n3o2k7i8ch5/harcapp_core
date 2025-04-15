@@ -170,8 +170,58 @@ Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
   ),
 );
 
+const String poradnik_name_wychowanie_przez_wysmianie = "wychowanie_przez_wysmianie";
+const String poradnik_title_wychowanie_przez_wysmianie = "Wychowanie przez wyśmianie";
+Poradnik poradnik_wychowanie_przez_wysmianie = Poradnik(
+  name: poradnik_name_wychowanie_przez_wysmianie,
+  title: poradnik_title_wychowanie_przez_wysmianie,
+  pageCount: 25,
+  description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące m.in. zagadnienia:'
+      '\n'
+      '\nJak komunikować się z grupami nastolatków, gdzie wszystko jest sprowadzane do memu, żartu i jest aktywnie obśmiewane?',
+  coverTitle: 'WYCHOWANIE\nPRZEZ WYŚMIANIE',
+  formats: [FileFormat.pdf, FileFormat.docx],
+  titleColor: Colors.white,
+  coverTitleBuilder: (context, poradnik, width, height) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+
+      Text(
+        'WYCHOWANIE\nPRZEZ WYŚMIANIE',
+        style: AppTextStyle(
+            color: poradnik.titleColor??Colors.black,
+            fontSize: height*Poradnik.mainTitleHeightFactor,
+            fontWeight: weight.halfBold
+        ),
+        textAlign: TextAlign.center,
+      ),
+
+      SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+      Container(
+        width: width*0.63,
+        height: height*0.003,
+        color: poradnik.titleColor??Colors.black,
+      ),
+
+      SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+      Text(
+        'Poradnik w pracy wychowawczej',
+        style: AppTextStyle(
+          color: poradnik.titleColor??Colors.black,
+          fontSize: height*Poradnik.subTitleHeightFactor,
+        ),
+        textAlign: TextAlign.center,
+      ),
+
+    ],
+  ),
+);
+
 List<Poradnik> allPoradniks = [
   poradnik_o_strukturze_duchowosci,
   poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich,
+  poradnik_wychowanie_przez_wysmianie,
 ];

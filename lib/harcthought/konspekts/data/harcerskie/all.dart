@@ -1883,7 +1883,10 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Podjęcie przez uczestników refleksji nad sensem i celem życia'
       ],
       summary: 'Uczestnik rozmawia z różnymi osobami w podeszłym wieku na temat ich życia, tego co było dla nich najważniejsze, czego żałowali.',
-      description: '<p style="text-align:justify;">Uczestnik znajduje pięć osób po 60. roku życia o różnych przeszłościach i odbywa z nimi rozmowy na temat ich życia oraz (zwłaszcza!) tego, co według nich jest w życiu najważniejsze, z czego się najbardziej cieszą, czego najbardziej żałują. Forma ma na celu dać uczestnikowi możliwość spojrzenia na rzeczywistość oczami kogoś, kto dobrze ją zna i kto większość swojego życia ma już za sobą.'
+      description: '<p style="text-align:justify;">'
+          'Uczestnik znajduje pięć osób po 60. roku życia o różnych przeszłościach i odbywa z nimi rozmowy na temat ich życia oraz (zwłaszcza!) tego, co według nich jest w życiu najważniejsze, z czego się najbardziej cieszą, czego najbardziej żałują. Forma ma na celu dać uczestnikowi możliwość spojrzenia na rzeczywistość oczami kogoś, kto dobrze ją zna i kto większość swojego życia ma już za sobą.'
+          '<br>'
+          '<br>Warto, aby prowadzący formę miał okazję zweryfikować osoby, z którymi planują porozmawiać uczestnicy. Najlepiej, aby nie były to osoby zupełnie nieznane. Formę można także przeprowadzić w małych grupach (dwu- lub trzyosobowych, maksymalnie w ramach jednego zastępu).'
           '<br>'
           '<br>Uczestnicy do tej formy muszą posiadać potrzebne umiejętności komunikacyjne, by umieli prowadzić rozmowę, a nie tylko “odpytkę”. Jeżeli nie uda im się nawiązać szczerej, mimo, że krótkiej relacji, forma będzie bezcelowa. Wskazane jest z tego względu, by wybrane osoby były otwarte na rozmowy z harcerzami - byli instruktorzy, kombatanci, osoby, które pełniły w ZHP w państwie Polskim funkcje. Wskazane jest także, aby uczestnik formy przygotował strategię rozmowy, która pozwoli mu przejść od tego, czym rozmówca się zajmował do jego ducha.</p>',
       howToFail: [
@@ -2972,6 +2975,15 @@ List<Konspekt> allHarcerskieKonspekts = [
             amount: 0
         )
       ],
+      description: '<p style="text-align:justify;">'
+          'Forma dobrze się nadaje na okres świąt Wszystkich Świętych.'
+          '<br>'
+          '<br>Prowadzący, obawiając się, czy perspektywa śmierci nie przytłoczy części uczestników powinien spojrzeć na ten dylemat z dwóch perspektyw:'
+          '</p>'
+          '<ul>'
+          '<li><p style="text-align:justify;">forma może być przeprowadzona z wyraźnym zaznaczeniem uczestnikom jej dobrowolności.</p></li>'
+          '<li><p style="text-align:justify;">śmierć jest i będzie obecna w otoczeniu uczestników. Zamiast ją cenzurować, lepiej ich do niej przygotować w kontrolowanym środowisku.</p></li>'
+          '</ul>',
       summary: 'Uczestnicy wykonują z dostępnych materiałów dwa modele własnych nagrobków - pierwszy to taki, jakby chcieliby by podsumowywał ich życie, drugi to taki, który uważają, że teraz by im postawiono, gdyby umarli jutro.',
       steps: [
 
@@ -3087,11 +3099,13 @@ List<Konspekt> allHarcerskieKonspekts = [
         'Kształtowanie u uczestników postaw dbania o zdrowie',
       ],
       summary: 'Uczestnicy wspólnie jedzą po jednym ząbku czosnku, jednak po jego rozgryzieniu nie mogą go przełknąć przez jedną minutę.',
-      description: '<p style="text-align:justify;">Grupa osób bierze po ząbku czosnku i staje w kręgu. Na dany znak wszyscy zaczynają jeść ząbek czosnku (rozgryzając go), jednak przełknąć i popić go można dopiero po minucie. Przegrywają Ci, którzy przełkną czosnek wcześniej. Ponieważ jest to forma wspólnego trudu, kształtuje też wartości związane ze wspólnotą.'
+      description: '<p style="text-align:justify;">Grupa osób bierze po ząbku czosnku i staje w kręgu. Na dany znak wszyscy zaczynają jeść ząbek czosnku (rozgryzając go), jednak przełknąć i popić go można dopiero po minucie. Przegrywają ci, którzy przełkną czosnek wcześniej. Ponieważ jest to forma wspólnego trudu, kształtuje też wartości związane ze wspólnotą.'
           '<br>'
           '<br>Jeśli prowadzący uzna to za stosowne, a uczestnicy są odpowiednio duzi (ok, 15+), może w ten sposób naturalnie skomentować podobieństwo jedzenia czosnku do picia wódki - oba pieką, oba trzeba popić, oba dezynfekują, ale jeden wzmacnia odporność, a drugi niszczy wątrobę i mózg.'
           '<br>'
-          '<br>Formę można przeprowadzać <b>maksymalnie</b> raz dziennie - więcej niż jeden ząbek czosnku na dobrę może podrażnić żołądek.</p>'
+          '<br>Szczególnie dla tej formy warto zadbać o jej dobrowolność - pomaga to budować poczucie elitarności osób podejmujących rywalizację i wspólne wyzwania.'
+          '<br>'
+          '<br>Formę można przeprowadzać <b>maksymalnie</b> raz dziennie - więcej niż jeden ząbek czosnku na dobę może podrażnić żołądek.</p>'
   ),
 
 
