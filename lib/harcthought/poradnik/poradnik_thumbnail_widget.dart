@@ -30,7 +30,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
 
   final double titleHeightPaddingFraction;
   final double titleHorizontalPaddingFraction;
-git
+
   PoradnikThumbnailWidget(
       this.poradnik,
       { this.width,
