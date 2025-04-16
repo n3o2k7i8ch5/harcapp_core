@@ -37,6 +37,7 @@ List<Person> allPeople = [
   ALICJA_MAJCHER,
   ALICJA_NOWOSAD,
   AMELIA_KALICKA,
+  AMELIA_SITNICKA,
   AMELIA_SZALEWICZ,
   ANNA_RAJEWSKA,
   ANTONI_ATANASSOW,
@@ -221,6 +222,7 @@ List<Person> allPeople = [
   KORNEL_DABKOWSKI,
   KORNEL_GOLEBIEWSKI,
   KORNELIA_KASIBORSKA,
+  KORNELIA_MROWKA,
   KORNELIA_PRZYCZOLKA,
   KRYSTIAN_BULANDA,
   KRZYSZTOF_BANIK,
@@ -679,9 +681,17 @@ const Person AMELIA_KALICKA = Person(
     org: Org.zhr,
     email: ['amelkal678@gmail.com']
 );
+const Person AMELIA_SITNICKA = Person(
+    name: 'Amelia Sitnicka',
+    druzyna: '112. WDH „Czirokezi”',
+    hufiec: huf_zhp_warszawa_praga_pd,
+    rankHarc: RankHarc.zhpSamarytanka,
+    org: Org.zhp,
+    email: ["ameliasitnicka787@gmail.com"]
+);
 const Person AMELIA_SZALEWICZ = Person(
     name: 'Amelia Szalewicz',
-    druzyna: '16. Astra',
+    druzyna: '16. „Astra”',
     hufiec: huf_zhp_lowicz,
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
@@ -695,7 +705,7 @@ const Person ANNA_RAJEWSKA = Person(
 );
 const Person ANTONI_ATANASSOW = Person(
     name: 'Antoni Atanassow',
-    druzyna: '5. PgDH “Eastwick” im. Zawiszy Czarnego',
+    druzyna: '5. PgDH „Eastwick” im. Zawiszy Czarnego',
     hufiec: huf_zhp_krakow_pdg,
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
@@ -703,7 +713,7 @@ const Person ANTONI_ATANASSOW = Person(
 );
 const Person ANTONINA_KARMANSKA = Person(
     name: 'Szczurowa',
-    druzyna: '123. WSH "Za horyzontem"',
+    druzyna: '123. WSH „Za horyzontem”',
     hufiec: huf_zhp_warszawa_zoliborz,
     org: Org.zhp,
     email: ['tosia.karmanska@gmail.com']
@@ -936,7 +946,7 @@ const Person FILIP_BERGIER = Person(
     druzyna: '72. WDHS „Uroczysko”',
     hufiec: huf_zhp_warszawa_praga_pn,
     org: Org.zhp,
-    email: ['janberg7272@gmail.com', 'filip.bergier@zhp.net.pl']
+    email: ['janberg7272@gmail.com', 'filip.bergier@zhp.net.pl', 'filip.bergier111@gmail.com']
 );
 const Person FILIP_BRASZEWSKI = Person(
     name: 'Filip Brąszewski',
@@ -1854,6 +1864,14 @@ const Person KORNELIA_KASIBORSKA = Person(
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["korneliakasiborska76@gmail.com"]
+);
+const Person KORNELIA_MROWKA = Person(
+    name: 'Kornelia Mrówka',
+    druzyna: '11 DH Ragnar im Jana Bytnara w Sierakowie',
+    hufiec: huf_zhp_miedzychod,
+    rankHarc: RankHarc.dhd,
+    org: Org.zhp,
+    email: ["kornelia.mrowka1@gmail.com"]
 );
 const Person KORNELIA_PRZYCZOLKA = Person(
   name: 'Kornelia Przyczółka',
