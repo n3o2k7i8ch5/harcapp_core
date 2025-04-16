@@ -55,6 +55,11 @@ KonspektMaterial material_poradnik_o_strukturze_duchowosci = KonspektMaterial(
   attachmentName: attach_name_poradnik_o_strukturze_duchowosci,
 );
 
+KonspektMaterial material_poradnik_przykladowa_strategia_rozwoju_duchowego = KonspektMaterial(
+  name: 'Dostępny do przygotowania merytorycznego $attach_title_poradnik_przykladowa_strategia_rozwoju_duchowego',
+  attachmentName: attach_name_poradnik_przykladowa_strategia_rozwoju_duchowego,
+);
+
 KonspektMaterial material_identyfikator = KonspektMaterial(
   name: 'Identyfikator',
   amountAttendantFactor: 1,
@@ -161,6 +166,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
     ],
     attachments: [
       attach_poradnik_o_strukturze_duchowosci,
+      attach_poradnik_przykladowa_strategia_rozwoju_duchowego,
 
       attach_karty_poziomow_duchowosci,
       attach_karty_zdolnosci_integracji_duchowosci,
@@ -187,6 +193,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
     materials: [
 
       material_poradnik_o_strukturze_duchowosci,
+      material_poradnik_przykladowa_strategia_rozwoju_duchowego,
 
       material_identyfikator,
 
@@ -593,6 +600,22 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                     '</p>',
                 materials: [
                   material_zal_planowanie_strategii_i_dzialan,
+                ]
+            ),
+
+            KonspektStep(
+                title: 'Planowanie wychowania duchowego - przykladowa strategia',
+                duration: Duration(minutes: 15),
+                activeForm: false,
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący prezentuje uczestnikom przykładową strategię rozwoju duchowego drużyny, która jest opisana w załączniku $attach_html_poradnik_przykladowa_strategia_rozwoju_duchowego.'
+                    '<br>'
+                    '<br>Zadaniem uczestników jest stworzenie strategii o podobnej formie dla jednostek, które wybrali w poprzednim kroku.'
+                    '<br>'
+                    '<br>Prowadzący po zakończeniu przedstawiania przykładowej strategii mówi, że <b>jest dostępna w aplikacji HarcApp jako poradnik</b> i uczestnicy mogą w każdej chwili do niej zajrzeć.'
+                    '</p>',
+                materials: [
+                  material_poradnik_przykladowa_strategia_rozwoju_duchowego
                 ]
             ),
 
