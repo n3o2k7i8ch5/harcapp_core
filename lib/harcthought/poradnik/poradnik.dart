@@ -12,6 +12,7 @@ class Poradnik{
   final int pageCount;
   final String description;
   final String? coverTitle;
+  final String? coverSource;
   final List<FileFormat> formats;
   final Color? titleColor;
   final Widget Function(BuildContext context, Poradnik poradnik, double width, double height)? coverTitleBuilder;
@@ -22,6 +23,7 @@ class Poradnik{
     required this.pageCount,
     required this.description,
     this.coverTitle,
+    this.coverSource,
     required this.formats,
     this.titleColor,
     this.coverTitleBuilder,

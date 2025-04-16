@@ -16,6 +16,7 @@ Poradnik poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Poradnik(
       '\n'
       '\nJakie mechanizmy i zjawiska wpływają na rozwój duchowy?',
   coverTitle: 'CZYNNIKI I MECHANIZMY\nKSZTAŁTOWANIA\nDUCHOWOŚCI',
+  coverSource: 'Freepik (freepik)',
   formats: [FileFormat.pdf, FileFormat.docx],
   titleColor: Colors.black,
   coverTitleBuilder: (context, poradnik, width, height) => Column(
@@ -72,6 +73,7 @@ Poradnik poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich = Poradnik(
       '\n'
       '\nJak przeprowadić proces wyboru i złożenia Przyrzeczenia Harcerskiego?',
   coverTitle: 'DWIE ROTY\nDWÓCH PRZYRZECZEŃ',
+  coverSource: 'Daniel Iwanicki',
   formats: [FileFormat.pdf, FileFormat.docx],
   titleColor: Colors.white,
   coverTitleBuilder: (context, poradnik, width, height) => Column(
@@ -131,6 +133,7 @@ Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
       '\n'
       '\nJak w sposób skuteczny pracować nad duchowością młodego człowieka?',
   coverTitle: 'O STRUKTURZE\nDUCHOWOŚCI',
+  coverSource: 'Daniel Iwanicki',
   formats: [FileFormat.pdf, FileFormat.docx],
   titleColor: Colors.black,
   coverTitleBuilder: (context, poradnik, width, height) => Column(
@@ -170,16 +173,65 @@ Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
   ),
 );
 
+const String poradnik_name_przykladowa_strategia_rozwoju_duchowego = "przykladowa_strategia_rozwoju_duchowego";
+const String poradnik_title_przykladowa_strategia_rozwoju_duchowego = "Przykładowa strategia rozwoju duchowego";
+Poradnik poradnik_przykladowa_strategia_rozwoju_duchowego = Poradnik(
+  name: poradnik_name_przykladowa_strategia_rozwoju_duchowego,
+  title: poradnik_title_przykladowa_strategia_rozwoju_duchowego,
+  pageCount: 15,
+  description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), przedstawiajacy przykładową strategię kształtowania u wychowanków określonej duchowości',
+  coverTitle: 'PRZYKŁADOWA STRATEGIA\nROZWOJU DUCHOWEGO',
+  coverSource: 'Freepik (freepik)',
+  formats: [FileFormat.pdf, FileFormat.docx],
+  titleColor: Colors.white,
+  coverTitleBuilder: (context, poradnik, width, height) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+
+      Text(
+        'PRZYKŁADOWA STRATEGIA\nROZWOJU DUCHOWEGO',
+        style: AppTextStyle(
+            color: poradnik.titleColor??Colors.black,
+            fontSize: height*Poradnik.mainTitleHeightFactor,
+            fontWeight: weight.halfBold
+        ),
+        textAlign: TextAlign.center,
+      ),
+
+      SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+      Container(
+        width: width*0.63,
+        height: height*0.003,
+        color: poradnik.titleColor??Colors.black,
+      ),
+
+      SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+      Text(
+        'Poradnik w pracy wychowawczej',
+        style: AppTextStyle(
+          color: poradnik.titleColor??Colors.black,
+          fontSize: height*Poradnik.subTitleHeightFactor,
+        ),
+        textAlign: TextAlign.center,
+      ),
+
+    ],
+  ),
+);
+
 const String poradnik_name_wychowanie_przez_wysmianie = "wychowanie_przez_wysmianie";
 const String poradnik_title_wychowanie_przez_wysmianie = "Wychowanie przez wyśmianie";
 Poradnik poradnik_wychowanie_przez_wysmianie = Poradnik(
   name: poradnik_name_wychowanie_przez_wysmianie,
   title: poradnik_title_wychowanie_przez_wysmianie,
-  pageCount: 25,
+  pageCount: 5,
   description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące m.in. zagadnienia:'
       '\n'
       '\nJak komunikować się z grupami nastolatków, gdzie wszystko jest sprowadzane do memu, żartu i jest aktywnie obśmiewane?',
   coverTitle: 'WYCHOWANIE\nPRZEZ WYŚMIANIE',
+  coverSource: 'Freepik (freepik)',
   formats: [FileFormat.pdf, FileFormat.docx],
   titleColor: Colors.white,
   coverTitleBuilder: (context, poradnik, width, height) => Column(
@@ -223,5 +275,6 @@ List<Poradnik> allPoradniks = [
   poradnik_o_strukturze_duchowosci,
   poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich,
+  poradnik_przykladowa_strategia_rozwoju_duchowego,
   poradnik_wychowanie_przez_wysmianie,
 ];
