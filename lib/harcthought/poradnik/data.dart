@@ -183,7 +183,7 @@ Poradnik poradnik_przykladowa_strategia_rozwoju_duchowego = Poradnik(
   coverTitle: 'PRZYKŁADOWA STRATEGIA\nROZWOJU DUCHOWEGO',
   coverSource: 'Freepik (freepik)',
   formats: [FileFormat.pdf, FileFormat.docx],
-  titleColor: Colors.white,
+  titleColor: Colors.black,
   coverTitleBuilder: (context, poradnik, width, height) => Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
