@@ -16,7 +16,7 @@ KonspektAttachment attach_poradnik_o_strukturze_duchowosci = KonspektAttachment(
   },
 );
 
-const String attach_html_poradnik_przykladowa_strategia_rozwoju_duchowego = '<a href="$attach_name_poradnik_o_strukturze_duchowosci@attachment">$attach_title_poradnik_o_strukturze_duchowosci</a>';
+const String attach_html_poradnik_przykladowa_strategia_rozwoju_duchowego = '<a href="$attach_name_poradnik_przykladowa_strategia_rozwoju_duchowego@attachment">$attach_title_poradnik_przykladowa_strategia_rozwoju_duchowego</a>';
 const String attach_name_poradnik_przykladowa_strategia_rozwoju_duchowego = 'przykladowa_strategia_rozwoju_duchowego';
 const String attach_title_poradnik_przykladowa_strategia_rozwoju_duchowego = 'Poradnik "$poradnik_title_przykladowa_strategia_rozwoju_duchowego"';
 KonspektAttachment attach_poradnik_przykladowa_strategia_rozwoju_duchowego = KonspektAttachment(
