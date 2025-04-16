@@ -38,7 +38,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
         this.elevation = 0,
         this.radius = AppCard.defRadius,
         this.titleHeightPaddingFraction = 0.10,
-        this.titleHorizontalPaddingFraction = 0.12,
+        this.titleHorizontalPaddingFraction = 0.11,
         this.onTap,
         this.onFormatTap,
         this.showDownloadFormats = true,
