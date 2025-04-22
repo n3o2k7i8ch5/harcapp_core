@@ -169,13 +169,13 @@ abstract class SongCore{
       return _title;
 
     String _performer = remPolChars(performers[0]).trim()
+        .replaceAll(':', ' ')
+        .replaceAll('-', ' ')
         .replaceAll(' ', '_')
-        .replaceAll('-', '_')
         .replaceAll(',', '')
         .replaceAll('.', '')
         .replaceAll('(', '')
         .replaceAll(')', '')
-        .replaceAll(':', '')
         .replaceAll(';', '')
         .replaceAll('"', '')
         .replaceAll('„', '')
