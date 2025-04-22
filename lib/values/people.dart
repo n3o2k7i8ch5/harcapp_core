@@ -161,6 +161,7 @@ List<Person> allPeople = [
   JOANNA_MICHALOWSKA,
   JOANNA_PAJAK,
   JOANNA_RACZKO,
+  JOANNA_WALENDZIK,
   JOLA_RYS,
   JOWITA_BUCZYNSKA,
   JULIA_BIENIEK,
@@ -208,7 +209,9 @@ List<Person> allPeople = [
   KAROL_GOLABEK,
   KAROL_MALINSKI,
   KAROL_MALUS,
+  KATARZYNA_BIALAS,
   KATARZYNA_LISAK,
+  KATARZYNA_MAZUR,
   KATARZYNA_POLANSKA_WILK,
   KATARZYNA_STUDNICKA,
   KINGA_BABIARSKA,
@@ -246,6 +249,7 @@ List<Person> allPeople = [
   LUKASZ_SZEPIELAK,
   LUKASZ_KRYWULT,
   LUKASZ_RYBINSKI,
+  LUKASZ_WERNIK,
   MACIEJ_BATKO,
   MACIEJ_DOBROWOLSKI,
   MACIEJ_GRZELAZKA,
@@ -273,6 +277,7 @@ List<Person> allPeople = [
   MARCEL_MICHALIK,
   MARCEL_RYCHTER,
   MARCEL_WOZNIAK,
+  MARCELINA_SZYNDLER,
   MARCELINA_WILCZAK,
   MARCIN_JANKOWIAK,
   MARCIN_SOBKOWICZ,
@@ -354,6 +359,7 @@ List<Person> allPeople = [
   PATRYK_OLECH,
   PAULINA_BURDZIK,
   PAULINA_LUBOS,
+  PAULINA_PODGORSKA,
   PAWEL_KIMEL,
   PAWEL_MARUD,
   PAWEL_SZCZYGIEL,
@@ -368,6 +374,7 @@ List<Person> allPeople = [
   PIOTR_TUROWSKI,
   PIOTR_URBANIEC,
   PIOTR_ZIEMBIKIEWICZ,
+  POLA_MARCINKOWSKA,
   PRZEMYSLAW_KLUCZKOWSKI,
   PRZEMYSLAW_MROCZKOWSKI,
   RADOSLAW_JASZCZAK,
@@ -1505,6 +1512,14 @@ const Person JOANNA_RACZKO = Person(
     org: Org.zhp,
     email: ['joanna.raczko@zhp.net.pl']
 );
+const Person JOANNA_WALENDZIK = Person(
+    name: 'Joanna Walendzik',
+    druzyna: '111 Artystyczna Drużyna Harcerska',
+    hufiec: huf_zhp_starachowice,
+    rankHarc: RankHarc.zhpHRd,
+    org: Org.zhp,
+    email: ["joanna.walendzik@zhp.net.pl"]
+);
 const Person JOLA_RYS = Person(
     name: 'Jola Ryś',
     druzyna: '5. Drużyna „Dzieci Gór”',
@@ -1778,6 +1793,11 @@ const Person KAROL_MALINSKI = Person(
     email: ["karol.malinski@zhp.net.pl"]
 );
 const Person KAROL_MALUS = Person(name: 'Karol Malus', rankHarc: RankHarc.dhc);
+const Person KATARZYNA_BIALAS = Person(
+    name: 'Katarzyna Białas',
+    druzyna: 'IV SDH „Jutrzenka”',
+    email: ["katarzyna.bialas2010@gmail.com"]
+);
 const Person KATARZYNA_LISAK = Person(
     name: 'Katarzyna Lisak',
     druzyna: '88. DW „Wierchy”',
@@ -1785,6 +1805,13 @@ const Person KATARZYNA_LISAK = Person(
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ['katarzyna.lisak@zhp.net.pl']
+);
+const Person KATARZYNA_MAZUR = Person(
+    name: 'Katarzyna Mazur',
+    druzyna: '9. Próbna Drużyna Wędrownicza „Vigilo”',
+    rankHarc: RankHarc.zhpPionierka,
+    org: Org.zhp,
+    email: ["k.mazur@zhp.pl"]
 );
 const Person KATARZYNA_POLANSKA_WILK = Person(
   name: 'Katarzyna Polańska-Wilk',
@@ -2008,6 +2035,14 @@ const Person LUKASZ_SZTANDERA = Person(
 );
 const Person LUKASZ_KRYWULT = Person(name: 'Łukasz Krywult', rankHarc: RankHarc.zhpCwik, org: Org.zhp,);
 const Person LUKASZ_RYBINSKI = Person(name: 'Łukasz Rybiński', rankInstr: RankInstr.pwd);
+const Person LUKASZ_WERNIK = Person(
+    name: 'Łukasz Wernik',
+    druzyna: '3. DSH „Feniks”',
+    hufiec: huf_zhp_gostynin,
+    rankHarc: RankHarc.zhpCwik,
+    org: Org.zhp,
+    email: ["lukasz.wernik@zhp.pl", 'danzelrex0@gmail.com']
+);
 const Person MACIEJ_BATKO = Person(name: 'Maciej Batko', rankHarc: RankHarc.dhc,
   druzyna: '117. Elbląskiej Męskiej Drużyny Harcerskiej „Mato”',
   email: ['maciej.batko@uczen11.elblag.pl', 'maciemaciek160@gmail.com', 'maciut2007@gmail.com']
@@ -2201,6 +2236,10 @@ const Person MARCEL_WOZNIAK = Person(
   rankHarc: RankHarc.zhpCwik,
   org: Org.zhp,
   email: ['marcel.wozniak.144@gmail.com']
+);
+const Person MARCELINA_SZYNDLER = Person(
+  name: "Marcelina Szyndler",
+  email: ['marcelina.szyndler@gmail.com']
 );
 const Person MARCELINA_WILCZAK = Person(
     name: 'Marcelina Wilczak',
@@ -2754,6 +2793,15 @@ const Person PAULINA_LUBOS = Person(
   org: Org.sh,
   email: ['4ndhcasus@gmail.com'],
 );
+const Person PAULINA_PODGORSKA = Person(
+    name: 'Paulina Podgórska',
+    druzyna: '254 DW „Paloma”',
+    hufiec: 'Krapkowice',
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhpHOd,
+    org: Org.zhp,
+    email: ["paulina.podgorska@zhp.pl"]
+);
 const Person PAWEL_KIMEL = Person(
   name: 'Paweł Kimel',
   email: ['pawel.kimel@gmail.com']
@@ -2761,7 +2809,7 @@ const Person PAWEL_KIMEL = Person(
 const Person PAWEL_MARUD = Person(name: 'Piotr Marud');
 const Person PAWEL_SZCZYGIEL = Person(
     name: 'Paweł Szczygieł',
-    druzyna: '15. Radomska Drużyna Harcerska "Paszczaki"',
+    druzyna: '15. Radomska Drużyna Harcerska „Paszczaki"',
     hufiec: huf_zhp_radom_miasto,
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
@@ -2769,7 +2817,7 @@ const Person PAWEL_SZCZYGIEL = Person(
 );
 const Person PIOTR_BUKOWSKI = Person(
     name: 'Piotr Bukowski',
-    druzyna: '2. DH "Sokoły"',
+    druzyna: '2. DH „Sokoły”',
     hufiec: huf_zhp_milicz,
     rankHarc: RankHarc.zhpOdkrywca,
     org: Org.zhp,
@@ -2785,7 +2833,7 @@ const Person PIOTR_CHELMINIAK = Person(
 );
 const Person PIOTR_GASIOR = Person(
     name: 'Piotr Gąsior',
-    druzyna: '44. Drużyna Harcerska "Stella"',
+    druzyna: '44. Drużyna Harcerska „Stella”',
     hufiec: huf_zhp_myslowice,
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
@@ -2834,6 +2882,14 @@ const Person PIOTR_URBANIEC = Person(
   email: ['piotr23042006@gmail.com'],
 );
 const Person PIOTR_ZIEMBIKIEWICZ = Person(name: 'Piotr Ziembikiewicz', rankInstr: RankInstr.phm);
+const Person POLA_MARCINKOWSKA = Person(
+    name: 'Pola Marcinkowska',
+    druzyna: '2. DH „Mimo wszystko”',
+    hufiec: huf_zhp_krosno,
+    rankInstr: RankInstr.pwd,
+    org: Org.zhp,
+    email: ['polamarcinkowska2005@gmail.com']
+);
 const Person PRZEMYSLAW_KLUCZKOWSKI = Person(name: 'Przemysław Kluczkowski');
 const Person PRZEMYSLAW_MROCZKOWSKI = Person(
     name: 'Przemysław Mroczkowski',
