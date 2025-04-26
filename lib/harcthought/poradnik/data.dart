@@ -230,7 +230,7 @@ const String poradnik_title_wychowanie_przez_wysmianie = "Wychowanie przez wyśm
 Poradnik poradnik_wychowanie_przez_wysmianie = Poradnik(
   name: poradnik_name_wychowanie_przez_wysmianie,
   title: poradnik_title_wychowanie_przez_wysmianie,
-  pageCount: 5,
+  pageCount: 6,
   description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące m.in. zagadnienia:'
       '\n'
       '\nJak komunikować się z grupami nastolatków, gdzie wszystko jest sprowadzane do memu, żartu i jest aktywnie obśmiewane?',
