@@ -31,7 +31,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
   final double titleHeightPaddingFraction;
   final double titleHorizontalPaddingFraction;
 
-  PoradnikThumbnailWidget(
+  const PoradnikThumbnailWidget(
       this.poradnik,
       { this.width,
         this.height,
@@ -45,6 +45,8 @@ class PoradnikThumbnailWidget extends StatelessWidget {
         this.showPageCount = true,
         this.withHero = true
       });
+
+  void _onFormatTap(FileFormat format) => onFormatTap??(format) => launchURL(poradnik.getDownloadUrl(format));
 
   @override
   Widget build(BuildContext context) {
@@ -134,14 +136,20 @@ class PoradnikThumbnailWidget extends StatelessWidget {
 
                   ],
                 ),
-                onTap: onTap,
+                onTap:
+                onTap??
+                (
+                    poradnik.defaultFormat == null?
+                    null:
+                    () => _onFormatTap(poradnik.defaultFormat!)
+                )
               ),
             ),
 
             if(showDownloadFormats)
               FileFormatSelectorRowWidget(
                 poradnik.formats,
-                onTap: onFormatTap??(format) => launchURL(poradnik.getDownloadUrl(format)),
+                onTap: _onFormatTap,
               )
 
           ],

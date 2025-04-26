@@ -14,6 +14,7 @@ class Poradnik{
   final String? coverTitle;
   final String? coverSource;
   final List<FileFormat> formats;
+  final FileFormat? defaultFormat;
   final Color? titleColor;
   final Widget Function(BuildContext context, Poradnik poradnik, double width, double height)? coverTitleBuilder;
 
@@ -25,6 +26,7 @@ class Poradnik{
     this.coverTitle,
     this.coverSource,
     required this.formats,
+    this.defaultFormat,
     this.titleColor,
     this.coverTitleBuilder,
   });

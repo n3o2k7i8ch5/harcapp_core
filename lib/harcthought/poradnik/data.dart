@@ -18,6 +18,7 @@ Poradnik poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Poradnik(
   coverTitle: 'CZYNNIKI I MECHANIZMY\nKSZTAŁTOWANIA\nDUCHOWOŚCI',
   coverSource: 'Freepik (freepik)',
   formats: [FileFormat.pdf, FileFormat.docx],
+  defaultFormat: FileFormat.pdf,
   titleColor: Colors.black,
   coverTitleBuilder: (context, poradnik, width, height) => Column(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -75,6 +76,7 @@ Poradnik poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich = Poradnik(
   coverTitle: 'DWIE ROTY\nDWÓCH PRZYRZECZEŃ',
   coverSource: 'Daniel Iwanicki',
   formats: [FileFormat.pdf, FileFormat.docx],
+  defaultFormat: FileFormat.pdf,
   titleColor: Colors.white,
   coverTitleBuilder: (context, poradnik, width, height) => Column(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -135,6 +137,7 @@ Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
   coverTitle: 'O STRUKTURZE\nDUCHOWOŚCI',
   coverSource: 'Daniel Iwanicki',
   formats: [FileFormat.pdf, FileFormat.docx],
+  defaultFormat: FileFormat.pdf,
   titleColor: Colors.black,
   coverTitleBuilder: (context, poradnik, width, height) => Column(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -183,6 +186,7 @@ Poradnik poradnik_przykladowa_strategia_rozwoju_duchowego = Poradnik(
   coverTitle: 'PRZYKŁADOWA STRATEGIA\nROZWOJU DUCHOWEGO',
   coverSource: 'Freepik (freepik)',
   formats: [FileFormat.pdf, FileFormat.docx],
+  defaultFormat: FileFormat.pdf,
   titleColor: Colors.black,
   coverTitleBuilder: (context, poradnik, width, height) => Column(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -233,6 +237,7 @@ Poradnik poradnik_wychowanie_przez_wysmianie = Poradnik(
   coverTitle: 'WYCHOWANIE\nPRZEZ WYŚMIANIE',
   coverSource: 'Freepik (freepik)',
   formats: [FileFormat.pdf, FileFormat.docx],
+  defaultFormat: FileFormat.pdf,
   titleColor: Colors.white,
   coverTitleBuilder: (context, poradnik, width, height) => Column(
     mainAxisAlignment: MainAxisAlignment.center,
