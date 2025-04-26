@@ -46,8 +46,6 @@ class PoradnikThumbnailWidget extends StatelessWidget {
         this.withHero = true
       });
 
-  void _onFormatTap(FileFormat format) => onFormatTap??(format) => launchURL(poradnik.getDownloadUrl(format));
-
   @override
   Widget build(BuildContext context) {
 
@@ -66,6 +64,8 @@ class PoradnikThumbnailWidget extends StatelessWidget {
       width = this.width!;
       height = this.height!;
     }
+
+    void Function(FileFormat) _onFormatTap = onFormatTap??(format) => launchURL(poradnik.getDownloadUrl(format));
 
     Widget widget = Material(
       borderRadius: BorderRadius.circular(radius),
