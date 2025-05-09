@@ -12,7 +12,7 @@ class CustTextStyle extends TextStyle{
 
   const CustTextStyle(
       String familyName,
-      { Color? color = AppColors.text_def_enab,
+      { Color? color = AppColors.textDefEnab,
         weight fontWeight = weight.normal,
         fontSize = defFontSize,
         bool? shadow = false,

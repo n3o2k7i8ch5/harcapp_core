@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 class AppColors{
 
-  static const Color icon_transp = Colors.black54;
-  static const Color icon_enabled = Colors.black87;
-  static const Color icon_disabled = Colors.black12;
-  static const Color text_hint_enab = Colors.black26;
-  static const Color text_hint_disab = Colors.black12;
-  static const Color text_def_enab = Colors.black54;
-  static const Color text_def_disab = Colors.black26;
+  static const Color backgroundDark = Color.fromARGB(255, 10, 10, 10);
+
+  static const Color iconTransp = Colors.black54;
+  static const Color iconEnab = Colors.black87;
+  static const Color iconDisab = Colors.black12;
+  static const Color textHintEnab = Colors.black26;
+  static const Color textHintDisab = Colors.black12;
+  static const Color textDefEnab = Colors.black54;
+  static const Color textDefDisab = Colors.black26;
 
   static const Color white_dark = Color.fromARGB(255, 240, 240, 240);
 

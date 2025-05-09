@@ -7,7 +7,7 @@ class HarcApp extends StatelessWidget{
   final size;
   final color;
   final shadow;
-  const HarcApp({required this.size, this.color = AppColors.text_def_enab, this.shadow = false});
+  const HarcApp({required this.size, this.color = AppColors.textDefEnab, this.shadow = false});
 
   @override
   Widget build(BuildContext context) {

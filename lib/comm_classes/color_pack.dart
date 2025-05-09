@@ -44,13 +44,13 @@ abstract class ColorPack{
   Color get appBar => background;
   Color get appBarTextEnabled => defAppBarTextEnab;
 
-  Color get textEnabled => AppColors.text_def_enab;
-  Color get textDisabled => AppColors.text_def_disab;
+  Color get textEnabled => AppColors.textDefEnab;
+  Color get textDisabled => AppColors.textDefDisab;
 
-  Color get textDrawer => AppColors.text_def_enab;
-  Color get hintDrawer => AppColors.text_def_disab;
+  Color get textDrawer => AppColors.textDefEnab;
+  Color get hintDrawer => AppColors.textDefDisab;
 
-  Color get hintEnabled => AppColors.text_hint_enab;
+  Color get hintEnabled => AppColors.textHintEnab;
 
   Color get defCardEnabled => defCard;
   Color get defCardDisabled => Color.fromARGB(255, 235, 235, 235);
@@ -197,4 +197,115 @@ abstract class ColorPack{
         }),
     ),
   );
+}
+
+abstract class BaseColorPack extends ColorPack{
+
+  static const Color appBarColor = Colors.white;
+  static const Color iconDisabledColor = AppColors.iconDisab;
+  static const Color iconEnabledColor = AppColors.iconEnab;
+
+  const BaseColorPack();
+
+  @override
+  String get name;
+
+  @override
+  Color get appBar => background;
+
+  @override
+  Color get iconDisabled => iconDisabledColor;
+
+  @override
+  Color get iconEnabled => iconEnabledColor;
+
+  @override
+  Color get backgroundStart => appBar;
+
+  @override
+  ColorPack? get darkEquivalent => const ColorPackBlack();
+
+}
+
+class ColorPackSimple extends BaseColorPack{
+
+  @override
+  String get name => 'ColorPackSimple';
+
+  @override
+  final Color accent;
+
+  const ColorPackSimple({this.accent = Colors.black});
+
+}
+
+class ColorPackBlack extends BaseColorPack{
+
+  static const Color appBarTextEnabColor = Colors.white;
+  static const Color appBarTextDisabColor = Colors.white70;
+  static const Color textEnabColor = Colors.white;
+  static const Color textDisabColor = Colors.white54;
+
+  static const Color iconEnabColor = Colors.white;
+  static const Color iconDisabColor = Colors.white54;
+
+  static const Color cardEnabColor = Color.fromARGB(255, 30, 30, 30);
+
+  const ColorPackBlack();
+
+  @override
+  String get name => 'ColorPackBlack';
+
+  @override
+  Brightness get brightness => Brightness.dark;
+
+  @override
+  Color get appBarTextEnabled => appBarTextEnabColor;
+
+  @override
+  Color get textEnabled => textEnabColor;
+
+  @override
+  Color get textDisabled => textDisabColor;
+
+
+  @override
+  Color get textDrawer => Colors.white70;
+
+  @override
+  Color get hintDrawer => Colors.white54;
+
+
+  @override
+  Color get hintEnabled => Colors.white54;
+
+
+  @override
+  Color get defCardEnabled => cardEnabColor;
+
+  @override
+  Color get defCardDisabled => const Color.fromARGB(255, 60, 60, 60);
+
+  @override
+  Color get defCardElevation => const Color.fromARGB(120, 255, 255, 255);
+
+
+  @override
+  Color get background => AppColors.backgroundDark;
+
+  @override
+  Color get backgroundIcon => Colors.white24;
+
+  @override
+  Color get accent => Colors.black;
+
+  @override
+  Color get iconEnabled => Colors.white;
+
+  @override
+  Color get iconDisabled => Colors.white54;
+
+  @override
+  ColorPack? get darkEquivalent => null;
+
 }
