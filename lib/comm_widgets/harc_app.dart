@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:harcapp_core/colors.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
+import 'package:harcapp_core/values/colors.dart';
 
 class HarcApp extends StatelessWidget{
 

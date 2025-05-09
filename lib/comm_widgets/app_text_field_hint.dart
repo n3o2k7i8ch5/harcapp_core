@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 
 import '../comm_classes/color_pack.dart';
-import '../dimen.dart';
+import '../values/dimen.dart';
 import 'multi_text_field.dart';
 
 class AppTextFieldHint extends StatefulWidget{

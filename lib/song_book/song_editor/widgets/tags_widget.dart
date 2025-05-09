@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
-import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/song_book/song_tags.dart';
 import 'package:harcapp_core/tag/tags_widget.dart';
 import 'package:provider/provider.dart';

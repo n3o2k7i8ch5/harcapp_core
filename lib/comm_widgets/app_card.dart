@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../comm_classes/color_pack.dart';
-import '../dimen.dart';
+import '../values/dimen.dart';
 
 class AppCard extends StatelessWidget{
 

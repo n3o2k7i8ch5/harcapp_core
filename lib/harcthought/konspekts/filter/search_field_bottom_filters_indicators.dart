@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_widgets/meto_row.dart';
-import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
 import 'konspekt_filters.dart';

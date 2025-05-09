@@ -3,7 +3,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 
 import '../comm_classes/color_pack.dart';
-import '../dimen.dart';
+import '../values/dimen.dart';
 import 'chord.dart';
 import 'instrument_type.dart';
 

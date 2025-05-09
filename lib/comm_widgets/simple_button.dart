@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 
-import '../dimen.dart';
+import '../values/dimen.dart';
 import 'app_card.dart';
 import 'gradient_widget.dart';
 

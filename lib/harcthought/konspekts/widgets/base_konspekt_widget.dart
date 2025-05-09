@@ -11,7 +11,7 @@ import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/person_card.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
-import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt_tile_widget.dart';
 import 'package:harcapp_core/harcthought/konspekts/widgets/step_group_widget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';

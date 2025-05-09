@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 
-import '../colors.dart';
-import '../dimen.dart';
+import 'package:harcapp_core/values/colors.dart';
+import '../values/dimen.dart';
 
 enum weight{thin, normal, halfBold, bold, heavy}
 

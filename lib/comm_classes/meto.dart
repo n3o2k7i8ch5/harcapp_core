@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:harcapp_core/colors.dart';
+import 'package:harcapp_core/values/colors.dart';
 
 enum Meto{
   zuch,

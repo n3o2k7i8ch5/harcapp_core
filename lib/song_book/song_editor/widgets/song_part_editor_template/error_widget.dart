@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
-import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/values/dimen.dart';
 import 'package:provider/provider.dart';
 
 import 'errors.dart';

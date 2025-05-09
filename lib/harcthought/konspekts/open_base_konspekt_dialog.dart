@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
-import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/all.dart' as all;
 import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/all.dart' as harcerskie;
 import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/all.dart' as ksztalcenie;

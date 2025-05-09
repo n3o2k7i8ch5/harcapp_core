@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 
-import '../colors.dart';
-import '../dimen.dart';
+import 'package:harcapp_core/values/colors.dart';
+import '../values/dimen.dart';
 import 'app_text_style.dart';
 
 
