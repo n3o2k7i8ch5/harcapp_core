@@ -12,7 +12,7 @@ dependencies:
 
   # assets_audio_player: ^3.1.1
   auto_size_text: ^3.0.0
-  cached_network_image: ^3.3.1
+  cached_network_image: ^3.4.1
   connectivity_plus: ^6.1.2
   decorated_icon: ^1.2.1
   dio: ^5.8.0+1
@@ -25,7 +25,7 @@ dependencies:
   html_pdf_widgets: ^0.0.3
   html_unescape: ^2.0.0
   implicitly_animated_reorderable_list_2: ^0.6.0
-  just_audio: ^0.9.46
+  just_audio: ^0.10.3
   linked_scroll_controller: ^0.2.0
   logger: ^2.5.0
   material_design_icons_flutter: ^7.0.7296
