@@ -21,6 +21,13 @@ class Dimen{
   static const double iconFootprint = 2*iconMarg + iconSize;
   static const double iconEmptyInfoSize = 72.0;
 
+  static const EdgeInsets toastPadding = EdgeInsets.only(
+    top: 12.0,
+    right: 12.0,
+    left: 12.0,
+    bottom: 46.0,
+  );
+
   static const double APPBAR_LEADING_WIDTH = iconFootprint + 8.0;
 
 

@@ -19,14 +19,11 @@ ToastFuture showAppToast(
     bool bottom = true,
     bool handleTouch = true,
     void Function()? onButtonPressed,
+    double? bottomPadding,
 }) => showToastWidget(
     Padding(
-      padding:
-      const EdgeInsets.only(
-        top: 12.0,
-        right: 12.0,
-        left: 12.0,
-        bottom: 46.0,
+      padding: Dimen.toastPadding.copyWith(
+        bottom: bottomPadding
       ),
       child: IntrinsicWidth(
         child: Material(
