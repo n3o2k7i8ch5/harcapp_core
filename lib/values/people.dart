@@ -154,6 +154,7 @@ List<Person> allPeople = [
   JAN_KWIATKOWSKI,
   JAN_LEWANDOWSKI,
   JAN_NOWAK,
+  JAN_REWERSKI,
   JAN_STANULA,
   JANUSZ_ORLUTA,
   JAROMIR_JABLONSKI,
@@ -404,6 +405,7 @@ List<Person> allPeople = [
   SOFIJA_GALICKA,
   STANISLAW_MARCHEWICZ,
   STANISLAW_WOJCIECHOWSKI,
+  STANISLAW_WATOR,
   STANISLAW_WRONSKI,
   STEFAN_KRYCZKA,
   SZYMON_BARCZYK,
@@ -1481,6 +1483,14 @@ const Person JAN_NOWAK = Person(
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhr,
     email: ['lolekmarian.200@gmail.com']
+);
+const Person JAN_REWERSKI = Person(
+    name: 'Jan Rewerski',
+    druzyna: '173. WDH „Biała” im K. K. Baczyńskiego',
+    hufiec: huf_zhp_warszawa_ochota,
+    rankHarc: RankHarc.zhpMlodzik,
+    org: Org.zhp,
+    email: ["jarewerski@gmail.com"]
 );
 const Person JAN_STANULA = Person(
   name: 'Jan Stanula',
@@ -3065,6 +3075,14 @@ const Person SOFIJA_GALICKA = Person(
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ['galicka.sofija16@gmail.com']
+);
+const Person STANISLAW_WATOR = Person(
+    name: 'Stanisław Wątor',
+    druzyna: '19. WDH "Przygoda" im. Ludwika Narbutta',
+    hufiec: huf_zhp_warszawa_wola,
+    rankHarc: RankHarc.zhpHOc,
+    org: Org.zhp,
+    email: ["stanislaw.wator@zhp.pl"]
 );
 const Person STANISLAW_MARCHEWICZ = Person(
     name: 'Stanisław Marchewicz',
