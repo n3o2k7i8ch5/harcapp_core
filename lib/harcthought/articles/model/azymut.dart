@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:webfeed_plus/domain/atom_item.dart';
 import 'package:image/image.dart' as img;
+import 'package:rss_dart/domain/atom_item.dart';
 
 import 'article.dart';
 import 'article_data.dart';

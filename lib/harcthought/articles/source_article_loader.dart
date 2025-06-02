@@ -6,8 +6,8 @@ import 'package:harcapp_core/comm_classes/dio.dart';
 import 'package:harcapp_core/harcthought/articles/model/article_source.dart';
 import 'package:harcapp_core/harcthought/articles/model/zhr_utils.dart';
 import 'package:harcapp_core/logger.dart';
-import 'package:webfeed_plus/domain/atom_feed.dart';
-import 'package:webfeed_plus/domain/atom_item.dart';
+import 'package:rss_dart/domain/atom_feed.dart';
+import 'package:rss_dart/domain/atom_item.dart';
 import 'package:html_unescape/html_unescape.dart';
 
 import 'model/article_data.dart';
@@ -273,7 +273,7 @@ abstract class _ArticleZhrLoader extends BaseSourceArticleLoader{
     }
 
     List<ArticleData> articles = [];
-    for(AtomItem item in atomFeed.items??[]) {
+    for(AtomItem item in atomFeed.items) {
       String? imageUrl;
       if(downloadCoverLinks)
         try{
@@ -371,6 +371,8 @@ abstract class BaseArticleAzymutLoader extends _ArticleZhrLoader{
   @override
   String pageUrl(int page) => 'https://azymut.zhr.pl/feed/atom/?paged=$page';
 
+  const BaseArticleAzymutLoader({super.downloadCoverLinks = false});
+
 }
 
 abstract class BaseArticlePojutrzeLoader extends _ArticleZhrLoader{
@@ -380,5 +382,7 @@ abstract class BaseArticlePojutrzeLoader extends _ArticleZhrLoader{
 
   @override
   String pageUrl(int page) => 'https://pojutrze.zhr.pl/feed/atom/?paged=$page';
+
+  const BaseArticlePojutrzeLoader({super.downloadCoverLinks = false});
 
 }

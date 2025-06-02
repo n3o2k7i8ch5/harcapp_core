@@ -88,7 +88,7 @@ abstract class ColorPack{
       bodyMedium: TextStyle(color: textEnabled),
       bodyLarge: TextStyle(color: textEnabled),
     ).apply(),
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: TabBarThemeData(
         labelColor: iconEnabled,
         unselectedLabelColor: iconDisabled,
         labelStyle: AppTextStyle(fontWeight: weight.halfBold),
@@ -150,7 +150,7 @@ abstract class ColorPack{
     ),
 
     cardColor: defCardEnabled,
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
         color: defCardEnabled,
         shadowColor: defCardElevation
     ),

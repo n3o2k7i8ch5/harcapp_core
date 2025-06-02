@@ -5,7 +5,7 @@ import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:harcapp_core/harcthought/articles/model/article_source.dart';
 import 'package:html/dom.dart' as html_dom;
 import 'package:html/parser.dart';
-import 'package:webfeed_plus/domain/atom_item.dart';
+import 'package:rss_dart/domain/atom_item.dart';
 import 'package:image/image.dart' as img;
 
 import 'article_data.dart';
@@ -84,11 +84,11 @@ abstract class ZHRUtils{
 
   }
 
-  static String? linkFromAtom(AtomItem item) => item.links?[0].href;
+  static String? linkFromAtom(AtomItem item) => item.links[0].href;
 
   static ArticleData fromAtomItem(ArticleSource source, AtomItem item, {String? imageUrl}){
 
-    List<String> tags = item.categories!.map((cat) => '#${cat.term!.toUpperCase()}').toList();
+    List<String> tags = item.categories.map((cat) => '#${cat.term!.toUpperCase()}').toList();
 
     String text = item.content!.replaceAll('<br>', '\n');
 
@@ -117,7 +117,7 @@ abstract class ZHRUtils{
       localId,
       title: item.title??(throw Exception('No title in atom item')),
       tags: tags,
-      author: item.authors![0].name??(throw Exception('No author name in atom item')),
+      author: item.authors[0].name??(throw Exception('No author name in atom item')),
       date: DateTime.tryParse(item.published!)??(throw Exception('No publish date in atom item')),
       link: linkFromAtom(item)??(throw Exception('No link in atom item')),
       imageUrl: imageUrl,
