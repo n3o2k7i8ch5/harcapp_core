@@ -42,7 +42,7 @@ dependencies:
   provider: ^6.1.2
   rss_dart: ^1.0.13
   semaphore_plus: ^0.3.1
-  shared_preferences: ^2.5.1
+  shared_preferences: ^2.5.3
   tuple: ^2.0.2
   url_launcher: ^6.3.1
   uuid: ^4.5.1
