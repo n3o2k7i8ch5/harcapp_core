@@ -135,8 +135,10 @@ flutter:
     - assets/konspekty/ksztalcenie/warsztaty_wychowania_duchowego_old/
     - assets/konspekty/ksztalcenie/wstep_do_wychowania_duchowego/
 
+    - assets/poradnik/betlejemskie_swiatlo_pokoju/
     - assets/poradnik/czynniki_i_mechanizmy_ksztaltowania_duchowosci/
     - assets/poradnik/dwie_roty_dwoch_przyrzeczen_harcerskich/
+    - assets/poradnik/niedziela_na_obozie/
     - assets/poradnik/o_strukturze_duchowosci/
     - assets/poradnik/wychowanie_przez_wysmianie/
     - assets/poradnik/przykladowa_strategia_rozwoju_duchowego/

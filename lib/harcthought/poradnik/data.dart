@@ -57,7 +57,6 @@ Poradnik poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Poradnik(
   ),
 );
 
-
 const String poradnik_name_dwie_roty_dwoch_przyrzeczen_harcerskich = "dwie_roty_dwoch_przyrzeczen_harcerskich";
 const String poradnik_title_dwie_roty_dwoch_przyrzeczen_harcerskich = "Dwie roty dwóch Przyrzeczeń";
 Poradnik poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich = Poradnik(
@@ -225,6 +224,55 @@ Poradnik poradnik_przykladowa_strategia_rozwoju_duchowego = Poradnik(
   ),
 );
 
+const String poradnik_name_niedziela_na_obozie = "niedziela_na_obozie";
+const String poradnik_title_niedziela_na_obozie = "Niedziela na obozie";
+Poradnik poradnik_niedziela_na_obozie = Poradnik(
+  name: poradnik_name_niedziela_na_obozie,
+  title: poradnik_title_niedziela_na_obozie,
+  pageCount: 17,
+  description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), przedstawiajacy przykładową strategię kształtowania u wychowanków określonej duchowości',
+  coverTitle: 'NIEDZIELA\nNA OBOZIE',
+  coverSource: 'Daniel Iwanicki',
+  formats: [FileFormat.pdf, FileFormat.docx],
+  defaultFormat: FileFormat.pdf,
+  titleColor: Colors.white,
+  coverTitleBuilder: (context, poradnik, width, height) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+
+      Text(
+        'NIEDZIELA\nNA OBOZIE',
+        style: AppTextStyle(
+            color: poradnik.titleColor??Colors.white,
+            fontSize: height*Poradnik.mainTitleHeightFactor,
+            fontWeight: weight.halfBold
+        ),
+        textAlign: TextAlign.center,
+      ),
+
+      SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+      Container(
+        width: width*0.63,
+        height: height*0.003,
+        color: poradnik.titleColor??Colors.white,
+      ),
+
+      SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+      Text(
+        'Poradnik w pracy wychowawczej',
+        style: AppTextStyle(
+          color: poradnik.titleColor??Colors.white,
+          fontSize: height*Poradnik.subTitleHeightFactor,
+        ),
+        textAlign: TextAlign.center,
+      ),
+
+    ],
+  ),
+);
+
 const String poradnik_name_wychowanie_przez_wysmianie = "wychowanie_przez_wysmianie";
 const String poradnik_title_wychowanie_przez_wysmianie = "Wychowanie przez wyśmianie";
 Poradnik poradnik_wychowanie_przez_wysmianie = Poradnik(
@@ -281,5 +329,6 @@ List<Poradnik> allPoradniks = [
   poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich,
   poradnik_przykladowa_strategia_rozwoju_duchowego,
+  poradnik_niedziela_na_obozie,
   poradnik_wychowanie_przez_wysmianie,
 ];

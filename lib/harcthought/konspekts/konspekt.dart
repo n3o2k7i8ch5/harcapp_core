@@ -544,7 +544,7 @@ class Konspekt with KonspektStepsContainerMixin{
       upToDate: false
   );
 
-  String get coverPath => 'packages/harcapp_core/assets/konspekty/${category.path}/${customCoverDirName??name}/cover.webp';
+  String get coverPath => 'packages/harcapp_core/assets/konspekty/${category.path}/${customCoverDirName??name}/cover_raw.webp';
 
   Duration? get duration{
     if(customDuration != null) return customDuration;
