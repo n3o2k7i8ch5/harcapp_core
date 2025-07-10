@@ -90,84 +90,87 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
 
   @override
   Widget build(BuildContext context) =>
-      LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) => Stack(
-            children: [
+      SizedBox(
+        height: SoundPlayerWidget.height,
+        child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) => Stack(
+              children: [
 
-              StreamBuilder<PositionData>(
-                stream: _positionDataStream,
-                builder: (context, snapshot) {
-                  final PositionData? positionData = snapshot.data;
-                  if(positionData == null)
-                    return Container();
+                StreamBuilder<PositionData>(
+                  stream: _positionDataStream,
+                  builder: (context, snapshot) {
+                    final PositionData? positionData = snapshot.data;
+                    if(positionData == null)
+                      return Container();
 
-                  return Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      color: backgroundIcon_(context),
-                      height: Dimen.iconFootprint,
-                      width: (positionData.position.inMilliseconds/audioPlayer.duration!.inMilliseconds)*constraints.maxWidth,
+                    return Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        color: backgroundIcon_(context),
+                        height: Dimen.iconFootprint,
+                        width: (positionData.position.inMilliseconds/audioPlayer.duration!.inMilliseconds)*constraints.maxWidth,
+                      ),
+                    );
+                  },
+                ),
+
+                Row(
+                  children: [
+
+                    AppButton(
+                      icon: Icon(
+                          audioPlayer.playing?
+                          MdiIcons.pause:
+                          MdiIcons.play
+                      ),
+                      onTap: () async {
+                        if(isWeb && !await isNetworkAvailable() && !audioPlayer.playing) {
+                          showAppToast(context, text: noInternetMessage);
+                          return;
+                        }
+
+                        await audioPlayer.playing?audioPlayer.pause():audioPlayer.play();
+                        if(mounted) setState((){});
+                      },
                     ),
-                  );
-                },
-              ),
 
-              Row(
-                children: [
-
-                  AppButton(
-                    icon: Icon(
-                        audioPlayer.playing?
-                        MdiIcons.pause:
-                        MdiIcons.play
+                    Expanded(
+                      child: AppText(name??'<i>Anonimowe nagranie</i>'),
                     ),
-                    onTap: () async {
-                      if(isWeb && !await isNetworkAvailable() && !audioPlayer.playing) {
-                        showAppToast(context, text: noInternetMessage);
-                        return;
-                      }
 
-                      await audioPlayer.playing?audioPlayer.pause():audioPlayer.play();
-                      if(mounted) setState((){});
-                    },
-                  ),
+                    AppButton(
+                      icon: Icon(MdiIcons.rewind),
+                      onLongPress: audioPlayer.playing?
+                          (){
+                        audioPlayer.seek(Duration.zero);
+                        if(mounted) showAppToast(context, text: 'Od początku!', duration: const Duration(seconds: 1));
+                        if(mounted) setState((){});
+                      }: null,
+                      onTap: audioPlayer.playing?
+                          () async {
+                        await audioPlayer.seek(audioPlayer.position - const Duration(seconds: 2));
+                        if(mounted) showAppToast(context, text: '-2 sekundy', duration: const Duration(seconds: 1));
+                        if(mounted) setState((){});
+                      }: null,
+                    ),
 
-                  Expanded(
-                    child: AppText(name??'<i>Anonimowe nagranie</i>'),
-                  ),
-
-                  AppButton(
-                    icon: Icon(MdiIcons.rewind),
-                    onLongPress: audioPlayer.playing?
-                    (){
-                      audioPlayer.seek(Duration.zero);
-                      if(mounted) showAppToast(context, text: 'Od początku!', duration: const Duration(seconds: 1));
-                      if(mounted) setState((){});
-                    }: null,
-                    onTap: audioPlayer.playing?
-                    () async {
-                      await audioPlayer.seek(audioPlayer.position - const Duration(seconds: 2));
-                      if(mounted) showAppToast(context, text: '-2 sekundy', duration: const Duration(seconds: 1));
-                      if(mounted) setState((){});
-                    }: null,
-                  ),
-
-                  AppButton(
-                    icon: Icon(MdiIcons.fastForward),
-                    onTap:
-                    audioPlayer.playing?
-                    () async {
-                      await audioPlayer.seek(audioPlayer.position + const Duration(seconds: 2));
-                      if(mounted) showAppToast(context, text: '+2 sekundy', duration: const Duration(seconds: 1));
-                      if(mounted) setState((){});
-                    }: null,
-                  ),
+                    AppButton(
+                      icon: Icon(MdiIcons.fastForward),
+                      onTap:
+                      audioPlayer.playing?
+                          () async {
+                        await audioPlayer.seek(audioPlayer.position + const Duration(seconds: 2));
+                        if(mounted) showAppToast(context, text: '+2 sekundy', duration: const Duration(seconds: 1));
+                        if(mounted) setState((){});
+                      }: null,
+                    ),
 
 
-                ],
-              ),
-            ],
-          )
+                  ],
+                ),
+              ],
+            )
+        ),
       );
 
 }
