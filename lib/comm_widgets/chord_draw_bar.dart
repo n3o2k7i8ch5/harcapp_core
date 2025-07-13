@@ -332,7 +332,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               color: widget.chordColor,
               onTap: (){
                 if(widget.changeTypeOnTap)
-                  setState(() => type.next);
+                  setState(() => type = type.next);
                 widget.onTap?.call(chordSet[0], type);
               }
           )
@@ -349,7 +349,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               color: widget.chordColor,
               onTap:(){
                 if(widget.changeTypeOnTap)
-                  setState(() => type.next);
+                  setState(() => type = type.next);
                 widget.onTap?.call(chord, type);
               }
           )
@@ -366,7 +366,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               color: widget.chordColor,
               onTap:(){
                 if(widget.changeTypeOnTap)
-                  setState(() => type.next);
+                  setState(() => type = type.next);
                 widget.onTap?.call(chord, type);
               }
           )
