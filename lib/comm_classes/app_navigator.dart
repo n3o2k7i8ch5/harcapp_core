@@ -4,8 +4,8 @@ Duration pageTransDuration = MaterialPageRoute<Scaffold>(
     builder: (context) => Container()
 ).transitionDuration;
 
-Future<void> popPage(BuildContext context) async {
-  Navigator.pop(context);
+Future<void> popPage(BuildContext context, {bool root = false}) async {
+  Navigator.of(context, rootNavigator: root).pop();
   await Future.delayed(pageTransDuration);
 }
 
