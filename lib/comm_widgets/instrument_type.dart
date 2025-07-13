@@ -1,24 +1,31 @@
 enum InstrumentType{
   GUITAR,
   UKULELE,
-  MANDOLIN
-}
+  MANDOLIN;
 
-const Map<InstrumentType, String> _instrumentTypeName = {
-  InstrumentType.GUITAR: 'Gitara',
-  InstrumentType.UKULELE: 'Ukulele',
-  InstrumentType.MANDOLIN: 'Mandolina'
-};
+  String get name{
+    switch(this){
+      case InstrumentType.GUITAR: return 'Gitara';
+      case InstrumentType.UKULELE: return 'Ukulele';
+      case InstrumentType.MANDOLIN: return 'Mandolina';
+    }
+  }
 
+  String get nameDopelniacz{
+    switch(this){
+      case InstrumentType.GUITAR: return 'Gitary';
+      case InstrumentType.UKULELE: return 'Ukulele';
+      case InstrumentType.MANDOLIN: return 'Mandoliny';
+    }
+  }
 
-String instrumentTypeName(InstrumentType type) => _instrumentTypeName[type]??'Nie ma takiego';
-
-InstrumentType nextInstrumentType(InstrumentType type){
-  if(type == InstrumentType.GUITAR) return InstrumentType.UKULELE;
-  else if(type == InstrumentType.UKULELE) return InstrumentType.MANDOLIN;
-  else if(type == InstrumentType.MANDOLIN) return InstrumentType.GUITAR;
-  
-  return InstrumentType.GUITAR;
+  InstrumentType get next{
+    switch(this){
+      case InstrumentType.GUITAR: return InstrumentType.UKULELE;
+      case InstrumentType.UKULELE: return InstrumentType.MANDOLIN;
+      case InstrumentType.MANDOLIN: return InstrumentType.GUITAR;
+    }
+  }
 
 }
 
