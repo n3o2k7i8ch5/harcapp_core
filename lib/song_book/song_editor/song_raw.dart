@@ -87,8 +87,10 @@ class SongRaw extends SongCore{
     this.refrenPart = refrenPart??SongPart.empty(isRefrenTemplate: true);
   }
 
+  static String get newLocalId => const Uuid().v4();
+
   static SongRaw empty({String? lclId}) => SongRaw(
-    lclId: lclId??const Uuid().v4(),
+    lclId: lclId??newLocalId,
     title: '',
     hidTitles: [],
     authors: [],
@@ -109,7 +111,7 @@ class SongRaw extends SongCore{
       fromRespMap(lclId, jsonDecode(code)[lclId]);
 
   static SongRaw fromBase64({String? lclId, required String code}) => SongRaw.parse(
-      const Uuid().v4(),
+      newLocalId,
       Utf8Decoder().convert(Base64Codec().decode(code).toList())
   );
 
@@ -190,7 +192,7 @@ class SongRaw extends SongCore{
   }
 
   SongRaw copy({bool withLclId = true}) => SongRaw(
-    lclId: withLclId?lclId:const Uuid().v4(),
+    lclId: withLclId?lclId:newLocalId,
     title: title,
     hidTitles: hidTitles,
     authors: authors,
