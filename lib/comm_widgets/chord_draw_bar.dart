@@ -332,7 +332,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               color: widget.chordColor,
               onTap: (){
                 if(widget.changeTypeOnTap)
-                  setState(() => type = nextInstrumentType(type));
+                  setState(() => type.next);
                 widget.onTap?.call(chordSet[0], type);
               }
           )
@@ -349,7 +349,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               color: widget.chordColor,
               onTap:(){
                 if(widget.changeTypeOnTap)
-                  setState(() => type = nextInstrumentType(type));
+                  setState(() => type.next);
                 widget.onTap?.call(chord, type);
               }
           )
@@ -366,7 +366,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
               color: widget.chordColor,
               onTap:(){
                 if(widget.changeTypeOnTap)
-                  setState(() => type = nextInstrumentType(type));
+                  setState(() => type.next);
                 widget.onTap?.call(chord, type);
               }
           )
@@ -401,7 +401,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
             Padding(
               padding: EdgeInsets.all(Dimen.defMarg),
               child: RotatedBox(
-                child: Text(instrumentTypeName(type), style: AppTextStyle(fontSize: Dimen.textSizeTiny, color: hintEnab_(context))),
+                child: Text(type.name, style: AppTextStyle(fontSize: Dimen.textSizeTiny, color: hintEnab_(context))),
                 quarterTurns: 3,
               ),
             )
