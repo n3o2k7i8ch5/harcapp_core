@@ -1219,9 +1219,9 @@ const Person HELENA_SWIATKOWSKA = Person(
 );
 const Person HUBERT_CISLAK = Person(
     name: 'Hubert Ciślak',
-    druzyna: '300. PgDH „Wichura”',
+    druzyna: '300. PgLDH „Wichura”',
     hufiec: huf_zhp_krakow_pdg,
-    rankHarc: RankHarc.zhpMlodzik,
+    rankHarc: RankHarc.zhpWywiadowca,
     email: ["hubertcc007@gmail.com"]
 );
 const Person HUBERT_FRUKOWSKI = Person(
