@@ -32,6 +32,7 @@ const String huf_zhp_jordanow = "Hufiec ZHP Jordanów";
 const String huf_zhp_kalisz = 'Hufiec ZHP Kalisz';
 const String huf_zhp_karkonoski = 'Karkonoski Hufiec ZHP';
 const String huf_zhp_kartuzy = 'Hufiec ZHP Kartuzy';
+const String huf_zhp_katowice = 'Hufiec ZHP Katowice';
 const String huf_zhp_kepno = 'Hufiec ZHP Kępno im. Wojska Polskiego';
 const String huf_zhp_kedzierzyn_kozle = 'Hufiec ZHP Kędzierzyn-Koźle';
 const String huf_zhp_kielce_poludnie = 'Hufiec ZHP Kielce-Południe';

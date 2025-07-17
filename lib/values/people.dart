@@ -55,6 +55,7 @@ List<Person> allPeople = [
   BARTLOMIEJ_SIUSTA,
   BARTOSZ_DABROWSKI,
   BARTOSZ_IGNASIAK,
+  BARTOSZ_KSIAZEK,
   BENIAMIN_PLUCINSKI,
   BLANKA_KARCZEWSKA,
   BLAZEJ_KLEBBA,
@@ -96,6 +97,7 @@ List<Person> allPeople = [
   FRANCISZEK_TOMASZCZYK,
   FRANCISZEK_WOJDYLO,
   GABRIEL_POZNANSKI,
+  GABRIELA_OZOG,
   GABRIELA_SOBCZAK,
   GRZEGORZ_BOROWIEC,
   GRZEGORZ_FRANK,
@@ -237,6 +239,7 @@ List<Person> allPeople = [
   KORNELIA_PRZYCZOLKA,
   KRYSTIAN_BULANDA,
   KRZYSZTOF_BANIK,
+  KRZYSZTOF_GORECKI,
   KRZYSZTOF_KANIEWSKI,
   KRZYSZTOF_KRAWCZYK,
   KRZYSZTOF_MALIKIEWICZ,
@@ -248,6 +251,7 @@ List<Person> allPeople = [
   LAURA_FRASZEWSKA,
   LAURA_NOWAKOWSKA,
   LENA_PATLA,
+  LENA_STEFANSKA,
   LENA_WEISS,
   LILIANA_KASPRZYK,
   LILIANA_MIROTA,
@@ -329,6 +333,7 @@ List<Person> allPeople = [
   MICHAL_JABCZYNSKI,
   MICHAL_JANAS,
   MICHAL_KARWOWSKI,
+  MICHAL_KUSTOSIK,
   MICHAL_MACULEWICZ,
   MICHAL_METEL,
   MICHAL_SITEK,
@@ -389,6 +394,7 @@ List<Person> allPeople = [
   PIOTR_ZIEMBIKIEWICZ,
   POLA_MARCINKOWSKA,
   PRZEMYSLAW_KLUCZKOWSKI,
+  PRZEMYSLAW_KOWALIK,
   PRZEMYSLAW_MROCZKOWSKI,
   RADOSLAW_JASZCZAK,
   RADOSLAW_RELIDZYNSKI,
@@ -811,6 +817,15 @@ const Person BARTLOMIEJ_SIUSTA = Person(
 );
 const Person BARTOSZ_DABROWSKI = Person(name: 'Bartosz Dąbrowski', rankHarc: RankHarc.zhpWywiadowca, org: Org.zhp);
 const Person BARTOSZ_IGNASIAK = Person(name: 'Bartosz Ignasiak', rankHarc: RankHarc.zhpHOc, rankInstr: RankInstr.pwd, druzyna: '8. Drużyna Wędrownicza „Kuźnia Płomienia”');
+const Person BARTOSZ_KSIAZEK = Person(
+    name: 'Bartosz Książek',
+    druzyna: '91. DHS „Ad Astra”',
+    hufiec: huf_zhp_katowice,
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhpHRc,
+    org: Org.zhp,
+    email: ["bartosz.ksiazek@zhp.net.pl"]
+);
 const Person BLANKA_KARCZEWSKA = Person(
     name: 'Blanka Karczewska',
     druzyna: '56. WDS „Ignis”',
@@ -1091,6 +1106,14 @@ const Person GABRIEL_POZNANSKI = Person(
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ['gabriel.poznanski455@gmail.com']
+);
+const Person GABRIELA_OZOG = Person(
+    name: 'Gabriela Ożóg',
+    druzyna: '175 RwDW Orientalis',
+    hufiec: huf_zhp_rzeszow,
+    rankHarc: RankHarc.dhd,
+    org: Org.zhp,
+    email: ["gabriela.ozog.mw@gmail.com"]
 );
 const Person GABRIELA_SOBCZAK = Person(
     name: 'Gabriela Sobczak',
@@ -1993,6 +2016,14 @@ const Person KRZYSZTOF_BANIK = Person(
     org: Org.zhp,
     email: ["krystofb2010@gmail.com"]
 );
+const Person KRZYSZTOF_GORECKI = Person(
+    name: 'Krzysztof Górecki',
+    druzyna: 'Szczep Pomarańczowy',
+    hufiec: huf_zhp_andrychow,
+    rankInstr: RankInstr.phm,
+    org: Org.zhp,
+    email: ["krzysztof.gorecki@zhp.net.pl"]
+);
 const Person KRZYSZTOF_KANIEWSKI = Person(
   name: 'Krzysztof Kaniewski',
   rankHarc: RankHarc.zhpHOc,
@@ -2057,6 +2088,14 @@ const Person LENA_PATLA = Person(
     hufiec: huf_zhp_krosno,
     org: Org.zhp,
     email: ['lena.patla@icloud.com']
+);
+const Person LENA_STEFANSKA = Person(
+    name: 'Lena Stefańska',
+    druzyna: 'Różanie',
+    hufiec: huf_zhp_bydgoszcz_miasto,
+    rankHarc: RankHarc.zhpOchotniczka,
+    org: Org.zhp,
+    email: ["lenastefanska16@gmail.com"]
 );
 const Person LENA_WEISS = Person(
     name: 'Lena Weiss',
@@ -2604,6 +2643,12 @@ const Person MICHAL_KARWOWSKI = Person(
     hufiec: huf_zhp_warszawa_praga_pn,
     org: Org.zhp,
 );
+const Person MICHAL_KUSTOSIK = Person(
+    name: 'Michał Kustosik',
+    druzyna: 'Krąg Instruktorski',
+    hufiec: huf_zhp_lodz_polesie,
+    email: ["mkustosik@gmail.com"]
+);
 const Person MICHAL_MACULEWICZ = Person(
     name: 'Michał Maculewicz',
     druzyna: '6. GNDH „Vitae" im.Floriana Marciniaka',
@@ -3002,6 +3047,13 @@ const Person POLA_MARCINKOWSKA = Person(
     email: ['polamarcinkowska2005@gmail.com']
 );
 const Person PRZEMYSLAW_KLUCZKOWSKI = Person(name: 'Przemysław Kluczkowski');
+const Person PRZEMYSLAW_KOWALIK = Person(
+    name: 'Przemysław Kowalik',
+    druzyna: '300. PgLDH „Wichura"',
+    hufiec: huf_zhp_krakow_pdg,
+    rankHarc: RankHarc.dhc,
+    email: ["przemek.kowalik.pl@gmail.com"]
+);
 const Person PRZEMYSLAW_MROCZKOWSKI = Person(
     name: 'Przemysław Mroczkowski',
     druzyna: '16. Drużyna Harcerska im. marsz. J. Piłsudskiego „Niepokonani”',
