@@ -76,5 +76,12 @@ List<Gaweda> allGawedy = [
       fileName: 'gaweda_o_kregu_99',
       titleColor: (context) => Colors.black,
       graphicalResource: const GraphicalResource('gaweda_o_kregu_99.webp', 'Freepik (pvproductions)')
+  ),
+  Gaweda(
+      title: 'O kompasie',
+      fileName: 'gaweda_o_kompasie',
+      author: 'Daniel Iwanicki',
+      titleColor: (context) => Colors.black,
+      graphicalResource: const GraphicalResource('gaweda_o_kompasie.webp', 'Freepik (freepik)')
   )
 ];
