@@ -230,7 +230,7 @@ Poradnik poradnik_niedziela_na_obozie = Poradnik(
   name: poradnik_name_niedziela_na_obozie,
   title: poradnik_title_niedziela_na_obozie,
   pageCount: 17,
-  description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), przedstawiajacy przykładową strategię kształtowania u wychowanków określonej duchowości',
+  description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), omawiający rolę niedzieli podczas obozu oraz prawidłowego sposobu jej wykorzystania do pracy wychowawczej.',
   coverTitle: 'NIEDZIELA\nNA OBOZIE',
   coverSource: 'Daniel Iwanicki',
   formats: [FileFormat.pdf, FileFormat.docx],
