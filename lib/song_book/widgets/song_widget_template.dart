@@ -501,7 +501,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
     // double scrollLeft = scrollController.position.maxScrollExtent - scrollController.offset;
     double scrollLeft = autoscrollProvider.scrollExtent! - scrollController.offset;
 
-    double duration = scrollLeft*(1.1-settings.autoscrollTextSpeed)*500;
+    double duration = scrollLeft*(1.05-settings.autoscrollTextSpeed)*1000;
 
     if(duration.round() <= 0) return;
 
@@ -1272,7 +1272,7 @@ class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
                 child: SliderTheme(
                   child: Slider(
                     value: prov.speed,
-                    divisions: 5,
+                    divisions: 10,
                     activeColor: accentColor??accent_(context),
                     inactiveColor: hintEnab_(context),
                     onChanged: (value){
