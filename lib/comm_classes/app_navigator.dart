@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Duration pageTransDuration = MaterialPageRoute<Scaffold>(
+Duration get pageTransDuration => MaterialPageRoute<Scaffold>(
     builder: (context) => Container()
 ).transitionDuration;
 
