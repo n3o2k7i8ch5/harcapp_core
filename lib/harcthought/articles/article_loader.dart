@@ -83,7 +83,9 @@ class ArticleLoader extends SingleComputer<String, ArticleLoaderListener>{
 
   Future<(String?, String?, bool?)> _downloadSource(
       ArticleSource source,
-      {FutureOr Function(ArticleDataOrList articleData)? onArticleData}
+      { bool fullReload = false,
+        FutureOr Function(ArticleDataOrList articleData)? onArticleData
+      }
   ) async {
 
     String? updatedNewestLocalIdsSeen = null;
@@ -119,9 +121,9 @@ class ArticleLoader extends SingleComputer<String, ArticleLoaderListener>{
     var args = (
       kIsWeb ? webMockPort : receivePort.sendPort,
       sourceArticleLoaders[source]!,
-      await newestLocalIdsSeen(source),
-      await oldestLocalIdsSeen(source),
-      await isAllHistoryLoaded(source)
+      fullReload? null : await newestLocalIdsSeen(source),
+      fullReload? null : await oldestLocalIdsSeen(source),
+      fullReload? false : await isAllHistoryLoaded(source)
     );
 
     await compute(_downloadFromStream, args);
@@ -135,16 +137,16 @@ class ArticleLoader extends SingleComputer<String, ArticleLoaderListener>{
         await listener.onArticleData?.call(articleData);
   }
 
-  late bool all;
+  late bool fullReload;
   late List<ArticleSource> restrictToSources;
 
   @override
   Future<bool> run({
     bool awaitFinish = false,
-    bool all=false,
+    bool fullReload = false,
     List<ArticleSource> restrictToSources = ArticleSource.values
   }){
-    this.all = all;
+    this.fullReload = fullReload;
     this.restrictToSources = restrictToSources;
     return super.run(awaitFinish: awaitFinish);
   }
@@ -152,13 +154,16 @@ class ArticleLoader extends SingleComputer<String, ArticleLoaderListener>{
   @override
   Future<void> perform() async {
 
-    List<ArticleSource> sourcesToLoad = Set.from(unloadedArticleSources).intersection(Set.from(restrictToSources)).toList().cast();
+    List<ArticleSource> sourcesToLoad = fullReload?
+    ArticleSource.values.toList():
+    Set.from(unloadedArticleSources).intersection(Set.from(restrictToSources)).toList().cast();
 
     List<Future> futures = [];
     for(ArticleSource source in sourcesToLoad)
       futures.add(
           _downloadSource(
               source,
+              fullReload: fullReload,
               onArticleData: (ArticleDataOrList dataOrList) async {
                 await onNewArticles(source, dataOrList.toList());
                 await _callOnArticleListeners(dataOrList);
