@@ -155,7 +155,7 @@ class ArticleLoader extends SingleComputer<String, ArticleLoaderListener>{
   Future<void> perform() async {
 
     List<ArticleSource> sourcesToLoad = fullReload?
-    ArticleSource.values:
+    ArticleSource.values.toList():
     Set.from(unloadedArticleSources).intersection(Set.from(restrictToSources)).toList().cast();
 
     List<Future> futures = [];
