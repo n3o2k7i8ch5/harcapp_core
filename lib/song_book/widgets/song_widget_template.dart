@@ -67,8 +67,8 @@ class SongAutoScrollController extends StatelessWidget{
 
 class SongWidgetTemplate<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatefulWidget{
 
-  static IconData ICON_SEND_SONG = MdiIcons.sendCircleOutline;
-  static IconData ICON_SHARE_SONG = MdiIcons.shareVariant;
+  static IconData iconSendSong = MdiIcons.sendCircleOutline;
+  static IconData iconShareSong = MdiIcons.shareVariant;
 
   final TSong song;
   final SongBookSettTempl settings;
@@ -377,7 +377,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
             SliverList(
               delegate: SliverChildListDelegate([
 
-                _ButtonWidget<TSong, TAddPersRes>(this, contentCardsKey),
+                _ButtonsWidget<TSong, TAddPersRes>(this, contentCardsKey),
 
                 _ContentWidget<TSong, TAddPersRes>(this, scrollController, contentCardsKey, scrollviewKey, key: contentCardsKey),
 
@@ -766,18 +766,151 @@ class _ContribPersonWidget extends StatelessWidget{
 
 }
 
-class _ButtonWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatefulWidget{
+class _ButtonData{
+  final String name;
+  final IconData? _iconData;
+  final Widget Function(BuildContext, SongWidgetTemplateState, _ButtonsWidgetState)? _iconWidgetBuilder;
+  final void Function(BuildContext, SongWidgetTemplateState, _ButtonsWidgetState) onPressed;
+  final void Function(BuildContext, SongWidgetTemplateState, _ButtonsWidgetState)? onLongPress;
+  final bool Function(BuildContext, SongWidgetTemplateState, _ButtonsWidgetState) show;
 
-  final SongWidgetTemplateState<TSong, TAddPersRes> fragmentState;
-  final GlobalKey contentCardsKey;
-  const _ButtonWidget(this.fragmentState, this.contentCardsKey);
+  const _ButtonData({
+    required this.name,
+    IconData? iconData,
+    Widget Function(BuildContext, SongWidgetTemplateState, _ButtonsWidgetState)? iconWidget,
+    required this.onPressed,
+    this.onLongPress,
+    required this.show
+  }):
+        assert(iconData != null || iconWidget != null, 'Either iconData or iconWidget must be provided.'),
+        _iconData = iconData,
+        _iconWidgetBuilder = iconWidget;
 
-  @override
-  State<StatefulWidget> createState() => _ButtonWidgetState<TSong, TAddPersRes>();
+  Widget icon(BuildContext context, SongWidgetTemplateState songWidget, _ButtonsWidgetState buttonsWidget) =>
+      _iconWidgetBuilder == null ?
+      Icon(_iconData, size: Dimen.iconSize):
+      _iconWidgetBuilder.call(context, songWidget, buttonsWidget);
+
+  Widget buildIconButton(BuildContext context, SongWidgetTemplateState songWidget, _ButtonsWidgetState buttonsWidget) => SimpleButton.from(
+    text: name,
+    iconWidget: icon(context, songWidget, buttonsWidget),
+    margin: EdgeInsets.zero,
+    onTap: () => onPressed.call(context, songWidget, buttonsWidget),
+    onLongPress: onLongPress == null?
+    null:
+        () => onLongPress?.call(context, songWidget, buttonsWidget),
+  );
+
+  Widget buildSimpleButton(BuildContext context, SongWidgetTemplateState songWidget, _ButtonsWidgetState buttonsWidget) => IconButton(
+    icon: icon(context, songWidget, buttonsWidget),
+    onPressed: () => onPressed.call(context, songWidget, buttonsWidget),
+    onLongPress: onLongPress == null?
+    null:
+        () => onLongPress?.call(context, songWidget, buttonsWidget),
+  );
 
 }
 
-class _ButtonWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends State<_ButtonWidget<TSong, TAddPersRes>>{
+class _ButtonsWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatefulWidget{
+
+  final SongWidgetTemplateState<TSong, TAddPersRes> fragmentState;
+  final GlobalKey contentCardsKey;
+  const _ButtonsWidget(this.fragmentState, this.contentCardsKey);
+
+  @override
+  State<StatefulWidget> createState() => _ButtonsWidgetState<TSong, TAddPersRes>();
+
+}
+
+class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends State<_ButtonsWidget<TSong, TAddPersRes>>{
+  
+  // Reversed order of buttons to show them from right to left.
+  List<_ButtonData> buttonData = [
+
+    _ButtonData(
+      name: 'Ocena',
+      iconWidget: (_, songWidget, _) => SongRateIcon(songWidget.song.rate),
+      onPressed: (_, songWidget, _) =>
+      songWidget.onRateTap==null?
+      null:
+          (){
+        final RenderBox renderBox = songWidget.contentCardsKey.currentContext!.findRenderObject() as RenderBox;
+        final position = renderBox.localToGlobal(Offset.zero).dy;// - parent.widget.topScreenPadding;
+        songWidget.onRateTap!(position);
+      },
+      show: (_, _, _) => true,
+    ),
+
+    _ButtonData(
+        name: 'Rozmiar czcionki',
+        iconWidget: (_, _, _) => TextSizeIcon(),
+        onPressed: (_, _, buttonsWidget) => buttonsWidget.showChangeSize(),
+        show: (_, _, _) => true
+    ),
+
+    _ButtonData(
+        name: 'Albumy',
+        iconData: FeatherIcons.bookmark,
+        onPressed: (_, songWidget, _) => songWidget.onAlbumsTap?.call(),
+        show: (_, _, _) => true
+    ),
+
+    _ButtonData(
+        name: 'YouTube',
+        iconData: FeatherIcons.youtube,
+        onLongPress: (_, songWidget, _) => songWidget.onYtLongPress?.call(),
+        onPressed: (_, songWidget, _) => songWidget.onYtTap==null?null:(){
+          final RenderBox renderBox = songWidget.contentCardsKey.currentContext!.findRenderObject() as RenderBox;
+          final position = renderBox.localToGlobal(Offset.zero).dy; // - parent.widget.topScreenPadding;
+          songWidget.onYtTap!(position);
+        },
+        show: (_, parent, _) => parent.song.youtubeVideoId != null && parent.song.youtubeVideoId!.length!=0
+    ),
+    
+    _ButtonData(
+      name: 'Trudne słowa',
+      iconData: MdiIcons.timelineTextOutline,
+      onPressed: (_, songWidget, _) => songWidget.onSongExplanationTap?.call(),
+      show: (_, songWidget, _) => songWidget.showSongExplanationButton
+    ),
+
+    _ButtonData(
+      name: 'Modyfikuj',
+      iconData: FeatherIcons.edit,
+      onPressed: (context, parent, _) => parent.onEditTap?.call(TextSizeProvider.of(context)),
+      show: (_, _, _) => true
+    ),
+
+    _ButtonData(
+      name: 'Kopiuj treść',
+      iconData: MdiIcons.contentCopy,
+      onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
+      show: (_, _, _) => true
+    ),
+
+    _ButtonData(
+        name: 'Udostępnij',
+        iconData: SongWidgetTemplate.iconShareSong,
+        onPressed: (_, songWidget, _) => songWidget.onShareTap?.call(),
+        show: (_, songWidget, _) => songWidget.song.isOwn
+    ),
+
+    _ButtonData(
+      name: 'Wyślij do HarcAppa',
+      iconData: SongWidgetTemplate.iconSendSong,
+      onPressed: (_, songWidget, _) => songWidget.onSendSongTap?.call(),
+      show: (_, songWidget, _) => songWidget.song.isOwn
+    ),
+
+    _ButtonData(
+      name: 'Usuń',
+      iconData: MdiIcons.trashCanOutline,
+      onPressed: (_, songWidget, _) => songWidget.onDeleteTap?.call(),
+      onLongPress: (_, songWidget, _) => songWidget.onDeleteLongPress,
+      show: (_, songWidget, _) => songWidget.song.isOwn
+    ),
+    
+  ];
 
   SongWidgetTemplateState<TSong, TAddPersRes> get fragmentState => widget.fragmentState;
   GlobalKey get contentCardsKey => widget.contentCardsKey;
@@ -948,7 +1081,7 @@ class TextSizeIcon extends StatelessWidget{
 
           Align(
             alignment: Alignment.centerLeft,
-            child: Text('Т', style: TextStyle(
+            child: Text('A', style: TextStyle(
                 fontSize: 22.0,
                 color: color??iconEnab_(context),
                 fontWeight: FontWeight.w400,
@@ -958,7 +1091,7 @@ class TextSizeIcon extends StatelessWidget{
 
           Align(
             alignment: Alignment.centerRight,
-            child: Text('т', style: TextStyle(
+            child: Text('a', style: TextStyle(
                 fontSize: 22.0,
                 color: color??iconEnab_(context),
                 fontWeight: FontWeight.w400,
@@ -1074,14 +1207,14 @@ class _BottomWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolve
           ),
 
           IconButton(
-              icon: Icon(SongWidgetTemplate.ICON_SHARE_SONG, color: iconEnab_(context)),
+              icon: Icon(SongWidgetTemplate.iconShareSong, color: iconEnab_(context)),
               onPressed: parent.onShareTap
           ),
 
           if(song.isOwn)
             IconButton(
                 icon: Icon(
-                    SongWidgetTemplate.ICON_SEND_SONG,
+                    SongWidgetTemplate.iconSendSong,
                     color: iconEnab_(context)),
                 onPressed: parent.onSendSongTap
             ),
