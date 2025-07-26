@@ -10,7 +10,6 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
-import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/chord_draw_bar.dart';
 import 'package:harcapp_core/comm_widgets/instrument_type.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
@@ -782,9 +781,9 @@ class _ButtonData{
     this.onLongPress,
     required this.show
   }):
-        assert(iconData != null || iconWidget != null, 'Either iconData or iconWidget must be provided.'),
-        _iconData = iconData,
-        _iconWidgetBuilder = iconWidget;
+      assert(iconData != null || iconWidget != null, 'Either iconData or iconWidget must be provided.'),
+      _iconData = iconData,
+      _iconWidgetBuilder = iconWidget;
 
   Widget icon(BuildContext context, SongWidgetTemplateState songWidget, _ButtonsWidgetState buttonsWidget) =>
       _iconWidgetBuilder == null ?
@@ -800,13 +799,13 @@ class _ButtonData{
     icon: icon(context, songWidget, buttonsWidget),
 
     onPressed: tappable?
-        () => onPressed.call(context, songWidget, buttonsWidget):
+    () => onPressed.call(context, songWidget, buttonsWidget):
     null,
 
     onLongPress:
     onLongPress == null || !tappable?
     null:
-        () => onLongPress?.call(context, songWidget, buttonsWidget),
+    () => onLongPress?.call(context, songWidget, buttonsWidget),
   );
 
   Widget buildSimpleButton(
@@ -821,7 +820,7 @@ class _ButtonData{
     onTap: () => onPressed.call(context, songWidget, buttonsWidget),
     onLongPress: onLongPress == null?
     null:
-        () => onLongPress?.call(context, songWidget, buttonsWidget),
+    () => onLongPress?.call(context, songWidget, buttonsWidget),
   );
 
 }
@@ -849,7 +848,7 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
       onPressed: (_, songWidget, _) =>
       songWidget.onRateTap==null?
       null:
-          (){
+      (){
         final RenderBox renderBox = songWidget.contentCardsKey.currentContext!.findRenderObject() as RenderBox;
         final position = renderBox.localToGlobal(Offset.zero).dy;// - parent.widget.topScreenPadding;
         songWidget.onRateTap!(position);
@@ -1180,7 +1179,7 @@ class TextSizeIcon extends StatelessWidget{
         children: [
 
           Align(
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.bottomLeft,
             child: Text('A', style: TextStyle(
                 fontSize: 22.0,
                 color: color??iconEnab_(context),
@@ -1190,11 +1189,11 @@ class TextSizeIcon extends StatelessWidget{
           ),
 
           Align(
-            alignment: Alignment.centerRight,
+            alignment: Alignment.bottomRight,
             child: Text('A', style: TextStyle(
-                fontSize:16.0,
+                fontSize:15.0,
                 color: color??iconEnab_(context),
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
                 fontFamily: 'Roboto'
             )),
           )
@@ -1205,129 +1204,129 @@ class TextSizeIcon extends StatelessWidget{
 
 }
 
-class _TopWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
-
-  final SongWidgetTemplateState<TSong, TAddPersRes> parent;
-  final void Function()? onTextSizeTap;
-  final GlobalKey contentCardsKey;
-
-  TSong get song => parent.song;
-
-  double get topScreenPadding => parent.topScreenPadding;
-
-  const _TopWidget(this.parent, this.contentCardsKey, {this.onTextSizeTap});
-
-
-  @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-    scrollDirection: Axis.horizontal,
-    physics: const BouncingScrollPhysics(),
-    reverse: true,
-    child: Row(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-
-        if(parent.showSongExplanationButton)
-          IconButton(
-            icon: Icon(MdiIcons.timelineTextOutline),
-            onPressed: parent.onSongExplanationTap,
-          ),
-
-        if(song.youtubeVideoId != null && song.youtubeVideoId!.length!=0)
-          AppButton(
-              icon: Icon(
-                  FeatherIcons.youtube,
-                  color: iconEnab_(context)
-              ),
-              onLongPress: parent.onYtLongPress,
-              onTap: parent.onYtTap==null?null:(){
-                final RenderBox renderBox = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
-                final position = renderBox.localToGlobal(Offset.zero).dy; // - parent.widget.topScreenPadding;
-                parent.onYtTap!(position);
-              }
-          ),
-
-        IconButton(
-          icon: Icon(FeatherIcons.bookmark, color: iconEnab_(context)),
-          onPressed: parent.onAlbumsTap,
-        ),
-
-        IconButton(
-            icon: TextSizeIcon(),
-            onPressed: onTextSizeTap
-        ),
-
-        IconButton(
-            icon: SongRateIcon(song.rate),
-            onPressed:
-            parent.onRateTap==null?
-            null:
-            (){
-              final RenderBox renderBox = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
-              final position = renderBox.localToGlobal(Offset.zero).dy;// - parent.widget.topScreenPadding;
-              parent.onRateTap!(position);
-            }
-        )
-      ],
-    ),
-  );
-
-}
-
-class _BottomWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
-
-  final SongWidgetTemplateState<TSong, TAddPersRes> parent;
-  const _BottomWidget(this.parent);
-
-  TSong get song => parent.song;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      physics: BouncingScrollPhysics(),
-      reverse: true,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          if(song.isOwn)
-            AppButton(
-                icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
-                onTap: parent.onDeleteTap,
-                onLongPress: parent.onDeleteLongPress),
-
-          // if(!song.isOwn)
-          //   IconButton(icon: Icon(FeatherIcons.alertTriangle, color: iconEnab_(context)),
-          //       onPressed: parent.onReportTap),
-
-          IconButton(
-              icon: Icon(FeatherIcons.edit, color: iconEnab_(context)),
-              onPressed: () => parent.onEditTap?.call(Provider.of<TextSizeProvider>(context, listen: false))
-          ),
-
-          IconButton(
-              icon: Icon(SongWidgetTemplate.iconShareSong, color: iconEnab_(context)),
-              onPressed: parent.onShareTap
-          ),
-
-          if(song.isOwn)
-            IconButton(
-                icon: Icon(
-                    SongWidgetTemplate.iconSendSong,
-                    color: iconEnab_(context)),
-                onPressed: parent.onSendSongTap
-            ),
-
-          IconButton(icon: Icon(MdiIcons.contentCopy, color: iconEnab_(context)),
-              onPressed: parent.onCopyTap
-          ),
-
-        ],
-      ),
-    );
-  }
-}
+// class _TopWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
+//
+//   final SongWidgetTemplateState<TSong, TAddPersRes> parent;
+//   final void Function()? onTextSizeTap;
+//   final GlobalKey contentCardsKey;
+//
+//   TSong get song => parent.song;
+//
+//   double get topScreenPadding => parent.topScreenPadding;
+//
+//   const _TopWidget(this.parent, this.contentCardsKey, {this.onTextSizeTap});
+//
+//
+//   @override
+//   Widget build(BuildContext context) => SingleChildScrollView(
+//     scrollDirection: Axis.horizontal,
+//     physics: const BouncingScrollPhysics(),
+//     reverse: true,
+//     child: Row(
+//       mainAxisSize: MainAxisSize.max,
+//       children: [
+//
+//         if(parent.showSongExplanationButton)
+//           IconButton(
+//             icon: Icon(MdiIcons.timelineTextOutline),
+//             onPressed: parent.onSongExplanationTap,
+//           ),
+//
+//         if(song.youtubeVideoId != null && song.youtubeVideoId!.length!=0)
+//           AppButton(
+//               icon: Icon(
+//                   FeatherIcons.youtube,
+//                   color: iconEnab_(context)
+//               ),
+//               onLongPress: parent.onYtLongPress,
+//               onTap: parent.onYtTap==null?null:(){
+//                 final RenderBox renderBox = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
+//                 final position = renderBox.localToGlobal(Offset.zero).dy; // - parent.widget.topScreenPadding;
+//                 parent.onYtTap!(position);
+//               }
+//           ),
+//
+//         IconButton(
+//           icon: Icon(FeatherIcons.bookmark, color: iconEnab_(context)),
+//           onPressed: parent.onAlbumsTap,
+//         ),
+//
+//         IconButton(
+//             icon: TextSizeIcon(),
+//             onPressed: onTextSizeTap
+//         ),
+//
+//         IconButton(
+//             icon: SongRateIcon(song.rate),
+//             onPressed:
+//             parent.onRateTap==null?
+//             null:
+//             (){
+//               final RenderBox renderBox = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
+//               final position = renderBox.localToGlobal(Offset.zero).dy;// - parent.widget.topScreenPadding;
+//               parent.onRateTap!(position);
+//             }
+//         )
+//       ],
+//     ),
+//   );
+//
+// }
+//
+// class _BottomWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
+//
+//   final SongWidgetTemplateState<TSong, TAddPersRes> parent;
+//   const _BottomWidget(this.parent);
+//
+//   TSong get song => parent.song;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SingleChildScrollView(
+//       scrollDirection: Axis.horizontal,
+//       physics: BouncingScrollPhysics(),
+//       reverse: true,
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.end,
+//         mainAxisSize: MainAxisSize.max,
+//         children: [
+//           if(song.isOwn)
+//             AppButton(
+//                 icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
+//                 onTap: parent.onDeleteTap,
+//                 onLongPress: parent.onDeleteLongPress),
+//
+//           // if(!song.isOwn)
+//           //   IconButton(icon: Icon(FeatherIcons.alertTriangle, color: iconEnab_(context)),
+//           //       onPressed: parent.onReportTap),
+//
+//           IconButton(
+//               icon: Icon(FeatherIcons.edit, color: iconEnab_(context)),
+//               onPressed: () => parent.onEditTap?.call(Provider.of<TextSizeProvider>(context, listen: false))
+//           ),
+//
+//           IconButton(
+//               icon: Icon(SongWidgetTemplate.iconShareSong, color: iconEnab_(context)),
+//               onPressed: parent.onShareTap
+//           ),
+//
+//           if(song.isOwn)
+//             IconButton(
+//                 icon: Icon(
+//                     SongWidgetTemplate.iconSendSong,
+//                     color: iconEnab_(context)),
+//                 onPressed: parent.onSendSongTap
+//             ),
+//
+//           IconButton(icon: Icon(MdiIcons.contentCopy, color: iconEnab_(context)),
+//               onPressed: parent.onCopyTap
+//           ),
+//
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class _ContentWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
 
