@@ -812,14 +812,19 @@ class _ButtonData{
   Widget buildSimpleButton(
     BuildContext context,
     SongWidgetTemplateState songWidget,
-    _ButtonsWidgetState buttonsWidget
+    _ButtonsWidgetState buttonsWidget,
+    {bool tappable = true}
   ) => SimpleButton.from(
     context: context,
     text: name,
     iconWidget: icon(context, songWidget, buttonsWidget),
     margin: EdgeInsets.zero,
-    onTap: () => onPressed.call(context, songWidget, buttonsWidget),
-    onLongPress: onLongPress == null?
+    onTap:
+    tappable?
+    () => onPressed.call(context, songWidget, buttonsWidget):
+    null,
+
+    onLongPress: onLongPress == null || !tappable?
     null:
     () => onLongPress?.call(context, songWidget, buttonsWidget),
   );
@@ -1056,7 +1061,8 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
                     child: button.buildSimpleButton(
                       context,
                       fragmentState,
-                      this
+                      this,
+                      tappable: false,
                   )
                 )
               ).toList(),
