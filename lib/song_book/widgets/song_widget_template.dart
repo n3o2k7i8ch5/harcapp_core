@@ -1052,9 +1052,7 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
               menuPadding: EdgeInsets.zero,
               padding: EdgeInsets.zero,
               icon: Icon(MdiIcons.dotsVertical),
-              onSelected: (_ButtonData item){
-                item.onPressed(context, fragmentState, this);
-              },
+              onSelected: (_ButtonData item) => item.onPressed(context, fragmentState, this),
               itemBuilder: (BuildContext context) => hiddenButtons.map(
                   (button) => PopupMenuItem<_ButtonData>(
                     value: button,
