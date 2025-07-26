@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:harcapp_core/comm_classes/app_navigator.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
@@ -1044,7 +1045,10 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
               menuPadding: EdgeInsets.zero,
               padding: EdgeInsets.zero,
               icon: Icon(MdiIcons.dotsVertical),
-              onSelected: (_ButtonData item) => item.onPressed(context, fragmentState, this),
+              onSelected: (_ButtonData item){
+                popPage(context, root: true);
+                item.onPressed(context, fragmentState, this);
+              },
               itemBuilder: (BuildContext context) => hiddenButtons.map(
                   (button) => PopupMenuItem<_ButtonData>(
                     value: button,
