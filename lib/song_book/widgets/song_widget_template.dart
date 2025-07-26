@@ -963,7 +963,8 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
   
   @override
   Widget build(BuildContext context){
-    return LayoutBuilder(
+
+    Widget buttonWidget = LayoutBuilder(
       builder: (context, constraints) {
 
         List<_ButtonData> buttonToShow = buttonData.where((button) => button.show(context, fragmentState, this)).toList();
@@ -1017,6 +1018,28 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
         );
 
       },
+    );
+
+    return SizedBox(
+      height: Dimen.iconFootprint,
+      child: AnimatedChildSlider(
+        direction: Axis.horizontal,
+        duration: Duration(milliseconds: 150),
+        alignment: Alignment.centerRight,
+        isCenter: false,
+        index: changeSizeVisible?1:0,
+        children: [
+
+          buttonWidget,
+
+          _TextResizeWidget<TSong, TAddPersRes>(
+            fragmentState,
+            onCloseTap: hideChangeSize,
+            onResizeTap: scheduleAutoHide
+          )
+
+        ],
+      )
     );
   }
 
@@ -1168,10 +1191,10 @@ class TextSizeIcon extends StatelessWidget{
 
           Align(
             alignment: Alignment.centerRight,
-            child: Text('a', style: TextStyle(
-                fontSize: 22.0,
+            child: Text('A', style: TextStyle(
+                fontSize:16.0,
                 color: color??iconEnab_(context),
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
                 fontFamily: 'Roboto'
             )),
           )
