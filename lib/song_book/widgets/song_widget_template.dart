@@ -792,6 +792,24 @@ class _ButtonData{
       _iconWidgetBuilder.call(context, songWidget, buttonsWidget);
 
   Widget buildIconButton(
+      BuildContext context,
+      SongWidgetTemplateState songWidget,
+      _ButtonsWidgetState buttonsWidget,
+      {bool tappable = true}
+      ) => IconButton(
+    icon: icon(context, songWidget, buttonsWidget),
+
+    onPressed: tappable?
+        () => onPressed.call(context, songWidget, buttonsWidget):
+    null,
+
+    onLongPress:
+    onLongPress == null || !tappable?
+    null:
+        () => onLongPress?.call(context, songWidget, buttonsWidget),
+  );
+
+  Widget buildSimpleButton(
     BuildContext context,
     SongWidgetTemplateState songWidget,
     _ButtonsWidgetState buttonsWidget
@@ -804,24 +822,6 @@ class _ButtonData{
     onLongPress: onLongPress == null?
     null:
         () => onLongPress?.call(context, songWidget, buttonsWidget),
-  );
-
-  Widget buildSimpleButton(
-    BuildContext context,
-    SongWidgetTemplateState songWidget,
-    _ButtonsWidgetState buttonsWidget,
-    {bool tappable = true}
-  ) => IconButton(
-    icon: icon(context, songWidget, buttonsWidget),
-
-    onPressed: tappable?
-    () => onPressed.call(context, songWidget, buttonsWidget):
-    null,
-
-    onLongPress:
-    onLongPress == null || !tappable?
-    null:
-    () => onLongPress?.call(context, songWidget, buttonsWidget),
   );
 
 }
