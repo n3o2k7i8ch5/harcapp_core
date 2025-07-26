@@ -172,7 +172,7 @@ flutter:
 
     - family: RobotoFlex
       fonts:
-        - asset: assets/fonts/RobotoFlex.ttf
+        - asset: fonts/RobotoFlex.ttf
 
     - family: Ubuntu
       fonts:
