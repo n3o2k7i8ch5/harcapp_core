@@ -791,7 +791,11 @@ class _ButtonData{
       Icon(_iconData, size: Dimen.iconSize):
       _iconWidgetBuilder.call(context, songWidget, buttonsWidget);
 
-  Widget buildIconButton(BuildContext context, SongWidgetTemplateState songWidget, _ButtonsWidgetState buttonsWidget) => SimpleButton.from(
+  Widget buildIconButton(
+    BuildContext context,
+    SongWidgetTemplateState songWidget,
+    _ButtonsWidgetState buttonsWidget
+  ) => SimpleButton.from(
     text: name,
     iconWidget: icon(context, songWidget, buttonsWidget),
     margin: EdgeInsets.zero,
@@ -801,12 +805,22 @@ class _ButtonData{
         () => onLongPress?.call(context, songWidget, buttonsWidget),
   );
 
-  Widget buildSimpleButton(BuildContext context, SongWidgetTemplateState songWidget, _ButtonsWidgetState buttonsWidget) => IconButton(
+  Widget buildSimpleButton(
+    BuildContext context,
+    SongWidgetTemplateState songWidget,
+    _ButtonsWidgetState buttonsWidget,
+    {bool tappable = true}
+  ) => IconButton(
     icon: icon(context, songWidget, buttonsWidget),
-    onPressed: () => onPressed.call(context, songWidget, buttonsWidget),
-    onLongPress: onLongPress == null?
+
+    onPressed: tappable?
+    () => onPressed.call(context, songWidget, buttonsWidget):
+    null,
+
+    onLongPress:
+    onLongPress == null || !tappable?
     null:
-        () => onLongPress?.call(context, songWidget, buttonsWidget),
+    () => onLongPress?.call(context, songWidget, buttonsWidget),
   );
 
 }
@@ -815,6 +829,7 @@ class _ButtonsWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolv
 
   final SongWidgetTemplateState<TSong, TAddPersRes> fragmentState;
   final GlobalKey contentCardsKey;
+
   const _ButtonsWidget(this.fragmentState, this.contentCardsKey);
 
   @override
@@ -825,7 +840,7 @@ class _ButtonsWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolv
 class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends State<_ButtonsWidget<TSong, TAddPersRes>>{
   
   // Reversed order of buttons to show them from right to left.
-  List<_ButtonData> buttonData = [
+  static List<_ButtonData> buttonData = [
 
     _ButtonData(
       name: 'Ocena',
@@ -946,54 +961,115 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
   }
   
   @override
-  Widget build(BuildContext context) => SizedBox(
-    height: Dimen.iconFootprint,
-    child: AnimatedChildSlider(
-      direction: Axis.horizontal,
-      duration: Duration(milliseconds: 150),
-      alignment: Alignment.centerRight,
-      isCenter: false,
-      index: changeSizeVisible?1:0,
-      children: [
+  Widget build(BuildContext context){
+    return LayoutBuilder(
+      builder: (context, constraints) {
 
-        Row(
-          children: <Widget>[
-            IconButton(
-              icon: Icon(MdiIcons.dotsHorizontal, color: iconEnab_(context)),
-              onPressed: () => setState(() => topVisible = !topVisible),
+        List<_ButtonData> buttonToShow = buttonData.where((button) => button.show(context, fragmentState, this)).toList();
+
+        if (constraints.maxWidth > Dimen.iconFootprint * buttonToShow.length)
+          return Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: buttonToShow.map((button) => button.buildIconButton(context, fragmentState, this)).toList(),
+          );
+
+        double widthToShow = constraints.maxWidth - 2*Dimen.iconFootprint;
+        int nButtonsToShow = (widthToShow / Dimen.iconFootprint).floor();
+
+        List<_ButtonData> visibleButtons = buttonToShow.sublist(0, nButtonsToShow);
+        List<_ButtonData> hiddenButtons = buttonToShow.sublist(nButtonsToShow);
+
+        return Row(
+          children: [
+
+            PopupMenuButton<_ButtonData>(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppCard.bigRadius),
+              ),
+              menuPadding: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
+              child: Icon(MdiIcons.dotsVertical),
+              onSelected: (_ButtonData item) => item.onPressed(context, fragmentState, this),
+              itemBuilder: (BuildContext context) => hiddenButtons.map(
+                  (button) => PopupMenuItem<_ButtonData>(
+                    value: button,
+                    padding: EdgeInsets.zero,
+                    child: button.buildSimpleButton(
+                      context,
+                      fragmentState,
+                      this
+                  )
+                )
+              ).toList(),
             ),
 
             Expanded(
-              child: AnimatedChildSlider(
-                direction: Axis.vertical,
-                duration: Duration(milliseconds: 150),
-                alignment: Alignment.centerRight,
-                isCenter: false,
-                index: topVisible?0:1,
-                children: <Widget>[
-                  _TopWidget<TSong, TAddPersRes>(
-                      fragmentState,
-                      contentCardsKey,
-                      onTextSizeTap: showChangeSize,
-                  ),
-                  _BottomWidget<TSong, TAddPersRes>(fragmentState)
-                ],
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: visibleButtons.map((button) => button.buildIconButton(context, fragmentState, this)).toList(),
               ),
-            ),
+            )
 
           ],
-        ),
+        );
 
-        _TextResizeWidget<TSong, TAddPersRes>(
-          fragmentState,
-          onCloseTap: hideChangeSize,
-          onResizeTap: scheduleAutoHide
-        )
+      },
+    );
+  }
 
-      ],
-    )
-  );
+
+  // SizedBox(
+  //   height: Dimen.iconFootprint,
+  //   child: AnimatedChildSlider(
+  //     direction: Axis.horizontal,
+  //     duration: Duration(milliseconds: 150),
+  //     alignment: Alignment.centerRight,
+  //     isCenter: false,
+  //     index: changeSizeVisible?1:0,
+  //     children: [
+  //
+  //       Row(
+  //         children: <Widget>[
+  //           IconButton(
+  //             icon: Icon(MdiIcons.dotsHorizontal, color: iconEnab_(context)),
+  //             onPressed: () => setState(() => topVisible = !topVisible),
+  //           ),
+  //
+  //           Expanded(
+  //             child: AnimatedChildSlider(
+  //               direction: Axis.vertical,
+  //               duration: Duration(milliseconds: 150),
+  //               alignment: Alignment.centerRight,
+  //               isCenter: false,
+  //               index: topVisible?0:1,
+  //               children: <Widget>[
+  //                 _TopWidget<TSong, TAddPersRes>(
+  //                     fragmentState,
+  //                     contentCardsKey,
+  //                     onTextSizeTap: showChangeSize,
+  //                 ),
+  //                 _BottomWidget<TSong, TAddPersRes>(fragmentState)
+  //               ],
+  //             ),
+  //           ),
+  //
+  //         ],
+  //       ),
+  //
+  //       _TextResizeWidget<TSong, TAddPersRes>(
+  //         fragmentState,
+  //         onCloseTap: hideChangeSize,
+  //         onResizeTap: scheduleAutoHide
+  //       )
+  //
+  //     ],
+  //   )
+  // );
 }
+
+
 
 class _TextResizeWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
 
