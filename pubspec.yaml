@@ -159,42 +159,42 @@ flutter:
 
     - family: Lato
       fonts:
-        - asset: packages/harcapp_core/fonts/Lato/Lato-Regular.ttf
+        - asset: fonts/Lato/Lato-Regular.ttf
           weight: 300
-        - asset: packages/harcapp_core/fonts/Lato/Lato-Italic.ttf
+        - asset: fonts/Lato/Lato-Italic.ttf
           weight: 300
           style: italic
-        - asset: packages/harcapp_core/fonts/Lato/Lato-Bold.ttf
+        - asset: fonts/Lato/Lato-Bold.ttf
           weight: 700
-        - asset: packages/harcapp_core/fonts/Lato/Lato-BoldItalic.ttf
+        - asset: fonts/Lato/Lato-BoldItalic.ttf
           weight: 700
           style: italic
 
     - family: RobotoFlex
       fonts:
-        - asset: packages/harcapp_core/fonts/RobotoFlex.ttf
+        - asset: assets/fonts/RobotoFlex.ttf
 
     - family: Ubuntu
       fonts:
-        - asset: packages/harcapp_core/fonts/Ubuntu/Ubuntu-B.ttf
+        - asset: fonts/Ubuntu/Ubuntu-B.ttf
           weight: 900
-        - asset: packages/harcapp_core/fonts/Ubuntu/Ubuntu-BI.ttf
+        - asset: fonts/Ubuntu/Ubuntu-BI.ttf
           weight: 900
           style: italic
-        - asset: packages/harcapp_core/fonts/Ubuntu/Ubuntu-M.ttf
+        - asset: fonts/Ubuntu/Ubuntu-M.ttf
           weight: 700
-        - asset: packages/harcapp_core/fonts/Ubuntu/Ubuntu-MI.ttf
+        - asset: fonts/Ubuntu/Ubuntu-MI.ttf
           weight: 700
           style: italic
-        - asset: packages/harcapp_core/fonts/Ubuntu/Ubuntu-R.ttf
+        - asset: fonts/Ubuntu/Ubuntu-R.ttf
           weight: 500
-        - asset: packages/harcapp_core/fonts/Ubuntu/Ubuntu-RI.ttf
+        - asset: fonts/Ubuntu/Ubuntu-RI.ttf
           weight: 500
           style: italic
-        - asset: packages/harcapp_core/fonts/Ubuntu/Ubuntu-L.ttf
+        - asset: fonts/Ubuntu/Ubuntu-L.ttf
           weight: 300
-        - asset: packages/harcapp_core/fonts/Ubuntu/Ubuntu-LI.ttf
+        - asset: fonts/Ubuntu/Ubuntu-LI.ttf
           weight: 300
           style: italic
-        - asset: packages/harcapp_core/fonts/Ubuntu/Ubuntu-Th.ttf
+        - asset: fonts/Ubuntu/Ubuntu-Th.ttf
           weight: 100
