@@ -818,7 +818,9 @@ class _ButtonData{
     context: context,
     text: name,
     iconWidget: icon(context, songWidget, buttonsWidget),
+    fontWeight: weight.normal,
     margin: EdgeInsets.zero,
+
     onTap:
     tappable?
     () => onPressed.call(context, songWidget, buttonsWidget):
