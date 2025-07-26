@@ -1175,33 +1175,36 @@ class TextSizeIcon extends StatelessWidget{
     child: SizedBox(
         width: Dimen.iconSize,
         height: Dimen.iconSize,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 0.5),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
 
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Text('A', style: TextStyle(
-                  height: 1,
-                  fontSize: 20.0,
-                  color: iconEnab_(context),
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Roboto'
-              )),
-            ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Text('A', style: TextStyle(
+                    height: 1,
+                    fontSize: 20.0,
+                    color: iconEnab_(context),
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Roboto'
+                )),
+              ),
 
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Text('A', style: TextStyle(
-                  height: 1.1,
-                  fontSize: 14.0,
-                  color: iconEnab_(context),
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Roboto'
-              )),
-            ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Text('A', style: TextStyle(
+                    height: 1.1,
+                    fontSize: 14.0,
+                    color: iconEnab_(context),
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Roboto'
+                )),
+              ),
 
-          ],
+            ],
+          ),
         )
     ),
   );
