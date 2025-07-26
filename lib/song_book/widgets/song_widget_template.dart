@@ -1183,7 +1183,7 @@ class TextSizeIcon extends StatelessWidget{
               alignment: Alignment.bottomCenter,
               child: Text('A', style: TextStyle(
                   height: 1,
-                  fontSize: 20.0,
+                  fontSize: 22.0,
                   color: iconEnab_(context),
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Roboto'
@@ -1194,7 +1194,7 @@ class TextSizeIcon extends StatelessWidget{
               alignment: Alignment.bottomCenter,
               child: Text('A', style: TextStyle(
                   height: 1.1,
-                  fontSize: 14.0,
+                  fontSize: 15.0,
                   color: iconEnab_(context),
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Roboto'
