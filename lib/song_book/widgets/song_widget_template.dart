@@ -1176,7 +1176,7 @@ class TextSizeIcon extends StatelessWidget{
         width: Dimen.iconSize,
         height: Dimen.iconSize,
         child: Padding(
-          padding: EdgeInsets.only(bottom: 0.5),
+          padding: EdgeInsets.only(bottom: 1),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
