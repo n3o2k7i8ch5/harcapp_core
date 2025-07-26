@@ -985,13 +985,11 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
   SongWidgetTemplateState<TSong, TAddPersRes> get fragmentState => widget.fragmentState;
   GlobalKey get contentCardsKey => widget.contentCardsKey;
 
-  late bool topVisible;
   late bool changeSizeVisible;
   late int scheduleId;
 
   @override
   void initState() {
-    topVisible = true;
     changeSizeVisible = false;
     scheduleId = 0;
     super.initState();
@@ -1045,7 +1043,7 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
               ),
               menuPadding: EdgeInsets.zero,
               padding: EdgeInsets.zero,
-              child: Icon(MdiIcons.dotsVertical),
+              icon: Icon(MdiIcons.dotsVertical),
               onSelected: (_ButtonData item) => item.onPressed(context, fragmentState, this),
               itemBuilder: (BuildContext context) => hiddenButtons.map(
                   (button) => PopupMenuItem<_ButtonData>(
