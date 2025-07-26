@@ -845,10 +845,9 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
     _ButtonData(
       name: 'Ocena',
       iconWidget: (_, songWidget, _) => SongRateIcon(songWidget.song.rate),
-      onPressed: (_, songWidget, _) =>
-      songWidget.onRateTap==null?
-      null:
-      (){
+      onPressed: (_, songWidget, _){
+        if(songWidget.onRateTap == null) return;
+
         final RenderBox renderBox = songWidget.contentCardsKey.currentContext!.findRenderObject() as RenderBox;
         final position = renderBox.localToGlobal(Offset.zero).dy;// - parent.widget.topScreenPadding;
         songWidget.onRateTap!(position);
@@ -874,7 +873,8 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
         name: 'YouTube',
         iconData: FeatherIcons.youtube,
         onLongPress: (_, songWidget, _) => songWidget.onYtLongPress?.call(),
-        onPressed: (_, songWidget, _) => songWidget.onYtTap==null?null:(){
+        onPressed: (_, songWidget, _){
+          if(songWidget.onYtTap==null) return;
           final RenderBox renderBox = songWidget.contentCardsKey.currentContext!.findRenderObject() as RenderBox;
           final position = renderBox.localToGlobal(Offset.zero).dy; // - parent.widget.topScreenPadding;
           songWidget.onYtTap!(position);
