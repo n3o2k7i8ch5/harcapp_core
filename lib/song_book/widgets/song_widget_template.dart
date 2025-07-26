@@ -1205,7 +1205,7 @@ class TextSizeIcon extends StatelessWidget{
                   color: iconEnab_(context),
                   fontFamily: 'packages/harcapp_core/RobotoFlex',
                   fontVariations: [
-                    FontVariation('wght', 720),
+                    FontVariation('wght', 740),
                   ],
                 )),
               ),
