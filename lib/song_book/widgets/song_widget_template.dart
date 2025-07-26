@@ -1183,26 +1183,29 @@ class TextSizeIcon extends StatelessWidget{
 
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Text('A', style: TextStyle(
-                  height: 1,
-                  fontSize: 20.0,
-                  color: iconEnab_(context),
-                  fontFamily: 'RobotoFlex',
-                  fontVariations: [
-                    FontVariation('wght', 280),
-                  ],
-                )),
+                child: Text(
+                    'A',
+                    style: TextStyle(
+                      height: 1,
+                      fontSize: 20.0,
+                      color: iconEnab_(context),
+                      fontFamily: 'packages/harcapp_core/RobotoFlex',
+                      fontVariations: [
+                        FontVariation('wght', 500),
+                      ],
+                    )
+                ),
               ),
 
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Text('A', style: TextStyle(
-                  height: 1.18,
+                  height: 1.17,
                   fontSize: 14.0,
                   color: iconEnab_(context),
-                  fontFamily: 'RobotoFlex',
+                  fontFamily: 'packages/harcapp_core/RobotoFlex',
                   fontVariations: [
-                    FontVariation('wght', 520),
+                    FontVariation('wght', 720),
                   ],
                 )),
               ),
