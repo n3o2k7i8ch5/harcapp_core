@@ -904,6 +904,61 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
     ),
 
     _ButtonData(
+        name: 'Kopiuj treść',
+        iconData: MdiIcons.contentCopy,
+        onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
+        show: (_, _, _) => true
+    ),
+
+    _ButtonData(
+        name: 'Kopiuj treść',
+        iconData: MdiIcons.contentCopy,
+        onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
+        show: (_, _, _) => true
+    ),
+
+    _ButtonData(
+        name: 'Kopiuj treść',
+        iconData: MdiIcons.contentCopy,
+        onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
+        show: (_, _, _) => true
+    ),
+
+    _ButtonData(
+        name: 'Kopiuj treść',
+        iconData: MdiIcons.contentCopy,
+        onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
+        show: (_, _, _) => true
+    ),
+
+    _ButtonData(
+        name: 'Kopiuj treść',
+        iconData: MdiIcons.contentCopy,
+        onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
+        show: (_, _, _) => true
+    ),
+
+    _ButtonData(
+        name: 'Kopiuj treść',
+        iconData: MdiIcons.contentCopy,
+        onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
+        show: (_, _, _) => true
+    ),
+
+    _ButtonData(
+        name: 'Kopiuj treść',
+        iconData: MdiIcons.contentCopy,
+        onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
+        show: (_, _, _) => true
+    ),
+    _ButtonData(
+        name: 'Kopiuj treść',
+        iconData: MdiIcons.contentCopy,
+        onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
+        show: (_, _, _) => true
+    ),
+
+    _ButtonData(
         name: 'Udostępnij',
         iconData: SongWidgetTemplate.iconShareSong,
         onPressed: (_, songWidget, _) => songWidget.onShareTap?.call(),
@@ -1042,54 +1097,6 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
     );
   }
 
-
-  // SizedBox(
-  //   height: Dimen.iconFootprint,
-  //   child: AnimatedChildSlider(
-  //     direction: Axis.horizontal,
-  //     duration: Duration(milliseconds: 150),
-  //     alignment: Alignment.centerRight,
-  //     isCenter: false,
-  //     index: changeSizeVisible?1:0,
-  //     children: [
-  //
-  //       Row(
-  //         children: <Widget>[
-  //           IconButton(
-  //             icon: Icon(MdiIcons.dotsHorizontal, color: iconEnab_(context)),
-  //             onPressed: () => setState(() => topVisible = !topVisible),
-  //           ),
-  //
-  //           Expanded(
-  //             child: AnimatedChildSlider(
-  //               direction: Axis.vertical,
-  //               duration: Duration(milliseconds: 150),
-  //               alignment: Alignment.centerRight,
-  //               isCenter: false,
-  //               index: topVisible?0:1,
-  //               children: <Widget>[
-  //                 _TopWidget<TSong, TAddPersRes>(
-  //                     fragmentState,
-  //                     contentCardsKey,
-  //                     onTextSizeTap: showChangeSize,
-  //                 ),
-  //                 _BottomWidget<TSong, TAddPersRes>(fragmentState)
-  //               ],
-  //             ),
-  //           ),
-  //
-  //         ],
-  //       ),
-  //
-  //       _TextResizeWidget<TSong, TAddPersRes>(
-  //         fragmentState,
-  //         onCloseTap: hideChangeSize,
-  //         onResizeTap: scheduleAutoHide
-  //       )
-  //
-  //     ],
-  //   )
-  // );
 }
 
 
@@ -1188,7 +1195,7 @@ class TextSizeIcon extends StatelessWidget{
                     style: TextStyle(
                       height: 1,
                       fontSize: 20.0,
-                      color: iconEnab_(context),
+                      color: color??iconEnab_(context),
                       fontFamily: 'packages/harcapp_core/RobotoFlex',
                       fontVariations: [
                         FontVariation('wght', 500),
@@ -1202,7 +1209,7 @@ class TextSizeIcon extends StatelessWidget{
                 child: Text('A', style: TextStyle(
                   height: 1.17,
                   fontSize: 14.0,
-                  color: iconEnab_(context),
+                  color: color??iconEnab_(context),
                   fontFamily: 'packages/harcapp_core/RobotoFlex',
                   fontVariations: [
                     FontVariation('wght', 740),
@@ -1217,130 +1224,6 @@ class TextSizeIcon extends StatelessWidget{
   );
 
 }
-
-// class _TopWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
-//
-//   final SongWidgetTemplateState<TSong, TAddPersRes> parent;
-//   final void Function()? onTextSizeTap;
-//   final GlobalKey contentCardsKey;
-//
-//   TSong get song => parent.song;
-//
-//   double get topScreenPadding => parent.topScreenPadding;
-//
-//   const _TopWidget(this.parent, this.contentCardsKey, {this.onTextSizeTap});
-//
-//
-//   @override
-//   Widget build(BuildContext context) => SingleChildScrollView(
-//     scrollDirection: Axis.horizontal,
-//     physics: const BouncingScrollPhysics(),
-//     reverse: true,
-//     child: Row(
-//       mainAxisSize: MainAxisSize.max,
-//       children: [
-//
-//         if(parent.showSongExplanationButton)
-//           IconButton(
-//             icon: Icon(MdiIcons.timelineTextOutline),
-//             onPressed: parent.onSongExplanationTap,
-//           ),
-//
-//         if(song.youtubeVideoId != null && song.youtubeVideoId!.length!=0)
-//           AppButton(
-//               icon: Icon(
-//                   FeatherIcons.youtube,
-//                   color: iconEnab_(context)
-//               ),
-//               onLongPress: parent.onYtLongPress,
-//               onTap: parent.onYtTap==null?null:(){
-//                 final RenderBox renderBox = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
-//                 final position = renderBox.localToGlobal(Offset.zero).dy; // - parent.widget.topScreenPadding;
-//                 parent.onYtTap!(position);
-//               }
-//           ),
-//
-//         IconButton(
-//           icon: Icon(FeatherIcons.bookmark, color: iconEnab_(context)),
-//           onPressed: parent.onAlbumsTap,
-//         ),
-//
-//         IconButton(
-//             icon: TextSizeIcon(),
-//             onPressed: onTextSizeTap
-//         ),
-//
-//         IconButton(
-//             icon: SongRateIcon(song.rate),
-//             onPressed:
-//             parent.onRateTap==null?
-//             null:
-//             (){
-//               final RenderBox renderBox = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
-//               final position = renderBox.localToGlobal(Offset.zero).dy;// - parent.widget.topScreenPadding;
-//               parent.onRateTap!(position);
-//             }
-//         )
-//       ],
-//     ),
-//   );
-//
-// }
-//
-// class _BottomWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
-//
-//   final SongWidgetTemplateState<TSong, TAddPersRes> parent;
-//   const _BottomWidget(this.parent);
-//
-//   TSong get song => parent.song;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SingleChildScrollView(
-//       scrollDirection: Axis.horizontal,
-//       physics: BouncingScrollPhysics(),
-//       reverse: true,
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.end,
-//         mainAxisSize: MainAxisSize.max,
-//         children: [
-//           if(song.isOwn)
-//             AppButton(
-//                 icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
-//                 onTap: parent.onDeleteTap,
-//                 onLongPress: parent.onDeleteLongPress),
-//
-//           // if(!song.isOwn)
-//           //   IconButton(icon: Icon(FeatherIcons.alertTriangle, color: iconEnab_(context)),
-//           //       onPressed: parent.onReportTap),
-//
-//           IconButton(
-//               icon: Icon(FeatherIcons.edit, color: iconEnab_(context)),
-//               onPressed: () => parent.onEditTap?.call(Provider.of<TextSizeProvider>(context, listen: false))
-//           ),
-//
-//           IconButton(
-//               icon: Icon(SongWidgetTemplate.iconShareSong, color: iconEnab_(context)),
-//               onPressed: parent.onShareTap
-//           ),
-//
-//           if(song.isOwn)
-//             IconButton(
-//                 icon: Icon(
-//                     SongWidgetTemplate.iconSendSong,
-//                     color: iconEnab_(context)),
-//                 onPressed: parent.onSendSongTap
-//             ),
-//
-//           IconButton(icon: Icon(MdiIcons.contentCopy, color: iconEnab_(context)),
-//               onPressed: parent.onCopyTap
-//           ),
-//
-//         ],
-//       ),
-//     );
-//   }
-// }
 
 class _ContentWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
 
