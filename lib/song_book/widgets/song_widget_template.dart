@@ -972,13 +972,13 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
           return Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
-            children: buttonToShow.map((button) => button.buildIconButton(context, fragmentState, this)).toList(),
+            children: buttonToShow.reversed.map((button) => button.buildIconButton(context, fragmentState, this)).toList(),
           );
 
         double widthToShow = constraints.maxWidth - 2*Dimen.iconFootprint;
         int nButtonsToShow = (widthToShow / Dimen.iconFootprint).floor();
 
-        List<_ButtonData> visibleButtons = buttonToShow.sublist(0, nButtonsToShow);
+        Iterable<_ButtonData> visibleButtons = buttonToShow.sublist(0, nButtonsToShow).reversed;
         List<_ButtonData> hiddenButtons = buttonToShow.sublist(nButtonsToShow);
 
         return Row(
