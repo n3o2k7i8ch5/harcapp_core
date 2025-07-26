@@ -1174,36 +1174,38 @@ class TextSizeIcon extends StatelessWidget{
   Widget build(BuildContext context) => SizedBox(
       width: Dimen.iconSize,
       height: Dimen.iconSize,
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 2),
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          fit: StackFit.passthrough,
-          children: [
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 2),
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            fit: StackFit.passthrough,
+            children: [
 
-            Positioned(
-              bottom: 0,
-              left: 1,
-              child: Text('A', style: TextStyle(
-                  fontSize: 20.0,
-                  color: iconEnab_(context),
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Roboto'
-              )),
-            ),
+              Positioned(
+                bottom: 0,
+                left: 1,
+                child: Text('A', style: TextStyle(
+                    fontSize: 20.0,
+                    color: iconEnab_(context),
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Roboto'
+                )),
+              ),
 
-            Positioned(
-              bottom: 1,
-              right: 1,
-              child: Text('A', style: TextStyle(
-                  fontSize:14.0,
-                  color: iconEnab_(context),
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Roboto'
-              )),
-            )
+              Positioned(
+                bottom: 1,
+                right: 1,
+                child: Text('A', style: TextStyle(
+                    fontSize:14.0,
+                    color: iconEnab_(context),
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Roboto'
+                )),
+              )
 
-          ],
+            ],
+          ),
         ),
       )
   );
