@@ -1053,7 +1053,6 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
               padding: EdgeInsets.zero,
               icon: Icon(MdiIcons.dotsVertical),
               onSelected: (_ButtonData item){
-                popPage(context, root: true);
                 item.onPressed(context, fragmentState, this);
               },
               itemBuilder: (BuildContext context) => hiddenButtons.map(
