@@ -1176,7 +1176,7 @@ class TextSizeIcon extends StatelessWidget{
         width: Dimen.iconSize,
         height: Dimen.iconSize,
         child: Padding(
-          padding: EdgeInsets.only(bottom: 1.8),
+          padding: EdgeInsets.only(bottom: 1.9),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -1187,7 +1187,7 @@ class TextSizeIcon extends StatelessWidget{
                     height: 1,
                     fontSize: 20.0,
                     color: iconEnab_(context),
-                    fontWeight: FontWeight.lerp(FontWeight.w400, FontWeight.w500, 0.1),
+                    fontWeight: FontWeight.lerp(FontWeight.w400, FontWeight.w500, 0.3),
                     fontFamily: 'Roboto'
                 )),
               ),
@@ -1198,7 +1198,7 @@ class TextSizeIcon extends StatelessWidget{
                     height: 1.1,
                     fontSize: 14.0,
                     color: iconEnab_(context),
-                    fontWeight: FontWeight.lerp(FontWeight.w500, FontWeight.w600, 0.1),
+                    fontWeight: FontWeight.lerp(FontWeight.w500, FontWeight.w600, 0.3),
                     fontFamily: 'Roboto'
                 )),
               ),
