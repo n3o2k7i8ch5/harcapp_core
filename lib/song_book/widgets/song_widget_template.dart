@@ -1178,10 +1178,12 @@ class TextSizeIcon extends StatelessWidget{
         padding: EdgeInsets.only(bottom: 1),
         child: Stack(
           alignment: Alignment.bottomCenter,
+          fit: StackFit.expand,
           children: [
 
-            Align(
-              alignment: Alignment.bottomLeft,
+            Positioned(
+              bottom: 0,
+              left: 0,
               child: Text('A', style: TextStyle(
                   fontSize: 20.0,
                   color: color??iconEnab_(context),
@@ -1190,8 +1192,9 @@ class TextSizeIcon extends StatelessWidget{
               )),
             ),
 
-            Align(
-              alignment: Alignment.bottomRight,
+            Positioned(
+              bottom: 0,
+              right: 0,
               child: Text('A', style: TextStyle(
                   fontSize:14.0,
                   color: color??iconEnab_(context),
