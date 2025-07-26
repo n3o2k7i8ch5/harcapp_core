@@ -1171,43 +1171,43 @@ class TextSizeIcon extends StatelessWidget{
   const TextSizeIcon({this.color});
 
   @override
-  Widget build(BuildContext context) => SizedBox(
+  Widget build(BuildContext context) => Center(
+    child: SizedBox(
       width: Dimen.iconSize,
       height: Dimen.iconSize,
-      child: Center(
-        child: Padding(
-          padding: EdgeInsets.only(bottom: 2),
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            fit: StackFit.passthrough,
-            children: [
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 2),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          fit: StackFit.passthrough,
+          children: [
 
-              Positioned(
-                bottom: 0,
-                left: 1,
-                child: Text('A', style: TextStyle(
-                    fontSize: 20.0,
-                    color: iconEnab_(context),
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Roboto'
-                )),
-              ),
+            Positioned(
+              bottom: 0,
+              left: 1,
+              child: Text('A', style: TextStyle(
+                  fontSize: 20.0,
+                  color: iconEnab_(context),
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Roboto'
+              )),
+            ),
 
-              Positioned(
-                bottom: 1,
-                right: 1,
-                child: Text('A', style: TextStyle(
-                    fontSize:14.0,
-                    color: iconEnab_(context),
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'Roboto'
-                )),
-              )
+            Positioned(
+              bottom: 1,
+              right: 1,
+              child: Text('A', style: TextStyle(
+                  fontSize:14.0,
+                  color: iconEnab_(context),
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Roboto'
+              )),
+            )
 
-            ],
-          ),
+          ],
         ),
-      )
+      ),
+    ),
   );
 
 }
