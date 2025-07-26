@@ -796,6 +796,7 @@ class _ButtonData{
     SongWidgetTemplateState songWidget,
     _ButtonsWidgetState buttonsWidget
   ) => SimpleButton.from(
+    context: context,
     text: name,
     iconWidget: icon(context, songWidget, buttonsWidget),
     margin: EdgeInsets.zero,
