@@ -1187,8 +1187,8 @@ class TextSizeIcon extends StatelessWidget{
                     height: 1,
                     fontSize: 20.0,
                     color: iconEnab_(context),
-                    fontWeight: FontWeight.lerp(FontWeight.w400, FontWeight.w500, 0.3),
-                    fontFamily: 'Roboto'
+                    fontWeight: FontWeight.lerp(FontWeight.w400, FontWeight.w500, 0.2),
+                    fontFamily: 'RobotoFlex'
                 )),
               ),
 
@@ -1198,8 +1198,8 @@ class TextSizeIcon extends StatelessWidget{
                     height: 1.1,
                     fontSize: 14.0,
                     color: iconEnab_(context),
-                    fontWeight: FontWeight.lerp(FontWeight.w500, FontWeight.w600, 0.3),
-                    fontFamily: 'Roboto'
+                    fontWeight: FontWeight.lerp(FontWeight.w500, FontWeight.w600, 0.2),
+                    fontFamily: 'RobotoFlex'
                 )),
               ),
 

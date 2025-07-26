@@ -170,6 +170,10 @@ flutter:
           weight: 700
           style: italic
 
+    - family: RobotoFlex
+      fonts:
+        - asset: fonts/RobotoFlex.ttf
+
     - family: Ubuntu
       fonts:
         - asset: fonts/Ubuntu/Ubuntu-B.ttf
