@@ -795,7 +795,7 @@ class _ButtonData{
       SongWidgetTemplateState songWidget,
       _ButtonsWidgetState buttonsWidget,
       {bool tappable = true}
-      ) => IconButton(
+  ) => IconButton(
     icon: icon(context, songWidget, buttonsWidget),
 
     onPressed: tappable?
@@ -1173,19 +1173,16 @@ class TextSizeIcon extends StatelessWidget{
   @override
   Widget build(BuildContext context) => Center(
     child: SizedBox(
-      width: Dimen.iconSize,
-      height: Dimen.iconSize,
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 2),
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          fit: StackFit.passthrough,
+        width: Dimen.iconSize,
+        height: Dimen.iconSize,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
 
-            Positioned(
-              bottom: 0,
-              left: 1,
+            Align(
+              alignment: Alignment.bottomCenter,
               child: Text('A', style: TextStyle(
+                  height: 1,
                   fontSize: 20.0,
                   color: iconEnab_(context),
                   fontWeight: FontWeight.w400,
@@ -1193,20 +1190,19 @@ class TextSizeIcon extends StatelessWidget{
               )),
             ),
 
-            Positioned(
-              bottom: 1,
-              right: 1,
+            Align(
+              alignment: Alignment.bottomCenter,
               child: Text('A', style: TextStyle(
-                  fontSize:14.0,
+                  height: 1.1,
+                  fontSize: 14.0,
                   color: iconEnab_(context),
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Roboto'
               )),
-            )
+            ),
 
           ],
-        ),
-      ),
+        )
     ),
   );
 
