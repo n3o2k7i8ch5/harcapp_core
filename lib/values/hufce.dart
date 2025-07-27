@@ -24,6 +24,7 @@ const String huf_zhp_gorlice = 'Hufiec ZHP Gorlice';
 const String huf_zhp_gostynin = 'Hufiec ZHP Gostynin';
 const String huf_zhp_grodzisk_mazowiecki = 'Hufiec ZHP Grodzisk Mazowiecki';
 const String huf_zhp_grojec = 'Hufiec ZHP Grójec';
+const String huf_zhp_ilawa = 'Hufiec ZHP Iława';
 const String huf_zhp_jaktorow = 'Hufiec ZHP Jaktorów im. Grupy Kampinos AK';
 const String huf_zhp_jarocin = 'Hufiec ZHP Jarocin';
 const String huf_zhp_jastrzebie_zdroj = 'Jastrzębie-Zdrój im. Józefa Kreta';

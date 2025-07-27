@@ -320,7 +320,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
                   Padding(
                     padding: const EdgeInsets.all(Dimen.defMarg),
                     child: Text(
-                      'Piosenka własna',
+                      'Tylko Ty widzisz tę piosenkę',
                       style: AppTextStyle(
                           color: accentColor??accent_(context),
                           fontWeight: weight.halfBold

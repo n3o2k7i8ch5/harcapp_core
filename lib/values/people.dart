@@ -152,6 +152,7 @@ List<Person> allPeople = [
   JAKUB_SKUCHA,
   JAKUB_STEFANSKI,
   JAKUB_STRACZYNSKI,
+  JAKUB_SWIT,
   JAKUB_TARNOWSKI,
   JAKUB_ZDANOWICZ_ZASIDKO,
   JAN_JARECKI,
@@ -219,6 +220,7 @@ List<Person> allPeople = [
   KAROL_GOLABEK,
   KAROL_MALINSKI,
   KAROL_MALUS,
+  KAROL_PODOLSKI,
   KATARZYNA_BIALAS,
   KATARZYNA_LISAK,
   KATARZYNA_MAZUR,
@@ -1485,6 +1487,15 @@ const Person JAKUB_STRACZYNSKI = Person(
     hufiec: huf_zhp_kielce_miasto,
     email: ['pancernuq@gmail.com', 'pancernu2@gmail.com', 'qbastraczynski@gmail.com']
 );
+const Person JAKUB_SWIT = Person(
+    name: 'Jakub Świt',
+    druzyna: '124. Łódzka Drużyna Harcerzy „Bór" im. K.K. Baczyńskiego',
+    hufiec: huf_zhp_lodz_baluty,
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhpHOc,
+    org: Org.zhp,
+    email: ["jakub.swit@zhp.net.pl"]
+);
 const Person JAKUB_TARNOWSKI = Person(
     name: 'Jakub Tarnowski',
     druzyna: '101. Tarnowska Wędrownicza Drużyna Harcerska „Currahee”',
@@ -1891,6 +1902,14 @@ const Person KAROL_MALINSKI = Person(
     email: ["karol.malinski@zhp.net.pl"]
 );
 const Person KAROL_MALUS = Person(name: 'Karol Malus', rankHarc: RankHarc.dhc);
+const Person KAROL_PODOLSKI = Person(
+    name: 'Karol Podolski',
+    druzyna: '22. IMDW „Baribale”',
+    hufiec: huf_zhp_ilawa,
+    rankInstr: RankInstr.pwd,
+    org: Org.zhp,
+    email: ["karol.podolski@zhp.net.pl"]
+);
 const Person KATARZYNA_BIALAS = Person(
     name: 'Katarzyna Białas',
     druzyna: 'IV SDH „Jutrzenka”',
