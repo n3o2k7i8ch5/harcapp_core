@@ -910,18 +910,19 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
       show: (_, _, _) => true
     ),
 
+
+    _ButtonData(
+        name: 'Wyślij do HarcAppa',
+        iconData: SongWidgetTemplate.iconSendSong,
+        onPressed: (_, songWidget, _) => songWidget.onSendSongTap?.call(),
+        show: (_, songWidget, _) => songWidget.song.isOwn
+    ),
+
     _ButtonData(
         name: 'Udostępnij',
         iconData: SongWidgetTemplate.iconShareSong,
         onPressed: (_, songWidget, _) => songWidget.onShareTap?.call(),
         show: (_, songWidget, _) => songWidget.song.isOwn
-    ),
-
-    _ButtonData(
-      name: 'Wyślij do HarcAppa',
-      iconData: SongWidgetTemplate.iconSendSong,
-      onPressed: (_, songWidget, _) => songWidget.onSendSongTap?.call(),
-      show: (_, songWidget, _) => songWidget.song.isOwn
     ),
 
     _ButtonData(
@@ -980,7 +981,7 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
             children: buttonToShow.reversed.map((button) => button.buildIconButton(context, fragmentState, this)).toList(),
           );
 
-        double widthToShow = constraints.maxWidth - 2*Dimen.iconFootprint;
+        double widthToShow = constraints.maxWidth - 1.5*Dimen.iconFootprint;
         int nButtonsToShow = (widthToShow / Dimen.iconFootprint).floor();
 
         Iterable<_ButtonData> visibleButtons = buttonToShow.sublist(0, nButtonsToShow).reversed;
