@@ -27,7 +27,10 @@ class SongContributionWidget extends StatelessWidget{
           '\nAplikacja HarcApp, w tym także jej śpiewnik, jest tworzona przez wolontariuszy pracujących "po godzinach". Zespół HarcApp nie jest w stanie każdorazowo zagwarantować szybkiej odpowiedzi na złoszenia. Dołożone są wszelkie starania, by zgłoszenia były sukcesywnie obsługiwane.'
           '\n'
           '\n<b>6. Prawa autorskie</b>'
-          '\nPrzesyłając piosenkę do śpiewnika aplikacji HarcApp, użytkownik oświadcza, że jest jej autorem lub posiada prawa do jej publikacji. Użytkownik wyraża zgodę na publikację piosenki w aplikacji HarcApp oraz na jej udostępnianie innym użytkownikom. W przypadku stwierdzenia naruszenia praw autorskich, zespół HarcApp zastrzega sobie prawo do usunięcia piosenki ze śpiewnika.',
+          '\nPrzesyłając piosenkę do śpiewnika aplikacji HarcApp, użytkownik oświadcza, że jest jej autorem lub posiada prawa do jej publikacji. Użytkownik wyraża zgodę na publikację piosenki w aplikacji HarcApp oraz na jej udostępnianie innym użytkownikom. W przypadku stwierdzenia naruszenia praw autorskich, zespół HarcApp zastrzega sobie prawo do usunięcia piosenki ze śpiewnika.'
+          '\n'
+          '\n<b>7. Naruszenia praw autorskich</b>'
+          '\nW przypadku stwierdzenia naruszenia praw autorskich, zespół HarcApp zastrzega sobie prawo do usunięcia piosenki ze śpiewnika. Naruszenia praw autorskich mogą być zgłaszane na adres e-mail: <b>harcapp@gmail.com</b><b>',
       size: Dimen.textSizeBig,
       height: 1.2,
     ),
