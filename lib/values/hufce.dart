@@ -132,6 +132,7 @@ const String huf_zhp_ziemi_cieszynskiej = 'Hufiec ZHP Ziemi Cieszyńskiej';
 const String huf_zhp_ziemi_dzierzoniowskiej = 'Ziemi Dzierżoniowskiej im. Władysława Reniewickiego';
 const String huf_zhp_ziemi_gliwickiej = 'Hufiec ZHP Ziemi Gliwickiej';
 const String huf_zhp_ziemi_koszalinskiej = 'Hufiec ZHP Ziemi Koszalińskiej';
+const String huf_zhp_ziemi_mikolajowskiej = 'Hufiec Ziemi Mikołowskiej im. Bohaterów Powstań Śląskich';
 const String huf_zhp_ziemi_myszkowskiej = 'Hufiec ZHP Ziemi Myszkowskiej';
 const String huf_zhp_ziemi_przemyskiej = 'Hufiec Ziemi Przemyskiej im. Orląt Przemyskich';
 const String huf_zhp_ziemi_rybnickiej = 'Hufiec ZHP Ziemi Rybnickiej';
