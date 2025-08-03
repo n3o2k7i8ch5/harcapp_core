@@ -72,117 +72,122 @@ abstract class ColorPack{
   bool operator == (Object other) => other is ColorPack && name == other.name;
   int get hashCode => name.hashCode;
 
-  ThemeData get themeData => ThemeData(
-    brightness: brightness,
-    hintColor: hintEnabled,
-    appBarTheme: AppBarTheme(
+  ThemeData themeData(BuildContext context){
+
+    AppBarTheme baseAppBarTheme = AppBarTheme.of(context);
+    baseAppBarTheme = baseAppBarTheme.copyWith(
         backgroundColor: appBar,
-        titleTextStyle: AppTextStyle(fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
-        toolbarTextStyle: AppTextStyle(fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
-        actionsIconTheme: IconThemeData(color: appBarTextEnabled),
-        iconTheme: IconThemeData(color: appBarTextEnabled),
+        titleTextStyle: baseAppBarTheme.titleTextStyle?.copyWith(fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
+        toolbarTextStyle: baseAppBarTheme.toolbarTextStyle?.copyWith(fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
+        actionsIconTheme: baseAppBarTheme.actionsIconTheme?.copyWith(color: appBarTextEnabled),
+        iconTheme: baseAppBarTheme.iconTheme?.copyWith(color: appBarTextEnabled),
         surfaceTintColor: null
-    ),
-    textTheme: TextTheme(
-      bodySmall: TextStyle(color: textEnabled),
-      bodyMedium: TextStyle(color: textEnabled),
-      bodyLarge: TextStyle(color: textEnabled),
-    ).apply(),
-    tabBarTheme: TabBarThemeData(
-        labelColor: iconEnabled,
-        unselectedLabelColor: iconDisabled,
-        labelStyle: AppTextStyle(fontWeight: weight.halfBold),
-        unselectedLabelStyle: AppTextStyle(fontWeight: weight.halfBold),
-        overlayColor: WidgetStateColor.resolveWith((states) => accent.withValues(alpha: .2))
-    ),
-    timePickerTheme: TimePickerThemeData(
-      backgroundColor: background,
-      dialHandColor: accent,
-      helpTextStyle: AppTextStyle(color: hintEnabled),
-      dayPeriodTextStyle: AppTextStyle(),
-      hourMinuteTextStyle: TextStyle(
-        fontSize: 48,
-      ),
-      hourMinuteShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0))
-      ),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(AppCard.bigRadius))
-      ),
-    ),
+    );
 
-    textSelectionTheme: TextSelectionThemeData(
-      cursorColor: accent,
-      selectionColor: accent.withValues(alpha: 0.5),
-      selectionHandleColor: accent,
-    ),
-
-    primaryTextTheme: TextTheme(
-      bodySmall: TextStyle(color: textEnabled),
-      bodyMedium: TextStyle(color: textEnabled),
-      bodyLarge: TextStyle(color: textEnabled),
-    ),
-    colorScheme: ColorScheme(
+    return ThemeData(
       brightness: brightness,
-      primary: accent,
-      secondary: accent,
-      surface: background,
-      primaryContainer: backgroundIcon,
-      error: Colors.red,
-      onPrimary: accent,
-      onSecondary: accent,
-      onSurface: textEnabled,
-      onError: Colors.red,
-    ),
-    scaffoldBackgroundColor: background,
-    unselectedWidgetColor: hintEnabled,
+      hintColor: hintEnabled,
+      appBarTheme: baseAppBarTheme,
+      textTheme: TextTheme.of(context).copyWith(
+        bodySmall: TextStyle(color: textEnabled),
+        bodyMedium: TextStyle(color: textEnabled),
+        bodyLarge: TextStyle(color: textEnabled),
+      ).apply(),
+      tabBarTheme: TabBarThemeData(
+          labelColor: iconEnabled,
+          unselectedLabelColor: iconDisabled,
+          labelStyle: AppTextStyle(fontWeight: weight.halfBold),
+          unselectedLabelStyle: AppTextStyle(fontWeight: weight.halfBold),
+          overlayColor: WidgetStateColor.resolveWith((states) => accent.withValues(alpha: .2))
+      ),
+      timePickerTheme: TimePickerThemeData(
+        backgroundColor: background,
+        dialHandColor: accent,
+        helpTextStyle: AppTextStyle(color: hintEnabled),
+        dayPeriodTextStyle: AppTextStyle(),
+        hourMinuteTextStyle: TextStyle(
+          fontSize: 48,
+        ),
+        hourMinuteShape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))
+        ),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(AppCard.bigRadius))
+        ),
+      ),
 
-    bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: background,
-    ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      selectedIconTheme: IconThemeData(color: iconEnabled),
-      unselectedIconTheme: IconThemeData(color: iconDisabled),
-    ),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: accent,
-      foregroundColor: iconEnabled,
-    ),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: accent,
+        selectionColor: accent.withValues(alpha: 0.5),
+        selectionHandleColor: accent,
+      ),
 
-    cardColor: defCardEnabled,
-    cardTheme: CardThemeData(
-        color: defCardEnabled,
-        shadowColor: defCardElevation
-    ),
+      primaryTextTheme: TextTheme.of(context).copyWith(
+        bodySmall: TextStyle(color: textEnabled),
+        bodyMedium: TextStyle(color: textEnabled),
+        bodyLarge: TextStyle(color: textEnabled),
+      ),
+      colorScheme: ColorScheme.of(context).copyWith(
+        brightness: brightness,
+        primary: accent,
+        secondary: accent,
+        surface: background,
+        primaryContainer: backgroundIcon,
+        error: Colors.red,
+        onPrimary: accent,
+        onSecondary: accent,
+        onSurface: textEnabled,
+        onError: Colors.red,
+      ),
+      scaffoldBackgroundColor: background,
+      unselectedWidgetColor: hintEnabled,
 
-    disabledColor: textDisabled,
-    inputDecorationTheme: InputDecorationTheme(
-        fillColor: textEnabled
-    ),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: background,
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        selectedIconTheme: IconThemeData(color: iconEnabled),
+        unselectedIconTheme: IconThemeData(color: iconDisabled),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: accent,
+        foregroundColor: iconEnabled,
+      ),
 
-    primaryColor: accent,
-    primaryColorDark: accent,
-    primaryColorLight: accent,
-    iconTheme: IconThemeData(
-      color: iconEnabled,
-    ),
-    primaryIconTheme: IconThemeData(
-      color: iconEnabled,
-    ),
-    checkboxTheme: CheckboxThemeData(
-      checkColor: WidgetStateProperty.all(background),
-    ).copyWith(
+      cardColor: defCardEnabled,
+      cardTheme: CardThemeData(
+          color: defCardEnabled,
+          shadowColor: defCardElevation
+      ),
+
+      disabledColor: textDisabled,
+      inputDecorationTheme: InputDecorationTheme(
+          fillColor: textEnabled
+      ),
+
+      primaryColor: accent,
+      primaryColorDark: accent,
+      primaryColorLight: accent,
+      iconTheme: IconThemeData(
+        color: iconEnabled,
+      ),
+      primaryIconTheme: IconThemeData(
+        color: iconEnabled,
+      ),
+      checkboxTheme: CheckboxThemeData(
+        checkColor: WidgetStateProperty.all(background),
+      ).copyWith(
+        fillColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) { return null; }
+          if (states.contains(WidgetState.selected)) { return accent; }
+          return null;
+        }),
+      ), radioTheme: RadioThemeData(
       fillColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
         if (states.contains(WidgetState.disabled)) { return null; }
         if (states.contains(WidgetState.selected)) { return accent; }
         return null;
       }),
-    ), radioTheme: RadioThemeData(
-    fillColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-      if (states.contains(WidgetState.disabled)) { return null; }
-      if (states.contains(WidgetState.selected)) { return accent; }
-      return null;
-    }),
     ),
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
@@ -195,8 +200,10 @@ abstract class ColorPack{
           if (states.contains(WidgetState.selected)) { return accent.withValues(alpha: .5); }
           return null;
         }),
-    ),
-  );
+      ),
+    );
+
+  }
 }
 
 abstract class BaseColorPack extends ColorPack{
