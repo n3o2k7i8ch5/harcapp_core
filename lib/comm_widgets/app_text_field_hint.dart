@@ -156,7 +156,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           hintText: hint,
           hintStyle: hintStyle,
           border: widget.showUnderline?null:InputBorder.none,
-          contentPadding: widget.contentPadding??EdgeInsets.only(top: 32),
+          contentPadding: widget.contentPadding,
+          isCollapsed: true
         ),
         maxLength: widget.maxLength,
         maxLines: widget.maxLines,
