@@ -41,15 +41,14 @@ class SongPartsListWidget extends StatelessWidget{
     this.onReorderFinished,
   }): _controller = controller??ScrollController();
 
-  bool _isLastIndex(BuildContext context, int index){
+  bool _isLastSongPartIndex(BuildContext context, int index){
     int allItemsCount = CurrentItemProvider.of(context).song.songParts.length;
     if(header != null) allItemsCount++;
     if(footer != null) allItemsCount++;
     return index == allItemsCount - 1;
   }
 
-  int _getSongPartIndex(BuildContext context, int index){
-    int songPartsCount = CurrentItemProvider.of(context).song.songParts.length;
+  int _getSongPartIndex(int index){
     if(header != null) index--;
     return index;
   }
@@ -75,79 +74,84 @@ class SongPartsListWidget extends StatelessWidget{
       // removeDuration: Duration(milliseconds: prov.song.songParts.length==0?0:500),
       isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
       onReorder: (int oldIndex, int newIndex){
+        oldIndex = _getSongPartIndex(oldIndex);
+        newIndex = _getSongPartIndex(newIndex);
         final SongPart songPart = prov.song.songParts.removeAt(oldIndex);
         prov.song.songParts.insert(newIndex, songPart);
         prov.notify();
         onReorderFinished?.call();
       },
-      itemBuilder: (BuildContext context, int index) => Builder(
-        key: ValueKey(prov.song.songParts[index].hashCode),
-        builder: (context) {
+      itemBuilder: (BuildContext context, int index){
+        int songPartIndex = _getSongPartIndex(index);
+        return  Builder(
+          key: ValueKey(prov.song.songParts[songPartIndex].hashCode),
+          builder: (context) {
 
-          if(index == 0 && header != null)
-            return header!;
+            if(index == 0 && header != null)
+              return header!;
 
-          if(_isLastIndex(context, index) && footer != null)
-            return footer!;
+            if(_isLastSongPartIndex(context, index) && footer != null)
+              return footer!;
 
-          SongPart item = prov.song.songParts[_getSongPartIndex(context, index)];
-          Widget child;
+            SongPart item = prov.song.songParts[songPartIndex];
+            Widget child;
 
-          if(item.isRefren(context))
-            child = Consumer<RefrenPartProvider>(
-                builder: (context, prov, child) => SongPartCard(
-                  type: SongPartType.REFREN,
-                  songPart: item,
-                  topBuilder: (context, part) => TopRefrenButtons(
-                    part,
-                    index: index,
-                    onDelete: (songPart) => onDelete?.call(),
-                  ),
-                  onTap:
-                  refrenTapable? () => onPartTap?.call(index): null,
-                )
-            );
-
-          else
-            child = ChangeNotifierProvider<SongPartProvider>(
-              create: (context) => SongPartProvider(item),
-              builder: (context, child) => Consumer<SongPartProvider>(
+            if(item.isRefren(context))
+              child = Consumer<RefrenPartProvider>(
                   builder: (context, prov, child) => SongPartCard(
-                    type: SongPartType.ZWROTKA,
+                    type: SongPartType.REFREN,
                     songPart: item,
-                    topBuilder: (context, part) => TopZwrotkaButtons(
+                    topBuilder: (context, part) => TopRefrenButtons(
                       part,
-                      index: index,
-                      onDuplicate: (SongPart part){
-                        scrollToBottom(_controller);
-                        onDuplicate?.call();
-                      },
-                      onDelete: (SongPart part) => onDelete?.call(),
+                      index: songPartIndex,
+                      onDelete: (songPart) => onDelete?.call(),
                     ),
-                    onTap: () => onPartTap?.call(index),
+                    onTap:
+                    refrenTapable? () => onPartTap?.call(songPartIndex): null,
                   )
-              ),
+              );
+
+            else
+              child = ChangeNotifierProvider<SongPartProvider>(
+                create: (context) => SongPartProvider(item),
+                builder: (context, child) => Consumer<SongPartProvider>(
+                    builder: (context, prov, child) => SongPartCard(
+                      type: SongPartType.ZWROTKA,
+                      songPart: item,
+                      topBuilder: (context, part) => TopZwrotkaButtons(
+                        part,
+                        index: songPartIndex,
+                        onDuplicate: (SongPart part){
+                          scrollToBottom(_controller);
+                          onDuplicate?.call();
+                        },
+                        onDelete: (SongPart part) => onDelete?.call(),
+                      ),
+                      onTap: () => onPartTap?.call(songPartIndex),
+                    )
+                ),
+              );
+
+            return Padding(
+              padding: EdgeInsets.all(Dimen.defMarg),
+              child: child,
             );
 
-          return Padding(
-            padding: EdgeInsets.all(Dimen.sideMarg),
-            child: child,
-          );
-
-          return AppCard(
-              clipBehavior: Clip.none,
-              padding: EdgeInsets.zero,
-              margin: EdgeInsets.only(
-                  top: ITEM_TOP_MARG,
-                  right: Dimen.defMarg,
-                  left: Dimen.defMarg,
-                  bottom: ITEM_BOTTOM_MARG
-              ),
-              radius: AppCard.bigRadius,
-              child: child
-          );
-        },
-      ),
+            return AppCard(
+                clipBehavior: Clip.none,
+                padding: EdgeInsets.zero,
+                margin: EdgeInsets.only(
+                    top: ITEM_TOP_MARG,
+                    right: Dimen.defMarg,
+                    left: Dimen.defMarg,
+                    bottom: ITEM_BOTTOM_MARG
+                ),
+                radius: AppCard.bigRadius,
+                child: child
+            );
+          },
+        );
+      },
       padding: EdgeInsets.only(bottom: Dimen.defMarg/2),
       shrinkWrap: shrinkWrap,
       enterTransition: [FadeIn()],
