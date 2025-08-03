@@ -101,20 +101,19 @@ enum LayoutMode{
 
 class MultiTextField extends StatefulWidget{
 
-  static IconData defAddIcon = MdiIcons.plusCircleOutline;
-
   final MultiTextFieldController? controller;
   final TextStyle? style;
   final TextStyle? hintStyle;
   final bool expanded;
   final String? hint;
   final LayoutMode layout;
-  final IconData? addIcon;
   final TextCapitalization textCapitalization;
   final TextAlignVertical? textAlignVertical;
 
-  final Widget Function(int)? verticalSeparator;
-  final Widget Function(int)? horizontalSeparator;
+  final Widget Function(int)? verticalSeparatorBuilder;
+  final Widget Function(int)? horizontalSeparatorBuilder;
+  final Widget Function(int, Widget)? itemBuilder;
+  final Widget Function(void Function() onTap)? addButtonBuilder;
 
   final void Function(List<String>)? onAnyChanged;
   final void Function(int, String)? onChanged;
@@ -128,11 +127,14 @@ class MultiTextField extends StatefulWidget{
     this.expanded = false, 
     this.hint, 
     this.layout = LayoutMode.row,
-    this.addIcon,
     this.textCapitalization = TextCapitalization.none, 
     this.textAlignVertical,
-    this.verticalSeparator,
-    this.horizontalSeparator,
+    
+    this.verticalSeparatorBuilder,
+    this.horizontalSeparatorBuilder,
+    this.itemBuilder,
+    this.addButtonBuilder,
+    
     this.onAnyChanged,
     this.onChanged,
     this.onRemoved, 
@@ -155,12 +157,13 @@ class MultiTextFieldState extends State<MultiTextField>{
   bool get expanded => widget.expanded;
   String? get hint => widget.hint;
   LayoutMode get linear => widget.layout;
-  IconData? get addIcon => widget.addIcon;
   TextCapitalization get textCapitalization => widget.textCapitalization;
   TextAlignVertical? get textAlignVertical => widget.textAlignVertical;
 
-  Widget Function(int)? get verticalSeparator => widget.verticalSeparator;
-  Widget Function(int)? get horizontalSeparator => widget.horizontalSeparator;
+  Widget Function(int)? get verticalSeparatorBuilder => widget.verticalSeparatorBuilder;
+  Widget Function(int)? get horizontalSeparatorBuilder => widget.horizontalSeparatorBuilder;
+  Widget Function(int, Widget)? get itemBuilder => widget.itemBuilder;
+  Widget Function(void Function() onTap)? get addButtonBuilder => widget.addButtonBuilder;
 
   void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
   void Function(int, String)? get onChanged => widget.onChanged;
@@ -179,63 +182,66 @@ class MultiTextFieldState extends State<MultiTextField>{
     super.initState();
   }
 
-  Widget separator(int index){
+  Widget buildSeparator(int index){
     if(linear == LayoutMode.row)
-      return horizontalSeparator?.call(index)??SizedBox(width: Dimen.defMarg);
+      return horizontalSeparatorBuilder?.call(index)??SizedBox(width: Dimen.defMarg);
     else if(linear == LayoutMode.column)
-      return verticalSeparator?.call(index)??SizedBox(height: Dimen.defMarg);
+      return verticalSeparatorBuilder?.call(index)??Container();
     else
       return Container();
   }
 
+  Widget buildItemWidget(int index, Widget child){
+    if(itemBuilder != null)
+      return itemBuilder!.call(index, child);
+    else
+      return child;
+  }
+  
   @override
   Widget build(BuildContext context) {
     
     List<Widget> children = [];
     for(int i=0; i<controller.length; i++) {
       children.add(
-          _ItemWidget(
-            controller: controller[i],
-            style: style,
-            hintStyle: hintStyle,
-            hint: hint,
-            textCapitalization: textCapitalization,
-            textAlignVertical: textAlignVertical,
-            removable: controller.length>minCount,
-            onChanged: (text){
-              if(i == controller.length-1)
-                setState(() {});
+          buildItemWidget(
+            i,
+            _ItemWidget(
+              controller: controller[i],
+              style: style,
+              hintStyle: hintStyle,
+              hint: hint,
+              textCapitalization: textCapitalization,
+              textAlignVertical: textAlignVertical,
+              removable: controller.length>minCount,
+              onChanged: (text){
+                if(i == controller.length-1)
+                  setState(() {});
 
-              _callOnChanged(i);
-              controller._callOnChanged(i);
-              _callOnAnyChanged();
-              controller._callOnAnyChanged();
-            },
-            onRemoveTap: () => setState((){
-              controller.removeAt(i);
-              onRemoved?.call(i);
+                _callOnChanged(i);
+                controller._callOnChanged(i);
+                _callOnAnyChanged();
+                controller._callOnAnyChanged();
+              },
+              onRemoveTap: () => setState((){
+                controller.removeAt(i);
+                onRemoved?.call(i);
 
-              _callOnAnyChanged();
-              controller._callOnAnyChanged();
-            }),
-            enabled: enabled,
+                _callOnAnyChanged();
+                controller._callOnAnyChanged();
+              }),
+              enabled: enabled,
+            )
           )
       );
 
-      if(i < controller.length-1) children.add(separator(i));
+      if(i < controller.length-1) children.add(buildSeparator(i));
     }
 
     Widget addButton = enabled?
-    AddButton(
+    addButtonBuilder?.call(onAddButtonTap)??AddButton(
       controller: controller,
-      onPressed: () => setState((){
-        String text = '';
-        controller.addText(text);
-        _callOnChanged(controller.length-1);
-        controller._callOnChanged(controller.length-1);
-        _callOnAnyChanged();
-        controller._callOnAnyChanged();
-      })
+      onPressed: onAddButtonTap
     ):Container();
 
     switch(linear) {
@@ -298,17 +304,18 @@ class MultiTextFieldState extends State<MultiTextField>{
           updateDuration: Duration(milliseconds: 300),
         );
 
-
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ...children,
-            if(children.isNotEmpty && !expanded) addButton
-          ],
-        );
     }
   }
+
+  void onAddButtonTap() => setState((){
+    String text = '';
+    controller.addText(text);
+    _callOnChanged(controller.length-1);
+    controller._callOnChanged(controller.length-1);
+    _callOnAnyChanged();
+    controller._callOnAnyChanged();
+  });
+
 }
 
 
@@ -444,23 +451,25 @@ class _ItemWidgetState extends State<_ItemWidget>{
 
 class AddButton extends StatelessWidget{
 
+  static IconData defAddIcon = MdiIcons.plusCircleOutline;
+
   final MultiTextFieldController controller;
   final IconData? addIcon;
+  final String? addText;
   final void Function()? onPressed;
 
   const AddButton({
     required this.controller,
     this.addIcon,
+    this.addText,
     this.onPressed,
     super.key
   });
-
-
+  
   @override
-  Widget build(BuildContext context){
-    return IconButton(
+  Widget build(BuildContext context) => IconButton(
       icon: Icon(
-        addIcon??MultiTextField.defAddIcon,
+        addIcon??defAddIcon,
         color:
         controller.isNotEmpty && controller.last.isEmpty?
         iconDisab_(context):
@@ -470,7 +479,6 @@ class AddButton extends StatelessWidget{
       controller.isNotEmpty && controller.last.isEmpty?
       null:
       onPressed
-    );
-  }
+  );
 
 }
