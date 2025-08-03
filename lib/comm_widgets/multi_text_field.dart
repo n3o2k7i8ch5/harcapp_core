@@ -288,8 +288,7 @@ class MultiTextFieldState extends State<MultiTextField>{
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            AnimatedListView<Widget>(
-              physics: BouncingScrollPhysics(),
+            AnimatedListView(
               items: children,
               itemBuilder: (context, index) => children[index],
               shrinkWrap: true,
