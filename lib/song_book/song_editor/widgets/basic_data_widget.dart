@@ -55,7 +55,6 @@ class BasicDataWidget extends StatelessWidget{
                   children: [
                     Expanded(
                       child: AppTextFieldHint(
-                        accentColor: accentColor,
                         controller: currItemProv.titleController,
                         hint: 'Tytuł:',
                         style: AppTextStyle(
@@ -141,7 +140,6 @@ class BasicDataWidget extends StatelessWidget{
                 ),
 
                 AppTextFieldHint(
-                  accentColor: accentColor,
                   hint: 'Autor słów:',
                   style: AppTextStyle(
                     fontSize: Dimen.textSizeBig,
@@ -163,7 +161,6 @@ class BasicDataWidget extends StatelessWidget{
                 ),
 
                 AppTextFieldHint(
-                  accentColor: accentColor,
                   hint: 'Kompozytor muzyki:',
                   style: AppTextStyle(
                     fontSize: Dimen.textSizeBig,
@@ -185,7 +182,6 @@ class BasicDataWidget extends StatelessWidget{
                 ),
 
                 AppTextFieldHint(
-                  accentColor: accentColor,
                   hint: 'Wykonawca:',
                   style: AppTextStyle(
                     fontSize: Dimen.textSizeBig,
@@ -222,7 +218,6 @@ class BasicDataWidget extends StatelessWidget{
 
                     Expanded(
                       child: AppTextFieldHint(
-                        accentColor: accentColor,
                         controller: currItemProv.ytLinkController,
                         hint: 'Link YouTube:',
                         style: AppTextStyle(
@@ -262,7 +257,6 @@ class BasicDataWidget extends StatelessWidget{
                         IgnorePointer(
                           ignoring: true,
                           child: AppTextFieldHint(
-                            accentColor: accentColor,
                             controller: TextEditingController(
                                 text:
                                 currItemProv.releaseDate==null ?
