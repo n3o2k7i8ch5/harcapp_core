@@ -432,8 +432,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
     ),
   );
 
-
-  void setEditing(editing) => setState(() => this.selected = editing);
+  void setEditing(value) => setState(() => this.selected = value);
 
 }
 
