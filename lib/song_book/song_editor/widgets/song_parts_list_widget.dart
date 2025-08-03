@@ -41,6 +41,19 @@ class SongPartsListWidget extends StatelessWidget{
     this.onReorderFinished,
   }): _controller = controller??ScrollController();
 
+  bool _isLastIndex(BuildContext context, int index){
+    int allItemsCount = CurrentItemProvider.of(context).song.songParts.length;
+    if(header != null) allItemsCount++;
+    if(footer != null) allItemsCount++;
+    return index == allItemsCount - 1;
+  }
+
+  int _getSongPartIndex(BuildContext context, int index){
+    int songPartsCount = CurrentItemProvider.of(context).song.songParts.length;
+    if(header != null) index--;
+    return index;
+  }
+
   @override
   Widget build(BuildContext context) => Consumer<CurrentItemProvider>(
     builder: (context, prov, _) => AnimatedReorderableListView(
@@ -48,7 +61,15 @@ class SongPartsListWidget extends StatelessWidget{
       proxyDecorator: proxyDecorator,
       physics: physics??BouncingScrollPhysics(),
       controller: _controller,
-      items: prov.song.songParts,
+      items: [
+        if(header != null) header!,
+        ...prov.song.songParts,
+        if(footer != null) footer!,
+      ],
+      nonDraggableItems: [
+        if(header != null) header!,
+        if(footer != null) footer!,
+      ],
       // items: prov.song.songParts,
       // insertDuration: Duration(milliseconds: prov.song.songParts.length<=1?0:200),
       // removeDuration: Duration(milliseconds: prov.song.songParts.length==0?0:500),
@@ -63,8 +84,13 @@ class SongPartsListWidget extends StatelessWidget{
         key: ValueKey(prov.song.songParts[index].hashCode),
         builder: (context) {
 
-          SongPart item = prov.song.songParts[index];
+          if(index == 0 && header != null)
+            return header!;
 
+          if(_isLastIndex(context, index) && footer != null)
+            return footer!;
+
+          SongPart item = prov.song.songParts[_getSongPartIndex(context, index)];
           Widget child;
 
           if(item.isRefren(context))
