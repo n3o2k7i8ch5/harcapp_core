@@ -15,7 +15,7 @@ import 'scroll_to_bottom.dart';
 class SongPartsListWidget extends StatelessWidget{
 
   static const double ITEM_TOP_MARG = Dimen.defMarg;
-  static const double ITEM_BOTTOM_MARG = 12.0;
+  static const double ITEM_BOTTOM_MARG = Dimen.defMarg;
 
   final ScrollController _controller;
   final ScrollPhysics? physics;
@@ -75,9 +75,7 @@ class SongPartsListWidget extends StatelessWidget{
         controller: _controller,
         items: items,
         nonDraggableItems: nonDraggableItems,
-        // items: prov.song.songParts,
-        // insertDuration: Duration(milliseconds: prov.song.songParts.length<=1?0:200),
-        // removeDuration: Duration(milliseconds: prov.song.songParts.length==0?0:500),
+        clipBehavior: Clip.none,
         isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
         onReorder: (int oldIndex, int newIndex){
           oldIndex = _getSongPartIndex(oldIndex);
@@ -153,40 +151,6 @@ class SongPartsListWidget extends StatelessWidget{
         shrinkWrap: shrinkWrap,
         enterTransition: [FadeIn()],
         exitTransition: [SlideInDown(), FadeIn()],
-        // header: header,
-        // footer: Column(
-        //   children: [
-        //
-        //     AnimatedContainer(
-        //       duration: Duration(milliseconds: 1),
-        //       height:
-        //       prov.song.songParts.isEmpty?
-        //       SongPartCard.EMPTY_HEIGHT + Dimen.iconFootprint + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
-        //           :0,
-        //       child: Column(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //
-        //             Icon(MdiIcons.musicNoteOffOutline, color: hintEnab_(context)),
-        //
-        //             SizedBox(height: Dimen.iconMarg),
-        //
-        //             Text(
-        //               'Pusto!\nUżyj poniższych przycisków.',
-        //               textAlign: TextAlign.center,
-        //               style: AppTextStyle(
-        //                 color: hintEnab_(context),
-        //                 fontSize: Dimen.textSizeBig,
-        //               ),
-        //             ),
-        //           ]
-        //       ),
-        //     ),
-        //
-        //     if(footer!=null) footer!,
-        //
-        //   ],
-        // ),
       );
     },
   );
