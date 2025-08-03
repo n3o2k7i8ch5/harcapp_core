@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:animated_reorderable_list/animated_reorderable_list.dart';
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
@@ -107,6 +109,8 @@ class SongPartsListWidget extends StatelessWidget{
               ),
             );
 
+          return child;
+
           return AppCard(
               clipBehavior: Clip.none,
               padding: EdgeInsets.zero,
@@ -123,6 +127,8 @@ class SongPartsListWidget extends StatelessWidget{
       ),
       padding: EdgeInsets.only(bottom: Dimen.defMarg/2),
       shrinkWrap: shrinkWrap,
+      enterTransition: [FadeIn()],
+      exitTransition: [SlideInDown(), FadeIn()],
       // header: header,
       // footer: Column(
       //   children: [
@@ -158,6 +164,21 @@ class SongPartsListWidget extends StatelessWidget{
       //   ],
       // ),
     ),
+  );
+
+  Widget proxyDecorator(Widget child, int index, Animation<double> animation) => AnimatedBuilder(
+    animation: animation,
+    builder: (BuildContext context, Widget? child) {
+      final double animValue = Curves.easeInOut.transform(animation.value);
+      final double elevation = lerpDouble(0, 6, animValue)!;
+      return Material(
+        borderRadius: BorderRadius.circular(AppCard.bigRadius),
+        elevation: elevation,
+        color: Colors.transparent,
+        child: child,
+      );
+    },
+    child: child,
   );
 
   // @override
