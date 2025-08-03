@@ -14,9 +14,6 @@ import 'scroll_to_bottom.dart';
 
 class SongPartsListWidget extends StatelessWidget{
 
-  static const double ITEM_TOP_MARG = Dimen.defMarg;
-  static const double ITEM_BOTTOM_MARG = Dimen.defMarg;
-
   final ScrollController _controller;
   final ScrollPhysics? physics;
   final Widget? header;
@@ -77,6 +74,7 @@ class SongPartsListWidget extends StatelessWidget{
         nonDraggableItems: fixedItems,
         lockedItems: fixedItems,
         clipBehavior: Clip.none,
+        dragStartDelay: Duration.zero,
         isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
         onReorder: (int oldIndex, int newIndex){
           oldIndex = _getSongPartIndex(oldIndex);
@@ -137,12 +135,7 @@ class SongPartsListWidget extends StatelessWidget{
               );
 
             return Padding(
-              padding: EdgeInsets.only(
-                  top: ITEM_TOP_MARG,
-                  right: Dimen.defMarg,
-                  left: Dimen.defMarg,
-                  bottom: ITEM_BOTTOM_MARG
-              ),
+              padding: EdgeInsets.all(Dimen.defMarg),
               child: child,
             );
 
