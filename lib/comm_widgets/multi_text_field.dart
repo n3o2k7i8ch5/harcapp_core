@@ -228,13 +228,6 @@ class MultiTextFieldState extends State<MultiTextField>{
       enabled: enabled,
     );
 
-    if(withSeparator)
-      child = Padding(
-        key: buildValueKey(index),
-        padding: EdgeInsets.only(right: Dimen.defMarg),
-        child: child,
-      );
-
     if(itemBuilder != null)
       return itemBuilder!.call(index, buildValueKey(index), child);
     else
