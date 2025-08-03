@@ -93,6 +93,10 @@ class MultiTextFieldController{
 
 }
 
+enum LayoutMode{
+  wrap, column, row
+}
+
 class MultiTextField extends StatefulWidget{
 
   static IconData defAddIcon = MdiIcons.plusCircleOutline;
@@ -102,7 +106,7 @@ class MultiTextField extends StatefulWidget{
   final TextStyle? hintStyle;
   final bool expanded;
   final String? hint;
-  final bool linear;
+  final LayoutMode layout;
   final Color? accentColor;
   final IconData? addIcon;
   final TextCapitalization textCapitalization;
@@ -119,7 +123,7 @@ class MultiTextField extends StatefulWidget{
     this.hintStyle, 
     this.expanded = false, 
     this.hint, 
-    this.linear = true, 
+    this.layout = LayoutMode.row,
     this.accentColor,
     this.addIcon, 
     this.textCapitalization = TextCapitalization.none, 
@@ -145,7 +149,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   int get minCount => controller.minCount;
   bool get expanded => widget.expanded;
   String? get hint => widget.hint;
-  bool get linear => widget.linear;
+  LayoutMode get linear => widget.layout;
   Color? get accentColor => widget.accentColor;
   IconData? get addIcon => widget.addIcon;
   TextCapitalization get textCapitalization => widget.textCapitalization;
@@ -173,7 +177,7 @@ class MultiTextFieldState extends State<MultiTextField>{
     
     List<Widget> children = [];
     for(int i=0; i<controller.length; i++) {
-      children.add(Item(
+      children.add(_ItemWidget(
         controller: controller[i],
         style: style,
         hintStyle: hintStyle,
@@ -200,8 +204,12 @@ class MultiTextFieldState extends State<MultiTextField>{
         enabled: enabled,
       ));
 
-      if(linear && i < controller.length-1)
-        children.add(SizedBox(width: Dimen.defMarg));
+      if(i < controller.length-1) {
+        if (linear == LayoutMode.row)
+          children.add(SizedBox(width: Dimen.defMarg));
+        else if (linear == LayoutMode.column)
+          children.add(SizedBox(height: Dimen.defMarg));
+      }
     }
 
     Widget addButton = enabled?
@@ -226,44 +234,56 @@ class MultiTextFieldState extends State<MultiTextField>{
       }),
     ):Container();
 
-    if(linear)
-      return Builder(builder: (context){
-        if(!expanded)
-          children.add(addButton);
+    switch(linear) {
+      case LayoutMode.row:
+        return Builder(
+          builder: (context) {
+            if (!expanded) children.add(addButton);
 
-        Widget scrollView = SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          child: Row(children: children),
-          clipBehavior: Clip.hardEdge,
+            Widget scrollView = SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              child: Row(children: children),
+              clipBehavior: Clip.hardEdge,
+            );
+
+            if (expanded)
+              return Row(
+                children: [
+                  if(children.length == 1)
+                    Expanded(child: children[0])
+                  else
+                    Expanded(child: scrollView),
+                  addButton
+                ],
+              );
+            else
+              return scrollView;
+          }
         );
-
-        if(expanded)
-          return Row(
-            children: [
-              if(children.length == 1)
-                Expanded(child: children[0])
-              else
-                Expanded(child: scrollView),
-              addButton
-            ],
-          );
-        else
-          return scrollView;
-      });
-    
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.start,
-      children: children,
-      runSpacing: Dimen.defMarg,
-      spacing: Dimen.defMarg,
-    );
+      case LayoutMode.wrap:
+        return Wrap(
+          crossAxisAlignment: WrapCrossAlignment.start,
+          children: children,
+          runSpacing: Dimen.defMarg,
+          spacing: Dimen.defMarg,
+        );
+      case LayoutMode.column:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ...children,
+            if(children.isNotEmpty && !expanded) addButton
+          ],
+        );
+    }
   }
 }
 
 
 
-class Item extends StatefulWidget{
+class _ItemWidget extends StatefulWidget{
   
   final TextEditingController controller;
   final TextStyle? style;
@@ -276,14 +296,14 @@ class Item extends StatefulWidget{
   final void Function(String)? onChanged;
   final bool enabled;
 
-  const Item({required this.controller, this.style, this.hintStyle, required this.hint, this.removable = true, this.textCapitalization = TextCapitalization.none,this.textAlignVertical, this.onRemoveTap, this.onChanged, this.enabled = true, Key? key}):super(key: key);
+  const _ItemWidget({required this.controller, this.style, this.hintStyle, required this.hint, this.removable = true, this.textCapitalization = TextCapitalization.none,this.textAlignVertical, this.onRemoveTap, this.onChanged, this.enabled = true, Key? key}):super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ItemState();
+  State<StatefulWidget> createState() => _ItemWidgetState();
 
 }
 
-class ItemState extends State<Item>{
+class _ItemWidgetState extends State<_ItemWidget>{
 
   static const double iconSize = 20.0;
 
