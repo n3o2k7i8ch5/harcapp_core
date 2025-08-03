@@ -156,6 +156,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           hintText: hint,
           hintStyle: hintStyle,
           border: widget.showUnderline?null:InputBorder.none,
+          contentPadding: EdgeInsets.only(top: 31),
         ),
         maxLength: widget.maxLength,
         maxLines: widget.maxLines,
@@ -165,6 +166,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         inputFormatters: widget.inputFormatters,
         textCapitalization: widget.textCapitalization,
         textAlignVertical: widget.textAlignVertical,
+
       );
 
     return Row(

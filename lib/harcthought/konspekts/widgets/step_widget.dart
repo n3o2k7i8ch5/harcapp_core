@@ -53,8 +53,8 @@ class KonspektStepWidget extends StatelessWidget{
                     children: [
 
                       SelectableText(
-                          step.title,
-                          style: const AppTextStyle(fontWeight: weightHalfBold)
+                        step.title,
+                        style: const AppTextStyle(fontWeight: weightHalfBold)
                       ),
 
                       const SizedBox(height: Dimen.defMarg),
@@ -255,29 +255,29 @@ class StepIndexWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => SizedBox(
-      height: 2*Dimen.textSizeNormal + Dimen.defMarg + 4,
-      child: Material(
-          borderRadius: BorderRadius.circular(AppCard.defRadius),
-          color: hintEnab_(context),
-          child: Container(
-            constraints: BoxConstraints(
-                minWidth: 2*Dimen.textSizeNormal + Dimen.defMarg + 4
-            ),
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: Dimen.defMarg),
-                child: Center(
-                  child: Text(
-                      '${groupIndex==null?'':'${groupIndex! + 1}.'}${index + 1}.',
-                      style: AppTextStyle(
-                          fontSize: Dimen.textSizeAppBar,
-                          fontWeight: weightHalfBold,
-                          color: background_(context)
-                      )
-                  ),
-                )
+    height: 2*Dimen.textSizeNormal + Dimen.defMarg + 4,
+    child: Material(
+      borderRadius: BorderRadius.circular(AppCard.defRadius),
+      color: hintEnab_(context),
+      child: Container(
+        constraints: BoxConstraints(
+            minWidth: 2*Dimen.textSizeNormal + Dimen.defMarg + 4
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: Dimen.defMarg),
+          child: Center(
+            child: Text(
+              '${groupIndex==null?'':'${groupIndex! + 1}.'}${index + 1}.',
+              style: AppTextStyle(
+                  fontSize: Dimen.textSizeAppBar,
+                  fontWeight: weightHalfBold,
+                  color: background_(context)
+              )
             ),
           )
+        ),
       )
+    )
   );
 
 }
