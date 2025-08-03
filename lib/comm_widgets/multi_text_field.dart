@@ -200,7 +200,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       return Container();
   }
 
-  Key buildValueKey(int index) => valueKeyBuilder?.call(index)??ValueKey('MultiTextField ${index}');
+  Key buildValueKey(int index) => valueKeyBuilder?.call(index)??ValueKey(controller[index]);
 
   Widget buildItemWidget(int index, Widget child){
     if(itemBuilder != null)
