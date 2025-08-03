@@ -78,7 +78,8 @@ class BasicDataWidget extends StatelessWidget{
                     ),
 
                     AnimatedChildSlider(
-                      index: currItemProv.hiddenTitlesController.isEmpty?0:1,
+                      // In this case `length==0` is not the same as `isEmpty`!
+                      index: currItemProv.hiddenTitlesController.length==0?0:1,
                       children: [
                         IconButton(
                           icon: Icon(MdiIcons.plus),
