@@ -34,6 +34,7 @@ class AppTextFieldHint extends StatefulWidget{
   final Widget Function(bool tappable, void Function() onTap)? multiAddButtonBuilder;
   final String? multiHintTop;
   final bool multiExpanded;
+  final bool multiIsCollapsed;
   final MultiTextFieldController? multiController;
   final TextCapitalization textCapitalization;
   final TextAlignVertical? textAlignVertical;
@@ -65,6 +66,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.multiAddButtonBuilder,
     this.multiHintTop,
     this.multiExpanded = false,
+    this.multiIsCollapsed = false,
     this.multiController,
     this.textCapitalization = TextCapitalization.none,
     this.textAlignVertical,
@@ -136,6 +138,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
         enabled: widget.enabled,
+        isCollapsed: widget.multiIsCollapsed,
       );
     else
       textField = TextField(
@@ -178,7 +181,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           children: <Widget>[
 
             Padding(
-              padding: EdgeInsets.only(top: 12.0),
+              padding: EdgeInsets.symmetric(vertical: 12.0),
               child: textField,
             ),
 

@@ -120,6 +120,7 @@ class MultiTextField extends StatefulWidget{
   final void Function(int, String)? onChanged;
   final void Function(int)? onRemoved;
   final bool enabled;
+  final bool isCollapsed;
 
   const MultiTextField({
     this.allowZeroFields = false,
@@ -140,7 +141,9 @@ class MultiTextField extends StatefulWidget{
     this.onAnyChanged,
     this.onChanged,
     this.onRemoved, 
-    this.enabled = true
+    this.enabled = true,
+    this.isCollapsed = false,
+    super.key
   });
 
   @override
@@ -172,6 +175,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   void Function(int, String)? get onChanged => widget.onChanged;
   void Function(int)? get onRemoved => widget.onRemoved;
   bool get enabled => widget.enabled;
+  bool get isCollapsed => widget.isCollapsed;
 
   void _callOnChanged(int index) => onChanged?.call(index, controller[index].text);
 
@@ -217,6 +221,7 @@ class MultiTextFieldState extends State<MultiTextField>{
               textCapitalization: textCapitalization,
               textAlignVertical: textAlignVertical,
               removable: controller.length>minCount,
+              isCollapsed: isCollapsed,
               onChanged: (text){
                 if(i == controller.length-1)
                   setState(() {});
@@ -337,8 +342,21 @@ class _ItemWidget extends StatefulWidget{
   final void Function()? onRemoveTap;
   final void Function(String)? onChanged;
   final bool enabled;
+  final bool isCollapsed;
 
-  const _ItemWidget({required this.controller, this.style, this.hintStyle, required this.hint, this.removable = true, this.textCapitalization = TextCapitalization.none,this.textAlignVertical, this.onRemoveTap, this.onChanged, this.enabled = true, Key? key}):super(key: key);
+  const _ItemWidget({
+    required this.controller,
+    this.style,
+    this.hintStyle,
+    required this.hint,
+    this.removable = true,
+    this.textCapitalization = TextCapitalization.none,
+    this.textAlignVertical, this.onRemoveTap,
+    this.onChanged,
+    this.enabled = true,
+    this.isCollapsed = false,
+    super.key
+  });
 
   @override
   State<StatefulWidget> createState() => _ItemWidgetState();
@@ -361,6 +379,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
   void Function()? get onRemoveTap => widget.onRemoveTap;
   void Function(String)? get onChanged => widget.onChanged;
   bool get enabled => widget.enabled;
+  bool get isCollapsed => widget.isCollapsed;
 
   late bool selected;
 
@@ -407,6 +426,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
                     enabledBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
                     focusedBorder: InputBorder.none,
+                    isCollapsed: isCollapsed,
                   ),
                   onChanged: onChanged,
                   readOnly: !enabled,

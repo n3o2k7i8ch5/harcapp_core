@@ -111,6 +111,7 @@ class BasicDataWidget extends StatelessWidget{
                       multiLayout: LayoutMode.column,
                       multiAllowZeroFields: true,
                       multiExpanded: true,
+                      multiIsCollapsed: true,
                       multiItemBuilder: (index, widget) => Row(
                         children: [
                           SizedBox(width: Dimen.iconMarg),

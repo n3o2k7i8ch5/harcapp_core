@@ -69,18 +69,18 @@ class KonspektStepWidget extends StatelessWidget{
 
                           if(startTime != null)
                             SelectableText(
-                                '(${timeOfDayRangeToString(startTime!, startTime! + step.duration)})',
-                                style: const AppTextStyle()
+                              '(${timeOfDayRangeToString(startTime!, startTime! + step.duration)})',
+                              style: const AppTextStyle()
                             ),
 
                           const SizedBox(width: 20),
 
                           SelectableText(
-                              step.activeForm?'Forma aktywna':'Forma statyczna',
-                              style: AppTextStyle(
-                                  color: step.activeForm?Colors.green:Colors.deepOrange,
-                                  fontWeight: weightHalfBold
-                              )
+                            step.activeForm?'Forma aktywna':'Forma statyczna',
+                            style: AppTextStyle(
+                                color: step.activeForm?Colors.green:Colors.deepOrange,
+                                fontWeight: weightHalfBold
+                            )
                           ),
 
                           const SizedBox(width: 20),
