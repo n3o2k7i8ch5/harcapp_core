@@ -125,7 +125,7 @@ class MultiTextField extends StatefulWidget{
     this.textCapitalization = TextCapitalization.none, 
     this.textAlignVertical, 
     this.onAnyChanged,
-    this.onChanged, 
+    this.onChanged,
     this.onRemoved, 
     this.enabled = true
   });
@@ -156,9 +156,9 @@ class MultiTextFieldState extends State<MultiTextField>{
   void Function(int)? get onRemoved => widget.onRemoved;
   bool get enabled => widget.enabled;
 
-  void _callOnChanged(int index) => onChanged!(index, controller[index].text);
+  void _callOnChanged(int index) => onChanged?.call(index, controller[index].text);
 
-  void _callOnAnyChanged() => onAnyChanged!(controller.texts);
+  void _callOnAnyChanged() => onAnyChanged?.call(controller.texts);
 
   @override
   void initState() {
