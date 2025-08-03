@@ -25,7 +25,7 @@ class AppTextFieldHint extends StatefulWidget{
   final Widget? leading;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
-  final Color? accentColor;
+  final EdgeInsets? contentPadding;
 
   final bool multi;
   final bool multiAllowZeroFields;
@@ -57,7 +57,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.leading,
     this.keyboardType,
     this.inputFormatters,
-    this.accentColor,
+    this.contentPadding,
     this.multi = false,
     this.multiAllowZeroFields = false,
     this.multiLayout = LayoutMode.row,
@@ -156,7 +156,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           hintText: hint,
           hintStyle: hintStyle,
           border: widget.showUnderline?null:InputBorder.none,
-          contentPadding: EdgeInsets.only(top: 31),
+          contentPadding: widget.contentPadding??EdgeInsets.only(top: 31),
         ),
         maxLength: widget.maxLength,
         maxLines: widget.maxLines,
