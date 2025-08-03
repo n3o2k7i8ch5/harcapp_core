@@ -177,10 +177,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           clipBehavior: Clip.none,
           children: <Widget>[
 
-            Positioned(
-              left: 0,
-              top: 12,
-              child: textField
+            Padding(
+              padding: EdgeInsets.only(top: 12.0),
+              child: textField,
             ),
 
             AnimatedOpacity(
