@@ -81,7 +81,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   MultiTextFieldController? get multiController => widget.multiController??_multiController;
 
   String get hint => widget.hint;
-  String get hintTop => widget.hintTop??hint;
+  String get hintTop => widget.hintTop??(hint.endsWith(':')?hint.substring(0, hint.length-1):hint);
   bool get multi => widget.multi;
   String get multiHintTop => widget.multiHintTop??hintTop;
   bool get multiExpanded => widget.multiExpanded;
