@@ -30,7 +30,7 @@ class AppTextFieldHint extends StatefulWidget{
   final bool multi;
   final bool multiAllowZeroFields;
   final LayoutMode multiLayout;
-  final Widget Function(int index, Widget item)? multiItemBuilder;
+  final Widget Function(int index, Key key, Widget item)? multiItemBuilder;
   final Widget Function(bool tappable, void Function() onTap)? multiAddButtonBuilder;
   final String? multiHintTop;
   final bool multiExpanded;

@@ -112,8 +112,9 @@ class MultiTextField extends StatefulWidget{
 
   final Widget Function(int)? verticalSeparatorBuilder;
   final Widget Function(int)? horizontalSeparatorBuilder;
-  final Widget Function(int, Widget)? itemBuilder;
+  final Widget Function(int, Key, Widget)? itemBuilder;
   final Widget Function(bool tappable, void Function() onTap)? addButtonBuilder;
+  final Key Function(int)? valueKeyBuilder;
 
   final void Function(List<String>)? onAnyChanged;
   final void Function(int, String)? onChanged;
@@ -136,6 +137,7 @@ class MultiTextField extends StatefulWidget{
     this.horizontalSeparatorBuilder,
     this.itemBuilder,
     this.addButtonBuilder,
+    this.valueKeyBuilder,
     
     this.onAnyChanged,
     this.onChanged,
@@ -167,8 +169,9 @@ class MultiTextFieldState extends State<MultiTextField>{
 
   Widget Function(int)? get verticalSeparatorBuilder => widget.verticalSeparatorBuilder;
   Widget Function(int)? get horizontalSeparatorBuilder => widget.horizontalSeparatorBuilder;
-  Widget Function(int, Widget)? get itemBuilder => widget.itemBuilder;
+  Widget Function(int, Key, Widget)? get itemBuilder => widget.itemBuilder;
   Widget Function(bool tappable, void Function() onTap)? get addButtonBuilder => widget.addButtonBuilder;
+  Key Function(int)? get valueKeyBuilder => widget.valueKeyBuilder;
 
   void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
   void Function(int, String)? get onChanged => widget.onChanged;
@@ -197,9 +200,11 @@ class MultiTextFieldState extends State<MultiTextField>{
       return Container();
   }
 
+  Key buildValueKey(int index) => valueKeyBuilder?.call(index)??ValueKey('MultiTextField ${index}');
+
   Widget buildItemWidget(int index, Widget child){
     if(itemBuilder != null)
-      return itemBuilder!.call(index, child);
+      return itemBuilder!.call(index, buildValueKey(index), child);
     else
       return child;
   }
@@ -213,6 +218,7 @@ class MultiTextFieldState extends State<MultiTextField>{
           buildItemWidget(
             i,
             _ItemWidget(
+              key: buildValueKey(i),
               controller: controller[i],
               style: style,
               hintStyle: hintStyle,
