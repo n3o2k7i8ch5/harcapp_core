@@ -284,6 +284,9 @@ class MultiTextFieldState extends State<MultiTextField>{
           ),
 
           shrinkWrap: true,
+          insertDuration: Duration(milliseconds: 300),
+          removeDuration: Duration(milliseconds: 300),
+          updateDuration: Duration(milliseconds: 300),
         );
 
 
