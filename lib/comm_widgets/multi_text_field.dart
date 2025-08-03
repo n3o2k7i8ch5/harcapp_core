@@ -109,10 +109,12 @@ class MultiTextField extends StatefulWidget{
   final bool expanded;
   final String? hint;
   final LayoutMode layout;
-  final Color? accentColor;
   final IconData? addIcon;
   final TextCapitalization textCapitalization;
   final TextAlignVertical? textAlignVertical;
+
+  final Widget Function(int)? verticalSeparator;
+  final Widget Function(int)? horizontalSeparator;
 
   final void Function(List<String>)? onAnyChanged;
   final void Function(int, String)? onChanged;
@@ -126,10 +128,11 @@ class MultiTextField extends StatefulWidget{
     this.expanded = false, 
     this.hint, 
     this.layout = LayoutMode.row,
-    this.accentColor,
-    this.addIcon, 
+    this.addIcon,
     this.textCapitalization = TextCapitalization.none, 
-    this.textAlignVertical, 
+    this.textAlignVertical,
+    this.verticalSeparator,
+    this.horizontalSeparator,
     this.onAnyChanged,
     this.onChanged,
     this.onRemoved, 
@@ -152,10 +155,12 @@ class MultiTextFieldState extends State<MultiTextField>{
   bool get expanded => widget.expanded;
   String? get hint => widget.hint;
   LayoutMode get linear => widget.layout;
-  Color? get accentColor => widget.accentColor;
   IconData? get addIcon => widget.addIcon;
   TextCapitalization get textCapitalization => widget.textCapitalization;
   TextAlignVertical? get textAlignVertical => widget.textAlignVertical;
+
+  Widget Function(int)? get verticalSeparator => widget.verticalSeparator;
+  Widget Function(int)? get horizontalSeparator => widget.horizontalSeparator;
 
   void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
   void Function(int, String)? get onChanged => widget.onChanged;
@@ -173,45 +178,51 @@ class MultiTextFieldState extends State<MultiTextField>{
 
     super.initState();
   }
-  
+
+  Widget separator(int index){
+    if(linear == LayoutMode.row)
+      return horizontalSeparator?.call(index)??SizedBox(width: Dimen.defMarg);
+    else if(linear == LayoutMode.column)
+      return verticalSeparator?.call(index)??SizedBox(height: Dimen.defMarg);
+    else
+      return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
     
     List<Widget> children = [];
     for(int i=0; i<controller.length; i++) {
-      children.add(_ItemWidget(
-        controller: controller[i],
-        style: style,
-        hintStyle: hintStyle,
-        hint: hint,
-        textCapitalization: textCapitalization,
-        textAlignVertical: textAlignVertical,
-        removable: controller.length>minCount,
-        onChanged: (text){
-          if(i == controller.length-1)
-            setState(() {});
+      children.add(
+          _ItemWidget(
+            controller: controller[i],
+            style: style,
+            hintStyle: hintStyle,
+            hint: hint,
+            textCapitalization: textCapitalization,
+            textAlignVertical: textAlignVertical,
+            removable: controller.length>minCount,
+            onChanged: (text){
+              if(i == controller.length-1)
+                setState(() {});
 
-          _callOnChanged(i);
-          controller._callOnChanged(i);
-          _callOnAnyChanged();
-          controller._callOnAnyChanged();
-        },
-        onRemoveTap: () => setState((){
-          controller.removeAt(i);
-          onRemoved?.call(i);
+              _callOnChanged(i);
+              controller._callOnChanged(i);
+              _callOnAnyChanged();
+              controller._callOnAnyChanged();
+            },
+            onRemoveTap: () => setState((){
+              controller.removeAt(i);
+              onRemoved?.call(i);
 
-          _callOnAnyChanged();
-          controller._callOnAnyChanged();
-        }),
-        enabled: enabled,
-      ));
+              _callOnAnyChanged();
+              controller._callOnAnyChanged();
+            }),
+            enabled: enabled,
+          )
+      );
 
-      if(i < controller.length-1) {
-        if (linear == LayoutMode.row)
-          children.add(SizedBox(width: Dimen.defMarg));
-        else if (linear == LayoutMode.column)
-          children.add(SizedBox(height: Dimen.defMarg));
-      }
+      if(i < controller.length-1) children.add(separator(i));
     }
 
     Widget addButton = enabled?
@@ -231,7 +242,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       case LayoutMode.row:
         return Builder(
           builder: (context) {
-            if (!expanded) children.add(addButton);
+            if(!expanded) children.add(addButton);
 
             Widget scrollView = SingleChildScrollView(
               physics: BouncingScrollPhysics(),
@@ -257,14 +268,14 @@ class MultiTextFieldState extends State<MultiTextField>{
       case LayoutMode.wrap:
         return Wrap(
           crossAxisAlignment: WrapCrossAlignment.start,
-          children: children,
+          children: [...children, addButton],
           runSpacing: Dimen.defMarg,
           spacing: Dimen.defMarg,
         );
       case LayoutMode.column:
         return ImplicitlyAnimatedList<Widget>(
           physics: BouncingScrollPhysics(),
-          items: children,
+          items: [...children, addButton],
           areItemsTheSame: (a, b) => a.hashCode == b.hashCode,
 
           itemBuilder: (context, animation, item, index) => SizeFadeTransition(
