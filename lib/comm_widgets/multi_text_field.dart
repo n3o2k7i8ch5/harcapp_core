@@ -276,6 +276,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       case LayoutMode.wrap:
         return Wrap(
           crossAxisAlignment: WrapCrossAlignment.start,
+          alignment: WrapAlignment.center,
           children: [...children, addButton],
           runSpacing: Dimen.defMarg,
           spacing: Dimen.defMarg,
@@ -288,14 +289,14 @@ class MultiTextFieldState extends State<MultiTextField>{
 
           itemBuilder: (context, animation, item, index) => SizeFadeTransition(
             sizeFraction: 0.7,
-            curve: Curves.easeInOut,
+            curve: Curves.easeInQuad,
             animation: animation,
             child: item
           ),
 
           removeItemBuilder: (context, animation, oldItem) => SizeFadeTransition(
             sizeFraction: 0.7,
-            curve: Curves.easeInOut,
+            curve: Curves.easeInQuad,
             animation: animation,
             child: oldItem,
           ),
@@ -385,8 +386,6 @@ class _ItemWidgetState extends State<_ItemWidget>{
                 minWidth: 10,//40.0,
               ),
               child:
-              selected || true?
-
               IntrinsicWidth(
                 child: TextField(
                   focusNode: focusNode,
@@ -410,22 +409,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
                   onChanged: onChanged,
                   readOnly: !enabled,
                 ),
-              ):
-
-              GestureDetector(
-                onTap: (){
-                  setState(() => selected = true);
-                  focusNode.requestFocus();
-                },
-                child: Text(
-                  controller.text.isEmpty?hint!:controller.text,
-                  style: AppTextStyle(
-                      fontSize: controller.text.isEmpty?Dimen.textSizeBig:Dimen.textSizeBig,
-                      fontWeight: controller.text.isEmpty?weightNormal:weightHalfBold,
-                      color: controller.text.isEmpty?hintEnab_(context):textEnab_(context)
-                  ),
-                ),
-              ),
+              )
             ),
             duration: Duration(milliseconds: 300),
             curve: Curves.easeOutQuint,
@@ -501,13 +485,13 @@ class AddButtonState extends State<AddButton>{
         MdiIcons.plusCircleOutline,
         color:
         tappable?
-        iconDisab_(context):
-        iconEnab_(context),
+        iconEnab_(context):
+        iconDisab_(context),
       ),
       onPressed:
       tappable?
-      null:
-      onPressed
+      onPressed:
+      null
   );
 
 }
