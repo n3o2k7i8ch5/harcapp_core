@@ -362,8 +362,6 @@ class _ItemWidgetState extends State<_ItemWidget>{
 
   static const double iconSize = 20.0;
 
-  late FocusNode focusNode;
-
   TextEditingController get controller => widget.controller;
   TextStyle? get style => widget.style;
   TextStyle? get hintStyle => widget.hintStyle;
@@ -377,16 +375,6 @@ class _ItemWidgetState extends State<_ItemWidget>{
   bool get enabled => widget.enabled;
   bool get isCollapsed => widget.isCollapsed;
 
-  late bool selected;
-
-  @override
-  void initState() {
-    focusNode = FocusNode();
-    focusNode.addListener(() => setState(() => selected = focusNode.hasFocus));
-
-    selected = false;
-    super.initState();
-  }
   
   @override
   Widget build(BuildContext context) => IntrinsicWidth(
@@ -399,13 +387,9 @@ class _ItemWidgetState extends State<_ItemWidget>{
 
           Expanded(child: AnimatedSize(
             child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minWidth: 10,//40.0,
-              ),
-              child:
-              IntrinsicWidth(
+              constraints: BoxConstraints(minWidth: 10),
+              child: IntrinsicWidth(
                 child: TextField(
-                  focusNode: focusNode,
                   controller: controller,
                   style: style??AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold),
                   minLines: 1,
@@ -447,8 +431,6 @@ class _ItemWidgetState extends State<_ItemWidget>{
       ),
     ),
   );
-
-  void setEditing(value) => setState(() => this.selected = value);
 
 }
 
