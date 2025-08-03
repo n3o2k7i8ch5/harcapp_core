@@ -146,9 +146,10 @@ class LevelSelectableGridWidget extends StatelessWidget{
 
   final Set<Meto> availableLevels;
   final Set<Meto> selectedLevels;
+  final bool oneLine;
   final void Function(Meto meto, bool checked)? onLevelTap;
 
-  const LevelSelectableGridWidget(this.availableLevels, this.selectedLevels, {this.onLevelTap, super.key});
+  const LevelSelectableGridWidget(this.availableLevels, this.selectedLevels, {this.oneLine = false, this.onLevelTap, super.key});
 
   @override
   Widget build(BuildContext context){
@@ -177,6 +178,17 @@ class LevelSelectableGridWidget extends StatelessWidget{
 
       );
     }
+
+    if(oneLine)
+      return SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          clipBehavior: Clip.none,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: children,
+          )
+      );
 
     return LayoutGrid(
       columnSizes: [1.fr, 1.fr],
