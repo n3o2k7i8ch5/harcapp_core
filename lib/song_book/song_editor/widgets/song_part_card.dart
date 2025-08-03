@@ -7,6 +7,7 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:animated_reorderable_list/src/component/drag_listener.dart';
 
 import '../common.dart';
 import '../providers.dart';
@@ -236,13 +237,15 @@ class _SongChordsWidget extends StatelessWidget{
 class TopZwrotkaButtons extends StatelessWidget{
 
   final SongPart songPart;
+  final int index;
   final void Function(SongPart)? onDuplicate;
   final void Function(SongPart)? onDelete;
   final bool showName;
 
   const TopZwrotkaButtons(
       this.songPart,
-      {this.onDuplicate,
+      { required this.index,
+        this.onDuplicate,
         this.onDelete,
         this.showName = true
       });
@@ -253,7 +256,10 @@ class TopZwrotkaButtons extends StatelessWidget{
 
       Padding(
         padding: EdgeInsets.all(Dimen.iconMarg),
-        child: Icon(MdiIcons.swapVertical, color: iconEnab_(context)),
+        child: ReorderableGridDragStartListener(
+          index: index,
+          child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))
+        ),
       ),
 
       Expanded(
@@ -292,12 +298,14 @@ class TopZwrotkaButtons extends StatelessWidget{
 class TopRefrenButtons extends StatelessWidget{
 
   final SongPart songPart;
+  final int index;
   final void Function(SongPart)? onDelete;
   final bool showName;
 
   const TopRefrenButtons(
       this.songPart,
-      { this.onDelete,
+      { required this.index,
+        this.onDelete,
         this.showName = true
       });
 
@@ -307,7 +315,10 @@ class TopRefrenButtons extends StatelessWidget{
 
       Padding(
         padding: EdgeInsets.all(Dimen.iconMarg),
-        child: Icon(MdiIcons.swapVertical, color: iconEnab_(context)),
+        child: ReorderableGridDragStartListener(
+          index: index,
+          child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))
+        ),
       ),
 
       Expanded(

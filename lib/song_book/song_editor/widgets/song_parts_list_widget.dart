@@ -49,6 +49,7 @@ class SongPartsListWidget extends StatelessWidget{
       items: prov.song.songParts,
       insertDuration: Duration(milliseconds: prov.song.songParts.length<=1?0:200),
       removeDuration: Duration(milliseconds: prov.song.songParts.length==0?0:500),
+      buildDefaultDragHandles: false,
       isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
       onReorder: (int oldIndex, int newIndex){
         final SongPart songPart = prov.song.songParts.removeAt(oldIndex);
@@ -76,6 +77,7 @@ class SongPartsListWidget extends StatelessWidget{
                     songPart: item,
                     topBuilder: (context, part) => TopRefrenButtons(
                       part,
+                      index: index,
                       onDelete: (songPart) => onDelete?.call(),
                     ),
                     onTap:
@@ -94,6 +96,7 @@ class SongPartsListWidget extends StatelessWidget{
                       songPart: item,
                       topBuilder: (context, part) => TopZwrotkaButtons(
                         part,
+                        index: index,
                         onDuplicate: (SongPart part){
                           scrollToBottom(_controller);
                           onDuplicate?.call();
