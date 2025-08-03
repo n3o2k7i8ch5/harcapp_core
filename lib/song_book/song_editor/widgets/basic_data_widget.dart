@@ -96,25 +96,33 @@ class BasicDataWidget extends StatelessWidget{
                   ],
                 ),
 
-                MultiTextField(
-                  hint: 'Tytuł ukryty:',
-                  layout: LayoutMode.column,
-                  controller: currItemProv.hiddenTitlesController,
-                  addButtonBuilder: (tappable, onTap) => SimpleButton.from(
-                      icon: MdiIcons.plus,
-                      text: 'Dodaj tytuł ukryty',
+                AnimatedOpacity(
+                  opacity: currItemProv.hiddenTitlesController.isEmpty? 0: 1,
 
-                      textColor:
-                      tappable?
-                      iconEnab_(context):
-                      iconDisab_(context),
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                  child:
 
-                      margin: EdgeInsets.only(bottom: Dimen.iconMarg),
-                      onTap: tappable?(){
-                        List<String> hidTitles = currItemProv.addHidTitle();
-                        onChangedHiddenTitles?.call(hidTitles);
-                      }:null,
-                      center: false
+                  MultiTextField(
+                    hint: 'Tytuł ukryty:',
+                    layout: LayoutMode.column,
+                    controller: currItemProv.hiddenTitlesController,
+                    addButtonBuilder: (tappable, onTap) => SimpleButton.from(
+                        icon: MdiIcons.plus,
+                        text: 'Dodaj tytuł ukryty',
+
+                        textColor:
+                        tappable?
+                        iconEnab_(context):
+                        iconDisab_(context),
+
+                        margin: EdgeInsets.only(bottom: Dimen.iconMarg),
+                        onTap: tappable?(){
+                          List<String> hidTitles = currItemProv.addHidTitle();
+                          onChangedHiddenTitles?.call(hidTitles);
+                        }:null,
+                        center: false
+                    ),
                   ),
                 ),
 
