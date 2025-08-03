@@ -101,6 +101,7 @@ enum LayoutMode{
 
 class MultiTextField extends StatefulWidget{
 
+  final bool allowZeroFields;
   final MultiTextFieldController? controller;
   final TextStyle? style;
   final TextStyle? hintStyle;
@@ -121,6 +122,7 @@ class MultiTextField extends StatefulWidget{
   final bool enabled;
 
   const MultiTextField({
+    this.allowZeroFields = false,
     this.controller, 
     this.style, 
     this.hintStyle, 
@@ -148,6 +150,7 @@ class MultiTextField extends StatefulWidget{
 
 class MultiTextFieldState extends State<MultiTextField>{
 
+  bool get allowZeroFields => widget.allowZeroFields;
   MultiTextFieldController? _controller;
   MultiTextFieldController get controller => widget.controller??_controller!;
   TextStyle? get style => widget.style;
@@ -240,6 +243,7 @@ class MultiTextFieldState extends State<MultiTextField>{
 
     Widget addButton = enabled?
     AddButton(
+      allowZeroFields: allowZeroFields,
       controller: controller,
       addButtonBuilder: addButtonBuilder,
       onPressed: onAddButtonTap
@@ -435,11 +439,13 @@ class _ItemWidgetState extends State<_ItemWidget>{
 
 class AddButton extends StatefulWidget{
 
+  final bool allowZeroFields;
   final MultiTextFieldController controller;
   final Widget Function(bool tappable, void Function() onTap)? addButtonBuilder;
   final void Function() onPressed;
 
   const AddButton({
+    required this.allowZeroFields,
     required this.controller,
     this.addButtonBuilder,
     required this.onPressed,
@@ -453,11 +459,14 @@ class AddButton extends StatefulWidget{
 
 class AddButtonState extends State<AddButton>{
 
+  bool get allowZeroFields => widget.allowZeroFields;
   MultiTextFieldController get controller => widget.controller;
   Widget Function(bool tappable, void Function() onTap)? get addButtonBuilder => widget.addButtonBuilder;
   void Function() get onPressed => widget.onPressed;
 
-  bool get tappable => controller.isEmpty || controller.last.isNotEmpty;
+  bool get tappable => allowZeroFields?
+  (controller.length==0 || controller.last.isNotEmpty):
+  (controller.isEmpty || controller.last.isNotEmpty);
 
   @override
   Widget build(BuildContext context){

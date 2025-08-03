@@ -102,29 +102,32 @@ class BasicDataWidget extends StatelessWidget{
 
                   duration: Duration(milliseconds: 500),
                   curve: Curves.easeInOut,
-                  child:
+                  child: IgnorePointer(
+                    // In this case `length==0` is not the same as `isEmpty`!
+                    ignoring: currItemProv.hiddenTitlesController.length==0,
+                    child: MultiTextField(
+                      allowZeroFields: true,
+                      hint: 'Tytuł ukryty:',
+                      layout: LayoutMode.column,
+                      controller: currItemProv.hiddenTitlesController,
+                      addButtonBuilder: (tappable, onTap) => SimpleButton.from(
+                          icon: MdiIcons.plus,
+                          text: 'Dodaj tytuł ukryty',
 
-                  MultiTextField(
-                    hint: 'Tytuł ukryty:',
-                    layout: LayoutMode.column,
-                    controller: currItemProv.hiddenTitlesController,
-                    addButtonBuilder: (tappable, onTap) => SimpleButton.from(
-                        icon: MdiIcons.plus,
-                        text: 'Dodaj tytuł ukryty',
+                          textColor:
+                          tappable?
+                          iconEnab_(context):
+                          iconDisab_(context),
 
-                        textColor:
-                        tappable?
-                        iconEnab_(context):
-                        iconDisab_(context),
-
-                        margin: EdgeInsets.only(bottom: Dimen.iconMarg),
-                        onTap: tappable?(){
-                          List<String> hidTitles = currItemProv.addHidTitle();
-                          onChangedHiddenTitles?.call(hidTitles);
-                        }:null,
-                        center: false
+                          margin: EdgeInsets.only(bottom: Dimen.iconMarg),
+                          onTap: tappable?(){
+                            List<String> hidTitles = currItemProv.addHidTitle();
+                            onChangedHiddenTitles?.call(hidTitles);
+                          }:null,
+                          center: false
+                      ),
+                      onAnyChanged: onChangedHiddenTitles,
                     ),
-                    onAnyChanged: onChangedHiddenTitles,
                   ),
                 ),
 
