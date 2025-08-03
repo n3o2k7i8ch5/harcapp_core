@@ -301,7 +301,7 @@ class MultiTextFieldState extends State<MultiTextField>{
             AnimatedListView<Widget>(
               physics: BouncingScrollPhysics(),
               items: children,
-              isSameItem: (a, b) => a.hashCode == b.hashCode,
+              isSameItem: (a, b) => a.key == b.key,
 
               itemBuilder: (context, index) => children[index],
 
