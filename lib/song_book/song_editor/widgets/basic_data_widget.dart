@@ -123,77 +123,9 @@ class BasicDataWidget extends StatelessWidget{
                         }:null,
                         center: false
                     ),
+                    onAnyChanged: onChangedHiddenTitles,
                   ),
                 ),
-
-                // Column(
-                //   crossAxisAlignment: CrossAxisAlignment.stretch,
-                //   children: [
-                //
-                //     ImplicitlyAnimatedList<TextEditingController>(
-                //       physics: BouncingScrollPhysics(),
-                //       items: currItemProv.hiddenTitlesController.controllers,
-                //       areItemsTheSame: (a, b) => a.hashCode == b.hashCode,
-                //
-                //       itemBuilder: (context, animation, item, index) => SizeFadeTransition(
-                //         sizeFraction: 0.7,
-                //         curve: Curves.easeInOut,
-                //         animation: animation,
-                //         child: AddTextWidget(
-                //           item,
-                //           onTextChanged: (text) =>
-                //               onChangedHiddenTitles?.call(currItemProv.editHidTitle(index, text)),
-                //           onRemove: () =>
-                //             onChangedHiddenTitles?.call(currItemProv.removeHidTitleAt(index)),
-                //         ),
-                //       ),
-                //
-                //       removeItemBuilder: (context, animation, oldItem) => SizeFadeTransition(
-                //         sizeFraction: 0.7,
-                //         curve: Curves.easeInOut,
-                //         animation: animation,
-                //         child: AddTextWidget(oldItem),
-                //       ),
-                //
-                //       shrinkWrap: true,
-                //     ),
-                //
-                //     AnimatedContainer(
-                //         duration: Duration(milliseconds: 500),
-                //         curve: Curves.easeInOut,
-                //         height: currItemProv.hiddenTitlesController.isEmpty?
-                //         0:
-                //         Dimen.iconFootprint + Dimen.iconMarg,
-                //
-                //         child: AnimatedOpacity(
-                //           opacity: currItemProv.hiddenTitlesController.isEmpty?
-                //           0:
-                //           1,
-                //
-                //           duration: Duration(milliseconds: 500),
-                //           curve: Curves.easeInOut,
-                //           child: SimpleButton.from(
-                //             icon: MdiIcons.plus,
-                //             text: 'Dodaj tytuł ukryty',
-                //
-                //             textColor:
-                //             isLastHidTitleEmpty(currItemProv)?
-                //             iconDisab_(context):
-                //             iconEnab_(context),
-                //
-                //             radius: AppCard.bigRadius,
-                //             margin: EdgeInsets.only(bottom: Dimen.iconMarg),
-                //             onTap: isLastHidTitleEmpty(currItemProv)?null:(){
-                //               List<String> hidTitles = currItemProv.addHidTitle();
-                //               onChangedHiddenTitles?.call(hidTitles);
-                //             },
-                //             center: false
-                //           ),
-                //         )
-                //     ),
-                //
-                //   ],
-                // ),
 
                 AppTextFieldHint(
                   accentColor: accentColor,
@@ -402,43 +334,6 @@ class BasicDataWidget extends StatelessWidget{
 
         ],
       )
-  );
-
-}
-
-class AddTextWidget extends StatelessWidget{
-
-  final TextEditingController controller;
-  final void Function(String)? onTextChanged;
-  final void Function()? onRemove;
-  const AddTextWidget(this.controller, {this.onTextChanged, this.onRemove});
-
-  @override
-  Widget build(BuildContext context) => Row(
-    children: [
-
-      IconButton(
-        icon: Icon(MdiIcons.trashCanOutline),
-        padding: EdgeInsets.all(Dimen.iconMarg),
-        onPressed: onRemove,
-      ),
-
-      Expanded(child: AppTextFieldHint(
-        hint: 'Tytuł ukryty:',
-        hintTop: '',
-        controller: controller,
-        style: AppTextStyle(
-          fontSize: Dimen.textSizeBig,
-          color: textEnab_(context),
-        ),
-        hintStyle: AppTextStyle(
-          fontSize: Dimen.textSizeBig,
-          color: hintEnab_(context),
-        ),
-        onChanged: (_, value) => onTextChanged?.call(value),
-      )),
-
-    ],
   );
 
 }
