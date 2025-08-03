@@ -41,14 +41,24 @@ class LevelSelectableGridWidget extends StatelessWidget{
   final bool oneLine;
   final void Function(Meto meto, bool checked)? onLevelTap;
 
-  const LevelSelectableGridWidget(this.availableLevels, this.selectedLevels, {this.oneLine = false, this.onLevelTap, super.key});
+  const LevelSelectableGridWidget(
+      this.availableLevels,
+      this.selectedLevels,
+      { this.oneLine = false,
+        this.onLevelTap,
+        super.key
+      });
 
   @override
   Widget build(BuildContext context){
 
     List<Widget> children = [];
 
-    for(Meto meto in availableLevels){
+    List<Meto> allMetos = availableLevels.toList();
+    for(int i=0; i<availableLevels.length; i++){
+
+      Meto meto = allMetos[i];
+
       children.add(
 
         _AnimatedSelectedWrapper(
@@ -58,7 +68,7 @@ class LevelSelectableGridWidget extends StatelessWidget{
             meto: meto,
             iconSize: 42.0,
             trailing: Padding(
-              padding: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.only(right: 12),
               child: Icon(
                 selectedLevels.contains(meto)?Icons.check_circle:Icons.radio_button_unchecked,
                 color: Colors.white,
@@ -69,11 +79,14 @@ class LevelSelectableGridWidget extends StatelessWidget{
         ),
 
       );
+
+      if(oneLine && i<availableLevels.length-1)
+        children.add(SizedBox(width: Dimen.defMarg));
+
     }
 
     if(oneLine)
       return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: children,
       );
 

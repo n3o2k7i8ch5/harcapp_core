@@ -68,6 +68,12 @@ enum Meto{
     }
   }
 
-
+  toList() => [
+    Meto.zuch,
+    Meto.harc,
+    Meto.hs,
+    Meto.wedro,
+    Meto.kadra
+  ];
 
 }
