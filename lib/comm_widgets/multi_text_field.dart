@@ -1,9 +1,8 @@
+import 'package:animated_reorderable_list/animated_reorderable_list.dart';
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/values/dimen.dart';
-import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
-import 'package:implicitly_animated_reorderable_list_2/transitions.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MultiTextFieldController{
@@ -290,29 +289,17 @@ class MultiTextFieldState extends State<MultiTextField>{
           spacing: Dimen.defMarg,
         );
       case LayoutMode.column:
-        return ImplicitlyAnimatedList<Widget>(
+        List<Widget> items = [...children, addButton];
+        return AnimatedListView<Widget>(
           physics: BouncingScrollPhysics(),
-          items: [...children, addButton],
-          areItemsTheSame: (a, b) => a.hashCode == b.hashCode,
+          items: items,
+          isSameItem: (a, b) => a.hashCode == b.hashCode,
 
-          itemBuilder: (context, animation, item, index) => SizeFadeTransition(
-            sizeFraction: 0.7,
-            curve: Curves.easeInQuad,
-            animation: animation,
-            child: item
-          ),
-
-          removeItemBuilder: (context, animation, oldItem) => SizeFadeTransition(
-            sizeFraction: 0.7,
-            curve: Curves.easeInQuad,
-            animation: animation,
-            child: oldItem,
-          ),
+          itemBuilder: (context, index) => items[index],
 
           shrinkWrap: true,
           insertDuration: Duration(milliseconds: 300),
           removeDuration: Duration(milliseconds: 300),
-          updateDuration: Duration(milliseconds: 300),
         );
 
     }
