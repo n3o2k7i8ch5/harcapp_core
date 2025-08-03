@@ -1,7 +1,11 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/values/dimen.dart';
+import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
+import 'package:implicitly_animated_reorderable_list_2/transitions.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MultiTextFieldController{
@@ -213,25 +217,16 @@ class MultiTextFieldState extends State<MultiTextField>{
     }
 
     Widget addButton = enabled?
-    IconButton(
-      icon: Icon(
-        addIcon??MultiTextField.defAddIcon,
-        color:
-        controller.isNotEmpty && controller.last.isEmpty?
-        iconDisab_(context):
-        accentColor,
-      ),
-      onPressed:
-      controller.isNotEmpty && controller.last.isEmpty?
-      null:
-          () => setState((){
+    AddButton(
+      controller: controller,
+      onPressed: () => setState((){
         String text = '';
         controller.addText(text);
         _callOnChanged(controller.length-1);
         controller._callOnChanged(controller.length-1);
         _callOnAnyChanged();
         controller._callOnAnyChanged();
-      }),
+      })
     ):Container();
 
     switch(linear) {
@@ -269,6 +264,29 @@ class MultiTextFieldState extends State<MultiTextField>{
           spacing: Dimen.defMarg,
         );
       case LayoutMode.column:
+        return ImplicitlyAnimatedList<Widget>(
+          physics: BouncingScrollPhysics(),
+          items: children,
+          areItemsTheSame: (a, b) => a.hashCode == b.hashCode,
+
+          itemBuilder: (context, animation, item, index) => SizeFadeTransition(
+            sizeFraction: 0.7,
+            curve: Curves.easeInOut,
+            animation: animation,
+            child: item
+          ),
+
+          removeItemBuilder: (context, animation, oldItem) => SizeFadeTransition(
+            sizeFraction: 0.7,
+            curve: Curves.easeInOut,
+            animation: animation,
+            child: oldItem,
+          ),
+
+          shrinkWrap: true,
+        );
+
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -358,15 +376,15 @@ class _ItemWidgetState extends State<_ItemWidget>{
                   textCapitalization: textCapitalization,
                   textAlignVertical: textAlignVertical,
                   decoration: InputDecoration(
-                      hintText: hint,
-                      hintStyle: hintStyle??AppTextStyle(
-                        color: hintEnab_(context),
-                        fontSize: Dimen.textSizeBig,
-                      ),
-                      border: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
+                    hintText: hint,
+                    hintStyle: hintStyle??AppTextStyle(
+                      color: hintEnab_(context),
+                      fontSize: Dimen.textSizeBig,
+                    ),
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
                   ),
                   onChanged: onChanged,
                   readOnly: !enabled,
@@ -409,5 +427,38 @@ class _ItemWidgetState extends State<_ItemWidget>{
 
 
   void setEditing(editing) => setState(() => this.selected = editing);
+
+}
+
+class AddButton extends StatelessWidget{
+
+  final MultiTextFieldController controller;
+  final IconData? addIcon;
+  final void Function()? onPressed;
+
+  const AddButton({
+    required this.controller,
+    this.addIcon,
+    this.onPressed,
+    super.key
+  });
+
+
+  @override
+  Widget build(BuildContext context){
+    return IconButton(
+      icon: Icon(
+        addIcon??MultiTextField.defAddIcon,
+        color:
+        controller.isNotEmpty && controller.last.isEmpty?
+        iconDisab_(context):
+        iconEnab_(context),
+      ),
+      onPressed:
+      controller.isNotEmpty && controller.last.isEmpty?
+      null:
+      onPressed
+    );
+  }
 
 }
