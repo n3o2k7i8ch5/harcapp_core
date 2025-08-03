@@ -200,7 +200,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       return Container();
   }
 
-  Key buildValueKey(int index) => valueKeyBuilder?.call(index)??ValueKey(controller[index]);
+  Key buildValueKey(int index) => valueKeyBuilder?.call(index)??ValueKey(controller[index].hashCode);
 
   Widget buildItemWidget(int index, Widget child){
     if(itemBuilder != null)
@@ -301,13 +301,11 @@ class MultiTextFieldState extends State<MultiTextField>{
             AnimatedListView<Widget>(
               physics: BouncingScrollPhysics(),
               items: children,
-              isSameItem: (a, b) => a.key == b.key,
-
               itemBuilder: (context, index) => children[index],
-
               shrinkWrap: true,
-              insertDuration: Duration(milliseconds: 300),
-              removeDuration: Duration(milliseconds: 300),
+              enterTransition: [FadeIn(), ScaleIn()],
+              exitTransition: [SlideInUp()],
+              isSameItem: (a, b) => a.key == b.key,
             ),
             addButton
           ],
