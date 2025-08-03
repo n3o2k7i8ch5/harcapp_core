@@ -113,7 +113,7 @@ class MultiTextField extends StatefulWidget{
   final Widget Function(int)? verticalSeparatorBuilder;
   final Widget Function(int)? horizontalSeparatorBuilder;
   final Widget Function(int, Widget)? itemBuilder;
-  final Widget Function(void Function() onTap)? addButtonBuilder;
+  final Widget Function(bool tappable, void Function() onTap)? addButtonBuilder;
 
   final void Function(List<String>)? onAnyChanged;
   final void Function(int, String)? onChanged;
@@ -163,7 +163,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   Widget Function(int)? get verticalSeparatorBuilder => widget.verticalSeparatorBuilder;
   Widget Function(int)? get horizontalSeparatorBuilder => widget.horizontalSeparatorBuilder;
   Widget Function(int, Widget)? get itemBuilder => widget.itemBuilder;
-  Widget Function(void Function() onTap)? get addButtonBuilder => widget.addButtonBuilder;
+  Widget Function(bool tappable, void Function() onTap)? get addButtonBuilder => widget.addButtonBuilder;
 
   void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
   void Function(int, String)? get onChanged => widget.onChanged;
@@ -239,10 +239,12 @@ class MultiTextFieldState extends State<MultiTextField>{
     }
 
     Widget addButton = enabled?
-    addButtonBuilder?.call(onAddButtonTap)??AddButton(
+    AddButton(
       controller: controller,
+      addButtonBuilder: addButtonBuilder,
       onPressed: onAddButtonTap
-    ):Container();
+    )
+    :Container();
 
     switch(linear) {
       case LayoutMode.row:
@@ -454,31 +456,36 @@ class AddButton extends StatelessWidget{
   static IconData defAddIcon = MdiIcons.plusCircleOutline;
 
   final MultiTextFieldController controller;
-  final IconData? addIcon;
-  final String? addText;
-  final void Function()? onPressed;
+  final Widget Function(bool tappable, void Function() onTap)? addButtonBuilder;
+  final void Function() onPressed;
 
   const AddButton({
     required this.controller,
-    this.addIcon,
-    this.addText,
-    this.onPressed,
+    this.addButtonBuilder,
+    required this.onPressed,
     super.key
   });
-  
+
+  bool get tappable => controller.isNotEmpty && controller.last.isEmpty;
+
   @override
-  Widget build(BuildContext context) => IconButton(
-      icon: Icon(
-        addIcon??defAddIcon,
-        color:
-        controller.isNotEmpty && controller.last.isEmpty?
-        iconDisab_(context):
-        iconEnab_(context),
-      ),
-      onPressed:
-      controller.isNotEmpty && controller.last.isEmpty?
-      null:
-      onPressed
+  Widget build(BuildContext context){
+    if(addButtonBuilder == null) return default_(context);
+    return addButtonBuilder!.call(tappable, onPressed);
+  }
+
+  Widget default_(BuildContext context) => IconButton(
+    icon: Icon(
+      defAddIcon,
+      color:
+      tappable?
+      iconDisab_(context):
+      iconEnab_(context),
+    ),
+    onPressed:
+    tappable?
+    null:
+    onPressed
   );
 
 }
