@@ -111,6 +111,14 @@ class BasicDataWidget extends StatelessWidget{
                       multi: true,
                       multiLayout: LayoutMode.column,
                       multiAllowZeroFields: true,
+                      multiExpanded: true,
+                      multiItemBuilder: (index, widget) => Row(
+                        children: [
+                          Icon(MdiIcons.circleMedium),
+                          SizedBox(width: Dimen.iconMarg),
+                          Expanded(child: widget)
+                        ],
+                      ),
                       multiAddButtonBuilder: (tappable, onTap) => SimpleButton.from(
                           icon: MdiIcons.plus,
                           text: 'Dodaj ukryty tytuł',

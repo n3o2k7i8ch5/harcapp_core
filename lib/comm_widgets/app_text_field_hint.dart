@@ -30,6 +30,7 @@ class AppTextFieldHint extends StatefulWidget{
   final bool multi;
   final bool multiAllowZeroFields;
   final LayoutMode multiLayout;
+  final Widget Function(int index, Widget item)? multiItemBuilder;
   final Widget Function(bool tappable, void Function() onTap)? multiAddButtonBuilder;
   final String? multiHintTop;
   final bool multiExpanded;
@@ -60,6 +61,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.multi = false,
     this.multiAllowZeroFields = false,
     this.multiLayout = LayoutMode.row,
+    this.multiItemBuilder,
     this.multiAddButtonBuilder,
     this.multiHintTop,
     this.multiExpanded = false,
@@ -129,6 +131,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         textCapitalization: widget.textCapitalization,
         textAlignVertical: widget.textAlignVertical,
 
+        itemBuilder: widget.multiItemBuilder,
         addButtonBuilder: widget.multiAddButtonBuilder,
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
