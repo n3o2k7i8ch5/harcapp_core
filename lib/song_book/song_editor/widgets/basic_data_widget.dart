@@ -11,7 +11,6 @@ import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
 
 import '../providers.dart';
 
@@ -280,7 +279,7 @@ class BasicDataWidget extends StatelessWidget{
                               color: hintEnab_(context),
                             ),
                             onAnyChanged: (text) => onChangedReleaseDate?.call(currItemProv.releaseDate),
-                            key: ValueKey(Tuple3(currItemProv.releaseDate, currItemProv.showRelDateMonth, currItemProv.showRelDateDay)),
+                            key: ValueKey((currItemProv.releaseDate, currItemProv.showRelDateMonth, currItemProv.showRelDateDay)),
                           ),
                         ),
 

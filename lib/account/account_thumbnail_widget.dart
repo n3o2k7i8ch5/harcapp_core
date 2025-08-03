@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:tuple/tuple.dart';
 
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
@@ -10,18 +9,18 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 
 class AccountThumbnailWidget extends StatelessWidget{
 
-  static const List<Tuple2<Color, Color>> backgroundColors = [
-    Tuple2(Color.fromARGB(255, 255, 204, 204), Color.fromARGB(255, 255, 153, 153)),
-    Tuple2(Color.fromARGB(255, 255, 229, 204), Color.fromARGB(255, 255, 204, 153)),
-    Tuple2(Color.fromARGB(255, 255, 255, 204), Color.fromARGB(255, 255, 255, 51)),
-    Tuple2(Color.fromARGB(255, 229, 255, 204), Color.fromARGB(255, 204, 255, 153)),
-    Tuple2(Color.fromARGB(255, 204, 255, 204), Color.fromARGB(255, 153, 255, 153)),
-    Tuple2(Color.fromARGB(255, 204, 255, 229), Color.fromARGB(255, 153, 255, 204)),
-    Tuple2(Color.fromARGB(255, 204, 255, 255), Color.fromARGB(255, 153, 255, 255)),
-    Tuple2(Color.fromARGB(255, 204, 229, 255), Color.fromARGB(255, 153, 204, 255)),
-    Tuple2(Color.fromARGB(255, 204, 204, 255), Color.fromARGB(255, 153, 153, 255)),
-    Tuple2(Color.fromARGB(255, 229, 204, 255), Color.fromARGB(255, 204, 153, 255)),
-    Tuple2(Color.fromARGB(255, 255, 204, 255), Color.fromARGB(255, 255, 153, 255)),
+  static const List<(Color, Color)> backgroundColors = [
+    (Color.fromARGB(255, 255, 204, 204), Color.fromARGB(255, 255, 153, 153)),
+    (Color.fromARGB(255, 255, 229, 204), Color.fromARGB(255, 255, 204, 153)),
+    (Color.fromARGB(255, 255, 255, 204), Color.fromARGB(255, 255, 255, 51)),
+    (Color.fromARGB(255, 229, 255, 204), Color.fromARGB(255, 204, 255, 153)),
+    (Color.fromARGB(255, 204, 255, 204), Color.fromARGB(255, 153, 255, 153)),
+    (Color.fromARGB(255, 204, 255, 229), Color.fromARGB(255, 153, 255, 204)),
+    (Color.fromARGB(255, 204, 255, 255), Color.fromARGB(255, 153, 255, 255)),
+    (Color.fromARGB(255, 204, 229, 255), Color.fromARGB(255, 153, 204, 255)),
+    (Color.fromARGB(255, 204, 204, 255), Color.fromARGB(255, 153, 153, 255)),
+    (Color.fromARGB(255, 229, 204, 255), Color.fromARGB(255, 204, 153, 255)),
+    (Color.fromARGB(255, 255, 204, 255), Color.fromARGB(255, 255, 153, 255)),
   ];
 
   static const double defSize = 50;

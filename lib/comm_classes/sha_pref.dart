@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:isolate';
 import 'package:harcapp_core/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tuple/tuple.dart';
 
 class ShaPref{
 
@@ -78,42 +77,42 @@ class ShaPref{
       customGetBoolOrNull: (String key) => shaPrefMap[key],
       customSetBool: (String key, bool value){
         shaPrefMap[key] = value;
-        sendPort?.send(Tuple2(key, value));
+        sendPort?.send((key, value));
       },
       customGetStringOrNull: (String key) => shaPrefMap[key],
       customSetString: (String key, String value){
         shaPrefMap[key] = value;
-        sendPort?.send(Tuple2(key, value));
+        sendPort?.send((key, value));
       },
       customGetStringListOrNull: (String key) => (shaPrefMap[key] as List).cast<String>(),
       customSetStringList: (String key, List<String> value){
         shaPrefMap[key] = value;
-        sendPort?.send(Tuple2(key, value));
+        sendPort?.send((key, value));
       },
       customGetMapJsonStrOrNull: (String key) => shaPrefMap[key],
       customSetMap: (String key, Map value){
         shaPrefMap[key] = value;
-        sendPort?.send(Tuple2(key, value));
+        sendPort?.send((key, value));
       },
       customGetIntOrNull: (String key) => shaPrefMap[key],
       customSetInt: (String key, int value){
         shaPrefMap[key] = value;
-        sendPort?.send(Tuple2(key, value));
+        sendPort?.send((key, value));
       },
       customGetDoubleOrNull: (String key) => shaPrefMap[key],
       customSetDouble: (String key, double value){
         shaPrefMap[key] = value;
-        sendPort?.send(Tuple2(key, value));
+        sendPort?.send((key, value));
       },
       customGetDateTimeStrOrNull: (String key) => shaPrefMap[key],
       customSetDateTime: (String key, DateTime? value){
         shaPrefMap[key] = value;
-        sendPort?.send(Tuple2(key, value));
+        sendPort?.send((key, value));
       },
       customExists: (String key) => shaPrefMap.containsKey(key),
       customRemove: (String key){
         shaPrefMap.remove(key);
-        sendPort?.send(Tuple2(key, null));
+        sendPort?.send((key, null));
       },
       customClear: () => shaPrefMap.clear()
   );

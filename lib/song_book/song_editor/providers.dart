@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
-import 'package:tuple/tuple.dart';
 import 'package:provider/provider.dart';
 
 import '../add_person.dart';
@@ -22,7 +21,7 @@ class CurrentItemProvider extends ChangeNotifier{
 
   late TextEditingController ytLinkController;
 
-  late List<Tuple3<TextEditingController, TextEditingController, TextEditingController>> addPersData;
+  late List<(TextEditingController, TextEditingController, TextEditingController)> addPersData;
 
   void _updateControllers(SongRaw song){
     titleController.text = song.title;
@@ -33,7 +32,7 @@ class CurrentItemProvider extends ChangeNotifier{
 
     ytLinkController.text = song.youtubeUrl??'';
 
-    addPersData = song.addPers.map((addPers) => Tuple3(
+    addPersData = song.addPers.map((addPers) => (
         TextEditingController(text: addPers.name),
         TextEditingController(text: addPers.emailRef),
         TextEditingController(text: addPers.userKeyRef)
@@ -52,14 +51,14 @@ class CurrentItemProvider extends ChangeNotifier{
     ytLinkController = TextEditingController(text: song.youtubeUrl??'');
 
     if(song.addPers.isNotEmpty)
-      addPersData = song.addPers.map((addPers) => Tuple3(
+      addPersData = song.addPers.map((addPers) => (
           TextEditingController(text: addPers.name),
           TextEditingController(text: addPers.emailRef),
           TextEditingController(text: addPers.userKeyRef)
       )).toList();
     else if (initAddPersName != null || initAddPersEmail != null || initAddPersUserKey != null){
       song.addPers.add(AddPerson(name: initAddPersName, emailRef: initAddPersEmail, userKeyRef: initAddPersUserKey));
-      addPersData = [Tuple3(
+      addPersData = [(
           TextEditingController(text: initAddPersName??''),
           TextEditingController(text: initAddPersEmail??''),
           TextEditingController(text: initAddPersUserKey??'')

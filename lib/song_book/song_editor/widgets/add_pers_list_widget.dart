@@ -10,7 +10,6 @@ import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
 
 import '../../add_person.dart';
 import '../providers.dart';
@@ -121,11 +120,13 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
                 trailing: IconButton(
                   icon: Icon(MdiIcons.plus),
                   onPressed: (){
-                    prov.addPersData.add(Tuple3(
+                    prov.addPersData.add(
+                      (
                         TextEditingController(),
                         TextEditingController(),
                         TextEditingController()
-                    ));
+                      )
+                    );
                     prov.notify();
                   },
                 ),
@@ -136,15 +137,15 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
               items: prov.addPersData,
               itemBuilder: (context, index) =>
                   AddPersWidget(
-                    prov.addPersData[index].item1,
-                    prov.addPersData[index].item2,
+                    prov.addPersData[index].$1,
+                    prov.addPersData[index].$2,
 
                     onChanged: (){
 
                       List<AddPerson> data = prov.addPersData.map((addPersData) => AddPerson(
-                        name: addPersData.item1.text,
-                        emailRef: addPersData.item2.text,
-                        userKeyRef: addPersData.item3.text,
+                        name: addPersData.$1.text,
+                        emailRef: addPersData.$2.text,
+                        userKeyRef: addPersData.$3.text,
                       )).toList();
 
                       prov.setAddPers(data);
@@ -173,7 +174,7 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
                     child: SimpleButton(
                       radius: AppCard.bigRadius,
                       onTap: (){
-                        prov.addPersData.add(Tuple3(
+                        prov.addPersData.add((
                             TextEditingController(),
                             TextEditingController(),
                             TextEditingController()

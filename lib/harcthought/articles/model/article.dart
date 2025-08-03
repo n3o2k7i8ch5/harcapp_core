@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:semaphore_plus/semaphore_plus.dart';
-import 'package:tuple/tuple.dart';
 import 'package:image/image.dart' as img;
 
 import 'article_data.dart';
@@ -11,7 +10,7 @@ import 'article_data.dart';
 
 abstract class CoreArticle extends ArticleData{
 
-  static Map<String, Tuple2<String, int>>? altCoverUrls;
+  static Map<String, (String, int)>? altCoverUrls;
 
   static const String paramTitle = 'title';
   static const String paramTags = 'tags';
