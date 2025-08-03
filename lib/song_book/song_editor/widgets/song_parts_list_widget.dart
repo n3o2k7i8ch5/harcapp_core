@@ -43,125 +43,133 @@ class SongPartsListWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Consumer<CurrentItemProvider>(
-    builder: (context, prov, _) => AnimatedReorderableListView(
-      physics: physics??BouncingScrollPhysics(),
-      controller: _controller,
-      items: prov.song.songParts,
-      insertDuration: Duration(milliseconds: prov.song.songParts.length<=1?0:200),
-      removeDuration: Duration(milliseconds: prov.song.songParts.length==0?0:500),
-      buildDefaultDragHandles: false,
-      isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
-      onReorder: (int oldIndex, int newIndex){
-        final SongPart songPart = prov.song.songParts.removeAt(oldIndex);
-        prov.song.songParts.insert(newIndex, songPart);
-        prov.notify();
-        onReorderFinished?.call();
-      },
-      itemBuilder: (BuildContext context, int index){
-        SongPart item = prov.song.songParts[index];
-        return Builder(
-          key: ValueKey(item.hashCode),
-          builder: (context) {
-            // final t = dragAnimation.value;
-            // final elevation = ui.lerpDouble(0, AppCard.bigElevation, t)!;
-            // final color = Color.lerp(background_(context), cardEnab_(context), t);
+    builder: (context, prov, _) => Column(
+      children: [
 
-            bool isRefren = item.isRefren(context);
+        if(header!=null) header!,
 
-            Widget child;
-
-            if(isRefren)
-              child = Consumer<RefrenPartProvider>(
-                  builder: (context, prov, child) => SongPartCard(
-                    type: SongPartType.REFREN,
-                    songPart: item,
-                    topBuilder: (context, part) => TopRefrenButtons(
-                      part,
-                      index: index,
-                      onDelete: (songPart) => onDelete?.call(),
-                    ),
-                    onTap:
-                    refrenTapable?
-                        () => onPartTap?.call(index):
-                    null,
-                  )
-              );
-
-            else
-              child = ChangeNotifierProvider<SongPartProvider>(
-                create: (context) => SongPartProvider(item),
-                builder: (context, child) => Consumer<SongPartProvider>(
-                    builder: (context, prov, child) => SongPartCard(
-                      type: SongPartType.ZWROTKA,
-                      songPart: item,
-                      topBuilder: (context, part) => TopZwrotkaButtons(
-                        part,
-                        index: index,
-                        onDuplicate: (SongPart part){
-                          scrollToBottom(_controller);
-                          onDuplicate?.call();
-                        },
-                        onDelete: (SongPart part) => onDelete?.call(),
-                      ),
-                      onTap: () => onPartTap?.call(index),
-                    )
-                ),
-              );
-
-            return AppCard(
-                clipBehavior: Clip.none,
-                padding: EdgeInsets.zero,
-                margin: EdgeInsets.only(
-                  top: ITEM_TOP_MARG,
-                  right: Dimen.defMarg,
-                  left: Dimen.defMarg,
-                  bottom: ITEM_BOTTOM_MARG
-                ),
-                radius: AppCard.bigRadius,
-                elevation: 0,
-                color: background_(context),
-                child: child
-            );
+        AnimatedReorderableListView(
+          physics: physics??BouncingScrollPhysics(),
+          controller: _controller,
+          items: prov.song.songParts,
+          insertDuration: Duration(milliseconds: prov.song.songParts.length<=1?0:200),
+          removeDuration: Duration(milliseconds: prov.song.songParts.length==0?0:500),
+          buildDefaultDragHandles: false,
+          isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
+          onReorder: (int oldIndex, int newIndex){
+            final SongPart songPart = prov.song.songParts.removeAt(oldIndex);
+            prov.song.songParts.insert(newIndex, songPart);
+            prov.notify();
+            onReorderFinished?.call();
           },
-        );
+          itemBuilder: (BuildContext context, int index){
+            SongPart item = prov.song.songParts[index];
+            return Builder(
+              key: ValueKey(item.hashCode),
+              builder: (context) {
+                // final t = dragAnimation.value;
+                // final elevation = ui.lerpDouble(0, AppCard.bigElevation, t)!;
+                // final color = Color.lerp(background_(context), cardEnab_(context), t);
 
-      },
-      padding: EdgeInsets.only(bottom: Dimen.defMarg/2),
-      shrinkWrap: shrinkWrap,
-      // header: header,
-      // footer: Column(
-      //   children: [
-      //
-      //     AnimatedContainer(
-      //       duration: Duration(milliseconds: 1),
-      //       height:
-      //       prov.song.songParts.isEmpty?
-      //       SongPartCard.EMPTY_HEIGHT + Dimen.iconFootprint + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
-      //           :0,
-      //       child: Column(
-      //           mainAxisAlignment: MainAxisAlignment.center,
-      //           children: [
-      //
-      //             Icon(MdiIcons.musicNoteOffOutline, color: hintEnab_(context)),
-      //
-      //             SizedBox(height: Dimen.iconMarg),
-      //
-      //             Text(
-      //               'Pusto!\nUżyj poniższych przycisków.',
-      //               textAlign: TextAlign.center,
-      //               style: AppTextStyle(
-      //                 color: hintEnab_(context),
-      //                 fontSize: Dimen.textSizeBig,
-      //               ),
-      //             ),
-      //           ]
-      //       ),
-      //     ),
-      //
-      //     if(footer!=null) footer!,
-      //
-      //   ],
-      // ),
+                bool isRefren = item.isRefren(context);
+
+                Widget child;
+
+                if(isRefren)
+                  child = Consumer<RefrenPartProvider>(
+                      builder: (context, prov, child) => SongPartCard(
+                        type: SongPartType.REFREN,
+                        songPart: item,
+                        topBuilder: (context, part) => TopRefrenButtons(
+                          part,
+                          index: index,
+                          onDelete: (songPart) => onDelete?.call(),
+                        ),
+                        onTap:
+                        refrenTapable?
+                            () => onPartTap?.call(index):
+                        null,
+                      )
+                  );
+
+                else
+                  child = ChangeNotifierProvider<SongPartProvider>(
+                    create: (context) => SongPartProvider(item),
+                    builder: (context, child) => Consumer<SongPartProvider>(
+                        builder: (context, prov, child) => SongPartCard(
+                          type: SongPartType.ZWROTKA,
+                          songPart: item,
+                          topBuilder: (context, part) => TopZwrotkaButtons(
+                            part,
+                            index: index,
+                            onDuplicate: (SongPart part){
+                              scrollToBottom(_controller);
+                              onDuplicate?.call();
+                            },
+                            onDelete: (SongPart part) => onDelete?.call(),
+                          ),
+                          onTap: () => onPartTap?.call(index),
+                        )
+                    ),
+                  );
+
+                return AppCard(
+                    clipBehavior: Clip.none,
+                    padding: EdgeInsets.zero,
+                    margin: EdgeInsets.only(
+                        top: ITEM_TOP_MARG,
+                        right: Dimen.defMarg,
+                        left: Dimen.defMarg,
+                        bottom: ITEM_BOTTOM_MARG
+                    ),
+                    radius: AppCard.bigRadius,
+                    elevation: 0,
+                    color: background_(context),
+                    child: child
+                );
+              },
+            );
+
+          },
+          padding: EdgeInsets.only(bottom: Dimen.defMarg/2),
+          shrinkWrap: shrinkWrap,
+          // header: header,
+          // footer: Column(
+          //   children: [
+          //
+          //     AnimatedContainer(
+          //       duration: Duration(milliseconds: 1),
+          //       height:
+          //       prov.song.songParts.isEmpty?
+          //       SongPartCard.EMPTY_HEIGHT + Dimen.iconFootprint + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
+          //           :0,
+          //       child: Column(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           children: [
+          //
+          //             Icon(MdiIcons.musicNoteOffOutline, color: hintEnab_(context)),
+          //
+          //             SizedBox(height: Dimen.iconMarg),
+          //
+          //             Text(
+          //               'Pusto!\nUżyj poniższych przycisków.',
+          //               textAlign: TextAlign.center,
+          //               style: AppTextStyle(
+          //                 color: hintEnab_(context),
+          //                 fontSize: Dimen.textSizeBig,
+          //               ),
+          //             ),
+          //           ]
+          //       ),
+          //     ),
+          //
+          //     if(footer!=null) footer!,
+          //
+          //   ],
+          // ),
+        )
+
+      ],
     ),
   );
 

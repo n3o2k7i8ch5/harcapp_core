@@ -122,20 +122,20 @@ class BasicDataWidget extends StatelessWidget{
                         ],
                       ),
                       multiAddButtonBuilder: (tappable, onTap) => SimpleButton.from(
-                          icon: MdiIcons.plus,
-                          text: 'Dodaj ukryty tytuł',
-                          margin: EdgeInsets.zero,
+                        icon: MdiIcons.plus,
+                        text: 'Dodaj ukryty tytuł',
+                        margin: EdgeInsets.zero,
 
-                          textColor:
-                          tappable?
-                          iconEnab_(context):
-                          iconDisab_(context),
+                        textColor:
+                        tappable?
+                        iconEnab_(context):
+                        iconDisab_(context),
 
-                          onTap: tappable?(){
-                            List<String> hidTitles = currItemProv.addHidTitle();
-                            onChangedHiddenTitles?.call(hidTitles);
-                          }:null,
-                          center: false
+                        onTap: tappable?(){
+                          List<String> hidTitles = currItemProv.addHidTitle();
+                          onChangedHiddenTitles?.call(hidTitles);
+                        }:null,
+                        center: false
                       ),
                     ),
                   ),
