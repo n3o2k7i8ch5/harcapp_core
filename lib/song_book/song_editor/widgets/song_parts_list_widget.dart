@@ -44,6 +44,7 @@ class SongPartsListWidget extends StatelessWidget{
   Widget build(BuildContext context) => Consumer<CurrentItemProvider>(
     builder: (context, prov, _) => AnimatedReorderableListView(
       buildDefaultDragHandles: false,
+      proxyDecorator: proxyDecorator,
       physics: physics??BouncingScrollPhysics(),
       controller: _controller,
       items: prov.song.songParts,
@@ -109,7 +110,10 @@ class SongPartsListWidget extends StatelessWidget{
               ),
             );
 
-          return child;
+          return Padding(
+            padding: EdgeInsets.all(Dimen.sideMarg),
+            child: child,
+          );
 
           return AppCard(
               clipBehavior: Clip.none,
