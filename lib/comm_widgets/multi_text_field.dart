@@ -451,9 +451,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
 
 }
 
-class AddButton extends StatelessWidget{
-
-  static IconData defAddIcon = MdiIcons.plusCircleOutline;
+class AddButton extends StatefulWidget{
 
   final MultiTextFieldController controller;
   final Widget Function(bool tappable, void Function() onTap)? addButtonBuilder;
@@ -466,6 +464,17 @@ class AddButton extends StatelessWidget{
     super.key
   });
 
+  @override
+  State<StatefulWidget> createState() => AddButtonState();
+
+}
+
+class AddButtonState extends State<AddButton>{
+
+  MultiTextFieldController get controller => widget.controller;
+  Widget Function(bool tappable, void Function() onTap)? get addButtonBuilder => widget.addButtonBuilder;
+  void Function() get onPressed => widget.onPressed;
+
   bool get tappable => controller.isNotEmpty && controller.last.isEmpty;
 
   @override
@@ -474,18 +483,31 @@ class AddButton extends StatelessWidget{
     return addButtonBuilder!.call(tappable, onPressed);
   }
 
+  void _listener(_) => setState(() {});
+
+  void initState() {
+    super.initState();
+    controller.addOnAnyChangedListener(_listener);
+  }
+
+  @override
+  void dispose() {
+    controller.removeOnAnyChangedListener(_listener);
+    super.dispose();
+  }
+
   Widget default_(BuildContext context) => IconButton(
-    icon: Icon(
-      defAddIcon,
-      color:
+      icon: Icon(
+        MdiIcons.plusCircleOutline,
+        color:
+        tappable?
+        iconDisab_(context):
+        iconEnab_(context),
+      ),
+      onPressed:
       tappable?
-      iconDisab_(context):
-      iconEnab_(context),
-    ),
-    onPressed:
-    tappable?
-    null:
-    onPressed
+      null:
+      onPressed
   );
 
 }
