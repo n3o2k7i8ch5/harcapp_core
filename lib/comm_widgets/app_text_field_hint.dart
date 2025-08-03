@@ -179,14 +179,18 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
             textField,
 
-            AnimatedOpacity(
-              child: Text(
-                multiController!.length==1?hintTop:multiHintTop,
-                style: AppTextStyle(fontSize: Dimen.textSizeSmall, fontWeight: weightHalfBold, color: hintEnab_(context)),
+            Positioned(
+              left: 0,
+              top: 10,
+              child: AnimatedOpacity(
+                child: Text(
+                  multiController!.length==1?hintTop:multiHintTop,
+                  style: AppTextStyle(fontSize: Dimen.textSizeSmall, fontWeight: weightHalfBold, color: hintEnab_(context)),
+                ),
+                duration: Duration(milliseconds: 300),
+                opacity:
+                (multi && multiController!.isEmpty) || (!multi && controller.text.isEmpty)?0:1,
               ),
-              duration: Duration(milliseconds: 300),
-              opacity:
-              (multi && multiController!.isEmpty) || (!multi && controller.text.isEmpty)?0:1,
             ),
 
           ],
