@@ -6,6 +6,11 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 class TitleShortcutRowWidget extends StatelessWidget{
 
+  static const TextStyle style = AppTextStyle(
+    fontSize: Dimen.textSizeAppBar,
+    fontWeight: weight.bold,
+  );
+
   static const double height = Dimen.iconFootprint;
   static const double textStartPadding = 10.0;
 
@@ -42,11 +47,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    AppTextStyle style = AppTextStyle(
-        fontSize: Dimen.textSizeAppBar,
-        fontWeight: weight.bold,
-        color: titleColor
-    );
+    TextStyle _style = style.copyWith(color: titleColor);
 
     Widget widget = Row(
       children: [
@@ -81,12 +82,12 @@ class TitleShortcutRowWidget extends StatelessWidget{
             selectable?
             SelectableText(
               title,
-              style: style,
+              style: _style,
               textAlign: textAlign,
             ):
             Text(
               title,
-              style: style,
+              style: _style,
               textAlign: textAlign,
             )
         ),
