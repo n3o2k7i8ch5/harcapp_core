@@ -97,7 +97,8 @@ class BasicDataWidget extends StatelessWidget{
                 ),
 
                 AnimatedOpacity(
-                  opacity: currItemProv.hiddenTitlesController.isEmpty? 0: 1,
+                  // In this case `length==0` is not the same as `isEmpty`!
+                  opacity: currItemProv.hiddenTitlesController.length==0? 0: 1,
 
                   duration: Duration(milliseconds: 500),
                   curve: Curves.easeInOut,
