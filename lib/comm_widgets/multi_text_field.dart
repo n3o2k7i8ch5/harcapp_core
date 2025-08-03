@@ -110,8 +110,8 @@ class MultiTextField extends StatefulWidget{
   final TextCapitalization textCapitalization;
   final TextAlignVertical? textAlignVertical;
 
-  final Widget Function(int)? verticalSeparatorBuilder;
-  final Widget Function(int)? horizontalSeparatorBuilder;
+  final double verticalSeparator;
+  final double horizontalSeparator;
   final Widget Function(int, Key, Widget)? itemBuilder;
   final Widget Function(bool tappable, void Function() onTap)? addButtonBuilder;
   final Key Function(int)? valueKeyBuilder;
@@ -133,8 +133,8 @@ class MultiTextField extends StatefulWidget{
     this.textCapitalization = TextCapitalization.none, 
     this.textAlignVertical,
     
-    this.verticalSeparatorBuilder,
-    this.horizontalSeparatorBuilder,
+    this.verticalSeparator = 0,
+    this.horizontalSeparator = 0,
     this.itemBuilder,
     this.addButtonBuilder,
     this.valueKeyBuilder,
@@ -167,8 +167,8 @@ class MultiTextFieldState extends State<MultiTextField>{
   TextCapitalization get textCapitalization => widget.textCapitalization;
   TextAlignVertical? get textAlignVertical => widget.textAlignVertical;
 
-  Widget Function(int)? get verticalSeparatorBuilder => widget.verticalSeparatorBuilder;
-  Widget Function(int)? get horizontalSeparatorBuilder => widget.horizontalSeparatorBuilder;
+  double get verticalSeparator => widget.verticalSeparator;
+  double get horizontalSeparator => widget.horizontalSeparator;
   Widget Function(int, Key, Widget)? get itemBuilder => widget.itemBuilder;
   Widget Function(bool tappable, void Function() onTap)? get addButtonBuilder => widget.addButtonBuilder;
   Key Function(int)? get valueKeyBuilder => widget.valueKeyBuilder;
@@ -191,18 +191,59 @@ class MultiTextFieldState extends State<MultiTextField>{
     super.initState();
   }
 
-  Widget buildSeparator(int index){
-    if(linear == LayoutMode.row)
-      return horizontalSeparatorBuilder?.call(index)??SizedBox(width: Dimen.defMarg);
-    else if(linear == LayoutMode.column)
-      return verticalSeparatorBuilder?.call(index)??Container();
-    else
-      return Container();
-  }
+  // Widget buildSeparator(int index){
+  //   if(linear == LayoutMode.row)
+  //     return horizontalSeparatorBuilder?.call(index)??SizedBox(width: Dimen.defMarg);
+  //   else if(linear == LayoutMode.column)
+  //     return verticalSeparatorBuilder?.call(index)??Container();
+  //   else
+  //     return Container();
+  // }
 
   Key buildValueKey(int index) => valueKeyBuilder?.call(index)??ValueKey(controller[index].hashCode);
 
-  Widget buildItemWidget(int index, Widget child){
+  Widget buildItemWidget(int index, bool withSeparator){
+    Widget child = _ItemWidget(
+      key: buildValueKey(index),
+      controller: controller[index],
+      style: style,
+      hintStyle: hintStyle,
+      hint: hint,
+      padding: withSeparator?
+        EdgeInsets.only(
+          right: widget.layout == LayoutMode.row?horizontalSeparator:0,
+          bottom: widget.layout == LayoutMode.wrap?verticalSeparator:0
+        ): null,
+      textCapitalization: textCapitalization,
+      textAlignVertical: textAlignVertical,
+      removable: controller.length>minCount,
+      isCollapsed: isCollapsed,
+      onChanged: (text){
+        if(index == controller.length-1)
+          setState(() {});
+
+        _callOnChanged(index);
+        controller._callOnChanged(index);
+        _callOnAnyChanged();
+        controller._callOnAnyChanged();
+      },
+      onRemoveTap: () => setState((){
+        controller.removeAt(index);
+        onRemoved?.call(index);
+
+        _callOnAnyChanged();
+        controller._callOnAnyChanged();
+      }),
+      enabled: enabled,
+    );
+
+    if(withSeparator)
+      child = Padding(
+        key: buildValueKey(index),
+        padding: EdgeInsets.only(right: Dimen.defMarg),
+        child: child,
+      );
+
     if(itemBuilder != null)
       return itemBuilder!.call(index, buildValueKey(index), child);
     else
@@ -213,43 +254,8 @@ class MultiTextFieldState extends State<MultiTextField>{
   Widget build(BuildContext context) {
     
     List<Widget> children = [];
-    for(int i=0; i<controller.length; i++) {
-      children.add(
-          buildItemWidget(
-            i,
-            _ItemWidget(
-              key: buildValueKey(i),
-              controller: controller[i],
-              style: style,
-              hintStyle: hintStyle,
-              hint: hint,
-              textCapitalization: textCapitalization,
-              textAlignVertical: textAlignVertical,
-              removable: controller.length>minCount,
-              isCollapsed: isCollapsed,
-              onChanged: (text){
-                if(i == controller.length-1)
-                  setState(() {});
-
-                _callOnChanged(i);
-                controller._callOnChanged(i);
-                _callOnAnyChanged();
-                controller._callOnAnyChanged();
-              },
-              onRemoveTap: () => setState((){
-                controller.removeAt(i);
-                onRemoved?.call(i);
-
-                _callOnAnyChanged();
-                controller._callOnAnyChanged();
-              }),
-              enabled: enabled,
-            )
-          )
-      );
-
-      if(i < controller.length-1) children.add(buildSeparator(i));
-    }
+    for(int i=0; i<controller.length; i++)
+      children.add(buildItemWidget(i, i < controller.length-1));
 
     Widget addButton = enabled?
     AddButton(
@@ -333,6 +339,7 @@ class _ItemWidget extends StatefulWidget{
   final TextStyle? hintStyle;
   final String? hint;
   final bool removable;
+  final EdgeInsets? padding;
   final TextCapitalization textCapitalization;
   final TextAlignVertical? textAlignVertical;
   final void Function()? onRemoveTap;
@@ -346,6 +353,7 @@ class _ItemWidget extends StatefulWidget{
     this.hintStyle,
     required this.hint,
     this.removable = true,
+    this.padding,
     this.textCapitalization = TextCapitalization.none,
     this.textAlignVertical, this.onRemoveTap,
     this.onChanged,
@@ -370,6 +378,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
   TextStyle? get hintStyle => widget.hintStyle;
   String? get hint => widget.hint;
   bool get removable => widget.removable;
+  EdgeInsets? get padding => widget.padding;
   TextCapitalization get textCapitalization => widget.textCapitalization;
   TextAlignVertical? get textAlignVertical => widget.textAlignVertical;
   void Function()? get onRemoveTap => widget.onRemoveTap;
@@ -391,7 +400,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
   @override
   Widget build(BuildContext context) => IntrinsicWidth(
     child: Padding(
-      padding: EdgeInsets.symmetric(vertical: 2.0),
+      padding: padding??EdgeInsets.zero,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
