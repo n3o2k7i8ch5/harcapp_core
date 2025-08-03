@@ -51,6 +51,7 @@ class SimpleButton extends StatelessWidget{
 
     Widget child = InkWell(
       borderRadius: borderRadius??BorderRadius.circular(radius??AppCard.defRadius),
+
       onTap: enabled?onTap:null,
       onLongPress: onLongPress,
       child: Padding(
@@ -149,7 +150,7 @@ class SimpleButton extends StatelessWidget{
     else
       children = [
         if(iconLeading && (iconWidget != null || icon != null))
-          iconWidget??Icon(icon, color: textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.iconSize)),
+          iconWidget??Icon(icon, color: iconColor??textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.iconSize)),
 
         if(text != null)
           SizedBox(height: dense?Dimen.defMarg:Dimen.iconMarg),
@@ -168,7 +169,7 @@ class SimpleButton extends StatelessWidget{
           SizedBox(height: dense?Dimen.defMarg:Dimen.iconMarg),
 
         if(!iconLeading && (iconWidget != null || icon != null))
-          iconWidget??Icon(icon, color: textColor??iconEnab_(context!)),
+          iconWidget??Icon(icon, color: iconColor??textColor??iconEnab_(context!)),
       ];
 
     return SimpleButton(
