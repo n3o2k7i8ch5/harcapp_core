@@ -126,74 +126,74 @@ class BasicDataWidget extends StatelessWidget{
                   ),
                 ),
 
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-
-                    ImplicitlyAnimatedList<TextEditingController>(
-                      physics: BouncingScrollPhysics(),
-                      items: currItemProv.hiddenTitlesController.controllers,
-                      areItemsTheSame: (a, b) => a.hashCode == b.hashCode,
-
-                      itemBuilder: (context, animation, item, index) => SizeFadeTransition(
-                        sizeFraction: 0.7,
-                        curve: Curves.easeInOut,
-                        animation: animation,
-                        child: AddTextWidget(
-                          item,
-                          onTextChanged: (text) =>
-                              onChangedHiddenTitles?.call(currItemProv.editHidTitle(index, text)),
-                          onRemove: () =>
-                            onChangedHiddenTitles?.call(currItemProv.removeHidTitleAt(index)),
-                        ),
-                      ),
-
-                      removeItemBuilder: (context, animation, oldItem) => SizeFadeTransition(
-                        sizeFraction: 0.7,
-                        curve: Curves.easeInOut,
-                        animation: animation,
-                        child: AddTextWidget(oldItem),
-                      ),
-
-                      shrinkWrap: true,
-                    ),
-
-                    AnimatedContainer(
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                        height: currItemProv.hiddenTitlesController.isEmpty?
-                        0:
-                        Dimen.iconFootprint + Dimen.iconMarg,
-
-                        child: AnimatedOpacity(
-                          opacity: currItemProv.hiddenTitlesController.isEmpty?
-                          0:
-                          1,
-
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                          child: SimpleButton.from(
-                            icon: MdiIcons.plus,
-                            text: 'Dodaj tytuł ukryty',
-
-                            textColor:
-                            isLastHidTitleEmpty(currItemProv)?
-                            iconDisab_(context):
-                            iconEnab_(context),
-
-                            radius: AppCard.bigRadius,
-                            margin: EdgeInsets.only(bottom: Dimen.iconMarg),
-                            onTap: isLastHidTitleEmpty(currItemProv)?null:(){
-                              List<String> hidTitles = currItemProv.addHidTitle();
-                              onChangedHiddenTitles?.call(hidTitles);
-                            },
-                            center: false
-                          ),
-                        )
-                    ),
-
-                  ],
-                ),
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.stretch,
+                //   children: [
+                //
+                //     ImplicitlyAnimatedList<TextEditingController>(
+                //       physics: BouncingScrollPhysics(),
+                //       items: currItemProv.hiddenTitlesController.controllers,
+                //       areItemsTheSame: (a, b) => a.hashCode == b.hashCode,
+                //
+                //       itemBuilder: (context, animation, item, index) => SizeFadeTransition(
+                //         sizeFraction: 0.7,
+                //         curve: Curves.easeInOut,
+                //         animation: animation,
+                //         child: AddTextWidget(
+                //           item,
+                //           onTextChanged: (text) =>
+                //               onChangedHiddenTitles?.call(currItemProv.editHidTitle(index, text)),
+                //           onRemove: () =>
+                //             onChangedHiddenTitles?.call(currItemProv.removeHidTitleAt(index)),
+                //         ),
+                //       ),
+                //
+                //       removeItemBuilder: (context, animation, oldItem) => SizeFadeTransition(
+                //         sizeFraction: 0.7,
+                //         curve: Curves.easeInOut,
+                //         animation: animation,
+                //         child: AddTextWidget(oldItem),
+                //       ),
+                //
+                //       shrinkWrap: true,
+                //     ),
+                //
+                //     AnimatedContainer(
+                //         duration: Duration(milliseconds: 500),
+                //         curve: Curves.easeInOut,
+                //         height: currItemProv.hiddenTitlesController.isEmpty?
+                //         0:
+                //         Dimen.iconFootprint + Dimen.iconMarg,
+                //
+                //         child: AnimatedOpacity(
+                //           opacity: currItemProv.hiddenTitlesController.isEmpty?
+                //           0:
+                //           1,
+                //
+                //           duration: Duration(milliseconds: 500),
+                //           curve: Curves.easeInOut,
+                //           child: SimpleButton.from(
+                //             icon: MdiIcons.plus,
+                //             text: 'Dodaj tytuł ukryty',
+                //
+                //             textColor:
+                //             isLastHidTitleEmpty(currItemProv)?
+                //             iconDisab_(context):
+                //             iconEnab_(context),
+                //
+                //             radius: AppCard.bigRadius,
+                //             margin: EdgeInsets.only(bottom: Dimen.iconMarg),
+                //             onTap: isLastHidTitleEmpty(currItemProv)?null:(){
+                //               List<String> hidTitles = currItemProv.addHidTitle();
+                //               onChangedHiddenTitles?.call(hidTitles);
+                //             },
+                //             center: false
+                //           ),
+                //         )
+                //     ),
+                //
+                //   ],
+                // ),
 
                 AppTextFieldHint(
                   accentColor: accentColor,
