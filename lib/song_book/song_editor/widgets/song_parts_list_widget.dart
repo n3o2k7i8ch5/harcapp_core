@@ -63,7 +63,7 @@ class SongPartsListWidget extends StatelessWidget{
         if(footer != null) footer!,
       ];
 
-      List<Object> nonDraggableItems = [
+      List<Object> fixedItems = [
         if(header != null) header!,
         if(footer != null) footer!,
       ];
@@ -74,7 +74,8 @@ class SongPartsListWidget extends StatelessWidget{
         physics: physics??BouncingScrollPhysics(),
         controller: _controller,
         items: items,
-        nonDraggableItems: nonDraggableItems,
+        nonDraggableItems: fixedItems,
+        lockedItems: fixedItems,
         clipBehavior: Clip.none,
         isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
         onReorder: (int oldIndex, int newIndex){
