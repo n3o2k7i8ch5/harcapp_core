@@ -72,14 +72,9 @@ class LevelSelectableGridWidget extends StatelessWidget{
     }
 
     if(oneLine)
-      return SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          clipBehavior: Clip.none,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: children,
-          )
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: children,
       );
 
     return LayoutGrid(
