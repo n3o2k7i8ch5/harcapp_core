@@ -6,6 +6,7 @@ import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
+import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
@@ -93,6 +94,28 @@ class BasicDataWidget extends StatelessWidget{
                     )
 
                   ],
+                ),
+
+                MultiTextField(
+                  hint: 'Tytuł ukryty:',
+                  layout: LayoutMode.column,
+                  controller: currItemProv.hiddenTitlesController,
+                  addButtonBuilder: (tappable, onTap) => SimpleButton.from(
+                      icon: MdiIcons.plus,
+                      text: 'Dodaj tytuł ukryty',
+
+                      textColor:
+                      tappable?
+                      iconEnab_(context):
+                      iconDisab_(context),
+
+                      margin: EdgeInsets.only(bottom: Dimen.iconMarg),
+                      onTap: tappable?(){
+                        List<String> hidTitles = currItemProv.addHidTitle();
+                        onChangedHiddenTitles?.call(hidTitles);
+                      }:null,
+                      center: false
+                  ),
                 ),
 
                 Column(

@@ -276,7 +276,6 @@ class MultiTextFieldState extends State<MultiTextField>{
       case LayoutMode.wrap:
         return Wrap(
           crossAxisAlignment: WrapCrossAlignment.start,
-          alignment: WrapAlignment.center,
           children: [...children, addButton],
           runSpacing: Dimen.defMarg,
           spacing: Dimen.defMarg,
@@ -320,7 +319,6 @@ class MultiTextFieldState extends State<MultiTextField>{
   });
 
 }
-
 
 
 class _ItemWidget extends StatefulWidget{
