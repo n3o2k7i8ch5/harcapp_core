@@ -64,7 +64,7 @@ class LevelSelectableGridWidget extends StatelessWidget{
                 color: Colors.white,
               ),
             ),
-            intrinsicWidth: false,
+            intrinsicWidth: oneLine,
           ),
         ),
 
