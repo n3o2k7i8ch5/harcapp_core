@@ -295,17 +295,21 @@ class MultiTextFieldState extends State<MultiTextField>{
           spacing: Dimen.defMarg,
         );
       case LayoutMode.column:
-        List<Widget> items = [...children, addButton];
-        return AnimatedListView<Widget>(
-          physics: BouncingScrollPhysics(),
-          items: items,
-          isSameItem: (a, b) => a.hashCode == b.hashCode,
+        return Column(
+          children: [
+            AnimatedListView<Widget>(
+              physics: BouncingScrollPhysics(),
+              items: children,
+              isSameItem: (a, b) => a.hashCode == b.hashCode,
 
-          itemBuilder: (context, index) => items[index],
+              itemBuilder: (context, index) => children[index],
 
-          shrinkWrap: true,
-          insertDuration: Duration(milliseconds: 300),
-          removeDuration: Duration(milliseconds: 300),
+              shrinkWrap: true,
+              insertDuration: Duration(milliseconds: 300),
+              removeDuration: Duration(milliseconds: 300),
+            ),
+            addButton
+          ],
         );
 
     }
