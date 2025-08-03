@@ -191,15 +191,6 @@ class MultiTextFieldState extends State<MultiTextField>{
     super.initState();
   }
 
-  // Widget buildSeparator(int index){
-  //   if(linear == LayoutMode.row)
-  //     return horizontalSeparatorBuilder?.call(index)??SizedBox(width: Dimen.defMarg);
-  //   else if(linear == LayoutMode.column)
-  //     return verticalSeparatorBuilder?.call(index)??Container();
-  //   else
-  //     return Container();
-  // }
-
   Key buildValueKey(int index) => valueKeyBuilder?.call(index)??ValueKey(controller[index].hashCode);
 
   Widget buildItemWidget(int index, bool withSeparator){
@@ -212,7 +203,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       padding: withSeparator?
         EdgeInsets.only(
           right: widget.layout == LayoutMode.row?horizontalSeparator:0,
-          bottom: widget.layout == LayoutMode.wrap?verticalSeparator:0
+          bottom: widget.layout == LayoutMode.column?verticalSeparator:0
         ): null,
       textCapitalization: textCapitalization,
       textAlignVertical: textAlignVertical,
@@ -310,7 +301,7 @@ class MultiTextFieldState extends State<MultiTextField>{
               itemBuilder: (context, index) => children[index],
               shrinkWrap: true,
               enterTransition: [FadeIn()],
-              exitTransition: [SlideInUp()],
+              exitTransition: [SlideInUp(), FadeIn()],
               isSameItem: (a, b) => a.key == b.key,
             ),
             addButton
