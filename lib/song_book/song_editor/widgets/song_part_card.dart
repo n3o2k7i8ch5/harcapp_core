@@ -5,6 +5,7 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
+import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:animated_reorderable_list/src/component/drag_listener.dart';
@@ -256,10 +257,7 @@ class TopZwrotkaButtons extends StatelessWidget{
 
       Padding(
         padding: EdgeInsets.all(Dimen.iconMarg),
-        child: ReorderableGridDragStartListener(
-          index: index,
-          child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))
-        ),
+        child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))),
       ),
 
       Expanded(
@@ -298,14 +296,12 @@ class TopZwrotkaButtons extends StatelessWidget{
 class TopRefrenButtons extends StatelessWidget{
 
   final SongPart songPart;
-  final int index;
   final void Function(SongPart)? onDelete;
   final bool showName;
 
   const TopRefrenButtons(
       this.songPart,
-      { required this.index,
-        this.onDelete,
+      { this.onDelete,
         this.showName = true
       });
 
@@ -315,10 +311,7 @@ class TopRefrenButtons extends StatelessWidget{
 
       Padding(
         padding: EdgeInsets.all(Dimen.iconMarg),
-        child: ReorderableGridDragStartListener(
-          index: index,
-          child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))
-        ),
+        child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))),
       ),
 
       Expanded(

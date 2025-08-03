@@ -82,7 +82,6 @@ class SongPartsListWidget extends StatelessWidget{
                         songPart: item,
                         topBuilder: (context, part) => TopRefrenButtons(
                           part,
-                          index: index,
                           onDelete: (songPart) => onDelete?.call(),
                         ),
                         onTap:
