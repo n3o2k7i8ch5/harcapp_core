@@ -55,36 +55,40 @@ class SongPartsListWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Consumer<CurrentItemProvider>(
-    builder: (context, prov, _) => AnimatedReorderableListView(
-      buildDefaultDragHandles: false,
-      proxyDecorator: proxyDecorator,
-      physics: physics??BouncingScrollPhysics(),
-      controller: _controller,
-      items: [
+    builder: (context, prov, _){
+
+      List<Object> items = [
         if(header != null) header!,
         ...prov.song.songParts,
         if(footer != null) footer!,
-      ],
-      nonDraggableItems: [
+      ];
+
+      List<Object> nonDraggableItems = [
         if(header != null) header!,
         if(footer != null) footer!,
-      ],
-      // items: prov.song.songParts,
-      // insertDuration: Duration(milliseconds: prov.song.songParts.length<=1?0:200),
-      // removeDuration: Duration(milliseconds: prov.song.songParts.length==0?0:500),
-      isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
-      onReorder: (int oldIndex, int newIndex){
-        oldIndex = _getSongPartIndex(oldIndex);
-        newIndex = _getSongPartIndex(newIndex);
-        final SongPart songPart = prov.song.songParts.removeAt(oldIndex);
-        prov.song.songParts.insert(newIndex, songPart);
-        prov.notify();
-        onReorderFinished?.call();
-      },
-      itemBuilder: (BuildContext context, int index){
-        int songPartIndex = _getSongPartIndex(index);
-        return  Builder(
-          key: ValueKey(prov.song.songParts[songPartIndex].hashCode),
+      ];
+
+      return AnimatedReorderableListView(
+        buildDefaultDragHandles: false,
+        proxyDecorator: proxyDecorator,
+        physics: physics??BouncingScrollPhysics(),
+        controller: _controller,
+        items: items,
+        nonDraggableItems: nonDraggableItems,
+        // items: prov.song.songParts,
+        // insertDuration: Duration(milliseconds: prov.song.songParts.length<=1?0:200),
+        // removeDuration: Duration(milliseconds: prov.song.songParts.length==0?0:500),
+        isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
+        onReorder: (int oldIndex, int newIndex){
+          oldIndex = _getSongPartIndex(oldIndex);
+          newIndex = _getSongPartIndex(newIndex);
+          final SongPart songPart = prov.song.songParts.removeAt(oldIndex);
+          prov.song.songParts.insert(newIndex, songPart);
+          prov.notify();
+          onReorderFinished?.call();
+        },
+        itemBuilder: (BuildContext context, int index) => Builder(
+          key: ValueKey(items[index].hashCode),
           builder: (context) {
 
             if(index == 0 && header != null)
@@ -93,6 +97,7 @@ class SongPartsListWidget extends StatelessWidget{
             if(_isLastSongPartIndex(context, index) && footer != null)
               return footer!;
 
+            int songPartIndex = _getSongPartIndex(index);
             SongPart item = prov.song.songParts[songPartIndex];
             Widget child;
 
@@ -133,64 +138,57 @@ class SongPartsListWidget extends StatelessWidget{
               );
 
             return Padding(
-              padding: EdgeInsets.all(Dimen.defMarg),
+              padding: EdgeInsets.only(
+                  top: ITEM_TOP_MARG,
+                  right: Dimen.defMarg,
+                  left: Dimen.defMarg,
+                  bottom: ITEM_BOTTOM_MARG
+              ),
               child: child,
             );
 
-            return AppCard(
-                clipBehavior: Clip.none,
-                padding: EdgeInsets.zero,
-                margin: EdgeInsets.only(
-                    top: ITEM_TOP_MARG,
-                    right: Dimen.defMarg,
-                    left: Dimen.defMarg,
-                    bottom: ITEM_BOTTOM_MARG
-                ),
-                radius: AppCard.bigRadius,
-                child: child
-            );
           },
-        );
-      },
-      padding: EdgeInsets.only(bottom: Dimen.defMarg/2),
-      shrinkWrap: shrinkWrap,
-      enterTransition: [FadeIn()],
-      exitTransition: [SlideInDown(), FadeIn()],
-      // header: header,
-      // footer: Column(
-      //   children: [
-      //
-      //     AnimatedContainer(
-      //       duration: Duration(milliseconds: 1),
-      //       height:
-      //       prov.song.songParts.isEmpty?
-      //       SongPartCard.EMPTY_HEIGHT + Dimen.iconFootprint + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
-      //           :0,
-      //       child: Column(
-      //           mainAxisAlignment: MainAxisAlignment.center,
-      //           children: [
-      //
-      //             Icon(MdiIcons.musicNoteOffOutline, color: hintEnab_(context)),
-      //
-      //             SizedBox(height: Dimen.iconMarg),
-      //
-      //             Text(
-      //               'Pusto!\nUżyj poniższych przycisków.',
-      //               textAlign: TextAlign.center,
-      //               style: AppTextStyle(
-      //                 color: hintEnab_(context),
-      //                 fontSize: Dimen.textSizeBig,
-      //               ),
-      //             ),
-      //           ]
-      //       ),
-      //     ),
-      //
-      //     if(footer!=null) footer!,
-      //
-      //   ],
-      // ),
-    ),
+        ),
+        padding: EdgeInsets.only(bottom: Dimen.defMarg/2),
+        shrinkWrap: shrinkWrap,
+        enterTransition: [FadeIn()],
+        exitTransition: [SlideInDown(), FadeIn()],
+        // header: header,
+        // footer: Column(
+        //   children: [
+        //
+        //     AnimatedContainer(
+        //       duration: Duration(milliseconds: 1),
+        //       height:
+        //       prov.song.songParts.isEmpty?
+        //       SongPartCard.EMPTY_HEIGHT + Dimen.iconFootprint + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
+        //           :0,
+        //       child: Column(
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //
+        //             Icon(MdiIcons.musicNoteOffOutline, color: hintEnab_(context)),
+        //
+        //             SizedBox(height: Dimen.iconMarg),
+        //
+        //             Text(
+        //               'Pusto!\nUżyj poniższych przycisków.',
+        //               textAlign: TextAlign.center,
+        //               style: AppTextStyle(
+        //                 color: hintEnab_(context),
+        //                 fontSize: Dimen.textSizeBig,
+        //               ),
+        //             ),
+        //           ]
+        //       ),
+        //     ),
+        //
+        //     if(footer!=null) footer!,
+        //
+        //   ],
+        // ),
+      );
+    },
   );
 
   Widget proxyDecorator(Widget child, int index, Animation<double> animation) => AnimatedBuilder(
@@ -198,7 +196,7 @@ class SongPartsListWidget extends StatelessWidget{
     builder: (BuildContext context, Widget? child) {
       final double animValue = Curves.easeInOut.transform(animation.value);
       final color = Color.lerp(background_(context), cardEnab_(context), animValue);
-      final double elevation = lerpDouble(0, 6, animValue)!;
+      final double elevation = lerpDouble(0, AppCard.bigElevation, animValue)!;
       return Material(
         borderRadius: BorderRadius.circular(AppCard.bigRadius),
         elevation: elevation,
