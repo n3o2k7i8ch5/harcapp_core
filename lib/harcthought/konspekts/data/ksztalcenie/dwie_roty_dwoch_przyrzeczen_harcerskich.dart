@@ -126,7 +126,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Wstęp',
           duration: Duration(minutes: 1),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący rozpoczyna krótkim wyjaśnieniem tego, co będzie na tych warsztatach:'
               '<br>'
@@ -137,7 +137,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Po co jest harcerstwo?',
           duration: Duration(minutes: 3),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący rozpoczyna od pytania w zasadzie retorycznego: <i>“Po co jest harcerstwo?”</i>.'
               '<br>'
@@ -150,7 +150,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Kto decyduje, do czego wychowujemy?',
           duration: Duration(minutes: 10),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący rzuca kolejne pytanie: <i>“Kto decyduje o tym, do czego wychowujemy młodego człowieka w harcerstwie?”</i>.'
               '<br>'
@@ -206,7 +206,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Konieczność pracy ze źródłem wartości - aksjomatem',
           duration: Duration(minutes: 10),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący przedstawia historię:'
               '<br>'
@@ -263,7 +263,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Aksjomaty - przykłady i pytania',
           duration: Duration(minutes: 5),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący szybko podaje kilka przykładów tego, co może być aksjomatem, aby uczestnicy mogli zbudować wokół pojęcia aksjomatu intuicję:'
               '</p>'
@@ -285,7 +285,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Kompatybilne aksjomaty - jak to działa w ZHP?',
           duration: Duration(minutes: 5),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: 'Prowadzący zauważa, że każde dalekosiężne, holistyczne wychowanie musi zakładać pracę nad aksjomatem ducha (czyli źródłem wartości) młodego człowieka. Jakie więc są aksjomaty, z których wypływa harcerskie wychowanie? Niestety, model wychowawczy w ZHP ich nie nazywa. Zamiast tego ogranicza dopuszczalne aksjomaty poprzez narzucenie, jakie wartości mają z nich wynikać. Z pozoru to rozwiązanie może działać, ale w praktyce, wyobraźcie sobie pewną sytuację wychowawczą.'
               '<br>'
       ),
@@ -293,7 +293,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Kompatybilne aksjomaty - przykłady',
           duration: Duration(minutes: 10),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
             'Prowadzący zauważa, że:'
             '<br>'
@@ -335,7 +335,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Kompatybilne aksjomaty - kto je wybiera?',
           duration: Duration(minutes: 10),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący stawia pytanie:'
               '<br>'
@@ -354,7 +354,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Szybkie podsumowanie',
           duration: Duration(minutes: 1),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący podsumowuje dotychczasowe (oczywiste) ustalenia:'
               '</p>'
@@ -373,7 +373,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Przerwa',
           duration: Duration(minutes: 5),
-          activeForm: true,
+          activeForm: KonspektStepActiveForm.active,
           content: '<p style="text-align:justify;">'
               'Krótka przerwa.'
               '</p>'
@@ -382,7 +382,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
         title: 'Po co jest Przyrzeczenie Harcerskie?',
         duration: Duration(minutes: 10),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         content: '<p style="text-align:justify;">'
           'Prowadzący zadaje uczestnikom kolejne pytanie: <i>“Po co jest Przyrzeczenie Harcerskie?”</i>.'
           '<br>'
@@ -400,7 +400,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
         title: 'Kto wybiera treść Przyrzeczenia?',
         duration: Duration(minutes: 5),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         content: '<p style="text-align:justify;">'
             'Prowadzący stawia pytanie: <i>“Kto wybiera treść Przyrzeczenia, które złoży harcerz?”</i>.'
             '<br>'
@@ -415,7 +415,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Kiedy wybrana powinna być treść Przyrzeczenia?',
           duration: Duration(minutes: 5),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący stawia pytanie: <i>“Kiedy powinna być wybrana treść Przyrzeczenia, które złoży harcerz?”</i>.'
               '<br>'
@@ -430,7 +430,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Jak przeprowadzić Przyrzeczenie Harcerskie?',
           duration: Duration(minutes: 10),
-          activeForm: true,
+          activeForm: KonspektStepActiveForm.active,
           content: '<p style="text-align:justify;">'
               'Prowadzący stawia pytanie: <i>“Jak przeprowadzić cały proces związany z Przyrzeczeniem Harcerskim?”</i>.'
               '<br>'
@@ -447,7 +447,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Omówienie',
           duration: Duration(minutes: 10),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący omawia z grupami wyniki ich pracy oraz ich ewentualne pomysły na wzbogacenie procesu przeprowadzenia Przyrzeczenia.'
               '<br>'
@@ -460,7 +460,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Scenariusze',
           duration: Duration(minutes: 40),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący po kolei przedstawia uczestnikom kilka scenariuszy z wydrukowanego załącznika $attach_html_scenariusze związanych z problematyką dwóch możliwych do wyboru rot Przyrzeczenia.'
               '<br>'
@@ -591,7 +591,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektStep(
           title: 'Podsumowanie i wnioski',
           duration: Duration(minutes: 5),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący krótko podsumowuje wnioski:'
               '</p>'

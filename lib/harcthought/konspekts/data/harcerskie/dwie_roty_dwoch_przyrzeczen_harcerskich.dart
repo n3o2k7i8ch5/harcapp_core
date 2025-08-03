@@ -71,7 +71,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     KonspektStep(
         title: 'Spotkanie z rodzicami',
         duration: Duration(hours: 2),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         content: '<p style="text-align:justify;">'
             'Drużynowy organizuje spotkanie z rodzicami „nowych harcerzy”, podczas którego poruszane są co najmniej następujące kwestie:'
             '</p>'
@@ -86,7 +86,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     KonspektStep(
       title: 'Otwarcie przez harcerza Próby Harcerza',
       duration: Duration(minutes: 15),
-      activeForm: false,
+      activeForm: KonspektStepActiveForm.static,
       content: '<p style="text-align:justify;">'
           'Drużynowy w rozkazie otwiera harcerzowi Próbę Harcerza (bądź czyni to w inny obrzędowy sposób). Warto przy tej okazji mianować kogoś opiekunem jego Próby Harcerza – najlepiej, jeśli harcerz sam sobie taką osobę wybierze.'
           '</p>'
@@ -95,7 +95,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     KonspektStep(
         title: 'Zbiórka o Prawie i Przyrzeczeniu',
         duration: Duration(hours: 2),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         content: '<p style="text-align:justify;">'
             'Drużyna organizuje zbiórkę o Prawie i Przyrzeczeniu Harcerskim. Harcerze, którzy już złożyli Przyrzeczenie mogą pomóc w jej organizacji (np. każdy zastęp może dostać konkretne zadanie związane ze zbiórką).'
             '</p>'
@@ -104,7 +104,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     KonspektStep(
         title: 'Poinformowanie rodziców o Próbie Harcerza',
         duration: Duration(hours: 2),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         content: '<p style="text-align:justify;">'
             'Drużynowy uprzedza rodziców (np. SMSem), że „nowi harcerze” otrzymali list, z którym powinni zapoznać się wspólnie z nimi - rodzicami. Prosi, by w ciągu najbliższego tygodnia rodzice znaleźli chwilę (15-30 minut), by go z harcerzami przeczytać.'
             '<br>'
@@ -117,7 +117,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     KonspektStep(
         title: 'List do harcerza i rodzica',
         duration: Duration(minutes: 5),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         content: '<p style="text-align:justify;">'
             'Drużynowy wręcza „nowym harcerzom” po kopercie zaadresowanej do nich i ich rodziców.'
             '<br>'
@@ -130,7 +130,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     KonspektStep(
         title: 'Zrealizowanie wszystkich wymagań Próby Harcerza',
         duration: Duration(days: 120),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         content: '<p style="text-align:justify;">'
             'Harcerz realizuje wszystkie wymagania Próby Harcerza.'
             '</p>'
@@ -139,7 +139,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     KonspektStep(
         title: 'Ceremonia złożenia Przyrzeczenia Harcerskiego',
         duration: Duration(minutes: 20),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         content: '<p style="text-align:justify;">'
             'Harcerz składa Przyrzeczenie Harcerskie. Podczas ceremonii złożenia Przyrzeczenia <u>nie pada pytanie, którą rotę harcerz wybiera</u>. Została ona wybrana w trakcie Próby Harcerza.'
             '<br>'
@@ -152,7 +152,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     KonspektStep(
         title: 'Praca z duchowością wynikającą z Przyrzeczenia',
         duration: Duration(days: 4015),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         content: '<p style="text-align:justify;">'
             'Jeśli harcerz złożył Przyrzeczenie ze „służbą Bogu”, drużynowy powinien zadbać, aby harcerz rozwijał zarówno relację z Bogiem, budował zrozumienie treści swojej wiary.'
             '<br>'

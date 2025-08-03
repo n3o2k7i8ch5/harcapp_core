@@ -387,11 +387,30 @@ mixin KonspektDurationElementMixin{
 
 }
 
+enum KonspektStepActiveForm{
+  active,
+  static;
+
+  String get displayName{
+    switch(this){
+      case active: return 'Forma aktywna';
+      case static: return 'Forma statyczna';
+    }
+  }
+
+  Color get color{
+    switch(this){
+      case active: return Colors.green;
+      case static: return Colors.deepOrange;
+    }
+  }
+}
+
 class KonspektStep with KonspektDurationElementMixin{
 
   final String title;
   final Duration duration;
-  final bool activeForm;
+  final KonspektStepActiveForm activeForm;
   final bool required;
   final String? content;
   final List<String>? aims;
@@ -413,7 +432,7 @@ class KonspektStep with KonspektDurationElementMixin{
   KonspektStep copyWith({
     String? title,
     Duration? duration,
-    bool? activeForm,
+    KonspektStepActiveForm? activeForm,
     bool? required,
     String? content,
     List<String>? aims,

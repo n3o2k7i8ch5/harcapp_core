@@ -77,11 +77,11 @@ Future<List<Widget>> StepWidget(
                 SizedBox(width: 16),
 
                 Text(
-                    step.activeForm?'Forma aktywna':'Forma pasywna',
+                    step.activeForm.displayName,
                     style: TextStyle(
                       font: fontBold,
                       fontSize: defTextSize,
-                      color: color(step.activeForm?Colors.green:Colors.deepOrange),
+                      color: color(step.activeForm.color),
                     )
                 ),
 

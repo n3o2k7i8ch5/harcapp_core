@@ -102,7 +102,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
     KonspektStep(
         title: 'Poziomy (warstwy) rozwoju duchowego - sprawdzenie',
         duration: Duration(minutes: 15),
-        activeForm: true,
+        activeForm: KonspektStepActiveForm.active,
         required: false,
         content: '<p style="text-align:justify;">'
             'Prowadzący dzieli uczestników na pięć grup. Rozdaje każdej grupie po jednym komplecie przygotowanych kartek z załącznika $attach_html_przyklady_poziomow_duchowosci i prosi grupy o <b>posegregowanie kartek na zachowania, postawy, wartości i aksjomaty.</b>'
@@ -118,7 +118,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
     KonspektStep(
         title: 'Praktyka wychowania duchowego - mechanizmy pośrednie',
         duration: Duration(minutes: 20),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         materials: [
           material_zal_mechanizmy_posrednie,
         ],
@@ -224,7 +224,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
     KonspektStep(
         title: 'Praktyka wychowania duchowego - Metanarracja',
         duration: Duration(minutes: 10),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         materials: [
           material_zal_mechanizmy_posrednie,
         ],
@@ -254,7 +254,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
     KonspektStep(
         title: 'Antyprzykłady',
         duration: Duration(minutes: 30),
-        activeForm: false,
+        activeForm: KonspektStepActiveForm.static,
         materials: [
           material_zal_antyprzyklady,
         ],
@@ -267,7 +267,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
     KonspektStep(
         title: 'Scenariusze w grupach',
         duration: Duration(minutes: 40),
-        activeForm: true,
+        activeForm: KonspektStepActiveForm.active,
         content: '<p style="text-align:justify;">'
             'Prowadzący dzieli uczestników na grupy po ok. 4 osób. Każda z grup otrzymuje po 2-4 scenariusze z $attach_html_scenariusze i w swoim gronie je omawia. Celem omówienia każdego scenariusza jest zaproponowanie rozwiązania zgodnego z harcerskimi celami wychowania duchowego. Na jeden scenariusz grupa powinna poświęcić 10-15 min. Ważne, by prowadzący zaznaczył, że <b>grupy nie muszą osiągnąć jednomyślności</b>.'
             '<br>'

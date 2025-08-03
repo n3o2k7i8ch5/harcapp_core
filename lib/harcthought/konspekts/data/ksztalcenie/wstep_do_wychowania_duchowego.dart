@@ -109,7 +109,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
           title: 'Pytanie wstępne',
           duration: Duration(minutes: 10),
           required: false,
-          activeForm: true,
+          activeForm: KonspektStepActiveForm.active,
           content: '<p style="text-align:justify;">'
               'Uczestnicy odpowiadają na pytanie:'
               '<br>'
@@ -122,7 +122,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       KonspektStep(
           title: 'Skrót tematu zajęć',
           duration: Duration(minutes: 5),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący informuje uczestników o czym będą, a o czym nie będą niniejsze zajęcia.'
               '<br>'
@@ -164,7 +164,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       KonspektStep(
           title: 'Przerwa',
           duration: Duration(minutes: 5),
-          activeForm: true,
+          activeForm: KonspektStepActiveForm.active,
           content: '<p style="text-align:justify;">'
               'Prowadzący zarządza przerwę celem rozprostowania starych kości, zażycia ruchu, skoczenia do toalety itd..'
       ),
@@ -173,7 +173,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       KonspektStep(
           title: 'Neutralność duchowa - wstęp',
           duration: Duration(minutes: 10),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           aims: [
             'Przekazanie myśli, że "wychowanie to kształtowanie duchowości"',
           ],
@@ -208,7 +208,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       KonspektStep(
           title: 'Kratka minimów rozwoju duchowego',
           duration: Duration(minutes: 5),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący przekazuje uczestnikom w grupach po jednym wydrukowanym egzemplarzu załącznika $attach_html_kratka_minimow_rozwoju_duchowego. Prowadzący tłumaczy uczestnikom co owa kratka reprezentuje - w każde pole odpowiada ogólnym zasadom, którymi prawidłowo rozwijający się w sferze duchowej harcerz powinien się cechować. Prowadzący informuje uczestników gdzie ten załącznik jest dostępny.'
               '<br>'

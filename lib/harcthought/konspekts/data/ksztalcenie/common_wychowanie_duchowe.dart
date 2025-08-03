@@ -119,7 +119,7 @@ String aksjomaty_przyklady = '<ul>'
 KonspektStep step_sfery_rozwoju_i_ich_relacje = KonspektStep(
     title: 'Sfery rozwoju i ich relacje',
     duration: Duration(minutes: 15),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci wprowadza podział człowieka na 5 sfer rozwoju - 4 sfery funkcjonalne: <b>ciało</b>, <b>umysł</b>, <b>emocje</b>, <b>relacje</b> i jedną sferę centralną: sferę <b>ducha</b>.'
         '<br>'
@@ -198,7 +198,7 @@ KonspektStep step_sfery_rozwoju_i_ich_relacje = KonspektStep(
 KonspektStep _step_poziomy_duchowosci = KonspektStep(
     title: 'Poziomy (warstwy) rozwoju duchowego',
     duration: Duration(minutes: 10),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>zachowań</b>, poziom <b>postaw</b>, poziom <b>wartości</b> i poziom <b>aksjomatu</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika $attach_html_karty_poziomow_duchowosci. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
         '<br>'
@@ -233,7 +233,7 @@ KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
     title: 'Poziomy (warstwy) rozwoju duchowego - przykłady uczestników',
     duration: Duration(minutes: 5),
     required: false,
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
 
         '<p style="text-align:justify;">'
@@ -274,7 +274,7 @@ KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
 KonspektStep _step_poziomy_duchowosci_aksjomat = KonspektStep(
   title: 'Poziomy (warstwy) rozwoju duchowego - aksjomat',
   duration: Duration(minutes: 5),
-  activeForm: false,
+  activeForm: KonspektStepActiveForm.static,
   content: '<p style="text-align:justify;">'
       'Poziom zachowań, postaw i wartości są dla większości osób zrozumiałe, jednak poziom aksjomatu może być nieintuicyjny. Z tego względu, po zdefiniowaniu wszystkich czterech poziomów duchowości, prowadzący zatrzymuje się dłużej nad aksjomatami.'
       '<br>'
@@ -308,7 +308,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = Konspekt
       material_zal_aksjomaty_bledne_przyklady,
     ],
     duration: Duration(minutes: 15),
-    activeForm: true,
+    activeForm: KonspektStepActiveForm.active,
     content: '<p style="text-align:justify;">'
         'Aby uczestnicy mieli okazję sami obyć się z aksjomatami, prowadzący rozdaje im wycięte prostokątne kartki z przykładami aksjomatów z załącznika $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_opisu_i_sensu_przyklady, $attach_html_aksjomaty_sensu_przyklady i $attach_html_aksjomaty_bledne_przyklady.'
         '<br>'
@@ -337,7 +337,7 @@ KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
 KonspektStep _step_integracja_duchowosci_osie = KonspektStep(
     title: 'Integracja duchowości - osie współrzędnych',
     duration: Duration(minutes: 1),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący bierze dużą kartkę (np. flipchart) i rysuje na niej dwie prostopadłe osie współrzędnych. Na osi X zaznacza <b>czas</b>, zaś na osi Y <b>poziom duchowości</b>. Tłumaczy przy tym, że przejdzie teraz z uczestnikami krok po kroku przez sposób, w jaki kształtuje się duchowość człowieka.'
         '</p>',
@@ -346,7 +346,7 @@ KonspektStep _step_integracja_duchowosci_osie = KonspektStep(
 KonspektStep _step_integracja_duchowosci_jak_nie = KonspektStep(
     title: 'Integracja duchowości - jak duchowość nie jest kształtowana',
     duration: Duration(minutes: 2),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     materials: [
       material_flipchart.copyWith(amount: 1),
       material_marker,
@@ -365,7 +365,7 @@ KonspektStep _step_integracja_duchowosci_jak_nie = KonspektStep(
 KonspektStep _step_integracja_duchowosci_wstepna = KonspektStep(
     title: 'Integracja duchowości - integracja wstępna',
     duration: Duration(minutes: 6),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     materials: [
       material_flipchart,
       material_marker,
@@ -421,7 +421,7 @@ KonspektStep _step_integracja_duchowosci_wstepna = KonspektStep(
 KonspektStep _step_integracja_duchowosci_swiadoma = KonspektStep(
     title: 'Integracja duchowości - integracja świadoma',
     duration: Duration(minutes: 6),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     materials: [
       material_flipchart,
       material_marker,
@@ -464,7 +464,7 @@ KonspektStepGroup step_group_integracja_duchowosci = KonspektStepGroup(
 KonspektStep _step_meta_narracja_scenka_wprowadzenie = KonspektStep(
     title: 'Meta-narracja - scenka - wprowadzenie',
     duration: Duration(minutes: 5),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący przedstawia uczestnikom krótką historię:'
         '<br>'
@@ -496,7 +496,7 @@ KonspektStep _step_meta_narracja_scenka_wprowadzenie = KonspektStep(
 KonspektStep _step_meta_narracja_scenka_przygotowanie = KonspektStep(
     title: 'Meta-narracja - scenka - przygotowanie',
     duration: Duration(minutes: 5),
-    activeForm: true,
+    activeForm: KonspektStepActiveForm.active,
     content: '<p style="text-align:justify;">'
         'Uczestnicy mają pięć minut, aby ustalić między sobą strategię rozmowy.'
         '</p>'
@@ -505,7 +505,7 @@ KonspektStep _step_meta_narracja_scenka_przygotowanie = KonspektStep(
 KonspektStep _step_meta_narracja_scenka = KonspektStep(
     title: 'Meta-narracja - scenka',
     duration: Duration(minutes: 15),
-    activeForm: true,
+    activeForm: KonspektStepActiveForm.active,
     materials: [
       material_budzik
     ],
@@ -523,7 +523,7 @@ KonspektStep _step_meta_narracja_scenka = KonspektStep(
 KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
     title: 'Meta-narracja - omówienie scenki',
     duration: Duration(minutes: 10),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący pyta uczestników <i>"jak Wam poszło?"</i>.'
         '<br>'
@@ -538,7 +538,7 @@ KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
 KonspektStep _step_meta_narracja = KonspektStep(
     title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja',
     duration: Duration(minutes: 5),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     materials: [
       material_zal_meta_narracja_opis,
       material_zal_meta_narracja_przyklady,
@@ -565,7 +565,7 @@ KonspektStep _step_meta_narracja = KonspektStep(
 KonspektStep _step_meta_narracja_pytania = KonspektStep(
     title: 'Meta-narracja - pytania',
     duration: Duration(minutes: 10),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Uczestnicy mogą dopytać o niejasne kwestie związane z meta-narracją.'
         '</p>'
@@ -574,7 +574,7 @@ KonspektStep _step_meta_narracja_pytania = KonspektStep(
 KonspektStep _step_meta_narracja_ocena_metanarracji_i_duchowosci = KonspektStep(
     title: 'Meta-narracja - pytanie końcowe',
     duration: Duration(minutes: 0),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Na koniec prowadzący stawia pytanie, które rozpoczyna kolejny wątek:'
         '<br>'
@@ -600,7 +600,7 @@ KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
 KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektStep(
     title: 'Duchowość powszechna, mądrość, kultura i tradycja',
     duration: Duration(minutes: 10),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej formą przekazu - <b>kulturę</b> i <b>tradycje</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
         '<br>'
@@ -615,7 +615,7 @@ KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektSte
 KonspektStep _step_duchowosc_religia_religijnosc = KonspektStep(
     title: 'Duchowość, religia, religijność',
     duration: Duration(minutes: 10),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci definiuje religię:'
         '<br>'
@@ -634,7 +634,7 @@ KonspektStep _step_duchowosc_religia_religijnosc = KonspektStep(
 KonspektStep _step_ocena_metanarracji_i_duchowosci_odpowiedz = KonspektStep(
     title: 'Meta-narracja - pytanie końcowe - odpowiedź',
     duration: Duration(minutes: 0),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Na koniec prowadzący odpowiada na postawione pod koniec omawiania "meta-narracji" pytanie: <i>Czy istnieją meta-narracje, tudzież duchowości <b>lepsze</b> oraz <b>gorsze</b>?</i>'
         '<br>'
@@ -658,7 +658,7 @@ KonspektStepGroup step_group_duchowosc_powszechna_madrosc_kultura_tradycja = Kon
 KonspektStep _step_zdolnosci_integracji_duchowosci = KonspektStep(
   title: 'Zdolności integracji duchowości',
   duration: Duration(minutes: 5),
-  activeForm: false,
+  activeForm: KonspektStepActiveForm.static,
   materials: [
     material_zal_karty_zdolnosci_integracji_duchowosci
   ],
@@ -695,7 +695,7 @@ KonspektStep _step_zdolnosci_integracji_duchowosci = KonspektStep(
 KonspektStep _step_zdolnosci_integracji_duchowosci_wyjasnienie_przyklady = KonspektStep(
     title: 'Zdolności integracji duchowości - wyjaśnienie na przykładach',
     duration: Duration(minutes: 2),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący, na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci podaje przykłady różnic między dwiema dodanymi kartami:'
         '<br>'
@@ -722,7 +722,7 @@ KonspektStep _step_zdolnosci_integracji_duchowosci_wyjasnienie_przyklady = Konsp
 KonspektStep _step_zdolnosci_integracji_duchowosci_podsumowanie = KonspektStep(
     title: 'Zdolności integracji duchowości',
     duration: Duration(minutes: 3),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący podsumowuje strukturę i sposób kształtowania duchowości:'
         '<br>'
@@ -746,7 +746,7 @@ KonspektStepGroup step_group_zdolnosc_integracji_duchowosci = KonspektStepGroup(
 KonspektStep _step_neutralnosc_duchowa_galeria_sztuki = KonspektStep(
     title: 'Neutralność duchowa - galeria sztuki',
     duration: Duration(minutes: 15),
-    activeForm: true,
+    activeForm: KonspektStepActiveForm.active,
     aims: [
       'Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, indywidualizm, ew. wierność w związku, modlitwa), które choć pozornie uniwersalne, wcale nie są domyślne, oczywiste, czy neutralne',
       'Przekonanie uczestników, że neutralność światopoglądowa w wychowaniu nie jest możliwa'
@@ -774,7 +774,7 @@ KonspektStep _step_neutralnosc_duchowa_galeria_sztuki = KonspektStep(
 KonspektStep _step_neutralnosc_duchowa_omowienie_wnioskow = KonspektStep(
     title: 'Neutralność duchowa - omówienie wniosków',
     duration: Duration(minutes: 15),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Gdy wszyscy uczestnicy skonczą swoje rozważania nad scenariuszami, wracają do wspólnego miejsca i prowadzący prosi uczestników, by doszli do porozumienia w sprawie odpowiedzi na pierwsze pytanie, czyli:'
         '<br>'
@@ -808,7 +808,7 @@ KonspektStep _step_neutralnosc_duchowa_omowienie_wnioskow = KonspektStep(
 KonspektStep _step_neutralnosc_duchowa_w_przypadku_problemow = KonspektStep(
     title: 'Neutralność duchowa - w przypadku problemów',
     duration: Duration(minutes: 5),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     required: false,
     content: '<p style="text-align:justify;">'
         '<br>Rolą prowadzącego jest kształtowanie dyskusji uczestników poprzez zadawania pytań. Jeśli uczestnicy sądzą, że neutralność jest możliwa, prowadzący może zapytać:'
@@ -828,7 +828,7 @@ KonspektStep _step_neutralnosc_duchowa_w_przypadku_problemow = KonspektStep(
 KonspektStep _step_neutralnosc_analogia_do_ogrodnikow = KonspektStep(
     title: 'Neutralność duchowa - analogia harcerstwa z ogrodnikami',
     duration: Duration(minutes: 5),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     required: false,
     content: '<p style="text-align:justify;">'
         'Jeśli uczestnicy mają problem ze zrozumieniem, dlaczego zarówno działanie wychowawcze jak i jego brak zawsze kształtuje duchowość wychowanków, prowadzący może przedstawić uczestnikom użyteczną analogię:'
@@ -856,7 +856,7 @@ KonspektStepGroup step_group_neutralnosc_duchowa = KonspektStepGroup(
 KonspektStep _step_duchowosc_w_zhp_dokumenty = KonspektStep(
     title: 'Duchowość w ZHP - dokumenty',
     duration: Duration(minutes: 5),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     aims: [
       'Wskazanie uczestnikom formalnych źródeł stanowiących, że harcerstwo jest dla wszystkich, ale nie wychowuje do wszystkiego - ma ściśle określone wartości, do których kształtuje'
     ],
@@ -876,7 +876,7 @@ KonspektStep _step_duchowosc_w_zhp_dokumenty = KonspektStep(
 KonspektStep _step_duchowosc_w_zhp_dobrowolnosc = KonspektStep(
     title: 'Duchowość w ZHP - dobrowolność',
     duration: Duration(minutes: 5),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący zwraca uwagę uczestników na następujący dylemat:'
         '<br>'
@@ -901,7 +901,7 @@ KonspektStep _step_duchowosc_w_zhp_dobrowolnosc = KonspektStep(
 KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
     title: 'Duchowość w ZHP - aksjomaty',
     duration: Duration(minutes: 20),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     materials: [
       material_zal_neutralnosc_duchowa_przyklady
     ],
@@ -989,7 +989,7 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
 KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
     title: 'Duchowość w ZHP - co dla ateistów?',
     duration: Duration(minutes: 10),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący zwraca uczestnikom uwagę na pewien problem (jest szansa, że któryś z uczestników sam zwróci na niego uwagę):'
         '<br>'
@@ -1040,7 +1040,7 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
 KonspektStep _step_duchowosc_w_zhp_podsumowanie = KonspektStep(
     title: 'Duchowość w ZHP - podsumowanie',
     duration: Duration(minutes: 5),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         '<b>Podsumowanie (dla przewodników)</b>'
         '</p>'
@@ -1087,7 +1087,7 @@ KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
 KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
     title: 'Strategia wychowania duchowego',
     duration: Duration(minutes: 20),
-    activeForm: false,
+    activeForm: KonspektStepActiveForm.static,
     materials: [
       material_flipchart.copyWith(amount: 1),
       material_marker.copyWith(amount: 2),
@@ -1185,7 +1185,7 @@ KonspektStepGroup step_strategia_wychowania_duchowego = KonspektStepGroup(
 KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
     title: 'Szybkie strzały dyskusyjne',
     duration: Duration(minutes: 30),
-    activeForm: true,
+    activeForm: KonspektStepActiveForm.active,
     required: false,
     materials: [
       material_zal_szybkie_strzaly_dyskusyjne

@@ -268,7 +268,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 title: 'Przyjście i ogarnięcie się',
                 duration: Duration(minutes: 15),
                 required: false,
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Nim rozpocznie się właściwa część warsztatów, warto pozwolić uczestnikom przyjść, zrobić hebratę i porozmawiwać o głupotach.'
                     '</p>'
@@ -277,7 +277,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Rozpoczęcie',
                 duration: Duration(minutes: 30),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący rozdaje uczestnikom <b>identyfikatory</b>, <b>długopisy</b> i <b>notatniki</b> (uczestnicy mogą tam zapisywać swoje wnioski i myśli z warsztatów). Na identyfikatorach uczestnicy wypisują swoje imię i zawieszają na szyi lub przypinają je na ubraniu.'
                     '<br>'
@@ -304,7 +304,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
               title: 'Oświadczenie wstępne',
               duration: Duration(minutes: 5),
-              activeForm: false,
+              activeForm: KonspektStepActiveForm.static,
               content: '<p style="text-align:justify;">'
                   'Prowadzący informuje uczestników o celu warsztatów:'
                   '<br>'
@@ -335,7 +335,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Podział człowieka na sfery',
                 duration: Duration(minutes: 2),
-                activeForm: false,
+                activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący zapoznaje uczestników z podziałem człowieka na pięć sfer zgodnie z poradnikiem $attach_html_poradnik_o_strukturze_duchowosci.'
                     '<br>'
@@ -353,7 +353,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Sfera ciała (fizyczna)',
                 duration: Duration(minutes: 1),
-                activeForm: false,
+                activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera ciała:'
                     '<br>'
@@ -372,7 +372,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Sfera umysłu (intelektualna)',
                 duration: Duration(minutes: 1),
-                activeForm: false,
+                activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera umysłu:'
                     '<br>'
@@ -390,7 +390,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Sfera relacji (społeczna)',
                 duration: Duration(minutes: 1),
-                activeForm: false,
+                activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera relacji:'
                     '<br>'
@@ -409,7 +409,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Sfera emocji',
                 duration: Duration(minutes: 1),
-                activeForm: false,
+                activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera emocji:'
                     '<br>'
@@ -425,7 +425,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Sfery funkcjonalne',
                 duration: Duration(minutes: 2),
-                activeForm: false,
+                activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący zwraca uwagę, że wszystkie wymienione przezeń sfery są umiejętnościami i zdolnościami. Sprawiają, że człowiek "może więcej", jednak żadna z tych sfer, nawet gdyby była rozwinięta do perfekcji, <b>nie określa kiedy, czy i jak należy jakąś zdolność wykorzystać</b>.'
                     '<br>'
@@ -436,7 +436,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Sfera ducha',
                 duration: Duration(minutes: 1),
-                activeForm: false,
+                activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący definiuje sferę ducha:'
                     '<br>'
@@ -447,7 +447,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Analogia samochodu',
                 duration: Duration(minutes: 1),
-                activeForm: false,
+                activeForm: KonspektStepActiveForm.static,
                 required: true,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący, jeśli uważa, że pomoże to lepiej zrozumieć relację między sferami funkcjonalnymi, a sferą ducha, może posłużyć się następującą analogią:'
@@ -473,7 +473,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Przerwa',
                 duration: Duration(minutes: 10),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Przerwa na rozprostowanie nóg, przewietrzenie się, siku itp..'
                     '</p>'
@@ -491,7 +491,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Obiad',
                 duration: Duration(minutes: 45),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Najlepiej już wcześniej zamówić pizzę, żeby jedzenie trwało niewiele czasu i by można było po nim chwilę odpocząć.'
                     '</p>',
@@ -512,7 +512,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Praktyka wychowania duchowego - kratka i formy',
                 duration: Duration(minutes: 30),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Uczestnicy otrzymują w grupach po jednym załączniku $attach_html_kratka_minimow_rozwoju_duchowego. Otrzymują również wydrukowane i wycięte formy z załącznika $attach_html_formy.'
                     '<br>'
@@ -529,7 +529,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Praktyka wychowania duchowego - kratka i formy - podsumowanie',
                 duration: Duration(minutes: 10),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący zbiera na powrót wszystkie grupy w jedno miejsce i prosi, by każda z grup przestawiła po kilka wybranych form które:'
                     '</p>'
@@ -548,7 +548,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Fantomowe działania wychowawcze i skuteczność wychowawcza',
                 duration: Duration(minutes: 10),
-                activeForm: false,
+                activeForm: KonspektStepActiveForm.static,
                 required: false,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący prezentuje krótki opis obozu drużyny z załącznika $attach_html_scenariusz_fantomowe_dzialania_wychowawcze i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zapoczątkowuje krótką dyskusję zadając pytanie: “co jest nie tak z tą strategią?”. Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
@@ -573,7 +573,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Przerwa',
                 duration: Duration(minutes: 10),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Przerwa na rozprostowanie nóg, przewietrzenie się, siku itp..'
                     '</p>'
@@ -590,7 +590,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Planowanie wychowania duchowego - podział na grupy',
                 duration: Duration(minutes: 5),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Uczestnicy w grupach są dzieleni na 4 grupy. Każda grupa otrzymuje krótki opis drużyny z załącznika $attach_html_planowanie_strategii_i_dzialan. Zadaniem każdej grupy jest stworzyć plan rozwoju duchowego jednostki.'
                     '<br>'
@@ -606,7 +606,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Planowanie wychowania duchowego - przykladowa strategia',
                 duration: Duration(minutes: 15),
-                activeForm: false,
+                activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący prezentuje uczestnikom przykładową strategię rozwoju duchowego drużyny, która jest opisana w załączniku $attach_html_poradnik_przykladowa_strategia_rozwoju_duchowego.'
                     '<br>'
@@ -622,7 +622,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Planowanie wychowania duchowego - cele',
                 duration: Duration(minutes: 15),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący prosi każdą z grup, by wskazała, jakie <b>cele w pracy duchowej</b> chce osiągnąć dla opisanej drużyny. Należy założyć, że praca z opisaną grupą bedzie trwała 3 lata.'
                     '</p>',
@@ -634,7 +634,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Planowanie wychowania duchowego - czynniki duchowości',
                 duration: Duration(minutes: 15),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący prosi każdą z grup, by wskazała mechanizmy oparte o trzy czynniki duchowości, za pomocą których można zrealizować wyłonione uprzednio cele.'
                     '<br>'
@@ -665,7 +665,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Planowanie wychowania duchowego - omówienie postępu prac',
                 duration: Duration(minutes: 10),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący zbiera na chwilę w jedno miejsce wszystkich uczestników i prosi każdą z grup, by przedstawiła swoje opisane cele, wybrane czynniki duchowości i mechanizmy kształtowania duchowości. Po każdej z prezentacji może się odbyć krótka dyskusja nad planami.'
                     '<br>'
@@ -676,7 +676,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Planowanie wychowania duchowego - działania bezpośrednie',
                 duration: Duration(minutes: 20),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący prosi każdą z grup, by jako ostatni element planowania strategii rozwoju duchowego wskazała <b>działania śródroczne</b> i <b>działania obozowe</b> z uwzględnieniem <b>niedzieli na obozie</b>. Można się w tym celu posiłkować pomysłami z załącznika $attach_html_formy, które są dostępne w apliakcji <b>HarcApp</b>.'
                     '<br>'
@@ -692,7 +692,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Planowanie wychowania duchowego - prezentacja',
                 duration: Duration(minutes: 40),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Każda z grup ma kilka minut, aby <b>zaprezentować</b> swoje strategie i działania.'
                     '<br>'
@@ -703,7 +703,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Niedziela na obozie',
                 duration: Duration(minutes: 20),
-                activeForm: false,
+                activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący zanotowawszy plany i strategie rozwoju duchowego związane z niedzielą obozową prezentowane w poprzednim punkcie przez grupy podsumowuje je. Uczestnicy mają możliwość dodania proponowanych form - ważne, by prowadzący prosił o podanie mechanizmu ich działania.'
                     '<br>'
@@ -722,7 +722,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             KonspektStep(
                 title: 'Podsumowanie warsztatów',
                 duration: Duration(minutes: 20),
-                activeForm: true,
+                activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący zaprasza uczestników do wspólnego kręgu w celu podsumowania warsztatów. Przy tej okazji warto skupić się na następujących rzeczach:'
                     '</p>'

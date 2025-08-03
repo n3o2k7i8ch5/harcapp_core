@@ -76,7 +76,7 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
   KonspektStep(
       title: 'Wyjaśnienie merytoryczne',
       duration: Duration(minutes: 5),
-      activeForm: false,
+      activeForm: KonspektStepActiveForm.static,
       materials: [
         material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
       ],
@@ -90,7 +90,7 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
   KonspektStep(
       title: 'Zasady postaw na milion',
       duration: Duration(minutes: 5),
-      activeForm: false,
+      activeForm: KonspektStepActiveForm.static,
       content: '<p style="text-align:justify;">'
           'Prowadzący wyjaśnia uczestnikom zasady gry, ktorą za chwilę rozegrają:'
           '<br>'
@@ -107,7 +107,7 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
   KonspektStep(
       title: 'Podział na grupy',
       duration: Duration(minutes: 5),
-      activeForm: true,
+      activeForm: KonspektStepActiveForm.active,
       content: '<p style="text-align:justify;">'
           'Prowadzący dzieli uczestników na dwie grupy.'
           '</p>'
@@ -116,7 +116,7 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
   KonspektStep(
       title: 'Zapoznanie się z poradnikami',
       duration: Duration(minutes: 10),
-      activeForm: false,
+      activeForm: KonspektStepActiveForm.static,
       content: '<style="text-align:justify;">'
           'Prowadzący wręcza każdej z grup po jednym egzemplarzu poradnika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci. Ważne, aby dało się go rozłożyć na osobne kartki - na tych kartkach każda grupa będzie kładła swoje żetony.'
           '<br>'
@@ -129,7 +129,7 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
   KonspektStep(
       title: 'Postaw na milion',
       duration: Duration(minutes: 40),
-      activeForm: true,
+      activeForm: KonspektStepActiveForm.active,
       materials: [
         material_zal_scenariusze_czynnikow_duchowosci,
         material_zetony,
@@ -154,7 +154,7 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
   KonspektStep(
       title: 'Wręcznie nagrody',
       duration: Duration(minutes: 5),
-      activeForm: false,
+      activeForm: KonspektStepActiveForm.static,
       materials: [
         material_nagroda,
       ],

@@ -115,7 +115,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Przedstawienie zasad',
             duration: Duration(minutes: 10),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący przedstawia uczestnikom zasady gry:</p>'
                 '<ul>'
                 '<li><p style="text-align:justify;">W grze biorą udział co najmniej dwie grupy. Wygrywa grupa, której w której jako ostatniej zostaną "żywi" uczestnicy.</p></li>'
@@ -130,7 +130,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Podział na grupy',
             duration: Duration(minutes: 10),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący dzieli uczestników na wybraną liczbę grup. Ważne, by każda grupa charakteryzowała się podobną sprawnością ruchową.</p>'
         ),
 
@@ -138,7 +138,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Oznaczenie grup',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Każdy uczestnik zostaje oznaczenie przynależności do swojej grupy. Może to być szarfa naramienna o innym kolorze dla każdej grupy lub po prostu może to być beret o wybranym kolorze.'
                 '<br>'
                 '<br>Jeżeli do gry używane są berety harcerskie, ważne jest, by nie miały one na sobie lilijek lub by berety były "wywrócone na lewą stronę" - inaczej łatwo o pocięte dłonie.</p>'
@@ -148,7 +148,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Gra',
             duration: Duration(minutes: 30),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Grupy rozchodzą się po lesie i rozpoczyna się gra zgodnie z opisanymi wcześniej zasadami.</p>'
         ),
 
@@ -156,7 +156,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Podsumowanie',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący po zakończeniu gry podsumowuje jej przebieg z uczestnikami.</p>'
         ),
 
@@ -164,7 +164,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Rewanż',
             duration: Duration(minutes: 30),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Grupy rozchodzą się po lesie i rozpoczyna się druga gra zgodnie z opisanymi wcześniej zasadami.</p>'
         ),
 
@@ -172,7 +172,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Podsumowanie',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący po zakończeniu rewanżu podsumowuje jej przebieg z uczestnikami.</p>'
         ),
 
@@ -251,7 +251,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Podział na grupy',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący dzieli uczestników na grupy. Liczba grup zależy od liczby uczestników - w jednej grupie powinno być ok. 6-10 osób. Ważne, by powstały przynajmniej dwie grupy, by przygotowane na końcu przez każdą grupę scenki mogły zostać komuś przedstawione. Zbyt wiele osób w grupie niepotrzebnie wydłuża pracę, zbyt mało ogranicza dynamikę spacerów pytań.'
                 '<br>'
                 '<br>Każda osoba otrzymuje po jednym fragmencie Pisma Świętego - w ramach jednej grupy wszyscy otrzymują ten sam fragment. Ważne, by każdy z fragmentów był różny. Fragmenty Biblii muszą mieć potencjał fabularny – możliwość ich przedstawienia.'
@@ -269,7 +269,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Medytacja fragmentu Pisma Świętego',
             duration: Duration(minutes: 20),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący rozdaje uczestnikom wydrukowane fragmenty Pisma Świętego wraz z krótką instrukcją medytacji.'
                 '<br>'
                 '<br>Uczestnicy w ciszy zapoznają się z fragmentem Biblii, jego bohaterami i ich historią. Ważne, by podjęli refleksję dotyczącą tego, co przykuwa ich uwagę, co ich porusza, z czym się nie zgadzają, czego nie rozumieją oraz o co chcielibyśmy zapytać samych bohaterów historii.</p>'
@@ -279,7 +279,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Wstępny krąg dzielenia',
             duration: Duration(minutes: 20),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Pierwsze dzielenie jest najbardziej uporządkowane. Uczestnicy kolejno w kręgu dzielą się swoimi refleksjami dotyczącymi przeczytanego fragmentu Biblii. Po zakończeniu wypowiedzi uczestnik mówi „dzięki” - w dobrym tonie jest, aby wówczas reszta również odpowiada „dzięki” - wówczas głos wędruje do następnej osoby. Gdy wszyscy się wypowiedzą i zostanie jeszcze czas, każdy może dodać coś jeszcze.'
                 '<br>'
                 '<br>Uczestnicy nie powinni się odnosić do swoich wzajemnych wypowiedzi w sposób krytyczny lub polemiczny.</p>'
@@ -289,7 +289,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Wstępny krąg dzielenia',
             duration: Duration(minutes: 20),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Spacer jest najbardziej specyficzną formą bibliodramy. Odbywa się w grupach, jednak dobrze jest przed podziałem przećwiczyć go ze wszystkimi uczestnikami na popularnej biblijnej postaci.'
                 '<br>'
                 '<br>Uczestnicy chodzą powoli w kręgu i kontemplują w myślach bohatera z czytanego fragmentu wskazanego przez prowadzącego. Kiedy komuś pojawia się w głowie pytanie które chciałby owej postaci zadać, wchodzi do środka kręgu, krąg zatrzymuje się, po czym osoba w kręgu zadaje głośno pytanie do postaci. Następnie wraca do kręgu i krąg rusza dalej, tyle, że w przeciwnym kierunku. Uczestnicy w kręgu odpowiadają na pytanie (krótko i zwięźle) w pierwszej osobie wcielając się w bohatera, któremu zostało ono zadane. Odpowiedzi mogą być dowolne: to praca zbiorowej (nie)świadomości.'
@@ -313,7 +313,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Krąg dzielenia z pierwszym bohaterem',
             duration: Duration(minutes: 20),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Drugi krąg dzielenia jest luźniejszy od pierwszego. Uczestnicy dzielą się swoimi obserwacjami i doświadczeniami w formie dyskusji. Na tym etapie tworzy się wspólne rozumienie historii, nad którą uczestnicy pracują.</p>'
         ),
 
@@ -321,7 +321,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Spacer pytań z drugim bohaterem',
             duration: Duration(minutes: 20),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Forma analogiczna do <i>spaceru pytań z pierwszym bohaterem</i>, tyle, że dotycząca drugiego, wybranego przez prowadzącego bohatera.</p>'
         ),
 
@@ -329,7 +329,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Krąg dzielenia z drugim bohaterem',
             duration: Duration(minutes: 20),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Forma analogiczna do <i>kręgu pytań z pierwszym bohaterem</i>, tyle, że dotycząca drugiego, wybranego przez prowadzącego bohatera.</p>'
         ),
 
@@ -337,7 +337,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Kontemplacja końcowa',
             duration: Duration(minutes: 20),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Uczestnicy po raz ostatni siadają z fragmentem sami. Kontemplacja powinna mieć formę jak najgłębszego wejścia w tę sytuację, bez nadmiernego analizowania.</p>'
         ),
 
@@ -345,7 +345,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Przygotowanie scenki',
             duration: Duration(minutes: 20),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Uczestnicy na podstawie poprzednich form przygotowują scenkę, którą później odegrają - tworzą scenariusz, scenografię i kostiumy, dzielą się rolami i ćwiczą. Prowadzący nie musi przygotowywać żadnych rekwizytów - uczestnicy korzystają z rzeczy znajdujących się w miejscu, w którym się znajdują. Nie potrzeba im niczego więcej ponad to, co mają wokół siebie i ze sobą.'
                 '<br>'
                 '<br>Podczas przygotowywania scenki uczestnicy zazwyczaj wychodzą z nastroju skupienia i powagi – jest to dla nich forma rozładowania napięcia zgromadzonego podczas długotrwałej pracy wewnętrznej. Często towarzyszy temu rodzaj „odpału” – uczestnicy zaczynają żartować co ma pozytywny wpływ na liczbę i jakość pomysłów na formę przedstawienia historii. Dobrze jest dbać o to, żeby scenka uobecniała owoce duchowej pracy, jeśli jednak tak się nie stanie, nie trzeba się tym przejmować.</p>'
@@ -355,7 +355,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Przedstawienie scenek',
             duration: Duration(minutes: 10),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Gdy wszystkie grupy są gotowe, rozpoczynają się przedstawienia. Po każdym przedstawieniu organizator powinien zachęcić grupę do podzielenia się z resztą owocami ich pracy oraz tym, w jaki sposób owoce te uobecniły się w scence.</p>'
         ),
 
@@ -501,7 +501,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         const KonspektStep(
             title: 'Przejrzenie przykładów kapliczek',
             duration: Duration(minutes: 20),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący daje uczestnikom trochę czasu, by zapoznali się z przykładowymi kapliczkami oraz by zastanowili się jaki styl kapliczki (krzyża, figurki na cokole, kolumny, etc.) chcą zbudować oraz na jaki styl kapliczki mają wystarczające środki (zdolności, czas, materiały).</p>'
         ),
 
@@ -509,7 +509,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         const KonspektStep(
             title: 'Stworzenie projektu',
             duration: Duration(minutes: 30),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Uczestnicy tworzą projekt kapliczki. Projekt powinien zawierać szczegółowe informacje o:</p>'
                 '<ul>'
                 '<li><p style="text-align:justify;">Elementach kapliczki, które zostaną potem złączone w całość,</p></li>'
@@ -524,7 +524,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         const KonspektStep(
             title: 'Konsultacja projektu',
             duration: Duration(minutes: 20),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Uczestnicy przedstawiają gotowy projektu drużynowemu w celu zweryfikowania sensowności technicznej konstrukcji i, jeśli to możliwe, zaprzyjaźnionemu księdzu lub kapelanowi w celu zweryfikowania religijnej spójności kapliczki.'
                 '<br>'
                 '<br>Prawdopodobnie niektóre elementy będą wymagały poprawy - poprawianie i ponowne konsultowanie projektu powtarza się aż zostanie on zaakceptowany przez drużynowego.</p>'
@@ -534,7 +534,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         const KonspektStep(
             title: 'Budowa',
             duration: Duration(hours: 6),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Uczestnicy mając do dyspozycji dostępne materiały (drewno, zaprawę, kamienie) i narzędzia budują kapliczkę.</p>'
         ),
 
@@ -542,7 +542,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         const KonspektStep(
             title: 'Dbanie z czasem',
             duration: Duration(minutes: 30),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Uczestnicy ustalają w jaki sposób będą dbali o kapliczkę. Ważne, by po jej zbudowaniu nie została ona porzucona.</p>'
         ),
 
@@ -615,14 +615,14 @@ List<Konspekt> allHarcerskieKonspekts = [
         const KonspektStep(
             title: 'Przejrzenie przykładów szopek',
             duration: Duration(minutes: 20),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący daje uczestnikom trochę czasu, by zapoznali się z przykładowymi szopkami oraz by zastanowili się jaki styl szopki chcą zbudować.</p>'
         ),
 
         const KonspektStep(
             title: 'Stworzenie projektu',
             duration: Duration(minutes: 30),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Uczestnicy tworzą projekt szopki bożonarodzeniowej. Projekt powinien zawierać szczegółowe informacje o:</p>'
                 '<ul>'
                 '<li><p style="text-align:justify;">Elementach szopki, które zostaną potem złączone w całość</p></li>'
@@ -636,7 +636,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         const KonspektStep(
             title: 'Konsultacja projektu',
             duration: Duration(minutes: 20),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Uczestnicy przedstawiają gotowy projektu drużynowemu w celu zweryfikowania sensowności technicznej konstrukcji. W zależności od wieku można oczekiwać szopki o różnym stopniu zaawansowania. W przypadku zuchów i harcerzy szopka można być budowana z kartonów i farb, jednak w przypadku harcerzy starszych i wędrowników szopka może powstać z np. z desek.'
                 '<br>'
                 '<br>Prawdopodobnie niektóre elementy będą wymagały poprawy - poprawianie i ponowne konsultowanie projektu powtarza się aż zostanie on zaakceptowany przez drużynowego.</p>'
@@ -645,7 +645,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         const KonspektStep(
             title: 'Budowa',
             duration: Duration(hours: 6),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Uczestnicy mając do dyspozycji dostępne materiały (drewno, zaprawę, kamienie) i narzędzia budują kapliczkę.</p>'
         ),
 
@@ -841,31 +841,31 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Dziękowanie Bogu za otrzymane dobro',
             duration: Duration(minutes: 3),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: 'Podziękuj Bogu za to co masz: za łaski, relacje, naturalne zdolności. Każdą czynność warto w życiu rozpoczynać od westchnienia z wdzięcznością do Boga.'
         ),
         KonspektStep(
             title: 'Prośba o łaskę poznania grzechów',
             duration: Duration(minutes: 3),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: 'Poproś Boga o skuteczne dostrzeżenie swoich poruszeń duchowych, ograniczeń i grzechów. Łatwiej jest wielbłądowi przejść przez ucho igielne, niż Tobie, zwykłemu śmiertelnikowi przyłapać się na „wypieraniu, intelektualizowaniu czy projekcji”.'
         ),
         KonspektStep(
             title: 'Żądanie od swojej duszy zdania sprawy',
             duration: Duration(minutes: 3),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: 'Skup się na swoich uczuciach takich jak smutek, agresja, czy zazdrość, które mogą być powodem głupich działań i decyzji (czyli grzechu). Zdystansuj się od nich, spójrz na nie szczerze i uświadom sobie co w Tobie siedzi.'
         ),
         KonspektStep(
             title: 'Prośba o przebaczenie win',
             duration: Duration(minutes: 3),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: 'Proś Boga o przebaczenie za popełnione grzechy. Odróżnij poczucie winy od żalu za grzechy - Bóg oczekuje od nas żalu za grzechy, a nie poczucia winy.'
         ),
         KonspektStep(
             title: 'Postanowienie poprawy przy Jego łasce',
             duration: Duration(minutes: 3),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: 'Co musisz zmienić, by Twoje życie stało się lepsze? Skup się znowu na swoich uczuciach - przy odpowiedniej pokorze i subtelności pozwala się to wewnętrznie uporządkować. Świat wokół Ciebie wymaga radykalnej poprawy - zacznij od wyjęcia belki z własnego oka.'
         ),
       ],
@@ -1323,7 +1323,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Podział na grupy',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący dzieli uczestników na wybraną liczbę grup, z których każda powinna być spójna światopoglądowo.</p>'
         ),
 
@@ -1331,7 +1331,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Podział na grupy',
             duration: Duration(minutes: 45),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Każda z grup zakłada swoją mini-partię. Każda mini-patria wymyśla swoją <b>nazwę</b>, wybiera spośród siebie <b>przedstawiciela</b>, <b>skrybę</b> oraz spisuje swoje <b>postulaty</b>. Jeśli wystarczy czasu, może stworzyć swoje logo.</p>'
         ),
 
@@ -1339,7 +1339,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Negocjacje - wstęp',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący prosi do siebie wszystkie grupy i na forum wita ich jako partie polityczne w Parlamencie Rzeczpospolitej. Informuje, że ich zadaniem jest zawiązanie koalicji. Koalicja może być zawiązana tylko, jeśli wszystkie partie zgodzą się na wspólną listę postulatów politycznych, społecznych i gospodarczych. Żadne postulaty poza tymi koalicyjnymi nie będą zrealizowane.'
                 '<br>'
                 '<br>Umowa koalicyjna musi zostać spisana do czasu zakończenia ostatniej rundy negocjacji i podpisana przez przedstawicieli wszystkich partii. W przeciwnym razie <b>państwo pogrąży się w chaosie</b>.'
@@ -1357,7 +1357,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Negocjacje - runda 1',
             duration: Duration(minutes: 15),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Partie siadają naprzeciw siebie i kolejni przedstawiciele referują postulaty swoich partii. Po zakończeniu wszystkich wystąpień każda partia może zadać każdej innej partii po jednym pytaniu.</p>'
         ),
 
@@ -1365,7 +1365,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Narada',
             duration: Duration(minutes: 15),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Partie udają się w swoje odrębne miejsca i naradzają się nad strategią komunikacji.'
                 '<br>'
                 '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca fazy narady.</p>'
@@ -1375,7 +1375,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Negocjacje - runda 2',
             duration: Duration(minutes: 30),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Partie zbierają się we wspólnej przestrzeni. Przedstawiciele każdej z partii (konsultując się z członkami swoich partii) negocjują między sobą koalicję.'
                 '<br>'
                 '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca rundy negocjacji.</p>'
@@ -1385,7 +1385,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Narada',
             duration: Duration(minutes: 15),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Partie udają się w swoje odrębne miejsca i naradzają się nad strategią komunikacji.'
                 '<br>'
                 '<br>Prowadzący co jakiś czas przypomina ile zostało czasu do końca fazy narady.</p>'
@@ -1395,7 +1395,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Negocjacje - runda 2',
             duration: Duration(minutes: 45),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Partie zbierają się we wspólnej przestrzeni. Przedstawiciele każdej z partii (konsultując się z członkami swoich partii) negocjują między sobą koalicję.'
                 '<br>'
                 '<br>Na końcu tej rundy musi powstać umowa koalicyjna - w przeciwnym razie państwo pogrąży się w chaosie.'
@@ -1694,7 +1694,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Podział na pięć grup',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">'
                 'Prowadzący dzieli uczestników na pięć równolicznych grup (grupy mogą być jednoosobowe).'
                 '<br>'
@@ -1703,7 +1703,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
           title: 'Przedstawienie zasad',
           duration: Duration(minutes: 10),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
               'Prowadzący przedstawia uczestnikom zasady:'
               '<br>'
@@ -1734,7 +1734,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Pytania do zasad',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Uczestnicy mają możliwość zadania prowadzącemu pytań dotyczących zasad.'
                 '<br>'
                 '<br>W szczególności prowadzący powinien zauważyć, że:'
@@ -1750,7 +1750,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Tura pierwsza',
             duration: Duration(minutes: 45),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">'
                 'Prowadzący rozdaje piratom znaczniki starszeństwa.'
                 '<br>'
@@ -1775,7 +1775,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Tura druga',
             duration: Duration(minutes: 45),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">'
                 'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
@@ -1786,7 +1786,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Tura trzecia',
             duration: Duration(minutes: 45),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">'
                 'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
@@ -1797,7 +1797,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Tura czwarta',
             duration: Duration(minutes: 45),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">'
                 'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
@@ -1808,7 +1808,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Tura piąta',
             duration: Duration(minutes: 45),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">'
                 'Prowadzący zmienia piratom znaczniki starszeństwa. Starszeństwo przesuwa się o jeden w dół, zaś najmłodszy pirat staje się najstarszym.'
                 '<br>'
@@ -2138,7 +2138,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Internet i adresy w sieci - pytania',
             duration: Duration(minutes: 10),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Uczestnicy zbierają się w kręgu i prowadzący wyjaśnia uczestnikom po krótce sposób, w jaki działa internet. Najlepiej, jeśli uczyni to poprzez zadawanie pytań, na które uczestnicy będą mieli możliwość odpowiedzieć, zaś prowadzący będzie dopowiadał brakujące elementy odpowiedzi:</p>'
                 '<ol>'
                 '<li>'
@@ -2177,7 +2177,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Internet i adresy w sieci - symulacja',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p>Prowadzący podsumowuje krótko to, co zostało powiedziane w formie odpowiedzi na pytania:'
                 '<br>'
                 '<br>Internet to sieć, w której komputery mogą się ze sobą komunikować. Każde urządzenie ma swój unikalny adres IP, który go identyfikuje. Wiadomości w sieci są przekazywane kolejnym urządzeniom aż dotrą do urządzenia z właściwym adresem.</p>'
@@ -2186,7 +2186,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Internet i adresy w sieci - wyjaśnienie symulacji',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący rozdaje uczestnikom po jednej kopii wydrukowanego załącznika <a href="komputer@attachment">symulator komputera</a> i po kilka (np. po trzy) karteczek biurowych, po czym tłumaczy co one reprezentują:</p>'
                 '<ul>'
                 '<li><p style="text-align:justify;">Na kartce biurowej można napisać dowolną wiadomość - jest to informacja, którą można przechowywać w komputerze lub przesłać ją przez sieć. Aby ją wysłać, należy na jej odwrocie napisać adres IP odbiorcy, położyć w polu "Wyślij do" i zwrócić się do prowadzącego (czyli do internetu) z wnioskiem o wysyłkę.</p></li>'
@@ -2199,7 +2199,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Internet i adresy w sieci - symulacja',
             duration: Duration(minutes: 10),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Prowadzący siada na środku kręgu i informuje uczestników, że od teraz reprezentuje sieć internetową - jest przekaźnikiem, pozwala przesyłać innym wiadomości i który nadaje adresy IP.'
                 '<br>'
                 '<br>Uczestnicy mają za zadanie stworzyć wiadomość, podpiąć się sieci i przesłać wiadomość do innego uczestnika. Nie muszą czekać aż inni będą gotowi do wysyłki swoich wiadomości.'
@@ -2216,7 +2216,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Czy i jak warto szyfrować wiadomości?',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący zaczyna od zapytania uczestników: <i>"Co wy na to, że każda wiadomość jaką przesłaliście była możliwa przeze mnie, czyli każdego w sieci, do odczytania?" Może były tam Wasze maile? Może wyznania miłosne do najładniejszej dziewczyny w szkole? Może problemy zdrowotne, albo leki na przykład zamówienie na czopki, które wkłada się do odbytu? Może hasło do mediów społecznościowych? Czy na pewno to wszystko powinno być jawne?</i>'
                 '<br>'
                 '<br>Następnie prowadzący pyta uczestników jak temu zaradzić?'
@@ -2229,7 +2229,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Szyfrowanie kluczem asymetrycznym',
             duration: Duration(minutes: 20),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Prowadzący informuje uczestników, że istnieje metoda szyfrowania przesyłanych wiadomości, która nazywa się "szyfrowaniem kluczem asymetrycznym". Dlaczego asymetrycznym? Bo używa się przy nim dwóch <b>różnych</b> kluczy: jednego do zaszyfrowania, innego do odszyfrowania.'
                 '<br>'
                 '<br>Żeby jednak nie wchodzić w technikalia, uczestnicy będą mieli okazję sami wymyślić mechanizm tej metody.'
@@ -2265,14 +2265,14 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Podsumowanie szyfrowania kluczem asymetrycznym',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący podsumowuje wykonane przez uczestników ćwiczenie z zamykanymi skrzynkami upewniając się, że każdy rozumie dlaczego takie wysłanie wiadomości jest bezpieczne.</p>'
         ),
 
         KonspektStep(
             title: 'Przykład szyfrowanej poczty',
             duration: Duration(minutes: 5),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Gdy uczestnicy rozumieją już mechanizm ze skrzynką, kłódką i kluczem, prowadzący organizuje <b>scenkę</b> będącą przykładem wysyłania maila w formie z udziałem trzech chętnych uczestników.'
                 '<br>'
                 '<br>Scenka dotyczy następującej sytuacji: osoba A wysyła maila do osoby B używając poczty eletronicznej M. Zarówno osoba A, osoba B jak i poczta B odgrywane sa przez uczestników, każdy z których ma skrzynkę z kłódką i kluczem. W scence tej prowadzący gra rolę internetu i chodzi między uczestnikami obrazując ruch zaszyfrowanych informacji (skrzynek) po sieci.'
@@ -2297,7 +2297,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Kto widzi zaszyfrowane wiadomości?',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący zbiera uczestników z powrotem w kręgu i zadaje im pytanie: <i>"Kto może zobaczyć maila, którego wysyłacie do kolegi?"</i>'
                 '<br>'
                 '<br>Uczestnicy rzucają swoje pomysły. Prawidłowa odpowiedź brzmi: <i>"Wysyłający, odbierający oraz dostawca usługi poczty elektronicznej (np. Gmail)."</i>'
@@ -2308,7 +2308,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Czy można uwolnić się od śledzenia w sieci?',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący zadaje uczestnikom pytanie: <i>"W jaki sposób można byłoby teoretycznie wysłać wiadomość email tak, by poczta M nie widziała jaka jest treść wiadomości?"</i>'
                 '<br>'
                 '<br>Jeśli uczestnicy mają problem z wpadnięciem na pomysł, prowadzący podpowiada, że przed chwilą udało im się zabezpieczyć wiadomości skrzynkami - może należy go jakoś zmodyfikować?'
@@ -2319,7 +2319,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Bezpieczne komunikatory',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący informuje uczestników, że szyforwanie, w którym serwis dostarczający usługi nie ma dostępu do wiadomości nazywa się szyfrowaniem end-to-end.'
                 '<br>'
                 '<br>Prowadzący dodaje także, że jednym z najpopularniejszych bezpiecznych komunikatorów jest Signal - dostępny także w formie aplikacji mobilnej.</p>'
@@ -2328,21 +2328,21 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Gawęda',
             duration: Duration(minutes: 10),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący prosi uczestników, by usiedli wygodnie i zamknęli oczy (mogą się też położyć, jeśli chcą) po czym opowiada im gawędę <a href="gaweda_o_braku_telefonu@gaweda">O braku telefonu</a>.</>'
         ),
 
         KonspektStep(
             title: 'Zagrożenia wynikające z telefonu',
             duration: Duration(minutes: 10),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Prowadzący dzieli uczestników na grupy. Każda grupa dostaje kartkę i długopis i ma za zadanie w 10 minut wypisać najważniejsze zagrożenia jakie niesie za sobą dostęp do telefonu komórkowego.</p>'
         ),
 
         KonspektStep(
             title: 'Jak korzystać z telefonu? Savoir-vivre',
             duration: Duration(minutes: 20),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Uczestnicy wracają do kręgu. Prowadzący informuje uczestników, że będą oni teraz tworzyli savoir-vivre urządzeń mobilnych: czyli zasady kulturalnego i mądrego korzystania z telefonów komórkowych.'
                 '<br>'
                 '<br>Prowadzący prosi grupy o odczytanie kolejno po jednym zagrożeniu jakie grupy zapisały. Po każdym zagrożeniu uczestnicy muszą przekuć zagrożenie na ogólną zasadę lub zasady postępowania z telefonami.'
@@ -2361,7 +2361,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Podpisanie stworzonego savoir-vivre',
             duration: Duration(minutes: 5),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Uczestnicy kolejno podpisują savoir-vivre urządzeń mobilnych. Warto również wywiesić podpisany dokument gdzieś w harcówce w widocznym, ale niekoniecznie centralnym miejscu.</p>'
         ),
 
@@ -2576,7 +2576,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       KonspektStep(
           title: 'Podział na grupy',
           duration: Duration(minutes: 5),
-          activeForm: true,
+          activeForm: KonspektStepActiveForm.active,
           content: '<p style="text-align:justify;">Harcerze są dzieleni na dwie grupy. Forma podziału jest dowolna (np. wg. zastępów, grając w <a href="atomy@form">atomy</a>).</p>'
       ),
 
@@ -2584,7 +2584,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       KonspektStep(
           title: 'Sznury - wywiady z kadrą',
           duration: Duration(minutes: 15),
-          activeForm: true,
+          activeForm: KonspektStepActiveForm.active,
           required: false,
           content: '<p style="text-align:justify;">Harcerze są informowani, że za chwilę czeka ich wielka gra z wiedzy o funkcjach i sznurach w ZHP. Ich zadaniem jest dowiedzieć się jak najwięcej o sznurach od obecnej na obozie kadry innych drużyn (o ile nie są obecnie zajęci innymi sprawami!). Mogą w tym celu posiłkować się jedynie kartką i długopisem.'
               '<br>'
@@ -2595,7 +2595,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       KonspektStep(
           title: 'Sznury - wstęp teoretyczny',
           duration: Duration(minutes: 15),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           required: false,
           content: '<p style="text-align:justify;">Prowadzący, żeby skupić uwagę harcerzy, mówi, że za chwilę harcerze będą podzieleni na grupy i zagrają w “warunkowe warcaby” na podstawie wiedzy z funkcji i sznurów.'
               '<br>'
@@ -2641,7 +2641,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       KonspektStep(
           title: 'Przyporządkowywanie sznurów do funkcji - warunkowe warcaby',
           duration: Duration(minutes: 45),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">Prowadzący korzystając z załącznika <a href="sznury@attachment">sznury</a> zbiera przygotowane kartki z funkcjami w jedno miejsce (np. do worka, czapki, etc.) z którego harcerze będa je naprzemiennie losowali.'
               '<br>'
               '<br>Pozostałe części pasków (czyli <i>“sznur”</i>-<i>”sposób noszenia”</i>) prowadzący układa w losowej kolejności na widoku jeden pod drugim. Zadaniem harcerzy będzie naprzemienne losowanie funkcji i próba odnalezienia z puli kartek ze sznurami odpowiadającego im sznura wraz ze sposobem noszenia. Gdy poprawnie przyporządkują sznur do funkcji, zabierają obie części kartki do siebie. Jeżeli się pomylą, funkcja wraca do puli losowania, a sznur do puli sznurów.'
@@ -2655,7 +2655,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       KonspektStep(
           title: 'Uszeregowanie męskich stopni harcerskich - milcząca, pół-widoczna kolejność',
           duration: Duration(minutes: 5),
-          activeForm: true,
+          activeForm: KonspektStepActiveForm.active,
           content: '<p style="text-align:justify;">Harcerze są dzieleni na grupy po 6 osób (tyle, ile jest stopni harcerskich). Jeżeli harcerzy jest za mało na dwie grupy, wszyscy powinni być w jednej grupie.'
               '<br>'
               '<br>Od tej chwili harcerze nie mogą się do siebie odzywać. Prowadzący każdej osobie w każdym zespole nakleja na czoło kartkę z nazwą innego męskiego stopnia harcerskiego. Jeżeli liczba uczestników nie pozwala ich podzielić na sześcioosobowe grupy, należy względnie po równo zwiększyć liczebność grup i uzupełnić pulę kartek o nazwy gwiazdek zuchowych i/lub kartkę “próba harcerza”.'
@@ -2669,7 +2669,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       KonspektStep(
           title: 'Uszeregowanie żeńskich stopni harcerskich - milcząca, pół-widoczna kolejność',
           duration: Duration(minutes: 5),
-          activeForm: true,
+          activeForm: KonspektStepActiveForm.active,
           content: '<p style="text-align:justify;">Prowadzący powtarza poprzednią formę, tym razem ze stopniami żeńskimi.</p>'
       ),
 
@@ -2677,7 +2677,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       KonspektStep(
           title: 'Stopnie męskie i damskie - memory',
           duration: Duration(minutes: 10),
-          activeForm: false,
+          activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">Prowadzący zbiera wszystkie kartki ze stopniami. Zostawia po jednej kartce z każdego stopnia (zarówno męskiego jak i żeńskiego), pozostałe wyrzuca. Tasuje kartki i rozkłada je wierzchem do góry na podłodze. Dzieli harcerzy na dwie grupy (można powtórzyć poprzedni podział) i harcerze grają w memory - zebrać parę mogą tylko, gdy połączą stopień męski i odpowiadający im stopień żeński.'
               '<br>'
               '<br>Jeżeli uczestników jest więcej niż 12, można podzielić ich na grupy i zagrać w memory w mniejszych grupach.</p>'
@@ -2687,7 +2687,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       KonspektStep(
           title: 'Stopnie instruktorskie - tak-nie',
           duration: Duration(minutes: 15),
-          activeForm: true,
+          activeForm: KonspektStepActiveForm.active,
           content: '<p style="text-align:justify;">Harcerze są dzieleni na dwie grupy (można powtórzyć poprzedni podział). Grupy ustawiają się w dwóch kolumnach równolegle obok siebie. Kilka metrów przed nimi prowadzący ustawia dwa przedmioty: przedmiot symbolizujący “tak” oraz drugi symbolizujący “nie”.'
               '<br>'
               '<br>Prowadzący zadaje kolejne pytania z załącznika <a href="stopnie_instruktorskie_pytania@attachment">stopnie instruktorskie pytania</a> obu grupom. Po zadaniu pytania osoby na czele każdej z kolumn biegną jak najszybciej do przedmiotów “tak” i “nie” i podnoszą ten, który według nich jest odpowiedzią na zadane pytanie (jeżeli grupa A podniesie przedmiot “tak”, grupa B może już wybrać tylko “nie”). Następnie prowadzący udziela głośno odpowiedzi na zadane pytanie, ewentualnie omawia jego szczegóły.'
@@ -2990,7 +2990,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Wprowadzenie - nagrobek idealny',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący wprowadza uczestników w cel pierwszej części zadania - mają zaprojektować i zbudować nagrobek, który chcieliby by im postawiono na końcu życia.'
                 '<br>'
                 '<br>Prowadzący informuje uczestników, że na końcu zajęć każdy będzie mógł opowiedzieć o swoim nagrobku idealnym - jeśli tylko będzie chciał.</p>'
@@ -3000,7 +3000,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Rozdanie materiałów',
             duration: Duration(minutes: 10),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący rozdaje uczestnikom materiały, z których będą budowali nagrobki. Część materiałów warto zostawić na środku, tak by były dostępne dla tych, którzy będą potrzebowali ich więcej.'
                 '<br>'
                 '<br>Prowadzący informuje uczestników, że na przemyślenie i stworzenie nagrobka będą mieli 60 minut.</p>'
@@ -3010,7 +3010,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Projektowanie i budowanie nagrobka idealnego',
             duration: Duration(minutes: 60),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Uczestnicy projektują i budują swój nagrobek idealny.</p>'
         ),
 
@@ -3018,7 +3018,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Wprowadzenie - nagrobek rzeczywisty',
             duration: Duration(minutes: 5),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Prowadzący wprowadza uczestników w cel drugiej części zadania - mają zaprojektować i zbudować nagrobek, który sądzą, że postawiono by im, gdyby umarli jutro.'
                 '<br>'
                 '<br>Ważne, by zawarli w nim te same <b>kategorie informacji</b> (np. imię, lata życia, opis kto ich żegna i jak żyli), które zawarli w nagrobku idealnym.'
@@ -3030,7 +3030,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Projektowanie i budowanie nagrobka rzeczywistego',
             duration: Duration(minutes: 60),
-            activeForm: true,
+            activeForm: KonspektStepActiveForm.active,
             content: '<p style="text-align:justify;">Uczestnicy projektują i budują swój nagrobek rzeczywisty.</p>'
         ),
 
@@ -3038,7 +3038,7 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektStep(
             title: 'Podsumowanie nagrobków idealnych',
             duration: Duration(minutes: 20),
-            activeForm: false,
+            activeForm: KonspektStepActiveForm.static,
             content: '<p style="text-align:justify;">Uczestnicy wspólnie z prowadzącym podsumowują swoje nagrobki idealne. Nie ma konieczności prezentowania swojego przygotowanego nagrobka.</p>'
         ),
 

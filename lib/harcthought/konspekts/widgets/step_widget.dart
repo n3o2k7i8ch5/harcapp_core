@@ -76,9 +76,9 @@ class KonspektStepWidget extends StatelessWidget{
                           const SizedBox(width: 20),
 
                           SelectableText(
-                            step.activeForm?'Forma aktywna':'Forma statyczna',
+                            step.activeForm.displayName,
                             style: AppTextStyle(
-                                color: step.activeForm?Colors.green:Colors.deepOrange,
+                                color: step.activeForm.color,
                                 fontWeight: weightHalfBold
                             )
                           ),
