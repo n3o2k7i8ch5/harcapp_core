@@ -296,6 +296,7 @@ class MultiTextFieldState extends State<MultiTextField>{
         );
       case LayoutMode.column:
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             AnimatedListView<Widget>(
               physics: BouncingScrollPhysics(),
