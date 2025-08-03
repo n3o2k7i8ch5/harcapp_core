@@ -121,7 +121,7 @@ class AccountThumbnailWidget extends StatelessWidget{
               icon == null?
               Text(
                 abbr,
-                style: AppTextStyle(fontSize: size*textSizeRatio, fontWeight: weight.halfBold, color: enabled?textEnab_(context):hintEnab_(context)),
+                style: AppTextStyle(fontSize: size*textSizeRatio, fontWeight: weightHalfBold, color: enabled?textEnab_(context):hintEnab_(context)),
               ):
               Icon(icon, color: textEnab_(context)),
             ),

@@ -104,7 +104,7 @@ class KonspektHtmlWidget extends StatelessWidget{
             element.innerHtml,
             style: AppTextStyle(
               fontSize: Dimen.textSizeAppBar,
-              fontWeight: weight.halfBold,
+              fontWeight: weightHalfBold,
               decoration: TextDecoration.underline
             )
           );
@@ -113,7 +113,7 @@ class KonspektHtmlWidget extends StatelessWidget{
               element.innerHtml,
               style: AppTextStyle(
                   fontSize: Dimen.textSizeAppBar,
-                  fontWeight: weight.halfBold
+                  fontWeight: weightHalfBold
               )
           );
         else if(element.localName == "h3")
@@ -121,7 +121,7 @@ class KonspektHtmlWidget extends StatelessWidget{
               element.innerHtml,
               style: AppTextStyle(
                   fontSize: Dimen.textSizeBig,
-                  fontWeight: weight.halfBold,
+                  fontWeight: weightHalfBold,
                   decoration: TextDecoration.underline
               )
           );
@@ -130,7 +130,7 @@ class KonspektHtmlWidget extends StatelessWidget{
               element.innerHtml,
               style: AppTextStyle(
                 fontSize: Dimen.textSizeBig,
-                fontWeight: weight.halfBold,
+                fontWeight: weightHalfBold,
               )
           );
 

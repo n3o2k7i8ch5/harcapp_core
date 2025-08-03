@@ -60,7 +60,7 @@ class KonspektStepWidget extends StatelessWidget{
                                       '${groupIndex==null?'':'${groupIndex! + 1}.'}${index + 1}.',
                                       style: AppTextStyle(
                                           fontSize: Dimen.textSizeAppBar,
-                                          fontWeight: weight.halfBold,
+                                          fontWeight: weightHalfBold,
                                           color: background_(context)
                                       )
                                   ),
@@ -78,7 +78,7 @@ class KonspektStepWidget extends StatelessWidget{
 
                       SelectableText(
                           step.title,
-                          style: const AppTextStyle(fontWeight: weight.halfBold)
+                          style: const AppTextStyle(fontWeight: weightHalfBold)
                       ),
 
                       const SizedBox(height: Dimen.defMarg),
@@ -103,7 +103,7 @@ class KonspektStepWidget extends StatelessWidget{
                               step.activeForm?'Forma aktywna':'Forma statyczna',
                               style: AppTextStyle(
                                   color: step.activeForm?Colors.green:Colors.deepOrange,
-                                  fontWeight: weight.halfBold
+                                  fontWeight: weightHalfBold
                               )
                           ),
 
@@ -162,7 +162,7 @@ class KonspektStepWidget extends StatelessWidget{
                         'Cele kroku',
                         style: AppTextStyle(
                             fontSize: Dimen.textSizeNormal,
-                            fontWeight: weight.halfBold
+                            fontWeight: weightHalfBold
                         ),
                       ),
                     ),
@@ -223,7 +223,7 @@ class KonspektStepWidget extends StatelessWidget{
                           'Materiały kroku',
                           style: AppTextStyle(
                               fontSize: Dimen.textSizeNormal,
-                              fontWeight: weight.halfBold
+                              fontWeight: weightHalfBold
                           ),
                         ),
                       ),

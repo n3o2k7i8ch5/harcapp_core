@@ -30,7 +30,7 @@ class FileFormatWidget extends StatelessWidget {
                   format.displayName,
                   style: const AppTextStyle(
                     color: Colors.black,
-                    fontWeight: weight.halfBold,
+                    fontWeight: weightHalfBold,
                   )
               ),
             ),

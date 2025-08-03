@@ -48,7 +48,7 @@ class HeaderArticleElementWidget extends StatelessWidget{
         textAlign: TextAlign.start,
         style: const AppTextStyle(
           fontSize: 24.0,
-          fontWeight: weight.bold,
+          fontWeight: weightBold,
         ),
       )
   );
@@ -206,7 +206,7 @@ class PictureArticleElementWidget extends StatelessWidget{
                   picture.desc!,
                   style: const AppTextStyle(
                       fontSize: Dimen.textSizeTiny,
-                      fontWeight: weight.halfBold
+                      fontWeight: weightHalfBold
                   ),
                   textAlign: TextAlign.end
               ),

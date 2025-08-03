@@ -125,7 +125,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
                                 '${poradnik.pageCount} stron',
                                 style: AppTextStyle(
                                   color: Colors.black,
-                                  fontWeight: weight.halfBold,
+                                  fontWeight: weightHalfBold,
                                 ),
                                 textAlign: TextAlign.center,
                               ),

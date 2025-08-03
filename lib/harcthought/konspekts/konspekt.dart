@@ -146,7 +146,7 @@ enum KonspektSphereLevel{
 
   Widget get textWidget => Text(
     displayName,
-    style: AppTextStyle(color: color, fontWeight: weight.bold),
+    style: AppTextStyle(color: color, fontWeight: weightBold),
   );
 
   pdf.Widget pdfWidget(pdf.Font fontBold, double fontSize) => pdf.Text(
@@ -191,7 +191,7 @@ enum KonspektSphereFactor{
   Widget get textWidget => Text(
     displayName,
     style: const AppTextStyle(
-      fontWeight: weight.normal,
+      fontWeight: weightNormal,
       decoration: TextDecoration.underline
     ),
   );

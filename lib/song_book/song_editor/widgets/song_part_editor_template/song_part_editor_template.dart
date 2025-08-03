@@ -483,7 +483,7 @@ class ButtonsWidget extends StatelessWidget{
                 children: [
                   Icon(MdiIcons.alertCircleOutline, color: Colors.red),
                   SizedBox(width: Dimen.iconMarg),
-                  Text('$errCont', style: AppTextStyle(fontWeight: weight.halfBold, color: Colors.red),)
+                  Text('$errCont', style: AppTextStyle(fontWeight: weightHalfBold, color: Colors.red),)
                 ],
               ),
             ),

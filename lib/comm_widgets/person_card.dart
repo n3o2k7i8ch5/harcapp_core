@@ -37,7 +37,7 @@ class PersonCardSimple extends StatelessWidget{
               && rankHarc != RankHarc.zhpHRd
           ) Text('${rankHarcShortName(rankHarc)} ', style: AppTextStyle(fontSize: Dimen.textSizeBig, color: textColor??textEnab_(context))),
           if(rankInstr != null) Text('$rankInstr ', style: AppTextStyle(fontSize: Dimen.textSizeBig, color: textColor??textEnab_(context))),
-          Text(name, style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weight.bold, color: textColor??textEnab_(context))),
+          Text(name, style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightBold, color: textColor??textEnab_(context))),
           if(rankHarc == RankHarc.zhpHOc
               || rankHarc == RankHarc.zhpHOd
               || rankHarc == RankHarc.zhpHRc
@@ -85,17 +85,17 @@ class PersonCard extends StatelessWidget{
                   && rankHarc != RankHarc.zhpHRd
               ) Text('${rankHarcShortName(rankHarc)} ', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
               if(rankInstr != null) Text('${rankInstrToStr(rankInstr!)}. ', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
-              Text(name, style: AppTextStyle(fontSize: textSize, fontWeight: weight.halfBold, color: textColor??textEnab_(context))),
+              Text(name, style: AppTextStyle(fontSize: textSize, fontWeight: weightHalfBold, color: textColor??textEnab_(context))),
               if(rankHarc == RankHarc.zhpHOc
                   || rankHarc == RankHarc.zhpHOd
                   || rankHarc == RankHarc.zhpHRc
                   || rankHarc == RankHarc.zhpHRd
               ) Text(' ${rankHarcShortName(rankHarc)}', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
               //Expanded(child: Container()),
-              if(org != null) Text(' (', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context), fontWeight: weight.halfBold)),
+              if(org != null) Text(' (', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context), fontWeight: weightHalfBold)),
               if(org != null)
-                Text(org!.shortName.$1, style: AppTextStyle(fontSize: textSize, color: org!.colors.avgColor(isDark(context)), fontWeight: weight.halfBold)),
-              if(org != null) Text(')', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context), fontWeight: weight.halfBold)),
+                Text(org!.shortName.$1, style: AppTextStyle(fontSize: textSize, color: org!.colors.avgColor(isDark(context)), fontWeight: weightHalfBold)),
+              if(org != null) Text(')', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context), fontWeight: weightHalfBold)),
 
             ],
           ),

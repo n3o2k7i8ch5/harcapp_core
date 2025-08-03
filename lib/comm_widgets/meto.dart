@@ -75,7 +75,7 @@ class MetoTile extends StatelessWidget{
                       meto.shortDisplayName,
                       style: AppTextStyle(
                           fontSize: Dimen.textSizeBig,
-                          fontWeight: weight.bold,
+                          fontWeight: weightBold,
                           color: background_(context)
                       ),
                     ),
@@ -86,7 +86,7 @@ class MetoTile extends StatelessWidget{
                       meto.age,
                       style: AppTextStyle(
                           fontSize: Dimen.textSizeNormal,
-                          fontWeight: weight.halfBold,
+                          fontWeight: weightHalfBold,
                           color: background_(context)
                       ),
                     )

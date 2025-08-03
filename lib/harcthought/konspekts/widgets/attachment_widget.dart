@@ -101,7 +101,7 @@ class KonspektAttachmentPrintWidget extends StatelessWidget{
                   'Jak drukować:',
                   style: AppTextStyle(
                       color: hintEnab_(context),
-                      fontWeight: weight.halfBold
+                      fontWeight: weightHalfBold
                   )
               )
 
@@ -210,7 +210,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
                     attachment.title,
                     style: const AppTextStyle(
                       fontSize: Dimen.textSizeBig,
-                      fontWeight: weight.halfBold,
+                      fontWeight: weightHalfBold,
                     )
                 )),
 
@@ -241,7 +241,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
                 attachment.title,
                 style: const AppTextStyle(
                   fontSize: Dimen.textSizeBig,
-                  fontWeight: weight.halfBold,
+                  fontWeight: weightHalfBold,
                 )
             ),
           ),

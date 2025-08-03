@@ -103,7 +103,7 @@ class KonspektTileWidget extends StatelessWidget{
                                 konspekt.title,
                                 style: AppTextStyle(
                                   fontSize: Dimen.textSizeBig,
-                                  fontWeight: weight.halfBold,
+                                  fontWeight: weightHalfBold,
                                   color: konspekt.upToDate?textEnab_(context):textDisab_(context),
                                 ),
                                 maxLines: konspekt.title.split(' ').length,
@@ -181,7 +181,7 @@ class KonspektSphereList extends StatelessWidget{
         children: [
           Icon(sphere.displayIcon, size: Dimen.iconSmallSize, color: iconDisab_(context)),
           const SizedBox(width: Dimen.defMarg),
-          Text(sphere.displayName, style: AppTextStyle(fontWeight: weight.halfBold, color: iconDisab_(context)))
+          Text(sphere.displayName, style: AppTextStyle(fontWeight: weightHalfBold, color: iconDisab_(context)))
         ],
       ),
       wrapAlignment: WrapAlignment.start

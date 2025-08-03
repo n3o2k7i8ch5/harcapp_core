@@ -323,7 +323,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
                       'Tylko Ty widzisz tę piosenkę',
                       style: AppTextStyle(
                           color: accentColor??accent_(context),
-                          fontWeight: weight.halfBold
+                          fontWeight: weightHalfBold
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -390,7 +390,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
                         SizedBox(width: 6.0),
                         Text(
                             dateToString(song.releaseDate!, showMonth: song.showRelDateMonth, showDay: song.showRelDateMonth && song.showRelDateDay, yearAbbr: 'A.D.'),
-                            style: AppTextStyle(color: hintEnab_(context), fontWeight: weight.halfBold)
+                            style: AppTextStyle(color: hintEnab_(context), fontWeight: weightHalfBold)
                         ),
                       ],
                     ),
@@ -570,7 +570,7 @@ class _TitleCard<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
       radius: AppCard.bigRadius,
       child: AutoSizeText(
         song.title,
-        style: AppTextStyle(fontSize: 24.0, color: textEnab_(context), fontWeight: weight.bold),
+        style: AppTextStyle(fontSize: 24.0, color: textEnab_(context), fontWeight: weightBold),
         maxLines: 1,
         textAlign: TextAlign.center,
       ),
@@ -683,7 +683,7 @@ class _TitleCard<TSong extends SongCore, TAddPersRes extends AddPersonResolver> 
             radius: AppCard.bigRadius,
             child: Text(
               song.tags[index],
-              style: AppTextStyle(fontSize: Dimen.textSizeSmall, color: textEnab_(context), fontWeight: weight.halfBold),
+              style: AppTextStyle(fontSize: Dimen.textSizeSmall, color: textEnab_(context), fontWeight: weightHalfBold),
             ),
             onTap: () => onTagTap?.call(song.tags[index]),
           ),
@@ -753,7 +753,7 @@ class _ContribPersonWidget extends StatelessWidget{
       child: Text(
         text,
         style: AppTextStyle(
-          fontWeight: weight.halfBold,
+          fontWeight: weightHalfBold,
           fontSize: Dimen.textSizeSmall,
           color: textEnab_(context),
         ),
@@ -817,7 +817,7 @@ class _ButtonData{
     context: context,
     text: name,
     iconWidget: icon(context, songWidget, buttonsWidget),
-    fontWeight: weight.normal,
+    fontWeight: weightNormal,
     margin: EdgeInsets.zero,
 
     onTap:
@@ -1365,7 +1365,7 @@ class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
                     label: 'Szybkość przewijania',
                   ),
                   data: SliderTheme.of(context).copyWith(
-                      valueIndicatorTextStyle: AppTextStyle(color: accentIconColor??background_(context), fontWeight: weight.halfBold),
+                      valueIndicatorTextStyle: AppTextStyle(color: accentIconColor??background_(context), fontWeight: weightHalfBold),
                       valueIndicatorColor: accentColor??accent_(context)
                   ),
                 ),

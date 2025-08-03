@@ -6,7 +6,7 @@ class HeaderTextStyle extends CustTextStyle{
   const HeaderTextStyle({double? fontSize, FontStyle? fontStyle}):super(
       'Gentium',
       fontStyle: fontStyle,
-      fontWeight: weight.halfBold,
+      fontWeight: weightHalfBold,
       fontSize: fontSize,
       height: 1.2,
   );
@@ -19,7 +19,7 @@ class Parag1TextStyle extends CustTextStyle{
   const Parag1TextStyle({double? fontSize, bool? shadow, FontStyle? fontStyle}):super(
       FAMILY,
       fontStyle: fontStyle,
-      fontWeight: weight.normal,
+      fontWeight: weightNormal,
       fontSize: fontSize,
       height: 1.2,
   );
@@ -32,7 +32,7 @@ class Parag2TextStyle extends CustTextStyle{
   const Parag2TextStyle({double? fontSize, FontStyle? fontStyle}):super(
       FAMILY,
       fontStyle: fontStyle,
-      fontWeight: weight.normal,
+      fontWeight: weightNormal,
       fontSize: fontSize,
       height: 1.2,
   );
@@ -45,7 +45,7 @@ class Parag3TextStyle extends CustTextStyle{
   const Parag3TextStyle({double? fontSize, FontStyle? fontStyle}):super(
       FAMILY,
       fontStyle: fontStyle,
-      fontWeight: weight.normal,
+      fontWeight: weightNormal,
       fontSize: fontSize,
       height: 1.2,
   );

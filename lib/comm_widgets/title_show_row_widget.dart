@@ -8,7 +8,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
 
   static const TextStyle style = AppTextStyle(
     fontSize: Dimen.textSizeAppBar,
-    fontWeight: weight.bold,
+    fontWeight: weightBold,
   );
 
   static const double height = Dimen.iconFootprint;
@@ -72,7 +72,7 @@ class TitleShortcutRowWidget extends StatelessWidget{
               child: PulsingText(
                 title,
                 fontSize: Dimen.textSizeAppBar,
-                fontWeight: weight.bold,
+                fontWeight: weightBold,
                 fontColor: titleColor,
                 pulseColor: pulseShadowColor??titleColor?.withValues(alpha: (titleColor?.a??1)*0.7),
                 textAlign: textAlign,

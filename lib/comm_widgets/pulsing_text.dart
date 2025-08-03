@@ -11,7 +11,7 @@ class PulsingText extends StatefulWidget{
   final bool selectable;
   final bool pulse;
   final double fontSize;
-  final weight fontWeight;
+  final FontWeight fontWeight;
   final TextAlign? textAlign;
   final Color? fontColor;
   final Color? pulseColor;
@@ -21,7 +21,7 @@ class PulsingText extends StatefulWidget{
       { this.selectable = true,
         this.pulse = true,
         this.fontSize = Dimen.textSizeBig,
-        this.fontWeight = weight.bold,
+        this.fontWeight = weightBold,
         this.textAlign,
         this.fontColor,
         this.pulseColor,

@@ -223,7 +223,7 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
               child: Text(
                 'Podaj email, by połączyć swoje piosenki jednolitym podpisem. Sam email nie będzie widoczny.',
                 style: AppTextStyle(
-                  fontWeight: weight.halfBold,
+                  fontWeight: weightHalfBold,
                   color: hintEnab_(context),
                   fontSize: Dimen.textSizeBig,
                   height: 1.2

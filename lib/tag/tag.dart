@@ -61,7 +61,7 @@ class Tag extends StatelessWidget{
     //       text: text,
     //       style: AppTextStyle(
     //           fontSize: MediaQuery.of(context).textScaler.scale(fontSize),
-    //           fontWeight: weight.halfBold
+    //           fontWeight: weightHalfBold
     //       ),
     //     ),
     //     textDirection: TextDirection.ltr,
@@ -82,7 +82,7 @@ class Tag extends StatelessWidget{
                 text,
                 style: AppTextStyle(
                   fontSize: fontSize,
-                  fontWeight: bold?weight.halfBold:weight.normal,
+                  fontWeight: bold?weightHalfBold:weightNormal,
                   color: textColor,
                 ),
                 maxLines: 1,
@@ -96,7 +96,7 @@ class Tag extends StatelessWidget{
                 text,
                 style: AppTextStyle(
                   fontSize: fontSize,
-                  fontWeight: weight.halfBold,
+                  fontWeight: weightHalfBold,
                   color: textColor,
                 ),
                 maxLines: 1,

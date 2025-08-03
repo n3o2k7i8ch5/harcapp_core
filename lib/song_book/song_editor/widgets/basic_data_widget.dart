@@ -62,7 +62,7 @@ class BasicDataWidget extends StatelessWidget{
                         hint: 'Tytuł:',
                         style: AppTextStyle(
                           fontSize: Dimen.textSizeBig,
-                          fontWeight: weight.halfBold,
+                          fontWeight: weightHalfBold,
                           color: textEnab_(context),
                         ),
                         hintStyle: AppTextStyle(
@@ -169,7 +169,7 @@ class BasicDataWidget extends StatelessWidget{
                   hint: 'Autor słów:',
                   style: AppTextStyle(
                     fontSize: Dimen.textSizeBig,
-                    fontWeight: weight.halfBold,
+                    fontWeight: weightHalfBold,
                     color: textEnab_(context),
                   ),
                   hintStyle: AppTextStyle(
@@ -191,7 +191,7 @@ class BasicDataWidget extends StatelessWidget{
                   hint: 'Kompozytor muzyki:',
                   style: AppTextStyle(
                     fontSize: Dimen.textSizeBig,
-                    fontWeight: weight.halfBold,
+                    fontWeight: weightHalfBold,
                     color: textEnab_(context),
                   ),
                   hintStyle: AppTextStyle(
@@ -213,7 +213,7 @@ class BasicDataWidget extends StatelessWidget{
                   hint: 'Wykonawca:',
                   style: AppTextStyle(
                     fontSize: Dimen.textSizeBig,
-                    fontWeight: weight.halfBold,
+                    fontWeight: weightHalfBold,
                     color: textEnab_(context),
                   ),
                   hintStyle: AppTextStyle(
@@ -251,7 +251,7 @@ class BasicDataWidget extends StatelessWidget{
                         hint: 'Link YouTube:',
                         style: AppTextStyle(
                           fontSize: Dimen.textSizeBig,
-                          fontWeight: weight.halfBold,
+                          fontWeight: weightHalfBold,
                           color: textEnab_(context),
                         ),
                         hintStyle: AppTextStyle(
@@ -300,7 +300,7 @@ class BasicDataWidget extends StatelessWidget{
                             hint: 'Data pierwszego wykonania:',
                             style: AppTextStyle(
                               fontSize: Dimen.textSizeBig,
-                              fontWeight: weight.halfBold,
+                              fontWeight: weightHalfBold,
                               color: textEnab_(context),
                             ),
                             hintStyle: AppTextStyle(

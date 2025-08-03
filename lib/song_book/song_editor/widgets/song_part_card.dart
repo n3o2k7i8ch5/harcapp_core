@@ -98,7 +98,7 @@ class SongPartCard extends StatelessWidget{
             style: AppTextStyle(
                 color: pressable?iconEnab_(context):hintEnab_(context),
                 fontSize: Dimen.textSizeBig,
-                fontWeight: pressable?weight.halfBold:weight.normal
+                fontWeight: pressable?weightHalfBold:weightNormal
             ),
             textAlign: TextAlign.center,
           ),
@@ -259,7 +259,7 @@ class TopZwrotkaButtons extends StatelessWidget{
 
       Expanded(
           child: showName?
-          Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weight.halfBold, color: hintEnab_(context))):
+          Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold, color: hintEnab_(context))):
           Container()
       ),
 
@@ -313,7 +313,7 @@ class TopRefrenButtons extends StatelessWidget{
 
       Expanded(
           child: showName?
-          Text('Refren', style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weight.halfBold, color: hintEnab_(context))):
+          Text('Refren', style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold, color: hintEnab_(context))):
           Container()
       ),
 

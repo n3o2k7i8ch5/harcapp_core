@@ -69,7 +69,7 @@ class ArticleInfoAuthorDateWidget extends StatelessWidget{
           Text(
               article.author,
               style: AppTextStyle(
-                  fontWeight: weight.halfBold,
+                  fontWeight: weightHalfBold,
                   fontSize: fontSize,
                   color: iconEnab_(context)
               )

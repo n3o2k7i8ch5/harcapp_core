@@ -14,8 +14,8 @@ class HarcApp extends StatelessWidget{
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        Text('Harc', style: AppTextStyle(fontSize: size, fontWeight: weight.halfBold, color: color, shadow: shadow, height: 1.0)),
-        Text('App', style: AppTextStyle(fontSize: size, fontWeight: weight.normal, color: color, shadow: shadow, height: 1.0),)
+        Text('Harc', style: AppTextStyle(fontSize: size, fontWeight: weightHalfBold, color: color, shadow: shadow, height: 1.0)),
+        Text('App', style: AppTextStyle(fontSize: size, fontWeight: weightNormal, color: color, shadow: shadow, height: 1.0),)
       ],
     );
   }

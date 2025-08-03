@@ -214,7 +214,7 @@ class AmountWidget extends StatelessWidget{
             'x',
             style: AppTextStyle(
                 fontSize: Dimen.textSizeBig,
-                fontWeight: weight.halfBold
+                fontWeight: weightHalfBold
             ),
           ),
 
@@ -224,7 +224,7 @@ class AmountWidget extends StatelessWidget{
             '${material.amountAttendantFactor}',
             style: const AppTextStyle(
                 fontSize: Dimen.textSizeAppBar,
-                fontWeight: weight.bold
+                fontWeight: weightBold
             ),
           ),
 
@@ -234,7 +234,7 @@ class AmountWidget extends StatelessWidget{
             'Liczb.\nuczest.',
             style: AppTextStyle(
                 fontSize: Dimen.textSizeAppBar/2/1.1,
-                fontWeight: weight.bold
+                fontWeight: weightBold
             ),
           )
 
@@ -249,7 +249,7 @@ class AmountWidget extends StatelessWidget{
           'x',
           style: AppTextStyle(
               fontSize: Dimen.textSizeBig,
-              fontWeight: weight.halfBold
+              fontWeight: weightHalfBold
           ),
         ),
 
@@ -259,7 +259,7 @@ class AmountWidget extends StatelessWidget{
           '${material.amount}',
           style: const AppTextStyle(
               fontSize: Dimen.textSizeAppBar,
-              fontWeight: weight.bold
+              fontWeight: weightBold
           ),
         )
 

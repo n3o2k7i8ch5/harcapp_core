@@ -74,59 +74,61 @@ abstract class ColorPack{
 
   ThemeData themeData(BuildContext context){
 
-    AppBarTheme baseAppBarTheme = AppBarTheme.of(context);
-    baseAppBarTheme = baseAppBarTheme.copyWith(
+    AppBarTheme appBarTheme = AppBarTheme.of(context);
+    appBarTheme = appBarTheme.copyWith(
         backgroundColor: appBar,
-        titleTextStyle: baseAppBarTheme.titleTextStyle?.copyWith(fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
-        toolbarTextStyle: baseAppBarTheme.toolbarTextStyle?.copyWith(fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
-        actionsIconTheme: baseAppBarTheme.actionsIconTheme?.copyWith(color: appBarTextEnabled),
-        iconTheme: baseAppBarTheme.iconTheme?.copyWith(color: appBarTextEnabled),
+        titleTextStyle: appBarTheme.titleTextStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_, fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
+        toolbarTextStyle: appBarTheme.toolbarTextStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_, fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
+        actionsIconTheme: appBarTheme.actionsIconTheme?.copyWith(color: appBarTextEnabled),
+        iconTheme: appBarTheme.iconTheme?.copyWith(color: appBarTextEnabled),
         surfaceTintColor: null
+    );
+
+    TextTheme textTheme = TextTheme.of(context);
+    textTheme = textTheme.copyWith(
+      bodySmall: textTheme.bodySmall?.copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+      bodyMedium: textTheme.bodyMedium?.copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+      bodyLarge: textTheme.bodyLarge?.copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+    ).apply();
+
+    TabBarThemeData tabBarTheme = TabBarTheme.of(context);
+    tabBarTheme = tabBarTheme.copyWith(
+        labelColor: iconEnabled,
+        unselectedLabelColor: iconDisabled,
+        labelStyle: tabBarTheme.labelStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_ ,fontWeight: weightHalfBold),
+        unselectedLabelStyle: tabBarTheme.unselectedLabelStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_, fontWeight: weightHalfBold),
+        overlayColor: WidgetStateColor.resolveWith((states) => accent.withValues(alpha: .2))
+    );
+
+    TimePickerThemeData timePickerTheme = TimePickerTheme.of(context);
+    timePickerTheme = TimePickerThemeData(
+      backgroundColor: background,
+      dialHandColor: accent,
+      helpTextStyle: timePickerTheme.helpTextStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
+      dayPeriodTextStyle: timePickerTheme.dayPeriodTextStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_),
+      hourMinuteTextStyle: timePickerTheme.hourMinuteTextStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_, fontSize: 48.0),
+      hourMinuteShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppCard.bigRadius)),
+    );
+
+    TextSelectionThemeData textSelectionTheme = TextSelectionTheme.of(context);
+    textSelectionTheme = textSelectionTheme.copyWith(
+      cursorColor: accent,
+      selectionColor: accent.withValues(alpha: 0.5),
+      selectionHandleColor: accent,
     );
 
     return ThemeData(
       brightness: brightness,
       hintColor: hintEnabled,
-      appBarTheme: baseAppBarTheme,
-      textTheme: TextTheme.of(context).copyWith(
-        bodySmall: TextStyle(color: textEnabled),
-        bodyMedium: TextStyle(color: textEnabled),
-        bodyLarge: TextStyle(color: textEnabled),
-      ).apply(),
-      tabBarTheme: TabBarThemeData(
-          labelColor: iconEnabled,
-          unselectedLabelColor: iconDisabled,
-          labelStyle: AppTextStyle(fontWeight: weight.halfBold),
-          unselectedLabelStyle: AppTextStyle(fontWeight: weight.halfBold),
-          overlayColor: WidgetStateColor.resolveWith((states) => accent.withValues(alpha: .2))
-      ),
-      timePickerTheme: TimePickerThemeData(
-        backgroundColor: background,
-        dialHandColor: accent,
-        helpTextStyle: AppTextStyle(color: hintEnabled),
-        dayPeriodTextStyle: AppTextStyle(),
-        hourMinuteTextStyle: TextStyle(
-          fontSize: 48,
-        ),
-        hourMinuteShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0))
-        ),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(AppCard.bigRadius))
-        ),
-      ),
+      appBarTheme: appBarTheme,
+      textTheme: textTheme,
+      tabBarTheme: tabBarTheme,
+      timePickerTheme: timePickerTheme,
 
-      textSelectionTheme: TextSelectionThemeData(
-        cursorColor: accent,
-        selectionColor: accent.withValues(alpha: 0.5),
-        selectionHandleColor: accent,
-      ),
+      textSelectionTheme: textSelectionTheme,
 
-      primaryTextTheme: TextTheme.of(context).copyWith(
-        bodySmall: TextStyle(color: textEnabled),
-        bodyMedium: TextStyle(color: textEnabled),
-        bodyLarge: TextStyle(color: textEnabled),
-      ),
+      primaryTextTheme: textTheme,
       colorScheme: ColorScheme.of(context).copyWith(
         brightness: brightness,
         primary: accent,

@@ -19,7 +19,7 @@ class KonspektSphereDetailFactorWidget extends StatelessWidget{
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      Text(detail, style: AppTextStyle(fontWeight: weight.bold)),
+      Text(detail, style: AppTextStyle(fontWeight: weightBold)),
       if(factors != null && factors!.length > 0)
         Padding(
           padding: EdgeInsets.only(top: 2.0),

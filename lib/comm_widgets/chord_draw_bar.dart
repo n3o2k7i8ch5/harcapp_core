@@ -191,7 +191,7 @@ class ChordWidget extends StatelessWidget{
                 (nearestDotPosition-1).toString(),
                 style: AppTextStyle(
                     fontSize: positionTextSize(size),
-                    fontWeight: weight.bold,
+                    fontWeight: weightBold,
                     color: color??iconEnab_(context)
                 ),
                 textAlign: TextAlign.start
@@ -238,7 +238,7 @@ class ChordWidget extends StatelessWidget{
                 chord!.name,
                 style: AppTextStyle(
                     fontSize: chordNameSize(size),
-                    fontWeight: weight.halfBold,
+                    fontWeight: weightHalfBold,
                     color: color??iconEnab_(context)
                 )
 

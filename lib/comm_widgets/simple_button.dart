@@ -111,7 +111,7 @@ class SimpleButton extends StatelessWidget{
     Color? textColor,
     Color? colorSplash,
     bool dense = false,
-    weight fontWeight = weight.halfBold,
+    FontWeight fontWeight = weightHalfBold,
     Axis direction = Axis.horizontal,
     bool animateSize = false,
     bool center = true,

@@ -32,7 +32,7 @@ class FormThumbnailTagsWidget extends StatelessWidget{
             style: AppTextStyle(
               fontSize: Dimen.textSizeNormal,
               color: hintEnab_(context),
-              fontWeight: weight.halfBold,
+              fontWeight: weightHalfBold,
             ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -95,7 +95,7 @@ class FormThumbnailWidget extends StatelessWidget{
                             style: AppTextStyle(
                               fontSize: Dimen.textSizeBig,
                               color: iconEnab_(context),
-                              fontWeight: weight.bold,
+                              fontWeight: weightBold,
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,

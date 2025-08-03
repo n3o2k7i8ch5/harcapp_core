@@ -58,7 +58,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                         KonspektSphereLevel.duchAksjomaty.displayName,
                         style: AppTextStyle(
                             color: KonspektSphereLevel.duchAksjomaty.color,
-                            fontWeight: weight.bold,
+                            fontWeight: weightBold,
                             fontSize: Dimen.textSizeBig
                         ),
                       ),
@@ -75,7 +75,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                         KonspektSphereLevel.duchWartosci.displayName,
                         style: AppTextStyle(
                             color: KonspektSphereLevel.duchWartosci.color,
-                            fontWeight: weight.bold,
+                            fontWeight: weightBold,
                             fontSize: Dimen.textSizeBig
                         ),
                       ),
@@ -92,7 +92,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                         KonspektSphereLevel.duchPostawy.displayName,
                         style: AppTextStyle(
                             color: KonspektSphereLevel.duchPostawy.color,
-                            fontWeight: weight.bold,
+                            fontWeight: weightBold,
                             fontSize: Dimen.textSizeBig
                         ),
                       ),
@@ -138,7 +138,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                         KonspektSphereLevel.duchSilaCharakteru.displayName,
                         style: AppTextStyle(
                             color: KonspektSphereLevel.duchSilaCharakteru.color,
-                            fontWeight: weight.bold,
+                            fontWeight: weightBold,
                             fontSize: Dimen.textSizeBig
                         ),
                       ),
@@ -155,7 +155,7 @@ class KonspektSphereDuchLevelsInfoDialog extends StatelessWidget{
                         KonspektSphereLevel.duchZdolnoscRefleksyjna.displayName,
                         style: AppTextStyle(
                             color: KonspektSphereLevel.duchZdolnoscRefleksyjna.color,
-                            fontWeight: weight.bold,
+                            fontWeight: weightBold,
                             fontSize: Dimen.textSizeBig
                         ),
                       ),

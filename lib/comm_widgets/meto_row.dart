@@ -22,7 +22,7 @@ class MetoRow extends StatelessWidget{
       Widget child = Text(
         meto.letter,
         style: AppTextStyle(
-            fontWeight: weight.bold,
+            fontWeight: weightBold,
             color: meto.color,
             shadow: elevated
         ),

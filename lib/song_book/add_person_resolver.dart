@@ -27,7 +27,7 @@ class AddPersonSimpleResolver extends AddPersonResolver{
   @override
   Widget build(BuildContext context, AddPerson data) => Text(
       data.name??'',
-      style: AppTextStyle(color: textColor??hintEnab_(context), fontSize: textSize??Dimen.textSizeNormal, fontWeight: weight.halfBold)
+      style: AppTextStyle(color: textColor??hintEnab_(context), fontSize: textSize??Dimen.textSizeNormal, fontWeight: weightHalfBold)
   );
 
 }

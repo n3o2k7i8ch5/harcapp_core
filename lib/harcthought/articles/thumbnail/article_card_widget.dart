@@ -78,7 +78,7 @@ class ArticleCardWidget extends StatelessWidget{
                               SizedBox(width: Dimen.defMarg),
                               Text(
                                   article.source.displayName,
-                                  style: AppTextStyle(fontWeight: weight.halfBold, color: iconEnab_(context))
+                                  style: AppTextStyle(fontWeight: weightHalfBold, color: iconEnab_(context))
                               )
                             ],
                           ),

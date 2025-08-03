@@ -114,7 +114,7 @@ class _TagWidget extends StatelessWidget{
 
       Text(
         tag.text,
-        style: const AppTextStyle(fontWeight: weight.halfBold, fontSize: Dimen.textSizeNormal),
+        style: const AppTextStyle(fontWeight: weightHalfBold, fontSize: Dimen.textSizeNormal),
         textAlign: TextAlign.center,
       ),
     ],

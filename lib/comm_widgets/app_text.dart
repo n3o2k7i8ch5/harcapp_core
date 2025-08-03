@@ -38,7 +38,7 @@ class RText extends StatelessWidget{
     style: CustTextStyle(
       fontFamily!,
       color: url?Colors.blueAccent:italic?(colorItalic??color):color,
-      fontWeight: (bold || globalBold)?weight.bold:weight.normal,
+      fontWeight: (bold || globalBold)?weightBold:weightNormal,
       fontStyle: italic?FontStyle.italic:FontStyle.normal,
       fontSize: size,
       height: height,

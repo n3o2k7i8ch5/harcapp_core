@@ -29,7 +29,7 @@ Poradnik poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Poradnik(
         style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
             fontSize: height*Poradnik.mainTitleHeightFactor,
-            fontWeight: weight.halfBold
+            fontWeight: weightHalfBold
         ),
         textAlign: TextAlign.center,
       ),
@@ -86,7 +86,7 @@ Poradnik poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich = Poradnik(
         style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
             fontSize: height*Poradnik.mainTitleHeightFactor,
-            fontWeight: weight.halfBold
+            fontWeight: weightHalfBold
         ),
         textAlign: TextAlign.center,
       ),
@@ -147,7 +147,7 @@ Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
         style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
             fontSize: height*Poradnik.mainTitleHeightFactor,
-            fontWeight: weight.halfBold
+            fontWeight: weightHalfBold
         ),
         textAlign: TextAlign.center,
       ),
@@ -196,7 +196,7 @@ Poradnik poradnik_przykladowa_strategia_rozwoju_duchowego = Poradnik(
         style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
             fontSize: height*Poradnik.mainTitleHeightFactor,
-            fontWeight: weight.halfBold
+            fontWeight: weightHalfBold
         ),
         textAlign: TextAlign.center,
       ),
@@ -245,7 +245,7 @@ Poradnik poradnik_niedziela_na_obozie = Poradnik(
         style: AppTextStyle(
             color: poradnik.titleColor??Colors.white,
             fontSize: height*Poradnik.mainTitleHeightFactor,
-            fontWeight: weight.halfBold
+            fontWeight: weightHalfBold
         ),
         textAlign: TextAlign.center,
       ),
@@ -296,7 +296,7 @@ Poradnik poradnik_wychowanie_przez_wysmianie = Poradnik(
         style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
             fontSize: height*Poradnik.mainTitleHeightFactor,
-            fontWeight: weight.halfBold
+            fontWeight: weightHalfBold
         ),
         textAlign: TextAlign.center,
       ),

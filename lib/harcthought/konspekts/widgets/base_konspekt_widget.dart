@@ -599,7 +599,7 @@ class StartTimeButton extends StatelessWidget{
           margin: EdgeInsets.zero,
           icon: MdiIcons.clockStart,
           text: startTime==null?'Dodaj czas rozpoczęcia':'Rozpoczęcie: ${timeOfDayToString(startTime!)}',
-          fontWeight: weight.normal,
+          fontWeight: weightNormal,
           onTap: () async {
             TimeOfDay? newStartTime = await showTimePicker(
               context: context,
