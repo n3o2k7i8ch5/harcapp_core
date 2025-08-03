@@ -3,15 +3,12 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
-import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
-import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
-import 'package:implicitly_animated_reorderable_list_2/transitions.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
@@ -106,12 +103,15 @@ class BasicDataWidget extends StatelessWidget{
                   child: IgnorePointer(
                     // In this case `length==0` is not the same as `isEmpty`!
                     ignoring: currItemProv.hiddenTitlesController.length==0,
-                    child: MultiTextField(
-                      allowZeroFields: true,
+                    child: AppTextFieldHint(
                       hint: 'Ukryty tytuł:',
-                      layout: LayoutMode.column,
-                      controller: currItemProv.hiddenTitlesController,
-                      addButtonBuilder: (tappable, onTap) => SimpleButton.from(
+                      multiController: currItemProv.hiddenTitlesController,
+                      onAnyChanged: onChangedHiddenTitles,
+
+                      multi: true,
+                      multiLayout: LayoutMode.column,
+                      multiAllowZeroFields: true,
+                      multiAddButtonBuilder: (tappable, onTap) => SimpleButton.from(
                           icon: MdiIcons.plus,
                           text: 'Dodaj ukryty tytuł',
                           margin: EdgeInsets.zero,
@@ -127,7 +127,6 @@ class BasicDataWidget extends StatelessWidget{
                           }:null,
                           center: false
                       ),
-                      onAnyChanged: onChangedHiddenTitles,
                     ),
                   ),
                 ),

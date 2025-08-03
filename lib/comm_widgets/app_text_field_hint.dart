@@ -28,10 +28,11 @@ class AppTextFieldHint extends StatefulWidget{
   final Color? accentColor;
 
   final bool multi;
+  final bool multiAllowZeroFields;
+  final LayoutMode multiLayout;
+  final Widget Function(bool tappable, void Function() onTap)? multiAddButtonBuilder;
   final String? multiHintTop;
-  //final List<String> initVals;
   final bool multiExpanded;
-  final IconData? multiAddIcon;
   final MultiTextFieldController? multiController;
   final TextCapitalization textCapitalization;
   final TextAlignVertical? textAlignVertical;
@@ -57,9 +58,11 @@ class AppTextFieldHint extends StatefulWidget{
     this.inputFormatters,
     this.accentColor,
     this.multi = false,
+    this.multiAllowZeroFields = false,
+    this.multiLayout = LayoutMode.row,
+    this.multiAddButtonBuilder,
     this.multiHintTop,
     this.multiExpanded = false,
-    this.multiAddIcon,
     this.multiController,
     this.textCapitalization = TextCapitalization.none,
     this.textAlignVertical,
@@ -85,7 +88,6 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   bool get multi => widget.multi;
   String get multiHintTop => widget.multiHintTop??hintTop;
   bool get multiExpanded => widget.multiExpanded;
-  IconData? get multiAddIcon => widget.multiAddIcon;
 
   TextStyle get style => widget.style??AppTextStyle(color: textEnab_(context));
   TextStyle get hintStyle => widget.hintStyle??widget.style?.copyWith(color: hintEnab_(context))??AppTextStyle(color: hintEnab_(context));
@@ -117,18 +119,17 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
     if(multi)
       textField = MultiTextField(
+        allowZeroFields: widget.multiAllowZeroFields,
         controller: multiController,
         expanded: multiExpanded,
         hint: hint,
         style: style,
         hintStyle: hintStyle,
+        layout: widget.multiLayout,
         textCapitalization: widget.textCapitalization,
         textAlignVertical: widget.textAlignVertical,
 
-        addButtonBuilder: (bool tappable, void Function() onTap) => IconButton(
-          icon: Icon(multiAddIcon, color: tappable?iconEnab_(context):iconDisab_(context)),
-          onPressed: tappable?onTap:null,
-        ),
+        addButtonBuilder: widget.multiAddButtonBuilder,
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
         enabled: widget.enabled,
