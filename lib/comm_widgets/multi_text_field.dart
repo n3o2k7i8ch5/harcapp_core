@@ -475,7 +475,7 @@ class AddButtonState extends State<AddButton>{
   Widget Function(bool tappable, void Function() onTap)? get addButtonBuilder => widget.addButtonBuilder;
   void Function() get onPressed => widget.onPressed;
 
-  bool get tappable => controller.isNotEmpty && controller.last.isEmpty;
+  bool get tappable => controller.isEmpty || controller.last.isNotEmpty;
 
   @override
   Widget build(BuildContext context){
