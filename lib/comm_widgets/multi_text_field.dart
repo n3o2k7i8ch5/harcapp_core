@@ -394,15 +394,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
             clipBehavior: Clip.none,
           )),
 
-          if(focusNode.hasFocus && enabled)
-            IconButton(
-              icon: Icon(MdiIcons.check, size: iconSize),
-              onPressed: (){
-                setState(() => selected = false);
-                focusNode.unfocus();
-              },
-            )
-          else if(removable && enabled)
+          if(removable && enabled)
             IconButton(
               icon: Icon(MdiIcons.close, size: iconSize),
               onPressed: onRemoveTap,
