@@ -108,19 +108,19 @@ class BasicDataWidget extends StatelessWidget{
                     ignoring: currItemProv.hiddenTitlesController.length==0,
                     child: MultiTextField(
                       allowZeroFields: true,
-                      hint: 'Tytuł ukryty:',
+                      hint: 'Ukryty tytuł:',
                       layout: LayoutMode.column,
                       controller: currItemProv.hiddenTitlesController,
                       addButtonBuilder: (tappable, onTap) => SimpleButton.from(
                           icon: MdiIcons.plus,
-                          text: 'Dodaj tytuł ukryty',
+                          text: 'Dodaj ukryty tytuł',
+                          margin: EdgeInsets.zero,
 
                           textColor:
                           tappable?
                           iconEnab_(context):
                           iconDisab_(context),
 
-                          margin: EdgeInsets.only(bottom: Dimen.iconMarg),
                           onTap: tappable?(){
                             List<String> hidTitles = currItemProv.addHidTitle();
                             onChangedHiddenTitles?.call(hidTitles);
