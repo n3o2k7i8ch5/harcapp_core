@@ -44,31 +44,7 @@ class KonspektStepWidget extends StatelessWidget{
               child: Row(
                 children: [
 
-                  SizedBox(
-                      height: 2*Dimen.textSizeNormal + Dimen.defMarg + 4,
-                      child: Material(
-                          borderRadius: BorderRadius.circular(AppCard.defRadius),
-                          color: hintEnab_(context),
-                          child: Container(
-                            constraints: BoxConstraints(
-                                minWidth: 2*Dimen.textSizeNormal + Dimen.defMarg + 4
-                            ),
-                            child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: Dimen.defMarg),
-                                child: Center(
-                                  child: Text(
-                                      '${groupIndex==null?'':'${groupIndex! + 1}.'}${index + 1}.',
-                                      style: AppTextStyle(
-                                          fontSize: Dimen.textSizeAppBar,
-                                          fontWeight: weightHalfBold,
-                                          color: background_(context)
-                                      )
-                                  ),
-                                )
-                            ),
-                          )
-                      )
-                  ),
+                  StepIndexWidget(index, groupIndex: groupIndex),
 
                   const SizedBox(width: Dimen.iconMarg),
 
@@ -266,6 +242,42 @@ class KonspektStepWidget extends StatelessWidget{
         )
       )
     ],
+  );
+
+}
+
+class StepIndexWidget extends StatelessWidget{
+
+  final int index;
+  final int? groupIndex;
+
+  const StepIndexWidget(this.index, {this.groupIndex, super.key});
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+      height: 2*Dimen.textSizeNormal + Dimen.defMarg + 4,
+      child: Material(
+          borderRadius: BorderRadius.circular(AppCard.defRadius),
+          color: hintEnab_(context),
+          child: Container(
+            constraints: BoxConstraints(
+                minWidth: 2*Dimen.textSizeNormal + Dimen.defMarg + 4
+            ),
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: Dimen.defMarg),
+                child: Center(
+                  child: Text(
+                      '${groupIndex==null?'':'${groupIndex! + 1}.'}${index + 1}.',
+                      style: AppTextStyle(
+                          fontSize: Dimen.textSizeAppBar,
+                          fontWeight: weightHalfBold,
+                          color: background_(context)
+                      )
+                  ),
+                )
+            ),
+          )
+      )
   );
 
 }
