@@ -125,9 +125,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         textCapitalization: widget.textCapitalization,
         textAlignVertical: widget.textAlignVertical,
 
-        addButtonBuilder: (void Function() onTap) => IconButton(
-          icon: Icon(multiAddIcon),
-          onPressed: onTap,
+        addButtonBuilder: (bool tappable, void Function() onTap) => IconButton(
+          icon: Icon(multiAddIcon, color: tappable?iconEnab_(context):iconDisab_(context)),
+          onPressed: tappable?onTap:null,
         ),
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
