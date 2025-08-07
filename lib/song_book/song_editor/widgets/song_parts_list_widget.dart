@@ -85,7 +85,7 @@ class SongPartsListWidget extends StatelessWidget{
           onReorderFinished?.call();
         },
         itemBuilder: (BuildContext context, int index) => Builder(
-          key: ValueKey(items[index].hashCode),
+          key: ValueKey("song_part_${items[index].hashCode}"),
           builder: (context) {
 
             if(index == 0 && header != null)
