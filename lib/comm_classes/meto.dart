@@ -8,6 +8,17 @@ enum Meto{
   wedro,
   kadra;
 
+  static Meto? fromName(String name){
+    switch(name.toLowerCase()){
+      case 'zuch': return Meto.zuch;
+      case 'harc': return Meto.harc;
+      case 'hs': return Meto.hs;
+      case 'wedro': return Meto.wedro;
+      case 'kadra': return Meto.kadra;
+      default: return null;
+    }
+  }
+
   String get displayName{
     switch(this){
       case Meto.zuch: return 'Zuchy';

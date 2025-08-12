@@ -27,7 +27,7 @@ class ArticleData extends ArticleIdentifier{
         required this.articleElements
       }): _link = link;
 
-  static ArticleData fromJson(String localId, ArticleSource source, Map jsonMap) {
+  static ArticleData fromJsonMap(String localId, ArticleSource source, Map jsonMap) {
 
     final String title = jsonMap[CoreArticle.paramTitle] as String;
     final List<String> tags = ((jsonMap[CoreArticle.paramTags]??[]) as List).cast<String>();
@@ -60,7 +60,7 @@ class ArticleData extends ArticleIdentifier{
 
   }
 
-  Map toJson() => {
+  Map toJsonMap() => {
     CoreArticle.paramTitle: title,
     CoreArticle.paramTags: tags,
     CoreArticle.paramAuthor: author,

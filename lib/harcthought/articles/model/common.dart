@@ -24,7 +24,7 @@ class Author{
 
   const Author(this.authCode, this.imageBytes, this.name, this.desc);
 
-  Object toJsonMap() {
+  Map<String, Object?> toJsonMap() {
 
     String? imageCode = imageBytes==null?
     null: base64Encode(imageBytes!.toList());
@@ -38,7 +38,7 @@ class Author{
     return map;
   }
 
-  static Author fromJson(String authCode, String code) {
+  static Author fromJsonMap(String authCode, String code) {
 
     Map<String, Object> map = jsonDecode(code);
 

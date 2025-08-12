@@ -126,7 +126,7 @@ abstract class BaseArticleHarcAppLoader extends BaseSourceArticleLoader{
       Response response = await defDio.get(webCorsProxy(_articleUrl(localId)));
 
       Map jsonMap = jsonDecode(response.data);
-      return ArticleData.fromJson(localId, source, jsonMap);
+      return ArticleData.fromJsonMap(localId, source, jsonMap);
     } catch(_){
       return null;
     }

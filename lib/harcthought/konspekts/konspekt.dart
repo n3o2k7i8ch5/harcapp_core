@@ -63,6 +63,17 @@ enum KonspektType{
 enum KonspektSphere{
   cialo, umysl, duch, emocje, relacje;
 
+  static KonspektSphere? fromName(String name){
+    switch(name.toLowerCase()){
+      case 'cialo': return KonspektSphere.cialo;
+      case 'umysl': return KonspektSphere.umysl;
+      case 'duch': return KonspektSphere.duch;
+      case 'emocje': return KonspektSphere.emocje;
+      case 'relacje': return KonspektSphere.relacje;
+      default: return null;
+    }
+  }
+
   String get displayName{
     switch(this){
       case cialo: return 'Ciało';
@@ -87,11 +98,22 @@ enum KonspektSphere{
 
 class KonspektSphereDetails{
 
-  final Map<KonspektSphereLevel, Map<String, Set<KonspektSphereFactor>?>>? levels;
+  final Map<KonspektSphereLevel, Map<String, Set<KonspektSphereFactor>?>> levels;
 
   const KonspektSphereDetails({
     required this.levels,
   });
+
+  Map toJsonMap(){
+    Map result = {};
+    for (KonspektSphereLevel level in levels.keys)
+      result[level.name] = levels[level]!.map(
+              (key, value) => MapEntry(key, value?.map((e) => e.name).toList())
+      );
+
+    return result;
+  }
+
 }
 
 enum KonspektSphereLevel{
@@ -341,8 +363,8 @@ class KonspektMaterial{
   final int? amountAttendantFactor;
   final String name;
   final String? comment;
-  final String? additionalPreparation;
   final String? attachmentName;
+  final String? additionalPreparation;
   final void Function(BuildContext)? onTap;
   final Widget Function(BuildContext)? bottomBuilder;
 
@@ -377,6 +399,24 @@ class KonspektMaterial{
     attachmentName: attachmentName??this.attachmentName,
     onTap: onTap??this.onTap,
     bottomBuilder: bottomBuilder??this.bottomBuilder,
+  );
+
+  Map toJsonMap() => {
+    'amount': amount,
+    'amountAttendantFactor': amountAttendantFactor,
+    'name': name,
+    'comment': comment,
+    'attachmentName': attachmentName,
+    'additionalPreparation': additionalPreparation,
+  };
+
+  static KonspektMaterial fromJsonMap(Map<String, dynamic> map) => KonspektMaterial(
+    amount: map['amount'] as int?,
+    amountAttendantFactor: map['amountAttendantFactor'] as int?,
+    name: map['name'] as String,
+    comment: map['comment'] as String?,
+    additionalPreparation: map['additionalPreparation'] as String?,
+    attachmentName: map['attachmentName'] as String?,
   );
 
 }
