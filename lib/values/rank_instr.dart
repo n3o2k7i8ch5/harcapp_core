@@ -1,37 +1,46 @@
-enum RankInstr{ pwd, phm, hm }
+enum RankInstr{
+  pwd, phm, hm;
 
-String rankInstrToParam(RankInstr rankInstr) {
-  switch(rankInstr){
-    case RankInstr.pwd: return 'Pwd';
-    case RankInstr.phm: return 'Phm';
-    case RankInstr.hm: return 'Hm';
+  String get shortName {
+    switch(this){
+      case RankInstr.pwd: return 'pwd';
+      case RankInstr.phm: return 'phm';
+      case RankInstr.hm: return 'hm';
+    }
   }
-}
 
-Map<String, RankInstr> paramToRankInstr = {
-  'Pwd': RankInstr.pwd,
-  'Phm': RankInstr.phm,
-  'Hm': RankInstr.hm,
-};
-
-String rankInstrToStr(RankInstr rankInstr) {
-  switch(rankInstr){
-    case RankInstr.pwd: return 'pwd';
-    case RankInstr.phm: return 'phm';
-    case RankInstr.hm: return 'hm';
+  static RankInstr fromShortName(String shortName) {
+    switch(shortName){
+      case 'pwd': return RankInstr.pwd;
+      case 'phm': return RankInstr.phm;
+      case 'hm': return RankInstr.hm;
+      default: throw ArgumentError('Unknown RankInstr shortName: $shortName');
+    }
   }
-}
 
-Map<String, RankInstr> strToRankInstr = {
-  'pwd': RankInstr.pwd,
-  'phm': RankInstr.phm,
-  'hm': RankInstr.hm,
-};
-
-String rankInstrToName(RankInstr rankInstr) {
-  switch(rankInstr){
-    case RankInstr.pwd: return 'Przewodnik';
-    case RankInstr.phm: return 'Podharcmistrz';
-    case RankInstr.hm: return 'Harcmistrz';
+  String get longName{
+    switch(this){
+      case RankInstr.pwd: return 'Przewodnik';
+      case RankInstr.phm: return 'Podharcmistrz';
+      case RankInstr.hm: return 'Harcmistrz';
+    }
   }
+
+  String get apiParam {
+    switch(this){
+      case RankInstr.pwd: return 'Pwd';
+      case RankInstr.phm: return 'Phm';
+      case RankInstr.hm: return 'Hm';
+    }
+  }
+
+  static RankInstr fromApiParam(String apiParam) {
+    switch(apiParam){
+      case 'Pwd': return RankInstr.pwd;
+      case 'Phm': return RankInstr.phm;
+      case 'Hm': return RankInstr.hm;
+      default: throw ArgumentError('Unknown RankInstr apiParam: $apiParam');
+    }
+  }
+
 }

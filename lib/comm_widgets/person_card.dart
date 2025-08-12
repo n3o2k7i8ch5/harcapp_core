@@ -35,14 +35,14 @@ class PersonCardSimple extends StatelessWidget{
               && rankHarc != RankHarc.zhpHOd
               && rankHarc != RankHarc.zhpHRc
               && rankHarc != RankHarc.zhpHRd
-          ) Text('${rankHarcShortName(rankHarc)} ', style: AppTextStyle(fontSize: Dimen.textSizeBig, color: textColor??textEnab_(context))),
+          ) Text('${rankHarc!.shortName} ', style: AppTextStyle(fontSize: Dimen.textSizeBig, color: textColor??textEnab_(context))),
           if(rankInstr != null) Text('$rankInstr ', style: AppTextStyle(fontSize: Dimen.textSizeBig, color: textColor??textEnab_(context))),
           Text(name, style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightBold, color: textColor??textEnab_(context))),
           if(rankHarc == RankHarc.zhpHOc
               || rankHarc == RankHarc.zhpHOd
               || rankHarc == RankHarc.zhpHRc
               || rankHarc == RankHarc.zhpHRd
-          ) Text(' ${rankHarcShortName(rankHarc)}', style: AppTextStyle(color: textColor??textEnab_(context))),
+          ) Text(' ${rankHarc!.shortName}', style: AppTextStyle(color: textColor??textEnab_(context))),
           Expanded(child: Container()),
         ],
       )
@@ -83,14 +83,14 @@ class PersonCard extends StatelessWidget{
                   && rankHarc != RankHarc.zhpHOd
                   && rankHarc != RankHarc.zhpHRc
                   && rankHarc != RankHarc.zhpHRd
-              ) Text('${rankHarcShortName(rankHarc)} ', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
-              if(rankInstr != null) Text('${rankInstrToStr(rankInstr!)}. ', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
+              ) Text('${rankHarc!.shortName} ', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
+              if(rankInstr != null) Text('${rankInstr!.shortName}. ', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
               Text(name, style: AppTextStyle(fontSize: textSize, fontWeight: weightHalfBold, color: textColor??textEnab_(context))),
               if(rankHarc == RankHarc.zhpHOc
                   || rankHarc == RankHarc.zhpHOd
                   || rankHarc == RankHarc.zhpHRc
                   || rankHarc == RankHarc.zhpHRd
-              ) Text(' ${rankHarcShortName(rankHarc)}', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
+              ) Text(' ${rankHarc!.shortName}', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
               //Expanded(child: Container()),
               if(org != null) Text(' (', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context), fontWeight: weightHalfBold)),
               if(org != null)

@@ -1,6 +1,6 @@
 enum RankHarc{
-  dhd,
   dhc,
+  dhd,
 
   zhpMlodzik, zhpOchotniczka,
   zhpWywiadowca, zhpTropicielka,
@@ -13,68 +13,155 @@ enum RankHarc{
   zhrWywiadowca, zhrTropicielka,
   zhrCwik, zhrSamarytanka,
   zhrHOc, zhrWedrowniczka,
-  zhrHRc, zhrHRd,
-}
+  zhrHRc, zhrHRd;
 
-String rankHarcToParam(RankHarc rankHarc){
-  switch(rankHarc){
-    case RankHarc.dhd: return 'Dhd';
-    case RankHarc.dhc: return 'Dhc';
-    case RankHarc.zhpMlodzik: return 'ZhpMlodzik';
-    case RankHarc.zhpOchotniczka: return 'ZhpOchotniczka';
-    case RankHarc.zhpWywiadowca: return 'ZhpWywiadowca';
-    case RankHarc.zhpTropicielka: return 'ZhpTropicielka';
-    case RankHarc.zhpOdkrywca: return 'ZhpOdkrywca';
-    case RankHarc.zhpPionierka: return 'ZhpPionierka';
+  String get shortName {
+    switch(this){
+      case RankHarc.dhc: return 'dh';
+      case RankHarc.dhd: return 'dh.';
+      case RankHarc.zhpMlodzik: return 'mł.';
+      case RankHarc.zhpOchotniczka: return 'och.';
+      case RankHarc.zhpWywiadowca: return 'wyw.';
+      case RankHarc.zhpTropicielka: return 'trop.';
+      case RankHarc.zhpOdkrywca: return 'odk.';
+      case RankHarc.zhpPionierka: return 'pion.';
+      case RankHarc.zhpCwik: return 'ćw.';
+      case RankHarc.zhpSamarytanka: return 'sam.';
+      case RankHarc.zhpHOd: return 'HO';
+      case RankHarc.zhpHOc: return 'HO';
+      case RankHarc.zhpHRd: return 'HR';
+      case RankHarc.zhpHRc: return 'HR';
 
-    case RankHarc.zhpCwik: return 'ZhpCwik';
-    case RankHarc.zhpSamarytanka: return 'ZhpSamarytanka';
-    case RankHarc.zhpHOc: return 'ZhpHOc';
-    case RankHarc.zhpHOd: return 'ZhpHOd';
-    case RankHarc.zhpHRc: return 'ZhpHRc';
-    case RankHarc.zhpHRd: return 'ZhpHRd';
-
-    case RankHarc.zhrMlodzik: return 'ZhrMlodzik';
-    case RankHarc.zhrOchotniczka: return 'ZhrOchotniczka';
-    case RankHarc.zhrWywiadowca: return 'ZhrWywiadowca';
-    case RankHarc.zhrTropicielka: return 'ZhrTropicielka';
-    case RankHarc.zhrCwik: return 'ZhrCwik';
-    case RankHarc.zhrSamarytanka: return 'ZhrSamarytanka';
-    case RankHarc.zhrHOc: return 'ZhrHOc';
-    case RankHarc.zhrWedrowniczka: return 'ZhrWedrowniczka';
-    case RankHarc.zhrHRc: return 'ZhrHRc';
-    case RankHarc.zhrHRd: return 'ZhrHRd';
+      case RankHarc.zhrMlodzik: return 'mł.';
+      case RankHarc.zhrOchotniczka: return 'och.';
+      case RankHarc.zhrWywiadowca: return 'wyw.';
+      case RankHarc.zhrTropicielka: return 'trop.';
+      case RankHarc.zhrCwik: return 'ćw.';
+      case RankHarc.zhrSamarytanka: return 'sam.';
+      case RankHarc.zhrHOc: return 'HO';
+      case RankHarc.zhrWedrowniczka: return 'wędr.';
+      case RankHarc.zhrHRc: return 'HR';
+      case RankHarc.zhrHRd: return 'HR';
+    }
   }
+
+  String longName({bool withOrg = false}){
+    switch(this){
+      case RankHarc.dhc: return 'Druh' + (withOrg?' (ZHP)':'');
+      case RankHarc.dhd: return 'Druhna' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpMlodzik: return 'Młodzik' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpOchotniczka: return 'Ochotniczka' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpWywiadowca: return 'Wywiadowca' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpTropicielka: return 'Tropicielka' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpOdkrywca: return 'Odkrywca' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpPionierka: return 'Pionierka' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpCwik: return 'Ćwik' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpSamarytanka: return 'Samarytanka' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpHOd: return 'Harcerka Orla' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpHOc: return 'Harcerz Orli' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpHRd: return 'Harcerka Rzeczypospolitej' + (withOrg?' (ZHP)':'');
+      case RankHarc.zhpHRc: return 'Harcerz Rzeczypospolitej' + (withOrg?' (ZHP)':'');
+
+      case RankHarc.zhrMlodzik: return 'Młodzik' + (withOrg?' (ZHR)':'');
+      case RankHarc.zhrOchotniczka: return 'Ochotniczka' + (withOrg?' (ZHR)':'');
+      case RankHarc.zhrWywiadowca: return 'Wywiadowca' + (withOrg?' (ZHR)':'');
+      case RankHarc.zhrTropicielka: return 'Tropicielka' + (withOrg?' (ZHR)':'');
+      case RankHarc.zhrCwik: return 'Ćwik' + (withOrg?' (ZHR)':'');
+      case RankHarc.zhrSamarytanka: return 'Samarytanka' + (withOrg?' (ZHR)':'');
+      case RankHarc.zhrHOc: return 'Harcerz Orli' + (withOrg?' (ZHR)':'');
+      case RankHarc.zhrWedrowniczka: return 'Wędrowniczka' + (withOrg?' (ZHR)':'');
+      case RankHarc.zhrHRc: return 'Harcerz Rzeczypospolitej' + (withOrg?' (ZHR)':'');
+      case RankHarc.zhrHRd: return 'Harcerka Rzeczypospolitej' + (withOrg?' (ZHR)':'');
+    }
+  }
+
+  String get apiParam{
+    switch(this){
+      case RankHarc.dhd: return 'Dhd';
+      case RankHarc.dhc: return 'Dhc';
+      case RankHarc.zhpMlodzik: return 'ZhpMlodzik';
+      case RankHarc.zhpOchotniczka: return 'ZhpOchotniczka';
+      case RankHarc.zhpWywiadowca: return 'ZhpWywiadowca';
+      case RankHarc.zhpTropicielka: return 'ZhpTropicielka';
+      case RankHarc.zhpOdkrywca: return 'ZhpOdkrywca';
+      case RankHarc.zhpPionierka: return 'ZhpPionierka';
+
+      case RankHarc.zhpCwik: return 'ZhpCwik';
+      case RankHarc.zhpSamarytanka: return 'ZhpSamarytanka';
+      case RankHarc.zhpHOc: return 'ZhpHOc';
+      case RankHarc.zhpHOd: return 'ZhpHOd';
+      case RankHarc.zhpHRc: return 'ZhpHRc';
+      case RankHarc.zhpHRd: return 'ZhpHRd';
+
+      case RankHarc.zhrMlodzik: return 'ZhrMlodzik';
+      case RankHarc.zhrOchotniczka: return 'ZhrOchotniczka';
+      case RankHarc.zhrWywiadowca: return 'ZhrWywiadowca';
+      case RankHarc.zhrTropicielka: return 'ZhrTropicielka';
+      case RankHarc.zhrCwik: return 'ZhrCwik';
+      case RankHarc.zhrSamarytanka: return 'ZhrSamarytanka';
+      case RankHarc.zhrHOc: return 'ZhrHOc';
+      case RankHarc.zhrWedrowniczka: return 'ZhrWedrowniczka';
+      case RankHarc.zhrHRc: return 'ZhrHRc';
+      case RankHarc.zhrHRd: return 'ZhrHRd';
+    }
+  }
+
+  static RankHarc? fromApiParam(String param) {
+    switch (param) {
+      case 'Dhd':
+        return RankHarc.dhd;
+      case 'Dhc':
+        return RankHarc.dhc;
+      case 'ZhpMlodzik':
+        return RankHarc.zhpMlodzik;
+      case 'ZhpOchotniczka':
+        return RankHarc.zhpOchotniczka;
+      case 'ZhpWywiadowca':
+        return RankHarc.zhpWywiadowca;
+      case 'ZhpTropicielka':
+        return RankHarc.zhpTropicielka;
+      case 'ZhpOdkrywca':
+        return RankHarc.zhpOdkrywca;
+      case 'ZhpPionierka':
+        return RankHarc.zhpPionierka;
+      case 'ZhpCwik':
+        return RankHarc.zhpCwik;
+      case 'ZhpSamarytanka':
+        return RankHarc.zhpSamarytanka;
+      case 'ZhpHOc':
+        return RankHarc.zhpHOc;
+      case 'ZhpHOd':
+        return RankHarc.zhpHOd;
+      case 'ZhpHRc':
+        return RankHarc.zhpHRc;
+      case 'ZhpHRd':
+        return RankHarc.zhpHRd;
+      case 'ZhrMlodzik':
+        return RankHarc.zhrMlodzik;
+      case 'ZhrOchotniczka':
+        return RankHarc.zhrOchotniczka;
+      case 'ZhrWywiadowca':
+        return RankHarc.zhrWywiadowca;
+      case 'ZhrTropicielka':
+        return RankHarc.zhrTropicielka;
+      case 'ZhrCwik':
+        return RankHarc.zhrCwik;
+      case 'ZhrSamarytanka':
+        return RankHarc.zhrSamarytanka;
+      case 'ZhrHOc':
+        return RankHarc.zhrHOc;
+      case 'ZhrWedrowniczka':
+        return RankHarc.zhrWedrowniczka;
+      case 'ZhrHRc':
+        return RankHarc.zhrHRc;
+      case 'ZhrHRd':
+        return RankHarc.zhrHRd;
+      default:
+        return null;
+    }
+  }
+
 }
-
-Map<String, RankHarc> paramToRankHarc = {
-  'Dhd': RankHarc.dhd,
-  'Dhc': RankHarc.dhc,
-  'ZhpMlodzik': RankHarc.zhpMlodzik,
-  'ZhpOchotniczka': RankHarc.zhpOchotniczka,
-  'ZhpWywiadowca': RankHarc.zhpWywiadowca,
-  'ZhpTropicielka': RankHarc.zhpTropicielka,
-  'ZhpOdkrywca': RankHarc.zhpOdkrywca,
-  'ZhpPionierka': RankHarc.zhpPionierka,
-
-  'ZhpCwik': RankHarc.zhpCwik,
-  'ZhpSamarytanka': RankHarc.zhpSamarytanka,
-  'ZhpHOc': RankHarc.zhpHOc,
-  'ZhpHOd': RankHarc.zhpHOd,
-  'ZhpHRc': RankHarc.zhpHRc,
-  'ZhpHRd': RankHarc.zhpHRd,
-
-  'ZhrMlodzik': RankHarc.zhrMlodzik,
-  'ZhrOchotniczka': RankHarc.zhrOchotniczka,
-  'ZhrWywiadowca': RankHarc.zhrWywiadowca,
-  'ZhrTropicielka': RankHarc.zhrTropicielka,
-  'ZhrCwik': RankHarc.zhrCwik,
-  'ZhrSamarytanka': RankHarc.zhrSamarytanka,
-  'ZhrHOc': RankHarc.zhrHOc,
-  'ZhrWedrowniczka': RankHarc.zhrWedrowniczka,
-  'ZhrHRc': RankHarc.zhrHRc,
-  'ZhrHRd': RankHarc.zhrHRd,
-};
 
 String rankHarcToStr(RankHarc rankHarc){
   switch(rankHarc){
@@ -135,121 +222,3 @@ Map<String, RankHarc> strToRankHarc = {
   'zhrHRc': RankHarc.zhrHRc,
   'zhrHRd': RankHarc.zhrHRd,
 };
-
-const String rankZhpDhD = 'Druhna';
-const String rankZhpDhDShort = 'dh.';
-const String rankZhpDhC = 'Druh';
-const String rankZhpDhCShort = 'dh';
-
-const String rankZhpMlodzik = 'Młodzik';
-const String rankZhpMlodzikShort = 'mł.';
-const String rankZhpOchotniczka = 'Ochotniczka';
-const String rankZhpOchotniczkaShort = 'och.';
-
-const String rankZhpWywiadowca = 'Wywiadowca';
-const String rankZhpWywiadowcaShort = 'wyw.';
-const String rankZhpTropicielka = 'Tropicielka';
-const String rankZhpTropicielkaShort = 'trop.';
-
-const String rankZhpOdkrywca = 'Odkrywca';
-const String rankZhpOdkrywcaShort = 'odk.';
-const String rankZhpPionierka = 'Pionierka';
-const String rankZhpPionierkaShort = 'pion.';
-
-const String rankZhpCwik = 'Ćwik';
-const String rankZhpCwikShort = 'ćw.';
-const String rankZhpSamarytanka = 'Samarytanka';
-const String rankZhpSamarytankaShort = 'sam.';
-
-const String rankZhpHoC = 'Harcerz Orli';
-const String rankZhpHoD = 'Harcerka Orla';
-const String rankZhpHoShort = 'HO';
-
-const String rankZhpHrC = 'Harcerz Rzeczypospolitej';
-const String rankZhpHrD = 'Harcerka Rzeczypospolitej';
-const String rankZhpHrShort = 'HR';
-
-const String rankZhrMlodzik = 'Młodzik';
-const String rankZhrMlodzikShort = 'mł.';
-const String rankZhrOchotniczka = 'Ochotniczka';
-const String rankZhrOchotniczkaShort = 'och.';
-
-const String rankZhrWywiadowca = 'Wywiadowca';
-const String rankZhrWywiadowcaShort = 'wyw.';
-const String rankZhrTropicielka = 'Tropicielka';
-const String rankZhrTropicielkaShort = 'trop.';
-
-const String rankZhrCwik = 'Ćwik';
-const String stopZhrCwikShort = 'ćw.';
-const String rankZhrSamarytanka = 'Samarytanka';
-const String rankZhrSamarytankaShort = 'sam.';
-
-const String rankZhrHoC = 'Harcerz Orli';
-const String rankZhrHoShort = 'HO';
-const String rankZhrWedrowniczka = 'Wędrowniczka';
-const String rankZhrWedrowniczkaShort = 'wędr.';
-
-const String rankZhrHrC = 'Harcerz Rzeczypospolitej';
-const String rankZhrHrD = 'Harcerka Rzeczypospolitej';
-const String rankZhrHrShort = 'HR';
-
-String rankHarcFullName(RankHarc stop, {bool withOrg = false}){
-  switch(stop){
-    case RankHarc.dhd: return rankZhpDhD + (withOrg?' (ZHP)':'');
-    case RankHarc.dhc: return rankZhpDhC + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpMlodzik: return rankZhpMlodzik + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpOchotniczka: return rankZhpOchotniczka + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpWywiadowca: return rankZhpWywiadowca + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpTropicielka: return rankZhpTropicielka + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpOdkrywca: return rankZhpOdkrywca + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpPionierka: return rankZhpPionierka + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpCwik: return rankZhpCwik + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpSamarytanka: return rankZhpSamarytanka + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpHOd: return rankZhpHoD + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpHOc: return rankZhpHoC + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpHRd: return rankZhpHrD + (withOrg?' (ZHP)':'');
-    case RankHarc.zhpHRc: return rankZhpHrC + (withOrg?' (ZHP)':'');
-
-    case RankHarc.zhrMlodzik: return rankZhrMlodzik + (withOrg?' (ZHR)':'');
-    case RankHarc.zhrOchotniczka: return rankZhrOchotniczka + (withOrg?' (ZHR)':'');
-    case RankHarc.zhrWywiadowca: return rankZhrWywiadowca + (withOrg?' (ZHR)':'');
-    case RankHarc.zhrTropicielka: return rankZhrTropicielka + (withOrg?' (ZHR)':'');
-    case RankHarc.zhrCwik: return rankZhrCwik + (withOrg?' (ZHR)':'');
-    case RankHarc.zhrSamarytanka: return rankZhrSamarytanka + (withOrg?' (ZHR)':'');
-    case RankHarc.zhrHOc: return rankZhrHoC + (withOrg?' (ZHR)':'');
-    case RankHarc.zhrWedrowniczka: return rankZhrWedrowniczka + (withOrg?' (ZHR)':'');
-    case RankHarc.zhrHRc: return rankZhrHrC + (withOrg?' (ZHR)':'');
-    case RankHarc.zhrHRd: return rankZhrHrD + (withOrg?' (ZHR)':'');
-  }
-}
-
-String rankHarcShortName(RankHarc? stop){
-  switch(stop){
-    case RankHarc.dhd: return rankZhpDhDShort;
-    case RankHarc.dhc: return rankZhpDhCShort;
-    case RankHarc.zhpMlodzik: return rankZhpMlodzikShort;
-    case RankHarc.zhpOchotniczka: return rankZhpOchotniczkaShort;
-    case RankHarc.zhpWywiadowca: return rankZhpWywiadowcaShort;
-    case RankHarc.zhpTropicielka: return rankZhpTropicielkaShort;
-    case RankHarc.zhpOdkrywca: return rankZhpOdkrywcaShort;
-    case RankHarc.zhpPionierka: return rankZhpPionierkaShort;
-    case RankHarc.zhpCwik: return rankZhpCwikShort;
-    case RankHarc.zhpSamarytanka: return rankZhpSamarytankaShort;
-    case RankHarc.zhpHOd: return rankZhpHoShort;
-    case RankHarc.zhpHOc: return rankZhpHoShort;
-    case RankHarc.zhpHRd: return rankZhpHrShort;
-    case RankHarc.zhpHRc: return rankZhpHrShort;
-
-    case RankHarc.zhrMlodzik: return rankZhrMlodzikShort;
-    case RankHarc.zhrOchotniczka: return rankZhrOchotniczkaShort;
-    case RankHarc.zhrWywiadowca: return rankZhrWywiadowcaShort;
-    case RankHarc.zhrTropicielka: return rankZhrTropicielkaShort;
-    case RankHarc.zhrCwik: return stopZhrCwikShort;
-    case RankHarc.zhrSamarytanka: return rankZhrSamarytankaShort;
-    case RankHarc.zhrHOc: return rankZhrHoShort;
-    case RankHarc.zhrWedrowniczka: return rankZhrWedrowniczkaShort;
-    case RankHarc.zhrHRc: return rankZhrHrShort;
-    case RankHarc.zhrHRd: return rankZhrHrShort;
-    case null: return '';
-  }
-}
