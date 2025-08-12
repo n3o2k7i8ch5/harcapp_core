@@ -20,6 +20,23 @@ enum FileFormat{
     }
   }
 
+  static FileFormat? fromName(String name){
+    switch(name.toLowerCase()){
+      case 'pdf': return FileFormat.pdf;
+      case 'docx': return FileFormat.docx;
+      case 'png': return FileFormat.png;
+      case 'webp': return FileFormat.webp;
+      case 'svg': return FileFormat.svg;
+      case 'url': return FileFormat.url;
+      case 'urlpdf': return FileFormat.urlPdf;
+      case 'urldocx': return FileFormat.urlDocx;
+      case 'urlpng': return FileFormat.urlPng;
+      case 'urlwebp': return FileFormat.urlWebp;
+      case 'urlsvg': return FileFormat.urlSvg;
+      default: return null;
+    }
+  }
+
   String get displayName{
     switch(this){
       case pdf: return 'PDF';

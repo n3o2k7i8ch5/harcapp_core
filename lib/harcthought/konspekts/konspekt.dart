@@ -3,6 +3,7 @@ import 'package:harcapp_core/color_pack_app.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
+import 'package:harcapp_core/comm_classes/missing_decode_param_error.dart';
 import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/open_image_dialog.dart';
@@ -233,6 +234,15 @@ enum KonspektSphereFactor{
 enum KonspektAttachmentPrintColor{
   monochrome, color, any;
 
+  static KonspektAttachmentPrintColor? fromName(String name){
+    switch(name.toLowerCase()){
+      case 'monochrome': return KonspektAttachmentPrintColor.monochrome;
+      case 'color': return KonspektAttachmentPrintColor.color;
+      case 'any': return KonspektAttachmentPrintColor.any;
+      default: return null;
+    }
+  }
+
   String get displayName{
     switch(this){
       case monochrome: return 'Czarno-biało';
@@ -245,6 +255,15 @@ enum KonspektAttachmentPrintColor{
 
 enum KonspektAttachmentPrintSide{
   single, double, any;
+
+  static KonspektAttachmentPrintSide? fromName(String name){
+    switch(name.toLowerCase()){
+      case 'single': return KonspektAttachmentPrintSide.single;
+      case 'double': return KonspektAttachmentPrintSide.double;
+      case 'any': return KonspektAttachmentPrintSide.any;
+      default: return null;
+    }
+  }
 
   String get displayName{
     switch(this){
@@ -265,7 +284,17 @@ class KonspektAttachmentPrint{
     required this.color,
     required this.side,
   });
-  
+
+  Map toJsonMap() => {
+    'color': color.name,
+    'side': side.name,
+  };
+
+  static KonspektAttachmentPrint? fromJsonMap(Map<String, dynamic> map) => KonspektAttachmentPrint(
+    color: KonspektAttachmentPrintColor.fromName(map['color'] as String)??(throw MissingDecodeParamError('color')),
+    side: KonspektAttachmentPrintSide.fromName(map['side'] as String)??(throw MissingDecodeParamError('side')),
+  );
+
 }
 
 class KonspektAttachment{
@@ -354,6 +383,20 @@ class KonspektAttachment{
       if(!result) showAppToast(context, text: 'Nie udało się otworzyć pliku');
       return result;
     }
+
+    Map toJsonMap() => {
+      'name': name,
+      'title': title,
+      'assets': assets.map((key, value) => MapEntry(key.name, value)),
+      'print': print?.toJsonMap()
+    };
+
+    static KonspektAttachment fromJsonMap(Map<String, dynamic> map) => KonspektAttachment(
+      name: map['name'] as String,
+      title: map['title'] as String,
+      assets: (map['assets'] as Map<String, dynamic>).map((key, value) => MapEntry(FileFormat.fromName(key)??(throw MissingDecodeParamError('assets.$key')), value as String)),
+      print: map['print'] == null ? null : KonspektAttachmentPrint.fromJsonMap(map['print'] as Map<String, dynamic>),
+    );
 
 }
 
