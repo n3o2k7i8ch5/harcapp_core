@@ -3795,7 +3795,7 @@ class Person{
     this.email = const []
   });
 
-  void toJsonMap() =>
+  Map toJsonMap() =>
       {
         'name': name,
         'rankHarc': rankHarc?.apiParam,
