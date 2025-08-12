@@ -9,12 +9,12 @@ enum RankInstr{
     }
   }
 
-  static RankInstr fromShortName(String shortName) {
+  static RankInstr? fromShortName(String shortName) {
     switch(shortName){
       case 'pwd': return RankInstr.pwd;
       case 'phm': return RankInstr.phm;
       case 'hm': return RankInstr.hm;
-      default: throw ArgumentError('Unknown RankInstr shortName: $shortName');
+      default: return null;
     }
   }
 
@@ -34,12 +34,12 @@ enum RankInstr{
     }
   }
 
-  static RankInstr fromApiParam(String apiParam) {
+  static RankInstr? fromApiParam(String apiParam) {
     switch(apiParam){
       case 'Pwd': return RankInstr.pwd;
       case 'Phm': return RankInstr.phm;
       case 'Hm': return RankInstr.hm;
-      default: throw ArgumentError('Unknown RankInstr apiParam: $apiParam');
+      default: return null;
     }
   }
 
