@@ -77,26 +77,26 @@ abstract class ColorPack{
     AppBarTheme appBarTheme = AppBarTheme.of(context);
     appBarTheme = appBarTheme.copyWith(
         backgroundColor: appBar,
-        titleTextStyle: appBarTheme.titleTextStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_, fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
-        toolbarTextStyle: appBarTheme.toolbarTextStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_, fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
-        actionsIconTheme: appBarTheme.actionsIconTheme?.copyWith(color: appBarTextEnabled),
-        iconTheme: appBarTheme.iconTheme?.copyWith(color: appBarTextEnabled),
+        titleTextStyle: (appBarTheme.titleTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
+        toolbarTextStyle: (appBarTheme.toolbarTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
+        actionsIconTheme: (appBarTheme.actionsIconTheme??IconThemeData()).copyWith(color: appBarTextEnabled),
+        iconTheme: (appBarTheme.iconTheme??IconThemeData()).copyWith(color: appBarTextEnabled),
         surfaceTintColor: null
     );
 
     TextTheme textTheme = TextTheme.of(context);
     textTheme = textTheme.copyWith(
-      bodySmall: textTheme.bodySmall?.copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
-      bodyMedium: textTheme.bodyMedium?.copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
-      bodyLarge: textTheme.bodyLarge?.copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+      bodySmall: (textTheme.bodySmall??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+      bodyMedium: (textTheme.bodyMedium??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+      bodyLarge: (textTheme.bodyLarge??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
     ).apply();
 
     TabBarThemeData tabBarTheme = TabBarTheme.of(context);
     tabBarTheme = tabBarTheme.copyWith(
         labelColor: iconEnabled,
         unselectedLabelColor: iconDisabled,
-        labelStyle: tabBarTheme.labelStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_ ,fontWeight: weightHalfBold),
-        unselectedLabelStyle: tabBarTheme.unselectedLabelStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_, fontWeight: weightHalfBold),
+        labelStyle: (tabBarTheme.labelStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_ ,fontWeight: weightHalfBold),
+        unselectedLabelStyle: (tabBarTheme.unselectedLabelStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, fontWeight: weightHalfBold),
         overlayColor: WidgetStateColor.resolveWith((states) => accent.withValues(alpha: .2))
     );
 
@@ -104,9 +104,9 @@ abstract class ColorPack{
     timePickerTheme = TimePickerThemeData(
       backgroundColor: background,
       dialHandColor: accent,
-      helpTextStyle: timePickerTheme.helpTextStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
-      dayPeriodTextStyle: timePickerTheme.dayPeriodTextStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_),
-      hourMinuteTextStyle: timePickerTheme.hourMinuteTextStyle?.copyWith(fontFamily: AppTextStyle.fontFamily_, fontSize: 48.0),
+      helpTextStyle: (timePickerTheme.helpTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
+      dayPeriodTextStyle: (timePickerTheme.dayPeriodTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_),
+      hourMinuteTextStyle: (timePickerTheme.hourMinuteTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, fontSize: 48.0),
       hourMinuteShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppCard.bigRadius)),
     );
