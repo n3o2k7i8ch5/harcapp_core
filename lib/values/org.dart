@@ -62,9 +62,9 @@ enum Org{
         colorDarkAccent: Colors.orange,
       );
       case Org.zhrChlop: return OrgColors(
-        colorMain: Colors.lime[900]!,
+        colorMain: Colors.red[900]!,
         colorAccent: Colors.green[900]!,
-        colorDarkMain: Colors.lime,
+        colorDarkMain: Colors.red,
         colorDarkAccent: Colors.green[600]!,
       );
       case Org.zhrZuchDziew: return OrgColors(
@@ -74,10 +74,10 @@ enum Org{
         colorDarkAccent: Colors.pink,
       );
       case Org.zhrDziew: return OrgColors(
-        colorMain: Colors.green[700]!,
-        colorAccent: Colors.indigo[700]!,
-        colorDarkMain: Colors.green,
-        colorDarkAccent: Colors.indigo[400]!,
+        colorMain: Colors.indigo[700]!,
+        colorAccent: Colors.green[700]!,
+        colorDarkMain: Colors.indigo[400]!,
+        colorDarkAccent: Colors.green,
       );
       case Org.fse: return OrgColors(
         colorMain: Colors.orange[800]!,
@@ -208,10 +208,10 @@ class OrgColors{
     Color colorAccent = accent(isDark);
 
     return Color.fromARGB(
-        255,
-        256*(colorMain.r + colorAccent.r)~/2,
-        256*(colorMain.g + colorAccent.g)~/2,
-        256*(colorMain.b + colorAccent.b)~/2
+      255,
+      256*(colorMain.r + colorAccent.r)~/2,
+      256*(colorMain.g + colorAccent.g)~/2,
+      256*(colorMain.b + colorAccent.b)~/2
     );
   }
 
@@ -224,10 +224,10 @@ class OrgColors{
     Color? colorDarkMain,
     Color? colorDarkAccent
   }) => OrgColors(
-      colorMain: colorMain??this.colorMain,
-      colorAccent: colorAccent??this.colorAccent,
-      colorDarkMain: colorDarkMain??this.colorDarkMain,
-      colorDarkAccent: colorDarkAccent??this.colorDarkAccent
+    colorMain: colorMain??this.colorMain,
+    colorAccent: colorAccent??this.colorAccent,
+    colorDarkMain: colorDarkMain??this.colorDarkMain,
+    colorDarkAccent: colorDarkAccent??this.colorDarkAccent
   );
 
 }
