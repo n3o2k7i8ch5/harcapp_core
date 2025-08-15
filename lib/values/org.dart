@@ -44,9 +44,9 @@ enum Org{
         colorDarkAccent: Colors.red,
       );
       case Org.zhpZuch: return OrgColors(
-        colorMain: Colors.orange[800]!,
+        colorMain: Colors.orange[900]!,
         colorAccent: Colors.yellow[800]!,
-        colorDarkMain: Colors.orange,
+        colorDarkMain: Colors.orange[700]!,
         colorDarkAccent: Colors.yellow[600]!,
       );
       case Org.zhr: return OrgColors(
@@ -75,9 +75,9 @@ enum Org{
       );
       case Org.zhrDziew: return OrgColors(
         colorMain: Colors.purple[300]!,
-        colorAccent: Colors.teal[600]!,
+        colorAccent: Colors.teal[400]!,
         colorDarkMain: Colors.purple[200]!,
-        colorDarkAccent: Colors.teal[400]!,
+        colorDarkAccent: Colors.teal[300]!,
       );
       case Org.fse: return OrgColors(
         colorMain: Colors.orange[800]!,
