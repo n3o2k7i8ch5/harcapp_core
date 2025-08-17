@@ -82,7 +82,7 @@ class CurrentItemProvider extends ChangeNotifier{
   }
 
   void setLclId(String value, {bool notify = true}){
-    _song.lclId = value;
+    _song.id = value;
     if(notify) notifyListeners();
   }
 

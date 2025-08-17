@@ -13,7 +13,7 @@ import 'widgets/song_part_editor_template/errors.dart';
 
 class SongRaw extends SongCore{
 
-  String lclId;
+  String id;
   String title;
   List<String> hidTitles;
   List<String> authors;
@@ -32,8 +32,8 @@ class SongRaw extends SongCore{
 
   bool get isOwn => !isOfficial && !isConfid;
 
-  bool get isConfid => lclId.length >= 4 && lclId.substring(0, 4) == 'oc!_';
-  bool get isOfficial => lclId.length >= 3 && lclId.substring(0, 3) == 'o!_';
+  bool get isConfid => id.length >= 4 && id.substring(0, 4) == 'oc!_';
+  bool get isOfficial => id.length >= 3 && id.substring(0, 3) == 'o!_';
 
   List<String> tags;
 
@@ -45,7 +45,7 @@ class SongRaw extends SongCore{
   bool get hasChords => chords.replaceAll('\n', '').replaceAll(' ', '').length!=0;
 
   void set(SongRaw song){
-    this.lclId = song.lclId;
+    this.id = song.id;
     this.title = song.title;
     this.hidTitles = song.hidTitles;
     this.authors = song.authors;
@@ -65,7 +65,7 @@ class SongRaw extends SongCore{
   }
 
   SongRaw({
-    required this.lclId,
+    required this.id,
     required this.title,
     required this.hidTitles,
     required this.authors,
@@ -90,7 +90,7 @@ class SongRaw extends SongCore{
   static String get newLocalId => const Uuid().v4();
 
   static SongRaw empty({String? lclId}) => SongRaw(
-    lclId: lclId??newLocalId,
+    id: lclId??newLocalId,
     title: '',
     hidTitles: [],
     authors: [],
@@ -169,7 +169,7 @@ class SongRaw extends SongCore{
     }
 
     return SongRaw(
-      lclId: lclId,
+      id: lclId,
       title: title,
       hidTitles: hidTitles,
       authors: authors,
@@ -192,7 +192,7 @@ class SongRaw extends SongCore{
   }
 
   SongRaw copy({bool withLclId = true}) => SongRaw(
-    lclId: withLclId?lclId:newLocalId,
+    id: withLclId?id:newLocalId,
     title: title,
     hidTitles: hidTitles,
     authors: authors,
@@ -312,7 +312,7 @@ class SongRaw extends SongCore{
 
     map[SongCore.PARAM_PARTS] = parts;
 
-    if(withLclId) return {lclId : map};
+    if(withLclId) return {id : map};
     else return map;
   }
 

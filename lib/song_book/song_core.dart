@@ -48,7 +48,7 @@ abstract class SongCore{
   static const String PARAM_REFREN = 'refren';
   static const String PARAM_PARTS = 'parts';
 
-  String get lclId;
+  String get id;
   String get title;
   List<String> get hidTitles;
   List<String> get authors;
