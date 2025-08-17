@@ -139,38 +139,39 @@ enum Org{
     }
   }
 
-  int get asInt{
-    switch(this){
-      case Org.zhp: return 0;
-      case Org.zhpZuch: return 1;  // not used, only for ZHP zuch ranks.
-      case Org.zhr: return 2;
-      case Org.zhrZuchChlop: return 3;  // not used, only for ZHR zuch ranks.
-      case Org.zhrChlop: return 4;
-      case Org.zhrZuchDziew: return 5; // not used, only for ZHR zuch ranks.
-      case Org.zhrDziew: return 6;
-      case Org.fse: return 7;
-      case Org.sh: return 8;
-      case Org.zhpNL: return 9;
-      case Org.hrp: return 10;
-    }
-  }
-
-  static Org? fromInt(int value){
-    switch(value){
-      case 0: return Org.zhp;
-      case 1: return Org.zhpZuch;  // not used, only for ZHP zuch ranks.
-      case 2: return Org.zhr;
-      case 3: return Org.zhrZuchChlop; // not used, only for ZHR zuch ranks.
-      case 4: return Org.zhrChlop;
-      case 5: return Org.zhrZuchDziew; // not used, only for ZHR zuch ranks.
-      case 6: return Org.zhrDziew;
-      case 7: return Org.fse;
-      case 8: return Org.sh;
-      case 9: return Org.zhpNL;
-      case 10: return Org.hrp;
-      default: return null;
-    }
-  }
+  // If nothing breaks, just remove this. Use as Param instead.
+  // int get asInt{
+  //   switch(this){
+  //     case Org.zhp: return 0;
+  //     case Org.zhpZuch: return 1;  // not used, only for ZHP zuch ranks.
+  //     case Org.zhr: return 2;
+  //     case Org.zhrZuchChlop: return 3;  // not used, only for ZHR zuch ranks.
+  //     case Org.zhrChlop: return 4;
+  //     case Org.zhrZuchDziew: return 5; // not used, only for ZHR zuch ranks.
+  //     case Org.zhrDziew: return 6;
+  //     case Org.fse: return 7;
+  //     case Org.sh: return 8;
+  //     case Org.zhpNL: return 9;
+  //     case Org.hrp: return 10;
+  //   }
+  // }
+  //
+  // static Org? fromInt(int value){
+  //   switch(value){
+  //     case 0: return Org.zhp;
+  //     case 1: return Org.zhpZuch;  // not used, only for ZHP zuch ranks.
+  //     case 2: return Org.zhr;
+  //     case 3: return Org.zhrZuchChlop; // not used, only for ZHR zuch ranks.
+  //     case 4: return Org.zhrChlop;
+  //     case 5: return Org.zhrZuchDziew; // not used, only for ZHR zuch ranks.
+  //     case 6: return Org.zhrDziew;
+  //     case 7: return Org.fse;
+  //     case 8: return Org.sh;
+  //     case 9: return Org.zhpNL;
+  //     case 10: return Org.hrp;
+  //     default: return null;
+  //   }
+  // }
 
 }
 
