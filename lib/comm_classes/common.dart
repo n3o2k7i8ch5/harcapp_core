@@ -128,7 +128,7 @@ String remSpecChars(String string){
       .replaceAll('"', '');
 }
 
-List<String> remPolCharsList(List<String> strings){
+List<String> remPolCharsList(Iterable<String> strings){
   List<String> result = [];
   for(String string in strings)
     result.add(remPolChars(string));
@@ -136,7 +136,7 @@ List<String> remPolCharsList(List<String> strings){
   return result;
 }
 
-List<String> remSpecCharsList(List<String> strings){
+List<String> remSpecCharsList(Iterable<String> strings){
   List<String> result = [];
   for(String string in strings)
     result.add(remSpecChars(string));
