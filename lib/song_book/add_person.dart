@@ -10,7 +10,7 @@ class AddPerson{
 
   const AddPerson({this.name, this.emailRef, this.userKeyRef});
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJsonMap() => {
     PARAM_NAME: name==null || name!.trim().isEmpty?null:name!.trim(),
     PARAM_EMAIL_REF: emailRef==null || emailRef!.trim().isEmpty?null:emailRef!.trim().toLowerCase(),
     PARAM_USER_KEY_REF: userKeyRef==null || userKeyRef!.trim().isEmpty?null:userKeyRef!.trim(),
