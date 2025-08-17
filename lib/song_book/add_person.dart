@@ -10,13 +10,13 @@ class AddPerson{
 
   const AddPerson({this.name, this.emailRef, this.userKeyRef});
 
-  Map<String, dynamic> toJsonMap() => {
+  Map<String, dynamic> toApiJsonMap() => {
     PARAM_NAME: name==null || name!.trim().isEmpty?null:name!.trim(),
     PARAM_EMAIL_REF: emailRef==null || emailRef!.trim().isEmpty?null:emailRef!.trim().toLowerCase(),
     PARAM_USER_KEY_REF: userKeyRef==null || userKeyRef!.trim().isEmpty?null:userKeyRef!.trim(),
   };
 
-  static AddPerson fromRespMap(Map<String, dynamic> respMap) => AddPerson(
+  static AddPerson fromApiRespMap(Map<String, dynamic> respMap) => AddPerson(
     name: respMap[PARAM_NAME],
     emailRef: respMap[PARAM_EMAIL_REF],
     userKeyRef: respMap[PARAM_USER_KEY_REF],

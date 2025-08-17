@@ -3795,7 +3795,7 @@ class Person{
     this.email = const []
   });
 
-  Map toJsonMap() =>
+  Map toApiJsonMap() =>
       {
         'name': name,
         'rankHarc': rankHarc?.apiParam,
@@ -3807,7 +3807,7 @@ class Person{
         'email': email.isEmpty ? null : email
       };
 
-  static Person fromJsonMap(Map<String, dynamic> json) => Person(
+  static Person fromApiJsonMap(Map<String, dynamic> json) => Person(
     name: json['name'] as String,
     rankHarc: json['rankHarc'] == null ? null : RankHarc.fromApiParam(json['rankHarc'] as String),
     rankInstr: json['rankInstr'] == null? null : RankInstr.fromApiParam(json['rankInstr'] as String),

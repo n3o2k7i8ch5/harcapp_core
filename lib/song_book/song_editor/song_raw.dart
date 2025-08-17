@@ -108,7 +108,7 @@ class SongRaw extends SongCore{
   );
 
   static SongRaw parse(String lclId, String code) =>
-      fromRespMap(lclId, jsonDecode(code)[lclId]);
+      fromApiRespMap(lclId, jsonDecode(code)[lclId]);
 
   static SongRaw fromBase64({String? lclId, required String code}) => SongRaw.parse(
       newLocalId,
@@ -131,7 +131,7 @@ class SongRaw extends SongCore{
     return YoutubePlayer.convertUrlToId(ytLink);
   }
 
-  static SongRaw fromRespMap(String lclId, Map respMap){
+  static SongRaw fromApiRespMap(String lclId, Map respMap){
     bool hasRefren = false;
 
     String title = respMap[SongCore.PARAM_TITLE];
@@ -143,7 +143,7 @@ class SongRaw extends SongCore{
     bool showRelDateMonth = respMap[SongCore.PARAM_SHOW_REL_DATE_MONTH]??true;
     bool showRelDateDay = respMap[SongCore.PARAM_SHOW_REL_DATE_DAY]??true;
     String? youtubeVideoId = respMap[SongCore.PARAM_YT_VIDEO_ID]??ytLinkToVideoId(respMap[SongCore.PARAM_YT_LINK]);
-    List<AddPerson> addPers = ((respMap[SongCore.PARAM_ADD_PERS]??[]) as List).map((map) => AddPerson.fromRespMap(map)).toList();
+    List<AddPerson> addPers = ((respMap[SongCore.PARAM_ADD_PERS]??[]) as List).map((map) => AddPerson.fromApiRespMap(map)).toList();
     List<String> tags = (respMap[SongCore.PARAM_TAGS] as List).cast<String>();
     SongPart refrenPart;
     if (respMap.containsKey(SongCore.PARAM_REFREN)) {
@@ -259,7 +259,7 @@ class SongRaw extends SongCore{
     return chords;
   }
 
-  Map toMap({bool withLclId = true}){
+  Map toApiJsonMap({bool withLclId = true}){
 
     Map map = {};
     map[SongCore.PARAM_TITLE] = title.trim();
@@ -272,7 +272,7 @@ class SongRaw extends SongCore{
     map[SongCore.PARAM_SHOW_REL_DATE_DAY] = showRelDateDay;
     map[SongCore.PARAM_YT_VIDEO_ID] = youtubeVideoId;
     map[SongCore.PARAM_ADD_PERS] = addPers.where((addPers) => addPers.isNotEmpty)
-        .map((addPers) => addPers.toJsonMap()).toList();
+        .map((addPers) => addPers.toApiJsonMap()).toList();
 
     map[SongCore.PARAM_TAGS] = tags;
 
@@ -316,7 +316,7 @@ class SongRaw extends SongCore{
     else return map;
   }
 
-  String toCode({bool withLclId = true}) => jsonEncode(toMap(withLclId: withLclId));
+  String toCode({bool withLclId = true}) => jsonEncode(toApiJsonMap(withLclId: withLclId));
 
   @override
   SongRate? get rate => null;
@@ -373,12 +373,12 @@ class SongRaw extends SongCore{
     return resultLines.join("\n");
   }
 
-/*
+  /*
   static Future<SongRaw> read({@required String lclId}) async {
     String code = await getSongCode(lclId);
     return SongRaw.parse(lclId, code);
   }
-*/
+  */
 }
 
 class SongPart{
