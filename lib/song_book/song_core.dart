@@ -28,6 +28,34 @@ enum SongRate{
   rate1, rate2, rate3, rate4, rate5
 }
 
+class ContributorData{
+  final String email;
+  final DateTime contributionDate;
+  final String acceptedContributionRulesVersion;
+
+  ContributorData({
+    required this.email,
+    required this.contributionDate,
+    required this.acceptedContributionRulesVersion,
+  });
+
+  Map toJsonMap() {
+    return {
+      'email': email,
+      'contribution_date': contributionDate.toIso8601String(),
+      'accepted_contribution_rules_version': acceptedContributionRulesVersion,
+    };
+  }
+
+  static ContributorData fromJsonMap(Map jsonMap) =>
+    ContributorData(
+      email: jsonMap['email'] as String,
+      contributionDate: DateTime.parse(jsonMap['contribution_date'] as String),
+      acceptedContributionRulesVersion: jsonMap['accepted_contribution_rules_version'] as String,
+    );
+
+}
+
 abstract class SongCore{
 
   static const String TAB_CHAR = '   ';
@@ -44,6 +72,7 @@ abstract class SongCore{
   // tmp - old yt_video_id
   static const String PARAM_YT_LINK = 'yt_link';
   static const String PARAM_ADD_PERS = 'add_pers';
+  static const String PARAM_CONTRIBUTOR_DATA = 'contributor_data';
   static const String PARAM_TAGS = 'tags';
   static const String PARAM_REFREN = 'refren';
   static const String PARAM_PARTS = 'parts';
@@ -59,6 +88,7 @@ abstract class SongCore{
   bool get showRelDateDay;
 
   List<AddPerson> get addPers;
+  ContributorData? get contributorData;
   String? get youtubeVideoId;
   bool get isOwn;
 

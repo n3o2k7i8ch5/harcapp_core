@@ -23,6 +23,7 @@ class SongRaw extends SongCore{
   bool showRelDateMonth;
   bool showRelDateDay;
   List<AddPerson> addPers;
+  ContributorData? contributorData;
   String? youtubeVideoId;
   String? get youtubeUrl{
     if(youtubeVideoId == null)
@@ -75,6 +76,7 @@ class SongRaw extends SongCore{
     required this.showRelDateMonth,
     required this.showRelDateDay,
     required this.addPers,
+    required this.contributorData,
     required this.youtubeVideoId,
 
     required this.tags,
@@ -100,6 +102,7 @@ class SongRaw extends SongCore{
     showRelDateMonth: true,
     showRelDateDay: true,
     addPers: [AddPerson()],
+    contributorData: null,
     youtubeVideoId: null,
     tags: [],
     hasRefren: true,
@@ -144,6 +147,8 @@ class SongRaw extends SongCore{
     bool showRelDateDay = respMap[SongCore.PARAM_SHOW_REL_DATE_DAY]??true;
     String? youtubeVideoId = respMap[SongCore.PARAM_YT_VIDEO_ID]??ytLinkToVideoId(respMap[SongCore.PARAM_YT_LINK]);
     List<AddPerson> addPers = ((respMap[SongCore.PARAM_ADD_PERS]??[]) as List).map((map) => AddPerson.fromApiRespMap(map)).toList();
+    ContributorData? contributorData = respMap[SongCore.PARAM_CONTRIBUTOR_DATA]==null?null:
+        ContributorData.fromJsonMap(respMap[SongCore.PARAM_CONTRIBUTOR_DATA] as Map<String, dynamic>);
     List<String> tags = (respMap[SongCore.PARAM_TAGS] as List).cast<String>();
     SongPart refrenPart;
     if (respMap.containsKey(SongCore.PARAM_REFREN)) {
@@ -180,6 +185,7 @@ class SongRaw extends SongCore{
       showRelDateDay: showRelDateDay,
 
       addPers: addPers,
+      contributorData: contributorData,
       youtubeVideoId: youtubeVideoId,
 
       tags: tags,
@@ -202,6 +208,7 @@ class SongRaw extends SongCore{
     showRelDateMonth: showRelDateMonth,
     showRelDateDay: showRelDateDay,
     addPers: addPers,
+    contributorData: null,
     youtubeVideoId: youtubeVideoId,
     tags: tags,
     hasRefren: hasRefren,
