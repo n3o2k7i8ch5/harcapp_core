@@ -92,7 +92,7 @@ class AddPersWidget extends StatelessWidget{
 
 class AddPersListWidget extends StatefulWidget{
 
-  final void Function(List<AddPerson>)? onAddPersChanged;
+  final void Function(List<ContributorIdentity>)? onAddPersChanged;
 
   const AddPersListWidget({this.onAddPersChanged});
 
@@ -103,7 +103,7 @@ class AddPersListWidget extends StatefulWidget{
 
 class AddPersListWidgetState extends State<AddPersListWidget>{
 
-  void Function(List<AddPerson>)? get onAddPersChanged => widget.onAddPersChanged;
+  void Function(List<ContributorIdentity>)? get onAddPersChanged => widget.onAddPersChanged;
 
   @override
   Widget build(BuildContext context) => Consumer<CurrentItemProvider>(
@@ -142,7 +142,7 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
 
                     onChanged: (){
 
-                      List<AddPerson> data = prov.addPersData.map((addPersData) => AddPerson(
+                      List<ContributorIdentity> data = prov.addPersData.map((addPersData) => ContributorIdentity(
                         name: addPersData.$1.text,
                         emailRef: addPersData.$2.text,
                         userKeyRef: addPersData.$3.text,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:harcapp_core/comm_classes/common.dart';
 
 import 'add_person.dart';
@@ -87,7 +89,7 @@ abstract class SongCore{
   bool get showRelDateMonth;
   bool get showRelDateDay;
 
-  List<AddPerson> get addPers;
+  List<ContributorIdentity> get addPers;
   ContributorData? get contributorData;
   String? get youtubeVideoId;
   bool get isOwn;
@@ -98,6 +100,8 @@ abstract class SongCore{
   String get text;
   String get chords;
   SongRate? get rate;
+
+  FutureOr<String> get code;
 
   late final String authorsStr = _authorsStr;
   String get _authorsStr{

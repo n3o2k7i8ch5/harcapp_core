@@ -9,13 +9,13 @@ abstract class AddPersonResolver{
 
   const AddPersonResolver();
 
-  Widget build(BuildContext context, AddPerson data);
+  Widget build(BuildContext context, ContributorIdentity data);
 
 }
 
 class AddPersonSimpleResolver extends AddPersonResolver{
 
-  static String? name(AddPerson data){
+  static String? name(ContributorIdentity data){
     return data.name;
   }
 
@@ -25,7 +25,7 @@ class AddPersonSimpleResolver extends AddPersonResolver{
   const AddPersonSimpleResolver({this.textSize, this.textColor});
 
   @override
-  Widget build(BuildContext context, AddPerson data) => Text(
+  Widget build(BuildContext context, ContributorIdentity data) => Text(
       data.name??'',
       style: AppTextStyle(color: textColor??hintEnab_(context), fontSize: textSize??Dimen.textSizeNormal, fontWeight: weightHalfBold)
   );

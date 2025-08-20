@@ -1,4 +1,4 @@
-class AddPerson{
+class ContributorIdentity{
 
   static const String PARAM_NAME = 'name';
   static const String PARAM_EMAIL_REF = 'email_ref';
@@ -8,7 +8,7 @@ class AddPerson{
   final String? emailRef;
   final String? userKeyRef;
 
-  const AddPerson({this.name, this.emailRef, this.userKeyRef});
+  const ContributorIdentity({this.name, this.emailRef, this.userKeyRef});
 
   Map<String, dynamic> toApiJsonMap() => {
     PARAM_NAME: name==null || name!.trim().isEmpty?null:name!.trim(),
@@ -16,7 +16,7 @@ class AddPerson{
     PARAM_USER_KEY_REF: userKeyRef==null || userKeyRef!.trim().isEmpty?null:userKeyRef!.trim(),
   };
 
-  static AddPerson fromApiRespMap(Map<String, dynamic> respMap) => AddPerson(
+  static ContributorIdentity fromApiRespMap(Map<String, dynamic> respMap) => ContributorIdentity(
     name: respMap[PARAM_NAME],
     emailRef: respMap[PARAM_EMAIL_REF],
     userKeyRef: respMap[PARAM_USER_KEY_REF],
@@ -38,7 +38,7 @@ class AddPerson{
 
   @override
   bool operator == (Object other) {
-    if(!(other is AddPerson)) return false;
+    if(!(other is ContributorIdentity)) return false;
 
     if(userKeyRef != null && userKeyRef!.trim().isNotEmpty && userKeyRef!.trim() == other.userKeyRef?.trim())
       return true;

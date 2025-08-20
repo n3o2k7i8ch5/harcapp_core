@@ -57,7 +57,7 @@ class CurrentItemProvider extends ChangeNotifier{
           TextEditingController(text: addPers.userKeyRef)
       )).toList();
     else if (initAddPersName != null || initAddPersEmail != null || initAddPersUserKey != null){
-      song.addPers.add(AddPerson(name: initAddPersName, emailRef: initAddPersEmail, userKeyRef: initAddPersUserKey));
+      song.addPers.add(ContributorIdentity(name: initAddPersName, emailRef: initAddPersEmail, userKeyRef: initAddPersUserKey));
       addPersData = [(
           TextEditingController(text: initAddPersName??''),
           TextEditingController(text: initAddPersEmail??''),
@@ -153,8 +153,8 @@ class CurrentItemProvider extends ChangeNotifier{
     if(notify) notifyListeners();
   }
 
-  List<AddPerson> get addPers => _song.addPers;
-  setAddPers(List<AddPerson> value, {bool notify = true}){
+  List<ContributorIdentity> get addPers => _song.addPers;
+  setAddPers(List<ContributorIdentity> value, {bool notify = true}){
     _song.addPers = value;
     if(notify) notifyListeners();
   }
