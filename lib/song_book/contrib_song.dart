@@ -4,14 +4,14 @@ import 'package:harcapp_core/values/people.dart';
 
 import 'add_person.dart';
 
-bool _isPersonsFirstSong(ContributorIdentity contrId){
-  if(contrId.emailRef == null) return true;
-  if(!allPeopleByEmailMap.containsKey(contrId.emailRef)) return true;
+bool _isPersonsFirstSong(ContributorIdentity contribId){
+  if(contribId.emailRef == null) return true;
+  if(!allPeopleByEmailMap.containsKey(contribId.emailRef)) return true;
 
   return false;
 }
 
-String personToObjectString(Person person, List<ContributorIdentity> contrIds){
+String personToObjectString(Person person, List<ContributorIdentity> contribIds){
   late String newPersonCode;
 
   bool hasName = person.name.isNotEmpty;
@@ -22,8 +22,8 @@ String personToObjectString(Person person, List<ContributorIdentity> contrIds){
   bool hasOrg = person.org != null;
 
   List<String> addPersEmails = [];
-  for(ContributorIdentity contrId in contrIds)
-    if(contrId.emailRef != null) addPersEmails.add(contrId.emailRef!);
+  for(ContributorIdentity contribId in contribIds)
+    if(contribId.emailRef != null) addPersEmails.add(contribId.emailRef!);
 
   newPersonCode = "const Person ${remPolChars(person.name).toUpperCase().replaceAll(' ', '_')} = Person(";
   if(hasName) newPersonCode += "\n  name: '${person.name}',";
@@ -38,7 +38,7 @@ String personToObjectString(Person person, List<ContributorIdentity> contrIds){
   return newPersonCode;
 }
 
-Future<String> composeEmail(
+Future<String> composeContribSongEmail(
   SongCore song,
   String? acceptRulesVersion,
   Person? person,
@@ -47,8 +47,8 @@ Future<String> composeEmail(
 ) async {
 
   bool isPersonsFirstSong = false;
-  for (ContributorIdentity contrId in song.addPers)
-    if (_isPersonsFirstSong(contrId)) {
+  for (ContributorIdentity contribId in song.addPers)
+    if (_isPersonsFirstSong(contribId)) {
       isPersonsFirstSong = true;
       break;
     }
