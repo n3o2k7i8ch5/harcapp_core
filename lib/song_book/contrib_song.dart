@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/values/people.dart';
@@ -38,13 +40,28 @@ String personToObjectString(Person person, List<ContributorIdentity> contribIds)
   return newPersonCode;
 }
 
-Future<String> composeContribSongEmail(
-  SongCore song,
+enum SongSource{
+  application,
+  web;
+
+  String get displayName {
+    switch(this) {
+      case SongSource.application:
+        return "Aplikacja ${Platform.isIOS?'iOS':Platform.isIOS?'Android':''}".trim();
+      case SongSource.web:
+        return "harcapp.web.app";
+    }
+  }
+}
+
+Future<String> composeContribSongEmail({
+  required SongCore song,
+  required SongSource source,
   String? acceptRulesVersion,
   Person? person,
-  bool isNewSong,
+  required bool isNewSong,
   String? updateComment
-) async {
+}) async {
 
   bool isPersonsFirstSong = false;
   for (ContributorIdentity contribId in song.addPers)
@@ -67,6 +84,8 @@ Future<String> composeContribSongEmail(
       "\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (${acceptRulesVersion}, dostępne na www.harcapp.web.app/song_contribution_rules)."
       "\n"
       "\n- - - - - - Nie edytuj poniższego tekstu - - - - - -"
+      "\n"
+      "\n### Źródło piosenki: ${source.displayName}"
       "\n"
       "\n### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):"
       "\n"
