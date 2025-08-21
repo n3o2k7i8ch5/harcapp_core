@@ -32,4 +32,6 @@ class AppColors{
   static const Color rankPhmColor = Color.fromARGB(255, 30, 190, 20);
   static const Color rankHmColor = Color.fromARGB(255, 210, 0, 0);
 
+  static const Color dialogDim = Colors.black54;
+
 }
