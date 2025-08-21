@@ -1,6 +1,6 @@
 String songContributionRulesTitle = 'Zasady dodawania piosenek';
 
-String get latestSongContributionRulesTitle => songContributionRules.keys.first;
+String get latestSongContributionRulesVersion => songContributionRules.keys.first;
 String get latestSongContributionRules => songContributionRules.values.first;
 
 // Newest at top, oldest at bottom
