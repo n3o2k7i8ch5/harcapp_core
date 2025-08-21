@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:provider/provider.dart';
 
-import '../add_person.dart';
+import '../contributor_identity.dart';
 import 'song_raw.dart';
 
 
@@ -21,7 +21,7 @@ class CurrentItemProvider extends ChangeNotifier{
 
   late TextEditingController ytLinkController;
 
-  late List<(TextEditingController, TextEditingController, TextEditingController)> addPersData;
+  late List<(TextEditingController, TextEditingController, TextEditingController)> contribIdData;
 
   void _updateControllers(SongRaw song){
     titleController.text = song.title;
@@ -32,14 +32,14 @@ class CurrentItemProvider extends ChangeNotifier{
 
     ytLinkController.text = song.youtubeUrl??'';
 
-    addPersData = song.addPers.map((addPers) => (
-        TextEditingController(text: addPers.name),
-        TextEditingController(text: addPers.emailRef),
-        TextEditingController(text: addPers.userKeyRef)
+    contribIdData = song.contribId.map((contribId) => (
+        TextEditingController(text: contribId.name),
+        TextEditingController(text: contribId.emailRef),
+        TextEditingController(text: contribId.userKeyRef)
     )).toList();
   }
 
-  CurrentItemProvider({required SongRaw song, String? initAddPersName, String? initAddPersEmail, String? initAddPersUserKey}){
+  CurrentItemProvider({required SongRaw song, String? initContribIdName, String? initContribIdEmail, String? initContribIdUserKey}){
     _song = song;
 
     titleController = TextEditingController(text: song.title);
@@ -50,21 +50,21 @@ class CurrentItemProvider extends ChangeNotifier{
 
     ytLinkController = TextEditingController(text: song.youtubeUrl??'');
 
-    if(song.addPers.isNotEmpty)
-      addPersData = song.addPers.map((addPers) => (
-          TextEditingController(text: addPers.name),
-          TextEditingController(text: addPers.emailRef),
-          TextEditingController(text: addPers.userKeyRef)
+    if(song.contribId.isNotEmpty)
+      contribIdData = song.contribId.map((contribId) => (
+          TextEditingController(text: contribId.name),
+          TextEditingController(text: contribId.emailRef),
+          TextEditingController(text: contribId.userKeyRef)
       )).toList();
-    else if (initAddPersName != null || initAddPersEmail != null || initAddPersUserKey != null){
-      song.addPers.add(ContributorIdentity(name: initAddPersName, emailRef: initAddPersEmail, userKeyRef: initAddPersUserKey));
-      addPersData = [(
-          TextEditingController(text: initAddPersName??''),
-          TextEditingController(text: initAddPersEmail??''),
-          TextEditingController(text: initAddPersUserKey??'')
+    else if (initContribIdName != null || initContribIdEmail != null || initContribIdUserKey != null){
+      song.contribId.add(ContributorIdentity(name: initContribIdName, emailRef: initContribIdEmail, userKeyRef: initContribIdUserKey));
+      contribIdData = [(
+          TextEditingController(text: initContribIdName??''),
+          TextEditingController(text: initContribIdEmail??''),
+          TextEditingController(text: initContribIdUserKey??'')
       )];
     } else
-      addPersData = [];
+      contribIdData = [];
 
   }
 
@@ -153,9 +153,9 @@ class CurrentItemProvider extends ChangeNotifier{
     if(notify) notifyListeners();
   }
 
-  List<ContributorIdentity> get addPers => _song.addPers;
-  setAddPers(List<ContributorIdentity> value, {bool notify = true}){
-    _song.addPers = value;
+  List<ContributorIdentity> get contribId => _song.contribId;
+  setContribId(List<ContributorIdentity> value, {bool notify = true}){
+    _song.contribId = value;
     if(notify) notifyListeners();
   }
 

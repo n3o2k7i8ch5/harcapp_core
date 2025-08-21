@@ -6,7 +6,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../song_core.dart';
 import '../song_element.dart';
-import '../add_person.dart';
+import '../contributor_identity.dart';
 import 'providers.dart';
 import 'widgets/song_part_editor_template/errors.dart';
 
@@ -22,7 +22,7 @@ class SongRaw extends SongCore{
   DateTime? releaseDate;
   bool showRelDateMonth;
   bool showRelDateDay;
-  List<ContributorIdentity> addPers;
+  List<ContributorIdentity> contribId;
   ContributorData? contributorData;
   String? youtubeVideoId;
   String? get youtubeUrl{
@@ -55,7 +55,7 @@ class SongRaw extends SongCore{
     this.releaseDate = song.releaseDate;
     this.showRelDateMonth = song.showRelDateMonth;
     this.showRelDateDay = song.showRelDateDay;
-    this.addPers = song.addPers;
+    this.contribId = song.contribId;
     this.youtubeVideoId = song.youtubeVideoId;
     this.tags = song.tags.toList();
 
@@ -75,7 +75,7 @@ class SongRaw extends SongCore{
     required this.releaseDate,
     required this.showRelDateMonth,
     required this.showRelDateDay,
-    required this.addPers,
+    required this.contribId,
     required this.contributorData,
     required this.youtubeVideoId,
 
@@ -101,7 +101,7 @@ class SongRaw extends SongCore{
     releaseDate: null,
     showRelDateMonth: true,
     showRelDateDay: true,
-    addPers: [ContributorIdentity()],
+    contribId: [ContributorIdentity()],
     contributorData: null,
     youtubeVideoId: null,
     tags: [],
@@ -146,7 +146,7 @@ class SongRaw extends SongCore{
     bool showRelDateMonth = respMap[SongCore.PARAM_SHOW_REL_DATE_MONTH]??true;
     bool showRelDateDay = respMap[SongCore.PARAM_SHOW_REL_DATE_DAY]??true;
     String? youtubeVideoId = respMap[SongCore.PARAM_YT_VIDEO_ID]??ytLinkToVideoId(respMap[SongCore.PARAM_YT_LINK]);
-    List<ContributorIdentity> addPers = ((respMap[SongCore.PARAM_ADD_PERS]??[]) as List).map((map) => ContributorIdentity.fromApiRespMap(map)).toList();
+    List<ContributorIdentity> contribId = ((respMap[SongCore.PARAM_CONTRIB_ID]??[]) as List).map((map) => ContributorIdentity.fromApiRespMap(map)).toList();
     ContributorData? contributorData = respMap[SongCore.PARAM_CONTRIBUTOR_DATA]==null?null:
         ContributorData.fromJsonMap(respMap[SongCore.PARAM_CONTRIBUTOR_DATA] as Map<String, dynamic>);
     List<String> tags = (respMap[SongCore.PARAM_TAGS] as List).cast<String>();
@@ -184,7 +184,7 @@ class SongRaw extends SongCore{
       showRelDateMonth: showRelDateMonth,
       showRelDateDay: showRelDateDay,
 
-      addPers: addPers,
+      contribId: contribId,
       contributorData: contributorData,
       youtubeVideoId: youtubeVideoId,
 
@@ -207,7 +207,7 @@ class SongRaw extends SongCore{
     releaseDate: releaseDate,
     showRelDateMonth: showRelDateMonth,
     showRelDateDay: showRelDateDay,
-    addPers: addPers,
+    contribId: contribId,
     contributorData: null,
     youtubeVideoId: youtubeVideoId,
     tags: tags,
@@ -278,8 +278,8 @@ class SongRaw extends SongCore{
     map[SongCore.PARAM_SHOW_REL_DATE_MONTH] = showRelDateMonth;
     map[SongCore.PARAM_SHOW_REL_DATE_DAY] = showRelDateDay;
     map[SongCore.PARAM_YT_VIDEO_ID] = youtubeVideoId;
-    map[SongCore.PARAM_ADD_PERS] = addPers.where((addPers) => addPers.isNotEmpty)
-        .map((addPers) => addPers.toApiJsonMap()).toList();
+    map[SongCore.PARAM_CONTRIB_ID] = contribId.where((contribId) => contribId.isNotEmpty)
+        .map((contribId) => contribId.toApiJsonMap()).toList();
 
     map[SongCore.PARAM_TAGS] = tags;
 

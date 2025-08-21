@@ -18,7 +18,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:native_device_orientation/native_device_orientation.dart';
 import 'package:provider/provider.dart';
 
-import '../add_person_resolver.dart';
+import '../contributor_identity_resolver.dart';
 import '../providers.dart';
 import '../settings.dart';
 import '../song_core.dart';
@@ -64,7 +64,7 @@ class SongAutoScrollController extends StatelessWidget{
 
 }
 
-class SongWidgetTemplate<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatefulWidget{
+class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends StatefulWidget{
 
   static IconData iconSendSong = MdiIcons.sendCircleOutline;
   static IconData iconShareSong = MdiIcons.shareVariant;
@@ -129,7 +129,7 @@ class SongWidgetTemplate<TSong extends SongCore, TAddPersRes extends AddPersonRe
   final ScrollController scrollController;
   final Color? accentColor;
 
-  final TAddPersRes addPersonResolver;
+  final TContribIdRes contribIdResolver;
 
   const SongWidgetTemplate(
       this.song,
@@ -191,17 +191,17 @@ class SongWidgetTemplate<TSong extends SongCore, TAddPersRes extends AddPersonRe
         required this.scrollController,
         this.accentColor,
 
-        required this.addPersonResolver,
+        required this.contribIdResolver,
 
         Key? key
       }):super(key: key);
 
   @override
-  State<StatefulWidget> createState() => SongWidgetTemplateState<TSong, TAddPersRes>();
+  State<StatefulWidget> createState() => SongWidgetTemplateState<TSong, TContribIdRes>();
 
 }
 
-class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends State<SongWidgetTemplate<TSong, TAddPersRes>>{
+class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends State<SongWidgetTemplate<TSong, TContribIdRes>>{
 
   TSong get song => widget.song;
   SongBookSettTempl get settings => widget.settings;
@@ -263,7 +263,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
   ScrollController get scrollController => widget.scrollController;
   Color? get accentColor => widget.accentColor;
 
-  TAddPersRes get addPersonResolver => widget.addPersonResolver;
+  TContribIdRes get contribIdResolver => widget.contribIdResolver;
 
   bool get showChords => settings.showChords && song.hasChords;
 
@@ -331,7 +331,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
 
                 if(header!=null) header!.call(context, scrollController),
 
-                _TitleCard<TSong, TAddPersRes>(
+                _TitleCard<TSong, TContribIdRes>(
                   song: song,
                   index: index,
                   onTitleTap: (){
@@ -376,9 +376,9 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
             SliverList(
               delegate: SliverChildListDelegate([
 
-                _ButtonsWidget<TSong, TAddPersRes>(this, contentCardsKey),
+                _ButtonsWidget<TSong, TContribIdRes>(this, contentCardsKey),
 
-                _ContentWidget<TSong, TAddPersRes>(this, scrollController, contentCardsKey, scrollviewKey, key: contentCardsKey),
+                _ContentWidget<TSong, TContribIdRes>(this, scrollController, contentCardsKey, scrollviewKey, key: contentCardsKey),
 
                 if(song.releaseDate != null)
                   Padding(
@@ -398,23 +398,23 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
 
                 if(contentFooter!=null) contentFooter!.call(context, scrollController),
 
-                if(song.addPers.isNotEmpty)
+                if(song.contribId.isNotEmpty)
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(width: Dimen.defMarg),
                       Icon(MdiIcons.accountEdit, size: Dimen.textSizeNormal + 2, color: hintEnab_(context)),
                       const SizedBox(width: Dimen.defMarg),
-                      Expanded(child: Text(song.addPers.length <=1 ? 'Osoba dodająca' : 'Osoby dodające', style: AppTextStyle(fontSize: Dimen.textSizeNormal, color: hintEnab_(context))))
+                      Expanded(child: Text(song.contribId.length <=1 ? 'Osoba dodająca' : 'Osoby dodające', style: AppTextStyle(fontSize: Dimen.textSizeNormal, color: hintEnab_(context))))
                     ],
                   ),
 
-                if(song.addPers.isNotEmpty)
+                if(song.contribId.isNotEmpty)
                   Padding(
                       padding: const EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg, left: 2*Dimen.defMarg + Dimen.textSizeNormal + 2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: song.addPers.map((addPers) => addPersonResolver.build(context, addPers)).toList(),
+                        children: song.contribId.map((contribId) => contribIdResolver.build(context, contribId)).toList(),
                       )
                   ),
 
@@ -539,7 +539,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TAddPersRes extends AddPer
 
 }
 
-class _TitleCard<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
+class _TitleCard<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends StatelessWidget{
 
   final TSong song;
   final int index;
@@ -832,19 +832,19 @@ class _ButtonData{
 
 }
 
-class _ButtonsWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatefulWidget{
+class _ButtonsWidget<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends StatefulWidget{
 
-  final SongWidgetTemplateState<TSong, TAddPersRes> fragmentState;
+  final SongWidgetTemplateState<TSong, TContribIdRes> fragmentState;
   final GlobalKey contentCardsKey;
 
   const _ButtonsWidget(this.fragmentState, this.contentCardsKey);
 
   @override
-  State<StatefulWidget> createState() => _ButtonsWidgetState<TSong, TAddPersRes>();
+  State<StatefulWidget> createState() => _ButtonsWidgetState<TSong, TContribIdRes>();
 
 }
 
-class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends State<_ButtonsWidget<TSong, TAddPersRes>>{
+class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends State<_ButtonsWidget<TSong, TContribIdRes>>{
   
   // Reversed order of buttons to show them from right to left.
   static List<_ButtonData> buttonData = [
@@ -935,7 +935,7 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
     
   ];
 
-  SongWidgetTemplateState<TSong, TAddPersRes> get fragmentState => widget.fragmentState;
+  SongWidgetTemplateState<TSong, TContribIdRes> get fragmentState => widget.fragmentState;
   GlobalKey get contentCardsKey => widget.contentCardsKey;
 
   late bool changeSizeVisible;
@@ -1038,7 +1038,7 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
 
           buttonWidget,
 
-          _TextResizeWidget<TSong, TAddPersRes>(
+          _TextResizeWidget<TSong, TContribIdRes>(
             fragmentState,
             onCloseTap: hideChangeSize,
             onResizeTap: scheduleAutoHide
@@ -1053,9 +1053,9 @@ class _ButtonsWidgetState<TSong extends SongCore, TAddPersRes extends AddPersonR
 
 
 
-class _TextResizeWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
+class _TextResizeWidget<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends StatelessWidget{
 
-  final SongWidgetTemplateState<TSong, TAddPersRes> fragmentState;
+  final SongWidgetTemplateState<TSong, TContribIdRes> fragmentState;
   final void Function()? onCloseTap;
   final void Function()? onResizeTap;
   
@@ -1177,12 +1177,12 @@ class TextSizeIcon extends StatelessWidget{
 
 }
 
-class _ContentWidget<TSong extends SongCore, TAddPersRes extends AddPersonResolver> extends StatelessWidget{
+class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends StatelessWidget{
 
   static const double vertMargVal = SimpleButton.defMargVal;
   static const double vertPaddVal = SimpleButton.defPaddVal;
 
-  final SongWidgetTemplateState<TSong, TAddPersRes> parent;
+  final SongWidgetTemplateState<TSong, TContribIdRes> parent;
   final ScrollController scrollController;
   final GlobalKey contentCardsKey;
   final GlobalKey scrollviewKey;

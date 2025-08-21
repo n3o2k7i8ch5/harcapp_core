@@ -11,10 +11,10 @@ import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../../add_person.dart';
+import '../../contributor_identity.dart';
 import '../providers.dart';
 
-class AddPersWidget extends StatelessWidget{
+class ContributorIdentityWidget extends StatelessWidget{
 
   static const double height = 2*Dimen.defMarg + 2*Dimen.defMarg + Dimen.defMarg + 2*Dimen.iconFootprint;
 
@@ -23,7 +23,7 @@ class AddPersWidget extends StatelessWidget{
   final void Function()? onChanged;
   final void Function()? onRemoveTap;
 
-  const AddPersWidget(this.nameController, this.emailController, {this.onChanged, this.onRemoveTap, Key? key}): super(key: key);
+  const ContributorIdentityWidget(this.nameController, this.emailController, {this.onChanged, this.onRemoveTap, Key? key}): super(key: key);
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -90,20 +90,20 @@ class AddPersWidget extends StatelessWidget{
 
 }
 
-class AddPersListWidget extends StatefulWidget{
+class ContributorIdentityListWidget extends StatefulWidget{
 
-  final void Function(List<ContributorIdentity>)? onAddPersChanged;
+  final void Function(List<ContributorIdentity>)? onChanged;
 
-  const AddPersListWidget({this.onAddPersChanged});
+  const ContributorIdentityListWidget({this.onChanged});
 
   @override
-  State<StatefulWidget> createState() => AddPersListWidgetState();
+  State<StatefulWidget> createState() => ContributorIdentityListWidgetState();
 
 }
 
-class AddPersListWidgetState extends State<AddPersListWidget>{
+class ContributorIdentityListWidgetState extends State<ContributorIdentityListWidget>{
 
-  void Function(List<ContributorIdentity>)? get onAddPersChanged => widget.onAddPersChanged;
+  void Function(List<ContributorIdentity>)? get onChanged => widget.onChanged;
 
   @override
   Widget build(BuildContext context) => Consumer<CurrentItemProvider>(
@@ -114,13 +114,13 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
             Padding(
               padding: EdgeInsets.only(left: Dimen.iconMarg, right: Dimen.defMarg),
               child: TitleShortcutRowWidget(
-                title: prov.addPersData.length <= 1?'Osoba dodająca':'Osoby dodające',
+                title: prov.contribIdData.length <= 1?'Osoba dodająca':'Osoby dodające',
                 textAlign: TextAlign.start,
                 //icon: MdiIcons.tagOutline,
                 trailing: IconButton(
                   icon: Icon(MdiIcons.plus),
                   onPressed: (){
-                    prov.addPersData.add(
+                    prov.contribIdData.add(
                       (
                         TextEditingController(),
                         TextEditingController(),
@@ -134,28 +134,28 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
             ),
 
             AnimatedListView(
-              items: prov.addPersData,
+              items: prov.contribIdData,
               itemBuilder: (context, index) =>
-                  AddPersWidget(
-                    prov.addPersData[index].$1,
-                    prov.addPersData[index].$2,
+                  ContributorIdentityWidget(
+                    prov.contribIdData[index].$1,
+                    prov.contribIdData[index].$2,
 
                     onChanged: (){
 
-                      List<ContributorIdentity> data = prov.addPersData.map((addPersData) => ContributorIdentity(
-                        name: addPersData.$1.text,
-                        emailRef: addPersData.$2.text,
-                        userKeyRef: addPersData.$3.text,
+                      List<ContributorIdentity> data = prov.contribIdData.map((contribIdData) => ContributorIdentity(
+                        name: contribIdData.$1.text,
+                        emailRef: contribIdData.$2.text,
+                        userKeyRef: contribIdData.$3.text,
                       )).toList();
 
-                      prov.setAddPers(data);
-                      onAddPersChanged?.call(data);
+                      prov.setContribId(data);
+                      onChanged?.call(data);
                     },
                     onRemoveTap: () {
-                      prov.addPersData.removeAt(index);
+                      prov.contribIdData.removeAt(index);
                       prov.notify();
                     },
-                    key: ValueKey(prov.addPersData[index]),
+                    key: ValueKey(prov.contribIdData[index]),
                   ),
               shrinkWrap: true,
               enterTransition: [FadeIn()],
@@ -168,13 +168,13 @@ class AddPersListWidgetState extends State<AddPersListWidget>{
               mainAxisSize: MainAxisSize.min,
               children: [
 
-                if(prov.addPersData.isEmpty)
+                if(prov.contribIdData.isEmpty)
                   SizedBox(
-                    height: AddPersWidget.height + 2*Dimen.iconMarg + 2*Dimen.textSizeBig,
+                    height: ContributorIdentityWidget.height + 2*Dimen.iconMarg + 2*Dimen.textSizeBig,
                     child: SimpleButton(
                       radius: AppCard.bigRadius,
                       onTap: (){
-                        prov.addPersData.add((
+                        prov.contribIdData.add((
                             TextEditingController(),
                             TextEditingController(),
                             TextEditingController()

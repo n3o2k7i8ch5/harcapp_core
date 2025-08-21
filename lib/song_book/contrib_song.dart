@@ -4,7 +4,7 @@ import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/values/people.dart';
 
-import 'add_person.dart';
+import 'contributor_identity.dart';
 
 bool _isContributorNew(ContributorIdentity contribId) {
   if(contribId.emailRef == null) return true;
@@ -16,7 +16,7 @@ bool _isContributorNew(ContributorIdentity contribId) {
 bool _isPersonsFirstSong(List<SongCore> songs){
   bool isPersonsFirstSong = false;
   for (SongCore song in songs)
-    for (ContributorIdentity contribId in song.addPers)
+    for (ContributorIdentity contribId in song.contribId)
       if (_isContributorNew(contribId)) {
         isPersonsFirstSong = true;
         break;
@@ -35,9 +35,9 @@ String _personToObjectString(Person person, {List<ContributorIdentity> contribId
   bool hasRankHarc = person.rankHarc != null;
   bool hasOrg = person.org != null;
 
-  List<String> addPersEmails = [];
+  List<String> contribIdEmails = [];
   for(ContributorIdentity contribId in contribIds)
-    if(contribId.emailRef != null) addPersEmails.add(contribId.emailRef!);
+    if(contribId.emailRef != null) contribIdEmails.add(contribId.emailRef!);
 
   newPersonCode = "const Person ${remPolChars(person.name).toUpperCase().replaceAll(' ', '_')} = Person(";
   if(hasName) newPersonCode += "\n  name: '${person.name}',";
@@ -46,7 +46,7 @@ String _personToObjectString(Person person, {List<ContributorIdentity> contribId
   if(hasRankInstr) newPersonCode += "\n  rankInstr: RankInstr.${person.rankInstr?.shortName},";
   if(hasRankHarc) newPersonCode += "\n  rankHarc: RankHarc.${person.rankHarc?.shortName},";
   if(hasOrg) newPersonCode += "\n  org: ${person.org},";
-  newPersonCode += "\n  email: [${(person.email.isEmpty?addPersEmails:person.email).map((email) => '"$email"').join(', ')}]";
+  newPersonCode += "\n  email: [${(person.email.isEmpty?contribIdEmails:person.email).map((email) => '"$email"').join(', ')}]";
   newPersonCode += "\n);";
 
   return newPersonCode;
@@ -103,7 +103,7 @@ Future<String> composeContribSongEmail({
   null:
   _personToObjectString(
     person,
-    contribIds: song.addPers
+    contribIds: song.contribId
   );
 
   String encodedSong = await song.code;
