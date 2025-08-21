@@ -83,6 +83,9 @@ Future<String> composeContribSongEmail({
       "\n"
       "\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (${acceptRulesVersion}, dostępne na www.harcapp.web.app/song_contribution_rules)."
       "\n"
+      "\n- - - - - - Miejsce na własną wiadomość: - - - - - -"
+      "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
+      "\n"
       "\n- - - - - - Nie edytuj poniższego - - - - - -"
       "\n"
       "\n### Źródło piosenki: ${source.displayName}"
@@ -99,12 +102,12 @@ Future<String> composeContribSongEmail({
 
 }
 
-Future<String> composeContribAttachedSongsEmail({
+String composeContribAttachedSongsEmail({
   required List<SongCore> songs,
   required SongSource source,
   String? acceptRulesVersion,
   Person? person,
-}) async {
+}) {
 
   bool isPersonsFirstSong = false;
   for (SongCore song in songs)
@@ -121,6 +124,9 @@ Future<String> composeContribAttachedSongsEmail({
   return "Przesyłam propozycję piosenek!"
       "\n"
       "\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (${acceptRulesVersion}, dostępne na www.harcapp.web.app/song_contribution_rules)."
+      "\n"
+      "\n- - - - - - Miejsce na własną wiadomość: - - - - - -"
+      "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
       "\n"
       "\n- - - - - - Nie edytuj poniższego - - - - - -"
       "\n"
