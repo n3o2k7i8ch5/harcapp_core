@@ -1,5 +1,9 @@
 String songContributionRulesTitle = 'Zasady dodawania piosenek';
 
+String get latestSongContributionRulesTitle => songContributionRules.keys.first;
+String get latestSongContributionRules => songContributionRules.values.first;
+
+// Newest at top, oldest at bottom
 Map<String, String> songContributionRules = {
   'v19.08.2025':
   'Zasady dodawania piosenek do śpiewnika aplikacji Harcapp z dnia 19. sierpnia 2025 A.D.'
