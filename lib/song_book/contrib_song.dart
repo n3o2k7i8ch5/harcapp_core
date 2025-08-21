@@ -90,11 +90,11 @@ String _baseMessage(
     "\n- - - - - - Nie edytuj poniższego - - - - - -"
     "\n"
     "\n### Źródło piosenki: ${source.displayName}"
-    "\n"
-    "\n${
+    "${
         person == null?
         '':
-        '### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):'
+        '\n'
+        '\n### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):'
         '\n'
         '\n${_personToObjectString(person)}'
     }";
@@ -113,8 +113,14 @@ Future<String> composeContribSongEmail({
   String encodedSong = await song.code;
 
   return "${_baseMessage(source, acceptRulesVersion, isPersonsFirstSong, person)}"
-      "\n"
-      "${updateComment != null?'\n### Propozycja poprawki:\n\n$updateComment':''}"
+      "${
+          updateComment != null?
+          '\n'
+          '\n### Propozycja poprawki:'
+          '\n'
+          '\n$updateComment':
+          ''
+      }"
       "\n"
       "\n### Kod piosenki:"
       "\n"
