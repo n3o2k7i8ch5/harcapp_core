@@ -39,6 +39,7 @@ Future<void> showAlertDialog(
       Widget? leadingContent,
       List<Widget> Function(BuildContext context)? actionBuilder,
       bool dismissible = true,
+      bool scrollable = false,
     }){
   assert(contentWidget != null || content != null, 'Either contentWidget or content must be provided');
   return openDialog(
@@ -69,6 +70,7 @@ Future<void> showAlertDialog(
       backgroundColor: background_(context),
       surfaceTintColor: Colors.transparent,
       contentTextStyle: TextStyle(color: textEnab_(context)),
+      scrollable: scrollable,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppCard.alertDialogRadius))),
     ),
   );
