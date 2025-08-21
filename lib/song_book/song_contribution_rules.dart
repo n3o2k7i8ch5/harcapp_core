@@ -1,3 +1,5 @@
+String songContributionRulesTitle = 'Zasady dodawania piosenek';
+
 Map<String, String> songContributionRules = {
   'v19.08.2025':
   'Zasady dodawania piosenek do śpiewnika aplikacji Harcapp z dnia 19. sierpnia 2025 A.D.'
