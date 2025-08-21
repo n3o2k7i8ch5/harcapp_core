@@ -6,11 +6,23 @@ import 'package:harcapp_core/values/people.dart';
 
 import 'add_person.dart';
 
-bool _isPersonsFirstSong(ContributorIdentity contribId){
+bool _isContributorNew(ContributorIdentity contribId) {
   if(contribId.emailRef == null) return true;
   if(!allPeopleByEmailMap.containsKey(contribId.emailRef)) return true;
 
   return false;
+}
+
+bool _isPersonsFirstSong(List<SongCore> songs){
+  bool isPersonsFirstSong = false;
+  for (SongCore song in songs)
+    for (ContributorIdentity contribId in song.addPers)
+      if (_isContributorNew(contribId)) {
+        isPersonsFirstSong = true;
+        break;
+      }
+
+  return isPersonsFirstSong;
 }
 
 String _personToObjectString(Person person, {List<ContributorIdentity> contribIds = const []}){
@@ -54,6 +66,14 @@ enum SongSource{
   }
 }
 
+String composeContribSongEmailSubject({
+  required SongCore song,
+  required bool isNewSong,
+}){
+  bool isPersonsFirstSong = _isPersonsFirstSong([song]);
+  return '${isNewSong?'Nowa piosenka':'Poprawka piosenki'} "${song.title}" (${isPersonsFirstSong?' + świeżak + ':'- weteran - '})';
+}
+
 Future<String> composeContribSongEmail({
   required SongCore song,
   required SongSource source,
@@ -63,12 +83,7 @@ Future<String> composeContribSongEmail({
   String? updateComment
 }) async {
 
-  bool isPersonsFirstSong = false;
-  for (ContributorIdentity contribId in song.addPers)
-    if (_isPersonsFirstSong(contribId)) {
-      isPersonsFirstSong = true;
-      break;
-    }
+  bool isPersonsFirstSong = _isPersonsFirstSong([song]);
 
   String? personObjectString = person == null?
   null:
@@ -99,7 +114,13 @@ Future<String> composeContribSongEmail({
       "\n### Kod piosenki:"
       "\n"
       "\n$encodedSong";
+}
 
+String composeContribAttachedSongsEmailSubject({
+  required List<SongCore> songs,
+}){
+  bool isPersonsFirstSong = _isPersonsFirstSong(songs);
+  return 'Piosenki "${songs.length}" (${isPersonsFirstSong?' + świeżak + ':'- weteran - '})';
 }
 
 String composeContribAttachedSongsEmail({
@@ -109,13 +130,7 @@ String composeContribAttachedSongsEmail({
   Person? person,
 }) {
 
-  bool isPersonsFirstSong = false;
-  for (SongCore song in songs)
-    for (ContributorIdentity contribId in song.addPers)
-      if (_isPersonsFirstSong(contribId)) {
-        isPersonsFirstSong = true;
-        break;
-      }
+  bool isPersonsFirstSong = _isPersonsFirstSong(songs);
 
   String? personObjectString = person == null?
   null:
