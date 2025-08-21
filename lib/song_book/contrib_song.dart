@@ -13,7 +13,7 @@ bool _isPersonsFirstSong(ContributorIdentity contribId){
   return false;
 }
 
-String personToObjectString(Person person, List<ContributorIdentity> contribIds){
+String _personToObjectString(Person person, {List<ContributorIdentity> contribIds = const []}){
   late String newPersonCode;
 
   bool hasName = person.name.isNotEmpty;
@@ -72,9 +72,9 @@ Future<String> composeContribSongEmail({
 
   String? personObjectString = person == null?
   null:
-  personToObjectString(
+  _personToObjectString(
     person,
-    song.addPers
+    contribIds: song.addPers
   );
 
   String encodedSong = await song.code;
@@ -83,7 +83,7 @@ Future<String> composeContribSongEmail({
       "\n"
       "\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (${acceptRulesVersion}, dostępne na www.harcapp.web.app/song_contribution_rules)."
       "\n"
-      "\n- - - - - - Nie edytuj poniższego tekstu - - - - - -"
+      "\n- - - - - - Nie edytuj poniższego - - - - - -"
       "\n"
       "\n### Źródło piosenki: ${source.displayName}"
       "\n"
@@ -96,5 +96,38 @@ Future<String> composeContribSongEmail({
       "\n### Kod piosenki:"
       "\n"
       "\n$encodedSong";
+
+}
+
+Future<String> composeContribAttachedSongsEmail({
+  required List<SongCore> songs,
+  required SongSource source,
+  String? acceptRulesVersion,
+  Person? person,
+}) async {
+
+  bool isPersonsFirstSong = false;
+  for (SongCore song in songs)
+    for (ContributorIdentity contribId in song.addPers)
+      if (_isPersonsFirstSong(contribId)) {
+        isPersonsFirstSong = true;
+        break;
+      }
+
+  String? personObjectString = person == null?
+  null:
+  _personToObjectString(person);
+
+  return "Przesyłam propozycję piosenek!"
+      "\n"
+      "\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (${acceptRulesVersion}, dostępne na www.harcapp.web.app/song_contribution_rules)."
+      "\n"
+      "\n- - - - - - Nie edytuj poniższego - - - - - -"
+      "\n"
+      "\n### Źródło piosenki: ${source.displayName}"
+      "\n"
+      "\n### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):"
+      "\n"
+      "\n$personObjectString";
 
 }

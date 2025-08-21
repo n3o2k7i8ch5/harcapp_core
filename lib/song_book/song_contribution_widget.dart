@@ -18,5 +18,4 @@ class SongContributionWidget extends StatelessWidget{
     ),
   );
 
-
 }
