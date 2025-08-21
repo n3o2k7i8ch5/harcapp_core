@@ -72,3 +72,8 @@ Future<void> showAlertDialog(
     ),
   );
 }
+
+TextStyle alertDialogTextStyle(BuildContext context) => Theme.of(context).textTheme.headlineSmall!.copyWith(
+    fontFamily: 'Ubuntu',
+    fontWeight: weightHalfBold
+);
