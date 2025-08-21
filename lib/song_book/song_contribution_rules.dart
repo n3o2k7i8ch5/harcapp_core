@@ -26,6 +26,6 @@ Map<String, String> songContributionRules = {
   '\n<b>6. Prawa autorskie</b>'
   '\nPrzesyłając piosenkę do śpiewnika aplikacji HarcApp, użytkownik oświadcza, że jest jej autorem lub posiada prawa do jej publikacji. Użytkownik wyraża zgodę na publikację piosenki w aplikacji HarcApp oraz na jej udostępnianie innym użytkownikom. W przypadku stwierdzenia naruszenia praw autorskich, zespół HarcApp zastrzega sobie prawo do usunięcia piosenki ze śpiewnika.'
   '\n'
-  '\n<b>7. Stwierdzenie naruszenia prawa</b>'
+  '\n<b>7. Stwierdzenie naruszeń</b>'
   '\nW przypadku stwierdzenia naruszenia prawa, w szczególności praw autorskich, zespół HarcApp zastrzega sobie prawo do usunięcia piosenki ze śpiewnika. Naruszenia praw autorskich mogą być zgłaszane na adres e-mail: <b>harcapp@gmail.com</b><b>'
 };
