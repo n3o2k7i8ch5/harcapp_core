@@ -74,6 +74,20 @@ String composeContribSongEmailSubject({
   return '${isNewSong?'Nowa piosenka':'Poprawka piosenki'} "${song.title}" (${isPersonsFirstSong?' + świeżak + ':'- weteran - '})';
 }
 
+String messageInit(SongSource source, String? acceptRulesVersion, bool isPersonsFirstSong) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
+    "\n"
+    "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
+    "\n"
+    "\n- - - - - - Zasady dodawania piosenek - - - - - -"
+    "\n"
+    "\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (${acceptRulesVersion}, dostępne na www.harcapp.web.app/song_contribution_rules)."
+    "\n"
+    "\n- - - - - - Nie edytuj poniższego - - - - - -"
+    "\n"
+    "\n### Źródło piosenki: ${source.displayName}"
+    "\n"
+    "\n### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):";
+
 Future<String> composeContribSongEmail({
   required SongCore song,
   required SongSource source,
@@ -94,18 +108,7 @@ Future<String> composeContribSongEmail({
 
   String encodedSong = await song.code;
 
-  return "- - - - - - Miejsce na własną wiadomość - - - - - -"
-      "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
-      "\n"
-      "\n- - - - - - Zasady dodawania piosenek - - - - - -"
-      "\n"
-      "\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (${acceptRulesVersion}, dostępne na www.harcapp.web.app/song_contribution_rules)."
-      "\n"
-      "\n- - - - - - Nie edytuj poniższego - - - - - -"
-      "\n"
-      "\n### Źródło piosenki: ${source.displayName}"
-      "\n"
-      "\n### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):"
+  return "${messageInit(source, acceptRulesVersion, isPersonsFirstSong)}"
       "\n"
       "\n$personObjectString"
       "\n"
@@ -136,18 +139,7 @@ String composeContribAttachedSongsEmail({
   null:
   _personToObjectString(person);
 
-  return "- - - - - - Miejsce na własną wiadomość - - - - - -"
-      "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
-      "\n"
-      "\n- - - - - - Zasady dodawania piosenek - - - - - -"
-      "\n"
-      "\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (${acceptRulesVersion}, dostępne na www.harcapp.web.app/song_contribution_rules)."
-      "\n"
-      "\n- - - - - - Nie edytuj poniższego - - - - - -"
-      "\n"
-      "\n### Źródło piosenki: ${source.displayName}"
-      "\n"
-      "\n### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):"
+  return "${messageInit(source, acceptRulesVersion, isPersonsFirstSong)}"
       "\n"
       "\n$personObjectString";
 
