@@ -74,7 +74,12 @@ String composeContribSongEmailSubject({
   return '${isNewSong?'Nowa piosenka':'Poprawka piosenki'} "${song.title}" (${isPersonsFirstSong?' + świeżak + ':'- weteran - '})';
 }
 
-String messageInit(SongSource source, String? acceptRulesVersion, bool isPersonsFirstSong) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
+String _baseMessage(
+    SongSource source, 
+    String? acceptRulesVersion,
+    bool isPersonsFirstSong,
+    Person? person,
+) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
     "\n"
     "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
     "\n"
@@ -86,7 +91,13 @@ String messageInit(SongSource source, String? acceptRulesVersion, bool isPersons
     "\n"
     "\n### Źródło piosenki: ${source.displayName}"
     "\n"
-    "\n### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):";
+    "\n${
+        person == null?
+        '':
+        '### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):'
+        '\n'
+        '\n${_personToObjectString(person)}'
+    }";
 
 Future<String> composeContribSongEmail({
   required SongCore song,
@@ -99,18 +110,9 @@ Future<String> composeContribSongEmail({
 
   bool isPersonsFirstSong = _isPersonsFirstSong([song]);
 
-  String? personObjectString = person == null?
-  null:
-  _personToObjectString(
-    person,
-    contribIds: song.contribId
-  );
-
   String encodedSong = await song.code;
 
-  return "${messageInit(source, acceptRulesVersion, isPersonsFirstSong)}"
-      "\n"
-      "\n$personObjectString"
+  return "${_baseMessage(source, acceptRulesVersion, isPersonsFirstSong, person)}"
       "\n"
       "${updateComment != null?'\n### Propozycja poprawki:\n\n$updateComment':''}"
       "\n"
@@ -135,12 +137,6 @@ String composeContribAttachedSongsEmail({
 
   bool isPersonsFirstSong = _isPersonsFirstSong(songs);
 
-  String? personObjectString = person == null?
-  null:
-  _personToObjectString(person);
-
-  return "${messageInit(source, acceptRulesVersion, isPersonsFirstSong)}"
-      "\n"
-      "\n$personObjectString";
+  return _baseMessage(source, acceptRulesVersion, isPersonsFirstSong, person);
 
 }
