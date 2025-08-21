@@ -94,12 +94,12 @@ Future<String> composeContribSongEmail({
 
   String encodedSong = await song.code;
 
-  return "Przesyłam propozycję piosenki!"
+  return "- - - - - - Miejsce na własną wiadomość - - - - - -"
+      "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
+      "\n"
+      "\n- - - - - - Zasady dodawania piosenek - - - - - -"
       "\n"
       "\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (${acceptRulesVersion}, dostępne na www.harcapp.web.app/song_contribution_rules)."
-      "\n"
-      "\n- - - - - - Miejsce na własną wiadomość: - - - - - -"
-      "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
       "\n"
       "\n- - - - - - Nie edytuj poniższego - - - - - -"
       "\n"
@@ -120,7 +120,7 @@ String composeContribAttachedSongsEmailSubject({
   required List<SongCore> songs,
 }){
   bool isPersonsFirstSong = _isPersonsFirstSong(songs);
-  return 'Piosenki "${songs.length}" (${isPersonsFirstSong?' + świeżak + ':'- weteran - '})';
+  return 'Piosenki ${songs.length} (${isPersonsFirstSong?' + świeżak + ':' - weteran - '})';
 }
 
 String composeContribAttachedSongsEmail({
@@ -136,12 +136,12 @@ String composeContribAttachedSongsEmail({
   null:
   _personToObjectString(person);
 
-  return "Przesyłam propozycję piosenek!"
+  return "- - - - - - Miejsce na własną wiadomość - - - - - -"
+      "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
+      "\n"
+      "\n- - - - - - Zasady dodawania piosenek - - - - - -"
       "\n"
       "\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (${acceptRulesVersion}, dostępne na www.harcapp.web.app/song_contribution_rules)."
-      "\n"
-      "\n- - - - - - Miejsce na własną wiadomość: - - - - - -"
-      "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
       "\n"
       "\n- - - - - - Nie edytuj poniższego - - - - - -"
       "\n"
