@@ -9,6 +9,7 @@ import 'package:harcapp_core/values/dimen.dart';
 import 'dialog.dart';
 
 const double alertDialogMarginVal = 24.0;
+const double alertDialogTitleBottomMarginVal = 16.0;
 
 class AlertDialogButton extends StatelessWidget{
 
