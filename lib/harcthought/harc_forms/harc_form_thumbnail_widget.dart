@@ -12,35 +12,57 @@ import 'harc_form.dart';
 class FormThumbnailTagsWidget extends StatelessWidget{
 
   final HarcForm form;
-  const FormThumbnailTagsWidget(this.form, {super.key});
+  final int? maxItems;
+
+  const FormThumbnailTagsWidget(this.form, {this.maxItems, super.key});
 
   @override
   Widget build(BuildContext context) {
 
     List<Widget> children = [];
 
-    for(HarcFormTag tag in form.tags){
-      children.add(Row(
-        children: [
+    List<HarcFormTag> tags;
 
-          Icon(tag.icon, size: Dimen.iconSmallSize, color: hintEnab_(context)),
+    if (maxItems == null) tags = form.tags;
+    else tags = form.tags.take(maxItems!).toList();
 
-          const SizedBox(width: Dimen.iconMarg),
+    bool hasMoreThanMax = maxItems != null && form.tags.length > maxItems!;
 
+    for(HarcFormTag tag in tags)
+      children.add(
+          Row(
+            children: [
+
+              Icon(tag.icon, size: Dimen.iconSmallSize, color: hintEnab_(context)),
+
+              const SizedBox(width: Dimen.iconMarg),
+
+              Text(
+                tag.text,
+                style: AppTextStyle(
+                  fontSize: Dimen.textSizeNormal,
+                  color: hintEnab_(context),
+                  fontWeight: weightHalfBold,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+
+            ],
+          )
+      );
+
+    if(hasMoreThanMax)
+      children.add(
           Text(
-            tag.text,
+            "...",
             style: AppTextStyle(
               fontSize: Dimen.textSizeNormal,
               color: hintEnab_(context),
               fontWeight: weightHalfBold,
             ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-
-        ],
-      ));
-    }
+          )
+      );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,59 +87,57 @@ class FormThumbnailWidget extends StatelessWidget{
     child: Hero(
         tag: form,
         child: GradientWidget(
-          elevation: elevation,
-          colorStart: form.colorStart.withValues(alpha: .25),
-          colorEnd: form.colorEnd.withValues(alpha: .25),
-          radius: AppCard.bigRadius,
-          child: InkWell(
-              onTap: onTap,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
+            elevation: elevation,
+            colorStart: form.colorStart.withValues(alpha: .25),
+            colorEnd: form.colorEnd.withValues(alpha: .25),
+            radius: AppCard.bigRadius,
+            child: InkWell(
+                onTap: onTap,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
 
-                    GradientIcon(
-                      form.icon,
-                      colorStart: form.colorStart,
-                      colorEnd: form.colorEnd,
-                      size: 64.0,
-                    ),
-
-                    const SizedBox(width: Dimen.iconMarg),
-
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            form.title,
-                            style: AppTextStyle(
-                              fontSize: Dimen.textSizeBig,
-                              color: iconEnab_(context),
-                              fontWeight: weightBold,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-
-                          const SizedBox(height: Dimen.iconMarg),
-
-                          FormThumbnailTagsWidget(form),
-
-                          Expanded(child: Container()),
-
-                          MetoRow(form.metos, mainAxisAlignment: MainAxisAlignment.end),
-
-                        ],
+                      GradientIcon(
+                        form.icon,
+                        colorStart: form.colorStart,
+                        colorEnd: form.colorEnd,
+                        size: 64.0,
                       ),
-                    ),
 
-                  ],
-                ),
-              )
-          )
-      )
+                      const SizedBox(width: Dimen.iconMarg),
+
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              form.title,
+                              style: AppTextStyle(
+                                fontSize: Dimen.textSizeBig,
+                                color: iconEnab_(context),
+                                fontWeight: weightBold,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+
+                            const SizedBox(height: Dimen.iconMarg),
+
+                            Expanded(child: FormThumbnailTagsWidget(form, maxItems: 2)),
+
+                            MetoRow(form.metos, mainAxisAlignment: MainAxisAlignment.end),
+
+                          ],
+                        ),
+                      ),
+
+                    ],
+                  ),
+                )
+            )
+        )
 
     ),
   );
