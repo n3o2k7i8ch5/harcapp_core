@@ -29,6 +29,33 @@ class MetoIcon extends StatelessWidget{
 
 }
 
+class MetoThumbnail extends StatelessWidget{
+
+  final Meto meto;
+
+  const MetoThumbnail({required this.meto, super.key});
+
+  @override
+  Widget build(BuildContext context) => Material(
+    borderRadius: BorderRadius.circular(100),
+    color: background_(context).withValues(alpha: .7),
+    child: SizedBox(
+      width: 24,
+      height: 24,
+      child: Center(
+        child: Text(
+          meto.letter,
+          style: AppTextStyle(
+              fontWeight: weightBold,
+              color: meto.color,
+          ),
+        )
+      ),
+    ),
+  );
+
+}
+
 class MetoTile extends StatelessWidget{
 
   final double iconSize;
