@@ -6,6 +6,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/gradient_widget.dart';
 import 'package:harcapp_core/values/dimen.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'harc_form.dart';
 
@@ -54,14 +55,8 @@ class FormThumbnailTagsWidget extends StatelessWidget{
 
     if(hasMoreThanMax)
       children.add(
-          Text(
-            "...",
-            style: AppTextStyle(
-              fontSize: Dimen.textSizeNormal,
-              color: hintEnab_(context),
-              fontWeight: weightHalfBold,
-            ),
-          )
+        Icon(MdiIcons.dotsHorizontal, size: Dimen.iconSmallSize, color: hintEnab_(context)),
+
       );
 
     return Column(
