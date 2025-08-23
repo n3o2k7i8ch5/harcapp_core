@@ -84,6 +84,8 @@ class MetoTile extends StatelessWidget{
 
                     Text(
                       meto.age,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: AppTextStyle(
                           fontSize: Dimen.textSizeNormal,
                           fontWeight: weightHalfBold,
