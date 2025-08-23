@@ -70,18 +70,7 @@ class KonspektTileWidget extends StatelessWidget{
                     bottom: Dimen.iconMarg,
                     right: Dimen.iconMarg,
                     left: Dimen.iconMarg,
-                    child: MetoRow(
-                      konspekt.metos,
-                      itemBuilder: (child) => Material(
-                        borderRadius: BorderRadius.circular(100),
-                        color: background_(context).withValues(alpha: .7),
-                        child: SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: Center(child: child),
-                        ),
-                      ),
-                    ),
+                    child: MetoRow(konspekt.metos),
                   ),
 
                 ],

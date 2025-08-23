@@ -107,7 +107,7 @@ class FormThumbnailWidget extends StatelessWidget{
 
                           Expanded(child: Container()),
 
-                          MetoRow(form.metos, elevated: true, mainAxisAlignment: MainAxisAlignment.end),
+                          MetoRow(form.metos, mainAxisAlignment: MainAxisAlignment.end),
 
                         ],
                       ),
