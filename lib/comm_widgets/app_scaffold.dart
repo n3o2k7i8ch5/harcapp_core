@@ -14,8 +14,20 @@ class AppScaffold extends StatelessWidget{
   final Color? backgroundColor;
   final bool avoidKeyboard;
   final bool extendBody;
+  final bool extendBodyBehindAppBar;
 
-  const AppScaffold({this.scaffoldKey, this.appBar, this.drawer, this.body, this.backgroundColor, this.bottomNavigationBar, this.floatingActionButton, this.avoidKeyboard = true, this.extendBody = false});
+  const AppScaffold({
+    this.scaffoldKey,
+    this.appBar,
+    this.drawer,
+    this.body,
+    this.backgroundColor,
+    this.bottomNavigationBar,
+    this.floatingActionButton,
+    this.avoidKeyboard = true,
+    this.extendBody = false,
+    this.extendBodyBehindAppBar = false
+  });
 
   @override
   Widget build(BuildContext context) => MediaQuery.removePadding(
@@ -32,6 +44,7 @@ class AppScaffold extends StatelessWidget{
         floatingActionButton: floatingActionButton,
         resizeToAvoidBottomInset: avoidKeyboard,
         extendBody: extendBody,
+        extendBodyBehindAppBar: extendBodyBehindAppBar,
       )
   );
 
