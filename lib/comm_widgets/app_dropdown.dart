@@ -35,6 +35,7 @@ class AppDropdown<T extends IconTextEnum> extends StatelessWidget{
   final Widget? child;
   final Widget? icon;
   final Color? color;
+  final PopupMenuPosition? position;
   final void Function(T item) onSelected;
   final List<AppDropdownButton<T>> Function(BuildContext context) itemBuilder;
 
@@ -43,6 +44,7 @@ class AppDropdown<T extends IconTextEnum> extends StatelessWidget{
     this.child,
     this.icon,
     this.color,
+    this.position,
     required this.onSelected,
     required this.itemBuilder,
   });
@@ -58,6 +60,7 @@ class AppDropdown<T extends IconTextEnum> extends StatelessWidget{
     color: color??background_(context),
     icon: icon,
     child: child,
+    position: position,
     onSelected: onSelected,
     itemBuilder: (BuildContext context) => itemBuilder.call(context)
   );
