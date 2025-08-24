@@ -8,6 +8,10 @@ import 'multi_text_field.dart';
 
 class AppTextFieldHint extends StatefulWidget{
 
+  static const double topHintFontSize = Dimen.textSizeSmall;
+  static const FontWeight topHintFontWeight = weightHalfBold;
+  static topHintColor(BuildContext context) => hintEnab_(context);
+
   final String hint;
   final String? hintTop;
   final TextEditingController? controller;
@@ -188,7 +192,11 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
             AnimatedOpacity(
               child: Text(
                 multiController!.length==1?hintTop:multiHintTop,
-                style: AppTextStyle(fontSize: Dimen.textSizeSmall, fontWeight: weightHalfBold, color: hintEnab_(context)),
+                style: AppTextStyle(
+                  fontSize: AppTextFieldHint.topHintFontSize,
+                  fontWeight: AppTextFieldHint.topHintFontWeight,
+                  color: AppTextFieldHint.topHintColor(context)
+                ),
               ),
               duration: Duration(milliseconds: 300),
               opacity:
