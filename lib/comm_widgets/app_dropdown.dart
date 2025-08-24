@@ -12,13 +12,15 @@ abstract interface class IconTextEnum {
 
 class AppDropdownButton<T extends IconTextEnum> extends PopupMenuItem<T>{
 
-  AppDropdownButton(BuildContext context, T item):
+  AppDropdownButton(BuildContext context, T item, {bool enabled = true}):
         super(
           value: item,
+          enabled: enabled,
           padding: EdgeInsets.zero,
           child: SimpleButton.from(
               context: context,
               onTap: null,
+              textColor: enabled?iconEnab_(context): iconDisab_(context),
               fontWeight: weightNormal,
               margin: EdgeInsets.zero,
               text: item.text,
