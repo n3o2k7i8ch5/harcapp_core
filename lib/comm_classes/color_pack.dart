@@ -74,7 +74,7 @@ abstract class ColorPack{
 
   ThemeData themeData(BuildContext context){
 
-    AppBarTheme appBarTheme = AppBarTheme.of(context);
+    AppBarThemeData appBarTheme = AppBarTheme.of(context);
     appBarTheme = appBarTheme.copyWith(
         backgroundColor: appBar,
         titleTextStyle: (appBarTheme.titleTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, fontSize: Dimen.textSizeAppBar, color: appBarTextEnabled),
