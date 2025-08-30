@@ -121,22 +121,26 @@ class SongPartCard extends StatelessWidget{
 
       }
 
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          if(topBuilder!=null) topBuilder!(context, songPart),
+      return IgnorePointer(
+          ignoring: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              if(topBuilder!=null) topBuilder!(context, songPart),
 
-          IgnorePointer(
-            child: SimpleButton(
-                radius: AppCard.bigRadius,
-                padding: EdgeInsets.all(Dimen.defMarg),
-                margin: EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg),
-                child: main,
-                onTap: onTap
-            ),
+              IgnorePointer(
+                ignoring: false,
+                child: SimpleButton(
+                    radius: AppCard.bigRadius,
+                    padding: EdgeInsets.all(Dimen.defMarg),
+                    margin: EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg),
+                    child: main,
+                    onTap: onTap
+                ),
+              )
+            ],
           )
-        ],
       );
 
     },
@@ -267,25 +271,34 @@ class TopZwrotkaButtons extends StatelessWidget{
       ),
 
       if(songPart.isError)
-        IconButton(
-          icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-          onPressed: () => AppScaffold.showMessage(context, 'Zwrotka nie spełnia standardów. Podejrzyj ją by dowiedzieć się więcej.'),
+        IgnorePointer(
+          ignoring: false,
+          child: IconButton(
+            icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
+            onPressed: () => AppScaffold.showMessage(context, 'Zwrotka nie spełnia standardów. Podejrzyj ją by dowiedzieć się więcej.'),
+          ),
         ),
 
-      IconButton(
-        icon: Icon(MdiIcons.contentDuplicate, color: iconEnab_(context)),
-        onPressed: (){
-          onDuplicate?.call(songPart);
-          CurrentItemProvider.of(context).addPart(songPart.copy());
-        },
+      IgnorePointer(
+        ignoring: false,
+        child: IconButton(
+          icon: Icon(MdiIcons.contentDuplicate, color: iconEnab_(context)),
+          onPressed: (){
+            onDuplicate?.call(songPart);
+            CurrentItemProvider.of(context).addPart(songPart.copy());
+          },
+        ),
       ),
 
-      IconButton(
-        icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
-        onPressed: (){
-          onDelete?.call(songPart);
-          CurrentItemProvider.of(context).removePart(songPart);
-        },
+      IgnorePointer(
+        ignoring: false,
+        child: IconButton(
+          icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
+          onPressed: (){
+            onDelete?.call(songPart);
+            CurrentItemProvider.of(context).removePart(songPart);
+          },
+        ),
       ),
 
     ],
@@ -322,12 +335,15 @@ class TopRefrenButtons extends StatelessWidget{
           Container()
       ),
 
-      IconButton(
-        icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
-        onPressed: (){
-          onDelete?.call(songPart);
-          CurrentItemProvider.of(context).removePart(songPart);
-        },
+      IgnorePointer(
+        ignoring: false,
+        child: IconButton(
+          icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
+          onPressed: (){
+            onDelete?.call(songPart);
+            CurrentItemProvider.of(context).removePart(songPart);
+          },
+        ),
       ),
 
     ],
