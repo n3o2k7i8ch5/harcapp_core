@@ -67,6 +67,7 @@ class SongPartsListWidget extends StatelessWidget{
 
       return AnimatedReorderableListView(
         buildDefaultDragHandles: false,
+        longPressDraggable: false,
         proxyDecorator: proxyDecorator,
         physics: physics??BouncingScrollPhysics(),
         controller: _controller,
@@ -74,7 +75,6 @@ class SongPartsListWidget extends StatelessWidget{
         nonDraggableItems: fixedItems,
         lockedItems: fixedItems,
         clipBehavior: Clip.none,
-        dragStartDelay: Duration.zero,
         isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
         onReorder: (int oldIndex, int newIndex){
           oldIndex = _getSongPartIndex(oldIndex);
