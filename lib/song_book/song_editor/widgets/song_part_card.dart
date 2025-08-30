@@ -3,6 +3,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
+import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -255,9 +256,12 @@ class TopZwrotkaButtons extends StatelessWidget{
   Widget build(BuildContext context) => Row(
     children: <Widget>[
 
-      Padding(
-        padding: EdgeInsets.all(Dimen.iconMarg),
-        child: ReorderableDragStartListener(index: index, child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))),
+      ReorderableDragStartListener(
+          index: index,
+          child: IconButton(
+            icon: Icon(MdiIcons.swapVertical, color: iconEnab_(context)),
+            onPressed: () => showAppToast(context, text: 'Przytrzymaj, by przenieść'),
+          )
       ),
 
       Expanded(
@@ -311,9 +315,12 @@ class TopRefrenButtons extends StatelessWidget{
   Widget build(BuildContext context) => Row(
     children: <Widget>[
 
-      Padding(
-        padding: EdgeInsets.all(Dimen.iconMarg),
-        child: ReorderableDragStartListener(index: index, child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))),
+      ReorderableDragStartListener(
+        index: index,
+        child: IconButton(
+          icon: Icon(MdiIcons.swapVertical, color: iconEnab_(context)),
+          onPressed: () => showAppToast(context, text: 'Przytrzymaj, by przenieść'),
+        )
       ),
 
       Expanded(
