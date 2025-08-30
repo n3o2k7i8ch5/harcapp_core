@@ -82,6 +82,7 @@ const String huf_zhp_powiatu_trzebnickiego = 'Hufiec Powiatu Trzebnickiego';
 const String huf_zhp_poznan_grunwald = 'Hufiec ZHP Poznań Grunwald';
 const String huf_zhp_poznan_jezyce = 'Hufiec ZHP Poznań-Jeżyce';
 const String huf_zhp_poznan_nowe_miasto = 'Hufiec ZHP Poznań Nowe Miasto';
+const String huf_zhp_poznan_stare_miasto = 'Hufiec ZHP „Piast” Poznań Stare Miasto';
 const String huf_zhp_poznan_wilda = 'Hufiec ZHP Poznań-Wilda';
 const String huf_zhp_pruszkow = 'Hufiec ZHP Pruszków';
 const String huf_zhp_puck = 'Hufiec ZHP Puck';
