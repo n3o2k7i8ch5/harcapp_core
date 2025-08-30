@@ -43,7 +43,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'beretowa',
       title: 'Beretówa',
       category: KonspektCategory.harcerskie,
@@ -181,7 +181,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'bibliodrama',
       title: 'Bibliodrama',
       category: KonspektCategory.harcerskie,
@@ -365,7 +365,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'biwak_bez_nadzoru',
       title: 'Biwak bez nadzoru',
       category: KonspektCategory.harcerskie,
@@ -658,7 +658,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   ),
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'druzynowe_mycie_w_jeziorze',
       title: 'Drużynowe mycie w jeziorze',
       additionalSearchPhrases: ['jezioro'],
@@ -703,7 +703,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   dwie_roty_dwoch_przyrzeczen_harcerskich,
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'ekstremalna_droga_krzyzowa',
       title: 'Ekstremalna Droga Krzyżowa',
       additionalSearchPhrases: ['edk'],
@@ -745,7 +745,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
   // Done
   // TODO: dodać jakiś przykład
-  const Konspekt(
+  Konspekt(
       name: 'gaweda_o_swietym',
       title: 'Gawęda o świętym',
       category: KonspektCategory.harcerskie,
@@ -781,7 +781,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'ignacjanski_rachunek_sumienia',
       title: 'Ignacjański rachunek sumienia',
       category: KonspektCategory.harcerskie,
@@ -883,7 +883,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'kadrowe_msze',
       title: 'Kadrowe msze',
       additionalSearchPhrases: ['msza', 'msza'],
@@ -924,7 +924,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'kalambury_z_prawa_harcerskiego',
       title: 'Kalambury z Prawa Harcerskiego',
       additionalSearchPhrases: ['prawo harcerskie', 'ph'],
@@ -965,7 +965,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'kalambury_z_prawa_zucha',
       title: 'Kalambury z Prawa Zucha',
       additionalSearchPhrases: ['prawo zucha', 'pz'],
@@ -1050,7 +1050,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'koledowanie_z_quizem_interpretacyjnym',
       title: 'Kolędowanie z quizem interpretacyjnym',
       additionalSearchPhrases: ['kolęda', 'kolędy', 'święta'],
@@ -1086,7 +1086,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   ),
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'kontrowersyjna_dyskusja',
       title: 'Kontrowersyjna dyskusja',
       additionalSearchPhrases: ['debata', 'argument'],
@@ -1161,7 +1161,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'modlitwa_przed_posilkiem',
       title: 'Modlitwa przed posiłkiem',
       category: KonspektCategory.harcerskie,
@@ -1222,7 +1222,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   msza_obozowa_lecz_nie_tylko,
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'musztra_i_dbalosc_o_umundurowanie',
       title: 'Musztra i dbałość o umundurowanie',
       category: KonspektCategory.harcerskie,
@@ -1262,7 +1262,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'negocjowanie_koalicji_wlasnych_partii_politycznych',
       title: 'Negocjowanie koalicji własnych partii politycznych',
       additionalSearchPhrases: ['polityka', 'koalicja', 'koalicje' 'negocjacje'],
@@ -1413,7 +1413,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
     name: 'nocne_podkradanie',
     title: 'Nocne podkradanie',
     additionalSearchPhrases: ['podchody', 'noc'],
@@ -1472,7 +1472,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'opieka_nad_roslinka',
       title: 'Opieka nad roślinką',
       category: KonspektCategory.harcerskie,
@@ -1509,7 +1509,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'opowiedzenie_gawedy_o_autorytecie',
       title: 'Opowiedzenie gawędy o autorytecie',
       additionalSearchPhrases: ['gawęda'],
@@ -1547,7 +1547,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
   // Done
   // TODO: dopisać info o tym, że karanie jest ok.
-  const Konspekt(
+  Konspekt(
       name: 'padnij_za_zbyt_wolno_wykonana_zbiorke',
       title: '“Padnij” za zbyt wolną zbiórkę',
       category: KonspektCategory.harcerskie,
@@ -1584,7 +1584,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'pielgrzymka_druzyny',
       title: 'Pielgrzymka drużyny',
       category: KonspektCategory.harcerskie,
@@ -1646,7 +1646,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   ),
 
 
-  const Konspekt(
+  Konspekt(
       name: 'podzial_pirackiego_lupu',
       title: 'Podział pirackiego łupu',
       additionalSearchPhrases: ['piraci', 'pirat', 'zagadka', 'zagadki', 'zagadka logiczna'],
@@ -1821,7 +1821,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'post',
       title: 'Post',
       category: KonspektCategory.harcerskie,
@@ -1847,7 +1847,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'pozno_zyciowe_rozmowy',
       title: 'Późno-życiowe rozmowy',
       category: KonspektCategory.harcerskie,
@@ -1900,7 +1900,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'rowerowe_nabozenstwo_majowe',
       title: 'Rowerowe nabożeństwo majowe',
       additionalSearchPhrases: ['majowka'],
@@ -1993,7 +1993,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'sad_nad_postawa',
       title: 'Sąd nad postawą',
       additionalSearchPhrases: ['debata'],
@@ -2064,7 +2064,7 @@ List<Konspekt> allHarcerskieKonspekts = [
   ),
 
 
-  const Konspekt(
+  Konspekt(
       name: 'savoir_vivre_urzadzen_mobilnych',
       title: 'Savoir-vivre urządzeń mobilnych',
       additionalSearchPhrases: ['telefon', 'smartfon', 'komorka'],
@@ -2377,7 +2377,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
     name: 'swieczka_prawa_harcerskiego',
     title: 'Świeczka Prawa Harcerskiego',
     additionalSearchPhrases: ['prawo harcerskie', 'ph'],
@@ -2424,7 +2424,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
     name: 'swieczka_prawa_zuchowego',
     title: 'Świeczka Prawa Zuchowego',
     additionalSearchPhrases: ['prawo zucha', 'pz'],
@@ -2471,7 +2471,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'staly_spowiednik',
       title: 'Stały spowiednik',
       additionalSearchPhrases: ['spowiedź', 'ksiądz', 'duchowny'],
@@ -2511,7 +2511,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
     name: 'sznury_funkcje_stopnie',
     title: 'Sznury, funkcje, stopnie ZHP',
     category: KonspektCategory.harcerskie,
@@ -2727,7 +2727,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'warta_nocna',
       title: 'Warta nocna',
       category: KonspektCategory.harcerskie,
@@ -2760,7 +2760,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'wedrowka',
       title: 'Wędrówka',
       additionalSearchPhrases: ['wedrowki'],
@@ -2806,7 +2806,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'wedrowka_bez_zasobow',
       title: 'Wędrówka bez zasobów',
       additionalSearchPhrases: ['wedrowki'],
@@ -2853,7 +2853,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'wedrowka_medytacyjna',
       title: 'Wędrówka medytacyjna',
       additionalSearchPhrases: ['wedrowki', 'medytacja'],
@@ -2887,7 +2887,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'wieczorne_przeprosiny_i_podziekowania',
       title: 'Wieczorne przeprosiny i podziękowania',
       category: KonspektCategory.harcerskie,
@@ -2943,7 +2943,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'wlasny_nagrobek',
       title: 'Własny nagrobek',
       additionalSearchPhrases: ['grob', 'śmierć', 'cmentarz'],
@@ -3047,7 +3047,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'wspolna_minuta_czosnku',
       title: 'Wspólna minuta czosnku',
       additionalSearchPhrases: ['czosnek'],
@@ -3110,7 +3110,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'zagadki_matematyczno_logiczne',
       title: 'Zagadki matematno-logiczne',
       additionalSearchPhrases: ['zagadki', 'matematyka', 'logika'],
@@ -3207,7 +3207,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'zakwaterowanie_pod_namiotem',
       title: 'Zakwaterowanie pod namiotem',
       category: KonspektCategory.harcerskie,
@@ -3244,7 +3244,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // ! Done
-  const Konspekt(
+  Konspekt(
       name: 'zimowiskowe_apele_przed_osrodkiem',
       title: 'Zimowiskowe apele przed ośrodkiem',
       category: KonspektCategory.harcerskie,
@@ -3270,7 +3270,7 @@ List<Konspekt> allHarcerskieKonspekts = [
 
 
   // Done
-  const Konspekt(
+  Konspekt(
       name: 'zwiad_lokalnej_spolecznosci',
       title: 'Zwiad lokalnej społeczności',
       category: KonspektCategory.harcerskie,

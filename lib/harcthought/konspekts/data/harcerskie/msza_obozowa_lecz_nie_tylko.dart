@@ -6,7 +6,7 @@ import 'package:harcapp_core/values/people.dart';
 import '../level_examples.dart';
 import 'refleksja_nad_aksjomatem_ducha.dart';
 
-Konspekt msza_obozowa_lecz_nie_tylko = const Konspekt(
+Konspekt msza_obozowa_lecz_nie_tylko = Konspekt(
   name: 'msza_obozowa_lecz_nie_tylko',
   title: 'Msza (obozowa, lecz nie tylko)',
   category: KonspektCategory.harcerskie,

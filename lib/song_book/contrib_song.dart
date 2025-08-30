@@ -39,7 +39,7 @@ String _personToObjectString(Person person, {List<ContributorIdentity> contribId
   for(ContributorIdentity contribId in contribIds)
     if(contribId.emailRef != null) contribIdEmails.add(contribId.emailRef!);
 
-  newPersonCode = "const Person ${remPolChars(person.name).toUpperCase().replaceAll(' ', '_')} = Person(";
+  newPersonCode = "Person ${remPolChars(person.name).toUpperCase().replaceAll(' ', '_')} = _register(const Person(";
   if(hasName) newPersonCode += "\n  name: '${person.name}',";
   if(hasDruzyna) newPersonCode += "\n  druzyna: '${person.druzyna}',";
   if(hasHufiec) newPersonCode += "\n  hufiec: '${person.hufiec}',";
@@ -47,7 +47,7 @@ String _personToObjectString(Person person, {List<ContributorIdentity> contribId
   if(hasRankHarc) newPersonCode += "\n  rankHarc: RankHarc.${person.rankHarc?.shortName},";
   if(hasOrg) newPersonCode += "\n  org: ${person.org},";
   newPersonCode += "\n  email: [${(person.email.isEmpty?contribIdEmails:person.email).map((email) => '"$email"').join(', ')}]";
-  newPersonCode += "\n);";
+  newPersonCode += "\n));";
 
   return newPersonCode;
 }

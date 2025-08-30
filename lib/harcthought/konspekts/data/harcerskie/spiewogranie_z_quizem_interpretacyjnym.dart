@@ -6,7 +6,7 @@ const String konspekt_harc_name_spiewogranie_z_quizem_interpretacyjnym = 'spiewo
 const String konspekt_harc_title_spiewogranie_z_quizem_interpretacyjnym = 'Śpiewogranie z quizem interpretacyjnym';
 const String konspekt_harc_html_spiewogranie_z_quizem_interpretacyjnym = '<a href="$konspekt_harc_name_spiewogranie_z_quizem_interpretacyjnym@harcerskie.konspekt">$konspekt_harc_title_spiewogranie_z_quizem_interpretacyjnym</a>';
 
-Konspekt spiewogranie_z_quizem_interpretacyjnym = const Konspekt(
+Konspekt spiewogranie_z_quizem_interpretacyjnym = Konspekt(
   name: konspekt_harc_name_spiewogranie_z_quizem_interpretacyjnym,
   title: konspekt_harc_title_spiewogranie_z_quizem_interpretacyjnym,
   additionalSearchPhrases: ['śpiewowisko', 'śpiewanie', 'piosenki', 'interpretacja', 'quiz'],

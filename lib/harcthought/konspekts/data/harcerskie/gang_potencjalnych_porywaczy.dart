@@ -16,7 +16,7 @@ const KonspektAttachment attach_wycinki_informacji = KonspektAttachment(
   },
 );
 
-Konspekt gang_potencjalnych_porywaczy = const Konspekt(
+Konspekt gang_potencjalnych_porywaczy = Konspekt(
   name: 'gang_potencjalnych_porywaczy',
   title: 'Gang potencjalnych porywaczy',
   category: KonspektCategory.harcerskie,

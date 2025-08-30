@@ -8,7 +8,7 @@ const String konspekt_harc_name_refleksja_nad_aksjomatem_ducha = 'refleksja_nad_
 const String konspekt_harc_title_refleksja_nad_aksjomatem_ducha = 'Refleksja nad aksjomatem ducha';
 const String konspekt_harc_html_refleksja_nad_aksjomatem_ducha = '<a href="$konspekt_harc_name_refleksja_nad_aksjomatem_ducha@harcerskie.konspekt">$konspekt_harc_title_refleksja_nad_aksjomatem_ducha</a>';
 
-Konspekt refleksja_nad_aksjomatem_ducha = const Konspekt(
+Konspekt refleksja_nad_aksjomatem_ducha = Konspekt(
   name: konspekt_harc_name_refleksja_nad_aksjomatem_ducha,
   title: konspekt_harc_title_refleksja_nad_aksjomatem_ducha,
   category: KonspektCategory.harcerskie,
