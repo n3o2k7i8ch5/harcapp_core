@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:animated_reorderable_list/animated_reorderable_list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
@@ -74,6 +75,7 @@ class SongPartsListWidget extends StatelessWidget{
         nonDraggableItems: fixedItems,
         lockedItems: fixedItems,
         clipBehavior: Clip.none,
+        dragStartDelay: kIsWeb? Duration.zero: Duration(milliseconds: 300),
         isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
         onReorder: (int oldIndex, int newIndex){
           oldIndex = _getSongPartIndex(oldIndex);
