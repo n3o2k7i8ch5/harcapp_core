@@ -105,6 +105,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   }
 
   void onAnyChangedListener(List<String> texts) {
+    setState(() {});
     widget.onAnyChanged?.call(texts);
   }
 
@@ -152,8 +153,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         focusNode: widget.focusNode,
         autofocus: widget.autofocus,
         onChanged: (text){
-          if(controller.text.length<=1)
-            setState(() {});
+          setState(() {});
 
           onChangedListener(0, text);
           onAnyChangedListener([text]);
