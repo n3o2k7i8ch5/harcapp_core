@@ -114,7 +114,6 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
         radius: AppCard.bigRadius,
         elevation: widget.elevation,
         padding: EdgeInsets.zero,
-        margin: AppCard.normMargin,
         child: MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (context) => TextProvider(text: initText??'')),
