@@ -75,7 +75,7 @@ class SongPartsListWidget extends StatelessWidget{
         nonDraggableItems: fixedItems,
         lockedItems: fixedItems,
         clipBehavior: Clip.none,
-        dragStartDelay: kIsWeb? Duration.zero: Duration(milliseconds: 300),
+        dragStartDelay: kIsWeb? Duration(milliseconds: 10): Duration(milliseconds: 300),
         isSameItem: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
         onReorder: (int oldIndex, int newIndex){
           oldIndex = _getSongPartIndex(oldIndex);

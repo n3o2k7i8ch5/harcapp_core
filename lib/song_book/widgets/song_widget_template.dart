@@ -12,6 +12,7 @@ import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/chord_draw_bar.dart';
 import 'package:harcapp_core/comm_widgets/instrument_type.dart';
+import 'package:harcapp_core/comm_widgets/separated_column.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -412,7 +413,8 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
                 if(song.contribId.isNotEmpty)
                   Padding(
                       padding: const EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg, left: 2*Dimen.defMarg + Dimen.textSizeNormal + 2),
-                      child: Column(
+                      child: SeparatedColumn(
+                        separator: SizedBox(height: Dimen.defMarg),
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: song.contribId.map((contribId) => contribIdResolver.build(context, contribId)).toList(),
                       )

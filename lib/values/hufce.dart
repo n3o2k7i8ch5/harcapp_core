@@ -113,6 +113,7 @@ const String huf_zhp_warszawa_praga_pd = 'Hufiec ZHP Warszawa Praga Południe';
 const String huf_zhp_warszawa_praga_pn = 'Hufiec ZHP Warszawa-Praga-Północ';
 const String huf_zhp_warszawa_ursus_wlochy = 'Hufiec ZHP Warszawa Ursus-Włochy';
 const String huf_zhp_warszawa_ursynow = 'Hufiec ZHP Warszawa Ursynów';
+const String huf_zhp_warszawa_wawer = 'Hufiec ZHP Warszawa Wawer';
 const String huf_zhp_warszawa_wola = 'Hufiec ZHP Warszawa Wola';
 const String huf_zhp_warszawa_zoliborz = 'Hufiec ZHP Warszawa Żoliborz';
 const String huf_zhp_wegierska_gorka = 'Hufiec ZHP Węgierska Górka im. Obrońców Węgierskiej Górki';

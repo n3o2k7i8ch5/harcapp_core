@@ -116,6 +116,14 @@ Person ALEKSANDER_PALKA = _register(const Person(
     org: Org.zhp,
     email: ['tomaszml9236@gmail.com']
 ));
+Person ALEKSANDER_WELYCZKO = _register(const Person(
+    name: 'Aleksander Wełyczko',
+    druzyna: '5. DH „Czarne Wilki”',
+    hufiec: 'OłWa',
+    rankHarc: RankHarc.zhpOdkrywca,
+    org: Org.zhp,
+    email: ["rxus759@gmail.com"]
+));
 Person ALEKSANDRA_ANTKIEWICZ = _register(const Person(
     name: 'Ola Antkiewicz',
     druzyna: '35. Chynowska Drużyna Wielopoziomowa „Vis Verum”',
@@ -430,6 +438,13 @@ Person DAWID_LOBODA = _register(const Person(
     rankHarc: RankHarc.zhrHOc,
     org: Org.zhr,
     email: ['dawidekk728@gmail.com']
+));
+Person DAWID_PIOTR_JACHIMOWSKI = _register(const Person(
+    name: 'Dawid Piotr Jachimowski',
+    druzyna: '1 Włodawska Drużyna Harcerzy "Delta" im. Augusta Emila Fieldorfa ps. "Nil"',
+    rankHarc: RankHarc.zhrMlodzik,
+    org: Org.zhr,
+    email: ["dawid.kret011@gmail.com"]
 ));
 Person DAWID_WYSZYNSKI = _register(const Person(name: 'Dawid Wyszyński', rankHarc: RankHarc.dhc, org: Org.zhp,));
 Person DOMINIK_BETKA = _register(const Person(
@@ -811,6 +826,14 @@ Person HUGO_HANUSA = _register(const Person(
       'hanusahugo@gmail.com'
     ]
 ));
+Person HUGO_ZASACKI = _register(const Person(
+    name: 'Hugo Zasacki',
+    druzyna: 'Impeesa',
+    hufiec: "Wawer",
+    rankHarc: RankHarc.zhrCwik,
+    org: Org.zhr,
+    email: ["hugozas10@gmail.com"]
+));
 Person IDA_BECHTOLD = _register(const Person(
     name: 'Ida Bechtold',
     druzyna: '18. ŁDH Wierchy',
@@ -1060,7 +1083,7 @@ Person JAN_KUCZA = _register(const Person(
 ));
 Person JAN_KWIATKOWSKI = _register(const Person(
     name: 'Jan Kwiatkowski',
-    druzyna: 'Chabrowa 18. Toruńska Drużyna Harcerska "Las" im. Emilii Plater',
+    druzyna: 'Chabrowa 18. Toruńska Drużyna Harcerska „Las” im. Emilii Plater',
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -1068,11 +1091,19 @@ Person JAN_KWIATKOWSKI = _register(const Person(
 ));
 Person JAN_LEWANDOWSKI = _register(const Person(
     name: 'Jan Lewandowski',
-    druzyna: '58. MDH Cichociemni',
+    druzyna: '58. MDH „Cichociemni”',
     hufiec: 'Eldorado',
     rankHarc: RankHarc.zhrWywiadowca,
     org: Org.zhr,
     email: ["janeklefy@gmail.com"]
+));
+Person JAN_LICZBANSKI = _register(const Person(
+    name: 'Jan Liczbański',
+    druzyna: '1. PDH „Puszcza” im. KWP',
+    hufiec: 'Łódzki Hufiec Harcerzy "Szaniec"',
+    rankHarc: RankHarc.zhrWywiadowca,
+    org: Org.zhr,
+    email: ["janekliczbanski10@gmail.com", "kowalewiczgosia@gmail.com"]
 ));
 Person JAN_NOWAK = _register(const Person(
     name: 'Jan Nowak',
@@ -1364,6 +1395,14 @@ Person KAJETAN_WYGNANSKI = _register(const Person(
   hufiec: huf_zhp_pruszkow,
   rankHarc: RankHarc.zhpOdkrywca,
   org: Org.zhp,
+));
+Person KAROLINA_BABOL = _register(const Person(
+    name: 'Karolina Bąbol',
+    druzyna: '1. PDH-ek „Płomień” im. Olgi Drahonowskiej- Małkowskiej',
+    hufiec: 'Łodzki Hufiec Harcerek „Mozaika”',
+    rankHarc: RankHarc.zhrTropicielka,
+    org: Org.zhr,
+    email: ["karolinababolzhr@gmail.com"]
 ));
 Person KAROLINA_CZARNECKA = _register(const Person(
     name: 'Karolina Czarnecka',
@@ -3003,6 +3042,13 @@ Person TYMOTEUSZ_JAWORSKI = _register(const Person(
     rankHarc: RankHarc.zhrWywiadowca,
     org: Org.zhr,
     email: ['tymekjaworski36@gmail.com']
+));
+Person URSZULA_KOWALSKA = _register(const Person(
+    name: 'Ula Kowalska',
+    druzyna: '47. WDHS „Tajfun”',
+    rankHarc: RankHarc.zhpTropicielka,
+    org: Org.zhp,
+    email: ["kobea9415@gmail.com"]
 ));
 Person WANDA_MARCHEL = _register(const Person(
     name: 'Wanda Marchel',
