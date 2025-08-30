@@ -127,7 +127,7 @@ class SongPartCard extends StatelessWidget{
         children: <Widget>[
           if(topBuilder!=null) topBuilder!(context, songPart),
 
-          AbsorbPointer(
+          IgnorePointer(
             child: SimpleButton(
                 radius: AppCard.bigRadius,
                 padding: EdgeInsets.all(Dimen.defMarg),
