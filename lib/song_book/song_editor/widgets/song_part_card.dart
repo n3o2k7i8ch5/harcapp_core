@@ -127,21 +127,12 @@ class SongPartCard extends StatelessWidget{
         children: <Widget>[
           if(topBuilder!=null) topBuilder!(context, songPart),
 
-          Stack(
-            children: [
-
-              Positioned.fill(child: AbsorbPointer(child: Container())),
-              Positioned.fill(child: IgnorePointer(child: Container())),
-
-              SimpleButton(
-                  radius: AppCard.bigRadius,
-                  padding: EdgeInsets.all(Dimen.defMarg),
-                  margin: EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg),
-                  child: main,
-                  onTap: onTap
-              ),
-
-            ],
+          SimpleButton(
+              radius: AppCard.bigRadius,
+              padding: EdgeInsets.all(Dimen.defMarg),
+              margin: EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg),
+              child: main,
+              onTap: onTap
           )
 
 
