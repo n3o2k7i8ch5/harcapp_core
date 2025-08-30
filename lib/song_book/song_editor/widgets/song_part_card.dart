@@ -121,7 +121,7 @@ class SongPartCard extends StatelessWidget{
 
       }
 
-      return  Column(
+      return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -131,6 +131,7 @@ class SongPartCard extends StatelessWidget{
             children: [
 
               Positioned.fill(child: AbsorbPointer(child: Container())),
+              Positioned.fill(child: IgnorePointer(child: Container())),
 
               SimpleButton(
                   radius: AppCard.bigRadius,
