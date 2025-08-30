@@ -997,7 +997,8 @@ class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends Contribu
               menuPadding: EdgeInsets.zero,
               padding: EdgeInsets.zero,
               icon: Icon(MdiIcons.dotsVertical),
-              color: background_(context),
+              color: cardEnab_(context),
+              clipBehavior: Clip.hardEdge,
               onSelected: (_ButtonData item) => item.onPressed(context, fragmentState, this),
               itemBuilder: (BuildContext context) => hiddenButtons.map(
                   (button) => PopupMenuItem<_ButtonData>(
