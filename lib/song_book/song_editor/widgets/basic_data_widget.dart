@@ -4,7 +4,8 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
-import 'package:harcapp_core/comm_classes/open_in_new_tab.dart';
+import 'package:harcapp_core/comm_classes/web_utils_stub.dart'
+if (dart.library.html) 'package:harcapp_core/comm_classes/web_utils_web.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
