@@ -203,11 +203,13 @@ class MultiTextFieldState extends State<MultiTextField>{
       style: style,
       hintStyle: hintStyle,
       hint: hint,
-      padding: withSeparator?
-        EdgeInsets.only(
-          right: widget.layout == LayoutMode.row?horizontalSeparator:0,
-          bottom: widget.layout == LayoutMode.column?verticalSeparator:0
-        ): null,
+      padding:
+      withSeparator?
+      EdgeInsets.only(
+        right: widget.layout == LayoutMode.row?horizontalSeparator:0,
+        bottom: widget.layout == LayoutMode.column?verticalSeparator:0
+      ):
+      null,
       textCapitalization: textCapitalization,
       textAlignVertical: textAlignVertical,
       removable: controller.length>minCount,

@@ -105,8 +105,20 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   }
 
   void onAnyChangedListener(List<String> texts) {
-    setState(() {});
+    showTopHintNotifier.value = topHintVisible;
     widget.onAnyChanged?.call(texts);
+  }
+
+  late ValueNotifier<bool> showTopHintNotifier;
+
+  bool get topHintVisible{
+    (multi && multiController!.isEmpty) || (!multi && controller.text.isEmpty)?0:1;
+
+    if(multi)
+      return multiController!.isNotEmpty;
+    else
+      return controller.text.isNotEmpty;
+
   }
 
   @override
@@ -119,6 +131,14 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     if(widget.controller == null)
       _controller = TextEditingController(text: '');
 
+    showTopHintNotifier = ValueNotifier(topHintVisible);
+
+  }
+
+  @override
+  void dispose() {
+    showTopHintNotifier.dispose();
+    super.dispose();
   }
 
   @override
@@ -154,7 +174,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         focusNode: widget.focusNode,
         autofocus: widget.autofocus,
         onChanged: (text){
-          setState(() {});
+          showTopHintNotifier.value = topHintVisible;
 
           onChangedListener(0, text);
           onAnyChangedListener([text]);
@@ -181,31 +201,35 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
     return Row(
       children: <Widget>[
         if(widget.leading!=null) widget.leading!,
-        Expanded(child: Stack(
-          clipBehavior: Clip.none,
-          children: <Widget>[
+        Expanded(
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: <Widget>[
 
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.0),
-              child: textField,
-            ),
-
-            AnimatedOpacity(
-              child: Text(
-                multiController!.length==1?hintTop:multiHintTop,
-                style: AppTextStyle(
-                  fontSize: AppTextFieldHint.topHintFontSize,
-                  fontWeight: AppTextFieldHint.topHintFontWeight,
-                  color: AppTextFieldHint.topHintColor(context)
-                ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 12.0),
+                child: textField,
               ),
-              duration: Duration(milliseconds: 300),
-              opacity:
-              (multi && multiController!.isEmpty) || (!multi && controller.text.isEmpty)?0:1,
-            ),
 
-          ],
-        )),
+              ValueListenableBuilder<bool>(
+                  valueListenable: showTopHintNotifier,
+                  builder: (_, visible, _) => AnimatedOpacity(
+                    child: Text(
+                      multiController!.length==1?hintTop:multiHintTop,
+                      style: AppTextStyle(
+                          fontSize: AppTextFieldHint.topHintFontSize,
+                          fontWeight: AppTextFieldHint.topHintFontWeight,
+                          color: AppTextFieldHint.topHintColor(context)
+                      ),
+                    ),
+                    duration: Duration(milliseconds: 300),
+                    opacity:visible?1:0,
+                  )
+              ),
+
+            ],
+          )
+        ),
       ],
     );
 
