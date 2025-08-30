@@ -120,6 +120,7 @@ class MultiTextField extends StatefulWidget{
   final void Function(int, String)? onChanged;
   final void Function(int)? onRemoved;
   final bool enabled;
+  final EdgeInsets? contentPadding;
   final bool isCollapsed;
 
   const MultiTextField({
@@ -143,6 +144,7 @@ class MultiTextField extends StatefulWidget{
     this.onChanged,
     this.onRemoved, 
     this.enabled = true,
+    this.contentPadding,
     this.isCollapsed = false,
     super.key
   });
@@ -177,6 +179,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   void Function(int, String)? get onChanged => widget.onChanged;
   void Function(int)? get onRemoved => widget.onRemoved;
   bool get enabled => widget.enabled;
+  EdgeInsets? get contentPadding => widget.contentPadding;
   bool get isCollapsed => widget.isCollapsed;
 
   void _callOnChanged(int index) => onChanged?.call(index, controller[index].text);
@@ -208,7 +211,6 @@ class MultiTextFieldState extends State<MultiTextField>{
       textCapitalization: textCapitalization,
       textAlignVertical: textAlignVertical,
       removable: controller.length>minCount,
-      isCollapsed: isCollapsed,
       onChanged: (text){
         if(index == controller.length-1)
           setState(() {});
@@ -226,6 +228,8 @@ class MultiTextFieldState extends State<MultiTextField>{
         controller._callOnAnyChanged();
       }),
       enabled: enabled,
+      isCollapsed: isCollapsed,
+      contentPadding: contentPadding,
     );
 
     if(itemBuilder != null)
@@ -328,6 +332,7 @@ class _ItemWidget extends StatefulWidget{
   final void Function()? onRemoveTap;
   final void Function(String)? onChanged;
   final bool enabled;
+  final EdgeInsets? contentPadding;
   final bool isCollapsed;
 
   const _ItemWidget({
@@ -341,6 +346,7 @@ class _ItemWidget extends StatefulWidget{
     this.textAlignVertical, this.onRemoveTap,
     this.onChanged,
     this.enabled = true,
+    this.contentPadding,
     this.isCollapsed = false,
     super.key
   });
@@ -365,6 +371,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
   void Function()? get onRemoveTap => widget.onRemoveTap;
   void Function(String)? get onChanged => widget.onChanged;
   bool get enabled => widget.enabled;
+  EdgeInsets? get contentPadding => widget.contentPadding;
   bool get isCollapsed => widget.isCollapsed;
 
   
@@ -377,39 +384,42 @@ class _ItemWidgetState extends State<_ItemWidget>{
         mainAxisSize: MainAxisSize.min,
         children: [
 
-          Expanded(child: AnimatedSize(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minWidth: 10),
-              child: IntrinsicWidth(
-                child: TextField(
-                  controller: controller,
-                  style: style??AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold),
-                  minLines: 1,
-                  maxLines: 1,
-                  textCapitalization: textCapitalization,
-                  textAlignVertical: textAlignVertical,
-                  decoration: InputDecoration(
-                    hintText: hint,
-                    hintStyle: hintStyle??AppTextStyle(
-                      color: hintEnab_(context),
-                      fontSize: Dimen.textSizeBig,
-                    ),
-                    border: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    isCollapsed: isCollapsed,
-                  ),
-                  onChanged: onChanged,
-                  readOnly: !enabled,
+          Expanded(
+              child: AnimatedSize(
+                child: ConstrainedBox(
+                    constraints: BoxConstraints(minWidth: 10),
+                    child: IntrinsicWidth(
+                      child: TextField(
+                        controller: controller,
+                        style: style??AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold),
+                        minLines: 1,
+                        maxLines: 1,
+                        textCapitalization: textCapitalization,
+                        textAlignVertical: textAlignVertical,
+                        decoration: InputDecoration(
+                          hintText: hint,
+                          hintStyle: hintStyle??AppTextStyle(
+                            color: hintEnab_(context),
+                            fontSize: Dimen.textSizeBig,
+                          ),
+                          border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          contentPadding: contentPadding,
+                          isCollapsed: isCollapsed,
+                        ),
+                        onChanged: onChanged,
+                        readOnly: !enabled,
+                      ),
+                    )
                 ),
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeOutQuint,
+                alignment: Alignment.centerLeft,
+                clipBehavior: Clip.none,
               )
-            ),
-            duration: Duration(milliseconds: 300),
-            curve: Curves.easeOutQuint,
-            alignment: Alignment.centerLeft,
-            clipBehavior: Clip.none,
-          )),
+          ),
 
           if(removable && enabled)
             IconButton(

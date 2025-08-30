@@ -143,7 +143,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
         enabled: widget.enabled,
-        isCollapsed: widget.multiIsCollapsed,
+        contentPadding: widget.contentPadding,
+        isCollapsed: true, // widget.multiIsCollapsed,
       );
     else
       textField = TextField(
