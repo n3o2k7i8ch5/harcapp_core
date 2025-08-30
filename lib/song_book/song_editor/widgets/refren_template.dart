@@ -40,7 +40,7 @@ class RefrenTemplate extends StatelessWidget{
                     if(currItemProv.song.refrenPart.isError)
                       IconButton(
                         icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                        onPressed: () => AppScaffold.showMessage(context, 'Refren nie spełnia standardów. Podejrzyj go by dowiedzieć się więcej.'),
+                        onPressed: () => AppScaffold.showMessage(context, text: 'Refren nie spełnia standardów. Podejrzyj go by dowiedzieć się więcej.'),
                       ),
 
                     Switch(
@@ -49,7 +49,7 @@ class RefrenTemplate extends StatelessWidget{
                         currItemProv.setHasRefren(!currItemProv.hasRefren);
                         if(onRefrenEnabledChanged != null) onRefrenEnabledChanged!(value);
                       },
-                      activeColor: accentColor??accent_(context),
+                      activeThumbColor: accentColor??accent_(context),
                     ),
 
                   ],

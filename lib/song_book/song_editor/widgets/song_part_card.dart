@@ -273,7 +273,7 @@ class TopZwrotkaButtons extends StatelessWidget{
       if(songPart.isError)
         IconButton(
           icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-          onPressed: () => AppScaffold.showMessage(context, 'Zwrotka nie spełnia standardów. Podejrzyj ją by dowiedzieć się więcej.'),
+          onPressed: () => AppScaffold.showMessage(context, text: 'Zwrotka nie spełnia standardów. Podejrzyj ją by dowiedzieć się więcej.'),
         ),
 
       IconButton(
@@ -319,7 +319,7 @@ class TopRefrenButtons extends StatelessWidget{
         index: index,
         child: IconButton(
           icon: Icon(MdiIcons.swapVertical, color: iconEnab_(context)),
-          onPressed: () => showAppToast(context, text: 'Przytrzymaj, by przenieść'),
+          onPressed: () => AppScaffold.showMessage(context, text: 'Przytrzymaj, by przenieść'),
         )
       ),
 

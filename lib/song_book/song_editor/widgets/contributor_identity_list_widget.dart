@@ -59,7 +59,7 @@ class ContributorIdentityWidget extends StatelessWidget{
                           if(emailController.text.isEmpty)
                             IconButton(
                               icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                              onPressed: () => AppScaffold.showMessage(context, 'Podaj email, by zyskać wieczystą sławę'),
+                              onPressed: () => AppScaffold.showMessage(context, text: 'Podaj email, by zyskać wieczystą sławę'),
                             ),
 
                           Expanded(

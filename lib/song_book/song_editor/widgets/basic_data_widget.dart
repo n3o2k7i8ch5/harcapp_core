@@ -84,7 +84,7 @@ class BasicDataWidget extends StatelessWidget{
                         IconButton(
                           icon: Icon(MdiIcons.informationOutline),
                           onPressed: () =>
-                            AppScaffold.showMessage(context, 'Tytuły ukryte są dodatkowymi kluczami wyszukwiania piosneki.'),
+                            AppScaffold.showMessage(context, text: 'Tytuły ukryte są dodatkowymi kluczami wyszukwiania piosneki.'),
                         )
                       ],
                     )
@@ -209,12 +209,12 @@ class BasicDataWidget extends StatelessWidget{
                     if(currItemProv.ytLinkController.text.isEmpty)
                       IconButton(
                         icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                        onPressed: () => AppScaffold.showMessage(context, 'Podaj link do piosenki na jutubie'),
+                        onPressed: () => AppScaffold.showMessage(context, text: 'Podaj link do piosenki na jutubie'),
                       )
                     else if(currItemProv.ytLinkController.text.isNotEmpty && SongRaw.ytLinkToVideoId(currItemProv.ytLinkController.text) == null)
                       IconButton(
                         icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                        onPressed: () => AppScaffold.showMessage(context, 'Coś jest nie tak z linkiem do piosenki na jutubie'),
+                        onPressed: () => AppScaffold.showMessage(context, text: 'Coś jest nie tak z linkiem do piosenki na jutubie'),
                       ),
 
                     Expanded(
