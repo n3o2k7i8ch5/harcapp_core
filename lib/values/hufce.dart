@@ -58,6 +58,7 @@ const String huf_zhp_lodz_polesie = 'Hufiec ZHP Łódź Polesie';
 const String huf_zhp_lodz_widzew = 'Hufiec ZHP Łódź Widzew';
 const String huf_zhp_miedzychod = 'Hufiec ZHP Międzychód';
 const String huf_zhp_miedzyrzecz = 'Hufiec ZHP Międzyrzecz';
+const String huf_zhp_mielec = 'Hufiec ZHP Mielec';
 const String huf_zhp_milicz = 'Hufiec ZHP Milicz';
 const String huf_zhp_myslenice = 'Hufiec ZHP Myślenice';
 const String huf_zhp_mysliborz = 'Hufiec ZHP Myślibórz';
