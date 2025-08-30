@@ -121,38 +121,30 @@ class SongPartCard extends StatelessWidget{
 
       }
 
-      return IgnorePointer(
-          ignoring: true,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              if(topBuilder!=null) topBuilder!(context, songPart),
+      return  Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          if(topBuilder!=null) topBuilder!(context, songPart),
 
-              Stack(
-                children: [
+          Stack(
+            children: [
 
-                  Positioned.fill(
-                    child: IgnorePointer(
-                        ignoring: false,
-                        child: Container()
-                    ),
-                  ),
+              Positioned.fill(child: AbsorbPointer(child: Container())),
 
-                  SimpleButton(
-                      radius: AppCard.bigRadius,
-                      padding: EdgeInsets.all(Dimen.defMarg),
-                      margin: EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg),
-                      child: main,
-                      onTap: onTap
-                  ),
-
-                ],
-              )
-
+              SimpleButton(
+                  radius: AppCard.bigRadius,
+                  padding: EdgeInsets.all(Dimen.defMarg),
+                  margin: EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg),
+                  child: main,
+                  onTap: onTap
+              ),
 
             ],
           )
+
+
+        ],
       );
 
     },
