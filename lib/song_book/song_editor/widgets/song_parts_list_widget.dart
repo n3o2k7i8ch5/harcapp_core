@@ -67,7 +67,6 @@ class SongPartsListWidget extends StatelessWidget{
 
       return AnimatedReorderableListView(
         buildDefaultDragHandles: false,
-        longPressDraggable: false,
         proxyDecorator: proxyDecorator,
         physics: physics??BouncingScrollPhysics(),
         controller: _controller,

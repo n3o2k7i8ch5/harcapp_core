@@ -7,7 +7,6 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:animated_reorderable_list/src/component/drag_listener.dart';
 
 import '../common.dart';
 import '../providers.dart';
