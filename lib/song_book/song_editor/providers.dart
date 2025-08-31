@@ -250,11 +250,11 @@ class TagsProvider extends ChangeNotifier{
 
   late List<String> _checkedTags;
 
-  TagsProvider(List<String> allTags, List<String> checkedTags){
+  TagsProvider(List<String> checkedTags){
     _checkedTags = checkedTags;
   }
 
-  set(List<String> allTags, List<String> checkedTags){
+  set(List<String> checkedTags){
     _checkedTags = checkedTags;
     notifyListeners();
   }
