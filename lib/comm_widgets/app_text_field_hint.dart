@@ -120,7 +120,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
   bool get topHintVisible{
     if(widget.multi)
-      return multiController!.isNotEmpty;
+      return multiController!.isContentNotEmpty;
     else
       return controller.text.isNotEmpty;
   }

@@ -22,8 +22,8 @@ class MultiTextFieldController{
 
   int get length => _controllers.length;
   String get last => _controllers[length-1].text;
-  bool get isEmpty => _controllers.isEmpty || (_controllers.length == 1 && _controllers.first.text.isEmpty);
-  bool get isNotEmpty => !isEmpty;
+  bool get isContentEmpty => _controllers.isEmpty || (_controllers.length == 1 && _controllers.first.text.isEmpty);
+  bool get isContentNotEmpty => !isContentEmpty;
   bool get isLastEmpty => _controllers.isEmpty || _controllers.last.text.isEmpty;
 
   int minCount;
@@ -507,7 +507,7 @@ class AddButtonState extends State<AddButton>{
 
   bool get tappable => allowZeroFields?
   (controller.length==0 || controller.last.isNotEmpty):
-  (controller.isEmpty || controller.last.isNotEmpty);
+  (controller.isContentEmpty || controller.last.isNotEmpty);
 
   @override
   Widget build(BuildContext context){
