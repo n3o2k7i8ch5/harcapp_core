@@ -27,9 +27,7 @@ class ContributorIdentityWidget extends StatelessWidget{
   const ContributorIdentityWidget(this.nameController, this.emailController, {this.onChanged, this.onRemoveTap, Key? key}): super(key: key);
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: EdgeInsets.all(Dimen.defMarg),
-    child: Material(
+  Widget build(BuildContext context) => Material(
       color: cardEnab_(context),
       borderRadius: BorderRadius.circular(AppCard.bigRadius),
       clipBehavior: Clip.hardEdge,
@@ -86,7 +84,6 @@ class ContributorIdentityWidget extends StatelessWidget{
           ),
         ),
       )
-    ),
   );
 
 }
@@ -134,26 +131,29 @@ class ContributorIdentityListWidgetState extends State<ContributorIdentityListWi
             AnimatedListView(
               items: prov.contribIdData,
               itemBuilder: (context, index) =>
-                  ContributorIdentityWidget(
-                    prov.contribIdData[index].$1,
-                    prov.contribIdData[index].$2,
+                  Padding(
+                    padding: EdgeInsets.only(bottom: index < prov.contribIdData.length - 1?Dimen.defMarg:0),
+                    child: ContributorIdentityWidget(
+                      prov.contribIdData[index].$1,
+                      prov.contribIdData[index].$2,
 
-                    onChanged: (){
+                      onChanged: (){
 
-                      List<ContributorIdentity> data = prov.contribIdData.map((contribIdData) => ContributorIdentity(
-                        name: contribIdData.$1.text,
-                        emailRef: contribIdData.$2.text,
-                        userKeyRef: contribIdData.$3.text,
-                      )).toList();
+                        List<ContributorIdentity> data = prov.contribIdData.map((contribIdData) => ContributorIdentity(
+                          name: contribIdData.$1.text,
+                          emailRef: contribIdData.$2.text,
+                          userKeyRef: contribIdData.$3.text,
+                        )).toList();
 
-                      prov.setContribId(data);
-                      onChanged?.call(data);
-                    },
-                    onRemoveTap: () {
-                      prov.contribIdData.removeAt(index);
-                      prov.notify();
-                    },
-                    key: ValueKey(prov.contribIdData[index]),
+                        prov.setContribId(data);
+                        onChanged?.call(data);
+                      },
+                      onRemoveTap: () {
+                        prov.contribIdData.removeAt(index);
+                        prov.notify();
+                      },
+                      key: ValueKey(prov.contribIdData[index]),
+                    ),
                   ),
               shrinkWrap: true,
               enterTransition: [FadeIn()],
