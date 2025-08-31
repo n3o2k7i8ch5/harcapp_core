@@ -381,6 +381,35 @@ class SongRaw extends SongCore{
     return resultLines.join("\n");
   }
 
+  bool get isEmpty{
+    if(title.trim().isNotEmpty)
+      return false;
+    if(hidTitles.where((a) => a.trim().isNotEmpty).isNotEmpty)
+      return false;
+    if(authors.where((a) => a.trim().isNotEmpty).isNotEmpty)
+      return false;
+    if(composers.where((a) => a.trim().isNotEmpty).isNotEmpty)
+      return false;
+    if(performers.where((a) => a.trim().isNotEmpty).isNotEmpty)
+      return false;
+    if(releaseDate != null)
+      return false;
+    if(contribId.where((c) => c.isNotEmpty).isNotEmpty)
+      return false;
+    if(youtubeVideoId != null && youtubeVideoId!.trim().isNotEmpty)
+      return false;
+    if(tags.isNotEmpty)
+      return false;
+    if(!refrenPart.isEmpty)
+      return false;
+    for(SongPart part in songParts)
+      if(!part.isEmpty)
+        return false;
+
+    return true;
+
+  }
+
   /*
   static Future<SongRaw> read({@required String id}) async {
     String code = await getSongCode(id);
