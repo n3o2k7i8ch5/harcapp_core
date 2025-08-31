@@ -103,7 +103,10 @@ class BasicDataWidget extends StatelessWidget{
             ),
 
             AnimatedSize(
-              duration: Duration(milliseconds: 300),
+              duration:
+              currItemProv.hiddenTitlesController.length<=1?
+              Duration(milliseconds: 300):
+              Duration.zero,  // Let the AppTextFieldHint handle the animation,
               alignment: Alignment.topCenter,
               child: currItemProv.hiddenTitlesController.length==0?
               Container():
