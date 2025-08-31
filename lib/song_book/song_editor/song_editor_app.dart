@@ -18,7 +18,7 @@ class SongEditorApp extends StatelessWidget{
       ChangeNotifierProvider(create: (context) => CurrentItemProvider(song: SongRaw.empty())),
       ChangeNotifierProvider(create: (context) => RefrenEnabProvider(true)),
       ChangeNotifierProvider(create: (context) => RefrenPartProvider()),
-      ChangeNotifierProvider(create: (context) => TagsProvider(SongTag.ALL, [])),
+      ChangeNotifierProvider(create: (context) => TagsProvider([])),
     ],
     builder: builder
   );
