@@ -89,10 +89,10 @@ class SongRaw extends SongCore{
     this.refrenPart = refrenPart??SongPart.empty(isRefrenTemplate: true);
   }
 
-  static String get newLocalId => const Uuid().v4();
+  static String get newId => const Uuid().v4();
 
-  static SongRaw empty({String? lclId}) => SongRaw(
-    id: lclId??newLocalId,
+  static SongRaw empty({String? id}) => SongRaw(
+    id: id??newId,
     title: '',
     hidTitles: [],
     authors: [],
@@ -110,11 +110,11 @@ class SongRaw extends SongCore{
     songParts: [],
   );
 
-  static SongRaw parse(String lclId, String code) =>
-      fromApiRespMap(lclId, jsonDecode(code)[lclId]);
+  static SongRaw parse(String id, String code) =>
+      fromApiRespMap(id, jsonDecode(code)[id]);
 
-  static SongRaw fromBase64({String? lclId, required String code}) => SongRaw.parse(
-      newLocalId,
+  static SongRaw fromBase64({String? id, required String code}) => SongRaw.parse(
+      newId,
       Utf8Decoder().convert(Base64Codec().decode(code).toList())
   );
 
@@ -197,8 +197,8 @@ class SongRaw extends SongCore{
     );
   }
 
-  SongRaw copy({bool withLclId = true}) => SongRaw(
-    id: withLclId?id:newLocalId,
+  SongRaw copy({bool withId = true}) => SongRaw(
+    id: withId?id:newId,
     title: title,
     hidTitles: hidTitles,
     authors: authors,
@@ -382,9 +382,9 @@ class SongRaw extends SongCore{
   }
 
   /*
-  static Future<SongRaw> read({@required String lclId}) async {
-    String code = await getSongCode(lclId);
-    return SongRaw.parse(lclId, code);
+  static Future<SongRaw> read({@required String id}) async {
+    String code = await getSongCode(id);
+    return SongRaw.parse(id, code);
   }
   */
 }

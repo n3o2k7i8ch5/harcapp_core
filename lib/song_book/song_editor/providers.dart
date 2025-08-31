@@ -282,26 +282,6 @@ class TagsProvider extends ChangeNotifier{
 
 }
 
-// class TitleCtrlProvider extends ChangeNotifier{
-//
-//   static TitleCtrlProvider of(BuildContext context) => Provider.of<TitleCtrlProvider>(context, listen: false);
-//   static void notify_(BuildContext context) => of(context).notify();
-//
-//   TextEditingController? controller;
-//   TitleCtrlProvider({String? text, Function(String text)? onChanged}){
-//     controller = TextEditingController(text: text);
-//     if(onChanged!=null) controller!.addListener(() => onChanged(controller!.text));
-//   }
-//
-//   set text(String value){
-//     controller!.text = value;
-//     notifyListeners();
-//   }
-//
-//   void notify() => notifyListeners();
-//
-// }
-
 class SongPartProvider extends ChangeNotifier{
 
   static SongPartProvider of(BuildContext context) => Provider.of<SongPartProvider>(context, listen: false);
