@@ -76,6 +76,14 @@ class CurrentItemProvider extends ChangeNotifier{
     String? initContribIdEmail,
     String? initContribIdUserKey
   }){
+    titleController = TextEditingController();
+    hiddenTitlesController = MultiTextFieldController(minCount: 0);
+    authorsController = MultiTextFieldController();
+    composersController = MultiTextFieldController();
+    performersController = MultiTextFieldController();
+
+    ytLinkController = TextEditingController();
+
     _song = song;
     _updateControllers(
       song: _song,
