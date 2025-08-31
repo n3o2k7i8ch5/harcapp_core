@@ -189,7 +189,6 @@ class BasicDataWidget extends StatelessWidget{
                 color: hintEnab_(context),
               ),
               multi: true,
-              multiHintTop: 'Kompozytorzy muzyki:',
               multiExpanded: true,
               multiController: currItemProv.composersController,
               multiPadding: padding,
