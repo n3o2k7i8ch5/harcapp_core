@@ -146,6 +146,10 @@ class BasicDataWidget extends StatelessWidget{
                       }:null,
                       center: false
                   ),
+                  multiPadding: EdgeInsets.only(
+                    left: padding?.left??0,
+                    right: padding?.right??0,
+                  ),
                 ),
               ),
             ),
