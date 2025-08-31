@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
 import 'package:animated_reorderable_list/animated_reorderable_list.dart';
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
@@ -287,7 +289,10 @@ class MultiTextFieldState extends State<MultiTextField>{
       allowZeroFields: allowZeroFields,
       controller: controller,
       addButtonBuilder: addButtonBuilder,
-      onPressed: onAddButtonTap
+      onPressed: (){
+        setState((){});
+        onAddButtonTap.call();
+      }
     ):
     Container();
 
@@ -458,10 +463,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
               icon: Icon(MdiIcons.close, size: iconSize),
               padding: EdgeInsets.symmetric(horizontal: Dimen.iconMarg),
               constraints: const BoxConstraints(),
-              onTap: (){
-                setState(() {});
-                onRemoveTap?.call();
-              },
+              onTap: onRemoveTap,
             )
           else
             SizedBox(width: Dimen.iconFootprint)
