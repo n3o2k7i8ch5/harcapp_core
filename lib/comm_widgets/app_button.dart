@@ -29,6 +29,7 @@ class AppButton extends StatelessWidget {
     this.autofocus = false,
     this.tooltip,
     this.enableFeedback = true,
+    this.constraints,
   }):super(key: key);
 
 
@@ -54,6 +55,8 @@ class AppButton extends StatelessWidget {
 
   final bool enableFeedback;
 
+  final BoxConstraints? constraints;
+
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
@@ -64,7 +67,7 @@ class AppButton extends StatelessWidget {
       currentColor = disabledColor ?? Theme.of(context).disabledColor;
 
     Widget result = ConstrainedBox(
-      constraints: const BoxConstraints(minWidth: _kMinButtonSize, minHeight: _kMinButtonSize),
+      constraints: constraints?? const BoxConstraints(minWidth: _kMinButtonSize, minHeight: _kMinButtonSize),
       child: Padding(
         padding: padding,
         child: SizedBox(
