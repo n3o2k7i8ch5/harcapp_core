@@ -112,25 +112,22 @@ class ContributorIdentityListWidgetState extends State<ContributorIdentityListWi
         Column(
           children: [
 
-            Padding(
-              padding: EdgeInsets.only(left: Dimen.iconMarg, right: Dimen.defMarg),
-              child: TitleShortcutRowWidget(
-                title: prov.contribIdData.length <= 1?'Osoba dodająca':'Osoby dodające',
-                textAlign: TextAlign.start,
-                //icon: MdiIcons.tagOutline,
-                trailing: AppButton(
-                  icon: Icon(MdiIcons.plus),
-                  onTap: (){
-                    prov.contribIdData.add(
+            TitleShortcutRowWidget(
+              title: prov.contribIdData.length <= 1?'Osoba dodająca':'Osoby dodające',
+              textAlign: TextAlign.start,
+              //icon: MdiIcons.tagOutline,
+              trailing: AppButton(
+                icon: Icon(MdiIcons.plus),
+                onTap: (){
+                  prov.contribIdData.add(
                       (
-                        TextEditingController(),
-                        TextEditingController(),
-                        TextEditingController()
+                      TextEditingController(),
+                      TextEditingController(),
+                      TextEditingController()
                       )
-                    );
-                    prov.notify();
-                  },
-                ),
+                  );
+                  prov.notify();
+                },
               ),
             ),
 
