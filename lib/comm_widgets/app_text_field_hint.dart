@@ -41,6 +41,9 @@ class AppTextFieldHint extends StatefulWidget{
   final bool multiIsCollapsed;
   final MultiTextFieldController? multiController;
   final EdgeInsets? multiPadding;
+  final void Function()? multiOnAdded;
+  final void Function(int index)? multiOnRemoved;
+
   final TextCapitalization textCapitalization;
   final TextAlignVertical? textAlignVertical;
   final bool autofocus;
@@ -74,6 +77,8 @@ class AppTextFieldHint extends StatefulWidget{
     this.multiIsCollapsed = false,
     this.multiController,
     this.multiPadding,
+    this.multiOnAdded,
+    this.multiOnRemoved,
     this.textCapitalization = TextCapitalization.none,
     this.textAlignVertical,
     this.autofocus = false,
@@ -161,8 +166,14 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         addButtonBuilder: widget.multiAddButtonBuilder,
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
-        onAdded: () => setState((){}),
-        onRemoved: (_) => setState((){}),
+        onAdded: (){
+          setState((){});
+          widget.multiOnAdded?.call();
+        },
+        onRemoved: (int index){
+          setState((){});
+          widget.multiOnRemoved?.call(index);
+        },
         enabled: widget.enabled,
         contentPadding: widget.contentPadding,
         isCollapsed: true, // widget.multiIsCollapsed,
