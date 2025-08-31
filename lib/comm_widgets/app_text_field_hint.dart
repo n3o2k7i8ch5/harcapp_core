@@ -40,6 +40,7 @@ class AppTextFieldHint extends StatefulWidget{
   final bool multiExpanded;
   final bool multiIsCollapsed;
   final MultiTextFieldController? multiController;
+  final EdgeInsets? multiPadding;
   final TextCapitalization textCapitalization;
   final TextAlignVertical? textAlignVertical;
   final bool autofocus;
@@ -72,6 +73,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.multiExpanded = false,
     this.multiIsCollapsed = false,
     this.multiController,
+    this.multiPadding,
     this.textCapitalization = TextCapitalization.none,
     this.textAlignVertical,
     this.autofocus = false,
@@ -163,6 +165,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         enabled: widget.enabled,
         contentPadding: widget.contentPadding,
         isCollapsed: true, // widget.multiIsCollapsed,
+        padding: widget.multiPadding,
       );
     else
       textField = BaseTextFieldHint(

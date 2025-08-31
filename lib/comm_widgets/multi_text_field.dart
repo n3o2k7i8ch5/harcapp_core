@@ -125,6 +125,7 @@ class MultiTextField extends StatefulWidget{
   final bool enabled;
   final EdgeInsets? contentPadding;
   final bool isCollapsed;
+  final EdgeInsets? padding;
 
   const MultiTextField({
     this.allowZeroFields = false,
@@ -149,6 +150,7 @@ class MultiTextField extends StatefulWidget{
     this.enabled = true,
     this.contentPadding,
     this.isCollapsed = false,
+    this.padding,
     super.key
   });
 
@@ -266,6 +268,7 @@ class MultiTextFieldState extends State<MultiTextField>{
             if(!expanded) children.add(addButton);
 
             Widget scrollView = SingleChildScrollView(
+              padding: expanded?null:widget.padding,
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               child: Row(children: children),
@@ -275,11 +278,15 @@ class MultiTextFieldState extends State<MultiTextField>{
             if (expanded)
               return Row(
                 children: [
+                  if(widget.padding != null)
+                    SizedBox(width: widget.padding!.left),
                   if(children.length == 1)
                     Expanded(child: children[0])
                   else
                     Expanded(child: scrollView),
-                  addButton
+                  addButton,
+                  if(widget.padding != null)
+                    SizedBox(width: widget.padding!.right),
                 ],
               );
             else
@@ -287,26 +294,32 @@ class MultiTextFieldState extends State<MultiTextField>{
           }
         );
       case LayoutMode.wrap:
-        return Wrap(
-          crossAxisAlignment: WrapCrossAlignment.start,
-          children: [...children, addButton],
-          runSpacing: Dimen.defMarg,
-          spacing: Dimen.defMarg,
+        return Padding(
+          padding: widget.padding??EdgeInsets.zero,
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.start,
+            children: [...children, addButton],
+            runSpacing: Dimen.defMarg,
+            spacing: Dimen.defMarg,
+          ),
         );
       case LayoutMode.column:
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            AnimatedListView(
-              items: children,
-              itemBuilder: (context, index) => children[index],
-              shrinkWrap: true,
-              enterTransition: [FadeIn()],
-              exitTransition: [SlideInUp(), FadeIn()],
-              isSameItem: (a, b) => a.key == b.key,
-            ),
-            addButton
-          ],
+        return Padding(
+          padding: widget.padding??EdgeInsets.zero,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AnimatedListView(
+                items: children,
+                itemBuilder: (context, index) => children[index],
+                shrinkWrap: true,
+                enterTransition: [FadeIn()],
+                exitTransition: [SlideInUp(), FadeIn()],
+                isSameItem: (a, b) => a.key == b.key,
+              ),
+              addButton
+            ],
+          ),
         );
 
     }
