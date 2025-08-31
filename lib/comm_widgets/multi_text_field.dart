@@ -5,6 +5,8 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import 'app_text_field_hint.dart';
+
 class MultiTextFieldController{
 
   TextEditingController operator [](int index) => _controllers[index];
@@ -376,7 +378,6 @@ class _ItemWidgetState extends State<_ItemWidget>{
   EdgeInsets? get contentPadding => widget.contentPadding;
   bool get isCollapsed => widget.isCollapsed;
 
-  
   @override
   Widget build(BuildContext context) => IntrinsicWidth(
     child: Padding(
@@ -391,28 +392,16 @@ class _ItemWidgetState extends State<_ItemWidget>{
                 child: ConstrainedBox(
                     constraints: BoxConstraints(minWidth: 10),
                     child: IntrinsicWidth(
-                      child: TextField(
+                      child: BaseTextFieldHint(
                         controller: controller,
                         style: style??AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold),
-                        minLines: 1,
                         maxLines: 1,
                         textCapitalization: textCapitalization,
                         textAlignVertical: textAlignVertical,
-                        decoration: InputDecoration(
-                          hintText: hint,
-                          hintStyle: hintStyle??AppTextStyle(
-                            color: hintEnab_(context),
-                            fontSize: Dimen.textSizeBig,
-                          ),
-                          border: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          contentPadding: contentPadding,
-                          isCollapsed: isCollapsed,
-                        ),
+                        hint: hint,
+                        hintStyle: hintStyle,
+                        contentPadding: contentPadding,
                         onChanged: onChanged,
-                        readOnly: !enabled,
                       ),
                     )
                 ),

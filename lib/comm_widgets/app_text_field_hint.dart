@@ -93,9 +93,9 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
   String get hint => widget.hint;
   String get hintTop => widget.hintTop??(hint.endsWith(':')?hint.substring(0, hint.length-1):hint);
-  bool get multi => widget.multi;
+  // bool get multi => widget.multi;
   String get multiHintTop => widget.multiHintTop??hintTop;
-  bool get multiExpanded => widget.multiExpanded;
+  // bool get multiExpanded => widget.multiExpanded;
 
   TextStyle get style => widget.style??AppTextStyle(color: textEnab_(context));
   TextStyle get hintStyle => widget.hintStyle??widget.style?.copyWith(color: hintEnab_(context))??AppTextStyle(color: hintEnab_(context));
@@ -112,9 +112,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
   late ValueNotifier<bool> showTopHintNotifier;
 
   bool get topHintVisible{
-    (multi && multiController!.isEmpty) || (!multi && controller.text.isEmpty)?0:1;
-
-    if(multi)
+    if(widget.multi)
       return multiController!.isNotEmpty;
     else
       return controller.text.isNotEmpty;
@@ -146,11 +144,11 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
     Widget textField;
 
-    if(multi)
+    if(widget.multi)
       textField = MultiTextField(
         allowZeroFields: widget.multiAllowZeroFields,
         controller: multiController,
-        expanded: multiExpanded,
+        expanded: widget.multiExpanded,
         hint: hint,
         style: style,
         hintStyle: hintStyle,
@@ -167,8 +165,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         isCollapsed: true, // widget.multiIsCollapsed,
       );
     else
-      textField = TextField(
-        scrollPhysics: BouncingScrollPhysics(),
+      textField = BaseTextFieldHint(
         style: style,
         controller: controller,
         focusNode: widget.focusNode,
@@ -179,23 +176,17 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
           onChangedListener(0, text);
           onAnyChangedListener([text]);
         },
-        decoration: InputDecoration(
-          counterStyle: widget.counterStyle??AppTextStyle(color: hintEnab_(context)),
-          hintText: hint,
-          hintStyle: hintStyle,
-          border: widget.showUnderline?null:InputBorder.none,
-          contentPadding: widget.contentPadding,
-          isCollapsed: true
-        ),
+        counterStyle: widget.counterStyle,
+        hint: hint,
+        hintStyle: hintStyle,
+        contentPadding: widget.contentPadding,
         maxLength: widget.maxLength,
         maxLines: widget.maxLines,
         obscureText: widget.obscureText,
-        readOnly: !widget.enabled,
         keyboardType: widget.keyboardType,
         inputFormatters: widget.inputFormatters,
         textCapitalization: widget.textCapitalization,
         textAlignVertical: widget.textAlignVertical,
-
       );
 
     return Row(
@@ -235,4 +226,77 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 
   }
 
+}
+
+class BaseTextFieldHint extends StatelessWidget {
+
+  final String? hint;
+  final TextEditingController controller;
+  final FocusNode? focusNode;
+  final TextStyle? style;
+  final TextStyle? hintStyle;
+  final TextStyle? counterStyle;
+  final int? maxLength;
+  final int? maxLines;
+  final bool showUnderline;
+  final Function(String)? onChanged;
+  final bool obscureText;
+  final bool enabled;
+  final Widget? leading;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final EdgeInsets? contentPadding;
+  final TextCapitalization textCapitalization;
+  final TextAlignVertical? textAlignVertical;
+  final bool autofocus;
+
+  const BaseTextFieldHint({
+    required this.hint,
+    required this.controller,
+    this.focusNode,
+    this.style,
+    this.hintStyle,
+    this.counterStyle,
+    this.maxLength,
+    this.maxLines = 1,
+    this.showUnderline = false,
+    this.onChanged,
+    this.obscureText = false,
+    this.enabled = true,
+    this.leading,
+    this.keyboardType,
+    this.inputFormatters,
+    this.contentPadding,
+    this.textCapitalization = TextCapitalization.none,
+    this.textAlignVertical,
+    this.autofocus = false,
+    Key? key
+  }) :super(key: key);
+
+  @override
+  Widget build(BuildContext context) => TextField(
+    scrollPhysics: BouncingScrollPhysics(),
+    style: style,
+    controller: controller,
+    focusNode: focusNode,
+    autofocus: autofocus,
+    onChanged: onChanged,
+    decoration: InputDecoration(
+        counterStyle: counterStyle ?? AppTextStyle(color: hintEnab_(context)),
+        hintText: hint,
+        hintStyle: hintStyle,
+        border: showUnderline ? null : InputBorder.none,
+        contentPadding: contentPadding,
+        isCollapsed: true
+    ),
+    maxLength: maxLength,
+    maxLines: maxLines,
+    obscureText: obscureText,
+    readOnly: !enabled,
+    keyboardType: keyboardType,
+    inputFormatters: inputFormatters,
+    textCapitalization: textCapitalization,
+    textAlignVertical: textAlignVertical,
+
+  );
 }
