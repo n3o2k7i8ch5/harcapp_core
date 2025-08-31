@@ -255,8 +255,8 @@ class MultiTextFieldState extends State<MultiTextField>{
       controller: controller,
       addButtonBuilder: addButtonBuilder,
       onPressed: onAddButtonTap
-    )
-    :Container();
+    ):
+    Container();
 
     switch(linear) {
       case LayoutMode.row:
@@ -415,6 +415,11 @@ class _ItemWidgetState extends State<_ItemWidget>{
           if(removable && enabled)
             IconButton(
               icon: Icon(MdiIcons.close, size: iconSize),
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+              style: const ButtonStyle(
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
               onPressed: onRemoveTap,
             )
           else
@@ -484,6 +489,11 @@ class AddButtonState extends State<AddButton>{
         tappable?
         iconEnab_(context):
         iconDisab_(context),
+      ),
+      padding: EdgeInsets.zero,
+      constraints: const BoxConstraints(),
+      style: const ButtonStyle(
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
       onPressed:
       tappable?
