@@ -37,50 +37,47 @@ class ContributorIdentityWidget extends StatelessWidget{
           borderRadius: BorderRadius.circular(AppCard.bigRadius - 6),
           clipBehavior: Clip.hardEdge,
           color: background_(context),
-          child: Padding(
-            padding: EdgeInsets.only(left: Dimen.iconMarg, top: Dimen.defMarg),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      AppTextFieldHint(
-                        hint: 'Imię i nazwisko:',
-                        hintTop: 'Imię i nazwisko',
-                        controller: nameController,
-                        onChanged: (_, __) => onChanged?.call(),
-                      ),
-                      Row(
-                        children: [
-
-                          Expanded(
-                            child: AppTextFieldHint(
-                              hint: 'Email:',
-                              hintTop: 'Email',
-                              controller: emailController,
-                              onChanged: (_, __) => onChanged?.call(),
-                            ),
-                          ),
-
-                          if(emailController.text.isEmpty)
-                            AppButton(
-                              icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                              onTap: () => AppScaffold.showMessage(context, text: 'Podaj email, by zyskać wieczystą sławę'),
-                            ),
-
-                        ],
-                      )
-                    ],
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: AppTextFieldHint(
+                      hint: 'Imię i nazwisko:',
+                      hintTop: 'Imię i nazwisko',
+                      controller: nameController,
+                      onChanged: (_, __) => onChanged?.call(),
+                    ),
                   ),
-                ),
-                AppButton(
-                    icon: Icon(MdiIcons.close),
-                    onTap: onRemoveTap
-                )
-              ],
-            ),
+
+                  AppButton(
+                      icon: Icon(MdiIcons.close),
+                      onTap: onRemoveTap
+                  )
+                ],
+              ),
+              Row(
+                children: [
+
+                  Expanded(
+                    child: AppTextFieldHint(
+                      hint: 'Email:',
+                      hintTop: 'Email',
+                      controller: emailController,
+                      onChanged: (_, __) => onChanged?.call(),
+                    ),
+                  ),
+
+                  if(emailController.text.isEmpty)
+                    AppButton(
+                      icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
+                      onTap: () => AppScaffold.showMessage(context, text: 'Podaj email, by zyskać wieczystą sławę'),
+                    ),
+
+                ],
+              )
+            ],
           ),
         ),
       )
