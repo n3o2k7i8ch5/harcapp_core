@@ -226,17 +226,6 @@ class BasicDataWidget extends StatelessWidget{
                 if(padding != null)
                   SizedBox(width: padding!.left),
 
-                if(currItemProv.ytLinkController.text.isEmpty)
-                  AppButton(
-                    icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                    onTap: () => AppScaffold.showMessage(context, text: 'Podaj link do piosenki na jutubie'),
-                  )
-                else if(currItemProv.ytLinkController.text.isNotEmpty && SongRaw.ytLinkToVideoId(currItemProv.ytLinkController.text) == null)
-                  AppButton(
-                    icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                    onTap: () => AppScaffold.showMessage(context, text: 'Coś jest nie tak z linkiem do piosenki na jutubie'),
-                  ),
-
                 Expanded(
                   child: AppTextFieldHint(
                       controller: currItemProv.ytLinkController,
@@ -257,7 +246,18 @@ class BasicDataWidget extends StatelessWidget{
                   ),
                 ),
 
-                if(SongRaw.ytLinkToVideoId(currItemProv.ytLinkController.text) != null)
+
+                if(currItemProv.ytLinkController.text.isEmpty)
+                  AppButton(
+                    icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
+                    onTap: () => AppScaffold.showMessage(context, text: 'Podaj link do piosenki na jutubie'),
+                  )
+                else if(currItemProv.ytLinkController.text.isNotEmpty && SongRaw.ytLinkToVideoId(currItemProv.ytLinkController.text) == null)
+                  AppButton(
+                    icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
+                    onTap: () => AppScaffold.showMessage(context, text: 'Coś jest nie tak z linkiem do piosenki na jutubie'),
+                  )
+                else if(SongRaw.ytLinkToVideoId(currItemProv.ytLinkController.text) != null)
                   AppButton(
                     icon: Icon(MdiIcons.openInNew),
                     onTap: (){

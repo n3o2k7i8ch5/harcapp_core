@@ -55,12 +55,6 @@ class ContributorIdentityWidget extends StatelessWidget{
                       Row(
                         children: [
 
-                          if(emailController.text.isEmpty)
-                            AppButton(
-                              icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                              onTap: () => AppScaffold.showMessage(context, text: 'Podaj email, by zyskać wieczystą sławę'),
-                            ),
-
                           Expanded(
                             child: AppTextFieldHint(
                               hint: 'Email:',
@@ -69,6 +63,12 @@ class ContributorIdentityWidget extends StatelessWidget{
                               onChanged: (_, __) => onChanged?.call(),
                             ),
                           ),
+
+                          if(emailController.text.isEmpty)
+                            AppButton(
+                              icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
+                              onTap: () => AppScaffold.showMessage(context, text: 'Podaj email, by zyskać wieczystą sławę'),
+                            ),
 
                         ],
                       )
