@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
@@ -258,9 +259,9 @@ class TopZwrotkaButtons extends StatelessWidget{
 
       ReorderableDragStartListener(
           index: index,
-          child: IconButton(
+          child: AppButton(
             icon: Icon(MdiIcons.swapVertical, color: iconEnab_(context)),
-            onPressed: () => showAppToast(context, text: 'Przytrzymaj, by przenieść'),
+            onTap: () => showAppToast(context, text: 'Przytrzymaj, by przenieść'),
           )
       ),
 
@@ -271,22 +272,22 @@ class TopZwrotkaButtons extends StatelessWidget{
       ),
 
       if(songPart.isError)
-        IconButton(
+        AppButton(
           icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-          onPressed: () => AppScaffold.showMessage(context, text: 'Zwrotka nie spełnia standardów. Podejrzyj ją by dowiedzieć się więcej.'),
+          onTap: () => AppScaffold.showMessage(context, text: 'Zwrotka nie spełnia standardów. Podejrzyj ją by dowiedzieć się więcej.'),
         ),
 
-      IconButton(
+      AppButton(
         icon: Icon(MdiIcons.contentDuplicate, color: iconEnab_(context)),
-        onPressed: (){
+        onTap: (){
           onDuplicate?.call(songPart);
           CurrentItemProvider.of(context).addPart(songPart.copy());
         },
       ),
 
-      IconButton(
+      AppButton(
         icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
-        onPressed: (){
+        onTap: (){
           onDelete?.call(songPart);
           CurrentItemProvider.of(context).removePart(songPart);
         },
@@ -317,9 +318,9 @@ class TopRefrenButtons extends StatelessWidget{
 
       ReorderableDragStartListener(
         index: index,
-        child: IconButton(
+        child: AppButton(
           icon: Icon(MdiIcons.swapVertical, color: iconEnab_(context)),
-          onPressed: () => AppScaffold.showMessage(context, text: 'Przytrzymaj, by przenieść'),
+          onTap: () => AppScaffold.showMessage(context, text: 'Przytrzymaj, by przenieść'),
         )
       ),
 
@@ -329,9 +330,9 @@ class TopRefrenButtons extends StatelessWidget{
           Container()
       ),
 
-      IconButton(
+      AppButton(
         icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
-        onPressed: (){
+        onTap: (){
           onDelete?.call(songPart);
           CurrentItemProvider.of(context).removePart(songPart);
         },

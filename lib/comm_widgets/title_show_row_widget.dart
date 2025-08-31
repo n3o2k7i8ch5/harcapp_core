@@ -4,6 +4,8 @@ import 'package:harcapp_core/comm_widgets/pulsing_text.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import 'app_button.dart';
+
 class TitleShortcutRowWidget extends StatelessWidget{
 
   static const TextStyle style = AppTextStyle(
@@ -96,10 +98,10 @@ class TitleShortcutRowWidget extends StatelessWidget{
           trailing!,
 
         if(onOpen != null)
-          IconButton(
+          AppButton(
             padding: EdgeInsets.only(left: Dimen.iconMarg, right: Dimen.iconMarg),
             icon: Icon(onOpenIcon??MdiIcons.arrowRight, color: onOpenIconColor),
-            onPressed: () => onOpen!(),
+            onTap: () => onOpen!(),
           )
         else if(icon != null && textAlign == TextAlign.center && trailing == null)
           SizedBox(width: Dimen.iconFootprint),

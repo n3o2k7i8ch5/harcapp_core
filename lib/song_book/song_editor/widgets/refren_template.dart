@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/values/dimen.dart';
@@ -38,9 +39,9 @@ class RefrenTemplate extends StatelessWidget{
                   children: [
 
                     if(currItemProv.song.refrenPart.isError)
-                      IconButton(
+                      AppButton(
                         icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                        onPressed: () => AppScaffold.showMessage(context, text: 'Refren nie spełnia standardów. Podejrzyj go by dowiedzieć się więcej.'),
+                        onTap: () => AppScaffold.showMessage(context, text: 'Refren nie spełnia standardów. Podejrzyj go by dowiedzieć się więcej.'),
                       ),
 
                     Switch(

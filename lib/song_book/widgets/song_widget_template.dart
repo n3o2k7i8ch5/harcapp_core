@@ -9,6 +9,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
+import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/chord_draw_bar.dart';
 import 'package:harcapp_core/comm_widgets/instrument_type.dart';
@@ -792,15 +793,15 @@ class _ButtonData{
       Icon(_iconData, size: Dimen.iconSize):
       _iconWidgetBuilder.call(context, songWidget, buttonsWidget);
 
-  Widget buildIconButton(
+  Widget buildAppButton(
       BuildContext context,
       SongWidgetTemplateState songWidget,
       _ButtonsWidgetState buttonsWidget,
       {bool tappable = true}
-  ) => IconButton(
+  ) => AppButton(
     icon: icon(context, songWidget, buttonsWidget),
 
-    onPressed: tappable?
+    onTap: tappable?
     () => onPressed.call(context, songWidget, buttonsWidget):
     null,
 
@@ -980,7 +981,7 @@ class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends Contribu
           return Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
-            children: buttonToShow.reversed.map((button) => button.buildIconButton(context, fragmentState, this)).toList(),
+            children: buttonToShow.reversed.map((button) => button.buildAppButton(context, fragmentState, this)).toList(),
           );
 
         double widthToShow = constraints.maxWidth - 1.5*Dimen.iconFootprint;
@@ -1020,7 +1021,7 @@ class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends Contribu
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: visibleButtons.map((button) => button.buildIconButton(context, fragmentState, this)).toList(),
+                children: visibleButtons.map((button) => button.buildAppButton(context, fragmentState, this)).toList(),
               ),
             )
 
@@ -1074,9 +1075,9 @@ class _TextResizeWidget<TSong extends SongCore, TContribIdRes extends Contributo
           padding: EdgeInsets.all(Dimen.iconMarg),
           child: TextSizeIcon(color: iconDisab_(context))
         ),
-        
-        IconButton(icon: Icon(MdiIcons.formatFontSizeDecrease, color: iconEnab_(context)),
-            onPressed: fragmentState.onMinusTap==null?null:(){
+
+        AppButton(icon: Icon(MdiIcons.formatFontSizeDecrease, color: iconEnab_(context)),
+            onTap: fragmentState.onMinusTap==null?null:(){
 
               TextSizeProvider prov = TextSizeProvider.of(context);
 
@@ -1090,8 +1091,8 @@ class _TextResizeWidget<TSong extends SongCore, TContribIdRes extends Contributo
               onResizeTap?.call();
 
             }),
-        IconButton(icon: Icon(MdiIcons.formatFontSizeIncrease, color: iconEnab_(context)),
-            onPressed: fragmentState.onPlusTap==null?null:(){
+        AppButton(icon: Icon(MdiIcons.formatFontSizeIncrease, color: iconEnab_(context)),
+            onTap: fragmentState.onPlusTap==null?null:(){
 
               TextSizeProvider prov = TextSizeProvider.of(context);
               TextScaler textScaler = MediaQuery.textScalerOf(context);
@@ -1117,10 +1118,10 @@ class _TextResizeWidget<TSong extends SongCore, TContribIdRes extends Contributo
         ),
 
         Expanded(child: Container()),
-        
-        IconButton(
+
+        AppButton(
           icon: Icon(MdiIcons.close),
-          onPressed: onCloseTap,
+          onTap: onCloseTap,
         ),
         
       ]

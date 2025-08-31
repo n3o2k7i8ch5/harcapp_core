@@ -2,6 +2,7 @@ import 'package:animated_reorderable_list/animated_reorderable_list.dart';
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
@@ -57,9 +58,9 @@ class ContributorIdentityWidget extends StatelessWidget{
                         children: [
 
                           if(emailController.text.isEmpty)
-                            IconButton(
+                            AppButton(
                               icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                              onPressed: () => AppScaffold.showMessage(context, text: 'Podaj email, by zyskać wieczystą sławę'),
+                              onTap: () => AppScaffold.showMessage(context, text: 'Podaj email, by zyskać wieczystą sławę'),
                             ),
 
                           Expanded(
@@ -76,9 +77,9 @@ class ContributorIdentityWidget extends StatelessWidget{
                     ],
                   ),
                 ),
-                IconButton(
+                AppButton(
                     icon: Icon(MdiIcons.close),
-                    onPressed: onRemoveTap
+                    onTap: onRemoveTap
                 )
               ],
             ),
@@ -117,9 +118,9 @@ class ContributorIdentityListWidgetState extends State<ContributorIdentityListWi
                 title: prov.contribIdData.length <= 1?'Osoba dodająca':'Osoby dodające',
                 textAlign: TextAlign.start,
                 //icon: MdiIcons.tagOutline,
-                trailing: IconButton(
+                trailing: AppButton(
                   icon: Icon(MdiIcons.plus),
-                  onPressed: (){
+                  onTap: (){
                     prov.contribIdData.add(
                       (
                         TextEditingController(),
@@ -229,138 +230,6 @@ class ContributorIdentityListWidgetState extends State<ContributorIdentityListWi
           ],
         ),
 
-
-
-
-
-    //     ImplicitlyAnimatedReorderableList<Tuple3<TextEditingController, TextEditingController, TextEditingController>>(
-    //   physics: BouncingScrollPhysics(),
-    //   items: prov.addPersData,
-    //   insertDuration: Duration(milliseconds: prov.addPersData.length<=1?0:200),
-    //   removeDuration: Duration(milliseconds: prov.addPersData.length==0?0:500),
-    //   areItemsTheSame: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
-    //   onReorderFinished: (item, from, to, newItems){
-    //     prov.addPersData = newItems;
-    //   },
-    //   itemBuilder: (context, itemAnimation, item, index) => Reorderable(
-    //     key: ValueKey(item.hashCode),
-    //     builder: (context, dragAnimation, inDrag) {
-    //
-    //       return SizeFadeTransition(
-    //           sizeFraction: 0.7,
-    //           curve: Curves.easeInOut,
-    //           animation: itemAnimation,
-    //           child:AddPersWidget(
-    //               item.item1,
-    //               item.item2,
-    //
-    //               onChanged: (){
-    //
-    //                 List<AddPerson> data = prov.addPersData.map((addPersData) => AddPerson(
-    //                   name: addPersData.item1.text,
-    //                   emailRef: addPersData.item2.text,
-    //                   userKeyRef: addPersData.item3.text,
-    //                 )).toList();
-    //
-    //                 prov.setAddPers(data);
-    //                 onAddPersChanged?.call(data);
-    //               },
-    //               onRemoveTap: () {
-    //                 prov.addPersData.removeAt(index);
-    //                 prov.notify();
-    //               },
-    //             key: ValueKey(item),
-    //           )
-    //       );
-    //
-    //     },
-    //   ),
-    //
-    //   header: Padding(
-    //     padding: EdgeInsets.only(left: Dimen.iconMarg, right: Dimen.defMarg),
-    //     child: TitleShortcutRowWidget(
-    //       title: prov.addPersData.length <= 1?'Osoba dodająca':'Osoby dodające',
-    //       textAlign: TextAlign.start,
-    //       //icon: MdiIcons.tagOutline,
-    //       trailing: IconButton(
-    //         icon: Icon(MdiIcons.plus),
-    //         onPressed: (){
-    //           prov.addPersData.add(Tuple3(
-    //               TextEditingController(),
-    //               TextEditingController(),
-    //               TextEditingController()
-    //           ));
-    //           prov.notify();
-    //         },
-    //       ),
-    //     ),
-    //   ),
-    //
-    //   footer: Column(
-    //     crossAxisAlignment: CrossAxisAlignment.stretch,
-    //     mainAxisSize: MainAxisSize.min,
-    //     children: [
-    //
-    //       if(prov.addPersData.isEmpty)
-    //         SizedBox(
-    //           height: AddPersWidget.height + 2*Dimen.iconMarg + 2*Dimen.textSizeBig,
-    //           child: SimpleButton(
-    //             radius: AppCard.bigRadius,
-    //             onTap: (){
-    //               prov.addPersData.add(Tuple3(
-    //                   TextEditingController(),
-    //                   TextEditingController(),
-    //                   TextEditingController()
-    //               ));
-    //               prov.notify();
-    //             },
-    //             child: Column(
-    //                 mainAxisSize: MainAxisSize.min,
-    //                 mainAxisAlignment: MainAxisAlignment.center,
-    //                 crossAxisAlignment: CrossAxisAlignment.stretch,
-    //                 children: [
-    //
-    //                   SizedBox(height: Dimen.iconMarg),
-    //
-    //                   Icon(MdiIcons.accountPlusOutline, color: hintEnab_(context)),
-    //
-    //                   SizedBox(height: Dimen.iconMarg),
-    //
-    //                   Text(
-    //                     'Pusto!\nUzupełnij swoje imię :)',
-    //                     textAlign: TextAlign.center,
-    //                     style: AppTextStyle(
-    //                       color: hintEnab_(context),
-    //                       fontSize: Dimen.textSizeBig,
-    //                     ),
-    //                   ),
-    //
-    //                   SizedBox(height: Dimen.iconMarg),
-    //
-    //                 ]
-    //             ),
-    //           ),
-    //         )
-    //       else
-    //         Padding(
-    //           padding: EdgeInsets.symmetric(vertical: Dimen.iconMarg, horizontal: Dimen.iconMarg),
-    //           child: Text(
-    //             'Podaj email, by połączyć swoje piosenki jednolitym podpisem. Sam email nie będzie widoczny.',
-    //             style: AppTextStyle(
-    //               fontWeight: weightHalfBold,
-    //               color: hintEnab_(context),
-    //               fontSize: Dimen.textSizeBig,
-    //               height: 1.2
-    //             ),
-    //             textAlign: TextAlign.center,
-    //           ),
-    //         ),
-    //
-    //     ],
-    //   ),
-    //
-    //   shrinkWrap: true,
-    // ),
   );
 
 }

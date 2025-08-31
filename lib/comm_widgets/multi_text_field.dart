@@ -5,6 +5,7 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import 'app_button.dart';
 import 'app_text_field_hint.dart';
 
 class MultiTextFieldController{
@@ -413,13 +414,11 @@ class _ItemWidgetState extends State<_ItemWidget>{
           ),
 
           if(removable && enabled)
-            IconButton(
+            AppButton(
               icon: Icon(MdiIcons.close, size: iconSize),
               padding: EdgeInsets.symmetric(horizontal: Dimen.iconMarg),
               constraints: const BoxConstraints(),
-              style: ButtonStyle(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-              splashRadius: Material.defaultSplashRadius,
-              onPressed: onRemoveTap,
+              onTap: onRemoveTap,
             )
           else
             SizedBox(width: Dimen.iconFootprint)
@@ -481,7 +480,7 @@ class AddButtonState extends State<AddButton>{
     super.dispose();
   }
 
-  Widget default_(BuildContext context) => IconButton(
+  Widget default_(BuildContext context) => AppButton(
       icon: Icon(
         MdiIcons.plusCircleOutline,
         color:
@@ -491,9 +490,7 @@ class AddButtonState extends State<AddButton>{
       ),
       padding: EdgeInsets.symmetric(horizontal: Dimen.iconMarg),
       constraints: const BoxConstraints(),
-      style: ButtonStyle(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-      splashRadius: Material.defaultSplashRadius,
-      onPressed:
+      onTap:
       tappable?
       onPressed:
       null

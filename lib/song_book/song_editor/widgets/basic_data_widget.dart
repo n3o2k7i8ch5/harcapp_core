@@ -7,6 +7,7 @@ import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/web_utils_stub.dart'
 if (dart.library.html) 'package:harcapp_core/comm_classes/web_utils_web.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
+import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
@@ -80,14 +81,14 @@ class BasicDataWidget extends StatelessWidget{
                       // In this case `length==0` is not the same as `isEmpty`!
                       index: currItemProv.hiddenTitlesController.length==0?0:1,
                       children: [
-                        IconButton(
+                        AppButton(
                           icon: Icon(MdiIcons.plus),
-                          onPressed: () => onChangedHiddenTitles?.call(currItemProv.addHidTitle()),
+                          onTap: () => onChangedHiddenTitles?.call(currItemProv.addHidTitle()),
                         ),
 
-                        IconButton(
+                        AppButton(
                           icon: Icon(MdiIcons.informationOutline),
-                          onPressed: () =>
+                          onTap: () =>
                             AppScaffold.showMessage(context, text: 'Tytuły ukryte są dodatkowymi kluczami wyszukwiania piosneki.'),
                         )
                       ],
@@ -211,14 +212,14 @@ class BasicDataWidget extends StatelessWidget{
                   children: [
 
                     if(currItemProv.ytLinkController.text.isEmpty)
-                      IconButton(
+                      AppButton(
                         icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                        onPressed: () => AppScaffold.showMessage(context, text: 'Podaj link do piosenki na jutubie'),
+                        onTap: () => AppScaffold.showMessage(context, text: 'Podaj link do piosenki na jutubie'),
                       )
                     else if(currItemProv.ytLinkController.text.isNotEmpty && SongRaw.ytLinkToVideoId(currItemProv.ytLinkController.text) == null)
-                      IconButton(
+                      AppButton(
                         icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                        onPressed: () => AppScaffold.showMessage(context, text: 'Coś jest nie tak z linkiem do piosenki na jutubie'),
+                        onTap: () => AppScaffold.showMessage(context, text: 'Coś jest nie tak z linkiem do piosenki na jutubie'),
                       ),
 
                     Expanded(
@@ -242,9 +243,9 @@ class BasicDataWidget extends StatelessWidget{
                     ),
 
                     if(SongRaw.ytLinkToVideoId(currItemProv.ytLinkController.text) != null)
-                      IconButton(
+                      AppButton(
                         icon: Icon(MdiIcons.openInNew),
-                        onPressed: (){
+                        onTap: (){
                           if(kIsWeb) openInNewTab(currItemProv.ytLinkController.text);
                           else launchURL(currItemProv.ytLinkController.text);
                         },
@@ -314,9 +315,9 @@ class BasicDataWidget extends StatelessWidget{
                     ),
                   ),
 
-                  IconButton(
+                  AppButton(
                       icon: Icon(MdiIcons.close),
-                      onPressed: currItemProv.releaseDate==null?null:(){
+                      onTap: currItemProv.releaseDate==null?null:(){
                         currItemProv.setReleaseDate(null);
                       }
                   ),

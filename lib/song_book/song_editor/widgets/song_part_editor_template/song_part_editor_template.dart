@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
+import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/chord_shifter.dart';
@@ -433,9 +434,9 @@ class ButtonsWidget extends StatelessWidget{
   Widget build(BuildContext context) => Row(
     children: [
 
-      IconButton(
+      AppButton(
           icon: Icon(MdiIcons.check),
-          onPressed: onCheckPressed
+          onTap: onCheckPressed
       ),
 
       isRefren?
@@ -447,7 +448,7 @@ class ButtonsWidget extends StatelessWidget{
         ),
       ) :
       Consumer<TextShiftProvider>(
-          builder: (context, provider, child) => IconButton(
+          builder: (context, provider, child) => AppButton(
             icon: AnimatedChildSlider(
               reverse: provider.shifted,
               direction: Axis.horizontal,
@@ -463,7 +464,7 @@ class ButtonsWidget extends StatelessWidget{
                 )
               ],
             ),
-            onPressed: isRefren?null:(){
+            onTap: isRefren?null:(){
               TextShiftProvider.of(context).reverseShift();
             },
           )
@@ -489,9 +490,9 @@ class ButtonsWidget extends StatelessWidget{
           )
       )),
 
-      IconButton(
+      AppButton(
         icon: Icon(MdiIcons.chevronDoubleDown),
-        onPressed: (){
+        onTap: (){
 
           ChordsProvider provider = ChordsProvider.of(context);
 
@@ -506,9 +507,9 @@ class ButtonsWidget extends StatelessWidget{
         },
       ),
 
-      IconButton(
+      AppButton(
         icon: Icon(MdiIcons.chevronDoubleUp),
-        onPressed: (){
+        onTap: (){
 
           ChordsProvider provider = ChordsProvider.of(context);
 
