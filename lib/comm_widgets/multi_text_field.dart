@@ -415,7 +415,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
           if(removable && enabled)
             IconButton(
               icon: Icon(MdiIcons.close, size: iconSize),
-              padding: EdgeInsets.zero,
+              padding: EdgeInsets.symmetric(horizontal: Dimen.iconMarg),
               constraints: const BoxConstraints(),
               onPressed: onRemoveTap,
             )
@@ -487,7 +487,7 @@ class AddButtonState extends State<AddButton>{
         iconEnab_(context):
         iconDisab_(context),
       ),
-      padding: EdgeInsets.zero,
+      padding: EdgeInsets.symmetric(horizontal: Dimen.iconMarg),
       constraints: const BoxConstraints(),
       onPressed:
       tappable?
