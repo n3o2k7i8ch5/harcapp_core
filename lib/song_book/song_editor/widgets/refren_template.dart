@@ -21,45 +21,42 @@ class RefrenTemplate extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Consumer2<CurrentItemProvider, RefrenPartProvider>(
-    builder: (context, currItemProv, refProv, child) => Padding(
-      padding: EdgeInsets.only(left: Dimen.defMarg, right: Dimen.defMarg),
-      child: SongPartCard(
-        songPart: currItemProv.song.refrenPart,
-        type: SongPartType.REFREN_TEMPLATE,
-        topBuilder: (context, part) => Padding(
-          padding: EdgeInsets.only(left: Dimen.iconMarg - Dimen.defMarg),
-          child: Consumer<CurrentItemProvider>(
-            builder: (context, currItemProv, child) => TitleShortcutRowWidget(
-                title: 'Szablon refrenu',
-                titleColor:
-                currItemProv.hasRefren?textEnab_(context):textDisab_(context),
-                textAlign: TextAlign.left,
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
+    builder: (context, currItemProv, refProv, child) => SongPartCard(
+      songPart: currItemProv.song.refrenPart,
+      type: SongPartType.REFREN_TEMPLATE,
+      topBuilder: (context, part) => Padding(
+        padding: EdgeInsets.only(left: Dimen.iconMarg - Dimen.defMarg),
+        child: Consumer<CurrentItemProvider>(
+          builder: (context, currItemProv, child) => TitleShortcutRowWidget(
+              title: 'Szablon refrenu',
+              titleColor:
+              currItemProv.hasRefren?textEnab_(context):textDisab_(context),
+              textAlign: TextAlign.left,
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
 
-                    if(currItemProv.song.refrenPart.isError)
-                      AppButton(
-                        icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                        onTap: () => AppScaffold.showMessage(context, text: 'Refren nie spełnia standardów. Podejrzyj go by dowiedzieć się więcej.'),
-                      ),
-
-                    Switch(
-                      value: currItemProv.hasRefren,
-                      onChanged: (bool value){
-                        currItemProv.setHasRefren(!currItemProv.hasRefren);
-                        if(onRefrenEnabledChanged != null) onRefrenEnabledChanged!(value);
-                      },
-                      activeThumbColor: accentColor??accent_(context),
+                  if(currItemProv.song.refrenPart.isError)
+                    AppButton(
+                      icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
+                      onTap: () => AppScaffold.showMessage(context, text: 'Refren nie spełnia standardów. Podejrzyj go by dowiedzieć się więcej.'),
                     ),
 
-                  ],
-                )
-            ),
+                  Switch(
+                    value: currItemProv.hasRefren,
+                    onChanged: (bool value){
+                      currItemProv.setHasRefren(!currItemProv.hasRefren);
+                      if(onRefrenEnabledChanged != null) onRefrenEnabledChanged!(value);
+                    },
+                    activeThumbColor: accentColor??accent_(context),
+                  ),
+
+                ],
+              )
           ),
         ),
-        onTap: () => onPartTap?.call(),
       ),
+      onTap: () => onPartTap?.call(),
     ),
   );
 }
