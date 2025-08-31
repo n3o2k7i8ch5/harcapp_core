@@ -170,7 +170,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   int get minCount => controller.minCount;
   bool get expanded => widget.expanded;
   String? get hint => widget.hint;
-  LayoutMode get linear => widget.layout;
+  LayoutMode get layout => widget.layout;
   TextCapitalization get textCapitalization => widget.textCapitalization;
   TextAlignVertical? get textAlignVertical => widget.textAlignVertical;
 
@@ -201,7 +201,11 @@ class MultiTextFieldState extends State<MultiTextField>{
 
   Key buildValueKey(int index) => valueKeyBuilder?.call(index)??ValueKey(controller[index].hashCode);
 
-  Widget buildItemWidget(int index, bool withSeparator){
+  Widget buildItemWidget({
+    required int index, 
+    required bool withSeparator, 
+    required EdgeInsetsGeometry? contentPadding
+  }){
     Widget child = _ItemWidget(
       key: buildValueKey(index),
       controller: controller[index],
@@ -248,9 +252,34 @@ class MultiTextFieldState extends State<MultiTextField>{
   @override
   Widget build(BuildContext context) {
     
+    EdgeInsetsGeometry? _contentPadding = null;
+    EdgeInsets? scrollViewPadding = null;
+    double expandedRowRightPadding = 0;
+    if (layout != LayoutMode.row)
+      _contentPadding = contentPadding;
+    else if(expanded && controller.length == 1){
+      _contentPadding = EdgeInsets.only(left: widget.padding?.left??0).add(contentPadding??EdgeInsets.zero);
+      scrollViewPadding = null;
+    } else if(expanded){  // && controller.length > 1
+      _contentPadding = contentPadding;
+      scrollViewPadding = EdgeInsets.only(left: widget.padding?.left??0);
+      expandedRowRightPadding = (widget.padding?.right??0);
+    } else if(!expanded) {
+      // Let the scroll view handle the padding
+      _contentPadding = contentPadding;
+      scrollViewPadding = widget.padding;
+    }
+
+    
     List<Widget> children = [];
     for(int i=0; i<controller.length; i++)
-      children.add(buildItemWidget(i, i < controller.length-1));
+      children.add(
+        buildItemWidget(
+          index: i, 
+          withSeparator: i < controller.length-1,
+          contentPadding: _contentPadding
+        )
+      );
 
     Widget addButton = enabled?
     AddButton(
@@ -261,14 +290,14 @@ class MultiTextFieldState extends State<MultiTextField>{
     ):
     Container();
 
-    switch(linear) {
+    switch(layout) {
       case LayoutMode.row:
         return Builder(
           builder: (context) {
             if(!expanded) children.add(addButton);
 
             Widget scrollView = SingleChildScrollView(
-              padding: expanded?null:widget.padding,
+              padding: scrollViewPadding,
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               child: Row(children: children),
@@ -278,15 +307,12 @@ class MultiTextFieldState extends State<MultiTextField>{
             if (expanded)
               return Row(
                 children: [
-                  if(widget.padding != null)
-                    SizedBox(width: widget.padding!.left),
                   if(children.length == 1)
                     Expanded(child: children[0])
                   else
                     Expanded(child: scrollView),
                   addButton,
-                  if(widget.padding != null)
-                    SizedBox(width: widget.padding!.right),
+                  SizedBox(width: expandedRowRightPadding),
                 ],
               );
             else
@@ -350,7 +376,7 @@ class _ItemWidget extends StatefulWidget{
   final void Function()? onRemoveTap;
   final void Function(String)? onChanged;
   final bool enabled;
-  final EdgeInsets? contentPadding;
+  final EdgeInsetsGeometry? contentPadding;
   final bool isCollapsed;
 
   const _ItemWidget({
@@ -389,7 +415,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
   void Function()? get onRemoveTap => widget.onRemoveTap;
   void Function(String)? get onChanged => widget.onChanged;
   bool get enabled => widget.enabled;
-  EdgeInsets? get contentPadding => widget.contentPadding;
+  EdgeInsetsGeometry? get contentPadding => widget.contentPadding;
   bool get isCollapsed => widget.isCollapsed;
 
   @override

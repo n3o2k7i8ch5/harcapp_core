@@ -346,6 +346,7 @@ class BasicDataWidget extends StatelessWidget{
                     SizedBox(width: padding!.left),
 
                   SimpleButton.from(
+                      color: cardEnab_(context),
                       textColor: currItemProv.showRelDateDay && currItemProv.showRelDateMonth?iconEnab_(context):iconDisab_(context),
                       dense: true,
                       margin: EdgeInsets.zero,
@@ -355,6 +356,7 @@ class BasicDataWidget extends StatelessWidget{
                   ),
 
                   SimpleButton.from(
+                      color: cardEnab_(context),
                       textColor: currItemProv.showRelDateMonth?iconEnab_(context):iconDisab_(context),
                       dense: true,
                       margin: EdgeInsets.zero,

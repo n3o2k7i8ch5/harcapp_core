@@ -205,7 +205,16 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
                 child: textField,
               ),
 
-              ValueListenableBuilder<bool>(
+              Padding(
+                padding: EdgeInsets.only(
+                  left: widget.multi?
+                  (widget.multiPadding?.left??0):
+                  (widget.contentPadding?.left??0),
+                  right: widget.multi?
+                  (widget.multiPadding?.right??0):
+                  (widget.contentPadding?.right??0),
+                ),
+                child: ValueListenableBuilder<bool>(
                   valueListenable: showTopHintNotifier,
                   builder: (_, visible, _) => AnimatedOpacity(
                     child: Text(
@@ -219,6 +228,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
                     duration: Duration(milliseconds: 300),
                     opacity:visible?1:0,
                   )
+                ),
               ),
 
             ],
@@ -248,7 +258,7 @@ class BaseTextFieldHint extends StatelessWidget {
   final Widget? leading;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
-  final EdgeInsets? contentPadding;
+  final EdgeInsetsGeometry? contentPadding;
   final TextCapitalization textCapitalization;
   final TextAlignVertical? textAlignVertical;
   final bool autofocus;
