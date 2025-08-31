@@ -14,6 +14,7 @@ class AppTextFieldHint extends StatefulWidget{
 
   final String hint;
   final String? hintTop;
+  final bool alwaysShowTopHint;
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final TextStyle? style;
@@ -51,6 +52,7 @@ class AppTextFieldHint extends StatefulWidget{
   const AppTextFieldHint({
     required this.hint,
     this.hintTop,
+    this.alwaysShowTopHint = false,
     this.controller,
     this.focusNode,
     this.style,
@@ -238,7 +240,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
                       ),
                     ),
                     duration: Duration(milliseconds: 300),
-                    opacity:visible?1:0,
+                    opacity:widget.alwaysShowTopHint || visible?1:0,
                   )
                 ),
               ),

@@ -106,6 +106,7 @@ class BasicDataWidget extends StatelessWidget{
               builder: (context){
                 Widget child = AppTextFieldHint(
                   hint: 'Ukryty tytuł:',
+                  alwaysShowTopHint: true,
                   multiController: currItemProv.hiddenTitlesController,
                   onAnyChanged: onChangedHiddenTitles,
 
