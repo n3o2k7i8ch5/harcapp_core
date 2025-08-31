@@ -102,58 +102,62 @@ class BasicDataWidget extends StatelessWidget{
               ],
             ),
 
-            AnimatedSize(
-              duration:
-              currItemProv.hiddenTitlesController.length<=1?
-              Duration(milliseconds: 300):
-              Duration.zero,  // Let the AppTextFieldHint handle the animation,
-              alignment: Alignment.topCenter,
-              child: currItemProv.hiddenTitlesController.length==0?
-              Container():
-              AppTextFieldHint(
-                hint: 'Ukryty tytuł:',
-                multiController: currItemProv.hiddenTitlesController,
-                onAnyChanged: onChangedHiddenTitles,
+            Builder(
+              builder: (context){
+                Widget child = AppTextFieldHint(
+                  hint: 'Ukryty tytuł:',
+                  multiController: currItemProv.hiddenTitlesController,
+                  onAnyChanged: onChangedHiddenTitles,
 
-                multi: true,
-                multiHintTop: 'Ukryte tytuły',
-                multiLayout: LayoutMode.column,
-                multiAllowZeroFields: true,
-                multiExpanded: true,
-                multiIsCollapsed: true,
-                multiItemBuilder: (index, key, widget) => Row(
-                  key: key,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(Dimen.iconMarg),
-                      child: Icon(MdiIcons.circleMedium),
-                    ),
-                    Expanded(child: widget)
-                  ],
-                ),
-                multiAddButtonBuilder: (tappable, onTap) => SimpleButton.from(
-                    icon: MdiIcons.plus,
-                    text: 'Dodaj ukryty tytuł',
-                    margin: EdgeInsets.zero,
+                  multi: true,
+                  multiHintTop: 'Ukryte tytuły',
+                  multiLayout: LayoutMode.column,
+                  multiAllowZeroFields: true,
+                  multiExpanded: true,
+                  multiIsCollapsed: true,
+                  multiItemBuilder: (index, key, widget) => Row(
+                    key: key,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(Dimen.iconMarg),
+                        child: Icon(MdiIcons.circleMedium),
+                      ),
+                      Expanded(child: widget)
+                    ],
+                  ),
+                  multiAddButtonBuilder: (tappable, onTap) => SimpleButton.from(
+                      icon: MdiIcons.plus,
+                      text: 'Dodaj ukryty tytuł',
+                      margin: EdgeInsets.zero,
 
-                    textColor:
-                    tappable?
-                    iconEnab_(context):
-                    iconDisab_(context),
+                      textColor:
+                      tappable?
+                      iconEnab_(context):
+                      iconDisab_(context),
 
-                    onTap: tappable?(){
-                      List<String> hidTitles = currItemProv.addHidTitle();
-                      onChangedHiddenTitles?.call(hidTitles);
-                    }:null,
-                    center: false
-                ),
-                multiPadding: EdgeInsets.only(
-                  left: padding?.left??0,
-                  right: padding?.right??0,
-                ),
-                multiOnAdded: () => currItemProv.notify(),
-                multiOnRemoved: (_) => currItemProv.notify(),
-              ),
+                      onTap: tappable?(){
+                        List<String> hidTitles = currItemProv.addHidTitle();
+                        onChangedHiddenTitles?.call(hidTitles);
+                      }:null,
+                      center: false
+                  ),
+                  multiPadding: EdgeInsets.only(
+                    left: padding?.left??0,
+                    right: padding?.right??0,
+                  ),
+                  multiOnAdded: () => currItemProv.notify(),
+                  multiOnRemoved: (_) => currItemProv.notify(),
+                );
+                if(currItemProv.hiddenTitlesController.length<=1)
+                  return AnimatedSize(
+                    duration: Duration(milliseconds: 300),
+                    alignment: Alignment.topCenter,
+                    child: child,
+                  );
+
+                return child;
+
+              },
             ),
 
             // AnimatedOpacity(
