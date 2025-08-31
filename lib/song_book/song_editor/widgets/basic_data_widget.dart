@@ -355,6 +355,8 @@ class BasicDataWidget extends StatelessWidget{
                       onTap: currItemProv.showRelDateMonth?() => currItemProv.setShowRelDateDay(!currItemProv.showRelDateDay) : null
                   ),
 
+                  SizedBox(width: Dimen.defMarg),
+
                   SimpleButton.from(
                       color: cardEnab_(context),
                       textColor: currItemProv.showRelDateMonth?iconEnab_(context):iconDisab_(context),

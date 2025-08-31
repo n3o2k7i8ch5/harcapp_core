@@ -260,6 +260,7 @@ class MultiTextFieldState extends State<MultiTextField>{
     else if(expanded && controller.length == 1){
       _contentPadding = EdgeInsets.only(left: widget.padding?.left??0).add(contentPadding??EdgeInsets.zero);
       scrollViewPadding = null;
+      expandedRowRightPadding = (widget.padding?.right??0);
     } else if(expanded){  // && controller.length > 1
       _contentPadding = contentPadding;
       scrollViewPadding = EdgeInsets.only(left: widget.padding?.left??0);
