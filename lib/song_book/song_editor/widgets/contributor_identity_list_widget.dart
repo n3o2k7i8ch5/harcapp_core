@@ -132,6 +132,7 @@ class ContributorIdentityListWidgetState extends State<ContributorIdentityListWi
               items: prov.contribIdData,
               itemBuilder: (context, index) =>
                   Padding(
+                    key: ValueKey(prov.contribIdData[index]),
                     padding: EdgeInsets.only(bottom: index < prov.contribIdData.length - 1?Dimen.defMarg:0),
                     child: ContributorIdentityWidget(
                       prov.contribIdData[index].$1,
@@ -152,7 +153,6 @@ class ContributorIdentityListWidgetState extends State<ContributorIdentityListWi
                         prov.contribIdData.removeAt(index);
                         prov.notify();
                       },
-                      key: ValueKey(prov.contribIdData[index]),
                     ),
                   ),
               shrinkWrap: true,
