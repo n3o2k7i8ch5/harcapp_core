@@ -157,67 +157,70 @@ class ContributorIdentityListWidgetState extends State<ContributorIdentityListWi
               isSameItem: (a, b) => a.hashCode == b.hashCode,
             ),
 
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
+            Padding(
+              padding: widget.listPadding,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
 
-                if(prov.contribIdData.isEmpty)
-                  SizedBox(
-                    height: ContributorIdentityWidget.height + 2*Dimen.iconMarg + 2*Dimen.textSizeBig,
-                    child: SimpleButton(
-                      radius: AppCard.bigRadius,
-                      onTap: (){
-                        prov.contribIdData.add((
+                  if(prov.contribIdData.isEmpty)
+                    SizedBox(
+                      height: ContributorIdentityWidget.height + 2*Dimen.iconMarg + 2*Dimen.textSizeBig,
+                      child: SimpleButton(
+                        radius: AppCard.bigRadius,
+                        onTap: (){
+                          prov.contribIdData.add((
                             TextEditingController(),
                             TextEditingController(),
                             TextEditingController()
-                        ));
-                        prov.notify();
-                      },
-                      child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
+                          ));
+                          prov.notify();
+                        },
+                        child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
 
-                            SizedBox(height: Dimen.iconMarg),
+                              SizedBox(height: Dimen.iconMarg),
 
-                            Icon(MdiIcons.accountPlusOutline, color: hintEnab_(context)),
+                              Icon(MdiIcons.accountPlusOutline, color: hintEnab_(context)),
 
-                            SizedBox(height: Dimen.iconMarg),
+                              SizedBox(height: Dimen.iconMarg),
 
-                            Text(
-                              'Pusto!\nUzupełnij swoje imię :)',
-                              textAlign: TextAlign.center,
-                              style: AppTextStyle(
-                                color: hintEnab_(context),
-                                fontSize: Dimen.textSizeBig,
+                              Text(
+                                'Pusto!\nUzupełnij swoje imię :)',
+                                textAlign: TextAlign.center,
+                                style: AppTextStyle(
+                                  color: hintEnab_(context),
+                                  fontSize: Dimen.textSizeBig,
+                                ),
                               ),
-                            ),
 
-                            SizedBox(height: Dimen.iconMarg),
+                              SizedBox(height: Dimen.iconMarg),
 
-                          ]
+                            ]
+                        ),
+                      ),
+                    )
+                  else
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: Dimen.iconMarg, horizontal: Dimen.iconMarg),
+                      child: Text(
+                        'Podaj email, by połączyć swoje piosenki jednolitym podpisem. Sam email nie będzie widoczny.',
+                        style: AppTextStyle(
+                            fontWeight: weightHalfBold,
+                            color: hintEnab_(context),
+                            fontSize: Dimen.textSizeBig,
+                            height: 1.2
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                  )
-                else
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: Dimen.iconMarg, horizontal: Dimen.iconMarg),
-                    child: Text(
-                      'Podaj email, by połączyć swoje piosenki jednolitym podpisem. Sam email nie będzie widoczny.',
-                      style: AppTextStyle(
-                          fontWeight: weightHalfBold,
-                          color: hintEnab_(context),
-                          fontSize: Dimen.textSizeBig,
-                          height: 1.2
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
 
-              ],
+                ],
+              ),
             ),
 
           ],

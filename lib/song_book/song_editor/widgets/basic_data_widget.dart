@@ -154,7 +154,9 @@ class BasicDataWidget extends StatelessWidget{
                   return AnimatedSize(
                     duration: Duration(milliseconds: 300),
                     alignment: Alignment.topCenter,
-                    child: child,
+                    child: currItemProv.hiddenTitlesController.isEmpty?
+                    Container():
+                    child,
                   );
 
                 return child;
