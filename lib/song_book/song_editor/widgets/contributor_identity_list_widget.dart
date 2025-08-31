@@ -81,8 +81,10 @@ class ContributorIdentityWidget extends StatelessWidget{
 class ContributorIdentityListWidget extends StatefulWidget{
 
   final void Function(List<ContributorIdentity>)? onChanged;
+  final EdgeInsets titlePadding;
+  final EdgeInsets listPadding;
 
-  const ContributorIdentityListWidget({this.onChanged});
+  const ContributorIdentityListWidget({this.onChanged, this.titlePadding = EdgeInsets.zero, this.listPadding = EdgeInsets.zero, super.key});
 
   @override
   State<StatefulWidget> createState() => ContributorIdentityListWidgetState();
@@ -99,26 +101,30 @@ class ContributorIdentityListWidgetState extends State<ContributorIdentityListWi
         Column(
           children: [
 
-            TitleShortcutRowWidget(
-              title: prov.contribIdData.length <= 1?'Osoba dodająca':'Osoby dodające',
-              textAlign: TextAlign.left,
-              //icon: MdiIcons.tagOutline,
-              trailing: AppButton(
-                icon: Icon(MdiIcons.plus),
-                onTap: (){
-                  prov.contribIdData.add(
-                      (
-                      TextEditingController(),
-                      TextEditingController(),
-                      TextEditingController()
-                      )
-                  );
-                  prov.notify();
-                },
+            Padding(
+              padding: widget.titlePadding,
+              child: TitleShortcutRowWidget(
+                title: prov.contribIdData.length <= 1?'Osoba dodająca':'Osoby dodające',
+                textAlign: TextAlign.left,
+                //icon: MdiIcons.tagOutline,
+                trailing: AppButton(
+                  icon: Icon(MdiIcons.plus),
+                  onTap: (){
+                    prov.contribIdData.add(
+                        (
+                        TextEditingController(),
+                        TextEditingController(),
+                        TextEditingController()
+                        )
+                    );
+                    prov.notify();
+                  },
+                ),
               ),
             ),
 
             AnimatedListView(
+              padding: widget.listPadding,
               items: prov.contribIdData,
               itemBuilder: (context, index) =>
                   Padding(
