@@ -125,9 +125,10 @@ class BasicDataWidget extends StatelessWidget{
                   multiItemBuilder: (index, key, widget) => Row(
                     key: key,
                     children: [
-                      SizedBox(width: Dimen.iconMarg),
-                      Icon(MdiIcons.circleMedium),
-                      SizedBox(width: Dimen.iconMarg),
+                      Padding(
+                        padding: EdgeInsets.all(Dimen.iconMarg),
+                        child: Icon(MdiIcons.circleMedium),
+                      ),
                       Expanded(child: widget)
                     ],
                   ),
