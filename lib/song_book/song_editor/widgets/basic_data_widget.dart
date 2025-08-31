@@ -76,6 +76,7 @@ class BasicDataWidget extends StatelessWidget{
                       onChangedTitle?.call(values[0]);
                     },
                     contentPadding: EdgeInsets.only(left: padding?.left??0),
+                    textCapitalization: TextCapitalization.sentences,
                   ),
                 ),
 

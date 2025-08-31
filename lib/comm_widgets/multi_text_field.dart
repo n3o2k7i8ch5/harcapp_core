@@ -346,6 +346,7 @@ class MultiTextFieldState extends State<MultiTextField>{
                 items: children,
                 itemBuilder: (context, index) => children[index],
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 enterTransition: [FadeIn()],
                 exitTransition: [SlideInUp(), FadeIn()],
                 isSameItem: (a, b) => a.key == b.key,
