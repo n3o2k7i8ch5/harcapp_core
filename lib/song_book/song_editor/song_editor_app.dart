@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/song_book/song_editor/providers.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
-import 'package:harcapp_core/song_book/song_tags.dart';
 import 'package:provider/provider.dart';
 
 class SongEditorApp extends StatelessWidget{
