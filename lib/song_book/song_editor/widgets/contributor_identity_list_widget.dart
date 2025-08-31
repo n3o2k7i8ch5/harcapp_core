@@ -6,6 +6,7 @@ import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
+import 'package:harcapp_core/comm_widgets/border_material.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/values/dimen.dart';
@@ -27,60 +28,53 @@ class ContributorIdentityWidget extends StatelessWidget{
   const ContributorIdentityWidget(this.nameController, this.emailController, {this.onChanged, this.onRemoveTap, Key? key}): super(key: key);
 
   @override
-  Widget build(BuildContext context) => Material(
-      color: cardEnab_(context),
-      borderRadius: BorderRadius.circular(AppCard.bigRadius),
-      clipBehavior: Clip.hardEdge,
+  Widget build(BuildContext context) => BorderMaterial(
+      // color: cardEnab_(context),
       child: Padding(
-        padding: EdgeInsets.all(Dimen.defMarg),
-        child: Material(
-          borderRadius: BorderRadius.circular(AppCard.bigRadius - 6),
-          clipBehavior: Clip.hardEdge,
-          color: background_(context),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: AppTextFieldHint(
-                      hint: 'Imię i nazwisko:',
-                      hintTop: 'Imię i nazwisko',
-                      controller: nameController,
-                      onChanged: (_, __) => onChanged?.call(),
-                    ),
+        padding: EdgeInsets.only(left: Dimen.iconMarg, top: Dimen.defMarg),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: AppTextFieldHint(
+                    hint: 'Imię i nazwisko:',
+                    hintTop: 'Imię i nazwisko',
+                    controller: nameController,
+                    onChanged: (_, __) => onChanged?.call(),
                   ),
+                ),
 
+                AppButton(
+                    icon: Icon(MdiIcons.close),
+                    onTap: onRemoveTap
+                )
+              ],
+            ),
+            Row(
+              children: [
+
+                Expanded(
+                  child: AppTextFieldHint(
+                    hint: 'Email:',
+                    hintTop: 'Email',
+                    controller: emailController,
+                    onChanged: (_, __) => onChanged?.call(),
+                  ),
+                ),
+
+                if(emailController.text.isEmpty)
                   AppButton(
-                      icon: Icon(MdiIcons.close),
-                      onTap: onRemoveTap
-                  )
-                ],
-              ),
-              Row(
-                children: [
-
-                  Expanded(
-                    child: AppTextFieldHint(
-                      hint: 'Email:',
-                      hintTop: 'Email',
-                      controller: emailController,
-                      onChanged: (_, __) => onChanged?.call(),
-                    ),
+                    icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
+                    onTap: () => AppScaffold.showMessage(context, text: 'Podaj email, by zyskać wieczystą sławę'),
                   ),
 
-                  if(emailController.text.isEmpty)
-                    AppButton(
-                      icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
-                      onTap: () => AppScaffold.showMessage(context, text: 'Podaj email, by zyskać wieczystą sławę'),
-                    ),
-
-                ],
-              )
-            ],
-          ),
+              ],
+            )
+          ],
         ),
-      )
+      ),
   );
 
 }
