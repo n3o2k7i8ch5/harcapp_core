@@ -33,7 +33,7 @@ class RefrenTemplate extends StatelessWidget{
                 title: 'Szablon refrenu',
                 titleColor:
                 currItemProv.hasRefren?textEnab_(context):textDisab_(context),
-                textAlign: TextAlign.start,
+                textAlign: TextAlign.left,
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
