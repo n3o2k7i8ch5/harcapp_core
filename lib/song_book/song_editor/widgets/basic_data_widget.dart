@@ -105,6 +105,7 @@ class BasicDataWidget extends StatelessWidget{
 
             Builder(
               builder: (context){
+
                 Widget child = AppTextFieldHint(
                   hint: 'Ukryty tytuł:',
                   alwaysShowTopHint: true,
@@ -150,6 +151,7 @@ class BasicDataWidget extends StatelessWidget{
                   multiOnAdded: () => currItemProv.notify(),
                   multiOnRemoved: (_) => currItemProv.notify(),
                 );
+
                 if(currItemProv.hiddenTitlesController.length<=1)
                   return AnimatedSize(
                     duration: Duration(milliseconds: 300),
