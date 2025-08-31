@@ -33,11 +33,13 @@ class SongTagsWidget extends StatelessWidget{
       return Column(
         children: [
 
+          SizedBox(height: padding.top),
+
           Padding(
-            padding: EdgeInsets.only(left: Dimen.iconMarg),
+            padding: EdgeInsets.only(left: padding.left, right: padding.right),
             child: TitleShortcutRowWidget(
               title: 'Tagi${prov.count==0?'':' (${prov.count})'}',
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.left,
             ),
           ),
 
@@ -45,7 +47,7 @@ class SongTagsWidget extends StatelessWidget{
             TagsWidget.linear(
               onTagTap: onTagTap as dynamic Function(String, bool)?,
               allTags: SongTag.ALL,
-              padding: padding,
+              padding: EdgeInsets.only(left: padding.left, right: padding.right),
               checkedTags: prov.checkedTags,
               fontSize: Dimen.textSizeNormal,
             )
@@ -53,10 +55,12 @@ class SongTagsWidget extends StatelessWidget{
             TagsWidget.wrap(
               onTagTap: onTagTap as dynamic Function(String, bool)?,
               allTags: SongTag.ALL,
-              padding: padding,
+              padding: EdgeInsets.only(left: padding.left, right: padding.right),
               checkedTags: prov.checkedTags,
               fontSize: Dimen.textSizeNormal,
-            )
+            ),
+
+          SizedBox(height: padding.bottom),
 
         ],
       );

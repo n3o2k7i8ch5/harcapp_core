@@ -114,7 +114,7 @@ class ContributorIdentityListWidgetState extends State<ContributorIdentityListWi
 
             TitleShortcutRowWidget(
               title: prov.contribIdData.length <= 1?'Osoba dodająca':'Osoby dodające',
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.left,
               //icon: MdiIcons.tagOutline,
               trailing: AppButton(
                 icon: Icon(MdiIcons.plus),
