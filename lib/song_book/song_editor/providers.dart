@@ -25,9 +25,9 @@ class CurrentItemProvider extends ChangeNotifier{
 
   void _updateControllers({
     required SongRaw song,
-    String? initContribIdName,
-    String? initContribIdEmail,
-    String? initContribIdUserKey
+    String? contribIdName,
+    String? contribIdEmail,
+    String? contribIdUserKey
   }){
     titleController.text = song.title;
     hiddenTitlesController.texts = song.hidTitles;
@@ -43,12 +43,12 @@ class CurrentItemProvider extends ChangeNotifier{
       TextEditingController(text: contribId.emailRef),
       TextEditingController(text: contribId.userKeyRef)
       )).toList();
-    else if (initContribIdName != null || initContribIdEmail != null || initContribIdUserKey != null){
-      song.contribId.add(ContributorIdentity(name: initContribIdName, emailRef: initContribIdEmail, userKeyRef: initContribIdUserKey));
+    else if (contribIdName != null || contribIdEmail != null || contribIdUserKey != null){
+      song.contribId.add(ContributorIdentity(name: contribIdName, emailRef: contribIdEmail, userKeyRef: contribIdUserKey));
       contribIdData = [(
-      TextEditingController(text: initContribIdName??''),
-      TextEditingController(text: initContribIdEmail??''),
-      TextEditingController(text: initContribIdUserKey??'')
+      TextEditingController(text: contribIdName??''),
+      TextEditingController(text: contribIdEmail??''),
+      TextEditingController(text: contribIdUserKey??'')
       )];
     } else
       contribIdData = [];
@@ -57,16 +57,16 @@ class CurrentItemProvider extends ChangeNotifier{
 
   void set({
     required SongRaw song,
-    String? initContribIdName,
-    String? initContribIdEmail,
-    String? initContribIdUserKey
+    String? contribIdName,
+    String? contribIdEmail,
+    String? contribIdUserKey
   }) {
     _song = song;
     _updateControllers(
         song: song,
-        initContribIdName: initContribIdName,
-        initContribIdEmail: initContribIdEmail,
-        initContribIdUserKey: initContribIdUserKey
+        contribIdName: contribIdName,
+        contribIdEmail: contribIdEmail,
+        contribIdUserKey: contribIdUserKey
     );
     notifyListeners();
   }
@@ -79,9 +79,9 @@ class CurrentItemProvider extends ChangeNotifier{
     _song = song;
     _updateControllers(
       song: _song,
-      initContribIdName: initContribIdName,
-      initContribIdEmail: initContribIdEmail,
-      initContribIdUserKey: initContribIdUserKey
+      contribIdName: initContribIdName,
+      contribIdEmail: initContribIdEmail,
+      contribIdUserKey: initContribIdUserKey
     );
 
   }
