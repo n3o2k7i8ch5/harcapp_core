@@ -118,7 +118,6 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
       return multiController!.isNotEmpty;
     else
       return controller.text.isNotEmpty;
-
   }
 
   @override
@@ -162,6 +161,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         addButtonBuilder: widget.multiAddButtonBuilder,
         onAnyChanged: onAnyChangedListener,
         onChanged: onChangedListener,
+        onAdded: () => setState((){}),
+        onRemoved: (_) => setState((){}),
         enabled: widget.enabled,
         contentPadding: widget.contentPadding,
         isCollapsed: true, // widget.multiIsCollapsed,

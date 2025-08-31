@@ -121,6 +121,7 @@ class MultiTextField extends StatefulWidget{
 
   final void Function(List<String>)? onAnyChanged;
   final void Function(int, String)? onChanged;
+  final void Function()? onAdded;
   final void Function(int)? onRemoved;
   final bool enabled;
   final EdgeInsets? contentPadding;
@@ -146,6 +147,7 @@ class MultiTextField extends StatefulWidget{
     
     this.onAnyChanged,
     this.onChanged,
+    this.onAdded,
     this.onRemoved, 
     this.enabled = true,
     this.contentPadding,
@@ -182,6 +184,7 @@ class MultiTextFieldState extends State<MultiTextField>{
 
   void Function(List<String>)? get onAnyChanged => widget.onAnyChanged;
   void Function(int, String)? get onChanged => widget.onChanged;
+  void Function()? get onAdded => widget.onAdded;
   void Function(int)? get onRemoved => widget.onRemoved;
   bool get enabled => widget.enabled;
   EdgeInsets? get contentPadding => widget.contentPadding;
@@ -362,6 +365,7 @@ class MultiTextFieldState extends State<MultiTextField>{
     controller._callOnChanged(controller.length-1);
     _callOnAnyChanged();
     controller._callOnAnyChanged();
+    onAdded?.call();
   });
 
 }

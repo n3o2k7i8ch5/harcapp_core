@@ -29,7 +29,6 @@ class ContributorIdentityWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => BorderMaterial(
-      // color: cardEnab_(context),
       child: Padding(
         padding: EdgeInsets.only(left: Dimen.iconMarg, top: Dimen.defMarg),
         child: Column(

@@ -166,7 +166,7 @@ class BasicDataWidget extends StatelessWidget{
                 color: hintEnab_(context),
               ),
               multi: true,
-              multiHintTop: 'Autorzy słów:',
+              multiHintTop: 'Autorzy słów',
               multiExpanded: true,
               multiController: currItemProv.authorsController,
               onAnyChanged: (values){
