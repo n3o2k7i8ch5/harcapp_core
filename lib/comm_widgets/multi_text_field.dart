@@ -417,6 +417,8 @@ class _ItemWidgetState extends State<_ItemWidget>{
               icon: Icon(MdiIcons.close, size: iconSize),
               padding: EdgeInsets.symmetric(horizontal: Dimen.iconMarg),
               constraints: const BoxConstraints(),
+              style: ButtonStyle(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+              splashRadius: Material.defaultSplashRadius,
               onPressed: onRemoveTap,
             )
           else
@@ -489,6 +491,8 @@ class AddButtonState extends State<AddButton>{
       ),
       padding: EdgeInsets.symmetric(horizontal: Dimen.iconMarg),
       constraints: const BoxConstraints(),
+      style: ButtonStyle(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+      splashRadius: Material.defaultSplashRadius,
       onPressed:
       tappable?
       onPressed:
