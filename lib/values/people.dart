@@ -21,8 +21,6 @@ Map<String, Person> __getAllPeopleByEmailMap(){
   return result;
 }
 
-Map<String, Person> allPeopleByEmailMap = __getAllPeopleByEmailMap();
-
 Person ABRAHAM_PRAGER = _register(const Person(
   name: 'Abraham Prager',
   druzyna: '1. Czarnkowska Drużyna Wielopoziomowa „Puszcza” im. Jana Kilińskiego',
@@ -1484,7 +1482,10 @@ Person KAMIL_ORGANISTA = _register(const Person(
     org: Org.zhp,
     email: ['k.furiao@gmail.com', 'k.organista@onet.pl']
 ));
-Person KAMIL_ZAK = _register(const Person(name: 'Kamil Żak', rankHarc: RankHarc.zhpHOc));
+Person KAMIL_ZAK = _register(const Person(
+    name: 'Kamil Żak',
+    rankHarc: RankHarc.zhpHOc
+));
 Person KAROL_FRANKOWSKI = _register(const Person(
     name: 'Karol Frankowski',
     druzyna: '1. PDH „Borek”',
@@ -1512,7 +1513,10 @@ Person KAROL_MALINSKI = _register(const Person(
     org: Org.zhp,
     email: ["karol.malinski@zhp.net.pl"]
 ));
-Person KAROL_MALUS = _register(const Person(name: 'Karol Malus', rankHarc: RankHarc.dhc));
+Person KAROL_MALUS = _register(const Person(
+    name: 'Karol Malus',
+    rankHarc: RankHarc.dhc
+));
 Person KAROL_PODOLSKI = _register(const Person(
     name: 'Karol Podolski',
     druzyna: '22. IMDW „Baribale”',
@@ -1601,7 +1605,9 @@ Person KLAUDIA_STASINSKA = _register(const Person(
     org: Org.zhp,
     email: ['klaudia.stasinska@zhp.net.pl', 'claudia.stasinska@gmail.com']
 ));
-Person KLAUDIUSZ_PALUCH = _register(const Person(name: 'Klaudiusz Paluch'));
+Person KLAUDIUSZ_PALUCH = _register(const Person(
+    name: 'Klaudiusz Paluch'
+));
 Person KLEMENTYNA_MARWICZ = _register(const Person(
     name: 'Klementyna Marwicz',
     druzyna: 'Przełęcz',
@@ -1678,7 +1684,10 @@ Person KRZYSZTOF_KANIEWSKI = _register(const Person(
     org: Org.zhp,
     email: ['krzysztof.kaniewski@zhp.net.pl']
 ));
-Person KRZYSZTOF_KRAWCZYK = _register(const Person(name: 'Krzysztof Krawczyk', rankHarc: RankHarc.dhc));
+Person KRZYSZTOF_KRAWCZYK = _register(const Person(
+    name: 'Krzysztof Krawczyk',
+    rankHarc: RankHarc.dhc
+));
 Person KRZYSZTOF_LUBAS = _register(const Person(
     name: 'Krzysztof Lubas',
     druzyna: '1. Śledziejowicka Drużyna Harcerzy „Pełnia”',
@@ -3506,7 +3515,14 @@ Person ZUZANNA_RADKOWSKA = _register(const Person(
     org: Org.zhp,
     email: ['zuzanna.radkowska21.12@gmail.com']
 ));
-Person ZUZANNA_WARCHOL = _register(const Person(name: 'Zuzanna Warchoł', druzyna: '113. TWDH „Pustynna Burza”', org: Org.zhp, hufiec: huf_zhp_szczecin_pogodno));
+Person ZUZANNA_WARCHOL = _register(const Person(
+    name: 'Zuzanna Warchoł',
+    druzyna: '113. TWDH „Pustynna Burza”',
+    org: Org.zhp,
+    hufiec: huf_zhp_szczecin_pogodno
+));
+
+Map<String, Person> allPeopleByEmailMap = __getAllPeopleByEmailMap();
 
 class Person{
 
