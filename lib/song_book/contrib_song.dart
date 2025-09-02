@@ -8,6 +8,7 @@ import 'contributor_identity.dart';
 
 bool _isContributorNew(ContributorIdentity contribId) {
   if(contribId.emailRef == null) return true;
+  Map<String, Person> allPeopleByEmailMap = buildAllPeopleByEmailMap();
   if(!allPeopleByEmailMap.containsKey(contribId.emailRef)) return true;
 
   return false;

@@ -11,7 +11,7 @@ Person _register(Person person) {
   return person;
 }
 
-Map<String, Person> __getAllPeopleByEmailMap(){
+Map<String, Person> buildAllPeopleByEmailMap(){
   Map<String, Person> result = {};
 
   for(Person person in allPeople)
@@ -3521,8 +3521,6 @@ Person ZUZANNA_WARCHOL = _register(const Person(
     org: Org.zhp,
     hufiec: huf_zhp_szczecin_pogodno
 ));
-
-Map<String, Person> allPeopleByEmailMap = __getAllPeopleByEmailMap();
 
 class Person{
 
