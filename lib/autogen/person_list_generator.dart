@@ -8,7 +8,7 @@ class PersonFieldGenerator extends Generator {
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
     final buffer = StringBuffer();
 
-    final topLevelPeople = library.element.topLevelElements
+    final topLevelPeople = library.element.topLevelVariables
         .whereType<TopLevelVariableElement>()
         .where((element) =>
     element.isConst &&
