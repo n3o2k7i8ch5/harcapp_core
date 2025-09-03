@@ -4,16 +4,13 @@ import 'package:harcapp_core/values/rank_instr.dart';
 import 'hufce.dart';
 import 'org.dart';
 
-@pragma('vm:entry-point')
 final List<Person> allPeople = [];
 
-@pragma('vm:entry-point')
 Person _register(Person person) {
   allPeople.add(person);
   return person;
 }
 
-@pragma('vm:entry-point')
 final Person ABRAHAM_PRAGER = _register(const Person(
   name: 'Abraham Prager',
   druzyna: '1. Czarnkowska Drużyna Wielopoziomowa „Puszcza” im. Jana Kilińskiego',
@@ -3627,6 +3624,35 @@ Person ZUZANNA_WARCHOL = _register(const Person(
 ));
 
 class Person{
+
+  static final List<Person> allPeople = [];
+
+  static Person _register(Person person) {
+    allPeople.add(person);
+    return person;
+  }
+
+  static final Person ADAM_DAWID = _register(const Person(
+      name: 'Adam Dawid',
+      druzyna: '33. CDH „Czarne stopy”',
+      hufiec: huf_zhp_ziemi_cieszynskiej,
+      rankHarc: RankHarc.dhc,
+      org: Org.zhp,
+      email: ['treaxy09@gmail.com']
+  ));
+  static final Person ADAM_DUDAK = _register(const Person(
+      name: 'Adam Dudak',
+      hufiec: huf_zhp_warszawa_ursynow,
+      druzyna: '234. Warszawska Drużyna Harcerska „Forteca”'
+  ));
+  static final Person ADAM_SKLODOWSKI = _register(const Person(
+      name: 'Adam Skłodowski',
+      druzyna: '58. MDH „Cichociemni”',
+      hufiec: 'Eldorado',
+      rankHarc: RankHarc.zhrWywiadowca,
+      org: Org.zhr,
+      email: []
+  ));
 
   final String name;
   final RankHarc? rankHarc;
