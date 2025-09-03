@@ -1201,7 +1201,14 @@ const Person JERZY_ZOLNA = Person(
     org: Org.zhp,
     email: ["kamil12356544@gmail.com"]
 );
-
+const Person JOANNA_ASZKLAR = Person(
+    name: 'Joanna Aszklar',
+    druzyna: '155. WDSH „Kuźnia”',
+    hufiec: huf_zhp_warszawa_mokotow,
+    rankHarc: RankHarc.zhpHOd,
+    org: Org.zhp,
+    email: ["Joanna.aszklar@zhp.net.pl"]
+);
 const Person JOANNA_MICHALOWSKA = Person(name: 'Joanna Michałowska', rankHarc: RankHarc.zhpSamarytanka,
   druzyna: '18. Poznańska Drużyna Harcerek im. Olgi Drahonowskiej-Małkowskiej',
   org: Org.zhp,
@@ -1420,6 +1427,14 @@ const Person KACPER_TOMCZYK = Person(
     hufiec: huf_zhp_wrzesnia_wrzos,
     org: Org.zhp,
     email: ['celnysnajper@gmail.com']
+);
+const Person KACPER_TRUCHLEWSKI = Person(
+    name: 'Kacper Truchlewski',
+    druzyna: '13. DSH „Szalona Trzynsatka”',
+    hufiec: huf_zhp_ziemi_mikolowskiej,
+    rankHarc: RankHarc.dhc,
+    org: Org.zhp,
+    email: ['truchlewski_kacper@enaukasp1.laziska.pl']
 );
 const Person KACPER_WIDZ = Person(
   name: 'Kacper Widz',
@@ -1645,10 +1660,6 @@ const Person KLEMENTYNA_MARWICZ = Person(
     org: Org.zhr,
     email: ["kemarwicz@gmail.com"]
 );
-const Person KORNEL_GOLEBIEWSKI = Person(
-    name: 'Kornel Gołębiewski',
-    email: ['kornelg2001@wp.pl']
-);
 const Person KORDIAN_LATOCHA = Person(
     name: 'Kordian Latocha',
     druzyna: '10. ŁDH',
@@ -1660,9 +1671,14 @@ const Person KORDIAN_LATOCHA = Person(
 const Person KORNEL_DABKOWSKI = Person(
     name: 'Kornel Dąbkowski',
     druzyna: '0,5. Próbna Drużyna Wędrownicza „Włóczykije”',
-    hufiec: 'Trzcianka',
+    hufiec: huf_zhp_trzcianka,
+    rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["rener17011973@gmail.com"]
+);
+const Person KORNEL_GOLEBIEWSKI = Person(
+    name: 'Kornel Gołębiewski',
+    email: ['kornelg2001@wp.pl']
 );
 const Person KORNELIA_KASIBORSKA = Person(
     name: 'Kornelia Kasiborska',
@@ -2884,7 +2900,7 @@ const Person RADOSLAW_RELIDZYNSKI = Person(
 const Person RAFAL_ANTONICKI = Person(
     name: 'Rafał Antonicki',
     druzyna: '27. HDW',
-    hufiec: huf_zhp_ziemi_mikolajowskiej,
+    hufiec: huf_zhp_ziemi_mikolowskiej,
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["rafalantonicki@gmail.com"]
