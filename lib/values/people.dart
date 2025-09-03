@@ -2819,7 +2819,9 @@ const Person PIOTR_KWAPIEN = Person(
 const Person PIOTR_MACIEJ_KABATA = Person(
     name: 'Piotr Maciej Kabata'
 );
-const Person PIOTR_SOSNOWSKI = Person(name: 'Piotr Sosnowski', rankInstr: RankInstr.pwd,
+const Person PIOTR_SOSNOWSKI = Person(
+  name: 'Piotr Sosnowski',
+  rankInstr: RankInstr.pwd,
   druzyna: 'II. SzDHiZ, 74. Poznańska Drużyna Wędrownicza „Lewe Skrzydło” im. Dywizjonu 303',
   hufiec: huf_zhp_poznan_wilda,
   org: Org.zhp,
