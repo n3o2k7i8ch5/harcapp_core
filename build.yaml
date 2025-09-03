@@ -1,0 +1,15 @@
+builders:
+  personBuilder:
+    import: "package:harcapp_core/autogen/builder.dart"
+    builder_factories: ["personBuilder"]
+    build_extensions: {".dart": [".all.g.dart"]}
+    auto_apply: dependents
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]
+
+targets:
+  $default:
+    builders:
+      harcapp_core|personBuilder:
+        generate_for:
+          - lib/values/people.dart
