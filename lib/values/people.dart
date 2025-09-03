@@ -3601,21 +3601,21 @@ const Person ZUZANNA_ROMANISZYN = Person(
     email: ['zuziarysia19@outlook.com', 'zuziarysia19@gmail.com']
 );
 
-// const Person ZUZANNA_RADKOWSKA = Person(
-//     name: 'Zuzanna Radkowska',
-//     druzyna: '21. ZDH',
-//     hufiec: huf_zhp_ziemi_zawiercianskiej,
-//     rankHarc: RankHarc.zhpTropicielka,
-//     org: Org.zhp,
-//     email: ['zuzanna.radkowska21.12@gmail.com']
-// );
+const Person ZUZANNA_RADKOWSKA = Person(
+    name: 'Zuzanna Radkowska',
+    druzyna: '21. ZDH',
+    hufiec: huf_zhp_ziemi_zawiercianskiej,
+    rankHarc: RankHarc.zhpTropicielka,
+    org: Org.zhp,
+    email: ['zuzanna.radkowska21.12@gmail.com']
+);
 
-// const Person ZUZANNA_WARCHOL = Person(
-//     name: 'Zuzanna Warchoł',
-//     druzyna: '113. TWDH „Pustynna Burza”',
-//     org: Org.zhp,
-//     hufiec: huf_zhp_szczecin_pogodno
-// );
+const Person ZUZANNA_WARCHOL = Person(
+    name: 'Zuzanna Warchoł',
+    druzyna: '113. TWDH „Pustynna Burza”',
+    org: Org.zhp,
+    hufiec: huf_zhp_szczecin_pogodno
+);
 
 class Person{
 
