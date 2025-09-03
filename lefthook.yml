@@ -2,5 +2,5 @@ pre-commit:
   commands:
     build_runner:
       run: dart run build_runner build --delete-conflicting-outputs
-      # Regex to match staged files — only runs if this file changed
-      files: ^lib/values/people.dart$
+      stage_fixed: true
+      glob: "lib/values/people.dart"

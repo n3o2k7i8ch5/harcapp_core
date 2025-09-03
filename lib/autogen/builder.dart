@@ -4,5 +4,5 @@ import 'person_list_generator.dart';
 
 Builder personBuilder(BuilderOptions options) => LibraryBuilder(
   PersonFieldGenerator(),
-  generatedExtension: '.people_list.g.dart',
+  generatedExtension: '.all.g.dart',
 );

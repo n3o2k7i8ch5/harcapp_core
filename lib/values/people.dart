@@ -1,4 +1,4 @@
-import 'package:harcapp_core/values/people.people_list.g.dart';
+import 'package:harcapp_core/values/people.all.g.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
 
