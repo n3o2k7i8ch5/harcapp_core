@@ -7,6 +7,7 @@ import 'org.dart';
 @pragma('vm:entry-point')
 final List<Person> allPeople = [];
 
+@pragma('vm:entry-point')
 Person _register(Person person) {
   allPeople.add(person);
   return person;
