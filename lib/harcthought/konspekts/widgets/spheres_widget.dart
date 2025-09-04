@@ -91,7 +91,7 @@ class KonspektSphereDetailsWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context){
 
-    if(details.levels == null || details.levels!.isEmpty)
+    if(details.levels.isEmpty)
       return Container();
 
     return SimpleButton(
@@ -101,10 +101,10 @@ class KonspektSphereDetailsWidget extends StatelessWidget{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: 2*Dimen.defMarg,
-        children: details.levels!.keys.map((level) =>
+        children: details.levels.keys.map((level) =>
             KonspektSphereDetailLevelWidget(
               level,
-              details.levels![level]!,
+              details.levels[level]!,
             )
         ).toList(),
       ),
@@ -112,6 +112,31 @@ class KonspektSphereDetailsWidget extends StatelessWidget{
 
   }
 
+}
+
+class KonspektSphereTitleWidget extends StatelessWidget{
+
+  final KonspektSphere sphere;
+
+  const KonspektSphereTitleWidget(this.sphere, {super.key});
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+
+      Icon(sphere.displayIcon),
+
+      const SizedBox(width: Dimen.iconMarg),
+
+      Expanded(
+          child: Text(
+              sphere.displayName,
+              style: const AppTextStyle(fontSize: Dimen.textSizeAppBar)
+          )
+      )
+
+    ],
+  );
 }
 
 class KonspektSphereWidget extends StatelessWidget{
@@ -141,22 +166,7 @@ class KonspektSphereWidget extends StatelessWidget{
                 top: 2*Dimen.defMarg,
                 left: 2*Dimen.defMarg
             ),
-            child: Row(
-              children: [
-
-                Icon(sphere.displayIcon),
-
-                const SizedBox(width: Dimen.iconMarg),
-
-                Expanded(
-                    child: Text(
-                        sphere.displayName,
-                        style: const AppTextStyle(fontSize: Dimen.textSizeAppBar)
-                    )
-                )
-
-              ],
-            )
+            child: KonspektSphereTitleWidget(sphere)
         ),
 
         const SizedBox(height: 2*Dimen.defMarg),
