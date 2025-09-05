@@ -85,6 +85,16 @@ enum KonspektSphere{
     }
   }
 
+  String get displayNameDopelniacz{
+    switch(this){
+      case cialo: return 'Ciała';
+      case umysl: return 'Umysłu';
+      case duch: return 'Ducha';
+      case emocje: return 'Emocji';
+      case relacje: return 'Relacji';
+    }
+  }
+
   IconData get displayIcon{
     switch(this){
       case cialo: return MdiIcons.armFlexOutline;
