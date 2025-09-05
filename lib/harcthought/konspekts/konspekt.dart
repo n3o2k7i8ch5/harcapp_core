@@ -109,7 +109,7 @@ enum KonspektSphere{
 
 class KonspektSphereDetails{
 
-  final Map<KonspektSphereLevel, Map<String, Set<KonspektSphereFactor>?>> levels;
+  final Map<KonspektSphereLevel, KonspektSphereFields> levels;
 
   const KonspektSphereDetails({
     required this.levels,
@@ -118,7 +118,7 @@ class KonspektSphereDetails{
   Map toJsonMap(){
     Map result = {};
     for (KonspektSphereLevel level in levels.keys)
-      result[level.name] = levels[level]!.map(
+      result[level.name] = levels[level]!.fields.map(
               (key, value) => MapEntry(key, value?.map((e) => e.name).toList())
       );
 
@@ -190,6 +190,16 @@ enum KonspektSphereLevel{
       color: pdfColor,
     ),
   );
+
+}
+
+class KonspektSphereFields{
+
+  final Map<String, Set<KonspektSphereFactor>?> fields;
+
+  const KonspektSphereFields({
+    required this.fields,
+  });
 
 }
 

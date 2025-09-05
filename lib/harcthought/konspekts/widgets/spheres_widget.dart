@@ -44,7 +44,7 @@ class KonspektSphereDetailFactorWidget extends StatelessWidget{
 class KonspektSphereDetailLevelWidget extends StatelessWidget{
 
   final KonspektSphereLevel level;
-  final Map<String, Set<KonspektSphereFactor>?> data;
+  final KonspektSphereFields data;
 
   const KonspektSphereDetailLevelWidget(this.level, this.data);
 
@@ -61,7 +61,7 @@ class KonspektSphereDetailLevelWidget extends StatelessWidget{
       Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: Dimen.defMarg,
-        children: data.keys.map((detail) => Row(
+        children: data.fields.keys.map((detail) => Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
@@ -71,7 +71,7 @@ class KonspektSphereDetailLevelWidget extends StatelessWidget{
             ),
 
             Expanded(
-              child: KonspektSphereDetailFactorWidget(detail, data[detail]),
+              child: KonspektSphereDetailFactorWidget(detail, data.fields[detail]),
             ),
           ],
         )).toList(),

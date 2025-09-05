@@ -31,20 +31,24 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     spheres: {
       KonspektSphere.duch: KonspektSphereDetails(
         levels: {
-          KonspektSphereLevel.duchPostawy: {
+          KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+              fields: {
             postawaPostepowanieZgodnieZPH: {
               KonspektSphereFactor.duchPerspektywa_Normalizacja,
               KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
               KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
             }
           }
+          )
         }
       ),
       KonspektSphere.umysl: KonspektSphereDetails(
           levels: {
-            KonspektSphereLevel.other: {
+            KonspektSphereLevel.other: KonspektSphereFields(
+                fields: {
               umyslZnajomoscPIP: null,
             }
+            )
           }
       ),
     },

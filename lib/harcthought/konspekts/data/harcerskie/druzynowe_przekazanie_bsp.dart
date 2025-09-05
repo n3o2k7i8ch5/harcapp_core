@@ -13,19 +13,25 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
     spheres: {
       KonspektSphere.duch: KonspektSphereDetails(
           levels: {
-            KonspektSphereLevel.duchPostawy: {
+            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+              fields: {
               postawaOtwartoscNaLudzi: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
               postawaPrzebaczenie: {KonspektSphereFactor.duchPerspektywa_Normalizacja}
-            },
-            KonspektSphereLevel.duchWartosci: {
+            }
+            ),
+            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+              fields: {
               wartoscPokoj: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
               wartoscPrzynaleznoscDoHarcerstwa: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-            },
-            KonspektSphereLevel.duchAksjomaty: {
+            }
+            ),
+            KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
+              fields: {
               aksjoNarodzinyChrystusa: {KonspektSphereFactor.duchPerspektywa_Normalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow},
               aksjoZbawczaRolaChrystusa: {KonspektSphereFactor.duchPerspektywa_Normalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow},
               aksjoZbawienie: {KonspektSphereFactor.duchPerspektywa_Normalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow}
-            },
+            }
+            ),
           },
       ),
     },

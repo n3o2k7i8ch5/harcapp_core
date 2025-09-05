@@ -302,9 +302,11 @@ Konspekt zycie_i_swiat_prl = Konspekt(
     spheres: {
       KonspektSphere.umysl: KonspektSphereDetails(
           levels: {
-            KonspektSphereLevel.other: {
+            KonspektSphereLevel.other: KonspektSphereFields(
+                fields: {
               umyslZnajomoscHistorii: null,
             }
+            )
           }
       ),
     },

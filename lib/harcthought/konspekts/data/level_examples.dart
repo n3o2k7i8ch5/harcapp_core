@@ -92,29 +92,35 @@ const Map levelSilaCharakteru = {
 const Map<KonspektSphere, KonspektSphereDetails> spheresLogiczne = {
   KonspektSphere.umysl: KonspektSphereDetails(
       levels: {
-        KonspektSphereLevel.other: {
+        KonspektSphereLevel.other: KonspektSphereFields(
+            fields: {
           umyslLogiczneMyslenie: null
         }
+        )
   }
   ),
   KonspektSphere.duch: KonspektSphereDetails(
       levels: {
-        KonspektSphereLevel.duchPostawy: {
+        KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+            fields: {
           postawaUwaznosc: {
             KonspektSphereFactor.duchPerspektywa_Normalizacja,
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchWartosciWtorne,
             KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
           }
-        },
-        KonspektSphereLevel.duchWartosci: {
+        }
+        ),
+        KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+            fields: {
           wartoscBystrosc: {
             KonspektSphereFactor.duchPerspektywa_Normalizacja,
             KonspektSphereFactor.duchWartosciWtorne,
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
           },
-        },
+        }
+        ),
         ...levelSilaCharakteru
       }
   ),

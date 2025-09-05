@@ -14,23 +14,28 @@ Konspekt msza_obozowa_lecz_nie_tylko = Konspekt(
   spheres: {
     KonspektSphere.duch: KonspektSphereDetails(
       levels: {
-        KonspektSphereLevel.duchAksjomaty: {
+        KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
+            fields: {
           aksjoSpotkanieBogaWeMszySw: {
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
             KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
             KonspektSphereFactor.duchPerspektywa_Normalizacja,
           },
-        },
-        KonspektSphereLevel.duchWartosci: {
+        }
+        ),
+        KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+            fields: {
           wartoscBliskoscZBogiem: {
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
             KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
             KonspektSphereFactor.duchPerspektywa_Normalizacja,
           }
-        },
-        KonspektSphereLevel.duchPostawy: {
+        }
+        ),
+        KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+            fields: {
           postawaPrzebaczenie: {
             KonspektSphereFactor.duchBezposrednieDoswiadczenie,
             KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
@@ -38,14 +43,17 @@ Konspekt msza_obozowa_lecz_nie_tylko = Konspekt(
             KonspektSphereFactor.duchPerspektywa_Normalizacja,
           }
         }
+        )
       }
     ),
     KonspektSphere.relacje: KonspektSphereDetails(
       levels: {
-        KonspektSphereLevel.other: {
+        KonspektSphereLevel.other: KonspektSphereFields(
+            fields: {
           relBudowanieRelacjiZaufania: null,
           relBudowanieWspolnotyAksjomatu: null,
         }
+        )
       }
     ),
   },

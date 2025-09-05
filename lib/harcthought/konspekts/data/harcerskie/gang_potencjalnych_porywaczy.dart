@@ -24,16 +24,20 @@ Konspekt gang_potencjalnych_porywaczy = Konspekt(
   spheres: {
     KonspektSphere.umysl: KonspektSphereDetails(
       levels: {
-        KonspektSphereLevel.other: {
+        KonspektSphereLevel.other: KonspektSphereFields(
+          fields: {
           umyslLogiczneMyslenie: null,
         }
+        )
       },
     ),
     KonspektSphere.relacje: KonspektSphereDetails(
       levels: {
-        KonspektSphereLevel.other: {
+        KonspektSphereLevel.other: KonspektSphereFields(
+          fields: {
           relWspolpracaWGrupie: null,
         }
+        )
       },
     )
   },
