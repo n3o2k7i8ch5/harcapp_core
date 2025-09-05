@@ -81,12 +81,14 @@ const String relBudowanieWspolnotyAksjomatu = "Budowanie wspólnoty aksjomatu";
 // Siła charakteru
 const String silaCharakteruFuncjonowanieMimoNiewygody = "Funkcjonowanie mimo niewygody";
 
-const Map levelSilaCharakteru = {
-  KonspektSphereLevel.duchSilaCharakteru: {
-    silaCharakteruFuncjonowanieMimoNiewygody: {
-      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+const Map<KonspektSphereLevel, KonspektSphereFields> levelSilaCharakteru = {
+  KonspektSphereLevel.duchSilaCharakteru: KonspektSphereFields(
+    fields: {
+      silaCharakteruFuncjonowanieMimoNiewygody: {
+        KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+      }
     }
-  }
+  )
 };
 
 const Map<KonspektSphere, KonspektSphereDetails> spheresLogiczne = {
@@ -94,32 +96,32 @@ const Map<KonspektSphere, KonspektSphereDetails> spheresLogiczne = {
       levels: {
         KonspektSphereLevel.other: KonspektSphereFields(
             fields: {
-          umyslLogiczneMyslenie: null
-        }
+              umyslLogiczneMyslenie: null
+            }
         )
-  }
+      }
   ),
   KonspektSphere.duch: KonspektSphereDetails(
       levels: {
         KonspektSphereLevel.duchPostawy: KonspektSphereFields(
             fields: {
-          postawaUwaznosc: {
-            KonspektSphereFactor.duchPerspektywa_Normalizacja,
-            KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-            KonspektSphereFactor.duchWartosciWtorne,
-            KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
-          }
-        }
+              postawaUwaznosc: {
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWartosciWtorne,
+                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
+              }
+            }
         ),
         KonspektSphereLevel.duchWartosci: KonspektSphereFields(
             fields: {
-          wartoscBystrosc: {
-            KonspektSphereFactor.duchPerspektywa_Normalizacja,
-            KonspektSphereFactor.duchWartosciWtorne,
-            KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-            KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
-          },
-        }
+              wartoscBystrosc: {
+                KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                KonspektSphereFactor.duchWartosciWtorne,
+                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
+              },
+            }
         ),
         ...levelSilaCharakteru
       }

@@ -50,36 +50,36 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-                fields: {cialoKoordynacjaRuchowa: null}
-            )
-          }
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {cialoKoordynacjaRuchowa: null}
+              )
+            }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaOtwartoscNaLudzi: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja
-              }
-            }
-            ),
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaOtwartoscNaLudzi: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja
+                    }
+                  }
+              ),
 
-            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              wartoscSprawnoscFizyczna: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja
-              }
-            }
-            ),
+              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                  fields: {
+                    wartoscSprawnoscFizyczna: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja
+                    }
+                  }
+              ),
 
-            ...levelSilaCharakteru
-          }
+              ...levelSilaCharakteru
+            }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -196,13 +196,13 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-            fields: {
-              aksjoSwietoscHistoriiBiblijnych: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+            levels: {
+              KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
+                  fields: {
+                    aksjoSwietoscHistoriiBiblijnych: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                  }
+              ),
             }
-            ),
-          }
         )
       },
 
@@ -382,50 +382,50 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.projekt,
       spheres: {
         KonspektSphere.umysl: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              umyslPlanowanie: null,
-              umyslPodzialZadan: null
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {
+                    umyslPlanowanie: null,
+                    umyslPodzialZadan: null
+                  }
+              )
             }
-            )
-          }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaSkuteczneDzialanie: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
-              postawaSumiennosc: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
-              postawaOdpowiedzialnosc: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
-              postawaUwaznosc: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaSkuteczneDzialanie: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    },
+                    postawaSumiennosc: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    },
+                    postawaOdpowiedzialnosc: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    },
+                    postawaUwaznosc: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    },
+                  }
+              ),
+              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                  fields: {
+                    wartoscWspolnota: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    },
+                  }
+              ),
+              ...levelSilaCharakteru
             }
-            ),
-            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              wartoscWspolnota: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
-            }
-            ),
-            ...levelSilaCharakteru
-          }
         ),
         KonspektSphere.relacje: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              relWspolpracaWGrupie: null,
-              relNegocjowanieRoliWGrupie: null,
-            }
+                fields: {
+                  relWspolpracaWGrupie: null,
+                  relNegocjowanieRoliWGrupie: null,
+                }
             )
           },
         )
@@ -469,10 +469,10 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: const KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-            fields: {
-              aksjoZbawienie: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
-              aksjoModlitwa: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-            }
+                fields: {
+                  aksjoZbawienie: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+                  aksjoModlitwa: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                }
             )
           },
         )
@@ -582,9 +582,9 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: const KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-            fields: {
-              aksjoZbawienie: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
-            }
+                fields: {
+                  aksjoZbawienie: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+                }
             )
           },
         )
@@ -690,25 +690,25 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.cialo: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.other: KonspektSphereFields(
-              fields: {
-                cialoWzmacnianieOdpornosciOrganizmu: null
-              }
+                  fields: {
+                    cialoWzmacnianieOdpornosciOrganizmu: null
+                  }
               )
             }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            ...levelSilaCharakteru
-          }
+            levels: {
+              ...levelSilaCharakteru
+            }
         ),
         KonspektSphere.relacje: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              relBudowanieWspolnotyPrzezIntensywneDoswiadczenia: null
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {
+                    relBudowanieWspolnotyPrzezIntensywneDoswiadczenia: null
+                  }
+              )
             }
-            )
-          }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -739,12 +739,12 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-            fields: {
-              aksjoModlitwa: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-              },
-            }
+                fields: {
+                  aksjoModlitwa: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                  },
+                }
             ),
             ...levelSilaCharakteru
           },
@@ -782,14 +782,14 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.duch: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-              fields: {
-                "Wartości wynikajace z gawędy": {
-                  KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                  KonspektSphereFactor.duchWlasnaRefleksja,
-                  KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                  KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
-                }
-              }
+                  fields: {
+                    "Wartości wynikajace z gawędy": {
+                      KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                      KonspektSphereFactor.duchWlasnaRefleksja,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                      KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
+                    }
+                  }
               ),
             }
         )
@@ -818,32 +818,32 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaSpojnoscZWartosciamiChrzescijanskimi: {
-                KonspektSphereFactor.duchWlasnaRefleksja,
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaSpojnoscZWartosciamiChrzescijanskimi: {
+                      KonspektSphereFactor.duchWlasnaRefleksja,
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    },
+                  }
+              ),
+              KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
+                  fields: {
+                    aksjoAksjomatyChrzescijanskie: {
+                      KonspektSphereFactor.duchWlasnaRefleksja,
+                    },
+                  }
+              ),
             }
-            ),
-            KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-            fields: {
-              aksjoAksjomatyChrzescijanskie: {
-                KonspektSphereFactor.duchWlasnaRefleksja,
-              },
-            }
-            ),
-          }
         ),
         KonspektSphere.emocje: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              emoOdczytywanieWlasnychEmocji: null
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {
+                    emoOdczytywanieWlasnychEmocji: null
+                  }
+              )
             }
-            )
-          }
         ),
       },
       metos: [Meto.wedro],
@@ -927,22 +927,22 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-            fields: {
-              aksjoModlitwa: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow
-              },
+            levels: {
+              KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
+                  fields: {
+                    aksjoModlitwa: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchPrzykladWlasnyAutorytetow
+                    },
+                  }
+              ),
+              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                  fields: {
+                    wartoscWspolnota: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+                  }
+              )
             }
-            ),
-            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              wartoscWspolnota: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
-            }
-            )
-          }
         )
       },
       metos: [Meto.wedro],
@@ -972,27 +972,27 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.umysl: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              umyslZnajomoscPH: null,
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {
+                    umyslZnajomoscPH: null,
+                  }
+              )
             }
-            )
-          }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
-            levels: {
-              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-              fields: {
-                "Postawy wynikające z Prawa Harcerskiego": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
-              }
-              ),
-              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-              fields: {
-                "Wartości wynikające z Prawa Harcerskiego": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
-              }
-              )
-            },
+          levels: {
+            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                fields: {
+                  "Postawy wynikające z Prawa Harcerskiego": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+                }
+            ),
+            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                fields: {
+                  "Wartości wynikające z Prawa Harcerskiego": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+                }
+            )
+          },
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -1021,23 +1021,23 @@ List<Konspekt> allHarcerskieKonspekts = [
         KonspektSphere.umysl: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.other: KonspektSphereFields(
-              fields: {
-                umyslZnajomoscPZ: null,
-              }
+                  fields: {
+                    umyslZnajomoscPZ: null,
+                  }
               )
             }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              "Postawy wynikające z Prawa Zucha": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
-            }
+                fields: {
+                  "Postawy wynikające z Prawa Zucha": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+                }
             ),
             KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              "Wartości wynikające z Prawa Zucha": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
-            }
+                fields: {
+                  "Wartości wynikające z Prawa Zucha": {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+                }
             )
           },
         )
@@ -1066,21 +1066,21 @@ List<Konspekt> allHarcerskieKonspekts = [
       type: KonspektType.projekt,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaOtwartoscNaLudzi: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-              postawaWyciszenie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-              postawaTolerowaniaRyzyka: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-            },
-            ),
-            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-fields: {
-              wartoscWspolnota: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                fields: {
+                  postawaOtwartoscNaLudzi: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                  postawaWyciszenie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                  postawaTolerowaniaRyzyka: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                },
+              ),
+              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                  fields: {
+                    wartoscWspolnota: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                  }
+              ),
+              ...levelSilaCharakteru
             }
-            ),
-            ...levelSilaCharakteru
-          }
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -1114,18 +1114,18 @@ fields: {
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-            levels: {
-              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-              fields: {
-                'Wartości zawarte w kolędach': {KonspektSphereFactor.duchPerspektywa_Normalizacja},
-              }
-              ),
-              KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-              fields: {
-                aksjoNarodzinyChrystusa: {KonspektSphereFactor.duchPerspektywa_Normalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow}
-              }
-              )
-            },
+          levels: {
+            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                fields: {
+                  'Wartości zawarte w kolędach': {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+                }
+            ),
+            KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
+                fields: {
+                  aksjoNarodzinyChrystusa: {KonspektSphereFactor.duchPerspektywa_Normalizacja, KonspektSphereFactor.duchPrzykladWlasnyAutorytetow}
+                }
+            )
+          },
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -1156,40 +1156,40 @@ fields: {
         KonspektSphere.umysl: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.other: KonspektSphereFields(
-              fields: {umyslDyskusja: null}
+                  fields: {umyslDyskusja: null}
               )
-        }
+            }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaRozumienieObcychPogladow: {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
-              "Dyskutowane postawy": {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-              }
-            }
+                fields: {
+                  postawaRozumienieObcychPogladow: {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                  },
+                  "Dyskutowane postawy": {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                  }
+                }
             ),
             KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              wartoscUwaznosc: {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
-              wartoscBystrosc: {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
-              "Dyskutowane wartości": {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
-              }
-            }
+                fields: {
+                  wartoscUwaznosc: {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                  },
+                  wartoscBystrosc: {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                  },
+                  "Dyskutowane wartości": {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                    KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
+                  }
+                }
             ),
           },
         )
@@ -1236,31 +1236,31 @@ fields: {
         KonspektSphere.duch: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-              fields: {
-                aksjoModlitwa: {
-                  KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                  KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                  KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                },
-              }
+                  fields: {
+                    aksjoModlitwa: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                    },
+                  }
               ),
               KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-              fields: {
-                postawaMyslenieOInnych: {
-                  KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                  KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                  KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                }
-              }
+                  fields: {
+                    postawaMyslenieOInnych: {
+                      KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    }
+                  }
               ),
               KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-              fields: {
-                wartoscWspolnota: {
-                  KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                  KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                  KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                }
-              }
+                  fields: {
+                    wartoscWspolnota: {
+                      KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    }
+                  }
               ),
             }
         )
@@ -1301,20 +1301,20 @@ fields: {
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaSumiennosc: {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchOczekiwaniaAutorytetu,
-                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie
-              }
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaSumiennosc: {
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                      KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+                      KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie
+                    }
+                  }
+              ),
+              ...levelSilaCharakteru
             }
-            ),
-            ...levelSilaCharakteru
-          }
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -1346,36 +1346,36 @@ fields: {
         KonspektSphere.umysl: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.other: KonspektSphereFields(
-              fields: {
-                umyslLogiczneMyslenie: null,
-                umyslFormulowanieArgumentow: null
-              }
+                  fields: {
+                    umyslLogiczneMyslenie: null,
+                    umyslFormulowanieArgumentow: null
+                  }
               )
             }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              "Wartości własne i współuczestników": {
-                KonspektSphereFactor.duchWlasnaRefleksja,
-                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
-              },
-              postawaRozumienieObcychPogladow: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
-            }
+                fields: {
+                  "Wartości własne i współuczestników": {
+                    KonspektSphereFactor.duchWlasnaRefleksja,
+                    KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
+                  },
+                  postawaRozumienieObcychPogladow: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
+                }
             )
           },
         ),
         KonspektSphere.relacje: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              relPrzedstawianieWlasnychPogladow: null,
-              relRozmowaOObcychPogladach: null,
-              relWspolpracaWGrupie: null
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {
+                    relPrzedstawianieWlasnychPogladow: null,
+                    relRozmowaOObcychPogladach: null,
+                    relWspolpracaWGrupie: null
+                  }
+              )
             }
-            )
-          }
         ),
       },
       metos: [Meto.hs, Meto.wedro],
@@ -1501,42 +1501,42 @@ fields: {
     type: KonspektType.zwyczaj,
     spheres: {
       KonspektSphere.duch: KonspektSphereDetails(
-        levels: {
-          KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-          fields: {
-            postawaUwaznosc: {
-              KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-              KonspektSphereFactor.duchOczekiwaniaAutorytetu,
-            },
-            postawaSkupienie: {
-              KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-              KonspektSphereFactor.duchOczekiwaniaAutorytetu,
-            },
-            postawaSkuteczneDzialanie: {
-              KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-              KonspektSphereFactor.duchOczekiwaniaAutorytetu,
-            },
-            postawaTolerowaniaRyzyka: {
-              KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-              KonspektSphereFactor.duchOczekiwaniaAutorytetu,
-            },
+          levels: {
+            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                fields: {
+                  postawaUwaznosc: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                    KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+                  },
+                  postawaSkupienie: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                    KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+                  },
+                  postawaSkuteczneDzialanie: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                    KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+                  },
+                  postawaTolerowaniaRyzyka: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                    KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+                  },
+                }
+            ),
+            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                fields: {
+                  wartoscWspolnota: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                    KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+                  }
+                }
+            ),
+            ...levelSilaCharakteru
           }
-          ),
-          KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-          fields: {
-            wartoscWspolnota: {
-              KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-              KonspektSphereFactor.duchOczekiwaniaAutorytetu,
-            }
-          }
-          ),
-          ...levelSilaCharakteru
-        }
       )
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -1563,17 +1563,17 @@ fields: {
       type: KonspektType.projekt,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaSumiennosc: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchOczekiwaniaAutorytetu,
-              }
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaSumiennosc: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchOczekiwaniaAutorytetu,
+                    }
+                  }
+              )
             }
-            )
-          }
         )
       },
       metos: [Meto.zuch, Meto.harc],
@@ -1603,18 +1603,18 @@ fields: {
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              "Wartości wynikajace z gawędy": {
-                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                KonspektSphereFactor.duchWlasnaRefleksja,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
-              }
+            levels: {
+              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                  fields: {
+                    "Wartości wynikajace z gawędy": {
+                      KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                      KonspektSphereFactor.duchWlasnaRefleksja,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                      KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
+                    }
+                  }
+              ),
             }
-            ),
-          }
         )
       },
       metos: [Meto.hs, Meto.wedro],
@@ -1642,20 +1642,20 @@ fields: {
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaKarnosc: {KonspektSphereFactor.duchOczekiwaniaAutorytetu, KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan},
-              postawaPunktualnosc: {KonspektSphereFactor.duchOczekiwaniaAutorytetu, KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan}
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaKarnosc: {KonspektSphereFactor.duchOczekiwaniaAutorytetu, KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan},
+                    postawaPunktualnosc: {KonspektSphereFactor.duchOczekiwaniaAutorytetu, KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan}
+                  }
+              ),
+              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                  fields: {
+                    wartoscWspolnota: {KonspektSphereFactor.duchOczekiwaniaAutorytetu, KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan}
+                  }
+              ),
+              ...levelSilaCharakteru
             }
-            ),
-            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              wartoscWspolnota: {KonspektSphereFactor.duchOczekiwaniaAutorytetu, KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan}
-            }
-            ),
-            ...levelSilaCharakteru
-          }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -1683,47 +1683,47 @@ fields: {
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {cialoZdolnoscMarszu: null}
-            ),
-          }
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {cialoZdolnoscMarszu: null}
+              ),
+            }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaUwaznosc: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie
-              },
-              postawaSkupienie: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie
-              },
-              postawaOtwartoscNaLudzi: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie
-              },
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaUwaznosc: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie
+                    },
+                    postawaSkupienie: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie
+                    },
+                    postawaOtwartoscNaLudzi: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie
+                    },
+                  }
+              ),
+              KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
+                  fields: {
+                    aksjoModlitwa: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    }
+                  }
+              ),
+              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                  fields: {
+                    wartoscWspolnota: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    }
+                  }
+              ),
+              ...levelSilaCharakteru
             }
-            ),
-            KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-            fields: {
-              aksjoModlitwa: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-              }
-            }
-            ),
-            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              wartoscWspolnota: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-              }
-            }
-            ),
-            ...levelSilaCharakteru
-          }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -1764,7 +1764,7 @@ fields: {
       summary: 'Uczestnicy wcielają się w piratów. Muszą podzielić między siebie piracki łup. Po kolei proponują podział, nad którym wszyscy głosują. Jeśli głosowanie nie przejdzie, proponujący wylatuje za wirtualną burtę i propozycję podziału wysuwa kolejny z uczestników.',
       materials: [
         KonspektMaterial(
-            name: 'Kartki A4 z numerami od 1 do 5',
+          name: 'Kartki A4 z numerami od 1 do 5',
         ),
         KonspektMaterial(
             name: 'Coś do notowania wyników po każdej turze'
@@ -1801,34 +1801,34 @@ fields: {
                 '<br>Jeśli podział na równoliczne grupy jest niemożliwy, najliczniejsza i najmniej liczna grupa powinna różnić się od siebie o najwyżej jedną osobę.</p>'
         ),
         KonspektStep(
-          title: 'Przedstawienie zasad',
-          duration: Duration(minutes: 10),
-          activeForm: KonspektStepActiveForm.static,
-          content: '<p style="text-align:justify;">'
-              'Prowadzący przedstawia uczestnikom zasady:'
-              '<br>'
-              '<br>Uczestnicy wcielają się w szajki piratów zgodnie z dokonanym wcześniej podziałem na grupy. W każdej szajce jest jeden pirat - reszta osób to jego doradcy. Szajki wspólnie płyną jednym statkiem. Na pokładzie statku znajduje się <b>pięć skarbów</b> - każdy z pięciu skarbów liczy dokładnie <b>100 złotych monet</b>.'
-              '<br>'
-              '<br>Piraci zdecydowali się podzielić między siebie wszystkie skarby. Robią to w pięciu turach - w każdej turze dzielą jeden skarb (100 złotych monet).'
-              '<br>'
-              '<br>Każda tura wygląda następująco:'
-              '</p>'
-              '<ol>'
-              '<li><p style="text-align:justify;">Piraci otrzymują numer starszeństwa - od 5 (najstarszy) do 1 (najmłodszy).</p></li>'
-              '<li><p style="text-align:justify;">Najstarszy pirat (z numerem 5), naradza się jako pierwszy ze swoimi doradcami i proponuje publicznie podział skarbu między wszystkich piratów (w tym siebie).</p></li>'
-              '<li><p style="text-align:justify;">Piraci naradzają się ze swoimi doradcami. Następne piraci jednocześnie głosują za zaproponowanym podziałem (pirat składający propozycję też głosuje). Każdy pirat ma jeden głos. Jeżeli połowa lub więcej piratów zagłosuje "za", skarb dzielony jest wedle propozycji. W przeciwnym wypadku pirat proponujący podział zostaje wyrzucony za burtę wraz z doradcami.</p></li>'
-              '<li><p style="text-align:justify;">Jeśli poprzednia poprzednia szajka wyleciała za burtę, propozycję podziału skarbu składa kolejny według starszeństwa pirat. Zasady i skutki głosowania podziału są takie same jak wcześniej.</p></li>'
-              '<li><p style="text-align:justyfy;"> Wyrzucanie za burtę i się powtarza tak długo, aż piraci nie przegłosują podziału skarbu.</p></li>'
-              '</ol>'
-              '<p style="text-align:justify;">'
-              'Tura kończy się, gdy przegłosowany zostanie dowolny podział skarbu. Wówczas prowadzący zapisuje piratów, którzy wylecieli za burtę oraz zapisuje monety zdobyte w podziale dla tych, którzy za burtę nie wylecieli.'
-              '<br>'
-              '<br>Celem każdej szajki jest <b>jak najmniej razy wylecieć za burtę</b> i jednocześnie <b>zdobyć jak najwięcej monet</b>.'
-              '<br>'
-              '<br>W każdej kolejnej turze starszeństwo przesuwa się o jeden w dół - każdy pirat otrzymuje numer starszeństwa o jeden mniejszy niż miał, zaś najmłodszy pirat staje się najstarszym. W ten sposób w ciągu pięciu tur każdy pirat będzie miał jeden raz każdy numer starszeństwa.'
-              '<br>'
-              '<br>Po rozegraniu wszystkich tur rozgrywkę wygrywa pirat i jego szajka, która najmniej razy został wyrzucony za burtę. W przypadku remisu decyduje suma zgromadzonych w ciągu wszystkich tur złotych monet.'
-              '</p>'
+            title: 'Przedstawienie zasad',
+            duration: Duration(minutes: 10),
+            activeForm: KonspektStepActiveForm.static,
+            content: '<p style="text-align:justify;">'
+                'Prowadzący przedstawia uczestnikom zasady:'
+                '<br>'
+                '<br>Uczestnicy wcielają się w szajki piratów zgodnie z dokonanym wcześniej podziałem na grupy. W każdej szajce jest jeden pirat - reszta osób to jego doradcy. Szajki wspólnie płyną jednym statkiem. Na pokładzie statku znajduje się <b>pięć skarbów</b> - każdy z pięciu skarbów liczy dokładnie <b>100 złotych monet</b>.'
+                '<br>'
+                '<br>Piraci zdecydowali się podzielić między siebie wszystkie skarby. Robią to w pięciu turach - w każdej turze dzielą jeden skarb (100 złotych monet).'
+                '<br>'
+                '<br>Każda tura wygląda następująco:'
+                '</p>'
+                '<ol>'
+                '<li><p style="text-align:justify;">Piraci otrzymują numer starszeństwa - od 5 (najstarszy) do 1 (najmłodszy).</p></li>'
+                '<li><p style="text-align:justify;">Najstarszy pirat (z numerem 5), naradza się jako pierwszy ze swoimi doradcami i proponuje publicznie podział skarbu między wszystkich piratów (w tym siebie).</p></li>'
+                '<li><p style="text-align:justify;">Piraci naradzają się ze swoimi doradcami. Następne piraci jednocześnie głosują za zaproponowanym podziałem (pirat składający propozycję też głosuje). Każdy pirat ma jeden głos. Jeżeli połowa lub więcej piratów zagłosuje "za", skarb dzielony jest wedle propozycji. W przeciwnym wypadku pirat proponujący podział zostaje wyrzucony za burtę wraz z doradcami.</p></li>'
+                '<li><p style="text-align:justify;">Jeśli poprzednia poprzednia szajka wyleciała za burtę, propozycję podziału skarbu składa kolejny według starszeństwa pirat. Zasady i skutki głosowania podziału są takie same jak wcześniej.</p></li>'
+                '<li><p style="text-align:justyfy;"> Wyrzucanie za burtę i się powtarza tak długo, aż piraci nie przegłosują podziału skarbu.</p></li>'
+                '</ol>'
+                '<p style="text-align:justify;">'
+                'Tura kończy się, gdy przegłosowany zostanie dowolny podział skarbu. Wówczas prowadzący zapisuje piratów, którzy wylecieli za burtę oraz zapisuje monety zdobyte w podziale dla tych, którzy za burtę nie wylecieli.'
+                '<br>'
+                '<br>Celem każdej szajki jest <b>jak najmniej razy wylecieć za burtę</b> i jednocześnie <b>zdobyć jak najwięcej monet</b>.'
+                '<br>'
+                '<br>W każdej kolejnej turze starszeństwo przesuwa się o jeden w dół - każdy pirat otrzymuje numer starszeństwa o jeden mniejszy niż miał, zaś najmłodszy pirat staje się najstarszym. W ten sposób w ciągu pięciu tur każdy pirat będzie miał jeden raz każdy numer starszeństwa.'
+                '<br>'
+                '<br>Po rozegraniu wszystkich tur rozgrywkę wygrywa pirat i jego szajka, która najmniej razy został wyrzucony za burtę. W przypadku remisu decyduje suma zgromadzonych w ciągu wszystkich tur złotych monet.'
+                '</p>'
         ),
 
         KonspektStep(
@@ -1928,9 +1928,9 @@ fields: {
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            ...levelSilaCharakteru
-          }
+            levels: {
+              ...levelSilaCharakteru
+            }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -1954,30 +1954,30 @@ fields: {
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-            fields: {
-              aksjoRozwazanieSensuICeluZycia: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              }
+            levels: {
+              KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
+                  fields: {
+                    aksjoRozwazanieSensuICeluZycia: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    }
+                  }
+              ),
+              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                  fields: {
+                    "Wartości własne i rozmówcy": {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    }
+                  }
+              ),
             }
-            ),
-            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              "Wartości własne i rozmówcy": {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              }
-            }
-            ),
-          }
         ),
         KonspektSphere.relacje: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.other: KonspektSphereFields(
-              fields: {
-                relRozmowaOObcychPogladach: null,
-                relFunkcjonowanieWRoznychRolach: null,
-              }
+                  fields: {
+                    relRozmowaOObcychPogladach: null,
+                    relFunkcjonowanieWRoznychRolach: null,
+                  }
               ),
             }
         ),
@@ -2014,35 +2014,35 @@ fields: {
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {cialoKoordynacjaRuchowa: null}
-            )
-          }
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {cialoKoordynacjaRuchowa: null}
+              )
+            }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaWyciszenie: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-              },
-              postawaUwaznosc: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-              },
-            }
+                fields: {
+                  postawaWyciszenie: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                  },
+                  postawaUwaznosc: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                  },
+                }
             ),
             KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-            fields: {
-              aksjoModlitwa: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-              },
-            }
+                fields: {
+                  aksjoModlitwa: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                    KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                  },
+                }
             )
           },
         )
@@ -2070,28 +2070,28 @@ fields: {
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaMyslenieOInnych: {
-                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
-              }
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaMyslenieOInnych: {
+                      KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                      KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
+                    }
+                  }
+              ),
+              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                  fields: {
+                    wartoscWspolnota: {
+                      KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                      KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
+                    }
+                  }
+              ),
             }
-            ),
-            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              wartoscWspolnota: {
-                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
-              }
-            }
-            ),
-          }
         )
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
@@ -2117,42 +2117,42 @@ fields: {
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.umysl: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {umyslDyskusja: null}
-            )
-        }
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {umyslDyskusja: null}
+              )
+            }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaRozumienieObcychPogladow: {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
-              "Dyskutowane postawy": {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-              }
-            }
+                fields: {
+                  postawaRozumienieObcychPogladow: {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                  },
+                  "Dyskutowane postawy": {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                  }
+                }
             ),
             KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              wartoscUwaznosc: {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
-              wartoscBystrosc: {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-              },
-              "Dyskutowane wartości": {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
-                KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
-              }
-            }
+                fields: {
+                  wartoscUwaznosc: {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                  },
+                  wartoscBystrosc: {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                  },
+                  "Dyskutowane wartości": {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                    KonspektSphereFactor.duchPrzykladWlasnyAutorytetow,
+                    KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna,
+                  }
+                }
             ),
           },
         )
@@ -2194,22 +2194,22 @@ fields: {
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.umysl: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              umyslZnajomoscSkutkowUrzadzenMobilnych: null,
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {
+                    umyslZnajomoscSkutkowUrzadzenMobilnych: null,
+                  }
+              )
             }
-            )
-          }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              wartoscUwaznosc: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
-              wartoscWspolnota: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
-              wartoscWyciszenie: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
-            }
+                fields: {
+                  wartoscUwaznosc: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+                  wartoscWspolnota: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+                  wartoscWyciszenie: {KonspektSphereFactor.duchPerspektywa_Normalizacja},
+                }
             ),
           },
         )
@@ -2235,10 +2235,10 @@ fields: {
       ],
       materials: [
         KonspektMaterial(
-          name: 'Wydrukowany załącznik "Symulator komputera"',
-          comment: 'Uwaga: prowadzący musi umieć grać w warcaby!',
-          attachmentName: 'komputer',
-          amountAttendantFactor: 1
+            name: 'Wydrukowany załącznik "Symulator komputera"',
+            comment: 'Uwaga: prowadzący musi umieć grać w warcaby!',
+            attachmentName: 'komputer',
+            amountAttendantFactor: 1
         ),
         KonspektMaterial(
             name: 'Karteczki biurowe (kwadratowe, ok. 10 cm x 10 cm)',
@@ -2512,20 +2512,20 @@ fields: {
       KonspektSphere.umysl: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              umyslZnajomoscPH: null,
-            }
+                fields: {
+                  umyslZnajomoscPH: null,
+                }
             )
           }
       ),
       KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaPostepowanieZgodnieZPH: {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja
-              }
-            }
+                fields: {
+                  postawaPostepowanieZgodnieZPH: {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja
+                  }
+                }
             )
           }
       )
@@ -2563,20 +2563,20 @@ fields: {
       KonspektSphere.umysl: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              umyslZnajomoscPZ: null,
-            }
+                fields: {
+                  umyslZnajomoscPZ: null,
+                }
             )
           }
       ),
       KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaPostepowanieZgodnieZPZ: {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja
-              }
-            }
+                fields: {
+                  postawaPostepowanieZgodnieZPZ: {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja
+                  }
+                }
             )
           }
       )
@@ -2615,28 +2615,28 @@ fields: {
         KonspektSphere.duch: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-              fields: {
-                postawaSpojnoscZWartosciamiChrzescijanskimi: {
-                  KonspektSphereFactor.duchWlasnaRefleksja,
-                  KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                },
-              }
+                  fields: {
+                    postawaSpojnoscZWartosciamiChrzescijanskimi: {
+                      KonspektSphereFactor.duchWlasnaRefleksja,
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    },
+                  }
               ),
               KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-              fields: {
-                aksjoAksjomatyChrzescijanskie: {
-                  KonspektSphereFactor.duchWlasnaRefleksja,
+                fields: {
+                  aksjoAksjomatyChrzescijanskie: {
+                    KonspektSphereFactor.duchWlasnaRefleksja,
+                  },
                 },
-              },
               )
             }
         ),
         KonspektSphere.relacje: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {relBudowanieRelacjiZaufania: null}
-            )
-          }
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {relBudowanieRelacjiZaufania: null}
+              )
+            }
         ),
       },
       metos: [Meto.hs, Meto.wedro],
@@ -2658,24 +2658,24 @@ fields: {
     type: KonspektType.zajecia,
     spheres: {
       KonspektSphere.umysl: KonspektSphereDetails(
-        levels: {
-          KonspektSphereLevel.other: KonspektSphereFields(
-          fields: {
-            umyslZnajomoscSznurowFunkcjiStopniZHP: null,
+          levels: {
+            KonspektSphereLevel.other: KonspektSphereFields(
+                fields: {
+                  umyslZnajomoscSznurowFunkcjiStopniZHP: null,
+                }
+            )
           }
-          )
-        }
       ),
       KonspektSphere.duch: KonspektSphereDetails(
-        levels: {
-          KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-          fields: {
-            wartoscPrzynaleznoscDoHarcerstwa: {
-              KonspektSphereFactor.duchPerspektywa_Normalizacja
-            }
+          levels: {
+            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                fields: {
+                  wartoscPrzynaleznoscDoHarcerstwa: {
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja
+                  }
+                }
+            )
           }
-          )
-        }
       )
     },
     metos: [Meto.harc, Meto.hs],
@@ -2878,17 +2878,17 @@ fields: {
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaOdpowiedzialnosc: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
-              }
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaOdpowiedzialnosc: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
+                    }
+                  }
+              ),
+              ...levelSilaCharakteru
             }
-            ),
-            ...levelSilaCharakteru
-          }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -2916,26 +2916,26 @@ fields: {
         KonspektSphere.cialo: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {cialoZdolnoscMarszu: null}
+                fields: {cialoZdolnoscMarszu: null}
             )
           },
         ),
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaSkupienie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-              postawaUwaznosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-              postawaOdpowiedzialnosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaSkupienie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                    postawaUwaznosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                    postawaOdpowiedzialnosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
+                  }
+              ),
+              ...levelSilaCharakteru
             }
-            ),
-            ...levelSilaCharakteru
-          }
         ),
         KonspektSphere.umysl: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {umyslKoncentracja: null}
+                fields: {umyslKoncentracja: null}
             )
           },
         )
@@ -2968,19 +2968,19 @@ fields: {
         KonspektSphere.cialo: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {cialoZdolnoscMarszu: null}
+                fields: {cialoZdolnoscMarszu: null}
             )
           },
         ),
         KonspektSphere.duch: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-              fields: {
-                postawaSkupienie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-                postawaUwaznosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-                postawaOdpowiedzialnosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-                postawaOtwartoscNaLudzi: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
-              }
+                  fields: {
+                    postawaSkupienie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                    postawaUwaznosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                    postawaOdpowiedzialnosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                    postawaOtwartoscNaLudzi: {KonspektSphereFactor.duchBezposrednieDoswiadczenie}
+                  }
               ),
               ...levelSilaCharakteru
             }
@@ -2988,7 +2988,7 @@ fields: {
         KonspektSphere.umysl: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {umyslKoncentracja: null}
+                fields: {umyslKoncentracja: null}
             )
           },
         )
@@ -3021,17 +3021,17 @@ fields: {
         KonspektSphere.cialo: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {cialoZdolnoscMarszu: null}
+                fields: {cialoZdolnoscMarszu: null}
             )
           },
         ),
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaSkupienie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-              postawaUwaznosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-            }
+                fields: {
+                  postawaSkupienie: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                  postawaUwaznosc: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
+                }
             ),
             ...levelSilaCharakteru
           },
@@ -3056,37 +3056,37 @@ fields: {
       type: KonspektType.zwyczaj,
       spheres: {
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaPrzebaczenie: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja
-              },
-              postawaWdziecznosc: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja
-              },
-              postawaOtwartoscNaLudzi: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja
-              },
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaPrzebaczenie: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja
+                    },
+                    postawaWdziecznosc: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja
+                    },
+                    postawaOtwartoscNaLudzi: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja
+                    },
+                  }
+              ),
             }
-            ),
-          }
         ),
         KonspektSphere.relacje: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              relPrzyznanieSieDoBledow: null,
-              relBudowanieRelacjiZaufania: null,
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {
+                    relPrzyznanieSieDoBledow: null,
+                    relBudowanieRelacjiZaufania: null,
+                  }
+              )
             }
-            )
-          }
         )
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
@@ -3119,12 +3119,12 @@ fields: {
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-            fields: {
-              aksjoRozwazanieSensuICeluZycia: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchPerspektywa_Normalizacja
-              },
-            }
+                fields: {
+                  aksjoRozwazanieSensuICeluZycia: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchPerspektywa_Normalizacja
+                  },
+                }
             )
           },
         )
@@ -3223,45 +3223,45 @@ fields: {
       type: KonspektType.zajecia,
       spheres: {
         KonspektSphere.cialo: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              cialoWzmacnianieOdpornosciOrganizmu: null
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {
+                    cialoWzmacnianieOdpornosciOrganizmu: null
+                  }
+              )
             }
-            )
-          }
         ),
         KonspektSphere.duch: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaOtwartoscNaLudzi: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
-              }
+            levels: {
+              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
+                  fields: {
+                    postawaOtwartoscNaLudzi: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
+                    }
+                  }
+              ),
+              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
+                  fields: {
+                    wartoscZdrowie: {
+                      KonspektSphereFactor.duchPerspektywa_Normalizacja,
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
+                    },
+                  }
+              ),
+              ...levelSilaCharakteru
             }
-            ),
-            KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              wartoscZdrowie: {
-                KonspektSphereFactor.duchPerspektywa_Normalizacja,
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
-              },
-            }
-            ),
-            ...levelSilaCharakteru
-          }
         ),
         KonspektSphere.relacje: KonspektSphereDetails(
-          levels: {
-            KonspektSphereLevel.other: KonspektSphereFields(
-            fields: {
-              relRozmowaOWlasnychDoswiadczeniach: null,
-              relBudowanieWspolnotyPrzezIntensywneDoswiadczenia: null
+            levels: {
+              KonspektSphereLevel.other: KonspektSphereFields(
+                  fields: {
+                    relRozmowaOWlasnychDoswiadczeniach: null,
+                    relBudowanieWspolnotyPrzezIntensywneDoswiadczenia: null
+                  }
+              )
             }
-            )
-          }
         )
       },
       metos: [Meto.hs, Meto.wedro],
@@ -3287,98 +3287,98 @@ fields: {
 
   // Done
   const Konspekt(
-      name: 'zagadki_matematyczno_logiczne',
-      title: 'Zagadki matematno-logiczne',
-      additionalSearchPhrases: ['zagadki', 'matematyka', 'logika'],
-      category: KonspektCategory.harcerskie,
-      type: KonspektType.zwyczaj,
-      spheres: {
-        ...spheresLogiczne
-      },
-      metos: [Meto.hs, Meto.wedro],
-      coverAuthor: 'Freepik (hamimfadillah)',
-      author: DANIEL_IWANICKI,
-      customDuration: Duration(minutes: 90),
-      aims: [
-        'Kształtowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
-      ],
-      summary: 'Uczestnicy otrzymują jedną zagadkę matematyczno-logiczną na dzień, którą mogą rozwiązać do końca dnia.',
-      description: '<p style="text-align:justify;">'
-          'Prowadzący formę regularnie (np. codziennie na apelu na obozie) przedstawia uczestnikom jedną zagadkę matematyczną, która jest w zasięgu ich możliwości intelektualnych, np:'
-          '</p>'
+    name: 'zagadki_matematyczno_logiczne',
+    title: 'Zagadki matematno-logiczne',
+    additionalSearchPhrases: ['zagadki', 'matematyka', 'logika'],
+    category: KonspektCategory.harcerskie,
+    type: KonspektType.zwyczaj,
+    spheres: {
+      ...spheresLogiczne
+    },
+    metos: [Meto.hs, Meto.wedro],
+    coverAuthor: 'Freepik (hamimfadillah)',
+    author: DANIEL_IWANICKI,
+    customDuration: Duration(minutes: 90),
+    aims: [
+      'Kształtowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
+    ],
+    summary: 'Uczestnicy otrzymują jedną zagadkę matematyczno-logiczną na dzień, którą mogą rozwiązać do końca dnia.',
+    description: '<p style="text-align:justify;">'
+        'Prowadzący formę regularnie (np. codziennie na apelu na obozie) przedstawia uczestnikom jedną zagadkę matematyczną, która jest w zasięgu ich możliwości intelektualnych, np:'
+        '</p>'
 
-          '<ul>'
+        '<ul>'
 
-          '<li>'
-          '<p style="text-align:justify;">'
-          '<i>“O magicznym kamieniu wiadomo tylko tyle, że waży on kilogram oraz pół magicznego kamienia.'
-          '<br>Ile kilogramów waży magiczny kamień?”.</i>'
-          '</p>'
-          '</li>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<i>“O magicznym kamieniu wiadomo tylko tyle, że waży on kilogram oraz pół magicznego kamienia.'
+        '<br>Ile kilogramów waży magiczny kamień?”.</i>'
+        '</p>'
+        '</li>'
 
-          '<li>'
-          '<p style="text-align:justify;">'
-          '<i>Pewien brat mówi o swoim młodszym bracie: „Dwa lata temu byłem trzy razy starszy od mojego brata. Za trzy lata będę dwa razy starszy od mojego brata”.'
-          '<br>Ile mają teraz lat?</i>'
-          '</p>'
-          '</li>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<i>Pewien brat mówi o swoim młodszym bracie: „Dwa lata temu byłem trzy razy starszy od mojego brata. Za trzy lata będę dwa razy starszy od mojego brata”.'
+        '<br>Ile mają teraz lat?</i>'
+        '</p>'
+        '</li>'
 
-          '<li>'
-          '<p style="text-align:justify;">'
-          '<i>Dlaczego dźwięk nadjeżdżającego pociągu szybciej niesie się po torach niż w powietrzu?</i>'
-          '</p>'
-          '</li>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<i>Dlaczego dźwięk nadjeżdżającego pociągu szybciej niesie się po torach niż w powietrzu?</i>'
+        '</p>'
+        '</li>'
 
-          '<li>'
-          '<p style="text-align:justify;">'
-          '<i>Jeśli półtora kury zniesie półtora jajka w ciągu półtora dnia, ile jaj zniesie pół tuzina kur w ciągu pół tuzina dni?</i>'
-          '</p>'
-          '</li>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<i>Jeśli półtora kury zniesie półtora jajka w ciągu półtora dnia, ile jaj zniesie pół tuzina kur w ciągu pół tuzina dni?</i>'
+        '</p>'
+        '</li>'
 
-          '<li>'
-          '<p style="text-align:justify;">'
-          '<i>Mamy kłódkę zamykaną na 3-cyfrowy szyfr. Musimy znaleźć jej kod. O kodzie wiadomo tylko, że:</i>'
-          '</p>'
-          '<ul>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<i>Mamy kłódkę zamykaną na 3-cyfrowy szyfr. Musimy znaleźć jej kod. O kodzie wiadomo tylko, że:</i>'
+        '</p>'
+        '<ul>'
 
-          '<li>'
-          '<p style="text-align:justify;">'
-          '<i>276 – jedna cyfra jest poprawna, ale w niewłaściwym miejscu.</i>'
-          '</p>'
-          '</li>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<i>276 – jedna cyfra jest poprawna, ale w niewłaściwym miejscu.</i>'
+        '</p>'
+        '</li>'
 
-          '<li>'
-          '<p style="text-align:justify;">'
-          '<i>387 – żadna cyfra nie jest właściwa.</i>'
-          '</p>'
-          '</li>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<i>387 – żadna cyfra nie jest właściwa.</i>'
+        '</p>'
+        '</li>'
 
-          '<li>'
-          '<p style="text-align:justify;">'
-          '<i>368 – jedna cyfra jest właściwa i znajduje się we właściwym miejscu.</i>'
-          '</p>'
-          '</li>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<i>368 – jedna cyfra jest właściwa i znajduje się we właściwym miejscu.</i>'
+        '</p>'
+        '</li>'
 
-          '<li>'
-          '<p style="text-align:justify;">'
-          '<i>471 – dwie liczby są poprawne, ale znajdują się w niewłaściwym miejscu.</i>'
-          '</p>'
-          '</li>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<i>471 – dwie liczby są poprawne, ale znajdują się w niewłaściwym miejscu.</i>'
+        '</p>'
+        '</li>'
 
-          '</ul>'
+        '</ul>'
 
-          '</li>'
+        '</li>'
 
-          '<li>'
-          '<p style="text-align:justify;"><i>Sześcienna kostka została rzucona jeden raz.'
-          '<br>Jakie jest prawdopodobieństwo, że wyrzucona cyfra będzie parzysta i większa niż 2?</i></p>'
-          '</li>'
+        '<li>'
+        '<p style="text-align:justify;"><i>Sześcienna kostka została rzucona jeden raz.'
+        '<br>Jakie jest prawdopodobieństwo, że wyrzucona cyfra będzie parzysta i większa niż 2?</i></p>'
+        '</li>'
 
-          '</ul>'
+        '</ul>'
 
-          '<p style="text-align:justify;">'
-          'Forma wykorzystuje wpływ sfer funkcjonalnych na sferę ducha korzystając z czynnika wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..'
-          '</p>',
+        '<p style="text-align:justify;">'
+        'Forma wykorzystuje wpływ sfer funkcjonalnych na sferę ducha korzystając z czynnika wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..'
+        '</p>',
   ),
 
 
@@ -3392,20 +3392,20 @@ fields: {
         KonspektSphere.duch: KonspektSphereDetails(
           levels: {
             KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-            fields: {
-              postawaOtwartoscNaLudzi: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
-              }
-            }
+                fields: {
+                  postawaOtwartoscNaLudzi: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
+                  }
+                }
             ),
             KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-            fields: {
-              wartoscWspolnota: {
-                KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
-              }
-            }
+                fields: {
+                  wartoscWspolnota: {
+                    KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                    KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
+                  }
+                }
             ),
             ...levelSilaCharakteru
           },
@@ -3459,12 +3459,12 @@ fields: {
         KonspektSphere.duch: KonspektSphereDetails(
             levels: {
               KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-              fields: {
-                postawaOtwartoscNaLudzi: {
-                  KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                  KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
-                }
-              }
+                  fields: {
+                    postawaOtwartoscNaLudzi: {
+                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
+                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan
+                    }
+                  }
               )
             }
         )
