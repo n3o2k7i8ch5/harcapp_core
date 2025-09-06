@@ -50,7 +50,7 @@ class MultiTextFieldController{
   late List<void Function(List<String>)> _anyListeners;
 
   MultiTextFieldController({List<String>? texts, this.minCount = 1}){
-    if(texts == null || texts.length == 0) texts = [''];
+    if(texts == null) texts = [''];
     this._controllers = texts.map((text) => TextEditingController(text: text)).toList();
     _listeners = [];
     _anyListeners = [];
