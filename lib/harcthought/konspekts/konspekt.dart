@@ -125,6 +125,15 @@ class KonspektSphereDetails{
     return result;
   }
 
+  KonspektSphereDetails copy() => KonspektSphereDetails(
+    levels: Map.fromEntries(
+      levels.entries.map((e) => MapEntry(
+        e.key,
+        e.value.copy()
+      ))
+    )
+  );
+
 }
 
 enum KonspektSphereLevel{
@@ -200,6 +209,15 @@ class KonspektSphereFields{
   const KonspektSphereFields({
     required this.fields,
   });
+
+  KonspektSphereFields copy() => KonspektSphereFields(
+    fields: Map.fromEntries(
+      fields.entries.map((e) => MapEntry(
+        e.key,
+        e.value == null ? null : Set.from(e.value!))
+      )
+    )
+  );
 
 }
 
