@@ -31,6 +31,7 @@ class AppTextFieldHint extends StatefulWidget{
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final EdgeInsets? contentPadding;
+  final EdgeInsets? textFieldHintPadding;
 
   final bool multi;
   final bool multiAllowZeroFields;
@@ -69,6 +70,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.keyboardType,
     this.inputFormatters,
     this.contentPadding,
+    this.textFieldHintPadding,
     this.multi = false,
     this.multiAllowZeroFields = false,
     this.multiLayout = LayoutMode.row,
@@ -213,7 +215,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
             children: <Widget>[
 
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 12.0),
+                padding: widget.textFieldHintPadding??EdgeInsets.symmetric(vertical: 12.0),
                 child: textField,
               ),
 
