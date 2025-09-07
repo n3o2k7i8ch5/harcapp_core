@@ -183,13 +183,6 @@ class OrgColors{
     colorDarkMain: Colors.grey[200]!,
     colorDarkAccent: Colors.grey[400]!,
   );
-
-  static OrgColors zhpSim2003Water = OrgColors(
-    colorMain: Colors.lightBlueAccent,
-    colorAccent: Colors.blue[700]!,
-    colorDarkMain: Colors.lightBlueAccent,
-    colorDarkAccent: Colors.blue[700]!,
-  );
   
   final Color colorMain;
   final Color colorAccent;
