@@ -134,10 +134,25 @@ class KonspektSphereDetails{
     Map result = {};
     for (KonspektSphereLevel level in levels.keys)
       result[level.name] = levels[level]!.fields.map(
-              (key, value) => MapEntry(key, value?.map((e) => e.name).toList())
+          (key, value) => MapEntry(key, value?.map((e) => e.name).toList())
       );
 
     return result;
+  }
+
+  static KonspektSphereDetails fromJsonMap(Map<String, dynamic> map){
+    Map<KonspektSphereLevel, KonspektSphereFields> levels = {};
+
+    for(String levelKey in map.keys){
+      KonspektSphereLevel? level = KonspektSphereLevel.fromApiParam(levelKey);
+
+      Map<String, dynamic>? fieldsMap = map[levelKey] as Map<String, dynamic>?;
+      if(level == null || fieldsMap == null) continue;
+
+      levels[level] = KonspektSphereFields.fromJsonMap(fieldsMap);
+    }
+
+    return KonspektSphereDetails(levels: levels);
   }
 
   KonspektSphereDetails copy() => KonspektSphereDetails(
@@ -215,6 +230,34 @@ enum KonspektSphereLevel{
     ),
   );
 
+  String get apiParam {
+    switch (this) {
+      case duchAksjomaty:
+        return 'aksjomaty';
+      case duchWartosci:
+        return 'wartosci';
+      case duchPostawy:
+        return 'postawy';
+      case duchSilaCharakteru:
+        return 'sila_charakteru';
+      case duchZdolnoscRefleksyjna:
+        return 'zdolnosc_refleksyjna';
+      case other:
+        return 'other';
+    }
+  }
+
+  static KonspektSphereLevel? fromApiParam(String name){
+    switch(name){
+      case 'aksjomaty': return KonspektSphereLevel.duchAksjomaty;
+      case 'wartosci': return KonspektSphereLevel.duchWartosci;
+      case 'postawy': return KonspektSphereLevel.duchPostawy;
+      case 'sila_charakteru': return KonspektSphereLevel.duchSilaCharakteru;
+      case 'zdolnosc_refleksyjna': return KonspektSphereLevel.duchZdolnoscRefleksyjna;
+      case 'other': return KonspektSphereLevel.other;
+      default: return null;
+    }
+  }
 }
 
 class KonspektSphereFields{
@@ -224,6 +267,25 @@ class KonspektSphereFields{
   const KonspektSphereFields({
     required this.fields,
   });
+
+  Map toJsonMap() => fields.map(
+      (key, value) => MapEntry(key, value?.map((e) => e.name).toList())
+  );
+
+  static KonspektSphereFields fromJsonMap(Map<String, dynamic> map) {
+    Map<String, Set<KonspektSphereFactor>?> fields = {};
+    for(String fieldKey in map.keys){
+      List<dynamic>? factorsList = map[fieldKey] as List<dynamic>?;
+
+      fields[fieldKey] = factorsList?.map(
+        (e) => KonspektSphereFactor.fromApiParam(e as String)
+      ).where(
+        (e) => e != null
+      ).cast<KonspektSphereFactor>().toSet();
+    }
+
+    return KonspektSphereFields(fields: fields);
+  }
 
   KonspektSphereFields copy() => KonspektSphereFields(
     fields: Map.fromEntries(
@@ -281,6 +343,37 @@ enum KonspektSphereFactor{
       decoration: pdf.TextDecoration.underline
     ),
   );
+
+  String get apiParam{
+    switch(this){
+      case duchBiologia: return 'biologia';
+      case duchBezposrednieDoswiadczenie: return 'bezposrednie_doswiadczenie';
+      case duchPerspektywa_Normalizacja: return 'perspektywa_normalizacja';
+      case duchOczekiwaniaAutorytetu: return 'oczekiwania_autorytetu';
+      case duchMetanarracja: return 'metanarracja';
+      case duchPerspektwa_PrzestrzenSemantyczna: return 'perspektywa_przestrzen_semantyczna';
+      case duchPrzykladWlasnyAutorytetow: return 'przyklad_wlasny_autorytetow';
+      case duchWartosciWtorne: return 'wartosci_wtorne';
+      case duchWlasnaRefleksja: return 'wlasna_refleksja';
+      case duchWspolnota_WzajemnoscOddzialywan: return 'wspolnota_wzajemnosc_oddzialywan';
+    }
+  }
+
+  static KonspektSphereFactor? fromApiParam(String name){
+    switch(name){
+      case 'biologia': return KonspektSphereFactor.duchBiologia;
+      case 'bezposrednie_doswiadczenie': return KonspektSphereFactor.duchBezposrednieDoswiadczenie;
+      case 'perspektywa_normalizacja': return KonspektSphereFactor.duchPerspektywa_Normalizacja;
+      case 'oczekiwania_autorytetu': return KonspektSphereFactor.duchOczekiwaniaAutorytetu;
+      case 'metanarracja': return KonspektSphereFactor.duchMetanarracja;
+      case 'perspektywa_przestrzen_semantyczna': return KonspektSphereFactor.duchPerspektwa_PrzestrzenSemantyczna;
+      case 'przyklad_wlasny_autorytetow': return KonspektSphereFactor.duchPrzykladWlasnyAutorytetow;
+      case 'wartosci_wtorne': return KonspektSphereFactor.duchWartosciWtorne;
+      case 'wlasna_refleksja': return KonspektSphereFactor.duchWlasnaRefleksja;
+      case 'wspolnota_wzajemnosc_oddzialywan': return KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan;
+      default: return null;
+    }
+  }
 
 }
 
@@ -886,32 +979,26 @@ class Konspekt extends BaseKonspekt{
       additionalSearchPhrases: (data['additionalSearchPhrases'] as List?)?.map((e) => e as String).toList()??[],
       category: KonspektCategory.fromApiParam(data['category'] as String)??(throw MissingDecodeParamError('category')),
       type: KonspektType.values.firstWhere((e) => e.name == (data['type'] as String), orElse: () => throw MissingDecodeParamError('type')),
-      spheres: (data['spheres'] as Map<String, dynamic>).map((key, value) => MapEntry(
-        KonspektSphere.fromName(key)??(throw MissingDecodeParamError('spheres.$key')),
-        value == null ? null : KonspektSphereDetails(
-          levels: (value as Map<String, dynamic>).map((levelKey, levelValue) => MapEntry(
-            KonspektSphereLevel.values.firstWhere((e) => e.name == levelKey, orElse: () => throw MissingDecodeParamError('spheres.$key.$levelKey')),
-            KonspektSphereFields(
-              fields: (levelValue as Map<String, dynamic>).map((fieldKey, fieldValue) => MapEntry(
-                fieldKey,
-                fieldValue == null ? null : Set.from((fieldValue as List).map((e) => KonspektSphereFactor.values.firstWhere((f) => f.name == e, orElse: () => throw MissingDecodeParamError('spheres.$key.$levelKey.$fieldKey'))))
-              ))
-            )
-          ))
-        )
-      )),
+      spheres: (data['spheres'] as Map).map((key, value) => MapEntry(
+        KonspektSphere.fromName(key as String)??(throw MissingDecodeParamError('spheres.$key')),
+        value == null ? null : KonspektSphereDetails.fromJsonMap((value as Map).cast<String, dynamic>())
+      )).cast<KonspektSphere, KonspektSphereDetails?>(),
       metos: (data['metos'] as List).map((e) => Meto.fromName(e as String)??(throw MissingDecodeParamError('metos'))).toList(),
       coverAuthor: data['coverAuthor'] as String,
       customCoverDirName: data['customCoverDirName'] as String?,
-      author: data['author']==null?null:Person.fromApiJsonMap(data['author'] as Map<String, dynamic>),
+      author: data['author']==null?null:Person.fromApiJsonMap((data['author'] as Map).cast<String, dynamic>()),
       customDuration: data['customDuration'] == null ? null : Duration(seconds: data['customDuration'] as int),
       aims: (data['aims'] as List?)?.map((e) => e as String).toList()??[],
-      materials: (data['materials'] as List?)?.map((e) => KonspektMaterial.fromJsonMap(e as Map<String, dynamic>)).toList(),
+      materials: (data['materials'] as List?)?.map(
+        (e) => KonspektMaterial.fromJsonMap((e as Map).cast<String, dynamic>())
+      ).toList(),
       summary: data['summary'] as String,
       intro: data['intro'] as String?,
       description: data['description'] as String?,
       howToFail: (data['howToFail'] as List?)?.map((e) => e as String).toList(),
-      steps: (data['steps'] as List?)?.map((e) => KonspektStep.fromJsonMap(e as Map<String, dynamic>)).toList()??[],
+      steps: (data['steps'] as List?)?.map(
+        (e) => KonspektStep.fromJsonMap((e as Map).cast<String, dynamic>())
+      ).toList()??[],
     );
 
   }
