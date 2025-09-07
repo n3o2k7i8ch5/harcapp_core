@@ -2938,6 +2938,15 @@ const Person ROBERT_LISZEWSKI = Person(
     org: Org.zhp,
     email: ['liszewskir25@gmail.com']
 );
+const Person ROBERT_LOPATKA = Person(
+    name: 'Robert Łopatka',
+    druzyna: '37 drużyna wędrownicza "Nocne Licha"',
+    hufiec: huf_zhp_ziemi_zywieckiej,
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhpHRc,
+    org: Org.zhp,
+    email: ["robert.lopatka@zhp.pl"]
+);
 const Person ROBERT_MAZUR = Person(
     name: 'Robert Mazur',
     rankHarc: RankHarc.zhpOdkrywca
