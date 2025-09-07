@@ -177,7 +177,7 @@ enum Org{
 
 class OrgColors{
 
-  static OrgColors zhpSim2003Regular = OrgColors(
+  static OrgColors outOfDate = OrgColors(
     colorMain: Colors.grey[800]!,
     colorAccent: Colors.grey[600]!,
     colorDarkMain: Colors.grey[200]!,
