@@ -878,7 +878,7 @@ class Konspekt extends BaseKonspekt{
     return true;
   }
 
-  Konspekt fromJsonMap(Map data){
+  static Konspekt fromJsonMap(Map data){
 
     return Konspekt(
       name: data['name'] as String,
