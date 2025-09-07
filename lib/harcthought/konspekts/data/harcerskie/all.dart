@@ -217,7 +217,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       materials: [
         KonspektMaterial(
           amountAttendantFactor: 1,
-          name: 'Wydrukowane fragmenty Pisma Świętego z planem bibliodramy. Przykłady można w załącznikach.',
+          name: 'Wydrukowane fragmenty Pisma Świętego z planem bibliodramy. Przykłady w załącznikach.',
         ),
       ],
       summary: 'Forma teatralna, w której uczestnicy w grupach medytują nad fragmentem Pisma Świętego i wchodzą w rolę pozwalającą zadawać pytania bohaterom biblijnych wydarzeń oraz na nie odpowiadać.',

@@ -33,7 +33,22 @@ enum KonspektCategory{
       case ksztalcenie: return 'ksztalcenie';
     }
   }
-  
+
+  String get apiParam{
+    switch(this){
+      case harcerskie: return 'harcerskie';
+      case ksztalcenie: return 'ksztalcenie';
+    }
+  }
+
+  static KonspektCategory? fromApiParam(String name){
+    switch(name){
+      case 'harcerskie': return KonspektCategory.harcerskie;
+      case 'ksztalcenie': return KonspektCategory.ksztalcenie;
+      default: return null;
+    }
+  }
+
 }
 
 enum KonspektType{
@@ -574,6 +589,26 @@ class KonspektStep with KonspektDurationElementMixin{
     title: prefix + title[0].toLowerCase() + title.substring(1)
   );
 
+  Map toJsonMap() => {
+    'title': title,
+    'duration': duration.inSeconds,
+    'activeForm': activeForm.name,
+    'required': required,
+    'content': content,
+    'aims': aims,
+    'materials': materials?.map((e) => e.toJsonMap()).toList(),
+  };
+
+  static KonspektStep fromJsonMap(Map<String, dynamic> map) => KonspektStep(
+    title: map['title'] as String,
+    duration: Duration(seconds: map['duration'] as int),
+    activeForm: KonspektStepActiveForm.values.firstWhere((e) => e.name == (map['activeForm'] as String), orElse: () => throw MissingDecodeParamError('activeForm')),
+    required: map['required'] as bool? ?? true,
+    content: map['content'] as String?,
+    aims: (map['aims'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    materials: (map['materials'] as List<dynamic>?)?.map((e) => KonspektMaterial.fromJsonMap(e as Map<String, dynamic>)).toList(),
+  );
+
 }
 
 mixin KonspektStepsContainerMixin{
@@ -610,6 +645,50 @@ class KonspektStepGroup with KonspektDurationElementMixin, KonspektStepsContaine
     this.title,
     required this.steps
   });
+}
+
+abstract class BaseKonspekt with KonspektDurationElementMixin, KonspektStepsContainerMixin{
+
+  String get name;
+  String get title;
+  List<String> get additionalSearchPhrases;
+  KonspektCategory get category;
+  KonspektType get type;
+  Map<KonspektSphere, KonspektSphereDetails?> get spheres;
+
+  List<Meto> get metos;
+  String get coverAuthor;
+  Person? get author;
+  Duration? get customDuration;
+  List<String> get aims;
+  List<KonspektMaterial>? get materials;
+  String get summary;
+  String? get intro;
+  String? get description;
+  List<String>? get howToFail;
+
+  List<KonspektStep> get steps;
+
+  Map toJsonMap() => {
+    'name': name,
+    'title': title,
+    'additionalSearchPhrases': additionalSearchPhrases,
+    'category': category.name,
+    'type': type.name,
+    'spheres': spheres.map((key, value) => MapEntry(key.name, value?.toJsonMap())),
+    'metos': metos.map((e) => e.name).toList(),
+    'coverAuthor': coverAuthor,
+    'author': author?.toApiJsonMap(),
+    'customDuration': customDuration?.inSeconds,
+    'aims': aims,
+    'materials': materials?.map((e) => e.toJsonMap()).toList(),
+    'summary': summary,
+    'intro': intro,
+    'description': description,
+    'howToFail': howToFail,
+    'steps': steps.map((e) => e.toJsonMap()).toList(),
+  };
+
 }
 
 class Konspekt with KonspektStepsContainerMixin{
@@ -795,6 +874,44 @@ class Konspekt with KonspektStepsContainerMixin{
         return false;
 
     return true;
+  }
+
+  Konspekt fromJsonMap(Map data){
+
+    return Konspekt(
+      name: data['name'] as String,
+      title: data['title'] as String,
+      additionalSearchPhrases: (data['additionalSearchPhrases'] as List?)?.map((e) => e as String).toList()??[],
+      category: KonspektCategory.fromApiParam(data['category'] as String)??(throw MissingDecodeParamError('category')),
+      type: KonspektType.values.firstWhere((e) => e.name == (data['type'] as String), orElse: () => throw MissingDecodeParamError('type')),
+      spheres: (data['spheres'] as Map<String, dynamic>).map((key, value) => MapEntry(
+        KonspektSphere.fromName(key)??(throw MissingDecodeParamError('spheres.$key')),
+        value == null ? null : KonspektSphereDetails(
+          levels: (value as Map<String, dynamic>).map((levelKey, levelValue) => MapEntry(
+            KonspektSphereLevel.values.firstWhere((e) => e.name == levelKey, orElse: () => throw MissingDecodeParamError('spheres.$key.$levelKey')),
+            KonspektSphereFields(
+              fields: (levelValue as Map<String, dynamic>).map((fieldKey, fieldValue) => MapEntry(
+                fieldKey,
+                fieldValue == null ? null : Set.from((fieldValue as List).map((e) => KonspektSphereFactor.values.firstWhere((f) => f.name == e, orElse: () => throw MissingDecodeParamError('spheres.$key.$levelKey.$fieldKey'))))
+              ))
+            )
+          ))
+        )
+      )),
+      metos: (data['metos'] as List).map((e) => Meto.fromName(e as String)??(throw MissingDecodeParamError('metos'))).toList(),
+      coverAuthor: data['coverAuthor'] as String,
+      customCoverDirName: data['customCoverDirName'] as String?,
+      author: data['author']==null?null:Person.fromApiJsonMap(data['author'] as Map<String, dynamic>),
+      customDuration: data['customDuration'] == null ? null : Duration(seconds: data['customDuration'] as int),
+      aims: (data['aims'] as List?)?.map((e) => e as String).toList()??[],
+      materials: (data['materials'] as List?)?.map((e) => KonspektMaterial.fromJsonMap(e as Map<String, dynamic>)).toList(),
+      summary: data['summary'] as String,
+      intro: data['intro'] as String?,
+      description: data['description'] as String?,
+      howToFail: (data['howToFail'] as List?)?.map((e) => e as String).toList(),
+      steps: (data['steps'] as List?)?.map((e) => KonspektStep.fromJsonMap(e as Map<String, dynamic>)).toList()??[],
+    );
+
   }
 
 }
