@@ -647,7 +647,7 @@ class KonspektStepGroup with KonspektDurationElementMixin, KonspektStepsContaine
   });
 }
 
-abstract class BaseKonspekt with KonspektDurationElementMixin, KonspektStepsContainerMixin{
+abstract class BaseKonspekt with KonspektStepsContainerMixin{
 
   String get name;
   String get title;
@@ -668,6 +668,8 @@ abstract class BaseKonspekt with KonspektDurationElementMixin, KonspektStepsCont
   List<String>? get howToFail;
 
   List<KonspektStep> get steps;
+
+  const BaseKonspekt();
 
   Map toJsonMap() => {
     'name': name,
@@ -691,7 +693,7 @@ abstract class BaseKonspekt with KonspektDurationElementMixin, KonspektStepsCont
 
 }
 
-class Konspekt with KonspektStepsContainerMixin{
+class Konspekt extends BaseKonspekt{
 
   final String name;
   final String title;
@@ -865,7 +867,7 @@ class Konspekt with KonspektStepsContainerMixin{
 
     return true;
   }
-  
+
   bool containsSpheres(Iterable<KonspektSphere> spheres){
     if(this.spheres.isEmpty && spheres.isNotEmpty) return false;
 
