@@ -56,7 +56,8 @@ Konspekt gang_potencjalnych_porywaczy = Konspekt(
     KonspektMaterial(
       amount: 1,
       name: 'Wydrukowany załącznik “$attach_title_wycinki_informacji”',
-      additionalPreparation: 'Wydrukowany załącznik należy pociąć wzdłuż przerywanych linii.'
+      additionalPreparation: 'Wydrukowany załącznik należy pociąć wzdłuż przerywanych linii.',
+      attachmentName: attach_name_wycinki_informacji,
     ),
   ],
 
