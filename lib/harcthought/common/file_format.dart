@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_widgets/app_dropdown.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-enum FileFormat{
+enum FileFormat implements IconTextEnum{
   pdf, docx, png, webp, svg, url, urlPdf, urlDocx, urlPng, urlWebp, urlSvg;
 
   Color get color{
@@ -84,5 +85,11 @@ enum FileFormat{
       case urlSvg: return 'svg';
     }
   }
+
+  @override
+  String get text => displayName;
+
+  @override
+  IconData get icon => subIcon??MdiIcons.fileOutline;
 
 }
