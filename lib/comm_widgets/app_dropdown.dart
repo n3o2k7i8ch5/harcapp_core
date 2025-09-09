@@ -38,6 +38,7 @@ class AppDropdown<T extends IconTextEnum> extends StatelessWidget{
   final PopupMenuPosition? position;
   final void Function(T item) onSelected;
   final List<AppDropdownButton<T>> Function(BuildContext context) itemBuilder;
+  final BorderRadius? borderRadius;
 
   const AppDropdown({
     super.key,
@@ -47,12 +48,13 @@ class AppDropdown<T extends IconTextEnum> extends StatelessWidget{
     this.position,
     required this.onSelected,
     required this.itemBuilder,
+    this.borderRadius,
   });
 
   @override
   Widget build(BuildContext context) => PopupMenuButton<T>(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(AppCard.bigRadius),
+      borderRadius: borderRadius??BorderRadius.circular(AppCard.bigRadius),
     ),
     menuPadding: EdgeInsets.zero,
     padding: EdgeInsets.zero,
