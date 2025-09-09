@@ -5,6 +5,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_classes/missing_decode_param_error.dart';
 import 'package:harcapp_core/comm_classes/storage.dart';
+import 'package:harcapp_core/comm_widgets/app_dropdown.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/open_image_dialog.dart';
 import 'package:harcapp_core/comm_widgets/open_svg_image_dialog.dart';
@@ -377,7 +378,7 @@ enum KonspektSphereFactor{
 
 }
 
-enum KonspektAttachmentPrintColor{
+enum KonspektAttachmentPrintColor implements IconTextEnum{
   monochrome, color, any;
 
   static KonspektAttachmentPrintColor? fromName(String name){
@@ -397,9 +398,21 @@ enum KonspektAttachmentPrintColor{
     }
   }
 
+  @override
+  IconData get icon{
+    switch(this){
+      case monochrome: return MdiIcons.invertColors;
+      case color: return MdiIcons.palette;
+      case any: return MdiIcons.creationOutline;
+    }
+  }
+
+  @override
+  String get text => displayName;
+
 }
 
-enum KonspektAttachmentPrintSide{
+enum KonspektAttachmentPrintSide implements IconTextEnum{
   single, double, any;
 
   static KonspektAttachmentPrintSide? fromName(String name){
@@ -418,6 +431,18 @@ enum KonspektAttachmentPrintSide{
       case any: return 'Jedno- lub dwustronnie';
     }
   }
+
+  @override
+  IconData get icon{
+    switch(this){
+      case single: return MdiIcons.noteOutline;
+      case double: return MdiIcons.noteMultipleOutline;
+      case any: return MdiIcons.creationOutline;
+    }
+  }
+
+  @override
+  String get text => displayName;
 
 }
 
