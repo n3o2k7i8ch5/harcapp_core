@@ -39,7 +39,7 @@ class TextFieldChordsState extends State<TextFieldChords> {
   TextEditingController? _controller;
   TextEditingController? get _effectiveController => widget.controller ?? _controller;
 
-  int? shift;
+  late int shift;
 
   bool? recentlyTyped;
   @override
@@ -198,20 +198,18 @@ class ChordsTextInputFormatter extends TextInputFormatter {
     return text;
   }
 
-  final RegExp _regExp = RegExp(r'^[ ]?(((([CcDdFfGg](is?)?)|[EeAaBbHh\n])(\d\+?)?( |\n+)*)*)$');
+  // Validation regex:
+  // - Does not allow a leading space
+  // - Repeats tokens separated by spaces/newlines
+  // - A token is either:
+  //   a) a chord letter (optionally with "is" for sharps) or E/A/B/H, optionally followed by a digit and optional plus
+  //   b) a newline
+  // This structure ensures digits can only follow a chord token, never directly after a newline.
+  final RegExp _regExp = RegExp(
+      r'^((((([CcDdFfGg](is?)?)|[EeAaBbHh])(\d\+?)?)|\n)( |\n+)*)*$'
+  );
 
   bool _isValid(String value) {
-    try {
-      final matches = _regExp.allMatches(value);
-      for (Match match in matches)
-        if (match.start == 0 && match.end == value.length)
-          return true;
-
-      return false;
-    } catch (e) {
-      // Invalid regex
-      assert(false, e.toString());
-      return true;
-    }
+    return _regExp.hasMatch(value);
   }
 }
