@@ -1747,7 +1747,7 @@ const Person KRZYSZTOF_MALIKIEWICZ = Person(
     name: 'Krzysztof Malikiewicz',
     rankHarc: RankHarc.zhpHRc,
     hufiec: huf_zhp_trzebinia,
-    email: ['krzysztof.malikiewicz@zhp.net.pl']
+    email: ['krzysztof.malikiewicz@zhp.net.pl', 'krzysztof.malikiewicz@zhp.pl']
 );
 const Person KRZYSZTOF_MALINOWSKI = Person(
     name: 'Krzysztof Malinowski',
