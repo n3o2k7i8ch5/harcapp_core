@@ -1373,14 +1373,14 @@ class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
                   value: prov.speed,
                   divisions: 10,
                   min: 0,
-                  max: 1,
+                  max: 0.5,
                   activeColor: accentColor??accent_(context),
                   inactiveColor: hintEnab_(context),
                   onChanged: (value){
                     prov.speed = value;
                     SongWidgetTemplateState._startAutoscroll(context, scrollController(), song.lineCount, restart: true);
                   },
-                  label: 'Szybkość przewijania: ${prov.speed} linijki na sekundę',
+                  label: 'Jedna linijka co ${(10/prov.speed).ceil()/10} sek.',
                 ),
                 data: SliderTheme.of(context).copyWith(
                   valueIndicatorTextStyle: AppTextStyle(color: accentIconColor??background_(context), fontWeight: weightHalfBold),
