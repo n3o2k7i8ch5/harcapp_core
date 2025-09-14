@@ -1372,7 +1372,7 @@ class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
                 child: Slider(
                   value: prov.speed,
                   divisions: 10,
-                  min: 0,
+                  min: 0.05,
                   max: 0.5,
                   activeColor: accentColor??accent_(context),
                   inactiveColor: hintEnab_(context),
