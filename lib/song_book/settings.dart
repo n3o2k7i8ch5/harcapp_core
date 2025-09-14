@@ -8,6 +8,7 @@ abstract class SongBookSettTempl{
   bool get scrollText;
   set scrollText(bool value);
 
+  // Lines per second, between 0 and 1
   double get autoscrollTextSpeed;
   set autoscrollTextSpeed(double value);
 

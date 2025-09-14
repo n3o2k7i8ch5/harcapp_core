@@ -180,6 +180,8 @@ abstract class SongCore{
     return result;
   }
 
+  int get lineCount => _lineNumList.length;
+
   static String filenameFromTitle(String title) => remPolChars(title).trim()
         .replaceAll(":", "_")
         .replaceAll('-', '_')

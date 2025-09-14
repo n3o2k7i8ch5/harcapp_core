@@ -458,12 +458,13 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
   }
 
   static void _startAutoscroll(
-      BuildContext context,
-      ScrollController? scrollController,
-      { bool restart = false,
-        GlobalKey? scrollviewKey,
-        GlobalKey? contentCardsKey
-      })async{
+    BuildContext context,
+    ScrollController? scrollController,
+    int allLines,
+    { bool restart = false,
+      GlobalKey? scrollviewKey,
+      GlobalKey? contentCardsKey,
+    })async{
 
     assert(restart || (contentCardsKey != null && scrollviewKey != null));
 
@@ -496,16 +497,19 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
       final contentTop = renderBoxContent.localToGlobal(Offset.zero).dy;
       final contentHeight = renderBoxContent.size.height;
       autoscrollProvider.scrollExtent = (contentTop + scrollController.offset) + contentHeight - autoscrollProvider.scrollviewHeight! - scrollviewTop;
-
     }
-    SongBookSettTempl settings = Provider.of<AutoscrollProvider>(context, listen: false).settings;
 
-    // double scrollLeft = scrollController.position.maxScrollExtent - scrollController.offset;
-    double scrollLeft = autoscrollProvider.scrollExtent! - scrollController.offset;
+    SongBookSettTempl settings = AutoscrollProvider.of(context).settings;
 
-    double duration = scrollLeft*(1.05-settings.autoscrollTextSpeed)*1000;
+    // double scrollLeft = autoscrollProvider.scrollExtent! - scrollController.offset;
 
-    if(duration.round() <= 0) return;
+    double scrollProgress = scrollController.offset/autoscrollProvider.scrollExtent!;
+    double linesLeftCount = allLines * (1 - scrollProgress);
+
+    // double millisecondsLeft = 1000*scrollLeft*(1.05-settings.autoscrollTextSpeed);
+    double millisecondsLeft = 1000*linesLeftCount/settings.autoscrollTextSpeed;
+
+    if(millisecondsLeft.round() <= 0) return;
 
     if(restart)
       autoscrollProvider.restart = true;
@@ -513,17 +517,19 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
       autoscrollProvider.isScrolling = true;
 
     Function() tmpListener = () =>
-      debugPrint('Autoscrolling: '
-          '${scrollController.offset.toStringAsFixed(1)} / '
-          '${autoscrollProvider.scrollExtent!.toStringAsFixed(1)}');
+      debugPrint(
+        'Autoscrolling: '
+        '${scrollController.offset.toStringAsFixed(1)} / '
+        '${autoscrollProvider.scrollExtent!.toStringAsFixed(1)}'
+      );
 
     scrollController.addListener(tmpListener);
 
-    debugPrint('Autoscrolling started for ${duration.round()} milliseconds.');
+    debugPrint('Autoscrolling started for ${millisecondsLeft.round()} milliseconds.');
     await scrollController.animateTo(
         // Don't use `scrollController.position.maxScrollExtent` - it changes it's value during scrolling.
         autoscrollProvider.scrollExtent!,
-        duration: Duration(milliseconds: duration.round()),
+        duration: Duration(milliseconds: millisecondsLeft.round()),
         curve: Curves.linear
     );
 
@@ -1314,7 +1320,13 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
                                 );
                             }
                           },
-                          onLongPress: () => SongWidgetTemplateState._startAutoscroll(context, scrollController, contentCardsKey: contentCardsKey, scrollviewKey: scrollviewKey)
+                          onLongPress: () => SongWidgetTemplateState._startAutoscroll(
+                            context,
+                            scrollController,
+                            song.lineCount,
+                            contentCardsKey: contentCardsKey,
+                            scrollviewKey: scrollviewKey
+                          )
                       ),
                     ),
 
@@ -1330,58 +1342,57 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
 
 class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
 
+  final T song;
   final Color? accentColor;
   final Color? accentIconColor;
   final ScrollController Function() scrollController;
 
   const AutoScrollSpeedWidget({
+    required this.song,
     this.accentColor,
     this.accentIconColor,
     required this.scrollController,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<AutoscrollProvider>(
-        builder: (context, prov, child) => prov.isScrolling!?AppCard(
-          elevation: AppCard.bigElevation,
-          radius: AppCard.bigRadius,
-          child: Row(
-            children: [
+  Widget build(BuildContext context) => Consumer<AutoscrollProvider>(
+      builder: (context, prov, child) => prov.isScrolling!?AppCard(
+        elevation: AppCard.bigElevation,
+        radius: AppCard.bigRadius,
+        child: Row(
+          children: [
 
-              Padding(
-                padding: const EdgeInsets.all(Dimen.iconMarg),
-                child: Icon(MdiIcons.speedometer),
-              ),
+            Padding(
+              padding: const EdgeInsets.all(Dimen.iconMarg),
+              child: Icon(MdiIcons.speedometer),
+            ),
 
-              Expanded(
-                child: SliderTheme(
-                  child: Slider(
-                    value: prov.speed,
-                    divisions: 10,
-                    min: 0,
-                    max: 1,
-                    activeColor: accentColor??accent_(context),
-                    inactiveColor: hintEnab_(context),
-                    onChanged: (value){
-                      prov.speed = value;
-                      SongWidgetTemplateState._startAutoscroll(context, scrollController(), restart: true);
-                    },
-                    label: 'Szybkość przewijania',
-                  ),
-                  data: SliderTheme.of(context).copyWith(
-                      valueIndicatorTextStyle: AppTextStyle(color: accentIconColor??background_(context), fontWeight: weightHalfBold),
-                      valueIndicatorColor: accentColor??accent_(context)
-                  ),
+            Expanded(
+              child: SliderTheme(
+                child: Slider(
+                  value: prov.speed,
+                  divisions: 10,
+                  min: 0,
+                  max: 1,
+                  activeColor: accentColor??accent_(context),
+                  inactiveColor: hintEnab_(context),
+                  onChanged: (value){
+                    prov.speed = value;
+                    SongWidgetTemplateState._startAutoscroll(context, scrollController(), song.lineCount, restart: true);
+                  },
+                  label: 'Szybkość przewijania: ${prov.speed} linijki na sekundę',
+                ),
+                data: SliderTheme.of(context).copyWith(
+                  valueIndicatorTextStyle: AppTextStyle(color: accentIconColor??background_(context), fontWeight: weightHalfBold),
+                  valueIndicatorColor: accentColor??accent_(context)
                 ),
               ),
+            ),
 
-            ],
-          ),
-        ):Container()
-    );
-
-  }
+          ],
+        ),
+      ):Container()
+  );
 
 }
 
