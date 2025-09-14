@@ -1,11 +1,36 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
+import 'package:harcapp_core/harcthought/common/file_format.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/level_examples.dart';
 import 'package:harcapp_core/values/people.dart';
 
 import '../../konspekt.dart';
 
-Konspekt druzynowe_przekazanie_bsp = const Konspekt(
-    name: 'druzynowe_przekazanie_bsp',
+const String _konspekt_name = 'druzynowe_przekazanie_bsp';
+
+const String attach_html_odznaka_bsp = '<a href="${attach_name_odznaka_bsp}@attachment">${attach_title_odznaka_bsp}</a>';
+const String attach_name_odznaka_bsp = "odznaka_bsp";
+const String attach_title_odznaka_bsp = "Odznaka BŚP";
+KonspektAttachment attach_odznaka_bsp = KonspektAttachment(
+    name: attach_name_odznaka_bsp,
+    title: attach_title_odznaka_bsp,
+    assets: {
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'odznaka_bsp.docx'),
+      FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'odznaka_bsp.pdf'),
+    },
+    print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
+);
+
+
+KonspektMaterial material_zal_odznaka_bsp = KonspektMaterial(
+    name: 'Dostępny załącznik “$attach_title_odznaka_bsp”',
+    attachmentName: attach_name_odznaka_bsp,
+    amount: 1
+);
+
+
+Konspekt druzynowe_przekazanie_bsp = Konspekt(
+    name: _konspekt_name,
     title: 'Drużynowe przekazanie Betlejemskiego Światła Pokoju',
     additionalSearchPhrases: ['bśp'],
     category: KonspektCategory.harcerskie,
@@ -50,6 +75,8 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
 
       'Kształtowanie poczucia przynależności do wspólnoty harcerskiej i skautowej',
     ],
+
+    materials: [material_zal_odznaka_bsp],
 
     summary: 'Harcerze w gronie drużyny przygotowują się, a nastepnie uczestniczą w przekazaniu Betlejemskiego Światła Pokoju.',
 
@@ -239,6 +266,11 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
           '<li><p style="text-align:justify;">Zorganizowanie konkursu, który wyłoni patrole, które zanoszą Światło do najważniejszych instytucji lokalnych lub państwowych (np. konkurs „Ambasadorzy Światła”),</p></li>'
         '</ul>'
 
+        '<h1>Odznaka BŚP</h1>'
+        '<p style="text-align:justify;">'
+        'Motywacją dla harcerzy dla przygotowań do BŚP może być przygotowana przez ZHP propozycja Odznaki BŚP, której szczegóły dostępne są w załączniku ${attach_html_odznaka_bsp}.'
+        '</p>'
+
         '<h1>Przykładowe pomysły (miejsca i inicjatywy) na służbę w Warszawie</h1>'
 
         '<ul>'
@@ -257,5 +289,8 @@ Konspekt druzynowe_przekazanie_bsp = const Konspekt(
 
     howToFail: [
       'Potraktować jako cel sam akt przekazania Światła, bez wcześniejszego przygotowania drużyny do duchowej strony tego wydarzenia.',
+    ],
+    attachments: [
+      attach_odznaka_bsp,
     ]
 );
