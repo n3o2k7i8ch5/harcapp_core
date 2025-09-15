@@ -11,7 +11,6 @@ double songScrollToVisibleBottomLineIdx(
     double textTopPadding,
     ScrollController innerController,
 ){
-
   BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
   double statusBarHeight = MediaQuery.of(rootContext).padding.top;
   
@@ -43,11 +42,12 @@ double songScrollToVisibleBottomLineIdx(
   SongCore song,
   double textAreaHeight,
   double textTopPadding,
-  double statusBarHeight,
   double chordBarHeight,
   ScrollController innerController,
   ScrollController outerController
 ){
+  BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
+  double statusBarHeight = MediaQuery.of(rootContext).padding.top;
 
   double lineHeight = textAreaHeight / song.lineNumList.length;
 
