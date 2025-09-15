@@ -435,12 +435,11 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
           }
 
           final double _contentWidgetTop = contentWidgetTopPos(contentCardsKey);
-          final double _contentWidgetHeight = contentWidgetHeight(contentCardsKey);
 
           // distance between the screen top and the top of the song text area.
           final double textTopPadding = scrollInfo.metrics.pixels + _contentWidgetTop + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
 
-          double _textHeight = _contentWidgetHeight - 2*_ContentWidget.vertMargVal - 2*_ContentWidget.vertPaddVal;
+          double _textHeight = textWidgetHeight(contentCardsKey);
 
           onScroll?.call(scrollInfo, _textHeight, textTopPadding);
           return true;
