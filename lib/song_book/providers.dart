@@ -235,6 +235,7 @@ class AutoscrollProvider extends ChangeNotifier{
   double? scrollviewHeight;
   double? contentWidgetHeight;
   double? contentWidgetTop;
+  double? textWidgetHeight;
 
   FutureOr<void> Function()? beforeAutoscrollStart;
   FutureOr<void> Function()? onAutoscrollStart;

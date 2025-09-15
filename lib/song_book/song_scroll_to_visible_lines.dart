@@ -7,14 +7,14 @@ import 'package:harcapp_core/song_book/song_core.dart';
 double songScrollToVisibleBottomLineIdx(
     BuildContext context,
     SongCore song,
-    double textAreaHeight,
+    double textWidgetHeight,
     double textTopPadding,
     ScrollController innerController,
 ){
   BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
   double statusBarHeight = MediaQuery.of(rootContext).padding.top;
   
-  double lineHeight = textAreaHeight / song.lineCount;
+  double lineHeight = textWidgetHeight / song.lineCount;
 
   // distance between the screen top and the screen bottom available for the song book module.
   double songBookAvailHeight = MediaQuery
@@ -25,7 +25,7 @@ double songScrollToVisibleBottomLineIdx(
   // distance between the screen top and the top of the song text area.
   double textTopY = textTopPadding - innerController.offset - statusBarHeight;
 
-  double textBottomVisY = min(songBookAvailHeight - textTopY, textAreaHeight);
+  double textBottomVisY = min(songBookAvailHeight - textTopY, textWidgetHeight);
 
   return (textBottomVisY / lineHeight) - 1;
 
