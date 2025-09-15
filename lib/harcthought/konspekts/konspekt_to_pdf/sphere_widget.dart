@@ -27,7 +27,7 @@ Widget SphereDetailFactorWidget(String detail, Set<KonspektSphereFactor>? factor
   ],
 );
 
-List<Widget> SphereDetailLevelWidget(KonspektSphereLevel level, Map<String, Set<KonspektSphereFactor>?> data, Font font, Font fontBold) =>  [
+List<Widget> SphereDetailLevelWidget(KonspektSphereLevel level, KonspektSphereFields data, Font font, Font fontBold) =>  [
   if(level != KonspektSphereLevel.other)
     level.pdfWidget(fontBold, defTextSize),
 
@@ -36,7 +36,7 @@ List<Widget> SphereDetailLevelWidget(KonspektSphereLevel level, Map<String, Set<
 
   ...spaceWidgets(
     spacing: defMarg,
-    children: data.keys.map((detail) => Row(
+    children: data.fields.keys.map((detail) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
 
@@ -46,7 +46,7 @@ List<Widget> SphereDetailLevelWidget(KonspektSphereLevel level, Map<String, Set<
         ),
 
         Expanded(
-          child: SphereDetailFactorWidget(detail, data[detail], font, fontBold),
+          child: SphereDetailFactorWidget(detail, data.fields[detail], font, fontBold),
         ),
       ],
     )).toList(),
@@ -55,16 +55,16 @@ List<Widget> SphereDetailLevelWidget(KonspektSphereLevel level, Map<String, Set<
 
 List<Widget> SphereDetailsWidget(KonspektSphereDetails details, Font font, Font fontBold){
 
-  if(details.levels == null || details.levels!.isEmpty)
+  if(details.levels.isEmpty)
     return [Container()];
 
   List<Widget> result = [];
 
   result.add(SizedBox(height: 2*defMarg));
 
-  for(MapEntry entry in details.levels!.entries){
+  for(MapEntry<KonspektSphereLevel, KonspektSphereFields> entry in details.levels.entries){
     KonspektSphereLevel level = entry.key;
-    Map<String, Set<KonspektSphereFactor>?> data = entry.value;
+    KonspektSphereFields data = entry.value;
 
     List<Widget> children = SphereDetailLevelWidget(level, data, font, fontBold);
     children = children.map(
