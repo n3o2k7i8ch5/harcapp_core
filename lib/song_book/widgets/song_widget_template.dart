@@ -15,6 +15,7 @@ import 'package:harcapp_core/comm_widgets/chord_draw_bar.dart';
 import 'package:harcapp_core/comm_widgets/instrument_type.dart';
 import 'package:harcapp_core/comm_widgets/separated_column.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
+import 'package:harcapp_core/song_book/song_scroll_to_visible_lines.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:native_device_orientation/native_device_orientation.dart';
@@ -337,12 +338,8 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
                   song: song,
                   index: index,
                   onTitleTap: (){
-
-                    final RenderBox renderBoxText = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
-                    final textTop = renderBoxText.localToGlobal(Offset.zero).dy;
-
+                    final textTop = contentWidgetTopPos(contentCardsKey);
                     onTitleTap?.call(textTop);
-
                   },
                   onAuthorTap: onAuthorTap,
                   onPerformerTap: onPerformerTap,
@@ -432,19 +429,15 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
           if(onScroll == null) return true;
 
-          double textTopPadding = 0;
-          double textHeight = 0;
-
           if(contentCardsKey.currentContext == null){
             onScroll?.call(scrollInfo, null, null);
             return true;
           }
 
-          final RenderBox renderBoxText = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
-          final textTop = renderBoxText.localToGlobal(Offset.zero).dy;
+          final double textTop = contentWidgetTopPos(contentCardsKey);
+          final double textHeight = contentWidgetHeight(contentCardsKey);
 
-          textTopPadding = scrollInfo.metrics.pixels + textTop;
-          textHeight = renderBoxText.size.height;
+          final double textTopPadding = scrollInfo.metrics.pixels + textTop;
 
           double _textHeight = textHeight - 2*_ContentWidget.vertMargVal - 2*_ContentWidget.vertPaddVal;
           double _textTopPadding = textTopPadding + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
@@ -457,21 +450,36 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
   }
 
+  static double scrollViewHeight(GlobalKey scrollviewKey){
+    final RenderBox renderBoxScrollview = scrollviewKey.currentContext!.findRenderObject() as RenderBox;
+    return renderBoxScrollview.size.height;
+  }
+  
+  static double scrollViewTop(GlobalKey scrollviewKey){
+    final RenderBox renderBoxScrollview = scrollviewKey.currentContext!.findRenderObject() as RenderBox;
+    return renderBoxScrollview.localToGlobal(Offset.zero).dy;
+  }
+  
+  static double contentWidgetHeight(GlobalKey contentCardsKey){
+    final RenderBox renderBoxText = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
+    return renderBoxText.size.height;
+  }
+
+  static double contentWidgetTopPos(GlobalKey contentCardsKey){
+    final RenderBox renderBoxText = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
+    return renderBoxText.localToGlobal(Offset.zero).dy;
+  }
+
   static void _startAutoscroll(
     BuildContext context,
-    ScrollController? scrollController,
-    int allLines,
+    SongCore song,
+    ScrollController scrollController,
     { bool restart = false,
       GlobalKey? scrollviewKey,
       GlobalKey? contentCardsKey,
     })async{
 
     assert(restart || (contentCardsKey != null && scrollviewKey != null));
-
-    if(scrollController == null){
-      debugPrint('No scrollController attached.');
-      return;
-    }
 
     AutoscrollProvider autoscrollProvider = AutoscrollProvider.of(context);
 
@@ -489,24 +497,34 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
     await SystemChrome.setPreferredOrientations([orientation]);
 
     if(contentCardsKey != null && scrollviewKey != null){
-      final RenderBox renderBoxScrollview = scrollviewKey.currentContext!.findRenderObject() as RenderBox;
-      final scrollviewTop = renderBoxScrollview.localToGlobal(Offset.zero).dy;
-      autoscrollProvider.scrollviewHeight = renderBoxScrollview.size.height;
+      // final RenderBox renderBoxScrollview = scrollviewKey.currentContext!.findRenderObject() as RenderBox;
+      final scrollviewTop = scrollViewTop(scrollviewKey); // renderBoxScrollview.localToGlobal(Offset.zero).dy;
+      autoscrollProvider.scrollviewHeight = scrollViewHeight(scrollviewKey); //renderBoxScrollview.size.height;
 
-      final RenderBox renderBoxContent = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
-      final contentTop = renderBoxContent.localToGlobal(Offset.zero).dy;
-      final contentHeight = renderBoxContent.size.height;
+      // final RenderBox renderBoxContent = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
+      final double contentTop = contentWidgetTopPos(contentCardsKey); // renderBoxContent.localToGlobal(Offset.zero).dy;
+      final double contentHeight = contentWidgetHeight(contentCardsKey); //renderBoxContent.size.height;
       autoscrollProvider.scrollExtent = (contentTop + scrollController.offset) + contentHeight - autoscrollProvider.scrollviewHeight! - scrollviewTop;
+      autoscrollProvider.contentWidgetTop = contentTop;
+      autoscrollProvider.contentWidgetHeight = contentHeight;
     }
 
     SongBookSettTempl settings = AutoscrollProvider.of(context).settings;
 
     // double scrollLeft = autoscrollProvider.scrollExtent! - scrollController.offset;
 
-    double scrollProgress = scrollController.offset/autoscrollProvider.scrollExtent!;
-    double linesLeftCount = allLines * (1 - scrollProgress);
+    final double textTopPadding = scrollController.offset + autoscrollProvider.contentWidgetTop! + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
 
-    // double millisecondsLeft = 1000*scrollLeft*(1.05-settings.autoscrollTextSpeed);
+    double bottomVisibleLine = songScrollToVisibleBottomLineIdx(
+        context,
+        song,
+        autoscrollProvider.contentWidgetHeight!,
+        textTopPadding,
+        scrollController,
+    );
+
+    double linesLeftCount = song.lineCount - bottomVisibleLine;
+
     double millisecondsLeft = 1000*linesLeftCount/settings.autoscrollTextSpeed;
 
     if(millisecondsLeft.round() <= 0) return;
@@ -1322,8 +1340,8 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
                           },
                           onLongPress: () => SongWidgetTemplateState._startAutoscroll(
                             context,
+                            song,
                             scrollController,
-                            song.lineCount,
                             contentCardsKey: contentCardsKey,
                             scrollviewKey: scrollviewKey
                           )
@@ -1378,7 +1396,12 @@ class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
                   inactiveColor: hintEnab_(context),
                   onChanged: (value){
                     prov.speed = value;
-                    SongWidgetTemplateState._startAutoscroll(context, scrollController(), song.lineCount, restart: true);
+                    SongWidgetTemplateState._startAutoscroll(
+                        context, 
+                        song,
+                        scrollController(),
+                        restart: true
+                    );
                   },
                   label: 'Jedna linijka co ${(10/prov.speed).ceil()/10} sek.',
                 ),
