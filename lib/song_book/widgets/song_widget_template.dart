@@ -85,7 +85,7 @@ class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends Contribut
 
   final InstrumentType initInstrumentType;
 
-  final void Function(ScrollNotification scrollInfo, double? textHeight, double? textTopPadding)? onScroll;
+  final void Function(ScrollNotification scrollInfo, double? textHeight, double? textTopOffset)? onScroll;
 
   final void Function(double)? onTitleTap;
   final void Function(String)? onAuthorTap;
@@ -219,7 +219,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
   InstrumentType get initInstrumentType => widget.initInstrumentType;
 
-  void Function(ScrollNotification scrollInfo, double? textHeight, double? textTopPadding)? get onScroll => widget.onScroll;
+  void Function(ScrollNotification scrollInfo, double? textHeight, double? textTopOffset)? get onScroll => widget.onScroll;
 
   void Function(double)? get onTitleTap => widget.onTitleTap;
   void Function(String)? get onAuthorTap => widget.onAuthorTap;
@@ -436,12 +436,11 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
           final double _contentWidgetTop = contentWidgetTopPos(contentCardsKey);
 
-          // distance between the screen top and the top of the song text area.
-          final double textTopPadding = scrollInfo.metrics.pixels + _contentWidgetTop + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
+          final double textTopOffset = scrollInfo.metrics.pixels + _contentWidgetTop + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
 
           double _textHeight = textWidgetHeight(contentCardsKey);
 
-          onScroll?.call(scrollInfo, _textHeight, textTopPadding);
+          onScroll?.call(scrollInfo, _textHeight, textTopOffset);
           return true;
         },
       ),
@@ -515,15 +514,13 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
     SongBookSettTempl settings = AutoscrollProvider.of(context).settings;
 
-    // double scrollLeft = autoscrollProvider.scrollExtent! - scrollController.offset;
-
-    final double textTopPadding = scrollController.offset + autoscrollProvider.contentWidgetTop! + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
+    final double textTopOffset = scrollController.offset + autoscrollProvider.contentWidgetTop! + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
 
     double bottomVisibleLineIdx = songScrollToVisibleBottomLineIdx(
       context,
       song,
       autoscrollProvider.textWidgetHeight!,
-      textTopPadding,
+      textTopOffset,
       scrollController,
     );
 

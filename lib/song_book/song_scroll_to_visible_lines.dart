@@ -9,7 +9,7 @@ double songScrollToVisibleBottomLineIdx(
     BuildContext context,
     SongCore song,
     double textWidgetHeight,
-    double textTopPadding,
+    double textTopOffset,
     ScrollController innerController,
 ){
   BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
@@ -25,7 +25,7 @@ double songScrollToVisibleBottomLineIdx(
       .height - kBottomNavigationBarHeight - screenTopPadding - screenBottomPadding;
 
   // distance between the screen top and the top of the song text area.
-  double textTopY = textTopPadding - innerController.offset - screenTopPadding;
+  double textTopY = textTopOffset - innerController.offset;
 
   double textBottomVisY = min(songBookAvailHeight - textTopY, textWidgetHeight);
 
@@ -38,7 +38,7 @@ double songScrollToVisibleBottomLineIdx(
   BuildContext context,
   SongCore song,
   double textWidgetHeight,
-  double textTopPadding,
+  double textTopOffset,
   double chordBarHeight,
   ScrollController innerController,
   ScrollController outerController
@@ -58,7 +58,7 @@ double songScrollToVisibleBottomLineIdx(
       .height - kBottomNavigationBarHeight - screenTopPadding - screenBottomPadding;
 
   // distance between the screen top and the top of the song text area.
-  double textTopY = textTopPadding + screenTopPadding - innerController.offset;
+  double textTopY = textTopOffset - innerController.offset;
 
   double textHiddenHeight = min(
       textWidgetHeight,
@@ -99,23 +99,12 @@ double songScrollToVisibleBottomLineIdx(
     ),
 
     Positioned(
-        top: textTopY,
+        top: textBottomVisY + textTopOffset - innerController.offset,
         left: 0,
         right: 0,
         child: Container(
           width: double.infinity,
           height: 3,
-          color: Colors.amber,
-        )
-    ),
-
-    Positioned(
-        top: textBottomVisY + textTopPadding - screenTopPadding - innerController.offset - 1,
-        left: 0,
-        right: 0,
-        child: Container(
-          width: double.infinity,
-          height: 1,
           color: Colors.amber,
         )
     ),
@@ -135,15 +124,7 @@ double songScrollToVisibleBottomLineIdx(
                 children.add(Container(
                   width: double.infinity,
                   height: lineHeight,
-                  color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.all(1),
-                    child: Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      color: i%2==0?Colors.pink:Colors.pink[900],
-                    ),
-                  ),
+                  color: i%2==0?Colors.pink:Colors.pink[900],
                 ));
 
               return Column(children: children);
