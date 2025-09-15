@@ -515,7 +515,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
     final double textTopPadding = scrollController.offset + autoscrollProvider.contentWidgetTop! + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
 
-    double bottomVisibleLine = songScrollToVisibleBottomLineIdx(
+    double bottomVisibleLineIdx = songScrollToVisibleBottomLineIdx(
         context,
         song,
         autoscrollProvider.contentWidgetHeight!,
@@ -523,7 +523,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
         scrollController,
     );
 
-    double linesLeftCount = song.lineCount - bottomVisibleLine;
+    double linesLeftCount = song.lineCount - bottomVisibleLineIdx;
 
     double millisecondsLeft = 1000*linesLeftCount/settings.autoscrollTextSpeed;
 
@@ -534,16 +534,16 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
     else
       autoscrollProvider.isScrolling = true;
 
-    Function() tmpListener = () =>
+    Function() debugListener = () =>
       debugPrint(
         'Autoscrolling: '
         '${scrollController.offset.toStringAsFixed(1)} / '
         '${autoscrollProvider.scrollExtent!.toStringAsFixed(1)}'
       );
 
-    scrollController.addListener(tmpListener);
+    scrollController.addListener(debugListener);
 
-    debugPrint('Autoscrolling started for ${millisecondsLeft.round()} milliseconds.');
+    debugPrint('Autoscrolling started for ${millisecondsLeft.round()} milliseconds (autoscrollTextSpeed: ${settings.autoscrollTextSpeed}, bottomVisibleLineIdx: ${bottomVisibleLineIdx}).');
     await scrollController.animateTo(
         // Don't use `scrollController.position.maxScrollExtent` - it changes it's value during scrolling.
         autoscrollProvider.scrollExtent!,
@@ -551,7 +551,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
         curve: Curves.linear
     );
 
-    scrollController.removeListener(tmpListener);
+    scrollController.removeListener(debugListener);
 
     autoscrollProvider.isScrolling = false;
     await SystemChrome.setPreferredOrientations(DeviceOrientation.values);

@@ -14,7 +14,7 @@ double songScrollToVisibleBottomLineIdx(
   BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
   double statusBarHeight = MediaQuery.of(rootContext).padding.top;
   
-  double lineHeight = textAreaHeight / song.lineNumList.length;
+  double lineHeight = textAreaHeight / song.lineCount;
 
   // distance between the screen top and the screen bottom available for the song book module.
   double songBookAvailHeight = MediaQuery
@@ -27,7 +27,7 @@ double songScrollToVisibleBottomLineIdx(
 
   double textBottomVisY = min(songBookAvailHeight - textTopY, textAreaHeight);
 
-  return textBottomVisY / lineHeight;
+  return (textBottomVisY / lineHeight) - 1;
 
   // int bottomVisibleIdx = max(0, (textBottomVisY / lineHeight).floor() - 1);
   //
@@ -49,7 +49,7 @@ double songScrollToVisibleBottomLineIdx(
   BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
   double statusBarHeight = MediaQuery.of(rootContext).padding.top;
 
-  double lineHeight = textAreaHeight / song.lineNumList.length;
+  double lineHeight = textAreaHeight / song.lineCount;
 
   double appBarHeight = kToolbarHeight - outerController.offset;
 
