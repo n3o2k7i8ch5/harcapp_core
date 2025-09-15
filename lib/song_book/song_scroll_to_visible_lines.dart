@@ -79,7 +79,7 @@ double songScrollToVisibleBottomLineIdx(
   );
 
   int bottomVisibleIdx;
-  // This if mechanism is to solve machine epsilon issues with selecting the last index;
+  // This 'if' mechanism solves machine epsilon issues with selecting the last index;
   if(textBottomVisY < screenTopPadding + songBookAvailHeight)
     bottomVisibleIdx = song.lineNumList.length-1;
   else

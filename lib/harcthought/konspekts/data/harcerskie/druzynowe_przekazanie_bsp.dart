@@ -15,8 +15,8 @@ KonspektAttachment attach_odznaka_bsp = KonspektAttachment(
     name: attach_name_odznaka_bsp,
     title: attach_title_odznaka_bsp,
     assets: {
-      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'odznaka_bsp.docx'),
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'odznaka_bsp.pdf'),
+      FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'odznaka_bsp.docx'),
     },
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
