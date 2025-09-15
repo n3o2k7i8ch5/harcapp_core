@@ -13,18 +13,19 @@ double songScrollToVisibleBottomLineIdx(
     ScrollController innerController,
 ){
   BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
-  double statusBarHeight = MediaQuery.of(rootContext).padding.top;
-  
+  double screenTopPadding = MediaQuery.of(rootContext).padding.top;
+  double screenBottomPadding = MediaQuery.of(rootContext).padding.bottom;
+
   double lineHeight = textWidgetHeight / song.lineCount;
 
   // distance between the screen top and the screen bottom available for the song book module.
   double songBookAvailHeight = MediaQuery
       .of(context)
       .size
-      .height - kBottomNavigationBarHeight - statusBarHeight;
+      .height - kBottomNavigationBarHeight - screenTopPadding - screenBottomPadding;
 
   // distance between the screen top and the top of the song text area.
-  double textTopY = textTopPadding - innerController.offset - statusBarHeight;
+  double textTopY = textTopPadding - innerController.offset - screenTopPadding;
 
   double textBottomVisY = min(songBookAvailHeight - textTopY, textWidgetHeight);
 
@@ -43,7 +44,8 @@ double songScrollToVisibleBottomLineIdx(
   ScrollController outerController
 ){
   BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
-  double statusBarHeight = MediaQuery.of(rootContext).padding.top;
+  double screenTopPadding = MediaQuery.of(rootContext).padding.top;
+  double screenBottomPadding = MediaQuery.of(rootContext).padding.bottom;
 
   double lineHeight = textWidgetHeight / song.lineCount;
 
@@ -53,10 +55,10 @@ double songScrollToVisibleBottomLineIdx(
   double songBookAvailHeight = MediaQuery
       .of(context)
       .size
-      .height - kBottomNavigationBarHeight - statusBarHeight;
+      .height - kBottomNavigationBarHeight - screenTopPadding - screenBottomPadding;
 
   // distance between the screen top and the top of the song text area.
-  double textTopY = textTopPadding - innerController.offset - statusBarHeight;
+  double textTopY = textTopPadding + screenTopPadding - innerController.offset;
 
   double textHiddenHeight = min(
       textWidgetHeight,
@@ -108,7 +110,7 @@ double songScrollToVisibleBottomLineIdx(
     ),
 
     Positioned(
-        top: textBottomVisY + textTopPadding - statusBarHeight - innerController.offset - 1,
+        top: textBottomVisY + textTopPadding - screenTopPadding - innerController.offset - 1,
         left: 0,
         right: 0,
         child: Container(
@@ -139,7 +141,7 @@ double songScrollToVisibleBottomLineIdx(
                     child: Container(
                       height: double.infinity,
                       width: double.infinity,
-                      color: Colors.pink,
+                      color: i%2==0?Colors.pink:Colors.pink[900],
                     ),
                   ),
                 ));
