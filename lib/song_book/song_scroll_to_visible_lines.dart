@@ -31,7 +31,7 @@ double songScrollToVisibleBottomLineIdx(
     screenTopPadding + songBookAvailHeight,
   );
 
-  return (textBottomVisY / lineHeight) - 1;
+  return max(0, ((textBottomVisY - textTopY) / lineHeight) - 1);
 
 }
 
