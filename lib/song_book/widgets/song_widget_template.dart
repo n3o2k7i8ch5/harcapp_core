@@ -15,6 +15,7 @@ import 'package:harcapp_core/comm_widgets/chord_draw_bar.dart';
 import 'package:harcapp_core/comm_widgets/instrument_type.dart';
 import 'package:harcapp_core/comm_widgets/separated_column.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
+import 'package:harcapp_core/logger.dart';
 import 'package:harcapp_core/song_book/song_scroll_to_visible_lines.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -536,7 +537,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
       autoscrollProvider.isScrolling = true;
 
     Function() debugListener = () =>
-      debugPrint(
+      logger.d(
         'Autoscrolling: '
         '${scrollController.offset.toStringAsFixed(1)} / '
         '${autoscrollProvider.scrollExtent!.toStringAsFixed(1)}'
@@ -544,7 +545,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
     scrollController.addListener(debugListener);
 
-    debugPrint('Autoscrolling started for ${millisecondsLeft.round()} milliseconds (autoscrollTextSpeed: ${settings.autoscrollTextSpeed}, bottomVisibleLineIdx: ${bottomVisibleLineIdx}).');
+    logger.d('Autoscrolling started for ${millisecondsLeft.round()} milliseconds (autoscrollTextSpeed: ${settings.autoscrollTextSpeed}, bottomVisibleLineIdx: ${bottomVisibleLineIdx}).');
     await scrollController.animateTo(
         // Don't use `scrollController.position.maxScrollExtent` - it changes it's value during scrolling.
         autoscrollProvider.scrollExtent!,
