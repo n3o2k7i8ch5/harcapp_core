@@ -517,6 +517,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
     await SystemChrome.setPreferredOrientations([orientation]);
 
+    double floatingButtonScrollHeight = Dimen.floatingButtonMarg + Dimen.floatingButtonSize;
     if(contentCardsKey != null && scrollviewKey != null){
       final scrollviewTop = scrollViewTop(scrollviewKey);
       autoscrollProvider.scrollviewHeight = scrollViewHeight(scrollviewKey);
@@ -524,7 +525,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
       final double _contentWidgetTop = contentWidgetTopPos(contentCardsKey);
       final double _contentHeight = contentWidgetHeight(contentCardsKey);
       final double _textWidgetHeight = textWidgetHeight(contentCardsKey);
-      autoscrollProvider.scrollExtent = (_contentWidgetTop + scrollController.offset) + _contentHeight - autoscrollProvider.scrollviewHeight! - scrollviewTop;
+      autoscrollProvider.scrollExtent = (_contentWidgetTop + scrollController.offset) + _contentHeight - autoscrollProvider.scrollviewHeight! - scrollviewTop + floatingButtonScrollHeight;
       autoscrollProvider.textWidgetTopOffset = textWidgetTopOffset(contentCardsKey, scrollviewKey, scrollController.offset);
       autoscrollProvider.textWidgetHeight = _textWidgetHeight;
     }
@@ -543,7 +544,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
     double lineHeight = autoscrollProvider.textWidgetHeight! / song.lineCount;
     double pxPerSecScrollSpeed = settings.autoscrollTextSpeed * lineHeight;
-    double millisecondsToScrollFloatingButton = 1000*(Dimen.floatingButtonMarg + Dimen.floatingButtonSize)/pxPerSecScrollSpeed;
+    double millisecondsToScrollFloatingButton = 1000*(floatingButtonScrollHeight)/pxPerSecScrollSpeed;
 
     double millisecondsToScrollTextLeft = 1000*linesLeftCount/settings.autoscrollTextSpeed;
     double millisecondsLeft = millisecondsToScrollTextLeft + millisecondsToScrollFloatingButton;
