@@ -535,19 +535,14 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
     double bottomVisibleLineIdx = songScrollToVisibleBottomLineIdx(
       context,
       song,
-      autoscrollProvider.textWidgetHeight!,
+      autoscrollProvider.textWidgetHeight! + floatingButtonScrollHeight,
       autoscrollProvider.textWidgetTopOffset!,
       scrollController,
     );
 
-    double linesLeftCount = song.lineCount - bottomVisibleLineIdx;
+    double linesLeftCount = song.lineCount - bottomVisibleLineIdx - 1;
 
-    double lineHeight = autoscrollProvider.textWidgetHeight! / song.lineCount;
-    double pxPerSecScrollSpeed = settings.autoscrollTextSpeed * lineHeight;
-    double millisecondsToScrollFloatingButton = 1000*(floatingButtonScrollHeight)/pxPerSecScrollSpeed;
-
-    double millisecondsToScrollTextLeft = 1000*linesLeftCount/settings.autoscrollTextSpeed;
-    double millisecondsLeft = millisecondsToScrollTextLeft + millisecondsToScrollFloatingButton;
+    double millisecondsLeft = 1000*linesLeftCount/settings.autoscrollTextSpeed;
 
     if(millisecondsLeft.round() <= 0) return;
 
