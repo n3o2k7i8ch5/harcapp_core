@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_widgets/dialog/dialog.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
+import 'package:harcapp_core/song_book/widgets/song_widget_template.dart';
 
 // Line index counts both lines with text and the divider lines.
 double songScrollToVisibleBottomLineIdx(
@@ -45,9 +47,8 @@ double songScrollToVisibleBottomLineIdx(
     ScrollController innerController,
     ScrollController outerController
 ){
-  BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
-  double screenTopPadding = MediaQuery.of(rootContext).padding.top;
-  double screenBottomPadding = MediaQuery.of(rootContext).padding.bottom;
+  double screenTopPadding = SongWidgetTemplateState.screenTopPadding(context);
+  double screenBottomPadding = SongWidgetTemplateState.screenBottomPadding(context);
 
   double lineHeight = textWidgetHeight / song.lineCount;
 
@@ -63,10 +64,10 @@ double songScrollToVisibleBottomLineIdx(
   double textTopY = textTopOffset - innerController.offset;
 
   // For visualizing
-  // double textTopVisY = max(
-  //     textTopY,
-  //     screenTopPadding + appBarHeight + chordBarHeight
-  // );
+  double textTopVisY = max(
+      textTopY,
+      screenTopPadding + appBarHeight + chordBarHeight
+  );
 
   double textBottomVisY = min(
     textTopY + textWidgetHeight,
@@ -93,104 +94,104 @@ double songScrollToVisibleBottomLineIdx(
   int topVisibleLine = song.lineNumList[topVisibleIdx];
   int bottomVisibleLine = song.lineNumList[bottomVisibleIdx];
 
-  // openDialog(context: context, builder: (context) => Stack(children: [
-  //
-  //   Positioned(
-  //       top: screenTopPadding,
-  //       left: 0,
-  //       right: 0,
-  //       child: Opacity(
-  //         opacity: .3,
-  //         child: Container(
-  //           width: double.infinity,
-  //           height: songBookAvailHeight,
-  //           color: Colors.red,
-  //           child: Padding(
-  //             padding: const EdgeInsets.all(6),
-  //             child: Container(
-  //               width: double.infinity,
-  //               height: songBookAvailHeight,
-  //               color: Colors.green,
-  //             ),
-  //           ),
-  //         ),
-  //       )
-  //   ),
-  //
-  //   Positioned(
-  //       top: textTopVisY,
-  //       left: 0,
-  //       right: 0,
-  //       child: Container(
-  //         width: double.infinity,
-  //         height: 3,
-  //         color: Colors.orange,
-  //       )
-  //   ),
-  //
-  //   Positioned(
-  //       top: textTopVisY - textHiddenAboveHeight,
-  //       left: 0,
-  //       right: 0,
-  //       child: Opacity(
-  //         opacity: 0.5,
-  //         child: Container(
-  //           width: double.infinity,
-  //           height: textHiddenAboveHeight,
-  //           color: Colors.orange,
-  //         ),
-  //       )
-  //   ),
-  //
-  //   Positioned(
-  //       top: textBottomVisY,
-  //       left: 0,
-  //       right: 0,
-  //       child: Container(
-  //         width: double.infinity,
-  //         height: 3,
-  //         color: Colors.amber,
-  //       )
-  //   ),
-  //
-  //   Positioned(
-  //       top: textTopY,
-  //       left: 0,
-  //       right: 0,
-  //       child: Opacity(
-  //         opacity: .3,
-  //         child: Builder(
-  //           builder: (context){
-  //
-  //             List<Widget> children = [];
-  //
-  //             for(int i=0; i<song.lineNumList.length; i++)
-  //               children.add(
-  //                   Container(
-  //                     width: double.infinity,
-  //                     height: lineHeight,
-  //                     color: i%2==0?Colors.pink:Colors.pink[900],
-  //                     child: i==topVisibleIdx?Material(
-  //                         color: Colors.black,
-  //                         child: Text("Top visible", style: TextStyle(fontSize: lineHeight-2))
-  //                     ):
-  //                     i==bottomVisibleIdx?
-  //                     Material(
-  //                         color: Colors.black,
-  //                         child: Text("Bottom visible", style: TextStyle(fontSize: lineHeight-2))
-  //                     ):
-  //                     null,
-  //                   )
-  //               );
-  //
-  //             return Column(children: children);
-  //
-  //           },
-  //         ),
-  //       )
-  //   ),
-  //
-  // ]));
+  openDialog(context: context, builder: (context) => Stack(children: [
+
+    Positioned(
+        top: screenTopPadding,
+        left: 0,
+        right: 0,
+        child: Opacity(
+          opacity: .3,
+          child: Container(
+            width: double.infinity,
+            height: songBookAvailHeight,
+            color: Colors.red,
+            child: Padding(
+              padding: const EdgeInsets.all(6),
+              child: Container(
+                width: double.infinity,
+                height: songBookAvailHeight,
+                color: Colors.green,
+              ),
+            ),
+          ),
+        )
+    ),
+
+    Positioned(
+        top: textTopVisY,
+        left: 0,
+        right: 0,
+        child: Container(
+          width: double.infinity,
+          height: 3,
+          color: Colors.orange,
+        )
+    ),
+
+    Positioned(
+        top: textTopVisY - textHiddenAboveHeight,
+        left: 0,
+        right: 0,
+        child: Opacity(
+          opacity: 0.5,
+          child: Container(
+            width: double.infinity,
+            height: textHiddenAboveHeight,
+            color: Colors.orange,
+          ),
+        )
+    ),
+
+    Positioned(
+        top: textBottomVisY,
+        left: 0,
+        right: 0,
+        child: Container(
+          width: double.infinity,
+          height: 3,
+          color: Colors.amber,
+        )
+    ),
+
+    Positioned(
+        top: textTopY,
+        left: 0,
+        right: 0,
+        child: Opacity(
+          opacity: .3,
+          child: Builder(
+            builder: (context){
+
+              List<Widget> children = [];
+
+              for(int i=0; i<song.lineNumList.length; i++)
+                children.add(
+                    Container(
+                      width: double.infinity,
+                      height: lineHeight,
+                      color: i%2==0?Colors.pink:Colors.pink[900],
+                      child: i==topVisibleIdx?Material(
+                          color: Colors.black,
+                          child: Text("Top visible", style: TextStyle(fontSize: lineHeight-2))
+                      ):
+                      i==bottomVisibleIdx?
+                      Material(
+                          color: Colors.black,
+                          child: Text("Bottom visible", style: TextStyle(fontSize: lineHeight-2))
+                      ):
+                      null,
+                    )
+                );
+
+              return Column(children: children);
+
+            },
+          ),
+        )
+    ),
+
+  ]));
 
   return (topVisibleLine, bottomVisibleLine);
 }

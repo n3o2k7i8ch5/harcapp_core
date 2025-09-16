@@ -437,16 +437,31 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
           final double _contentWidgetTop = contentWidgetTopPos(contentCardsKey);
 
-          final double textTopOffset = scrollInfo.metrics.pixels + _contentWidgetTop + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
+          // The constant distance between the text widget's top and the scrollview's top.
+          double _textTopOffset = scrollInfo.metrics.pixels + _contentWidgetTop + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
 
-          double _textHeight = textWidgetHeight(contentCardsKey);
+          double outerScrollOffset = kToolbarHeight - (scrollViewTop(scrollviewKey) - screenTopPadding(context));
 
-          onScroll?.call(scrollInfo, _textHeight, textTopOffset);
+          _textTopOffset = textWidgetTopOffset(contentCardsKey, scrollInfo.metrics.pixels, outerScrollOffset);
+
+          final double _textHeight = textWidgetHeight(contentCardsKey);
+
+          onScroll?.call(scrollInfo, _textHeight, _textTopOffset);
           return true;
         },
       ),
     );
 
+  }
+
+  static double screenTopPadding(BuildContext context) {
+    BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
+    return MediaQuery.of(rootContext).padding.top;
+  }
+
+  static double screenBottomPadding(BuildContext context) {
+    BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
+    return MediaQuery.of(rootContext).padding.bottom;
   }
 
   static double scrollViewHeight(GlobalKey scrollviewKey){
@@ -471,6 +486,9 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
   static double textWidgetHeight(GlobalKey contentCardsKey) =>
     contentWidgetHeight(contentCardsKey) - 2*_ContentWidget.vertMargVal - 2*_ContentWidget.vertPaddVal;
+
+  static double textWidgetTopOffset(GlobalKey contentCardsKey, double innerScrollOffset, double outerScrollOffset) =>
+      innerScrollOffset - outerScrollOffset + contentWidgetTopPos(contentCardsKey) + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
 
   static void _startAutoscroll(
     BuildContext context,
