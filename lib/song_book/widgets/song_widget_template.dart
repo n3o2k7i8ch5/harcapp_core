@@ -440,9 +440,9 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
           // The constant distance between the text widget's top and the scrollview's top.
           double _textTopOffset = scrollInfo.metrics.pixels + _contentWidgetTop + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
 
-          double outerScrollOffset = kToolbarHeight - (scrollViewTop(scrollviewKey) - screenTopPadding(context));
+          double outerScrollOffset =
 
-          _textTopOffset = textWidgetTopOffset(contentCardsKey, scrollviewKey, scrollInfo.metrics.pixels, outerScrollOffset);
+          _textTopOffset = textWidgetTopOffset(contentCardsKey, scrollviewKey, scrollInfo.metrics.pixels);
 
           final double _textHeight = textWidgetHeight(contentCardsKey);
 
@@ -463,6 +463,8 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
     BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
     return MediaQuery.of(rootContext).padding.bottom;
   }
+
+  static double outerScrollOffset(GlobalKey scrollviewKey, BuildContext context) => kToolbarHeight - (scrollViewTop(scrollviewKey) - screenTopPadding(context));
 
   static double scrollViewHeight(GlobalKey scrollviewKey){
     final RenderBox renderBoxScrollview = scrollviewKey.currentContext!.findRenderObject() as RenderBox;
@@ -490,10 +492,8 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
   static double textWidgetTopPos(GlobalKey contentCardsKey) =>
       contentWidgetTopPos(contentCardsKey) + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
 
-  static double textWidgetTopOffset(GlobalKey contentCardsKey, GlobalKey scrollviewKey, double innerScrollOffset, double outerScrollOffset){
+  static double textWidgetTopOffset(GlobalKey contentCardsKey, GlobalKey scrollviewKey, double innerScrollOffset){
     // The constant distance between the text widget's top and the scrollview's top.
-
-    double appBarHeight = kToolbarHeight - outerScrollOffset;
     return textWidgetTopPos(contentCardsKey) - scrollViewTop(scrollviewKey) + innerScrollOffset;
   }
 
@@ -524,29 +524,24 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
     await SystemChrome.setPreferredOrientations([orientation]);
 
     if(contentCardsKey != null && scrollviewKey != null){
-      // final RenderBox renderBoxScrollview = scrollviewKey.currentContext!.findRenderObject() as RenderBox;
-      final scrollviewTop = scrollViewTop(scrollviewKey); // renderBoxScrollview.localToGlobal(Offset.zero).dy;
-      autoscrollProvider.scrollviewHeight = scrollViewHeight(scrollviewKey); //renderBoxScrollview.size.height;
+      final scrollviewTop = scrollViewTop(scrollviewKey);
+      autoscrollProvider.scrollviewHeight = scrollViewHeight(scrollviewKey);
 
-      // final RenderBox renderBoxContent = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
-      final double _contentWidgetTop = contentWidgetTopPos(contentCardsKey); // renderBoxContent.localToGlobal(Offset.zero).dy;
-      final double contentHeight = contentWidgetHeight(contentCardsKey); //renderBoxContent.size.height;
+      final double _contentWidgetTop = contentWidgetTopPos(contentCardsKey);
+      final double _contentHeight = contentWidgetHeight(contentCardsKey);
       final double _textWidgetHeight = textWidgetHeight(contentCardsKey);
-      autoscrollProvider.scrollExtent = (_contentWidgetTop + scrollController.offset) + contentHeight - autoscrollProvider.scrollviewHeight! - scrollviewTop;
-      autoscrollProvider.contentWidgetTop = _contentWidgetTop;
-      autoscrollProvider.contentWidgetHeight = contentHeight;
+      autoscrollProvider.scrollExtent = (_contentWidgetTop + scrollController.offset) + _contentHeight - autoscrollProvider.scrollviewHeight! - scrollviewTop;
+      autoscrollProvider.textWidgetTopOffset = textWidgetTopOffset(contentCardsKey, scrollviewKey, scrollController.offset);
       autoscrollProvider.textWidgetHeight = _textWidgetHeight;
     }
 
     SongBookSettTempl settings = AutoscrollProvider.of(context).settings;
 
-    final double textTopOffset = scrollController.offset + autoscrollProvider.contentWidgetTop! + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
-
     double bottomVisibleLineIdx = songScrollToVisibleBottomLineIdx(
       context,
       song,
       autoscrollProvider.textWidgetHeight!,
-      textTopOffset,
+      autoscrollProvider.textWidgetTopOffset!,
       scrollController,
     );
 

@@ -233,8 +233,7 @@ class AutoscrollProvider extends ChangeNotifier{
   late SongBookSettTempl settings;
   double? scrollExtent;
   double? scrollviewHeight;
-  double? contentWidgetHeight;
-  double? contentWidgetTop;
+  double? textWidgetTopOffset;
   double? textWidgetHeight;
 
   FutureOr<void> Function()? beforeAutoscrollStart;
