@@ -76,7 +76,7 @@ double songScrollToVisibleBottomLineIdx(
 
   double textHiddenAboveHeight = max(
       0,
-      innerController.offset - (textTopOffset - screenTopPadding - appBarHeight - chordBarHeight)
+      innerController.offset - (textTopOffset - chordBarHeight)
   );
 
   int bottomVisibleIdx;
