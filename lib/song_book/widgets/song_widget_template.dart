@@ -488,7 +488,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
     contentWidgetHeight(contentCardsKey) - 2*_ContentWidget.vertMargVal - 2*_ContentWidget.vertPaddVal;
 
   static double textWidgetTopOffset(GlobalKey contentCardsKey, double innerScrollOffset, double outerScrollOffset) =>
-      innerScrollOffset - outerScrollOffset + contentWidgetTopPos(contentCardsKey) + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
+      innerScrollOffset - (kToolbarHeight - outerScrollOffset) + contentWidgetTopPos(contentCardsKey) + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
 
   static void _startAutoscroll(
     BuildContext context,
