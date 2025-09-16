@@ -435,14 +435,8 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
             return true;
           }
 
-          final double _contentWidgetTop = contentWidgetTopPos(contentCardsKey);
-
           // The constant distance between the text widget's top and the scrollview's top.
-          double _textTopOffset = scrollInfo.metrics.pixels + _contentWidgetTop + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
-
-          double outerScrollOffset =
-
-          _textTopOffset = textWidgetTopOffset(contentCardsKey, scrollviewKey, scrollInfo.metrics.pixels);
+          final double _textTopOffset = textWidgetTopOffset(contentCardsKey, scrollviewKey, scrollInfo.metrics.pixels);
 
           final double _textHeight = textWidgetHeight(contentCardsKey);
 
@@ -547,7 +541,12 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
     double linesLeftCount = song.lineCount - bottomVisibleLineIdx;
 
-    double millisecondsLeft = 1000*linesLeftCount/settings.autoscrollTextSpeed;
+    double lineHeight = autoscrollProvider.textWidgetHeight! / song.lineCount;
+    double pxPerSecScrollSpeed = settings.autoscrollTextSpeed * lineHeight;
+    double millisecondsToScrollFloatingButton = 1000*(Dimen.floatingButtonMarg + Dimen.floatingButtonSize)/pxPerSecScrollSpeed;
+
+    double millisecondsToScrollTextLeft = 1000*linesLeftCount/settings.autoscrollTextSpeed;
+    double millisecondsLeft = millisecondsToScrollTextLeft + millisecondsToScrollFloatingButton;
 
     if(millisecondsLeft.round() <= 0) return;
 
@@ -567,10 +566,10 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
     logger.d('Autoscrolling started for ${millisecondsLeft.round()} milliseconds (autoscrollTextSpeed: ${settings.autoscrollTextSpeed}, bottomVisibleLineIdx: ${bottomVisibleLineIdx}).');
     await scrollController.animateTo(
-        // Don't use `scrollController.position.maxScrollExtent` - it changes it's value during scrolling.
-        autoscrollProvider.scrollExtent!,
-        duration: Duration(milliseconds: millisecondsLeft.round()),
-        curve: Curves.linear
+      // Don't use `scrollController.position.maxScrollExtent` - it changes it's value during scrolling.
+      autoscrollProvider.scrollExtent!,
+      duration: Duration(milliseconds: millisecondsLeft.round()),
+      curve: Curves.linear
     );
 
     scrollController.removeListener(debugListener);
@@ -581,8 +580,8 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
   void _notify(){
     textSizeProvider.reinit(
-        song,
-        chordsVisible: ShowChordsProvider.of(context).showChords
+      song,
+      chordsVisible: ShowChordsProvider.of(context).showChords
     );
   }
 

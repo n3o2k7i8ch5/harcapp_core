@@ -1,17 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:harcapp_core/comm_widgets/dialog/dialog.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/widgets/song_widget_template.dart';
 
 // Line index counts both lines with text and the divider lines.
 double songScrollToVisibleBottomLineIdx(
-    BuildContext context,
-    SongCore song,
-    double textWidgetHeight,
-    double textTopOffset,
-    ScrollController innerController,
+  BuildContext context,
+  SongCore song,
+  double textWidgetHeight,
+  double textTopOffset,
+  ScrollController innerController,
 ){
   BuildContext rootContext = Navigator.of(context, rootNavigator: true).context;
   double screenTopPadding = MediaQuery.of(rootContext).padding.top;
