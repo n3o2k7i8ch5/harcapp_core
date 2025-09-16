@@ -442,7 +442,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
           double outerScrollOffset = kToolbarHeight - (scrollViewTop(scrollviewKey) - screenTopPadding(context));
 
-          _textTopOffset = textWidgetTopOffset(contentCardsKey, scrollInfo.metrics.pixels, outerScrollOffset);
+          _textTopOffset = textWidgetTopOffset(contentCardsKey, scrollviewKey, scrollInfo.metrics.pixels, outerScrollOffset);
 
           final double _textHeight = textWidgetHeight(contentCardsKey);
 
@@ -487,8 +487,15 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
   static double textWidgetHeight(GlobalKey contentCardsKey) =>
     contentWidgetHeight(contentCardsKey) - 2*_ContentWidget.vertMargVal - 2*_ContentWidget.vertPaddVal;
 
-  static double textWidgetTopOffset(GlobalKey contentCardsKey, double innerScrollOffset, double outerScrollOffset) =>
-      innerScrollOffset - (kToolbarHeight - outerScrollOffset) + contentWidgetTopPos(contentCardsKey) + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
+  static double textWidgetTopPos(GlobalKey contentCardsKey) =>
+      contentWidgetTopPos(contentCardsKey) + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
+
+  static double textWidgetTopOffset(GlobalKey contentCardsKey, GlobalKey scrollviewKey, double innerScrollOffset, double outerScrollOffset){
+    // The constant distance between the text widget's top and the scrollview's top.
+
+    double appBarHeight = kToolbarHeight - outerScrollOffset;
+    return textWidgetTopPos(contentCardsKey) - scrollViewTop(scrollviewKey) + innerScrollOffset;
+  }
 
   static void _startAutoscroll(
     BuildContext context,
