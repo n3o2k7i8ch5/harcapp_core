@@ -61,7 +61,7 @@ double songScrollToVisibleBottomLineIdx(
       .height - screenTopPadding - screenBottomPadding - kBottomNavigationBarHeight;
 
   // distance between the screen top and the top of the song text area.
-  double textTopY = textTopOffset - innerController.offset;
+  double textTopY = screenTopPadding + textTopOffset - innerController.offset;
 
   // For visualizing
   double textTopVisY = max(
