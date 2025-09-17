@@ -1,0 +1,7 @@
+id: rozjemca
+name: 'Rozjemca',
+level: 2,
+tasks:
+  - 'Umie oddzielić fakty od opinii i ocen (np. podsumowując grę potrafi wskazać realne przyczyny zwycięstwa lub porażki oraz zaproponować rozwiązania na przyszłość).',
+  - 'W swoich wypowiedziach potrafi opisać zdarzenie wyraźnie rozgraniczając fakty od emocji, które kierowały jego uczestnikami. Umie wykorzystać tę umiejętność do opisu konfliktu, którego był świadkiem bądź uczestnikiem.',
+

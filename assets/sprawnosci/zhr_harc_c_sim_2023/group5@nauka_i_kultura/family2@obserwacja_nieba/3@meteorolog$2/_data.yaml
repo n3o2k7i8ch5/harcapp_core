@@ -1,0 +1,9 @@
+id: meteorolog
+name: 'Meteorolog',
+level: 2,
+tasks:
+  - 'Umie na podstawie zjawisk na lądzie lub morzu ocenić siłę wiatru w skali Beauforta.',
+  - 'Potrafi odczytać z barometru ciśnienie atmosferyczne. Na podstawie kilku kolejnych pomiarów umie ocenić, czy ciśnienie rośnie, spada czy utrzymuje się na stałym poziomie.',
+  - 'Potrafi rozpoznać oznaki zbliżającej się burzy.',
+  - 'Umie rozpoznać 3 rodzaje chmur.',
+

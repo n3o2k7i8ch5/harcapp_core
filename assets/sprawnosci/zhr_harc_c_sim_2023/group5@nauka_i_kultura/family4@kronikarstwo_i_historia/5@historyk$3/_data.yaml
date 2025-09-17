@@ -1,0 +1,10 @@
+id: historyk
+name: 'Historyk',
+level: 3,
+tasks:
+  - 'Potrafi napisać tekst (np. artykuł), w którym skonfrontuje ze sobą dwa różne opisy tego samego wydarzenia historycznego i wskaże różnice między nimi.',
+  - 'Umie przygotować rozmowę ze świadkiem historii, wie, jakie powinien zebrać informacje wcześniej. Potrafi zadać pytania w sposób pozwalający na swobodną wypowiedź.',
+  - 'Umie zredagować tekst historyczny z użyciem przypisów, spisu treści, spisu źródeł i spisu ilustracji. Potrafi sporządzić opis bibliograficzny.',
+  - 'Umie tworzyć i modyfikować treści dostępne w otwartych encyklopediach internetowych (np. Wikipedia), korzystając ze źródeł książkowych lub archiwalnych, podając źródła z jakich korzystał.',
+  - 'Potrafi posłużyć się internetowym katalogiem biblioteki uniwersyteckiej, miejskiej i Biblioteki Narodowej (w razie konieczności z pomocą osoby pełnoletniej).',
+

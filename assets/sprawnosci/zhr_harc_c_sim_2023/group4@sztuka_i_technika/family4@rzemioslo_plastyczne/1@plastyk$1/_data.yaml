@@ -1,0 +1,8 @@
+id: plastyk
+name: 'Plastyk',
+level: 1,
+tasks:
+  - 'Umie przygotować odpowiednie narzędzia i materiały do wybranych działań plastycznych (np. modelowania lub rysowania).',
+  - 'Potrafi wykonać model albo rysunek na podstawie opisu lub szczegółowo odwzorować przedmiot z natury (np. liść lub totem).',
+  - 'Umie przygotować swoją pracę do publicznej prezentacji (np. oprawić ilustrację samodzielnie wykonaną ramką lub wypalić gliniany model).',
+

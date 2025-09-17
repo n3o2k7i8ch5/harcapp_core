@@ -1,0 +1,8 @@
+id: astronom
+name: 'Astronom',
+level: 2,
+tasks:
+  - 'Zna i umie samodzielnie odnaleźć na niebie 5 gwiazdozbiorów, w tym po jednym charakterystycznym dla nieba letniego i zimowego.',
+  - 'Potrafi wykorzystać mapę nieba, aby odnaleźć lub nazwać widoczne gwiazdozbiory i najjaśniejsze gwiazdy.',
+  - 'Umie przy pomocy danych astronomicznych (np. z Internetu) odnaleźć na niebie widoczne akurat planety.',
+

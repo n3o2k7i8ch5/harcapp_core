@@ -1,0 +1,28 @@
+id: literatura
+name: Literatura
+
+tags:
+  - "#słowo"
+  - "#emocje"
+  - "#wyobraźnia"
+  - "#umysł"
+  - "#twórczość"
+  - "#książka"
+  - "#ciekawość"
+  - "#rytm"
+  - "#harmonia"
+  - "#technika"
+
+fragment: |
+  Bard skończył śpiewać. Pochyliwszy lekko głowę, powtórzył na lutni motyw przewodni ballady, delikatnie, cicho, o ton wyżej od akompaniującego mu ucznia. (...)
+
+  – Dzięki ci, mistrzu Jaskrze – powiedział dźwięcznie, choć niegłośno. – Niechaj to ja, Radcliffe z Oxenfurtu, Mistrz Arkanów Magicznych, niechybnie jako wyraziciel opinii wszystkich tu obecnych, wypowiem słowa podziękowania i uznania dla twej wielkiej sztuki i twego talentu.
+
+  (...) Wzruszone niewiasty pociągały nosami i ocierały oczy, czym mogły, w zależności od stanu, profesji i majętności: wieśniaczki przedramieniem lub wierzchem dłoni, żony kupców lnianymi chustami, elfki i szlachcianki batystem, a trzy córki komesa Viliberta, który dla występu słynnego trubadura przerwał wraz z całym swym orszakiem polowanie z sokołami, smarkały donośnie i przejmująco w gustowne wełniane szaliczki w kolorze zgnitej zieleni. (...)
+
+  Bezbłędnie wyczuwając właściwy moment, trubadur mrugnął do ucznia. Chłopiec odłożył lutnię i podjął z ziemi szkatułeczkę służącą do zbierania wśród słuchaczy bardziej wymiernych wyrazów uznania. Zawahał się, powiódł wzrokiem po tłumie, po czym odłożył szkatułeczkę i chwycił stojący obok spory ceber. Mistrz Jaskier łaskawym uśmiechem zaaprobował roztropność młodzieńca. (...)
+
+  – Mistrzu Jaskrze, jakże to tak? Zostawiacie nas w niepewności? Przecie to nie koniec waszej ballady? Zaśpiewajcież nam o tym, co dalej było!
+
+  – Pieśni i ballady – skłonił się artysta – nie kończą się nigdy, o Pani, bo poezja jest wieczna i nieśmiertelna, nie zna ni początku, ni końca...
+fragmentAuthor: "Sapkowski Andrzej, „Krew Elfów” (Saga o Wiedźminie)"

@@ -1,0 +1,7 @@
+id: holubiec
+name: 'Hołubiec',
+level: 1,
+tasks:
+  - 'Potrafi zatańczyć krok podstawowy i 2 figury w wybranym stylu tańca.',
+  - 'Umie określić rytmikę swojego tańca i rozliczyć rytmicznie znane figury.',
+

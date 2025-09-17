@@ -1,0 +1,8 @@
+id: modelarz
+name: 'Modelarz',
+level: 3,
+tasks:
+  - 'Potrafi złożyć i – jeśli to konieczne pomalować – model pojazdu, budynku lub innego obiektu w przynajmniej 2 technikach.',
+  - 'Umie wykonać dioramę z zachowaniem skali i precyzji adekwatnej do przedstawianego wydarzenia oraz wybranej techniki lub wykonać ruchomy model napędzany mechanicznie lub elektrycznie.',
+  - 'Zdobył sprawność **Technika ze ścieżki „Rzemiosło techniczne”.',
+

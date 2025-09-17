@@ -1,0 +1,9 @@
+id: tropiciel_zwierzyny
+name: 'Tropiciel Zwierzyny',
+level: 2,
+tasks:
+  - 'Umie zaplanować i przeprowadzić udaną obserwację zwierzyny.',
+  - 'Potrafi rozpoznać tropy lub ślady bytowania 10 zwierząt występujących na wolności w polskich lasach.',
+  - 'Umie rozpoznać na podstawie charakterystycznych cech kilka ściśle chronionych gatunków zwierząt.',
+  - 'Potrafi odpowiednio zachowywać się w lesie, aby nie płoszyć zwierząt i nie tworzyć dla nich zagrożenia.',
+

@@ -1,0 +1,8 @@
+id: rekodzielnik
+name: 'Rękodzielnik',
+level: 2,
+tasks:
+  - 'Umie samodzielnie wykonać za pomocą scyzoryka lub innego narzędzia drobny element ozdobny lub użytkowy z drewna lub kory (np. pierścień, list na korze czy pieczęć zastępu).',
+  - 'Potrafi wykonać według własnego projektu ozdobny element aranżacji pokoju, namiotu lub harcówki (np. abażur, skrzynkę lub wieszak na proporce).',
+  - 'Umie sprawnie i estetycznie naprawić lub przerobić przedmiot (np. wymienić guziki w koszuli, naprawić uszkodzoną okładkę książki lub przemalować niewielki mebel).',
+

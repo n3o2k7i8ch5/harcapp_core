@@ -1,0 +1,9 @@
+id: technik
+name: 'Technik',
+level: 2,
+tasks:
+  - 'Umie wykonać praktyczny mebel (np. stołek lub stojak na proporce) lub naprawić uszkodzony przedmiot.',
+  - 'Potrafi posługiwać się narzędziami ręcznymi oraz elektronarzędziami z zachowaniem zasad bezpieczeństwa pracy.',
+  - 'Umie zastosować różne rodzaje połączeń mechanicznych (np. zbijanie, skręcanie i sklejanie).',
+  - 'Potrafi naostrzyć nóż i naoliwić zamek lub kłódkę.',
+

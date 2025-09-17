@@ -1,0 +1,8 @@
+id: lacznosciowiec
+name: 'Łącznościowiec',
+level: 3,
+tasks:
+  - 'Umie zorganizować w terenie sprawną sieć łączności opartą na urządzeniach kablowych lub radiowych: przygotować i rozstawić sprzęt, ustalić zasady korzystania z sieci, przeszkolić operatorów.',
+  - 'Potrafi zorganizować kilkuosobową stację sygnalizacyjną do płynnego nadawania i odbierania wiadomości alfabetem Morse’a: wyznaczyć zadania, podzielić i zorganizować pracę.',
+  - 'Umie złamać prosty szyfr (np. szyfr Cezara).',
+

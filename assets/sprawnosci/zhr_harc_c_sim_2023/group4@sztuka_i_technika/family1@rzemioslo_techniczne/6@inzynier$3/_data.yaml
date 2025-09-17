@@ -1,0 +1,9 @@
+id: inzynier
+name: 'Inżynier',
+level: 3,
+tasks:
+  - 'Umie samodzielnie wykonać maszynę prostą, taką jak kołowrót, przekładnia lub wielokrążek, składającą się z różnych materiałów, używając własnoręcznie wykonanego szkicu technicznego, suwmiarki oraz narzędzi ręcznych.',
+  - 'Potrafi wyjaśnić zasadę działania różnych maszyn prostych.',
+  - 'Umie samodzielnie złożyć urządzenie mechaniczne przydatne w codziennym użytku (np. pompę „abisynkę” lub rower).',
+  - 'Sprawnie korzysta ze wzorów stosowanych w geometrii, potrafi wykreślać różne figury i bryły geometryczne oraz obliczać ich objętość i pole powierzchni.',
+

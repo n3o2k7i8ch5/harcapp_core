@@ -1,0 +1,7 @@
+id: ogrodnik
+name: 'Ogrodnik',
+level: 1,
+tasks:
+  - 'Umie zadbać o roślinę przez kilka tygodni, dbając o jej właściwe usytuowanie oraz odpowiednią porę podlewania i ilość wody.',
+  - 'Potrafi samodzielnie przesadzić sadzonkę.',
+

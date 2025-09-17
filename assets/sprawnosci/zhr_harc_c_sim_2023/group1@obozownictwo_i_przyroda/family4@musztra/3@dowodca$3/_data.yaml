@@ -1,0 +1,9 @@
+id: dowodca
+name: 'Dowódca',
+level: 3,
+tasks:
+  - 'Potrafi poprowadzić apel drużyny zgodnie z regulaminem musztry.',
+  - 'Umie dowodzić drużyną podczas przemarszu, uroczystości lub pokazu musztry.',
+  - 'Potrafi sprawnie zwołać i opanować drużynę w czasie paniki lub zamieszania.',
+  - 'Umie zaplanować i zorganizować udział sztandaru w przemarszu lub uroczystości.',
+

@@ -1,0 +1,9 @@
+id: polarnik
+name: 'Polarnik',
+level: 3,
+tasks:
+  - 'Umie skompletować i spakować ekwipunek odpowiedni do biwakowania w warunkach zimowych.',
+  - 'Potrafi przygotować legowisko, które przy ujemnej temperaturze pozwoli mu spędzić noc w komforcie cieplnym.',
+  - 'W zimie, w warunkach polowych umie przygotować sobie ciepły posiłek.',
+  - 'Potrafi udzielić pierwszej pomocy w przypadku odmrożeń i hipotermii, posiada sprawność **Sanitariusza ze ścieżki „Samarytanka”.',
+

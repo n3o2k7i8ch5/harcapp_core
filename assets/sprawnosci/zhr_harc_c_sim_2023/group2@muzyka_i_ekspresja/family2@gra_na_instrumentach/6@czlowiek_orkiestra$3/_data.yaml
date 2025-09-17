@@ -1,0 +1,10 @@
+id: czlowiek_orkiestra
+name: 'Człowiek Orkiestra',
+level: 3,
+tasks:
+  - 'Umie zaplanować i poprowadzić akompaniament instrumentalny podczas ogniska lub śpiewanek. Potrafi poprowadzić grupę kilku akompaniatorów.',
+  - 'Potrafi dobrać technikę gry do nastroju piosenki.',
+  - 'Umie ze słuchu ułożyć akompaniament do piosenki.',
+  - 'Zna zasady budowy akordów, umie wymyślić jak zagrać na instrumencie dowolny akord.',
+  - 'Zna podstawowe zależności harmoniczne między akordami, potrafi znaleźć tonację równoległą (molową lub durową), a także przetransponować akordy z jednej tonacji do drugiej.',
+

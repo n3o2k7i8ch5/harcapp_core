@@ -1,0 +1,9 @@
+id: wedrowiec_gorski
+name: 'Wędrowiec Górski',
+level: 3,
+tasks:
+  - 'Potrafi zaplanować i przeprowadzić kilkudniową górską wędrówkę.',
+  - 'Zna i stosuje zasady bezpieczeństwa w górach, m.in. zwraca uwagę na pogodę, prowiant, ubiór i samopoczucie zespołu.',
+  - 'Potrafi ocenić trudność szlaku oraz dobrać odpowiednią dla danej grupy trasę. Na podstawie przewyższenia i długości trasy umie oszacować czas marszu (np. przeliczając długość i przewyższenie na punkty GOT). Zna przepisy dotyczące poruszania się po górach powyżej 1000 m n.p.m.',
+  - 'Posiada sprawność **Sanitariusza ze ścieżki „Samarytanka”.',
+

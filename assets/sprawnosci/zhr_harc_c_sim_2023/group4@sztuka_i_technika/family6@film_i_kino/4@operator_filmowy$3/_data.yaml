@@ -1,0 +1,9 @@
+id: operator_filmowy
+name: 'Operator Filmowy',
+level: 3,
+tasks:
+  - 'Potrafi pełnić funkcję operatora (reżysera obrazu) przy realizacji krótkiego filmu fabularnego lub dokumentalnego.',
+  - 'Umie kierować pracą kamery: potrafi ją obsługiwać, zna jej ograniczenia i walory techniczne.',
+  - 'Umiejętnie komponuje kadry, dobiera odpowiednie plany i światła. Potrafi twórczo współpracować z reżyserem filmu.',
+  - 'Posiada sprawność *Migawki ze ścieżki „Fotografia”.',
+

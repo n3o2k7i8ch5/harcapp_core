@@ -1,0 +1,11 @@
+id: plywak
+name: 'Pływak',
+level: 2,
+tasks:
+  - 'Potrafi przepłynąć dystans 200 m w wodzie stojącej, w tym przynajmniej 50 m stylem grzbietowym, lub dystans 400 m z nurtem, w tym przynajmniej 100 m stylem grzbietowym.',
+  - 'Umie przepłynąć pod wodą dystans 5 m w wodzie stojącej lub 15 m z nurtem.',
+  - 'Potrafi bezpiecznie wskoczyć do wody z wysokości 0,7 m.',
+  - 'Umie przepłynąć 20 m w ubraniu.',
+  - 'Potrafi wyłowić z głębokości 2 m przedmiot wielkości menażki.',
+  - 'Umie wyjść z wody na łódkę lub ponton.',
+

@@ -1,0 +1,9 @@
+id: sedzia
+name: 'Sędzia',
+level: 3,
+tasks:
+  - 'Umie sędziować, zachowując bezstronność i nie przeszkadzając w rozgrywce.',
+  - 'Potrafi skoordynować pracę zespołu sędziowskiego (np. sędziów liniowych, pomocników i sekretarza).',
+  - 'Umie ocenić jakość i przygotowanie obiektu (np. sali gimnastycznej, boiska) do przeprowadzenia zawodów.',
+  - 'Posiada sprawność **Rozjemcy ze ścieżki „Komunikacja”.',
+

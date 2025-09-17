@@ -1,0 +1,10 @@
+id: snajper
+name: 'Snajper',
+level: 3,
+tasks:
+  - 'Potrafi rozłożyć i złożyć karabin oraz pistolet i wytłumaczyć ich działanie.',
+  - 'Potrafi samodzielnie bezpiecznie obsługiwać broń palną, w tym zająć stanowisko, załadować, odbezpieczyć i ustawić przyrządy celownicze.',
+  - 'Potrafi naprawić drobne usterki i wyregulować replikę broni lub wiatrówkę (np. wyregulować przyrządy celownicze).',
+  - 'Umie strzelać w postawie leżącej, stojącej i klęczącej.',
+  - 'Potrafi udzielić pierwszej pomocy w przypadku ran postrzałowych, umie korzystać z wojskowej opaski uciskowej (tzw. stazy taktycznej). Posiada sprawność **Sanitariusza ze ścieżki „Samarytanka”.',
+

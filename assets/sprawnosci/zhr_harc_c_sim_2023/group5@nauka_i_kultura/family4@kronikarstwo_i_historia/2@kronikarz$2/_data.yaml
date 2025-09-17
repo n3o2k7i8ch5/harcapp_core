@@ -1,0 +1,9 @@
+id: kronikarz
+name: 'Kronikarz',
+level: 2,
+tasks:
+  - 'Umie opisać wydarzenia, których był świadkiem, dbając nie tylko o fakty, ale także oddając nastrój i towarzyszące im emocje, korzystając z własnych wspomnień, a także konfrontując ze sobą relacje uczestników (np. członków przeciwnych zespołów w relacji z gry terenowej).',
+  - 'Potrafi zaplanować i wykonać cykl kronikarski (np. na stronie lub fanpage’u drużyny) opisujący kilka wydarzeń i łączący się w spójną stylistycznie całość.',
+  - 'Umie zbadać i opisać wydarzenie z przeszłości, posługując się różnymi źródłami informacji (np. wspomnieniami uczestników, zdjęciem, artykułem prasowym lub książką).',
+  - 'Zna i stosuje zasady kompozycji tekstu i fotografii.',
+

@@ -1,0 +1,9 @@
+id: botanik
+name: 'Botanik',
+level: 2,
+tasks:
+  - 'Umie przygotować napar (herbatę) z pospolicie występującej rośliny (np. z liści pokrzywy lub mięty, liści lub pędów malin czy koszyczków rumianku).',
+  - 'Umie rozpoznać i wykorzystać 12 roślin jadalnych. Wie, które części tych roślin są jadalne, a jeżeli wymagają przed spożyciem specjalnej obróbki, to potrafi ją przeprowadzić (dotyczy to np. jarzębiny i liści mniszka lekarskiego).',
+  - 'Potrafi rozpoznać w naturze 5 roślin trujących podobnych do roślin jadalnych i wskazać cechy, które je odróżniają.',
+  - 'Umie odszukać w terenie 6 roślin ściśle chronionych.',
+

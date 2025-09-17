@@ -1,0 +1,9 @@
+id: wloczega
+name: 'Włóczęga',
+level: 2,
+tasks:
+  - 'Potrafi, posługując się mapą, odwiedzić wskazane miejsca i zdobyć informacje na temat ich historii, wartości kulturowych lub przyrodniczych.',
+  - 'Umie poprowadzić zastęp trasą wyznaczoną według mapy lub planu miasta.',
+  - 'Potrafi zaplanować podróż różnymi środkami komunikacji. Umie spośród różnych form podróżowania na zadanej trasie wybrać najszybszy, najtańszy lub najkrótszy wariant.',
+  - 'Potrafi spakować się na kilkudniową wędrówkę.',
+

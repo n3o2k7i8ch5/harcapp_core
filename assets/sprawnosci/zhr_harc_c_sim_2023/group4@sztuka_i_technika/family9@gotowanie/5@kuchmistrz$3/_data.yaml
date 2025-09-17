@@ -1,0 +1,10 @@
+id: kuchmistrz
+name: 'Kuchmistrz',
+level: 3,
+tasks:
+  - 'Umie ugotować 10 różnych dań.',
+  - 'Potrafi zaplanować i przygotować kierując kilkuosobowym zespołem obiad dla 15–20 osób (np. dla drużyny), składający się z dwóch dań. Umie obliczyć ilość potrzebnych produktów tak, aby wszyscy się najedli.',
+  - 'Rozpoznaje i potrafi korzystać z kilkunastu przypraw, wie które są podstawowe dla poszczególnych kuchni regionalnych.',
+  - 'Potrafi przygotować listę zakupów obejmującą wszystkie posiłki w ciągu dnia.',
+  - 'W przygotowywanych posiłkach umie zadbać o odpowiednie proporcje produktów i składników odżywczych.',
+

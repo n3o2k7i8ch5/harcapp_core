@@ -1,0 +1,8 @@
+id: lesny_czlowiek
+name: 'Leśny Człowiek',
+level: 2,
+tasks:
+  - 'Potrafi zbudować szałas pozwalający na przetrwanie deszczowej nocy i spędzić w nim noc.',
+  - 'Umie zamaskować ślady swojego pobytu.',
+  - 'Posiada sprawność *Przyrodnika ze ścieżki „Zielarstwo”.',
+

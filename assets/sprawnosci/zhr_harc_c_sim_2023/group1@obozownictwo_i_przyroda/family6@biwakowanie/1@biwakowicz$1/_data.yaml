@@ -1,0 +1,9 @@
+id: biwakowicz
+name: 'Biwakowicz',
+level: 1,
+tasks:
+  - 'Umie dobrze spakować się na biwak.',
+  - 'Potrafi rozbić namiot turystyczny.',
+  - 'Umie zapewnić sobie komfort cieplny podczas biwakowania, m.in. poprzez odpowiednią izolację od ziemi, wybór śpiwora dopasowanego do temperatury.',
+  - 'Potrafi zbudować kuchnię polową i zagotować na niej wodę.',
+

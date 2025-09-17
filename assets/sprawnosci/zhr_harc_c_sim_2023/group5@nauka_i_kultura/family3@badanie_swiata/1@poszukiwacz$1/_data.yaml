@@ -1,0 +1,7 @@
+id: poszukiwacz
+name: 'Poszukiwacz',
+level: 1,
+tasks:
+  - 'Umie znaleźć prawdopodobną przyczynę ciekawego zjawiska zaobserwowanego w najbliższym otoczeniu (np. popularności piosenek na ogniskach lub tras, którymi koledzy chodzą do szkoły).',
+  - 'Potrafi użyć do sprawdzenia swojej hipotezy narzędzi badawczych (np. cyklicznej obserwacji lub ankiety).',
+

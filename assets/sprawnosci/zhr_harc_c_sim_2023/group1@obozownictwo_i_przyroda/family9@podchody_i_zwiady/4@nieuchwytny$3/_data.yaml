@@ -1,0 +1,9 @@
+id: nieuchwytny
+name: 'Nieuchwytny',
+level: 3,
+tasks:
+  - 'Potrafi w dzień i w nocy trafić do wyznaczonego miejsca na podstawie pobieżnego szkicu lub zapamiętanej trasy, bez użycia narzędzi nawigacyjnych i mapy.',
+  - 'Potrafi skrycie podejść strzeżony teren lub obiekt, a następnie wycofać się niepostrzeżenie, nie pozostawiając po sobie śladów. Umie wykorzystać uzyskane zawczasu informacje do zaplanowania podchodów.',
+  - 'Zauważony przez wartownika potrafi postąpić honorowo.',
+  - 'Posiada sprawność **Wartownika ze ścieżki „Bezpieczeństwo obozowe” i **Terenoznawcy ze ścieżki „Terenoznawstwo”.',
+

@@ -1,0 +1,9 @@
+id: hobbysta
+name: 'Hobbysta',
+level: 2,
+tasks:
+  - 'Umie opisać kilka elementów swojego zbioru za pomocą 3 kryteriów (np. kraj pochodzenia, rok wykonania, miejsce wydania).',
+  - 'Potrafi określić ramy gromadzonej kolekcji oraz wyróżnić i scharakteryzować w niej podzbiory, a także barwnie i szczegółowo opowiedzieć historię związaną z wybranym jej elementem.',
+  - 'Umie zgodnie ze sztuką przechowywać i konserwować swoje zbiory.',
+  - 'Potrafi wskazać źródła, z których można pozyskiwać nowe elementy zbiorów.',
+

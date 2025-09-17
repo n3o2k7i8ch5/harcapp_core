@@ -1,0 +1,9 @@
+id: mlodszy_sternik
+name: 'Młodszy Sternik',
+level: 2,
+tasks:
+  - 'Potrafi sterować na wiatr, na punkt i wg. kompasu, umie ostrzyć i odpadać, a także wykonywać wszelkie komendy na ster podczas manewrów.',
+  - 'Umie pokierować stawianiem, zrzucaniem i klarowaniem żagli.',
+  - 'Potrafi prawidłowo refować żagle, wie do czego służy czynność refowania.',
+  - 'Umie prawidłowo zacumować łódź, wydając właściwe komendy na cumy i szpringi.',
+

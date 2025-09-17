@@ -1,0 +1,8 @@
+id: mistrz_zdobnictwa
+name: 'Mistrz Zdobnictwa',
+level: 3,
+tasks:
+  - 'Umie wykonać totem przedstawiający w rozpoznawalny sposób charakterystyczne zwierzę lub konkretną postać, z wykorzystaniem materiałów znalezionych w terenie.',
+  - 'Umie opracować dokładny projekt plastyczny i na jego podstawie wykonać samodzielnie trwały element zdobniczy (np. proporzec, rzeźbioną buławę, herb, inny element obrzędowy).',
+  - 'Potrafi stosować różne puszczańskie techniki zdobnicze takie jak wyplatanie, rzeźbienie, opalanie.',
+

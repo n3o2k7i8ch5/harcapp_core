@@ -1,0 +1,9 @@
+id: przetwornik
+name: 'Przetwornik',
+level: 3,
+tasks:
+  - 'Umie samodzielnie przygotować smaczne i zdrowe wyżywienie, które nie zepsuje się czasie kilkudniowej wędrówki (np. suszone mięso i owoce, własnoręcznie przygotowane batoniki energetyczne lub weki).',
+  - 'Potrafi przygotować 5 różnych przetworów, w tym słodkie i słone.',
+  - 'Wie, na czym polega pasteryzacja, i umie ją przeprowadzić.',
+  - 'Potrafi przygotować jadłospis na kilkudniowy wyjazd z uwzględnieniem zwiększonego zapotrzebowania kalorycznego grupy.',
+

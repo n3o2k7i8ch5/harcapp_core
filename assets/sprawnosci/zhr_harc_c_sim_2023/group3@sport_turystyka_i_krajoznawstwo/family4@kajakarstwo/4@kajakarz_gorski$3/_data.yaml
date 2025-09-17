@@ -1,0 +1,9 @@
+id: kajakarz_gorski
+name: 'Kajakarz Górski',
+level: 3,
+tasks:
+  - 'Umie spłynąć jednoosobowym kajakiem z fartuchem rzeką z odcinkami górskimi.',
+  - 'Potrafi przygotować się do niebezpiecznego spływu (kask, odpowiedni ubiór, odpowiedni kajak itd.).',
+  - 'Potrafi zrobić eskimoskę i w razie potrzeby wyjść z kajaka z fartuchem w razie wywrotki.',
+  - 'Zna zasady spływania po rzece górskiej, wie jak zachować się w trudnych sytuacjach.',
+

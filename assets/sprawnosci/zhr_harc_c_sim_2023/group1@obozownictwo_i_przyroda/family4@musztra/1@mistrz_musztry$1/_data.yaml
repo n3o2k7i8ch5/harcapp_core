@@ -1,0 +1,8 @@
+id: mistrz_musztry
+name: 'Mistrz musztry',
+level: 1,
+tasks:
+  - 'Umie prawidłowo wykonać wszystkie komendy musztry harcerskiej w czasie zbiórki, apelu i przemarszu.',
+  - 'Potrafi zadbać o wygląd i czystość swojego munduru, a także wytłumaczyć symbolikę jego elementów.',
+  - 'Potrafi stawić się na zbiórkę alarmową w wyznaczonym czasie.',
+

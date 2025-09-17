@@ -1,0 +1,10 @@
+id: grajek
+name: 'Grajek',
+level: 2,
+tasks:
+  - 'Umie akompaniować na gitarze do 5 piosenek.',
+  - 'Potrafi chwytać akordy barowe oraz płynnie przechodzić między akordami.',
+  - 'Umie zaśpiewać do własnego akompaniamentu. Potrafi ocenić czy śpiewany utwór jest w dobrej tonacji dla grupy.',
+  - 'Przy użyciu podanego dźwięku (np. z kamertonu) umie nastroić gitarę ze słuchu.',
+  - 'Potrafi założyć struny w gitarze.',
+

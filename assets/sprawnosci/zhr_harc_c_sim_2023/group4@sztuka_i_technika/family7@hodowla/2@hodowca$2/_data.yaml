@@ -1,0 +1,8 @@
+id: hodowca
+name: 'Hodowca',
+level: 2,
+tasks:
+  - 'Potrafi samodzielnie zaopiekować się zwierzęciem przez kilka tygodni: właściwie odmierzyć, przygotować i podać karmę, dbać o czystość i higienę itd..',
+  - 'Umie wykonać skomplikowaną czynność związaną z regularną opieką nad zwierzęciem (np. przyciąć szpony, wykąpać lub wyczyścić akwarium).',
+  - 'Potrafi opisać, jak tryb życia zwierzęcia (np. pory czuwania i odpoczynku, sposób zdobywania pokarmu i środowisko bytowania) wpływa na opiekę nad nim.',
+

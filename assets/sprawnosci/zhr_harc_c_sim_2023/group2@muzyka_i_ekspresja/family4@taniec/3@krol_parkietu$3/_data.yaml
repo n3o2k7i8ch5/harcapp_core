@@ -1,0 +1,9 @@
+id: krol_parkietu
+name: 'Król Parkietu',
+level: 3,
+tasks:
+  - 'Zna i umie zatańczyć krok podstawowy i 5 figur w 3 różnych stylach tanecznych, towarzyskich lub solowych.',
+  - 'Potrafi nie gubiąc rytmu improwizować i łączyć figury taneczne w spójną całość.',
+  - 'Umie poprowadzić partnerkę w tańcu. Potrafi nauczyć drugą osobę podstawowych kroków tanecznych.',
+  - 'Potrafi dobrać muzykę odpowiednią do kilku wybranych styli tanecznych.',
+

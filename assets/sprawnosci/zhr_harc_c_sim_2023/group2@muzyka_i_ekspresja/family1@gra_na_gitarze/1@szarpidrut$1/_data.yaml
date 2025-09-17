@@ -1,0 +1,8 @@
+id: szarpidrut
+name: 'Szarpidrut',
+level: 1,
+tasks:
+  - 'Potrafi zagrać na gitarze 2 piosenki.',
+  - 'Umie zagrać i nazwać 5 akordów.',
+  - 'Potrafi nastroić gitarę (np. przy pomocy stroika) oraz bezpiecznie ją przechowywać.',
+

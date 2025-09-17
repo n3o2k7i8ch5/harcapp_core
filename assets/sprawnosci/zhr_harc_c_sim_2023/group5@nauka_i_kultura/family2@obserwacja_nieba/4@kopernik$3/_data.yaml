@@ -1,0 +1,9 @@
+id: kopernik
+name: 'Kopernik',
+level: 3,
+tasks:
+  - 'Potrafi używać teleskopu: wie do czego służą jego poszczególne części, jak go przechowywać i przygotować do obserwacji.',
+  - 'Umie przez teleskop obserwować ciała niebieskie (np. bliskie galaktyki, powierzchnię Księżyca, księżyce Jowisza) i zjawiska astronomiczne (np. fazy Wenus). Potrafi pokazać je kolegom.',
+  - 'Umie pokrótce wytłumaczyć wybrane zagadnienie współczesnej astronomii (np. przesunięcie ku czerwieni widma odległych obiektów, soczewkowanie grawitacyjne czy badanie składu chemicznego i ewolucji gwiazd).',
+  - 'Potrafi wyjaśnić zaobserwowany ruch planet po niebie za pomocą teorii heliocentrycznej.',
+

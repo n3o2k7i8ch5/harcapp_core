@@ -1,0 +1,8 @@
+id: pisarz
+name: 'Pisarz',
+level: 2,
+tasks:
+  - 'Umie napisać utwór w wybranej przez siebie formie literackiej na podstawie inspiracji (np. wiersz na podstawie zdjęcia, opowiadanie na podstawie obrazu lub piosenki) albo przerobić lub uzupełnić istniejącą historię (np. napisać alternatywne zakończenie książki, opisać dalsze losy bohatera lub rozwinąć epizod).',
+  - 'Potrafi stosować trójpodział narracji (wstęp, rozwinięcie i zakończenie) w swoich utworach literackich (np. opowiadaniach, felietonach).',
+  - 'Umie przy pomocy słowników sprawdzić tekst pod kątem ortograficznym, gramatycznym, stylistycznym i językowym.',
+

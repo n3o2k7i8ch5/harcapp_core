@@ -1,0 +1,11 @@
+id: zwiadowca
+name: 'Zwiadowca',
+level: 3,
+tasks:
+  - 'Potrafi zdobywać informacje za pomocą różnych technik wywiadowczych, takich jak rozmowa, obserwacja, śledzenie, badanie śladów, analiza map i dokumentów.',
+  - 'Potrafi zorientować się, gdy jest śledzony. Umie zmylić pościg.',
+  - 'Umie zlokalizować obiekt w terenie, kierując się jedynie orientacyjnymi wskazówkami na jego temat (np. potrafi odnaleźć obóz harcerski dysponując jedynie nazwą miejscowości, w której się on znajduje).',
+  - 'Potrafi z pamięci lub na podstawie obserwacji z ukrycia stworzyć szkic strzeżonego terenu lub obiektu (np. obozu).',
+  - 'Potrafi zwięźle i precyzyjnie przekazać zdobyte informacje. Umie to zrobić różnymi sposobami, w tym za pomocą szkicu, zaszyfrowanego meldunku i znaków patrolowych.',
+  - 'Posiada sprawność **Terenoznawcy ze ścieżki „Terenoznawstwo”.',
+

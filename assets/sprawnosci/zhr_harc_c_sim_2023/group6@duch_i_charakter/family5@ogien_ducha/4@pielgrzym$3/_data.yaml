@@ -1,0 +1,10 @@
+id: pielgrzym
+name: 'Pielgrzym',
+level: 3,
+tasks:
+  - 'Umie określić duchową intencję pielgrzymowania, dobierając odpowiednią trasę i cel.',
+  - 'Potrafi opowiedzieć innym pątnikom o znaczeniu religijnym i historii miejsca, będącego celem pielgrzymki.',
+  - 'Umie poprowadzić modlitwę różańcową.',
+  - 'Zna trzy piosenki, które da się wykonać w czasie marszu. Posiada sprawność *Śpiewaka ze ścieżki „Śpiew”.',
+  - 'Posiada sprawność **Włóczęgi ze ścieżki „Krajoznawstwo i wędrowanie” lub **Cyklisty ze ścieżki „Jazda na rowerze”.',
+

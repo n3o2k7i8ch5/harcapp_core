@@ -1,0 +1,8 @@
+id: kreslarz
+name: 'Kreślarz',
+level: 2,
+tasks:
+  - 'Potrafi sporządzić w określonej skali i opisać plan (np. domu, pomieszczenia lub ogrodu).',
+  - 'Umie wykorzystać zasady perspektywy dla odwzorowania rzeczywistości.',
+  - 'Potrafi wykonać model mebla, konstrukcji lub pomieszczenia w odpowiedniej skali i z zachowaniem precyzji adekwatnej do przedmiotu zadania.',
+

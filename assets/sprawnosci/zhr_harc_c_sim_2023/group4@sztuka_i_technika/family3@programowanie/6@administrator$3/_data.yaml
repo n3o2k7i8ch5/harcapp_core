@@ -1,0 +1,10 @@
+id: administrator
+name: 'Administrator',
+level: 3,
+tasks:
+  - 'Potrafi zaprojektować oraz skonfigurować bezpieczną sieć lokalną, przewodową lub bezprzewodową, z dostępem do Internetu.',
+  - 'Umie zainstalować i skonfigurować ogólnodostępny serwer (np. WWW lub wymiany plików), dobierając odpowiedni system operacyjny.',
+  - 'Posługuje się wybranym językiem skryptowym, który pomaga zautomatyzować czynności administracyjne.',
+  - 'Potrafi podzielić dysk twardy na partycje, zainstalować system operacyjny oraz przygotować go do pracy, w tym zainstalować oprogramowanie i skonfigurować połączenie sieciowe.',
+  - 'Umie uruchomić usługę pulpitu zdalnego, a następnie połączyć się z innym komputerem, wykorzystując tę metodę.',
+

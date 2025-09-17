@@ -1,0 +1,10 @@
+id: dowodca_warty
+name: 'Dowódca Warty',
+level: 3,
+tasks:
+  - 'Gdy rozkłada z zastępem obozowisko, potrafi umiejscowić je tak, aby było jak najlepiej zakamuflowane.',
+  - 'Umie ustalić grafik wart. Wie, w których godzinach warta jest najtrudniejsza, i potrafi adekwatnie dobrać wartowników.',
+  - 'Umie przygotować plan obrony obozu, zawierający procedury na wypadek zauważenia w obozie intruzów, zagrożenia pogodowego, podchodów itp., a następnie przeszkolić drużynę i przećwiczyć wykonanie tego planu.',
+  - 'Potrafi przygotować i przeprowadzić próbę alarmów obozowych: ewakuacja, alarm wartowniczy, stan zagrożenia pogodowego.',
+  - 'Umie przygotować obóz na nagłą zmianę warunków atmosferycznych. Posiada sprawność **Meteorologa ze ścieżki „Obserwacja nieba”.',
+
