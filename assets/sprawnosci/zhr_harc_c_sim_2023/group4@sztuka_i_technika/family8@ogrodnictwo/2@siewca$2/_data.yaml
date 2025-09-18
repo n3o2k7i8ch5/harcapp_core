@@ -1,9 +1,9 @@
 id: siewca
-name: 'Siewca',
-level: 2,
+name: 'Siewca'
+level: 2
 tasks:
-  - 'Umie wyhodować 5 gatunków roślin z rozsady lub z nasion.',
-  - 'Potrafi samodzielnie wyhodować dwa szybko rosnące warzywa (np. rzodkiew lub szczaw) i zebrać plon pozwalający na przygotowanie posiłku.',
-  - 'Umie przyciąć wybrany krzew w odpowiedni sposób i w odpowiednim okresie.',
-  - 'Potrafi posługiwać się narzędziami ogrodniczymi, takimi jak sekator, łopata, nożyce.',
+  - 'Umie wyhodować 5 gatunków roślin z rozsady lub z nasion.'
+  - 'Potrafi samodzielnie wyhodować dwa szybko rosnące warzywa (np. rzodkiew lub szczaw) i zebrać plon pozwalający na przygotowanie posiłku.'
+  - 'Umie przyciąć wybrany krzew w odpowiedni sposób i w odpowiednim okresie.'
+  - 'Potrafi posługiwać się narzędziami ogrodniczymi, takimi jak sekator, łopata, nożyce.'
 

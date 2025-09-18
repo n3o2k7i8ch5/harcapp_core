@@ -4,7 +4,7 @@ import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/warsztaty_wychowania_duchowego.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/poradnik/data.dart';
-import 'package:harcapp_core/values/people.dart';
+import 'package:harcapp_core/values/people/data.dart';
 
 const konspekt_kszt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci = 'czynniki_i_mechanizmy_ksztaltowania_duchowosci';
 

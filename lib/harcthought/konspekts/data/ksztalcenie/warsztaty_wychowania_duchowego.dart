@@ -3,7 +3,7 @@ import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common_attachments.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/wstep_do_wychowania_duchowego.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
-import 'package:harcapp_core/values/people.dart';
+import 'package:harcapp_core/values/people/data.dart';
 
 import 'common_wychowanie_duchowe.dart';
 import 'czynniki_i_mechanizmy_ksztaltowania_duchowosci.dart';

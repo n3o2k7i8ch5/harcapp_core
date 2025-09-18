@@ -1,7 +1,7 @@
 id: biblista
-name: 'Biblista',
-level: 1,
+name: 'Biblista'
+level: 1
 tasks:
-  - 'Umie odnaleźć właściwy fragment Pisma Świętego na podstawie skrótów biblijnych (sigla).',
-  - 'Potrafi godnie odczytać fragment Pisma Świętego (np. podczas Mszy Świętej lub obchodów święta w domu).',
+  - 'Umie odnaleźć właściwy fragment Pisma Świętego na podstawie skrótów biblijnych (sigla).'
+  - 'Potrafi godnie odczytać fragment Pisma Świętego (np. podczas Mszy Świętej lub obchodów święta w domu).'
 

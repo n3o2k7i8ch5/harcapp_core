@@ -1,11 +1,11 @@
 id: plywak_doskonaly
-name: 'Pływak Doskonały',
-level: 3,
+name: 'Pływak Doskonały'
+level: 3
 tasks:
-  - 'Potrafi przepłynąć w wodzie dystans 1000 m co najmniej dwoma stylami.',
-  - 'Umie przepłynąć 15 m pod wodą, a także zdjąć w wodzie ubranie: koszulę, spodnie i buty.',
-  - 'Potrafi wyznaczyć i przygotować bezpieczne kąpielisko (np. wyznaczyć granice, oczyścić dno) dla osób w różnym wieku.',
-  - 'Umie pływać z płetwami oraz maską i rurką oraz wyłowić z głębokości 3 m przedmiot wielkości menażki.',
-  - 'Potrafi posługiwać się kołem ratunkowym, rzutką, linką ratowniczą.',
-  - 'Umie udzielić pierwszej pomocy osobie podtopionej, posiada sprawność **Sanitariusza ze ścieżki „Samarytanka”.',
+  - 'Potrafi przepłynąć w wodzie dystans 1000 m co najmniej dwoma stylami.'
+  - 'Umie przepłynąć 15 m pod wodą, a także zdjąć w wodzie ubranie: koszulę, spodnie i buty.'
+  - 'Potrafi wyznaczyć i przygotować bezpieczne kąpielisko (np. wyznaczyć granice, oczyścić dno) dla osób w różnym wieku.'
+  - 'Umie pływać z płetwami oraz maską i rurką oraz wyłowić z głębokości 3 m przedmiot wielkości menażki.'
+  - 'Potrafi posługiwać się kołem ratunkowym, rzutką, linką ratowniczą.'
+  - 'Umie udzielić pierwszej pomocy osobie podtopionej, posiada sprawność **Sanitariusza ze ścieżki „Samarytanka”.'
 

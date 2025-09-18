@@ -1,6 +1,6 @@
 id: opiekun_zwierzat
-name: 'Opiekun Zwierząt',
-level: 1,
+name: 'Opiekun Zwierząt'
+level: 1
 tasks:
-  - 'Umie samodzielnie wykonać czynności związane z codzienną opieką nad zwierzęciem, takie jak karmienie, czesanie, wyprowadzanie na spacer, czyszczenie kuwety.',
+  - 'Umie samodzielnie wykonać czynności związane z codzienną opieką nad zwierzęciem, takie jak karmienie, czesanie, wyprowadzanie na spacer, czyszczenie kuwety.'
 

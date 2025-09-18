@@ -1,9 +1,9 @@
 id: sygnalista
-name: 'Sygnalista',
-level: 2,
+name: 'Sygnalista'
+level: 2
 tasks:
-  - 'Umie nadać i odebrać wiadomość zakodowaną alfabetem Morse’a przy pomocy chorągiewek, sygnałów dźwiękowych oraz świetlnych. Umie wykonać prowizoryczny sygnalizacyjny (np. chorągiewkę lub pochodnię).',
-  - 'Potrafi zakodować i rozkodować wiadomość przy pomocy alfabetu Morse’a.',
-  - 'Umie obsługiwać radiotelefon lub telefon polowy.',
-  - 'Potrafi wymyślić własny szyfr i nauczyć go kolegów.',
+  - 'Umie nadać i odebrać wiadomość zakodowaną alfabetem Morse’a przy pomocy chorągiewek, sygnałów dźwiękowych oraz świetlnych. Umie wykonać prowizoryczny sygnalizacyjny (np. chorągiewkę lub pochodnię).'
+  - 'Potrafi zakodować i rozkodować wiadomość przy pomocy alfabetu Morse’a.'
+  - 'Umie obsługiwać radiotelefon lub telefon polowy.'
+  - 'Potrafi wymyślić własny szyfr i nauczyć go kolegów.'
 

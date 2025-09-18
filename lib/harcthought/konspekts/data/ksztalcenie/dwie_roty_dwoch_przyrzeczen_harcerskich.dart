@@ -1,7 +1,7 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
-import 'package:harcapp_core/values/people.dart';
+import 'package:harcapp_core/values/people/data.dart';
 
 import '../common_attachments.dart';
 import '../harcerskie/dwie_roty_dwoch_przyrzeczen_harcerskich.dart';

@@ -1,7 +1,7 @@
 id: spiewak
-name: 'Śpiewak',
-level: 1,
+name: 'Śpiewak'
+level: 1
 tasks:
-  - 'Potrafi zaśpiewać 5 wybranych piosenek, zna ich teksty na pamięć.',
-  - 'W swoim śpiewie trzyma się rytmu i melodii.',
+  - 'Potrafi zaśpiewać 5 wybranych piosenek, zna ich teksty na pamięć.'
+  - 'W swoim śpiewie trzyma się rytmu i melodii.'
 

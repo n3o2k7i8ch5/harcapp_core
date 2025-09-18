@@ -1,8 +1,8 @@
 id: akompaniator
-name: 'Akompaniator',
-level: 2,
+name: 'Akompaniator'
+level: 2
 tasks:
-  - 'Umie akompaniować do 5 piosenek, stosując różne techniki gry i ozdobniki.',
-  - 'Potrafi zaśpiewać do własnego akompaniamentu i ocenić, czy śpiewany utwór jest w dobrej tonacji dla grupy.',
-  - 'Umie dbać o instrument i go konserwować. Jeśli instrument wymaga częstego strojenia, potrafi to robić.',
+  - 'Umie akompaniować do 5 piosenek, stosując różne techniki gry i ozdobniki.'
+  - 'Potrafi zaśpiewać do własnego akompaniamentu i ocenić, czy śpiewany utwór jest w dobrej tonacji dla grupy.'
+  - 'Umie dbać o instrument i go konserwować. Jeśli instrument wymaga częstego strojenia, potrafi to robić.'
 

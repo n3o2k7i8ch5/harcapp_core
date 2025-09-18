@@ -1,10 +1,10 @@
 id: sternik_manewrowy
-name: 'Sternik Manewrowy',
-level: 3,
+name: 'Sternik Manewrowy'
+level: 3
 tasks:
-  - 'Potrafi wykonać prawidłowo zwrot przez sztag i przez rufę, wydając właściwe komendy załodze.',
-  - 'Umie wykonać prawidłowo podejście oraz odejście od i do nabrzeża (pomostu) na żaglach wydając odpowiednie komendy załodze.',
-  - 'Potrafi pokierować jachtem (wykonać manewr) w trakcie alarmu „człowiek za burtą”.',
-  - 'Umie poprawnie stanąć na kotwicy i z niej zejść.',
-  - 'Potrafi dokonać przeglądu stanu jachtu (takielunek, kadłub, ster) przed i po pływaniu.',
+  - 'Potrafi wykonać prawidłowo zwrot przez sztag i przez rufę, wydając właściwe komendy załodze.'
+  - 'Umie wykonać prawidłowo podejście oraz odejście od i do nabrzeża (pomostu) na żaglach wydając odpowiednie komendy załodze.'
+  - 'Potrafi pokierować jachtem (wykonać manewr) w trakcie alarmu „człowiek za burtą”.'
+  - 'Umie poprawnie stanąć na kotwicy i z niej zejść.'
+  - 'Potrafi dokonać przeglądu stanu jachtu (takielunek, kadłub, ster) przed i po pływaniu.'
 

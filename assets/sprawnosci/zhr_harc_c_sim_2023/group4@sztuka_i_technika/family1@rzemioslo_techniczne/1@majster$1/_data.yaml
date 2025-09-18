@@ -1,7 +1,7 @@
 id: majster
-name: 'Majster',
-level: 1,
+name: 'Majster'
+level: 1
 tasks:
-  - 'Potrafi wykonać element wyposażenia pokoju, mieszkania lub namiotu (np. świecznik, przybornik, pudełko).',
-  - 'Umie zorganizować miejsce do wygodne majsterkowania, dbając o porządek i bezpieczeństwo',
+  - 'Potrafi wykonać element wyposażenia pokoju, mieszkania lub namiotu (np. świecznik, przybornik, pudełko).'
+  - 'Umie zorganizować miejsce do wygodne majsterkowania, dbając o porządek i bezpieczeństwo'
 

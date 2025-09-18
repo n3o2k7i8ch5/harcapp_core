@@ -1,13 +1,13 @@
 id: ratownik
-name: 'Ratownik',
-level: 3,
+name: 'Ratownik'
+level: 3
 tasks:
-  - 'Potrafi pokierować małym zespołem sanitariuszy w czasie akcji ratowniczej.',
-  - 'Umie udzielić pierwszej pomocy w przypadku ran i krwotoków.',
-  - 'Potrafi postępować w przypadku podejrzenia urazu kręgosłupa. Umie unieruchomić kończynę przy pomocy szyny (np. szyny Kramera lub szyny typu Splint).',
-  - 'Potrafi rozpoznać objawy udaru mózgu i zawału serca.',
-  - 'Umie zebrać informacje od osoby poszkodowanej według schematu SAMPLE.',
-  - 'Podczas ćwiczeń potrafi przeprowadzić triaż – segregację medyczną poszkodowanych.',
-  - 'Potrafi poprawnie się zachować w razie wypadku komunikacyjnego (np. samochodowego).',
-  - 'Umie skompletować apteczkę drużyny i określić sposób przechowywania leków.',
+  - 'Potrafi pokierować małym zespołem sanitariuszy w czasie akcji ratowniczej.'
+  - 'Umie udzielić pierwszej pomocy w przypadku ran i krwotoków.'
+  - 'Potrafi postępować w przypadku podejrzenia urazu kręgosłupa. Umie unieruchomić kończynę przy pomocy szyny (np. szyny Kramera lub szyny typu Splint).'
+  - 'Potrafi rozpoznać objawy udaru mózgu i zawału serca.'
+  - 'Umie zebrać informacje od osoby poszkodowanej według schematu SAMPLE.'
+  - 'Podczas ćwiczeń potrafi przeprowadzić triaż – segregację medyczną poszkodowanych.'
+  - 'Potrafi poprawnie się zachować w razie wypadku komunikacyjnego (np. samochodowego).'
+  - 'Umie skompletować apteczkę drużyny i określić sposób przechowywania leków.'
 

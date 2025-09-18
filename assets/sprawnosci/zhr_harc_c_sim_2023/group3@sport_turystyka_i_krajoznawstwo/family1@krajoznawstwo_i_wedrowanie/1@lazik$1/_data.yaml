@@ -1,8 +1,8 @@
 id: lazik
-name: 'Lazik',
-level: 1,
+name: 'Lazik'
+level: 1
 tasks:
-  - 'Umie odpowiednio się ubrać, skompletować ekwipunek i poradzić sobie podczas całodniowej wędrówki.',
-  - 'Potrafi opowiedzieć o poznanych w czasie wędrówki zabytkach lub osobliwościach przyrodniczych.',
-  - 'Na planie miasta lub mapie turystycznej umie wskazać ważne obiekty oznaczone w legendzie i do nich dotrzeć.',
+  - 'Umie odpowiednio się ubrać, skompletować ekwipunek i poradzić sobie podczas całodniowej wędrówki.'
+  - 'Potrafi opowiedzieć o poznanych w czasie wędrówki zabytkach lub osobliwościach przyrodniczych.'
+  - 'Na planie miasta lub mapie turystycznej umie wskazać ważne obiekty oznaczone w legendzie i do nich dotrzeć.'
 

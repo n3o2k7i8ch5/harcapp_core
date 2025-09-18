@@ -1,10 +1,10 @@
 id: webmaster
-name: 'Webmaster',
-level: 3,
+name: 'Webmaster'
+level: 3
 tasks:
-  - 'Potrafi uruchomić witrynę WWW opartą o popularny system zarządzania treścią (np. Wordpress, Joomla, Media Wiki). Umie znaleźć i zainstalować moduły i dodatki, które zwiększą możliwości i atrakcyjność witryny.',
-  - 'Potrafi skonfigurować połączenie HTTPS, wie czym różni się od HTTP.',
-  - 'Umie uruchomić serwer WWW (np. Apache) w swojej sieci lokalnej oraz wywołać go w tej sieci z innego komputera.',
-  - 'Potrafi połączyć się zdalnie z serwerem (np. przez FTP) i umieścić pliki na serwerze.',
-  - 'Umie wdrożyć dowolny mechanizm zwiększający bezpieczeństwo strony WWW (np. filtr antyspamowy, wymuszenie bezpiecznych haseł lub weryfikację importowanych plików).',
+  - 'Potrafi uruchomić witrynę WWW opartą o popularny system zarządzania treścią (np. Wordpress, Joomla, Media Wiki). Umie znaleźć i zainstalować moduły i dodatki, które zwiększą możliwości i atrakcyjność witryny.'
+  - 'Potrafi skonfigurować połączenie HTTPS, wie czym różni się od HTTP.'
+  - 'Umie uruchomić serwer WWW (np. Apache) w swojej sieci lokalnej oraz wywołać go w tej sieci z innego komputera.'
+  - 'Potrafi połączyć się zdalnie z serwerem (np. przez FTP) i umieścić pliki na serwerze.'
+  - 'Umie wdrożyć dowolny mechanizm zwiększający bezpieczeństwo strony WWW (np. filtr antyspamowy, wymuszenie bezpiecznych haseł lub weryfikację importowanych plików).'
 

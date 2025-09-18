@@ -2,7 +2,7 @@ import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/level_examples.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
-import 'package:harcapp_core/values/people.dart';
+import 'package:harcapp_core/values/people/data.dart';
 
 const String konspekt_harc_name_refleksja_nad_aksjomatem_ducha = 'refleksja_nad_aksjomatem_ducha';
 const String konspekt_harc_title_refleksja_nad_aksjomatem_ducha = 'Refleksja nad aksjomatem ducha';

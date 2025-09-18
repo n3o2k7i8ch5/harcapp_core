@@ -1,7 +1,7 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/spiewogranie_z_quizem_interpretacyjnym.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
-import 'package:harcapp_core/values/people.dart';
+import 'package:harcapp_core/values/people/data.dart';
 
 import '../level_examples.dart';
 import 'refleksja_nad_aksjomatem_ducha.dart';

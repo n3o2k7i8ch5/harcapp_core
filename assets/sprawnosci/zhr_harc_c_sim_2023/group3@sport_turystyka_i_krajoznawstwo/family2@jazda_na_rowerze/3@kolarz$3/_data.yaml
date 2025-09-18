@@ -1,9 +1,9 @@
 id: kolarz
-name: 'Kolarz',
-level: 3,
+name: 'Kolarz'
+level: 3
 tasks:
-  - 'Umie przejechać na rowerze 100 km w ciągu jednego dnia.',
-  - 'Potrafi zaplanować kilkudniową wyprawę rowerową, umiejętnie dobierając potrzebny ekwipunek (np. namioty, narzędzia do naprawy rowerów, części zapasowe) i rozdzielając go między uczestników wyprawy.',
-  - 'Umie naprawić rower w trasie podczas wyprawy.',
-  - 'Potrafi udzielić pierwszej pomocy w przypadku urazów typowych dla rowerzystów. Posiada sprawność **Sanitarusza ze ścieżki „Samarytanka”.',
+  - 'Umie przejechać na rowerze 100 km w ciągu jednego dnia.'
+  - 'Potrafi zaplanować kilkudniową wyprawę rowerową, umiejętnie dobierając potrzebny ekwipunek (np. namioty, narzędzia do naprawy rowerów, części zapasowe) i rozdzielając go między uczestników wyprawy.'
+  - 'Umie naprawić rower w trasie podczas wyprawy.'
+  - 'Potrafi udzielić pierwszej pomocy w przypadku urazów typowych dla rowerzystów. Posiada sprawność **Sanitarusza ze ścieżki „Samarytanka”.'
 

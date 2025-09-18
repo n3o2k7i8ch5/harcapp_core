@@ -1,9 +1,9 @@
 id: oblak
-name: 'Oblak',
-level: 2,
+name: 'Oblak'
+level: 2
 tasks:
-  - 'Potrafi przeprowadzić asekurację górną z użyciem samoblokującego się przyrządu asekuracyjnego (np. grigri).',
-  - 'Umie wspinać się z asekuracją dolną, potrafi samodzielnie skompletować sprzęt przed tego rodzaju wspinaczką, m.in. policzyć potrzebne expressy i pętle.',
-  - 'Potrafi porównać trudność dróg wspinaczkowych, sprawdzając w przewodniku ich wycenę według dowolnej skali.',
-  - 'Umie dbać o sprzęt wspinaczkowy i dokonać jego przeglądu pod kątem bezpieczeństwa.',
+  - 'Potrafi przeprowadzić asekurację górną z użyciem samoblokującego się przyrządu asekuracyjnego (np. grigri).'
+  - 'Umie wspinać się z asekuracją dolną, potrafi samodzielnie skompletować sprzęt przed tego rodzaju wspinaczką, m.in. policzyć potrzebne expressy i pętle.'
+  - 'Potrafi porównać trudność dróg wspinaczkowych, sprawdzając w przewodniku ich wycenę według dowolnej skali.'
+  - 'Umie dbać o sprzęt wspinaczkowy i dokonać jego przeglądu pod kątem bezpieczeństwa.'
 

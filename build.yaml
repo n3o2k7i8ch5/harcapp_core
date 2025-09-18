@@ -12,4 +12,4 @@ targets:
     builders:
       harcapp_core|personBuilder:
         generate_for:
-          - lib/values/people.dart
+          - lib/values/people/data.dart

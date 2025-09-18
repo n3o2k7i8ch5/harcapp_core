@@ -1,8 +1,8 @@
 id: mechanik
-name: 'Mechanik',
-level: 3,
+name: 'Mechanik'
+level: 3
 tasks:
-  - 'Potrafi złożyć urządzenie spalinowe (np. pompę lub piłę spalinową), wymienić uszkodzoną część, wykonać podstawowy serwis (np. naostrzyć łańcuch, przygotować odpowiednią mieszankę).',
-  - 'Potrafi samodzielnie dokonać podstawowych czynności obsługowych pojazdu: sprawdzić i uzupełnić płyny eksploatacyjne, wymienić koło, zmienić przepaloną żarówkę, wymienić dowolny filtr.',
-  - 'Zna zasady działania i umie wytłumaczyć różnice w pracy skrzyni biegów manualnej i automatycznej, silnika o zapłonie samoczynnym i zapłonie iskrowym oraz silnika dwusuwowego i czterosuwowego.',
+  - 'Potrafi złożyć urządzenie spalinowe (np. pompę lub piłę spalinową), wymienić uszkodzoną część, wykonać podstawowy serwis (np. naostrzyć łańcuch, przygotować odpowiednią mieszankę).'
+  - 'Potrafi samodzielnie dokonać podstawowych czynności obsługowych pojazdu: sprawdzić i uzupełnić płyny eksploatacyjne, wymienić koło, zmienić przepaloną żarówkę, wymienić dowolny filtr.'
+  - 'Zna zasady działania i umie wytłumaczyć różnice w pracy skrzyni biegów manualnej i automatycznej, silnika o zapłonie samoczynnym i zapłonie iskrowym oraz silnika dwusuwowego i czterosuwowego.'
 

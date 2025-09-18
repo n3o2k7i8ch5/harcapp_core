@@ -1,7 +1,7 @@
 id: harcownik
-name: 'Harcownik',
-level: 1,
+name: 'Harcownik'
+level: 1
 tasks:
-  - 'Umie wytłumaczyć zasady i uczestniczyć w 6 różnych grach (np. terenowych, słownych, planszowych lub logicznych).',
-  - 'We wszelkich grach potrafi postępować honorowo.',
+  - 'Umie wytłumaczyć zasady i uczestniczyć w 6 różnych grach (np. terenowych, słownych, planszowych lub logicznych).'
+  - 'We wszelkich grach potrafi postępować honorowo.'
 

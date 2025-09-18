@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format width=80
+// GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
 // PersonFieldGenerator
@@ -7,7 +7,8 @@
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-import 'package:harcapp_core/values/people.dart';
+import 'package:harcapp_core/values/people/data.dart';
+import 'package:harcapp_core/values/people/person.dart';
 
 const List<Person> allPeople = [
   ABRAHAM_PRAGER,

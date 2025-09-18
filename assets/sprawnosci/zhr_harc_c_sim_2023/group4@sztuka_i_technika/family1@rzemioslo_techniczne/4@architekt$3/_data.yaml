@@ -1,10 +1,10 @@
 id: architekt
-name: 'Architekt',
-level: 3,
+name: 'Architekt'
+level: 3
 tasks:
-  - 'Umie wykonać projekt urządzenia pomieszczenia lub zagospodarowania terenu, w sposób pozwalający na realizację prac kilkuosobowemu zespołowi, z wykorzystaniem rzutowania, rysunków przekrojowych, wymiarowania i opisów.',
-  - 'Potrafi precyzyjnie oszacować ilość potrzebnych materiałów do kompletnego wykonania opracowanego projektu.',
-  - 'Umie wymodelować swój projekt w prostym programie do modelowania 3D (np. SketchUp).',
-  - 'Zna kilka współczesnych obiektów architektonicznych i potrafi o nich opowiedzieć (np. podać autora, wymienić cechy charakterystyczne).',
-  - 'Zna główne style architektoniczne, umie opisać ich cechy i je rozpoznawać.',
+  - 'Umie wykonać projekt urządzenia pomieszczenia lub zagospodarowania terenu, w sposób pozwalający na realizację prac kilkuosobowemu zespołowi, z wykorzystaniem rzutowania, rysunków przekrojowych, wymiarowania i opisów.'
+  - 'Potrafi precyzyjnie oszacować ilość potrzebnych materiałów do kompletnego wykonania opracowanego projektu.'
+  - 'Umie wymodelować swój projekt w prostym programie do modelowania 3D (np. SketchUp).'
+  - 'Zna kilka współczesnych obiektów architektonicznych i potrafi o nich opowiedzieć (np. podać autora, wymienić cechy charakterystyczne).'
+  - 'Zna główne style architektoniczne, umie opisać ich cechy i je rozpoznawać.'
 

@@ -1,7 +1,7 @@
 id: obserwator_nieba
-name: 'Obserwator nieba',
-level: 1,
+name: 'Obserwator nieba'
+level: 1
 tasks:
-  - 'Umie odnaleźć na niebie Gwiazdę Polarną, a także rozpoznać 3 gwiazdozbiory.',
-  - 'Potrafi rozpoznać chmury z rodzaju Cumulus.',
+  - 'Umie odnaleźć na niebie Gwiazdę Polarną, a także rozpoznać 3 gwiazdozbiory.'
+  - 'Potrafi rozpoznać chmury z rodzaju Cumulus.'
 

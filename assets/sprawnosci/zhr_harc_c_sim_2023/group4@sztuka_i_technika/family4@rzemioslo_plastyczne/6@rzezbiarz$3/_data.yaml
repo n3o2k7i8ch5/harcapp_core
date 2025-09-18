@@ -1,9 +1,9 @@
 id: rzezbiarz
-name: 'Rzeźbiarz',
-level: 3,
+name: 'Rzeźbiarz'
+level: 3
 tasks:
-  - 'Potrafi samodzielnie wykonać model obiektu z natury z odwzorowaniem jego charakterystycznych cech i proporcji, wykorzystując do tego materiały takie jak glina, gips, masa plastyczna lub drewno.',
-  - 'Umie posługiwać się narzędziami rzeźbiarskimi do drewna, takimi jak dłuto, rylec, tarnik. Zna przynajmniej 3 rodzaje drewna przydatne w rzeźbie i potrafi je scharakteryzować.',
-  - 'Umie zaprojektować i wykonać w technice rzeźby lub linorytu ilustrację (np. na podstawie cytatu z książki lub opisu wydarzenia).',
-  - 'Zna twórczość wybranych rzeźbiarzy, potrafi opowiedzieć o głównych tematach rzeźbiarskich od antyku po czasy współczesne, umie rozpoznać charakterystyczne cechy rzeźby z różnych epok.',
+  - 'Potrafi samodzielnie wykonać model obiektu z natury z odwzorowaniem jego charakterystycznych cech i proporcji, wykorzystując do tego materiały takie jak glina, gips, masa plastyczna lub drewno.'
+  - 'Umie posługiwać się narzędziami rzeźbiarskimi do drewna, takimi jak dłuto, rylec, tarnik. Zna przynajmniej 3 rodzaje drewna przydatne w rzeźbie i potrafi je scharakteryzować.'
+  - 'Umie zaprojektować i wykonać w technice rzeźby lub linorytu ilustrację (np. na podstawie cytatu z książki lub opisu wydarzenia).'
+  - 'Zna twórczość wybranych rzeźbiarzy, potrafi opowiedzieć o głównych tematach rzeźbiarskich od antyku po czasy współczesne, umie rozpoznać charakterystyczne cechy rzeźby z różnych epok.'
 

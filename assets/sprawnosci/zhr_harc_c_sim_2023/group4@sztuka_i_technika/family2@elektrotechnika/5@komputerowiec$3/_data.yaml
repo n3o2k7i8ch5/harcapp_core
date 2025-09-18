@@ -1,9 +1,9 @@
 id: komputerowiec
-name: 'Komputerowiec',
-level: 3,
+name: 'Komputerowiec'
+level: 3
 tasks:
-  - 'Umie złożyć komputer z podzespołów i zainstalować w nim system operacyjny.',
-  - 'Potrafi zlokalizować i wymienić uszkodzony element komputera, laptopa lub tabletu (np. baterię, płytę główną, procesor lub dysk twardy) oraz dokonać jego rozbudowy (np. zwiększenia pamięci RAM lub zainstalowania karty graficznej).',
-  - 'Umie lutować elementy SMD za pomocą gorącego powietrza.',
-  - 'Potrafi wyjaśnić, jakie funkcje spełniają poszczególne podzespoły komputera i w jaki sposób działają.',
+  - 'Umie złożyć komputer z podzespołów i zainstalować w nim system operacyjny.'
+  - 'Potrafi zlokalizować i wymienić uszkodzony element komputera, laptopa lub tabletu (np. baterię, płytę główną, procesor lub dysk twardy) oraz dokonać jego rozbudowy (np. zwiększenia pamięci RAM lub zainstalowania karty graficznej).'
+  - 'Umie lutować elementy SMD za pomocą gorącego powietrza.'
+  - 'Potrafi wyjaśnić, jakie funkcje spełniają poszczególne podzespoły komputera i w jaki sposób działają.'
 

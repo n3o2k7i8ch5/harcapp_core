@@ -1,9 +1,9 @@
 id: badacz
-name: 'Badacz',
-level: 2,
+name: 'Badacz'
+level: 2
 tasks:
-  - 'Umie określić cel w planowanym badaniu (np. ocena zadowolenia harcerzy z posiłków na ostatnim obozie lub atrakcyjności zajęć pozalekcyjnych dostępnych w szkole).',
-  - 'Potrafi zrealizować badanie odpowiadające na postawiony cel za pomocą przygotowanych przez siebie narzędzi badawczych (np. ankiety, eksperymentu lub serii wywiadów osobistych).',
-  - 'Potrafi wyciągnąć wnioski z przeprowadzonych badań.',
-  - 'W swojej pracy badawczej potrafi zachować obiektywizm (np. nie sugeruje odpowiedzi na zadawane przez siebie pytania).',
+  - 'Umie określić cel w planowanym badaniu (np. ocena zadowolenia harcerzy z posiłków na ostatnim obozie lub atrakcyjności zajęć pozalekcyjnych dostępnych w szkole).'
+  - 'Potrafi zrealizować badanie odpowiadające na postawiony cel za pomocą przygotowanych przez siebie narzędzi badawczych (np. ankiety, eksperymentu lub serii wywiadów osobistych).'
+  - 'Potrafi wyciągnąć wnioski z przeprowadzonych badań.'
+  - 'W swojej pracy badawczej potrafi zachować obiektywizm (np. nie sugeruje odpowiedzi na zadawane przez siebie pytania).'
 

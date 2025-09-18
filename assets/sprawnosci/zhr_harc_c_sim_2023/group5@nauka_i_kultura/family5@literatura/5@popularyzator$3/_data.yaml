@@ -1,10 +1,10 @@
 id: popularyzator
-name: 'Popularyzator',
-level: 3,
+name: 'Popularyzator'
+level: 3
 tasks:
-  - 'Potrafi napisać porywający a jednocześnie rzetelny artykuł popularnonaukowy na temat, który go interesuje.',
-  - 'Umie zweryfikować prawdziwość informacji z dziedziny, którą się interesuje, a także ocenić i potwierdzić wiarygodność źródeł, z których korzysta.',
-  - 'Potrafi przygotować swój artykuł do publikacji (np. w gazetce szkolnej): opatrzyć przypisami, podać bibliografię, sprawdzić terminologię.',
-  - 'Umie wskazać cenione przez siebie wydawnictwa lub portale popularyzatorskie i uargumentować, dlaczego uważa je za wartościowe.',
-  - 'Posiada sprawność ** w dziedzinie, którą popularyzuje.',
+  - 'Potrafi napisać porywający a jednocześnie rzetelny artykuł popularnonaukowy na temat, który go interesuje.'
+  - 'Umie zweryfikować prawdziwość informacji z dziedziny, którą się interesuje, a także ocenić i potwierdzić wiarygodność źródeł, z których korzysta.'
+  - 'Potrafi przygotować swój artykuł do publikacji (np. w gazetce szkolnej): opatrzyć przypisami, podać bibliografię, sprawdzić terminologię.'
+  - 'Umie wskazać cenione przez siebie wydawnictwa lub portale popularyzatorskie i uargumentować, dlaczego uważa je za wartościowe.'
+  - 'Posiada sprawność ** w dziedzinie, którą popularyzuje.'
 

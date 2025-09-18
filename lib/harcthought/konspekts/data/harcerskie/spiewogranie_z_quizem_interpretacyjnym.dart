@@ -1,6 +1,6 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
-import 'package:harcapp_core/values/people.dart';
+import 'package:harcapp_core/values/people/data.dart';
 
 const String konspekt_harc_name_spiewogranie_z_quizem_interpretacyjnym = 'spiewogranie_z_quizem_interpretacyjnym';
 const String konspekt_harc_title_spiewogranie_z_quizem_interpretacyjnym = 'Śpiewogranie z quizem interpretacyjnym';

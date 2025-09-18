@@ -1,8 +1,8 @@
 id: tancerz
-name: 'Tancerz',
-level: 2,
+name: 'Tancerz'
+level: 2
 tasks:
-  - 'Potrafi zatańczyć krok podstawowy i 6 figur w wybranym stylu tańca towarzyskiego.',
-  - 'Umie zatańczyć do piosenki i utrzymać rytm przez cały czas jej trwania.',
-  - 'Potrafi poprosić dziewczynę do tańca.',
+  - 'Potrafi zatańczyć krok podstawowy i 6 figur w wybranym stylu tańca towarzyskiego.'
+  - 'Umie zatańczyć do piosenki i utrzymać rytm przez cały czas jej trwania.'
+  - 'Potrafi poprosić dziewczynę do tańca.'
 

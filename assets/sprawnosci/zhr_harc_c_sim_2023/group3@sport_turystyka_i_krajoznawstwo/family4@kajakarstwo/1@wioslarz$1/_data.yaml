@@ -1,9 +1,9 @@
 id: wioslarz
-name: 'Wodniak',
-level: 1,
+name: 'Wodniak'
+level: 1
 tasks:
-  - 'Umie przepłynąć na pontonie, łodzi itp. rzekę albo małe jezioro.',
-  - 'Potrafi prawidłowo przywiązać ponton lub łódź do drzewa.',
-  - 'Potrafi w ubraniu i kamizelce asekuracyjnej pokonać w wodzie dystans 50 m.',
-  - 'Przestrzega zasad bezpieczeństwa na wodzie.',
+  - 'Umie przepłynąć na pontonie, łodzi itp. rzekę albo małe jezioro.'
+  - 'Potrafi prawidłowo przywiązać ponton lub łódź do drzewa.'
+  - 'Potrafi w ubraniu i kamizelce asekuracyjnej pokonać w wodzie dystans 50 m.'
+  - 'Przestrzega zasad bezpieczeństwa na wodzie.'
 

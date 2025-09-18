@@ -1,9 +1,9 @@
 id: moderator
-name: 'Moderator',
-level: 3,
+name: 'Moderator'
+level: 3
 tasks:
-  - 'Potrafi przygotować scenariusz i materiały pomocnicze (np. dane statystyczne związane z tematem) a następnie przeprowadzić dyskusję moderowaną w gronie co najmniej 4 osób. Umie określić zasady spotkania (np. kolejność oraz czas wypowiedzi) i pilnować ich w czasie dyskusji.',
-  - 'Potrafi napisać sprawozdanie lub artykuł z przeprowadzonej dyskusji, uwzględniając w nim różne pojawiające się w niej punkty widzenia, problemy lub pomysły i zaplanowane rozwiązania.',
-  - 'Umie zadawać pytania otwarte, które mogą pomóc uczestnikom dyskusji w opisaniu ich pomysłów.',
-  - 'Posiada sprawność **Rozjemcy ze ścieżki „Komunikacja”.',
+  - 'Potrafi przygotować scenariusz i materiały pomocnicze (np. dane statystyczne związane z tematem) a następnie przeprowadzić dyskusję moderowaną w gronie co najmniej 4 osób. Umie określić zasady spotkania (np. kolejność oraz czas wypowiedzi) i pilnować ich w czasie dyskusji.'
+  - 'Potrafi napisać sprawozdanie lub artykuł z przeprowadzonej dyskusji, uwzględniając w nim różne pojawiające się w niej punkty widzenia, problemy lub pomysły i zaplanowane rozwiązania.'
+  - 'Umie zadawać pytania otwarte, które mogą pomóc uczestnikom dyskusji w opisaniu ich pomysłów.'
+  - 'Posiada sprawność **Rozjemcy ze ścieżki „Komunikacja”.'
 

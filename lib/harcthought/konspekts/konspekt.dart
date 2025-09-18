@@ -10,7 +10,7 @@ import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/open_image_dialog.dart';
 import 'package:harcapp_core/comm_widgets/open_svg_image_dialog.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
-import 'package:harcapp_core/values/people.dart';
+import 'package:harcapp_core/values/people/person.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart' as pdf;

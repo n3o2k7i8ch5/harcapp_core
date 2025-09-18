@@ -1,9 +1,9 @@
 id: elektronik
-name: 'Elektronik',
-level: 2,
+name: 'Elektronik'
+level: 2
 tasks:
-  - 'Umie zbudować na płytce prototypowej prosty układ elektroniczny i wyjaśnić jego działanie.',
-  - 'Potrafi rozpoznać podstawowe elementy elektroniczne, takie jak diody, oporniki i kondensatory. Umie określić polaryzację diod i kondensatorów elektrolitycznych.',
-  - 'Potrafi w bezpieczny sposób posługiwać się lutownicą.',
-  - 'Umie dokonać naprawy bądź modyfikacji urządzenia zasilanego bateryjnie (np. zabawki, alarmu lub budzika).',
+  - 'Umie zbudować na płytce prototypowej prosty układ elektroniczny i wyjaśnić jego działanie.'
+  - 'Potrafi rozpoznać podstawowe elementy elektroniczne, takie jak diody, oporniki i kondensatory. Umie określić polaryzację diod i kondensatorów elektrolitycznych.'
+  - 'Potrafi w bezpieczny sposób posługiwać się lutownicą.'
+  - 'Umie dokonać naprawy bądź modyfikacji urządzenia zasilanego bateryjnie (np. zabawki, alarmu lub budzika).'
 

@@ -3,4 +3,4 @@ pre-commit:
     build_runner:
       run: dart run build_runner build --delete-conflicting-outputs && git diff --exit-code
       stage_fixed: true
-      glob: "lib/values/people.dart"
+      glob: "lib/values/data.dart"

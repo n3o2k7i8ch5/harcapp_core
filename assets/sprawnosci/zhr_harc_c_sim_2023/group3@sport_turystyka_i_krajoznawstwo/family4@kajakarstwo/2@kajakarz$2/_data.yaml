@@ -1,11 +1,11 @@
 id: kajakarz
-name: 'Kajakarz',
-level: 2,
+name: 'Kajakarz'
+level: 2
 tasks:
-  - 'Umie przygotować się i poradzić sobie w czasie kilkudniowego spływu kajakowego, w tym zabezpieczyć bagaż przed przemoczeniem.',
-  - 'Potrafi pokonać przeszkody na rzece takie jak zwalone drzewa, płycizny, mosty, bystry nurt.',
-  - 'Umie wejść do kajaka z wody, nie wywracając go.',
-  - 'Potrafi poradzić sobie w razie wywrotki i wypadnięcia z kajaka.',
-  - 'Umie zacumować kajak we wskazanym miejscu, zadbać o sprzęt i go zabezpieczyć (np. wylać wodę z kajaka i go osuszyć).',
-  - 'Posiada sprawność *Kijanki ze ścieżki „Pływanie”.',
+  - 'Umie przygotować się i poradzić sobie w czasie kilkudniowego spływu kajakowego, w tym zabezpieczyć bagaż przed przemoczeniem.'
+  - 'Potrafi pokonać przeszkody na rzece takie jak zwalone drzewa, płycizny, mosty, bystry nurt.'
+  - 'Umie wejść do kajaka z wody, nie wywracając go.'
+  - 'Potrafi poradzić sobie w razie wywrotki i wypadnięcia z kajaka.'
+  - 'Umie zacumować kajak we wskazanym miejscu, zadbać o sprzęt i go zabezpieczyć (np. wylać wodę z kajaka i go osuszyć).'
+  - 'Posiada sprawność *Kijanki ze ścieżki „Pływanie”.'
 

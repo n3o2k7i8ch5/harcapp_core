@@ -1,7 +1,7 @@
 id: glaz
-name: 'Głaz',
-level: 2,
+name: 'Głaz'
+level: 2
 tasks:
-  - 'Umie na określony czas (np. miesiąc) zrezygnować z konkretnej przyjemności, żeby zrealizować postawiony sobie cel.',
-  - 'Potrafi zaplanować i przeprowadzić działanie, które zajmuje czas kilkunastu dni lub kilku tygodni (np. konieczna jest systematyczna codzienna praca przez 2 lub 3 tygodnie).',
+  - 'Umie na określony czas (np. miesiąc) zrezygnować z konkretnej przyjemności, żeby zrealizować postawiony sobie cel.'
+  - 'Potrafi zaplanować i przeprowadzić działanie, które zajmuje czas kilkunastu dni lub kilku tygodni (np. konieczna jest systematyczna codzienna praca przez 2 lub 3 tygodnie).'
 

@@ -1,8 +1,8 @@
 id: newton
-name: 'Newton',
-level: 3,
+name: 'Newton'
+level: 3
 tasks:
-  - 'Potrafi samodzielnie zaplanować i przeprowadzić eksperyment, żeby potwierdzić jedno z praw fizycznych (np. prawo Ohma lub drugą zasadę dynamiki) albo zmierzyć wartość jakiejś stałej fizycznej (np. prędkości dźwięku lub przyspieszenia ziemskiego).',
-  - 'Umie przeanalizować wyniki doświadczenia oraz wytłumaczyć ewentualną niezgodność wyników z teorią.',
-  - 'Potrafi ocenić niepewność wykonywanych pomiarów.',
+  - 'Potrafi samodzielnie zaplanować i przeprowadzić eksperyment, żeby potwierdzić jedno z praw fizycznych (np. prawo Ohma lub drugą zasadę dynamiki) albo zmierzyć wartość jakiejś stałej fizycznej (np. prędkości dźwięku lub przyspieszenia ziemskiego).'
+  - 'Umie przeanalizować wyniki doświadczenia oraz wytłumaczyć ewentualną niezgodność wyników z teorią.'
+  - 'Potrafi ocenić niepewność wykonywanych pomiarów.'
 

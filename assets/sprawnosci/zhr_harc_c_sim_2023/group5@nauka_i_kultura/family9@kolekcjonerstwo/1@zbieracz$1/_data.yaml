@@ -1,7 +1,7 @@
 id: zbieracz
-name: 'Zbieracz',
-level: 1,
+name: 'Zbieracz'
+level: 1
 tasks:
-  - 'Umie zebrać kolekcję tematyczną i wyjaśnić, co łączy poszczególne przedmioty w kolekcji.',
-  - 'Potrafi zaprezentować kolegom swoją kolekcję.',
+  - 'Umie zebrać kolekcję tematyczną i wyjaśnić, co łączy poszczególne przedmioty w kolekcji.'
+  - 'Potrafi zaprezentować kolegom swoją kolekcję.'
 

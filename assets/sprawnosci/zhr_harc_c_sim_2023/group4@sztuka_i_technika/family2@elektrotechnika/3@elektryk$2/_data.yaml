@@ -1,9 +1,9 @@
 id: elektryk
-name: 'Elektryk',
-level: 2,
+name: 'Elektryk'
+level: 2
 tasks:
-  - 'Umie bezpiecznie wykonać pracę przy domowej lub polowej instalacji elektrycznej (np. zamontować wtyczkę, podłączyć akumulator do ładowania, podłączyć baterie słoneczne).',
-  - 'Potrafi narysować schemat zadanego obwodu elektrycznego (np. obozowej instalacji elektrycznej). Umie na podstawie schematu zestawić działający obwód.',
-  - 'Potrafi za pomocą multimetru dokonać pomiaru podstawowych wielkości elektrycznych: napięcia, natężenia prądu, oporu elektrycznego.',
-  - 'Zna i stosuje zasady bezpiecznej pracy z urządzeniami elektrycznymi i wie jak się zachować w przypadku porażenia prądem.',
+  - 'Umie bezpiecznie wykonać pracę przy domowej lub polowej instalacji elektrycznej (np. zamontować wtyczkę, podłączyć akumulator do ładowania, podłączyć baterie słoneczne).'
+  - 'Potrafi narysować schemat zadanego obwodu elektrycznego (np. obozowej instalacji elektrycznej). Umie na podstawie schematu zestawić działający obwód.'
+  - 'Potrafi za pomocą multimetru dokonać pomiaru podstawowych wielkości elektrycznych: napięcia, natężenia prądu, oporu elektrycznego.'
+  - 'Zna i stosuje zasady bezpiecznej pracy z urządzeniami elektrycznymi i wie jak się zachować w przypadku porażenia prądem.'
 

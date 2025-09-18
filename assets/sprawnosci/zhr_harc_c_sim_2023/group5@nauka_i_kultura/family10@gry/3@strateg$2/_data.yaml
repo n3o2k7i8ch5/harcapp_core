@@ -1,8 +1,8 @@
 id: strateg
-name: 'Strateg',
-level: 2,
+name: 'Strateg'
+level: 2
 tasks:
-  - 'Umie grać w przynajmniej jedną grę wymagającą logicznego myślenia (np. szachy, brydż lub go). Potrafi wytłumaczyć jej zasady i nauczyć podstaw gry nowicjusza.',
-  - 'Umie stosować typowe zagrania taktyczne w wybranej grze logiczno-strategicznej (np. impas brydżowy, pułapki szachowe, groźba ko w go).',
-  - 'Potrafi zastosować przemyślaną strategię w grze terenowej, planszowej, karcianej lub komputerowej. Umie wyjaśnić na czym polegała, jakie miała zalety i jakie wady, jak wysokie było ryzyko z nią związane.',
+  - 'Umie grać w przynajmniej jedną grę wymagającą logicznego myślenia (np. szachy, brydż lub go). Potrafi wytłumaczyć jej zasady i nauczyć podstaw gry nowicjusza.'
+  - 'Umie stosować typowe zagrania taktyczne w wybranej grze logiczno-strategicznej (np. impas brydżowy, pułapki szachowe, groźba ko w go).'
+  - 'Potrafi zastosować przemyślaną strategię w grze terenowej, planszowej, karcianej lub komputerowej. Umie wyjaśnić na czym polegała, jakie miała zalety i jakie wady, jak wysokie było ryzyko z nią związane.'
 

@@ -2,7 +2,7 @@ import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/level_examples.dart';
-import 'package:harcapp_core/values/people.dart';
+import 'package:harcapp_core/values/people/person.dart';
 
 import '../../konspekt.dart';
 
@@ -268,7 +268,7 @@ Konspekt druzynowe_przekazanie_bsp = Konspekt(
 
         '<h1>Odznaka BŚP</h1>'
         '<p style="text-align:justify;">'
-        'Motywacją dla harcerzy dla przygotowań do BŚP może być przygotowana przez ZHP propozycja Odznaki BŚP, której szczegóły dostępne są w załączniku ${attach_html_odznaka_bsp}.'
+        'Motywacją dla harcerzy dla przygotowań do BŚP może być przygotowana przez ZHP propozycja Odznaki BŚP. Szczegóły dotyczące zasad i wymagań dostępne są w załączniku ${attach_html_odznaka_bsp}.'
         '</p>'
 
         '<h1>Przykładowe pomysły (miejsca i inicjatywy) na służbę w Warszawie</h1>'

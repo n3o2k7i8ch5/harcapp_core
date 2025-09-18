@@ -1,9 +1,9 @@
 id: sprinter
-name: 'Sprinter',
-level: 2,
+name: 'Sprinter'
+level: 2
 tasks:
-  - 'Umie przebiec dystans 100 m w czasie poniżej 16 s.',
-  - 'Umie przebiec bez przerwy dystans 2 km.',
-  - 'Potrafi wystartować do biegu ze startu niskiego i wysokiego.',
-  - 'Umie wykonać 5 ćwiczeń przydatnych w treningu siłowym dla biegacza.',
+  - 'Umie przebiec dystans 100 m w czasie poniżej 16 s.'
+  - 'Umie przebiec bez przerwy dystans 2 km.'
+  - 'Potrafi wystartować do biegu ze startu niskiego i wysokiego.'
+  - 'Umie wykonać 5 ćwiczeń przydatnych w treningu siłowym dla biegacza.'
 

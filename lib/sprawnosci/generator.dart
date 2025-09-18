@@ -4,10 +4,12 @@ import 'package:harcapp_core/sprawnosci/models.dart';
 import 'package:isar_community/isar.dart';
 
 Future<void> main(List<String> args) async {
+  await Isar.initializeIsarCore(download: true);
+
   // dart run lib/sprawnosci/generator.dart [versionDir] [isarDir]
   final projectRoot = Directory.current.path;
-  final versionDirPath = args[0];
-  final isarDirPath = args[1];
+  final versionDirPath = 'assets/sprawnosci/zhr_harc_c_sim_2023'; // args[0];
+  final isarDirPath = 'assets/sprawnosci/sprawnosci.isar'; // args[1];
 
   final versionDir = Directory(versionDirPath);
   if (!versionDir.existsSync()) {

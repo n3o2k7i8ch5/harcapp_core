@@ -8,7 +8,7 @@ import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/spiewogranie_z_quizem_interpretacyjnym.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/zycie_i_swiat_prl.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/level_examples.dart';
-import 'package:harcapp_core/values/people.dart';
+import 'package:harcapp_core/values/people/data.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../konspekt.dart';

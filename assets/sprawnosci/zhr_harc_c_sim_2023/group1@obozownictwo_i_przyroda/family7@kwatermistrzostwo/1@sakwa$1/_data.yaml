@@ -1,8 +1,8 @@
 id: sakwa
-name: 'Sakwa',
-level: 1,
+name: 'Sakwa'
+level: 1
 tasks:
-  - 'Umie odłożyć pieniądze na zaplanowany wydatek. Potrafi oszacować, ile czasu będzie mu potrzebne na zebranie określonej kwoty.',
-  - 'Umie bezpiecznie przechowywać pieniądze.',
-  - 'Potrafi zadbać o powierzony sprzęt biwakowy i pionierski, tj. właściwie go przechowywać, transportować i kompletować.',
+  - 'Umie odłożyć pieniądze na zaplanowany wydatek. Potrafi oszacować, ile czasu będzie mu potrzebne na zebranie określonej kwoty.'
+  - 'Umie bezpiecznie przechowywać pieniądze.'
+  - 'Potrafi zadbać o powierzony sprzęt biwakowy i pionierski, tj. właściwie go przechowywać, transportować i kompletować.'
 

@@ -1,7 +1,6 @@
 id: zdobnik
-name: 'Zdobnik',
-level: 2,
+name: 'Zdobnik'
+level: 2
 tasks:
-  - 'Umie samodzielnie wykonać prosty totem lub inny element zdobnictwa obozowego z wykorzystaniem materiałów znalezionych w terenie.',
-  - 'Posiada sprawność *Plastyka ze ścieżki „Rzemiosło plastyczne”.',
-
+  - 'Umie samodzielnie wykonać prosty totem lub inny element zdobnictwa obozowego z wykorzystaniem materiałów znalezionych w terenie.'
+  - 'Posiada sprawność *Plastyka ze ścieżki „Rzemiosło plastyczne”.'

@@ -112,7 +112,7 @@ class SprawFamily {
     final family = SprawFamily()
       ..slug = data['id']
       ..name = data['name']
-      ..tags = data['tags']
+      ..tags = data['tags'].toList().cast<String>()
       ..fragment = data['fragment']
       ..fragmentAuthor = data['fragmentAuthor'];
 
@@ -171,7 +171,7 @@ class SprawItem {
       ..iconPath = iconPath
       ..name = data['name']
       ..level = data['level']
-      ..tasks = data['tasks'];
+      ..tasks = data['tasks'].toList().cast<String>();
 
     return item;
   }

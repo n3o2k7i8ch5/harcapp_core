@@ -1,10 +1,10 @@
 id: rosomak
-name: 'Rosomak',
-level: 3,
+name: 'Rosomak'
+level: 3
 tasks:
-  - 'Potrafi w terenie pozyskać wodę zdatną do picia.',
-  - 'Potrafi przygotować ciepły posiłek mając do dyspozycji jedynie nóż, zapałki i butelkę wody.',
-  - 'Potrafi z surowców naturalnych samodzielnie wytworzyć użyteczne narzędzie lub element ekwipunku biwakowego (np. naczynie na wodę, kosz pleciony, linę).',
-  - 'Potrafi bytować w lesie w sposób niezauważalny dla osób postronnych.',
-  - 'Posiada sprawność **Botanika ze ścieżki „Zielarstwo” oraz **Tropiciela Zwierzyny ze ścieżki „Tropienie zwierząt”.',
+  - 'Potrafi w terenie pozyskać wodę zdatną do picia.'
+  - 'Potrafi przygotować ciepły posiłek mając do dyspozycji jedynie nóż, zapałki i butelkę wody.'
+  - 'Potrafi z surowców naturalnych samodzielnie wytworzyć użyteczne narzędzie lub element ekwipunku biwakowego (np. naczynie na wodę, kosz pleciony, linę).'
+  - 'Potrafi bytować w lesie w sposób niezauważalny dla osób postronnych.'
+  - 'Posiada sprawność **Botanika ze ścieżki „Zielarstwo” oraz **Tropiciela Zwierzyny ze ścieżki „Tropienie zwierząt”.'
 

@@ -1,8 +1,8 @@
 id: obserwator
-name: 'Obserwator',
-level: 1,
+name: 'Obserwator'
+level: 1
 tasks:
-  - 'Umie posłużyć się mapą papierową (tj. zorientować ją i odczytać), żeby trafić za dnia do wyznaczonego miejsca.',
-  - 'Potrafi wyznaczyć kierunki świata według busoli, słońca (w dzień) i gwiazd (w nocy).',
-  - 'Umie ocenić przebytą odległość, mierząc ją krokami.',
+  - 'Umie posłużyć się mapą papierową (tj. zorientować ją i odczytać), żeby trafić za dnia do wyznaczonego miejsca.'
+  - 'Potrafi wyznaczyć kierunki świata według busoli, słońca (w dzień) i gwiazd (w nocy).'
+  - 'Umie ocenić przebytą odległość, mierząc ją krokami.'
 

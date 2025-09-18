@@ -1,7 +1,6 @@
 id: technik_obozowy
-name: 'Technik Obozowy',
-level: 2,
+name: 'Technik Obozowy'
+level: 2
 tasks:
-  - 'Umie zaprojektować oraz pokierować wykonaniem pomysłowego i estetycznego urządzenia obozowego (np. bramy, latryny lub pionierki w namiocie).',
-  - 'Umie pokierować rozstawieniem namiotu dziesięcioosobowego.',
-
+  - 'Umie zaprojektować oraz pokierować wykonaniem pomysłowego i estetycznego urządzenia obozowego (np. bramy, latryny lub pionierki w namiocie).'
+  - 'Umie pokierować rozstawieniem namiotu dziesięcioosobowego.'

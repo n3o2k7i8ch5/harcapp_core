@@ -1,9 +1,9 @@
 id: terenoznawca
-name: 'Terenoznawca',
-level: 2,
+name: 'Terenoznawca'
+level: 2
 tasks:
-  - 'Potrafi w dzień i w nocy odnaleźć się na mapie w nieznanym terenie według ukształtowania terenu i przedmiotów terenowych (np. skrzyżowań, budowli, cieków wodnych).',
-  - 'Umie zmierzyć odległość na mapie i trafnie ocenić odległość „na oko” w terenie.',
-  - 'Potrafi nanieść na mapę trasę wędrówki, narysować szkic terenu i przebytej drogi.',
-  - 'Umie zapamiętać trasę zaznaczoną na mapie, a następnie bez pomocy mapy ją pokonać.',
+  - 'Potrafi w dzień i w nocy odnaleźć się na mapie w nieznanym terenie według ukształtowania terenu i przedmiotów terenowych (np. skrzyżowań, budowli, cieków wodnych).'
+  - 'Umie zmierzyć odległość na mapie i trafnie ocenić odległość „na oko” w terenie.'
+  - 'Potrafi nanieść na mapę trasę wędrówki, narysować szkic terenu i przebytej drogi.'
+  - 'Umie zapamiętać trasę zaznaczoną na mapie, a następnie bez pomocy mapy ją pokonać.'
 

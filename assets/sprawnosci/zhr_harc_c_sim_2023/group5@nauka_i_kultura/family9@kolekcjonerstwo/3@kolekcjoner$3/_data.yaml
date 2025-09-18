@@ -1,10 +1,10 @@
 id: kolekcjoner
-name: 'Kolekcjoner',
-level: 3,
+name: 'Kolekcjoner'
+level: 3
 tasks:
-  - 'Umie skatalogować swój zbiór poprzez opis wykorzystujący informacje encyklopedyczne, profesjonalne katalogi i inne dane źródłowe.',
-  - 'Potrafi ciekawie opowiedzieć o różnych elementach swojej kolekcji (np. w kontekście historycznym, geograficznym lub artystycznym).',
-  - 'Wie, gdzie można obejrzeć zbiory z dziedziny jaką się interesuje oraz jakie instytucje lub osoby zajmują się gromadzeniem podobnych zbiorów.',
-  - 'Umie praktycznie wykorzystać wiedzę o swoich zbiorach (np. do przygotowania zadań w ramach gry zastępu lub drużyny).',
-  - 'Potrafi zdobyć nowe elementy do kolekcji różnymi sposobami i z różnych źródeł.',
+  - 'Umie skatalogować swój zbiór poprzez opis wykorzystujący informacje encyklopedyczne, profesjonalne katalogi i inne dane źródłowe.'
+  - 'Potrafi ciekawie opowiedzieć o różnych elementach swojej kolekcji (np. w kontekście historycznym, geograficznym lub artystycznym).'
+  - 'Wie, gdzie można obejrzeć zbiory z dziedziny jaką się interesuje oraz jakie instytucje lub osoby zajmują się gromadzeniem podobnych zbiorów.'
+  - 'Umie praktycznie wykorzystać wiedzę o swoich zbiorach (np. do przygotowania zadań w ramach gry zastępu lub drużyny).'
+  - 'Potrafi zdobyć nowe elementy do kolekcji różnymi sposobami i z różnych źródeł.'
 

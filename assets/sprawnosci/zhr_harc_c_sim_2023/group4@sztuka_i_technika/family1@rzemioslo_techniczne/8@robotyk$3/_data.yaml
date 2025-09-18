@@ -1,9 +1,9 @@
 id: robotyk
-name: 'Robotyk',
-level: 3,
+name: 'Robotyk'
+level: 3
 tasks:
-  - 'Potrafi samodzielnie zaprojektować i wykonać układ automatyczny, taki jak fotokomórka lub migająca lampka, posługując się stworzonym przez siebie schematem, multimetrem, lutownicą i innymi potrzebnymi narzędziami.',
-  - 'Zna podstawy jednego z języków programowania i potrafi je zastosować do stworzenia użytecznego programu na platformie Arduino, Raspberry Pi lub innej tego typu.',
-  - 'Umie zbudować i zaprogramować robota typu sumo, line follower lub podobnego.',
-  - 'Posiada sprawność **Elektronika ze ścieżki „Elektrotechnika” lub **Programisty ze ścieżki „Programowanie”.',
+  - 'Potrafi samodzielnie zaprojektować i wykonać układ automatyczny, taki jak fotokomórka lub migająca lampka, posługując się stworzonym przez siebie schematem, multimetrem, lutownicą i innymi potrzebnymi narzędziami.'
+  - 'Zna podstawy jednego z języków programowania i potrafi je zastosować do stworzenia użytecznego programu na platformie Arduino, Raspberry Pi lub innej tego typu.'
+  - 'Umie zbudować i zaprogramować robota typu sumo, line follower lub podobnego.'
+  - 'Posiada sprawność **Elektronika ze ścieżki „Elektrotechnika” lub **Programisty ze ścieżki „Programowanie”.'
 

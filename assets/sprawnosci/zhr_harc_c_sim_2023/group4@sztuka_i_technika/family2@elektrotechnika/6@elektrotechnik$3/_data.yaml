@@ -1,9 +1,9 @@
 id: elektrotechnik
-name: 'Elektrotechnik',
-level: 3,
+name: 'Elektrotechnik'
+level: 3
 tasks:
-  - 'Umie bezpiecznie i prawidłowo przygotować do pracy (w tym uziemić) oraz obsłużyć urządzenia, które mogą dostarczać energii elektrycznej w terenie (np. agregat prądotwórczy, baterie słoneczne).',
-  - 'Potrafi zaprojektować i uruchomić polową instalację elektryczną a także zabezpieczyć ją przed wpływem warunków pogodowych.',
-  - 'Umie wykorzystać prawo Ohma i potrafi obliczyć moc prądu elektrycznego.',
-  - 'Wie jak jest zbudowana domowa instalacja elektryczna, rozumie jaką rolę pełnią w niej obwody oświetleniowe, zasilające, trójfazowe i tablica rozdzielcza. Rozumie zasadę działania wyłączników nadprądowych i różnicowych i potrafi sprawdzić ich działanie.',
+  - 'Umie bezpiecznie i prawidłowo przygotować do pracy (w tym uziemić) oraz obsłużyć urządzenia, które mogą dostarczać energii elektrycznej w terenie (np. agregat prądotwórczy, baterie słoneczne).'
+  - 'Potrafi zaprojektować i uruchomić polową instalację elektryczną a także zabezpieczyć ją przed wpływem warunków pogodowych.'
+  - 'Umie wykorzystać prawo Ohma i potrafi obliczyć moc prądu elektrycznego.'
+  - 'Wie jak jest zbudowana domowa instalacja elektryczna, rozumie jaką rolę pełnią w niej obwody oświetleniowe, zasilające, trójfazowe i tablica rozdzielcza. Rozumie zasadę działania wyłączników nadprądowych i różnicowych i potrafi sprawdzić ich działanie.'
 

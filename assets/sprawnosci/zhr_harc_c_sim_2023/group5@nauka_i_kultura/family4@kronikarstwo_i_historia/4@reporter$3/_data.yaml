@@ -1,9 +1,9 @@
 id: reporter
-name: 'Reporter',
-level: 3,
+name: 'Reporter'
+level: 3
 tasks:
-  - 'Potrafi wybrać interesujący go temat, dotrzeć do świadków związanych z nim wydarzeń oraz zebrać i opracować ich relacje, posługując się dyktafonem lub kamerą.',
-  - 'Umie rzetelnie i ciekawie opisać fakty na podstawie zebranych relacji, dokumentów i materiałów multimedialnych.',
-  - 'Potrafi zredagować i przygotować zebrane przez siebie informacje i relacje do publikacji.',
-  - 'Umie ocenić przeczytane reportaże pod względem przygotowania i rzetelności autorów, wiarygodności źródeł informacji i wagi poruszanego tematu.',
+  - 'Potrafi wybrać interesujący go temat, dotrzeć do świadków związanych z nim wydarzeń oraz zebrać i opracować ich relacje, posługując się dyktafonem lub kamerą.'
+  - 'Umie rzetelnie i ciekawie opisać fakty na podstawie zebranych relacji, dokumentów i materiałów multimedialnych.'
+  - 'Potrafi zredagować i przygotować zebrane przez siebie informacje i relacje do publikacji.'
+  - 'Umie ocenić przeczytane reportaże pod względem przygotowania i rzetelności autorów, wiarygodności źródeł informacji i wagi poruszanego tematu.'
 
