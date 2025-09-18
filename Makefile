@@ -15,9 +15,10 @@ generate:
 
 # Defaults (can be overridden on the make command line)
 BOOK_DIR?=assets/sprawnosci/zhr_harc_c_sim_2023
-ISAR_DIR?=assets/sprawnosci/sprawnosci.isar
+ISAR_DIR?=assets/sprawnosci/db.isar
 
 import_spraw_book:
+	mkdir -p "$(ISAR_DIR)"
 	@if [ -z "$(BOOK_DIR)" ]; then echo "Error: BOOK_DIR is required. Example: make import_spraw_book BOOK_DIR=assets/sprawnosci/zhr_harc_c_sim_2023 ISAR_DIR=.dart_tool/isar"; exit 2; fi
 	@if [ -z "$(ISAR_DIR)" ]; then echo "Error: ISAR_DIR is required. Example: make import_spraw_book BOOK_DIR=assets/sprawnosci/zhr_harc_c_sim_2023 ISAR_DIR=.dart_tool/isar"; exit 2; fi
 	@echo "Importing from: $(BOOK_DIR) -> Isar dir: $(ISAR_DIR)"
