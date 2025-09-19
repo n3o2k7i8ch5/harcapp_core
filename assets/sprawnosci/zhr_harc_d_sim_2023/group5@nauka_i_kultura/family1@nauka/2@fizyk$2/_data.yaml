@@ -1,0 +1,7 @@
+id: fizyk
+name: 'Fizyk',
+level: 2,
+tasks:
+  - 'Potrafi w eksperymencie zademonstrować jedno z praw fizycznych (np. prawo Archimedesa, zasadę zachowania pędu lub wytwarzanie pola magnetycznego przez prąd elektryczny).',
+  - 'Umie podać praktyczne przykłady, gdzie to prawo ma zastosowanie.',
+

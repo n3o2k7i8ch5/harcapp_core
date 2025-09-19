@@ -1,0 +1,9 @@
+id: wedrowiec
+name: 'Organizatorka turystyki',
+level: 3,
+tasks:
+  - 'Potrafi zaplanować i przeprowadzić kilkudniową wędrówkę w nieznanym regionie, obejmującą poznanie historii, zabytków kultury, etnografii lub wartości przyrodniczo-krajobrazowych.',
+  - 'Umie do przygotowania wędrówki wykorzystać różne źródła informacji (np. książki historyczne, przewodniki, informacje z Internetu).',
+  - 'Potrafi zorganizować zdalnie nocleg, posiłek i przewodnika po danym miejscu; umie rozliczyć wycieczkę.',
+  - 'Umie dobrać ekwipunek adekwatny do planowanej wyprawy.',
+

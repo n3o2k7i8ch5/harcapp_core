@@ -1,0 +1,7 @@
+id: lacznik
+name: 'Łączniczka',
+level: 1,
+tasks:
+  - 'Umie bezbłędnie zapamiętać i przenieść wiadomość ustną złożoną z kilkunastu słów.',
+  - 'Potrafi zaszyfrować i odczytać wiadomość trzema różnymi szyframi.',
+

@@ -1,0 +1,22 @@
+id: kajakarstwo
+name: Kajakarstwo
+
+tags:
+  - "#woda"
+  - "#współpraca"
+  - "#ruch"
+  - "#wytrzymałość"
+  - "#las"
+  - "#plecak"
+  - "#szlak"
+  - "#góry"
+  - "#ciekawość"
+  - "#siła"
+  - "#technika"
+  - "#mapa"
+  - "#narzędzia"
+  - "#natura"
+
+fragment: |
+  Jeżeli wiosłujesz kajakiem po rzece i potrzebujesz pomocy w odczytywaniu prądów, szukaj wskazówek u roślin. Tak samo jak drzewa i wiatr rośliny będą odzwierciedlać przepływ wody. Im bliżej ziemi się znajdują, tym szybciej płynie woda, więc w zależności od tego, czy płyniesz w górę, czy w dół, wskażą ci miejsca, którymi chcesz popłynąć, lub takie, których wolisz uniknąć.
+fragmentAuthor: "Tristan Gooley „Przewodnik wędrowca. Sztuka odczytywania znaków natury”"

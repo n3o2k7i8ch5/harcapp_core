@@ -1,0 +1,30 @@
+id: nauka
+name: Nauka
+
+tags:
+  - "#eksperyment"
+  - "#ciekawość"
+  - "#wyobraźnia"
+  - "#umysł"
+  - "#zagadka"
+  - "#spryt"
+  - "#książka"
+  - "#harmonia"
+  - "#dyscyplina"
+  - "#narzędzia"
+  - "#obiektyw"
+  - "#obserwacja"
+  - "#natura"
+  - "#las"
+
+fragment: |
+  W moim pokoju w Princeton było okno wykuszowe z półokrągłym parapetem. Pewnego dnia weszły na parapet mrówki i wałęsały się na wszystkie strony. Zainteresowało mnie, jak znajdują drogę, skąd wiedzą, dokąd mają iść?
+
+  Czy umieją się nawzajem informować, gdzie jest jedzenie, tak jak pszczoły? Czy mają jakieś poczucie geometrii?
+
+  Czysta amatorszczyzna: wszyscy znają odpowiedź na te pytania, ale ja nie znałem, więc rozciągnąłem nad parapetem sznurek i podwiesiłem tuż nad parapetem trochę cukru na tekturce. Chodziło o to, żeby mrówki nie znalazły cukru przypadkiem – eksperyment był kontrolowany. (...)
+
+  Porozkładałem papierki na parapecie w dwóch grupach: koło cukru (wiszącego na sznurku) i koło mrówek, które zgromadziły się gdzie indziej. Siedziałem całe popołudnie, czytając i zerkając, czy jakaś mrówka nie zabłąkała się na któryś z moich papierowych „promów”. Jeżeli tak, przenosiłem ją w pobliże cukru. Kiedy kilka mrówek zostało przetransportowanych w pobliże cukru, jedna z nich przypadkiem znów weszła na prom, więc odniosłem ją z powrotem.
+
+  Chciałem sprawdzić, czy pozostałe mrówki otrzymają informację, że trzeba się udać do „terminalu promów”. Z początku szło powoli, ale po jakimś czasie bez przerwy transportowałem mrówki tam i z powrotem.
+fragmentAuthor: "Richard P. Feynman, „Pan raczy żartować Panie Feynman”"

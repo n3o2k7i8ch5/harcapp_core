@@ -1,0 +1,10 @@
+id: ilustrator
+name: 'Ilustrator',
+level: 3,
+tasks:
+  - 'Umie przedstawić historię lub zobrazować tekst ilustracją bądź sekwencją ilustracji, akcentując charakterystyczne i ważne dla narracji elementy.',
+  - 'Potrafi posługiwać się 5 różnymi technikami plastycznymi, takimi jak rysunek węglem, pastele, akwarele, malarstwo olejne lub temperowe, linoryt, grafika rastrowa lub wektorowa. Umie dobrać odpowiednią technikę do realizowanego dzieła.',
+  - 'Zna podstawowe zasady kompozycji, wie co to jest złota proporcja, wie jak wygląda koło barw i co to są barwy dopełniające, jak powstają kolory pochodne itp. Potrafi wykorzystać znajomość tych zasad w swoich pracach.',
+  - 'Umie wykonać reprodukcję własnych ilustracji z wykorzystaniem techniki cyfrowej.',
+  - 'Zna twórczość wybranych ilustratorów, malarzy i grafików. Potrafi wskazać, co mu się w nich podoba i czym charakteryzuje się ich twórczość.',
+

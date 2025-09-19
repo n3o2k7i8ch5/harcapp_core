@@ -1,0 +1,8 @@
+id: cyklista
+name: 'Cyklistka',
+level: 2,
+tasks:
+  - 'Potrafi przygotować się i poradzić sobie podczas kilkudniowej wyprawy rowerowej.',
+  - 'Umie samodzielnie wyregulować hamulce i przerzutki oraz wykonać prace takie jak zamontowanie bagażnika czy dokręcenie pedału.',
+  - 'Potrafi poruszać się rowerem zgodnie z przepisami ruchu drogowego.',
+

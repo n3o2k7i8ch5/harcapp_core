@@ -1,0 +1,10 @@
+id: magazynier
+name: 'Magazynier',
+level: 3,
+tasks:
+  - 'Potrafi wykonać prace konserwacyjne sprzętu takiego jak namioty, sprzęt pływający, kanadyjki. Umie pokierować wykonaniem takich prac przez drużynę.',
+  - 'Potrafi wysuszyć namioty różnych typów, zabezpieczyć je przed zawilgoceniem i właściwie przygotować do magazynowania.',
+  - 'Umie właściwie przygotować i spakować sprzęt drużyny do transportu (np. w ciężarówce) i praktycznie ułożyć go w magazynie.',
+  - 'Umie prowadzić kompletną ewidencję sprzętu, potrafi dokonać wpisu w książce inwentarzowej i oznakować sprzęt.',
+  - 'Posiada sprawność **Techniczki ze ścieżki „Rzemiosło techniczne”.',
+

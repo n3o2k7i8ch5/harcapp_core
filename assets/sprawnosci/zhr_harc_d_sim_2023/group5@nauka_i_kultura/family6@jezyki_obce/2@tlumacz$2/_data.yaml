@@ -1,0 +1,9 @@
+id: tlumacz
+name: 'Tłumacz',
+level: 2,
+tasks:
+  - 'Umie porozmawiać w języku obcym na kilka tematów (np. szkoła, zainteresowania, wakacje czy miejscowość z której pochodzi).',
+  - 'Potrafi zrozumieć obcojęzyczny film z napisami w danym języku.',
+  - 'Umie pisemnie porozumieć się w języku obcym, np. pisząc komentarze na internetowym forum.',
+  - 'Potrafi czytać ze zrozumieniem krótkie teksty w obcym języku, np. artykuły z interesującej ją dziedziny lub wpisy na blogach.',
+

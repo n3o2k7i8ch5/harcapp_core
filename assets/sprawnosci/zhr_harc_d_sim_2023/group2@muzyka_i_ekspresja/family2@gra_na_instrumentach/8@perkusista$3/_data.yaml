@@ -1,0 +1,9 @@
+id: perkusista
+name: 'Perkusistka',
+level: 3,
+tasks:
+  - 'Umie na zestawie perkusyjnym improwizować do utworów w wybranym stylu muzycznym, takim jak rock, jazz, metal, R’n’B lub reggae.',
+  - 'Potrafi wyjaśnić różnice między różnymi stylami muzyki popularnej (np. rockiem, jazzem, metalem, reggae, r’n’b) oraz w jaki sposób przekłada się to na grę na zestawie (dobór instrumentów, pałeczek, rytmów, styl gry).',
+  - 'Zna poszczególne elementy perkusji, potrafi je nazwać i opisać ich funkcje. Umie rozstawić i złożyć zestaw perkusyjny (lub podłączyć zestaw padów perkusji elektronicznej) i dopasować ułożenie instrumentów do swoich potrzeb. W razie potrzeby potrafi go wygłuszyć.',
+  - 'Potrafi wskazać wybitnego perkusistę, ulubione utwory i techniki gry, które ją inspirują.',
+

@@ -1,0 +1,8 @@
+id: akrobata
+name: 'Akrobatka',
+level: 3,
+tasks:
+  - 'Potrafi na drążku zawisnąć przez 60 s, wykonać wymyk przodem oraz wejście siłowe (tzw. muscle up).',
+  - 'Umie bez podparcia nogami stabilnie ustać na rękach przez kilkanaście sekund.',
+  - 'Potrafi, stosując odpowiednią technikę, bezpiecznie wejść po linie na wysokość 4 m.',
+

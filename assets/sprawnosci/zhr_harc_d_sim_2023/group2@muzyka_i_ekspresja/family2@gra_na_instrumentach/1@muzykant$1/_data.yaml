@@ -1,0 +1,7 @@
+id: muzykant
+name: 'Muzykant',
+level: 1,
+tasks:
+  - 'Potrafi zagrać na wybranym instrumencie dwie piosenki, melodie lub rytmy, a także zagrać i nazwać kilka akordów lub dźwięków.',
+  - 'Umie przygotować instrument do grania (np. złożyć lub nastroić przy pomocy stroika) oraz odpowiednio go zabezpieczyć (np. na czas transportu).',
+

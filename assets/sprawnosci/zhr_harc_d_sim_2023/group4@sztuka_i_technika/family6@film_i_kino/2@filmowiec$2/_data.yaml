@@ -1,0 +1,8 @@
+id: filmowiec
+name: 'Filmowiec',
+level: 2,
+tasks:
+  - 'Potrafi zrealizować krótką, składającą się z kliku scen etiudę lub klip według własnej wizji.',
+  - 'Potrafi zebrać zespół, podzielić zadania (operator, aktorzy itd.) i czuwać nad ich realizacją.',
+  - 'Nakręcony materiał filmowy umie zmontować i zaprezentować publiczności (np. pokazać na zbiórce drużyny lub udostępnić w Internecie).',
+

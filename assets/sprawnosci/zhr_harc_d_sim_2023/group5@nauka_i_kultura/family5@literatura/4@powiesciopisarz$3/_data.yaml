@@ -1,0 +1,10 @@
+id: powiesciopisarz
+name: 'Powieściopisarka',
+level: 3,
+tasks:
+  - 'Umie stworzyć opowieść z wieloma wątkami i postaciami w wybranej konwencji literackiej (np. detektywistyczną, fantasy lub science-fiction).',
+  - 'Potrafi wykreować i opisać atrakcyjny i przekonujący świat przedstawiony, wypełniony bohaterami o określonych cechach i motywacjach.',
+  - 'Umie pisać dialogi między postaciami tak, aby wynikał z niego styl i sposób wypowiedzi charakterystyczny dla każdej z nich.',
+  - 'Potrafi wskazać kilku pisarzy, którzy go inspirują, i opisać konkretne, stosowane przez nich zabiegi stylistyczne, które mu się podobają.',
+  - 'Umie rozróżnić i scharakteryzować kilka epickich i dramatycznych gatunków literackich, takich jak nowela, opowiadanie, powieść, bajka, komedia lub tragedia.',
+

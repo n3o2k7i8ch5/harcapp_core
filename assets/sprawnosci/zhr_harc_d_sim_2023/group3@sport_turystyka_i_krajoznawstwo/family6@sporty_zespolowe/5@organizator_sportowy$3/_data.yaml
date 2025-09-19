@@ -1,0 +1,8 @@
+id: organizator_sportowy
+name: 'Organizatorka sportowa',
+level: 3,
+tasks:
+  - 'Potrafi zorganizować i przeprowadzić rozgrywki w wybranej dyscyplinie sportu zespołowego: przygotować boisko i sprzęt sportowy, załogę sędziowską, nagrody, regulamin, zorganizować zapisy, podsumować wyniki itd..',
+  - 'Zna zasady działania lig i turniejów w swojej dyscyplinie sportowej (np. sposób wyłaniania drużyn w turniejach, zasady losowania grup, zasady poruszania się zawodników między ligą narodową a klubową lub okna transferowe).',
+  - 'Umie zadbać o bezpieczeństwo graczy i widzów podczas zawodów.',
+

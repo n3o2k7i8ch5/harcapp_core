@@ -1,0 +1,9 @@
+id: socjolog
+name: 'Socjolog',
+level: 3,
+tasks:
+  - 'Umie przygotować scenariusz i na jego podstawie przeprowadzić osobisty wywiad pogłębiony, a także wypisać wnioski z niego płynące.',
+  - 'Potrafi przygotować kwestionariusz do badania, unikając typowych błędów (np. sugerowania odpowiedzi, niejasnych pytań oraz nieprzemyślanej kolejności pytań). Umie przeprowadzić badanie ankietowe w wybranej formie (np. ankieta papierowa lub internetowa).',
+  - 'Na podstawie zebranych przez siebie danych potrafi zaobserwować ciekawe tendencje, wyciągnąć wnioski i przedstawić je w formie graficznej.',
+  - 'Umie zebrać opinie, wykorzystując odpowiednią formę (np. ankietę, pudełko na postulaty, plakat na wpisywanie pomysłów lub głosowanie przez stawianie kropek).',
+

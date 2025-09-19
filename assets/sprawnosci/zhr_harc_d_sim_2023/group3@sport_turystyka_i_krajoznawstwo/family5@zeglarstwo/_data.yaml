@@ -1,0 +1,23 @@
+id: zeglarstwo
+name: Żeglarstwo
+
+tags:
+  - "#woda"
+  - "#wiatr"
+  - "#współpraca"
+  - "#zespół"
+  - "#obserwacja"
+  - "#ruch"
+  - "#wytrzymałość"
+  - "#plecak"
+  - "#dzikość"
+  - "#karność"
+  - "#ciekawość"
+  - "#technika"
+  - "#słowo #mapa"
+  - "#narzędzia"
+  - "#natura"
+
+fragment: |
+  Morze jest wszystkim! To przeogromna pustynia, na której człowiek nigdy nie jest samotny, bo czuje wszędzie wokół siebie drgające życie. Morze jest nosicielem jakiegoś nieznanego, niezwykłego i potężnego życia, jest ruchem i miłością; jest żywą nieskończonością
+fragmentAuthor: "Juliusz Verne, „20 000 mil podmorskiej żeglugi”"

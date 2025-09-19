@@ -1,0 +1,10 @@
+id: gospodarz
+name: 'Gospodyni',
+level: 2,
+tasks:
+  - 'Umie skompletować narzędzia dla zastępu na biwak lub obóz.',
+  - 'Potrafi konserwować narzędzia pionierskie a także odpowiednio je oznakować.',
+  - 'Umie prowadzić wykaz sprzętu zastępu.',
+  - 'Potrafi rozliczyć się z powierzonych pieniędzy (np. składek zastępu na wycieczkę).',
+  - 'Umie prowadzić zeszyt wpływów i wydatków (np. w Excelu).',
+

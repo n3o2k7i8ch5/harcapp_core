@@ -1,0 +1,10 @@
+id: mowca
+name: 'Mówca',
+level: 3,
+tasks:
+  - 'Potrafi przygotować i wygłosić wypowiedź (np. gawędę lub referat) dotyczącą wybranego tematu. Umie w przekonujący i porywający sposób przekazać swoją myśl w czasie nie dłuższym niż 7 minut.',
+  - 'Potrafi dobrać formę i ton (np. modulację głosu, ułożenie treści, dynamikę wypowiedzi, argumentację, postawę) adekwatne do tematu wypowiedzi i grona słuchaczy.',
+  - 'Umie używać figur retorycznych (np. pytań retorycznych, porównań, metafor).',
+  - 'Potrafi wypowiedzieć się na wybrany temat w krótkiej improwizowanej formie, nie korzystając z notatek.',
+  - 'Przygotowując wypowiedź, umie korzystać z różnych źródeł i w trakcie wypowiedzi umiejętnie się na nie powołać.',
+

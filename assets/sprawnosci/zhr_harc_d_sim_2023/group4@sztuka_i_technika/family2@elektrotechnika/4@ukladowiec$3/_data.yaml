@@ -1,0 +1,9 @@
+id: ukladowiec
+name: 'Układowiec',
+level: 3,
+tasks:
+  - 'Potrafi zaprojektować płytkę PCB i wytrawić ją w domu bądź zlecić jej wyprodukowanie.',
+  - 'Umie prawidłowo zlutować i uruchomić zaprojektowany układ.',
+  - 'Potrafi dostosować do własnych potrzeb schemat układu elektronicznego (np. znaleziony w Internecie) i uruchomić go na płytce prototypowej.',
+  - 'Umie programować mikrokontrolery. Potrafi w oparciu o mikrokontroler zaprojektować i zrealizować przydatny układ (np. czujnik lub sterownik).',
+

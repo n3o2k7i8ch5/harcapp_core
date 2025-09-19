@@ -1,0 +1,10 @@
+id: biegacz
+name: 'Biegaczka',
+level: 3,
+tasks:
+  - 'Potrafi pokonać dystans 5 km w czasie krótszym niż 25 min.',
+  - 'Umie przygotować swój organizm do konkretnego treningu, takiego jak trening siłowy, kondycyjny, wysokogórski, rozciąganie.',
+  - 'Potrafi obliczyć swoje tętno maksymalne, wie co to jest głód tlenowy.',
+  - 'Umie wykonać 10 ćwiczeń siłowych uzupełniających trening biegowy (np. skipy, przysiady, wykroki lub pajacyki).',
+  - 'Potrafi przygotować się do biegania w zależności od rodzaju terenu i typu treningu (np. dobrać odpowiednie obuwie).',
+

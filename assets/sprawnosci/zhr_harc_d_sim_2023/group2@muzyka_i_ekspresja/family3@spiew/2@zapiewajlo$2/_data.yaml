@@ -1,0 +1,10 @@
+id: zapiewajlo
+name: 'Pieśniarka',
+level: 2,
+tasks:
+  - 'Umie zaśpiewać 10 wybranych piosenek.',
+  - 'Potrafi powtórzyć melodię ze słuchu i wystukać do niej rytm.',
+  - 'Umie zaintonować śpiew w grupie (np. zastępie lub drużynie).',
+  - 'Potrafi zaśpiewać zadaną melodię od podanego dźwięku.',
+  - 'Umie wykonać 3 ćwiczenia na rozśpiewanie.',
+

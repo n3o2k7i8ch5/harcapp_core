@@ -1,0 +1,9 @@
+id: topograf
+name: 'Topograf',
+level: 3,
+tasks:
+  - 'Potrafi wykonać odpowiednie pomiary i staranny szkic wskazanego terenu z zachowaniem skali.',
+  - 'Potrafi zmierzyć wysokość drzewa i szerokość rzeki bez użycia specjalistycznych narzędzi.',
+  - 'Umie posłużyć się dalmierzem lub niwelatorem.',
+  - 'Potrafi z pamięci narysować dokładny szkic przebytej drogi.',
+

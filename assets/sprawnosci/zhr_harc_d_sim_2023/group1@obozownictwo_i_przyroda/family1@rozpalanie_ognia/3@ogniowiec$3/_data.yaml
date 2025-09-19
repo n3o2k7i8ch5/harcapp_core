@@ -1,0 +1,10 @@
+id: ogniowiec
+name: 'Ogniomistrzyni',
+level: 3,
+tasks:
+  - 'Umie rozpalić ogień w niesprzyjających warunkach (np. w ulewnym deszczu, przy silnym wietrze lub w głębokim śniegu).',
+  - 'Potrafi rozpalić ogień bez zapałek, samodzielnie wykonanym narzędziem (np. łukiem ogniowym lub własnoręcznie zrobionym krzesiwem).',
+  - 'Umie wykorzystać specyficzne cechy różnych rodzajów i gatunków drewna do rozpalania i podtrzymywania ognia.',
+  - 'Potrafi przygotować pochodnię, która będzie płonęła 2 godziny.',
+  - 'Umie posłużyć się kilkoma rodzajami podręcznych środków gaśniczych, w tym gaśnicami różnych typów. Wie, jakie środki gaśnicze stosować w różnych sytuacjach.',
+

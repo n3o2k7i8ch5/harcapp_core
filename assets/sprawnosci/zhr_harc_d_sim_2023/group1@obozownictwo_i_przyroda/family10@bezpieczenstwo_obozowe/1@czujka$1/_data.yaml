@@ -1,0 +1,9 @@
+id: czujka
+name: 'Czujka',
+level: 1,
+tasks:
+  - 'Potrafi prawidłowo pełnić służbę wartowniczą w dzień i w nocy.',
+  - 'Umie poruszać się w nocy nie wykorzystując sztucznych źródeł światła. Potrafi wyłącznie przy pomocy słuchu określić, z której strony zbliża się człowiek.',
+  - 'Umie zachować się w wypadku zauważenia w obozie obcych osób, pożaru bądź gwałtownej zmiany pogody. Umie skutecznie ogłosić alarm.',
+  - 'Potrafi w razie konieczności wezwać telefonicznie pomoc oraz zdać rzeczowy raport służbom.',
+

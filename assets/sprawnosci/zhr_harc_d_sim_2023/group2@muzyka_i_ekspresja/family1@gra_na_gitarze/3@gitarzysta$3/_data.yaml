@@ -1,0 +1,9 @@
+id: gitarzysta
+name: 'Gitarzystka',
+level: 3,
+tasks:
+  - 'Umie poprowadzić muzycznie ognisko lub śpiewanki, nawet w razie braku śpiewnika z akordami. Potrafi poprowadzić grupę kilku akompaniatorów.',
+  - 'Umie dobrać technikę gry do nastroju piosenki. Potrafi zastosować różne techniki lewej i prawej ręki (np. ozdobniki, legato, różne rodzaje bicia, tremolo).',
+  - 'Zna zasady budowy akordów. Umie wymyślić, jak zagrać na gitarze dowolny akord i potrafi przetransponować akordy z jednej tonacji do drugiej.',
+  - 'Potrafi ze słuchu dobrać akordy do piosenki.',
+

@@ -1,0 +1,7 @@
+id: przyrodnik
+name: 'Przyrodnik',
+level: 1,
+tasks:
+  - 'Umie przy pomocy atlasu roślin rozpoznać w lesie 6 roślin jadalnych (np. malina, jeżyna, borówka czarna, poziomka, lipa, pokrzywa, mięta, komosa biała, szczawik zajęczy, szczaw, stokrotka) oraz 3 trujące (np. wilcza jagoda, cis pospolity, czeremcha, kruszyna, bluszcz, bylicę piołun, glistnik jaskółcze ziele, jaskier, wrotycz).',
+  - 'Potrafi przygotować danie na zimno z samodzielnie zebranych darów lasu.',
+

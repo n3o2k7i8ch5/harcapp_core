@@ -1,0 +1,10 @@
+id: kwatermistrz
+name: 'Kwatermistrzyni',
+level: 3,
+tasks:
+  - 'Potrafi zaplanować budżet wyjazdu lub biwaku, sprawować nadzór nad wydatkami i rozliczyć powierzone środki.',
+  - 'Umie przygotować kompletną listę zadań kwatermistrzowskich związanych z organizacją biwaku lub wędrówki, takich jak dojazd, aprowizacja, noclegi. Każde z tych zadań potrafi wykonać samodzielnie.',
+  - 'Umie zamówić usługę lub dokonać zakupu przez internet, wykonać przelew i wypłacić pieniądze z bankomatu.',
+  - 'Wie, do czego służy książka inwentarzowa i finansowa, i umie prawidłowo dokonać w nich wpisu.',
+  - 'Potrafi opisywać faktury oraz przypisać wydatki do odpowiednich kategorii: materiały, żywność, wyposażenie itd..',
+

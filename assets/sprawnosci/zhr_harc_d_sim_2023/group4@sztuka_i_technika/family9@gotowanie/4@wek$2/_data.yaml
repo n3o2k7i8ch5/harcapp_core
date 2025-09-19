@@ -1,0 +1,8 @@
+id: wek
+name: 'Spiżarka',
+level: 2,
+tasks:
+  - 'Umie przygotować proste przetwory (np. dżem lub ogórki kiszone).',
+  - 'W warunkach polowych potrafi zabezpieczyć żywność (np. nabiał, mięso, owoce) przed zepsuciem przez 3 dni.',
+  - 'Potrafi zadbać o odpowiednie warunki przechowywania i transportu produktów lub przetworzonej żywności.',
+

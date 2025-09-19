@@ -1,0 +1,7 @@
+id: chatka_robinsona
+name: 'Chatka',
+level: 1,
+tasks:
+  - 'Potrafi poradzić sobie w czasie 24 godzinnej wyprawy zastępu do lasu, bez namiotu lub innego gotowego zadaszenia.',
+  - 'Potrafi zabezpieczyć prowiant i swój ekwipunek na czas bytowania w lesie (np. przed deszczem, zwierzętami).',
+

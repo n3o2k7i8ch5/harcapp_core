@@ -1,0 +1,10 @@
+id: wartownik
+name: 'Wartowniczka',
+level: 2,
+tasks:
+  - 'Umie samodzielnie pełnić nocną służbę wartowniczą. Obudzony potrafi szybko i sprawnie wstać oraz przygotować się do służby.',
+  - 'Zna i potrafi stosować zasady harcerskich podchodów. Umie ocenić strzeżony teren i wybrać najlepsze stanowiska do pełnienia warty.',
+  - 'Potrafi wykonać prosty i bezpieczny wykrywacz (np. suche gałęzie lub ukryty dzwonek).',
+  - 'Umie przyjąć obozowych gości oraz wizytację zgodnie z właściwymi procedurami oraz należytymi manierami.',
+  - 'Potrafi złożyć dowódcy warty prawidłowy raport z wykonanej służby.',
+

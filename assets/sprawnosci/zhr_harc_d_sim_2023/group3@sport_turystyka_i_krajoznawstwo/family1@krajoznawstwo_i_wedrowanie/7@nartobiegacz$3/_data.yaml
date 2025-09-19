@@ -1,0 +1,9 @@
+id: nartobiegacz
+name: 'Nartobiegaczka',
+level: 3,
+tasks:
+  - 'Umie sprawnie poruszać się na nartach biegowych stylem klasycznym i łyżwowym. Potrafi poprawnie posługiwać się kijami i dobrać ich wysokość. Umie iść na nartach w kopnym śniegu, bez przetartego śladu.',
+  - 'Potrafi nie wypinając nart obrócić się w miejscu w trzech ruchach bez utraty równowagi. Jadąc na nartach z plecakiem umie utrzymać równowagę.',
+  - 'Potrafi zaplanować kilkudniową wędrówkę narciarską, skompletować potrzebny ekwipunek i poradzić sobie w jej trakcie.',
+  - 'Umie wykonać drobne prace serwisowe przy nartach (np. wymienić zepsute wiązanie lub nasmarować narty).',
+

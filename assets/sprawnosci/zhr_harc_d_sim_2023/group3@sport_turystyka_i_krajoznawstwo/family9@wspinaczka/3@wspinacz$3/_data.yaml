@@ -1,0 +1,10 @@
+id: wspinacz
+name: 'Kotwa',
+level: 3,
+tasks:
+  - 'Potrafi wspinać się zarówno na ściance wspinaczkowej, jak i w naturalnych skałach.',
+  - 'Podczas wspinaczki z asekuracją dolną umie samodzielnie dokonać przewiązania na końcowym punkcie drogi wspinaczkowej z wykorzystaniem dowolnej techniki autoasekuracji.',
+  - 'Potrafi przeprowadzić asekurację dolną z użyciem samoblokującego się przyrządu asekuracyjnego.',
+  - 'Umie wykonać samodzielny zjazd po linie z użyciem przyrządu asekuracyjnego.',
+  - 'Potrafi udzielić pierwszej pomocy w przypadku urazów typowych dla wspinaczy. Posiada sprawność **Sanitariuszki ze ścieżki „Samarytanka”.',
+

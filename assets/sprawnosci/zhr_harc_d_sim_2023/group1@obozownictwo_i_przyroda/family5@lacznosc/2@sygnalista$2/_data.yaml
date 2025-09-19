@@ -1,0 +1,10 @@
+id: sygnalista
+name: 'Sygnalistka',
+level: 2,
+tasks:
+  - 'Umie wykonać prowizoryczny przyrząd sygnalizacyjny (np. chorągiewkę lub pochodnię).',
+  - 'Umie nadać i odebrać wiadomość zakodowaną alfabetem Morse’a za pomocą chorągiewek, sygnałów dźwiękowych oraz świetlnych.',
+  - 'Potrafi zakodować i rozkodować wiadomość przy pomocy alfabetu Morse’a.',
+  - 'Umie obsługiwać radiotelefon lub telefon polowy.',
+  - 'Potrafi wymyślić własny szyfr i nauczyć go koleżanki.',
+

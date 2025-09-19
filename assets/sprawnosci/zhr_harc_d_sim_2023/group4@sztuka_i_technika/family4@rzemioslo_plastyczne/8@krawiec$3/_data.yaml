@@ -1,0 +1,9 @@
+id: krawiec
+name: 'Krawcowa',
+level: 3,
+tasks:
+  - 'Umie zaprojektować i wykonać element garderoby. Potrafi przy tym skorzystać z wykrojników i odpowiednio dobrać technikę łączenia.',
+  - 'Potrafi sprawnie posłużyć się igłą i nicią. Umie obsługiwać maszynę do szycia (np. wykonać szwy różnymi ściegami).',
+  - 'Potrafi skorzystać z umiejętności krawieckich w warunkach polowych (np. naprawić plecak, wszyć troczki w namiot albo zszyć żagiel).',
+  - 'Potrafi przy wykorzystaniu umiejętności krawieckich samodzielnie wykonać użytkowy element aranżacji wnętrza (np. zasłonę lub poduszkę).',
+

@@ -1,0 +1,10 @@
+id: synoptyk
+name: 'Synoptyk',
+level: 3,
+tasks:
+  - 'Umie zorganizować stację meteorologiczną, która umożliwi pomiar temperatury powietrza, ciśnienia atmosferycznego i kierunku wiatru. Na podstawie odczytu z barometru potrafi obliczyć ciśnienie zredukowane do poziomu morza. Umie wykorzystać wyniki pomiarów do orientacyjnego przewidywania pogody.',
+  - 'Potrafi rozpoznać niebezpieczne zmiany siły i kierunku wiatru, takie jak szkwał, odbicie i dysza; umie wyjaśnić zjawisko bryzy porannej i wieczornej; wie, jakie kierunki wiatru dominują w Polsce. Potrafi wykorzystać tę wiedzę w praktyce (np. w czasie żeglugi lub rozstawiania obozowiska).',
+  - 'Umie rozpoznać rodzaj chmury ze względu na kształt i wysokość występowania. Potrafi wskazać zjawiska pogodowe związane z występowaniem różnych rodzajów chmur.',
+  - 'Potrafi korzystać z ogólnodostępnych numerycznych prognoz pogody, umie zinterpretować mapy pogody i meteogramy.',
+  - 'Potrafi wyjaśnić zjawisko powstawania układów barycznych oraz frontów atmosferycznych i ich wpływ na pogodę.',
+

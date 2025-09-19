@@ -1,0 +1,11 @@
+id: kajakarz_doskonaly
+name: 'Kajakarka doskonała',
+level: 3,
+tasks:
+  - 'Potrafi zaplanować i przeprowadzić kilkudniowy i kilkuosobowy spływ (zorganizować mapy, wyposażenie biwakowe, rozdział ekwipunku na kajaki, miejsca noclegowe itd.).',
+  - 'Umie dbać o bezpieczeństwo spływu w różnych warunkach terenowych, umie pełnić funkcję otwierającego spływ.',
+  - 'Potrafi pomóc załodze wywróconego kajaka, umie holować kajakarza na dziobie swojego kajaka.',
+  - 'Zna i stosuje przepisy dotyczące turystyki kajakowej.',
+  - 'Umie naprawić podstawowe uszkodzenia kajaka i wiosła.',
+  - 'Potrafi udzielić pierwszej pomocy osobie podtopionej, posiada sprawność **Sanitariuszki ze ścieżki „Samarytanka”.',
+

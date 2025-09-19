@@ -1,0 +1,8 @@
+id: czarna_pantera
+name: 'Czarna Pantera',
+level: 2,
+tasks:
+  - 'Umie zauważyć popełniane przez siebie lub innych błędy poznawcze (np. uprzedzenia, generalizowanie, myślenie czarnobiałe itd.) i potrafi wyjaśnić, na czym polegają i jak się ich wystrzegać.',
+  - 'Potrafi przedstawić różne racje i spojrzenia na tę samą sprawę oraz wyjaśnić jakie mogą być przyczyny różnych poglądów.',
+  - 'Umie ocenić i zweryfikować wiarygodność zasłyszanej informacji, konfrontując różne źródła.',
+

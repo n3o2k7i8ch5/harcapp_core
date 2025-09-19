@@ -1,0 +1,9 @@
+id: snowboardzista
+name: 'Snowboardzista',
+level: 3,
+tasks:
+  - 'Potrafi przejechać trudną trasę zjazdową (np. czerwoną) utrzymując poprawną pozycję, korzystając z takich technik jak jazda na krawędzi i skręty cięte.',
+  - 'Umie jeździć z tylną nogą z przodu (tzw. switch) z zachowaniem poprawnej pozycji.',
+  - 'Potrafi przeskoczyć nad małą przeszkodą, taką jak mulda śniegu. Umie pokonać przeszkodę typu box.',
+  - 'Zna różne techniki jazdy na desce, wie jakie mają zastosowania i potrafi dopasować sprzęt do wybranej z nich.',
+

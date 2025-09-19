@@ -1,0 +1,9 @@
+id: kaligraf
+name: 'Kaligraf',
+level: 3,
+tasks:
+  - 'Potrafi płynnie posługiwać się przynajmniej dwoma odręcznymi krojami pisma w odmianie prostej i pochyłej. Zna i umie wykorzystać w swoim piśmie różne rodzaje szeryfów.',
+  - 'Wie czym są i do czego służą inicjały, a także potrafi wykonać ozdobny inicjał każdej litery.',
+  - 'Zna pojęcia takie jak szeryf, wersalik, kapitalik, majuskuła i umie znaleźć (np. w Internecie) krój pisma o interesujących go parametrach.',
+  - 'Potrafi posługiwać się różnymi narzędziami do kaligrafii, w tym piórem o stalówce ściętej oraz miękkiej.',
+

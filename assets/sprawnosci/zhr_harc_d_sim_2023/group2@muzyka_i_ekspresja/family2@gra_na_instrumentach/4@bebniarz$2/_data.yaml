@@ -1,0 +1,8 @@
+id: bebniarz
+name: 'Bębniarz',
+level: 2,
+tasks:
+  - 'Umie zagrać na instrumencie perkusyjnym wybrany rytm na podstawie zapisu nutowego. Potrafi powtórzyć kilkutaktowy rytm zagrany przez kogoś innego.',
+  - 'Umie stosować różne rodzaje artykulacji dźwięku na instrumentach perkusyjnych, w tym tremolo.',
+  - 'Potrafi akompaniować rytmicznie do kilku piosenek. Umie w zespole nadać odpowiednie tempo i utrzymać je (tj. nie przyspieszać ani zwalniać, jeśli nie jest to przewidziane).',
+

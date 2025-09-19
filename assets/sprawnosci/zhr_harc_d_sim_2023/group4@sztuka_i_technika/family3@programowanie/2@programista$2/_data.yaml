@@ -1,0 +1,7 @@
+id: programista
+name: 'Programista',
+level: 2,
+tasks:
+  - 'Potrafi napisać program (np. wykonujący działania matematyczne, szyfrujący wiadomość lub przeliczający jednostki miary) i umie wytłumaczyć jego działanie.',
+  - 'Potrafi zabezpieczyć plik hasłem i przesłać go mailem.',
+

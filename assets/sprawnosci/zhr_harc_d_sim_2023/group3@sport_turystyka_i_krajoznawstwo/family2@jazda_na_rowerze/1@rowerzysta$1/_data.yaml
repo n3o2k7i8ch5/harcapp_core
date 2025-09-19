@@ -1,0 +1,8 @@
+id: rowerzysta
+name: 'Rowerzystka',
+level: 1,
+tasks:
+  - 'Potrafi przygotować rower i ekwipunek na jednodniową wyprawę rowerową.',
+  - 'Umie przejechać na rowerze 30 km w ciągu jednego dnia.',
+  - 'Potrafi wykonać przy rowerze drobne prace, takie jak smarowanie łańcucha, zamontowanie oświetlenia lub błotnika. Umie wymienić dętkę.',
+

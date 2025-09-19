@@ -1,0 +1,8 @@
+id: lekka_stopa
+name: 'Lekka Stopa',
+level: 1,
+tasks:
+  - 'Umie poruszać się bezszelestnie w różnych warunkach terenowych.',
+  - 'Potrafi sprawnie pokonać różne przeszkody (np. wejść na drzewo, przeskoczyć rów o szerokości 1,5 m, przejść przez ogrodzenie).',
+  - 'Umie zapamiętać przebytą drogę i samodzielnie nią powrócić.',
+

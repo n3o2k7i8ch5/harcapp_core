@@ -1,0 +1,9 @@
+id: zielarz
+name: 'Zielarka',
+level: 3,
+tasks:
+  - 'Z wykorzystaniem samodzielnie zebranych dziko rosnących ziół i owoców z 8 różnych gatunków potrafi przygotować 10 dań, w tym 3 na ciepło.',
+  - 'Umie rozpoznać 5 ziół o właściwościach leczniczych i zna ich zastosowanie. Potrafi odnaleźć 3 z nich w terenie.',
+  - 'Zna zastosowanie i potrafi wykorzystać w celu innym niż spożycie 5 roślin - np. natrzeć się wrotyczem w celu uchronienia się przed ukąszeniami komarów, przyłożyć cebulę do ukąszenia osy w celu uśmierzenia bólu, wykorzystać mydlnicę lekarską do wyprania ubrań.',
+  - 'Ma podstawową wiedzę o systematyce roślin występujących w Polsce, umie posłużyć się atlasem roślin dla odszukania lub opisania danego gatunku.',
+

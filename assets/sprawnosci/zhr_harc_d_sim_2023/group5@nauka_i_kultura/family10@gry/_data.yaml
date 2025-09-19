@@ -1,0 +1,27 @@
+id: gry
+name: Gry
+
+tags:
+  - "#zasady"
+  - "#wyobraźnia"
+  - "#twórczość"
+  - "#spryt"
+  - "#współpraca"
+  - "#zespół"
+  - "#współzawodnictwo"
+  - "#ruch"
+  - "#wytrzymałość"
+  - "#technika"
+  - "#emocje"
+  - "#mapa"
+  - "#zwinność"
+  - "#zagadka"
+
+fragment: |
+  Trzy kolumny wskażą dróżkę w trawie,
+  która prowadzi do granicy wody.
+  Jeśli brama będzie zamknięta,
+  pamiętajcie, żeby nie stukać.
+  Natomiast nie będzie niegrzecznie
+  zamknąć wodę.
+fragmentAuthor: "Pierdomenico Baccalario, „Mistrz piorunów”"

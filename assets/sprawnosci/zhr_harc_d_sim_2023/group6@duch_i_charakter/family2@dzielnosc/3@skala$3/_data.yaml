@@ -1,0 +1,9 @@
+id: skala
+name: 'Skała',
+level: 3,
+tasks:
+  - 'Potrafi wyrobić sobie nowy pożyteczny nawyk.',
+  - 'Umie wskazać swoje mocne i słabe strony oraz uwzględnić je w podejmowanych działaniach, aby jak najlepiej wykorzystać swój potencjał.',
+  - 'Potrafi wyznaczyć sobie realny do osiągnięcia cel, wspierający rozwój jednej z mocnych stron lub niwelujący jedną ze słabości, a następnie go zrealizować, wyznaczając konkretne zadania i terminy.',
+  - 'Umie właściwie ocenić swoje możliwości przy przyjmowaniu nowych zobowiązań tak, aby móc ich dotrzymywać bez zaniedbywania swoich dotychczasowych potrzeb i obowiązków.',
+

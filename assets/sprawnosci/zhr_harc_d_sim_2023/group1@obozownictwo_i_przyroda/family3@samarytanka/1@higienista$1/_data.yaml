@@ -1,0 +1,8 @@
+id: higienista
+name: 'Higienistka',
+level: 1,
+tasks:
+  - 'Potrafi opatrzyć drobne zranienie, oparzenie i lekki uraz.',
+  - 'Umie ułożyć poszkodowanego w pozycji bezpiecznej.',
+  - 'Zna numery alarmowe i potrafi wezwać pomoc w różnych sytuacjach.',
+

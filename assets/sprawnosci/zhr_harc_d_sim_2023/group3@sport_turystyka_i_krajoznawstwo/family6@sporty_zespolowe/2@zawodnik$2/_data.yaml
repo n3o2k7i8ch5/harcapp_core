@@ -1,0 +1,9 @@
+id: zawodnik
+name: 'Zawodniczka',
+level: 2,
+tasks:
+  - 'Umie grać na wybranej pozycji lub w wybranej roli w zespole stosując specjalistyczne techniki gry z nią związane (np. piąstkowanie bramkarza w piłce nożnej, krótki atak w siatkówce, rzut za 3 pkt w koszykówce).',
+  - 'Zna dokładnie zasady wybranego sportu zespołowego zgodne z międzynarodowym regulaminem.',
+  - 'Zawsze gra fair play i potrafi przekonać do tego innych członków zespołu.',
+  - 'Umie prawidłowo rozgrzać się wykonując kilka ćwiczeń przed rozgrywką.',
+

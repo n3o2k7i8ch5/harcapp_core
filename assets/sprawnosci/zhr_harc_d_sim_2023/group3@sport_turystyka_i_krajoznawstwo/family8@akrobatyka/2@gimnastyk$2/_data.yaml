@@ -1,0 +1,10 @@
+id: gimnastyk
+name: 'Gimnastyczka',
+level: 2,
+tasks:
+  - 'Umie podciągnąć się oburącz na drążku podchwytem i nachwytem.',
+  - 'Potrafi stabilnie stać na rękach, opierając nogi o ścianę.',
+  - 'Umie przeskoczyć przeszkodę sięgającą do pasa, opierając się o nią wyłącznie rękami.',
+  - 'Potrafi przejść kilka metrów po naciągniętej linie, trzymając się drugiej liny, lub po linie typu slackline.',
+  - 'Umie poprowadzić prawidłową rozgrzewkę, uwzględniając różne ćwiczenia i partie ciała.',
+

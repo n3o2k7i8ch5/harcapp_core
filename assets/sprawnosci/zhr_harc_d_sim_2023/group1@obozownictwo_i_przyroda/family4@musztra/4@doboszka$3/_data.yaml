@@ -1,0 +1,8 @@
+id: doboszka
+name: 'Dobosz',
+level: 3,
+tasks:
+  - 'Potrafi dobrać i nadać kolumnie odpowiednie tempo wybijając rytm na instrumencie perkusyjnym w marszu.',
+  - 'Potrafi poprowadzić asystę perkusyjną, wybijając odpowiedni rytm na wejście pocztu sztandarowego, złożenie wieńca i apel poległych.',
+  - 'Posiada sprawność *Muzykantki ze ścieżki „Gra na instrumentach”.',
+

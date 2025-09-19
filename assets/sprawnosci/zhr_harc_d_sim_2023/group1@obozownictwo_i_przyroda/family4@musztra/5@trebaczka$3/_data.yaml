@@ -1,0 +1,8 @@
+id: trebaczka
+name: 'Trębaczka',
+level: 3,
+tasks:
+  - 'Zna i umie zagrać kilka sygnałów Wojska Polskiego np. Pobudkę, Baczność, Spocznij, Hasło Wojska Polskiego.',
+  - 'Potrafi zastosować odpowiednie sygnały do kierowania drużyną.',
+  - 'Posiada sprawność *Muzykantki ze ścieżki „Gra na instrumentach”.',
+
