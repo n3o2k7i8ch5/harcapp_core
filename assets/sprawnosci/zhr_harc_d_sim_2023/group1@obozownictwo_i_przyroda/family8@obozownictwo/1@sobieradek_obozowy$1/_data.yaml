@@ -1,8 +1,8 @@
 id: sobieradek_obozowy
-name: 'Sobieradek Obozowy',
-level: 1,
+name: 'Sobieradek Obozowy'
+level: 1
 tasks:
-  - 'Potrafi sprawnie posługiwać się narzędziami pionierskimi: młotkiem, toporkiem i piłą. Umie zabezpieczyć je po skończonej pracy.',
-  - 'Umie zaprojektować i wykonać drobny przedmiot pionierki obozowej (np. drogowskaz, wieszak lub ławkę).',
-  - 'Potrafi wyregulować odciągi i podwinąć poły w namiocie dziesięcioosobowym.',
+  - 'Potrafi sprawnie posługiwać się narzędziami pionierskimi: młotkiem, toporkiem i piłą. Umie zabezpieczyć je po skończonej pracy.'
+  - 'Umie zaprojektować i wykonać drobny przedmiot pionierki obozowej (np. drogowskaz, wieszak lub ławkę).'
+  - 'Potrafi wyregulować odciągi i podwinąć poły w namiocie dziesięcioosobowym.'
 

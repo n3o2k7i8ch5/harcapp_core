@@ -1,9 +1,9 @@
 id: plomien
-name: 'Iskierka',
-level: 1,
+name: 'Iskierka'
+level: 1
 tasks:
-  - 'Umie ułożyć i rozpalić ognisko.',
-  - 'Potrafi umiejętnie podkładać drwa lub gałęzie, regulując wysokość płomienia i ograniczając iskrzenie.',
-  - 'Umie zatrzeć ślady ogniska po jego całkowitym wygaszeniu.',
-  - 'Potrafi obchodzić się z ogniem ostrożnie. Umie posługiwać się podstawowym sprzętem gaśniczym oraz wezwać straż pożarną.',
+  - 'Umie ułożyć i rozpalić ognisko.'
+  - 'Potrafi umiejętnie podkładać drwa lub gałęzie, regulując wysokość płomienia i ograniczając iskrzenie.'
+  - 'Umie zatrzeć ślady ogniska po jego całkowitym wygaszeniu.'
+  - 'Potrafi obchodzić się z ogniem ostrożnie. Umie posługiwać się podstawowym sprzętem gaśniczym oraz wezwać straż pożarną.'
 

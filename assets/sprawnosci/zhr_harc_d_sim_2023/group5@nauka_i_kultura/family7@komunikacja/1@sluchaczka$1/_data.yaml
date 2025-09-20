@@ -1,5 +1,7 @@
 id: sluchaczka
-name: 'Słuchaczka',
-level: 1,
+name: 'Słuchaczka'
+level: 1
 tasks:
+  - 'Umie rozwiązać konflikt z kolegą lub koleżanką uwzględniając zarówno potrzeby własne, jak i drugiej osoby.'
+  - 'W różnych sytuacjach potrafi nazwać swoje uczucia i wskazać ich źródła.'
 

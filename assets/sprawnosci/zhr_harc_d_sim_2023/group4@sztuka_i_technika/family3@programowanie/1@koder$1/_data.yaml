@@ -1,7 +1,7 @@
 id: koder
-name: 'Koder',
-level: 1,
+name: 'Koder'
+level: 1
 tasks:
-  - 'Potrafi napisać i uruchomić program, który pobiera od użytkownika tekst i wyświetla go na ekranie.',
-  - 'Umie podłączyć do komputera urządzenia peryferyjne, takie jak monitor, mikrofon, głośniki lub drukarka.',
+  - 'Potrafi napisać i uruchomić program, który pobiera od użytkownika tekst i wyświetla go na ekranie.'
+  - 'Umie podłączyć do komputera urządzenia peryferyjne, takie jak monitor, mikrofon, głośniki lub drukarka.'
 

@@ -1,9 +1,9 @@
 id: przewodnik
-name: 'Przewodnik',
-level: 3,
+name: 'Przewodnik'
+level: 3
 tasks:
-  - 'Potrafi zaplanować, zorganizować i przeprowadzić tematyczną wycieczkę po rodzinnym mieście lub regionie.',
-  - 'Zna w swoim mieście lub regionie 10 miejsc, które warto odwiedzić, i umie o nich opowiedzieć.',
-  - 'Potrafi znaleźć w dostępnych źródłach (np. w internecie, książkach lub przewodnikach) informacje poszerzające jego wiedzę na temat miasta lub regionu.',
-  - 'Posiada sprawność **Gawędziarki ze ścieżki „Aktorstwo i teatr”.',
+  - 'Potrafi zaplanować, zorganizować i przeprowadzić tematyczną wycieczkę po rodzinnym mieście lub regionie.'
+  - 'Zna w swoim mieście lub regionie 10 miejsc, które warto odwiedzić, i umie o nich opowiedzieć.'
+  - 'Potrafi znaleźć w dostępnych źródłach (np. w internecie, książkach lub przewodnikach) informacje poszerzające jego wiedzę na temat miasta lub regionu.'
+  - 'Posiada sprawność **Gawędziarki ze ścieżki „Aktorstwo i teatr”.'
 

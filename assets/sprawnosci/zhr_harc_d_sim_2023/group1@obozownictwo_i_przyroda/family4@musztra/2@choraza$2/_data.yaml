@@ -1,5 +1,8 @@
 id: choraza
-name: 'Chorąża',
-level: 2,
+name: 'Chorąża'
+level: 2
 tasks:
+  - 'Umie poruszać się i wykonywać chwyty sztandarem lub proporcem zgodnie z regulaminem musztry.'
+  - 'Potrafi bezpiecznie przechowywać i zadbać o proporzec lub sztandar, zarówno w warunkach polowych, jak i w harcówce lub w domu.'
+  - 'Umie wyjaśnić symbolikę proporca lub sztandaru, który mu powierzono.'
 

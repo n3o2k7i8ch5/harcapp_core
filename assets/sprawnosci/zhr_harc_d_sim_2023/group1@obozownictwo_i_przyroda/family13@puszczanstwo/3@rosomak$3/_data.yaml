@@ -1,10 +1,10 @@
 id: rosomak
-name: 'Łasica',
-level: 3,
+name: 'Łasica'
+level: 3
 tasks:
-  - 'Potrafi w terenie pozyskać wodę zdatną do picia.',
-  - 'Potrafi przygotować ciepły posiłek mając do dyspozycji jedynie nóż, zapałki i butelkę wody.',
-  - 'Potrafi z surowców naturalnych samodzielnie wytworzyć użyteczne narzędzie lub element ekwipunku biwakowego (np. naczynie na wodę, kosz pleciony, linę).',
-  - 'Potrafi bytować w lesie w sposób niezauważalny dla osób postronnych.',
-  - 'Posiada sprawność **Botaniczki ze ścieżki „Zielarstwo” oraz **Tropicielki Zwierzyny ze ścieżki „Tropienie zwierząt”.',
+  - 'Potrafi w terenie pozyskać wodę zdatną do picia.'
+  - 'Potrafi przygotować ciepły posiłek mając do dyspozycji jedynie nóż, zapałki i butelkę wody.'
+  - 'Potrafi z surowców naturalnych samodzielnie wytworzyć użyteczne narzędzie lub element ekwipunku biwakowego (np. naczynie na wodę, kosz pleciony, linę).'
+  - 'Potrafi bytować w lesie w sposób niezauważalny dla osób postronnych.'
+  - 'Posiada sprawność **Botaniczki ze ścieżki „Zielarstwo” oraz **Tropicielki Zwierzyny ze ścieżki „Tropienie zwierząt”.'
 

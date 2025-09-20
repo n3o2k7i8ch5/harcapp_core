@@ -1,10 +1,10 @@
 id: deweloper
-name: 'Dewelopera',
-level: 3,
+name: 'Dewelopera'
+level: 3
 tasks:
-  - 'Umie napisać program złożony z kilku podprogramów lub obiektów, wykorzystujący biblioteki programistyczne i złożone typy danych.',
-  - 'Potrafi zabezpieczyć program przed wprowadzeniem niepoprawnych danych. Umie skonstruować jego intuicyjną instrukcję obsługi (np. w formie wyświetlanych komunikatów lub osobnej dokumentacji).',
-  - 'Potrafi skompilować program lub przygotować go do łatwego uruchomienia na innym komputerze.',
-  - 'Umie umieszczać w kodzie komentarze i wybierać treściwe nazwy dla zmiennych i funkcji tak, by kod programu był czytelny i zrozumiały.',
-  - 'Potrafi wskazać najważniejsze cechy języka programowania, którego używa, i porównać go z innym wybranym językiem.',
+  - 'Umie napisać program złożony z kilku podprogramów lub obiektów, wykorzystujący biblioteki programistyczne i złożone typy danych.'
+  - 'Potrafi zabezpieczyć program przed wprowadzeniem niepoprawnych danych. Umie skonstruować jego intuicyjną instrukcję obsługi (np. w formie wyświetlanych komunikatów lub osobnej dokumentacji).'
+  - 'Potrafi skompilować program lub przygotować go do łatwego uruchomienia na innym komputerze.'
+  - 'Umie umieszczać w kodzie komentarze i wybierać treściwe nazwy dla zmiennych i funkcji tak, by kod programu był czytelny i zrozumiały.'
+  - 'Potrafi wskazać najważniejsze cechy języka programowania, którego używa, i porównać go z innym wybranym językiem.'
 

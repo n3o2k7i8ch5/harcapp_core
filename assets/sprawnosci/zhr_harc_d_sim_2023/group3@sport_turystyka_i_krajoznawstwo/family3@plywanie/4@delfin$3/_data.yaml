@@ -1,10 +1,10 @@
 id: delfin
-name: 'Delfin',
-level: 3,
+name: 'Delfin'
+level: 3
 tasks:
-  - 'Potrafi przepłynąć 50 m w czasie nie dłuższym niż 45 s.',
-  - 'Umie poprawnie pływać co najmniej czterema stylami w tym stylem motylkowym (tzw. delfinem).',
-  - 'Potrafi przepłynąć w wodzie stojącej dystans 1500 m, płynąc co najmniej dwoma stylami, z czego przynajmniej 200 m stylem grzbietowym.',
-  - 'Umie wykonać bezpieczny skok do wody z wysokości 1 m.',
-  - 'Potrafi zanurkować na głębokość 3 m i przepłynąć 20 m pod wodą.',
+  - 'Potrafi przepłynąć 50 m w czasie nie dłuższym niż 45 s.'
+  - 'Umie poprawnie pływać co najmniej czterema stylami w tym stylem motylkowym (tzw. delfinem).'
+  - 'Potrafi przepłynąć w wodzie stojącej dystans 1500 m, płynąc co najmniej dwoma stylami, z czego przynajmniej 200 m stylem grzbietowym.'
+  - 'Umie wykonać bezpieczny skok do wody z wysokości 1 m.'
+  - 'Potrafi zanurkować na głębokość 3 m i przepłynąć 20 m pod wodą.'
 

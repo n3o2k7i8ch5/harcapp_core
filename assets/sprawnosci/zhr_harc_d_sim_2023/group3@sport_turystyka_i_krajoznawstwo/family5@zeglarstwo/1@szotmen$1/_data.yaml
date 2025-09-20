@@ -1,10 +1,10 @@
 id: szotmen
-name: 'Szotmenka',
-level: 1,
+name: 'Szotmenka'
+level: 1
 tasks:
-  - 'Potrafi wykorzystywać podstawowe węzły żeglarskie, w tym: prosty, szotowy i cumowniczy.',
-  - 'Umie obsługiwać (wybierać, luzować, knagować) szoty, fały i cumy.',
-  - 'Potrafi posługiwać się pagajami i wykonywać prawidłowo polecenia sternika na pagaje.',
-  - 'Umie prawidłowo posługiwać się odbijaczami, bosakiem, a także nabrać wodę do wiadra podczas postoju.',
-  - 'Przestrzega zasad bezpieczeństwa na jachcie.',
+  - 'Potrafi wykorzystywać podstawowe węzły żeglarskie, w tym: prosty, szotowy i cumowniczy.'
+  - 'Umie obsługiwać (wybierać, luzować, knagować) szoty, fały i cumy.'
+  - 'Potrafi posługiwać się pagajami i wykonywać prawidłowo polecenia sternika na pagaje.'
+  - 'Umie prawidłowo posługiwać się odbijaczami, bosakiem, a także nabrać wodę do wiadra podczas postoju.'
+  - 'Przestrzega zasad bezpieczeństwa na jachcie.'
 

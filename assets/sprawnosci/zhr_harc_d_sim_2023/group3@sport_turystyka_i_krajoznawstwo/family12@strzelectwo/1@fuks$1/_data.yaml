@@ -1,7 +1,7 @@
 id: fuks
-name: 'Fuks',
-level: 1,
+name: 'Fuks'
+level: 1
 tasks:
-  - 'Umie posługiwać się wiatrówką lub karabinkiem pneumatycznym, zgodnie z zasadami bezpieczeństwa. Umie wytłumaczyć zasady wynikające z rozwinięcia skrótu BLOS: broń, lufa, otoczenie, spust.',
-  - 'Strzelając z wiatrówki lub karabinku pneumatycznego potrafi trafić z odległości 10 m do celu o średnicy ok. 15 cm.',
+  - 'Umie posługiwać się wiatrówką lub karabinkiem pneumatycznym, zgodnie z zasadami bezpieczeństwa. Umie wytłumaczyć zasady wynikające z rozwinięcia skrótu BLOS: broń, lufa, otoczenie, spust.'
+  - 'Strzelając z wiatrówki lub karabinku pneumatycznego potrafi trafić z odległości 10 m do celu o średnicy ok. 15 cm.'
 

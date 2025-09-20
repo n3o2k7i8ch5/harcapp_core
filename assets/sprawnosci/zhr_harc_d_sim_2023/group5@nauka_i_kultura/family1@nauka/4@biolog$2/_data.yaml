@@ -1,7 +1,7 @@
 id: biolog
-name: 'Biolog',
-level: 2,
+name: 'Biolog'
+level: 2
 tasks:
-  - 'Potrafi przeprowadzić eksperyment, żeby zademonstrować wybrane zjawisko ze świata bakterii, grzybów, roślin lub zwierząt (np. wpływ temperatury i wilgotności na pleśnienie jedzenia albo zjawisko osmozy).',
-  - 'Umie zaprezentować wnioski z przeprowadzonego eksperymentu.',
+  - 'Potrafi przeprowadzić eksperyment, żeby zademonstrować wybrane zjawisko ze świata bakterii, grzybów, roślin lub zwierząt (np. wpływ temperatury i wilgotności na pleśnienie jedzenia albo zjawisko osmozy).'
+  - 'Umie zaprezentować wnioski z przeprowadzonego eksperymentu.'
 

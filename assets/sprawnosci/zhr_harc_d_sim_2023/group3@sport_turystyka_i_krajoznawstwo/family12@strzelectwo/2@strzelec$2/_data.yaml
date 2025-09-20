@@ -1,9 +1,9 @@
 id: strzelec
-name: 'Strzelec',
-level: 2,
+name: 'Strzelec'
+level: 2
 tasks:
-  - 'Potrafi posługiwać się bronią palną, wiatrówkami lub replikami broni, przestrzegając dodatkowych zasad bezpieczeństwa specyficznych dla danego rodzaju broni. Umie zastosować adekwatne środki ochrony oczu, słuchu, twarzy i ciała.',
-  - 'Potrafi celnie strzelać z wybranej broni (np. strzelając z wiatrówki z odległości 10 m do standardowej tarczy o średnicy 155,5 mm osiągnie wynik powyżej 70/100 punktów).',
-  - 'Potrafi obsługiwać, czyścić i konserwować replikę broni lub wiatrówkę.',
-  - 'Potrafi zorganizować bezpieczne miejsce do strzelania.',
+  - 'Potrafi posługiwać się bronią palną, wiatrówkami lub replikami broni, przestrzegając dodatkowych zasad bezpieczeństwa specyficznych dla danego rodzaju broni. Umie zastosować adekwatne środki ochrony oczu, słuchu, twarzy i ciała.'
+  - 'Potrafi celnie strzelać z wybranej broni (np. strzelając z wiatrówki z odległości 10 m do standardowej tarczy o średnicy 155,5 mm osiągnie wynik powyżej 70/100 punktów).'
+  - 'Potrafi obsługiwać, czyścić i konserwować replikę broni lub wiatrówkę.'
+  - 'Potrafi zorganizować bezpieczne miejsce do strzelania.'
 

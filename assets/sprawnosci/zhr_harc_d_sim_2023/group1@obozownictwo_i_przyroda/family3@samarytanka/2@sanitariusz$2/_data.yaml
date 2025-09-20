@@ -1,9 +1,9 @@
 id: sanitariusz
-name: 'Sanitariuszka',
-level: 2,
+name: 'Sanitariuszka'
+level: 2
 tasks:
-  - 'Umie zaradzić w sytuacji wyziębienia, udaru cieplnego, omdlenia i oparzeń.',
-  - 'Potrafi zaradzić w przypadku urazu kończyny (np. skręcenie lub złamanie), a w razie konieczności umie ją unieruchomić przy pomocy improwizowanego sprzętu.',
-  - 'Umie poprawnie przeprowadzić resuscytację krążeniowo-oddechową.',
-  - 'Potrafi skompletować apteczkę zastępu na całodniową wycieczkę i korzystać z jej zawartości.',
+  - 'Umie zaradzić w sytuacji wyziębienia, udaru cieplnego, omdlenia i oparzeń.'
+  - 'Potrafi zaradzić w przypadku urazu kończyny (np. skręcenie lub złamanie), a w razie konieczności umie ją unieruchomić przy pomocy improwizowanego sprzętu.'
+  - 'Umie poprawnie przeprowadzić resuscytację krążeniowo-oddechową.'
+  - 'Potrafi skompletować apteczkę zastępu na całodniową wycieczkę i korzystać z jej zawartości.'
 

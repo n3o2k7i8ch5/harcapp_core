@@ -1,10 +1,10 @@
 id: kurier_rowerowy
-name: 'Kurierka rowerowa',
-level: 3,
+name: 'Kurierka rowerowa'
+level: 3
 tasks:
-  - 'Potrafi efektywnie poruszać się rowerem po mieście stosując się do zasad ruchu drogowego, nie utrudniając poruszania się pieszym i samochodom.',
-  - 'Umie dobrać trasę przejazdu w taki sposób, aby jak najrzadziej się zatrzymywać i schodzić z roweru.',
-  - 'Potrafi dobrze oszacować czas przejazdu na zadanej trasie z uwzględnieniem warunków drogowych, pogodowych, pory dnia, kondycji i wytrzymałości sprzętu.',
-  - 'Umie samodzielnie złożyć rower.',
-  - 'Umie w bezpieczny i szybki sposób przewieźć na rowerze przesyłkę (np. pudło lub rulon).',
+  - 'Potrafi efektywnie poruszać się rowerem po mieście stosując się do zasad ruchu drogowego, nie utrudniając poruszania się pieszym i samochodom.'
+  - 'Umie dobrać trasę przejazdu w taki sposób, aby jak najrzadziej się zatrzymywać i schodzić z roweru.'
+  - 'Potrafi dobrze oszacować czas przejazdu na zadanej trasie z uwzględnieniem warunków drogowych, pogodowych, pory dnia, kondycji i wytrzymałości sprzętu.'
+  - 'Umie samodzielnie złożyć rower.'
+  - 'Umie w bezpieczny i szybki sposób przewieźć na rowerze przesyłkę (np. pudło lub rulon).'
 

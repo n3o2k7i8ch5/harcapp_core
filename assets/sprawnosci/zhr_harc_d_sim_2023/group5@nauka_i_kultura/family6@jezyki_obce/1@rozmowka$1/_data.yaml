@@ -1,7 +1,7 @@
 id: rozmowka
-name: 'Rozmówka',
-level: 1,
+name: 'Rozmówka'
+level: 1
 tasks:
-  - 'Potrafi załatwić kilka spraw w obcym języku, np. dogadać się w sklepie, zapytać o drogę.',
-  - 'Umie w obcym języku krótko opowiedzieć o sobie i o wydarzeniu, w którym uczestniczyła (np. ostatniej zbiórce drużyny, wycieczce klasowej).',
+  - 'Potrafi załatwić kilka spraw w obcym języku, np. dogadać się w sklepie, zapytać o drogę.'
+  - 'Umie w obcym języku krótko opowiedzieć o sobie i o wydarzeniu, w którym uczestniczyła (np. ostatniej zbiórce drużyny, wycieczce klasowej).'
 

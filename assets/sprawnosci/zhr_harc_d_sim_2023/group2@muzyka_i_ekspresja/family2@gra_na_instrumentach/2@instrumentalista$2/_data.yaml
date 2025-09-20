@@ -1,8 +1,8 @@
 id: instrumentalista
-name: 'Instrumentalistka',
-level: 2,
+name: 'Instrumentalistka'
+level: 2
 tasks:
-  - 'Potrafi na podstawie zapisu (np. nutowego lub tabulaturowego) samodzielnie nauczyć się grać wybrany utwór.',
-  - 'Umie grać w kilkuosobowym zespole, trzymając wspólny rytm i tonację.',
-  - 'Potrafi dbać o instrument i go konserwować. Jeśli instrument wymaga częstego strojenia, umie to robić.',
+  - 'Potrafi na podstawie zapisu (np. nutowego lub tabulaturowego) samodzielnie nauczyć się grać wybrany utwór.'
+  - 'Umie grać w kilkuosobowym zespole, trzymając wspólny rytm i tonację.'
+  - 'Potrafi dbać o instrument i go konserwować. Jeśli instrument wymaga częstego strojenia, umie to robić.'
 

@@ -1,9 +1,9 @@
 id: obywatel
-name: 'Obywatelka',
-level: 3,
+name: 'Obywatelka'
+level: 3
 tasks:
-  - 'Umie skutecznie zainicjować i doprowadzić do realizacji przedsięwzięcia związanego z życiem szkoły lub życiem sąsiedzkim (np. obchody święta szkoły lub porządkowanie podwórka).',
-  - 'Potrafi skutecznie przeprowadzić akcję promującą aktywność obywatelską (np. akcja „Wywieś Flagę” lub akcja Szlachetna Paczka).',
-  - 'Umie znaleźć informację o aktualnych konsultacjach społecznych lub innych formach dialogu społecznego prowadzonych w swojej miejscowości.',
-  - 'Potrafi na piśmie złożyć pytanie lub zgłosić sprawę dotyczącą społeczności lokalnej lub przestrzeni wspólnej (np. niedziałająca sygnalizacja świetlna). Umie ustalić, kto jest odpowiedzialny za daną kwestię na szczeblu samorządu lokalnego, spółdzielczego lub osiedlowego.',
+  - 'Umie skutecznie zainicjować i doprowadzić do realizacji przedsięwzięcia związanego z życiem szkoły lub życiem sąsiedzkim (np. obchody święta szkoły lub porządkowanie podwórka).'
+  - 'Potrafi skutecznie przeprowadzić akcję promującą aktywność obywatelską (np. akcja „Wywieś Flagę” lub akcja Szlachetna Paczka).'
+  - 'Umie znaleźć informację o aktualnych konsultacjach społecznych lub innych formach dialogu społecznego prowadzonych w swojej miejscowości.'
+  - 'Potrafi na piśmie złożyć pytanie lub zgłosić sprawę dotyczącą społeczności lokalnej lub przestrzeni wspólnej (np. niedziałająca sygnalizacja świetlna). Umie ustalić, kto jest odpowiedzialny za daną kwestię na szczeblu samorządu lokalnego, spółdzielczego lub osiedlowego.'
 

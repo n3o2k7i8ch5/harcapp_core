@@ -1,9 +1,9 @@
 id: fotograf
-name: 'Fotograf',
-level: 2,
+name: 'Fotograf'
+level: 2
 tasks:
-  - 'Umie zrobić serię zdjęć portretowych (np. harcerzom swojej drużyny). Potrafi zadbać przy tym o odpowiednie dobranie parametrów (np. tła, światła i głębi ostrości) aparatu, aby zdjęcia były spójne wizualnie.',
-  - 'Umie dobrać odpowiedni tryb aparatu do fotografowanej sceny: np. pejzaż, ruch, sport, portret, portret zbiorowy, scenę na ulicy.',
-  - 'Potrafi dokonać podstawowej obróbki zdjęć w wybranym programie graficznym, posługując się takimi parametrami jak kontrast, jasność, ostrość, kadrowanie, nasycenie kolorów itp..',
-  - 'Umie przygotować swoje zdjęcia do publikacji w Internecie oraz do druku. Potrafi sporządzić wydruk swoich fotografii.',
+  - 'Umie zrobić serię zdjęć portretowych (np. harcerzom swojej drużyny). Potrafi zadbać przy tym o odpowiednie dobranie parametrów (np. tła, światła i głębi ostrości) aparatu, aby zdjęcia były spójne wizualnie.'
+  - 'Umie dobrać odpowiedni tryb aparatu do fotografowanej sceny: np. pejzaż, ruch, sport, portret, portret zbiorowy, scenę na ulicy.'
+  - 'Potrafi dokonać podstawowej obróbki zdjęć w wybranym programie graficznym, posługując się takimi parametrami jak kontrast, jasność, ostrość, kadrowanie, nasycenie kolorów itp..'
+  - 'Umie przygotować swoje zdjęcia do publikacji w Internecie oraz do druku. Potrafi sporządzić wydruk swoich fotografii.'
 

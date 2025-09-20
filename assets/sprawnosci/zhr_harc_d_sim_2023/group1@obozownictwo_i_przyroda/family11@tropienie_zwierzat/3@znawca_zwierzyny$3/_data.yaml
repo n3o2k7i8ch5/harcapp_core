@@ -1,9 +1,9 @@
 id: znawca_zwierzyny
-name: 'Znawca Zwierzyny',
-level: 3,
+name: 'Znawca Zwierzyny'
+level: 3
 tasks:
-  - 'Umie odnaleźć zwierzynę w terenie wyłącznie na podstawie tropów i śladów.',
-  - 'Na podstawie znalezionych w lesie tropów i śladów potrafi wysnuć wnioski i opisać zdarzenie z udziałem zwierząt.',
-  - 'Potrafi wyznaczyć i przygotować stanowisko do wielogodzinnej obserwacji zwierząt, przeprowadzić taką obserwację i ją udokumentować (np. w formie notatek, zdjęć, rysunków lub filmu).',
-  - 'Dobrze zna zwyczaje zwierząt z 6 gatunków występujących na wolności w Polsce. Zna określenia na samców i samice tych gatunków, ich zwyczaje godowe, sposób chowu potomstwa i preferencje dotyczące pokarmu. Potrafi udzielić wskazówek jak odnaleźć takie zwierzę w terenie i po czym je rozpoznać.',
+  - 'Umie odnaleźć zwierzynę w terenie wyłącznie na podstawie tropów i śladów.'
+  - 'Na podstawie znalezionych w lesie tropów i śladów potrafi wysnuć wnioski i opisać zdarzenie z udziałem zwierząt.'
+  - 'Potrafi wyznaczyć i przygotować stanowisko do wielogodzinnej obserwacji zwierząt, przeprowadzić taką obserwację i ją udokumentować (np. w formie notatek, zdjęć, rysunków lub filmu).'
+  - 'Dobrze zna zwyczaje zwierząt z 6 gatunków występujących na wolności w Polsce. Zna określenia na samców i samice tych gatunków, ich zwyczaje godowe, sposób chowu potomstwa i preferencje dotyczące pokarmu. Potrafi udzielić wskazówek jak odnaleźć takie zwierzę w terenie i po czym je rozpoznać.'
 

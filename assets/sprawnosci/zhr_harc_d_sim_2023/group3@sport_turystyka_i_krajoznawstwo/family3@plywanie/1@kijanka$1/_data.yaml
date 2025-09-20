@@ -1,9 +1,9 @@
 id: kijanka
-name: 'Kijanka',
-level: 1,
+name: 'Kijanka'
+level: 1
 tasks:
-  - 'Potrafi przepłynąć bez przerwy dystans 100 m w wodzie stojącej lub dystans 200 m z nurtem.',
-  - 'Umie stabilnie utrzymywać się na powierzchni wody.',
-  - 'Potrafi skoczyć do wody z wysokości 0,5 m.',
-  - 'Umie wstrzymać oddech pod wodą przez 10 s.',
+  - 'Potrafi przepłynąć bez przerwy dystans 100 m w wodzie stojącej lub dystans 200 m z nurtem.'
+  - 'Umie stabilnie utrzymywać się na powierzchni wody.'
+  - 'Potrafi skoczyć do wody z wysokości 0,5 m.'
+  - 'Umie wstrzymać oddech pod wodą przez 10 s.'
 

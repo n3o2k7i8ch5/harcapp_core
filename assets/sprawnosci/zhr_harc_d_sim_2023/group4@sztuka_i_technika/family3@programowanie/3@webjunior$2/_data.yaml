@@ -1,8 +1,8 @@
 id: webjunior
-name: 'Webjunior',
-level: 2,
+name: 'Webjunior'
+level: 2
 tasks:
-  - 'Umie stworzyć pojedynczą stronę internetową, korzystając z języków HTML i CSS.',
-  - 'Potrafi umieścić swoją stronę w Internecie. Umie utworzyć jej kopię zapasową oraz wgrać ją z powrotem na serwer.',
-  - 'Potrafi stworzyć prosty serwis internetowy korzystający z systemu zarządzania treścią (np. z Wordpressa) i skonfigurować jego podstawowe funkcje, takie jak system newsów, logowanie użytkowników, import plików i zdjęć.',
+  - 'Umie stworzyć pojedynczą stronę internetową, korzystając z języków HTML i CSS.'
+  - 'Potrafi umieścić swoją stronę w Internecie. Umie utworzyć jej kopię zapasową oraz wgrać ją z powrotem na serwer.'
+  - 'Potrafi stworzyć prosty serwis internetowy korzystający z systemu zarządzania treścią (np. z Wordpressa) i skonfigurować jego podstawowe funkcje, takie jak system newsów, logowanie użytkowników, import plików i zdjęć.'
 

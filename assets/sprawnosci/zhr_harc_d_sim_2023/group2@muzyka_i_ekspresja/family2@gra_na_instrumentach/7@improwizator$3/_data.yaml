@@ -1,9 +1,9 @@
 id: improwizator
-name: 'Improwizator',
-level: 3,
+name: 'Improwizator'
+level: 3
 tasks:
-  - 'Umie improwizować do akompaniamentu.',
-  - 'Potrafi wymyślić i zagrać własną melodię (np. do istniejącego tekstu).',
-  - 'Umie ułożyć i zagrać solo melodię w wybranej skali (np. bluesowej).',
-  - 'Potrafi poruszać się po pentatonice i dwóch innych skalach (np. modalnych).',
+  - 'Umie improwizować do akompaniamentu.'
+  - 'Potrafi wymyślić i zagrać własną melodię (np. do istniejącego tekstu).'
+  - 'Umie ułożyć i zagrać solo melodię w wybranej skali (np. bluesowej).'
+  - 'Potrafi poruszać się po pentatonice i dwóch innych skalach (np. modalnych).'
 

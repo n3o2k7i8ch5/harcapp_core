@@ -1,9 +1,9 @@
 id: arcymistrz
-name: 'Arcymistrzyni',
-level: 3,
+name: 'Arcymistrzyni'
+level: 3
 tasks:
-  - 'Umie przeanalizować strategię lub taktyczne zagrania przeciwnika w wybranej grze logiczno-strategicznej, wskazać wady i zalety tych zagrań i zastosować odpowiednie kontry.',
-  - 'Zna zasady turniejowe wybranej przez siebie gry logiczno-strategicznej. Potrafi taki turniej zorganizować.',
-  - 'Umie pokazać analogie między wybraną grą logiczno-strategiczną, a strategią wojskową lub gospodarczą.',
-  - 'Potrafi obiektywnie ocenić swoje umiejętności w wybranej grze logiczno-strategicznej w odniesieniu do powszechnie stosowanych rankingów lub kategorii.',
+  - 'Umie przeanalizować strategię lub taktyczne zagrania przeciwnika w wybranej grze logiczno-strategicznej, wskazać wady i zalety tych zagrań i zastosować odpowiednie kontry.'
+  - 'Zna zasady turniejowe wybranej przez siebie gry logiczno-strategicznej. Potrafi taki turniej zorganizować.'
+  - 'Umie pokazać analogie między wybraną grą logiczno-strategiczną, a strategią wojskową lub gospodarczą.'
+  - 'Potrafi obiektywnie ocenić swoje umiejętności w wybranej grze logiczno-strategicznej w odniesieniu do powszechnie stosowanych rankingów lub kategorii.'
 

@@ -1,9 +1,9 @@
 id: lyzwiarz
-name: 'Łyżwiarka',
-level: 2,
+name: 'Łyżwiarka'
+level: 2
 tasks:
-  - 'Umie jeździć tzw. przeplatanką oraz płynnie pokonać slalom.',
-  - 'Potrafi przejechać dystans równy 5 długościom pełnowymiarowego boiska bez żadnego upadku. Umie zmienić kierunek jazdy o 180 stopni wykonując łuk w lewo lub w prawo.',
-  - 'Potrafi zatrzymać się we wskazanym miejscu.',
-  - 'Po jeździe potrafi odpowiednio osuszyć i zadbać o łyżwy.',
+  - 'Umie jeździć tzw. przeplatanką oraz płynnie pokonać slalom.'
+  - 'Potrafi przejechać dystans równy 5 długościom pełnowymiarowego boiska bez żadnego upadku. Umie zmienić kierunek jazdy o 180 stopni wykonując łuk w lewo lub w prawo.'
+  - 'Potrafi zatrzymać się we wskazanym miejscu.'
+  - 'Po jeździe potrafi odpowiednio osuszyć i zadbać o łyżwy.'
 

@@ -1,10 +1,10 @@
 id: tropiciel
-name: 'Patrolowa',
-level: 2,
+name: 'Patrolowa'
+level: 2
 tasks:
-  - 'Potrafi zamaskować się w terenie tak, by pozostać niezauważonym.',
-  - 'Potrafi posprzątać i zamaskować miejsce odpoczynku lub biwaku, by nie zostawić po sobie śladów.',
-  - 'Bezbłędnie rozpoznaje znaki patrolowe stosowane w drużynie, umie je wykorzystać do oznakowania trasy.',
-  - 'Potrafi z pamięci wykonać szkic przebytej trasy i opisać wygląd napotkanych osób.',
-  - 'Na podstawie śladów ludzkiej bytności umie wywnioskować możliwie dużo informacji (np. kierunek marszu i szacunkową liczbę osób lub czas biwaku i działania jego uczestników).',
+  - 'Potrafi zamaskować się w terenie tak, by pozostać niezauważonym.'
+  - 'Potrafi posprzątać i zamaskować miejsce odpoczynku lub biwaku, by nie zostawić po sobie śladów.'
+  - 'Bezbłędnie rozpoznaje znaki patrolowe stosowane w drużynie, umie je wykorzystać do oznakowania trasy.'
+  - 'Potrafi z pamięci wykonać szkic przebytej trasy i opisać wygląd napotkanych osób.'
+  - 'Na podstawie śladów ludzkiej bytności umie wywnioskować możliwie dużo informacji (np. kierunek marszu i szacunkową liczbę osób lub czas biwaku i działania jego uczestników).'
 

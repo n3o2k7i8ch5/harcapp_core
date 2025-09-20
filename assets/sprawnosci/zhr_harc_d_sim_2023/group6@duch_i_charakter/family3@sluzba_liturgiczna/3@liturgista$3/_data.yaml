@@ -1,8 +1,8 @@
 id: liturgista
-name: 'Liturgista',
-level: 3,
+name: 'Liturgista'
+level: 3
 tasks:
-  - 'Umie zorganizować uroczystą liturgię jako ceremoniarz i potrafi do niej służyć.',
-  - 'Umie zorganizować Mszę Świętą w warunkach polowych, aby zapewnić jej godne sprawowanie.',
-  - 'Zna nazwy ksiąg liturgicznych i wie kiedy się ich używa.',
+  - 'Umie zorganizować uroczystą liturgię jako ceremoniarz i potrafi do niej służyć.'
+  - 'Umie zorganizować Mszę Świętą w warunkach polowych, aby zapewnić jej godne sprawowanie.'
+  - 'Zna nazwy ksiąg liturgicznych i wie kiedy się ich używa.'
 

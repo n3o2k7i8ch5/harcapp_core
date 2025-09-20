@@ -1,9 +1,9 @@
 id: krol_parkietu
-name: 'Królowa parkietu',
-level: 3,
+name: 'Królowa parkietu'
+level: 3
 tasks:
-  - 'Zna i umie zatańczyć przynajmniej 13 kroków podstawowych wybranej formy tańca.',
-  - 'Potrafi nie gubiąc rytmu improwizować i łączyć figury taneczne w spójną całość.',
-  - 'Potrafi nauczyć drugą osobę podstawowych kroków tanecznych.',
-  - 'Zna podstawowe informacje na temat formy tańca, której się uczy (historia, geneza nazwy, twórcy).',
+  - 'Zna i umie zatańczyć przynajmniej 13 kroków podstawowych wybranej formy tańca.'
+  - 'Potrafi nie gubiąc rytmu improwizować i łączyć figury taneczne w spójną całość.'
+  - 'Potrafi nauczyć drugą osobę podstawowych kroków tanecznych.'
+  - 'Zna podstawowe informacje na temat formy tańca, której się uczy (historia, geneza nazwy, twórcy).'
 

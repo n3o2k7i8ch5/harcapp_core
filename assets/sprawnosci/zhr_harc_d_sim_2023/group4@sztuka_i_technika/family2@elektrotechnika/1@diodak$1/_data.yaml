@@ -1,7 +1,7 @@
 id: diodak
-name: 'Dioda',
-level: 1,
+name: 'Dioda'
+level: 1
 tasks:
-  - 'Potrafi wykonać prosty obwód elektryczny. Przykłady: zabawkowy silnik elektryczny (z magnesu, baterii i drutu), elektromagnes (z baterii, gwoździa i grubego izolowanego drutu), prymitywny próbnik przewodności elektrycznej (z baterii, żarówki i kabelków).',
-  - 'Potrafi bezpiecznie wymienić żarówkę.',
+  - 'Potrafi wykonać prosty obwód elektryczny. Przykłady: zabawkowy silnik elektryczny (z magnesu, baterii i drutu), elektromagnes (z baterii, gwoździa i grubego izolowanego drutu), prymitywny próbnik przewodności elektrycznej (z baterii, żarówki i kabelków).'
+  - 'Potrafi bezpiecznie wymienić żarówkę.'
 

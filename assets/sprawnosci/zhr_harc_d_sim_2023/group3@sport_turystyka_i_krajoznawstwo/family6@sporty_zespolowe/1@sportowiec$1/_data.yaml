@@ -1,7 +1,7 @@
 id: sportowiec
-name: 'Sportsmenka',
-level: 1,
+name: 'Sportsmenka'
+level: 1
 tasks:
-  - 'Umie aktywnie uczestniczyć w rozgrywce wybranej gry zespołowej i stosować się do jej zasad.',
-  - 'Rozróżnia funkcje poszczególnych graczy i potrafi objąć różne role w zespole.',
+  - 'Umie aktywnie uczestniczyć w rozgrywce wybranej gry zespołowej i stosować się do jej zasad.'
+  - 'Rozróżnia funkcje poszczególnych graczy i potrafi objąć różne role w zespole.'
 

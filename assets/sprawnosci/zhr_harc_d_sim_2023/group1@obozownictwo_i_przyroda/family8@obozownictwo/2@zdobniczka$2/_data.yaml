@@ -1,7 +1,7 @@
 id: zdobniczka
-name: 'Zdobniczka',
-level: 2,
+name: 'Zdobniczka'
+level: 2
 tasks:
-  - 'Umie samodzielnie wykonać prosty totem lub inny element zdobnictwa obozowego z wykorzystaniem materiałów znalezionych w terenie.',
-  - 'Posiada sprawność *Plastyczki ze ścieżki „Rzemiosło plastyczne”.',
+  - 'Umie samodzielnie wykonać prosty totem lub inny element zdobnictwa obozowego z wykorzystaniem materiałów znalezionych w terenie.'
+  - 'Posiada sprawność *Plastyczki ze ścieżki „Rzemiosło plastyczne”.'
 

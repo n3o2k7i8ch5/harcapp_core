@@ -1,7 +1,7 @@
 id: rytmiczka
-name: 'Rytmiczka',
-level: 1,
+name: 'Rytmiczka'
+level: 1
 tasks:
-  - 'Potrafi zatańczyć 3 kroki podstawowe wybranej formy tańca.',
-  - 'Potrafi zatańczyć w 3 różnych rytmach.',
+  - 'Potrafi zatańczyć 3 kroki podstawowe wybranej formy tańca.'
+  - 'Potrafi zatańczyć w 3 różnych rytmach.'
 

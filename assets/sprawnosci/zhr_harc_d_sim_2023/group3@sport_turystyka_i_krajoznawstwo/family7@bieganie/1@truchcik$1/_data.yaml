@@ -1,7 +1,7 @@
 id: truchcik
-name: 'Przebieżka',
-level: 1,
+name: 'Przebieżka'
+level: 1
 tasks:
-  - 'Umie przygotować się do wysiłku poprzez prawidłową rozgrzewkę.',
-  - 'Potrafi przebiec bez przerwy dystans 1 km.',
+  - 'Umie przygotować się do wysiłku poprzez prawidłową rozgrzewkę.'
+  - 'Potrafi przebiec bez przerwy dystans 1 km.'
 

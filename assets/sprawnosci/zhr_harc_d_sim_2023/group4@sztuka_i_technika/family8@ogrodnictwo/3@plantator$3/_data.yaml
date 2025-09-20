@@ -1,11 +1,11 @@
 id: plantator
-name: 'Plantatorka',
-level: 3,
+name: 'Plantatorka'
+level: 3
 tasks:
-  - 'Potrafi wyhodować 5 różnych warzyw i zebrać z każdego z nich plon, pozwalający na przygotowanie posiłku.',
-  - 'Wie co decyduje o efektywności hodowli, umie samodzielnie zapylić kwiaty i odpowiednio zasilić rośliny nawozem lub kompostem.',
-  - 'Umie samodzielnie rozmnożyć 5 gatunków roślin (w tym 3 przez sadzonki).',
-  - 'Potrafi posługiwać się kalendarzem ogrodniczym, wie kiedy dane gatunki warzyw i owoców sadzi się w gruncie i kiedy zbiera plon.',
-  - 'Umie wykorzystać symbiozę międzygatunkową(np. pomiędzy pomidorami i fasolą).',
-  - 'Potrafi wykonać system nawadniania działający w warunkach domowych, pozwalający pozostawić roślinę doniczkową bez opieki na kilka dni.',
+  - 'Potrafi wyhodować 5 różnych warzyw i zebrać z każdego z nich plon, pozwalający na przygotowanie posiłku.'
+  - 'Wie co decyduje o efektywności hodowli, umie samodzielnie zapylić kwiaty i odpowiednio zasilić rośliny nawozem lub kompostem.'
+  - 'Umie samodzielnie rozmnożyć 5 gatunków roślin (w tym 3 przez sadzonki).'
+  - 'Potrafi posługiwać się kalendarzem ogrodniczym, wie kiedy dane gatunki warzyw i owoców sadzi się w gruncie i kiedy zbiera plon.'
+  - 'Umie wykorzystać symbiozę międzygatunkową(np. pomiędzy pomidorami i fasolą).'
+  - 'Potrafi wykonać system nawadniania działający w warunkach domowych, pozwalający pozostawić roślinę doniczkową bez opieki na kilka dni.'
 

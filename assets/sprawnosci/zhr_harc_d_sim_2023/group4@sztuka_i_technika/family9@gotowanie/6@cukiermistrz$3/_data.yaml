@@ -1,9 +1,9 @@
 id: cukiermistrz
-name: 'Cukiermistrzyni',
-level: 3,
+name: 'Cukiermistrzyni'
+level: 3
 tasks:
-  - 'Potrafi przygotować 10 różnych deserów.',
-  - 'Umie dobrać i przygotować deser na wyjątkową okazję dla grupy kilkunastu osób (np. podczas święta obozu, rodzinnego spotkania albo urodzin znajomego).',
-  - 'Potrafi zachować balans smaków (np. słodyczy i kwaśności).',
-  - 'Umie samodzielnie przygotować wyjątkową dekorację deseru, taką jak fantazyjne wzory z kremu, trójwymiarowe kształty z czekolady, żywe jadalne kwiaty.',
+  - 'Potrafi przygotować 10 różnych deserów.'
+  - 'Umie dobrać i przygotować deser na wyjątkową okazję dla grupy kilkunastu osób (np. podczas święta obozu, rodzinnego spotkania albo urodzin znajomego).'
+  - 'Potrafi zachować balans smaków (np. słodyczy i kwaśności).'
+  - 'Umie samodzielnie przygotować wyjątkową dekorację deseru, taką jak fantazyjne wzory z kremu, trójwymiarowe kształty z czekolady, żywe jadalne kwiaty.'
 

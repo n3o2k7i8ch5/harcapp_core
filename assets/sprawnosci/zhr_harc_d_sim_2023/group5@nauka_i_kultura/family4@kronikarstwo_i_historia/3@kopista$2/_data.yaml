@@ -1,8 +1,8 @@
 id: kopista
-name: 'Kopista',
-level: 2,
+name: 'Kopista'
+level: 2
 tasks:
-  - 'Umie płynnie i czytelnie pisać odręcznie, zachowując stałą wysokość liter małych i wielkich.',
-  - 'Potrafi korzystać z narzędzi pisarskich o różnych końcówkach (np. flamastrów o końcówkach okrągłych i ściętych).',
-  - 'Umie wykonać odręcznie ozdobny inicjał lub tytuł. Sprawnie posługuje się wybranym krojem pisma ozdobnego.',
+  - 'Umie płynnie i czytelnie pisać odręcznie, zachowując stałą wysokość liter małych i wielkich.'
+  - 'Potrafi korzystać z narzędzi pisarskich o różnych końcówkach (np. flamastrów o końcówkach okrągłych i ściętych).'
+  - 'Umie wykonać odręcznie ozdobny inicjał lub tytuł. Sprawnie posługuje się wybranym krojem pisma ozdobnego.'
 

@@ -1,9 +1,9 @@
 id: traper
-name: 'Traper',
-level: 2,
+name: 'Traper'
+level: 2
 tasks:
-  - 'Umie przygotować namiot na różne warunki atmosferyczne takie jak mocny wiatr czy burza oraz odpowiednio wybrać i przygotować miejsce do jego rozstawienia.',
-  - 'Umie wykorzystać 3 węzły przydatne podczas biwakowania (np. do zbudowania zadaszenia z plandeki biwakowej).',
-  - 'Potrafi przygotować ciepły posiłek w warunkach polowych, umie posługiwać się turystyczną kuchenką gazową.',
-  - 'Umie przygotować listę ekwipunku niezbędnego na biwak zastępu i odpowiednio rozdzielić go między uczestników.',
+  - 'Umie przygotować namiot na różne warunki atmosferyczne takie jak mocny wiatr czy burza oraz odpowiednio wybrać i przygotować miejsce do jego rozstawienia.'
+  - 'Umie wykorzystać 3 węzły przydatne podczas biwakowania (np. do zbudowania zadaszenia z plandeki biwakowej).'
+  - 'Potrafi przygotować ciepły posiłek w warunkach polowych, umie posługiwać się turystyczną kuchenką gazową.'
+  - 'Umie przygotować listę ekwipunku niezbędnego na biwak zastępu i odpowiednio rozdzielić go między uczestników.'
 

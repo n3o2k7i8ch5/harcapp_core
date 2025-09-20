@@ -1,10 +1,10 @@
 id: straznik_ognia
-name: 'Strażniczka Ognia',
-level: 2,
+name: 'Strażniczka Ognia'
+level: 2
 tasks:
-  - 'Potrafi ułożyć i rozpalić różne typy ognisk, takie jak ognisko do gotowania, do podtrzymania żaru, do oświetlenia kręgu, stos na mokry teren.',
-  - 'Umie podtrzymywać ogień odpowiednio do potrzeb i sytuacji. Zna zasady zachowania w kręgu ogniskowym.',
-  - 'Potrafi przygotować drewno przed ogniskiem: porąbać lub połamać odpowiedni zapas i przygotować rozpałkę odpowiednią do warunków.',
-  - 'Umie zabezpieczyć przybory do rozpalania ognia przed deszczem i wilgocią.',
-  - 'Potrafi rozpoznać i opatrzyć oparzenia różnych stopni, posiada sprawność *Higienistki ze ścieżki „Samarytanka”.',
+  - 'Potrafi ułożyć i rozpalić różne typy ognisk, takie jak ognisko do gotowania, do podtrzymania żaru, do oświetlenia kręgu, stos na mokry teren.'
+  - 'Umie podtrzymywać ogień odpowiednio do potrzeb i sytuacji. Zna zasady zachowania w kręgu ogniskowym.'
+  - 'Potrafi przygotować drewno przed ogniskiem: porąbać lub połamać odpowiedni zapas i przygotować rozpałkę odpowiednią do warunków.'
+  - 'Umie zabezpieczyć przybory do rozpalania ognia przed deszczem i wilgocią.'
+  - 'Potrafi rozpoznać i opatrzyć oparzenia różnych stopni, posiada sprawność *Higienisty ze ścieżki „Samarytanka”.'
 

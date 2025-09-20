@@ -1,10 +1,10 @@
 id: krotkofalarz
-name: 'Radioamatorka',
-level: 3,
+name: 'Radioamatorka'
+level: 3
 tasks:
-  - 'Potrafi posłużyć się alfabetem fonetycznym ICAO (tzw. alfabet fonetyczny NATO) oraz jego polskim odpowiednikiem.',
-  - 'Zna kilkanaście kodów Q najczęściej używanych przez krótkofalarzy oraz kilka wyrażeń z tzw. slangu amatorskiego. Umie przekazać raport RST oraz informacje o własnym QTH Locator.',
-  - 'Potrafi obsługiwać sprzęt łączności z zachowaniem zasad BHP.',
-  - 'Umie zmierzyć prąd, napięcie, WFS oraz moc wychodzącą do anteny.',
-  - 'Posiada sprawność *Diodaka ze ścieżki „Elektrotechnika”.',
+  - 'Potrafi posłużyć się alfabetem fonetycznym ICAO (tzw. alfabet fonetyczny NATO) oraz jego polskim odpowiednikiem.'
+  - 'Zna kilkanaście kodów Q najczęściej używanych przez krótkofalarzy oraz kilka wyrażeń z tzw. slangu amatorskiego. Umie przekazać raport RST oraz informacje o własnym QTH Locator.'
+  - 'Potrafi obsługiwać sprzęt łączności z zachowaniem zasad BHP.'
+  - 'Umie zmierzyć prąd, napięcie, WFS oraz moc wychodzącą do anteny.'
+  - 'Posiada sprawność *Diodaka ze ścieżki „Elektrotechnika”.'
 
