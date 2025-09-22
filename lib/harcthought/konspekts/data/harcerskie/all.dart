@@ -3139,7 +3139,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       ],
       materials: [
         KonspektMaterial(
-            name: 'Materiały na nagrobki (deski, gwoździe, pineski, kartony, kartki, nożyczki, klej, brokat, długopisy, markery, itp.',
+            name: 'Materiały na nagrobki (deski, gwoździe, pineski, kartony, kartki, nożyczki, klej, brokat, długopisy, markery, itp.)',
             amount: 0
         )
       ],
