@@ -1028,4 +1028,6 @@ class Konspekt extends BaseKonspekt{
 
   }
 
+
+
 }

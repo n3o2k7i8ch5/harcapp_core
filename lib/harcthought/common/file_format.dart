@@ -54,20 +54,20 @@ enum FileFormat implements IconTextEnum{
     }
   }
 
-  IconData? get subIcon{
+  bool get isUrl{
     switch(this){
-      case pdf:
-      case docx:
-      case png:
-      case webp:
-      case svg:
-      case url: return null;
+      case url:
       case urlPdf:
       case urlDocx:
       case urlPng:
       case urlWebp:
-      case urlSvg: return MdiIcons.web;
-    }
+      case urlSvg: return true;
+      default: return false;
+    }}
+
+  IconData? get subIcon{
+    if(isUrl && this != url) return MdiIcons.web;
+    else return null;
   }
 
   String get extension{
