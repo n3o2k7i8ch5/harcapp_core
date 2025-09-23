@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/color_pack_app.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
@@ -16,6 +19,7 @@ import 'package:open_filex/open_filex.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart' as pdf;
 
 import 'common.dart';
+import 'hrcpknspkt_data.dart';
 
 
 enum KonspektCategory{
@@ -563,11 +567,33 @@ class KonspektAttachment{
     };
 
     static KonspektAttachment fromJsonMap(Map<String, dynamic> map) => KonspektAttachment(
-      name: map['name'] as String,
-      title: map['title'] as String,
+      name: map['name'],
+      title: map['title'],
       assets: (map['assets'] as Map<String, dynamic>).map((key, value) => MapEntry(FileFormat.fromName(key)??(throw MissingDecodeParamError('assets.$key')), value as String)),
       print: map['print'] == null ? null : KonspektAttachmentPrint.fromJsonMap(map['print'] as Map<String, dynamic>),
     );
+
+    Future<AttachmentData> toAttachmentData() async {
+
+      Map<FileFormat, Uint8List> fileData = {};
+      Map<FileFormat, String> urlData = {};
+
+      for(MapEntry<FileFormat, String> entry in assets.entries)
+        if(entry.key.isUrl)
+          urlData[entry.key] = entry.value;
+        else
+          fileData[entry.key] = (await readByteDataFromAssets(entry.value))!.buffer.asUint8List();
+
+      return AttachmentData(
+        name: name,
+        title: title,
+        fileData: fileData,
+        urlData: urlData,
+        printInfoEnabled: print != null,
+        printSide: print?.side??KonspektAttachmentPrintSide.single,
+        printColor: print?.color??KonspektAttachmentPrintColor.monochrome,
+      );
+    }
 
 }
 
@@ -1028,6 +1054,16 @@ class Konspekt extends BaseKonspekt{
 
   }
 
+  Future<HrcpknspktData> toHrcpknspktData() async{
+    List<AttachmentData> attachmentsData = [];
+    for(KonspektAttachment attachment in attachments??[])
+      attachmentsData.add(await attachment.toAttachmentData());
 
+    return HrcpknspktData(
+        coverImage: (await readByteDataFromAssets(coverPath))!.buffer.asUint8List(),
+        attachments: attachmentsData,
+        konspektCoreData: jsonEncode(toJsonMap())
+    );
+  }
 
 }
