@@ -79,21 +79,42 @@ enum KonspektType{
     }
   }
 
+  String get apiParam{
+    switch(this){
+      case zwyczaj: return 'zwyczaj';
+      case zajecia: return 'zajecia';
+      case projekt: return 'projekt';
+      case wspolzawoIndywidualne: return 'wspolzawoIndywidualne';
+      case wspolzawoGrupowe: return 'wspolzawoGrupowe';
+    }
+  }
+
+  static KonspektType? fromApiParam(String name){
+    switch(name){
+      case 'zwyczaj': return KonspektType.zwyczaj;
+      case 'zajecia': return KonspektType.zajecia;
+      case 'projekt': return KonspektType.projekt;
+      case 'wspolzawoIndywidualne': return KonspektType.wspolzawoIndywidualne;
+      case 'wspolzawoGrupowe': return KonspektType.wspolzawoGrupowe;
+      default: return null;
+    }
+  }
+
 }
 
 enum KonspektSphere{
   cialo, umysl, duch, emocje, relacje;
 
-  static KonspektSphere? fromName(String name){
-    switch(name.toLowerCase()){
-      case 'cialo': return KonspektSphere.cialo;
-      case 'umysl': return KonspektSphere.umysl;
-      case 'duch': return KonspektSphere.duch;
-      case 'emocje': return KonspektSphere.emocje;
-      case 'relacje': return KonspektSphere.relacje;
-      default: return null;
-    }
-  }
+  // static KonspektSphere? fromName(String name){
+  //   switch(name.toLowerCase()){
+  //     case 'cialo': return KonspektSphere.cialo;
+  //     case 'umysl': return KonspektSphere.umysl;
+  //     case 'duch': return KonspektSphere.duch;
+  //     case 'emocje': return KonspektSphere.emocje;
+  //     case 'relacje': return KonspektSphere.relacje;
+  //     default: return null;
+  //   }
+  // }
 
   String get displayName{
     switch(this){
@@ -122,6 +143,27 @@ enum KonspektSphere{
       case duch: return MdiIcons.flare;
       case emocje: return MdiIcons.dramaMasks;
       case relacje: return MdiIcons.handshake;
+    }
+  }
+
+  String get apiParam{
+    switch(this){
+      case cialo: return 'cialo';
+      case umysl: return 'umysl';
+      case duch: return 'duch';
+      case emocje: return 'emocje';
+      case relacje: return 'relacje';
+    }
+  }
+
+  static KonspektSphere? fromApiParam(String name){
+    switch(name){
+      case 'cialo': return KonspektSphere.cialo;
+      case 'umysl': return KonspektSphere.umysl;
+      case 'duch': return KonspektSphere.duch;
+      case 'emocje': return KonspektSphere.emocje;
+      case 'relacje': return KonspektSphere.relacje;
+      default: return null;
     }
   }
 
@@ -819,10 +861,10 @@ abstract class BaseKonspekt with KonspektStepsContainerMixin{
     'name': name,
     'title': title,
     'additionalSearchPhrases': additionalSearchPhrases,
-    'category': category.name,
-    'type': type.name,
-    'spheres': spheres.map((key, value) => MapEntry(key.name, value?.toJsonMap())),
-    'metos': metos.map((e) => e.name).toList(),
+    'category': category.apiParam,
+    'type': type.apiParam,
+    'spheres': spheres.map((key, value) => MapEntry(key.apiParam, value?.toJsonMap())),
+    'metos': metos.map((e) => e.apiParam).toList(),
     'coverAuthor': coverAuthor,
     'author': author?.toApiJsonMap(),
     'customDuration': customDuration?.inSeconds,
@@ -1022,37 +1064,33 @@ class Konspekt extends BaseKonspekt{
     return true;
   }
 
-  static Konspekt fromJsonMap(Map data){
-
-    return Konspekt(
-      name: data['name'] as String,
-      title: data['title'] as String,
-      additionalSearchPhrases: (data['additionalSearchPhrases'] as List?)?.map((e) => e as String).toList()??[],
-      category: KonspektCategory.fromApiParam(data['category'] as String)??(throw MissingDecodeParamError('category')),
-      type: KonspektType.values.firstWhere((e) => e.name == (data['type'] as String), orElse: () => throw MissingDecodeParamError('type')),
-      spheres: (data['spheres'] as Map).map((key, value) => MapEntry(
-        KonspektSphere.fromName(key as String)??(throw MissingDecodeParamError('spheres.$key')),
+  static Konspekt fromJsonMap(Map data) => Konspekt(
+    name: data['name'] as String,
+    title: data['title'] as String,
+    additionalSearchPhrases: (data['additionalSearchPhrases'] as List?)?.map((e) => e as String).toList()??[],
+    category: KonspektCategory.fromApiParam(data['category'] as String)??(throw MissingDecodeParamError('category')),
+    type: KonspektType.fromApiParam(data['type']) ?? (throw MissingDecodeParamError('type')),
+    spheres: (data['spheres'] as Map).map((key, value) => MapEntry(
+        KonspektSphere.fromApiParam(key as String)??(throw MissingDecodeParamError('spheres.$key')),
         value == null ? null : KonspektSphereDetails.fromJsonMap((value as Map).cast<String, dynamic>())
-      )).cast<KonspektSphere, KonspektSphereDetails?>(),
-      metos: (data['metos'] as List).map((e) => Meto.fromName(e as String)??(throw MissingDecodeParamError('metos'))).toList(),
-      coverAuthor: data['coverAuthor'] as String,
-      customCoverDirName: data['customCoverDirName'] as String?,
-      author: data['author']==null?null:Person.fromApiJsonMap((data['author'] as Map).cast<String, dynamic>()),
-      customDuration: data['customDuration'] == null ? null : Duration(seconds: data['customDuration'] as int),
-      aims: (data['aims'] as List?)?.map((e) => e as String).toList()??[],
-      materials: (data['materials'] as List?)?.map(
-        (e) => KonspektMaterial.fromJsonMap((e as Map).cast<String, dynamic>())
-      ).toList(),
-      summary: data['summary'] as String,
-      intro: data['intro'] as String?,
-      description: data['description'] as String?,
-      howToFail: (data['howToFail'] as List?)?.map((e) => e as String).toList(),
-      steps: (data['steps'] as List?)?.map(
-        (e) => KonspektStep.fromJsonMap((e as Map).cast<String, dynamic>())
-      ).toList()??[],
-    );
-
-  }
+    )).cast<KonspektSphere, KonspektSphereDetails?>(),
+    metos: (data['metos'] as List).map((e) => Meto.fromApiParam(e as String)??(throw MissingDecodeParamError('metos'))).toList(),
+    coverAuthor: data['coverAuthor'] as String,
+    customCoverDirName: data['customCoverDirName'] as String?,
+    author: data['author']==null?null:Person.fromApiJsonMap((data['author'] as Map).cast<String, dynamic>()),
+    customDuration: data['customDuration'] == null ? null : Duration(seconds: data['customDuration'] as int),
+    aims: (data['aims'] as List?)?.map((e) => e as String).toList()??[],
+    materials: (data['materials'] as List?)?.map(
+            (e) => KonspektMaterial.fromJsonMap((e as Map).cast<String, dynamic>())
+    ).toList(),
+    summary: data['summary'] as String,
+    intro: data['intro'] as String?,
+    description: data['description'] as String?,
+    howToFail: (data['howToFail'] as List?)?.map((e) => e as String).toList(),
+    steps: (data['steps'] as List?)?.map(
+            (e) => KonspektStep.fromJsonMap((e as Map).cast<String, dynamic>())
+    ).toList()??[],
+  );
 
   Future<HrcpknspktData> toHrcpknspktData() async{
     List<AttachmentData> attachmentsData = [];

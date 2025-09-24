@@ -8,16 +8,16 @@ enum Meto{
   wedro,
   kadra;
 
-  static Meto? fromName(String name){
-    switch(name.toLowerCase()){
-      case 'zuch': return Meto.zuch;
-      case 'harc': return Meto.harc;
-      case 'hs': return Meto.hs;
-      case 'wedro': return Meto.wedro;
-      case 'kadra': return Meto.kadra;
-      default: return null;
-    }
-  }
+  // static Meto? fromName(String name){
+  //   switch(name.toLowerCase()){
+  //     case 'zuch': return Meto.zuch;
+  //     case 'harc': return Meto.harc;
+  //     case 'hs': return Meto.hs;
+  //     case 'wedro': return Meto.wedro;
+  //     case 'kadra': return Meto.kadra;
+  //     default: return null;
+  //   }
+  // }
 
   String get displayName{
     switch(this){
@@ -76,6 +76,27 @@ enum Meto{
       case Meto.hs: return 'packages/harcapp_core/assets/images/meto/hs.svg';
       case Meto.wedro: return 'packages/harcapp_core/assets/images/meto/w.svg';
       case Meto.kadra: return 'packages/harcapp_core/assets/images/meto/kadra.svg';
+    }
+  }
+
+  String get apiParam{
+    switch(this){
+      case Meto.zuch: return 'zuch';
+      case Meto.harc: return 'harc';
+      case Meto.hs: return 'hs';
+      case Meto.wedro: return 'wedro';
+      case Meto.kadra: return 'kadra';
+    }
+  }
+
+  static Meto? fromApiParam(String name){
+    switch(name){
+      case 'zuch': return Meto.zuch;
+      case 'harc': return Meto.harc;
+      case 'hs': return Meto.hs;
+      case 'wedro': return Meto.wedro;
+      case 'kadra': return Meto.kadra;
+      default: return null;
     }
   }
 
