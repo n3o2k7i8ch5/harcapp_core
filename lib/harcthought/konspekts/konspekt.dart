@@ -639,7 +639,30 @@ class KonspektAttachment{
 
 }
 
-class KonspektMaterial{
+abstract class BaseKonspektMaterial{
+  int? get amount;
+  int? get amountAttendantFactor;
+  String get name;
+  String? get comment;
+  String? get attachmentName;
+  String? get additionalPreparation;
+
+  const BaseKonspektMaterial();
+
+  bool get hasAmount => (amount != null && amount! > 0) || (amountAttendantFactor != null && amountAttendantFactor! > 0);
+
+  Map toJsonMap() => {
+    'amount': amount,
+    'amountAttendantFactor': amountAttendantFactor,
+    'name': name,
+    'comment': comment,
+    'attachmentName': attachmentName,
+    'additionalPreparation': additionalPreparation,
+  };
+
+}
+
+class KonspektMaterial extends BaseKonspektMaterial{
 
   final int? amount;
   final int? amountAttendantFactor;
@@ -649,8 +672,6 @@ class KonspektMaterial{
   final String? additionalPreparation;
   final void Function(BuildContext)? onTap;
   final Widget Function(BuildContext)? bottomBuilder;
-
-  bool get hasAmount => (amount != null && amount! > 0) || (amountAttendantFactor != null && amountAttendantFactor! > 0);
 
   const KonspektMaterial({
     this.amount,
@@ -683,14 +704,6 @@ class KonspektMaterial{
     bottomBuilder: bottomBuilder??this.bottomBuilder,
   );
 
-  Map toJsonMap() => {
-    'amount': amount,
-    'amountAttendantFactor': amountAttendantFactor,
-    'name': name,
-    'comment': comment,
-    'attachmentName': attachmentName,
-    'additionalPreparation': additionalPreparation,
-  };
 
   static KonspektMaterial fromJsonMap(Map<String, dynamic> map) => KonspektMaterial(
     amount: map['amount'] as int?,
@@ -847,7 +860,7 @@ abstract class BaseKonspekt with KonspektStepsContainerMixin{
   Person? get author;
   Duration? get customDuration;
   List<String> get aims;
-  List<KonspektMaterial>? get materials;
+  List<BaseKonspektMaterial>? get materials;
   String get summary;
   String? get intro;
   String? get description;
