@@ -21,23 +21,6 @@ enum FileFormat implements IconTextEnum{
     }
   }
 
-  static FileFormat? fromName(String name){
-    switch(name.toLowerCase()){
-      case 'pdf': return FileFormat.pdf;
-      case 'docx': return FileFormat.docx;
-      case 'png': return FileFormat.png;
-      case 'webp': return FileFormat.webp;
-      case 'svg': return FileFormat.svg;
-      case 'url': return FileFormat.url;
-      case 'urlpdf': return FileFormat.urlPdf;
-      case 'urldocx': return FileFormat.urlDocx;
-      case 'urlpng': return FileFormat.urlPng;
-      case 'urlwebp': return FileFormat.urlWebp;
-      case 'urlsvg': return FileFormat.urlSvg;
-      default: return null;
-    }
-  }
-
   String get displayName{
     switch(this){
       case pdf: return 'PDF';
@@ -91,5 +74,39 @@ enum FileFormat implements IconTextEnum{
 
   @override
   IconData get icon => subIcon??MdiIcons.fileOutline;
+
+  String get apiParam{
+    switch(this){
+      case pdf: return 'pdf';
+      case docx: return 'docx';
+      case png: return 'png';
+      case webp: return 'webp';
+      case svg: return 'svg';
+      case url: return 'url';
+      case urlPdf: return 'urlPdf';
+      case urlDocx: return 'urlDocx';
+      case urlPng: return 'urlPng';
+      case urlWebp: return 'urlWebp';
+      case urlSvg: return 'urlSvg';
+    }
+  }
+
+  static FileFormat? fromApiParam(String name){
+    switch(name.toLowerCase()){
+      case 'pdf': return FileFormat.pdf;
+      case 'docx': return FileFormat.docx;
+      case 'png': return FileFormat.png;
+      case 'webp': return FileFormat.webp;
+      case 'svg': return FileFormat.svg;
+      case 'url': return FileFormat.url;
+      case 'urlPdf': return FileFormat.urlPdf;
+      case 'urlDocx': return FileFormat.urlDocx;
+      case 'urlPng': return FileFormat.urlPng;
+      case 'urlWebp': return FileFormat.urlWebp;
+      case 'urlSvg': return FileFormat.urlSvg;
+      default: return null;
+    }
+  }
+
 
 }
