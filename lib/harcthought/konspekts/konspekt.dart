@@ -828,8 +828,8 @@ class KonspektStep extends BaseKonspektStep{
   );
 
   static KonspektStep fromJsonMap(Map<String, dynamic> map) => KonspektStep(
-    title: map['title'] as String,
-    duration: Duration(seconds: map['duration'] as int),
+    title: map['title']??(throw MissingDecodeParamError('title')),
+    duration: Duration(seconds: map['duration']??(throw MissingDecodeParamError('duration'))),
     activeForm: KonspektStepActiveForm.fromApiParam(map['activeForm'])??(throw MissingDecodeParamError('activeForm')),
     required: map['required']??(throw MissingDecodeParamError('required')),
     content: map['content']??(throw MissingDecodeParamError('content')),
