@@ -514,7 +514,25 @@ class KonspektAttachmentPrint{
 
 }
 
-class KonspektAttachment{
+abstract class BaseKonspektAttachment{
+  
+  String get name;
+  String get title;
+  Map<FileFormat, String> get assets;
+  KonspektAttachmentPrint? get print;
+
+  const BaseKonspektAttachment();
+
+  Map toJsonMap() => {
+    'name': name,
+    'title': title,
+    'assets': assets.map((key, value) => MapEntry(key.name, value)),
+    'print': print?.toJsonMap()
+  };
+
+}
+
+class KonspektAttachment extends BaseKonspektAttachment{
 
     final String name;
     final String title;
@@ -600,14 +618,7 @@ class KonspektAttachment{
       if(!result) showAppToast(context, text: 'Nie udało się otworzyć pliku');
       return result;
     }
-
-    Map toJsonMap() => {
-      'name': name,
-      'title': title,
-      'assets': assets.map((key, value) => MapEntry(key.name, value)),
-      'print': print?.toJsonMap()
-    };
-
+    
     static KonspektAttachment fromJsonMap(Map<String, dynamic> map) => KonspektAttachment(
       name: map['name'],
       title: map['title'],
@@ -839,13 +850,19 @@ class KonspektStep extends BaseKonspektStep{
 
 }
 
-mixin KonspektStepsContainerMixin{
+mixin BaseKonspektStepsContainerMixin{
+
+  List<BaseKonspektStep> get steps;
+
+}
+
+mixin KonspektStepsContainerMixin on BaseKonspektStepsContainerMixin{
 
   List<KonspektStep> get steps;
 
 }
 
-class KonspektStepGroup with KonspektDurationElementMixin, KonspektStepsContainerMixin{
+class KonspektStepGroup with KonspektDurationElementMixin, BaseKonspektStepsContainerMixin, KonspektStepsContainerMixin{
 
   final String? title;
   final List<KonspektStep> steps;
@@ -875,7 +892,7 @@ class KonspektStepGroup with KonspektDurationElementMixin, KonspektStepsContaine
   });
 }
 
-abstract class BaseKonspekt with KonspektStepsContainerMixin{
+abstract class BaseKonspekt with BaseKonspektStepsContainerMixin{
 
   String get name;
   String get title;
@@ -895,7 +912,7 @@ abstract class BaseKonspekt with KonspektStepsContainerMixin{
   String? get description;
   List<String>? get howToFail;
 
-  List<KonspektStep> get steps;
+  List<BaseKonspektStep> get steps;
 
   const BaseKonspekt();
 
@@ -921,7 +938,7 @@ abstract class BaseKonspekt with KonspektStepsContainerMixin{
 
 }
 
-class Konspekt extends BaseKonspekt{
+class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
 
   final String name;
   final String title;
