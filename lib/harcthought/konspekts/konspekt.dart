@@ -741,7 +741,31 @@ enum KonspektStepActiveForm{
   }
 }
 
-class KonspektStep with KonspektDurationElementMixin{
+abstract class BaseKonspektStep with KonspektDurationElementMixin{
+
+  String get title;
+  Duration get duration;
+  KonspektStepActiveForm get activeForm;
+  bool get required;
+  String? get content;
+  List<String>? get aims;
+  List<BaseKonspektMaterial>? get materials;
+
+  const BaseKonspektStep();
+
+  Map toJsonMap() => {
+    'title': title,
+    'duration': duration.inSeconds,
+    'activeForm': activeForm.name,
+    'required': required,
+    'content': content,
+    'aims': aims,
+    'materials': materials?.map((e) => e.toJsonMap()).toList(),
+  };
+
+}
+
+class KonspektStep extends BaseKonspektStep{
 
   final String title;
   final Duration duration;
@@ -787,16 +811,6 @@ class KonspektStep with KonspektDurationElementMixin{
   KonspektStep copyWithNamePrefix(String prefix) => copyWith(
     title: prefix + title[0].toLowerCase() + title.substring(1)
   );
-
-  Map toJsonMap() => {
-    'title': title,
-    'duration': duration.inSeconds,
-    'activeForm': activeForm.name,
-    'required': required,
-    'content': content,
-    'aims': aims,
-    'materials': materials?.map((e) => e.toJsonMap()).toList(),
-  };
 
   static KonspektStep fromJsonMap(Map<String, dynamic> map) => KonspektStep(
     title: map['title'] as String,
