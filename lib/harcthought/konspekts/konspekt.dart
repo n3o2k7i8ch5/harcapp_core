@@ -456,6 +456,23 @@ enum KonspektAttachmentPrintColor implements IconTextEnum{
   @override
   String get text => displayName;
 
+  String get apiParam{
+    switch(this){
+      case monochrome: return 'monochrome';
+      case color: return 'color';
+      case any: return 'any';
+    }
+  }
+
+  static KonspektAttachmentPrintColor? fromApiParam(String name){
+    switch(name){
+      case 'monochrome': return KonspektAttachmentPrintColor.monochrome;
+      case 'color': return KonspektAttachmentPrintColor.color;
+      case 'any': return KonspektAttachmentPrintColor.any;
+      default: return null;
+    }
+  }
+
 }
 
 enum KonspektAttachmentPrintSide implements IconTextEnum{
@@ -489,6 +506,23 @@ enum KonspektAttachmentPrintSide implements IconTextEnum{
 
   @override
   String get text => displayName;
+
+  String get apiParam{
+    switch(this){
+      case single: return 'single';
+      case double: return 'double';
+      case any: return 'any';
+    }
+  }
+
+  static KonspektAttachmentPrintSide? fromApiParam(String name){
+    switch(name){
+      case 'single': return KonspektAttachmentPrintSide.single;
+      case 'double': return KonspektAttachmentPrintSide.double;
+      case 'any': return KonspektAttachmentPrintSide.any;
+      default: return null;
+    }
+  }
 
 }
 
