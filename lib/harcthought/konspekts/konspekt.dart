@@ -514,25 +514,7 @@ class KonspektAttachmentPrint{
 
 }
 
-abstract class BaseKonspektAttachment{
-  
-  String get name;
-  String get title;
-  Map<FileFormat, String> get assets;
-  KonspektAttachmentPrint? get print;
-
-  const BaseKonspektAttachment();
-
-  Map toJsonMap() => {
-    'name': name,
-    'title': title,
-    'assets': assets.map((key, value) => MapEntry(key.name, value)),
-    'print': print?.toJsonMap()
-  };
-
-}
-
-class KonspektAttachment extends BaseKonspektAttachment{
+class KonspektAttachment{
 
     final String name;
     final String title;
@@ -618,7 +600,14 @@ class KonspektAttachment extends BaseKonspektAttachment{
       if(!result) showAppToast(context, text: 'Nie udało się otworzyć pliku');
       return result;
     }
-    
+
+    Map toJsonMap() => {
+      'name': name,
+      'title': title,
+      'assets': assets.map((key, value) => MapEntry(key.name, value)),
+      'print': print?.toJsonMap()
+    };
+
     static KonspektAttachment fromJsonMap(Map<String, dynamic> map) => KonspektAttachment(
       name: map['name'],
       title: map['title'],
