@@ -739,6 +739,21 @@ enum KonspektStepActiveForm{
       case static: return Colors.deepOrange;
     }
   }
+
+  String get apiParam{
+    switch(this){
+      case active: return 'active';
+      case static: return 'static';
+    }
+  }
+
+  static KonspektStepActiveForm? fromApiParam(String param){
+    switch(param){
+      case 'active': return active;
+      case 'static': return static;
+      default: return null;
+    }
+  }
 }
 
 abstract class BaseKonspektStep with KonspektDurationElementMixin{
@@ -815,9 +830,9 @@ class KonspektStep extends BaseKonspektStep{
   static KonspektStep fromJsonMap(Map<String, dynamic> map) => KonspektStep(
     title: map['title'] as String,
     duration: Duration(seconds: map['duration'] as int),
-    activeForm: KonspektStepActiveForm.values.firstWhere((e) => e.name == (map['activeForm'] as String), orElse: () => throw MissingDecodeParamError('activeForm')),
-    required: map['required'] as bool? ?? true,
-    content: map['content'] as String?,
+    activeForm: KonspektStepActiveForm.fromApiParam(map['activeForm'])??(throw MissingDecodeParamError('activeForm')),
+    required: map['required']??(throw MissingDecodeParamError('required')),
+    content: map['content']??(throw MissingDecodeParamError('content')),
     aims: (map['aims'] as List<dynamic>?)?.map((e) => e as String).toList(),
     materials: (map['materials'] as List<dynamic>?)?.map((e) => KonspektMaterial.fromJsonMap(e as Map<String, dynamic>)).toList(),
   );
