@@ -110,7 +110,10 @@ class BasicDataWidget extends StatelessWidget{
                   hint: 'Ukryty tytuł:',
                   alwaysShowTopHint: true,
                   multiController: currItemProv.hiddenTitlesController,
-                  onAnyChanged: onChangedHiddenTitles,
+                  onAnyChanged: (values){
+                    currItemProv.setHidTitles(values, notify: false);
+                    onChangedHiddenTitles?.call(values);
+                  },
 
                   multi: true,
                   multiHintTop: 'Ukryte tytuły',
