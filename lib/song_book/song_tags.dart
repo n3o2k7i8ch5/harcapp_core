@@ -4,6 +4,7 @@ class SongTag {
   static const String TAG_DLA_DZIECI = '#DlaDzieci';
   static const String TAG_HARCERSKIE = '#Harcerskie';
   static const String TAG_HISTORYCZNE = '#Historyczne';
+  static const String TAG_HUMORYSTYCZNE = '#Humorystyczne';
   static const String TAG_KOLEDY = '#Kolędy';
   static const String TAG_LUDOWE = '#Ludowe';
   static const String TAG_O_MILOSCI = '#OMiłości';
@@ -12,6 +13,7 @@ class SongTag {
   static const String TAG_POWSTANCZE = '#Powstańcze';
   static const String TAG_POEZJA_SPIEWANA = '#PoezjaŚpiewana';
   static const String TAG_POPULARNE = '#Popularne';
+  static const String TAG_PRZEROBKI = '#Przeróbki';
   static const String TAG_REFLEKSYJNE = '#Refleksyjne';
   static const String TAG_RELIGIJNE = '#Religijne';
   static const String TAG_SPOKOJNE = '#Spokojne';

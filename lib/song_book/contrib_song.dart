@@ -72,7 +72,7 @@ String composeContribSongEmailSubject({
   required bool isNewSong,
 }){
   bool isPersonsFirstSong = _isPersonsFirstSong([song]);
-  return '${isNewSong?'Nowa piosenka':'Poprawka piosenki'} "${song.title}" (${isPersonsFirstSong?' + świeżak + ':'- weteran - '})';
+  return '${isNewSong?'Nowa piosenka':'Poprawka piosenki'} "${song.title}" (${isPersonsFirstSong?' + świeżak + ':' - weteran - '})';
 }
 
 String _baseMessage(

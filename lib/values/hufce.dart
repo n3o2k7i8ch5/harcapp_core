@@ -50,6 +50,7 @@ const String huf_zhp_lagiewniki = 'Hufiec ZHP Łagiewniki im. Synów Pułku';
 const String huf_zhp_lask = 'Hufiec ZHP Łask';
 const String huf_zhp_legionowo = 'Hufiec ZHP Legionowo im. Szarych Szeregów „Rój-Tom”';
 const String huf_zhp_lowicz = 'Hufiec ZHP Łowicz';
+const String huf_zhp_lubaczow = 'Hufiec ZHP Lubaczów';
 const String huf_zhp_luban = 'Hufiec ZHP Lubań';
 const String huf_zhp_lublin = 'Hufiec ZHP Lublin';
 const String huf_zhp_lodz_baluty = 'Hufiec ZHP Łódź-Bałuty';

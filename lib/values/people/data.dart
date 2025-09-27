@@ -1391,6 +1391,14 @@ const Person KACPER_FRONC = Person(
     druzyna: '19.DH „Modrzewie” im. 12. Pułku Ułanów Podolskich z Telatyna',
     email: ['kacperfronc44@gmail.com']
 );
+const Person KACPER_JASINSKI = Person(
+    name: 'Kacper Jasiński',
+    druzyna: '7. PDW "Żar"',
+    hufiec: 'Poleski Hufiec Harcerzy "Świt"',
+    rankHarc: RankHarc.zhrMlodzik,
+    org: Org.zhr,
+    email: ["kjasinski008@gmail.com"]
+);
 const Person KACPER_KORDEK = Person(name: 'Kacper Kordek', rankHarc: RankHarc.zhpCwik);
 const Person KACPER_KOTECKI = Person(
     name: 'Kacper Kotecki',
@@ -1411,6 +1419,13 @@ const Person KACPER_MIESOWICZ = Person(
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
     email: ['kacper.miesowicz@gmail.com']
+);
+const Person KACPER_OLEJNIK = Person(
+    name: 'Kacper Olejnik',
+    druzyna: '8 DW "Leśne Licho"',
+    hufiec: huf_zhp_lubaczow,
+    org: Org.zhp,
+    email: ["kacper.olejnik@zhp.pl"]
 );
 const Person KACPER_SMOLKA = Person(name: 'Kacper Smółka', org: Org.zhp, email: ['kacper.smolka@zhp.net.pl']);
 const Person KACPER_SWITKIEWICZ = Person(name: 'Kacper Świtkiewicz', rankHarc: RankHarc.dhc, org: Org.zhp);
@@ -1771,11 +1786,11 @@ const Person KRZYSZTOF_RODZINKA = Person(
 );
 const Person KRZYSZTOF_SUCHARSKI = Person(
     name: 'Krzysztof Sucharski',
-    druzyna: 'Wataha',
+    druzyna: '14 DSH Fenris',
     hufiec: huf_zhp_lagiewniki,
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
-    email: []
+    email: ["krzysztofsucharski75@gmail.com"]
 );
 const Person KSAWERY_TWORKOWSKI = Person(
     name: 'Ksawery Tworkowski',
