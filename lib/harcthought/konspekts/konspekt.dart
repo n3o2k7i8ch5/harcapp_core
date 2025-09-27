@@ -951,11 +951,11 @@ abstract class BaseKonspekt with BaseKonspektStepsContainerMixin{
     'author': author?.toApiJsonMap(),
     'customDuration': customDuration?.inSeconds,
     'aims': aims,
-    'materials': materials?.map((e) => e.toJsonMap()).toList(),
+    'materials': materials?.map((e) => e.toJsonMap()).toList()??[],
     'summary': summary,
     'intro': intro,
     'description': description,
-    'howToFail': howToFail,
+    'howToFail': howToFail??[],
     'steps': steps.map((e) => e.toJsonMap()).toList(),
   };
 
