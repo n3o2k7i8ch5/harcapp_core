@@ -197,13 +197,14 @@ abstract class SongCore{
     if(!withPerformer || performers.isEmpty || performers[0].isEmpty)
       return _title;
 
-    String _performer = remPolChars(performers.join('&')).trim()
+    String _performer = performers.map((performer) => remPolChars(performer).trim()
         .replaceAll(':', '_')
         .replaceAll('-', '_')
         .replaceAll('/', '_')
         .replaceAll(' ', '_')
         .replaceAll(RegExp(r"_+"), "_")
-        .replaceAll(RegExp(r"[^\w]"), '');
+        .replaceAll(RegExp(r"[^\w]"), '')
+    ).join('&');
 
     return _title + '@' + _performer;
 
