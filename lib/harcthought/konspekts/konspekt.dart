@@ -645,7 +645,7 @@ class KonspektAttachment{
     static KonspektAttachment fromJsonMap(Map<String, dynamic> map) => KonspektAttachment(
       name: map['name'],
       title: map['title'],
-      assets: (map['assets'] as Map<String, dynamic>).map((key, value) => MapEntry(FileFormat.fromName(key)??(throw MissingDecodeParamError('assets.$key')), value as String)),
+      assets: (map['assets'] as Map<String, dynamic>).map((key, value) => MapEntry(FileFormat.fromApiParam(key)??(throw MissingDecodeParamError('assets.$key')), value as String)),
       print: map['print'] == null ? null : KonspektAttachmentPrint.fromJsonMap(map['print'] as Map<String, dynamic>),
     );
 
