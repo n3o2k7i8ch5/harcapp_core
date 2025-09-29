@@ -136,6 +136,14 @@ const Person ALEKSANDRA_GALIJ = Person(
     org: Org.zhp,
     email: ["aleksandra.galij@zhp.net.pl", 'aleksandra.galij@gmail.com']
 );
+const Person ALEKSANDRA_KLEJDYSZ = Person(
+    name: 'Aleksandra Klejdysz',
+    druzyna: '8. PgDW „Granat”',
+    hufiec: huf_zhp_krakow_pdg,
+    rankHarc: RankHarc.zhpSamarytanka,
+    org: Org.zhp,
+    email: ["olaklejdysz123@gmail.com"]
+);
 const Person ALEKSANDRA_KOSTRZEWA = Person(
     name: 'Ola Kostrzewa',
     org: Org.zhp
@@ -482,6 +490,14 @@ const Person DOMINIK_KIERES = Person(
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ["dominik.kieres@zhp.net.pl"]
+);
+Person DOMINIK_PRZYBYLOWSKI = const Person(
+    name: 'Dominik Przybyłowski',
+    druzyna: '141. BDW',
+    hufiec: huf_zhp_bialystok,
+    rankHarc: RankHarc.zhpHRc,
+    org: Org.zhp,
+    email: ['dominik.przybylowski@zhp.pl']
 );
 const Person DOMINIKA_GORZYNSKA = Person(name: 'Dominika Gorzyńska', rankHarc: RankHarc.zhpPionierka,
   druzyna: '11. Gdańska Drużyna Starszoharcerska „Cegły” im. Anny Burdówny',
@@ -915,6 +931,11 @@ const Person INGA_WIERZBICKA = Person(
     rankHarc: RankHarc.zhrOchotniczka,
     org: Org.zhr,
     email: ['ingawierzbicka1@gmail.com']
+);
+const Person JACEK_ANTKIEWICZ = Person(
+    name: 'Jacek Antkiewicz',
+    druzyna: '21. DH „Burza”',
+    email: ["jacek.ant11@gmail.com"]
 );
 const Person JACEK_PELCZAR = Person(
     name: 'Jacek Pelczar',
@@ -1546,6 +1567,14 @@ const Person KAMIL_ZAK = Person(
     name: 'Kamil Żak',
     rankHarc: RankHarc.zhpHOc
 );
+const Person KAMILA_GAJEWSKA = Person(
+    name: 'Kamila Gajewska',
+    druzyna: '16. Drużyna Harcerska „Metrum”',
+    hufiec: huf_zhp_grojec,
+    rankInstr: RankInstr.pwd,
+    org: Org.zhp,
+    email: ["kgajewska1616@gmail.com"]
+);
 const Person KAROL_FRANKOWSKI = Person(
     name: 'Karol Frankowski',
     druzyna: '1. PDH „Borek”',
@@ -1869,6 +1898,15 @@ const Person LUKAS_JANOSIS = Person(
     name: 'Lukas Janonis',
     org: Org.zhpNL,
     email: []
+);
+const Person LUKASZ_STANISZEWSKI = Person(
+    name: 'Łukasz Staniszewski',
+    druzyna: '27. DW „Śreżoga”',
+    hufiec: huf_zhp_legionowo,
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhpHRc,
+    org: Org.zhp,
+    email: ["lukasz.staniszewski@zhp.net.pl"]
 );
 const Person LUKASZ_STROZYK = Person(
     name: 'Łukasz Stróżyk',
@@ -3114,7 +3152,7 @@ const Person SZYMON_JAWOREK = Person(
 );
 const Person SZYMON_KLIMUNTOWSKI = Person(
     name: 'Szymon Klimuntowski',
-    druzyna: '7. DH "Iskra"',
+    druzyna: '7. DH „Iskra”',
     hufiec: huf_zhp_ziemi_dzierzoniowskiej,
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
@@ -3123,6 +3161,13 @@ const Person SZYMON_KLIMUNTOWSKI = Person(
 const Person SZYMON_LANDORF = Person(
     name: 'Szymon Landorf',
     email: ['szymon.landorf@gmail.com']
+);
+const Person SZYMON_MALCZAK = Person(
+    name: 'Szymon Małczak',
+    druzyna: '128. WDH „Orion”',
+    hufiec: huf_zhp_zary,
+    org: Org.zhp,
+    email: ["tomek02897@gmail.com"]
 );
 const Person SZYMON_OPLOCKI_NIEMIEC = Person(
     name: 'Szymon Opłocki-Niemiec',
@@ -3133,14 +3178,14 @@ const Person SZYMON_OPLOCKI_NIEMIEC = Person(
 );
 const Person SZYMON_OZOG = Person(
     name: 'Szymon Ożóg',
-    druzyna: '175. RwDW Orientalis',
+    druzyna: '175. RwDW „Orientalis”',
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ["szymon.ozog@zhp.net.pl"]
 );
 const Person SZYMON_PADOK = Person(
     name: 'Szymon Padok',
-    druzyna: '9 WDH Wataha im. Józefa Gołębiowskiego',
+    druzyna: '9 WDH „Wataha” im. Józefa Gołębiowskiego',
     hufiec: huf_zhp_mysliborz,
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
@@ -3312,6 +3357,14 @@ const Person WERONIKA_MATECKA = Person(
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["weronika.matecka@zhp.net.pl"]
+);
+const Person WERONIKA_PUSCIAN = Person(
+    name: 'Weronika Puścian',
+    druzyna: '37. Drużyna Harcerska im. Zawiszy Czarnego w „Góralach Mandarynki"',
+    hufiec: huf_zhp_brodnica,
+    rankHarc: RankHarc.zhpSamarytanka,
+    org: Org.zhp,
+    email: ["weronika.puscian@zhp.pl"]
 );
 const Person WERONIKA_WICHER = Person(
     name: 'Weronika Wicher',
