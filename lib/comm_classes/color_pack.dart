@@ -89,6 +89,9 @@ abstract class ColorPack{
       bodySmall: (textTheme.bodySmall??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
       bodyMedium: (textTheme.bodyMedium??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
       bodyLarge: (textTheme.bodyLarge??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+      titleSmall: (textTheme.titleSmall??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+      titleMedium: (textTheme.titleMedium??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+      titleLarge: (textTheme.titleLarge??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
     ).apply();
 
     TabBarThemeData tabBarTheme = TabBarTheme.of(context);
@@ -125,6 +128,23 @@ abstract class ColorPack{
       textTheme: textTheme,
       tabBarTheme: tabBarTheme,
       timePickerTheme: timePickerTheme,
+
+      dialogTheme: DialogThemeData(
+        titleTextStyle: TextStyle(
+          fontFamily: AppTextStyle.fontFamily_,
+          fontWeight: weightHalfBold,
+          color: textEnabled,
+        ),
+        contentTextStyle: TextStyle(
+          fontFamily: AppTextStyle.fontFamily_,
+          color: textEnabled,
+        ),
+        backgroundColor: background,
+        surfaceTintColor: Colors.transparent,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(AppCard.alertDialogRadius)),
+        ),
+      ),
 
       textSelectionTheme: textSelectionTheme,
 
