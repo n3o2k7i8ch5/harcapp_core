@@ -85,14 +85,7 @@ abstract class ColorPack{
     );
 
     TextTheme textTheme = TextTheme.of(context);
-    textTheme = textTheme.copyWith(
-      bodySmall: (textTheme.bodySmall??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
-      bodyMedium: (textTheme.bodyMedium??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
-      bodyLarge: (textTheme.bodyLarge??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
-      titleSmall: (textTheme.titleSmall??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
-      titleMedium: (textTheme.titleMedium??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
-      titleLarge: (textTheme.titleLarge??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
-    ).apply();
+    textTheme = textTheme.apply(fontFamily: AppTextStyle.fontFamily_, displayColor: textEnabled, bodyColor: textEnabled);
 
     TabBarThemeData tabBarTheme = TabBarTheme.of(context);
     tabBarTheme = tabBarTheme.copyWith(
@@ -116,12 +109,12 @@ abstract class ColorPack{
 
     DialogThemeData dialogThemeData = DialogTheme.of(context);
     dialogThemeData = DialogThemeData(
-      titleTextStyle: (dialogThemeData.titleTextStyle??TextStyle()).copyWith(
+      titleTextStyle: (dialogThemeData.titleTextStyle??textTheme.titleMedium??TextStyle()).copyWith(
         fontFamily: AppTextStyle.fontFamily_,
         fontWeight: weightHalfBold,
         color: textEnabled,
       ),
-      contentTextStyle: (dialogThemeData.contentTextStyle??TextStyle()).copyWith(
+      contentTextStyle: (dialogThemeData.contentTextStyle??textTheme.bodyMedium??TextStyle()).copyWith(
         fontFamily: AppTextStyle.fontFamily_,
         color: textEnabled,
       ),
