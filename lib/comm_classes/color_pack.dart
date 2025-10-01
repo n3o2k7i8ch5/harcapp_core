@@ -114,7 +114,7 @@ abstract class ColorPack{
         fontWeight: weightHalfBold,
         color: textEnabled,
       ),
-      contentTextStyle: (dialogThemeData.contentTextStyle??textTheme.bodyMedium??TextStyle()).copyWith(
+      contentTextStyle: (dialogThemeData.contentTextStyle??textTheme.headlineSmall??TextStyle()).copyWith(
         fontFamily: AppTextStyle.fontFamily_,
         color: textEnabled,
       ),
