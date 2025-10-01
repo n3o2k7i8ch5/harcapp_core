@@ -115,7 +115,7 @@ abstract class ColorPack{
     );
 
     DialogThemeData dialogThemeData = DialogTheme.of(context);
-    DialogThemeData(
+    dialogThemeData = DialogThemeData(
       titleTextStyle: (dialogThemeData.titleTextStyle??TextStyle()).copyWith(
         fontFamily: AppTextStyle.fontFamily_,
         fontWeight: weightHalfBold,
