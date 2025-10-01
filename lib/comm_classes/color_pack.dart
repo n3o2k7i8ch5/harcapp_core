@@ -74,6 +74,8 @@ abstract class ColorPack{
 
   ThemeData themeData(BuildContext context){
 
+    bool useMaterial3 = Theme.of(context).useMaterial3;
+
     AppBarThemeData appBarTheme = AppBarTheme.of(context);
     appBarTheme = appBarTheme.copyWith(
         backgroundColor: appBar,
@@ -109,7 +111,7 @@ abstract class ColorPack{
 
     DialogThemeData dialogThemeData = DialogTheme.of(context);
     dialogThemeData = DialogThemeData(
-      titleTextStyle: (dialogThemeData.titleTextStyle??textTheme.titleMedium??TextStyle()).copyWith(
+      titleTextStyle: (dialogThemeData.titleTextStyle??(useMaterial3?textTheme.headlineSmall:textTheme.titleLarge)??TextStyle()).copyWith(
         fontFamily: AppTextStyle.fontFamily_,
         fontWeight: weightHalfBold,
         color: textEnabled,
