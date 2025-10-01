@@ -114,6 +114,24 @@ abstract class ColorPack{
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppCard.bigRadius)),
     );
 
+    DialogThemeData dialogThemeData = DialogTheme.of(context);
+    DialogThemeData(
+      titleTextStyle: (dialogThemeData.titleTextStyle??TextStyle()).copyWith(
+        fontFamily: AppTextStyle.fontFamily_,
+        fontWeight: weightHalfBold,
+        color: textEnabled,
+      ),
+      contentTextStyle: (dialogThemeData.contentTextStyle??TextStyle()).copyWith(
+        fontFamily: AppTextStyle.fontFamily_,
+        color: textEnabled,
+      ),
+      backgroundColor: background,
+      surfaceTintColor: Colors.transparent,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(AppCard.alertDialogRadius)),
+      ),
+    );
+
     TextSelectionThemeData textSelectionTheme = TextSelectionTheme.of(context);
     textSelectionTheme = textSelectionTheme.copyWith(
       cursorColor: accent,
@@ -129,22 +147,7 @@ abstract class ColorPack{
       tabBarTheme: tabBarTheme,
       timePickerTheme: timePickerTheme,
 
-      dialogTheme: DialogThemeData(
-        titleTextStyle: TextStyle(
-          fontFamily: AppTextStyle.fontFamily_,
-          fontWeight: weightHalfBold,
-          color: textEnabled,
-        ),
-        contentTextStyle: TextStyle(
-          fontFamily: AppTextStyle.fontFamily_,
-          color: textEnabled,
-        ),
-        backgroundColor: background,
-        surfaceTintColor: Colors.transparent,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(AppCard.alertDialogRadius)),
-        ),
-      ),
+      dialogTheme: dialogThemeData,
 
       textSelectionTheme: textSelectionTheme,
 
