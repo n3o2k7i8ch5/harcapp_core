@@ -13,17 +13,17 @@ class CustTextStyle extends TextStyle{
   static const double defFontSize = Dimen.textSizeNormal;
 
   const CustTextStyle(
-      String familyName,
-      { Color? color = AppColors.textDefEnab,
-        FontWeight fontWeight = weightNormal,
-        fontSize = defFontSize,
-        bool? shadow = false,
-        FontStyle? fontStyle,
-        double height = 1.0,
-        TextDecoration? decoration,
-        TextDecorationStyle? decorationStyle,
-        double? decorationThickness,
-      }):super(
+    String familyName,
+    { Color? color,
+      FontWeight? fontWeight,
+      double? fontSize,
+      bool? shadow = false,
+      FontStyle? fontStyle,
+      double height = 1.0,
+      TextDecoration? decoration,
+      TextDecorationStyle? decorationStyle,
+      double? decorationThickness,
+    }):super(
       fontFamily: familyName,
       color: color,
       fontStyle: fontStyle,
@@ -41,7 +41,7 @@ class CustTextStyle extends TextStyle{
           color: const Color.fromARGB(72, 0, 0, 0),
         )
       ]:null
-  );
+    );
 }
 
 class AppTextStyle extends CustTextStyle{
@@ -52,7 +52,7 @@ class AppTextStyle extends CustTextStyle{
   const AppTextStyle(
       {Color? color,
         FontWeight fontWeight = weightNormal,
-        fontSize,
+        double? fontSize,
         bool? shadow,
         FontStyle? fontStyle,
         double height = 1.0,
