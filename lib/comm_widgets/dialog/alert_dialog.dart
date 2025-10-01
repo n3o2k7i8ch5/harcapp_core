@@ -46,7 +46,7 @@ Future<void> showAlertDialog(
     context: context,
     dismissible: dismissible,
     builder: (BuildContext context) => AlertDialog(
-      title: Text(title, style: const AppTextStyle(fontWeight: weightHalfBold)),
+      title: Text(title), // , style: const AppTextStyle(fontWeight: weightHalfBold)),
       content: contentWidget??
           Column(
             mainAxisSize: MainAxisSize.min,

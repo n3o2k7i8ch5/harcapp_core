@@ -51,7 +51,7 @@ class AppTextStyle extends CustTextStyle{
 
   const AppTextStyle(
       {Color? color,
-        FontWeight fontWeight = weightNormal,
+        FontWeight? fontWeight,
         double? fontSize,
         bool? shadow,
         FontStyle? fontStyle,
