@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
@@ -154,6 +155,16 @@ bool isDigit(String string){
 }
 
 void post(Function function) => WidgetsBinding.instance.addPostFrameCallback((_) => function());
+
+Future<void> postAsync(Function function) async {
+  Completer<void> completer = Completer<void>();
+  WidgetsBinding.instance.addPostFrameCallback((_) async {
+    await function();
+    completer.complete();
+  });
+
+  return completer.future;
+}
 
 class CannotLaunchUrlException implements Exception{
 
