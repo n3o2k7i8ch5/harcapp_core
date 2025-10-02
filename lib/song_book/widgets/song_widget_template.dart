@@ -1345,7 +1345,7 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
                               double scrollDefDelta = MediaQuery.of(context).size.height / 2;
                               double scrollDelta = min(
                                   scrollDefDelta,
-                                  SongWidgetTemplateState.scrollViewHeight(contentCardsKey) - scrollController.offset
+                                  SongWidgetTemplateState.scrollViewHeight(scrollviewKey) - scrollController.offset
                               );
 
                               int scrollDuration = (2000*scrollDelta/scrollDefDelta).round();
