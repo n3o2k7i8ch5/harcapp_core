@@ -96,10 +96,12 @@ class CurrentItemProvider extends ChangeNotifier{
   }
 
   SongRaw get song => _song;
-  set song(SongRaw value){
-    _song = value;
+  set song(SongRaw value) => setSong(value);
+
+  void setSong(SongRaw song, {bool notify = true}){
+    _song = song;
     _updateControllers(song: _song);
-    notifyListeners();
+    if(notify) notifyListeners();
   }
 
   String setLclIdFromTitleAndPerformer({bool withPerformer = true, bool notify = true}){
@@ -252,9 +254,11 @@ class RefrenEnabProvider extends ChangeNotifier{
 
   bool? get refEnab => _refEnab;
 
-  set refEnab(bool? value){
+  set refEnab(bool? value) => setRefEnab(value);
+
+  void setRefEnab(bool? value, {bool notify = true}){
     _refEnab = value;
-    notifyListeners();
+    if(notify) notifyListeners();
   }
 
   void notify() => notifyListeners();
@@ -281,24 +285,24 @@ class TagsProvider extends ChangeNotifier{
     _checkedTags = checkedTags;
   }
 
-  set(List<String> checkedTags){
+  set(List<String> checkedTags, {bool notify = true}){
     _checkedTags = checkedTags;
-    notifyListeners();
+    if(notify) notifyListeners();
   }
 
   String get(int idx) => _checkedTags[idx];
 
-  void add(String tag){
+  void add(String tag, {bool notify = true}){
     if(!_checkedTags.contains(tag)) {
       _checkedTags.add(tag);
       _checkedTags.sort();
     }
-    notifyListeners();
+    if(notify) notifyListeners();
   }
 
-  void remove(String tag){
+  void remove(String tag, {bool notify = true}){
     _checkedTags.remove(tag);
-    notifyListeners();
+    if(notify) notifyListeners();
   }
 
   List<String> get checkedTags => _checkedTags;
