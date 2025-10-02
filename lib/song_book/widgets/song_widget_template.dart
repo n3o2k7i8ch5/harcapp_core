@@ -1347,10 +1347,9 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
                               double scrollDefDelta = MediaQuery.of(context).size.height / 2;
 
                               double scrollableContentHeight = (
-                                  SongWidgetTemplateState.contentWidgetTopPos(contentCardsKey)
-                                  + scrollController.offset
-                                  + SongWidgetTemplateState.contentWidgetHeight(contentCardsKey)
-                                  + Dimen.floatingButtonMarg + Dimen.floatingButtonSize
+                                SongWidgetTemplateState.contentWidgetTopOffset(contentCardsKey, scrollviewKey, scrollController.offset)
+                                + SongWidgetTemplateState.contentWidgetHeight(contentCardsKey)
+                                + Dimen.floatingButtonMarg + Dimen.floatingButtonSize
                               );
 
                               double scrollDelta = min(
