@@ -59,7 +59,8 @@ class CurrentItemProvider extends ChangeNotifier{
     required SongRaw song,
     String? contribIdName,
     String? contribIdEmail,
-    String? contribIdUserKey
+    String? contribIdUserKey,
+    bool notify = true
   }) {
     _song = song;
     _updateControllers(
@@ -68,7 +69,7 @@ class CurrentItemProvider extends ChangeNotifier{
         contribIdEmail: contribIdEmail,
         contribIdUserKey: contribIdUserKey
     );
-    notifyListeners();
+    if(notify) notifyListeners();
   }
   CurrentItemProvider({
     required SongRaw song,
