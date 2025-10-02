@@ -1352,9 +1352,11 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
                                 + Dimen.floatingButtonMarg + Dimen.floatingButtonSize
                               );
 
+                              double scrollableAmount = scrollableContentHeight - SongWidgetTemplateState.scrollViewHeight(scrollviewKey);
+
                               double scrollDelta = min(
                                   scrollDefDelta,
-                                  scrollableContentHeight - scrollController.offset
+                                  scrollableAmount - scrollController.offset
                               );
 
                               int scrollDuration = (2000*scrollDelta/scrollDefDelta).round();
