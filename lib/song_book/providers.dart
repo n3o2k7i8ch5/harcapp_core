@@ -228,7 +228,7 @@ class AutoscrollProvider extends ChangeNotifier{
 
   static AutoscrollProvider of(BuildContext context) => Provider.of<AutoscrollProvider>(context, listen: false);
 
-  bool? _isScrolling;
+  bool _isScrolling;
   late bool restart;
   late SongBookSettTempl settings;
   double? scrollExtent;
@@ -245,20 +245,19 @@ class AutoscrollProvider extends ChangeNotifier{
       { this.beforeAutoscrollStart,
         this.onAutoscrollStart,
         this.onAutoscrollEnd
-      }){
-    _isScrolling = false;
-    restart = false;
+      }):
+    _isScrolling = false,
+    restart = false,
     this.settings = settings;
-  }
 
-  bool? get isScrolling => _isScrolling;
-  set isScrolling(bool? value){
+  bool get isScrolling => _isScrolling;
+  set isScrolling(bool value){
     if(restart){
       restart = false;
       return;
     }
     _isScrolling = value;
-    if(_isScrolling!) onAutoscrollStart?.call();
+    if(_isScrolling) onAutoscrollStart?.call();
     else onAutoscrollEnd?.call();
 
     notifyListeners();

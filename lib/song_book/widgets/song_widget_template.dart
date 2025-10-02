@@ -1377,21 +1377,21 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
 
 class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
 
-  final T song;
+  final T Function() songBuilder;
   final Color? accentColor;
   final Color? accentIconColor;
-  final ScrollController Function() scrollController;
+  final ScrollController Function() scrollControllerBuilder;
 
   const AutoScrollSpeedWidget({
-    required this.song,
+    required this.songBuilder,
     this.accentColor,
     this.accentIconColor,
-    required this.scrollController,
+    required this.scrollControllerBuilder,
   });
 
   @override
   Widget build(BuildContext context) => Consumer<AutoscrollProvider>(
-      builder: (context, prov, child) => prov.isScrolling!?AppCard(
+      builder: (context, prov, child) => prov.isScrolling?AppCard(
         elevation: AppCard.bigElevation,
         radius: AppCard.bigRadius,
         child: Row(
@@ -1415,8 +1415,8 @@ class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
                     prov.speed = value;
                     SongWidgetTemplateState._startAutoscroll(
                         context, 
-                        song,
-                        scrollController(),
+                        songBuilder(),
+                        scrollControllerBuilder(),
                         restart: true
                     );
                   },
