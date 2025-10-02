@@ -483,6 +483,9 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
     return renderBoxText.localToGlobal(Offset.zero).dy;
   }
 
+  static double contentWidgetTopOffset(GlobalKey contentCardsKey, GlobalKey scrollviewKey, double innerScrollOffset) =>
+    contentWidgetTopPos(contentCardsKey) - scrollViewTop(scrollviewKey) + innerScrollOffset;
+
   static double textWidgetHeight(GlobalKey contentCardsKey) =>
     contentWidgetHeight(contentCardsKey) - 2*_ContentWidget.vertMargVal - 2*_ContentWidget.vertPaddVal;
 
@@ -522,14 +525,13 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
     double floatingButtonScrollHeight = Dimen.floatingButtonMarg + Dimen.floatingButtonSize;
     if(contentCardsKey != null && scrollviewKey != null){
-      final scrollviewTop = scrollViewTop(scrollviewKey);
       autoscrollProvider.scrollviewHeight = scrollViewHeight(scrollviewKey);
 
-      final double _contentWidgetTop = contentWidgetTopPos(contentCardsKey);
       final double _contentHeight = contentWidgetHeight(contentCardsKey);
+      final double _textWidgetTopOffset = textWidgetTopOffset(contentCardsKey, scrollviewKey, scrollController.offset);
       final double _textWidgetHeight = textWidgetHeight(contentCardsKey);
-      autoscrollProvider.scrollExtent = (_contentWidgetTop + scrollController.offset) + _contentHeight - autoscrollProvider.scrollviewHeight! - scrollviewTop + floatingButtonScrollHeight;
-      autoscrollProvider.textWidgetTopOffset = textWidgetTopOffset(contentCardsKey, scrollviewKey, scrollController.offset);
+      autoscrollProvider.scrollExtent = contentWidgetTopOffset(contentCardsKey, scrollviewKey, scrollController.offset) + _contentHeight - autoscrollProvider.scrollviewHeight! + floatingButtonScrollHeight;
+      autoscrollProvider.textWidgetTopOffset = _textWidgetTopOffset;
       autoscrollProvider.textWidgetHeight = _textWidgetHeight;
     }
 
@@ -1343,9 +1345,17 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
                             if(settings.scrollText) {
 
                               double scrollDefDelta = MediaQuery.of(context).size.height / 2;
+
+                              double scrollableContentHeight = (
+                                  SongWidgetTemplateState.contentWidgetTopPos(contentCardsKey)
+                                  + scrollController.offset
+                                  + SongWidgetTemplateState.contentWidgetHeight(contentCardsKey)
+                                  + Dimen.floatingButtonMarg + Dimen.floatingButtonSize
+                              );
+
                               double scrollDelta = min(
                                   scrollDefDelta,
-                                  SongWidgetTemplateState.scrollViewHeight(scrollviewKey) - scrollController.offset
+                                  scrollableContentHeight - scrollController.offset
                               );
 
                               int scrollDuration = (2000*scrollDelta/scrollDefDelta).round();
