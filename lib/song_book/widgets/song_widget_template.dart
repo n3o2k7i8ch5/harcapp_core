@@ -1378,15 +1378,15 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
 class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
 
   final T Function() songBuilder;
+  final ScrollController Function() scrollControllerBuilder;
   final Color? accentColor;
   final Color? accentIconColor;
-  final ScrollController Function() scrollControllerBuilder;
 
   const AutoScrollSpeedWidget({
     required this.songBuilder,
+    required this.scrollControllerBuilder,
     this.accentColor,
     this.accentIconColor,
-    required this.scrollControllerBuilder,
   });
 
   @override
