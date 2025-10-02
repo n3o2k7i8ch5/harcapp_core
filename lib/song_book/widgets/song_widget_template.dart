@@ -1359,7 +1359,7 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
                                   scrollableAmount - scrollController.offset
                               );
 
-                              int scrollDuration = (2000*scrollDelta/scrollDefDelta).round();
+                              int scrollDuration = (1200*scrollDelta/scrollDefDelta).round();
 
                               if(scrollDuration > 0) {
                                 parent.tapScrolling = true;
