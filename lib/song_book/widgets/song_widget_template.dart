@@ -86,7 +86,7 @@ class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends Contribut
 
   final InstrumentType initInstrumentType;
 
-  final void Function(ScrollNotification scrollInfo, double? textHeight, double? textTopOffset)? onScroll;
+  final void Function(ScrollNotification scrollInfo, double? textHeight, double? textTopOffset, bool tapScrolling)? onScroll;
 
   final void Function(double)? onTitleTap;
   final void Function(String)? onAuthorTap;
@@ -220,7 +220,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
   InstrumentType get initInstrumentType => widget.initInstrumentType;
 
-  void Function(ScrollNotification scrollInfo, double? textHeight, double? textTopOffset)? get onScroll => widget.onScroll;
+  void Function(ScrollNotification scrollInfo, double? textHeight, double? textTopOffset, bool tapScrolling)? get onScroll => widget.onScroll;
 
   void Function(double)? get onTitleTap => widget.onTitleTap;
   void Function(String)? get onAuthorTap => widget.onAuthorTap;
@@ -277,12 +277,15 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
   late GlobalKey scrollviewKey;
   late GlobalKey contentCardsKey;
 
+  late bool tapScrolling;
+
   @override
   void initState() {
     if(widget.controller == null) _controller = SongController();
     controller.addListener(_notify);
     scrollviewKey = GlobalKey();
     contentCardsKey = GlobalKey();
+    tapScrolling = false;
     super.initState();
   }
 
@@ -431,7 +434,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
           if(onScroll == null) return true;
 
           if(contentCardsKey.currentContext == null){
-            onScroll?.call(scrollInfo, null, null);
+            onScroll?.call(scrollInfo, null, null, tapScrolling);
             return true;
           }
 
@@ -440,7 +443,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
           final double _textHeight = textWidgetHeight(contentCardsKey);
 
-          onScroll?.call(scrollInfo, _textHeight, _textTopOffset);
+          onScroll?.call(scrollInfo, _textHeight, _textTopOffset, tapScrolling);
           return true;
         },
       ),
@@ -1336,7 +1339,7 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
                               numWidget
                             ],
                           ),
-                          onTap: (){
+                          onTap: () async {
                             if(settings.scrollText) {
 
                               double scrollDefDelta = MediaQuery.of(context).size.height / 2;
@@ -1347,12 +1350,16 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
 
                               int scrollDuration = (2000*scrollDelta/scrollDefDelta).round();
 
-                              if(scrollDuration > 0)
-                                scrollController.animateTo(
+                              if(scrollDuration > 0) {
+                                parent.tapScrolling = true;
+                                await scrollController.animateTo(
                                     scrollController.offset + scrollDelta,
-                                    duration: Duration(milliseconds: scrollDuration),
+                                    duration: Duration(
+                                        milliseconds: scrollDuration),
                                     curve: Curves.ease
                                 );
+                                parent.tapScrolling = false;
+                              }
                             }
                           },
                           onLongPress: () => SongWidgetTemplateState._startAutoscroll(
