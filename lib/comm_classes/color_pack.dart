@@ -99,7 +99,7 @@ abstract class ColorPack{
     );
 
     TimePickerThemeData timePickerTheme = TimePickerTheme.of(context);
-    timePickerTheme = TimePickerThemeData(
+    timePickerTheme = timePickerTheme.copyWith(
       backgroundColor: background,
       dialHandColor: accent,
       helpTextStyle: (timePickerTheme.helpTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
@@ -109,8 +109,18 @@ abstract class ColorPack{
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppCard.bigRadius)),
     );
 
+    DatePickerThemeData datePickerTheme = DatePickerTheme.of(context);
+    DatePickerThemeData datePickerThemeDefaults = DatePickerTheme.defaults(context);
+    datePickerTheme = datePickerTheme.copyWith(
+      backgroundColor: background,
+      headerHeadlineStyle: (datePickerTheme.headerHeadlineStyle??datePickerThemeDefaults.headerHeadlineStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+      headerHelpStyle: (datePickerTheme.headerHelpStyle??datePickerThemeDefaults.headerHelpStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
+      weekdayStyle: (datePickerTheme.weekdayStyle??datePickerThemeDefaults.weekdayStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
+      dayStyle: (datePickerTheme.dayStyle??datePickerThemeDefaults.dayStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
+    );
+
     DialogThemeData dialogThemeData = DialogTheme.of(context);
-    dialogThemeData = DialogThemeData(
+    dialogThemeData.copyWith(
       titleTextStyle: (dialogThemeData.titleTextStyle??(useMaterial3?textTheme.headlineSmall:textTheme.titleLarge)??TextStyle()).copyWith(
         fontFamily: AppTextStyle.fontFamily_,
         fontWeight: weightHalfBold,
@@ -142,6 +152,7 @@ abstract class ColorPack{
       tabBarTheme: tabBarTheme,
       timePickerTheme: timePickerTheme,
 
+      datePickerTheme: datePickerTheme,
       dialogTheme: dialogThemeData,
 
       textSelectionTheme: textSelectionTheme,
