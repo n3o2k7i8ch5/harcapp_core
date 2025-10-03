@@ -112,11 +112,49 @@ abstract class ColorPack{
     DatePickerThemeData datePickerTheme = DatePickerTheme.of(context);
     DatePickerThemeData datePickerThemeDefaults = DatePickerTheme.defaults(context);
     datePickerTheme = datePickerTheme.copyWith(
-      backgroundColor: background,
-      headerHeadlineStyle: (datePickerTheme.headerHeadlineStyle??datePickerThemeDefaults.headerHeadlineStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
-      headerHelpStyle: (datePickerTheme.headerHelpStyle??datePickerThemeDefaults.headerHelpStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
-      weekdayStyle: (datePickerTheme.weekdayStyle??datePickerThemeDefaults.weekdayStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
-      dayStyle: (datePickerTheme.dayStyle??datePickerThemeDefaults.dayStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
+        backgroundColor: background,
+        headerHeadlineStyle: (datePickerTheme.headerHeadlineStyle??datePickerThemeDefaults.headerHeadlineStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+        headerHelpStyle: (datePickerTheme.headerHelpStyle??datePickerThemeDefaults.headerHelpStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
+        weekdayStyle: (datePickerTheme.weekdayStyle??datePickerThemeDefaults.weekdayStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
+        dayStyle: (datePickerTheme.dayStyle??datePickerThemeDefaults.dayStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
+        todayForegroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.selected)) return background;
+          if (states.contains(WidgetState.disabled)) return hintEnabled;
+          return textEnabled;
+        }),
+        todayBackgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.selected)) return accent;
+          return null;
+        }),
+        todayBorder: (datePickerTheme.todayBorder??datePickerThemeDefaults.todayBorder??BorderSide()).copyWith(
+            color: accent
+        ),
+        dayForegroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.selected)) return background;
+          if (states.contains(WidgetState.disabled)) return hintEnabled;
+          return textEnabled;
+        }),
+        dayBackgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.selected)) return accent;
+          return null;
+        }),
+        yearForegroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.selected)) return background;
+          if (states.contains(WidgetState.disabled)) return hintEnabled;
+          return textEnabled;
+        }),
+        yearBackgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.selected)) return accent;
+          return null;
+        }),
+        cancelButtonStyle: datePickerTheme.cancelButtonStyle?.copyWith(
+          backgroundColor: datePickerTheme.cancelButtonStyle?.backgroundColor??datePickerThemeDefaults.cancelButtonStyle?.backgroundColor,
+          foregroundColor: datePickerTheme.cancelButtonStyle?.foregroundColor??datePickerThemeDefaults.cancelButtonStyle?.foregroundColor,
+        ),
+        confirmButtonStyle: datePickerTheme.confirmButtonStyle?.copyWith(
+          backgroundColor: datePickerTheme.confirmButtonStyle?.backgroundColor??datePickerThemeDefaults.confirmButtonStyle?.backgroundColor,
+          foregroundColor: datePickerTheme.confirmButtonStyle?.foregroundColor??datePickerThemeDefaults.confirmButtonStyle?.foregroundColor,
+        )
     );
 
     DialogThemeData dialogThemeData = DialogTheme.of(context);
