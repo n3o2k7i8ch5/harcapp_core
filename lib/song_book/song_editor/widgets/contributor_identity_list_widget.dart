@@ -152,6 +152,7 @@ class ContributorIdentityListWidgetState extends State<ContributorIdentityListWi
                     ),
                   ),
               shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
               enterTransition: [FadeIn()],
               exitTransition: [SlideInUp(), FadeIn()],
               isSameItem: (a, b) => a.hashCode == b.hashCode,
