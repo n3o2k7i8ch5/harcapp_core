@@ -1,0 +1,14 @@
+id: enigma
+name: 'Enigma'
+level: 3
+tasks:
+  - |
+    Wiem, jak sprawdzić sygnaturę e-maila i jak powinien być on podpisany. Wiem, jak sprawdzić, czy połączenie jest bezpieczne. Wysłałem(-am) maila podpisanego lub szyfrowanego i wykonałem co najmniej jedno z zadań:
+    
+    a) Pokazałem(-am) znajomemu lub członkowi rodziny, jak rozpoznać, że połączenie jest szyfrowane i bezpieczne.
+    
+    b) Zaprezentowałem(-am) zastępowi lub członkom rodziny kilka przykładów phishingu bazując na wiedzy z portali takich jak niebezpiecznik.pl lub zaufanatrzeciastrona.pl.
+  - 'Wiem, jakie są zasady i sposoby przekazywania oraz gromadzenia poufnych informacji (np. danych osobowych), szczególnie w Internecie. Założyłem(-am) e-maila w domenie zhp.net.pl i wykorzystuję tę pocztę do załatwiania wszystkich spraw służbowych.'
+  - 'Znam podstawowe metody łamania szyfrów. Złamałem(-am) szyfr i odczytałem(-am) wiadomość napisaną nieznanym mi szyfrem.'
+  - 'Przeprowadziłem(-am) zajęcia dla harcerzy/harcerek z dziedziny bezpieczeństwa danych osobowych w Internecie, zademonstrowałem(-am), ile można się o kimś dowiedzieć z portali społecznościowych i innych miejsc jego aktywności w sieci.'
+

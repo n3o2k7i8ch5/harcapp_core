@@ -1,0 +1,8 @@
+id: technik_informatyk
+name: 'Technik Informatyk'
+level: 2
+tasks:
+  - 'Poznałem(-am) budowę komputera (stacjonarnego lub laptopa). Zapoznałem(-am) się z najważniejszymi podzespołami komputera (zasilacz, płyta główna, pamięć, karta graficzna, procesor, itp.) i wiem, do czego służą. Sprawdziłem konfigurację używanego komputera, wykorzystując funkcjonalność systemu operacyjnego lub narzędzia dodatkowe. Przygotowałem(-am) opis swojego komputera, prezentując w nim najważniejsze informacje o każdym istotnym jego podzespole.'
+  - 'Zapoznałem(-am) się z najważniejszymi pojęciami dotyczącymi sprzętu komputerowego. Zapoznałem(-am) się z rodzajami pamięci (RAM, ROM, pamięć masowa, cache), rodzajami pamięci masowej (HDD, SSD, pamięci Flash itp.). Doradziłem(-am) znajomemu/znajomej dobór odpowiedniej pamięci masowej dopasowany do jego/jej potrzeb.'
+  - 'Zapoznałem/em się z podstawowymi rodzajami złącz (HDMI, DisplayPort, USB 2.0, USB 3.0, DVI, D-SUB itd.). Podłączyłem(-am) i skonfigurowałem(-am) dodatkowy monitor, drukarkę oraz inne dowolne urządzenie peryferyjne.'
+

@@ -1,0 +1,9 @@
+id: programista
+name: 'Programista'
+level: 4
+tasks:
+  - 'Napisałem(-am) złożony program pomocny w pracy harcerskiej, wykorzystując wybrany framework (np. .NET, Symphony, Flask) w celu uniknięcia konieczności samodzielnego implementowania powszechnie wykorzystywanych funkcjonalności.'
+  - 'Napisałem(-am) użyteczny w pracy harcerskiej program, wykorzystując wybrany paradygmat programowania (proceduralny, obiektowy, funkcyjny, logiczny itd.) inny niż w przypadku zadania 1.'
+  - 'Pisząc program, użyłem bibliotek rozszerzeń spoza standardu wykorzystanego języka (np. systemy kolejkowania, bazy NoSQL).'
+  - 'Zaprezentowałem(-am) stworzony program wybranej grupie docelowej (zastępowi, zespołowi kwatermistrzowskiemu, zespołowi promocji itp.) i udostępniłem(-am) do wykorzystywania. Uwzględniłem(-am) informację zwrotną, ulepszając program.'
+

@@ -1,0 +1,10 @@
+id: ratownik_specjalista
+name: 'Ratownik specjalista'
+level: 1
+tasks:
+  - 'W czasie zajęć na wodzie zawsze pływałem(-am) w kamizelce asekuracyjnej lub ratunkowej.'
+  - 'Opowiedziałem(-am), jak oznacza się kąpieliska w Polsce, co oznaczają poszczególne flagi oraz w jakich miejscach należy unikać kąpieli.'
+  - 'Skompletowałem(-am) apteczkę zastępu lub wachty na biwak, rejs lub obóz.'
+  - 'Prawidłowo wezwałem(-am) pomoc w przypadku wypadku nad wodą lub w czasie pozoracji wypadku.'
+  - 'Zawiązałem(-am) węzeł ratowniczy.'
+

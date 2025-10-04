@@ -1,0 +1,11 @@
+id: ratownik_specjalista
+name: 'Ratownik specjalista'
+level: 3
+tasks:
+  - 'Rozpoznałem(-am) oznaki hipotermii i opowiedziałem(-am), jak postąpić w przypadku jej wystąpienia.'
+  - 'Ustawiłem(-am) odpowiednio jednostkę (jacht, kajak, łódź motorową itp.) w przypadku pozorowanego pożaru na jednostce.'
+  - 'Prawidłowo podałem(-am) koło ratunkowe, założyłem(-am) pas ratunkowy i kamizelkę asekuracyjną.'
+  - 'Ukończyłem(-am) przynajmniej 9-godzinny kurs pierwszej pomocy, w którym wykonywano ćwiczenia RKO na fantomie.'
+  - 'Zaprezentowałem(-am) przynajmniej pięć sposobów wzywania pomocy na wodach śródlądowych.'
+  - 'Skoczyłem(-am) do wody na nogi w kamizelce ratunkowej z wysokości 2 metrów.'
+

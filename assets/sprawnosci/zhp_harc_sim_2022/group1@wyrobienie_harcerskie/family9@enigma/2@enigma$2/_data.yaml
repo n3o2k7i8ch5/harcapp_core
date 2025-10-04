@@ -1,0 +1,13 @@
+id: enigma
+name: 'Enigma'
+level: 2
+tasks:
+  - |
+    Wykonałem jedno z zadań:
+    
+    a) Nadałem(-am) i odebrałem(-am) wiadomość zakodowaną alfabetem Morse’a za pomocą chorągiewek, latarki lub innego przyrządu.
+    
+    b) Nadałem(-am) i odebrałem(-am) wiadomości za pomocą alfabetu semaforowego.
+  - 'Przeprowadziłem(-am) zajęcia z szyfrów lub sygnalizacji dla zastępu.'
+  - 'Stworzyłem(-am) szyfr dla zastępu lub drużyny. Przeprowadziłem(-am) na zbiórce grę opartą na wykorzystaniu tego szyfru.'
+

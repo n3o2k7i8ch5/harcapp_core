@@ -1,0 +1,14 @@
+id: enigma
+name: 'Enigma'
+level: 4
+tasks:
+  - 'Wziąłem(wzięłam) udział w konkursie kryptologicznym (np. lamaczeszyfrow.pl) lub we własnym zakresie zapoznałem(-am) się z rodzajami szyfrów i metodami skutecznego ataku na nie.'
+  - 'Znam metody Kasiskiego i Friedmana, potrafię skorzystać ze statystyki znaków do określenia rodzaju użytego szyfru oraz przypuszczenia ataku na szyfrogram. Złamałem(-am) jeden szyfr polialfabetyczny (klucz min. 3 znaki).'
+  - |
+    Poznałem(-am) współczesne metody kryptologiczne stosowane do zabezpieczania danych i podstawowe metody szyfrowania danych. Wykonałem(-am) co najmniej jedno z zadań: 
+    
+    a) Na bazie zdobytej wiedzy napisałem(-am) prosty program szyfrujący.
+    
+    b) Zdobyłem(-am) wiedzę na temat śledzenia danych przez przeglądarki. Wybrałem(-am) taką, której używanie w zgodnie ze zdobyta wiedzą zapewnia największy poziom prywatności i bezpieczeństwa. Dobrałem(-am) dodatkowe metody nawiązywania bezpiecznych połączeń z Internetem.
+  - 'Przeprowadziłem(-am) zajęcia/zbiórkę z łamania szyfrów.'
+

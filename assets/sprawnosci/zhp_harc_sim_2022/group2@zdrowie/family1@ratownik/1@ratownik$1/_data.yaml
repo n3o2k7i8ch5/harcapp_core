@@ -1,0 +1,16 @@
+id: ratownik
+name: 'Ratownik'
+level: 1
+tasks:
+  - |
+    Udzieliłem(-am) pomocy w następujących sytuacjach:
+    
+    a) Opatrzyłem(-am) ranę, zabezpieczyłem(-am) oparzenie.
+    
+    b) Zareagowałem(-am) właściwie w sytuacji omdlenia.
+    
+    c) Zadbałem(-am) o bezpieczeństwo osoby nieprzytomnej (oceniłem(-am) przytomność, udrożniłem(-am) drogi oddechowe i sprawdziłem(-am) oddech u poszkodowanego nieprzytomnego).
+  - 'Znam numery alarmowe, skorzystałem(-am) z nich w sytuacji rzeczywistej lub symulowanej podając dyspozytorowi niezbędne informacje.'
+  - 'Unieruchomiłem(-am) rękę w przypadku urazu.'
+  - 'Oceniłem(-am) czy mogę bezpiecznie udzielić pierwszej pomocy poszkodowanemu. Bezpiecznie zdjąłem(-am) rękawiczki.'
+

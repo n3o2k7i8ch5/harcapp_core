@@ -1,0 +1,10 @@
+id: nawigator
+name: 'Nawigator'
+level: 4
+tasks:
+  - 'W aplikacji lub chartploterze do nawigacji jachtowej ustawiłem(-am) i aktywowałem(-am) punkty (waypoints) oraz trasę (route) żeglugi.'
+  - 'Określiłem(-am) pozycję jachtu na papierowej mapie morskiej na podstawie obserwacji dwóch punktów oraz na podstawie obserwacji jednego punktu i pomiaru głębokości.'
+  - 'Wyznaczyłem(-am) na papierowej mapie morskiej pozycję jachtu na podstawie kursu, prędkości, czasu itd. od ostatniej pozycji obserwowanej.'
+  - 'Przeczytałem(-am) w locji opisy i obejrzałem(-am) na mapie podejścia do trzech portów morskich i zatokowych w Polsce. Zrobiłem(-am) notatki, na podstawie których opowiedziałem(-am) innym o każdym z nich.'
+  - 'Podczas żeglugi zidentyfikowałem(-am) na mapie mijane i widoczne obiekty na wodzie i na brzegu.'
+

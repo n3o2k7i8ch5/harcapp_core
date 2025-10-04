@@ -1,0 +1,10 @@
+id: ratownik_wodny
+name: 'Ratownik wodny'
+level: 3
+tasks:
+  - 'Skoczyłem(-am) do wody sposobem ratowniczym.'
+  - 'Przepłynąłem(-ęłam) 50 metrów kraulem ratowniczym i 50 metrów żabką ratowniczą.'
+  - 'Poznałem(-am) min. dwa sposoby holowania tonącego i przeholowałem(-am) kogoś na dystansie 50 metrów.'
+  - 'Podczas symulacji ułożyłem(-am) poszkodowanego z podejrzeniem urazu kręgosłupa na desce ratowniczej.'
+  - 'Rzuciłem(-am) rzutką ratowniczą trzy razy na odległość min. 15 metrów. Po każdym rzucie poprawnie ją sklarowałem(-am).'
+

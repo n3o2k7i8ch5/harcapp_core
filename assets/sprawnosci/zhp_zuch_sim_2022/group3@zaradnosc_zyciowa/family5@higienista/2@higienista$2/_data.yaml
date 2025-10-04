@@ -1,0 +1,9 @@
+id: higienista
+name: 'Higienista'
+level: 2
+tasks:
+  - 'Zademonstrowałem(-am) innym zuchom, jak prawidłowo myć ręce.'
+  - 'Dwukrotnie sprawdzałem(-am) stan czystości na wyjeździe gromady.'
+  - 'Zmierzyłem(-am) temperaturę w domu i oceniłem(-am), czy jest prawidłowa.'
+  - 'Samodzielnie umyłem(-am) włosy podczas wyjazdu gromady lub w domu pod okiem rodziców. Efekty zaprezentowałem(-am) drużynowemu.'
+

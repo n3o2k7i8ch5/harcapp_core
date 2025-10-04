@@ -1,0 +1,8 @@
+id: webmaster
+name: 'Webmaster'
+level: 4
+tasks:
+  - 'Stworzyłem(-am) prostą aplikację webową w wybranym języku backendowym z wykorzystaniem relacyjnych baz danych (np. MySQL, PostgreSQL, SQLite, Firebird).'
+  - 'Stworzyłem(-am) stronę WWW z zawartością dynamiczną, wykorzystując języki HTML i JavaScript oraz arkusze stylów CSS z zachowaniem zasad RWD.'
+  - 'Postawiłem(-am) serwer WWW na komputerze lub maszynie wirtualnej, zabezpieczyłem(-am) go i udostępniłem(-am) w sieci.'
+

@@ -1,0 +1,11 @@
+id: operator_drona
+name: 'Operator Drona'
+level: 1
+tasks:
+  - 'Poprawnie wykonałem(-am) manewry startu i lądowania.'
+  - 'Wykonałem(-am) trening lotu dronem w symulatorze.'
+  - 'Sprawdziłem(-am) stan baterii i oszacowałem(-am) czas możliwego lotu.'
+  - 'Poprawnie skalibrowałem(-am) żyroskop w statku powietrznym.'
+  - 'Podczas lotu poprawnie instruowałem(-am) operatora drona o wymaganych manewrach.'
+  - 'Wyjaśniłem(-am) zasadę działania śmigła.'
+

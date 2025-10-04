@@ -1,0 +1,11 @@
+id: hodowca_zwierzat
+name: 'Hodowca Zwierząt'
+level: 2
+tasks:
+  - 'Mam w domu zwierzę, którym opiekuję się wspólnie z rodzicami. Mam stały obowiązek, np. daję mu jeść lub wyprowadzam na dwór.'
+  - 'Zebrałem(-am) informacje przydatne do opieki nad moim zwierzęciem.'
+  - 'Wspólnie z rodzicami przygotowałem(-am) miejsce dla mojego zwierzęcia. Pomagam w jego sprzątaniu.'
+  - 'Wykonałem(-am) zabawkę lub inną przydatną rzecz dla mojego zwierzęcia.'
+  - 'Byłem(-am) z moim zwierzęciem u weterynarza.'
+  - 'Zrobiłem(-am) zdjęcia mojemu zwierzęciu. Pokazałem(-am) je innym zuchom i opowiedziałem(-am) im o jego zwyczajach (np. ile śpi, co lubi jeść, jak można się z nim bawić) oraz o tym, jak się nim zajmuję.'
+

@@ -13,6 +13,8 @@ import 'dart:io';
 // EDIT THIS LIST TO ADD MORE SOURCES
 const List<String> BASE_DIRS = [
   'assets/sprawnosci/common/zhr_common',
+  'assets/sprawnosci/zhp_harc_sim_2022',
+  'assets/sprawnosci/zhp_zuch_sim_2022',
   'assets/sprawnosci/zhr_harc_c_sim_2023',
   'assets/sprawnosci/zhr_harc_d_sim_2023',
 ];

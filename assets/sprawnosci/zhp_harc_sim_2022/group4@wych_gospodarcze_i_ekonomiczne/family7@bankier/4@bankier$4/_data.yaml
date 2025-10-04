@@ -1,0 +1,18 @@
+id: bankier
+name: 'Bankier'
+level: 4
+tasks:
+  - 'Wyliczyłem(-am) ratę równą i malejącą z kredytu oraz zaprezentowałem(-am), jakie są między nimi różnice. Uwzględniłem(-am) w takich obliczeniach element ryzyka kursu waluty oraz podałem(-am) stopę nominalnego oraz realnego jego oprocentowania, z uwzględnieniem wpływu stopy inflacji.'
+  - 'Przygotowałem(-am) i ustawiłem(-am) odpowiednie zabezpieczenia dla transakcji zakupu dokonywanych poprzez Internet.'
+  - 'Przygotowałem(-am) i przeprowadziłem(-am) grę ekonomiczną zawierającą elementy inwestowania (forma inwestycji, czas, płynność), oszczędzania oraz oceny ryzyka.'
+  - |
+    Posługuję się biegle bankowością elektroniczną, realizując następujące działania:
+    
+    a) Dokonałem(-am) przelewu,
+    
+    b) Użyłem(-am) karty płatniczej,
+    
+    c) Ustanowiłem(-am) lokatę,
+    
+    d) Zapłaciłem(-am) przy użyciu dostępnego elektronicznego serwisu transakcyjnego (np. BLIK) wykorzystując do tego telefon. Przeanalizowałem(-am) na podstawie systemu bankowego strukturę swoich wydatków.
+

@@ -1,0 +1,16 @@
+id: hodowca
+name: 'Hodowca (ptaków, gryzoni, drobiu, ryb)'
+level: 3
+tasks:
+  - |
+    Dbam o zdrowie moich zwierząt, wykonując jedno z poniższych zadań:
+    
+    a) Zapewniłem(-am) moim zwierzętom wizytę weterynarza,
+    
+    b) Zaszczepiłem(-am) moje zwierzęta,
+    
+    c) Zweryfikowałem(-am) swoje dotychczasowe praktyki hodowlane w fachowych książkach, czasopismach, portalach.
+  - 'Przygotowałem(-am) dla swoich zwierząt wyposażenie zwiększające komfort miejsca ich codziennego przebywania (np. zabawkę, wybieg).'
+  - 'Dostosowałem(-am) dietę moich zwierząt do ich indywidualnych potrzeb. W trakcie trwania próby (przynajmniej 4 miesiące) samodzielnie karmiłem(-am) swoje zwierzęta. W przypadku własnej niedyspozycji zapewniłem(-am) sobie zastępstwo.'
+  - 'Zabrałem(-am) członków mojego zastępu na wizytę, podczas której oglądaliśmy moją hodowlę.'
+

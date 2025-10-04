@@ -1,0 +1,10 @@
+id: ratownik_specjalista
+name: 'Ratownik specjalista'
+level: 2
+tasks:
+  - 'Odwiedziłem(-am) z drużyną, zastępem lub wachtą stację ratownictwa wodnego lub sekcję wodną straży pożarnej.'
+  - 'Udzieliłem(-am) pomocy w przypadku skaleczenia i oparzenia słonecznego.'
+  - 'Zapobiegłem(-am) wystąpieniu udaru słonecznego, w czasie zajęć na wodzie zawsze nosiłem(-am) czapkę.'
+  - 'Wskazałem(-am) na mapie, gdzie na najbliższych zbiornikach wodnych zlokalizowane są służby mogące nieść pomoc na wodzie.'
+  - 'Zawiązałem(-am) węzeł ratowniczy w wodzie oraz na lądzie z zawiązanymi oczami.'
+

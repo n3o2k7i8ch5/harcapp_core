@@ -1,0 +1,9 @@
+id: pomocnik_weterynarza
+name: 'Pomocnik Weterynarza'
+level: 1
+tasks:
+  - 'Poznałem(-am) budowę konia. Wskazałem(-am) na koniu przebieg kręgosłupa, łopatkę, nadgarstek, biodro, kolano, staw skokowy.'
+  - 'Zmierzyłem(-am) temperaturę konia pod opieką specjalisty, wskazałem(-am) prawidłowy zakres temperatur.'
+  - 'Pomagałem(-am) w odrobaczaniu konia, dowiedziałem(-am) się, czemu należy odrobaczać konie (co jaki czas należy to robić, jakie są sposoby podawania).'
+  - 'Wykonałem(-am) wywiad z lekarzem weterynarii na temat układu pokarmowego, diety oraz najczęstszych chorób u koni.'
+

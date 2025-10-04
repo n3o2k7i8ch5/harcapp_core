@@ -1,0 +1,17 @@
+id: technik_informatyk
+name: 'Technik Informatyk'
+level: 4
+tasks:
+  - 'Poznałem(-am) zależności wynikające ze współpracy poszczególnych podzespołów komputerowych. Złożyłem(-am) komputer stacjonarny od podstaw, samodzielnie montując takie rzeczy jak: płyta główna, procesor, karta graficzna, pamięć RAM oraz inne konieczne podzespoły.'
+  - 'Zaprojektowałem(-am) zestaw komputerowy lub komputer przenośny spełniający wskazane wymagania i mieszczący się w określonym (realnym) budżecie. Dobrałem podzespoły (CPU, RAM, pamięć masową, karty rozszerzeń itd.), biorąc pod uwagę parametry współpracujących elementów (np. taktowanie pamięci) i dostępne do wykorzystania złącza'
+  - |
+    Poznałem(-am) budowę przenośnych komputerów osobistych (laptopów, notebooków, ultrabooków, itp.). Rozłożyłem(-am) laptopa i wykonałem(-am) co najmniej jedno z zadań:
+    
+    a) Wyczyściłem(-am) podzespoły komputera, wymieniłem(-am) pastę termoprzewodzącą pod procesorem i/lub kratą graficzną;
+    
+    b) Wymieniłem(-am) w nim dysk i/lub pamięć RAM;
+    
+    c) Wymieniłem(-am) matrycę wyświetlacza.
+    
+    Po wykonaniu tych działań, prawidłowo złożyłem(-am) komputer z powrotem.
+

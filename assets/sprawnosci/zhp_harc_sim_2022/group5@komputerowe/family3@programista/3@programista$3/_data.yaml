@@ -1,0 +1,9 @@
+id: programista
+name: 'Programista'
+level: 3
+tasks:
+  - 'Napisałem(-am) użyteczny w pracy harcerskiej program, wykorzystując wybrany paradygmat programowania (proceduralny, obiektowy, funkcyjny, logiczny itd.). Zaprezentowałem(-am) go wybranej grupie docelowej (zastępowi, zespołowi kwatermistrzowskiemu, zespołowi promocji itp.) i udostępniłem(-am) do wykorzystywania. Uwzględniłem(-am) informację zwrotną, ulepszając program.'
+  - 'Napisałem prosty program w języku programowania innym niż wykorzystany w zadaniu 1.'
+  - 'Zapoznałem(-am) się z wybranym systemem kontroli wersji, np. Git. Utworzyłem(-am) profil na platformie pozwalającej na prowadzenie zdalnej kontroli wersji (np. GitHub). Umieściłem(-am) na niej co najmniej jeden swój program.'
+  - 'Stworzyłem lub istotnie ulepszyłem dokumentację programu przeznaczoną dla użytkownika.'
+

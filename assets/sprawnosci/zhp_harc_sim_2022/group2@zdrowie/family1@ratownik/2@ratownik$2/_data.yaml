@@ -1,0 +1,18 @@
+id: ratownik
+name: 'Ratownik'
+level: 2
+tasks:
+  - 'Skompletowałem(-am) apteczkę osobistą.'
+  - 'Ułożyłem(-am) poszkodowanego w pozycji bezpiecznej.'
+  - 'Wykonałem(-am) prawidłowo uciśnięcia klatki piersiowej u osoby dorosłej (podczas RKO).'
+  - 'Udzieliłem(-am) pierwszej pomocy w przypadku ukąszenia przez owady.'
+  - |
+    Prawidłowo postąpiłem(-am) przy krwotokach:
+    
+    a) Udzieliłem(-am) pierwszej pomocy w przypadku krwotoku z nosa.
+    
+    b) Założyłem(-am) opatrunek uciskowy w przypadku krwotoku z rany.
+    
+    c) Udzieliłem(-am) pierwszej pomocy w przypadku złamania otwartego.
+  - 'Zabezpieczyłem(-am) poszkodowanego przed utratą ciepła (zastosowałem(-am) termoizolację).'
+

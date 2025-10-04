@@ -1,0 +1,7 @@
+id: ogrodnik
+name: 'Ogrodnik'
+level: 2
+tasks:
+  - 'Rozpoznałem(-am) nasiona popularnych warzyw np. marchwi, pietruszki, sałaty, ogórków, buraczków, groszku i dyni.'
+  - 'Wyhodowałem(-am) samodzielnie co najmniej 5 warzyw z nasion lub rozsady. Starałem(-am) się nie korzystać z nawozów sztucznych oraz oszczędnie gospodarowałem(-am) wodą (np. łapałem(-am) deszczówkę).'
+

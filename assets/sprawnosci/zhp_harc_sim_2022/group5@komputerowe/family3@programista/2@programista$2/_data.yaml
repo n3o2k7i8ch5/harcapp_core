@@ -1,0 +1,8 @@
+id: programista
+name: 'Programista'
+level: 2
+tasks:
+  - 'Poznałem(-am) podstawy algorytmów. Stworzyłem(-am) schemat blokowy na podstawie wybranego przez siebie procesu (np. proces zbierania i opłacania składek, proces decyzyjny w przypadku udzielania pierwszej pomocy, itp.).'
+  - 'Zapoznałem(-am) się z definicją rekurencji oraz iteracji. Stworzyłem(-am) algorytm zawierający iterację i rekurencję.'
+  - 'Napisałem(-am) prosty program w dowolnym języku programowania, który wyświetla tekst, wykonuje proste operacje oraz umożliwia wprowadzenie danych, np. z klawiatury.'
+

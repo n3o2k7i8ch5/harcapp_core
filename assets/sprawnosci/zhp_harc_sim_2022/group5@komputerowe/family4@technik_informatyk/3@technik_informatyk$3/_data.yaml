@@ -1,0 +1,8 @@
+id: technik_informatyk
+name: 'Technik Informatyk'
+level: 3
+tasks:
+  - 'Zapoznałem(-am) się z podstawowymi oznaczeniami najbardziej znanych modeli procesorów. Ręcznie zmieniłem(-am) taktowanie procesora w komputerze (np. w BIOS/UEFI), zaobserwowałem efekty (stabilność, szybkość działania, zużycie energii, temperatura procesora) i wyjaśniłem(-am) je.'
+  - 'Zapoznałem(-am) się z rodzajami kart graficznych i ich oznaczeniami oraz wiem, do czego mogą zostać one wykorzystane. Wyjaśniłem parametry techniczne wybranej karty graficznej. Dobrałem(-am) kartę graficzną dopasowaną do wskazanych potrzeb, uwzględniając określony budżet (np. kartę przystosowaną do obróbki grafiki, gier, kryptowalut, itp.).'
+  - 'Podłączyłem(-am) w komputerze stacjonarnym dodatkową kartę (np. graficzną), pamięć RAM oraz dysk pamięci masowej.'
+

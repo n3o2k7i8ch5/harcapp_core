@@ -1,0 +1,10 @@
+id: webmaster
+name: 'Webmaster'
+level: 2
+tasks:
+  - 'Stworzyłem(-am) prostą statyczną stronę WWW, wykorzystując język HTML i arkusz stylów CSS oraz zewnętrzne zasoby (np. obrazki).'
+  - 'Postawiłem(-am) serwer WWW (np. Apache) na komputerze lub maszynie wirtualnej.'
+  - 'Poznałem(-am) terminologię webową (np. protokół, serwer, host, ftp, domena, api) i sposób działania Internetu.'
+  - 'Samodzielnie postawiłem(-am) stronę internetowym na wybranym systemie zarządzania treścią (Wordpress, Joomla!, PrestaShop, Drupal, Magento, itp.) i skonfigurowałem(-am) ją odpowiednio do swoich potrzeb.'
+  - 'Poznałem(-am) metody bezpiecznego poruszania się po Internecie. Zapoznałem(-am) się z technologią VPN. Przeprowadziłem(-am) zbiórkę dla zastępu lub drużyny na temat bezpiecznego korzystania z Internetu, omawiając przy tym zalety sieci VPN.'
+
