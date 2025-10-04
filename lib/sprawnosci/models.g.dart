@@ -1770,8 +1770,18 @@ int _sprawFamilyEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.fragment.length * 3;
-  bytesCount += 3 + object.fragmentAuthor.length * 3;
+  {
+    final value = object.fragment;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.fragmentAuthor;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.name.length * 3;
   bytesCount += 3 + object.slug.length * 3;
   bytesCount += 3 + object.tags.length * 3;
@@ -1804,8 +1814,8 @@ SprawFamily _sprawFamilyDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = SprawFamily();
-  object.fragment = reader.readString(offsets[0]);
-  object.fragmentAuthor = reader.readString(offsets[1]);
+  object.fragment = reader.readStringOrNull(offsets[0]);
+  object.fragmentAuthor = reader.readStringOrNull(offsets[1]);
   object.id = id;
   object.name = reader.readString(offsets[2]);
   object.slug = reader.readString(offsets[3]);
@@ -1821,9 +1831,9 @@ P _sprawFamilyDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
@@ -2048,8 +2058,26 @@ extension SprawFamilyQueryWhere
 
 extension SprawFamilyQueryFilter
     on QueryBuilder<SprawFamily, SprawFamily, QFilterCondition> {
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  fragmentIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'fragment'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  fragmentIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'fragment'),
+      );
+    });
+  }
+
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition> fragmentEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -2065,7 +2093,7 @@ extension SprawFamilyQueryFilter
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
   fragmentGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -2083,7 +2111,7 @@ extension SprawFamilyQueryFilter
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
   fragmentLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -2100,8 +2128,8 @@ extension SprawFamilyQueryFilter
   }
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition> fragmentBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -2193,7 +2221,25 @@ extension SprawFamilyQueryFilter
   }
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
-  fragmentAuthorEqualTo(String value, {bool caseSensitive = true}) {
+  fragmentAuthorIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'fragmentAuthor'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  fragmentAuthorIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'fragmentAuthor'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  fragmentAuthorEqualTo(String? value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(
@@ -2207,7 +2253,7 @@ extension SprawFamilyQueryFilter
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
   fragmentAuthorGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -2225,7 +2271,7 @@ extension SprawFamilyQueryFilter
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
   fragmentAuthorLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -2243,8 +2289,8 @@ extension SprawFamilyQueryFilter
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
   fragmentAuthorBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -3128,13 +3174,14 @@ extension SprawFamilyQueryProperty
     });
   }
 
-  QueryBuilder<SprawFamily, String, QQueryOperations> fragmentProperty() {
+  QueryBuilder<SprawFamily, String?, QQueryOperations> fragmentProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'fragment');
     });
   }
 
-  QueryBuilder<SprawFamily, String, QQueryOperations> fragmentAuthorProperty() {
+  QueryBuilder<SprawFamily, String?, QQueryOperations>
+  fragmentAuthorProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'fragmentAuthor');
     });

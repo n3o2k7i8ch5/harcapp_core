@@ -11,15 +11,14 @@ generate:
 	flutter pub get
 	dart run build_runner build --delete-conflicting-outputs
 
-.PHONY: import_spraw_book
+.PHONY: import_spraw_books
 
 # Defaults (can be overridden on the make command line)
-BOOK_DIR?=assets/sprawnosci/zhr_harc_c_sim_2023
-ISAR_DIR?=assets/sprawnosci/db.isar
+ISAR_DIR?=assets/sprawnosci_db.isar
 
-import_spraw_book:
+# Import all sprawnosci books from assets/sprawnosci
+# Note: Run 'make generate' first if you've modified the models
+import_spraw_books:
 	mkdir -p "$(ISAR_DIR)"
-	@if [ -z "$(BOOK_DIR)" ]; then echo "Error: BOOK_DIR is required. Example: make import_spraw_book BOOK_DIR=assets/sprawnosci/zhr_harc_c_sim_2023 ISAR_DIR=.dart_tool/isar"; exit 2; fi
-	@if [ -z "$(ISAR_DIR)" ]; then echo "Error: ISAR_DIR is required. Example: make import_spraw_book BOOK_DIR=assets/sprawnosci/zhr_harc_c_sim_2023 ISAR_DIR=.dart_tool/isar"; exit 2; fi
-	@echo "Importing from: $(BOOK_DIR) -> Isar dir: $(ISAR_DIR)"
-	dart run lib/sprawnosci/generator.dart "$(BOOK_DIR)" "$(ISAR_DIR)"
+	@echo "Importing all sprawnosci books -> Isar dir: $(ISAR_DIR)"
+	dart run lib/sprawnosci/generator.dart "$(ISAR_DIR)"

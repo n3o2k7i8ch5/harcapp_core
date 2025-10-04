@@ -93,9 +93,9 @@ class SprawFamily {
 
   late List<String> tags;
 
-  late String fragment;
+  String? fragment;
 
-  late String fragmentAuthor;
+  String? fragmentAuthor;
 
   final group = IsarLink<SprawGroup>();
 
@@ -105,16 +105,16 @@ class SprawFamily {
   static SprawFamily fromDir(Directory dir){
     final dataFile = File(p.join(dir.path, '_data.yaml'));
     if (!dataFile.existsSync())
-      throw StateError('Missing _data.yaml in: ${dir.path}');
+      throw StateError('Missing _data.yaml in family directory: ${dir.path}');
 
     final data = readYaml(dataFile);
 
     final family = SprawFamily()
       ..slug = data['id']
       ..name = data['name']
-      ..tags = data['tags'].toList().cast<String>()
-      ..fragment = data['fragment']
-      ..fragmentAuthor = data['fragmentAuthor'];
+      ..tags = (data['tags'] as List<dynamic>?)?.cast<String>() ?? []
+      ..fragment = data['fragment'] as String?
+      ..fragmentAuthor = data['fragmentAuthor'] as String?;
 
     final itemDirs = dir
         .listSync()
@@ -155,10 +155,10 @@ class SprawItem {
     final iconLinkFile = File(p.join(dir.path, 'icon.yaml'));
 
     if (!dataFile.existsSync())
-      throw StateError('Missing _data.yaml in: ${dir.path}');
+      throw StateError('Missing _data.yaml in item directory: ${dir.path}');
 
     if(!iconFile.existsSync() && !iconLinkFile.existsSync())
-      throw StateError('Missing icon file in: ${dir.path}');
+      throw StateError('Missing icon file (icon.svg or icon.yaml) in: ${dir.path}');
 
     final data = readYaml(dataFile);
 
@@ -166,14 +166,18 @@ class SprawItem {
     readYaml(iconLinkFile)['link']:
     iconFile.path;
 
-    final item = SprawItem()
-      ..slug = data['id']
-      ..iconPath = iconPath
-      ..name = data['name']
-      ..level = data['level']
-      ..tasks = data['tasks'].toList().cast<String>();
+    try {
+      final item = SprawItem()
+        ..slug = data['id']
+        ..iconPath = iconPath
+        ..name = data['name']
+        ..level = data['level']
+        ..tasks = data['tasks']?.toList().cast<String>() ?? [];
 
-    return item;
+      return item;
+    } catch (e) {
+      throw StateError('Error parsing item data in ${dir.path}: $e');
+    }
   }
 
 }
