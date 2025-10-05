@@ -1813,6 +1813,9 @@ flutter:
     - assets/sprawnosci/zhr_harc_d_sim_2023/group6@duch_i_charakter/family5@ogien_ducha/3@luczywo$3/
     - assets/sprawnosci/zhr_harc_d_sim_2023/group6@duch_i_charakter/family5@ogien_ducha/4@pielgrzym$3/
 
+    # Isar DB
+    - assets/sprawnosci_db.isar/
+
     # Fonts
     - fonts/
     - fonts/Lato/
