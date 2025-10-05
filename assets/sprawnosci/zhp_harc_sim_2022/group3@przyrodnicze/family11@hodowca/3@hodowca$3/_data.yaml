@@ -1,4 +1,4 @@
-id: hodowca
+slug: hodowca
 name: 'Hodowca (ptaków, gryzoni, drobiu, ryb)'
 level: 3
 tasks:

@@ -26,7 +26,7 @@ class SprawBook {
     final data = readYaml(dataFile);
 
     final book = SprawBook()
-      ..slug = (data['id'] ?? p.basename(dir.path)).toString()
+      ..slug = (data['slug'] ?? p.basename(dir.path)).toString()
       ..name = (data['name'] ?? '').toString();
 
     final groupDirs = dir
@@ -65,7 +65,7 @@ class SprawGroup {
     final data = readYaml(dataFile);
 
     final group = SprawGroup()
-      ..slug = data['id']
+      ..slug = data['slug']
       ..name = data['name'];
 
     final familyDirs = dir
@@ -110,7 +110,7 @@ class SprawFamily {
     final data = readYaml(dataFile);
 
     final family = SprawFamily()
-      ..slug = data['id']
+      ..slug = data['slug']
       ..name = data['name']
       ..tags = (data['tags'] as List<dynamic>?)?.cast<String>() ?? []
       ..fragment = data['fragment'] as String?
@@ -168,7 +168,7 @@ class SprawItem {
 
     try {
       final item = SprawItem()
-        ..slug = data['id']
+        ..slug = data['slug']
         ..iconPath = iconPath
         ..name = data['name']
         ..level = data['level']
