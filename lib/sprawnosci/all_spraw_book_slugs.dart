@@ -52,7 +52,7 @@ enum SprawBookSlug {
     }
   }
 
-  static SprawBookSlug? fromSprawBook(SprawBook sprawBook) => fromName(sprawBook.slug);
+  static SprawBookSlug fromSprawBook(SprawBook sprawBook) => fromName(sprawBook.slug)!;
 
   OrgColors get colors{
     switch(this){
