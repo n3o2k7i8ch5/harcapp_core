@@ -206,10 +206,11 @@ class Spraw {
 
   // Convenience getters to access parent relationships
   @Ignore()
-  SprawGroup get group => family.value!.group.value!;
-  
-  @Ignore()
   SprawBook get sprawBook => group.sprawBook.value!;
+
+  @Ignore()
+  SprawGroup get group => family.value!.group.value!;
+
 
   static Spraw fromDir(Directory dir) {
     final dataFile = File(p.join(dir.path, '_data.yaml'));
@@ -263,6 +264,16 @@ class SprawTask {
 
   late String text;
   late int index;
+
+  // Convenience getters to access parent relationships
+  @Ignore()
+  SprawBook get sprawBook => group.sprawBook.value!;
+
+  @Ignore()
+  SprawGroup get group => family.group.value!;
+
+  @Ignore()
+  SprawFamily get family => spraw.value!.family.value!;
 
   final spraw = IsarLink<Spraw>();
 }
