@@ -1,0 +1,11 @@
+slug: nawigator
+name: 'Nawigator'
+level: 3
+tasks:
+  - 'Korzysta z mapy, orientuje ją według kierunku północnego i według kształtu terenu.'
+  - 'W czasie rejsów korzysta z przewodników i opisów dróg wodnych, wejść do portów itp..'
+  - 'Obliczył drogę na mapie turystycznej oraz znając swoją prędkość obliczyć czas dotarcia do celu.'
+  - 'Orientuje się na podstawie położenia słońca i gwiazd.'
+  - 'Zna przynajmniej jeden popularny akwen żeglarski w Polsce (Wielkie Jeziora Mazurskie, Pętlę Wielkopolską, Jeziorak, Jezioro Zegrzyńskie, Zalew Soliński itp) i potrafi podać jego charakterystykę.'
+  - 'Wie jak działa system GPS, potrafi wskazać jego ograniczenia.'
+

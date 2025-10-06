@@ -1,0 +1,10 @@
+slug: radiotelegrafista
+name: 'Radiotelegrafista'
+level: 3
+comment: 'Funkcję sprawności mistrzowskiej pełni odznaka lub uprawnienie: licencja radiooperatora w służbie radiokomunikacyjnej amatorskiej klasy A, B, C i D.'
+tasks:
+  - 'Odebrał i nadał kluczem 60 znaków na minutę według PARIS.'
+  - 'Poznał minimum 20 znaków Q-kodu oraz znaki służbowe dotyczące korespondencji radiowej.'
+  - 'Nawiązał co najmniej 20 łączności telegrafią na radiostacji klubowej i przekazał telegrafią co najmniej 10 radiogramów podczas pracy amatorskiej lub służbowej.'
+  - 'Pracował co najmniej raz z terenowego stanowiska (obóz, biwak]), utrzymując łączność z wybranym korespondentem w macierzystej miejscowości.'
+

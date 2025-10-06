@@ -1,0 +1,12 @@
+slug: programistka
+name: 'Programistka'
+level: 4
+tasks:
+  - 'Pozna w stopniu zaawansowanym wybrany język programowania (np. C++, Java, PHP).'
+  - 'Zaprojektuje i uruchomi program (aplikację www) przydatny w pracy drużyny lub grę, program edukacyjny.'
+  - 'Zna popularne serwisy z oprogramowaniem open source. Umie wykorzystać dostępne śródła programów do budowy własnych rozwiązań.'
+  - 'Umie podzielić się pracą nad programem (aplikacją www) w 2-3-osobowym zespole. Potrafi napisać specyfikację nowego programu, oszacować czas. Orientuje się, do czego służą bazy błędów, archiwa wersji (np. CVS).'
+  - 'Zadba o łatwość obsługi, profesjonalny wygląd i rozpowszechnianie programu w środowisku.'
+  - 'Zorganizuje i przeprowadzi kurs komputerowy w swoim środowisku.'
+  - 'Zna podstawy tworzenia i obsługi bazy danych, formatów wymiany danych typu XML.'
+
