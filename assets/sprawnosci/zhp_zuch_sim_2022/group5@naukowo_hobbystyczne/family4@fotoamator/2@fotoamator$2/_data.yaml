@@ -1,6 +1,7 @@
 slug: fotoamator
 name: 'Fotoamator'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Znam budowę tradycyjnego aparatu fotograficznego. Przygotowałem(-am) plakat prezentujący budowę aparatu i przedstawiłem(-am) go na zbiórce.'
   - 'Byłem(-am) w studiu fotograficznym i poznałem(-am) pracę fotografa. Opowiedziałem(-am) o tym na zbiórce.'

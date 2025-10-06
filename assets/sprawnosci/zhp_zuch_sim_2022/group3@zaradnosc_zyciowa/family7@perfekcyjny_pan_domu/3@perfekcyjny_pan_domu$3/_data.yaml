@@ -1,6 +1,7 @@
 slug: perfekcyjny_pan_domu
 name: 'Perfekcyjny pan/pani domu'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Samodzielnie przyszyłem(-am) plakietkę okolicznościową.'
   - 'Samodzielnie wyprasowałem(-am) mundur.'

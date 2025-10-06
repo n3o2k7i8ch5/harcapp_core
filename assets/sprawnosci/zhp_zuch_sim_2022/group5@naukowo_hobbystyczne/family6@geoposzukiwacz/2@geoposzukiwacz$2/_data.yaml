@@ -1,6 +1,7 @@
 slug: geoposzukiwacz
 name: 'Geoposzukiwacz'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Opowiedziałem(-am) zuchom z mojej gromady, czym jest geocaching oraz GPS.'
   - 'Zaprezentowałem(-am) graficznie kodeks geocachera.'

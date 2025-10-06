@@ -1,6 +1,7 @@
 slug: perfekcyjny_pan_domu
 name: 'Perfekcyjny pan/pani domu'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Samodzielnie posprzątałem(-am) swój pokój.'
   - 'Co najmniej raz w tygodniu robiłem(-am) sobie śniadanie.'

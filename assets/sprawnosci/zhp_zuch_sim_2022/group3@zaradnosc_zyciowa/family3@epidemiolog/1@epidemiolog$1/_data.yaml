@@ -1,6 +1,7 @@
 slug: epidemiolog
 name: 'Epidemiolog'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Wiem, co znaczą słowa „epidemia” i „kwarantanna”. Wyjaśniłem(-am) je własnymi słowami.'
   - 'Wybrałem(-am) piosenkę (lub jej 30-sekundowy fragment), którą śpiewam zawsze podczas mycia rąk, aby robić to odpowiednio długo.'

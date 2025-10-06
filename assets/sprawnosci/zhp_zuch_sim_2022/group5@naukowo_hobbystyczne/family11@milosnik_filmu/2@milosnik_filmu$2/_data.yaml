@@ -1,6 +1,7 @@
 slug: milosnik_filmu
 name: 'Miłośnik filmu'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Wiem, jakie zadania przy powstawaniu filmu mają reżyser, operator kamery, scenograf i kostiumolog. Opowiedziałem(-am) o tym zuchom w kręgu rady.'
   - 'Wykonałem(-am) album prezentujący zdjęcia mojego ulubionego aktora. Pokazałem(-am) go gromadzie.'

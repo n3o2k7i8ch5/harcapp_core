@@ -1,6 +1,7 @@
 slug: snieznobialy_usmiech
 name: 'Śnieżnobiały uśmiech'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Wykonałem(-am) plakat przedstawiający jamę ustną i zaprezentowałem(-am) na zbiórce gromady, jak prawidłowo szczotkować zęby.'
   - 'Założyłem(-am) dzienniczek szczotkowania zębów i uzupełniałem(-am) go systematycznie (przynajmniej dwa razy dziennie) przez pięć dni.'

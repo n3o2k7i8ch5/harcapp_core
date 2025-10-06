@@ -1,6 +1,7 @@
 slug: smieszek
 name: 'Śmieszek'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Zorganizowałem(-am) teatr min w swojej szóstce.'
   - 'Samodzielnie lub z szóstką zaprezentowałem(-am) krótką scenkę komediową.'

@@ -1,6 +1,7 @@
 slug: plastyk
 name: 'Plastyk'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Dowiedziałem(-am) się, co znaczą słowa: oryginał, reprodukcja, galeria, paleta, krytyk. Opowiedziałem(-am) o tym w kręgu rady.'
   - 'Zapoznałem(-am) się z różnymi technikami plastycznymi. Nauczyłem(-am) się trzech wybranych technik.'

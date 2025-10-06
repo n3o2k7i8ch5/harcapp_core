@@ -1,6 +1,7 @@
 slug: lamiglowa
 name: 'Łamigłowa'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Rozwiązałem(-am) krzyżówkę, labirynt, rebus, odszyfrowałem(-am) wiadomość, ułożyłem(-am) puzzle.'
   - 'Znalazłem(-am) w encyklopedii lub słowniku słowo potrzebne do rozwiązania krzyżówki.'

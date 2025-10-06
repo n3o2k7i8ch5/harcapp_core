@@ -1,6 +1,7 @@
 slug: kolekcjoner
 name: 'Kolekcjoner'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Zebrałem(-am) własną kolekcję.'
   - 'Pokazałem(-am) moją kolekcję i opowiedziałem(-am) o niej.'

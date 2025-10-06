@@ -1,6 +1,7 @@
 slug: hodowca_kwiatow
 name: 'Hodowca Kwiatów'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Mam swoją ulubioną roślinę doniczkową. Narysowałem(-am) ją.'
   - 'Razem z rodzicami wybrałem(-am) się do ogrodu botanicznego lub kwiaciarni. Tam dowiedziałem(-am) się, jakich warunków do życia potrzebują rośliny doniczkowe zimą, a jakich latem, jak często należy je podlewać, jakie są sposoby nawożenia roślin i które kwiaty należy zraszać. Zapisałem(-am) zdobyte informacje.'

@@ -1,6 +1,7 @@
 slug: grajek
 name: 'Grajek'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Wiem, czym jest pięciolinia, nuta, pauza, klucz wiolinowy. Opowiedziałem(-am) zuchom w kręgu rady, do czego służą. Wyjaśniłem(-am), czym różni się cała nuta od półnuty, ćwierćnuty i ósemki, wyklaskując ich wartości.'
   - 'Znam podział instrumentów na dęte, perkusyjne i strunowe. Wymieniłem(-am) przynajmniej pięć instrumentów z każdej z tych grup.'

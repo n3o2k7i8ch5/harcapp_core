@@ -1,6 +1,7 @@
 slug: plywak
 name: 'Pływak'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'W ciągu miesiąca lub podczas kolonii byłem(-am) na basenie lub kąpielisku co najmniej cztery razy.'
   - 'Opowiedziałem(-am), w jaki sposób należy zachowywać się na basenie. Wyjaśniłem(-am), co oznaczają białe i czerwone flagi wywieszone na kąpieliskach.'

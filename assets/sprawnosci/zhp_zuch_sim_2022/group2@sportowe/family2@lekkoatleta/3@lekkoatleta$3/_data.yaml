@@ -1,6 +1,7 @@
 slug: lekkoatleta
 name: 'Lekkoatleta'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Regularnie ćwiczę w domu i na zajęciach sportowych. Po każdych zajęciach pamiętam o rozciąganiu. Zrobiłem(-am) plan ćwiczeń odpowiednich dla mojego wieku i zaprezentowałem(-am) go na zbiórce.'
   - 'Znam co najmniej trzech mistrzów olimpijskich. Znam ich rekordy i liczbę zdobytych medali.'

@@ -1,6 +1,7 @@
 slug: kolednik
 name: 'Kolędnik'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Potrafię zaśpiewać pięć kolęd. Nauczyłem(-am) jednej kolędy młodsze zuchy.'
   - 'Brałem(-am) udział w jasełkach.'

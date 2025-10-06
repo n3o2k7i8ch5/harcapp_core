@@ -1,6 +1,7 @@
 slug: sobieradek_obozowy
 name: 'Sobieradek obozowy'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Wziąłem(wzięłam) udział w kolonii zuchowej lub leśnym biwaku.'
   - 'Nauczyłem(-am) się bezpiecznie posługiwać narzędziami. Opowiedziałem(-am) o tym w kręgu rady.'

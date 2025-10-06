@@ -1,6 +1,7 @@
 slug: hodowca_warzyw_i_owocow
 name: 'Hodowca warzyw i owoców'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Zebrałem(-am) i wysuszyłem(-am) nasiona warzywa i owocu.'
   - 'Zasadziłem(-am) owoc lub warzywo. Regularnie pielęgnuję posadzoną roślinę.'

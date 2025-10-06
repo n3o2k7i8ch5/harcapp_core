@@ -1,6 +1,7 @@
 slug: kuchmistrz
 name: 'Kuchmistrz'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Przez tydzień zabierałem(-am) zdrowe przekąski do szkoły.'
   - 'Pomogłem(-am) komuś z rodziny przygotować trzy wybrane posiłki.'

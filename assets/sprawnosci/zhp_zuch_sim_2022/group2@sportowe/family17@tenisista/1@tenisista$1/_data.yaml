@@ -1,6 +1,7 @@
 slug: tenisista
 name: 'Tenisista'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Rozegrałem(-am) mecz w singlu i deblu.'
   - 'Pobiłem(-am) swój rekord w podbijaniu piłeczki tenisowej.'

@@ -1,6 +1,7 @@
 slug: przechodzien
 name: 'Przechodzień'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Umiem w poprawny sposób przejść przez przejście dla pieszych. Pokazałem(-am) rodzicom, jak to robię.'
   - 'Mam odblaski przypięte do plecaka. Na zbiórce opowiedziałem(-am), gdzie należy je nosić i dlaczego są takie ważne.'

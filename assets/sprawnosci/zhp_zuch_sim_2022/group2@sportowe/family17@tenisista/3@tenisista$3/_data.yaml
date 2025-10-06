@@ -1,6 +1,7 @@
 slug: tenisista
 name: 'Tenisista'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Wytłumaczyłem(-am) zasady gry i fachowe słownictwo używane podczas meczu. Zaprezentowałem(-am) to w gromadzie.'
   - 'Sędziowałem(-am) mecz tenisa.'

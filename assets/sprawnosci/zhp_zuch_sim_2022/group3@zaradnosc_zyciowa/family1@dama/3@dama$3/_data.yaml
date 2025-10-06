@@ -1,6 +1,7 @@
 slug: dama
 name: 'Dama'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Przeczytałam książkę lub artykuł z czasopisma dla dzieci o zasadach savoir-vivre’u. Ułożyłam kodeks damy, który zaprezentowałam kolegom z klasy lub gromady.'
   - 'Zrobiłam gazetkę na temat savoir-vivre’u lub opowiedziałam o zasadach savoir-vivre’u kolegom.'

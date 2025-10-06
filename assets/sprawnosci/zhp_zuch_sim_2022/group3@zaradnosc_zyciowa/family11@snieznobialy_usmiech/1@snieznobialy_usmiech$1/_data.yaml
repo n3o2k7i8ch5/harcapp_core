@@ -1,6 +1,7 @@
 slug: snieznobialy_usmiech
 name: 'Śnieżnobiały uśmiech'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Znam budowę jamy ustnej. Podzieliłem(-am) się tą wiedzą z moją szóstką.'
   - 'Potrafię prawidłowo szczotkować zęby. Zaprezentowałem(-am) zuchom, jak to robić.'

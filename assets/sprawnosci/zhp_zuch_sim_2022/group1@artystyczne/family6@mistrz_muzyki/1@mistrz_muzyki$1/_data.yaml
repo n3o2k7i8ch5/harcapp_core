@@ -1,6 +1,7 @@
 slug: mistrz_muzyki
 name: 'Mistrz muzyki'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Rozpoznałem(-am) po brzmieniu trzy instrumenty. Narysowałem(-am) te instrumenty.'
   - 'Zagrałem(-am) na instrumencie gamę C-dur i jedną melodię.'

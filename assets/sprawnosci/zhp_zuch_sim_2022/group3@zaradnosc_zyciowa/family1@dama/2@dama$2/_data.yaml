@@ -1,6 +1,7 @@
 slug: dama
 name: 'Dama'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Używam słów: proszę, przepraszam, dziękuję, dzień dobry, dobranoc, do widzenia. Opowiedziałam szóstce, dlaczego ważne są zwroty grzecznościowe.'
   - 'Zachowuję się uprzejmie wobec chłopców i dziewcząt. Nie zaczepiam ich i nie przezywam. Stworzyłam poradnik młodej damy, w którym zawarłam najważniejsze porady.'

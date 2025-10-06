@@ -1,6 +1,7 @@
 slug: przewodnik_po_szkole
 name: 'Przewodnik po szkole'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Wiem, gdzie jest moja klasa. Sam(a) do niej trafiłem(-am).'
   - 'Znam imię i nazwisko wychowawcy.'

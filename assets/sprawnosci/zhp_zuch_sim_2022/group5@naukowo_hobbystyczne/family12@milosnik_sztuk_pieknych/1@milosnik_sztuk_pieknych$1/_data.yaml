@@ -1,6 +1,7 @@
 slug: milosnik_sztuk_pieknych
 name: 'Miłośnik sztuk pięknych'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Odwiedziłem(-am) muzeum lub galerię sztuki.'
   - 'Opowiedziałem(-am) szóstce o moim ulubionym dziele lub twórcy.'

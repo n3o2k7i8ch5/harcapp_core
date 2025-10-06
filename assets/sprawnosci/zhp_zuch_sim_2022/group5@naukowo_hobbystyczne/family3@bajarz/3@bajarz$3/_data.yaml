@@ -1,6 +1,7 @@
 slug: bajarz
 name: 'Bajarz'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Mam swoją ulubioną bajkę. Wykonałem(-am) do niej ilustracje. Znam jej autora.'
   - 'Wykonałem(-am) plakat zachęcający zuchy do czytania bajek. Zaprezentowałem(-am) go zuchom na zbiórce.'

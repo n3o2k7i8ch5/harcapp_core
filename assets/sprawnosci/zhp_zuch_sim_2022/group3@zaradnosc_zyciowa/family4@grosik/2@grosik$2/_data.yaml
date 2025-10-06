@@ -1,6 +1,7 @@
 slug: grosik
 name: 'Grosik'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Wykonałem(-am) skarbonkę, do której zbieram swoje oszczędności. Przeznaczyłem(-am) je na wybrany cel.'
   - 'Brałem(-am) udział w akcji zarobkowej gromady.'

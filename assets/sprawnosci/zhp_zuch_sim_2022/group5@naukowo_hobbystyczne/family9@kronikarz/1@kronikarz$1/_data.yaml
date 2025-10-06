@@ -1,6 +1,7 @@
 slug: kronikarz
 name: 'Kronikarz'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Prowadzę dziennik (pamiętnik), w którym notuję najważniejsze wydarzenia.'
   - 'Znam dzieje baśniowego kronikarza Koszałka-Opałka.'

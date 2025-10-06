@@ -1,6 +1,7 @@
 slug: mistrz_rolek
 name: 'Mistrz rolek'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Jeżdżę na rolkach regularnie, co najmniej dwa razy w tygodniu.'
   - 'Wykonałem(-am) kilka ewolucji. Jeździłem(-am) na jednej nodze, tyłem i w pozycji kucznej.'

@@ -1,6 +1,7 @@
 slug: mistrz_snowboardu
 name: 'Mistrz snowboardu'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Umiem jeździć na snowboardzie. Byłem(-am) na zimowym wyjeździe.'
   - 'Przygotowałem(-am) plakat prezentujący powierzchnię stoku w czasie różnych warunków atmosferycznych (marznący deszcz, świeże opady śniegu, odwilż).'

@@ -1,6 +1,7 @@
 slug: mistrz_gier_i_zabaw
 name: 'Mistrz gier i zabaw'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Założyłem(-am) wielką księgę gier gromady.'
   - 'Zbieram gry i zabawy, zapisuję je w notatniku i wykorzystuję podczas zabaw.'

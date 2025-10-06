@@ -1,6 +1,7 @@
 slug: mistrz_ping_ponga
 name: 'Mistrz ping-ponga'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Mam własną paletkę. Co najmniej raz w tygodniu gram w ping-ponga.'
   - 'Podbiłem(-am) piłeczkę co najmniej pięć razy.'

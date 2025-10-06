@@ -1,6 +1,7 @@
 slug: gimnastyk
 name: 'Gimnastyk'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Gimnastykowałem(-am) się rano co najmniej pięć razy w tygodniu.'
   - 'Zapisałem(-am) trzy powody, dla których gimnastyka jest ważna dla zdrowia.'

@@ -1,6 +1,7 @@
 slug: spiewak
 name: 'Śpiewak'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Założyłem(-am) śpiewnik i stale uzupełniam go nowymi piosenkami. Mam w nim co najmniej trzy piosenki harcerskie, które umiem już zaśpiewać. Zaśpiewałem(-am) jedną z nich zuchom z mojej gromady.'
   - 'Byłem(-am) na koncercie. Opowiedziałem(-am) o nim w kręgu rady.'

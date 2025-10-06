@@ -3,6 +3,7 @@ name: 'Znawca Unii Europejskiej'
 hiddenNames:
   - 'Obywatel Unii Europejskiej'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Wiem, co to jest Unia Europejska i po co powstała. Przygotowałem(-am) do zuchówki plakat o UE.'
   - 'Zaśpiewałem(-am) Hymn Unii Europejskiej.'

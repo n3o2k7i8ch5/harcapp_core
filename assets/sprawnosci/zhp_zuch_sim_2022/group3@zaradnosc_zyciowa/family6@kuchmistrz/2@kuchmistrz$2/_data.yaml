@@ -1,6 +1,7 @@
 slug: kuchmistrz
 name: 'Kuchmistrz'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Z pomocą osoby dorosłej nauczyłem(-am) się prawidłowo kroić.'
   - 'Samodzielnie przygotowałem(-am) zdrowy deser dla rodziny lub kolegi.'

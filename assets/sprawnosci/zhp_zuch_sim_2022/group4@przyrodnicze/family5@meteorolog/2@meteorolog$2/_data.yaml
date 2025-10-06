@@ -1,6 +1,7 @@
 slug: meteorolog
 name: 'Meteorolog'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Wytłumaczyłem(-am), jak powstaje deszcz, burza, mgła, śnieg i tęcza.'
   - 'Odczytałem(-am) wskazanie termometru.'

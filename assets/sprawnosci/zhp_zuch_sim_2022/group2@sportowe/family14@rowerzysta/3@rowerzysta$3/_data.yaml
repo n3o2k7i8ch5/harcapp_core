@@ -1,6 +1,7 @@
 slug: rowerzysta
 name: 'Rowerzysta'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Z pamięci wymieniłem(-am) numery alarmowe, pod które mogę zadzwonić po pomoc w razie wypadku na drodze.'
   - 'Urządziłem(-am) rowerowy tor przeszkód − jazda po ósemce, slalom, jazda pod górkę, jazda po nierównej powierzchni. Zaprezentowałem(-am) bezpieczny przejazd torem.'

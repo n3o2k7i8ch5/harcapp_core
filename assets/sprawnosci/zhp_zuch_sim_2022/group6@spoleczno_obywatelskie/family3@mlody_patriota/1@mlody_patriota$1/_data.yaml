@@ -1,6 +1,7 @@
 slug: mlody_patriota
 name: 'Młody Patriota'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Narysowałem(-am) flagę i godło Polski. Przedstawiłem(-am) je w kręgu rady.'
   - 'Razem z rodzicami wywiesiliśmy flagę na święto państwowe. Zdjęciem wywieszonej flagi pochwaliłem(-am) się w kręgu rady.'

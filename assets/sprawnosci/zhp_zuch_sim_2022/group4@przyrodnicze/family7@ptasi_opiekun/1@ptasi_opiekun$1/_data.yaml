@@ -1,6 +1,7 @@
 slug: ptasi_opiekun
 name: 'Ptasi Opiekun'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Zebrałem(-am) ilustracje, widokówki z ptakami lub ptasie pióra. Pokazałem(-am) je na zbiórce gromady.'
   - 'Rozpoznałem(-am) trzy gatunki ptaków.'

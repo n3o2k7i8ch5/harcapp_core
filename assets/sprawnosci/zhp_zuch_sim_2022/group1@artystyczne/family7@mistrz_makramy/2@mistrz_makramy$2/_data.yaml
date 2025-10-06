@@ -1,6 +1,7 @@
 slug: mistrz_makramy
 name: 'Mistrz makramy'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Wiem, co to jest makrama i do czego można ją wykorzystać. Opowiedziałem(-am) o tym w kręgu rady.'
   - 'Nauczyłem(-am) się wiązać przynajmniej trzy węzły.'

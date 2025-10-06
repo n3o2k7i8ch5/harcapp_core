@@ -1,6 +1,7 @@
 slug: przyjaciel_lasu
 name: 'Przyjaciel Lasu'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Rozpoznaję rodzaje polskich lasów. Zebrałem(-am) i opisałem(-am) ich liście i narysowałem(-am) lub sfotografowałem(-am) ich owoce. Pracę przedstawiłem(-am) na zbiórce gromady.'
   - 'Zebrałem(-am) ilustracje przedstawiające mieszkańców lasu. Pokazałem(-am) je mojej szóstce.'

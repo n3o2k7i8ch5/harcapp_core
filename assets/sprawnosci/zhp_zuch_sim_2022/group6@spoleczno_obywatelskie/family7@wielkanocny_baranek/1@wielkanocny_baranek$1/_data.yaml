@@ -1,6 +1,7 @@
 slug: wielkanocny_baranek
 name: 'Wielkanocny Baranek'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Znam tradycje związane ze Świętami Wielkanocnymi. Przedstawiłem(-am) je na plakacie.'
   - 'Wykonałem(-am) samodzielnie lub z pomocą palmę wielkanocną.'

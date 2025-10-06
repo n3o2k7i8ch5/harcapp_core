@@ -1,6 +1,7 @@
 slug: szachista
 name: 'Szachista'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Znam podstawowe zasady gry w szachy. Przedstawiłem(-am) je na plakacie lub opowiedziałem(-am) o nich w gromadzie.'
   - 'Potrafię rozpoznać wszystkie figury szachowe i znam ich ruchy. Nauczyłem(-am) nazw figur i ich ruchów kolegę.'

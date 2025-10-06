@@ -1,6 +1,7 @@
 slug: snieznobialy_usmiech
 name: 'Śnieżnobiały uśmiech'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Założyłem(-am) dzienniczek szczotkowania zębów i uzupełniałem(-am) go przez siedem dni.'
   - 'Zrobiłem(-am) w domu przegląd szczoteczek i płynów do mycia jamy ustnej. Jeśli była taka potrzeba, wyjaśniłem(-am), dlaczego należy je wymienić.'

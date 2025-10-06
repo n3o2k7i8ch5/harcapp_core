@@ -1,6 +1,7 @@
 slug: dzentelmen
 name: 'Dżentelmen'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Używam słów dziękuję, przepraszam, proszę, dzień dobry, do widzenia. Wytłumaczyłem swojej szóstce, dlaczego te słowa są bardzo ważne.'
   - 'Umiem ubrać się stosownie do okazji i pory roku. Wiem, jak prawidłowo złożyć ubranie. Wykonałem pokaz na zbiórce.'

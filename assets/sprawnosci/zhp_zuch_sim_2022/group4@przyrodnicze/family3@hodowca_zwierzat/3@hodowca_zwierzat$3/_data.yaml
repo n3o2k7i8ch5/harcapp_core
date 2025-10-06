@@ -1,6 +1,7 @@
 slug: hodowca_zwierzat
 name: 'Hodowca Zwierząt'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Mam w domu zwierzę, którym opiekuję się wspólnie z rodzicami. Mam stały obowiązek, np. daję mu jeść lub wyprowadzam na dwór.'
   - 'Zebrałem(-am) informacje przydatne do opieki nad moim zwierzęciem.'

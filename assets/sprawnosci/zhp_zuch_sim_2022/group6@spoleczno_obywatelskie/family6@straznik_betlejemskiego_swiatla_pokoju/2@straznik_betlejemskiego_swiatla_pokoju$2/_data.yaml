@@ -1,6 +1,7 @@
 slug: straznik_betlejemskiego_swiatla_pokoju
 name: 'Strażnik Betlejemskiego Światła Pokoju'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Razem z moją gromadą lub klasą uczestniczyłem(-am) we wspólnym kolędowaniu.'
   - 'Spełniłem(-am) dobry uczynek dla domowników, zuchów z szóstki lub kolegów z klasy.'

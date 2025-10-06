@@ -1,6 +1,7 @@
 slug: lyzwiarz
 name: 'Łyżwiarz'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Byłem(-am) z rodzicami lub klasą na łyżwach. Przejechałem(-am) dowolną odległość tyłem.'
   - 'Znam trzech sławnych łyżwiarzy. Zrobiłem(-am) plakat prezentujący jednego z nich.'

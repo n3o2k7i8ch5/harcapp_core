@@ -1,6 +1,7 @@
 slug: ekolog
 name: 'Ekolog'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Dowiedziałem(-am) się, jakie są przyczyny zanieczyszczenia środowiska i które z nich są najgroźniejsze. Opowiedziałem(-am) o nich drużynowemu.'
   - 'Wykonałem(-am) plakat zachęcający do działań na rzecz ratowania środowiska naturalnego. Przedstawiłem(-am) go w kręgu rady.'

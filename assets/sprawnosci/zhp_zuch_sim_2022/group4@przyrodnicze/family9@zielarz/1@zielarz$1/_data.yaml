@@ -1,6 +1,7 @@
 slug: zielarz
 name: 'Zielarz'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Zaprezentowałem(-am) szóstce trzy najpopularniejsze zioła, ich sposób wykorzystania oraz właściwości.'
   - 'Umiem wyszukać informacje o interesującej mnie roślinie. Przedstawiłem(-am) je zuchom.'

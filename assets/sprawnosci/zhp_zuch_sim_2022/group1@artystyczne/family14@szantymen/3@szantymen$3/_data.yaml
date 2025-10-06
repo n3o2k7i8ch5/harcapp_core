@@ -1,6 +1,7 @@
 slug: szantymen
 name: 'Szantymen'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Wykonałem(-am) plakat dotyczący szant. Wyjaśniłem(-am) na nim, skąd wzięła się ich nazwa, do czego były dawniej wykorzystywane oraz wymieniłem(-am) różne rodzaje szant (np. pieśni kubryku, wielorybnicze, szanty klasyczne).'
   - 'Założyłem(-am) swój szantowy śpiewnik.'

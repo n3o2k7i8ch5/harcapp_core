@@ -1,6 +1,7 @@
 slug: lalkarz
 name: 'Lalkarz'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Znam rodzaje lalek i wiem, do jakich przedstawień ich się używa. Zaprezentowałem(-am) je mojej szóstce w wybranej formie.'
   - 'Samodzielnie zaprojektowałem(-am) i wykonałem(-am) lalkę do wybranego typu przedstawienia.'

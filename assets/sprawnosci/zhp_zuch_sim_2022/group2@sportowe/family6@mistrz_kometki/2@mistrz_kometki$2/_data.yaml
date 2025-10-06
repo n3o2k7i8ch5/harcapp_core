@@ -1,6 +1,7 @@
 slug: mistrz_kometki
 name: 'Mistrz kometki'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Mam własny sprzęt do kometki. Zadbałem(-am) o niego. Naprawiłem(-am) niewielkie uszkodzenie.'
   - 'Regularnie gram w kometkę (co najmniej raz w tygodniu).'

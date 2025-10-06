@@ -1,6 +1,7 @@
 slug: mistrz_origami
 name: 'Mistrz origami'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Zaprezentowałem(-am) na zbiórce historię i pochodzenie origami.'
   - 'Zgromadziłem(-am) zbiór ilustracji i opisy nowych figur.'

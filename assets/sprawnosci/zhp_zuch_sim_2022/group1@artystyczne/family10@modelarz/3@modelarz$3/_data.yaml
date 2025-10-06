@@ -1,6 +1,7 @@
 slug: modelarz
 name: 'Modelarz'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Zastosowałem(-am) różne rodzaje klejów (odpowiednio do materiału).'
   - 'Skleiłem(-am) cztery modele z papieru, sklejki lub tworzywa na podstawie instrukcji.'

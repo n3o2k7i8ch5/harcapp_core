@@ -1,6 +1,7 @@
 slug: mim
 name: 'Mim'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Opowiedziałem(-am) szóstce, czym zajmuje się mim, jak się ubiera i jak się charakteryzuje.'
   - 'Obejrzałem(-am) przedstawienie pantomimiczne. Zaprezentowałem(-am) zuchom w dowolnej formie jego najciekawszy fragment i opowiedziałem(-am), czego dotyczyło.'

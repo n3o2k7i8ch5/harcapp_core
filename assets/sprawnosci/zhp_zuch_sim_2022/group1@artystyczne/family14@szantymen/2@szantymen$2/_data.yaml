@@ -1,6 +1,7 @@
 slug: szantymen
 name: 'Szantymen'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Wiem, co oznacza słowo „szanta”. Wiem, do czego kiedyś były wykorzystywane szanty. Opowiedziałem(-am) o tym swojej szóstce.'
   - 'Założyłem(-am) swój szantowy śpiewnik.'

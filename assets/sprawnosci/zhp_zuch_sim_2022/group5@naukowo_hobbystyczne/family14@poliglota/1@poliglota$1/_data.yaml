@@ -1,6 +1,7 @@
 slug: poliglota
 name: 'Poliglota'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Nauczyłem(-am) się wybranego wiersza w innym języku. Wyrecytowałem(-am) go w kręgu rady.'
   - 'Nauczyłem(-am) gromadę mówić „dzień dobry” i „do widzenia” w dwóch językach innych niż język polski.'

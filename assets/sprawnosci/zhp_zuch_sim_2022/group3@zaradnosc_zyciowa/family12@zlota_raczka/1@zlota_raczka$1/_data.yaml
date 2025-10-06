@@ -1,6 +1,7 @@
 slug: zlota_raczka
 name: 'Złota rączka'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Pod okiem osoby dorosłej wbiłem(-am) gwóźdź pod obrazek.'
   - 'Wykonałem(-am) prostą zabawkę z wybranych materiałów.'

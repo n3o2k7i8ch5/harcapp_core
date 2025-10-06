@@ -1,6 +1,7 @@
 slug: zbieracz_grzybow
 name: 'Zbieracz Grzybów'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Uczestniczyłem(-am) w grzybobraniu i zorganizowałem(-am) konkurs na króla grzybobrania.'
   - 'Rozpoznałem(-am) trzy gatunki grzybów jadalnych i trzy gatunki grzybów trujących.'

@@ -1,6 +1,7 @@
 slug: rowerzysta
 name: 'Rowerzysta'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Na zbiórce gromady opowiedziałem(-am), jak ubieram się do bezpiecznej jazdy rowerem.'
   - 'Bawiłem(-am) się z kolegami w wyścig kolarski. Zaplanowałem(-am) trasę wyścigu i przed startem opowiedziałem(-am) innym rowerzystom o zasadach bezpiecznej jazdy.'

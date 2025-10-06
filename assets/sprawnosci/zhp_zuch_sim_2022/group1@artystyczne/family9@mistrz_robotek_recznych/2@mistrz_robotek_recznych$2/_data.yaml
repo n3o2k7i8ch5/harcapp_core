@@ -1,6 +1,7 @@
 slug: mistrz_robotek_recznych
 name: 'Mistrz robótek ręcznych'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Zrobiłem(-am) dla siebie lub dla kogoś szalik albo inny włóczkowy upominek.'
   - 'Wykonałem(-am) serwetkę według wzoru (wymyślonego przez siebie lub podpatrzonego).'

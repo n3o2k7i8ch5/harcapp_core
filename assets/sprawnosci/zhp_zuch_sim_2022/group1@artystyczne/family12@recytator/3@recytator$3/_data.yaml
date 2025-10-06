@@ -1,6 +1,7 @@
 slug: recytator
 name: 'Recytator'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Wyrecytowałem(-am) gromadzie mój ulubiony wiersz i przedstawiłem(-am) jego autora. Uzasadniłem(-am), dlaczego wybrałem ten utwór i czego możemy się z niego nauczyć.'
   - 'Znam przynajmniej czterech autorów wierszy i bajek dla dzieci. Zaprezentowałem(-am) gromadzie ich sylwetki w dowolnej formie.'

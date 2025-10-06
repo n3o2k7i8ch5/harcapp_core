@@ -1,6 +1,7 @@
 slug: dobry_opiekun
 name: 'Dobry opiekun'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Opowiedziałem(-am) bajkę młodszym dzieciom.'
   - 'Stworzyłem(-am) zbiór gier i zabaw. Zgromadziłem(-am) w nim gry, ćwiczenia, zabawy i pląsy, które zaproponowałem(-am) młodszym dzieciom.'

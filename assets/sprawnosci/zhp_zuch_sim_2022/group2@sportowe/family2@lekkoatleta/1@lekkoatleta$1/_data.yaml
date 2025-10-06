@@ -1,6 +1,7 @@
 slug: lekkoatleta
 name: 'Lekkoatleta'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Zawsze jestem przygotowany(-na) na zajęcia sportowe. Narysowałem(-am), jak wyglądam w stroju sportowym.'
   - 'Systematycznie uprawiam gimnastykę, przygotowałem(-am) trzy ulubione ćwiczenia i przedstawiłem(-am) je na zbiórce.'

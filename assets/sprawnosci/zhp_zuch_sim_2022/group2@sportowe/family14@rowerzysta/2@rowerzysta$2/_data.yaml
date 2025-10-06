@@ -1,6 +1,7 @@
 slug: rowerzysta
 name: 'Rowerzysta'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Wyszukałem(-am) ilustracje i informacje o tym, jak wyglądały rowery w przeszłości. Pokazałem(-am) na zbiórce zdjęcia i opowiedziałem(-am) o nich kolegom.'
   - 'Urządziłem(-am) rowerowy tor przeszkód − jazda po ósemce, slalom. Zaprezentowałem(-am) bezpieczny przejazd torem.'

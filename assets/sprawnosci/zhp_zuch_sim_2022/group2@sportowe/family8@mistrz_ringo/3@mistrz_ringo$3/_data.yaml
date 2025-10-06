@@ -1,6 +1,7 @@
 slug: mistrz_ringo
 name: 'Mistrz ringo'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Kupiłem(-am) ringo za zaoszczędzone pieniądze. Gram co najmniej raz w tygodniu.'
   - 'Nauczyłem(-am) grać w ringo co najmniej trzy osoby.'

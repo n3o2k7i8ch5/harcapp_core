@@ -1,6 +1,7 @@
 slug: epidemiolog
 name: 'Epidemiolog'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Wiem, co znaczy słowo „epidemia”. Narysowałem(-am) komiks o tym, jak rozprzestrzeniają się choroby zakaźne i jak kwarantanna może temu zapobiegać.'
   - 'Często myję ręce. Wykonałem(-am) plakat z instrukcją mycia rąk. Powiesiłem(-am) w widocznym miejscu (na przykład przy umywalce).'

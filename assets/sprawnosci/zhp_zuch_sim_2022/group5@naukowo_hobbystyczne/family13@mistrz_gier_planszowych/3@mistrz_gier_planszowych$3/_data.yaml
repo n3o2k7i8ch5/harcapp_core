@@ -1,6 +1,7 @@
 slug: mistrz_gier_planszowych
 name: 'Mistrz gier planszowych'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Mam półkę z grami planszowymi. Zagrałem(-am) z kolegami w co najmniej pięć z nich.'
   - 'Przez miesiąc przynajmniej raz w tygodniu grałem(-am) z rodzicami w gry planszowe.'

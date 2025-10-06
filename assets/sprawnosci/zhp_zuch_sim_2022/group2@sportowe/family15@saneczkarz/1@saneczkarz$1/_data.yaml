@@ -1,6 +1,7 @@
 slug: saneczkarz
 name: 'Saneczkarz'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Umiem kierować sankami. Pokonałem(-am) górkę lub tor przeszkód.'
   - 'Zabezpieczyłem(-am) swój sprzęt i wykonałem(-am) potrzebne naprawy.'

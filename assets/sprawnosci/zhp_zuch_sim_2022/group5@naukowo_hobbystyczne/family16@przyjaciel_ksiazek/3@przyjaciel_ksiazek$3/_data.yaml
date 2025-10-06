@@ -1,6 +1,7 @@
 slug: przyjaciel_ksiazek
 name: 'Przyjaciel książek'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Założyłem(-am) kartę w bibliotece.'
   - 'Przeczytałem(-am) siedem książek.'

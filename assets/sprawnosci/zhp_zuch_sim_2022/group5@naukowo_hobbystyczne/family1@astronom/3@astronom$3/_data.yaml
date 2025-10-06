@@ -1,6 +1,7 @@
 slug: astronom
 name: 'Astronom'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Przez tydzień prowadziłem(-am) regularne obserwacje nieba. Zapisałem(-am) każdego dnia, o której godzinie był wschód i zachód słońca oraz określiłem(-am) fazy księżyca.'
   - 'Wykonałem(-am) konstrukcję przestrzenną układu słonecznego. Zaprezentowałem(-am) ją w kręgu rady.'

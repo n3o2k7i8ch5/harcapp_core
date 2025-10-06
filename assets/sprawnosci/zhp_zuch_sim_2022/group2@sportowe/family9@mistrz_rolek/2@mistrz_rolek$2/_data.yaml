@@ -1,6 +1,7 @@
 slug: mistrz_rolek
 name: 'Mistrz rolek'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Zaprezentowałem(-am) jazdę w pozycji klasycznej, skręt w prawo i w lewo oraz hamowanie.'
   - 'Znam przeszkody znajdujące się na drodze. Zaprezentowałem(-am), jak je omijam.'

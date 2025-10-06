@@ -1,6 +1,7 @@
 slug: rzezbiarz
 name: 'Rzeźbiarz'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Byłem(-am) w pracowni rzeźbiarza, kamieniarza lub garncarza. Narysowałem(-am) sprzęty i narzędzia, które tam się znajdują.'
   - 'Poznałem(-am) różne techniki rzeźbiarskie. Opowiedziałem(-am) o nich drużynowemu.'

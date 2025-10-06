@@ -1,6 +1,7 @@
 slug: higienista
 name: 'Higienista'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Zademonstrowałem(-am) innym zuchom, jak prawidłowo myć ręce.'
   - 'Dwukrotnie sprawdzałem(-am) stan czystości na wyjeździe gromady.'

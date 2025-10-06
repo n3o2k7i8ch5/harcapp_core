@@ -1,6 +1,7 @@
 slug: przechodzien
 name: 'Przechodzień'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Wiem, jak należy zareagować podczas wypadku komunikacyjnego. Zaprezentowałem(-am) w kręgu rady, w jaki sposób należy wezwać pomoc.'
   - 'Zrobiłem(-am) filmik, w którym opowiadam o prawidłowym poruszaniu się po zmroku.'

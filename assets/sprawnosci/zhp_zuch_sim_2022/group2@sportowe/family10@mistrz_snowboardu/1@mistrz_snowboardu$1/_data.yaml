@@ -1,6 +1,7 @@
 slug: mistrz_snowboardu
 name: 'Mistrz snowboardu'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Jeździłem(-am) na snowboardzie.'
   - 'Znam zasady bezpieczeństwa na stoku. Opowiedziałem(-am) o nich swojej szóstce.'

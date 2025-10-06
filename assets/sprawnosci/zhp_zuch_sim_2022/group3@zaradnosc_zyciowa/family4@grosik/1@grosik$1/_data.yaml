@@ -1,6 +1,7 @@
 slug: grosik
 name: 'Grosik'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Zbieram swoje oszczędności do skarbonki. Przeznaczyłem(-am) je na wybrany cel.'
   - 'Zrobiłem(-am) portmonetkę lub sakiewkę do przechowywania drobnych oszczędności.'

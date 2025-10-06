@@ -1,6 +1,7 @@
 slug: lekkoatleta
 name: 'Lekkoatleta'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Regularnie ćwiczę na zajęciach sportowych. Zrobiłem(-am) dzienniczek swoich osiągnięć.'
   - 'Mam swojego ulubionego olimpijczyka. Przedstawiłem(-am) na zbiórce prezentację o nim. Wiem, jakie pobił rekordy i ile medali zdobył.'

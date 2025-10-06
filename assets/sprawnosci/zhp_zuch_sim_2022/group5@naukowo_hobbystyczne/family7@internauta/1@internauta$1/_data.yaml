@@ -1,6 +1,7 @@
 slug: internauta
 name: 'Internauta'
 level: 1
+tasksAreExamples: true
 tasks:
 
 

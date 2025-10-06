@@ -1,6 +1,7 @@
 slug: zielarz
 name: 'Zielarz'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Zaprezentowałem(-am) gromadzie siedem najpopularniejszych ziół, ich sposób wykorzystania oraz właściwości.'
   - 'Sprawnie wyszukuję informacje o interesującej mnie roślinie. Podzieliłem(-am) się z gromadą tytułami książek oraz adresami stron internetowych, z których czerpię najwięcej informacji.'

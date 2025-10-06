@@ -1,6 +1,7 @@
 slug: fryzjer
 name: 'Fryzjer'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Byłem(-am) u fryzjera i obserwowałem(-am) jego pracę. Zadałem(-am) fryzjerowi pytania dotyczące pielęgnacji włosów. Zdobytą wiedzą podzieliłem(-am) się z zuchami z mojej szóstki.'
   - 'Wiem, jakich narzędzi i urządzeń używa fryzjer oraz do czego one służą. Narysowałem(-am) je i opowiedziałem(-am) o nich zuchom w szóstce.'

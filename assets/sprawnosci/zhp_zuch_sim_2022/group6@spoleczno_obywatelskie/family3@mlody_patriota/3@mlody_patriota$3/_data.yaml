@@ -1,6 +1,7 @@
 slug: mlody_patriota
 name: 'Młody Patriota'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Znam hymn Polski i wiem, w jaki sposób trzeba zachowywać się podczas jego śpiewania. Zaśpiewałem(-am) hymn i opowiedziałem(-am) o tym drużynowemu.'
   - 'Odwiedziłem(-am) urząd miasta lub gminy. Wiem, jakie sprawy można tam załatwić.'

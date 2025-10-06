@@ -1,6 +1,7 @@
 slug: przyjaciel_nieznanego_swiata
 name: 'Przyjaciel Nieznanego Świata'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Opiekowałem(-am) się osobą niepełnosprawną lub starszą i pomagałem(-am) jej w prostych czynnościach domowych.'
   - 'Systematycznie odwiedzałem(-am) osobę niepełnosprawną lub starszą przez miesiąc.'

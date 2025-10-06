@@ -1,6 +1,7 @@
 slug: mistrz_deskorolki
 name: 'Mistrz deskorolki'
 level: 1
+tasksAreExamples: true
 tasks:
   - 'Potrafię jeździć na deskorolce klasycznie oraz hamować.'
   - 'Dbam o swoją deskorolkę i zestaw ochraniaczy.'

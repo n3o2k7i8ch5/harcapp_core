@@ -1,6 +1,7 @@
 slug: pilkarz
 name: 'Piłkarz'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Rozegrałem(-am) kilkanaście meczów w piłkę nożną (grając na różnych pozycjach).'
   - 'Podczas meczu stosuję zasady fair play. Przygotowałem(-am) kodeks piłkarza.'

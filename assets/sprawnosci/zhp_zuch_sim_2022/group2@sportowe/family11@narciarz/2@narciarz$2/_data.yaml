@@ -1,6 +1,7 @@
 slug: narciarz
 name: 'Narciarz'
 level: 2
+tasksAreExamples: true
 tasks:
   - 'Jeździłem(-am) co najmniej pięć razy na nartach.'
   - 'Sporządziłem(-am) schematyczne obrazki podstawowych rodzajów śniegu i opisałem(-am) każdy z nich pod kątem przydatności do jazdy na nartach.'

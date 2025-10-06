@@ -1,6 +1,7 @@
 slug: badacz
 name: 'Badacz'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Przeprowadziłem(-am) przynajmniej cztery doświadczenia. Opisałem(-am) je w swoim dzienniku badań, który zaprezentowałem(-am) zuchom w kręgu rady.'
   - 'Wykonałem(-am) dla zuchów wybrane trzy doświadczenia. Opowiedziałem(-am), co ukazują i jakie wnioski z nich płyną.'

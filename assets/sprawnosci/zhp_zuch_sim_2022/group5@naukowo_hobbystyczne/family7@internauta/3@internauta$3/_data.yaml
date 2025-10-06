@@ -1,6 +1,7 @@
 slug: internauta
 name: 'Internauta'
 level: 3
+tasksAreExamples: true
 tasks:
   - 'Sprawdziłem(-am) w Internecie długoterminową prognozę pogody dla mojej miejscowości. Dowiedziałem(-am) się, czy prognozowane są niebezpieczne zjawiska pogodowe.'
   - 'Sprawdziłem(-am) w Internecie rozkład jazdy pociągów lub autobusów do miejsca, w którym chciałbym(-am) spędzić wakacje.'
