@@ -1,3 +1,20 @@
 slug: kolekcjoner
 name: 'Kolekcjoner'
 
+requirements:
+  - 'Posiadam własną kolekcję.'
+  - 'Znam historię przedmiotów, które zbieram.'
+  - 'Dbam o swoje zbiory, utrzymuję swoją kolekcję w porządku.'
+  - 'Systematycznie wzbogacam swoją kolekcję.'
+  - 'Zaprezentowałem(-am) swoją kolekcję i opowiedziałem(-am) o niej.'
+  - 'Wymieniałem(-am) swoje zbiory z innymi hobbystami.'
+  - 'Wykonałem(-am) opisy do najciekawszych okazów.'
+
+notesForLeaders:
+  - 'Zbieractwo jest popularną pasją wieku dziecięcego. Zuchy mogą zbierać autografy, etykiety zapałczane, monety, odznaki i znaczki metalowe, magnesy, znaczki pocztowe, widokówki, żołnierzyki, puszki, kapsle i wiele innych rzeczy. Pasje się zmieniają, zuchy mogą więc kilkakrotnie zdobyć tę sprawność.'
+  - 'Warto zachęcić zucha do poszerzania wiedzy o zbieranych przez niego przedmiotach.'
+  - 'Należy zwrócić uwagę na to, aby zuch nie kończył zbierania po zdobyciu sprawności.'
+  - 'Można zorganizować na zbiórce giełdę kolekcjonerską. To doskonała okazja, żeby zuchy zaprezentowały swoje zbiory, opowiedziały o nich innym i wymieniły się posiadanymi okazami.'
+  - 'Sprawność ma duże znaczenie wychowawcze ― rozbudza, poszerza i pogłębia zainteresowania poznawcze, przyspiesza wrastanie w kulturę, sprzyja powstawaniu zamiłowań, służy wypełnianiu wolnego czasu i uczy cierpliwości.'
+  - 'Punkt Prawa Zucha, na który zwracamy szczególną uwagę, realizując sprawność „Kolekcjonera”: "Zuch stara się być coraz lepszy."'
+

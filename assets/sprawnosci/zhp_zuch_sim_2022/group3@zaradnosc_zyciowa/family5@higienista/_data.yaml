@@ -1,3 +1,16 @@
 slug: higienista
 name: 'Higienista'
 
+requirements:
+  - 'Wiem, na czym polega codzienna toaleta.'
+  - 'Dbam o higienę własnego ciała. Wiem, kiedy i jak należy myć ręce.'
+  - 'Opowiedziałem(-am) kolegom, jak należy dbać o higienę.'
+  - 'Sprawdzałem(-am) stan czystości na kolonii.'
+  - 'Zmierzyłem(-am) temperaturę i oceniłem(-am), czy jest prawidłowa.'
+  - 'Dbam o swój pokój lub kącik. Potrafię uporządkować swoje miejsce pracy.'
+
+notesForLeaders:
+  - 'Sprawność kształtuje postawę dbałości o zdrowie. Uczy zucha troski o higienę swojego ciała i miejsca, w którym przebywa.'
+  - 'Zuch „Higienista” może następnie zdobyć sprawność „Śnieżnobiały uśmiech”.'
+  - 'Punkty Prawa Zucha, na które zwracamy szczególną uwagę, realizując sprawność „Higienisty”: "Zuch stara się być coraz lepszy.", "Zuch pamięta o swoich obowiązkach."'
+

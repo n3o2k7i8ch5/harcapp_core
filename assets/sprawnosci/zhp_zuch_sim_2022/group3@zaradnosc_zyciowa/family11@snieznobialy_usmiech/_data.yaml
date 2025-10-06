@@ -1,3 +1,19 @@
 slug: snieznobialy_usmiech
 name: 'Śnieżnobiały uśmiech'
 
+requirements:
+  - 'Poznałem(-am) budowę jamy ustnej.'
+  - 'Potrafię prawidłowo szczotkować zęby.'
+  - 'Założyłem(-am) dzienniczek szczotkowania zębów. Uzupełniałem(-am) go systematycznie (przynajmniej dwa razy dziennie).'
+  - 'Zrobiłem(-am) przegląd szczoteczek do zębów wszystkich domowników. Jeśli była taka potrzeba, wyjaśniłem(-am), dlaczego należy je zmienić.'
+  - 'Znam bezpieczne dla zębów przekąski.'
+  - 'Walczę ze skłonnością do podjadania słodyczy.'
+  - 'Sporządziłem(-am) listę past zawierających fluor.'
+  - 'Byłem(-am) w gabinecie stomatologicznym na badaniach kontrolnych.'
+  - 'Wykonałem(-am) plakat związany tematycznie z higieną jamy ustnej.'
+
+notesForLeaders:
+  - 'Sprawność kształtuje pozytywne nawyki. Uczy obowiązkowości i odpowiedzialności oraz dbałości o higienę, przede wszystkim jamy ustnej.'
+  - 'Sprawność może być zdobywana przez zuchy w każdym wieku.'
+  - 'Punkty Prawa Zucha, na które zwracamy szczególną uwagę, realizując sprawność „Śnieżnobiały uśmiech”: "Zuch stara się być coraz lepszy.", "Zuch pamięta o swoich obowiązkach."'
+

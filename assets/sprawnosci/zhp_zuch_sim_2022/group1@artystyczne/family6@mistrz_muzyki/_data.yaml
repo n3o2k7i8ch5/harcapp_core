@@ -1,3 +1,22 @@
 slug: mistrz_muzyki
 name: 'Mistrz muzyki'
 
+requirements:
+  - 'Często słucham muzyki. Mam ulubionego twórcę (wykonawcę).'
+  - 'Potrafię określić rodzaj muzyki (poważna, ludowa, rozrywkowa).'
+  - 'Potrafię rozpoznać instrument po brzmieniu.'
+  - 'Byłem(-am) na koncercie.'
+  - 'Umiem zagrać na instrumencie dwie lub trzy proste melodie.'
+  - 'Potrafię zagrać gamę C-dur, a-moll, zapisać ją i nazwać dźwięki.'
+  - 'Dbam o własny instrument.'
+  - 'Wykonałem(-am) koncert dla mojej gromady.'
+  - 'Przygotowałem(-am) akompaniament do występu gromady, klasy lub szkoły.'
+  - 'Brałem(-am) udział w muzycznej imprezie szkolnej.'
+
+notesForLeaders:
+  - 'Sprawność kształtuje zdolności muzyczne i wyrabia wrażliwość na piękno.'
+  - 'Zuch „Miłośnik muzyki” jest znawcą muzyki − jednego lub kilku jej rodzajów (np. pop, rock, muzyka klasyczna, jazz). Potrafi zagrać na jakimś instrumencie. Należy zróżnicować poziom wymagań dla zuchów, które chodzą do szkoły muzycznej i samouków.'
+  - 'Zadania realizowane przez zucha można wykorzystać np. na uroczystych zbiorkach gromady lub podczas przygotowań do festiwalu piosenki.'
+  - 'Aby dalej rozwijać zainteresowania zucha, można polecić mu sprawności „Grajka” i „Śpiewaka”.'
+  - 'Punkty Prawa Zucha, na które zwracamy szczególną uwagę, realizując sprawność „Miłośnika muzyki”: „Zuch stara się być coraz lepszy”, „Wszystkim jest z zuchem dobrze”.'
+

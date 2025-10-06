@@ -1,3 +1,21 @@
 slug: przewodnik_po
 name: 'Przewodnik po...'
 
+requirements:
+  - 'Opowiedziałem(-am) podanie, historię lub legendę związaną z moją miejscowością.'
+  - 'Znam najciekawsze obiekty w mojej miejscowości. Potrafię wskazać do nich drogę.'
+  - 'Wiem, gdzie jest najbliższy przystanek, apteka, poczta, straż pożarna, przychodnia (szpital), siedziba władz miasta, dzielnicy lub gminy.'
+  - 'Umiem dojść lub dojechać do określonego miejsca w mojej miejscowości.'
+  - 'Oprowadziłem(-am) wycieczkę lub gościa po mojej miejscowości.'
+  - 'Wykonałem(-am) prosty plan mojej miejscowości.'
+  - 'Prowadziłem(-am) dla zuchów z gromady punkt informacji turystycznej o mojej miejscowości.'
+  - 'Zaplanowałem(-am) trasy wycieczek po mojej miejscowości.'
+  - 'Mam w swojej kolekcji mapę, zdjęcia oraz foldery dotyczące mojej miejscowości. Przeczytałem(-am) o niej w przewodniku.'
+  - 'Przestrzegam przepisów poruszania się po drogach.'
+  - 'Umiem opowiadać jak przewodnik, dobierając informacje oraz język do zainteresowań i poziomu uczestników wycieczki.'
+
+notesForLeaders:
+  - 'Zuch „Przewodnik po...” ma obszerną wiedzę na wiele tematów. Interesuje się podróżami i zwiedzaniem ciekawych miejsc. Lubi przygody. Łatwo nawiązuje kontakty z innymi ludźmi. Nie boi się mówić do wielu słuchaczy.'
+  - 'Aby dalej rozwijać zainteresowania zucha, można wskazać mu sprawność „Geoposzukiwacza”.'
+  - 'Punkty Prawa Zucha, na które zwracamy szczególną uwagę, realizując sprawność „Przewodnika po...”: "Zuch stara się być coraz lepszy.", "Wszystkim jest z zuchem dobrze."'
+

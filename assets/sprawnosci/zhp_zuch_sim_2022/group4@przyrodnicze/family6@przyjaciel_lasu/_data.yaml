@@ -1,3 +1,20 @@
 slug: przyjaciel_lasu
 name: 'Przyjaciel Lasu'
 
+requirements:
+  - 'Interesuję się lasem. Znam rodzaje lasów występujących w Polsce.'
+  - 'Znam popularne rośliny występujące w lesie. Potrafię je rozpoznać.'
+  - 'Znam owoce lasu występujące w okolicy. Wiem, które z nich nadają się do spożycia.'
+  - 'Znam zwierzęta zamieszkujące polskie lasy, potrafię rozpoznać ich ślady.'
+  - 'Znam zasady przebywania w lesie. Opowiedziałem(-am) o nich kolegom.'
+  - 'Wybrałem(-am) się na wycieczkę do lasu, podczas której zebrałem(-am) znalezione śmieci.'
+  - 'Wykonałem(-am) makietę lasu, opisując poszczególne jego warstwy.'
+
+notesForLeaders:
+  - 'Zdobywając tę sprawność, zuch rozwija swoje zainteresowania przyrodnicze i zdobywa wiedzę o polskich lasach.'
+  - 'Swoją makietę lasu zuch może przedstawić podczas realizacji w gromadzie tropu związanego z przyrodą.'
+  - 'Konieczny jest nadzór nad zuchem zdobywającym sprawność, gdyż dotyczy ona m.in. jadalnych owoców lasu. Jeśli kadra gromady nie ma wiedzy niezbędnej do ich rozpoznania, należy skonsultować się ze specjalistą i powierzyć mu kontrolę nad realizacją tego punktu.'
+  - 'Ze względu na specyfikę zadań o fakcie zdobywania sprawności należy poinformować rodziców zucha.'
+  - 'Aby dalej rozwijać zainteresowania przyrodnicze zucha, można zaproponować mu zdobywanie sprawności „Ptasiego opiekuna”, „Zbieracza grzybów”, „Zielarza” i „Ekologa”.'
+  - 'Punkty Prawa Zucha, na które zwracamy szczególną uwagę, realizując sprawność „Przyjaciela lasu”: „Wszystkim z zuchem jest dobrze" „Zuch stara się być coraz lepszy".'
+

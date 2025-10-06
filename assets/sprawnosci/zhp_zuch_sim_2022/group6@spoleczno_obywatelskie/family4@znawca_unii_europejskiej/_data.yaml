@@ -1,3 +1,17 @@
 slug: znawca_unii_europejskiej
 name: 'Znawca Unii Europejskiej'
 
+requirements:
+  - 'Wiem, co to jest Unia Europejska i po co powstała.'
+  - 'Znam Hymn Unii Europejskiej.'
+  - 'Wiem, ile państw należy do Unii Europejskiej. Umiem wymienić dziesięć z nich.'
+  - 'Wykonałem(-am) flagę Unii Europejskiej. Wytłumaczyłem(-am) kolegom, co oznaczają gwiazdki na fladze UE.'
+  - 'Znam walutę, którą posługuje się większość państw zjednoczonych w UE i potrafię ją odróżnić od innych walut.'
+  - 'Wiem, gdzie znajduje się siedziba władz UE.'
+  - 'Znam datę przystąpienia Polski do Unii Europejskiej.'
+
+notesForLeaders:
+  - 'Sprawność ma uświadomić zuchowi, czym jest Unia Europejska, jakie są jej cele i dlaczego Polska została jej członkiem.'
+  - 'Punkty Prawa Zucha, na które zwracamy szczególną uwagę, realizując sprawność „Znawca Unii Europejskiej”: „Zuch kocha Polskę i czyni dobro.”, „Zuch pamięta o swoich obowiązkach.”, „Wszystkim jest z zuchem dobrze”.'
+  - 'Zuch powinien rozumieć, że Unia Europejska nie jest państwem, a umową między państwami, dlatego zuch nie jest obywatelem Unii Europejskiej, lecz obywatelem Polski.'
+

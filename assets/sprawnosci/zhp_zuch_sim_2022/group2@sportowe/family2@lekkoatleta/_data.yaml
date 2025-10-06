@@ -1,3 +1,18 @@
 slug: lekkoatleta
 name: 'Lekkoatleta'
 
+requirements:
+  - 'Znam konkurencje lekkoatletyczne. Uprawiam jedną z dziedzin lekkiej atletyki.'
+  - 'Pracuję nad swoją kondycją fizyczną. Systematycznie uprawiam gimnastykę.'
+  - 'Założyłem(-am) dzienniczek swoich rekordów.'
+  - 'Opowiedziałem(-am) kolegom, na czym polega zdrowe odżywianie się. Wyjaśniłem(-am), dlaczego jest ważne.'
+  - 'Uczestniczyłem(-am) w meetingu lekkoatletycznym lub zawodach sportowych.'
+  - 'Znam rekordy olimpijskie i nazwiska sportowców uprawiających wybraną dyscyplinę sportową.'
+  - 'Zorganizowałem(-am) zawody w gromadzie lub na podwórku.'
+  - 'Podczas zawodów stosuję zasady fair play.'
+
+notesForLeaders:
+  - 'Zuch „Lekkoatleta” uprawia jedną lub kilka dyscyplin lekkoatletycznych. Lubi uprawiać sport, ma dużo energii i chęci do pracy nad sobą.'
+  - 'Zuchy, które zdobywają tę sprawność na kolonii, mogą pomagać w porannych rozgrzewkach lub zajęciach sportowych.'
+  - 'Punkty Prawa Zucha, na które zwracamy szczególną uwagę, realizując sprawność „Lekkoatlety”: "Zuch stara się być coraz lepszy.", "Wszystkim jest z zuchem dobrze.", "Zuch pamięta o swoich obowiązkach."'
+
