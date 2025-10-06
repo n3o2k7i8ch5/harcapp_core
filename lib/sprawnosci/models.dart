@@ -205,10 +205,10 @@ class Spraw {
 
   // Convenience getters to access parent relationships
   @Ignore()
-  SprawGroup? get group => family.value?.group.value;
+  SprawGroup get group => family.value!.group.value!;
   
   @Ignore()
-  SprawBook? get sprawBook => group?.sprawBook.value;
+  SprawBook get sprawBook => group.sprawBook.value!;
 
   static Spraw fromDir(Directory dir) {
     final dataFile = File(p.join(dir.path, '_data.yaml'));
