@@ -1,6 +1,7 @@
 slug: jezdziec
 name: 'Jeździec'
 level: 2
+comment: 'Skompletował(-a) odpowiedni strój do jazdy. Rozróżnia podstawowy sprzęt. Prawidłowo wyjeżdża podstawowe figury na ujeżdżalni. Porusza się w równowadze w trzech podstawowych chodach.'
 tasks:
   - 'Skompletowałem(-am) odpowiedni i bezpieczny strój do jazdy konnej.'
   - 'Rozróżniłem(-am) i opisałem(-am) podstawowy sprzęt jeździecki.'

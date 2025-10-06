@@ -1,6 +1,7 @@
 slug: pomocnik_ukladacza_spadochronowego
 name: 'Pomocnik Układacza Spadochronowego'
 level: 3
+comment: 'Przygotowuje spadochrony do skoku i transportu.'
 tasks:
   - 'Wykazałem(-am) się znajomością podstawowych zasad przechowywania, konserwacji i transportu sprzętu spadochronowego.'
   - 'Dokonałem(-am) wizualnej oceny spadochronu szybującego i kontenera oraz wskazałem(-am) ewentualne uszkodzenia.'

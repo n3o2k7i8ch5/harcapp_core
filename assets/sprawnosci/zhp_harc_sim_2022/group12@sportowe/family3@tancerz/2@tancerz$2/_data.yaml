@@ -1,6 +1,7 @@
 slug: tancerz
 name: 'Tancerz'
 level: 2
+comment: 'Uczy się tańca. Prezentuje swoje umiejętności z wybranych rodzajów tańca. Realizuje swoją pasję w sposób bezpieczny dla zdrowia'
 tasks:
   - 'Zatańczyłem(-am) publicznie minimum dwa wybrane tańce z różnych gatunków, z których minimum jeden to taniec tańczony w parze. Skompletowałem(-am) strój taneczny do wybranego rodzaju tańca, który zaprezentowałem(-am).'
   - 'Wziąłem(wzięłam) udział w zajęciach nauki tańca.'

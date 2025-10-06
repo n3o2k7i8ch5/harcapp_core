@@ -1,6 +1,7 @@
 slug: programista
 name: 'Programista'
 level: 3
+comment: 'Pisze praktyczne programy. Dba o jakość kodu oraz prawidłowo zarządza wersjonowaniem aplikacji.'
 tasks:
   - 'Napisałem(-am) użyteczny w pracy harcerskiej program, wykorzystując wybrany paradygmat programowania (proceduralny, obiektowy, funkcyjny, logiczny itd.). Zaprezentowałem(-am) go wybranej grupie docelowej (zastępowi, zespołowi kwatermistrzowskiemu, zespołowi promocji itp.) i udostępniłem(-am) do wykorzystywania. Uwzględniłem(-am) informację zwrotną, ulepszając program.'
   - 'Napisałem prosty program w języku programowania innym niż wykorzystany w zadaniu 1.'

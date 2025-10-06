@@ -1,6 +1,7 @@
 slug: zwiadowca_wodny
 name: 'Zwiadowca wodny'
 level: 3
+comment: 'Potrafi czytać rzekę, wie jak jest zbudowana. Interesuje się turystyką związaną ze zbiornikami wodnymi w swojej okolicy.'
 tasks:
   - 'Przeprowadziłem(-am) zwiad rzeki na długości 100 metrów, oceniając napotkane trudności i przedstawiając bezpieczne sposoby ich pokonania.'
   - 'Przedstawiłem(-am) na schemacie lub modelu budowę rzeki. Poprawnie rozpoznałem(-am) zjawiska zachodzące na powierzchni rzeki (bystrze, mielizna itp.).'

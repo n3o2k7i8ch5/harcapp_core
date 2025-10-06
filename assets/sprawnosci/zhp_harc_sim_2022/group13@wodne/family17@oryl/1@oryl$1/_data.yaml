@@ -1,6 +1,7 @@
 slug: oryl
 name: 'Oryl'
 level: 1
+comment: 'Potrafi poprawnie wiosłować i bezpiecznie zachować się na łodzi.'
 tasks:
   - 'Poprawnie wiosłowałem(-am) pagajem na czółnie lub kanadyjce lub wiosłem na kajaku i odpowiednio reagowałem(-am) na komendy sternika'
   - 'Wsiadłem(-am) i wysiadłem(-am) z lub do kanadyjki lub kajaka z brzegu i pomostu.'

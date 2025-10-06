@@ -1,6 +1,7 @@
 slug: organizator_czasu
 name: 'Organizator czasu'
 level: 3
+comment: 'Umie prowadzić planowanie zespołowe - zarządza projektami. Dzieli się wiedzą.'
 tasks:
   - 'Założyłem(-am) własny bullet journal, dobierając najwygodniejsze i najpotrzebniejsze dla siebie elementy. Prowadziłem(-am) go przez co najmniej miesiąc, a następnie podzieliłem(-am) się dobrymi praktykami z zastępem lub znajomymi.'
   - 'W trakcie trwania próby planowałem(-am) każdy swój tydzień. Pod koniec każdego tygodnia dokonywałem(-am) podsumowania realizacji planu i brałem(-am) pod uwagę efekty przy planowaniu kolejnego tygodnia.'

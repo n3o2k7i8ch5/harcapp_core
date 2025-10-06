@@ -1,6 +1,7 @@
 slug: kajakarz
 name: 'Kajakarz'
 level: 2
+comment: 'Skutecznie kieruje kajakiem. Czyta locje rzeki. Wie, jak spakować kajak na spływ.'
 tasks:
   - 'Uczestniczyłem(-am) w co najmniej trzech spływach kajakowych.'
   - 'Wiosłowałem(-am) na wprost i wstecz oraz zawróciłem(-am) kajakiem.'

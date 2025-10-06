@@ -1,6 +1,7 @@
 slug: paralotniarz
 name: '(Para)Lotniarz'
 level: 1
+comment: 'Konstruuje prosty latawiec i wyjaśnia na nim pilotaż lotnią.'
 tasks:
   - 'Wyjaśniłem(-am) i zademonstrowałem(-am) zasady lotu i pilotażu lotni lub paralotni, korzystając z samodzielnie zbudowanego latawca płaskiego.'
   - 'Wykazałem(-am) się znajomością podstawowych zasad wykonywania lotów m.in. w jakich warunkach można je wykonywać.'

@@ -1,6 +1,7 @@
 slug: rolkarz
 name: 'Rolkarz'
 level: 1
+comment: 'Porusza się na rolkach. Wie, jak poprawnie i bezpiecznie trenować jazdę na rolkach.'
 tasks:
   - 'Potrafię jeździć na rolkach do przodu, przejechałem(-am) jednorazowo min. 2 km.'
   - 'Zatrzymałem(-am) się samodzielnie, bez wykorzystania infrastruktury drogowej (znaki, słupki).'

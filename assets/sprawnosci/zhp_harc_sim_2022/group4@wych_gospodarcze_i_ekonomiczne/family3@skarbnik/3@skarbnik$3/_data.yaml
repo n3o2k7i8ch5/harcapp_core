@@ -1,6 +1,7 @@
 slug: skarbnik
 name: 'Skarbnik'
 level: 3
+comment: 'Skarbnik drużyny. Na bieżąco wspiera prace drużynowego zajmując się rozliczeniami finansowymi. '
 tasks:
   - 'Poznałem(-am) przepisy finansowe ZHP obowiązujące drużynę.'
   - 'Pod nadzorem drużynowego zebrałem(-am) i rozliczyłem(-am) składki drużyny za jeden kwartał.'

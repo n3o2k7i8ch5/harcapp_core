@@ -1,6 +1,7 @@
 slug: lazik
 name: 'Łazik'
 level: 1
+comment: 'Bierze udział w całodziennych wędrówkach pieszych. Jest przygotowany do wycieczki zarówno pod względem podstawowej wiedzy, jak i ekwipunku.'
 tasks:
   - 'Przeszedłem/przeszłam samodzielnie lub z zastępem zaplanowaną trasę o długości co najmniej 6 km w terenie pozamiejskim, ubierając się stosownie do warunków terenowych i pogodowych, zabezpieczając się przed przegrzaniem, przemoczeniem oraz otarciem stóp.'
   - 'Dotarłem(-am) pieszo do wskazanego punktu, korzystając z mapy.'

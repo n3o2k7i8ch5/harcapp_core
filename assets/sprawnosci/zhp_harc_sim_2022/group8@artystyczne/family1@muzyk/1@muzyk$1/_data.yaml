@@ -1,6 +1,7 @@
 slug: muzyk
 name: 'Muzyk'
 level: 1
+comment: 'Gra na wybranym instrumencie. Potrafi zagrać kilka ulubionych utworów. Posługuje się zapisem nutowym.'
 tasks:
   - 'Nauczyłem(-am) się grać na wybranym instrumencie. Przygotowałem(-am) wybrany utwór, który zaprezentowałem(-am) przed większym gronem (drużyną, rodziną).'
   - 'Zebrałem(-am) zbiór przynajmniej 5 ulubionych utworów, które potrafię zagrać na instrumencie (może być w postaci śpiewnika bądź zeszytu/segregatora nutowego).'

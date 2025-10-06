@@ -1,6 +1,7 @@
 slug: strazak
 name: 'Strażak'
 level: 2
+comment: 'Posiada podstawową wiedzę i umiejętności niezbędne w działaniach strażackich.'
 tasks:
   - |
     W czasie zbiórek zastępów wykazałem(-am) się znajomością:

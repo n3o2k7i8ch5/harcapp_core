@@ -1,6 +1,7 @@
 slug: ratownik_wodny
 name: 'Ratownik wodny'
 level: 3
+comment: 'Zna skoki i style ratownicze oraz sposoby holowania. Używa bardziej zaawansowanego sprzętu ratowniczego.'
 tasks:
   - 'Skoczyłem(-am) do wody sposobem ratowniczym.'
   - 'Przepłynąłem(-ęłam) 50 metrów kraulem ratowniczym i 50 metrów żabką ratowniczą.'

@@ -1,6 +1,7 @@
 slug: piosenkarz
 name: 'Piosenkarz'
 level: 2
+comment: 'Występuje jako solista. Doskonali swój warsztat śpiewaka'
 tasks:
   - 'Wystąpiłem(-am) jako solista np. w szkolnym konkursie talentów, podczas szkolnego apelu czy festiwalu obozowego.'
   - 'Zaśpiewałem(-am) 10 piosenek z pamięci.'

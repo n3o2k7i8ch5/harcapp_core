@@ -1,6 +1,7 @@
 slug: kartograf
 name: 'Kartograf'
 level: 4
+comment: 'Kreśli nowe i aktualizuje stare mapy i plany. Organizuje INO. Szkoli młodszych harcerzy.'
 tasks:
   - 'Wykreśliłem(-am) mapę wybranego terenu (lub zaktualizowałem(-am) starą mapę) na potrzeby obozu, gry terenowej, rajdu, INO itp.'
   - 'Na podstawie archaicznej mapy (np. z lat 30. XX wieku) odnalazłem(-am) w terenie miejsca, które uległy zmianom (np. wgłębienie po wyschniętym oczku wodnym, miejsce po zarośniętej lasem drodze, pozostałości nieistniejących już zabudowań itp.).'

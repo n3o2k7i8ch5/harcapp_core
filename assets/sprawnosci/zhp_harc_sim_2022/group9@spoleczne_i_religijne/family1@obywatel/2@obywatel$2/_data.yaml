@@ -1,6 +1,7 @@
 slug: obywatel
 name: 'Obywatel'
 level: 2
+comment: 'Poznaje swoje państwo i zasady demokracji.'
 tasks:
   - 'Poznałem(-am) daty polskich świąt narodowych. Wiem, na pamiątkę jakich wydarzeń zostały ustanowione. Przygotowałem(-am) z zastępem zbiórkę z okazji jednego z nich.'
   - 'Wskazałem(-am) na mapie krainy geograficzne Polski. Jedną z nich zaprezentowałem(-am) na zbiórce zastępu.'

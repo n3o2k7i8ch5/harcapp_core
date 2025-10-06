@@ -1,6 +1,7 @@
 slug: mechanik
 name: 'Mechanik'
 level: 4
+comment: 'Potrafi dokonać trudniejszych napraw w większych silnikach, wymienić i wyregulować niezbędne elementy.'
 tasks:
   - 'Oceniłem(-am) stan techniczny pędnika, mechanizmu przenoszenia napędu oraz mechanizm sterujący. Wymieniłem(-am) uszkodzony pędnik w silniku stacjonarnym.'
   - 'Samodzielnie wymieniłem(-am) olej, filtr paliwa i oleju w silniku stacjonarnym.'

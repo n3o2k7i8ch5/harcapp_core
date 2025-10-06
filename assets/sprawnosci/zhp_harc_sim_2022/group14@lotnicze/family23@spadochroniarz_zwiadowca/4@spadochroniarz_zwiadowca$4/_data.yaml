@@ -1,6 +1,7 @@
 slug: spadochroniarz_zwiadowca
 name: 'Spadochroniarz Zwiadowca'
 level: 4
+comment: 'Samodzielnie dokonuje zwiadu taktycznego, kontaktuje się przez radio i zapewnia sobie przetrwanie w warunkach leśnych.'
 tasks:
   - 'Wykazałem(-am) się znajomością historii polskich wojskowych jednostek specjalnych. Rozpoznałem(-am) znaki identyfikacyjne tych formacji oraz wymieniłem(-am) ich główne zadania.'
   - 'Wykazałem(-am) się wiedzą, jakimi cechami winien odznaczać się wojskowy zwiadowca oraz wskazałem(-am), które z umiejętności wojskowych zwiadowców zostały przeniesione na grunt skautingu.'

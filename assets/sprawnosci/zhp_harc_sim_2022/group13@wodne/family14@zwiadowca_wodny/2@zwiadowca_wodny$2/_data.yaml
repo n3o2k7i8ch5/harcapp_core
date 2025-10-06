@@ -1,6 +1,7 @@
 slug: zwiadowca_wodny
 name: 'Zwiadowca wodny'
 level: 2
+comment: 'Zna najważniejsze zbiorniki wodne Polski. Rozpoznaje chronione gatunki i budowle hydrotechniczne, które może spotkać na rzece.'
 tasks:
   - 'Rozpoznałem(-am) na ilustracji lub w terenie faszynę, opaskę, ostrogę i opisałem(-am) do czego służą.'
   - 'Narysowałem(-am) z pamięci mapę konturową Polski i naniosłem(-am) na nią najważniejsze rzeki, kanały, jeziora, zalewy, porty śródlądowe i morskie.'

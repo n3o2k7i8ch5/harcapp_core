@@ -1,6 +1,7 @@
 slug: narciarz
 name: 'Narciarz'
 level: 1
+comment: 'Korzysta z podstawowego wyposażenia narciarstwa zjazdowego. Potrafi zjechać ze stoku oraz podejść pod stok dowolną techniką.'
 tasks:
   - 'Samodzielnie założyłem(-am) buty narciarskie. Wpiąłem(-ęłam) i wypiąłem(-ęłam) narty zjazdowe.'
   - 'Zademonstrowałem(-am) sposób bezpiecznego upadania podczas jazdy na nartach, a następnie samodzielnie się podniosłem(-am).'

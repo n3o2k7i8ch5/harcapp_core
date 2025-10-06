@@ -1,6 +1,7 @@
 slug: narciarz
 name: 'Narciarz'
 level: 4
+comment: 'Przygotowuje inne osoby do jazdy na nartach. Organizuje wycieczki narciarskie, dbając o bezpieczeństwo grupy.'
 tasks:
   - 'Opracowałem(-am) i przeprowadziłem(-am) wycieczkę narciarską na podstawie mapy topograficznej o długości co najmniej 10 km. Wziąłem(wzięłam) pod uwagę możliwości jej uczestników. Zaplanowałem(-am) ekwipunek indywidualny i zbiorowy na trasę wycieczki. Pomogłem(-am) jej uczestnikom w jego skompletowaniu.'
   - |

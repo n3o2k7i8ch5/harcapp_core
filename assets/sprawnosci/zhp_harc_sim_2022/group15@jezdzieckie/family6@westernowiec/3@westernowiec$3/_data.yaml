@@ -1,6 +1,7 @@
 slug: westernowiec
 name: 'Westernowiec'
 level: 3
+comment: 'Opisuje najważniejsze klasy pokazowe w western. Samodzielnie przygotowuje konia. Poprawnie trzyma wodze. Rozpoznaje typowe dla westernu rasy koni. Porusza się w trzech chodach, prawidłowo wykonuje figury westernowe, zachowuje balans przy przejściach pomiędzy nimi.'
 tasks:
   - 'Wymieniłem(-am) i opisałem(-am) najważniejsze klasy pokazowe w stylu western.'
   - 'Samodzielnie przygotowałem(-am) konia do jazdy.'

@@ -1,6 +1,7 @@
 slug: skoczek
 name: 'Skoczek'
 level: 1
+comment: 'Utrzymuje równowagę podczas wykonywania skoku. Poprawnie pokonuje przeszkody. Wykonuje szereg gimnastyczny. Zmienia nogę po skoku.'
 tasks:
   - 'Utrzymałem(-am) równowagę w skoku, podążałem(-am) za koniem, zarówno z kłusu, jak i z galopu.'
   - 'Pokonałem(-am) parkur złożony z 4 przeszkód o wysokości min. 50-60cm (duże konie) i 40-50 cm (kucyki).'

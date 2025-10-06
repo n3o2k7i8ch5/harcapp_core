@@ -1,6 +1,7 @@
 slug: skarbnik
 name: 'Skarbnik'
 level: 2
+comment: 'Skarbnik zastępu. Swoje umiejętności finansowe wykorzystuje w pomaganiu zastępowemu w sprawach finansowych.'
 tasks:
   - 'Wiem na co są zbierane składki w ZHP. Zapoznałem(-am) z tym tematem członków mojego zastępu.'
   - 'Wspierałem(-am) zbieranie składek w moim zastępie (przypominanie o terminach, zrobienie listy zebranych składek dla zastępowego) co najmniej przez jeden kwartał.'

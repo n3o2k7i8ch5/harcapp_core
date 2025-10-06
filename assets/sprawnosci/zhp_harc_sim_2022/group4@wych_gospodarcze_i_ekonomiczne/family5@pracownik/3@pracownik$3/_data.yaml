@@ -1,6 +1,7 @@
 slug: pracownik
 name: 'Pracownik'
 level: 3
+comment: 'Identyfikuje swoje predyspozycje zawodowe oraz przygotował(-a) się do rekrutacji. Bierze udział w praktykach lub zdobywa pracę dostępną dla osób młodocianych bądź studentów.'
 tasks:
   - 'Zidentyfikowałem(-am) swoje predyspozycje zawodowe korzystając z pomocy doradcy zawodowego lub wybranego kwestionariusza. Na podstawie zidentyfikowanych predyspozycji zawodowych przygotowałem(-am) swoje CV.'
   - 'Przeprowadziłem(-am) wywiad z osobą wykonującą interesujący mnie zawód, dowiedziałem(-am) się, jakie umiejętności lub wykształcenie są potrzebne do jego wykonywania.'

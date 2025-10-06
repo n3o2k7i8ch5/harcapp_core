@@ -1,6 +1,7 @@
 slug: zawodnik_trec
 name: 'Zawodnik TREC'
 level: 2
+comment: 'Trenuje elementy TREC, wyjeżdżając w teren, prawidłowo odnajduje się na mapie. Przekazuje wiedzę na temat TREC PTTK innym harcerzom. Sprawnie pokonuje coraz trudniejsze elementy fazy PTV oraz osiąga coraz lepsze wyniki w fazie MA.'
 tasks:
   - 'Zaprezentowałem(-am) zastępowi w dowolnej formie regulamin TREC PTTK.'
   - 'Uczestniczyłem(-am) w wycieczce konnej, podczas której zaznaczałem(-am) na mapie topograficznej przejechaną trasę.'

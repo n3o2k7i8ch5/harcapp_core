@@ -1,6 +1,7 @@
 slug: konstruktor_lotniczy
 name: 'Konstruktor Lotniczy'
 level: 3
+comment: 'Konstruuje zaawansowane modele samolotów.'
 tasks:
   - 'Opowiedziałem(-am) o kilku najnowszych osiągnięciach techniki lotniczej, różnych doświadczalnych rodzajach samolotów i układach aerodynamicznych. Objaśniłem(-am) zasady lotu różnego rodzaju statków latających.'
   - 'Wyjaśniłem(-am), jaką rolę spełniają poszczególne elementy konstrukcyjne i urządzenia aerodynamiczne samolotów.'

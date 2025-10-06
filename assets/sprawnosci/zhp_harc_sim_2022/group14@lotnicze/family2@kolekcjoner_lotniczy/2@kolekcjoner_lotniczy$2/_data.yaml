@@ -1,6 +1,7 @@
 slug: kolekcjoner_lotniczy
 name: 'Kolekcjoner Lotniczy'
 level: 2
+comment: 'Prowadzi kolekcję lotniczą w sposób uporządkowany. Potrafi ją zaprezentować i o niej opowiedzieć'
 tasks:
   - 'Objaśniłem(-am) lotniczą treść swego zbioru.'
   - 'Wykazałem(-am) się wiedzą, gdzie i jakie zbiory lotnicze tego rodzaju można obejrzeć oraz gdzie zrzeszeni są ich zbieracze.'

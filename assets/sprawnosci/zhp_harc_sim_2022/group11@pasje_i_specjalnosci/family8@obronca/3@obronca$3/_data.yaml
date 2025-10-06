@@ -1,6 +1,7 @@
 slug: obronca
 name: 'Obrońca'
 level: 3
+comment: 'Dzieli się wiedzą z zakresu samoobrony.'
 tasks:
   - 'Zdobyłem(-am) wiedzę i umiejętności na poziomie sprawności Obrońca (**).'
   - 'Zastosowałem(-am) odpowiednie techniki i obroniłem(-am) się przed atakami rąk i nóg z różnych kierunków oraz atakami noża (z góry i z dołu).'

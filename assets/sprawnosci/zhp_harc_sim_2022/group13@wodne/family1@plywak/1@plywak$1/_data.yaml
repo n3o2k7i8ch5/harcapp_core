@@ -1,6 +1,7 @@
 slug: plywak
 name: 'Pływak'
 level: 1
+comment: 'W wodzie czuje się swobodnie, potrafi się w niej poruszać i zanurzyć.'
 tasks:
   - 'Przepłynąłem(-ęłam) 100 metrów, w tym połowę na plecach.'
   - 'Wytrzymałem(-am) 20 sekund pod wodą.'

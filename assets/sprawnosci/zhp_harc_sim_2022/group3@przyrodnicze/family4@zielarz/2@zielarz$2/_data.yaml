@@ -1,6 +1,7 @@
 slug: zielarz
 name: 'Zielarz'
 level: 2
+comment: 'Zna podstawowe zioła występujące w Polsce. Potrafi je wykorzystać.'
 tasks:
   - 'Znalazłem(-am) w lesie i na łące co najmniej 6 roślin jadalnych, które zebrałem w celu wykorzystania.'
   - 'Przygotowałem(-am) napar (herbatę) z pokrzywy, mięty, rumianku lub innego zioła.'

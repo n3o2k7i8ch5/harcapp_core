@@ -1,6 +1,7 @@
 slug: szachista
 name: 'Szachista'
 level: 1
+comment: 'Zna nazwy poszczególnych bierek, potrafi prawidłowo je ustawić w pozycji wyjściowej i poruszać się nimi po szachownicy. Przestrzega podstawowych zasad gry. Zauważa, kiedy jego bierki są atakowane i potrafi ich bronić.'
 tasks:
   - 'Kilkukrotnie i samodzielnie rozstawiłem(-am) bierki w pozycji wyjściowej, grając zarówno białymi, jak i czarnymi.'
   - 'Rozegrałem(-am) przynajmniej 3 zwycięskie partie, w których bezpośrednio zamatowałem(-am) króla przeciwnika zgodnie z podstawowymi zasadami gry (dotknięta idzie, roszada, bicie w przelocie, szach, pat, mat).'

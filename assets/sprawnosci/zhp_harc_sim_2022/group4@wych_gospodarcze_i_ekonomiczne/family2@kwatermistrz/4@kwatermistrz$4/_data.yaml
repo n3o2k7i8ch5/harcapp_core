@@ -1,6 +1,7 @@
 slug: kwatermistrz
 name: 'Kwatermistrz'
 level: 4
+comment: 'Wspiera kwatermistrzów drużyn i zastępów. Przeprowadza inwentaryzację sprzętu. Organizuje obozy pod względem kwatermistrzowskim.'
 tasks:
   - 'Przeprowadziłem(-am) szkolenie dla kwatermistrzów zastępów lub drużyn.'
   - 'W okresie trwania próby prowadziłem(-am) dokumentację sprzętową drużyny, szczepu lub hufca.'

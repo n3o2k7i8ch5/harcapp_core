@@ -1,6 +1,7 @@
 slug: westernowiec
 name: 'Westernowiec'
 level: 2
+comment: 'Porusza się w trzech chodach, wykonuje płynne przejścia pomiędzy nimi. Rozpoznaje kiełzna. Opisuje jedną z konkurencji oraz korzenie tej dyscypliny.'
 tasks:
   - 'Opisałem(-am) jedną z konkurencji rozgrywanych w stylu western.'
   - 'Rozpoznałem(-am) kiełzna charakterystyczne dla tej dyscypliny.'

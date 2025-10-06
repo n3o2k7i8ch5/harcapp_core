@@ -1,6 +1,7 @@
 slug: sadownik
 name: 'Sadownik'
 level: 3
+comment: 'Rozpoznaje typowe drzewa owocowe. Bierze udział w pielęgnacji sadu. Bierze udział w zbiorze owoców lub ich zabezpieczeniu na zimę.'
 tasks:
   - 'Rozpoznałem(-am) po pniach i liściach popularne drzewa owocowe np. jabłonie, grusze, śliwy, wiśnie, czereśnie oraz krzewy owocowe np. maliny, porzeczki, winorośl.'
   - 'Wziąłem (Wzięłam) udział w sadzeniu drzew owocowych lub krzewów jagodowych.'

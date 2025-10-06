@@ -1,6 +1,7 @@
 slug: zawodnik_hobby_horses
 name: 'Zawodnik Hobby Horses'
 level: 2
+comment: 'Posiada swojego Hobby Horsa. Tworzy układy ujeżdżeniowe do dowolnej piosenki. Organizuje zawody Hobby Horsing.'
 tasks:
   - 'Wykonałem(-am) własnego Hobby Horsa. Zaprezentowałem(-am) go na zbiórce. Nadałem(-am) mu imię oraz przedstawiłem(-am) jego dane (rasa, maść, wiek). Opowiedziałem(-am) o cechach charakterystycznych dla tej rasy.'
   - 'Ustawiłem(-am) i przejechałem(-am) parkur złożony z co najmniej 6 przeszkód o wysokości 60 cm.'

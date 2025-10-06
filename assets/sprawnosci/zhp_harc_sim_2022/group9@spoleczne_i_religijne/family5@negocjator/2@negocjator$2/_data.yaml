@@ -1,6 +1,7 @@
 slug: negocjator
 name: 'Negocjator'
 level: 2
+comment: 'Rozpoznaje różne rodzaje informacji, które do niego/niej docierają, potrafi rozdzielić je i wyłowić fakty. Wie, czym są: negocjacja, opinia, fakt, pogłoska, dane, przypuszczenie i potrafi je identyfikować w rozmowie. '
 tasks:
   - 'Poznałem(-am) terminy: negocjacja, opinia, fakt, pogłoska, dane, przypuszczenie. Wyjaśniłem(-am) zastępowi relacje i różnice między nimi. W działaniach zastępu staram się by informacje były oparte na faktach i danych, a nie na pogłoskach i przypuszczeniach, i aby każdy miał okazje do wygłoszenia swojej opinii.'
   - 'Odnalazłem(-am) i przedstawiłem(-am) kilka przykładów opinii, faktu, pogłoski, danej, przypuszczenia znalezionych w mediach (źródła drukowane i elektroniczne).'

@@ -1,6 +1,7 @@
 slug: malarz
 name: 'Malarz'
 level: 4
+comment: 'Przygotowuje podłoże malarskie do swojej pracy. Wystawia własne obrazy w miejscu publicznym. Prowadzi szkicownik.'
 tasks:
   - 'Przygotowałem(-am) infografikę przedstawiającą dwie epoki malarskie. Infografika zawiera krótką charakterystykę każdej epoki, sylwetki co najmniej 4 artystów (po dwie dla każdej epoki), ciekawostki.'
   - 'Namalowałem(-am) co najmniej 4 cykle obrazów poruszające różną tematykę. Zaprezentowałem(-am) je na wystawie w miejscu publicznym.'

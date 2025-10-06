@@ -1,6 +1,7 @@
 slug: naukowiec
 name: 'Naukowiec'
 level: 1
+comment: 'Dostrzega zależności w świecie. Umie zorganizować proste doświadczenie i zauważa zachodzące zjawiska.'
 tasks:
   - 'Wziąłem(-am) udział w pokazach naukowych, festiwalu nauki lub warsztatach naukowych. Zauważyłem(-am) warunki potrzebne do przeprowadzania doświadczeń.'
   - 'Odwiedziłem(-am) centrum nauki. Umiem wskazać, które eksperymenty mogę powtórzyć w domu, a które wymagają szczególnych warunków.'

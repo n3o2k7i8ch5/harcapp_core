@@ -1,6 +1,7 @@
 slug: jurysta_morski
 name: 'Jurysta morski'
 level: 4
+comment: 'Stosuje przepisy prawa drogi i zasady ochrony środowiska na wodach morskich. Zna oznaczenie szlaku żeglownego, rozpoznaje statki po oznakowaniu dziennym i nocnym.'
 tasks:
   - 'Podczas żeglugi oceniłem(-am) ryzyko zderzenia na podstawie obserwacji namiaru burtowego oraz podjąłem(-ęłam) działanie zgodne z prawidłami MPZZM (colreg).'
   - 'Podczas żeglugi prowadzałem(-am) obserwację m.in. znaków i sieci, innych jednostek, śmieci w wodzie, głębokości oraz nasłuch radiowy.'

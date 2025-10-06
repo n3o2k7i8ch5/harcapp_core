@@ -1,6 +1,7 @@
 slug: szyper_motorowodny
 name: 'Szyper motorowodny'
 level: 1
+comment: 'Potrafi uruchomić silnik, trzymać kurs i zmieniać biegi na silniku.'
 tasks:
   - 'Prawidłowo uruchomiłem(-am) mały silnik zaburtowy.'
   - 'Byłem(-am) załogantem na łodzi motorowodnej.'

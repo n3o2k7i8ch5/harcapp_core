@@ -1,6 +1,7 @@
 slug: nawigator
 name: 'Nawigator'
 level: 4
+comment: 'Używa map elektronicznych i papierowych oraz pomocy nawigacyjnych do planowania i realizacji podróży morskiej.'
 tasks:
   - 'W aplikacji lub chartploterze do nawigacji jachtowej ustawiłem(-am) i aktywowałem(-am) punkty (waypoints) oraz trasę (route) żeglugi.'
   - 'Określiłem(-am) pozycję jachtu na papierowej mapie morskiej na podstawie obserwacji dwóch punktów oraz na podstawie obserwacji jednego punktu i pomiaru głębokości.'

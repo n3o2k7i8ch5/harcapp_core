@@ -1,6 +1,7 @@
 slug: operator_drona
 name: 'Operator Drona'
 level: 1
+comment: 'Asystuje przy operowaniu dronem.'
 tasks:
   - 'Poprawnie wykonałem(-am) manewry startu i lądowania.'
   - 'Wykonałem(-am) trening lotu dronem w symulatorze.'

@@ -1,6 +1,7 @@
 slug: pszczelarz
 name: 'Pszczelarz'
 level: 3
+comment: 'Umie rozpoznać pszczele produkty, wie, jak się je pozyskuje. Pomaga owadom zapylającym.'
 tasks:
   - 'Wziąłem (Wzięłam) udział w kręceniu miodu.'
   - 'Rozpoznałem(-am) co najmniej 5 rodzajów roślin miododajnych występujących w Polsce. Obserwowałem(-am) jak pszczoły zbierają z nich nektar i pyłek kwiatów.'

@@ -1,6 +1,7 @@
 slug: nawigator
 name: 'Nawigator'
 level: 3
+comment: 'Świadomie używa odbiornika satelitarnego, wykonuje proste pomiary i obliczenia na mapie, monitoruje realizację planu podróży na wodzie.'
 tasks:
   - 'W aplikacji lub odbiorniku nawigacji satelitarnej (GPS) zapisałem(-am) przebytą drogę podczas wędrówki. Wyświetliłem(-am) na mapie cyfrowej, sprawdziłem(-am) i omówiłem(-am) kompletność oraz dokładność swojego śladu.'
   - 'Zorientowałem(-am) się w przestrzeni i wskazałem(-am) kierunek północny na podstawie położenia słońca i gwiazd.'

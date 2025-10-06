@@ -1,6 +1,7 @@
 slug: bosman
 name: 'Bosman'
 level: 1
+comment: 'Uczestniczy w przygotowaniu jachtu do żeglugi i postoju.'
 tasks:
   - 'Zawiązałem(-am) węzły: knagowy, ósemka, płaski, ratowniczy przed sobą i na sobie oraz zbuchtowałem(-am) linę.'
   - 'Sklarowałem(-am) żagle przed i po żeglowaniu.'

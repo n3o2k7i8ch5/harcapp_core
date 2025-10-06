@@ -1,6 +1,7 @@
 slug: skaut
 name: 'Skaut'
 level: 2
+comment: 'Odkrywa harcerstwo poza własną drużyną. Zna miejsce swojej drużyny w ZHP, w ruchu harcerskim.'
 tasks:
   - 'Dowiedziałem(-am) się, jakie inne organizacje harcerskie, poza ZHP, działają w Polsce. Nawiązałem(-am) kontakt z członkiem jednej z nich i poznałem(-am) kilka różnic między naszymi organizacjami, opowiedziałem(-am) o tym zastępowi.'
   - 'Opowiedziałem(-am) osobie spoza ZHP (np. koledze, członkowi rodziny) o tym, kto, kiedy i z jakiego powodu utworzył skauting i harcerstwo.'

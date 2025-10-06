@@ -1,6 +1,7 @@
 slug: baloniarz
 name: 'Baloniarz'
 level: 1
+comment: 'Konstruuje proste modele balonów i potrafi wyjaśnić ich działanie.'
 tasks:
   - 'Wyjaśniłem(-am) zasady unoszenia się balonu w powietrzu oraz budowę balonu sportowego.'
   - 'Rozpoznałem(-am) rodzaje balonów i wykazałem(-am) się znajomością ich zastosowania.'

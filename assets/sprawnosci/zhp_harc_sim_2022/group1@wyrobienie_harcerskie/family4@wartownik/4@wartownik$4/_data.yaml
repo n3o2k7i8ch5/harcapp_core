@@ -1,6 +1,7 @@
 slug: wartownik
 name: 'Wartownik'
 level: 4
+comment: 'Dba o bezpieczeństwo obozu.'
 tasks:
   - 'Przyjmowałem(-am) gości obozowych i wizytacje zgodnie z właściwymi procedurami.'
   - |

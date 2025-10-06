@@ -1,6 +1,7 @@
 slug: grafik_komputerowy
 name: 'Grafik Komputerowy'
 level: 2
+comment: 'Projektuje proste grafiki. Wykorzystuje programy graficzne do wykonania prac dla zastępu lub drużyny.'
 tasks:
   - 'Zaprojektowałem(-am) prostą grafikę w dowolnym programie graficznym np. plakat, zaproszenie.'
   - 'Wykonałem(-am) ilustrację do kroniki drużyny używając dowolnego programu graficznego.'

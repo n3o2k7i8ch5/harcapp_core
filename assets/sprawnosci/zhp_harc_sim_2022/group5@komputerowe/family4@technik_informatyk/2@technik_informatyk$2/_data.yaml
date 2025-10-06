@@ -1,6 +1,7 @@
 slug: technik_informatyk
 name: 'Technik Informatyk'
 level: 2
+comment: 'Zna podstawowe urządzenia i elementy wchodzące w skład budowy komputera. Wie, za co odpowiadają. Doradza w doborze pamięci masowej oraz pamięci RAM w zależności od zastosowania i potrzeb użytkowników. Konfiguruje podstawowe urządzenia peryferyjne.'
 tasks:
   - 'Poznałem(-am) budowę komputera (stacjonarnego lub laptopa). Zapoznałem(-am) się z najważniejszymi podzespołami komputera (zasilacz, płyta główna, pamięć, karta graficzna, procesor, itp.) i wiem, do czego służą. Sprawdziłem konfigurację używanego komputera, wykorzystując funkcjonalność systemu operacyjnego lub narzędzia dodatkowe. Przygotowałem(-am) opis swojego komputera, prezentując w nim najważniejsze informacje o każdym istotnym jego podzespole.'
   - 'Zapoznałem(-am) się z najważniejszymi pojęciami dotyczącymi sprzętu komputerowego. Zapoznałem(-am) się z rodzajami pamięci (RAM, ROM, pamięć masowa, cache), rodzajami pamięci masowej (HDD, SSD, pamięci Flash itp.). Doradziłem(-am) znajomemu/znajomej dobór odpowiedniej pamięci masowej dopasowany do jego/jej potrzeb.'

@@ -1,6 +1,7 @@
 slug: mechanik
 name: 'Mechanik'
 level: 1
+comment: 'Potrafi bezpiecznie zachować się na jachcie motorowym, zna jego podstawową budowę.'
 tasks:
   - 'Poznałem(-am) zasady bezpieczeństwa panujące na jachcie motorowodnym.'
   - 'Poznałem(-am) podstawową budowę łodzi motorowodnej oraz małego silnika zaburtowego.'

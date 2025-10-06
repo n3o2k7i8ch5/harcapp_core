@@ -1,6 +1,7 @@
 slug: konstruktor_latawcow
 name: 'Konstruktor Latawców'
 level: 1
+comment: 'Operuje latawcem. Potrafi skonstruować prosty model i wyjaśnić zasadę jego lotu.'
 tasks:
   - 'Rozpoznałem(-am) różne rodzaje latawców. Wykazałem(-am) się wiedzą, jaka jest konstrukcja każdego z nich i jakie miały zastosowanie dawniej i dziś.'
   - 'Wyjaśniłem(-am), jakie siły działają na latawiec w locie i od czego zależy prawidłowy lot.'

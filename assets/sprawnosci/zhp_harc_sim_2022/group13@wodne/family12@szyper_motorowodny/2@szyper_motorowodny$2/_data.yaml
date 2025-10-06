@@ -1,6 +1,7 @@
 slug: szyper_motorowodny
 name: 'Szyper motorowodny'
 level: 2
+comment: 'Potrafi prowadzić jacht motorowy i wykonać podstawowe manewry.'
 tasks:
   - 'Prowadziłem(-am) jacht motorowy, gdy na akwenie znajdowały się też inne jednostki.'
   - 'Wykonałem(-am) manewry: odejście od nadbrzeża, dojście do nadbrzeża, alarm „człowiek za burtą”, kotwiczenia.'

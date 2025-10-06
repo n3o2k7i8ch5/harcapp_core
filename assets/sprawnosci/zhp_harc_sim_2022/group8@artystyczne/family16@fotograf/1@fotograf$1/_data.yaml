@@ -1,6 +1,7 @@
 slug: fotograf
 name: 'Fotograf'
 level: 1
+comment: 'Wykonuje zdjęcia przy użyciu podstawowych funkcji aparatu/telefonu. Wybiera do publikacji zdjęcia z puli wykonanych fotografii.'
 tasks:
   - 'Wykonałam/em portret osoby lub zjawiska przyrody.'
   - 'Wykonałam/em zdjęcie tematyczne, odpowiednio używając właściwych funkcji.'

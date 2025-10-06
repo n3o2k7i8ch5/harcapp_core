@@ -1,6 +1,7 @@
 slug: plywak
 name: 'Pływak'
 level: 2
+comment: 'Potrafi skakać do wody, nurkować i orientować się pod wodą. Jest w stanie przepłynąć dłuższy dystans.'
 tasks:
   - 'Przepłynąłem(-ęłam) 200 metrów, w tym połowę na plecach.'
   - 'Skoczyłem(-am) do wody z wysokości 1 metra i przepłynąłem(przepłynęłam) pod wodą 10 metrów.'

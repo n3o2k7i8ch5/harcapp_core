@@ -1,6 +1,7 @@
 slug: ratownik_wodny
 name: 'Ratownik wodny'
 level: 4
+comment: 'Potrafi udzielić pomocy tonącemu w różnych sytuacjach. Potrafi pływać łodzią ratowniczą. Używa zaawansowanego sprzętu ratowniczego i zna sposoby wzywania pomocy.'
 tasks:
   - 'Podczas ćwiczeń odpaliłem(-am) pławkę dymną, flarę ratowniczą lub rakietę spadochronową.'
   - 'Przepłynąłem(-ęłam) 400 metrów dowolnym sposobem w czasie poniżej osiem minut.'

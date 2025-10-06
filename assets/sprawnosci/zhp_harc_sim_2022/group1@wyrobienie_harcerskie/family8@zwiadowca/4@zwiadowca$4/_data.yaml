@@ -1,6 +1,7 @@
 slug: zwiadowca
 name: 'Zwiadowca'
 level: 4
+comment: 'Potrafi zebrać potrzebne informacje posługując się różnymi źródłami.'
 tasks:
   - 'Przeprowadziłem(-am) zwiad na określony temat różnymi technikami (wywiad, obserwacja, badanie dokumentów). Zebrałem(-am) materiały, sporządziłem(-am) szczegółowy raport z opisem wykonanych zadań i zaobserwowanych/badanych zdarzeń.'
   - 'Dotarłem(-am) w nocy do wyznaczonego miejsca oddalonego o co najmniej 4 kilometry posługując się wyłącznie mapą i busolą (bez wykorzystania elektronicznych środków lokalizacji).'

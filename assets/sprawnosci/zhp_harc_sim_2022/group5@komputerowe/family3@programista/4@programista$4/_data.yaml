@@ -1,6 +1,7 @@
 slug: programista
 name: 'Programista'
 level: 4
+comment: 'Pisze złożone programy, wykorzystując gotowe narzędzia oraz frameworki. W swoich programach implementuje gotowe moduły oraz rozszerzenia.'
 tasks:
   - 'Napisałem(-am) złożony program pomocny w pracy harcerskiej, wykorzystując wybrany framework (np. .NET, Symphony, Flask) w celu uniknięcia konieczności samodzielnego implementowania powszechnie wykorzystywanych funkcjonalności.'
   - 'Napisałem(-am) użyteczny w pracy harcerskiej program, wykorzystując wybrany paradygmat programowania (proceduralny, obiektowy, funkcyjny, logiczny itd.) inny niż w przypadku zadania 1.'

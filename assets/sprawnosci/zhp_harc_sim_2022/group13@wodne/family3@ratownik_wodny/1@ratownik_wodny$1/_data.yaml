@@ -1,6 +1,7 @@
 slug: ratownik_wodny
 name: 'Ratownik wodny'
 level: 1
+comment: 'Dba o własne bezpieczeństwo na wodzie. Potrafi pływać i nurkować. Zna podstawy pierwszej pomocy.'
 tasks:
   - 'Wie, czym się różni kamizelka asekuracyjna od ratunkowej, poprawnie założyłem(-am) jedną z nich.'
   - 'Przepłynąłem(-ęłam) 200 metrów dowolnym stylem.'

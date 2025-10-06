@@ -1,6 +1,7 @@
 slug: rezyser_teatralny
 name: 'Reżyser Teatralny'
 level: 3
+comment: 'Przygotowuje różne przedstawienia do wystawienia, pełniąc rolę reżysera. Opracowuje scenariusze. Dobiera rekwizyty i dekoracje'
 tasks:
   - 'Wraz z zastępem lub grupą kolegów przygotowałem(-am) do wystawienia (pełniąc rolę reżysera) sztukę lalkową, teatrzyk harcerski, program kabaretowy itp.'
   - 'Opracowałem(-am) scenariusz przedstawienia (własny lub adaptowany) i prowadziłem(-am) próby z zespołem.'

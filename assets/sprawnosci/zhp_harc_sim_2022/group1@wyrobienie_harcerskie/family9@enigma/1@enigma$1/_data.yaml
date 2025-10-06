@@ -1,6 +1,7 @@
 slug: enigma
 name: 'Enigma'
 level: 1
+comment: 'Korzysta z różnych metod łączności (poczta, Internet, terenowe metody łączności). Potrafi zaszyfrować informację.'
 tasks:
   - 'Posiadam stały adres e-mailowy, regularnie sprawdzam swoją skrzynkę odbiorczą. Napisałem(-am) i wysłałem(-am) list tradycyjny i e-mailowy.'
   - 'Poznałem(-am) podstawowe rodzaje szyfrów - wiem, czym się różnią. Zaszyfrowałem(-am) i odszyfrowałem(-am) wiadomość w co najmniej pięciu różnych szyfrach. Posłużyłem(-am) się szyfrem w grach harcerskich.'

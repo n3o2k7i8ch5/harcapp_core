@@ -1,6 +1,7 @@
 slug: baloniarz
 name: 'Baloniarz'
 level: 3
+comment: 'Asystuje przy lotach balonem.'
 tasks:
   - 'Opowiedziałem(-am) o dziejach baloniarstwa w Polsce i na świecie, wykazując się ich dobrą znajomością.'
   - 'Wykazałem(-am) się znajomością wymagań do uzyskania Harcerskiego Znaku Balonowego.'

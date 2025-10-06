@@ -1,6 +1,7 @@
 slug: jezdziec
 name: 'Jeździec'
 level: 3
+comment: 'Przekazuje wiedzę dotyczącą podstaw jazdy, pomocy jeździeckich. Pokazuje elementy ujeżdżeniowe. Prawidłowo pokonuje przeszkody do 60 cm.'
 tasks:
   - 'Wytłumaczyłem(-am) zastępowi podstawy teorii jazdy konnej, a także czym jest dosiad i jakie są jego rodzaje.'
   - 'Zaprezentowałem(-am) na zbiórce różne pomoce używane w jeździectwie, wskazałem(-am) ich dobre i złe strony.'

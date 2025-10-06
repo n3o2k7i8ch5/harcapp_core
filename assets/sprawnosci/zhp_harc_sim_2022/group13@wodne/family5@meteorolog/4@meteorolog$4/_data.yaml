@@ -1,6 +1,7 @@
 slug: meteorolog
 name: 'Meteorolog'
 level: 4
+comment: 'Wykorzystuje prognozy pogody i wiedze meteorologiczną na poziomie zaawansowanym.'
 tasks:
   - 'Zastosowałem(-am) numeryczne prognozy pogody z przynajmniej trzech serwisów.'
   - 'Przynajmniej raz ściągnąłem(-ęłam) i zastosowałem(-am) griby.'

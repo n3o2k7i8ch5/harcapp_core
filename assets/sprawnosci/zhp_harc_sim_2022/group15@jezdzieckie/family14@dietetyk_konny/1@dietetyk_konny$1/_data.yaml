@@ -1,6 +1,7 @@
 slug: dietetyk_konny
 name: 'Dietetyk Konna'
 level: 1
+comment: 'Rozpoznaje podstawowe pasze. Prezentuje zasady karmienia i pojenia. Karmi konie oraz czyści poidła. Zna budowę układu pokarmowego konia'
 tasks:
   - 'Rozpoznawałem(-am) podstawowe pasze objętościowe i treściwe w żywieniu koni.'
   - 'Poznałem(-am) i zaprezentowałem(-am) zasady karmienia i pojenia koni.'

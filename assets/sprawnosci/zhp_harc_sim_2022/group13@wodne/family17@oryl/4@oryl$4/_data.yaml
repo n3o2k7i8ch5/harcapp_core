@@ -1,6 +1,7 @@
 slug: oryl
 name: 'Oryl'
 level: 4
+comment: 'Potrafi dowodzić wioślarzami i wydawać komendy. Wie, jak podjąć człowieka, który wypadł za burtę. Przekazuje umiejętności wiosłowania młodszym.'
 tasks:
   - 'Dowodziłem(-am) wioślarzami na szalupie. Poprawnie wydawałem(-am) komendy wioślarzom i sternikowi (wiosła, wiosła basta, naprzód, prawa naprzód, lewa wstecz) itd..'
   - 'Wiosłowałem(-am) sposobem rybackim "z ręki" jednym wiosłem.'

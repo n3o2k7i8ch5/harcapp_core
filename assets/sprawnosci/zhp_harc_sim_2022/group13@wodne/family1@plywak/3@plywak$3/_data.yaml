@@ -1,6 +1,7 @@
 slug: plywak
 name: 'Pływak'
 level: 3
+comment: 'Zna przynajmniej trzy style pływackie, pracuje nad swoją techniką pływania.'
 tasks:
   - 'Przepłynąłem(-ęłam) 400 metrów co najmniej trzema różnymi stylami.'
   - 'Bezpiecznie skoczyłem(-am) do wody na kilka sposobów (np. skokiem ratowniczym, w kamizelce asekuracyjnej itp.)'

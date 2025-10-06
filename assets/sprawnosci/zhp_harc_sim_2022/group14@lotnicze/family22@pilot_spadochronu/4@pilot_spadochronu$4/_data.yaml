@@ -1,6 +1,7 @@
 slug: pilot_spadochronu
 name: 'Pilot Spadochronu'
 level: 4
+comment: 'Wykonuje skoki na strugi i biegle steruje czaszą spadochronu.'
 tasks:
   - 'Wykonałem(-am) stabilne skoki na strugi relatywne.'
   - 'Utrzymałem(-am) kierunek spadania i otworzyłem(-am) spadochron na kierunku wyrzutu.'

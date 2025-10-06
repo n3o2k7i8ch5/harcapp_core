@@ -1,6 +1,7 @@
 slug: enigma
 name: 'Enigma'
 level: 3
+comment: 'Wie, jak są konstruowane szyfry, i zna podstawowe metody ich łamania. Wie, jak są używane współcześnie, i rozumie wagę ochrony danych.'
 tasks:
   - |
     Wiem, jak sprawdzić sygnaturę e-maila i jak powinien być on podpisany. Wiem, jak sprawdzić, czy połączenie jest bezpieczne. Wysłałem(-am) maila podpisanego lub szyfrowanego i wykonałem co najmniej jedno z zadań:

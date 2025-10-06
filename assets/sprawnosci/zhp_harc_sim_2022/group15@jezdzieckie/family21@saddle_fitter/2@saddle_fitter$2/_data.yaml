@@ -1,6 +1,7 @@
 slug: saddle_fitter
 name: 'Saddle Fitter'
 level: 2
+comment: 'Wyznacza granice, w których powinno leżeć siodło. Przekazuje wiedzę, dlaczego należy sprawdzać siodło, czym jest terlica oraz jakie mamy rodzaje wędzideł. Składa i dopasowuje ogłowie po konserwacji.'
 tasks:
   - 'Wyznaczyłem(-am) na koniu granice, w których powinno leżeć siodło, tak aby nie wchodziło na łopatki oraz nie wychodziło poza odcinek piersiowy konia.'
   - 'Wytłumaczyłem(-am) zastępowi, czym jest terlica, jak jest zbudowana oraz jakie ma wady i zalety.'

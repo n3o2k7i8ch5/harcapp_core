@@ -1,6 +1,7 @@
 slug: recytator
 name: 'Recytator'
 level: 2
+comment: 'Ćwiczy dykcję. Recytuje prozę i wiersze.'
 tasks:
   - 'Zaprezentowałem(-am) członkom zastępu podstawowe ćwiczenia doskonalące dykcję.'
   - 'Obejrzałem(-am) na żywo lub na nagraniu trzy interpretacje prozy lub wierszy w wykonaniu profesjonalistów. Zinterpretowałem(-am) utwór poetycki lub prozatorski, dobierając barwę głosu, modulację, tempo i rytm.'

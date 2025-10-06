@@ -1,6 +1,7 @@
 slug: lotnik_tunelowy
 name: 'Lotnik Tunelowy'
 level: 4
+comment: 'Lata w tunelu z innymi osobami. Startuje w zawodach tunelowych.'
 tasks:
   - 'Zdobyłem(-am) wiedzę i umiejętności na poziomie sprawności (***).'
   - 'Osiągnąłem(osiągnęłam) sprawność fizyczną i techniczną pozwalającą na pełną kontrolę nad ciałem podczas latania w tunelu w wybranej sylwetce.'

@@ -1,6 +1,7 @@
 slug: opiekun_koni
 name: 'Opiekun Koni'
 level: 1
+comment: 'Wymienia oraz stosuje się do podstawowych zasad pracy w stajni. Rozróżnia stanowisko i boks, a także podstawowe pasze objętościowe i treściwe. Prawidłowo przygotowuje i podaje pasze dla koni.'
 tasks:
   - 'Poznałem(-am) podstawowe zasady bezpieczeństwa pracy przy koniach. Stosowałem(-am) je w praktyce, a także w dowolnej formie przedstawiłem(-am) je swojemu zastępowi.'
   - 'Rozróżniłem(-am) stanowisko i boks, omówiłem(-am) ich wady i zalety, prawidłowo je pościeliłem(-am).'

@@ -1,6 +1,7 @@
 slug: negocjator
 name: 'Negocjator'
 level: 3
+comment: 'Rozumie rolę emocji i wagę zarządzania nimi w rozmowie. Rozumie rolę moderatora rozmowy oraz wagę słuchania w tej roli. Łagodzi konflikty w otoczeniu.'
 tasks:
   - 'Poznałem(-am) fazy negocjacji prowadzące do porozumienia. Przedstawiłem(-am) zastępowi podstawowe zasady negocjacji.'
   - 'Przeprowadziłem(-am) dwa rodzaje debat dla zastępu, drużyny lub innej grupy. Przed debatami przygotowałem(-am) do nich uczestników.'

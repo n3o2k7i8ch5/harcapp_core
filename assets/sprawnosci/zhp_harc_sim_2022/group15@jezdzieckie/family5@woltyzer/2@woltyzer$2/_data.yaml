@@ -1,6 +1,7 @@
 slug: woltyzer
 name: 'Woltyżer'
 level: 2
+comment: 'Utrzymuje równowagę w trzech podstawowych chodach. Prawidłowo wykonuje ćwiczenia na koniu stojącym oraz chodzącym w trzech chodach. Zakłada i dopasowuje sprzęt woltyżerski.'
 tasks:
   - 'Utrzymywałem(-am) równowagę w stępie, kłusie i galopie.'
   - |

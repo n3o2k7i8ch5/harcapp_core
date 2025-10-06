@@ -1,6 +1,7 @@
 slug: hipoterapeuta
 name: 'Hipoterapeuta'
 level: 2
+comment: 'Tłumaczy harcerzom, czym jest hipoterapia. Pomaga w przygotowaniu konia. Opisuje konia oraz hipoterapeutę. Prezentuje ćwiczenia hipoterapeutyczne.'
 tasks:
   - 'Nauczyłem(-am) się, czym jest hipoterapia. Wytłumaczyłem(-am) zastępowi, na czym polega.'
   - 'Pomogłem(-am) przygotować konia do hipoterapii pod okiem specjalisty.'

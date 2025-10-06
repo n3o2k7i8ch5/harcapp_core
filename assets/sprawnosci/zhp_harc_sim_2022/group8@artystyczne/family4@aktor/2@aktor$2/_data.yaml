@@ -1,6 +1,7 @@
 slug: aktor
 name: 'Aktor'
 level: 2
+comment: 'Prezentuje publicznie swoje umiejętności aktorskie. Bierze udział w przedstawieniach lub zajęciach teatralnych.'
 tasks:
   - 'Zaprezentowałem(-am) się przed publicznością w jednej z form aktorskich: monolog, dialog, pantomima, teatr radia, teatr lalek, teatr tańca.'
   - |

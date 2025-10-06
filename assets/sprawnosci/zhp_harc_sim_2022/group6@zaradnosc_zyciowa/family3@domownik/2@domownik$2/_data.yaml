@@ -1,6 +1,7 @@
 slug: domownik
 name: 'Domownik'
 level: 2
+comment: 'Wspiera swoją rodzinę w wykonywaniu takich czynności domowych jak pranie, zakupy i sprzątanie.'
 tasks:
   - 'Wstawiłem(-am) pranie, prawidłowo posegregowałem(-am) rzeczy, dobrałem(-am) odpowiedni program, wyciągnąłem(-am) i rozwiesiłem(-am).'
   - 'Zrobiłem(-am) listę zakupów oraz zakupy dla rodziny, uwzględniając zakup jedzenia i drobnych elementów higieny i chemii domowej (np. papier toaletowy, mydło, pastę do zębów).'

@@ -1,6 +1,7 @@
 slug: ratownik_specjalista
 name: 'Ratownik specjalista'
 level: 1
+comment: 'Wie, jakie zasady bezpieczeństwa obowiązują nad wodą, potrafi wezwać pomoc.'
 tasks:
   - 'W czasie zajęć na wodzie zawsze pływałem(-am) w kamizelce asekuracyjnej lub ratunkowej.'
   - 'Opowiedziałem(-am), jak oznacza się kąpieliska w Polsce, co oznaczają poszczególne flagi oraz w jakich miejscach należy unikać kąpieli.'

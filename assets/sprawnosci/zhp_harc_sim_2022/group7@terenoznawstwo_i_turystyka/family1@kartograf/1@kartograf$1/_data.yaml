@@ -1,6 +1,7 @@
 slug: kartograf
 name: 'Kartograf'
 level: 1
+comment: 'Poruszając się w terenie, wyznacza kierunki świata. Z pomocą mapy (bez wsparcia GPS) pokonuje nieskomplikowane trasy.'
 tasks:
   - 'Wyznaczyłem(-am) kilkakrotnie kierunki świata w terenie, za pomocą kompasu oraz bez jego użycia, wykorzystując elementy terenowe.'
   - 'W czasie wędrówki w terenie zorientowałem(-am) mapę zgodnie z kierunkami świata. Poprowadziłam/em zastęp podczas wędrówki.'

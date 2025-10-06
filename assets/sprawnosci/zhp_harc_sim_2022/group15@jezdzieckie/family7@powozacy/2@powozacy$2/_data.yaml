@@ -1,6 +1,7 @@
 slug: powozacy
 name: 'Powożący'
 level: 2
+comment: 'Wymienia i rozpoznaje rodzaje uprzęży oraz typy pojazdów. Dopasowuje uprzęże oraz wymienia, z czego się składają. Pełni funkcję luzaka, opowiada, na czym ona polega'
 tasks:
   - 'Wymieniłem(-am) rodzaje uprzęży i typy pojazdów, rozpoznając je na rysunkach lub zdjęciach.'
   - 'Zademonstrowałem(-am) i opowiedziałem(-am) o tym, jaką funkcję pełni luzak w dyscyplinie powożenia.'

@@ -1,6 +1,7 @@
 slug: ratownik_specjalista
 name: 'Ratownik specjalista'
 level: 2
+comment: 'Potrafi udzielić podstawowej pomocy w wypadku nad wodą.'
 tasks:
   - 'Odwiedziłem(-am) z drużyną, zastępem lub wachtą stację ratownictwa wodnego lub sekcję wodną straży pożarnej.'
   - 'Udzieliłem(-am) pomocy w przypadku skaleczenia i oparzenia słonecznego.'

@@ -1,6 +1,7 @@
 slug: technik_informatyk
 name: 'Technik Informatyk'
 level: 4
+comment: 'Zna zależności pomiędzy infrastrukturą komputerową. Samodzielnie składa komputery zarówno stacjonarne, jak i laptopy. Dobiera podzespoły komputera do potrzeb użytkownika.'
 tasks:
   - 'Poznałem(-am) zależności wynikające ze współpracy poszczególnych podzespołów komputerowych. Złożyłem(-am) komputer stacjonarny od podstaw, samodzielnie montując takie rzeczy jak: płyta główna, procesor, karta graficzna, pamięć RAM oraz inne konieczne podzespoły.'
   - 'Zaprojektowałem(-am) zestaw komputerowy lub komputer przenośny spełniający wskazane wymagania i mieszczący się w określonym (realnym) budżecie. Dobrałem podzespoły (CPU, RAM, pamięć masową, karty rozszerzeń itd.), biorąc pod uwagę parametry współpracujących elementów (np. taktowanie pamięci) i dostępne do wykorzystania złącza'

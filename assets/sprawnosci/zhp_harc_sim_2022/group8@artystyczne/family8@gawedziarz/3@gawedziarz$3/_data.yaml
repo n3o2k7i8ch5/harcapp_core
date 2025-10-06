@@ -1,6 +1,7 @@
 slug: gawedziarz
 name: 'Gawędziarz'
 level: 3
+comment: 'Opowiada gawędy w trakcie ognisk/kominków. W opowieściach posługuje się inspiracjami z legend i książek. Tworzy gawędy na podstawie konkretnych wydarzeń.'
 tasks:
   - 'Opowiedziałem(-am) kilka gawęd podczas ogniska lub kominka zawierających morał lub przysłowie.'
   - 'Uwzględniłem(-am) w przynajmniej jednej gawędzie poznane wcześniej legendy lub opowieści ludowe.'

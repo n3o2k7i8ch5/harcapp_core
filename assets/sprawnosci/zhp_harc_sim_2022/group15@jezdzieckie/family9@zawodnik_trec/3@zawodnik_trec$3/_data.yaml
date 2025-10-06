@@ -1,6 +1,7 @@
 slug: zawodnik_trec
 name: 'Zawodnik TREC'
 level: 3
+comment: 'Bierze udział w zawodach TREC PTTK. Organizuje zawody z elementami tej dyscypliny dla innych. Sprawnie pokonuje coraz trudniejsze elementy fazy PTV oraz osiąga coraz lepsze wyniki w fazie MA'
 tasks:
   - 'Wziąłem(Wzięłam) udział w zawodach TREC PTTK.'
   - 'Zorganizowałem(-am) zawody z elementami TREC dla znajomych ze stajni lub/i harcerstwa.'

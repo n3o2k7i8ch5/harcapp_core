@@ -1,6 +1,7 @@
 slug: opiekun_koni
 name: 'Opiekun Koni'
 level: 2
+comment: 'Rozróżnia rośliny jadalne i trujące dla koni. Dba o bezpieczeństwo konia i siebie. Prawidłowo odczytuje mowę koni, chętnie przekazuje wiedzę na ten temat innym. Prawidłowo przygotowuje pastwisko do wypasu. Zakłada na konia podstawowy sprzęt stajenny.'
 tasks:
   - 'Rozpoznałem(-am) na pastwisku, czy wszystkie rośliny są jadalne dla koni, wymieniłem(-am) 5 roślin trujących. Sprawdziłem(-am), czy siano i pasza treściwa są zdatne do zjedzenia dla konia (np. brak pleśni).'
   - 'Brałem(-am) udział w przygotowaniu pastwiska do wypasu: sprzątałem(-am) odchody po koniach, sprawdzałem(-am), czy ogrodzenie jest całe, przygotowałem(-am) wraz z opiekunem miejsca poboru siana przez zwierzęta, sprawdziłem(-am) stan poideł, czyszcząc je.'

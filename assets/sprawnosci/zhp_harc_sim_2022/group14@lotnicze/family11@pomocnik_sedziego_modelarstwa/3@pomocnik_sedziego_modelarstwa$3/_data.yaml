@@ -1,6 +1,7 @@
 slug: pomocnik_sedziego_modelarstwa
 name: 'Pomocnik Sędziego Sportowego Modelarstwa Lotniczego i Kosmicznego'
 level: 3
+comment: 'Asystuje przy sędziowaniu zawodów modeli latających.'
 tasks:
   - 'Wykazałem(-am) się znajomością przepisów Kodeksu Sportowego FAI (w szczególności część 4a i 4b), dotyczących zawodów modelarskich. Wykazałem(-am) się znajomością organizacji pracy komisji sędziowskiej.'
   - 'Wykazałem(-am) się znajomością kategorii, klas i konkurencji w zawodach modeli latających - lotniczych i kosmicznych.'

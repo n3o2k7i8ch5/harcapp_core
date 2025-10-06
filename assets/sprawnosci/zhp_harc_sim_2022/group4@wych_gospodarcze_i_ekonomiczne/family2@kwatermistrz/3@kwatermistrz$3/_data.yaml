@@ -1,6 +1,7 @@
 slug: kwatermistrz
 name: 'Kwatermistrz'
 level: 3
+comment: 'Kwatermistrz drużyny. Potrafi poprowadzić magazyn i rejestr sprzętu. Uczy młodszych harcerzy, jak opiekować się sprzętem. '
 tasks:
   - 'W okresie trwania próby prowadziłem(-am) magazyn sprzętu podczas obozu drużyny lub w ciągu roku wraz z dokumentacją.'
   - 'Wiem na czym polega inwentaryzacja. Brałem(-am) udział w spisie z natury.'

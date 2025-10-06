@@ -1,6 +1,7 @@
 slug: saddle_fitter
 name: 'Saddle Fitter'
 level: 1
+comment: 'Opisuje budowę siodła oraz ogłowia, prawidłowo zakłada je na konia. Konserwuje sprzęt skórzany. Sprawdza, czy grzbiet konia jest w dobrym stanie (takim, że można założyć siodło), rozpoznaje symptomy źle dopasowanego siodła, które widoczne są na grzbiecie.'
 tasks:
   - 'Poznałem(-am) podstawową budowę siodła, poznałem(-am) pojęcie terlica oraz wymieniłem(-am) i opisałem(-am) typy siodeł. Poznałem(-am) podstawową budowę ogłowia, rozróżniłem(-am) i opisałem(-am) nachrapniki.'
   - 'Wziąłem(Wzięłam) udział w czyszczeniu i konserwacji sprzętu skórzanego (siodło, ogłowie).'

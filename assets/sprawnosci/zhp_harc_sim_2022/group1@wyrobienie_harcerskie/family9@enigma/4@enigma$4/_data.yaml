@@ -1,6 +1,7 @@
 slug: enigma
 name: 'Enigma'
 level: 4
+comment: 'Posiada umiejętności kryptoanalizy, umie przypuścić skuteczny atak na szyfr polialfabetyczny; wie, jak szyfry są stosowane we współczesnym świecie.'
 tasks:
   - 'Wziąłem(wzięłam) udział w konkursie kryptologicznym (np. lamaczeszyfrow.pl) lub we własnym zakresie zapoznałem(-am) się z rodzajami szyfrów i metodami skutecznego ataku na nie.'
   - 'Znam metody Kasiskiego i Friedmana, potrafię skorzystać ze statystyki znaków do określenia rodzaju użytego szyfru oraz przypuszczenia ataku na szyfrogram. Złamałem(-am) jeden szyfr polialfabetyczny (klucz min. 3 znaki).'

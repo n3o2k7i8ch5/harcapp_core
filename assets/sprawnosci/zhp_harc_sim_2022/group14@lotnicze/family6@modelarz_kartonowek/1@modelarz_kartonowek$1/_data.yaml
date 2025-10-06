@@ -1,6 +1,7 @@
 slug: modelarz_kartonowek
 name: 'Modelarz Kartonówek'
 level: 1
+comment: 'Konstruuje proste modele kartonowe i potrafi wyjaśnić ich działanie.'
 tasks:
   - 'Opowiedziałem(-am) o pierwszych próbach wzlotów szybowcowych.'
   - 'Wyjaśniłem(-am), jakie cechy charakteru musi mieć dobry lotnik.'

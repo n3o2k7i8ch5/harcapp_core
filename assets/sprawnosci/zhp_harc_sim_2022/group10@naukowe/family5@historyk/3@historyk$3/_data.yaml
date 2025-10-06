@@ -1,6 +1,7 @@
 slug: historyk
 name: 'Historyk'
 level: 3
+comment: 'Poznaje historię swojego państwa. Korzysta ze źródeł historycznych (materialnych i niematerialnych).'
 tasks:
   - |
     Wykonałem(-am) jedno z zadań:

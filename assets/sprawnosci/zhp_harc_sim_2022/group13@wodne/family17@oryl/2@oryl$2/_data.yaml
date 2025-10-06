@@ -1,6 +1,7 @@
 slug: oryl
 name: 'Oryl'
 level: 2
+comment: 'Potrafi sterować łodzią wiosłową i wiosłować wiosłami w dulkach.'
 tasks:
   - 'Pokonałem(-am) tor slalomowy na wodzie stojącej, płynąc jako sternik kajaka lub kanadyjki.'
   - 'Odbiłem(-am) i dobiłem(-am) do brzegu w wybranym miejscu na rzece.'

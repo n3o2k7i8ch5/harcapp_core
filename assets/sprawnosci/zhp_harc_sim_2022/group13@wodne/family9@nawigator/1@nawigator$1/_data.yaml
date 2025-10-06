@@ -1,6 +1,7 @@
 slug: nawigator
 name: 'Nawigator'
 level: 1
+comment: 'Używa kompasu, czyta mapy papierowe i korzysta z wyszukiwania na mapach cyfrowych.'
 tasks:
   - 'Wskazałem(-am) z pomocą kompasu północ i południe oraz wschód i zachód.'
   - 'Wskazałem(-am) na mapie i opowiedziałem(-am) o zbiornikach wodnych w mojej okolicy.'

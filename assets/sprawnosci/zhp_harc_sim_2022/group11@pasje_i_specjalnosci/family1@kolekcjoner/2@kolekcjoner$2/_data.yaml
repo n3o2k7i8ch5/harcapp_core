@@ -1,6 +1,7 @@
 slug: kolekcjoner
 name: 'Kolekcjoner'
 level: 2
+comment: 'Posiada kolekcję, którą stale uzupełnia. Kontaktuje się z innymi osobami kolekcjonującymi te same przedmioty.'
 tasks:
   - 'Stworzyłem(-am) własną kolekcję wybranych przedmiotów lub systematycznie powiększałem(-am) kolekcję, którą otrzymałem(-am).'
   - 'Opracowałem(-am) system katalogowania własnych zbiorów i posługiwałem(-am) się nim, uzupełniając swoją kolekcję.'

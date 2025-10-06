@@ -1,6 +1,7 @@
 slug: meteorolog
 name: 'Meteorolog'
 level: 1
+comment: 'Potrafi rozpoznać podstawowe zjawiska pogodowe.'
 tasks:
   - 'Opowiedziałem(-am), co to jest wiatr.'
   - 'Pokazałem(-am) szkwał na jeziorze.'

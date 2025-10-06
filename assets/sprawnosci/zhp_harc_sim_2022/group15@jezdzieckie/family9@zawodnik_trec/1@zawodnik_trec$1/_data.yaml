@@ -1,6 +1,7 @@
 slug: zawodnik_trec
 name: 'Zawodnik TREC'
 level: 1
+comment: 'Ma świadomość, czym są zawody TREC PTTK, rozróżnia ich fazy. Prawidłowo orientuje się w terenie. Bierze udział w dwóch fazach TREC - MA oraz PTV.'
 tasks:
   - 'Wytłumaczyłem(-am) zastępowi, czym są zawody TREC PTTK, oraz wyjaśniłem(-am) skróty Faza PTV, MA, POR.'
   - 'Posługiwałem(-am) się mapą topograficzną. Wziąłem(Wzięłam) udział w rozgrywkach INO.'

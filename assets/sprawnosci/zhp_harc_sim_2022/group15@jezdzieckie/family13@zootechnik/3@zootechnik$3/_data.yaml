@@ -1,6 +1,7 @@
 slug: zootechnik
 name: 'Zootechnik'
 level: 3
+comment: 'Korzysta z Ksiąg Stadnych. Wskazuje i zapobiega złym nawykom i narowom. Poznał, czym jest imbred. Ocenia wiek konia po zębach. Dzieli się wiedzą na temat przyznawania klas ogierom rozpłodowym.'
 tasks:
   - 'Prawidłowo korzystałem(-am) z Ksiąg Stadnych, wyszukałem(-am) konkretnego konia po ustalonych wcześniej założeniach. Wykonałem(-am) teoretyczny rodowód konia do 3 pokoleń wstecz.'
   - 'Rozpoznałem(-am) narowy i złe nawyki u koni. Potrafiłem(-am) je wskazać oraz im zapobiegać.'

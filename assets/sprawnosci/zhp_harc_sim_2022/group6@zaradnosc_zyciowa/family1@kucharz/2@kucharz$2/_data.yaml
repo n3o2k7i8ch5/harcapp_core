@@ -1,6 +1,7 @@
 slug: kucharz
 name: 'Kucharz'
 level: 2
+comment: 'Przygotował/a złożony posiłek według przepisu. Bezpiecznie posługiwał/a się urządzeniami kuchennymi.'
 tasks:
   - 'Ugotowałem(-am) zupę i drugie danie (niekoniecznie jednego dnia) dla mojej rodziny z pomocą przepisu (z Internetu, książki kucharskiej).'
   - 'Nakryłem(-am) do stołu do przygotowanego przez siebie obiadu.'

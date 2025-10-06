@@ -1,6 +1,7 @@
 slug: ratownik
 name: 'Ratownik'
 level: 3
+comment: 'W prawdziwej sytuacji lub podczas symulacji rozpoznaje najczęstsze stany zagrożenia życia i udziela pierwszej pomocy, dbając o bezpieczeństwo swoje i świadków zdarzenia.'
 tasks:
   - 'Przeprowadziłem(-am) resuscytację krążeniowo-oddechową na fantomie osoby dorosłej.'
   - 'Rozpoznałem(-am) objawy udaru słonecznego i udzieliłem(-am) poszkodowanemu pierwszej pomocy.'

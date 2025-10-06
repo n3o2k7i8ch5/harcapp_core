@@ -1,6 +1,7 @@
 slug: pomocnik_weterynarza
 name: 'Pomocnik Weterynarza'
 level: 2
+comment: 'Prawidłowo posługuje się terminologią anatomiczną. Mierzy temperaturę (kontroluje, czy jest odpowiednia), tętno i liczbę oddechów. Rozpoznaje najczęstsze objawy chorobowe i dopasowuje je do choroby. Kontroluje stan apteczki, uzupełnia ją.'
 tasks:
   - 'Poznałem(-am) budowa ogólną, budowę anatomiczną konia, układ szkieletowy oraz położenie najważniejszych narządów.'
   - 'Prawidłowo zmierzyłem(-am) temperaturę, tętno i liczbę oddechów konia, poznałem(-am) ich prawidłowe wartości.'

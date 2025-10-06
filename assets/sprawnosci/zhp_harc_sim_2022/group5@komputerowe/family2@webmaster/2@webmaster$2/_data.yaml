@@ -1,6 +1,7 @@
 slug: webmaster
 name: 'Webmaster'
 level: 2
+comment: 'Zna podstawy bezpiecznego korzystania z Internetu i zabezpieczania stron. Tworzy rozbudowane strony internetowe. Potrafi uruchomić serwer.'
 tasks:
   - 'Stworzyłem(-am) prostą statyczną stronę WWW, wykorzystując język HTML i arkusz stylów CSS oraz zewnętrzne zasoby (np. obrazki).'
   - 'Postawiłem(-am) serwer WWW (np. Apache) na komputerze lub maszynie wirtualnej.'

@@ -1,6 +1,7 @@
 slug: gitarzysta
 name: 'Gitarzysta'
 level: 2
+comment: 'Wykorzystuje gitarę do akompaniowania zastępowi lub drużynie.'
 tasks:
   - 'Akompaniowałem(-am) drużynie przy wykonaniu minimum 5 piosenek (np. w czasie ogniska, na zbiórce).'
   - 'Nastroiłem(-am) gitarę przy pomocy stroika.'

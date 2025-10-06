@@ -1,6 +1,7 @@
 slug: zwiadowca_wodny
 name: 'Zwiadowca wodny'
 level: 4
+comment: 'Potrafi przygotować bezpieczny spływ. Zna szlaki wodne w swoim województwie.'
 tasks:
   - 'Przedstawiłem(-am) zasady organizacji spływu i przepisy obowiązujące podczas spływu.'
   - 'Opracowałem(-am) trasę spływu, uwzględniając wiek i umiejętności uczestników.'

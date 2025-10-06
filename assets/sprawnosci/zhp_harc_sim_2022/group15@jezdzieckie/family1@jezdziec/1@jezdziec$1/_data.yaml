@@ -1,6 +1,7 @@
 slug: jezdziec
 name: 'Jeździec'
 level: 1
+comment: 'Przekazuje wiedzę na temat maści i odmian koni. Prawidłowo podchodzi do koni i odczytuje ich reakcje. Prawidłowo przygotowuje konia do jazdy oraz zakłada rząd jeździecki, nazywa jego części. Porusza się w trzech chodach w zastępie podczas jazdy konnej.'
 tasks:
   - 'Poznałem(-am) budowę zewnętrzną, maści i odmiany koni. Wiedzę tę przekazałem(-am) swojemu zastępowi podczas zbiórki.'
   - 'Potrafiłem(-am) prawidłowo podejść do konia, odczytać i zinterpretować jego reakcje. Wskazałem(-am) najważniejsze zasady obowiązujące w stajni oraz na ujeżdżalni.'

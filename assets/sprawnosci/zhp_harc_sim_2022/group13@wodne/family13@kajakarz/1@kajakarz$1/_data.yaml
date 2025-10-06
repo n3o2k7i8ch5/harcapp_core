@@ -1,6 +1,7 @@
 slug: kajakarz
 name: 'Kajakarz'
 level: 1
+comment: 'Pływa kajakiem, prawidłowo wiosłuje wiosłem kajakowym, przestrzega zasad bezpieczeństwa.'
 tasks:
   - 'Uczestniczyłem(-am) w co najmniej jednym spływie kajakowym.'
   - 'W czasie spływów zachowałem(-am) się bezpiecznie, zawsze używałem(-am) kamizelki.'

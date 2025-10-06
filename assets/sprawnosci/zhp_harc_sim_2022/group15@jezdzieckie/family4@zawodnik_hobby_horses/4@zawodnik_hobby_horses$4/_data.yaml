@@ -1,6 +1,7 @@
 slug: zawodnik_hobby_horses
 name: 'Zawodnik Hobby Horses'
 level: 4
+comment: 'Przekazuje wiedzę o trenowaniu i utrzymywaniu w porządku swoich Hobby Horses. Wykona własną stajnię Hobby Horses. Organizuje zawody Hobby Horses dla innych drużyn'
 tasks:
   - 'Wykonałem(-am) stajnię dla moich Hobby Horses. Uszyłem(-am) derki i kantary.'
   - 'Zorganizowałem(-am) dla drużyny zajęcia o tym, jak zrobić własną stajnię Hobby Horses i jak dbać o swoje Hobby Horses.'

@@ -1,6 +1,7 @@
 slug: ratownik
 name: 'Ratownik'
 level: 2
+comment: 'W prawdziwej sytuacji lub podczas symulacji udziela pierwszej pomocy w najczęściej spotykanych urazach w domu, szkole i na obozie.'
 tasks:
   - 'Skompletowałem(-am) apteczkę osobistą.'
   - 'Ułożyłem(-am) poszkodowanego w pozycji bezpiecznej.'

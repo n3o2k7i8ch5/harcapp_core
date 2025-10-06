@@ -1,6 +1,7 @@
 slug: doswiadczony_spadochroniarz
 name: 'Doświadczony Spadochroniarz'
 level: 4
+comment: 'W bezpieczny sposób podchodzi do wykonywania skoków spadochronowych.'
 tasks:
   - 'Odczytałem(-am) i zinterpretowałem(-am) komunikat pogodowy.'
   - 'Na podstawie danych meteo określiłem(-am) kierunek do zrzutu i punkt rozpoczęcia zrzutu skoczków spadochronowych z samolotu.'

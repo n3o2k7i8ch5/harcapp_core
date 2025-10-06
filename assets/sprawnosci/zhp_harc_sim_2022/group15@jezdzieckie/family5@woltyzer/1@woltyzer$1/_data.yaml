@@ -1,6 +1,7 @@
 slug: woltyzer
 name: 'Woltyżer'
 level: 1
+comment: 'Przestrzega podstawowych zasad lonżowania konia. Zna podstawowy sprzęt do woltyżerki. Wsiada i zsiada z konia z obydwóch stron. Wykonuje podstawowe ćwiczenia na koniu gimnastycznym, stojącym oraz chodzącym stępem'
 tasks:
   - 'Prawidłowo wsiadałem(-am) i zsiadałem(-am) z konia, zarówno z prawej, jak i lewej strony (dopuszczalna jest pomoc asystenta).'
   - |

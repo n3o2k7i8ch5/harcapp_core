@@ -1,6 +1,7 @@
 slug: pocztowiec
 name: 'Pocztowiec'
 level: 3
+comment: 'Realizuje w zespołach projekty pocztowe.'
 tasks:
   - 'Uczestniczyłem(-am) w obsłudze pocztowej na zlocie, obozie, imprezie hufca albo imprezie publicznej.'
   - 'Wykonałem(-am) samodzielnie klisze lub pieczątkę dla poczty harcerskiej (np. linoryt).'

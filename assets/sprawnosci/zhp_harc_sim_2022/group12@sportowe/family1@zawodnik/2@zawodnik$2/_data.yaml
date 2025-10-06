@@ -1,6 +1,7 @@
 slug: zawodnik
 name: 'Zawodnik'
 level: 2
+comment: 'Regularnie ćwiczy wybraną dyscyplinę sportów zespołowych oraz uczy innych obowiązujących w niej zasad. Uczestniczy w rozgrywkach wybranej dyscypliny.'
 tasks:
   - 'Nauczyłem(-am) innych zasad gry mojej ulubionej dyscypliny sportów zespołowych (np. siatkówki, piłki nożnej, koszykówki, footballu amerykańskiego, piłki ręcznej).'
   - 'W czasie próby trenowałem(-am) systematycznie min. raz w tygodniu. Skompletowałem(-am) niezbędny sprzęt umożliwiający treningi, np. korki, kask.'

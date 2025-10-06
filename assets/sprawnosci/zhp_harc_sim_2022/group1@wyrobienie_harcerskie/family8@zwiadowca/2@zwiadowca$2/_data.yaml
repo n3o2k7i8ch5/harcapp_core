@@ -1,6 +1,7 @@
 slug: zwiadowca
 name: 'Zwiadowca'
 level: 2
+comment: 'Dobrze orientuje się w terenie. Wykonuje zadania dokładnie i bez zwracania na siebie uwagi.'
 tasks:
   - 'Wskazałem(-am) najkrótszą drogę do ważnych miejsc w swojej miejscowości.'
   - 'Dostarczyłem(-am) ustną wiadomość do adresata w wyznaczonym terminie, przekazując precyzyjnie i w zwięzłej formie powierzoną informację.'

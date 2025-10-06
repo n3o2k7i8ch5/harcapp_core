@@ -1,6 +1,7 @@
 slug: genealog
 name: 'Genealog'
 level: 4
+comment: 'Propaguje genealogię jako sposób na poznawanie historii Polski przez dzieje własnej rodziny.'
 tasks:
   - 'Rozbudowałem(-am) drzewo genealogiczne swojej rodziny do przynajmniej czterech pokoleń wstecz.'
   - |

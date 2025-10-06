@@ -1,6 +1,7 @@
 slug: paralotniarz
 name: '(Para)Lotniarz'
 level: 2
+comment: 'Przygotowuje lotnię do lotu. Rozróżnia rodzaje i zastosowanie lotni.'
 tasks:
   - 'Zademonstrowałem(-am) i wyjaśniłem(-am) kolegom zasady sterowania lotnią lub paralotnią.'
   - 'Brałem(-am) udział w składaniu i rozkładaniu lotni lub paralotni i przygotowaniu jej do lotów. Prawidłowo założyłem(-am) i przymocowałem(-am) uprząż do lotni/paralotni.'

@@ -1,6 +1,7 @@
 slug: mechanik
 name: 'Mechanik'
 level: 3
+comment: 'Poznaje bardziej skomplikowane silniki, potrafi samodzielnie przygotować, sklarować i zabezpieczyć silnik oraz wykonać proste naprawy.'
 tasks:
   - 'Poznałem(-am) budowę mocniejszych silników zaburtowych oraz stacjonarnych, zasady ich działania i metody przenoszenia napędu.'
   - 'Przygotowałem(-am) samodzielnie łódź i silnik do wypłynięcia. Sklarowałem(-am) i zabezpieczyłem(-am) go po pływaniu.'

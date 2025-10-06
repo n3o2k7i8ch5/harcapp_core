@@ -1,6 +1,7 @@
 slug: znawca_sztuk_walki
 name: 'Znawca sztuk walki'
 level: 1
+comment: 'Poznaje podstawowe pozycje oraz techniki w wybranej sztuce walki. Rozwija się sprawnościowo. Ma świadomość, jak bezpiecznie ćwiczyć sztuki walki.'
 tasks:
   - 'Brałem(-am) udział w min. 5 zajęciach dotyczących wybranej sztuk walki.'
   - 'Zapoznałem(-am) się z zasadami panującymi na zajęciach, np. znam etykietę, zasady bezpieczeństwa w trakcie zajęć i stosuję się do nich.'

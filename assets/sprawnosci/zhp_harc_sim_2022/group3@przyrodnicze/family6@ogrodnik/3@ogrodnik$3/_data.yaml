@@ -1,6 +1,7 @@
 slug: ogrodnik
 name: 'Ogrodnik'
 level: 3
+comment: 'Rozpoznaje nasiona mniej popularnych warzyw. Samodzielnie prowadzi własny ogródek warzywny.'
 tasks:
   - 'Rozpoznałem(-am) nasiona rzadziej hodowanych warzyw np. karczochów, jarmużu, rzepy, szpinaku i rukoli.'
   - 'Zaplanowałem(-am) i przeprowadziłem(-am) siew i zbieranie plonów na działce lub w ogrodzie. Nie korzystałem(-am) z nawozów sztucznych oraz oszczędnie gospodarowałem(-am) wodą (np. łapałem(-am) deszczówkę).'

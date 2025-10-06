@@ -1,6 +1,7 @@
 slug: znawca_musztry
 name: 'Znawca musztry'
 level: 2
+comment: 'Prowadzi musztrę zastępu. Występuje w rolach innych niż szeregowy członek grupy.'
 tasks:
   - 'Kierowałem(-am) musztrą zastępu, wykonując: zbiórkę, zmiany szyku, odliczanie.'
   - |

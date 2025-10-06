@@ -1,6 +1,7 @@
 slug: lesny_czlowiek
 name: 'Leśny człowiek'
 level: 4
+comment: 'Jest specjalistą od przetrwania w lesie. Uczy tego młodszych.'
 tasks:
   - 'Spędziłem(-am) samotnie co najmniej jedną noc w lesie (poza obozem) będąc niezauważalny/a dla osób postronnych. Aby nie niszczyć poszycia leśnego, wykorzystałem(-łam) do urządzenia noclegu płachtę biwakową/hamak/tarp/.'
   - 'Przygotowałem(-am) posiłki dla siebie na cały dzień korzystając z darów lasu.'

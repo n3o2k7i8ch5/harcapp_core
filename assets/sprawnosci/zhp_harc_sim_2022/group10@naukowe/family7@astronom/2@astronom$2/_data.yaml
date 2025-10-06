@@ -1,6 +1,7 @@
 slug: astronom
 name: 'Astronom'
 level: 2
+comment: 'Zdobywa podstawową wiedzę z zakresu astronomii, uczy się obserwacji nieba i zjawisk astronomicznych.'
 tasks:
   - 'Korzystałem(-am) z mapy nieba, aby zidentyfikować gwiazdozbiory i najjaśniejsze gwiazdy. Za jej pomocą wyznaczyłem(-am) również układ gwiazd o różnych porach roku i nocy.'
   - 'Wskazałem(-am) na niebie minimum 8 podstawowych gwiazdozbiorów, w tym jeden charakterystyczny dla nieba letniego i jeden dla nieba zimowego.'

@@ -1,6 +1,7 @@
 slug: lotnik_tunelowy
 name: 'Lotnik Tunelowy'
 level: 2
+comment: 'Utrzymuje się stabilnie na strugach w tunelu aerodynamicznym.'
 tasks:
   - 'Zdobyłem(-am) wiedzę i umiejętności na poziomie sprawności (*).'
   - 'Przez okres jednego miesiąca przed lataniem regularnie wykonywałem(-am) ćwiczenia wzmacniające mięśnie ramion, tułowia oraz gibkość.'

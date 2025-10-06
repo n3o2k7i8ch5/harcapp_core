@@ -1,6 +1,7 @@
 slug: pomocnik_sedziego_spadochronowego
 name: 'Pomocnik Sędziego Spadochronowego'
 level: 3
+comment: 'Asystuje sędziemu podczas zawodów spadochronowych.'
 tasks:
   - 'Wykazałem(-am) się znajomością podstawowych przepisów Kodeksu Sportowego FAI dotyczących zawodów spadochronowych.'
   - 'Wykazałem(-am) się znajomością zasad pomiaru i punktowania wyniku co najmniej dwóch dyscyplin spadochronowych.'

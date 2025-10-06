@@ -1,6 +1,7 @@
 slug: kwatermistrz
 name: 'Kwatermistrz'
 level: 2
+comment: 'Dba o sprzęt zastępu. Potrafi naprawiać i konserwować sprzęt. Potrafi zaopiekować się harcówką. '
 tasks:
   - 'Skompletowałem(-am) sprzęt zastępu potrzebny na obozie. Dbałem(-am) o niego w czasie obozu.'
   - 'Brałem(-am) udział w pracach konserwatorsko-naprawczych sprzętu drużyny, szczepu lub hufca po akcji letniej.'

@@ -1,6 +1,7 @@
 slug: pomocnik_weterynarza
 name: 'Pomocnik Weterynarza'
 level: 3
+comment: 'Opowiada o podstawowej anatomii konia. Udziela pomocy w przypadku problemów zdrowotnych. Przekazuje wiedzę na temat temperatury konia, oddechów, tętna, nawodnienia. Zwraca uwagę na szczepienia oraz ich powód.'
 tasks:
   - 'Poznałem(-am) anatomię konia (szkielet, podstawowe układy pokarmowy, krwionośny, mięśniowy, oddechowy). Zaprezentowałem(-am), gdzie znajdują się poszczególne narządy, wskazując je na koniu (anatomia topograficzna).'
   - 'Poznałem(-am) postępowanie teoretyczne i nauczyłem(-am) się, jak udzielić pierwszej pomocy w przypadku zranienia, ochwatu, kolki, odwodnienia, podbicia i mięśniochwatu. W razie nagłego przypadku swoją wiedzę teoretyczną wykorzystałem(-am) w praktyce.'

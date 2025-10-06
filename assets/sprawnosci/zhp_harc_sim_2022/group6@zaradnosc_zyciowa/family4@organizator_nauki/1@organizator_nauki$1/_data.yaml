@@ -1,6 +1,7 @@
 slug: organizator_nauki
 name: 'Organizator nauki'
 level: 1
+comment: 'Wie po co i jak się uczyć, wykorzystuje tę wiedzę w praktyce.'
 tasks:
   - 'Opracowałem(-am) tygodniowy plan zajęć, w którym uwzględniłem(-am) wszystkie swoje zajęcia (lekcje w szkole, odrabianie zadań domowych, zajęcia pozalekcyjne, obowiązki domowe, czas odpoczynku).'
   - 'Zorganizowałem(-am) sobie miejsce do nauki w domu (oświetlenie, ustawienie krzesła itp.).'

@@ -1,6 +1,7 @@
 slug: kronikarz
 name: 'Kronikarz'
 level: 1
+comment: 'Prowadzi kronikę. Na bieżąco odnotowuje ważne wydarzenia.'
 tasks:
   - 'Prowadziłem(-am) w okresie próby kronikę (zastępu, drużyny lub prywatną), posługując się kilkoma rodzajami pisma.'
   - 'Sporządziłem(-am) notatkę z wydarzeń na podstawie relacji świadków'

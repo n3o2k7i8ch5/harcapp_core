@@ -1,6 +1,7 @@
 slug: przyrodnik
 name: 'Przyrodnik'
 level: 3
+comment: 'Rozpoznaje rośliny i zwierzęta występujące w jego/jej regionie. Organizuje wycieczki przyrodnicze w sposób bezpieczny dla uczestników i natury.'
 tasks:
   - |
     Rozpoznałem(-am) i opowiedziałem innym osobom o życiu co najmniej 10 występujących w moim otoczeniu roślin i zwierząt:

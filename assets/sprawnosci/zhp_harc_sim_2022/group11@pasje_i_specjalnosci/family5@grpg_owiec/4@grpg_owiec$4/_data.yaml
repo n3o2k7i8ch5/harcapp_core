@@ -1,6 +1,7 @@
 slug: grpg_owiec
 name: 'GRPGowiec'
 level: 4
+comment: 'Tworzy złożone scenariusze na kilka sesji w różnych systemach. Prowadzi je, tworząc właściwy klimat.'
 tasks:
   - 'Stworzyłem(-am) złożony scenariusz do przeprowadzenia w ciągu kilku sesji w co najmniej dwóch systemach i przeprowadziłem(-am) przynajmniej jeden.'
   - 'Stworzyłem(-am) własne materiały na sesje, dbając o ich estetykę. Zaaranżowałem(-am) przestrzeń w klimatyczny sposób.'

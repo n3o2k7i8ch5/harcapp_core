@@ -1,6 +1,7 @@
 slug: filmowiec
 name: 'Filmowiec'
 level: 3
+comment: 'Nagrywa filmy przy użyciu wybranego środka technicznego. Prezentuje je drużynie/znajomym. Zgłębia wiedzę na temat kina i dzieli się nią z innymi osobami.'
 tasks:
   - 'Poznałem(-am) podstawowe zasady filmowania. Zgodnie z nimi udokumentowałem wydarzenie w drużynie, szkole lub rodzinie'
   - 'Rozróżniam gatunki filmowe. Dopasowałem(-am) je do odbiorcy proponując repertuar stosownie do upodobań moich znajomych.'

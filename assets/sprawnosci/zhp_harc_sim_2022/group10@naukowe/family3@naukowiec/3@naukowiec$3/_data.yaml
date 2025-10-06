@@ -1,6 +1,7 @@
 slug: naukowiec
 name: 'Naukowiec'
 level: 3
+comment: 'Pogłębia wiedzę w wybranej dyscyplinie nauk ścisłych i przyrodniczych. Potrafi ją zaprezentować i wyjaśnić innym. Na podstawie posiadanej wiedzy potrafi sformułować pytanie badawcze, przygotować w oparciu o przyjętą hipotezę doświadczenie oraz wyciągnąć wnioski z jego rezultatów.'
 tasks:
   - 'W czasie próby uczestniczyłem(-am) w kilku warsztatach naukowych bądź zajęciach kółka naukowego/ przedmiotowego.'
   - 'Dzielę się swoją wiedzą – przeprowadziłem(-am) krótkie zajęcia z wykorzystaniem eksperymentów dla młodszych dzieci (np. zuchów, uczniów młodszych klas).'

@@ -1,6 +1,7 @@
 slug: bankier
 name: 'Bankier'
 level: 4
+comment: 'Posiada rozszerzone informacje na temat systemu bankowego. Biegle posługuje się bankowością elektroniczną. Dokonuje podstawowe obliczenia w zakresie określania kosztu pieniądza w czasie oraz ryzyka kursu waluty.'
 tasks:
   - 'Wyliczyłem(-am) ratę równą i malejącą z kredytu oraz zaprezentowałem(-am), jakie są między nimi różnice. Uwzględniłem(-am) w takich obliczeniach element ryzyka kursu waluty oraz podałem(-am) stopę nominalnego oraz realnego jego oprocentowania, z uwzględnieniem wpływu stopy inflacji.'
   - 'Przygotowałem(-am) i ustawiłem(-am) odpowiednie zabezpieczenia dla transakcji zakupu dokonywanych poprzez Internet.'

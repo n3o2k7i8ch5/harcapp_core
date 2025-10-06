@@ -1,6 +1,7 @@
 slug: saddle_fitter
 name: 'Saddle Fitter'
 level: 3
+comment: 'Pokazuje, na jakich mięśniach leży siodło. Wykonuje podstawową ocenę siodła. Przekazuje wiedzę na temat tego, jak siodłać i kiełznać konia. Dyskutuje na temat wad i zalet różnych wodzy pomocniczych.'
 tasks:
   - 'Wymieniłem(-am) i pokazałem(-am) na koniu, na jakich mięśniach leży siodło.'
   - 'Wykonałem(-am) podstawową ocenę siodła: test terlicy, symetria siodła, stan paneli (np. jakość wypełnienia), szerokość kanału. Dowiedziałem(-am) się, dlaczego szerokość kanału min. 6 cm jest ważna dla grzbietu konia.'

@@ -1,6 +1,7 @@
 slug: pomocnik_weterynarza
 name: 'Pomocnik Weterynarza'
 level: 1
+comment: 'Pokazuje kilka najważniejszych struktur kostnych konia. Opowiada o temperaturze i odrobaczaniu oraz o odpowiedniej diecie dla konia, a także potrafi wymienić podstawowe choroby koni.'
 tasks:
   - 'Poznałem(-am) budowę konia. Wskazałem(-am) na koniu przebieg kręgosłupa, łopatkę, nadgarstek, biodro, kolano, staw skokowy.'
   - 'Zmierzyłem(-am) temperaturę konia pod opieką specjalisty, wskazałem(-am) prawidłowy zakres temperatur.'

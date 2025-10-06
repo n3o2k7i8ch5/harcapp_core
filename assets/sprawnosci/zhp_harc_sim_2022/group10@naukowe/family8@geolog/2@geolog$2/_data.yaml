@@ -1,6 +1,7 @@
 slug: geolog
 name: 'Geolog'
 level: 2
+comment: 'Poznaje pracę geologów. Powiększa zbiór skał i minerałów.'
 tasks:
   - 'Nauczyłem(-am) się rozróżniać kilka rodzajów skał. Zaprezentowałem(-am) członkom zastępu swoje zbiory skał i minerałów.'
   - 'Skompletowałem(-am) sprzęt do prac terenowych związanych ze zbieraniem okazów skał i minerałów (m.in. młotek, dłuto, łopatka, lupa).'

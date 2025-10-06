@@ -1,6 +1,7 @@
 slug: lazik
 name: 'Łazik'
 level: 4
+comment: 'Odbywa dłuższe wędrówki w zróżnicowanym terenie. Potrafi zorganizować wędrówkę.'
 tasks:
   - 'Odbyłem(-am) co najmniej pięć samodzielnych wypraw w promieniu kilku kilometrów od miejsca zamieszkania oraz co najmniej jedną dalszą wyprawę poza swój region (niekoniecznie samodzielną).'
   - 'Nocowałem(-am) w lesie bez namiotu, a także w nieznanej miejscowości, korzystając np. ze schroniska.'

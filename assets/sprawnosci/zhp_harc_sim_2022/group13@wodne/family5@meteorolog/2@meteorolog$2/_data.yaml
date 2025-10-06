@@ -1,6 +1,7 @@
 slug: meteorolog
 name: 'Meteorolog'
 level: 2
+comment: 'Rozpoznaje zjawiska pogodowe.'
 tasks:
   - 'Narysowałem(-am) i wytłumaczyłem(-am), na czym polega zjawisko bryzy nocnej i dziennej.'
   - 'Będąc na wycieczce, spływie lub rejsie rozpoznałem(-am), z jaką siłą wieje wiatr w skali Beauforta.'

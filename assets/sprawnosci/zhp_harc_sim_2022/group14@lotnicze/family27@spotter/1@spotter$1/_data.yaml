@@ -1,6 +1,7 @@
 slug: spotter
 name: 'Spotter'
 level: 1
+comment: 'Rozpoznaje samoloty cywilne i wojskowe, znaki sił powietrznych i linii lotniczych. Bezpiecznie porusza się po lotnisku.'
 tasks:
   - 'Rozpoznałem(-am) i rozróżniłem(-am) samoloty cywilne i wojskowe. Rozpoznałem(-am) znaki sił powietrznych i linii lotniczych przynajmniej trzech krajów.'
   - 'Wykazałem(-am) się znajomością zasad bezpiecznego poruszania się po lotniskach.'

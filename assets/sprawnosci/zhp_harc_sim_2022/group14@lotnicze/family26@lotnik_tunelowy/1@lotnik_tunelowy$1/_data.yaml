@@ -1,6 +1,7 @@
 slug: lotnik_tunelowy
 name: 'Lotnik Tunelowy'
 level: 1
+comment: 'Zachowuje spokój w tunelu aerodynamicznym i stosuje się do komend instruktora.'
 tasks:
   - 'Ukończyłem(-am) odpowiednie szkolenie przygotowawcze (instruktaż) do latania w tunelu aerodynamicznym.'
   - 'Wykazałem(-am) się wiedzą na temat bezpieczeństwa w trakcie latania w tunelu (ubiór, zachowanie w tunelu).'

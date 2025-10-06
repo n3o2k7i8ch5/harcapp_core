@@ -1,6 +1,7 @@
 slug: straznik_ognia
 name: 'Strażnik ognia'
 level: 2
+comment: 'Ustawia i rozpala ogniska z odpowiednich materiałów i w odpowiednim miejscu'
 tasks:
   - 'Znam znaczenie ognia w historii ludzkości, opowiedziałem(-am) w zastępie, jak rozpalano go i korzystano z niego na przestrzeni wieków.'
   - 'Dowiedziałem(-am) się, w jakich miejscach można rozpalić ognisko, a także, jakie jest znaczenie martwego drewna w lesie. Samodzielnie znalazłem(-am) i przygotowałem materiały na ognisko. Ułożyłem(-am) stos i rozpaliłem(-am) ognisko w legalnym, właściwie zabezpieczonym miejscu ogniskowym.'

@@ -1,6 +1,7 @@
 slug: zaklinacz_koni
 name: 'Zaklinacz Koni'
 level: 2
+comment: 'Uczy konie kilku sztuczek. Widzi wady i zalety sztuczek oraz wskazuje, z jakich naturalnych zachowań wywodzą się sztuczki. Wymienia autorytety, które pracują na zasadzie sztuczek.'
 tasks:
   - 'Pod okiem specjalisty nauczyłem(-am) konie trzech dowolnych sztuczek.'
   - 'Wskazałem(-am) zalety i wady konkretnych sztuczek, np. leżenie, wyrzut nogi, wyrzut z zadnich nóg.'

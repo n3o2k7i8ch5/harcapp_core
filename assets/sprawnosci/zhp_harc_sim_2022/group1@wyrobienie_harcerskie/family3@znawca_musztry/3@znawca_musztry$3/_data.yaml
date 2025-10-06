@@ -1,6 +1,7 @@
 slug: znawca_musztry
 name: 'Znawca musztry'
 level: 3
+comment: 'Prowadzi apel drużyny. Wykorzystuje musztrę na poziomie niezbędnym oboźnemu.'
 tasks:
   - 'Kierowałem(-am) apelem drużyny.'
   - 'Wykorzystałem(-am) musztrę do zorganizowanego przemieszczenia drużyny, np. na posiłek.'

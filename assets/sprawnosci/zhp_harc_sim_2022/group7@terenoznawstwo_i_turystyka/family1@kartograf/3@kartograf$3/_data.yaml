@@ -1,6 +1,7 @@
 slug: kartograf
 name: 'Kartograf'
 level: 3
+comment: 'Wykonuje szczegółowe plany i szkice. Do prac topograficznych wykorzystuje różne przyrządy.'
 tasks:
   - 'Wyznaczyłem(-am) kierunki świata w terenie z pomocą gwiazd oraz leśnych słupków oddziałowych.'
   - 'Przy pomocy busoli wykonałem(-am) szczegółowy plan obozu.'

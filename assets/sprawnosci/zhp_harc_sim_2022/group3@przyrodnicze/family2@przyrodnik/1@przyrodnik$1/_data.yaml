@@ -1,6 +1,7 @@
 slug: przyrodnik
 name: 'Przyrodnik'
 level: 1
+comment: 'Rozpoznaje najpopularniejsze rośliny i zwierzęta leśne. Opiekuje się roślinami domowymi.'
 tasks:
   - 'Rozpoznałem(-am) podstawowe jadalne rośliny leśne (np. borówka, poziomka, malina, jeżyna, orzechy laskowe).'
   - 'Rozpoznałem(-am) zwierzęta dziko żyjące w Polsce: sarny, jelenie, dziki, łosie, żubry, bobry, wilki. Co najmniej dwa z nich widziałem na własne oczy.'

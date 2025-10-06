@@ -1,6 +1,7 @@
 slug: ratownik
 name: 'Ratownik'
 level: 1
+comment: 'Podczas rzeczywistego wydarzenia lub symulacji wykazuje się umiejętnościami udzielania pierwszej pomocy w sytuacjach, które mogą przydarzyć się w domu. Zna numery alarmowe, wie, kiedy i w jaki sposób z nich korzystać.'
 tasks:
   - |
     Udzieliłem(-am) pomocy w następujących sytuacjach:

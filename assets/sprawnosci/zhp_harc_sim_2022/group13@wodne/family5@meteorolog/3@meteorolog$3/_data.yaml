@@ -1,6 +1,7 @@
 slug: meteorolog
 name: 'Meteorolog'
 level: 3
+comment: 'Potrafi określić i przewidzieć zjawiska pogodowe.'
 tasks:
   - 'Zaprezentowałem(-am) skalę Beauforta w zakresie od 0 do 7 stopni. W czasie zajęć nad wodą pięć razy wskazałem(-am), z jaką siłą wieje wiatr.'
   - 'Posługiwałem(-am) się skalą stanu morza do określenia warunków na jeziorze.'

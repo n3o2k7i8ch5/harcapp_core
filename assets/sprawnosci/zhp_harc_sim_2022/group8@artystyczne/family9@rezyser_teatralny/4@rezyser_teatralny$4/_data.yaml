@@ -1,6 +1,7 @@
 slug: rezyser_teatralny
 name: 'Reżyser Teatralny'
 level: 4
+comment: 'Reżyseruje wybrane przez siebie sztuki lub inne przedstawienia. Dokonuje doboru aktorów. Udziela wskazówek aktorom.'
 tasks:
   - 'Przygotowałem(-am) do wystawienia sztukę teatru dramatycznego (komedię lub tragedię), teatru lalek, teatru tańca lub pantomimę. Dobrałem(-am) aktorów i przeprowadziłem(-am) próby.'
   - 'Opracowałem(-am) reżyserię wybranej przez siebie sztuki lub programu, planując wykorzystanie sceny, ruch sceniczny, rolę muzyki i tańca w przedstawieniu i oczekiwania wobec scenografa.'

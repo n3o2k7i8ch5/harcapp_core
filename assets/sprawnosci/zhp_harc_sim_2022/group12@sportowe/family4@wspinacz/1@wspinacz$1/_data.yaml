@@ -1,6 +1,7 @@
 slug: wspinacz
 name: 'Wspinacz'
 level: 1
+comment: 'Wspina się na sztucznej ściance z zachowaniem zasad bezpieczeństwa. Korzysta ze sprzętu wspinaczkowego.'
 tasks:
   - 'Przeprowadziłem(-am) rozgrzewkę przed treningiem oraz rozciągałem(-am) się po treningu.'
   - 'Poznałem(-am) podstawowe komendy używane w trakcie wspinaczki i stosowałem(-am) je za każdym razem, kiedy się wspinałem(-am).'

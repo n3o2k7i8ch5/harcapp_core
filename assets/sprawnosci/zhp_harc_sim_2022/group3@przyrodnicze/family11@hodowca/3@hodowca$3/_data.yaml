@@ -1,6 +1,7 @@
 slug: hodowca
 name: 'Hodowca (ptaków, gryzoni, drobiu, ryb)'
 level: 3
+comment: 'Świadomie kultywuje hodowlę wybranych zwierząt (np. ptaków, gryzoni, drobiu, ryb).'
 tasks:
   - |
     Dbam o zdrowie moich zwierząt, wykonując jedno z poniższych zadań:

@@ -1,3 +1,6 @@
 slug: enigma
 name: 'Enigma'
 
+notesForLeaders:
+  - 'W tej sprawności wykorzystujemy alfabet Morse’a jako przykład prostego systemu kodowania informacji. Nie ma potrzeby wymagania, by zdobywający sprawności uczył się go na pamięć.'
+

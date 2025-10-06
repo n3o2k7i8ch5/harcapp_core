@@ -1,6 +1,7 @@
 slug: piosenkarz
 name: 'Piosenkarz'
 level: 1
+comment: 'Chętnie śpiewa z drużyną. Inicjuje naukę nowych piosenek w zastępie. Wie jak dbać o swój głos, zna podstawowe zasady higieny głosu.'
 tasks:
   - 'Rozpocząłem(-am) śpiew kilku piosenek na zbiórce zastępu i zaśpiewałem piosenkę w duecie.'
   - 'Nauczyłem(-am) zastęp 1 nowej piosenki.'

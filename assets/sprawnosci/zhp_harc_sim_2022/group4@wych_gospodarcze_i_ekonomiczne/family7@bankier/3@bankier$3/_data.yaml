@@ -1,6 +1,7 @@
 slug: bankier
 name: 'Bankier'
 level: 3
+comment: 'Posiada podstawowe informacje na temat systemu bankowego. Jest świadomy(-a) sposobu obiegu pieniądza w gospodarce oraz dostępnych form jego inwestowania i związanych z tym ryzyk.'
 tasks:
   - 'Wyjaśniłem(-am) innym, jak wygląda obieg pieniądza w gospodarce. Przygotowałem(-am) na ten temat dowolną prezentację.'
   - 'Obliczyłem(-am) odsetki, jakie uzyskałbym(uzyskałabym) w wypadku założenia rok temu rocznej lokaty w walucie (kwota w EUR) w wysokości 100 zł (przeliczonych na EUR), przy użyciu aktualnej stopy oprocentowania, jaką proponuje wybrany przeze mnie bank oraz kursu waluty sprzed roku i dzisiejszego oraz przy założeniu, że nie uwzględniona zostaje kapitalizacja (procent prosty).'

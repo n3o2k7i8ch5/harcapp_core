@@ -1,6 +1,7 @@
 slug: hipoterapeuta
 name: 'Hipoterapeuta'
 level: 4
+comment: 'Zna kanony pracy hipoterapeuty. Dobiera konia do pacjenta oraz układa wstępny plan zajęć. Orientuje się w podstawowych jednostkach chorobowych oraz jak oddziaływaniu konia na pacjenta. Ocenia postawę jeźdźca.'
 tasks:
   - 'Poznałem(-am) kanony pracy hipoterapeuty i przedstawiłem(-am) je zainteresowanym kolegom z drużyny.'
   - 'Pod okiem specjalisty dobrałem(-am) konia do pacjenta, a także wybrałem(-am) miejsce, czas zajęć oraz plan zmiany kierunków.'

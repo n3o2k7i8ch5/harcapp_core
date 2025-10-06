@@ -1,6 +1,7 @@
 slug: przyjaciel_zwierzat
 name: 'Przyjaciel zwierząt'
 level: 1
+comment: 'Zna zwierzęta żyjące dziko w swojej najbliższej okolicy i wie, jak można im pomagać. Wie, jak powinno opiekować się wybranymi zwierzętami domowymi.'
 tasks:
   - 'Przygotowałem(-am) dla zastępu quiz, grę planszową itp. wymagającą rozpoznania na zdjęciach lub rysunkach minimum 15 gatunków zwierząt żyjących dziko w Polsce.'
   - |

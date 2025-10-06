@@ -1,6 +1,7 @@
 slug: woltyzer
 name: 'Woltyżer'
 level: 3
+comment: 'Prezentuje wymyślone przez siebie układy. Przekazuje wiedzę na temat woltyżerki mniej doświadczonym osobom, uczy je podstawowych ćwiczeń. Prawidłowo wykonuje ćwiczenia na koniu stojącym oraz chodzącym w trzech chodach.'
 tasks:
   - 'Przedstawiłem(-am) swojemu zastępowi w dowolny sposób regulamin dyscypliny woltyżerka.'
   - |

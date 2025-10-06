@@ -1,6 +1,7 @@
 slug: kartograf
 name: 'Kartograf'
 level: 2
+comment: 'Sprawnie posługuje się mapami i planami. Porusza się w terenie, trafiając do celu przy pomocy mapy. Rysuje proste szkice sytuacyjne.'
 tasks:
   - 'Wyznaczyłem(-am) kilkakrotnie kierunki świata w terenie, za pomocą gwiazd lub słońca.'
   - 'Narysowałem(-am) prosty szkic sytuacyjny na potrzeby gry lub rozplanowania obozowiska.'

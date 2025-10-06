@@ -1,6 +1,7 @@
 slug: organizator_czasu
 name: 'Organizator czasu'
 level: 4
+comment: 'Prowadząc projekty, właściwie dobiera narzędzia ze znanych mu metodyk zarządzania projektami, biorąc pod uwagę charakter zespołu i samego projektu.'
 tasks:
   - 'Poznałem(-am) podstawy zarządzania projektami, wiem czym jest agile i waterfall. Do prowadzonego przez siebie projektu dobrałem(-am) takie narzędzia z tych metodyk projektowych, które pasowały do charakteru grupy i prowadzonego projektu tak, by wspierały efektywność pracy, a nie ją utrudniały.'
   - 'Poznałem(-am) kilka narzędzi do planowania i zarządzania pracą zespołu lub własną (np. Trello, Asana, Microsoft Planner, Habitica). Wybrałem(-am) jedno i zastosowałem(-am) w pracy własnej lub zespołu, konsekwentnie używając go w trakcie trwania zadania.'

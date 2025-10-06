@@ -1,6 +1,7 @@
 slug: makler
 name: 'Makler'
 level: 4
+comment: 'Zna zasady funkcjonowania giełdy oraz innych rynków finansowych i potrafi wykorzystać je praktycznie w podejmowanych decyzjach inwestycyjnych. Wykorzystał(-a) w działaniu wiedzę na temat zasad inwestowania oraz oceny ryzyka. Potrafi obliczyć rentowność instrumentów finansowych oraz wyjaśnić innym podstawowe pojęcia i zasady funkcjonowania rynków finansowych'
 tasks:
   - 'Na podstawie dostępnych w Internecie materiałów przeprowadziłem(-am) dla członków drużyny test oceny skłonności do ryzyka inwestycyjnego.'
   - 'Dokonałem(-am) analizy ofert domów maklerskich i na jej podstawie otworzyłem(-am) własny rachunek inwestycyjny.'

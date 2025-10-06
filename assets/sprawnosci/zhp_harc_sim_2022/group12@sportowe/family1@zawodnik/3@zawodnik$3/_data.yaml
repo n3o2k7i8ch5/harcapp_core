@@ -1,6 +1,7 @@
 slug: zawodnik
 name: 'Zawodnik'
 level: 3
+comment: 'Samodzielnie planuje swój rozwój w ramach trenowania wybranej dyscypliny sportów zespołowych. Uczy innych podstawowych podań i prostych trików. Testuje różne taktyki przydatne w meczach. Organizuje i sędziuje rozgrywki wybranej dyscypliny'
 tasks:
   - 'Zorganizowałem(-am) zawody, podczas których pełniłem(-am) funkcję sędziego.'
   - 'Zapoznałem(-am) się z różnymi taktykami gry. W czasie dwóch rozgrywek przeprowadziłem(-am) taktykę, którą przekazałem(-am) innym członkom drużyny.'

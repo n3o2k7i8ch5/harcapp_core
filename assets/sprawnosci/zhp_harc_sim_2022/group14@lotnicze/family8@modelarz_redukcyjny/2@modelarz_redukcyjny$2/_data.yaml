@@ -1,6 +1,7 @@
 slug: modelarz_redukcyjny
 name: 'Modelarz Redukcyjny'
 level: 2
+comment: 'Konstruuje modele samolotów wiernie oddające wygląd.'
 tasks:
   - 'Rozpoznałem(-am) 3 typy polskich szybowców i 12 typów używanych w Polsce samolotów lub śmigłowców.'
   - 'Wykazałem(-am) się znajomością nazw części samolotu, wyjaśniłem(-am) działanie sterów.'

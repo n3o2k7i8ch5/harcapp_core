@@ -1,6 +1,7 @@
 slug: strazak
 name: 'Strażak'
 level: 4
+comment: 'W czasie ćwiczeń kieruje pracą grupy harcerzy-strażaków.'
 tasks:
   - 'Zebrałem(-am) informacje o stanie zaopatrzenia wybranej miejscowości w wodę oraz ustaliłem(-am) najdogodniejsze miejsce na ustawienie motopompy.'
   - |

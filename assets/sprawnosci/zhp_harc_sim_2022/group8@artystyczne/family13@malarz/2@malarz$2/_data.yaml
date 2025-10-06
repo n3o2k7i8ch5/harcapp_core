@@ -1,6 +1,7 @@
 slug: malarz
 name: 'Malarz'
 level: 2
+comment: 'Uzyskuje pożądane kolory łącząc farby. W swoich pracach posługuje się kilkoma technikami malarskimi. Odwiedza wystawy malarskie, analizując wnikliwie wybrane dzieła. Zna twórczość wybranych malarzy.'
 tasks:
   - 'Odpowiednio wymieszałem(-am) farby, aby uzyskać kolor: pomarańczowy, fioletowy, zielony, brązowy, szary. Wykorzystałem(-am), w tym celu tylko barwy podstawowe.'
   - 'Namalowałem(-am) minimum 5 obrazów, posługując się co najmniej dwiema technikami malarskimi np. akwarela, tempera, akryl.'

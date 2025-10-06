@@ -1,6 +1,7 @@
 slug: podkuwacz
 name: 'Podkuwacz'
 level: 1
+comment: 'Zna budowę anatomiczną kopyta, rodzaje podków oraz zasady prawidłowego podkuwania koni. Pomaga podkuwaczowi (kowalowi). Trzyma prawidłowo nogi konia. Pielęgnuje kopyta w odpowiedni sposób.'
 tasks:
   - 'Poznałem(-am) budowę anatomiczną końskiego kopyta.'
   - 'Poznałem(-am) rodzaje podków i ich przeznaczenie oraz zasady prawidłowego podkuwania koni.'

@@ -1,6 +1,7 @@
 slug: plywak
 name: 'Pływak'
 level: 4
+comment: 'Zna wszystkie (4) style pływackie. Jest w stanie przepłynąć większy dystans bez przerwy. Wie, w jaki sposób można holować tonącego.'
 tasks:
   - 'Przepłynąłem(-am) 800 m, dowolnie wybierając style płynięcia, bez przerw.'
   - 'Przepłynąłem(-am) 100 metrów stylem zmiennym (25 m stylem motylkowym, 25 m grzbietem, 25 m żabką i 25 m kraulem).'

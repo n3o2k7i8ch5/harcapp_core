@@ -1,6 +1,7 @@
 slug: podkuwacz
 name: 'Podkuwacz'
 level: 2
+comment: 'Rozpoznaje wady budowy kopyt. Prawidłowo pielęgnuje kopyta, odpowiednio reaguje przy problemach z nimi związanymi. Pomaga przy podkuwaniu. Przekazuje wiedzę dotyczącą podnoszenia kończyn i codziennej pielęgnacji innym osobom.'
 tasks:
   - 'Rozpoznałem(-am) wady budowy kopyt.'
   - 'Poznałem(-am) zasady pielęgnacji kopyt (postępowania w przypadku gnicia strzałki, obluzowania podków, codziennej pielęgnacji) i stosowałem(-am) je w praktyce.'

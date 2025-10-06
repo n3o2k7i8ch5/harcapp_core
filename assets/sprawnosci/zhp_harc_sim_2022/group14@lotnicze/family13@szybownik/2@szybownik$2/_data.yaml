@@ -1,6 +1,7 @@
 slug: szybownik
 name: 'Szybownik'
 level: 2
+comment: 'Asystuje przy startach szybowców.'
 tasks:
   - 'Wykazałem(-am) się wiedzą, jakie siły działają na szybowiec w locie i jakie warunki sprzyjają lotom szybowcowym. W terenie lub na mapie wskazałem(-am), gdzie powstają prądy wznoszące.'
   - 'Wykazałem(-am) się wiedzą dot. zasad bezpieczeństwa obowiązujące na starcie szybowcowym. Pełniłem(-am) funkcję dyżurnego i chronometrażysty na starcie.'

@@ -1,6 +1,7 @@
 slug: genealog
 name: 'Genealog'
 level: 2
+comment: 'Poznaje historię swojej rodziny.'
 tasks:
   - 'Odtworzyłem(-am) drzewo genealogiczne swojej rodziny przynajmniej trzy pokolenia wstecz, korzystając np. z dokumentów rodzinnych.'
   - |

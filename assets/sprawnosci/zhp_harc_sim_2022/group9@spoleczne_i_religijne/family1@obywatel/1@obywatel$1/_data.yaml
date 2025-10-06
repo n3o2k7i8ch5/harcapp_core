@@ -1,6 +1,7 @@
 slug: obywatel
 name: 'Obywatel'
 level: 1
+comment: 'Aktywnie poznaje swój kraj.'
 tasks:
   - 'Znam historię godła i barw narodowych. Wiem, co oznaczają i potrafię się wobec nich zachować. Wywiesiłem(-am) flagę biało-czerwoną w dniu święta państwowego.'
   - 'Razem z zastępem lub drużyną zaśpiewałem(-am) hymn państwowy w czasie uroczystości.'

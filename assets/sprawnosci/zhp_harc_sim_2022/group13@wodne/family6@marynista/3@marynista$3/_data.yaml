@@ -1,6 +1,7 @@
 slug: marynista
 name: 'Marynista'
 level: 3
+comment: 'Zna historie Polskiej Marynarki Wojennej oraz Harcerskiego Ruchu Wodnego. Zna kilka szant i piosenek żeglarskich. Wie, jakie gatunki chronione są w Bałtyku i na czym polega ich ochrona.'
 tasks:
   - 'Poznałem(-am) historię żaglowca Zawisza Czarny oraz Leonida Teligi i jego jachtu Opty.'
   - 'Poznałem(-am) położenie przynajmniej jednej polskiej platformy wiertniczej na Morzu Bałtyckim.'

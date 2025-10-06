@@ -1,6 +1,7 @@
 slug: domownik
 name: 'Domownik'
 level: 1
+comment: 'Regularnie wypełniania swoje obowiązki domowe. Wykonuje podstawowe czynności w domu.'
 tasks:
   - 'Przez minimum tydzień podjąłem(-am) się dodatkowego obowiązku, ustalonego z rodzicami, na rzecz domu, np. zmywałem(-am) naczynia, wynosiłem(-am) śmieci.'
   - 'W czasie próby segregowałem(-am) śmieci. Jeśli dotąd go nie było, zorganizowałem(-am) w domu miejsce na różne rodzaje surowców wtórnych.'

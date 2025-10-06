@@ -1,6 +1,7 @@
 slug: szyper
 name: 'Szyper'
 level: 4
+comment: 'Kieruje jachtem podczas szkolenia i żeglugi swobodnej.'
 tasks:
   - 'Podczas żeglugi kierowałem(-am) pracą załogi poprzez omówienie manewru planowego, zapasowego i awaryjnego, przydzielanie stanowisk i zadań oraz ustalenie zasad komunikacji w trakcie.'
   - 'Wyjaśniłem(-am) zasady optymalnego ustawienie żagli do panujących warunków oraz zademonstrowałem(-am) prawidłowy trym w różnych kursach względem wiatru, wskazując wiatr rzeczywisty i pozorny.'

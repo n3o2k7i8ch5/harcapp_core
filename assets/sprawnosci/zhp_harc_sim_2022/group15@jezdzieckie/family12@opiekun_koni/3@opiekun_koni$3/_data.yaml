@@ -1,6 +1,7 @@
 slug: opiekun_koni
 name: 'Opiekun Koni'
 level: 3
+comment: 'Prawidłowo kieruje zespołem podczas prac stajennych. Przekazuje wiedzę na temat dobrostanu koni oraz ich prawidłowego utrzymania.'
 tasks:
   - 'Kierowałem(-am) pracą wachty stajennej na obozie lub w klubie.'
   - 'Przedstawiłem(-am) zastępowi lub drużynie 5 zasad dobrostanu zwierząt, w swojej pracy z końmi zastosowałem(-am) te zasady w praktyce.'

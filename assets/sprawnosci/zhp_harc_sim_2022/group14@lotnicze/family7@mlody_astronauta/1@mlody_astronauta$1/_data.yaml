@@ -1,6 +1,7 @@
 slug: mlody_astronauta
 name: 'Młody Astronauta'
 level: 1
+comment: 'Konstruuje proste modele rakiet i potrafi wyjaśnić ich działanie.'
 tasks:
   - 'Poznałem(-am) i stosuję zasady bezpieczeństwa używania modeli rakiet.'
   - 'Wyjaśniłem(-am) zasady poruszania się rakiety oraz budowę wyrzutni i urządzenia do startu modeli rakiet.'

@@ -1,6 +1,7 @@
 slug: krotkofalowiec
 name: 'Krótkofalowiec'
 level: 2
+comment: 'Prowadzi nasłuchy, poznaje podstawową wiedzę krótkofalarską.'
 tasks:
   - 'Poznałem(-am) międzynarodowy podział pasm radiowych oraz służby korzystające z nich. Opowiedziałem(-am) o tym swojemu zastępowi.'
   - 'Poznałem(-am) zakresy amatorskich pasm KF i ich wewnętrzny podział oraz podstawowe wyrazy Q-kodu i podstawowe skróty służbowe.'

@@ -1,6 +1,7 @@
 slug: bankier
 name: 'Bankier'
 level: 2
+comment: 'Posiada wiedzę o tym, czym jest pieniądz i jakie pełni w gospodarce funkcje. Posiada podstawowe umiejętności w zakresie obliczania oprocentowania oraz wykorzystania podstawowych form przekazywania środków finansowych innym podmiotom lub osobom.'
 tasks:
   - 'Poznałem(-am) pojęcia takie jak: cechy pieniądza, funkcje pieniądza oraz jestem świadomy(-a) ewolucji form pieniądza. Jedno z tych pojęć wyjaśniłem(-am) na forum zastępu przygotowując graficzną prezentację.'
   - |

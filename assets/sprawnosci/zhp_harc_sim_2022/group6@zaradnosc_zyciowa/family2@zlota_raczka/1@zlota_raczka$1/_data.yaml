@@ -1,6 +1,7 @@
 slug: zlota_raczka
 name: 'Złota rączka'
 level: 1
+comment: 'Poradził/a sobie w prostych sytuacjach domowych. Używał/a podstawowych narzędzi do prac domowych (młotek, igła, śrubokręt, obcęgi, nóż).'
 tasks:
   - 'Przez okres próby utrzymywałem(-am) porządek w pokoju, w którym mieszkam.'
   - |

@@ -1,6 +1,7 @@
 slug: skoczek
 name: 'Skoczek'
 level: 3
+comment: 'Pokonuje parkur złożony z więcej niż 8 przeszkód. Kompletuje ubiór na zawody zgodny z obowiązującym regulaminem. Bierze udział w zawodach. Przekazuje wiedzę na temat jazdy skokowej i zawodów.'
 tasks:
   - 'Przejechałem(-am) parkur złożony z więcej niż 8 przeszkód o wysokości powyżej 80 cm (duże konie) i 70 cm (kucyki).'
   - 'Skompletowałem(-am) prawidłowy ubiór na zawody jeździeckie.'

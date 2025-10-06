@@ -1,6 +1,7 @@
 slug: nawigator
 name: 'Nawigator'
 level: 2
+comment: 'Używa kompasu i odbiornika satelitarnego, orientuje się w przestrzeni na podstawie mapy papierowe lub cyfrowej.'
 tasks:
   - 'Wyznaczyłem(-am) azymut na mapie i w terenie, posługując się kompasem magnetycznym.'
   - 'Ustaliłem(-am) współrzędne geograficzne swojego domu lub namiotu oraz kilku wybranych punktów w mojej okolicy przy użyciu odbiornika nawigacji satelitarnej (np. aplikacja GPS w telefonie).'

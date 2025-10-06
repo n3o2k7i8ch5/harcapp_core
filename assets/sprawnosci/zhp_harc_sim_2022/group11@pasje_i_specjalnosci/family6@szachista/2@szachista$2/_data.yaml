@@ -1,6 +1,7 @@
 slug: szachista
 name: 'Szachista'
 level: 2
+comment: 'Potrafi prawidłowo rozgrywać 3 wybrane debiuty i obronić się przed nimi, grając białymi i czarnymi. Potrafi prawidłowo rozgrywać podstawowe końcówki pionkowe. Potrafi rozwiązywać zadania szachowe z wykorzystaniem podstawowych kombinacji, potrafi także motywy te wykorzystać w partii.'
 tasks:
   - 'Rozegrałem(-am) przynajmniej 9 partii szachowych, w których zastosowałem 3 znane mi debiuty, grając zarówno białymi, jak i czarnymi.'
   - 'Rozegrałem(-am) z przeciwnikiem przynajmniej 6 końcówek z wykorzystaniem wyłącznie pionków (1, 2 lub 3 pionki samodzielnie lub też w różnych wariantach, gdzie przeciwnik też posiada pionki).'

@@ -1,6 +1,7 @@
 slug: mechanik
 name: 'Mechanik'
 level: 2
+comment: 'Potrafi prawidłowo używać silnika, dbać o niego i sprawdzić podstawowe parametry.'
 tasks:
   - 'Poznałem(-am) szczegółową budowę łodzi motorowodnej oraz zasady działania silnika dwu- i czterosuwowego.'
   - 'Przygotowałem(-am) silnik do uruchomienia. Sklarowałem(-am) go po pływaniu.'

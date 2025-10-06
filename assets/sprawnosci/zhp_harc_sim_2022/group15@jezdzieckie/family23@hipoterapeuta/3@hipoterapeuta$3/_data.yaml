@@ -1,6 +1,7 @@
 slug: hipoterapeuta
 name: 'Hipoterapeuta'
 level: 3
+comment: 'Przedstawia wiedzę na temat hipoterapii i jej rodzaje. Prowadzi konia, wymyśla ćwiczenia. Dba o dopasowanie sprzętu przed hipoterapią. Zna wskazania i przeciwwskazania do tej terapii.'
 tasks:
   - 'Poznałem(-am) rodzaje hipoterapii, w dowolny sposób swoją wiedzę na ten temat przedstawiłem(-am) zastępowi.'
   - 'Wymieniłem(-am) min. po 5 wskazań i przeciwwskazań do hipoterapii.'

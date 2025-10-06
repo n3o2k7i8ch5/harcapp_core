@@ -1,6 +1,7 @@
 slug: spadochroniarz_ratownik
 name: 'Spadochroniarz Ratownik'
 level: 4
+comment: 'Reaguje na niebezpieczeństwa, stosuje odpowiednie algorytmy zachowania, współpracuje ze służbami mundurowymi.'
 tasks:
   - 'Wykazałem(-am) się wiedzą na temat bojowego ratownictwa i poszukiwań (CSAR), w szczególności zastosowania w tym celu spadochroniarstwa.'
   - 'Rozpoznałem(-am) oznaczenia stopni służbowych obowiązujących w formacjach działających na rzecz bezpieczeństwa powszechnego (Wojsko, Policja, Straż Pożarna).'

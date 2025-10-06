@@ -1,6 +1,7 @@
 slug: k6
 name: 'K6'
 level: 4
+comment: 'Tworzy własne gry stolikowe. Rozumie różnicę między „ciekawym pomysłem” a „grywalnym pomysłem”.'
 tasks:
   - 'Określiłem(-am) potrzebę edukacyjną, docelową grupę wiekową i zakres wiedzy, który można przekazać za pomocą gry. Odpowiednio dobrałem(-am) mechanikę do projektowanej gry i stworzyłem(-am) fabułę.'
   - 'Zapoznałem(-am) się z materiałami o projektowaniu gier - np. Laboratorium Gier. Stworzyłem(-am) prototyp gry w kilku egzemplarzach i przeprowadziłem(-am) testy. Na bazie uzyskanej informacji zwrotnej poprawiłem(-am) grę i przeprowadziłem(-am) kolejną serię testów. Cykl powtarzałem(-am) do momentu, gdy gra stała się grywalna (uzyskała dobre oceny od 125 testujących i w większości określali ją jako atrakcyjną).'

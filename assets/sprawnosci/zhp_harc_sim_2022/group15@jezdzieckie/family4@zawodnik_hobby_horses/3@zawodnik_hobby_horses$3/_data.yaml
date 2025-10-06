@@ -1,6 +1,7 @@
 slug: zawodnik_hobby_horses
 name: 'Zawodnik Hobby Horses'
 level: 3
+comment: 'Regularnie trenuje na własnoręcznie zrobionych min. trzech Hobby Horsach. Prowadzi zajęcia majsterkowe dla zastępu lub drużyny na których pokazuje, jak zrobić własnego Hobby Horsa. Bierze udział w przygotowaniach zawodów „Potęgi Skoku” i Dnia Hobby Horsing.'
 tasks:
   - 'Wykonałem(-am) co najmniej trzy Hobby Horses. Powiedziałem(-am), jakiej są rasy i maści. Regularnie na nich trenuję.'
   - 'Przeprowadziłem(-am) zbiórkę o tym, jak zrobić własnego Hobby Horsa.'

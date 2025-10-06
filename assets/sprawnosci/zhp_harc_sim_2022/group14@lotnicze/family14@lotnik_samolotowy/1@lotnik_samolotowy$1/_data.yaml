@@ -1,6 +1,7 @@
 slug: lotnik_samolotowy
 name: 'Lotnik Samolotowy'
 level: 1
+comment: 'Interesuje się pilotażem lotniczym.'
 tasks:
   - 'Wymieniłem(-am) wymagania zdrowotne i psychiczne stawiane lotnikom. Wykazałem(-am) się wiedzą dot. warunków przyjęcia na szkolenia lotnicze (wiek, wykształcenie) i główne rodzaje pracy w lotnictwie.'
   - 'Wykazałem(-am) się znajomością nazw głównych części samolotu.'

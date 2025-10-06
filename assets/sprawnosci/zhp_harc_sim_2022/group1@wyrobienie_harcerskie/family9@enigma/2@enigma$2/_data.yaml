@@ -1,6 +1,7 @@
 slug: enigma
 name: 'Enigma'
 level: 2
+comment: 'Potrafi porozumiewać się na odległość za pomocą tradycyjnych systemów szyfrowania i przekazywania informacji. Konstruuje proste szyfry na potrzeby swojego zastępu lub drużyny.'
 tasks:
   - |
     Wykonałem jedno z zadań:

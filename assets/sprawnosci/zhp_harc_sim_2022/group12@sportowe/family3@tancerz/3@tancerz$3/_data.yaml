@@ -1,6 +1,7 @@
 slug: tancerz
 name: 'Tancerz'
 level: 3
+comment: 'Swobodnie tańczy różne rodzaje tańca. W wybranej dziedzinie tańca bierze udział w zawodach. Uczy podstaw tańca inne osoby.'
 tasks:
   - 'Wziąłem(wzięłam) udział w konkursie tanecznym, starając się uzyskać jak najlepszą ocenę.'
   - 'Zatańczyłem(-am) publicznie trzy choreografie prezentujące wybrany taniec: towarzyski, taniec ludowy lub taniec nowoczesny.'

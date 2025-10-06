@@ -1,6 +1,7 @@
 slug: lyzwiarz
 name: 'Łyżwiarz'
 level: 1
+comment: 'Potrafi poruszać się na łyżwach. Regularnie uczęszcza na lodowisko'
 tasks:
   - 'Nauczyłem(-am) się jeździć na łyżwach do przodu, przejechałem(-am) bez wywrotki kilka kółek na lodowisku.'
   - 'Zahamowałem(-am) skutecznie na łyżwach (nie wpadając w bandę).'

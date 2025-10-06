@@ -1,6 +1,7 @@
 slug: radiomodelarz
 name: 'Radiomodelarz'
 level: 2
+comment: 'Obsługuje model samolotu sterowany zdalnie i potrafi wyjaśnić działanie zdalnego sterowania.'
 tasks:
   - 'Poznałem(-am) przynajmniej dwa systemy zdalnego sterowania samolotem; wiem, czym one się charakteryzują. Dowiedziałem(-am) się, jaką rolę w urządzeniu zdalnie sterowanym spełniają przekaźniki elektromechaniczne, czujniki i silniki elektryczne.'
   - 'Wyjaśniłem(-am), gdzie i na jakich warunkach można uzyskać zezwolenie na budowę urządzeń nadawczo-odbiorczych do sterowania radiomodelarskiego.'

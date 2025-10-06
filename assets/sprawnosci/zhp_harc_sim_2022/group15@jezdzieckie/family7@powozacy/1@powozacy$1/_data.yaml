@@ -1,6 +1,7 @@
 slug: powozacy
 name: 'Powożący'
 level: 1
+comment: 'Opiekuje się koniem. Widzi różnicę pomiędzy uprzężą szorową a chomątową. Rozpoznaje kiełzna zaprzęgowe. Wie, jak bezpiecznie zaprzęgać konie.'
 tasks:
   - 'Rozpoznałem(-am) kiełzna wykorzystywane w zaprzęgach.'
   - 'Dowiedziałem(-am) się, czym różni uprząż szorowa od chomątowej. Opowiedziałem(-am) o tym.'

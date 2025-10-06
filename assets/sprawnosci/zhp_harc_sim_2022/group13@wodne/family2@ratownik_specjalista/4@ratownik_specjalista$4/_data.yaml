@@ -1,6 +1,7 @@
 slug: ratownik_specjalista
 name: 'Ratownik specjalista'
 level: 4
+comment: 'Potrafi zachować się w przypadku niebezpiecznego zdarzenia na wodzie.'
 tasks:
   - 'Opisałem(-am) procedurę wzywania pomocy przez radiotelefon UKF, odebrałem(-am) pozorowany komunikat MAYDAY, PAN-PAN i SECURITE.'
   - 'Posługiwałem(-am) się szelkami asekuracyjnymi na pokładzie.'

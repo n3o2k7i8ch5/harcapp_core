@@ -1,6 +1,7 @@
 slug: lotnik_samolotowy
 name: 'Lotnik Samolotowy'
 level: 2
+comment: 'Wykazuje się pogłębioną wiedzą nt pilotażu i doświadcza pierwszych lotów samolotem sportowym.'
 tasks:
   - 'Określiłem(-am) nawigacyjną prędkość, meteorologiczny kierunek i prędkość wiatru oraz możliwości latania w danych warunkach.'
   - 'Wykazałem(-am) się znajomością przeznaczenia dźwigara, kesonu, wręgi, żebra, okucia i pokrycia.'

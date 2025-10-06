@@ -1,6 +1,7 @@
 slug: szybownik
 name: 'Szybownik'
 level: 1
+comment: 'Konstruuje prosty szybowiec i wyjaśnia na nim lot szybowy.'
 tasks:
   - 'Wyjaśniłem(-am) i zademonstrowałem(-am) zasady lotu i pilotażu szybowca, korzystając z samodzielnie zbudowanego prostego modelu szybowca.'
   - 'Wykazałem(-am) się wiedzą, w jakich warunkach można wykonywać loty oraz znajomością podstawowych zasad wykonywania lotów.'

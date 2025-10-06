@@ -1,6 +1,7 @@
 slug: ratownik_wodny
 name: 'Ratownik wodny'
 level: 2
+comment: 'W czasie zajęć na wodzie zawsze używa środków asekuracyjnych i pilnuje innych w tym zakresie. Posługuje się podstawowym sprzętem ratowniczym. Jest dobrym pływakiem.'
 tasks:
   - 'Przed zajęciami na wodzie sprawdziłem(-am) poprawność założenia środków asekuracyjnych u innych członków zastępu.'
   - 'Opowiedziałem(-am) zastępowi, jak oznaczane są kąpieliska w Polsce i w jakich miejscach powinno się unikać kąpieli.'

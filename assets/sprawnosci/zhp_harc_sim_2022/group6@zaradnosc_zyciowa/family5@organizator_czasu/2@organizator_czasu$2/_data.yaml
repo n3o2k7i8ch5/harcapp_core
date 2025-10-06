@@ -1,6 +1,7 @@
 slug: organizator_czasu
 name: 'Organizator czasu'
 level: 2
+comment: 'Cyklicznie planuje swój czas.'
 tasks:
   - 'Rozumiem, dlaczego należy zarządzać swoim czasem. Planując zadania na tydzień, dopilnowałem(-am), aby nie przeładować swojego tygodnia i zostawić sobie czas na odpoczynek i odpowiednią ilość snu.'
   - 'Poznałem(-am) trzy różne metody zarządzania czasem. Zaplanowałem(-am) jedno zadanie wybraną metodą.'

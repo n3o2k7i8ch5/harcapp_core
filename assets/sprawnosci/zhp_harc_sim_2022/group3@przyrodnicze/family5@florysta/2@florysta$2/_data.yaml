@@ -1,6 +1,7 @@
 slug: florysta
 name: 'Florysta'
 level: 2
+comment: 'Rozpoznaje najpopularniejsze kwiaty ogrodowe, doniczkowe i polne. Pielęgnuje własny ogródek kwiatowy. Układa bukiety kwiatowe, korzystając z roślin sezonowych.'
 tasks:
   - 'Rozpoznałem(-am) co najmniej 15 różnych kwiatów w tym kwiaty ogrodowe, doniczkowe i polne.'
   - 'Pielęgnowałem(-am) w czasie próby własny ogródek kwiatowy (np. na klombie, w doniczkach, na działce) składający się co najmniej z kilku gatunków.'

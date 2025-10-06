@@ -1,6 +1,7 @@
 slug: modelarz_3d
 name: 'Modelarz 3D'
 level: 3
+comment: 'Zna podstawy modelowania trójwymiarowego i zasady działania technologii druku 3D. Wykorzystuje je do produkcji drobnych przedmiotów przydatnych w codziennym życiu.'
 tasks:
   - 'Dowiedziałem(-am) się, na czym polega druk 3D i jakie może mieć zastosowania. Skonfigurowałem(-am) drukarkę do prostego wydruku. Dowiedziałem(-am) się, czym są filament, hotend, extruder.'
   - 'Poznałem(-am) dowolny program do modelowania trójwymiarowego (np. Skrimarket Playground, Tinkercad). Wykonałem(-am) w nim model przedmiotu, który może się przydać w mojej drużynie (np. element wyposażenia harcówki albo harcerską ozdobę).'
