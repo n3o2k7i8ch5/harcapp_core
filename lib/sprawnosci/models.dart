@@ -158,6 +158,10 @@ class SprawItem {
   @Index()
   late int level;
 
+  String? comment;
+
+  late bool tasksAreExamples;
+
   late List<String> tasks;
 
   final family = IsarLink<SprawFamily>();
@@ -186,6 +190,8 @@ class SprawItem {
         ..name = data['name']
         ..hiddenNames = (data['hiddenNames'] as List<dynamic>?)?.cast<String>() ?? []
         ..level = data['level']
+        ..comment = data['comment'] as String?
+        ..tasksAreExamples = data['tasksAreExamples'] as bool? ?? false
         ..tasks = data['tasks']?.toList().cast<String>() ?? [];
 
       return item;
