@@ -4426,14 +4426,13 @@ const SprawSchema = CollectionSchema(
     r'level': PropertySchema(id: 3, name: r'level', type: IsarType.long),
     r'name': PropertySchema(id: 4, name: r'name', type: IsarType.string),
     r'slug': PropertySchema(id: 5, name: r'slug', type: IsarType.string),
-    r'tasks': PropertySchema(id: 6, name: r'tasks', type: IsarType.stringList),
     r'tasksAreExamples': PropertySchema(
-      id: 7,
+      id: 6,
       name: r'tasksAreExamples',
       type: IsarType.bool,
     ),
     r'uniqName': PropertySchema(
-      id: 8,
+      id: 7,
       name: r'uniqName',
       type: IsarType.string,
     ),
@@ -4492,6 +4491,13 @@ const SprawSchema = CollectionSchema(
       target: r'SprawFamily',
       single: true,
     ),
+    r'tasks': LinkSchema(
+      id: -4356327535830731942,
+      name: r'tasks',
+      target: r'SprawTask',
+      single: false,
+      linkName: r'spraw',
+    ),
   },
   embeddedSchemas: {},
 
@@ -4528,13 +4534,6 @@ int _sprawEstimateSize(
   }
   bytesCount += 3 + object.name.length * 3;
   bytesCount += 3 + object.slug.length * 3;
-  bytesCount += 3 + object.tasks.length * 3;
-  {
-    for (var i = 0; i < object.tasks.length; i++) {
-      final value = object.tasks[i];
-      bytesCount += value.length * 3;
-    }
-  }
   bytesCount += 3 + object.uniqName.length * 3;
   return bytesCount;
 }
@@ -4551,9 +4550,8 @@ void _sprawSerialize(
   writer.writeLong(offsets[3], object.level);
   writer.writeString(offsets[4], object.name);
   writer.writeString(offsets[5], object.slug);
-  writer.writeStringList(offsets[6], object.tasks);
-  writer.writeBool(offsets[7], object.tasksAreExamples);
-  writer.writeString(offsets[8], object.uniqName);
+  writer.writeBool(offsets[6], object.tasksAreExamples);
+  writer.writeString(offsets[7], object.uniqName);
 }
 
 Spraw _sprawDeserialize(
@@ -4570,9 +4568,8 @@ Spraw _sprawDeserialize(
   object.level = reader.readLong(offsets[3]);
   object.name = reader.readString(offsets[4]);
   object.slug = reader.readString(offsets[5]);
-  object.tasks = reader.readStringList(offsets[6]) ?? [];
-  object.tasksAreExamples = reader.readBool(offsets[7]);
-  object.uniqName = reader.readString(offsets[8]);
+  object.tasksAreExamples = reader.readBool(offsets[6]);
+  object.uniqName = reader.readString(offsets[7]);
   return object;
 }
 
@@ -4596,10 +4593,8 @@ P _sprawDeserializeProp<P>(
     case 5:
       return (reader.readString(offset)) as P;
     case 6:
-      return (reader.readStringList(offset) ?? []) as P;
-    case 7:
       return (reader.readBool(offset)) as P;
-    case 8:
+    case 7:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -4611,12 +4606,13 @@ Id _sprawGetId(Spraw object) {
 }
 
 List<IsarLinkBase<dynamic>> _sprawGetLinks(Spraw object) {
-  return [object.family];
+  return [object.family, object.tasks];
 }
 
 void _sprawAttach(IsarCollection<dynamic> col, Id id, Spraw object) {
   object.id = id;
   object.family.attach(col, col.isar.collection<SprawFamily>(), r'family', id);
+  object.tasks.attach(col, col.isar.collection<SprawTask>(), r'tasks', id);
 }
 
 extension SprawByIndex on IsarCollection<Spraw> {
@@ -5947,207 +5943,6 @@ extension SprawQueryFilter on QueryBuilder<Spraw, Spraw, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(
-          property: r'tasks',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
-          property: r'tasks',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.lessThan(
-          include: include,
-          property: r'tasks',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.between(
-          property: r'tasks',
-          lower: lower,
-          includeLower: includeLower,
-          upper: upper,
-          includeUpper: includeUpper,
-          caseSensitive: caseSensitive,
-        ),
-      );
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.startsWith(
-          property: r'tasks',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.endsWith(
-          property: r'tasks',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementContains(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.contains(
-          property: r'tasks',
-          value: value,
-          caseSensitive: caseSensitive,
-        ),
-      );
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementMatches(
-    String pattern, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.matches(
-          property: r'tasks',
-          wildcard: pattern,
-          caseSensitive: caseSensitive,
-        ),
-      );
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'tasks', value: ''),
-      );
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(property: r'tasks', value: ''),
-      );
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthEqualTo(
-    int length,
-  ) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(r'tasks', length, true, length, true);
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(r'tasks', 0, true, 0, true);
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(r'tasks', 0, false, 999999, true);
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthLessThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(r'tasks', 0, true, length, include);
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthGreaterThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(r'tasks', length, include, 999999, true);
-    });
-  }
-
-  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'tasks',
-        lower,
-        includeLower,
-        upper,
-        includeUpper,
-      );
-    });
-  }
-
   QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksAreExamplesEqualTo(
     bool value,
   ) {
@@ -6319,6 +6114,69 @@ extension SprawQueryLinks on QueryBuilder<Spraw, Spraw, QFilterCondition> {
   QueryBuilder<Spraw, Spraw, QAfterFilterCondition> familyIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.linkLength(r'family', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasks(
+    FilterQuery<SprawTask> q,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'tasks');
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthEqualTo(
+    int length,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'tasks', length, true, length, true);
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'tasks', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'tasks', 0, false, 999999, true);
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'tasks', 0, true, length, include);
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'tasks', length, include, 999999, true);
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(
+        r'tasks',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 }
@@ -6552,12 +6410,6 @@ extension SprawQueryWhereDistinct on QueryBuilder<Spraw, Spraw, QDistinct> {
     });
   }
 
-  QueryBuilder<Spraw, Spraw, QDistinct> distinctByTasks() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'tasks');
-    });
-  }
-
   QueryBuilder<Spraw, Spraw, QDistinct> distinctByTasksAreExamples() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'tasksAreExamples');
@@ -6616,12 +6468,6 @@ extension SprawQueryProperty on QueryBuilder<Spraw, Spraw, QQueryProperty> {
     });
   }
 
-  QueryBuilder<Spraw, List<String>, QQueryOperations> tasksProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'tasks');
-    });
-  }
-
   QueryBuilder<Spraw, bool, QQueryOperations> tasksAreExamplesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'tasksAreExamples');
@@ -6631,6 +6477,575 @@ extension SprawQueryProperty on QueryBuilder<Spraw, Spraw, QQueryProperty> {
   QueryBuilder<Spraw, String, QQueryOperations> uniqNameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'uniqName');
+    });
+  }
+}
+
+// coverage:ignore-file
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
+
+extension GetSprawTaskCollection on Isar {
+  IsarCollection<SprawTask> get sprawTasks => this.collection();
+}
+
+const SprawTaskSchema = CollectionSchema(
+  name: r'SprawTask',
+  id: -6715861572136222227,
+  properties: {
+    r'index': PropertySchema(id: 0, name: r'index', type: IsarType.long),
+    r'text': PropertySchema(id: 1, name: r'text', type: IsarType.string),
+  },
+
+  estimateSize: _sprawTaskEstimateSize,
+  serialize: _sprawTaskSerialize,
+  deserialize: _sprawTaskDeserialize,
+  deserializeProp: _sprawTaskDeserializeProp,
+  idName: r'id',
+  indexes: {},
+  links: {
+    r'spraw': LinkSchema(
+      id: 3361889398247926251,
+      name: r'spraw',
+      target: r'Spraw',
+      single: true,
+    ),
+  },
+  embeddedSchemas: {},
+
+  getId: _sprawTaskGetId,
+  getLinks: _sprawTaskGetLinks,
+  attach: _sprawTaskAttach,
+  version: '3.3.0-dev.3',
+);
+
+int _sprawTaskEstimateSize(
+  SprawTask object,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  var bytesCount = offsets.last;
+  bytesCount += 3 + object.text.length * 3;
+  return bytesCount;
+}
+
+void _sprawTaskSerialize(
+  SprawTask object,
+  IsarWriter writer,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  writer.writeLong(offsets[0], object.index);
+  writer.writeString(offsets[1], object.text);
+}
+
+SprawTask _sprawTaskDeserialize(
+  Id id,
+  IsarReader reader,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  final object = SprawTask();
+  object.id = id;
+  object.index = reader.readLong(offsets[0]);
+  object.text = reader.readString(offsets[1]);
+  return object;
+}
+
+P _sprawTaskDeserializeProp<P>(
+  IsarReader reader,
+  int propertyId,
+  int offset,
+  Map<Type, List<int>> allOffsets,
+) {
+  switch (propertyId) {
+    case 0:
+      return (reader.readLong(offset)) as P;
+    case 1:
+      return (reader.readString(offset)) as P;
+    default:
+      throw IsarError('Unknown property with id $propertyId');
+  }
+}
+
+Id _sprawTaskGetId(SprawTask object) {
+  return object.id;
+}
+
+List<IsarLinkBase<dynamic>> _sprawTaskGetLinks(SprawTask object) {
+  return [object.spraw];
+}
+
+void _sprawTaskAttach(IsarCollection<dynamic> col, Id id, SprawTask object) {
+  object.id = id;
+  object.spraw.attach(col, col.isar.collection<Spraw>(), r'spraw', id);
+}
+
+extension SprawTaskQueryWhereSort
+    on QueryBuilder<SprawTask, SprawTask, QWhere> {
+  QueryBuilder<SprawTask, SprawTask, QAfterWhere> anyId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(const IdWhereClause.any());
+    });
+  }
+}
+
+extension SprawTaskQueryWhere
+    on QueryBuilder<SprawTask, SprawTask, QWhereClause> {
+  QueryBuilder<SprawTask, SprawTask, QAfterWhereClause> idEqualTo(Id id) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IdWhereClause.between(lower: id, upper: id));
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterWhereClause> idNotEqualTo(Id id) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(
+              IdWhereClause.lessThan(upper: id, includeUpper: false),
+            )
+            .addWhereClause(
+              IdWhereClause.greaterThan(lower: id, includeLower: false),
+            );
+      } else {
+        return query
+            .addWhereClause(
+              IdWhereClause.greaterThan(lower: id, includeLower: false),
+            )
+            .addWhereClause(
+              IdWhereClause.lessThan(upper: id, includeUpper: false),
+            );
+      }
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterWhereClause> idGreaterThan(
+    Id id, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IdWhereClause.greaterThan(lower: id, includeLower: include),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterWhereClause> idLessThan(
+    Id id, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IdWhereClause.lessThan(upper: id, includeUpper: include),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterWhereClause> idBetween(
+    Id lowerId,
+    Id upperId, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IdWhereClause.between(
+          lower: lowerId,
+          includeLower: includeLower,
+          upper: upperId,
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+}
+
+extension SprawTaskQueryFilter
+    on QueryBuilder<SprawTask, SprawTask, QFilterCondition> {
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> idEqualTo(
+    Id value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'id', value: value),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> idGreaterThan(
+    Id value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> idLessThan(
+    Id value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> idBetween(
+    Id lower,
+    Id upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'id',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> indexEqualTo(
+    int value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'index', value: value),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> indexGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'index',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> indexLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'index',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> indexBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'index',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> textEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'text',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> textGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'text',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> textLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'text',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> textBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'text',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> textStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'text',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> textEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'text',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> textContains(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'text',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> textMatches(
+    String pattern, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'text',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> textIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'text', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> textIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'text', value: ''),
+      );
+    });
+  }
+}
+
+extension SprawTaskQueryObject
+    on QueryBuilder<SprawTask, SprawTask, QFilterCondition> {}
+
+extension SprawTaskQueryLinks
+    on QueryBuilder<SprawTask, SprawTask, QFilterCondition> {
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> spraw(
+    FilterQuery<Spraw> q,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'spraw');
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> sprawIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'spraw', 0, true, 0, true);
+    });
+  }
+}
+
+extension SprawTaskQuerySortBy on QueryBuilder<SprawTask, SprawTask, QSortBy> {
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> sortByIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'index', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> sortByIndexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'index', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> sortByText() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'text', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> sortByTextDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'text', Sort.desc);
+    });
+  }
+}
+
+extension SprawTaskQuerySortThenBy
+    on QueryBuilder<SprawTask, SprawTask, QSortThenBy> {
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> thenById() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> thenByIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> thenByIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'index', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> thenByIndexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'index', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> thenByText() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'text', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> thenByTextDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'text', Sort.desc);
+    });
+  }
+}
+
+extension SprawTaskQueryWhereDistinct
+    on QueryBuilder<SprawTask, SprawTask, QDistinct> {
+  QueryBuilder<SprawTask, SprawTask, QDistinct> distinctByIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'index');
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QDistinct> distinctByText({
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'text', caseSensitive: caseSensitive);
+    });
+  }
+}
+
+extension SprawTaskQueryProperty
+    on QueryBuilder<SprawTask, SprawTask, QQueryProperty> {
+  QueryBuilder<SprawTask, int, QQueryOperations> idProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<SprawTask, int, QQueryOperations> indexProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'index');
+    });
+  }
+
+  QueryBuilder<SprawTask, String, QQueryOperations> textProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'text');
     });
   }
 }

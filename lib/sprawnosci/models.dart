@@ -199,9 +199,10 @@ class Spraw {
 
   late bool tasksAreExamples;
 
-  late List<String> tasks;
-
   final family = IsarLink<SprawFamily>();
+
+  @Backlink(to: 'spraw')
+  final tasks = IsarLinks<SprawTask>();
 
   // Convenience getters to access parent relationships
   @Ignore()
@@ -229,20 +230,39 @@ class Spraw {
     null;
 
     try {
-      final item = Spraw()
+      final spraw = Spraw()
         ..slug = data['slug']
         ..iconPath = iconPath
         ..name = data['name']
         ..hiddenNames = (data['hiddenNames'] as List<dynamic>?)?.cast<String>() ?? []
         ..level = data['level']
         ..comment = data['comment'] as String?
-        ..tasksAreExamples = data['tasksAreExamples'] as bool? ?? false
-        ..tasks = data['tasks']?.toList().cast<String>() ?? [];
+        ..tasksAreExamples = data['tasksAreExamples'] as bool? ?? false;
 
-      return item;
+      // Parse tasks and create SprawTask objects
+      final tasksList = data['tasks']?.toList().cast<String>() ?? [];
+      for (int i = 0; i < tasksList.length; i++) {
+        final task = SprawTask()
+          ..text = tasksList[i]
+          ..index = i
+          ..spraw.value = spraw;
+        spraw.tasks.add(task);
+      }
+
+      return spraw;
     } catch (e) {
       throw StateError('Error parsing item data in ${dir.path}: $e');
     }
   }
 
+}
+
+@collection
+class SprawTask {
+  Id id = Isar.autoIncrement;
+
+  late String text;
+  late int index;
+
+  final spraw = IsarLink<Spraw>();
 }

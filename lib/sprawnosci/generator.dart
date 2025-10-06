@@ -44,13 +44,14 @@ Future<void> main(List<String> args) async {
 
   stdout.writeln('Opening Isar at: $isarDirPath');
   final isar = await Isar.open(
-    [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema],
+    [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema, SprawTaskSchema],
     directory: isarDirPath,
   );
 
   // Clear existing data to avoid unique index violations
   stdout.writeln('Clearing existing data...');
   await isar.writeTxn(() async {
+    await isar.sprawTasks.clear();
     await isar.spraws.clear();
     await isar.sprawFamilys.clear();
     await isar.sprawGroups.clear();
@@ -73,11 +74,16 @@ Future<void> main(List<String> args) async {
       final groups = book.groups.toList();
       final Map<SprawGroup, List<SprawFamily>> groupFamilies = {};
       final Map<SprawFamily, List<Spraw>> familyItems = {};
+      final Map<Spraw, List<SprawTask>> sprawTasks = {};
       for (final g in groups) {
         final families = g.families.toList();
         groupFamilies[g] = families;
-        for (final f in families)
-          familyItems[f] = f.spraws.toList();
+        for (final f in families) {
+          final spraws = f.spraws.toList();
+          familyItems[f] = spraws;
+          for (final s in spraws)
+            sprawTasks[s] = s.tasks.toList();
+        }
       }
 
       await isar.writeTxn(() async {
@@ -91,6 +97,10 @@ Future<void> main(List<String> args) async {
             for (final it in familyItems[f] ?? const []) {
               await isar.spraws.put(it);
               await it.family.save();
+              for (final task in sprawTasks[it] ?? const []) {
+                await isar.sprawTasks.put(task);
+                await task.spraw.save();
+              }
             }
           }
         }
