@@ -70,6 +70,8 @@ class SprawGroup {
   @Backlink(to: 'group')
   final families = IsarLinks<SprawFamily>();
 
+  Iterable<SprawItem> get allSprawItems => families.expand((f) => f.items);
+
   static SprawGroup fromDir(Directory dir){
     final dataFile = File(p.join(dir.path, '_data.yaml'));
     if (!dataFile.existsSync())
@@ -157,6 +159,20 @@ class SprawItem {
   @Index(unique: true, caseSensitive: false)
   late String slug; // e.g. plomien
 
+  static const String uniqNameSepChar = '\$';
+  // Unique name: book_slug/group_slug/family_slug/item_slug
+  // Computed after loading via updateUniqName()
+  @Index(unique: true, caseSensitive: false)
+  late String uniqName;
+
+  void updateUniqName() {
+    final _family = family.value!;
+    final _group = _family.group.value!;
+    final _book = _group.sprawBook.value!;
+
+  uniqName = '${_book.slug}${uniqNameSepChar}${_group.slug}${uniqNameSepChar}${_family.slug}${uniqNameSepChar}$slug';
+  }
+
   // Relative path to the icon (from assets root), taken from icon.yaml -> link
   String? iconPath;
 
@@ -203,6 +219,8 @@ class SprawItem {
         ..comment = data['comment'] as String?
         ..tasksAreExamples = data['tasksAreExamples'] as bool? ?? false
         ..tasks = data['tasks']?.toList().cast<String>() ?? [];
+
+      item.updateUniqName();
 
       return item;
     } catch (e) {
