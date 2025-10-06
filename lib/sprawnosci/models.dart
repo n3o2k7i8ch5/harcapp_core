@@ -48,7 +48,20 @@ class SprawBook {
           SprawGroup.fromDir(d)..sprawBook.value = book
       );
 
+    // Update uniqNames after the entire tree is built
+    book.updateAllUniqNames();
+
     return book;
+  }
+
+  void updateAllUniqNames() {
+    for (final group in groups) {
+      for (final family in group.families) {
+        for (final item in family.items) {
+          item.updateUniqName();
+        }
+      }
+    }
   }
 }
 
@@ -70,6 +83,7 @@ class SprawGroup {
   @Backlink(to: 'group')
   final families = IsarLinks<SprawFamily>();
 
+  @Ignore()
   Iterable<SprawItem> get allSprawItems => families.expand((f) => f.items);
 
   static SprawGroup fromDir(Directory dir){
@@ -170,7 +184,7 @@ class SprawItem {
     final _group = _family.group.value!;
     final _book = _group.sprawBook.value!;
 
-  uniqName = '${_book.slug}${uniqNameSepChar}${_group.slug}${uniqNameSepChar}${_family.slug}${uniqNameSepChar}$slug';
+    uniqName = '${_book.slug}${uniqNameSepChar}${_group.slug}${uniqNameSepChar}${_family.slug}${uniqNameSepChar}$slug';
   }
 
   // Relative path to the icon (from assets root), taken from icon.yaml -> link
@@ -219,8 +233,6 @@ class SprawItem {
         ..comment = data['comment'] as String?
         ..tasksAreExamples = data['tasksAreExamples'] as bool? ?? false
         ..tasks = data['tasks']?.toList().cast<String>() ?? [];
-
-      item.updateUniqName();
 
       return item;
     } catch (e) {
