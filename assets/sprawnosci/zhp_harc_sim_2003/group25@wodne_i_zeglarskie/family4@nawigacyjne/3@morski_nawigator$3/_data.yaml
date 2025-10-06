@@ -1,0 +1,12 @@
+slug: morski_nawigator
+name: 'Morski nawigator'
+level: 3
+comment: 'Funkcję sprawności mistrzowskiej pełnią uprawnienia młodszego ratownika WOPR.'
+tasks:
+  - 'Odczytał z mapy morskiej: przebieg farwaterów, występujące przeszkody nawigacyjne i wartość deklinacji w roku.'
+  - 'Zmierzył szybkość logiem burtowym i głębokość sondą ręczną.'
+  - 'Posługiwał się polskimi locjami i spisem świateł. W nocy na podstawie widocznych świateł określił swą pozycję.'
+  - 'Wykreślił na mapie namiary, zaznaczając pozycję obserwowaną oraz kursy, odkładając przebytą drogę i zaznaczając pozycję zliczoną'
+  - 'Przeliczył kursy i namiary kompasowe na rzeczywiste, dokonał zapisów w dzienniku jachtowym.'
+  - 'Prowadził zliczeniówkę podczas rejsu; po określeniu różnicy pozycji obserwowanej i zliczonej (np. po nocy) potrafił ją wytłumaczyć.'
+

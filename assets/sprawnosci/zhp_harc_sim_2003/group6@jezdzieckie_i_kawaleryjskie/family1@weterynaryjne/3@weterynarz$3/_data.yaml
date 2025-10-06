@@ -1,0 +1,10 @@
+slug: weterynarz
+name: 'Weterynarz'
+level: 3
+comment: 'Funkcję sprawności mistrzowskiej pełni odznaka lub uprawnienie: projektowana odznaka ratownika weterynaryjnego Polskiego Związku Jeździeckiego.'
+tasks:
+  - 'Zna dokładną budowę konia (szkielet, położenie narządów).'
+  - 'Udzielił pierwszej pomocy przy zranieniu, ochwacie, kolce, zmierzyć temperaturę, tętno i liczbę oddechów.'
+  - 'Przygotował pacjenta i środki potrzebne do zabiegu przed przybyciem lekarza.'
+  - 'Pełnił służbę weterynaryjną na obozie.'
+
