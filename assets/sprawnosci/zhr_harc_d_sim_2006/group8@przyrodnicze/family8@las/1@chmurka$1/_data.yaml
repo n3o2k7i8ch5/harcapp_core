@@ -1,0 +1,11 @@
+slug: chmurka
+name: 'Chmurka'
+level: 1
+tasks:
+  - 'Zmierzy temperaturę powietrza zachowując wymagane warunki dla pomiarów meteorologicznych.'
+  - 'Odczyta z barometru ciśnienie powietrza i określi czy jest to ciśnie-nie wysokie, niskie czy normalne dla danej okolicy.'
+  - 'Zmierzy wielkość opadu atmosferycznego.'
+  - 'Zna zasadę działania wiatromierza, oceni kierunek i prędkość wiatru.'
+  - 'Rozróżnia 3 główne typy chmur: kłębiaste, pierzaste, warstwowe.'
+  - 'Prowadzi dzienniczek obserwacji atmosfery, gdzie systematycznie wpisuje wyniki własnych obserwacji pogody.'
+

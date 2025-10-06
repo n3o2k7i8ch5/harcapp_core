@@ -1,14 +1,14 @@
 .PHONY: install
 
 install:
-	flutter pub get
-	dart run lefthook_dart install
-	flutter pub global activate lefthook_dart
+	@flutter pub get
+	@dart run lefthook_dart install
+	@flutter pub global activate lefthook_dart
 
 # Generate all code (including Isar adapters)
 .PHONY: generate
 generate:
-	flutter pub get
+	@flutter pub get
 	dart run build_runner build --delete-conflicting-outputs
 
 .PHONY: import_spraw_books

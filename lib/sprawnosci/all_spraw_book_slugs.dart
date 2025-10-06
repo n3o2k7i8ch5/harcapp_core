@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/sprawnosci/models.dart';
 import 'package:harcapp_core/values/org.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -50,6 +51,8 @@ enum SprawBookSlug {
         return null;
     }
   }
+
+  static SprawBookSlug? fromSprawBook(SprawBook sprawBook) => fromName(sprawBook.slug);
 
   OrgColors get colors{
     switch(this){

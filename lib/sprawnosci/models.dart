@@ -1,11 +1,9 @@
 import 'dart:io';
 
-import 'package:harcapp_core/sprawnosci/all_spraw_book_slugs.dart';
+// import 'package:harcapp_core/sprawnosci/all_spraw_book_slugs.dart';
 import 'package:harcapp_core/sprawnosci/utils.dart';
 import 'package:isar_community/isar.dart';
 import 'package:path/path.dart' as p;
-
-import '../values/org.dart';
 
 part 'models.g.dart';
 
@@ -87,7 +85,7 @@ class SprawGroup {
   final families = IsarLinks<SprawFamily>();
 
   @Ignore()
-  Iterable<SprawItem> get allSprawItems => families.expand((f) => f.items);
+  Iterable<Spraw> get allSpraws => families.expand((f) => f.items);
 
   static SprawGroup fromDir(Directory dir){
     final dataFile = File(p.join(dir.path, '_data.yaml'));
@@ -137,7 +135,7 @@ class SprawFamily {
   final group = IsarLink<SprawGroup>();
 
   @Backlink(to: 'family')
-  final items = IsarLinks<SprawItem>();
+  final items = IsarLinks<Spraw>();
 
   static SprawFamily fromDir(Directory dir){
     final dataFile = File(p.join(dir.path, '_data.yaml'));
@@ -162,7 +160,7 @@ class SprawFamily {
 
     for (final d in itemDirs)
       family.items.add(
-          SprawItem.fromDir(d)..family.value = family
+          Spraw.fromDir(d)..family.value = family
       );
 
     return family;
@@ -170,7 +168,7 @@ class SprawFamily {
 }
 
 @collection
-class SprawItem {
+class Spraw {
   Id id = Isar.autoIncrement;
 
   @Index(unique: true, caseSensitive: false)
@@ -182,17 +180,12 @@ class SprawItem {
   @Index(unique: true, caseSensitive: false)
   late String uniqName;
 
-  // Cached org from parent book for quick access
-  @Enumerated(EnumType.name)
-  late Org org;
-
   void updateUniqName() {
     final _family = family.value!;
     final _group = _family.group.value!;
     final _book = _group.sprawBook.value!;
 
     uniqName = '${_book.slug}${uniqNameSepChar}${_group.slug}${uniqNameSepChar}${_family.slug}${uniqNameSepChar}$slug';
-    org = SprawBookSlug.fromName(_book.slug)!.org;
   }
 
   // Relative path to the icon (from assets root), taken from icon.yaml -> link
@@ -213,7 +206,7 @@ class SprawItem {
 
   final family = IsarLink<SprawFamily>();
 
-  static SprawItem fromDir(Directory dir) {
+  static Spraw fromDir(Directory dir) {
     final dataFile = File(p.join(dir.path, '_data.yaml'));
     final iconFile = File(p.join(dir.path, 'icon.svg'));
     final iconLinkFile = File(p.join(dir.path, 'icon.yaml'));
@@ -232,7 +225,7 @@ class SprawItem {
     null;
 
     try {
-      final item = SprawItem()
+      final item = Spraw()
         ..slug = data['slug']
         ..iconPath = iconPath
         ..name = data['name']

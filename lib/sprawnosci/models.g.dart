@@ -2500,9 +2500,9 @@ const SprawFamilySchema = CollectionSchema(
       single: true,
     ),
     r'items': LinkSchema(
-      id: -7142802713291345483,
+      id: 6960255956846443902,
       name: r'items',
-      target: r'SprawItem',
+      target: r'Spraw',
       single: false,
       linkName: r'family',
     ),
@@ -2633,7 +2633,7 @@ void _sprawFamilyAttach(
 ) {
   object.id = id;
   object.group.attach(col, col.isar.collection<SprawGroup>(), r'group', id);
-  object.items.attach(col, col.isar.collection<SprawItem>(), r'items', id);
+  object.items.attach(col, col.isar.collection<Spraw>(), r'items', id);
 }
 
 extension SprawFamilyByIndex on IsarCollection<SprawFamily> {
@@ -4113,7 +4113,7 @@ extension SprawFamilyQueryLinks
   }
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition> items(
-    FilterQuery<SprawItem> q,
+    FilterQuery<Spraw> q,
   ) {
     return QueryBuilder.apply(this, (query) {
       return query.link(q, r'items');
@@ -4403,13 +4403,13 @@ extension SprawFamilyQueryProperty
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetSprawItemCollection on Isar {
-  IsarCollection<SprawItem> get sprawItems => this.collection();
+extension GetSprawCollection on Isar {
+  IsarCollection<Spraw> get spraws => this.collection();
 }
 
-const SprawItemSchema = CollectionSchema(
-  name: r'SprawItem',
-  id: -692741685080851142,
+const SprawSchema = CollectionSchema(
+  name: r'Spraw',
+  id: 5364718012575422951,
   properties: {
     r'comment': PropertySchema(id: 0, name: r'comment', type: IsarType.string),
     r'hiddenNames': PropertySchema(
@@ -4438,10 +4438,10 @@ const SprawItemSchema = CollectionSchema(
     ),
   },
 
-  estimateSize: _sprawItemEstimateSize,
-  serialize: _sprawItemSerialize,
-  deserialize: _sprawItemDeserialize,
-  deserializeProp: _sprawItemDeserializeProp,
+  estimateSize: _sprawEstimateSize,
+  serialize: _sprawSerialize,
+  deserialize: _sprawDeserialize,
+  deserializeProp: _sprawDeserializeProp,
   idName: r'id',
   indexes: {
     r'slug': IndexSchema(
@@ -4486,7 +4486,7 @@ const SprawItemSchema = CollectionSchema(
   },
   links: {
     r'family': LinkSchema(
-      id: 3006936548881345821,
+      id: 8054155273771712438,
       name: r'family',
       target: r'SprawFamily',
       single: true,
@@ -4494,14 +4494,14 @@ const SprawItemSchema = CollectionSchema(
   },
   embeddedSchemas: {},
 
-  getId: _sprawItemGetId,
-  getLinks: _sprawItemGetLinks,
-  attach: _sprawItemAttach,
+  getId: _sprawGetId,
+  getLinks: _sprawGetLinks,
+  attach: _sprawAttach,
   version: '3.3.0-dev.3',
 );
 
-int _sprawItemEstimateSize(
-  SprawItem object,
+int _sprawEstimateSize(
+  Spraw object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -4538,8 +4538,8 @@ int _sprawItemEstimateSize(
   return bytesCount;
 }
 
-void _sprawItemSerialize(
-  SprawItem object,
+void _sprawSerialize(
+  Spraw object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
@@ -4555,13 +4555,13 @@ void _sprawItemSerialize(
   writer.writeString(offsets[8], object.uniqName);
 }
 
-SprawItem _sprawItemDeserialize(
+Spraw _sprawDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = SprawItem();
+  final object = Spraw();
   object.comment = reader.readStringOrNull(offsets[0]);
   object.hiddenNames = reader.readStringList(offsets[1]) ?? [];
   object.iconPath = reader.readStringOrNull(offsets[2]);
@@ -4575,7 +4575,7 @@ SprawItem _sprawItemDeserialize(
   return object;
 }
 
-P _sprawItemDeserializeProp<P>(
+P _sprawDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -4605,25 +4605,25 @@ P _sprawItemDeserializeProp<P>(
   }
 }
 
-Id _sprawItemGetId(SprawItem object) {
+Id _sprawGetId(Spraw object) {
   return object.id;
 }
 
-List<IsarLinkBase<dynamic>> _sprawItemGetLinks(SprawItem object) {
+List<IsarLinkBase<dynamic>> _sprawGetLinks(Spraw object) {
   return [object.family];
 }
 
-void _sprawItemAttach(IsarCollection<dynamic> col, Id id, SprawItem object) {
+void _sprawAttach(IsarCollection<dynamic> col, Id id, Spraw object) {
   object.id = id;
   object.family.attach(col, col.isar.collection<SprawFamily>(), r'family', id);
 }
 
-extension SprawItemByIndex on IsarCollection<SprawItem> {
-  Future<SprawItem?> getBySlug(String slug) {
+extension SprawByIndex on IsarCollection<Spraw> {
+  Future<Spraw?> getBySlug(String slug) {
     return getByIndex(r'slug', [slug]);
   }
 
-  SprawItem? getBySlugSync(String slug) {
+  Spraw? getBySlugSync(String slug) {
     return getByIndexSync(r'slug', [slug]);
   }
 
@@ -4635,12 +4635,12 @@ extension SprawItemByIndex on IsarCollection<SprawItem> {
     return deleteByIndexSync(r'slug', [slug]);
   }
 
-  Future<List<SprawItem?>> getAllBySlug(List<String> slugValues) {
+  Future<List<Spraw?>> getAllBySlug(List<String> slugValues) {
     final values = slugValues.map((e) => [e]).toList();
     return getAllByIndex(r'slug', values);
   }
 
-  List<SprawItem?> getAllBySlugSync(List<String> slugValues) {
+  List<Spraw?> getAllBySlugSync(List<String> slugValues) {
     final values = slugValues.map((e) => [e]).toList();
     return getAllByIndexSync(r'slug', values);
   }
@@ -4655,27 +4655,27 @@ extension SprawItemByIndex on IsarCollection<SprawItem> {
     return deleteAllByIndexSync(r'slug', values);
   }
 
-  Future<Id> putBySlug(SprawItem object) {
+  Future<Id> putBySlug(Spraw object) {
     return putByIndex(r'slug', object);
   }
 
-  Id putBySlugSync(SprawItem object, {bool saveLinks = true}) {
+  Id putBySlugSync(Spraw object, {bool saveLinks = true}) {
     return putByIndexSync(r'slug', object, saveLinks: saveLinks);
   }
 
-  Future<List<Id>> putAllBySlug(List<SprawItem> objects) {
+  Future<List<Id>> putAllBySlug(List<Spraw> objects) {
     return putAllByIndex(r'slug', objects);
   }
 
-  List<Id> putAllBySlugSync(List<SprawItem> objects, {bool saveLinks = true}) {
+  List<Id> putAllBySlugSync(List<Spraw> objects, {bool saveLinks = true}) {
     return putAllByIndexSync(r'slug', objects, saveLinks: saveLinks);
   }
 
-  Future<SprawItem?> getByUniqName(String uniqName) {
+  Future<Spraw?> getByUniqName(String uniqName) {
     return getByIndex(r'uniqName', [uniqName]);
   }
 
-  SprawItem? getByUniqNameSync(String uniqName) {
+  Spraw? getByUniqNameSync(String uniqName) {
     return getByIndexSync(r'uniqName', [uniqName]);
   }
 
@@ -4687,12 +4687,12 @@ extension SprawItemByIndex on IsarCollection<SprawItem> {
     return deleteByIndexSync(r'uniqName', [uniqName]);
   }
 
-  Future<List<SprawItem?>> getAllByUniqName(List<String> uniqNameValues) {
+  Future<List<Spraw?>> getAllByUniqName(List<String> uniqNameValues) {
     final values = uniqNameValues.map((e) => [e]).toList();
     return getAllByIndex(r'uniqName', values);
   }
 
-  List<SprawItem?> getAllByUniqNameSync(List<String> uniqNameValues) {
+  List<Spraw?> getAllByUniqNameSync(List<String> uniqNameValues) {
     final values = uniqNameValues.map((e) => [e]).toList();
     return getAllByIndexSync(r'uniqName', values);
   }
@@ -4707,35 +4707,31 @@ extension SprawItemByIndex on IsarCollection<SprawItem> {
     return deleteAllByIndexSync(r'uniqName', values);
   }
 
-  Future<Id> putByUniqName(SprawItem object) {
+  Future<Id> putByUniqName(Spraw object) {
     return putByIndex(r'uniqName', object);
   }
 
-  Id putByUniqNameSync(SprawItem object, {bool saveLinks = true}) {
+  Id putByUniqNameSync(Spraw object, {bool saveLinks = true}) {
     return putByIndexSync(r'uniqName', object, saveLinks: saveLinks);
   }
 
-  Future<List<Id>> putAllByUniqName(List<SprawItem> objects) {
+  Future<List<Id>> putAllByUniqName(List<Spraw> objects) {
     return putAllByIndex(r'uniqName', objects);
   }
 
-  List<Id> putAllByUniqNameSync(
-    List<SprawItem> objects, {
-    bool saveLinks = true,
-  }) {
+  List<Id> putAllByUniqNameSync(List<Spraw> objects, {bool saveLinks = true}) {
     return putAllByIndexSync(r'uniqName', objects, saveLinks: saveLinks);
   }
 }
 
-extension SprawItemQueryWhereSort
-    on QueryBuilder<SprawItem, SprawItem, QWhere> {
-  QueryBuilder<SprawItem, SprawItem, QAfterWhere> anyId() {
+extension SprawQueryWhereSort on QueryBuilder<Spraw, Spraw, QWhere> {
+  QueryBuilder<Spraw, Spraw, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhere> anyLevel() {
+  QueryBuilder<Spraw, Spraw, QAfterWhere> anyLevel() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'level'),
@@ -4744,15 +4740,14 @@ extension SprawItemQueryWhereSort
   }
 }
 
-extension SprawItemQueryWhere
-    on QueryBuilder<SprawItem, SprawItem, QWhereClause> {
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> idEqualTo(Id id) {
+extension SprawQueryWhere on QueryBuilder<Spraw, Spraw, QWhereClause> {
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(lower: id, upper: id));
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> idNotEqualTo(Id id) {
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -4774,7 +4769,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> idGreaterThan(
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> idGreaterThan(
     Id id, {
     bool include = false,
   }) {
@@ -4785,7 +4780,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> idLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> idLessThan(
     Id id, {
     bool include = false,
   }) {
@@ -4796,7 +4791,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> idBetween(
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -4814,9 +4809,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> slugEqualTo(
-    String slug,
-  ) {
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> slugEqualTo(String slug) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IndexWhereClause.equalTo(indexName: r'slug', value: [slug]),
@@ -4824,9 +4817,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> slugNotEqualTo(
-    String slug,
-  ) {
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> slugNotEqualTo(String slug) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -4868,7 +4859,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> uniqNameEqualTo(
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> uniqNameEqualTo(
     String uniqName,
   ) {
     return QueryBuilder.apply(this, (query) {
@@ -4878,7 +4869,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> uniqNameNotEqualTo(
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> uniqNameNotEqualTo(
     String uniqName,
   ) {
     return QueryBuilder.apply(this, (query) {
@@ -4922,9 +4913,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> levelEqualTo(
-    int level,
-  ) {
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> levelEqualTo(int level) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IndexWhereClause.equalTo(indexName: r'level', value: [level]),
@@ -4932,9 +4921,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> levelNotEqualTo(
-    int level,
-  ) {
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> levelNotEqualTo(int level) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -4976,7 +4963,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> levelGreaterThan(
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> levelGreaterThan(
     int level, {
     bool include = false,
   }) {
@@ -4992,7 +4979,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> levelLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> levelLessThan(
     int level, {
     bool include = false,
   }) {
@@ -5008,7 +4995,7 @@ extension SprawItemQueryWhere
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterWhereClause> levelBetween(
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> levelBetween(
     int lowerLevel,
     int upperLevel, {
     bool includeLower = true,
@@ -5028,9 +5015,8 @@ extension SprawItemQueryWhere
   }
 }
 
-extension SprawItemQueryFilter
-    on QueryBuilder<SprawItem, SprawItem, QFilterCondition> {
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentIsNull() {
+extension SprawQueryFilter on QueryBuilder<Spraw, Spraw, QFilterCondition> {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const FilterCondition.isNull(property: r'comment'),
@@ -5038,7 +5024,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentIsNotNull() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const FilterCondition.isNotNull(property: r'comment'),
@@ -5046,7 +5032,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentEqualTo(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -5061,7 +5047,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentGreaterThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -5078,7 +5064,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -5095,7 +5081,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentBetween(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -5116,7 +5102,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentStartsWith(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5131,7 +5117,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentEndsWith(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5146,7 +5132,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentContains(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentContains(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5161,7 +5147,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentMatches(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentMatches(
     String pattern, {
     bool caseSensitive = true,
   }) {
@@ -5176,7 +5162,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentIsEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(property: r'comment', value: ''),
@@ -5184,8 +5170,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  commentIsNotEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> commentIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.greaterThan(property: r'comment', value: ''),
@@ -5193,8 +5178,10 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  hiddenNamesElementEqualTo(String value, {bool caseSensitive = true}) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> hiddenNamesElementEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(
@@ -5206,7 +5193,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition>
   hiddenNamesElementGreaterThan(
     String value, {
     bool include = false,
@@ -5224,8 +5211,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  hiddenNamesElementLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> hiddenNamesElementLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -5242,8 +5228,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  hiddenNamesElementBetween(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> hiddenNamesElementBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -5264,7 +5249,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition>
   hiddenNamesElementStartsWith(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
@@ -5277,8 +5262,10 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  hiddenNamesElementEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> hiddenNamesElementEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.endsWith(
@@ -5290,8 +5277,10 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  hiddenNamesElementContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> hiddenNamesElementContains(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.contains(
@@ -5303,8 +5292,10 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  hiddenNamesElementMatches(String pattern, {bool caseSensitive = true}) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> hiddenNamesElementMatches(
+    String pattern, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.matches(
@@ -5316,7 +5307,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition>
   hiddenNamesElementIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
@@ -5325,7 +5316,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition>
   hiddenNamesElementIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
@@ -5334,43 +5325,43 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  hiddenNamesLengthEqualTo(int length) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> hiddenNamesLengthEqualTo(
+    int length,
+  ) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(r'hiddenNames', length, true, length, true);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  hiddenNamesIsEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> hiddenNamesIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(r'hiddenNames', 0, true, 0, true);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  hiddenNamesIsNotEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> hiddenNamesIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(r'hiddenNames', 0, false, 999999, true);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  hiddenNamesLengthLessThan(int length, {bool include = false}) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> hiddenNamesLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(r'hiddenNames', 0, true, length, include);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition>
   hiddenNamesLengthGreaterThan(int length, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(r'hiddenNames', length, include, 999999, true);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  hiddenNamesLengthBetween(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> hiddenNamesLengthBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -5387,7 +5378,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathIsNull() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const FilterCondition.isNull(property: r'iconPath'),
@@ -5395,8 +5386,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  iconPathIsNotNull() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         const FilterCondition.isNotNull(property: r'iconPath'),
@@ -5404,7 +5394,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathEqualTo(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -5419,7 +5409,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathGreaterThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -5436,7 +5426,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -5453,7 +5443,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathBetween(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -5474,7 +5464,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathStartsWith(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5489,7 +5479,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathEndsWith(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5504,7 +5494,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathContains(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathContains(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5519,7 +5509,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathMatches(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathMatches(
     String pattern, {
     bool caseSensitive = true,
   }) {
@@ -5534,7 +5524,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathIsEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(property: r'iconPath', value: ''),
@@ -5542,8 +5532,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  iconPathIsNotEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.greaterThan(property: r'iconPath', value: ''),
@@ -5551,9 +5540,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> idEqualTo(
-    Id value,
-  ) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(property: r'id', value: value),
@@ -5561,7 +5548,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> idGreaterThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> idGreaterThan(
     Id value, {
     bool include = false,
   }) {
@@ -5576,7 +5563,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> idLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> idLessThan(
     Id value, {
     bool include = false,
   }) {
@@ -5591,7 +5578,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> idBetween(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> idBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
@@ -5610,9 +5597,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> levelEqualTo(
-    int value,
-  ) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> levelEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(property: r'level', value: value),
@@ -5620,7 +5605,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> levelGreaterThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> levelGreaterThan(
     int value, {
     bool include = false,
   }) {
@@ -5635,7 +5620,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> levelLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> levelLessThan(
     int value, {
     bool include = false,
   }) {
@@ -5650,7 +5635,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> levelBetween(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> levelBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -5669,7 +5654,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> nameEqualTo(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> nameEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5684,7 +5669,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> nameGreaterThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> nameGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -5701,7 +5686,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> nameLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> nameLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -5718,7 +5703,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> nameBetween(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> nameBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -5739,7 +5724,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> nameStartsWith(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> nameStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5754,7 +5739,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> nameEndsWith(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> nameEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5769,7 +5754,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> nameContains(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> nameContains(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5784,7 +5769,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> nameMatches(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> nameMatches(
     String pattern, {
     bool caseSensitive = true,
   }) {
@@ -5799,7 +5784,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> nameIsEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> nameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(property: r'name', value: ''),
@@ -5807,7 +5792,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> nameIsNotEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> nameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.greaterThan(property: r'name', value: ''),
@@ -5815,7 +5800,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> slugEqualTo(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> slugEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5830,7 +5815,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> slugGreaterThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> slugGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -5847,7 +5832,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> slugLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> slugLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -5864,7 +5849,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> slugBetween(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> slugBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -5885,7 +5870,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> slugStartsWith(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> slugStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5900,7 +5885,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> slugEndsWith(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> slugEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5915,7 +5900,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> slugContains(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> slugContains(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5930,7 +5915,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> slugMatches(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> slugMatches(
     String pattern, {
     bool caseSensitive = true,
   }) {
@@ -5945,7 +5930,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> slugIsEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> slugIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(property: r'slug', value: ''),
@@ -5953,7 +5938,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> slugIsNotEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> slugIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.greaterThan(property: r'slug', value: ''),
@@ -5961,7 +5946,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> tasksElementEqualTo(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -5976,8 +5961,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  tasksElementGreaterThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -5994,8 +5978,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  tasksElementLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -6012,7 +5995,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> tasksElementBetween(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -6033,8 +6016,10 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  tasksElementStartsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.startsWith(
@@ -6046,8 +6031,10 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  tasksElementEndsWith(String value, {bool caseSensitive = true}) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.endsWith(
@@ -6059,8 +6046,10 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  tasksElementContains(String value, {bool caseSensitive = true}) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementContains(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.contains(
@@ -6072,7 +6061,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> tasksElementMatches(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementMatches(
     String pattern, {
     bool caseSensitive = true,
   }) {
@@ -6087,8 +6076,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  tasksElementIsEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(property: r'tasks', value: ''),
@@ -6096,8 +6084,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  tasksElementIsNotEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksElementIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.greaterThan(property: r'tasks', value: ''),
@@ -6105,7 +6092,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> tasksLengthEqualTo(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthEqualTo(
     int length,
   ) {
     return QueryBuilder.apply(this, (query) {
@@ -6113,19 +6100,19 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> tasksIsEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(r'tasks', 0, true, 0, true);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> tasksIsNotEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(r'tasks', 0, false, 999999, true);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> tasksLengthLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthLessThan(
     int length, {
     bool include = false,
   }) {
@@ -6134,14 +6121,16 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  tasksLengthGreaterThan(int length, {bool include = false}) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(r'tasks', length, include, 999999, true);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> tasksLengthBetween(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksLengthBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -6158,8 +6147,9 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  tasksAreExamplesEqualTo(bool value) {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksAreExamplesEqualTo(
+    bool value,
+  ) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(property: r'tasksAreExamples', value: value),
@@ -6167,7 +6157,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> uniqNameEqualTo(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> uniqNameEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -6182,7 +6172,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> uniqNameGreaterThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> uniqNameGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -6199,7 +6189,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> uniqNameLessThan(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> uniqNameLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -6216,7 +6206,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> uniqNameBetween(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> uniqNameBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -6237,7 +6227,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> uniqNameStartsWith(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> uniqNameStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -6252,7 +6242,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> uniqNameEndsWith(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> uniqNameEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -6267,7 +6257,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> uniqNameContains(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> uniqNameContains(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -6282,7 +6272,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> uniqNameMatches(
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> uniqNameMatches(
     String pattern, {
     bool caseSensitive = true,
   }) {
@@ -6297,7 +6287,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> uniqNameIsEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> uniqNameIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(property: r'uniqName', value: ''),
@@ -6305,8 +6295,7 @@ extension SprawItemQueryFilter
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
-  uniqNameIsNotEmpty() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> uniqNameIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.greaterThan(property: r'uniqName', value: ''),
@@ -6315,12 +6304,10 @@ extension SprawItemQueryFilter
   }
 }
 
-extension SprawItemQueryObject
-    on QueryBuilder<SprawItem, SprawItem, QFilterCondition> {}
+extension SprawQueryObject on QueryBuilder<Spraw, Spraw, QFilterCondition> {}
 
-extension SprawItemQueryLinks
-    on QueryBuilder<SprawItem, SprawItem, QFilterCondition> {
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> family(
+extension SprawQueryLinks on QueryBuilder<Spraw, Spraw, QFilterCondition> {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> family(
     FilterQuery<SprawFamily> q,
   ) {
     return QueryBuilder.apply(this, (query) {
@@ -6328,203 +6315,199 @@ extension SprawItemQueryLinks
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> familyIsNull() {
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> familyIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.linkLength(r'family', 0, true, 0, true);
     });
   }
 }
 
-extension SprawItemQuerySortBy on QueryBuilder<SprawItem, SprawItem, QSortBy> {
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByComment() {
+extension SprawQuerySortBy on QueryBuilder<Spraw, Spraw, QSortBy> {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByComment() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'comment', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByCommentDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByCommentDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'comment', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByIconPath() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByIconPath() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'iconPath', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByIconPathDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByIconPathDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'iconPath', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByLevel() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByLevel() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'level', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByLevelDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByLevelDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'level', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByName() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByNameDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortBySlug() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortBySlug() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slug', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortBySlugDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortBySlugDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slug', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByTasksAreExamples() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByTasksAreExamples() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'tasksAreExamples', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy>
-  sortByTasksAreExamplesDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByTasksAreExamplesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'tasksAreExamples', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByUniqName() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByUniqName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uniqName', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByUniqNameDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByUniqNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uniqName', Sort.desc);
     });
   }
 }
 
-extension SprawItemQuerySortThenBy
-    on QueryBuilder<SprawItem, SprawItem, QSortThenBy> {
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByComment() {
+extension SprawQuerySortThenBy on QueryBuilder<Spraw, Spraw, QSortThenBy> {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByComment() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'comment', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByCommentDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByCommentDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'comment', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByIconPath() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByIconPath() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'iconPath', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByIconPathDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByIconPathDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'iconPath', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenById() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByLevel() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByLevel() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'level', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByLevelDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByLevelDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'level', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByName() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByNameDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenBySlug() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenBySlug() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slug', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenBySlugDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenBySlugDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slug', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByTasksAreExamples() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByTasksAreExamples() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'tasksAreExamples', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy>
-  thenByTasksAreExamplesDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByTasksAreExamplesDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'tasksAreExamples', Sort.desc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByUniqName() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByUniqName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uniqName', Sort.asc);
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByUniqNameDesc() {
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByUniqNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'uniqName', Sort.desc);
     });
   }
 }
 
-extension SprawItemQueryWhereDistinct
-    on QueryBuilder<SprawItem, SprawItem, QDistinct> {
-  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByComment({
+extension SprawQueryWhereDistinct on QueryBuilder<Spraw, Spraw, QDistinct> {
+  QueryBuilder<Spraw, Spraw, QDistinct> distinctByComment({
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -6532,13 +6515,13 @@ extension SprawItemQueryWhereDistinct
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByHiddenNames() {
+  QueryBuilder<Spraw, Spraw, QDistinct> distinctByHiddenNames() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'hiddenNames');
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByIconPath({
+  QueryBuilder<Spraw, Spraw, QDistinct> distinctByIconPath({
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -6546,13 +6529,13 @@ extension SprawItemQueryWhereDistinct
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByLevel() {
+  QueryBuilder<Spraw, Spraw, QDistinct> distinctByLevel() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'level');
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByName({
+  QueryBuilder<Spraw, Spraw, QDistinct> distinctByName({
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -6560,7 +6543,7 @@ extension SprawItemQueryWhereDistinct
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctBySlug({
+  QueryBuilder<Spraw, Spraw, QDistinct> distinctBySlug({
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -6568,19 +6551,19 @@ extension SprawItemQueryWhereDistinct
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByTasks() {
+  QueryBuilder<Spraw, Spraw, QDistinct> distinctByTasks() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'tasks');
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByTasksAreExamples() {
+  QueryBuilder<Spraw, Spraw, QDistinct> distinctByTasksAreExamples() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'tasksAreExamples');
     });
   }
 
-  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByUniqName({
+  QueryBuilder<Spraw, Spraw, QDistinct> distinctByUniqName({
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -6589,64 +6572,62 @@ extension SprawItemQueryWhereDistinct
   }
 }
 
-extension SprawItemQueryProperty
-    on QueryBuilder<SprawItem, SprawItem, QQueryProperty> {
-  QueryBuilder<SprawItem, int, QQueryOperations> idProperty() {
+extension SprawQueryProperty on QueryBuilder<Spraw, Spraw, QQueryProperty> {
+  QueryBuilder<Spraw, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<SprawItem, String?, QQueryOperations> commentProperty() {
+  QueryBuilder<Spraw, String?, QQueryOperations> commentProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'comment');
     });
   }
 
-  QueryBuilder<SprawItem, List<String>, QQueryOperations>
-  hiddenNamesProperty() {
+  QueryBuilder<Spraw, List<String>, QQueryOperations> hiddenNamesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'hiddenNames');
     });
   }
 
-  QueryBuilder<SprawItem, String?, QQueryOperations> iconPathProperty() {
+  QueryBuilder<Spraw, String?, QQueryOperations> iconPathProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'iconPath');
     });
   }
 
-  QueryBuilder<SprawItem, int, QQueryOperations> levelProperty() {
+  QueryBuilder<Spraw, int, QQueryOperations> levelProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'level');
     });
   }
 
-  QueryBuilder<SprawItem, String, QQueryOperations> nameProperty() {
+  QueryBuilder<Spraw, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
     });
   }
 
-  QueryBuilder<SprawItem, String, QQueryOperations> slugProperty() {
+  QueryBuilder<Spraw, String, QQueryOperations> slugProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'slug');
     });
   }
 
-  QueryBuilder<SprawItem, List<String>, QQueryOperations> tasksProperty() {
+  QueryBuilder<Spraw, List<String>, QQueryOperations> tasksProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'tasks');
     });
   }
 
-  QueryBuilder<SprawItem, bool, QQueryOperations> tasksAreExamplesProperty() {
+  QueryBuilder<Spraw, bool, QQueryOperations> tasksAreExamplesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'tasksAreExamples');
     });
   }
 
-  QueryBuilder<SprawItem, String, QQueryOperations> uniqNameProperty() {
+  QueryBuilder<Spraw, String, QQueryOperations> uniqNameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'uniqName');
     });
