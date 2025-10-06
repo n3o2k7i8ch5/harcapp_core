@@ -1,5 +1,7 @@
 slug: znawca_unii_europejskiej
 name: 'Znawca Unii Europejskiej'
+hiddenNames:
+  - 'Obywatel Unii Europejskiej'
 level: 2
 tasks:
   - 'Wiem, co to jest Unia Europejska i po co powstała. Przygotowałem(-am) do zuchówki gazetkę o UE.'

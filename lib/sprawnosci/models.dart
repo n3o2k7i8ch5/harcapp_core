@@ -153,6 +153,8 @@ class SprawItem {
 
   late String name;
 
+  late List<String> hiddenNames;
+
   @Index()
   late int level;
 
@@ -182,6 +184,7 @@ class SprawItem {
         ..slug = data['slug']
         ..iconPath = iconPath
         ..name = data['name']
+        ..hiddenNames = (data['hiddenNames'] as List<dynamic>?)?.cast<String>() ?? []
         ..level = data['level']
         ..tasks = data['tasks']?.toList().cast<String>() ?? [];
 

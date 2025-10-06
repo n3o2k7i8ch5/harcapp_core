@@ -844,8 +844,14 @@ const SprawGroupSchema = CollectionSchema(
   name: r'SprawGroup',
   id: 800708513845433203,
   properties: {
-    r'name': PropertySchema(id: 0, name: r'name', type: IsarType.string),
-    r'slug': PropertySchema(id: 1, name: r'slug', type: IsarType.string),
+    r'description': PropertySchema(
+      id: 0,
+      name: r'description',
+      type: IsarType.string,
+    ),
+    r'name': PropertySchema(id: 1, name: r'name', type: IsarType.string),
+    r'slug': PropertySchema(id: 2, name: r'slug', type: IsarType.string),
+    r'tags': PropertySchema(id: 3, name: r'tags', type: IsarType.stringList),
   },
 
   estimateSize: _sprawGroupEstimateSize,
@@ -897,8 +903,21 @@ int _sprawGroupEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  {
+    final value = object.description;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.name.length * 3;
   bytesCount += 3 + object.slug.length * 3;
+  bytesCount += 3 + object.tags.length * 3;
+  {
+    for (var i = 0; i < object.tags.length; i++) {
+      final value = object.tags[i];
+      bytesCount += value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -908,8 +927,10 @@ void _sprawGroupSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.name);
-  writer.writeString(offsets[1], object.slug);
+  writer.writeString(offsets[0], object.description);
+  writer.writeString(offsets[1], object.name);
+  writer.writeString(offsets[2], object.slug);
+  writer.writeStringList(offsets[3], object.tags);
 }
 
 SprawGroup _sprawGroupDeserialize(
@@ -919,9 +940,11 @@ SprawGroup _sprawGroupDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = SprawGroup();
+  object.description = reader.readStringOrNull(offsets[0]);
   object.id = id;
-  object.name = reader.readString(offsets[0]);
-  object.slug = reader.readString(offsets[1]);
+  object.name = reader.readString(offsets[1]);
+  object.slug = reader.readString(offsets[2]);
+  object.tags = reader.readStringList(offsets[3]) ?? [];
   return object;
 }
 
@@ -933,9 +956,13 @@ P _sprawGroupDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 1:
       return (reader.readString(offset)) as P;
+    case 2:
+      return (reader.readString(offset)) as P;
+    case 3:
+      return (reader.readStringList(offset) ?? []) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -1155,6 +1182,165 @@ extension SprawGroupQueryWhere
 
 extension SprawGroupQueryFilter
     on QueryBuilder<SprawGroup, SprawGroup, QFilterCondition> {
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'description'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'description'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionEqualTo(String? value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'description',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionStartsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionEndsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'description',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'description',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'description', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  descriptionIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'description', value: ''),
+      );
+    });
+  }
+
   QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition> idEqualTo(
     Id value,
   ) {
@@ -1505,6 +1691,198 @@ extension SprawGroupQueryFilter
       );
     });
   }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsElementEqualTo(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'tags',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsElementGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'tags',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsElementLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'tags',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsElementBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'tags',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsElementStartsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'tags',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsElementEndsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'tags',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsElementContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'tags',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsElementMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'tags',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsElementIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'tags', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'tags', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition> tagsLengthEqualTo(
+    int length,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'tags', length, true, length, true);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition> tagsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'tags', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition> tagsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'tags', 0, false, 999999, true);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsLengthLessThan(int length, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'tags', 0, true, length, include);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  tagsLengthGreaterThan(int length, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'tags', length, include, 999999, true);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition> tagsLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'tags',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
 }
 
 extension SprawGroupQueryObject
@@ -1591,6 +1969,18 @@ extension SprawGroupQueryLinks
 
 extension SprawGroupQuerySortBy
     on QueryBuilder<SprawGroup, SprawGroup, QSortBy> {
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> sortByDescription() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> sortByDescriptionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.desc);
+    });
+  }
+
   QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -1618,6 +2008,18 @@ extension SprawGroupQuerySortBy
 
 extension SprawGroupQuerySortThenBy
     on QueryBuilder<SprawGroup, SprawGroup, QSortThenBy> {
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> thenByDescription() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> thenByDescriptionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.desc);
+    });
+  }
+
   QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -1657,6 +2059,14 @@ extension SprawGroupQuerySortThenBy
 
 extension SprawGroupQueryWhereDistinct
     on QueryBuilder<SprawGroup, SprawGroup, QDistinct> {
+  QueryBuilder<SprawGroup, SprawGroup, QDistinct> distinctByDescription({
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'description', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<SprawGroup, SprawGroup, QDistinct> distinctByName({
     bool caseSensitive = true,
   }) {
@@ -1672,6 +2082,12 @@ extension SprawGroupQueryWhereDistinct
       return query.addDistinctBy(r'slug', caseSensitive: caseSensitive);
     });
   }
+
+  QueryBuilder<SprawGroup, SprawGroup, QDistinct> distinctByTags() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'tags');
+    });
+  }
 }
 
 extension SprawGroupQueryProperty
@@ -1679,6 +2095,12 @@ extension SprawGroupQueryProperty
   QueryBuilder<SprawGroup, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<SprawGroup, String?, QQueryOperations> descriptionProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'description');
     });
   }
 
@@ -1691,6 +2113,12 @@ extension SprawGroupQueryProperty
   QueryBuilder<SprawGroup, String, QQueryOperations> slugProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'slug');
+    });
+  }
+
+  QueryBuilder<SprawGroup, List<String>, QQueryOperations> tagsProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'tags');
     });
   }
 }
@@ -1717,8 +2145,18 @@ const SprawFamilySchema = CollectionSchema(
       type: IsarType.string,
     ),
     r'name': PropertySchema(id: 2, name: r'name', type: IsarType.string),
-    r'slug': PropertySchema(id: 3, name: r'slug', type: IsarType.string),
-    r'tags': PropertySchema(id: 4, name: r'tags', type: IsarType.stringList),
+    r'notesForLeaders': PropertySchema(
+      id: 3,
+      name: r'notesForLeaders',
+      type: IsarType.stringList,
+    ),
+    r'requirements': PropertySchema(
+      id: 4,
+      name: r'requirements',
+      type: IsarType.stringList,
+    ),
+    r'slug': PropertySchema(id: 5, name: r'slug', type: IsarType.string),
+    r'tags': PropertySchema(id: 6, name: r'tags', type: IsarType.stringList),
   },
 
   estimateSize: _sprawFamilyEstimateSize,
@@ -1783,6 +2221,20 @@ int _sprawFamilyEstimateSize(
     }
   }
   bytesCount += 3 + object.name.length * 3;
+  bytesCount += 3 + object.notesForLeaders.length * 3;
+  {
+    for (var i = 0; i < object.notesForLeaders.length; i++) {
+      final value = object.notesForLeaders[i];
+      bytesCount += value.length * 3;
+    }
+  }
+  bytesCount += 3 + object.requirements.length * 3;
+  {
+    for (var i = 0; i < object.requirements.length; i++) {
+      final value = object.requirements[i];
+      bytesCount += value.length * 3;
+    }
+  }
   bytesCount += 3 + object.slug.length * 3;
   bytesCount += 3 + object.tags.length * 3;
   {
@@ -1803,8 +2255,10 @@ void _sprawFamilySerialize(
   writer.writeString(offsets[0], object.fragment);
   writer.writeString(offsets[1], object.fragmentAuthor);
   writer.writeString(offsets[2], object.name);
-  writer.writeString(offsets[3], object.slug);
-  writer.writeStringList(offsets[4], object.tags);
+  writer.writeStringList(offsets[3], object.notesForLeaders);
+  writer.writeStringList(offsets[4], object.requirements);
+  writer.writeString(offsets[5], object.slug);
+  writer.writeStringList(offsets[6], object.tags);
 }
 
 SprawFamily _sprawFamilyDeserialize(
@@ -1818,8 +2272,10 @@ SprawFamily _sprawFamilyDeserialize(
   object.fragmentAuthor = reader.readStringOrNull(offsets[1]);
   object.id = id;
   object.name = reader.readString(offsets[2]);
-  object.slug = reader.readString(offsets[3]);
-  object.tags = reader.readStringList(offsets[4]) ?? [];
+  object.notesForLeaders = reader.readStringList(offsets[3]) ?? [];
+  object.requirements = reader.readStringList(offsets[4]) ?? [];
+  object.slug = reader.readString(offsets[5]);
+  object.tags = reader.readStringList(offsets[6]) ?? [];
   return object;
 }
 
@@ -1837,8 +2293,12 @@ P _sprawFamilyDeserializeProp<P>(
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringList(offset) ?? []) as P;
     case 4:
+      return (reader.readStringList(offset) ?? []) as P;
+    case 5:
+      return (reader.readString(offset)) as P;
+    case 6:
       return (reader.readStringList(offset) ?? []) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -2585,6 +3045,400 @@ extension SprawFamilyQueryFilter
     });
   }
 
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersElementEqualTo(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'notesForLeaders',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersElementGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'notesForLeaders',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersElementLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'notesForLeaders',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersElementBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'notesForLeaders',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersElementStartsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'notesForLeaders',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersElementEndsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'notesForLeaders',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersElementContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'notesForLeaders',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersElementMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'notesForLeaders',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersElementIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'notesForLeaders', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'notesForLeaders', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'notesForLeaders', length, true, length, true);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'notesForLeaders', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'notesForLeaders', 0, false, 999999, true);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersLengthLessThan(int length, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'notesForLeaders', 0, true, length, include);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersLengthGreaterThan(int length, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'notesForLeaders',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  notesForLeadersLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'notesForLeaders',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsElementEqualTo(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'requirements',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsElementGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'requirements',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsElementLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'requirements',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsElementBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'requirements',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsElementStartsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'requirements',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsElementEndsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'requirements',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsElementContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'requirements',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsElementMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'requirements',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsElementIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'requirements', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'requirements', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'requirements', length, true, length, true);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'requirements', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'requirements', 0, false, 999999, true);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsLengthLessThan(int length, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'requirements', 0, true, length, include);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsLengthGreaterThan(int length, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'requirements', length, include, 999999, true);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  requirementsLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'requirements',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition> slugEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -3151,6 +4005,19 @@ extension SprawFamilyQueryWhereDistinct
     });
   }
 
+  QueryBuilder<SprawFamily, SprawFamily, QDistinct>
+  distinctByNotesForLeaders() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'notesForLeaders');
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QDistinct> distinctByRequirements() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'requirements');
+    });
+  }
+
   QueryBuilder<SprawFamily, SprawFamily, QDistinct> distinctBySlug({
     bool caseSensitive = true,
   }) {
@@ -3193,6 +4060,20 @@ extension SprawFamilyQueryProperty
     });
   }
 
+  QueryBuilder<SprawFamily, List<String>, QQueryOperations>
+  notesForLeadersProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'notesForLeaders');
+    });
+  }
+
+  QueryBuilder<SprawFamily, List<String>, QQueryOperations>
+  requirementsProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'requirements');
+    });
+  }
+
   QueryBuilder<SprawFamily, String, QQueryOperations> slugProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'slug');
@@ -3217,15 +4098,20 @@ const SprawItemSchema = CollectionSchema(
   name: r'SprawItem',
   id: -692741685080851142,
   properties: {
-    r'iconPath': PropertySchema(
+    r'hiddenNames': PropertySchema(
       id: 0,
+      name: r'hiddenNames',
+      type: IsarType.stringList,
+    ),
+    r'iconPath': PropertySchema(
+      id: 1,
       name: r'iconPath',
       type: IsarType.string,
     ),
-    r'level': PropertySchema(id: 1, name: r'level', type: IsarType.long),
-    r'name': PropertySchema(id: 2, name: r'name', type: IsarType.string),
-    r'slug': PropertySchema(id: 3, name: r'slug', type: IsarType.string),
-    r'tasks': PropertySchema(id: 4, name: r'tasks', type: IsarType.stringList),
+    r'level': PropertySchema(id: 2, name: r'level', type: IsarType.long),
+    r'name': PropertySchema(id: 3, name: r'name', type: IsarType.string),
+    r'slug': PropertySchema(id: 4, name: r'slug', type: IsarType.string),
+    r'tasks': PropertySchema(id: 5, name: r'tasks', type: IsarType.stringList),
   },
 
   estimateSize: _sprawItemEstimateSize,
@@ -3283,6 +4169,13 @@ int _sprawItemEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.hiddenNames.length * 3;
+  {
+    for (var i = 0; i < object.hiddenNames.length; i++) {
+      final value = object.hiddenNames[i];
+      bytesCount += value.length * 3;
+    }
+  }
   bytesCount += 3 + object.iconPath.length * 3;
   bytesCount += 3 + object.name.length * 3;
   bytesCount += 3 + object.slug.length * 3;
@@ -3302,11 +4195,12 @@ void _sprawItemSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.iconPath);
-  writer.writeLong(offsets[1], object.level);
-  writer.writeString(offsets[2], object.name);
-  writer.writeString(offsets[3], object.slug);
-  writer.writeStringList(offsets[4], object.tasks);
+  writer.writeStringList(offsets[0], object.hiddenNames);
+  writer.writeString(offsets[1], object.iconPath);
+  writer.writeLong(offsets[2], object.level);
+  writer.writeString(offsets[3], object.name);
+  writer.writeString(offsets[4], object.slug);
+  writer.writeStringList(offsets[5], object.tasks);
 }
 
 SprawItem _sprawItemDeserialize(
@@ -3316,12 +4210,13 @@ SprawItem _sprawItemDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = SprawItem();
-  object.iconPath = reader.readString(offsets[0]);
+  object.hiddenNames = reader.readStringList(offsets[0]) ?? [];
+  object.iconPath = reader.readString(offsets[1]);
   object.id = id;
-  object.level = reader.readLong(offsets[1]);
-  object.name = reader.readString(offsets[2]);
-  object.slug = reader.readString(offsets[3]);
-  object.tasks = reader.readStringList(offsets[4]) ?? [];
+  object.level = reader.readLong(offsets[2]);
+  object.name = reader.readString(offsets[3]);
+  object.slug = reader.readString(offsets[4]);
+  object.tasks = reader.readStringList(offsets[5]) ?? [];
   return object;
 }
 
@@ -3333,14 +4228,16 @@ P _sprawItemDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringList(offset) ?? []) as P;
     case 1:
-      return (reader.readLong(offset)) as P;
-    case 2:
       return (reader.readString(offset)) as P;
+    case 2:
+      return (reader.readLong(offset)) as P;
     case 3:
       return (reader.readString(offset)) as P;
     case 4:
+      return (reader.readString(offset)) as P;
+    case 5:
       return (reader.readStringList(offset) ?? []) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -3663,6 +4560,200 @@ extension SprawItemQueryWhere
 
 extension SprawItemQueryFilter
     on QueryBuilder<SprawItem, SprawItem, QFilterCondition> {
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesElementEqualTo(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'hiddenNames',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesElementGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'hiddenNames',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesElementLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'hiddenNames',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesElementBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'hiddenNames',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesElementStartsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'hiddenNames',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesElementEndsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'hiddenNames',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesElementContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'hiddenNames',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesElementMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'hiddenNames',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesElementIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'hiddenNames', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'hiddenNames', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'hiddenNames', length, true, length, true);
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'hiddenNames', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'hiddenNames', 0, false, 999999, true);
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesLengthLessThan(int length, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'hiddenNames', 0, true, length, include);
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesLengthGreaterThan(int length, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(r'hiddenNames', length, include, 999999, true);
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  hiddenNamesLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'hiddenNames',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
   QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -4553,6 +5644,12 @@ extension SprawItemQuerySortThenBy
 
 extension SprawItemQueryWhereDistinct
     on QueryBuilder<SprawItem, SprawItem, QDistinct> {
+  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByHiddenNames() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'hiddenNames');
+    });
+  }
+
   QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByIconPath({
     bool caseSensitive = true,
   }) {
@@ -4595,6 +5692,13 @@ extension SprawItemQueryProperty
   QueryBuilder<SprawItem, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<SprawItem, List<String>, QQueryOperations>
+  hiddenNamesProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'hiddenNames');
     });
   }
 
