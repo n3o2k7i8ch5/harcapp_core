@@ -17,6 +17,9 @@ const List<String> BASE_DIRS = [
   'assets/sprawnosci/zhp_zuch_sim_2022',
   'assets/sprawnosci/zhr_harc_c_sim_2023',
   'assets/sprawnosci/zhr_harc_d_sim_2023',
+  'assets/sprawnosci/zhr_harc_d_sim_2006',
+  'assets/sprawnosci/zhp_harc_sim_2003',
+  'assets/sprawnosci/zhp_wodne_sim_2003',
 ];
 
 void main(List<String> args) async {
