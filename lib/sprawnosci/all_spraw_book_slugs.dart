@@ -16,4 +16,19 @@ enum SprawBookSlug {
         return 'zhr_harc_d_sim_2023';
     }
   }
+
+  static SprawBookSlug? fromName(String name){
+    switch(name){
+      case 'zhp_zuch_sim_2022':
+        return SprawBookSlug.zhpZuchSim2022;
+      case 'zhp_harc_sim_2022':
+        return SprawBookSlug.zhpHarcSim2022;
+      case 'zhr_harc_c_sim_2023':
+        return SprawBookSlug.zhrHarcCSim2023;
+      case 'zhr_harc_d_sim_2023':
+        return SprawBookSlug.zhrHarcSim2023;
+      default:
+        return null;
+    }
+  }
 }
