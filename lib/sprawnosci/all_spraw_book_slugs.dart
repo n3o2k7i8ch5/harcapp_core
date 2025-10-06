@@ -5,7 +5,7 @@ enum SprawBookSlug {
   zhrHarcDSim2023,
   zhrHarcDSim2006,
   zhpHarcSim2003,
-  zhpWodneSim2003;
+  zhpHarcSim2003Wodne;
 
   String get name{
     switch(this){
@@ -21,8 +21,8 @@ enum SprawBookSlug {
         return 'zhr_harc_d_sim_2006';
       case zhpHarcSim2003:
         return 'zhr_harc_d_sim_2003';
-      case zhpWodneSim2003:
-        return 'zhp_wodne_sim_2003';
+      case zhpHarcSim2003Wodne:
+        return 'zhp_harc_sim_2003_wodne';
     }
   }
 
@@ -40,8 +40,8 @@ enum SprawBookSlug {
         return SprawBookSlug.zhrHarcDSim2006;
       case 'zhp_harc_sim_2003':
         return SprawBookSlug.zhpHarcSim2003;
-      case 'zhp_wodne_sim_2003':
-        return SprawBookSlug.zhpWodneSim2003;
+      case 'zhp_harc_sim_2003_wodne':
+        return SprawBookSlug.zhpHarcSim2003Wodne;
       default:
         return null;
     }
