@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:harcapp_core/values/org.dart';
-
-import 'models.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 enum SprawBookSlug {
   zhpZuchSim2022,
@@ -67,6 +67,44 @@ enum SprawBookSlug {
         return Org.zhrChlop.colors;
       case SprawBookSlug.zhrHarcDSim2023:
         return Org.zhrDziew.colors;
+    }
+  }
+
+  IconData get icon{
+    switch(this){
+      case SprawBookSlug.zhpHarcSim2003:
+        return MdiIcons.hammerScrewdriver;
+      case zhpHarcSim2003Wodne:
+        return MdiIcons.shipWheel;
+      case zhrHarcDSim2006:
+        return MdiIcons.campfire;
+      case zhpZuchSim2022:
+        return MdiIcons.abacus;
+      case zhpHarcSim2022:
+        return MdiIcons.abacus;
+      case zhrHarcCSim2023:
+        return MdiIcons.campfire;
+      case zhrHarcDSim2023:
+        return MdiIcons.tent;
+    }
+  }
+
+  Org get org{
+    switch(this){
+      case SprawBookSlug.zhpHarcSim2003:
+        return Org.zhp;
+      case SprawBookSlug.zhpHarcSim2003Wodne:
+        return Org.zhp;
+      case SprawBookSlug.zhrHarcDSim2006:
+        return Org.zhrDziew;
+      case SprawBookSlug.zhpZuchSim2022:
+        return Org.zhpZuch;
+      case SprawBookSlug.zhpHarcSim2022:
+        return Org.zhp;
+      case SprawBookSlug.zhrHarcCSim2023:
+        return Org.zhrChlop;
+      case SprawBookSlug.zhrHarcDSim2023:
+        return Org.zhrDziew;
     }
   }
 }

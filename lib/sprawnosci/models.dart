@@ -15,6 +15,12 @@ class SprawBook {
 
   late String name; // human readable
 
+  String? source;
+
+  late bool male;
+
+  late bool female;
+
   @Backlink(to: 'sprawBook')
   final groups = IsarLinks<SprawGroup>();
 
@@ -27,7 +33,10 @@ class SprawBook {
 
     final book = SprawBook()
       ..slug = (data['slug'] ?? p.basename(dir.path)).toString()
-      ..name = (data['name'] ?? '').toString();
+      ..name = (data['name'] ?? '').toString()
+      ..source = data['source'] as String?
+      ..male = data['male'] as bool
+      ..female = data['female'] as bool;
 
     final groupDirs = dir
         .listSync()

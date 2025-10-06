@@ -17,8 +17,11 @@ const SprawBookSchema = CollectionSchema(
   name: r'SprawBook',
   id: 398851501432896569,
   properties: {
-    r'name': PropertySchema(id: 0, name: r'name', type: IsarType.string),
-    r'slug': PropertySchema(id: 1, name: r'slug', type: IsarType.string),
+    r'female': PropertySchema(id: 0, name: r'female', type: IsarType.bool),
+    r'male': PropertySchema(id: 1, name: r'male', type: IsarType.bool),
+    r'name': PropertySchema(id: 2, name: r'name', type: IsarType.string),
+    r'slug': PropertySchema(id: 3, name: r'slug', type: IsarType.string),
+    r'source': PropertySchema(id: 4, name: r'source', type: IsarType.string),
   },
 
   estimateSize: _sprawBookEstimateSize,
@@ -66,6 +69,12 @@ int _sprawBookEstimateSize(
   var bytesCount = offsets.last;
   bytesCount += 3 + object.name.length * 3;
   bytesCount += 3 + object.slug.length * 3;
+  {
+    final value = object.source;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -75,8 +84,11 @@ void _sprawBookSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.name);
-  writer.writeString(offsets[1], object.slug);
+  writer.writeBool(offsets[0], object.female);
+  writer.writeBool(offsets[1], object.male);
+  writer.writeString(offsets[2], object.name);
+  writer.writeString(offsets[3], object.slug);
+  writer.writeString(offsets[4], object.source);
 }
 
 SprawBook _sprawBookDeserialize(
@@ -86,9 +98,12 @@ SprawBook _sprawBookDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = SprawBook();
+  object.female = reader.readBool(offsets[0]);
   object.id = id;
-  object.name = reader.readString(offsets[0]);
-  object.slug = reader.readString(offsets[1]);
+  object.male = reader.readBool(offsets[1]);
+  object.name = reader.readString(offsets[2]);
+  object.slug = reader.readString(offsets[3]);
+  object.source = reader.readStringOrNull(offsets[4]);
   return object;
 }
 
@@ -100,9 +115,15 @@ P _sprawBookDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 1:
+      return (reader.readBool(offset)) as P;
+    case 2:
       return (reader.readString(offset)) as P;
+    case 3:
+      return (reader.readString(offset)) as P;
+    case 4:
+      return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -311,6 +332,16 @@ extension SprawBookQueryWhere
 
 extension SprawBookQueryFilter
     on QueryBuilder<SprawBook, SprawBook, QFilterCondition> {
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> femaleEqualTo(
+    bool value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'female', value: value),
+      );
+    });
+  }
+
   QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> idEqualTo(
     Id value,
   ) {
@@ -366,6 +397,16 @@ extension SprawBookQueryFilter
           upper: upper,
           includeUpper: includeUpper,
         ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> maleEqualTo(
+    bool value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'male', value: value),
       );
     });
   }
@@ -661,6 +702,168 @@ extension SprawBookQueryFilter
       );
     });
   }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'source'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'source'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'source',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'source',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'source',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'source',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'source',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'source',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceContains(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'source',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceMatches(
+    String pattern, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'source',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'source', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition> sourceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'source', value: ''),
+      );
+    });
+  }
 }
 
 extension SprawBookQueryObject
@@ -729,6 +932,30 @@ extension SprawBookQueryLinks
 }
 
 extension SprawBookQuerySortBy on QueryBuilder<SprawBook, SprawBook, QSortBy> {
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> sortByFemale() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'female', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> sortByFemaleDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'female', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> sortByMale() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'male', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> sortByMaleDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'male', Sort.desc);
+    });
+  }
+
   QueryBuilder<SprawBook, SprawBook, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -752,10 +979,34 @@ extension SprawBookQuerySortBy on QueryBuilder<SprawBook, SprawBook, QSortBy> {
       return query.addSortBy(r'slug', Sort.desc);
     });
   }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> sortBySource() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'source', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> sortBySourceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'source', Sort.desc);
+    });
+  }
 }
 
 extension SprawBookQuerySortThenBy
     on QueryBuilder<SprawBook, SprawBook, QSortThenBy> {
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> thenByFemale() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'female', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> thenByFemaleDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'female', Sort.desc);
+    });
+  }
+
   QueryBuilder<SprawBook, SprawBook, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -765,6 +1016,18 @@ extension SprawBookQuerySortThenBy
   QueryBuilder<SprawBook, SprawBook, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> thenByMale() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'male', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> thenByMaleDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'male', Sort.desc);
     });
   }
 
@@ -791,10 +1054,34 @@ extension SprawBookQuerySortThenBy
       return query.addSortBy(r'slug', Sort.desc);
     });
   }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> thenBySource() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'source', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> thenBySourceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'source', Sort.desc);
+    });
+  }
 }
 
 extension SprawBookQueryWhereDistinct
     on QueryBuilder<SprawBook, SprawBook, QDistinct> {
+  QueryBuilder<SprawBook, SprawBook, QDistinct> distinctByFemale() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'female');
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QDistinct> distinctByMale() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'male');
+    });
+  }
+
   QueryBuilder<SprawBook, SprawBook, QDistinct> distinctByName({
     bool caseSensitive = true,
   }) {
@@ -810,6 +1097,14 @@ extension SprawBookQueryWhereDistinct
       return query.addDistinctBy(r'slug', caseSensitive: caseSensitive);
     });
   }
+
+  QueryBuilder<SprawBook, SprawBook, QDistinct> distinctBySource({
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'source', caseSensitive: caseSensitive);
+    });
+  }
 }
 
 extension SprawBookQueryProperty
@@ -817,6 +1112,18 @@ extension SprawBookQueryProperty
   QueryBuilder<SprawBook, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<SprawBook, bool, QQueryOperations> femaleProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'female');
+    });
+  }
+
+  QueryBuilder<SprawBook, bool, QQueryOperations> maleProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'male');
     });
   }
 
@@ -829,6 +1136,12 @@ extension SprawBookQueryProperty
   QueryBuilder<SprawBook, String, QQueryOperations> slugProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'slug');
+    });
+  }
+
+  QueryBuilder<SprawBook, String?, QQueryOperations> sourceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'source');
     });
   }
 }
