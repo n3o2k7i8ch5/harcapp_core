@@ -2499,9 +2499,9 @@ const SprawFamilySchema = CollectionSchema(
       target: r'SprawGroup',
       single: true,
     ),
-    r'items': LinkSchema(
+    r'spraws': LinkSchema(
       id: 6960255956846443902,
-      name: r'items',
+      name: r'spraws',
       target: r'Spraw',
       single: false,
       linkName: r'family',
@@ -2623,7 +2623,7 @@ Id _sprawFamilyGetId(SprawFamily object) {
 }
 
 List<IsarLinkBase<dynamic>> _sprawFamilyGetLinks(SprawFamily object) {
-  return [object.group, object.items];
+  return [object.group, object.spraws];
 }
 
 void _sprawFamilyAttach(
@@ -2633,7 +2633,7 @@ void _sprawFamilyAttach(
 ) {
   object.id = id;
   object.group.attach(col, col.isar.collection<SprawGroup>(), r'group', id);
-  object.items.attach(col, col.isar.collection<Spraw>(), r'items', id);
+  object.spraws.attach(col, col.isar.collection<Spraw>(), r'spraws', id);
 }
 
 extension SprawFamilyByIndex on IsarCollection<SprawFamily> {
@@ -4112,50 +4112,51 @@ extension SprawFamilyQueryLinks
     });
   }
 
-  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition> items(
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition> spraws(
     FilterQuery<Spraw> q,
   ) {
     return QueryBuilder.apply(this, (query) {
-      return query.link(q, r'items');
+      return query.link(q, r'spraws');
     });
   }
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
-  itemsLengthEqualTo(int length) {
+  sprawsLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'items', length, true, length, true);
-    });
-  }
-
-  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition> itemsIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'items', 0, true, 0, true);
+      return query.linkLength(r'spraws', length, true, length, true);
     });
   }
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
-  itemsIsNotEmpty() {
+  sprawsIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'items', 0, false, 999999, true);
+      return query.linkLength(r'spraws', 0, true, 0, true);
     });
   }
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
-  itemsLengthLessThan(int length, {bool include = false}) {
+  sprawsIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'items', 0, true, length, include);
+      return query.linkLength(r'spraws', 0, false, 999999, true);
     });
   }
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
-  itemsLengthGreaterThan(int length, {bool include = false}) {
+  sprawsLengthLessThan(int length, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.linkLength(r'items', length, include, 999999, true);
+      return query.linkLength(r'spraws', 0, true, length, include);
     });
   }
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
-  itemsLengthBetween(
+  sprawsLengthGreaterThan(int length, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'spraws', length, include, 999999, true);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  sprawsLengthBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -4163,7 +4164,7 @@ extension SprawFamilyQueryLinks
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.linkLength(
-        r'items',
+        r'spraws',
         lower,
         includeLower,
         upper,

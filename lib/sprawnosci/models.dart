@@ -56,13 +56,13 @@ class SprawBook {
   }
 
   void updateAllUniqNames() {
-    for (final group in groups) {
-      for (final family in group.families) {
-        for (final item in family.items) {
-          item.updateUniqName();
-        }
-      }
-    }
+    for (final group in groups)
+      for (final family in group.families)
+        for (final spraw in family.spraws)
+          spraw.updateUniqName();
+
+
+
   }
 }
 
@@ -85,7 +85,7 @@ class SprawGroup {
   final families = IsarLinks<SprawFamily>();
 
   @Ignore()
-  Iterable<Spraw> get allSpraws => families.expand((f) => f.items);
+  Iterable<Spraw> get allSpraws => families.expand((f) => f.spraws);
 
   static SprawGroup fromDir(Directory dir){
     final dataFile = File(p.join(dir.path, '_data.yaml'));
@@ -135,7 +135,7 @@ class SprawFamily {
   final group = IsarLink<SprawGroup>();
 
   @Backlink(to: 'family')
-  final items = IsarLinks<Spraw>();
+  final spraws = IsarLinks<Spraw>();
 
   static SprawFamily fromDir(Directory dir){
     final dataFile = File(p.join(dir.path, '_data.yaml'));
@@ -159,7 +159,7 @@ class SprawFamily {
         .where((d) => RegExp(r'^[0-9]+@').hasMatch(p.basename(d.path)));
 
     for (final d in itemDirs)
-      family.items.add(
+      family.spraws.add(
           Spraw.fromDir(d)..family.value = family
       );
 

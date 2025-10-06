@@ -77,7 +77,7 @@ Future<void> main(List<String> args) async {
         final families = g.families.toList();
         groupFamilies[g] = families;
         for (final f in families)
-          familyItems[f] = f.items.toList();
+          familyItems[f] = f.spraws.toList();
       }
 
       await isar.writeTxn(() async {
