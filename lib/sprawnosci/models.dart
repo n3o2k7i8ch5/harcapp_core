@@ -149,7 +149,7 @@ class SprawItem {
   late String slug; // e.g. plomien
 
   // Relative path to the icon (from assets root), taken from icon.yaml -> link
-  late String iconPath;
+  String? iconPath;
 
   late String name;
 
@@ -174,14 +174,15 @@ class SprawItem {
     if (!dataFile.existsSync())
       throw StateError('Missing _data.yaml in item directory: ${dir.path}');
 
-    if(!iconFile.existsSync() && !iconLinkFile.existsSync())
-      throw StateError('Missing icon file (icon.svg or icon.yaml) in: ${dir.path}');
+    // if(!iconFile.existsSync() && !iconLinkFile.existsSync())
+    //   throw StateError('Missing icon file (icon.svg or icon.yaml) in: ${dir.path}');
 
     final data = readYaml(dataFile);
 
-    String iconPath = iconLinkFile.existsSync()?
+    String? iconPath = iconLinkFile.existsSync()?
     readYaml(iconLinkFile)['link']:
-    iconFile.path;
+    iconFile.existsSync()?iconFile.path:
+    null;
 
     try {
       final item = SprawItem()

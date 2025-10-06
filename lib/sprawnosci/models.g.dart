@@ -4188,7 +4188,12 @@ int _sprawItemEstimateSize(
       bytesCount += value.length * 3;
     }
   }
-  bytesCount += 3 + object.iconPath.length * 3;
+  {
+    final value = object.iconPath;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.name.length * 3;
   bytesCount += 3 + object.slug.length * 3;
   bytesCount += 3 + object.tasks.length * 3;
@@ -4226,7 +4231,7 @@ SprawItem _sprawItemDeserialize(
   final object = SprawItem();
   object.comment = reader.readStringOrNull(offsets[0]);
   object.hiddenNames = reader.readStringList(offsets[1]) ?? [];
-  object.iconPath = reader.readString(offsets[2]);
+  object.iconPath = reader.readStringOrNull(offsets[2]);
   object.id = id;
   object.level = reader.readLong(offsets[3]);
   object.name = reader.readString(offsets[4]);
@@ -4248,7 +4253,7 @@ P _sprawItemDeserializeProp<P>(
     case 1:
       return (reader.readStringList(offset) ?? []) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 3:
       return (reader.readLong(offset)) as P;
     case 4:
@@ -4937,8 +4942,25 @@ extension SprawItemQueryFilter
     });
   }
 
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'iconPath'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  iconPathIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'iconPath'),
+      );
+    });
+  }
+
   QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -4953,7 +4975,7 @@ extension SprawItemQueryFilter
   }
 
   QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -4970,7 +4992,7 @@ extension SprawItemQueryFilter
   }
 
   QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -4987,8 +5009,8 @@ extension SprawItemQueryFilter
   }
 
   QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> iconPathBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -5964,7 +5986,7 @@ extension SprawItemQueryProperty
     });
   }
 
-  QueryBuilder<SprawItem, String, QQueryOperations> iconPathProperty() {
+  QueryBuilder<SprawItem, String?, QQueryOperations> iconPathProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'iconPath');
     });
