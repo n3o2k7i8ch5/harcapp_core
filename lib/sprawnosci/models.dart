@@ -52,6 +52,10 @@ class SprawGroup {
 
   late String name; // human readable
 
+  String? description;
+
+  late List<String> tags;
+
   final sprawBook = IsarLink<SprawBook>();
 
   @Backlink(to: 'group')
@@ -66,6 +70,8 @@ class SprawGroup {
 
     final group = SprawGroup()
       ..slug = data['slug']
+      ..description = data['description'] as String?
+      ..tags = (data['tags'] as List<dynamic>?)?.cast<String>() ?? []
       ..name = data['name'];
 
     final familyDirs = dir
@@ -97,6 +103,9 @@ class SprawFamily {
 
   String? fragmentAuthor;
 
+  late List<String> requirements;
+  late List<String> notesForLeaders;
+
   final group = IsarLink<SprawGroup>();
 
   @Backlink(to: 'family')
@@ -114,7 +123,9 @@ class SprawFamily {
       ..name = data['name']
       ..tags = (data['tags'] as List<dynamic>?)?.cast<String>() ?? []
       ..fragment = data['fragment'] as String?
-      ..fragmentAuthor = data['fragmentAuthor'] as String?;
+      ..fragmentAuthor = data['fragmentAuthor'] as String?
+      ..requirements = (data['requirements'] as List<dynamic>?)?.cast<String>() ?? []
+      ..notesForLeaders = (data['notesForLeaders'] as List<dynamic>?)?.cast<String>() ?? [];
 
     final itemDirs = dir
         .listSync()
