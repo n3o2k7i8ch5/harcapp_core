@@ -1,3 +1,7 @@
+import 'package:harcapp_core/values/org.dart';
+
+import 'models.dart';
+
 enum SprawBookSlug {
   zhpZuchSim2022,
   zhpHarcSim2022,
@@ -44,6 +48,25 @@ enum SprawBookSlug {
         return SprawBookSlug.zhpHarcSim2003Wodne;
       default:
         return null;
+    }
+  }
+
+  OrgColors get colors{
+    switch(this){
+      case SprawBookSlug.zhpHarcSim2003:
+        return OrgColors.outOfDate;
+      case SprawBookSlug.zhpHarcSim2003Wodne:
+        return OrgColors.outOfDate;
+      case SprawBookSlug.zhrHarcDSim2006:
+        return OrgColors.outOfDate;
+      case SprawBookSlug.zhpZuchSim2022:
+        return Org.zhpZuch.colors;
+      case SprawBookSlug.zhpHarcSim2022:
+        return Org.zhp.colors;
+      case SprawBookSlug.zhrHarcCSim2023:
+        return Org.zhrChlop.colors;
+      case SprawBookSlug.zhrHarcDSim2023:
+        return Org.zhrDziew.colors;
     }
   }
 }
