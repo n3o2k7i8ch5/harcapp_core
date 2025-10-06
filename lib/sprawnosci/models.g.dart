@@ -4098,20 +4098,26 @@ const SprawItemSchema = CollectionSchema(
   name: r'SprawItem',
   id: -692741685080851142,
   properties: {
+    r'comment': PropertySchema(id: 0, name: r'comment', type: IsarType.string),
     r'hiddenNames': PropertySchema(
-      id: 0,
+      id: 1,
       name: r'hiddenNames',
       type: IsarType.stringList,
     ),
     r'iconPath': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'iconPath',
       type: IsarType.string,
     ),
-    r'level': PropertySchema(id: 2, name: r'level', type: IsarType.long),
-    r'name': PropertySchema(id: 3, name: r'name', type: IsarType.string),
-    r'slug': PropertySchema(id: 4, name: r'slug', type: IsarType.string),
-    r'tasks': PropertySchema(id: 5, name: r'tasks', type: IsarType.stringList),
+    r'level': PropertySchema(id: 3, name: r'level', type: IsarType.long),
+    r'name': PropertySchema(id: 4, name: r'name', type: IsarType.string),
+    r'slug': PropertySchema(id: 5, name: r'slug', type: IsarType.string),
+    r'tasks': PropertySchema(id: 6, name: r'tasks', type: IsarType.stringList),
+    r'tasksAreExamples': PropertySchema(
+      id: 7,
+      name: r'tasksAreExamples',
+      type: IsarType.bool,
+    ),
   },
 
   estimateSize: _sprawItemEstimateSize,
@@ -4169,6 +4175,12 @@ int _sprawItemEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  {
+    final value = object.comment;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.hiddenNames.length * 3;
   {
     for (var i = 0; i < object.hiddenNames.length; i++) {
@@ -4195,12 +4207,14 @@ void _sprawItemSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeStringList(offsets[0], object.hiddenNames);
-  writer.writeString(offsets[1], object.iconPath);
-  writer.writeLong(offsets[2], object.level);
-  writer.writeString(offsets[3], object.name);
-  writer.writeString(offsets[4], object.slug);
-  writer.writeStringList(offsets[5], object.tasks);
+  writer.writeString(offsets[0], object.comment);
+  writer.writeStringList(offsets[1], object.hiddenNames);
+  writer.writeString(offsets[2], object.iconPath);
+  writer.writeLong(offsets[3], object.level);
+  writer.writeString(offsets[4], object.name);
+  writer.writeString(offsets[5], object.slug);
+  writer.writeStringList(offsets[6], object.tasks);
+  writer.writeBool(offsets[7], object.tasksAreExamples);
 }
 
 SprawItem _sprawItemDeserialize(
@@ -4210,13 +4224,15 @@ SprawItem _sprawItemDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = SprawItem();
-  object.hiddenNames = reader.readStringList(offsets[0]) ?? [];
-  object.iconPath = reader.readString(offsets[1]);
+  object.comment = reader.readStringOrNull(offsets[0]);
+  object.hiddenNames = reader.readStringList(offsets[1]) ?? [];
+  object.iconPath = reader.readString(offsets[2]);
   object.id = id;
-  object.level = reader.readLong(offsets[2]);
-  object.name = reader.readString(offsets[3]);
-  object.slug = reader.readString(offsets[4]);
-  object.tasks = reader.readStringList(offsets[5]) ?? [];
+  object.level = reader.readLong(offsets[3]);
+  object.name = reader.readString(offsets[4]);
+  object.slug = reader.readString(offsets[5]);
+  object.tasks = reader.readStringList(offsets[6]) ?? [];
+  object.tasksAreExamples = reader.readBool(offsets[7]);
   return object;
 }
 
@@ -4228,17 +4244,21 @@ P _sprawItemDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readStringList(offset) ?? []) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringList(offset) ?? []) as P;
     case 2:
-      return (reader.readLong(offset)) as P;
-    case 3:
       return (reader.readString(offset)) as P;
+    case 3:
+      return (reader.readLong(offset)) as P;
     case 4:
       return (reader.readString(offset)) as P;
     case 5:
+      return (reader.readString(offset)) as P;
+    case 6:
       return (reader.readStringList(offset) ?? []) as P;
+    case 7:
+      return (reader.readBool(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -4560,6 +4580,169 @@ extension SprawItemQueryWhere
 
 extension SprawItemQueryFilter
     on QueryBuilder<SprawItem, SprawItem, QFilterCondition> {
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'comment'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'comment'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'comment',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'comment',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'comment',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'comment',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'comment',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'comment',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentContains(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'comment',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentMatches(
+    String pattern, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'comment',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition> commentIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'comment', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  commentIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'comment', value: ''),
+      );
+    });
+  }
+
   QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
   hiddenNamesElementEqualTo(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -5507,6 +5690,15 @@ extension SprawItemQueryFilter
       );
     });
   }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterFilterCondition>
+  tasksAreExamplesEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'tasksAreExamples', value: value),
+      );
+    });
+  }
 }
 
 extension SprawItemQueryObject
@@ -5530,6 +5722,18 @@ extension SprawItemQueryLinks
 }
 
 extension SprawItemQuerySortBy on QueryBuilder<SprawItem, SprawItem, QSortBy> {
+  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByComment() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'comment', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByCommentDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'comment', Sort.desc);
+    });
+  }
+
   QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByIconPath() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'iconPath', Sort.asc);
@@ -5577,10 +5781,35 @@ extension SprawItemQuerySortBy on QueryBuilder<SprawItem, SprawItem, QSortBy> {
       return query.addSortBy(r'slug', Sort.desc);
     });
   }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> sortByTasksAreExamples() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tasksAreExamples', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterSortBy>
+  sortByTasksAreExamplesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tasksAreExamples', Sort.desc);
+    });
+  }
 }
 
 extension SprawItemQuerySortThenBy
     on QueryBuilder<SprawItem, SprawItem, QSortThenBy> {
+  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByComment() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'comment', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByCommentDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'comment', Sort.desc);
+    });
+  }
+
   QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByIconPath() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'iconPath', Sort.asc);
@@ -5640,10 +5869,31 @@ extension SprawItemQuerySortThenBy
       return query.addSortBy(r'slug', Sort.desc);
     });
   }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterSortBy> thenByTasksAreExamples() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tasksAreExamples', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawItem, SprawItem, QAfterSortBy>
+  thenByTasksAreExamplesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'tasksAreExamples', Sort.desc);
+    });
+  }
 }
 
 extension SprawItemQueryWhereDistinct
     on QueryBuilder<SprawItem, SprawItem, QDistinct> {
+  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByComment({
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'comment', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByHiddenNames() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'hiddenNames');
@@ -5685,6 +5935,12 @@ extension SprawItemQueryWhereDistinct
       return query.addDistinctBy(r'tasks');
     });
   }
+
+  QueryBuilder<SprawItem, SprawItem, QDistinct> distinctByTasksAreExamples() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'tasksAreExamples');
+    });
+  }
 }
 
 extension SprawItemQueryProperty
@@ -5692,6 +5948,12 @@ extension SprawItemQueryProperty
   QueryBuilder<SprawItem, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<SprawItem, String?, QQueryOperations> commentProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'comment');
     });
   }
 
@@ -5729,6 +5991,12 @@ extension SprawItemQueryProperty
   QueryBuilder<SprawItem, List<String>, QQueryOperations> tasksProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'tasks');
+    });
+  }
+
+  QueryBuilder<SprawItem, bool, QQueryOperations> tasksAreExamplesProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'tasksAreExamples');
     });
   }
 }
