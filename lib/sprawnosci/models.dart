@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:harcapp_core/sprawnosci/all_spraw_book_slugs.dart';
 import 'package:harcapp_core/sprawnosci/utils.dart';
 import 'package:isar_community/isar.dart';
 import 'package:path/path.dart' as p;
+
+import '../values/org.dart';
 
 part 'models.g.dart';
 
@@ -179,12 +182,17 @@ class SprawItem {
   @Index(unique: true, caseSensitive: false)
   late String uniqName;
 
+  // Cached org from parent book for quick access
+  @Enumerated(EnumType.name)
+  late Org org;
+
   void updateUniqName() {
     final _family = family.value!;
     final _group = _family.group.value!;
     final _book = _group.sprawBook.value!;
 
     uniqName = '${_book.slug}${uniqNameSepChar}${_group.slug}${uniqNameSepChar}${_family.slug}${uniqNameSepChar}$slug';
+    org = SprawBookSlug.fromName(_book.slug)!.org;
   }
 
   // Relative path to the icon (from assets root), taken from icon.yaml -> link
