@@ -1,4 +1,4 @@
-import 'package:harcapp_core/comm_classes/common.dart';
+import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/all.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/all.dart';
 import 'package:harcapp_core/harcthought/konspekts/filter/konspekt_filters.dart';

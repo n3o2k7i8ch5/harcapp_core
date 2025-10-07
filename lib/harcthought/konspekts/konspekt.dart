@@ -8,6 +8,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_classes/missing_decode_param_error.dart';
 import 'package:harcapp_core/comm_classes/storage.dart';
+import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/comm_widgets/app_dropdown.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/open_image_dialog.dart';
@@ -1117,10 +1118,10 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
 
   bool matchesAdditionalPhrase(String searchPhrase){
 
-    searchPhrase = remSpecChars(remPolChars(searchPhrase));
+    searchPhrase = simplifyString(searchPhrase, spaceStrategy: SpaceStrategy.remove);
 
-    for (String addSearchPhrase in additionalSearchPhrases)
-      if(remSpecChars(remPolChars(addSearchPhrase)).contains(searchPhrase))
+    for (String additionalSearchPhrase in additionalSearchPhrases)
+      if(simplifyString(additionalSearchPhrase, spaceStrategy: SpaceStrategy.remove).contains(searchPhrase))
         return true;
 
     return false;

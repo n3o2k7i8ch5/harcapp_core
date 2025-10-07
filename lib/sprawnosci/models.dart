@@ -1,11 +1,13 @@
 import 'dart:io';
 
-// import 'package:harcapp_core/sprawnosci/all_spraw_book_slugs.dart';
+import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/sprawnosci/utils.dart';
 import 'package:isar_community/isar.dart';
 import 'package:path/path.dart' as p;
 
 part 'models.g.dart';
+
+String makeRaw(String value) => simplifyString(value, spaceStrategy: SpaceStrategy.remove);
 
 @collection
 class SprawBook {
@@ -192,13 +194,16 @@ class Spraw {
   String? iconPath;
 
   late String name;
+  late String nameRaw;
 
   late List<String> hiddenNames;
+  late List<String> hiddenNamesRaw;
 
   @Index()
   late int level;
 
   String? comment;
+  String? commentRaw;
 
   late bool tasksAreExamples;
 
@@ -238,16 +243,22 @@ class Spraw {
         ..slug = data['slug']
         ..iconPath = iconPath
         ..name = data['name']
+        ..nameRaw = makeRaw(data['name'])
         ..hiddenNames = (data['hiddenNames'] as List<dynamic>?)?.cast<String>() ?? []
+        ..hiddenNamesRaw = (data['hiddenNames'] as List<dynamic>?)?.map(
+          (hiddenName) => makeRaw(hiddenName)
+        ).toList() ?? []
         ..level = data['level']
-        ..comment = data['comment'] as String?
-        ..tasksAreExamples = data['tasksAreExamples'] as bool? ?? false;
+        ..comment = data['comment']
+        ..commentRaw = data['comment']==null? null: makeRaw(data['comment'])
+        ..tasksAreExamples = data['tasksAreExamples'] ?? false;
 
       // Parse tasks and create SprawTask objects
       final tasksList = data['tasks']?.toList().cast<String>() ?? [];
       for (int i = 0; i < tasksList.length; i++) {
         final task = SprawTask()
           ..text = tasksList[i]
+          ..textRaw = makeRaw(tasksList[i])
           ..index = i
           ..spraw.value = spraw;
         spraw.tasks.add(task);
@@ -277,6 +288,7 @@ class SprawTask {
   }
 
   late String text;
+  late String textRaw;
   late int index;
 
   // Convenience getters to access parent relationships

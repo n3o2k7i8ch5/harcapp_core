@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:harcapp_core/comm_classes/common.dart';
+import 'package:harcapp_core/comm_classes/text_utils.dart';
 
 import 'contributor_identity.dart';
 
@@ -197,14 +197,7 @@ abstract class SongCore{
     if(!withPerformer || performers.isEmpty || performers[0].isEmpty)
       return _title;
 
-    String _performer = performers.map((performer) => remPolChars(performer).trim()
-        .replaceAll(':', '_')
-        .replaceAll('-', '_')
-        .replaceAll('/', '_')
-        .replaceAll(' ', '_')
-        .replaceAll(RegExp(r"_+"), "_")
-        .replaceAll(RegExp(r"[^\w]"), '')
-    ).join('&');
+    String _performer = performers.map((performer) => simplifyString(performer)).join('&');
 
     return _title + '@' + _performer;
 

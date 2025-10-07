@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:harcapp_core/comm_classes/common.dart';
+import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/values/people/person.dart';
 import 'package:harcapp_core/values/people/utils.dart';
