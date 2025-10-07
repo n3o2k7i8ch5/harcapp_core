@@ -1118,10 +1118,10 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
 
   bool matchesAdditionalPhrase(String searchPhrase){
 
-    searchPhrase = simplifyString(searchPhrase, spaceStrategy: SpaceStrategy.remove);
+    searchPhrase = searchableString(searchPhrase);
 
-    for (String additionalSearchPhrase in additionalSearchPhrases)
-      if(simplifyString(additionalSearchPhrase, spaceStrategy: SpaceStrategy.remove).contains(searchPhrase))
+    for(String additionalSearchPhrase in additionalSearchPhrases)
+      if(searchableString(additionalSearchPhrase).contains(searchPhrase))
         return true;
 
     return false;
