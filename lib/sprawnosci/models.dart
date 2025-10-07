@@ -6,7 +6,7 @@ part 'models.g.dart';
 class SprawBook {
   Id id = Isar.autoIncrement;
 
-  @Index(caseSensitive: false)
+  @Index(caseSensitive: false, unique: true)
   late String slug; // e.g. zhr_harc_c_sim_2023
 
   late String name; // human readable
