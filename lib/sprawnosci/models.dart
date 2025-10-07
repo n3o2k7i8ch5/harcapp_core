@@ -58,8 +58,11 @@ class SprawBook {
   void updateAllUniqNames() {
     for (final group in groups)
       for (final family in group.families)
-        for (final spraw in family.spraws)
+        for (final spraw in family.spraws) {
           spraw.updateUniqName();
+          for (final task in spraw.tasks)
+            task.updateUniqName();
+        }
   }
 }
 
@@ -150,12 +153,12 @@ class SprawFamily {
       ..requirements = (data['requirements'] as List<dynamic>?)?.cast<String>() ?? []
       ..notesForLeaders = (data['notesForLeaders'] as List<dynamic>?)?.cast<String>() ?? [];
 
-    final itemDirs = dir
+    final sprawDirs = dir
         .listSync()
         .whereType<Directory>()
         .where((d) => RegExp(r'^[0-9]+@').hasMatch(p.basename(d.path)));
 
-    for (final d in itemDirs)
+    for (final d in sprawDirs)
       family.spraws.add(
           Spraw.fromDir(d)..family.value = family
       );
@@ -172,7 +175,7 @@ class Spraw {
   late String slug; // e.g. plomien
 
   static const String uniqNameSepChar = '\$';
-  // Unique name: book_slug/group_slug/family_slug/item_slug
+  // Unique name: book_slug$group_slug$family_slug$spraw_slug
   // Computed after loading via updateUniqName()
   @Index(unique: true, caseSensitive: false)
   late String uniqName;
@@ -218,7 +221,7 @@ class Spraw {
     final iconLinkFile = File(p.join(dir.path, 'icon.yaml'));
 
     if (!dataFile.existsSync())
-      throw StateError('Missing _data.yaml in item directory: ${dir.path}');
+      throw StateError('Missing _data.yaml in spraw directory: ${dir.path}');
 
     // if(!iconFile.existsSync() && !iconLinkFile.existsSync())
     //   throw StateError('Missing icon file (icon.svg or icon.yaml) in: ${dir.path}');
@@ -252,7 +255,7 @@ class Spraw {
 
       return spraw;
     } catch (e) {
-      throw StateError('Error parsing item data in ${dir.path}: $e');
+      throw StateError('Error parsing spraw data in ${dir.path}: $e');
     }
   }
 
@@ -261,6 +264,17 @@ class Spraw {
 @collection
 class SprawTask {
   Id id = Isar.autoIncrement;
+
+  static const String uniqNameSepChar = '@';
+  // Unique name: book_slug$group_slug$family_slug$spraw_slug
+  // Computed after loading via updateUniqName()
+  @Index(unique: true, caseSensitive: false)
+  late String uniqName;
+
+  void updateUniqName() {
+    final _spraw = spraw.value!;
+    uniqName = '${_spraw.uniqName}${uniqNameSepChar}${index}';
+  }
 
   late String text;
   late int index;

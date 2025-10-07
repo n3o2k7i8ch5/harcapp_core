@@ -6494,6 +6494,11 @@ const SprawTaskSchema = CollectionSchema(
   properties: {
     r'index': PropertySchema(id: 0, name: r'index', type: IsarType.long),
     r'text': PropertySchema(id: 1, name: r'text', type: IsarType.string),
+    r'uniqName': PropertySchema(
+      id: 2,
+      name: r'uniqName',
+      type: IsarType.string,
+    ),
   },
 
   estimateSize: _sprawTaskEstimateSize,
@@ -6501,7 +6506,21 @@ const SprawTaskSchema = CollectionSchema(
   deserialize: _sprawTaskDeserialize,
   deserializeProp: _sprawTaskDeserializeProp,
   idName: r'id',
-  indexes: {},
+  indexes: {
+    r'uniqName': IndexSchema(
+      id: -5359579789865846563,
+      name: r'uniqName',
+      unique: true,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'uniqName',
+          type: IndexType.hash,
+          caseSensitive: false,
+        ),
+      ],
+    ),
+  },
   links: {
     r'spraw': LinkSchema(
       id: 3361889398247926251,
@@ -6525,6 +6544,7 @@ int _sprawTaskEstimateSize(
 ) {
   var bytesCount = offsets.last;
   bytesCount += 3 + object.text.length * 3;
+  bytesCount += 3 + object.uniqName.length * 3;
   return bytesCount;
 }
 
@@ -6536,6 +6556,7 @@ void _sprawTaskSerialize(
 ) {
   writer.writeLong(offsets[0], object.index);
   writer.writeString(offsets[1], object.text);
+  writer.writeString(offsets[2], object.uniqName);
 }
 
 SprawTask _sprawTaskDeserialize(
@@ -6548,6 +6569,7 @@ SprawTask _sprawTaskDeserialize(
   object.id = id;
   object.index = reader.readLong(offsets[0]);
   object.text = reader.readString(offsets[1]);
+  object.uniqName = reader.readString(offsets[2]);
   return object;
 }
 
@@ -6561,6 +6583,8 @@ P _sprawTaskDeserializeProp<P>(
     case 0:
       return (reader.readLong(offset)) as P;
     case 1:
+      return (reader.readString(offset)) as P;
+    case 2:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -6578,6 +6602,63 @@ List<IsarLinkBase<dynamic>> _sprawTaskGetLinks(SprawTask object) {
 void _sprawTaskAttach(IsarCollection<dynamic> col, Id id, SprawTask object) {
   object.id = id;
   object.spraw.attach(col, col.isar.collection<Spraw>(), r'spraw', id);
+}
+
+extension SprawTaskByIndex on IsarCollection<SprawTask> {
+  Future<SprawTask?> getByUniqName(String uniqName) {
+    return getByIndex(r'uniqName', [uniqName]);
+  }
+
+  SprawTask? getByUniqNameSync(String uniqName) {
+    return getByIndexSync(r'uniqName', [uniqName]);
+  }
+
+  Future<bool> deleteByUniqName(String uniqName) {
+    return deleteByIndex(r'uniqName', [uniqName]);
+  }
+
+  bool deleteByUniqNameSync(String uniqName) {
+    return deleteByIndexSync(r'uniqName', [uniqName]);
+  }
+
+  Future<List<SprawTask?>> getAllByUniqName(List<String> uniqNameValues) {
+    final values = uniqNameValues.map((e) => [e]).toList();
+    return getAllByIndex(r'uniqName', values);
+  }
+
+  List<SprawTask?> getAllByUniqNameSync(List<String> uniqNameValues) {
+    final values = uniqNameValues.map((e) => [e]).toList();
+    return getAllByIndexSync(r'uniqName', values);
+  }
+
+  Future<int> deleteAllByUniqName(List<String> uniqNameValues) {
+    final values = uniqNameValues.map((e) => [e]).toList();
+    return deleteAllByIndex(r'uniqName', values);
+  }
+
+  int deleteAllByUniqNameSync(List<String> uniqNameValues) {
+    final values = uniqNameValues.map((e) => [e]).toList();
+    return deleteAllByIndexSync(r'uniqName', values);
+  }
+
+  Future<Id> putByUniqName(SprawTask object) {
+    return putByIndex(r'uniqName', object);
+  }
+
+  Id putByUniqNameSync(SprawTask object, {bool saveLinks = true}) {
+    return putByIndexSync(r'uniqName', object, saveLinks: saveLinks);
+  }
+
+  Future<List<Id>> putAllByUniqName(List<SprawTask> objects) {
+    return putAllByIndex(r'uniqName', objects);
+  }
+
+  List<Id> putAllByUniqNameSync(
+    List<SprawTask> objects, {
+    bool saveLinks = true,
+  }) {
+    return putAllByIndexSync(r'uniqName', objects, saveLinks: saveLinks);
+  }
 }
 
 extension SprawTaskQueryWhereSort
@@ -6656,6 +6737,60 @@ extension SprawTaskQueryWhere
           includeUpper: includeUpper,
         ),
       );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterWhereClause> uniqNameEqualTo(
+    String uniqName,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.equalTo(indexName: r'uniqName', value: [uniqName]),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterWhereClause> uniqNameNotEqualTo(
+    String uniqName,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'uniqName',
+                lower: [],
+                upper: [uniqName],
+                includeUpper: false,
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'uniqName',
+                lower: [uniqName],
+                includeLower: false,
+                upper: [],
+              ),
+            );
+      } else {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'uniqName',
+                lower: [uniqName],
+                includeLower: false,
+                upper: [],
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'uniqName',
+                lower: [],
+                upper: [uniqName],
+                includeUpper: false,
+              ),
+            );
+      }
     });
   }
 }
@@ -6925,6 +7060,153 @@ extension SprawTaskQueryFilter
       );
     });
   }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> uniqNameEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'uniqName',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> uniqNameGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'uniqName',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> uniqNameLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'uniqName',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> uniqNameBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'uniqName',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> uniqNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'uniqName',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> uniqNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'uniqName',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> uniqNameContains(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'uniqName',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> uniqNameMatches(
+    String pattern, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'uniqName',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition> uniqNameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'uniqName', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterFilterCondition>
+  uniqNameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'uniqName', value: ''),
+      );
+    });
+  }
 }
 
 extension SprawTaskQueryObject
@@ -6971,6 +7253,18 @@ extension SprawTaskQuerySortBy on QueryBuilder<SprawTask, SprawTask, QSortBy> {
       return query.addSortBy(r'text', Sort.desc);
     });
   }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> sortByUniqName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uniqName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> sortByUniqNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uniqName', Sort.desc);
+    });
+  }
 }
 
 extension SprawTaskQuerySortThenBy
@@ -7010,6 +7304,18 @@ extension SprawTaskQuerySortThenBy
       return query.addSortBy(r'text', Sort.desc);
     });
   }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> thenByUniqName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uniqName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QAfterSortBy> thenByUniqNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uniqName', Sort.desc);
+    });
+  }
 }
 
 extension SprawTaskQueryWhereDistinct
@@ -7025,6 +7331,14 @@ extension SprawTaskQueryWhereDistinct
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'text', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SprawTask, SprawTask, QDistinct> distinctByUniqName({
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'uniqName', caseSensitive: caseSensitive);
     });
   }
 }
@@ -7046,6 +7360,12 @@ extension SprawTaskQueryProperty
   QueryBuilder<SprawTask, String, QQueryOperations> textProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'text');
+    });
+  }
+
+  QueryBuilder<SprawTask, String, QQueryOperations> uniqNameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'uniqName');
     });
   }
 }
