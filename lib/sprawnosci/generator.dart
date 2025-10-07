@@ -25,6 +25,7 @@ Future<void> main(List<String> args) async {
   final isar = await _openIsar(isarDirPath);
   await _clearExistingData(isar);
   await _importBooks(isar, bookDirs);
+  await _printDatabaseStatistics(isar);
   await isar.close();
 
   stdout.writeln('Import completed. Processed ${bookDirs.length} book(s).');
@@ -93,6 +94,23 @@ Future<void> _importBooks(Isar isar, List<Directory> bookDirs) async {
     }
     stdout.writeln('');
   }
+}
+
+Future<void> _printDatabaseStatistics(Isar isar) async {
+  final bookCount = await isar.sprawBooks.count();
+  final groupCount = await isar.sprawGroups.count();
+  final familyCount = await isar.sprawFamilys.count();
+  final sprawCount = await isar.spraws.count();
+  final taskCount = await isar.sprawTasks.count();
+
+  stdout.writeln('');
+  stdout.writeln('=== Database Statistics ===');
+  stdout.writeln('Books:    $bookCount');
+  stdout.writeln('Groups:   $groupCount');
+  stdout.writeln('Families: $familyCount');
+  stdout.writeln('Spraws:   $sprawCount');
+  stdout.writeln('Tasks:    $taskCount');
+  stdout.writeln('');
 }
 
 Never _exitWithError(String message) {
