@@ -33,7 +33,7 @@ const SprawBookSchema = CollectionSchema(
     r'slug': IndexSchema(
       id: 6169444064746062836,
       name: r'slug',
-      unique: true,
+      unique: false,
       replace: false,
       properties: [
         IndexPropertySchema(
@@ -140,60 +140,6 @@ List<IsarLinkBase<dynamic>> _sprawBookGetLinks(SprawBook object) {
 void _sprawBookAttach(IsarCollection<dynamic> col, Id id, SprawBook object) {
   object.id = id;
   object.groups.attach(col, col.isar.collection<SprawGroup>(), r'groups', id);
-}
-
-extension SprawBookByIndex on IsarCollection<SprawBook> {
-  Future<SprawBook?> getBySlug(String slug) {
-    return getByIndex(r'slug', [slug]);
-  }
-
-  SprawBook? getBySlugSync(String slug) {
-    return getByIndexSync(r'slug', [slug]);
-  }
-
-  Future<bool> deleteBySlug(String slug) {
-    return deleteByIndex(r'slug', [slug]);
-  }
-
-  bool deleteBySlugSync(String slug) {
-    return deleteByIndexSync(r'slug', [slug]);
-  }
-
-  Future<List<SprawBook?>> getAllBySlug(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return getAllByIndex(r'slug', values);
-  }
-
-  List<SprawBook?> getAllBySlugSync(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return getAllByIndexSync(r'slug', values);
-  }
-
-  Future<int> deleteAllBySlug(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return deleteAllByIndex(r'slug', values);
-  }
-
-  int deleteAllBySlugSync(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return deleteAllByIndexSync(r'slug', values);
-  }
-
-  Future<Id> putBySlug(SprawBook object) {
-    return putByIndex(r'slug', object);
-  }
-
-  Id putBySlugSync(SprawBook object, {bool saveLinks = true}) {
-    return putByIndexSync(r'slug', object, saveLinks: saveLinks);
-  }
-
-  Future<List<Id>> putAllBySlug(List<SprawBook> objects) {
-    return putAllByIndex(r'slug', objects);
-  }
-
-  List<Id> putAllBySlugSync(List<SprawBook> objects, {bool saveLinks = true}) {
-    return putAllByIndexSync(r'slug', objects, saveLinks: saveLinks);
-  }
 }
 
 extension SprawBookQueryWhereSort
@@ -1176,7 +1122,7 @@ const SprawGroupSchema = CollectionSchema(
     r'slug': IndexSchema(
       id: 6169444064746062836,
       name: r'slug',
-      unique: true,
+      unique: false,
       replace: false,
       properties: [
         IndexPropertySchema(
@@ -1303,60 +1249,6 @@ void _sprawGroupAttach(IsarCollection<dynamic> col, Id id, SprawGroup object) {
     r'families',
     id,
   );
-}
-
-extension SprawGroupByIndex on IsarCollection<SprawGroup> {
-  Future<SprawGroup?> getBySlug(String slug) {
-    return getByIndex(r'slug', [slug]);
-  }
-
-  SprawGroup? getBySlugSync(String slug) {
-    return getByIndexSync(r'slug', [slug]);
-  }
-
-  Future<bool> deleteBySlug(String slug) {
-    return deleteByIndex(r'slug', [slug]);
-  }
-
-  bool deleteBySlugSync(String slug) {
-    return deleteByIndexSync(r'slug', [slug]);
-  }
-
-  Future<List<SprawGroup?>> getAllBySlug(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return getAllByIndex(r'slug', values);
-  }
-
-  List<SprawGroup?> getAllBySlugSync(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return getAllByIndexSync(r'slug', values);
-  }
-
-  Future<int> deleteAllBySlug(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return deleteAllByIndex(r'slug', values);
-  }
-
-  int deleteAllBySlugSync(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return deleteAllByIndexSync(r'slug', values);
-  }
-
-  Future<Id> putBySlug(SprawGroup object) {
-    return putByIndex(r'slug', object);
-  }
-
-  Id putBySlugSync(SprawGroup object, {bool saveLinks = true}) {
-    return putByIndexSync(r'slug', object, saveLinks: saveLinks);
-  }
-
-  Future<List<Id>> putAllBySlug(List<SprawGroup> objects) {
-    return putAllByIndex(r'slug', objects);
-  }
-
-  List<Id> putAllBySlugSync(List<SprawGroup> objects, {bool saveLinks = true}) {
-    return putAllByIndexSync(r'slug', objects, saveLinks: saveLinks);
-  }
 }
 
 extension SprawGroupQueryWhereSort
@@ -2481,7 +2373,7 @@ const SprawFamilySchema = CollectionSchema(
     r'slug': IndexSchema(
       id: 6169444064746062836,
       name: r'slug',
-      unique: true,
+      unique: false,
       replace: false,
       properties: [
         IndexPropertySchema(
@@ -2634,63 +2526,6 @@ void _sprawFamilyAttach(
   object.id = id;
   object.group.attach(col, col.isar.collection<SprawGroup>(), r'group', id);
   object.spraws.attach(col, col.isar.collection<Spraw>(), r'spraws', id);
-}
-
-extension SprawFamilyByIndex on IsarCollection<SprawFamily> {
-  Future<SprawFamily?> getBySlug(String slug) {
-    return getByIndex(r'slug', [slug]);
-  }
-
-  SprawFamily? getBySlugSync(String slug) {
-    return getByIndexSync(r'slug', [slug]);
-  }
-
-  Future<bool> deleteBySlug(String slug) {
-    return deleteByIndex(r'slug', [slug]);
-  }
-
-  bool deleteBySlugSync(String slug) {
-    return deleteByIndexSync(r'slug', [slug]);
-  }
-
-  Future<List<SprawFamily?>> getAllBySlug(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return getAllByIndex(r'slug', values);
-  }
-
-  List<SprawFamily?> getAllBySlugSync(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return getAllByIndexSync(r'slug', values);
-  }
-
-  Future<int> deleteAllBySlug(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return deleteAllByIndex(r'slug', values);
-  }
-
-  int deleteAllBySlugSync(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return deleteAllByIndexSync(r'slug', values);
-  }
-
-  Future<Id> putBySlug(SprawFamily object) {
-    return putByIndex(r'slug', object);
-  }
-
-  Id putBySlugSync(SprawFamily object, {bool saveLinks = true}) {
-    return putByIndexSync(r'slug', object, saveLinks: saveLinks);
-  }
-
-  Future<List<Id>> putAllBySlug(List<SprawFamily> objects) {
-    return putAllByIndex(r'slug', objects);
-  }
-
-  List<Id> putAllBySlugSync(
-    List<SprawFamily> objects, {
-    bool saveLinks = true,
-  }) {
-    return putAllByIndexSync(r'slug', objects, saveLinks: saveLinks);
-  }
 }
 
 extension SprawFamilyQueryWhereSort
@@ -4458,7 +4293,7 @@ const SprawSchema = CollectionSchema(
     r'slug': IndexSchema(
       id: 6169444064746062836,
       name: r'slug',
-      unique: true,
+      unique: false,
       replace: false,
       properties: [
         IndexPropertySchema(
@@ -4653,58 +4488,6 @@ void _sprawAttach(IsarCollection<dynamic> col, Id id, Spraw object) {
 }
 
 extension SprawByIndex on IsarCollection<Spraw> {
-  Future<Spraw?> getBySlug(String slug) {
-    return getByIndex(r'slug', [slug]);
-  }
-
-  Spraw? getBySlugSync(String slug) {
-    return getByIndexSync(r'slug', [slug]);
-  }
-
-  Future<bool> deleteBySlug(String slug) {
-    return deleteByIndex(r'slug', [slug]);
-  }
-
-  bool deleteBySlugSync(String slug) {
-    return deleteByIndexSync(r'slug', [slug]);
-  }
-
-  Future<List<Spraw?>> getAllBySlug(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return getAllByIndex(r'slug', values);
-  }
-
-  List<Spraw?> getAllBySlugSync(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return getAllByIndexSync(r'slug', values);
-  }
-
-  Future<int> deleteAllBySlug(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return deleteAllByIndex(r'slug', values);
-  }
-
-  int deleteAllBySlugSync(List<String> slugValues) {
-    final values = slugValues.map((e) => [e]).toList();
-    return deleteAllByIndexSync(r'slug', values);
-  }
-
-  Future<Id> putBySlug(Spraw object) {
-    return putByIndex(r'slug', object);
-  }
-
-  Id putBySlugSync(Spraw object, {bool saveLinks = true}) {
-    return putByIndexSync(r'slug', object, saveLinks: saveLinks);
-  }
-
-  Future<List<Id>> putAllBySlug(List<Spraw> objects) {
-    return putAllByIndex(r'slug', objects);
-  }
-
-  List<Id> putAllBySlugSync(List<Spraw> objects, {bool saveLinks = true}) {
-    return putAllByIndexSync(r'slug', objects, saveLinks: saveLinks);
-  }
-
   Future<Spraw?> getByUniqName(String uniqName) {
     return getByIndex(r'uniqName', [uniqName]);
   }
