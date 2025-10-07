@@ -7,8 +7,6 @@ import 'package:path/path.dart' as p;
 
 part 'models.g.dart';
 
-String makeRaw(String value) => simplifyString(value, spaceStrategy: SpaceStrategy.remove);
-
 @collection
 class SprawBook {
   Id id = Isar.autoIncrement;
@@ -243,14 +241,14 @@ class Spraw {
         ..slug = data['slug']
         ..iconPath = iconPath
         ..name = data['name']
-        ..nameRaw = makeRaw(data['name'])
+        ..nameRaw = searchableString(data['name'])
         ..hiddenNames = (data['hiddenNames'] as List<dynamic>?)?.cast<String>() ?? []
         ..hiddenNamesRaw = (data['hiddenNames'] as List<dynamic>?)?.map(
-          (hiddenName) => makeRaw(hiddenName)
+          (hiddenName) => searchableString(hiddenName)
         ).toList() ?? []
         ..level = data['level']
         ..comment = data['comment']
-        ..commentRaw = data['comment']==null? null: makeRaw(data['comment'])
+        ..commentRaw = data['comment']==null? null: searchableString(data['comment'])
         ..tasksAreExamples = data['tasksAreExamples'] ?? false;
 
       // Parse tasks and create SprawTask objects
@@ -258,7 +256,7 @@ class Spraw {
       for (int i = 0; i < tasksList.length; i++) {
         final task = SprawTask()
           ..text = tasksList[i]
-          ..textRaw = makeRaw(tasksList[i])
+          ..textRaw = searchableString(tasksList[i])
           ..index = i
           ..spraw.value = spraw;
         spraw.tasks.add(task);

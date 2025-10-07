@@ -86,44 +86,7 @@ int compareText(String s1, String s2, {bool replaceStrangeChars = true}){
   return s1.length - s2.length;
 }
 
-enum SpaceStrategy{
-  space,
-  underscore,
-  remove
-}
-
 String removeNonWordChars(String value, {bool keepSpaces = false}) => value.replaceAll(RegExp(keepSpaces ? r"[^\w ]" : r"[^\w]"), '');
-
-String simplifyString(String string, {SpaceStrategy spaceStrategy = SpaceStrategy.underscore}){
-  string = string.trim();
-  string = remPolChars(string);
-
-  String spaceChar;
-  switch(spaceStrategy){
-    case SpaceStrategy.space:
-      spaceChar = ' ';
-      break;
-    case SpaceStrategy.underscore:
-      spaceChar = '_';
-      break;
-    case SpaceStrategy.remove:
-      spaceChar = '';
-      break;
-  }
-  string = string
-      .replaceAll(':', spaceChar)
-      .replaceAll('-', spaceChar)
-      .replaceAll('/', spaceChar)
-      .replaceAll(' ', spaceChar);
-
-  if(spaceStrategy == SpaceStrategy.space)
-    string = string.replaceAll(RegExp(r" +"), " ");
-  else if(spaceStrategy == SpaceStrategy.underscore)
-    string = string.replaceAll(RegExp(r"_+"), "_");
-
-  return removeNonWordChars(string, keepSpaces: spaceStrategy == SpaceStrategy.space);
-
-}
 
 String remPolChars(String string){
   return string.toLowerCase()
@@ -189,3 +152,42 @@ bool isDigit(String string){
     return false;
   }
 }
+
+enum SpaceStrategy{
+  space,
+  underscore,
+  remove
+}
+
+String simplifyString(String string, {SpaceStrategy spaceStrategy = SpaceStrategy.underscore}){
+  string = string.trim();
+  string = remPolChars(string);
+
+  String spaceChar;
+  switch(spaceStrategy){
+    case SpaceStrategy.space:
+      spaceChar = ' ';
+      break;
+    case SpaceStrategy.underscore:
+      spaceChar = '_';
+      break;
+    case SpaceStrategy.remove:
+      spaceChar = '';
+      break;
+  }
+  string = string
+      .replaceAll(':', spaceChar)
+      .replaceAll('-', spaceChar)
+      .replaceAll('/', spaceChar)
+      .replaceAll(' ', spaceChar);
+
+  if(spaceStrategy == SpaceStrategy.space)
+    string = string.replaceAll(RegExp(r" +"), " ");
+  else if(spaceStrategy == SpaceStrategy.underscore)
+    string = string.replaceAll(RegExp(r"_+"), "_");
+
+  return removeNonWordChars(string, keepSpaces: spaceStrategy == SpaceStrategy.space);
+
+}
+
+String searchableString(String string) => simplifyString(string, spaceStrategy: SpaceStrategy.remove);
