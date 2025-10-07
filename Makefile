@@ -22,3 +22,10 @@ import_spraw_books:
 	mkdir -p "$(ISAR_DIR)"
 	@echo "Importing all sprawnosci books -> Isar dir: $(ISAR_DIR)"
 	dart run lib/sprawnosci/generator.dart "$(ISAR_DIR)"
+
+.PHONY: count_spraws
+
+# Count the number of sprawności in the database
+count_spraws:
+	@echo "Counting sprawności in database: $(ISAR_DIR)"
+	dart run tool/count_spraws.dart "$(ISAR_DIR)"

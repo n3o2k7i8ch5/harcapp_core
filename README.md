@@ -13,3 +13,19 @@ See:
    ```bash
    export PATH="$PATH":"$HOME/.pub-cache/bin"
    ```
+
+## Working with Sprawności Database
+
+### Count sprawności in the database
+```bash
+make count_spraws
+```
+
+Or directly:
+```bash
+dart run tool/count_spraws.dart [isarDir?]
+```
+
+This will display:
+- Total counts of books, groups, families, spraws, and tasks
+- Breakdown of spraws per book
