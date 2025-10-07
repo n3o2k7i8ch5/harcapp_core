@@ -33,7 +33,7 @@ const SprawBookSchema = CollectionSchema(
     r'slug': IndexSchema(
       id: 6169444064746062836,
       name: r'slug',
-      unique: false,
+      unique: true,
       replace: false,
       properties: [
         IndexPropertySchema(
@@ -140,6 +140,60 @@ List<IsarLinkBase<dynamic>> _sprawBookGetLinks(SprawBook object) {
 void _sprawBookAttach(IsarCollection<dynamic> col, Id id, SprawBook object) {
   object.id = id;
   object.groups.attach(col, col.isar.collection<SprawGroup>(), r'groups', id);
+}
+
+extension SprawBookByIndex on IsarCollection<SprawBook> {
+  Future<SprawBook?> getBySlug(String slug) {
+    return getByIndex(r'slug', [slug]);
+  }
+
+  SprawBook? getBySlugSync(String slug) {
+    return getByIndexSync(r'slug', [slug]);
+  }
+
+  Future<bool> deleteBySlug(String slug) {
+    return deleteByIndex(r'slug', [slug]);
+  }
+
+  bool deleteBySlugSync(String slug) {
+    return deleteByIndexSync(r'slug', [slug]);
+  }
+
+  Future<List<SprawBook?>> getAllBySlug(List<String> slugValues) {
+    final values = slugValues.map((e) => [e]).toList();
+    return getAllByIndex(r'slug', values);
+  }
+
+  List<SprawBook?> getAllBySlugSync(List<String> slugValues) {
+    final values = slugValues.map((e) => [e]).toList();
+    return getAllByIndexSync(r'slug', values);
+  }
+
+  Future<int> deleteAllBySlug(List<String> slugValues) {
+    final values = slugValues.map((e) => [e]).toList();
+    return deleteAllByIndex(r'slug', values);
+  }
+
+  int deleteAllBySlugSync(List<String> slugValues) {
+    final values = slugValues.map((e) => [e]).toList();
+    return deleteAllByIndexSync(r'slug', values);
+  }
+
+  Future<Id> putBySlug(SprawBook object) {
+    return putByIndex(r'slug', object);
+  }
+
+  Id putBySlugSync(SprawBook object, {bool saveLinks = true}) {
+    return putByIndexSync(r'slug', object, saveLinks: saveLinks);
+  }
+
+  Future<List<Id>> putAllBySlug(List<SprawBook> objects) {
+    return putAllByIndex(r'slug', objects);
+  }
+
+  List<Id> putAllBySlugSync(List<SprawBook> objects, {bool saveLinks = true}) {
+    return putAllByIndexSync(r'slug', objects, saveLinks: saveLinks);
+  }
 }
 
 extension SprawBookQueryWhereSort
