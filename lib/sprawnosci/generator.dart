@@ -1,34 +1,79 @@
 import 'dart:io';
-
+import 'package:archive/archive.dart';
+import 'package:path/path.dart' as p;
 import 'package:harcapp_core/sprawnosci/data_importer.dart';
 import 'package:harcapp_core/sprawnosci/models.dart';
 import 'package:isar_community/isar.dart';
-import 'package:path/path.dart' as p;
 
-const _defaultIsarPath = 'assets/sprawnosci_db.isar';
 const _sprawRootPath = 'assets/sprawnosci';
 const _commonDirName = 'common';
 const _dataFileName = '_data.yaml';
+const _outputTarPath = 'assets/sprawnosci_db.isar.tar';
 
 Future<void> main(List<String> args) async {
   await Isar.initializeIsarCore(download: true);
 
-  final isarDirPath = args.isNotEmpty ? args[0] : _defaultIsarPath;
-  final bookDirs = await _findBookDirectories();
+  // Create a temporary directory for the database
+  final tempDbDir = Directory(p.join(Directory.systemTemp.path, 'sprawnosci_db_${DateTime.now().millisecondsSinceEpoch}'));
+  
+  try {
+    final bookDirs = await _findBookDirectories();
 
-  if (bookDirs.isEmpty) {
-    _exitWithError('No valid sprawnosci book directories found in: $_sprawRootPath');
+    if (bookDirs.isEmpty) {
+      _exitWithError('No valid sprawnosci book directories found in: $_sprawRootPath');
+    }
+
+    _printBookList(bookDirs);
+
+    // Create and populate the database in the temp directory
+    final isar = await _openIsar(tempDbDir.path);
+    await _clearExistingData(isar);
+    await _importBooks(isar, bookDirs);
+    await _printDatabaseStatistics(isar);
+    await isar.close();
+
+    // Create the output directory if it doesn't exist
+    final outputFile = File(_outputTarPath);
+    await outputFile.parent.create(recursive: true);
+
+    // Create tar archive
+    await _createTarArchive(tempDbDir, outputFile);
+
+    stdout.writeln('\nDatabase successfully packaged to: ${outputFile.absolute.path}');
+    stdout.writeln('Import completed. Processed ${bookDirs.length} book(s).');
+  } finally {
+    // Clean up the temporary directory
+    try {
+      if (await tempDbDir.exists()) {
+        await tempDbDir.delete(recursive: true);
+      }
+    } catch (e) {
+      stderr.writeln('Warning: Could not clean up temporary directory: ${tempDbDir.path}');
+      stderr.writeln('Error: $e');
+    }
   }
+}
 
-  _printBookList(bookDirs);
-
-  final isar = await _openIsar(isarDirPath);
-  await _clearExistingData(isar);
-  await _importBooks(isar, bookDirs);
-  await _printDatabaseStatistics(isar);
-  await isar.close();
-
-  stdout.writeln('Import completed. Processed ${bookDirs.length} book(s).');
+Future<void> _createTarArchive(Directory sourceDir, File outputFile) async {
+  stdout.writeln('\nCreating tar archive...');
+  
+  final archive = Archive();
+  final files = await sourceDir.list(recursive: true).where((e) => e is File).cast<File>().toList();
+  
+  for (final file in files) {
+    final relativePath = p.relative(file.path, from: sourceDir.path);
+    final data = await file.readAsBytes();
+    final archiveFile = ArchiveFile(relativePath, data.length, data);
+    archive.addFile(archiveFile);
+    stdout.writeln('  - Added: $relativePath');
+  }
+  
+  // Write the tar file
+  final tarData = TarEncoder().encode(archive);
+  await outputFile.writeAsBytes(tarData);
+  
+  stdout.writeln('Created tar archive at: ${outputFile.path}');
+  stdout.writeln('Total files: ${archive.files.length}');
 }
 
 Future<List<Directory>> _findBookDirectories() async {
@@ -59,6 +104,12 @@ void _printBookList(List<Directory> bookDirs) {
 }
 
 Future<Isar> _openIsar(String isarDirPath) async {
+  // Ensure the directory exists
+  final dir = Directory(isarDirPath);
+  if (!await dir.exists()) {
+    await dir.create(recursive: true);
+  }
+  
   stdout.writeln('Opening Isar at: $isarDirPath');
   return await Isar.open(
     [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema, SprawTaskSchema],
