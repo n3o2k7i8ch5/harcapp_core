@@ -10,10 +10,10 @@ import 'package:harcapp_core/comm_classes/sha_pref.dart';
 
 late Isar isar;
 
-class DatabaseUpdater {
+class _DBUpdater {
   final String shaPrefLastAppVersionSyncKey;
   
-  const DatabaseUpdater(this.shaPrefLastAppVersionSyncKey);
+  const _DBUpdater(this.shaPrefLastAppVersionSyncKey);
   
   Future<String> get _appVersion async {
     final info = await PackageInfo.fromPlatform();
@@ -94,7 +94,7 @@ Future<void> initIsar(String shaPrefLastAppVersionSyncKey) async {
   await Isar.initializeIsarCore(download: true);
   
   // Update database if needed
-  await DatabaseUpdater(shaPrefLastAppVersionSyncKey)
+  await _DBUpdater(shaPrefLastAppVersionSyncKey)
       .updateIfNeeded('assets/sprawnosci_db.isar.tar');
   
   // Open the database
