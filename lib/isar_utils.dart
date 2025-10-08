@@ -95,7 +95,7 @@ Future<void> initIsar(String shaPrefLastAppVersionSyncKey) async {
   
   // Update database if needed
   await _DBUpdater(shaPrefLastAppVersionSyncKey)
-      .updateIfNeeded('assets/sprawnosci_db.isar.tar');
+      .updateIfNeeded('packages/harcapp_core/assets/sprawnosci_db.isar.tar');
   
   // Open the database
   isar = await Isar.open(
