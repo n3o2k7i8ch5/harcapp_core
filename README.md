@@ -16,16 +16,20 @@ See:
 
 ## Working with Sprawności Database
 
-### Count sprawności in the database
+### Quick Start
+
+Import all sprawności books into the database:
+
 ```bash
-make count_spraws
+make import_spraw_books
 ```
 
-Or directly:
-```bash
-dart run tool/count_spraws.dart [isarDir?]
-```
+### Documentation
 
-This will display:
-- Total counts of books, groups, families, spraws, and tasks
-- Breakdown of spraws per book
+For detailed information about the sprawności module, including:
+- Data structure and models
+- Import process
+- Querying examples
+- Development guidelines
+
+See **[`lib/sprawnosci/README.md`](lib/sprawnosci/README.md)**

@@ -19,6 +19,21 @@ class SprawBook {
 
   @Backlink(to: 'sprawBook')
   final groups = IsarLinks<SprawGroup>();
+
+  @Ignore()
+  Iterable<Spraw> get allSpraws => groups.expand((g) => g.families.expand((f) => f.spraws));
+
+  QueryBuilder<Spraw, String, QQueryOperations> allSprawUniqNamesQuery(Isar isar){
+    final prefix = '$slug${Spraw.uniqNameSepChar}';
+    return isar.spraws
+        .filter()
+        .uniqNameStartsWith(prefix)
+        .uniqNameProperty();
+  }
+
+  Future<List<String>> allSprawUniqNames(Isar isar) => allSprawUniqNamesQuery(isar).findAll();
+  List<String> allSprawUniqNamesSync(Isar isar) => allSprawUniqNamesQuery(isar).findAllSync();
+
 }
 
 @collection
