@@ -61,6 +61,41 @@ class _DBUpdater {
     }
   }
 
+  Future<void> _validateExtractedArchive(Directory dbDir) async {
+    // Validate extraction
+    final extractedFiles = await dbDir.list().toList();
+    if (extractedFiles.isEmpty) {
+      throw Exception('Database extraction failed: no files extracted');
+    }
+
+    // Check if default.isar exists and has data
+    final isarFile = File(join(dbDir.path, 'default.isar'));
+    if (!await isarFile.exists()) {
+      throw Exception('Database extraction failed: default.isar not found');
+    }
+
+    final fileSize = await isarFile.length();
+    if (fileSize == 0) {
+      throw Exception('Database extraction failed: default.isar is empty');
+    }
+
+    // Validate by opening and checking for data
+    final tempIsar = await Isar.open(
+      [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema, SprawTaskSchema],
+      directory: dbDir.path,
+      name: 'validation',
+    );
+
+    try {
+      final bookCount = tempIsar.sprawBooks.countSync();
+      if (bookCount == 0) {
+        throw Exception('Database validation failed: database contains no books');
+      }
+    } finally {
+      await tempIsar.close();
+    }
+  }
+
   Future<void> updateIfNeeded(String assetPath) async {
     if (!await _needsUpdate()) return;
     
@@ -79,7 +114,9 @@ class _DBUpdater {
       await tarFile.writeAsBytes(data.buffer.asUint8List(0, data.lengthInBytes));
       
       await _extractTarArchive(tarFile, dbDir);
-      
+
+      await _validateExtractedArchive(dbDir);
+
       await _markAsUpdated();
     } catch (e) {
       throw Exception('Failed to update database: $e');
