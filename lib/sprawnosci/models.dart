@@ -56,6 +56,19 @@ class SprawGroup {
 
   @Ignore()
   Iterable<Spraw> get allSpraws => families.expand((f) => f.spraws);
+
+
+  QueryBuilder<Spraw, String, QQueryOperations> allSprawUniqNamesQuery(Isar isar){
+    final prefix = '${sprawBook.value!.slug}${Spraw.uniqNameSepChar}$slug${Spraw.uniqNameSepChar}';
+    return isar.spraws
+        .filter()
+        .uniqNameStartsWith(prefix)
+        .uniqNameProperty();
+  }
+
+  Future<List<String>> allSprawUniqNames(Isar isar) => allSprawUniqNamesQuery(isar).findAll();
+  List<String> allSprawUniqNamesSync(Isar isar) => allSprawUniqNamesQuery(isar).findAllSync();
+
 }
 
 @collection
