@@ -6,7 +6,7 @@ late Isar isar;
 Future<void> initIsar() async {
   await Isar.initializeIsarCore(download: true);
   isar = await Isar.open(
-    [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema],
+    [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema, SprawTaskSchema],
     directory: 'assets/sprawnosci_db.isar',
   );
 }
