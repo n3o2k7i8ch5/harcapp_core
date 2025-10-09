@@ -177,9 +177,9 @@ class SprawDBImporter {
     final data = readYaml(dataFile);
 
     String? iconPath = iconLinkFile.existsSync()
-        ? readYaml(iconLinkFile)['link']
+        ? "packages/harcapp_core/assets/sprawnosci/${readYaml(iconLinkFile)['link']}"
         : iconFile.existsSync()
-            ? iconFile.path
+            ? "packages/harcapp_core/${iconFile.path}"
             : null;
 
     try {
