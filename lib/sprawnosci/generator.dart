@@ -9,6 +9,7 @@ const _sprawRootPath = 'assets/sprawnosci';
 const _commonDirName = 'common';
 const _dataFileName = '_data.yaml';
 const _outputTarPath = 'assets/sprawnosci_db.isar.tar';
+const _outputDirPath = 'assets/sprawnosci_db.isar';
 
 Future<void> main(List<String> args) async {
   await Isar.initializeIsarCore(download: true);
@@ -19,9 +20,8 @@ Future<void> main(List<String> args) async {
   try {
     final bookDirs = await _findBookDirectories();
 
-    if (bookDirs.isEmpty) {
+    if (bookDirs.isEmpty)
       _exitWithError('No valid sprawnosci book directories found in: $_sprawRootPath');
-    }
 
     _printBookList(bookDirs);
 
@@ -32,16 +32,25 @@ Future<void> main(List<String> args) async {
     await _printDatabaseStatistics(isar);
     await isar.close();
 
-    // Create the output directory if it doesn't exist
-    final outputFile = File(_outputTarPath);
-    await outputFile.parent.create(recursive: true);
+    final outputAsTar = args.contains('--tar');
 
-    // Create tar archive
-    await _createTarArchive(tempDbDir, outputFile);
-
-    stdout.writeln('\nDatabase successfully packaged to: ${outputFile.absolute.path}');
-
-    await _validateTar(outputFile);
+    if (outputAsTar) {
+      // Create tar archive
+      final outputFile = File(_outputTarPath);
+      await outputFile.parent.create(recursive: true);
+      await _createTarArchive(tempDbDir, outputFile);
+      stdout.writeln('\nDatabase successfully packaged to: ${outputFile.absolute.path}');
+      await _validateTar(outputFile);
+    } else {
+      // Copy database directory directly
+      final outputDir = Directory(_outputDirPath);
+      if (await outputDir.exists()) {
+        await outputDir.delete(recursive: true);
+      }
+      await outputDir.create(recursive: true);
+      await _copyDirectory(tempDbDir, outputDir);
+      stdout.writeln('\nDatabase successfully copied to: ${outputDir.absolute.path}');
+    }
 
     stdout.writeln('Import completed. Processed ${bookDirs.length} book(s).');
   } finally {
@@ -196,8 +205,7 @@ Future<void> _validateTar(File outputFile) async {
     // Check if the required files exist
     final requiredFiles = [
       'default.isar',
-      'default.isar.lock',
-      'default.isar-wal'
+      'default.isar-lck',
     ];
     for (final fileName in requiredFiles) {
       final file = File('${tempDir.path}/$fileName');
@@ -234,7 +242,7 @@ Future<void> _validateTar(File outputFile) async {
       final taskCount = await isar.sprawTasks.count();
 
       print('📚 Books: $bookCount');
-      print('🏷️  Groups: $groupCount');
+      print('🏷️ Groups: $groupCount');
       print('👨‍👩‍👧‍👦 Families: $familyCount');
       print('⭐ Spraws: $sprawCount');
       print('✅ Tasks: $taskCount');
@@ -258,6 +266,19 @@ Future<void> _validateTar(File outputFile) async {
       await tempDir.delete(recursive: true);
     } catch (e) {
       print('⚠️  Warning: Failed to clean up temporary directory: $e');
+    }
+  }
+}
+
+Future<void> _copyDirectory(Directory source, Directory destination) async {
+  await for (final entity in source.list(recursive: false)) {
+    if (entity is File) {
+      final newPath = p.join(destination.path, p.basename(entity.path));
+      await entity.copy(newPath);
+    } else if (entity is Directory) {
+      final newDir = Directory(p.join(destination.path, p.basename(entity.path)));
+      await newDir.create(recursive: true);
+      await _copyDirectory(entity, newDir);
     }
   }
 }

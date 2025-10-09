@@ -28,7 +28,7 @@ class _DBUpdater {
 
   Future<void> _markAsUpdated() async => ShaPref.setString(shaPrefLastAppVersionSyncKey, await _appVersion);
 
-  Future<String> get databasePath async {
+  static Future<String> get databaseDirectory async {
     final dir = await getApplicationDocumentsDirectory();
     return '${dir.path}/sprawnosci_db.isar';
   }
@@ -96,7 +96,7 @@ class _DBUpdater {
   Future<void> updateIfNeeded(String assetPath) async {
     if (!await _needsUpdate()) return;
     
-    final dbDir = Directory(await databasePath);
+    final dbDir = Directory(await databaseDirectory);
     
     if (await dbDir.exists())
       await dbDir.delete(recursive: true);
@@ -124,6 +124,7 @@ class _DBUpdater {
     }
   }
 }
+
 Future<void> initIsar(String shaPrefLastAppVersionSyncKey) async {
   await Isar.initializeIsarCore(download: true);
   
@@ -132,8 +133,9 @@ Future<void> initIsar(String shaPrefLastAppVersionSyncKey) async {
       .updateIfNeeded('packages/harcapp_core/assets/sprawnosci_db.isar.tar');
   
   // Open the database
+  final dbDir = await _DBUpdater.databaseDirectory;
   isar = await Isar.open(
     [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema, SprawTaskSchema],
-    directory: (await getApplicationDocumentsDirectory()).path,
+    directory: dbDir,
   );
 }

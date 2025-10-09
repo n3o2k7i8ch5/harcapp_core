@@ -21,7 +21,7 @@ ISAR_DIR?=assets/sprawnosci_db.isar
 import_spraw_books:
 	mkdir -p "$(ISAR_DIR)"
 	@echo "Importing all sprawnosci books -> Isar dir: $(ISAR_DIR)"
-	dart run lib/sprawnosci/generator.dart "$(ISAR_DIR)"
+	dart run lib/sprawnosci/generator.dart --tar "$(ISAR_DIR)"
 
 .PHONY: count_spraws
 
