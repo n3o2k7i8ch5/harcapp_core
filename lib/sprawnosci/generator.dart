@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:archive/archive.dart';
-import 'package:harcapp_core/isar_utils.dart';
+import 'package:harcapp_core/isar/open_isar.dart';
 import 'package:path/path.dart' as p;
 import 'package:harcapp_core/sprawnosci/data_importer.dart';
 import 'package:harcapp_core/sprawnosci/models.dart';
