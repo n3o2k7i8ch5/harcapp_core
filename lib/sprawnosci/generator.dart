@@ -40,6 +40,9 @@ Future<void> main(List<String> args) async {
     await _createTarArchive(tempDbDir, outputFile);
 
     stdout.writeln('\nDatabase successfully packaged to: ${outputFile.absolute.path}');
+
+    await _validateTar(outputFile);
+
     stdout.writeln('Import completed. Processed ${bookDirs.length} book(s).');
   } finally {
     // Clean up the temporary directory
@@ -162,6 +165,101 @@ Future<void> _printDatabaseStatistics(Isar isar) async {
   stdout.writeln('Spraws:   $sprawCount');
   stdout.writeln('Tasks:    $taskCount');
   stdout.writeln('');
+}
+
+Future<void> _validateTar(File outputFile) async {
+  if (!await outputFile.exists()) {
+    print('❌ Error: Tar file does not exist at ${outputFile.path}');
+    return;
+  }
+
+  // Create a temporary directory for extraction
+  final tempDir = Directory.systemTemp.createTempSync('sprawnosci_validate');
+
+  try {
+    print('🔍 Validating tar file: ${outputFile.path}');
+
+    // Extract the tar file
+    final tarData = await outputFile.readAsBytes();
+    final archive = TarDecoder().decodeBytes(tarData);
+
+    for (final file in archive.files) {
+      if (!file.isFile) continue;
+
+      final outputPath = '${tempDir.path}/${file.name}';
+      final outputFile = File(outputPath);
+
+      await outputFile.parent.create(recursive: true);
+      await outputFile.writeAsBytes(file.content as List<int>);
+    }
+
+    // Check if the required files exist
+    final requiredFiles = [
+      'default.isar',
+      'default.isar.lock',
+      'default.isar-wal'
+    ];
+    for (final fileName in requiredFiles) {
+      final file = File('${tempDir.path}/$fileName');
+      if (!await file.exists()) {
+        throw Exception(
+            '❌ Required file $fileName is missing in the tar archive');
+      }
+      final size = await file.length();
+      print('✅ Found $fileName (${size} bytes)');
+    }
+
+    // Try to open the database
+    print('\n🔑 Opening database for validation...');
+    final isar = await Isar.open(
+      [
+        SprawBookSchema,
+        SprawGroupSchema,
+        SprawFamilySchema,
+        SprawSchema,
+        SprawTaskSchema
+      ],
+      directory: tempDir.path,
+    );
+
+    try {
+      // Print database statistics
+      print('\n📊 Database Statistics:');
+      print('---------------------');
+
+      final bookCount = await isar.sprawBooks.count();
+      final groupCount = await isar.sprawGroups.count();
+      final familyCount = await isar.sprawFamilys.count();
+      final sprawCount = await isar.spraws.count();
+      final taskCount = await isar.sprawTasks.count();
+
+      print('📚 Books: $bookCount');
+      print('🏷️  Groups: $groupCount');
+      print('👨‍👩‍👧‍👦 Families: $familyCount');
+      print('⭐ Spraws: $sprawCount');
+      print('✅ Tasks: $taskCount');
+
+      // Print some sample data
+      if (bookCount > 0) {
+        final sampleBook = await isar.sprawBooks.where().findFirst();
+        print('\n📖 Sample Book: ${sampleBook?.name} (ID: ${sampleBook?.id})');
+      }
+
+      print('\n✅ Validation successful! Database is valid.');
+    } finally {
+      await isar.close();
+    }
+  } catch (e) {
+    print('❌ Validation failed: $e');
+    rethrow;
+  } finally {
+    // Clean up
+    try {
+      await tempDir.delete(recursive: true);
+    } catch (e) {
+      print('⚠️  Warning: Failed to clean up temporary directory: $e');
+    }
+  }
 }
 
 Never _exitWithError(String message) {

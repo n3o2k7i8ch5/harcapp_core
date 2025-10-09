@@ -64,20 +64,17 @@ class _DBUpdater {
   Future<void> _validateExtractedArchive(Directory dbDir) async {
     // Validate extraction
     final extractedFiles = await dbDir.list().toList();
-    if (extractedFiles.isEmpty) {
+    if (extractedFiles.isEmpty)
       throw Exception('Database extraction failed: no files extracted');
-    }
 
     // Check if default.isar exists and has data
     final isarFile = File(join(dbDir.path, 'default.isar'));
-    if (!await isarFile.exists()) {
+    if (!await isarFile.exists())
       throw Exception('Database extraction failed: default.isar not found');
-    }
 
     final fileSize = await isarFile.length();
-    if (fileSize == 0) {
+    if (fileSize == 0)
       throw Exception('Database extraction failed: default.isar is empty');
-    }
 
     // Validate by opening and checking for data
     final tempIsar = await Isar.open(
@@ -88,9 +85,9 @@ class _DBUpdater {
 
     try {
       final bookCount = tempIsar.sprawBooks.countSync();
-      if (bookCount == 0) {
+      if (bookCount == 0)
         throw Exception('Database validation failed: database contains no books');
-      }
+
     } finally {
       await tempIsar.close();
     }
