@@ -1164,7 +1164,12 @@ const SprawGroupSchema = CollectionSchema(
     ),
     r'name': PropertySchema(id: 1, name: r'name', type: IsarType.string),
     r'slug': PropertySchema(id: 2, name: r'slug', type: IsarType.string),
-    r'tags': PropertySchema(id: 3, name: r'tags', type: IsarType.stringList),
+    r'sortIndex': PropertySchema(
+      id: 3,
+      name: r'sortIndex',
+      type: IsarType.long,
+    ),
+    r'tags': PropertySchema(id: 4, name: r'tags', type: IsarType.stringList),
   },
 
   estimateSize: _sprawGroupEstimateSize,
@@ -1182,6 +1187,19 @@ const SprawGroupSchema = CollectionSchema(
         IndexPropertySchema(
           name: r'slug',
           type: IndexType.hash,
+          caseSensitive: false,
+        ),
+      ],
+    ),
+    r'sortIndex': IndexSchema(
+      id: -1914576846740722168,
+      name: r'sortIndex',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'sortIndex',
+          type: IndexType.value,
           caseSensitive: false,
         ),
       ],
@@ -1243,7 +1261,8 @@ void _sprawGroupSerialize(
   writer.writeString(offsets[0], object.description);
   writer.writeString(offsets[1], object.name);
   writer.writeString(offsets[2], object.slug);
-  writer.writeStringList(offsets[3], object.tags);
+  writer.writeLong(offsets[3], object.sortIndex);
+  writer.writeStringList(offsets[4], object.tags);
 }
 
 SprawGroup _sprawGroupDeserialize(
@@ -1257,7 +1276,8 @@ SprawGroup _sprawGroupDeserialize(
   object.id = id;
   object.name = reader.readString(offsets[1]);
   object.slug = reader.readString(offsets[2]);
-  object.tags = reader.readStringList(offsets[3]) ?? [];
+  object.sortIndex = reader.readLong(offsets[3]);
+  object.tags = reader.readStringList(offsets[4]) ?? [];
   return object;
 }
 
@@ -1275,6 +1295,8 @@ P _sprawGroupDeserializeProp<P>(
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
+      return (reader.readLong(offset)) as P;
+    case 4:
       return (reader.readStringList(offset) ?? []) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1310,6 +1332,14 @@ extension SprawGroupQueryWhereSort
   QueryBuilder<SprawGroup, SprawGroup, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterWhere> anySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'sortIndex'),
+      );
     });
   }
 }
@@ -1435,6 +1465,111 @@ extension SprawGroupQueryWhere
               ),
             );
       }
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterWhereClause> sortIndexEqualTo(
+    int sortIndex,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.equalTo(indexName: r'sortIndex', value: [sortIndex]),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterWhereClause> sortIndexNotEqualTo(
+    int sortIndex,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [],
+                upper: [sortIndex],
+                includeUpper: false,
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [sortIndex],
+                includeLower: false,
+                upper: [],
+              ),
+            );
+      } else {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [sortIndex],
+                includeLower: false,
+                upper: [],
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [],
+                upper: [sortIndex],
+                includeUpper: false,
+              ),
+            );
+      }
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterWhereClause> sortIndexGreaterThan(
+    int sortIndex, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'sortIndex',
+          lower: [sortIndex],
+          includeLower: include,
+          upper: [],
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterWhereClause> sortIndexLessThan(
+    int sortIndex, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'sortIndex',
+          lower: [],
+          upper: [sortIndex],
+          includeUpper: include,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterWhereClause> sortIndexBetween(
+    int lowerSortIndex,
+    int upperSortIndex, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'sortIndex',
+          lower: [lowerSortIndex],
+          includeLower: includeLower,
+          upper: [upperSortIndex],
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 }
@@ -1951,6 +2086,63 @@ extension SprawGroupQueryFilter
     });
   }
 
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition> sortIndexEqualTo(
+    int value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'sortIndex', value: value),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  sortIndexGreaterThan(int value, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'sortIndex',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition> sortIndexLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'sortIndex',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition> sortIndexBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'sortIndex',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+
   QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
   tagsElementEqualTo(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -2263,6 +2455,18 @@ extension SprawGroupQuerySortBy
       return query.addSortBy(r'slug', Sort.desc);
     });
   }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> sortBySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> sortBySortIndexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.desc);
+    });
+  }
 }
 
 extension SprawGroupQuerySortThenBy
@@ -2314,6 +2518,18 @@ extension SprawGroupQuerySortThenBy
       return query.addSortBy(r'slug', Sort.desc);
     });
   }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> thenBySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> thenBySortIndexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.desc);
+    });
+  }
 }
 
 extension SprawGroupQueryWhereDistinct
@@ -2339,6 +2555,12 @@ extension SprawGroupQueryWhereDistinct
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'slug', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QDistinct> distinctBySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'sortIndex');
     });
   }
 
@@ -2372,6 +2594,12 @@ extension SprawGroupQueryProperty
   QueryBuilder<SprawGroup, String, QQueryOperations> slugProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'slug');
+    });
+  }
+
+  QueryBuilder<SprawGroup, int, QQueryOperations> sortIndexProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'sortIndex');
     });
   }
 
@@ -2415,7 +2643,12 @@ const SprawFamilySchema = CollectionSchema(
       type: IsarType.stringList,
     ),
     r'slug': PropertySchema(id: 5, name: r'slug', type: IsarType.string),
-    r'tags': PropertySchema(id: 6, name: r'tags', type: IsarType.stringList),
+    r'sortIndex': PropertySchema(
+      id: 6,
+      name: r'sortIndex',
+      type: IsarType.long,
+    ),
+    r'tags': PropertySchema(id: 7, name: r'tags', type: IsarType.stringList),
   },
 
   estimateSize: _sprawFamilyEstimateSize,
@@ -2433,6 +2666,19 @@ const SprawFamilySchema = CollectionSchema(
         IndexPropertySchema(
           name: r'slug',
           type: IndexType.hash,
+          caseSensitive: false,
+        ),
+      ],
+    ),
+    r'sortIndex': IndexSchema(
+      id: -1914576846740722168,
+      name: r'sortIndex',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'sortIndex',
+          type: IndexType.value,
           caseSensitive: false,
         ),
       ],
@@ -2517,7 +2763,8 @@ void _sprawFamilySerialize(
   writer.writeStringList(offsets[3], object.notesForLeaders);
   writer.writeStringList(offsets[4], object.requirements);
   writer.writeString(offsets[5], object.slug);
-  writer.writeStringList(offsets[6], object.tags);
+  writer.writeLong(offsets[6], object.sortIndex);
+  writer.writeStringList(offsets[7], object.tags);
 }
 
 SprawFamily _sprawFamilyDeserialize(
@@ -2534,7 +2781,8 @@ SprawFamily _sprawFamilyDeserialize(
   object.notesForLeaders = reader.readStringList(offsets[3]) ?? [];
   object.requirements = reader.readStringList(offsets[4]) ?? [];
   object.slug = reader.readString(offsets[5]);
-  object.tags = reader.readStringList(offsets[6]) ?? [];
+  object.sortIndex = reader.readLong(offsets[6]);
+  object.tags = reader.readStringList(offsets[7]) ?? [];
   return object;
 }
 
@@ -2558,6 +2806,8 @@ P _sprawFamilyDeserializeProp<P>(
     case 5:
       return (reader.readString(offset)) as P;
     case 6:
+      return (reader.readLong(offset)) as P;
+    case 7:
       return (reader.readStringList(offset) ?? []) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -2587,6 +2837,14 @@ extension SprawFamilyQueryWhereSort
   QueryBuilder<SprawFamily, SprawFamily, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterWhere> anySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'sortIndex'),
+      );
     });
   }
 }
@@ -2714,6 +2972,109 @@ extension SprawFamilyQueryWhere
               ),
             );
       }
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterWhereClause> sortIndexEqualTo(
+    int sortIndex,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.equalTo(indexName: r'sortIndex', value: [sortIndex]),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterWhereClause> sortIndexNotEqualTo(
+    int sortIndex,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [],
+                upper: [sortIndex],
+                includeUpper: false,
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [sortIndex],
+                includeLower: false,
+                upper: [],
+              ),
+            );
+      } else {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [sortIndex],
+                includeLower: false,
+                upper: [],
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [],
+                upper: [sortIndex],
+                includeUpper: false,
+              ),
+            );
+      }
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterWhereClause>
+  sortIndexGreaterThan(int sortIndex, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'sortIndex',
+          lower: [sortIndex],
+          includeLower: include,
+          upper: [],
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterWhereClause> sortIndexLessThan(
+    int sortIndex, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'sortIndex',
+          lower: [],
+          upper: [sortIndex],
+          includeUpper: include,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterWhereClause> sortIndexBetween(
+    int lowerSortIndex,
+    int upperSortIndex, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'sortIndex',
+          lower: [lowerSortIndex],
+          includeLower: includeLower,
+          upper: [upperSortIndex],
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 }
@@ -3789,6 +4150,61 @@ extension SprawFamilyQueryFilter
   }
 
   QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  sortIndexEqualTo(int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'sortIndex', value: value),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  sortIndexGreaterThan(int value, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'sortIndex',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  sortIndexLessThan(int value, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'sortIndex',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  sortIndexBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'sortIndex',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
   tagsElementEqualTo(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
@@ -4113,6 +4529,18 @@ extension SprawFamilyQuerySortBy
       return query.addSortBy(r'slug', Sort.desc);
     });
   }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterSortBy> sortBySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterSortBy> sortBySortIndexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.desc);
+    });
+  }
 }
 
 extension SprawFamilyQuerySortThenBy
@@ -4177,6 +4605,18 @@ extension SprawFamilyQuerySortThenBy
       return query.addSortBy(r'slug', Sort.desc);
     });
   }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterSortBy> thenBySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterSortBy> thenBySortIndexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.desc);
+    });
+  }
 }
 
 extension SprawFamilyQueryWhereDistinct
@@ -4226,6 +4666,12 @@ extension SprawFamilyQueryWhereDistinct
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'slug', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QDistinct> distinctBySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'sortIndex');
     });
   }
 
@@ -4283,6 +4729,12 @@ extension SprawFamilyQueryProperty
     });
   }
 
+  QueryBuilder<SprawFamily, int, QQueryOperations> sortIndexProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'sortIndex');
+    });
+  }
+
   QueryBuilder<SprawFamily, List<String>, QQueryOperations> tagsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'tags');
@@ -4326,13 +4778,18 @@ const SprawSchema = CollectionSchema(
     r'name': PropertySchema(id: 6, name: r'name', type: IsarType.string),
     r'nameRaw': PropertySchema(id: 7, name: r'nameRaw', type: IsarType.string),
     r'slug': PropertySchema(id: 8, name: r'slug', type: IsarType.string),
-    r'tasksAreExamples': PropertySchema(
+    r'sortIndex': PropertySchema(
       id: 9,
+      name: r'sortIndex',
+      type: IsarType.long,
+    ),
+    r'tasksAreExamples': PropertySchema(
+      id: 10,
       name: r'tasksAreExamples',
       type: IsarType.bool,
     ),
     r'uniqName': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'uniqName',
       type: IsarType.string,
     ),
@@ -4378,6 +4835,19 @@ const SprawSchema = CollectionSchema(
       properties: [
         IndexPropertySchema(
           name: r'level',
+          type: IndexType.value,
+          caseSensitive: false,
+        ),
+      ],
+    ),
+    r'sortIndex': IndexSchema(
+      id: -1914576846740722168,
+      name: r'sortIndex',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'sortIndex',
           type: IndexType.value,
           caseSensitive: false,
         ),
@@ -4467,8 +4937,9 @@ void _sprawSerialize(
   writer.writeString(offsets[6], object.name);
   writer.writeString(offsets[7], object.nameRaw);
   writer.writeString(offsets[8], object.slug);
-  writer.writeBool(offsets[9], object.tasksAreExamples);
-  writer.writeString(offsets[10], object.uniqName);
+  writer.writeLong(offsets[9], object.sortIndex);
+  writer.writeBool(offsets[10], object.tasksAreExamples);
+  writer.writeString(offsets[11], object.uniqName);
 }
 
 Spraw _sprawDeserialize(
@@ -4488,8 +4959,9 @@ Spraw _sprawDeserialize(
   object.name = reader.readString(offsets[6]);
   object.nameRaw = reader.readString(offsets[7]);
   object.slug = reader.readString(offsets[8]);
-  object.tasksAreExamples = reader.readBool(offsets[9]);
-  object.uniqName = reader.readString(offsets[10]);
+  object.sortIndex = reader.readLong(offsets[9]);
+  object.tasksAreExamples = reader.readBool(offsets[10]);
+  object.uniqName = reader.readString(offsets[11]);
   return object;
 }
 
@@ -4519,8 +4991,10 @@ P _sprawDeserializeProp<P>(
     case 8:
       return (reader.readString(offset)) as P;
     case 9:
-      return (reader.readBool(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 10:
+      return (reader.readBool(offset)) as P;
+    case 11:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -4606,6 +5080,14 @@ extension SprawQueryWhereSort on QueryBuilder<Spraw, Spraw, QWhere> {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'level'),
+      );
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterWhere> anySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'sortIndex'),
       );
     });
   }
@@ -4879,6 +5361,111 @@ extension SprawQueryWhere on QueryBuilder<Spraw, Spraw, QWhereClause> {
           lower: [lowerLevel],
           includeLower: includeLower,
           upper: [upperLevel],
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> sortIndexEqualTo(
+    int sortIndex,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.equalTo(indexName: r'sortIndex', value: [sortIndex]),
+      );
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> sortIndexNotEqualTo(
+    int sortIndex,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [],
+                upper: [sortIndex],
+                includeUpper: false,
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [sortIndex],
+                includeLower: false,
+                upper: [],
+              ),
+            );
+      } else {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [sortIndex],
+                includeLower: false,
+                upper: [],
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'sortIndex',
+                lower: [],
+                upper: [sortIndex],
+                includeUpper: false,
+              ),
+            );
+      }
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> sortIndexGreaterThan(
+    int sortIndex, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'sortIndex',
+          lower: [sortIndex],
+          includeLower: include,
+          upper: [],
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> sortIndexLessThan(
+    int sortIndex, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'sortIndex',
+          lower: [],
+          upper: [sortIndex],
+          includeUpper: include,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterWhereClause> sortIndexBetween(
+    int lowerSortIndex,
+    int upperSortIndex, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.between(
+          indexName: r'sortIndex',
+          lower: [lowerSortIndex],
+          includeLower: includeLower,
+          upper: [upperSortIndex],
           includeUpper: includeUpper,
         ),
       );
@@ -6317,6 +6904,65 @@ extension SprawQueryFilter on QueryBuilder<Spraw, Spraw, QFilterCondition> {
     });
   }
 
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> sortIndexEqualTo(
+    int value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'sortIndex', value: value),
+      );
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> sortIndexGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'sortIndex',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> sortIndexLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'sortIndex',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> sortIndexBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'sortIndex',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+
   QueryBuilder<Spraw, Spraw, QAfterFilterCondition> tasksAreExamplesEqualTo(
     bool value,
   ) {
@@ -6640,6 +7286,18 @@ extension SprawQuerySortBy on QueryBuilder<Spraw, Spraw, QSortBy> {
     });
   }
 
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortBySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortBySortIndexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.desc);
+    });
+  }
+
   QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByTasksAreExamples() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'tasksAreExamples', Sort.asc);
@@ -6762,6 +7420,18 @@ extension SprawQuerySortThenBy on QueryBuilder<Spraw, Spraw, QSortThenBy> {
     });
   }
 
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenBySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenBySortIndexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sortIndex', Sort.desc);
+    });
+  }
+
   QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByTasksAreExamples() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'tasksAreExamples', Sort.asc);
@@ -6854,6 +7524,12 @@ extension SprawQueryWhereDistinct on QueryBuilder<Spraw, Spraw, QDistinct> {
     });
   }
 
+  QueryBuilder<Spraw, Spraw, QDistinct> distinctBySortIndex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'sortIndex');
+    });
+  }
+
   QueryBuilder<Spraw, Spraw, QDistinct> distinctByTasksAreExamples() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'tasksAreExamples');
@@ -6927,6 +7603,12 @@ extension SprawQueryProperty on QueryBuilder<Spraw, Spraw, QQueryProperty> {
   QueryBuilder<Spraw, String, QQueryOperations> slugProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'slug');
+    });
+  }
+
+  QueryBuilder<Spraw, int, QQueryOperations> sortIndexProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'sortIndex');
     });
   }
 

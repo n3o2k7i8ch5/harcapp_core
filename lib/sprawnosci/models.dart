@@ -53,6 +53,9 @@ class SprawGroup {
 
   @Backlink(to: 'group')
   final families = IsarLinks<SprawFamily>();
+  
+  @Index()
+  late int sortIndex;
 
   @Ignore()
   Iterable<Spraw> get allSpraws => families.expand((f) => f.spraws);
@@ -93,6 +96,9 @@ class SprawFamily {
 
   @Backlink(to: 'family')
   final spraws = IsarLinks<Spraw>();
+  
+  @Index()
+  late int sortIndex;
 }
 
 @collection
@@ -137,6 +143,9 @@ class Spraw {
 
   @Backlink(to: 'spraw')
   final tasks = IsarLinks<SprawTask>();
+  
+  @Index()
+  late int sortIndex;
 
   // Convenience getters to access parent relationships
   @Ignore()

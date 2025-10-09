@@ -28,15 +28,20 @@ class SprawBookDBImporter {
       ..male = data['male'] as bool
       ..female = data['female'] as bool;
 
+    // Get list of group directories and sort them by name
     final groupDirs = dir
         .listSync()
         .whereType<Directory>()
-        .where((d) => p.basename(d.path).startsWith('group'));
+        .where((d) => p.basename(d.path).startsWith('group'))
+        .toList()
+      ..sort((a, b) => p.basename(a.path).compareTo(p.basename(b.path)));
 
     final groups = <SprawGroupDBImporter>[];
-    for (final d in groupDirs) {
+    for (int i = 0; i < groupDirs.length; i++) {
+      final d = groupDirs[i];
       final group = SprawGroupDBImporter.fromDir(d);
       group.group.sprawBook.value = book;
+      group.group.sortIndex = i; // Set sortIndex based on directory order
       groups.add(group);
     }
 
@@ -88,15 +93,20 @@ class SprawGroupDBImporter {
       ..tags = (data['tags'] as List<dynamic>?)?.cast<String>() ?? []
       ..name = data['name'];
 
+    // Get list of family directories and sort them by name
     final familyDirs = dir
         .listSync()
         .whereType<Directory>()
-        .where((d) => p.basename(d.path).startsWith('family'));
+        .where((d) => p.basename(d.path).startsWith('family'))
+        .toList()
+      ..sort((a, b) => p.basename(a.path).compareTo(p.basename(b.path)));
 
     final families = <SprawFamilyDBImporter>[];
-    for (final d in familyDirs) {
+    for (int i = 0; i < familyDirs.length; i++) {
+      final d = familyDirs[i];
       final family = SprawFamilyDBImporter.fromDir(d);
       family.family.group.value = group;
+      family.family.sortIndex = i; // Set sortIndex based on directory order
       families.add(family);
     }
 
@@ -135,15 +145,20 @@ class SprawFamilyDBImporter {
       ..requirements = (data['requirements'] as List<dynamic>?)?.cast<String>() ?? []
       ..notesForLeaders = (data['notesForLeaders'] as List<dynamic>?)?.cast<String>() ?? [];
 
+    // Get list of spraw directories and sort them by name (which starts with a number)
     final sprawDirs = dir
         .listSync()
         .whereType<Directory>()
-        .where((d) => RegExp(r'^[0-9]+@').hasMatch(p.basename(d.path)));
+        .where((d) => RegExp(r'^[0-9]+@').hasMatch(p.basename(d.path)))
+        .toList()
+      ..sort((a, b) => p.basename(a.path).compareTo(p.basename(b.path)));
 
     final spraws = <SprawDBImporter>[];
-    for (final d in sprawDirs) {
+    for (int i = 0; i < sprawDirs.length; i++) {
+      final d = sprawDirs[i];
       final spraw = SprawDBImporter.fromDir(d);
       spraw.spraw.family.value = family;
+      spraw.spraw.sortIndex = i; // Set sortIndex based on directory order
       spraws.add(spraw);
     }
 
@@ -195,8 +210,8 @@ class SprawDBImporter {
         ..nameRaw = searchableString(data['name'])
         ..hiddenNames = (data['hiddenNames'] as List<dynamic>?)?.cast<String>() ?? []
         ..hiddenNamesRaw = (data['hiddenNames'] as List<dynamic>?)
-                ?.map((hiddenName) => searchableString(hiddenName))
-                .toList() ??
+            ?.map((hiddenName) => searchableString(hiddenName))
+            .toList() ??
             []
         ..level = level
         ..comment = data['comment']
