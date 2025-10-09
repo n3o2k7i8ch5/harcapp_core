@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:archive/archive.dart';
+import 'package:harcapp_core/isar_utils.dart';
 import 'package:path/path.dart' as p;
 import 'package:harcapp_core/sprawnosci/data_importer.dart';
 import 'package:harcapp_core/sprawnosci/models.dart';
@@ -42,11 +43,11 @@ Future<void> main(List<String> args) async {
       stdout.writeln('\nDatabase successfully packaged to: ${outputFile.absolute.path}');
       await _validateTar(outputFile);
     } else {
-      // Copy database directory directly
+
       final outputDir = Directory(_outputDirPath);
-      if (await outputDir.exists()) {
+      if (await outputDir.exists())
         await outputDir.delete(recursive: true);
-      }
+
       await outputDir.create(recursive: true);
       await _copyDirectory(tempDbDir, outputDir);
       stdout.writeln('\nDatabase successfully copied to: ${outputDir.absolute.path}');
@@ -54,11 +55,9 @@ Future<void> main(List<String> args) async {
 
     stdout.writeln('Import completed. Processed ${bookDirs.length} book(s).');
   } finally {
-    // Clean up the temporary directory
     try {
-      if (await tempDbDir.exists()) {
-        await tempDbDir.delete(recursive: true);
-      }
+      if (await tempDbDir.exists()) await tempDbDir.delete(recursive: true);
+
     } catch (e) {
       stderr.writeln('Warning: Could not clean up temporary directory: ${tempDbDir.path}');
       stderr.writeln('Error: $e');
@@ -91,9 +90,8 @@ Future<void> _createTarArchive(Directory sourceDir, File outputFile) async {
 Future<List<Directory>> _findBookDirectories() async {
   final sprawRootDir = Directory(_sprawRootPath);
   
-  if (!sprawRootDir.existsSync()) {
+  if (!sprawRootDir.existsSync())
     _exitWithError('Sprawnosci root directory does not exist: ${sprawRootDir.path}');
-  }
 
   final bookDirs = <Directory>[];
   await for (final entity in sprawRootDir.list()) {
@@ -109,24 +107,17 @@ Future<List<Directory>> _findBookDirectories() async {
 
 void _printBookList(List<Directory> bookDirs) {
   stdout.writeln('Found ${bookDirs.length} sprawnosci book(s) to import:');
-  for (final dir in bookDirs) {
-    stdout.writeln('  - ${p.basename(dir.path)}');
-  }
+  for (final dir in bookDirs) stdout.writeln('  - ${p.basename(dir.path)}');
   stdout.writeln('');
 }
 
 Future<Isar> _openIsar(String isarDirPath) async {
   // Ensure the directory exists
   final dir = Directory(isarDirPath);
-  if (!await dir.exists()) {
-    await dir.create(recursive: true);
-  }
-  
+  if (!await dir.exists()) await dir.create(recursive: true);
+
   stdout.writeln('Opening Isar at: $isarDirPath');
-  return await Isar.open(
-    [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema, SprawTaskSchema],
-    directory: isarDirPath,
-  );
+  return await openIsar(isarDirPath);
 }
 
 Future<void> _clearExistingData(Isar isar) async {
@@ -209,10 +200,9 @@ Future<void> _validateTar(File outputFile) async {
     ];
     for (final fileName in requiredFiles) {
       final file = File('${tempDir.path}/$fileName');
-      if (!await file.exists()) {
-        throw Exception(
-            '❌ Required file $fileName is missing in the tar archive');
-      }
+      if (!await file.exists())
+        throw Exception('❌ Required file $fileName is missing in the tar archive');
+
       final size = await file.length();
       print('✅ Found $fileName (${size} bytes)');
     }

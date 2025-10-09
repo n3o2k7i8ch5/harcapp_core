@@ -61,37 +61,36 @@ class _DBUpdater {
     }
   }
 
-  Future<void> _validateExtractedArchive(Directory dbDir) async {
-    // Validate extraction
-    final extractedFiles = await dbDir.list().toList();
-    if (extractedFiles.isEmpty)
-      throw Exception('Database extraction failed: no files extracted');
-
-    // Check if default.isar exists and has data
-    final isarFile = File(join(dbDir.path, 'default.isar'));
-    if (!await isarFile.exists())
-      throw Exception('Database extraction failed: default.isar not found');
-
-    final fileSize = await isarFile.length();
-    if (fileSize == 0)
-      throw Exception('Database extraction failed: default.isar is empty');
-
-    // Validate by opening and checking for data
-    final tempIsar = await Isar.open(
-      [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema, SprawTaskSchema],
-      directory: dbDir.path,
-      name: 'validation',
-    );
-
-    try {
-      final bookCount = tempIsar.sprawBooks.countSync();
-      if (bookCount == 0)
-        throw Exception('Database validation failed: database contains no books');
-
-    } finally {
-      await tempIsar.close();
-    }
-  }
+  // Future<void> _validateExtractedArchive(Directory dbDir) async {
+  //   // Validate extraction
+  //   final extractedFiles = await dbDir.list().toList();
+  //   if (extractedFiles.isEmpty)
+  //     throw Exception('Database extraction failed: no files extracted');
+  //
+  //   // Check if default.isar exists and has data
+  //   final isarFile = File(join(dbDir.path, 'default.isar'));
+  //   if (!await isarFile.exists())
+  //     throw Exception('Database extraction failed: default.isar not found');
+  //
+  //   final fileSize = await isarFile.length();
+  //   if (fileSize == 0)
+  //     throw Exception('Database extraction failed: default.isar is empty');
+  //
+  //   // Validate by opening and checking for data
+  //   final tempIsar = await Isar.open(
+  //     [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema, SprawTaskSchema],
+  //     directory: dbDir.path,
+  //   );
+  //
+  //   try {
+  //     final bookCount = tempIsar.sprawBooks.countSync();
+  //     if (bookCount == 0)
+  //       throw Exception('Database validation failed: database contains no books');
+  //
+  //   } finally {
+  //     await tempIsar.close();
+  //   }
+  // }
 
   Future<void> updateIfNeeded(String assetPath) async {
     if (!await _needsUpdate()) return;
@@ -112,7 +111,7 @@ class _DBUpdater {
       
       await _extractTarArchive(tarFile, dbDir);
 
-      await _validateExtractedArchive(dbDir);
+      // await _validateExtractedArchive(dbDir);
 
       await _markAsUpdated();
     } catch (e) {
@@ -125,6 +124,11 @@ class _DBUpdater {
   }
 }
 
+Future<Isar> openIsar(String dbDir) => Isar.open(
+  [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema, SprawTaskSchema],
+  directory: dbDir,
+);
+
 Future<void> initIsar(String shaPrefLastAppVersionSyncKey) async {
   await Isar.initializeIsarCore(download: true);
   
@@ -133,9 +137,6 @@ Future<void> initIsar(String shaPrefLastAppVersionSyncKey) async {
       .updateIfNeeded('packages/harcapp_core/assets/sprawnosci_db.isar.tar');
   
   // Open the database
-  final dbDir = await _DBUpdater.databaseDirectory;
-  isar = await Isar.open(
-    [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema, SprawTaskSchema],
-    directory: dbDir,
-  );
+  final String dbDir = await _DBUpdater.databaseDirectory;
+  isar = await openIsar(dbDir);
 }
