@@ -169,9 +169,8 @@ class SprawFamilyDBImporter {
   Future<void> import(Isar isar) async {
     await isar.sprawFamilys.put(family);
     await family.group.save();
-    for (final sprawImporter in spraws) {
+    for (final sprawImporter in spraws)
       await sprawImporter.import(isar);
-    }
   }
 }
 
