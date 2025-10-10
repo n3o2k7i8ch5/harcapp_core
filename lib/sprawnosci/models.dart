@@ -97,7 +97,7 @@ class SprawFamily {
   @Backlink(to: 'family')
   final spraws = IsarLinks<Spraw>();
   
-  @Index()
+  // @Index()
   late int sortIndex;
 }
 
