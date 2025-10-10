@@ -3,7 +3,7 @@ name: 'Astronom'
 level: 1
 comment: 'Spogląda w górę i widzi gwieździste niebo nad głową, które go zachwyca i zaciekawia.'
 tasks:
-  - 'Odwiedziłem(-am) planetarium, wziąłem(wzięłam) udział w pokazie tematycznym.'
+  - 'Odwiedziłem(-am) planetarium, wziąłem(am) udział w pokazie tematycznym.'
   - 'Wskazałem(-am) na nocnym niebie gwiazdozbiór Wielkiej i Małej Niedźwiedzicy wraz z Gwiazdą Polarną. Nauczyłem członków mojego zastępu znajdować ją.'
   - 'Zaobserwowałem(-am) na niebie przynajmniej jedną planetę Układu Słonecznego.'
 
