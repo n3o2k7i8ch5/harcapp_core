@@ -62,40 +62,7 @@ class _DBUpdater {
     }
   }
 
-  // Future<void> _validateExtractedArchive(Directory dbDir) async {
-  //   // Validate extraction
-  //   final extractedFiles = await dbDir.list().toList();
-  //   if (extractedFiles.isEmpty)
-  //     throw Exception('Database extraction failed: no files extracted');
-  //
-  //   // Check if default.isar exists and has data
-  //   final isarFile = File(join(dbDir.path, 'default.isar'));
-  //   if (!await isarFile.exists())
-  //     throw Exception('Database extraction failed: default.isar not found');
-  //
-  //   final fileSize = await isarFile.length();
-  //   if (fileSize == 0)
-  //     throw Exception('Database extraction failed: default.isar is empty');
-  //
-  //   // Validate by opening and checking for data
-  //   final tempIsar = await Isar.open(
-  //     [SprawBookSchema, SprawGroupSchema, SprawFamilySchema, SprawSchema, SprawTaskSchema],
-  //     directory: dbDir.path,
-  //   );
-  //
-  //   try {
-  //     final bookCount = tempIsar.sprawBooks.countSync();
-  //     if (bookCount == 0)
-  //       throw Exception('Database validation failed: database contains no books');
-  //
-  //   } finally {
-  //     await tempIsar.close();
-  //   }
-  // }
-
-  Future<void> updateIfNeeded(String assetPath) async {
-    if (!await _needsUpdate()) return;
-    
+  Future<void> update(String assetPath) async {
     final dbDir = Directory(await databaseDirectory);
     
     if (await dbDir.exists())
@@ -112,8 +79,6 @@ class _DBUpdater {
       
       await _extractTarArchive(tarFile, dbDir);
 
-      // await _validateExtractedArchive(dbDir);
-
       await _markAsUpdated();
     } catch (e) {
       throw Exception('Failed to update database: $e');
@@ -123,14 +88,23 @@ class _DBUpdater {
       } catch (e) {}
     }
   }
+
+  Future<void> updateIfNeeded(String assetPath) async {
+    if (!await _needsUpdate()) return;
+    await update(assetPath);
+  }
 }
 
-Future<void> initIsar(String shaPrefLastAppVersionSyncKey) async {
+Future<void> initIsar(String shaPrefLastAppVersionSyncKey, {bool forceUpdate = false}) async {
   await Isar.initializeIsarCore(download: true);
   
   // Update database if needed
-  await _DBUpdater(shaPrefLastAppVersionSyncKey)
-      .updateIfNeeded('packages/harcapp_core/assets/sprawnosci_db.isar.tar');
+  _DBUpdater dbUpdater = _DBUpdater(shaPrefLastAppVersionSyncKey);
+  String dbTarPath = 'packages/harcapp_core/assets/sprawnosci_db.isar.tar';
+  if(forceUpdate)
+    await dbUpdater.update(dbTarPath);
+  else
+    await dbUpdater.updateIfNeeded(dbTarPath);
   
   // Open the database
   final String dbDir = await _DBUpdater.databaseDirectory;
