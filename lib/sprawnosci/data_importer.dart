@@ -6,6 +6,34 @@ import 'package:harcapp_core/sprawnosci/utils.dart';
 import 'package:isar_community/isar.dart';
 import 'package:path/path.dart' as p;
 
+/// Natural sort comparator that extracts numbers after a given prefix and compares them numerically.
+/// e.g., for prefix "group", "group2" vs "group11" will compare 2 vs 11.
+/// Throws an error if either string doesn't have the expected prefix+number format.
+int _naturalSort(String a, String b, String prefix) {
+  // Check prefix exists
+  if (!a.startsWith(prefix))
+    throw FormatException('String "$a" does not start with expected prefix "$prefix"');
+
+  if (!b.startsWith(prefix))
+    throw FormatException('String "$b" does not start with expected prefix "$prefix"');
+  
+  // Extract part after prefix
+  final remainA = a.substring(prefix.length);
+  final remainB = b.substring(prefix.length);
+  
+  // Try to parse the numeric part at the start
+  final numA = int.tryParse(RegExp(r'^\d+').firstMatch(remainA)?.group(0) ?? '');
+  final numB = int.tryParse(RegExp(r'^\d+').firstMatch(remainB)?.group(0) ?? '');
+  
+  if (numA == null)
+    throw FormatException('String "$a" does not have a number after prefix "$prefix"');
+
+  if (numB == null)
+    throw FormatException('String "$b" does not have a number after prefix "$prefix"');
+  
+  return numA.compareTo(numB);
+}
+
 /// Database importer for sprawnosci book hierarchy.
 /// Loads data from filesystem and provides import() method to save to Isar.
 class SprawBookDBImporter {
@@ -34,7 +62,7 @@ class SprawBookDBImporter {
         .whereType<Directory>()
         .where((d) => p.basename(d.path).startsWith('group'))
         .toList()
-      ..sort((a, b) => p.basename(a.path).compareTo(p.basename(b.path)));
+      ..sort((a, b) => _naturalSort(p.basename(a.path), p.basename(b.path), 'group'));
 
     final groups = <SprawGroupDBImporter>[];
     for (int i = 0; i < groupDirs.length; i++) {
@@ -99,7 +127,7 @@ class SprawGroupDBImporter {
         .whereType<Directory>()
         .where((d) => p.basename(d.path).startsWith('family'))
         .toList()
-      ..sort((a, b) => p.basename(a.path).compareTo(p.basename(b.path)));
+      ..sort((a, b) => _naturalSort(p.basename(a.path), p.basename(b.path), 'family'));
 
     final families = <SprawFamilyDBImporter>[];
     for (int i = 0; i < familyDirs.length; i++) {
@@ -151,7 +179,7 @@ class SprawFamilyDBImporter {
         .whereType<Directory>()
         .where((d) => RegExp(r'^[0-9]+@').hasMatch(p.basename(d.path)))
         .toList()
-      ..sort((a, b) => p.basename(a.path).compareTo(p.basename(b.path)));
+      ..sort((a, b) => _naturalSort(p.basename(a.path), p.basename(b.path), ''));
 
     final spraws = <SprawDBImporter>[];
     for (int i = 0; i < sprawDirs.length; i++) {
