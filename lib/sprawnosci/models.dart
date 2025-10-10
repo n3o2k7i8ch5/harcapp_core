@@ -17,6 +17,8 @@ class SprawBook {
 
   late bool female;
 
+  bool? iconsMonochrome;
+
   @Backlink(to: 'sprawBook')
   final groups = IsarLinks<SprawGroup>();
 
@@ -48,6 +50,8 @@ class SprawGroup {
   String? description;
 
   late List<String> tags;
+
+  bool? iconsMonochrome;
 
   final sprawBook = IsarLink<SprawBook>();
 
@@ -92,6 +96,8 @@ class SprawFamily {
   late List<String> requirements;
   late List<String> notesForLeaders;
 
+  bool? iconsMonochrome;
+
   final group = IsarLink<SprawGroup>();
 
   @Backlink(to: 'family')
@@ -122,8 +128,21 @@ class Spraw {
     uniqName = '${_book.slug}${uniqNameSepChar}${_group.slug}${uniqNameSepChar}${_family.slug}${uniqNameSepChar}$slug';
   }
 
+  void updateIconMonochrome(Map<String, dynamic> sprawData) {
+    final _family = family.value!;
+    final _group = _family.group.value!;
+    final _book = _group.sprawBook.value!;
+
+    iconMonochrome = sprawData['iconMonochrome'] as bool? ??
+        _family.iconsMonochrome ??
+        _group.iconsMonochrome ??
+        _book.iconsMonochrome ??
+        false;
+  }
+
   // Relative path to the icon (from assets root), taken from icon.yaml -> link
   String? iconPath;
+  late bool iconMonochrome;
 
   late String name;
   late String nameRaw;

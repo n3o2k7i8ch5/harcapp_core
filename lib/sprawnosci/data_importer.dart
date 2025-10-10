@@ -47,14 +47,15 @@ class SprawBookDBImporter {
     if (!dataFile.existsSync())
       throw StateError('Missing book _data.yaml in: ${dir.path}');
 
-    final data = readYaml(dataFile);
+    final data = Map<String, dynamic>.from(readYaml(dataFile));
 
     final book = SprawBook()
       ..slug = (data['slug'] ?? p.basename(dir.path)).toString()
       ..name = (data['name'] ?? '').toString()
       ..source = data['source'] as String?
       ..male = data['male'] as bool
-      ..female = data['female'] as bool;
+      ..female = data['female'] as bool
+      ..iconsMonochrome = data['iconsMonochrome'] as bool?;
 
     // Get list of group directories and sort them by name
     final groupDirs = dir
@@ -75,6 +76,7 @@ class SprawBookDBImporter {
 
     final importer = SprawBookDBImporter(book, groups);
     importer.updateAllUniqNames();
+    importer.updateAllIconMonochrome();
     return importer;
   }
 
@@ -86,6 +88,16 @@ class SprawBookDBImporter {
           for (final task in sprawImporter.tasks) {
             task.updateUniqName();
           }
+        }
+      }
+    }
+  }
+
+  void updateAllIconMonochrome() {
+    for (final groupImporter in groups) {
+      for (final familyImporter in groupImporter.families) {
+        for (final sprawImporter in familyImporter.spraws) {
+          sprawImporter.spraw.updateIconMonochrome(sprawImporter.sprawData);
         }
       }
     }
@@ -113,13 +125,14 @@ class SprawGroupDBImporter {
     if (!dataFile.existsSync())
       throw StateError('Missing _data.yaml in: ${dir.path}');
 
-    final data = readYaml(dataFile);
+    final data = Map<String, dynamic>.from(readYaml(dataFile));
 
     final group = SprawGroup()
       ..slug = data['slug']
       ..description = data['description'] as String?
       ..tags = (data['tags'] as List<dynamic>?)?.cast<String>() ?? []
-      ..name = data['name'];
+      ..name = data['name']
+      ..iconsMonochrome = data['iconsMonochrome'] as bool?;
 
     // Get list of family directories and sort them by name
     final familyDirs = dir
@@ -162,7 +175,7 @@ class SprawFamilyDBImporter {
     if (!dataFile.existsSync())
       throw StateError('Missing _data.yaml in family directory: ${dir.path}');
 
-    final data = readYaml(dataFile);
+    final data = Map<String, dynamic>.from(readYaml(dataFile));
 
     final family = SprawFamily()
       ..slug = data['slug']
@@ -171,7 +184,8 @@ class SprawFamilyDBImporter {
       ..fragment = data['fragment'] as String?
       ..fragmentAuthor = data['fragmentAuthor'] as String?
       ..requirements = (data['requirements'] as List<dynamic>?)?.cast<String>() ?? []
-      ..notesForLeaders = (data['notesForLeaders'] as List<dynamic>?)?.cast<String>() ?? [];
+      ..notesForLeaders = (data['notesForLeaders'] as List<dynamic>?)?.cast<String>() ?? []
+      ..iconsMonochrome = data['iconsMonochrome'] as bool?;
 
     // Get list of spraw directories and sort them by name (which starts with a number)
     final sprawDirs = dir
@@ -205,8 +219,9 @@ class SprawFamilyDBImporter {
 class SprawDBImporter {
   final Spraw spraw;
   final List<SprawTask> tasks;
+  final Map<String, dynamic> sprawData;
 
-  SprawDBImporter(this.spraw, this.tasks);
+  SprawDBImporter(this.spraw, this.tasks, this.sprawData);
 
   static SprawDBImporter fromDir(Directory dir) {
     final dataFile = File(p.join(dir.path, '_data.yaml'));
@@ -216,7 +231,7 @@ class SprawDBImporter {
     if (!dataFile.existsSync())
       throw StateError('Missing _data.yaml in spraw directory: ${dir.path}');
 
-    final data = readYaml(dataFile);
+    final data = Map<String, dynamic>.from(readYaml(dataFile));
 
     String? iconPath = iconLinkFile.existsSync()
         ? "packages/harcapp_core/assets/sprawnosci/${readYaml(iconLinkFile)['link']}"
@@ -257,7 +272,7 @@ class SprawDBImporter {
         tasks.add(task);
       }
 
-      return SprawDBImporter(spraw, tasks);
+      return SprawDBImporter(spraw, tasks, data);
     } catch (e) {
       throw StateError('Error parsing spraw data in ${dir.path}: $e');
     }

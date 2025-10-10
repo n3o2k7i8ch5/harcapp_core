@@ -18,10 +18,15 @@ const SprawBookSchema = CollectionSchema(
   id: 398851501432896569,
   properties: {
     r'female': PropertySchema(id: 0, name: r'female', type: IsarType.bool),
-    r'male': PropertySchema(id: 1, name: r'male', type: IsarType.bool),
-    r'name': PropertySchema(id: 2, name: r'name', type: IsarType.string),
-    r'slug': PropertySchema(id: 3, name: r'slug', type: IsarType.string),
-    r'source': PropertySchema(id: 4, name: r'source', type: IsarType.string),
+    r'iconsMonochrome': PropertySchema(
+      id: 1,
+      name: r'iconsMonochrome',
+      type: IsarType.bool,
+    ),
+    r'male': PropertySchema(id: 2, name: r'male', type: IsarType.bool),
+    r'name': PropertySchema(id: 3, name: r'name', type: IsarType.string),
+    r'slug': PropertySchema(id: 4, name: r'slug', type: IsarType.string),
+    r'source': PropertySchema(id: 5, name: r'source', type: IsarType.string),
   },
 
   estimateSize: _sprawBookEstimateSize,
@@ -85,10 +90,11 @@ void _sprawBookSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeBool(offsets[0], object.female);
-  writer.writeBool(offsets[1], object.male);
-  writer.writeString(offsets[2], object.name);
-  writer.writeString(offsets[3], object.slug);
-  writer.writeString(offsets[4], object.source);
+  writer.writeBool(offsets[1], object.iconsMonochrome);
+  writer.writeBool(offsets[2], object.male);
+  writer.writeString(offsets[3], object.name);
+  writer.writeString(offsets[4], object.slug);
+  writer.writeString(offsets[5], object.source);
 }
 
 SprawBook _sprawBookDeserialize(
@@ -99,11 +105,12 @@ SprawBook _sprawBookDeserialize(
 ) {
   final object = SprawBook();
   object.female = reader.readBool(offsets[0]);
+  object.iconsMonochrome = reader.readBoolOrNull(offsets[1]);
   object.id = id;
-  object.male = reader.readBool(offsets[1]);
-  object.name = reader.readString(offsets[2]);
-  object.slug = reader.readString(offsets[3]);
-  object.source = reader.readStringOrNull(offsets[4]);
+  object.male = reader.readBool(offsets[2]);
+  object.name = reader.readString(offsets[3]);
+  object.slug = reader.readString(offsets[4]);
+  object.source = reader.readStringOrNull(offsets[5]);
   return object;
 }
 
@@ -117,12 +124,14 @@ P _sprawBookDeserializeProp<P>(
     case 0:
       return (reader.readBool(offset)) as P;
     case 1:
-      return (reader.readBool(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 3:
       return (reader.readString(offset)) as P;
     case 4:
+      return (reader.readString(offset)) as P;
+    case 5:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -338,6 +347,33 @@ extension SprawBookQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(property: r'female', value: value),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition>
+  iconsMonochromeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'iconsMonochrome'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition>
+  iconsMonochromeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'iconsMonochrome'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterFilterCondition>
+  iconsMonochromeEqualTo(bool? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'iconsMonochrome', value: value),
       );
     });
   }
@@ -944,6 +980,18 @@ extension SprawBookQuerySortBy on QueryBuilder<SprawBook, SprawBook, QSortBy> {
     });
   }
 
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> sortByIconsMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> sortByIconsMonochromeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.desc);
+    });
+  }
+
   QueryBuilder<SprawBook, SprawBook, QAfterSortBy> sortByMale() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'male', Sort.asc);
@@ -1004,6 +1052,18 @@ extension SprawBookQuerySortThenBy
   QueryBuilder<SprawBook, SprawBook, QAfterSortBy> thenByFemaleDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'female', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> thenByIconsMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawBook, SprawBook, QAfterSortBy> thenByIconsMonochromeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.desc);
     });
   }
 
@@ -1076,6 +1136,12 @@ extension SprawBookQueryWhereDistinct
     });
   }
 
+  QueryBuilder<SprawBook, SprawBook, QDistinct> distinctByIconsMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'iconsMonochrome');
+    });
+  }
+
   QueryBuilder<SprawBook, SprawBook, QDistinct> distinctByMale() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'male');
@@ -1121,6 +1187,12 @@ extension SprawBookQueryProperty
     });
   }
 
+  QueryBuilder<SprawBook, bool?, QQueryOperations> iconsMonochromeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'iconsMonochrome');
+    });
+  }
+
   QueryBuilder<SprawBook, bool, QQueryOperations> maleProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'male');
@@ -1162,14 +1234,19 @@ const SprawGroupSchema = CollectionSchema(
       name: r'description',
       type: IsarType.string,
     ),
-    r'name': PropertySchema(id: 1, name: r'name', type: IsarType.string),
-    r'slug': PropertySchema(id: 2, name: r'slug', type: IsarType.string),
+    r'iconsMonochrome': PropertySchema(
+      id: 1,
+      name: r'iconsMonochrome',
+      type: IsarType.bool,
+    ),
+    r'name': PropertySchema(id: 2, name: r'name', type: IsarType.string),
+    r'slug': PropertySchema(id: 3, name: r'slug', type: IsarType.string),
     r'sortIndex': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'sortIndex',
       type: IsarType.long,
     ),
-    r'tags': PropertySchema(id: 4, name: r'tags', type: IsarType.stringList),
+    r'tags': PropertySchema(id: 5, name: r'tags', type: IsarType.stringList),
   },
 
   estimateSize: _sprawGroupEstimateSize,
@@ -1259,10 +1336,11 @@ void _sprawGroupSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.description);
-  writer.writeString(offsets[1], object.name);
-  writer.writeString(offsets[2], object.slug);
-  writer.writeLong(offsets[3], object.sortIndex);
-  writer.writeStringList(offsets[4], object.tags);
+  writer.writeBool(offsets[1], object.iconsMonochrome);
+  writer.writeString(offsets[2], object.name);
+  writer.writeString(offsets[3], object.slug);
+  writer.writeLong(offsets[4], object.sortIndex);
+  writer.writeStringList(offsets[5], object.tags);
 }
 
 SprawGroup _sprawGroupDeserialize(
@@ -1273,11 +1351,12 @@ SprawGroup _sprawGroupDeserialize(
 ) {
   final object = SprawGroup();
   object.description = reader.readStringOrNull(offsets[0]);
+  object.iconsMonochrome = reader.readBoolOrNull(offsets[1]);
   object.id = id;
-  object.name = reader.readString(offsets[1]);
-  object.slug = reader.readString(offsets[2]);
-  object.sortIndex = reader.readLong(offsets[3]);
-  object.tags = reader.readStringList(offsets[4]) ?? [];
+  object.name = reader.readString(offsets[2]);
+  object.slug = reader.readString(offsets[3]);
+  object.sortIndex = reader.readLong(offsets[4]);
+  object.tags = reader.readStringList(offsets[5]) ?? [];
   return object;
 }
 
@@ -1291,12 +1370,14 @@ P _sprawGroupDeserializeProp<P>(
     case 0:
       return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readLong(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 4:
+      return (reader.readLong(offset)) as P;
+    case 5:
       return (reader.readStringList(offset) ?? []) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1731,6 +1812,33 @@ extension SprawGroupQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.greaterThan(property: r'description', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  iconsMonochromeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'iconsMonochrome'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  iconsMonochromeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'iconsMonochrome'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterFilterCondition>
+  iconsMonochromeEqualTo(bool? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'iconsMonochrome', value: value),
       );
     });
   }
@@ -2432,6 +2540,19 @@ extension SprawGroupQuerySortBy
     });
   }
 
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> sortByIconsMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy>
+  sortByIconsMonochromeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.desc);
+    });
+  }
+
   QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -2480,6 +2601,19 @@ extension SprawGroupQuerySortThenBy
   QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> thenByDescriptionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy> thenByIconsMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawGroup, SprawGroup, QAfterSortBy>
+  thenByIconsMonochromeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.desc);
     });
   }
 
@@ -2542,6 +2676,12 @@ extension SprawGroupQueryWhereDistinct
     });
   }
 
+  QueryBuilder<SprawGroup, SprawGroup, QDistinct> distinctByIconsMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'iconsMonochrome');
+    });
+  }
+
   QueryBuilder<SprawGroup, SprawGroup, QDistinct> distinctByName({
     bool caseSensitive = true,
   }) {
@@ -2582,6 +2722,12 @@ extension SprawGroupQueryProperty
   QueryBuilder<SprawGroup, String?, QQueryOperations> descriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'description');
+    });
+  }
+
+  QueryBuilder<SprawGroup, bool?, QQueryOperations> iconsMonochromeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'iconsMonochrome');
     });
   }
 
@@ -2631,24 +2777,29 @@ const SprawFamilySchema = CollectionSchema(
       name: r'fragmentAuthor',
       type: IsarType.string,
     ),
-    r'name': PropertySchema(id: 2, name: r'name', type: IsarType.string),
+    r'iconsMonochrome': PropertySchema(
+      id: 2,
+      name: r'iconsMonochrome',
+      type: IsarType.bool,
+    ),
+    r'name': PropertySchema(id: 3, name: r'name', type: IsarType.string),
     r'notesForLeaders': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'notesForLeaders',
       type: IsarType.stringList,
     ),
     r'requirements': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'requirements',
       type: IsarType.stringList,
     ),
-    r'slug': PropertySchema(id: 5, name: r'slug', type: IsarType.string),
+    r'slug': PropertySchema(id: 6, name: r'slug', type: IsarType.string),
     r'sortIndex': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'sortIndex',
       type: IsarType.long,
     ),
-    r'tags': PropertySchema(id: 7, name: r'tags', type: IsarType.stringList),
+    r'tags': PropertySchema(id: 8, name: r'tags', type: IsarType.stringList),
   },
 
   estimateSize: _sprawFamilyEstimateSize,
@@ -2759,12 +2910,13 @@ void _sprawFamilySerialize(
 ) {
   writer.writeString(offsets[0], object.fragment);
   writer.writeString(offsets[1], object.fragmentAuthor);
-  writer.writeString(offsets[2], object.name);
-  writer.writeStringList(offsets[3], object.notesForLeaders);
-  writer.writeStringList(offsets[4], object.requirements);
-  writer.writeString(offsets[5], object.slug);
-  writer.writeLong(offsets[6], object.sortIndex);
-  writer.writeStringList(offsets[7], object.tags);
+  writer.writeBool(offsets[2], object.iconsMonochrome);
+  writer.writeString(offsets[3], object.name);
+  writer.writeStringList(offsets[4], object.notesForLeaders);
+  writer.writeStringList(offsets[5], object.requirements);
+  writer.writeString(offsets[6], object.slug);
+  writer.writeLong(offsets[7], object.sortIndex);
+  writer.writeStringList(offsets[8], object.tags);
 }
 
 SprawFamily _sprawFamilyDeserialize(
@@ -2776,13 +2928,14 @@ SprawFamily _sprawFamilyDeserialize(
   final object = SprawFamily();
   object.fragment = reader.readStringOrNull(offsets[0]);
   object.fragmentAuthor = reader.readStringOrNull(offsets[1]);
+  object.iconsMonochrome = reader.readBoolOrNull(offsets[2]);
   object.id = id;
-  object.name = reader.readString(offsets[2]);
-  object.notesForLeaders = reader.readStringList(offsets[3]) ?? [];
-  object.requirements = reader.readStringList(offsets[4]) ?? [];
-  object.slug = reader.readString(offsets[5]);
-  object.sortIndex = reader.readLong(offsets[6]);
-  object.tags = reader.readStringList(offsets[7]) ?? [];
+  object.name = reader.readString(offsets[3]);
+  object.notesForLeaders = reader.readStringList(offsets[4]) ?? [];
+  object.requirements = reader.readStringList(offsets[5]) ?? [];
+  object.slug = reader.readString(offsets[6]);
+  object.sortIndex = reader.readLong(offsets[7]);
+  object.tags = reader.readStringList(offsets[8]) ?? [];
   return object;
 }
 
@@ -2798,16 +2951,18 @@ P _sprawFamilyDeserializeProp<P>(
     case 1:
       return (reader.readStringOrNull(offset)) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 3:
-      return (reader.readStringList(offset) ?? []) as P;
+      return (reader.readString(offset)) as P;
     case 4:
       return (reader.readStringList(offset) ?? []) as P;
     case 5:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringList(offset) ?? []) as P;
     case 6:
-      return (reader.readLong(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 7:
+      return (reader.readLong(offset)) as P;
+    case 8:
       return (reader.readStringList(offset) ?? []) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -3398,6 +3553,33 @@ extension SprawFamilyQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.greaterThan(property: r'fragmentAuthor', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  iconsMonochromeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNull(property: r'iconsMonochrome'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  iconsMonochromeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        const FilterCondition.isNotNull(property: r'iconsMonochrome'),
+      );
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterFilterCondition>
+  iconsMonochromeEqualTo(bool? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'iconsMonochrome', value: value),
       );
     });
   }
@@ -4506,6 +4688,19 @@ extension SprawFamilyQuerySortBy
     });
   }
 
+  QueryBuilder<SprawFamily, SprawFamily, QAfterSortBy> sortByIconsMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterSortBy>
+  sortByIconsMonochromeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.desc);
+    });
+  }
+
   QueryBuilder<SprawFamily, SprawFamily, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -4567,6 +4762,19 @@ extension SprawFamilyQuerySortThenBy
   thenByFragmentAuthorDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fragmentAuthor', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterSortBy> thenByIconsMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawFamily, SprawFamily, QAfterSortBy>
+  thenByIconsMonochromeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconsMonochrome', Sort.desc);
     });
   }
 
@@ -4640,6 +4848,13 @@ extension SprawFamilyQueryWhereDistinct
     });
   }
 
+  QueryBuilder<SprawFamily, SprawFamily, QDistinct>
+  distinctByIconsMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'iconsMonochrome');
+    });
+  }
+
   QueryBuilder<SprawFamily, SprawFamily, QDistinct> distinctByName({
     bool caseSensitive = true,
   }) {
@@ -4700,6 +4915,12 @@ extension SprawFamilyQueryProperty
   fragmentAuthorProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'fragmentAuthor');
+    });
+  }
+
+  QueryBuilder<SprawFamily, bool?, QQueryOperations> iconsMonochromeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'iconsMonochrome');
     });
   }
 
@@ -4769,27 +4990,32 @@ const SprawSchema = CollectionSchema(
       name: r'hiddenNamesRaw',
       type: IsarType.stringList,
     ),
-    r'iconPath': PropertySchema(
+    r'iconMonochrome': PropertySchema(
       id: 4,
+      name: r'iconMonochrome',
+      type: IsarType.bool,
+    ),
+    r'iconPath': PropertySchema(
+      id: 5,
       name: r'iconPath',
       type: IsarType.string,
     ),
-    r'level': PropertySchema(id: 5, name: r'level', type: IsarType.long),
-    r'name': PropertySchema(id: 6, name: r'name', type: IsarType.string),
-    r'nameRaw': PropertySchema(id: 7, name: r'nameRaw', type: IsarType.string),
-    r'slug': PropertySchema(id: 8, name: r'slug', type: IsarType.string),
+    r'level': PropertySchema(id: 6, name: r'level', type: IsarType.long),
+    r'name': PropertySchema(id: 7, name: r'name', type: IsarType.string),
+    r'nameRaw': PropertySchema(id: 8, name: r'nameRaw', type: IsarType.string),
+    r'slug': PropertySchema(id: 9, name: r'slug', type: IsarType.string),
     r'sortIndex': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'sortIndex',
       type: IsarType.long,
     ),
     r'tasksAreExamples': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'tasksAreExamples',
       type: IsarType.bool,
     ),
     r'uniqName': PropertySchema(
-      id: 11,
+      id: 12,
       name: r'uniqName',
       type: IsarType.string,
     ),
@@ -4932,14 +5158,15 @@ void _sprawSerialize(
   writer.writeString(offsets[1], object.commentRaw);
   writer.writeStringList(offsets[2], object.hiddenNames);
   writer.writeStringList(offsets[3], object.hiddenNamesRaw);
-  writer.writeString(offsets[4], object.iconPath);
-  writer.writeLong(offsets[5], object.level);
-  writer.writeString(offsets[6], object.name);
-  writer.writeString(offsets[7], object.nameRaw);
-  writer.writeString(offsets[8], object.slug);
-  writer.writeLong(offsets[9], object.sortIndex);
-  writer.writeBool(offsets[10], object.tasksAreExamples);
-  writer.writeString(offsets[11], object.uniqName);
+  writer.writeBool(offsets[4], object.iconMonochrome);
+  writer.writeString(offsets[5], object.iconPath);
+  writer.writeLong(offsets[6], object.level);
+  writer.writeString(offsets[7], object.name);
+  writer.writeString(offsets[8], object.nameRaw);
+  writer.writeString(offsets[9], object.slug);
+  writer.writeLong(offsets[10], object.sortIndex);
+  writer.writeBool(offsets[11], object.tasksAreExamples);
+  writer.writeString(offsets[12], object.uniqName);
 }
 
 Spraw _sprawDeserialize(
@@ -4953,15 +5180,16 @@ Spraw _sprawDeserialize(
   object.commentRaw = reader.readStringOrNull(offsets[1]);
   object.hiddenNames = reader.readStringList(offsets[2]) ?? [];
   object.hiddenNamesRaw = reader.readStringList(offsets[3]) ?? [];
-  object.iconPath = reader.readStringOrNull(offsets[4]);
+  object.iconMonochrome = reader.readBool(offsets[4]);
+  object.iconPath = reader.readStringOrNull(offsets[5]);
   object.id = id;
-  object.level = reader.readLong(offsets[5]);
-  object.name = reader.readString(offsets[6]);
-  object.nameRaw = reader.readString(offsets[7]);
-  object.slug = reader.readString(offsets[8]);
-  object.sortIndex = reader.readLong(offsets[9]);
-  object.tasksAreExamples = reader.readBool(offsets[10]);
-  object.uniqName = reader.readString(offsets[11]);
+  object.level = reader.readLong(offsets[6]);
+  object.name = reader.readString(offsets[7]);
+  object.nameRaw = reader.readString(offsets[8]);
+  object.slug = reader.readString(offsets[9]);
+  object.sortIndex = reader.readLong(offsets[10]);
+  object.tasksAreExamples = reader.readBool(offsets[11]);
+  object.uniqName = reader.readString(offsets[12]);
   return object;
 }
 
@@ -4981,20 +5209,22 @@ P _sprawDeserializeProp<P>(
     case 3:
       return (reader.readStringList(offset) ?? []) as P;
     case 4:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 5:
-      return (reader.readLong(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 6:
-      return (reader.readString(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 7:
       return (reader.readString(offset)) as P;
     case 8:
       return (reader.readString(offset)) as P;
     case 9:
-      return (reader.readLong(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 10:
-      return (reader.readBool(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 11:
+      return (reader.readBool(offset)) as P;
+    case 12:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -6190,6 +6420,16 @@ extension SprawQueryFilter on QueryBuilder<Spraw, Spraw, QFilterCondition> {
     });
   }
 
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconMonochromeEqualTo(
+    bool value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'iconMonochrome', value: value),
+      );
+    });
+  }
+
   QueryBuilder<Spraw, Spraw, QAfterFilterCondition> iconPathIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
@@ -7226,6 +7466,18 @@ extension SprawQuerySortBy on QueryBuilder<Spraw, Spraw, QSortBy> {
     });
   }
 
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByIconMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconMonochrome', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByIconMonochromeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconMonochrome', Sort.desc);
+    });
+  }
+
   QueryBuilder<Spraw, Spraw, QAfterSortBy> sortByIconPath() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'iconPath', Sort.asc);
@@ -7345,6 +7597,18 @@ extension SprawQuerySortThenBy on QueryBuilder<Spraw, Spraw, QSortThenBy> {
   QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByCommentRawDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'commentRaw', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByIconMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconMonochrome', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterSortBy> thenByIconMonochromeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'iconMonochrome', Sort.desc);
     });
   }
 
@@ -7486,6 +7750,12 @@ extension SprawQueryWhereDistinct on QueryBuilder<Spraw, Spraw, QDistinct> {
     });
   }
 
+  QueryBuilder<Spraw, Spraw, QDistinct> distinctByIconMonochrome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'iconMonochrome');
+    });
+  }
+
   QueryBuilder<Spraw, Spraw, QDistinct> distinctByIconPath({
     bool caseSensitive = true,
   }) {
@@ -7573,6 +7843,12 @@ extension SprawQueryProperty on QueryBuilder<Spraw, Spraw, QQueryProperty> {
   QueryBuilder<Spraw, List<String>, QQueryOperations> hiddenNamesRawProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'hiddenNamesRaw');
+    });
+  }
+
+  QueryBuilder<Spraw, bool, QQueryOperations> iconMonochromeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'iconMonochrome');
     });
   }
 
