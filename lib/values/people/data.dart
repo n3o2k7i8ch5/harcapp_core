@@ -268,6 +268,12 @@ const Person AMELIA_SZALEWICZ = Person(
     org: Org.zhp,
     email: ["amelia_sz.2010@o2.pl", "ameliaszalewicz@gmail.com"]
 );
+const Person ANGELIKA_MOSKAL = Person(
+    name: 'Angelika Moskal',
+    rankHarc: RankHarc.dhd,
+    org: Org.zhp,
+    email: ["moskalangelika762@gmail.com"]
+);
 const Person ANNA_RAJEWSKA = Person(
     name: 'Anna Rajewska',
     druzyna: '2. Drużyna im. Leona Zadurskiego w Żukowie',
@@ -1647,6 +1653,14 @@ const Person KATARZYNA_STUDNICKA = Person(
     druzyna: '12. DH „Na Tropie”',
     hufiec: huf_zhp_andrychow, org: Org.zhp,
     email: ['katarzyna.studnicka@zhp.net.pl']
+);
+const Person KATARZYNA_TRZESNIOWSKA = Person(
+  name: 'Katarzyna Trześniowska',
+  druzyna: '4. Lubelska Drużyna Wędrownicza „Czarna Czwórka” im. hetmana Jana Zamojskiego',
+  hufiec: huf_zhp_lublin,
+  rankHarc: RankHarc.dhd,
+  org: Org.zhp,
+  email: ["kasiat.trzesniowska@gmail.com"]
 );
 const Person KINGA_BABIARSKA = Person(
     name: 'Kinga Babiarska',
