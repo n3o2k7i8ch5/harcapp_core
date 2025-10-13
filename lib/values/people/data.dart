@@ -3237,7 +3237,7 @@ const Person TADEUSZ_BOJANOWSKI = Person(
 );
 const Person TADEUSZ_BRACHA = Person(
     name: 'Tadeusz K. Bracha',
-    druzyna: '6 DSH Andromeda',
+    druzyna: '6. DSH „Andromeda”',
     hufiec: 'Hufiec Oświęcim',
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
@@ -3245,7 +3245,7 @@ const Person TADEUSZ_BRACHA = Person(
 );
 const Person TAMANACO_NORIEGA = Person(
     name: 'Tamanaco Noriega',
-    druzyna: '73. WDH "Custodia"',
+    druzyna: '73. WDH „Custodia”',
     hufiec: huf_zhp_warszawa_praga_pn,
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
