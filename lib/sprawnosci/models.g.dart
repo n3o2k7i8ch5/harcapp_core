@@ -5094,6 +5094,12 @@ const SprawSchema = CollectionSchema(
       single: false,
       linkName: r'spraw',
     ),
+    r'external': LinkSchema(
+      id: 130598467585445867,
+      name: r'external',
+      target: r'SprawExternal',
+      single: true,
+    ),
   },
   embeddedSchemas: {},
 
@@ -5236,13 +5242,19 @@ Id _sprawGetId(Spraw object) {
 }
 
 List<IsarLinkBase<dynamic>> _sprawGetLinks(Spraw object) {
-  return [object.family, object.tasks];
+  return [object.family, object.tasks, object.external];
 }
 
 void _sprawAttach(IsarCollection<dynamic> col, Id id, Spraw object) {
   object.id = id;
   object.family.attach(col, col.isar.collection<SprawFamily>(), r'family', id);
   object.tasks.attach(col, col.isar.collection<SprawTask>(), r'tasks', id);
+  object.external.attach(
+    col,
+    col.isar.collection<SprawExternal>(),
+    r'external',
+    id,
+  );
 }
 
 extension SprawByIndex on IsarCollection<Spraw> {
@@ -7439,6 +7451,20 @@ extension SprawQueryLinks on QueryBuilder<Spraw, Spraw, QFilterCondition> {
       );
     });
   }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> external(
+    FilterQuery<SprawExternal> q,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'external');
+    });
+  }
+
+  QueryBuilder<Spraw, Spraw, QAfterFilterCondition> externalIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'external', 0, true, 0, true);
+    });
+  }
 }
 
 extension SprawQuerySortBy on QueryBuilder<Spraw, Spraw, QSortBy> {
@@ -7897,6 +7923,553 @@ extension SprawQueryProperty on QueryBuilder<Spraw, Spraw, QQueryProperty> {
   QueryBuilder<Spraw, String, QQueryOperations> uniqNameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'uniqName');
+    });
+  }
+}
+
+// coverage:ignore-file
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
+
+extension GetSprawExternalCollection on Isar {
+  IsarCollection<SprawExternal> get sprawExternals => this.collection();
+}
+
+const SprawExternalSchema = CollectionSchema(
+  name: r'SprawExternal',
+  id: 8775235713977027227,
+  properties: {
+    r'yamlContent': PropertySchema(
+      id: 0,
+      name: r'yamlContent',
+      type: IsarType.string,
+    ),
+  },
+
+  estimateSize: _sprawExternalEstimateSize,
+  serialize: _sprawExternalSerialize,
+  deserialize: _sprawExternalDeserialize,
+  deserializeProp: _sprawExternalDeserializeProp,
+  idName: r'id',
+  indexes: {
+    r'yamlContent': IndexSchema(
+      id: 5112290567786559776,
+      name: r'yamlContent',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'yamlContent',
+          type: IndexType.hash,
+          caseSensitive: true,
+        ),
+      ],
+    ),
+  },
+  links: {
+    r'spraw': LinkSchema(
+      id: 49874618957920855,
+      name: r'spraw',
+      target: r'Spraw',
+      single: true,
+    ),
+  },
+  embeddedSchemas: {},
+
+  getId: _sprawExternalGetId,
+  getLinks: _sprawExternalGetLinks,
+  attach: _sprawExternalAttach,
+  version: '3.3.0-dev.3',
+);
+
+int _sprawExternalEstimateSize(
+  SprawExternal object,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  var bytesCount = offsets.last;
+  bytesCount += 3 + object.yamlContent.length * 3;
+  return bytesCount;
+}
+
+void _sprawExternalSerialize(
+  SprawExternal object,
+  IsarWriter writer,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  writer.writeString(offsets[0], object.yamlContent);
+}
+
+SprawExternal _sprawExternalDeserialize(
+  Id id,
+  IsarReader reader,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  final object = SprawExternal();
+  object.id = id;
+  object.yamlContent = reader.readString(offsets[0]);
+  return object;
+}
+
+P _sprawExternalDeserializeProp<P>(
+  IsarReader reader,
+  int propertyId,
+  int offset,
+  Map<Type, List<int>> allOffsets,
+) {
+  switch (propertyId) {
+    case 0:
+      return (reader.readString(offset)) as P;
+    default:
+      throw IsarError('Unknown property with id $propertyId');
+  }
+}
+
+Id _sprawExternalGetId(SprawExternal object) {
+  return object.id;
+}
+
+List<IsarLinkBase<dynamic>> _sprawExternalGetLinks(SprawExternal object) {
+  return [object.spraw];
+}
+
+void _sprawExternalAttach(
+  IsarCollection<dynamic> col,
+  Id id,
+  SprawExternal object,
+) {
+  object.id = id;
+  object.spraw.attach(col, col.isar.collection<Spraw>(), r'spraw', id);
+}
+
+extension SprawExternalQueryWhereSort
+    on QueryBuilder<SprawExternal, SprawExternal, QWhere> {
+  QueryBuilder<SprawExternal, SprawExternal, QAfterWhere> anyId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(const IdWhereClause.any());
+    });
+  }
+}
+
+extension SprawExternalQueryWhere
+    on QueryBuilder<SprawExternal, SprawExternal, QWhereClause> {
+  QueryBuilder<SprawExternal, SprawExternal, QAfterWhereClause> idEqualTo(
+    Id id,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IdWhereClause.between(lower: id, upper: id));
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterWhereClause> idNotEqualTo(
+    Id id,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(
+              IdWhereClause.lessThan(upper: id, includeUpper: false),
+            )
+            .addWhereClause(
+              IdWhereClause.greaterThan(lower: id, includeLower: false),
+            );
+      } else {
+        return query
+            .addWhereClause(
+              IdWhereClause.greaterThan(lower: id, includeLower: false),
+            )
+            .addWhereClause(
+              IdWhereClause.lessThan(upper: id, includeUpper: false),
+            );
+      }
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterWhereClause> idGreaterThan(
+    Id id, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IdWhereClause.greaterThan(lower: id, includeLower: include),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterWhereClause> idLessThan(
+    Id id, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IdWhereClause.lessThan(upper: id, includeUpper: include),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterWhereClause> idBetween(
+    Id lowerId,
+    Id upperId, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IdWhereClause.between(
+          lower: lowerId,
+          includeLower: includeLower,
+          upper: upperId,
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterWhereClause>
+  yamlContentEqualTo(String yamlContent) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IndexWhereClause.equalTo(
+          indexName: r'yamlContent',
+          value: [yamlContent],
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterWhereClause>
+  yamlContentNotEqualTo(String yamlContent) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'yamlContent',
+                lower: [],
+                upper: [yamlContent],
+                includeUpper: false,
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'yamlContent',
+                lower: [yamlContent],
+                includeLower: false,
+                upper: [],
+              ),
+            );
+      } else {
+        return query
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'yamlContent',
+                lower: [yamlContent],
+                includeLower: false,
+                upper: [],
+              ),
+            )
+            .addWhereClause(
+              IndexWhereClause.between(
+                indexName: r'yamlContent',
+                lower: [],
+                upper: [yamlContent],
+                includeUpper: false,
+              ),
+            );
+      }
+    });
+  }
+}
+
+extension SprawExternalQueryFilter
+    on QueryBuilder<SprawExternal, SprawExternal, QFilterCondition> {
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition> idEqualTo(
+    Id value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'id', value: value),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  idGreaterThan(Id value, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition> idLessThan(
+    Id value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'id',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition> idBetween(
+    Id lower,
+    Id upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'id',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  yamlContentEqualTo(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'yamlContent',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  yamlContentGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'yamlContent',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  yamlContentLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'yamlContent',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  yamlContentBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'yamlContent',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  yamlContentStartsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'yamlContent',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  yamlContentEndsWith(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'yamlContent',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  yamlContentContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'yamlContent',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  yamlContentMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'yamlContent',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  yamlContentIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'yamlContent', value: ''),
+      );
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  yamlContentIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'yamlContent', value: ''),
+      );
+    });
+  }
+}
+
+extension SprawExternalQueryObject
+    on QueryBuilder<SprawExternal, SprawExternal, QFilterCondition> {}
+
+extension SprawExternalQueryLinks
+    on QueryBuilder<SprawExternal, SprawExternal, QFilterCondition> {
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition> spraw(
+    FilterQuery<Spraw> q,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'spraw');
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterFilterCondition>
+  sprawIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'spraw', 0, true, 0, true);
+    });
+  }
+}
+
+extension SprawExternalQuerySortBy
+    on QueryBuilder<SprawExternal, SprawExternal, QSortBy> {
+  QueryBuilder<SprawExternal, SprawExternal, QAfterSortBy> sortByYamlContent() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'yamlContent', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterSortBy>
+  sortByYamlContentDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'yamlContent', Sort.desc);
+    });
+  }
+}
+
+extension SprawExternalQuerySortThenBy
+    on QueryBuilder<SprawExternal, SprawExternal, QSortThenBy> {
+  QueryBuilder<SprawExternal, SprawExternal, QAfterSortBy> thenById() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterSortBy> thenByIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterSortBy> thenByYamlContent() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'yamlContent', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SprawExternal, SprawExternal, QAfterSortBy>
+  thenByYamlContentDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'yamlContent', Sort.desc);
+    });
+  }
+}
+
+extension SprawExternalQueryWhereDistinct
+    on QueryBuilder<SprawExternal, SprawExternal, QDistinct> {
+  QueryBuilder<SprawExternal, SprawExternal, QDistinct> distinctByYamlContent({
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'yamlContent', caseSensitive: caseSensitive);
+    });
+  }
+}
+
+extension SprawExternalQueryProperty
+    on QueryBuilder<SprawExternal, SprawExternal, QQueryProperty> {
+  QueryBuilder<SprawExternal, int, QQueryOperations> idProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<SprawExternal, String, QQueryOperations> yamlContentProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'yamlContent');
     });
   }
 }

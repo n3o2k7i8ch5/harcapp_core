@@ -124,6 +124,7 @@ Future<void> _clearExistingData(Isar isar) async {
   stdout.writeln('Clearing existing data...');
   await isar.writeTxn(() async {
     await isar.sprawTasks.clear();
+    await isar.sprawExternals.clear();
     await isar.spraws.clear();
     await isar.sprawFamilys.clear();
     await isar.sprawGroups.clear();
@@ -156,14 +157,16 @@ Future<void> _printDatabaseStatistics(Isar isar) async {
   final familyCount = await isar.sprawFamilys.count();
   final sprawCount = await isar.spraws.count();
   final taskCount = await isar.sprawTasks.count();
+  final externalCount = await isar.sprawExternals.count();
 
   stdout.writeln('');
   stdout.writeln('=== Database Statistics ===');
-  stdout.writeln('Books:    $bookCount');
-  stdout.writeln('Groups:   $groupCount');
-  stdout.writeln('Families: $familyCount');
-  stdout.writeln('Spraws:   $sprawCount');
-  stdout.writeln('Tasks:    $taskCount');
+  stdout.writeln('Books:     $bookCount');
+  stdout.writeln('Groups:    $groupCount');
+  stdout.writeln('Families:  $familyCount');
+  stdout.writeln('Spraws:    $sprawCount');
+  stdout.writeln('Tasks:     $taskCount');
+  stdout.writeln('Externals: $externalCount');
   stdout.writeln('');
 }
 
@@ -215,7 +218,8 @@ Future<void> _validateTar(File outputFile) async {
         SprawGroupSchema,
         SprawFamilySchema,
         SprawSchema,
-        SprawTaskSchema
+        SprawTaskSchema,
+        SprawExternalSchema,
       ],
       directory: tempDir.path,
     );
@@ -230,12 +234,14 @@ Future<void> _validateTar(File outputFile) async {
       final familyCount = await isar.sprawFamilys.count();
       final sprawCount = await isar.spraws.count();
       final taskCount = await isar.sprawTasks.count();
+      final externalCount = await isar.sprawExternals.count();
 
       print('📚 Books: $bookCount');
       print('🏷️ Groups: $groupCount');
       print('👨‍👩‍👧‍👦 Families: $familyCount');
       print('⭐ Spraws: $sprawCount');
       print('✅ Tasks: $taskCount');
+      print('📄 Externals: $externalCount');
 
       // Print some sample data
       if (bookCount > 0) {

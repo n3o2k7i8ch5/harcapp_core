@@ -220,13 +220,15 @@ class SprawDBImporter {
   final Spraw spraw;
   final List<SprawTask> tasks;
   final Map<String, dynamic> sprawData;
+  final SprawExternal? external;
 
-  SprawDBImporter(this.spraw, this.tasks, this.sprawData);
+  SprawDBImporter(this.spraw, this.tasks, this.sprawData, this.external);
 
   static SprawDBImporter fromDir(Directory dir) {
     final dataFile = File(p.join(dir.path, '_data.yaml'));
     final iconFile = File(p.join(dir.path, 'icon.svg'));
     final iconLinkFile = File(p.join(dir.path, 'icon.yaml'));
+    final externalFile = File(p.join(dir.path, 'external.yaml'));
 
     if (!dataFile.existsSync())
       throw StateError('Missing _data.yaml in spraw directory: ${dir.path}');
@@ -260,6 +262,13 @@ class SprawDBImporter {
         ..commentRaw = data['comment'] == null ? null : searchableString(data['comment'])
         ..tasksAreExamples = data['tasksAreExamples'] ?? false;
 
+      // Load external data if exists
+      final external = SprawExternal.fromFile(externalFile);
+      if (external != null) {
+        spraw.external.value = external;
+        external.spraw.value = spraw;
+      }
+
       // Parse tasks and create SprawTask objects
       final tasksList = data['tasks']?.toList().cast<String>() ?? [];
       final tasks = <SprawTask>[];
@@ -272,7 +281,7 @@ class SprawDBImporter {
         tasks.add(task);
       }
 
-      return SprawDBImporter(spraw, tasks, data);
+      return SprawDBImporter(spraw, tasks, data, external);
     } catch (e) {
       throw StateError('Error parsing spraw data in ${dir.path}: $e');
     }
@@ -280,8 +289,16 @@ class SprawDBImporter {
 
   /// Import this spraw and all its tasks into the Isar database.
   Future<void> import(Isar isar) async {
+    // Don't create a transaction here - the parent SprawBookDBImporter already has one
     await isar.spraws.put(spraw);
     await spraw.family.save();
+    
+    // Save external data if it exists
+    if (external != null) {
+      await isar.sprawExternals.put(external!);
+      await spraw.external.save();
+    }
+    
     for (final task in tasks) {
       await isar.sprawTasks.put(task);
       await task.spraw.save();

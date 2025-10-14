@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:isar_community/isar.dart';
+import 'package:yaml/yaml.dart';
 
 part 'models.g.dart';
 
@@ -166,12 +169,47 @@ class Spraw {
   @Index()
   late int sortIndex;
 
+  final external = IsarLink<SprawExternal>();
+
   // Convenience getters to access parent relationships
   @Ignore()
   SprawBook get sprawBook => group.sprawBook.value!;
 
   @Ignore()
   SprawGroup get group => family.value!.group.value!;
+}
+
+@collection
+@collection
+class SprawExternal {
+  Id id = Isar.autoIncrement;
+
+  // Reference back to the Spraw this external data belongs to
+  final spraw = IsarLink<Spraw>();
+
+  // Store the raw YAML content
+  @Index()
+  late String yamlContent;
+
+  // Helper method to load from a file
+  static SprawExternal? fromFile(File file) {
+    try {
+      if (!file.existsSync()) return null;
+      
+      final content = file.readAsStringSync();
+      // Validate that it's valid YAML by trying to parse it
+      loadYaml(content);
+      
+      return SprawExternal()..yamlContent = content;
+    } catch (e) {
+      print('Error loading external.yaml: $e');
+      return null;
+    }
+  }
+
+  // Get the parsed YAML data as a map
+  @Ignore()
+  Map<String, dynamic> get data => loadYaml(yamlContent);
 }
 
 @collection
