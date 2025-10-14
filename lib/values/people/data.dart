@@ -687,6 +687,11 @@ const Person FRANCISZEK_WOJDYLO = Person(
     org: Org.zhp,
     email: ["franciszek.wojdylo@zhp.net.pl", 'franciszek.wojdylo@icloud.com']
 );
+const Person GABRIEL_KOSSAKOWSKI = Person(
+  name: 'Gabriel Kossakowski',
+  hufiec: huf_zhp_gorlice,
+  org: Org.zhp
+);
 const Person GABRIEL_POZNANSKI = Person(
     name: 'Gabriel Poznański',
     druzyna: '6. GZ „Jeźdźcy Smoków”',
