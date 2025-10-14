@@ -95,20 +95,25 @@ class _DBUpdater {
   }
 }
 
-Future<void> initIsar(String shaPrefLastAppVersionSyncKey, {bool skipUpdate = false, bool forceUpdate = false}) async {
+Future<void> initIsar(
+    String shaPrefLastAppVersionSyncKey,
+    { bool skipUpdate = false,
+      bool forceUpdate = false,
+    }) async {
   assert(!(skipUpdate && forceUpdate), 'skipUpdate and forceUpdate cannot both be true');
 
-  await Isar.initializeIsarCore(download: true);
+  // await Isar.initializeIsarCore(download: true);
   
   // Update database if needed
-  _DBUpdater dbUpdater = _DBUpdater(shaPrefLastAppVersionSyncKey);
-  String dbTarPath = 'packages/harcapp_core/assets/sprawnosci_db.isar.tar';
+  if(!skipUpdate) {
+    _DBUpdater dbUpdater = _DBUpdater(shaPrefLastAppVersionSyncKey);
+    String dbTarPath = 'packages/harcapp_core/assets/sprawnosci_db.isar.tar';
 
-  if(forceUpdate)
-    await dbUpdater.update(dbTarPath);
-  else if(!skipUpdate)
-    await dbUpdater.updateIfNeeded(dbTarPath);
-  
+    if (forceUpdate)
+      await dbUpdater.update(dbTarPath);
+    else
+      await dbUpdater.updateIfNeeded(dbTarPath);
+  }
   // Open the database
   final String dbDir = await _DBUpdater.databaseDirectory;
   isar = await openIsar(dbDir);
