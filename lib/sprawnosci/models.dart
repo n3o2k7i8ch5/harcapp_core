@@ -209,7 +209,11 @@ class SprawExternal {
 
   // Get the parsed YAML data as a map
   @Ignore()
-  Map<String, dynamic> get data => loadYaml(yamlContent);
+  Map<String, dynamic> get data {
+    final yaml = loadYaml(yamlContent);
+    return Map<String, dynamic>.from(yaml);
+  }
+
 }
 
 @collection
