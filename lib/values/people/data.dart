@@ -931,6 +931,14 @@ const Person IGNACY_WOJTCZAK = Person(
       'wojtczaki009@gmail.com'
     ]
 );
+const Person IGOR_SOLECKI = Person(
+    name: 'Igor Solecki',
+    druzyna: '58. (MDH) Cichociemni ps. Ponury',
+    hufiec: 'Rosa Venti',
+    rankHarc: RankHarc.zhrWywiadowca,
+    org: Org.zhr,
+    email: ["mrk282665@gmail.com"]
+);
 const Person IZABELA_MOSKAL = Person(
     name: 'Izabela Moskal',
     email: ['izabela.moskal.5@gmail.com']
