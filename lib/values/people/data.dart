@@ -2059,9 +2059,9 @@ const Person MAGDALENA_KROSZCZYNSKA = Person(
     email: ["madzik.kroszczyk@gmail.com"]
 );
 const Person MAGDALENA_MIELNIK = Person(
-    name: 'Magdalena Mielnik',
-    druzyna: '10. Drużyna Harcerska "Fidem" w Majdanie Starym im. Wandy "Wacek" Wasilewskiej',
-    rankHarc: RankHarc.zhrTropicielka,
+    name: 'Anonim', // 'Magdalena Mielnik',
+    // druzyna: '10. Drużyna Harcerska "Fidem" w Majdanie Starym im. Wandy "Wacek" Wasilewskiej',
+    // rankHarc: RankHarc.zhrTropicielka,
     org: Org.zhr,
     email: ['madzia.mielnik@onet.pl', 'fajrantelo@gmail.com', 'melizaikk@gmail.com']
 );
