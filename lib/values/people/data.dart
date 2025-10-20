@@ -2665,6 +2665,13 @@ const Person NATALIA_STODOLNA = Person(
     org: Org.zhp,
     email: ['natalia.stodolna@zhp.net.pl']
 );
+Person NATALIA_SZYMANIAK = const Person(
+    name: 'Natalia Szymaniak',
+    druzyna: '14. WGZ „Trollinki z Kniei” św. Huberta',
+    rankHarc: RankHarc.zhrSamarytanka,
+    org: Org.zhr,
+    email: ['nataliaszym009@gmail.com']
+);
 const Person NATALIA_WOJTYCZKA = Person(
     name: 'Natalia Wojtyczka',
     druzyna: '39. DH „Azymut” im. Batalionu „Zośka”',
@@ -3494,6 +3501,13 @@ const Person WOJCIECH_KITA = Person(
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["wojtix912@gmail.com"]
+);
+const Person WOJCIECH_KORZENIOWSKI = Person(
+    name: 'Wojciech Korzeniowski',
+    druzyna: '72. WDSH Gawra',
+    hufiec: huf_zhp_wroclaw_polnoc,
+    rankHarc: RankHarc.dhc,
+    email: ["wojtek2012k@gmail.com"]
 );
 const Person WOJCIECH_KUCHARSKI = Person(
     name: 'Wojciech Kucharski',
