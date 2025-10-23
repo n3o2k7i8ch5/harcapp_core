@@ -186,6 +186,7 @@ class ChordWidget extends StatelessWidget{
 
     return SimpleButton(
         onTap: onTap,
+        onLongPress: onLongPress,
         margin: EdgeInsets.all(marg(size)),
         padding: EdgeInsets.all(padding(size)),
         child: Column(
