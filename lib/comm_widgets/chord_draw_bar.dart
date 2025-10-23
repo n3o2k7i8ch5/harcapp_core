@@ -336,7 +336,8 @@ class ChordDrawBar extends StatelessWidget{
           ChordWidget.fromUChord(
               chord,
               color: chordColor,
-              onTap:() => onTap?.call(chord)
+              onTap:() => onTap?.call(chord),
+              onLongPress: () => onLongPress?.call(chord),
           )
       );
     }
@@ -349,7 +350,8 @@ class ChordDrawBar extends StatelessWidget{
           ChordWidget.fromMChord(
               chord,
               color: chordColor,
-              onTap:() => onTap?.call(chord)
+              onTap:() => onTap?.call(chord),
+              onLongPress: () => onLongPress?.call(chord),
           )
       );
     }
