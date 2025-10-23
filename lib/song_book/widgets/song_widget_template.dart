@@ -11,6 +11,7 @@ import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
 import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
+import 'package:harcapp_core/comm_widgets/chord.dart';
 import 'package:harcapp_core/comm_widgets/chord_draw_bar.dart';
 import 'package:harcapp_core/comm_widgets/instrument_type.dart';
 import 'package:harcapp_core/comm_widgets/separated_column.dart';
@@ -120,7 +121,8 @@ class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends Contribut
 
   final void Function()? onCopyTap;
 
-  final void Function(InstrumentType type)? onChordsTypeChanged;
+  final void Function(Chord chord)? onChordsTypeTap;
+  final void Function(Chord chord)? onChordsTypeLongPress;
 
   final void Function(TextSizeProvider provider)? onChordsTap;
   final void Function(TextSizeProvider provider)? onChordsLongPress;
@@ -182,7 +184,8 @@ class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends Contribut
 
         this.onCopyTap,
 
-        this.onChordsTypeChanged,
+        this.onChordsTypeTap,
+        this.onChordsTypeLongPress,
 
         this.onChordsTap,
         this.onChordsLongPress,
@@ -254,7 +257,8 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
   void Function()? get onCopyTap => widget.onCopyTap;
 
-  void Function(InstrumentType type)? get onChordsTypeChanged => widget.onChordsTypeChanged;
+  void Function(Chord chord)? get onChordsTypeTap => widget.onChordsTypeTap;
+  void Function(Chord chord)? get onChordsTypeLongPress => widget.onChordsTypeLongPress;
 
   void Function(TextSizeProvider provider)? get onChordsTap => widget.onChordsTap;
   void Function(TextSizeProvider provider)? get onChordsLongPress => widget.onChordsLongPress;
@@ -363,10 +367,11 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
                     child: Consumer<ChordShiftProvider>(
                       builder: (context, prov, child) => ChordDrawBar(
                         song.chords,
-                        onTap: (chord, type) => onChordsTypeChanged?.call(type),
+                        onTap: onChordsTypeTap,
+                        onLongPress: onChordsTypeLongPress,
                         elevation: 0,
                         chordColor: iconEnab_(context),
-                        initType: initInstrumentType,
+                        instrumentType: initInstrumentType,
                       ),
                     ),
                     height: ChordWidget.height(6) + 2.0

@@ -87,6 +87,7 @@ class ChordWidget extends StatelessWidget{
   final int? strings;
 
   final void Function()? onTap;
+  final void Function()? onLongPress;
 
   const ChordWidget({
     this.chord,
@@ -98,6 +99,7 @@ class ChordWidget extends StatelessWidget{
     this.strings,
 
     this.onTap,
+    this.onLongPress,
   });
 
   static ChordWidget fromGChord(
@@ -105,12 +107,14 @@ class ChordWidget extends StatelessWidget{
       { Color? color,
         double size = ChordWidget.defSize,
         void Function()? onTap,
+        void Function()? onLongPress,
       }) => ChordWidget(
     chord: chord,
     strings: 6,
     color: color,
     size: size,
     onTap: onTap,
+    onLongPress: onLongPress,
   );
 
   static ChordWidget fromUChord(
@@ -118,12 +122,14 @@ class ChordWidget extends StatelessWidget{
       { Color? color,
         double size = ChordWidget.defSize,
         void Function()? onTap,
+        void Function()? onLongPress,
       }) => ChordWidget(
     chord: chord,
     strings: 4,
     color: color,
     size: size,
     onTap: onTap,
+    onLongPress: onLongPress,
   );
 
   static ChordWidget fromMChord(
@@ -131,12 +137,14 @@ class ChordWidget extends StatelessWidget{
     { Color? color,
       double size = ChordWidget.defSize,
       void Function()? onTap,
+      void Function()? onLongPress,
     }) => ChordWidget(
     chord: chord,
     strings: 4,
     color: color,
     size: size,
     onTap: onTap,
+    onLongPress: onLongPress,
   );
 
   @override
@@ -251,51 +259,35 @@ class ChordWidget extends StatelessWidget{
 
 }
 
-class ChordDrawBar extends StatefulWidget{
+class ChordDrawBar extends StatelessWidget{
   
   final String chords;
   final Color background;
   final Color? chordColor;
   final double elevation;
-  final bool changeTypeOnTap;
-  final InstrumentType initType;
+  final InstrumentType instrumentType;
   final bool showLabel;
   final EdgeInsets padding;
 
-  final void Function(Chord, InstrumentType)? onTap;
-  
+  final void Function(Chord)? onTap;
+  final void Function(Chord)? onLongPress;
+
+
   const ChordDrawBar(
       this.chords, {
         this.background=Colors.transparent,
         this.chordColor,
         this.elevation=0,
-        this.changeTypeOnTap=true,
-        this.initType = InstrumentType.GUITAR,
+        this.instrumentType = InstrumentType.GUITAR,
         this.showLabel=true,
         this.padding=EdgeInsets.zero,
 
         this.onTap,
+        this.onLongPress,
 
         Key? key
       }):super(key: key);
-  
-  @override
-  State<StatefulWidget> createState() => ChordDrawBarState();
-  
-}
 
-class ChordDrawBarState extends State<ChordDrawBar>{
-
-  late InstrumentType type;
-
-  @override
-  void initState() {
-
-    type = widget.initType;
-
-    super.initState();
-  }
-  
   @override
   Widget build(BuildContext context) {
 
@@ -303,7 +295,7 @@ class ChordDrawBarState extends State<ChordDrawBar>{
     List<String> ukulChordStrs = [];
     List<String> mandChordStrs = [];
 
-    List<String> lines = widget.chords.split('\n');
+    List<String> lines = chords.split('\n');
 
     for(String line in lines) {
       List<String> chordStrs = line.split(' ');
@@ -329,12 +321,9 @@ class ChordDrawBarState extends State<ChordDrawBar>{
       guitChords.add(
           ChordWidget.fromGChord(
               chordSet[0],
-              color: widget.chordColor,
-              onTap: (){
-                if(widget.changeTypeOnTap)
-                  setState(() => type = type.next);
-                widget.onTap?.call(chordSet[0], type);
-              }
+              color: chordColor,
+              onTap: () => onTap?.call(chordSet[0]),
+              onLongPress: () => onLongPress?.call(chordSet[0]),
           )
       );
     }
@@ -346,12 +335,8 @@ class ChordDrawBarState extends State<ChordDrawBar>{
       ukulChords.add(
           ChordWidget.fromUChord(
               chord,
-              color: widget.chordColor,
-              onTap:(){
-                if(widget.changeTypeOnTap)
-                  setState(() => type = type.next);
-                widget.onTap?.call(chord, type);
-              }
+              color: chordColor,
+              onTap:() => onTap?.call(chord)
           )
       );
     }
@@ -363,32 +348,28 @@ class ChordDrawBarState extends State<ChordDrawBar>{
       mandChords.add(
           ChordWidget.fromMChord(
               chord,
-              color: widget.chordColor,
-              onTap:(){
-                if(widget.changeTypeOnTap)
-                  setState(() => type = type.next);
-                widget.onTap?.call(chord, type);
-              }
+              color: chordColor,
+              onTap:() => onTap?.call(chord)
           )
       );
     }
 
     return Material(
-      color: widget.background,
-      elevation: widget.elevation,
+      color: background,
+      elevation: elevation,
       child: Row(
         children: [
           Expanded(
             child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
-                padding: widget.padding,
+                padding: padding,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children:
-                    type == InstrumentType.GUITAR?
+                    instrumentType == InstrumentType.GUITAR?
                     guitChords:
-                    (type == InstrumentType.UKULELE?
+                    (instrumentType == InstrumentType.UKULELE?
                     ukulChords:
                     // type == InstrumentType.MANDOLIN?
                     mandChords
@@ -397,11 +378,11 @@ class ChordDrawBarState extends State<ChordDrawBar>{
             ),
           ),
 
-          if(widget.showLabel)
+          if(showLabel)
             Padding(
               padding: EdgeInsets.all(Dimen.defMarg),
               child: RotatedBox(
-                child: Text(type.name, style: AppTextStyle(fontSize: Dimen.textSizeTiny, color: hintEnab_(context))),
+                child: Text(instrumentType.name, style: AppTextStyle(fontSize: Dimen.textSizeTiny, color: hintEnab_(context))),
                 quarterTurns: 3,
               ),
             )
