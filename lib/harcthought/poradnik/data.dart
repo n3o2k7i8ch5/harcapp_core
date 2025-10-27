@@ -324,6 +324,55 @@ Poradnik poradnik_wychowanie_przez_wysmianie = Poradnik(
   ),
 );
 
+const String poradnik_name_wspolzawodnictwo = "wspolzawodnictwo";
+const String poradnik_title_wspolzawodnictwo = "Współzawodnictwo";
+Poradnik poradnik_wspolzawodnictwo = Poradnik(
+  name: poradnik_name_wspolzawodnictwo,
+  title: poradnik_title_wspolzawodnictwo,
+  pageCount: 11,
+  description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający zagadnienia planowania, organizowania i skuteczności wychowawczej współzawodnictwa jako narzędzia wychowawczego.',
+  coverTitle: 'WSPÓŁZAWODNICTWO',
+  coverSource: 'Freepik (freepik)',
+  formats: [FileFormat.pdf, FileFormat.docx],
+  defaultFormat: FileFormat.pdf,
+  titleColor: Colors.white,
+  coverTitleBuilder: (context, poradnik, width, height) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+
+      Text(
+        'WSPÓŁZAWODNICTWO',
+        style: AppTextStyle(
+            color: poradnik.titleColor??Colors.black,
+            fontSize: height*Poradnik.mainTitleHeightFactor,
+            fontWeight: weightHalfBold
+        ),
+        textAlign: TextAlign.center,
+      ),
+
+      SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+      Container(
+        width: width*0.63,
+        height: height*0.003,
+        color: poradnik.titleColor??Colors.black,
+      ),
+
+      SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+      Text(
+        'Poradnik w pracy wychowawczej',
+        style: AppTextStyle(
+          color: poradnik.titleColor??Colors.black,
+          fontSize: height*Poradnik.subTitleHeightFactor,
+        ),
+        textAlign: TextAlign.center,
+      ),
+
+    ],
+  ),
+);
+
 List<Poradnik> allPoradniks = [
   poradnik_o_strukturze_duchowosci,
   poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
@@ -331,4 +380,5 @@ List<Poradnik> allPoradniks = [
   poradnik_przykladowa_strategia_rozwoju_duchowego,
   poradnik_niedziela_na_obozie,
   poradnik_wychowanie_przez_wysmianie,
+  poradnik_wspolzawodnictwo,
 ];
