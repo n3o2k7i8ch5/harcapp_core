@@ -723,6 +723,14 @@ const Person GABRIELA_SOBCZAK = Person(
     rankHarc: RankHarc.zhpOchotniczka,
     email: ["gabi.sobczak1011@gmail.com"]
 );
+Person GABRIELA_TWORKOWSKA = const Person(
+    name: 'Gabriela Tworkowska',
+    druzyna: '75. ŁDH-EK „Brzask” im. gen. Marii Wittek',
+    hufiec: 'Łódzki Hufiec Harcerek „Mozaika”',
+    rankHarc: RankHarc.zhrTropicielka,
+    org: Org.zhr,
+    email: ['gabi.tworko@gmail.com']
+);
 const Person GRZEGORZ_BOROWIEC = Person(
   name: 'Grzegorz Borowiec',
   rankHarc: RankHarc.zhpHOc,
@@ -770,6 +778,13 @@ const Person GUSTAW_BAJCAR = Person(
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
     email: ['gustaw.bajcar2@gmail.com']
+);
+Person HANNA_BAJER = const Person(
+    name: 'Hanna Bajer',
+    druzyna: '3. Gromada Zuchowa „Zawiszątka”',
+    rankHarc: RankHarc.dhd,
+    org: Org.zhp,
+    email: ['bajerhanna12@gmail.com']
 );
 const Person HANNA_CISAKOWSKA = Person(
     name: 'Hania Cisakowska',
@@ -2257,6 +2272,14 @@ const Person MARLENA_BANIA = Person(
     org: Org.zhp,
     email: ['marlena.bania6474@gmail.com', 'marlena.bania@zhp.net.pl']
 );
+const Person MARIA_BATKO = Person(
+    name: 'Maria Batko',
+    druzyna: '99 EŻDSH Wapiti im. Marii Konopnickiej',
+    hufiec: huf_zhp_elblag,
+    rankHarc: RankHarc.zhpSamarytanka,
+    org: Org.zhp,
+    email: ["marysiajamna@gmail.com"]
+);
 const Person MARIA_GRZYWACZ = Person(
     name: 'Maria Grzywacz',
     druzyna: '13. CDH „Bezimienni”',
@@ -2777,10 +2800,17 @@ const Person OSKAR_SAKOWICZ = Person(
 );
 const Person PATRYCJA_BINKIEWICZ = Person(
     name: 'Patrycja Binkiewicz',
-    druzyna: '5 SDH „Trawersi”',
+    druzyna: '5. SDH „Trawersi”',
     hufiec: huf_zhp_sokolka,
     org: Org.zhp,
     email: ["patrycja.binkiewicz@zhp.net.pl", "patrycjabinkiewicz2@gmail.com"]
+);
+Person PATRYCJA_DUDZINSKA = const Person(
+    name: 'Patrycja Dudzinska',
+    druzyna: '88. Drużyna Wędrownicza „Wierchy”',
+    rankHarc: RankHarc.zhpSamarytanka,
+    org: Org.zhp,
+    email: ['dudzinska.patrycjaa@gmail.com']
 );
 const Person PATRYCJA_KALINOWSKA = Person(
     name: 'Patrycja Kalinowska',
