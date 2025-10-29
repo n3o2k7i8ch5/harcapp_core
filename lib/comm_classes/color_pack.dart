@@ -188,6 +188,7 @@ abstract class ColorPack{
       iconColor: iconEnabled,
       titleTextStyle: (listTileTheme.titleTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
       subtitleTextStyle: (listTileTheme.subtitleTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
+      leadingAndTrailingTextStyle: (listTileTheme.leadingAndTrailingTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
     );
 
     return ThemeData(
@@ -215,6 +216,7 @@ abstract class ColorPack{
         onPrimary: accent,
         onSecondary: accent,
         onSurface: textEnabled,
+        onSurfaceVariant: iconEnabled,
         onError: Colors.red,
       ),
       scaffoldBackgroundColor: background,
