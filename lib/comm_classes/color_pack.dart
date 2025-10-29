@@ -217,6 +217,7 @@ abstract class ColorPack{
         onSecondary: accent,
         onSurface: textEnabled,
         onSurfaceVariant: iconEnabled,
+        outline: iconEnabled,
         onError: Colors.red,
       ),
       scaffoldBackgroundColor: background,
