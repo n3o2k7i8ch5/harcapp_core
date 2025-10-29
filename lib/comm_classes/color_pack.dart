@@ -182,6 +182,14 @@ abstract class ColorPack{
       selectionHandleColor: accent,
     );
 
+    ListTileThemeData listTileTheme = ListTileTheme.of(context);
+    listTileTheme = listTileTheme.copyWith(
+      textColor: textEnabled,
+      iconColor: iconEnabled,
+      titleTextStyle: (listTileTheme.titleTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: textEnabled),
+      subtitleTextStyle: (listTileTheme.subtitleTextStyle??TextStyle()).copyWith(fontFamily: AppTextStyle.fontFamily_, color: hintEnabled),
+    );
+
     return ThemeData(
       brightness: brightness,
       hintColor: hintEnabled,
@@ -194,6 +202,7 @@ abstract class ColorPack{
       dialogTheme: dialogThemeData,
 
       textSelectionTheme: textSelectionTheme,
+      listTileTheme: listTileTheme,
 
       primaryTextTheme: textTheme,
       colorScheme: ColorScheme.of(context).copyWith(
