@@ -98,6 +98,7 @@ class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends Contribut
   final bool showSongExplanationButton;
   final void Function()? onSongExplanationTap;
 
+  final bool showYtButton;
   final void Function(double position)? onYtTap;
   final void Function()? onYtLongPress;
 
@@ -161,6 +162,7 @@ class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends Contribut
         this.showSongExplanationButton = false,
         this.onSongExplanationTap,
 
+        this.showYtButton = true,
         this.onYtTap,
         this.onYtLongPress,
 
@@ -234,6 +236,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
   bool get showSongExplanationButton => widget.showSongExplanationButton;
   void Function()? get onSongExplanationTap => widget.onSongExplanationTap;
 
+  bool get showYtButton => widget.showYtButton;
   void Function(double position)? get onYtTap => widget.onYtTap;
   void Function()? get onYtLongPress => widget.onYtLongPress;
 
@@ -901,7 +904,7 @@ class _ButtonsWidget<TSong extends SongCore, TContribIdRes extends ContributorId
 class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends State<_ButtonsWidget<TSong, TContribIdRes>>{
   
   // Reversed order of buttons to show them from right to left.
-  static List<_ButtonData> buttonData = [
+  static List<_ButtonData> getButtonData({bool showYtButton = true}) => [
 
     _ButtonData(
       name: 'Ocena',
@@ -930,18 +933,19 @@ class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends Contribu
         show: (_, _, _) => true
     ),
 
-    _ButtonData(
-        name: 'YouTube',
-        iconData: FeatherIcons.youtube,
-        onLongPress: (_, songWidget, _) => songWidget.onYtLongPress?.call(),
-        onPressed: (_, songWidget, _){
-          if(songWidget.onYtTap==null) return;
-          final RenderBox renderBox = songWidget.contentCardsKey.currentContext!.findRenderObject() as RenderBox;
-          final position = renderBox.localToGlobal(Offset.zero).dy; // - parent.widget.topScreenPadding;
-          songWidget.onYtTap!(position);
-        },
-        show: (_, parent, _) => parent.song.youtubeVideoId != null && parent.song.youtubeVideoId!.length!=0
-    ),
+    if(showYtButton)
+      _ButtonData(
+          name: 'YouTube',
+          iconData: FeatherIcons.youtube,
+          onLongPress: (_, songWidget, _) => songWidget.onYtLongPress?.call(),
+          onPressed: (_, songWidget, _){
+            if(songWidget.onYtTap==null) return;
+            final RenderBox renderBox = songWidget.contentCardsKey.currentContext!.findRenderObject() as RenderBox;
+            final position = renderBox.localToGlobal(Offset.zero).dy; // - parent.widget.topScreenPadding;
+            songWidget.onYtTap!(position);
+          },
+          show: (_, parent, _) => parent.song.youtubeVideoId != null && parent.song.youtubeVideoId!.length!=0
+      ),
     
     _ButtonData(
       name: 'Trudne słowa',
@@ -995,10 +999,15 @@ class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends Contribu
   late bool changeSizeVisible;
   late int scheduleId;
 
+  late List<_ButtonData> buttonData;
+
   @override
   void initState() {
     changeSizeVisible = false;
     scheduleId = 0;
+
+    buttonData = getButtonData(showYtButton: fragmentState.showYtButton);
+
     super.initState();
   }
 
