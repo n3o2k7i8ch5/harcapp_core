@@ -200,13 +200,9 @@ KonspektStep _step_poziomy_duchowosci = KonspektStep(
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>zachowań</b>, poziom <b>postaw</b>, poziom <b>wartości</b> i poziom <b>aksjomatu</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu kartkę z nazwą poziomu duchowości i jego hasłową definicją z załącznika $attach_html_karty_poziomow_duchowosci. Dzięki temu uczestnicy mogą zawsze wrócić podczas warsztatów do definicji poziomu duchowości.'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>zachowań</b>, poziom <b>postaw</b>, poziom <b>wartości</b> i poziom <b>aksjomatu</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu katkę z nazwą i hasłową definicją poziomu duchowości z załącznika $attach_html_karty_poziomow_duchowosci. Dzięki temu uczestnicy mogą w każdym momencie zerknąć na definicję poziomu duchowości.'
         '<br>'
-        '<br>Dodatkowo prowadzący definiuje duchowość <b>wymierną</b> (poziom zachowań i postaw) i <b>głęboką</b> (poziom wartości i aksjomatów).'
-        '<br>'
-        '<br>Prowadzący powinien wyraźnie zaznaczyć, że “poziom duchowości” nie odnosi się do słowa “poziom” w sensie poziomu zaawansowania (np. poziom w grze komputerowej), ale poziomu w sensie warstwy, piętra, hierarchii etc..'
-        '<br>'
-        '<br>Prowadzący może w procesie definiowania posiłkować się przykładem:'
+        '<br>Prowadzący może w tym miejscu posiłkować się przykładem:'
         '</p>'
 
         '<table border="1" style="border-collapse: collapse; width: 100%;">'
@@ -227,6 +223,11 @@ KonspektStep _step_poziomy_duchowosci = KonspektStep(
         '</tr>'
         '</table>'
 
+        '<p style="text-align:justify;">'
+        'Dodatkowo prowadzący definiuje skróty: duchowość <b>wymierna</b> (poziom zachowań i postaw) i <b>głęboka</b> (poziom wartości i aksjomatów).'
+        '<br>'
+        '<br>Prowadzący powinien zaznaczyć, że “poziom duchowości” nie odnosi się do słowa “poziom” w sensie poziomu zaawansowania (np. poziom w grze komputerowej), ale poziomu w sensie warstwy, piętra, hierarchii etc..'
+        '</p>'
 );
 
 KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
@@ -237,7 +238,7 @@ KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
     content: '<p style="text-align:justify;">'
 
         '<p style="text-align:justify;">'
-        'Po zdefiniowaniu poziomów prowadzący prosi uczestników o podanie kilku przykładowych elementów do każdego z poziomów duchowości. Prowadzący każdorazowo ocenia, czy przykłady są trafne - jeśli nie, podaje powód, dla którego nie są.'
+        'Prowadzący może prosić uczestników o podanie kilku przykładowych elementów do każdego poziomu duchowości. Prowadzący każdorazowo ocenia, czy przykłady są trafne - jeśli nie, podaje powód, dla którego nie są.'
         '<br>'
         '<br><u>Uwagi o wartościach:</u>'
         '</p>'
@@ -246,13 +247,19 @@ KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Stwierdzenie pokroju: <i>“dla mnie wartością jest czytanie książek swoim dzieciom”</i> w istocie nie jest deklaracją wartości, a oceną słuszności czynu. Wartością jest stan, do którego ów czyn prowadzi. <i>“Warto czytać książki dzieciom, bo zacieśnia to więzi w rodzinie”</i> - zatem wartością w tym przypadku jest stan trwania bliskich relacji rodzinnych.'
+        'Wartości opisują zawsze <b>preferowany stan świata</b>. Bezstanowe określenia w stylu "rodzina" nie są wartością. Wartością może być "posiadanie rodziny", "majętność rodziny", "szczęście członków rodziny", "liczebność rodziny".'
         '</p>'
         '</li>'
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Potoczne określenie <i>“wartością jest dla mnie rodzina”</i> nie jest deklaracją wartości, bowiem nie określa preferowanego stanu z nią związanego: czy chodzi o posiadanie rodziny, o jej majętność, długowieczność, szczęście, dużą liczebność, poczucie przyjemności członków rodziny? W sposób domyślny podanie jedynie przedmiotu wartości oznacza: <i>“w staraniach o preferowany stan rzeczywistości wynikający z moich aksjomatów, najbardziej interesuje mnie poprawa fragmentu rzeczywistości związana z moją rodziną”</i>.'
+        'Ktoś powie: Zaraz! Przecież ludzie mówią: <i>"rodzina jest dla mnie wartością"</i>!'
+        '<br>'
+        '<br>Gdy takie słowa wypowiada konkretna osoba, to w istocie deklaruje: <i>"dobro rodziny, tak jak je rozumiem, jest dla mnie wartością"</i>. Przykładowo:'
+        '<br>'
+        '<br>Gdy Marian deklaruje: <i>"rodzina jest dla mnie wartością"</i>, to w istocie deklaruje następującą rzecz: <i>"ja, Marian, mam swoje przekonania, definicję dobra i zła. Chciałbym, aby wszystko na świecie było dobre, niestety, nie mogę zająć się na raz swoim zdrowiem, pracą i rodziną. Obszarem, który uważam za priorytetowy w doprowadzeniu go do "dobra" jest moja rodzina. Dobra rodzina to dla mnie taka, której członkowie sobie ufają i się wspierają."</i>.'
+        '<br>'
+        '<br>Oznacza to w istocie, że dla Mariana wartością jest <i>"wzajemne zaufanie i wsparcie członków rodziny"</i>.'
         '</p>'
         '</li>'
 
@@ -312,7 +319,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = Konspekt
     content: '<p style="text-align:justify;">'
         'Aby uczestnicy mieli okazję sami obyć się z aksjomatami, prowadzący rozdaje im wycięte prostokątne kartki z przykładami aksjomatów z załącznika $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_opisu_i_sensu_przyklady, $attach_html_aksjomaty_sensu_przyklady i $attach_html_aksjomaty_bledne_przyklady.'
         '<br>'
-        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio do jako <b>aksjomaty opisu</b>, <b>aksjomaty opisu i sensu</b> oraz <b>aksjomaty sensu</b>. Muszą mieć też na uwadze, że <b>kilka przykładów nie jest aksjomatem</b> w ogóle.'
+        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio jako <b>aksjomaty opisu</b>, <b>aksjomaty opisu i sensu</b> oraz <b>aksjomaty sensu</b>. Muszą mieć też na uwadze, że <b>kilka przykładów nie jest aksjomatem</b> w ogóle.'
         '<br>'
         '<br>W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
         '<br>'

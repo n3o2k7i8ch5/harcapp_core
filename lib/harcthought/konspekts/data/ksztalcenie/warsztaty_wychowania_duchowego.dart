@@ -258,7 +258,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_zal_przypinki,
 
     ],
-    summary: 'Uczestnicy pochylają się nad zagadnieniem tego, czym jest duchowość, jakie mechanizmy nią rządzą oraz czy może być ona "neutralna".',
+    summary: 'Uczestnicy pochylają się nad zagadnieniem duchowości: co to jest? co ją różni od innych sfer? jakie mechanizmy nią rządzą, czy może być ona "neutralna", oraz jak ją kształtować u wychowanków?.',
     stepGroups: [
 
       KonspektStepGroup(
@@ -279,9 +279,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 30),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący rozdaje uczestnikom <b>identyfikatory</b>, <b>długopisy</b> i <b>notatniki</b> (uczestnicy mogą tam zapisywać swoje wnioski i myśli z warsztatów). Na identyfikatorach uczestnicy wypisują swoje imię i zawieszają na szyi lub przypinają je na ubraniu.'
+                    'Prowadzący rozdaje uczestnikom <b>identyfikatory</b>, <b>długopisy</b> i <b>notatniki</b> (do własnego użytku uczestników). Na identyfikatorach uczestnicy wpisują swoje imię i je zakładają.'
                     '<br>'
-                    '<br>Następnie, w kręgu, uczestnicy się <b>przedstawiają</b> - jako ostatni przedstawia się prowadzący. W ramach przedstawienia prowadzący prosi, by każdy uczestnik odpowiedział na następujące zagadnienia:'
+                    '<br>Następnie, w kręgu, uczestnicy się <b>przedstawiają</b>. Prowadzący prosi, by każdy krótko odpowiedział na następujące zagadnienia:'
                     '</p>'
 
                     '<ol>'
@@ -291,7 +291,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                     '</ol>'
 
                     '<p style="text-align:justify;">'
-                    'Uczestnicy zapisują przedstawione frazy (skojarzenia z duchowością) na <b>mini-kartkach</b>, które następnie są umieszczane na wspólnej, widocznej przestrzeni.'
+                    'Każdy uczestnik zapisuje przedstawione skojarzenia z duchowością na <b>mini-kartkach</b> i umieszcza je na wspólnej, widocznej przestrzeni.'
                     '</p>',
                 materials: [
                   material_identyfikator,
@@ -308,7 +308,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
               content: '<p style="text-align:justify;">'
                   'Prowadzący informuje uczestników o celu warsztatów:'
                   '<br>'
-                  '<br><b><i>Warsztaty nie służą indywidualnej pracy nad duchowością uczestników. Służą opisaniu i zrozumieniu natury rozwoju duchowego, jego zasad, pojęciom z nim związanych oraz nabyciu kompetencji pracy z duchowością harcerzy w drużynach.</i></b>'
+                  '<br><b><i>Warsztaty nie służą indywidualnej pracy nad duchowością uczestników. Służą umiejętności wychowania duchowego harcerzy z perspektywy instruktora.</i></b>'
                   '<br>'
                   '<br>Warsztaty dzielą się na trzy części:'
                   '</p>'
@@ -320,9 +320,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                   '</ol>'
 
                   '<p style="text-align:justify;">'
-                  'Następnie prowadzący informuje uczestników o charakterze, w jaki chce, aby warsztaty były rozumiane:'
-                  '<br>'
-                  '<br><b><i>Zaproponowany podczas warsztatów opis duchowości i wynikające z niego logiczne konsekwencje są <u>propozycją perspektywy</u> rozumienia duchowości i rozwoju duchowego. Nie jest to mądrość dana z niebios, wyryta w kamieniu - jest to efekt wielu lat doświadczeń, rozmów i analiz, który podlega dalszemu rozwojowi.<i></b>'
+                  'Prowadzący może również zaznaczyć, że <b>przedstawiony na warsztatach sposób rozumienia duchowości jest propozycją - nie jest to mądrość dana z niebios, ani wyryta w kamieniu. Owa propozycja jest efektem wielu lat doświadczeń, rozmów i analiz i podlega stałemu rozwojowi.</b>'
                   '</p>',
             ),
           ]
@@ -337,9 +335,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 2),
                 activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący zapoznaje uczestników z podziałem człowieka na pięć sfer zgodnie z poradnikiem $attach_html_poradnik_o_strukturze_duchowosci.'
-                    '<br>'
-                    '<br>Jeżeli uczestnicy mają szansę znać pięcioelementowy podział człowieka na sfery rozwoju definiowany przez statut ZHP, prowadzący może poprosić ich o wymienienie kolejno wszystkich, czyli:'
+                    'Prowadzący zapoznaje uczestników z powszechnym w harcerstwie podziałem człowieka na pięć sfer: '
                     '</p>'
                     '<ul>'
                     '<li><p style="text-align:justify;">Sfera ciała (fizyczna)</p></li>'
@@ -348,6 +344,12 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                     '<li><p style="text-align:justify;">Sfera relacji (społeczna)</p></li>'
                     '<li><p style="text-align:justify;">Sfera ducha</p></li>'
                     '</ul>'
+                    '<p style="text-align:justify;">'
+                    'Ów podział jest dokładnie opisany w poradniku $attach_html_poradnik_o_strukturze_duchowosci.'
+                    '<br>'
+                    '<br>Jeżeli uczestnicy prawdopodobnie znają ów podział, prowadzący może skrócić ten punkt i dla porządku poprosić uczestników o wymienienie wszystkich sfer.'
+                    '</p>'
+
             ),
 
             KonspektStep(
@@ -427,9 +429,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 2),
                 activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący zwraca uwagę, że wszystkie wymienione przezeń sfery są umiejętnościami i zdolnościami. Sprawiają, że człowiek "może więcej", jednak żadna z tych sfer, nawet gdyby była rozwinięta do perfekcji, <b>nie określa kiedy, czy i jak należy jakąś zdolność wykorzystać</b>.'
+                    'Prowadzący zwraca uwagę, że wszystkie wymienione dotąd 4 sfery (ciała, umysłu, relacji i emocji) są źródłami umiejętnościami, czy zdolności. Sprawiają, że człowiek "może więcej", jednak żadna z tych sfer, nawet rozwinięta do perfekcji, <b>nie określa kiedy, czy, ani jak należy jakąś zdolność wykorzystać</b>.'
                     '<br>'
-                    '<br>Z tego powodu sfery <b>ciała</b>, <b>umysłu</b>, <b>relacji</b> i <b>emocji</b> są <b>sferami funkcjonalnymi</b> - są jak zestaw narzędzi leżących w garażu.'
+                    '<br>Z tego powodu sfery <b>ciała</b>, <b>umysłu</b>, <b>relacji</b> i <b>emocji</b> są <b>sferami funkcjonalnymi</b> - są jak zestaw dostępnych narzędzi leżących w garażu.'
                     '</p>'
             ),
 
@@ -440,7 +442,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 content: '<p style="text-align:justify;">'
                     'Prowadzący definiuje sferę ducha:'
                     '<br>'
-                    '<br><i>Sfera ducha jest wszystkim tym, co nadaje cel - określa kiedy jak postępować, jak korzystać z dostępnych zdolności, które dają sfery funkcjonalne. Co ważne, <b>sfera ducha sama w sobie nie stwarza żadnych zdolności</b> - rozwinięty duch nie pozwala ani dalej skakać, ani lepiej widzieć, ani więcej rozumieć.</i>'
+                    '<br><i>Sfera ducha jest wszystkim tym, co kształtuje sposób postępowania: określa kiedy i jak się zachować, jak korzystać z dostępnych zdolności, które dają sfery funkcjonalne. Co ważne, <b>sfera ducha sama w sobie nie stwarza żadnych zdolności</b> - rozwinięty duch nie pozwala ani dalej skakać, ani lepiej widzieć, ani więcej rozumieć.</i>'
                     '</p>'
             ),
 
@@ -450,9 +452,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 activeForm: KonspektStepActiveForm.static,
                 required: true,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący, jeśli uważa, że pomoże to lepiej zrozumieć relację między sferami funkcjonalnymi, a sferą ducha, może posłużyć się następującą analogią:'
+                    'Prowadzący, by podać intuicyjny przykład relacji między sferami funkcjonalnymi a sferą ducha, może posłużyć się następującą analogią:'
                     '<br>'
-                    '<br><i>Sfera ducha może być porównana do kierowcy samochodu: kierowca, w ramach ograniczeń stwarzanych przez sfery funkcjonalne samochodu wybiera kierunek jazdy, prędkość, muzykę, jasność świateł, odczytuje prędkość i awarie poprzez tablicę rozdzielczą. Samochód może działać półautomatycznie, np. ograniczając kąt skrętu przy dużej prędkości, jednak to kierowca w ramach ograniczeń samochodu decyduje o jego losie.</i>'
+                    '<br><i>Sfery funkcjonalne można porównać do <b>funkcjonalności samochodu</b> - jego silnika, opon, zwrotności, głośników, ładowności, etc. Sfera ducha to <b>kierowca samochodu</b>: to on wybiera kierunek jazdy, prędkość, muzykę, rodzaj świateł, odczytuje prędkość i awarie z tablicy rozdzielczej. Samochód, nieważne jak dobry, bez kierowcy nigdzie nie pojedzie. Kierowca, nieważne jak doświadczony, w zepsutym samochodzie też donikąd nie dojedzie.</i>'
                     '</p>'
             ),
 
