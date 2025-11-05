@@ -253,11 +253,11 @@ KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Ktoś powie: Zaraz! Przecież ludzie mówią: <i>"rodzina jest dla mnie wartością"</i>!'
+        'Ktoś powie: Zaraz! Przecież ludzie mówią: <i>"rodzina jest dla mnie wartością"</i> i wiadomo o co im chodzi!'
         '<br>'
-        '<br>Gdy takie słowa wypowiada konkretna osoba, to w istocie deklaruje: <i>"dobro rodziny, tak jak je rozumiem, jest dla mnie wartością"</i>. Przykładowo:'
+        '<br>Gdy takie stwierdzenie wypowiada konkretna osoba, to w istocie deklaruje: <i>"dobro rodziny, tak jak je rozumiem, jest dla mnie wartością"</i>. Przykładowo:'
         '<br>'
-        '<br>Gdy Marian deklaruje: <i>"rodzina jest dla mnie wartością"</i>, to w istocie deklaruje następującą rzecz: <i>"ja, Marian, mam swoje przekonania, definicję dobra i zła. Chciałbym, aby wszystko na świecie było dobre, niestety, nie mogę zająć się na raz swoim zdrowiem, pracą i rodziną. Obszarem, który uważam za priorytetowy w doprowadzeniu go do "dobra" jest moja rodzina. Dobra rodzina to dla mnie taka, której członkowie sobie ufają i się wspierają."</i>.'
+        '<br>Gdy Marian deklaruje: <i>"rodzina jest dla mnie wartością"</i>, to w istocie stwierdza: <i>"ja, Marian, mam swoje przekonania, definicję dobra i zła. Chciałbym, aby wszystko na świecie było dobre, niestety, nie mogę zająć się na raz swoim zdrowiem, pracą i rodziną. Obszarem, który uważam za priorytetowy w doprowadzeniu do "dobra" jest moja rodzina. Dobra rodzina to dla mnie taka, której członkowie sobie ufają i się wspierają, więc nad tym będę pracował."</i>.'
         '<br>'
         '<br>Oznacza to w istocie, że dla Mariana wartością jest <i>"wzajemne zaufanie i wsparcie członków rodziny"</i>.'
         '</p>'
@@ -265,9 +265,7 @@ KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Chwilowo człowiek może jako preferowany stan określić stan przyjemności wynikający ze zjedzenia cukierka, zaśnięcie, czy euforię po kupieniu nowych ciuchów.'
-        '<br>'
-        '<br>To także są wartości wpisane w strukturę wartości człowieka.'
+        'Wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Chwilowo człowiek może jako preferowany stan określić <b>przyjemność</b> wynikającą ze zjedzenia cukierka, <b>zaśnięcie</b>, czy <b>poczucie euforii</b> po kupieniu nowych ciuchów. To także są wartości wpisane w strukturę wartości człowieka.'
         '</p>'
         '</li>'
 
@@ -359,11 +357,11 @@ KonspektStep _step_integracja_duchowosci_jak_nie = KonspektStep(
       material_marker,
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje <b>dla zbudowania kontekstu</b> intuicyjny sposób kształtowania duchowości, który jest zupełnie nieprawdziwy. Zaczyna od zwrócenia uwagi:'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje <b>dla zbudowania kontekstu</b> intuicyjny, ale <b>zupełnie nieprawdziwy</b> sposób kształtowania duchowości. Zaczyna od zwrócenia uwagi:'
         '<br>'
-        '<br><i>Najlepiej byłoby, gdyby każdy człowiek najpierw ustalał swoje aksjomaty - czyli fundament duchowości, następnie wnioskował z nich słuszne wartości, zaś z wartości wnioskował właściwe postawy i zachowania. Potem żyłby długo i szczęśliwie, postępując zawsze w zgodzie z samym sobą, czasem tylko odkryłby jakąś nową wartość, albo nowe właściwe zachowanie.'
+        '<br><i>Najlepiej byłoby, gdyby każdy człowiek najpierw ustalał swoje aksjomaty - czyli fundament duchowości, następnie wnioskował z nich spójne wartości, zaś z wartości wnioskował właściwe postawy i zachowania. Potem żyłby długo i szczęśliwie, postępując zawsze w zgodzie z samym sobą, czasem tylko odkryłby jakąś nową wartość, albo nowe właściwe zachowanie.'
         '<br>'
-        '<br>Wszystko fajnie - tylko czy próbował ktoś kiedyś porozmawiać z niemowlakiem o filozofii egzystencjalnej, aksjomatach, albo chociaż słuszności jednych wartości nad drugimi? A przecież każdy niemowlak jakoś się już zachowuje, czyli ma już określoną duchowość!</i>'
+        '<br>Wszystko fajnie - ale próbował ktoś porozmawiać z niemowlakiem o filozofii egzystencjalnej, aksjomatach, albo chociaż słuszności jednych wartości nad drugimi? A przecież każdy niemowlak jakoś się już zachowuje, czyli ma już określoną duchowość!</i>'
         '<br>'
         '<br>Prowadzący zauważa, że w sposób oczywisty kształtowanie duchowości <b>nie odbywa się</b> od poziomów głębokich (aksjomaty, wartości) do wymiernych (postawy i zachowania). Kształtowanie duchowości zaczyna się od końca: czyli <b>od poziomu zachowań</b>.'
         '</p>'
