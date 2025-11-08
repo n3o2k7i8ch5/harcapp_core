@@ -11,3 +11,9 @@ String piramidaDuchowosciHtmlLight = '<img src="asset:packages/harcapp_core/asse
 String piramidaDuchowosciHtmlDark = '<img src="asset:packages/harcapp_core/assets/konspekty/common/warsztaty_duchowe/piramida_duchowosci_dark.svg" style="object-fit: contain; width: 100%; height: auto;" alt="Piramida duchowości"/>';
 
 String piramidaDuchowosciHtml({required bool isDark}) => isDark?piramidaDuchowosciHtmlDark:piramidaDuchowosciHtmlLight;
+
+
+String cyklIntegracjiDuchowosciHtmlLight = '<img src="asset:packages/harcapp_core/assets/konspekty/common/warsztaty_duchowe/cykl_integracji_duchowosci.svg" style="object-fit: contain; width: 100%; height: auto;" alt="Cykl integracji duchowości"/>';
+String cyklIntegracjiDuchowosciHtmlDark = '<img src="asset:packages/harcapp_core/assets/konspekty/common/warsztaty_duchowe/cykl_integracji_duchowosci.svg" style="object-fit: contain; width: 100%; height: auto;" alt="Cykl integracji duchowości"/>';
+
+String cyklIntegracjiDuchowosciHtml({required bool isDark}) => isDark?cyklIntegracjiDuchowosciHtmlDark:cyklIntegracjiDuchowosciHtmlLight;

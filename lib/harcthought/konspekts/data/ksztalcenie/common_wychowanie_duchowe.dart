@@ -348,25 +348,6 @@ KonspektStep _step_integracja_duchowosci_osie = KonspektStep(
         '</p>',
 );
 
-KonspektStep _step_integracja_duchowosci_jak_nie = KonspektStep(
-    title: 'Integracja duchowości - jak duchowość nie jest kształtowana',
-    duration: Duration(minutes: 2),
-    activeForm: KonspektStepActiveForm.static,
-    materials: [
-      material_flipchart.copyWith(amount: 1),
-      material_marker,
-    ],
-    content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje <b>dla zbudowania kontekstu</b> intuicyjny, ale <b>zupełnie nieprawdziwy</b> sposób kształtowania duchowości. Zaczyna od zwrócenia uwagi:'
-        '<br>'
-        '<br><i>Najlepiej byłoby, gdyby każdy człowiek najpierw ustalał swoje aksjomaty - czyli fundament duchowości, następnie wnioskował z nich spójne wartości, zaś z wartości wnioskował właściwe postawy i zachowania. Potem żyłby długo i szczęśliwie, postępując zawsze w zgodzie z samym sobą, czasem tylko odkryłby jakąś nową wartość, albo nowe właściwe zachowanie.'
-        '<br>'
-        '<br>Wszystko fajnie - ale próbował ktoś porozmawiać z niemowlakiem o filozofii egzystencjalnej, aksjomatach, albo chociaż wyższości jednych wartości nad drugimi? A przecież każdy niemowlak jakoś się już zachowuje, czyli ma już określoną duchowość!</i>'
-        '<br>'
-        '<br>Prowadzący zauważa, że w sposób oczywisty kształtowanie duchowości <b>nie odbywa się</b> od poziomów głębokich (aksjomaty, wartości) do wymiernych (postawy i zachowania). Kształtowanie duchowości zaczyna się od końca: czyli <b>od poziomu zachowań</b>.'
-        '</p>'
-);
-
 KonspektStep _step_etapy_ksztaltowania_integracja_duchowosci = KonspektStep(
     title: 'Integracja duchowości - etapy kształtowania duchowości',
     duration: Duration(minutes: 3),
@@ -383,7 +364,7 @@ KonspektStep _step_etapy_ksztaltowania_integracja_duchowosci = KonspektStep(
         '<li>'
         '<p style="text-align:justify;">'
         '<i>Etap dziecięcy + zuchowy:</i>'
-        '<br>Od dnia narodzin, aż do ok. 10. roku życia duchowość człowieka nie wykracza poza <b>poziom zachowań</b> i <b>postaw</b>. Człowiek rozumie jedynie to, że niektóre zachowania są dobre, a inne złe - ale nie wnika "dlaczego". To m.in. z tego powodu Prawo Zucha stanowi prostolinijnie o tym "co zuch robi", a nie "jakimi wartościami zuch się kieruje". Teoretycznie abstrakcyjne określenia takie jak "bycie grzecznym" jest rozumiany jako na zachowania: mówienie dzień dobry, dziękuję i przepraszam, mycie rąk po wejściu do domu i odkładanie zabawek na miejsce.'
+        '<br>Od dnia narodzin, aż do ok. 10. roku życia duchowość człowieka nie wykracza poza <b>poziom zachowań</b> i <b>postaw</b>. Z perspektywy dziecka jedne zachowania są dobre, a inne złe - i kropka. To m.in. dlatego Prawo Zucha opowiada "co zuch robi", a nie "jakimi wartościami zuch się kieruje". Abstrakcyjne określenia jak "bycie grzecznym" są rozumiane jako "worek na zachowania": mówienie dzień dobry, dziękuję i przepraszam, mycie rąk po wejściu do domu i odkładanie zabawek na miejsce.'
         '</p>'
         '</li>'
 
@@ -392,18 +373,16 @@ KonspektStep _step_etapy_ksztaltowania_integracja_duchowosci = KonspektStep(
         '<i>Etap harcerski:</i>'
         '<br>W wieku ok. 10 lat można zacząć mówić u dzieci o zdolności abstrakcyjnego myślenia. Zaczynają rozumieć, że dobre zachowania nie są "dobre, bo tak", ale są dobre, bo wynikają z określonych <b>wartości</b>. Nie trzeba wtedy już mówić: "zawsze przywitaj się i podziękuj", można zamiast tego powiedzieć: "odnoś się z szacunkiem".'
         '<br>'
-        '<br><u>Jakimi wartościami zacznie się na tym etapie kierować młody człowiek</u>?'
-        '<br>Oczywiście pierwsze wartości, nie ani losowe, ani zależne od chwilowej konstelacji gwiazd. Człowiek będzie miał tendencję do kierowania się <b>wartościami, z których wynikają zachowania i postawy, którymi na tym etapie żyje</b>.'
+        '<br>Wartości, które młody człowiek świadomie przyjmie jako pierwsze są zazwyczaj <b>spójne z zachowaniami i postawami, którymi na tym etapie żyje</b>. Np. jeśli człowiek w grze w piłkę był nauczony podawać często do kolegów, naturalną wartością będzie dla niego współpraca.'
         '</p>'
         '</li>'
 
         '<li>'
         '<p style="text-align:justify;">'
         '<i>Etap starszoharcersko-wędrowniczy + dorosły:</i>'
-        '<br>W wieku ok. 13-15 lat są wartości przestają być luźnym zbiorem i są porządkowane w światopoglądy, które mają swoje przyczyny - przyczynami tymi są <b>aksjomaty</b>, czyli przyjęte, nieweryfikowalne założenia o świecie. Towarzyszy temu zrozumienie, że różni ludzie mogą mieć różny światopogląd, czerpać swoje wartości z różnych źródeł i że nie ma możliwości jednoznacznego określenia który światopogląd, tudzież aksjomaty, są słuszne, a które gorsze.'
+        '<br>W wieku ok. 13-15 lat są wartości przestają być luźnymi bytami i są porządkowane w spójne światopoglądy, które mają swoje przyczyny - przyczynami tymi są <b>aksjomaty</b>, czyli przyjęte, fundamentalne, nieweryfikowalne założenia o świecie. Towarzyszy temu zrozumienie, że różni ludzie mogą mieć różny światopogląd i czerpać swoje wartości z różnych źródeł. Pojawia się też <u>zdolność</u> do zrozumienia, że nie ma możliwości jednoznacznego określenia który światopogląd, czy aksjomaty, jest słuszny, a który błędny.'
         '<br>'
-        '<br><u>Jakimi aksjomatami zacznie się na tym etapie kierować młody człowiek</u>?'
-        '<br>Podobnie jak wcześniej, nie będą one losowe. Człowiek będzie miał tendencję do przyjęcia <b>aksjomatów, z których wynikają wartości, którymi na tym etapie żyje</b>.'
+        '<br>Podobnie jak wcześniej, pierwsze świadomie przyjęet aksjomaty nie są losowe. Człowiek ma tendencję do przyjęcia <b>aksjomatów, z których wynikają wartości, którymi na tym etapie żyje</b>. Np., jeśli dla młodego człowieka wartością była współpraca i koleżeństwo, naturalnym aksjomatem może być dla niego zbawcza i powszechna rola odkupienia każdego człowieka przez Chrystusa, z której wynika niezbywalna godność każdego człowieka.'
         '</p>'
         '</li>'
 
@@ -415,8 +394,54 @@ KonspektStep _step_etapy_ksztaltowania_integracja_duchowosci = KonspektStep(
         '</p>'
 );
 
-KonspektStep _step_integracja_duchowosci_wstepna = KonspektStep(
-  title: 'Integracja duchowości - integracja wstępna',
+KonspektStep _step_integracja_duchowosci_jak_nie = KonspektStep(
+    title: 'Integracja duchowości - jak duchowość nie jest kształtowana',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    materials: [
+      material_flipchart.copyWith(amount: 1),
+      material_marker,
+    ],
+    content: '<p style="text-align:justify;">'
+        'Prowadzący opisuje <b>dla zbudowania kontekstu</b> intuicyjny, ale <b>zupełnie nieprawdziwy</b> sposób kształtowania duchowości. Zaczyna od zwrócenia uwagi:'
+        '<br>'
+        '<br><i>Najlepiej byłoby, gdyby każdy człowiek najpierw ustalał swoje aksjomaty - czyli fundament duchowości, następnie wnioskował z nich spójne wartości, zaś z wartości wnioskował właściwe postawy i zachowania. Potem żyłby długo i szczęśliwie, postępując zawsze w zgodzie z samym sobą, czasem tylko odkryłby jakąś nową wartość, albo nowe właściwe zachowanie.'
+        '<br>'
+        '<br>Wszystko fajnie - ale próbował ktoś porozmawiać z niemowlakiem o filozofii egzystencjalnej, aksjomatach, albo chociaż wyższości jednych wartości nad drugimi? A przecież każdy niemowlak jakoś się już zachowuje, czyli ma już określoną duchowość!</i>'
+        '<br>'
+        '<br>Prowadzący zauważa, że w sposób oczywisty kształtowanie duchowości <b>nie odbywa się</b> od poziomów głębokich (aksjomaty, wartości) do wymiernych (postawy i zachowania). Kształtowanie duchowości zaczyna się od końca: czyli <b>od poziomu zachowań</b>.'
+        '</p>'
+);
+
+KonspektStep _step_integracja_duchowosci_wstepna_wartosci = KonspektStep(
+  title: 'Integracja duchowości - integracja wstępna wartości',
+  duration: Duration(minutes: 5),
+  activeForm: KonspektStepActiveForm.static,
+  materials: [
+    material_flipchart,
+    material_marker,
+  ],
+  contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
+      'Prowadzący opisuje zjawisko <b>integracji duchowości</b>, czyli sposobu w jaki kształtowana jest duchowość człowieka. Robi to na przykładzie <b>wstępnej integracji duchowości</b>, jednak nie powinien jeszcze wprowadzać tego pojęcia.'
+      '<br>'
+      '<br>Przykładowy sposób opisu:'
+      '<br>'
+      '<br><i>Człowiek od urodzenia jakoś się zachowuje. W trakcie, gdy dorasta, otoczenie buduje w człowieku przekonanie, że jedne zachowania są dobre, a inne złe.'
+      '<br>'
+      '<br>W wieku ok. 10 lat człowiek zaczyna postrzegać świat przez pojęcie "wartości" i orientuje się, że część jego zachowań jest niezgodna z deklarowanymi wartościami. Skutek: jeśli dobrze pójdzie, człowiek koryguje swoje zachowania.'
+      '<br>'
+      '<br>Zmiana zachowań sprawia jednak, że dotychczasowy świat zaczyna prezentować mu się inaczej, a to weryfikuje przyjętą hierarchię wartości. Nowe wartości wpływają z powrotem na nowe zachowania, zachowania na wartości i tak w kółko.'
+      '<br>'
+      '<br>Tak wygląda mechanizm kształtowania duchowości każdego człowieka. Duchowość nie jest <b>budowana</b>, ani <b>wznoszona</b></i>, ale raczej uspójniana. Z biegiem czasu kolejne przestrzenie życia są do niej włączane i z nią integrowane, dlatego gdy mowa o rozwoju duchowym, zawsze odbywa się to w procesie <b>integracji duchowości</b>.'
+      '<br>'
+      '<br>Po opisaniu tego zjawiska, prowadzący jeszcze raz skrótowo przechodzi przez jego etapy, ale tym razem na dużym arkuszu flipcharta rysuje kolejno opisywane kroki tak, by na końcu opisu powstał niniejszy diagram:'
+      '<br>${cyklIntegracjiDuchowosciHtml(isDark: isDark)}'
+      '<br>'
+      '<br>Na końcu prowadzący dodaje, że moment, w którym w duchowości po raz pierwszy świadomie uwzględniane są wartości nosi nazwę <b>wstępnej integracji wartości</b>.'
+);
+
+KonspektStep _step_integracja_duchowosci_wstepna_aksjomatow = KonspektStep(
+  title: 'Integracja duchowości - integracja wstępna aksjomatów',
   duration: Duration(minutes: 3),
   activeForm: KonspektStepActiveForm.static,
   materials: [
@@ -424,15 +449,13 @@ KonspektStep _step_integracja_duchowosci_wstepna = KonspektStep(
     material_marker,
   ],
   contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
-      'Prowadzący opisuje zjawisko <b>integracji wstępnej duchowości</b>, czyli sposobu w jaki kształtowana jest duchowość człowieka od urodzenia aż do wieku ok. 13-15, gdy człowiek internalizuje poziom aksjomatów:'
+      'W dalszej kolejności prowadzący opisuje ten sam proces w kolejnym punkcie przełomu:'
       '<br>'
-      '<br><i>Od momentu urodzenia człowiek ma określone zachowania - nie muszą być nawet ze sobą spójne. W trakcie, gdy dorasta, jego otoczenie buduje w nim przekonanie, że niektóre zachowania są dobre, a inne są złe. W wieku 10 lat zacznie rozumieć związek zachowań z wartościami i stopniowo orientuje się, że część z jego dotychczasowych zachowań była niezgodna z jego wartościami, więc zaczyna je zmieniać swoje zachowania. Zmiana zachowań sprawia, że zaczyna inaczej funkcjonować i inaczej doświadczać rzeczywistości, a to weryfikuje przyjętą hierarchię wartości. Nowe wartości wpływają z powrotem na nowe zachowania, zachowania na wartości i tak w kółko.'
+      '<br><i>Mija kilka lat w końcu mając ok. 13-15 lat, człowiek zaczyna orientować się w świecie według świadomie przyjmowanych fundamentalnych prawd. Zazwyczaj stopniowo dostrzega, że część jego dotychczasowych wartości (a wraz z nimi zachowań) są z nimi niezgodne i rusza powolna machina ich uspójniania, lecz tym razem na dużo głębszym poziomie - zmianie nie ulegają bowiem jedynie zachowania, ale cała duchowość - od światopoglądu, poprzez całą strukturę wartości, aż na zachowaniach skończywszy.</i>'
       '<br>'
-      '<br>Dalej, w wieku ok. 13-15 lat, człowiek zaczyna w pełni zrozumieć czym są aksjomaty - nawet jeśli nie nazywa ich słowem "aksjomaty". Przyjmuje w życiu jakieś fundamentalne zasady i zazwyczaj stopniowo dostrzega, że część jego dotychczasowych poglądów, wartości i zachowań jest z nią niezgodna i rozpoczyna się gigantyczny proces ich uspójniania.</i>'
+      '<br>Tutaj także prowadzący zaznacza, że moment, w którym w duchowości po raz pierwszy świadomie uwzględniane są wartości nosi nazwę <b>wstępnej integracji aksjomatów</b>.'
       '<br>'
-      '<br>Prowadzący, opisując to wyjaśnia, że jest to mechanizm w jaki kształtowana jest duchowość: nie jest ona <b>budowana</b>, ani <b>wznoszona</b>, ale raczej <b>uspójniana</b> w procesie włączania kolejnych poziomów abstrakcji jej rozumienia, czyli <b>integrowana</b>. Cały ten proces nosi nazwę <b>integracji wstępnej duchowości</b> (od słowa wstęp, jak początek).'
-      '<br>'
-      '<br>Kolejne poziomy duchowości zależą w tym procesie od kształtu poprzednich. Prowadzący rysuje na flipcharchie strzałkę "integracji wstępnej".'
+      '<br>Prowadzący wraca do rysunku z etapami kształtowania duchowości i rysuje tam strzałkę "integracji wstępnej".'
       '<br>'
       '<br><i>Do momentu internalizacji pojęcia aksjomatu, duchowość człowieka jest integrowana "po raz pierwszy". <b>Wartości, które przyjmie będą wynikały z nauczonych zachowań</b>. <b>Aksjomaty, które przyjmie, będą wynikały z wartości</b>, które wyznaje. Kształt duchowości zależy tu przede wszystkim od <b>otoczenia</b> i <b>temperamentu</b> człowieka. Jest to etap "<b>integracji wstępnej</b>".',
 
@@ -449,9 +472,9 @@ KonspektStep _step_integracja_duchowosci_swiadoma = KonspektStep(
     contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
         'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje ostatni, najdłuższy etap rozwoju duchowego, czyli <b>integrację świadomą</b> duchowości.'
         '<br>'
-        '<br><i>Integracja wstępna duchowości jest ściśle zależna od otoczenia człowieka i względnie łatwo można ją kształtować, ponieważ człowiek nie ma ostatecznego punktu odniesienia swojej duchowości, czyli świadomie przyjętych aksjomatów.'
+        '<br><i>Integracja wstępna duchowości jest ściśle zależna od otoczenia człowieka i względnie łatwo można ją kształtować, ponieważ człowiek nie ma punktu odniesienia swojej duchowości, czyli aksjomatów.'
         '<br>'
-        '<br>Integracja świadoma jest pod tym kątem zupełnie inna - bezpośredni wpływ na człowieka staje się dużo bardziej ograniczony, bo człowiek zyskuje punkt odniesienia swojej duchowości (aksjomaty).</i>'
+        '<br>Integracja świadoma zastępuje proces integracji wstępnej w momencie, w którym człowiek świadomie opiera swoją duchowość o konkretne aksjomaty. Od tego momentu bezpośredni wpływ na człowieka staje się trudniejszy, bo człowiek każdą potencjalną zmianę odnosi do ostatecznej definicji dobra i zła - czyli do przyjętych aksjomatów.</i>'
         '<br>'
         '<br>Prowadzący na osi czasu rysuje wielką, grubą kropkę, która kończy etap integracji wstępnej i rozpoczyna etap integracji świadomej. Dodaje, że łatwo ten punkt rozpoznać u człowieka, bo ten zaczyna się wówczas poważnie martwić się pytaniami o <b>sens istnienia</b> i <b>podważać utarte założenia</b>. Towarzyszą temu pytania w stylu:'
         '</p>'
@@ -473,9 +496,10 @@ KonspektStepGroup step_group_integracja_duchowosci = KonspektStepGroup(
     title: 'Integracja duchowości',
     steps: [
       _step_integracja_duchowosci_osie,
-      _step_integracja_duchowosci_jak_nie,
       _step_etapy_ksztaltowania_integracja_duchowosci,
-      _step_integracja_duchowosci_wstepna,
+      _step_integracja_duchowosci_jak_nie,
+      _step_integracja_duchowosci_wstepna_wartosci,
+      _step_integracja_duchowosci_wstepna_aksjomatow,
       _step_integracja_duchowosci_swiadoma,
     ]
 );
