@@ -357,14 +357,14 @@ KonspektStep _step_etapy_ksztaltowania_integracja_duchowosci = KonspektStep(
       material_marker,
     ],
     contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje właściwe <b>etapy rozwoju duchowego</b>. Przy każdym etapie prowadzący zaznacza na osi czasu <b>orientacyjny wiek</b> człowieka, od którego jego duchowość może być analizowana na kolejnych poziomach (zachowań, postaw, wartości i aksjomatów).'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje właściwe <b>etapy rozwoju duchowego</b>. Przy każdym etapie prowadzący zaznacza na osi czasu <b>orientacyjny wiek</b> człowieka, którego omawiany etap dotyczy.'
         '</p>'
 
         '<ol>'
         '<li>'
         '<p style="text-align:justify;">'
         '<i>Etap dziecięcy + zuchowy:</i>'
-        '<br>Od dnia narodzin, aż do ok. 10. roku życia duchowość człowieka nie wykracza poza <b>poziom zachowań</b> i <b>postaw</b>. Z perspektywy dziecka jedne zachowania są dobre, a inne złe - i kropka. To m.in. dlatego Prawo Zucha opowiada "co zuch robi", a nie "jakimi wartościami zuch się kieruje". Abstrakcyjne określenia jak "bycie grzecznym" są rozumiane jako "worek na zachowania": mówienie dzień dobry, dziękuję i przepraszam, mycie rąk po wejściu do domu i odkładanie zabawek na miejsce.'
+        '<br>Od dnia narodzin, aż do ok. 10. roku życia duchowość człowieka nie wykracza poza <b>poziom zachowań</b> i <b>postaw</b>. Z perspektywy dziecka jedne zachowania są dobre, a inne złe - i kropka. To m.in. dlatego Prawo Zucha opowiada "co zuch robi", a nie "jakimi wartościami zuch się kieruje". Abstrakcyjne określenia jak "bycie grzecznym" są rozumiane jako "worek na zachowania": np. mówienie dzień dobry, dziękuję i przepraszam, mycie rąk po wejściu do domu i odkładanie zabawek na miejsce.'
         '</p>'
         '</li>'
 
@@ -380,9 +380,9 @@ KonspektStep _step_etapy_ksztaltowania_integracja_duchowosci = KonspektStep(
         '<li>'
         '<p style="text-align:justify;">'
         '<i>Etap starszoharcersko-wędrowniczy + dorosły:</i>'
-        '<br>W wieku ok. 13-15 lat są wartości przestają być luźnymi bytami i są porządkowane w spójne światopoglądy, które mają swoje przyczyny - przyczynami tymi są <b>aksjomaty</b>, czyli przyjęte, fundamentalne, nieweryfikowalne założenia o świecie. Towarzyszy temu zrozumienie, że różni ludzie mogą mieć różny światopogląd i czerpać swoje wartości z różnych źródeł. Pojawia się też <u>zdolność</u> do zrozumienia, że nie ma możliwości jednoznacznego określenia który światopogląd, czy aksjomaty, jest słuszny, a który błędny.'
+        '<br>W wieku ok. 13-15 lat wartości przestają być luźnymi bytami i są porządkowane w spójne światopoglądy, które mają swoje przyczyny. Przyczynami tymi są <b>aksjomaty</b>, czyli przyjęte, fundamentalne, nieweryfikowalne założenia o świecie. Towarzyszy temu zdolność do zrozumienia, że różni ludzie mogą mieć różny światopogląd i czerpać swoje wartości z różnych źródeł. Pojawia się też <u>zdolność</u> do zrozumienia, że nie ma możliwości jednoznacznego określenia który światopogląd, czy aksjomaty, jest słuszny, a który błędny.'
         '<br>'
-        '<br>Podobnie jak wcześniej, pierwsze świadomie przyjęet aksjomaty nie są losowe. Człowiek ma tendencję do przyjęcia <b>aksjomatów, z których wynikają wartości, którymi na tym etapie żyje</b>. Np., jeśli dla młodego człowieka wartością była współpraca i koleżeństwo, naturalnym aksjomatem może być dla niego zbawcza i powszechna rola odkupienia każdego człowieka przez Chrystusa, z której wynika niezbywalna godność każdego człowieka.'
+        '<br>Podobnie jak wcześniej, pierwsze świadomie przyjęte aksjomaty nie są losowe. Człowiek ma tendencję do przyjęcia aksjomatów, <b>o których wcześniej słyszał</b> i <b>z których wynikają wartości, którymi na tym etapie żyje</b>. Np., jeśli dla młodego człowieka wartością była współpraca i koleżeństwo, naturalnym aksjomatem może być dla niego zbawcza i powszechna rola odkupienia każdego człowieka przez Chrystusa, z której wynika niezbywalna godność każdego człowieka.'
         '</p>'
         '</li>'
 
@@ -422,7 +422,7 @@ KonspektStep _step_integracja_duchowosci_wstepna_wartosci = KonspektStep(
     material_marker,
   ],
   contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
-      'Prowadzący opisuje zjawisko <b>integracji duchowości</b>, czyli sposobu w jaki kształtowana jest duchowość człowieka. Robi to na przykładzie <b>wstępnej integracji duchowości</b>, jednak nie powinien jeszcze wprowadzać tego pojęcia.'
+      'Prowadzący opisuje zjawisko <b>integracji duchowości</b>, czyli sposobu w jaki kształtowana jest duchowość człowieka. Robi to na przykładzie <b>wstępnej integracji duchowości</b>, jednak nie powinien od razu wprowadzać tego pojęcia.'
       '<br>'
       '<br>Przykładowy sposób opisu:'
       '<br>'
@@ -432,7 +432,7 @@ KonspektStep _step_integracja_duchowosci_wstepna_wartosci = KonspektStep(
       '<br>'
       '<br>Zmiana zachowań sprawia jednak, że dotychczasowy świat zaczyna prezentować mu się inaczej, a to weryfikuje przyjętą hierarchię wartości. Nowe wartości wpływają z powrotem na nowe zachowania, zachowania na wartości i tak w kółko.'
       '<br>'
-      '<br>Tak wygląda mechanizm kształtowania duchowości każdego człowieka. Duchowość nie jest <b>budowana</b>, ani <b>wznoszona</b></i>, ale raczej uspójniana. Z biegiem czasu kolejne przestrzenie życia są do niej włączane i z nią integrowane, dlatego gdy mowa o rozwoju duchowym, zawsze odbywa się to w procesie <b>integracji duchowości</b>.'
+      '<br>Tak wygląda mechanizm kształtowania duchowości każdego człowieka. Duchowość nie jest <b>budowana</b>, ani <b>wznoszona</b>, ale raczej uspójniana. Z biegiem czasu kolejne przestrzenie życia są do niej włączane i z nią integrowane, dlatego gdy mowa o rozwoju duchowym, zawsze odbywa się to w procesie <b>integracji duchowości</b></i>.'
       '<br>'
       '<br>Po opisaniu tego zjawiska, prowadzący jeszcze raz skrótowo przechodzi przez jego etapy, ale tym razem na dużym arkuszu flipcharta rysuje kolejno opisywane kroki tak, by na końcu opisu powstał niniejszy diagram:'
       '<br>${cyklIntegracjiDuchowosciHtml(isDark: isDark)}'
@@ -449,11 +449,11 @@ KonspektStep _step_integracja_duchowosci_wstepna_aksjomatow = KonspektStep(
     material_marker,
   ],
   contentBuilder: ({required bool isDark}) => '<p style="text-align:justify;">'
-      'W dalszej kolejności prowadzący opisuje ten sam proces w kolejnym punkcie przełomu:'
+      'W dalszej kolejności prowadzący opisuje ten sam proces w kolejnym punkcie przełomu - momentu internalizacji aksjomatów:'
       '<br>'
-      '<br><i>Mija kilka lat w końcu mając ok. 13-15 lat, człowiek zaczyna orientować się w świecie według świadomie przyjmowanych fundamentalnych prawd. Zazwyczaj stopniowo dostrzega, że część jego dotychczasowych wartości (a wraz z nimi zachowań) są z nimi niezgodne i rusza powolna machina ich uspójniania, lecz tym razem na dużo głębszym poziomie - zmianie nie ulegają bowiem jedynie zachowania, ale cała duchowość - od światopoglądu, poprzez całą strukturę wartości, aż na zachowaniach skończywszy.</i>'
+      '<br><i>Mija kilka wiosen i w końcu w wieku ok. 13-15 lat, człowiek zaczyna orientować się w świecie według świadomie przyjmowanych fundamentalnych prawd. Zazwyczaj stopniowo dostrzega, że część jego dotychczasowych wartości (a wraz z nimi zachowań) są z nimi niezgodne i rusza powolna machina ich uspójniania, lecz tym razem na dużo głębszym poziomie - zmianie nie ulegają bowiem jedynie zachowania, ale cała duchowość - od światopoglądu, poprzez całą strukturę wartości, aż na zachowaniach skończywszy.</i>'
       '<br>'
-      '<br>Tutaj także prowadzący zaznacza, że moment, w którym w duchowości po raz pierwszy świadomie uwzględniane są wartości nosi nazwę <b>wstępnej integracji aksjomatów</b>.'
+      '<br>Tutaj prowadzący zaznacza, że moment, w którym w duchowości po raz pierwszy świadomie uwzględniane są wartości nosi nazwę <b>wstępnej integracji aksjomatów</b>.'
       '<br>'
       '<br>Prowadzący wraca do rysunku z etapami kształtowania duchowości i rysuje tam strzałkę "integracji wstępnej".'
       '<br>'
