@@ -720,7 +720,7 @@ KonspektStep _step_zdolnosci_integracji_duchowosci = KonspektStep(
     material_zal_karty_zdolnosci_integracji_duchowosci
   ],
   content: '<p style="text-align:justify;">'
-      'Prowadzący bierze obie kartki z załącznika $attach_html_karty_zdolnosci_integracji_duchowosci i kładzie je zakryte przed uczestnikami przed nimi (rewersem do góry). Następnie zadaje pytanie:'
+      'Prowadzący bierze obie kartki z załącznika $attach_html_karty_zdolnosci_integracji_duchowosci i kładzie je zakryte przed uczestnikami (rewersem do góry). Następnie zadaje pytanie:'
       '<br>'
       '<br><i>“Ustaliliśmy już w jaki sposób modelowo przebiega proces kształtowania duchowości człowieka. Ale! Wiedzieć, to jedno, a móc, to drugie. Jakie dwie, ogólne, fundamentalnie, kluczowe zdolności musi każdy człowiek posiadać (poza wiedzą o mechanizmie kształtowania duchowości), aby móc skutecznie rozwijać swoją duchowość?”</i>'
       '<br>'
