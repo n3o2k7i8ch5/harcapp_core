@@ -2646,6 +2646,13 @@ const Person MILENA_DULAK = Person(
     rankHarc: RankHarc.zhrOchotniczka,
     email: ['dulakmilena@gmail.com']
 );
+const Person MILOSZ_SZYMANSKI = Person(
+    name: 'Miłosz Szymański',
+    druzyna: '9. RDH „Włóczykije”',
+    rankHarc: RankHarc.dhc,
+    org: Org.zhp,
+    email: ['miloszszymanski38@gmail.com']
+);
 const Person MINION_MALGOSIA_MIKOLAJCZYK = Person(
     name: 'Minion Małgosia Mikołajczyk',
     druzyna: '119. Warszawska Drużyna Harcerska „Immortales”',
