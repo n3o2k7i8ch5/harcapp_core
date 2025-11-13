@@ -993,7 +993,7 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty_praca_w_grupach = KonspektStep(
 
 KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
     title: 'Duchowość w ZHP - aksjomaty',
-    duration: Duration(minutes: 20),
+    duration: Duration(minutes: 15),
     activeForm: KonspektStepActiveForm.static,
     materials: [
       material_zal_neutralnosc_duchowa_przyklady
@@ -1080,15 +1080,9 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Prowadzący zwraca uczestnikom uwagę na pewien problem (chyba, że któryś z uczestników sam zwróci na niego uwagę):'
         '<br>'
-        '<br><i>Przecież te aksjomaty są religijne - <b>co z tzw. “niewierzącymi” harcerzami?</b> Jakie aksjomaty powinny lec u podstaw ich wychowania duchowego?</i>'
+        '<br><i>Co, jeśli kogoś nie interesuje chrześcijaństwo?</i>'
         '<br>'
-        '<br>Prowadzący może zacząć od kilku refleksji:'
-        '<br>'
-        '<br><i>Po pierwsze - fakt, że wiara chrześcijan dawno temu dała naszej cywilizacji (w tym harcerstwu) wartości nie zależy od tego, czy ktoś dzisiaj jest wierzący, czy nie.'
-        '<br>'
-        '<br>Po drugie - czy na pewno da się zachować naszą cywilizację porzucając przyczynę idei mówienia prawdy, miłości bliźniego, szacunku wobec każdego człowieka, idei przebaczenia, miłosierdzia, sprawiedliwości, równości i relacji z absolutem?</i>'
-        '<br>'
-        '<br>Dalej, prowadzący powinien odpowiedzieć na wyjściowe pytanie zwracając uwagę na dwa aspekty:'
+        '<br>Prowadzący otwiera tym samym krótką dyskusję. Warto rozpatrzyć tutaj dwa osobne przypadki:'
         '</p>'
 
         '<ol>'
@@ -1129,6 +1123,7 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
 KonspektStep _step_duchowosc_w_zhp_podsumowanie = KonspektStep(
     title: 'Duchowość w ZHP - podsumowanie',
     duration: Duration(minutes: 5),
+    required: false,
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         '<b>Podsumowanie (dla przewodników)</b>'
