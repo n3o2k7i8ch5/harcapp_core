@@ -846,7 +846,7 @@ KonspektStep _step_neutralnosc_duchowa_omowienie_wnioskow = KonspektStep(
     duration: Duration(minutes: 15),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Gdy wszyscy uczestnicy skonczą swoje rozważania nad scenariuszami, wracają do wspólnego miejsca i prowadzący prosi uczestników, by doszli do porozumienia w sprawie odpowiedzi na pierwsze pytanie, czyli:'
+        'Gdy wszyscy uczestnicy skończą swoje rozważania nad scenariuszami, wracają do wspólnego miejsca i prowadzący prosi uczestników, by doszli do porozumienia w sprawie odpowiedzi na pierwsze pytanie, czyli:'
         '<br>'
         '<br><b>Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?'
         '<br>'
@@ -903,11 +903,11 @@ KonspektStep _step_neutralnosc_analogia_do_ogrodnikow = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Jeśli uczestnicy mają problem ze zrozumieniem, dlaczego zarówno działanie wychowawcze jak i jego brak zawsze kształtuje duchowość wychowanków, prowadzący może przedstawić uczestnikom użyteczną analogię:'
         '<br>'
-        '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instruktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im kształt w określonym stylu.</i>'
+        '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instruktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im kształt w określonym stylu.'
         '<br>'
         '<br>Krzew <b>zawsze nabywa jakiegoś kształtu</b>, także wtedy, gdy ogrodnik nic nie robi. Nie da się być rośliną nie mając jakiegoś kształtu. Tak samo, jak nie nie da się mówić nie użyjąc jakiegoś języka.'
         '<br>'
-        '<br>Harcerstwo jest przedsięwzięciem kształtowania ludzi. Wokół faktu, że harcerstwo kształtuje przekonania i wartości młodego człowieka w określonym kierunku narosła dziwna i niepotrzebna kontrowersja - ale <b>bez celowego kształtowania duchowości harcerzy harcerstwo nie ma najmniejszego sensu.</b>.'
+        '<br>Harcerstwo jest przedsięwzięciem kształtowania ludzi: ich przekonań, wartości i postaw w określonym kierunku. <b>Bez celowego kształtowania duchowości harcerzy harcerstwo nie realizuje swojego celu</b>, jakim jest wychowanie.</i>'
         '</p>'
 );
 
@@ -947,14 +947,15 @@ KonspektStep _step_duchowosc_w_zhp_dobrowolnosc = KonspektStep(
     title: 'Duchowość w ZHP - dobrowolność',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
+    required: false,
     content: '<p style="text-align:justify;">'
         'Prowadzący zwraca uwagę uczestników na następujący dylemat:'
         '<br>'
-        '<br><i>Czyli mamy w ZHP określoną duchowość zapisaną w statucie - fajnie. Ale jak się to ma do faktu, że cechą metody harcerskiej jest dobrowolność?</i>'
+        '<br><i>Mamy w statucie ZHP zapisaną określoną duchowość. Ale jak się to ma do faktu, że cechą metody harcerskiej jest dobrowolność?</i>'
         '<br>'
-        '<br>Uczestnicy powinni znać rozwiązanie tego dylamatu, jeśli byli na kursie przewodnikowskim. Po krótkiej dyskusji prowadzący rozwiązuje zagadkę, o ile któryś z uczestników nie rozwiązał jej poprawnie wcześniej:'
+        '<br>Uczestnicy powinni znać rozwiązanie tego dylamatu, jeśli byli na kursie przewodnikowskim. Jeśli jest inaczej, po krótkiej dyskusji prowadzący rozwiązuje zagadkę:'
         '<br>'
-        '<br><i>Dobrowolność nie <b>cechą celu wychowania</b> w ZHP, tylko <b>cechą metody</b>, czyli cechą narzędzi, które mają doprowadzić do celu.'
+        '<br><i>Dobrowolność nie jest <b>celem wychowania</b> w ZHP, tylko <b>cechą metody</b>, czyli cechą narzędzi, które mają doprowadzić do celu.'
         '<br>'
         '<br>Dobrowolność jest stosowana w ZHP, ponieważ skuteczniej jest wychować młodego człowieka do określonych wartości, gdy ma poczucie, że to on je wybiera, niż kiedy ma poczucie, że jest mu to zadane. Nie oznacza to jednak, że w ZHP istnieje dobrowolność celu wychowania.</i>'
         '<br>'
@@ -966,6 +967,28 @@ KonspektStep _step_duchowosc_w_zhp_dobrowolnosc = KonspektStep(
       material_zal_cel_wychowania_duchowego_zhp_statut,
       material_zal_cel_wychowania_duchowego_zhp_uchwala
     ]
+);
+
+KonspektStep _step_duchowosc_w_zhp_aksjoamty_praca_w_grupach = KonspektStep(
+    title: 'Duchowość w ZHP - aksjomaty - praca w grupach',
+    duration: Duration(minutes: 10),
+    activeForm: KonspektStepActiveForm.active,
+    materials: [
+      material_zal_neutralnosc_duchowa_przyklady
+    ],
+    aims: [
+      'Uświadomienie uczestnikom, że do wspierania rozwoju duchowego na poziomie Z i H wystarczy poziom postaw i wartości, ale rozwój duchowy z HS i W wymaga pracy na poziomie aksjomatu',
+      'Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej'
+    ],
+    content: '<p style="text-align:justify;">'
+        '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z użytego już załącznika $attach_html_neutralnosc_duchowa_przyklady. Stawia przed nimi zadanie w formie pytania:'
+        '<br>'
+        '<br><i>“We wszystkich scenariuszach mowa jest o wartościach obecnych w PH. Ale przecież żaden wędrownik nie będzie przestrzegał PH "bo tak powiedział drużynowy" - wartości wędrowników muszą wynikać ze spójnej, głębokiej, aksjomatycznej przyczyny.'
+        '<br>'
+        '<br>Jakie aksjomaty, lub meta-narracje są powodem, dla którego w świecie łacińskim te a nie inne wartości są tak naturalne?”</i>'
+        '<br>'
+        '<br>Uczestnicy mają chwilę, by w kilkuosobowych grupach zaproponować przyczyny dla każdej z omawianych wcześniej wartości (przebaczenie, prawdomówność, umiłowanie bliźnich, godność jednostki, itd.).'
+        '</p>'
 );
 
 KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
@@ -980,13 +1003,7 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
       'Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej'
     ],
     content: '<p style="text-align:justify;">'
-        '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z użytego już załącznika $attach_html_neutralnosc_duchowa_przyklady. Stawia przed nimi zadanie w formie pytania:'
-        '<br>'
-        '<br><i>“We wszystkich scenariuszach mowa jest o wartościach obecnych w PH. Ale przecież żaden wędrownik (mam nadzieję!) nie będzie przestrzegał PH wierząc, że spadło z nieba na kamiennych tablicach!'
-        '<br>'
-        '<br>Jakie aksjomaty, lub szerzej: meta-narracje ukształtowały ludzi, dla którego te wartości w sposób oczywisty dobre i do których mogą się dziś odnieść wędrownicy, by wierzyć w słuszność tych wartości?”</i>'
-        '<br>'
-        '<br>Prowadzący wchodzi z uczestnikami w dyskusję na temat kolejnych wartości opisanych w załączniku $attach_html_neutralnosc_duchowa_przyklady i omawia źródła wartości w poszczególnych scenariuszach, odnosząc się w razie potrzeby do wniosków uczestników.'
+        'Prowadzący rozpoczyna omawianie kolejnych wartości nad którymi przed chwilą pracowali uczestnicy. Na początku uczestnicy prezentują swoje propozycje, na końcu zaś prowadzący może zaprezentować źródło owych wartości w kulturze łacińskiej zgodnie z poniższą rozpiską.'
         '</p>'
 
         '<ol>'
@@ -1061,15 +1078,15 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uczestnikom uwagę na pewien problem (jest szansa, że któryś z uczestników sam zwróci na niego uwagę):'
+        'Prowadzący zwraca uczestnikom uwagę na pewien problem (chyba, że któryś z uczestników sam zwróci na niego uwagę):'
         '<br>'
-        '<br><i>Ale przecież te aksjomaty są religijne - <b>co z tzw. “niewierzącymi” harcerzami?</b> Jakie aksjomaty powinny lec u podstaw ich wychowania duchowego?</i>'
+        '<br><i>Przecież te aksjomaty są religijne - <b>co z tzw. “niewierzącymi” harcerzami?</b> Jakie aksjomaty powinny lec u podstaw ich wychowania duchowego?</i>'
         '<br>'
         '<br>Prowadzący może zacząć od kilku refleksji:'
         '<br>'
-        '<br><i>Po pierwsze - fakt, że chrześcijańska myśl dała naszej cywilizacji (i przy okazji harcerstwu) zbiór wartości nie zależy od tego, czy rozmyśla o nich osoba wierząca, czy niewierząca.'
+        '<br><i>Po pierwsze - fakt, że wiara chrześcijan dawno temu dała naszej cywilizacji (w tym harcerstwu) wartości nie zależy od tego, czy ktoś dzisiaj jest wierzący, czy nie.'
         '<br>'
-        '<br>Po drugie - na czym miałoby polegać wychowanie “z dala” od chrześcijańskich aksjomatów? Na porzuceniu idei mówienia prawdy, miłości bliźniego, szacunku wobec każdego człowieka, idei przebaczenia, miłosierdzia, sprawiedliwości, równości i relacji z absolutem?</i>'
+        '<br>Po drugie - czy na pewno da się zachować naszą cywilizację porzucając przyczynę idei mówienia prawdy, miłości bliźniego, szacunku wobec każdego człowieka, idei przebaczenia, miłosierdzia, sprawiedliwości, równości i relacji z absolutem?</i>'
         '<br>'
         '<br>Dalej, prowadzący powinien odpowiedzieć na wyjściowe pytanie zwracając uwagę na dwa aspekty:'
         '</p>'
@@ -1096,6 +1113,8 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
         '<br>Nie wiem. I prawdopodobnie nikt nie wie. Cała nasza zachodnia cywilizacja została zbudowana na aksjomatach chrześcijańskich. Została uksztaltowana przez życia miliardów ludzi, na przestrzeni tysięcy lat, przez myślicieli i filozofów większych od wszystkich tu obecnych. Czy można to wszystko porzucić i liczyć na to, że "wymyśli się" coś równie dobrego w kilka lat?'
         '<br>'
         '<br>Myśl, że można utrzymać świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, ale pozbyć się fundamentów, na których powstały wydaje się być <b>co najmniej wielką nieodpowiedzialnością</b>.'
+        '<br>'
+        '<br>Można próbować wybiegów w stylu: "wystarczy być dobrym człowiekiem", "idź za głosem serca" albo zostawić sferę aksjomatów niewierzących harcerzy samym sobie i tak oto pozbyć się problemu. Na razie taki model w ZHP funkcjonuje, ale jest to wyraz bezradności, a nie poważną odpowiedzią na to pytanie. Chyba nikt nie ma odpowiedzi na to pytanie.'
         '</i>'
         '</p>'
         '</li>'
@@ -1103,7 +1122,7 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
         '</ol>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący powinien pozwolić, by fundamentalny brak odpowiedzi na pytanie "co dla ateistów" wybrzmiał wsród uczestników. <b>Odpowiedź na nie padnie na warsztatach</b>, nie dlatego, że ktoś chce ją ukryć. Nie padnie, bo próba potraktowania tego pytania poważnie ma karkołomne, a być może niemożliwe do utrzymania konsekwencje, niezależnie od poglądów obecnych tu osób.'
+        'Prowadzący powinien pozwolić, by fundamentalny <b>brak odpowiedzi</b> na pytanie "co dla ateistów" wybrzmiał wsród uczestników. <b>Odpowiedź na nie padnie na warsztatach</b>, nie dlatego, że ktoś chce ją ukryć. Nie padnie, bo próba potraktowania tego pytania poważnie ma karkołomne, a być może niemożliwe do utrzymania konsekwencje, niezależnie od poglądów obecnych tu osób.'
         '</p>'
 );
 
@@ -1143,6 +1162,8 @@ KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
       _step_duchowosc_w_zhp_dokumenty,
 
       _step_duchowosc_w_zhp_dobrowolnosc,
+
+      _step_duchowosc_w_zhp_aksjoamty_praca_w_grupach,
 
       _step_duchowosc_w_zhp_aksjoamty,
 
