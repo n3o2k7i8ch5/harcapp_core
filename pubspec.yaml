@@ -25,8 +25,8 @@ dependencies:
   flutter_widget_from_html: ^0.17.0
   html_pdf_widgets: ^0.0.3
   html_unescape: ^2.0.0
-  isar_community: ^3.3.0-dev.3
-  isar_community_flutter_libs: ^3.3.0-dev.3
+  isar_community: ^3.3.0
+  isar_community_flutter_libs: ^3.3.0
   yaml: ^3.1.2
   path: ^1.9.0
   just_audio: ^0.10.4

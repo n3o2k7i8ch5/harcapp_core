@@ -63,7 +63,7 @@ const SprawBookSchema = CollectionSchema(
   getId: _sprawBookGetId,
   getLinks: _sprawBookGetLinks,
   attach: _sprawBookAttach,
-  version: '3.3.0-dev.3',
+  version: '3.3.0',
 );
 
 int _sprawBookEstimateSize(
@@ -1302,7 +1302,7 @@ const SprawGroupSchema = CollectionSchema(
   getId: _sprawGroupGetId,
   getLinks: _sprawGroupGetLinks,
   attach: _sprawGroupAttach,
-  version: '3.3.0-dev.3',
+  version: '3.3.0',
 );
 
 int _sprawGroupEstimateSize(
@@ -2855,7 +2855,7 @@ const SprawFamilySchema = CollectionSchema(
   getId: _sprawFamilyGetId,
   getLinks: _sprawFamilyGetLinks,
   attach: _sprawFamilyAttach,
-  version: '3.3.0-dev.3',
+  version: '3.3.0',
 );
 
 int _sprawFamilyEstimateSize(
@@ -5106,7 +5106,7 @@ const SprawSchema = CollectionSchema(
   getId: _sprawGetId,
   getLinks: _sprawGetLinks,
   attach: _sprawAttach,
-  version: '3.3.0-dev.3',
+  version: '3.3.0',
 );
 
 int _sprawEstimateSize(
@@ -7978,7 +7978,7 @@ const SprawExternalSchema = CollectionSchema(
   getId: _sprawExternalGetId,
   getLinks: _sprawExternalGetLinks,
   attach: _sprawExternalAttach,
-  version: '3.3.0-dev.3',
+  version: '3.3.0',
 );
 
 int _sprawExternalEstimateSize(
@@ -8528,7 +8528,7 @@ const SprawTaskSchema = CollectionSchema(
   getId: _sprawTaskGetId,
   getLinks: _sprawTaskGetLinks,
   attach: _sprawTaskAttach,
-  version: '3.3.0-dev.3',
+  version: '3.3.0',
 );
 
 int _sprawTaskEstimateSize(
