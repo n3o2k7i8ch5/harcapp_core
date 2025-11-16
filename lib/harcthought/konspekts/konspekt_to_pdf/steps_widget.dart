@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' show TimeOfDay;
+import 'package:harcapp_core/harcthought/konspekts/common.dart' as konspekt_common;
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt_to_pdf/step_widget.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart';
@@ -53,11 +54,17 @@ Future<List<Widget>> StepsWidget(
   else {
     int globalStepIdx = 0;
     for (int groupIdx=0; groupIdx<konspekt.stepGroups!.length; groupIdx++) {
-      for(int stepIdx=0; stepIdx<konspekt.stepGroups![groupIdx].steps.length; stepIdx++) {
+      KonspektStepGroup group = konspekt.stepGroups![groupIdx];
+      
+      // Build time table for this group, similar to UI widget
+      TimeOfDay? groupStartTime = stepsTimeTable == null ? null : stepsTimeTable[globalStepIdx];
+      List<TimeOfDay>? groupStepsTimeTable = groupStartTime == null ? null : konspekt_common.buildTimeTable(group.steps, groupStartTime);
+      
+      for(int stepIdx=0; stepIdx<group.steps.length; stepIdx++) {
         stepWidgets.addAll(
             await StepWidget(
-                konspekt.stepGroups![groupIdx].steps[stepIdx],
-                stepsTimeTable?[globalStepIdx],
+                group.steps[stepIdx],
+                groupStepsTimeTable?[stepIdx],
                 stepIdx,
                 groupIdx,
                 font,
