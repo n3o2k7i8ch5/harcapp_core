@@ -20,28 +20,35 @@ Future<List<Widget>> StepWidget(
     Font fontBoldItalic
 ) async {
   double numberFontSize = 16.0;
-  double numberCircleSize = 2*elementSmallSeparator + numberFontSize;
+  double numberCircleHeight = 2*elementSmallSeparator + numberFontSize;
+  double numberCircleMinWidth = 2*elementSmallSeparator + numberFontSize;
 
   List<Widget> widgets = [
     Row(
       children: [
 
-        SizedBox(
-            width: numberCircleSize,
-            height: numberCircleSize,
+        ConstrainedBox(
+            constraints: BoxConstraints(
+              minWidth: numberCircleMinWidth,
+              minHeight: numberCircleHeight,
+              maxHeight: numberCircleHeight,
+            ),
             child: ClipRRect(
                 horizontalRadius: defRadius,
                 verticalRadius: defRadius,
                 child: Container(
                   color: PdfColors.grey,
-                  child: Center(
-                    child: Text(
-                        '${groupIndex==null?'':'${groupIndex + 1}.'}${index + 1}.',
-                        style: TextStyle(
-                            fontSize: 16,
-                            font: fontBold,
-                            color: PdfColors.white
-                        )
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: elementSmallSeparator),
+                    child: Center(
+                      child: Text(
+                          '${groupIndex==null?'':'${groupIndex + 1}.'}${index + 1}.',
+                          style: TextStyle(
+                              fontSize: 16,
+                              font: fontBold,
+                              color: PdfColors.white
+                          )
+                      ),
                     ),
                   ),
                 )
