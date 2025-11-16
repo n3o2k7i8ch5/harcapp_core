@@ -11,13 +11,14 @@ Future<List<Widget>> StepWidget(
     KonspektStep step,
     TimeOfDay? startTime,
     int index,
+    int? groupIndex,
     Font font,
     Font fontHalfBold,
     Font fontBold,
     Font fontItalic,
     Font fontHalfBoldItalic,
     Font fontBoldItalic
-    ) async {
+) async {
   double numberFontSize = 16.0;
   double numberCircleSize = 2*elementSmallSeparator + numberFontSize;
 
@@ -35,7 +36,7 @@ Future<List<Widget>> StepWidget(
                   color: PdfColors.grey,
                   child: Center(
                     child: Text(
-                        '${index + 1}.',
+                        '${groupIndex==null?'':'${groupIndex + 1}.'}${index + 1}.',
                         style: TextStyle(
                             fontSize: 16,
                             font: fontBold,

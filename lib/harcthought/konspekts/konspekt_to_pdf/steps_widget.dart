@@ -31,22 +31,48 @@ Future<List<Widget>> StepsWidget(
 
   ];
 
-  for(int i=0; i<steps.length; i++) {
-    stepWidgets.addAll(
-        await StepWidget(
-            steps[i],
-            stepsTimeTable?[i],
-            i,
-            font,
-            fontHalfBold,
-            fontBold,
-            fontItalic,
-            fontHalfBoldItalic,
-            fontBoldItalic
-        )
-    );
-    if(i<steps.length - 1)
-      stepWidgets.add(SizedBox(height: 1.5*elementBigSeparator));
+  if(konspekt.stepGroups == null)
+    for(int i=0; i<steps.length; i++) {
+      stepWidgets.addAll(
+          await StepWidget(
+              steps[i],
+              stepsTimeTable?[i],
+              i,
+              null,
+              font,
+              fontHalfBold,
+              fontBold,
+              fontItalic,
+              fontHalfBoldItalic,
+              fontBoldItalic
+          )
+      );
+      if(i<steps.length - 1)
+        stepWidgets.add(SizedBox(height: 1.5*elementBigSeparator));
+    }
+  else {
+    int globalStepIdx = 0;
+    for (int groupIdx=0; groupIdx<konspekt.stepGroups!.length; groupIdx++) {
+      for(int stepIdx=0; stepIdx<konspekt.stepGroups![groupIdx].steps.length; stepIdx++) {
+        stepWidgets.addAll(
+            await StepWidget(
+                konspekt.stepGroups![groupIdx].steps[stepIdx],
+                stepsTimeTable?[globalStepIdx],
+                stepIdx,
+                groupIdx,
+                font,
+                fontHalfBold,
+                fontBold,
+                fontItalic,
+                fontHalfBoldItalic,
+                fontBoldItalic
+            )
+        );
+        if(globalStepIdx < steps.length - 1)
+          stepWidgets.add(SizedBox(height: 1.5 * elementBigSeparator));
+        globalStepIdx++;
+      }
+    }
   }
 
   return stepWidgets;
