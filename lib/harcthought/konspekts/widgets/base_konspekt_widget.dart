@@ -365,10 +365,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                     onTap: () => setState(() => attachmentsExpanded = !attachmentsExpanded),
                   ),
                 ),
-
-                SizedBox(height: Dimen.defMarg),
                 Text(
-                  'Spis wszystkich załączników: dokumentów, grafik, poradników, etc., do których część materiałów (wylistowanych w kolejnej sekcji) się odnosi.',
+                  'Spis wszystkich gotowych dokumentów, grafik, poradników, etc., które stanowią część materiałów (wylistowanych w kolejnej sekcji).',
                   style: AppTextStyle(
                     fontSize: Dimen.textSizeBig,
                     fontStyle: FontStyle.italic,
@@ -421,8 +419,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                     onTap: () => setState(() => materialsExpanded = !materialsExpanded)
                   ),
                 ),
-
-                SizedBox(height: Dimen.defMarg),
                 Text(
                   'Spis wszystkich materiałów wymaganych do realizacji konspektu.',
                   style: AppTextStyle(
