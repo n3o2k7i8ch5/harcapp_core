@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
+import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/meto.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/comm_widgets/sliver_child_builder_separated_delegate.dart';
@@ -96,6 +97,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   TimeOfDay? startTime;
   List<TimeOfDay>? stepsTimeTable;
 
+  late bool materialsExpanded;
+
   @override
   void initState() {
     showAppBarTitle = false;
@@ -112,6 +115,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
         setState(() => showAppBarTitle = shouldBeVisible);
 
     });
+
+    materialsExpanded = true;
 
     super.initState();
   }
@@ -350,27 +355,46 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               ),
               sliver: SliverList(delegate: SliverChildListDelegate([
 
-                const TitleShortcutRowWidget(title: 'Materiały', textAlign: TextAlign.left),
+                TitleShortcutRowWidget(
+                  title: 'Materiały',
+                  textAlign: TextAlign.left,
+                  trailing: AppButton(
+                    icon: Icon(materialsExpanded?MdiIcons.chevronDown: MdiIcons.chevronUp),
+                    onTap: () => setState(() => materialsExpanded = !materialsExpanded)
+                  ),
+                ),
 
               ])),
             ),
 
           if(konspekt.materials != null)
-            SliverPadding(
-              padding: const EdgeInsets.only(
-                left: Dimen.sideMarg,
-                right: Dimen.sideMarg,
-                bottom: Dimen.sideMarg,
-              ),
-              sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                  (context, index) => KonspektMaterialTile(
-                    konspekt,
-                    konspekt.materials![index],
-                    maxDialogWidth: maxDialogWidth,
+            SliverToBoxAdapter(
+              child: AnimatedCrossFade(
+                firstChild: const SizedBox.shrink(),
+                secondChild: Padding(
+                  padding: const EdgeInsets.only(
+                    left: Dimen.sideMarg,
+                    right: Dimen.sideMarg,
+                    bottom: Dimen.sideMarg,
                   ),
-                  separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
-                  count: konspekt.materials!.length
-              )),
+                  child: ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => KonspektMaterialTile(
+                      konspekt,
+                      konspekt.materials![index],
+                      maxDialogWidth: maxDialogWidth,
+                    ),
+                    separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
+                    itemCount: konspekt.materials!.length,
+                  ),
+                ),
+                crossFadeState: materialsExpanded
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                duration: const Duration(milliseconds: 250),
+                sizeCurve: Curves.easeInOut,
+              ),
             ),
 
           SliverPadding(
