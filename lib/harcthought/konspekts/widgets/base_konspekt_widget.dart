@@ -367,18 +367,13 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 ),
 
                 SizedBox(height: Dimen.defMarg),
-                Material(
-                  color: cardEnab_(context),
-                  child: Padding(
-                    padding: const EdgeInsets.all(Dimen.sideMarg),
-                    child: Text(
-                      'Spis wszystkich załączników: dokumentów, grafik, poradników, etc., do których część niniejszych materiałów się odnosi.',
-                      style: AppTextStyle(
-                        fontSize: Dimen.textSizeBig,
-                      ),
-                    ),
+                Text(
+                  'Spis wszystkich załączników: dokumentów, grafik, poradników, etc., do których część niniejszych materiałów się odnosi.',
+                  style: AppTextStyle(
+                    fontSize: Dimen.textSizeBig,
+                    fontStyle: FontStyle.italic,
                   ),
-                )
+                ),
 
               ])),
             ),
@@ -428,18 +423,13 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 ),
 
                 SizedBox(height: Dimen.defMarg),
-                Material(
-                  color: cardEnab_(context),
-                  child: Padding(
-                    padding: const EdgeInsets.all(Dimen.sideMarg),
-                    child: Text(
-                      'Spis wszystkich materiałów wymaganych do realizacji konspektu.',
-                      style: AppTextStyle(
-                        fontSize: Dimen.textSizeBig,
-                      ),
-                    ),
+                Text(
+                  'Spis wszystkich materiałów wymaganych do realizacji konspektu.',
+                  style: AppTextStyle(
+                    fontSize: Dimen.textSizeBig,
+                    fontStyle: FontStyle.italic,
                   ),
-                )
+                ),
 
               ])),
             ),
