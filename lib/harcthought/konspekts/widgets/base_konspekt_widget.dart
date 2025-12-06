@@ -97,6 +97,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   TimeOfDay? startTime;
   List<TimeOfDay>? stepsTimeTable;
 
+  late bool attachmentsExpanded;
   late bool materialsExpanded;
 
   @override
@@ -116,6 +117,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
     });
 
+    attachmentsExpanded = true;
     materialsExpanded = true;
 
     super.initState();
@@ -346,6 +348,53 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             ])),
           ),
 
+          if(konspekt.attachments != null)
+            SliverPadding(
+              padding: const EdgeInsets.only(
+                left: Dimen.sideMarg,
+                right: Dimen.sideMarg,
+                bottom: Dimen.sideMarg,
+              ),
+              sliver: SliverList(delegate: SliverChildListDelegate([
+
+                TitleShortcutRowWidget(
+                  title: 'Załączniki (${konspekt.attachments?.length})',
+                  textAlign: TextAlign.left,
+                  trailing: AppButton(
+                    icon: Icon(attachmentsExpanded?MdiIcons.chevronDown: MdiIcons.chevronUp),
+                    onTap: () => setState(() => attachmentsExpanded = !attachmentsExpanded),
+                  ),
+                ),
+
+              ])),
+            ),
+
+          if(konspekt.attachments != null)
+            SliverToBoxAdapter(
+              child: AnimatedCrossFade(
+                firstChild: const SizedBox.shrink(),
+                secondChild: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
+                  child: ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => KonspektAttachmentWidget(
+                      konspekt,
+                      konspekt.attachments![index],
+                      maxDialogWidth: maxDialogWidth,
+                    ),
+                    separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
+                    itemCount: konspekt.attachments!.length,
+                  ),
+                ),
+                crossFadeState: attachmentsExpanded
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                duration: const Duration(milliseconds: 250),
+                sizeCurve: Curves.easeInOut,
+              ),
+            ),
+
           if(konspekt.materials != null)
             SliverPadding(
               padding: const EdgeInsets.only(
@@ -356,7 +405,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               sliver: SliverList(delegate: SliverChildListDelegate([
 
                 TitleShortcutRowWidget(
-                  title: 'Materiały',
+                  title: 'Materiały (${konspekt.materials?.length})',
                   textAlign: TextAlign.left,
                   trailing: AppButton(
                     icon: Icon(materialsExpanded?MdiIcons.chevronDown: MdiIcons.chevronUp),
@@ -551,34 +600,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 ),
 
               ])),
-            ),
-
-          if(konspekt.attachments != null)
-            SliverPadding(
-              padding: const EdgeInsets.only(
-                left: Dimen.sideMarg,
-                right: Dimen.sideMarg,
-                bottom: Dimen.sideMarg,
-              ),
-              sliver: SliverList(delegate: SliverChildListDelegate([
-
-                const TitleShortcutRowWidget(title: 'Załączniki', textAlign: TextAlign.left),
-
-              ])),
-            ),
-
-          if(konspekt.attachments != null)
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
-              sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                  (context, index) => KonspektAttachmentWidget(
-                      konspekt,
-                      konspekt.attachments![index],
-                      maxDialogWidth: maxDialogWidth,
-                  ),
-                  separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
-                  count: konspekt.attachments!.length
-              )),
             ),
 
           SliverPadding(
