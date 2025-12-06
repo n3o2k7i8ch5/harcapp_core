@@ -368,7 +368,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
                 SizedBox(height: Dimen.defMarg),
                 Text(
-                  'Spis wszystkich załączników: dokumentów, grafik, poradników, etc., do których część niniejszych materiałów się odnosi.',
+                  'Spis wszystkich załączników: dokumentów, grafik, poradników, etc., do których część materiałów (wylistowanych w kolejnej sekcji) się odnosi.',
                   style: AppTextStyle(
                     fontSize: Dimen.textSizeBig,
                     fontStyle: FontStyle.italic,
