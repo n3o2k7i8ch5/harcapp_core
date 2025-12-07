@@ -181,8 +181,8 @@ class KonspektSphereDetails{
   Map toJsonMap(){
     Map result = {};
     for (KonspektSphereLevel level in levels.keys)
-      result[level.name] = levels[level]!.fields.map(
-          (key, value) => MapEntry(key, value?.map((e) => e.name).toList())
+      result[level.apiParam] = levels[level]!.fields.map(
+          (key, value) => MapEntry(key, value?.map((e) => e.apiParam).toList())
       );
 
     return result;
@@ -317,7 +317,7 @@ class KonspektSphereFields{
   });
 
   Map toJsonMap() => fields.map(
-      (key, value) => MapEntry(key, value?.map((e) => e.name).toList())
+      (key, value) => MapEntry(key, value?.map((e) => e.apiParam).toList())
   );
 
   static KonspektSphereFields fromJsonMap(Map<String, dynamic> map) {
@@ -538,8 +538,8 @@ class KonspektAttachmentPrint{
   });
 
   Map toJsonMap() => {
-    'color': color.name,
-    'side': side.name,
+    'color': color.apiParam,
+    'side': side.apiParam,
   };
 
   static KonspektAttachmentPrint? fromJsonMap(Map<String, dynamic> map) => KonspektAttachmentPrint(
@@ -639,7 +639,7 @@ class KonspektAttachment{
     Map toJsonMap() => {
       'name': name,
       'title': title,
-      'assets': assets.map((key, value) => MapEntry(key.name, value)),
+      'assets': assets.map((key, value) => MapEntry(key.apiParam, value)),
       'print': print?.toJsonMap()
     };
 
@@ -806,7 +806,7 @@ abstract class BaseKonspektStep with KonspektDurationElementMixin{
   Map toJsonMap() => {
     'title': title,
     'duration': duration.inSeconds,
-    'activeForm': activeForm.name,
+    'activeForm': activeForm.apiParam,
     'required': required,
     'content': content,
     'aims': aims,
