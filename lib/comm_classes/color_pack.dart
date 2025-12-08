@@ -382,7 +382,7 @@ class ColorPackBlack extends BaseColorPack{
   Color get background => AppColors.backgroundDark;
 
   @override
-  Color get backgroundIcon => Colors.white.withValues(alpha: .1);
+  Color get backgroundIcon => Colors.white.withValues(alpha: .09);
 
   @override
   Color get accent => Colors.white;
