@@ -36,6 +36,7 @@ class AttachmentData {
 
     return {
       'name': name,
+      'title': title,
       'formats': {...fileData.keys, ...urlData.keys}.map((e) => e.name).toList(),
       'files': filesJson,
       'urls': urlsJson,
