@@ -663,6 +663,15 @@ class StartTimeButton extends StatelessWidget{
             TimeOfDay? newStartTime = await showTimePicker(
               context: context,
               initialTime: startTime??TimeOfDay.now(),
+              builder: (context, child) => Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.fromSeed(
+                    seedColor: Theme.of(context).colorScheme.primary,
+                    brightness: Theme.of(context).brightness,
+                  ),
+                ),
+                child: child!,
+              ),
             );
             if(newStartTime == null) return;
 
