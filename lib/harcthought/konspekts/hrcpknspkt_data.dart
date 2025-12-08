@@ -118,7 +118,7 @@ class HrcpknspktData {
   };
 
   static HrcpknspktData fromJson(Map<String, dynamic> json) => HrcpknspktData(
-    coverImage: base64Decode(json['coverImage'] as String),
+    coverImage: json['coverImage']==null?null:base64Decode(json['coverImage'] as String),
     attachments: (json['attachments'] as List<dynamic>)
         .map((e) => AttachmentData.fromJson(e as Map<String, dynamic>))
         .toList(growable: false),
