@@ -1163,6 +1163,9 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
     author: data['author']==null?null:Person.fromApiJsonMap((data['author'] as Map).cast<String, dynamic>()),
     customDuration: data['customDuration'] == null ? null : Duration(seconds: data['customDuration'] as int),
     aims: (data['aims'] as List?)?.map((e) => e as String).toList()??[],
+    attachments: (data['attachments'] as List?)?.map(
+            (e) => KonspektAttachment.fromJsonMap((e as Map).cast<String, dynamic>())
+    ).toList()??[],
     materials: (data['materials'] as List?)?.map(
             (e) => KonspektMaterial.fromJsonMap((e as Map).cast<String, dynamic>())
     ).toList(),
