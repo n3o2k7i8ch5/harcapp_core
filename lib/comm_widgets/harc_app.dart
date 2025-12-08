@@ -4,10 +4,10 @@ import 'package:harcapp_core/values/colors.dart';
 
 class HarcApp extends StatelessWidget{
 
-  final size;
-  final color;
-  final shadow;
-  const HarcApp({required this.size, this.color = AppColors.textDefEnab, this.shadow = false});
+  final double size;
+  final Color? color;
+  final bool? shadow;
+  const HarcApp({required this.size, this.color, this.shadow = false});
 
   @override
   Widget build(BuildContext context) {
