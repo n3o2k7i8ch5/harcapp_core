@@ -49,6 +49,7 @@ class AppTextFieldHint extends StatefulWidget{
   final TextCapitalization textCapitalization;
   final TextAlignVertical? textAlignVertical;
   final bool autofocus;
+  final Duration? animationDuration;
 
   const AppTextFieldHint({
     required this.hint,
@@ -86,6 +87,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.textCapitalization = TextCapitalization.none,
     this.textAlignVertical,
     this.autofocus = false,
+    this.animationDuration,
     Key? key
   }):super(key: key);
 
@@ -180,6 +182,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         contentPadding: widget.contentPadding,
         isCollapsed: true, // widget.multiIsCollapsed,
         padding: widget.multiPadding,
+        animationDuration: widget.animationDuration,
       );
     else
       textField = BaseTextFieldHint(
