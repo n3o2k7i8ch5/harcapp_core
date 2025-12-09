@@ -269,6 +269,11 @@ enum KonspektSphereLevel{
     style: AppTextStyle(color: color, fontWeight: weightBold),
   );
 
+  Widget getTextWidget(double fontSize) => Text(
+    displayName,
+    style: AppTextStyle(color: color, fontWeight: weightBold, fontSize: fontSize),
+  );
+
   pdf.Widget pdfWidget(pdf.Font fontBold, double fontSize) => pdf.Text(
     displayName,
     style: pdf.TextStyle(
