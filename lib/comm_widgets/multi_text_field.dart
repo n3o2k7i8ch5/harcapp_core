@@ -127,7 +127,7 @@ class MultiTextField extends StatefulWidget{
   final EdgeInsets? contentPadding;
   final bool isCollapsed;
   final Duration? animationDuration;
-  final Curve animationCurve;
+  final Curve? animationCurve;
   final EdgeInsets? padding;
 
   const MultiTextField({
@@ -154,8 +154,8 @@ class MultiTextField extends StatefulWidget{
     this.enabled = true,
     this.contentPadding,
     this.isCollapsed = false,
-    this.animationDuration = const Duration(milliseconds: 300),
-    this.animationCurve = Curves.easeInOut,
+    this.animationDuration,
+    this.animationCurve,
     this.padding,
     super.key
   });
@@ -194,7 +194,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   EdgeInsets? get contentPadding => widget.contentPadding;
   bool get isCollapsed => widget.isCollapsed;
   Duration? get animationDuration => widget.animationDuration;
-  Curve get animationCurve => widget.animationCurve;
+  Curve? get animationCurve => widget.animationCurve;
 
   void _callOnChanged(int index) => onChanged?.call(index, controller[index].text);
 

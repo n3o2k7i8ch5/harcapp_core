@@ -50,6 +50,7 @@ class AppTextFieldHint extends StatefulWidget{
   final TextAlignVertical? textAlignVertical;
   final bool autofocus;
   final Duration? animationDuration;
+  final Curve? animationCurve;
 
   const AppTextFieldHint({
     required this.hint,
@@ -88,6 +89,7 @@ class AppTextFieldHint extends StatefulWidget{
     this.textAlignVertical,
     this.autofocus = false,
     this.animationDuration,
+    this.animationCurve,
     Key? key
   }):super(key: key);
 
@@ -183,6 +185,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         isCollapsed: true, // widget.multiIsCollapsed,
         padding: widget.multiPadding,
         animationDuration: widget.animationDuration,
+        animationCurve: widget.animationCurve,
       );
     else
       textField = BaseTextFieldHint(
