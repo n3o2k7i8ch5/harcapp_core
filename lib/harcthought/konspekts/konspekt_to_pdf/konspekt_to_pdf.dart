@@ -402,9 +402,6 @@ Future<Uint8List> konspektToPdf(
     multiPage.add(TypeWidget(konspekt, font, fontBold));
 
   if(withMetadata)
-    multiPage.addAll(SphereListWidget(konspekt, font, fontBold));
-
-  if(withMetadata)
     multiPage.add(AuthorWidget(konspekt, font, fontBold));
 
   if(withMetadata)
@@ -415,6 +412,9 @@ Future<Uint8List> konspektToPdf(
 
   if(withAims)
     multiPage.addAll(await AimsWidget(konspekt, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
+
+  if(withMetadata)
+    multiPage.addAll(SphereListWidget(konspekt, font, fontBold));
 
   if(konspekt.materials != null && withMaterials)
     multiPage.addAll(MaterialTiles(konspekt.materials!, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));

@@ -290,18 +290,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 ],
               ),
 
-              if(konspekt.spheres.isNotEmpty)
-                const SizedBox(height: Dimen.sideMarg),
-
-              if(konspekt.spheres.isNotEmpty)
-                const TitleShortcutRowWidget(title: 'Sfery rozwoju', textAlign: TextAlign.left),
-
-              if(konspekt.spheres.isNotEmpty)
-                KonspektSpheresWidget(
-                  konspekt.spheres,
-                  onDuchLevelInfoTap: onDuchLevelInfoTap,
-                ),
-
               const SizedBox(height: Dimen.sideMarg),
 
               if(konspekt.duration != null)
@@ -344,6 +332,18 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   bottom: Dimen.sideMarg,
                 ),
               ),
+
+              if(konspekt.spheres.isNotEmpty)
+                const SizedBox(height: Dimen.sideMarg),
+
+              if(konspekt.spheres.isNotEmpty)
+                const TitleShortcutRowWidget(title: 'Sfery rozwoju', textAlign: TextAlign.left),
+
+              if(konspekt.spheres.isNotEmpty)
+                KonspektSpheresWidget(
+                  konspekt.spheres,
+                  onDuchLevelInfoTap: onDuchLevelInfoTap,
+                ),
 
             ])),
           ),
