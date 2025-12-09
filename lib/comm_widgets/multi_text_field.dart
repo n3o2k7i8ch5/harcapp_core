@@ -127,6 +127,7 @@ class MultiTextField extends StatefulWidget{
   final EdgeInsets? contentPadding;
   final bool isCollapsed;
   final Duration? animationDuration;
+  final Curve animationCurve;
   final EdgeInsets? padding;
 
   const MultiTextField({
@@ -153,7 +154,8 @@ class MultiTextField extends StatefulWidget{
     this.enabled = true,
     this.contentPadding,
     this.isCollapsed = false,
-    this.animationDuration,
+    this.animationDuration = const Duration(milliseconds: 300),
+    this.animationCurve = Curves.easeInOut,
     this.padding,
     super.key
   });
@@ -192,6 +194,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   EdgeInsets? get contentPadding => widget.contentPadding;
   bool get isCollapsed => widget.isCollapsed;
   Duration? get animationDuration => widget.animationDuration;
+  Curve get animationCurve => widget.animationCurve;
 
   void _callOnChanged(int index) => onChanged?.call(index, controller[index].text);
 
@@ -248,6 +251,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       isCollapsed: isCollapsed,
       contentPadding: contentPadding,
       animationDuration: animationDuration,
+      animationCurve: animationCurve,
     );
 
     if(itemBuilder != null)
@@ -353,8 +357,13 @@ class MultiTextFieldState extends State<MultiTextField>{
                 physics: NeverScrollableScrollPhysics(),
                 insertDuration: animationDuration,
                 removeDuration: animationDuration,
-                enterTransition: [FadeIn()],
-                exitTransition: [SlideInUp(), FadeIn()],
+                enterTransition: [
+                  FadeIn(duration: animationDuration, curve: animationCurve)
+                ],
+                exitTransition: [
+                  SlideInUp(duration: animationDuration, curve: animationCurve),
+                  FadeIn(duration: animationDuration, curve: animationCurve)
+                ],
                 isSameItem: (a, b) => a.key == b.key,
               ),
               addButton
@@ -394,6 +403,7 @@ class _ItemWidget extends StatefulWidget{
   final EdgeInsetsGeometry? contentPadding;
   final bool isCollapsed;
   final Duration? animationDuration;
+  final Curve? animationCurve;
 
   const _ItemWidget({
     required this.controller,
@@ -409,6 +419,7 @@ class _ItemWidget extends StatefulWidget{
     this.contentPadding,
     this.isCollapsed = false,
     this.animationDuration,
+    this.animationCurve,
     super.key
   });
 
@@ -435,6 +446,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
   EdgeInsetsGeometry? get contentPadding => widget.contentPadding;
   bool get isCollapsed => widget.isCollapsed;
   Duration? get animationDuration => widget.animationDuration;
+  Curve? get animationCurve => widget.animationCurve;
 
   @override
   Widget build(BuildContext context) => IntrinsicWidth(
@@ -464,7 +476,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
                     )
                 ),
                 duration: animationDuration??Duration(milliseconds: 300),
-                curve: Curves.easeOutQuint,
+                curve: animationCurve??Curves.easeInOut,
                 alignment: Alignment.centerLeft,
                 clipBehavior: Clip.none,
               )
