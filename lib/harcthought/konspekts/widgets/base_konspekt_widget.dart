@@ -334,9 +334,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               ),
 
               if(konspekt.spheres.isNotEmpty)
-                const SizedBox(height: Dimen.sideMarg),
-
-              if(konspekt.spheres.isNotEmpty)
                 const TitleShortcutRowWidget(title: 'Sfery rozwoju', textAlign: TextAlign.left),
 
               if(konspekt.spheres.isNotEmpty)
@@ -344,6 +341,9 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   konspekt.spheres,
                   onDuchLevelInfoTap: onDuchLevelInfoTap,
                 ),
+
+              if(konspekt.spheres.isNotEmpty)
+                const SizedBox(height: Dimen.sideMarg),
 
             ])),
           ),
@@ -358,9 +358,9 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               sliver: SliverList(delegate: SliverChildListDelegate([
 
                 TitleShortcutRowWidget(
-                  title: 'Załączniki (${konspekt.attachments?.length})',
+                  title: 'Załączniki (${konspekt.attachments!.length})',
                   textAlign: TextAlign.left,
-                  trailing: AppButton(
+                  trailing: konspekt.attachments!.isEmpty?null:AppButton(
                     icon: Icon(attachmentsExpanded?MdiIcons.chevronDown: MdiIcons.chevronUp),
                     onTap: () => setState(() => attachmentsExpanded = !attachmentsExpanded),
                   ),
@@ -412,9 +412,9 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               sliver: SliverList(delegate: SliverChildListDelegate([
 
                 TitleShortcutRowWidget(
-                  title: 'Materiały (${konspekt.materials?.length})',
+                  title: 'Materiały (${konspekt.materials!.length})',
                   textAlign: TextAlign.left,
-                  trailing: AppButton(
+                  trailing: konspekt.materials!.isEmpty?null:AppButton(
                     icon: Icon(materialsExpanded?MdiIcons.chevronDown: MdiIcons.chevronUp),
                     onTap: () => setState(() => materialsExpanded = !materialsExpanded)
                   ),
