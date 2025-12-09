@@ -432,6 +432,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
   bool get enabled => widget.enabled;
   EdgeInsetsGeometry? get contentPadding => widget.contentPadding;
   bool get isCollapsed => widget.isCollapsed;
+  Duration? get animationDuration => widget.animationDuration;
 
   @override
   Widget build(BuildContext context) => IntrinsicWidth(
