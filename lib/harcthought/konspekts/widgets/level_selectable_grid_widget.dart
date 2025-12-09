@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
@@ -71,7 +72,7 @@ class LevelSelectableGridWidget extends StatelessWidget{
               padding: EdgeInsets.only(right: 12),
               child: Icon(
                 selectedLevels.contains(meto)?Icons.check_circle:Icons.radio_button_unchecked,
-                color: Colors.white,
+                color: background_(context),
               ),
             ),
             intrinsicWidth: oneLine,
