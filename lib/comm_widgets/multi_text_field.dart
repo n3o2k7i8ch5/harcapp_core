@@ -126,6 +126,7 @@ class MultiTextField extends StatefulWidget{
   final bool enabled;
   final EdgeInsets? contentPadding;
   final bool isCollapsed;
+  final Duration? animationDuration;
   final EdgeInsets? padding;
 
   const MultiTextField({
@@ -152,6 +153,7 @@ class MultiTextField extends StatefulWidget{
     this.enabled = true,
     this.contentPadding,
     this.isCollapsed = false,
+    this.animationDuration,
     this.padding,
     super.key
   });
@@ -189,6 +191,7 @@ class MultiTextFieldState extends State<MultiTextField>{
   bool get enabled => widget.enabled;
   EdgeInsets? get contentPadding => widget.contentPadding;
   bool get isCollapsed => widget.isCollapsed;
+  Duration? get animationDuration => widget.animationDuration;
 
   void _callOnChanged(int index) => onChanged?.call(index, controller[index].text);
 
@@ -244,6 +247,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       enabled: enabled,
       isCollapsed: isCollapsed,
       contentPadding: contentPadding,
+      animationDuration: animationDuration,
     );
 
     if(itemBuilder != null)
@@ -387,6 +391,7 @@ class _ItemWidget extends StatefulWidget{
   final bool enabled;
   final EdgeInsetsGeometry? contentPadding;
   final bool isCollapsed;
+  final Duration? animationDuration;
 
   const _ItemWidget({
     required this.controller,
@@ -401,6 +406,7 @@ class _ItemWidget extends StatefulWidget{
     this.enabled = true,
     this.contentPadding,
     this.isCollapsed = false,
+    this.animationDuration,
     super.key
   });
 
@@ -454,7 +460,7 @@ class _ItemWidgetState extends State<_ItemWidget>{
                       ),
                     )
                 ),
-                duration: Duration(milliseconds: 300),
+                duration: animationDuration??Duration(milliseconds: 300),
                 curve: Curves.easeOutQuint,
                 alignment: Alignment.centerLeft,
                 clipBehavior: Clip.none,
