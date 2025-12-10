@@ -29,7 +29,7 @@ class PersonDataDialog extends StatefulWidget{
     this.onChanged,
     this.onAccepted,
     this.title = 'Twoje dane',
-    this.saveText = 'Dalej',
+    this.saveText = 'Ok',
     this.cancelText = 'Anuluj',
     super.key
   });
