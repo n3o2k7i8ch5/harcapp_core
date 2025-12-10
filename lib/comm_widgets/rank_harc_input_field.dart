@@ -32,6 +32,7 @@ class RankHarcInputField extends StatelessWidget{
     leading: withIcon?Icon(MdiIcons.chevronDoubleRight, color: iconDisab_(context)):null,
     enabled: enabled,
     value: rankHarc,
+
     onChanged: (value) => onChanged?.call(value),
     onCleared: () => onChanged?.call(null),
     items: RankHarc.values.map((r) => DropdownMenuItem<RankHarc>(

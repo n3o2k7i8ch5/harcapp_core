@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_navigator.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
+import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
@@ -22,7 +23,7 @@ class PersonDataDialog extends StatefulWidget{
 
   final String title;
   final String saveText;
-  final String cancelText;
+  final String? cancelText;
 
   const PersonDataDialog({
     this.initialPerson,
@@ -30,7 +31,7 @@ class PersonDataDialog extends StatefulWidget{
     this.onAccepted,
     this.title = 'Twoje dane',
     this.saveText = 'Ok',
-    this.cancelText = 'Anuluj',
+    this.cancelText,
     super.key
   });
 
@@ -109,88 +110,125 @@ class PersonDataDialogState extends State<PersonDataDialog>{
 
                             const SizedBox(height: Dimen.sideMarg),
 
-                            AppTextFieldHint(
-                              hint: 'Imię i nazwisko:',
-                              hintTop: 'Imię i nazwisko',
-                              controller: nameController,
-                              onChanged: (_, __) => widget.onChanged?.call(currentPerson),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(AppCard.defRadius),
+                                color: cardEnab_(context),
+                              ),
+                              child: AppTextFieldHint(
+                                hint: 'Imię i nazwisko:',
+                                hintTop: 'Imię i nazwisko',
+                                controller: nameController,
+                                onChanged: (_, __) => widget.onChanged?.call(currentPerson),
+                              ),
                             ),
 
-                            AppTextFieldHint(
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(AppCard.defRadius),
+                            color: cardEnab_(context),
+                          ),
+                          child: AppTextFieldHint(
                               hint: 'Drużyna:',
                               hintTop: 'Drużyna',
                               controller: druzynaController,
                               onChanged: (_, __) => widget.onChanged?.call(currentPerson),
-                            ),
+                            )
+                        ),
 
-                            AppTextFieldHint(
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(AppCard.defRadius),
+                            color: cardEnab_(context),
+                          ),
+                          child: AppTextFieldHint(
                               hint: 'Hufiec:',
                               hintTop: 'Hufiec',
                               controller: hufiecController,
                               onChanged: (_, __) => widget.onChanged?.call(currentPerson),
-                            ),
+                            )
+                        ),
                           ],
                         ),
                       ),
 
-                      RankHarcInputField(
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(AppCard.defRadius),
+                      color: cardEnab_(context),
+                    ),
+                    child: RankHarcInputField(
                         rankHarc,
                         onChanged: (value){
                           setState(() => rankHarc = value);
                           widget.onChanged?.call(currentPerson);
                         },
                         withIcon: false,
-                      ),
+                      )
+                  ),
 
-                      RankInstrInputField(
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(AppCard.defRadius),
+                      color: cardEnab_(context),
+                    ),
+                    child: RankInstrInputField(
                         rankInstr,
                         onChanged: (value){
                           setState(() => rankInstr = value);
                           widget.onChanged?.call(currentPerson);
                         },
                         withIcon: false,
-                      ),
+                      )
+                  ),
 
-                      OrgInputField(
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(AppCard.defRadius),
+                      color: cardEnab_(context),
+                    ),
+                    child: OrgInputField(
                         org,
                         onChanged: (value){
                           setState(() => org = value);
                           widget.onChanged?.call(currentPerson);
                         },
                         withIcon: false,
-                      ),
+                      )
+                  ),
 
                     ],
                   ),
                   )
                 ),
 
-                Row(
-                  children: [
+                Padding(
+                  padding: EdgeInsets.all(Dimen.sideMarg),
+                  child: Row(
+                    children: [
 
-                    if(widget.cancelText.isNotEmpty)
+                      if(widget.cancelText != null)
+                        SimpleButton.from(
+                          context: context,
+                          margin: EdgeInsets.zero,
+                          text: widget.cancelText,
+                          onTap: () => popPage(context, root: true),
+                        ),
+
+                      const SizedBox(width: Dimen.defMarg),
+
                       SimpleButton.from(
-                        context: context,
-                        margin: EdgeInsets.zero,
-                        radius: 0,
-                        text: widget.cancelText,
-                        onTap: () => popPage(context, root: true),
-                      ),
+                          context: context,
+                          margin: EdgeInsets.zero,
+                          text: widget.saveText,
+                          onTap: (){
+                            widget.onAccepted?.call(currentPerson);
+                            popPage(context, root: true);
+                          }
+                      )
 
-                    const SizedBox(width: Dimen.defMarg),
-
-                    SimpleButton.from(
-                        context: context,
-                        margin: EdgeInsets.zero,
-                        radius: 0,
-                        text: widget.saveText,
-                        onTap: (){
-                          widget.onAccepted?.call(currentPerson);
-                          popPage(context, root: true);
-                        }
-                    )
-
-                  ],
+                    ],
+                  ),
                 )
 
               ],
