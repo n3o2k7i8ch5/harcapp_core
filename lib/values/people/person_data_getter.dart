@@ -88,69 +88,65 @@ class PersonDataDialogState extends State<PersonDataDialog>{
 
                 Expanded(
                     child: SingleChildScrollView(
+                      padding: const EdgeInsets.all(Dimen.sideMarg),
                       physics: const BouncingScrollPhysics(),
-                      // shrinkWrap: true,
                       child: Column(
                         children: [
 
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 10,
-                              left: Dimen.TEXT_FIELD_PADD,
-                              right: Dimen.TEXT_FIELD_PADD,
+                          const Text(
+                            'Dzięki temu każdy użytkownik będzie wiedział, kto dodał tę piosenkę!',
+                            style: AppTextStyle(fontSize: Dimen.textSizeBig),
+                          ),
+
+                          const SizedBox(height: Dimen.sideMarg),
+
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(AppCard.defRadius),
+                              color: cardEnab_(context),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-
-                                const Text(
-                                  'Dzięki temu każdy użytkownik będzie wiedział, kto dodał tę piosenkę!',
-                                  style: AppTextStyle(fontSize: Dimen.textSizeBig),
-                                ),
-
-                                const SizedBox(height: Dimen.sideMarg),
-
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(AppCard.defRadius),
-                                    color: cardEnab_(context),
-                                  ),
-                                  child: AppTextFieldHint(
-                                    hint: 'Imię i nazwisko:',
-                                    hintTop: 'Imię i nazwisko',
-                                    controller: nameController,
-                                    onChanged: (_, __) => widget.onChanged?.call(currentPerson),
-                                  ),
-                                ),
-
-                                Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(AppCard.defRadius),
-                                      color: cardEnab_(context),
-                                    ),
-                                    child: AppTextFieldHint(
-                                      hint: 'Drużyna:',
-                                      hintTop: 'Drużyna',
-                                      controller: druzynaController,
-                                      onChanged: (_, __) => widget.onChanged?.call(currentPerson),
-                                    )
-                                ),
-
-                                Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(AppCard.defRadius),
-                                      color: cardEnab_(context),
-                                    ),
-                                    child: AppTextFieldHint(
-                                      hint: 'Hufiec:',
-                                      hintTop: 'Hufiec',
-                                      controller: hufiecController,
-                                      onChanged: (_, __) => widget.onChanged?.call(currentPerson),
-                                    )
-                                ),
-                              ],
+                            child: AppTextFieldHint(
+                              hint: 'Imię i nazwisko:',
+                              hintTop: 'Imię i nazwisko',
+                              controller: nameController,
+                              contentPadding: const EdgeInsets.all(Dimen.defMarg),
+                              onChanged: (_, __) => widget.onChanged?.call(currentPerson),
                             ),
                           ),
+
+                          const SizedBox(height: Dimen.sideMarg),
+
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(AppCard.defRadius),
+                                color: cardEnab_(context),
+                              ),
+                              child: AppTextFieldHint(
+                                hint: 'Drużyna:',
+                                hintTop: 'Drużyna',
+                                controller: druzynaController,
+                                contentPadding: const EdgeInsets.all(Dimen.defMarg),
+                                onChanged: (_, __) => widget.onChanged?.call(currentPerson),
+                              )
+                          ),
+
+                          const SizedBox(height: Dimen.sideMarg),
+
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(AppCard.defRadius),
+                                color: cardEnab_(context),
+                              ),
+                              child: AppTextFieldHint(
+                                hint: 'Hufiec:',
+                                hintTop: 'Hufiec',
+                                controller: hufiecController,
+                                contentPadding: const EdgeInsets.all(Dimen.defMarg),
+                                onChanged: (_, __) => widget.onChanged?.call(currentPerson),
+                              )
+                          ),
+
+                          const SizedBox(height: Dimen.sideMarg),
 
                           Container(
                               decoration: BoxDecoration(
@@ -167,6 +163,8 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                               )
                           ),
 
+                          const SizedBox(height: Dimen.sideMarg),
+
                           Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(AppCard.defRadius),
@@ -181,6 +179,8 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                                 withIcon: false,
                               )
                           ),
+
+                          const SizedBox(height: Dimen.sideMarg),
 
                           Container(
                               decoration: BoxDecoration(
@@ -205,6 +205,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                 Padding(
                   padding: EdgeInsets.all(Dimen.sideMarg),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
 
                       if(widget.cancelText != null)

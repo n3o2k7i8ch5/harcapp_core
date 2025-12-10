@@ -37,7 +37,8 @@ class HintDropdownWidget<T> extends StatelessWidget{
   Widget build(BuildContext context) => Row(
     children: [
 
-      const SizedBox(width: Dimen.iconMarg),
+      if(leading != null)
+        const SizedBox(width: Dimen.iconMarg),
 
       if(leading != null)
         leading!,
