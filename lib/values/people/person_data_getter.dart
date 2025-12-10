@@ -105,7 +105,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                               hint: 'Imię i nazwisko:',
                               hintTop: 'Imię i nazwisko',
                               controller: nameController,
-                              contentPadding: const EdgeInsets.only(left: 14),
+                              contentPadding: const EdgeInsets.only(left: 16),
                               onChanged: (_, __) => widget.onChanged?.call(currentPerson),
                             ),
                           ),
@@ -117,7 +117,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                                 hint: 'Drużyna:',
                                 hintTop: 'Drużyna',
                                 controller: druzynaController,
-                                contentPadding: const EdgeInsets.only(left: 14),
+                                contentPadding: const EdgeInsets.only(left: 16),
                                 onChanged: (_, __) => widget.onChanged?.call(currentPerson),
                               )
                           ),
@@ -129,7 +129,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                                 hint: 'Hufiec:',
                                 hintTop: 'Hufiec',
                                 controller: hufiecController,
-                                contentPadding: const EdgeInsets.only(left: 14),
+                                contentPadding: const EdgeInsets.only(left: 16),
                                 onChanged: (_, __) => widget.onChanged?.call(currentPerson),
                               )
                           ),
@@ -231,7 +231,10 @@ class _Container extends StatelessWidget{
       ),
       child: Padding(
         padding: EdgeInsets.all(Dimen.defMarg/2),
-        child: child,
+        child: SizedBox(
+          height: Dimen.iconFootprint,
+          child: child,
+        ),
       )
   );
 
