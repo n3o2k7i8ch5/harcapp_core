@@ -149,9 +149,9 @@ class SimpleButton extends StatelessWidget{
 
     List<Widget> children = [
       if (iconLeading && iconW != null) iconW,
-      if (text != null) spacer,
+      if (iconW != null && textW != null) spacer,
       if (textW != null) textW,
-      if (text != null && !iconLeading) spacer,
+      if (!iconLeading && iconW != null && textW != null) spacer,
       if (!iconLeading && iconW != null) iconW,
     ];
 
