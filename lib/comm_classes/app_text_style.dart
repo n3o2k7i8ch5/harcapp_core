@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:harcapp_core/values/colors.dart';
 import '../values/dimen.dart';
 
 const FontWeight weightThin = FontWeight.w100;
@@ -30,6 +29,7 @@ class CustTextStyle extends TextStyle{
       fontWeight: fontWeight,
       fontSize: fontSize,
       height: height,
+      letterSpacing: 0,
       decoration: decoration,
       decorationStyle: decorationStyle,
       decorationThickness: decorationThickness,
