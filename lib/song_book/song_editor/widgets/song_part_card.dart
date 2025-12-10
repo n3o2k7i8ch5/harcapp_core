@@ -20,6 +20,26 @@ enum SongPartType{
   REFREN_TEMPLATE
 }
 
+Color _textColorForType(BuildContext context, SongPartType type) {
+  switch (type) {
+    case SongPartType.REFREN:
+      return textDisab_(context);
+    case SongPartType.ZWROTKA:
+    case SongPartType.REFREN_TEMPLATE:
+      return textEnab_(context);
+  }
+}
+
+int _calculateNewLines(int lineCnt, int otherLineCnt) {
+  if (lineCnt < otherLineCnt) {
+    if (otherLineCnt > SongPartCard.MIN_LINE_CNT) return otherLineCnt - lineCnt;
+    else return SongPartCard.MIN_LINE_CNT - lineCnt;
+  } else {
+    if (lineCnt < SongPartCard.MIN_LINE_CNT) return SongPartCard.MIN_LINE_CNT - lineCnt;
+  }
+  return 0;
+}
+
 class SongPartCard extends StatelessWidget{
 
   static const int MIN_LINE_CNT = 4;
@@ -153,42 +173,23 @@ class _SongTextWidget extends StatelessWidget{
   const _SongTextWidget({required this.type, required this.songPart});
 
   @override
-  Widget build(BuildContext context) {
-
-    Color? textColor;
-
-    if(type == SongPartType.ZWROTKA) textColor = textEnab_(context);
-    else if(type == SongPartType.REFREN) textColor = textDisab_(context);
-    else if(type == SongPartType.REFREN_TEMPLATE) textColor = textEnab_(context);
-
-    return Padding(
-      padding: EdgeInsets.only(left: songPart.shift?Dimen.iconSize:0),
-      child: Text(
-        text,
-        style: TextStyle(
-            fontFamily: 'Roboto',
-            fontSize: Dimen.textSizeNormal,
-            color: textColor
-        ),
+  Widget build(BuildContext context) => Padding(
+    padding: EdgeInsets.only(left: songPart.shift ? Dimen.iconSize : 0),
+    child: Text(
+      _text,
+      style: TextStyle(
+        fontFamily: 'Roboto',
+        fontSize: Dimen.textSizeNormal,
+        color: _textColorForType(context, type),
       ),
-    );
-  }
+    ),
+  );
 
-  String get text{
-
+  String get _text {
     String songText = songPart.getText();
     int textLineCnt = songText.split('\n').length;
     int chrdLineCnt = songPart.chords.split('\n').length;
-
-    int newLinesCnt = 0;
-    if(textLineCnt<chrdLineCnt) {
-      if(chrdLineCnt>SongPartCard.MIN_LINE_CNT) newLinesCnt = chrdLineCnt - textLineCnt;
-      else newLinesCnt = SongPartCard.MIN_LINE_CNT - textLineCnt;
-    }else{
-      if(textLineCnt<SongPartCard.MIN_LINE_CNT) newLinesCnt = SongPartCard.MIN_LINE_CNT - textLineCnt;
-    }
-
-    return songText + '\n'*newLinesCnt;
+    return songText + '\n' * _calculateNewLines(textLineCnt, chrdLineCnt);
   }
 }
 
@@ -200,42 +201,44 @@ class _SongChordsWidget extends StatelessWidget{
   const _SongChordsWidget({required this.type, required this.songPart});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Text(
+    _text,
+    style: TextStyle(
+      fontFamily: 'Roboto',
+      fontSize: Dimen.textSizeNormal,
+      color: _textColorForType(context, type),
+    ),
+  );
 
-    Color? textColor;
-
-    if(type == SongPartType.ZWROTKA) textColor = textEnab_(context);
-    else if(type == SongPartType.REFREN) textColor = textDisab_(context);
-    else if(type == SongPartType.REFREN_TEMPLATE) textColor = textEnab_(context);
-
-    return Text(
-      text,
-      style: TextStyle(
-          fontFamily: 'Roboto',
-          fontSize: Dimen.textSizeNormal,
-          color: textColor
-      ),
-    );
-  }
-
-  String get text{
-
+  String get _text {
     String songChords = songPart.chords;
     int chrdLineCnt = songChords.split('\n').length;
     int textLineCnt = songPart.getText().split('\n').length;
-
-    int newLinesCnt = 0;
-    if(chrdLineCnt<textLineCnt) {
-      if(textLineCnt>SongPartCard.MIN_LINE_CNT) newLinesCnt = textLineCnt - chrdLineCnt;
-      else newLinesCnt = SongPartCard.MIN_LINE_CNT - chrdLineCnt;
-    }else{
-      if(chrdLineCnt<SongPartCard.MIN_LINE_CNT) newLinesCnt = SongPartCard.MIN_LINE_CNT - chrdLineCnt;
-    }
-
-    return songChords + '\n'*newLinesCnt;
+    return songChords + '\n' * _calculateNewLines(chrdLineCnt, textLineCnt);
   }
-
 }
+
+Widget _dragButton(BuildContext context, int index) => ReorderableDragStartListener(
+  index: index,
+  child: AppButton(
+    icon: Icon(MdiIcons.swapVertical, color: iconEnab_(context)),
+    onTap: () => showAppToast(context, text: 'Przytrzymaj, by przenieść'),
+  ),
+);
+
+Widget _nameLabel(BuildContext context, String name, bool showName) => Expanded(
+  child: showName
+      ? Text(name, style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold, color: hintEnab_(context)))
+      : Container(),
+);
+
+Widget _deleteButton(BuildContext context, SongPart songPart, void Function(SongPart)? onDelete) => AppButton(
+  icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
+  onTap: () {
+    onDelete?.call(songPart);
+    CurrentItemProvider.of(context).removePart(songPart);
+  },
+);
 
 class TopZwrotkaButtons extends StatelessWidget{
 
@@ -256,20 +259,8 @@ class TopZwrotkaButtons extends StatelessWidget{
   @override
   Widget build(BuildContext context) => Row(
     children: <Widget>[
-
-      ReorderableDragStartListener(
-          index: index,
-          child: AppButton(
-            icon: Icon(MdiIcons.swapVertical, color: iconEnab_(context)),
-            onTap: () => showAppToast(context, text: 'Przytrzymaj, by przenieść'),
-          )
-      ),
-
-      Expanded(
-          child: showName?
-          Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold, color: hintEnab_(context))):
-          Container()
-      ),
+      _dragButton(context, index),
+      _nameLabel(context, 'Zwrotka', showName),
 
       if(songPart.isError)
         AppButton(
@@ -279,20 +270,13 @@ class TopZwrotkaButtons extends StatelessWidget{
 
       AppButton(
         icon: Icon(MdiIcons.contentDuplicate, color: iconEnab_(context)),
-        onTap: (){
+        onTap: () {
           onDuplicate?.call(songPart);
           CurrentItemProvider.of(context).addPart(songPart.copy());
         },
       ),
 
-      AppButton(
-        icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
-        onTap: (){
-          onDelete?.call(songPart);
-          CurrentItemProvider.of(context).removePart(songPart);
-        },
-      ),
-
+      _deleteButton(context, songPart, onDelete),
     ],
   );
 
@@ -315,29 +299,9 @@ class TopRefrenButtons extends StatelessWidget{
   @override
   Widget build(BuildContext context) => Row(
     children: <Widget>[
-
-      ReorderableDragStartListener(
-        index: index,
-        child: AppButton(
-          icon: Icon(MdiIcons.swapVertical, color: iconEnab_(context)),
-          onTap: () => AppScaffold.showMessage(context, text: 'Przytrzymaj, by przenieść'),
-        )
-      ),
-
-      Expanded(
-          child: showName?
-          Text('Refren', style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold, color: hintEnab_(context))):
-          Container()
-      ),
-
-      AppButton(
-        icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
-        onTap: (){
-          onDelete?.call(songPart);
-          CurrentItemProvider.of(context).removePart(songPart);
-        },
-      ),
-
+      _dragButton(context, index),
+      _nameLabel(context, 'Refren', showName),
+      _deleteButton(context, songPart, onDelete),
     ],
   );
 

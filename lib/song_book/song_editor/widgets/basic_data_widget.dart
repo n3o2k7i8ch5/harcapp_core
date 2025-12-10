@@ -19,6 +19,17 @@ import 'package:provider/provider.dart';
 
 import '../providers.dart';
 
+TextStyle _fieldStyle(BuildContext context) => AppTextStyle(
+  fontSize: Dimen.textSizeBig,
+  fontWeight: weightHalfBold,
+  color: textEnab_(context),
+);
+
+TextStyle _fieldHintStyle(BuildContext context) => AppTextStyle(
+  fontSize: Dimen.textSizeBig,
+  color: hintEnab_(context),
+);
+
 class BasicDataWidget extends StatelessWidget{
 
   final Color? accentColor;
@@ -62,15 +73,8 @@ class BasicDataWidget extends StatelessWidget{
                   child: AppTextFieldHint(
                     controller: currItemProv.titleController,
                     hint: 'Tytuł:',
-                    style: AppTextStyle(
-                      fontSize: Dimen.textSizeBig,
-                      fontWeight: weightHalfBold,
-                      color: textEnab_(context),
-                    ),
-                    hintStyle: AppTextStyle(
-                      fontSize: Dimen.textSizeBig,
-                      color: hintEnab_(context),
-                    ),
+                    style: _fieldStyle(context),
+                    hintStyle: _fieldHintStyle(context),
                     onAnyChanged: (values){
                       currItemProv.setTitle(values[0], notify: false);
                       onChangedTitle?.call(values[0]);
@@ -169,75 +173,10 @@ class BasicDataWidget extends StatelessWidget{
               },
             ),
 
-            // AnimatedOpacity(
-            //   // In this case `length==0` is not the same as `isEmpty`!
-            //   opacity: currItemProv.hiddenTitlesController.length==0? 0: 1,
-            //
-            //   duration: Duration(milliseconds: 500),
-            //   curve: Curves.easeInOut,
-            //   child: IgnorePointer(
-            //     // In this case `length==0` is not the same as `isEmpty`!
-            //     ignoring: currItemProv.hiddenTitlesController.length==0,
-            //     child:
-            //
-            //     AppTextFieldHint(
-            //       hint: 'Ukryty tytuł:',
-            //       multiController: currItemProv.hiddenTitlesController,
-            //       onAnyChanged: onChangedHiddenTitles,
-            //
-            //       multi: true,
-            //       multiHintTop: 'Ukryte tytuły',
-            //       multiLayout: LayoutMode.column,
-            //       multiAllowZeroFields: true,
-            //       multiExpanded: true,
-            //       multiIsCollapsed: true,
-            //       multiItemBuilder: (index, key, widget) => Row(
-            //         key: key,
-            //         children: [
-            //           Padding(
-            //             padding: EdgeInsets.all(Dimen.iconMarg),
-            //             child: Icon(MdiIcons.circleMedium),
-            //           ),
-            //           Expanded(child: widget)
-            //         ],
-            //       ),
-            //       multiAddButtonBuilder: (tappable, onTap) => SimpleButton.from(
-            //           icon: MdiIcons.plus,
-            //           text: 'Dodaj ukryty tytuł',
-            //           margin: EdgeInsets.zero,
-            //
-            //           textColor:
-            //           tappable?
-            //           iconEnab_(context):
-            //           iconDisab_(context),
-            //
-            //           onTap: tappable?(){
-            //             List<String> hidTitles = currItemProv.addHidTitle();
-            //             onChangedHiddenTitles?.call(hidTitles);
-            //           }:null,
-            //           center: false
-            //       ),
-            //       multiPadding: EdgeInsets.only(
-            //         left: padding?.left??0,
-            //         right: padding?.right??0,
-            //       ),
-            //       multiOnAdded: () => currItemProv.notify(),
-            //       multiOnRemoved: (_) => currItemProv.notify(),
-            //     ),
-            //   ),
-            // ),
-
             AppTextFieldHint(
               hint: 'Autor słów:',
-              style: AppTextStyle(
-                fontSize: Dimen.textSizeBig,
-                fontWeight: weightHalfBold,
-                color: textEnab_(context),
-              ),
-              hintStyle: AppTextStyle(
-                fontSize: Dimen.textSizeBig,
-                color: hintEnab_(context),
-              ),
+              style: _fieldStyle(context),
+              hintStyle: _fieldHintStyle(context),
               multi: true,
               multiHintTop: 'Autorzy słów',
               multiExpanded: true,
@@ -252,15 +191,8 @@ class BasicDataWidget extends StatelessWidget{
 
             AppTextFieldHint(
               hint: 'Kompozytor muzyki:',
-              style: AppTextStyle(
-                fontSize: Dimen.textSizeBig,
-                fontWeight: weightHalfBold,
-                color: textEnab_(context),
-              ),
-              hintStyle: AppTextStyle(
-                fontSize: Dimen.textSizeBig,
-                color: hintEnab_(context),
-              ),
+              style: _fieldStyle(context),
+              hintStyle: _fieldHintStyle(context),
               multi: true,
               multiHintTop: 'Kompozytorzy',
               multiExpanded: true,
@@ -274,15 +206,8 @@ class BasicDataWidget extends StatelessWidget{
 
             AppTextFieldHint(
               hint: 'Wykonawca:',
-              style: AppTextStyle(
-                fontSize: Dimen.textSizeBig,
-                fontWeight: weightHalfBold,
-                color: textEnab_(context),
-              ),
-              hintStyle: AppTextStyle(
-                fontSize: Dimen.textSizeBig,
-                color: hintEnab_(context),
-              ),
+              style: _fieldStyle(context),
+              hintStyle: _fieldHintStyle(context),
               multi: true,
               multiHintTop: 'Wykonawcy',
               multiExpanded: true,
@@ -304,15 +229,8 @@ class BasicDataWidget extends StatelessWidget{
                   child: AppTextFieldHint(
                       controller: currItemProv.ytLinkController,
                       hint: 'Link YouTube:',
-                      style: AppTextStyle(
-                        fontSize: Dimen.textSizeBig,
-                        fontWeight: weightHalfBold,
-                        color: textEnab_(context),
-                      ),
-                      hintStyle: AppTextStyle(
-                        fontSize: Dimen.textSizeBig,
-                        color: hintEnab_(context),
-                      ),
+                      style: _fieldStyle(context),
+                      hintStyle: _fieldHintStyle(context),
                       onAnyChanged: (values) {
                         currItemProv.setYoutubeVideoId(SongRaw.ytLinkToVideoId(values[0]), notify: false);
                         onChangedYT?.call(values[0]);
@@ -370,15 +288,8 @@ class BasicDataWidget extends StatelessWidget{
                               )
                           ),
                           hint: 'Data pierwszego wykonania:',
-                          style: AppTextStyle(
-                            fontSize: Dimen.textSizeBig,
-                            fontWeight: weightHalfBold,
-                            color: textEnab_(context),
-                          ),
-                          hintStyle: AppTextStyle(
-                            fontSize: Dimen.textSizeBig,
-                            color: hintEnab_(context),
-                          ),
+                          style: _fieldStyle(context),
+                          hintStyle: _fieldHintStyle(context),
                           onAnyChanged: (text) => onChangedReleaseDate?.call(currItemProv.releaseDate),
                           key: ValueKey((currItemProv.releaseDate, currItemProv.showRelDateMonth, currItemProv.showRelDateDay)),
                         ),

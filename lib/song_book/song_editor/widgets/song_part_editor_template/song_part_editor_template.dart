@@ -23,8 +23,6 @@ import 'errors.dart';
 import '../../providers.dart';
 import 'providers.dart';
 
-const double TEXT_FIELD_TOP_PADD = Dimen.TEXT_FIELD_PADD - 9;
-
 class SongPartEditorTemplate extends StatefulWidget{
 
   //final SongPart songPart;
@@ -84,18 +82,12 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
   late ScrollController textScrollController;
   late ScrollController chordsScrollController;
 
-  late TextEditingController textController;
-  late TextEditingController chordsController;
-
   @override
   void initState() {
 
     _controllers = LinkedScrollControllerGroup();
     textScrollController = _controllers.addAndGet();
     chordsScrollController = _controllers.addAndGet();
-
-    textController = TextEditingController(text: initText);
-    chordsController = TextEditingController(text: initChord);
 
     super.initState();
   }
@@ -163,10 +155,32 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
 
 }
 
-class SongTextWidget extends StatefulWidget{
+const double _lineHeight = 1.2;
+const double _fontSize = Dimen.textSizeNormal;
 
-  static const double height = 1.2;
-  static const double fontSize = Dimen.textSizeNormal;
+TextStyle _textStyle(BuildContext context) => TextStyle(
+  fontFamily: 'Roboto',
+  fontSize: _fontSize,
+  color: textEnab_(context),
+  height: _lineHeight,
+);
+
+TextStyle _hintStyle(BuildContext context) => TextStyle(
+  fontFamily: 'Roboto',
+  fontSize: _fontSize,
+  color: hintEnab_(context),
+  height: _lineHeight,
+);
+
+InputDecoration _inputDecoration(BuildContext context, String hintText) => InputDecoration(
+  hintText: hintText,
+  hintStyle: _hintStyle(context),
+  border: InputBorder.none,
+  isDense: true,
+  contentPadding: EdgeInsets.zero,
+);
+
+class SongTextWidget extends StatefulWidget{
   
   final bool isRefren;
   final ScrollController scrollController;
@@ -194,11 +208,8 @@ class _SongTextWidgetState extends State<SongTextWidget>{
 
   void onChanged(){
     TextProvider.notify_(context);
-    int errorCount = 0;
-    errorCount += TextTooLongError.handleNotifyErrorsFrom(context);
-    errorCount += ChordsMissingError.handleNotifyErrorsFrom(context);
+    int errorCount = handleAllErrors(context);
     widget.onChanged?.call(textController.text, errorCount);
-    
   }
 
   @override
@@ -257,24 +268,8 @@ class _SongTextWidgetState extends State<SongTextWidget>{
                     physics: BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     child: TextFieldFit(
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: SongTextWidget.fontSize,
-                          color: textEnab_(context),
-                          height: SongTextWidget.height,
-                        ),
-                        decoration: InputDecoration(
-                            hintText: 'Słowa ${isRefren?'refrenu':'zwrotki'}',
-                            hintStyle: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: SongTextWidget.fontSize,
-                              color: hintEnab_(context),
-                              height: SongTextWidget.height,
-                            ),
-                            border: InputBorder.none,
-                            isDense: true,
-                            contentPadding: EdgeInsets.zero,
-                        ),
+                        style: _textStyle(context),
+                        decoration: _inputDecoration(context, 'Słowa ${isRefren?'refrenu':'zwrotki'}'),
                         minLines: chordsController.text.split('\n').length,
                         maxLines: null,
                         focusNode: focusNode,
@@ -327,9 +322,7 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
   void Function(String, int)? get onChanged => widget.onChanged;
 
   void _onChanged(){
-    int errorCount = 0;
-    errorCount += TextTooLongError.handleNotifyErrorsFrom(context);
-    errorCount += ChordsMissingError.handleNotifyErrorsFrom(context);
+    int errorCount = handleAllErrors(context);
     onChanged?.call(chordsController.text, errorCount);
   }
 
@@ -371,7 +364,7 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
         topRight: Radius.circular(AppCard.bigRadius),
         bottomRight: Radius.circular(AppCard.bigRadius),
       ),
-      padding: EdgeInsets.only(left: Dimen.defMarg/2, right: Dimen.defMarg/2, top: Dimen.defMarg/2, bottom: Dimen.defMarg/2),
+      padding: EdgeInsets.all(Dimen.defMarg/2),
       margin: AppCard.normMargin,
       elevation: 0,
       color: background_(context),
@@ -391,24 +384,8 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
 
             TextFieldFitChords(
                 focusNode: focusNode,
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontSize: SongTextWidget.fontSize,
-                  color: textEnab_(context),
-                  height: SongTextWidget.height,
-                ),
-                decoration: InputDecoration(
-                    hintText: 'Chwyty ${isRefren?'ref.':'zwr.'}',
-                    hintStyle: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: SongTextWidget.fontSize,
-                      color: hintEnab_(context),
-                      height: SongTextWidget.height,
-                    ),
-                    border: InputBorder.none,
-                    isDense: true,
-                    contentPadding: EdgeInsets.zero,
-                ),
+                style: _textStyle(context),
+                decoration: _inputDecoration(context, 'Chwyty ${isRefren?'ref.':'zwr.'}'),
                 minLines: textController.text.split('\n').length,
                 maxLines: null,
                 minWidth: CHORDS_WIDGET_MIN_WIDTH,
@@ -494,41 +471,48 @@ class ButtonsWidget extends StatelessWidget{
 
       AppButton(
         icon: Icon(MdiIcons.chevronDoubleDown),
-        onTap: (){
-
-          ChordsProvider provider = ChordsProvider.of(context);
-
-          ChordShifter cs = ChordShifter(provider.chords, 0);
-          cs.down();
-
-          String chords = cs.getText(true);
-          provider.controller.text = chords;
-          provider.chords = chords;
-
-          provider.controller.selection = TextSelection.collapsed(offset: provider.chords.length);
-        },
+        onTap: () => _shiftChords(context, down: true),
       ),
 
       AppButton(
         icon: Icon(MdiIcons.chevronDoubleUp),
-        onTap: (){
-
-          ChordsProvider provider = ChordsProvider.of(context);
-
-          ChordShifter cs = ChordShifter(provider.chords, 0);
-          cs.up();
-
-          String chords = cs.getText(true);
-          provider.controller.text = chords;
-          provider.chords = chords;
-
-          provider.controller.selection = TextSelection.collapsed(offset: provider.chords.length);
-          //parent.onTextChanged?.call(chords, handleErrors(context, isRefren));
-        },
+        onTap: () => _shiftChords(context, down: false),
       ),
     ],
   );
 
+}
+
+void _shiftChords(BuildContext context, {required bool down}) {
+  ChordsProvider provider = ChordsProvider.of(context);
+
+  ChordShifter cs = ChordShifter(provider.chords, 0);
+  if (down) {
+    cs.down();
+  } else {
+    cs.up();
+  }
+
+  String chords = cs.getText(true);
+  provider.controller.text = chords;
+  provider.chords = chords;
+
+  provider.controller.selection = TextSelection.collapsed(offset: provider.chords.length);
+}
+
+List<Widget> _buildWarningShades<T extends SongEditError>(
+    BuildContext context,
+    ErrorProvider<T> provider,
+    int lineCount,
+) {
+  return List.generate(lineCount, (i) {
+    final error = provider.errorAt(i);
+    return WarningShade(
+      error == null
+          ? background_(context).withValues(alpha: 0)
+          : error.color,
+    );
+  });
 }
 
 class ChordPresenceWarning extends StatelessWidget{
@@ -537,27 +521,12 @@ class ChordPresenceWarning extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Consumer<ErrorProvider<ChordsMissingError>>(
-    builder: (context, provider, child){
-
-      List<Widget> lineWidgets = [];
-
+    builder: (context, provider, child) {
       int lines = TextProvider.of(context).text.split('\n').length;
-      for(int i=0; i<lines; i++){
-        ChordsMissingError? error = provider.errorAt(i);
-        lineWidgets.add(
-            WarningShade(
-                error==null?
-                background_(context).withValues(alpha: 0):
-                error.color
-            )
-        );
-      }
-
       return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: lineWidgets
+        mainAxisSize: MainAxisSize.min,
+        children: _buildWarningShades(context, provider, lines),
       );
-
     },
   );
 
@@ -570,7 +539,7 @@ class WarningShade extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: SongTextWidget.fontSize * SongTextWidget.height,
+    height: _fontSize * _lineHeight,
     child: Padding(
       padding: EdgeInsets.symmetric(vertical: 0.5),
       child: AnimatedContainer(
@@ -589,31 +558,18 @@ class WarningShade extends StatelessWidget{
 class TextLengthWarning extends StatelessWidget{
 
   @override
-  Widget build(BuildContext context) => Consumer<ErrorProvider<TextTooLongError>>(builder: (context, provider, child) {
-
-        List<Widget> lineWidgets = [];
-
-        int lines = TextProvider.of(context).text.split('\n').length;
-        for(int i=0; i<lines; i++){
-          TextTooLongError? error = provider.errorAt(i);
-          lineWidgets.add(
-              WarningShade(
-                  error==null?
-                  background_(context).withValues(alpha: 0):
-                  error.color
-              )
-          );
-        }
-
-        return Padding(
-          padding: EdgeInsets.only(left: 3),
-          child: SizedBox(
-            width: Dimen.iconMarg+2,
-            child: Column(children: lineWidgets),
-          ),
-        );
-
-      });
+  Widget build(BuildContext context) => Consumer<ErrorProvider<TextTooLongError>>(
+    builder: (context, provider, child) {
+      int lines = TextProvider.of(context).text.split('\n').length;
+      return Padding(
+        padding: EdgeInsets.only(left: 3),
+        child: SizedBox(
+          width: Dimen.iconMarg+2,
+          child: Column(children: _buildWarningShades(context, provider, lines)),
+        ),
+      );
+    },
+  );
 
 }
 
@@ -621,30 +577,22 @@ class LineCountWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) => Consumer2<TextProvider, ChordsProvider>(
-          builder: (context, textProv, chordsProv, child) {
-            int textLines = textProv.text.split('\n').length;
-            int chordsLines = chordsProv.chords.split('\n').length;
+    builder: (context, textProv, chordsProv, child) {
+      int textLines = textProv.text.split('\n').length;
+      int chordsLines = chordsProv.chords.split('\n').length;
+      int lines = max(textLines, chordsLines);
 
-            int lines = max(textLines, chordsLines);
-            String text = '';
-            for (int i = 0; i < lines; i++)
-              text += '${i + 1}\n';
-
-            if (text.length > 0)
-              text = text.substring(0, text.length - 1);
-
-            return Text(
-              text,
-              textAlign: TextAlign.end,
-              style: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontSize: Dimen.textSizeTiny, //initial font size
-                  color: hintEnab_(context),
-                  height: SongTextWidget.fontSize * SongTextWidget.height /
-                      Dimen.textSizeTiny
-              ),
-            );
-          }
+      return Text(
+        List.generate(lines, (i) => '${i + 1}').join('\n'),
+        textAlign: TextAlign.end,
+        style: TextStyle(
+          fontFamily: 'Roboto',
+          fontSize: Dimen.textSizeTiny, //initial font size
+          color: hintEnab_(context),
+          height: _fontSize * _lineHeight / Dimen.textSizeTiny,
+        ),
       );
+    },
+  );
 
 }

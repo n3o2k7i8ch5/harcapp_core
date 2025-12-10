@@ -5,6 +5,26 @@ import 'package:harcapp_core/values/dimen.dart';
 
 import 'tag.dart';
 
+Widget Function(BuildContext, T, bool) _defaultTagBuilder<T>({
+  required Iterable<T> checkedTags,
+  void Function(T, bool)? onTagTap,
+  double fontSize = Dimen.textSizeNormal,
+  double uncheckedElevation = 0,
+  String Function(T)? tagToName,
+}) => (context, tag, checked) =>
+    checkedTags.contains(tag)
+        ? Tag.checked(
+            tagToName?.call(tag) ?? tag.toString(),
+            onTap: onTagTap == null ? null : () => onTagTap(tag, checkedTags.contains(tag)),
+            fontSize: fontSize,
+          )
+        : Tag(
+            tagToName?.call(tag) ?? tag.toString(),
+            onTap: onTagTap == null ? null : () => onTagTap(tag, checkedTags.contains(tag)),
+            fontSize: fontSize,
+            elevation: uncheckedElevation,
+            textColor: hintEnab_(context),
+          );
 
 enum Layout{LINEAR, WRAP}
 class TagsWidget<T> extends StatelessWidget{
@@ -99,19 +119,12 @@ class TagsWidget<T> extends StatelessWidget{
     onTagTap: onTagTap,
     separator: separator,
     layout: Layout.LINEAR,
-    tagBuilder: (context, tag, checked) =>
-    checkedTags.contains(tag)?
-    Tag.checked(
-      tagToName?.call(tag)??tag.toString(),
-      onTap: onTagTap==null?null:() => onTagTap(tag, checkedTags.contains(tag)),
+    tagBuilder: _defaultTagBuilder<T>(
+      checkedTags: checkedTags,
+      onTagTap: onTagTap,
       fontSize: fontSize,
-    ):
-    Tag(
-      tagToName?.call(tag)??tag.toString(),
-      onTap: onTagTap==null?null:() => onTagTap(tag, checkedTags.contains(tag)),
-      fontSize: fontSize,
-      elevation: uncheckedElevation,
-      textColor: hintEnab_(context),
+      uncheckedElevation: uncheckedElevation,
+      tagToName: tagToName,
     ),
   );
 
@@ -137,19 +150,12 @@ class TagsWidget<T> extends StatelessWidget{
     layout: Layout.WRAP,
     wrapAlignment: wrapAlignment,
     separator: separator,
-    tagBuilder: (context, tag, chekced) =>
-    checkedTags.contains(tag)?
-    Tag.checked(
-      tagToName?.call(tag)??tag.toString(),
-      onTap: onTagTap==null?null:() => onTagTap(tag, checkedTags.contains(tag)),
+    tagBuilder: _defaultTagBuilder<T>(
+      checkedTags: checkedTags,
+      onTagTap: onTagTap,
       fontSize: fontSize,
-    ):
-    Tag(
-      tagToName?.call(tag)??tag.toString(),
-      onTap: onTagTap==null?null:() => onTagTap(tag, checkedTags.contains(tag)),
-      fontSize: fontSize,
-      elevation: uncheckedElevation,
-      textColor: hintEnab_(context),
+      uncheckedElevation: uncheckedElevation,
+      tagToName: tagToName,
     ),
   );
 

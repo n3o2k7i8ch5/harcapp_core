@@ -121,56 +121,39 @@ class SimpleButton extends StatelessWidget{
 
     assert(iconColor != null || textColor != null || context != null, 'Color or context must not be null.');
 
-    List<Widget> children;
+    final Color resolvedIconColor = iconColor ?? textColor ?? iconEnab_(context!);
+    final Color resolvedTextColor = textColor ?? iconColor ?? iconEnab_(context!);
+    final double resolvedIconSize = iconSize ?? (dense ? 18.0 : Dimen.iconSize);
+    final double resolvedTextSize = textSize ?? (dense ? Dimen.textSizeNormal : Dimen.textSizeBig);
+    final double spacing = dense ? Dimen.defMarg : Dimen.iconMarg;
+    final bool isHorizontal = direction == Axis.horizontal;
 
-    if(direction == Axis.horizontal) children = [
-      if(iconLeading && (iconWidget != null || icon != null))
-        iconWidget??Icon(icon, color: iconColor??textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.iconSize)),
+    Widget? iconW = (iconWidget != null || icon != null)
+        ? (iconWidget ?? Icon(icon, color: resolvedIconColor, size: resolvedIconSize))
+        : null;
 
-      if(text != null)
-        SizedBox(height: Dimen.iconSize, width: dense?Dimen.defMarg:Dimen.iconMarg),
-
-      if(text != null)
-        Text(
-          text,
-          style: AppTextStyle(
-              color: textColor??iconColor??iconEnab_(context!),
-              fontWeight: fontWeight,
-              fontSize: textSize??(dense?Dimen.textSizeNormal:Dimen.textSizeBig)
-          ),
-        ),
-
-      if(text != null)
-        SizedBox(width: dense?Dimen.defMarg:Dimen.iconMarg),
-
-      if(!iconLeading && (iconWidget != null || icon != null))
-        iconWidget??Icon(icon, color: iconColor??textColor??iconEnab_(context!)),
-
-    ];
-    else
-      children = [
-        if(iconLeading && (iconWidget != null || icon != null))
-          iconWidget??Icon(icon, color: iconColor??textColor??iconEnab_(context!), size: iconSize??(dense?18.0:Dimen.iconSize)),
-
-        if(text != null)
-          SizedBox(height: dense?Dimen.defMarg:Dimen.iconMarg),
-
-        if(text != null)
-          Text(
+    Widget? textW = text != null
+        ? Text(
             text,
             style: AppTextStyle(
-                color: textColor??iconEnab_(context!),
-                fontWeight: fontWeight,
-                fontSize: textSize??(dense?Dimen.textSizeNormal:Dimen.textSizeBig)
+              color: resolvedTextColor,
+              fontWeight: fontWeight,
+              fontSize: resolvedTextSize,
             ),
-          ),
+          )
+        : null;
 
-        if(text != null && !iconLeading)
-          SizedBox(height: dense?Dimen.defMarg:Dimen.iconMarg),
+    Widget spacer = isHorizontal
+        ? SizedBox(width: spacing, height: Dimen.iconSize)
+        : SizedBox(height: spacing);
 
-        if(!iconLeading && (iconWidget != null || icon != null))
-          iconWidget??Icon(icon, color: iconColor??textColor??iconEnab_(context!)),
-      ];
+    List<Widget> children = [
+      if (iconLeading && iconW != null) iconW,
+      if (text != null) spacer,
+      if (textW != null) textW,
+      if (text != null && !iconLeading) spacer,
+      if (!iconLeading && iconW != null) iconW,
+    ];
 
     return SimpleButton(
       key: key,
