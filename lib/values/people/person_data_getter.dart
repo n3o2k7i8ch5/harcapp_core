@@ -52,14 +52,14 @@ class PersonDataDialogState extends State<PersonDataDialog>{
   Org? org;
 
   Person get currentPerson => Person(
-    name: nameController.text.trim(),
-    druzyna: druzynaController.text.trim(),
-    hufiec: hufiecController.text.trim(),
-    rankInstr: rankInstr,
-    rankHarc: rankHarc,
-    org: org
+      name: nameController.text.trim(),
+      druzyna: druzynaController.text.trim(),
+      hufiec: hufiecController.text.trim(),
+      rankInstr: rankInstr,
+      rankHarc: rankHarc,
+      org: org
   );
-  
+
   @override
   void initState() {
     nameController = TextEditingController(text: initialPerson?.name);
@@ -87,119 +87,119 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                 AppBarX(title: widget.title),
 
                 Expanded(
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    // shrinkWrap: true,
-                    child: Column(
-                      children: [
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      // shrinkWrap: true,
+                      child: Column(
+                        children: [
 
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 10,
-                          left: Dimen.TEXT_FIELD_PADD,
-                          right: Dimen.TEXT_FIELD_PADD,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-
-                            const Text(
-                              'Dzięki temu każdy użytkownik będzie wiedział, kto dodał tę piosenkę!',
-                              style: AppTextStyle(fontSize: Dimen.textSizeBig),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 10,
+                              left: Dimen.TEXT_FIELD_PADD,
+                              right: Dimen.TEXT_FIELD_PADD,
                             ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
 
-                            const SizedBox(height: Dimen.sideMarg),
+                                const Text(
+                                  'Dzięki temu każdy użytkownik będzie wiedział, kto dodał tę piosenkę!',
+                                  style: AppTextStyle(fontSize: Dimen.textSizeBig),
+                                ),
 
-                            Container(
+                                const SizedBox(height: Dimen.sideMarg),
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(AppCard.defRadius),
+                                    color: cardEnab_(context),
+                                  ),
+                                  child: AppTextFieldHint(
+                                    hint: 'Imię i nazwisko:',
+                                    hintTop: 'Imię i nazwisko',
+                                    controller: nameController,
+                                    onChanged: (_, __) => widget.onChanged?.call(currentPerson),
+                                  ),
+                                ),
+
+                                Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(AppCard.defRadius),
+                                      color: cardEnab_(context),
+                                    ),
+                                    child: AppTextFieldHint(
+                                      hint: 'Drużyna:',
+                                      hintTop: 'Drużyna',
+                                      controller: druzynaController,
+                                      onChanged: (_, __) => widget.onChanged?.call(currentPerson),
+                                    )
+                                ),
+
+                                Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(AppCard.defRadius),
+                                      color: cardEnab_(context),
+                                    ),
+                                    child: AppTextFieldHint(
+                                      hint: 'Hufiec:',
+                                      hintTop: 'Hufiec',
+                                      controller: hufiecController,
+                                      onChanged: (_, __) => widget.onChanged?.call(currentPerson),
+                                    )
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(AppCard.defRadius),
                                 color: cardEnab_(context),
                               ),
-                              child: AppTextFieldHint(
-                                hint: 'Imię i nazwisko:',
-                                hintTop: 'Imię i nazwisko',
-                                controller: nameController,
-                                onChanged: (_, __) => widget.onChanged?.call(currentPerson),
+                              child: RankHarcInputField(
+                                rankHarc,
+                                onChanged: (value){
+                                  setState(() => rankHarc = value);
+                                  widget.onChanged?.call(currentPerson);
+                                },
+                                withIcon: false,
+                              )
+                          ),
+
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(AppCard.defRadius),
+                                color: cardEnab_(context),
                               ),
-                            ),
-
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(AppCard.defRadius),
-                            color: cardEnab_(context),
+                              child: RankInstrInputField(
+                                rankInstr,
+                                onChanged: (value){
+                                  setState(() => rankInstr = value);
+                                  widget.onChanged?.call(currentPerson);
+                                },
+                                withIcon: false,
+                              )
                           ),
-                          child: AppTextFieldHint(
-                              hint: 'Drużyna:',
-                              hintTop: 'Drużyna',
-                              controller: druzynaController,
-                              onChanged: (_, __) => widget.onChanged?.call(currentPerson),
-                            )
-                        ),
 
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(AppCard.defRadius),
-                            color: cardEnab_(context),
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(AppCard.defRadius),
+                                color: cardEnab_(context),
+                              ),
+                              child: OrgInputField(
+                                org,
+                                onChanged: (value){
+                                  setState(() => org = value);
+                                  widget.onChanged?.call(currentPerson);
+                                },
+                                withIcon: false,
+                              )
                           ),
-                          child: AppTextFieldHint(
-                              hint: 'Hufiec:',
-                              hintTop: 'Hufiec',
-                              controller: hufiecController,
-                              onChanged: (_, __) => widget.onChanged?.call(currentPerson),
-                            )
-                        ),
-                          ],
-                        ),
+
+                        ],
                       ),
-
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppCard.defRadius),
-                      color: cardEnab_(context),
-                    ),
-                    child: RankHarcInputField(
-                        rankHarc,
-                        onChanged: (value){
-                          setState(() => rankHarc = value);
-                          widget.onChanged?.call(currentPerson);
-                        },
-                        withIcon: false,
-                      )
-                  ),
-
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppCard.defRadius),
-                      color: cardEnab_(context),
-                    ),
-                    child: RankInstrInputField(
-                        rankInstr,
-                        onChanged: (value){
-                          setState(() => rankInstr = value);
-                          widget.onChanged?.call(currentPerson);
-                        },
-                        withIcon: false,
-                      )
-                  ),
-
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppCard.defRadius),
-                      color: cardEnab_(context),
-                    ),
-                    child: OrgInputField(
-                        org,
-                        onChanged: (value){
-                          setState(() => org = value);
-                          widget.onChanged?.call(currentPerson);
-                        },
-                        withIcon: false,
-                      )
-                  ),
-
-                    ],
-                  ),
-                  )
+                    )
                 ),
 
                 Padding(
