@@ -100,59 +100,43 @@ class PersonDataDialogState extends State<PersonDataDialog>{
 
                           const SizedBox(height: Dimen.sideMarg),
 
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(AppCard.defRadius),
-                              color: cardEnab_(context),
-                            ),
+                          _Container(
                             child: AppTextFieldHint(
                               hint: 'Imię i nazwisko:',
                               hintTop: 'Imię i nazwisko',
                               controller: nameController,
-                              contentPadding: const EdgeInsets.all(Dimen.defMarg),
+                              contentPadding: const EdgeInsets.only(left: 10),
                               onChanged: (_, __) => widget.onChanged?.call(currentPerson),
                             ),
                           ),
 
                           const SizedBox(height: Dimen.sideMarg),
 
-                          Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(AppCard.defRadius),
-                                color: cardEnab_(context),
-                              ),
+                          _Container(
                               child: AppTextFieldHint(
                                 hint: 'Drużyna:',
                                 hintTop: 'Drużyna',
                                 controller: druzynaController,
-                                contentPadding: const EdgeInsets.all(Dimen.defMarg),
+                                contentPadding: const EdgeInsets.only(left: 10),
                                 onChanged: (_, __) => widget.onChanged?.call(currentPerson),
                               )
                           ),
 
                           const SizedBox(height: Dimen.sideMarg),
 
-                          Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(AppCard.defRadius),
-                                color: cardEnab_(context),
-                              ),
+                          _Container(
                               child: AppTextFieldHint(
                                 hint: 'Hufiec:',
                                 hintTop: 'Hufiec',
                                 controller: hufiecController,
-                                contentPadding: const EdgeInsets.all(Dimen.defMarg),
+                                contentPadding: const EdgeInsets.only(left: 10),
                                 onChanged: (_, __) => widget.onChanged?.call(currentPerson),
                               )
                           ),
 
                           const SizedBox(height: Dimen.sideMarg),
 
-                          Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(AppCard.defRadius),
-                                color: cardEnab_(context),
-                              ),
+                          _Container(
                               child: RankHarcInputField(
                                 rankHarc,
                                 onChanged: (value){
@@ -165,11 +149,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
 
                           const SizedBox(height: Dimen.sideMarg),
 
-                          Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(AppCard.defRadius),
-                                color: cardEnab_(context),
-                              ),
+                          _Container(
                               child: RankInstrInputField(
                                 rankInstr,
                                 onChanged: (value){
@@ -182,11 +162,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
 
                           const SizedBox(height: Dimen.sideMarg),
 
-                          Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(AppCard.defRadius),
-                                color: cardEnab_(context),
-                              ),
+                          _Container(
                               child: OrgInputField(
                                 org,
                                 onChanged: (value){
@@ -237,6 +213,29 @@ class PersonDataDialogState extends State<PersonDataDialog>{
           )
       ),
     ),
+  );
+
+}
+
+class _Container extends StatelessWidget{
+
+  final Widget child;
+
+  const _Container({
+    required this.child,
+    super.key
+  });
+
+  @override
+  Widget build(BuildContext context) => Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppCard.defRadius),
+        color: cardEnab_(context),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(Dimen.defMarg),
+        child: child,
+      )
   );
 
 }
