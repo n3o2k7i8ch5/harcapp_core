@@ -273,7 +273,7 @@ class _SongTextWidgetState extends State<SongTextWidget>{
                             ),
                             border: InputBorder.none,
                             isDense: true,
-                            contentPadding: EdgeInsets.only(top: TEXT_FIELD_TOP_PADD),
+                            contentPadding: EdgeInsets.zero,
                         ),
                         minLines: chordsController.text.split('\n').length,
                         maxLines: null,
@@ -383,7 +383,7 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
           children: [
 
             Positioned(
-                top: TEXT_FIELD_TOP_PADD,
+                top: 0,
                 right: 0,
                 left: 0,
                 child: ChordPresenceWarning()
@@ -407,7 +407,7 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
                     ),
                     border: InputBorder.none,
                     isDense: true,
-                    contentPadding: EdgeInsets.only(top: TEXT_FIELD_TOP_PADD),
+                    contentPadding: EdgeInsets.zero,
                 ),
                 minLines: textController.text.split('\n').length,
                 maxLines: null,
@@ -589,9 +589,7 @@ class WarningShade extends StatelessWidget{
 class TextLengthWarning extends StatelessWidget{
 
   @override
-  Widget build(BuildContext context) => Padding(
-      padding: EdgeInsets.only(top: TEXT_FIELD_TOP_PADD),
-      child: Consumer<ErrorProvider<TextTooLongError>>(builder: (context, provider, child) {
+  Widget build(BuildContext context) => Consumer<ErrorProvider<TextTooLongError>>(builder: (context, provider, child) {
 
         List<Widget> lineWidgets = [];
 
@@ -615,17 +613,14 @@ class TextLengthWarning extends StatelessWidget{
           ),
         );
 
-      })
-  );
+      });
 
 }
 
 class LineCountWidget extends StatelessWidget{
 
   @override
-  Widget build(BuildContext context) => Padding(
-      padding: EdgeInsets.only(top: TEXT_FIELD_TOP_PADD),
-      child: Consumer2<TextProvider, ChordsProvider>(
+  Widget build(BuildContext context) => Consumer2<TextProvider, ChordsProvider>(
           builder: (context, textProv, chordsProv, child) {
             int textLines = textProv.text.split('\n').length;
             int chordsLines = chordsProv.chords.split('\n').length;
@@ -650,7 +645,6 @@ class LineCountWidget extends StatelessWidget{
               ),
             );
           }
-      )
-  );
+      );
 
 }
