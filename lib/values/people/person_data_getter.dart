@@ -105,7 +105,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                               hint: 'Imię i nazwisko:',
                               hintTop: 'Imię i nazwisko',
                               controller: nameController,
-                              contentPadding: const EdgeInsets.only(left: 10),
+                              contentPadding: const EdgeInsets.only(left: 14),
                               onChanged: (_, __) => widget.onChanged?.call(currentPerson),
                             ),
                           ),
@@ -117,7 +117,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                                 hint: 'Drużyna:',
                                 hintTop: 'Drużyna',
                                 controller: druzynaController,
-                                contentPadding: const EdgeInsets.only(left: 10),
+                                contentPadding: const EdgeInsets.only(left: 14),
                                 onChanged: (_, __) => widget.onChanged?.call(currentPerson),
                               )
                           ),
@@ -129,7 +129,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                                 hint: 'Hufiec:',
                                 hintTop: 'Hufiec',
                                 controller: hufiecController,
-                                contentPadding: const EdgeInsets.only(left: 10),
+                                contentPadding: const EdgeInsets.only(left: 14),
                                 onChanged: (_, __) => widget.onChanged?.call(currentPerson),
                               )
                           ),
@@ -221,10 +221,7 @@ class _Container extends StatelessWidget{
 
   final Widget child;
 
-  const _Container({
-    required this.child,
-    super.key
-  });
+  const _Container({required this.child});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -233,7 +230,7 @@ class _Container extends StatelessWidget{
         color: cardEnab_(context),
       ),
       child: Padding(
-        padding: EdgeInsets.all(Dimen.defMarg),
+        padding: EdgeInsets.all(Dimen.defMarg/2),
         child: child,
       )
   );
