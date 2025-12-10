@@ -104,6 +104,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                             child: AppTextFieldHint(
                               hint: 'Imię i nazwisko:',
                               hintTop: 'Imię i nazwisko',
+                              style: AppTextStyle(fontSize: Dimen.textSizeBig),
                               controller: nameController,
                               contentPadding: const EdgeInsets.only(left: 16),
                               onChanged: (_, __) => widget.onChanged?.call(currentPerson),
@@ -116,6 +117,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                               child: AppTextFieldHint(
                                 hint: 'Drużyna:',
                                 hintTop: 'Drużyna',
+                                style: AppTextStyle(fontSize: Dimen.textSizeBig),
                                 controller: druzynaController,
                                 contentPadding: const EdgeInsets.only(left: 16),
                                 onChanged: (_, __) => widget.onChanged?.call(currentPerson),
@@ -128,6 +130,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                               child: AppTextFieldHint(
                                 hint: 'Hufiec:',
                                 hintTop: 'Hufiec',
+                                style: AppTextStyle(fontSize: Dimen.textSizeBig),
                                 controller: hufiecController,
                                 contentPadding: const EdgeInsets.only(left: 16),
                                 onChanged: (_, __) => widget.onChanged?.call(currentPerson),
