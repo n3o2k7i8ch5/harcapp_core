@@ -20,10 +20,17 @@ class PersonDataDialog extends StatefulWidget{
   final void Function(Person)? onChanged;
   final void Function(Person)? onAccepted;
 
+  final String title;
+  final String saveText;
+  final String cancelText;
+
   const PersonDataDialog({
     this.initialPerson,
     this.onChanged,
     this.onAccepted,
+    this.title = 'Twoje dane',
+    this.saveText = 'Dalej',
+    this.cancelText = 'Anuluj',
     super.key
   });
 
@@ -76,7 +83,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
 
-                AppBarX(title: 'Twoje dane'),
+                AppBarX(title: widget.title),
 
                 Expanded(
                   child: SingleChildScrollView(
@@ -158,15 +165,32 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                   )
                 ),
 
-                SimpleButton.from(
-                    context: context,
-                    margin: EdgeInsets.zero,
-                    radius: 0,
-                    text: 'Dalej',
-                    onTap: (){
-                      widget.onAccepted?.call(currentPerson);
-                      popPage(context, root: true);
-                    }
+                Row(
+                  children: [
+
+                    if(widget.cancelText.isNotEmpty)
+                      SimpleButton.from(
+                        context: context,
+                        margin: EdgeInsets.zero,
+                        radius: 0,
+                        text: widget.cancelText,
+                        onTap: () => popPage(context, root: true),
+                      ),
+
+                    const SizedBox(width: Dimen.defMarg),
+
+                    SimpleButton.from(
+                        context: context,
+                        margin: EdgeInsets.zero,
+                        radius: 0,
+                        text: widget.saveText,
+                        onTap: (){
+                          widget.onAccepted?.call(currentPerson);
+                          popPage(context, root: true);
+                        }
+                    )
+
+                  ],
                 )
 
               ],
