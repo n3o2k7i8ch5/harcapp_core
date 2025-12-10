@@ -272,7 +272,8 @@ class _SongTextWidgetState extends State<SongTextWidget>{
                               height: SongTextWidget.height,
                             ),
                             border: InputBorder.none,
-                            isDense: true
+                            isDense: true,
+                            contentPadding: EdgeInsets.only(top: TEXT_FIELD_TOP_PADD),
                         ),
                         minLines: chordsController.text.split('\n').length,
                         maxLines: null,
@@ -405,7 +406,8 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
                       height: SongTextWidget.height,
                     ),
                     border: InputBorder.none,
-                    isDense: true
+                    isDense: true,
+                    contentPadding: EdgeInsets.only(top: TEXT_FIELD_TOP_PADD),
                 ),
                 minLines: textController.text.split('\n').length,
                 maxLines: null,
