@@ -25,6 +25,16 @@ class Person{
     this.email = const []
   });
 
+  bool isEmpty() =>
+      name.trim().isEmpty &&
+      rankHarc == null &&
+      rankInstr == null &&
+      druzyna == null &&
+      hufiec == null &&
+      org == null &&
+      (comment == null || comment!.trim().isEmpty) &&
+      email.isEmpty;
+
   Map toApiJsonMap() =>
       {
         'name': name,
