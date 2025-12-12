@@ -159,6 +159,7 @@ class KonspektTileWidget extends StatelessWidget{
                                   padding: EdgeInsets.all(Dimen.defMarg),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
 
                                       Icon(
