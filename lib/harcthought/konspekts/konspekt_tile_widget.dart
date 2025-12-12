@@ -161,7 +161,11 @@ class KonspektTileWidget extends StatelessWidget{
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
 
-                                      Icon(MdiIcons.timerOutline, size: Dimen.iconSmallSize, color: iconDisab_(context)),
+                                      Icon(
+                                          MdiIcons.timerOutline,
+                                          size: Dimen.iconSmallSize,
+                                          color: background??konspekt.type.color(context)
+                                      ),
 
                                       const SizedBox(width: Dimen.defMarg),
 
