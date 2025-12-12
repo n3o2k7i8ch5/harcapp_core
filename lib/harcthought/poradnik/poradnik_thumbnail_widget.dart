@@ -111,27 +111,22 @@ class PoradnikThumbnailWidget extends StatelessWidget {
                       Positioned(
                         bottom: 2*Dimen.defMarg,
                         right: 2*Dimen.defMarg,
-                        child: Container(
-                          clipBehavior: Clip.hardEdge,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(AppCard.defRadius),
-                            color: Colors.white.withValues(alpha: 0.7),
-                          ),
-                          child: Blur(
-                            sigma: 2,
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                '${poradnik.pageCount} stron',
-                                style: AppTextStyle(
-                                  color: Colors.black,
-                                  fontWeight: weightHalfBold,
-                                ),
-                                textAlign: TextAlign.center,
+                        child: Blur(
+                          sigma: 2,
+                          color: Colors.white.withValues(alpha: 0.7),
+                          borderRadius: BorderRadius.circular(AppCard.defRadius),
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              '${poradnik.pageCount} stron',
+                              style: AppTextStyle(
+                                color: Colors.black,
+                                fontWeight: weightHalfBold,
                               ),
+                              textAlign: TextAlign.center,
                             ),
-                          )
-                        ),
+                          ),
+                        )
                       )
 
                   ],
