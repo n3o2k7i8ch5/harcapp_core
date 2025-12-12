@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/meto_row.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
@@ -25,6 +26,7 @@ class KonspektTileWidget extends StatelessWidget{
   final bool showSummary;
   final bool showPartOf;
   final bool showSpheres;
+  final bool showTime;
   final void Function()? onTap;
 
   const KonspektTileWidget(
@@ -36,6 +38,7 @@ class KonspektTileWidget extends StatelessWidget{
         this.showSummary = true,
         this.showPartOf = true,
         this.showSpheres = true,
+        this.showTime = true,
         this.onTap, 
         super.key
       });
@@ -134,6 +137,18 @@ class KonspektTileWidget extends StatelessWidget{
                           Padding(
                             padding: EdgeInsets.only(top: 6.0),
                             child: KonspektSphereList(konspekt),
+                          ),
+
+                        if(showTime && konspekt.duration != null)
+                          Padding(
+                            padding: EdgeInsets.only(top: 6.0),
+                            child: Text(
+                              durationToString(konspekt.duration),
+                              style: AppTextStyle(
+                                fontSize: Dimen.textSizeNormal,
+                                color: textDisab_(context),
+                              ),
+                            ),
                           )
 
                       ],

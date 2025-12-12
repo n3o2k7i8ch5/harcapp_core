@@ -70,13 +70,13 @@ class FormThumbnailTagsWidget extends StatelessWidget{
 
 }
 
-class FormThumbnailWidget extends StatelessWidget{
+class FormTileWidget extends StatelessWidget{
 
   final HarcForm form;
   final double elevation;
   final void Function()? onTap;
 
-  const FormThumbnailWidget(this.form, {this.elevation = 0, this.onTap, super.key});
+  const FormTileWidget(this.form, {this.elevation = 0, this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) => AspectRatio(
