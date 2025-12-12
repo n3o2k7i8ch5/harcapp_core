@@ -150,29 +150,32 @@ class KonspektTileWidget extends StatelessWidget{
                         if(showTime && konspekt.duration != null)
                           Padding(
                             padding: EdgeInsets.only(top: 6.0),
-                            child: Material(
-                              color: textEnab_(context),
-                              borderRadius: BorderRadius.circular(100),
-                              child: Padding(
-                                padding: EdgeInsets.all(Dimen.defMarg),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Material(
+                                color: textEnab_(context),
+                                borderRadius: BorderRadius.circular(100),
+                                child: Padding(
+                                  padding: EdgeInsets.all(Dimen.defMarg),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
 
-                                    Icon(MdiIcons.timerOutline, size: Dimen.iconSmallSize, color: iconDisab_(context)),
+                                      Icon(MdiIcons.timerOutline, size: Dimen.iconSmallSize, color: iconDisab_(context)),
 
-                                    const SizedBox(width: Dimen.defMarg),
+                                      const SizedBox(width: Dimen.defMarg),
 
-                                    Text(
-                                      durationToString(konspekt.duration),
-                                      style: AppTextStyle(
-                                        fontSize: Dimen.textSizeNormal,
-                                        fontWeight: weightHalfBold,
-                                        color: background??konspekt.type.color(context),
+                                      Text(
+                                        durationToString(konspekt.duration),
+                                        style: AppTextStyle(
+                                          fontSize: Dimen.textSizeNormal,
+                                          fontWeight: weightHalfBold,
+                                          color: background??konspekt.type.color(context),
+                                        ),
                                       ),
-                                    ),
 
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             )
