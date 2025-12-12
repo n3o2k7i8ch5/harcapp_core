@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 String _monthToStr(DateTime date, {bool shortMonth = false, bool showDay = true}){
     switch (date.month) {
@@ -34,13 +33,13 @@ String _monthToStr(DateTime date, {bool shortMonth = false, bool showDay = true}
 }
 
 String _timeToStr(DateTime date, {bool showSeconds = false}){
-  String hours = (date.hour<10?'0':'') + date.hour.toString();
-  String minutes = (date.minute<10?'0':'') + date.minute.toString();
+  final hours = date.hour.toString().padLeft(2, '0');
+  final minutes = date.minute.toString().padLeft(2, '0');
 
   if(!showSeconds)
-    return '$hours:$minutes'.trimLeft();
+    return '$hours:$minutes';
 
-  String seconds = (date.second<10?'0':'') + date.second.toString();
+  final seconds = date.second.toString().padLeft(2, '0');
 
   return '$hours:$minutes:$seconds';
 }
@@ -101,8 +100,8 @@ String dateRangeToString(
 
   bool yearsMatch = dateStart.year == dateEnd.year;
 
-  String fullString = '${dateToString(
-      dateStart,
+  String fmt(DateTime date) => dateToString(
+      date,
       showYear: showYear,
       showMonth: showMonth,
       showDay: showDay,
@@ -111,17 +110,9 @@ String dateRangeToString(
       showSeconds: showSeconds,
       shortMonth: shortMonth,
       yearAbbr: yearAbbr
-  )} - ${dateToString(
-      dateEnd,
-      showYear: showYear,
-      showMonth: showMonth,
-      showDay: showDay,
-      withTime: withTime,
-      dateTimeSep: dateTimeSep,
-      showSeconds: showSeconds,
-      shortMonth: shortMonth,
-      yearAbbr: yearAbbr
-  )}';
+  );
+
+  String fullString = '${fmt(dateStart)} - ${fmt(dateEnd)}';
 
   if(!yearsMatch)
     return fullString;
@@ -170,9 +161,8 @@ String dateRangeToString(
 }
 
 String timeOfDayToString(TimeOfDay timeOfDay){
-  NumberFormat format = NumberFormat('00');
-  String hourStr = format.format(timeOfDay.hour);
-  String minuteStr = format.format(timeOfDay.minute);
+  String hourStr = timeOfDay.hour.toString().padLeft(2, '0');
+  String minuteStr = timeOfDay.minute.toString().padLeft(2, '0');
 
   return '${hourStr}:${minuteStr}';
 }
@@ -183,7 +173,7 @@ String timeOfDayRangeToString(
   TimeOfDay endTime,
 ) => '${timeOfDayToString(startTime)} - ${timeOfDayToString(endTime)}';
 
-String durationToString(Duration? duration, {bool onlyBiggestTimeFactor = false}){
+String durationToString(Duration? duration, {bool onlyBiggestTimeFactor = false, bool short = false}){
 
   if(duration == null) return '-';
 
@@ -195,20 +185,36 @@ String durationToString(Duration? duration, {bool onlyBiggestTimeFactor = false}
 
   List<String> resultParts = [];
 
-  if(weeks == 1) resultParts.add('$weeks tydz.');
+  if(weeks == 1) resultParts.add(short?'$weeks t.':'$weeks tydz.');
   else if(weeks > 1) resultParts.add('$weeks tyg.');
 
-  if(days == 1) resultParts.add('$days dzień');
+  if(days == 1) resultParts.add(short?'$days d.':'$days dzień');
   else if(days > 1) resultParts.add('$days dni');
   if(onlyBiggestTimeFactor && resultParts.isNotEmpty) return resultParts.first;
 
-  if(hours != 0) resultParts.add('$hours godz.');
-  if(onlyBiggestTimeFactor && resultParts.isNotEmpty) return resultParts.first;
+  if(short){
+    String? shortPart;
 
-  if(minutes != 0) resultParts.add('$minutes min.');
-  if(onlyBiggestTimeFactor && resultParts.isNotEmpty) return resultParts.first;
+    if (hours != 0)
+      shortPart = onlyBiggestTimeFactor
+          ? '${hours}h'
+          : (minutes != 0 ? '${hours}:${minutes.toString().padLeft(2, '0')}h' : '${hours}h');
+    else if (minutes != 0)
+      shortPart = '$minutes min.';
 
-  if(seconds != 0) resultParts.add('$seconds sek.');
+    if (shortPart != null) {
+      resultParts.add(shortPart);
+      return resultParts.join(' ');
+    }
+  }else {
+    if (hours != 0) resultParts.add('$hours godz.');
+    if (onlyBiggestTimeFactor && resultParts.isNotEmpty) return resultParts.first;
+
+    if (minutes != 0) resultParts.add('$minutes min.');
+    if (onlyBiggestTimeFactor && resultParts.isNotEmpty) return resultParts.first;
+  }
+
+  if(seconds != 0) resultParts.add(short?'$seconds s.':'$seconds sek.');
 
   return resultParts.join(' ');
 

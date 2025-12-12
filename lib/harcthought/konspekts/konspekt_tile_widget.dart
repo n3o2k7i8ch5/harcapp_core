@@ -210,7 +210,7 @@ class _TimePill extends StatelessWidget{
           const SizedBox(width: Dimen.defMarg),
 
           Text(
-            durationToString(konspekt.duration),
+            durationToString(konspekt.duration, short: true),
             style: AppTextStyle(
               fontSize: Dimen.textSizeNormal,
               fontWeight: weightHalfBold,

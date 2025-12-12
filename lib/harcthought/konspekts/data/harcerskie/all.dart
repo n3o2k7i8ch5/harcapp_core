@@ -714,6 +714,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: '',
       author: DANIEL_IWANICKI,
+      customDuration: Duration(minutes: 45),
       aims: [
         aimSilaCharakteruZimno
       ],
@@ -753,6 +754,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       metos: [Meto.wedro],
       coverAuthor: 'Radio Olsztyn',
       author: DANIEL_IWANICKI,
+      customDuration: Duration(hours: 8),
       aims: [
         aimUmiejetnoscWedrowania,
         aimSilaCharakteruWedrowanie,
@@ -1196,6 +1198,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
+      customDuration: Duration(hours: 2),
       aims: [
         'Poznanie przez kadrę drużyny poglądów harcerzy i ich rodziców',
         aimUmiejetnoscDyskusji,
@@ -2534,6 +2537,7 @@ List<Konspekt> allHarcerskieKonspekts = [
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'freepik.com (vecstock)',
     author: DANIEL_IWANICKI,
+    customDuration: Duration(minutes: 15),
     aims: [
       'Utrwalenie treści Prawa Harcerskiego u uczestników.',
       'Oswojenie uczestników z treścią i wartościami wynikającymi z Prawa Harcerskiego.'
@@ -2585,6 +2589,7 @@ List<Konspekt> allHarcerskieKonspekts = [
     metos: [Meto.zuch],
     coverAuthor: 'freepik.com (Sketchepedia)',
     author: DANIEL_IWANICKI,
+    customDuration: Duration(minutes: 15),
     aims: [
       'Utrwalenie treści Prawa Zucha u uczestników.',
       'Oswojenie uczestników z treścią i wartościami wynikającymi z Prawa Zucha.'
@@ -3092,6 +3097,7 @@ List<Konspekt> allHarcerskieKonspekts = [
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: '',
       author: DANIEL_IWANICKI,
+      customDuration: Duration(minutes: 15),
       aims: [
         'Kształtowanie u uczestników postawy wdzięczności',
         'Kształtowanie u uczestników postawy przepraszania',
