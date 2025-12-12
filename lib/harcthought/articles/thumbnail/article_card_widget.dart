@@ -62,30 +62,23 @@ class ArticleCardWidget extends StatelessWidget{
               Positioned(
                   top: Dimen.defMarg,
                   left: Dimen.defMarg,
-                  child: Container(
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppCard.bigRadius)
-                    ),
-                    child: Blur(
-                      child: Container(
-                        color: cardEnab_(context).withValues(alpha: .85),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: Dimen.defMarg, horizontal: Dimen.iconMarg),
-                          child: Row(
-                            children: [
-                              ArticleSource.icon,
-                              SizedBox(width: Dimen.defMarg),
-                              Text(
-                                  article.source.displayName,
-                                  style: AppTextStyle(fontWeight: weightHalfBold, color: iconEnab_(context))
-                              )
-                            ],
-                          ),
-                        ),
+                  child: Blur(
+                    borderRadius: BorderRadius.circular(AppCard.bigRadius),
+                    color: cardEnab_(context).withValues(alpha: .85),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: Dimen.defMarg, horizontal: Dimen.iconMarg),
+                      child: Row(
+                        children: [
+                          ArticleSource.icon,
+                          SizedBox(width: Dimen.defMarg),
+                          Text(
+                              article.source.displayName,
+                              style: AppTextStyle(fontWeight: weightHalfBold, color: iconEnab_(context))
+                          )
+                        ],
                       ),
                     ),
-                  )
+                  ),
               ),
 
               Positioned(
