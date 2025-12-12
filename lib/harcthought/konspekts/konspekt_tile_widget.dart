@@ -150,7 +150,7 @@ class KonspektTileWidget extends StatelessWidget{
                                     child: _TimePill(konspekt, background: background),
                                   )
                                 : OverflowBar(
-                                    alignment: MainAxisAlignment.spaceBetween,
+                                    alignment: MainAxisAlignment.end,
                                     spacing: Dimen.defMarg,
                                     overflowAlignment: OverflowBarAlignment.end,
                                     overflowSpacing: 6.0,
@@ -188,7 +188,7 @@ class _TimePill extends StatelessWidget{
   final Konspekt konspekt;
   final Color? background;
 
-  const _TimePill(this.konspekt, {this.background, super.key});
+  const _TimePill(this.konspekt, {this.background});
 
   @override
   Widget build(BuildContext context) => Material(
