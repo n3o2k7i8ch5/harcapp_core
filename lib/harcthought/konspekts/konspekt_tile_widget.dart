@@ -150,12 +150,16 @@ class KonspektTileWidget extends StatelessWidget{
                                     child: _TimePill(konspekt, background: background),
                                   )
                                 : OverflowBar(
-                                    alignment: MainAxisAlignment.end,
+                                    alignment: MainAxisAlignment.spaceBetween,
                                     spacing: Dimen.defMarg,
                                     overflowAlignment: OverflowBarAlignment.end,
                                     overflowSpacing: 6.0,
                                     children: [
-                                      if (showSpheres) KonspektSphereList(konspekt),
+                                      if (showSpheres)
+                                        Align(
+                                          alignment: Alignment.centerRight,
+                                          child: KonspektSphereList(konspekt),
+                                        ),
                                       if (showTime && konspekt.duration != null)
                                         _TimePill(konspekt, background: background),
                                     ],
