@@ -7,6 +7,8 @@ import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/values/dimen.dart';
 
+import 'blur.dart';
+
 class MetoIcon extends StatelessWidget{
 
   final double size;
@@ -36,9 +38,9 @@ class MetoThumbnail extends StatelessWidget{
   const MetoThumbnail({required this.meto, super.key});
 
   @override
-  Widget build(BuildContext context) => Material(
+  Widget build(BuildContext context) => Blur(
     borderRadius: BorderRadius.circular(100),
-    color: background_(context).withValues(alpha: .7),
+    color: background_(context).withValues(alpha: .6),
     child: SizedBox(
       width: 24,
       height: 24,
