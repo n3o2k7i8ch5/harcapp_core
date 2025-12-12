@@ -86,15 +86,13 @@ class ArticleCardWidget extends StatelessWidget{
                 left: -.1,
                 right: -.1,
                 child: Blur(
-                  child: Container(
-                    color: cardEnab_(context).withValues(alpha: .85),
-                    child: Padding(
-                      padding: const EdgeInsets.all(Dimen.iconMarg).subtract(
-                          const EdgeInsets.only(top: (1.2 - 1)*Dimen.textSizeBig)
-                      ),
-                      child: ArticleInfoWidget(article, infoBottomTrailing: infoBottomTrailing),
+                  color: cardEnab_(context).withValues(alpha: .85),
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimen.iconMarg).subtract(
+                        const EdgeInsets.only(top: (1.2 - 1)*Dimen.textSizeBig)
                     ),
-                  ),
+                    child: ArticleInfoWidget(article, infoBottomTrailing: infoBottomTrailing),
+                  )
                 ),
               )
 
