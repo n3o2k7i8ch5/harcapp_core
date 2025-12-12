@@ -119,17 +119,24 @@ class KonspektTileWidget extends StatelessWidget{
                         ),
 
                         if(showSummary)
-                          Flexible(
+                          Expanded(
                               child: Padding(
                                 padding: EdgeInsets.only(top: 6.0),
-                                child: Text(
-                                  konspekt.summary,
-                                  style: AppTextStyle(
-                                    fontSize: Dimen.textSizeNormal,
-                                    color: textDisab_(context),
-                                  ),
-                                  maxLines: 4,
-                                  overflow: TextOverflow.ellipsis,
+                                child: LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    final textStyle = AppTextStyle(
+                                      fontSize: Dimen.textSizeNormal,
+                                      color: textDisab_(context),
+                                    );
+                                    final lineHeight = textStyle.fontSize! * (textStyle.height ?? 1.2);
+                                    final maxLines = (constraints.maxHeight / lineHeight).floor().clamp(1, 4);
+                                    return Text(
+                                      konspekt.summary,
+                                      style: textStyle,
+                                      maxLines: maxLines,
+                                      overflow: TextOverflow.ellipsis,
+                                    );
+                                  },
                                 ),
                               )
                           ),
@@ -144,6 +151,7 @@ class KonspektTileWidget extends StatelessWidget{
                           Padding(
                             padding: EdgeInsets.only(top: 6.0),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
 
                                 Icon(MdiIcons.timerOutline, size: Dimen.iconSmallSize, color: iconDisab_(context)),
