@@ -9,7 +9,16 @@ class Blur extends StatelessWidget{
   final TileMode mode;
   final BorderRadiusGeometry? borderRadius;
   final Clip clipBehavior;
-  const Blur({this.child, this.sigma=8.0, this.mode = TileMode.repeated, this.borderRadius, this.clipBehavior = Clip.antiAlias, super.key});
+  final Color? color;
+  const Blur({
+    this.child,
+    this.sigma=8.0,
+    this.mode = TileMode.repeated,
+    this.borderRadius,
+    this.clipBehavior = Clip.antiAlias,
+    this.color,
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) => ClipRRect(
@@ -17,7 +26,9 @@ class Blur extends StatelessWidget{
       clipBehavior: clipBehavior,
       child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma, tileMode: mode),
-          child: child??Container(color: Colors.transparent)
+          child: color==null?
+          (child??Container(color: Colors.transparent)):
+          (Container(color: color, child: child))
       )
   );
 
