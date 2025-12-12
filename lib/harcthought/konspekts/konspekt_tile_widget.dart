@@ -16,7 +16,7 @@ import 'konspekt.dart';
 
 class KonspektTileWidget extends StatelessWidget{
 
-  static const double defHeight = 180;
+  static const double defHeight = 162;
   static const double defRadius = AppCard.bigRadius;
 
   final Konspekt konspekt;
@@ -129,7 +129,7 @@ class KonspektTileWidget extends StatelessWidget{
                                       color: textDisab_(context),
                                     );
                                     final lineHeight = textStyle.fontSize! * (textStyle.height ?? 1.2);
-                                    final maxLines = (constraints.maxHeight / lineHeight).floor().clamp(1, 4);
+                                    final maxLines = (constraints.maxHeight / lineHeight).floor().clamp(1, 6);
                                     return Text(
                                       konspekt.summary,
                                       style: textStyle,
