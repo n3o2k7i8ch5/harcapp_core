@@ -119,7 +119,7 @@ class KonspektTileWidget extends StatelessWidget{
                         ),
 
                         if(showSummary)
-                          Expanded(
+                          Flexible(
                               child: Padding(
                                 padding: EdgeInsets.only(top: 6.0),
                                 child: Text(
@@ -154,6 +154,7 @@ class KonspektTileWidget extends StatelessWidget{
                                   durationToString(konspekt.duration),
                                   style: AppTextStyle(
                                     fontSize: Dimen.textSizeNormal,
+                                    fontWeight: weightHalfBold,
                                     color: textDisab_(context),
                                   ),
                                 ),
