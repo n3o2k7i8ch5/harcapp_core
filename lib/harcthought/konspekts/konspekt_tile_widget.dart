@@ -10,6 +10,7 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/widgets/cover_widget.dart';
 import 'package:harcapp_core/tag/tags_widget.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'konspekt.dart';
 
@@ -142,13 +143,23 @@ class KonspektTileWidget extends StatelessWidget{
                         if(showTime && konspekt.duration != null)
                           Padding(
                             padding: EdgeInsets.only(top: 6.0),
-                            child: Text(
-                              durationToString(konspekt.duration),
-                              style: AppTextStyle(
-                                fontSize: Dimen.textSizeNormal,
-                                color: textDisab_(context),
-                              ),
-                            ),
+                            child: Row(
+                              children: [
+
+                                Icon(MdiIcons.timerOutline, size: Dimen.iconSmallSize, color: iconDisab_(context)),
+
+                                const SizedBox(width: Dimen.defMarg),
+
+                                Text(
+                                  durationToString(konspekt.duration),
+                                  style: AppTextStyle(
+                                    fontSize: Dimen.textSizeNormal,
+                                    color: textDisab_(context),
+                                  ),
+                                ),
+
+                              ],
+                            )
                           )
 
                       ],
