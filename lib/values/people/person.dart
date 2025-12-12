@@ -29,11 +29,11 @@ class Person{
       name.trim().isEmpty &&
       rankHarc == null &&
       rankInstr == null &&
-      druzyna == null &&
-      hufiec == null &&
+      (druzyna == null || druzyna!.trim().isEmpty) &&
+      (hufiec == null || hufiec!.trim().isEmpty) &&
       org == null &&
       (comment == null || comment!.trim().isEmpty) &&
-      email.isEmpty;
+      email.where((e) => e.trim().isNotEmpty).isEmpty;
 
   bool get isNotEmpty => !isEmpty;
 
