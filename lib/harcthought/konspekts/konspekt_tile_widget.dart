@@ -44,6 +44,47 @@ class KonspektTileWidget extends StatelessWidget{
         super.key
       });
 
+  double _measureTextWidth(BuildContext context, String text, TextStyle style) {
+    final painter = TextPainter(
+      text: TextSpan(text: text, style: style),
+      textDirection: Directionality.of(context),
+      maxLines: 1,
+    )..layout();
+    return painter.size.width;
+  }
+
+  double _estimateSphereListSingleLineWidth(BuildContext context) {
+    if (konspekt.spheres.isEmpty) return 0;
+
+    final textStyle = AppTextStyle(fontWeight: weightHalfBold, color: iconDisab_(context));
+    double width = 0;
+
+    for (int i = 0; i < konspekt.spheres.keys.length; i++) {
+      final sphere = konspekt.spheres.keys.elementAt(i);
+
+      final labelWidth = _measureTextWidth(context, sphere.displayName, textStyle);
+      final itemWidth = Dimen.iconSmallSize + Dimen.defMarg + labelWidth;
+
+      width += itemWidth;
+      if (i < konspekt.spheres.keys.length - 1) width += Dimen.iconMarg;
+    }
+
+    return width;
+  }
+
+  double _estimateTimePillWidth(BuildContext context) {
+    if (konspekt.duration == null) return 0;
+
+    final textStyle = AppTextStyle(
+      fontSize: Dimen.textSizeNormal,
+      fontWeight: weightHalfBold,
+      color: background ?? konspekt.type.color(context),
+    );
+    final textWidth = _measureTextWidth(context, durationToString(konspekt.duration), textStyle);
+
+    return 2 * Dimen.defMarg + Dimen.iconSmallSize + Dimen.defMarg + textWidth;
+  }
+
   @override
   Widget build(BuildContext context) => Hero(
       tag: konspekt,
@@ -141,49 +182,54 @@ class KonspektTileWidget extends StatelessWidget{
                               )
                           ),
 
-                        if(showSpheres)
+                        if (showSpheres || (showTime && konspekt.duration != null))
                           Padding(
                             padding: EdgeInsets.only(top: 6.0),
-                            child: KonspektSphereList(konspekt),
-                          ),
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                final spheresWidget = showSpheres ? KonspektSphereList(konspekt) : null;
+                                final timeWidget = (showTime && konspekt.duration != null)
+                                    ? _TimePill(konspekt, background: background)
+                                    : null;
 
-                        if(showTime && konspekt.duration != null)
-                          Padding(
-                            padding: EdgeInsets.only(top: 6.0),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Material(
-                                color: textEnab_(context),
-                                borderRadius: BorderRadius.circular(100),
-                                child: Padding(
-                                  padding: EdgeInsets.all(Dimen.defMarg),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    mainAxisSize: MainAxisSize.min,
+                                if (spheresWidget == null) {
+                                  return Align(
+                                    alignment: Alignment.centerRight,
+                                    child: timeWidget!,
+                                  );
+                                }
+
+                                if (timeWidget == null) return spheresWidget;
+
+                                final spheresWidth = _estimateSphereListSingleLineWidth(context);
+                                final pillWidth = _estimateTimePillWidth(context);
+                                final gap = Dimen.defMarg;
+
+                                final canFitSideBySide = spheresWidth + gap + pillWidth <= constraints.maxWidth;
+
+                                if (canFitSideBySide)
+                                  return Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-
-                                      Icon(
-                                          MdiIcons.timerOutline,
-                                          size: Dimen.iconSmallSize,
-                                          color: background??konspekt.type.color(context)
-                                      ),
-
+                                      Expanded(child: spheresWidget),
                                       const SizedBox(width: Dimen.defMarg),
-
-                                      Text(
-                                        durationToString(konspekt.duration),
-                                        style: AppTextStyle(
-                                          fontSize: Dimen.textSizeNormal,
-                                          fontWeight: weightHalfBold,
-                                          color: background??konspekt.type.color(context),
-                                        ),
-                                      ),
-
+                                      timeWidget,
                                     ],
-                                  ),
-                                ),
-                              ),
-                            )
+                                  );
+
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    spheresWidget,
+                                    const SizedBox(height: 6.0),
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: timeWidget,
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
                           )
 
                       ],
@@ -202,6 +248,49 @@ class KonspektTileWidget extends StatelessWidget{
         ),
       )
   );
+
+}
+
+class _TimePill extends StatelessWidget{
+
+  final Konspekt konspekt;
+  final Color? background;
+
+  const _TimePill(this.konspekt, {this.background, super.key});
+
+  @override
+  Widget build(BuildContext context) => Material(
+    color: textEnab_(context),
+    borderRadius: BorderRadius.circular(100),
+    child: Padding(
+      padding: EdgeInsets.all(Dimen.defMarg),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+
+          Icon(
+              MdiIcons.timerOutline,
+              size: Dimen.iconSmallSize,
+              color: background??konspekt.type.color(context)
+          ),
+
+          const SizedBox(width: Dimen.defMarg),
+
+          Text(
+            durationToString(konspekt.duration),
+            style: AppTextStyle(
+              fontSize: Dimen.textSizeNormal,
+              fontWeight: weightHalfBold,
+              color: background??konspekt.type.color(context),
+            ),
+          ),
+
+        ],
+      ),
+    ),
+  );
+
 
 }
 
