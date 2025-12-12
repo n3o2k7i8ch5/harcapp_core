@@ -16,7 +16,7 @@ import 'konspekt.dart';
 
 class KonspektTileWidget extends StatelessWidget{
 
-  static const double defHeight = 140;
+  static const double defHeight = 180;
   static const double defRadius = AppCard.bigRadius;
 
   final Konspekt konspekt;
