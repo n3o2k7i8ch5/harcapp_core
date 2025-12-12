@@ -25,7 +25,7 @@ class Person{
     this.email = const []
   });
 
-  bool isEmpty() =>
+  bool get isEmpty =>
       name.trim().isEmpty &&
       rankHarc == null &&
       rankInstr == null &&
@@ -34,6 +34,8 @@ class Person{
       org == null &&
       (comment == null || comment!.trim().isEmpty) &&
       email.isEmpty;
+
+  bool get isNotEmpty => !isEmpty;
 
   Map toApiJsonMap() =>
       {
