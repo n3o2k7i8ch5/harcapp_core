@@ -79,7 +79,7 @@ class KonspektTileWidget extends StatelessWidget{
 
             Expanded(
                 child: Padding(
-                    padding: const EdgeInsets.all(Dimen.sideMarg),
+                    padding: const EdgeInsets.all(Dimen.harcthoughtTileMarg),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [

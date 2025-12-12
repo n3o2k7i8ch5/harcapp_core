@@ -55,8 +55,10 @@ class FormThumbnailTagsWidget extends StatelessWidget{
 
     if(hasMoreThanMax)
       children.add(
-        Icon(MdiIcons.dotsHorizontal, size: Dimen.iconSmallSize, color: hintEnab_(context)),
-
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Icon(MdiIcons.dotsHorizontal, size: Dimen.iconSmallSize, color: hintEnab_(context)),
+        )
       );
 
     return Column(
@@ -89,7 +91,7 @@ class FormThumbnailWidget extends StatelessWidget{
             child: InkWell(
                 onTap: onTap,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(Dimen.harcthoughtTileMarg),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
