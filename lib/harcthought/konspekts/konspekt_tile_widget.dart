@@ -151,7 +151,7 @@ class KonspektTileWidget extends StatelessWidget{
                           Padding(
                             padding: EdgeInsets.only(top: 6.0),
                             child: Material(
-                              color: cardEnab_(context),
+                              color: textEnab_(context),
                               borderRadius: BorderRadius.circular(100),
                               child: Padding(
                                 padding: EdgeInsets.all(Dimen.defMarg),
@@ -168,7 +168,7 @@ class KonspektTileWidget extends StatelessWidget{
                                       style: AppTextStyle(
                                         fontSize: Dimen.textSizeNormal,
                                         fontWeight: weightHalfBold,
-                                        color: textDisab_(context),
+                                        color: background??konspekt.type.color(context),
                                       ),
                                     ),
 
