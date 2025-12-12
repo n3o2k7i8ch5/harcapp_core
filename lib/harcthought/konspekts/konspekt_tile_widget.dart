@@ -152,14 +152,10 @@ class KonspektTileWidget extends StatelessWidget{
                                 : OverflowBar(
                                     alignment: MainAxisAlignment.spaceBetween,
                                     spacing: Dimen.defMarg,
-                                    overflowAlignment: OverflowBarAlignment.end,
+                                    overflowAlignment: OverflowBarAlignment.start,
                                     overflowSpacing: 6.0,
                                     children: [
-                                      if (showSpheres)
-                                        Align(
-                                          alignment: Alignment.centerRight,
-                                          child: KonspektSphereList(konspekt),
-                                        ),
+                                      if (showSpheres) KonspektSphereList(konspekt),
                                       if (showTime && konspekt.duration != null)
                                         _TimePill(konspekt, background: background),
                                     ],
@@ -249,7 +245,7 @@ class KonspektSphereList extends StatelessWidget{
           Text(sphere.displayName, style: AppTextStyle(fontWeight: weightHalfBold, color: iconDisab_(context)))
         ],
       ),
-      wrapAlignment: WrapAlignment.start
+      wrapAlignment: WrapAlignment.end
   );
 
 
