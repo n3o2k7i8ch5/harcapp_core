@@ -22,6 +22,7 @@ class PersonDataDialog extends StatefulWidget{
   final void Function(Person)? onAccepted;
 
   final String title;
+  final String? description;
   final String saveText;
   final String? cancelText;
 
@@ -30,6 +31,7 @@ class PersonDataDialog extends StatefulWidget{
     this.onChanged,
     this.onAccepted,
     this.title = 'Twoje dane',
+    this.description,
     this.saveText = 'Ok',
     this.cancelText,
     super.key
@@ -93,10 +95,11 @@ class PersonDataDialogState extends State<PersonDataDialog>{
                       child: Column(
                         children: [
 
-                          const Text(
-                            'Dzięki temu każdy użytkownik będzie wiedział, kto dodał tę piosenkę!',
-                            style: AppTextStyle(fontSize: Dimen.textSizeBig),
-                          ),
+                          if(widget.description != null)
+                            Text(
+                              widget.description!,
+                              style: AppTextStyle(fontSize: Dimen.textSizeBig),
+                            ),
 
                           const SizedBox(height: Dimen.sideMarg),
 
