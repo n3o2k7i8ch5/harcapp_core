@@ -129,7 +129,7 @@ class KonspektTileWidget extends StatelessWidget{
                                       color: textDisab_(context),
                                     );
                                     final lineHeight = textStyle.fontSize! * (textStyle.height ?? 1.2);
-                                    final maxLines = (constraints.maxHeight / lineHeight).floor().clamp(1, 6);
+                                    final maxLines = (constraints.maxHeight / lineHeight).floor().clamp(1, 10);
                                     return Text(
                                       konspekt.summary,
                                       style: textStyle,
