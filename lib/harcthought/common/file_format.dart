@@ -92,7 +92,7 @@ enum FileFormat implements IconTextEnum{
   }
 
   static FileFormat? fromApiParam(String name){
-    switch(name.toLowerCase()){
+    switch(name){
       case 'pdf': return FileFormat.pdf;
       case 'docx': return FileFormat.docx;
       case 'png': return FileFormat.png;
