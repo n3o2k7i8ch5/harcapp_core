@@ -959,6 +959,7 @@ abstract class BaseKonspekt with BaseKonspektStepsContainerMixin{
   Person? get author;
   Duration? get customDuration;
   List<String> get aims;
+  List<KonspektAttachment>? get attachments;
   List<BaseKonspektMaterial>? get materials;
   String get summary;
   String? get intro;
@@ -981,6 +982,7 @@ abstract class BaseKonspekt with BaseKonspektStepsContainerMixin{
     'author': author?.toApiJsonMap(),
     'customDuration': customDuration?.inSeconds,
     'aims': aims,
+    'attachments': attachments?.map((e) => e.toJsonMap()).toList()??[],
     'materials': materials?.map((e) => e.toJsonMap()).toList()??[],
     'summary': summary,
     'intro': intro,
