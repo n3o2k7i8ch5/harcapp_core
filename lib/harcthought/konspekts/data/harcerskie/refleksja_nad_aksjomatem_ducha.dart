@@ -59,8 +59,8 @@ Konspekt refleksja_nad_aksjomatem_ducha = Konspekt(
       name: 'pytania',
       title: 'Pytania',
       assets: {
-        FileFormat.pdf: 'pytania.pdf',
-        FileFormat.docx: 'pytania.docx'
+        FileFormat.pdf: null,
+        FileFormat.docx: null
       },
     )
   ],

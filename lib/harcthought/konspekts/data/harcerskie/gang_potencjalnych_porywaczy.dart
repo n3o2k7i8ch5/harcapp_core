@@ -12,7 +12,7 @@ const KonspektAttachment attach_wycinki_informacji = KonspektAttachment(
   name: attach_name_wycinki_informacji,
   title: attach_title_wycinki_informacji,
   assets: {
-    FileFormat.pdf: 'wycinki_informacji.pdf'
+    FileFormat.pdf: null
   },
 );
 

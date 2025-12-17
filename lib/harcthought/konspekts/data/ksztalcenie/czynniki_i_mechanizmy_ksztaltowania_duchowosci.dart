@@ -29,8 +29,8 @@ const KonspektAttachment attach_scenariusze_czynnikow_duchowosci = KonspektAttac
   name: attach_name_scenariusze_czynnikow_duchowosci,
   title: attach_title_scenariusze_czynnikow_duchowosci,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci/$attach_name_scenariusze_czynnikow_duchowosci.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci/$attach_name_scenariusze_czynnikow_duchowosci.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 

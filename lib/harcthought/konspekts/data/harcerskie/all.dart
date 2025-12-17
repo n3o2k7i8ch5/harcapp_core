@@ -3,6 +3,7 @@ import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/asset_gallery_viewer.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/bibliodrama.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/spiewogranie_z_quizem_interpretacyjnym.dart';
@@ -12,6 +13,8 @@ import 'package:harcapp_core/values/people/data.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../konspekt.dart';
+import '_consts.dart';
+import 'beretowa.dart';
 import 'druzynowe_przekazanie_bsp.dart';
 import 'dwie_roty_dwoch_przyrzeczen_harcerskich.dart';
 import 'gang_potencjalnych_porywaczy.dart';
@@ -19,359 +22,13 @@ import 'msza_obozowa_lecz_nie_tylko.dart';
 import 'refleksja_nad_aksjomatem_ducha.dart';
 
 
-const String aimPraktykaModlitwy = 'Praktyka modlitwy przez uczestników';
-
-
-const String aimUmiejetnoscDyskusji = 'Kształtowanie u uczestników umiejetności krytycznego myślenia, argumentowania, dyskuskutowania i wypowiedzi';
-const String aimUmiejetnoscNegocjowania = 'Kształtowanie u uczestników umiejetności negocjowania';
-const String aimUmiejetnoscWedrowania = 'Kształtowanie u uczestników umiejętności sprawnego wędrowania';
-
-
-const String aimSilaCharakteruWedrowanie = 'Kształtowanie u uczestników siły charakteru przez trudy wędrówki (dystans, pogoda, noszenie plecaków)';
-const String aimSilaCharakteruZimno = 'Kształtowanie u uczestników siły charakteru przez wychodzenie z komfortu termicznego';
-const String aimPostawaOdpowiedzialnosciZaCzynny = 'Kształtowanie u uczestników postawy odpowiedzialności za swoje czyny i decyzje';
-const String aimWlasnaSprawczosc = 'Kształtowanie u uczestników wiary w swoją sprawczość';
-const String aimOtwartoscNaInterakcje = 'Kształtowanie u uczestników postawy otwartości na interakcję z innymi ludźmi';
-
-
-const String aimPostawaWspolpracy = 'Kształtowanie u uczestników postawy współpracy';
-const String aimSzacunekDlaSprawnosciFizycznej = 'Kształtowanie u uczestników szacunku dla sprawności fizycznej';
-const String aimSzacunekDlaSkutecznegoDzialania = 'Kształtowanie u uczestników szacunku dla skuteczności w działaniu';
-
 
 List<Konspekt> allHarcerskieKonspekts = [
 
+  beretowa,
 
   // Done
-  const Konspekt(
-      name: 'beretowa',
-      title: 'Beretówa',
-      category: KonspektCategory.harcerskie,
-      type: KonspektType.zajecia,
-      spheres: {
-        KonspektSphere.cialo: KonspektSphereDetails(
-            levels: {
-              KonspektSphereLevel.other: KonspektSphereFields(
-                  fields: {cialoKoordynacjaRuchowa: null}
-              )
-            }
-        ),
-        KonspektSphere.duch: KonspektSphereDetails(
-            levels: {
-              KonspektSphereLevel.duchPostawy: KonspektSphereFields(
-                  fields: {
-                    postawaOtwartoscNaLudzi: {
-                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                      KonspektSphereFactor.duchPerspektywa_Normalizacja
-                    }
-                  }
-              ),
-
-              KonspektSphereLevel.duchWartosci: KonspektSphereFields(
-                  fields: {
-                    wartoscSprawnoscFizyczna: {
-                      KonspektSphereFactor.duchBezposrednieDoswiadczenie,
-                      KonspektSphereFactor.duchWspolnota_WzajemnoscOddzialywan,
-                      KonspektSphereFactor.duchPerspektywa_Normalizacja
-                    }
-                  }
-              ),
-
-              ...levelSilaCharakteru
-            }
-        )
-      },
-      metos: [Meto.harc, Meto.hs, Meto.wedro],
-      coverAuthor: 'Freepik (vecstock)',
-      author: DANIEL_IWANICKI,
-      aims: [
-        aimPostawaWspolpracy,
-        aimSzacunekDlaSprawnosciFizycznej,
-        aimSzacunekDlaSkutecznegoDzialania,
-        'Kształtowanie u uczestników siły charakteru - działania pomimo drobnych zadrapań, wybitych palców, etc.'
-      ],
-      materials: [
-        KonspektMaterial(
-          amountAttendantFactor: 1,
-          name: 'Beret',
-        ),
-        KonspektMaterial(
-          amountAttendantFactor: 1,
-          name: 'Znacznik przynależności do grupy',
-        ),
-      ],
-      summary: 'Leśna gra, w której drużyny mają za zadanie wyeliminować przeciwne drużyny ściągając im berety z głów.',
-      description: '<p style="text-align:justify;">Aby forma była skuteczna, uczestnicy muszą być w nią zaangażowani i nie mieć nic przeciwko rywalizacji (częściej jest to domeną chłopców niż dziewczyn). Forma bywa kontuzjogenna.'
-          '<br>'
-          '<br>Forma powinna być toczona na dużym terenie lesistym zapewniającym możliwość łatwego skrycia się.'
-          '<br>'
-          '<br>Zachowując opisane niżej zasady gry można nieznacznie zmienić jej cel dla uczestników, np:</p>'
-          '<ul>'
-          '<li>'
-          '<p style="text-align:justify;">Drużyny są dzielone na <b>atakującą</b> i <b>broniącą</b>. Drużyna <b>broniąca</b> ma wyznaczony <b>teren krytyczny</b> (np. między pięcioma drzewami). Drużyna atakująca ma wyznaczonego <b>sapera</b> - osobę, która posiada przedmiot będący <b>bombą</b> (np. menażkę).'
-          '<br>'
-          '<br>Drużyna <b>atakująca</b> wygrywa, jeśli <b>saper</b> położy <b>bombę</b> w <b>terenie krytycznym</b>, przy czym <b>bombą</b> nie wolno rzucać.'
-          '<br>'
-          '<br>Drużyna <b>broniąca</b> wygrywa, jeśli zabije <b>sapera</b> lub jeśli obroni <b>teren krytyczny</b> przez 20 minut od rozpoczęcia gry.'
-          '</p>'
-          '</li>'
-          '<li><p style="text-align:justify;">Każda drużyna ma wyznaczoną <b>królową</b>. Drużyna przegrywa, jeśli straci <b>królową</b> niezależnie od tego ile osób pozostanie na końcu przy życiu. Przegrana drużyna natychmiast kończy grę.</p></li>'
-          '</ul>',
-      steps: [
-
-        KonspektStep(
-            title: 'Przedstawienie zasad',
-            duration: Duration(minutes: 10),
-            activeForm: KonspektStepActiveForm.static,
-            content: '<p style="text-align:justify;">Prowadzący przedstawia uczestnikom zasady gry:</p>'
-                '<ul>'
-                '<li><p style="text-align:justify;">W grze biorą udział co najmniej dwie grupy. Wygrywa grupa, której w której jako ostatniej zostaną "żywi" uczestnicy.</p></li>'
-                '<li><p style="text-align:justify;">Każdy uczestnik rozpoczyna mając na głowie beret. Jak uczestnik ma na głowie beret, tak długo jest "żywy".</p></li>'
-                '<li><p style="text-align:justify;">Berety można (a nawet trzeba) sobie wzajemnie ściągać z głowy.</p></li>'
-                '<li><p style="text-align:justify;">W grze nie wolno uderzać, gryźć, kopać, ani dotykać twarzy drugiej osoby.</p></li>'
-                '<li><p style="text-align:justify;">Gra toczy się na wybrany, jasny znak (np. trzykrotny gwizdek prowadzącego).</p></li>'
-                '</ul>'
-        ),
-
-
-        KonspektStep(
-            title: 'Podział na grupy',
-            duration: Duration(minutes: 10),
-            activeForm: KonspektStepActiveForm.static,
-            content: '<p style="text-align:justify;">Prowadzący dzieli uczestników na wybraną liczbę grup. Ważne, by każda grupa charakteryzowała się podobną sprawnością ruchową.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Oznaczenie grup',
-            duration: Duration(minutes: 5),
-            activeForm: KonspektStepActiveForm.static,
-            content: '<p style="text-align:justify;">Każdy uczestnik zostaje oznaczenie przynależności do swojej grupy. Może to być szarfa naramienna o innym kolorze dla każdej grupy lub po prostu może to być beret o wybranym kolorze.'
-                '<br>'
-                '<br>Jeżeli do gry używane są berety harcerskie, ważne jest, by nie miały one na sobie lilijek lub by berety były "wywrócone na lewą stronę" - inaczej łatwo o pocięte dłonie.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Gra',
-            duration: Duration(minutes: 30),
-            activeForm: KonspektStepActiveForm.active,
-            content: '<p style="text-align:justify;">Grupy rozchodzą się po lesie i rozpoczyna się gra zgodnie z opisanymi wcześniej zasadami.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Podsumowanie',
-            duration: Duration(minutes: 5),
-            activeForm: KonspektStepActiveForm.static,
-            content: '<p style="text-align:justify;">Prowadzący po zakończeniu gry podsumowuje jej przebieg z uczestnikami.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Rewanż',
-            duration: Duration(minutes: 30),
-            activeForm: KonspektStepActiveForm.active,
-            content: '<p style="text-align:justify;">Grupy rozchodzą się po lesie i rozpoczyna się druga gra zgodnie z opisanymi wcześniej zasadami.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Podsumowanie',
-            duration: Duration(minutes: 5),
-            activeForm: KonspektStepActiveForm.static,
-            content: '<p style="text-align:justify;">Prowadzący po zakończeniu rewanżu podsumowuje jej przebieg z uczestnikami.</p>'
-        ),
-
-      ]
-  ),
-
-
-  // Done
-  const Konspekt(
-      name: 'bibliodrama',
-      title: 'Bibliodrama',
-      category: KonspektCategory.harcerskie,
-      type: KonspektType.zajecia,
-      spheres: {
-        KonspektSphere.duch: KonspektSphereDetails(
-            levels: {
-              KonspektSphereLevel.duchAksjomaty: KonspektSphereFields(
-                  fields: {
-                    aksjoSwietoscHistoriiBiblijnych: {KonspektSphereFactor.duchBezposrednieDoswiadczenie},
-                  }
-              ),
-            }
-        )
-      },
-
-      metos: [Meto.wedro],
-      coverAuthor: 'freepik.com (freepik)',
-      author: MIKOLAJ_WITKOWSKI,
-      aims: [
-        'Doświadczenie Słowa Bożego poprzez zbudowanie empatycznej relacji z bohaterami biblijnych historii',
-        'Doświadczenie Słowa Bożego poprzez wymianę z innymi osobami punktów widzenia interpretowanej historii biblijnej',
-        'Doświadczenie Słowa Bożego poprzez cielesne przeżycie historii biblijnej odgrywając ją w scence'
-      ],
-      materials: [
-        KonspektMaterial(
-          amountAttendantFactor: 1,
-          name: 'Wydrukowane fragmenty Pisma Świętego z planem bibliodramy. Przykłady w załącznikach.',
-        ),
-      ],
-      summary: 'Forma teatralna, w której uczestnicy w grupach medytują nad fragmentem Pisma Świętego i wchodzą w rolę pozwalającą zadawać pytania bohaterom biblijnych wydarzeń oraz na nie odpowiadać.',
-      description: '<p style="text-align:justify;">By zachować precyzję, forma zawarta w niniejszym konspekcie powinna być nazwana "<b>Warsztatami z elementami bibliodramy</b>". Żeby jednak tę nazwę skrócić, używana jest hasłowa nazwa "<b>bibliodrama</b>".'
-          '<br>'
-          '<br>Bibliodrama składa się z dwóch etapów:</p>'
-          '<ul>'
-          '<li><p>praca ze Słowem Bożym</p></li>'
-          '<li><p>przygotowanie i przedstawienie scenki</p></li>'
-          '</ul>'
-          '<p style="text-align:justify;">Najważniejszym elementem bibliodramy jest praca duchowa poprzedzająca scenki. Należy mieć to na uwadze, jeśli rozważa się skrócenie czasu bibliodramy.</p>',
-      attachments: [
-        KonspektAttachment(
-          name: 'fragment_przykladowy_1',
-          title: 'Przykładowy fragment Pisma Świętego (nr 1)',
-          assets: {
-            FileFormat.pdf: 'fragment_przykladowy_1.pdf',
-            FileFormat.docx: 'fragment_przykladowy_1.docx'
-          },
-        ),
-        KonspektAttachment(
-          name: 'fragment_przykladowy_2',
-          title: 'Przykładowy fragment Pisma Świętego (nr 2)',
-          assets: {
-            FileFormat.pdf: 'fragment_przykladowy_2.pdf',
-            FileFormat.docx: 'fragment_przykladowy_2.docx'
-          },
-        ),
-        KonspektAttachment(
-          name: 'fragment_przykladowy_3',
-          title: 'Przykładowy fragment Pisma Świętego (nr 3)',
-          assets: {
-            FileFormat.pdf: 'fragment_przykladowy_3.pdf',
-            FileFormat.docx: 'fragment_przykladowy_3.docx'
-          },
-        )
-      ],
-      steps: [
-
-
-        KonspektStep(
-            title: 'Podział na grupy',
-            duration: Duration(minutes: 5),
-            activeForm: KonspektStepActiveForm.static,
-            content: '<p style="text-align:justify;">Prowadzący dzieli uczestników na grupy. Liczba grup zależy od liczby uczestników - w jednej grupie powinno być ok. 6-10 osób. Ważne, by powstały przynajmniej dwie grupy, by przygotowane na końcu przez każdą grupę scenki mogły zostać komuś przedstawione. Zbyt wiele osób w grupie niepotrzebnie wydłuża pracę, zbyt mało ogranicza dynamikę spacerów pytań.'
-                '<br>'
-                '<br>Każda osoba otrzymuje po jednym fragmencie Pisma Świętego - w ramach jednej grupy wszyscy otrzymują ten sam fragment. Ważne, by każdy z fragmentów był różny. Fragmenty Biblii muszą mieć potencjał fabularny – możliwość ich przedstawienia.'
-                '<br>'
-                '<br>Przykłady fragmentów można znaleźć w załącznikach:</p>'
-                '<ul>'
-                '<li><p style="text-align:justify;"><a href="fragment_przykladowy_1@attachment">Przykładowy fragment Pisma Świętego (nr 1)</a></p></li>'
-                '<li><p style="text-align:justify;"><a href="fragment_przykladowy_2@attachment">Przykładowy fragment Pisma Świętego (nr 2)</a></p></li>'
-                '<li><p style="text-align:justify;"><a href="fragment_przykladowy_3@attachment">Przykładowy fragment Pisma Świętego (nr 3)</a></p></li>'
-                '</ul>'
-                '<p style="text-align:justify;">Wskazane jest także, by w każdej z grup znalazła się przynajmniej jedna doświadczona osoba, która będzie ją animować: pilnowała czasu, decydowała o przejściach między kolejnymi etapami, wyczuwając atmosferę w grupie.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Medytacja fragmentu Pisma Świętego',
-            duration: Duration(minutes: 20),
-            activeForm: KonspektStepActiveForm.static,
-            content: '<p style="text-align:justify;">Prowadzący rozdaje uczestnikom wydrukowane fragmenty Pisma Świętego wraz z krótką instrukcją medytacji.'
-                '<br>'
-                '<br>Uczestnicy w ciszy zapoznają się z fragmentem Biblii, jego bohaterami i ich historią. Ważne, by podjęli refleksję dotyczącą tego, co przykuwa ich uwagę, co ich porusza, z czym się nie zgadzają, czego nie rozumieją oraz o co chcielibyśmy zapytać samych bohaterów historii.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Wstępny krąg dzielenia',
-            duration: Duration(minutes: 20),
-            activeForm: KonspektStepActiveForm.static,
-            content: '<p style="text-align:justify;">Pierwsze dzielenie jest najbardziej uporządkowane. Uczestnicy kolejno w kręgu dzielą się swoimi refleksjami dotyczącymi przeczytanego fragmentu Biblii. Po zakończeniu wypowiedzi uczestnik mówi „dzięki” - w dobrym tonie jest, aby wówczas reszta również odpowiada „dzięki” - wówczas głos wędruje do następnej osoby. Gdy wszyscy się wypowiedzą i zostanie jeszcze czas, każdy może dodać coś jeszcze.'
-                '<br>'
-                '<br>Uczestnicy nie powinni się odnosić do swoich wzajemnych wypowiedzi w sposób krytyczny lub polemiczny.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Wstępny krąg dzielenia',
-            duration: Duration(minutes: 20),
-            activeForm: KonspektStepActiveForm.active,
-            content: '<p style="text-align:justify;">Spacer jest najbardziej specyficzną formą bibliodramy. Odbywa się w grupach, jednak dobrze jest przed podziałem przećwiczyć go ze wszystkimi uczestnikami na popularnej biblijnej postaci.'
-                '<br>'
-                '<br>Uczestnicy chodzą powoli w kręgu i kontemplują w myślach bohatera z czytanego fragmentu wskazanego przez prowadzącego. Kiedy komuś pojawia się w głowie pytanie które chciałby owej postaci zadać, wchodzi do środka kręgu, krąg zatrzymuje się, po czym osoba w kręgu zadaje głośno pytanie do postaci. Następnie wraca do kręgu i krąg rusza dalej, tyle, że w przeciwnym kierunku. Uczestnicy w kręgu odpowiadają na pytanie (krótko i zwięźle) w pierwszej osobie wcielając się w bohatera, któremu zostało ono zadane. Odpowiedzi mogą być dowolne: to praca zbiorowej (nie)świadomości.'
-                '<br>'
-                '<br>Przykład pytania zadanego w środku kręgu:</p>'
-                '<ul>'
-                '<li><p><i>Józefie, jak się czułeś kiedy Maryja urodziła Ci syna?</i></p></li>'
-                '</ul>'
-                '<p style="text-align:justify;">Przykład odpowiedzi na pytanie od uczestników idących w kręgu:</p>'
-                '<ul>'
-                '<li><p><i>Byłem szczęśliwy.</i></p></li>'
-                '<li><p><i>Czułem niepokój.</i></p></li>'
-                '<li><p><i>Miałem dziwne poczucie podniosłości tego momentu.</i></p></li>'
-                '<li><p><i>Martwiłem się, że zmarznie.</i></p></li>'
-                '<li><p><i>...</i></p></li>'
-                '</ul>'
-                '<p style="text-align:justify;">Warto uczulić uczestników, że nie należy się przejmować poprawnością teologiczną pytań i odpowiedzi. Odpowiedzi mogą być ze sobą sprzeczne. Być może każdemu zapadnie w sercu coś innego. Gdy odpowiedzi zaczną się wyczerpywać, kolejna osoba mająca pytanie wchodzi do kręgu, zadaje je, krąg znowu zmienia kierunek i podąża dalej, formułując odpowiedzi na nowe pytanie.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Krąg dzielenia z pierwszym bohaterem',
-            duration: Duration(minutes: 20),
-            activeForm: KonspektStepActiveForm.static,
-            content: '<p style="text-align:justify;">Drugi krąg dzielenia jest luźniejszy od pierwszego. Uczestnicy dzielą się swoimi obserwacjami i doświadczeniami w formie dyskusji. Na tym etapie tworzy się wspólne rozumienie historii, nad którą uczestnicy pracują.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Spacer pytań z drugim bohaterem',
-            duration: Duration(minutes: 20),
-            activeForm: KonspektStepActiveForm.active,
-            content: '<p style="text-align:justify;">Forma analogiczna do <i>spaceru pytań z pierwszym bohaterem</i>, tyle, że dotycząca drugiego, wybranego przez prowadzącego bohatera.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Krąg dzielenia z drugim bohaterem',
-            duration: Duration(minutes: 20),
-            activeForm: KonspektStepActiveForm.static,
-            content: '<p style="text-align:justify;">Forma analogiczna do <i>kręgu pytań z pierwszym bohaterem</i>, tyle, że dotycząca drugiego, wybranego przez prowadzącego bohatera.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Kontemplacja końcowa',
-            duration: Duration(minutes: 20),
-            activeForm: KonspektStepActiveForm.static,
-            content: '<p style="text-align:justify;">Uczestnicy po raz ostatni siadają z fragmentem sami. Kontemplacja powinna mieć formę jak najgłębszego wejścia w tę sytuację, bez nadmiernego analizowania.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Przygotowanie scenki',
-            duration: Duration(minutes: 20),
-            activeForm: KonspektStepActiveForm.active,
-            content: '<p style="text-align:justify;">Uczestnicy na podstawie poprzednich form przygotowują scenkę, którą później odegrają - tworzą scenariusz, scenografię i kostiumy, dzielą się rolami i ćwiczą. Prowadzący nie musi przygotowywać żadnych rekwizytów - uczestnicy korzystają z rzeczy znajdujących się w miejscu, w którym się znajdują. Nie potrzeba im niczego więcej ponad to, co mają wokół siebie i ze sobą.'
-                '<br>'
-                '<br>Podczas przygotowywania scenki uczestnicy zazwyczaj wychodzą z nastroju skupienia i powagi – jest to dla nich forma rozładowania napięcia zgromadzonego podczas długotrwałej pracy wewnętrznej. Często towarzyszy temu rodzaj „odpału” – uczestnicy zaczynają żartować co ma pozytywny wpływ na liczbę i jakość pomysłów na formę przedstawienia historii. Dobrze jest dbać o to, żeby scenka uobecniała owoce duchowej pracy, jeśli jednak tak się nie stanie, nie trzeba się tym przejmować.</p>'
-        ),
-
-
-        KonspektStep(
-            title: 'Przedstawienie scenek',
-            duration: Duration(minutes: 10),
-            activeForm: KonspektStepActiveForm.active,
-            content: '<p style="text-align:justify;">Gdy wszystkie grupy są gotowe, rozpoczynają się przedstawienia. Po każdym przedstawieniu organizator powinien zachęcić grupę do podzielenia się z resztą owocami ich pracy oraz tym, w jaki sposób owoce te uobecniły się w scence.</p>'
-        ),
-
-
-      ]
-  ),
+  bibliodrama,
 
 
   // Done
@@ -912,8 +569,8 @@ List<Konspekt> allHarcerskieKonspekts = [
           name: 'kroki',
           title: 'Kroki',
           assets: {
-            FileFormat.pdf: 'kroki.pdf',
-            FileFormat.docx: 'kroki.docx'
+            FileFormat.pdf: null,
+            FileFormat.docx: null
           },
         ),
       ]
@@ -2231,8 +1888,8 @@ List<Konspekt> allHarcerskieKonspekts = [
           name: 'komputer',
           title: 'Symulator komputera',
           assets: {
-            FileFormat.pdf: 'komputer.pdf',
-            FileFormat.docx: 'komputer.docx',
+            FileFormat.pdf: null,
+            FileFormat.docx: null,
           },
         ),
       ],
@@ -2851,24 +2508,24 @@ List<Konspekt> allHarcerskieKonspekts = [
         name: 'sznury',
         title: 'Sznury',
         assets: {
-          FileFormat.pdf: 'sznury.pdf',
-          FileFormat.docx: 'sznury.docx',
+          FileFormat.pdf: null,
+          FileFormat.docx: null,
         },
       ),
       KonspektAttachment(
           name: 'nieistniejace_sznury',
           title: 'Nieistniejące sznury',
           assets: {
-            FileFormat.pdf: 'nieistniejace_sznury.pdf',
-            FileFormat.docx: 'nieistniejace_sznury.docx',
+            FileFormat.pdf: null,
+            FileFormat.docx: null,
           }
       ),
       KonspektAttachment(
           name: 'stopnie_instruktorskie_pytania',
           title: 'Stopnie instruktorskie - pytania',
           assets: {
-            FileFormat.pdf: 'stopnie_instruktorskie_pytania.pdf',
-            FileFormat.docx: 'stopnie_instruktorskie_pytania.docx',
+            FileFormat.pdf: null,
+            FileFormat.docx: null,
           }
       ),
     ],

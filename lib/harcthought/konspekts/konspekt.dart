@@ -18,6 +18,7 @@ import 'package:harcapp_core/values/people/person.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart' as pdf;
+import 'package:path/path.dart';
 
 import 'common.dart';
 import 'hrcpknspkt_data.dart';
@@ -554,11 +555,26 @@ class KonspektAttachmentPrint{
 
 }
 
+class KonspektAttachmentUrlMissingError extends Error{
+
+  FileFormat format;
+
+  KonspektAttachmentUrlMissingError(this.format);
+
+}
+
 class KonspektAttachment{
+
+  static const String baseAssetsPath = 'packages/harcapp_core/assets/konspekty';
 
     final String name;
     final String title;
-    final Map<FileFormat, String> assets;
+    // If format is url, then value is url.
+    // If format is not url, and the value is null, the file will be locally
+    // looked up at: "<name>.<format_extension>".
+    // If format is not url, and the value is not null, the file will be looked
+    // at the value (interpreted as path).
+    final Map<FileFormat, String?> assets;
     final KonspektAttachmentPrint? print;
 
     const KonspektAttachment({
@@ -568,6 +584,21 @@ class KonspektAttachment{
       this.print
     });
 
+    String getAssetPath(
+      String konspektName,
+      FileFormat format,
+      KonspektCategory konspektCategory,
+    ){
+      if(format.isUrl)
+        return assets[format]??(throw KonspektAttachmentUrlMissingError(format));
+
+      String? localPath = assets[format];
+      if(localPath == null)
+        return posix.join(baseAssetsPath, konspektCategory.path, konspektName, '$name.${format.extension}');
+
+      return posix.join(baseAssetsPath, localPath);
+    }
+
     Future<bool> open(
         BuildContext context,
         String konspektName,
@@ -575,16 +606,11 @@ class KonspektAttachment{
         KonspektCategory konspektCategory,
         {double? maxDialogWidth}
     ) async {
-      String? assetPath = assets[format];
-      if(assetPath == null) return false;
+      String assetPath = getAssetPath(konspektName, format, konspektCategory);
 
       switch(format){
         case FileFormat.url:
-          launchURL(assetPath);
-          return true;
         case FileFormat.urlPdf:
-          launchURL(assetPath);
-          return true;
         case FileFormat.urlDocx:
           launchURL(assetPath);
           return true;
@@ -597,30 +623,16 @@ class KonspektAttachment{
           return true;
         case FileFormat.pdf:
         case FileFormat.docx:
-          OpenResult? result;
-          if(assetPath.contains('/'))
-            result = await openAsset('packages/harcapp_core/assets/konspekty/$assetPath', webOpenInNewTab: true);
-          else
-            result = await openAsset('packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', webOpenInNewTab: true);
-
+          OpenResult? result = await openAsset(assetPath, webOpenInNewTab: true);
           return result?.type == ResultType.done;
         case FileFormat.png:
         case FileFormat.webp:
-          if(assetPath.contains('/'))
-            await openImageDialog(context, title, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false, maxWidth: maxDialogWidth);
-          else
-            await openImageDialog(context, title, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false, maxWidth: maxDialogWidth);
-
+          await openImageDialog(context, title, assetPath, web: false, maxWidth: maxDialogWidth);
           return true;
         case FileFormat.svg:
-          if(assetPath.contains('/'))
-            await openSvgImageDialog(context, title, 'packages/harcapp_core/assets/konspekty/$assetPath', web: false, maxWidth: maxDialogWidth);
-          else
-            await openSvgImageDialog(context,  title, 'packages/harcapp_core/assets/konspekty/${konspektCategory.path}/${konspektName}/${assetPath}', web: false, maxWidth: maxDialogWidth);
-
+          await openSvgImageDialog(context, title, assetPath, web: false, maxWidth: maxDialogWidth);
           return true;
       }
-
     }
 
     Future<bool> openOrShowMessage(
@@ -660,11 +672,13 @@ class KonspektAttachment{
       Map<FileFormat, Uint8List> fileData = {};
       Map<FileFormat, String> urlData = {};
 
-      for(MapEntry<FileFormat, String> entry in assets.entries)
+      for(MapEntry<FileFormat, String?> entry in assets.entries)
         if(entry.key.isUrl)
-          urlData[entry.key] = entry.value;
+          urlData[entry.key] = entry.value??(throw KonspektAttachmentUrlMissingError(entry.key));
         else
-          fileData[entry.key] = (await readByteDataFromAssets(entry.value))!.buffer.asUint8List();
+          fileData[entry.key] = (
+              await readByteDataFromAssets(entry.value??(throw KonspektAttachmentUrlMissingError(entry.key)))
+          )!.buffer.asUint8List();
 
       return AttachmentData(
         name: name,

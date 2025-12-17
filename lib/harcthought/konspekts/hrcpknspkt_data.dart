@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
@@ -131,4 +130,5 @@ class HrcpknspktData {
 
   static HrcpknspktData fromBytes(Uint8List bytes) =>
       fromJson(jsonDecode(utf8.decode(bytes)) as Map<String, dynamic>);
+
 }
