@@ -14,8 +14,8 @@ KonspektAttachment attach_przyklady_poziomow_duchowosci = KonspektAttachment(
   name: attach_name_przyklady_poziomow_duchowosci,
   title: attach_title_przyklady_poziomow_duchowosci,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_przyklady_poziomow_duchowosci.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_przyklady_poziomow_duchowosci.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
@@ -26,8 +26,8 @@ KonspektAttachment attach_mechanizmy_posrednie = KonspektAttachment(
   name: attach_name_mechanizmy_posrednie,
   title: attach_title_mechanizmy_posrednie,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_mechanizmy_posrednie.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_mechanizmy_posrednie.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
@@ -38,8 +38,8 @@ KonspektAttachment attach_antyprzyklady = KonspektAttachment(
   name: attach_name_antyprzyklady,
   title: attach_title_antyprzyklady,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_antyprzyklady.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_antyprzyklady.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
@@ -50,8 +50,8 @@ KonspektAttachment attach_scenariusze = KonspektAttachment(
   name: attach_name_scenariusze,
   title: attach_title_scenariusze,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_scenariusze.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego_old/$attach_name_scenariusze.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 

@@ -20,8 +20,8 @@ KonspektAttachment attach_scenariusz_fantomowe_dzialania_wychowawcze = KonspektA
   name: attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
   title: attach_title_scenariusz_fantomowe_dzialania_wychowawcze,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_scenariusz_fantomowe_dzialania_wychowawcze.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
@@ -32,8 +32,8 @@ KonspektAttachment attach_formy = KonspektAttachment(
   name: attach_name_formy,
   title: attach_title_formy,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_formy.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_formy.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
@@ -44,8 +44,8 @@ KonspektAttachment attach_planowanie_strategii_i_dzialan = KonspektAttachment(
   name: attach_name_planowanie_strategii_i_dzialan,
   title: attach_title_planowanie_strategii_i_dzialan,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_planowanie_strategii_i_dzialan.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_warsztaty_wychowania_duchowego/$attach_name_planowanie_strategii_i_dzialan.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 

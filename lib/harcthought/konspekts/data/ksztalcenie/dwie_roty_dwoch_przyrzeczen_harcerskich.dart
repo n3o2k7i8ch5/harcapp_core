@@ -15,8 +15,8 @@ const KonspektAttachment attach_prawo_harcerskie = KonspektAttachment(
   name: attach_name_prawo_harcerskie,
   title: attach_title_prawo_harcerskie,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_prawo_harcerskie.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_prawo_harcerskie.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
@@ -27,8 +27,8 @@ const KonspektAttachment attach_przyrzeczenie_harcerskie = KonspektAttachment(
   name: attach_name_przyrzeczenie_harcerskie,
   title: attach_title_przyrzeczenie_harcerskie,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_przyrzeczenie_harcerskie.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_przyrzeczenie_harcerskie.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
@@ -39,8 +39,8 @@ const KonspektAttachment attach_jak_przeprowadzic_przyrzeczenie = KonspektAttach
   name: attach_name_jak_przeprowadzic_przyrzeczenie,
   title: attach_title_jak_przeprowadzic_przyrzeczenie,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_jak_przeprowadzic_przyrzeczenie.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_jak_przeprowadzic_przyrzeczenie.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
@@ -51,8 +51,8 @@ const KonspektAttachment attach_scenariusze = KonspektAttachment(
   name: attach_name_scenariusze,
   title: attach_title_scenariusze,
   assets: {
-    FileFormat.pdf: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_scenariusze.pdf',
-    FileFormat.docx: 'ksztalcenie/$konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich/$attach_name_scenariusze.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
