@@ -677,29 +677,29 @@ class KonspektAttachment{
       print: map['print'] == null ? null : KonspektAttachmentPrint.fromJsonMap(map['print'] as Map<String, dynamic>),
     );
 
-    Future<AttachmentData> toAttachmentData() async {
-
-      Map<FileFormat, Uint8List> fileData = {};
-      Map<FileFormat, String> urlData = {};
-
-      for(MapEntry<FileFormat, String?> entry in assets.entries)
-        if(entry.key.isUrl)
-          urlData[entry.key] = entry.value??(throw KonspektAttachmentUrlMissingError(entry.key));
-        else
-          fileData[entry.key] = (
-              await readByteDataFromAssets(entry.value??(throw KonspektAttachmentUrlMissingError(entry.key)))
-          )!.buffer.asUint8List();
-
-      return AttachmentData(
-        name: name,
-        title: title,
-        assets: fileData,
-        urlAssets: urlData,
-        printInfoEnabled: print != null,
-        printSide: print?.side??KonspektAttachmentPrintSide.single,
-        printColor: print?.color??KonspektAttachmentPrintColor.monochrome,
-      );
-    }
+    // Future<AttachmentData> toAttachmentData() async {
+    //
+    //   Map<FileFormat, Uint8List> fileData = {};
+    //   Map<FileFormat, String> urlData = {};
+    //
+    //   for(MapEntry<FileFormat, String?> entry in assets.entries)
+    //     if(entry.key.isUrl)
+    //       urlData[entry.key] = entry.value??(throw KonspektAttachmentUrlMissingError(entry.key));
+    //     else
+    //       fileData[entry.key] = (
+    //           await readByteDataFromAssets(entry.value??(throw KonspektAttachmentUrlMissingError(entry.key)))
+    //       )!.buffer.asUint8List();
+    //
+    //   return AttachmentData(
+    //     name: name,
+    //     title: title,
+    //     assets: fileData,
+    //     urlAssets: urlData,
+    //     printInfoEnabled: print != null,
+    //     printSide: print?.side??KonspektAttachmentPrintSide.single,
+    //     printColor: print?.color??KonspektAttachmentPrintColor.monochrome,
+    //   );
+    // }
 
 }
 
