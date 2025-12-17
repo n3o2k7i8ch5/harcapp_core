@@ -1,16 +1,19 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:archive/archive.dart';
+import 'package:harcapp_core/comm_classes/missing_decode_param_error.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
+import 'package:path/path.dart';
 
 class AttachmentData {
   final String name;
   final String title;
 
-  final Map<FileFormat, Uint8List> fileData;
+  final Map<FileFormat, Uint8List> assets;
 
-  final Map<FileFormat, String> urlData;
+  final Map<FileFormat, String> urlAssets;
 
   final bool printInfoEnabled;
   final KonspektAttachmentPrintSide printSide;
@@ -19,8 +22,8 @@ class AttachmentData {
   const AttachmentData({
     required this.name,
     required this.title,
-    required this.fileData,
-    required this.urlData,
+    required this.assets,
+    required this.urlAssets,
     this.printInfoEnabled = false,
     this.printSide = KonspektAttachmentPrintSide.single,
     this.printColor = KonspektAttachmentPrintColor.monochrome,
@@ -28,15 +31,15 @@ class AttachmentData {
 
   Map<String, dynamic> toJson() {
     final Map filesJson = {};
-    fileData.forEach((k, v) => filesJson[k.name] = base64Encode(v));
+    assets.forEach((k, v) => filesJson[k.name] = base64Encode(v));
 
     final Map urlsJson = {};
-    urlData.forEach((k, v) => urlsJson[k.name] = v);
+    urlAssets.forEach((k, v) => urlsJson[k.name] = v);
 
     return {
       'name': name,
       'title': title,
-      'formats': {...fileData.keys, ...urlData.keys}.map((e) => e.name).toList(),
+      'formats': {...assets.keys, ...urlAssets.keys}.map((e) => e.apiParam).toList(),
       'files': filesJson,
       'urls': urlsJson,
       'printInfoEnabled': printInfoEnabled,
@@ -45,30 +48,58 @@ class AttachmentData {
     };
   }
 
+  ({Map<String, dynamic> json, List<ArchiveFile> files}) toTarData() {
+    final archiveFiles = <ArchiveFile>[];
+    for (final entry in assets.entries)
+      archiveFiles.add(ArchiveFile(
+        '$name.${entry.key.extension}',
+        entry.value.length,
+        entry.value,
+      ));
+
+    final Map<String, String> assetsJson = {};
+    for (final fmt in assets.keys)
+      assetsJson[fmt.apiParam] = '$name.${fmt.extension}';
+    for (final entry in urlAssets.entries)
+      assetsJson[entry.key.apiParam] = entry.value;
+
+    return (
+      json: {
+        'name': name,
+        'title': title,
+        'assets': assetsJson,
+        'printInfoEnabled': printInfoEnabled,
+        'printSide': printSide.name,
+        'printColor': printColor.name,
+      },
+      files: archiveFiles,
+    );
+  }
+
   static AttachmentData fromJson(Map<String, dynamic> json) {
     final formats = <FileFormat>{};
-    for (final fName in (json['formats'] as List).cast<String>())
-      formats.add(FileFormat.values.firstWhere((e) => e.name == fName));
+    for (final formatStr in (json['formats'] as List).cast<String>())
+      formats.add(FileFormat.fromApiParam(formatStr)??(throw InvalidDecodeParamError('format', formatStr)));
 
-    final fileData = <FileFormat, Uint8List>{};
+    final assets = <FileFormat, Uint8List>{};
     final filesJson = (json['files'] as Map?)?.cast<String, String>() ?? {};
-    filesJson.forEach((k, v) {
-      final fmt = FileFormat.values.firstWhere((e) => e.name == k);
-      fileData[fmt] = base64Decode(v);
+    filesJson.forEach((formatStr, value) {
+      final format = FileFormat.fromApiParam(formatStr)??(throw InvalidDecodeParamError('format', formatStr));
+      assets[format] = base64Decode(value);
     });
 
-    final urlData = <FileFormat, String>{};
+    final urlAssets = <FileFormat, String>{};
     final urlsJson = (json['urls'] as Map?)?.cast<String, String>() ?? {};
-    urlsJson.forEach((k, v) {
-      final fmt = FileFormat.values.firstWhere((e) => e.name == k);
-      urlData[fmt] = v;
+    urlsJson.forEach((formatStr, value) {
+      final format = FileFormat.fromApiParam(formatStr)??(throw InvalidDecodeParamError('format', formatStr));
+      urlAssets[format] = value;
     });
 
     return AttachmentData(
       name: json['name'] as String,
       title: json['title'] as String,
-      fileData: fileData,
-      urlData: urlData,
+      assets: assets,
+      urlAssets: urlAssets,
       printInfoEnabled: json['printInfoEnabled'] ?? false,
       printSide: KonspektAttachmentPrintSide.values
           .firstWhere((e) => e.name == (json['printSide'] ?? KonspektAttachmentPrintSide.single.name)),
@@ -103,32 +134,54 @@ class AttachmentData {
 
 class HrcpknspktData {
   final Uint8List? coverImage;
-  final List<AttachmentData> attachments;
-  final String konspektCoreData;
+  final Map<String, Uint8List> attachmentFiles;  // Name -> File
+  final Konspekt konspektCore;
 
   const HrcpknspktData({
     required this.coverImage,
-    this.attachments = const [],
-    required this.konspektCoreData,
+    required this.attachmentFiles,
+    required this.konspektCore,
   });
 
-  Map<String, dynamic> toJson() => {
-    'coverImage': coverImage==null?null:base64Encode(coverImage!),
-    'attachments': attachments.map((a) => a.toJson()).toList(),
-    'konspektCoreData': konspektCoreData,
-  };
+  Uint8List toTarBytes() {
+    final archive = Archive();
 
-  static HrcpknspktData fromJson(Map<String, dynamic> json) => HrcpknspktData(
-    coverImage: json['coverImage']==null?null:base64Decode(json['coverImage'] as String),
-    attachments: (json['attachments'] as List<dynamic>)
-        .map((e) => AttachmentData.fromJson(e as Map<String, dynamic>))
-        .toList(growable: false),
-    konspektCoreData: json['konspektCoreData'] as String,
-  );
+    for (final entry in attachmentFiles.entries)
+      archive.addFile(ArchiveFile(posix.join("attachments", entry.key), entry.value.length, entry.value));
 
-  Uint8List toBytes() => Uint8List.fromList(utf8.encode(jsonEncode(toJson())));
+    final Uint8List jsonBytes = utf8.encode(jsonEncode(konspektCore.toJsonMap()));
+    archive.addFile(ArchiveFile('konspekt.json', jsonBytes.length, jsonBytes));
 
-  static HrcpknspktData fromBytes(Uint8List bytes) =>
-      fromJson(jsonDecode(utf8.decode(bytes)) as Map<String, dynamic>);
+    if (coverImage != null)
+      archive.addFile(ArchiveFile('cover.webp', coverImage!.length, coverImage!));
 
+    return Uint8List.fromList(TarEncoder().encode(archive));
+  }
+
+  static HrcpknspktData fromTarBytes(Uint8List bytes){
+    final archive = TarDecoder().decodeBytes(bytes);
+
+    final konspektCore = Konspekt.fromJsonMap(
+        jsonDecode(
+            utf8.decode(
+                Uint8List.fromList(archive.files.firstWhere((e) => e.name == 'konspekt.json').content)
+            )
+        )
+    );
+
+    final coverFile = archive.files.where((e) => e.name == 'cover.webp').firstOrNull;
+    final Uint8List? coverImage = coverFile == null ? null : Uint8List.fromList(coverFile.content);
+
+    final Map<String, Uint8List> attachmentFiles = {
+      for (final file in archive.files.where((e) => e.name.startsWith('attachments/')))
+        posix.basename(file.name): Uint8List.fromList(file.content)
+    };
+
+    return HrcpknspktData(
+      coverImage: coverImage,
+      attachmentFiles: attachmentFiles,
+      konspektCore: konspektCore,
+    );
+
+  }
 }

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -599,6 +598,17 @@ class KonspektAttachment{
       return posix.join(baseAssetsPath, localPath);
     }
 
+    Future<Uint8List?> getAssetBytes(
+        String konspektName,
+        FileFormat format,
+        KonspektCategory konspektCategory,
+    ) async {
+      if(format.isUrl) return null;
+      ByteData? byteData = await readByteDataFromAssets(getAssetPath(konspektName, format, konspektCategory));
+      if(byteData == null) return null;
+      return byteData.buffer.asUint8List();
+    }
+
     Future<bool> open(
         BuildContext context,
         String konspektName,
@@ -683,8 +693,8 @@ class KonspektAttachment{
       return AttachmentData(
         name: name,
         title: title,
-        fileData: fileData,
-        urlData: urlData,
+        assets: fileData,
+        urlAssets: urlData,
         printInfoEnabled: print != null,
         printSide: print?.side??KonspektAttachmentPrintSide.single,
         printColor: print?.color??KonspektAttachmentPrintColor.monochrome,
@@ -1198,14 +1208,17 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
   );
 
   Future<HrcpknspktData> toHrcpknspktData() async{
-    List<AttachmentData> attachmentsData = [];
-    for(KonspektAttachment attachment in attachments??[])
-      attachmentsData.add(await attachment.toAttachmentData());
+    final Map<String, Uint8List> attachmentFiles = {};
+    for (final KonspektAttachment attachment in attachments ?? [])
+      for (final FileFormat format in attachment.assets.keys) {
+        final bytes = await attachment.getAssetBytes(name, format, category);
+        if (bytes != null) attachmentFiles['${attachment.name}.${format.extension}'] = bytes;
+      }
 
     return HrcpknspktData(
         coverImage: (await readByteDataFromAssets(coverPath))!.buffer.asUint8List(),
-        attachments: attachmentsData,
-        konspektCoreData: jsonEncode(toJsonMap())
+        attachmentFiles: attachmentFiles,
+        konspektCore: this
     );
   }
 
