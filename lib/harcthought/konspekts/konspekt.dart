@@ -562,7 +562,24 @@ class KonspektAttachmentUrlMissingError extends Error{
 
 }
 
-class KonspektAttachment{
+abstract class BaseKonspektAttachment{
+  String get name;
+  String get title;
+  Map<FileFormat, String?> get assets;
+  KonspektAttachmentPrint? get print;
+
+  const BaseKonspektAttachment();
+
+  Map toJsonMap() => {
+    'name': name,
+    'title': title,
+    'assets': assets.map((key, value) => MapEntry(key.apiParam, value)),
+    'print': print?.toJsonMap()
+  };
+
+}
+
+class KonspektAttachment extends BaseKonspektAttachment{
 
   static const String baseAssetsPath = 'packages/harcapp_core/assets/konspekty';
 
@@ -662,13 +679,6 @@ class KonspektAttachment{
       if(!result) showAppToast(context, text: 'Nie udało się otworzyć pliku');
       return result;
     }
-
-    Map toJsonMap() => {
-      'name': name,
-      'title': title,
-      'assets': assets.map((key, value) => MapEntry(key.apiParam, value)),
-      'print': print?.toJsonMap()
-    };
 
     static KonspektAttachment fromJsonMap(Map<String, dynamic> map) => KonspektAttachment(
       name: map['name'],
