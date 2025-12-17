@@ -969,7 +969,7 @@ abstract class BaseKonspekt with BaseKonspektStepsContainerMixin{
   Person? get author;
   Duration? get customDuration;
   List<String> get aims;
-  List<KonspektAttachment>? get attachments;
+  List<BaseKonspektAttachment>? get attachments;
   List<BaseKonspektMaterial>? get materials;
   String get summary;
   String? get intro;
