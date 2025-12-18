@@ -80,6 +80,7 @@ flutter:
     - assets/konspekty/
 
     - assets/konspekty/common/
+    - assets/konspekty/common/czynniki_i_mechanizmy_ksztaltowania_duchowosci/
     - assets/konspekty/common/warsztaty_duchowe/
 
     - assets/konspekty/harcerskie/
