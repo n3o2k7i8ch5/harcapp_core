@@ -20,7 +20,7 @@ class HrcpknspktData {
     final archive = Archive();
 
     for (final entry in attachmentFiles.entries)
-      archive.addFile(ArchiveFile(posix.join("attachments", entry.key), entry.value.length, entry.value));
+      archive.addFile(ArchiveFile(posix.join("attach@${entry.key}"), entry.value.length, entry.value));
 
     final Uint8List jsonBytes = utf8.encode(jsonEncode(konspektCore.toJsonMap()));
     archive.addFile(ArchiveFile('konspekt.json', jsonBytes.length, jsonBytes));
@@ -46,8 +46,8 @@ class HrcpknspktData {
     final Uint8List? coverImage = coverFile == null ? null : Uint8List.fromList(coverFile.content);
 
     final Map<String, Uint8List> attachmentFiles = {
-      for (final file in archive.files.where((e) => e.name.startsWith('attachments/')))
-        posix.basename(file.name): Uint8List.fromList(file.content)
+      for (final file in archive.files.where((e) => e.name.startsWith('attach@')))
+        file.name.substring('attach@'.length): Uint8List.fromList(file.content)
     };
 
     return HrcpknspktData(
