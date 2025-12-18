@@ -35,8 +35,8 @@ KonspektAttachment attach_karty_poziomow_duchowosci = KonspektAttachment(
   name: attach_name_karty_poziomow_duchowosci,
   title: attach_title_karty_poziomow_duchowosci,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_karty_poziomow_duchowosci.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_karty_poziomow_duchowosci.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_karty_poziomow_duchowosci.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_karty_poziomow_duchowosci.docx',
   },
 );
 
@@ -47,8 +47,8 @@ KonspektAttachment attach_karty_zdolnosci_integracji_duchowosci = KonspektAttach
   name: attach_name_karty_zdolnosci_integracji_duchowosci,
   title: attach_title_karty_zdolnosci_integracji_duchowosci,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_karty_zdolnosci_integracji_duchowosci.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_karty_zdolnosci_integracji_duchowosci.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_karty_zdolnosci_integracji_duchowosci.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_karty_zdolnosci_integracji_duchowosci.docx',
   },
 );
 
@@ -61,8 +61,8 @@ KonspektAttachment attach_aksjomaty_opisu_przyklady = KonspektAttachment(
   name: attach_name_aksjomaty_opisu_przyklady,
   title: attach_title_aksjomaty_opisu_przyklady,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_aksjomaty_opisu_przyklady.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_aksjomaty_opisu_przyklady.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_opisu_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_opisu_przyklady.docx',
   },
 );
 
@@ -73,8 +73,8 @@ KonspektAttachment attach_aksjomaty_opisu_i_sensu_przyklady = KonspektAttachment
   name: attach_name_aksjomaty_opisu_i_sensu_przyklady,
   title: attach_title_aksjomaty_opisu_i_sensu_przyklady,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_aksjomaty_opisu_i_sensu_przyklady.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_aksjomaty_opisu_i_sensu_przyklady.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_opisu_i_sensu_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_opisu_i_sensu_przyklady.docx',
   },
 );
 
@@ -85,8 +85,8 @@ KonspektAttachment attach_aksjomaty_sensu_przyklady = KonspektAttachment(
   name: attach_name_aksjomaty_sensu_przyklady,
   title: attach_title_aksjomaty_sensu_przyklady,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_aksjomaty_sensu_przyklady.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_aksjomaty_sensu_przyklady.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_sensu_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_sensu_przyklady.docx',
   },
 );
 
@@ -97,8 +97,8 @@ KonspektAttachment attach_aksjomaty_bledne_przyklady = KonspektAttachment(
   name: attach_name_aksjomaty_bledne_przyklady,
   title: attach_title_aksjomaty_bledne_przyklady,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_aksjomaty_bledne_przyklady.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_aksjomaty_bledne_przyklady.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_bledne_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_bledne_przyklady.docx',
   },
 );
 
@@ -111,8 +111,8 @@ KonspektAttachment attach_meta_narracja_opis = KonspektAttachment(
   name: attach_name_meta_narracja_opis,
   title: attach_title_meta_narracja_opis,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_meta_narracja_opis.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_meta_narracja_opis.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_meta_narracja_opis.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_meta_narracja_opis.docx',
   },
 );
 
@@ -123,8 +123,8 @@ KonspektAttachment attach_meta_narracja_przyklady = KonspektAttachment(
   name: attach_name_meta_narracja_przyklady,
   title: attach_title_meta_narracja_przyklady,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_meta_narracja_przyklady.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_meta_narracja_przyklady.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_meta_narracja_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_meta_narracja_przyklady.docx',
   },
 );
 
@@ -135,8 +135,8 @@ const KonspektAttachment attach_neutralnosc_duchowa_przyklady = KonspektAttachme
   name: attach_name_neutralnosc_duchowa_przyklady,
   title: attach_title_neutralnosc_duchowa_przyklady,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_neutralnosc_duchowa_przyklady.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_neutralnosc_duchowa_przyklady.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_neutralnosc_duchowa_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_neutralnosc_duchowa_przyklady.docx',
   },
 );
 
@@ -147,8 +147,8 @@ const KonspektAttachment attach_cel_wychowania_duchowego_zhp_statut = KonspektAt
   name: attach_name_cel_wychowania_duchowego_zhp_statut,
   title: attach_title_cel_wychowania_duchowego_zhp_statut,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_statut.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_statut.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_cel_wychowania_duchowego_zhp_statut.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_cel_wychowania_duchowego_zhp_statut.docx',
   },
 );
 
@@ -159,8 +159,8 @@ const KonspektAttachment attach_cel_wychowania_duchowego_zhp_uchwala = KonspektA
   name: attach_name_cel_wychowania_duchowego_zhp_uchwala,
   title: attach_title_cel_wychowania_duchowego_zhp_uchwala,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_uchwala.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_cel_wychowania_duchowego_zhp_uchwala.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_cel_wychowania_duchowego_zhp_uchwala.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_cel_wychowania_duchowego_zhp_uchwala.docx',
   },
 );
 
@@ -171,8 +171,8 @@ const KonspektAttachment attach_kratka_minimow_rozwoju_duchowego = KonspektAttac
   name: attach_name_kratka_minimow_rozwoju_duchowego,
   title: attach_title_kratka_minimow_rozwoju_duchowego,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_kratka_minimow_rozwoju_duchowego.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_kratka_minimow_rozwoju_duchowego.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_kratka_minimow_rozwoju_duchowego.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_kratka_minimow_rozwoju_duchowego.docx',
   },
 );
 
@@ -183,7 +183,7 @@ const KonspektAttachment attach_szybkie_strzaly_dyskusyjne = KonspektAttachment(
   name: attach_name_szybkie_strzaly_dyskusyjne,
   title: attach_title_szybkie_strzaly_dyskusyjne,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/$attach_name_szybkie_strzaly_dyskusyjne.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/$attach_name_szybkie_strzaly_dyskusyjne.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_szybkie_strzaly_dyskusyjne.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_szybkie_strzaly_dyskusyjne.docx',
   },
 );
