@@ -610,7 +610,7 @@ class KonspektAttachment extends BaseKonspektAttachment{
 
       String? localPath = assets[format];
       if(localPath == null)
-        return posix.join(baseAssetsPath, konspektCategory.path, konspektName, '$name.${format.extension}');
+        return posix.join(baseAssetsPath, konspektCategory.path, konspektName, 'attach@$name.${format.extension}');
 
       return posix.join(baseAssetsPath, localPath);
     }
