@@ -8,48 +8,48 @@ import '../harcerskie/dwie_roty_dwoch_przyrzeczen_harcerskich.dart';
 
 const konspekt_kszt_name_dwie_roty_dwoch_przyrzeczen_harcerskich = 'dwie_roty_dwoch_przyrzeczen_harcerskich';
 
-const String attach_html_prawo_harcerskie = '<a href="$attach_name_prawo_harcerskie@attachment">$attach_title_prawo_harcerskie</a>';
-const String attach_name_prawo_harcerskie = 'prawo_harcerskie';
-const String attach_title_prawo_harcerskie = 'Prawo Harcerskie';
-const KonspektAttachment attach_prawo_harcerskie = KonspektAttachment(
-  name: attach_name_prawo_harcerskie,
-  title: attach_title_prawo_harcerskie,
+const String _attach_html_prawo_harcerskie = '<a href="$_attach_name_prawo_harcerskie@attachment">$_attach_title_prawo_harcerskie</a>';
+const String _attach_name_prawo_harcerskie = 'prawo_harcerskie';
+const String _attach_title_prawo_harcerskie = 'Prawo Harcerskie';
+const KonspektAttachment _attach_prawo_harcerskie = KonspektAttachment(
+  name: _attach_name_prawo_harcerskie,
+  title: _attach_title_prawo_harcerskie,
   assets: {
     FileFormat.pdf: null,
     FileFormat.docx: null,
   },
 );
 
-const String attach_html_przyrzeczenie_harcerskie = '<a href="$attach_name_przyrzeczenie_harcerskie@attachment">$attach_title_przyrzeczenie_harcerskie</a>';
-const String attach_name_przyrzeczenie_harcerskie = 'przyrzeczenie_harcerskie';
-const String attach_title_przyrzeczenie_harcerskie = 'Przyrzeczenie Harcerskie';
-const KonspektAttachment attach_przyrzeczenie_harcerskie = KonspektAttachment(
-  name: attach_name_przyrzeczenie_harcerskie,
-  title: attach_title_przyrzeczenie_harcerskie,
+const String _attach_html_przyrzeczenie_harcerskie = '<a href="$_attach_name_przyrzeczenie_harcerskie@attachment">$_attach_title_przyrzeczenie_harcerskie</a>';
+const String _attach_name_przyrzeczenie_harcerskie = 'przyrzeczenie_harcerskie';
+const String _attach_title_przyrzeczenie_harcerskie = 'Przyrzeczenie Harcerskie';
+const KonspektAttachment _attach_przyrzeczenie_harcerskie = KonspektAttachment(
+  name: _attach_name_przyrzeczenie_harcerskie,
+  title: _attach_title_przyrzeczenie_harcerskie,
   assets: {
     FileFormat.pdf: null,
     FileFormat.docx: null,
   },
 );
 
-const String attach_html_jak_przeprowadzic_przyrzeczenie = '<a href="$attach_name_jak_przeprowadzic_przyrzeczenie@attachment">$attach_title_jak_przeprowadzic_przyrzeczenie</a>';
-const String attach_name_jak_przeprowadzic_przyrzeczenie = 'jak_przeprowadzic_przyrzeczenie';
-const String attach_title_jak_przeprowadzic_przyrzeczenie = 'Jak przeprowadzić Przyrzeczenie';
-const KonspektAttachment attach_jak_przeprowadzic_przyrzeczenie = KonspektAttachment(
-  name: attach_name_jak_przeprowadzic_przyrzeczenie,
-  title: attach_title_jak_przeprowadzic_przyrzeczenie,
+const String _attach_html_jak_przeprowadzic_przyrzeczenie = '<a href="$_attach_name_jak_przeprowadzic_przyrzeczenie@attachment">$_attach_title_jak_przeprowadzic_przyrzeczenie</a>';
+const String _attach_name_jak_przeprowadzic_przyrzeczenie = 'jak_przeprowadzic_przyrzeczenie';
+const String _attach_title_jak_przeprowadzic_przyrzeczenie = 'Jak przeprowadzić Przyrzeczenie';
+const KonspektAttachment _attach_jak_przeprowadzic_przyrzeczenie = KonspektAttachment(
+  name: _attach_name_jak_przeprowadzic_przyrzeczenie,
+  title: _attach_title_jak_przeprowadzic_przyrzeczenie,
   assets: {
     FileFormat.pdf: null,
     FileFormat.docx: null,
   },
 );
 
-const String attach_html_scenariusze = '<a href="$attach_name_scenariusze@attachment">$attach_title_scenariusze</a>';
-const String attach_name_scenariusze = 'scenariusze';
-const String attach_title_scenariusze = 'Scenariusze';
-const KonspektAttachment attach_scenariusze = KonspektAttachment(
-  name: attach_name_scenariusze,
-  title: attach_title_scenariusze,
+const String _attach_html_scenariusze = '<a href="$_attach_name_scenariusze@attachment">$_attach_title_scenariusze</a>';
+const String _attach_name_scenariusze = 'scenariusze';
+const String _attach_title_scenariusze = 'Scenariusze';
+const KonspektAttachment _attach_scenariusze = KonspektAttachment(
+  name: _attach_name_scenariusze,
+  title: _attach_title_scenariusze,
   assets: {
     FileFormat.pdf: null,
     FileFormat.docx: null,
@@ -77,10 +77,10 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     attachments: [
       attach_cel_wychowania_duchowego_zhp_statut,
       attach_cel_wychowania_duchowego_zhp_uchwala,
-      attach_prawo_harcerskie,
-      attach_przyrzeczenie_harcerskie,
-      attach_jak_przeprowadzic_przyrzeczenie,
-      attach_scenariusze,
+      _attach_prawo_harcerskie,
+      _attach_przyrzeczenie_harcerskie,
+      _attach_jak_przeprowadzic_przyrzeczenie,
+      _attach_scenariusze,
     ],
     materials: [
       KonspektMaterial(
@@ -96,27 +96,27 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       ),
 
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_prawo_harcerskie”',
-          attachmentName: attach_name_prawo_harcerskie,
+          name: 'Wydrukowany załącznik “$_attach_title_prawo_harcerskie”',
+          attachmentName: _attach_name_prawo_harcerskie,
           amount: 2
       ),
 
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_przyrzeczenie_harcerskie”',
-          attachmentName: attach_name_przyrzeczenie_harcerskie,
+          name: 'Wydrukowany załącznik “$_attach_title_przyrzeczenie_harcerskie”',
+          attachmentName: _attach_name_przyrzeczenie_harcerskie,
           amount: 2
       ),
 
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_jak_przeprowadzic_przyrzeczenie”',
-          attachmentName: attach_name_jak_przeprowadzic_przyrzeczenie,
+          name: 'Wydrukowany załącznik “$_attach_title_jak_przeprowadzic_przyrzeczenie”',
+          attachmentName: _attach_name_jak_przeprowadzic_przyrzeczenie,
           amount: 2,
           additionalPreparation: 'Kartki pociąć wzdłuż przerywanych linii i potasować w ramach każdego zestawu.'
       ),
 
       KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_scenariusze”',
-        attachmentName: attach_name_scenariusze,
+        name: 'Wydrukowany załącznik “$_attach_title_scenariusze”',
+        attachmentName: _attach_name_scenariusze,
       )
 
     ],
@@ -183,14 +183,14 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
               '<li>'
               '<p style="text-align:justify;">'
               '<i>Prawo Harcerskie'
-              '<br>$attach_html_prawo_harcerskie</i>'
+              '<br>$_attach_html_prawo_harcerskie</i>'
               '</p>'
               '</li>'
 
               '<li>'
               '<p style="text-align:justify;">'
               '<i>Przyrzeczenie Harcerskie'
-              '<br>$attach_html_przyrzeczenie_harcerskie</i>'
+              '<br>$_attach_html_przyrzeczenie_harcerskie</i>'
               '</p>'
               '</li>'
 
@@ -438,7 +438,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
               '<br>'
               '<br><i>Do drużyny przychodzi 10-latek, który właśnie rozpoczął 4-tą klasę podstawówki. Co teraz?</i>'
               '<br>'
-              '<br>Prowadzący dzieli uczestników na dwie grupy i rozdaje im po jednym przygotowanym i pociętym załączniku “$attach_html_jak_przeprowadzic_przyrzeczenie”.'
+              '<br>Prowadzący dzieli uczestników na dwie grupy i rozdaje im po jednym przygotowanym i pociętym załączniku “$_attach_html_jak_przeprowadzic_przyrzeczenie”.'
               '<br>'
               '<br>Zadaniem każdej grupy jest ułożenie w odpowiedniej kolejności kawałków załącznika, tak aby powstał z niego spójny scenariusz. Jeśli grupa ma pomysły jak ów scenariusz można wzbogacić, powinna to zapisać.'
               '</p>'
@@ -462,7 +462,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
           duration: Duration(minutes: 40),
           activeForm: KonspektStepActiveForm.static,
           content: '<p style="text-align:justify;">'
-              'Prowadzący po kolei przedstawia uczestnikom kilka scenariuszy z wydrukowanego załącznika $attach_html_scenariusze związanych z problematyką dwóch możliwych do wyboru rot Przyrzeczenia.'
+              'Prowadzący po kolei przedstawia uczestnikom kilka scenariuszy z wydrukowanego załącznika $_attach_html_scenariusze związanych z problematyką dwóch możliwych do wyboru rot Przyrzeczenia.'
               '<br>'
               '<br>Aby wprowadzić pewną dynamikę, warto, aby to uczestnicy czytali scenariusze.'
               '<br>'

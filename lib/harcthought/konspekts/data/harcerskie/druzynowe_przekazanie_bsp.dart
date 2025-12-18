@@ -8,12 +8,12 @@ import '../../konspekt.dart';
 
 const String _konspekt_name = 'druzynowe_przekazanie_bsp';
 
-const String attach_html_odznaka_bsp = '<a href="${attach_name_odznaka_bsp}@attachment">${attach_title_odznaka_bsp}</a>';
-const String attach_name_odznaka_bsp = "odznaka_bsp";
-const String attach_title_odznaka_bsp = "Odznaka BŚP";
-KonspektAttachment attach_odznaka_bsp = KonspektAttachment(
-    name: attach_name_odznaka_bsp,
-    title: attach_title_odznaka_bsp,
+const String _attach_html_odznaka_bsp = '<a href="${_attach_name_odznaka_bsp}@attachment">${_attach_title_odznaka_bsp}</a>';
+const String _attach_name_odznaka_bsp = "odznaka_bsp";
+const String _attach_title_odznaka_bsp = "Odznaka BŚP";
+KonspektAttachment _attach_odznaka_bsp = KonspektAttachment(
+    name: _attach_name_odznaka_bsp,
+    title: _attach_title_odznaka_bsp,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'odznaka_bsp.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'odznaka_bsp.docx'),
@@ -23,8 +23,8 @@ KonspektAttachment attach_odznaka_bsp = KonspektAttachment(
 
 
 KonspektMaterial material_zal_odznaka_bsp = KonspektMaterial(
-    name: 'Dostępny załącznik “$attach_title_odznaka_bsp”',
-    attachmentName: attach_name_odznaka_bsp,
+    name: 'Dostępny załącznik “$_attach_title_odznaka_bsp”',
+    attachmentName: _attach_name_odznaka_bsp,
     amount: 1
 );
 
@@ -268,7 +268,7 @@ Konspekt druzynowe_przekazanie_bsp = Konspekt(
 
         '<h1>Odznaka BŚP</h1>'
         '<p style="text-align:justify;">'
-        'Motywacją dla harcerzy dla przygotowań do BŚP może być przygotowana przez ZHP propozycja Odznaki BŚP. Szczegóły dotyczące zasad i wymagań dostępne są w załączniku ${attach_html_odznaka_bsp}.'
+        'Motywacją dla harcerzy dla przygotowań do BŚP może być przygotowana przez ZHP propozycja Odznaki BŚP. Szczegóły dotyczące zasad i wymagań dostępne są w załączniku ${_attach_html_odznaka_bsp}.'
         '</p>'
 
         '<h1>Przykładowe pomysły (miejsca i inicjatywy) na służbę w Warszawie</h1>'
@@ -291,6 +291,6 @@ Konspekt druzynowe_przekazanie_bsp = Konspekt(
       'Potraktować jako cel sam akt przekazania Światła, bez wcześniejszego przygotowania drużyny do duchowej strony tego wydarzenia.',
     ],
     attachments: [
-      attach_odznaka_bsp,
+      _attach_odznaka_bsp,
     ]
 );

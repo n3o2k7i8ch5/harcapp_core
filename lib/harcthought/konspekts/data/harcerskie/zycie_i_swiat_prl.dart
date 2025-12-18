@@ -8,12 +8,12 @@ import '../level_examples.dart';
 
 const String _konspekt_name = 'zycie_i_swiat_prl';
 
-const String attach_html_mapa_glowna = '<a href="${attach_name_mapa_glowna}@attachment">${attach_title_mapa_glowna}</a>';
-const String attach_name_mapa_glowna = "mapa_glowna";
-const String attach_title_mapa_glowna = "Mapa główna";
+const String _attach_html_mapa_glowna = '<a href="${_attach_name_mapa_glowna}@attachment">${_attach_title_mapa_glowna}</a>';
+const String _attach_name_mapa_glowna = "mapa_glowna";
+const String _attach_title_mapa_glowna = "Mapa główna";
 KonspektAttachment attach_mapa_glowna = KonspektAttachment(
-    name: attach_name_mapa_glowna,
-    title: attach_title_mapa_glowna,
+    name: _attach_name_mapa_glowna,
+    title: _attach_title_mapa_glowna,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'mapa_prl.pdf'),
       FileFormat.urlPng: urlToGitlabFile(_konspekt_name, 'mapa_prl.png'),
@@ -24,12 +24,12 @@ KonspektAttachment attach_mapa_glowna = KonspektAttachment(
 
 // --- Banknoty
 
-const String attach_html_banknot_csk_1 = '<a href="${attach_name_banknot_csk_1}@attachment">${attach_title_banknot_csk_1}</a>';
-const String attach_name_banknot_csk_1 = "banknot_csk_1";
-const String attach_title_banknot_csk_1 = "Banknot 1 CSK";
+const String _attach_html_banknot_csk_1 = '<a href="${_attach_name_banknot_csk_1}@attachment">${_attach_title_banknot_csk_1}</a>';
+const String _attach_name_banknot_csk_1 = "banknot_csk_1";
+const String _attach_title_banknot_csk_1 = "Banknot 1 CSK";
 KonspektAttachment attach_banknot_csk_1 = KonspektAttachment(
-    name: attach_name_banknot_csk_1,
-    title: attach_title_banknot_csk_1,
+    name: _attach_name_banknot_csk_1,
+    title: _attach_title_banknot_csk_1,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_csk_1.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_csk_1.docx'),
@@ -38,12 +38,12 @@ KonspektAttachment attach_banknot_csk_1 = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
 
-const String attach_html_banknot_ddm_1 = '<a href="${attach_name_banknot_ddm_1}@attachment">${attach_title_banknot_ddm_1}</a>';
-const String attach_name_banknot_ddm_1 = "banknot_ddm_1";
-const String attach_title_banknot_ddm_1 = "Banknot 1 DDM";
+const String _attach_html_banknot_ddm_1 = '<a href="${_attach_name_banknot_ddm_1}@attachment">${_attach_title_banknot_ddm_1}</a>';
+const String _attach_name_banknot_ddm_1 = "banknot_ddm_1";
+const String _attach_title_banknot_ddm_1 = "Banknot 1 DDM";
 KonspektAttachment attach_banknot_ddm_1 = KonspektAttachment(
-    name: attach_name_banknot_ddm_1,
-    title: attach_title_banknot_ddm_1,
+    name: _attach_name_banknot_ddm_1,
+    title: _attach_title_banknot_ddm_1,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_ddm_1.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_ddm_1.docx'),
@@ -52,12 +52,12 @@ KonspektAttachment attach_banknot_ddm_1 = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
 
-const String attach_html_banknot_sur_1 = '<a href="${attach_name_banknot_sur_1}@attachment">${attach_title_banknot_sur_1}</a>';
-const String attach_name_banknot_sur_1 = "banknot_sur_1";
-const String attach_title_banknot_sur_1 = "Banknot 1 SUR";
+const String _attach_html_banknot_sur_1 = '<a href="${_attach_name_banknot_sur_1}@attachment">${_attach_title_banknot_sur_1}</a>';
+const String _attach_name_banknot_sur_1 = "banknot_sur_1";
+const String _attach_title_banknot_sur_1 = "Banknot 1 SUR";
 KonspektAttachment attach_banknot_sur_1 = KonspektAttachment(
-    name: attach_name_banknot_sur_1,
-    title: attach_title_banknot_sur_1,
+    name: _attach_name_banknot_sur_1,
+    title: _attach_title_banknot_sur_1,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_sur_1.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_sur_1.docx'),
@@ -66,12 +66,12 @@ KonspektAttachment attach_banknot_sur_1 = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
 
-const String attach_html_banknot_usd_1 = '<a href="${attach_name_banknot_usd_1}@attachment">${attach_title_banknot_usd_1}</a>';
-const String attach_name_banknot_usd_1 = "banknot_usd_1";
-const String attach_title_banknot_usd_1 = "Banknot 1 USD";
+const String _attach_html_banknot_usd_1 = '<a href="${_attach_name_banknot_usd_1}@attachment">${_attach_title_banknot_usd_1}</a>';
+const String _attach_name_banknot_usd_1 = "banknot_usd_1";
+const String _attach_title_banknot_usd_1 = "Banknot 1 USD";
 KonspektAttachment attach_banknot_usd_1 = KonspektAttachment(
-    name: attach_name_banknot_usd_1,
-    title: attach_title_banknot_usd_1,
+    name: _attach_name_banknot_usd_1,
+    title: _attach_title_banknot_usd_1,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_usd_1.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_usd_1.docx'),
@@ -80,12 +80,12 @@ KonspektAttachment attach_banknot_usd_1 = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
 
-const String attach_html_banknot_plz_1_mln = '<a href="${attach_name_banknot_plz_1_mln}@attachment">${attach_title_banknot_plz_1_mln}</a>';
-const String attach_name_banknot_plz_1_mln = "banknot_plz_1_mln";
-const String attach_title_banknot_plz_1_mln = "Banknot 1 mln PLZ";
+const String _attach_html_banknot_plz_1_mln = '<a href="${_attach_name_banknot_plz_1_mln}@attachment">${_attach_title_banknot_plz_1_mln}</a>';
+const String _attach_name_banknot_plz_1_mln = "banknot_plz_1_mln";
+const String _attach_title_banknot_plz_1_mln = "Banknot 1 mln PLZ";
 KonspektAttachment attach_banknot_plz_1_mln = KonspektAttachment(
-    name: attach_name_banknot_plz_1_mln,
-    title: attach_title_banknot_plz_1_mln,
+    name: _attach_name_banknot_plz_1_mln,
+    title: _attach_title_banknot_plz_1_mln,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_plz_1_mln.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_plz_1_mln.docx'),
@@ -94,12 +94,12 @@ KonspektAttachment attach_banknot_plz_1_mln = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
 
-const String attach_html_banknot_plz_2_mln = '<a href="${attach_name_banknot_plz_2_mln}@attachment">${attach_title_banknot_plz_2_mln}</a>';
-const String attach_name_banknot_plz_2_mln = "banknot_plz_2_mln";
-const String attach_title_banknot_plz_2_mln = "Banknot 2 mln PLZ";
+const String _attach_html_banknot_plz_2_mln = '<a href="${_attach_name_banknot_plz_2_mln}@attachment">${_attach_title_banknot_plz_2_mln}</a>';
+const String _attach_name_banknot_plz_2_mln = "banknot_plz_2_mln";
+const String _attach_title_banknot_plz_2_mln = "Banknot 2 mln PLZ";
 KonspektAttachment attach_banknot_plz_2_mln = KonspektAttachment(
-    name: attach_name_banknot_plz_2_mln,
-    title: attach_title_banknot_plz_2_mln,
+    name: _attach_name_banknot_plz_2_mln,
+    title: _attach_title_banknot_plz_2_mln,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_plz_2_mln.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_plz_2_mln.docx'),
@@ -108,12 +108,12 @@ KonspektAttachment attach_banknot_plz_2_mln = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.double)
 );
 
-const String attach_html_banknot_plz_5_mln = '<a href="${attach_name_banknot_plz_5_mln}@attachment">${attach_title_banknot_plz_5_mln}</a>';
-const String attach_name_banknot_plz_5_mln = "banknot_plz_5_mln";
-const String attach_title_banknot_plz_5_mln = "Banknot 5 mln PLZ";
+const String _attach_html_banknot_plz_5_mln = '<a href="${_attach_name_banknot_plz_5_mln}@attachment">${_attach_title_banknot_plz_5_mln}</a>';
+const String _attach_name_banknot_plz_5_mln = "banknot_plz_5_mln";
+const String _attach_title_banknot_plz_5_mln = "Banknot 5 mln PLZ";
 KonspektAttachment attach_banknot_plz_5_mln = KonspektAttachment(
-    name: attach_name_banknot_plz_5_mln,
-    title: attach_title_banknot_plz_5_mln,
+    name: _attach_name_banknot_plz_5_mln,
+    title: _attach_title_banknot_plz_5_mln,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'banknot_plz_5_mln.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'banknot_plz_5_mln.docx'),
@@ -124,12 +124,12 @@ KonspektAttachment attach_banknot_plz_5_mln = KonspektAttachment(
 
 // ---
 
-const String attach_html_wydarzenia_codzienne = '<a href="${attach_name_wydarzenia_codzienne}@attachment">${attach_title_wydarzenia_codzienne}</a>';
-const String attach_name_wydarzenia_codzienne = "wydarzenia_codzienne";
-const String attach_title_wydarzenia_codzienne = "Wydarzenia codzienne";
+const String _attach_html_wydarzenia_codzienne = '<a href="${_attach_name_wydarzenia_codzienne}@attachment">${_attach_title_wydarzenia_codzienne}</a>';
+const String _attach_name_wydarzenia_codzienne = "wydarzenia_codzienne";
+const String _attach_title_wydarzenia_codzienne = "Wydarzenia codzienne";
 KonspektAttachment attach_wydarzenia_codzienne = KonspektAttachment(
-  name: attach_name_wydarzenia_codzienne,
-  title: attach_title_wydarzenia_codzienne,
+  name: _attach_name_wydarzenia_codzienne,
+  title: _attach_title_wydarzenia_codzienne,
   assets: {
     FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'wydarzenia_codzienne.pdf'),
     FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'wydarzenia_codzienne.docx')
@@ -137,12 +137,12 @@ KonspektAttachment attach_wydarzenia_codzienne = KonspektAttachment(
   print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
 
-const String attach_html_raporty_obserwacji_obywatelskich = '<a href="${attach_name_raporty_obserwacji_obywatelskich}@attachment">${attach_title_raporty_obserwacji_obywatelskich}</a>';
-const String attach_name_raporty_obserwacji_obywatelskich = "raporty_obserwacji_obywatelskich";
-const String attach_title_raporty_obserwacji_obywatelskich = "Raporty obserwacji obywatelskich";
+const String _attach_html_raporty_obserwacji_obywatelskich = '<a href="${_attach_name_raporty_obserwacji_obywatelskich}@attachment">${_attach_title_raporty_obserwacji_obywatelskich}</a>';
+const String _attach_name_raporty_obserwacji_obywatelskich = "raporty_obserwacji_obywatelskich";
+const String _attach_title_raporty_obserwacji_obywatelskich = "Raporty obserwacji obywatelskich";
 KonspektAttachment attach_raporty_obserwacji_obywatelskich = KonspektAttachment(
-    name: attach_name_raporty_obserwacji_obywatelskich,
-    title: attach_title_raporty_obserwacji_obywatelskich,
+    name: _attach_name_raporty_obserwacji_obywatelskich,
+    title: _attach_title_raporty_obserwacji_obywatelskich,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'raporty_obserwacji_obywatelskich.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'raporty_obserwacji_obywatelskich.docx')
@@ -150,12 +150,12 @@ KonspektAttachment attach_raporty_obserwacji_obywatelskich = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
 
-const String attach_html_raporty_realiow_zycia = '<a href="${attach_name_raporty_realiow_zycia}@attachment">${attach_title_karty_wiedzy}</a>';
-const String attach_name_raporty_realiow_zycia = "raporty_realiow_zycia";
-const String attach_title_raporty_realiow_zycia = "Raporty realiów życia";
+const String _attach_html_raporty_realiow_zycia = '<a href="${_attach_name_raporty_realiow_zycia}@attachment">${_attach_title_karty_wiedzy}</a>';
+const String _attach_name_raporty_realiow_zycia = "raporty_realiow_zycia";
+const String _attach_title_raporty_realiow_zycia = "Raporty realiów życia";
 KonspektAttachment attach_raporty_realiow_zycia = KonspektAttachment(
-    name: attach_name_raporty_realiow_zycia,
-    title: attach_title_raporty_realiow_zycia,
+    name: _attach_name_raporty_realiow_zycia,
+    title: _attach_title_raporty_realiow_zycia,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'raporty_realiow_zycia.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'raporty_realiow_zycia.docx')
@@ -163,12 +163,12 @@ KonspektAttachment attach_raporty_realiow_zycia = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
 
-const String attach_html_wniosek_o_zalegendowanie_agenta = '<a href="${attach_name_wniosek_o_zalegendowanie_agenta}@attachment">${attach_title_wniosek_o_zalegendowanie_agenta}</a>';
-const String attach_name_wniosek_o_zalegendowanie_agenta = "wniosek_o_zalegendowanie_agenta";
-const String attach_title_wniosek_o_zalegendowanie_agenta = "Wniosek o zalegendowanie agenta";
+const String _attach_html_wniosek_o_zalegendowanie_agenta = '<a href="${_attach_name_wniosek_o_zalegendowanie_agenta}@attachment">${_attach_title_wniosek_o_zalegendowanie_agenta}</a>';
+const String _attach_name_wniosek_o_zalegendowanie_agenta = "wniosek_o_zalegendowanie_agenta";
+const String _attach_title_wniosek_o_zalegendowanie_agenta = "Wniosek o zalegendowanie agenta";
 KonspektAttachment attach_wniosek_o_zalegendowanie_agenta = KonspektAttachment(
-    name: attach_name_wniosek_o_zalegendowanie_agenta,
-    title: attach_title_wniosek_o_zalegendowanie_agenta,
+    name: _attach_name_wniosek_o_zalegendowanie_agenta,
+    title: _attach_title_wniosek_o_zalegendowanie_agenta,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'wniosek_o_zalegendowanie_agenta.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'wniosek_o_zalegendowanie_agenta.docx')
@@ -176,12 +176,12 @@ KonspektAttachment attach_wniosek_o_zalegendowanie_agenta = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
 
-const String attach_html_wydarzenia_specjalne = '<a href="${attach_name_wydarzenia_specjalne}@attachment">${attach_title_wydarzenia_specjalne}</a>';
-const String attach_name_wydarzenia_specjalne = "wydarzenia_specjalne";
-const String attach_title_wydarzenia_specjalne = "Wydarzenia specjalne";
+const String _attach_html_wydarzenia_specjalne = '<a href="${_attach_name_wydarzenia_specjalne}@attachment">${_attach_title_wydarzenia_specjalne}</a>';
+const String _attach_name_wydarzenia_specjalne = "wydarzenia_specjalne";
+const String _attach_title_wydarzenia_specjalne = "Wydarzenia specjalne";
 KonspektAttachment attach_wydarzenia_specjalne = KonspektAttachment(
-    name: attach_name_wydarzenia_specjalne,
-    title: attach_title_wydarzenia_specjalne,
+    name: _attach_name_wydarzenia_specjalne,
+    title: _attach_title_wydarzenia_specjalne,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'wydarzenia_specjalne.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'wydarzenia_specjalne.docx')
@@ -189,12 +189,12 @@ KonspektAttachment attach_wydarzenia_specjalne = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
 
-const String attach_html_sciaga_dla_uczestnikow = '<a href="${attach_name_sciaga_dla_uczestnikow}@attachment">${attach_title_sciaga_dla_uczestnikow}</a>';
-const String attach_name_sciaga_dla_uczestnikow = "sciaga_dla_uczestnikow";
-const String attach_title_sciaga_dla_uczestnikow = "Ściąga dla uczestników";
+const String _attach_html_sciaga_dla_uczestnikow = '<a href="${_attach_name_sciaga_dla_uczestnikow}@attachment">${_attach_title_sciaga_dla_uczestnikow}</a>';
+const String _attach_name_sciaga_dla_uczestnikow = "sciaga_dla_uczestnikow";
+const String _attach_title_sciaga_dla_uczestnikow = "Ściąga dla uczestników";
 KonspektAttachment attach_sciaga_dla_uczestnikow = KonspektAttachment(
-    name: attach_name_sciaga_dla_uczestnikow,
-    title: attach_title_sciaga_dla_uczestnikow,
+    name: _attach_name_sciaga_dla_uczestnikow,
+    title: _attach_title_sciaga_dla_uczestnikow,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'sciaga_dla_uczestnikow.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'sciaga_dla_uczestnikow.docx')
@@ -202,12 +202,12 @@ KonspektAttachment attach_sciaga_dla_uczestnikow = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
 
-const String attach_html_znaczniki_statystyk_wojewodztw = '<a href="${attach_name_znaczniki_statystyk_wojewodztw}@attachment">${attach_title_znaczniki_statystyk_wojewodztw}</a>';
-const String attach_name_znaczniki_statystyk_wojewodztw = "znaczniki_statystyk_wojewodztw";
-const String attach_title_znaczniki_statystyk_wojewodztw = "Znaczniki statystyk województw";
+const String _attach_html_znaczniki_statystyk_wojewodztw = '<a href="${_attach_name_znaczniki_statystyk_wojewodztw}@attachment">${_attach_title_znaczniki_statystyk_wojewodztw}</a>';
+const String _attach_name_znaczniki_statystyk_wojewodztw = "znaczniki_statystyk_wojewodztw";
+const String _attach_title_znaczniki_statystyk_wojewodztw = "Znaczniki statystyk województw";
 KonspektAttachment attach_znaczniki_statystyk_wojewodztw = KonspektAttachment(
-    name: attach_name_znaczniki_statystyk_wojewodztw,
-    title: attach_title_znaczniki_statystyk_wojewodztw,
+    name: _attach_name_znaczniki_statystyk_wojewodztw,
+    title: _attach_title_znaczniki_statystyk_wojewodztw,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'znaczniki_statystyk_wojewodztw.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'znaczniki_statystyk_wojewodztw.docx')
@@ -215,12 +215,12 @@ KonspektAttachment attach_znaczniki_statystyk_wojewodztw = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single)
 );
 
-const String attach_html_karty_wiedzy = '<a href="${attach_name_karty_wiedzy}@attachment">${attach_title_karty_wiedzy}</a>';
-const String attach_name_karty_wiedzy = "karty_wiedzy";
-const String attach_title_karty_wiedzy = "Karty wiedzy";
+const String _attach_html_karty_wiedzy = '<a href="${_attach_name_karty_wiedzy}@attachment">${_attach_title_karty_wiedzy}</a>';
+const String _attach_name_karty_wiedzy = "karty_wiedzy";
+const String _attach_title_karty_wiedzy = "Karty wiedzy";
 KonspektAttachment attach_karty_wiedzy = KonspektAttachment(
-    name: attach_name_karty_wiedzy,
-    title: attach_title_karty_wiedzy,
+    name: _attach_name_karty_wiedzy,
+    title: _attach_title_karty_wiedzy,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'karty_wiedzy.pdf'),
       FileFormat.urlDocx: urlToGitlabFile(_konspekt_name, 'karty_wiedzy.docx')
@@ -230,12 +230,12 @@ KonspektAttachment attach_karty_wiedzy = KonspektAttachment(
 
 // ---
 
-const String attach_html_sekretarz_bierut = '<a href="${attach_name_sekretarz_bierut}@attachment">${attach_title_sekretarz_bierut}</a>';
-const String attach_name_sekretarz_bierut = "sekretarz_bierut";
-const String attach_title_sekretarz_bierut = "Sekretarz Bierut";
+const String _attach_html_sekretarz_bierut = '<a href="${_attach_name_sekretarz_bierut}@attachment">${_attach_title_sekretarz_bierut}</a>';
+const String _attach_name_sekretarz_bierut = "sekretarz_bierut";
+const String _attach_title_sekretarz_bierut = "Sekretarz Bierut";
 KonspektAttachment attach_sekretarz_bierut = KonspektAttachment(
-    name: attach_name_sekretarz_bierut,
-    title: attach_title_sekretarz_bierut,
+    name: _attach_name_sekretarz_bierut,
+    title: _attach_title_sekretarz_bierut,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'sekretarz_bierut.pdf'),
       FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'sekretarz_bierut.webp')
@@ -243,12 +243,12 @@ KonspektAttachment attach_sekretarz_bierut = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
 );
 
-const String attach_html_sekretarz_gomulka = '<a href="${attach_name_sekretarz_gomulka}@attachment">${attach_title_sekretarz_gomulka}</a>';
-const String attach_name_sekretarz_gomulka = "sekretarz_gomulka";
-const String attach_title_sekretarz_gomulka = "Sekretarz Gomułka";
+const String _attach_html_sekretarz_gomulka = '<a href="${_attach_name_sekretarz_gomulka}@attachment">${_attach_title_sekretarz_gomulka}</a>';
+const String _attach_name_sekretarz_gomulka = "sekretarz_gomulka";
+const String _attach_title_sekretarz_gomulka = "Sekretarz Gomułka";
 KonspektAttachment attach_sekretarz_gomulka = KonspektAttachment(
-    name: attach_name_sekretarz_gomulka,
-    title: attach_title_sekretarz_gomulka,
+    name: _attach_name_sekretarz_gomulka,
+    title: _attach_title_sekretarz_gomulka,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'sekretarz_gomulka.pdf'),
       FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'sekretarz_gomulka.webp')
@@ -256,12 +256,12 @@ KonspektAttachment attach_sekretarz_gomulka = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
 );
 
-const String attach_html_sekretarz_gierek = '<a href="${attach_name_sekretarz_gierek}@attachment">${attach_title_sekretarz_gierek}</a>';
-const String attach_name_sekretarz_gierek = "sekretarz_gierek";
-const String attach_title_sekretarz_gierek = "Sekretarz Gierek";
+const String _attach_html_sekretarz_gierek = '<a href="${_attach_name_sekretarz_gierek}@attachment">${_attach_title_sekretarz_gierek}</a>';
+const String _attach_name_sekretarz_gierek = "sekretarz_gierek";
+const String _attach_title_sekretarz_gierek = "Sekretarz Gierek";
 KonspektAttachment attach_sekretarz_gierek = KonspektAttachment(
-    name: attach_name_sekretarz_gierek,
-    title: attach_title_sekretarz_gierek,
+    name: _attach_name_sekretarz_gierek,
+    title: _attach_title_sekretarz_gierek,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'sekretarz_gierek.pdf'),
       FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'sekretarz_gierek.webp')
@@ -269,12 +269,12 @@ KonspektAttachment attach_sekretarz_gierek = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
 );
 
-const String attach_html_sekretarz_jaruzelski = '<a href="${attach_name_sekretarz_jaruzelski}@attachment">${attach_title_sekretarz_jaruzelski}</a>';
-const String attach_name_sekretarz_jaruzelski = "sekretarz_jaruzelski";
-const String attach_title_sekretarz_jaruzelski = "Sekretarz Jaruzelski";
+const String _attach_html_sekretarz_jaruzelski = '<a href="${_attach_name_sekretarz_jaruzelski}@attachment">${_attach_title_sekretarz_jaruzelski}</a>';
+const String _attach_name_sekretarz_jaruzelski = "sekretarz_jaruzelski";
+const String _attach_title_sekretarz_jaruzelski = "Sekretarz Jaruzelski";
 KonspektAttachment attach_sekretarz_jaruzelski = KonspektAttachment(
-    name: attach_name_sekretarz_jaruzelski,
-    title: attach_title_sekretarz_jaruzelski,
+    name: _attach_name_sekretarz_jaruzelski,
+    title: _attach_title_sekretarz_jaruzelski,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'sekretarz_jaruzelski.pdf'),
       FileFormat.urlWebp: urlToGitlabFile(_konspekt_name, 'sekretarz_jaruzelski.webp')
@@ -282,12 +282,12 @@ KonspektAttachment attach_sekretarz_jaruzelski = KonspektAttachment(
     print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.color, side: KonspektAttachmentPrintSide.single)
 );
 
-const String attach_html_plakaty = '<a href="${attach_name_plakaty}@attachment">${attach_title_plakaty}</a>';
-const String attach_name_plakaty = "plakaty";
-const String attach_title_plakaty = "Plakaty propagandowe";
+const String _attach_html_plakaty = '<a href="${_attach_name_plakaty}@attachment">${_attach_title_plakaty}</a>';
+const String _attach_name_plakaty = "plakaty";
+const String _attach_title_plakaty = "Plakaty propagandowe";
 KonspektAttachment attach_plakaty = KonspektAttachment(
-    name: attach_name_plakaty,
-    title: attach_title_plakaty,
+    name: _attach_name_plakaty,
+    title: _attach_title_plakaty,
     assets: {
       FileFormat.urlPdf: urlToGitlabFile(_konspekt_name, 'plakaty.pdf'),
     },
@@ -385,124 +385,124 @@ Konspekt zycie_i_swiat_prl = Konspekt(
       ),
 
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_mapa_glowna"',
-          attachmentName: attach_name_mapa_glowna,
+          name: 'Wydrukowany załącznik “$_attach_title_mapa_glowna"',
+          attachmentName: _attach_name_mapa_glowna,
           amount: 1,
           comment: "Załącznik stworzony przy użyciu strony rasterbator.net",
           additionalPreparation: "Wydrukowane kartki z załącznika pdf służą temu, by w łatwy sposób nanieść kontury mapę (111cm x 85cm) na prześcieradło.",
       ),
 
       KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_banknot_csk_1"',
-        attachmentName: attach_name_banknot_csk_1,
+        name: 'Wydrukowany załącznik “$_attach_title_banknot_csk_1"',
+        attachmentName: _attach_name_banknot_csk_1,
         amount: 3,
         additionalPreparation: "Każdy banknot należy wyciąć."
       ),
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_banknot_ddm_1"',
-          attachmentName: attach_name_banknot_ddm_1,
+          name: 'Wydrukowany załącznik “$_attach_title_banknot_ddm_1"',
+          attachmentName: _attach_name_banknot_ddm_1,
           amount: 3,
           additionalPreparation: "Każdy banknot należy wyciąć."
       ),
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_banknot_sur_1"',
-          attachmentName: attach_name_banknot_sur_1,
+          name: 'Wydrukowany załącznik “$_attach_title_banknot_sur_1"',
+          attachmentName: _attach_name_banknot_sur_1,
           amount: 3,
           additionalPreparation: "Każdy banknot należy wyciąć."
       ),
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_banknot_usd_1"',
-          attachmentName: attach_name_banknot_usd_1,
-          amount: 3,
-          additionalPreparation: "Każdy banknot należy wyciąć."
-      ),
-
-      KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_banknot_plz_1_mln"',
-          attachmentName: attach_name_banknot_plz_1_mln,
-          amount: 3,
-          additionalPreparation: "Każdy banknot należy wyciąć."
-      ),
-      KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_banknot_plz_2_mln"',
-          attachmentName: attach_name_banknot_plz_2_mln,
-          amount: 3,
-          additionalPreparation: "Każdy banknot należy wyciąć."
-      ),
-      KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_banknot_plz_5_mln"',
-          attachmentName: attach_name_banknot_plz_5_mln,
+          name: 'Wydrukowany załącznik “$_attach_title_banknot_usd_1"',
+          attachmentName: _attach_name_banknot_usd_1,
           amount: 3,
           additionalPreparation: "Każdy banknot należy wyciąć."
       ),
 
       KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_wydarzenia_codzienne"',
-        attachmentName: attach_name_wydarzenia_codzienne
+          name: 'Wydrukowany załącznik “$_attach_title_banknot_plz_1_mln"',
+          attachmentName: _attach_name_banknot_plz_1_mln,
+          amount: 3,
+          additionalPreparation: "Każdy banknot należy wyciąć."
       ),
       KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_raporty_obserwacji_obywatelskich"',
-        attachmentName: attach_name_raporty_obserwacji_obywatelskich,
+          name: 'Wydrukowany załącznik “$_attach_title_banknot_plz_2_mln"',
+          attachmentName: _attach_name_banknot_plz_2_mln,
+          amount: 3,
+          additionalPreparation: "Każdy banknot należy wyciąć."
+      ),
+      KonspektMaterial(
+          name: 'Wydrukowany załącznik “$_attach_title_banknot_plz_5_mln"',
+          attachmentName: _attach_name_banknot_plz_5_mln,
+          amount: 3,
+          additionalPreparation: "Każdy banknot należy wyciąć."
+      ),
+
+      KonspektMaterial(
+        name: 'Wydrukowany załącznik “$_attach_title_wydarzenia_codzienne"',
+        attachmentName: _attach_name_wydarzenia_codzienne
+      ),
+      KonspektMaterial(
+        name: 'Wydrukowany załącznik “$_attach_title_raporty_obserwacji_obywatelskich"',
+        attachmentName: _attach_name_raporty_obserwacji_obywatelskich,
         amount: 1
       ),
       KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_raporty_realiow_zycia"',
-        attachmentName: attach_name_raporty_realiow_zycia,
+        name: 'Wydrukowany załącznik “$_attach_title_raporty_realiow_zycia"',
+        attachmentName: _attach_name_raporty_realiow_zycia,
         amount: 1
       ),
       KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_wniosek_o_zalegendowanie_agenta"',
-        attachmentName: attach_name_wniosek_o_zalegendowanie_agenta,
+        name: 'Wydrukowany załącznik “$_attach_title_wniosek_o_zalegendowanie_agenta"',
+        attachmentName: _attach_name_wniosek_o_zalegendowanie_agenta,
         amount: 1
       ),
       KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_wydarzenia_specjalne"',
-        attachmentName: attach_name_wydarzenia_specjalne,
+        name: 'Wydrukowany załącznik “$_attach_title_wydarzenia_specjalne"',
+        attachmentName: _attach_name_wydarzenia_specjalne,
         additionalPreparation: 'Karty należy wyciąć wzdłuż przerywanych linii i potasować.',
         amount: 16
       ),
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_sciaga_dla_uczestnikow"',
-          attachmentName: attach_name_sciaga_dla_uczestnikow,
+          name: 'Wydrukowany załącznik “$_attach_title_sciaga_dla_uczestnikow"',
+          attachmentName: _attach_name_sciaga_dla_uczestnikow,
           amount: 1
       ),
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_znaczniki_statystyk_wojewodztw"',
-          attachmentName: attach_name_znaczniki_statystyk_wojewodztw,
+          name: 'Wydrukowany załącznik “$_attach_title_znaczniki_statystyk_wojewodztw"',
+          attachmentName: _attach_name_znaczniki_statystyk_wojewodztw,
           amount: 1,
           additionalPreparation: 'Paski z liczbami oraz kartoniki należy wyciąć wzdłuż przerywanych linii. Kartoniki należy następnie dodatkowo naciąć wzdłuż czterech przerywanych linii. Na koniec do każdego kartonika należy wsunąć po dwa paski tak, by powstały dwa "suwaki" do łatwej zamiany wartości liczbowej',
       ),
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_karty_wiedzy"',
-          attachmentName: attach_name_karty_wiedzy,
+          name: 'Wydrukowany załącznik “$_attach_title_karty_wiedzy"',
+          attachmentName: _attach_name_karty_wiedzy,
           additionalPreparation: 'Karty należy wyciąć wzdłuż przerywanych linii, podzielić na trzy grupy według poziomów i każdą grupę potasować.',
           amount: 16
       ),
 
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_sekretarz_bierut"',
-          attachmentName: attach_name_sekretarz_bierut,
+          name: 'Wydrukowany załącznik “$_attach_title_sekretarz_bierut"',
+          attachmentName: _attach_name_sekretarz_bierut,
           amount: 1
       ),
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_sekretarz_gomulka"',
-          attachmentName: attach_name_sekretarz_gomulka,
+          name: 'Wydrukowany załącznik “$_attach_title_sekretarz_gomulka"',
+          attachmentName: _attach_name_sekretarz_gomulka,
           amount: 1
       ),
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_sekretarz_gierek"',
-          attachmentName: attach_name_sekretarz_gomulka,
+          name: 'Wydrukowany załącznik “$_attach_title_sekretarz_gierek"',
+          attachmentName: _attach_name_sekretarz_gomulka,
           amount: 1
       ),
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_sekretarz_jaruzelski"',
-          attachmentName: attach_name_sekretarz_jaruzelski,
+          name: 'Wydrukowany załącznik “$_attach_title_sekretarz_jaruzelski"',
+          attachmentName: _attach_name_sekretarz_jaruzelski,
           amount: 1
       ),
 
       KonspektMaterial(
-          name: 'Wydrukowany załącznik “$attach_title_plakaty"',
-          attachmentName: attach_name_plakaty,
+          name: 'Wydrukowany załącznik “$_attach_title_plakaty"',
+          attachmentName: _attach_name_plakaty,
           amount: 1,
           comment: 'Plakaty są jedynie elementem dekoracyjnym. Można je porozwieszać w różnych miejscach.'
       )
@@ -536,7 +536,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<li>'
         '<p style="text-align:justify;">'
         '<u>Wywołując <b>udane strajki</b></u>'
-        '<br>Strajki mogą wywoływać <b>agenci wpływu</b> - są to fikcyjne postaci, które stronnictwa plasują w poszczególnych <b>województwach</b> (agenci są umieszczani w formie znaczników na <b>głównej mapie</b>). Do skutecznego umieszczenia agenta wpływu w danym województwie niezbędne jest stworzenie mu odpowiedniej <b>legendy</b>, do której potrzebne są informacje o PRL (uczestnicy mają ciągły dostęp załączników: $attach_html_raporty_realiow_zycia i $attach_html_raporty_obserwacji_obywatelskich). Agenci mogą wywołać strajk w każdym momencie - powodzenie strajku zależy od warunków panujących w województwie (<b>poziom nastrojów społecznych</b> i <b>poziom kontroli</b>) oraz od <b>zasobów</b>, jakie dany agent ma przydzielone w momencie przeprowadzania strajku. Jeśli strajk się powiedzie, stronnictwo zdobywa <b>pięć punktów wpływu</b>. Jeśli się nie powiedzie, agent zostaje zdemaskowany i jest wycofywany z gry.'
+        '<br>Strajki mogą wywoływać <b>agenci wpływu</b> - są to fikcyjne postaci, które stronnictwa plasują w poszczególnych <b>województwach</b> (agenci są umieszczani w formie znaczników na <b>głównej mapie</b>). Do skutecznego umieszczenia agenta wpływu w danym województwie niezbędne jest stworzenie mu odpowiedniej <b>legendy</b>, do której potrzebne są informacje o PRL (uczestnicy mają ciągły dostęp załączników: $_attach_html_raporty_realiow_zycia i $_attach_html_raporty_obserwacji_obywatelskich). Agenci mogą wywołać strajk w każdym momencie - powodzenie strajku zależy od warunków panujących w województwie (<b>poziom nastrojów społecznych</b> i <b>poziom kontroli</b>) oraz od <b>zasobów</b>, jakie dany agent ma przydzielone w momencie przeprowadzania strajku. Jeśli strajk się powiedzie, stronnictwo zdobywa <b>pięć punktów wpływu</b>. Jeśli się nie powiedzie, agent zostaje zdemaskowany i jest wycofywany z gry.'
         '</p>'
         '</li>'
         '</ol>'
@@ -544,7 +544,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<h1>Szczegóły gry</h1>'
         '<h2>Województwa</h2>'
         '<p style="text-align:justify;">'
-        'Gra toczy się głównie w jednym, ustalonym miejscu, gdzie na stałe umieszczona jest duża (ok. 1x1 m) <b>mapa główna</b> - konturowa mapa Polski podzielonej na 49 województw z okresu PRL wraz z fragemtami sąsiadujących wówczas z Polską państw (załącznik $attach_name_mapa_glowna). Mapa główna służy śledzeniu aktualnego stanu gry: rozmieszczenia agentów, skutków ich działania, wydarzeń specjalnych itd..'
+        'Gra toczy się głównie w jednym, ustalonym miejscu, gdzie na stałe umieszczona jest duża (ok. 1x1 m) <b>mapa główna</b> - konturowa mapa Polski podzielonej na 49 województw z okresu PRL wraz z fragemtami sąsiadujących wówczas z Polską państw (załącznik $_attach_name_mapa_glowna). Mapa główna służy śledzeniu aktualnego stanu gry: rozmieszczenia agentów, skutków ich działania, wydarzeń specjalnych itd..'
         '<br>'
         '<br>Każde województwo na mapie jest opisane przez następujące elementy:'
         '</p>'
@@ -555,7 +555,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<b>Historia, kultura, struktura pracy, demografia</b>'
         '<br>Skala: brak.'
         '<br>'
-        '<br>Każde województwo posiada opis swoich specyficznych cech, statystyk itp.. Nie są one przedstawione na mapie głównej, ale są dostępne dla uczestników w formie segregatora z obok mapy z wydrukowanym załącznikiem $attach_html_raporty_realiow_zycia.'
+        '<br>Każde województwo posiada opis swoich specyficznych cech, statystyk itp.. Nie są one przedstawione na mapie głównej, ale są dostępne dla uczestników w formie segregatora z obok mapy z wydrukowanym załącznikiem $_attach_html_raporty_realiow_zycia.'
         '</p>'
         '</li>'
 
@@ -564,7 +564,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<b>Nastroje społeczne</b> (zadowolenie mieszkańców)'
         '<br>Skala: 1-10.'
         '<br>'
-        '<br>Nastroje społeczne zależą od wielu czynników: poziomu życia, dostępności produktów (jedzenie, ubrania, sprzęty domowe), dostępności usług (szkoła, lekarz), dostępności mieszkań, świadomości różnic między życiem w PRL a życiem za granicą, itp.. Poziom nastrojów społecznych jest ozaczony na mapie za pomocą znaczników $attach_html_znaczniki_statystyk_wojewodztw'
+        '<br>Nastroje społeczne zależą od wielu czynników: poziomu życia, dostępności produktów (jedzenie, ubrania, sprzęty domowe), dostępności usług (szkoła, lekarz), dostępności mieszkań, świadomości różnic między życiem w PRL a życiem za granicą, itp.. Poziom nastrojów społecznych jest ozaczony na mapie za pomocą znaczników $_attach_html_znaczniki_statystyk_wojewodztw'
         '</p>'
         '</li>'
 
@@ -573,7 +573,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<b>Kontrola</b> (milicyjna kontrola obywateli)'
         '<br>Skala: 1-10.'
         '<br>'
-        '<br>Milicyjna kontrola obywateli niesie za sobą inwigilację, kontrolę, przeszukania, porządek i mniejszą chęć do występowania przeciwko aparatowi władzy przez ludność. Poziom kontroli jest ozaczony na mapie za pomocą znaczników $attach_html_znaczniki_statystyk_wojewodztw.'
+        '<br>Milicyjna kontrola obywateli niesie za sobą inwigilację, kontrolę, przeszukania, porządek i mniejszą chęć do występowania przeciwko aparatowi władzy przez ludność. Poziom kontroli jest ozaczony na mapie za pomocą znaczników $_attach_html_znaczniki_statystyk_wojewodztw.'
         '</p>'
         '</li>'
 
@@ -791,7 +791,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         // Szczegóły gry - agenci wpływu - pozyskiwanie informacji
         '<h3>Pozyskiwanie informacji</h3>'
         '<p style="text-align:justify;">'
-        'Stronnictwa (uczestnicy) otrzymują co turę informacje na temat wydarzeń w województwach, w którym mają umieszczonych agentów oraz województwach sąsiednich. Informacje te są dostępne w załączniku $attach_html_wydarzenia_codzienne. Stronnictwa mogą wykorzystywać te informacje w celu wpływania na nastroje społeczne.'
+        'Stronnictwa (uczestnicy) otrzymują co turę informacje na temat wydarzeń w województwach, w którym mają umieszczonych agentów oraz województwach sąsiednich. Informacje te są dostępne w załączniku $_attach_html_wydarzenia_codzienne. Stronnictwa mogą wykorzystywać te informacje w celu wpływania na nastroje społeczne.'
         '</p>'
         // Szczegóły gry - agenci wpływu - nagłaśnianie informacji
         '<h3>Nagłaśnianie informacji</h3>'
@@ -834,7 +834,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<p style="text-align:justify;">'
         'Karty wiedzy są kopią mechaniki z gry planszowej “Splendor”.'
         '<br>'
-        '<br>Stronnictwa mogą zdobywać karty wiedzy (dostępne w załączniku $attach_html_karty_wiedzy) poprzez inwestowanie w nie odpowiednich środków. Karty wiedzy dostarczają dwóch rzeczy: zniżek na płatności w różnych walutach oraz (w niektórych przypadkach) punktów wpływu. Karty te są ciągle ogólnie dostępne na wspólnej dla stronnictw “tablicy rozwoju”.'
+        '<br>Stronnictwa mogą zdobywać karty wiedzy (dostępne w załączniku $_attach_html_karty_wiedzy) poprzez inwestowanie w nie odpowiednich środków. Karty wiedzy dostarczają dwóch rzeczy: zniżek na płatności w różnych walutach oraz (w niektórych przypadkach) punktów wpływu. Karty te są ciągle ogólnie dostępne na wspólnej dla stronnictw “tablicy rozwoju”.'
         '<br>'
         '<br>Karty wiedzy dzielą się na trzy kategorie: pierwszą, drugą i trzecią.'
         '</p>'
@@ -896,7 +896,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
         '<li>'
             '<p style="text-align:justify;">'
             '<b>Zgłaszanie nowych agentów</b>'
-            '<br>Zgłaszanie nowych agentów do umieszczenia wraz z opłatą kosztu poprzez wręczenie uzupełnionego załącznika $attach_html_wniosek_o_zalegendowanie_agenta'
+            '<br>Zgłaszanie nowych agentów do umieszczenia wraz z opłatą kosztu poprzez wręczenie uzupełnionego załącznika $_attach_html_wniosek_o_zalegendowanie_agenta'
             '</p>'
         '</li>'
         '<li>'

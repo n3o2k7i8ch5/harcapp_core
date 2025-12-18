@@ -5,12 +5,12 @@ import 'package:harcapp_core/values/people/data.dart';
 
 import '../level_examples.dart';
 
-const String attach_html_wycinki_informacji = '<a href="${attach_name_wycinki_informacji}@attachment">${attach_title_wycinki_informacji}</a>';
-const String attach_name_wycinki_informacji = "wycinki_informacji";
-const String attach_title_wycinki_informacji = "Wycinki informacji";
-const KonspektAttachment attach_wycinki_informacji = KonspektAttachment(
-  name: attach_name_wycinki_informacji,
-  title: attach_title_wycinki_informacji,
+const String _attach_html_wycinki_informacji = '<a href="${_attach_name_wycinki_informacji}@attachment">${_attach_title_wycinki_informacji}</a>';
+const String _attach_name_wycinki_informacji = "wycinki_informacji";
+const String _attach_title_wycinki_informacji = "Wycinki informacji";
+const KonspektAttachment _attach_wycinki_informacji = KonspektAttachment(
+  name: _attach_name_wycinki_informacji,
+  title: _attach_title_wycinki_informacji,
   assets: {
     FileFormat.pdf: null
   },
@@ -55,9 +55,9 @@ Konspekt gang_potencjalnych_porywaczy = Konspekt(
   materials: [
     KonspektMaterial(
       amount: 1,
-      name: 'Wydrukowany załącznik “$attach_title_wycinki_informacji”',
+      name: 'Wydrukowany załącznik “$_attach_title_wycinki_informacji”',
       additionalPreparation: 'Wydrukowany załącznik należy pociąć wzdłuż przerywanych linii.',
-      attachmentName: attach_name_wycinki_informacji,
+      attachmentName: _attach_name_wycinki_informacji,
     ),
   ],
 
@@ -78,7 +78,7 @@ Konspekt gang_potencjalnych_porywaczy = Konspekt(
       '<li><p>Robaczek i spółka</p></li>'
       '<li><p>Kolorowe irokezy</p></li>'
       '</ul>'
-      '<p style="text-align:justify;">Harcerze mają do zdobycia 64 wycinki informacji (załącznik: $attach_html_wycinki_informacji). Spośród nich jedynie 8 wycinków ma znaczenie dla sprawy, ponieważ dają alibi niektórym gangom - pozostałe wycinki nie mają żadnego znaczenia.'
+      '<p style="text-align:justify;">Harcerze mają do zdobycia 64 wycinki informacji (załącznik: $_attach_html_wycinki_informacji). Spośród nich jedynie 8 wycinków ma znaczenie dla sprawy, ponieważ dają alibi niektórym gangom - pozostałe wycinki nie mają żadnego znaczenia.'
       '<br>'
       '<br>Alibi posiadają następujące gangi:</p>'
       '<ul>'
@@ -104,6 +104,6 @@ Konspekt gang_potencjalnych_porywaczy = Konspekt(
       '<br>'
       '<br>Forma zdobywania wycinków informacji jest dowolna: mogą one być nagrodą w innej grze za wykonane zadania, mogą być schowane na określonym terenie, itp..</p>',
   attachments: [
-    attach_wycinki_informacji
+    _attach_wycinki_informacji
   ],
 );

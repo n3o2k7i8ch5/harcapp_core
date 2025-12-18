@@ -4,6 +4,39 @@ import 'package:harcapp_core/harcthought/poradnik/data.dart';
 
 import 'common.dart';
 
+// Source: CZYNNIKI I MECHANIZMY KSZTAŁTOWANIA DUCHOWOŚCI
+
+const String attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = '<a href="$attach_name_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci@attachment">$attach_title_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci</a>';
+const String attach_name_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = 'poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci';
+const String attach_title_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = 'Poradnik "$poradnik_title_czynniki_i_mechanizmy_ksztaltowania_duchowosci"';
+KonspektAttachment attach_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = KonspektAttachment(
+  name: attach_name_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  title: attach_title_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  assets: {
+    FileFormat.urlPdf: urlToPoradnikFile(poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci, "$poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci.pdf"),
+    FileFormat.urlDocx: urlToPoradnikFile(poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci, "$poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci.docx"),
+  },
+);
+
+const String attach_html_scenariusze_czynnikow_duchowosci = '<a href="$attach_name_scenariusze_czynnikow_duchowosci@attachment">$attach_title_scenariusze_czynnikow_duchowosci</a>';
+const String attach_name_scenariusze_czynnikow_duchowosci = 'scenariusze_czynnikow_duchowosci';
+const String attach_title_scenariusze_czynnikow_duchowosci = 'Scenariusze czynników duchowości';
+const KonspektAttachment attach_scenariusze_czynnikow_duchowosci = KonspektAttachment(
+  name: attach_name_scenariusze_czynnikow_duchowosci,
+  title: attach_title_scenariusze_czynnikow_duchowosci,
+  assets: {
+    FileFormat.pdf: 'common/czynniki_i_mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_scenariusze_czynnikow_duchowosci.pdf',
+    FileFormat.docx: 'common/czynniki_i_mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_scenariusze_czynnikow_duchowosci.docx',
+  },
+);
+
+List<KonspektAttachment> attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
+  attach_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  attach_scenariusze_czynnikow_duchowosci,
+];
+
+// Source: WARSZTATY WYCHOWANIA DUCHOWEGO
+
 const String attach_html_poradnik_o_strukturze_duchowosci = '<a href="$attach_name_poradnik_o_strukturze_duchowosci@attachment">$attach_title_poradnik_o_strukturze_duchowosci</a>';
 const String attach_name_poradnik_o_strukturze_duchowosci = 'o_strukturze_i_ksztaltowaniu_duchowosci';
 const String attach_title_poradnik_o_strukturze_duchowosci = 'Poradnik "$poradnik_title_o_strukturze_duchowosci"';

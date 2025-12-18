@@ -583,6 +583,13 @@ class KonspektAttachment extends BaseKonspektAttachment{
 
   static const String baseAssetsPath = 'packages/harcapp_core/assets/konspekty';
 
+  static String buildAssetPath(
+    KonspektCategory category,
+    String konspektName,
+    String attachmentName,
+    FileFormat format,
+  ) => '${category.path}/$konspektName/attach@$attachmentName.${format.extension}';
+
     final String name;
     final String title;
     // If format is url, then value is url.

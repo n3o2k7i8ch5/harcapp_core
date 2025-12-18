@@ -13,36 +13,36 @@ const konspekt_kszt_name_warsztaty_wychowania_duchowego = 'warsztaty_wychowania_
 const konspekt_kszt_title_warsztaty_wychowania_duchowego = 'Warsztaty wychowania duchowego';
 
 
-const String attach_html_scenariusz_fantomowe_dzialania_wychowawcze = '<a href="$attach_name_scenariusz_fantomowe_dzialania_wychowawcze@attachment">$attach_title_scenariusz_fantomowe_dzialania_wychowawcze</a>';
-const String attach_name_scenariusz_fantomowe_dzialania_wychowawcze = 'scenariusz_fantomowe_dzialania_wychowawcze';
-const String attach_title_scenariusz_fantomowe_dzialania_wychowawcze = 'Scenariusz fantomowe działania wychowawcze';
-KonspektAttachment attach_scenariusz_fantomowe_dzialania_wychowawcze = KonspektAttachment(
-  name: attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
-  title: attach_title_scenariusz_fantomowe_dzialania_wychowawcze,
+const String _attach_html_scenariusz_fantomowe_dzialania_wychowawcze = '<a href="$_attach_name_scenariusz_fantomowe_dzialania_wychowawcze@attachment">$_attach_title_scenariusz_fantomowe_dzialania_wychowawcze</a>';
+const String _attach_name_scenariusz_fantomowe_dzialania_wychowawcze = 'scenariusz_fantomowe_dzialania_wychowawcze';
+const String _attach_title_scenariusz_fantomowe_dzialania_wychowawcze = 'Scenariusz fantomowe działania wychowawcze';
+KonspektAttachment _attach_scenariusz_fantomowe_dzialania_wychowawcze = KonspektAttachment(
+  name: _attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
+  title: _attach_title_scenariusz_fantomowe_dzialania_wychowawcze,
   assets: {
     FileFormat.pdf: null,
     FileFormat.docx: null,
   },
 );
 
-const String attach_html_formy = '<a href="$attach_name_formy@attachment">$attach_title_formy</a>';
-const String attach_name_formy = 'formy';
-const String attach_title_formy = 'Formy';
-KonspektAttachment attach_formy = KonspektAttachment(
-  name: attach_name_formy,
-  title: attach_title_formy,
+const String _attach_html_formy = '<a href="$_attach_name_formy@attachment">$_attach_title_formy</a>';
+const String _attach_name_formy = 'formy';
+const String _attach_title_formy = 'Formy';
+KonspektAttachment _attach_formy = KonspektAttachment(
+  name: _attach_name_formy,
+  title: _attach_title_formy,
   assets: {
     FileFormat.pdf: null,
     FileFormat.docx: null,
   },
 );
 
-const String attach_html_planowanie_strategii_i_dzialan = '<a href="$attach_name_planowanie_strategii_i_dzialan@attachment">$attach_title_planowanie_strategii_i_dzialan</a>';
-const String attach_name_planowanie_strategii_i_dzialan = 'planowanie_strategii_i_dzialan';
-const String attach_title_planowanie_strategii_i_dzialan = 'Planowanie strategii i działań';
-KonspektAttachment attach_planowanie_strategii_i_dzialan = KonspektAttachment(
-  name: attach_name_planowanie_strategii_i_dzialan,
-  title: attach_title_planowanie_strategii_i_dzialan,
+const String _attach_html_planowanie_strategii_i_dzialan = '<a href="$_attach_name_planowanie_strategii_i_dzialan@attachment">$_attach_title_planowanie_strategii_i_dzialan</a>';
+const String _attach_name_planowanie_strategii_i_dzialan = 'planowanie_strategii_i_dzialan';
+const String _attach_title_planowanie_strategii_i_dzialan = 'Planowanie strategii i działań';
+KonspektAttachment _attach_planowanie_strategii_i_dzialan = KonspektAttachment(
+  name: _attach_name_planowanie_strategii_i_dzialan,
+  title: _attach_title_planowanie_strategii_i_dzialan,
   assets: {
     FileFormat.pdf: null,
     FileFormat.docx: null,
@@ -120,22 +120,22 @@ KonspektMaterial material_zal_kratka_minimow_rozwoju_duchowego = KonspektMateria
 );
 
 KonspektMaterial material_zal_scenariusz_fantomowe_dzialania_wychowawcze = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_scenariusz_fantomowe_dzialania_wychowawcze”',
-    attachmentName: attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
+    name: 'Wydrukowany załącznik “$_attach_title_scenariusz_fantomowe_dzialania_wychowawcze”',
+    attachmentName: _attach_name_scenariusz_fantomowe_dzialania_wychowawcze,
     additionalPreparation: 'Kartkę należy przeciąć na pół wzdłuż przerywanych linii.',
     amount: 1
 );
 
 KonspektMaterial material_zal_formy = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_formy”',
-    attachmentName: attach_name_formy,
+    name: 'Wydrukowany załącznik “$_attach_title_formy”',
+    attachmentName: _attach_name_formy,
     additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
     amount: 1
 );
 
 KonspektMaterial material_zal_planowanie_strategii_i_dzialan = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_planowanie_strategii_i_dzialan”',
-    attachmentName: attach_name_planowanie_strategii_i_dzialan,
+    name: 'Wydrukowany załącznik “$_attach_title_planowanie_strategii_i_dzialan”',
+    attachmentName: _attach_name_planowanie_strategii_i_dzialan,
     amount: 2,
     comment: 'Może się okazać, że chętni na jedną z metodyk będą tak liczni, że warto ich podzielić na dwie osobne grupy - dlatego warto wydrukować dwa razy.'
 );
@@ -184,9 +184,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       attach_kratka_minimow_rozwoju_duchowego,
 
       ...attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-      attach_scenariusz_fantomowe_dzialania_wychowawcze,
-      attach_formy,
-      attach_planowanie_strategii_i_dzialan,
+      _attach_scenariusz_fantomowe_dzialania_wychowawcze,
+      _attach_formy,
+      _attach_planowanie_strategii_i_dzialan,
 
       attach_szybkie_strzaly_dyskusyjne
     ],
@@ -516,7 +516,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 30),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Uczestnicy otrzymują w grupach po jednym załączniku $attach_html_kratka_minimow_rozwoju_duchowego. Otrzymują również wydrukowane i wycięte formy z załącznika $attach_html_formy.'
+                    'Uczestnicy otrzymują w grupach po jednym załączniku $attach_html_kratka_minimow_rozwoju_duchowego. Otrzymują również wydrukowane i wycięte formy z załącznika $_attach_html_formy.'
                     '<br>'
                     '<br>Na podstawie zdobytej dotychczas wiedzy oraz załącznika $attach_html_kratka_minimow_rozwoju_duchowego, zadaniem uczestników jest przyporządkowanie poszczególnych form do <b>grupy</b> lub <b>grup wiekowych</b>, określenie jakie <b>poziomy duchowości</b> rozwijają oraz, jeśli to możliwe, w jaki <b>mechanizm</b> wykorzystują.'
                     '<br>'
@@ -553,7 +553,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 activeForm: KonspektStepActiveForm.static,
                 required: false,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący prezentuje krótki opis obozu drużyny z załącznika $attach_html_scenariusz_fantomowe_dzialania_wychowawcze i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zapoczątkowuje krótką dyskusję zadając pytanie: “co jest nie tak z tą strategią?”. Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
+                    'Prowadzący prezentuje krótki opis obozu drużyny z załącznika $_attach_html_scenariusz_fantomowe_dzialania_wychowawcze i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zapoczątkowuje krótką dyskusję zadając pytanie: “co jest nie tak z tą strategią?”. Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
                     '<br>'
                     '<br>W oparciu o dotychczasowe pojęcia powinno paść hasło “<b>skuteczności wychowawczej</b>”.'
                     '<br>'
@@ -594,7 +594,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 5),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Uczestnicy w grupach są dzieleni na 4 grupy. Każda grupa otrzymuje krótki opis drużyny z załącznika $attach_html_planowanie_strategii_i_dzialan. Zadaniem każdej grupy jest stworzyć plan rozwoju duchowego jednostki.'
+                    'Uczestnicy w grupach są dzieleni na 4 grupy. Każda grupa otrzymuje krótki opis drużyny z załącznika $_attach_html_planowanie_strategii_i_dzialan. Zadaniem każdej grupy jest stworzyć plan rozwoju duchowego jednostki.'
                     '<br>'
                     '<br>Każda z opisanych na karce drużyn jest w innej metodyce (Z, H, HS, W). Prowadzący może podzielić uczestników tak, by każdy był w grupie pracującej nad metodyką, która jest uczestnikom najbliższa.'
                     '<br>'
@@ -680,7 +680,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 20),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący prosi każdą z grup, by jako ostatni element planowania strategii rozwoju duchowego wskazała <b>działania śródroczne</b> i <b>działania obozowe</b> z uwzględnieniem <b>niedzieli na obozie</b>. Można się w tym celu posiłkować pomysłami z załącznika $attach_html_formy, które są dostępne w apliakcji <b>HarcApp</b>.'
+                    'Prowadzący prosi każdą z grup, by jako ostatni element planowania strategii rozwoju duchowego wskazała <b>działania śródroczne</b> i <b>działania obozowe</b> z uwzględnieniem <b>niedzieli na obozie</b>. Można się w tym celu posiłkować pomysłami z załącznika $_attach_html_formy, które są dostępne w apliakcji <b>HarcApp</b>.'
                     '<br>'
                     '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, należy zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
                     '<br>'
@@ -709,7 +709,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 content: '<p style="text-align:justify;">'
                     'Prowadzący zanotowawszy plany i strategie rozwoju duchowego związane z niedzielą obozową prezentowane w poprzednim punkcie przez grupy podsumowuje je. Uczestnicy mają możliwość dodania proponowanych form - ważne, by prowadzący prosił o podanie mechanizmu ich działania.'
                     '<br>'
-                    '<br>Na końcu prowadzący uzupełnia zbiorczy plan niedzieli o elementy obecne w formie <i>“Msza (obozowa, lecz nie tylko)”</i> z załącznika $attach_html_formy i krótko je omawia.'
+                    '<br>Na końcu prowadzący uzupełnia zbiorczy plan niedzieli o elementy obecne w formie <i>“Msza (obozowa, lecz nie tylko)”</i> z załącznika $_attach_html_formy i krótko je omawia.'
                     '</p>'
             ),
 

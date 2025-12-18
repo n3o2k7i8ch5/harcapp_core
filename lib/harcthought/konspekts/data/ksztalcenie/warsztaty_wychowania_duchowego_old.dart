@@ -7,48 +7,48 @@ import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
 const konspekt_kszt_name_warsztaty_wychowania_duchowego_old = 'warsztaty_wychowania_duchowego_old';
 
-const String attach_html_przyklady_poziomow_duchowosci = '<a href="$attach_name_przyklady_poziomow_duchowosci@attachment">$attach_title_przyklady_poziomow_duchowosci</a>';
-const String attach_name_przyklady_poziomow_duchowosci = 'przyklady_poziomow_duchowosci';
-const String attach_title_przyklady_poziomow_duchowosci = 'Przykłady poziomów duchowości';
-KonspektAttachment attach_przyklady_poziomow_duchowosci = KonspektAttachment(
-  name: attach_name_przyklady_poziomow_duchowosci,
-  title: attach_title_przyklady_poziomow_duchowosci,
+const String _attach_html_przyklady_poziomow_duchowosci = '<a href="$_attach_name_przyklady_poziomow_duchowosci@attachment">$_attach_title_przyklady_poziomow_duchowosci</a>';
+const String _attach_name_przyklady_poziomow_duchowosci = 'przyklady_poziomow_duchowosci';
+const String _attach_title_przyklady_poziomow_duchowosci = 'Przykłady poziomów duchowości';
+KonspektAttachment _attach_przyklady_poziomow_duchowosci = KonspektAttachment(
+  name: _attach_name_przyklady_poziomow_duchowosci,
+  title: _attach_title_przyklady_poziomow_duchowosci,
   assets: {
     FileFormat.pdf: null,
     FileFormat.docx: null,
   },
 );
 
-const String attach_html_mechanizmy_posrednie = '<a href="$attach_name_mechanizmy_posrednie@attachment">$attach_title_mechanizmy_posrednie</a>';
-const String attach_name_mechanizmy_posrednie = 'mechanizmy_posrednie';
-const String attach_title_mechanizmy_posrednie = 'Mechanizmy pośrednie';
-KonspektAttachment attach_mechanizmy_posrednie = KonspektAttachment(
-  name: attach_name_mechanizmy_posrednie,
-  title: attach_title_mechanizmy_posrednie,
+const String _attach_html_mechanizmy_posrednie = '<a href="$_attach_name_mechanizmy_posrednie@attachment">$_attach_title_mechanizmy_posrednie</a>';
+const String _attach_name_mechanizmy_posrednie = 'mechanizmy_posrednie';
+const String _attach_title_mechanizmy_posrednie = 'Mechanizmy pośrednie';
+KonspektAttachment _attach_mechanizmy_posrednie = KonspektAttachment(
+  name: _attach_name_mechanizmy_posrednie,
+  title: _attach_title_mechanizmy_posrednie,
   assets: {
     FileFormat.pdf: null,
     FileFormat.docx: null,
   },
 );
 
-const String attach_html_antyprzyklady = '<a href="$attach_name_antyprzyklady@attachment">$attach_title_antyprzyklady</a>';
-const String attach_name_antyprzyklady = 'antyprzyklady';
-const String attach_title_antyprzyklady = 'Antyprzykłady';
-KonspektAttachment attach_antyprzyklady = KonspektAttachment(
-  name: attach_name_antyprzyklady,
-  title: attach_title_antyprzyklady,
+const String _attach_html_antyprzyklady = '<a href="$_attach_name_antyprzyklady@attachment">$_attach_title_antyprzyklady</a>';
+const String _attach_name_antyprzyklady = 'antyprzyklady';
+const String _attach_title_antyprzyklady = 'Antyprzykłady';
+KonspektAttachment _attach_antyprzyklady = KonspektAttachment(
+  name: _attach_name_antyprzyklady,
+  title: _attach_title_antyprzyklady,
   assets: {
     FileFormat.pdf: null,
     FileFormat.docx: null,
   },
 );
 
-const String attach_html_scenariusze = '<a href="$attach_name_scenariusze@attachment">$attach_title_scenariusze</a>';
-const String attach_name_scenariusze = 'scenariusze';
-const String attach_title_scenariusze = 'Scenariusze';
-KonspektAttachment attach_scenariusze = KonspektAttachment(
-  name: attach_name_scenariusze,
-  title: attach_title_scenariusze,
+const String _attach_html_scenariusze = '<a href="$_attach_name_scenariusze@attachment">$_attach_title_scenariusze</a>';
+const String _attach_name_scenariusze = 'scenariusze';
+const String _attach_title_scenariusze = 'Scenariusze';
+KonspektAttachment _attach_scenariusze = KonspektAttachment(
+  name: _attach_name_scenariusze,
+  title: _attach_title_scenariusze,
   assets: {
     FileFormat.pdf: null,
     FileFormat.docx: null,
@@ -56,28 +56,28 @@ KonspektAttachment attach_scenariusze = KonspektAttachment(
 );
 
 KonspektMaterial material_zal_przyklady_poziomow_duchowosci = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_przyklady_poziomow_duchowosci”',
-    attachmentName: attach_name_przyklady_poziomow_duchowosci,
+    name: 'Wydrukowany załącznik “$_attach_title_przyklady_poziomow_duchowosci”',
+    attachmentName: _attach_name_przyklady_poziomow_duchowosci,
     additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i potasować w ramach wyciętych czwórek.',
     amount: 1
 );
 
 KonspektMaterial material_zal_mechanizmy_posrednie = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_mechanizmy_posrednie”',
-    attachmentName: attach_name_mechanizmy_posrednie,
+    name: 'Wydrukowany załącznik “$_attach_title_mechanizmy_posrednie”',
+    attachmentName: _attach_name_mechanizmy_posrednie,
     additionalPreparation: 'Kartki należy przeciąć na pół wzdłuż przerywanych linii.',
     amount: 1
 );
 
 KonspektMaterial material_zal_antyprzyklady = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_antyprzyklady”',
-    attachmentName: attach_name_antyprzyklady,
+    name: 'Wydrukowany załącznik “$_attach_title_antyprzyklady”',
+    attachmentName: _attach_name_antyprzyklady,
     amount: 1
 );
 
 KonspektMaterial material_zal_scenariusze = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_scenariusze”',
-    attachmentName: attach_name_scenariusze,
+    name: 'Wydrukowany załącznik “$_attach_title_scenariusze”',
+    attachmentName: _attach_name_scenariusze,
     additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
     amount: 1
 );
@@ -85,10 +85,10 @@ KonspektMaterial material_zal_scenariusze = KonspektMaterial(
 Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
   konspekt_kszt_warsztaty_wychowania_duchowego,
   attachments: [
-    attach_przyklady_poziomow_duchowosci,
-    attach_mechanizmy_posrednie,
-    attach_antyprzyklady,
-    attach_scenariusze
+    _attach_przyklady_poziomow_duchowosci,
+    _attach_mechanizmy_posrednie,
+    _attach_antyprzyklady,
+    _attach_scenariusze
   ],
   materials: [
     material_zal_przyklady_poziomow_duchowosci,
@@ -105,7 +105,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
         activeForm: KonspektStepActiveForm.active,
         required: false,
         content: '<p style="text-align:justify;">'
-            'Prowadzący dzieli uczestników na pięć grup. Rozdaje każdej grupie po jednym komplecie przygotowanych kartek z załącznika $attach_html_przyklady_poziomow_duchowosci i prosi grupy o <b>posegregowanie kartek na zachowania, postawy, wartości i aksjomaty.</b>'
+            'Prowadzący dzieli uczestników na pięć grup. Rozdaje każdej grupie po jednym komplecie przygotowanych kartek z załącznika $_attach_html_przyklady_poziomow_duchowosci i prosi grupy o <b>posegregowanie kartek na zachowania, postawy, wartości i aksjomaty.</b>'
             '<br>'
             '<br>Gdy dana grupa jest gotowa, zgłasza się do prowadzącego, który podchodzi i sprawdza. Jeśli coś jest nie tak, prowadzący mówi który poziom duchowości wymaga poprawy. Gdy wszystkie grupy są gotowe, niezależnie od poprawności segregacji, prowadzący omawia na forum poprawne przyporządkowanie.'
             '</p>',
@@ -131,7 +131,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
             '<br>'
             '<br><b><i>“Duchowość nie jest umiejętnością, dlatego nie należy sądzić że można ją rozwinąć tymi samymi metodami co intelekt, ciało, czy emocje.”</i></b>'
             '<br>'
-            '<br>Prowadzący zwraca uwagę, że wychowanie duchowe zaczyna się od sposobu myślenia. Przedstawia trzy punkty wyjścia i przy omawianiu każdego kładzie w widocznym miejscu odpowiadającą mu kartkę z załącznika $attach_html_mechanizmy_posrednie.'
+            '<br>Prowadzący zwraca uwagę, że wychowanie duchowe zaczyna się od sposobu myślenia. Przedstawia trzy punkty wyjścia i przy omawianiu każdego kładzie w widocznym miejscu odpowiadającą mu kartkę z załącznika $_attach_html_mechanizmy_posrednie.'
             '</p>'
 
             '<ol>'
@@ -159,7 +159,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
             '</ol>'
 
             '<p style="text-align:justify;">'
-            'Następnie prowadzący przedstawia <b>mechanizmy pośrednie</b>, które wpływają na duchowość. W celu wejścia w interakcję z uczestnikami przedstawia krótkie scenariusze na podstawie których uczestnicy powinni wywnioskować określony mechanizm (podobnie jak poprzednio, gdy uczestnicy poprawnie nazwą mechanizm, prowadzący kładzie w widocznym miejscu odpowiadającą mu kartkę z załącznika $attach_html_mechanizmy_posrednie):'
+            'Następnie prowadzący przedstawia <b>mechanizmy pośrednie</b>, które wpływają na duchowość. W celu wejścia w interakcję z uczestnikami przedstawia krótkie scenariusze na podstawie których uczestnicy powinni wywnioskować określony mechanizm (podobnie jak poprzednio, gdy uczestnicy poprawnie nazwą mechanizm, prowadzący kładzie w widocznym miejscu odpowiadającą mu kartkę z załącznika $_attach_html_mechanizmy_posrednie):'
             '</p>'
 
             '<ul>'
@@ -229,7 +229,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
           material_zal_mechanizmy_posrednie,
         ],
         content: '<p style="text-align:justify;">'
-            'Prowadzący opisuje ostatni pośredni mechanizm kształtowania duchowości, czyli <b>Metanarrację</b> na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci. Podobnie jak w przypadku poprzednich mechanizmów, do pozostałych dodaje przy tym odpowiadającą kartkę z załącznika $attach_html_mechanizmy_posrednie'
+            'Prowadzący opisuje ostatni pośredni mechanizm kształtowania duchowości, czyli <b>Metanarrację</b> na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci. Podobnie jak w przypadku poprzednich mechanizmów, do pozostałych dodaje przy tym odpowiadającą kartkę z załącznika $_attach_html_mechanizmy_posrednie'
             '<br>'
             '<br><i>Metanarracja jest szczególnie silnym mechanizmem w momencie <b>rozpoczęcia integracji świadomej</b>, jednak gra rolę także później. Jest to opowieść, nadająca człowiekowi tożsamość, sens i cel.'
             '<br>'
@@ -259,7 +259,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
           material_zal_antyprzyklady,
         ],
         content: '<p style="text-align:justify;">'
-            'Prowadzący dzieli uczestników na dwie grupy i daje im po jednej kartce z załącznika $attach_html_antyprzyklady. Zadaniem uczestników jest szczegółowo przeanalizować opisaną w nim postać i wskazać jakie są problemy z duchowością, którą kształtuje u swoich wychowanków opisana postać.'
+            'Prowadzący dzieli uczestników na dwie grupy i daje im po jednej kartce z załącznika $_attach_html_antyprzyklady. Zadaniem uczestników jest szczegółowo przeanalizować opisaną w nim postać i wskazać jakie są problemy z duchowością, którą kształtuje u swoich wychowanków opisana postać.'
             '</p>',
     ),
 
@@ -269,7 +269,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
         duration: Duration(minutes: 40),
         activeForm: KonspektStepActiveForm.active,
         content: '<p style="text-align:justify;">'
-            'Prowadzący dzieli uczestników na grupy po ok. 4 osób. Każda z grup otrzymuje po 2-4 scenariusze z $attach_html_scenariusze i w swoim gronie je omawia. Celem omówienia każdego scenariusza jest zaproponowanie rozwiązania zgodnego z harcerskimi celami wychowania duchowego. Na jeden scenariusz grupa powinna poświęcić 10-15 min. Ważne, by prowadzący zaznaczył, że <b>grupy nie muszą osiągnąć jednomyślności</b>.'
+            'Prowadzący dzieli uczestników na grupy po ok. 4 osób. Każda z grup otrzymuje po 2-4 scenariusze z $_attach_html_scenariusze i w swoim gronie je omawia. Celem omówienia każdego scenariusza jest zaproponowanie rozwiązania zgodnego z harcerskimi celami wychowania duchowego. Na jeden scenariusz grupa powinna poświęcić 10-15 min. Ważne, by prowadzący zaznaczył, że <b>grupy nie muszą osiągnąć jednomyślności</b>.'
             '<br>'
             '<br>Po zakończeniu dyskusji grupy referują scenariusze i wnioski z nich płynące na forum wszystkich uczestników. Jeżeli któryś scenariusz zakończył się różnicą stanowisk dyskutujących, może zostać poruszony wspólnie przez wszystkich uczestników.'
             '</p>',
