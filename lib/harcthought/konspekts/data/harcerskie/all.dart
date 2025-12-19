@@ -2267,7 +2267,7 @@ List<Konspekt> get allHarcerskieKonspekts{
   return _allHarcerskieKonspekts;
 }
 
-Future<void> initializeHarcerskieKonspekts() async {
+Future<void> initHarcerskieKonspekts() async {
   if(initialized) return;
   _allHarcerskieKonspekts = await _loadAllHarcerskieKonspekts();
   initialized = true;

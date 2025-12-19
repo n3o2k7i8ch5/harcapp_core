@@ -23,7 +23,7 @@ List<Konspekt> get allKsztalcenieKonspekts{
   return _allKsztalcenieKonspekts;
 }
 
-Future<void> initializeKsztalcenieKonspekts() async {
+Future<void> initKsztalcenieKonspekts() async {
   if(initialized) return;
   _allKsztalcenieKonspekts = await _loadAllKsztalcenieKonspekts();
   initialized = true;

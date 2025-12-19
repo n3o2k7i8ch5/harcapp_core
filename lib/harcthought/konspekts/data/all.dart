@@ -12,8 +12,8 @@ import 'ksztalcenie/all.dart';
 
 Future<List<Konspekt>> _loadAllKonspekts() async{
   await Future.wait([
-    initializeHarcerskieKonspekts(),
-    initializeKsztalcenieKonspekts(),
+    initHarcerskieKonspekts(),
+    initKsztalcenieKonspekts(),
   ]);
 
   return <Konspekt>[
@@ -31,7 +31,7 @@ List<Konspekt> get allKonspekts{
   return _allKonspekts;
 }
 
-Future<void> initializeAllKonspekts() async {
+Future<void> initAllKonspekts() async {
   if(initialized) return;
   _allKonspekts = await _loadAllKonspekts();
   initialized = true;
