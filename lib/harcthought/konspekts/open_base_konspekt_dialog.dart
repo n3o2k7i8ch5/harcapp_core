@@ -13,13 +13,14 @@ Future<void> openBaseKonspektDialog({
   required BuildContext context,
   required String konspektName,
   KonspektCategory? category,
-  List<Konspekt>? allKonspekts,
+  // List<Konspekt>? allKonspekts,
   final void Function()? onDuchLevelInfoTap,
   double? maxWidth,
 }) async {
 
   Konspekt konspekt;
 
+  List<Konspekt>? allKonspekts;
   if(category == KonspektCategory.harcerskie)
     allKonspekts ??= harcerskie.allHarcerskieKonspekts;
   else if(category == KonspektCategory.ksztalcenie)
@@ -43,8 +44,8 @@ Future<void> openBaseKonspektDialog({
               borderRadius: BorderRadius.circular(AppCard.bigRadius),
               clipBehavior: Clip.hardEdge,
               child: BaseKonspektWidget(
-                  konspekt,
-                  onDuchLevelInfoTap: onDuchLevelInfoTap,
+                konspekt,
+                onDuchLevelInfoTap: onDuchLevelInfoTap,
               )
           ),
         );
