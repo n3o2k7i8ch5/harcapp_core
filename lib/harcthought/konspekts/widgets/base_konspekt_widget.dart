@@ -557,20 +557,20 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             SliverPadding(
               padding: const EdgeInsets.only(bottom: Dimen.sideMarg),
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
-                          (context, index) => KonspektStepGroupWidget(
-                          konspekt,
-                          index,
-                          startTime: stepsTimeTable?[index],
-                          showBackground: widget.showStepGroupBackground,
-                          showBorder: widget.showStepGroupBorder,
-                          maxDialogWidth: maxDialogWidth,
-                            key: ValueKey(
-                                (konspekt, index, stepsTimeTable?[index])
-                            ),
-                      ),
-                      separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
-                      count: konspekt.stepGroups!.length
-                  )),
+                (context, index) => KonspektStepGroupWidget(
+                  konspekt,
+                  index,
+                  startTime: stepsTimeTable?[index],
+                  showBackground: widget.showStepGroupBackground,
+                  showBorder: widget.showStepGroupBorder,
+                  maxDialogWidth: maxDialogWidth,
+                    key: ValueKey(
+                        (konspekt, index, stepsTimeTable?[index])
+                    ),
+                ),
+                separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
+                count: konspekt.stepGroups!.length
+              )),
             )
           else if(konspekt.steps.isNotEmpty)
             SliverPadding(
