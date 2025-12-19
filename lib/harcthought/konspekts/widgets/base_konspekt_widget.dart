@@ -479,13 +479,13 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   maxDialogWidth: widget.maxDialogWidth,
                 ),
 
-              if(konspekt.description != null)
+              if(isHtmlNotEmpty(konspekt.description))
                 const SizedBox(height: Dimen.sideMarg),
 
-              if(konspekt.description != null)
+              if(isHtmlNotEmpty(konspekt.description))
                 const TitleShortcutRowWidget(title: 'Opis', textAlign: TextAlign.left),
 
-              if(konspekt.description != null)
+              if(isHtmlNotEmpty(konspekt.description))
                 KonspektHtmlWidget(
                   konspekt,
                   konspekt.description!,

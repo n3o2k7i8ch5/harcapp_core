@@ -52,3 +52,10 @@ List<TimeOfDay> buildTimeTable(List<KonspektDurationElementMixin> steps, TimeOfD
 
   return timeTable;
 }
+
+bool isHtmlNotEmpty(String? html) {
+  if (html == null) return false;
+  // Usuń tagi HTML i sprawdź czy zostaje jakiś tekst
+  final stripped = html.replaceAll(RegExp(r'<[^>]*>'), '').trim();
+  return stripped.isNotEmpty;
+}
