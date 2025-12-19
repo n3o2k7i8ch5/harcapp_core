@@ -468,10 +468,10 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             ),
             sliver: SliverList(delegate: SliverChildListDelegate([
 
-              if(konspekt.intro != null)
+              if(isHtmlNotEmpty(konspekt.intro))
                 const TitleShortcutRowWidget(title: 'Wstęp', textAlign: TextAlign.left),
 
-              if(konspekt.intro != null)
+              if(isHtmlNotEmpty(konspekt.intro))
                 KonspektHtmlWidget(
                   konspekt,
                   konspekt.intro!,
@@ -511,7 +511,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                       });
                     }
                   ),
-
 
                 // Row(
                 //   children: [
