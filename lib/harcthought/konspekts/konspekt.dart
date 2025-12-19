@@ -20,6 +20,7 @@ import 'package:html_pdf_widgets/html_pdf_widgets.dart' as pdf;
 import 'package:path/path.dart';
 
 import 'common.dart';
+import 'data/utils.dart';
 import 'hrcpknspkt_data.dart';
 
 
@@ -581,8 +582,6 @@ abstract class BaseKonspektAttachment{
 
 class KonspektAttachment extends BaseKonspektAttachment{
 
-  static const String baseAssetsPath = 'packages/harcapp_core/assets/konspekty';
-
   static String buildAssetPath(
     KonspektCategory category,
     String konspektName,
@@ -617,9 +616,9 @@ class KonspektAttachment extends BaseKonspektAttachment{
 
       String? localPath = assets[format];
       if(localPath == null)
-        return posix.join(baseAssetsPath, konspektCategory.path, konspektName, 'attach@$name.${format.extension}');
+        return posix.join(baseKonspektAssetsPath, konspektCategory.path, konspektName, 'attach@$name.${format.extension}');
 
-      return posix.join(baseAssetsPath, localPath);
+      return posix.join(baseKonspektAssetsPath, localPath);
     }
 
     Future<Uint8List?> getAssetBytes(
@@ -1082,7 +1081,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
       upToDate: false
   );
 
-  String get coverPath => 'packages/harcapp_core/assets/konspekty/${category.path}/${customCoverDirName??name}/cover.webp';
+  String get coverPath => getCoverPath(category: category, konspektName: name, customCoverDirName: customCoverDirName);
 
   Duration? get duration{
     if(customDuration != null) return customDuration;

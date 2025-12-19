@@ -1,8 +1,7 @@
 import 'package:harcapp_core/harcthought/common/file_format.dart';
+import 'package:harcapp_core/harcthought/konspekts/data/utils.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/poradnik/data.dart';
-
-import 'common.dart';
 
 // Source: CZYNNIKI I MECHANIZMY KSZTAŁTOWANIA DUCHOWOŚCI
 
