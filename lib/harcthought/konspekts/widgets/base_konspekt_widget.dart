@@ -348,7 +348,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             ])),
           ),
 
-          if(konspekt.attachments != null)
+          if(konspekt.attachments != null && konspekt.attachments!.isNotEmpty)
             SliverPadding(
               padding: const EdgeInsets.only(
                 left: Dimen.sideMarg,
@@ -376,7 +376,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               ])),
             ),
 
-          if(konspekt.attachments != null)
+          if(konspekt.attachments != null && konspekt.attachments!.isNotEmpty)
             SliverToBoxAdapter(
               child: AnimatedCrossFade(
                 firstChild: const SizedBox.shrink(),
@@ -402,7 +402,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               ),
             ),
 
-          if(konspekt.materials != null)
+          if(konspekt.materials != null && konspekt.materials!.isNotEmpty)
             SliverPadding(
               padding: const EdgeInsets.only(
                 left: Dimen.sideMarg,
@@ -430,7 +430,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               ])),
             ),
 
-          if(konspekt.materials != null)
+          if(konspekt.materials != null && konspekt.materials!.isNotEmpty)
             SliverToBoxAdapter(
               child: AnimatedCrossFade(
                 firstChild: const SizedBox.shrink(),
@@ -553,7 +553,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             ])),
           ),
 
-          if(konspekt.stepGroups != null)
+          if(konspekt.stepGroups != null && konspekt.stepGroups!.isNotEmpty)
             SliverPadding(
               padding: const EdgeInsets.only(bottom: Dimen.sideMarg),
               sliver: SliverList(delegate: SliverChildSeparatedBuilderDelegate(
@@ -593,7 +593,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               ),
             ),
 
-          if(konspekt.howToFail != null)
+          if(konspekt.howToFail != null && konspekt.howToFail!.isNotEmpty)
             SliverPadding(
               padding: const EdgeInsets.only(
                 left: Dimen.sideMarg,
