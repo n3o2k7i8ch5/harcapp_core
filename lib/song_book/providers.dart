@@ -71,6 +71,7 @@ class ChordsTrailingProvider extends ChangeNotifier{
 class ChordsDrawTypeProvider extends ChangeNotifier{
 
   static ChordsDrawTypeProvider of(BuildContext context) => Provider.of<ChordsDrawTypeProvider>(context, listen: false);
+  static void notify_(BuildContext context) => of(context).notify();
 
   SongBookSettTempl settings;
   ChordsDrawTypeProvider(this.settings);
@@ -80,6 +81,14 @@ class ChordsDrawTypeProvider extends ChangeNotifier{
     settings.chordsDrawType = value;
     notifyListeners();
   }
+
+  InstrumentType getChordsDrawType(){
+    chordsDrawType = chordsDrawType.next;
+    notifyListeners();
+    return chordsDrawType;
+  }
+
+  void notify() => notifyListeners();
 }
 
 class ChordsDrawShowProvider extends ChangeNotifier{
