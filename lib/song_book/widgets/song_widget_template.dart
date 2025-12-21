@@ -13,7 +13,6 @@ import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/chord.dart';
 import 'package:harcapp_core/comm_widgets/chord_draw_bar.dart';
-import 'package:harcapp_core/comm_widgets/instrument_type.dart';
 import 'package:harcapp_core/comm_widgets/separated_column.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/logger.dart';
@@ -85,8 +84,6 @@ class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends Contribut
 
   final double topScreenPadding;
 
-  final InstrumentType initInstrumentType;
-
   final void Function(ScrollNotification scrollInfo, double? textHeight, double? textTopOffset, bool tapScrolling)? onScroll;
 
   final void Function(double)? onTitleTap;
@@ -148,8 +145,6 @@ class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends Contribut
         this.index = -1,
 
         this.topScreenPadding = 0,
-
-        this.initInstrumentType = InstrumentType.GUITAR,
 
         this.onScroll,
 
@@ -222,8 +217,6 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
   int get index => widget.index;
 
   double get topScreenPadding => widget.topScreenPadding;
-
-  InstrumentType get initInstrumentType => widget.initInstrumentType;
 
   void Function(ScrollNotification scrollInfo, double? textHeight, double? textTopOffset, bool tapScrolling)? get onScroll => widget.onScroll;
 
@@ -374,7 +367,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
                         onLongPress: onChordsTypeLongPress,
                         elevation: 0,
                         chordColor: iconEnab_(context),
-                        instrumentType: initInstrumentType,
+                        instrumentType: prov3.chordsDrawType,
                       ),
                     ),
                     height: ChordWidget.height(6) + 2.0
