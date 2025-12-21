@@ -82,7 +82,7 @@ class ChordsDrawTypeProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  InstrumentType getChordsDrawType(){
+  InstrumentType next(){
     chordsDrawType = chordsDrawType.next;
     notifyListeners();
     return chordsDrawType;
