@@ -1435,9 +1435,10 @@ const Person KACPER_BACZKOWSKI = Person(
 );
 const Person KACPER_CIESIELSKI = Person(
     name: 'Kacper Ciesielski',
-    druzyna: '17. Zgierska Obronną Drużyna Harcerska „Sokoły”',
-    hufiec: huf_zhp_zgierz,
-    rankHarc: RankHarc.zhpOdkrywca,
+    druzyna: '64. Świnoujska drużyna harcerska im. Batalionów “Zośka” i “Parasol”',
+    hufiec: huf_zhp_ziemi_wolinskiej,
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhpHRc,
     org: Org.zhp,
     email: ['yorunokoibito@gmail.com']
 );

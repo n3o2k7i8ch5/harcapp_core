@@ -150,6 +150,7 @@ const String huf_zhp_ziemi_tarnogorskiej = 'Hufiec Ziemi Tarnogórskiej im. Pows
 const String huf_zhp_ziemi_tyskiej = 'Hufiec Ziemi Tyskiej im. Wojska Polskiego';
 const String huf_zhp_ziemi_walbrzyskiej = 'Hufiec ZHP Ziemi Wałbrzyskiej im. Alojzego Ciasnochy';
 const String huf_zhp_ziemi_wodzislawskiej = 'Hufiec ZHP Ziemi Wodzisławskiej';
+const String huf_zhp_ziemi_wolinskiej = 'Hufiec ZHP Ziemi Wolińskiej im. Marynarki Wojennej RP';
 const String huf_zhp_ziemi_zawiercianskiej = 'Hufiec ZHP Ziemi Zawierciańskiej';
 const String huf_zhp_ziemi_zywieckiej = 'Ziemi Żywieckiej im. Tadeusza Jänicha';
 const String huf_zhp_zielona_gora = 'Hufiec ZHP Zielona Góra';
