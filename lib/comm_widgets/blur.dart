@@ -8,35 +8,41 @@ class Blur extends StatelessWidget{
   final double sigma;
   final TileMode mode;
   final BorderRadiusGeometry? borderRadius;
-  final Clip clipBehavior;
+  final double? elevation;
   final Color? color;
   const Blur({
     this.child,
     this.sigma=8.0,
     this.mode = TileMode.repeated,
     this.borderRadius,
-    this.clipBehavior = Clip.antiAlias,
+    this.elevation,
     this.color,
     super.key
   });
 
   @override
-  Widget build(BuildContext context) => Stack(
-    fit: StackFit.passthrough,
-    clipBehavior: clipBehavior,
-    children: [
-      Positioned.fill(
-        child: ClipRRect(
-          borderRadius: borderRadius ?? BorderRadius.zero,
-          clipBehavior: Clip.antiAlias,
-          child: BackdropFilter(
+  Widget build(BuildContext context){
+
+    Widget _widget = ClipRRect(
+        borderRadius: borderRadius ?? BorderRadius.zero,
+        clipBehavior: Clip.antiAlias,
+        child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma, tileMode: mode),
-            child: Container(color: color ?? Colors.transparent),
-          ),
-        ),
-      ),
-      if (child != null) child!,
-    ],
-  );
+            child: color==null?
+            (child??Container(color: Colors.transparent)):
+            (Container(color: color, child: child))
+        )
+    );
+
+    if(elevation == null) return _widget;
+
+    return Material(
+      elevation: elevation!,
+      borderRadius: borderRadius ?? BorderRadius.zero,
+      color: Colors.transparent,
+      child: _widget,
+    );
+
+  }
 
 }

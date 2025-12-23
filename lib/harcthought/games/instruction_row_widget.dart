@@ -21,15 +21,15 @@ class InstructionRowWidget extends StatelessWidget{
 
       Expanded(
           child: Blur(
-            clipBehavior: Clip.none,
+            elevation: AppCard.bigElevation,
+            borderRadius: BorderRadius.circular(AppCard.bigRadius),
             child: SimpleButton.from(
-              icon: MdiIcons.textBoxOutline,
-              text: 'Zasady',
-              textColor: Colors.white,
-              color: Colors.white54,
-              margin: EdgeInsets.zero,
-              elevation: AppCard.bigElevation,
-              onTap: () => onRulesTap?.call(context)
+                icon: MdiIcons.textBoxOutline,
+                text: 'Zasady',
+                textColor: Colors.white,
+                color: Colors.white54,
+                margin: EdgeInsets.zero,
+                onTap: () => onRulesTap?.call(context)
             ),
           )
       ),
@@ -40,15 +40,15 @@ class InstructionRowWidget extends StatelessWidget{
       if(onGuideTap != null)
         Expanded(
             child: Blur(
-              clipBehavior: Clip.none,
+              elevation: AppCard.bigElevation,
+              borderRadius: BorderRadius.circular(AppCard.bigRadius),
               child: SimpleButton.from(
-                icon: MdiIcons.cardsPlayingOutline,
-                text: 'Samoucz.',
-                textColor: Colors.white,
-                color: Colors.white54,
-                margin: EdgeInsets.zero,
-                elevation: AppCard.bigElevation,
-                onTap: () => onGuideTap?.call(context)
+                  icon: MdiIcons.cardsPlayingOutline,
+                  text: 'Samoucz.',
+                  textColor: Colors.white,
+                  color: Colors.white54,
+                  margin: EdgeInsets.zero,
+                  onTap: () => onGuideTap?.call(context)
               ),
             )
         ),
