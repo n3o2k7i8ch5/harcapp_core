@@ -21,15 +21,22 @@ class Blur extends StatelessWidget{
   });
 
   @override
-  Widget build(BuildContext context) => ClipRRect(
-      borderRadius: borderRadius ?? BorderRadius.zero,
-      clipBehavior: clipBehavior,
-      child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma, tileMode: mode),
-          child: color==null?
-          (child??Container(color: Colors.transparent)):
-          (Container(color: color, child: child))
-      )
+  Widget build(BuildContext context) => Stack(
+    fit: StackFit.passthrough,
+    clipBehavior: clipBehavior,
+    children: [
+      Positioned.fill(
+        child: ClipRRect(
+          borderRadius: borderRadius ?? BorderRadius.zero,
+          clipBehavior: Clip.antiAlias,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma, tileMode: mode),
+            child: Container(color: color ?? Colors.transparent),
+          ),
+        ),
+      ),
+      if (child != null) child!,
+    ],
   );
 
 }

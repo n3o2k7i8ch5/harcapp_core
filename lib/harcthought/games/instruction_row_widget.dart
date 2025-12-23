@@ -21,6 +21,7 @@ class InstructionRowWidget extends StatelessWidget{
 
       Expanded(
           child: Blur(
+            clipBehavior: Clip.none,
             child: SimpleButton.from(
               icon: MdiIcons.textBoxOutline,
               text: 'Zasady',
@@ -39,6 +40,7 @@ class InstructionRowWidget extends StatelessWidget{
       if(onGuideTap != null)
         Expanded(
             child: Blur(
+              clipBehavior: Clip.none,
               child: SimpleButton.from(
                 icon: MdiIcons.cardsPlayingOutline,
                 text: 'Samoucz.',
