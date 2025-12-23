@@ -20,7 +20,7 @@ class InstructionRowWidget extends StatelessWidget{
 
   static InstructionRowWidget simple({
     required Widget Function(BuildContext context) rulesWidgetBuilder,
-    required Widget Function(BuildContext context) guideWidgetBuilder,
+    required Widget Function(BuildContext context)? guideWidgetBuilder,
   }) => InstructionRowWidget(
     onRulesTap: (context) => showScrollBottomSheet(
       context: context,
@@ -30,7 +30,10 @@ class InstructionRowWidget extends StatelessWidget{
         builder: rulesWidgetBuilder
       ),
     ),
-    onGuideTap: (context) => openDialog(
+    onGuideTap:
+    guideWidgetBuilder==null?
+    null:
+    (context) => openDialog(
       context: context,
       builder: guideWidgetBuilder,
     ),
