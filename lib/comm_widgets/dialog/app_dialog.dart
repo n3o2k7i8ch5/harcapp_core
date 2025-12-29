@@ -8,7 +8,7 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-const double appDialogDefMargin = 18.0;
+const double appDialogDefMargin = 24.0;
 
 class AppDialogButton extends StatelessWidget{
 
