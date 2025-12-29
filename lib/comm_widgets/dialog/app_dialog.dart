@@ -50,6 +50,8 @@ class AppDialog extends StatelessWidget{
   final Axis buttonsOrientation;
   final double buttonsSeparator;
 
+  final bool scrollable;
+
   const AppDialog({
     super.key,
     required this.title,
@@ -63,54 +65,61 @@ class AppDialog extends StatelessWidget{
     this.buttons = const [],
     this.buttonsOrientation = Axis.horizontal,
     this.buttonsSeparator = 8.0,
+
+    this.scrollable = false,
   });
 
 
   @override
-  Widget build(BuildContext context) => BaseDialog(
-    padding: padding,
-    color: color,
-    radius: radius,
-    child: IntrinsicHeight(
-      child: Column(
-        children: [
+  Widget build(BuildContext context) {
+    Widget content = Column(
+      mainAxisSize: scrollable ? MainAxisSize.max : MainAxisSize.min,
+      children: [
 
-          Padding(
-            padding: EdgeInsets.all(appDialogDefMargin),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    title,
-                    style: AppTextStyle(fontSize: Dimen.textSizeAppBar, fontWeight: weightHalfBold),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+        Padding(
+          padding: EdgeInsets.all(appDialogDefMargin),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: AppTextStyle(fontSize: Dimen.textSizeAppBar, fontWeight: weightHalfBold),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                if(closable)
-                  IconButton(
-                    icon: Icon(MdiIcons.close),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-              ],
-            ),
+              ),
+              if(closable)
+                IconButton(
+                  icon: Icon(MdiIcons.close),
+                  onPressed: () => Navigator.pop(context),
+                ),
+            ],
           ),
+        ),
 
-          child,
+        scrollable
+            ? Expanded(child: SingleChildScrollView(child: child))
+            : child,
 
-          Padding(
-            padding: EdgeInsets.all(appDialogDefMargin),
-            child: _ActionButtons(
-              buttons,
-              orientation: buttonsOrientation,
-              separator: buttonsSeparator,
-            ),
-          )
+        Padding(
+          padding: EdgeInsets.all(appDialogDefMargin),
+          child: _ActionButtons(
+            buttons,
+            orientation: buttonsOrientation,
+            separator: buttonsSeparator,
+          ),
+        )
 
-        ],
-      ),
-    ),
-  );
+      ],
+    );
+
+    return BaseDialog(
+      padding: padding,
+      color: color,
+      radius: radius,
+      child: scrollable ? content : IntrinsicHeight(child: content),
+    );
+  }
 
 
 }
@@ -160,18 +169,21 @@ class _ActionButtons extends StatelessWidget {
 
 Future<void> openAppDialog({
   required BuildContext context,
-  required String title,
-  required Widget child,
-  bool closable = false,
   bool dismissible = true,
 
   EdgeInsets padding = const EdgeInsets.all(AppCard.bigRadius),
   Color? color,
   double radius = AppCard.bigRadius,
 
+  required String title,
+  bool closable = false,
+  required Widget child,
+
   List<Widget> buttons = const [],
   Axis buttonsOrientation = Axis.horizontal,
   double buttonsSeparator = 8.0,
+
+  bool scrollable = false,
 }) => openDialogRoute(
     context: context,
     dismissible: dismissible,
@@ -185,5 +197,6 @@ Future<void> openAppDialog({
       buttons: buttons,
       buttonsOrientation: buttonsOrientation,
       buttonsSeparator: buttonsSeparator,
+      scrollable: scrollable,
     )
 );

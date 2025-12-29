@@ -1,81 +1,121 @@
 import 'package:flutter/material.dart';
-import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
-import 'package:harcapp_core/comm_widgets/simple_button.dart';
+import 'package:harcapp_core/comm_widgets/dialog/app_dialog.dart';
 import 'package:harcapp_core/values/dimen.dart';
 
-import 'base.dart';
 
-const double alertDialogMarginVal = 24.0;
-const double alertDialogTitleBottomMarginVal = 16.0;
+class _DefaultChildWidget extends StatelessWidget{
 
-class AlertDialogButton extends StatelessWidget{
+  final String content;
+  final Widget? leadingContent;
+  final Widget? bottomContent;
 
-  final String text;
-  final Color? textColor;
-  final bool enabled;
-  final void Function() onTap;
-
-  const AlertDialogButton({required this.text, this.textColor, this.enabled = true, required this.onTap, super.key});
+  const _DefaultChildWidget({
+    required this.content,
+    this.leadingContent,
+    this.bottomContent,
+  });
 
   @override
-  Widget build(BuildContext context) => SimpleButton(
-      radius: AppCard.bigRadius,
-      padding: const EdgeInsets.all(Dimen.iconMarg),
-      onTap: enabled?onTap:null,
-      child: Text(text, style: AppTextStyle(fontWeight: weightHalfBold, color: textColor??(enabled?textEnab_(context):textDisab_(context)), fontSize: Dimen.textSizeBig))
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+
+      Row(
+        children: [
+          if(leadingContent != null) leadingContent!,
+          Expanded(child: AppText(content, size: Dimen.textSizeBig))
+        ],
+      ),
+
+      if(bottomContent != null)
+        bottomContent!,
+
+    ],
   );
 
 }
 
-Future<void> showAlertDialog(
-    BuildContext context,
-    { required String title,
+
+Future<void> showAlertDialog({
+      required BuildContext context,
+      bool dismissible = true,
+
+      EdgeInsets padding = const EdgeInsets.all(AppCard.bigRadius),
+      Color? color,
+      double radius = AppCard.bigRadius,
+
+      required String title,
+      bool closable = false,
       Widget? contentWidget,
       String? content,
       Widget? bottomContent,
       Widget? leadingContent,
-      List<Widget> Function(BuildContext context)? actionBuilder,
-      bool dismissible = true,
+      List<Widget> buttons = const [],
+      Axis buttonsOrientation = Axis.horizontal,
+      double buttonsSeparator = 8.0,
       bool scrollable = false,
     }){
   assert(contentWidget != null || content != null, 'Either contentWidget or content must be provided');
-  return openBaseDialog(
-    context: context,
-    dismissible: dismissible,
-    builder: (BuildContext context) => AlertDialog(
-      title: Text(title, style: const AppTextStyle(fontWeight: weightHalfBold)),
-      content: contentWidget??
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
 
-              Row(
-                children: [
-                  if(leadingContent != null) leadingContent,
-                  Expanded(child: AppText(content!, size: Dimen.textSizeBig))
-                ],
-              ),
+  return openAppDialog(
+      context: context,
+      dismissible: dismissible,
 
-              if(bottomContent != null)
-                bottomContent,
+      padding: padding,
+      color: color,
+      radius: radius,
 
-            ],
-          ),
-      actions: actionBuilder==null?null:actionBuilder(context),
-      actionsPadding: const EdgeInsets.only(bottom: Dimen.iconMarg, right: Dimen.iconMarg),
-      backgroundColor: background_(context),
-      surfaceTintColor: Colors.transparent,
-      contentTextStyle: TextStyle(color: textEnab_(context)),
-      scrollable: scrollable,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(AppCard.alertDialogRadius))
+      title: title,
+      closable: closable,
+      child: contentWidget??_DefaultChildWidget(
+          content: content!,
+          leadingContent: leadingContent,
+          bottomContent: bottomContent
       ),
-    ),
+      buttons: buttons,
+      buttonsOrientation: Axis.horizontal,
+      buttonsSeparator: 8.0,
+      scrollable: scrollable,
   );
+
+  // returnurn openBaseDialog(
+  //   context: context,
+  //   dismissible: dismissible,
+  //   builder: (BuildContext context) => AlertDialog(
+  //     title: Text(title, style: const AppTextStyle(fontWeight: weightHalfBold)),
+  //     content: contentWidget??
+  //         Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           crossAxisAlignment: CrossAxisAlignment.stretch,
+  //           children: [
+  //
+  //             Row(
+  //               children: [
+  //                 if(leadingContent != null) leadingContent,
+  //                 Expanded(child: AppText(content!, size: Dimen.textSizeBig))
+  //               ],
+  //             ),
+  //
+  //             if(bottomContent != null)
+  //               bottomContent,
+  //
+  //           ],
+  //         ),
+  //     actions: actionBuilder==null?null:actionBuilder(context),
+  //     actionsPadding: const EdgeInsets.only(bottom: Dimen.iconMarg, right: Dimen.iconMarg),
+  //     backgroundColor: background_(context),
+  //     surfaceTintColor: Colors.transparent,
+  //     contentTextStyle: TextStyle(color: textEnab_(context)),
+  //     scrollable: scrollable,
+  //     shape: const RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.all(Radius.circular(AppCard.alertDialogRadius))
+  //     ),
+  //   ),
+  // );
 }
 
 TextStyle alertDialogTextStyle(BuildContext context) => Theme.of(context).textTheme.headlineSmall!.copyWith(
