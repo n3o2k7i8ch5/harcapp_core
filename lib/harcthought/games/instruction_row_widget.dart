@@ -3,7 +3,7 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/blur.dart';
 import 'package:harcapp_core/comm_widgets/bottom_sheet.dart';
-import 'package:harcapp_core/comm_widgets/dialog/dialog.dart';
+import 'package:harcapp_core/comm_widgets/dialog/route.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -33,7 +33,7 @@ class InstructionRowWidget extends StatelessWidget{
     onGuideTap:
     guideWidgetBuilder==null?
     null:
-    (context) => openDialog(
+    (context) => openDialogRoute(
       context: context,
       builder: guideWidgetBuilder,
     ),

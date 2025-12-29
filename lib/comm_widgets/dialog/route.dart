@@ -46,7 +46,7 @@ class DialogRoute extends PageRoute{
 
 }
 
-Future<void> openDialog({
+Future<void> openDialogRoute({
   required BuildContext context,
   required Widget Function(BuildContext context) builder,
   bool dismissible = true
