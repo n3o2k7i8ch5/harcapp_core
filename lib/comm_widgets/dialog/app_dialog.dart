@@ -77,9 +77,15 @@ class AppDialog extends StatelessWidget{
       children: [
 
         Padding(
-          padding: EdgeInsets.all(appDialogDefMargin),
+          padding: EdgeInsets.only(
+            top: appDialogDefMargin - (Dimen.iconFootprint - Dimen.textSizeAppBar)/2,
+            left: appDialogDefMargin,
+            right: closable? (appDialogDefMargin - Dimen.iconMarg): appDialogDefMargin,
+            bottom: appDialogDefMargin - (Dimen.iconFootprint - Dimen.textSizeAppBar)/2,
+          ),
           child: Row(
             children: [
+              SizedBox(height: Dimen.iconFootprint),
               Expanded(
                 child: Text(
                   title,
@@ -92,7 +98,7 @@ class AppDialog extends StatelessWidget{
                 IconButton(
                   icon: Icon(MdiIcons.close),
                   onPressed: () => Navigator.pop(context),
-                ),
+                )
             ],
           ),
         ),
