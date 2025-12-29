@@ -3,6 +3,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/dialog/base.dart';
+import 'package:harcapp_core/comm_widgets/dialog/route.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -156,3 +157,33 @@ class _ActionButtons extends StatelessWidget {
   }
 
 }
+
+Future<void> openAppDialog({
+  required BuildContext context,
+  required String title,
+  required Widget child,
+  bool closable = false,
+  bool dismissible = true,
+
+  EdgeInsets padding = const EdgeInsets.all(AppCard.bigRadius),
+  Color? color,
+  double radius = AppCard.bigRadius,
+
+  List<Widget> buttons = const [],
+  Axis buttonsOrientation = Axis.horizontal,
+  double buttonsSeparator = 8.0,
+}) => openDialogRoute(
+    context: context,
+    dismissible: dismissible,
+    builder: (context) => AppDialog(
+      title: title,
+      child: child,
+      closable: closable,
+      padding: padding,
+      color: color,
+      radius: radius,
+      buttons: buttons,
+      buttonsOrientation: buttonsOrientation,
+      buttonsSeparator: buttonsSeparator,
+    )
+);
