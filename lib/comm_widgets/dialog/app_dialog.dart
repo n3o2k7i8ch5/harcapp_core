@@ -89,7 +89,7 @@ class AppDialog extends StatelessWidget{
               Expanded(
                 child: Text(
                   title,
-                  style: AppTextStyle(fontSize: Dimen.textSizeAppBar, fontWeight: weightHalfBold),
+                  style: AppTextStyle(fontSize: Dimen.textSizeAppBar, fontWeight: weightBold),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -107,14 +107,15 @@ class AppDialog extends StatelessWidget{
             ? Expanded(child: SingleChildScrollView(child: child))
             : child,
 
-        Padding(
-          padding: EdgeInsets.all(appDialogDefMargin),
-          child: _ActionButtons(
-            buttons,
-            orientation: buttonsOrientation,
-            separator: buttonsSeparator,
-          ),
-        )
+        if(buttons.isNotEmpty)
+          Padding(
+            padding: EdgeInsets.all(appDialogDefMargin),
+            child: _ActionButtons(
+              buttons,
+              orientation: buttonsOrientation,
+              separator: buttonsSeparator,
+            ),
+          )
 
       ],
     );
