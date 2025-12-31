@@ -36,6 +36,8 @@ class AppDropdown<T extends IconTextEnum> extends StatelessWidget{
   final Widget? icon;
   final Color? color;
   final PopupMenuPosition? position;
+  final Offset? offset;
+  final BoxConstraints? constraints;
   final void Function(T item) onSelected;
   final List<AppDropdownButton<T>> Function(BuildContext context) itemBuilder;
   final BorderRadius? borderRadius;
@@ -46,6 +48,8 @@ class AppDropdown<T extends IconTextEnum> extends StatelessWidget{
     this.icon,
     this.color,
     this.position,
+    this.offset,
+    this.constraints,
     required this.onSelected,
     required this.itemBuilder,
     this.borderRadius,
@@ -63,6 +67,8 @@ class AppDropdown<T extends IconTextEnum> extends StatelessWidget{
     icon: icon,
     child: child,
     position: position,
+    offset: offset ?? Offset.zero,
+    constraints: constraints,
     onSelected: onSelected,
     itemBuilder: (BuildContext context) => itemBuilder.call(context)
   );
