@@ -22,7 +22,7 @@ class AppBarX extends AppBar{
     super.elevation,
     super.scrolledUnderElevation = 6.0,
     super.notificationPredicate = defaultScrollNotificationPredicate,
-    super.shadowColor = Colors.black,
+    super.shadowColor = Colors.black38,
     super.surfaceTintColor = Colors.transparent,
     super.shape,
     super.backgroundColor,
