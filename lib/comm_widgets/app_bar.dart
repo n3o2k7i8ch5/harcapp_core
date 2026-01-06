@@ -4,6 +4,9 @@ import 'app_bar_back_button.dart';
 
 class AppBarX extends AppBar{
 
+  static const double defElevation = 6.0;
+  static const Color defShadowColor = Colors.black38;
+
   final String? _title;
   final Widget? titleWidget;
 
@@ -20,9 +23,9 @@ class AppBarX extends AppBar{
     super.flexibleSpace,
     super.bottom,
     super.elevation,
-    super.scrolledUnderElevation = 6.0,
+    super.scrolledUnderElevation = defElevation,
     super.notificationPredicate = defaultScrollNotificationPredicate,
-    super.shadowColor = Colors.black38,
+    super.shadowColor = defShadowColor,
     super.surfaceTintColor = Colors.transparent,
     super.shape,
     super.backgroundColor,
