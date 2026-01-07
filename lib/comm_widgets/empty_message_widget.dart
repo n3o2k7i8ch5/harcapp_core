@@ -8,7 +8,7 @@ class EmptyMessageWidget extends StatelessWidget{
   final String? text;
   final IconData icon;
   final Color? color;
-  final TextOverflow overflow;
+  final TextOverflow? overflow;
   final double size;
 
   const EmptyMessageWidget({
