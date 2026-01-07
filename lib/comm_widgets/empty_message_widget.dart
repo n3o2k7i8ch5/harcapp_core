@@ -8,6 +8,7 @@ class EmptyMessageWidget extends StatelessWidget{
   final String? text;
   final IconData icon;
   final Color? color;
+  final TextOverflow overflow;
   final double size;
 
   const EmptyMessageWidget({
@@ -15,6 +16,7 @@ class EmptyMessageWidget extends StatelessWidget{
     required this.icon,
     this.color,
     this.size = 92, //Dimen.ICON_EMPTY_INFO_SIZE,
+    this.overflow = TextOverflow.ellipsis,
     super.key});
 
   @override
@@ -33,7 +35,7 @@ class EmptyMessageWidget extends StatelessWidget{
             fontWeight: weightBold
         ),
         textAlign: TextAlign.center,
-        overflow: TextOverflow.ellipsis,
+        overflow: overflow,
       ),
 
     ],
