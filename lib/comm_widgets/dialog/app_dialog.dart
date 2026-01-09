@@ -82,6 +82,15 @@ class AppDialog extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
+    Widget actionButtons = _ActionButtons(
+      buttons,
+      orientation: buttonsOrientation,
+      separator: buttonsSeparator,
+    );
+
+    if(intrinsicWidth)
+      actionButtons = IntrinsicWidth(child: actionButtons);
+
     Widget content = Column(
       mainAxisSize: scrollable ? MainAxisSize.max : MainAxisSize.min,
       children: [
@@ -126,11 +135,7 @@ class AppDialog extends StatelessWidget{
         if(buttons.isNotEmpty)
           Padding(
             padding: EdgeInsets.all(appDialogDefMargin),
-            child: _ActionButtons(
-              buttons,
-              orientation: buttonsOrientation,
-              separator: buttonsSeparator,
-            ),
+            child: actionButtons
           )
 
       ],
@@ -165,9 +170,8 @@ class _ActionButtons extends StatelessWidget {
   const _ActionButtons(
       this.children,
       { this.orientation = Axis.horizontal,
-        this.separator = 8.0
-      }
-      );
+        this.separator = 8.0,
+      });
 
   @override
   Widget build(BuildContext context) {
