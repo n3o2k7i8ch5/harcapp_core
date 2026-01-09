@@ -6,7 +6,7 @@ import 'common.dart';
 
 List<Widget> SphereListWidget(Konspekt konspekt, Font font, Font fontBold){
 
-  if(konspekt.spheres.isEmpty)
+  if(konspekt.spheresEmpty)
     return [Container()];
 
   List<Widget> widgets = [];
@@ -14,6 +14,7 @@ List<Widget> SphereListWidget(Konspekt konspekt, Font font, Font fontBold){
   for(int i=0; i<konspekt.spheres.length; i++) {
     KonspektSphere sphere = konspekt.spheres.keys.toList()[i];
     KonspektSphereDetails? details = konspekt.spheres[sphere];
+    if(details == null || details.isEmpty) continue;
     widgets.add(SphereWidget(sphere, details, font, fontBold));
   }
 

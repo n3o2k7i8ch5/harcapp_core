@@ -197,19 +197,25 @@ class KonspektSpheresWidget extends StatelessWidget{
       });
 
   @override
-  Widget build(BuildContext context) => ListView.separated(
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
-    itemBuilder: (context, index){
-      KonspektSphere sphere = spheres.keys.toList()[index];
-      return KonspektSphereWidget(
-          sphere,
-          spheres[sphere],
+  Widget build(BuildContext context) {
+    final nonEmptySpheres = spheres.entries
+        .where((e) => e.value?.isNotEmpty ?? false)
+        .toList();
+
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
+      itemBuilder: (context, index) {
+        final entry = nonEmptySpheres[index];
+        return KonspektSphereWidget(
+          entry.key,
+          entry.value,
           onDuchLevelInfoTap: onDuchLevelInfoTap,
-      );
-    },
-    itemCount: spheres.length,
-  );
+        );
+      },
+      itemCount: nonEmptySpheres.length,
+    );
+  }
 
 }

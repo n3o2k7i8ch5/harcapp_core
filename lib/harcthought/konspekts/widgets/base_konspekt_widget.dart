@@ -333,16 +333,16 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 ),
               ),
 
-              if(konspekt.spheres.isNotEmpty)
+              if(konspekt.spheresNotEmpty)
                 const TitleShortcutRowWidget(title: 'Sfery rozwoju', textAlign: TextAlign.left),
 
-              if(konspekt.spheres.isNotEmpty)
+              if(konspekt.spheresNotEmpty)
                 KonspektSpheresWidget(
                   konspekt.spheres,
                   onDuchLevelInfoTap: onDuchLevelInfoTap,
                 ),
 
-              if(konspekt.spheres.isNotEmpty)
+              if(konspekt.spheresNotEmpty)
                 const SizedBox(height: Dimen.sideMarg),
 
             ])),

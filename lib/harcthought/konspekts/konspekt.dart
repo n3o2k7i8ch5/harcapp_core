@@ -188,6 +188,8 @@ class KonspektSphereDetails{
     return true;
   }
 
+  bool get isNotEmpty => !isEmpty;
+
   Map toJsonMap(){
     Map result = {};
     for (KonspektSphereLevel level in levels.keys)
@@ -339,6 +341,8 @@ class KonspektSphereFields{
 
     return true;
   }
+
+  bool get isNotEmpty => !isEmpty;
 
   Map toJsonMap() => fields.map(
       (key, value) => MapEntry(key, value?.map((e) => e.apiParam).toList())
@@ -1004,20 +1008,28 @@ abstract class BaseKonspekt with BaseKonspektStepsContainerMixin{
 
   const BaseKonspekt();
 
-  Map? _spheresToJsonMap(){
-    if(spheres.isEmpty) return null;
+  bool get spheresEmpty{
+    if(spheres.isEmpty) return true;
 
+    for(var entry in spheres.entries)
+      if(entry.value != null && entry.value!.isNotEmpty)
+        return false;
+
+    return true;
+  }
+
+  bool get spheresNotEmpty => !spheresEmpty;
+
+  Map? _spheresToJsonMap(){
+    if(spheresEmpty) return null;
     Map<String, dynamic> result = {};
 
     for(var entry in spheres.entries){
-      if(entry.value == null || entry.value!.isEmpty)
-        continue;
-
+      if(entry.value == null || entry.value!.isEmpty) continue;
       result[entry.key.apiParam] = entry.value!.toJsonMap();
     }
 
-
-    return spheres.map((key, value) => MapEntry(key.apiParam, value?.toJsonMap()));
+    return result;
   }
 
   Map toJsonMap() => {
