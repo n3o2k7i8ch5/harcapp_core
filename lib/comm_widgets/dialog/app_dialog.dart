@@ -97,6 +97,11 @@ class AppDialog extends StatelessWidget{
     if(intrinsicWidth)
       actionButtons = IntrinsicWidth(child: actionButtons);
 
+    Widget paddedActionButtons = Padding(
+      padding: EdgeInsets.all(appDialogDefMargin),
+      child: actionButtons,
+    );
+
     Widget content = Column(
       mainAxisSize: scrollable ? MainAxisSize.max : MainAxisSize.min,
       children: [
@@ -139,9 +144,11 @@ class AppDialog extends StatelessWidget{
         ),
 
         if(buttons.isNotEmpty)
-          Padding(
-            padding: EdgeInsets.all(appDialogDefMargin),
-            child: actionButtons
+          actionButtonsExpanded?
+          paddedActionButtons:
+          Align(
+            alignment: Alignment.bottomRight,
+            child: paddedActionButtons,
           )
 
       ],
@@ -203,7 +210,7 @@ class _ActionButtons extends StatelessWidget {
 
     return orientation == Axis.horizontal ?
     Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: expanded?MainAxisSize.max:MainAxisSize.min,
       children: spacedChildren
     ) :
     Column(
