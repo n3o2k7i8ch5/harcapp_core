@@ -141,6 +141,7 @@ flutter:
     - assets/konspekty/harcerskie/zycie_i_swiat_prl/
 
     - assets/konspekty/ksztalcenie/
+    - assets/konspekty/ksztalcenie/czym_jest_zhp/
     - assets/konspekty/ksztalcenie/czynniki_i_mechanizmy_ksztaltowania_duchowosci/
     - assets/konspekty/ksztalcenie/dwie_roty_dwoch_przyrzeczen_harcerskich/
     - assets/konspekty/ksztalcenie/warsztaty_wychowania_duchowego/
