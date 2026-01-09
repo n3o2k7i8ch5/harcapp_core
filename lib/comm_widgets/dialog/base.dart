@@ -10,6 +10,7 @@ class BaseDialog extends StatelessWidget{
   final Color? color;
   final double? radius;
   final Widget child;
+  final double? maxWidth;
 
   const BaseDialog({
     super.key,
@@ -17,21 +18,33 @@ class BaseDialog extends StatelessWidget{
     this.color,
     this.radius,
     required this.child,
+    this.maxWidth,
   });
 
   @override
-  Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: padding ?? const EdgeInsets.all(Dimen.sideMarg),
-      child: Material(
-        clipBehavior: Clip.hardEdge,
-        elevation: AppCard.bigElevation,
-        borderRadius: BorderRadius.circular(radius??AppCard.bigRadius),
-        color: color??background_(context),
-        child: child,
+  Widget build(BuildContext context) {
+
+    Widget _child = Center(
+      child: Padding(
+        padding: padding ?? const EdgeInsets.all(Dimen.sideMarg),
+        child: Material(
+          clipBehavior: Clip.hardEdge,
+          elevation: AppCard.bigElevation,
+          borderRadius: BorderRadius.circular(radius??AppCard.bigRadius),
+          color: color??background_(context),
+          child: child,
+        ),
       ),
-    ),
-  );
+    );
+
+    if(maxWidth != null)
+      _child = Container(
+        constraints: BoxConstraints(maxWidth: maxWidth!),
+        child: _child,
+      );
+
+    return _child;
+  }
 
 }
 

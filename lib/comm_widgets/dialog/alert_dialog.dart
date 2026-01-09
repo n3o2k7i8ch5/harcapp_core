@@ -59,8 +59,8 @@ Future<void> showAlertDialog({
       double buttonsSeparator = 8.0,
       bool scrollable = false,
 
-      bool intrinsicWidth = false,
       double? maxWidth,
+      bool intrinsicWidth = false,
 
       bool actionButtonsExpanded = false,
     }){
@@ -86,8 +86,8 @@ Future<void> showAlertDialog({
       buttonsSeparator: 8.0,
       scrollable: scrollable,
 
-      intrinsicWidth: intrinsicWidth,
       maxWidth: maxWidth,
+      intrinsicWidth: intrinsicWidth,
 
       actionButtonsExpanded: actionButtonsExpanded,
   );

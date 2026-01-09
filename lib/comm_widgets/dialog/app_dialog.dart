@@ -154,12 +154,6 @@ class AppDialog extends StatelessWidget{
       ],
     );
 
-    if(maxWidth != null)
-      content = Container(
-        constraints: BoxConstraints(maxWidth: maxWidth!),
-        child: content,
-      );
-
     if(intrinsicWidth)
       content = IntrinsicWidth(child: content);
 
@@ -168,6 +162,7 @@ class AppDialog extends StatelessWidget{
       color: color,
       radius: radius,
       child: scrollable ? content : IntrinsicHeight(child: content),
+      maxWidth: maxWidth,
     );
   }
 

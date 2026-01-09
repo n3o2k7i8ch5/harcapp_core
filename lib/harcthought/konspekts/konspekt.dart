@@ -179,6 +179,15 @@ class KonspektSphereDetails{
     required this.levels,
   });
 
+  bool get isEmpty{
+    if(levels.isEmpty) return true;
+
+    for(final fields in levels.values)
+      if(!fields.isEmpty) return false;
+
+    return true;
+  }
+
   Map toJsonMap(){
     Map result = {};
     for (KonspektSphereLevel level in levels.keys)
@@ -321,6 +330,15 @@ class KonspektSphereFields{
   const KonspektSphereFields({
     required this.fields,
   });
+
+  bool get isEmpty{
+    if(fields.isEmpty) return true;
+
+    for(final factors in fields.values)
+      if(factors != null && factors.isNotEmpty) return false;
+
+    return true;
+  }
 
   Map toJsonMap() => fields.map(
       (key, value) => MapEntry(key, value?.map((e) => e.apiParam).toList())
@@ -986,13 +1004,29 @@ abstract class BaseKonspekt with BaseKonspektStepsContainerMixin{
 
   const BaseKonspekt();
 
+  Map? _spheresToJsonMap(){
+    if(spheres.isEmpty) return null;
+
+    Map<String, dynamic> result = {};
+
+    for(var entry in spheres.entries){
+      if(entry.value == null || entry.value!.isEmpty)
+        continue;
+
+      result[entry.key.apiParam] = entry.value!.toJsonMap();
+    }
+
+
+    return spheres.map((key, value) => MapEntry(key.apiParam, value?.toJsonMap()));
+  }
+
   Map toJsonMap() => {
     'name': name,
     'title': title,
     'additionalSearchPhrases': additionalSearchPhrases,
     'category': category.apiParam,
     'type': type.apiParam,
-    'spheres': spheres.map((key, value) => MapEntry(key.apiParam, value?.toJsonMap())),
+    'spheres': _spheresToJsonMap(),
     'metos': metos.map((e) => e.apiParam).toList(),
     'coverAuthor': coverAuthor,
     'author': author?.toApiJsonMap(),
