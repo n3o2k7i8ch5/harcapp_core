@@ -58,6 +58,9 @@ class AppDialog extends StatelessWidget{
   final bool intrinsicWidth;
   final double? maxWidth;
 
+  final bool actionButtonsExpanded;
+
+
   const AppDialog({
     super.key,
     required this.title,
@@ -76,7 +79,9 @@ class AppDialog extends StatelessWidget{
 
     this.intrinsicWidth = false,
     this.maxWidth,
-  });
+
+    this.actionButtonsExpanded = false,
+  }) : assert(!actionButtonsExpanded || buttonsOrientation == Axis.horizontal);
 
 
   @override
@@ -86,6 +91,7 @@ class AppDialog extends StatelessWidget{
       buttons,
       orientation: buttonsOrientation,
       separator: buttonsSeparator,
+      expanded: actionButtonsExpanded,
     );
 
     if(intrinsicWidth)
@@ -166,12 +172,14 @@ class _ActionButtons extends StatelessWidget {
   final List<Widget> children;
   final Axis orientation;
   final double separator;
+  final bool expanded;
 
   const _ActionButtons(
       this.children,
       { this.orientation = Axis.horizontal,
         this.separator = 8.0,
-      });
+        this.expanded = false,
+      }) : assert(!expanded || orientation == Axis.horizontal);
 
   @override
   Widget build(BuildContext context) {
@@ -188,14 +196,17 @@ class _ActionButtons extends StatelessWidget {
       }
       spacedChildren.add(
           orientation == Axis.horizontal
-              ? Expanded(child: children[i])
+              ? (expanded?Expanded(child: children[i]):children[i])
               : children[i]
       );
     }
 
-    return orientation == Axis.horizontal
-        ? Row(children: spacedChildren)
-        : Column(
+    return orientation == Axis.horizontal ?
+    Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: spacedChildren
+    ) :
+    Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: spacedChildren,
     );
