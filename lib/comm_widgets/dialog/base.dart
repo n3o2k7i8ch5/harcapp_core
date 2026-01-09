@@ -24,16 +24,14 @@ class BaseDialog extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    Widget _child = Center(
-      child: Padding(
-        padding: padding ?? const EdgeInsets.all(Dimen.sideMarg),
-        child: Material(
-          clipBehavior: Clip.hardEdge,
-          elevation: AppCard.bigElevation,
-          borderRadius: BorderRadius.circular(radius??AppCard.bigRadius),
-          color: color??background_(context),
-          child: child,
-        ),
+    Widget _child = Padding(
+      padding: padding ?? const EdgeInsets.all(Dimen.sideMarg),
+      child: Material(
+        clipBehavior: Clip.hardEdge,
+        elevation: AppCard.bigElevation,
+        borderRadius: BorderRadius.circular(radius??AppCard.bigRadius),
+        color: color??background_(context),
+        child: child,
       ),
     );
 
@@ -43,7 +41,7 @@ class BaseDialog extends StatelessWidget{
         child: _child,
       );
 
-    return _child;
+    return Center(child: _child);
   }
 
 }
