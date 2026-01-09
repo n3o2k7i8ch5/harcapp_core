@@ -1246,7 +1246,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
     additionalSearchPhrases: (data['additionalSearchPhrases'] as List?)?.map((e) => e as String).toList()??[],
     category: KonspektCategory.fromApiParam(data['category'] as String)??(throw MissingDecodeParamError('category')),
     type: KonspektType.fromApiParam(data['type']) ?? (throw MissingDecodeParamError('type')),
-    spheres: (data['spheres'] as Map).map((key, value) => MapEntry(
+    spheres: ((data['spheres'] as Map?) ?? const {}).map((key, value) => MapEntry(
         KonspektSphere.fromApiParam(key as String)??(throw MissingDecodeParamError('spheres.$key')),
         value == null ? null : KonspektSphereDetails.fromJsonMap((value as Map).cast<String, dynamic>())
     )).cast<KonspektSphere, KonspektSphereDetails?>(),
