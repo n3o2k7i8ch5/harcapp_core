@@ -58,6 +58,9 @@ Future<void> showAlertDialog({
       Axis buttonsOrientation = Axis.horizontal,
       double buttonsSeparator = 8.0,
       bool scrollable = false,
+
+      bool intrinsicWidth = false,
+      double? maxWidth,
     }){
   assert(contentWidget != null || content != null, 'Either contentWidget or content must be provided');
 
@@ -80,6 +83,9 @@ Future<void> showAlertDialog({
       buttonsOrientation: Axis.horizontal,
       buttonsSeparator: 8.0,
       scrollable: scrollable,
+
+      intrinsicWidth: intrinsicWidth,
+      maxWidth: maxWidth,
   );
 
   // returnurn openBaseDialog(

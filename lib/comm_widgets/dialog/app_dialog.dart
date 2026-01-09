@@ -216,6 +216,9 @@ Future<void> openAppDialog({
   double buttonsSeparator = 8.0,
 
   bool scrollable = false,
+
+  bool intrinsicWidth = false,
+  double? maxWidth,
 }) => openDialogRoute(
     context: context,
     dismissible: dismissible,
@@ -230,5 +233,8 @@ Future<void> openAppDialog({
       buttonsOrientation: buttonsOrientation,
       buttonsSeparator: buttonsSeparator,
       scrollable: scrollable,
+
+      intrinsicWidth: intrinsicWidth,
+      maxWidth: maxWidth,
     )
 );
