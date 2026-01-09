@@ -61,6 +61,8 @@ Future<void> showAlertDialog({
 
       bool intrinsicWidth = false,
       double? maxWidth,
+
+      bool actionButtonsExpanded = false,
     }){
   assert(contentWidget != null || content != null, 'Either contentWidget or content must be provided');
 
@@ -86,6 +88,8 @@ Future<void> showAlertDialog({
 
       intrinsicWidth: intrinsicWidth,
       maxWidth: maxWidth,
+
+      actionButtonsExpanded: actionButtonsExpanded,
   );
 
   // returnurn openBaseDialog(

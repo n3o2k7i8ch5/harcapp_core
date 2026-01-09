@@ -234,6 +234,8 @@ Future<void> openAppDialog({
 
   bool intrinsicWidth = false,
   double? maxWidth,
+
+  bool actionButtonsExpanded = false,
 }) => openDialogRoute(
     context: context,
     dismissible: dismissible,
@@ -251,5 +253,7 @@ Future<void> openAppDialog({
 
       intrinsicWidth: intrinsicWidth,
       maxWidth: maxWidth,
+
+      actionButtonsExpanded: actionButtonsExpanded,
     )
 );
