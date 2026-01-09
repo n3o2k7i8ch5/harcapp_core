@@ -55,6 +55,7 @@ class AppDialog extends StatelessWidget{
 
   final bool scrollable;
 
+  final bool intrinsicWidth;
   final double? maxWidth;
 
   const AppDialog({
@@ -73,6 +74,7 @@ class AppDialog extends StatelessWidget{
 
     this.scrollable = false,
 
+    this.intrinsicWidth = false,
     this.maxWidth,
   });
 
@@ -139,6 +141,9 @@ class AppDialog extends StatelessWidget{
         constraints: BoxConstraints(maxWidth: maxWidth!),
         child: content,
       );
+
+    if(intrinsicWidth)
+      content = IntrinsicWidth(child: content);
 
     return BaseDialog(
       padding: padding,
