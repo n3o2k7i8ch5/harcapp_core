@@ -155,7 +155,7 @@ class KonspektTileWidget extends StatelessWidget{
                                     overflowAlignment: OverflowBarAlignment.start,
                                     overflowSpacing: 6.0,
                                     children: [
-                                      if (showSpheres) KonspektSphereList(konspekt),
+                                      if (showSpheres & konspekt.spheresNotEmpty) KonspektSphereList(konspekt),
                                       if (showTime && konspekt.duration != null)
                                         _TimePill(konspekt, background: background),
                                     ],
