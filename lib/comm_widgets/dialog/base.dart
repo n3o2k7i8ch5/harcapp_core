@@ -56,6 +56,7 @@ Future<void> openBaseDialog({
   Color? color,
   double? radius,
   required Widget Function(BuildContext context) builder,
+  double? maxWidth,
 }) => openDialogRoute(
     context: context,
     dismissible: dismissible,
@@ -64,5 +65,6 @@ Future<void> openBaseDialog({
       color: color,
       radius: radius,
       child: builder.call(context),
+      maxWidth: maxWidth,
     )
 );
