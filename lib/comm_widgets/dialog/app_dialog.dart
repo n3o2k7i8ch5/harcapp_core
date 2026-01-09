@@ -24,13 +24,16 @@ class AppDialogButton extends StatelessWidget{
       radius: AppCard.bigRadius,
       padding: const EdgeInsets.all(Dimen.iconMarg),
       onTap: enabled?onTap:null,
-      child: Text(
+      child: Center(
+        child: Text(
           text,
           style: AppTextStyle(
-              fontWeight: weightHalfBold,
-              color: textColor??(enabled?textEnab_(context):textDisab_(context)),
-              fontSize: Dimen.textSizeBig
-          )
+            fontWeight: weightHalfBold,
+            color: textColor??(enabled?textEnab_(context):textDisab_(context)),
+            fontSize: Dimen.textSizeBig
+          ),
+          textAlign: TextAlign.center,
+        ),
       )
   );
 
@@ -52,6 +55,8 @@ class AppDialog extends StatelessWidget{
 
   final bool scrollable;
 
+  final double? maxWidth;
+
   const AppDialog({
     super.key,
     required this.title,
@@ -67,11 +72,14 @@ class AppDialog extends StatelessWidget{
     this.buttonsSeparator = 8.0,
 
     this.scrollable = false,
+
+    this.maxWidth,
   });
 
 
   @override
   Widget build(BuildContext context) {
+
     Widget content = Column(
       mainAxisSize: scrollable ? MainAxisSize.max : MainAxisSize.min,
       children: [
@@ -104,8 +112,14 @@ class AppDialog extends StatelessWidget{
         ),
 
         scrollable
-            ? Expanded(child: SingleChildScrollView(child: child))
-            : child,
+        ? Expanded(child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: appDialogDefMargin),
+          child: child)
+        )
+        : Padding(
+          padding: EdgeInsets.symmetric(horizontal: appDialogDefMargin),
+          child: child,
+        ),
 
         if(buttons.isNotEmpty)
           Padding(
@@ -119,6 +133,12 @@ class AppDialog extends StatelessWidget{
 
       ],
     );
+
+    if(maxWidth != null)
+      content = Container(
+        constraints: BoxConstraints(maxWidth: maxWidth!),
+        child: content,
+      );
 
     return BaseDialog(
       padding: padding,
