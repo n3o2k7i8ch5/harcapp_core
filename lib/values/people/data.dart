@@ -1748,10 +1748,18 @@ const Person KINGA_JANKO = Person(
     hufiec: huf_zhp_ziemi_tarnogorskiej,
     email: ["jankokinga9@gmail.com"]
 );
+const Person KINGA_JASKULSKA = Person(
+    name: 'Kinga Jaskulska',
+    druzyna: '100. WDH „Triera”',
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhpHOd,
+    org: Org.zhp,
+    email: ['kinga.jaskulska1@zhp.net.pl']
+);
 const Person KLARA_MAZEK = Person(name: 'Klara Mazek');
 const Person KLAUDIA_PARNIEWICZ = Person(
     name: 'Klaudia Parniewicz',
-    druzyna: '12 Drużyna Starszoharcerska Horyzont',
+    druzyna: '12 Drużyna Starszoharcerska „Horyzont”',
     hufiec: huf_zhp_nowy_tomysl,
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
@@ -1823,6 +1831,14 @@ const Person KRYSTIAN_BULANDA = Person(
     hufiec: huf_zhp_krakow_pdg,
     email: ['krystian.bulanda@zhp.net.pl'],
     org: Org.zhp
+);
+const Person KRZESIMIR_KARBOWNIK = Person(
+    name: 'Krzesimir Karbownik',
+    druzyna: '132. MDH "SSzW"',
+    hufiec: huf_zhp_zielonka,
+    rankHarc: RankHarc.zhpHOc,
+    org: Org.zhp,
+    email: ["krzesimir@karbownik.org"]
 );
 const Person KRZYSZTOF_BANIK = Person(
     name: 'Krzysztof Banik',
@@ -2386,6 +2402,14 @@ const Person MARTYNA_BULAKOWSKA = Person(
     hufiec: huf_zhp_ruda_slaska,
     org: Org.zhp,
     email: ['m.bulakowska1997@gmail.com']
+);
+const Person MARTYNA_CEGLAREK = Person(
+    name: 'Martyna Ceglarek',
+    druzyna: '21. Drużyna Harcerska „Gawra”',
+    hufiec: huf_zhp_wolsztyn,
+    rankHarc: RankHarc.zhpTropicielka,
+    org: Org.zhp,
+    email: ["ceglarekmartyna003@gmail.com"]
 );
 const Person MARTYNA_SADOWNIK = Person(
     name: 'Martyna Sadownik',
@@ -3129,9 +3153,9 @@ const Person ROBERT_LISZEWSKI = Person(
     name: 'Robert Liszewski',
     druzyna: "25. Środowiskowa Drużyna Harcerska „Echo” im. Tony'ego Halika",
     hufiec: huf_zhp_sochaczew,
-    rankHarc: RankHarc.zhpCwik,
+    rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
-    email: ['liszewskir25@gmail.com']
+    email: ['liszewskir25@gmail.com', 'robert.liszewski@zhp.net.pl']
 );
 const Person ROBERT_LOPATKA = Person(
     name: 'Robert Łopatka',
