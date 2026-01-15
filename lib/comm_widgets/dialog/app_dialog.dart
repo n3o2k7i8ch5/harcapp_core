@@ -103,7 +103,7 @@ class AppDialog extends StatelessWidget{
     );
 
     Widget content = Column(
-      mainAxisSize: scrollable ? MainAxisSize.max : MainAxisSize.min,
+      mainAxisSize: MainAxisSize.min,
       children: [
 
         Padding(
@@ -134,7 +134,7 @@ class AppDialog extends StatelessWidget{
         ),
 
         scrollable
-        ? Expanded(child: SingleChildScrollView(
+        ? Flexible(child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: appDialogDefMargin),
           child: child)
         )
