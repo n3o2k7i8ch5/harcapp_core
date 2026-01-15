@@ -336,8 +336,8 @@ class KonspektSphereFields{
   bool get isEmpty{
     if(fields.isEmpty) return true;
 
-    for(final factors in fields.values)
-      if(factors != null && factors.isNotEmpty) return false;
+    for(final field in fields.keys)
+      if(field.isNotEmpty) return false;
 
     return true;
   }
