@@ -141,7 +141,9 @@ class AppDialog extends StatelessWidget{
           child: child,
         ),
 
-        if(buttons.isNotEmpty)
+        if(buttons.isEmpty)
+          SizedBox(height: appDialogDefMargin)
+        else
           actionButtonsExpanded?
           paddedActionButtons:
           Align(
