@@ -44,7 +44,7 @@ Future<void> showAlertDialog({
       required BuildContext context,
       bool dismissible = true,
 
-      EdgeInsets padding = const EdgeInsets.all(AppCard.bigRadius),
+      EdgeInsets margin = const EdgeInsets.all(Dimen.sideMarg),
       Color? color,
       double radius = AppCard.bigRadius,
 
@@ -70,7 +70,7 @@ Future<void> showAlertDialog({
       context: context,
       dismissible: dismissible,
 
-      padding: padding,
+      margin: margin,
       color: color,
       radius: radius,
 
@@ -91,41 +91,6 @@ Future<void> showAlertDialog({
 
       actionButtonsExpanded: actionButtonsExpanded,
   );
-
-  // returnurn openBaseDialog(
-  //   context: context,
-  //   dismissible: dismissible,
-  //   builder: (BuildContext context) => AlertDialog(
-  //     title: Text(title, style: const AppTextStyle(fontWeight: weightHalfBold)),
-  //     content: contentWidget??
-  //         Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           crossAxisAlignment: CrossAxisAlignment.stretch,
-  //           children: [
-  //
-  //             Row(
-  //               children: [
-  //                 if(leadingContent != null) leadingContent,
-  //                 Expanded(child: AppText(content!, size: Dimen.textSizeBig))
-  //               ],
-  //             ),
-  //
-  //             if(bottomContent != null)
-  //               bottomContent,
-  //
-  //           ],
-  //         ),
-  //     actions: actionBuilder==null?null:actionBuilder(context),
-  //     actionsPadding: const EdgeInsets.only(bottom: Dimen.iconMarg, right: Dimen.iconMarg),
-  //     backgroundColor: background_(context),
-  //     surfaceTintColor: Colors.transparent,
-  //     contentTextStyle: TextStyle(color: textEnab_(context)),
-  //     scrollable: scrollable,
-  //     shape: const RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.all(Radius.circular(AppCard.alertDialogRadius))
-  //     ),
-  //   ),
-  // );
 }
 
 TextStyle alertDialogTextStyle(BuildContext context) => Theme.of(context).textTheme.headlineSmall!.copyWith(
