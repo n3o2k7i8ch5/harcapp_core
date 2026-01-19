@@ -104,6 +104,7 @@ class AppDialog extends StatelessWidget{
 
     Widget content = Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
 
         Padding(
