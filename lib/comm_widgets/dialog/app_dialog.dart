@@ -67,7 +67,7 @@ class AppDialog extends StatelessWidget{
     required this.child,
     this.closable = false,
 
-    this.padding = const EdgeInsets.all(AppCard.bigRadius),
+    this.padding = const EdgeInsets.all(Dimen.sideMarg),
     this.color,
     this.radius = AppCard.bigRadius,
 
