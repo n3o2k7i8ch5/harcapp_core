@@ -6,7 +6,6 @@ import 'route.dart';
 
 class BaseDialog extends StatelessWidget{
 
-  final EdgeInsets? padding;
   final Color? color;
   final double? radius;
   final Widget child;
@@ -14,7 +13,6 @@ class BaseDialog extends StatelessWidget{
 
   const BaseDialog({
     super.key,
-    this.padding,
     this.color,
     this.radius,
     required this.child,
@@ -24,15 +22,12 @@ class BaseDialog extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    Widget _child = Padding(
-      padding: padding ?? const EdgeInsets.all(Dimen.sideMarg),
-      child: Material(
-        clipBehavior: Clip.hardEdge,
-        elevation: AppCard.bigElevation,
-        borderRadius: BorderRadius.circular(radius??AppCard.bigRadius),
-        color: color??background_(context),
-        child: child,
-      ),
+    Widget _child = Material(
+      clipBehavior: Clip.hardEdge,
+      elevation: AppCard.bigElevation,
+      borderRadius: BorderRadius.circular(radius??AppCard.bigRadius),
+      color: color??background_(context),
+      child: child,
     );
 
     if(maxWidth != null)
@@ -50,7 +45,7 @@ Future<void> openBaseDialog({
   required BuildContext context,
   bool dismissible = true,
 
-  EdgeInsets? padding,
+  EdgeInsets margin = const EdgeInsets.all(Dimen.sideMarg),
   Color? color,
   double? radius,
   required Widget Function(BuildContext context) builder,
@@ -58,11 +53,13 @@ Future<void> openBaseDialog({
 }) => openDialogRoute(
     context: context,
     dismissible: dismissible,
-    builder: (context) => BaseDialog(
-      padding: padding,
-      color: color,
-      radius: radius,
-      child: builder.call(context),
-      maxWidth: maxWidth,
+    builder: (context) => Padding(
+      padding: margin,
+      child: BaseDialog(
+        color: color,
+        radius: radius,
+        child: builder.call(context),
+        maxWidth: maxWidth,
+      ),
     )
 );

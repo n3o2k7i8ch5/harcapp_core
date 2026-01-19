@@ -45,7 +45,6 @@ class AppDialog extends StatelessWidget{
   final Widget child;
   final bool closable;
 
-  final EdgeInsets padding;
   final Color? color;
   final double radius;
 
@@ -60,14 +59,12 @@ class AppDialog extends StatelessWidget{
 
   final bool actionButtonsExpanded;
 
-
   const AppDialog({
     super.key,
     required this.title,
     required this.child,
     this.closable = false,
 
-    this.padding = const EdgeInsets.all(Dimen.sideMarg),
     this.color,
     this.radius = AppCard.bigRadius,
 
@@ -159,7 +156,6 @@ class AppDialog extends StatelessWidget{
       content = IntrinsicWidth(child: content);
 
     return BaseDialog(
-      padding: padding,
       color: color,
       radius: radius,
       child: scrollable ? content : IntrinsicHeight(child: content),
@@ -221,7 +217,7 @@ Future<void> openAppDialog({
   required BuildContext context,
   bool dismissible = true,
 
-  EdgeInsets padding = const EdgeInsets.all(Dimen.sideMarg),
+  EdgeInsets margin = const EdgeInsets.all(Dimen.sideMarg),
   Color? color,
   double radius = AppCard.bigRadius,
 
@@ -242,21 +238,23 @@ Future<void> openAppDialog({
 }) => openDialogRoute(
     context: context,
     dismissible: dismissible,
-    builder: (context) => AppDialog(
-      title: title,
-      child: child,
-      closable: closable,
-      padding: padding,
-      color: color,
-      radius: radius,
-      buttons: buttons,
-      buttonsOrientation: buttonsOrientation,
-      buttonsSeparator: buttonsSeparator,
-      scrollable: scrollable,
+    builder: (context) => Padding(
+      padding: margin,
+      child: AppDialog(
+        title: title,
+        child: child,
+        closable: closable,
+        color: color,
+        radius: radius,
+        buttons: buttons,
+        buttonsOrientation: buttonsOrientation,
+        buttonsSeparator: buttonsSeparator,
+        scrollable: scrollable,
 
-      intrinsicWidth: intrinsicWidth,
-      maxWidth: maxWidth,
+        intrinsicWidth: intrinsicWidth,
+        maxWidth: maxWidth,
 
-      actionButtonsExpanded: actionButtonsExpanded,
+        actionButtonsExpanded: actionButtonsExpanded,
+      ),
     )
 );
