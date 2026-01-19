@@ -221,7 +221,7 @@ Future<void> openAppDialog({
   required BuildContext context,
   bool dismissible = true,
 
-  EdgeInsets padding = const EdgeInsets.all(AppCard.bigRadius),
+  EdgeInsets padding = const EdgeInsets.all(Dimen.sideMarg),
   Color? color,
   double radius = AppCard.bigRadius,
 
