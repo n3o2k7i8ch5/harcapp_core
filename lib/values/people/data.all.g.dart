@@ -11,7 +11,7 @@ import 'package:harcapp_core/values/people/data.dart';
 import 'package:harcapp_core/values/people/person.dart';
 
 const List<Person> allPeople = [
-  ABRAHAM_PRAGER,
+  ABRAHAM_PRAGERR,
   ADAM_DAWID,
   ADAM_DUDAK,
   ADAM_SKLODOWSKI,

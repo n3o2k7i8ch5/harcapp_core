@@ -5,7 +5,7 @@ import 'package:harcapp_core/values/rank_instr.dart';
 import '../hufce.dart';
 import '../org.dart';
 
-const Person ABRAHAM_PRAGER = Person(
+const Person ABRAHAM_PRAGERR = Person(
     name: 'Abraham Prager',
     druzyna: '1. Czarnkowska Drużyna Wielopoziomowa „Puszcza” im. Jana Kilińskiego',
     email: ['abraham.p@wp.pl']
