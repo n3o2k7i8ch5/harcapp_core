@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Pre-commit hook to ensure data.all.g.dart is up-to-date
+# Automatically regenerates and stages the file if outdated
+
+GENERATED_FILE="lib/values/people/data.all.g.dart"
+
+# Check if generated file exists
+if [ ! -f "$GENERATED_FILE" ]; then
+    echo "Generating $GENERATED_FILE..."
+    dart run build_runner build --delete-conflicting-outputs 2>&1 | tail -1
+    if [ -f "$GENERATED_FILE" ]; then
+        git add "$GENERATED_FILE"
+        echo "Generated and staged $GENERATED_FILE"
+    else
+        echo "ERROR: Failed to generate $GENERATED_FILE"
+        exit 1
+    fi
+    exit 0
+fi
+
+# Save current content
+ORIGINAL_CONTENT=$(cat "$GENERATED_FILE")
+
+echo "Verifying generated code is up-to-date..."
+
+# Remove file to force regeneration
+rm -f "$GENERATED_FILE"
+
+# Run build_runner
+BUILD_OUTPUT=$(dart run build_runner build --delete-conflicting-outputs 2>&1)
+BUILD_EXIT_CODE=$?
+
+if [ $BUILD_EXIT_CODE -ne 0 ]; then
+    echo "ERROR: build_runner failed!"
+    echo "$BUILD_OUTPUT"
+    echo "$ORIGINAL_CONTENT" > "$GENERATED_FILE"
+    exit 1
+fi
+
+# Check if file was regenerated
+if [ ! -f "$GENERATED_FILE" ]; then
+    echo "ERROR: build_runner did not generate $GENERATED_FILE!"
+    echo "$ORIGINAL_CONTENT" > "$GENERATED_FILE"
+    exit 1
+fi
+
+NEW_CONTENT=$(cat "$GENERATED_FILE")
+
+# Compare and auto-stage if different
+if [ "$ORIGINAL_CONTENT" != "$NEW_CONTENT" ]; then
+    git add "$GENERATED_FILE"
+    echo "Auto-generated and staged $GENERATED_FILE"
+fi
+
+echo "Generated code is up-to-date."
+exit 0
