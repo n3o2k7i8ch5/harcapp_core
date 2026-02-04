@@ -1,6 +1,5 @@
 pre-commit:
   commands:
     build_runner:
-      run: dart run build_runner build --delete-conflicting-outputs && git diff --exit-code
-      stage_fixed: true
-      glob: "lib/values/data.dart"
+      run: dart run build_runner build --delete-conflicting-outputs && git diff --exit-code lib/values/people/data.all.g.dart
+      glob: "lib/values/people/data.dart"

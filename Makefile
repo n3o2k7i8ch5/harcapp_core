@@ -2,8 +2,9 @@
 
 install:
 	@flutter pub get
-	@dart run lefthook_dart install
-	@flutter pub global activate lefthook_dart
+	@cp scripts/pre-commit .git/hooks/pre-commit
+	@chmod +x .git/hooks/pre-commit
+	@echo "Git hooks installed."
 
 # Generate all code (including Isar adapters)
 .PHONY: generate

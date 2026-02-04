@@ -9,7 +9,7 @@ const String poradnik_title_czynniki_i_mechanizmy_ksztaltowania_duchowosci = "Cz
 Poradnik poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Poradnik(
   name: poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   title: poradnik_title_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-  pageCount: 13,
+  pageCount: 10,
   description: 'Poradnik dla pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące zagadnienia:'
       '\n'
       '\nJakie prawa rządzą kształtowaniem duchowości?'
