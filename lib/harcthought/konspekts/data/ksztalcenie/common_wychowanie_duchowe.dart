@@ -200,7 +200,7 @@ KonspektStep _step_poziomy_duchowosci = KonspektStep(
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci wprowadza rozróżnienie poziomów duchowości kolejno na poziom <b>zachowań</b>, poziom <b>postaw</b>, poziom <b>wartości</b> i poziom <b>aksjomatu</b> (kolejność definiowania jest ważna). Każdorazowo po zdefiniowaniu określonego poziomu duchowości prowadzący kładzie w widocznym miejscu katkę z nazwą i hasłową definicją poziomu duchowości z załącznika $attach_html_karty_poziomow_duchowosci. Dzięki temu uczestnicy mogą w każdym momencie zerknąć na definicję poziomu duchowości.'
+        'Prowadzący, opierając się na poradniku $attach_html_poradnik_o_strukturze_duchowosci wprowadza kolejno rozróżnienie poziomów duchowości: <b>zachowań</b>, <b>wartości</b> i <b>aksjomatów</b> (kolejność definiowania jest ważna). Po zdefiniowaniu każdego poziomu kładzie w widocznym miejscu odpowiednią kartkę z załącznika $attach_html_karty_poziomow_duchowosci, aby uczestnicy mogli w każdej chwili do nich wrócić.'
         '<br>'
         '<br>Prowadzący może w tym miejscu posiłkować się przykładem:'
         '</p>'
@@ -210,12 +210,8 @@ KonspektStep _step_poziomy_duchowosci = KonspektStep(
         '<td style="padding-left: 8px; padding-right: 8px;"><p>Oddanie własnego obiadu bezdomnemu</p></td>'
         '</tr>'
         '<tr>'
-        '<td style="padding-left: 8px; padding-right: 8px;"><p>Postawa</p></td>'
-        '<td style="padding-left: 8px; padding-right: 8px;"><p>Ofiarność</p></td>'
-        '</tr>'
-        '<tr>'
         '<td style="padding-left: 8px; padding-right: 8px;"><p>Wartość</p></td>'
-        '<td style="padding-left: 8px; padding-right: 8px;"><p>Godne życie każdego człowieka</p></td>'
+        '<td style="padding-left: 8px; padding-right: 8px;"><p>Godność każdego człowieka</p></td>'
         '</tr>'
         '<tr>'
         '<td style="padding-left: 8px; padding-right: 8px;"><p>Aksjomat</p></td>'
@@ -224,9 +220,9 @@ KonspektStep _step_poziomy_duchowosci = KonspektStep(
         '</table>'
 
         '<p style="text-align:justify;">'
-        'Dodatkowo prowadzący definiuje skróty: duchowość <b>wymierna</b> (poziom zachowań i postaw) i <b>głęboka</b> (poziom wartości i aksjomatów).'
+        'Dodatkowo prowadzący definiuje skróty: duchowość <b>wymierna</b> (poziom zachowań) i <b>głęboka</b> (poziom wartości i aksjomatów).'
         '<br>'
-        '<br>Prowadzący powinien zaznaczyć, że “poziom duchowości” nie odnosi się do słowa “poziom” w sensie poziomu zaawansowania (np. poziom w grze komputerowej), ale poziomu w sensie warstwy, piętra, hierarchii etc..'
+        '<br>Prowadzący powinien zaznaczyć, że „poziom duchowości" oznacza tu warstwę czy piętro hierarchii, a nie stopień zaawansowania (jak np. poziom w grze komputerowej).'
         '</p>'
 );
 
@@ -238,7 +234,7 @@ KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
     content: '<p style="text-align:justify;">'
 
         '<p style="text-align:justify;">'
-        'Prowadzący może prosić uczestników o podanie kilku przykładowych elementów do każdego poziomu duchowości. Prowadzący każdorazowo ocenia, czy przykłady są trafne - jeśli nie, podaje powód, dla którego nie są.'
+        'Prowadzący prosi uczestników o podanie kilku przykładów do każdego poziomu duchowości i ew. wchodzi w krótką dyskusję, jeśli coś jest nie tak w przykładach uczestników.'
         '<br>'
         '<br><u>Uwagi o wartościach:</u>'
         '</p>'
@@ -247,13 +243,13 @@ KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Wartości opisują zawsze <b>preferowany stan świata</b>. Bezstanowe określenia w stylu "rodzina" nie są wartością. Wartością może być "posiadanie rodziny", "majętność rodziny", "szczęście członków rodziny", "liczebność rodziny".'
+        'Wartości zawsze oceniają <b>stan świata</b>. Bezstanowe określenia w stylu "rodzina" formalnie nie są wartością: mogą nią być "posiadanie rodziny", "majętność rodziny", "szczęście członków rodziny", "liczebność rodziny".'
         '</p>'
         '</li>'
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Ktoś powie: Zaraz! Przecież ludzie mówią: <i>"rodzina jest dla mnie wartością"</i> i wiadomo o co im chodzi!'
+        'Mimo to, przecież ludzie mówią: <i>"rodzina jest dla mnie wartością"</i>!'
         '<br>'
         '<br>Gdy takie stwierdzenie wypowiada konkretna osoba, to w istocie deklaruje: <i>"dobro rodziny, tak jak je rozumiem, jest dla mnie wartością"</i>. Przykładowo:'
         '<br>'
@@ -265,7 +261,7 @@ KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Chwilowo człowiek może jako preferowany stan określić <b>przyjemność</b> wynikającą ze zjedzenia cukierka, <b>zaśnięcie</b>, czy <b>poczucie euforii</b> po kupieniu nowych ciuchów. To także są wartości wpisane w strukturę wartości człowieka.'
+        'Wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Chwilowo człowiek może kierować się wartością <b>doświadczania przyjemności</b> wynikającej ze zjedzenia cukierka, czy <b>poczucie euforii</b> po kupieniu nowych ciuchów. To także są wartości wpisane w strukturę wartości człowieka.'
         '</p>'
         '</li>'
 
@@ -281,7 +277,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomat = KonspektStep(
   duration: Duration(minutes: 5),
   activeForm: KonspektStepActiveForm.static,
   content: '<p style="text-align:justify;">'
-      'Poziom zachowań, postaw i wartości są dla większości osób zrozumiałe, jednak poziom aksjomatu może być nieintuicyjny. Z tego względu, po zdefiniowaniu wszystkich czterech poziomów duchowości, prowadzący zatrzymuje się dłużej nad aksjomatami.'
+      'Poziom zachowań i wartości są dla większości osób zrozumiałe, jednak poziom aksjomatu może być nieintuicyjny. Po zdefiniowaniu wszystkich trzech poziomów duchowości, prowadzący zatrzymuje się dłużej nad aksjomatami.'
       '<br>'
       '<br>Prowadzący podaje kilka przykładów aksjomatów, np.:'
       '</p>'
@@ -289,11 +285,9 @@ KonspektStep _step_poziomy_duchowosci_aksjomat = KonspektStep(
       '$aksjomaty_przyklady'
 
       '<p style="text-align:justify;">'
-      '<b>Aksjomat zawsze jest fundamentalną, niesprawdzalną wiarą</b> w określony porządek rzeczy.'
+      '<b>Aksjomat jest zawsze <b>fundamentalną, niesprawdzalną wiarą w określony porządek rzeczy — i całkowicie porządkuje postrzeganie rzeczywistości</b>. Aby to zobrazować, prowadzący może posłużyć się przykładem::'
       '<br>'
-      '<br><b>Aksjomaty całkowicie porządkują postrzeganie rzeczywistości</b>. Aby to zobrazować, prowadzący może posłużyć się przykładem:'
-      '<br>'
-      '<br><i>"Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Również, jeśli ów człowiek zobaczy dowód na kulistość Ziemi, to wniosek będzie miał tylko jeden: narzędzia użyte przy tych dowodach były wadliwe.'
+      '<br><i>"Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Również, jeśli zobaczy dowód na kulistość Ziemi, to wniosek będzie miał tylko jeden: narzędzia użyte przy tych dowodach były wadliwe.'
       '<br>'
       '<br>Czy to powinno zaskakiwać? Przecież my, gdy nam przedstawiono nagranie dowodzące, że księżyc jest jedynie wyświetlanym hologramem, też uznalibyśmy, że to nagranie musi być błędne. Nie zakładalibyśmy, że cała nauka się pomyliła - a przecież nauka mogła się pomylić, my jedynie wierzymy, że ona dobrze opisuje rzeczywistość.".</i>'
       '<br>'
@@ -312,18 +306,16 @@ KonspektStep _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = Konspekt
       material_zal_aksjomaty_sensu_przyklady,
       material_zal_aksjomaty_bledne_przyklady,
     ],
-    duration: Duration(minutes: 15),
+    duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.active,
     content: '<p style="text-align:justify;">'
-        'Aby uczestnicy mieli okazję sami obyć się z aksjomatami, prowadzący rozdaje im wycięte prostokątne kartki z przykładami aksjomatów z załącznika $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_opisu_i_sensu_przyklady, $attach_html_aksjomaty_sensu_przyklady i $attach_html_aksjomaty_bledne_przyklady.'
+        'Aby uczestnicy oswoili się z aksjomatami, prowadzący rozdaje im wycięte i pomieszane kartki z przykładami z załączników $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_opisu_i_sensu_przyklady, $attach_html_aksjomaty_sensu_przyklady i $attach_html_aksjomaty_bledne_przyklady.'
         '<br>'
-        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio jako <b>aksjomaty opisu</b>, <b>aksjomaty opisu i sensu</b> oraz <b>aksjomaty sensu</b>. Muszą mieć też na uwadze, że <b>kilka przykładów nie jest aksjomatem</b> w ogóle.'
-        '<br>'
-        '<br>W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
+        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio jako <b>aksjomaty opisu</b>, <b>aksjomaty opisu i sensu</b> oraz <b>aksjomaty sensu</b> - mając na uwadze, że <b>kilka przykładów nie jest aksjomatem</b> w ogóle. W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
         '<br>'
         '<br>Kartki z przykładowymi aksjomatami powinny zostać ułożone w trzech kolumnach pod wyłożoną podczas prezentowania poziomów duchowości kartką "Aksjomat". Przykłady, które nie są aksjomatami należy odłożyć gdzieś z boku.'
         '<br>'
-        '<br>Na końcu prowadzący po krótce omawia z uczestnikami poprawność ich dopasowania.'
+        '<br>Na końcu prowadzący pokrótce omawia z uczestnikami poprawność ich dopasowania.'
         '</p>'
 );
 
