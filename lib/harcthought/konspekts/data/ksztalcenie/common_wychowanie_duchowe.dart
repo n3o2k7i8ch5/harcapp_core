@@ -494,6 +494,8 @@ KonspektStepGroup step_group_integracja_duchowosci = KonspektStepGroup(
     ]
 );
 
+
+
 // Meta-narracja
 
 KonspektStep _step_meta_narracja_scenka_wprowadzenie = KonspektStep(
@@ -504,18 +506,18 @@ KonspektStep _step_meta_narracja_scenka_wprowadzenie = KonspektStep(
         'Prowadzący przedstawia uczestnikom krótką historię:'
         '<br>'
         '<br>'
-        '<i>Na obozie jeden z wędrowników, Radek, zaszedł drugiemu, Adamowi, za skórę. Zaczęło się od żartów i docinków, jednak w ciągu paru tygodni eskalowało to w celowe, wzajemne robienie sobie na złość. Pewnego razu na biwaku Radek podciął Adamowi linki do hamaka - wieczorem, gdy Adam kładkł się spać, cały jego hamak runął. Wybuchła z tego afera.'
+        '<i>Na obozie dwóch wędrowników, Radek i Adam, weszło ze sobą w konflikt. Zaczęło się od żartów i docinków, ale w ciągu kilku tygodni eskalowało w celowe robienie sobie na złość. Pewnego razu Radek podciął Adamowi linki do hamaka - gdy wieczorem Adam kładł się spać, cały hamak runął. Wybuchła afera.'
         '<br>'
-        '<br>Drużynowy wziął chłopaków na bok i odbył z nimi poważną rozmowę. Radkowi było głupio - wiedział, że przesadził podcinając linki. Po kilku dniach podszedł do Adama i go przeprosił za wszystkie dotychczasowe niesnaski, jednak Adam wzruszył tylko ramionami.'
+        '<br>Drużynowy wziął chłopaków na rozmowę. Radkowi było głupio — wiedział, że przesadził. Po kilku dniach przeprosił Adama za wszystkie dotychczasowe niesnaski, jednak Adam wzruszył tylko ramionami.'
         '<br>'
-        '<br>Radek zaprzestał wszelkich docinków, jednak Adam wciąż go ignorował i co jakiś tylko czas rzucał pod jego adresem kąśliwe uwagi. Sytuacja ta trwała już miesiąc, więc drużynowy wziął Adama na rozmowę. Powiedział, że zgodnie z Prawem Harcerskim należy traktować innych jak bliźnich i braci, a skoro Radek przeprosił za swoje "akcje", to chyba Adam powinien odpuścić już Radkowi.'
+        '<br>Radek zaprzestał docinków, ale Adam wciąż go ignorował i co jakiś czas rzucał kąśliwe uwagi. Po miesiącu drużynowy wziął Adama na rozmowę: zgodnie z Prawem Harcerskim należy traktować innych jak bliźnich i braci, a skoro Radek przeprosił, Adam powinien mu wybaczyć.'
         '<br>'
         '<br>Adam jednak stwierdził:'
         '<br>'
-        '<br>"Okej. Mogę dać mu spokój, ale po tym, co Radek zrobił, nie zasługuje na traktowanie jak brata. Jedną sprawą jest trochę się zagalopować, a inną celowo robić komuś na złość. Zresztą, nie jestem już dzieckiem: dlaczego mam wierzyć w jakieś Prawo Harcerskie, które garstka ludzi nazywających się Radą Naczelną może w każdym momencie zmienić? Kto powiedział, że akurat ich wartości są dobre? Przecież Rada Naczelna to banda starych dziadów rodem z poprzedniej epoki. Braterstwo jest dla niekumatych dzieci. Ja mam inne zasady - nie ma drugiej szansy, to tylko zachęca do nadużywania zasad z myślą, że potem wystarczy przeprosić. Konsekwencje win powinny trwać przez całe życie.".'
+        '<br>"Mogę dać mu spokój, ale po tym co zrobił nie zasługuje na traktowanie jak brata. Czemu mam wierzyć w Prawo Harcerskie, które garstka starych dinozaurów z poprzedniej epoki, czyli Rada Naczelna, może w każdym momencie zmienić? Braterstwo jest dla niekumatych dzieci. Ja mam inne zasady — nie ma drugiej szansy. To tylko zachęca do nadużyć z myślą, że potem wystarczy przeprosić. Konsekwencje win powinny trwać całe życie."'
         '</i>'
         '<br>'
-        '<br>Prowadzący informuje uczestników, że za chwilę wcielą się oni w najlepszej jakości, światowej klasy kadrę wędrowniczą. Ich zadaniem będzie odbyć rozmowę z Adamem i spróbować <b>przekonać go w ciągu 15 minut, że harcerską postawą jest wybaczyć Radkowi, kierując sie 4. punktem PH.</b>'
+        '<br>Prowadzący informuje uczestników, że za chwilę wcielą się oni w najlepszej jakości, światowej klasy kadrę wędrowniczą. Ich zadaniem będzie odbyć rozmowę z Adamem i spróbować <b>przekonać go w ciągu 15 minut, że harcerską postawą jest wybaczyć Radkowi, kierując się 4. punktem PH.</b>'
         '<br>'
         '<br>Uwagi:'
         '</p>'
@@ -545,13 +547,13 @@ KonspektStep _step_meta_narracja_scenka = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Prowadzący ustawia budzik na 15 minut i wciela się w Adama. Zadaniem uczestników jest wcielić się w najlepszej klasy instruktorów harcerskich i przekonać prowadzącego, że powinien (jako Adam) być posłusznym PH i przebaczyć Radkowi ich sprzeczkę.'
         '<br>'
-        '<br>Prowadzący informuje uczestników, że jeżeli uda im się przekonać Adma przed upływem 15 minut, to wyłączy on stoper wcześniej. Jeśli zaś uczestnicy dojdą do wniosku, że nie jest to w ich wykonaniu możliwe, to oni moga zatrzymać stoper.'
+        '<br>Prowadzący informuje uczestników, że jeżeli uda im się przekonać Adama przed upływem 15 minut, to wyłączy on stoper wcześniej. Jeśli zaś uczestnicy dojdą do wniosku, że nie jest to w ich wykonaniu możliwe, to oni mogą zatrzymać stoper.'
         '<br>'
         '<br>Prowadzący w roli Adama aż do końca ma <b>nie dać się przekonać</b>. Kluczowe jest to, by stał ciągle na stanowisku, że <b>uczestnicy mogą sobie wierzyć w PH, ale według Adama ono jest bez sensu i jest wyrazem słabości</b>.'
         '<br>'
         '<br>Filozofia (aksjomatyczne przekonanie) Adama jest następująca:'
         '<br>'
-        '<br>Kultura wybaczania jest kulturą słabości. Zachęca do wyrządzania innym krzywd wiedząc, że można potem przeprosić, trochę zadośćuczynić, a po jakimś czasie znowu wrocić do nadużyć. Prowadzi to patologi, niszczenia zaufania i niszczenia tkanki społecznej. Jedynym wyjściem z tego dylematu jest nie dawać drugiej szansy nikomu, kto świadomie i z premedytacją przekracza granice. Wina raz popełniona nie może być nigdy zmazana - tylko to będzie motywowało ludzi to przestrzegania zasad.'
+        '<br><i>Kultura wybaczania jest kulturą słabości. Zachęca do wyrządzania innym krzywd wiedząc, że można potem przeprosić, trochę zadośćuczynić, a po jakimś czasie znowu wrócić do nadużyć. Prowadzi to do patologii, niszczenia zaufania i niszczenia tkanki społecznej. Jedynym wyjściem z tego dylematu jest nie dawać drugiej szansy nikomu, kto świadomie i z premedytacją przekracza granice. Wina raz popełniona nie może być nigdy zmazana - tylko to będzie motywowało ludzi do przestrzegania zasad.</i>'
         '</p>'
 );
 
@@ -562,38 +564,107 @@ KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Prowadzący pyta uczestników <i>"jak Wam poszło?"</i>.'
         '<br>'
-        '<br>Oczywiście poszło im <b>fatalnie</b> - nie przekonali Adama. Prowadzący pyta uczestników, co poszło nie tak.'
+        '<br>Oczywiście poszło im <b>fatalnie</b> — nie przekonali Adama. Prowadzący zadaje kolejne pytania:'
         '<br>'
-        '<br>Wniosek z dyskusji powinien prowadzić do jedynej możliwej odpowiedzi: <b>“To się nie mogło udać, bo nie ma powodu, by Adam <u>arbitalnie</u> przyjął wartości PH. Jeśli dorosły czlowiek ma traktować Prawo Harcerskie poważnie, musi przyjąć wiarę w coś, z czego owe wartości będą wypływały - np. w to, że jest winien przebaczenie każdemu bliźniemu, bo karma wraca i to on kiedyś będzie owym bliźnim, lub że Chrystus zbawił go przez przebaczenie mu win wyrażonej w śmierci na krzyżu.”</b>.'
+        '<br><i>"Jakich argumentów używaliście?"</i> — uczestnicy prawdopodobnie wymienią: PH tak mówi, to wartościowe, tak wypada, przebaczenie jest dobre, etc.'
         '<br>'
-        '<br>Bez wiary w odpowiedni spójny zbiór aksjomatów, w którym Adam może odnaleźć swoją tożsamość, swój cel, swoje źródło dobra, <b>nie ma żadnej drogi by udało się Adama wychować na dojrzałego, spójnego człowieka w harcerskich (lub jakichkolwiek innych) wartościach!</b>'
+        '<br><i>"Dlaczego nie działały?"</i> — tu uczestnicy powinni sami dojść do tego, że Adam nie miał powodu przyjąć ich wartości. Mówili mu „powinieneś", a on pytał „dlaczego?".'
+        '<br>'
+        '<br><i>"Czego Wam brakowało, żeby go przekonać?"</i> — brakowało im czegoś głębszego niż same wartości. Czegoś, z czego te wartości by wypływały.'
+        '<br>'
+        '<br>Prowadzący nie podaje jeszcze odpowiedzi. Mówi tylko: <i>"Zaraz do tego wrócimy. Najpierw chcę opowiedzieć o czymś, co wyjaśni, dlaczego to się nie mogło udać."</i>'
         '</p>'
 );
 
-KonspektStep _step_meta_narracja = KonspektStep(
-    title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja',
-    duration: Duration(minutes: 5),
+KonspektStep _step_meta_narracja_opowiesci_sa_wszedzie = KonspektStep(
+    title: 'Meta-narracja - opowieści są wszędzie',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący mówi:'
+        '<br>'
+        '<br><i>Ludzie postrzegają świat w formie opowieści — i to nie jest żaden atawizm. Robimy to dziś tak samo jak nasi przodkowie. Uznajemy istnienie państw, wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności człowieka, w opowieści o bohaterach poległych za ojczyznę, w kapłańską rolę naukowców obcujących z najczystszą formą prawdy. To nie słabość — tak działa ludzki umysł.</i>'
+        '</p>'
+);
+
+KonspektStep _step_meta_narracja_opowiesc_vs_instrukcja = KonspektStep(
+    title: 'Meta-narracja - opowieść vs instrukcja',
+    duration: Duration(minutes: 1),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+    // TODO
+        '</p>'
+);
+
+KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
+    title: 'Meta-narracja - opowieści niosą prawdę',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący kontynuuje:'
+        '<br>'
+        '<br><i>Łatwo zarzucić opowieściom, że to bajki dla naiwnych. Owszem, istnieje wiele opowieści, które nie mają w sobie nic — ale są one czymś zupełnie innym od opowieści funkcjonujących w kulturze od pokoleń. Te drugie zawsze obrazują prawdę o świecie — prawdę, do opowiedzenia której postacie niekoniecznie muszą być historyczne, bo to nie aktorzy są istotni, lecz to, co ich historia odsłania.</i>'
+        '<br>'
+        '<br>Prowadzący podaje przykład:'
+        '<br>'
+        '<br><i>Weźmy Pinokia: drewniana, naiwna kukła ucieka z domu, zostaje przygnieciona życiem, lecz w końcu bierze odpowiedzialność za siebie, ratuje ojca z wnętrza wieloryba i dzięki temu staje się w pełni człowiekiem. Żadna kilkutomowa publikacja w stylu „Psychologiczne aspekty relacji między dziećmi a rodzicami" nie opisze tego lepiej. A ludzie to „czują" — intuicyjnie, natychmiast.</i>'
+        '</p>'
+);
+
+KonspektStep _step_meta_narracja_opowiesci_o_opowiesciach = KonspektStep(
+    title: 'Meta-narracja - opowieści o opowieściach',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący kontynuuje:'
+        '<br>'
+        '<br><i>Istnieją opowieści, które nie kończą się na sobie samych, lecz funkcjonują w spójnym kontekście innych opowieści: np. mitologia grecka, mitologia egipska, Koran, starotestamentalna historia ludu wybranego czy Władca Pierścieni. Poza prawdami płynącymi z pojedynczych historii opisują one sposób funkcjonowania złożonych rzeczywistości, gdy skomplikowane koncepty wchodzą ze sobą w interakcję.</i>'
+        '<br>'
+        '<br>Prowadzący podaje przykład:'
+        '<br>'
+        '<br><i>Na przykład: dobro wynikające z tego, że Frodo nigdy nie decyduje się zabić Golluma mimo jego podłości. To nie jest prosta prawda w stylu „bądź miły" — to opowieść o tym, jak miłosierdzie wobec kogoś niegodnego może okazać się kluczowe dla ocalenia całego świata. Ale żeby to zrozumieć, trzeba znać cały kontekst — sam ten epizod, wyrwany z całości, nie ma takiej siły.</i>'
+        '</p>'
+);
+
+KonspektStep _step_meta_narracja_definicja = KonspektStep(
+    title: 'Meta-narracja - definicja i przykłady',
+    duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     materials: [
       material_zal_meta_narracja_opis,
       material_zal_meta_narracja_przyklady,
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący przedstawia definicję meta-narracji na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci i kładzie przed uczestnikami (obok kartki "Aksjomat") opis meta-narracji z załącznika $attach_html_meta_narracja_opis.'
+        'Prowadzący mówi:'
         '<br>'
-        '<br><i>Meta-narracja to opowieść o świecie, obok której nie można przejść obojętnie. To opowieść tak "głęboka", tak "wielka", tak dojmująca i fundamentalna, że niejako "chwyta człowieka za samo serce" i staje się dla niego głównym punktem odniesienia jego obecności w świecie.'
+        '<br><i>Wśród wszystkich zbiorów opowieści istnieje bardzo wąska, ale szczególna kategoria — opowieści tak fundamentalne, że porządkują całość rzeczywistości. Opowieść, która mówi ci kim jesteś, jak działa świat, co jest dobre i jaki jest sens. To jest <b>meta-narracja</b>.</i>'
         '<br>'
-        '<br>Meta-narracja określa jak działa świat, opowiada o jego aktorach, o osobistej roli przyjmującej ją człowieka i jego tożsamości, definiuje dobro, cel, sens.'
+        '<br>Prowadzący kładzie przed uczestnikami (obok kartki "Aksjomat") opis meta-narracji z załącznika $attach_html_meta_narracja_opis i odczytuje go:'
         '<br>'
-        '<br>Aby jakaś opowieść stała się dla człowieka meta-narracją, musi ona zostać przez niego przyjęcia jako <b>zbiór aksjomatów</b>, które uporządkują wszystkie inne aspekty jego rzeczywistości.</i>'
+        '<br><i>Meta-narracja to opowieść o świecie, obok której nie można przejść obojętnie. To opowieść tak głęboka, tak wielka, tak dojmująca i fundamentalna, że niejako chwyta człowieka za samo serce i staje się dla niego głównym punktem odniesienia jego obecności w świecie.'
+        '<br>'
+        '<br>Meta-narracja określa jak działa świat, opowiada o jego aktorach, o osobistej roli przyjmującego ją człowieka i jego tożsamości, definiuje dobro, cel, sens.'
+        '<br>'
+        '<br>Aby jakaś opowieść stała się dla człowieka meta-narracją, musi ona zostać przez niego przyjęta jako <b>zbiór aksjomatów</b>, które uporządkują wszystkie inne aspekty jego rzeczywistości.</i>'
         '<br>'
         '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady i kładzie je obok karty "Meta-narracja".'
+        '</p>'
+);
+
+KonspektStep _step_meta_narracja_powrot_do_scenki = KonspektStep(
+    title: 'Meta-narracja - powrót do scenki i implikacja',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący wraca do scenki:'
         '<br>'
-        '<br>Prowadzący kończy wyjaśnieniem powodu, dla którego porusza ten temat:'
+        '<br><i>Adam nie potrzebował lepszych argumentów za Prawem Harcerskim. Potrzebował opowieści, z której PH wypływa. Bez niej wasze wartości były dla niego arbitralne — i miał rację.</i>'
         '<br>'
-        '<br><i>Ograniczając się do pracy jedynie nad postawami i wartościami wychowanków można jedynie do etapu <b>wstępnej integracji duchowości</b>. Później, na etapie <b>świadomej integracji duchowości</b>, dojrzały duchowo człowiek nie przyjmie zbioru wartości "bo tak". Będzie potrzebował <b>powodu</b> by je przyjąć - <b>źródła wartości</b>, na którym będzie mógł oprzeć swoją duchowość.'
+        '<br>Prowadzący kończy wyjaśnieniem implikacji dla wychowawców:'
         '<br>'
-        '<br>Człowiek ewolował setki tysięcy lat postrzegając świat jako pewną opowieść (np. mitologię) i nie uległo to zmianie. Jeśli chcemy, jako wychowawcy, skutecznie i długotrwale ukształtować młodego czlowieka <b>nie możemy abstrahować od kwestii najbardziej osobistych</b>. Musimy wejść w interakcję z jego przestrzenią aksjomatyczną: opowieścią, która stanie się dla niego najbardziej fundamentalnym rdzeniem jego osoby.</i>'
+        '<br><i>Ograniczając się do pracy jedynie nad postawami i wartościami wychowanków, można dojść jedynie do etapu <b>wstępnej integracji duchowości</b>. Później, na etapie <b>świadomej integracji duchowości</b>, dojrzały duchowo człowiek nie przyjmie zbioru wartości „bo tak". Będzie potrzebował <b>powodu</b>, by je przyjąć — <b>źródła wartości</b>, na którym będzie mógł oprzeć swoją duchowość.'
+        '<br>'
+        '<br>Człowiek prędzej uwierzy w największą głupotę, niż nie będzie wierzył w nic. Jeśli chcemy jako wychowawcy skutecznie i długotrwale ukształtować młodego człowieka, nie możemy abstrahować od kwestii najbardziej osobistych. Musimy wejść w interakcję z jego przestrzenią aksjomatyczną: opowieścią, która stanie się dla niego najbardziej fundamentalnym rdzeniem jego osoby.</i>'
         '</p>'
 );
 
@@ -606,17 +677,6 @@ KonspektStep _step_meta_narracja_pytania = KonspektStep(
         '</p>'
 );
 
-KonspektStep _step_meta_narracja_ocena_metanarracji_i_duchowosci = KonspektStep(
-    title: 'Meta-narracja - pytanie końcowe',
-    duration: Duration(minutes: 0),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Na koniec prowadzący stawia celowo kontrowersyjne pytanie:'
-        '<br>'
-        '<br><i>Za chwilę spróbujemy rozstrzygnąć pytanie za 100 punktów: czy istnieją meta-narracje, tudzież całe duchowości <b>lepsze</b> oraz <b>gorsze</b>?</i>'
-        '</p>'
-);
-
 KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
     title: 'Meta-narracja',
     steps: [
@@ -624,11 +684,153 @@ KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
       _step_meta_narracja_scenka_przygotowanie,
       _step_meta_narracja_scenka,
       _step_meta_narracja_omowienie_scenki,
-      _step_meta_narracja,
+      _step_meta_narracja_opowiesci_sa_wszedzie,
+      _step_meta_narracja_opowiesc_vs_instrukcja,
+      _step_meta_narracja_opowiesci_niosa_prawde,
+      _step_meta_narracja_opowiesci_o_opowiesciach,
+      _step_meta_narracja_definicja,
+      _step_meta_narracja_powrot_do_scenki,
       _step_meta_narracja_pytania,
-      _step_meta_narracja_ocena_metanarracji_i_duchowosci,
     ]
 );
+
+
+
+// Meta-narracja -- old
+
+// KonspektStep _step_meta_narracja_scenka_wprowadzenie = KonspektStep(
+//     title: 'Meta-narracja - scenka - wprowadzenie',
+//     duration: Duration(minutes: 5),
+//     activeForm: KonspektStepActiveForm.static,
+//     content: '<p style="text-align:justify;">'
+//         'Prowadzący przedstawia uczestnikom krótką historię:'
+//         '<br>'
+//         '<br>'
+//         '<i>Na obozie dwóch wędrowników, Radek i Adam, weszło ze sobą w konflikt. Zaczęło się od żartów i docinków, ale w ciągu kilku tygodni eskalowało w celowe robienie sobie na złość. Pewnego razu Radek podciął Adamowi linki do hamaka - gdy wieczorem Adam kładł się spać, cały hamak runął. Wybuchła afera.'
+//         '<br>'
+//         '<br>Drużynowy wziął chłopaków na rozmowę. Radkowi było głupio — wiedział, że przesadził. Po kilku dniach przeprosił Adama za wszystkie dotychczasowe niesnaski, jednak Adam wzruszył tylko ramionami.'
+//         '<br>'
+//         '<br>Radek zaprzestał docinków, ale Adam wciąż go ignorował i co jakiś czas rzucał kąśliwe uwagi. Po miesiącu drużynowy wziął Adama na rozmowę: zgodnie z Prawem Harcerskim należy traktować innych jak bliźnich i braci, a skoro Radek przeprosił, Adam powinien mu wybaczyć.'
+//         '<br>'
+//         '<br>Adam jednak stwierdził:'
+//         '<br>'
+//         '<br>"Mogę dać mu spokój, ale po tym co zrobił nie zasługuje na traktowanie jak brata. Czemu mam wierzyć w Prawo Harcerskie, które garstka starych dinozaurów z poprzedniej epoki, czyli Rada Naczelna, może w każdym momencie zmienić? Braterstwo jest dla niekumatych dzieci. Ja mam inne zasady — nie ma drugiej szansy. To tylko zachęca do nadużyć z myślą, że potem wystarczy przeprosić. Konsekwencje win powinny trwać całe życie."'
+//         '</i>'
+//         '<br>'
+//         '<br>Prowadzący informuje uczestników, że za chwilę wcielą się oni w najlepszej jakości, światowej klasy kadrę wędrowniczą. Ich zadaniem będzie odbyć rozmowę z Adamem i spróbować <b>przekonać go w ciągu 15 minut, że harcerską postawą jest wybaczyć Radkowi, kierując sie 4. punktem PH.</b>'
+//         '<br>'
+//         '<br>Uwagi:'
+//         '</p>'
+//         '<ul>'
+//         '<li><p style="text-align:justify;">Jeśli prowadzący nie jest sam, najlepiej, jeśli aktorem grającym Adama będzie ktoś inny niż osoba czytająca opis.</p></li>'
+//         '<li><p style="text-align:justify;">Jeśli uczestników jest wielu (ponad 10), a prowadzący nie jest sam, można podzielić uczestników na grupy i odegrać scenkę niezależnie w grupach przez różnych prowadzących.</p></li>'
+//         '<li><p style="text-align:justify;">Jeśli prowadzący bardzo nie chce wcielać się w rolę, formę można przeprowadzić w postaci aktywnej dyskusji, gdzie prowadzący wciela się w "adwokata diabła" i stara się argumentować tak, jak robiłby Adam.</p></li>'
+//         '</ul>'
+// );
+//
+// KonspektStep _step_meta_narracja_scenka_przygotowanie = KonspektStep(
+//     title: 'Meta-narracja - scenka - przygotowanie',
+//     duration: Duration(minutes: 5),
+//     activeForm: KonspektStepActiveForm.active,
+//     content: '<p style="text-align:justify;">'
+//         'Uczestnicy mają pięć minut, aby ustalić między sobą strategię rozmowy.'
+//         '</p>'
+// );
+//
+// KonspektStep _step_meta_narracja_scenka = KonspektStep(
+//     title: 'Meta-narracja - scenka',
+//     duration: Duration(minutes: 15),
+//     activeForm: KonspektStepActiveForm.active,
+//     materials: [
+//       material_budzik
+//     ],
+//     content: '<p style="text-align:justify;">'
+//         'Prowadzący ustawia budzik na 15 minut i wciela się w Adama. Zadaniem uczestników jest wcielić się w najlepszej klasy instruktorów harcerskich i przekonać prowadzącego, że powinien (jako Adam) być posłusznym PH i przebaczyć Radkowi ich sprzeczkę.'
+//         '<br>'
+//         '<br>Prowadzący informuje uczestników, że jeżeli uda im się przekonać Adma przed upływem 15 minut, to wyłączy on stoper wcześniej. Jeśli zaś uczestnicy dojdą do wniosku, że nie jest to w ich wykonaniu możliwe, to oni moga zatrzymać stoper.'
+//         '<br>'
+//         '<br>Prowadzący w roli Adama aż do końca ma <b>nie dać się przekonać</b>. Kluczowe jest to, by stał ciągle na stanowisku, że <b>uczestnicy mogą sobie wierzyć w PH, ale według Adama ono jest bez sensu i jest wyrazem słabości</b>.'
+//         '<br>'
+//         '<br>Filozofia (aksjomatyczne przekonanie) Adama jest następująca:'
+//         '<br>'
+//         '<br>Kultura wybaczania jest kulturą słabości. Zachęca do wyrządzania innym krzywd wiedząc, że można potem przeprosić, trochę zadośćuczynić, a po jakimś czasie znowu wrocić do nadużyć. Prowadzi to patologi, niszczenia zaufania i niszczenia tkanki społecznej. Jedynym wyjściem z tego dylematu jest nie dawać drugiej szansy nikomu, kto świadomie i z premedytacją przekracza granice. Wina raz popełniona nie może być nigdy zmazana - tylko to będzie motywowało ludzi to przestrzegania zasad.'
+//         '</p>'
+// );
+//
+// KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
+//     title: 'Meta-narracja - omówienie scenki',
+//     duration: Duration(minutes: 10),
+//     activeForm: KonspektStepActiveForm.static,
+//     content: '<p style="text-align:justify;">'
+//         'Prowadzący pyta uczestników <i>"jak Wam poszło?"</i>.'
+//         '<br>'
+//         '<br>Oczywiście poszło im <b>fatalnie</b> - nie przekonali Adama. Prowadzący pyta uczestników, co poszło nie tak.'
+//         '<br>'
+//         '<br>Wniosek z dyskusji powinien prowadzić do jedynej możliwej odpowiedzi: <b>“To się nie mogło udać, bo nie ma powodu, by Adam <u>arbitalnie</u> przyjął wartości PH. Jeśli dorosły czlowiek ma traktować Prawo Harcerskie poważnie, musi przyjąć wiarę w coś, z czego owe wartości będą wypływały - np. w to, że jest winien przebaczenie każdemu bliźniemu, bo karma wraca i to on kiedyś będzie owym bliźnim, lub że Chrystus zbawił go przez przebaczenie mu win wyrażonej w śmierci na krzyżu.”</b>.'
+//         '<br>'
+//         '<br>Bez wiary w odpowiedni spójny zbiór aksjomatów, w którym Adam może odnaleźć swoją tożsamość, swój cel, swoje źródło dobra, <b>nie ma żadnej drogi by udało się Adama wychować na dojrzałego, spójnego człowieka w harcerskich (lub jakichkolwiek innych) wartościach!</b>'
+//         '</p>'
+// );
+//
+// KonspektStep _step_meta_narracja = KonspektStep(
+//     title: 'Poziomy (warstwy) rozwoju duchowego - meta-narracja',
+//     duration: Duration(minutes: 5),
+//     activeForm: KonspektStepActiveForm.static,
+//     materials: [
+//       material_zal_meta_narracja_opis,
+//       material_zal_meta_narracja_przyklady,
+//     ],
+//     content: '<p style="text-align:justify;">'
+//         'Prowadzący przedstawia definicję meta-narracji na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci i kładzie przed uczestnikami (obok kartki "Aksjomat") opis meta-narracji z załącznika $attach_html_meta_narracja_opis.'
+//         '<br>'
+//         '<br><i>Meta-narracja to opowieść o świecie, obok której nie można przejść obojętnie. To opowieść tak "głęboka", tak "wielka", tak dojmująca i fundamentalna, że niejako "chwyta człowieka za samo serce" i staje się dla niego głównym punktem odniesienia jego obecności w świecie.'
+//         '<br>'
+//         '<br>Meta-narracja określa jak działa świat, opowiada o jego aktorach, o osobistej roli przyjmującej ją człowieka i jego tożsamości, definiuje dobro, cel, sens.'
+//         '<br>'
+//         '<br>Aby jakaś opowieść stała się dla człowieka meta-narracją, musi ona zostać przez niego przyjęcia jako <b>zbiór aksjomatów</b>, które uporządkują wszystkie inne aspekty jego rzeczywistości.</i>'
+//         '<br>'
+//         '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady i kładzie je obok karty "Meta-narracja".'
+//         '<br>'
+//         '<br>Prowadzący kończy wyjaśnieniem powodu, dla którego porusza ten temat:'
+//         '<br>'
+//         '<br><i>Ograniczając się do pracy jedynie nad postawami i wartościami wychowanków można jedynie do etapu <b>wstępnej integracji duchowości</b>. Później, na etapie <b>świadomej integracji duchowości</b>, dojrzały duchowo człowiek nie przyjmie zbioru wartości "bo tak". Będzie potrzebował <b>powodu</b> by je przyjąć - <b>źródła wartości</b>, na którym będzie mógł oprzeć swoją duchowość.'
+//         '<br>'
+//         '<br>Człowiek ewolował setki tysięcy lat postrzegając świat jako pewną opowieść (np. mitologię) i nie uległo to zmianie. Jeśli chcemy, jako wychowawcy, skutecznie i długotrwale ukształtować młodego czlowieka <b>nie możemy abstrahować od kwestii najbardziej osobistych</b>. Musimy wejść w interakcję z jego przestrzenią aksjomatyczną: opowieścią, która stanie się dla niego najbardziej fundamentalnym rdzeniem jego osoby.</i>'
+//         '</p>'
+// );
+//
+// KonspektStep _step_meta_narracja_pytania = KonspektStep(
+//     title: 'Meta-narracja - pytania',
+//     duration: Duration(minutes: 10),
+//     activeForm: KonspektStepActiveForm.static,
+//     content: '<p style="text-align:justify;">'
+//         'Uczestnicy mogą dopytać o niejasne kwestie związane z meta-narracją.'
+//         '</p>'
+// );
+//
+// KonspektStep _step_meta_narracja_ocena_metanarracji_i_duchowosci = KonspektStep(
+//     title: 'Meta-narracja - pytanie końcowe',
+//     duration: Duration(minutes: 0),
+//     activeForm: KonspektStepActiveForm.static,
+//     content: '<p style="text-align:justify;">'
+//         'Na koniec prowadzący stawia celowo kontrowersyjne pytanie:'
+//         '<br>'
+//         '<br><i>Za chwilę spróbujemy rozstrzygnąć pytanie za 100 punktów: czy istnieją meta-narracje, tudzież całe duchowości <b>lepsze</b> oraz <b>gorsze</b>?</i>'
+//         '</p>'
+// );
+//
+// KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
+//     title: 'Meta-narracja',
+//     steps: [
+//       _step_meta_narracja_scenka_wprowadzenie,
+//       _step_meta_narracja_scenka_przygotowanie,
+//       _step_meta_narracja_scenka,
+//       _step_meta_narracja_omowienie_scenki,
+//       _step_meta_narracja,
+//       _step_meta_narracja_pytania,
+//       _step_meta_narracja_ocena_metanarracji_i_duchowosci,
+//     ]
+// );
 
 // Duchowość powszechna etc.
 
