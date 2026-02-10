@@ -466,8 +466,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       step_group_metanarracja,
 
-      step_group_duchowosc_powszechna_madrosc_kultura_tradycja,
-
       step_group_zdolnosc_integracji_duchowosci,
 
       KonspektStepGroup(
@@ -505,6 +503,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       ),
 
       step_group_neutralnosc_duchowa,
+
+      step_group_duchowosc_powszechna,
 
       step_group_duchowosc_w_zhp,
 

@@ -968,8 +968,8 @@ KonspektStep _step_ocena_metanarracji_i_duchowosci_odpowiedz = KonspektStep(
         '</p>'
 );
 
-KonspektStepGroup step_group_duchowosc_powszechna_madrosc_kultura_tradycja = KonspektStepGroup(
-    title: 'Duchowość powszechna, mądrość, kultura i tradycja',
+KonspektStepGroup step_group_duchowosc_powszechna = KonspektStepGroup(
+    title: 'Duchowość powszechna',
     steps: [
       _step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
 

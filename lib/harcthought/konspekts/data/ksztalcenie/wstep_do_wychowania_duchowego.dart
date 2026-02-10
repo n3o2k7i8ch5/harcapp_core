@@ -201,7 +201,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
 
       ...step_group_neutralnosc_duchowa.steps,
 
-      ...step_group_duchowosc_powszechna_madrosc_kultura_tradycja.steps,
+      ...step_group_duchowosc_powszechna.steps,
 
       ...step_group_duchowosc_w_zhp.steps,
 
