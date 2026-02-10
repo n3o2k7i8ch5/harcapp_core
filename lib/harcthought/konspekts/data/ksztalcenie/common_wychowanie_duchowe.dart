@@ -910,7 +910,7 @@ KonspektStepGroup step_group_neutralnosc_duchowa = KonspektStepGroup(
 // Duchowość powszechna etc.
 
 KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektStep(
-    title: 'Duchowość powszechna, mądrość, kultura i tradycja',
+    title: 'Duchowość powszechna',
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
