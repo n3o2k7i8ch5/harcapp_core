@@ -578,7 +578,7 @@ KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
 
 KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
     title: 'Meta-narracja - opowieści niosą prawdę',
-    duration: Duration(minutes: 5),
+    duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący kontynuuje:'
@@ -589,11 +589,11 @@ KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
         '<li><p style="text-align:justify;"><i>Czy tygrysy były śmiertelnym zagrożeniem?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy węże były śmiertelnym zagrożeniem?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy ogień wymykający się spod kontroli był śmiertelnym zagrożeniem?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy chcąc opisać największe możliwe zło, miałoby sens użyć obrazu potwora będącego na raz tygrysem, wężem, w dodatku mającym skrzydła i plującym ogiem?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy w obliczu zagrożenia i zła, lepiej jest uciekać, czy walczyć?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy chcąc opisać największe możliwe zło, miałoby sens użyć obrazu potwora będącego na raz tygrysem, wężem, w dodatku ze skrzydłami i plującego ogiem?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy w obliczu zła, lepiej jest uciekać, czy walczyć?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy chcąc wygrać ze złem, wystarczy czekać aż przyjdzie, czy może trzeba wyjść mu naprzeciw w nieznane?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy największe zagrożenia i zło da się przezwyciężyć starymi metodami, czy trzeba wymyślić coś zupełnie nowego? A może trzeba sięgnąć do starego i nowego jednoczesnie?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy człowiek, który zmierzył się i pokonał zło, jest dalej tym, kim był, czy staje się kimś nowym?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy człowiek, który przezwycięży zło, jest dalej tym, kim był, czy staje się kimś nowym?</i></p></li>'
         '</ol>'
 
         '<p style="text-align:justify;">'
@@ -601,13 +601,11 @@ KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
         '<br>'
         '<br><i>Najlepszą strategię radzenia sobie z chaosem, złem i zagrożeniami można próbować opisać tomami precyzyjnych, wyrafinowanych prac analitycznych, tyle że prawie nikt ich nie zrozumie.'
         '<br>'
-        '<br>Moźna z drugiej strony odwołać się do ludzkich mechanizmów postrzegania świata i opisać to w formie opowieści:'
-        '<br>'
-        '<br>Była kiedyś spokojna kraina, którą zaczął nękać smok. Pożarł on najlepszych, najbardziej doświadczonych wojowników, którzy wyszli go zgładzić. W końcu, mimo strachu, decyduje się z nim zmierzyć zwykły młodzieniec imieniem Jerzy, który odrzuca odrzuca zbroję, ale bierze miecz tych, którzy walczyli przed nim, wchodzi do jamy potwora i podstępem wbija mu miecz między łuski prosto w serce. W konsekwencji zdobywa ogromny skarb, najpiękniejsza dziewczyna w królestwie zgadza się go poślubić, a on zostaje królem.</i>'
+        '<br>Prowadzący proponuje inną metodę: odłowanie się do ludzkich mechanizmów postrzegania świata i opisać to w formie opowieści w stylu: <i>była kiedyś spokojna kraina, którą zaczął nękać smok. Pożarł najlepszych, najbardziej doświadczonych wojowników, którzy chcieli go zgładzić. W końcu, mimo strachu, decyduje się z nim zmierzyć zwykły młodzieniec imieniem Jerzy, który odrzuca odrzuca zbroję, ale bierze miecz starszych wojowników, wchodzi do jamy potwora i podstępem wbija mu miecz między łuski prosto w serce. W konsekwencji Jerzy zdobywa ogromny skarb, najpiękniejsza dziewczyna w królestwie zgadza się go poślubić, a on zostaje królem.</i>'
         '<br>'
         '<br>Prowadzący zwraca uwagę, że to oczywiste, że Jerzy z opowieści nigdy nie żył, oraz że żaden smok nigdy nie zaatakował żadnej wioski. W opowieści nie chodzi o bohaterów, tylko o pokazanie sposobu działania rzeczywistości, do której opowiedzenia ci bohaterowie są potrzebni: człowiek, który dobrowolnie mierzy się z tym, czego się boi może zwycięzyć, a jesli to zrobi, będzie kimś innym niż był wcześniej.'
         '<br>'
-        '<br>To nie jest byle jaki tani morał z bajki, tylko głęboka prawda o naturze człowieka.'
+        '<br>Archetypiczna opowieść to nie bajka z morałem, ale wyraz głębokiej prawdy o naturze człowieka.'
         '</p>'
 );
 
@@ -624,7 +622,7 @@ KonspektStep _step_meta_narracja_opowiesci_sa_wszedzie = KonspektStep(
 
 KonspektStep _step_meta_narracja_opowiesci_o_opowiesciach = KonspektStep(
     title: 'Meta-narracja - opowieści o opowieściach',
-    duration: Duration(minutes: 2),
+    duration: Duration(minutes: 1),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący zwraca uwagę na to, że istnieją opowieści, które nie kończą się na sobie samych, lecz funkcjonują w spójnym kontekście innych opowieści: np. mitologia grecka, mitologia egipska, starotestamentalna historia ludu wybranego. Poza prawdami płynącymi z pojedynczych historii opisują one sposób funkcjonowania złożonych rzeczywistości, gdy skomplikowane koncepty wchodzą ze sobą w interakcję.'
