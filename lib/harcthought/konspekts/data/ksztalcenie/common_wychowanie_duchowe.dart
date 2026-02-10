@@ -562,17 +562,17 @@ KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący pyta uczestników <i>"jak Wam poszło?"</i>.'
+        'Prowadzący pyta uczestników: <i>"jak Wam poszło?"</i>.'
         '<br>'
         '<br>Oczywiście poszło im <b>fatalnie</b> — nie przekonali Adama. Prowadzący zadaje kolejne pytania:'
         '</p>'
-        '<ul>'
+        '<ol>'
         '<li><p style="text-align:justify;"><i>"Jakich argumentów używaliście?"</i></p></li>'
         '<li><p style="text-align:justify;"><i>"Dlaczego nie działały?"</i></p></li>'
         '<li><p style="text-align:justify;"><i>"Czego Wam brakowało, żeby go przekonać?"</i></p></li>'
-        '</ul>'
+        '</ol>'
         '<p style="text-align:justify;">'
-        'Prowadzący podsumowuje: Adamowi brakowało <b>powodu</b>, żeby wyznawać harcerskie wartości — brakowało mu aksjomatu, z którego te wartości by wypływały. Ale samo podanie mu aksjomatu na kartce nie wystarczy. Jak więc sprawić, żeby człowiek naprawdę przyjął aksjomat za swój?'
+        'Prowadzący podsumowuje: Adamowi brakowało <b>powodu</b>, żeby wyznawać harcerskie wartości — brakowało mu aksjomatu, z którego te wartości by wypływały. Tylko skąd miałby ten aksjomat wziąć?'
         '</p>'
 );
 
@@ -583,13 +583,9 @@ KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Prowadzący kontynuuje:'
         '<br>'
-        '<br><i>Łatwo zarzucić opowieściom, że to bajki dla naiwnych. Owszem, istnieje wiele opowieści, które nie mają w sobie nic — ale są one czymś zupełnie innym od opowieści funkcjonujących w kulturze od pokoleń. Te drugie zawsze obrazują prawdę o świecie — prawdę, do opowiedzenia której postacie niekoniecznie muszą być historyczne, bo to nie aktorzy są istotni, lecz to, co ich historia odsłania.</i>'
-        '<br>'
-        '<br>Prowadzący podaje przykład:'
-        '<br>'
-        '<br><i>Wyobraźcie sobie świat w którym ludzie żyli przez ostatnie sto tysięcy lat:<i>'
+        '<br><i>Wyobraźcie sobie świat w którym ludzie żyli przez ostatnie sto tysięcy lat:</i>'
         '</p>'
-        '<ul>'
+        '<ol>'
         '<li><p style="text-align:justify;"><i>Czy tygrysy były śmiertelnym zagrożeniem?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy węże były śmiertelnym zagrożeniem?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy ogień wymykający się spod kontroli był śmiertelnym zagrożeniem?</i></p></li>'
@@ -598,7 +594,7 @@ KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
         '<li><p style="text-align:justify;"><i>A czy chcąc wygrać ze złem, wystarczy czekać aż przyjdzie, czy może trzeba wyjść mu naprzeciw w nieznane?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy największe zagrożenia i zło da się przezwyciężyć starymi metodami, czy trzeba wymyślić coś zupełnie nowego? A może trzeba sięgnąć do starego i nowego jednoczesnie?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy człowiek, który zmierzył się i pokonał zło, jest dalej tym, kim był, czy staje się kimś nowym?</i></p></li>'
-        '</ul>'
+        '</ol>'
 
         '<p style="text-align:justify;">'
         'Prowadzący mówi uczestnikom:'
@@ -610,8 +606,9 @@ KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
         '<br>Była kiedyś spokojna kraina, którą zaczął nękać smok. Pożarł on najlepszych, najbardziej doświadczonych wojowników, którzy wyszli go zgładzić. W końcu, mimo strachu, decyduje się z nim zmierzyć zwykły młodzieniec imieniem Jerzy, który odrzuca odrzuca zbroję, ale bierze miecz tych, którzy walczyli przed nim, wchodzi do jamy potwora i podstępem wbija mu miecz między łuski prosto w serce. W konsekwencji zdobywa ogromny skarb, najpiękniejsza dziewczyna w królestwie zgadza się go poślubić, a on zostaje królem.</i>'
         '<br>'
         '<br>Prowadzący zwraca uwagę, że to oczywiste, że Jerzy z opowieści nigdy nie żył, oraz że żaden smok nigdy nie zaatakował żadnej wioski. W opowieści nie chodzi o bohaterów, tylko o pokazanie sposobu działania rzeczywistości, do której opowiedzenia ci bohaterowie są potrzebni: człowiek, który dobrowolnie mierzy się z tym, czego się boi może zwycięzyć, a jesli to zrobi, będzie kimś innym niż był wcześniej.'
+        '<br>'
+        '<br>To nie jest byle jaki tani morał z bajki, tylko głęboka prawda o naturze człowieka.'
         '</p>'
-
 );
 
 KonspektStep _step_meta_narracja_opowiesci_sa_wszedzie = KonspektStep(
@@ -619,7 +616,9 @@ KonspektStep _step_meta_narracja_opowiesci_sa_wszedzie = KonspektStep(
     duration: Duration(minutes: 1),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę, że ludzie zawsze postrzegali i dalej postrzegają świat w formie opowieści — było tak sto tysięcy lat temu, dwa tysiące lat temu i jest tak samo do dziś. Te same historie są dziś opowiadane innym językiem, przy użyciu innych postaci. Dziś historia o pokonaniu smoka funkcjonuje jako Władka Pierścieni, czy Gwiezdne Wojny. Zamiast opowieści o królestwach i wioskach widzimy istnienie instytucji i państw, mimo, że przecież patrząc na świat z kosmosu nie widać żadnych granic. Wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności człowieka, w opowieści o bohaterach poległych za ojczyznę, w kapłańską rolę naukowców obcujących z najczystszą formą prawdy. To nie jest atawizm — to sposób, w jaki homo sapiens postrzega rzeczywistość.'
+        'Prowadzący zwraca uwagę, że ludzie zawsze postrzegali i dalej postrzegają świat w formie opowieści.'
+        '<br>'
+        '<br>Te same historie są dziś opowiadane innym językiem, innymi postaciami. Dziś historia o pokonaniu smoka funkcjonuje jako Władka Pierścieni, czy Gwiezdne Wojny. Zamiast opowieści o królestwach i wioskach widzimy instytucje i państwa, wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności człowieka, w opowieści o bohaterach poległych za ojczyznę, w kapłańską rolę naukowców obcujących z najczystszą formą prawdy. To nie jest atawizm — to sposób, w jaki homo sapiens postrzega rzeczywistość.'
         '</p>'
 );
 
@@ -628,13 +627,7 @@ KonspektStep _step_meta_narracja_opowiesci_o_opowiesciach = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący kontynuuje:'
-        '<br>'
-        '<br><i>Istnieją opowieści, które nie kończą się na sobie samych, lecz funkcjonują w spójnym kontekście innych opowieści: np. mitologia grecka, mitologia egipska, a dziś są to np. starotestamentalna historia ludu wybranego. Poza prawdami płynącymi z pojedynczych historii opisują one sposób funkcjonowania złożonych rzeczywistości, gdy skomplikowane koncepty wchodzą ze sobą w interakcję.</i>'
-        '<br>'
-        '<br>Prowadzący podaje przykład:'
-        '<br>'
-        '<br><i>We Władcy Pierścieni istnieje skomplikowana postać Froda, złożona historia Goluma, i ich zderzenie pokazuje zupełnie nieoczywiste dobro wynikające z tego, że Frodo nigdy nie decyduje się zabić Golluma mimo jego podłości. To nie jest prosta rada w stylu „bądź miły" — to opowieść o tym, jak miłosierdzie może ocalić świat.</i>'
+        'Prowadzący zwraca uwagę na to, że istnieją opowieści, które nie kończą się na sobie samych, lecz funkcjonują w spójnym kontekście innych opowieści: np. mitologia grecka, mitologia egipska, starotestamentalna historia ludu wybranego. Poza prawdami płynącymi z pojedynczych historii opisują one sposób funkcjonowania złożonych rzeczywistości, gdy skomplikowane koncepty wchodzą ze sobą w interakcję.'
         '</p>'
 );
 
