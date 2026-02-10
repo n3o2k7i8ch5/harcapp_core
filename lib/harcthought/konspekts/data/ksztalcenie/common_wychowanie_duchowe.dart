@@ -695,78 +695,6 @@ KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
 );
 
 
-// Duchowość powszechna etc.
-
-KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektStep(
-    title: 'Duchowość powszechna, mądrość, kultura i tradycja',
-    duration: Duration(minutes: 10),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej formą przekazu - <b>kulturę</b> i <b>tradycje</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
-        '<br>'
-        '<br>Prowadzący może zobrazować dylemat tego <i>"jak ściśle trzymać się tradycji"</i> w sposób następujący:'
-        '<br>'
-        '<br><i>Kultura i tradycja są mądrością miliona lat żyć, pamięcią miliona umysłów, wiedzą o skutkach miliona głupich prób – wszystkie dostępne dla człowieka żyjącego raptem kilkadziesiąt lat.</i>'
-        '<br>'
-        '<br><i>Gdybyśmy zanegowali na raz wszystkie tradycje, w ciągu jednego pokolenia wrócilibyśmy do jaskiń. Ale gdybyśmy nigdy nie podważyli żadnej tradycji, nigdy z tych jaskiń byśmy nie wyszli.</i>'
-        '</p>'
-);
-
-KonspektStep _step_duchowosc_religia_religijnosc = KonspektStep(
-    title: 'Duchowość, religia, religijność',
-    duration: Duration(minutes: 10),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci definiuje religię:'
-        '<br>'
-        '<br>Religia jest duchowością powszechną. <b>Religia nie jest “dodatkiem” do duchowości, ale jest określoną duchowością</b> - ma określone aksjomaty i wartości, określone sposoby jej (religii jako duchowość) integracji.'
-        '<br>'
-        '<br>Prowadzący powinien zwrócić uwagę, że nie ma tu mowy o relacji “zawierania”: Nie jest tak, że wszyscy ludzie mają bazową duchowość, ale część osób ma dodatek “z religią”. Religia jest rodzajem, sposobem duchowości. Nie można z czyjejś duchowości “wyjąć” elementu religijnego i dalej mieć do czynienia z duchowością, tak samo jak nie można z psa wyjąć elementu “jamnik” i dalej uważać, że pozostałość to pies. Jamnik nie jest dodatkiem do psa, tylko jest rodzajem całego, spójnego psa.'
-        '<br>'
-        '<br>Wnioski wychowawcze:'
-        '</p>'
-
-        '<ol>'
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Nie można prowadzić wychowania w drużynie w oparciu o ogólną, wspólną duchowość, i ewentualnie “wzbogacać” ją dla niektórych religią. Duchowość religijna i duchowość niereligijna są dwiema zupełnie różnymi duchowościami opartymi o inne aksjomaty.'
-        '</p>'
-        '</li>'
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Nie ma symetrii między wychowaniem osób religijnych i niereligijnych. Osoby religijne mają z góry określone aksjomaty, jednak aksjomaty osób niereligijnych dopiero wymagają określenia.'
-        '</p>'
-        '</li>'
-
-        '<p style="text-align:justify;">'
-        'Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości.'
-        '<br>'
-        '<br>Religia to nie to samo co religijność. Religia to np. "chrześcijaństwo", ale religijność to np. "uczestnictwo w nabożeństwach". <b>Religijność</b> jest zestawem zachowań i postaw wynikających z religii: religijność to jedynie wierzchnia warstwa duchowości religijnej, która pozwala (lecz sama w sobie niekoniecznie wystarcza) by duchowość religijną skutecznie integrować.'
-        '</p>'
-);
-
-KonspektStep _step_ocena_metanarracji_i_duchowosci_odpowiedz = KonspektStep(
-    title: 'Meta-narracja - pytanie końcowe - odpowiedź',
-    duration: Duration(minutes: 0),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Na koniec prowadzący odpowiada na postawione pod koniec omawiania "meta-narracji" pytanie: <i>Czy istnieją meta-narracje, tudzież duchowości <b>lepsze</b> oraz <b>gorsze</b>?</i>'
-        '<br>'
-        '<br><i>Niektóre duchowości wyraźnie skuteczniej prowadzą do szczęścia i rozwoju człowieka oraz jego otoczenia od pozostałych. Niektóre duchowości czynią to w sposób stabilny od tysięcy lat, inne działają dobrze przez pół pokolenia, po czym prowadzą do katastrofy.</i>'
-        '</p>'
-);
-
-KonspektStepGroup step_group_duchowosc_powszechna_madrosc_kultura_tradycja = KonspektStepGroup(
-    title: 'Duchowość powszechna, mądrość, kultura i tradycja',
-    steps: [
-      _step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
-
-      _step_duchowosc_religia_religijnosc,
-
-      _step_ocena_metanarracji_i_duchowosci_odpowiedz,
-    ]
-);
-
 // Zdolności integracji duchowości
 
 KonspektStep _step_zdolnosci_integracji_duchowosci = KonspektStep(
@@ -977,6 +905,80 @@ KonspektStepGroup step_group_neutralnosc_duchowa = KonspektStepGroup(
       _step_neutralnosc_analogia_do_ogrodnikow
     ]
 );
+
+
+// Duchowość powszechna etc.
+
+KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektStep(
+    title: 'Duchowość powszechna, mądrość, kultura i tradycja',
+    duration: Duration(minutes: 10),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Następnie definiuje w oparciu o duchowość powszechną pojęcie <b>mądrości</b> oraz jej formą przekazu - <b>kulturę</b> i <b>tradycje</b>. Prowadzący opisuje także zjawisko dualizmu tradycji - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
+        '<br>'
+        '<br>Prowadzący może zobrazować dylemat tego <i>"jak ściśle trzymać się tradycji"</i> w sposób następujący:'
+        '<br>'
+        '<br><i>Kultura i tradycja są mądrością miliona lat żyć, pamięcią miliona umysłów, wiedzą o skutkach miliona głupich prób – wszystkie dostępne dla człowieka żyjącego raptem kilkadziesiąt lat.</i>'
+        '<br>'
+        '<br><i>Gdybyśmy zanegowali na raz wszystkie tradycje, w ciągu jednego pokolenia wrócilibyśmy do jaskiń. Ale gdybyśmy nigdy nie podważyli żadnej tradycji, nigdy z tych jaskiń byśmy nie wyszli.</i>'
+        '</p>'
+);
+
+KonspektStep _step_duchowosc_religia_religijnosc = KonspektStep(
+    title: 'Duchowość, religia, religijność',
+    duration: Duration(minutes: 10),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci definiuje religię:'
+        '<br>'
+        '<br>Religia jest duchowością powszechną. <b>Religia nie jest “dodatkiem” do duchowości, ale jest określoną duchowością</b> - ma określone aksjomaty i wartości, określone sposoby jej (religii jako duchowość) integracji.'
+        '<br>'
+        '<br>Prowadzący powinien zwrócić uwagę, że nie ma tu mowy o relacji “zawierania”: Nie jest tak, że wszyscy ludzie mają bazową duchowość, ale część osób ma dodatek “z religią”. Religia jest rodzajem, sposobem duchowości. Nie można z czyjejś duchowości “wyjąć” elementu religijnego i dalej mieć do czynienia z duchowością, tak samo jak nie można z psa wyjąć elementu “jamnik” i dalej uważać, że pozostałość to pies. Jamnik nie jest dodatkiem do psa, tylko jest rodzajem całego, spójnego psa.'
+        '<br>'
+        '<br>Wnioski wychowawcze:'
+        '</p>'
+
+        '<ol>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Nie można prowadzić wychowania w drużynie w oparciu o ogólną, wspólną duchowość, i ewentualnie “wzbogacać” ją dla niektórych religią. Duchowość religijna i duchowość niereligijna są dwiema zupełnie różnymi duchowościami opartymi o inne aksjomaty.'
+        '</p>'
+        '</li>'
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Nie ma symetrii między wychowaniem osób religijnych i niereligijnych. Osoby religijne mają z góry określone aksjomaty, jednak aksjomaty osób niereligijnych dopiero wymagają określenia.'
+        '</p>'
+        '</li>'
+
+        '<p style="text-align:justify;">'
+        'Osobnym pytaniem jest to, czy da się skutecznie wychowywać grupę do dwóch lub więcej zupełnie różnych duchowości.'
+        '<br>'
+        '<br>Religia to nie to samo co religijność. Religia to np. "chrześcijaństwo", ale religijność to np. "uczestnictwo w nabożeństwach". <b>Religijność</b> jest zestawem zachowań i postaw wynikających z religii: religijność to jedynie wierzchnia warstwa duchowości religijnej, która pozwala (lecz sama w sobie niekoniecznie wystarcza) by duchowość religijną skutecznie integrować.'
+        '</p>'
+);
+
+KonspektStep _step_ocena_metanarracji_i_duchowosci_odpowiedz = KonspektStep(
+    title: 'Meta-narracja - pytanie końcowe - odpowiedź',
+    duration: Duration(minutes: 0),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Na koniec prowadzący odpowiada na postawione pod koniec omawiania "meta-narracji" pytanie: <i>Czy istnieją meta-narracje, tudzież duchowości <b>lepsze</b> oraz <b>gorsze</b>?</i>'
+        '<br>'
+        '<br><i>Niektóre duchowości wyraźnie skuteczniej prowadzą do szczęścia i rozwoju człowieka oraz jego otoczenia od pozostałych. Niektóre duchowości czynią to w sposób stabilny od tysięcy lat, inne działają dobrze przez pół pokolenia, po czym prowadzą do katastrofy.</i>'
+        '</p>'
+);
+
+KonspektStepGroup step_group_duchowosc_powszechna_madrosc_kultura_tradycja = KonspektStepGroup(
+    title: 'Duchowość powszechna, mądrość, kultura i tradycja',
+    steps: [
+      _step_duchowosc_powszechna_madrosc_kultura_i_tradycja,
+
+      _step_duchowosc_religia_religijnosc,
+
+      _step_ocena_metanarracji_i_duchowosci_odpowiedz,
+    ]
+);
+
 
 // Duchowość w ZHP
 
