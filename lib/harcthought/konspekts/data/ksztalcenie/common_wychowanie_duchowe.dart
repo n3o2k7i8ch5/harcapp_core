@@ -572,33 +572,13 @@ KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
         '<li><p style="text-align:justify;"><i>"Czego Wam brakowało, żeby go przekonać?"</i></p></li>'
         '</ul>'
         '<p style="text-align:justify;">'
-        'Prowadzący nie podaje jeszcze odpowiedzi. Mówi tylko: <i>"Zaraz do tego wrócimy. Najpierw chcę opowiedzieć o czymś, co wyjaśni, dlaczego to się nie mogło udać."</i>'
-        '</p>'
-);
-
-KonspektStep _step_meta_narracja_opowiesci_sa_wszedzie = KonspektStep(
-    title: 'Meta-narracja - opowieści są wszędzie',
-    duration: Duration(minutes: 2),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący mówi:'
-        '<br>'
-        '<br><i>Ludzie postrzegają świat w formie opowieści — i to nie jest żaden atawizm. Robimy to dziś tak samo jak nasi przodkowie. Uznajemy istnienie państw, wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności człowieka, w opowieści o bohaterach poległych za ojczyznę, w kapłańską rolę naukowców obcujących z najczystszą formą prawdy. To nie słabość — tak działa ludzki umysł.</i>'
-        '</p>'
-);
-
-KonspektStep _step_meta_narracja_opowiesc_vs_instrukcja = KonspektStep(
-    title: 'Meta-narracja - opowieść vs instrukcja',
-    duration: Duration(minutes: 1),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-    // TODO
+        'Prowadzący podsumowuje: Adamowi brakowało <b>powodu</b>, żeby wyznawać harcerskie wartości — brakowało mu aksjomatu, z którego te wartości by wypływały. Ale samo podanie mu aksjomatu na kartce nie wystarczy. Jak więc sprawić, żeby człowiek naprawdę przyjął aksjomat za swój?'
         '</p>'
 );
 
 KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
     title: 'Meta-narracja - opowieści niosą prawdę',
-    duration: Duration(minutes: 2),
+    duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący kontynuuje:'
@@ -607,7 +587,39 @@ KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
         '<br>'
         '<br>Prowadzący podaje przykład:'
         '<br>'
-        '<br><i>Weźmy Pinokia: drewniana, naiwna kukła ucieka z domu, zostaje przygnieciona życiem, lecz w końcu bierze odpowiedzialność za siebie, ratuje ojca z wnętrza wieloryba i dzięki temu staje się w pełni człowiekiem. Żadna kilkutomowa publikacja w stylu „Psychologiczne aspekty relacji między dziećmi a rodzicami" nie opisze tego lepiej. A ludzie to „czują" — intuicyjnie, natychmiast.</i>'
+        '<br><i>Wyobraźcie sobie świat w którym ludzie żyli przez ostatnie sto tysięcy lat:<i>'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;"><i>Czy tygrysy były śmiertelnym zagrożeniem?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy węże były śmiertelnym zagrożeniem?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy ogień wymykający się spod kontroli był śmiertelnym zagrożeniem?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy chcąc opisać największe możliwe zło, miałoby sens użyć obrazu potwora będącego na raz tygrysem, wężem, w dodatku mającym skrzydła i plującym ogiem?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy w obliczu zagrożenia i zła, lepiej jest uciekać, czy walczyć?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy chcąc wygrać ze złem, wystarczy czekać aż przyjdzie, czy może trzeba wyjść mu naprzeciw w nieznane?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy największe zagrożenia i zło da się przezwyciężyć starymi metodami, czy trzeba wymyślić coś zupełnie nowego? A może trzeba sięgnąć do starego i nowego jednoczesnie?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy człowiek, który zmierzył się i pokonał zło, jest dalej tym, kim był, czy staje się kimś nowym?</i></p></li>'
+        '</ul>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący mówi uczestnikom:'
+        '<br>'
+        '<br><i>Najlepszą strategię radzenia sobie z chaosem, złem i zagrożeniami można próbować opisać tomami precyzyjnych, wyrafinowanych prac analitycznych, tyle że prawie nikt ich nie zrozumie.'
+        '<br>'
+        '<br>Moźna z drugiej strony odwołać się do ludzkich mechanizmów postrzegania świata i opisać to w formie opowieści:'
+        '<br>'
+        '<br>Była kiedyś spokojna kraina, którą zaczął nękać smok. Pożarł on najlepszych, najbardziej doświadczonych wojowników, którzy wyszli go zgładzić. W końcu, mimo strachu, decyduje się z nim zmierzyć zwykły młodzieniec imieniem Jerzy, który odrzuca odrzuca zbroję, ale bierze miecz tych, którzy walczyli przed nim, wchodzi do jamy potwora i podstępem wbija mu miecz między łuski prosto w serce. W konsekwencji zdobywa ogromny skarb, najpiękniejsza dziewczyna w królestwie zgadza się go poślubić, a on zostaje królem.</i>'
+        '<br>'
+        '<br>Prowadzący zwraca uwagę, że to oczywiste, że Jerzy z opowieści nigdy nie żył, oraz że żaden smok nigdy nie zaatakował żadnej wioski. W opowieści nie chodzi o bohaterów, tylko o pokazanie sposobu działania rzeczywistości, do której opowiedzenia ci bohaterowie są potrzebni: człowiek, który dobrowolnie mierzy się z tym, czego się boi może zwycięzyć, a jesli to zrobi, będzie kimś innym niż był wcześniej.'
+        '</p>'
+
+);
+
+KonspektStep _step_meta_narracja_opowiesci_sa_wszedzie = KonspektStep(
+    title: 'Meta-narracja - opowieści są wszędzie',
+    duration: Duration(minutes: 1),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący zwraca uwagę, że ludzie zawsze postrzegali i dalej postrzegają świat w formie opowieści — było tak sto tysięcy lat temu, dwa tysiące lat temu i jest tak samo do dziś. Te same historie są dziś opowiadane innym językiem, przy użyciu innych postaci. Dziś historia o pokonaniu smoka funkcjonuje jako Władka Pierścieni, czy Gwiezdne Wojny. Zamiast opowieści o królestwach i wioskach widzimy istnienie instytucji i państw, mimo, że przecież patrząc na świat z kosmosu nie widać żadnych granic. Wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności człowieka, w opowieści o bohaterach poległych za ojczyznę, w kapłańską rolę naukowców obcujących z najczystszą formą prawdy. To nie jest atawizm — to sposób, w jaki homo sapiens postrzega rzeczywistość.'
         '</p>'
 );
 
@@ -618,11 +630,11 @@ KonspektStep _step_meta_narracja_opowiesci_o_opowiesciach = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Prowadzący kontynuuje:'
         '<br>'
-        '<br><i>Istnieją opowieści, które nie kończą się na sobie samych, lecz funkcjonują w spójnym kontekście innych opowieści: np. mitologia grecka, mitologia egipska, Koran, starotestamentalna historia ludu wybranego czy Władca Pierścieni. Poza prawdami płynącymi z pojedynczych historii opisują one sposób funkcjonowania złożonych rzeczywistości, gdy skomplikowane koncepty wchodzą ze sobą w interakcję.</i>'
+        '<br><i>Istnieją opowieści, które nie kończą się na sobie samych, lecz funkcjonują w spójnym kontekście innych opowieści: np. mitologia grecka, mitologia egipska, a dziś są to np. starotestamentalna historia ludu wybranego. Poza prawdami płynącymi z pojedynczych historii opisują one sposób funkcjonowania złożonych rzeczywistości, gdy skomplikowane koncepty wchodzą ze sobą w interakcję.</i>'
         '<br>'
         '<br>Prowadzący podaje przykład:'
         '<br>'
-        '<br><i>Na przykład: dobro wynikające z tego, że Frodo nigdy nie decyduje się zabić Golluma mimo jego podłości. To nie jest prosta prawda w stylu „bądź miły" — to opowieść o tym, jak miłosierdzie wobec kogoś niegodnego może okazać się kluczowe dla ocalenia całego świata. Ale żeby to zrozumieć, trzeba znać cały kontekst — sam ten epizod, wyrwany z całości, nie ma takiej siły.</i>'
+        '<br><i>We Władcy Pierścieni istnieje skomplikowana postać Froda, złożona historia Goluma, i ich zderzenie pokazuje zupełnie nieoczywiste dobro wynikające z tego, że Frodo nigdy nie decyduje się zabić Golluma mimo jego podłości. To nie jest prosta rada w stylu „bądź miły" — to opowieść o tym, jak miłosierdzie może ocalić świat.</i>'
         '</p>'
 );
 
@@ -643,9 +655,7 @@ KonspektStep _step_meta_narracja_definicja = KonspektStep(
         '<br>'
         '<br><i>Meta-narracja to opowieść o świecie, obok której nie można przejść obojętnie. To opowieść tak głęboka, tak wielka, tak dojmująca i fundamentalna, że niejako chwyta człowieka za samo serce i staje się dla niego głównym punktem odniesienia jego obecności w świecie.'
         '<br>'
-        '<br>Meta-narracja określa jak działa świat, opowiada o jego aktorach, o osobistej roli przyjmującego ją człowieka i jego tożsamości, definiuje dobro, cel, sens.'
-        '<br>'
-        '<br>Aby jakaś opowieść stała się dla człowieka meta-narracją, musi ona zostać przez niego przyjęta jako <b>zbiór aksjomatów</b>, które uporządkują wszystkie inne aspekty jego rzeczywistości.</i>'
+        '<br>Meta-narracja jest opowieścią o świecie, jego aktorach, o osobistej roli przyjmującego ją człowieka.'
         '<br>'
         '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady i kładzie je obok karty "Meta-narracja".'
         '</p>'
@@ -658,13 +668,13 @@ KonspektStep _step_meta_narracja_powrot_do_scenki = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Prowadzący wraca do scenki:'
         '<br>'
-        '<br><i>Adam nie potrzebował lepszych argumentów za Prawem Harcerskim. Potrzebował opowieści, z której PH wypływa. Bez niej wasze wartości były dla niego arbitralne — i miał rację.</i>'
+        '<br><i>Jeśli Adam miałby kiedyś wybaczyć Radkowi, to nie dlatego, że tak mówi Prawo Harcerskie, ale dlatego, że zobaczy i przyjmie świat w perspektywie meta-narracji, którą przyjmie jego własne aksjomaty i z których naturalnie wyniknie wartość przebaczenia.</i>'
         '<br>'
         '<br>Prowadzący kończy wyjaśnieniem implikacji dla wychowawców:'
         '<br>'
         '<br><i>Ograniczając się do pracy jedynie nad postawami i wartościami wychowanków, można dojść jedynie do etapu <b>wstępnej integracji duchowości</b>. Później, na etapie <b>świadomej integracji duchowości</b>, dojrzały duchowo człowiek nie przyjmie zbioru wartości „bo tak". Będzie potrzebował <b>powodu</b>, by je przyjąć — <b>źródła wartości</b>, na którym będzie mógł oprzeć swoją duchowość.'
         '<br>'
-        '<br>Człowiek prędzej uwierzy w największą głupotę, niż nie będzie wierzył w nic. Jeśli chcemy jako wychowawcy skutecznie i długotrwale ukształtować młodego człowieka, nie możemy abstrahować od kwestii najbardziej osobistych. Musimy wejść w interakcję z jego przestrzenią aksjomatyczną: opowieścią, która stanie się dla niego najbardziej fundamentalnym rdzeniem jego osoby.</i>'
+        '<br>Człowiek prędzej uwierzy w największą głupotę, niż nie będzie wierzył w nic. Jeśli chcemy jako wychowawcy skutecznie i długotrwale ukształtować młodego człowieka, nie możemy abstrahować od kwestii najbardziej osobistych. Musimy wejść w interakcję z jego przestrzenią aksjomatyczną: opowieścią, która stanie się dla niego fundamentalnym rdzeniem jego ducha.</i>'
         '</p>'
 );
 
@@ -685,7 +695,6 @@ KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
       _step_meta_narracja_scenka,
       _step_meta_narracja_omowienie_scenki,
       _step_meta_narracja_opowiesci_sa_wszedzie,
-      _step_meta_narracja_opowiesc_vs_instrukcja,
       _step_meta_narracja_opowiesci_niosa_prawde,
       _step_meta_narracja_opowiesci_o_opowiesciach,
       _step_meta_narracja_definicja,
