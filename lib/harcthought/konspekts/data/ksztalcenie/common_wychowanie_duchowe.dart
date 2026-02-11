@@ -458,7 +458,7 @@ KonspektStep _step_integracja_duchowosci_wstepna_aksjomatow = KonspektStep(
 
 KonspektStep _step_integracja_duchowosci_swiadoma = KonspektStep(
     title: 'Integracja duchowości - integracja świadoma',
-    duration: Duration(minutes: 6),
+    duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     materials: [
       material_flipchart,
@@ -483,7 +483,15 @@ KonspektStep _step_integracja_duchowosci_swiadoma = KonspektStep(
         '<p style="text-align:justify;">'
         'Prowadzący opisując to, rysuje liczne "oscylujące" strzałki i podpisuje je jako "integracja świadoma", tak jak poniżej:'
         '<br>${piramidaDuchowosci3Html(isDark: isDark)}'
-        '<br>Na koniec ważne jest, aby prowadzący zaznaczył, że o ile można skutecznie wpływać na wartości, zachowania i postawy młodego człowieka, o tyle wpływ na aksjomat jest już bardziej subtelny. Do aksjomatów można młodego człowieka najwyżej "podprowadzić": owszem, są one kształtowane na podstawie własnych doświadczeń, znanych poglądów i przyjętych uprzednio wartości, jednak przyjąć aksjomat za własny można jedynie samemu, wedle własnego, osobistego przekonania. W tym procesie nie da się komuś towarzyszyć do końca.'
+        '</p>',
+);
+
+KonspektStep _step_integracja_duchowosci_swiadoma_implikacja = KonspektStep(
+    title: 'Integracja duchowości - implikacja dla wychowawców',
+    duration: Duration(minutes: 1),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'O ile można skutecznie wpływać na wartości, zachowania i postawy młodego człowieka, o tyle wpływ na aksjomat jest już bardziej subtelny. Do aksjomatów można młodego człowieka najwyżej "podprowadzić": owszem, są one kształtowane na podstawie własnych doświadczeń, znanych poglądów i przyjętych uprzednio wartości, jednak przyjąć aksjomat za własny można jedynie samemu, wedle własnego, osobistego przekonania. W tym procesie nie da się komuś towarzyszyć do końca.'
         '</p>',
 );
 
@@ -496,6 +504,7 @@ KonspektStepGroup step_group_integracja_duchowosci = KonspektStepGroup(
       _step_integracja_duchowosci_wstepna_wartosci,
       _step_integracja_duchowosci_wstepna_aksjomatow,
       _step_integracja_duchowosci_swiadoma,
+      _step_integracja_duchowosci_swiadoma_implikacja,
     ]
 );
 
