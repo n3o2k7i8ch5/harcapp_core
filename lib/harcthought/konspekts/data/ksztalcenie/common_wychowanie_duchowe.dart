@@ -110,7 +110,7 @@ KonspektMaterial material_zal_szybkie_strzaly_dyskusyjne = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_szybkie_strzaly_dyskusyjne”',
     attachmentName: attach_name_szybkie_strzaly_dyskusyjne,
     amount: 1,
-    additionalPreparation: 'Załącznik należy pociąć na 10 kartek wzdłuż przerywach linii.'
+    additionalPreparation: 'Załącznik należy pociąć na 10 kartek wzdłuż przerywanych linii.'
 );
 
 // ---
@@ -291,7 +291,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomat = KonspektStep(
       '$aksjomaty_przyklady'
 
       '<p style="text-align:justify;">'
-      '<b>Aksjomat jest zawsze <b>fundamentalną, niesprawdzalną wiarą w określony porządek rzeczy — i całkowicie porządkuje postrzeganie rzeczywistości</b>. Aby to zobrazować, prowadzący może posłużyć się przykładem::'
+      '<b>Aksjomat jest zawsze <b>fundamentalną, niesprawdzalną wiarą w określony porządek rzeczy — i całkowicie porządkuje postrzeganie rzeczywistości</b>. Aby to zobrazować, prowadzący może posłużyć się przykładem:'
       '<br>'
       '<br><i>"Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Również, jeśli zobaczy dowód na kulistość Ziemi, to wniosek będzie miał tylko jeden: narzędzia użyte przy tych dowodach były wadliwe.'
       '<br>'
@@ -378,7 +378,7 @@ KonspektStep _step_etapy_ksztaltowania_integracja_duchowosci = KonspektStep(
         '<li>'
         '<p style="text-align:justify;">'
         '<i>Etap starszoharcersko-wędrowniczy + dorosły:</i>'
-        '<br>W wieku ok. 13-15 lat wartości przestają być luźnymi bytami i są porządkowane w spójne światopoglądy, które mają swoje przyczyny. Przyczynami tymi są <b>aksjomaty</b>, czyli przyjęte, fundamentalne, nieweryfikowalne założenia o świecie. Towarzyszy temu zdolność do zrozumienia, że różni ludzie mogą mieć różny światopogląd i czerpać swoje wartości z różnych źródeł. Pojawia się też <u>zdolność</u> do zrozumienia, że nie ma możliwości jednoznacznego określenia który światopogląd, czy aksjomaty, jest słuszny, a który błędny.'
+        '<br>W wieku ok. 13-15 lat wartości przestają być luźnymi bytami i są porządkowane w spójne światopoglądy, które mają swoje przyczyny. Przyczynami tymi są <b>aksjomaty</b>, czyli przyjęte, fundamentalne, nieweryfikowalne założenia o świecie. Towarzyszy temu zdolność do zrozumienia, że różni ludzie mogą mieć różny światopogląd i czerpać swoje wartości z różnych źródeł. Pojawia się też <u>zdolność</u> do zrozumienia, że nie ma możliwości jednoznacznego określenia który światopogląd czy które aksjomaty są słuszne, a które błędne.'
         '<br>'
         '<br>Podobnie jak wcześniej, pierwsze świadomie przyjęte aksjomaty nie są losowe. Człowiek ma tendencję do przyjęcia aksjomatów, <b>o których wcześniej słyszał</b> i <b>z których wynikają wartości, którymi na tym etapie żyje</b>. Np., jeśli dla młodego człowieka wartością była współpraca i koleżeństwo, naturalnym aksjomatem może być dla niego zbawcza i powszechna rola odkupienia każdego człowieka przez Chrystusa, z której wynika niezbywalna godność każdego człowieka.'
         '</p>'
@@ -454,7 +454,7 @@ KonspektStep _step_integracja_duchowosci_wstepna_aksjomatow = KonspektStep(
       '<br>Prowadzący wraca do rysunku z etapami kształtowania duchowości i rysuje tam strzałkę "integracji wstępnej":'
       '<br>${piramidaDuchowosci2Html(isDark: isDark)}'
       '<br>'
-      '<br><i>Podczas integracji wstępnej duchowość człowieka jest integrowana "po raz pierwszy". Mało tu jest głębokich, życiowych rozważań, a więcej chłonięcia otoczenia. <b>Wartości wyłaniają się z nauczonych zachowań</b>. <b>Aksjomaty wyłaniają się z wcześniej przyjętnych wartości</b>. Kształt duchowości zależy tu przede wszystkim od <b>środowiska</b> i <b>temperamentu</b> człowieka.',
+      '<br><i>Podczas integracji wstępnej duchowość człowieka jest integrowana "po raz pierwszy". Mało tu jest głębokich, życiowych rozważań, a więcej chłonięcia otoczenia. <b>Wartości wyłaniają się z nauczonych zachowań</b>. <b>Aksjomaty wyłaniają się z wcześniej przyjętych wartości</b>. Kształt duchowości zależy tu przede wszystkim od <b>środowiska</b> i <b>temperamentu</b> człowieka.',
 );
 
 KonspektStep _step_integracja_duchowosci_swiadoma = KonspektStep(
@@ -595,10 +595,10 @@ KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
         '<li><p style="text-align:justify;"><i>Czy tygrysy były śmiertelnym zagrożeniem?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy węże były śmiertelnym zagrożeniem?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy ogień wymykający się spod kontroli był śmiertelnym zagrożeniem?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy chcąc opisać największe możliwe zło, miałoby sens użyć obrazu potwora będącego na raz tygrysem, wężem, w dodatku ze skrzydłami i plującego ogiem?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy chcąc opisać największe możliwe zło, miałoby sens użyć obrazu potwora będącego na raz tygrysem, wężem, w dodatku ze skrzydłami i plującego ogniem?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy w obliczu zła, lepiej jest uciekać, czy walczyć?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy chcąc wygrać ze złem, wystarczy czekać aż przyjdzie, czy może trzeba wyjść mu naprzeciw w nieznane?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy największe zagrożenia i zło da się przezwyciężyć starymi metodami, czy trzeba wymyślić coś zupełnie nowego? A może trzeba sięgnąć do starego i nowego jednoczesnie?</i></p></li>'
+        '<li><p style="text-align:justify;"><i>A czy największe zagrożenia i zło da się przezwyciężyć starymi metodami, czy trzeba wymyślić coś zupełnie nowego? A może trzeba sięgnąć do starego i nowego jednocześnie?</i></p></li>'
         '<li><p style="text-align:justify;"><i>A czy człowiek, który przezwycięży zło, jest dalej tym, kim był, czy staje się kimś nowym?</i></p></li>'
         '</ol>'
 
@@ -607,9 +607,9 @@ KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
         '<br>'
         '<br><i>Najlepszą strategię radzenia sobie z chaosem, złem i zagrożeniami można próbować opisać tomami precyzyjnych, wyrafinowanych prac analitycznych, tyle że prawie nikt ich nie zrozumie.'
         '<br>'
-        '<br>Prowadzący proponuje inną metodę: odłowanie się do ludzkich mechanizmów postrzegania świata i opisać to w formie opowieści w stylu: <i>była kiedyś spokojna kraina, którą zaczął nękać smok. Pożarł najlepszych, najbardziej doświadczonych wojowników, którzy chcieli go zgładzić. W końcu, mimo strachu, decyduje się z nim zmierzyć zwykły młodzieniec imieniem Jerzy, który odrzuca odrzuca zbroję, ale bierze miecz starszych wojowników, wchodzi do jamy potwora i podstępem wbija mu miecz między łuski prosto w serce. W konsekwencji Jerzy zdobywa ogromny skarb, najpiękniejsza dziewczyna w królestwie zgadza się go poślubić, a on zostaje królem.</i>'
+        '<br>Prowadzący proponuje inną metodę: odwołanie się do ludzkich mechanizmów postrzegania świata i opisać to w formie opowieści w stylu: <i>była kiedyś spokojna kraina, którą zaczął nękać smok. Pożarł najlepszych, najbardziej doświadczonych wojowników, którzy chcieli go zgładzić. W końcu, mimo strachu, decyduje się z nim zmierzyć zwykły młodzieniec imieniem Jerzy, który odrzuca zbroję, ale bierze miecz starszych wojowników, wchodzi do jamy potwora i podstępem wbija mu miecz między łuski prosto w serce. W konsekwencji Jerzy zdobywa ogromny skarb, najpiękniejsza dziewczyna w królestwie zgadza się go poślubić, a on zostaje królem.</i>'
         '<br>'
-        '<br>Prowadzący zwraca uwagę, że to oczywiste, że Jerzy z opowieści nigdy nie żył, oraz że żaden smok nigdy nie zaatakował żadnej wioski. W opowieści nie chodzi o bohaterów, tylko o pokazanie sposobu działania rzeczywistości, do której opowiedzenia ci bohaterowie są potrzebni: człowiek, który dobrowolnie mierzy się z tym, czego się boi może zwycięzyć, a jesli to zrobi, będzie kimś innym niż był wcześniej.'
+        '<br>Prowadzący zwraca uwagę, że to oczywiste, że Jerzy z opowieści nigdy nie żył, oraz że żaden smok nigdy nie zaatakował żadnej wioski. W opowieści nie chodzi o bohaterów, tylko o pokazanie sposobu działania rzeczywistości, do której opowiedzenia ci bohaterowie są potrzebni: człowiek, który dobrowolnie mierzy się z tym, czego się boi może zwyciężyć, a jeśli to zrobi, będzie kimś innym niż był wcześniej.'
         '<br>'
         '<br>Archetypiczna opowieść to nie bajka z morałem, ale wyraz głębokiej prawdy o naturze człowieka.'
         '</p>'
@@ -622,7 +622,7 @@ KonspektStep _step_meta_narracja_opowiesci_sa_wszedzie = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Prowadzący zwraca uwagę, że ludzie zawsze postrzegali i dalej postrzegają świat w formie opowieści.'
         '<br>'
-        '<br>Te same historie są dziś opowiadane innym językiem, innymi postaciami. Dziś historia o pokonaniu smoka funkcjonuje jako Władka Pierścieni, czy Gwiezdne Wojny. Zamiast opowieści o królestwach i wioskach widzimy instytucje i państwa, wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności człowieka, w opowieści o bohaterach poległych za ojczyznę, w kapłańską rolę naukowców obcujących z najczystszą formą prawdy. To nie jest atawizm — to sposób, w jaki homo sapiens postrzega rzeczywistość.'
+        '<br>Te same historie są dziś opowiadane innym językiem, innymi postaciami. Dziś historia o pokonaniu smoka funkcjonuje jako Władca Pierścieni, czy Gwiezdne Wojny. Zamiast opowieści o królestwach i wioskach widzimy instytucje i państwa, wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności człowieka, w opowieści o bohaterach poległych za ojczyznę, w kapłańską rolę naukowców obcujących z najczystszą formą prawdy. To nie jest atawizm — to sposób, w jaki homo sapiens postrzega rzeczywistość.'
         '</p>'
 );
 
@@ -855,11 +855,11 @@ KonspektStep _step_neutralnosc_duchowa_omowienie_wnioskow = KonspektStep(
         '</ul>'
 
         '<p style="text-align:justify;">'
-        'Gdy dyskusje dobiegną końca, prowadzący może dorzucić kilka swoich niezobowiązujacych uwag na temat wniosków uczestników. Ważniejsze jest jednak, aby szybko przejść do drugiego pytania:'
+        'Gdy dyskusje dobiegną końca, prowadzący może dorzucić kilka swoich niezobowiązujących uwag na temat wniosków uczestników. Ważniejsze jest jednak, aby szybko przejść do drugiego pytania:'
         '<br>'
         '<br><b><i>“Czy w którymkolwiek scenariuszu instruktor mógł postąpić neutralnie z perspektywy kształtowania duchowości?”</i></b>.'
         '<br>'
-        '<br>Uczestnicy ponownie wracają do dyskusji dyskusja. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.',
+        '<br>Uczestnicy ponownie wracają do dyskusji. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.',
     materials: [
       material_zal_neutralnosc_duchowa_przyklady,
     ]
@@ -965,7 +965,7 @@ KonspektStep _step_duchowosc_w_zhp_dokumenty = KonspektStep(
         '<br>'
         '<br>Prowadzący kończy stwierdzeniem:'
         '<br>'
-        '<br><i>To oczywiste, że nie da się wychować młodego człowieka bez pracy z aksjomatami. Skoro zaś ZHP nie określa skąd harcerskie wartości maja być wywodzone, to spróbujmy rozszyfrować dlaczego te wartości są tak oczywiste w naszej cywilizacji.</i>'
+        '<br><i>To oczywiste, że nie da się wychować młodego człowieka bez pracy z aksjomatami. Skoro zaś ZHP nie określa skąd harcerskie wartości mają być wywodzone, to spróbujmy rozszyfrować dlaczego te wartości są tak oczywiste w naszej cywilizacji.</i>'
         '</p>',
   materials: [
     material_zal_cel_wychowania_duchowego_zhp_statut,
@@ -983,7 +983,7 @@ KonspektStep _step_duchowosc_w_zhp_dobrowolnosc = KonspektStep(
         '<br>'
         '<br><i>Mamy w statucie ZHP zapisaną określoną duchowość. Ale jak się to ma do faktu, że cechą metody harcerskiej jest dobrowolność?</i>'
         '<br>'
-        '<br>Uczestnicy powinni znać rozwiązanie tego dylamatu, jeśli byli na kursie przewodnikowskim. Jeśli jest inaczej, po krótkiej dyskusji prowadzący rozwiązuje zagadkę:'
+        '<br>Uczestnicy powinni znać rozwiązanie tego dylematu, jeśli byli na kursie przewodnikowskim. Jeśli jest inaczej, po krótkiej dyskusji prowadzący rozwiązuje zagadkę:'
         '<br>'
         '<br><i>Dobrowolność nie jest <b>celem wychowania</b> w ZHP, tylko <b>cechą metody</b>, czyli cechą narzędzi, które mają doprowadzić do celu.'
         '<br>'
@@ -1007,7 +1007,7 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty_poszukiwanie_zrodla = KonspektStep(
       material_zal_neutralnosc_duchowa_przyklady
     ],
     aims: [
-      'Uświadomienie uczestnikom, że harcerskie wartości, oparte wartościach cywilizacji łacińskiej nie są oczywiste, uniwersalne, ani naturalne.'
+      'Uświadomienie uczestnikom, że harcerskie wartości, oparte na wartościach cywilizacji łacińskiej nie są oczywiste, uniwersalne, ani naturalne.'
     ],
     content: '<p style="text-align:justify;">'
         'Prowadzący zwraca uwagę, że wartości cywilizacji łacińskiej nie są ani uniwersalne, ani naturalne. Posiłkując się przykładami z użytego wcześniej załącznika ${attach_html_neutralnosc_duchowa_przyklady}, poddaje pod dyskusję pytanie: <b>dlaczego w naszej kulturze akurat te, a nie inne wartości są tak powszechne</b>?'
@@ -1118,7 +1118,7 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
         '<li>'
         '<p style="text-align:justify;">'
         '<i>'
-        '<u>Co, jeśli ktoś nie jest zainteresowany egzystencjalnymi pytaniami? Co jeśli ktoś uważa, ze należy być dobrym "bo tak"?</u>'
+        '<u>Co, jeśli ktoś nie jest zainteresowany egzystencjalnymi pytaniami? Co jeśli ktoś uważa, że należy być dobrym "bo tak"?</u>'
         '<br>'
         '<br>Harcerstwo stawia za cel wychowanie osób świadomych swoich wartości, potrafiących je uzasadnić i ich bronić. Faktycznie jednak należy liczyć się z tym, że niektórzy zwyczajnie nie będą sobie zadawali trudu refleksji nad swoim życiem i duchem. Część osób może konformistycznie, na bieżąco dopasowywać się do poglądów otoczenia, mieć przez to kolegów i czuć się z tym dobrze, jednak <b>jest to wyraz niedojrzałości</b>.'
         '<br>'
@@ -1132,11 +1132,11 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
         '<i>'
         '<u>Jakie aksjomaty powinny być podstawą duchowości ateistów w ZHP?</u>'
         '<br>'
-        '<br>Nie wiem. I prawdopodobnie nikt nie wie. Cała nasza zachodnia cywilizacja została zbudowana na aksjomatach chrześcijańskich. Została uksztaltowana przez życia miliardów ludzi, na przestrzeni tysięcy lat, przez myślicieli i filozofów większych od wszystkich tu obecnych. Czy można to wszystko porzucić i liczyć na to, że "wymyśli się" coś równie dobrego w kilka lat?'
+        '<br>Nie wiem. I prawdopodobnie nikt nie wie. Cała nasza zachodnia cywilizacja została zbudowana na aksjomatach chrześcijańskich. Została ukształtowana przez życia miliardów ludzi, na przestrzeni tysięcy lat, przez myślicieli i filozofów większych od wszystkich tu obecnych. Czy można to wszystko porzucić i liczyć na to, że "wymyśli się" coś równie dobrego w kilka lat?'
         '<br>'
         '<br>Myśl, że można utrzymać świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, ale pozbyć się fundamentów, na których powstały wydaje się być <b>co najmniej wielką nieodpowiedzialnością</b>.'
         '<br>'
-        '<br>Można próbować wybiegów w stylu: "wystarczy być dobrym człowiekiem", "idź za głosem serca" albo zostawić sferę aksjomatów niewierzących harcerzy samym sobie i tak oto pozbyć się problemu. Na razie taki model w ZHP funkcjonuje, ale jest to wyraz bezradności, a nie poważną odpowiedzią na to pytanie. Chyba nikt nie ma odpowiedzi na to pytanie.'
+        '<br>Można próbować wybiegów w stylu: "wystarczy być dobrym człowiekiem", "idź za głosem serca" albo zostawić sferę aksjomatów niewierzących harcerzy samym sobie i tak oto pozbyć się problemu. Na razie taki model w ZHP funkcjonuje, ale jest to wyraz bezradności, a nie poważna odpowiedź na to pytanie. Chyba nikt nie ma odpowiedzi na to pytanie.'
         '</i>'
         '</p>'
         '</li>'
@@ -1144,7 +1144,7 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
         '</ol>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący powinien pozwolić, by fundamentalny <b>brak odpowiedzi</b> na pytanie "co dla ateistów" wybrzmiał wsród uczestników. <b>Odpowiedź na nie padnie na warsztatach</b>, nie dlatego, że ktoś chce ją ukryć. Nie padnie, bo próba potraktowania tego pytania poważnie ma karkołomne, a być może niemożliwe do utrzymania konsekwencje, niezależnie od poglądów obecnych tu osób.'
+        'Prowadzący powinien pozwolić, by fundamentalny <b>brak odpowiedzi</b> na pytanie "co dla ateistów" wybrzmiał wśród uczestników. <b>Odpowiedź na nie padnie na warsztatach</b>, nie dlatego, że ktoś chce ją ukryć. Nie padnie, bo próba potraktowania tego pytania poważnie ma karkołomne, a być może niemożliwe do utrzymania konsekwencje, niezależnie od poglądów obecnych tu osób.'
         '</p>'
 );
 
@@ -1223,7 +1223,7 @@ KonspektStep _step_zalozenia_wyjsciowe_wychowania_duchowego = KonspektStep(
         'Teza: <b>Duchowość harcerzy to ich prywatna sprawa</b>'
         '<br>'
         '<br><u>Sugestia prowadzącego:</u>'
-        '<br><i>Duchowość to sprawa indywidualna i fundamentalnie osobista, <b>ale</b> jest jednocześnie sprawą publiczna - z duchowości wynika długa lista spraw (zachowania, postawy i wartości), które dotyczą i wpływają na całe otoczenie, w którym człowiek żyje. O wierze można i trzeba o niej rozmawiać, robić dla niej miejsce, można ją publicznie praktykować, także w formie tradycji, czy w warstwie symbolicznej.</i>'
+        '<br><i>Duchowość to sprawa indywidualna i fundamentalnie osobista, <b>ale</b> jest jednocześnie sprawą publiczna - z duchowości wynika długa lista spraw (zachowania, postawy i wartości), które dotyczą i wpływają na całe otoczenie, w którym człowiek żyje. O wierze można i trzeba rozmawiać, robić dla niej miejsce, można ją publicznie praktykować, także w formie tradycji, czy w warstwie symbolicznej.</i>'
         '</p>'
         '</li>'
 
@@ -1242,7 +1242,7 @@ KonspektStep _step_zalozenia_wyjsciowe_wychowania_duchowego = KonspektStep(
         'Teza: <b>Formy pracy harcerskiej powinny być inkluzywne</b>'
         '<br>'
         '<br><u>Sugestia prowadzącego:</u>'
-        '<br><i>Absolutnie nie - prowadzi to do zjawiska <b>weganizacji wychowania duchowego</b>, czyli do zjawiska ograniczenia wychowania do najmniejszego wspólnego mianownika duchowości osób o różnych aksjomatach. Ludzie wychowywani w różnych wiarach wymagają różnych form pracy nad swoją duchowością. To, że formy te będa wykluczające dla części osób jest normalne, konieczne i nie należy się tego bać.</i>'
+        '<br><i>Absolutnie nie - prowadzi to do zjawiska <b>weganizacji wychowania duchowego</b>, czyli do zjawiska ograniczenia wychowania do najmniejszego wspólnego mianownika duchowości osób o różnych aksjomatach. Ludzie wychowywani w różnych wiarach wymagają różnych form pracy nad swoją duchowością. To, że formy te będą wykluczające dla części osób jest normalne, konieczne i nie należy się tego bać.</i>'
         '</p>'
         '</li>'
 
@@ -1251,7 +1251,7 @@ KonspektStep _step_zalozenia_wyjsciowe_wychowania_duchowego = KonspektStep(
         'Teza: <b>Nie wolno narażać harcerzy na niebezpieczeństwo ani dyskomfort</b>'
         '<br>'
         '<br><u>Sugestia prowadzącego:</u>'
-        '<br><i>Po pierwsze, niektóre niezwykle skuteczne formy wychowawcze mają w sobie element ryzyka: chodzenie w góry, jeżdżenie autostopem, podróże po innych krajach, etc.. Po drugie, świat jest w sposób immanentny niebezpieczny. Niemal na pewno nasi wychowankowie zetkną się w życiu z agresją, bezradnością, frustracją. Lepiej jest ich do tego skutecznie przygotować w kontrolowanych warunkach. To właśnie jest chartem ducha.</i>'
+        '<br><i>Po pierwsze, niektóre niezwykle skuteczne formy wychowawcze mają w sobie element ryzyka: chodzenie w góry, jeżdżenie autostopem, podróże po innych krajach, etc.. Po drugie, świat jest w sposób immanentny niebezpieczny. Niemal na pewno nasi wychowankowie zetkną się w życiu z agresją, bezradnością, frustracją. Lepiej jest ich do tego skutecznie przygotować w kontrolowanych warunkach. To właśnie jest hartem ducha.</i>'
         '</p>'
         '</li>'
 
@@ -1313,7 +1313,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
         '<p style="text-align:justify;">'
         '<u>Religia to prywatna sprawa każdego człowieka i nie powinien się z nią afiszować.</u>'
         '<br>'
-        '<br><i>Życie religijne człowieka jest sprawą indywidualną i fundamentalnie osobistą, ale jest jednocześnie sprawą publiczną - z religii wynika długa lista spraw (zachowania, postawy i wartości), które dotyczą i wpływają na całe otoczenie, w którym człowiek żyje. O wierze można i trzeba o niej rozmawiać, robić dla niej miejsce, można ją publicznie praktykować.</i>'
+        '<br><i>Życie religijne człowieka jest sprawą indywidualną i fundamentalnie osobistą, ale jest jednocześnie sprawą publiczną - z religii wynika długa lista spraw (zachowania, postawy i wartości), które dotyczą i wpływają na całe otoczenie, w którym człowiek żyje. O wierze można i trzeba rozmawiać, robić dla niej miejsce, można ją publicznie praktykować.</i>'
         '</p>'
         '</li>'
 
@@ -1352,7 +1352,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
         '<p style="text-align:justify;">'
         '<u>Możliwość zamknięcia próby instruktorskiej powinna zależeć od poglądów kandydata.</u>'
         '<br>'
-        '<br><i>Tak. Instruktorzy wychowuję również poprzez przykład własny i pełnią rolę autorytetów, dlatego ma to znaczenie, jakie poglądy reprezentuje instruktor. Nie każdy człowiek powinien nim być.</i>'
+        '<br><i>Tak. Instruktorzy wychowują również poprzez przykład własny i pełnią rolę autorytetów, dlatego ma to znaczenie, jakie poglądy reprezentuje instruktor. Nie każdy człowiek powinien nim być.</i>'
         '</p>'
         '</li>'
 

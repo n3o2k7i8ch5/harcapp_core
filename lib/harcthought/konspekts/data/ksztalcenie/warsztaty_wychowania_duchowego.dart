@@ -270,7 +270,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 required: false,
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Nim rozpocznie się właściwa część warsztatów, warto pozwolić uczestnikom przyjść, zrobić hebratę i porozmawiwać o głupotach.'
+                    'Nim rozpocznie się właściwa część warsztatów, warto pozwolić uczestnikom przyjść, zrobić herbatę i porozmawiać o głupotach.'
                     '</p>'
             ),
 
@@ -357,7 +357,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 1),
                 activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera ciała:'
+                    'Prowadzący pokrótce wyjaśnia uczestnikom, czym jest sfera ciała:'
                     '<br>'
                     '<br><i>Sfera ciała jest wszystkim tym, co stwarza <b>zdolności</b> fizycznej interakcji z rzeczywistością, np.:</i>'
                     '</p>'
@@ -376,7 +376,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 1),
                 activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera umysłu:'
+                    'Prowadzący pokrótce wyjaśnia uczestnikom, czym jest sfera umysłu:'
                     '<br>'
                     '<br><i>Sfera umysłu jest wszystkim tym, co stwarza <b>zdolności</b> analizy, rozumienia, syntezy, wiedzy np.:</i>'
                     '</p>'
@@ -394,7 +394,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 1),
                 activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera relacji:'
+                    'Prowadzący pokrótce wyjaśnia uczestnikom, czym jest sfera relacji:'
                     '<br>'
                     '<br><i>Sfera relacji jest wszystkim tym, co stwarza <b>zdolności</b> do skutecznego życia w społeczności (we wspólnocie wiedzy, we wspólnocie ekonomicznej, w rodzinie) np.:</i>'
                     '</p>'
@@ -413,7 +413,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 1),
                 activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący po krótce wyjaśnia uczestnikom, czym jest sfera emocji:'
+                    'Prowadzący pokrótce wyjaśnia uczestnikom, czym jest sfera emocji:'
                     '<br>'
                     '<br><i>Sfera emocji jest wszystkim tym, co stwarza <b>zdolności</b> do skutecznego życia w społeczności (we wspólnocie wiedzy, we wspólnocie ekonomicznej, w rodzinie) np.:</i>'
                     '</p>'
@@ -429,7 +429,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 2),
                 activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący zwraca uwagę, że wszystkie wymienione dotąd 4 sfery (ciała, umysłu, relacji i emocji) są źródłami umiejętnościami, czy zdolności. Sprawiają, że człowiek "może więcej", jednak żadna z tych sfer, nawet rozwinięta do perfekcji, <b>nie określa kiedy, czy, ani jak należy jakąś zdolność wykorzystać</b>.'
+                    'Prowadzący zwraca uwagę, że wszystkie wymienione dotąd 4 sfery (ciała, umysłu, relacji i emocji) są źródłami umiejętności, czy zdolności. Sprawiają, że człowiek "może więcej", jednak żadna z tych sfer, nawet rozwinięta do perfekcji, <b>nie określa kiedy, czy, ani jak należy jakąś zdolność wykorzystać</b>.'
                     '<br>'
                     '<br>Z tego powodu sfery <b>ciała</b>, <b>umysłu</b>, <b>relacji</b> i <b>emocji</b> są <b>sferami funkcjonalnymi</b> - są jak zestaw dostępnych narzędzi leżących w garażu.'
                     '</p>'
@@ -533,7 +533,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 content: '<p style="text-align:justify;">'
                     'Uczestnicy otrzymują w grupach po jednym załączniku $attach_html_kratka_minimow_rozwoju_duchowego. Otrzymują również wydrukowane i wycięte formy z załącznika $_attach_html_formy.'
                     '<br>'
-                    '<br>Na podstawie zdobytej dotychczas wiedzy oraz załącznika $attach_html_kratka_minimow_rozwoju_duchowego, zadaniem uczestników jest przyporządkowanie poszczególnych form do <b>grupy</b> lub <b>grup wiekowych</b>, określenie jakie <b>poziomy duchowości</b> rozwijają oraz, jeśli to możliwe, w jaki <b>mechanizm</b> wykorzystują.'
+                    '<br>Na podstawie zdobytej dotychczas wiedzy oraz załącznika $attach_html_kratka_minimow_rozwoju_duchowego, zadaniem uczestników jest przyporządkowanie poszczególnych form do <b>grupy</b> lub <b>grup wiekowych</b>, określenie jakie <b>poziomy duchowości</b> rozwijają oraz, jeśli to możliwe, jaki <b>mechanizm</b> wykorzystują.'
                     '<br>'
                     '<br>Warto uczestników podzielić na grupy po 3-4 osoby, aby jak najbardziej zaangażować ich w dyskusję nad formami.'
                     '</p>',
@@ -548,7 +548,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 10),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący zbiera na powrót wszystkie grupy w jedno miejsce i prosi, by każda z grup przestawiła po kilka wybranych form które:'
+                    'Prowadzący zbiera na powrót wszystkie grupy w jedno miejsce i prosi, by każda z grup przedstawiła po kilka wybranych form które:'
                     '</p>'
 
                     '<ul>'
@@ -558,7 +558,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                     '</ul>'
 
                     '<p style="text-align:justify;">'
-                    'Prowadzący może skorzystać z okazji, po przedstawieniu najbardziej kontrowesyjnych form zauważyć, że harcerstwo opiera się na <b>wychowaniu poprzez stawianie wyzwań</b> i nie należy się łudzić, że można wychować kogoś w ciągłym, bezgranicznym bezpieczeństwie i komforcie. Lepiej, aby rozwój duchowy zakładał budowanie odporności na trudy i nieprzyjemne sytuacje, niż od nich izolował - harcerstwo nie wychowuje <b>pod kloszem</b>.'
+                    'Prowadzący może skorzystać z okazji, po przedstawieniu najbardziej kontrowersyjnych form zauważyć, że harcerstwo opiera się na <b>wychowaniu poprzez stawianie wyzwań</b> i nie należy się łudzić, że można wychować kogoś w ciągłym, bezgranicznym bezpieczeństwie i komforcie. Lepiej, aby rozwój duchowy zakładał budowanie odporności na trudy i nieprzyjemne sytuacje, niż od nich izolował - harcerstwo nie wychowuje <b>pod kloszem</b>.'
                     '</p>'
             ),
 
@@ -594,11 +594,11 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 5),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Uczestnicy w grupach są dzieleni na 4 grupy. Każda grupa otrzymuje krótki opis drużyny z załącznika $_attach_html_planowanie_strategii_i_dzialan. Zadaniem każdej grupy jest stworzyć plan rozwoju duchowego jednostki.'
+                    'Uczestnicy są dzieleni na 4 grupy. Każda grupa otrzymuje krótki opis drużyny z załącznika $_attach_html_planowanie_strategii_i_dzialan. Zadaniem każdej grupy jest stworzyć plan rozwoju duchowego jednostki.'
                     '<br>'
-                    '<br>Każda z opisanych na karce drużyn jest w innej metodyce (Z, H, HS, W). Prowadzący może podzielić uczestników tak, by każdy był w grupie pracującej nad metodyką, która jest uczestnikom najbliższa.'
+                    '<br>Każda z opisanych na kartce drużyn jest w innej metodyce (Z, H, HS, W). Prowadzący może podzielić uczestników tak, by każdy był w grupie pracującej nad metodyką, która jest uczestnikom najbliższa.'
                     '<br>'
-                    '<br>Na początku prowadzący prosi każdą z grup, by zapoznałą się z opisami.'
+                    '<br>Na początku prowadzący prosi każdą z grup, by zapoznała się z opisami.'
                     '</p>',
                 materials: [
                   material_zal_planowanie_strategii_i_dzialan,
@@ -606,7 +606,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             ),
 
             KonspektStep(
-                title: 'Planowanie wychowania duchowego - przykladowa strategia',
+                title: 'Planowanie wychowania duchowego - przykładowa strategia',
                 duration: Duration(minutes: 15),
                 activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
@@ -638,7 +638,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 15),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący prosi każdą z grup i przygotowanie konkretnych rozwiązań w oparciu w oparciu o przynajmniej <b>trzy czynniki duchowości</b>, które zrealizują wybrany uprzednio cel.'
+                    'Prowadzący prosi każdą z grup i przygotowanie konkretnych rozwiązań w oparciu o przynajmniej <b>trzy czynniki duchowości</b>, które zrealizują wybrany uprzednio cel.'
                     '<br>'
                     '<br>Wszystkie czynniki duchowości powinny być wyłożone w widocznym miejscu na kartkach z załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci.'
                     '<br>'
@@ -672,7 +672,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 20),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący prosi każdą z grup, by jako ostatni element planowania strategii rozwoju duchowego wskazała <b>działania śródroczne</b> i <b>działania obozowe</b> z uwzględnieniem <b>niedzieli na obozie</b>. Można się w tym celu posiłkować pomysłami z załącznika $_attach_html_formy, które są dostępne w apliakcji <b>HarcApp</b>.'
+                    'Prowadzący prosi każdą z grup, by jako ostatni element planowania strategii rozwoju duchowego wskazała <b>działania śródroczne</b> i <b>działania obozowe</b> z uwzględnieniem <b>niedzieli na obozie</b>. Można się w tym celu posiłkować pomysłami z załącznika $_attach_html_formy, które są dostępne w aplikacji <b>HarcApp</b>.'
                     '<br>'
                     '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, należy zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
                     '<br>'
@@ -726,7 +726,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                     '<li><p style="text-align:justify;">Poproszenie uczestników o podzielenie się wrażeniami związanymi z warsztatami.</p></li>'
                     '<li><p style="text-align:justify;">Prośba o uzupełnienie szczegółowej ankiety ewaluacyjnej - przesłanie jej uczestnikom na maila.</p></li>'
                     '<li><p style="text-align:justify;">Wspólne zdjęcie.</p></li>'
-                    '<li><p style="text-align:justify;">Oddanie indetyfikatorów przez uczestników.</p></li>'
+                    '<li><p style="text-align:justify;">Oddanie identyfikatorów przez uczestników.</p></li>'
                     '</ul>'
             ),
           ]
