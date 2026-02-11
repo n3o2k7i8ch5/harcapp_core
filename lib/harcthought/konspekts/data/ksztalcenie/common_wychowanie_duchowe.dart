@@ -1294,7 +1294,7 @@ KonspektStep _step_zalozenia_wyjsciowe_wychowania_duchowego = KonspektStep(
 );
 
 KonspektStepGroup step_strategia_wychowania_duchowego = KonspektStepGroup(
-    title: 'Strategia wychowania duchowego',
+    title: 'Założenia wyjściowe wychowania duchowego',
     steps: [
       _step_zalozenia_wyjsciowe_wychowania_duchowego
     ]
