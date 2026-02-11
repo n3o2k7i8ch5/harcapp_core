@@ -212,6 +212,7 @@ KonspektStep _step_poziomy_duchowosci = KonspektStep(
         '</p>'
 
         '<table border="1" style="border-collapse: collapse; width: 100%;">'
+        '<tr>'
         '<td style="padding-left: 8px; padding-right: 8px;"><p>Zachowanie</p></td>'
         '<td style="padding-left: 8px; padding-right: 8px;"><p>Oddanie własnego obiadu bezdomnemu</p></td>'
         '</tr>'
@@ -238,8 +239,6 @@ KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
     required: false,
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-
-        '<p style="text-align:justify;">'
         'Prowadzący prosi uczestników o podanie kilku przykładów do każdego poziomu duchowości i ew. wchodzi w krótką dyskusję, jeśli coś jest nie tak w przykładach uczestników.'
         '<br>'
         '<br><u>Uwagi o wartościach:</u>'
@@ -291,7 +290,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomat = KonspektStep(
       '$aksjomaty_przyklady'
 
       '<p style="text-align:justify;">'
-      '<b>Aksjomat jest zawsze <b>fundamentalną, niesprawdzalną wiarą w określony porządek rzeczy — i całkowicie porządkuje postrzeganie rzeczywistości</b>. Aby to zobrazować, prowadzący może posłużyć się przykładem:'
+      '<b>Aksjomat jest zawsze fundamentalną, niesprawdzalną wiarą w określony porządek rzeczy — i całkowicie porządkuje postrzeganie rzeczywistości</>. Aby to zobrazować, prowadzący może posłużyć się przykładem:'
       '<br>'
       '<br><i>"Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Również, jeśli zobaczy dowód na kulistość Ziemi, to wniosek będzie miał tylko jeden: narzędzia użyte przy tych dowodach były wadliwe.'
       '<br>'
@@ -691,8 +690,8 @@ KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
       _step_meta_narracja_scenka_przygotowanie,
       _step_meta_narracja_scenka,
       _step_meta_narracja_omowienie_scenki,
-      _step_meta_narracja_opowiesci_sa_wszedzie,
       _step_meta_narracja_opowiesci_niosa_prawde,
+      _step_meta_narracja_opowiesci_sa_wszedzie,
       _step_meta_narracja_opowiesci_o_opowiesciach,
       _step_meta_narracja_definicja,
       _step_meta_narracja_powrot_do_scenki,
@@ -812,7 +811,7 @@ KonspektStep _step_neutralnosc_duchowa_galeria_sztuki = KonspektStep(
         '<ol>'
         '<li>'
         '<p style="text-align:justify;">'
-        'Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?'
+        '<b>Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?'
         '</p>'
         '</li>'
 
@@ -872,7 +871,7 @@ KonspektStep _step_neutralnosc_duchowa_w_przypadku_problemow = KonspektStep(
     activeForm: KonspektStepActiveForm.static,
     required: false,
     content: '<p style="text-align:justify;">'
-        '<br>Rolą prowadzącego jest kształtowanie dyskusji uczestników poprzez zadawania pytań. Jeśli uczestnicy sądzą, że neutralność jest możliwa, prowadzący może zapytać:'
+        'Rolą prowadzącego jest kształtowanie dyskusji uczestników poprzez zadawania pytań. Jeśli uczestnicy sądzą, że neutralność jest możliwa, prowadzący może zapytać:'
         '<br>'
         '<br><i>“Czy jeśli harcerz zawsze bije kolegów, którzy się z nim nie zgadzają, a instruktor nie reaguje, to czy postępuje neutralnie?”</i>'
         '<br>'
@@ -999,7 +998,7 @@ KonspektStep _step_duchowosc_w_zhp_dobrowolnosc = KonspektStep(
     ]
 );
 
-KonspektStep _step_duchowosc_w_zhp_aksjoamty_poszukiwanie_zrodla = KonspektStep(
+KonspektStep _step_duchowosc_w_zhp_aksjomaty_poszukiwanie_zrodla = KonspektStep(
     title: 'Duchowość w ZHP - aksjomaty - poszukiwanie źródła',
     duration: Duration(minutes: 15),
     activeForm: KonspektStepActiveForm.static,
@@ -1050,7 +1049,7 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty_poszukiwanie_zrodla = KonspektStep(
         '</ol>'
 );
 
-KonspektStep _step_duchowosc_w_zhp_aksjoamty_odpowiedzi = KonspektStep(
+KonspektStep _step_duchowosc_w_zhp_aksjomaty_odpowiedzi = KonspektStep(
     title: 'Duchowość w ZHP - aksjomaty - odpowiedzi',
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
@@ -1078,7 +1077,7 @@ KonspektStep _step_duchowosc_w_zhp_religia = KonspektStep(
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący stawia pytanie: </i>jak wygląda relacja między wychowaniem duchowym osób wierzących i osób bez wyznania w jednej drużynie? Czy można prowadzić wspólne wychowanie duchowe, a religię traktować jako „dodatek" dla części harcerzy?</i>'
+        'Prowadzący stawia pytanie: <i>jak wygląda relacja między wychowaniem duchowym osób wierzących i osób bez wyznania w jednej drużynie? Czy można prowadzić wspólne wychowanie duchowe, a religię traktować jako „dodatek" dla części harcerzy?</i>'
         '<br>'
         '<br>Na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci prowadzący naprowadza uczestników na kluczową tezę: <b>religia nie jest dodatkiem do duchowości – jest autonomiczną, pełną duchowością</b>, z własnymi aksjomatami, spójną hierarchią wartości i sposobami ich integracji.'
         '<br>'
@@ -1144,7 +1143,7 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
         '</ol>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący powinien pozwolić, by fundamentalny <b>brak odpowiedzi</b> na pytanie "co dla ateistów" wybrzmiał wśród uczestników. <b>Odpowiedź na nie padnie na warsztatach</b>, nie dlatego, że ktoś chce ją ukryć. Nie padnie, bo próba potraktowania tego pytania poważnie ma karkołomne, a być może niemożliwe do utrzymania konsekwencje, niezależnie od poglądów obecnych tu osób.'
+        'Prowadzący powinien pozwolić, by fundamentalny <b>brak odpowiedzi</b> na pytanie "co dla ateistów" wybrzmiał wśród uczestników. <b>Odpowiedź nie padnie na warsztatach</b>, nie dlatego, że ktoś chce ją ukryć. Nie padnie, bo próba potraktowania tego pytania poważnie ma karkołomne, a być może niemożliwe do utrzymania konsekwencje, niezależnie od poglądów obecnych tu osób.'
         '</p>'
 );
 
@@ -1186,9 +1185,9 @@ KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
 
       _step_duchowosc_w_zhp_dobrowolnosc,
       
-      _step_duchowosc_w_zhp_aksjoamty_poszukiwanie_zrodla,
+      _step_duchowosc_w_zhp_aksjomaty_poszukiwanie_zrodla,
 
-      _step_duchowosc_w_zhp_aksjoamty_odpowiedzi,
+      _step_duchowosc_w_zhp_aksjomaty_odpowiedzi,
 
       _step_duchowosc_w_zhp_religia,
 

@@ -258,7 +258,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_zal_przypinki,
 
     ],
-    summary: 'Uczestnicy pochylają się nad zagadnieniem duchowości: co to jest? co ją różni od innych sfer? jakie mechanizmy nią rządzą, czy może być ona "neutralna", oraz jak ją kształtować u wychowanków?.',
+    summary: 'Uczestnicy pochylają się nad zagadnieniem duchowości: co to jest? co ją różni od innych sfer? jakie mechanizmy nią rządzą, czy może być ona "neutralna", oraz jak ją kształtować u wychowanków?',
     stepGroups: [
 
       KonspektStepGroup(
@@ -415,7 +415,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 content: '<p style="text-align:justify;">'
                     'Prowadzący pokrótce wyjaśnia uczestnikom, czym jest sfera emocji:'
                     '<br>'
-                    '<br><i>Sfera emocji jest wszystkim tym, co stwarza <b>zdolności</b> do skutecznego życia w społeczności (we wspólnocie wiedzy, we wspólnocie ekonomicznej, w rodzinie) np.:</i>'
+                    '<br><i>Sfera emocji jest wszystkim tym, co stwarza <b>zdolności</b> do rozumienia i panowania nad własnym systemem emocjonalnym np.:</i>'
                     '</p>'
                     '<ul>'
                     '<li><p style="text-align:justify;"><i>Zdolność określenia własnego stanu emocjonalnego</i></p></li>'
