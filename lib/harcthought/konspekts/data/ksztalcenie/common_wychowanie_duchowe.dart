@@ -100,6 +100,12 @@ KonspektMaterial material_zal_cel_wychowania_duchowego_zhp_uchwala = KonspektMat
     amount: 4
 );
 
+KonspektMaterial material_zal_karty_zalozen_wyjsciowych_wychowania_duchowego = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_karty_zalozen_wyjsciowych_wychowania_duchowego”',
+    attachmentName: attach_name_karty_zalozen_wyjsciowych_wychowania_duchowego,
+    amount: 1,
+);
+
 KonspektMaterial material_zal_szybkie_strzaly_dyskusyjne = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_szybkie_strzaly_dyskusyjne”',
     attachmentName: attach_name_szybkie_strzaly_dyskusyjne,
@@ -1227,77 +1233,48 @@ KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
     ]
 );
 
-// Strategia wychowania duchowego
+// Założenia wyjściowe wychowania duchowego
 
-KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
-    title: 'Strategia wychowania duchowego',
+KonspektStep _step_zalozenia_wyjsciowe_wychowania_duchowego = KonspektStep(
+    title: 'Założenia wyjściowe wychowania duchowego',
     duration: Duration(minutes: 20),
-    activeForm: KonspektStepActiveForm.static,
+    activeForm: KonspektStepActiveForm.active,
     materials: [
       material_flipchart.copyWith(amount: 1),
       material_marker.copyWith(amount: 2),
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący informuje uczestników, że za kilka chwil ich zadaniem będzie zaprojektować proces wychowania duchowego dla konkretnej jednostki.'
+        'Prowadzący informuje uczestników, że za chwilę będą projektować proces wychowania duchowego dla konkretnej jednostki, ale najpierw trzeba ustalić kilka kwestii wyjściowych założeń dotyczących filozofii ich pracy.'
         '<br>'
-        '<br>Zanim uczestnicy przejdą do planowania, trzeba ustalić kilka kwestii strategicznych dotyczących filozofii, której jako instruktorzy harcerscy chcą podporządkować styl swojej pracy.'
+        '<br>Prowadzący przeprowadza w formie "Dwuściennej dyskusji" krótką debatę dotyczącą kolejno każdego z tematów zawartych w załączniku ${attach_html_karty_zalozen_wyjsciowych_wychowania_duchowego}.'
         '<br>'
-        '<br>Prowadzący rozklada przed uczestnikami duży arkusz papieru (flipchart), na którym są już napisane (w odstępach) cztery przestrzenie do strategicznego omówienia:'
-        '</p>'
-
-        '<ul>'
-
-        '<li>'
-        '<p style="text-align:justify;">Polityka trzymania wychowanków pod ideowym kloszem</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">Polityka fizycznego i emocjonalnego bezpieczeństwa wychowanków</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">Polityka inkluzywności form w sytuacji różnicy aksjomatycznej wychowanków</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">Polityka prywatności życia duchowego wychowanków</p>'
-        '</li>'
-
-        '</ul>'
-
-        '<p style="text-align:justify;">'
-        'Prowadzący, jeśli uzna to za stosowne, może rzucić żartem, że będziemy teraz rozmawiać o polityce.'
-        '<br>'
-        '<br>Prawdopodobnie uczestnicy nie będą od razu rozumieli "o co chodzi" widzac jedynie zapisane na arkuszu ogólne zdania. Rolą prowadzącego jest <b>wyjaśnienie</b> każdego z omawianych punktów (można się posłużyć opisami z listy poniżej) oraz takie poprowadzenie dyskusji (poprzez zadawanie pytań, rzucanie przykładów), aby <b>przekonać uczestników</b> do przyjęcia strategii z listy poniżej.'
-        '<br>'
-        '<br>Najlepiej, jeśli ostateczny wniosek dotyczący stosownej strategii pod każdym z punktow będzie zapisywał któryś z uczestników.'
+        '<br>Wnioski, które wypłyną z dyskusji powinny być następujące:'
         '</p>'
 
         '<ul>'
 
         '<li>'
         '<p style="text-align:justify;">'
-        '<b>Polityka trzymania wychowanków pod ideowym kloszem</b>'
-        '<br>Czy i na jakim etapie duchowość wychowanków ma być kontestowana? Do jakiego stopnia? W jakim celu?'
+        'Teza: <b>Duchowość harcerzy to ich prywatna sprawa</b>'
+        '<br>'
+        '<br><u>Sugestia prowadzącego:</u>'
+        '<br><i>Duchowość to sprawa indywidualna i fundamentalnie osobista, <b>ale</b> jest jednocześnie sprawą publiczna - z duchowości wynika długa lista spraw (zachowania, postawy i wartości), które dotyczą i wpływają na całe otoczenie, w którym człowiek żyje. O wierze można i trzeba o niej rozmawiać, robić dla niej miejsce, można ją publicznie praktykować, także w formie tradycji, czy w warstwie symbolicznej.</i>'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        'Teza: <b>Harcerzy należy izolować od niemoralnych postaw</b>'
         '<br>'
         '<br><u>Sugestia prowadzącego:</u>'
         '<br><i>Początkowo harcerze powinni mieć jednoznaczny, niepodważany, niezmącony przekaz dotyczący tego, co jest dobre, a co złe. Stan ten powinien trwać mniej więcej do początku etapu świadomej integracji duchowości. W dalszej kolejności harcerze powinni być stopniowo wystawiani na inne perspektywy, inne postawy, inne wspólnoty, jednak nie po to, żeby przyjęli ich duchowość, tylko żeby wobec niej utwierdzili swoją własną oraz by nauczyli się funkcjonować w świecie, w którym nie ma jednorodności duchowej.</i>'
         '</p>'
         '</li>'
 
-        '<li>'
-        '<p style="text-align:justify;">'
-        '<b>Polityka fizycznego i emocjonalnego bezpieczeństwa wychowanków</b>'
-        '<br>Czy, kiedy i w jakim celu można wystawiać wychowanków na ryzyko? Czy, kiedy i w jakim celu należy wystawiać wychowanków na doświadczenie bezradności, agresji wobec nich, frustracji, etc.?'
-        '<br>'
-        '<br><u>Sugestia prowadzącego:</u>'
-        '<br><i>Po pierwsze, niektóre niezwykle skuteczne formy wychowawcze mają w sobie element ryzyka: chodzenie w góry, jeżdżenie autostopem, podróże po innych krajach, etc.. Po drugie, świat jest w sposób immanentny niebezpieczny. Niemal na pewno nasi wychowankowie zetkną się w życiu z agresją, bezradnością, frustracją. Lepiej jest ich do tego skutecznie przygotować w kontrolowanych warunkach. To właśnie jest chartem ducha.</i>'
-        '</p>'
-        '</li>'
 
         '<li>'
         '<p style="text-align:justify;">'
-        '<b>Polityka inkluzywności form w sytuacji różnicy aksjomatycznej wychowanków</b>'
+        'Teza: <b>Formy pracy harcerskiej powinny być inkluzywne</b>'
         '<br>Czy wszystkie formy muszą być tak skonstruowane, aby każdy wychowanek, niezależnie od aksjomatów swojej duchowości, mógł wziąć w nich udział?'
         '<br>'
         '<br><u>Sugestia prowadzącego:</u>'
@@ -1307,13 +1284,14 @@ KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        '<b>Polityka prywatności życia duchowego wychowanków</b>'
-        '<br>Czy symbolika, obrzędy, tradycje, język religijny wychowanków może być obecny w przestrzeni publicznej drużyny, w której nie wszyscy są wspólnego wyznania?'
+        'Teza: <b>Nie wolno narażać harcerzy na niebezpieczeństwo ani dyskomfort</b>'
         '<br>'
         '<br><u>Sugestia prowadzącego:</u>'
-        '<br><i>Duchowość to sprawa indywidualna i fundamentalnie osobista, <b>ale</b> jest jednocześnie sprawą publiczna - z duchowości wynika długa lista spraw (zachowania, postawy i wartości), które dotyczą i wpływają na całe otoczenie, w którym człowiek żyje. O wierze można i trzeba o niej rozmawiać, robić dla niej miejsce, można ją publicznie praktykować, także w formie tradycji, czy w warstwie symbolicznej.</i>'
+        '<br><i>Po pierwsze, niektóre niezwykle skuteczne formy wychowawcze mają w sobie element ryzyka: chodzenie w góry, jeżdżenie autostopem, podróże po innych krajach, etc.. Po drugie, świat jest w sposób immanentny niebezpieczny. Niemal na pewno nasi wychowankowie zetkną się w życiu z agresją, bezradnością, frustracją. Lepiej jest ich do tego skutecznie przygotować w kontrolowanych warunkach. To właśnie jest chartem ducha.</i>'
         '</p>'
         '</li>'
+
+
 
         '</ul>',
 );
@@ -1321,7 +1299,7 @@ KonspektStep _step_strategia_wychowania_duchowego = KonspektStep(
 KonspektStepGroup step_strategia_wychowania_duchowego = KonspektStepGroup(
     title: 'Strategia wychowania duchowego',
     steps: [
-      _step_strategia_wychowania_duchowego
+      _step_zalozenia_wyjsciowe_wychowania_duchowego
     ]
 );
 
