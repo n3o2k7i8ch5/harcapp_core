@@ -638,7 +638,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 15),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący prosi każdą z grup i przygotowanie konkretnych rozwiązań w oparciu o przynajmniej <b>trzy czynniki duchowości</b>, które zrealizują wybrany uprzednio cel.'
+                    'Prowadzący prosi każdą z grup o przygotowanie konkretnych rozwiązań w oparciu o przynajmniej <b>trzy czynniki duchowości</b>, które zrealizują wybrany uprzednio cel.'
                     '<br>'
                     '<br>Wszystkie czynniki duchowości powinny być wyłożone w widocznym miejscu na kartkach z załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci.'
                     '<br>'

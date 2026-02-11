@@ -290,7 +290,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomat = KonspektStep(
       '$aksjomaty_przyklady'
 
       '<p style="text-align:justify;">'
-      '<b>Aksjomat jest zawsze fundamentalną, niesprawdzalną wiarą w określony porządek rzeczy — i całkowicie porządkuje postrzeganie rzeczywistości</>. Aby to zobrazować, prowadzący może posłużyć się przykładem:'
+      '<b>Aksjomat jest zawsze fundamentalną, niesprawdzalną wiarą w określony porządek rzeczy — i całkowicie porządkuje postrzeganie rzeczywistości</b>. Aby to zobrazować, prowadzący może posłużyć się przykładem:'
       '<br>'
       '<br><i>"Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Również, jeśli zobaczy dowód na kulistość Ziemi, to wniosek będzie miał tylko jeden: narzędzia użyte przy tych dowodach były wadliwe.'
       '<br>'
@@ -817,7 +817,7 @@ KonspektStep _step_neutralnosc_duchowa_galeria_sztuki = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        'Jak należałoby postąpić, by zachować w opisanych scenariuszu neutralność w aspekcie duchowym?'
+        'Jak należałoby postąpić, by zachować w opisanym scenariuszu neutralność w aspekcie duchowym?'
         '</p>'
         '</li>'
         '</ol>'
@@ -895,7 +895,7 @@ KonspektStep _step_neutralnosc_analogia_do_ogrodnikow = KonspektStep(
         '<br>'
         '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instruktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im kształt w określonym stylu.'
         '<br>'
-        '<br>Krzew <b>zawsze nabywa jakiegoś kształtu</b>, także wtedy, gdy ogrodnik nic nie robi. Nie da się być rośliną nie mając jakiegoś kształtu. Tak samo, jak nie nie da się mówić nie użyjąc jakiegoś języka.'
+        '<br>Krzew <b>zawsze nabywa jakiegoś kształtu</b>, także wtedy, gdy ogrodnik nic nie robi. Nie da się być rośliną nie mając jakiegoś kształtu. Tak samo, jak nie da się mówić nie użyjąc jakiegoś języka.'
         '<br>'
         '<br>Harcerstwo jest przedsięwzięciem kształtowania ludzi: ich przekonań, wartości i postaw w określonym kierunku. <b>Bez celowego kształtowania duchowości harcerzy harcerstwo nie realizuje swojego celu</b>, jakim jest wychowanie.</i>'
         '</p>'
@@ -1121,7 +1121,7 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
         '<br>'
         '<br>Harcerstwo stawia za cel wychowanie osób świadomych swoich wartości, potrafiących je uzasadnić i ich bronić. Faktycznie jednak należy liczyć się z tym, że niektórzy zwyczajnie nie będą sobie zadawali trudu refleksji nad swoim życiem i duchem. Część osób może konformistycznie, na bieżąco dopasowywać się do poglądów otoczenia, mieć przez to kolegów i czuć się z tym dobrze, jednak <b>jest to wyraz niedojrzałości</b>.'
         '<br>'
-        '<br>Ludzie mogą być też motywowani różnymi meta-narracjami. Niektóre mogą być absurdalne, czy trywialne, np.: "Musimy dzielić się bogactwem, bo był kiedyś kolonializm". Nie zmienia to faktu, że dla kogoś może być to odpowiedzią na wszystkie życiowe rozterki. Nie należy jednak sądzić, że w ogólności ludzie pójdą za każdą meta-narracją. Nie wszystkie meta-narracja kończą się dla człowieka dobrze. Nie bez przyczyny za niektórymi meta-narracjami poszły miliardy ludzi, a inne wygasły po dwóch pokoleniach.'
+        '<br>Ludzie mogą być też motywowani różnymi meta-narracjami. Niektóre mogą być absurdalne, czy trywialne, np.: "Musimy dzielić się bogactwem, bo był kiedyś kolonializm". Nie zmienia to faktu, że dla kogoś może być to odpowiedzią na wszystkie życiowe rozterki. Nie należy jednak sądzić, że w ogólności ludzie pójdą za każdą meta-narracją. Nie wszystkie meta-narracje kończą się dla człowieka dobrze. Nie bez przyczyny za niektórymi meta-narracjami poszły miliardy ludzi, a inne wygasły po dwóch pokoleniach.'
         '</i>'
         '</p>'
         '</li>'
@@ -1165,7 +1165,6 @@ KonspektStep _step_duchowosc_w_zhp_podsumowanie = KonspektStep(
         '</ul>'
 
         '<p style="text-align:justify;">'
-        '<br>'
         '<b>Podsumowanie dodatkowe (dla podharcmistrzów)</b>'
         '</p>'
 
@@ -1359,7 +1358,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
         '<p style="text-align:justify;">'
         '<u>W ramach działań drużyny nie powinno być aktywności religijnych, gdyż te wykluczają niewierzących.</u>'
         '<br>'
-        '<br><i>Osoby wyznające wiarę w osobowego Boga, aby móc rozwijać swoją duchowość muszą brać udział w formach, w które są niecelowe dla osób niereligijnych. Ograniczanie osobom wychowywanym w wierze form religijnych, tabuizowanie tematu wiary i religii jest dla nich krzywdzące. Skuteczne wychowanie osób o różnych aksjomatach w jednej drużynie <b>zawsze prowadzi przez formy, które są nieinkluzywne</b> - zjawisko to jest normalne i pożądane. Uciekanie od tego faktu skutkuje zjawiskiem <b>weganizacji procesu wychowawczego</b>.</i>'
+        '<br><i>Osoby wyznające wiarę w osobowego Boga, aby móc rozwijać swoją duchowość muszą brać udział w formach, które są niecelowe dla osób niereligijnych. Ograniczanie osobom wychowywanym w wierze form religijnych, tabuizowanie tematu wiary i religii jest dla nich krzywdzące. Skuteczne wychowanie osób o różnych aksjomatach w jednej drużynie <b>zawsze prowadzi przez formy, które są nieinkluzywne</b> - zjawisko to jest normalne i pożądane. Uciekanie od tego faktu skutkuje zjawiskiem <b>weganizacji procesu wychowawczego</b>.</i>'
         '</p>'
         '</li>'
 
