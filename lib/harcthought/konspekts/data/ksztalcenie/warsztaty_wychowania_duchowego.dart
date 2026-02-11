@@ -623,10 +623,10 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
             KonspektStep(
                 title: 'Planowanie wychowania duchowego - cele',
-                duration: Duration(minutes: 15),
+                duration: Duration(minutes: 10),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący prosi każdą z grup, by wskazała, jakie <b>cele w pracy duchowej</b> chce osiągnąć dla opisanej drużyny. Należy założyć, że praca z opisaną grupą bedzie trwała 3 lata.'
+                    'Prowadzący prosi każdą z grup, by wskazała <b>jeden cel w pracy duchowej</b>, który chce osiągnąć dla opisanej drużyny mając do dyspozycji 3 lata pracy harcerskiej.'
                     '</p>',
                 materials: [
                   material_zal_planowanie_strategii_i_dzialan,
@@ -638,7 +638,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 15),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący prosi każdą z grup, by wskazała mechanizmy oparte o trzy czynniki duchowości, za pomocą których można zrealizować wyłonione uprzednio cele.'
+                    'Prowadzący prosi każdą z grup i przygotowanie konkretnych rozwiązań w oparciu w oparciu o przynajmniej <b>trzy czynniki duchowości</b>, które zrealizują wybrany uprzednio cel.'
                     '<br>'
                     '<br>Wszystkie czynniki duchowości powinny być wyłożone w widocznym miejscu na kartkach z załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci.'
                     '<br>'
@@ -647,16 +647,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                     '<br>Prowadzący może zasugerować, by grupy skoncentrowały się na następujących czynnikach:'
                     '</p>'
 
-                    '<ul>'
-                    '<li><p style="text-align:justify;">Przykład własny autorytetów</p></li>'
-                    '<li><p style="text-align:justify;">Oczekiwania uznanych autorytetów</p></li>'
-                    '<li><p style="text-align:justify;">Normy</p></li>'
-                    '</ul>'
-
                     '<p style="text-align:justify;">'
-                    'Jeżeli jednak grupy uznają, że są w stanie wykorzystać inne czynniki do osiągnięcia celów, mogą ich użyć.'
-                    '<br>'
-                    '<br>Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, należy zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
+                    'Jeżeli w ramach grup pojawi się konflikt poglądów, który nie zostanie ujednolicony wskutek dyskusji, należy zachować wszystkie perspektywy do późniejszego ich omówienia na forum.'
                     '</p>',
                 materials: [
                   material_zal_planowanie_strategii_i_dzialan,
@@ -693,7 +685,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
             KonspektStep(
                 title: 'Planowanie wychowania duchowego - prezentacja',
-                duration: Duration(minutes: 40),
+                duration: Duration(minutes: 30),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Każda z grup ma kilka minut, aby <b>zaprezentować</b> swoje strategie i działania.'
