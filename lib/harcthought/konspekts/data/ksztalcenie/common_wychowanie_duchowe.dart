@@ -1275,7 +1275,6 @@ KonspektStep _step_zalozenia_wyjsciowe_wychowania_duchowego = KonspektStep(
         '<li>'
         '<p style="text-align:justify;">'
         'Teza: <b>Formy pracy harcerskiej powinny być inkluzywne</b>'
-        '<br>Czy wszystkie formy muszą być tak skonstruowane, aby każdy wychowanek, niezależnie od aksjomatów swojej duchowości, mógł wziąć w nich udział?'
         '<br>'
         '<br><u>Sugestia prowadzącego:</u>'
         '<br><i>Absolutnie nie - prowadzi to do zjawiska <b>weganizacji wychowania duchowego</b>, czyli do zjawiska ograniczenia wychowania do najmniejszego wspólnego mianownika duchowości osób o różnych aksjomatach. Ludzie wychowywani w różnych wiarach wymagają różnych form pracy nad swoją duchowością. To, że formy te będa wykluczające dla części osób jest normalne, konieczne i nie należy się tego bać.</i>'
@@ -1290,8 +1289,6 @@ KonspektStep _step_zalozenia_wyjsciowe_wychowania_duchowego = KonspektStep(
         '<br><i>Po pierwsze, niektóre niezwykle skuteczne formy wychowawcze mają w sobie element ryzyka: chodzenie w góry, jeżdżenie autostopem, podróże po innych krajach, etc.. Po drugie, świat jest w sposób immanentny niebezpieczny. Niemal na pewno nasi wychowankowie zetkną się w życiu z agresją, bezradnością, frustracją. Lepiej jest ich do tego skutecznie przygotować w kontrolowanych warunkach. To właśnie jest chartem ducha.</i>'
         '</p>'
         '</li>'
-
-
 
         '</ul>',
 );
@@ -1320,6 +1317,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
         '<br>'
         '<br>Sugestie do kartek:'
         '</p>'
+
         '<ul>'
 
         '<li>'
