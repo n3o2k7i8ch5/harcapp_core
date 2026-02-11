@@ -508,6 +508,21 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       step_group_duchowosc_w_zhp,
 
+      step_zalozenia_wyjsciowe_wychowania_duchowego,
+
+      KonspektStepGroup(
+          steps: [
+            KonspektStep(
+                title: 'Przerwa',
+                duration: Duration(minutes: 10),
+                activeForm: KonspektStepActiveForm.active,
+                content: '<p style="text-align:justify;">'
+                    'Przerwa na rozprostowanie nóg, przewietrzenie się, siku itp..'
+                    '</p>'
+            ),
+          ]
+      ),
+
       KonspektStepGroup(
           title: 'Praktyka wychowania duchowego',
           steps: [
@@ -569,21 +584,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             ),
           ]
       ),
-
-      KonspektStepGroup(
-          steps: [
-            KonspektStep(
-                title: 'Przerwa',
-                duration: Duration(minutes: 10),
-                activeForm: KonspektStepActiveForm.active,
-                content: '<p style="text-align:justify;">'
-                    'Przerwa na rozprostowanie nóg, przewietrzenie się, siku itp..'
-                    '</p>'
-            ),
-          ]
-      ),
-
-      step_strategia_wychowania_duchowego,
 
       KonspektStepGroup(
           title: 'Planowanie wychowania duchowego',

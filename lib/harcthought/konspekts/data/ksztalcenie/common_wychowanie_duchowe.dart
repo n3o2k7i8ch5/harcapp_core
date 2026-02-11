@@ -1034,41 +1034,18 @@ KonspektStep _step_duchowosc_w_zhp_dobrowolnosc = KonspektStep(
     ]
 );
 
-KonspektStep _step_duchowosc_w_zhp_aksjoamty_praca_w_grupach = KonspektStep(
-    title: 'Duchowość w ZHP - aksjomaty - praca w grupach',
-    duration: Duration(minutes: 10),
-    activeForm: KonspektStepActiveForm.active,
-    materials: [
-      material_zal_neutralnosc_duchowa_przyklady
-    ],
-    aims: [
-      'Uświadomienie uczestnikom, że do wspierania rozwoju duchowego na poziomie Z i H wystarczy poziom postaw i wartości, ale rozwój duchowy z HS i W wymaga pracy na poziomie aksjomatu',
-      'Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej'
-    ],
-    content: '<p style="text-align:justify;">'
-        '<br>Prowadzący znowu prezentuje uczestnikom scenariusze z użytego już załącznika $attach_html_neutralnosc_duchowa_przyklady. Stawia przed nimi zadanie w formie pytania:'
-        '<br>'
-        '<br><i>“We wszystkich scenariuszach mowa jest o wartościach obecnych w PH. Ale przecież żaden wędrownik nie będzie przestrzegał PH "bo tak powiedział drużynowy" - wartości wędrowników muszą wynikać ze spójnej, głębokiej, aksjomatycznej przyczyny.'
-        '<br>'
-        '<br>Jakie aksjomaty, lub meta-narracje są powodem, dla którego w świecie łacińskim te a nie inne wartości są tak naturalne?”</i>'
-        '<br>'
-        '<br>Uczestnicy mają chwilę, by w kilkuosobowych grupach zaproponować przyczyny dla każdej z omawianych wcześniej wartości (przebaczenie, prawdomówność, umiłowanie bliźnich, godność jednostki, itd.).'
-        '</p>'
-);
-
-KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
-    title: 'Duchowość w ZHP - aksjomaty',
+KonspektStep _step_duchowosc_w_zhp_aksjoamty_poszukiwanie_zrodla = KonspektStep(
+    title: 'Duchowość w ZHP - aksjomaty - poszukiwanie źródła',
     duration: Duration(minutes: 15),
     activeForm: KonspektStepActiveForm.static,
     materials: [
       material_zal_neutralnosc_duchowa_przyklady
     ],
     aims: [
-      'Uświadomienie uczestnikom, że do wspierania rozwoju duchowego na poziomie Z i H wystarczy poziom postaw i wartości, ale rozwój duchowy z HS i W wymaga pracy na poziomie aksjomatu',
-      'Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej'
+      'Uświadomienie uczestnikom, że harcerskie wartości, oparte wartościach cywilizacji łacińskiej nie są oczywiste, uniwersalne, ani naturalne.'
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący rozpoczyna omawianie kolejnych wartości nad którymi przed chwilą pracowali uczestnicy. Na początku uczestnicy prezentują swoje propozycje, na końcu zaś prowadzący może zaprezentować źródło owych wartości w kulturze łacińskiej zgodnie z poniższą rozpiską.'
+        'Prowadzący zwraca uwagę, że warości cywilizacji łacińskiej nie są wcale ani uniwersalne, ani naturalne. Posiłkując się przykładami z użytego wcześniej załącznika ${attach_html_neutralnosc_duchowa_przyklady}, poddaje pod dyskusję kwestię tego, dlaczego w naszej kulturze i cywilizacji akurat te, a nie inne wartością są tak powszechne?'
         '</p>'
 
         '<ol>'
@@ -1077,37 +1054,25 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
         '<p style="text-align:justify;">'
         '<b>Scenariusz 1.</b> Przebaczenie i odpuszczenie win.'
         '<br>'
-        '<br>Przebaczenie win nie jest moralnym standardem. W wielu kulturach jest to uważane za zachętę do bycia wykorzystywanym. Nietzsche uważał przebaczanie za wyraz słabości i element moralności niewolników. W tradycyjnej kulturze Japońskiej, po popełnieniu poważnej winy nie było drogi odpuszczenia winy: jedynym honorowym wyjściem było popełnienie rytualnego samobójstwa: seppuku (lub harakiri).'
-        '<br>'
-        '<br>Dlaczego więc w kulturze łacińskiej jest inaczej? Bo naszą kulturę ukształtowała wiara, że sam stwórca świata uznał za słuszne ponieść śmierć za człowieka, by ten doznał odpuszczenia win, a na pytanie św. Piotra o to ile razy ma wybaczyć komuś winę, usłyszał: zawsze.'
-        '<br>'
-        '<br>Z tego też powodu w zachodnim systemie prawnym po poniesieniu kary za popełnioną winę, zostaje ona zmazana i człowiek otrzymuje niejako "czystą kartę" - a przecież nie ma technicznego problemu, by za kradzież człowiek był skazywany i uznany winnym do końca życia.'
+        '<br>W wielu kulturach przebaczenie win jest uważane za zachętę do bycia wykorzystywanym. Nietzsche uważał przebaczanie za wyraz słabości i element moralności niewolników. W tradycyjnej kulturze Japońskiej, po popełnieniu poważnej winy nie było drogi odpuszczenia winy: jedynym honorowym wyjściem było popełnienie rytualnego samobójstwa: seppuku (lub harakiri). Dlaczego więc w kulturze łacińskiej jest inaczej? Dlaczego w naszych systemach prawnych po poniesieniu kary za popełnioną winę, zostaje ona zmazana i człowiek jest wolny? Dlaczego za kradzież ludzie nie są dożywotnio skazywani, żeby skutecznie ich od nie zniechęcić?'
         '</p>'
         '</li>'
 
         '<li>'
         '<p style="text-align:justify;">'
-        '<b>Scenariusz 2.</b> Mówienie prawdy.'
+        '<b>Scenariusz 2.</b> Życie w prawdzie.'
         '<br>'
-        '<br>W kulturach wschodnich, szczególnie w kulturze konfucjańskiej, gdzie najważniejsza jest harmonia społeczna i kolektywizm, należy kłamać, jeśli prowadzi do uniknięcia konfliktu. W części kultur afrykańskich kłamstwo nie jest złem, jeśli służy uniknięciu wstydu.'
-        '<br>'
-        '<br>Dlaczego więc akurat my tak się uparliśmy, by nagannie traktować świadome mówienie nieprawdy?'
-        '<br>'
-        '<br>Po pierwsze naszą kulturę ukształtowała wiara, że całe cierpienie i grzechy świata swój początek wzięły w kłamstwie węża, w które Adam i Ewa uwierzyli. Po drugie, jeśli Bóg stworzył świat, który wierzymy, że jest dobry, to wyjście z trudnych sytuacji nie może być długodystansowo możliwe przez nagięcie lub zatajenie rzeczywistości. Nasz świat jest oparty o ewangeliczną tezę <i>“poznacie prawdę, a prawda was wyzwoli”</i>.'
-        '<br>'
-        '<br><i>“Do obalenia totalitaryzmu wystarczy jeden człowiek, który powie prawdę”</i> napisał Sołżenicyn w „Archipelagu GUŁag”.'
+        '<br>W kulturach wschodnich, gdzie najważniejsza jest harmonia społeczna i kolektywizm, należy kłamać, jeśli prowadzi do uniknięcia konfliktu. W części kultur afrykańskich kłamstwo nie jest złem, jeśli służy uniknięciu wstydu. Dlaczego więc akurat my tak się uparliśmy, by nagannie traktować świadome mówienie nieprawdy?'
         '</p>'
         '</li>'
 
         '<li>'
         '<p style="text-align:justify;">'
-        '<b>Scenariusz 3.</b> Bezinteresowna pomoc bliźnim'
+        '<b>Scenariusz 3.</b> Niezbywalna godność każdego człowieka'
         '<br>'
         '<br>Niezbywalna godność i równość każdego człowieka? W systemach konfucjańskich liczy się najpierw wspólnota i kolektyw, dopiero potem człowiek. Niektórzy wyznawcy hinduizmu widząc cierpienie drugiego człowieka powstrzymają innych od udzielenia mu pomocy - jeśli ktoś cierpi, to niewątpliwie pokutuje za grzechy popełnione w poprzednim życiu.'
         '<br>'
         '<br>A skąd pogląd, że wykształcony profesor z zasługami dla narodu ma takie same prawa jak półinteligentny osiedlowy cwaniaczek? Skąd pomysł, że prawo do życia i godnego traktowania ma każdy, niezależnie od wieku, pochodzenia, czy wyznania?</i>.'
-        '<br>'
-        '<br>Naszą kulturę ukształtowała wiara, że chyba w nawet najpodlejszemu człowiekowi nie można odebrać godności, skoro sam Bóg zechciał umrzeć na krzyżu dla jego zbawienia. W świetle tego faktu nie ma usprawiedliwienia dla systemu kastowego, niewolnictwa ani wyzysku.'
         '</p>'
         '</li>'
 
@@ -1119,23 +1084,32 @@ KonspektStep _step_duchowosc_w_zhp_aksjoamty = KonspektStep(
         '<br>'
         '<br>W kulturze konfucjańskiej najpierw liczy się kolektyw, dobro zbiorowości, trwałość systemu państwowego - a dopiero potem dobro jednostki. W Chinach niedopuszczalne jest publiczne okazywanie sporów, ponieważ osłabia to wspólnotę. W kulturze japońskiej należy poświęcić własne plany prywatne, jeśli kolidują one z wydarzeniem firmy, w której się pracuje.'
         '<br>'
-        '<br>Skąd więc u nas "oczywiste" przekonanie, że należy zapewnić odszkodowanie rodzinie, której dom stoi na drodze nowej autostrady? Skąd przekonanie, że nie można zmusić kogoś do pracy, jeśli nie chce? Nasza kultura została ukształtowana przez wiarę, że Bóg stworzył każdego człowieka na swój obraz, że zginął za każdego, najmniejszego z ludzi, by ten mógł doświadczyć zbawienia. "Wszystko, coście uczynili jednemu z braci moich najmniejszych mnieście [Bogu] uczynili".'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        '<b>Scenariusz 5.</b> Wierność w związku'
-        '<br>'
-        '<br>Dlaczego kultura łacińska nalega na trwałe związki damsko-męskie?'
-        '<br>'
-        '<br>Być może przewagi monogamii wyparły skutecznością większość innych modeli relacji. Monogamia jest przewidywalna, stabilna, ułatwia zarządzanie zasobami i dziedziczenie, a to zwiększa bezpieczeństwo dzieci. W skali makro zmniejsza napięcia społeczne wynikające z braku dostępnych partnerów życiowych i minimalizuje ryzyko chorób przenoszonych drogą płciową.'
-        '<br>'
-        '<br>Z indywidualistycznej perspektywy pozwala zrównać w relacji obie płcie nie odbierając możliwości pełnienia komplementarnych ról, zaś brak możliwości łatwego zakończenia związku zmusza jego uczestników do skutecznego mierzenia się z problemami ich osobowości.'
+        '<br>Skąd więc u nas "oczywiste" przekonanie, że należy zapewnić odszkodowanie rodzinie, której dom stoi na drodze nowej autostrady? Skąd przekonanie, że nie można zmusić kogoś do pracy, jeśli nie chce?'
         '</p>'
         '</li>'
 
         '</ol>'
+);
+
+KonspektStep _step_duchowosc_w_zhp_aksjoamty_odpowiedzi = KonspektStep(
+    title: 'Duchowość w ZHP - aksjomaty - odpowiedzi',
+    duration: Duration(minutes: 10),
+    activeForm: KonspektStepActiveForm.static,
+    materials: [
+      material_zal_neutralnosc_duchowa_przyklady
+    ],
+    aims: [
+      'Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej'
+    ],
+    content: '<p style="text-align:justify;">'
+        'Gdy wśród uczestników wybrzmi nieuniwersalność, a może nawet dziwność wartości łacińskich z perspektywy reszty świata, prowadzacy naprowadza uczestników na powód, dla którego akurat te wartości są u nas standardem:'
+        '<br>'
+        '<br><i>Nie byłoby niezbywalnej godności każdego człowieka, ani równości wobec prawa, ani humanitaryzmu, ani oświecenia, ani Powszechnej Deklaracji Praw Człowieka bez wiary, że skoro sam Bóg dobrowolnie wydał się na śmierć dla zbawienia najpodlejszego nawet człowieka, to że w każdym człowieku jest coś iście boskiego, nieważne jak bardzo jest podły, bezużyteczny, inny, czy denerwujący.'
+        '<br>'
+        '<br>Nie byłoby uniwersytetów bez zgromadzeń i klasztorów zakonnych, ani nie byłoby nauki bez przekonania, że Bóg stworzył dobry, uporządkowany świat, że Bóg przekracza naturę i że można badać ją bez bluźnierstwa, oraz bez ewangelicznej wiary w wartość prawdy pomimo pokusy fałszowania rzeczywistości dla własnych korzyści.'
+        '</i>'
+        '</p>'
+
 );
 
 KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
@@ -1222,10 +1196,10 @@ KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
       _step_duchowosc_w_zhp_dokumenty,
 
       _step_duchowosc_w_zhp_dobrowolnosc,
+      
+      _step_duchowosc_w_zhp_aksjoamty_poszukiwanie_zrodla,
 
-      _step_duchowosc_w_zhp_aksjoamty_praca_w_grupach,
-
-      _step_duchowosc_w_zhp_aksjoamty,
+      _step_duchowosc_w_zhp_aksjoamty_odpowiedzi,
 
       _step_duchowosc_w_zhp_ateisci,
 
@@ -1293,7 +1267,7 @@ KonspektStep _step_zalozenia_wyjsciowe_wychowania_duchowego = KonspektStep(
         '</ul>',
 );
 
-KonspektStepGroup step_strategia_wychowania_duchowego = KonspektStepGroup(
+KonspektStepGroup step_zalozenia_wyjsciowe_wychowania_duchowego = KonspektStepGroup(
     title: 'Założenia wyjściowe wychowania duchowego',
     steps: [
       _step_zalozenia_wyjsciowe_wychowania_duchowego
