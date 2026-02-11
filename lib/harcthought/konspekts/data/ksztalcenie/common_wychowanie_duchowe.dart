@@ -606,7 +606,7 @@ KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
         '<br>'
         '<br><i>Najlepszą strategię radzenia sobie z chaosem, złem i zagrożeniami można próbować opisać tomami precyzyjnych, wyrafinowanych prac analitycznych, tyle że prawie nikt ich nie zrozumie.'
         '<br>'
-        '<br>Prowadzący proponuje inną metodę: odwołanie się do ludzkich mechanizmów postrzegania świata i opisać to w formie opowieści w stylu: <i>była kiedyś spokojna kraina, którą zaczął nękać smok. Pożarł najlepszych, najbardziej doświadczonych wojowników, którzy chcieli go zgładzić. W końcu, mimo strachu, decyduje się z nim zmierzyć zwykły młodzieniec imieniem Jerzy, który odrzuca zbroję, ale bierze miecz starszych wojowników, wchodzi do jamy potwora i podstępem wbija mu miecz między łuski prosto w serce. W konsekwencji Jerzy zdobywa ogromny skarb, najpiękniejsza dziewczyna w królestwie zgadza się go poślubić, a on zostaje królem.</i>'
+        '<br>Prowadzący proponuje inną metodę: odwołać się do ludzkich mechanizmów postrzegania świata i opisać to w formie opowieści w stylu: <i>była kiedyś spokojna kraina, którą zaczął nękać smok. Pożarł najlepszych, najbardziej doświadczonych wojowników, którzy chcieli go zgładzić. W końcu, mimo strachu, decyduje się z nim zmierzyć zwykły młodzieniec imieniem Jerzy, który odrzuca zbroję, ale bierze miecz starszych wojowników, wchodzi do jamy potwora i podstępem wbija mu miecz między łuski prosto w serce. W konsekwencji Jerzy zdobywa ogromny skarb, najpiękniejsza dziewczyna w królestwie zgadza się go poślubić, a on zostaje królem.</i>'
         '<br>'
         '<br>Prowadzący zwraca uwagę, że to oczywiste, że Jerzy z opowieści nigdy nie żył, oraz że żaden smok nigdy nie zaatakował żadnej wioski. W opowieści nie chodzi o bohaterów, tylko o pokazanie sposobu działania rzeczywistości, do której opowiedzenia ci bohaterowie są potrzebni: człowiek, który dobrowolnie mierzy się z tym, czego się boi może zwyciężyć, a jeśli to zrobi, będzie kimś innym niż był wcześniej.'
         '<br>'
@@ -664,7 +664,7 @@ KonspektStep _step_meta_narracja_powrot_do_scenki = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Prowadzący wraca do scenki:'
         '<br>'
-        '<br><i>Jeśli Adam miałby kiedyś wybaczyć Radkowi, to nie dlatego, że tak mówi Prawo Harcerskie, ale dlatego, że zobaczy i przyjmie świat w perspektywie meta-narracji, którą przyjmie jego własne aksjomaty i z których naturalnie wyniknie wartość przebaczenia.</i>'
+        '<br><i>Jeśli Adam miałby kiedyś wybaczyć Radkowi, to nie dlatego, że tak mówi Prawo Harcerskie, ale dlatego, że zobaczy i przyjmie świat w perspektywie meta-narracji, z której wynikną jego aksjomaty – a z nich naturalnie wyniknie wartość przebaczenia.</i>'
         '<br>'
         '<br>Prowadzący kończy wyjaśnieniem implikacji dla wychowawców:'
         '<br>'
@@ -893,7 +893,7 @@ KonspektStep _step_neutralnosc_analogia_do_ogrodnikow = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Jeśli uczestnicy mają problem ze zrozumieniem, dlaczego zarówno działanie wychowawcze jak i jego brak zawsze kształtuje duchowość wychowanków, prowadzący może przedstawić uczestnikom użyteczną analogię:'
         '<br>'
-        '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne drzewka, w różnych formach i kształtach, a zadaniem ogrodników (instruktorów) jest te drzewa przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im kształt w określonym stylu.'
+        '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne krzewy, w różnych formach i kształtach, a zadaniem ogrodników (instruktorów) jest te krzewy przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im kształt w określonym stylu.'
         '<br>'
         '<br>Krzew <b>zawsze nabywa jakiegoś kształtu</b>, także wtedy, gdy ogrodnik nic nie robi. Nie da się być rośliną nie mając jakiegoś kształtu. Tak samo, jak nie da się mówić nie użyjąc jakiegoś języka.'
         '<br>'
@@ -1143,7 +1143,7 @@ KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
         '</ol>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący powinien pozwolić, by fundamentalny <b>brak odpowiedzi</b> na pytanie "co dla ateistów" wybrzmiał wśród uczestników. <b>Odpowiedź nie padnie na warsztatach</b>, nie dlatego, że ktoś chce ją ukryć. Nie padnie, bo próba potraktowania tego pytania poważnie ma karkołomne, a być może niemożliwe do utrzymania konsekwencje, niezależnie od poglądów obecnych tu osób.'
+        'Prowadzący powinien pozwolić, by fundamentalny <b>brak odpowiedzi</b> na pytanie „co dla ateistów" wybrzmiał wśród uczestników. <b>Odpowiedź nie padnie na warsztatach</b> – nie dlatego, że ktoś chce ją ukryć, ale dlatego, że próba potraktowania tego pytania poważnie prowadzi do karkołomnych konsekwencji – niezależnie od poglądów obecnych tu osób.'
         '</p>'
 );
 
