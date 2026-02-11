@@ -645,11 +645,11 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 15),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący prosi każdą z grup o przygotowanie konkretnych rozwiązań w oparciu o przynajmniej <b>trzy czynniki duchowości</b>, które zrealizują wybrany uprzednio cel.'
+                    'Prowadzący prosi każdą z grup, by w oparciu o przynajmniej <b>trzy czynniki duchowości</b> zaplanowała konkretne działania strategiczne, które przybliżą drużynę do wybranego celu.'
                     '<br>'
                     '<br>Wszystkie czynniki duchowości powinny być wyłożone w widocznym miejscu na kartkach z załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci.'
                     '<br>'
-                    '<br>Na tym etapie zadaniem grup <b>nie jest wymyślanie żadnych zajęć</b> dla harcerzy. Chodzi o podjęcie działania w stylu: <i>przekonanie rodziców zuchów, aby do 14 roku życia miały one na wyłączność dostęp tylko do prostych telefonów bez funkcji dotykowych, aby zwiększyć częstotliwość ich interakcji z niecyfrowym światem, który stawia większe wyzwania.</i>'
+                    '<br>Nie chodzi tu o wymyślanie zajęć dla harcerzy (zbiórek, gier, ognisk), lecz o decyzje dotyczące otoczenia i warunków, w jakich drużyna funkcjonuje, np.: <i>przekonanie rodziców zuchów, aby do 14 roku życia miały one na wyłączność dostęp tylko do prostych telefonów bez funkcji dotykowych, aby zwiększyć częstotliwość ich interakcji z niecyfrowym światem, który stawia większe wyzwania.</i>'
                     '<br>'
                     '<br>Prowadzący może zasugerować, by grupy skoncentrowały się na następujących czynnikach:'
                     '</p>'
