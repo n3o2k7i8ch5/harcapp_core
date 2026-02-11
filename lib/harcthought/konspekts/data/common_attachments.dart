@@ -196,7 +196,7 @@ const KonspektAttachment attach_cel_wychowania_duchowego_zhp_uchwala = KonspektA
   },
 );
 
-const String attach_html_karty_zalozen_wyjsciowych_wychowania_duchowego = '<a href="$attach_name_cel_wychowania_duchowego_zhp_uchwala@attachment">$attach_title_cel_wychowania_duchowego_zhp_uchwala</a>';
+const String attach_html_karty_zalozen_wyjsciowych_wychowania_duchowego = '<a href="$attach_name_karty_zalozen_wyjsciowych_wychowania_duchowego@attachment">$attach_title_karty_zalozen_wyjsciowych_wychowania_duchowego</a>';
 const String attach_name_karty_zalozen_wyjsciowych_wychowania_duchowego = 'karty_zalozen_wyjsciowych_wychowania_duchowego';
 const String attach_title_karty_zalozen_wyjsciowych_wychowania_duchowego = 'Karty założeń wyjściowych wychowania duchowego';
 const KonspektAttachment attach_karty_zalozen_wyjsciowych_wychowania_duchowego = KonspektAttachment(

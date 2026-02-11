@@ -511,85 +511,16 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       step_zalozenia_wyjsciowe_wychowania_duchowego,
 
       KonspektStepGroup(
-          steps: [
-            KonspektStep(
-                title: 'Przerwa',
-                duration: Duration(minutes: 10),
-                activeForm: KonspektStepActiveForm.active,
-                content: '<p style="text-align:justify;">'
-                    'Przerwa na rozprostowanie nóg, przewietrzenie się, siku itp..'
-                    '</p>'
-            ),
-          ]
-      ),
-
-      KonspektStepGroup(
-          title: 'Formy wychowania duchowego',
-          steps: [
-            KonspektStep(
-                title: 'Formy wychowania duchowego - kratka i przykłady',
-                duration: Duration(minutes: 30),
-                activeForm: KonspektStepActiveForm.active,
-                content: '<p style="text-align:justify;">'
-                    'Uczestnicy otrzymują w grupach po jednym załączniku $attach_html_kratka_minimow_rozwoju_duchowego. Otrzymują również wydrukowane i wycięte formy z załącznika $_attach_html_formy.'
-                    '<br>'
-                    '<br>Na podstawie zdobytej dotychczas wiedzy oraz załącznika $attach_html_kratka_minimow_rozwoju_duchowego, zadaniem uczestników jest:'
-                    '</p>'
-                    '<ol>'
-                    '<li><p style="text-align:justify;">Przyporządkowanie poszczególnych form do <b>grupy</b> lub <b>grup wiekowych</b>.</p></li>'
-                    '<li><p style="text-align:justify;">Określenie, jakie <b>poziomy duchowości</b> rozwijają.</p></li>'
-                    '<li><p style="text-align:justify;">Określenie, jeśli to możliwe, jaki <b>mechanizm</b> wykorzystują.</p></li>'
-                    '</ol>'
-                    '<p style="text-align:justify;">'
-                    '<br>'
-                    '<br>Warto uczestników podzielić na grupy po 3-4 osoby, aby jak najbardziej zaangażować ich w dyskusję nad formami.'
-                    '</p>',
-                materials: [
-                  material_zal_kratka_minimow_rozwoju_duchowego,
-                  material_zal_formy,
-                ]
-            ),
-
-            KonspektStep(
-                title: 'Formy wychowania duchowego - kratka i przykłady - podsumowanie',
-                duration: Duration(minutes: 10),
-                activeForm: KonspektStepActiveForm.active,
-                content: '<p style="text-align:justify;">'
-                    'Prowadzący zbiera na powrót wszystkie grupy w jedno miejsce i prosi, by każda z grup przedstawiła po kilka wybranych form które:'
-                    '</p>'
-
-                    '<ul>'
-                    '<li><p style="text-align:justify;">Najbardziej przypadły im do gustu.</p></li>'
-                    '<li><p style="text-align:justify;">Najbardziej ich zaskoczyły.</p></li>'
-                    '<li><p style="text-align:justify;">Wydały im się najbardziej kontrowersyjne.</p></li>'
-                    '</ul>'
-
-                    '<p style="text-align:justify;">'
-                    'Po przedstawieniu najbardziej kontrowersyjnych form prowadzący może zauważyć, że harcerstwo opiera się na <b>wychowaniu poprzez stawianie wyzwań</b> i nie należy się łudzić, że można wychować kogoś w ciągłym, bezgranicznym bezpieczeństwie i komforcie. Lepiej, aby rozwój duchowy zakładał budowanie odporności na trudy i nieprzyjemne sytuacje, niż od nich izolował - harcerstwo nie wychowuje <b>pod kloszem</b>.'
-                    '</p>'
-            ),
-
-            KonspektStep(
-                title: 'Fantomowe działania wychowawcze i skuteczność wychowawcza',
-                duration: Duration(minutes: 10),
-                activeForm: KonspektStepActiveForm.static,
-                required: false,
-                content: '<p style="text-align:justify;">'
-                    'Prowadzący prezentuje krótki opis obozu drużyny z załącznika $_attach_html_scenariusz_fantomowe_dzialania_wychowawcze i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zadaje pytanie: "co jest nie tak z tą strategią?". Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
-                    '<br>'
-                    '<br>W oparciu o dotychczasowe pojęcia powinno paść hasło “<b>skuteczności wychowawczej</b>”.'
-                    '<br>'
-                    '<br>Prowadzący może posiłkować się pytaniami:'
-                    '<br>'
-                    '<br><b>Czy któraś z tych form nie kształtuje duchowości?</b>'
-                    '<br>'
-                    '<br><b>Jaki jest problem z tak skonstruowanym planem wychowania duchowego?</b>'
-                    '</p>',
-                materials: [
-                  material_zal_scenariusz_fantomowe_dzialania_wychowawcze,
-                ]
-            ),
-          ]
+        steps: [
+          KonspektStep(
+            title: 'Przerwa',
+            duration: Duration(minutes: 10),
+            activeForm: KonspektStepActiveForm.active,
+            content: '<p style="text-align:justify;">'
+              'Przerwa na rozprostowanie nóg, przewietrzenie się, siku itp..'
+              '</p>'
+          ),
+        ]
       ),
 
       KonspektStepGroup(
@@ -601,12 +532,12 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 5),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
-                    'Uczestnicy są dzieleni na 4 grupy. Każda grupa otrzymuje krótki opis drużyny z załącznika $_attach_html_planowanie_strategii_i_dzialan. Zadaniem każdej grupy jest stworzyć plan rozwoju duchowego jednostki.'
-                    '<br>'
-                    '<br>Każda z opisanych na kartce drużyn jest w innej metodyce (Z, H, HS, W). Prowadzący może podzielić uczestników tak, by każdy był w grupie pracującej nad metodyką, która jest uczestnikom najbliższa.'
-                    '<br>'
-                    '<br>Na początku prowadzący prosi każdą z grup, by zapoznała się z opisami.'
-                    '</p>',
+                  'Uczestnicy są dzieleni na 4 grupy. Każda grupa otrzymuje krótki opis drużyny z załącznika $_attach_html_planowanie_strategii_i_dzialan. Zadaniem każdej grupy jest stworzyć plan rozwoju duchowego jednostki.'
+                  '<br>'
+                  '<br>Każda z opisanych na kartce drużyn jest w innej metodyce (Z, H, HS, W). Prowadzący może podzielić uczestników tak, by każdy był w grupie pracującej nad metodyką, która jest uczestnikom najbliższa.'
+                  '<br>'
+                  '<br>Na początku prowadzący prosi każdą z grup, by zapoznała się z opisami.'
+                  '</p>',
                 materials: [
                   material_zal_planowanie_strategii_i_dzialan,
                 ]
@@ -634,7 +565,13 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
                     'Prowadzący prosi każdą z grup, by wskazała <b>jeden cel w pracy duchowej</b>, który chce osiągnąć dla opisanej drużyny mając do dyspozycji 3 lata pracy harcerskiej.'
-                    '</p>',
+                    '<br>'
+                    '<br>Uczestnicy powinni wybrać coś, co uważają za szczególnie ważnie: w razie czego prowadzący może im zasugerować jeden z następujacych celów:'
+                    '</p>'
+                    '<ul>'
+                    '<li><p style="text-align:justify;">Wiara chrześcijańska</p></li>'
+                    '<li><p style="text-align:justify;">Patriotyzm</p></li>'
+                    '</ul>',
                 materials: [
                   material_zal_planowanie_strategii_i_dzialan,
                 ]
@@ -712,6 +649,75 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                     '</p>'
             ),
 
+          ]
+      ),
+
+      KonspektStepGroup(
+          title: 'Formy wychowania duchowego',
+          steps: [
+            KonspektStep(
+                title: 'Formy wychowania duchowego - kratka i przykłady',
+                duration: Duration(minutes: 30),
+                activeForm: KonspektStepActiveForm.active,
+                content: '<p style="text-align:justify;">'
+                    'Uczestnicy otrzymują w grupach po jednym załączniku $attach_html_kratka_minimow_rozwoju_duchowego. Otrzymują również wydrukowane i wycięte formy z załącznika $_attach_html_formy.'
+                    '<br>'
+                    '<br>Na podstawie zdobytej dotychczas wiedzy oraz załącznika $attach_html_kratka_minimow_rozwoju_duchowego, zadaniem uczestników jest:'
+                    '</p>'
+                    '<ol>'
+                    '<li><p style="text-align:justify;">Przyporządkowanie poszczególnych form do <b>grupy</b> lub <b>grup wiekowych</b>.</p></li>'
+                    '<li><p style="text-align:justify;">Określenie, jakie <b>poziomy duchowości</b> rozwijają.</p></li>'
+                    '<li><p style="text-align:justify;">Określenie, jeśli to możliwe, jaki <b>mechanizm</b> wykorzystują.</p></li>'
+                    '</ol>'
+                    '<p style="text-align:justify;">'
+                    '<br>'
+                    '<br>Warto uczestników podzielić na grupy po 3-4 osoby, aby jak najbardziej zaangażować ich w dyskusję nad formami.'
+                    '</p>',
+                materials: [
+                  material_zal_kratka_minimow_rozwoju_duchowego,
+                  material_zal_formy,
+                ]
+            ),
+
+            KonspektStep(
+                title: 'Formy wychowania duchowego - kratka i przykłady - podsumowanie',
+                duration: Duration(minutes: 10),
+                activeForm: KonspektStepActiveForm.active,
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący zbiera na powrót wszystkie grupy w jedno miejsce i prosi, by każda z grup przedstawiła po kilka wybranych form które:'
+                    '</p>'
+
+                    '<ul>'
+                    '<li><p style="text-align:justify;">Najbardziej przypadły im do gustu.</p></li>'
+                    '<li><p style="text-align:justify;">Najbardziej ich zaskoczyły.</p></li>'
+                    '<li><p style="text-align:justify;">Wydały im się najbardziej kontrowersyjne.</p></li>'
+                    '</ul>'
+
+                    '<p style="text-align:justify;">'
+                    'Po przedstawieniu najbardziej kontrowersyjnych form prowadzący może zauważyć, że harcerstwo opiera się na <b>wychowaniu poprzez stawianie wyzwań</b> i nie należy się łudzić, że można wychować kogoś w ciągłym, bezgranicznym bezpieczeństwie i komforcie. Lepiej, aby rozwój duchowy zakładał budowanie odporności na trudy i nieprzyjemne sytuacje, niż od nich izolował - harcerstwo nie wychowuje <b>pod kloszem</b>.'
+                    '</p>'
+            ),
+
+            KonspektStep(
+                title: 'Fantomowe działania wychowawcze i skuteczność wychowawcza',
+                duration: Duration(minutes: 10),
+                activeForm: KonspektStepActiveForm.static,
+                required: false,
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący prezentuje krótki opis obozu drużyny z załącznika $_attach_html_scenariusz_fantomowe_dzialania_wychowawcze i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zadaje pytanie: "co jest nie tak z tą strategią?". Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
+                    '<br>'
+                    '<br>W oparciu o dotychczasowe pojęcia powinno paść hasło “<b>skuteczności wychowawczej</b>”.'
+                    '<br>'
+                    '<br>Prowadzący może posiłkować się pytaniami:'
+                    '<br>'
+                    '<br><b>Czy któraś z tych form nie kształtuje duchowości?</b>'
+                    '<br>'
+                    '<br><b>Jaki jest problem z tak skonstruowanym planem wychowania duchowego?</b>'
+                    '</p>',
+                materials: [
+                  material_zal_scenariusz_fantomowe_dzialania_wychowawcze,
+                ]
+            ),
           ]
       ),
 
