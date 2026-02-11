@@ -431,7 +431,7 @@ KonspektStep _step_integracja_duchowosci_wstepna_wartosci = KonspektStep(
       '<br>'
       '<br>Ów cykliczny mechanizm jest sposobem w jaki kształtuje się duchowość każdego człowieka. Duchowość nie jest <b>budowana</b>, ani <b>wznoszona</b>, ale raczej stopniowo uspójniana. Z biegiem czasu kolejne przestrzenie życia są do niej włączane i z nią integrowane. Rozwój duchowy zawsze odbywa się w procesie <b>integracji duchowości</b></i>.'
       '<br>'
-      '<br>Po opisaniu tego zjawiska, prowadzący jeszcze raz skrótowo przechodzi przez jego etapy (dobrze, aby poprosił uczestników o wymienienie kolejnych, opisanych etapów, by ich zaangażować). Tym razem jednak rysuje na dużym arkuszu flipcharta kolejno opisywane kroki tak, by na końcu opisu powstał niniejszy diagram:'
+      '<br>Po opisaniu tego zjawiska prowadzący jeszcze raz skrótowo przechodzi przez etapy integracji duchowości, tym razem rysując kolejne kroki na nowym, dużym arkuszu flipcharta. Warto przy tym prosić uczestników o wymienienie kolejnych etapów, by ich zaangażować. Na końcu powinien powstać niniejszy diagram:'
       '<br>${cyklIntegracjiDuchowosciHtml(isDark: isDark)}'
 );
 
