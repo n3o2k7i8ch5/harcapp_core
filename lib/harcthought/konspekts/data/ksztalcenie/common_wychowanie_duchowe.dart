@@ -639,7 +639,7 @@ KonspektStep _step_meta_narracja_opowiesci_o_opowiesciach = KonspektStep(
     duration: Duration(minutes: 1),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę na to, że istnieją opowieści, które nie kończą się na sobie samych, lecz funkcjonują w spójnym kontekście innych opowieści: np. mitologia grecka, mitologia egipska, starotestamentalna historia ludu wybranego. Poza prawdami płynącymi z pojedynczych historii opisują one sposób funkcjonowania złożonych rzeczywistości, gdy skomplikowane koncepty wchodzą ze sobą w interakcję.'
+        'Prowadzący zwraca uwagę na to, że istnieją opowieści, które nie kończą się na sobie samych, lecz funkcjonują w spójnym kontekście innych opowieści: np. mitologia grecka, mitologia egipska, starotestamentalna historia ludu wybranego. Poza prawdami płynącymi z pojedynczych historii opisują one, jak różne aspekty rzeczywistości na siebie oddziałują — np. jak sprawiedliwość współgra z losem, miłość z obowiązkiem, pycha z karą.'
         '</p>'
 );
 
