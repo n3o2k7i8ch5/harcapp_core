@@ -524,10 +524,10 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       ),
 
       KonspektStepGroup(
-          title: 'Praktyka wychowania duchowego',
+          title: 'Formy wychowania duchowego',
           steps: [
             KonspektStep(
-                title: 'Praktyka wychowania duchowego - kratka i formy',
+                title: 'Formy wychowania duchowego - kratka i przykłady',
                 duration: Duration(minutes: 30),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
@@ -544,7 +544,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             ),
 
             KonspektStep(
-                title: 'Praktyka wychowania duchowego - kratka i formy - podsumowanie',
+                title: 'Formy wychowania duchowego - kratka i przykłady - podsumowanie',
                 duration: Duration(minutes: 10),
                 activeForm: KonspektStepActiveForm.active,
                 content: '<p style="text-align:justify;">'
@@ -568,7 +568,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 activeForm: KonspektStepActiveForm.static,
                 required: false,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący prezentuje krótki opis obozu drużyny z załącznika $_attach_html_scenariusz_fantomowe_dzialania_wychowawcze i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zapoczątkowuje krótką dyskusję zadając pytanie: “co jest nie tak z tą strategią?”. Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
+                    'Prowadzący prezentuje krótki opis obozu drużyny z załącznika $_attach_html_scenariusz_fantomowe_dzialania_wychowawcze i podejmowanych tam działań duchowych, które są zupełnie losowe. Na tej podstawie zadaje pytanie: "co jest nie tak z tą strategią?". Po krótkiej wymianie opinii prowadzący odpowiada wprowadzając pojęcie “<b>fantomowych działań wychowawczych</b>”.'
                     '<br>'
                     '<br>W oparciu o dotychczasowe pojęcia powinno paść hasło “<b>skuteczności wychowawczej</b>”.'
                     '<br>'
@@ -610,7 +610,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 15),
                 activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący prezentuje uczestnikom przykładową strategię rozwoju duchowego drużyny, która jest opisana w załączniku $attach_html_poradnik_przykladowa_strategia_rozwoju_duchowego.'
+                    'Prowadzący prezentuje uczestnikom przykładową strategię rozwoju duchowego drużyny, opisaną w załączniku $attach_html_poradnik_przykladowa_strategia_rozwoju_duchowego.'
                     '<br>'
                     '<br>Zadaniem uczestników jest stworzenie strategii o podobnej formie dla jednostek, które wybrali w poprzednim kroku.'
                     '<br>'
@@ -699,7 +699,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 duration: Duration(minutes: 20),
                 activeForm: KonspektStepActiveForm.static,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący zanotowawszy plany i strategie rozwoju duchowego związane z niedzielą obozową prezentowane w poprzednim punkcie przez grupy podsumowuje je. Uczestnicy mają możliwość dodania proponowanych form - ważne, by prowadzący prosił o podanie mechanizmu ich działania.'
+                    'Prowadzący podsumowuje plany i strategie rozwoju duchowego związane z niedzielą obozową, prezentowane przez grupy w poprzednim punkcie. Uczestnicy mają możliwość dodania proponowanych form - ważne, by prowadzący prosił o podanie mechanizmu ich działania.'
                     '<br>'
                     '<br>Na końcu prowadzący uzupełnia zbiorczy plan niedzieli o elementy obecne w formie <i>“Msza (obozowa, lecz nie tylko)”</i> z załącznika $_attach_html_formy i krótko je omawia.'
                     '</p>'

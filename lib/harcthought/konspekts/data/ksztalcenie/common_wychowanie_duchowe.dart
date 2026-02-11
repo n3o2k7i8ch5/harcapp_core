@@ -131,7 +131,7 @@ KonspektStep step_sfery_rozwoju_i_ich_relacje = KonspektStep(
         '<br>'
         '<br>Prowadzący opisuje zależności między sferami - sfery funkcjonalne dostarczają człowiekowi <b>zdolności</b>, zaś sfera ducha jest <b>sposobem</b> ich zarządzania.'
         '<br>'
-        '<br>Jeżeli prowadzący uzna, że poprawi to poziom zrozumienia, może skorzystać z analogii opisanej sfer funkcjonalnych i centralnych do samochodu i kierowcy opisanego w załączniku $attach_html_poradnik_o_strukturze_duchowosci.'
+        '<br>Prowadzący może też skorzystać z analogii sfer do samochodu i kierowcy z załącznika $attach_html_poradnik_o_strukturze_duchowosci.'
         '<br>'
         '<br>Następnie prowadzący hasłowo wymienia uczestnikom kilka elementów poszczególnych sfer i prosi uczestników o podanie do jakiej sfery należą, np.:'
         '</p>'
@@ -448,7 +448,7 @@ KonspektStep _step_integracja_duchowosci_wstepna_aksjomatow = KonspektStep(
       '<br>'
       '<br><i>Mija kilka wiosen i w końcu w wieku ok. 13-15 lat, człowiek zaczyna orientować się w świecie według świadomie przyjmowanych <b>fundamentalnych prawd</b>. Te prawdy to nic innego jak <b>aksjomaty</b>. Młody człowiek zazwyczaj stopniowo dostrzega, że część jego dotychczasowych wartości (a wraz z nimi zachowań) jest niezgodna z przyjętymi fundamentalnymi prawdami (aksjomatami) i rusza powolna machina ich uspójniania. Tym razem owa integracja odbywa się na dużo głębszym poziomie - ewolucji ulegają nie tylko zachowania, ale cała duchowość - od aksjomatów, poprzez całą strukturę wartości, aż na zachowaniach skończywszy.</i>'
       '<br>'
-      '<br>Prowadzący zaznacza, od momentu narodzin, nabywania postaw i zachowań, aż do momentu, w którym człowiek po raz pierwszy świadomie zaczyna orientować się według jakichś fundamentalnych prawd nosi nazwę <b>wstępnej integracji duchowości</b>.'
+      '<br>Prowadzący zaznacza, że okres od narodzin do momentu, w którym człowiek po raz pierwszy świadomie orientuje się według fundamentalnych prawd, nosi nazwę <b>wstępnej integracji duchowości</b>.'
       '<br>'
       '<br>Prowadzący wraca do rysunku z etapami kształtowania duchowości i rysuje tam strzałkę "integracji wstępnej":'
       '<br>${piramidaDuchowosci2Html(isDark: isDark)}'
@@ -712,7 +712,7 @@ KonspektStep _step_zdolnosci_integracji_duchowosci = KonspektStep(
   content: '<p style="text-align:justify;">'
       'Prowadzący bierze obie kartki z załącznika $attach_html_karty_zdolnosci_integracji_duchowosci i kładzie je zakryte przed uczestnikami (rewersem do góry). Następnie zadaje pytanie:'
       '<br>'
-      '<br><i>“Ustaliliśmy już w jaki sposób modelowo przebiega proces kształtowania duchowości człowieka. Ale! Wiedzieć, to jedno, a móc, to drugie. Jakie dwie, ogólne, fundamentalnie, kluczowe zdolności musi każdy człowiek posiadać (poza wiedzą o mechanizmie kształtowania duchowości), aby móc skutecznie rozwijać swoją duchowość?”</i>'
+      '<br><i>“Ustaliliśmy już w jaki sposób modelowo przebiega proces kształtowania duchowości człowieka. Ale! Wiedzieć, to jedno, a móc, to drugie. Jakie dwie, fundamentalne zdolności musi każdy człowiek posiadać (poza wiedzą o mechanizmie kształtowania duchowości), aby móc skutecznie rozwijać swoją duchowość?”</i>'
       '<br>'
       '<br>Prowadzący wdaje się z uczestnikami w dyskusję na temat postawionego pytania. Rolą prowadzącego jest tu podchwytywać wątki i zadawać takie pytania pomocnicze, które pomogą uczestnikom dojść do odpowiedzi zapisanych na kartkach. Jeśli uczestnicy utkną, prowadzący może zadać dwa pytania pomocnicze:'
       '</p>'
@@ -836,7 +836,7 @@ KonspektStep _step_neutralnosc_duchowa_omowienie_wnioskow = KonspektStep(
     duration: Duration(minutes: 15),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Gdy wszyscy uczestnicy skończą swoje rozważania nad scenariuszami, wracają do wspólnego miejsca i prowadzący prosi uczestników, by doszli do porozumienia w sprawie odpowiedzi na pierwsze pytanie, czyli:'
+        'Gdy wszyscy uczestnicy skończą rozważania nad scenariuszami, wracają do wspólnego miejsca. Prowadzący prosi, by doszli do wspólnej odpowiedzi na pierwsze pytanie:'
         '<br>'
         '<br><b>Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?'
         '<br>'
@@ -919,7 +919,7 @@ KonspektStep _step_duchowosc_powszechna_madrosc_kultura_i_tradycja = KonspektSte
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Prowadzący opisuje także zjawisko dualizmu aktualności duchowości powszechnych - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
+        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Opisuje także zjawisko dualizmu aktualności duchowości powszechnych - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
         '<br>'
         '<br>Prowadzący może zobrazować dylemat tego <i>"jak ściśle trzymać się tradycji"</i> w sposób następujący:'
         '<br>'
@@ -960,7 +960,7 @@ KonspektStep _step_duchowosc_w_zhp_dokumenty = KonspektStep(
       'Wskazanie uczestnikom formalnych źródeł stanowiących, że harcerstwo jest dla wszystkich, ale nie wychowuje do wszystkiego - ma ściśle określone wartości, do których kształtuje'
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący przedstawia uczestnikom stosowny fragment statutu ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_statut) oraz preambułę uchwały w sprawie wspierania rozwoju duchowego w ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_uchwala). Zwraca uwagę na to, że w ZHP mamy określony zbiór wartości i postaw, do których wychowujemy, ale <b>nie mamy jako określonych aksjomatów</b> na podstawie których te wartości są wywodzone.'
+        'Prowadzący przedstawia uczestnikom stosowny fragment statutu ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_statut) oraz preambułę uchwały w sprawie wspierania rozwoju duchowego w ZHP (załącznik $attach_html_cel_wychowania_duchowego_zhp_uchwala). Zwraca uwagę, że w ZHP mamy określony zbiór wartości i postaw, do których wychowujemy, ale <b>nie mamy jako określonych aksjomatów</b> na podstawie których te wartości są wywodzone.'
         '<br>'
         '<br>Prowadzący kończy stwierdzeniem:'
         '<br>'
@@ -1207,7 +1207,7 @@ KonspektStep _step_zalozenia_wyjsciowe_wychowania_duchowego = KonspektStep(
       material_marker.copyWith(amount: 2),
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący informuje uczestników, że za chwilę będą projektować proces wychowania duchowego dla konkretnej jednostki, ale najpierw trzeba ustalić kilka kwestii wyjściowych założeń dotyczących filozofii ich pracy.'
+        'Prowadzący informuje uczestników, że za chwilę będą projektować proces wychowania duchowego dla konkretnej jednostki, ale najpierw trzeba ustalić wyjściowe założenia dotyczące filozofii pracy.'
         '<br>'
         '<br>Prowadzący przeprowadza w formie "Dwuściennej dyskusji" krótką debatę dotyczącą kolejno każdego z tematów zawartych w załączniku ${attach_html_karty_zalozen_wyjsciowych_wychowania_duchowego}.'
         '<br>'
