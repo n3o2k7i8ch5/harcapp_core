@@ -452,7 +452,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 activeForm: KonspektStepActiveForm.static,
                 required: true,
                 content: '<p style="text-align:justify;">'
-                    'Prowadzący, by podać intuicyjny przykład relacji między sferami funkcjonalnymi a sferą ducha, może posłużyć się następującą analogią:'
+                    'Prowadzący może posłużyć się następującą analogią:'
                     '<br>'
                     '<br><i>Sfery funkcjonalne można porównać do <b>funkcjonalności samochodu</b> - jego silnika, opon, zwrotności, głośników, ładowności, etc. Sfera ducha to <b>kierowca samochodu</b>: to on wybiera kierunek jazdy, prędkość, muzykę, rodzaj świateł, odczytuje prędkość i awarie z tablicy rozdzielczej. Samochód, nieważne jak dobry, bez kierowcy nigdzie nie pojedzie. Kierowca, nieważne jak doświadczony, w zepsutym samochodzie też donikąd nie dojedzie.</i>'
                     '</p>'
@@ -558,7 +558,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                     '</ul>'
 
                     '<p style="text-align:justify;">'
-                    'Prowadzący może skorzystać z okazji, po przedstawieniu najbardziej kontrowersyjnych form zauważyć, że harcerstwo opiera się na <b>wychowaniu poprzez stawianie wyzwań</b> i nie należy się łudzić, że można wychować kogoś w ciągłym, bezgranicznym bezpieczeństwie i komforcie. Lepiej, aby rozwój duchowy zakładał budowanie odporności na trudy i nieprzyjemne sytuacje, niż od nich izolował - harcerstwo nie wychowuje <b>pod kloszem</b>.'
+                    'Po przedstawieniu najbardziej kontrowersyjnych form prowadzący może zauważyć, że harcerstwo opiera się na <b>wychowaniu poprzez stawianie wyzwań</b> i nie należy się łudzić, że można wychować kogoś w ciągłym, bezgranicznym bezpieczeństwie i komforcie. Lepiej, aby rozwój duchowy zakładał budowanie odporności na trudy i nieprzyjemne sytuacje, niż od nich izolował - harcerstwo nie wychowuje <b>pod kloszem</b>.'
                     '</p>'
             ),
 
