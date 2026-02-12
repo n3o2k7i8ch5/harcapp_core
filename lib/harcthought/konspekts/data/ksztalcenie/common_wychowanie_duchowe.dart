@@ -607,7 +607,7 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
 
 KonspektStep _step_meta_narracja_czy_opowiesci_to_atawizm = KonspektStep(
     title: 'Meta-narracja - czy opowieści to atawizm?',
-    duration: Duration(minutes: 4),
+    duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący zwraca uwagę, że zazwyczaj, gdy współczesny człowiek słyszy o widzeniu świata w perspektywie opowieści, myśli o prehistorycznych ludach, które nie umiały wyjaśnić przyczyny chorób, deszczu, ani burz, więc wymyślali sobie jakieś bajeczki na ten temat, które dziś są zupełnie śmieszne.'
@@ -622,7 +622,7 @@ KonspektStep _step_meta_narracja_czy_opowiesci_to_atawizm = KonspektStep(
 
 KonspektStep _step_meta_narracja_definicja = KonspektStep(
     title: 'Meta-narracja - definicja i przykłady',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     materials: [
       material_zal_meta_narracja_opis,
