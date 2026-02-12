@@ -590,56 +590,33 @@ KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
         '</p>'
 );
 
-KonspektStep _step_meta_narracja_opowiesci_niosa_prawde = KonspektStep(
-    title: 'Meta-narracja - opowieści niosą prawdę',
+KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
+    title: 'Meta-narracja - opowieści',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący kontynuuje:'
+        'Prowadzący podsumowuje dotychczasowe wnioski:'
         '<br>'
-        '<br><i>Wyobraźcie sobie świat w którym ludzie żyli przez ostatnie sto tysięcy lat:</i>'
-        '</p>'
-        '<ol>'
-        '<li><p style="text-align:justify;"><i>Czy tygrysy były śmiertelnym zagrożeniem?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy węże były śmiertelnym zagrożeniem?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy ogień wymykający się spod kontroli był śmiertelnym zagrożeniem?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy chcąc opisać największe możliwe zło, miałoby sens użyć obrazu potwora będącego na raz tygrysem, wężem, w dodatku ze skrzydłami i plującego ogniem?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy w obliczu zła, lepiej jest uciekać, czy walczyć?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy chcąc wygrać ze złem, wystarczy czekać aż przyjdzie, czy może trzeba wyjść mu naprzeciw w nieznane?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy największe zagrożenia i zło da się przezwyciężyć starymi metodami, czy trzeba wymyślić coś zupełnie nowego? A może trzeba sięgnąć do starego i nowego jednocześnie?</i></p></li>'
-        '<li><p style="text-align:justify;"><i>A czy człowiek, który przezwycięży zło, jest dalej tym, kim był, czy staje się kimś nowym?</i></p></li>'
-        '</ol>'
-
-        '<p style="text-align:justify;">'
-        'Prowadzący mówi uczestnikom:'
+        '<br><i>Jeżeli chcemy, żeby Adam uznał wartość przebaczenia, to musimy ukształtować jego źródła wartości, czyli aksjomaty. Zanim wskoczymy do oceanu metod skutecznego kształtowania duchowości, musimy jeszcze zatrzymać się nad kwestią aksjomatów.</i>'
         '<br>'
-        '<br><i>Najlepszą strategię radzenia sobie z chaosem, złem i zagrożeniami można próbować opisać tomami precyzyjnych, wyrafinowanych prac analitycznych, tyle że prawie nikt ich nie zrozumie.'
+        '<br>Prowadzący zwraca uwagę, że kształtując czyjś fundament duchowości, nie można pozbierać losowych aksjomatów w jedną kupę i powiedzieć komuś: masz, wykuj to, od dziś tym się kierujesz.'
         '<br>'
-        '<br>Prowadzący proponuje inną metodę: odwołać się do ludzkich mechanizmów postrzegania świata i opisać to w formie opowieści w stylu: <i>była kiedyś spokojna kraina, którą zaczął nękać smok. Pożarł najlepszych, najbardziej doświadczonych wojowników, którzy chcieli go zgładzić. W końcu, mimo strachu, decyduje się z nim zmierzyć zwykły młodzieniec imieniem Jerzy, który odrzuca zbroję, ale bierze miecz starszych wojowników, wchodzi do jamy potwora i podstępem wbija mu miecz między łuski prosto w serce. W konsekwencji Jerzy zdobywa ogromny skarb, najpiękniejsza dziewczyna w królestwie zgadza się go poślubić, a on zostaje królem.</i>'
-        '<br>'
-        '<br>Prowadzący zwraca uwagę, że to oczywiste, że Jerzy z opowieści nigdy nie żył, oraz że żaden smok nigdy nie zaatakował żadnej wioski. W opowieści nie chodzi o bohaterów, tylko o pokazanie sposobu działania rzeczywistości, do której opowiedzenia ci bohaterowie są potrzebni: człowiek, który dobrowolnie mierzy się z tym, czego się boi może zwyciężyć, a jeśli to zrobi, będzie kimś innym niż był wcześniej.'
-        '<br>'
-        '<br>Archetypiczna opowieść to nie bajka z morałem, ale wyraz głębokiej prawdy o naturze człowieka.'
+        '<br>Aksjomaty muszą po pierwsze <b>być między sobą spójne</b>, zaś po drugie muszą wynikać ze sposobu, w jaki człowiek postrzega rzeczywistość - zaś ta cecha jest w gatunku homo sapiens niezmienna od setek tysięcy lat — a tą cechą są <b>archetypiczne opowieści</b>.'
         '</p>'
 );
 
-KonspektStep _step_meta_narracja_opowiesci_sa_wszedzie = KonspektStep(
-    title: 'Meta-narracja - opowieści są wszędzie',
-    duration: Duration(minutes: 1),
+KonspektStep _step_meta_narracja_czy_opowiesci_to_atawizm = KonspektStep(
+    title: 'Meta-narracja - czy opowieści to atawizm?',
+    duration: Duration(minutes: 4),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę, że ludzie zawsze postrzegali i dalej postrzegają świat w formie opowieści.'
+        'Prowadzący zwraca uwagę, że zazwyczaj, gdy współczesny człowiek słyszy o widzeniu świata w perspektywie opowieści, myśli o prehistorycznych ludach, które nie umiały wyjaśnić przyczyny chorób, deszczu, ani burz, więc wymyślali sobie jakieś bajeczki na ten temat, które dziś są zupełnie śmieszne.'
         '<br>'
-        '<br>Te same historie są dziś opowiadane innym językiem, innymi postaciami. Dziś historia o pokonaniu smoka funkcjonuje jako Władca Pierścieni, czy Gwiezdne Wojny. Zamiast opowieści o królestwach i wioskach widzimy instytucje i państwa, wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności człowieka, w opowieści o bohaterach poległych za ojczyznę, w kapłańską rolę naukowców obcujących z najczystszą formą prawdy. To nie jest atawizm — to sposób, w jaki homo sapiens postrzega rzeczywistość.'
-        '</p>'
-);
-
-KonspektStep _step_meta_narracja_opowiesci_o_opowiesciach = KonspektStep(
-    title: 'Meta-narracja - opowieści o opowieściach',
-    duration: Duration(minutes: 1),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę na to, że istnieją opowieści, które nie kończą się na sobie samych, lecz funkcjonują w spójnym kontekście innych opowieści: np. mitologia grecka, mitologia egipska, starotestamentalna historia ludu wybranego. Poza prawdami płynącymi z pojedynczych historii opisują one, jak różne aspekty rzeczywistości na siebie oddziałują — np. jak sprawiedliwość współgra z losem, miłość z obowiązkiem, pycha z karą.'
+        '<br>Opowieści kształtujące ludzkie postrzeganie są jednak czymś dużo głębszym: w greckiej mitologii nie chodzi o to, że jest jakiś chłop z błyskawicami na chmurce, ale o prawidła rządzące rzeczywistym światem, do którego opowiedzenia najwygodniej użyć fikcyjnych aktorów.'
+        '<br>'
+        '<br>To jasne, że nie było nigdy takiego człowieka, jak Odyseusz i że nie było nigdy żadnych cyklopów. Odyseja nie jest jednak o tym: chodzi o wyrażenie tego, że życie nie jest procesem, który można sobie zaplanować, albo z którym można się siłować i że próba powrotu do miejsca zwanego domem bywa procesem, który może trwać dwie dekady, zanim się w końcu uda.'
+        '<br>'
+        '<br>Nic się w tym zakresie nie zmieniło do dziś. Dlaczego ludzie płacą za to, żeby siedzieć z jakimiś losowymi ludźmi i gapić się przez dwie godziny na ekran kina, na którym lecą Avengersi, Władca Pierścieni, czy Gwiezdne Wojny? Dziś widzimy świat przez opowieść o instytucjach i państwach, wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności człowieka, w opowieści o bohaterach poległych za ojczyznę, w kapłańską rolę naukowców obcujących z najczystszą formą prawdy. To nie jest atawizm — to sposób, w jaki każdy człowiek postrzega rzeczywistość.'
         '</p>'
 );
 
@@ -654,13 +631,13 @@ KonspektStep _step_meta_narracja_definicja = KonspektStep(
     content: '<p style="text-align:justify;">'
         'Prowadzący mówi:'
         '<br>'
-        '<br><i>Wśród wszystkich zbiorów opowieści istnieje bardzo wąska, ale szczególna kategoria — opowieści tak fundamentalne, że porządkują całość rzeczywistości. Opowieść, która mówi ci kim jesteś, jak działa świat, co jest dobre i jaki jest sens. To jest <b>meta-narracja</b>.</i>'
+        '<br><i>Wśród wszystkich opowieści istnieje bardzo wąska, ale szczególna kategoria — opowieści tak fundamentalne, że porządkują całą rzeczywistość. Opowieść, która mówi człowiekowi kim jest, jak działa jego świat, co jest dobre i jaki jest sens. Opowieści te noszą nazwę <b>meta-narracji</b>.</i>'
         '<br>'
         '<br>Prowadzący kładzie przed uczestnikami (obok kartki "Aksjomat") opis meta-narracji z załącznika $attach_html_meta_narracja_opis i odczytuje go:'
         '<br>'
         '<br><i>Meta-narracja to opowieść o świecie, obok której nie można przejść obojętnie. To opowieść tak głęboka, tak wielka, tak dojmująca i fundamentalna, że niejako chwyta człowieka za samo serce i staje się dla niego głównym punktem odniesienia jego obecności w świecie.'
         '<br>'
-        '<br>Meta-narracja jest opowieścią o świecie, jego aktorach, o osobistej roli przyjmującego ją człowieka.'
+        '<br>Meta-narracja jest opowieścią o świecie, jego aktorach, o osobistej roli przyjmującego ją człowieka.</i>'
         '<br>'
         '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady i kładzie je obok karty "Meta-narracja".'
         '</p>'
@@ -699,9 +676,8 @@ KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
       _step_meta_narracja_scenka_przygotowanie,
       _step_meta_narracja_scenka,
       _step_meta_narracja_omowienie_scenki,
-      _step_meta_narracja_opowiesci_niosa_prawde,
-      _step_meta_narracja_opowiesci_sa_wszedzie,
-      _step_meta_narracja_opowiesci_o_opowiesciach,
+      _step_meta_narracja_opowiesci,
+      _step_meta_narracja_czy_opowiesci_to_atawizm,
       _step_meta_narracja_definicja,
       _step_meta_narracja_powrot_do_scenki,
       _step_meta_narracja_pytania,

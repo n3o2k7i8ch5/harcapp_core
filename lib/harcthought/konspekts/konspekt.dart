@@ -1108,7 +1108,8 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
       List<KonspektMaterial> materials = const [],
       List<KonspektAttachment> attachments = const [],
       List<KonspektStep> steps = const [],
-  }) => Konspekt(
+      List<KonspektStepGroup> stepGroups = const [],
+    }) => Konspekt(
       name: upToDateKonspekt.name + "_old",
       title: upToDateKonspekt.title + " (stare elementy)",
       category: upToDateKonspekt.category,
@@ -1124,6 +1125,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
       attachments: attachments,
       summary: 'Stare elementy konspektu "${upToDateKonspekt.title}", które z niego wyleciały.',
       steps: steps,
+      stepGroups: stepGroups,
       upToDate: false
   );
 
