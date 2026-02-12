@@ -184,9 +184,13 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       attach_kratka_minimow_rozwoju_duchowego,
 
       ...attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-      _attach_scenariusz_fantomowe_dzialania_wychowawcze,
-      _attach_formy,
+
+      attach_karty_zalozen_wyjsciowych_wychowania_duchowego,
+
       _attach_planowanie_strategii_i_dzialan,
+
+      _attach_formy,
+      _attach_scenariusz_fantomowe_dzialania_wychowawcze,
 
       attach_szybkie_strzaly_dyskusyjne
     ],
@@ -247,11 +251,13 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       ...materials_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
 
-      material_zal_scenariusz_fantomowe_dzialania_wychowawcze,
+      material_zal_karty_zalozen_wyjsciowych_wychowania_duchowego,
+
+      material_zal_planowanie_strategii_i_dzialan,
 
       material_zal_formy,
 
-      material_zal_planowanie_strategii_i_dzialan,
+      material_zal_scenariusz_fantomowe_dzialania_wychowawcze,
 
       material_zal_szybkie_strzaly_dyskusyjne,
 
