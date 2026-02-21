@@ -370,7 +370,7 @@ KonspektStepGroup step_group_definicja_sfery_ducha = KonspektStepGroup(
 // Poziomy (warstwy) duchowości
 
 KonspektStep step_poziomy_duchowosci_wstep = KonspektStep(
-    title: 'Poziomy rozwoju duchowego - zachowania',
+    title: 'Poziomy duchowości - wstęp',
     duration: Duration.zero,
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -379,69 +379,100 @@ KonspektStep step_poziomy_duchowosci_wstep = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Ustaliliśy już, że duchowość to sposób, w jaki człowiek reaguje na rzeczywistość. Fajnie byłoby jednak móc opisać różne duchowości, żeby umożliwić ich nazywanie, porównywanie, analizę itd.'
+        'Ustaliliśy już, że duchowość to sposób, w jaki człowiek reaguje na rzeczywistość. Fajnie byłoby jednak móc nieco precyzyjniej opisać różne duchowości, żeby umożliwić ich nazywanie, porównywanie, analizę itd.'
         '<br><br>'
-        'Po pierwsze, tę samą duchowość jednego człowieka można opisać w różnych płaszczyznach. Szczególnie przydatne jest zrozumienie, że każdą duchowość można opisać na trzech poziomach abstrakcji.'
+        'Na szczęście taka możliwość istnieje, nawet nie jedna: w pracy wychowawczej szczególnie przydatne są trzy sposoby spojrzenia na duchowość, każda na innym poziomie abstrakcji.'
         '</p>'
         '</blockquote>'
 );
 
 KonspektStep step_poziomy_duchowosci_zachowania = KonspektStep(
-    title: 'Poziomy rozwoju duchowego - zachowania',
+    title: 'Poziomy duchowości - zachowania',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący opisuje poziom zachowań i korzystając z załącznika $attach_html_karty_poziomow_duchowosci kładzie we wspólnej przestrzeni kartkę "poziom zachowań".'
+        'Prowadzący opisuje <b>poziom zachowań</b> i kładzie we wspólnej przestrzeni kartkę "poziom zachowań" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Najbardziej wymiernym, czy bezpośrednim sposobem opisu duchowości jest poziom zachowań. Taki opis jest banalny: gdybyśmy chcieli przykładowo opisać duchowość Alberta na poziomie zachowań, to można ją w pełni opisać tworząc gigantyczną, w zasadzie nieskończoną tabelkę, w której do każdej możliwej sytuacji, która może go spotkać, przypisane jest zachowanie, które Albert podejmie.'
+        'Najbardziej wymiernym (bezpośrednim) sposobem spojrzenia na duchowość jest poziom zachowań. Obrazowo polega to na tym, by konkretną duchowość opisać przez stworzenie gigantycznej, w zasadzie nieskończoną tabeli, w której do każdej możliwej sytuacji, przypisane jest zachowanie, które człowiek w reakcji na nią podejmie.'
         '<br>'
-        '<br>Przykłady:'
+        '<br>Przykładowo, dla Alberta można byłoby powiedzieć, że:'
         '</p>'
         '<ul>'
         '<li>Auto się zepsuło w drodze do pracy — otwiera maskę i naprawia.</li>'
-        '<li>Ktoś mu powie „dzień dobry" — odpowie „dzień dobry".</li>'
-        '<li>Zobaczy śmieć na chodniku — podniesie go i wyrzuci do kosza.</li>'
-        '<li>Zobaczy śmieć na chodniku, ale spieszy się do teatru — minie go i pobiegnie dalej.</li>'
+        '<li>Usłyszy „dzień dobry" — zawsze odpowie „dzień dobry".</li>'
+        '<li>Zobaczy śmieć na chodniku podczas spaceru — podniesie go i wyrzuci do kosza.</li>'
+        '<li>Zobaczy śmieć na chodniku, gdy spieszy się do teatru — minie go i pobiegnie dalej.</li>'
+        '<li>Zobaczy śmieć na chodniku, gdy spieszy się do teatru i idzie z narzeczoną — podniesie go i wyrzuci do kosza.</li>'
         '<li>Szef go skrytykuje — zacznie się z nim wykłócać.</li>'
         '<li>...i tak dalej, i tak dalej.</li>'
         '</ul>'
         '<p style="text-align:justify;">'
-        'Prawdopodobnie taka tabelka dla każdego wariantu, sytuacji, czy warunków otoczenia określałaby trochę inne zachowania - co nie zmienia faktu, że można stworzyć dla każdego człowieka taką listę okoliczości i odpowiadających im <b>zachowań</b>.'
+        'Oczwyiście taka tabelka musi zawsze brać pod uwagę wszystkie okoliczności, warunki otoczenia, stan samego Alberta itd. - co nie zmienia faktu, że dla każdego człowieka można stworzyć taką tabelkę <b>zachowań</b>.'
         '</p>'
         '</blockquote>'
 );
 
 KonspektStep step_poziomy_duchowosci_wartosci = KonspektStep(
-    title: 'Poziomy rozwoju duchowego - wartości',
+    title: 'Poziomy duchowości - wartości',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący płynnie przechodzi do opisu poziomu wartości i korzystając z załącznika $attach_html_karty_poziomow_duchowosci kładzie we wspólnej przestrzeni kartkę "poziom wartości".'
+        'Prowadzący płynnie przechodzi do opisu <b>poziomu wartości</b> i kładzie we wspólnej przestrzeni kartkę "poziom wartości" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Problem w tym, że lista możliwych do wystąpienia okoliczości jest nieskończona — bardzo ciężko o niej szczegółowo myśleć w szerokim zakresie.'
+        'Tabelka z zachowaniami ma niestety swoje problemy: mianowicie lista możliwych do wystąpienia okoliczości jest nieskończona, podobnie jak nieskończona jest liczba stanów, w jakich może podczas każdej z tych okoliczności znajdować się człowiek — bardzo ciężko jest w praktyce myśleć o czyjejś duchowości tylko przez pryzmat jego zachowań.'
         '<br>'
-        '<br>Na szczęście tak się składa, że zazwyczaj ludzie nie podejmują zupełnie losowych, arbitralnych, niezwiązanych między sobą zachowań. Zazwyczaj ludzie do czegoś dążą - najczęściej do jakiegoś stanu, który uważają za dobry.'
+        '<br>Na szczęście tak się składa, że (zazwyczaj) ludzie nie podejmują losowych, niezwiązanych między sobą zachowań. Zazwyczaj każdy do czegoś dąży - najczęściej do jakiegoś określonego stanu, który uważa za dobry (świadomie, lub nie).'
         '<br>'
-        '<br>Duchowość człowieka można zatem opisać wskazując na to, co ów człowiek uważa za dobre, co jest tym, do czego w życiu dąży. Innymi słowy, duchowość każdego człowieka można opisać przez jego <b>hierarchię wartości</b>.'
+        '<br>Duchowość człowieka można zatem opisać nieco ogólniej i zamiast rozważać same zachowania człowieka, można pochylić się nad tym, do czego one dążą, albo co człowiek uważa za dobre. Mówiąc inaczej, duchowość każdego człowieka można opisać przez jego <b>hierarchię wartości</b>.'
         '<br>'
-        '<br>Wartości są abstrakcyjnymi bytami, czy stanami: np. zdrowie, władza, bogactwo, posiadanie, rodzina, pokora, patriotyzm, etc.. Żadnej z tych rzeczy nie da się wskazać palcem. Wartości są jakimiś bytami, czy stanami (zazwyczaj abstrakcyjnymi), do których człowiek dąży.'
+        '<br>Wartości są abstrakcyjnymi bytami, czy stanami: np. zdrowie, władza, bogactwo, posiadanie, rodzina, pokora, patriotyzm, ale też przyjemność, brak głodu, spokój, etc.. Żadnej z tych rzeczy nie da się wskazać palcem. Wartości są abstrakcyjnymi bytami, czy stanami które człowiek uważa za dobre i do których człowiek dąży.'
         '<br>'
-        '<br>O Albercie można przykładowo stwierdzić (wiem to, bo to ja wymyśliłem jego postać), że pewną wartością są dla niego pieniądze. Wynika z tego szereg zachowań: chodzi do pracy, uczy się, dba o firmowe narzędzia, itd. Ale o Albercie można również powiedzieć, że większą wartością od pieniędzy jest dla niego lojalność: dlatego dba o reputację firmy, czy próbuje w środku zimy naprawić zepsute auto, którym jechał do klienta - a przecież mógł wzruszyć ramionami, zadzwonić po lawetę, czekać w ciepłym aucie i napisać szefowi, że nie da rady dojechać - przecież to nie była jego wina.'
+        '<br>O Albercie można przykładowo stwierdzić, że pewną wartością są dla niego pieniądze: przecież chodzi do pracy, ma konto bankowe, itd.. Ale o Albercie można również powiedzieć, że większą wartością od pieniędzy jest dla niego rodzina: ma narzeczoną, rodzeństwo, chce mieć dużo dzieci, etc. Dla Alberta kolejną wartością jest lojalność: dlatego dba o reputację firmy, do tego stopnia, że próbuje w środku zimy naprawić zepsute auto, którym musi dojechać do klienta - a przecież w ciepłym aucie zadzwonić po lawetę i napisać szefowi, że nie da rady dojechać - przecież to nie jego wina.'
         '</p>'
         '</blockquote>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący może dodać, że wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Ludzie mogą kierować się wartością bycia wyspanym, czy doświadczania przyjemności i jeść z tego powodu cukierki, albo grać w gry. To także jest wpisane w hierarchię wartości dużej części ludzi.'
+        'Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje pytanie-zagadkę:'
         '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'No dobrze, ale skoro wartości są tym, co człowiek uważa za dobre i tym, za do czego człowiek dąży, to jak to jest, że uczniowie bardzo chcą dobrze napisać maturę, a studenci bardzo chcą zdać sesję, ale jakoś tak się składa, że zamiast się uczyć robią zupełne głupoty pokroju scrollowania instagrama? Wartości jedno, a zachowania drugie? O co chodzi?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący powinien dać uczestnikom chwilę na to, by spróbowali rozwiązać tę zagwozdkę. Dobrze, jeśli wywiąże się z tego jakaś dyskusja, która doprowadzi do następującego wniosku:'
+        ''
+        'Prowadzący może dodać, że '
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Po pierwsze: wartości są tym, do czego człowiek dąży i co uważa za dobre - a nie tym, co mówi, że uważa za dobre.'
+        'Po drugie: wartości nie są wcale stałe w czasie. Człowiek może zupełnie coś innego uważać za dobre w chwili, gdy wisi nad nim bezpośrednia wizja oblania egzaminu, a zupełnie coś innego, gdy wraca wieczorem do domu i ma czas do zagospodarowania.'
+        'Po trzecie: wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Ludzie kierują się chęcią bycia wyspanym, czy doznania przyjemności i najedzenia, a to, czy o tym wiedzą, lub czy chcą się do tego przyznać to już inna sprawa.'
+        '<br>'
+        '<br>Czy to oznacza, że nie ma znaczenia, co człowiek mówi, że jest dla niego ważne, bo liczą się tylko fakty? Nie do końca. Człowiek może pracować nad swoimi wartościami i wówczas jego świadoma wola jest kluczowa w kierunku rozwoju jego hierarchii wartości.'
+        '</p>'
+        '</blockquote>'
+
 );
 
-
+KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
+    title: 'Poziomy (warstwy) duchowości',
+    steps: [
+      step_poziomy_duchowosci_wstep,
+      step_poziomy_duchowosci_zachowania,
+      step_poziomy_duchowosci_wartosci,
+    ]
+);
 
 
 // Poziomy (warstwy) duchowości - old
@@ -569,7 +600,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = Konspekt
         '</p>'
 );
 
-KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
+KonspektStepGroup step_group_poziomy_duchowosci_old = KonspektStepGroup(
     title: 'Poziomy (warstwy) duchowości',
     steps: [
       _step_poziomy_duchowosci,

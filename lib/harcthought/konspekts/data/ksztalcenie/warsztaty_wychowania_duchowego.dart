@@ -343,6 +343,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       step_group_poziomy_duchowosci,
 
+      step_group_poziomy_duchowosci_old,
+
       step_group_integracja_duchowosci,
 
       step_group_metanarracja,
