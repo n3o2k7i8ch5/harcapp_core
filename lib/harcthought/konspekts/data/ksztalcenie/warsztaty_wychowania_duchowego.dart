@@ -339,15 +339,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           ]
       ),
 
-      KonspektStepGroup(
-          title: 'Definicja sfery ducha',
-          steps: [
-            step_sfery_rozwoju,
-            step_sfery_rozwoju_przyklady,
-            step_sfery_rozwoju_sfera_ducha_jest_inna,
-            step_sfery_rozwoju_sfery_funkcjonalne,
-            step_sfery_rozwoju_sfera_ducha,
-          ]),
+      step_group_definicja_sfery_ducha,
 
       KonspektStepGroup(
           title: 'Sfery człowieka (sfery rozwoju)',

@@ -192,16 +192,27 @@ KonspektStep step_sfery_rozwoju_sfera_ducha_jest_inna = KonspektStep(
 
 KonspektStep step_sfery_rozwoju_sfery_funkcjonalne = KonspektStep(
     title: 'Sfery rozwoju - sfery funkcjonalne',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 1),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę, że każdą z dotychczas przywołanych sfer (ciała, umysłu, emocji i relacji) łączy to, że są bez wyjątku źródłem <b>zdolności</b>, np. szybkiego biegu, czy rozwiązywania skomplikowanych problemów. Te zdolności są jak <b>narzędzia</b>, które wiszą gotowe na półce. O wszystkich tych sferach można zbiorczo mówić jako o <b>sferach funkcjonalnych</b> - są bowiem źródłem funkcjonalności.'
+        'Prowadzący zwraca uwagę, przywołane dotąd 4 sfery (ciała, umysłu, emocji i relacji) łączy jedno: wszystkie są źródłem <b>zdolności</b> (np. szybkiego biegu, czy rozwiązywania skomplikowanych problemów). Te zdolności są jak <b>narzędzia</b>, które leżą na półce, gotowe do użycia. O tych sferach można zbiorczo mówić jako o <b>sferach funkcjonalnych</b> - są bowiem źródłem funkcjonalności.'
         '<br>'
-        '<br>Następnie prowadzący obrazowo zbiera rozłożone wcześniej karty sfery ciała, umysłu, relacji i emocji w stosik i przykrywa go kartą "sfery funkcjonalne", również z załącznika $attach_html_sfery.'
-        '<br>'
-        '<br>Prowadzący dodaje, że traktowanie sfer funkcjonalnych łącznie jako źródło zdolności, kompetencji i możliwości ma dużą zaletę: to, że ktoś sobie podzielił sfery funkcjonalne na 4 jest arbitralną decyzją. Równie dobrze można by zmieścić wszystko w dwóch: sferze ciała i umysłu, który przecież odpowiada zarówno za sferę emocji człowieka jak i za kompetencje społeczne. Można również pójść w drugą stronę i wydzielić więcej sfer: np. dodać sferę zasobów materialnych.'
-        '<br>'
-        '<br>Aby podeprzeć się przykładem, że nawet w obecnym podziale niektóre zdolności nie pasują do tylko jednej sfery, prowadzący może skorzystać z <b>dwóch szarych kartek</b> z załącznika $attach_html_sfery_przyklady i poprosić uczestników o wskazanie, do której sfery funkcjonalnej przynależą zapisane na nich zdolności.'
+        '<br>Następnie prowadzący zbiera rozłożone wcześniej karty 4 sfer funkcjonalnych (ciała, umysłu, relacji i emocji) i symbolicznie składa je w stosik, który przykrywa kartą "sfery funkcjonalne" z załącznika $attach_html_sfery.'
+);
+
+KonspektStep step_sfery_rozwoju_sfery_funkcjonalne_arbitalnosc_podzialu = KonspektStep(
+    title: 'Sfery rozwoju - sfery funkcjonalne - arbitralność podziału',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący zwraca uwagę, że traktowanie sfer funkcjonalnych łącznie, bez wchodzenia w to, czy chodzi o ciało, umysł, emocje, czy relacje rozwiązuje dwa problemy:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;"><b>Arbitralność podziału</b> — to, że ktoś podzielił sfery funkcjonalne na 4 jest arbitralną decyzją. Równie dobrze można by zmieścić wszystko w dwóch: sferze ciała i umysłu, który przecież odpowiada zarówno za sferę emocji człowieka jak i za kompetencje społeczne. Można również pójść w drugą stronę i wydzielić więcej sfer: np. dodać sferę zasobów materialnych.</p></li>'
+        '<li><p style="text-align:justify;"><b>Nieostrość podziału</b> — w obecnym podziale (i w każdym podziale) istnieją zdolności, które nie pasują do tylko jednej sfery.</p></li>'
+        '</ul>'
+        '<p style="text-align:justify;">'
+        'Prowadzący może skorzystać z <b>dwóch szarych kartek</b> z załącznika $attach_html_sfery_przyklady i poprosić uczestników o wskazanie, do której sfery funkcjonalnej przynależą zapisane na nich zdolności:'
         '</p>'
         '<table border="1" cellpadding="6" cellspacing="0">'
         '<tr><td style="text-align:justify;"><i>Potrafi w kilka dni zdyskredytować czyjąś reputację</i></td><td><b>Relacje</b> i <b>Umysł</b></td></tr>'
@@ -241,9 +252,16 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
         '</p>'
 );
 
-
-
-
+KonspektStepGroup step_group_definicja_sfery_ducha = KonspektStepGroup(
+    title: 'Definicja sfery ducha',
+    steps: [
+      step_sfery_rozwoju,
+      step_sfery_rozwoju_przyklady,
+      step_sfery_rozwoju_sfera_ducha_jest_inna,
+      step_sfery_rozwoju_sfery_funkcjonalne,
+      step_sfery_rozwoju_sfery_funkcjonalne_arbitalnosc_podzialu,
+      step_sfery_rozwoju_sfera_ducha,
+    ]);
 
 
 
