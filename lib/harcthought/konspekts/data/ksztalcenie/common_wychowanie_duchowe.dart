@@ -277,6 +277,66 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
         '</blockquote>'
 );
 
+KonspektStep step_sfery_rozwoju_sfera_ducha_dopowiedzenie = KonspektStep(
+    title: 'Sfery rozwoju - sfera ducha - dopowiedzenie i przykład',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący proponuje pewną intuicję dotyczącą sfery ducha:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'O sferze ducha można myśleć w następujący sposób:'
+        '<br>'
+        '<br>Jest sobie człowiek, weźmy już wspomnianego Alberta. Albert ma jakieś zdolności. Życie Alberta jest taśmą kolejnych zdarzeń, np.:'
+        '</p>'
+        '<ul>'
+        '<li>Ktoś mu powie "dzień dobry",</li>'
+        '<li>spotka w autobusie swoją byłą dziewczynę,</li>'
+        '<li>szef da mu podwyżkę,</li>'
+        '<li>poczuje głód,</li>'
+        '<li>pojawi mu się w głowie myśl, że ktoś został niesprawiedliwie potraktowany,</li>'
+        '<li>zauważy, że za chwilę wybije godzina dwudziesta,</li>'
+        '<li>...</li>'
+        '</ul>'
+        '<p style="text-align:justify;">'
+        'Sfera ducha jest sposobem, czy schematem w jaki Albert zareaguje na każdą z sytuacji, która go w życiu spotka.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący podaje jeden przykład:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Wyobraźcie sobie, że Albert dowiaduje się, że jego młodszej siostrze po lekcjach dokuczają koledzy z klasy. Albert umie różne rzeczy: ma określone zdolności, ale może je wykorzystać w różny sposób. Oczywiście sposobów reakcji na taką sytuację jest nieskończenie wiele, ale na chwilę uprośćmy je do trzech:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">Albert nie robi nic — sprawa była już zgłoszona do dyrekcji. W szkole co chwilę ktoś komuś dokucza, problem prawdopodobnie szybko zniknie.</p></li>'
+        '<li><p style="text-align:justify;">Albert kilka razy po lekcjach czeka przed szkołą na kolegów dokuczających jego siostrze. W ciągu jednego tygodnia całkowicie ich ośmiesza i dyskredytuje w oczach reszty klasy — problem znika.</p></li>'
+        '<li><p style="text-align:justify;">Albert zakłada bluzę z kapturem, jednorazowo wybiera się do szkoły w odpowiedniej porze i gdy dostrzega dokuczających jego siostrze chłopaków, sprzedaje największemu gonga w twarz i odchodzi — do niewątpliwie ustawi ich do pionu.</p></li>'
+        '</ul>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Wszystkie te trzy opcje są na stole: to, jak Albert je oceni i którą z opcji wykona zależy od kształtu jego sfery ducha.'
+        '</p>'
+
+);
+
+KonspektStep step_sfery_rozwoju_pytania = KonspektStep(
+    title: 'Sfery rozwoju - sfera ducha - dopowiedzenie i przykład',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący daje uczestnikom czas na ewentualne pytania.'
+        '</p>'
+
+);
+
+
 KonspektStepGroup step_group_definicja_sfery_ducha = KonspektStepGroup(
     title: 'Definicja sfery ducha',
     steps: [
@@ -286,86 +346,10 @@ KonspektStepGroup step_group_definicja_sfery_ducha = KonspektStepGroup(
       step_sfery_rozwoju_sfery_funkcjonalne,
       step_sfery_rozwoju_sfery_funkcjonalne_arbitralnosc_podzialu,
       step_sfery_rozwoju_sfera_ducha,
+      step_sfery_rozwoju_sfera_ducha_dopowiedzenie,
+      step_sfery_rozwoju_pytania,
     ]);
 
-
-
-KonspektStep step_sfery_rozwoju_i_ich_relacje = KonspektStep(
-    title: 'Sfery rozwoju i ich relacje',
-    duration: Duration(minutes: 15),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci wprowadza podział człowieka na 5 sfer rozwoju - 4 sfery funkcjonalne: <b>ciało</b>, <b>umysł</b>, <b>emocje</b>, <b>relacje</b> i jedną sferę centralną: sferę <b>ducha</b>.'
-        '<br>'
-        '<br>Prowadzący opisuje zależności między sferami - sfery funkcjonalne dostarczają człowiekowi <b>zdolności</b>, zaś sfera ducha jest <b>sposobem</b> ich zarządzania.'
-        '<br>'
-        '<br>Prowadzący może też skorzystać z analogii sfer do samochodu i kierowcy z załącznika $attach_html_poradnik_o_strukturze_duchowosci.'
-        '<br>'
-        '<br>Następnie prowadzący hasłowo wymienia uczestnikom kilka elementów poszczególnych sfer i prosi uczestników o podanie do jakiej sfery należą, np.:'
-        '</p>'
-
-        '<ul>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Umiejętność gry na trąbce'
-        '<br><i>Sfera umysłu (koordynacja) i ciała (płuca)</i>'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Zdolność marszu przez tydzień przy -20°C'
-        '<br><i>Sfera ciała</i>'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Kontrolowanie swoich reakcji będąc wściekłym'
-        '<br><i>Sfera emocji</i>'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Umiejętność zdyskredytowania kogoś w oczach wspólnoty'
-        '<br><i>Sfera relacji</i>'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Postępowanie zgodnie ze swoimi przekonaniami w środowisku stresogennym'
-        '<br><i>Sfera ducha (chęć postępowania) i emocji (panowanie nad stresem)</i>'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Posiadanie spójnego światopoglądu'
-        '<br><i>Sfera ducha</i>'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Zdolność zbudowania ładnej bramy obozowej'
-        '<br><i>Sfera umysłu</i>'
-        '</p>'
-        '</li>'
-
-        '</ul>'
-        '<p style="text-align:justify;">'
-        'Prowadzący może zwrócić uwagę na fakt, że jest różnica między <b>emocjami</b> a <b>doświadczeniem duchowym</b>. Czasami przestrzenie te są mylone, ponieważ doświadczenie duchowe często rodzi silne emocje, ale jest doświadczeniem najgłębszego sensu bycia, jedności z Bogiem, etc.'
-        '<br>'
-        '<br>Ważne, by prowadzący na końcu wprowadzenia zaznaczył:'
-        '<br>'
-        '<br><b><i>“Duchowość nie jest umiejętnością, dlatego nie należy sądzić że można ją rozwinąć tymi samymi metodami co intelekt, ciało, czy emocje.”</i></b>'
-        '<br>'
-        '<br>Przechodząc do kolejnego punktu prowadzący oświadcza, że <b>przedmiotem tych zajęć będzie jedynie sfera ducha</b>. Inne sfery nie będą tutaj głębiej rozpatrywane.'
-        '</p>'
-);
 
 // Poziomy (warstwy) duchowości
 

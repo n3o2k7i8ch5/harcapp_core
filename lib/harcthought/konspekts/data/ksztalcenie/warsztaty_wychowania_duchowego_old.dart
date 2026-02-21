@@ -101,6 +101,140 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
   stepGroups: [
 
     KonspektStepGroup(
+        title: 'Sfery człowieka (sfery rozwoju)',
+        steps: [
+
+          KonspektStep(
+              title: 'Podział człowieka na sfery',
+              duration: Duration(minutes: 2),
+              activeForm: KonspektStepActiveForm.static,
+              content: '<p style="text-align:justify;">'
+                  'Prowadzący zapoznaje uczestników z powszechnym w harcerstwie podziałem człowieka na pięć sfer: '
+                  '</p>'
+                  '<ul>'
+                  '<li><p style="text-align:justify;">Sfera ciała (fizyczna)</p></li>'
+                  '<li><p style="text-align:justify;">Sfera umysłu (intelektualna)</p></li>'
+                  '<li><p style="text-align:justify;">Sfera emocjonalna</p></li>'
+                  '<li><p style="text-align:justify;">Sfera relacji (społeczna)</p></li>'
+                  '<li><p style="text-align:justify;">Sfera ducha</p></li>'
+                  '</ul>'
+                  '<p style="text-align:justify;">'
+                  'Ów podział jest dokładnie opisany w poradniku $attach_html_poradnik_o_strukturze_duchowosci.'
+                  '<br>'
+                  '<br>Jeżeli uczestnicy prawdopodobnie znają ów podział, prowadzący może skrócić ten punkt i dla porządku poprosić uczestników o wymienienie wszystkich sfer.'
+                  '</p>'
+
+          ),
+
+          KonspektStep(
+              title: 'Sfera ciała (fizyczna)',
+              duration: Duration(minutes: 1),
+              activeForm: KonspektStepActiveForm.static,
+              content: '<p style="text-align:justify;">'
+                  'Prowadzący pokrótce wyjaśnia uczestnikom, czym jest sfera ciała:'
+                  '<br>'
+                  '<br><i>Sfera ciała jest wszystkim tym, co stwarza <b>zdolności</b> fizycznej interakcji z rzeczywistością, np.:</i>'
+                  '</p>'
+                  '<ul>'
+                  '<li><p style="text-align:justify;"><i>Zdolność biegania</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Zdolność skakania</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Zdrowie</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Zdolność wyraźnego mówienia</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Zdolność widzenia, słyszenia, wąchania</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Zdolność wytrzymania w niskiej temperaturze</i></p></li>'
+                  '</ul>'
+          ),
+
+          KonspektStep(
+              title: 'Sfera umysłu (intelektualna)',
+              duration: Duration(minutes: 1),
+              activeForm: KonspektStepActiveForm.static,
+              content: '<p style="text-align:justify;">'
+                  'Prowadzący pokrótce wyjaśnia uczestnikom, czym jest sfera umysłu:'
+                  '<br>'
+                  '<br><i>Sfera umysłu jest wszystkim tym, co stwarza <b>zdolności</b> analizy, rozumienia, syntezy, wiedzy np.:</i>'
+                  '</p>'
+                  '<ul>'
+                  '<li><p style="text-align:justify;"><i>Zdolność analitycznego myślenia</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Zdolność klarownego wysławiania się</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Umiejętność czytania</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Umiejętność szukania i zdobywania wiedzy</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Znajomość faktów</i></p></li>'
+                  '</ul>'
+          ),
+
+          KonspektStep(
+              title: 'Sfera relacji (społeczna)',
+              duration: Duration(minutes: 1),
+              activeForm: KonspektStepActiveForm.static,
+              content: '<p style="text-align:justify;">'
+                  'Prowadzący pokrótce wyjaśnia uczestnikom, czym jest sfera relacji:'
+                  '<br>'
+                  '<br><i>Sfera relacji jest wszystkim tym, co stwarza <b>zdolności</b> do skutecznego życia w społeczności (we wspólnocie wiedzy, we wspólnocie ekonomicznej, w rodzinie) np.:</i>'
+                  '</p>'
+                  '<ul>'
+                  '<li><p style="text-align:justify;"><i>Zdolność negocjowania swojej roli społecznej</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Zdolność budowania więzi zależności i wsparcia</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Zdolność kompromitacji pozycji drugiej osoby w oczach społeczności</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Posiadanie rodziny</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Posiadanie znajomych</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Bycie w związku</i></p></li>'
+                  '</ul>'
+          ),
+
+          KonspektStep(
+              title: 'Sfera emocji',
+              duration: Duration(minutes: 1),
+              activeForm: KonspektStepActiveForm.static,
+              content: '<p style="text-align:justify;">'
+                  'Prowadzący pokrótce wyjaśnia uczestnikom, czym jest sfera emocji:'
+                  '<br>'
+                  '<br><i>Sfera emocji jest wszystkim tym, co stwarza <b>zdolności</b> do rozumienia i panowania nad własnym systemem emocjonalnym np.:</i>'
+                  '</p>'
+                  '<ul>'
+                  '<li><p style="text-align:justify;"><i>Zdolność określenia własnego stanu emocjonalnego</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Zdolność określenia przyczyn własnego stanu emocjonalnego</i></p></li>'
+                  '<li><p style="text-align:justify;"><i>Umiejętność panowania nad swoimi emocjami (np. hamowania złości, działania mimo stresu)</i></p></li>'
+                  '</ul>'
+          ),
+
+          KonspektStep(
+              title: 'Sfery funkcjonalne',
+              duration: Duration(minutes: 2),
+              activeForm: KonspektStepActiveForm.static,
+              content: '<p style="text-align:justify;">'
+                  'Prowadzący zwraca uwagę, że wszystkie wymienione dotąd 4 sfery (ciała, umysłu, relacji i emocji) są źródłami umiejętności, czy zdolności. Sprawiają, że człowiek "może więcej", jednak żadna z tych sfer, nawet rozwinięta do perfekcji, <b>nie określa kiedy, czy, ani jak należy jakąś zdolność wykorzystać</b>.'
+                  '<br>'
+                  '<br>Z tego powodu sfery <b>ciała</b>, <b>umysłu</b>, <b>relacji</b> i <b>emocji</b> są <b>sferami funkcjonalnymi</b> - są jak zestaw dostępnych narzędzi leżących w garażu.'
+                  '</p>'
+          ),
+
+          KonspektStep(
+              title: 'Sfera ducha',
+              duration: Duration(minutes: 1),
+              activeForm: KonspektStepActiveForm.static,
+              content: '<p style="text-align:justify;">'
+                  'Prowadzący definiuje sferę ducha:'
+                  '<br>'
+                  '<br><i>Sfera ducha jest wszystkim tym, co kształtuje sposób postępowania: określa kiedy i jak się zachować, jak korzystać z dostępnych zdolności, które dają sfery funkcjonalne. Co ważne, <b>sfera ducha sama w sobie nie stwarza żadnych zdolności</b> - rozwinięty duch nie pozwala ani dalej skakać, ani lepiej widzieć, ani więcej rozumieć.</i>'
+                  '</p>'
+          ),
+
+          KonspektStep(
+              title: 'Analogia samochodu',
+              duration: Duration(minutes: 1),
+              activeForm: KonspektStepActiveForm.static,
+              required: true,
+              content: '<p style="text-align:justify;">'
+                  'Prowadzący może posłużyć się następującą analogią:'
+                  '<br>'
+                  '<br><i>Sfery funkcjonalne można porównać do <b>funkcjonalności samochodu</b> - jego silnika, opon, zwrotności, głośników, ładowności, etc. Sfera ducha to <b>kierowca samochodu</b>: to on wybiera kierunek jazdy, prędkość, muzykę, rodzaj świateł, odczytuje prędkość i awarie z tablicy rozdzielczej. Samochód, nieważne jak dobry, bez kierowcy nigdzie nie pojedzie. Kierowca, nieważne jak doświadczony, w zepsutym samochodzie też donikąd nie dojedzie.</i>'
+                  '</p>'
+          ),
+
+        ]),
+
+    KonspektStepGroup(
       title: 'Poziomy duchowości',
       steps: [
         KonspektStep(

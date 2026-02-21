@@ -29,6 +29,9 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
     attachments: [
       attach_poradnik_o_strukturze_duchowosci,
 
+      attach_sfery,
+      attach_sfery_przyklady,
+
       attach_karty_poziomow_duchowosci,
       attach_karty_zdolnosci_integracji_duchowosci,
 
@@ -67,6 +70,9 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       ),
 
       material_tasma_klejaca,
+
+      material_zal_sfery,
+      material_zal_sfery_przyklady,
 
       material_zal_karty_poziomow_duchowosci,
       material_zal_karty_zdolnosci_integracji_duchowosci,
@@ -153,7 +159,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
               '</p>'
       ),
 
-      step_sfery_rozwoju_i_ich_relacje,
+      ...step_group_definicja_sfery_ducha.steps,
 
       ...step_group_poziomy_duchowosci.steps,
 
