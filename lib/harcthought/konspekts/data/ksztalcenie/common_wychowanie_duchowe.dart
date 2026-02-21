@@ -391,7 +391,7 @@ KonspektStep step_poziomy_duchowosci_zachowania = KonspektStep(
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący opisuje <b>poziom zachowań</b> i kładzie we wspólnej przestrzeni kartkę "poziom zachowań" z załącznika $attach_html_karty_poziomow_duchowosci.'
+        'Prowadzący opisuje <b>poziom zachowań</b> i w odpowiednim momencie kładzie we wspólnej przestrzeni kartkę "poziom zachowań" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
 
         '<blockquote>'
@@ -420,7 +420,7 @@ KonspektStep step_poziomy_duchowosci_wartosci = KonspektStep(
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący płynnie przechodzi do opisu <b>poziomu wartości</b> i kładzie we wspólnej przestrzeni kartkę "poziom wartości" z załącznika $attach_html_karty_poziomow_duchowosci.'
+        'Prowadzący płynnie przechodzi do opisu <b>poziomu wartości</b> i w odpowiednim momencie kładzie we wspólnej przestrzeni kartkę "poziom wartości" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
 
         '<blockquote>'
@@ -432,8 +432,16 @@ KonspektStep step_poziomy_duchowosci_wartosci = KonspektStep(
         '<br>Duchowość człowieka można zatem opisać nieco ogólniej i zamiast rozważać same zachowania człowieka, można pochylić się nad tym, do czego one dążą, albo co człowiek uważa za dobre. Mówiąc inaczej, duchowość każdego człowieka można opisać przez jego <b>hierarchię wartości</b>.'
         '<br>'
         '<br>Wartości są abstrakcyjnymi bytami, czy stanami: np. zdrowie, władza, bogactwo, posiadanie, rodzina, pokora, patriotyzm, ale też przyjemność, brak głodu, spokój, etc.. Żadnej z tych rzeczy nie da się wskazać palcem. Wartości są abstrakcyjnymi bytami, czy stanami które człowiek uważa za dobre i do których człowiek dąży.'
-        '<br>'
-        '<br>O Albercie można przykładowo stwierdzić, że pewną wartością są dla niego pieniądze: przecież chodzi do pracy, ma konto bankowe, itd.. Ale o Albercie można również powiedzieć, że większą wartością od pieniędzy jest dla niego rodzina: ma narzeczoną, rodzeństwo, chce mieć dużo dzieci, etc. Dla Alberta kolejną wartością jest lojalność: dlatego dba o reputację firmy, do tego stopnia, że próbuje w środku zimy naprawić zepsute auto, którym musi dojechać do klienta - a przecież w ciepłym aucie zadzwonić po lawetę i napisać szefowi, że nie da rady dojechać - przecież to nie jego wina.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący ilustruje pojęcie wartości na przykładzie Alberta:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'O Albercie można przykładowo stwierdzić, że wartością są dla niego pieniądze: przecież chodzi do pracy, ma konto bankowe, itd.. Ale o Albercie można również powiedzieć, że większą wartością od pieniędzy jest dla niego rodzina: ma narzeczoną, rodzeństwo, chce mieć dużo dzieci, etc. Dla Alberta kolejną wartością jest lojalność: dlatego dba o reputację firmy, do tego stopnia, że próbuje w środku zimy naprawić zepsute auto, którym musi dojechać do klienta - a przecież w ciepłym aucie zadzwonić po lawetę i napisać szefowi, że nie da rady dojechać - przecież to nie jego wina.'
         '</p>'
         '</blockquote>'
 
@@ -449,20 +457,117 @@ KonspektStep step_poziomy_duchowosci_wartosci = KonspektStep(
 
         '<p style="text-align:justify;">'
         'Prowadzący powinien dać uczestnikom chwilę na to, by spróbowali rozwiązać tę zagwozdkę. Dobrze, jeśli wywiąże się z tego jakaś dyskusja, która doprowadzi do następującego wniosku:'
-        ''
-        'Prowadzący może dodać, że '
+        '</p>'
+
+        '<blockquote>'
+        '<ul>'
+        '<li><p style="text-align:justify;">Wartości są tym, do czego człowiek dąży i co uważa za dobre — a nie tym, co mówi, że uważa za dobre.</p></li>'
+        '<li><p style="text-align:justify;">Wartości nie są wcale stałe w czasie. Człowiek może zupełnie coś innego uważać za dobre w chwili, gdy wisi nad nim bezpośrednia wizja oblania egzaminu, a zupełnie coś innego, gdy wraca wieczorem do domu i ma czas do zagospodarowania.</p></li>'
+        '<li><p style="text-align:justify;">Wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Ludzie kierują się chęcią bycia wyspanym, czy doznania przyjemności i najedzenia, a to, czy o tym wiedzą, lub czy chcą się do tego przyznać, to już inna sprawa.</p></li>'
+        '</ul>'
+        '<p style="text-align:justify;">'
+        'Czy to oznacza, że nie ma znaczenia, co człowiek mówi, że jest dla niego ważne, bo liczą się tylko fakty? Nie do końca. Człowiek może pracować nad swoimi wartościami i wówczas jego świadoma wola jest kluczowa w kierunku rozwoju jego hierarchii wartości.'
+        '</p>'
+        '</blockquote>'
+
+);
+
+
+KonspektStep step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
+    title: 'Poziomy rozwoju duchowego - aksjomaty - dekompozycja',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący płynnie przechodzi do opisu <b>poziomu aksjomatów</b>. Zanim jednak cokolwiek zdefiniuje, pomaga najpierw uczestnikom zbudować intuicję.'
         '</p>'
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Po pierwsze: wartości są tym, do czego człowiek dąży i co uważa za dobre - a nie tym, co mówi, że uważa za dobre.'
-        'Po drugie: wartości nie są wcale stałe w czasie. Człowiek może zupełnie coś innego uważać za dobre w chwili, gdy wisi nad nim bezpośrednia wizja oblania egzaminu, a zupełnie coś innego, gdy wraca wieczorem do domu i ma czas do zagospodarowania.'
-        'Po trzecie: wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Ludzie kierują się chęcią bycia wyspanym, czy doznania przyjemności i najedzenia, a to, czy o tym wiedzą, lub czy chcą się do tego przyznać to już inna sprawa.'
+        'Jak niektórzy mogli już wychwycić podczas opisywania poziomu wartości, wartości nie funkcjonują w luźnej kupie, ale w formie hierarchicznej struktury. Pozwala to, w przypadku sytuacji konfliktu dwóch różnych dóbr, wybrać dobro nadrzędne: przykładowo, gdy człowiek musi się zdecydować, czy poświęcić czas rodzinie, czy pracy.'
         '<br>'
-        '<br>Czy to oznacza, że nie ma znaczenia, co człowiek mówi, że jest dla niego ważne, bo liczą się tylko fakty? Nie do końca. Człowiek może pracować nad swoimi wartościami i wówczas jego świadoma wola jest kluczowa w kierunku rozwoju jego hierarchii wartości.'
+        '<br>Hierarchiczność wartości oznacza, że zawsze muszą istnieć jakieś <b>wartości najważniejsze</b>. Przykładowo można byłoby podrążyć trochę w wartościach Alberta powtarzając pytanie: <b>"dlaczego jest to dla Ciebie ważne?"</b>.'
+        '<br>'
+        '<br><u>Przykładowy tok rozumowania Alberta:</u>'
+        '<br>Praca jest dla mnie ważna. '
+        '<br>Dlaczego?'
+        '<br>Bo chcę mieć pieniądze - są dla mnie ważne.'
+        '<br>Dlaczego?'
+        '<br>Bo potrzebuję ich do życia, jedzenie, ubrania, ale przede wszystkim chcę móc odłożyć na przyszłość.'
+        '<br>Dlaczego?'
+        '<br>Bo cenię sobie bezpieczeństwo, chciałbym też móc kupić kiedyś dom.'
+        '<br>Dlaczego?'
+        '<br>Bo chcę mieć dużą rodzinę i chcę, żeby dobrze im się żyło.'
+        '<br>Dlaczego?'
+        '<br>Bo uważam, że jestem do tego powołany, żeby mieć rodzinę. Rodzina to bliskość, wspólnota, miłość - a to najlepsze, co w życiu może być.'
+        '<br>Dlaczego?'
+        '<br>Nie wiem. Tak uważam. Uważam, że miłość jest najważniejsza w życiu. Przemawia do mnie i wierzę w historię Chrystusa.'
+        '<br>Dlaczego?'
+        '<br>Nie wiem. Wierzę w to i tyle. Nie wiem. Po prostu.'
+        '<br>'
+        '<br>Zawsze w takich sekwencjach w końcu dochodzi się do ściany, gdzie nie ma już dalej odpowiedzi na pytanie "dlaczego". Albert nie ma dalszych odpowiedzi, nie dlatego, że jest głupi, ale dlatego, że dotarł do fundamentu — do pewnego przekonania, które z niczego dalej nie wynika. Zazwyczaj takie rozważania nie trwają kilku minut, a raczej kilka dni, miesięcy, czy nawet lat. Za każdym razem jednak, gdy dochodzi się do tej granicy, dotyka się ostatniego poziomu duchowości, czyli poziomu aksjomatu.'
+);
+
+KonspektStep step_poziomy_duchowosci_aksjomaty = KonspektStep(
+    title: 'Poziomy rozwoju duchowego - aksjomaty - dekompozycja',
+    duration: Duration(minutes: 5),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący definiuje <b>poziom aksjomatów</b> i w odpowiednim momencie kładzie we wspólnej przestrzeni kartkę "poziom aksjomatów" z załącznika $attach_html_karty_poziomow_duchowosci.'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Aksjomat jest zawsze fundamentalną, nieweryfikowalną wiarą w określony porządek rzeczy — coś, co całkowicie porządkuje postrzeganie rzeczywistości.'
+        '<br>'
+        '<br>Ludzie wyznają najróżniejsze aksjomaty. Przykładowo mogą to być:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">"Świat stworzył trójjedyny Bóg, powołał człowieka na swój obraz, by doświadczył miłości."</p></li>'
+        '<li><p style="text-align:justify;">"Świat stworzył przypadek. Świadomość człowieka jest iluzją fizyki, nie ma żadnego celu."</p></li>'
+        '<li><p style="text-align:justify;">"Światem rządzą wibracje dobrych i złych energii, człowiek może się z nimi łączyć przez medytację."</p></li>'
+        '</ul>'
+        '<p style="text-align:justify;">'
+        'Istnieją jednak też inne aksjomaty, które ludzie wyznają, a których często nie są nawet świadomi:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">To, czego doświadczają moje zmysły, jest odzwierciedleniem realnego świata.</p></li>'
+        '<li><p style="text-align:justify;">Prawa fizyki są zawsze takie same, nie tylko wtedy, gdy się je bada.</p></li>'
+        '</ul>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący ilustruje pojęcie aksjomatu wracając do przykładu z Albertem:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Aksjomaty zawsze są odpowiedzią na pytanie o najgłębszą wiarę.'
+        '<br>'
+        '<br>Przykład: Albert wziął się za naprawę, a przecież mógłby uklęknąć i medytować, by odeprzeć wibracje chaosu od silnika. Dlaczego tego nie zrobił? Może medytacja by zadziałała. Może mechanika, której uczył się w szkole nie ma zastosowania do akurat tego silnika: może prawa fizyki uległy tu akurat zmianie. Albert wziął się za naprawę, bo wierzy, że świat rządzi się stałymi prawami, które można poznać i zastosować.'
+        '<br>'
+        '<br>Inny przykład: Albert naprawia auto w mrozie, mimo że nikt go nie widzi, nikt mu dodatkowo nie zapłaci: mógłby olać temat i poczekać na lawetę. Czemu tego nie zrobi? Skąd u niego wartości takie jak zaradność, inicjatywa, czy działania mimo trudu? Przeciez Albert mógłby wierzyć, że zepsute auto to znak z niebios.'
+        '<br>'
+        '<br>Tymczasem Albert bez żadnego specjalnego powodu wierzy, że świat staje się lepszy, gdy człowiek dobrowolnie bierze na siebie krzyż, trudy, zmagania rzeczywistości i je dźwiga — nawet, gdy nikt tego nie wymaga. Dlaczego w to wierzy? Wierzy, bo tak. Taki wyznaje aksjomat i cześć.'
         '</p>'
         '</blockquote>'
 
+        '<p style="text-align:justify;">'
+        'Prowadzący kończy definicję aksjomatów:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Ludzie wierzą w różne rzeczy. Spojrzenie na duchowość człowieka przez pryzmat poziomu aksjomatów polega na ustaleniu: co stoi za czyjąś strukturą wartości? Jaka wiara, porządkuje i nadaje interpretację postrzeganej rzeczywistości? Jakie jest najwyższe dobro, czy cel, któremu podporządkowują swoje dążenia?'
+        '</p>'
+        '</blockquote>'
+);
+
+KonspektStep step_poziomy_duchowosci_aksjomaty_pytania = KonspektStep(
+    title: 'Poziomy rozwoju duchowego - pytania',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący daje uczestnikom czas na ewentualne pytania dotyczące poziomów duchowości.'
+        '</p>'
 );
 
 KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
@@ -471,6 +576,9 @@ KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
       step_poziomy_duchowosci_wstep,
       step_poziomy_duchowosci_zachowania,
       step_poziomy_duchowosci_wartosci,
+      step_poziomy_duchowosci_aksjomaty_dekompozycja,
+      step_poziomy_duchowosci_aksjomaty,
+      step_poziomy_duchowosci_aksjomaty_pytania,
     ]
 );
 
