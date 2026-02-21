@@ -141,7 +141,9 @@ KonspektStep step_sfery_rozwoju = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący przygotowuje kartki "sfera ciała", "sfera umysłu", "sfera relacji", "sfera emocji" oraz "sfera ducha" z załącznika $attach_html_sfery. Następnie prosi uczestników o wymienienie sfer rozwoju, zgodnie z którymi ruch harcerski rozwija swoich członków. Za każdym razem, gdy uczestnicy wymienią jakąś sferę, prowadzący kładzie we wspólnej przestrzeni odpowiednią kartkę.'
+        'Prowadzący przygotowuje kartki ze sferami <b>ciała</b>, <b>umysłu</b>, <b>relacji</b>, <b>emocji</b> oraz <b>ducha</b> z załącznika $attach_html_sfery.'
+        '<br>'
+        '<br>Następnie prowadzący prosi uczestników o wymienienie sfer człowieka rozwijanych w harcerstwie. Za każdym razem - każdorazowo, gdy padnie odpowiedź, kładzie odpowiednią kartkę we wspólnej przestrzeni.'
         '</p>'
 );
 
