@@ -707,11 +707,10 @@ packages:
   html_pdf_widgets:
     dependency: "direct main"
     description:
-      name: html_pdf_widgets
-      sha256: da5c6f66e130b86eb5b5f0638f1faa25ae47834ac40cb9905dbce7403b8a5ee4
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.3"
+      path: "../htmltopdfwidgets"
+      relative: true
+    source: path
+    version: "0.0.4"
   html_unescape:
     dependency: "direct main"
     description:

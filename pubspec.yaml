@@ -24,8 +24,7 @@ dependencies:
   flutter_spinkit: ^5.2.1
   flutter_svg: ^2.0.17
   flutter_widget_from_html: ^0.17.0
-  html_pdf_widgets:
-    path: ../htmltopdfwidgets
+  html_pdf_widgets: ^0.0.4
   html_unescape: ^2.0.0
   isar_community: ^3.3.0
   isar_community_flutter_libs: ^3.3.0
