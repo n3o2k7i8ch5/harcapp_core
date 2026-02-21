@@ -174,13 +174,14 @@ KonspektStep step_sfery_rozwoju_sfera_ducha_jest_inna = KonspektStep(
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący mówi:'
-        '<br>'
-        '<br>'
-        '<i>Często panuje przekonanie, że sfera ducha to sfera jak każda inna - że dotyczy jakiegoś kolejnego fragmentu człowieka, oraz że jej sposób rozwoju jest zbliżony do np. sfery umysłu, czy emocji.'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Często panuje przekonanie, że sfera ducha to sfera jak każda inna - że dotyczy jakiegoś kolejnego fragmentu człowieka, oraz że jej sposób rozwoju jest zbliżony do np. sfery umysłu, czy emocji.'
         '<br>'
         '<br>Taki pogląd to fundamentalny błąd i żeby zrozumieć dlaczego, najpierw pochylmy się nad wymienionymi dotąd sferami.'
-        '</i>'
         '</p>'
+        '</blockquote>'
 );
 
 KonspektStep step_sfery_rozwoju_sfery_funkcjonalne = KonspektStep(
@@ -188,11 +189,11 @@ KonspektStep step_sfery_rozwoju_sfery_funkcjonalne = KonspektStep(
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę, że każdą z dotychczas przywołanych sfer: ciała, umysłu, emocji i relacji łączy to, że są bez wyjątku źródłem <b>zdolności</b>. Rozwijając je, człowiek zyskuje nowe kompetencje, narzędzia, możliwości - zyskuje np. możliwość szybkiego biegu, narzędzia jakim jest wiedza, czy zdolność rozwiązywanie skomplikowanych problemów. Ponieważ owe sfery są źródłem nowych funkcjonalności, z których człowiek może w życiu korzystać, o tych sferach można zbiorczo mówić jako o <b>sferach funkcjonalnych</b>.'
+        'Prowadzący zwraca uwagę, że każdą z dotychczas przywołanych sfer (ciała, umysłu, emocji i relacji) łączy to, że są bez wyjątku źródłem <b>zdolności</b>, np. szybkiego biegu, czy rozwiązywania skomplikowanych problemów. Te zdolności są jak <b>narzędzia</b>, które wiszą gotowe na półce. O wszystkich tych sferach można zbiorczo mówić jako o <b>sferach funkcjonalnych</b> - są bowiem źródłem funkcjonalności.'
         '<br>'
         '<br>Następnie prowadzący obrazowo zbiera rozłożone wcześniej karty sfery ciała, umysłu, relacji i emocji w stosik i przykrywa go kartą "sfery funkcjonalne", również z załącznika $attach_html_sfery.'
         '<br>'
-        '<br>Prowadzący dodaje również, że traktowanie sfer funkcjonalnych łącznie jako źródło zdolności, kompetencji i moźliwości ma dużą zaletę: to, że ktoś sobie podzielił sfery funkcjonalne na 4 jest arbitalną decyzją. Równie dobrze można byłoby zmieścić wszystko w dwóch: sferze ciała i umysłu, który przecież odpowiada zarówno za sferę emocji człowieka jak i za kompetencje społeczne. Można również pójść w drugą stronę i wydzielić więcej sfer: np. dodać sferę zasobów materialnych.'
+        '<br>Prowadzący dodaje, że traktowanie sfer funkcjonalnych łącznie jako źródło zdolności, kompetencji i możliwości ma dużą zaletę: to, że ktoś sobie podzielił sfery funkcjonalne na 4 jest arbitralną decyzją. Równie dobrze można by zmieścić wszystko w dwóch: sferze ciała i umysłu, który przecież odpowiada zarówno za sferę emocji człowieka jak i za kompetencje społeczne. Można również pójść w drugą stronę i wydzielić więcej sfer: np. dodać sferę zasobów materialnych.'
         '<br>'
         '<br>Aby podeprzeć się przykładem, że nawet w obecnym podziale niektóre zdolności nie pasują do tylko jednej sfery, prowadzący może skorzystać z <b>dwóch szarych kartek</b> z załącznika $attach_html_sfery_przyklady i poprosić uczestników o wskazanie, do której sfery funkcjonalnej przynależą zapisane na nich zdolności.'
         '</p>'

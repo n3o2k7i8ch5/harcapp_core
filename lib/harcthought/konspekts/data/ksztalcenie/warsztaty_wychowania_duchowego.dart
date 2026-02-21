@@ -166,6 +166,10 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
     ],
     attachments: [
       attach_poradnik_o_strukturze_duchowosci,
+
+      attach_sfery,
+      attach_sfery_przyklady,
+
       attach_poradnik_przykladowa_strategia_rozwoju_duchowego,
 
       attach_karty_poziomow_duchowosci,
@@ -208,6 +212,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_nozyczki,
 
       material_mini_kartki_biurowe,
+
+      material_zal_sfery,
+      material_zal_sfery_przyklady,
 
       material_kartka_a4,
 
