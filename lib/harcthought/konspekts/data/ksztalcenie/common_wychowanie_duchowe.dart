@@ -157,9 +157,10 @@ KonspektStep step_sfery_rozwoju_przyklady = KonspektStep(
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący w losowej kolejności odczytuje uczestnikom 8 kartek <b>z białym tłem</b> z załącznika $attach_html_sfery_przyklady. Każdorazowo prosi uczestników o wskazanie, z którą sferą rozwoju określona jest odczytana kartka.'
+        '<br>'
+        '<br>Prawidłowe odpowiedzi:'
         '</p>'
 
-        '<p style="text-align:justify;">Prawidłowe odpowiedzi:</p>'
         '<table border="1" style="$_tableStyle">'
         '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Potrafi przebiec 5 kilometrów w 20 minut</i></p></td><td style="$_tdPadding"><p><b>Ciało</b></p></td></tr>'
         '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Zachowuje zdrowie nawet w fatalnych warunkach pogodowych</i></p></td><td style="$_tdPadding"><p><b>Ciało</b></p></td></tr>'
