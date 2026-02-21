@@ -32,19 +32,6 @@ class KonspektHtmlWidget extends StatelessWidget{
     child: HtmlWidget(
       text,
       textStyle: AppTextStyle(height: 1.2, fontSize: textSize),
-      customStylesBuilder: (element) {
-        if (element.localName == 'blockquote') {
-          return {
-            'background-color': '#F5F5F5',
-            'padding': '8px 12px',
-            'margin': '8px 0',
-            'border-left': '3px solid #888',
-            'border-radius': '6px',
-            'font-style': 'italic',
-          };
-        }
-        return null;
-      },
       onTapUrl: (url){
         if(url.endsWith('@form')){
           String formName = url.substring(0, url.length - '@form'.length);
@@ -97,7 +84,48 @@ class KonspektHtmlWidget extends StatelessWidget{
         return false;
       },
       customWidgetBuilder: (element){
-        if(element.localName == 'img'){
+        if(element.localName == 'blockquote'){
+          bool isDark = Theme.of(context).brightness == Brightness.dark;
+          return Container(
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? Colors.white.withOpacity(0.08)
+                  : Colors.black.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(8),
+              border: Border(
+                left: BorderSide(
+                  color: isDark ? Colors.white38 : Colors.black38,
+                  width: 3,
+                ),
+              ),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8, top: 2),
+                  child: Icon(
+                    Icons.format_quote,
+                    size: 20,
+                    color: isDark ? Colors.white38 : Colors.black38,
+                  ),
+                ),
+                Expanded(
+                  child: HtmlWidget(
+                    element.innerHtml,
+                    textStyle: AppTextStyle(
+                      height: 1.2,
+                      fontSize: textSize,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }else if(element.localName == 'img'){
           String src = element.attributes['src']!;
           if (src.startsWith('asset:') && src.endsWith('.svg'))
             return LayoutBuilder(
