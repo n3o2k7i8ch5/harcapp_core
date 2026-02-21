@@ -156,7 +156,7 @@ KonspektStep step_sfery_rozwoju_przyklady = KonspektStep(
         '</p>'
 
         '<p style="text-align:justify;">Prawidłowe odpowiedzi:</p>'
-        '<table border="1" cellpadding="6" cellspacing="0">'
+        '<table border="1">'
         '<tr><td style="text-align:justify;"><i>Potrafi przebiec 5 kilometrów w 20 minut</i></td><td><b>Ciało</b></td></tr>'
         '<tr><td style="text-align:justify;"><i>Zachowuje zdrowie nawet w fatalnych warunkach pogodowych</i></td><td><b>Ciało</b></td></tr>'
         '<tr><td style="text-align:justify;"><i>W 6 miesięcy umie opanować dowolny język obcy</i></td><td><b>Umysł</b></td></tr>'
@@ -184,8 +184,7 @@ KonspektStep step_sfery_rozwoju_sfera_ducha_jest_inna = KonspektStep(
         '<li>że jej sposób rozwoju jest zbliżony do np. sfery umysłu, czy emocji.</li>'
         '</ul>'
         '<p style="text-align:justify;">'
-        '<br>'
-        '<br>Taki pogląd to fundamentalny błąd. Żeby zrozumieć dlaczego, najpierw pochylmy się nad wymienionymi dotąd 4 sferami.'
+        'Taki pogląd to fundamentalny błąd. Żeby zrozumieć dlaczego, najpierw pochylmy się nad wymienionymi dotąd 4 sferami.'
         '</p>'
         '</blockquote>'
 );
@@ -214,7 +213,7 @@ KonspektStep step_sfery_rozwoju_sfery_funkcjonalne_arbitalnosc_podzialu = Konspe
         '<p style="text-align:justify;">'
         'Prowadzący może skorzystać z <b>dwóch szarych kartek</b> z załącznika $attach_html_sfery_przyklady i poprosić uczestników o wskazanie, do której sfery funkcjonalnej przynależą zapisane na nich zdolności:'
         '</p>'
-        '<table border="1" cellpadding="6" cellspacing="0">'
+        '<table border="1">'
         '<tr><td style="text-align:justify;"><i>Potrafi w kilka dni zdyskredytować czyjąś reputację</i></td><td><b>Relacje</b> i <b>Umysł</b></td></tr>'
         '<tr><td style="text-align:justify;"><i>Potrafi zagrać na fortepianie każdy utwór Chopina</i></td><td><b>Ciało</b>, <b>Umysł</b> i <b>Emocje</b></td></tr>'
         '</table>'
