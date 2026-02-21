@@ -144,6 +144,9 @@ KonspektStep step_sfery_rozwoju = KonspektStep(
     title: 'Sfery rozwoju - wymienienie',
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
+    materials: [
+      material_zal_sfery,
+    ],
     content: '<p style="text-align:justify;">'
         'Prowadzący przygotowuje kartki z 5 sferami <b>ciała</b>, <b>umysłu</b>, <b>relacji</b>, <b>emocji</b> oraz <b>ducha</b> z załącznika $attach_html_sfery.'
         '<br>'
@@ -155,6 +158,9 @@ KonspektStep step_sfery_rozwoju_przyklady = KonspektStep(
     title: 'Sfery rozwoju - przykłady',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
+    materials: [
+      material_zal_sfery_przyklady,
+    ],
     content: '<p style="text-align:justify;">'
         'Prowadzący w losowej kolejności odczytuje uczestnikom 8 kartek <b>z białym tłem</b> z załącznika $attach_html_sfery_przyklady. Każdorazowo prosi uczestników o wskazanie, z którą sferą rozwoju określona jest odczytana kartka.'
         '<br>'
@@ -198,6 +204,9 @@ KonspektStep step_sfery_rozwoju_sfery_funkcjonalne = KonspektStep(
     title: 'Sfery rozwoju - sfery funkcjonalne',
     duration: Duration(minutes: 1),
     activeForm: KonspektStepActiveForm.static,
+    materials: [
+      material_zal_sfery,
+    ],
     content: '<p style="text-align:justify;">'
         'Prowadzący definiuje sfery funkcjonalne:'
         '</p>'
@@ -214,6 +223,9 @@ KonspektStep step_sfery_rozwoju_sfery_funkcjonalne_arbitralnosc_podzialu = Konsp
     title: 'Sfery rozwoju - sfery funkcjonalne - arbitralność podziału',
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
+    materials: [
+      material_zal_sfery_przyklady,
+    ],
     content: '<p style="text-align:justify;">'
         'Prowadzący zwraca uwagę, że traktowanie sfer funkcjonalnych łącznie, bez wchodzenia w to, czy chodzi o ciało, umysł, emocje, czy relacje rozwiązuje dwa problemy:'
         '</p>'
@@ -234,6 +246,10 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
     title: 'Sfery rozwoju - sfera ducha',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
+    materials: [
+      material_zal_sfery,
+      material_zal_sfery_przyklady,
+    ],
     content: '<p style="text-align:justify;">'
         'Prowadzący mówi:'
         '</p>'
