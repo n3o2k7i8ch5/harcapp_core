@@ -156,15 +156,15 @@ KonspektStep step_sfery_rozwoju_przyklady = KonspektStep(
         '</p>'
 
         '<p style="text-align:justify;">Prawidłowe odpowiedzi:</p>'
-        '<table border="1">'
-        '<tr><td style="text-align:justify;"><i>Potrafi przebiec 5 kilometrów w 20 minut</i></td><td><b>Ciało</b></td></tr>'
-        '<tr><td style="text-align:justify;"><i>Zachowuje zdrowie nawet w fatalnych warunkach pogodowych</i></td><td><b>Ciało</b></td></tr>'
-        '<tr><td style="text-align:justify;"><i>W 6 miesięcy umie opanować dowolny język obcy</i></td><td><b>Umysł</b></td></tr>'
-        '<tr><td style="text-align:justify;"><i>Zna budowę silnika mechanicznego</i></td><td><b>Umysł</b></td></tr>'
-        '<tr><td style="text-align:justify;"><i>Panuje nad sobą, niezależnie od sytuacji</i></td><td><b>Emocje</b></td></tr>'
-        '<tr><td style="text-align:justify;"><i>Rozróżnia tylko trzy stany samopoczucia: "super", "ok" i "źle"</i></td><td><b>Emocje</b></td></tr>'
-        '<tr><td style="text-align:justify;"><i>Ma czwórkę rodzeństwa</i></td><td><b>Relacje</b></td></tr>'
-        '<tr><td style="text-align:justify;"><i>Jest zaręczony ze swoją dziewczyną, którą zna od liceum</i></td><td><b>Relacje</b></td></tr>'
+        '<table border="1" style="border-collapse: collapse; width: 100%;">'
+        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Potrafi przebiec 5 kilometrów w 20 minut</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Ciało</b></td></tr>'
+        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Zachowuje zdrowie nawet w fatalnych warunkach pogodowych</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Ciało</b></td></tr>'
+        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>W 6 miesięcy umie opanować dowolny język obcy</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Umysł</b></td></tr>'
+        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Zna budowę silnika mechanicznego</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Umysł</b></td></tr>'
+        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Panuje nad sobą, niezależnie od sytuacji</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Emocje</b></td></tr>'
+        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Rozróżnia tylko trzy stany samopoczucia: "super", "ok" i "źle"</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Emocje</b></td></tr>'
+        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Ma czwórkę rodzeństwa</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Relacje</b></td></tr>'
+        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Jest zaręczony ze swoją dziewczyną, którą zna od liceum</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Relacje</b></td></tr>'
         '</table>'
 );
 
@@ -213,9 +213,9 @@ KonspektStep step_sfery_rozwoju_sfery_funkcjonalne_arbitalnosc_podzialu = Konspe
         '<p style="text-align:justify;">'
         'Prowadzący może skorzystać z <b>dwóch szarych kartek</b> z załącznika $attach_html_sfery_przyklady i poprosić uczestników o wskazanie, do której sfery funkcjonalnej przynależą zapisane na nich zdolności:'
         '</p>'
-        '<table border="1">'
-        '<tr><td style="text-align:justify;"><i>Potrafi w kilka dni zdyskredytować czyjąś reputację</i></td><td><b>Relacje</b> i <b>Umysł</b></td></tr>'
-        '<tr><td style="text-align:justify;"><i>Potrafi zagrać na fortepianie każdy utwór Chopina</i></td><td><b>Ciało</b>, <b>Umysł</b> i <b>Emocje</b></td></tr>'
+        '<table border="1" style="border-collapse: collapse; width: 100%;">'
+        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Potrafi w kilka dni zdyskredytować czyjąś reputację</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Relacje</b> i <b>Umysł</b></td></tr>'
+        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Potrafi zagrać na fortepianie każdy utwór Chopina</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Ciało</b>, <b>Umysł</b> i <b>Emocje</b></td></tr>'
         '</table>'
 );
 

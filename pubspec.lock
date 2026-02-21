@@ -707,10 +707,11 @@ packages:
   html_pdf_widgets:
     dependency: "direct main"
     description:
-      name: html_pdf_widgets
-      sha256: "9d7ebe55a47f6821a7af771724f287a915ee3cf91e84746f8c8d82c74740fc56"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: fbd0f777ad5342e21f41965148f3fe22b0bfd902
+      url: "https://github.com/n3o2k7i8ch5/htmltopdfwidgets.git"
+    source: git
     version: "0.0.4"
   html_unescape:
     dependency: "direct main"
