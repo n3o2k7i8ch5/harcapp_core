@@ -199,9 +199,15 @@ KonspektStep step_sfery_rozwoju_sfery_funkcjonalne = KonspektStep(
     duration: Duration(minutes: 1),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę, przywołane dotąd 4 sfery (ciała, umysłu, emocji i relacji) łączy jedno: wszystkie są źródłem <b>zdolności</b> (np. szybkiego biegu, czy rozwiązywania skomplikowanych problemów). Te zdolności są jak <b>narzędzia</b>, które leżą na półce, gotowe do użycia. O tych sferach można zbiorczo mówić jako o <b>sferach funkcjonalnych</b> - są bowiem źródłem funkcjonalności.'
-        '<br>'
-        '<br>Następnie prowadzący zbiera rozłożone wcześniej karty 4 sfer funkcjonalnych (ciała, umysłu, relacji i emocji) i symbolicznie składa je w stosik, który przykrywa kartą "sfery funkcjonalne" z załącznika $attach_html_sfery.'
+        'Prowadzący zwraca uwagę:'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Przywołane dotąd 4 sfery (ciała, umysłu, emocji i relacji) łączy jedno: wszystkie są źródłem <b>zdolności</b> (np. szybkiego biegu, czy rozwiązywania skomplikowanych problemów). Te zdolności są jak <b>narzędzia</b>, które leżą na półce, gotowe do użycia. O tych sferach można zbiorczo mówić jako o <b>sferach funkcjonalnych</b> - są bowiem źródłem funkcjonalności.'
+        '</p>'
+        '</blockquote>'
+        '<p style="text-align:justify;">'
+        'Następnie prowadzący zbiera rozłożone wcześniej karty 4 sfer funkcjonalnych (ciała, umysłu, relacji i emocji) i symbolicznie składa je w stosik, który przykrywa kartą "sfery funkcjonalne" z załącznika $attach_html_sfery.'
 );
 
 KonspektStep step_sfery_rozwoju_sfery_funkcjonalne_arbitalnosc_podzialu = KonspektStep(
@@ -230,10 +236,10 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący mówi:'
-        '<br>'
-        '<br><i>Sfery funkcjonalne, czyli zdolności człowieka, to dopiero połowa historii.</i>'
-        '<br>'
-        '<br>Prowadzący przedstawia prostą intuicję:'
+        '</p>'
+        '<blockquote><p style="text-align:justify;">Sfery funkcjonalne, czyli zdolności człowieka, to dopiero połowa historii.</p></blockquote>'
+        '<p style="text-align:justify;">'
+        'Prowadzący przedstawia prostą intuicję:'
         '<br>'
         '<br><i>Wyobraźcie sobie trzech ludzi: Alberta, Bartka i Cezarego. Mieszkają w tym samym mieście. Każdy ma 20 lat. Pracują w tej samej firmie zajmującej się montażem elektryki. Wszystkie te zdolności</i> - prowadzący wskazuje na zdolności z załącznika $attach_html_sfery_przyklady - <i>opisują każdego z nich: każdy z nich umie tak samo dobrze biegać, każdy z nich tak samo dobrze rozumie budowę silnika, każdy z nich ma narzeczoną (oczywiście są to różne osoby) itd. Ba: są tak podobni, że każdy z nich ma absolutnie identyczną listę zdolności, talentów, możliwości, kompetencji, w skrócie <b>ich sfery funkcjonalne są identyczne</b>.</i>'
         '<br>'
