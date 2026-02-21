@@ -84,6 +84,32 @@ KonspektAttachment attach_karty_zdolnosci_integracji_duchowosci = KonspektAttach
   },
 );
 
+// Sfery
+
+const String attach_html_sfery = '<a href="$attach_name_sfery@attachment">$attach_title_sfery</a>';
+const String attach_name_sfery = 'sfery';
+const String attach_title_sfery = 'Sfery';
+KonspektAttachment attach_sfery = KonspektAttachment(
+  name: attach_name_sfery,
+  title: attach_title_sfery,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_sfery.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_sfery.docx',
+  },
+);
+
+const String attach_html_sfery_przyklady = '<a href="$attach_name_sfery_przyklady@attachment">$attach_title_sfery_przyklady</a>';
+const String attach_name_sfery_przyklady = 'sfery_przyklady';
+const String attach_title_sfery_przyklady = 'Sfery przykłady';
+KonspektAttachment attach_sfery_przyklady = KonspektAttachment(
+  name: attach_name_sfery_przyklady,
+  title: attach_title_sfery_przyklady,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_sfery_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_sfery_przyklady.docx',
+  },
+);
+
 // Przykłady aksjomatów
 
 const String attach_html_aksjomaty_opisu_przyklady = '<a href="$attach_name_aksjomaty_opisu_przyklady@attachment">$attach_title_aksjomaty_opisu_przyklady</a>';

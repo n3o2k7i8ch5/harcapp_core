@@ -48,6 +48,18 @@ KonspektMaterial material_zal_aksjomaty_bledne_przyklady = KonspektMaterial(
     amount: 1
 );
 
+KonspektMaterial material_zal_sfery = KonspektMaterial(
+    name: 'Wydrukowany załącznik "$attach_title_sfery"',
+    attachmentName: attach_name_sfery,
+    amount: 1
+);
+
+KonspektMaterial material_zal_sfery_przyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik "$attach_title_sfery_przyklady"',
+    attachmentName: attach_name_sfery_przyklady,
+    amount: 1
+);
+
 KonspektMaterial material_budzik = KonspektMaterial(
   name: "Budzik (np. w telefonie)",
   amount: 1
@@ -121,6 +133,111 @@ String aksjomaty_przyklady = '<ul>'
     '<li><p style="text-align:justify;">“Wszystko jest iluzją. Istnieję tylko ja, reszta to zaprogramowane postaci w mojej głowie. Iluzja ta pryśnie, jeśli wszyscy ludzie uwierzą, że w niej żyją.”</p></li>'
     '<li><p style="text-align:justify;">“Świat stworzył trójjedyny Bóg, powołał człowieka na swój obraz, by doświadczył miłości.”</p></li>'
     '</ul>';
+
+
+
+KonspektStep step_sfery_rozwoju = KonspektStep(
+    title: 'Sfery rozwoju - wymienienie',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przygotowuje kartki "sfera ciała", "sfera umysłu", "sfera relacji", "sfera emocji" oraz "sfera ducha" z załącznika $attach_html_sfery. Następnie prosi uczestników o wymienienie sfer rozwoju, zgodnie z którymi ruch harcerski rozwija swoich członków. Za każdym razem, gdy uczestnicy wymienią jakąś sferę, prowadzący kładzie we wspólnej przestrzeni odpowiednią kartkę.'
+        '</p>'
+);
+
+KonspektStep step_sfery_rozwoju_przyklady = KonspektStep(
+    title: 'Sfery rozwoju - wymienienie',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący w losowej kolejności odczytuje uczestnikom 8 kartek <b>z białym tłem</b> z załącznika $attach_html_sfery_przyklady. Każdorazowo prosi uczestników o wskazanie, z którą sferą rozwoju określona jest odczytana kartka.'
+        '</p>'
+
+        '<p style="text-align:justify;">Prawidłowe odpowiedzi:</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;"><i>Potrafi przebiec 5 kilometrów w 20 minut</i> - <b>Ciało</b></p></li>'
+        '<li><p style="text-align:justify;"><i>Zachowuje zdrowie nawet w fatalnych warunkach pogodowych</i> - <b>Ciało</b></p></li>'
+        '<li><p style="text-align:justify;"><i>W 6 miesięcy umie opanować dowolny język obcy</i> - <b>Umysł</b></p></li>'
+        '<li><p style="text-align:justify;"><i>Zna budowę silnika mechanicznego</i> - <b>Umysł</b></p></li>'
+        '<li><p style="text-align:justify;"><i>Panuje nad sobą, niezależnie od sytuacji</i> - <b>Emocje</b></p></li>'
+        '<li><p style="text-align:justify;"><i>Rozróżnia tylko trzy stany samopoczucia: "super", "ok" i "źle"</i> - <b>Emocje</b></p></li>'
+        '<li><p style="text-align:justify;"><i>Ma czwórkę rodzeństwa</i> - <b>Relacje</b></p></li>'
+        '<li><p style="text-align:justify;"><i>Jest zaręczony ze swoją dziewczyną, którą zna od liceum</i> - <b>Relacje</b></p></li>'
+        '</ul>'
+);
+
+KonspektStep step_sfery_rozwoju_sfera_ducha_jest_inna = KonspektStep(
+    title: 'Sfery rozwoju - sfera ducha jest inna niż wszystkie',
+    duration: Duration(minutes: 1),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący mówi:'
+        '<br>'
+        '<br>'
+        '<i>Ktoś mógłby zapytać: <b>"dlaczego do tej pory gadamy o wszystkim, tylko nie o sferze ducha?"</b>. Otóż często panuje przekonanie, że sfera ducha to w sfera jak każda inna - dotyczy jakiegoś kolejnego fragmentu człowieka, oraz że jej sposób rozwoju jest zbliżony do np. sfery umysłu, czy emocji.'
+        '<br>'
+        '<br>Taki pogląd to fundamentalny błąd i żeby zrozumieć dlaczego, najpierw pochylmy się nad wymienionymi dotąd sferami.'
+        '</i>'
+        '</p>'
+);
+
+KonspektStep step_sfery_rozwoju_sfery_funkcjonalne = KonspektStep(
+    title: 'Sfery rozwoju - sfery funkcjonalne',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący zwraca uwagę, że każdą z dotychczas przywołanych sfer: ciała, umysłu, emocji i relacji łączy to, że są bez wyjątku źródłem <b>zdolności</b>. Rozwijając je, człowiek zyskuje nowe kompetencje, narzędzia, możliwości - zyskuje np. możliwość szybkiego biegu, narzędzia jakim jest wiedza, czy zdolność rozwiązywanie skomplikowanych problemów. Ponieważ owe sfery są źródłem nowych funkcjonalności, z których człowiek może w życiu korzystać, o tych sferach można zbiorczo mówić jako o <b>sferach funkcjonalnych</b>.'
+        '<br>'
+        '<br>Następnie prowadzący obrazowo zbiera rozłożone wcześniej karty sfery ciała, umysłu, relacji i emocji w stosik i przykrywa go kartą "sfery funkcjonalne", również z załącznika $attach_html_sfery.'
+        '<br>'
+        '<br>Prowadzący dodaje również, że traktowanie sfer funkcjonalnych łącznie jako źródło zdolności, kompetencji i moźliwości ma dużą zaletę: to, że ktoś sobie podzielił sfery funkcjonalne na 4 jest arbitalną decyzją. Równie dobrze można byłoby zmieścić wszystko w dwóch: sferze ciała i umysłu, który przecież odpowiada zarówno za sferę emocji człowieka jak i za kompetencje społeczne. Można również pójść w drugą stronę i wydzielić więcej sfer: np. dodać sferę zasobów materialnych.'
+        '<br>'
+        '<br>Aby podeprzeć się przykładem, że nawet w obecnym podziale niektóre zdolności nie pasują do tylko jednej sfery, prowadzący może skorzystać z <b>dwóch szarych kartek</b> z załącznika $attach_html_sfery_przyklady i poprosić uczestników o wskazanie, do której sfery funkcjonalnej przynależą zapisane na nich zdolności.'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;"><i>Potrafi w kilka dni zdyskredytować czyjąś reputację</i> - <b>Relacje</b> i <b>Umysł</b></p></li>'
+        '<li><p style="text-align:justify;"><i>Potrafi zagrać na fortepianie każdy utwór Chopina</i> - <b>Ciało</b>, <b>Umysł</b> i <b>Emocje</b></p></li>'
+        '</ul>'
+);
+
+KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
+    title: 'Sfery rozwoju - sfera ducha',
+    duration: Duration(minutes: 5),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący mówi:'
+        '<br>'
+        '<br><i>Sfery funkcjonalne, czyli źródło zdolności człowieka, to - jak się zapewne domyślacie - dopiero połowa historii.</i>'
+        '<br>'
+        '<br>Prowadzący przedstawia prostą intuicję:'
+        '<br>'
+        '<br><i>Wyobraźcie sobie trzech ludzi: Alberta, Bartka i Cezarego. Mieszkają w tym samym mieście. Każdy ma 20 lat. Pracują w tej samej firmie zajmującej się montażem eletryki. Wszystkie te zdolności</i> - prowadzący wskazuje na zdolności z załącznika $attach_html_sfery_przyklady - <i>opisują każdego z nich: każdy z nich umie tak samo dobrze biegać, każdy z nich tak samo dobrze rozumie budowę silnika, każdy z nich ma narzeczoną (oczywiście są to różne osoby) itd. Ba: są tak podobni, że każdy z nich ma absolutnie identyczną listę zdolności, talentów, możliwości, kompetencji, w skrócie <b>ich sfery funkcjonalne są identyczne</b>.</i>'
+        '<br>'
+        '<br><u>Historia 1:</u>'
+        '<br><i>Pewnego ranka jeden z nich bierze auto z pracy i jedzie do klienta montować elektrykę. Niestety w połowie drogi auto się psuje i staje na poboczu. Na zewnątrz jest minus piętnaście stopni.'
+        '<br>'
+        '</i></p>'
+        '<ul>'
+        '<li><p style="text-align:justify;"><i>Gdyby autem jechał Albert, to bez zastanowienia otworzyłby maskę i zaczął naprawiać auto.</i></p></li>'
+        '<li><p style="text-align:justify;"><i>Gdyby autem jechał Bartek, nie ruszyłby się z auta, tylko natychmiast zadzwonił do ubezpieczyciela, żeby mu szybko przywieźli auto zastępcze.</i></p></li>'
+        '<li><p style="text-align:justify;"><i>Gdyby autem jechał Cezary, wziąłby narzędzia, zostawił samochód i pobiegł resztę trasy pieszo, żeby wykonać u klienta zlecenie.</i></p></li>'
+        '</ul>'
+        '<p style="text-align:justify;"><i>'
+        'Wszyscy trzej mają absolutnie te same zdolności. Wszyscy trzej umieją otworzyć maskę i znaleźć problem, umieją zadzwnoić do ubezpieczyciela i umieją dobiec na czas do klienta. Umieją to samo, a jednak każdy skorzystałby z zupełnie innych zdolności i w innym celu.</i>'
+        '<br>'
+        '<br>Prowadzący robi pauzę, po czym podsumowuje:'
+        '<br>'
+        '<br><i>Sfery funkcjonalne definiują co człowiek może. Sfera ducha definicuje jak i do czego ze swoich możliwości korzysta.</i>'
+        '<br>'
+        '<br>Prowadzący kładzie we wspólnej przestrzeni, obok kartki "sfery funkcjonalne", kartkę "sfera ducha" z załącznika $attach_html_sfery.'
+        '</p>'
+);
+
+
+
+
+
+
 
 KonspektStep step_sfery_rozwoju_i_ich_relacje = KonspektStep(
     title: 'Sfery rozwoju i ich relacje',
