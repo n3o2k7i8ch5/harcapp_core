@@ -32,6 +32,19 @@ class KonspektHtmlWidget extends StatelessWidget{
     child: HtmlWidget(
       text,
       textStyle: AppTextStyle(height: 1.2, fontSize: textSize),
+      customStylesBuilder: (element) {
+        if (element.localName == 'blockquote') {
+          return {
+            'background-color': '#F5F5F5',
+            'padding': '8px 12px',
+            'margin': '8px 0',
+            'border-left': '3px solid #888',
+            'border-radius': '6px',
+            'font-style': 'italic',
+          };
+        }
+        return null;
+      },
       onTapUrl: (url){
         if(url.endsWith('@form')){
           String formName = url.substring(0, url.length - '@form'.length);
