@@ -2,7 +2,8 @@ import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common_attachments.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
-const String _tableStyle = 'border-collapse: collapse; width: 100%;';
+const String _tableStyle = 'border-collapse: collapse;';
+const String _tableStyleWide = 'border-collapse: collapse; width: 100%;';
 const String _tdPadding = 'padding-left: 8px; padding-right: 8px;';
 
 KonspektMaterial material_mini_kartki_biurowe = KonspektMaterial(
@@ -356,7 +357,7 @@ KonspektStep _step_poziomy_duchowosci = KonspektStep(
         '<br>Prowadzący może w tym miejscu posiłkować się przykładem:'
         '</p>'
 
-        '<table border="1" style="$_tableStyle">'
+        '<table border="1" style="$_tableStyleWide">'
         '<tr>'
         '<td style="$_tdPadding"><p>Zachowanie</p></td>'
         '<td style="$_tdPadding"><p>Oddanie własnego obiadu bezdomnemu</p></td>'
