@@ -2,6 +2,9 @@ import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common_attachments.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
+const String _tableStyle = 'border-collapse: collapse; width: 100%;';
+const String _tdPadding = 'padding-left: 8px; padding-right: 8px;';
+
 KonspektMaterial material_mini_kartki_biurowe = KonspektMaterial(
   name: 'Mini kartki biurowe (ok. 10x10 cm)',
   amountAttendantFactor: 3,
@@ -156,15 +159,15 @@ KonspektStep step_sfery_rozwoju_przyklady = KonspektStep(
         '</p>'
 
         '<p style="text-align:justify;">Prawidłowe odpowiedzi:</p>'
-        '<table border="1" style="border-collapse: collapse; width: 100%;">'
-        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Potrafi przebiec 5 kilometrów w 20 minut</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Ciało</b></td></tr>'
-        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Zachowuje zdrowie nawet w fatalnych warunkach pogodowych</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Ciało</b></td></tr>'
-        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>W 6 miesięcy umie opanować dowolny język obcy</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Umysł</b></td></tr>'
-        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Zna budowę silnika mechanicznego</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Umysł</b></td></tr>'
-        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Panuje nad sobą, niezależnie od sytuacji</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Emocje</b></td></tr>'
-        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Rozróżnia tylko trzy stany samopoczucia: "super", "ok" i "źle"</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Emocje</b></td></tr>'
-        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Ma czwórkę rodzeństwa</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Relacje</b></td></tr>'
-        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Jest zaręczony ze swoją dziewczyną, którą zna od liceum</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Relacje</b></td></tr>'
+        '<table border="1" style="$_tableStyle">'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Potrafi przebiec 5 kilometrów w 20 minut</i></p></td><td style="$_tdPadding"><p><b>Ciało</b></p></td></tr>'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Zachowuje zdrowie nawet w fatalnych warunkach pogodowych</i></p></td><td style="$_tdPadding"><p><b>Ciało</b></p></td></tr>'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>W 6 miesięcy umie opanować dowolny język obcy</i></p></td><td style="$_tdPadding"><p><b>Umysł</b></p></td></tr>'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Zna budowę silnika mechanicznego</i></p></td><td style="$_tdPadding"><p><b>Umysł</b></p></td></tr>'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Panuje nad sobą, niezależnie od sytuacji</i></p></td><td style="$_tdPadding"><p><b>Emocje</b></p></td></tr>'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Rozróżnia tylko trzy stany samopoczucia: "super", "ok" i "źle"</i></p></td><td style="$_tdPadding"><p><b>Emocje</b></p></td></tr>'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Ma czwórkę rodzeństwa</i></p></td><td style="$_tdPadding"><p><b>Relacje</b></p></td></tr>'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Jest zaręczony ze swoją dziewczyną, którą zna od liceum</i></p></td><td style="$_tdPadding"><p><b>Relacje</b></p></td></tr>'
         '</table>'
 );
 
@@ -213,9 +216,9 @@ KonspektStep step_sfery_rozwoju_sfery_funkcjonalne_arbitalnosc_podzialu = Konspe
         '<p style="text-align:justify;">'
         'Prowadzący może skorzystać z <b>dwóch szarych kartek</b> z załącznika $attach_html_sfery_przyklady i poprosić uczestników o wskazanie, do której sfery funkcjonalnej przynależą zapisane na nich zdolności:'
         '</p>'
-        '<table border="1" style="border-collapse: collapse; width: 100%;">'
-        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Potrafi w kilka dni zdyskredytować czyjąś reputację</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Relacje</b> i <b>Umysł</b></td></tr>'
-        '<tr><td style="text-align:justify;padding-left: 8px; padding-right: 8px;"><i>Potrafi zagrać na fortepianie każdy utwór Chopina</i></td><td style="padding-left: 8px; padding-right: 8px;"><b>Ciało</b>, <b>Umysł</b> i <b>Emocje</b></td></tr>'
+        '<table border="1" style="$_tableStyle">'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Potrafi w kilka dni zdyskredytować czyjąś reputację</i></p></td><td style="$_tdPadding"><p><b>Relacje</b> i <b>Umysł</b></p></td></tr>'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Potrafi zagrać na fortepianie każdy utwór Chopina</i></p></td><td style="$_tdPadding"><p><b>Ciało</b>, <b>Umysł</b> i <b>Emocje</b></p></td></tr>'
         '</table>'
 );
 
@@ -353,18 +356,18 @@ KonspektStep _step_poziomy_duchowosci = KonspektStep(
         '<br>Prowadzący może w tym miejscu posiłkować się przykładem:'
         '</p>'
 
-        '<table border="1" style="border-collapse: collapse; width: 100%;">'
+        '<table border="1" style="$_tableStyle">'
         '<tr>'
-        '<td style="padding-left: 8px; padding-right: 8px;"><p>Zachowanie</p></td>'
-        '<td style="padding-left: 8px; padding-right: 8px;"><p>Oddanie własnego obiadu bezdomnemu</p></td>'
+        '<td style="$_tdPadding"><p>Zachowanie</p></td>'
+        '<td style="$_tdPadding"><p>Oddanie własnego obiadu bezdomnemu</p></td>'
         '</tr>'
         '<tr>'
-        '<td style="padding-left: 8px; padding-right: 8px;"><p>Wartość</p></td>'
-        '<td style="padding-left: 8px; padding-right: 8px;"><p>Godność każdego człowieka</p></td>'
+        '<td style="$_tdPadding"><p>Wartość</p></td>'
+        '<td style="$_tdPadding"><p>Godność każdego człowieka</p></td>'
         '</tr>'
         '<tr>'
-        '<td style="padding-left: 8px; padding-right: 8px;"><p>Aksjomat</p></td>'
-        '<td style="padding-left: 8px; padding-right: 8px;"><p>Bóg z miłości stworzył każdego człowieka na swój obraz</p></td>'
+        '<td style="$_tdPadding"><p>Aksjomat</p></td>'
+        '<td style="$_tdPadding"><p>Bóg z miłości stworzył każdego człowieka na swój obraz</p></td>'
         '</tr>'
         '</table>'
 
