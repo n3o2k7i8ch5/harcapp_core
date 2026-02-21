@@ -152,7 +152,7 @@ KonspektStep step_sfery_rozwoju = KonspektStep(
 );
 
 KonspektStep step_sfery_rozwoju_przyklady = KonspektStep(
-    title: 'Sfery rozwoju - wymienienie',
+    title: 'Sfery rozwoju - przykłady',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -210,7 +210,7 @@ KonspektStep step_sfery_rozwoju_sfery_funkcjonalne = KonspektStep(
         'Następnie prowadzący zbiera rozłożone wcześniej karty 4 sfer funkcjonalnych (ciała, umysłu, relacji i emocji) i symbolicznie składa je w stosik, który przykrywa kartą "sfery funkcjonalne" z załącznika $attach_html_sfery.'
 );
 
-KonspektStep step_sfery_rozwoju_sfery_funkcjonalne_arbitalnosc_podzialu = KonspektStep(
+KonspektStep step_sfery_rozwoju_sfery_funkcjonalne_arbitralnosc_podzialu = KonspektStep(
     title: 'Sfery rozwoju - sfery funkcjonalne - arbitralność podziału',
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
@@ -257,7 +257,7 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
         '<li><p style="text-align:justify;">Gdyby autem jechał Cezary, wziąłby narzędzia, zostawił samochód i pobiegł wykonać zlecenie u klienta.</p></li>'
         '</ul>'
         '<p style="text-align:justify;">'
-        'Wszyscy trzej umieją dokładnie to samo, wiedzą dokładnie to samo i mają dokładnie te same narzędzia. A jednak: każdy te same zdolności wykorzysałby zupełnie inaczej i w innym celu.'
+        'Wszyscy trzej umieją dokładnie to samo, wiedzą dokładnie to samo i mają dokładnie te same narzędzia. A jednak: każdy te same zdolności wykorzystałby zupełnie inaczej i w innym celu.'
         '</blockquote>'
 
         '<p style="text-align:justify;">'
@@ -265,16 +265,15 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
         '</p>'
 
         '<blockquote>'
-        'Czujecie różnicę? Sfery funkcjonalne i wszystkie wypływające z nich zdolności to worek narzędzi, które człowiek posiada.'
+        '<p style="text-align:justify;">Czujecie różnicę? Sfery funkcjonalne i wszystkie wypływające z nich zdolności to worek narzędzi, które człowiek posiada.</p>'
         '</blockquote>'
 
         '<p style="text-align:justify;">'
         'Następnie prowadzący wskazuje na kartkę "sfera ducha":'
         '</p>'
 
-        '<br>'
-        '<br>Sfera ducha nie dostarcza żadnych narzędzi. Sfera ducha określa, jak i do czego dostępne narzędzia mają być w życiu wykorzystywane.'
-        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">Sfera ducha nie dostarcza żadnych narzędzi. Sfera ducha określa, jak i do czego dostępne narzędzia mają być w życiu wykorzystywane.</p>'
         '</blockquote>'
 );
 
@@ -285,7 +284,7 @@ KonspektStepGroup step_group_definicja_sfery_ducha = KonspektStepGroup(
       step_sfery_rozwoju_przyklady,
       step_sfery_rozwoju_sfera_ducha_jest_inna,
       step_sfery_rozwoju_sfery_funkcjonalne,
-      step_sfery_rozwoju_sfery_funkcjonalne_arbitalnosc_podzialu,
+      step_sfery_rozwoju_sfery_funkcjonalne_arbitralnosc_podzialu,
       step_sfery_rozwoju_sfera_ducha,
     ]);
 
@@ -358,7 +357,7 @@ KonspektStep step_sfery_rozwoju_i_ich_relacje = KonspektStep(
 
         '</ul>'
         '<p style="text-align:justify;">'
-        'Prowadzący może zwrócić uwagę na fakt, że jest różnica między <b>emocjami</b> a <b>doświadczeniem duchowym</b>. Czasami przestrzenie te są mylone, ponieważ doświadczenie duchowe często rodzi silne emocje, ale jest doświadczeniem najgłębszego sensu bycia, jedności z Bogiem, etc..'
+        'Prowadzący może zwrócić uwagę na fakt, że jest różnica między <b>emocjami</b> a <b>doświadczeniem duchowym</b>. Czasami przestrzenie te są mylone, ponieważ doświadczenie duchowe często rodzi silne emocje, ale jest doświadczeniem najgłębszego sensu bycia, jedności z Bogiem, etc.'
         '<br>'
         '<br>Ważne, by prowadzący na końcu wprowadzenia zaznaczył:'
         '<br>'
@@ -886,11 +885,11 @@ KonspektStep _step_zdolnosci_integracji_duchowosci = KonspektStep(
       '</p>'
       '</li>'
 
+      '</ul>'
+
       '<p style="text-align:justify;">'
       'Gdy uczestnicy (z pomocą prowadzącego) dojdą do odpowiedzi, prowadzący odkrywa kartki i kładzie je <b>obok</b> kolumny kart z poziomami duchowości.'
       '</p>'
-
-      '</ul>'
 );
 
 KonspektStep _step_zdolnosci_integracji_duchowosci_wyjasnienie_przyklady = KonspektStep(
@@ -1315,7 +1314,7 @@ KonspektStep _step_duchowosc_w_zhp_podsumowanie = KonspektStep(
         '<li><p style="text-align:justify;">Jeśli harcerstwo chce być skuteczne wychowawczo, nie może abdykować z rozwoju duchowego na poziomie aksjomatu.</p></li>'
         '<li><p style="text-align:justify;">Harcerskie wychowanie jest fundamentalnie chrześcijańskie, nawet jeśli jego członkowie są innego wyznania.</p></li>'
         '<li><p style="text-align:justify;">Nie należy zbyt łatwo pomijać elementów tradycyjnej duchowości, których jako kadra nie rozumiemy. Zazwyczaj stoją za nimi dziesiątki wieków mądrości.</p></li>'
-        '<li><p style="text-align:justify;">Harcerstwo powinno mieć wysokie standardy. Nie po to, by prowadzić selekcję osób mogących harcerzami zostać, ale po to, by wychować ludzi w szacunku do wartości, postaw, a często również wiary, która dała nam świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, itd..</p></li>'
+        '<li><p style="text-align:justify;">Harcerstwo powinno mieć wysokie standardy. Nie po to, by prowadzić selekcję osób mogących harcerzami zostać, ale po to, by wychować ludzi w szacunku do wartości, postaw, a często również wiary, która dała nam świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, itd.</p></li>'
         '</ul>'
 
         '<p style="text-align:justify;">'
