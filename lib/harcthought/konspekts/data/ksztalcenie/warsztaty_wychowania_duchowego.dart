@@ -176,7 +176,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       attach_karty_zdolnosci_integracji_duchowosci,
 
       attach_aksjomaty_opisu_przyklady,
-      attach_aksjomaty_opisu_i_sensu_przyklady,
       attach_aksjomaty_sensu_przyklady,
       attach_aksjomaty_bledne_przyklady,
 
@@ -241,7 +240,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_zal_karty_zdolnosci_integracji_duchowosci,
 
       material_zal_aksjomaty_opisu_przyklady,
-      material_zal_aksjomaty_opisu_i_sensu_przyklady,
       material_zal_aksjomaty_sensu_przyklady,
       material_zal_aksjomaty_bledne_przyklady,
 

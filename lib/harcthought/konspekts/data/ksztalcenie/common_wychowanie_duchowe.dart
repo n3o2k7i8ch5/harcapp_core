@@ -31,13 +31,6 @@ KonspektMaterial material_zal_aksjomaty_opisu_przyklady = KonspektMaterial(
     amount: 1
 );
 
-KonspektMaterial material_zal_aksjomaty_opisu_i_sensu_przyklady = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_aksjomaty_opisu_i_sensu_przyklady”',
-    attachmentName: attach_name_aksjomaty_opisu_i_sensu_przyklady,
-    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
-    amount: 1
-);
-
 KonspektMaterial material_zal_aksjomaty_sensu_przyklady = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_aksjomaty_sensu_przyklady”',
     attachmentName: attach_name_aksjomaty_sensu_przyklady,
@@ -697,16 +690,15 @@ KonspektStep _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = Konspekt
     ],
     materials: [
       material_zal_aksjomaty_opisu_przyklady,
-      material_zal_aksjomaty_opisu_i_sensu_przyklady,
       material_zal_aksjomaty_sensu_przyklady,
       material_zal_aksjomaty_bledne_przyklady,
     ],
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.active,
     content: '<p style="text-align:justify;">'
-        'Aby uczestnicy oswoili się z aksjomatami, prowadzący rozdaje im wycięte i pomieszane kartki z przykładami z załączników $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_opisu_i_sensu_przyklady, $attach_html_aksjomaty_sensu_przyklady i $attach_html_aksjomaty_bledne_przyklady.'
+        'Aby uczestnicy oswoili się z aksjomatami, prowadzący rozdaje im wycięte i pomieszane kartki z przykładami z załączników $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_sensu_przyklady i $attach_html_aksjomaty_bledne_przyklady.'
         '<br>'
-        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio jako <b>aksjomaty opisu</b>, <b>aksjomaty opisu i sensu</b> oraz <b>aksjomaty sensu</b> - mając na uwadze, że <b>kilka przykładów nie jest aksjomatem</b> w ogóle. W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
+        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio jako <b>aksjomaty opisu</b> oraz <b>aksjomaty sensu</b> - mając na uwadze, że <b>kilka przykładów nie jest aksjomatem</b> w ogóle. W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
         '<br>'
         '<br>Kartki z przykładowymi aksjomatami powinny zostać ułożone w trzech kolumnach pod wyłożoną podczas prezentowania poziomów duchowości kartką "Aksjomat". Przykłady, które nie są aksjomatami należy odłożyć gdzieś z boku.'
         '<br>'

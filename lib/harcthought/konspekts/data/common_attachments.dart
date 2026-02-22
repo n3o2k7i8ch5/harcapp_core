@@ -124,18 +124,6 @@ KonspektAttachment attach_aksjomaty_opisu_przyklady = KonspektAttachment(
   },
 );
 
-const String attach_html_aksjomaty_opisu_i_sensu_przyklady = '<a href="$attach_name_aksjomaty_opisu_i_sensu_przyklady@attachment">$attach_title_aksjomaty_opisu_i_sensu_przyklady</a>';
-const String attach_name_aksjomaty_opisu_i_sensu_przyklady = 'aksjomaty_opisu_i_sensu_przyklady';
-const String attach_title_aksjomaty_opisu_i_sensu_przyklady = 'Aksjomaty opisu i sensu przykłady';
-KonspektAttachment attach_aksjomaty_opisu_i_sensu_przyklady = KonspektAttachment(
-  name: attach_name_aksjomaty_opisu_i_sensu_przyklady,
-  title: attach_title_aksjomaty_opisu_i_sensu_przyklady,
-  assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_opisu_i_sensu_przyklady.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_opisu_i_sensu_przyklady.docx',
-  },
-);
-
 const String attach_html_aksjomaty_sensu_przyklady = '<a href="$attach_name_aksjomaty_sensu_przyklady@attachment">$attach_title_aksjomaty_sensu_przyklady</a>';
 const String attach_name_aksjomaty_sensu_przyklady = 'aksjomaty_sensu_przyklady';
 const String attach_title_aksjomaty_sensu_przyklady = 'Aksjomaty sensu przykłady';
