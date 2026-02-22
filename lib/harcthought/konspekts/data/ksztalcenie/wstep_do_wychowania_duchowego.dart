@@ -159,7 +159,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
 
       ...step_group_definicja_sfery_ducha.steps,
 
-      ...step_group_poziomy_duchowosci_old.steps,
+      ...step_group_poziomy_duchowosci.steps,
 
       ...step_group_integracja_duchowosci.steps,
 

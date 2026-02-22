@@ -368,7 +368,7 @@ KonspektStepGroup step_group_definicja_sfery_ducha = KonspektStepGroup(
 
 // Poziomy (warstwy) duchowości
 
-KonspektStep step_poziomy_duchowosci_wstep = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_wstep = KonspektStep(
     title: 'Poziomy duchowości - wstęp',
     duration: Duration.zero,
     activeForm: KonspektStepActiveForm.static,
@@ -385,7 +385,7 @@ KonspektStep step_poziomy_duchowosci_wstep = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep step_poziomy_duchowosci_zachowania = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_zachowania = KonspektStep(
     title: 'Poziomy duchowości - zachowania',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
@@ -414,7 +414,7 @@ KonspektStep step_poziomy_duchowosci_zachowania = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep step_poziomy_duchowosci_wartosci = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_wartosci = KonspektStep(
     title: 'Poziomy duchowości - wartości',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
@@ -471,8 +471,7 @@ KonspektStep step_poziomy_duchowosci_wartosci = KonspektStep(
 
 );
 
-
-KonspektStep step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
     title: 'Poziomy rozwoju duchowego - aksjomaty - dekompozycja',
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
@@ -506,7 +505,7 @@ KonspektStep step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
         '<br>Zawsze w takich sekwencjach w końcu dochodzi się do ściany, gdzie nie ma już dalej odpowiedzi na pytanie "dlaczego". Albert nie ma dalszych odpowiedzi, nie dlatego, że jest głupi, ale dlatego, że dotarł do fundamentu — do pewnego przekonania, które z niczego dalej nie wynika. Zazwyczaj takie rozważania nie trwają kilku minut, a raczej kilka dni, miesięcy, czy nawet lat. Za każdym razem jednak, gdy dochodzi się do tej granicy, dotyka się ostatniego poziomu duchowości, czyli poziomu aksjomatu.'
 );
 
-KonspektStep step_poziomy_duchowosci_aksjomaty = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_aksjomaty = KonspektStep(
     title: 'Poziomy rozwoju duchowego - aksjomaty - dekompozycja',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
@@ -560,7 +559,7 @@ KonspektStep step_poziomy_duchowosci_aksjomaty = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep step_poziomy_duchowosci_aksjomaty_pytania = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_aksjomaty_pytania = KonspektStep(
     title: 'Poziomy rozwoju duchowego - pytania',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
@@ -569,124 +568,10 @@ KonspektStep step_poziomy_duchowosci_aksjomaty_pytania = KonspektStep(
         '</p>'
 );
 
-KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
-    title: 'Poziomy (warstwy) duchowości',
-    steps: [
-      step_poziomy_duchowosci_wstep,
-      step_poziomy_duchowosci_zachowania,
-      step_poziomy_duchowosci_wartosci,
-      step_poziomy_duchowosci_aksjomaty_dekompozycja,
-      step_poziomy_duchowosci_aksjomaty,
-      step_poziomy_duchowosci_aksjomaty_pytania,
-    ]
-);
-
-
-// Poziomy (warstwy) duchowości - old
-
-KonspektStep _step_poziomy_duchowosci = KonspektStep(
-    title: 'Poziomy (warstwy) rozwoju duchowego',
-    duration: Duration(minutes: 10),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący, opierając się na poradniku $attach_html_poradnik_o_strukturze_duchowosci wprowadza kolejno rozróżnienie poziomów duchowości: <b>zachowań</b>, <b>wartości</b> i <b>aksjomatów</b> (kolejność definiowania jest ważna). Po zdefiniowaniu każdego poziomu kładzie w widocznym miejscu odpowiednią kartkę z załącznika $attach_html_karty_poziomow_duchowosci, aby uczestnicy mogli w każdej chwili do nich wrócić.'
-        '<br>'
-        '<br>Prowadzący może w tym miejscu posiłkować się przykładem:'
-        '</p>'
-
-        '<table border="1" style="$_tableStyleWide">'
-        '<tr>'
-        '<td style="$_tdPadding"><p>Zachowanie</p></td>'
-        '<td style="$_tdPadding"><p>Oddanie własnego obiadu bezdomnemu</p></td>'
-        '</tr>'
-        '<tr>'
-        '<td style="$_tdPadding"><p>Wartość</p></td>'
-        '<td style="$_tdPadding"><p>Godność każdego człowieka</p></td>'
-        '</tr>'
-        '<tr>'
-        '<td style="$_tdPadding"><p>Aksjomat</p></td>'
-        '<td style="$_tdPadding"><p>Bóg z miłości stworzył każdego człowieka na swój obraz</p></td>'
-        '</tr>'
-        '</table>'
-
-        '<p style="text-align:justify;">'
-        'Dodatkowo prowadzący definiuje skróty: duchowość <b>wymierna</b> (poziom zachowań) i <b>głęboka</b> (poziom wartości i aksjomatów).'
-        '<br>'
-        '<br>Prowadzący powinien zaznaczyć, że „poziom duchowości" oznacza tu warstwę czy piętro hierarchii, a nie stopień zaawansowania (jak np. poziom w grze komputerowej).'
-        '</p>'
-);
-
-KonspektStep _step_poziomy_duchowosci_przyklady_uczestnikow = KonspektStep(
-    title: 'Poziomy (warstwy) rozwoju duchowego - przykłady uczestników',
-    duration: Duration(minutes: 5),
-    required: false,
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący prosi uczestników o podanie kilku przykładów do każdego poziomu duchowości i ew. wchodzi w krótką dyskusję, jeśli coś jest nie tak w przykładach uczestników.'
-        '<br>'
-        '<br><u>Uwagi o wartościach:</u>'
-        '</p>'
-
-        '<ul>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Wartości zawsze oceniają <b>stan świata</b>. Bezstanowe określenia w stylu "rodzina" formalnie nie są wartością: mogą nią być "posiadanie rodziny", "majętność rodziny", "szczęście członków rodziny", "liczebność rodziny".'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Mimo to, przecież ludzie mówią: <i>"rodzina jest dla mnie wartością"</i>!'
-        '<br>'
-        '<br>Gdy takie stwierdzenie wypowiada konkretna osoba, to w istocie deklaruje: <i>"dobro rodziny, tak jak je rozumiem, jest dla mnie wartością"</i>. Przykładowo:'
-        '<br>'
-        '<br>Gdy Marian deklaruje: <i>"rodzina jest dla mnie wartością"</i>, to w istocie stwierdza: <i>"ja, Marian, mam swoje przekonania, definicję dobra i zła. Chciałbym, aby wszystko na świecie było dobre, niestety, nie mogę zająć się na raz swoim zdrowiem, pracą i rodziną. Obszarem, który uważam za priorytetowy w doprowadzeniu do "dobra" jest moja rodzina. Dobra rodzina to dla mnie taka, której członkowie sobie ufają i się wspierają, więc nad tym będę pracował."</i>.'
-        '<br>'
-        '<br>Oznacza to w istocie, że dla Mariana wartością jest <i>"wzajemne zaufanie i wsparcie członków rodziny"</i>.'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Chwilowo człowiek może kierować się wartością <b>doświadczania przyjemności</b> wynikającej ze zjedzenia cukierka, czy <b>poczucie euforii</b> po kupieniu nowych ciuchów. To także są wartości wpisane w strukturę wartości człowieka.'
-        '</p>'
-        '</li>'
-
-        '</ul>',
-    materials: [
-      material_zal_karty_poziomow_duchowosci,
-    ]
-
-);
-
-KonspektStep _step_poziomy_duchowosci_aksjomat = KonspektStep(
-  title: 'Poziomy (warstwy) rozwoju duchowego - aksjomat',
-  duration: Duration(minutes: 5),
-  activeForm: KonspektStepActiveForm.static,
-  content: '<p style="text-align:justify;">'
-      'Poziom zachowań i wartości są dla większości osób zrozumiałe, jednak poziom aksjomatu może być nieintuicyjny. Po zdefiniowaniu wszystkich trzech poziomów duchowości, prowadzący zatrzymuje się dłużej nad aksjomatami.'
-      '<br>'
-      '<br>Prowadzący podaje kilka przykładów aksjomatów, np.:'
-      '</p>'
-
-      '$aksjomaty_przyklady'
-
-      '<p style="text-align:justify;">'
-      '<b>Aksjomat jest zawsze fundamentalną, niesprawdzalną wiarą w określony porządek rzeczy — i całkowicie porządkuje postrzeganie rzeczywistości</b>. Aby to zobrazować, prowadzący może posłużyć się przykładem:'
-      '<br>'
-      '<br><i>"Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Również, jeśli zobaczy dowód na kulistość Ziemi, to wniosek będzie miał tylko jeden: narzędzia użyte przy tych dowodach były wadliwe.'
-      '<br>'
-      '<br>Czy to powinno zaskakiwać? Przecież my, gdy nam przedstawiono nagranie dowodzące, że księżyc jest jedynie wyświetlanym hologramem, też uznalibyśmy, że to nagranie musi być błędne. Nie zakładalibyśmy, że cała nauka się pomyliła - a przecież nauka mogła się pomylić, my jedynie wierzymy, że ona dobrze opisuje rzeczywistość.".</i>'
-      '<br>'
-      '<br>Prowadzący dzieli aksjomaty na dwie nierozłączne grupy (tzn. każdy aksjomat może należeć do jednej z grup lub wszystkich na raz): <b>aksjomaty opisu</b> oraz <b>aksjomaty sensu</b> na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci.'
-      '</p>'
-);
-
-KonspektStep _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = KonspektStep(
-    title: 'Poziomy (warstwy) rozwoju duchowego - aksjomat - dopasowanie przykładów',
+KonspektStep _step_poziomy_duchowosci_aksjomaty_dopasowanie_przykladow = KonspektStep(
+    title: 'Poziomy rozwoju duchowego - aksjomaty - dopasowanie przykładów',
     aims: [
-      'Zrozumienie przez uczestników w praktyce różnicy między aksjomatami opisu, a aksjomatami sensu.',
+      'Zbudowanie u uczestników intuicji dotyczącej tego, co jest, a co nie jest aksjomatem.',
     ],
     materials: [
       material_zal_aksjomaty_opisu_przyklady,
@@ -706,13 +591,17 @@ KonspektStep _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow = Konspekt
         '</p>'
 );
 
-KonspektStepGroup step_group_poziomy_duchowosci_old = KonspektStepGroup(
+
+KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
     title: 'Poziomy (warstwy) duchowości',
     steps: [
-      _step_poziomy_duchowosci,
-      _step_poziomy_duchowosci_przyklady_uczestnikow,
-      _step_poziomy_duchowosci_aksjomat,
-      _step_poziomy_duchowosci_aksjomat_dopasowanie_przykladow
+      _step_poziomy_duchowosci_wstep,
+      _step_poziomy_duchowosci_zachowania,
+      _step_poziomy_duchowosci_wartosci,
+      _step_poziomy_duchowosci_aksjomaty_dekompozycja,
+      _step_poziomy_duchowosci_aksjomaty,
+      _step_poziomy_duchowosci_aksjomaty_pytania,
+      _step_poziomy_duchowosci_aksjomaty_dopasowanie_przykladow
     ]
 );
 
