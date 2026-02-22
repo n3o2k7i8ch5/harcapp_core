@@ -186,6 +186,18 @@ KonspektAttachment attach_meta_narracja_przyklady = KonspektAttachment(
   },
 );
 
+const String attach_html_meta_narracja_scenka = '<a href="$attach_name_meta_narracja_scenka@attachment">$attach_title_meta_narracja_scenka</a>';
+const String attach_name_meta_narracja_scenka = 'meta_narracja_scenka';
+const String attach_title_meta_narracja_scenka = 'Meta-narracja scenka';
+KonspektAttachment attach_meta_narracja_scenka = KonspektAttachment(
+  name: attach_name_meta_narracja_scenka,
+  title: attach_title_meta_narracja_scenka,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_meta_narracja_scenka.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_meta_narracja_scenka.docx',
+  },
+);
+
 const String attach_html_neutralnosc_duchowa_przyklady = '<a href="$attach_name_neutralnosc_duchowa_przyklady@attachment">$attach_title_neutralnosc_duchowa_przyklady</a>';
 const String attach_name_neutralnosc_duchowa_przyklady = 'neutralnosc_duchowa_przyklady';
 const String attach_title_neutralnosc_duchowa_przyklady = 'Neutralność duchowa - przykłady';

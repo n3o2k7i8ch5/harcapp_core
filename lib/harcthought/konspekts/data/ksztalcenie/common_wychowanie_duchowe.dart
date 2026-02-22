@@ -82,6 +82,12 @@ KonspektMaterial material_zal_meta_narracja_przyklady = KonspektMaterial(
     additionalPreparation: "Załącznik należy pociąć na 4 kartki wzdłuż przerywanych linii."
 );
 
+KonspektMaterial material_zal_meta_narracja_scenka = KonspektMaterial(
+    name: 'Wydrukowany załącznik "$attach_title_meta_narracja_scenka"',
+    attachmentName: attach_name_meta_narracja_scenka,
+    amount: 4
+);
+
 KonspektMaterial material_flipchart = KonspektMaterial(
   name: 'Duży arkusz papieru (flipchart)',
   amount: 2,
@@ -900,27 +906,17 @@ KonspektStep _step_meta_narracja_scenka_wprowadzenie = KonspektStep(
     title: 'Meta-narracja - scenka - wprowadzenie',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
+    materials: [
+      material_zal_meta_narracja_scenka,
+    ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący przedstawia uczestnikom krótką historię:'
-        '<br>'
-        '<br>'
-        '<i>Na obozie dwóch wędrowników, Radek i Adam, weszło ze sobą w konflikt. Zaczęło się od żartów i docinków, ale w ciągu kilku tygodni eskalowało w celowe robienie sobie na złość. Pewnego razu Radek podciął Adamowi linki do hamaka - gdy wieczorem Adam kładł się spać, cały hamak runął. Wybuchła afera.'
-        '<br>'
-        '<br>Drużynowy wziął chłopaków na rozmowę. Radkowi było głupio — wiedział, że przesadził. Po kilku dniach przeprosił Adama za wszystkie dotychczasowe niesnaski, jednak Adam wzruszył tylko ramionami.'
-        '<br>'
-        '<br>Radek zaprzestał docinków, ale Adam wciąż go ignorował i co jakiś czas rzucał kąśliwe uwagi. Po miesiącu drużynowy wziął Adama na rozmowę: zgodnie z Prawem Harcerskim należy traktować innych jak bliźnich i braci, a skoro Radek przeprosił, Adam powinien mu wybaczyć.'
-        '<br>'
-        '<br>Adam jednak stwierdził:'
-        '<br>'
-        '<br>"Mogę dać mu spokój, ale po tym co zrobił nie zasługuje na traktowanie jak brata. Czemu mam wierzyć w Prawo Harcerskie, które garstka starych dinozaurów z poprzedniej epoki, czyli Rada Naczelna, może w każdym momencie zmienić? Braterstwo jest dla niekumatych dzieci. Ja mam inne zasady — nie ma drugiej szansy. To tylko zachęca do nadużyć z myślą, że potem wystarczy przeprosić. Konsekwencje win powinny trwać całe życie."'
-        '</i>'
-        '<br>'
-        '<br>Prowadzący informuje uczestników, że za chwilę wcielą się oni w najlepszej jakości, światowej klasy kadrę wędrowniczą. Ich zadaniem będzie odbyć rozmowę z Adamem i spróbować <b>przekonać go w ciągu 15 minut, że harcerską postawą jest wybaczyć Radkowi, kierując się 4. punktem PH.</b>'
+        'Prowadzący rozdaje uczestnikom załącznik $attach_html_meta_narracja_scenka, po czym czyta na głos opisaną tam historię. Następnie informuje uczestników, że za chwilę wcielą się w kadrę wędrowniczą. Ich zadaniem będzie odbyć rozmowę z Adamem i spróbować <b>przekonać go w ciągu 15 minut, że harcerską postawą jest wybaczyć Radkowi, kierując się 4. punktem PH.</b>'
         '<br>'
         '<br>Uwagi:'
         '</p>'
         '<ul>'
         '<li><p style="text-align:justify;">Jeśli prowadzący nie jest sam, najlepiej, jeśli aktorem grającym Adama będzie ktoś inny niż osoba czytająca opis.</p></li>'
+        '<li><p style="text-align:justify;">Wskazane jest, aby na czas "grania roli Adama" prowadzący jakoś się ucharakteryzował, np. ubrał czapkę.</p></li>'
         '<li><p style="text-align:justify;">Jeśli uczestników jest wielu (ponad 10), a prowadzący nie jest sam, można podzielić uczestników na grupy i odegrać scenkę niezależnie w grupach przez różnych prowadzących.</p></li>'
         '<li><p style="text-align:justify;">Jeśli prowadzący bardzo nie chce wcielać się w rolę, formę można przeprowadzić w postaci aktywnej dyskusji, gdzie prowadzący wciela się w "adwokata diabła" i stara się argumentować tak, jak robiłby Adam.</p></li>'
         '</ul>'

@@ -180,6 +180,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       attach_aksjomaty_sensu_przyklady,
       attach_aksjomaty_bledne_przyklady,
 
+      attach_meta_narracja_scenka,
       attach_meta_narracja_opis,
       attach_meta_narracja_przyklady,
       attach_neutralnosc_duchowa_przyklady,
@@ -245,6 +246,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_zal_aksjomaty_bledne_przyklady,
 
       material_budzik,
+      material_zal_meta_narracja_scenka,
       material_zal_meta_narracja_opis,
       material_zal_meta_narracja_przyklady,
 
