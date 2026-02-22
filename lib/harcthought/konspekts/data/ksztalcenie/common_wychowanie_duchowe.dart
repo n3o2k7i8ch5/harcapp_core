@@ -349,7 +349,7 @@ KonspektStep step_sfery_rozwoju_sfera_ducha_dopowiedzenie = KonspektStep(
 );
 
 KonspektStep step_sfery_rozwoju_pytania = KonspektStep(
-    title: 'Sfery rozwoju - sfera ducha - dopowiedzenie i przykład',
+    title: 'Sfery rozwoju - pytania',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -385,7 +385,7 @@ KonspektStep step_poziomy_duchowosci_wstep = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Ustaliliśy już, że duchowość to sposób, w jaki człowiek reaguje na rzeczywistość. Fajnie byłoby jednak móc nieco precyzyjniej opisać różne duchowości, żeby umożliwić ich nazywanie, porównywanie, analizę itd.'
+        'Ustaliliśmy już, że duchowość to sposób, w jaki człowiek reaguje na rzeczywistość. Fajnie byłoby jednak móc nieco precyzyjniej opisać różne duchowości, żeby umożliwić ich nazywanie, porównywanie, analizę itd.'
         '<br><br>'
         'Na szczęście taka możliwość istnieje, nawet nie jedna: w pracy wychowawczej szczególnie przydatne są trzy sposoby spojrzenia na duchowość, każda na innym poziomie abstrakcji.'
         '</p>'
@@ -402,7 +402,7 @@ KonspektStep step_poziomy_duchowosci_zachowania = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Najbardziej wymiernym (bezpośrednim) sposobem spojrzenia na duchowość jest poziom zachowań. Obrazowo polega to na tym, by konkretną duchowość opisać przez stworzenie gigantycznej, w zasadzie nieskończoną tabeli, w której do każdej możliwej sytuacji, przypisane jest zachowanie, które człowiek w reakcji na nią podejmie.'
+        'Najbardziej wymiernym (bezpośrednim) sposobem spojrzenia na duchowość jest poziom zachowań. Obrazowo polega to na tym, by konkretną duchowość opisać przez stworzenie gigantycznej, w zasadzie nieskończonej tabeli, w której do każdej możliwej sytuacji, przypisane jest zachowanie, które człowiek w reakcji na nią podejmie.'
         '<br>'
         '<br>Przykładowo, dla Alberta można byłoby powiedzieć, że:'
         '</p>'
@@ -416,7 +416,7 @@ KonspektStep step_poziomy_duchowosci_zachowania = KonspektStep(
         '<li>...i tak dalej, i tak dalej.</li>'
         '</ul>'
         '<p style="text-align:justify;">'
-        'Oczwyiście taka tabelka musi zawsze brać pod uwagę wszystkie okoliczności, warunki otoczenia, stan samego Alberta itd. - co nie zmienia faktu, że dla każdego człowieka można stworzyć taką tabelkę <b>zachowań</b>.'
+        'Oczywiście taka tabelka musi zawsze brać pod uwagę wszystkie okoliczności, warunki otoczenia, stan samego Alberta itd. - co nie zmienia faktu, że dla każdego człowieka można stworzyć taką tabelkę <b>zachowań</b>.'
         '</p>'
         '</blockquote>'
 );
@@ -431,13 +431,13 @@ KonspektStep step_poziomy_duchowosci_wartosci = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Tabelka z zachowaniami ma niestety swoje problemy: mianowicie lista możliwych do wystąpienia okoliczości jest nieskończona, podobnie jak nieskończona jest liczba stanów, w jakich może podczas każdej z tych okoliczności znajdować się człowiek — bardzo ciężko jest w praktyce myśleć o czyjejś duchowości tylko przez pryzmat jego zachowań.'
+        'Tabelka z zachowaniami ma niestety swoje problemy: mianowicie lista możliwych do wystąpienia okoliczności jest nieskończona, podobnie jak nieskończona jest liczba stanów, w jakich może podczas każdej z tych okoliczności znajdować się człowiek — bardzo ciężko jest w praktyce myśleć o czyjejś duchowości tylko przez pryzmat jego zachowań.'
         '<br>'
         '<br>Na szczęście tak się składa, że (zazwyczaj) ludzie nie podejmują losowych, niezwiązanych między sobą zachowań. Zazwyczaj każdy do czegoś dąży - najczęściej do jakiegoś określonego stanu, który uważa za dobry (świadomie, lub nie).'
         '<br>'
         '<br>Duchowość człowieka można zatem opisać nieco ogólniej i zamiast rozważać same zachowania człowieka, można pochylić się nad tym, do czego one dążą, albo co człowiek uważa za dobre. Mówiąc inaczej, duchowość każdego człowieka można opisać przez jego <b>hierarchię wartości</b>.'
         '<br>'
-        '<br>Wartości są abstrakcyjnymi bytami, czy stanami: np. zdrowie, władza, bogactwo, posiadanie, rodzina, pokora, patriotyzm, ale też przyjemność, brak głodu, spokój, etc.. Żadnej z tych rzeczy nie da się wskazać palcem. Wartości są abstrakcyjnymi bytami, czy stanami które człowiek uważa za dobre i do których człowiek dąży.'
+        '<br>Wartości są abstrakcyjnymi bytami, czy stanami: np. zdrowie, władza, bogactwo, posiadanie, rodzina, pokora, patriotyzm, ale też przyjemność, brak głodu, spokój, etc. Żadnej z tych rzeczy nie da się wskazać palcem. Wartości są abstrakcyjnymi bytami, czy stanami które człowiek uważa za dobre i do których człowiek dąży.'
         '</p>'
         '</blockquote>'
 
@@ -457,7 +457,7 @@ KonspektStep step_poziomy_duchowosci_wartosci = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'No dobrze, ale skoro wartości są tym, co człowiek uważa za dobre i tym, za do czego człowiek dąży, to jak to jest, że uczniowie bardzo chcą dobrze napisać maturę, a studenci bardzo chcą zdać sesję, ale jakoś tak się składa, że zamiast się uczyć robią zupełne głupoty pokroju scrollowania instagrama? Wartości jedno, a zachowania drugie? O co chodzi?'
+        'No dobrze, ale skoro wartości są tym, co człowiek uważa za dobre i tym, do czego człowiek dąży, to jak to jest, że uczniowie bardzo chcą dobrze napisać maturę, a studenci bardzo chcą zdać sesję, ale jakoś tak się składa, że zamiast się uczyć robią zupełne głupoty pokroju scrollowania instagrama? Wartości jedno, a zachowania drugie? O co chodzi?'
         '</p>'
         '</blockquote>'
 
@@ -550,7 +550,7 @@ KonspektStep step_poziomy_duchowosci_aksjomaty = KonspektStep(
         '<br>'
         '<br>Przykład: Albert wziął się za naprawę, a przecież mógłby uklęknąć i medytować, by odeprzeć wibracje chaosu od silnika. Dlaczego tego nie zrobił? Może medytacja by zadziałała. Może mechanika, której uczył się w szkole nie ma zastosowania do akurat tego silnika: może prawa fizyki uległy tu akurat zmianie. Albert wziął się za naprawę, bo wierzy, że świat rządzi się stałymi prawami, które można poznać i zastosować.'
         '<br>'
-        '<br>Inny przykład: Albert naprawia auto w mrozie, mimo że nikt go nie widzi, nikt mu dodatkowo nie zapłaci: mógłby olać temat i poczekać na lawetę. Czemu tego nie zrobi? Skąd u niego wartości takie jak zaradność, inicjatywa, czy działania mimo trudu? Przeciez Albert mógłby wierzyć, że zepsute auto to znak z niebios.'
+        '<br>Inny przykład: Albert naprawia auto w mrozie, mimo że nikt go nie widzi, nikt mu dodatkowo nie zapłaci: mógłby olać temat i poczekać na lawetę. Czemu tego nie zrobi? Skąd u niego wartości takie jak zaradność, inicjatywa, czy działania mimo trudu? Przecież Albert mógłby wierzyć, że zepsute auto to znak z niebios.'
         '<br>'
         '<br>Tymczasem Albert bez żadnego specjalnego powodu wierzy, że świat staje się lepszy, gdy człowiek dobrowolnie bierze na siebie krzyż, trudy, zmagania rzeczywistości i je dźwiga — nawet, gdy nikt tego nie wymaga. Dlaczego w to wierzy? Wierzy, bo tak. Taki wyznaje aksjomat i cześć.'
         '</p>'
@@ -562,7 +562,7 @@ KonspektStep step_poziomy_duchowosci_aksjomaty = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Ludzie wierzą w różne rzeczy. Spojrzenie na duchowość człowieka przez pryzmat poziomu aksjomatów polega na ustaleniu: co stoi za czyjąś strukturą wartości? Jaka wiara, porządkuje i nadaje interpretację postrzeganej rzeczywistości? Jakie jest najwyższe dobro, czy cel, któremu podporządkowują swoje dążenia?'
+        'Ludzie wierzą w różne rzeczy. Spojrzenie na duchowość człowieka przez pryzmat poziomu aksjomatów polega na ustaleniu: co stoi za czyjąś strukturą wartości? Jaka wiara porządkuje i nadaje interpretację postrzeganej rzeczywistości? Jakie jest najwyższe dobro, czy cel, któremu podporządkowują swoje dążenia?'
         '</p>'
         '</blockquote>'
 );
