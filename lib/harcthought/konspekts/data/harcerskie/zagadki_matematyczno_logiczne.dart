@@ -95,6 +95,6 @@ Konspekt zagadki_matematyczno_logiczne = const Konspekt(
       '</ul>'
 
       '<p style="text-align:justify;">'
-      'Forma wykorzystuje wpływ sfer funkcjonalnych na sferę ducha korzystając z czynnika wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..'
+      'Forma wykorzystuje wpływ sfer zdolności na sferę ducha korzystając z czynnika wartości wtórnych - uczestnicy będą mieli tendencję, by z czasem uznać umiejętność logicznego myślenia za ważną, ponieważ będą ją dobrze umieli. W ślad za tym pójdą zaś szacunek do nauki, krytycznego myślenia, itd..'
       '</p>',
 );

@@ -199,41 +199,41 @@ KonspektStep step_sfery_rozwoju_sfera_ducha_jest_inna = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep step_sfery_rozwoju_sfery_funkcjonalne = KonspektStep(
-    title: 'Sfery rozwoju - sfery funkcjonalne',
+KonspektStep step_sfery_rozwoju_sfery_zdolnosci = KonspektStep(
+    title: 'Sfery rozwoju - sfery zdolności',
     duration: Duration(minutes: 1),
     activeForm: KonspektStepActiveForm.static,
     materials: [
       material_zal_sfery,
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący definiuje sfery funkcjonalne:'
+        'Prowadzący definiuje sfery zdolności:'
         '</p>'
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Przywołane dotąd 4 sfery (ciała, umysłu, emocji i relacji) łączy jedno: wszystkie są źródłem <b>zdolności</b> (np. szybkiego biegu, czy rozwiązywania skomplikowanych problemów). Te zdolności są jak <b>narzędzia</b>, które leżą na półce, gotowe do użycia. O tych sferach można zbiorczo mówić jako o <b>sferach funkcjonalnych</b> - są bowiem źródłem funkcjonalności.'
+        'Przywołane dotąd 4 sfery (ciała, umysłu, emocji i relacji) łączy jedno: wszystkie są źródłem <b>zdolności</b> (np. szybkiego biegu, czy rozwiązywania skomplikowanych problemów). Te zdolności są jak <b>narzędzia</b>, które leżą na półce, gotowe do użycia. O tych sferach można zbiorczo mówić jako o <b>sferach zdolności</b> - są bowiem źródłem zdolności.'
         '</p>'
         '</blockquote>'
         '<p style="text-align:justify;">'
-        'Następnie prowadzący zbiera rozłożone wcześniej karty 4 sfer funkcjonalnych (ciała, umysłu, relacji i emocji) i symbolicznie składa je w stosik, który przykrywa kartą "sfery funkcjonalne" z załącznika $attach_html_sfery.'
+        'Następnie prowadzący zbiera rozłożone wcześniej karty 4 sfer zdolności (ciała, umysłu, relacji i emocji) i symbolicznie składa je w stosik, który przykrywa kartą "sfery zdolności" z załącznika $attach_html_sfery.'
 );
 
-KonspektStep step_sfery_rozwoju_sfery_funkcjonalne_arbitralnosc_podzialu = KonspektStep(
-    title: 'Sfery rozwoju - sfery funkcjonalne - arbitralność podziału',
+KonspektStep step_sfery_rozwoju_sfery_zdolnosci_arbitralnosc_podzialu = KonspektStep(
+    title: 'Sfery rozwoju - sfery zdolności - arbitralność podziału',
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     materials: [
       material_zal_sfery_przyklady,
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę, że traktowanie sfer funkcjonalnych łącznie, bez wchodzenia w to, czy chodzi o ciało, umysł, emocje, czy relacje rozwiązuje dwa problemy:'
+        'Prowadzący zwraca uwagę, że traktowanie sfer zdolności łącznie, bez wchodzenia w to, czy chodzi o ciało, umysł, emocje, czy relacje rozwiązuje dwa problemy:'
         '</p>'
         '<ul>'
-        '<li><p style="text-align:justify;"><b>Arbitralność podziału</b> — to, że ktoś podzielił sfery funkcjonalne na 4 jest arbitralną decyzją. Równie dobrze można by zmieścić wszystko w dwóch: sferze ciała i umysłu, który przecież odpowiada zarówno za sferę emocji człowieka jak i za kompetencje społeczne. Można również pójść w drugą stronę i wydzielić więcej sfer: np. dodać sferę zasobów materialnych.</p></li>'
+        '<li><p style="text-align:justify;"><b>Arbitralność podziału</b> — to, że ktoś podzielił sfery zdolności na 4 jest arbitralną decyzją. Równie dobrze można by zmieścić wszystko w dwóch: sferze ciała i umysłu, który przecież odpowiada zarówno za sferę emocji człowieka jak i za kompetencje społeczne. Można również pójść w drugą stronę i wydzielić więcej sfer: np. dodać sferę zasobów materialnych.</p></li>'
         '<li><p style="text-align:justify;"><b>Nieostrość podziału</b> — w obecnym podziale (i w każdym podziale) istnieją zdolności, które nie pasują do tylko jednej sfery.</p></li>'
         '</ul>'
         '<p style="text-align:justify;">'
-        'Prowadzący może skorzystać z <b>dwóch szarych kartek</b> z załącznika $attach_html_sfery_przyklady i poprosić uczestników o wskazanie, do której sfery funkcjonalnej przynależą zapisane na nich zdolności:'
+        'Prowadzący może skorzystać z <b>dwóch szarych kartek</b> z załącznika $attach_html_sfery_przyklady i poprosić uczestników o wskazanie, do której sfery zdolności przynależą zapisane na nich zdolności:'
         '</p>'
         '<table border="1" style="$_tableStyle">'
         '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Potrafi w kilka dni zdyskredytować czyjąś reputację</i></p></td><td style="$_tdPadding"><p><b>Relacje</b> i <b>Umysł</b></p></td></tr>'
@@ -254,15 +254,15 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
         '</p>'
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Sfery funkcjonalne, czyli zdolności człowieka, to dopiero połowa historii.'
+        'Sfery zdolności to dopiero połowa historii.'
         '</p>'
         '</blockquote>'
         '<p style="text-align:justify;">'
-        'Prowadzący kładzie dookoła kartki "sfery funkcjonalne" kartki z przykładowymi zdolnościami z załącznika $attach_html_sfery_przyklady i opowiada następującą historię:'
+        'Prowadzący kładzie dookoła kartki "sfery zdolności" kartki z przykładowymi zdolnościami z załącznika $attach_html_sfery_przyklady i opowiada następującą historię:'
         '</p>'
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Wyobraźcie sobie trzech ludzi: Alberta, Bartka i Cezarego. Mieszkają w tym samym mieście. Każdy ma 20 lat. Pracują w tej samej firmie zajmującej się montażem elektryki. Każda zdolność, którą tu widzicie, opisuje każdego z nich w identycznym stopniu: każdy umie tak samo dobrze biegać, tak samo dobrze rozumie budowę silnika, każdy ma narzeczoną. Ba: <b>ich sfery funkcjonalne są identyczne</b>.'
+        'Wyobraźcie sobie trzech ludzi: Alberta, Bartka i Cezarego. Mieszkają w tym samym mieście. Każdy ma 20 lat. Pracują w tej samej firmie zajmującej się montażem elektryki. Każda zdolność, którą tu widzicie, opisuje każdego z nich w identycznym stopniu: każdy umie tak samo dobrze biegać, tak samo dobrze rozumie budowę silnika, każdy ma narzeczoną. Ba: <b>ich sfery zdolności są identyczne</b>.'
         '<br>'
         '<br>Pewnego ranka jeden z nich jedzie autem do klienta. W połowie drogi auto się psuje. Na zewnątrz jest minus piętnaście stopni.'
         '</p>'
@@ -276,11 +276,11 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
         '</blockquote>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący kładzie obok kartki "sfery funkcjonalne", kartkę "sfera ducha" z załącznika $attach_html_sfery. Wskazuje najpierw na kartkę "sfery funkcjonalne" wraz z przykładami zdolności i podsumowuje:'
+        'Prowadzący kładzie obok kartki "sfery zdolności", kartkę "sfera ducha" z załącznika $attach_html_sfery. Wskazuje najpierw na kartkę "sfery zdolności" wraz z przykładami zdolności i podsumowuje:'
         '</p>'
 
         '<blockquote>'
-        '<p style="text-align:justify;">Czujecie różnicę? Sfery funkcjonalne i wszystkie wypływające z nich zdolności to worek narzędzi, które człowiek posiada.</p>'
+        '<p style="text-align:justify;">Czujecie różnicę? Sfery zdolności i wszystkie wypływające z nich kompetencje to worek narzędzi, które człowiek posiada.</p>'
         '</blockquote>'
 
         '<p style="text-align:justify;">'
@@ -296,6 +296,7 @@ KonspektStep step_sfery_rozwoju_sfera_ducha_dopowiedzenie = KonspektStep(
     title: 'Sfery rozwoju - sfera ducha - dopowiedzenie i przykład',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
+    required: false,
     content: '<p style="text-align:justify;">'
         'Prowadzący proponuje pewną intuicję dotyczącą sfery ducha:'
         '</p>'
@@ -358,8 +359,8 @@ KonspektStepGroup step_group_definicja_sfery_ducha = KonspektStepGroup(
       step_sfery_rozwoju,
       step_sfery_rozwoju_przyklady,
       step_sfery_rozwoju_sfera_ducha_jest_inna,
-      step_sfery_rozwoju_sfery_funkcjonalne,
-      step_sfery_rozwoju_sfery_funkcjonalne_arbitralnosc_podzialu,
+      step_sfery_rozwoju_sfery_zdolnosci,
+      step_sfery_rozwoju_sfery_zdolnosci_arbitralnosc_podzialu,
       step_sfery_rozwoju_sfera_ducha,
       step_sfery_rozwoju_sfera_ducha_dopowiedzenie,
       step_sfery_rozwoju_pytania,
@@ -591,6 +592,49 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dopasowanie_przykladow = Konspek
         '</p>'
 );
 
+KonspektStep _step_poziomy_duchowosci_aksjomaty_plaska_ziemia = KonspektStep(
+    title: 'Poziomy rozwoju duchowego - aksjomaty - intuicja',
+    duration: Duration(minutes: 5),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący, żeby sprawdzić, czy uczestnicy rozumieją sposób funkcjonowania aksjomatów, stawia przed nimi pytanie:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Czy wiara w to, że Ziemia jest płaska, może być aksjomatem?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący wchodzi z uczestnikami w dyskusję i przechodzi przez trzy punkty:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Jeśli ktoś wierzy w to, że świat można badać, że wyniki badań są obiektywne i nie zależą od tego, kto, kiedy i gdzie wykonuje jakaś obserwację, to może uznać, że Ziemia jest płaska na przykład wskutek błędnych badań, ale nie będzie to jego aksjomatem, tylko jego wnioskiem.'
+        '<br>'
+        '<br>Ale może być też tak, że ktoś wyjdzie z założenia, że Ziemia jest płaska i w oparciu o to zbuduje metodę badania świata - to, czy jego wnioski będą miały cokolwiek wspólnego z rzeczywistością to już zupełnie inna sprawa.'
+        '</p>'
+
+        '<ol>'
+        '<li><p style="text-align:justify;">'
+        '<b>Aksjomat porządkuje wszystko inne.</b>'
+        '<br>Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Gdy zobaczy zdjęcie kulistej Ziemi z kosmosu, wniosek będzie miał tylko jeden: zdjęcie jest sfałszowane, albo przykładowo uzna to za dowód na to, że przebywanie w próżni powoduje iluzję kulistości rzeczy płaskich.'
+        '</p></li>'
+        '<li><p style="text-align:justify;">'
+        '<b>My robimy dokładnie to samo.</b>'
+        '<br>Gdyby ktoś powiedział, że zrobił naukowy eksperyment wykazujący, że grawitacja nie istnieje, też uznalibyśmy, że eksperyment musi być błędny. Nie założylibyśmy nagle, że cała fizyka się myli. A przecież mogłaby się mylić — my jedynie wierzymy, że dobrze opisuje rzeczywistość.'
+        '</p></li>'
+        '<li><p style="text-align:justify;">'
+        '<b>Tak działa każdy aksjomat.</b>'
+        '<br>Gdy wyniki eksperymentu odbiegają od oczekiwań, żaden naukowiec nie stwierdza „nauka nie działa, rzucam ten chłam". Nagina swoje rozumienie świata tak, żeby wyniki pasowały do jego wiary, że metoda naukowa zawsze działa. Wyznawca płaskiej Ziemi robi dokładnie to samo — tylko z innym aksjomatem.'
+        '</p></li>'
+        '</ol>'
+        '</blockquote>'
+);
+
+
 
 KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
     title: 'Poziomy (warstwy) duchowości',
@@ -601,7 +645,8 @@ KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
       _step_poziomy_duchowosci_aksjomaty_dekompozycja,
       _step_poziomy_duchowosci_aksjomaty,
       _step_poziomy_duchowosci_aksjomaty_pytania,
-      _step_poziomy_duchowosci_aksjomaty_dopasowanie_przykladow
+      _step_poziomy_duchowosci_aksjomaty_dopasowanie_przykladow,
+      _step_poziomy_duchowosci_aksjomaty_plaska_ziemia
     ]
 );
 

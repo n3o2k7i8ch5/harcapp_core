@@ -199,13 +199,13 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
           ),
 
           KonspektStep(
-              title: 'Sfery funkcjonalne',
+              title: 'Sfery zdolności',
               duration: Duration(minutes: 2),
               activeForm: KonspektStepActiveForm.static,
               content: '<p style="text-align:justify;">'
                   'Prowadzący zwraca uwagę, że wszystkie wymienione dotąd 4 sfery (ciała, umysłu, relacji i emocji) są źródłami umiejętności, czy zdolności. Sprawiają, że człowiek "może więcej", jednak żadna z tych sfer, nawet rozwinięta do perfekcji, <b>nie określa kiedy, czy, ani jak należy jakąś zdolność wykorzystać</b>.'
                   '<br>'
-                  '<br>Z tego powodu sfery <b>ciała</b>, <b>umysłu</b>, <b>relacji</b> i <b>emocji</b> są <b>sferami funkcjonalnymi</b> - są jak zestaw dostępnych narzędzi leżących w garażu.'
+                  '<br>Z tego powodu sfery <b>ciała</b>, <b>umysłu</b>, <b>relacji</b> i <b>emocji</b> są <b>sferami zdolności</b> - są jak zestaw dostępnych narzędzi leżących w garażu.'
                   '</p>'
           ),
 
@@ -216,7 +216,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
               content: '<p style="text-align:justify;">'
                   'Prowadzący definiuje sferę ducha:'
                   '<br>'
-                  '<br><i>Sfera ducha jest wszystkim tym, co kształtuje sposób postępowania: określa kiedy i jak się zachować, jak korzystać z dostępnych zdolności, które dają sfery funkcjonalne. Co ważne, <b>sfera ducha sama w sobie nie stwarza żadnych zdolności</b> - rozwinięty duch nie pozwala ani dalej skakać, ani lepiej widzieć, ani więcej rozumieć.</i>'
+                  '<br><i>Sfera ducha jest wszystkim tym, co kształtuje sposób postępowania: określa kiedy i jak się zachować, jak korzystać z dostępnych zdolności, które dają sfery zdolności. Co ważne, <b>sfera ducha sama w sobie nie stwarza żadnych zdolności</b> - rozwinięty duch nie pozwala ani dalej skakać, ani lepiej widzieć, ani więcej rozumieć.</i>'
                   '</p>'
           ),
 
@@ -228,7 +228,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
               content: '<p style="text-align:justify;">'
                   'Prowadzący może posłużyć się następującą analogią:'
                   '<br>'
-                  '<br><i>Sfery funkcjonalne można porównać do <b>funkcjonalności samochodu</b> - jego silnika, opon, zwrotności, głośników, ładowności, etc. Sfera ducha to <b>kierowca samochodu</b>: to on wybiera kierunek jazdy, prędkość, muzykę, rodzaj świateł, odczytuje prędkość i awarie z tablicy rozdzielczej. Samochód, nieważne jak dobry, bez kierowcy nigdzie nie pojedzie. Kierowca, nieważne jak doświadczony, w zepsutym samochodzie też donikąd nie dojedzie.</i>'
+                  '<br><i>Sfery zdolności można porównać do <b>funkcjonalności samochodu</b> - jego silnika, opon, zwrotności, głośników, ładowności, etc. Sfera ducha to <b>kierowca samochodu</b>: to on wybiera kierunek jazdy, prędkość, muzykę, rodzaj świateł, odczytuje prędkość i awarie z tablicy rozdzielczej. Samochód, nieważne jak dobry, bez kierowcy nigdzie nie pojedzie. Kierowca, nieważne jak doświadczony, w zepsutym samochodzie też donikąd nie dojedzie.</i>'
                   '</p>'
           ),
 
