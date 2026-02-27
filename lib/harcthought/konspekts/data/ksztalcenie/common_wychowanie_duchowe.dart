@@ -216,6 +216,7 @@ KonspektStep step_sfery_rozwoju_sfery_zdolnosci = KonspektStep(
         '</blockquote>'
         '<p style="text-align:justify;">'
         'Następnie prowadzący zbiera rozłożone wcześniej karty 4 sfer zdolności (ciała, umysłu, relacji i emocji) i symbolicznie składa je w stosik, który przykrywa kartą "sfery zdolności" z załącznika $attach_html_sfery.'
+        '</p>'
 );
 
 KonspektStep step_sfery_rozwoju_sfery_zdolnosci_arbitralnosc_podzialu = KonspektStep(
@@ -386,12 +387,11 @@ KonspektStep _step_poziomy_duchowosci_wstep = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep _step_poziomy_duchowosci_zachowania = KonspektStep(
-    title: 'Poziomy duchowości - zachowania',
-    duration: Duration(minutes: 5),
+KonspektStep _step_poziomy_duchowosci_zachowania_definicja = KonspektStep(
+    title: 'Poziomy duchowości - zachowania - definicja',
+    duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        '<i>Zdefiniowanie poziomu zachowań</i>'
         '<br>Prowadzący opisuje <b>poziom zachowań</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom zachowań" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
 
@@ -400,9 +400,14 @@ KonspektStep _step_poziomy_duchowosci_zachowania = KonspektStep(
         'Najbardziej wymiernym (bezpośrednim) sposobem spojrzenia na duchowość jest poziom zachowań. Obrazowo polega to na tym, by konkretną duchowość opisać przez stworzenie gigantycznej, w zasadzie nieskończonej tabeli, w której do każdej możliwej sytuacji, przypisane jest zachowanie, które człowiek w reakcji na nią podejmie.'
         '</p>'
         '</blockquote>'
+);
 
+KonspektStep _step_poziomy_duchowosci_zachowania_przyklad = KonspektStep(
+    title: 'Poziomy duchowości - zachowania - przykład',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
         '<p style="text-align:justify;">'
-        '<i>Przykłady wartości Alberta</i>'
         '<br>Prowadzący opisuje <b>poziom zachowań</b> na przykładzie Alberta:'
         '</p>'
 
@@ -425,12 +430,11 @@ KonspektStep _step_poziomy_duchowosci_zachowania = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep _step_poziomy_duchowosci_wartosci = KonspektStep(
-    title: 'Poziomy duchowości - wartości',
-    duration: Duration(minutes: 10),
+KonspektStep _step_poziomy_duchowosci_wartosci_definicja = KonspektStep(
+    title: 'Poziomy duchowości - wartości - definicja',
+    duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        '<i>Zdefiniowanie poziomu wartości</i>'
         '<br>Prowadzący płynnie przechodzi do opisu <b>poziomu wartości</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom wartości" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
 
@@ -440,14 +444,19 @@ KonspektStep _step_poziomy_duchowosci_wartosci = KonspektStep(
         '<br>'
         '<br>Na szczęście ludzie (zazwyczaj) nie podejmują losowych, niezwiązanych między sobą zachowań. Zazwyczaj każdy do czegoś dąży - najczęściej do jakiegoś określonego stanu, który uważa za dobry (świadomie, lub nie).'
         '<br>'
-        '<br>Duchowość człowieka można zatem opisać nieco ogólniej i zamiast rozważać same zachowania, można pochylić się nad tym, do czego one dążą, albo co człowiek uważa za dobre. Mówiąc inaczej, duchowość każdego człowieka można opisać przez jego <b>hierarchię wartości</b>.'
+        '<br>Duchowość człowieka można opisać nieco głębiej i zamiast rozważać same zachowania, można pochylić się nad tym, do czego one dążą, albo co człowiek uważa za dobre. Mówiąc inaczej, duchowość każdego człowieka można opisać przez jego <b>hierarchię wartości</b>.'
         '<br>'
         '<br>Wartości są abstrakcyjnymi bytami, które człowiek uważa za dobre: np. zdrowie, władza, bogactwo, śmierć wrogów, posiadanie, rodzina, pokora, patriotyzm, ale też przyjemność, brak głodu, spokój, etc..'
         '</p>'
         '</blockquote>'
+);
 
+KonspektStep _step_poziomy_duchowosci_wartosci_przyklad = KonspektStep(
+    title: 'Poziomy duchowości - wartości - przykład',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
         '<p style="text-align:justify;">'
-        '<i>Przykłady wartości Alberta</i>'
         '<br>Prowadzący opisuje <b>poziom wartości</b> na przykładzie Alberta:'
         '</p>'
 
@@ -457,17 +466,21 @@ KonspektStep _step_poziomy_duchowosci_wartosci = KonspektStep(
         '</p>'
 
         '<ul>'
-        '<li>Wartością dla Alberta są <b>pieniądze</b> - wynikają z tego zachowania w stylu: chodzenie do pracy, utrzymywanie konta bankowego itd..</li>'
-        '<li>Wartością większą od pieniędzy jest dla Albera <b>rodzina</b> - wynikają z tego zachowania w stylu: dbanie o relację narzeczoną, spędzanie czasu z rodzeństwem, dostosowywanie swojego życia pod posiadanie dużej liczby dzieci, etc.</li>'
-        '<li>Wartością dla Alberta <b>lojalność wobec firmy</b> - wyniakją z tego zachowania w stylu: dbanie o reputację firmy, próba naprawy w środku zimy zepsutego auto, by móc dojechać do klienta (a przecież Albert mógłby zostać w jego ciepłym wnętrzu, zadzwonić po lawetę i napisać szefowi, że nie da rady dojechać - przecież to nie jego wina).</li>'
-        '<li>Wartością dla Alberta nie jest poezja - nie czyta jej, nie rozmyśla o niej, nie poświęca jej czasu, nie interesuje go ten temat.</li>'
+        '<li><p style="text-align:justify;">Wartością dla Alberta są <b>pieniądze</b> - wynikają z tego zachowania w stylu: chodzenie do pracy, utrzymywanie konta bankowego itd..</p></li>'
+        '<li><p style="text-align:justify;">Wartością większą od pieniędzy jest dla Alberta <b>rodzina</b> - wynikają z tego zachowania w stylu: dbanie o relację narzeczoną, spędzanie czasu z rodzeństwem, dostosowywanie swojego życia pod posiadanie dużej liczby dzieci, etc.</p></li>'
+        '<li><p style="text-align:justify;">Wartością dla Alberta jest <b>lojalność wobec firmy</b> - wynikają z tego zachowania w stylu: dbanie o reputację firmy, próba naprawy w środku zimy zepsutego auto, by móc dojechać do klienta (a przecież Albert mógłby zostać w jego ciepłym wnętrzu, zadzwonić po lawetę i napisać szefowi, że nie da rady dojechać - przecież to nie jego wina).</p></li>'
+        '<li><p style="text-align:justify;">Wartością dla Alberta nie jest poezja - nie czyta jej, nie rozmyśla o niej, nie poświęca jej czasu, nie interesuje go ten temat.</p></li>'
         '</ul>'
 
-        '</p>'
         '</blockquote>'
+);
 
+KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_1 = KonspektStep(
+    title: 'Poziomy duchowości - wartości - zagadka 1',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
         '<p style="text-align:justify;">'
-        '<i>Wartości - zagadka 1</i>'
         '<br>Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje pytanie-zagadkę:'
         '</p>'
 
@@ -491,16 +504,21 @@ KonspektStep _step_poziomy_duchowosci_wartosci = KonspektStep(
         'Czy to oznacza, że nie ma znaczenia, co człowiek mówi, że jest dla niego ważne, bo liczą się tylko fakty? Nie do końca. Człowiek może pracować nad swoimi wartościami i wówczas jego świadoma wola jest kluczowa w kierunku rozwoju jego hierarchii wartości.'
         '</p>'
         '</blockquote>'
+);
 
+KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_2 = KonspektStep(
+    title: 'Poziomy duchowości - wartości - zagadka 2',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
         '<p style="text-align:justify;">'
-        '<i>Wartości - zagadka 2</i>'
-        'Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje drugie pytanie-zagadkę:'
+        '<br>Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje drugie pytanie-zagadkę:'
         '</p>'
 
         // Zademonstrować ten dylemat lepiej.
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Wyobraźcie sobie człowieka, który powstrzymuje się od kradzieży, ale nie dlatego, że wartością jest dla niego zaufanie społeczne, albo uczciwość, ale dlatego, że boi sie, że policja go wsadzi do pierdla. No to jak to jest: zachowuje się tak, jakby wartością była dla niego uczciwość, ale tak naprawdę nie ma to żadnego zwiazku? Zachowania oderwane w zupełności od wartości? O co chodzi?'
+        'Wyobraźcie sobie człowieka, który powstrzymuje się od kradzieży, ale nie dlatego, że wartością jest dla niego zaufanie społeczne, albo uczciwość, ale dlatego, że boi się, że policja go wsadzi do pierdla. No to jak to jest: zachowuje się tak, jakby wartością była dla niego uczciwość, ale tak naprawdę nie ma to żadnego związku? Zachowania oderwane w zupełności od wartości? O co chodzi?'
         '</p>'
         '</blockquote>'
 
@@ -521,7 +539,6 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        '<i>Zdefiniowanie poziomu aksjomatów</i>'
         '<br>Prowadzący płynnie przechodzi do opisu <b>poziomu aksjomatów</b>. Zanim jednak cokolwiek zdefiniuje, pomaga najpierw uczestnikom zbudować intuicję.'
         '</p>'
 
@@ -530,7 +547,9 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
         'Jak niektórzy mogli już wychwycić podczas opisywania poziomu wartości, wartości nie funkcjonują w luźnej kupie, ale w formie hierarchicznej struktury. Pozwala to, w przypadku sytuacji konfliktu dwóch różnych dóbr, wybrać dobro nadrzędne: przykładowo, gdy człowiek musi się zdecydować, czy poświęcić czas rodzinie, czy pracy.'
         '<br>'
         '<br>Hierarchiczność wartości oznacza, że zawsze muszą istnieć jakieś <b>wartości najważniejsze</b>.'
-        '<br>'
+        '</p>'
+        '</blockquote>'
+
         '<br>Przykładowo można byłoby podrążyć trochę w wartościach Alberta powtarzając pytanie: <b>"dlaczego jest to dla Ciebie ważne?"</b>.'
         '<br>'
         '<br><u>Przykładowy tok rozumowania Alberta:</u>'
@@ -558,7 +577,8 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty = KonspektStep(
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący definiuje <b>poziom aksjomatów</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom aksjomatów" z załącznika $attach_html_karty_poziomow_duchowosci.'
+        '<i>Zdefiniowanie poziomu aksjomatów</i>'
+        '<br>Prowadzący definiuje <b>poziom aksjomatów</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom aksjomatów" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
         '<blockquote>'
         '<p style="text-align:justify;">'
@@ -578,17 +598,21 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty = KonspektStep(
         '<li><p style="text-align:justify;">To, czego doświadczają moje zmysły, jest odzwierciedleniem realnego świata.</p></li>'
         '<li><p style="text-align:justify;">Prawa fizyki są zawsze takie same, nie tylko wtedy, gdy się je bada.</p></li>'
         '</ul>'
+
+        '<p style="text-align:justify;">'
+        'Aksjomaty zawsze są odpowiedzią na pytanie o najgłębszą wiarę.'
+        '</p>'
+
         '</blockquote>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący ilustruje pojęcie aksjomatu wracając do przykładu z Albertem:'
+        '<i>Przykłady aksjomatów Alberta</i>'
+        '<br>Prowadzący opisuje <b>poziom aksjomatów</b> na przykładzie Alberta:'
         '</p>'
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Aksjomaty zawsze są odpowiedzią na pytanie o najgłębszą wiarę.'
-        '<br>'
-        '<br>Przykład: Albert wziął się za naprawę, a przecież mógłby uklęknąć i medytować, by odeprzeć wibracje chaosu od silnika. Dlaczego tego nie zrobił? Może medytacja by zadziałała. Może mechanika, której uczył się w szkole nie ma zastosowania do akurat tego silnika: może prawa fizyki uległy tu akurat zmianie. Albert wziął się za naprawę, bo wierzy, że świat rządzi się stałymi prawami, które można poznać i zastosować.'
+        'Albert wziął się za naprawę, a przecież mógłby uklęknąć i medytować, by odeprzeć wibracje chaosu od silnika. Dlaczego tego nie zrobił? Może medytacja by zadziałała. Może mechanika, której uczył się w szkole nie ma zastosowania do akurat tego silnika: może prawa fizyki uległy tu akurat zmianie. Albert wziął się za naprawę, bo wierzy, że świat rządzi się stałymi prawami, które można poznać i zastosować.'
         '<br>'
         '<br>Inny przykład: Albert naprawia auto w mrozie, mimo że nikt go nie widzi, nikt mu dodatkowo nie zapłaci: mógłby olać temat i poczekać na lawetę. Czemu tego nie zrobi? Skąd u niego wartości takie jak zaradność, inicjatywa, czy działania mimo trudu? Przecież Albert mógłby wierzyć, że zepsute auto to znak z niebios.'
         '<br>'
@@ -687,8 +711,14 @@ KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
     title: 'Poziomy (warstwy) duchowości',
     steps: [
       _step_poziomy_duchowosci_wstep,
-      _step_poziomy_duchowosci_zachowania,
-      _step_poziomy_duchowosci_wartosci,
+      _step_poziomy_duchowosci_zachowania_definicja,
+      _step_poziomy_duchowosci_zachowania_przyklad,
+      _step_poziomy_duchowosci_wartosci_definicja,
+
+      _step_poziomy_duchowosci_wartosci_przyklad,
+      _step_poziomy_duchowosci_wartosci_zagadka_1,
+      _step_poziomy_duchowosci_wartosci_zagadka_2,
+
       _step_poziomy_duchowosci_aksjomaty_dekompozycja,
       _step_poziomy_duchowosci_aksjomaty,
       _step_poziomy_duchowosci_aksjomaty_pytania,
@@ -816,7 +846,7 @@ KonspektStep _step_integracja_duchowosci_wstepna_aksjomatow = KonspektStep(
       '<br>Prowadzący wraca do rysunku z etapami kształtowania duchowości i rysuje tam strzałkę "integracji wstępnej":'
       '<br>${piramidaDuchowosci2Html(isDark: isDark)}'
       '<br>'
-      '<br><i>Podczas integracji wstępnej duchowość człowieka jest integrowana "po raz pierwszy". Mało tu jest głębokich, życiowych rozważań, a więcej chłonięcia otoczenia. <b>Wartości wyłaniają się z nauczonych zachowań</b>. <b>Aksjomaty wyłaniają się z wcześniej przyjętych wartości</b>. Kształt duchowości zależy tu przede wszystkim od <b>środowiska</b> i <b>temperamentu</b> człowieka.',
+      '<br><i>Podczas integracji wstępnej duchowość człowieka jest integrowana "po raz pierwszy". Mało tu jest głębokich, życiowych rozważań, a więcej chłonięcia otoczenia. <b>Wartości wyłaniają się z nauczonych zachowań</b>. <b>Aksjomaty wyłaniają się z wcześniej przyjętych wartości</b>. Kształt duchowości zależy tu przede wszystkim od <b>środowiska</b> i <b>temperamentu</b> człowieka.</i>',
 );
 
 KonspektStep _step_integracja_duchowosci_swiadoma = KonspektStep(
