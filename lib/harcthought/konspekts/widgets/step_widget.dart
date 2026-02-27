@@ -62,18 +62,20 @@ class KonspektStepWidget extends StatelessWidget{
                       Row(
                         children: [
 
-                          SelectableText(durationToString(step.duration), style: const AppTextStyle()),
+                          if(step.duration > Duration.zero)
+                            SelectableText(durationToString(step.duration), style: const AppTextStyle()),
 
-                          if(startTime != null)
+                          if(step.duration > Duration.zero && startTime != null)
                             const SizedBox(width: 10),
 
-                          if(startTime != null)
+                          if(step.duration > Duration.zero && startTime != null)
                             SelectableText(
                               '(${timeOfDayRangeToString(startTime!, startTime! + step.duration)})',
                               style: const AppTextStyle()
                             ),
 
-                          const SizedBox(width: 20),
+                          if(step.duration > Duration.zero)
+                            const SizedBox(width: 20),
 
                           SelectableText(
                             step.activeForm.displayName,

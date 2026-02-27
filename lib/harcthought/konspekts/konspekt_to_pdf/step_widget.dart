@@ -71,18 +71,20 @@ Future<List<Widget>> StepWidget(
             Row(
               children: [
 
-                Text(durationToString(step.duration), style: TextStyle(font: font, fontSize: defTextSize)),
+                if(step.duration > Duration.zero)
+                  Text(durationToString(step.duration), style: TextStyle(font: font, fontSize: defTextSize)),
 
-                if(startTime != null)
+                if(step.duration > Duration.zero && startTime != null)
                   SizedBox(width: 8),
 
-                if(startTime != null)
+                if(step.duration > Duration.zero && startTime != null)
                   Text(
                       '(${timeOfDayRangeToString(startTime, startTime + step.duration)})',
                       style: TextStyle(font: font, fontSize: defTextSize)
                   ),
 
-                SizedBox(width: 16),
+                if(step.duration > Duration.zero)
+                  SizedBox(width: 16),
 
                 Text(
                     step.activeForm.displayName,
