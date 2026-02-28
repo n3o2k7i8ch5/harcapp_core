@@ -401,7 +401,7 @@ KonspektStep _step_poziomy_duchowosci_zachowania_definicja = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        '<br>Prowadzący opisuje <b>poziom zachowań</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom zachowań" z załącznika $attach_html_karty_poziomow_duchowosci.'
+        'Prowadzący opisuje <b>poziom zachowań</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom zachowań" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
 
         '<blockquote>'
@@ -416,8 +416,7 @@ KonspektStep _step_poziomy_duchowosci_zachowania_przyklad = KonspektStep(
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        '<p style="text-align:justify;">'
-        '<br>Prowadzący opisuje <b>poziom zachowań</b> na przykładzie Alberta:'
+        'Prowadzący opisuje <b>poziom zachowań</b> na przykładzie Alberta:'
         '</p>'
 
         '<blockquote>'
@@ -435,7 +434,7 @@ KonspektStep _step_poziomy_duchowosci_zachowania_przyklad = KonspektStep(
         '<li><p style="text-align:justify;">...i tak dalej, i tak dalej.</p></li>'
         '</ul>'
         '<p style="text-align:justify;">'
-        'Oczywiście taka lista jest zawsze nieskończona: są tam wszystkie możliwe sytuacje, każda z nich występuje wielokrotnie we wszystkich mozliwych okolicznościach, warunki otoczenia, stanach samego Alberta itd. - można jednak spojrzeć na duchowość każdego człowieka patrząc na <b>zachowania</b>, które podejmuje.'
+        'Oczywiście taka lista jest zawsze nieskończona: są tam wszystkie możliwe sytuacje, każda z nich występuje wielokrotnie we wszystkich możliwych okolicznościach, warunkach otoczenia, stanach samego Alberta itd. - można jednak spojrzeć na duchowość każdego człowieka patrząc na <b>zachowania</b>, które podejmuje.'
         '</p>'
         '</blockquote>'
 );
@@ -445,12 +444,12 @@ KonspektStep _step_poziomy_duchowosci_wartosci_definicja = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        '<br>Prowadzący płynnie przechodzi do opisu <b>poziomu wartości</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom wartości" z załącznika $attach_html_karty_poziomow_duchowosci.'
+        'Prowadzący płynnie przechodzi do opisu <b>poziomu wartości</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom wartości" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        '<br>Tabelka z zachowaniami ma niestety swoje problemy: lista możliwych do wystąpienia okoliczności jest nieskończona, co więcej, dla każdej okoliczości istnieje nieskończona jest liczba stanów, w jakich może znajdować się człowiek — bardzo ciężko jest w praktyce myśleć o czyjejś duchowości tylko przez pryzmat jego zachowań. To trochę, jakby analizować czyjeś ruchy tylko przez pryzmat skurczów poszczególnych mięśni.'
+        '<br>Tabelka z zachowaniami ma niestety swoje problemy: lista możliwych do wystąpienia okoliczności jest nieskończona, co więcej, dla każdej okoliczności istnieje nieskończona liczba stanów, w jakich może znajdować się człowiek — bardzo ciężko jest w praktyce myśleć o czyjejś duchowości tylko przez pryzmat jego zachowań. To trochę, jakby analizować czyjeś ruchy tylko przez pryzmat skurczów poszczególnych mięśni.'
         '<br>'
         '<br>Na szczęście ludzie (zazwyczaj) nie podejmują losowych, niezwiązanych między sobą zachowań. Zazwyczaj każdy do czegoś dąży - najczęściej do jakiegoś określonego stanu, który uważa za dobry (świadomie, lub nie).'
         '<br>'
@@ -466,8 +465,7 @@ KonspektStep _step_poziomy_duchowosci_wartosci_przyklad = KonspektStep(
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        '<p style="text-align:justify;">'
-        '<br>Prowadzący opisuje <b>poziom wartości</b> na przykładzie Alberta:'
+        'Prowadzący opisuje <b>poziom wartości</b> na przykładzie Alberta:'
         '</p>'
 
         '<blockquote>'
@@ -490,8 +488,7 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_1 = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        '<p style="text-align:justify;">'
-        '<br>Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje pytanie-zagadkę:'
+        'Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje pytanie-zagadkę:'
         '</p>'
 
         '<blockquote>'
@@ -521,8 +518,7 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_2 = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        '<p style="text-align:justify;">'
-        '<br>Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje drugie pytanie-zagadkę:'
+        'Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje drugie pytanie-zagadkę:'
         '</p>'
 
         // Zademonstrować ten dylemat lepiej.
@@ -549,7 +545,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        '<br>Prowadzący płynnie przechodzi do opisu <b>poziomu aksjomatów</b>. Zanim jednak cokolwiek zdefiniuje, pomaga najpierw uczestnikom zbudować intuicję.'
+        'Prowadzący płynnie przechodzi do opisu <b>poziomu aksjomatów</b>. Zanim jednak cokolwiek zdefiniuje, pomaga najpierw uczestnikom zbudować intuicję.'
         '</p>'
 
         '<blockquote>'
@@ -560,7 +556,8 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
         '</p>'
         '</blockquote>'
 
-        '<br>Przykładowo można byłoby podrążyć trochę w wartościach Alberta powtarzając pytanie: <b>"dlaczego jest to dla Ciebie ważne?"</b>.'
+        '<p style="text-align:justify;">'
+        'Przykładowo można byłoby podrążyć trochę w wartościach Alberta powtarzając pytanie: <b>"dlaczego jest to dla Ciebie ważne?"</b>.'
         '<br>'
         '<br><u>Przykładowy tok rozumowania Alberta:</u>'
         '<br>Praca jest dla mnie ważna. '
@@ -580,6 +577,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
         '<br>Nie wiem. Wierzę w to i tyle. Nie wiem. Po prostu.'
         '<br>'
         '<br>Zawsze w takich sekwencjach w końcu dochodzi się do ściany, gdzie nie ma już dalej odpowiedzi na pytanie "dlaczego". Albert nie ma dalszych odpowiedzi, nie dlatego, że jest głupi, ale dlatego, że dotarł do fundamentu — do pewnego przekonania, które z niczego dalej nie wynika. Zazwyczaj takie rozważania nie trwają kilku minut, a raczej kilka dni, miesięcy, czy nawet lat. Za każdym razem jednak, gdy dochodzi się do tej granicy, dotyka się ostatniego poziomu duchowości, czyli poziomu aksjomatu.'
+        '</p>'
 );
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty = KonspektStep(
@@ -836,6 +834,7 @@ KonspektStep _step_integracja_duchowosci_wstepna_wartosci = KonspektStep(
       '<br>'
       '<br>Po opisaniu tego zjawiska prowadzący jeszcze raz skrótowo przechodzi przez etapy integracji duchowości, tym razem rysując kolejne kroki na nowym, dużym arkuszu flipcharta. Warto przy tym prosić uczestników o wymienienie kolejnych etapów, by ich zaangażować. Na końcu powinien powstać niniejszy diagram:'
       '<br>${cyklIntegracjiDuchowosciHtml(isDark: isDark)}'
+      '</p>'
 );
 
 KonspektStep _step_integracja_duchowosci_wstepna_aksjomatow = KonspektStep(
@@ -1236,7 +1235,8 @@ KonspektStep _step_neutralnosc_duchowa_omowienie_wnioskow = KonspektStep(
         '<br>'
         '<br><b><i>“Czy w którymkolwiek scenariuszu instruktor mógł postąpić neutralnie z perspektywy kształtowania duchowości?”</i></b>.'
         '<br>'
-        '<br>Uczestnicy ponownie wracają do dyskusji. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.',
+        '<br>Uczestnicy ponownie wracają do dyskusji. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.'
+        '</p>',
     materials: [
       material_zal_neutralnosc_duchowa_przyklady,
     ]
