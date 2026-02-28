@@ -392,7 +392,8 @@ KonspektStep _step_poziomy_duchowosci_wstep = KonspektStep(
         '<ol>'
         '<li><p style="text-align:justify;">Definiuje, czym jest poziom,</p></li>'
         '<li><p style="text-align:justify;">Podaje przykład tego poziomu dla przypadku Alberta.</p></li>'
-        '<li><p style="text-align:justify;">Ewentualnie pyta uczestników o różne zagadki czy pozorne sprzeczności, żeby utrwalić ich zrozumienie.</p></li>'
+        '<li><p style="text-align:justify;">Daje uczestnikom chwilę na pytania.</p></li>'
+        '<li><p style="text-align:justify;">Przedstawia uczestnikom zagadkę, pozorną sprzeczność, czy proste zadanie, by utrwalić ich zrozumienie.</p></li>'
         '</ol>'
 );
 
@@ -413,7 +414,7 @@ KonspektStep _step_poziomy_duchowosci_zachowania_definicja = KonspektStep(
 
 KonspektStep _step_poziomy_duchowosci_zachowania_przyklad = KonspektStep(
     title: 'Poziomy duchowości - zachowania - przykład',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący opisuje <b>poziom zachowań</b> na przykładzie Alberta:'
@@ -438,6 +439,15 @@ KonspektStep _step_poziomy_duchowosci_zachowania_przyklad = KonspektStep(
         '</blockquote>'
 );
 
+KonspektStep _step_poziomy_duchowosci_zachowania_pytania = KonspektStep(
+    title: 'Poziomy rozwoju duchowego - zachowania - pytania',
+    duration: Duration(minutes: 1),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący daje uczestnikom czas na ewentualne pytania.'
+        '</p>'
+);
+
 KonspektStep _step_poziomy_duchowosci_wartosci_definicja = KonspektStep(
     title: 'Poziomy duchowości - wartości - definicja',
     duration: Duration(minutes: 2),
@@ -457,7 +467,7 @@ KonspektStep _step_poziomy_duchowosci_wartosci_definicja = KonspektStep(
 
 KonspektStep _step_poziomy_duchowosci_wartosci_przyklad = KonspektStep(
     title: 'Poziomy duchowości - wartości - przykład',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący opisuje <b>poziom wartości</b> na przykładzie Alberta:'
@@ -478,6 +488,15 @@ KonspektStep _step_poziomy_duchowosci_wartosci_przyklad = KonspektStep(
         '</blockquote>'
 );
 
+KonspektStep _step_poziomy_duchowosci_wartosci_pytania = KonspektStep(
+    title: 'Poziomy rozwoju duchowego - wartości - pytania',
+    duration: Duration(minutes: 1),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący daje uczestnikom czas na ewentualne pytania.'
+        '</p>'
+);
+
 KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_1 = KonspektStep(
     title: 'Poziomy duchowości - wartości - zagadka 1',
     duration: Duration(minutes: 2),
@@ -486,9 +505,10 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_1 = KonspektStep(
         'Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje pytanie-zagadkę:'
         '</p>'
 
+        // Zademonstrować ten dylemat lepiej.
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'No dobrze, ale skoro wartości są tym, co człowiek uważa za dobre i do czego człowiek dąży, to dlaczego uczniowie bardzo chcą dobrze napisać maturę, ale gdy przychodzi co do czego, to zamiast się uczyć robią zupełne głupoty pokroju scrollowania instagrama? Wartości jedno, a zachowania drugie? O co chodzi?'
+        'Wyobraźcie sobie człowieka, który powstrzymuje się od kradzieży, ale nie dlatego, że wartością jest dla niego zaufanie społeczne, albo uczciwość, ale dlatego, że boi się, że policja go wsadzi do pierdla. No to jak to jest: zachowuje się tak, jakby wartością była dla niego uczciwość, ale tak naprawdę nie ma to żadnego związku? Zachowania oderwane w zupełności od wartości? O co chodzi?'
         '</p>'
         '</blockquote>'
 
@@ -497,13 +517,8 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_1 = KonspektStep(
         '</p>'
 
         '<blockquote>'
-        '<ul>'
-        '<li><p style="text-align:justify;">Wartości są tym, do czego człowiek dąży i co uważa za dobre — a nie tym, co mówi, że uważa za dobre.</p></li>'
-        '<li><p style="text-align:justify;">Wartości nie są wcale stałe w czasie. Człowiek może zupełnie coś innego uważać za dobre w chwili, gdy wisi nad nim bezpośrednia wizja oblania egzaminu, a zupełnie coś innego, gdy wraca wieczorem do domu i ma czas do zagospodarowania.</p></li>'
-        '<li><p style="text-align:justify;">Wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Ludzie kierują się chęcią bycia wyspanym, czy doznania przyjemności i najedzenia, a to, czy o tym wiedzą, lub czy chcą się do tego przyznać, to już inna sprawa.</p></li>'
-        '</ul>'
         '<p style="text-align:justify;">'
-        'Czy to oznacza, że nie ma znaczenia, co człowiek mówi, że jest dla niego ważne, bo liczą się tylko fakty? Nie do końca. Człowiek może pracować nad swoimi wartościami i wówczas jego świadoma wola jest kluczowa w kierunku rozwoju jego hierarchii wartości.'
+        'Nie wszystkie zachowania człowieka wynikają z wartości w stylu "uczciwość", czy "honor", "prawda", "rodzina", "wiara", etc. Niektóre zachowania wynikają z temperamentu człowieka, czy jego emocji, np. ze strachu, zainteresowania, głodu, czy zakochania. To, że intuicyjnie myślimy o wartościach jako o moralnych, wzniosłych bytach, to dopiero połowa historii: ludzie w dużej mierze kierują się wartością poczucia bezpieczeństwa, czy realizacji swoich popędów, instynków itd.. To też są wartości - co więcej, to właśnie te "pierwotne" wartości są głównym źródłem motywacji zachowań człowieka, nie te wzniosłe.'
         '</p>'
         '</blockquote>'
 );
@@ -516,10 +531,9 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_2 = KonspektStep(
         'Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje drugie pytanie-zagadkę:'
         '</p>'
 
-        // Zademonstrować ten dylemat lepiej.
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Wyobraźcie sobie człowieka, który powstrzymuje się od kradzieży, ale nie dlatego, że wartością jest dla niego zaufanie społeczne, albo uczciwość, ale dlatego, że boi się, że policja go wsadzi do pierdla. No to jak to jest: zachowuje się tak, jakby wartością była dla niego uczciwość, ale tak naprawdę nie ma to żadnego związku? Zachowania oderwane w zupełności od wartości? O co chodzi?'
+        'No dobrze, ale skoro wartości są tym, co człowiek uważa za dobre i do czego człowiek dąży, to dlaczego uczniowie bardzo chcą dobrze napisać maturę, ale gdy przychodzi co do czego, to zamiast się uczyć robią zupełne głupoty pokroju scrollowania instagrama? Wartości jedno, a zachowania drugie? O co chodzi?'
         '</p>'
         '</blockquote>'
 
@@ -528,8 +542,13 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_2 = KonspektStep(
         '</p>'
 
         '<blockquote>'
+        '<ul>'
+        '<li><p style="text-align:justify;">Wartości są tym, do czego człowiek dąży i co uważa za dobre — a nie tym, co mówi, że uważa za dobre.</p></li>'
+        '<li><p style="text-align:justify;">Wartości nie są wcale stałe w czasie. Człowiek może zupełnie coś innego uważać za dobre w chwili, gdy wisi nad nim bezpośrednia wizja oblania egzaminu, a zupełnie coś innego, gdy wraca wieczorem do domu i ma czas do zagospodarowania.</p></li>'
+        '<li><p style="text-align:justify;">Wartości nie muszą być wcale przemyślane, górnolotne i głębokie. Ludzie kierują się chęcią bycia wyspanym, czy doznania przyjemności i najedzenia, a to, czy o tym wiedzą, lub czy chcą się do tego przyznać, to już inna sprawa.</p></li>'
+        '</ul>'
         '<p style="text-align:justify;">'
-        'Nie wszystkie zachowania człowieka wynikają z wartości w stylu "uczciwość", czy "honor", "prawda", "rodzina", "wiara", etc. Niektóre zachowania wynikają z temperamentu człowieka, czy jego emocji, np. ze strachu, zainteresowania, głodu, czy zakochania. To, że intuicyjnie myślimy o wartościach jako o moralnych, wzniosłych bytach, to dopiero połowa historii: ludzie w dużej mierze kierują się wartością poczucia bezpieczeństwa, czy realizacji swoich popędów, instynków itd.. To też są wartości - co więcej, to właśnie te "pierwotne" wartości są głównym źródłem motywacji zachowań człowieka, nie te wzniosłe.'
+        'Czy to oznacza, że nie ma znaczenia, co człowiek mówi, że jest dla niego ważne, bo liczą się tylko fakty? Nie do końca. Człowiek może pracować nad swoimi wartościami i wówczas jego świadoma wola jest kluczowa w kierunku rozwoju jego hierarchii wartości.'
         '</p>'
         '</blockquote>'
 
@@ -555,33 +574,32 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
         'Przykładowo można byłoby podrążyć trochę w wartościach Alberta powtarzając pytanie: <b>"dlaczego jest to dla Ciebie ważne?"</b>.'
         '<br>'
         '<br><u>Przykładowy tok rozumowania Alberta:</u>'
-        '<br>Praca jest dla mnie ważna. '
-        '<br>Dlaczego?'
-        '<br>Bo chcę mieć pieniądze - są dla mnie ważne.'
-        '<br>Dlaczego?'
-        '<br>Bo potrzebuję ich do życia, jedzenie, ubrania, ale przede wszystkim chcę móc odłożyć na przyszłość.'
-        '<br>Dlaczego?'
-        '<br>Bo cenię sobie bezpieczeństwo, chciałbym też móc kupić kiedyś dom.'
-        '<br>Dlaczego?'
-        '<br>Bo chcę mieć dużą rodzinę i chcę, żeby dobrze im się żyło.'
-        '<br>Dlaczego?'
-        '<br>Bo uważam, że jestem do tego powołany, żeby mieć rodzinę. Rodzina to bliskość, wspólnota, miłość - a to najlepsze, co w życiu może być.'
-        '<br>Dlaczego?'
-        '<br>Nie wiem. Tak uważam. Uważam, że miłość jest najważniejsza w życiu. Przemawia do mnie i wierzę w historię Chrystusa.'
-        '<br>Dlaczego?'
-        '<br>Nie wiem. Wierzę w to i tyle. Nie wiem. Po prostu.'
+        '<br>- Praca jest dla mnie ważna. '
+        '<br>- Dlaczego?'
+        '<br>- Bo chcę mieć pieniądze - są dla mnie ważne.'
+        '<br>- Dlaczego?'
+        '<br>- Bo potrzebuję ich do życia, jedzenie, ubrania, ale przede wszystkim chcę móc odłożyć na przyszłość.'
+        '<br>- Dlaczego?'
+        '<br>- Bo cenię sobie bezpieczeństwo, chciałbym też móc kupić kiedyś dom.'
+        '<br>- Dlaczego?'
+        '<br>- Bo chcę mieć dużą rodzinę i chcę, żeby dobrze im się żyło.'
+        '<br>- Dlaczego?'
+        '<br>- Bo uważam, że jestem do tego powołany, żeby mieć rodzinę. Rodzina to bliskość, wspólnota, miłość - a to najlepsze, co w życiu może być.'
+        '<br>- Dlaczego?'
+        '<br>- Nie wiem. Tak uważam. Uważam, że miłość jest najważniejsza w życiu. Przemawia do mnie i wierzę w historię Chrystusa.'
+        '<br>- Dlaczego?'
+        '<br>- Nie wiem. Wierzę w to i tyle. Nie wiem. Po prostu.'
         '<br>'
         '<br>Zawsze w takich sekwencjach w końcu dochodzi się do ściany, gdzie nie ma już dalej odpowiedzi na pytanie "dlaczego". Albert nie ma dalszych odpowiedzi, nie dlatego, że jest głupi, ale dlatego, że dotarł do fundamentu — do pewnego przekonania, które z niczego dalej nie wynika. Zazwyczaj takie rozważania nie trwają kilku minut, a raczej kilka dni, miesięcy, czy nawet lat. Za każdym razem jednak, gdy dochodzi się do tej granicy, dotyka się ostatniego poziomu duchowości, czyli poziomu aksjomatu.'
         '</p>'
 );
 
-KonspektStep _step_poziomy_duchowosci_aksjomaty = KonspektStep(
-    title: 'Poziomy rozwoju duchowego - aksjomaty',
-    duration: Duration(minutes: 5),
+KonspektStep _step_poziomy_duchowosci_aksjomaty_definicja = KonspektStep(
+    title: 'Poziomy rozwoju duchowego - aksjomaty - definicja',
+    duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        '<i>Zdefiniowanie poziomu aksjomatów</i>'
-        '<br>Prowadzący definiuje <b>poziom aksjomatów</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom aksjomatów" z załącznika $attach_html_karty_poziomow_duchowosci.'
+        'Prowadzący definiuje <b>poziom aksjomatów</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom aksjomatów" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
         '<blockquote>'
         '<p style="text-align:justify;">'
@@ -607,10 +625,14 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty = KonspektStep(
         '</p>'
 
         '</blockquote>'
+);
 
-        '<p style="text-align:justify;">'
-        '<i>Przykłady aksjomatów Alberta</i>'
-        '<br>Prowadzący opisuje <b>poziom aksjomatów</b> na przykładzie Alberta:'
+KonspektStep _step_poziomy_duchowosci_aksjomaty_przyklad = KonspektStep(
+    title: 'Poziomy rozwoju duchowego - aksjomaty - przykład',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący opisuje <b>poziom aksjomatów</b> na przykładzie Alberta:'
         '</p>'
 
         '<blockquote>'
@@ -635,16 +657,16 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty = KonspektStep(
 );
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty_pytania = KonspektStep(
-    title: 'Poziomy rozwoju duchowego - pytania',
+    title: 'Poziomy rozwoju duchowego - aksjomaty - pytania',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący daje uczestnikom czas na ewentualne pytania dotyczące poziomów duchowości.'
+        'Prowadzący daje uczestnikom czas na ewentualne pytania.'
         '</p>'
 );
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty_dopasowanie_przykladow = KonspektStep(
-    title: 'Poziomy rozwoju duchowego - aksjomaty - dopasowanie przykładów',
+    title: 'Poziomy rozwoju duchowego - aksjomaty - zadanie 1',
     aims: [
       'Zbudowanie u uczestników intuicji dotyczącej tego, co jest, a co nie jest aksjomatem.',
     ],
@@ -667,7 +689,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dopasowanie_przykladow = Konspek
 );
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty_plaska_ziemia = KonspektStep(
-    title: 'Poziomy rozwoju duchowego - aksjomaty - intuicja',
+    title: 'Poziomy rozwoju duchowego - aksjomaty - zagadka 2',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -714,16 +736,20 @@ KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
     title: 'Poziomy (warstwy) duchowości',
     steps: [
       _step_poziomy_duchowosci_wstep,
+
       _step_poziomy_duchowosci_zachowania_definicja,
       _step_poziomy_duchowosci_zachowania_przyklad,
-      _step_poziomy_duchowosci_wartosci_definicja,
+      _step_poziomy_duchowosci_zachowania_pytania,
 
+      _step_poziomy_duchowosci_wartosci_definicja,
       _step_poziomy_duchowosci_wartosci_przyklad,
+      _step_poziomy_duchowosci_wartosci_pytania,
       _step_poziomy_duchowosci_wartosci_zagadka_1,
       _step_poziomy_duchowosci_wartosci_zagadka_2,
 
       _step_poziomy_duchowosci_aksjomaty_dekompozycja,
-      _step_poziomy_duchowosci_aksjomaty,
+      _step_poziomy_duchowosci_aksjomaty_definicja,
+      _step_poziomy_duchowosci_aksjomaty_przyklad,
       _step_poziomy_duchowosci_aksjomaty_pytania,
       _step_poziomy_duchowosci_aksjomaty_dopasowanie_przykladow,
       _step_poziomy_duchowosci_aksjomaty_plaska_ziemia
