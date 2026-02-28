@@ -545,7 +545,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Jak niektórzy mogli już wychwycić podczas opisywania poziomu wartości, wartości nie funkcjonują w luźnej kupie, ale w formie hierarchicznej struktury. Pozwala to, w przypadku sytuacji konfliktu dwóch różnych dóbr, wybrać dobro nadrzędne: przykładowo, gdy człowiek musi się zdecydować, czy poświęcić czas rodzinie, czy pracy.'
+        'Jak niektórzy mogli już wychwycić podczas opisywania poziomu wartości, wartości nie funkcjonują w luźnej kupie, ale w formie hierarchicznej struktury. Różne rzeczy są dla ludzi ważne, ale niektóre są ważniejsze od innych: ma to znaczenie, gdy człowiek decyduje, czy poświęcić czas rodzinie, czy pracy, mimo, że oba są dla niego ważne.'
         '<br>'
         '<br>Hierarchiczność wartości oznacza, że zawsze muszą istnieć jakieś <b>wartości najważniejsze</b>.'
         '</p>'
