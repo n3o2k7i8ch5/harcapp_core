@@ -385,6 +385,15 @@ KonspektStep _step_poziomy_duchowosci_wstep = KonspektStep(
         'Na szczęście taka możliwość istnieje, nawet nie jedna: w pracy wychowawczej szczególnie przydatne są trzy sposoby spojrzenia na duchowość, każda na innym poziomie abstrakcji.'
         '</p>'
         '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący prezentuje kolejno poziomy duchowości: <b>zachowań</b>, <b>wartości</b> i <b>aksjomatów</b> i dla każdego z tych poziomów opisuje je w taki sam sposób:'
+        '</p>'
+        '<ol>'
+        '<li><p style="text-align:justify;">Definiuje, czym jest poziom,</p></li>'
+        '<li><p style="text-align:justify;">Podaje przykład tego poziomu dla przypadku Alberta.</p></li>'
+        '<li><p style="text-align:justify;">Ewentualnie pyta uczestników o różne zagadki czy pozorne sprzeczności, żeby utrwalić ich zrozumienie.</p></li>'
+        '</ol>'
 );
 
 KonspektStep _step_poziomy_duchowosci_zachowania_definicja = KonspektStep(
@@ -397,7 +406,7 @@ KonspektStep _step_poziomy_duchowosci_zachowania_definicja = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Najbardziej wymiernym (bezpośrednim) sposobem spojrzenia na duchowość jest poziom zachowań. Obrazowo polega to na tym, by konkretną duchowość opisać przez stworzenie gigantycznej, w zasadzie nieskończonej tabeli, w której do każdej możliwej sytuacji, przypisane jest zachowanie, które człowiek w reakcji na nią podejmie.'
+        'Najłatwiej zacząć od poziomu zachowań. Duchowość każdego człowieka można dokładnie opisać wymieniając zachowania, którymi zreaguje na każdą możliwą sytuację.'
         '</p>'
         '</blockquote>'
 );
@@ -416,16 +425,17 @@ KonspektStep _step_poziomy_duchowosci_zachowania_przyklad = KonspektStep(
         'Przykładowo o <b>poziomie zachowań w duchowości</b> Alberta można powiedzieć, że:'
         '</p>'
         '<ul>'
-        '<li>Auto się zepsuło w drodze do pracy — otwiera maskę i naprawia.</li>'
-        '<li>Usłyszy „dzień dobry" — zawsze odpowie „dzień dobry".</li>'
-        '<li>Zobaczy śmieć na chodniku podczas spaceru — podniesie go i wyrzuci do kosza.</li>'
-        '<li>Zobaczy śmieć na chodniku, gdy spieszy się do teatru — minie go i pobiegnie dalej.</li>'
-        '<li>Zobaczy śmieć na chodniku, gdy spieszy się do teatru i idzie z narzeczoną — podniesie go i wyrzuci do kosza.</li>'
-        '<li>Szef go skrytykuje — zacznie się z nim wykłócać.</li>'
-        '<li>...i tak dalej, i tak dalej.</li>'
+        '<li><p style="text-align:justify;">Auto się zepsuło w drodze do pracy — otwiera maskę i naprawia.</p></li>'
+        '<li><p style="text-align:justify;">Usłyszy „dzień dobry" — zawsze odpowie „dzień dobry".</p></li>'
+        '<li><p style="text-align:justify;">Wraca głodny po pracy, w szafce czipsy albo składniki na obiad — ugotuje obiad.</p></li>'
+        '<li><p style="text-align:justify;">Zobaczy śmieć na chodniku podczas spaceru — podniesie go i wyrzuci do kosza.</p></li>'
+        '<li><p style="text-align:justify;">Zobaczy śmieć na chodniku, gdy spieszy się do teatru — minie go i pobiegnie dalej.</p></li>'
+        '<li><p style="text-align:justify;">Zobaczy śmieć na chodniku, gdy spieszy się do teatru i idzie z narzeczoną — podniesie go i wyrzuci do kosza.</p></li>'
+        '<li><p style="text-align:justify;">Szef go skrytykuje — zacznie się z nim wykłócać.</p></li>'
+        '<li><p style="text-align:justify;">...i tak dalej, i tak dalej.</p></li>'
         '</ul>'
         '<p style="text-align:justify;">'
-        'Oczywiście taka tabelka musi zawsze brać pod uwagę wszystkie okoliczności, warunki otoczenia, stan samego Alberta itd. - co nie zmienia faktu, że dla każdego człowieka można stworzyć taką tabelkę <b>zachowań</b>.'
+        'Oczywiście taka lista jest zawsze nieskończona: są tam wszystkie możliwe sytuacje, każda z nich występuje wielokrotnie we wszystkich mozliwych okolicznościach, warunki otoczenia, stanach samego Alberta itd. - można jednak spojrzeć na duchowość każdego człowieka patrząc na <b>zachowania</b>, które podejmuje.'
         '</p>'
         '</blockquote>'
 );
