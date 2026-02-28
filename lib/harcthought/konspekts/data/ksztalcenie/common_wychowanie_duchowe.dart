@@ -525,7 +525,7 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_1 = KonspektStep(
 
 KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_2 = KonspektStep(
     title: 'Poziomy duchowości - wartości - zagadka 2',
-    duration: Duration(minutes: 2),
+    duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje drugie pytanie-zagadkę:'
@@ -556,7 +556,7 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_2 = KonspektStep(
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
     title: 'Poziomy rozwoju duchowego - aksjomaty - dekompozycja',
-    duration: Duration(minutes: 2),
+    duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący płynnie przechodzi do opisu <b>poziomu aksjomatów</b>. Zanim jednak cokolwiek zdefiniuje, pomaga najpierw uczestnikom zbudować intuicję.'
@@ -596,7 +596,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty_definicja = KonspektStep(
     title: 'Poziomy rozwoju duchowego - aksjomaty - definicja',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący definiuje <b>poziom aksjomatów</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom aksjomatów" z załącznika $attach_html_karty_poziomow_duchowosci.'
@@ -658,7 +658,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_przyklad = KonspektStep(
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty_pytania = KonspektStep(
     title: 'Poziomy rozwoju duchowego - aksjomaty - pytania',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 1),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący daje uczestnikom czas na ewentualne pytania.'
@@ -699,33 +699,44 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_plaska_ziemia = KonspektStep(
         '<blockquote>'
         '<p style="text-align:justify;">'
         'Czy wiara w to, że Ziemia jest płaska, może być aksjomatem?'
+        '<br>'
+        '<br>Wyjaśnijmy najpierw o co <b>nie chodzi</b>: może się zdarzyć, że ktoś robi badania i obserwacje i wychodzi mu, że Ziemia jest płaska - na przykład wskutek błędu w obliczeniach. W takim przypadku stwierdzenie, że ziemia jest płaska nie jest aksjomatem, tylko <b>wnioskiem</b> z badań. Taki przypadek nas <b>nie interesuje</b>.'
+        '<br>'
+        '<br>Pytanie brzmi, czy może być tak, że ktoś całe spojrzenie na świat zaczyna od dogmatu, że Ziemia jest płaska?'
         '</p>'
         '</blockquote>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący wchodzi z uczestnikami w dyskusję i przechodzi przez trzy punkty:'
+        'Prowadzący wchodzi z uczestnikami w dyskusję, która powinna doprowadzić do jednoznacznego wniosku:'
         '</p>'
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Jeśli ktoś wierzy w to, że świat można badać, że wyniki badań są obiektywne i nie zależą od tego, kto, kiedy i gdzie wykonuje jakaś obserwację, to może uznać, że Ziemia jest płaska na przykład wskutek błędnych badań, ale nie będzie to jego aksjomatem, tylko jego wnioskiem.'
-        '<br>'
-        '<br>Ale może być też tak, że ktoś wyjdzie z założenia, że Ziemia jest płaska i w oparciu o to zbuduje metodę badania świata - to, czy jego wnioski będą miały cokolwiek wspólnego z rzeczywistością to już zupełnie inna sprawa.'
+        'Oczywiście, że tak - stwierdzenie, że Ziemia jest płaska może być czyimś aksjomatem.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący wyjaśnia to zwracając uwagę na dwie kwestie:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Jeśli ktoś wyjdzie z założenia, że Ziemia jest płaska, to po prostu dostosuje do tego wszystkie inne wnioski o świecie - to, czy będą one raczej pomagały, czy przeszkadzały w życiu to już zupełnie inna sprawa.'
         '</p>'
 
         '<ol>'
+
         '<li><p style="text-align:justify;">'
-        '<b>Aksjomat porządkuje wszystko inne.</b>'
-        '<br>Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Gdy zobaczy zdjęcie kulistej Ziemi z kosmosu, wniosek będzie miał tylko jeden: zdjęcie jest sfałszowane, albo przykładowo uzna to za dowód na to, że przebywanie w próżni powoduje iluzję kulistości rzeczy płaskich.'
+        '<b>Aksjomat porządkuje wszystko.</b>'
+        '<br>Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Przykładowo, gdy ktoś zobaczy zdjęcie kulistej Ziemi z kosmosu, wniosek będzie miał tylko jeden: zdjęcie jest sfałszowane, albo jest dowodem na to, że przebywanie w próżni powoduje iluzję kulistości rzeczy płaskich.'
         '</p></li>'
+
         '<li><p style="text-align:justify;">'
         '<b>My robimy dokładnie to samo.</b>'
-        '<br>Gdyby ktoś powiedział, że zrobił naukowy eksperyment wykazujący, że grawitacja nie istnieje, też uznalibyśmy, że eksperyment musi być błędny. Nie założylibyśmy nagle, że cała fizyka się myli. A przecież mogłaby się mylić — my jedynie wierzymy, że dobrze opisuje rzeczywistość.'
+        '<br>Gdyby ktoś nam powiedział, że ma dowód na to, że nauka to stek bzdur, że jego dowód musi być błędny. Nie założylibyśmy nagle, że cała matematyka, fizyka, chemia, czy biologia się mylą. W tym zakresie niczym sie nie różnimy od wyznawców płaskiej Ziemi: my wyznajemy wiarę w metodę naukową, oni w płaską Ziemię. My również wszystko arbitralnie dostosowujemy do wiary w naukę, żeby zawsze móc uznać, że jest działa.'
         '</p></li>'
-        '<li><p style="text-align:justify;">'
-        '<b>Tak działa każdy aksjomat.</b>'
-        '<br>Gdy wyniki eksperymentu odbiegają od oczekiwań, żaden naukowiec nie stwierdza „nauka nie działa, rzucam ten chłam". Nagina swoje rozumienie świata tak, żeby wyniki pasowały do jego wiary, że metoda naukowa zawsze działa. Wyznawca płaskiej Ziemi robi dokładnie to samo — tylko z innym aksjomatem.'
-        '</p></li>'
+
         '</ol>'
         '</blockquote>'
 );
