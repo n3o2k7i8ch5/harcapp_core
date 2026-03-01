@@ -593,7 +593,7 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_3 = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'A jak to jest, zdarzają się ludzie (przykładowo bliźniacy), którzy mają identyczne wychowanie, niemal identyczne doświadczenia, ale jedno z nich jest kłótliwe i stawia na swoje, a drugie ugodowe i chodzące na kompromisy, mimo, że rodzice dokładają wszelkich starań, by oboje byli w tej kwestii tacy sami?'
+        'A jak to jest, zdarzają się ludzie (przykładowo bliźniacy), wychowani w tej samej rodzinie, w takich samych warunkach, ale jedno z nich jest kłótliwe i stawia na swoje, a drugie ugodowe i chodzące na kompromisy, mimo że rodzice dokładają wszelkich starań, by byli w tej kwestii tacy sami?'
         '</p>'
         '</blockquote>'
 
@@ -606,16 +606,16 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_3 = KonspektStep(
         'Ludzie mają <b>predyspozycje</b> do określonych wartości - zwłaszcza związanych z wartościami pierwotnymi.'
         '</p>'
         '<ul>'
-        '<li><p style="text-align:justify;">Ludzie asertywni będą mieli skłonność do cenienia sobie wyżej <b>konfrontacji</b> i <b>poszanowania własnych granic</b> od ludzi ugodowych.</p></li>'
-        '<li><p style="text-align:justify;">Ludzie ekstrawertyczni będą mieli skłonność do cenienia sobie wyżej <b>imprezowania</b> od ludzi introwertycznych.</p></li>'
-        '<li><p style="text-align:justify;">Ludzie sumienni będą mieli skłonność do cenienia sobie wyżej <b>kończenia tego, co już zaczęli</b> od ludzi impulsywnych.</p></li>'
-        '<li><p style="text-align:justify;">Ludzie neurotyczni będą mieli skłonność do cenienia sobie wyżej <b>spokoju</b> i <b>braku stresu</b> od ludzi o niższej wrażliwości na negatywne emocje.</p></li>'
+        '<li><p style="text-align:justify;">Ludzie asertywni będą mieli skłonność do cenienia <b>konfrontacji</b> i <b>poszanowania własnych granic</b> wyżej od ludzi ugodowych.</p></li>'
+        '<li><p style="text-align:justify;">Ludzie ekstrawertyczni będą mieli skłonność do cenienia <b>przebywania z ludźmi</b> wyżej od ludzi introwertycznych.</p></li>'
+        '<li><p style="text-align:justify;">Ludzie sumienni będą mieli skłonność do cenienia <b>kończenia tego, co już zaczęli</b> wyżej od ludzi impulsywnych.</p></li>'
+        '<li><p style="text-align:justify;">Ludzie neurotyczni będą mieli skłonność do cenienia <b>spokoju</b> i <b>braku stresu</b> wyżej od ludzi o niższej wrażliwości na negatywne emocje.</p></li>'
         '<li><p style="text-align:justify;">itd.</p></li>'
         '</ul>'
         '</blockquote>'
 
         '<p style="text-align:justify;">'
-        'Wszystkie powyższe 4 przykłady są związane z cechami temperamentu w teorii modelu "Big Five personality traits" - są to cechy biologiczne, na które nie wpływa socjalizacja (wychowanie).'
+        'Powyższe przykłady są związane z cechami temperamentu w modelu Big Five — są to cechy biologiczne, na które nie wpływa wychowanie. Warto o tym wspomnieć, jeśli ktoś z uczestników sam o to zapyta — w przeciwnym wypadku nie warto wprowadzać wątku nazewnictwa.'
         '</p>'
 
 );
