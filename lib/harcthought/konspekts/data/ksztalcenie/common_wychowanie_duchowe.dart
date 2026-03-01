@@ -244,7 +244,7 @@ KonspektStep step_sfery_rozwoju_sfery_zdolnosci_arbitralnosc_podzialu = Konspekt
 
 KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
     title: 'Sfery rozwoju - sfera ducha',
-    duration: Duration(minutes: 5),
+    duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     materials: [
       material_zal_sfery,
@@ -295,7 +295,7 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
 
 KonspektStep step_sfery_rozwoju_sfera_ducha_dopowiedzenie = KonspektStep(
     title: 'Sfery rozwoju - sfera ducha - dopowiedzenie i przykład',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     required: false,
     content: '<p style="text-align:justify;">'
@@ -390,7 +390,7 @@ KonspektStep _step_poziomy_duchowosci_wstep = KonspektStep(
         'Prowadzący prezentuje kolejno poziomy duchowości: <b>zachowań</b>, <b>wartości</b> i <b>aksjomatów</b> i dla każdego z tych poziomów opisuje je w taki sam sposób:'
         '</p>'
         '<ol>'
-        '<li><p style="text-align:justify;">Definiuje, czym jest poziom,</p></li>'
+        '<li><p style="text-align:justify;">Definiuje, czym jest określony poziom duchowości.</p></li>'
         '<li><p style="text-align:justify;">Podaje przykład tego poziomu dla przypadku Alberta.</p></li>'
         '<li><p style="text-align:justify;">Daje uczestnikom chwilę na pytania.</p></li>'
         '<li><p style="text-align:justify;">Przedstawia uczestnikom zagadkę, pozorną sprzeczność, czy proste zadanie, by utrwalić ich zrozumienie.</p></li>'
@@ -479,7 +479,7 @@ KonspektStep _step_poziomy_duchowosci_wartosci_przyklad = KonspektStep(
         '</p>'
 
         '<ul>'
-        '<li><p style="text-align:justify;">Wartością dla Alberta są <b>pieniądze</b> - wynikają z tego zachowania w stylu: chodzenie do pracy, utrzymywanie konta bankowego itd..</p></li>'
+        '<li><p style="text-align:justify;">Wartością dla Alberta są <b>pieniądze</b> - wynikają z tego zachowania w stylu: chodzenie do pracy, utrzymywanie konta bankowego itd.</p></li>'
         '<li><p style="text-align:justify;">Wartością większą od pieniędzy jest dla Alberta <b>rodzina</b> - wynikają z tego zachowania w stylu: dbanie o relację narzeczoną, spędzanie czasu z rodzeństwem, dostosowywanie swojego życia pod posiadanie dużej liczby dzieci, etc.</p></li>'
         '<li><p style="text-align:justify;">Wartością dla Alberta jest <b>lojalność wobec firmy</b> - wynikają z tego zachowania w stylu: dbanie o reputację firmy, próba naprawy w środku zimy zepsutego auto, by móc dojechać do klienta (a przecież Albert mógłby zostać w jego ciepłym wnętrzu, zadzwonić po lawetę i napisać szefowi, że nie da rady dojechać - przecież to nie jego wina).</p></li>'
         '<li><p style="text-align:justify;">Wartością dla Alberta nie jest poezja - nie czyta jej, nie rozmyśla o niej, nie poświęca jej czasu, nie interesuje go ten temat.</p></li>'
@@ -498,17 +498,16 @@ KonspektStep _step_poziomy_duchowosci_wartosci_pytania = KonspektStep(
 );
 
 KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_1 = KonspektStep(
-    title: 'Poziomy duchowości - wartości - zagadka 1',
-    duration: Duration(minutes: 2),
+    title: 'Poziomy duchowości - wartości - zagadka 1 - pierwotne i moralne',
+    duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje pytanie-zagadkę:'
         '</p>'
 
-        // Zademonstrować ten dylemat lepiej.
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Wyobraźcie sobie człowieka, który powstrzymuje się od kradzieży, ale nie dlatego, że wartością jest dla niego zaufanie społeczne, albo uczciwość, ale dlatego, że boi się, że policja go wsadzi do pierdla. No to jak to jest: zachowuje się tak, jakby wartością była dla niego uczciwość, ale tak naprawdę nie ma to żadnego związku? Zachowania oderwane w zupełności od wartości? O co chodzi?'
+        'Czy jeśli ktoś, mogąc ukraść coś w sklepie świadomie tego nie robi - czy wartością jest dla niego uczciwość? A może niekoniecznie?'
         '</p>'
         '</blockquote>'
 
@@ -518,17 +517,47 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_1 = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Nie wszystkie zachowania człowieka wynikają z wartości w stylu "uczciwość", czy "honor", "prawda", "rodzina", "wiara", etc. Niektóre zachowania wynikają z temperamentu człowieka, czy jego emocji, np. ze strachu, zainteresowania, głodu, czy zakochania. To, że intuicyjnie myślimy o wartościach jako o moralnych, wzniosłych bytach, to dopiero połowa historii: ludzie w dużej mierze kierują się wartością poczucia bezpieczeństwa, czy realizacji swoich popędów, instynków itd.. To też są wartości - co więcej, to właśnie te "pierwotne" wartości są głównym źródłem motywacji zachowań człowieka, nie te wzniosłe.'
+        'Niekoniecznie - może mieć w nosie uczciwość, prawdę czy zaufanie, ale zwyczajnie bać się konsekwencji karnych.'
         '</p>'
+        '<p style="text-align:justify;">'
+        'Z tej prostej obserwacji płyną dwa bardzo ważne wnioski:'
+        '</p>'
+        '<ol>'
+        '<li><p style="text-align:justify;">Te same zachowania mogą wynikać z zupełnie różnych wartości, np. z uczciwości albo ze strachu.</p></li>'
+        '<li><p style="text-align:justify;">Istnieją dwa bardzo różne "gatunki" wartości:</p>'
+        '<ul>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<b>Wartości moralne</b>'
+        '<br>Pierwsze, o czym zazwyczaj każdy myśli, słysząc o wartościach, to <b>wartości moralne</b>, np.: "honor", "uczciwość", "prawda", "rodzina", "wiara".'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<b>Wartości pierwotne</b>'
+        '<br>...ale przecież każdy człowiek (również każde zwierzę) jest motywowany pewnymi pierwotnymi, biologicznymi instynktami, np.: ciekawością, strachem, głodem, przyjemnością, zakochaniem, etc. Są to <b>wartości pierwotne</b> - i też są to wartości; bezpiecznie jest nawet założyć, że są to przeważające wartości w życiu przeciętnego człowieka.'
+        '</p>'
+        '</li>'
+
+        '</ul>'
+        '</li>'
+        '</ol>'
         '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Po tych słowach prowadzący upewnia się, że podział na "wartości pierwotne" oraz "wartości moralne" zapisane na kartce "poziom wartości" jest dla uczestników jasny.'
+        '</p>'
+
 );
 
 KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_2 = KonspektStep(
-    title: 'Poziomy duchowości - wartości - zagadka 2',
-    duration: Duration(minutes: 3),
+    title: 'Poziomy duchowości - wartości - zagadka 2 - dualizm',
+    duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący upewnia się, że uczestnicy nadążają za jego tokiem rozumowania, następnie zadaje drugie pytanie-zagadkę:'
+        'Prowadzący zadaje uczestnikom drugie pytanie-zagadkę:'
         '</p>'
 
         '<blockquote>'
@@ -554,9 +583,46 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_2 = KonspektStep(
 
 );
 
+KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_3 = KonspektStep(
+    title: 'Poziomy duchowości - wartości - zagadka 3 - predyspozycje',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący zadaje uczestnikom trzecie pytanie-zagadkę:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'A jak to jest, zdarzają się ludzie (przykładowo bliźniacy), którzy mają identyczne wychowanie, niemal identyczne doświadczenia, ale jedno z nich jest kłótliwe i stawia na swoje, a drugie ugodowe i chodzące na kompromisy, mimo, że rodzice dokładają wszelkich starań, by oboje byli w tej kwestii tacy sami?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący ponownie daje uczestnikom chwilę, by spróbowali rozwiązać tę zagwozdkę. Ponownie: dobrze, jeśli wywiąże się z tego jakaś <b>dyskusja</b>, która doprowadzi do następującego wniosku:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Ludzie mają <b>predyspozycje</b> do określonych wartości - zwłaszcza związanych z wartościami pierwotnymi.'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">Ludzie asertywni będą mieli skłonność do cenienia sobie wyżej <b>konfrontacji</b> i <b>poszanowania własnych granic</b> od ludzi ugodowych.</p></li>'
+        '<li><p style="text-align:justify;">Ludzie ekstrawertyczni będą mieli skłonność do cenienia sobie wyżej <b>imprezowania</b> od ludzi introwertycznych.</p></li>'
+        '<li><p style="text-align:justify;">Ludzie sumienni będą mieli skłonność do cenienia sobie wyżej <b>kończenia tego, co już zaczęli</b> od ludzi impulsywnych.</p></li>'
+        '<li><p style="text-align:justify;">Ludzie neurotyczni będą mieli skłonność do cenienia sobie wyżej <b>spokoju</b> i <b>braku stresu</b> od ludzi o niższej wrażliwości na negatywne emocje.</p></li>'
+        '<li><p style="text-align:justify;">itd.</p></li>'
+        '</ul>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Wszystkie powyższe 4 przykłady są związane z cechami temperamentu w teorii modelu "Big Five personality traits" - są to cechy biologiczne, na które nie wpływa socjalizacja (wychowanie).'
+        '</p>'
+
+);
+
 KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
     title: 'Poziomy rozwoju duchowego - aksjomaty - dekompozycja',
-    duration: Duration(minutes: 5),
+    duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący płynnie przechodzi do opisu <b>poziomu aksjomatów</b>. Zanim jednak cokolwiek zdefiniuje, pomaga najpierw uczestnikom zbudować intuicję.'
@@ -574,7 +640,9 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
         'Przykładowo można byłoby podrążyć trochę w wartościach Alberta powtarzając pytanie: <b>"dlaczego jest to dla Ciebie ważne?"</b>.'
         '<br>'
         '<br><u>Przykładowy tok rozumowania Alberta:</u>'
-        '<br>- Praca jest dla mnie ważna. '
+        '<br>'
+        '<i>'
+        '<br>- Praca jest dla mnie ważna.'
         '<br>- Dlaczego?'
         '<br>- Bo chcę mieć pieniądze - są dla mnie ważne.'
         '<br>- Dlaczego?'
@@ -589,6 +657,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
         '<br>- Nie wiem. Tak uważam. Uważam, że miłość jest najważniejsza w życiu. Przemawia do mnie i wierzę w historię Chrystusa.'
         '<br>- Dlaczego?'
         '<br>- Nie wiem. Wierzę w to i tyle. Nie wiem. Po prostu.'
+        '</i>'
         '<br>'
         '<br>Zawsze w takich sekwencjach w końcu dochodzi się do ściany, gdzie nie ma już dalej odpowiedzi na pytanie "dlaczego". Albert nie ma dalszych odpowiedzi, nie dlatego, że jest głupi, ale dlatego, że dotarł do fundamentu — do pewnego przekonania, które z niczego dalej nie wynika. Zazwyczaj takie rozważania nie trwają kilku minut, a raczej kilka dni, miesięcy, czy nawet lat. Za każdym razem jednak, gdy dochodzi się do tej granicy, dotyka się ostatniego poziomu duchowości, czyli poziomu aksjomatu.'
         '</p>'
@@ -700,7 +769,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_plaska_ziemia = KonspektStep(
         '<p style="text-align:justify;">'
         'Czy wiara w to, że Ziemia jest płaska, może być aksjomatem?'
         '<br>'
-        '<br>Wyjaśnijmy najpierw o co <b>nie chodzi</b>: może się zdarzyć, że ktoś robi badania i obserwacje i wychodzi mu, że Ziemia jest płaska - na przykład wskutek błędu w obliczeniach. W takim przypadku stwierdzenie, że ziemia jest płaska nie jest aksjomatem, tylko <b>wnioskiem</b> z badań. Taki przypadek nas <b>nie interesuje</b>.'
+        '<br>Wyjaśnijmy najpierw o co <b>nie chodzi</b>: może się zdarzyć, że ktoś robi badania i obserwacje i wychodzi mu, że Ziemia jest płaska - na przykład wskutek błędu w obliczeniach. W takim przypadku stwierdzenie, że Ziemia jest płaska nie jest aksjomatem, tylko <b>wnioskiem</b> z badań. Taki przypadek nas <b>nie interesuje</b>.'
         '<br>'
         '<br>Pytanie brzmi, czy może być tak, że ktoś całe spojrzenie na świat zaczyna od dogmatu, że Ziemia jest płaska?'
         '</p>'
@@ -712,29 +781,29 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_plaska_ziemia = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Oczywiście, że tak - stwierdzenie, że Ziemia jest płaska może być czyimś aksjomatem.'
+        'Oczywiście, że tak - stwierdzenie, że Ziemia jest płaska, może być czyimś aksjomatem.'
         '</p>'
         '</blockquote>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący wyjaśnia to zwracając uwagę na dwie kwestie:'
+        'Prowadzący wyjaśnia to, zwracając uwagę na dwie kwestie:'
         '</p>'
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Jeśli ktoś wyjdzie z założenia, że Ziemia jest płaska, to po prostu dostosuje do tego wszystkie inne wnioski o świecie - to, czy będą one raczej pomagały, czy przeszkadzały w życiu to już zupełnie inna sprawa.'
+        'Jeśli ktoś wyjdzie z założenia, że Ziemia jest płaska, to po prostu dostosuje do tego wszystkie inne wnioski o świecie - to, czy będą one raczej pomagały, czy przeszkadzały w życiu, to już zupełnie inna sprawa.'
         '</p>'
 
         '<ol>'
 
         '<li><p style="text-align:justify;">'
         '<b>Aksjomat porządkuje wszystko.</b>'
-        '<br>Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Przykładowo, gdy ktoś zobaczy zdjęcie kulistej Ziemi z kosmosu, wniosek będzie miał tylko jeden: zdjęcie jest sfałszowane, albo jest dowodem na to, że przebywanie w próżni powoduje iluzję kulistości rzeczy płaskich.'
+        '<br>Jeśli ktoś wierzy, że Ziemia jest płaska, to wszystko inne podporządkuje pod to założenie. Przykładowo, gdy ktoś zobaczy zdjęcie kulistej Ziemi z kosmosu, wniosek będzie miał tylko jeden: zdjęcie jest sfałszowane, albo uzna to za dowód na to, że przebywanie w próżni powoduje iluzję kulistości rzeczy płaskich.'
         '</p></li>'
 
         '<li><p style="text-align:justify;">'
         '<b>My robimy dokładnie to samo.</b>'
-        '<br>Gdyby ktoś nam powiedział, że ma dowód na to, że nauka to stek bzdur, że jego dowód musi być błędny. Nie założylibyśmy nagle, że cała matematyka, fizyka, chemia, czy biologia się mylą. W tym zakresie niczym sie nie różnimy od wyznawców płaskiej Ziemi: my wyznajemy wiarę w metodę naukową, oni w płaską Ziemię. My również wszystko arbitralnie dostosowujemy do wiary w naukę, żeby zawsze móc uznać, że jest działa.'
+        '<br>Gdyby ktoś nam powiedział, że ma dowód na to, że nauka to stek bzdur, uznalibyśmy, że jego dowód musi być błędny. Nie założylibyśmy nagle, że cała matematyka, fizyka, chemia czy biologia się mylą. W tym zakresie niczym się nie różnimy od wyznawców płaskiej Ziemi: my wyznajemy wiarę w metodę naukową, oni w płaską Ziemię. My również wszystko arbitralnie dostosowujemy do wiary w naukę, żeby zawsze móc uznać, że działa.'
         '</p></li>'
 
         '</ol>'
@@ -757,6 +826,7 @@ KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
       _step_poziomy_duchowosci_wartosci_pytania,
       _step_poziomy_duchowosci_wartosci_zagadka_1,
       _step_poziomy_duchowosci_wartosci_zagadka_2,
+      _step_poziomy_duchowosci_wartosci_zagadka_3,
 
       _step_poziomy_duchowosci_aksjomaty_dekompozycja,
       _step_poziomy_duchowosci_aksjomaty_definicja,
