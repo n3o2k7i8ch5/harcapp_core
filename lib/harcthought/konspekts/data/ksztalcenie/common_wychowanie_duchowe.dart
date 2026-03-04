@@ -922,7 +922,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_schemat = KonspektStep(
       'Każdorazowo, po opisaniu konkretnego fragmentu, prowadzący rysuje na dużej kartce kolejne elementy wykresu.'
       '<br>'
       '<br>Ważne, by całą tę część przeprowadzić możliwie dynamicznie, ale spokojnie, w formie wynikającej z siebie opowieści, podając odpowiednie przykłady, by uczestnicy zbudowali sobie intuicję o każdym z etapów rozwoju.'
-      '</p>'
+      '</p>',
 );
 
 KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_zachowania = KonspektStep(
@@ -1134,7 +1134,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_zachowania = KonspektStep(
         '</p>'
         '<ul>'
         '<li><p style="text-align:justify;">Po pierwsze: od momentu pojawienia się w świadomości człowieka wartości, dotychczasowe zachowania zaczynają być stopniowo weryfikowane - dotychczasowe sposoby funkcjonowania są zderzane z tym, co człowiek świadomie uważa za dobre.</p></li>'
-        '<li><p style="text-align:justify;">Po drugie: zachowania nadal bywają kształtowane pojedynczo, ale często są one kształtowane grupowo wskutek uznania lub wzmocnienia określonej wartości - przykładowo człowiek poczuje moralny dyskomfort, że wyżej sobie ceni gry komputerowe niż przyjaźnie, zmieni cały szereg zachowań w swoim życiu.</p></li>'
+        '<li><p style="text-align:justify;">Po drugie: zachowania nadal bywają kształtowane pojedynczo, ale często są one kształtowane grupowo wskutek uznania lub wzmocnienia określonej wartości - przykładowo, gdy człowiek poczuje moralny dyskomfort, że wyżej sobie ceni gry komputerowe niż przyjaźnie, zmieni cały szereg zachowań w swoim życiu.</p></li>'
         '<li><p style="text-align:justify;">Po trzecie: odkąd człowiek odnosi zachowania do swoich wartości, trudniej jest w procesie wychowawczym ukształtować w nim dowolne zachowanie z taką łatwością jak wcześniej - jeżeli bowiem będzie ono sprzeczne z jego wartościami, raczej go nie przyjmie.</p></li>'
         '</ul>'
         '</blockquote>'
@@ -1174,7 +1174,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_co_sie_zmienia = KonspektS
         '</p>'
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Przychodzi w końcu w życiu człowieka piękny czas początku szkoły średniej. Z jednej strony wiąże się to z tak zwanym nastoletnim buntem, a z drugiej, zupełnie przypadkiem, znamionuje to czas, w którym człowiek zaczyna mieć potencjał do przebudowania swojej duchowości o perspektywie konkretnych aksjomatów.'
+        'Przychodzi w końcu w życiu człowieka piękny czas początku szkoły średniej. Z jednej strony wiąże się to z tak zwanym nastoletnim buntem, a z drugiej, zupełnym zbiegiem okoliczności jest to też czas, w którym człowiek zaczyna mieć potencjał do przebudowania swojej duchowości w perspektywie konkretnych aksjomatów.'
         '<br>'
         '<br>Istnieje kilka charakterystycznych wydarzeń, które towarzyszą temu procesowi:'
         '</p>'
@@ -1206,7 +1206,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_aksjomaty = KonspektStep(
         '<br>'
         '<br>Znowu, na pewno nie będą to losowe aksjomaty. Podobnie jak wcześniej, człowiek będzie miał tendencję do przyjęcia aksjomatów, które już zna: takich, które będą korespondowały z wartościami i zachowaniami, do których człowiek jest najsilniej przywiązany oraz z którymi ma najlepsze doświadczenia.'
         '<br>'
-        '<br>Przykładowo: jeśli dla człowieka przyjaźnie były ważne, przebaczenie było ważne, modlitwa była ważna, przyjęcie spojrzenia, że sens życia wypływa z życia, męki i zmartwychwstania Chrystusa będzie bardzo prawdopodobne.'
+        '<br>Przykładowo: jeśli dla człowieka ważne były przyjaźnie, przebaczenie i modlitwa to przyjęcie zbawczej roli życia, męki i zmartwychwstania Chrystusa będzie bardzo prawdopodobne.'
         '</p>'
         '</blockquote>'
 
@@ -1265,7 +1265,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_16_plus_lat = KonspektStep(
         '<ul>'
         '<li><p style="text-align:justify;">Po pierwsze, od momentu, w którym duchowość człowieka jest oparta w konkretnym, nieporównywalnym źródle, wpływ zewnętrznych czynników wychowawczych staje się dużo bardziej subtelny. Każda "proponowana zmiana" w duchowości jest odnoszona do ostatecznego kryterium jakim są przyjęte przez człowieka aksjomaty - rozwój duchowy człowieka staje się dużo bardziej autonomiczny.</p></li>'
         '<li><p style="text-align:justify;">Po drugie: proces budowania spójności między kolejnymi poziomami duchowości nie trwa pięciu minut. Czasami jest to kwestia miesięcy, a nawet lat - ludzie mają określone przyzwyczajenia, nawyki, zajęcia itp - nie siedzą cały dzień i nie dumają nad swoją duchowością.</p></li>'
-        '<li><p style="text-align:justify;">Po trzecie: za każdym razem, gdy coś w aksjomacie lub wartościach ulegnie zmianie, zmieniają się także zachowania, ALE! Zmiana zachowań sprawia, że człowiek zmienia sposób w jaki funkcjonuje w świecie - wskutek tego zmieniają się jego doświadczenia, a to sprawia, że zmienia się jego perspektywa i spojrzenie, co wpływa na sposób, w jaki kształtuje on swoją duchowość. Ta pętla sprzężenia zwrotnego sprawia, że w rzeczywistości najczęściej rozwój duchowy kończy się wraz z końcem życia człowieka.</p></li>'
+        '<li><p style="text-align:justify;">Po trzecie: za każdym razem, gdy coś w aksjomacie lub wartościach ulegnie zmianie, zmieniają się także zachowania. Ale zmiana zachowań to zmiana sposobu funkcjonowania w świecie — a to oznacza nowe doświadczenia, nową perspektywę i nowe impulsy do dalszego kształtowania duchowości. Powstaje pętla, która w praktyce sprawia, że rozwój duchowy trwa aż do końca życia.</p></li>'
         '</ul>'
         '</blockquote>'
 );
