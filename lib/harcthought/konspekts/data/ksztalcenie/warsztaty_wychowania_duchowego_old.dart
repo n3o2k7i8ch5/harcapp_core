@@ -1,12 +1,28 @@
 import 'package:harcapp_core/harcthought/common/file_format.dart';
-import 'package:harcapp_core/harcthought/konspekts/data/common.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/common_attachments.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/warsztaty_wychowania_duchowego.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
 import 'common_wychowanie_duchowe.dart';
 
+const String _assetPath = 'asset:packages/harcapp_core/assets/konspekty/ksztalcenie/warsztaty_wychowania_duchowego_old';
+const String _imgStyle = 'object-fit: contain; width: 100%; height: auto;';
 
+String _piramidaDuchowosci1HtmlLight = '<img src="$_assetPath/piramida_duchowosci_1_light.svg" style="$_imgStyle" alt="Piramida duchowości part"/>';
+String _piramidaDuchowosci1HtmlDark = '<img src="$_assetPath/piramida_duchowosci_1_dark.svg" style="$_imgStyle" alt="Piramida duchowości part"/>';
+String piramidaDuchowosci1Html({required bool isDark}) => isDark?_piramidaDuchowosci1HtmlDark:_piramidaDuchowosci1HtmlLight;
+
+String _piramidaDuchowosci2HtmlLight = '<img src="$_assetPath/piramida_duchowosci_2_light.svg" style="$_imgStyle" alt="Piramida duchowości"/>';
+String _piramidaDuchowosci2HtmlDark = '<img src="$_assetPath/piramida_duchowosci_2_dark.svg" style="$_imgStyle" alt="Piramida duchowości"/>';
+String piramidaDuchowosci2Html({required bool isDark}) => isDark?_piramidaDuchowosci2HtmlDark:_piramidaDuchowosci2HtmlLight;
+
+String _piramidaDuchowosci3HtmlLight = '<img src="$_assetPath/piramida_duchowosci_3_light.svg" style="$_imgStyle" alt="Piramida duchowości"/>';
+String _piramidaDuchowosci3HtmlDark = '<img src="$_assetPath/piramida_duchowosci_3_dark.svg" style="$_imgStyle" alt="Piramida duchowości"/>';
+String piramidaDuchowosci3Html({required bool isDark}) => isDark?_piramidaDuchowosci3HtmlDark:_piramidaDuchowosci3HtmlLight;
+
+String _cyklIntegracjiDuchowosciHtmlLight = '<img src="$_assetPath/cykl_integracji_duchowosci_light.svg" style="$_imgStyle" alt="Cykl integracji duchowości"/>';
+String _cyklIntegracjiDuchowosciHtmlDark = '<img src="$_assetPath/cykl_integracji_duchowosci_dark.svg" style="$_imgStyle" alt="Cykl integracji duchowości"/>';
+String cyklIntegracjiDuchowosciHtml({required bool isDark}) => isDark?_cyklIntegracjiDuchowosciHtmlDark:_cyklIntegracjiDuchowosciHtmlLight;
 
 const konspekt_kszt_name_warsztaty_wychowania_duchowego_old = 'warsztaty_wychowania_duchowego_old';
 
