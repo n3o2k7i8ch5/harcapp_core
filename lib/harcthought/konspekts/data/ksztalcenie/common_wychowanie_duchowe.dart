@@ -839,8 +839,6 @@ KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
 
 // Ksztaltowanie duchowości
 
-
-
 KonspektStep _step_ksztaltowanie_duchowosci_roznica_jakosciowa = KonspektStep(
   title: 'Kształtowanie duchowości - różnica jakościowa',
   duration: Duration(minutes: 2),
@@ -864,7 +862,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_roznica_jakosciowa = KonspektStep(
 
 KonspektStep _step_ksztaltowanie_duchowosci_roznica_jakosciowa_pytania = KonspektStep(
   title: 'Kształtowanie duchowości - różnica jakościowa - pytania',
-  duration: Duration(minutes: 1),
+  duration: Duration(minutes: 2),
   activeForm: KonspektStepActiveForm.static,
   content: '<p style="text-align:justify;">'
       'Prowadzący daje uczestnikom czas na zadanie pytań.'
@@ -929,7 +927,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_schemat = KonspektStep(
 
 KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_zachowania = KonspektStep(
   title: 'Kształtowanie duchowości - 7-9 lat - zachowania',
-  duration: Duration(minutes: 5),
+  duration: Duration(minutes: 2),
   activeForm: KonspektStepActiveForm.static,
   content: '<p style="text-align:justify;">'
       'Prowadzący przedstawia poziom <b>zachowań</b> na etapie <b>7-9 lat</b>:'
@@ -957,7 +955,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_zachowania = KonspektStep(
 
 KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_wartosci = KonspektStep(
     title: 'Kształtowanie duchowości - 7-9 lat - wartości',
-    duration: Duration(minutes: 5),
+    duration: Duration(minutes: 4),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący przedstawia poziom <b>wartości</b> na etapie <b>7-9 lat</b>:'
@@ -1007,7 +1005,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_wartosci = KonspektStep(
 
 KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty = KonspektStep(
     title: 'Kształtowanie duchowości - 7-9 lat - aksjomaty',
-    duration: Duration(minutes: 5),
+    duration: Duration(minutes: 4),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący przedstawia poziom <b>aksjomatów</b> na etapie <b>7-9 lat</b>:'
@@ -1029,8 +1027,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty = KonspektStep(
         '<br>Dzieci mają pewną wąską grupę podstawowych założeń o świecie: '
         '</p>'
         '<ul>'
-        '<li>Wierzą, że świat jest taki, jak go widzą, lub</li>'
-        '<li>Rodzice zawsze mają rację.</li>'
+        '<li><p style="text-align:justify;">Wierzą, że świat jest taki, jak go widzą, lub</p></li>'
+        '<li><p style="text-align:justify;">Rodzice zawsze mają rację.</p></li>'
         '</ul>'
         '<p style="text-align:justify;">'
         'U dzieci w tym wieku próżno szukać jednak zrozumienia, że działają w oparciu o tę wiarę - nie rozumieją nawet tego, co to oznacza "wierzyć".'
@@ -1048,8 +1046,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty = KonspektStep(
         'Czy skoro dla dzieci aksjomaty takie, jak:'
         '</p>'
         '<ul>'
-        '<li>Życie, śmierć i zmartwychwstanie Chrystusa, albo:</li>'
-        '<li>Dobro zawsze wraca</li>'
+        '<li><p style="text-align:justify;">Życie, śmierć i zmartwychwstanie Chrystusa, albo:</p></li>'
+        '<li><p style="text-align:justify;">Dobro zawsze wraca</p></li>'
         '</ul>'
         '<p style="text-align:justify;">'
         '...nie mają znaczenia duchowego, to czy w ogóle warto im mówić, co jest w życiu najważniejsze?'
@@ -1067,6 +1065,220 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty = KonspektStep(
         '</blockquote>'
 );
 
+// czy dzieci mają duchowość?
+
+KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_co_sie_zmienia = KonspektStep(
+    title: 'Kształtowanie duchowości - 10-12 lat - co się zmienia?',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przedstawia zmianę, jaka zachodzi w okolicy 9-10 roku życia:'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Mniej więcej między trzecią, a czwartą klasą szkoły podstawowej zachodzi w umyśle człowieka ważna zmiana, która znacząco wpływa na duchowość: człowiek zyskuje zdolność do abstrakcyjnego myślenia:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">liczby przestają oznaczać jedynie "jabłka leżące na stole", do których można dodać jeszcze kilka jabłek - człowiek zaczyna je rozumieć jako abstrakcyjne byty, które mogą być ujemne, ułamkowe itp.</p></li>'
+        '<li><p style="text-align:justify;">koncept porządku przestaje już być związany z konkretną salą w przedszkolu, czy pokojem w domu - człowiek zaczyna go rozumieć jako autonomiczny, niezwiązany z jakimś miejscem byt.</p></li>'
+        '</ul>'
+        '<p style="text-align:justify;">'
+        'Zmiana ta powoduje, że człowiek szybko dostrzega między różnymi zachowaniami wspólne cechy, których nie można bezpośrednio dotknąć, czy przedstawić - np. szacunek, siłę, posłuszeństwo, honor, braterstwo itp.'
+        '<br>'
+        '<br>W świadomości człowieka pojawia się koncept "wartości" - nawet, jeśli nie są one tym określeniem nazywane.'
+        '</p>'
+        '</blockquote>'
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_wartosci = KonspektStep(
+    title: 'Kształtowanie duchowości - 10-12 lat - wartości',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przedstawia poziom <b>wartości</b> na etapie <b>10-12 lat</b>:'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Skoro ustaliliśmy już, że od ok. 10. roku życia w duchowości człowieka krystalizują się wartości, to zastanówmy się, jakie wartości człowiek przyjmie jako pierwsze:'
+        '<br>'
+        '<br>Po pierwsze: na pewno nie będą to wartości losowe. Po drugie: pierwsze wartości, które człowiek przyjmie będą niemal na pewno korespondowały z zachowaniami, do których człowiek jest najsilniej przywiązany oraz z którymi ma najlepsze doświadczenia.'
+        '<br>'
+        '<br>Przykładowo: jeśli człowiek chodził do szkoły, uczył się, dobrze mu szło i był otoczony ludźmi robiącymi to samo - wykształcenie będzie dla niego prawdopodobnie ważną rzeczą.'
+        '</p>'
+        '</blockquote>'
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_zachowania = KonspektStep(
+    title: 'Kształtowanie duchowości - 10-12 lat - zachowania',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący wraca do poziomu <b>zachowań</b> na etapie <b>10-12 lat</b>:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Zatrzymajmy się w takim razie jeszcze na chwilę przy zachowaniach w tym wieku. Po pierwsze - można dalej mówić o <b>zachowaniach</b> w duchowości człowieka na etapie 10-12 lat, oraz czy można je szeroko kształtować?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Odpowiedź na to pytanie jest banalna, jednak prowadzący zwraca uwagę:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Oczywiście: człowiek tak jak miał, tak dalej ma różne, określone zachowania.'
+        '<br>'
+        '<br>W ich kształcie zmieniają się jednak trzy rzeczy:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">Po pierwsze: od momentu pojawienia się w świadomości człowieka wartości, dotychczasowe zachowania zaczynają być stopniowo weryfikowane - dotychczasowe sposoby funkcjonowania są zderzane z tym, co człowiek świadomie uważa za dobre.</p></li>'
+        '<li><p style="text-align:justify;">Po drugie: zachowania nadal bywają kształtowane pojedynczo, ale często są one kształtowane grupowo wskutek uznania lub wzmocnienia określonej wartości - przykładowo człowiek poczuje moralny dyskomfort, że wyżej sobie ceni gry komputerowe niż przyjaźnie, zmieni cały szereg zachowań w swoim życiu.</p></li>'
+        '<li><p style="text-align:justify;">Po trzecie: odkąd człowiek odnosi zachowania do swoich wartości, trudniej jest w procesie wychowawczym ukształtować w nim dowolne zachowanie z taką łatwością jak wcześniej - jeżeli bowiem będzie ono sprzeczne z jego wartościami, raczej go nie przyjmie.</p></li>'
+        '</ul>'
+        '</blockquote>'
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_aksjomaty = KonspektStep(
+    title: 'Kształtowanie duchowości - 10-12 lat - aksjomaty',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przedstawia poziom <b>aksjomatów</b> na etapie <b>10-12 lat</b>:'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Czy w wieku 10-12 lat w duchowości człowieka funkcjonują <b>aksjomaty</b> i czy można je szeroko kształtować?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący udziela odpowiedzi:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Nie. W tym zakresie niewiele się zmienia: człowiek wprawdzie ma różne wartości, ale nie ma on jeszcze potrzeby, ani zdolności, by zrozumieć, że różne systemy wartości są między sobą nieporównywalne, oraz potrzebę, by za jego wartościami stała jakaś głębsza wiara porządkująca jego życie. Aksjomatyczne stwierdzenia mogą być rozumiane nieco głębiej niż wcześniej, ale wciąż nie są one ostateczną, arbitralnie przyjmowaną prawdą, której podporządkowywana jest cała pozostała perspektywa.'
+        '</p>'
+        '</blockquote>'
+
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_co_sie_zmienia = KonspektStep(
+    title: 'Kształtowanie duchowości - 13-15 lat - co się zmienia?',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przedstawia zmianę, jaka zachodzi w okolicy 13-15 roku życia:'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Przychodzi w końcu w życiu człowieka piękny czas początku szkoły średniej. Z jednej strony wiąże się to z tak zwanym nastoletnim buntem, a z drugiej, zupełnie przypadkiem, znamionuje to czas, w którym człowiek zaczyna mieć potencjał do przebudowania swojej duchowości o perspektywie konkretnych aksjomatów.'
+        '<br>'
+        '<br>Istnieje kilka charakterystycznych wydarzeń, które towarzyszą temu procesowi:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">Człowiek zaczyna podważać dotychczasową duchowość, w której został ukształtowany i zaczyna budować swoją autonomię od rodziców.</p></li>'
+        '<li><p style="text-align:justify;">Człowiek zaczyna widzieć, że wiele z tego, co uważał dotychczas za obiektywne wcale nie musi takie być:</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">Kto ustalił, które wartości są dobre, a które nie?</p></li>'
+        '<li><p style="text-align:justify;">Czemu mam wierzyć w Boga, skoro gdybym urodził się w Iranie, to wierzyłbym w Allaha?</p></li>'
+        '</ul>'
+        '</li>'
+        '</ul>'
+        '<p style="text-align:justify;">'
+        'Tym pytaniom towarzyszy najczęściej także niewypowiedziana, ale paląca potrzeba oparcia swojego życia o coś większego: o jakąś misję, tożsamość, wiarę, perspektywę, etc.'
+        '</p>'
+        '</blockquote>'
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_aksjomaty = KonspektStep(
+    title: 'Kształtowanie duchowości - 13-15 lat - aksjomaty',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przedstawia poziom <b>aksjomatów</b> na etapie <b>13-15 lat</b>:'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'A zatem człowiek budzi się pewnego ranka i niedługo potem jego życie staje w perspektywie poszukiwania czegoś głębszego. Znowu: zastanówmy się jakie aksjomaty człowiek przyjmie jako pierwsze?'
+        '<br>'
+        '<br>Znowu, na pewno nie będą to losowe aksjomaty. Podobnie jak wcześniej, człowiek będzie miał tendencję do przyjęcia aksjomatów, które już zna: takich, które będą korespondowały z wartościami i zachowaniami, do których człowiek jest najsilniej przywiązany oraz z którymi ma najlepsze doświadczenia.'
+        '<br>'
+        '<br>Przykładowo: jeśli dla człowieka przyjaźnie były ważne, przebaczenie było ważne, modlitwa była ważna, przyjęcie spojrzenia, że sens życia wypływa z życia, męki i zmartwychwstania Chrystusa będzie bardzo prawdopodobne.'
+        '</p>'
+        '</blockquote>'
+
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_wartosci = KonspektStep(
+    title: 'Kształtowanie duchowości - 13-15 lat - wartości',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący wraca do poziomu <b>wartości</b> na etapie <b>13-15 lat</b>:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Nie będzie chyba zaskoczeniem, gdy powiem, że ludzie w wieku 13-15 lat wciąż mają wartości. Ciekawszym zagadnieniem jest to, co się z nimi dzieje po internalizacji aksjomatów?'
+        '<br>'
+        '<br>Pierwszy proces, który się rozpoczyna, to proces uspójniania wartości z przyjętymi aksjomatami. Jeśli jakieś wartości były między sobą niespójne, powstanie napięcie, które będzie pchało człowieka do zrobienia czegoś z tą niespójnością.'
+        '<br>'
+        '<br>Drugi proces, który następuje to wyłonienie zupełnie nowych wartości, których wcześniej człowiek nie miał, ale które wynikają z przyjęcia określonych aksjomatów.'
+        '<br>'
+        '<br>W największym skrócie proces, któremu podlegają wartości jest długim procesem uspójnienia ich z przyjętymi aksjomatami - może się również okazać, że człowiek będzie tak przywiązany do niektórych wartości, że to aksjomat będzie musiał ustąpić. Efekt jest jednak wciąż ten sam - stopniowe budowanie spójności w obrębie hierarchii wartości i jej źródła.'
+        '</p>'
+        '</blockquote>'
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_zachowania = KonspektStep(
+    title: 'Kształtowanie duchowości - 13-15 lat - zachowania',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący wraca do poziomu <b>zachowań</b> na etapie <b>13-15 lat</b>:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Poziom zachowań jest tą samą opowieścią, co poziom wartości: gdy aksjomaty zaczynają odciskać piętno na wartościach, w ślad za tym wartości przekształcają zachowania człowieka.'
+        '</p>'
+        '</blockquote>'
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_16_plus_lat = KonspektStep(
+    title: 'Kształtowanie duchowości - 16+ lat',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący podnosi temat rozwoju duchowości człowieka po internalizacji aksjomatów:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'No dobrze - człowiek ma już kilkanaście lat, ma określone wartości, ma jakieś aksjomaty lub przynajmniej potrzebę znalezienia aksjomatu - i co teraz? Czy to już koniec kształtowania duchowości?'
+        '<br>'
+        '<br>Oczywiście - nie. Kształtowanie duchowości się absolutnie nie kończy, choć faktem jest, że nabiera innego charakteru. Warto tu wspomnieć o trzech rzeczach:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">Po pierwsze, od momentu, w którym duchowość człowieka jest oparta w konkretnym, nieporównywalnym źródle, wpływ zewnętrznych czynników wychowawczych staje się dużo bardziej subtelny. Każda "proponowana zmiana" w duchowości jest odnoszona do ostatecznego kryterium jakim są przyjęte przez człowieka aksjomaty - rozwój duchowy człowieka staje się dużo bardziej autonomiczny.</p></li>'
+        '<li><p style="text-align:justify;">Po drugie: proces budowania spójności między kolejnymi poziomami duchowości nie trwa pięciu minut. Czasami jest to kwestia miesięcy, a nawet lat - ludzie mają określone przyzwyczajenia, nawyki, zajęcia itp - nie siedzą cały dzień i nie dumają nad swoją duchowością.</p></li>'
+        '<li><p style="text-align:justify;">Po trzecie: za każdym razem, gdy coś w aksjomacie lub wartościach ulegnie zmianie, zmieniają się także zachowania, ALE! Zmiana zachowań sprawia, że człowiek zmienia sposób w jaki funkcjonuje w świecie - wskutek tego zmieniają się jego doświadczenia, a to sprawia, że zmienia się jego perspektywa i spojrzenie, co wpływa na sposób, w jaki kształtuje on swoją duchowość. Ta pętla sprzężenia zwrotnego sprawia, że w rzeczywistości najczęściej rozwój duchowy kończy się wraz z końcem życia człowieka.</p></li>'
+        '</ul>'
+        '</blockquote>'
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_pytania = KonspektStep(
+    title: 'Kształtowanie duchowości - pytania',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący daje uczestnikom czas na zadanie pytań.'
+        '</p>',
+);
+
 KonspektStepGroup step_group_ksztaltowanie_duchowosci = KonspektStepGroup(
     title: 'Kształtowanie duchowości',
     steps: [
@@ -1079,6 +1291,18 @@ KonspektStepGroup step_group_ksztaltowanie_duchowosci = KonspektStepGroup(
       _step_ksztaltowanie_duchowosci_7_9_lat_wartosci,
       _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty,
 
+      _step_ksztaltowanie_duchowosci_10_12_lat_co_sie_zmienia,
+      _step_ksztaltowanie_duchowosci_10_12_lat_wartosci,
+      _step_ksztaltowanie_duchowosci_10_12_lat_zachowania,
+      _step_ksztaltowanie_duchowosci_10_12_lat_aksjomaty,
+
+      _step_ksztaltowanie_duchowosci_13_15_lat_co_sie_zmienia,
+      _step_ksztaltowanie_duchowosci_13_15_lat_aksjomaty,
+      _step_ksztaltowanie_duchowosci_13_15_lat_wartosci,
+      _step_ksztaltowanie_duchowosci_13_15_lat_zachowania,
+
+      _step_ksztaltowanie_duchowosci_16_plus_lat,
+      _step_ksztaltowanie_duchowosci_pytania,
     ]
 );
 
