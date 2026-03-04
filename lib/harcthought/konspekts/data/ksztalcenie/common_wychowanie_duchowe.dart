@@ -837,7 +837,253 @@ KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
     ]
 );
 
-// Integracja duchowości
+// Ksztaltowanie duchowości
+
+
+
+KonspektStep _step_ksztaltowanie_duchowosci_roznica_jakosciowa = KonspektStep(
+  title: 'Kształtowanie duchowości - różnica jakościowa',
+  duration: Duration(minutes: 2),
+  activeForm: KonspektStepActiveForm.static,
+  content: '<p style="text-align:justify;">'
+      'Prowadzący zaczyna od zwrócenia uwagi na różnicę między sposobem rozwoju sfer zdolności, a sfery ducha:'
+      '</p>'
+
+      '<blockquote>'
+      '<p style="text-align:justify;">'
+      'Rozwój <b>sfer zdolności</b> polega na tym, że do już istniejącego "worka ze zdolnościami" dorzucane są kolejne zdolności: człowiek uczy się grać na nowym instrumencie, uczy się nowego języka, uczy się sposobu radzenia sobie ze złością, etc..'
+      '<br>'
+      '<br>Rozwój <b>sfery ducha</b> jest zupełnie inny. Człowiek nie ma "worka z różnymi duchowościami" - ale ma zawsze jedną, konkretną duchowość. Rozwój duchowości polega na jej przekształcaniu. Przykładowo, dla kogoś najważniejsze było zdrowie i wszystkie swoje czyny podporządkowywał zdrowemu stylowi życia, aż pewnego razu, wskutek rozwoju duchowego miejsce zdrowia zastępują przyjaźnie - i wówczas to one determinują sposób użycia posiadanych zdolności i zasobów.'
+      '<br>'
+      '<br>O rozwoju duchowym nie należy myśleć jak o procesie "budowania", czy "wnoszenia kolejnych pięter", ale raczej jak o procesie kształtowania - nadawaniu określonemu kawałkowi gliny jednego z nieskończonej liczby możliwych kształtów.'
+      '<br>'
+      '<br>Czujecie tę różnicę?'
+      '</p>'
+      '</blockquote>',
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_roznica_jakosciowa_pytania = KonspektStep(
+  title: 'Kształtowanie duchowości - różnica jakościowa - pytania',
+  duration: Duration(minutes: 1),
+  activeForm: KonspektStepActiveForm.static,
+  content: '<p style="text-align:justify;">'
+      'Prowadzący daje uczestnikom czas na zadanie pytań.'
+      '</p>',
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_osie = KonspektStep(
+  title: 'Kształtowanie duchowości - osie współrzędnych',
+  duration: Duration(minutes: 1),
+  activeForm: KonspektStepActiveForm.static,
+  content: '<p style="text-align:justify;">'
+      'Prowadzący bierze dużą kartkę (np. flipchart) i rysuje na niej dwie prostopadłe osie współrzędnych. Na osi X zaznacza <b>czas</b>, zaś na osi Y <b>poziom duchowości</b> i wyjaśnia, co się będzie działo:'
+      '</p>'
+      '<blockquote>'
+      '<p style="text-align:justify;">'
+      'Przejdziemy teraz krok po kroku przez etapy ogólnego procesu kształtowania duchowości - od zucha po dorosłego człowieka, którego harcerstwo ma ambicję wychować.'
+      '</p>'
+      '</blockquote>',
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_schemat = KonspektStep(
+  title: 'Kształtowanie duchowości - schemat',
+  duration: Duration.zero,
+  activeForm: KonspektStepActiveForm.static,
+  content: '<p style="text-align:justify;">'
+      'Prowadzący przechodzi do tłumaczenia krok po kroku sposobu kształtowania duchowości. W tym celu wydzielić należy 3 etapy wiekowe wymienione poniżej. Dla każdego etapu przechodzi przez każdy z poziomów rozwoju duchowego w wymienionej niżej kolejności.'
+      '<br>'
+      '<br>Model i kolejność tłumaczenia etapów powinien być następujący:'
+      '</p>'
+      '<ul>'
+      '<li>Etap <b>7-9</b> lat:'
+      '<ol>'
+      '<li><b>Zachowania</b> w duchowości [TAK]</li>'
+      '<li><b>Wartości</b> w duchowości [NIE]</li>'
+      '<li><b>Aksjomaty</b> w duchowości [NIE]</li>'
+      '</ol>'
+      '</li>'
+      '<li>Etap <b>10-12</b> lat:'
+      '<ol start="0">'
+      '<li>Co się zmienia? [WARTOŚCI]</li>'
+      '<li><b>Wartości</b> w duchowości [TAK]</li>'
+      '<li><b>Zachowania</b> w duchowości [TAK]</li>'
+      '<li><b>Aksjomaty</b> w duchowości [NIE]</li>'
+      '</ol>'
+      '</li>'
+      '<li>Etap <b>13-15</b> lat:'
+      '<ol start="0">'
+      '<li>Co się zmienia? [Aksjomaty]</li>'
+      '<li><b>Aksjomaty</b> w duchowości [TAK]</li>'
+      '<li><b>Wartości</b> w duchowości [TAK]</li>'
+      '<li><b>Zachowania</b> w duchowości [TAK]</li>'
+      '</ol>'
+      '</li>'
+      '</ul>'
+
+      '<p style="text-align:justify;">'
+      'Każdorazowo, po opisaniu konkretnego fragmentu, prowadzący rysuje na dużej kartce kolejne elementy wykresu.'
+      '<br>'
+      '<br>Ważne, by całą tę część przeprowadzić możliwie dynamicznie, ale spokojnie, w formie wynikającej z siebie opowieści, podając odpowiednie przykłady, by uczestnicy zbudowali sobie intuicję o każdym z etapów rozwoju.'
+      '</p>'
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_zachowania = KonspektStep(
+  title: 'Kształtowanie duchowości - 7-9 lat - zachowania',
+  duration: Duration(minutes: 5),
+  activeForm: KonspektStepActiveForm.static,
+  content: '<p style="text-align:justify;">'
+      'Prowadzący przedstawia poziom <b>zachowań</b> na etapie <b>7-9 lat</b>:'
+      '</p>'
+      '<blockquote>'
+      '<p style="text-align:justify;">'
+      'Czy przed 9-tym rokiem życia, w duchowości człowieka funkcjonują <b>zachowania</b> i czy można je szeroko kształtować?'
+      '</p>'
+      '</blockquote>'
+
+      '<p style="text-align:justify;">'
+      'Prowadzący, jeśli chce, może poczekać kilka sekund, aż ktoś wyrazi swoje zdanie, po czym sam udziela odpowiedzi:'
+      '</p>'
+
+      '<blockquote>'
+      '<p style="text-align:justify;">'
+      'Oczywiście, że tak. Dzieci podejmują określone zachowania: jedzą, chodzą, mówią, skaczą, śpią, etc.'
+      '<br>'
+      '<br>Zachowania można kształtować, np. napominaniem dzieci (np., gdy rodzic mówi dziecku: "powiedz pani «dzień dobry»"). Kształtować zachowania u dzieci można też wykorzystując ich tendencję do naśladowania innych - można przykładowo jeść nożem i widelcem i dzięki temu dzieci same zaczną to robić.'
+      '<br>'
+      '<br>W skrócie: tak, w wieku 7-9 lat w duchowości dzieci funkcjonują zachowania.'
+      '</p>'
+      '</blockquote>'
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_wartosci = KonspektStep(
+    title: 'Kształtowanie duchowości - 7-9 lat - wartości',
+    duration: Duration(minutes: 5),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przedstawia poziom <b>wartości</b> na etapie <b>7-9 lat</b>:'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Czy przed 9-tym rokiem życia, w duchowości człowieka funkcjonują <b>wartości</b> i czy można je szeroko kształtować?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący udziela odpowiedzi:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Nie - z pewnym wyjątkiem.'
+        '<br>'
+        '<br>Dzieci mają <b>wartości pierwotne</b>: zainteresowania, temperament, empatię, popędy, do których zaspokojenia konsekwentnie dążą. U dzieci w tym wieku próżno szukać jednak zrozumienia, że źródłem ich działań są jakiekolwiek wartości, czy imperatywy.'
+        '<br>'
+        '<br>Podobnie, próżno szukać też u dzieci <b>wartości moralnych</b>. Zachowania przejawiane w tym wieku, jeśli nawet sprawiają wrażenie spójnie motywowanych moralnością, to tylko dlatego, że są ukształtowane przez środowisko funkcjonujące według określonego systemu wartości. U dzieci te zachowania nie są ze sobą związane - granie "fair play" w warcaby w żaden sposób nie przełoży się dla nich na zasady "fair play" w piłkę.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący podaje pierwszą intuicję:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Brak świadomego postrzegania wartości przez dzieci przed 10. rokiem życia jest ściśle związany z ich niezdolnością do abstrakcyjnego myślenia. Ma to swoje odzwierciedlenie w ich problemach ze sprzątaniem:'
+        '<br>'
+        '<br>Dla dzieci w tym wieku nie istnieje koncept "porządku". Sprzątanie nie polega na doprowadzeniu pokoju do pewnego stanu, ale na wykonaniu sekwencji przeniesienia rzeczy na określone miejsce: klocków pod szafkę, pluszaków na półkę, a kredek do kredensu. Niestety, jeśli ta umiejętność zostanie stworzona w kontekście sprzątania w przedszkolu, to w żaden sposób nie wpłynie to na umiejętność sprzątania w domu.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący podaje drugą intuicję:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Wymowne w tym zakresie jest także Prawo Zucha - nie bez przyczyny składa się ono ze stwierdzeń: co zuch <b>robi</b> i jaki zuch <b>jest</b>, a nie czym się zuch <b>kieruje</b>, albo do czego <b>dąży</b>.'
+        '</p>'
+        '</blockquote>'
+);
+
+KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty = KonspektStep(
+    title: 'Kształtowanie duchowości - 7-9 lat - aksjomaty',
+    duration: Duration(minutes: 5),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący przedstawia poziom <b>aksjomatów</b> na etapie <b>7-9 lat</b>:'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Czy przed 9-tym rokiem życia, w duchowości człowieka funkcjonują <b>aksjomaty</b> i czy można je szeroko kształtować?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący udziela odpowiedzi:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Nie - również z pewnym wyjątkiem.'
+        '<br>'
+        '<br>Dzieci mają pewną wąską grupę podstawowych założeń o świecie: '
+        '</p>'
+        '<ul>'
+        '<li>Wierzą, że świat jest taki, jak go widzą, lub</li>'
+        '<li>Rodzice zawsze mają rację.</li>'
+        '</ul>'
+        '<p style="text-align:justify;">'
+        'U dzieci w tym wieku próżno szukać jednak zrozumienia, że działają w oparciu o tę wiarę - nie rozumieją nawet tego, co to oznacza "wierzyć".'
+        '<br>'
+        '<br>Dzieci nie wyznają świadomie żadnej wiary, ani aksjomatów, nie umieją niczego z nich wywnioskować, nie umieją ich nazwać. Mogą zapamiętać stwierdzenia o tym, co jest w życiu najważniejsze, ale nie są w stanie spójnie określić, co jest w konsekwencji dobre, a co złe.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący zadaje uczestnikom pytanie-zagadkę:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Czy skoro dla dzieci aksjomaty takie, jak:'
+        '</p>'
+        '<ul>'
+        '<li>Życie, śmierć i zmartwychwstanie Chrystusa, albo:</li>'
+        '<li>Dobro zawsze wraca</li>'
+        '</ul>'
+        '<p style="text-align:justify;">'
+        '...nie mają znaczenia duchowego, to czy w ogóle warto im mówić, co jest w życiu najważniejsze?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący podaje odpowiedź:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Tak. Wprawdzie nie ma szans, aby człowiek w tym wieku sam, świadomie oparł o te prawdy swoje wartości i zachowania, ale ich znajomość buduje skojarzenia, schematy, wyobrażenia, sformułowania, przyzwyczajenia i rytuały. Gdy ci sami ludzie za kilka lat spojrzą w końcu na świat przez pryzmat aksjomatów, to te, które będą brzmiały znajomo i będą się im dobrze kojarzyły zyskają pierwszeństwo.'
+        '</p>'
+        '</blockquote>'
+);
+
+KonspektStepGroup step_group_ksztaltowanie_duchowosci = KonspektStepGroup(
+    title: 'Kształtowanie duchowości',
+    steps: [
+      _step_ksztaltowanie_duchowosci_roznica_jakosciowa,
+      _step_ksztaltowanie_duchowosci_roznica_jakosciowa_pytania,
+      _step_ksztaltowanie_duchowosci_osie,
+      _step_ksztaltowanie_duchowosci_schemat,
+
+      _step_ksztaltowanie_duchowosci_7_9_lat_zachowania,
+      _step_ksztaltowanie_duchowosci_7_9_lat_wartosci,
+      _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty,
+
+    ]
+);
+
+
+// Integracja duchowości - old
 
 KonspektStep _step_integracja_duchowosci_osie = KonspektStep(
     title: 'Integracja duchowości - osie współrzędnych',
