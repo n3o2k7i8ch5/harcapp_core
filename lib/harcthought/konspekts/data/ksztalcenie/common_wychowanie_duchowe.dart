@@ -1005,7 +1005,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_wartosci = KonspektStep(
 
 KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty = KonspektStep(
     title: 'Kształtowanie duchowości - 7-9 lat - aksjomaty',
-    duration: Duration(minutes: 4),
+    duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący przedstawia poziom <b>aksjomatów</b> na etapie <b>7-9 lat</b>:'
@@ -1065,6 +1065,17 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty = KonspektStep(
         '</blockquote>'
 );
 
+KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_wykres = KonspektStep(
+  title: 'Kształtowanie duchowości - 7-9 lat - wykres',
+  duration: Duration(minutes: 1),
+  activeForm: KonspektStepActiveForm.static,
+  contentBuilder: ({required bool isDark}) =>
+  '<p style="text-align:justify;">'
+      'Prowadzący rysuje na wykresie elementy odpowiadające etapowi <b>7-9 lat</b>.'
+      '</p>'
+      '${piramidaDuchowosci7_9Html(isDark: isDark)}',
+);
+
 // czy dzieci mają duchowość?
 
 KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_co_sie_zmienia = KonspektStep(
@@ -1110,7 +1121,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_wartosci = KonspektStep(
 
 KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_zachowania = KonspektStep(
     title: 'Kształtowanie duchowości - 10-12 lat - zachowania',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący wraca do poziomu <b>zachowań</b> na etapie <b>10-12 lat</b>:'
@@ -1165,6 +1176,17 @@ KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_aksjomaty = KonspektStep(
 
 );
 
+KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_wykres = KonspektStep(
+  title: 'Kształtowanie duchowości - 10-12 lat - wykres',
+  duration: Duration(minutes: 1),
+  activeForm: KonspektStepActiveForm.static,
+  contentBuilder: ({required bool isDark}) =>
+  '<p style="text-align:justify;">'
+      'Prowadzący rysuje na wykresie elementy odpowiadające etapowi <b>10-12 lat</b>.'
+      '</p>'
+      '${piramidaDuchowosci10_12Html(isDark: isDark)}',
+);
+
 KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_co_sie_zmienia = KonspektStep(
     title: 'Kształtowanie duchowości - 13-15 lat - co się zmienia?',
     duration: Duration(minutes: 3),
@@ -1214,7 +1236,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_aksjomaty = KonspektStep(
 
 KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_wartosci = KonspektStep(
     title: 'Kształtowanie duchowości - 13-15 lat - wartości',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący wraca do poziomu <b>wartości</b> na etapie <b>13-15 lat</b>:'
@@ -1248,6 +1270,17 @@ KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_zachowania = KonspektStep(
         '</blockquote>'
 );
 
+KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_wykres = KonspektStep(
+  title: 'Kształtowanie duchowości - 13-15 lat - wykres',
+  duration: Duration(minutes: 1),
+  activeForm: KonspektStepActiveForm.static,
+  contentBuilder: ({required bool isDark}) =>
+  '<p style="text-align:justify;">'
+      'Prowadzący rysuje na wykresie elementy odpowiadające etapowi <b>13-15 lat</b>.'
+      '</p>'
+      '${piramidaDuchowosci13_15Html(isDark: isDark)}',
+);
+
 KonspektStep _step_ksztaltowanie_duchowosci_16_plus_lat = KonspektStep(
     title: 'Kształtowanie duchowości - 16+ lat',
     duration: Duration(minutes: 3),
@@ -1270,9 +1303,20 @@ KonspektStep _step_ksztaltowanie_duchowosci_16_plus_lat = KonspektStep(
         '</blockquote>'
 );
 
+KonspektStep _step_ksztaltowanie_duchowosci_16_plus_lat_wykres = KonspektStep(
+  title: 'Kształtowanie duchowości - 16+ lat - wykres',
+  duration: Duration(minutes: 1),
+  activeForm: KonspektStepActiveForm.static,
+  contentBuilder: ({required bool isDark}) =>
+  '<p style="text-align:justify;">'
+      'Prowadzący rysuje na wykresie elementy odpowiadające etapowi <b>16+ lat</b>.'
+      '</p>'
+      '${piramidaDuchowosci16Html(isDark: isDark)}',
+);
+
 KonspektStep _step_ksztaltowanie_duchowosci_pytania = KonspektStep(
     title: 'Kształtowanie duchowości - pytania',
-    duration: Duration(minutes: 2),
+    duration: Duration(minutes: 1),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący daje uczestnikom czas na zadanie pytań.'
@@ -1290,18 +1334,22 @@ KonspektStepGroup step_group_ksztaltowanie_duchowosci = KonspektStepGroup(
       _step_ksztaltowanie_duchowosci_7_9_lat_zachowania,
       _step_ksztaltowanie_duchowosci_7_9_lat_wartosci,
       _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty,
+      _step_ksztaltowanie_duchowosci_7_9_lat_wykres,
 
       _step_ksztaltowanie_duchowosci_10_12_lat_co_sie_zmienia,
       _step_ksztaltowanie_duchowosci_10_12_lat_wartosci,
       _step_ksztaltowanie_duchowosci_10_12_lat_zachowania,
       _step_ksztaltowanie_duchowosci_10_12_lat_aksjomaty,
+      _step_ksztaltowanie_duchowosci_10_12_lat_wykres,
 
       _step_ksztaltowanie_duchowosci_13_15_lat_co_sie_zmienia,
       _step_ksztaltowanie_duchowosci_13_15_lat_aksjomaty,
       _step_ksztaltowanie_duchowosci_13_15_lat_wartosci,
       _step_ksztaltowanie_duchowosci_13_15_lat_zachowania,
+      _step_ksztaltowanie_duchowosci_13_15_lat_wykres,
 
       _step_ksztaltowanie_duchowosci_16_plus_lat,
+      _step_ksztaltowanie_duchowosci_16_plus_lat_wykres,
       _step_ksztaltowanie_duchowosci_pytania,
     ]
 );
