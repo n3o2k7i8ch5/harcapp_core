@@ -385,8 +385,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       step_group_neutralnosc_duchowa,
 
-      step_group_duchowosc_powszechna,
-
       step_group_duchowosc_w_zhp,
 
       step_zalozenia_wyjsciowe_wychowania_duchowego,
@@ -450,8 +448,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                     '<br>Uczestnicy powinni wybrać coś, co uważają za szczególnie ważnie: w razie czego prowadzący może im zasugerować jeden z następujacych celów:'
                     '</p>'
                     '<ul>'
-                    '<li><p style="text-align:justify;">Wiara chrześcijańska</p></li>'
-                    '<li><p style="text-align:justify;">Patriotyzm</p></li>'
+                    '<li><p style="text-align:justify;">Wychowanie w wierze chrześcijańskiej</p></li>'
+                    '<li><p style="text-align:justify;">Wychowanie patriotyczne</p></li>'
+                    '<li><p style="text-align:justify;">Wychowanie w abstynencji</p></li>'
                     '</ul>',
                 materials: [
                   material_zal_planowanie_strategii_i_dzialan,
