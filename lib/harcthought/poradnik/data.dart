@@ -194,7 +194,7 @@ Poradnik poradnik_wychowanie_duchowe = Poradnik(
       '\nJakie mechanizmy i zjawiska wpływają na rozwój duchowy?'
       '\n'
       '\nJak w sposób skuteczny pracować nad duchowością młodego człowieka?',
-  coverTitle: 'O STRUKTURZE\nDUCHOWOŚCI',
+  coverTitle: 'WYCHOWANIE\nDUCHOWE',
   coverSource: 'Daniel Iwanicki',
   formats: [FileFormat.pdf, FileFormat.docx],
   defaultFormat: FileFormat.pdf,
