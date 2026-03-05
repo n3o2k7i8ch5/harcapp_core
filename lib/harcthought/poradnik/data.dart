@@ -115,7 +115,7 @@ Poradnik poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich = Poradnik(
 );
 
 const String poradnik_name_o_strukturze_duchowosci = "o_strukturze_duchowosci";
-const String poradnik_title_o_strukturze_duchowosci = "O strukturze duchowości";
+const String poradnik_title_o_strukturze_duchowosci = "O strukturze duchowości [stare]";
 Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
   name: poradnik_name_o_strukturze_duchowosci,
   title: poradnik_title_o_strukturze_duchowosci,
@@ -144,6 +144,67 @@ Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
 
       Text(
         'O STRUKTURZE\nDUCHOWOŚCI',
+        style: AppTextStyle(
+            color: poradnik.titleColor??Colors.black,
+            fontSize: height*Poradnik.mainTitleHeightFactor,
+            fontWeight: weightHalfBold
+        ),
+        textAlign: TextAlign.center,
+      ),
+
+      SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+      Container(
+        width: width*0.63,
+        height: height*0.003,
+        color: poradnik.titleColor??Colors.black,
+      ),
+
+      SizedBox(height: height*Poradnik.titlePaddingFactor),
+
+      Text(
+        'Poradnik w pracy wychowawczej',
+        style: AppTextStyle(
+          color: poradnik.titleColor??Colors.black,
+          fontSize: height*Poradnik.subTitleHeightFactor,
+        ),
+        textAlign: TextAlign.center,
+      ),
+
+    ],
+  ),
+);
+
+const String poradnik_name_wychowanie_duchowe = "wychowanie_duchowe";
+const String poradnik_title_wychowanie_duchowe = "Wychowanie duchowe [nowe] [w toku]";
+Poradnik poradnik_wychowanie_duchowe = Poradnik(
+  name: poradnik_name_wychowanie_duchowe,
+  title: poradnik_title_wychowanie_duchowe,
+  pageCount: 25,
+  description: 'Poradnik dla osób pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące m.in. zagadnienia:'
+      '\n'
+      '\nCzym jest duchowość?'
+      '\n'
+      '\nJaka jest relacja między duchowością a wychowaniem?'
+      '\n'
+      '\nJaka jest relacja między duchowością a innymi sferami rozwoju człowieka?'
+      '\n'
+      '\nJaka jest relacja między duchowością a religijnością i religią?'
+      '\n'
+      '\nJakie mechanizmy i zjawiska wpływają na rozwój duchowy?'
+      '\n'
+      '\nJak w sposób skuteczny pracować nad duchowością młodego człowieka?',
+  coverTitle: 'O STRUKTURZE\nDUCHOWOŚCI',
+  coverSource: 'Daniel Iwanicki',
+  formats: [FileFormat.pdf, FileFormat.docx],
+  defaultFormat: FileFormat.pdf,
+  titleColor: Colors.black,
+  coverTitleBuilder: (context, poradnik, width, height) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+
+      Text(
+        'WYCHOWANIE\nDUCHOWE',
         style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
             fontSize: height*Poradnik.mainTitleHeightFactor,
@@ -374,6 +435,7 @@ Poradnik poradnik_wspolzawodnictwo = Poradnik(
 );
 
 List<Poradnik> allPoradniks = [
+  poradnik_wychowanie_duchowe,
   poradnik_o_strukturze_duchowosci,
   poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
   poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich,
