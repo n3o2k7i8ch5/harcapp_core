@@ -133,7 +133,7 @@ Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
       '\nJakie mechanizmy i zjawiska wpływają na rozwój duchowy?'
       '\n'
       '\nJak w sposób skuteczny pracować nad duchowością młodego człowieka?',
-  coverTitle: 'O STRUKTURZE\nDUCHOWOŚCI',
+  coverTitle: 'O STRUKTURZE\nDUCHOWOŚCI\n[STARE]',
   coverSource: 'Daniel Iwanicki',
   formats: [FileFormat.pdf, FileFormat.docx],
   defaultFormat: FileFormat.pdf,
@@ -143,7 +143,7 @@ Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
     children: [
 
       Text(
-        'O STRUKTURZE\nDUCHOWOŚCI',
+        'O STRUKTURZE\nDUCHOWOŚCI\n[STARE]',
         style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
             fontSize: height*Poradnik.mainTitleHeightFactor,
@@ -176,7 +176,7 @@ Poradnik poradnik_o_strukturze_duchowosci = Poradnik(
 );
 
 const String poradnik_name_wychowanie_duchowe = "wychowanie_duchowe";
-const String poradnik_title_wychowanie_duchowe = "Wychowanie duchowe [nowe] [w toku]";
+const String poradnik_title_wychowanie_duchowe = "Wychowanie duchowe [nowe] [w toku prac]";
 Poradnik poradnik_wychowanie_duchowe = Poradnik(
   name: poradnik_name_wychowanie_duchowe,
   title: poradnik_title_wychowanie_duchowe,
@@ -194,7 +194,7 @@ Poradnik poradnik_wychowanie_duchowe = Poradnik(
       '\nJakie mechanizmy i zjawiska wpływają na rozwój duchowy?'
       '\n'
       '\nJak w sposób skuteczny pracować nad duchowością młodego człowieka?',
-  coverTitle: 'WYCHOWANIE\nDUCHOWE',
+  coverTitle: 'WYCHOWANIE\nDUCHOWE\n[NOWE]\n[W TOKU PRAC]',
   coverSource: 'Daniel Iwanicki',
   formats: [FileFormat.pdf, FileFormat.docx],
   defaultFormat: FileFormat.pdf,
@@ -204,7 +204,7 @@ Poradnik poradnik_wychowanie_duchowe = Poradnik(
     children: [
 
       Text(
-        'WYCHOWANIE\nDUCHOWE',
+        'WYCHOWANIE\nDUCHOWE\n[NOWE]\n[W TOKU PRAC]',
         style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
             fontSize: height*Poradnik.mainTitleHeightFactor,
