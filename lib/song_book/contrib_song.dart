@@ -35,6 +35,7 @@ String _personToObjectString(Person person, {List<ContributorIdentity> contribId
   bool hasRankInstr = person.rankInstr != null;
   bool hasRankHarc = person.rankHarc != null;
   bool hasOrg = person.org != null;
+  bool hasComment = person.comment != null && person.comment!.isNotEmpty;
 
   List<String> contribIdEmails = [];
   for(ContributorIdentity contribId in contribIds)
@@ -44,9 +45,10 @@ String _personToObjectString(Person person, {List<ContributorIdentity> contribId
   if(hasName) newPersonCode += "\n  name: '${person.name}',";
   if(hasDruzyna) newPersonCode += "\n  druzyna: '${person.druzyna}',";
   if(hasHufiec) newPersonCode += "\n  hufiec: '${person.hufiec}',";
-  if(hasRankInstr) newPersonCode += "\n  rankInstr: RankInstr.${person.rankInstr?.shortName},";
-  if(hasRankHarc) newPersonCode += "\n  rankHarc: RankHarc.${person.rankHarc?.shortName},";
+  if(hasRankInstr) newPersonCode += "\n  rankInstr: RankInstr.${person.rankInstr?.name},";
+  if(hasRankHarc) newPersonCode += "\n  rankHarc: RankHarc.${person.rankHarc?.name},";
   if(hasOrg) newPersonCode += "\n  org: ${person.org},";
+  if(hasComment) newPersonCode += "\n  comment: '${person.comment}',";
   newPersonCode += "\n  email: [${(person.email.isEmpty?contribIdEmails:person.email).map((email) => '"$email"').join(', ')}]";
   newPersonCode += "\n);";
 
@@ -60,7 +62,7 @@ enum SongSource{
   String get displayName {
     switch(this) {
       case SongSource.application:
-        return "Aplikacja ${Platform.isIOS?'iOS':Platform.isIOS?'Android':''}".trim();
+        return "Aplikacja ${Platform.isIOS?'iOS':Platform.isAndroid?'Android':''}".trim();
       case SongSource.web:
         return "harcapp.web.app";
     }
