@@ -1619,6 +1619,13 @@ const Person KACPER_WIETRZYKOWSKI = Person(
     email: ['kacper.wietrzykowski@zhp.net.pl']
 );
 
+const Person KAJETAN_MEDYK = Person(
+    name: 'Kajetan Mędyk',
+    druzyna: '254 Warszawskie Drużyny Harcerskie i Gromady Zuchowe',
+    hufiec: huf_zhp_warszawa_zoliborz,
+    org: Org.zhp,
+    email: ['Kajetan_Medyk@outlook.com']
+);
 const Person KAJETAN_RUSZKOWSKI = Person(
   name: 'Kajetan Ruszkowski',
   druzyna: 'XV. ŁDH „Zielony Płomień” im. Andrzeja Małkowskiego',

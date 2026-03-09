@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
-import 'package:harcapp_core/comm_widgets/simple_button.dart';
 
 import 'app_card.dart';
 
@@ -35,75 +34,52 @@ class AppDropdown<T extends IconTextEnum> extends StatefulWidget{
 
 class _AppDropdownState<T extends IconTextEnum> extends State<AppDropdown<T>> {
   final GlobalKey _buttonKey = GlobalKey();
-  OverlayEntry? _overlayEntry;
 
-  void _showMenu() {
+  void _showMenu() async {
     final button = _buttonKey.currentContext!.findRenderObject() as RenderBox;
-    final pos = button.localToGlobal(Offset.zero);
+    final overlay = Navigator.of(context).overlay!.context.findRenderObject() as RenderBox;
+    final buttonPos = button.localToGlobal(Offset.zero, ancestor: overlay);
     final radius = widget.borderRadius ?? BorderRadius.circular(AppCard.bigRadius);
-    final top = widget.menuUnderButton ? pos.dy + button.size.height + 4 : pos.dy;
 
-    _overlayEntry = OverlayEntry(
-      builder: (ctx) => GestureDetector(
-        onTap: _hideMenu,
-        behavior: HitTestBehavior.opaque,
-        child: Material(
-          color: Colors.transparent,
-          child: Stack(
-            children: [
-              Positioned(
-                left: pos.dx,
-                top: top,
-                child: Material(
-                  color: widget.color ?? background_(ctx),
-                  borderRadius: radius,
-                  elevation: 8,
-                  clipBehavior: Clip.antiAlias,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: button.size.width),
-                    child: IntrinsicWidth(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          for (final item in widget.items)
-                            SimpleButton.from(
-                              context: ctx,
-                              onTap: () {
-                                _hideMenu();
-                                widget.onSelected(item);
-                              },
-                              textColor: iconEnab_(ctx),
-                              fontWeight: weightNormal,
-                              center: false,
-                              margin: EdgeInsets.zero,
-                              text: item.text,
-                              icon: item.icon,
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+    final double top = widget.menuUnderButton
+        ? buttonPos.dy + button.size.height + 4
+        : buttonPos.dy;
+
+    final position = RelativeRect.fromRect(
+      Rect.fromLTWH(buttonPos.dx, top, button.size.width, button.size.height),
+      Offset.zero & overlay.size,
     );
 
-    Overlay.of(context).insert(_overlayEntry!);
-  }
+    final result = await showMenu<T>(
+      context: context,
+      position: position,
+      shape: RoundedRectangleBorder(borderRadius: radius),
+      color: widget.color ?? background_(context),
+      elevation: 8,
+      constraints: BoxConstraints(minWidth: button.size.width),
+      items: [
+        for (final item in widget.items)
+          PopupMenuItem<T>(
+            value: item,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(item.icon, color: iconEnab_(context)),
+                SizedBox(width: 10),
+                Text(
+                  item.text,
+                  style: TextStyle(
+                    color: iconEnab_(context),
+                    fontWeight: weightNormal,
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
 
-  void _hideMenu() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-  }
-
-  @override
-  void dispose() {
-    _hideMenu();
-    super.dispose();
+    if (result != null && mounted) widget.onSelected(result);
   }
 
   @override
