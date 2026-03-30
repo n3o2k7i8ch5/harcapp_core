@@ -844,16 +844,20 @@ KonspektStep _step_ksztaltowanie_duchowosci_roznica_jakosciowa = KonspektStep(
   duration: Duration(minutes: 2),
   activeForm: KonspektStepActiveForm.static,
   content: '<p style="text-align:justify;">'
-      'Prowadzący zaczyna od zwrócenia uwagi na różnicę między sposobem rozwoju sfer zdolności, a sfery ducha:'
+      'Prowadzący zaczyna od zwrócenia uwagi na <b>różnicę</b> między sposobem rozwoju <b>sfer zdolności</b>, a <b>sfery ducha</b>:'
       '</p>'
 
       '<blockquote>'
       '<p style="text-align:justify;">'
       'Rozwój <b>sfer zdolności</b> polega na tym, że do już istniejącego "worka ze zdolnościami" dorzucane są kolejne zdolności: człowiek uczy się grać na nowym instrumencie, uczy się nowego języka, uczy się sposobu radzenia sobie ze złością, etc..'
       '<br>'
-      '<br>Rozwój <b>sfery ducha</b> jest zupełnie inny. Człowiek nie ma "worka z różnymi duchowościami" - ale ma zawsze jedną, konkretną duchowość. Rozwój duchowości polega na jej przekształcaniu. Przykładowo, dla kogoś najważniejsze było zdrowie i wszystkie swoje czyny podporządkowywał zdrowemu stylowi życia, aż pewnego razu, wskutek rozwoju duchowego miejsce zdrowia zastępują przyjaźnie - i wówczas to one determinują sposób użycia posiadanych zdolności i zasobów.'
+      '<br>Rozwój <b>sfery ducha</b> jest zupełnie inny. Człowiek nie ma "worka z różnymi duchowościami" - ma zawsze jedną, konkretną duchowość. Rozwój sfery ducha polega na porzucaniu jednej formy duchowości i przyjmowaniu nowej.'
       '<br>'
-      '<br>O rozwoju duchowym nie należy myśleć jak o procesie "budowania", czy "wnoszenia kolejnych pięter", ale raczej jak o procesie kształtowania - nadawaniu określonemu kawałkowi gliny jednego z nieskończonej liczby możliwych kształtów.'
+      '<br>Przykładowo: dla kogoś dotąd najważniejsze było zdrowie i wszystkie swoje czyny podporządkowywał zdrowemu stylowi życia, aż pewnego razu miejsce zdrowia zastępuje przyjaźń - i wówczas to relacja z drugim człowiekiem determinuje sposób użycia posiadanych zdolności i zasobów.'
+      '<br>'
+      '<br>To trochę jak wygranie na ten sam komputer zupełnie nowego systemu operacyjnego.'
+      '<br>'
+      '<br>O rozwoju duchowym nie należy myśleć jak o budowaniu — lecz jak o kształtowaniu, rzeźbieniu: ten sam kawałek gliny może przyjąć nieskończenie wiele kształtów, ale zawsze jest tylko jeden naraz.'
       '<br>'
       '<br>Czujecie tę różnicę?'
       '</p>'
@@ -986,9 +990,9 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_wartosci = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Brak świadomego postrzegania wartości przez dzieci przed 10. rokiem życia jest ściśle związany z ich niezdolnością do abstrakcyjnego myślenia. Ma to swoje odzwierciedlenie w ich problemach ze sprzątaniem:'
+        'Brak świadomych wartości u dzieci przed 10. rokiem życia wynika z ich problemów z abstrakcyjnym myśleniem. Dobrze to widać przy sprzątaniu:'
         '<br>'
-        '<br>Dla dzieci w tym wieku nie istnieje koncept "porządku". Sprzątanie nie polega na doprowadzeniu pokoju do pewnego stanu, ale na wykonaniu sekwencji przeniesienia rzeczy na określone miejsce: klocków pod szafkę, pluszaków na półkę, a kredek do kredensu. Niestety, jeśli ta umiejętność zostanie stworzona w kontekście sprzątania w przedszkolu, to w żaden sposób nie wpłynie to na umiejętność sprzątania w domu.'
+        '<br>Dla dzieci w tym wieku nie istnieje koncept "porządku". Sprzątanie nie polega na doprowadzeniu przestrzeni do jakiegoś stanu, ale na wykonaniu sekwencji przeniesienia rzeczy na określone miejsca: klocków pod szafkę, pluszaków na półkę, a kredek do kredensu. Niestety, jeśli ta umiejętność zostanie stworzona w kontekście sprzątania w przedszkolu, to w żaden sposób nie wpłynie to na umiejętność sprzątania w domu.'
         '</p>'
         '</blockquote>'
 
