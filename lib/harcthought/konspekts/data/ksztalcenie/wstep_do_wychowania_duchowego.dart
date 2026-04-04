@@ -35,9 +35,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       attach_karty_poziomow_duchowosci,
       attach_karty_zdolnosci_integracji_duchowosci,
 
-      attach_aksjomaty_opisu_przyklady,
-      attach_aksjomaty_sensu_przyklady,
-      attach_aksjomaty_bledne_przyklady,
+      attach_aksjomaty_wartosci_przyporzadkowanie,
 
       attach_neutralnosc_duchowa_przyklady,
       attach_cel_wychowania_duchowego_zhp_statut,
@@ -76,9 +74,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       material_zal_karty_poziomow_duchowosci,
       material_zal_karty_zdolnosci_integracji_duchowosci,
 
-      material_zal_aksjomaty_opisu_przyklady,
-      material_zal_aksjomaty_sensu_przyklady,
-      material_zal_aksjomaty_bledne_przyklady,
+      material_zal_aksjomaty_wartosci_przyporzadkowanie,
 
       KonspektMaterial(
         name: 'Wydrukowany załącznik “$attach_title_neutralnosc_duchowa_przyklady”',

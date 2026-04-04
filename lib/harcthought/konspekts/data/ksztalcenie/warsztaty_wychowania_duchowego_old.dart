@@ -26,6 +26,46 @@ String cyklIntegracjiDuchowosciHtml({required bool isDark}) => isDark?_cyklInteg
 
 const konspekt_kszt_name_warsztaty_wychowania_duchowego_old = 'warsztaty_wychowania_duchowego_old';
 
+// Przykłady aksjomatów
+
+const String _attach_html_aksjomaty_opisu_przyklady = '<a href="$_attach_name_aksjomaty_opisu_przyklady@attachment">$_attach_title_aksjomaty_opisu_przyklady</a>';
+const String _attach_name_aksjomaty_opisu_przyklady = 'aksjomaty_opisu_przyklady';
+const String _attach_title_aksjomaty_opisu_przyklady = 'Aksjomaty opisu przykłady';
+KonspektAttachment _attach_aksjomaty_opisu_przyklady = KonspektAttachment(
+  name: _attach_name_aksjomaty_opisu_przyklady,
+  title: _attach_title_aksjomaty_opisu_przyklady,
+  assets: {
+    FileFormat.pdf: '$_assetPath/attach@$_attach_name_aksjomaty_opisu_przyklady.pdf',
+    FileFormat.docx: '$_assetPath/attach@$_attach_name_aksjomaty_opisu_przyklady.docx',
+  },
+);
+
+const String _attach_html_aksjomaty_sensu_przyklady = '<a href="$_attach_name_aksjomaty_sensu_przyklady@attachment">$_attach_title_aksjomaty_sensu_przyklady</a>';
+const String _attach_name_aksjomaty_sensu_przyklady = 'aksjomaty_sensu_przyklady';
+const String _attach_title_aksjomaty_sensu_przyklady = 'Aksjomaty sensu przykłady';
+KonspektAttachment _attach_aksjomaty_sensu_przyklady = KonspektAttachment(
+  name: _attach_name_aksjomaty_sensu_przyklady,
+  title: _attach_title_aksjomaty_sensu_przyklady,
+  assets: {
+    FileFormat.pdf: '$_assetPath/attach@$_attach_name_aksjomaty_sensu_przyklady.pdf',
+    FileFormat.docx: '$_assetPath/attach@$_attach_name_aksjomaty_sensu_przyklady.docx',
+  },
+);
+
+const String _attach_html_aksjomaty_bledne_przyklady = '<a href="$_attach_name_aksjomaty_bledne_przyklady@attachment">$_attach_title_aksjomaty_bledne_przyklady</a>';
+const String _attach_name_aksjomaty_bledne_przyklady = 'aksjomaty_bledne_przyklady';
+const String _attach_title_aksjomaty_bledne_przyklady = 'Aksjomaty błedne przykłady';
+KonspektAttachment _attach_aksjomaty_bledne_przyklady = KonspektAttachment(
+  name: _attach_name_aksjomaty_bledne_przyklady,
+  title: _attach_title_aksjomaty_bledne_przyklady,
+  assets: {
+    FileFormat.pdf: '$_assetPath/attach@$_attach_name_aksjomaty_bledne_przyklady.pdf',
+    FileFormat.docx: '$_assetPath/attach@$_attach_name_aksjomaty_bledne_przyklady.docx',
+  },
+);
+
+// Przykłady poziomów duchowości
+
 const String _attach_html_przyklady_poziomow_duchowosci = '<a href="$_attach_name_przyklady_poziomow_duchowosci@attachment">$_attach_title_przyklady_poziomow_duchowosci</a>';
 const String _attach_name_przyklady_poziomow_duchowosci = 'przyklady_poziomow_duchowosci';
 const String _attach_title_przyklady_poziomow_duchowosci = 'Przykłady poziomów duchowości';
@@ -74,6 +114,27 @@ KonspektAttachment _attach_scenariusze = KonspektAttachment(
   },
 );
 
+KonspektMaterial _material_zal_aksjomaty_opisu_przyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$_attach_title_aksjomaty_opisu_przyklady”',
+    attachmentName: _attach_name_aksjomaty_opisu_przyklady,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
+    amount: 1
+);
+
+KonspektMaterial _material_zal_aksjomaty_sensu_przyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$_attach_title_aksjomaty_sensu_przyklady”',
+    attachmentName: _attach_name_aksjomaty_sensu_przyklady,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
+    amount: 1
+);
+
+KonspektMaterial _material_zal_aksjomaty_bledne_przyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$_attach_title_aksjomaty_bledne_przyklady”',
+    attachmentName: _attach_name_aksjomaty_bledne_przyklady,
+    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
+    amount: 1
+);
+
 KonspektMaterial material_zal_przyklady_poziomow_duchowosci = KonspektMaterial(
     name: 'Wydrukowany załącznik "$_attach_title_przyklady_poziomow_duchowosci"',
     attachmentName: _attach_name_przyklady_poziomow_duchowosci,
@@ -104,12 +165,22 @@ KonspektMaterial material_zal_scenariusze = KonspektMaterial(
 Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
     konspekt_kszt_warsztaty_wychowania_duchowego,
     attachments: [
+
+      _attach_aksjomaty_opisu_przyklady,
+      _attach_aksjomaty_sensu_przyklady,
+      _attach_aksjomaty_bledne_przyklady,
+
       _attach_przyklady_poziomow_duchowosci,
       _attach_mechanizmy_posrednie,
       _attach_antyprzyklady,
       _attach_scenariusze
     ],
     materials: [
+
+      _material_zal_aksjomaty_opisu_przyklady,
+      _material_zal_aksjomaty_sensu_przyklady,
+      _material_zal_aksjomaty_bledne_przyklady,
+
       material_zal_przyklady_poziomow_duchowosci,
       material_zal_mechanizmy_posrednie,
       material_zal_antyprzyklady,
@@ -250,6 +321,36 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
             ),
 
           ]),
+
+      KonspektStepGroup(
+        title: 'Poziomy rozwoju duchowego - rozroznienie aksjomatow',
+        steps: [
+
+          KonspektStep(
+              title: 'Poziomy rozwoju duchowego - rozroznienie aksjomatow',
+              aims: [
+                'Zbudowanie u uczestników intuicji dotyczącej tego, co jest, a co nie jest aksjomatem.',
+              ],
+              materials: [
+                _material_zal_aksjomaty_opisu_przyklady,
+                _material_zal_aksjomaty_sensu_przyklady,
+                _material_zal_aksjomaty_bledne_przyklady,
+              ],
+              duration: Duration(minutes: 10),
+              activeForm: KonspektStepActiveForm.active,
+              content: '<p style="text-align:justify;">'
+                  'Aby uczestnicy oswoili się z aksjomatami, prowadzący rozdaje im wycięte i pomieszane kartki z przykładami z załączników $_attach_html_aksjomaty_opisu_przyklady, $_attach_html_aksjomaty_sensu_przyklady i $_attach_html_aksjomaty_bledne_przyklady.'
+                  '<br>'
+                  '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio jako <b>aksjomaty opisu</b> oraz <b>aksjomaty sensu</b> - mając na uwadze, że <b>kilka przykładów nie jest aksjomatem</b> w ogóle. W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
+                  '<br>'
+                  '<br>Kartki z przykładowymi aksjomatami powinny zostać ułożone w trzech kolumnach pod wyłożoną podczas prezentowania poziomów duchowości kartką "Aksjomat". Przykłady, które nie są aksjomatami należy odłożyć gdzieś z boku.'
+                  '<br>'
+                  '<br>Na końcu prowadzący pokrótce omawia z uczestnikami poprawność ich dopasowania.'
+                  '</p>'
+          )
+
+]
+      ),
 
       KonspektStepGroup(
           title: 'Poziomy duchowości',

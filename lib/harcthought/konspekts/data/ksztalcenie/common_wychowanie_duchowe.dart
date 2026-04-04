@@ -23,24 +23,9 @@ KonspektMaterial material_zal_karty_zdolnosci_integracji_duchowosci = KonspektMa
     amount: 1
 );
 
-
-KonspektMaterial material_zal_aksjomaty_opisu_przyklady = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_aksjomaty_opisu_przyklady”',
-    attachmentName: attach_name_aksjomaty_opisu_przyklady,
-    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
-    amount: 1
-);
-
-KonspektMaterial material_zal_aksjomaty_sensu_przyklady = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_aksjomaty_sensu_przyklady”',
-    attachmentName: attach_name_aksjomaty_sensu_przyklady,
-    additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
-    amount: 1
-);
-
-KonspektMaterial material_zal_aksjomaty_bledne_przyklady = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_aksjomaty_bledne_przyklady”',
-    attachmentName: attach_name_aksjomaty_bledne_przyklady,
+KonspektMaterial material_zal_aksjomaty_wartosci_przyporzadkowanie = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_aksjomaty_wartosci_przyporzadkowanie”',
+    attachmentName: attach_name_aksjomaty_wartosci_przyporzadkowanie,
     additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i pomieszać ich kolejność.',
     amount: 1
 );
@@ -734,26 +719,26 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_pytania = KonspektStep(
         '</p>'
 );
 
-KonspektStep _step_poziomy_duchowosci_aksjomaty_dopasowanie_przykladow = KonspektStep(
+KonspektStep _step_poziomy_duchowosci_aksjomaty_wartosci_przyporzadkowanie = KonspektStep(
     title: 'Poziomy rozwoju duchowego - aksjomaty - zadanie 1',
     aims: [
-      'Zbudowanie u uczestników intuicji dotyczącej tego, co jest, a co nie jest aksjomatem.',
+      'Zbudowanie u uczestników intuicji tego, czym jest aksjomat.',
+      'Pokazanie uczestnikom przykładu tego, że z różnych aksjomatów wynikają różne wartości.',
+      'Pokazanie uczestnikom przykładu tego, że niektóre wartości mogą wynikać z różnych aksjomatów.',
     ],
     materials: [
-      material_zal_aksjomaty_opisu_przyklady,
-      material_zal_aksjomaty_sensu_przyklady,
-      material_zal_aksjomaty_bledne_przyklady,
+      material_zal_aksjomaty_wartosci_przyporzadkowanie,
     ],
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.active,
     content: '<p style="text-align:justify;">'
-        'Aby uczestnicy oswoili się z aksjomatami, prowadzący rozdaje im wycięte i pomieszane kartki z przykładami z załączników $attach_html_aksjomaty_opisu_przyklady, $attach_html_aksjomaty_sensu_przyklady i $attach_html_aksjomaty_bledne_przyklady.'
+        'Aby uczestnicy oswoili się z aksjomatami, prowadzący rozdaje im wycięte i pomieszane kartki z załącznika $attach_html_aksjomaty_wartosci_przyporzadkowanie.'
         '<br>'
-        '<br>Zadaniem uczestników jest pogrupować przykłady aksjomatów odpowiednio jako <b>aksjomaty opisu</b> oraz <b>aksjomaty sensu</b> - mając na uwadze, że <b>kilka przykładów nie jest aksjomatem</b> w ogóle. W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
-        '<br>'
-        '<br>Kartki z przykładowymi aksjomatami powinny zostać ułożone w trzech kolumnach pod wyłożoną podczas prezentowania poziomów duchowości kartką "Aksjomat". Przykłady, które nie są aksjomatami należy odłożyć gdzieś z boku.'
+        '<br>Zadaniem uczestników jest przyporządkować każdą z 14 wartości do któregoś z 3 aksjomatów. Dwie wartości pasują do więcej niż jednego aksjomatu. W trakcie ćwiczenia uczestnicy mogą prosić prowadzącego o pomoc.'
         '<br>'
         '<br>Na końcu prowadzący pokrótce omawia z uczestnikami poprawność ich dopasowania.'
+        '<br>'
+        '<br>Poprawne przyporządkowanie:'
         '</p>'
 );
 
@@ -832,7 +817,7 @@ KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
       _step_poziomy_duchowosci_aksjomaty_definicja,
       _step_poziomy_duchowosci_aksjomaty_przyklad,
       _step_poziomy_duchowosci_aksjomaty_pytania,
-      _step_poziomy_duchowosci_aksjomaty_dopasowanie_przykladow,
+      _step_poziomy_duchowosci_aksjomaty_wartosci_przyporzadkowanie,
       _step_poziomy_duchowosci_aksjomaty_plaska_ziemia
     ]
 );

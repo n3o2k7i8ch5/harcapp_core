@@ -110,41 +110,17 @@ KonspektAttachment attach_sfery_przyklady = KonspektAttachment(
   },
 );
 
-// Przykłady aksjomatów
+// Aksjomaty wartości - przyporządkowanie
 
-const String attach_html_aksjomaty_opisu_przyklady = '<a href="$attach_name_aksjomaty_opisu_przyklady@attachment">$attach_title_aksjomaty_opisu_przyklady</a>';
-const String attach_name_aksjomaty_opisu_przyklady = 'aksjomaty_opisu_przyklady';
-const String attach_title_aksjomaty_opisu_przyklady = 'Aksjomaty opisu przykłady';
-KonspektAttachment attach_aksjomaty_opisu_przyklady = KonspektAttachment(
-  name: attach_name_aksjomaty_opisu_przyklady,
-  title: attach_title_aksjomaty_opisu_przyklady,
+const String attach_html_aksjomaty_wartosci_przyporzadkowanie = '<a href="$attach_name_aksjomaty_wartosci_przyporzadkowanie@attachment">$attach_title_aksjomaty_wartosci_przyporzadkowanie</a>';
+const String attach_name_aksjomaty_wartosci_przyporzadkowanie = 'aksjomaty_wartosci_przyporzadkowanie';
+const String attach_title_aksjomaty_wartosci_przyporzadkowanie = 'Aksjomaty wartości przyporządkowanie';
+KonspektAttachment attach_aksjomaty_wartosci_przyporzadkowanie = KonspektAttachment(
+  name: attach_name_aksjomaty_wartosci_przyporzadkowanie,
+  title: attach_title_aksjomaty_wartosci_przyporzadkowanie,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_opisu_przyklady.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_opisu_przyklady.docx',
-  },
-);
-
-const String attach_html_aksjomaty_sensu_przyklady = '<a href="$attach_name_aksjomaty_sensu_przyklady@attachment">$attach_title_aksjomaty_sensu_przyklady</a>';
-const String attach_name_aksjomaty_sensu_przyklady = 'aksjomaty_sensu_przyklady';
-const String attach_title_aksjomaty_sensu_przyklady = 'Aksjomaty sensu przykłady';
-KonspektAttachment attach_aksjomaty_sensu_przyklady = KonspektAttachment(
-  name: attach_name_aksjomaty_sensu_przyklady,
-  title: attach_title_aksjomaty_sensu_przyklady,
-  assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_sensu_przyklady.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_sensu_przyklady.docx',
-  },
-);
-
-const String attach_html_aksjomaty_bledne_przyklady = '<a href="$attach_name_aksjomaty_bledne_przyklady@attachment">$attach_title_aksjomaty_bledne_przyklady</a>';
-const String attach_name_aksjomaty_bledne_przyklady = 'aksjomaty_bledne_przyklady';
-const String attach_title_aksjomaty_bledne_przyklady = 'Aksjomaty błedne przykłady';
-KonspektAttachment attach_aksjomaty_bledne_przyklady = KonspektAttachment(
-  name: attach_name_aksjomaty_bledne_przyklady,
-  title: attach_title_aksjomaty_bledne_przyklady,
-  assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_bledne_przyklady.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_bledne_przyklady.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_wartosci_przyporzadkowanie.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_aksjomaty_wartosci_przyporzadkowanie.docx',
   },
 );
 
