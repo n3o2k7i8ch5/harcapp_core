@@ -35,8 +35,8 @@ KonspektAttachment _attach_aksjomaty_opisu_przyklady = KonspektAttachment(
   name: _attach_name_aksjomaty_opisu_przyklady,
   title: _attach_title_aksjomaty_opisu_przyklady,
   assets: {
-    FileFormat.pdf: '$_assetPath/attach@$_attach_name_aksjomaty_opisu_przyklady.pdf',
-    FileFormat.docx: '$_assetPath/attach@$_attach_name_aksjomaty_opisu_przyklady.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
@@ -47,8 +47,8 @@ KonspektAttachment _attach_aksjomaty_sensu_przyklady = KonspektAttachment(
   name: _attach_name_aksjomaty_sensu_przyklady,
   title: _attach_title_aksjomaty_sensu_przyklady,
   assets: {
-    FileFormat.pdf: '$_assetPath/attach@$_attach_name_aksjomaty_sensu_przyklady.pdf',
-    FileFormat.docx: '$_assetPath/attach@$_attach_name_aksjomaty_sensu_przyklady.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
@@ -59,8 +59,8 @@ KonspektAttachment _attach_aksjomaty_bledne_przyklady = KonspektAttachment(
   name: _attach_name_aksjomaty_bledne_przyklady,
   title: _attach_title_aksjomaty_bledne_przyklady,
   assets: {
-    FileFormat.pdf: '$_assetPath/attach@$_attach_name_aksjomaty_bledne_przyklady.pdf',
-    FileFormat.docx: '$_assetPath/attach@$_attach_name_aksjomaty_bledne_przyklady.docx',
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
   },
 );
 
