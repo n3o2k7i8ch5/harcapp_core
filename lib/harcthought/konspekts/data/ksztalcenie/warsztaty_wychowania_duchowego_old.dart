@@ -78,6 +78,18 @@ KonspektAttachment _attach_przyklady_poziomow_duchowosci = KonspektAttachment(
   },
 );
 
+const String _attach_html_neutralnosc_duchowa_przyklady = '<a href="$_attach_name_neutralnosc_duchowa_przyklady@attachment">$_attach_title_neutralnosc_duchowa_przyklady</a>';
+const String _attach_name_neutralnosc_duchowa_przyklady = 'neutralnosc_duchowa_przyklady';
+const String _attach_title_neutralnosc_duchowa_przyklady = 'Neutralność duchowa - przykłady';
+const KonspektAttachment _attach_neutralnosc_duchowa_przyklady = KonspektAttachment(
+  name: _attach_name_neutralnosc_duchowa_przyklady,
+  title: _attach_title_neutralnosc_duchowa_przyklady,
+  assets: {
+    FileFormat.pdf: null,
+    FileFormat.docx: null,
+  },
+);
+
 const String _attach_html_mechanizmy_posrednie = '<a href="$_attach_name_mechanizmy_posrednie@attachment">$_attach_title_mechanizmy_posrednie</a>';
 const String _attach_name_mechanizmy_posrednie = 'mechanizmy_posrednie';
 const String _attach_title_mechanizmy_posrednie = 'Mechanizmy pośrednie';
@@ -135,27 +147,34 @@ KonspektMaterial _material_zal_aksjomaty_bledne_przyklady = KonspektMaterial(
     amount: 1
 );
 
-KonspektMaterial material_zal_przyklady_poziomow_duchowosci = KonspektMaterial(
+KonspektMaterial _material_zal_przyklady_poziomow_duchowosci = KonspektMaterial(
     name: 'Wydrukowany załącznik "$_attach_title_przyklady_poziomow_duchowosci"',
     attachmentName: _attach_name_przyklady_poziomow_duchowosci,
     additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii i potasować w ramach wyciętych czwórek.',
     amount: 1
 );
 
-KonspektMaterial material_zal_mechanizmy_posrednie = KonspektMaterial(
+KonspektMaterial _material_zal_neutralnosc_duchowa_przyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$_attach_title_neutralnosc_duchowa_przyklady”',
+    attachmentName: _attach_name_neutralnosc_duchowa_przyklady,
+    amount: 1,
+    additionalPreparation: 'Załącznik należy pociąć na 4 części zgodnie z ramkami.'
+);
+
+KonspektMaterial _material_zal_mechanizmy_posrednie = KonspektMaterial(
     name: 'Wydrukowany załącznik "$_attach_title_mechanizmy_posrednie"',
     attachmentName: _attach_name_mechanizmy_posrednie,
     additionalPreparation: 'Kartki należy przeciąć na pół wzdłuż przerywanych linii.',
     amount: 1
 );
 
-KonspektMaterial material_zal_antyprzyklady = KonspektMaterial(
+KonspektMaterial _material_zal_antyprzyklady = KonspektMaterial(
     name: 'Wydrukowany załącznik "$_attach_title_antyprzyklady"',
     attachmentName: _attach_name_antyprzyklady,
     amount: 1
 );
 
-KonspektMaterial material_zal_scenariusze = KonspektMaterial(
+KonspektMaterial _material_zal_scenariusze = KonspektMaterial(
     name: 'Wydrukowany załącznik "$_attach_title_scenariusze"',
     attachmentName: _attach_name_scenariusze,
     additionalPreparation: 'Kartki należy wyciąć wzdłuż przerywanych linii.',
@@ -171,6 +190,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
       _attach_aksjomaty_bledne_przyklady,
 
       _attach_przyklady_poziomow_duchowosci,
+
+      _attach_neutralnosc_duchowa_przyklady,
+
       _attach_mechanizmy_posrednie,
       _attach_antyprzyklady,
       _attach_scenariusze
@@ -181,10 +203,13 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
       _material_zal_aksjomaty_sensu_przyklady,
       _material_zal_aksjomaty_bledne_przyklady,
 
-      material_zal_przyklady_poziomow_duchowosci,
-      material_zal_mechanizmy_posrednie,
-      material_zal_antyprzyklady,
-      material_zal_scenariusze,
+      _material_zal_przyklady_poziomow_duchowosci,
+
+      _material_zal_neutralnosc_duchowa_przyklady,
+
+      _material_zal_mechanizmy_posrednie,
+      _material_zal_antyprzyklady,
+      _material_zal_scenariusze,
     ],
     stepGroups: [
 
@@ -366,7 +391,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
                     '<br>Gdy dana grupa jest gotowa, zgłasza się do prowadzącego, który podchodzi i sprawdza. Jeśli coś jest nie tak, prowadzący mówi który poziom duchowości wymaga poprawy. Gdy wszystkie grupy są gotowe, niezależnie od poprawności segregacji, prowadzący omawia na forum poprawne przyporządkowanie.'
                     '</p>',
                 materials: [
-                  material_zal_przyklady_poziomow_duchowosci,
+                  _material_zal_przyklady_poziomow_duchowosci,
                 ]
             ),
           ]
@@ -674,7 +699,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
                 activeForm: KonspektStepActiveForm.static,
                 materials: [
                   material_zal_meta_narracja_opis,
-                  material_zal_meta_narracja_przyklady,
+                  material_zal_narracja_przyklady,
                 ],
                 content: '<p style="text-align:justify;">'
                     'Prowadzący mówi:'
@@ -687,7 +712,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
                     '<br>'
                     '<br>Meta-narracja jest opowieścią o świecie, jego aktorach, o osobistej roli przyjmującego ją człowieka.'
                     '<br>'
-                    '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady i kładzie je obok karty "Meta-narracja".'
+                    '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_narracja_przyklady i kładzie je obok karty "Meta-narracja".'
                     '</p>'
             ),
 
@@ -721,6 +746,120 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
       ),
 
       KonspektStepGroup(
+          title: 'Neutralność duchowa',
+          steps: [
+            KonspektStep(
+                title: 'Neutralność duchowa - galeria sztuki',
+                duration: Duration(minutes: 15),
+                activeForm: KonspektStepActiveForm.active,
+                aims: [
+                  'Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, indywidualizm, ew. wierność w związku, modlitwa), które choć pozornie uniwersalne, wcale nie są domyślne, oczywiste, czy neutralne',
+                  'Przekonanie uczestników, że neutralność światopoglądowa w wychowaniu nie jest możliwa'
+                ],
+                materials: [
+                  _material_zal_neutralnosc_duchowa_przyklady,
+                  material_tasma_klejaca,
+                ],
+                content: '<p style="text-align:justify;">'
+                    'Prowadzący (najlepiej przed przystąpieniem do formy) rozwiesza na różnych ścianach kartki z załącznika $_attach_html_neutralnosc_duchowa_przyklady (jeśli jest taka możliwość i pogoda temu sprzyja, warto rozwiesić kartki na zewnątrz, żeby przewietrzyć uczestników!). Wszystkie kartki zawierają scenariusze sytuacji wychowawczych z udziałem instruktora harcerskiego.'
+                    '<br>'
+                    '<br>Uczestnicy mają 15 minut, aby przejść się między wszystkimi scenariuszami, przeczytać je, po czym odpowiedzieć do każdego na dwa pytania:'
+                    '</p>'
+
+                    '<ol>'
+                    '<li>'
+                    '<p style="text-align:justify;">'
+                    '<b>Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?'
+                    '</p>'
+                    '</li>'
+
+                    '<li>'
+                    '<p style="text-align:justify;">'
+                    'Jak należałoby postąpić, by zachować w opisanym scenariuszu neutralność w aspekcie duchowym?'
+                    '</p>'
+                    '</li>'
+                    '</ol>'
+
+                    '<p style="text-align:justify;">'
+                    'Uczestnicy mogą chodzić pojedynczo i zastanawiać się w ciszy lub, jeśli chcą, w parach i dyskutować między sobą.'
+                    '<br>'
+                    '<br>Prowadzący prosi, by uczestnicy <b>nie skupiali się na technikaliach</b> (nie zastanawiali się, czy instruktor zareagował efektywnie), lecz jedynie na skutku działań - wpływie na duchowość (np. postawy lub wartości) wychowanków.'
+                    '<br>'
+                    '<br>Uczestnicy mogą notować swoje odpowiedzi, by móc łatwiej do nich wrócić.'
+                    '</p>'
+            ),
+            KonspektStep(
+                title: 'Neutralność duchowa - omówienie wniosków',
+                duration: Duration(minutes: 15),
+                activeForm: KonspektStepActiveForm.static,
+                content: '<p style="text-align:justify;">'
+                    'Gdy wszyscy uczestnicy skończą rozważania nad scenariuszami, wracają do wspólnego miejsca. Prowadzący prosi, by doszli do wspólnej odpowiedzi na pierwsze pytanie:'
+                    '<br>'
+                    '<br><b>Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?'
+                    '<br>'
+                    '<br>Prowadzący czeka, aż uczestnicy podyskutują - swoją rolę ogranicza jedynie do notowania ich wspólnych wniosków do każdego ze scenariuszy. Uczestnicy powinni zwrócić uwagę, że każdy ze scenariuszy kształtuje duchowość harcerzy w określonym kierunku:'
+                    '</p>'
+
+                    '<ul>'
+                    '<li><p style="text-align:justify;">Scenariusz 1 - postawa wybaczenia</p></li>'
+                    '<li><p style="text-align:justify;">Scenariusz 2 - życie w prawdzie</p></li>'
+                    '<li><p style="text-align:justify;">Scenariusz 3 - bezinteresowna pomoc bliźnim</p></li>'
+                    '<li><p style="text-align:justify;">Scenariusz 4 - wyższość dobra jednostki nad wizerunkiem wspólnoty</p></li>'
+                    '<li><p style="text-align:justify;">Scenariusz 5 (opcjonalny) - wierność w związkach romantycznych</p></li>'
+                    '<li><p style="text-align:justify;">Scenariusz 6 (opcjonalny) - modlitwa</p></li>'
+
+                    '</ul>'
+
+                    '<p style="text-align:justify;">'
+                    'Gdy dyskusje dobiegną końca, prowadzący może dorzucić kilka swoich niezobowiązujących uwag na temat wniosków uczestników. Ważniejsze jest jednak, aby szybko przejść do drugiego pytania:'
+                    '<br>'
+                    '<br><b><i>“Czy w którymkolwiek scenariuszu instruktor mógł postąpić neutralnie z perspektywy kształtowania duchowości?”</i></b>.'
+                    '<br>'
+                    '<br>Uczestnicy ponownie wracają do dyskusji. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.'
+                    '</p>',
+                materials: [
+                  _material_zal_neutralnosc_duchowa_przyklady,
+                ]
+
+            ),
+            KonspektStep(
+                title: 'Neutralność duchowa - w przypadku problemów',
+                duration: Duration(minutes: 5),
+                activeForm: KonspektStepActiveForm.static,
+                required: false,
+                content: '<p style="text-align:justify;">'
+                    'Rolą prowadzącego jest kształtowanie dyskusji uczestników poprzez zadawania pytań. Jeśli uczestnicy sądzą, że neutralność jest możliwa, prowadzący może zapytać:'
+                    '<br>'
+                    '<br><i>“Czy jeśli harcerz zawsze bije kolegów, którzy się z nim nie zgadzają, a instruktor nie reaguje, to czy postępuje neutralnie?”</i>'
+                    '<br>'
+                    '<br>Następnie może zapytać uczestników, jaka reakcja instruktora w tym wypadku była neutralna, po czym zadać pytanie:'
+                    '<br>'
+                    '<br><i>“Czy ta reakcja byłaby w istocie neutralna, czy po prostu mieści się w duchowości, którą prywatnie wyznajecie?”</i>'
+                    '<br>'
+                    '<br>Jeśli z kolei uczestnicy sądzą, że neutralne jest to, co jest zapisane w Prawie Harcerskim, prowadzący może zadać pytanie:'
+                    '<br>'
+                    '<br><i>“Ależ Prawo Harcerskie zmienia się pod wpływem poglądów Rady Naczelnej, poza tym skąd pomysł, że zasady jakiejś niewielkiej organizacyjki wychowawczej, z której wartościami nie wszyscy się w Polsce zgadzają, są prawdziwie neutralne?”</i>'
+                    '</p>'
+            ),
+            KonspektStep(
+                title: 'Neutralność duchowa - analogia harcerstwa z ogrodnikami',
+                duration: Duration(minutes: 5),
+                activeForm: KonspektStepActiveForm.static,
+                required: false,
+                content: '<p style="text-align:justify;">'
+                    'Jeśli uczestnicy mają problem ze zrozumieniem, dlaczego zarówno działanie wychowawcze jak i jego brak zawsze kształtuje duchowość wychowanków, prowadzący może przedstawić uczestnikom użyteczną analogię:'
+                    '<br>'
+                    '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne krzewy, w różnych formach i kształtach, a zadaniem ogrodników (instruktorów) jest te krzewy przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im kształt w określonym stylu.'
+                    '<br>'
+                    '<br>Krzew <b>zawsze nabywa jakiegoś kształtu</b>, także wtedy, gdy ogrodnik nic nie robi. Nie da się być rośliną nie mając jakiegoś kształtu. Tak samo, jak nie da się mówić nie użyjąc jakiegoś języka.'
+                    '<br>'
+                    '<br>Harcerstwo jest przedsięwzięciem kształtowania ludzi: ich przekonań, wartości i postaw w określonym kierunku. <b>Bez celowego kształtowania duchowości harcerzy harcerstwo nie realizuje swojego celu</b>, jakim jest wychowanie.</i>'
+                    '</p>'
+            )
+          ]
+      ),
+
+      KonspektStepGroup(
           title: 'Mechanizmy pośrednie',
           steps: [
             KonspektStep(
@@ -728,7 +867,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
               duration: Duration(minutes: 20),
               activeForm: KonspektStepActiveForm.static,
               materials: [
-                material_zal_mechanizmy_posrednie,
+                _material_zal_mechanizmy_posrednie,
               ],
               content: '<p style="text-align:justify;">'
                   'Prowadzący zaczyna od zadania oczywistego pytania:'
@@ -834,7 +973,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
               duration: Duration(minutes: 10),
               activeForm: KonspektStepActiveForm.static,
               materials: [
-                material_zal_mechanizmy_posrednie,
+                _material_zal_mechanizmy_posrednie,
               ],
               content: '<p style="text-align:justify;">'
                   'Prowadzący opisuje ostatni pośredni mechanizm kształtowania duchowości, czyli <b>Metanarrację</b> na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci. Podobnie jak w przypadku poprzednich mechanizmów, do pozostałych dodaje przy tym odpowiadającą kartkę z załącznika $_attach_html_mechanizmy_posrednie'
@@ -868,7 +1007,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
               duration: Duration(minutes: 30),
               activeForm: KonspektStepActiveForm.static,
               materials: [
-                material_zal_antyprzyklady,
+                _material_zal_antyprzyklady,
               ],
               content: '<p style="text-align:justify;">'
                   'Prowadzący dzieli uczestników na dwie grupy i daje im po jednej kartce z załącznika $_attach_html_antyprzyklady. Zadaniem uczestników jest szczegółowo przeanalizować opisaną w nim postać i wskazać jakie są problemy z duchowością, którą kształtuje u swoich wychowanków opisana postać.'
@@ -890,7 +1029,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego_old = Konspekt.oldFrom(
                     '<br>Po zakończeniu dyskusji grupy referują scenariusze i wnioski z nich płynące na forum wszystkich uczestników. Jeżeli któryś scenariusz zakończył się różnicą stanowisk dyskutujących, może zostać poruszony wspólnie przez wszystkich uczestników.'
                     '</p>',
                 materials: [
-                  material_zal_scenariusze,
+                  _material_zal_scenariusze,
                 ]
             ),
           ]

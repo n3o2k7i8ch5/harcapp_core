@@ -6,7 +6,7 @@ import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people/data.dart';
 
 import 'common_wychowanie_duchowe.dart';
-import 'czynniki_i_mechanizmy_ksztaltowania_duchowosci.dart';
+import 'mechanizmy_ksztaltowania_duchowosci.dart';
 
 
 const konspekt_kszt_name_warsztaty_wychowania_duchowego = 'warsztaty_wychowania_duchowego';
@@ -177,15 +177,19 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       attach_aksjomaty_wartosci_przyporzadkowanie,
 
-      attach_meta_narracja_scenka,
+      attach_scenka_wychowawcza,
+
+      ...attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+
+      attach_narracja_opis,
+      attach_narracja_przyklady,
+
       attach_meta_narracja_opis,
       attach_meta_narracja_przyklady,
-      attach_neutralnosc_duchowa_przyklady,
+
       attach_cel_wychowania_duchowego_zhp_statut,
       attach_cel_wychowania_duchowego_zhp_uchwala,
       attach_kratka_minimow_rozwoju_duchowego,
-
-      ...attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
 
       attach_karty_zalozen_wyjsciowych_wychowania_duchowego,
 
@@ -240,11 +244,15 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_zal_aksjomaty_wartosci_przyporzadkowanie,
 
       material_budzik,
-      material_zal_meta_narracja_scenka,
+      material_zal_scenka_wychowawcza,
+
+      ...materials_kszt_mechanizmy_ksztaltowania_duchowosci,
+
+      material_zal_narracja_opis,
+      material_zal_narracja_przyklady,
+
       material_zal_meta_narracja_opis,
       material_zal_meta_narracja_przyklady,
-
-      material_zal_neutralnosc_duchowa_przyklady,
 
       material_zal_cel_wychowania_duchowego_zhp_statut,
 
@@ -252,7 +260,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       material_zal_kratka_minimow_rozwoju_duchowego,
 
-      ...materials_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
 
       material_zal_karty_zalozen_wyjsciowych_wychowania_duchowego,
 
@@ -341,13 +348,13 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       step_group_etapy_rozwoju_duchowosci,
 
-      step_group_scenka,
+      step_group_scenka_wychowawcza,
 
       // step_group_zdolnosc_integracji_duchowosci,
 
       KonspektStepGroup(
-          title: 'Czynniki i mechanizmy kształtowania duchowości',
-          steps: steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci.map((step) => step.copyWithNamePrefix('Czynniki duchowości - ')).toList()
+          title: 'Mechanizmy kształtowania duchowości',
+          steps: steps_kszt_mechanizmy_ksztaltowania_duchowosci.map((step) => step.copyWithNamePrefix('Mechanizmy kształtowania duchowości - ')).toList()
       ),
 
       KonspektStepGroup(
@@ -380,8 +387,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
             ),
           ]
       ),
-
-      step_group_neutralnosc_duchowa,
 
       step_group_duchowosc_w_zhp,
 
@@ -474,7 +479,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                     '</p>',
                 materials: [
                   material_zal_planowanie_strategii_i_dzialan,
-                  material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+                  material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
                 ]
             ),
 

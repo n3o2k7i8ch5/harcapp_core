@@ -4,13 +4,13 @@ import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/warsztaty_wy
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people/data.dart';
 
-const konspekt_kszt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci = 'czynniki_i_mechanizmy_ksztaltowania_duchowosci';
+const konspekt_kszt_name_mechanizmy_ksztaltowania_duchowosci = 'mechanizmy_ksztaltowania_duchowosci';
 
 // Materials
 
-KonspektMaterial material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = KonspektMaterial(
-    name: 'Wydrukowany $attach_title_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci',
-    attachmentName: attach_name_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+KonspektMaterial material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci = KonspektMaterial(
+    name: 'Wydrukowany $attach_title_poradnik_mechanizmy_ksztaltowania_duchowosci',
+    attachmentName: attach_name_poradnik_mechanizmy_ksztaltowania_duchowosci,
     amount: 2
 );
 
@@ -30,22 +30,22 @@ KonspektMaterial material_nagroda = KonspektMaterial(
   amount: 1
 );
 
-List<KonspektMaterial> materials_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
-  material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+List<KonspektMaterial> materials_kszt_mechanizmy_ksztaltowania_duchowosci = [
+  material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
   material_zal_scenariusze_czynnikow_duchowosci,
   material_zetony,
   material_nagroda,
 ];
 
 // Steps
-List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
+List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
 
   KonspektStep(
       title: 'Wyjaśnienie merytoryczne',
       duration: Duration(minutes: 5),
       activeForm: KonspektStepActiveForm.static,
       materials: [
-        material_zal_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+        material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
       ],
       content: '<p style="text-align:justify;">'
           'Prowadzący, na podstawie załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci wyjaśnia uczestnikom czym są czynniki duchowości.'
@@ -134,8 +134,8 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
 
 // Konspekt
 Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt(
-  name: konspekt_kszt_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-  title: 'Czynniki i mechanizmy kształtowania duchowości',
+  name: konspekt_kszt_name_mechanizmy_ksztaltowania_duchowosci,
+  title: 'Mechanizmy kształtowania duchowości',
   category: KonspektCategory.ksztalcenie,
   type: KonspektType.zajecia,
   spheres: {},
@@ -147,8 +147,8 @@ Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt
     'Przedstawienie uczestnikom mechanizmów kształtowania duchowości.',
   ],
   attachments: attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-  materials: materials_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  materials: materials_kszt_mechanizmy_ksztaltowania_duchowosci,
   summary: 'Uczestnicy rozgrywają między sobą bieganą familiadę, by na podstawie krótkich historii określić, które czynniki rozwoju duchowości są w nich opisane.',
-  steps: steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  steps: steps_kszt_mechanizmy_ksztaltowania_duchowosci,
   partOf: konspekt_kszt_warsztaty_wychowania_duchowego
 );

@@ -5,7 +5,7 @@ import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/warsztaty_wy
 import 'package:harcapp_core/harcthought/konspekts/data/ksztalcenie/wstep_do_wychowania_duchowego.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 
-import 'czynniki_i_mechanizmy_ksztaltowania_duchowosci.dart';
+import 'mechanizmy_ksztaltowania_duchowosci.dart';
 
 Future<List<Konspekt>> _loadAllKsztalcenieKonspekts() async => [
   await konspekt_kszt_czym_jest_zhp,

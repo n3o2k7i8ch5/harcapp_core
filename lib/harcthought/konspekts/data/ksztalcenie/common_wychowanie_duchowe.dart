@@ -42,9 +42,28 @@ KonspektMaterial material_zal_sfery_przyklady = KonspektMaterial(
     amount: 1
 );
 
+KonspektMaterial material_zal_scenka_wychowawcza = KonspektMaterial(
+    name: 'Wydrukowany załącznik "$attach_title_scenka_wychowawcza"',
+    attachmentName: attach_name_scenka_wychowawcza,
+    amount: 4
+);
+
 KonspektMaterial material_budzik = KonspektMaterial(
   name: "Budzik (np. w telefonie)",
   amount: 1
+);
+
+KonspektMaterial material_zal_narracja_opis = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_narracja_opis”',
+    attachmentName: attach_name_narracja_opis,
+    amount: 1
+);
+
+KonspektMaterial material_zal_narracja_przyklady = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_narracja_przyklady”',
+    attachmentName: attach_name_narracja_przyklady,
+    amount: 1,
+    additionalPreparation: "Załącznik należy pociąć na 4 kartki wzdłuż przerywanych linii."
 );
 
 KonspektMaterial material_zal_meta_narracja_opis = KonspektMaterial(
@@ -60,12 +79,6 @@ KonspektMaterial material_zal_meta_narracja_przyklady = KonspektMaterial(
     additionalPreparation: "Załącznik należy pociąć na 4 kartki wzdłuż przerywanych linii."
 );
 
-KonspektMaterial material_zal_meta_narracja_scenka = KonspektMaterial(
-    name: 'Wydrukowany załącznik "$attach_title_meta_narracja_scenka"',
-    attachmentName: attach_name_meta_narracja_scenka,
-    amount: 4
-);
-
 KonspektMaterial material_flipchart = KonspektMaterial(
   name: 'Duży arkusz papieru (flipchart)',
   amount: 2,
@@ -79,13 +92,6 @@ KonspektMaterial material_marker = KonspektMaterial(
 KonspektMaterial material_tasma_klejaca = KonspektMaterial(
   name: 'Taśma klejąca',
   amount: 1,
-);
-
-KonspektMaterial material_zal_neutralnosc_duchowa_przyklady = KonspektMaterial(
-  name: 'Wydrukowany załącznik “$attach_title_neutralnosc_duchowa_przyklady”',
-  attachmentName: attach_name_neutralnosc_duchowa_przyklady,
-  amount: 1,
-  additionalPreparation: 'Załącznik należy pociąć na 4 części zgodnie z ramkami.'
 );
 
 KonspektMaterial material_zal_cel_wychowania_duchowego_zhp_statut = KonspektMaterial(
@@ -1383,10 +1389,10 @@ KonspektStep _step_scenka_wychowawcza_wprowadzenie = KonspektStep(
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     materials: [
-      material_zal_meta_narracja_scenka,
+      material_zal_scenka_wychowawcza,
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący rozdaje uczestnikom załącznik $attach_html_meta_narracja_scenka, po czym czyta na głos opisaną tam historię. Następnie informuje uczestników, że za chwilę wcielą się w kadrę wędrowniczą. Ich zadaniem będzie odbyć rozmowę z Adamem i spróbować <b>przekonać go w ciągu 15 minut, że harcerską postawą jest wybaczyć Radkowi, kierując się 4. punktem PH.</b>'
+        'Prowadzący rozdaje uczestnikom załącznik $attach_html_scenka_wychowawcza, po czym czyta na głos opisaną tam historię. Następnie informuje uczestników, że za chwilę wcielą się w kadrę wędrowniczą. Ich zadaniem będzie odbyć rozmowę z Adamem i spróbować <b>przekonać go w ciągu 15 minut, że harcerską postawą jest wybaczyć Radkowi, kierując się 4. punktem PH.</b>'
         '<br>'
         '<br>Uwagi:'
         '</p>'
@@ -1459,7 +1465,7 @@ KonspektStep _step_scenka_wychowawcza_omowienie = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStepGroup step_group_scenka = KonspektStepGroup(
+KonspektStepGroup step_group_scenka_wychowawcza = KonspektStepGroup(
     title: 'Scenka wychowawcza',
     steps: [
       _step_scenka_wychowawcza_wprowadzenie,
@@ -1474,7 +1480,7 @@ KonspektStepGroup step_group_scenka = KonspektStepGroup(
 
 KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
     title: 'Meta-narracja - opowieści',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący mówi:'
@@ -1484,15 +1490,11 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
         '<p style="text-align:justify;">'
         'Wróćmy jeszcze do przypadku Adama ze scenki. Przyczyną, dla której nie udało Wam się go przekonać był nie tylko nieodpowiedni dobór narzędzi - ale przede wszystkim nie dostał <b>powodu, by przyjąć wartości, które przyjmujemy w harcerstwie</b>.'
         '<br>'
-        '<br>Gdy ma się do czynienia z człowiekiem, który świadomie zinternalizował poziom aksjomatu, a ewidentnie takim człowiekiem był Adam, to jego wartości zawsze wynikają z jego fundamentalnych założeń na temat świata.'
-        '<br>'
         '<br>Czy zastanawialiście się kiedyś, dlaczego ludzie wierzą w to, w co wierzą? Albo raczej: dlaczego ludzie chętniej wierzą w jedne rzeczy, ale zupełnie nie przekonują ich inne poglądy?'
         '<br>'
-        '<br>Na szczęście byli i są na świecie ludzie dużo mądrzejsi od nas, którzy badają takie rzeczy i okazuje się, że od kiedy istniejemy jako gatunek, postrzegamy świat zawsze w ten sam sposób.'
+        '<br>Ludzie nie postrzegają świata fundamentalnie jako zbioru obiektów, ani zbioru faktów. Ludzie postrzegają rzeczywistość przede wszytskim jako <b>opowieści</b>: historie mające przyczynę, sens, cel, która opowiadające o naturze świata, o swojej roli w nim itd..'
         '<br>'
-        '<br>Ludzie nie postrzegają świata jako zbioru obiektów, ani zbioru faktów. Ludzie postrzegają rzeczywistość jako opowieść: opowieść mającą przyczynę, sens, cel, która opowiada o tym, jaki jest świat, jaką odgrywają w nim rolę, która nadaje im tożsamość i misję.'
-        '<br>'
-        '<br>Przykładów na to można mnożyć bez końca: Grecy widzieli świat takim, jakim opisali go w mitologicznych historiach. Starotestamentalny lud żydowski, z którego nota bene my wszyscy wyrastamy, widział świat jako miejsce, w którym Bóg prowadzi ich przez wyzwania, stopniowo odkrywając przed nimi swoją naturę. Tymczasem dziś, kilka tysięcy lat później, głód i potrzeba opowieści jest tak wielka, że ludzie płacą pieniądze za to, by móc usiąść na kilka godzin w fotelu i obejrzeć zupełnie wymyśloną historię walki dobra ze złem, taką jak Gwiezdne Wojny, Władca Pierścieni, czy Avengersi.'
+        '<br>Przykładów na to można mnożyć bez końca: Grecy widzieli świat takim, jakim opisali go w mitologicznych historiach. Starotestamentalny lud żydowski, z którego nota bene my wszyscy wyrastamy, widział świat jako miejsce, w którym Bóg prowadzi ich przez dzieje, stopniowo odkrywając przed nimi swoją naturę. Tymczasem dziś, kilka tysięcy lat później, głód i potrzeba opowieści jest wciąż tak wielka, że ludzie płacą pieniądze za to, by móc usiąść na kilka godzin w fotelu i obejrzeć zupełnie wymyśloną historię walki dobra ze złem, taką jak Gwiezdne Wojny, Władca Pierścieni, czy Avengersi.'
         '<br>'
         '<br>Zatrzymajmy się chwilę nad tymi opowieściami:'
         '<br>'
@@ -1502,11 +1504,12 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
         '<br>'
         '<br>Po drugie: opowieści i mity nie są bajeczkami, czy kłamstwami. Ich sens polega na przedstawieniu pewnej trudno uchwytnej prawdy o świecie, którą osiąga się poprzez stworzenie fikcyjnych postaci, fikcyjnych wydarzeń, które następnie są używane, by pokazać realne mechanizmy obecne w świecie. Przykładowo można z jednej strony polecić komuś napisaną precyzyjnym, ale specyficznym językiem serię publikacji naukowych „Psychologiczne i socjologiczne aspekty wariantowych relacji dzieci i ich rodziców", albo można tę samą treść opowiedzieć w historii Pinokia: drewnianej, naiwnej kukle, która uciekłszy z domu, zostaje przygnieciona życiem, lecz w końcu bierze odpowiedzialność za siebie, ratuje nieudacznego ojca z wnętrza wieloryba i dzięki temu staje się w pełni człowiekiem.'
         '<br>'
-        '<br>Ludzie wierzą w różne rzeczy, ale nie uwierzą w byle co. Ich najgłębsze przekonania są zawsze pewnego rodzaju narracją o rzeczywistości: czymś, co porządkuje im świat, opowiada o dobru i złu, nadaje im tożsamość, sens i cel.'
+        '<br>Ludzie wierzą w różne rzeczy. Czasami nawet wierzą w byle jakie treści, ale niemal nigdy nie wierzą w byle jakie formy. Przekonania, które wyznają, muszą do nich w pewien sposób przemawiać. Formą tą jest najczęściej <b>narracja</b> o rzeczywistości: opowieść, która porządkuje świat, opowiada o dobru i złu, nadaje tożsamość, sens i cel.'
         '</p>'
+        '</blockquote>'
 
         '<p style="text-align:justify;">'
-        '...tutaj chyba prowadzący powinien położyć jakieś rzeczy i podać te 4 przykłady...'
+        'Prowadzący kładzie obok karty "aksjomatu" kartę z załącznika $attach_html_narracja_opis, po czym prezentuje uczestnikom przykłady narracji z załącznika $attach_html_narracja_przyklady.'
         '</p>'
 
         '<blockquote>'
@@ -1516,10 +1519,9 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
         '</blockquote>'
 );
 
-
 KonspektStep _step_meta_narracja_warunki_brzegowe = KonspektStep(
     title: 'Meta-narracja - warunki brzegowe',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<blockquote>'
         '<p style="text-align:justify;">'
@@ -1554,10 +1556,9 @@ KonspektStep _step_meta_narracja_warunki_brzegowe = KonspektStep(
         '</blockquote>'
 );
 
-
 KonspektStep _step_meta_narracja_uniwersalnosc = KonspektStep(
     title: 'Meta-narracja - uniwersalność łacińskich wartości',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content:
         '<p style="text-align:justify;">'
@@ -1673,7 +1674,7 @@ KonspektStep _step_meta_narracja_uniwersalnosc = KonspektStep(
 
 KonspektStep _step_meta_narracja_zrodla_lacinskich_wartosci = KonspektStep(
     title: 'Meta-narracja - źródła łacińskich wartości',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący kontrastuje poprzednie trzy alternatywne systemy przekonań z systemem łacińskim:'
@@ -1708,7 +1709,7 @@ KonspektStep _step_meta_narracja_zrodla_lacinskich_wartosci = KonspektStep(
 
 KonspektStep _step_meta_narracja_selekcja_naturalna = KonspektStep(
     title: 'Meta-narracja - selekcja naturalna',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<blockquote>'
         '<p style="text-align:justify;">'
@@ -1779,27 +1780,101 @@ KonspektStep _step_meta_narracja_selekcja_naturalna = KonspektStep(
 
 KonspektStep _step_meta_narracja_wniosek = KonspektStep(
     title: 'Meta-narracja - wniosek',
-    duration: Duration(minutes: 3),
+    duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content: '<blockquote>'
         '<p style="text-align:justify;">'
-        'To wszystko w gruncie rzeczy sprowadza się do jednego pytania:'
-        '<br>'
-        '<br>Czy istnieje jakaś meta-narracja, która byłaby fundamentem duchowości, z której wynikają wszystkie najważniejsze chrześcijańskie wartości i postawy, ale która nie miałaby chrześcijańskich aksjomatów o zbawczym życiu, śmierci i zmartwychwstaniu Chrystusa?'
-        '<br>'
-        '<br>Jeśli nawet istnieje, to nikt do dziś takowej meta-narracji nie znalazł. A nawet gdyby znalazł, to byłaby ona najpewniej czymś w równym stopniu religijnym, co wiara chrześcijańska.'
-        '<br>'
-        '<br>Czy to zatem oznacza, że osoby niewierzące w Chrystusa nie mają jak kształtować swojej duchowości zgodnie z harcerskimi wartościami?'
-        '<br>'
-        '<br>Tutaj sprawa jest złożona: dopóki wystarcająco wiele osób żyje zgodnie z chrześcijańskimi zasadami, to można być niewierzącym i przez przyzwyczajenie i tożsamość owe zasady zachować. Ale jeżeli w życiu takiego człowieka nastąpi jakieś nagłe wydarzenie, katastrofa, albo jeśli wystarczająco wiele osób porzuci fundament, z którego ich wartości wyrastają - to w kilka pokoleń z owych wartości nic nie zostanie.'
-        '<br>'
-        '<br>Wniosek jest więc taki, że można porzucić aksjomaty chrześcijańskie w procesie kształtowania duchowości, ale trzeba założyć, że z czasem człowiek przestanie wierzyć w przebaczenie wszystkich win, przestanie wierzyć w absolutną wartość prawdy i przestanie wierzyć, że każdy człowiek ma niezbywalną godność. Bo dlaczego niby najwięksi wrogowie nie mieliby zostać z tego prawa do godności wyłączeni? Czemu ktokolwiek miałby się poświęcać dla swojego nieprzyjaciela?'
-        '<br>'
-        '<br>Ten wniosek nie jest "fajny", ani "łatwy" - w gruncie rzeczy nie wiemy o co oprzeć duchowość ludzi niewierzących tak, by jako dorośli, świadomi ludzie szczerze żyli harcerskimi wartościami niezależnie od okoliczności.'
+        'Przejdźmy zatem do wniosków i wróćmy już z powrotem do Adama. Jakie mamy opcje, żeby skutecznie wychować go do harcerskich wartości?'
         '</p>'
         '</blockquote>'
-);
 
+        '<p style="text-align:justify;">'
+        'Prowadzący proponuje jako opcję pierwszą <b>strategię "abdykacji"</b>:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Przede wszystkim można wyjść z założenia, że to nie jest nasz problem: że Adam jest po prostu stracony, a innym jakoś tam powiemy, że "trzeba być w życiu po prostu dobrym człowiekiem", albo "że trzeba się dzielić i przebaczać, bo kiedyś był kolonializm i musimy spłacić swój dług".'
+        '<br>'
+        '<br>Tylko że to w ogóle nie mieści się w harcerskim wychowaniu. Harcerstwo nie wychowuje konformistów, ani ignorantów, tylko wychowuje ludzi świadomych i ideowych.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący przed zaproponowaniem drugiej i trzeciej opcji przedstawia warunki, które należy spełnić:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Jeżeli zatem chcemy stanąć na wysokości zadania, to podsumujmy fakty:'
+        '<br>'
+        '<br>Po pierwsze: potrzebujemy dla Adama jakiejś narracji. Bez narracji nie ma stabilnych wartości innych niż wartości pierwotne.'
+        '<br>'
+        '<br>Po drugie: nie chcemy byle jakiej nararcji. Większość narracji kończy się dla przyjmujących ich ludzi fatalnie: w najlepszym wypadku samotnością, apatią i rozwalonym życiem, w najgorszym śmiercią. Chociaż nie jest to takie oczywiste, które z tych dwóch jest gorsze.'
+        '<br>Potrzebujemy zatem narracji, która ma za sobą co najmniej kilkadziesiąt pokoleń historii, czyli w zasadzie potrzebujemy jakiejś meta-narracji: jakiejś opowieści, stojącej za którąść z istniejących od dawna cywilizacji.'
+        '<br>'
+        '<br>Po trzecie: potrzebujemy meta-narracji spełniającej bardzo konkretne kryteria: chcemy, żeby wynikały z niej uniwersalna i niezbywalna ludzka godność, przebaczenie, braterstwo, pokora, dążenie do ideału itd..'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący proponuje jako opcję drugą <b>strategię "chrześcijańską"</b>:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Istnieje w sposób oczywisty znana i bardzo stara meta-narracja, która spełnia wszystkie kryteria: jest to meta-narracja o zbawczym życiu, śmierci i zmartwychwstaniu Chrystusa.'
+        '<br>'
+        '<br>Oczywiście to, jak w praktyce wygląda praca wychowcza z taką meta-narracją to osobne zagadnienie.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący omawia jako opcję trzecią <b>strategię "alternatywy"</b>:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Ale wiele z Was może się zapewne zastanawiać: "A co, jeśli Adam jest niewierzący"?'
+        '<br>'
+        '<br>I tutaj obawiam się, że otwiera się pustka, na którą nikt dotąd nie podał odpowiedzi.'
+        '<br>'
+        '<br>Cała nasza cywilizacja została zbudowana na aksjomatach chrześcijańskich. Została ukształtowana przez życia miliardów ludzi, na przestrzeni tysięcy lat, przez myślicieli i filozofów większych od wszystkich tu obecnych. Czy można to wszystko porzucić i liczyć na to, że można usunąć fundamenty, na których stoimy, a potem jakoś "wymyśli się" coś równie dobrego w ich miejsce?'
+        '<br>'
+        '<br>Być może istnieje jakaś alternatywa, ale na dziś, myśl, że można utrzymać świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, ale pozbyć się tego, z czego one wynikają jest, mówiąc najdelikatniej, wielką nieodpowiedzialnością.'
+        '<br>'
+        '<br>Można próbować wybiegów w stylu: "wystarczy być dobrym człowiekiem", "idź za głosem serca" albo zostawić sferę aksjomatów niewierzących harcerzy samym sobie i tak oto pozbyć się problemu. Na razie taki model w ZHP funkcjonuje, ale jest to wyraz bezradności, a nie poważna odpowiedź na to pytanie. Chyba nikt nie ma odpowiedzi na to pytanie.'
+        '</p>'
+        '</blockquote>'
+
+
+        '<p style="text-align:justify;">'
+        'Na końcu prowadzący wyraża głośno wynikającą z tego zagadnienia myśl:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        '<br>Czy to zatem oznacza, że osoby niewierzące w Chrystusa nie mają jak kształtować swojej duchowości zgodnie z harcerskimi wartościami?'
+        '<br>'
+        '<br>Tutaj sprawa jest dwoista: dopóki wystarcająco wiele osób żyje zgodnie z chrześcijańskimi zasadami, to można być niewierzącym i przez dostosowanie, przyzwyczajenie, a czasami (choć rzadko) tożsamość, owe zasady zachować.'
+        '<br>'
+        '<br>Jeżeli jednak w życiu niewierzącego człowieka nastąpi jakieś nagłe wydarzenie, katastrofa, albo jeśli wystarczająco wiele osób porzuci te wartości - to w kilka dekad nic z ludzkiej wolności, godności, braterstwa, czy równości nie zostanie. Zresztą, sami pomyślcie: dlaczego nie wyłączyć ludzi robiących złe rzeczy z prawa do godnego traktowania? Czemu ktokolwiek miałby się poświęcać dla swojego wroga?'
+        '<br>'
+        '<br>Nie chodzi o to, że każdy, kto porzuci klasyczną, łacińską, meta-narrację jutro umrze. Absolutnie. Chodzi o to, jeśli zacznie szukać w swoim życiu głębokiem spójności ze swoimi przekonaniami, to absolutnie nie można liczyć na to, że w długim okresie zachowa harcerskie wartości jako swoje.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący powinien pozwolić, by fundamentalny <b>brak odpowiedzi</b> na pytanie „co dla ateistów" wybrzmiał wśród uczestników. <b>Odpowiedź nie padnie na warsztatach</b> – nie dlatego, że ktoś chce ją ukryć, ale dlatego, że próba potraktowania tego pytania poważnie prowadzi do karkołomnych konsekwencji – niezależnie od poglądów obecnych tu osób.'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Ta kwestia niech zostanie zatem otwarta - zastanówcie się nad nią i możemy do niej wrócić po lub w trakcie obiadu, jeśli najdą Was jakieś myśli.'
+        '</p>'
+        '</blockquote>'
+
+);
 
 // KonspektStep _step_meta_narracja_definicja = KonspektStep(
 //     title: 'Meta-narracja - definicja i przykłady',
@@ -1843,7 +1918,7 @@ KonspektStep _step_meta_narracja_wniosek = KonspektStep(
 
 KonspektStep _step_meta_narracja_pytania = KonspektStep(
     title: 'Meta-narracja - pytania',
-    duration: Duration(minutes: 10),
+    duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Uczestnicy mogą dopytać o niejasne kwestie związane z meta-narracją.'
@@ -1952,130 +2027,6 @@ KonspektStepGroup step_group_zdolnosc_integracji_duchowosci = KonspektStepGroup(
     ]
 );
 
-// Neutralność
-
-KonspektStep _step_neutralnosc_duchowa_galeria_sztuki = KonspektStep(
-    title: 'Neutralność duchowa - galeria sztuki',
-    duration: Duration(minutes: 15),
-    activeForm: KonspektStepActiveForm.active,
-    aims: [
-      'Zaprezentowanie uczestnikom wartości i postaw (przebaczenie, prawdomówność, pomoc bliźnim, indywidualizm, ew. wierność w związku, modlitwa), które choć pozornie uniwersalne, wcale nie są domyślne, oczywiste, czy neutralne',
-      'Przekonanie uczestników, że neutralność światopoglądowa w wychowaniu nie jest możliwa'
-    ],
-    materials: [
-      material_zal_neutralnosc_duchowa_przyklady,
-      material_tasma_klejaca,
-    ],
-    content: '<p style="text-align:justify;">'
-        'Prowadzący (najlepiej przed przystąpieniem do formy) rozwiesza na różnych ścianach kartki z załącznika $attach_html_neutralnosc_duchowa_przyklady (jeśli jest taka możliwość i pogoda temu sprzyja, warto rozwiesić kartki na zewnątrz, żeby przewietrzyć uczestników!). Wszystkie kartki zawierają scenariusze sytuacji wychowawczych z udziałem instruktora harcerskiego.'
-        '<br>'
-        '<br>Uczestnicy mają 15 minut, aby przejść się między wszystkimi scenariuszami, przeczytać je, po czym odpowiedzieć do każdego na dwa pytania:'
-        '</p>'
-
-        '<ol>'
-        '<li>'
-        '<p style="text-align:justify;">'
-        '<b>Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Jak należałoby postąpić, by zachować w opisanym scenariuszu neutralność w aspekcie duchowym?'
-        '</p>'
-        '</li>'
-        '</ol>'
-
-        '<p style="text-align:justify;">'
-        'Uczestnicy mogą chodzić pojedynczo i zastanawiać się w ciszy lub, jeśli chcą, w parach i dyskutować między sobą.'
-        '<br>'
-        '<br>Prowadzący prosi, by uczestnicy <b>nie skupiali się na technikaliach</b> (nie zastanawiali się, czy instruktor zareagował efektywnie), lecz jedynie na skutku działań - wpływie na duchowość (np. postawy lub wartości) wychowanków.'
-        '<br>'
-        '<br>Uczestnicy mogą notować swoje odpowiedzi, by móc łatwiej do nich wrócić.'
-        '</p>'
-);
-
-KonspektStep _step_neutralnosc_duchowa_omowienie_wnioskow = KonspektStep(
-    title: 'Neutralność duchowa - omówienie wniosków',
-    duration: Duration(minutes: 15),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Gdy wszyscy uczestnicy skończą rozważania nad scenariuszami, wracają do wspólnego miejsca. Prowadzący prosi, by doszli do wspólnej odpowiedzi na pierwsze pytanie:'
-        '<br>'
-        '<br><b>Czy działanie instruktora miało wpływ na duchowość harcerzy?</b> Jeśli tak, to <b>jakie wartości</b> lub postawy działanie instruktora wzmocniło?'
-        '<br>'
-        '<br>Prowadzący czeka, aż uczestnicy podyskutują - swoją rolę ogranicza jedynie do notowania ich wspólnych wniosków do każdego ze scenariuszy. Uczestnicy powinni zwrócić uwagę, że każdy ze scenariuszy kształtuje duchowość harcerzy w określonym kierunku:'
-        '</p>'
-
-        '<ul>'
-        '<li><p style="text-align:justify;">Scenariusz 1 - postawa wybaczenia</p></li>'
-        '<li><p style="text-align:justify;">Scenariusz 2 - życie w prawdzie</p></li>'
-        '<li><p style="text-align:justify;">Scenariusz 3 - bezinteresowna pomoc bliźnim</p></li>'
-        '<li><p style="text-align:justify;">Scenariusz 4 - wyższość dobra jednostki nad wizerunkiem wspólnoty</p></li>'
-        '<li><p style="text-align:justify;">Scenariusz 5 (opcjonalny) - wierność w związkach romantycznych</p></li>'
-        '<li><p style="text-align:justify;">Scenariusz 6 (opcjonalny) - modlitwa</p></li>'
-
-        '</ul>'
-
-        '<p style="text-align:justify;">'
-        'Gdy dyskusje dobiegną końca, prowadzący może dorzucić kilka swoich niezobowiązujących uwag na temat wniosków uczestników. Ważniejsze jest jednak, aby szybko przejść do drugiego pytania:'
-        '<br>'
-        '<br><b><i>“Czy w którymkolwiek scenariuszu instruktor mógł postąpić neutralnie z perspektywy kształtowania duchowości?”</i></b>.'
-        '<br>'
-        '<br>Uczestnicy ponownie wracają do dyskusji. Scenariusze, które zostały omówione przez uczestników powinny prowadzić do wniosku: w sposób oczywisty harcerskie <b>wychowanie nie jest neutralne duchowo</b>.'
-        '</p>',
-    materials: [
-      material_zal_neutralnosc_duchowa_przyklady,
-    ]
-
-);
-
-KonspektStep _step_neutralnosc_duchowa_w_przypadku_problemow = KonspektStep(
-    title: 'Neutralność duchowa - w przypadku problemów',
-    duration: Duration(minutes: 5),
-    activeForm: KonspektStepActiveForm.static,
-    required: false,
-    content: '<p style="text-align:justify;">'
-        'Rolą prowadzącego jest kształtowanie dyskusji uczestników poprzez zadawania pytań. Jeśli uczestnicy sądzą, że neutralność jest możliwa, prowadzący może zapytać:'
-        '<br>'
-        '<br><i>“Czy jeśli harcerz zawsze bije kolegów, którzy się z nim nie zgadzają, a instruktor nie reaguje, to czy postępuje neutralnie?”</i>'
-        '<br>'
-        '<br>Następnie może zapytać uczestników, jaka reakcja instruktora w tym wypadku była neutralna, po czym zadać pytanie:'
-        '<br>'
-        '<br><i>“Czy ta reakcja byłaby w istocie neutralna, czy po prostu mieści się w duchowości, którą prywatnie wyznajecie?”</i>'
-        '<br>'
-        '<br>Jeśli z kolei uczestnicy sądzą, że neutralne jest to, co jest zapisane w Prawie Harcerskim, prowadzący może zadać pytanie:'
-        '<br>'
-        '<br><i>“Ależ Prawo Harcerskie zmienia się pod wpływem poglądów Rady Naczelnej, poza tym skąd pomysł, że zasady jakiejś niewielkiej organizacyjki wychowawczej, z której wartościami nie wszyscy się w Polsce zgadzają, są prawdziwie neutralne?”</i>'
-        '</p>'
-);
-
-KonspektStep _step_neutralnosc_analogia_do_ogrodnikow = KonspektStep(
-    title: 'Neutralność duchowa - analogia harcerstwa z ogrodnikami',
-    duration: Duration(minutes: 5),
-    activeForm: KonspektStepActiveForm.static,
-    required: false,
-    content: '<p style="text-align:justify;">'
-        'Jeśli uczestnicy mają problem ze zrozumieniem, dlaczego zarówno działanie wychowawcze jak i jego brak zawsze kształtuje duchowość wychowanków, prowadzący może przedstawić uczestnikom użyteczną analogię:'
-        '<br>'
-        '<br><i>ZHP jest jak wielka, rozproszona organizacja ogrodnicza. Zajmuje się kształtowaniem krzewów (czyli kształtowaniem duchowości i zdolności harcerzy). Pojawiają się u nas różne krzewy, w różnych formach i kształtach, a zadaniem ogrodników (instruktorów) jest te krzewy przycinać, podlewać, nawozić lub pozwalać im rosnąć tak, by nadać im kształt w określonym stylu.'
-        '<br>'
-        '<br>Krzew <b>zawsze nabywa jakiegoś kształtu</b>, także wtedy, gdy ogrodnik nic nie robi. Nie da się być rośliną nie mając jakiegoś kształtu. Tak samo, jak nie da się mówić nie użyjąc jakiegoś języka.'
-        '<br>'
-        '<br>Harcerstwo jest przedsięwzięciem kształtowania ludzi: ich przekonań, wartości i postaw w określonym kierunku. <b>Bez celowego kształtowania duchowości harcerzy harcerstwo nie realizuje swojego celu</b>, jakim jest wychowanie.</i>'
-        '</p>'
-);
-
-KonspektStepGroup step_group_neutralnosc_duchowa = KonspektStepGroup(
-    title: 'Neutralność duchowa',
-    steps: [
-      _step_neutralnosc_duchowa_galeria_sztuki,
-      _step_neutralnosc_duchowa_omowienie_wnioskow,
-      _step_neutralnosc_duchowa_w_przypadku_problemow,
-      _step_neutralnosc_analogia_do_ogrodnikow
-    ]
-);
-
 // Duchowość w ZHP
 
 KonspektStep _step_duchowosc_w_zhp_dokumenty = KonspektStep(
@@ -2144,194 +2095,194 @@ KonspektStep _step_duchowosc_w_zhp_dobrowolnosc = KonspektStep(
     ]
 );
 
-KonspektStep _step_duchowosc_w_zhp_aksjomaty_poszukiwanie_zrodla = KonspektStep(
-    title: 'Duchowość w ZHP - aksjomaty - poszukiwanie źródła',
-    duration: Duration(minutes: 15),
-    activeForm: KonspektStepActiveForm.static,
-    materials: [
-      material_zal_neutralnosc_duchowa_przyklady
-    ],
-    aims: [
-      'Uświadomienie uczestnikom, że harcerskie wartości, oparte na wartościach cywilizacji łacińskiej nie są oczywiste, uniwersalne, ani naturalne.'
-    ],
-    content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę, że wartości cywilizacji łacińskiej nie są ani uniwersalne, ani naturalne. Posiłkując się przykładami z użytego wcześniej załącznika ${attach_html_neutralnosc_duchowa_przyklady}, poddaje pod dyskusję pytanie:'
-        '</p>'
+// KonspektStep _step_duchowosc_w_zhp_aksjomaty_poszukiwanie_zrodla = KonspektStep(
+//     title: 'Duchowość w ZHP - aksjomaty - poszukiwanie źródła',
+//     duration: Duration(minutes: 15),
+//     activeForm: KonspektStepActiveForm.static,
+//     materials: [
+//       material_zal_neutralnosc_duchowa_przyklady
+//     ],
+//     aims: [
+//       'Uświadomienie uczestnikom, że harcerskie wartości, oparte na wartościach cywilizacji łacińskiej nie są oczywiste, uniwersalne, ani naturalne.'
+//     ],
+//     content: '<p style="text-align:justify;">'
+//         'Prowadzący zwraca uwagę, że wartości cywilizacji łacińskiej nie są ani uniwersalne, ani naturalne. Posiłkując się przykładami z użytego wcześniej załącznika ${attach_html_neutralnosc_duchowa_przyklady}, poddaje pod dyskusję pytanie:'
+//         '</p>'
+//
+//         '<blockquote>'
+//         '<p style="text-align:justify;">'
+//         'Dlaczego w naszej kulturze akurat te, a nie inne wartości są tak powszechne?'
+//         '</p>'
+//         '</blockquote>'
+//
+//         '<ol>'
+//
+//         '<li>'
+//         '<p style="text-align:justify;">'
+//         '<b>Scenariusz 1.</b> Przebaczenie i odpuszczenie win.'
+//         '</p>'
+//
+//         '<blockquote>'
+//         '<p style="text-align:justify;">'
+//         'W wielu kulturach przebaczenie jest uważane za zachętę do bycia wykorzystywanym. Nietzsche widział w nim wyraz słabości i element moralności niewolników. W tradycyjnej kulturze japońskiej po popełnieniu poważnej winy nie było drogi jej odpuszczenia – jedynym honorowym wyjściem było rytualne samobójstwo: seppuku. Dlaczego więc w kulturze łacińskiej jest inaczej? Dlaczego w naszych systemach prawnych po odbyciu kary wina zostaje zmazana i człowiek jest wolny? Dlaczego za kradzież nie skazuje się ludzi dożywotnio, żeby skutecznie ich od niej zniechęcić?'
+//         '</p>'
+//         '</blockquote>'
+//         '</li>'
+//
+//         '<li>'
+//         '<p style="text-align:justify;">'
+//         '<b>Scenariusz 2.</b> Życie w prawdzie.'
+//         '</p>'
+//
+//         '<blockquote>'
+//         '<p style="text-align:justify;">'
+//         'W kulturach wschodnich, gdzie najważniejsza jest harmonia społeczna, należy kłamać, jeśli prowadzi to do uniknięcia konfliktu. W części kultur afrykańskich kłamstwo nie jest złem, jeśli służy uniknięciu wstydu. Dlaczego więc akurat my tak się uparliśmy, by nagannie traktować świadome mówienie nieprawdy?'
+//         '</p>'
+//         '</blockquote>'
+//
+//         '</li>'
+//
+//         '<li>'
+//         '<p style="text-align:justify;">'
+//         '<b>Scenariusz 3.</b> Niezbywalna godność każdego człowieka'
+//         '</p>'
+//
+//         '<blockquote>'
+//         '<p style="text-align:justify;">'
+//         'W systemach konfucjańskich liczy się najpierw wspólnota i kolektyw, dopiero potem jednostka. Niektórzy wyznawcy hinduizmu powstrzymają innych od udzielenia pomocy cierpiącemu – jeśli ktoś cierpi, to pokutuje za grzechy popełnione w poprzednim życiu. A skąd pogląd, że wykształcony profesor z zasługami dla narodu ma takie same prawa jak półinteligentny osiedlowy cwaniaczek? Skąd pomysł, że prawo do życia i godnego traktowania przysługuje każdemu, niezależnie od wieku, pochodzenia czy wyznania?'
+//         '</p>'
+//         '</blockquote>'
+//
+//         '</li>'
+//
+//         '<li>'
+//         '<p style="text-align:justify;">'
+//         '<b>Scenariusz 4.</b> Stawianie wyżej dobra jednostki nad kolektywem'
+//         '</p>'
+//
+//         '<blockquote>'
+//         '<p style="text-align:justify;">'
+//         'W kulturze konfucjańskiej najpierw liczy się zbiorowość, trwałość systemu państwowego – a dopiero potem dobro jednostki. W Chinach niedopuszczalne jest publiczne okazywanie sporów, ponieważ osłabia to wspólnotę. W kulturze japońskiej należy poświęcić plany prywatne, jeśli kolidują z wydarzeniem firmy. Skąd więc u nas „oczywiste" przekonanie, że rodzinie, której dom stoi na drodze nowej autostrady, należy się odszkodowanie? Skąd przekonanie, że nie można zmusić człowieka do pracy, jeśli nie chce? Dlaczego chronimy tak zaciekle wolności słowa, nawet gdy osłabia ona spójność społeczną?'
+//         '</p>'
+//         '</blockquote>'
+//         '</li>'
+//
+//         '</ol>'
+// );
+//
+// KonspektStep _step_duchowosc_w_zhp_aksjomaty_odpowiedzi = KonspektStep(
+//     title: 'Duchowość w ZHP - aksjomaty - odpowiedzi',
+//     duration: Duration(minutes: 10),
+//     activeForm: KonspektStepActiveForm.static,
+//     materials: [
+//       material_zal_neutralnosc_duchowa_przyklady
+//     ],
+//     aims: [
+//       'Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej'
+//     ],
+//     content: '<p style="text-align:justify;">'
+//         'Gdy uczestnicy dostrzegą, jak nieoczywiste – a z perspektywy reszty świata wręcz dziwne – są wartości łacińskie, prowadzący naprowadza ich na powód, dla którego akurat te wartości stały się u nas standardem:'
+//         '</p>'
+//
+//         '<blockquote>'
+//         '<p style="text-align:justify;">'
+//         'Nie byłoby niezbywalnej godności każdego człowieka, ani równości wobec prawa, ani humanitaryzmu, ani oświecenia, ani Powszechnej Deklaracji Praw Człowieka bez wiary, że skoro sam Bóg dobrowolnie wydał się na śmierć dla zbawienia najpodlejszego nawet człowieka, to że w każdym człowieku jest coś iście boskiego, nieważne jak bardzo jest podły, bezużyteczny, inny, czy denerwujący. Koncept godności niektórych ludzi funkcjonował w wielu kręgach już wcześniej - ale godność <b>każdego</b> człowieka jest czymś zupełnie innym.'
+//         '<br>'
+//         '<br>Prawdopodobnie nie byłoby też uniwersytetów bez zgromadzeń i klasztorów zakonnych, ani nie byłoby nauki bez przekonania, że Bóg stworzył dobry, uporządkowany świat, że Bóg przekracza naturę i że można badać ją bez bluźnierstwa, oraz bez ewangelicznej wiary w wartość prawdy pomimo pokusy fałszowania rzeczywistości dla własnych korzyści.'
+//         '</p>'
+//         '</blockquote>'
+//
+//         '<p style="text-align:justify;">'
+//         'Prowadzący zostawia uczestnikom przestrzeń, by weszli z nim na ten temat w dyskusję.'
+//         '</p>'
+//
+// );
+//
+// KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
+//     title: 'Duchowość w ZHP - co dla ateistów?',
+//     duration: Duration(minutes: 10),
+//     activeForm: KonspektStepActiveForm.static,
+//     content: '<p style="text-align:justify;">'
+//         'Prowadzący zwraca uczestnikom uwagę na pewien problem (chyba, że któryś z uczestników sam zwróci na niego uwagę):'
+//         '</p>'
+//
+//         '<blockquote>'
+//         '<p style="text-align:justify;">'
+//         'Co, jeśli kogoś nie interesuje chrześcijaństwo?'
+//         '</p>'
+//         '</blockquote>'
+//
+//         '<p style="text-align:justify;">'
+//         'Prowadzący otwiera tym samym krótką dyskusję. Warto rozpatrzyć tutaj dwa osobne przypadki:'
+//         '</p>'
+//
+//         '<blockquote>'
+//         '<ol>'
+//
+//         '<li>'
+//         '<p style="text-align:justify;">'
+//         '<i>'
+//         '<u>Co, jeśli ktoś nie jest zainteresowany egzystencjalnymi pytaniami? Co jeśli ktoś uważa, że należy być dobrym "bo tak"?</u>'
+//         '<br>'
+//         '<br>Harcerstwo stawia za cel wychowanie osób świadomych swoich wartości, potrafiących je uzasadnić i ich bronić. Faktycznie jednak należy liczyć się z tym, że niektórzy zwyczajnie nie będą sobie zadawali trudu refleksji nad swoim życiem i duchem. Część osób może konformistycznie, na bieżąco dopasowywać się do poglądów otoczenia, mieć przez to kolegów i czuć się z tym dobrze, jednak <b>jest to wyraz niedojrzałości</b>.'
+//         '<br>'
+//         '<br>Ludzie mogą być też motywowani różnymi meta-narracjami. Niektóre mogą być absurdalne, czy trywialne, np.: "Musimy dzielić się bogactwem, bo był kiedyś kolonializm". Nie zmienia to faktu, że dla kogoś może być to odpowiedzią na wszystkie życiowe rozterki. Nie należy jednak sądzić, że w ogólności ludzie pójdą za każdą meta-narracją. Nie wszystkie meta-narracje kończą się dla człowieka dobrze. Nie bez przyczyny za niektórymi meta-narracjami poszły miliardy ludzi, a inne wygasły po dwóch pokoleniach.'
+//         '</i>'
+//         '</p>'
+//         '</li>'
+//
+//         '<li>'
+//         '<p style="text-align:justify;">'
+//         '<i>'
+//         '<u>Jakie aksjomaty powinny być podstawą duchowości ateistów w ZHP?</u>'
+//         '<br>'
+//         '<br>Nie wiem. I prawdopodobnie nikt nie wie. Cała nasza zachodnia cywilizacja została zbudowana na aksjomatach chrześcijańskich. Została ukształtowana przez życia miliardów ludzi, na przestrzeni tysięcy lat, przez myślicieli i filozofów większych od wszystkich tu obecnych. Czy można to wszystko porzucić i liczyć na to, że "wymyśli się" coś równie dobrego w kilka lat?'
+//         '<br>'
+//         '<br>Myśl, że można utrzymać świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, ale pozbyć się fundamentów, na których powstały wydaje się być <b>co najmniej wielką nieodpowiedzialnością</b>.'
+//         '<br>'
+//         '<br>Można próbować wybiegów w stylu: "wystarczy być dobrym człowiekiem", "idź za głosem serca" albo zostawić sferę aksjomatów niewierzących harcerzy samym sobie i tak oto pozbyć się problemu. Na razie taki model w ZHP funkcjonuje, ale jest to wyraz bezradności, a nie poważna odpowiedź na to pytanie. Chyba nikt nie ma odpowiedzi na to pytanie.'
+//         '</i>'
+//         '</p>'
+//         '</li>'
+//
+//         '</ol>'
+//         '</blockquote>'
+//
+//         '<p style="text-align:justify;">'
+//         'Prowadzący powinien pozwolić, by fundamentalny <b>brak odpowiedzi</b> na pytanie „co dla ateistów" wybrzmiał wśród uczestników. <b>Odpowiedź nie padnie na warsztatach</b> – nie dlatego, że ktoś chce ją ukryć, ale dlatego, że próba potraktowania tego pytania poważnie prowadzi do karkołomnych konsekwencji – niezależnie od poglądów obecnych tu osób.'
+//         '</p>'
+// );
 
-        '<blockquote>'
-        '<p style="text-align:justify;">'
-        'Dlaczego w naszej kulturze akurat te, a nie inne wartości są tak powszechne?'
-        '</p>'
-        '</blockquote>'
-
-        '<ol>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        '<b>Scenariusz 1.</b> Przebaczenie i odpuszczenie win.'
-        '</p>'
-
-        '<blockquote>'
-        '<p style="text-align:justify;">'
-        'W wielu kulturach przebaczenie jest uważane za zachętę do bycia wykorzystywanym. Nietzsche widział w nim wyraz słabości i element moralności niewolników. W tradycyjnej kulturze japońskiej po popełnieniu poważnej winy nie było drogi jej odpuszczenia – jedynym honorowym wyjściem było rytualne samobójstwo: seppuku. Dlaczego więc w kulturze łacińskiej jest inaczej? Dlaczego w naszych systemach prawnych po odbyciu kary wina zostaje zmazana i człowiek jest wolny? Dlaczego za kradzież nie skazuje się ludzi dożywotnio, żeby skutecznie ich od niej zniechęcić?'
-        '</p>'
-        '</blockquote>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        '<b>Scenariusz 2.</b> Życie w prawdzie.'
-        '</p>'
-
-        '<blockquote>'
-        '<p style="text-align:justify;">'
-        'W kulturach wschodnich, gdzie najważniejsza jest harmonia społeczna, należy kłamać, jeśli prowadzi to do uniknięcia konfliktu. W części kultur afrykańskich kłamstwo nie jest złem, jeśli służy uniknięciu wstydu. Dlaczego więc akurat my tak się uparliśmy, by nagannie traktować świadome mówienie nieprawdy?'
-        '</p>'
-        '</blockquote>'
-
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        '<b>Scenariusz 3.</b> Niezbywalna godność każdego człowieka'
-        '</p>'
-
-        '<blockquote>'
-        '<p style="text-align:justify;">'
-        'W systemach konfucjańskich liczy się najpierw wspólnota i kolektyw, dopiero potem jednostka. Niektórzy wyznawcy hinduizmu powstrzymają innych od udzielenia pomocy cierpiącemu – jeśli ktoś cierpi, to pokutuje za grzechy popełnione w poprzednim życiu. A skąd pogląd, że wykształcony profesor z zasługami dla narodu ma takie same prawa jak półinteligentny osiedlowy cwaniaczek? Skąd pomysł, że prawo do życia i godnego traktowania przysługuje każdemu, niezależnie od wieku, pochodzenia czy wyznania?'
-        '</p>'
-        '</blockquote>'
-
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        '<b>Scenariusz 4.</b> Stawianie wyżej dobra jednostki nad kolektywem'
-        '</p>'
-
-        '<blockquote>'
-        '<p style="text-align:justify;">'
-        'W kulturze konfucjańskiej najpierw liczy się zbiorowość, trwałość systemu państwowego – a dopiero potem dobro jednostki. W Chinach niedopuszczalne jest publiczne okazywanie sporów, ponieważ osłabia to wspólnotę. W kulturze japońskiej należy poświęcić plany prywatne, jeśli kolidują z wydarzeniem firmy. Skąd więc u nas „oczywiste" przekonanie, że rodzinie, której dom stoi na drodze nowej autostrady, należy się odszkodowanie? Skąd przekonanie, że nie można zmusić człowieka do pracy, jeśli nie chce? Dlaczego chronimy tak zaciekle wolności słowa, nawet gdy osłabia ona spójność społeczną?'
-        '</p>'
-        '</blockquote>'
-        '</li>'
-
-        '</ol>'
-);
-
-KonspektStep _step_duchowosc_w_zhp_aksjomaty_odpowiedzi = KonspektStep(
-    title: 'Duchowość w ZHP - aksjomaty - odpowiedzi',
-    duration: Duration(minutes: 10),
-    activeForm: KonspektStepActiveForm.static,
-    materials: [
-      material_zal_neutralnosc_duchowa_przyklady
-    ],
-    aims: [
-      'Uświadomienie uczestnikom, że harcerskie wartości, oparte na “oczywistych” wartościach naszej cywilizacji, w sposób ścisły wypływają z wiary chrześcijańskiej'
-    ],
-    content: '<p style="text-align:justify;">'
-        'Gdy uczestnicy dostrzegą, jak nieoczywiste – a z perspektywy reszty świata wręcz dziwne – są wartości łacińskie, prowadzący naprowadza ich na powód, dla którego akurat te wartości stały się u nas standardem:'
-        '</p>'
-
-        '<blockquote>'
-        '<p style="text-align:justify;">'
-        'Nie byłoby niezbywalnej godności każdego człowieka, ani równości wobec prawa, ani humanitaryzmu, ani oświecenia, ani Powszechnej Deklaracji Praw Człowieka bez wiary, że skoro sam Bóg dobrowolnie wydał się na śmierć dla zbawienia najpodlejszego nawet człowieka, to że w każdym człowieku jest coś iście boskiego, nieważne jak bardzo jest podły, bezużyteczny, inny, czy denerwujący. Koncept godności niektórych ludzi funkcjonował w wielu kręgach już wcześniej - ale godność <b>każdego</b> człowieka jest czymś zupełnie innym.'
-        '<br>'
-        '<br>Prawdopodobnie nie byłoby też uniwersytetów bez zgromadzeń i klasztorów zakonnych, ani nie byłoby nauki bez przekonania, że Bóg stworzył dobry, uporządkowany świat, że Bóg przekracza naturę i że można badać ją bez bluźnierstwa, oraz bez ewangelicznej wiary w wartość prawdy pomimo pokusy fałszowania rzeczywistości dla własnych korzyści.'
-        '</p>'
-        '</blockquote>'
-
-        '<p style="text-align:justify;">'
-        'Prowadzący zostawia uczestnikom przestrzeń, by weszli z nim na ten temat w dyskusję.'
-        '</p>'
-
-);
-
-KonspektStep _step_duchowosc_w_zhp_ateisci = KonspektStep(
-    title: 'Duchowość w ZHP - co dla ateistów?',
-    duration: Duration(minutes: 10),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uczestnikom uwagę na pewien problem (chyba, że któryś z uczestników sam zwróci na niego uwagę):'
-        '</p>'
-
-        '<blockquote>'
-        '<p style="text-align:justify;">'
-        'Co, jeśli kogoś nie interesuje chrześcijaństwo?'
-        '</p>'
-        '</blockquote>'
-
-        '<p style="text-align:justify;">'
-        'Prowadzący otwiera tym samym krótką dyskusję. Warto rozpatrzyć tutaj dwa osobne przypadki:'
-        '</p>'
-
-        '<blockquote>'
-        '<ol>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        '<i>'
-        '<u>Co, jeśli ktoś nie jest zainteresowany egzystencjalnymi pytaniami? Co jeśli ktoś uważa, że należy być dobrym "bo tak"?</u>'
-        '<br>'
-        '<br>Harcerstwo stawia za cel wychowanie osób świadomych swoich wartości, potrafiących je uzasadnić i ich bronić. Faktycznie jednak należy liczyć się z tym, że niektórzy zwyczajnie nie będą sobie zadawali trudu refleksji nad swoim życiem i duchem. Część osób może konformistycznie, na bieżąco dopasowywać się do poglądów otoczenia, mieć przez to kolegów i czuć się z tym dobrze, jednak <b>jest to wyraz niedojrzałości</b>.'
-        '<br>'
-        '<br>Ludzie mogą być też motywowani różnymi meta-narracjami. Niektóre mogą być absurdalne, czy trywialne, np.: "Musimy dzielić się bogactwem, bo był kiedyś kolonializm". Nie zmienia to faktu, że dla kogoś może być to odpowiedzią na wszystkie życiowe rozterki. Nie należy jednak sądzić, że w ogólności ludzie pójdą za każdą meta-narracją. Nie wszystkie meta-narracje kończą się dla człowieka dobrze. Nie bez przyczyny za niektórymi meta-narracjami poszły miliardy ludzi, a inne wygasły po dwóch pokoleniach.'
-        '</i>'
-        '</p>'
-        '</li>'
-
-        '<li>'
-        '<p style="text-align:justify;">'
-        '<i>'
-        '<u>Jakie aksjomaty powinny być podstawą duchowości ateistów w ZHP?</u>'
-        '<br>'
-        '<br>Nie wiem. I prawdopodobnie nikt nie wie. Cała nasza zachodnia cywilizacja została zbudowana na aksjomatach chrześcijańskich. Została ukształtowana przez życia miliardów ludzi, na przestrzeni tysięcy lat, przez myślicieli i filozofów większych od wszystkich tu obecnych. Czy można to wszystko porzucić i liczyć na to, że "wymyśli się" coś równie dobrego w kilka lat?'
-        '<br>'
-        '<br>Myśl, że można utrzymać świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, ale pozbyć się fundamentów, na których powstały wydaje się być <b>co najmniej wielką nieodpowiedzialnością</b>.'
-        '<br>'
-        '<br>Można próbować wybiegów w stylu: "wystarczy być dobrym człowiekiem", "idź za głosem serca" albo zostawić sferę aksjomatów niewierzących harcerzy samym sobie i tak oto pozbyć się problemu. Na razie taki model w ZHP funkcjonuje, ale jest to wyraz bezradności, a nie poważna odpowiedź na to pytanie. Chyba nikt nie ma odpowiedzi na to pytanie.'
-        '</i>'
-        '</p>'
-        '</li>'
-
-        '</ol>'
-        '</blockquote>'
-
-        '<p style="text-align:justify;">'
-        'Prowadzący powinien pozwolić, by fundamentalny <b>brak odpowiedzi</b> na pytanie „co dla ateistów" wybrzmiał wśród uczestników. <b>Odpowiedź nie padnie na warsztatach</b> – nie dlatego, że ktoś chce ją ukryć, ale dlatego, że próba potraktowania tego pytania poważnie prowadzi do karkołomnych konsekwencji – niezależnie od poglądów obecnych tu osób.'
-        '</p>'
-);
-
-KonspektStep _step_duchowosc_w_zhp_duchowosc_powszechna = KonspektStep(
-    title: 'Duchowość w ZHP - duchowość powszechna',
-    duration: Duration(minutes: 10),
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący porusza następujące zagadnienie:'
-        '</p>'
-
-        '<blockquote>'
-        '<p style="text-align:justify;">'
-        'Omówienia wymaga jeszcze jeden aspekt: dlaczego nie można byłoby stworzyć duchowości opartej o inne aksjomaty, ale z których wynikają te same wartości? Przecież duchowość cywilizacji łacińskiej, z której wszyscy wyrastamy <b>jakoś powstała</b>, prawda? Nie można skopiować tego procesu?'
-        '</p>'
-        '</blockquote>'
-
-        '<p style="text-align:justify;">'
-        'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Opisuje także zjawisko dualizmu aktualności duchowości powszechnych - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
-        '<br>'
-        '<br>Prowadzący może zobrazować dylemat tego <i>"jak ściśle trzymać się tradycji"</i> w sposób następujący:'
-        '</p>'
-
-        '<blockquote>'
-        '<p style="text-align:justify;">'
-        'Kultura i tradycja są mądrością miliona lat żyć, pamięcią miliona umysłów, wiedzą o skutkach miliona głupich prób – wszystkie dostępne dla człowieka żyjącego raptem kilkadziesiąt lat.'
-        '<br>'
-        '<br>Gdybyśmy zanegowali na raz wszystkie tradycje, w ciągu jednego pokolenia wrócilibyśmy do jaskiń. Ale gdybyśmy nigdy nie podważyli żadnej tradycji, nigdy z tych jaskiń byśmy nie wyszli.'
-        '<br>'
-        '<br>Niektóre duchowości wyraźnie skuteczniej prowadzą do szczęścia i rozwoju człowieka oraz jego otoczenia od pozostałych. Niektóre duchowości czynią to w sposób stabilny od tysięcy lat, inne działają dobrze przez pół pokolenia, po czym prowadzą do katastrofy - czego najlepszym dowodem są systemy totalitarne XX wieku.'
-        '</p>'
-        '</blockquote>'
-);
+// KonspektStep _step_duchowosc_w_zhp_duchowosc_powszechna = KonspektStep(
+//     title: 'Duchowość w ZHP - duchowość powszechna',
+//     duration: Duration(minutes: 10),
+//     activeForm: KonspektStepActiveForm.static,
+//     content: '<p style="text-align:justify;">'
+//         'Prowadzący porusza następujące zagadnienie:'
+//         '</p>'
+//
+//         '<blockquote>'
+//         '<p style="text-align:justify;">'
+//         'Omówienia wymaga jeszcze jeden aspekt: dlaczego nie można byłoby stworzyć duchowości opartej o inne aksjomaty, ale z których wynikają te same wartości? Przecież duchowość cywilizacji łacińskiej, z której wszyscy wyrastamy <b>jakoś powstała</b>, prawda? Nie można skopiować tego procesu?'
+//         '</p>'
+//         '</blockquote>'
+//
+//         '<p style="text-align:justify;">'
+//         'Prowadzący na podstawie poradnika $attach_html_poradnik_o_strukturze_duchowosci opisuje zjawisko <b>duchowości powszechnej</b>, związanej z nią <b>sztafetowością</b> i <b>selekcją naturalną</b>. Opisuje także zjawisko dualizmu aktualności duchowości powszechnych - z jednej strony jej wiecznego niedoczasu względem rzeczywistości, z drugiej jej funkcji tworzenia norm i przekazywania sprawdzonych rozwiązań nowym pokoleniom.'
+//         '<br>'
+//         '<br>Prowadzący może zobrazować dylemat tego <i>"jak ściśle trzymać się tradycji"</i> w sposób następujący:'
+//         '</p>'
+//
+//         '<blockquote>'
+//         '<p style="text-align:justify;">'
+//         'Kultura i tradycja są mądrością miliona lat żyć, pamięcią miliona umysłów, wiedzą o skutkach miliona głupich prób – wszystkie dostępne dla człowieka żyjącego raptem kilkadziesiąt lat.'
+//         '<br>'
+//         '<br>Gdybyśmy zanegowali na raz wszystkie tradycje, w ciągu jednego pokolenia wrócilibyśmy do jaskiń. Ale gdybyśmy nigdy nie podważyli żadnej tradycji, nigdy z tych jaskiń byśmy nie wyszli.'
+//         '<br>'
+//         '<br>Niektóre duchowości wyraźnie skuteczniej prowadzą do szczęścia i rozwoju człowieka oraz jego otoczenia od pozostałych. Niektóre duchowości czynią to w sposób stabilny od tysięcy lat, inne działają dobrze przez pół pokolenia, po czym prowadzą do katastrofy - czego najlepszym dowodem są systemy totalitarne XX wieku.'
+//         '</p>'
+//         '</blockquote>'
+// );
 
 KonspektStep _step_duchowosc_w_zhp_religia = KonspektStep(
     title: 'Duchowość w ZHP - religia',
@@ -2377,35 +2328,35 @@ KonspektStep _step_duchowosc_w_zhp_religia = KonspektStep(
         '</ol>'
 );
 
-KonspektStep _step_duchowosc_w_zhp_podsumowanie = KonspektStep(
-    title: 'Duchowość w ZHP - podsumowanie',
-    duration: Duration(minutes: 5),
-    required: false,
-    activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        '<b>Podsumowanie (dla przewodników)</b>'
-        '</p>'
-
-        '<ul>'
-        '<li><p style="text-align:justify;">Nie istnieje neutralne wychowanie.</p></li>'
-        '<li><p style="text-align:justify;">Jeśli harcerstwo chce być skuteczne wychowawczo, nie może abdykować z rozwoju duchowego na poziomie aksjomatu.</p></li>'
-        '<li><p style="text-align:justify;">Harcerskie wychowanie jest fundamentalnie chrześcijańskie, nawet jeśli jego członkowie są innego wyznania.</p></li>'
-        '<li><p style="text-align:justify;">Nie należy zbyt łatwo pomijać elementów tradycyjnej duchowości, których jako kadra nie rozumiemy. Zazwyczaj stoją za nimi dziesiątki wieków mądrości.</p></li>'
-        '<li><p style="text-align:justify;">Harcerstwo powinno mieć wysokie standardy. Nie po to, by prowadzić selekcję osób mogących harcerzami zostać, ale po to, by wychować ludzi w szacunku do wartości, postaw, a często również wiary, która dała nam świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, itd.</p></li>'
-        '</ul>'
-
-        '<p style="text-align:justify;">'
-        '<b>Podsumowanie dodatkowe (dla podharcmistrzów)</b>'
-        '</p>'
-
-        '<ul>'
-        '<li>'
-        '<p style="text-align:justify;">'
-        'Mamy w ZHP niechlubną tradycję zmieniania harcerskich zasad i ideałów, gdy okazuje się, że postawy harcerzy się z nimi nie spotykają. A przecież to harcerstwo powinno zmieniać ludzi, a nie się do nich dostosowywać.'
-        '</p>'
-        '</li>'
-        '</ul>'
-);
+// KonspektStep _step_duchowosc_w_zhp_podsumowanie = KonspektStep(
+//     title: 'Duchowość w ZHP - podsumowanie',
+//     duration: Duration(minutes: 5),
+//     required: false,
+//     activeForm: KonspektStepActiveForm.static,
+//     content: '<p style="text-align:justify;">'
+//         '<b>Podsumowanie (dla przewodników)</b>'
+//         '</p>'
+//
+//         '<ul>'
+//         '<li><p style="text-align:justify;">Nie istnieje neutralne wychowanie.</p></li>'
+//         '<li><p style="text-align:justify;">Jeśli harcerstwo chce być skuteczne wychowawczo, nie może abdykować z rozwoju duchowego na poziomie aksjomatu.</p></li>'
+//         '<li><p style="text-align:justify;">Harcerskie wychowanie jest fundamentalnie chrześcijańskie, nawet jeśli jego członkowie są innego wyznania.</p></li>'
+//         '<li><p style="text-align:justify;">Nie należy zbyt łatwo pomijać elementów tradycyjnej duchowości, których jako kadra nie rozumiemy. Zazwyczaj stoją za nimi dziesiątki wieków mądrości.</p></li>'
+//         '<li><p style="text-align:justify;">Harcerstwo powinno mieć wysokie standardy. Nie po to, by prowadzić selekcję osób mogących harcerzami zostać, ale po to, by wychować ludzi w szacunku do wartości, postaw, a często również wiary, która dała nam świat merytokracji, równości, wolności, godności ludzkiej, przebaczenia, uznania własnej niedoskonałości, powszechnej sprawiedliwości, nauki, itd.</p></li>'
+//         '</ul>'
+//
+//         '<p style="text-align:justify;">'
+//         '<b>Podsumowanie dodatkowe (dla podharcmistrzów)</b>'
+//         '</p>'
+//
+//         '<ul>'
+//         '<li>'
+//         '<p style="text-align:justify;">'
+//         'Mamy w ZHP niechlubną tradycję zmieniania harcerskich zasad i ideałów, gdy okazuje się, że postawy harcerzy się z nimi nie spotykają. A przecież to harcerstwo powinno zmieniać ludzi, a nie się do nich dostosowywać.'
+//         '</p>'
+//         '</li>'
+//         '</ul>'
+// );
 
 KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
     title: 'Duchowość w ZHP',
@@ -2414,17 +2365,17 @@ KonspektStepGroup step_group_duchowosc_w_zhp = KonspektStepGroup(
 
       _step_duchowosc_w_zhp_dobrowolnosc,
       
-      _step_duchowosc_w_zhp_aksjomaty_poszukiwanie_zrodla,
+      // _step_duchowosc_w_zhp_aksjomaty_poszukiwanie_zrodla,
 
-      _step_duchowosc_w_zhp_aksjomaty_odpowiedzi,
+      // _step_duchowosc_w_zhp_aksjomaty_odpowiedzi,
 
-      _step_duchowosc_w_zhp_ateisci,
+      // _step_duchowosc_w_zhp_ateisci,
 
-      _step_duchowosc_w_zhp_duchowosc_powszechna,
+      // _step_duchowosc_w_zhp_duchowosc_powszechna,
 
       _step_duchowosc_w_zhp_religia,
 
-      _step_duchowosc_w_zhp_podsumowanie,
+      // _step_duchowosc_w_zhp_podsumowanie,
     ]
 );
 

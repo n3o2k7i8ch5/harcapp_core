@@ -37,7 +37,6 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
 
       attach_aksjomaty_wartosci_przyporzadkowanie,
 
-      attach_neutralnosc_duchowa_przyklady,
       attach_cel_wychowania_duchowego_zhp_statut,
       attach_cel_wychowania_duchowego_zhp_uchwala,
       attach_kratka_minimow_rozwoju_duchowego,
@@ -75,11 +74,6 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       material_zal_karty_zdolnosci_integracji_duchowosci,
 
       material_zal_aksjomaty_wartosci_przyporzadkowanie,
-
-      KonspektMaterial(
-        name: 'Wydrukowany załącznik “$attach_title_neutralnosc_duchowa_przyklady”',
-        attachmentName: attach_name_neutralnosc_duchowa_przyklady,
-      ),
 
       KonspektMaterial(
         name: 'Wydrukowany załącznik “$attach_title_cel_wychowania_duchowego_zhp_statut”',
@@ -198,8 +192,6 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
               '<br><i>Skoro wychowanie to kształtowanie zachowań, postaw, poglądów, wartości... to czyż wychowanie nie jest po prostu kształtowaniem duchowości?</i>'
               '</p>'
       ),
-
-      ...step_group_neutralnosc_duchowa.steps,
 
       ...step_group_duchowosc_w_zhp.steps,
 

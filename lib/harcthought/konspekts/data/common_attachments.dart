@@ -5,15 +5,15 @@ import 'package:harcapp_core/harcthought/poradnik/data.dart';
 
 // Source: CZYNNIKI I MECHANIZMY KSZTAŁTOWANIA DUCHOWOŚCI
 
-const String attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = '<a href="$attach_name_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci@attachment">$attach_title_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci</a>';
-const String attach_name_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = 'poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci';
-const String attach_title_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = 'Poradnik "$poradnik_title_czynniki_i_mechanizmy_ksztaltowania_duchowosci"';
-KonspektAttachment attach_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = KonspektAttachment(
-  name: attach_name_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-  title: attach_title_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+const String attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = '<a href="$attach_name_poradnik_mechanizmy_ksztaltowania_duchowosci@attachment">$attach_title_poradnik_mechanizmy_ksztaltowania_duchowosci</a>';
+const String attach_name_poradnik_mechanizmy_ksztaltowania_duchowosci = 'poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci';
+const String attach_title_poradnik_mechanizmy_ksztaltowania_duchowosci = 'Poradnik "$poradnik_title_mechanizmy_ksztaltowania_duchowosci"';
+KonspektAttachment attach_poradnik_mechanizmy_ksztaltowania_duchowosci = KonspektAttachment(
+  name: attach_name_poradnik_mechanizmy_ksztaltowania_duchowosci,
+  title: attach_title_poradnik_mechanizmy_ksztaltowania_duchowosci,
   assets: {
-    FileFormat.urlPdf: urlToPoradnikFile(poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci, "$poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci.pdf"),
-    FileFormat.urlDocx: urlToPoradnikFile(poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci, "$poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci.docx"),
+    FileFormat.urlPdf: urlToPoradnikFile(poradnik_name_mechanizmy_ksztaltowania_duchowosci, "$poradnik_name_mechanizmy_ksztaltowania_duchowosci.pdf"),
+    FileFormat.urlDocx: urlToPoradnikFile(poradnik_name_mechanizmy_ksztaltowania_duchowosci, "$poradnik_name_mechanizmy_ksztaltowania_duchowosci.docx"),
   },
 );
 
@@ -30,7 +30,7 @@ const KonspektAttachment attach_scenariusze_czynnikow_duchowosci = KonspektAttac
 );
 
 List<KonspektAttachment> attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
-  attach_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  attach_poradnik_mechanizmy_ksztaltowania_duchowosci,
   attach_scenariusze_czynnikow_duchowosci,
 ];
 
@@ -124,7 +124,31 @@ KonspektAttachment attach_aksjomaty_wartosci_przyporzadkowanie = KonspektAttachm
   },
 );
 
-// Meta-narracja
+// Narracja i Meta-narracja
+
+const String attach_html_narracja_opis = '<a href="$attach_name_narracja_opis@attachment">$attach_title_narracja_opis</a>';
+const String attach_name_narracja_opis = 'narracja_opis';
+const String attach_title_narracja_opis = 'Narracja - opis';
+KonspektAttachment attach_narracja_opis = KonspektAttachment(
+  name: attach_name_narracja_opis,
+  title: attach_title_narracja_opis,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_narracja_opis.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_narracja_opis.docx',
+  },
+);
+
+const String attach_html_narracja_przyklady = '<a href="$attach_name_narracja_przyklady@attachment">$attach_title_narracja_przyklady</a>';
+const String attach_name_narracja_przyklady = 'narracja_przyklady';
+const String attach_title_narracja_przyklady = 'Narracja - przykłady';
+KonspektAttachment attach_narracja_przyklady = KonspektAttachment(
+  name: attach_name_narracja_przyklady,
+  title: attach_title_narracja_przyklady,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_narracja_przyklady.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_narracja_przyklady.docx',
+  },
+);
 
 const String attach_html_meta_narracja_opis = '<a href="$attach_name_meta_narracja_opis@attachment">$attach_title_meta_narracja_opis</a>';
 const String attach_name_meta_narracja_opis = 'meta_narracja_opis';
@@ -140,7 +164,7 @@ KonspektAttachment attach_meta_narracja_opis = KonspektAttachment(
 
 const String attach_html_meta_narracja_przyklady = '<a href="$attach_name_meta_narracja_przyklady@attachment">$attach_title_meta_narracja_przyklady</a>';
 const String attach_name_meta_narracja_przyklady = 'meta_narracja_przyklady';
-const String attach_title_meta_narracja_przyklady = 'Meta-narracja przykłady';
+const String attach_title_meta_narracja_przyklady = 'Meta-narracja - przykłady';
 KonspektAttachment attach_meta_narracja_przyklady = KonspektAttachment(
   name: attach_name_meta_narracja_przyklady,
   title: attach_title_meta_narracja_przyklady,
@@ -150,27 +174,15 @@ KonspektAttachment attach_meta_narracja_przyklady = KonspektAttachment(
   },
 );
 
-const String attach_html_meta_narracja_scenka = '<a href="$attach_name_meta_narracja_scenka@attachment">$attach_title_meta_narracja_scenka</a>';
-const String attach_name_meta_narracja_scenka = 'meta_narracja_scenka';
-const String attach_title_meta_narracja_scenka = 'Meta-narracja scenka';
-KonspektAttachment attach_meta_narracja_scenka = KonspektAttachment(
-  name: attach_name_meta_narracja_scenka,
-  title: attach_title_meta_narracja_scenka,
+const String attach_html_scenka_wychowawcza = '<a href="$attach_name_scenka_wychowawcza@attachment">$attach_title_scenka_wychowawcza</a>';
+const String attach_name_scenka_wychowawcza = 'scenka_wychowawcza';
+const String attach_title_scenka_wychowawcza = 'Scenka wychowawcza';
+KonspektAttachment attach_scenka_wychowawcza = KonspektAttachment(
+  name: attach_name_scenka_wychowawcza,
+  title: attach_title_scenka_wychowawcza,
   assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_meta_narracja_scenka.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_meta_narracja_scenka.docx',
-  },
-);
-
-const String attach_html_neutralnosc_duchowa_przyklady = '<a href="$attach_name_neutralnosc_duchowa_przyklady@attachment">$attach_title_neutralnosc_duchowa_przyklady</a>';
-const String attach_name_neutralnosc_duchowa_przyklady = 'neutralnosc_duchowa_przyklady';
-const String attach_title_neutralnosc_duchowa_przyklady = 'Neutralność duchowa - przykłady';
-const KonspektAttachment attach_neutralnosc_duchowa_przyklady = KonspektAttachment(
-  name: attach_name_neutralnosc_duchowa_przyklady,
-  title: attach_title_neutralnosc_duchowa_przyklady,
-  assets: {
-    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_neutralnosc_duchowa_przyklady.pdf',
-    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_neutralnosc_duchowa_przyklady.docx',
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_scenka_wychowawcza.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_scenka_wychowawcza.docx',
   },
 );
 

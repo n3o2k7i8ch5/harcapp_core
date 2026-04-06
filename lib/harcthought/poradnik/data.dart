@@ -4,11 +4,11 @@ import 'package:harcapp_core/harcthought/common/file_format.dart';
 
 import 'poradnik.dart';
 
-const String poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci = "czynniki_i_mechanizmy_ksztaltowania_duchowosci";
-const String poradnik_title_czynniki_i_mechanizmy_ksztaltowania_duchowosci = "Czynniki i mechanizmy kształtowania duchowości";
-Poradnik poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Poradnik(
-  name: poradnik_name_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
-  title: poradnik_title_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+const String poradnik_name_mechanizmy_ksztaltowania_duchowosci = "czynniki_i_mechanizmy_ksztaltowania_duchowosci";
+const String poradnik_title_mechanizmy_ksztaltowania_duchowosci = "Mechanizmy kształtowania duchowości";
+Poradnik poradnik_mechanizmy_ksztaltowania_duchowosci = Poradnik(
+  name: poradnik_name_mechanizmy_ksztaltowania_duchowosci,
+  title: poradnik_title_mechanizmy_ksztaltowania_duchowosci,
   pageCount: 10,
   description: 'Poradnik dla pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące zagadnienia:'
       '\n'
@@ -25,7 +25,7 @@ Poradnik poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Poradnik(
     children: [
 
       Text(
-        'CZYNNIKI I MECHANIZMY\nKSZTAŁTOWANIA\nDUCHOWOŚCI',
+        'MECHANIZMY\nKSZTAŁTOWANIA\nDUCHOWOŚCI',
         style: AppTextStyle(
             color: poradnik.titleColor??Colors.black,
             fontSize: height*Poradnik.mainTitleHeightFactor,
@@ -437,7 +437,7 @@ Poradnik poradnik_wspolzawodnictwo = Poradnik(
 List<Poradnik> allPoradniks = [
   poradnik_wychowanie_duchowe,
   poradnik_o_strukturze_duchowosci,
-  poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  poradnik_mechanizmy_ksztaltowania_duchowosci,
   poradnik_dwie_roty_dwoch_przyrzeczen_harcerskich,
   poradnik_przykladowa_strategia_rozwoju_duchowego,
   poradnik_niedziela_na_obozie,
