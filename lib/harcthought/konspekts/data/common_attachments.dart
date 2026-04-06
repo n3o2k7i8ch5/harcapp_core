@@ -29,9 +29,22 @@ const KonspektAttachment attach_scenariusze_mechanizmow_ksztaltowania_duchowosci
   },
 );
 
+const String attach_html_plansza_mechanizmow_ksztaltowania_duchowosci = '<a href="$attach_name_plansza_mechanizmow_ksztaltowania_duchowosci@attachment">$attach_title_plansza_mechanizmow_ksztaltowania_duchowosci</a>';
+const String attach_name_plansza_mechanizmow_ksztaltowania_duchowosci = 'plansza_mechanizmow_ksztaltowania_duchowosci';
+const String attach_title_plansza_mechanizmow_ksztaltowania_duchowosci = 'Plansza mechanizmów kształtowania duchowości';
+const KonspektAttachment attach_plansza_mechanizmow_ksztaltowania_duchowosci = KonspektAttachment(
+  name: attach_name_plansza_mechanizmow_ksztaltowania_duchowosci,
+  title: attach_title_plansza_mechanizmow_ksztaltowania_duchowosci,
+  assets: {
+    FileFormat.pdf: 'common/mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_plansza_mechanizmow_ksztaltowania_duchowosci.pdf',
+    FileFormat.docx: 'common/mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_plansza_mechanizmow_ksztaltowania_duchowosci.docx',
+  },
+);
+
 List<KonspektAttachment> attach_kszt_mechanizmy_ksztaltowania_duchowosci = [
   attach_poradnik_mechanizmy_ksztaltowania_duchowosci,
   attach_scenariusze_mechanizmow_ksztaltowania_duchowosci,
+  attach_plansza_mechanizmow_ksztaltowania_duchowosci,
 ];
 
 // Source: WARSZTATY WYCHOWANIA DUCHOWEGO

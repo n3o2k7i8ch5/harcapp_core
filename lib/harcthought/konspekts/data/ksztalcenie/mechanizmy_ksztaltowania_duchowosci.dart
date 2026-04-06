@@ -30,9 +30,16 @@ KonspektMaterial material_nagroda = KonspektMaterial(
   amount: 1
 );
 
+KonspektMaterial material_zal_plansza_mechanizmow_ksztaltowania_duchowosci = KonspektMaterial(
+  name: 'Wydrukowany załącznik "$attach_title_plansza_mechanizmow_ksztaltowania_duchowosci"',
+  attachmentName: attach_name_plansza_mechanizmow_ksztaltowania_duchowosci,
+  amount: 1
+);
+
 List<KonspektMaterial> materials_kszt_mechanizmy_ksztaltowania_duchowosci = [
   material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
   material_zal_scenariusze_czynnikow_duchowosci,
+  material_zal_plansza_mechanizmow_ksztaltowania_duchowosci,
   material_zetony,
   material_nagroda,
 ];
@@ -58,12 +65,25 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
       title: 'Zasady postaw na milion',
       duration: Duration(minutes: 5),
       activeForm: KonspektStepActiveForm.static,
+      materials: [
+        material_zetony,
+        material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
+        material_zal_plansza_mechanizmow_ksztaltowania_duchowosci
+      ],
       content: '<p style="text-align:justify;">'
           'Prowadzący wyjaśnia uczestnikom zasady gry, ktorą za chwilę rozegrają:'
           '<br>'
-          '<br>Uczestnicy zostaną podzieleni na grupy. Każda grupa otrzyma na początku 5 żetonów i karty z możliwymi do obstawienia odpowiedziami dotyczącymi czynników duchowości.'
-          '<br>'
-          '<br>Co turę prowadzący będzie czytał krótką historię. Gdy skończy, każda grupa będzie miała możliwość zastanowić się, które czynniki rozwoju duchowego są w niej opisane - może być ich więcej niż jeden.'
+          '<br>Uczestnicy zostaną podzieleni na grupy. Każda grupa otrzyma na początku:'
+          '</p>'
+
+          '<ul>'
+          '<li><p>5 żetonów</p></li>'
+          '<li><p style="text-align:justify;">wydrukowany załącznik $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci z opisami poszczególnych mechanizmów kształtowania duchowości,</p></li>'
+          '<li><p style="text-align:justify;">wydrukowany załącznik $attach_html_plansza_mechanizmow_ksztaltowania_duchowosci z możliwymi do obstawienia odpowiedziami dotyczącymi czynników duchowości.</p></li>'
+          '</ul>'
+
+          '<p style="text-align:justify;">'
+          'Co turę prowadzący będzie czytał krótką historię. Gdy skończy, każda grupa będzie miała możliwość zastanowić się, które czynniki rozwoju duchowego są w niej opisane - może być ich więcej niż jeden.'
           '<br>'
           '<br>Gdy grupy się zastanowią, mogą na każdej z kart położyć od 0 do 3 żetonów, obstawiając prawidłowe odpowiedzi. Gdy żetony zostaną rozdysponowane na kartach, grupy pokazują sobie nazwajem obstawione karty i prowadzący odczytuje odpowiedzi. Dobrze obstawione żetony są podwajane, źle obstawione są zabierane.'
           '<br>'
@@ -84,6 +104,9 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
       title: 'Zapoznanie się z poradnikami',
       duration: Duration(minutes: 10),
       activeForm: KonspektStepActiveForm.static,
+      materials: [
+        material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
+      ],
       content: '<style="text-align:justify;">'
           'Prowadzący wręcza każdej z grup po jednym egzemplarzu poradnika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci. Ważne, aby dało się go rozłożyć na osobne kartki - na tych kartkach każda grupa będzie kładła swoje żetony.'
           '<br>'
@@ -98,8 +121,9 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
       duration: Duration(minutes: 40),
       activeForm: KonspektStepActiveForm.active,
       materials: [
-        material_zal_scenariusze_czynnikow_duchowosci,
         material_zetony,
+        material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
+        material_zal_plansza_mechanizmow_ksztaltowania_duchowosci
       ],
       content: '<p style="text-align:justify;">'
           'Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci. Gdy skończy czytać, zadaje pytanie punktowane o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
