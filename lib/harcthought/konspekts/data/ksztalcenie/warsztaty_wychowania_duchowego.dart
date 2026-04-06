@@ -468,7 +468,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 content: '<p style="text-align:justify;">'
                     'Prowadzący prosi każdą z grup, by w oparciu o przynajmniej <b>trzy czynniki duchowości</b> zaplanowała konkretne działania strategiczne, które przybliżą drużynę do wybranego celu.'
                     '<br>'
-                    '<br>Wszystkie czynniki duchowości powinny być wyłożone w widocznym miejscu na kartkach z załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci.'
+                    '<br>Wszystkie czynniki duchowości powinny być wyłożone w widocznym miejscu na kartkach z załącznika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci.'
                     '<br>'
                     '<br>Nie chodzi tu o wymyślanie zajęć dla harcerzy (zbiórek, gier, ognisk), lecz o decyzje dotyczące otoczenia i warunków, w jakich drużyna funkcjonuje, np.: <i>przekonanie rodziców zuchów, aby do 14 roku życia miały one na wyłączność dostęp tylko do prostych telefonów bez funkcji dotykowych, aby zwiększyć częstotliwość ich interakcji z niecyfrowym światem, który stawia większe wyzwania.</i>'
                     '<br>'

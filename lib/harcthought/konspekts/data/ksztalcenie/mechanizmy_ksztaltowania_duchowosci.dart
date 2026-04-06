@@ -15,8 +15,8 @@ KonspektMaterial material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci = Kon
 );
 
 KonspektMaterial material_zal_scenariusze_czynnikow_duchowosci = KonspektMaterial(
-  name: 'Dostępny załącznik “$attach_title_scenariusze_czynnikow_duchowosci”',
-  attachmentName: attach_name_scenariusze_czynnikow_duchowosci,
+  name: 'Dostępny załącznik “$attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci”',
+  attachmentName: attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci,
   amount: 1
 );
 
@@ -48,7 +48,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
         material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
       ],
       content: '<p style="text-align:justify;">'
-          'Prowadzący, na podstawie załącznika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci wyjaśnia uczestnikom czym są czynniki duchowości.'
+          'Prowadzący, na podstawie załącznika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci wyjaśnia uczestnikom czym są mechanizmy kształtowania duchowości.'
           '<br>'
           '<br>Kwestie te są opisane w części "wstęp" poradnika i wystarczy je opowiedzieć uczestnikom własnymi słowami.'
           '</p>'
@@ -85,7 +85,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
       duration: Duration(minutes: 10),
       activeForm: KonspektStepActiveForm.static,
       content: '<style="text-align:justify;">'
-          'Prowadzący wręcza każdej z grup po jednym egzemplarzu poradnika $attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci. Ważne, aby dało się go rozłożyć na osobne kartki - na tych kartkach każda grupa będzie kładła swoje żetony.'
+          'Prowadzący wręcza każdej z grup po jednym egzemplarzu poradnika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci. Ważne, aby dało się go rozłożyć na osobne kartki - na tych kartkach każda grupa będzie kładła swoje żetony.'
           '<br>'
           '<br>Uczestnicy mają czas, aby zapoznać się z treściami kartek. Mogą przeczytać je sobie na głos, po cichu na raz, każdy po jednej kartce, po czym się nimi okrężnie wymieniać.'
           '<br>'
@@ -102,7 +102,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
         material_zetony,
       ],
       content: '<p style="text-align:justify;">'
-          'Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_czynnikow_duchowosci. Gdy skończy czytać, zadaje pytanie punktowane o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
+          'Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci. Gdy skończy czytać, zadaje pytanie punktowane o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
           '<br>'
           '<br>Grupy obstawiają swoje odpowiedzi. Gdy wszyscy skończą obstawiać, odsłaniają je i prowadzący odczytuje poprawne odpowiedzi.'
           '<br>'

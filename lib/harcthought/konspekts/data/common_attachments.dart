@@ -5,8 +5,8 @@ import 'package:harcapp_core/harcthought/poradnik/data.dart';
 
 // Source: CZYNNIKI I MECHANIZMY KSZTAŁTOWANIA DUCHOWOŚCI
 
-const String attach_html_poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci = '<a href="$attach_name_poradnik_mechanizmy_ksztaltowania_duchowosci@attachment">$attach_title_poradnik_mechanizmy_ksztaltowania_duchowosci</a>';
-const String attach_name_poradnik_mechanizmy_ksztaltowania_duchowosci = 'poradnik_czynniki_i_mechanizmy_ksztaltowania_duchowosci';
+const String attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci = '<a href="$attach_name_poradnik_mechanizmy_ksztaltowania_duchowosci@attachment">$attach_title_poradnik_mechanizmy_ksztaltowania_duchowosci</a>';
+const String attach_name_poradnik_mechanizmy_ksztaltowania_duchowosci = 'poradnik_mechanizmy_ksztaltowania_duchowosci';
 const String attach_title_poradnik_mechanizmy_ksztaltowania_duchowosci = 'Poradnik "$poradnik_title_mechanizmy_ksztaltowania_duchowosci"';
 KonspektAttachment attach_poradnik_mechanizmy_ksztaltowania_duchowosci = KonspektAttachment(
   name: attach_name_poradnik_mechanizmy_ksztaltowania_duchowosci,
@@ -17,21 +17,21 @@ KonspektAttachment attach_poradnik_mechanizmy_ksztaltowania_duchowosci = Konspek
   },
 );
 
-const String attach_html_scenariusze_czynnikow_duchowosci = '<a href="$attach_name_scenariusze_czynnikow_duchowosci@attachment">$attach_title_scenariusze_czynnikow_duchowosci</a>';
-const String attach_name_scenariusze_czynnikow_duchowosci = 'scenariusze_czynnikow_duchowosci';
-const String attach_title_scenariusze_czynnikow_duchowosci = 'Scenariusze czynników duchowości';
-const KonspektAttachment attach_scenariusze_czynnikow_duchowosci = KonspektAttachment(
-  name: attach_name_scenariusze_czynnikow_duchowosci,
-  title: attach_title_scenariusze_czynnikow_duchowosci,
+const String attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci = '<a href="$attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci@attachment">$attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci</a>';
+const String attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci = 'scenariusze_mechanizmow_ksztaltowania_duchowosci';
+const String attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci = 'Scenariusze mechanizmów kształtowania duchowości';
+const KonspektAttachment attach_scenariusze_mechanizmow_ksztaltowania_duchowosci = KonspektAttachment(
+  name: attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci,
+  title: attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci,
   assets: {
-    FileFormat.pdf: 'common/czynniki_i_mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_scenariusze_czynnikow_duchowosci.pdf',
-    FileFormat.docx: 'common/czynniki_i_mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_scenariusze_czynnikow_duchowosci.docx',
+    FileFormat.pdf: 'common/mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci.pdf',
+    FileFormat.docx: 'common/mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci.docx',
   },
 );
 
 List<KonspektAttachment> attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
   attach_poradnik_mechanizmy_ksztaltowania_duchowosci,
-  attach_scenariusze_czynnikow_duchowosci,
+  attach_scenariusze_mechanizmow_ksztaltowania_duchowosci,
 ];
 
 // Source: WARSZTATY WYCHOWANIA DUCHOWEGO

@@ -4,18 +4,18 @@ import 'package:harcapp_core/harcthought/common/file_format.dart';
 
 import 'poradnik.dart';
 
-const String poradnik_name_mechanizmy_ksztaltowania_duchowosci = "czynniki_i_mechanizmy_ksztaltowania_duchowosci";
+const String poradnik_name_mechanizmy_ksztaltowania_duchowosci = "mechanizmy_ksztaltowania_duchowosci";
 const String poradnik_title_mechanizmy_ksztaltowania_duchowosci = "Mechanizmy kształtowania duchowości";
 Poradnik poradnik_mechanizmy_ksztaltowania_duchowosci = Poradnik(
   name: poradnik_name_mechanizmy_ksztaltowania_duchowosci,
   title: poradnik_title_mechanizmy_ksztaltowania_duchowosci,
-  pageCount: 10,
+  pageCount: 17,
   description: 'Poradnik dla pracujących wychowawczo (instruktorów harcerskich i innych organizacji wychowawczych), poruszający następujące zagadnienia:'
       '\n'
       '\nJakie prawa rządzą kształtowaniem duchowości?'
       '\n'
       '\nJakie mechanizmy i zjawiska wpływają na rozwój duchowy?',
-  coverTitle: 'CZYNNIKI I MECHANIZMY\nKSZTAŁTOWANIA\nDUCHOWOŚCI',
+  coverTitle: 'MECHANIZMY\nKSZTAŁTOWANIA\nDUCHOWOŚCI',
   coverSource: 'Freepik (freepik)',
   formats: [FileFormat.pdf, FileFormat.docx],
   defaultFormat: FileFormat.pdf,
