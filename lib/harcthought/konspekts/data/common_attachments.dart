@@ -41,10 +41,23 @@ const KonspektAttachment attach_plansza_mechanizmow_ksztaltowania_duchowosci = K
   },
 );
 
+const String attach_html_karty_szczebli_internalizacji_duchowosci = '<a href="$attach_name_karty_szczebli_internalizacji_duchowosci@attachment">$attach_title_karty_szczebli_internalizacji_duchowosci</a>';
+const String attach_name_karty_szczebli_internalizacji_duchowosci = 'karty_szczebli_internalizacji_duchowosci';
+const String attach_title_karty_szczebli_internalizacji_duchowosci = 'Karty szczebli internalizacji duchowości';
+const KonspektAttachment attach_karty_szczebli_internalizacji_duchowosci = KonspektAttachment(
+  name: attach_name_karty_szczebli_internalizacji_duchowosci,
+  title: attach_title_karty_szczebli_internalizacji_duchowosci,
+  assets: {
+    FileFormat.pdf: 'common/mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_karty_szczebli_internalizacji_duchowosci.pdf',
+    FileFormat.docx: 'common/mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_karty_szczebli_internalizacji_duchowosci.docx',
+  },
+);
+
 List<KonspektAttachment> attach_kszt_mechanizmy_ksztaltowania_duchowosci = [
   attach_poradnik_mechanizmy_ksztaltowania_duchowosci,
   attach_scenariusze_mechanizmow_ksztaltowania_duchowosci,
   attach_plansza_mechanizmow_ksztaltowania_duchowosci,
+  attach_karty_szczebli_internalizacji_duchowosci,
 ];
 
 // Source: WARSZTATY WYCHOWANIA DUCHOWEGO

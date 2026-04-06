@@ -36,10 +36,17 @@ KonspektMaterial material_zal_plansza_mechanizmow_ksztaltowania_duchowosci = Kon
   amount: 1
 );
 
+KonspektMaterial material_zal_karty_szczebli_internalizacji_duchowosci = KonspektMaterial(
+  name: 'Wydrukowany załącznik "$attach_title_karty_szczebli_internalizacji_duchowosci"',
+  attachmentName: attach_name_karty_szczebli_internalizacji_duchowosci,
+  amount: 1
+);
+
 List<KonspektMaterial> materials_kszt_mechanizmy_ksztaltowania_duchowosci = [
   material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
   material_zal_scenariusze_czynnikow_duchowosci,
   material_zal_plansza_mechanizmow_ksztaltowania_duchowosci,
+  material_zal_karty_szczebli_internalizacji_duchowosci,
   material_zetony,
   material_nagroda,
 ];
@@ -48,7 +55,7 @@ List<KonspektMaterial> materials_kszt_mechanizmy_ksztaltowania_duchowosci = [
 List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
 
   KonspektStep(
-      title: 'Wyjaśnienie merytoryczne',
+      title: 'Wyjaśnienie merytoryczne - szczeble internalizacji',
       duration: Duration(minutes: 5),
       activeForm: KonspektStepActiveForm.static,
       materials: [
@@ -56,9 +63,69 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
       ],
       content: '<p style="text-align:justify;">'
           'Prowadzący, na podstawie załącznika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci wyjaśnia uczestnikom czym są mechanizmy kształtowania duchowości.'
-          '<br>'
-          '<br>Kwestie te są opisane w części "wstęp" poradnika i wystarczy je opowiedzieć uczestnikom własnymi słowami.'
           '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Duchowość człowieka można kształtować - co więcej, jest ona stale kształtowana, przez różne mechanizmy - niektóre z nich wynikają z intencjonalnych działań, np. harcerskich wychowawców, zaś inne są dziełem zamierzonych przez nikogo zjawisk.'
+          '<br>'
+          '<br>Istnieje cały zestaw narzędzi i mechanizmów, którymi można pływać na duchowość wychowanków, jednak przede wszystkim trzeba zrozumieć, że nie jest do końca tak, że jakieś zachowanie, wartość, czy aksjomat w duchowości są lub ich nie ma. W rzeczywistości każde zachowanie, wartość, czy aksjomat mogą być zakorzenione w duchowości człowieka w na różnym stopniu głębokości.'
+          '<br>'
+          '<br>Zanim przejdziemy do konkretnych mechanizmów kształtowania duchowości, warto mieć na uwadze, że różne mechanizmy kształtują duchowość na różnym poziomie jej zakorzenienia. Jest ich cztery i szybko je nakreślę.'
+          '</p>'
+          '</blockquote>'
+
+          '<p style="text-align:justify;">'
+          'Prowadzący kładzie w widocznym miejscu pierwszą kartę z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Najpłytszym i najłatwiejszym do ukształtowania szczeblem internalizacji jest szczel <b>dostosowania</b>.'
+          '<br>'
+          '<br>Człowiek ma tendencję do robienia tego, co wymaga najmniej wysiłku. Jeśli ktoś (koledzy, kadra, rodzice) lub coś (ekonomia, kultura, środowisko) do czegoś zachęca, namawia, wywiera presję, lub czyni przystępniejszym, człowiek prawdopodobnie to zrobi.'
+          '</p>'
+          '</blockquote>'
+
+          '<p style="text-align:justify;">'
+          'Prowadzący kładzie w widocznym miejscu drugą kartę z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Drugim szczeblem internalizacji jest szczel <b>przyzwyczajenia</b>.'
+          '<br>'
+          '<br>Człowiek ma tendencję do robienia tego, do czego jest przyzwyczajony. Przyzwyczajenie jest trwalsze od dostosowania – działa bez nadzoru i bez zewnętrznych czynników. Jest jednak kruche przy zmianie środowiska, rutyny i rytmu dnia.'
+          '</p>'
+          '</blockquote>'
+
+          '<p style="text-align:justify;">'
+          'Prowadzący kładzie w widocznym miejscu trzecią kartę z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Trzecim szczeblem internalizacji jest szczel <b>tożsamości</b>.'
+          '<br>'
+          '<br>Tożsamość to odpowiedź na pytanie "kim jestem" – zbiór cech, ról i przynależności, które człowiek uznaje za swoje. Tożsamość jest trwalsza niż dostosowanie lub przyzwyczajenie.'
+          '<br>'
+          '<br>Tożsamość, której wychowanek nigdy nie zakwestionował, jest krucha – rozpadnie się przy pierwszej konfrontacji z innym środowiskiem. Tożsamość, która przeszła przez wątpliwości i przetrwała, jest trwała właśnie dlatego, że została przetestowana.'
+          '</p>'
+          '</blockquote>'
+
+          '<p style="text-align:justify;">'
+          'Prowadzący kładzie w widocznym miejscu czwartą kartę z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Ostatnim, czwartym szczeblem internalizacji jest szczel <b>wiary</b>.'
+          '<br>'
+          '<br>Najtrwalszy poziom – przetrwa nawet kryzys tożsamości. Wymaga dojrzałości poznawczej (min. 11–12 lat). Nie da się jej narzucić.'
+          '<br>'
+          '<br>Próba kształtowania wiary bez poruszania innych szczebli jest zwykle jałowa. Ludzie rzadko dochodzą do wiary drogą rozumowania – jest raczej odwrotnie: osądy moralne powstają automatycznie, a wyznawane poglądy i rozumowanie na ich podstawie pojawia się później jako ich uzasadnienie.'
+          '</p>'
+          '</blockquote>'
   ),
 
   KonspektStep(
