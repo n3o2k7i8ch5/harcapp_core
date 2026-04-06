@@ -72,6 +72,12 @@ KonspektMaterial material_zal_meta_narracja_opis = KonspektMaterial(
     amount: 1
 );
 
+KonspektMaterial material_zal_wartosci_lacinskie = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_wartosci_lacinskie”',
+    attachmentName: attach_name_wartosci_lacinskie,
+    amount: 1
+);
+
 KonspektMaterial material_zal_meta_narracja_przyklady = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_meta_narracja_przyklady”',
     attachmentName: attach_name_meta_narracja_przyklady,
@@ -1502,7 +1508,11 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
         '<br>'
         '<br>Po pierwsze: wierzymy w mity, i to jak! Uznajemy istnienie państw, wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności wynikającej z samego faktu bycia człowiekiem, opowieści o bohaterach poległych za ojczyznę, wierzymy, że spokój i spełnienie osiąga się poprzez przepracowanie swoich problemów z dzieciństwa w drodze psychoterapii, czy w kapłańską rolę naukowców obcujących z najczystszą formą prawdy.'
         '<br>'
-        '<br>Po drugie: opowieści i mity nie są bajeczkami, czy kłamstwami. Ich sens polega na przedstawieniu pewnej trudno uchwytnej prawdy o świecie, którą osiąga się poprzez stworzenie fikcyjnych postaci, fikcyjnych wydarzeń, które następnie są używane, by pokazać realne mechanizmy obecne w świecie. Przykładowo można z jednej strony polecić komuś napisaną precyzyjnym, ale specyficznym językiem serię publikacji naukowych „Psychologiczne i socjologiczne aspekty wariantowych relacji dzieci i ich rodziców", albo można tę samą treść opowiedzieć w historii Pinokia: drewnianej, naiwnej kukle, która uciekłszy z domu, zostaje przygnieciona życiem, lecz w końcu bierze odpowiedzialność za siebie, ratuje nieudacznego ojca z wnętrza wieloryba i dzięki temu staje się w pełni człowiekiem.'
+        '<br>Po drugie: opowieści i mity nie są bajeczkami, czy kłamstwami. Ich sens polega na przedstawieniu pewnej trudno uchwytnej prawdy o świecie, którą osiąga się poprzez stworzenie fikcyjnych postaci, fikcyjnych wydarzeń, które następnie są używane, by pokazać realne mechanizmy obecne w świecie.'
+        '<br>'
+        '<br>Przykładowo:'
+        '- można z jednej strony polecić komuś napisaną precyzyjnym, ale specyficznym językiem serię publikacji naukowych „Psychologiczne i socjologiczne aspekty wariantowych relacji dzieci i ich rodziców", albo można tę samą treść opowiedzieć w historii Pinokia: drewnianej, naiwnej kukle, która uciekłszy z domu, zostaje przygnieciona życiem, lecz w końcu bierze odpowiedzialność za siebie, ratuje nieudacznego ojca z wnętrza wieloryba i dzięki temu staje się w pełni człowiekiem.'
+        '- jak myślicie, która forma prędzej wpłynie na sposób bycia człowieka: powiedzenie komuś "do największego dobra zdolni są czasem ludzie, po których nikt by się tego początkowo nie spodziewał", czy historia Froda z Władcy Pierścieni?'
         '<br>'
         '<br>Ludzie wierzą w różne rzeczy. Czasami nawet wierzą w byle jakie treści, ale niemal nigdy nie wierzą w byle jakie formy. Przekonania, które wyznają, muszą do nich w pewien sposób przemawiać. Formą tą jest najczęściej <b>narracja</b> o rzeczywistości: opowieść, która porządkuje świat, opowiada o dobru i złu, nadaje tożsamość, sens i cel.'
         '</p>'
@@ -1514,7 +1524,7 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Adamowi nie można po prostu powiedzieć: "przebaczenie jest dobre, uwierz w to". To, że przebaczenie jest dobre musi wynikać z jakiejś narracji, w którą uwierzy: ze spójnej wizji świata, przez pryzmat której Adam będzie postrzegał rzeczywistość.'
+        'Adamowi nie można po prostu powiedzieć: "przebaczenie jest dobre, uwierz w to". To, że przebaczenie jest dobre musi wynikać z jakiejś narracji, w którą uwierzy: ze pewnej opowieści, przez pryzmat której Adam będzie postrzegał rzeczywistość.'
         '</p>'
         '</blockquote>'
 );
@@ -1591,6 +1601,10 @@ KonspektStep _step_meta_narracja_uniwersalnosc = KonspektStep(
         '</p>'
         '</blockquote>'
 
+        '<p style="text-align:justify;">'
+        'Prowadzący, poruszając temat kolejnych wartości, może posiłkować się kartkami z załącznika $attach_html_wartosci_lacinskie.'
+        '</p>'
+
         '<ol>'
 
         // Wartość 1 - Niezbywalna godność każdego człowieka
@@ -1618,15 +1632,15 @@ KonspektStep _step_meta_narracja_uniwersalnosc = KonspektStep(
         '</blockquote>'
         '</li>'
 
-        // Wartość 2 - Przebaczenie i odpuszczenie win.
+        // Wartość 2 - Przebaczenie.
         '<li>'
         '<p style="text-align:justify;">'
-        '<b>Przebaczenie i odpuszczenie win.</b>'
+        '<b>Przebaczenie.</b>'
         '</p>'
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Czy przebaczenie i odpuszczanie win jest uniwersalną wartością w każdej cywilizacji?'
+        'Czy przebaczenie jest uniwersalną wartością w każdej rozwiniętej cywilizacji?'
         '</p>'
         '</blockquote>'
 
@@ -1653,7 +1667,7 @@ KonspektStep _step_meta_narracja_uniwersalnosc = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Czy prawda i życie w prawdzie jest uniwersalną wartością w każdej cywilizacji?'
+        'Czy życie w prawdzie (mówienie prawdy i szacunek do niej) jest uniwersalną wartością w każdej rozwiniętej cywilizacji?'
         '</p>'
         '</blockquote>'
 
@@ -1766,7 +1780,9 @@ KonspektStep _step_meta_narracja_selekcja_naturalna = KonspektStep(
         '</blockquote>'
 
         '<p style="text-align:justify;">'
-        'Na końcu prowadzący zwraca uwagę, że optymalnych duchowości nie da się "wymyślić":'
+        'Prowadzący obok karty "narracja" kładzie kartę "meta-narracja" z załącznika $attach_html_meta_narracja_opis, po czym prezentuje uczestnikom przykłady narracji z załącznika $attach_html_meta_narracja_przyklady. '
+        '<br>'
+        '<br>Na końcu prowadzący zwraca uwagę, że optymalnych duchowości nie da się "wymyślić":'
         '</p>'
 
         '<blockquote>'
@@ -1808,12 +1824,14 @@ KonspektStep _step_meta_narracja_wniosek = KonspektStep(
         '<p style="text-align:justify;">'
         'Jeżeli zatem chcemy stanąć na wysokości zadania, to podsumujmy fakty:'
         '<br>'
-        '<br>Po pierwsze: potrzebujemy dla Adama jakiejś narracji. Bez narracji nie ma stabilnych wartości innych niż wartości pierwotne.'
+        '<br>Po pierwsze: Adam nie uzna żadnych wartości, o ile nie będą one wynikały z jakoś przyjętego przezeń aksjomatu.'
         '<br>'
-        '<br>Po drugie: nie chcemy byle jakiej nararcji. Większość narracji kończy się dla przyjmujących ich ludzi fatalnie: w najlepszym wypadku samotnością, apatią i rozwalonym życiem, w najgorszym śmiercią. Chociaż nie jest to takie oczywiste, które z tych dwóch jest gorsze.'
-        '<br>Potrzebujemy zatem narracji, która ma za sobą co najmniej kilkadziesiąt pokoleń historii, czyli w zasadzie potrzebujemy jakiejś meta-narracji: jakiejś opowieści, stojącej za którąść z istniejących od dawna cywilizacji.'
+        '<br>Po drugie: kształtowanie aksjomatów Adama (od dostosowania, przez przyzwyczajenie, tożamość, a w końcu wiarę) musi dążyć do formy jakiejś narracji - jest to język, którym człowiek czyta aksjomaty.'
         '<br>'
-        '<br>Po trzecie: potrzebujemy meta-narracji spełniającej bardzo konkretne kryteria: chcemy, żeby wynikały z niej uniwersalna i niezbywalna ludzka godność, przebaczenie, braterstwo, pokora, dążenie do ideału itd..'
+        '<br>Po trzecie: chcemy, żeby duchowość Adama była spójna i stabilna, dlatego nie wystarczą byle jakie narracje. Większość narracji kończy się dla przyjmujących ich ludzi fatalnie: w najlepszym wypadku samotnością, apatią i rozwalonym życiem, w najgorszym śmiercią. Chociaż nie jest to takie oczywiste, które z tych dwóch jest gorsze.'
+        '<br>Potrzebujemy zatem narracji, które mają za sobą co najmniej kilkadziesiąt pokoleń historii i weryfikacji, czyli w zasadzie potrzebujemy jakiejś meta-narracji. Bez meta-narracji trudno oczekiwać spójnych i stabilnych wartości innych niż wartości pierwotne.'
+        '<br>'
+        '<br>Po czwarte: potrzebujemy meta-narracji spełniającej bardzo konkretne kryteria: chcemy, żeby wynikały z niej uniwersalna i niezbywalna ludzka godność, przebaczenie, braterstwo, pokora, dążenie do ideału itd..'
         '</p>'
         '</blockquote>'
 

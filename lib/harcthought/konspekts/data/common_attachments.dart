@@ -162,6 +162,18 @@ KonspektAttachment attach_meta_narracja_opis = KonspektAttachment(
   },
 );
 
+const String attach_html_wartosci_lacinskie = '<a href="$attach_name_wartosci_lacinskie@attachment">$attach_title_wartosci_lacinskie</a>';
+const String attach_name_wartosci_lacinskie = 'wartosci_lacinskie';
+const String attach_title_wartosci_lacinskie = 'Wartości łacińskie';
+KonspektAttachment attach_wartosci_lacinskie = KonspektAttachment(
+  name: attach_name_wartosci_lacinskie,
+  title: attach_title_wartosci_lacinskie,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_wartosci_lacinskie.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_wartosci_lacinskie.docx',
+  },
+);
+
 const String attach_html_meta_narracja_przyklady = '<a href="$attach_name_meta_narracja_przyklady@attachment">$attach_title_meta_narracja_przyklady</a>';
 const String attach_name_meta_narracja_przyklady = 'meta_narracja_przyklady';
 const String attach_title_meta_narracja_przyklady = 'Meta-narracja - przykłady';
