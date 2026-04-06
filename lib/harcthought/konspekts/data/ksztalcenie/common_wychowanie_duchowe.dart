@@ -146,7 +146,7 @@ KonspektStep step_sfery_rozwoju_przyklady = KonspektStep(
       material_zal_sfery_przyklady,
     ],
     content: '<p style="text-align:justify;">'
-        'Prowadzący w losowej kolejności odczytuje uczestnikom 8 kartek <b>z białym tłem</b> z załącznika $attach_html_sfery_przyklady. Każdorazowo prosi uczestników o wskazanie, z którą sferą rozwoju określona jest odczytana kartka.'
+        'Prowadzący w losowej kolejności odczytuje uczestnikom 8 kartek <b>z białym tłem</b> z załącznika $attach_html_sfery_przyklady. Każdorazowo prosi uczestników o wskazanie, z którą sferą rozwoju związana jest odczytana kartka.'
         '<br>'
         '<br>Prawidłowe odpowiedzi:'
         '</p>'
@@ -259,6 +259,7 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
         '</ul>'
         '<p style="text-align:justify;">'
         'Wszyscy trzej umieją dokładnie to samo, wiedzą dokładnie to samo i mają dokładnie te same narzędzia. A jednak: każdy te same zdolności wykorzystałby zupełnie inaczej i w innym celu.'
+        '</p>'
         '</blockquote>'
 
         '<p style="text-align:justify;">'
@@ -318,7 +319,7 @@ KonspektStep step_sfery_rozwoju_sfera_ducha_dopowiedzenie = KonspektStep(
         '<ul>'
         '<li><p style="text-align:justify;">Albert nie robi nic — sprawa była już zgłoszona do dyrekcji. W szkole co chwilę ktoś komuś dokucza, problem prawdopodobnie szybko zniknie.</p></li>'
         '<li><p style="text-align:justify;">Albert kilka razy po lekcjach czeka przed szkołą na kolegów dokuczających jego siostrze. W ciągu jednego tygodnia całkowicie ich ośmiesza i dyskredytuje w oczach reszty klasy — problem znika.</p></li>'
-        '<li><p style="text-align:justify;">Albert zakłada bluzę z kapturem, jednorazowo wybiera się do szkoły w odpowiedniej porze i gdy dostrzega dokuczających jego siostrze chłopaków, sprzedaje największemu gonga w twarz i odchodzi — do niewątpliwie ustawi ich do pionu.</p></li>'
+        '<li><p style="text-align:justify;">Albert zakłada bluzę z kapturem, jednorazowo wybiera się do szkoły w odpowiedniej porze i gdy dostrzega dokuczających jego siostrze chłopaków, sprzedaje największemu gonga w twarz i odchodzi — to niewątpliwie ustawi ich do pionu.</p></li>'
         '</ul>'
         '</blockquote>'
 
@@ -367,7 +368,7 @@ KonspektStep _step_poziomy_duchowosci_wstep = KonspektStep(
         '<p style="text-align:justify;">'
         'Ustaliliśmy już, że duchowość to sposób, w jaki człowiek reaguje na rzeczywistość. Fajnie byłoby jednak móc nieco precyzyjniej opisać różne duchowości, żeby umożliwić ich nazywanie, porównywanie, analizę itd.'
         '<br><br>'
-        'Na szczęście taka możliwość istnieje i to na kilka sposobów: w pracy wychowawczej szczególnie przydatne są trzy sposoby spojrzenia na duchowość, każda na innym poziomie abstrakcji.'
+        'Na szczęście taka możliwość istnieje i to na kilka sposobów: w pracy wychowawczej szczególnie przydatne są trzy sposoby spojrzenia na duchowość, każdy na innym poziomie abstrakcji.'
         '</p>'
         '</blockquote>'
 
@@ -465,8 +466,8 @@ KonspektStep _step_poziomy_duchowosci_wartosci_przyklad = KonspektStep(
 
         '<ul>'
         '<li><p style="text-align:justify;">Wartością dla Alberta są <b>pieniądze</b> - wynikają z tego zachowania w stylu: chodzenie do pracy, utrzymywanie konta bankowego itd.</p></li>'
-        '<li><p style="text-align:justify;">Wartością większą od pieniędzy jest dla Alberta <b>rodzina</b> - wynikają z tego zachowania w stylu: dbanie o relację narzeczoną, spędzanie czasu z rodzeństwem, dostosowywanie swojego życia pod posiadanie dużej liczby dzieci, etc.</p></li>'
-        '<li><p style="text-align:justify;">Wartością dla Alberta jest <b>lojalność wobec firmy</b> - wynikają z tego zachowania w stylu: dbanie o reputację firmy, próba naprawy w środku zimy zepsutego auto, by móc dojechać do klienta (a przecież Albert mógłby zostać w jego ciepłym wnętrzu, zadzwonić po lawetę i napisać szefowi, że nie da rady dojechać - przecież to nie jego wina).</p></li>'
+        '<li><p style="text-align:justify;">Wartością większą od pieniędzy jest dla Alberta <b>rodzina</b> - wynikają z tego zachowania w stylu: dbanie o relację z narzeczoną, spędzanie czasu z rodzeństwem, dostosowywanie swojego życia pod posiadanie dużej liczby dzieci, etc.</p></li>'
+        '<li><p style="text-align:justify;">Wartością dla Alberta jest <b>lojalność wobec firmy</b> - wynikają z tego zachowania w stylu: dbanie o reputację firmy, próba naprawy w środku zimy zepsutego auta, by móc dojechać do klienta (a przecież Albert mógłby zostać w jego ciepłym wnętrzu, zadzwonić po lawetę i napisać szefowi, że nie da rady dojechać - przecież to nie jego wina).</p></li>'
         '<li><p style="text-align:justify;">Wartością dla Alberta nie jest poezja - nie czyta jej, nie rozmyśla o niej, nie poświęca jej czasu, nie interesuje go ten temat.</p></li>'
         '</ul>'
 
@@ -615,7 +616,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Jak niektórzy mogli już wychwycić podczas opisywania poziomu wartości, wartości nie funkcjonują w luźnej kupie, ale w formie hierarchicznej struktury. Różne rzeczy są dla ludzi ważne, ale niektóre są ważniejsze od innych: ma to znaczenie, gdy człowiek decyduje, czy poświęcić czas rodzinie, czy pracy, mimo, że oba są dla niego ważne.'
+        'Jak niektórzy mogli już wychwycić podczas opisywania poziomu wartości, wartości nie funkcjonują w luźnej kupie, ale w formie hierarchicznej struktury. Różne rzeczy są dla ludzi ważne, ale niektóre są ważniejsze od innych: ma to znaczenie, gdy człowiek decyduje, czy poświęcić czas rodzinie, czy pracy, mimo że oba są dla niego ważne.'
         '<br>'
         '<br>Hierarchiczność wartości oznacza, że zawsze muszą istnieć jakieś <b>wartości najważniejsze</b>.'
         '</p>'
@@ -695,7 +696,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_przyklad = KonspektStep(
         '<br>'
         '<br>Inny przykład: Albert naprawia auto w mrozie, mimo że nikt go nie widzi, nikt mu dodatkowo nie zapłaci: mógłby olać temat i poczekać na lawetę. Czemu tego nie zrobi? Skąd u niego wartości takie jak zaradność, inicjatywa, czy działania mimo trudu? Przecież Albert mógłby wierzyć, że zepsute auto to znak z niebios.'
         '<br>'
-        '<br>Tymczasem Albert bez żadnego specjalnego powodu wierzy, że świat staje się lepszy, gdy człowiek dobrowolnie bierze na siebie krzyż, trudy, zmagania rzeczywistości i je dźwiga — nawet, gdy nikt tego nie wymaga. Dlaczego w to wierzy? Wierzy, bo tak. Taki wyznaje aksjomat i cześć.'
+        '<br>Tymczasem Albert bez żadnego specjalnego powodu wierzy, że świat staje się lepszy, gdy człowiek dobrowolnie bierze na siebie krzyż, trudy, zmagania rzeczywistości i je dźwiga — nawet gdy nikt tego nie wymaga. Dlaczego w to wierzy? Wierzy, bo tak. Taki wyznaje aksjomat i cześć.'
         '</p>'
         '</blockquote>'
 
@@ -739,6 +740,37 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_wartosci_przyporzadkowanie = Kon
         '<br>Na końcu prowadzący pokrótce omawia z uczestnikami poprawność ich dopasowania.'
         '<br>'
         '<br>Poprawne przyporządkowanie:'
+        '<ol>'
+        '<li>Chrystus, Syn Boży, wziął na siebie nasze winy, oddał życie i zmartwychwstał, byśmy mogli dostąpić zbawienia.'
+        '<ul>'
+        '<li>przebaczenie win</li>'
+        '<li>dobrowolne dźwiganie trudu życia</li>'
+        '<li>pokora, uznanie i walka z własnymi słabościami</li>'
+        '<li>gotowość poświęcenia na rzecz bliźniego, choćby i nieprzyjaciela</li>'
+        '</ul>'
+        '</li>'
+        '<li>Świat powstał przypadkiem, istnienie kończy się wraz ze śmiercią, a celem jest czerpanie przyjemności z życia, póki ono trwa.'
+        '<ul>'
+        '<li>unikanie długotrwałych zobowiązań</li>'
+        '<li>bogactwo materialne</li>'
+        '<li>dobrowolna eutanazja</li>'
+        '<li>realizacja swoich pragnień</li>'
+        '</ul>'
+        '</li>'
+        '<li>Świat jest areną walki i opresji, gdzie uprzywilejowane grupy niesprawiedliwie wyzyskują dyskryminowane mniejszości.'
+        '<ul>'
+        '<li>postrzeganie jednostki przez pryzmat jej przynależności grupowej</li>'
+        '<li>inkluzywność, nawet kosztem dobra większości</li>'
+        '<li>odnajdywanie i kompensowanie krzywd historycznych</li>'
+        '<li>zwalczanie źródeł sukcesu grup uprzywilejowanych</li>'
+        '</ul>'
+        '</li>'
+        '</ol>'
+        '<br>Wspólne:'
+        '<ul>'
+        '<li>ochrona najuboższych (1 i 3)</li>'
+        '<li>dostrzeganie piękna świata (1 i 2)</li>'
+        '</ul>'
         '</p>'
 );
 
@@ -822,10 +854,10 @@ KonspektStepGroup step_group_poziomy_duchowosci = KonspektStepGroup(
     ]
 );
 
-// Ksztaltowanie duchowości
+// Etapy rozwoju duchowości
 
-KonspektStep _step_ksztaltowanie_duchowosci_roznica_jakosciowa = KonspektStep(
-  title: 'Kształtowanie duchowości - różnica jakościowa',
+KonspektStep _step_etapy_rozwoju_duchowosci_roznica_jakosciowa = KonspektStep(
+  title: 'Etapy rozwoju duchowości - różnica jakościowa',
   duration: Duration(minutes: 2),
   activeForm: KonspektStepActiveForm.static,
   content: '<p style="text-align:justify;">'
@@ -834,7 +866,7 @@ KonspektStep _step_ksztaltowanie_duchowosci_roznica_jakosciowa = KonspektStep(
 
       '<blockquote>'
       '<p style="text-align:justify;">'
-      'Rozwój <b>sfer zdolności</b> polega na tym, że do już istniejącego "worka ze zdolnościami" dorzucane są kolejne zdolności: człowiek uczy się grać na nowym instrumencie, uczy się nowego języka, uczy się sposobu radzenia sobie ze złością, etc..'
+      'Rozwój <b>sfer zdolności</b> polega na tym, że do już istniejącego "worka ze zdolnościami" dorzucane są kolejne zdolności: człowiek uczy się grać na nowym instrumencie, uczy się nowego języka, uczy się sposobu radzenia sobie ze złością, etc.'
       '<br>'
       '<br>Rozwój <b>sfery ducha</b> jest zupełnie inny. Człowiek nie ma "worka z różnymi duchowościami" - ma zawsze jedną, konkretną duchowość. Rozwój sfery ducha polega na porzucaniu jednej formy duchowości i przyjmowaniu nowej.'
       '<br>'
@@ -849,8 +881,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_roznica_jakosciowa = KonspektStep(
       '</blockquote>',
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_roznica_jakosciowa_pytania = KonspektStep(
-  title: 'Kształtowanie duchowości - różnica jakościowa - pytania',
+KonspektStep _step_etapy_rozwoju_duchowosci_roznica_jakosciowa_pytania = KonspektStep(
+  title: 'Etapy rozwoju duchowości - różnica jakościowa - pytania',
   duration: Duration(minutes: 2),
   activeForm: KonspektStepActiveForm.static,
   content: '<p style="text-align:justify;">'
@@ -858,8 +890,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_roznica_jakosciowa_pytania = Konspek
       '</p>',
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_osie = KonspektStep(
-  title: 'Kształtowanie duchowości - osie współrzędnych',
+KonspektStep _step_etapy_rozwoju_duchowosci_osie = KonspektStep(
+  title: 'Etapy rozwoju duchowości - osie współrzędnych',
   duration: Duration(minutes: 1),
   activeForm: KonspektStepActiveForm.static,
   content: '<p style="text-align:justify;">'
@@ -872,8 +904,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_osie = KonspektStep(
       '</blockquote>',
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_schemat = KonspektStep(
-  title: 'Kształtowanie duchowości - schemat',
+KonspektStep _step_etapy_rozwoju_duchowosci_schemat = KonspektStep(
+  title: 'Etapy rozwoju duchowości - schemat',
   duration: Duration.zero,
   activeForm: KonspektStepActiveForm.static,
   content: '<p style="text-align:justify;">'
@@ -914,8 +946,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_schemat = KonspektStep(
       '</p>',
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_zachowania = KonspektStep(
-  title: 'Kształtowanie duchowości - 7-9 lat - zachowania',
+KonspektStep _step_etapy_rozwoju_duchowosci_7_9_lat_zachowania = KonspektStep(
+  title: 'Etapy rozwoju duchowości - 7-9 lat - zachowania',
   duration: Duration(minutes: 2),
   activeForm: KonspektStepActiveForm.static,
   content: '<p style="text-align:justify;">'
@@ -942,8 +974,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_zachowania = KonspektStep(
       '</blockquote>'
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_wartosci = KonspektStep(
-    title: 'Kształtowanie duchowości - 7-9 lat - wartości',
+KonspektStep _step_etapy_rozwoju_duchowosci_7_9_lat_wartosci = KonspektStep(
+    title: 'Etapy rozwoju duchowości - 7-9 lat - wartości',
     duration: Duration(minutes: 4),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -992,8 +1024,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_wartosci = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty = KonspektStep(
-    title: 'Kształtowanie duchowości - 7-9 lat - aksjomaty',
+KonspektStep _step_etapy_rozwoju_duchowosci_7_9_lat_aksjomaty = KonspektStep(
+    title: 'Etapy rozwoju duchowości - 7-9 lat - aksjomaty',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1054,8 +1086,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_wykres = KonspektStep(
-  title: 'Kształtowanie duchowości - 7-9 lat - wykres',
+KonspektStep _step_etapy_rozwoju_duchowosci_7_9_lat_wykres = KonspektStep(
+  title: 'Etapy rozwoju duchowości - 7-9 lat - wykres',
   duration: Duration(minutes: 1),
   activeForm: KonspektStepActiveForm.static,
   contentBuilder: ({required bool isDark}) =>
@@ -1067,8 +1099,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_7_9_lat_wykres = KonspektStep(
 
 // czy dzieci mają duchowość?
 
-KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_co_sie_zmienia = KonspektStep(
-    title: 'Kształtowanie duchowości - 10-12 lat - co się zmienia?',
+KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_co_sie_zmienia = KonspektStep(
+    title: 'Etapy rozwoju duchowości - 10-12 lat - co się zmienia?',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1090,8 +1122,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_co_sie_zmienia = KonspektS
         '</blockquote>'
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_wartosci = KonspektStep(
-    title: 'Kształtowanie duchowości - 10-12 lat - wartości',
+KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_wartosci = KonspektStep(
+    title: 'Etapy rozwoju duchowości - 10-12 lat - wartości',
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1108,8 +1140,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_wartosci = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_zachowania = KonspektStep(
-    title: 'Kształtowanie duchowości - 10-12 lat - zachowania',
+KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_zachowania = KonspektStep(
+    title: 'Etapy rozwoju duchowości - 10-12 lat - zachowania',
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1140,8 +1172,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_zachowania = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_aksjomaty = KonspektStep(
-    title: 'Kształtowanie duchowości - 10-12 lat - aksjomaty',
+KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_aksjomaty = KonspektStep(
+    title: 'Etapy rozwoju duchowości - 10-12 lat - aksjomaty',
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1165,8 +1197,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_aksjomaty = KonspektStep(
 
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_wykres = KonspektStep(
-  title: 'Kształtowanie duchowości - 10-12 lat - wykres',
+KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_wykres = KonspektStep(
+  title: 'Etapy rozwoju duchowości - 10-12 lat - wykres',
   duration: Duration(minutes: 1),
   activeForm: KonspektStepActiveForm.static,
   contentBuilder: ({required bool isDark}) =>
@@ -1176,8 +1208,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_10_12_lat_wykres = KonspektStep(
       '${piramidaDuchowosci10_12Html(isDark: isDark)}',
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_co_sie_zmienia = KonspektStep(
-    title: 'Kształtowanie duchowości - 13-15 lat - co się zmienia?',
+KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_co_sie_zmienia = KonspektStep(
+    title: 'Etapy rozwoju duchowości - 13-15 lat - co się zmienia?',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1204,8 +1236,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_co_sie_zmienia = KonspektS
         '</blockquote>'
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_aksjomaty = KonspektStep(
-    title: 'Kształtowanie duchowości - 13-15 lat - aksjomaty',
+KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_aksjomaty = KonspektStep(
+    title: 'Etapy rozwoju duchowości - 13-15 lat - aksjomaty',
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1223,8 +1255,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_aksjomaty = KonspektStep(
 
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_wartosci = KonspektStep(
-    title: 'Kształtowanie duchowości - 13-15 lat - wartości',
+KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_wartosci = KonspektStep(
+    title: 'Etapy rozwoju duchowości - 13-15 lat - wartości',
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1244,8 +1276,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_wartosci = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_zachowania = KonspektStep(
-    title: 'Kształtowanie duchowości - 13-15 lat - zachowania',
+KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_zachowania = KonspektStep(
+    title: 'Etapy rozwoju duchowości - 13-15 lat - zachowania',
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1259,8 +1291,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_zachowania = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_wykres = KonspektStep(
-  title: 'Kształtowanie duchowości - 13-15 lat - wykres',
+KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_wykres = KonspektStep(
+  title: 'Etapy rozwoju duchowości - 13-15 lat - wykres',
   duration: Duration(minutes: 1),
   activeForm: KonspektStepActiveForm.static,
   contentBuilder: ({required bool isDark}) =>
@@ -1270,8 +1302,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_13_15_lat_wykres = KonspektStep(
       '${piramidaDuchowosci13_15Html(isDark: isDark)}',
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_16_plus_lat = KonspektStep(
-    title: 'Kształtowanie duchowości - 16+ lat',
+KonspektStep _step_etapy_rozwoju_duchowosci_16_plus_lat = KonspektStep(
+    title: 'Etapy rozwoju duchowości - 16+ lat',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1292,8 +1324,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_16_plus_lat = KonspektStep(
         '</blockquote>'
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_16_plus_lat_wykres = KonspektStep(
-  title: 'Kształtowanie duchowości - 16+ lat - wykres',
+KonspektStep _step_etapy_rozwoju_duchowosci_16_plus_lat_wykres = KonspektStep(
+  title: 'Etapy rozwoju duchowości - 16+ lat - wykres',
   duration: Duration(minutes: 1),
   activeForm: KonspektStepActiveForm.static,
   contentBuilder: ({required bool isDark}) =>
@@ -1303,8 +1335,8 @@ KonspektStep _step_ksztaltowanie_duchowosci_16_plus_lat_wykres = KonspektStep(
       '${piramidaDuchowosci16Html(isDark: isDark)}',
 );
 
-KonspektStep _step_ksztaltowanie_duchowosci_pytania = KonspektStep(
-    title: 'Kształtowanie duchowości - pytania',
+KonspektStep _step_etapy_rozwoju_duchowosci_pytania = KonspektStep(
+    title: 'Etapy rozwoju duchowości - pytania',
     duration: Duration(minutes: 1),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1312,42 +1344,42 @@ KonspektStep _step_ksztaltowanie_duchowosci_pytania = KonspektStep(
         '</p>',
 );
 
-KonspektStepGroup step_group_ksztaltowanie_duchowosci = KonspektStepGroup(
-    title: 'Kształtowanie duchowości',
+KonspektStepGroup step_group_etapy_rozwoju_duchowosci = KonspektStepGroup(
+    title: 'Etapy rozwoju duchowości',
     steps: [
-      _step_ksztaltowanie_duchowosci_roznica_jakosciowa,
-      _step_ksztaltowanie_duchowosci_roznica_jakosciowa_pytania,
-      _step_ksztaltowanie_duchowosci_osie,
-      _step_ksztaltowanie_duchowosci_schemat,
+      _step_etapy_rozwoju_duchowosci_roznica_jakosciowa,
+      _step_etapy_rozwoju_duchowosci_roznica_jakosciowa_pytania,
+      _step_etapy_rozwoju_duchowosci_osie,
+      _step_etapy_rozwoju_duchowosci_schemat,
 
-      _step_ksztaltowanie_duchowosci_7_9_lat_zachowania,
-      _step_ksztaltowanie_duchowosci_7_9_lat_wartosci,
-      _step_ksztaltowanie_duchowosci_7_9_lat_aksjomaty,
-      _step_ksztaltowanie_duchowosci_7_9_lat_wykres,
+      _step_etapy_rozwoju_duchowosci_7_9_lat_zachowania,
+      _step_etapy_rozwoju_duchowosci_7_9_lat_wartosci,
+      _step_etapy_rozwoju_duchowosci_7_9_lat_aksjomaty,
+      _step_etapy_rozwoju_duchowosci_7_9_lat_wykres,
 
-      _step_ksztaltowanie_duchowosci_10_12_lat_co_sie_zmienia,
-      _step_ksztaltowanie_duchowosci_10_12_lat_wartosci,
-      _step_ksztaltowanie_duchowosci_10_12_lat_zachowania,
-      _step_ksztaltowanie_duchowosci_10_12_lat_aksjomaty,
-      _step_ksztaltowanie_duchowosci_10_12_lat_wykres,
+      _step_etapy_rozwoju_duchowosci_10_12_lat_co_sie_zmienia,
+      _step_etapy_rozwoju_duchowosci_10_12_lat_wartosci,
+      _step_etapy_rozwoju_duchowosci_10_12_lat_zachowania,
+      _step_etapy_rozwoju_duchowosci_10_12_lat_aksjomaty,
+      _step_etapy_rozwoju_duchowosci_10_12_lat_wykres,
 
-      _step_ksztaltowanie_duchowosci_13_15_lat_co_sie_zmienia,
-      _step_ksztaltowanie_duchowosci_13_15_lat_aksjomaty,
-      _step_ksztaltowanie_duchowosci_13_15_lat_wartosci,
-      _step_ksztaltowanie_duchowosci_13_15_lat_zachowania,
-      _step_ksztaltowanie_duchowosci_13_15_lat_wykres,
+      _step_etapy_rozwoju_duchowosci_13_15_lat_co_sie_zmienia,
+      _step_etapy_rozwoju_duchowosci_13_15_lat_aksjomaty,
+      _step_etapy_rozwoju_duchowosci_13_15_lat_wartosci,
+      _step_etapy_rozwoju_duchowosci_13_15_lat_zachowania,
+      _step_etapy_rozwoju_duchowosci_13_15_lat_wykres,
 
-      _step_ksztaltowanie_duchowosci_16_plus_lat,
-      _step_ksztaltowanie_duchowosci_16_plus_lat_wykres,
-      _step_ksztaltowanie_duchowosci_pytania,
+      _step_etapy_rozwoju_duchowosci_16_plus_lat,
+      _step_etapy_rozwoju_duchowosci_16_plus_lat_wykres,
+      _step_etapy_rozwoju_duchowosci_pytania,
     ]
 );
 
 
-// Meta-narracja
+// Scenka wychowawcza
 
-KonspektStep _step_meta_narracja_scenka_wprowadzenie = KonspektStep(
-    title: 'Meta-narracja - scenka - wprowadzenie',
+KonspektStep _step_scenka_wychowawcza_wprowadzenie = KonspektStep(
+    title: 'Scenka wychowawcza - wprowadzenie',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     materials: [
@@ -1366,8 +1398,8 @@ KonspektStep _step_meta_narracja_scenka_wprowadzenie = KonspektStep(
         '</ul>'
 );
 
-KonspektStep _step_meta_narracja_scenka_przygotowanie = KonspektStep(
-    title: 'Meta-narracja - scenka - przygotowanie',
+KonspektStep _step_scenka_wychowawcza_przygotowanie = KonspektStep(
+    title: 'Scenka wychowawcza - przygotowanie',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.active,
     content: '<p style="text-align:justify;">'
@@ -1375,8 +1407,8 @@ KonspektStep _step_meta_narracja_scenka_przygotowanie = KonspektStep(
         '</p>'
 );
 
-KonspektStep _step_meta_narracja_scenka = KonspektStep(
-    title: 'Meta-narracja - scenka',
+KonspektStep _step_scenka_wychowawcza_etap_wlasciwy = KonspektStep(
+    title: 'Scenka wychowawcza - etap właściwy',
     duration: Duration(minutes: 15),
     activeForm: KonspektStepActiveForm.active,
     materials: [
@@ -1395,8 +1427,8 @@ KonspektStep _step_meta_narracja_scenka = KonspektStep(
         '</p>'
 );
 
-KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
-    title: 'Meta-narracja - omówienie scenki',
+KonspektStep _step_scenka_wychowawcza_omowienie = KonspektStep(
+    title: 'Scenka wychowawcza - omówienie',
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1404,85 +1436,410 @@ KonspektStep _step_meta_narracja_omowienie_scenki = KonspektStep(
         '<br>'
         '<br>Oczywiście poszło im <b>fatalnie</b> — nie przekonali Adama. Prowadzący zadaje kolejne pytania:'
         '</p>'
+        '<blockquote>'
         '<ol>'
         '<li><p style="text-align:justify;"><i>"Jakich argumentów używaliście?"</i></p></li>'
         '<li><p style="text-align:justify;"><i>"Dlaczego nie działały?"</i></p></li>'
         '<li><p style="text-align:justify;"><i>"Czego Wam brakowało, żeby go przekonać?"</i></p></li>'
         '</ol>'
+        '</blockquote>'
+
         '<p style="text-align:justify;">'
-        'Prowadzący podsumowuje: Adamowi brakowało <b>powodu</b>, żeby wyznawać harcerskie wartości — brakowało mu aksjomatu, z którego te wartości by wypływały. Tylko skąd miałby ten aksjomat wziąć?'
+        'Prowadzący podsumowuje:'
+        '<br>'
         '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Zabrakło Wam dwóch rzeczy:'
+        '</p>'
+        '<ol>'
+        '<li><p style="text-align:justify;">Adam nie otrzymał <b>powodu</b>, żeby wyznawać harcerskie wartości — brakowało mu aksjomatu, z którego te wartości by wypływały. Tylko skąd miałby ten aksjomat wziąć?</p></li>'
+        '<li><p style="text-align:justify;">Duchowości człowieka nie kształtuje się rozmowami wychowawczymi. One działają tylko w bardzo wąskim zakresie przypadków.</p></li>'
+        '</ol>'
+        '</blockquote>'
 );
+
+KonspektStepGroup step_group_scenka = KonspektStepGroup(
+    title: 'Scenka wychowawcza',
+    steps: [
+      _step_scenka_wychowawcza_wprowadzenie,
+      _step_scenka_wychowawcza_przygotowanie,
+      _step_scenka_wychowawcza_etap_wlasciwy,
+      _step_scenka_wychowawcza_omowienie,
+    ]
+);
+
+
+// Meta-narracja
 
 KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
     title: 'Meta-narracja - opowieści',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący podsumowuje dotychczasowe wnioski:'
-        '<br>'
-        '<br><i>Jeżeli chcemy, żeby Adam uznał wartość przebaczenia, to musimy ukształtować jego źródła wartości, czyli aksjomaty. Zanim wskoczymy do oceanu metod skutecznego kształtowania duchowości, musimy jeszcze zatrzymać się nad kwestią aksjomatów.</i>'
-        '<br>'
-        '<br>Prowadzący zwraca uwagę, że kształtując czyjś fundament duchowości, nie można pozbierać losowych aksjomatów w jedną kupę i powiedzieć komuś: masz, wykuj to, od dziś tym się kierujesz.'
-        '<br>'
-        '<br>Aksjomaty muszą po pierwsze <b>być między sobą spójne</b>, zaś po drugie muszą wynikać ze sposobu, w jaki człowiek postrzega rzeczywistość - zaś ta cecha jest w gatunku homo sapiens niezmienna od setek tysięcy lat — a tą cechą są <b>archetypiczne opowieści</b>.'
+        'Prowadzący mówi:'
         '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Wróćmy jeszcze do przypadku Adama ze scenki. Przyczyną, dla której nie udało Wam się go przekonać był nie tylko nieodpowiedni dobór narzędzi - ale przede wszystkim nie dostał <b>powodu, by przyjąć wartości, które przyjmujemy w harcerstwie</b>.'
+        '<br>'
+        '<br>Gdy ma się do czynienia z człowiekiem, który świadomie zinternalizował poziom aksjomatu, a ewidentnie takim człowiekiem był Adam, to jego wartości zawsze wynikają z jego fundamentalnych założeń na temat świata.'
+        '<br>'
+        '<br>Czy zastanawialiście się kiedyś, dlaczego ludzie wierzą w to, w co wierzą? Albo raczej: dlaczego ludzie chętniej wierzą w jedne rzeczy, ale zupełnie nie przekonują ich inne poglądy?'
+        '<br>'
+        '<br>Na szczęście byli i są na świecie ludzie dużo mądrzejsi od nas, którzy badają takie rzeczy i okazuje się, że od kiedy istniejemy jako gatunek, postrzegamy świat zawsze w ten sam sposób.'
+        '<br>'
+        '<br>Ludzie nie postrzegają świata jako zbioru obiektów, ani zbioru faktów. Ludzie postrzegają rzeczywistość jako opowieść: opowieść mającą przyczynę, sens, cel, która opowiada o tym, jaki jest świat, jaką odgrywają w nim rolę, która nadaje im tożsamość i misję.'
+        '<br>'
+        '<br>Przykładów na to można mnożyć bez końca: Grecy widzieli świat takim, jakim opisali go w mitologicznych historiach. Starotestamentalny lud żydowski, z którego nota bene my wszyscy wyrastamy, widział świat jako miejsce, w którym Bóg prowadzi ich przez wyzwania, stopniowo odkrywając przed nimi swoją naturę. Tymczasem dziś, kilka tysięcy lat później, głód i potrzeba opowieści jest tak wielka, że ludzie płacą pieniądze za to, by móc usiąść na kilka godzin w fotelu i obejrzeć zupełnie wymyśloną historię walki dobra ze złem, taką jak Gwiezdne Wojny, Władca Pierścieni, czy Avengersi.'
+        '<br>'
+        '<br>Zatrzymajmy się chwilę nad tymi opowieściami:'
+        '<br>'
+        '<br>W pierwszym odruchu łatwo pomyśleć, że to atawizm - cecha, która kiedyś była przydatna, żeby sobie wyjaśnić jakieś zjawiska pogodowe i choroby, ale w gruncie rzeczy jest cechą prymitywnych ludów. No ale my, dzisiaj, nowocześni i współcześni, mamy wierzyć w jakieś mity? My, którzy mamy naukę i oświecenie?'
+        '<br>'
+        '<br>Po pierwsze: wierzymy w mity, i to jak! Uznajemy istnienie państw, wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności wynikającej z samego faktu bycia człowiekiem, opowieści o bohaterach poległych za ojczyznę, wierzymy, że spokój i spełnienie osiąga się poprzez przepracowanie swoich problemów z dzieciństwa w drodze psychoterapii, czy w kapłańską rolę naukowców obcujących z najczystszą formą prawdy.'
+        '<br>'
+        '<br>Po drugie: opowieści i mity nie są bajeczkami, czy kłamstwami. Ich sens polega na przedstawieniu pewnej trudno uchwytnej prawdy o świecie, którą osiąga się poprzez stworzenie fikcyjnych postaci, fikcyjnych wydarzeń, które następnie są używane, by pokazać realne mechanizmy obecne w świecie. Przykładowo można z jednej strony polecić komuś napisaną precyzyjnym, ale specyficznym językiem serię publikacji naukowych „Psychologiczne i socjologiczne aspekty wariantowych relacji dzieci i ich rodziców", albo można tę samą treść opowiedzieć w historii Pinokia: drewnianej, naiwnej kukle, która uciekłszy z domu, zostaje przygnieciona życiem, lecz w końcu bierze odpowiedzialność za siebie, ratuje nieudacznego ojca z wnętrza wieloryba i dzięki temu staje się w pełni człowiekiem.'
+        '<br>'
+        '<br>Ludzie wierzą w różne rzeczy, ale nie uwierzą w byle co. Ich najgłębsze przekonania są zawsze pewnego rodzaju narracją o rzeczywistości: czymś, co porządkuje im świat, opowiada o dobru i złu, nadaje im tożsamość, sens i cel.'
+        '</p>'
+
+        '<p style="text-align:justify;">'
+        '...tutaj chyba prowadzący powinien położyć jakieś rzeczy i podać te 4 przykłady...'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Adamowi nie można po prostu powiedzieć: "przebaczenie jest dobre, uwierz w to". To, że przebaczenie jest dobre musi wynikać z jakiejś narracji, w którą uwierzy: ze spójnej wizji świata, przez pryzmat której Adam będzie postrzegał rzeczywistość.'
+        '</p>'
+        '</blockquote>'
 );
 
-KonspektStep _step_meta_narracja_czy_opowiesci_to_atawizm = KonspektStep(
-    title: 'Meta-narracja - czy opowieści to atawizm?',
+
+KonspektStep _step_meta_narracja_warunki_brzegowe = KonspektStep(
+    title: 'Meta-narracja - warunki brzegowe',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Niestety nie wystarczy, żeby Adam przyjął dowolną narrację. Gdyby, przykładowo, przyjął darwinowski pogląd że <b>"świat to arena walki i prawo do życia mają tylko osobniki najlepiej dostosowane"</b>, raczej nie uznałby wartości braterstwa, uniwersalnej godności człowieka, czy przebaczenia.'
+        '<br>'
+        '<br>Konieczne jest, by z narracji przyjętej przez Adama wynikały <b>harcerskie wartości</b>.'
+        '<br>'
+        '<br>Zgodzicie się zapewne, że są nimi przede wszystkim wspomniane: "braterstwo", "godność każdego człowieka", "przebaczenie", czy "mówienie prawdy"?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Uczestnicy raczej powinni się zgodzić - w razie potrzeby dyskusji, prowadzący może podeprzeć się Prawem Harcerskim i Statutem ZHP.'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Zastanawialiście się kiedyś, skąd te wartości wzięły się w harcerskim wychowaniu? Czy jakiś stary, mądry harcerz, na przykład Robert Baden-Powell, usiadł kiedyś, głęboko się namyślił i ogłosił je wbrew całemu światu? A może jest inaczej: może harcerstwie wartości nie są wcale fundamentalnie inne od wartości kultury, w której żyjemy?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Po krótkiej dyskusji uczestnicy powinni zwrócić uwagę, że te wartości są powszechne w całej naszej kulturze, nie tylko w harcerstwie.'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'A czy zastanawialiście się kiedyś dlaczego nasza cywilizacja zbudowana jest akurat na takich, a nie innych wartościach?'
+        '<br>'
+        '<br>Jeśli mamy określić które poglądy i narracje mogą dać Adamowi wartości przebaczenia, braterstwa i uniwersalnej ludzkiej godności, to warto najpierw odpowiedzieć na pytanie jakie narracje dały początek tym wartościom w naszej kulturze. Do tego jednak konieczne jest nakreślenie pewnego kontekstu.'
+        '</p>'
+        '</blockquote>'
+);
+
+
+KonspektStep _step_meta_narracja_uniwersalnosc = KonspektStep(
+    title: 'Meta-narracja - uniwersalność łacińskich wartości',
+    duration: Duration(minutes: 3),
+    activeForm: KonspektStepActiveForm.static,
+    content:
+        '<p style="text-align:justify;">'
+        'Prowadzący zaczyna od zwrócenia uwagi, że wartości łacińskie nie są ani trochę <b>domyślne</b> ani <b>uniwersalne</b>:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Na początku rozprawmy się z założeniem, że nasze wartości są domyślne i naturalne: czyli że każdy, gdyby zostawić go samemu sobie, sam by je w końcu odkrył.'
+        '<br>'
+        '<br>Czy wiecie ile czasu my, jako gatunek (homo sapiens) żyjemy na świecie? Około 300 000 lat - gdybyście przenieśli noworodka sprzed 300 000 lat w czasie do obecnej chwili, to wyrósłby na zupełnie normalnego człowieka.'
+        '<br>'
+        '<br>Niestety przez 99% czasu swojego istnienia na Ziemi ludzie nawet nie stali obok braterstwa, przebaczenia, czy uniwersalnej ludzkiej godności. Te wartości wcale nie są dla nas naturalne - domyślne są dla nas <b>plemienność</b>, <b>niewolnictwo</b> i <b>przemoc</b>.'
+        '<br>'
+        '<br>Doskonale to widać nawet dziś na naszych najbliższych gatunkowych krewniakach, czyli szympansach. Niestety nie są to, mówiąc ogólnie, gołąbki pokoju: szympanse mają to do siebie, że regularnie zbierają się w grupy i polują na członków obcych stad, a gdy jakiegoś złapią, to dosłownie, żywcem rozrywają go na kawałki. To jest mniej więcej obraz tego, kim z natury jesteśmy także my dzisiaj, czyli gatunek homo sapiens.'
+        '<br>'
+        '<br>Nie jest to raczej przyjemna wiadomość dla naszych dzisiejszych, cywilizowanych uszu, ale jedynym powodem, dla którego jesteśmy inni jest to, że narzuciliśmy sobie bardzo wyrafinowane struktury, które z trudem wypierają z nas nasze naturalne instynkty i kształtują w nas zupełnie inną duchowość: zasady, wartości i przekonania, które zamiast pozwalać nam wybijać swoich wrogów, każą nam im przebaczać.'
+        '<br>'
+        '<br>To, jak kruche i w pewnym sensie nienaturalne są dla nas te narzucone duchowości widać niestety bardzo często. Masowe, przemysłowe mordy XX wieku na sąsiednich narodach nie były wcale wypadkiem i wynaturzeniem, ale obliczem naszego gatunku gdy cywilizująca nas duchowość na chwilę się zachwieje. Niemcy z III rzeszy nie byli jakimiś neandertalczykami, nie mieli innego genomu: byli identycznymi ludźmi jak my dziś i my na ich miejscu niestety zrobilibyśmy to samo.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Następnie prowadzący zwraca uwagę, że wartości łacińskie nie są <b>powszechne</b> na przestrzeni wszystkich <b>cywilizacji</b>:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Spróbujmy się teraz zastanowić, czy wszystkie cywilizacje, chcąc stłumić pierwotną, dziką ludzką duchowość dochodzi w końcu do łacińskich wartości.'
+        '</p>'
+        '</blockquote>'
+
+        '<ol>'
+
+        // Wartość 1 - Niezbywalna godność każdego człowieka
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<b>Niezbywalna godność każdego człowieka.</b>'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Czy niezbywalna godność każdego człowieka jest uniwersalną wartością w każdej rozwiniętej cywilizacji?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący daje uczestnikom chwilę, by wyrazili swoje zdanie, po czym zwraca uwagę:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'W systemach konfucjańskich, np. w Chinach, Japonii, czy Korei, liczy się najpierw wspólnota i kolektyw, dopiero potem jednostka - powszechne jest oczekiwanie, że prawa i wolności człowieka można mu zabrać, gdy wymaga tego dobro wspólne.'
+        '<br>'
+        '<br>Niektórzy wyznawcy hinduizmu powstrzymają innych od udzielenia pomocy cierpiącemu – jeśli ktoś cierpi, to pokutuje za grzechy popełnione w poprzednim życiu.'
+        '</p>'
+        '</blockquote>'
+        '</li>'
+
+        // Wartość 2 - Przebaczenie i odpuszczenie win.
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<b>Przebaczenie i odpuszczenie win.</b>'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Czy przebaczenie i odpuszczanie win jest uniwersalną wartością w każdej cywilizacji?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący daje uczestnikom chwilę, by wyrazili swoje zdanie, po czym zwraca uwagę:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'W wielu kulturach przebaczenie jest uważane za zachętę do bycia wykorzystywanym.'
+        '<br>'
+        '<br>Nietzsche widział w przebaczaniu wyraz słabości i element moralności niewolników.'
+        '<br>'
+        '<br>W tradycyjnej kulturze japońskiej po popełnieniu poważnej winy nie było drogi jej odpuszczenia – jedynym honorowym wyjściem było rytualne samobójstwo: seppuku.'
+        '</p>'
+        '</blockquote>'
+        '</li>'
+
+        // Wartość 3 - Życie w prawdzie.
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<b>Życie w prawdzie.</b>'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Czy prawda i życie w prawdzie jest uniwersalną wartością w każdej cywilizacji?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący daje uczestnikom chwilę, by wyrazili swoje zdanie, po czym zwraca uwagę:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'W kulturach wschodnich, gdzie najważniejsza jest harmonia społeczna, należy kłamać, jeśli prowadzi to do uniknięcia konfliktu. W części kultur afrykańskich kłamstwo nie jest złem, jeśli służy uniknięciu wstydu.'
+        '</p>'
+        '</blockquote>'
+        '</li>'
+
+        '</ol>'
+
+);
+
+KonspektStep _step_meta_narracja_zrodla_lacinskich_wartosci = KonspektStep(
+    title: 'Meta-narracja - źródła łacińskich wartości',
     duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę, że zazwyczaj, gdy współczesny człowiek słyszy o widzeniu świata w perspektywie opowieści, myśli o prehistorycznych ludach, które nie umiały wyjaśnić przyczyny chorób, deszczu, ani burz, więc wymyślali sobie jakieś bajeczki na ten temat, które dziś są zupełnie śmieszne.'
-        '<br>'
-        '<br>Opowieści kształtujące ludzkie postrzeganie są jednak czymś dużo głębszym: w greckiej mitologii nie chodzi o to, że jest jakiś chłop z błyskawicami na chmurce, ale o prawidła rządzące rzeczywistym światem, do którego opowiedzenia najwygodniej użyć fikcyjnych aktorów.'
-        '<br>'
-        '<br>To jasne, że nie było nigdy takiego człowieka, jak Odyseusz i że nie było nigdy żadnych cyklopów. Odyseja nie jest jednak o tym: chodzi o wyrażenie tego, że życie nie jest procesem, który można sobie zaplanować, albo z którym można się siłować i że próba powrotu do miejsca zwanego domem bywa procesem, który może trwać dwie dekady, zanim się w końcu uda.'
-        '<br>'
-        '<br>Nic się w tym zakresie nie zmieniło do dziś. Dlaczego ludzie płacą za to, żeby siedzieć z jakimiś losowymi ludźmi i gapić się przez dwie godziny na ekran kina, na którym lecą Avengersi, Władca Pierścieni, czy Gwiezdne Wojny? Dziś widzimy świat przez opowieść o instytucjach i państwach, wierzymy w swoją życiową misję względem rodziny, widzimy walkę wielkich, złych korporacji z dobrymi, zwykłymi ludźmi, wierzymy w oświeceniową opowieść o niezbywalnej godności człowieka, w opowieści o bohaterach poległych za ojczyznę, w kapłańską rolę naukowców obcujących z najczystszą formą prawdy. To nie jest atawizm — to sposób, w jaki każdy człowiek postrzega rzeczywistość.'
+        'Prowadzący kontrastuje poprzednie trzy alternatywne systemy przekonań z systemem łacińskim:'
         '</p>'
+
+        '<blockquote>'
+        '<ol>'
+        '<li><p style="text-align:justify;">Skąd zatem w naszej duchowości pogląd, że wykształcony profesor z zasługami dla narodu ma mieć takie same prawa jak półinteligentny osiedlowy cwaniaczek? Skąd pomysł, że prawo do życia i godnego traktowania przysługuje każdemu, niezależnie od wieku, pochodzenia czy wyznania?</p></li>'
+        '<li><p style="text-align:justify;">Dlaczego w naszych systemach prawnych po odbyciu kary wina zostaje zmazana i człowiek jest wolny? Dlaczego za kradzież nie skazuje się ludzi dożywotnio, żeby skutecznie ich od niej zniechęcić?</p></li>'
+        '<li><p style="text-align:justify;">Dlaczego akurat my tak się uparliśmy, by nagannie traktować świadome kłamstwa?</p></li>'
+        '</ol>'
+        '<p style="text-align:justify;">'
+        'Przecież ani nie są to dla nas naturalne instynkty, ani nawet nie są to uniwersalne remedia na nasze naturalne instynkty - większość cywilizacji i systemów społecznych kieruje się czymś zupełnie innym!'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący pozwala uczestnikom wejść w dyskusję i przedstawić własne propozycje, po czym podsumowuje:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Nasza cywilizacja jest zbudowana wokół takich wartości tylko z jednego powodu: bo ukształtowała ją wiara w zbawcze dla człowieka: życie, śmierć i zmartwychwstanie Chrystusa.'
+        '</p>'
+        '<ol>'
+        '<li><p style="text-align:justify;">Nie byłoby niezbywalnej godności każdego człowieka, ani równości wobec prawa, ani humanitaryzmu, ani oświecenia, ani Powszechnej Deklaracji Praw Człowieka bez wiary, że skoro sam Bóg dobrowolnie wydał się na śmierć dla zbawienia najpodlejszego nawet człowieka, to że w każdym człowieku jest coś iście boskiego, nieważne jak bardzo jest podły, bezużyteczny, inny, czy denerwujący. Koncept godności niektórych ludzi funkcjonował w wielu kręgach już wcześniej - ale godność każdego człowieka - bez względu na jego urodzenie, majętność, plemienną przynależność, czy poglądy - jest czymś zupełnie innym.</p></li>'
+        '<li><p style="text-align:justify;">Nie byłoby przebaczenia, ani odpuszczenia win, gdyby nie wiara, że sam Bóg, stwórca świata wziął na siebie błędy każdego człowieka i ich konsekwencje i zgodził się dobrowolnie ponieść śmierć, by zostać potępionym zamiast ludzi.</p></li>'
+        '<li><p style="text-align:justify;">Nie byłoby wreszcie uznania wartości prawdy, gdyby nie wiara, że świat i jego prawa zostały stworzone przez absolutne dobro, oraz że stając w prawdzie pomimo błędów, czy chwilowego braku interesu jest jedyną drogą, by naprawić swoje życie, bo czuwa nad nim wszechmogący i miłujący Bóg.</p></li>'
+        '</ol>'
+        '</blockquote>'
 );
 
-KonspektStep _step_meta_narracja_definicja = KonspektStep(
-    title: 'Meta-narracja - definicja i przykłady',
-    duration: Duration(minutes: 2),
+KonspektStep _step_meta_narracja_selekcja_naturalna = KonspektStep(
+    title: 'Meta-narracja - selekcja naturalna',
+    duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
-    materials: [
-      material_zal_meta_narracja_opis,
-      material_zal_meta_narracja_przyklady,
-    ],
-    content: '<p style="text-align:justify;">'
-        'Prowadzący mówi:'
+    content: '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Ale co jeśli ktoś jest niewierzący? Co, jeśli ktoś nie patrzy na świat przez paradygmat chrześcijański?'
         '<br>'
-        '<br><i>Wśród wszystkich opowieści istnieje bardzo wąska, ale szczególna kategoria — opowieści tak fundamentalne, że porządkują całą rzeczywistość. Opowieść, która mówi człowiekowi kim jest, jak działa jego świat, co jest dobre i jaki jest sens. Opowieści te noszą nazwę <b>meta-narracji</b>.</i>'
-        '<br>'
-        '<br>Prowadzący kładzie przed uczestnikami (obok kartki "Aksjomat") opis meta-narracji z załącznika $attach_html_meta_narracja_opis i odczytuje go:'
-        '<br>'
-        '<br><i>Meta-narracja to opowieść o świecie, obok której nie można przejść obojętnie. To opowieść tak głęboka, tak wielka, tak dojmująca i fundamentalna, że niejako chwyta człowieka za samo serce i staje się dla niego głównym punktem odniesienia jego obecności w świecie.'
-        '<br>'
-        '<br>Meta-narracja jest opowieścią o świecie, jego aktorach, o osobistej roli przyjmującego ją człowieka.</i>'
-        '<br>'
-        '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady i kładzie je obok karty "Meta-narracja".'
+        '<br>Tutaj jest do rozwikłania kilka rzeczy.'
         '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący zwraca uwagę, że źródło wartości cywilizacji łacińskiej nie jest kwestią wiary:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Po pierwsze, to że nasza cywilizacja i jej wartości są bezpośrednim efektem myśli, filozofii i wiary chrześcijańskiej nie jest zależne od tego, czy ktoś, kto dziś o tym myśli jest wierzący, czy nie.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Następnie prowadzący opisuje zjawisko <b>selekcji naturalnej</b> duchowości powszechnych:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Po drugie: nie wszystkie narracje, które stoją u podstaw różnych duchowości są tego samego kalibru i warto zrozumieć dlaczego.'
+        '<br>'
+        '<br>Ludzie mają to do siebie, że żyją w grupach, oraz że mają tendencję do ujednolicania w ramach swoich wspólnot swoich duchowości. Z tej perspektywy można zatem spojrzeć na duchowość nie tylko jak na sposób bycia pojedynczego człowieka, ale można w przypadku wspólnoty ludzi mówić o ich duchowości powszechnej - czyli zachowaniach, wartościach i aksjomatach wspólnych dla całej wspólnoty.'
+        '<br>'
+        '<br>Główną różnicą duchowości powszechnej jest to, że jej istnienie nie kończy się wraz ze śmiercią jednego człowieka. Duchowość powszechna ma charakter sztafetowy: każde przyjmujące ją pokolenie nią żyje, pogłębia ją, testuje jej warianty i coś poprawi, coś doda, coś usunie - i w końcu przekaże tę duchowość kolejnym pokoleniom. Ta sztafetowość ma olbrzymie znaczenie: zwykła duchowość jednego człowieka jest kształtowana tylko na podstawie doświadczeń i zasobów pojedynczego ludzkiego życia. Duchowość powszechna korzysta zaś z sekwencji milionów ludzkich żyć, prób, błędów, myśli i doświadczeń, co pozwala jej być daleko, daleko lepiej dostosowaną do życia w świecie niż pojedyncza duchowość pojedynczego człowieka.'
+        '<br>'
+        '<br>Drugą cechą duchowości powszechnych jest to, że podlegają one <b>selekcji naturalnej</b>. Niektóre sposoby postępowania działają w określonym środowisku lepiej od innych: niektóre poglądy, wartości i zachowania pozwalają żyć dłużej, szczęśliwiej, zasobniej niż inne. Przykładowo duchowość oparta jedynie na słuchaniu własnych potrzeb w ciągu kilku pokoleń doprowadziłaby do totalnego rozpadu struktur społecznych i sprawiałaby, że jej wyznawcy staliby się skazani tylko na siebie i prawdopodobnie wyginęli.'
+        '<br>'
+        '<br>Na świecie było i jest mnóstwo sposobów życia - ale zostawione samym sobie, wszystkie zostaną brutalnie zweryfikowane przez rzeczywistość i po kilkuset, czy nawet kilku tysiącach lat pozostaną tylko duchowości mieszczące się w wąskich granicach takich sposobów bycia, które pozwalają po pierwsze przetrwać, a po drugie czasami nawet się rozwijać.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący zwraca jeszcze uwagę na aspekt <b>narracji</b> duchowości powszechnych i wprowadza pojęcie <b>meta-narracji</b>:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Za każdą duchowością, która jest dla ludzi "przyjmowalna" stoi określona <b>narracja</b> - to już wiadomo. Ale w przypadku duchowości powszechnych te narracje także są innego kalibru.'
+        '<br>'
+        '<br>Jeżeli jakaś duchowość jest nieprzystająca do rzeczywistości i kończy się katastrofą ludzi ją przyjmujących, to zazwyczaj oznacza to, że owa narracja jest w jakiś sposób fałszywa - że opisuje świat i relacje w nim inaczej, niż funkcjonują one naprawdę.'
+        '<br>'
+        '<br>Jeżeli jednak jakaś duchowość okazuje się stabilna, oznacza to po pierwsze, że stojąca za nią narracja jest w jakiś głęboki sposób zgodna z tym, jak w istocie funkcjonuje świat. Po drugie zaś, jeśli trafia do ludzi, to znaczy, że nie przemawia do nich w sposób płytki i czysto emocjonalny, lecz dotyka ich najgłębszych kwestii egzystencjalnych.'
+        '<br>'
+        '<br>W tym drugim przypadku trudno mówić już jedynie o jakiejś wycinkowej narracji. Za stabilnymi, wielowiekowymi duchowościami stoją niezwykle spójne i głębokie opowieści o świecie, które rysują jego obraz w sposób zupełny, z których wynikają prawdy dotykające każdego ważnego aspektu życia.'
+        '<br>'
+        '<br>W takim wypadku zaś można już śmiało mówić o czymś więcej - o <b>meta-narracji</b>.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Na końcu prowadzący zwraca uwagę, że optymalnych duchowości nie da się "wymyślić":'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Kluczowe jest to, że rzeczywistość jest na tyle skomplikowana i nieprzewidywalna, że stworzenie duchowości "od zera" jest w zasadzie niewykonalne - jedyną metodą na zweryfikowanie jakości określonej duchowości jest jej empiryczne sprawdzenie w ogniu rzeczywistości.'
+        '<br>'
+        '<br>Podobnie, nie da się usiąść i skleić sobie na boku, nawet myśląc o tym przez kilkadziesiąt lat, jakiejś nowej meta-narracji. Takie próby oczywiście były wielokrotnie podejmowane i zawsze kończyły się tak samo: na początku działały, potem zaczynały pękać, a potem doprowadzały do rozlewu olbrzymiej ilości krwi.'
+        '</p>'
+        '</blockquote>'
 );
 
-KonspektStep _step_meta_narracja_powrot_do_scenki = KonspektStep(
-    title: 'Meta-narracja - powrót do scenki i implikacja',
-    duration: Duration(minutes: 2),
+KonspektStep _step_meta_narracja_wniosek = KonspektStep(
+    title: 'Meta-narracja - wniosek',
+    duration: Duration(minutes: 3),
     activeForm: KonspektStepActiveForm.static,
-    content: '<p style="text-align:justify;">'
-        'Prowadzący wraca do scenki:'
+    content: '<blockquote>'
+        '<p style="text-align:justify;">'
+        'To wszystko w gruncie rzeczy sprowadza się do jednego pytania:'
         '<br>'
-        '<br><i>Jeśli Adam miałby kiedyś wybaczyć Radkowi, to nie dlatego, że tak mówi Prawo Harcerskie, ale dlatego, że zobaczy i przyjmie świat w perspektywie meta-narracji, z której wynikną jego aksjomaty – a z nich naturalnie wyniknie wartość przebaczenia.</i>'
+        '<br>Czy istnieje jakaś meta-narracja, która byłaby fundamentem duchowości, z której wynikają wszystkie najważniejsze chrześcijańskie wartości i postawy, ale która nie miałaby chrześcijańskich aksjomatów o zbawczym życiu, śmierci i zmartwychwstaniu Chrystusa?'
         '<br>'
-        '<br>Prowadzący kończy wyjaśnieniem implikacji dla wychowawców:'
+        '<br>Jeśli nawet istnieje, to nikt do dziś takowej meta-narracji nie znalazł. A nawet gdyby znalazł, to byłaby ona najpewniej czymś w równym stopniu religijnym, co wiara chrześcijańska.'
         '<br>'
-        '<br><i>Ograniczając się do pracy jedynie nad postawami i wartościami wychowanków, można dojść jedynie do etapu <b>wstępnej integracji duchowości</b>. Później, na etapie <b>świadomej integracji duchowości</b>, dojrzały duchowo człowiek nie przyjmie zbioru wartości „bo tak". Będzie potrzebował <b>powodu</b>, by je przyjąć — <b>źródła wartości</b>, na którym będzie mógł oprzeć swoją duchowość.'
+        '<br>Czy to zatem oznacza, że osoby niewierzące w Chrystusa nie mają jak kształtować swojej duchowości zgodnie z harcerskimi wartościami?'
         '<br>'
-        '<br>Człowiek prędzej uwierzy w największą głupotę, niż nie będzie wierzył w nic. Jeśli chcemy jako wychowawcy skutecznie i długotrwale ukształtować młodego człowieka, nie możemy abstrahować od kwestii najbardziej osobistych. Musimy wejść w interakcję z jego przestrzenią aksjomatyczną: opowieścią, która stanie się dla niego fundamentalnym rdzeniem jego ducha.</i>'
+        '<br>Tutaj sprawa jest złożona: dopóki wystarcająco wiele osób żyje zgodnie z chrześcijańskimi zasadami, to można być niewierzącym i przez przyzwyczajenie i tożsamość owe zasady zachować. Ale jeżeli w życiu takiego człowieka nastąpi jakieś nagłe wydarzenie, katastrofa, albo jeśli wystarczająco wiele osób porzuci fundament, z którego ich wartości wyrastają - to w kilka pokoleń z owych wartości nic nie zostanie.'
+        '<br>'
+        '<br>Wniosek jest więc taki, że można porzucić aksjomaty chrześcijańskie w procesie kształtowania duchowości, ale trzeba założyć, że z czasem człowiek przestanie wierzyć w przebaczenie wszystkich win, przestanie wierzyć w absolutną wartość prawdy i przestanie wierzyć, że każdy człowiek ma niezbywalną godność. Bo dlaczego niby najwięksi wrogowie nie mieliby zostać z tego prawa do godności wyłączeni? Czemu ktokolwiek miałby się poświęcać dla swojego nieprzyjaciela?'
+        '<br>'
+        '<br>Ten wniosek nie jest "fajny", ani "łatwy" - w gruncie rzeczy nie wiemy o co oprzeć duchowość ludzi niewierzących tak, by jako dorośli, świadomi ludzie szczerze żyli harcerskimi wartościami niezależnie od okoliczności.'
         '</p>'
+        '</blockquote>'
 );
+
+
+// KonspektStep _step_meta_narracja_definicja = KonspektStep(
+//     title: 'Meta-narracja - definicja i przykłady',
+//     duration: Duration(minutes: 2),
+//     activeForm: KonspektStepActiveForm.static,
+//     materials: [
+//       material_zal_meta_narracja_opis,
+//       material_zal_meta_narracja_przyklady,
+//     ],
+//     content: '<p style="text-align:justify;">'
+//         'Prowadzący mówi:'
+//         '<br>'
+//         '<br><i>Wśród wszystkich opowieści istnieje bardzo wąska, ale szczególna kategoria — opowieści tak fundamentalne, że porządkują całą rzeczywistość. Opowieść, która mówi człowiekowi kim jest, jak działa jego świat, co jest dobre i jaki jest sens. Opowieści te noszą nazwę <b>meta-narracji</b>.</i>'
+//         '<br>'
+//         '<br>Prowadzący kładzie przed uczestnikami (obok kartki "Aksjomat") opis meta-narracji z załącznika $attach_html_meta_narracja_opis i odczytuje go:'
+//         '<br>'
+//         '<br><i>Meta-narracja to opowieść o świecie, obok której nie można przejść obojętnie. To opowieść tak głęboka, tak wielka, tak dojmująca i fundamentalna, że niejako chwyta człowieka za samo serce i staje się dla niego głównym punktem odniesienia jego obecności w świecie.'
+//         '<br>'
+//         '<br>Meta-narracja jest opowieścią o świecie, jego aktorach, o osobistej roli przyjmującego ją człowieka.</i>'
+//         '<br>'
+//         '<br>Prowadzący natychmiast przedstawia uczestnikom kilka przykładów meta-narracji z załącznika $attach_html_meta_narracja_przyklady i kładzie je obok karty "Meta-narracja".'
+//         '</p>'
+// );
+//
+// KonspektStep _step_meta_narracja_powrot_do_scenki = KonspektStep(
+//     title: 'Meta-narracja - powrót do scenki i implikacja',
+//     duration: Duration(minutes: 2),
+//     activeForm: KonspektStepActiveForm.static,
+//     content: '<p style="text-align:justify;">'
+//         'Prowadzący wraca do scenki:'
+//         '<br>'
+//         '<br><i>Jeśli Adam miałby kiedyś wybaczyć Radkowi, to nie dlatego, że tak mówi Prawo Harcerskie, ale dlatego, że zobaczy i przyjmie świat w perspektywie meta-narracji, z której wynikną jego aksjomaty – a z nich naturalnie wyniknie wartość przebaczenia.</i>'
+//         '<br>'
+//         '<br>Prowadzący kończy wyjaśnieniem implikacji dla wychowawców:'
+//         '<br>'
+//         '<br><i>Ograniczając się do pracy jedynie nad postawami i wartościami wychowanków, można dojść jedynie do etapu <b>wstępnej integracji duchowości</b>. Później, na etapie <b>świadomej integracji duchowości</b>, dojrzały duchowo człowiek nie przyjmie zbioru wartości „bo tak". Będzie potrzebował <b>powodu</b>, by je przyjąć — <b>źródła wartości</b>, na którym będzie mógł oprzeć swoją duchowość.'
+//         '<br>'
+//         '<br>Człowiek prędzej uwierzy w największą głupotę, niż nie będzie wierzył w nic. Jeśli chcemy jako wychowawcy skutecznie i długotrwale ukształtować młodego człowieka, nie możemy abstrahować od kwestii najbardziej osobistych. Musimy wejść w interakcję z jego przestrzenią aksjomatyczną: opowieścią, która stanie się dla niego fundamentalnym rdzeniem jego ducha.</i>'
+//         '</p>'
+// );
 
 KonspektStep _step_meta_narracja_pytania = KonspektStep(
     title: 'Meta-narracja - pytania',
@@ -1496,14 +1853,12 @@ KonspektStep _step_meta_narracja_pytania = KonspektStep(
 KonspektStepGroup step_group_metanarracja = KonspektStepGroup(
     title: 'Meta-narracja',
     steps: [
-      _step_meta_narracja_scenka_wprowadzenie,
-      _step_meta_narracja_scenka_przygotowanie,
-      _step_meta_narracja_scenka,
-      _step_meta_narracja_omowienie_scenki,
       _step_meta_narracja_opowiesci,
-      _step_meta_narracja_czy_opowiesci_to_atawizm,
-      _step_meta_narracja_definicja,
-      _step_meta_narracja_powrot_do_scenki,
+      _step_meta_narracja_warunki_brzegowe,
+      _step_meta_narracja_uniwersalnosc,
+      _step_meta_narracja_zrodla_lacinskich_wartosci,
+      _step_meta_narracja_selekcja_naturalna,
+      _step_meta_narracja_wniosek,
       _step_meta_narracja_pytania,
     ]
 );
@@ -1856,7 +2211,7 @@ KonspektStep _step_duchowosc_w_zhp_aksjomaty_poszukiwanie_zrodla = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'W kulturze konfucjańskiej najpierw liczy się zbiorowość, trwałość systemu państwowego – a dopiero potem dobro jednostki. W Chinach niedopuszczalne jest publiczne okazywanie sporów, ponieważ osłabia to wspólnotę. W kulturze japońskiej należy poświęcić plany prywatne, jeśli kolidują z wydarzeniem firmy. Skąd więc u nas „oczywiste" przekonanie, że rodzinie, której dom stoi na drodze nowej autostrady, należy się odszkodowanie? Skąd przekonanie, że nie można zmusić człowieka do pracy, jeśli nie chce? Dlaczego chronimy tak zaciekle wolności słowa, nawet, gdy osłabia ona spójność społeczną?'
+        'W kulturze konfucjańskiej najpierw liczy się zbiorowość, trwałość systemu państwowego – a dopiero potem dobro jednostki. W Chinach niedopuszczalne jest publiczne okazywanie sporów, ponieważ osłabia to wspólnotę. W kulturze japońskiej należy poświęcić plany prywatne, jeśli kolidują z wydarzeniem firmy. Skąd więc u nas „oczywiste" przekonanie, że rodzinie, której dom stoi na drodze nowej autostrady, należy się odszkodowanie? Skąd przekonanie, że nie można zmusić człowieka do pracy, jeśli nie chce? Dlaczego chronimy tak zaciekle wolności słowa, nawet gdy osłabia ona spójność społeczną?'
         '</p>'
         '</blockquote>'
         '</li>'
@@ -2126,7 +2481,7 @@ KonspektStep _step_zalozenia_wyjsciowe_wychowania_duchowego = KonspektStep(
         'Teza: <b>Nie wolno narażać harcerzy na niebezpieczeństwo ani dyskomfort</b>'
         '<br>'
         '<br><u>Sugestia prowadzącego:</u>'
-        '<br><i>Po pierwsze, niektóre niezwykle skuteczne formy wychowawcze mają w sobie element ryzyka: chodzenie w góry, jeżdżenie autostopem, podróże po innych krajach, etc.. Po drugie, świat jest w sposób immanentny niebezpieczny. Niemal na pewno nasi wychowankowie zetkną się w życiu z agresją, bezradnością, frustracją. Lepiej jest ich do tego skutecznie przygotować w kontrolowanych warunkach. To właśnie jest hartem ducha.</i>'
+        '<br><i>Po pierwsze, niektóre niezwykle skuteczne formy wychowawcze mają w sobie element ryzyka: chodzenie w góry, jeżdżenie autostopem, podróże po innych krajach, etc. Po drugie, świat jest w sposób immanentny niebezpieczny. Niemal na pewno nasi wychowankowie zetkną się w życiu z agresją, bezradnością, frustracją. Lepiej jest ich do tego skutecznie przygotować w kontrolowanych warunkach. To właśnie jest hartem ducha.</i>'
         '</p>'
         '</li>'
 
@@ -2202,7 +2557,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        '<u>Wszystkie niebezpieczne działania są niewychowawcze i nieodpowiedzialne.</u>'
+        '<u>Wszystkie niebezpieczne działania są niewychowawcze i nieodpowiednialne.</u>'
         '<br>'
         '<br><i>Życie jest niebezpieczne i nie da się odizolować od tego człowieka. Zamiast chować go pod kloszem i wychowywać do życia w nieistniejącym świecie, lepiej dawkować młodemu człowiekowi doświadczenie braku bezpieczeństwa - takie działania mogą być ryzykowne, ale są wychowawcze i są wyrazem odpowiedzialności za przyszłość młodego człowieka.</i>'
         '</p></li>'

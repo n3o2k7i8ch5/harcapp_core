@@ -339,11 +339,16 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       step_group_poziomy_duchowosci,
 
-      step_group_ksztaltowanie_duchowosci,
+      step_group_etapy_rozwoju_duchowosci,
 
-      step_group_metanarracja,
+      step_group_scenka,
 
-      step_group_zdolnosc_integracji_duchowosci,
+      // step_group_zdolnosc_integracji_duchowosci,
+
+      KonspektStepGroup(
+          title: 'Czynniki i mechanizmy kształtowania duchowości',
+          steps: steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci.map((step) => step.copyWithNamePrefix('Czynniki duchowości - ')).toList()
+      ),
 
       KonspektStepGroup(
           steps: [
@@ -358,10 +363,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           ]
       ),
 
-      KonspektStepGroup(
-          title: 'Czynniki i mechanizmy kształtowania duchowości',
-          steps: steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci.map((step) => step.copyWithNamePrefix('Czynniki duchowości - ')).toList()
-      ),
+      step_group_metanarracja,
 
       KonspektStepGroup(
           steps: [

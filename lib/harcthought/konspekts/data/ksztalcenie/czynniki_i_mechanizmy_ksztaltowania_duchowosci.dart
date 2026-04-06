@@ -119,7 +119,7 @@ List<KonspektStep> steps_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
   ),
 
   KonspektStep(
-      title: 'Wręcznie nagrody',
+      title: 'Wręczenie nagrody',
       duration: Duration(minutes: 5),
       activeForm: KonspektStepActiveForm.static,
       materials: [
