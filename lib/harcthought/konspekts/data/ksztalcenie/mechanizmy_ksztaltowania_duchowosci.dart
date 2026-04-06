@@ -133,7 +133,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
 ];
 
 // Konspekt
-Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt(
+Konspekt konspekt_kszt_mechanizmy_ksztaltowania_duchowosci = Konspekt(
   name: konspekt_kszt_name_mechanizmy_ksztaltowania_duchowosci,
   title: 'Mechanizmy kształtowania duchowości',
   category: KonspektCategory.ksztalcenie,
@@ -146,7 +146,7 @@ Konspekt konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = Konspekt
     'Przedstawienie uczestnikom czynników duchowości.',
     'Przedstawienie uczestnikom mechanizmów kształtowania duchowości.',
   ],
-  attachments: attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  attachments: attach_kszt_mechanizmy_ksztaltowania_duchowosci,
   materials: materials_kszt_mechanizmy_ksztaltowania_duchowosci,
   summary: 'Uczestnicy rozgrywają między sobą bieganą familiadę, by na podstawie krótkich historii określić, które czynniki rozwoju duchowości są w nich opisane.',
   steps: steps_kszt_mechanizmy_ksztaltowania_duchowosci,

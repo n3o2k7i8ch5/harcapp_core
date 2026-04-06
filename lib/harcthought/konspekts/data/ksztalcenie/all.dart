@@ -13,7 +13,7 @@ Future<List<Konspekt>> _loadAllKsztalcenieKonspekts() async => [
   konspekt_kszt_warsztaty_wychowania_duchowego,
   konspekt_kszt_warsztaty_wychowania_duchowego_old,
   konspekt_kszt_wstep_do_wychowania_duchowego,
-  konspekt_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+  konspekt_kszt_mechanizmy_ksztaltowania_duchowosci,
 ];
 
 bool initialized = false;

@@ -84,7 +84,7 @@ flutter:
     - assets/konspekty/
 
     - assets/konspekty/common/
-    - assets/konspekty/common/czynniki_i_mechanizmy_ksztaltowania_duchowosci/
+    - assets/konspekty/common/mechanizmy_ksztaltowania_duchowosci/
     - assets/konspekty/common/warsztaty_duchowe/
 
     - assets/konspekty/harcerskie/
@@ -145,14 +145,14 @@ flutter:
 
     - assets/konspekty/ksztalcenie/
     - assets/konspekty/ksztalcenie/czym_jest_zhp/
-    - assets/konspekty/ksztalcenie/czynniki_i_mechanizmy_ksztaltowania_duchowosci/
+    - assets/konspekty/ksztalcenie/mechanizmy_ksztaltowania_duchowosci/
     - assets/konspekty/ksztalcenie/dwie_roty_dwoch_przyrzeczen_harcerskich/
     - assets/konspekty/ksztalcenie/warsztaty_wychowania_duchowego/
     - assets/konspekty/ksztalcenie/warsztaty_wychowania_duchowego_old/
     - assets/konspekty/ksztalcenie/wstep_do_wychowania_duchowego/
 
     - assets/poradnik/betlejemskie_swiatlo_pokoju/
-    - assets/poradnik/czynniki_i_mechanizmy_ksztaltowania_duchowosci/
+    - assets/poradnik/mechanizmy_ksztaltowania_duchowosci/
     - assets/poradnik/dwie_roty_dwoch_przyrzeczen_harcerskich/
     - assets/poradnik/niedziela_na_obozie/
     - assets/poradnik/o_strukturze_duchowosci/

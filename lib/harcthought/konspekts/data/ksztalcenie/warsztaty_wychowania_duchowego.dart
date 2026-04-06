@@ -179,7 +179,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       attach_scenka_wychowawcza,
 
-      ...attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci,
+      ...attach_kszt_mechanizmy_ksztaltowania_duchowosci,
 
       attach_narracja_opis,
       attach_narracja_przyklady,

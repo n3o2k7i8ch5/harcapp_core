@@ -29,7 +29,7 @@ const KonspektAttachment attach_scenariusze_mechanizmow_ksztaltowania_duchowosci
   },
 );
 
-List<KonspektAttachment> attach_kszt_czynniki_i_mechanizmy_ksztaltowania_duchowosci = [
+List<KonspektAttachment> attach_kszt_mechanizmy_ksztaltowania_duchowosci = [
   attach_poradnik_mechanizmy_ksztaltowania_duchowosci,
   attach_scenariusze_mechanizmow_ksztaltowania_duchowosci,
 ];
