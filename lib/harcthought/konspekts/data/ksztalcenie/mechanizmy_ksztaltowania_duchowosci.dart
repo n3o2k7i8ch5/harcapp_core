@@ -26,7 +26,7 @@ KonspektMaterial material_zetony = KonspektMaterial(
 );
 
 KonspektMaterial material_nagroda = KonspektMaterial(
-  name: 'Nagroda dla zwyciezkiego zespołu (np. paczka żelków)',
+  name: 'Nagroda dla zwycięskiego zespołu (np. paczka żelków)',
   amount: 1
 );
 
@@ -62,68 +62,117 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
         material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
       ],
       content: '<p style="text-align:justify;">'
-          'Prowadzący, na podstawie załącznika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci wyjaśnia uczestnikom czym są mechanizmy kształtowania duchowości.'
+          'Prowadzący, na podstawie załącznika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci wprowadza uczestników w mechanizmy kształtowania duchowości.'
           '</p>'
 
           '<blockquote>'
           '<p style="text-align:justify;">'
-          'Duchowość człowieka można kształtować - co więcej, jest ona stale kształtowana, przez różne mechanizmy - niektóre z nich wynikają z intencjonalnych działań, np. harcerskich wychowawców, zaś inne są dziełem zamierzonych przez nikogo zjawisk.'
+          'Duchowość człowieka, jak pewnie się domyślacie, nie jest wyryta raz na zawsze w skale. Istnieją różne zjawiska, które wpływają na jej kształt.'
           '<br>'
-          '<br>Istnieje cały zestaw narzędzi i mechanizmów, którymi można pływać na duchowość wychowanków, jednak przede wszystkim trzeba zrozumieć, że nie jest do końca tak, że jakieś zachowanie, wartość, czy aksjomat w duchowości są lub ich nie ma. W rzeczywistości każde zachowanie, wartość, czy aksjomat mogą być zakorzenione w duchowości człowieka w na różnym stopniu głębokości.'
+          '<br>Pierwszą istotną kwestią jest to, że składowe duchowości człowieka (zachowania, wartości, czy aksjomaty) nie są w niej binarnie obecne: nie jest tak, że jakaś wartość albo w czyjejś duchowości jest, albo jej nie ma i że nie ma nic poza tym. W rzeczywistości każde zachowanie, wartość, czy aksjomat mogą być zakorzenione w duchowości człowieka na <b>różnym stopniu głębokości</b>.'
           '<br>'
-          '<br>Zanim przejdziemy do konkretnych mechanizmów kształtowania duchowości, warto mieć na uwadze, że różne mechanizmy kształtują duchowość na różnym poziomie jej zakorzenienia. Jest ich cztery i szybko je nakreślę.'
+          '<br>Istnieją cztery szczeble "zakorzenienia", czy "zakotwiczenia" różnych zachowań, wartości, czy aksjomatów w duchowości człowieka: im są one płycej osadzone, tym łatwiej je ukształtować, ale tym są mniej stabilne. Im są głębiej osadzone, tym trudniej je ukształtować, ale są za to stabilniejsze.'
           '</p>'
           '</blockquote>'
 
           '<p style="text-align:justify;">'
-          'Prowadzący kładzie w widocznym miejscu pierwszą kartę z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
+          'Prowadzący kładzie w widocznym miejscu kartę <b>dostosowanie</b> z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
           '</p>'
 
           '<blockquote>'
           '<p style="text-align:justify;">'
-          'Najpłytszym i najłatwiejszym do ukształtowania szczeblem internalizacji jest szczel <b>dostosowania</b>.'
+          'Najpłytszym i najłatwiejszym do ukształtowania szczeblem internalizacji jest szczebel <b>dostosowania</b>.'
           '<br>'
-          '<br>Człowiek ma tendencję do robienia tego, co wymaga najmniej wysiłku. Jeśli ktoś (koledzy, kadra, rodzice) lub coś (ekonomia, kultura, środowisko) do czegoś zachęca, namawia, wywiera presję, lub czyni przystępniejszym, człowiek prawdopodobnie to zrobi.'
+          '<br>Chodzi po prostu o to, że człowiek ma tendencję do robienia tego, co wymaga najmniej wysiłku. Jeśli ktoś (koledzy, kadra, rodzice) lub coś (ekonomia, kultura, środowisko) do czegoś zachęca, namawia, wywiera presję, lub czyni przystępniejszym, człowiek prawdopodobnie to zrobi.'
+          '<br>'
+          '<br>Przykładowo: jeżeli na obozie kadra wprowadzi kary za niepościelone łóżko, to harcerze będą je ścielili - czyli dostosują się do najmniej wymagającej ścieżki. Poziom dostosowania jednak działa tylko tak długo, jak długo warunki, do których człowiek się dostosowuje są obecne. Gdyby kara znikła, zniknęłoby także ścielenie łóżka u harcerzy.'
           '</p>'
           '</blockquote>'
 
           '<p style="text-align:justify;">'
-          'Prowadzący kładzie w widocznym miejscu drugą kartę z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
+          'Prowadzący kładzie w widocznym miejscu kartę <b>przyzwyczajenie</b> z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
           '</p>'
 
           '<blockquote>'
           '<p style="text-align:justify;">'
-          'Drugim szczeblem internalizacji jest szczel <b>przyzwyczajenia</b>.'
+          'Drugim szczeblem internalizacji jest szczebel <b>przyzwyczajenia</b>.'
           '<br>'
           '<br>Człowiek ma tendencję do robienia tego, do czego jest przyzwyczajony. Przyzwyczajenie jest trwalsze od dostosowania – działa bez nadzoru i bez zewnętrznych czynników. Jest jednak kruche przy zmianie środowiska, rutyny i rytmu dnia.'
+          '<br>'
+          '<br>Przykładowo: jeżeli kadra na obozie przyzwyczai harcerzy do codziennego ścielenia łóżek, to nie będzie trzeba ich dodatkowo motywować - po prostu będą to robili i już. Problem jednak się pojawi, gdy na chwilę coś sprawi, że przestaną praktykować owo ścielenie - wówczas przyzwyczajenie przepadnie.'
           '</p>'
           '</blockquote>'
 
           '<p style="text-align:justify;">'
-          'Prowadzący kładzie w widocznym miejscu trzecią kartę z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
+          'Prowadzący kładzie w widocznym miejscu kartę <b>tożsamość</b> z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
           '</p>'
 
           '<blockquote>'
           '<p style="text-align:justify;">'
-          'Trzecim szczeblem internalizacji jest szczel <b>tożsamości</b>.'
+          'Trzecim szczeblem internalizacji jest szczebel <b>tożsamości</b>.'
           '<br>'
-          '<br>Tożsamość to odpowiedź na pytanie "kim jestem" – zbiór cech, ról i przynależności, które człowiek uznaje za swoje. Tożsamość jest trwalsza niż dostosowanie lub przyzwyczajenie.'
+          '<br>Tożsamość to odpowiedź na pytanie "kim jestem" – zbiór cech, ról i przynależności, które człowiek uznaje za swoje. Tożsamość jest trwalsza niż dostosowanie lub przyzwyczajenie - przetrwa zmianę środowiska, czy zmianę nawyków.'
           '<br>'
-          '<br>Tożsamość, której wychowanek nigdy nie zakwestionował, jest krucha – rozpadnie się przy pierwszej konfrontacji z innym środowiskiem. Tożsamość, która przeszła przez wątpliwości i przetrwała, jest trwała właśnie dlatego, że została przetestowana.'
+          '<br>Tożsamość bywa jednak słaba, jeżeli wychowanek nigdy jej nie zakwestionował - ma ona wówczas większą tendencję do rozpadu w przypadku zderzenia z nowymi realiami. Z kolei tożsamość, która przeszła przez wątpliwości i przetrwała, jest dużo bardziej odporna.'
+          '<br>'
+          '<br>Przykładowo: jeżeli kadra na obozie zbuduje w harcerzach poczucie, że są wspólnotą, że wyróżnia ich dbałość i porządna praca, że łączą ich wspólne zasady i jeżeli harcerze będą się z tym poczuciem identyfikowali - będą ścielili łóżko nawet, jeśli znajdą się w zupełnie nowej rzeczywistości.'
           '</p>'
           '</blockquote>'
 
           '<p style="text-align:justify;">'
-          'Prowadzący kładzie w widocznym miejscu czwartą kartę z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
+          'Prowadzący kładzie w widocznym miejscu kartę <b>wiara</b> z załącznika $attach_html_karty_szczebli_internalizacji_duchowosci i ją objaśnia:'
           '</p>'
 
           '<blockquote>'
           '<p style="text-align:justify;">'
-          'Ostatnim, czwartym szczeblem internalizacji jest szczel <b>wiary</b>.'
+          'Ostatnim, najgłębszym szczeblem internalizacji jest szczebel <b>wiary</b>.'
           '<br>'
-          '<br>Najtrwalszy poziom – przetrwa nawet kryzys tożsamości. Wymaga dojrzałości poznawczej (min. 11–12 lat). Nie da się jej narzucić.'
+          '<br>Jest to najtrwalszy, ale i najtrudniejszy do ukształtowania szczebel – przetrwa nawet kryzys tożsamości. Przede wszystkim wymaga ona dojrzałości poznawczej (min. 11–12 lat). Wiary nie da się narzucić.'
           '<br>'
           '<br>Próba kształtowania wiary bez poruszania innych szczebli jest zwykle jałowa. Ludzie rzadko dochodzą do wiary drogą rozumowania – jest raczej odwrotnie: osądy moralne powstają automatycznie, a wyznawane poglądy i rozumowanie na ich podstawie pojawia się później jako ich uzasadnienie.'
+          '<br>'
+          '<br>Przykładowo: jeżeli harcerze będą wierzyli, że świat tak działa, że życie w uporządkowanym otoczeniu wprowadza porządek w myślach, relacjach i dążeniach człowieka, to będą starali się utrzymywać porządek nawet jeśli wszystko wokół, łącznie z ich poczuciem przynależności, będzie ich pchało w inną stronę.'
+          '</p>'
+          '</blockquote>'
+  ),
+
+  KonspektStep(
+      title: 'Wyjaśnienie merytoryczne - "przygotowywanie gruntu" i "redukcja dysonansu"',
+      duration: Duration(minutes: 5),
+      activeForm: KonspektStepActiveForm.static,
+      materials: [
+        material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
+      ],
+      content: '<p style="text-align:justify;">'
+          'Prowadzący, na podstawie załącznika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci wprowadza pojęcia "przygotowywania gruntu":'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Szczeble drabiny internalizacji duchowości opisują nie tylko głębokość zakorzenienia duchowości w człowieku: wyznaczają także naturalny „kierunek” jej kształtowania. Chcąc ukształtować głębszy fragment duchowości człowieka (np. wartość bycia porządnym opartą o tożsamość, czy wiarę), zazwyczaj konieczne jest wcześniejsze “przygotowanie gruntu” w postaci zadbania o płytsze wymiary duchowości (np. zachowania "ścielenia łóżka" wynikające z dostosowania, czy przyzwyczajenia).'
+          '</p>'
+          '</blockquote>'
+
+          '<p style="text-align:justify;">'
+          'Następnie prowadzący, na podstawie załącznika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci wprowadza pojęcia "redukcji dysonansu":'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          '"Przygotowywanie gruntu" działa na podstawie powszechnego u ludzi zjawiska "redukcji dysonansu".'
+          '<br>'
+          '<br>Wyobraźcie sobie, że jest jakiś człowiek, np. jakiś wędrownik. Wierzy on, że zdrowie jest najważniejsze, ale tak się składa, że bardzo lubi grać na kompie i spędza czas głównie przed ekranem.'
+          '<br>'
+          '<br>Między tymi dwoma elementami duchowości jest ewidentna sprzeczność i prędzej, czy później pojawi się w takim człowieku potrzeba jej usunięcia. Jak myślicie, co taki człowiek zrobi:'
+          '</p>'
+          '<ul>'
+          '<li><p>przestanie grać na kompie,</p></li>'
+          '<li><p>zmieni swoją wiarę w to, że zdrowie jest najważniejsze?</p></li>'
+          '</ul>'
+          '<p style="text-align:justify;">'
+          'Otóż najczęściej, jak pokazują badania, usunięcie sprzeczności zachodzi po ścieżce najmniejszego oporu i powinniście się w takim przypadku spodziewać dostosowania głębszych poziomów duchowości (np. przekonań) do płytszych (np. do zachowań).'
+          '<br>'
+          '<br>Czyli w jego przypadku raczej należy się spodziewać, że pewnego dnia oznajmi on, że wierzy, że w życiu najważniejsze jest życie w zgodzie ze swoimi potrzebami i słuchanie swojego wewnętrznego dziecka.'
           '</p>'
           '</blockquote>'
   ),
@@ -138,7 +187,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
         material_zal_plansza_mechanizmow_ksztaltowania_duchowosci
       ],
       content: '<p style="text-align:justify;">'
-          'Prowadzący wyjaśnia uczestnikom zasady gry, ktorą za chwilę rozegrają:'
+          'Prowadzący wyjaśnia uczestnikom zasady gry, którą za chwilę rozegrają:'
           '<br>'
           '<br>Uczestnicy zostaną podzieleni na grupy. Każda grupa otrzyma na początku:'
           '</p>'
@@ -152,7 +201,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
           '<p style="text-align:justify;">'
           'Co turę prowadzący będzie czytał krótką historię. Gdy skończy, każda grupa będzie miała możliwość zastanowić się, które czynniki rozwoju duchowego są w niej opisane - może być ich więcej niż jeden.'
           '<br>'
-          '<br>Gdy grupy się zastanowią, mogą na każdej z kart położyć od 0 do 3 żetonów, obstawiając prawidłowe odpowiedzi. Gdy żetony zostaną rozdysponowane na kartach, grupy pokazują sobie nazwajem obstawione karty i prowadzący odczytuje odpowiedzi. Dobrze obstawione żetony są podwajane, źle obstawione są zabierane.'
+          '<br>Gdy grupy się zastanowią, mogą na każdej z kart położyć od 0 do 3 żetonów, obstawiając prawidłowe odpowiedzi. Gdy żetony zostaną rozdysponowane na kartach, grupy pokazują sobie nawzajem obstawione karty i prowadzący odczytuje odpowiedzi. Dobrze obstawione żetony są podwajane, źle obstawione są zabierane.'
           '<br>'
           '<br>Grupa, która zdobędzie najwięcej punktów, wygrywa.'
           '</p>'
@@ -174,7 +223,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
       materials: [
         material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
       ],
-      content: '<style="text-align:justify;">'
+      content: '<p style="text-align:justify;">'
           'Prowadzący wręcza każdej z grup po jednym egzemplarzu poradnika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci. Ważne, aby dało się go rozłożyć na osobne kartki - na tych kartkach każda grupa będzie kładła swoje żetony.'
           '<br>'
           '<br>Uczestnicy mają czas, aby zapoznać się z treściami kartek. Mogą przeczytać je sobie na głos, po cichu na raz, każdy po jednej kartce, po czym się nimi okrężnie wymieniać.'
@@ -217,7 +266,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
         material_nagroda,
       ],
       content: '<p style="text-align:justify;">'
-          'Prowadzący zlicza punkty każdej z grup i wyłania zwycięzką grupę, następnie wręcza nagrodę.'
+          'Prowadzący zlicza punkty każdej z grup i wyłania zwycięską grupę, następnie wręcza nagrodę.'
           '</p>'
   ),
 
