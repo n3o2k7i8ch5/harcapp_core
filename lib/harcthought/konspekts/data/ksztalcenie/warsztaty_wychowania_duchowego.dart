@@ -192,8 +192,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       attach_cel_wychowania_duchowego_zhp_uchwala,
       attach_kratka_minimow_rozwoju_duchowego,
 
-      attach_karty_zalozen_wyjsciowych_wychowania_duchowego,
-
       _attach_planowanie_strategii_i_dzialan,
 
       _attach_formy,
@@ -263,8 +261,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_zal_cel_wychowania_duchowego_zhp_uchwala,
 
       material_zal_kratka_minimow_rozwoju_duchowego,
-
-      material_zal_karty_zalozen_wyjsciowych_wychowania_duchowego,
 
       material_zal_planowanie_strategii_i_dzialan,
 

@@ -112,12 +112,6 @@ KonspektMaterial material_zal_cel_wychowania_duchowego_zhp_uchwala = KonspektMat
     amount: 4
 );
 
-KonspektMaterial material_zal_karty_zalozen_wyjsciowych_wychowania_duchowego = KonspektMaterial(
-    name: 'Wydrukowany załącznik “$attach_title_karty_zalozen_wyjsciowych_wychowania_duchowego”',
-    attachmentName: attach_name_karty_zalozen_wyjsciowych_wychowania_duchowego,
-    amount: 1,
-);
-
 KonspektMaterial material_zal_duchowosc_harcerska_tezy = KonspektMaterial(
     name: 'Wydrukowany załącznik "$attach_title_duchowosc_harcerska_tezy"',
     attachmentName: attach_name_duchowosc_harcerska_tezy,
@@ -2056,7 +2050,7 @@ KonspektStep _step_duchowosc_harcerska_dyskusja = KonspektStep(
         '<br>'
         '<br>Przy każdym z dyskutowanych punktów warto położyć w widocznym miejscu kartę z tezą, nad którą trwa dyskusja, by uczestnicy mogli do niej wrócić.'
         '<br>'
-        '<br>Wnioski, które wypłyną z dyskusji powinny być następujące:'
+        '<br>Wnioski, które wypłyną z dyskusji, powinny być następujące:'
         '</p>'
 
         '<ul>'
@@ -2072,7 +2066,7 @@ KonspektStep _step_duchowosc_harcerska_dyskusja = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Co miałoby oznaczać "neutralne"? Każdy akt wychowawczy (każda forma kształtowania duchowości) kształtuje duchowość w jakimś określonym kierunku - umacnia lub osłabia określone zachownia, wartości, lub aksjomaty.'
+        'Co miałoby oznaczać "neutralne"? Każdy akt wychowawczy (każda forma kształtowania duchowości) kształtuje duchowość w jakimś określonym kierunku - umacnia lub osłabia określone zachowania, wartości, lub aksjomaty.'
         '<br>'
         '<br>Neutralność jest tutaj niemożliwa do osiągnięcia - jakie działanie wychowawcze byłoby neutralne?'
         '</p>'
@@ -2115,7 +2109,7 @@ KonspektStep _step_duchowosc_harcerska_dyskusja = KonspektStep(
         '<p style="text-align:justify;">'
         '<b>Religia nie jest "rozszerzeniem", ani "dodatkiem" do duchowości – religia jest autonomiczną, pełną duchowością</b>, z własnymi aksjomatami, spójną hierarchią wartości i sposobami ich integracji.'
         '<br>'
-        '<br>U osób wierzących wartości (w tym wartości harcerskie) muszą wynikać z przyjętej wiary, inaczej zostaną wyparte. Jeśli harcerz ma w każdym widzieć bliźniego, to nie dlatego, że „tak mówi Prawo Harcerskie" i już – dla człowieka wierzącego powinno to wynikać z wiary w <b>zbawczą relację między Chrustusem a człowiekiem</b>, w tym nim samym. Budowanie wartości w oderwaniu od aksjomatów kończy się tym, że w procesie redukcji dysonansu owe wartości zostaną porzucone jako naiwne i dziecinne.'
+        '<br>U osób wierzących wartości (w tym wartości harcerskie) muszą wynikać z przyjętej wiary, inaczej zostaną wyparte. Jeśli harcerz ma w każdym widzieć bliźniego, to nie dlatego, że „tak mówi Prawo Harcerskie" i już – dla człowieka wierzącego powinno to wynikać z wiary w <b>zbawczą relację między Chrystusem a człowiekiem</b>, w tym nim samym. Budowanie wartości w oderwaniu od aksjomatów kończy się tym, że w procesie redukcji dysonansu owe wartości zostaną porzucone jako naiwne i dziecinne.'
         '<br>'
         '<br>Nie jest tak, że wszyscy ludzie mają bazową duchowość, a część ma ją „z dodatkiem religii". Nie da się z czyjejś duchowości wyjąć elementu religijnego i dalej mieć do czynienia z duchowością – tak jak nie da się z jamnika wyjąć elementu „pies". Jamnik nie składa się z psa i czegoś jeszcze: jamnik jest psem.'
         '</p>'
