@@ -146,8 +146,11 @@ class _KonspektStepGroupWidgetState extends State<KonspektStepGroupWidget> with 
                         color: textDisab_(context),
                         selectable: true,
                       ),
+                      SizedBox(width: Dimen.defMarg),
                       AppButton(
                         icon: Icon(collapsed ? MdiIcons.chevronDown : MdiIcons.chevronUp),
+                        padding: EdgeInsets.zero,
+                        constraints: BoxConstraints(),
                         onTap: () => setState(() => collapsed = !collapsed),
                       ),
                     ],

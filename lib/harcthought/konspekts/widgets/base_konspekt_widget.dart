@@ -565,7 +565,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   showBorder: widget.showStepGroupBorder,
                   maxDialogWidth: maxDialogWidth,
                     key: ValueKey(
-                        (konspekt, index, stepsTimeTable?[index])
+                        (konspekt, index)
                     ),
                 ),
                 separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
@@ -584,7 +584,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                     startTime: stepsTimeTable?[index],
                     maxDialogWidth: maxDialogWidth,
                     key: ValueKey(
-                        (konspekt, index, stepsTimeTable?[index])
+                        (konspekt, index)
                     ),
                   ),
                   separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
