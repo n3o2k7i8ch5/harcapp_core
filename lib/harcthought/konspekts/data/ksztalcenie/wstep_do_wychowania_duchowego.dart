@@ -193,7 +193,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
               '</p>'
       ),
 
-      ...step_group_duchowosc_w_zhp.steps,
+      ...step_group_duchowosc_harcerska.steps,
 
       KonspektStep(
           title: 'Kratka minimów rozwoju duchowego',

@@ -178,6 +178,15 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
   ),
 
   KonspektStep(
+      title: 'Podział na grupy',
+      duration: Duration(minutes: 5),
+      activeForm: KonspektStepActiveForm.active,
+      content: '<p style="text-align:justify;">'
+          'Prowadzący dzieli uczestników na dwie grupy.'
+          '</p>'
+  ),
+
+  KonspektStep(
       title: 'Zasady postaw na milion',
       duration: Duration(minutes: 5),
       activeForm: KonspektStepActiveForm.static,
@@ -201,18 +210,9 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
           '<p style="text-align:justify;">'
           'Co turę prowadzący będzie czytał krótką historię. Gdy skończy, każda grupa będzie miała możliwość zastanowić się, które czynniki rozwoju duchowego są w niej opisane - może być ich więcej niż jeden.'
           '<br>'
-          '<br>Gdy grupy się zastanowią, mogą na każdej z kart położyć od 0 do 3 żetonów, obstawiając prawidłowe odpowiedzi. Gdy żetony zostaną rozdysponowane na kartach, grupy pokazują sobie nawzajem obstawione karty i prowadzący odczytuje odpowiedzi. Dobrze obstawione żetony są podwajane, źle obstawione są zabierane.'
+          '<br>Gdy grupy się zastanowią, mogą na każdej z kart położyć od 0 do 3 żetonów, obstawiając prawidłowe odpowiedzi. Gdy żetony zostaną rozdysponowane na planszy, prowadzący prosi każdą z grup u podanie argumentów dla swoich odpowiedzi, po czym odczytuje prawidłowe rozwiązanie. Dobrze obstawione żetony są podwajane, źle obstawione są zabierane.'
           '<br>'
-          '<br>Grupa, która zdobędzie najwięcej punktów, wygrywa.'
-          '</p>'
-  ),
-
-  KonspektStep(
-      title: 'Podział na grupy',
-      duration: Duration(minutes: 5),
-      activeForm: KonspektStepActiveForm.active,
-      content: '<p style="text-align:justify;">'
-          'Prowadzący dzieli uczestników na dwie grupy.'
+          '<br>Na końcu gry grupa, która zdobędzie najwięcej punktów, wygrywa.'
           '</p>'
   ),
 
@@ -222,13 +222,26 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
       activeForm: KonspektStepActiveForm.static,
       materials: [
         material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
+        material_zal_plansza_mechanizmow_ksztaltowania_duchowosci
       ],
       content: '<p style="text-align:justify;">'
-          'Prowadzący wręcza każdej z grup po jednym egzemplarzu poradnika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci. Ważne, aby dało się go rozłożyć na osobne kartki - na tych kartkach każda grupa będzie kładła swoje żetony.'
+          'Prowadzący wręcza każdej z grup po jednym egzemplarzu poradnika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci. Ważne, aby dało się go rozłożyć na osobne kartki, by uczestnicy mieli łatwy dostęp do treści.'
           '<br>'
-          '<br>Uczestnicy mają czas, aby zapoznać się z treściami kartek. Mogą przeczytać je sobie na głos, po cichu na raz, każdy po jednej kartce, po czym się nimi okrężnie wymieniać.'
+          '<br>Prowadzący rozdaje również uczestnikom po jednym egzemplażu załącznika $attach_html_plansza_mechanizmow_ksztaltowania_duchowosci - na nich uczestnicy będą obstawiali swoje odpowiedzi przy użyciu żetonów.'
           '<br>'
-          '<br>Gdy to zrobią, uczestnicy kładą kartki w rzędzie przed sobą na widoku, by móc do nich wracać w trakcie gry oraz obstawiać kartki z poprawnymi czynnikami za pomocą żetonów.'
+          '<br>Uczestnicy mają czas, aby zapoznać się z treściami kartek poradnika. Mogą przeczytać je sobie na głos, po cichu na raz, każdy po jednej kartce, po czym się nimi okrężnie wymieniać.'
+          '<br>'
+          '<br>Gdy to zrobią, uczestnicy kładą kartki w rzędzie przed sobą na widoku.'
+          '<br>'
+          '<br>Następnie prowadzący prosi uczestników, żeby położyli plansze z załącznika $attach_html_plansza_mechanizmow_ksztaltowania_duchowosci gdzieś bliżej prowadzącego i by zasłonili je tak, by druga grupa nie mogła ich podejrzeć.'
+          '<br>'
+          '<br>Zabieg ten ma ca celu dwie rzeczy:'
+          '</p>'
+          '<ul>'
+          '<li><p style="text-align:justify;">ważniejsze: sprawić, by uczestnicy musieli wstać, by obstawić swoje żetony (element dynamizujący)</p></li>'
+          '<li><p style="text-align:justify;">mniej ważne: sprawić, by uczestnicy nie mogli szybko zmienić swoich obstawień w trakcie dyskusji.</p></li>'
+          '</ul>'
+          '<p style="text-align:justify;">'
           '</p>'
   ),
 
@@ -242,7 +255,8 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
         material_zal_plansza_mechanizmow_ksztaltowania_duchowosci
       ],
       content: '<p style="text-align:justify;">'
-          'Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci. Gdy skończy czytać, zadaje pytanie punktowane o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
+          '<br>'
+          '<br>Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci. Gdy skończy czytać, zadaje pytanie punktowane o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
           '<br>'
           '<br>Grupy obstawiają swoje odpowiedzi. Gdy wszyscy skończą obstawiać, odsłaniają je i prowadzący odczytuje poprawne odpowiedzi.'
           '<br>'

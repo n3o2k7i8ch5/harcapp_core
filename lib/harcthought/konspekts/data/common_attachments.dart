@@ -272,6 +272,18 @@ const KonspektAttachment attach_kratka_minimow_rozwoju_duchowego = KonspektAttac
   },
 );
 
+const String attach_html_duchowosc_harcerska_tezy = '<a href="$attach_name_duchowosc_harcerska_tezy@attachment">$attach_title_duchowosc_harcerska_tezy</a>';
+const String attach_name_duchowosc_harcerska_tezy = 'duchowosc_harcerska_tezy';
+const String attach_title_duchowosc_harcerska_tezy = 'Duchowość harcerska - tezy';
+const KonspektAttachment attach_duchowosc_harcerska_tezy = KonspektAttachment(
+  name: attach_name_duchowosc_harcerska_tezy,
+  title: attach_title_duchowosc_harcerska_tezy,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_duchowosc_harcerska_tezy.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_duchowosc_harcerska_tezy.docx',
+  },
+);
+
 const String attach_html_szybkie_strzaly_dyskusyjne = '<a href="$attach_name_szybkie_strzaly_dyskusyjne@attachment">$attach_title_szybkie_strzaly_dyskusyjne</a>';
 const String attach_name_szybkie_strzaly_dyskusyjne = 'szybkie_strzaly_dyskusyjne';
 const String attach_title_szybkie_strzaly_dyskusyjne = 'Szybkie strzały dyskusyjne';

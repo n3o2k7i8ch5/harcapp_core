@@ -199,7 +199,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       _attach_formy,
       _attach_scenariusz_fantomowe_dzialania_wychowawcze,
 
-      attach_szybkie_strzaly_dyskusyjne
+      attach_szybkie_strzaly_dyskusyjne,
+
+      attach_duchowosc_harcerska_tezy,
     ],
     materials: [
 
@@ -273,6 +275,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_zal_szybkie_strzaly_dyskusyjne,
 
       material_zal_przypinki,
+
+      material_zal_duchowosc_harcerska_tezy,
 
     ],
     summary: 'Uczestnicy pochylają się nad zagadnieniem duchowości: co to jest? co ją różni od innych sfer? jakie mechanizmy nią rządzą, czy może być ona "neutralna", oraz jak ją kształtować u wychowanków?',
@@ -389,9 +393,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
           ]
       ),
 
-      step_group_duchowosc_w_zhp,
-
-      step_zalozenia_wyjsciowe_wychowania_duchowego,
+      step_group_duchowosc_harcerska,
 
       KonspektStepGroup(
         steps: [
