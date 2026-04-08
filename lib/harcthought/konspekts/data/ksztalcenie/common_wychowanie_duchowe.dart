@@ -1498,7 +1498,7 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
         '<br>'
         '<br>Czy zastanawialiście się kiedyś, dlaczego ludzie wierzą w to, w co wierzą? Albo raczej: dlaczego ludzie chętniej wierzą w jedne rzeczy, ale zupełnie nie przekonują ich inne poglądy?'
         '<br>'
-        '<br>Ludzie nie postrzegają świata fundamentalnie jako zbioru obiektów, ani zbioru faktów. Ludzie postrzegają rzeczywistość przede wszytskim jako <b>opowieści</b>: historie mające przyczynę, sens, cel, która opowiadające o naturze świata, o swojej roli w nim itd..'
+        '<br>Ludzie nie postrzegają świata fundamentalnie jako zbioru obiektów, ani zbioru faktów. Ludzie postrzegają rzeczywistość przede wszystkim jako <b>opowieści</b>: historie mające przyczynę, sens, cel, która opowiadające o naturze świata, o swojej roli w nim itd..'
         '<br>'
         '<br>Przykładów na to można mnożyć bez końca: Grecy widzieli świat takim, jakim opisali go w mitologicznych historiach. Starotestamentalny lud żydowski, z którego nota bene my wszyscy wyrastamy, widział świat jako miejsce, w którym Bóg prowadzi ich przez dzieje, stopniowo odkrywając przed nimi swoją naturę. Tymczasem dziś, kilka tysięcy lat później, głód i potrzeba opowieści jest wciąż tak wielka, że ludzie płacą pieniądze za to, by móc usiąść na kilka godzin w fotelu i obejrzeć zupełnie wymyśloną historię walki dobra ze złem, taką jak Gwiezdne Wojny, Władca Pierścieni, czy Avengersi.'
         '<br>'
@@ -1538,7 +1538,7 @@ KonspektStep _step_meta_narracja_warunki_brzegowe = KonspektStep(
     activeForm: KonspektStepActiveForm.static,
     content: '<blockquote>'
         '<p style="text-align:justify;">'
-        'Niestety nie wystarczy, żeby Adam przyjął dowolną narrację. Gdyby, przykładowo, przyjął darwinowski pogląd że <b>"świat to arena walki i prawo do życia mają tylko osobniki najlepiej dostosowane"</b>, raczej nie uznałby wartości braterstwa, uniwersalnej godności człowieka, czy przebaczenia.'
+        'Niestety nie wystarczy, żeby Adam przyjął dowolną narrację. Gdyby, przykładowo, przyjął darwinowski pogląd, że <b>"świat to arena walki i prawo do życia mają tylko osobniki najlepiej dostosowane"</b>, raczej nie uznałby wartości braterstwa, uniwersalnej godności człowieka, czy przebaczenia.'
         '<br>'
         '<br>Konieczne jest, by z narracji przyjętej przez Adama wynikały <b>harcerskie wartości</b>.'
         '<br>'

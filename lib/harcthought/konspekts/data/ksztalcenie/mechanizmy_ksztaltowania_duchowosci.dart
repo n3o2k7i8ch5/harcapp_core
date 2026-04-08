@@ -235,7 +235,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
           '<br>'
           '<br>Następnie prowadzący prosi uczestników, żeby położyli plansze z załącznika $attach_html_plansza_mechanizmow_ksztaltowania_duchowosci gdzieś bliżej prowadzącego i by zasłonili je tak, by druga grupa nie mogła ich podejrzeć.'
           '<br>'
-          '<br>Zabieg ten ma ca celu dwie rzeczy:'
+          '<br>Zabieg ten ma na celu dwie rzeczy:'
           '</p>'
           '<ul>'
           '<li><p style="text-align:justify;">ważniejsze: sprawić, by uczestnicy musieli wstać, by obstawić swoje żetony (element dynamizujący)</p></li>'
@@ -268,7 +268,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
           '<br>'
           '<br>Gra trwa do momentu, gdy prowadzący przeczyta wszystkie historie, lub aż skończy się czas.'
           '<br>'
-          '<br>Warto, aby prowadzący nie czytał historii po kolei, jako że są ułożone w tej samej kolejności, co czynniki opisane w poradnikach.'
+          '<br>Prowadzący nie powinien czytać historii po kolei, jako że są ułożone w tej samej kolejności, co czynniki opisane w poradnikach.'
           '</p>'
   ),
 

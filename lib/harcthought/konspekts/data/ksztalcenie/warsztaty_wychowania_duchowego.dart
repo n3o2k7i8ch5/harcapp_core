@@ -447,7 +447,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
                 content: '<p style="text-align:justify;">'
                     'Prowadzący prosi każdą z grup, by wskazała <b>jeden cel w pracy duchowej</b>, który chce osiągnąć dla opisanej drużyny mając do dyspozycji 3 lata pracy harcerskiej.'
                     '<br>'
-                    '<br>Uczestnicy powinni wybrać coś, co uważają za szczególnie ważnie: w razie czego prowadzący może im zasugerować jeden z następujacych celów:'
+                    '<br>Uczestnicy powinni wybrać coś, co uważają za szczególnie ważnie: w razie czego prowadzący może im zasugerować jeden z następujących celów:'
                     '</p>'
                     '<ul>'
                     '<li><p style="text-align:justify;">Wychowanie w wierze chrześcijańskiej</p></li>'
