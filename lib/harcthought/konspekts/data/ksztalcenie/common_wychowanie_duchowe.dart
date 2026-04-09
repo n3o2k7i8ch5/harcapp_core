@@ -670,7 +670,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_definicja = KonspektStep(
         '</p>'
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Aksjomat jest zawsze fundamentalną, nieweryfikowalną wiarą w określony porządek rzeczy — coś, co całkowicie porządkuje postrzeganie rzeczywistości.'
+        'Aksjomat jest zawsze fundamentalnym przekonaniem w określony porządek rzeczy — coś, co całkowicie porządkuje postrzeganie rzeczywistości.'
         '<br>'
         '<br>Ludzie wyznają najróżniejsze aksjomaty. Przykładowo mogą to być:'
         '</p>'
@@ -1510,7 +1510,7 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        '<br>Zatrzymajmy się chwilę nad tymi opowieściami:'
+        'Zatrzymajmy się chwilę nad tymi opowieściami:'
         '<br>'
         '<br>W pierwszym odruchu łatwo pomyśleć, że to atawizm - cecha, która kiedyś była przydatna, żeby sobie wyjaśnić jakieś zjawiska pogodowe i choroby, ale w gruncie rzeczy jest cechą prymitywnych ludów. No ale my, dzisiaj, nowocześni i współcześni, mamy wierzyć w jakieś mity? My, którzy mamy naukę i oświecenie?'
         '<br>'
@@ -1524,8 +1524,9 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
         '<li><p style="text-align:justify;">Można z jednej strony polecić komuś napisaną precyzyjnym, ale specyficznym językiem serię publikacji naukowych „Psychologiczne i socjologiczne aspekty wariantowych relacji dzieci i ich rodziców", albo można tę samą treść opowiedzieć w historii Pinokia: drewnianej, naiwnej kukle, która uciekłszy z domu, zostaje przygnieciona życiem, lecz w końcu bierze odpowiedzialność za siebie, ratuje nieudacznego ojca z wnętrza wieloryba i dzięki temu staje się w pełni człowiekiem.</p></li>'
         '<li><p style="text-align:justify;">Jak myślicie, która forma prędzej wpłynie na sposób bycia człowieka: powiedzenie komuś "do największego dobra zdolni są czasem ludzie, po których nikt by się tego początkowo nie spodziewał", czy historia Froda z Władcy Pierścieni?</p></li>'
         '</ul>'
+
         '<p style="text-align:justify;">'
-        '<br>Ludzie wierzą w różne rzeczy. Czasami nawet wierzą w byle jakie treści, ale niemal nigdy nie wierzą w byle jakie formy. Przekonania, które wyznają, muszą do nich w pewien sposób przemawiać. Formą tą jest najczęściej <b>narracja</b> o rzeczywistości: opowieść, która porządkuje świat, opowiada o dobru i złu, nadaje tożsamość, sens i cel.'
+        'Ludzie wierzą w różne rzeczy. Czasami nawet wierzą w byle jakie treści, ale niemal nigdy nie wierzą w byle jakie formy. Przekonania, które wyznają, muszą do nich w pewien sposób przemawiać. Formą tą jest najczęściej <b>narracja</b> o rzeczywistości: opowieść, która porządkuje świat, opowiada o dobru i złu, nadaje tożsamość, sens i cel.'
         '</p>'
         '</blockquote>'
 
@@ -1881,7 +1882,7 @@ KonspektStep _step_meta_narracja_wniosek = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        '<br>Czy to zatem oznacza, że osoby niewierzące w Chrystusa nie mają jak kształtować swojej duchowości zgodnie z harcerskimi wartościami?'
+        'Czy to zatem oznacza, że osoby niewierzące w Chrystusa nie mają jak kształtować swojej duchowości zgodnie z harcerskimi wartościami?'
         '<br>'
         '<br>Tutaj sprawa jest dwoista: dopóki wystarcająco wiele osób żyje zgodnie z chrześcijańskimi zasadami, to można być niewierzącym i przez dostosowanie, przyzwyczajenie, a czasami (choć rzadko) tożsamość, owe zasady zachować.'
         '<br>'

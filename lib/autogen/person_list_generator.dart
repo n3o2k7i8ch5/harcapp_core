@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 
 class PersonFieldGenerator extends Generator {
   @override
@@ -9,17 +9,14 @@ class PersonFieldGenerator extends Generator {
     final buffer = StringBuffer();
 
     final topLevelPeople = library.allElements
-        .whereType<TopLevelVariableElement2>()
+        .whereType<TopLevelVariableElement>()
         .where((element) {
           if (!element.isConst) return false;
 
-          // Prefer reliable name-based check on the resolved type element.
-          final typeElemName = element.type.element3?.name3;
+          final typeElemName = element.type.element?.name;
           if (typeElemName == 'Person') return true;
 
-          // Fallback: if type element is not directly available, try the
-          // computed constant value's type element name.
-          final constTypeElemName = element.computeConstantValue()?.type?.element3?.name3;
+          final constTypeElemName = element.computeConstantValue()?.type?.element?.name;
           return constTypeElemName == 'Person';
         })
         .toList();
@@ -27,7 +24,6 @@ class PersonFieldGenerator extends Generator {
     if (topLevelPeople.isEmpty)
       throw StateError('No top-level const Person values found.');
 
-    // Add import of the original library file (to access Person and const vars)
     Uri uri = buildStep.inputId.uri;
     buffer.writeln('// GENERATED CODE - DO NOT MODIFY BY HAND');
     buffer.writeln('');
@@ -36,7 +32,7 @@ class PersonFieldGenerator extends Generator {
     buffer.writeln('');
     buffer.writeln('const List<Person> allPeople = [');
     for (final person in topLevelPeople) {
-      buffer.writeln('  ${person.name3},');
+      buffer.writeln('  ${person.name},');
     }
     buffer.writeln('];');
 

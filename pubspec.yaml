@@ -24,6 +24,8 @@ dependencies:
   flutter_spinkit: ^5.2.1
   flutter_svg: ^2.0.17
   flutter_widget_from_html: ^0.17.0
+#  html_pdf_widgets:
+#    path: ../htmltopdfwidgets
   html_pdf_widgets:
     git:
       url: https://github.com/n3o2k7i8ch5/htmltopdfwidgets.git
