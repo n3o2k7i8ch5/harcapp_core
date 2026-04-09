@@ -193,6 +193,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       attach_cel_wychowania_duchowego_zhp_uchwala,
       attach_kratka_minimow_rozwoju_duchowego,
 
+      attach_duchowosc_harcerska_tezy,
+
       _attach_planowanie_strategii_i_dzialan,
 
       _attach_formy,
@@ -200,7 +202,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       attach_szybkie_strzaly_dyskusyjne,
 
-      attach_duchowosc_harcerska_tezy,
     ],
     materials: [
 
@@ -264,6 +265,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       material_zal_kratka_minimow_rozwoju_duchowego,
 
+      material_zal_duchowosc_harcerska_tezy,
+
       material_zal_planowanie_strategii_i_dzialan,
 
       material_zal_formy,
@@ -273,8 +276,6 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_zal_szybkie_strzaly_dyskusyjne,
 
       material_zal_przypinki,
-
-      material_zal_duchowosc_harcerska_tezy,
 
     ],
     summary: 'Uczestnicy pochylają się nad zagadnieniem duchowości: co to jest? co ją różni od innych sfer? jakie mechanizmy nią rządzą, czy może być ona "neutralna", oraz jak ją kształtować u wychowanków?',
