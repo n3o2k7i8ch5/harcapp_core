@@ -1489,7 +1489,7 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący mówi:'
+        'Prowadzący zwraca uwagę, że ludzie postrzegają rzeczywistość przeze wszystkim przez pryzmat opowieści:'
         '</p>'
 
         '<blockquote>'
@@ -1501,7 +1501,15 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
         '<br>Ludzie nie postrzegają świata fundamentalnie jako zbioru obiektów, ani zbioru faktów. Ludzie postrzegają rzeczywistość przede wszystkim jako <b>opowieści</b>: historie mające przyczynę, sens, cel, która opowiadające o naturze świata, o swojej roli w nim itd..'
         '<br>'
         '<br>Przykładów na to można mnożyć bez końca: Grecy widzieli świat takim, jakim opisali go w mitologicznych historiach. Starotestamentalny lud żydowski, z którego nota bene my wszyscy wyrastamy, widział świat jako miejsce, w którym Bóg prowadzi ich przez dzieje, stopniowo odkrywając przed nimi swoją naturę. Tymczasem dziś, kilka tysięcy lat później, głód i potrzeba opowieści jest wciąż tak wielka, że ludzie płacą pieniądze za to, by móc usiąść na kilka godzin w fotelu i obejrzeć zupełnie wymyśloną historię walki dobra ze złem, taką jak Gwiezdne Wojny, Władca Pierścieni, czy Avengersi.'
-        '<br>'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący doprecyzowuje kwestię tego, czym w istocie są te opowieści:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
         '<br>Zatrzymajmy się chwilę nad tymi opowieściami:'
         '<br>'
         '<br>W pierwszym odruchu łatwo pomyśleć, że to atawizm - cecha, która kiedyś była przydatna, żeby sobie wyjaśnić jakieś zjawiska pogodowe i choroby, ale w gruncie rzeczy jest cechą prymitywnych ludów. No ale my, dzisiaj, nowocześni i współcześni, mamy wierzyć w jakieś mity? My, którzy mamy naukę i oświecenie?'
