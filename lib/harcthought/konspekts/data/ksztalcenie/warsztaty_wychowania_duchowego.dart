@@ -184,8 +184,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       attach_narracja_opis,
       attach_narracja_przyklady,
 
-      attach_meta_narracja_opis,
       attach_wartosci_lacinskie,
+
+      attach_meta_narracja_opis,
       attach_meta_narracja_przyklady,
 
       attach_cel_wychowania_duchowego_zhp_statut,
@@ -252,8 +253,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       material_zal_narracja_opis,
       material_zal_narracja_przyklady,
 
-      material_zal_meta_narracja_opis,
       material_zal_wartosci_lacinskie,
+
+      material_zal_meta_narracja_opis,
       material_zal_meta_narracja_przyklady,
 
       material_zal_cel_wychowania_duchowego_zhp_statut,
