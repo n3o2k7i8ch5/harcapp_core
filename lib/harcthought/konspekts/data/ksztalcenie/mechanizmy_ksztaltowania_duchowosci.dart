@@ -55,6 +55,112 @@ List<KonspektMaterial> materials_kszt_mechanizmy_ksztaltowania_duchowosci = [
 List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
 
   KonspektStep(
+      title: 'Wyjaśnienie merytoryczne - wstęp',
+      duration: Duration(minutes: 1),
+      activeForm: KonspektStepActiveForm.active,
+      content: '<p style="text-align:justify;">'
+          'Prowadzący, jeśli chce, może zacząć od małej prowokacji:'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Skoro jesteśmy tutaj w tak zaszczytnym, instruktorskim gronie, to powiedzcie mi: jaki jest kompletny przepis na wychowanie dowolnego wychowanka do harcerskiego ducha? Znacie jakiś zestaw tricków, metod, narzędzi?'
+          '</p>'
+          '</blockquote>'
+
+          '<p style="text-align:justify;">'
+          'Jeżeli ktoś coś zaproponuje - super! Można chwilę podyskutować, lub zwrócić uwagę na to, że "jest to dobry start", by potem przejść do omówienia mechanizmów kształtowania duchowości.'
+          '<br>'
+          '<br>Jeśli pytanie prowadzącego spotka się z milczenie, prowadzący może zagadnąć:'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Jak to? Nie wiecie? Przecież jesteście harcerskimi wychowawcami, ekspertami od wychowania!'
+          '<br>'
+          '<br>Spokojnie, oczywiście żartuję - macie pełne tego nie wiedzieć, bo nikt tego do końca nie wie. Ale jest kilka ważnych aspektów, które pozwalają dużo skuteczniej kształtować duchowość.'
+          '</p>'
+          '</blockquote>'
+
+  ),
+
+  KonspektStep(
+      title: 'Wyjaśnienie merytoryczne - skrót',
+      duration: Duration(minutes: 4),
+      activeForm: KonspektStepActiveForm.active,
+      content: '<p style="text-align:justify;">'
+          'Prowadzący, na podstawie załącznika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci wprowadza uczestników w mechanizmy kształtowania duchowości.'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Duchowość człowieka, jak pewnie się domyślacie, nie jest wyryta raz na zawsze w skale. Istnieją różne zjawiska, które wpływają na jej kształt.'
+          '</p>'
+          '</blockquote>'
+
+          // Adresat
+          '<p style="text-align:justify;">'
+          '<b>Adresat</b>'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Po pierwsze: adresat.'
+          '<br>'
+          '<br>Ma znaczenie kim jest wychowanek, o którym mowa. Inne metody są konieczne by wychować do patriotyzmu, wiary, braterstwa, czy czegokolwiek innego wielomiejskiego konformistę, a inne w przypadku małomiasteczkowego cwaniaka. Ludzie są różni na wielu wymiarach, jednak na kształtowanie duchowości mają wpływ przede wszystkim dwie kwestie:'
+          '</p>'
+          '<ul>'
+          '<li><p>biologia i etap rozwoju człowieka (jego temperament, neurochemia, zdrowie, wiek, zainteresowania, itd.),</p></li>'
+          '<li><p>dotychczasowa duchowość człowieka.</p></li>'
+          '</ul>'
+          '</blockquote>'
+
+          // Drabina internalizacji
+          '<p style="text-align:justify;">'
+          '<b>Drabina internalizacji</b>'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Po drugie: drabina internalizacji.'
+          '<br>'
+          '<br>Każde zachowanie, wartość, czy aksjomat człowieka może być zinternalizowana przez człowieka na różnym szczeblu głębokości. To, że dwójka ludzi dobrowolnie myje co wieczór zęby nie oznacza jeszcze, że w obu przypadkach wynika to z tak samo silnie zakorzenionej przyczyny.'
+          '<br>'
+          '<br>Warto wyróżnić tutaj cztery poziomy internalizacji elementów duchowości, które za chwilę trochę głębiej omówimy:'
+          '</p>'
+
+          '<ul>'
+          '<li><p>dostosowanie</p></li>'
+          '<li><p>przyzwyczajenie</p></li>'
+          '<li><p>tożsamość</p></li>'
+          '<li><p>wiara (w jakiś porządek rzeczy)</p></li>'
+          '</ul>'
+
+          '<p style="text-align:justify;">'
+          'Im szczebel jest płytszy, tym łatwiej go ukształtować, jednak tym bardziej jest on ulotny. Im szczebel jest głębszy, tym trudniej na niego wpłynąć, ale tym jest on trwalszy.'
+          '<br>'
+          '<br>Duchowość na różnych szczeblach jej internalizacji kształtuje się różnymi narzędziami – inaczej kształtuje się czyjeś przyzwyczajenia, a inaczej czyjąś tożsamość, czy wiarę w porządek rzeczy.'
+          '</p>'
+          '</blockquote>'
+
+          // Kontekst stosowania narzędzi
+          '<p style="text-align:justify;">'
+          '<b>Kontekst stosowania narzędzi</b>'
+          '</p>'
+
+          '<blockquote>'
+          '<p style="text-align:justify;">'
+          'Po trzecie: kontekst stosowania narzędzi.'
+          '<br>'
+          '<br>Ma znaczenie, w jakich warunkach i przez kogo używane są narzędzia kształtowania duchowości. Tych samych metod można użyć w kontekście, który wzmocni ich działanie, ale można też łatwo doprowadzić do absolutnie zniweczenia ich wpływu.'
+          '<br>'
+          '<br>Okazuje się, przykładowo, że jeżeli jakieś narzędzie wychowawcze jest wykorzystywane przez kogoś, kogo wychowanek uznaje za swój autorytet, to że jest dużo skuteczniejsze, niż gdyby to samo zrobił przypadkowy człowiek z ulicy.'
+          '</p>'
+          '</blockquote>'
+
+  ),
+
+  KonspektStep(
       title: 'Wyjaśnienie merytoryczne - szczeble internalizacji',
       duration: Duration(minutes: 5),
       activeForm: KonspektStepActiveForm.static,
@@ -67,7 +173,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
 
           '<blockquote>'
           '<p style="text-align:justify;">'
-          'Duchowość człowieka, jak pewnie się domyślacie, nie jest wyryta raz na zawsze w skale. Istnieją różne zjawiska, które wpływają na jej kształt.'
+          'Kwestię adresata naszego wychowania oraz konktekstu stosowania narzędzi na chwilę zaparkujemy - skupmy się póki co na samych narzędziach oraz na drabinie internalizacji.'
           '<br>'
           '<br>Pierwszą istotną kwestią jest to, że składowe duchowości człowieka (zachowania, wartości, czy aksjomaty) nie są w niej binarnie obecne: nie jest tak, że jakaś wartość albo w czyjejś duchowości jest, albo jej nie ma i że nie ma nic poza tym. W rzeczywistości każde zachowanie, wartość, czy aksjomat mogą być zakorzenione w duchowości człowieka na <b>różnym stopniu głębokości</b>.'
           '<br>'
