@@ -94,7 +94,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
 
           '<blockquote>'
           '<p style="text-align:justify;">'
-          'Duchowość człowieka, jak pewnie się domyślacie, nie jest wyryta raz na zawsze w skale. Istnieją różne zjawiska, które wpływają na jej kształt i od których skuteczny sposób kształtownia duchowości zależy.'
+          'Duchowość człowieka, jak pewnie się domyślacie, nie jest wyryta raz na zawsze w skale. Istnieją różne zjawiska, które wpływają na jej kształt i od których skuteczny sposób kształtowania duchowości zależy.'
           '</p>'
           '</blockquote>'
 

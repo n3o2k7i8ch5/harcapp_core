@@ -212,7 +212,7 @@ KonspektStep step_sfery_rozwoju_sfery_zdolnosci_arbitralnosc_podzialu = Konspekt
         '</table>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący, korzystając z <b>niejednoznaczności</b> przyporządkwoania zwraca uwagę, że traktowanie 4 sfer zdolności łącznie, bez wchodzenia w to, czy chodzi o ciało, umysł, emocje, czy relacje rozwiązuje dwa problemy:'
+        'Prowadzący, korzystając z <b>niejednoznaczności</b> przyporządkowania zwraca uwagę, że traktowanie 4 sfer zdolności łącznie, bez wchodzenia w to, czy chodzi o ciało, umysł, emocje, czy relacje rozwiązuje dwa problemy:'
         '</p>'
         '<ul>'
         '<li><p style="text-align:justify;"><b>Arbitralność podziału</b> — to, że ktoś podzielił sfery zdolności na 4 jest arbitralną decyzją. Równie dobrze można by zmieścić wszystko w dwóch: sferze ciała i umysłu, który przecież odpowiada zarówno za sferę emocji człowieka jak i za kompetencje społeczne. Można również pójść w drugą stronę i wydzielić więcej sfer: np. dodać sferę zasobów materialnych.</p></li>'
@@ -258,7 +258,7 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
         '</p>'
         '</blockquote>'
         '<p style="text-align:justify;">'
-        'Prowadzący kładzie dookoła kartki "sfery zdolności" kartki z przykładowymi zdolnościami z załącznika $attach_html_sfery_przyklady i opowiada następującą historię:'
+        'Prowadzący kładzie dookoła karty "sfery zdolności" kartki z przykładowymi zdolnościami z załącznika $attach_html_sfery_przyklady i opowiada następującą historię:'
         '</p>'
         '<blockquote>'
         '<p style="text-align:justify;">'
@@ -401,7 +401,7 @@ KonspektStep _step_poziomy_duchowosci_zachowania_definicja = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący opisuje <b>poziom zachowań</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom zachowań" z załącznika $attach_html_karty_poziomow_duchowosci.'
+        'Prowadzący opisuje <b>poziom zachowań</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartę "poziom zachowań" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
 
         '<blockquote>'
@@ -452,12 +452,14 @@ KonspektStep _step_poziomy_duchowosci_wartosci_definicja = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący płynnie przechodzi do opisu <b>poziomu wartości</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom wartości" z załącznika $attach_html_karty_poziomow_duchowosci.'
+        'Prowadzący płynnie przechodzi do opisu <b>poziomu wartości</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartę "poziom wartości" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Na szczęście, gdy się przyjrzeć uważniej zachowaniom ludzi, prawie zawsze coś je ze sobą łączy. Zazwyczaj ludzie w swoich poczynaniach dążą do tego, co uważają za <b>dobre</b>. Owe dobra, którym człowiek podporządkowuje swoje zachowania to <b>wartości</b>.'
+        'Gdyby rozmawiając o czyjejś duchowości trzeba było wypisać wszystkie podejmowane przez niego zachowania, to łatwo zauważyć, że byłoby to niemożliwe - jest nieskończenie wiele sytuacji i okoliczności, które mogą się komuś przytrafić.'
+        '<br>'
+        '<br>Na szczęście, gdy się przyjrzeć uważniej zachowaniom ludzi, prawie zawsze coś je ze sobą łączy. Zazwyczaj ludzie w swoich poczynaniach dążą do tego, co uważają za <b>dobre</b>. Owe dobra, którym człowiek podporządkowuje swoje zachowania to <b>wartości</b>.'
         '<br>'
         '<br>Wartości to np.: zdrowie, władza, bogactwo, śmierć wrogów, posiadanie, rodzina, pokora, patriotyzm, ale też przyjemność, brak głodu, spokój, etc.'
         '</p>'
@@ -667,7 +669,7 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_definicja = KonspektStep(
     duration: Duration(minutes: 2),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący definiuje <b>poziom aksjomatów</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartkę "poziom aksjomatów" z załącznika $attach_html_karty_poziomow_duchowosci.'
+        'Prowadzący definiuje <b>poziom aksjomatów</b>, kładąc w odpowiednim momencie we wspólnej przestrzeni kartę "poziom aksjomatów" z załącznika $attach_html_karty_poziomow_duchowosci.'
         '</p>'
         '<blockquote>'
         '<p style="text-align:justify;">'
@@ -1459,7 +1461,6 @@ KonspektStep _step_scenka_wychowawcza_omowienie = KonspektStep(
 
         '<p style="text-align:justify;">'
         'Prowadzący podsumowuje:'
-        '<br>'
         '</p>'
         '<blockquote>'
         '<p style="text-align:justify;">'
@@ -1490,7 +1491,7 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę, że ludzie postrzegają rzeczywistość przeze wszystkim przez pryzmat opowieści:'
+        'Prowadzący zwraca uwagę, że ludzie postrzegają rzeczywistość przede wszystkim przez pryzmat opowieści:'
         '</p>'
 
         '<blockquote>'
@@ -1499,7 +1500,7 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
         '<br>'
         '<br>Czy zastanawialiście się kiedyś, dlaczego ludzie wierzą w to, w co wierzą? Albo raczej: dlaczego ludzie chętniej wierzą w jedne rzeczy, ale zupełnie nie przekonują ich inne poglądy?'
         '<br>'
-        '<br>Ludzie nie postrzegają świata fundamentalnie jako zbioru obiektów, ani zbioru faktów. Ludzie postrzegają rzeczywistość przede wszystkim jako <b>opowieści</b>: historie mające przyczynę, sens, cel, która opowiadające o naturze świata, o swojej roli w nim itd..'
+        '<br>Ludzie nie postrzegają świata fundamentalnie jako zbioru obiektów, ani zbioru faktów. Ludzie postrzegają rzeczywistość przede wszystkim jako <b>opowieści</b>: historie mające przyczynę, sens, cel, opowiadające o naturze świata, o swojej roli w nim itd.'
         '<br>'
         '<br>Przykładów na to można mnożyć bez końca: Grecy widzieli świat takim, jakim opisali go w mitologicznych historiach. Starotestamentalny lud żydowski, z którego nota bene my wszyscy wyrastamy, widział świat jako miejsce, w którym Bóg prowadzi ich przez dzieje, stopniowo odkrywając przed nimi swoją naturę. Tymczasem dziś, kilka tysięcy lat później, głód i potrzeba opowieści jest wciąż tak wielka, że ludzie płacą pieniądze za to, by móc usiąść na kilka godzin w fotelu i obejrzeć zupełnie wymyśloną historię walki dobra ze złem, taką jak Gwiezdne Wojny, Władca Pierścieni, czy Avengersi.'
         '</p>'
@@ -1585,12 +1586,22 @@ KonspektStep _step_meta_narracja_uniwersalnosc = KonspektStep(
     activeForm: KonspektStepActiveForm.static,
     content:
         '<p style="text-align:justify;">'
-        'Prowadzący zaczyna od zwrócenia uwagi, że wartości łacińskie nie są ani trochę <b>domyślne</b> ani <b>uniwersalne</b>:'
+        'Prowadzący zaczyna od zwrócenia uwagi, że wartości łacińskie nie są ani trochę <b>naturalne</b>, czy <b>uniwersalne</b>:'
         '</p>'
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Na początku rozprawmy się z założeniem, że nasze wartości są domyślne i naturalne: czyli że każdy, gdyby zostawić go samemu sobie, sam by je w końcu odkrył.'
+        'W pierwszej kolejności weźmy na warsztat jedną z możliwości: może każdy człowiek naturalnie sam dąży do wartości takich jak braterswo, uniwersalna ludzka godność, czy przebaczenie? Może tylko, gdy społeczeństwo negatywnie wpłynie na człowieka, to zamazuje te naturalnie występujące w nas dążenia? Co myślicie?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący daje uczetsnikom przestrzeń, by się wypowiedzieli, po czym podsumowuje:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Niestety nie jest tak, że gdyby zostawić nas, ludzi, samym sobie, to sami byśmy doszli do naszych harcerskich wartości. W zasadzie to jest dokładnie odwrotnie.'
         '<br>'
         '<br>Czy wiecie ile czasu my, jako gatunek (homo sapiens) żyjemy na świecie? Około 300 000 lat - gdybyście przenieśli noworodka sprzed 300 000 lat w czasie do obecnej chwili, to wyrósłby na zupełnie normalnego człowieka.'
         '<br>'
@@ -1610,7 +1621,7 @@ KonspektStep _step_meta_narracja_uniwersalnosc = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Spróbujmy się teraz zastanowić, czy wszystkie cywilizacje, chcąc stłumić pierwotną, dziką ludzką duchowość dochodzi w końcu do łacińskich wartości.'
+        'Spróbujmy się teraz zastanowić, czy wszystkie cywilizacje, chcąc stłumić pierwotną, dziką ludzką duchowość, dochodzą w końcu do łacińskich wartości.'
         '</p>'
         '</blockquote>'
 
@@ -1727,7 +1738,7 @@ KonspektStep _step_meta_narracja_zrodla_lacinskich_wartosci = KonspektStep(
         'Nasza cywilizacja jest zbudowana wokół takich wartości tylko z jednego powodu: bo ukształtowała ją wiara w zbawcze dla człowieka: życie, śmierć i zmartwychwstanie Chrystusa.'
         '</p>'
         '<ol>'
-        '<li><p style="text-align:justify;">Nie byłoby niezbywalnej godności każdego człowieka, ani równości wobec prawa, ani humanitaryzmu, ani oświecenia, ani Powszechnej Deklaracji Praw Człowieka bez wiary, że skoro sam Bóg dobrowolnie wydał się na śmierć dla zbawienia najpodlejszego nawet człowieka, to że w każdym człowieku jest coś iście boskiego, nieważne jak bardzo jest podły, bezużyteczny, inny, czy denerwujący. Koncept godności niektórych ludzi funkcjonował w wielu kręgach już wcześniej - ale godność każdego człowieka - bez względu na jego urodzenie, majętność, plemienną przynależność, czy poglądy - jest czymś zupełnie innym.</p></li>'
+        '<li><p style="text-align:justify;">Nie byłoby niezbywalnej godności każdego człowieka, ani równości wobec prawa, ani humanitaryzmu, ani oświecenia, ani Powszechnej Deklaracji Praw Człowieka bez wiary, że skoro sam Bóg dobrowolnie wydał się na śmierć dla zbawienia najpodlejszego nawet człowieka, to, że w każdym człowieku jest coś iście boskiego, nieważne jak bardzo jest podły, bezużyteczny, inny, czy denerwujący. Koncept godności niektórych ludzi funkcjonował w wielu kręgach już wcześniej - ale godność każdego człowieka - bez względu na jego urodzenie, majętność, plemienną przynależność, czy poglądy - jest czymś zupełnie innym.</p></li>'
         '<li><p style="text-align:justify;">Nie byłoby przebaczenia, ani odpuszczenia win, gdyby nie wiara, że sam Bóg, stwórca świata wziął na siebie błędy każdego człowieka i ich konsekwencje i zgodził się dobrowolnie ponieść śmierć, by zostać potępionym zamiast ludzi.</p></li>'
         '<li><p style="text-align:justify;">Nie byłoby wreszcie uznania wartości prawdy, gdyby nie wiara, że świat i jego prawa zostały stworzone przez absolutne dobro, oraz że stając w prawdzie pomimo błędów, czy chwilowego braku interesu jest jedyną drogą, by naprawić swoje życie, bo czuwa nad nim wszechmogący i miłujący Bóg.</p></li>'
         '</ol>'
@@ -1854,7 +1865,7 @@ KonspektStep _step_meta_narracja_wniosek = KonspektStep(
         '<p style="text-align:justify;">'
         'Istnieje w sposób oczywisty znana i bardzo stara meta-narracja, która spełnia wszystkie kryteria: jest to meta-narracja o zbawczym życiu, śmierci i zmartwychwstaniu Chrystusa.'
         '<br>'
-        '<br>Oczywiście to, jak w praktyce wygląda praca wychowcza z taką meta-narracją to osobne zagadnienie.'
+        '<br>Oczywiście to, jak w praktyce wygląda praca wychowawcza z taką meta-narracją to osobne zagadnienie.'
         '</p>'
         '</blockquote>'
 
@@ -1889,7 +1900,7 @@ KonspektStep _step_meta_narracja_wniosek = KonspektStep(
         '<br>'
         '<br>Jeżeli jednak w życiu niewierzącego człowieka nastąpi jakieś nagłe wydarzenie, katastrofa, albo jeśli wystarczająco wiele osób porzuci te wartości - to w kilka dekad nic z ludzkiej wolności, godności, braterstwa, czy równości nie zostanie. Zresztą, sami pomyślcie: dlaczego nie wyłączyć ludzi robiących złe rzeczy z prawa do godnego traktowania? Czemu ktokolwiek miałby się poświęcać dla swojego wroga?'
         '<br>'
-        '<br>Nie chodzi o to, że każdy, kto porzuci klasyczną, łacińską, meta-narrację jutro umrze. Absolutnie. Chodzi o to, jeśli zacznie szukać w swoim życiu głębokiem spójności ze swoimi przekonaniami, to absolutnie nie można liczyć na to, że w długim okresie zachowa harcerskie wartości jako swoje.'
+        '<br>Nie chodzi o to, że każdy, kto porzuci klasyczną, łacińską, meta-narrację jutro umrze. Absolutnie. Chodzi o to, jeśli zacznie szukać w swoim życiu głębokiej spójności ze swoimi przekonaniami, to absolutnie nie można liczyć na to, że w długim okresie zachowa harcerskie wartości jako swoje.'
         '</p>'
         '</blockquote>'
 
@@ -2136,7 +2147,7 @@ KonspektStep _step_duchowosc_harcerska_dyskusja = KonspektStep(
         '</p>'
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Duchowość to sprawa indywidualna i fundamentalnie osobista, <b>ale</b> jest jednocześnie sprawą publiczna - z duchowości wynika długa lista spraw (zachowania, postawy i wartości), które dotyczą i wpływają na całe otoczenie, w którym człowiek żyje. O wierze można i trzeba rozmawiać, robić dla niej miejsce, można ją publicznie praktykować, także w formie tradycji, czy w warstwie symbolicznej.'
+        'Duchowość to sprawa indywidualna i fundamentalnie osobista, <b>ale</b> jest jednocześnie sprawą publiczną - z duchowości wynika długa lista spraw (zachowania, postawy i wartości), które dotyczą i wpływają na całe otoczenie, w którym człowiek żyje. O wierze można i trzeba rozmawiać, robić dla niej miejsce, można ją publicznie praktykować, także w formie tradycji, czy w warstwie symbolicznej.'
         '</p>'
         '</blockquote>'
         '</li>'
@@ -2257,7 +2268,7 @@ KonspektStep step_szybkie_strzaly_dyskusyjne = KonspektStep(
 
         '<li>'
         '<p style="text-align:justify;">'
-        '<u>Wszystkie niebezpieczne działania są niewychowawcze i nieodpowiednialne.</u>'
+        '<u>Wszystkie niebezpieczne działania są niewychowawcze i nieodpowiedzialne.</u>'
         '<br>'
         '<br><i>Życie jest niebezpieczne i nie da się odizolować od tego człowieka. Zamiast chować go pod kloszem i wychowywać do życia w nieistniejącym świecie, lepiej dawkować młodemu człowiekowi doświadczenie braku bezpieczeństwa - takie działania mogą być ryzykowne, ale są wychowawcze i są wyrazem odpowiedzialności za przyszłość młodego człowieka.</i>'
         '</p></li>'
