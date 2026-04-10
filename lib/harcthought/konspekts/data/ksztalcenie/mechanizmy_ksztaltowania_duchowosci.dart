@@ -71,14 +71,14 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
           '<p style="text-align:justify;">'
           'Jeżeli ktoś coś zaproponuje - super! Można chwilę podyskutować, lub zwrócić uwagę na to, że "jest to dobry start", by potem przejść do omówienia mechanizmów kształtowania duchowości.'
           '<br>'
-          '<br>Jeśli pytanie prowadzącego spotka się z milczenie, prowadzący może zagadnąć:'
+          '<br>Jeśli pytanie prowadzącego spotka się z milczeniem, prowadzący może zagadnąć:'
           '</p>'
 
           '<blockquote>'
           '<p style="text-align:justify;">'
           'Jak to? Nie wiecie? Przecież jesteście harcerskimi wychowawcami, ekspertami od wychowania!'
           '<br>'
-          '<br>Spokojnie, oczywiście żartuję - macie pełne tego nie wiedzieć, bo nikt tego do końca nie wie. Ale jest kilka ważnych aspektów, które pozwalają dużo skuteczniej kształtować duchowość.'
+          '<br>Spokojnie, oczywiście żartuję - macie pełne prawo tego nie wiedzieć, bo nikt tego do końca nie wie. Ale jest kilka ważnych aspektów, które pozwalają dużo skuteczniej kształtować duchowość.'
           '</p>'
           '</blockquote>'
 
@@ -152,9 +152,9 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
           '<p style="text-align:justify;">'
           'Po trzecie: kontekst stosowania narzędzi.'
           '<br>'
-          '<br>Ma znaczenie, w jakich warunkach i przez kogo używane są narzędzia kształtowania duchowości. Tych samych metod można użyć w kontekście, który wzmocni ich działanie, ale można też łatwo doprowadzić do absolutnie zniweczenia ich wpływu.'
+          '<br>Ma znaczenie, w jakich warunkach i przez kogo używane są narzędzia kształtowania duchowości. Tych samych metod można użyć w kontekście, który wzmocni ich działanie, ale można też łatwo doprowadzić do absolutnego zniweczenia ich wpływu.'
           '<br>'
-          '<br>Okazuje się, przykładowo, że jeżeli jakieś narzędzie wychowawcze jest wykorzystywane przez kogoś, kogo wychowanek uznaje za swój autorytet, to że jest dużo skuteczniejsze, niż gdyby to samo zrobił przypadkowy człowiek z ulicy.'
+          '<br>Okazuje się, przykładowo, że jeżeli jakieś narzędzie wychowawcze jest wykorzystywane przez kogoś, kogo wychowanek uznaje za swój autorytet, to jest dużo skuteczniejsze, niż gdyby to samo zrobił przypadkowy człowiek z ulicy.'
           '</p>'
           '</blockquote>'
 
@@ -173,7 +173,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
 
           '<blockquote>'
           '<p style="text-align:justify;">'
-          'Kwestię adresata naszego wychowania oraz konktekstu stosowania narzędzi na chwilę zaparkujemy - skupmy się póki co na samych narzędziach oraz na drabinie internalizacji.'
+          'Kwestię adresata naszego wychowania oraz kontekstu stosowania narzędzi na chwilę zaparkujemy - skupmy się póki co na samych narzędziach oraz na drabinie internalizacji.'
           '<br>'
           '<br>Pierwszą istotną kwestią jest to, że składowe duchowości człowieka (zachowania, wartości, czy aksjomaty) nie są w niej binarnie obecne: nie jest tak, że jakaś wartość albo w czyjejś duchowości jest, albo jej nie ma i że nie ma nic poza tym. W rzeczywistości każde zachowanie, wartość, czy aksjomat mogą być zakorzenione w duchowości człowieka na <b>różnym stopniu głębokości</b>.'
           '<br>'
@@ -316,7 +316,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
           '<p style="text-align:justify;">'
           'Co turę prowadzący będzie czytał krótką historię. Gdy skończy, każda grupa będzie miała możliwość zastanowić się, które czynniki rozwoju duchowego są w niej opisane - może być ich więcej niż jeden.'
           '<br>'
-          '<br>Gdy grupy się zastanowią, mogą na każdej z kart położyć od 0 do 3 żetonów, obstawiając prawidłowe odpowiedzi. Gdy żetony zostaną rozdysponowane na planszy, prowadzący prosi każdą z grup u podanie argumentów dla swoich odpowiedzi, po czym odczytuje prawidłowe rozwiązanie. Dobrze obstawione żetony są podwajane, źle obstawione są zabierane.'
+          '<br>Gdy grupy się zastanowią, mogą na każdej z kart położyć od 0 do 3 żetonów, obstawiając prawidłowe odpowiedzi. Gdy żetony zostaną rozdysponowane na planszy, prowadzący prosi każdą z grup o podanie argumentów dla swoich odpowiedzi, po czym odczytuje prawidłowe rozwiązanie. Dobrze obstawione żetony są podwajane, źle obstawione są zabierane.'
           '<br>'
           '<br>Na końcu gry grupa, która zdobędzie najwięcej punktów, wygrywa.'
           '</p>'
@@ -347,8 +347,6 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
           '<li><p style="text-align:justify;">ważniejsze: sprawić, by uczestnicy musieli wstać, by obstawić swoje żetony (element dynamizujący)</p></li>'
           '<li><p style="text-align:justify;">mniej ważne: sprawić, by uczestnicy nie mogli szybko zmienić swoich obstawień w trakcie dyskusji.</p></li>'
           '</ul>'
-          '<p style="text-align:justify;">'
-          '</p>'
   ),
 
   KonspektStep(
@@ -361,8 +359,7 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
         material_zal_plansza_mechanizmow_ksztaltowania_duchowosci
       ],
       content: '<p style="text-align:justify;">'
-          '<br>'
-          '<br>Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci. Gdy skończy czytać, zadaje pytanie punktowane o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
+          'Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci. Gdy skończy czytać, zadaje pytanie punktowane o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
           '<br>'
           '<br>Grupy obstawiają swoje odpowiedzi. Gdy wszyscy skończą obstawiać, odsłaniają je i prowadzący odczytuje poprawne odpowiedzi.'
           '<br>'
