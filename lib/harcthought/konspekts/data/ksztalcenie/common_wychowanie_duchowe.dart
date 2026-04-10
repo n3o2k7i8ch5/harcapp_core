@@ -1563,7 +1563,7 @@ KonspektStep _step_meta_narracja_warunki_brzegowe = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Zastanawialiście się kiedyś, skąd te wartości wzięły się w harcerskim wychowaniu? Czy jakiś stary, mądry harcerz, na przykład Robert Baden-Powell, usiadł kiedyś, głęboko się namyślił i ogłosił je wbrew całemu światu? A może jest inaczej: może harcerstwie wartości nie są wcale fundamentalnie inne od wartości kultury, w której żyjemy?'
+        'Zastanawialiście się kiedyś, skąd te wartości wzięły się w harcerskim wychowaniu? Czy jakiś stary, mądry harcerz, na przykład Robert Baden-Powell, usiadł kiedyś, głęboko się namyślił i ogłosił je wbrew całemu światu? A może jest inaczej: może harcerskie wartości nie są wcale fundamentalnie inne od wartości kultury, w której żyjemy?'
         '</p>'
         '</blockquote>'
 
@@ -1591,12 +1591,12 @@ KonspektStep _step_meta_narracja_uniwersalnosc = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'W pierwszej kolejności weźmy na warsztat jedną z możliwości: może każdy człowiek naturalnie sam dąży do wartości takich jak braterswo, uniwersalna ludzka godność, czy przebaczenie? Może tylko, gdy społeczeństwo negatywnie wpłynie na człowieka, to zamazuje te naturalnie występujące w nas dążenia? Co myślicie?'
+        'W pierwszej kolejności weźmy na warsztat jedną z możliwości: może każdy człowiek naturalnie sam dąży do wartości takich jak braterstwo, uniwersalna ludzka godność, czy przebaczenie? Może tylko, gdy społeczeństwo negatywnie wpłynie na człowieka, to zamazuje te naturalnie występujące w nas dążenia? Co myślicie?'
         '</p>'
         '</blockquote>'
 
         '<p style="text-align:justify;">'
-        'Prowadzący daje uczetsnikom przestrzeń, by się wypowiedzieli, po czym podsumowuje:'
+        'Prowadzący daje uczestnikom przestrzeń, by się wypowiedzieli, po czym podsumowuje:'
         '</p>'
 
         '<blockquote>'
@@ -1791,15 +1791,11 @@ KonspektStep _step_meta_narracja_selekcja_naturalna = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">'
-        'Za każdą duchowością, która jest dla ludzi "przyjmowalna" stoi określona <b>narracja</b> - to już wiadomo. Ale w przypadku duchowości powszechnych te narracje także są innego kalibru.'
+        'Za każdą duchowością, która jest dla ludzi "przyjmowalna" stoi określona <b>narracja</b> - wiadomo. Ponieważ jednak duchowości podlegają selekcji naturalnej, to analogicznie owej selekcji podlegają narracje, które za nimi stoją - jedne narracje okazują się trafniej opisywać świat, lepiej "chwytać" ludzi niż inne.'
         '<br>'
-        '<br>Jeżeli jakaś duchowość jest nieprzystająca do rzeczywistości i kończy się katastrofą ludzi ją przyjmujących, to zazwyczaj oznacza to, że owa narracja jest w jakiś sposób fałszywa - że opisuje świat i relacje w nim inaczej, niż funkcjonują one naprawdę.'
+        '<br>Okazuje się, że za duchowościami powszechnymi, które trwają kilkaset, albo nawet kilka tysięcy lat stoi zupełnie inny kaliber narracji. Nie są to już bowiem jakieś tam mądrości - raz lepiej, a raz gorzej opowiadające świat. Za stabilnymi duchowościami powszechnymi stoją zawsze niezwykle spójne opowieści, rysujące obraz świata w sposób zupełny, z których wynikają prawdy dotykające każdego ważnego aspektu życia i które mają w sobie na tyle dużo głębii i prawdy, że kierujący się nią ludzie mogą zbudować stabilne cywilizacje.'
         '<br>'
-        '<br>Jeżeli jednak jakaś duchowość okazuje się stabilna, oznacza to po pierwsze, że stojąca za nią narracja jest w jakiś głęboki sposób zgodna z tym, jak w istocie funkcjonuje świat. Po drugie zaś, jeśli trafia do ludzi, to znaczy, że nie przemawia do nich w sposób płytki i czysto emocjonalny, lecz dotyka ich najgłębszych kwestii egzystencjalnych.'
-        '<br>'
-        '<br>W tym drugim przypadku trudno mówić już jedynie o jakiejś wycinkowej narracji. Za stabilnymi, wielowiekowymi duchowościami stoją niezwykle spójne i głębokie opowieści o świecie, które rysują jego obraz w sposób zupełny, z których wynikają prawdy dotykające każdego ważnego aspektu życia.'
-        '<br>'
-        '<br>W takim wypadku zaś można już śmiało mówić o czymś więcej - o <b>meta-narracji</b>.'
+        '<br>W takim wypadku zaś można już śmiało mówić o czymś więcej - nie tyle o jednej narracji, ale o wielkiej narracji na temat różnych narracji - mowa już wówczas o tak zwanej <b>meta-narracji</b>.'
         '</p>'
         '</blockquote>'
 
