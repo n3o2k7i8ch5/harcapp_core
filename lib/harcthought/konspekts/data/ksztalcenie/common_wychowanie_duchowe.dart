@@ -196,6 +196,31 @@ KonspektStep step_sfery_rozwoju_sfera_ducha_jest_inna = KonspektStep(
         '</blockquote>'
 );
 
+KonspektStep step_sfery_rozwoju_sfery_zdolnosci_arbitralnosc_podzialu = KonspektStep(
+    title: 'Sfery rozwoju - sfery zdolności - arbitralność podziału',
+    duration: Duration(minutes: 2),
+    activeForm: KonspektStepActiveForm.static,
+    materials: [
+      material_zal_sfery_przyklady,
+    ],
+    content: '<p style="text-align:justify;">'
+        'Prowadzący prosi uczestników o wskazanie, do której sfery zdolności przynależą zdolności z <b>dwóch szarych kartek</b> z załącznika $attach_html_sfery_przyklady:'
+        '</p>'
+        '<table border="1" style="$_tableStyle">'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Potrafi w kilka dni zdyskredytować czyjąś reputację</i></p></td><td style="$_tdPadding"><p><b>Relacje</b> i <b>Umysł</b></p></td></tr>'
+        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Potrafi zagrać na fortepianie każdy utwór Chopina</i></p></td><td style="$_tdPadding"><p><b>Ciało</b>, <b>Umysł</b> i <b>Emocje</b></p></td></tr>'
+        '</table>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący, korzystając z <b>niejednoznaczności</b> przyporządkwoania zwraca uwagę, że traktowanie 4 sfer zdolności łącznie, bez wchodzenia w to, czy chodzi o ciało, umysł, emocje, czy relacje rozwiązuje dwa problemy:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;"><b>Arbitralność podziału</b> — to, że ktoś podzielił sfery zdolności na 4 jest arbitralną decyzją. Równie dobrze można by zmieścić wszystko w dwóch: sferze ciała i umysłu, który przecież odpowiada zarówno za sferę emocji człowieka jak i za kompetencje społeczne. Można również pójść w drugą stronę i wydzielić więcej sfer: np. dodać sferę zasobów materialnych.</p></li>'
+        '<li><p style="text-align:justify;"><b>Nieostrość podziału</b> — w obecnym podziale (i w każdym podziale) istnieją zdolności, które nie pasują do tylko jednej sfery.</p></li>'
+        '</ul>'
+
+);
+
 KonspektStep step_sfery_rozwoju_sfery_zdolnosci = KonspektStep(
     title: 'Sfery rozwoju - sfery zdolności',
     duration: Duration(minutes: 1),
@@ -214,29 +239,6 @@ KonspektStep step_sfery_rozwoju_sfery_zdolnosci = KonspektStep(
         '<p style="text-align:justify;">'
         'Następnie prowadzący zbiera rozłożone wcześniej karty 4 sfer zdolności (ciała, umysłu, relacji i emocji) i symbolicznie składa je w stosik, który przykrywa kartą "sfery zdolności" z załącznika $attach_html_sfery.'
         '</p>'
-);
-
-KonspektStep step_sfery_rozwoju_sfery_zdolnosci_arbitralnosc_podzialu = KonspektStep(
-    title: 'Sfery rozwoju - sfery zdolności - arbitralność podziału',
-    duration: Duration(minutes: 2),
-    activeForm: KonspektStepActiveForm.static,
-    materials: [
-      material_zal_sfery_przyklady,
-    ],
-    content: '<p style="text-align:justify;">'
-        'Prowadzący zwraca uwagę, że traktowanie sfer zdolności łącznie, bez wchodzenia w to, czy chodzi o ciało, umysł, emocje, czy relacje rozwiązuje dwa problemy:'
-        '</p>'
-        '<ul>'
-        '<li><p style="text-align:justify;"><b>Arbitralność podziału</b> — to, że ktoś podzielił sfery zdolności na 4 jest arbitralną decyzją. Równie dobrze można by zmieścić wszystko w dwóch: sferze ciała i umysłu, który przecież odpowiada zarówno za sferę emocji człowieka jak i za kompetencje społeczne. Można również pójść w drugą stronę i wydzielić więcej sfer: np. dodać sferę zasobów materialnych.</p></li>'
-        '<li><p style="text-align:justify;"><b>Nieostrość podziału</b> — w obecnym podziale (i w każdym podziale) istnieją zdolności, które nie pasują do tylko jednej sfery.</p></li>'
-        '</ul>'
-        '<p style="text-align:justify;">'
-        'Prowadzący może skorzystać z <b>dwóch szarych kartek</b> z załącznika $attach_html_sfery_przyklady i poprosić uczestników o wskazanie, do której sfery zdolności przynależą zapisane na nich zdolności:'
-        '</p>'
-        '<table border="1" style="$_tableStyle">'
-        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Potrafi w kilka dni zdyskredytować czyjąś reputację</i></p></td><td style="$_tdPadding"><p><b>Relacje</b> i <b>Umysł</b></p></td></tr>'
-        '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Potrafi zagrać na fortepianie każdy utwór Chopina</i></p></td><td style="$_tdPadding"><p><b>Ciało</b>, <b>Umysł</b> i <b>Emocje</b></p></td></tr>'
-        '</table>'
 );
 
 KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
@@ -351,15 +353,14 @@ KonspektStep step_sfery_rozwoju_pytania = KonspektStep(
 
 );
 
-
 KonspektStepGroup step_group_definicja_sfery_ducha = KonspektStepGroup(
     title: 'Definicja sfery ducha',
     steps: [
       step_sfery_rozwoju,
       step_sfery_rozwoju_przyklady,
       step_sfery_rozwoju_sfera_ducha_jest_inna,
-      step_sfery_rozwoju_sfery_zdolnosci,
       step_sfery_rozwoju_sfery_zdolnosci_arbitralnosc_podzialu,
+      step_sfery_rozwoju_sfery_zdolnosci,
       step_sfery_rozwoju_sfera_ducha,
       step_sfery_rozwoju_sfera_ducha_dopowiedzenie,
       step_sfery_rozwoju_pytania,

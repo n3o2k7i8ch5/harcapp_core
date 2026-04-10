@@ -89,12 +89,12 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
       duration: Duration(minutes: 4),
       activeForm: KonspektStepActiveForm.active,
       content: '<p style="text-align:justify;">'
-          'Prowadzący, na podstawie załącznika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci wprowadza uczestników w mechanizmy kształtowania duchowości.'
+          'Prowadzący, na podstawie załącznika $attach_html_poradnik_mechanizmy_ksztaltowania_duchowosci wprowadza uczestników w szczeble internalizacji duchowości.'
           '</p>'
 
           '<blockquote>'
           '<p style="text-align:justify;">'
-          'Duchowość człowieka, jak pewnie się domyślacie, nie jest wyryta raz na zawsze w skale. Istnieją różne zjawiska, które wpływają na jej kształt.'
+          'Duchowość człowieka, jak pewnie się domyślacie, nie jest wyryta raz na zawsze w skale. Istnieją różne zjawiska, które wpływają na jej kształt i od których skuteczny sposób kształtownia duchowości zależy.'
           '</p>'
           '</blockquote>'
 
