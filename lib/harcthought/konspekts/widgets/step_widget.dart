@@ -29,29 +29,39 @@ class KonspektStepWidget extends StatelessWidget{
   const KonspektStepWidget(this.konspekt, this.stepsContainer, this.index, {this.groupIndex, this.startTime, this.trailingTop, this.horizontalPadding = Dimen.sideMarg, this.maxDialogWidth, super.key});
 
   void _showTableOfContentsDialog(BuildContext context) =>
-      openAppDialog(
+      showDialog(
         context: context,
-        title: 'Spis treści',
-        closable: true,
-        maxWidth: maxDialogWidth,
-        child: ListView.separated(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: step.tableOfContent.length,
-          itemBuilder: (context, i) => Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(MdiIcons.circleMedium, size: Dimen.textSizeNormal + 2),
-              const SizedBox(width: Dimen.defMarg),
-              Expanded(
-                child: Text(
-                  step.tableOfContent[i],
-                  style: const AppTextStyle(fontSize: Dimen.textSizeBig),
-                ),
+        builder: (context) => Padding(
+          padding: const EdgeInsets.all(Dimen.sideMarg),
+          child: Center(
+            child: AppDialog(
+              title: 'Spis treści',
+              closable: true,
+              maxWidth: maxDialogWidth,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  for (int i = 0; i < step.tableOfContent.length; i++) ...[
+                    if (i > 0) const SizedBox(height: Dimen.defMarg),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(MdiIcons.circleMedium, size: Dimen.textSizeNormal + 2),
+                        const SizedBox(width: Dimen.defMarg),
+                        Expanded(
+                          child: Text(
+                            step.tableOfContent[i],
+                            style: const AppTextStyle(fontSize: Dimen.textSizeBig),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
               ),
-            ],
+            ),
           ),
-          separatorBuilder: (context, i) => const SizedBox(height: Dimen.defMarg),
         ),
       );
 
