@@ -147,7 +147,10 @@ KonspektStep step_sfery_rozwoju = KonspektStep(
         'Prowadzący przygotowuje kartki z 5 sferami <b>ciała</b>, <b>umysłu</b>, <b>relacji</b>, <b>emocji</b> oraz <b>ducha</b> z załącznika $attach_html_sfery.'
         '<br>'
         '<br>Następnie prowadzący prosi uczestników o wymienienie sfer człowieka rozwijanych w harcerstwie. Każdorazowo, gdy padnie odpowiedź, kładzie odpowiednią kartkę we wspólnej przestrzeni.'
-        '</p>'
+        '</p>',
+    tableOfContent: [
+      'Jakie sfery? 5 kart',
+    ]
 );
 
 KonspektStep step_sfery_rozwoju_przyklady = KonspektStep(
@@ -172,7 +175,10 @@ KonspektStep step_sfery_rozwoju_przyklady = KonspektStep(
         '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Rozróżnia tylko trzy stany samopoczucia: "super", "ok" i "źle"</i></p></td><td style="$_tdPadding"><p><b>Emocje</b></p></td></tr>'
         '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Ma czwórkę rodzeństwa</i></p></td><td style="$_tdPadding"><p><b>Relacje</b></p></td></tr>'
         '<tr><td style="$_tdPadding"><p style="text-align:justify;"><i>Jest zaręczony ze swoją dziewczyną, którą zna od liceum</i></p></td><td style="$_tdPadding"><p><b>Relacje</b></p></td></tr>'
-        '</table>'
+        '</table>',
+    tableOfContent: [
+      'Białe kartki - przykłady sfer zdolności'
+    ]
 );
 
 KonspektStep step_sfery_rozwoju_sfera_ducha_jest_inna = KonspektStep(
@@ -193,7 +199,10 @@ KonspektStep step_sfery_rozwoju_sfera_ducha_jest_inna = KonspektStep(
         '<p style="text-align:justify;">'
         'Taki pogląd to fundamentalny błąd. Żeby zrozumieć dlaczego, najpierw pochylmy się nad wymienionymi dotąd 4 sferami.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'A sfera ducha? Skupmy się na 4'
+    ]
 );
 
 KonspektStep step_sfery_rozwoju_sfery_zdolnosci_arbitralnosc_podzialu = KonspektStep(
@@ -217,7 +226,11 @@ KonspektStep step_sfery_rozwoju_sfery_zdolnosci_arbitralnosc_podzialu = Konspekt
         '<ul>'
         '<li><p style="text-align:justify;"><b>Arbitralność podziału</b> — to, że ktoś podzielił sfery zdolności na 4 jest arbitralną decyzją. Równie dobrze można by zmieścić wszystko w dwóch: sferze ciała i umysłu, który przecież odpowiada zarówno za sferę emocji człowieka jak i za kompetencje społeczne. Można również pójść w drugą stronę i wydzielić więcej sfer: np. dodać sferę zasobów materialnych.</p></li>'
         '<li><p style="text-align:justify;"><b>Nieostrość podziału</b> — w obecnym podziale (i w każdym podziale) istnieją zdolności, które nie pasują do tylko jednej sfery.</p></li>'
-        '</ul>'
+        '</ul>',
+    tableOfContent: [
+      'Szare kartki - multi-sfery',
+      'Arbitralność i nieostrość podziału'
+    ]
 
 );
 
@@ -238,7 +251,10 @@ KonspektStep step_sfery_rozwoju_sfery_zdolnosci = KonspektStep(
         '</blockquote>'
         '<p style="text-align:justify;">'
         'Następnie prowadzący zbiera rozłożone wcześniej karty 4 sfer zdolności (ciała, umysłu, relacji i emocji) i symbolicznie składa je w stosik, który przykrywa kartą "sfery zdolności" z załącznika $attach_html_sfery.'
-        '</p>'
+        '</p>',
+    tableOfContent: [
+      'Karta - sfery zdolności'
+    ]
 );
 
 KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(

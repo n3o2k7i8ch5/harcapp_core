@@ -824,6 +824,12 @@ mixin KonspektDurationElementMixin{
 
 }
 
+mixin KonspektStepTableOfContentMixin{
+
+  List<String> get tableOfContent;
+
+}
+
 enum KonspektStepActiveForm{
   active,
   static;
@@ -858,7 +864,9 @@ enum KonspektStepActiveForm{
   }
 }
 
-abstract class BaseKonspektStep with KonspektDurationElementMixin{
+
+
+abstract class BaseKonspektStep with KonspektDurationElementMixin, KonspektStepTableOfContentMixin{
 
   String get title;
   Duration get duration;
@@ -892,6 +900,7 @@ class KonspektStep extends BaseKonspektStep{
   final List<String>? aims;
   final List<KonspektMaterial>? materials;
   final String Function({required bool isDark})? contentBuilder;
+  final List<String> tableOfContent;
 
   const KonspektStep({
     required this.title,
@@ -901,7 +910,8 @@ class KonspektStep extends BaseKonspektStep{
     this.content,
     this.aims,
     this.materials,
-    this.contentBuilder
+    this.contentBuilder,
+    this.tableOfContent = const [],
   }):
     assert (content != null || contentBuilder != null);
 
@@ -953,7 +963,7 @@ mixin KonspektStepsContainerMixin on BaseKonspektStepsContainerMixin{
 
 }
 
-class KonspektStepGroup with KonspektDurationElementMixin, BaseKonspektStepsContainerMixin, KonspektStepsContainerMixin{
+class KonspektStepGroup with KonspektDurationElementMixin, KonspektStepTableOfContentMixin, BaseKonspektStepsContainerMixin, KonspektStepsContainerMixin{
 
   final String? title;
   final List<KonspektStep> steps;
@@ -975,6 +985,14 @@ class KonspektStepGroup with KonspektDurationElementMixin, BaseKonspektStepsCont
         resultDuration += step.duration;
 
     return resultDuration;
+  }
+
+  List<String> get tableOfContent{
+    List<String> _list = [];
+    for(KonspektStep step in steps)
+      _list.addAll(step.tableOfContent);
+
+    return _list;
   }
 
   const KonspektStepGroup({

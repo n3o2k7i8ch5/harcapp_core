@@ -5,6 +5,7 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/time_of_day_extension.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
+import 'package:harcapp_core/comm_widgets/dialog/app_dialog.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/widgets/material_tile.dart';
@@ -26,6 +27,33 @@ class KonspektStepWidget extends StatelessWidget{
   KonspektStep get step => stepsContainer.steps[index];
 
   const KonspektStepWidget(this.konspekt, this.stepsContainer, this.index, {this.groupIndex, this.startTime, this.trailingTop, this.horizontalPadding = Dimen.sideMarg, this.maxDialogWidth, super.key});
+
+  void _showTableOfContentsDialog(BuildContext context) =>
+      openAppDialog(
+        context: context,
+        title: 'Spis treści',
+        closable: true,
+        maxWidth: maxDialogWidth,
+        child: ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: step.tableOfContent.length,
+          itemBuilder: (context, i) => Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(MdiIcons.circleMedium, size: Dimen.textSizeNormal + 2),
+              const SizedBox(width: Dimen.defMarg),
+              Expanded(
+                child: Text(
+                  step.tableOfContent[i],
+                  style: const AppTextStyle(fontSize: Dimen.textSizeBig),
+                ),
+              ),
+            ],
+          ),
+          separatorBuilder: (context, i) => const SizedBox(height: Dimen.defMarg),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) => Column(
@@ -100,6 +128,12 @@ class KonspektStepWidget extends StatelessWidget{
               ),
             ),
           ),
+
+          if(step.tableOfContent.isNotEmpty)
+            IconButton(
+              icon: Icon(MdiIcons.tableOfContents),
+              onPressed: () => _showTableOfContentsDialog(context),
+            ),
 
           if(trailingTop != null)
             trailingTop!
