@@ -4,6 +4,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/time_of_day_extension.dart';
+import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/dialog/app_dialog.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
@@ -140,9 +141,14 @@ class KonspektStepWidget extends StatelessWidget{
           ),
 
           if(step.tableOfContent.isNotEmpty)
-            IconButton(
-              icon: Icon(MdiIcons.tableOfContents),
-              onPressed: () => _showTableOfContentsDialog(context),
+            Padding(
+              padding: EdgeInsets.only(right: horizontalPadding),
+              child: AppButton(
+                icon: Icon(MdiIcons.tableOfContents),
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                onTap: () => _showTableOfContentsDialog(context),
+              ),
             ),
 
           if(trailingTop != null)
