@@ -154,12 +154,11 @@ class _MetoTile extends StatelessWidget{
   const _MetoTile(this.meto, this.enabled);
 
   @override
-  Widget build(BuildContext context) => Opacity(
-    opacity: enabled?1:0.5,
-    child: Material(
+  Widget build(BuildContext context) {
+    final tile = Material(
         clipBehavior: Clip.hardEdge,
         color: Colors.transparent,
-        elevation: enabled?AppCard.bigElevation:0,
+        elevation: enabled ? AppCard.bigElevation : 0,
         borderRadius: BorderRadius.circular(AppCard.defRadius),
         child: MetoTile(
           meto: meto,
@@ -173,15 +172,27 @@ class _MetoTile extends StatelessWidget{
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(Dimen.defMarg),
-                  child: enabled?
-                  Icon(MdiIcons.check):
-                  Icon(MdiIcons.close),
+                  child: enabled
+                      ? Icon(MdiIcons.check)
+                      : Icon(MdiIcons.close, color: hintEnab_(context)),
                 )
             ),
           ),
         )
-    ),
-  );
+    );
+
+    if (enabled) return tile;
+
+    return ColorFiltered(
+      colorFilter: const ColorFilter.matrix([
+        0.2126, 0.7152, 0.0722, 0, 0,
+        0.2126, 0.7152, 0.0722, 0, 0,
+        0.2126, 0.7152, 0.0722, 0, 0,
+        0,      0,      0,      1, 0,
+      ]),
+      child: tile,
+    );
+  }
 
 }
 
