@@ -74,9 +74,10 @@ class FormTileWidget extends StatelessWidget{
 
   final HarcForm form;
   final double elevation;
+  final double radius;
   final void Function()? onTap;
 
-  const FormTileWidget(this.form, {this.elevation = 0, this.onTap, super.key});
+  const FormTileWidget(this.form, {this.elevation = 0, this.radius = AppCard.bigRadius, this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) => AspectRatio(
@@ -87,7 +88,7 @@ class FormTileWidget extends StatelessWidget{
             elevation: elevation,
             colorStart: form.colorStart.withValues(alpha: .25),
             colorEnd: form.colorEnd.withValues(alpha: .25),
-            radius: AppCard.bigRadius,
+            radius: radius,
             child: InkWell(
                 onTap: onTap,
                 child: Padding(
