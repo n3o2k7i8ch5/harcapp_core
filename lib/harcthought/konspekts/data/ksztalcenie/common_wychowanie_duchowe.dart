@@ -306,7 +306,17 @@ KonspektStep step_sfery_rozwoju_sfera_ducha = KonspektStep(
 
         '<blockquote>'
         '<p style="text-align:justify;">Sfera ducha nie dostarcza żadnych narzędzi. Sfera ducha określa, jak i do czego dostępne narzędzia mają być w życiu wykorzystywane.</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'Przykład: Albera, Bartka i Cezarego (to samo miasto, 20 lat, montaż elektryki) - zdolności z kartki. Zepsute auto'
+          '\n- Albert - naprawia auto'
+          '\n- Bartek - dzwoni i czeka na nowe auto'
+          '\n- Cezary - porzuca auto i biegnie do klienta.'
+          '\n'
+          '\nTe same zdolności - inaczej je wykorzystują.',
+
+      'Kartka sfera ducha - "czujecie różnicę?"'
+    ]
 );
 
 KonspektStep step_sfery_rozwoju_sfera_ducha_dopowiedzenie = KonspektStep(
@@ -355,7 +365,13 @@ KonspektStep step_sfery_rozwoju_sfera_ducha_dopowiedzenie = KonspektStep(
 
         '<p style="text-align:justify;">'
         'Wszystkie te trzy opcje są na stole: to, jak Albert je oceni i którą z opcji wykona zależy od kształtu jego sfery ducha.'
-        '</p>'
+        '</p>',
+    tableOfContent: [
+      'Przykład 2: młodsza siostra Alberta (dokuczają jej w szkole)'
+          '\n- nic, sprawa już u dyrekcji'
+          '\n- ośmiesza ich w szkole'
+          '\n- sprzedaje gonga'
+    ]
 
 );
 
@@ -365,8 +381,10 @@ KonspektStep step_sfery_rozwoju_pytania = KonspektStep(
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący daje uczestnikom czas na ewentualne pytania.'
-        '</p>'
-
+        '</p>',
+    tableOfContent: [
+      'Pytania'
+    ]
 );
 
 KonspektStepGroup step_group_definicja_sfery_ducha = KonspektStepGroup(
@@ -424,7 +442,10 @@ KonspektStep _step_poziomy_duchowosci_zachowania_definicja = KonspektStep(
         '<p style="text-align:justify;">'
         'Najłatwiej zacząć od poziomu zachowań. Duchowość każdego człowieka można dokładnie opisać wymieniając zachowania, którymi zreaguje na każdą możliwą sytuację.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'Karta "zachowania"',
+    ]
 );
 
 KonspektStep _step_poziomy_duchowosci_zachowania_przyklad = KonspektStep(
@@ -451,7 +472,15 @@ KonspektStep _step_poziomy_duchowosci_zachowania_przyklad = KonspektStep(
         '<p style="text-align:justify;">'
         'Oczywiście taka lista jest zawsze nieskończona: są w niej wszystkie możliwe sytuacje, każda z nich występuje we wszystkich możliwych okolicznościach, warunkach otoczenia, stanach samego Alberta itd. - poziom zachowań duchowości polega na spojrzeniu na <b>zachowania</b> człowieka, które ten podejmuje.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'Ciąg zdarzeń -> sposób reakcji:'
+          '\n- zepsute auto -> naprawia'
+          '\n- słyszy "dzień dobry" -> mówi "dzień dobry"'
+          '\n- głodny, czipsy vs składniki -> składniki'
+          '\n- śmieć x2'
+          '\n- szef skrytykuje -> kłótnia'
+    ]
 );
 
 KonspektStep _step_poziomy_duchowosci_zachowania_pytania = KonspektStep(
@@ -460,7 +489,10 @@ KonspektStep _step_poziomy_duchowosci_zachowania_pytania = KonspektStep(
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący daje uczestnikom czas na ewentualne pytania.'
-        '</p>'
+        '</p>',
+    tableOfContent: [
+      'Zachowania - pytania'
+    ]
 );
 
 KonspektStep _step_poziomy_duchowosci_wartosci_definicja = KonspektStep(
@@ -479,7 +511,11 @@ KonspektStep _step_poziomy_duchowosci_wartosci_definicja = KonspektStep(
         '<br>'
         '<br>Wartości to np.: zdrowie, władza, bogactwo, śmierć wrogów, posiadanie, rodzina, pokora, patriotyzm, ale też przyjemność, brak głodu, spokój, etc.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'Zachowania -> nieskończenie wiele',
+      'Karta "wartości"'
+    ]
 );
 
 KonspektStep _step_poziomy_duchowosci_wartosci_przyklad = KonspektStep(
@@ -502,7 +538,14 @@ KonspektStep _step_poziomy_duchowosci_wartosci_przyklad = KonspektStep(
         '<li><p style="text-align:justify;">Wartością dla Alberta nie jest poezja - nie czyta jej, nie rozmyśla o niej, nie poświęca jej czasu, nie interesuje go ten temat.</p></li>'
         '</ul>'
 
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'Wartości Alberta:'
+          '\n- pieniądze (praca, konto bankowe)'
+          '\n- rodzina (narzeczona, rodzeństwo, czas, dzieci)'
+          '\n- lojalność wobec firmy'
+          '\n- NIE poezja (nie czyta, nie rozmyśla)'
+    ]
 );
 
 KonspektStep _step_poziomy_duchowosci_wartosci_pytania = KonspektStep(
@@ -511,7 +554,10 @@ KonspektStep _step_poziomy_duchowosci_wartosci_pytania = KonspektStep(
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący daje uczestnikom czas na ewentualne pytania.'
-        '</p>'
+        '</p>',
+    tableOfContent: [
+      'Wartości - pytania'
+    ]
 );
 
 KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_1 = KonspektStep(
@@ -565,7 +611,12 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_1 = KonspektStep(
 
         '<p style="text-align:justify;">'
         'Po tych słowach prowadzący upewnia się, że podział na "wartości pierwotne" oraz "wartości moralne" zapisane na kartce "poziom wartości" jest dla uczestników jasny.'
-        '</p>'
+        '</p>',
+    tableOfContent: [
+      'Wartości - zagadka 1: Brak kradzieży - zawsze wartość "uczciwość"?'
+          '\n- jedno zachowanie -> z różnych wartości'
+          '\n- moralne vs pierwotne'
+    ]
 
 );
 
@@ -596,7 +647,13 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_2 = KonspektStep(
         '<p style="text-align:justify;">'
         'Czy to oznacza, że nie ma znaczenia, co człowiek mówi, że jest dla niego ważne, bo liczą się tylko fakty? Nie do końca. Człowiek może pracować nad swoimi wartościami i wówczas jego świadoma wola jest kluczowa w kierunku rozwoju jego hierarchii wartości.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'Wartości - zagadka 2: Mówi jedno, robi drugie (matura)'
+          '\n- robi, nie mówi'
+          '\n- zmienne w czasie'
+          '\n- NIE górnolotne'
+    ]
 
 );
 
@@ -633,7 +690,11 @@ KonspektStep _step_poziomy_duchowosci_wartosci_zagadka_3 = KonspektStep(
 
         '<p style="text-align:justify;">'
         'Powyższe przykłady są związane z cechami temperamentu w modelu Big Five — są to cechy biologiczne, na które nie wpływa wychowanie. Warto o tym wspomnieć, jeśli ktoś z uczestników sam o to zapyta — w przeciwnym wypadku nie warto wprowadzać wątku nazewnictwa.'
-        '</p>'
+        '</p>',
+    tableOfContent: [
+      'Wartości - zagadka 3: Bliźniacy -> kłótliwy vs spokojny'
+          '\n- predyspozycje do wartości'
+    ]
 
 );
 
@@ -677,7 +738,10 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_dekompozycja = KonspektStep(
         '</i>'
         '<br>'
         '<br>Zawsze w takich sekwencjach w końcu dochodzi się do ściany, gdzie nie ma już dalej odpowiedzi na pytanie "dlaczego". Albert nie ma dalszych odpowiedzi, nie dlatego, że jest głupi, ale dlatego, że dotarł do fundamentu — do pewnego przekonania, które z niczego dalej nie wynika. Zazwyczaj takie rozważania nie trwają kilku minut, a raczej kilka dni, miesięcy, czy nawet lat. Za każdym razem jednak, gdy dochodzi się do tej granicy, dotyka się ostatniego poziomu duchowości, czyli poziomu aksjomatu.'
-        '</p>'
+        '</p>',
+    tableOfContent: [
+      'Aksjomaty - dekopozycja'
+    ]
 );
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty_definicja = KonspektStep(
@@ -710,7 +774,11 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_definicja = KonspektStep(
         'Aksjomaty zawsze są odpowiedzią na pytanie o najgłębszą wiarę.'
         '</p>'
 
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'Karta "aksjomat"',
+      'Przykłady z kopert + 2 (zmysły + stała fizyka)'
+    ]
 );
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty_przyklad = KonspektStep(
@@ -739,7 +807,12 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_przyklad = KonspektStep(
         '<p style="text-align:justify;">'
         'Ludzie wierzą w różne rzeczy. Spojrzenie na duchowość człowieka przez pryzmat poziomu aksjomatów polega na ustaleniu: co stoi za czyjąś strukturą wartości? Jaka wiara porządkuje i nadaje interpretację postrzeganej rzeczywistości? Jakie jest najwyższe dobro, czy cel, któremu podporządkowują swoje dążenia?'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'Aksjomaty Alberta:'
+          '\n- naprawia auto - wiara w zmianę świata pracą (vs modlitwa do kosmosu)'
+          '\n- naprawia w mrozie - weź swój krzyż'
+    ]
 );
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty_pytania = KonspektStep(
@@ -748,7 +821,10 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_pytania = KonspektStep(
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
         'Prowadzący daje uczestnikom czas na ewentualne pytania.'
-        '</p>'
+        '</p>',
+    tableOfContent: [
+      'Aksjomaty - pytania'
+    ]
 );
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty_wartosci_przyporzadkowanie = KonspektStep(
@@ -802,7 +878,10 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_wartosci_przyporzadkowanie = Kon
         '<li>ochrona najuboższych (1 i 3)</li>'
         '<li>dostrzeganie piękna świata (1 i 2)</li>'
         '</ul>'
-        '</p>'
+        '</p>',
+    tableOfContent: [
+      'Zadanie 1: Aksjomaty -> wartości'
+    ]
 );
 
 KonspektStep _step_poziomy_duchowosci_aksjomaty_plaska_ziemia = KonspektStep(
@@ -855,7 +934,10 @@ KonspektStep _step_poziomy_duchowosci_aksjomaty_plaska_ziemia = KonspektStep(
         '</p></li>'
 
         '</ol>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'Aksjomaty - zagadka 2: Płaskoziemcy'
+    ]
 );
 
 

@@ -5,6 +5,7 @@ import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/time_of_day_extension.dart';
 import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
+import 'package:harcapp_core/comm_widgets/dialog/app_dialog.dart';
 import 'package:harcapp_core/comm_widgets/border_material.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/values/dimen.dart';
@@ -48,6 +49,43 @@ class _KonspektStepGroupWidgetState extends State<KonspektStepGroupWidget> with 
 
   @override
   bool get wantKeepAlive => collapsed;
+
+  void _showTableOfContentsDialog(BuildContext context) => showDialog(
+    context: context,
+    builder: (context) => Padding(
+      padding: const EdgeInsets.all(Dimen.sideMarg),
+      child: Center(
+        child: AppDialog(
+          title: stepGroup.title ?? 'Spis treści',
+          closable: true,
+          maxWidth: maxDialogWidth,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (final step in stepGroup.steps)
+                for (int j = 0; j < step.tableOfContent.length; j++) ...[
+                  if (j > 0 || step != stepGroup.steps.first) const SizedBox(height: Dimen.defMarg),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(MdiIcons.circleMedium, size: Dimen.textSizeNormal + 2),
+                      const SizedBox(width: Dimen.defMarg),
+                      Expanded(
+                        child: Text(
+                          step.tableOfContent[j],
+                          style: const AppTextStyle(fontSize: Dimen.textSizeBig),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
 
   @override
   Widget build(BuildContext context){
@@ -146,7 +184,15 @@ class _KonspektStepGroupWidgetState extends State<KonspektStepGroupWidget> with 
                         color: textDisab_(context),
                         selectable: true,
                       ),
-                      SizedBox(width: Dimen.defMarg),
+                      SizedBox(width: Dimen.iconMarg),
+                      if(stepGroup.steps.any((s) => s.tableOfContent.isNotEmpty))
+                        AppButton(
+                          icon: Icon(MdiIcons.tableOfContents),
+                          padding: EdgeInsets.zero,
+                          constraints: BoxConstraints(),
+                          onTap: () => _showTableOfContentsDialog(context),
+                        ),
+                      SizedBox(width: 2*Dimen.iconMarg),
                       AppButton(
                         icon: Icon(collapsed ? MdiIcons.chevronDown : MdiIcons.chevronUp),
                         padding: EdgeInsets.zero,
