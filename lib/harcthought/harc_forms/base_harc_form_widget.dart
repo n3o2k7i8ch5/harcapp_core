@@ -220,3 +220,34 @@ class MetoGridWidget extends StatelessWidget{
   );
 
 }
+
+class MetoResponsiveWidget extends StatelessWidget {
+
+  final HarcForm form;
+  final double rowBreakpoint;
+
+  const MetoResponsiveWidget(this.form, {this.rowBreakpoint = 720, super.key});
+
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, constraints) {
+      const gap = SizedBox(width: Dimen.iconMarg);
+      final tiles = [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro]
+          .map((m) => Expanded(child: _MetoTile(m, form.metos.contains(m))))
+          .toList();
+
+      if (constraints.maxWidth >= rowBreakpoint) {
+        return Row(children: [tiles[0], gap, tiles[1], gap, tiles[2], gap, tiles[3]]);
+      }
+
+      return Column(
+        children: [
+          Row(children: [tiles[0], gap, tiles[1]]),
+          const SizedBox(height: Dimen.iconMarg),
+          Row(children: [tiles[2], gap, tiles[3]]),
+        ],
+      );
+    },
+  );
+
+}
