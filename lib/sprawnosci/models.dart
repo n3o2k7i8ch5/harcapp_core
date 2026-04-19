@@ -25,6 +25,14 @@ class SprawBook {
   @Backlink(to: 'sprawBook')
   final groups = IsarLinks<SprawGroup>();
 
+  static const Map<String, String> _taskLabels = {
+    'zhr_harc_c_sim_2023': 'Wymaganie',
+    'zhr_harc_d_sim_2023': 'Wymaganie',
+  };
+
+  @Ignore()
+  String get taskLabel => _taskLabels[slug] ?? 'Zadanie';
+
   @Ignore()
   Iterable<Spraw> get allSpraws => groups.expand((g) => g.families.expand((f) => f.spraws));
 
