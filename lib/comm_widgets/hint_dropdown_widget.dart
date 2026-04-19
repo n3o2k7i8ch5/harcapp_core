@@ -18,7 +18,7 @@ class HintDropdownWidget<T> extends StatelessWidget{
   final bool enabled;
   final double dropdownMaxHeight;
 
-  final List<DropdownMenuItem<T>> items;
+  final List<DropdownItem<T>> items;
 
   const HintDropdownWidget({
     required this.hint,
@@ -78,7 +78,7 @@ class HintDropdownWidget<T> extends StatelessWidget{
                             style: AppTextStyle(color: hintEnab_(context))
                         ),
                         items: items,
-                        value: value,
+                        valueListenable: ValueNotifier(value),
                         onChanged: (value) => onChanged(value as T),
                       )
                   ),

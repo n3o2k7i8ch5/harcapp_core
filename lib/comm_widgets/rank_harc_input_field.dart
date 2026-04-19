@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
@@ -35,7 +36,7 @@ class RankHarcInputField extends StatelessWidget{
 
     onChanged: (value) => onChanged?.call(value),
     onCleared: () => onChanged?.call(null),
-    items: RankHarc.values.map((r) => DropdownMenuItem<RankHarc>(
+    items: RankHarc.values.map((r) => DropdownItem<RankHarc>(
       value: r,
       child: Text(
         r.longName(withOrg: true),

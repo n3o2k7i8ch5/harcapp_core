@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
@@ -36,15 +37,15 @@ class RankInstrInputField extends StatelessWidget{
     onChanged: (value) => onChanged?.call(value),
     onCleared: () => onChanged?.call(null),
     items: [
-      DropdownMenuItem<RankInstr>(
+      DropdownItem<RankInstr>(
         value: RankInstr.pwd,
         child: Text('Przewodnik', style: AppTextStyle(color: enabled?textEnab_(context):dimTextOnDisabled?textDisab_(context):textEnab_(context))),
       ),
-      DropdownMenuItem<RankInstr>(
+      DropdownItem<RankInstr>(
         value: RankInstr.phm,
         child: Text('Podharcmistrz', style: AppTextStyle(color: enabled?textEnab_(context):dimTextOnDisabled?textDisab_(context):textEnab_(context))),
       ),
-      DropdownMenuItem<RankInstr>(
+      DropdownItem<RankInstr>(
         value: RankInstr.hm,
         child: Text('Harcmistrz', style: AppTextStyle(color: enabled?textEnab_(context):dimTextOnDisabled?textDisab_(context):textEnab_(context))),
       ),

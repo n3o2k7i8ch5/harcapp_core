@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
@@ -37,27 +38,27 @@ class OrgInputField extends StatelessWidget{
     onCleared: () async => onChanged?.call(null),
     enabled: enabled,
     items: [
-      DropdownMenuItem<Org>(
+      DropdownItem<Org>(
         value: Org.zhp,
         child: Text('ZHP', style: AppTextStyle(color: enabled?textEnab_(context):dimTextOnDisabled?textDisab_(context):textEnab_(context))),
       ),
-      DropdownMenuItem<Org>(
+      DropdownItem<Org>(
         value: Org.zhr,
         child: Text('ZHR', style: AppTextStyle(color: enabled?textEnab_(context):dimTextOnDisabled?textDisab_(context):textEnab_(context))),
       ),
-      DropdownMenuItem<Org>(
+      DropdownItem<Org>(
         value: Org.fse,
         child: Text('FSE', style: AppTextStyle(color: enabled?textEnab_(context):dimTextOnDisabled?textDisab_(context):textEnab_(context))),
       ),
-      DropdownMenuItem<Org>(
+      DropdownItem<Org>(
         value: Org.sh,
         child: Text('SH', style: AppTextStyle(color: enabled?textEnab_(context):dimTextOnDisabled?textDisab_(context):textEnab_(context))),
       ),
-      DropdownMenuItem<Org>(
+      DropdownItem<Org>(
         value: Org.zhpNL,
         child: Text('ZHPnL', style: AppTextStyle(color: enabled?textEnab_(context):dimTextOnDisabled?textDisab_(context):textEnab_(context))),
       ),
-      DropdownMenuItem<Org>(
+      DropdownItem<Org>(
         value: Org.hrp,
         child: Text('HRP', style: AppTextStyle(color: enabled?textEnab_(context):dimTextOnDisabled?textDisab_(context):textEnab_(context))),
       ),
