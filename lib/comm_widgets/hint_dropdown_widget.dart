@@ -7,7 +7,7 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class HintDropdownWidget<T> extends StatelessWidget{
+class HintDropdownWidget<T> extends StatefulWidget {
 
   final String hint;
   final String? hintTop;
@@ -34,14 +34,42 @@ class HintDropdownWidget<T> extends StatelessWidget{
   });
 
   @override
+  State<HintDropdownWidget<T>> createState() => _HintDropdownWidgetState<T>();
+}
+
+class _HintDropdownWidgetState<T> extends State<HintDropdownWidget<T>> {
+
+  late final ValueNotifier<T> _valueNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+    _valueNotifier = ValueNotifier(widget.value);
+  }
+
+  @override
+  void didUpdateWidget(HintDropdownWidget<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.value != widget.value) {
+      _valueNotifier.value = widget.value;
+    }
+  }
+
+  @override
+  void dispose() {
+    _valueNotifier.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => Row(
     children: [
 
-      if(leading != null)
+      if(widget.leading != null)
         const SizedBox(width: Dimen.iconMarg),
 
-      if(leading != null)
-        leading!,
+      if(widget.leading != null)
+        widget.leading!,
 
       Expanded(
         child: Stack(
@@ -51,7 +79,7 @@ class HintDropdownWidget<T> extends StatelessWidget{
               children: [
 
                 Expanded(child: IgnorePointer(
-                  ignoring: !enabled,
+                  ignoring: !widget.enabled,
                   child: DropdownButtonHideUnderline(
                       child: DropdownButton2<T>(
                         isExpanded: true,
@@ -59,7 +87,7 @@ class HintDropdownWidget<T> extends StatelessWidget{
                           iconSize: 0,
                         ),
                         dropdownStyleData: DropdownStyleData(
-                          maxHeight: dropdownMaxHeight,
+                          maxHeight: widget.dropdownMaxHeight,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(AppCard.bigRadius),
                           ),
@@ -71,23 +99,23 @@ class HintDropdownWidget<T> extends StatelessWidget{
                         ),
                         style: AppTextStyle(
                             fontSize: Dimen.textSizeBig,
-                            color: enabled?iconEnab_(context):hintEnab_(context)
+                            color: widget.enabled?iconEnab_(context):hintEnab_(context)
                         ),
                         hint: Text(
-                            hint,
+                            widget.hint,
                             style: AppTextStyle(color: hintEnab_(context))
                         ),
-                        items: items,
-                        valueListenable: ValueNotifier(value),
-                        onChanged: (value) => onChanged(value as T),
+                        items: widget.items,
+                        valueListenable: _valueNotifier,
+                        onChanged: (value) => widget.onChanged(value as T),
                       )
                   ),
                 )),
 
-                if(onCleared != null && value != null && enabled)
+                if(widget.onCleared != null && widget.value != null && widget.enabled)
                   AppButton(
                       icon: Icon(MdiIcons.close),
-                      onTap: onCleared
+                      onTap: widget.onCleared
                   )
 
               ],
@@ -98,10 +126,9 @@ class HintDropdownWidget<T> extends StatelessWidget{
               left: Dimen.TEXT_FIELD_PADD,
               child: AnimatedOpacity(
                 duration: const Duration(milliseconds: 300),
-                opacity:
-                value == null?0:1,
+                opacity: widget.value == null?0:1,
                 child: Text(
-                  hintTop??hint,
+                  widget.hintTop??widget.hint,
                   style: AppTextStyle(fontSize: Dimen.textSizeSmall, fontWeight: weightHalfBold, color: hintEnab_(context)),
                 ),
               ),
