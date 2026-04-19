@@ -32,7 +32,7 @@ class KonspektTileWidget extends StatelessWidget{
 
   const KonspektTileWidget(
       this.konspekt,
-      { this.elevation = 0, 
+      { this.elevation = 0,
         this.background,
         this.colorizeLeftSide = true,
         this.radius = defRadius,
@@ -40,7 +40,7 @@ class KonspektTileWidget extends StatelessWidget{
         this.showPartOf = true,
         this.showSpheres = true,
         this.showTime = true,
-        this.onTap, 
+        this.onTap,
         super.key
       });
 
@@ -50,7 +50,9 @@ class KonspektTileWidget extends StatelessWidget{
       child: SimpleButton(
         elevation: elevation,
         onTap: onTap,
-        color: background??konspekt.type.color(context),
+        color: background != null
+            ? Color.alphaBlend(konspekt.type.color(context).withValues(alpha: 0.12), background!)
+            : konspekt.type.color(context),
         borderRadius: BorderRadius.circular(this.radius),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -173,7 +175,7 @@ class KonspektTileWidget extends StatelessWidget{
                 width: 6.0,
                 color: konspekt.type.color(context),
               )
-            
+
           ],
         ),
       )
