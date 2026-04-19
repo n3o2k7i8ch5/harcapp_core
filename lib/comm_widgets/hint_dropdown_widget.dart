@@ -107,7 +107,10 @@ class _HintDropdownWidgetState<T> extends State<HintDropdownWidget<T>> {
                         ),
                         items: widget.items,
                         valueListenable: _valueNotifier,
-                        onChanged: (value) => widget.onChanged(value as T),
+                        onChanged: (value) {
+                          _valueNotifier.value = value as T;
+                          widget.onChanged(value);
+                        },
                       )
                   ),
                 )),
