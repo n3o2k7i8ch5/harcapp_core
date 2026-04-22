@@ -2950,6 +2950,8 @@ const Person OLIWIA_MAJDA = Person(
 );
 const Person OLIWIA_STANCZYK = Person(
     name: 'Oliwia Stańczyk',
+    rankInstr: RankInstr.pwd,
+    druzyna: '355. WDHiGZ „Utrøst”',
     org: Org.zhp,
     email: ['oliwia.stanczyk@zhp.net.pl']
 );

@@ -8,3 +8,14 @@ https://cloudconvert.com/mp4-to-mp3
 
 4. If the file size if huge, compress it here:
 https://www.freeconvert.com/mp3-compressor
+
+5. Name the file as follows:
+<song_title>.<performer_or_just_0>.mp3
+
+6. Add an entry do audio_meta.json as follows:
+"o!_<song_name>": [
+    {
+        "file": <file_name_from_step_5>,
+        "performer": <Performer name that will be displayed>
+    }
+],
