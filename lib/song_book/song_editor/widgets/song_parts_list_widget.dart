@@ -13,6 +13,9 @@ import 'song_part_card.dart';
 import '../song_raw.dart';
 import 'scroll_to_bottom.dart';
 
+const Object _headerSentinel = '__song_parts_list_header__';
+const Object _footerSentinel = '__song_parts_list_footer__';
+
 class SongPartsListWidget extends StatelessWidget{
 
   final ScrollController _controller;
@@ -56,14 +59,14 @@ class SongPartsListWidget extends StatelessWidget{
     builder: (context, prov, _){
 
       List<Object> items = [
-        if(header != null) header!,
+        if(header != null) _headerSentinel,
         ...prov.song.songParts,
-        if(footer != null) footer!,
+        if(footer != null) _footerSentinel,
       ];
 
       List<Object> fixedItems = [
-        if(header != null) header!,
-        if(footer != null) footer!,
+        if(header != null) _headerSentinel,
+        if(footer != null) _footerSentinel,
       ];
 
       return AnimatedReorderableListView(
