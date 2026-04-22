@@ -100,7 +100,7 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
                   stream: _positionDataStream,
                   builder: (context, snapshot) {
                     final PositionData? positionData = snapshot.data;
-                    if(positionData == null)
+                    if(positionData == null || positionData.duration.inMilliseconds == 0)
                       return Container();
 
                     return Align(
@@ -108,7 +108,7 @@ class SoundPlayerWidgetState extends State<SoundPlayerWidget>{
                       child: Container(
                         color: backgroundIcon_(context),
                         height: Dimen.iconFootprint,
-                        width: (positionData.position.inMilliseconds/audioPlayer.duration!.inMilliseconds)*constraints.maxWidth,
+                        width: (positionData.position.inMilliseconds/positionData.duration.inMilliseconds)*constraints.maxWidth,
                       ),
                     );
                   },
