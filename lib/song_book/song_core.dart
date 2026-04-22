@@ -188,7 +188,7 @@ abstract class SongCore{
         .replaceAll('/', '_')
         .replaceAll(' ', '_')
         .replaceAll(RegExp(r"_+"), "_")
-        .replaceAll(RegExp(r"[^\w]"), '');
+        .replaceAll(RegExp(r"[^\p{L}\p{N}_]", unicode: true), '');
 
   String generateFileName({required bool withPerformer}){
 

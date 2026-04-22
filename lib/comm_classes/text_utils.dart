@@ -58,6 +58,52 @@ int charToInt(String c) {
     case '7': return 51;
     case '8': return 52;
     case '9': return 53;
+
+    case 'а': return 54;
+    case 'б': return 55;
+    case 'в': return 56;
+    case 'г': return 57;
+    case 'ґ': return 58;
+    case 'д': return 59;
+    case 'ђ': return 60;
+    case 'е': return 61;
+    case 'є': return 62;
+    case 'ё': return 63;
+    case 'ж': return 64;
+    case 'з': return 65;
+    case 'и': return 66;
+    case 'і': return 67;
+    case 'ї': return 68;
+    case 'й': return 69;
+    case 'ј': return 70;
+    case 'к': return 71;
+    case 'л': return 72;
+    case 'љ': return 73;
+    case 'м': return 74;
+    case 'н': return 75;
+    case 'њ': return 76;
+    case 'о': return 77;
+    case 'п': return 78;
+    case 'р': return 79;
+    case 'с': return 80;
+    case 'т': return 81;
+    case 'ћ': return 82;
+    case 'у': return 83;
+    case 'ў': return 84;
+    case 'ф': return 85;
+    case 'х': return 86;
+    case 'ц': return 87;
+    case 'ч': return 88;
+    case 'џ': return 89;
+    case 'ш': return 90;
+    case 'щ': return 91;
+    case 'ъ': return 92;
+    case 'ы': return 93;
+    case 'ь': return 94;
+    case 'э': return 95;
+    case 'ю': return 96;
+    case 'я': return 97;
+
     default: return -1;
   }
 }
@@ -65,7 +111,7 @@ int charToInt(String c) {
 int compareText(String s1, String s2, {bool replaceStrangeChars = true}){
 
   if(replaceStrangeChars) {
-    RegExp regexp = RegExp(r'[^a-ząáćęéěíłńóřśšýźżž0-9 ]');
+    RegExp regexp = RegExp(r'[^a-ząáćęéěíłńóřśšýźżž0-9 Ѐ-ӿ]');
     s1 = s1.toLowerCase().replaceAll(regexp, '');
     s2 = s2.toLowerCase().replaceAll(regexp, '');
   }
@@ -86,7 +132,7 @@ int compareText(String s1, String s2, {bool replaceStrangeChars = true}){
   return s1.length - s2.length;
 }
 
-String removeNonWordChars(String value, {bool keepSpaces = false}) => value.replaceAll(RegExp(keepSpaces ? r"[^\w ]" : r"[^\w]"), '');
+String removeNonWordChars(String value, {bool keepSpaces = false}) => value.replaceAll(RegExp(keepSpaces ? r"[^\p{L}\p{N}_ ]" : r"[^\p{L}\p{N}_]", unicode: true), '');
 
 String remPolChars(String string) => string.toLowerCase()
     .replaceAll('Ą', 'A')
