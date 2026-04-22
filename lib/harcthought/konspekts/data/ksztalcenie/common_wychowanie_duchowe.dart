@@ -992,6 +992,9 @@ KonspektStep _step_etapy_rozwoju_duchowosci_roznica_jakosciowa = KonspektStep(
       '<br>Czujecie tę różnicę?'
       '</p>'
       '</blockquote>',
+  tableOfContent: [
+    'Rozwoj sfer zdolności - worek. Rozwój duchowości: zmiana kształtu'
+  ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_roznica_jakosciowa_pytania = KonspektStep(
@@ -1084,7 +1087,10 @@ KonspektStep _step_etapy_rozwoju_duchowosci_7_9_lat_zachowania = KonspektStep(
       '<br>'
       '<br>W skrócie: tak, w wieku 7-9 lat w duchowości dzieci funkcjonują zachowania.'
       '</p>'
-      '</blockquote>'
+      '</blockquote>',
+  tableOfContent: [
+    '7-9 lat: zachowania - tak'
+  ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_7_9_lat_wartosci = KonspektStep(
@@ -1134,7 +1140,10 @@ KonspektStep _step_etapy_rozwoju_duchowosci_7_9_lat_wartosci = KonspektStep(
         '<p style="text-align:justify;">'
         'Wymowne w tym zakresie jest także Prawo Zucha - nie bez przyczyny składa się ono ze stwierdzeń: co zuch <b>robi</b> i jaki zuch <b>jest</b>, a nie czym się zuch <b>kieruje</b>, albo do czego <b>dąży</b>.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      '7-9 lat: wartości - nie - sprzątanie, PZ'
+    ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_7_9_lat_aksjomaty = KonspektStep(
@@ -1196,7 +1205,10 @@ KonspektStep _step_etapy_rozwoju_duchowosci_7_9_lat_aksjomaty = KonspektStep(
         '<p style="text-align:justify;">'
         'Tak. Wprawdzie nie ma szans, aby człowiek w tym wieku sam, świadomie oparł o te prawdy swoje wartości i zachowania, ale ich znajomość buduje skojarzenia, schematy, wyobrażenia, sformułowania, przyzwyczajenia i rytuały. Gdy ci sami ludzie za kilka lat spojrzą w końcu na świat przez pryzmat aksjomatów, to te, które będą brzmiały znajomo i będą się im dobrze kojarzyły zyskają pierwszeństwo.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      '7-9 lat: aksjomaty - nie - czy warto o tym mówić?'
+    ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_7_9_lat_wykres = KonspektStep(
@@ -1232,7 +1244,10 @@ KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_co_sie_zmienia = KonspektS
         '<br>'
         '<br>W świadomości człowieka pojawia się koncept "wartości" - nawet, jeśli nie są one tym określeniem nazywane.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      '10-12 lat: zmiana - abstrakcja (liczby, porządek) - wartości'
+    ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_wartosci = KonspektStep(
@@ -1250,7 +1265,10 @@ KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_wartosci = KonspektStep(
         '<br>'
         '<br>Przykładowo: jeśli człowiek chodził do szkoły, uczył się, dobrze mu szło i był otoczony ludźmi robiącymi to samo - wykształcenie będzie dla niego prawdopodobnie ważną rzeczą.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      '10-12 lat: wartości - tak. z zachowań, które znają, lubią'
+    ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_zachowania = KonspektStep(
@@ -1282,7 +1300,10 @@ KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_zachowania = KonspektStep(
         '<li><p style="text-align:justify;">Po drugie: zachowania nadal bywają kształtowane pojedynczo, ale często są one kształtowane grupowo wskutek uznania lub wzmocnienia określonej wartości - przykładowo, gdy człowiek poczuje moralny dyskomfort, że wyżej sobie ceni gry komputerowe niż przyjaźnie, zmieni cały szereg zachowań w swoim życiu.</p></li>'
         '<li><p style="text-align:justify;">Po trzecie: odkąd człowiek odnosi zachowania do swoich wartości, trudniej jest w procesie wychowawczym ukształtować w nim dowolne zachowanie z taką łatwością jak wcześniej - jeżeli bowiem będzie ono sprzeczne z jego wartościami, raczej go nie przyjmie.</p></li>'
         '</ul>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      '10-12 lat: zachowania - tak (uspójnianie)'
+    ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_aksjomaty = KonspektStep(
@@ -1306,8 +1327,10 @@ KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_aksjomaty = KonspektStep(
         '<p style="text-align:justify;">'
         'Nie. W tym zakresie niewiele się zmienia: człowiek wprawdzie ma różne wartości, ale nie ma on jeszcze potrzeby, ani zdolności, by zrozumieć, że różne systemy wartości są między sobą nieporównywalne, oraz potrzebę, by za jego wartościami stała jakaś głębsza wiara porządkująca jego życie. Aksjomatyczne stwierdzenia mogą być rozumiane nieco głębiej niż wcześniej, ale wciąż nie są one ostateczną, arbitralnie przyjmowaną prawdą, której podporządkowywana jest cała pozostała perspektywa.'
         '</p>'
-        '</blockquote>'
-
+        '</blockquote>',
+    tableOfContent: [
+      '10-12 lat: aksjomaty - nie'
+    ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_10_12_lat_wykres = KonspektStep(
@@ -1346,7 +1369,10 @@ KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_co_sie_zmienia = KonspektS
         '<p style="text-align:justify;">'
         'Tym pytaniom towarzyszy najczęściej także niewypowiedziana, ale paląca potrzeba oparcia swojego życia o coś większego: o jakąś misję, tożsamość, wiarę, perspektywę, etc.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      '13-15 lat: zmiana - (bunt, kto powiedział? Allah) - aksjomaty'
+    ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_aksjomaty = KonspektStep(
@@ -1364,8 +1390,10 @@ KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_aksjomaty = KonspektStep(
         '<br>'
         '<br>Przykładowo: jeśli dla człowieka ważne były przyjaźnie, przebaczenie i modlitwa to przyjęcie zbawczej roli życia, męki i zmartwychwstania Chrystusa będzie bardzo prawdopodobne.'
         '</p>'
-        '</blockquote>'
-
+        '</blockquote>',
+    tableOfContent: [
+      '13-15 lat: aksjomaty - z wartości, tego, co zna i się utożsamia (uspójnianie)'
+    ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_wartosci = KonspektStep(
@@ -1386,7 +1414,10 @@ KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_wartosci = KonspektStep(
         '<br>'
         '<br>W największym skrócie proces, któremu podlegają wartości jest długim procesem uspójnienia ich z przyjętymi aksjomatami - może się również okazać, że człowiek będzie tak przywiązany do niektórych wartości, że to aksjomat będzie musiał ustąpić. Efekt jest jednak wciąż ten sam - stopniowe budowanie spójności w obrębie hierarchii wartości i jej źródła.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      '13-15 lat: wartości - tak (uspójnianie)'
+    ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_zachowania = KonspektStep(
@@ -1401,7 +1432,10 @@ KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_zachowania = KonspektStep(
         '<p style="text-align:justify;">'
         'Poziom zachowań jest tą samą opowieścią, co poziom wartości: gdy aksjomaty zaczynają odciskać piętno na wartościach, w ślad za tym wartości przekształcają zachowania człowieka.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      '13-15 lat: zachowania - tak (uspójnianie)'
+    ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_13_15_lat_wykres = KonspektStep(
@@ -1434,7 +1468,12 @@ KonspektStep _step_etapy_rozwoju_duchowosci_16_plus_lat = KonspektStep(
         '<li><p style="text-align:justify;">Po drugie: proces budowania spójności między kolejnymi poziomami duchowości nie trwa pięciu minut. Czasami jest to kwestia miesięcy, a nawet lat - ludzie mają określone przyzwyczajenia, nawyki, zajęcia itp - nie siedzą cały dzień i nie dumają nad swoją duchowością.</p></li>'
         '<li><p style="text-align:justify;">Po trzecie: za każdym razem, gdy coś w aksjomacie lub wartościach ulegnie zmianie, zmieniają się także zachowania. Ale zmiana zachowań to zmiana sposobu funkcjonowania w świecie — a to oznacza nowe doświadczenia, nową perspektywę i nowe impulsy do dalszego kształtowania duchowości. Powstaje pętla, która w praktyce sprawia, że rozwój duchowy trwa aż do końca życia.</p></li>'
         '</ul>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      '16+ lat: czy to koniec',
+      '16+ lat: cykl',
+      '16+ lat: autonomia'
+    ]
 );
 
 KonspektStep _step_etapy_rozwoju_duchowosci_16_plus_lat_wykres = KonspektStep(
@@ -1638,7 +1677,19 @@ KonspektStep _step_meta_narracja_opowiesci = KonspektStep(
         '<p style="text-align:justify;">'
         'Adamowi nie można po prostu powiedzieć: "przebaczenie jest dobre, uwierz w to". To, że przebaczenie jest dobre musi wynikać z jakiejś narracji, w którą uwierzy: ze pewnej opowieści, przez pryzmat której Adam będzie postrzegał rzeczywistość.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+  tableOfContent: [
+    'Adam - brak powodu dla wartości',
+    'Czemu ludzie wierzą chętniej w jedne rzeczy, a mniej chętnie w inne?',
+    'Świat -> NIE obiekty -> NIE fakty. Opowieść',
+    'Przykład: Grecy. Izrael. Dziś: kino.',
+    'Atawizm?'
+      '\n- Robimy to samo'
+      '\n- Mity to nie kłamstwa (Pinokio, Frodo)',
+    'Ludzie wierzą czasem w byle co, ale nie w byle jakiej formie',
+    'Karta narracja + przykłady',
+    'Adam -> przebaczenie musi być z opowieści'
+  ]
 );
 
 KonspektStep _step_meta_narracja_warunki_brzegowe = KonspektStep(
@@ -1675,7 +1726,11 @@ KonspektStep _step_meta_narracja_warunki_brzegowe = KonspektStep(
         '<br>'
         '<br>Jeśli mamy określić które poglądy i narracje mogą dać Adamowi wartości przebaczenia, braterstwa i uniwersalnej ludzkiej godności, to warto najpierw odpowiedzieć na pytanie jakie narracje dały początek tym wartościom w naszej kulturze. Do tego jednak konieczne jest nakreślenie pewnego kontekstu.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+  tableOfContent: [
+    'Nie każda narracja prowadzi do przebaczenia',
+    'Skąd harc wartości? Źródło Adama -> źródło naszej kultury',
+  ]
 );
 
 KonspektStep _step_meta_narracja_uniwersalnosc = KonspektStep(
@@ -1804,7 +1859,15 @@ KonspektStep _step_meta_narracja_uniwersalnosc = KonspektStep(
         '</blockquote>'
         '</li>'
 
-        '</ol>'
+        '</ol>',
+    tableOfContent: [
+      'Naturalność -> pytanie do uczestników',
+      '300 tys lat. Szympansy, kruche struktury, XX. w.',
+      'Uniwersalność'
+          '\n- karta wartości 1'
+          '\n- karta wartości 2'
+          '\n- karta wartości 3'
+    ]
 
 );
 
@@ -1840,7 +1903,10 @@ KonspektStep _step_meta_narracja_zrodla_lacinskich_wartosci = KonspektStep(
         '<li><p style="text-align:justify;">Nie byłoby przebaczenia, ani odpuszczenia win, gdyby nie wiara, że sam Bóg, stwórca świata wziął na siebie błędy każdego człowieka i ich konsekwencje i zgodził się dobrowolnie ponieść śmierć, by zostać potępionym zamiast ludzi.</p></li>'
         '<li><p style="text-align:justify;">Nie byłoby wreszcie uznania wartości prawdy, gdyby nie wiara, że świat i jego prawa zostały stworzone przez absolutne dobro, oraz że stając w prawdzie pomimo błędów, czy chwilowego braku interesu jest jedyną drogą, by naprawić swoje życie, bo czuwa nad nim wszechmogący i miłujący Bóg.</p></li>'
         '</ol>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'Skąd u nas te wartości? - Chrześcijaństwo',
+    ]
 );
 
 KonspektStep _step_meta_narracja_selekcja_naturalna = KonspektStep(
@@ -1909,7 +1975,14 @@ KonspektStep _step_meta_narracja_selekcja_naturalna = KonspektStep(
         '<br>'
         '<br>Podobnie, nie da się usiąść i skleić sobie na boku, nawet myśląc o tym przez kilkadziesiąt lat, jakiejś nowej meta-narracji. Takie próby oczywiście były wielokrotnie podejmowane i zawsze kończyły się tak samo: na początku działały, potem zaczynały pękać, a potem doprowadzały do rozlewu olbrzymiej ilości krwi.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+    tableOfContent: [
+      'A ateiści?'
+        '\n- duchowość powszechna + selekcja naturalna'
+        '\n- selekcja naturalna na narracjach'
+        '\n- meta-narracja (kartka + przykłady)'
+        '\n- nie da się wymyślić meta-narracji od zera, ani dowolnie jej zmodyfiwakoć.'
+    ]
 );
 
 KonspektStep _step_meta_narracja_wniosek = KonspektStep(
@@ -2006,7 +2079,22 @@ KonspektStep _step_meta_narracja_wniosek = KonspektStep(
         '<p style="text-align:justify;">'
         'Ta kwestia niech zostanie zatem otwarta - zastanówcie się nad nią i możemy do niej wrócić po lub w trakcie obiadu, jeśli najdą Was jakieś myśli.'
         '</p>'
-        '</blockquote>'
+        '</blockquote>',
+  tableOfContent: [
+    'Warunki brzegowe dla Adama:'
+      '\n- wartości z aksjomatu'
+      '\n- aksjomat jako narracja'
+      '\n- narracja -> meta-narracja'
+      '\n- meta-narracja -> wartości łacińskie',
+
+    'Jakie opcje:'
+        '\n- olać temat'
+        '\n- meta-narracja chrześcijańska'
+        '\n- inna meta-narracja -> ale są konsekwencje.='
+        '\n- dużo osób -> ok'
+        '\n- nagłe wydarzenia -> NIE ok'
+        '\n- brak odpowiedzi.'
+  ]
 
 );
 
