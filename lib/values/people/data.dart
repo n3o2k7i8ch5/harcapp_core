@@ -608,7 +608,7 @@ const Person EMILIA_WITKOWSKA = Person(
     name: 'Emilia Witkowska',
     druzyna: '307. WDHiZ',
     hufiec: huf_zhp_warszawa_mokotow,
-    rankInstr: RankInstr.pwd,
+    rankInstr: RankInstr.phm,
     rankHarc: RankHarc.zhpHRd,
     org: Org.zhp,
     email: ['emilia.witkowska@zhp.net.pl', 's206102@sggw.edu.pl']
