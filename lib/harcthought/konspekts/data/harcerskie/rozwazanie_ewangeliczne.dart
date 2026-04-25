@@ -5,9 +5,107 @@ import 'package:harcapp_core/values/people/data.dart';
 import '../../konspekt.dart';
 
 
+const String konspekt_harc_name_rozwazanie_ewangeliczne = 'rozwazanie_ewangeliczne';
+const String konspekt_harc_title_rozwazanie_ewangeliczne = 'Rozważanie ewangeliczne';
+const String konspekt_harc_html_rozwazanie_ewangeliczne = '<a href="$konspekt_harc_name_rozwazanie_ewangeliczne@harcerskie.konspekt">$konspekt_harc_title_rozwazanie_ewangeliczne</a>';
+
+
+/// Krótki, ogólny opis czym jest "Rozważanie ewangeliczne" (zwane też "apelem ewangelicznym").
+const String rozwazanie_ewangeliczne_html_opis_ogolny =
+    '<p style="text-align:justify;">'
+    '<b>Rozważanie ewangeliczne</b> (zwane też <i>„apelem ewangelicznym”</i>) to krótka forma duchowa polegająca na wspólnym wysłuchaniu fragmentu <b>Ewangelii</b> i zatrzymaniu się nad jego treścią z pomocą prostych, praktycznych pytań pomocniczych. '
+    '<br>'
+    '<br>Forma sprawdza się zarówno na obozie (np. w niedzielę przed Mszą lub w sobotę wieczorem), jak i w trakcie roku harcerskiego - przy ognisku, na wyjeździe, przed zbiórką.'
+    '</p>';
+
+/// Dla jakich metodyk forma jest przygotowywana - z podziałem na dwie grupy wiekowe.
+const String rozwazanie_ewangeliczne_html_dla_jakich_metodyk =
+    '<p style="text-align:justify;"><b>Dla jakich metodyk?</b>'
+    '<br>'
+    '<br>Pytania pomocnicze są przygotowywane osobno dla dwóch grup wiekowych:'
+    '</p>'
+    '<ul>'
+    '<li><p style="text-align:justify;">dla <b>młodszych</b> - metodyki <i>zuchowa</i> i <i>harcerska</i>,</p></li>'
+    '<li><p style="text-align:justify;">dla <b>starszych</b> - metodyki <i>starszoharcerska</i> i <i>wędrownicza</i>.</p></li>'
+    '</ul>';
+
+/// Czy formę można zaproponować całej drużynie - również osobom poszukującym.
+const String rozwazanie_ewangeliczne_html_dla_calej_druzyny =
+    '<p style="text-align:justify;"><b>Czy formę można zaproponować całej drużynie?</b>'
+    '<br>'
+    '<br>Tak. Dla osób wychowywanych w wierze chrześcijańskiej jest to okazja do pogłębienia znajomości Pisma Świętego, relacji z Bogiem oraz przygotowania do głębszego przeżycia <b>Mszy Świętej</b> w daną niedzielę. Osoby poszukujące znajdą w niej okazję do refleksji nad postawami i wartościami, które ukształtowały naszą kulturę i cywilizację.'
+    '</p>';
+
+/// Sugerowany czas trwania formy.
+const String rozwazanie_ewangeliczne_html_czas_trwania =
+    '<p style="text-align:justify;"><b>Ile to trwa?</b>'
+    '<br>'
+    '<br>Około <b>30-45 minut</b>. Formę najlepiej przeprowadzić w niedzielę przed Mszą lub w sobotę wieczorem.'
+    '</p>';
+
+/// Praktyczny przebieg formy w zastępie - 4 kroki.
+const String rozwazanie_ewangeliczne_html_przebieg_praktyczny =
+    '<p style="text-align:justify;"><b>Jak przeprowadzić to w praktyce?</b></p>'
+    '<ol>'
+    '<li><p style="text-align:justify;">W <b>zastępach</b> każdy harcerz otrzymuje kartkę z fragmentem Ewangelii oraz z pytaniami pomocniczymi.</p></li>'
+    '<li><p style="text-align:justify;">Harcerze mają indywidualnie <b>10-15 minut</b> na przeczytanie fragmentu i refleksję nad pytaniami - mogą zapisywać swoje myśli.</p></li>'
+    '<li><p style="text-align:justify;">Po wyznaczonym czasie zastęp się schodzi - tę część <b>animuje zastępowy lub osoba z kadry</b>. Każdy może (ale nie musi) podzielić się swoimi przemyśleniami. Gdy każdy chętny się wypowie, może wywiązać się dalsza rozmowa.</p></li>'
+    '<li><p style="text-align:justify;">Zastęp może się krótko, wspólnie pomodlić - własnymi słowami lub np. modlitwą <i>„Ojcze nasz”</i>.</p></li>'
+    '</ol>';
+
+/// Materiały, które należy przygotować przed przeprowadzeniem formy.
+const String rozwazanie_ewangeliczne_html_przygotowanie_materialy =
+    '<p style="text-align:justify;"><b>Materiały</b>'
+    '<br>'
+    '<br>Rozważanie ewangeliczne należy wcześniej <b>wydrukować - po jednym egzemplarzu na uczestnika</b>.'
+    '</p>';
+
+/// Zasady doboru i pracy opiekunów zastępów prowadzących Rozważanie ewangeliczne.
+const String rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie =
+    '<p style="text-align:justify;"><b>Opiekunowie zastępów</b>'
+    '<br>'
+    '<br>Każdy zastęp w ramach tej formy powinien mieć swojego opiekuna - może to być ktoś z kadry lub zastępowy. Opiekunów warto wcześniej przygotować, np. przeprowadzając z nimi „na rozgrzewkę” dowolne Rozważanie ewangeliczne, by poczuli się w roli swobodnie.'
+    '<br>'
+    '<br><b>Zasady dla opiekunów:</b>'
+    '</p>'
+    '<ul>'
+    '<li><p style="text-align:justify;">Jeśli opiekun nie chce prowadzić formy - <b>nie należy go zmuszać</b>.</p></li>'
+    '<li><p style="text-align:justify;">Opiekun pełni rolę <b>animatora</b> - tłumaczy formę zastępowi, pilnuje czasu, stwarza każdemu przestrzeń, by mógł się wypowiedzieć.</p></li>'
+    '<li><p style="text-align:justify;">Opiekun <b>nie powinien kwestionować ani podważać przemyśleń uczestników</b> - może jednak „z wyczuciem” o coś dopytać.</p></li>'
+    '<li><p style="text-align:justify;">Opiekun również <b>bierze udział</b> w formie.</p></li>'
+    '<li><p style="text-align:justify;">Każdy uczestnik dzieli się tym, czym chce - <b>bez presji</b>.</p></li>'
+    '<li><p style="text-align:justify;"><b>Wszystko, co zostało powiedziane podczas Rozważania ewangelicznego, zostaje w zastępie!</b></p></li>'
+    '</ul>';
+
+/// Wskazówki dotyczące miejsca i atmosfery przeprowadzenia formy.
+const String rozwazanie_ewangeliczne_html_przygotowanie_miejsce =
+    '<p style="text-align:justify;"><b>Miejsce i atmosfera</b>'
+    '<br>'
+    '<br>Odpowiedni czas, miejsce i komfort są kluczowe. Warto zadbać o spokojne miejsce i ciszę - może sprzyjający refleksji piękny widok na jezioro lub leśna polana?'
+    '</p>';
+
+/// Pytania ewaluacyjne, które warto zadać po przeprowadzeniu formy.
+const String rozwazanie_ewangeliczne_html_ewaluacja =
+    '<p style="text-align:justify;"><b>Ewaluacja</b>'
+    '<br>'
+    '<br>Po przeprowadzeniu formy warto sprawdzić z opiekunami, czy wszystko gra:'
+    '</p>'
+    '<ul>'
+    '<li><p style="text-align:justify;">Jak opiekunowie odnajdują się w przeprowadzaniu formy?</p></li>'
+    '<li><p style="text-align:justify;">Czy harcerze są w stanie skupić się i poważnie potraktować pytania?</p></li>'
+    '<li><p style="text-align:justify;">Czy są jakieś przeszkody lub rozpraszacze? Co można zrobić, aby je rozwiązać?</p></li>'
+    '</ul>';
+
+/// Fragmenty Ewangelii dostępne w aplikacji jako gotowe materiały.
+const String rozwazanie_ewangeliczne_html_zrodla_w_aplikacji =
+    '<p style="text-align:justify;">'
+    'Fragmenty Ewangelii na każdy dzień roku liturgicznego są dostępne w aplikacji w sekcji <i>Rozważania ewangeliczne</i>.'
+    '</p>';
+
+
 Konspekt rozwazanie_ewangeliczne = const Konspekt(
-    name: 'rozwazanie_ewangeliczne',
-    title: 'Rozważanie ewangeliczne',
+    name: konspekt_harc_name_rozwazanie_ewangeliczne,
+    title: konspekt_harc_title_rozwazanie_ewangeliczne,
     additionalSearchPhrases: ['rozważania ewangeliczne', 'ewangelia', 'apel ewangeliczny', 'pismo święte', 'biblia'],
     category: KonspektCategory.harcerskie,
     type: KonspektType.zwyczaj,
@@ -52,6 +150,7 @@ Konspekt rozwazanie_ewangeliczne = const Konspekt(
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (fijulanam468)',
     author: DANIEL_IWANICKI,
+    customDuration: Duration(minutes: 45),
     aims: [
       'Stworzenie uczestnikom czasu do budowania ich relacji z Bogiem',
       'Budowanie u uczestników nawyku regularnego sięgania po Słowo Boże',
@@ -59,18 +158,32 @@ Konspekt rozwazanie_ewangeliczne = const Konspekt(
       'Kształtowanie u uczestników zdolności refleksji nad treściami biblijnymi i ich odniesieniem do własnego życia',
       'Budowanie wspólnoty aksjomatu wokół chrześcijańskiej wizji świata',
     ],
-    summary: 'Uczestnicy wspólnie czytają krótki fragment Ewangelii, a następnie w ciszy lub w rozmowie odnoszą jego treść do własnego życia.',
-    description: '<p style="text-align:justify;">Rozważanie ewangeliczne (zwane też „apelem ewangelicznym”) to krótka forma duchowa polegająca na wspólnym wysłuchaniu fragmentu Ewangelii i zatrzymaniu się nad jego treścią. Może być realizowana codziennie (np. wieczorem na obozie), tygodniowo lub okazjonalnie - przy ognisku, przed zbiórką, na wyjeździe.'
-        '<br>'
-        '<br><b>Przebieg:</b></p>'
-        '<ol>'
-        '<li><p style="text-align:justify;">Prowadzący wybiera fragment - najlepiej krótki (kilka wersetów), z Ewangelii na dany dzień lub dobrany tematycznie.</p></li>'
-        '<li><p style="text-align:justify;">Jedna z osób czyta fragment na głos - powoli, z wyczuciem.</p></li>'
-        '<li><p style="text-align:justify;">Następuje chwila ciszy (1-3 minuty), w której uczestnicy w głowie odpowiadają sobie na pytanie: <i>„co ten fragment mówi do mnie dzisiaj?”</i>.</p></li>'
-        '<li><p style="text-align:justify;">Opcjonalnie: chętni dzielą się krótko swoją refleksją - bez dyskusji, bez oceniania, bez „prawidłowych odpowiedzi”.</p></li>'
-        '<li><p style="text-align:justify;">Forma kończy się krótką modlitwą lub po prostu „Amen”.</p></li>'
-        '</ol>'
-        '<p style="text-align:justify;">Fragmenty Ewangelii na każdy dzień roku liturgicznego są dostępne w aplikacji w sekcji <i>Rozważania ewangeliczne</i>.'
-        '<br>'
-        '<br>Forma sprawdza się szczególnie w drużynach starszoharcerskich i wędrowniczych, gdzie uczestnicy są w stanie samodzielnie podjąć refleksję. W metodyce harcerskiej warto pomóc uczestnikom pytaniami naprowadzającymi.</p>'
+    materials: [
+      KonspektMaterial(
+        amountAttendantFactor: 1,
+        name: 'Wydrukowana kartka z fragmentem Ewangelii i pytaniami pomocniczymi',
+        additionalPreparation: 'Po jednym egzemplarzu na uczestnika. Pytania należy dobrać do grupy wiekowej (młodsi: zuch + harc; starsi: HS + wędro).',
+      ),
+    ],
+    summary: 'Uczestnicy w zastępach indywidualnie czytają krótki fragment Ewangelii i odpowiadają na pytania pomocnicze, a następnie wspólnie - w atmosferze zaufania - dzielą się swoimi przemyśleniami i kończą krótką modlitwą.',
+    description:
+        '$rozwazanie_ewangeliczne_html_opis_ogolny'
+        '$rozwazanie_ewangeliczne_html_dla_jakich_metodyk'
+        '$rozwazanie_ewangeliczne_html_dla_calej_druzyny'
+        '$rozwazanie_ewangeliczne_html_czas_trwania'
+        '$rozwazanie_ewangeliczne_html_przebieg_praktyczny'
+        '<p style="text-align:justify;"><b>Przygotowanie</b></p>'
+        '$rozwazanie_ewangeliczne_html_przygotowanie_materialy'
+        '$rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie'
+        '$rozwazanie_ewangeliczne_html_przygotowanie_miejsce'
+        '$rozwazanie_ewangeliczne_html_ewaluacja'
+        '$rozwazanie_ewangeliczne_html_zrodla_w_aplikacji',
+    howToFail: [
+      'Zmusić opiekuna zastępu do prowadzenia formy, jeśli ten nie chce.',
+      'Kwestionować, podważać lub oceniać przemyślenia uczestników.',
+      'Wywierać presję na to, by uczestnik dzielił się swoimi refleksjami.',
+      'Wynieść poza zastęp to, co zostało powiedziane w czasie formy.',
+      'Przeprowadzić formę w hałaśliwym lub rozpraszającym miejscu.',
+      'Pominąć przygotowanie opiekunów - wrzucić ich „na głęboką wodę”.',
+    ]
 );
