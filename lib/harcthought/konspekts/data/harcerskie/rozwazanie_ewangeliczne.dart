@@ -13,7 +13,7 @@ const String konspekt_harc_html_rozwazanie_ewangeliczne = '<a href="$konspekt_ha
 /// Krótki, ogólny opis czym jest "Rozważanie ewangeliczne" (zwane też "apelem ewangelicznym").
 const String rozwazanie_ewangeliczne_html_opis_ogolny =
     '<p style="text-align:justify;">'
-    '<b>Rozważanie ewangeliczne</b> (zwane też <i>„apelem ewangelicznym”</i>) to krótka forma duchowa polegająca na wspólnym wysłuchaniu fragmentu <b>Ewangelii</b> i zatrzymaniu się nad jego treścią z pomocą prostych, praktycznych pytań pomocniczych. '
+    '<b>Rozważanie ewangeliczne</b> (zwane też <i>„apelem ewangelicznym”</i>) to krótka forma duchowa polegająca na wspólnym wysłuchaniu fragmentu <b>Ewangelii</b> i zatrzymaniu się nad jego treścią z pomocą prostych, praktycznych pytań pomocniczych.'
     '<br>'
     '<br>Forma sprawdza się zarówno na obozie (np. w niedzielę przed Mszą lub w sobotę wieczorem), jak i w trakcie roku harcerskiego - przy ognisku, na wyjeździe, przed zbiórką.'
     '</p>';
@@ -36,28 +36,18 @@ const String rozwazanie_ewangeliczne_html_dla_calej_druzyny =
     '<br>Tak. Dla osób wychowywanych w wierze chrześcijańskiej jest to okazja do pogłębienia znajomości Pisma Świętego, relacji z Bogiem oraz przygotowania do głębszego przeżycia <b>Mszy Świętej</b> w daną niedzielę. Osoby poszukujące znajdą w niej okazję do refleksji nad postawami i wartościami, które ukształtowały naszą kulturę i cywilizację.'
     '</p>';
 
-/// Sugerowany czas trwania formy.
-const String rozwazanie_ewangeliczne_html_czas_trwania =
-    '<p style="text-align:justify;"><b>Ile to trwa?</b>'
+/// Sugerowany moment przeprowadzenia formy.
+const String rozwazanie_ewangeliczne_html_kiedy_przeprowadzic =
+    '<p style="text-align:justify;"><b>Kiedy przeprowadzić?</b>'
     '<br>'
-    '<br>Około <b>30-45 minut</b>. Formę najlepiej przeprowadzić w niedzielę przed Mszą lub w sobotę wieczorem.'
+    '<br>Formę najlepiej przeprowadzić w niedzielę przed Mszą lub w sobotę wieczorem.'
     '</p>';
-
-/// Praktyczny przebieg formy w zastępie - 4 kroki.
-const String rozwazanie_ewangeliczne_html_przebieg_praktyczny =
-    '<p style="text-align:justify;"><b>Jak przeprowadzić to w praktyce?</b></p>'
-    '<ol>'
-    '<li><p style="text-align:justify;">W <b>zastępach</b> każdy harcerz otrzymuje kartkę z fragmentem Ewangelii oraz z pytaniami pomocniczymi.</p></li>'
-    '<li><p style="text-align:justify;">Harcerze mają indywidualnie <b>10-15 minut</b> na przeczytanie fragmentu i refleksję nad pytaniami - mogą zapisywać swoje myśli.</p></li>'
-    '<li><p style="text-align:justify;">Po wyznaczonym czasie zastęp się schodzi - tę część <b>animuje zastępowy lub osoba z kadry</b>. Każdy może (ale nie musi) podzielić się swoimi przemyśleniami. Gdy każdy chętny się wypowie, może wywiązać się dalsza rozmowa.</p></li>'
-    '<li><p style="text-align:justify;">Zastęp może się krótko, wspólnie pomodlić - własnymi słowami lub np. modlitwą <i>„Ojcze nasz”</i>.</p></li>'
-    '</ol>';
 
 /// Materiały, które należy przygotować przed przeprowadzeniem formy.
 const String rozwazanie_ewangeliczne_html_przygotowanie_materialy =
     '<p style="text-align:justify;"><b>Materiały</b>'
     '<br>'
-    '<br>Rozważanie ewangeliczne należy wcześniej <b>wydrukować - po jednym egzemplarzu na uczestnika</b>.'
+    '<br>Rozważanie ewangeliczne należy wcześniej <b>wydrukować - po jednym egzemplarzu na uczestnika</b>. Pytania trzeba dobrać do grupy wiekowej (młodsi: zuch + harc; starsi: HS + wędro).'
     '</p>';
 
 /// Zasady doboru i pracy opiekunów zastępów prowadzących Rozważanie ewangeliczne.
@@ -100,6 +90,42 @@ const String rozwazanie_ewangeliczne_html_ewaluacja =
 const String rozwazanie_ewangeliczne_html_zrodla_w_aplikacji =
     '<p style="text-align:justify;">'
     'Fragmenty Ewangelii na każdy dzień roku liturgicznego są dostępne w aplikacji w sekcji <i>Rozważania ewangeliczne</i>.'
+    '</p>';
+
+
+/// Treść kroku 1 - wprowadzenie do formy i rozdanie kartek.
+const String rozwazanie_ewangeliczne_html_step_wprowadzenie =
+    '<p style="text-align:justify;">'
+    'Drużyna dzieli się na <b>zastępy</b>. Opiekun zastępu krótko tłumaczy uczestnikom, na czym polega forma i jak będzie przebiegać, a następnie rozdaje każdemu harcerzowi kartkę z fragmentem Ewangelii oraz z pytaniami pomocniczymi.'
+    '</p>';
+
+/// Treść kroku 2 - indywidualna refleksja nad fragmentem.
+const String rozwazanie_ewangeliczne_html_step_indywidualna_refleksja =
+    '<p style="text-align:justify;">'
+    'Każdy z uczestników <b>indywidualnie</b> czyta fragment Ewangelii i odpowiada sobie na załączone pytania pomocnicze - może swobodnie zapisywać swoje myśli na kartce. W tym czasie zastęp pracuje w ciszy.'
+    '<br>'
+    '<br>Również opiekun bierze udział w refleksji.'
+    '</p>';
+
+/// Treść kroku 3 - wspólne dzielenie się przemyśleniami w zastępie.
+const String rozwazanie_ewangeliczne_html_step_dzielenie_sie =
+    '<p style="text-align:justify;">'
+    'Po wyznaczonym czasie zastęp zbiera się razem. Tę część <b>animuje opiekun zastępu</b> (członek kadry lub zastępowy):'
+    '</p>'
+    '<ul>'
+    '<li><p style="text-align:justify;">stwarza każdemu przestrzeń, by się wypowiedział,</p></li>'
+    '<li><p style="text-align:justify;">nie kwestionuje ani nie ocenia tego, co mówią uczestnicy - może natomiast „z wyczuciem” o coś dopytać.</p></li>'
+    '</ul>'
+    '<p style="text-align:justify;">'
+    'Każdy może (ale nie musi) podzielić się swoimi przemyśleniami - <b>bez presji</b>. Gdy każdy chętny się wypowie, może wywiązać się dalsza, swobodna rozmowa.'
+    '<br>'
+    '<br><b>Wszystko, co zostało powiedziane podczas Rozważania ewangelicznego, zostaje w zastępie!</b>'
+    '</p>';
+
+/// Treść kroku 4 - wspólna, krótka modlitwa kończąca formę.
+const String rozwazanie_ewangeliczne_html_step_modlitwa =
+    '<p style="text-align:justify;">'
+    'Zastęp może się krótko, wspólnie pomodlić - własnymi słowami lub np. modlitwą <i>„Ojcze nasz”</i>.'
     '</p>';
 
 
@@ -150,7 +176,6 @@ Konspekt rozwazanie_ewangeliczne = const Konspekt(
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (fijulanam468)',
     author: DANIEL_IWANICKI,
-    customDuration: Duration(minutes: 45),
     aims: [
       'Stworzenie uczestnikom czasu do budowania ich relacji z Bogiem',
       'Budowanie u uczestników nawyku regularnego sięgania po Słowo Boże',
@@ -166,16 +191,47 @@ Konspekt rozwazanie_ewangeliczne = const Konspekt(
       ),
     ],
     summary: 'Uczestnicy w zastępach indywidualnie czytają krótki fragment Ewangelii i odpowiadają na pytania pomocnicze, a następnie wspólnie - w atmosferze zaufania - dzielą się swoimi przemyśleniami i kończą krótką modlitwą.',
-    description:
+    intro:
         '$rozwazanie_ewangeliczne_html_opis_ogolny'
         '$rozwazanie_ewangeliczne_html_dla_jakich_metodyk'
         '$rozwazanie_ewangeliczne_html_dla_calej_druzyny'
-        '$rozwazanie_ewangeliczne_html_czas_trwania'
-        '$rozwazanie_ewangeliczne_html_przebieg_praktyczny'
+        '$rozwazanie_ewangeliczne_html_kiedy_przeprowadzic'
         '<p style="text-align:justify;"><b>Przygotowanie</b></p>'
         '$rozwazanie_ewangeliczne_html_przygotowanie_materialy'
         '$rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie'
-        '$rozwazanie_ewangeliczne_html_przygotowanie_miejsce'
+        '$rozwazanie_ewangeliczne_html_przygotowanie_miejsce',
+    steps: [
+
+      KonspektStep(
+        title: 'Wprowadzenie i rozdanie kartek',
+        duration: Duration(minutes: 5),
+        activeForm: KonspektStepActiveForm.static,
+        content: rozwazanie_ewangeliczne_html_step_wprowadzenie,
+      ),
+
+      KonspektStep(
+        title: 'Indywidualna refleksja',
+        duration: Duration(minutes: 15),
+        activeForm: KonspektStepActiveForm.static,
+        content: rozwazanie_ewangeliczne_html_step_indywidualna_refleksja,
+      ),
+
+      KonspektStep(
+        title: 'Wspólne dzielenie się w zastępie',
+        duration: Duration(minutes: 20),
+        activeForm: KonspektStepActiveForm.static,
+        content: rozwazanie_ewangeliczne_html_step_dzielenie_sie,
+      ),
+
+      KonspektStep(
+        title: 'Wspólna modlitwa',
+        duration: Duration(minutes: 5),
+        activeForm: KonspektStepActiveForm.static,
+        content: rozwazanie_ewangeliczne_html_step_modlitwa,
+      ),
+
+    ],
+    description:
         '$rozwazanie_ewangeliczne_html_ewaluacja'
         '$rozwazanie_ewangeliczne_html_zrodla_w_aplikacji',
     howToFail: [
