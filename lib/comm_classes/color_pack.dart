@@ -67,6 +67,8 @@ abstract class ColorPack{
   Color get iconEnabled;
   Color get iconDisabled;
 
+  Color get floatingButtonIcon => background;
+
   ColorPack? get darkEquivalent;
 
   bool operator == (Object other) => other is ColorPack && name == other.name;
@@ -232,7 +234,7 @@ abstract class ColorPack{
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: accent,
-        foregroundColor: iconEnabled,
+        foregroundColor: floatingButtonIcon,
       ),
 
       cardColor: defCardEnabled,
