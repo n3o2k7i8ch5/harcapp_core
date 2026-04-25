@@ -8,7 +8,7 @@ import '../../konspekt.dart';
 Konspekt rozwazanie_ewangeliczne = const Konspekt(
     name: 'rozwazanie_ewangeliczne',
     title: 'Rozważanie ewangeliczne',
-    additionalSearchPhrases: ['ewangelia', 'apel ewangeliczny', 'pismo święte', 'biblia'],
+    additionalSearchPhrases: ['rozważania ewangeliczne', 'ewangelia', 'apel ewangeliczny', 'pismo święte', 'biblia'],
     category: KonspektCategory.harcerskie,
     type: KonspektType.zwyczaj,
     spheres: {
