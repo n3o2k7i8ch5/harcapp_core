@@ -16,8 +16,9 @@ class BaseHarcFormWidget extends StatefulWidget{
 
   final HarcForm form;
   final bool withAppBar;
+  final Widget? leading;
 
-  const BaseHarcFormWidget(this.form, {this.withAppBar = true, super.key});
+  const BaseHarcFormWidget(this.form, {this.withAppBar = true, this.leading, super.key});
 
   @override
   State<StatefulWidget> createState() => BaseHarcFormWidgetState();
@@ -67,6 +68,9 @@ class BaseHarcFormWidgetState extends State<BaseHarcFormWidget>{
 
           ],
         ),
+
+      if(widget.leading != null)
+        SliverToBoxAdapter(child: widget.leading!),
 
       SliverPadding(
         padding: const EdgeInsets.all(Dimen.sideMarg),

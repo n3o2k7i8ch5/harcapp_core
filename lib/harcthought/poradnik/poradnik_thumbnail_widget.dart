@@ -8,6 +8,8 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/common/file_format_selector_row_widget.dart';
+import 'package:harcapp_core/harcthought/harcapp_links.dart';
+import 'package:harcapp_core/harcthought/harcapp_share_button.dart';
 import 'package:harcapp_core/harcthought/poradnik/poradnik.dart';
 
 class PoradnikThumbnailWidget extends StatelessWidget {
@@ -145,7 +147,15 @@ class PoradnikThumbnailWidget extends StatelessWidget {
               FileFormatSelectorRowWidget(
                 poradnik.formats,
                 onTap: _onFormatTap,
-              )
+              ),
+
+            if(showDownloadFormats)
+              Center(
+                child: HarcappShareButton(
+                  url: HarcappLinks.poradnikOf(poradnik),
+                  subject: poradnik.title,
+                ),
+              ),
 
           ],
         ),
