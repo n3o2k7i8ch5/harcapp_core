@@ -93,6 +93,18 @@ const String rozwazanie_ewangeliczne_html_zrodla_w_aplikacji =
     '</p>';
 
 
+/// Krótkie streszczenie 4 kroków przebiegu formy w jednym bloku HTML.
+/// Używane do zwięzłego opisu w innych miejscach (sam konspekt korzysta z rozbudowanych [steps]).
+const String rozwazanie_ewangeliczne_html_przebieg_praktyczny =
+    '<p style="text-align:justify;"><b>Jak przeprowadzić to w praktyce?</b></p>'
+    '<ol>'
+    '<li><p style="text-align:justify;">W <b>zastępach</b> każdy harcerz otrzymuje kartkę z fragmentem Ewangelii oraz z pytaniami pomocniczymi.</p></li>'
+    '<li><p style="text-align:justify;">Harcerze mają indywidualnie <b>10-15 minut</b> na przeczytanie fragmentu i refleksję nad pytaniami - mogą zapisywać swoje myśli.</p></li>'
+    '<li><p style="text-align:justify;">Po wyznaczonym czasie zastęp się schodzi - tę część <b>animuje zastępowy lub osoba z kadry</b>. Każdy może (ale nie musi) podzielić się swoimi przemyśleniami. Gdy każdy chętny się wypowie, może wywiązać się dalsza rozmowa.</p></li>'
+    '<li><p style="text-align:justify;">Zastęp może się krótko, wspólnie pomodlić - własnymi słowami lub np. modlitwą <i>„Ojcze nasz”</i>.</p></li>'
+    '</ol>';
+
+
 /// Treść kroku 1 - wprowadzenie do formy i rozdanie kartek.
 const String rozwazanie_ewangeliczne_html_step_wprowadzenie =
     '<p style="text-align:justify;">'
