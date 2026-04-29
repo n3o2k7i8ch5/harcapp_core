@@ -154,6 +154,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
     if(withHero)
       return Hero(
         tag: heroTag(poradnik),
+        createRectTween: (begin, end) => RectTween(begin: begin, end: end),
         child: widget,
       );
 
