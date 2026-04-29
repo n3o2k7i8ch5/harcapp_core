@@ -121,7 +121,6 @@ class PoradnikThumbnailWidget extends StatelessWidget {
                             color: Colors.transparent,
                             iconColor: Colors.black,
                             radius: AppCard.defRadius,
-                            dense: true,
                             collapsed: true,
                           ),
                         ),
