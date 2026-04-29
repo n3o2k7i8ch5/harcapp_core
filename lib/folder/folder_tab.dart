@@ -79,7 +79,7 @@ class FolderTab extends StatelessWidget implements PreferredSizeWidget{
     required this.colorsKey,
     required this.folderName,
     required this.countText,
-    this.textAlignment = CrossAxisAlignment.center,
+    this.textAlignment = CrossAxisAlignment.start,
     this.countTextStyle,
     super.key
   });
