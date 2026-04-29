@@ -34,7 +34,10 @@ class ApelEwanWidgetState extends State<ApelEwanWidget>{
   @override
   void initState() {
 
-    selVariantId = widget.initVariantId??apelEwan.variants.keys.first;
+    final initVariantId = widget.initVariantId;
+    selVariantId = (initVariantId != null && apelEwan.variants.containsKey(initVariantId))
+        ? initVariantId
+        : apelEwan.variants.keys.first;
     allVariantId = apelEwan.variants.keys.toList();
 
     switch(apelEwan.siglum.split(' ')[0]){
