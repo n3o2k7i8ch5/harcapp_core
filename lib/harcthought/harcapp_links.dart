@@ -1,3 +1,4 @@
+import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan.dart';
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan_persistent_folder.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/harc_forms/harc_form.dart';
@@ -33,6 +34,7 @@ class HarcappLinks {
 
   static const String apelEwanFolderListTemplate = '/rozwazania_ewangeliczne';
   static const String apelEwanFolderTemplate = '/rozwazania_ewangeliczne/:folder';
+  static const String apelEwanItemTemplate = '/rozwazania_ewangeliczne/:folder/:apel';
 
   // Short forms (reserved — not yet wired up).
   static const String poradnikItemTemplateShort = '/p/:name';
@@ -40,6 +42,7 @@ class HarcappLinks {
   static const String konspektItemTemplateShort = '/k/:category/:name';
   static const String formaItemTemplateShort = '/f/:filename';
   static const String apelEwanFolderTemplateShort = '/r/:folder';
+  static const String apelEwanItemTemplateShort = '/r/:folder/:apel';
 
   // ---------------- go_router path helpers ----------------
   // Web router has separate routes per KonspektCategory; these helpers fill
@@ -81,6 +84,11 @@ class HarcappLinks {
     return '$baseUrl${_fill(tpl, {'folder': slug})}';
   }
 
+  static String apelEwanItem(String folderSlug, String apelDirName, {bool short = false}) {
+    final tpl = short ? apelEwanItemTemplateShort : apelEwanItemTemplate;
+    return '$baseUrl${_fill(tpl, {'folder': folderSlug, 'apel': apelDirName})}';
+  }
+
   static String poradnikOf(Poradnik p, {bool short = false}) =>
       poradnik(p.name, short: short);
 
@@ -95,6 +103,9 @@ class HarcappLinks {
 
   static String apelEwanFolderOf(ApelEwanPersistentFolder f, {bool short = false}) =>
       apelEwanFolder(f.slug, short: short);
+
+  static String apelEwanItemOf(ApelEwanPersistentFolder f, ApelEwan apel, {bool short = false}) =>
+      apelEwanItem(f.slug, apel.dirName, short: short);
 
   // ---------------- Parser ----------------
   /// Parse any harcapp.web.app URL (long or short form) into a typed link.

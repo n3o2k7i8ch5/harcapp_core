@@ -138,29 +138,26 @@ class _ApelEwanPrintBottomSheetState extends State<ApelEwanPrintBottomSheet> {
             widget.extraTopWidget!,
 
           if(apels.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Uwzględnione apele (${_selectedSiglums.length}/${apels.length})',
-                      style: AppTextStyle(
-                        fontWeight: weightHalfBold,
-                        color: hintEnab_(context),
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: allSelected ? null : _selectAll,
-                    child: const Text('Zaznacz wszystkie', style: AppTextStyle()),
-                  ),
-                  TextButton(
-                    onPressed: noneSelected ? null : _deselectAll,
-                    child: const Text('Odznacz wszystkie', style: AppTextStyle()),
-                  ),
-                ],
+            CheckboxListTile(
+              tristate: true,
+              value: allSelected ? true : (noneSelected ? false : null),
+              controlAffinity: ListTileControlAffinity.leading,
+              activeColor: accent_(context),
+              title: Text(
+                'Uwzględnione apele (${_selectedSiglums.length}/${apels.length})',
+                style: AppTextStyle(
+                  fontSize: Dimen.textSizeAppBar,
+                  fontWeight: weightBold,
+                  color: iconEnab_(context),
+                ),
               ),
+              onChanged: (_) {
+                if (allSelected) {
+                  _deselectAll();
+                } else {
+                  _selectAll();
+                }
+              },
             ),
 
           if(apels.isNotEmpty)
