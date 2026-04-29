@@ -1,8 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:harcapp_core/values/common_color_data.dart';
 import 'package:yaml/yaml.dart';
 
 import 'apel_ewan.dart';
+import 'apel_ewan_persistent_folder.dart';
 
 const String ogolneApelEwansVariantId = 'ogolne';
 const String ogolneApelEwansName = 'Ogólne';
@@ -14,6 +17,13 @@ const Map<String, String> apelEwansVariantNameMap = {
   ogolneApelEwansVariantId: ogolneApelEwansName,
   dekalogApelEwansVariantId: dekalogApelEwansName,
 };
+
+// Palette keys for the persistent folders. Registered with [CommonColorData]
+// inside [loadAllApelEwans] and stored as the folder's `colorsKey`. Apps
+// shouldn't touch these directly — read the resolved palette via
+// `folder.colorsData`.
+const String _omegaApelEwanColorsKey = 'omega_apel_ewan';
+const String _dekalogApelEwanColorsKey = 'dekalog_apel_ewan';
 
 const String _assetDir = 'packages/harcapp_core/assets/apel_ewan';
 
@@ -34,6 +44,9 @@ const List<String> dekalogOrder = [
 
 late List<ApelEwan> allApelEwans;
 late Map<String, ApelEwan> allApelEwanMap;
+
+late ApelEwanPersistentFolder omegaFolder;
+late ApelEwanPersistentFolder dekalogFolder;
 
 Future<List<String>> _discoverIds() async {
   final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
@@ -157,4 +170,50 @@ Future<void> loadAllApelEwans() async {
 
   allApelEwans = loaded;
   allApelEwanMap = {for (final apelEwan in loaded) apelEwan.siglum: apelEwan};
+
+  _registerFolderPalettes();
+  _buildPersistentFolders();
+}
+
+void _registerFolderPalettes() {
+  CommonColorData.register(_omegaApelEwanColorsKey,
+      const CommonColorData(Colors.yellow, Colors.orange, Colors.black));
+  CommonColorData.register(_dekalogApelEwanColorsKey,
+      const CommonColorData(Colors.greenAccent, Colors.blue, Colors.black));
+}
+
+void _buildPersistentFolders() {
+  final byId = {for (final apelEwan in allApelEwans) apelEwan.dirName: apelEwan};
+  final dekalogItems = <ApelEwan>[];
+  for (final id in dekalogOrder) {
+    final apelEwan = byId[id];
+    assert(apelEwan != null,
+        'dekalog: dekalogOrder references "$id" but no asset was discovered');
+    if (apelEwan == null) continue;
+    assert(apelEwan.folders.contains(dekalogApelEwansVariantId),
+        'dekalog: $id.yaml is in dekalogOrder but its `folders` list does not contain "$dekalogApelEwansVariantId"');
+    if (!apelEwan.folders.contains(dekalogApelEwansVariantId)) continue;
+    dekalogItems.add(apelEwan);
+  }
+
+  omegaFolder = ApelEwanPersistentFolder(
+    id: '__omega__',
+    apelEwans: allApelEwans,
+    name: 'Wszystkie rozważania',
+    colorsKey: _omegaApelEwanColorsKey,
+    iconKey: 'bookCross',
+    variantId: ogolneApelEwansVariantId,
+  );
+
+  dekalogFolder = ApelEwanPersistentFolder(
+    id: '__dekalog__',
+    apelEwans: dekalogItems,
+    name: dekalogApelEwansName,
+    colorsKey: _dekalogApelEwanColorsKey,
+    iconKey: 'textBoxMultiple',
+    variantId: dekalogApelEwansVariantId,
+  );
+
+  ApelEwanPersistentFolder.register(omegaFolder);
+  ApelEwanPersistentFolder.register(dekalogFolder);
 }
