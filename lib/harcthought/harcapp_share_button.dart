@@ -31,6 +31,7 @@ class HarcappShareButton extends StatelessWidget {
   final Color? color;
   final double? radius;
   final String? tooltip;
+  final bool collapsed;
 
   const HarcappShareButton({
     required this.url,
@@ -39,6 +40,7 @@ class HarcappShareButton extends StatelessWidget {
     this.color,
     this.radius,
     this.tooltip = 'Udostępnij',
+    this.collapsed = false,
     super.key,
   });
 
@@ -53,7 +55,7 @@ class HarcappShareButton extends StatelessWidget {
         radius: radius,
         margin: EdgeInsets.zero,
         icon: icon ?? MdiIcons.shareVariant,
-        text: 'Udostępnij',
+        text: collapsed ? null : 'Udostępnij',
         onTap: () => HarcappShare.share(url, subject: subject),
       ),
     );

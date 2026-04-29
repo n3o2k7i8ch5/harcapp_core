@@ -58,10 +58,12 @@ class FileFormatSelectorRowWidget extends StatelessWidget{
 
   final Iterable<FileFormat> fileFormats;
   final void Function(FileFormat) onTap;
+  final BorderRadius? borderRadius;
 
   const FileFormatSelectorRowWidget(
     this.fileFormats,
     { required this.onTap,
+      this.borderRadius,
       super.key
     });
 
@@ -86,7 +88,14 @@ class FileFormatSelectorRowWidget extends StatelessWidget{
       );
     }
 
-    return Row(children: formatButtons);
+    final Widget row = Row(children: formatButtons);
+
+    if(borderRadius == null) return row;
+
+    return ClipRRect(
+      borderRadius: borderRadius!,
+      child: row,
+    );
   }
 
 
