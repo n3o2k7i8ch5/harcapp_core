@@ -143,29 +143,7 @@ class KonspektTileWidget extends StatelessWidget{
                               )
                           ),
 
-                        if (showSpheres || (showTime && konspekt.duration != null))
-                          Padding(
-                            padding: EdgeInsets.only(top: 6.0),
-                            child: Builder(
-                              builder: (context) {
-                                final hasSpheres = showSpheres && konspekt.spheresNotEmpty;
-                                final hasTime = showTime && konspekt.duration != null;
-                                if (hasSpheres && hasTime)
-                                  return Row(
-                                    children: [
-                                      Expanded(child: KonspektSphereList(konspekt)),
-                                      const SizedBox(width: Dimen.defMarg),
-                                      _TimePill(konspekt, background: background),
-                                    ],
-                                  );
-                                if (hasSpheres) return KonspektSphereList(konspekt);
-                                return Align(
-                                  alignment: Alignment.centerRight,
-                                  child: _TimePill(konspekt, background: background),
-                                );
-                              },
-                            ),
-                          )
+                        _buildBottomBar()
 
                       ],
                     )
@@ -183,6 +161,35 @@ class KonspektTileWidget extends StatelessWidget{
         ),
       )
   );
+
+  Widget _buildBottomBar() {
+    final hasSpheres = showSpheres && konspekt.spheresNotEmpty;
+    final hasTime = showTime && konspekt.duration != null;
+
+    Widget? content;
+    if (hasSpheres && hasTime)
+      content = Row(
+        children: [
+          Expanded(child: KonspektSphereList(konspekt)),
+          const SizedBox(width: Dimen.defMarg),
+          _TimePill(konspekt, background: background),
+        ],
+      );
+    else if (hasSpheres)
+      content = KonspektSphereList(konspekt);
+    else if (hasTime)
+      content = Align(
+        alignment: Alignment.centerRight,
+        child: _TimePill(konspekt, background: background),
+      );
+
+    if (content == null) return const SizedBox.shrink();
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 6.0),
+      child: content,
+    );
+  }
 
 }
 
@@ -243,20 +250,21 @@ class KonspektSphereList extends StatelessWidget{
     final textStyle = AppTextStyle(fontWeight: weightHalfBold, color: iconDisab_(context));
     final textScaler = MediaQuery.textScalerOf(context);
 
+    double labelsTotalWidth = 0;
+    for (int i = 0; i < spheres.length; i++) {
+      final tp = TextPainter(
+        text: TextSpan(text: spheres[i].displayName, style: textStyle),
+        textDirection: TextDirection.ltr,
+        textScaler: textScaler,
+      )..layout();
+      labelsTotalWidth += Dimen.iconSmallSize + Dimen.defMarg + tp.width;
+      if (i < spheres.length - 1) labelsTotalWidth += Dimen.iconMarg;
+      tp.dispose();
+    }
+
     return LayoutBuilder(
       builder: (context, constraints) {
-        double withLabelsWidth = 0;
-        for (int i = 0; i < spheres.length; i++) {
-          final tp = TextPainter(
-            text: TextSpan(text: spheres[i].displayName, style: textStyle),
-            textDirection: TextDirection.ltr,
-            textScaler: textScaler,
-          )..layout();
-          withLabelsWidth += Dimen.iconSmallSize + Dimen.defMarg + tp.width;
-          if (i < spheres.length - 1) withLabelsWidth += Dimen.iconMarg;
-        }
-
-        final showLabels = withLabelsWidth <= constraints.maxWidth;
+        final showLabels = labelsTotalWidth <= constraints.maxWidth;
 
         return TagsWidget.customWrap<KonspektSphere>(
           allTags: spheres,
