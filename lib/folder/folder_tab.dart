@@ -72,11 +72,15 @@ class FolderTab extends StatelessWidget implements PreferredSizeWidget{
   final String colorsKey;
   final String folderName;
   final String countText;
+  final CrossAxisAlignment textAlignment;
+  final TextStyle? countTextStyle;
   const FolderTab({
     required this.iconKey,
     required this.colorsKey,
     required this.folderName,
     required this.countText,
+    this.textAlignment = CrossAxisAlignment.center,
+    this.countTextStyle,
     super.key
   });
 
@@ -85,11 +89,11 @@ class FolderTab extends StatelessWidget implements PreferredSizeWidget{
     leading: FolderIcon(iconKey, colorsKey),
     text: folderName,
     textWidget: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: textAlignment,
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(folderName, style: const AppTextStyle(fontWeight: weightHalfBold)),
-          Text(countText, style: const AppTextStyle()),
+          Text(countText, style: countTextStyle ?? const AppTextStyle()),
         ]
     ),
   );
