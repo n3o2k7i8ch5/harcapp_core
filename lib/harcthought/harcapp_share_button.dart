@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
+import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 /// Pluggable share entry point. Apps register an implementation at startup
@@ -34,7 +35,7 @@ class HarcappShareButton extends StatelessWidget {
   final double? radius;
   final String? tooltip;
   final bool collapsed;
-  final bool dense;
+  final EdgeInsets? padding;
 
   const HarcappShareButton({
     required this.url,
@@ -46,7 +47,7 @@ class HarcappShareButton extends StatelessWidget {
     this.radius,
     this.tooltip = 'Udostępnij',
     this.collapsed = false,
-    this.dense = false,
+    this.padding,
     super.key,
   });
 
@@ -62,8 +63,7 @@ class HarcappShareButton extends StatelessWidget {
         textColor: textColor,
         radius: radius,
         margin: EdgeInsets.zero,
-        padding: dense ? const EdgeInsets.all(8.0) : const EdgeInsets.all(12.0),
-        dense: dense,
+        padding: padding ?? const EdgeInsets.all(Dimen.iconMarg),
         icon: icon ?? MdiIcons.shareVariant,
         text: collapsed ? null : 'Udostępnij',
         onTap: () => HarcappShare.share(url, subject: subject),

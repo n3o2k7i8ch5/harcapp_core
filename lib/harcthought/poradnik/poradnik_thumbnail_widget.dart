@@ -122,6 +122,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
                             iconColor: Colors.black,
                             radius: AppCard.defRadius,
                             collapsed: true,
+                            padding: const EdgeInsets.all(Dimen.defMarg),
                           ),
                         ),
                       ),
