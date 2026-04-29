@@ -146,22 +146,25 @@ class KonspektTileWidget extends StatelessWidget{
                         if (showSpheres || (showTime && konspekt.duration != null))
                           Padding(
                             padding: EdgeInsets.only(top: 6.0),
-                            child: !showSpheres && (showTime && konspekt.duration != null)
-                                ? Align(
-                                    alignment: Alignment.centerRight,
-                                    child: _TimePill(konspekt, background: background),
-                                  )
-                                : OverflowBar(
-                                    alignment: MainAxisAlignment.spaceBetween,
-                                    spacing: Dimen.defMarg,
-                                    overflowAlignment: OverflowBarAlignment.start,
-                                    overflowSpacing: 6.0,
+                            child: Builder(
+                              builder: (context) {
+                                final hasSpheres = showSpheres && konspekt.spheresNotEmpty;
+                                final hasTime = showTime && konspekt.duration != null;
+                                if (hasSpheres && hasTime)
+                                  return Row(
                                     children: [
-                                      if (showSpheres & konspekt.spheresNotEmpty) KonspektSphereList(konspekt),
-                                      if (showTime && konspekt.duration != null)
-                                        _TimePill(konspekt, background: background),
+                                      Expanded(child: KonspektSphereList(konspekt)),
+                                      const SizedBox(width: Dimen.defMarg),
+                                      _TimePill(konspekt, background: background),
                                     ],
-                                  ),
+                                  );
+                                if (hasSpheres) return KonspektSphereList(konspekt);
+                                return Align(
+                                  alignment: Alignment.centerRight,
+                                  child: _TimePill(konspekt, background: background),
+                                );
+                              },
+                            ),
                           )
 
                       ],
@@ -235,20 +238,44 @@ class KonspektSphereList extends StatelessWidget{
   const KonspektSphereList(this.konspekt, {super.key});
 
   @override
-  Widget build(BuildContext context) => TagsWidget.customWrap<KonspektSphere>(
-      allTags: konspekt.spheres.keys.toList(),
-      separator: Dimen.iconMarg,
-      tagBuilder: (context, sphere, checked) => Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(height: _TimePill.height),
-          Icon(sphere.displayIcon, size: Dimen.iconSmallSize, color: iconDisab_(context)),
-          const SizedBox(width: Dimen.defMarg),
-          Text(sphere.displayName, style: AppTextStyle(fontWeight: weightHalfBold, color: iconDisab_(context)))
-        ],
-      ),
-      wrapAlignment: WrapAlignment.end
-  );
+  Widget build(BuildContext context) {
+    final spheres = konspekt.spheres.keys.toList();
+    final textStyle = AppTextStyle(fontWeight: weightHalfBold, color: iconDisab_(context));
+    final textScaler = MediaQuery.textScalerOf(context);
 
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double withLabelsWidth = 0;
+        for (int i = 0; i < spheres.length; i++) {
+          final tp = TextPainter(
+            text: TextSpan(text: spheres[i].displayName, style: textStyle),
+            textDirection: TextDirection.ltr,
+            textScaler: textScaler,
+          )..layout();
+          withLabelsWidth += Dimen.iconSmallSize + Dimen.defMarg + tp.width;
+          if (i < spheres.length - 1) withLabelsWidth += Dimen.iconMarg;
+        }
+
+        final showLabels = withLabelsWidth <= constraints.maxWidth;
+
+        return TagsWidget.customWrap<KonspektSphere>(
+          allTags: spheres,
+          separator: Dimen.iconMarg,
+          tagBuilder: (context, sphere, checked) => Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: _TimePill.height),
+              Icon(sphere.displayIcon, size: Dimen.iconSmallSize, color: iconDisab_(context)),
+              if (showLabels) ...[
+                const SizedBox(width: Dimen.defMarg),
+                Text(sphere.displayName, style: textStyle),
+              ]
+            ],
+          ),
+          wrapAlignment: WrapAlignment.start,
+        );
+      },
+    );
+  }
 
 }
