@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 /// Pluggable share entry point. Apps register an implementation at startup
@@ -27,26 +28,34 @@ class HarcappShareButton extends StatelessWidget {
   final String url;
   final String? subject;
   final IconData? icon;
+  final Color? color;
+  final double? radius;
   final String? tooltip;
-  final EdgeInsetsGeometry? padding;
 
   const HarcappShareButton({
     required this.url,
     this.subject,
     this.icon,
+    this.color,
+    this.radius,
     this.tooltip = 'Udostępnij',
-    this.padding,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     if (!HarcappShare.isRegistered) return const SizedBox.shrink();
-    return IconButton(
-      icon: Icon(icon ?? MdiIcons.shareVariant),
-      tooltip: tooltip,
-      padding: padding ?? const EdgeInsets.all(8),
-      onPressed: () => HarcappShare.share(url, subject: subject),
+    return Tooltip(
+      message: tooltip,
+      child: SimpleButton.from(
+        context: context,
+        color: color,
+        radius: radius,
+        margin: EdgeInsets.zero,
+        icon: icon ?? MdiIcons.shareVariant,
+        text: 'Udostępnij',
+        onTap: () => HarcappShare.share(url, subject: subject),
+      ),
     );
   }
 }
