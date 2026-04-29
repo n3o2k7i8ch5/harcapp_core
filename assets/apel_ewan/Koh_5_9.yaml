@@ -1,0 +1,23 @@
+siglum: Koh 8, 9
+folders:
+- dekalog
+text: |-
+  Kto kocha się w pieniądzach,
+  pieniądzem się nie nasyci;
+  a kto się kocha w zasobach,
+  ten nie ma z nich pożytku.
+  To również jest marność.
+variants:
+  dekalog:
+    title: Ani żadnej rzeczy, która jego jest
+    shortTitle: |-
+      X
+      Przykazanie
+    questions:
+    - Czy dostrzegasz w sobie chciwość i zazdrość?
+    - Na czym polega zazdrość? Co to jest chciwość?
+    - Czego, poza pieniędzmi, można zazdrościć?
+    - Dlaczego nie można się nasycić pieniędzmi i dlaczego nie dają one szczęścia?
+    - 'Co to znaczy: "Pieniądz jest dobrym sługą, ale złym panem"?'
+    - Jak należy traktować rzeczy materialne, aby dobrze Ci służyły?
+    comment: Zastanówcie się, co jest skarbem, którym możecie dzielić się z innymi (talenty, umiejętności, przyjaźń?)
