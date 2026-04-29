@@ -62,7 +62,8 @@ class HarcappLinks {
 
   static String konspekt(KonspektCategory category, String name, {bool short = false}) {
     final tpl = short ? konspektItemTemplateShort : konspektItemTemplate;
-    return '$baseUrl${_fill(tpl, {'category': category.path, 'name': name})}';
+    final cat = short ? category.pathShort : category.path;
+    return '$baseUrl${_fill(tpl, {'category': cat, 'name': name})}';
   }
 
   static String forma(String filename, {bool short = false}) {
@@ -116,9 +117,10 @@ class HarcappLinks {
     }
 
     // Konspekt: /konspekty/<category>/:name or /k/<category>/:name
+    // Accepts both long ('harcerskie') and short ('h') category segments.
     if (segs[0] == 'konspekty' || segs[0] == 'k') {
       if (segs.length == 3) {
-        final category = KonspektCategory.fromApiParam(segs[1]);
+        final category = KonspektCategory.fromAnyPath(segs[1]);
         if (category != null) {
           return KonspektLink(category: category, name: segs[2]);
         }

@@ -29,18 +29,24 @@ class HarcappShareButton extends StatelessWidget {
   final String? subject;
   final IconData? icon;
   final Color? color;
+  final Color? iconColor;
+  final Color? textColor;
   final double? radius;
   final String? tooltip;
   final bool collapsed;
+  final bool dense;
 
   const HarcappShareButton({
     required this.url,
     this.subject,
     this.icon,
     this.color,
+    this.iconColor,
+    this.textColor,
     this.radius,
     this.tooltip = 'Udostępnij',
     this.collapsed = false,
+    this.dense = false,
     super.key,
   });
 
@@ -52,8 +58,12 @@ class HarcappShareButton extends StatelessWidget {
       child: SimpleButton.from(
         context: context,
         color: color,
+        iconColor: iconColor,
+        textColor: textColor,
         radius: radius,
         margin: EdgeInsets.zero,
+        padding: dense ? const EdgeInsets.all(8.0) : const EdgeInsets.all(12.0),
+        dense: dense,
         icon: icon ?? MdiIcons.shareVariant,
         text: collapsed ? null : 'Udostępnij',
         onTap: () => HarcappShare.share(url, subject: subject),

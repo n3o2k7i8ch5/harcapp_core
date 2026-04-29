@@ -109,27 +109,25 @@ class PoradnikThumbnailWidget extends StatelessWidget {
                         )
                     ),
 
-                    if(showPageCount)
+                    if(showDownloadFormats)
                       Positioned(
                         bottom: 2*Dimen.defMarg,
-                        right: 2*Dimen.defMarg,
+                        left: 2*Dimen.defMarg,
                         child: Blur(
                           sigma: 2,
                           color: Colors.white.withValues(alpha: 0.7),
                           borderRadius: BorderRadius.circular(AppCard.defRadius),
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              '${poradnik.pageCount} stron',
-                              style: AppTextStyle(
-                                color: Colors.black,
-                                fontWeight: weightHalfBold,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
+                          child: HarcappShareButton(
+                            url: HarcappLinks.poradnikOf(poradnik),
+                            subject: poradnik.title,
+                            color: Colors.transparent,
+                            iconColor: Colors.black,
+                            radius: AppCard.defRadius,
+                            dense: true,
+                            collapsed: true,
                           ),
-                        )
-                      )
+                        ),
+                      ),
 
                   ],
                 ),
@@ -147,14 +145,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
               FileFormatSelectorRowWidget(
                 poradnik.formats,
                 onTap: _onFormatTap,
-              ),
-
-            if(showDownloadFormats)
-              Center(
-                child: HarcappShareButton(
-                  url: HarcappLinks.poradnikOf(poradnik),
-                  subject: poradnik.title,
-                ),
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(radius)),
               ),
 
           ],

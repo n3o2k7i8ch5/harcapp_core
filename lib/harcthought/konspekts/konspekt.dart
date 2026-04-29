@@ -41,6 +41,13 @@ enum KonspektCategory{
     }
   }
 
+  String get pathShort{
+    switch(this){
+      case harcerskie: return 'h';
+      case ksztalcenie: return 'k';
+    }
+  }
+
   String get apiParam{
     switch(this){
       case harcerskie: return 'harcerskie';
@@ -52,6 +59,20 @@ enum KonspektCategory{
     switch(name){
       case 'harcerskie': return KonspektCategory.harcerskie;
       case 'ksztalcenie': return KonspektCategory.ksztalcenie;
+      default: return null;
+    }
+  }
+
+  /// Accepts both long ("harcerskie"/"ksztalcenie") and short ("h"/"k")
+  /// path segments — used by HarcappLinks parser.
+  static KonspektCategory? fromAnyPath(String s){
+    switch(s){
+      case 'harcerskie':
+      case 'h':
+        return KonspektCategory.harcerskie;
+      case 'ksztalcenie':
+      case 'k':
+        return KonspektCategory.ksztalcenie;
       default: return null;
     }
   }
