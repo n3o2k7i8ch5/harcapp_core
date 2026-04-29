@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:harcapp_core/values/common_color_data.dart';
+import 'package:harcapp_core/values/common_icon_data.dart';
+
+class FolderIcon extends StatelessWidget{
+
+  static const double defSize = 36.0;
+
+  final String iconKey;
+  final String colorKey;
+  final double size;
+
+  const FolderIcon(this.iconKey, this.colorKey, {this.size = defSize, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    CommonColorData commonColorData = CommonColorData.get(colorKey);
+
+    return ShaderMask(
+        child: Icon(
+          CommonIconData.get(iconKey),
+          size: size,
+          color: Colors.white,
+        ),
+        shaderCallback: (Rect bounds){
+          final Rect rect = Rect.fromLTRB(0, 0, size, size);
+          final Gradient gradient = LinearGradient(
+              colors: [
+                commonColorData.colorStart,
+                commonColorData.colorEnd],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight
+          );
+          return gradient.createShader(rect);
+        }
+    );
+
+  }
+
+}
