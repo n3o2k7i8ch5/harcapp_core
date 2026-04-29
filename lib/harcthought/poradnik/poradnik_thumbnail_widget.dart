@@ -27,7 +27,6 @@ class PoradnikThumbnailWidget extends StatelessWidget {
   final void Function()? onTap;
   final void Function(FileFormat format)? onFormatTap;
   final bool showDownloadFormats;
-  final bool showPageCount;
   final bool withHero;
 
   final double titleHeightPaddingFraction;
@@ -44,7 +43,6 @@ class PoradnikThumbnailWidget extends StatelessWidget {
         this.onTap,
         this.onFormatTap,
         this.showDownloadFormats = true,
-        this.showPageCount = true,
         this.withHero = true
       });
 
@@ -118,7 +116,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
                           color: Colors.white.withValues(alpha: 0.7),
                           borderRadius: BorderRadius.circular(AppCard.defRadius),
                           child: HarcappShareButton(
-                            url: HarcappLinks.poradnikOf(poradnik),
+                            url: HarcappLinks.poradnikOf(poradnik, short: true),
                             subject: poradnik.title,
                             color: Colors.transparent,
                             iconColor: Colors.black,
