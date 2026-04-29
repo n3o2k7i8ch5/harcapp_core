@@ -1,3 +1,4 @@
+import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan_persistent_folder.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/harc_forms/harc_form.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
@@ -30,11 +31,15 @@ class HarcappLinks {
   static const String formaListTemplate = '/konspekty/formy';
   static const String formaItemTemplate = '/konspekty/formy/:filename';
 
+  static const String apelEwanFolderListTemplate = '/rozwazania_ewangeliczne';
+  static const String apelEwanFolderTemplate = '/rozwazania_ewangeliczne/:folder';
+
   // Short forms (reserved — not yet wired up).
   static const String poradnikItemTemplateShort = '/p/:name';
   static const String poradnikItemFileTemplateShort = '/p/:name/:ext';
   static const String konspektItemTemplateShort = '/k/:category/:name';
   static const String formaItemTemplateShort = '/f/:filename';
+  static const String apelEwanFolderTemplateShort = '/r/:folder';
 
   // ---------------- go_router path helpers ----------------
   // Web router has separate routes per KonspektCategory; these helpers fill
@@ -71,6 +76,11 @@ class HarcappLinks {
     return '$baseUrl${_fill(tpl, {'filename': filename})}';
   }
 
+  static String apelEwanFolder(String slug, {bool short = false}) {
+    final tpl = short ? apelEwanFolderTemplateShort : apelEwanFolderTemplate;
+    return '$baseUrl${_fill(tpl, {'folder': slug})}';
+  }
+
   static String poradnikOf(Poradnik p, {bool short = false}) =>
       poradnik(p.name, short: short);
 
@@ -82,6 +92,9 @@ class HarcappLinks {
 
   static String formaOf(HarcForm f, {bool short = false}) =>
       forma(f.filename, short: short);
+
+  static String apelEwanFolderOf(ApelEwanPersistentFolder f, {bool short = false}) =>
+      apelEwanFolder(f.slug, short: short);
 
   // ---------------- Parser ----------------
   /// Parse any harcapp.web.app URL (long or short form) into a typed link.
@@ -128,6 +141,13 @@ class HarcappLinks {
       return null;
     }
 
+    // Apel ewangeliczny folder: /rozwazania_ewangeliczne/:folder or /r/:folder.
+    // /rozwazania_ewangeliczne (no slug) is a list URL — not a typed link.
+    if (segs[0] == 'rozwazania_ewangeliczne' || segs[0] == 'r') {
+      if (segs.length == 2) return ApelEwanFolderLink(slug: segs[1]);
+      return null;
+    }
+
     return null;
   }
 
@@ -159,4 +179,9 @@ class KonspektLink extends HarcappLink {
 class FormaLink extends HarcappLink {
   final String filename;
   const FormaLink({required this.filename});
+}
+
+class ApelEwanFolderLink extends HarcappLink {
+  final String slug;
+  const ApelEwanFolderLink({required this.slug});
 }

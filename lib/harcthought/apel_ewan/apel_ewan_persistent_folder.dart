@@ -16,6 +16,19 @@ class ApelEwanPersistentFolder extends ApelEwanFolder{
     _all.add(folder);
   }
 
+  /// Looks up a registered folder by its [slug] (e.g. `omega`, `dekalog`).
+  /// Returns null if no matching folder is registered.
+  static ApelEwanPersistentFolder? bySlug(String slug) {
+    for (final f in _all) {
+      if (f.slug == slug) return f;
+    }
+    return null;
+  }
+
+  /// URL slug derived from [id] by stripping all underscores
+  /// (e.g. `__omega__` → `omega`). Used in shareable harcapp.web.app links.
+  String get slug => id.replaceAll('_', '');
+
   @override
   final String name;
 
