@@ -1,4 +1,4 @@
-import 'package:harcapp_core/comm_classes/folder.dart';
+import 'package:harcapp_core/folder/folder.dart';
 
 import 'apel_ewan.dart';
 
