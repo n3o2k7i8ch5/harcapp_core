@@ -97,6 +97,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
   TimeOfDay? startTime;
   List<TimeOfDay>? stepsTimeTable;
 
+  late bool aimsExpanded;
+  late bool spheresExpanded;
   late bool attachmentsExpanded;
   late bool materialsExpanded;
 
@@ -117,6 +119,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
     });
 
+    aimsExpanded = true;
+    spheresExpanded = true;
     attachmentsExpanded = true;
     materialsExpanded = true;
 
@@ -189,6 +193,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               const SizedBox(height: Dimen.sideMarg),
 
+              // Summary
+
               if(widget.oneLineSummary)
                 KonspektHtmlWidget(
                     konspekt,
@@ -207,8 +213,9 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   textSize: Dimen.textSizeBig,
                 ),
 
-              if(konspekt.partOf != null)
-                const SizedBox(height: Dimen.sideMarg),
+              const SizedBox(height: Dimen.sideMarg),
+
+              // Part of
 
               if(konspekt.partOf != null)
                 const TitleShortcutRowWidget(title: 'Część większego konspektu:', textAlign: TextAlign.left),
@@ -229,7 +236,10 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   ),
                 ),
 
-              const SizedBox(height: Dimen.sideMarg),
+              if(konspekt.partOf != null)
+                const SizedBox(height: Dimen.sideMarg),
+
+              // Metodyki
 
               TitleShortcutRowWidget(
                   title: konspekt.category == KonspektCategory.harcerskie?
@@ -272,6 +282,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
               const SizedBox(height: Dimen.sideMarg),
 
+              // Rodzaj
+
               Row(
                 children: [
                   const IntrinsicWidth(
@@ -291,6 +303,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               ),
 
               const SizedBox(height: Dimen.sideMarg),
+
+              // Czas trwania
 
               if(konspekt.duration != null)
                 Row(
@@ -322,24 +336,66 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               if(konspekt.duration != null)
                 const SizedBox(height: Dimen.sideMarg),
 
-              const TitleShortcutRowWidget(title: 'Cele', textAlign: TextAlign.left),
+              // Cele
 
-              StringListWidget(
-                konspekt.aims,
-                padding: const EdgeInsets.only(
-                  left: Dimen.sideMarg,
-                  right: Dimen.sideMarg,
-                  bottom: Dimen.sideMarg,
+              TitleShortcutRowWidget(
+                title: 'Cele',
+                textAlign: TextAlign.left,
+                trailing: konspekt.aims.isEmpty?null:AppButton(
+                  icon: Icon(aimsExpanded?MdiIcons.chevronDown: MdiIcons.chevronUp),
+                  onTap: () => setState(() => aimsExpanded = !aimsExpanded),
                 ),
               ),
 
-              if(konspekt.spheresNotEmpty)
-                const TitleShortcutRowWidget(title: 'Sfery rozwoju', textAlign: TextAlign.left),
+              AnimatedCrossFade(
+                firstChild: const SizedBox.shrink(),
+                secondChild: StringListWidget(
+                  konspekt.aims,
+                  padding: const EdgeInsets.only(
+                    left: Dimen.sideMarg,
+                    right: Dimen.sideMarg,
+                    bottom: Dimen.sideMarg,
+                  ),
+                ),
+                crossFadeState: aimsExpanded
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                duration: const Duration(milliseconds: 250),
+                sizeCurve: Curves.easeInOut,
+              ),
+
+              const SizedBox(height: Dimen.sideMarg),
+
+              // Sfery rozwoju
 
               if(konspekt.spheresNotEmpty)
-                KonspektSpheresWidget(
-                  konspekt.spheres,
-                  onDuchLevelInfoTap: onDuchLevelInfoTap,
+                TitleShortcutRowWidget(
+                  title: 'Sfery rozwoju',
+                  textAlign: TextAlign.left,
+                  trailing: AppButton(
+                    icon: Icon(spheresExpanded?MdiIcons.chevronDown: MdiIcons.chevronUp),
+                    onTap: () => setState(() => spheresExpanded = !spheresExpanded),
+                  ),
+                ),
+
+              if(konspekt.spheresNotEmpty)
+                AnimatedCrossFade(
+                  firstChild: const SizedBox.shrink(),
+                  secondChild: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      KonspektSpheresWidget(
+                        konspekt.spheres,
+                        onDuchLevelInfoTap: onDuchLevelInfoTap,
+                      ),
+                      const SizedBox(height: Dimen.sideMarg),
+                    ],
+                  ),
+                  crossFadeState: spheresExpanded
+                      ? CrossFadeState.showSecond
+                      : CrossFadeState.showFirst,
+                  duration: const Duration(milliseconds: 250),
+                  sizeCurve: Curves.easeInOut,
                 ),
 
               if(konspekt.spheresNotEmpty)
@@ -347,6 +403,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
 
             ])),
           ),
+
+          // Załączniki
 
           if(konspekt.attachments != null && konspekt.attachments!.isNotEmpty)
             SliverPadding(
@@ -381,7 +439,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               child: AnimatedCrossFade(
                 firstChild: const SizedBox.shrink(),
                 secondChild: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: Dimen.sideMarg),
+                  padding: const EdgeInsets.only(
+                    left: Dimen.sideMarg,
+                    right: Dimen.sideMarg,
+                    bottom: Dimen.sideMarg,
+                  ),
                   child: ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -401,6 +463,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                 sizeCurve: Curves.easeInOut,
               ),
             ),
+
+          // Materiały
 
           if(konspekt.materials != null && konspekt.materials!.isNotEmpty)
             SliverPadding(
@@ -433,24 +497,22 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
           if(konspekt.materials != null && konspekt.materials!.isNotEmpty)
             SliverToBoxAdapter(
               child: AnimatedCrossFade(
-                firstChild: const SizedBox.shrink(),
-                secondChild: Padding(
+                firstChild: const SizedBox(height: Dimen.sideMarg),
+                secondChild: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.only(
                     left: Dimen.sideMarg,
                     right: Dimen.sideMarg,
                     bottom: Dimen.sideMarg,
                   ),
-                  child: ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => KonspektMaterialTile(
-                      konspekt,
-                      konspekt.materials![index],
-                      maxDialogWidth: maxDialogWidth,
-                    ),
-                    separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
-                    itemCount: konspekt.materials!.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => KonspektMaterialTile(
+                    konspekt,
+                    konspekt.materials![index],
+                    maxDialogWidth: maxDialogWidth,
                   ),
+                  separatorBuilder: (context, index) => const SizedBox(height: Dimen.defMarg),
+                  itemCount: konspekt.materials!.length,
                 ),
                 crossFadeState: materialsExpanded
                     ? CrossFadeState.showSecond
@@ -460,6 +522,8 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               ),
             ),
 
+          // Wstęp
+          // Opis
           SliverPadding(
             padding: const EdgeInsets.only(
               left: Dimen.sideMarg,
@@ -479,7 +543,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   maxDialogWidth: widget.maxDialogWidth,
                 ),
 
-              if(isHtmlNotEmpty(konspekt.description))
+              if(isHtmlNotEmpty(konspekt.intro))
                 const SizedBox(height: Dimen.sideMarg),
 
               if(isHtmlNotEmpty(konspekt.description))
@@ -493,7 +557,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                   maxDialogWidth: widget.maxDialogWidth,
                 ),
 
-              if(konspekt.anySteps)
+              if(isHtmlNotEmpty(konspekt.description))
                 const SizedBox(height: Dimen.sideMarg),
 
               if(konspekt.anySteps)
@@ -511,7 +575,6 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                       });
                     }
                   ),
-
                 // Row(
                 //   children: [
                 //     SimpleButton.from(
@@ -583,9 +646,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
                     index,
                     startTime: stepsTimeTable?[index],
                     maxDialogWidth: maxDialogWidth,
-                    key: ValueKey(
-                        (konspekt, index)
-                    ),
+                    key: ValueKey((konspekt, index)),
                   ),
                   separatorBuilder: (context, index) => const SizedBox(height: 2*Dimen.sideMarg),
                   count: konspekt.steps.length
