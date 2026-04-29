@@ -94,14 +94,12 @@ class CommonColorData{
   final Color iconColor;
   Color moreVisible(bool isDark) => isDark?colorStart:colorEnd;
 
-  Color get avgColor{
-    return Color.fromARGB(
-        255,
-        (colorStart.red + colorEnd.red)~/2,
-        (colorStart.green + colorEnd.green)~/2,
-        (colorStart.blue + colorEnd.blue)~/2
-    );
-  }
+  Color get avgColor => Color.from(
+    alpha: 1.0,
+    red: (colorStart.r + colorEnd.r)/2,
+    green: (colorStart.g + colorEnd.g)/2,
+    blue: (colorStart.b + colorEnd.b)/2,
+  );
 
   const CommonColorData(this.colorStart, this.colorEnd, this.iconColor);
 
