@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
+import 'package:harcapp_core/comm_widgets/dialog/app_dialog.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -148,42 +148,22 @@ class KonspektMaterialTile extends StatelessWidget{
                 ),
               ),
               onTap: () => showDialog(
-                  context: context,
-                  builder: (context) => Padding(
-                    padding: const EdgeInsets.all(Dimen.defMarg),
-                    child: Center(
-                      child: IntrinsicHeight(
-                        child: Material(
-                          borderRadius: BorderRadius.circular(AppCard.bigRadius),
-                          clipBehavior: Clip.hardEdge,
-                          child: Column(
-                            children: [
-
-                              AppBarX(
-                                title: 'Przygotowanie materiału',
-                                iconTheme: IconThemeData(color: iconEnab_(context)),
-                                titleTextStyle: AppTextStyle(
-                                    color: iconEnab_(context),
-                                    fontSize: Dimen.textSizeAppBar
-                                ),
-                              ),
-
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  padding: const EdgeInsets.all(Dimen.sideMarg),
-                                  child: AppText(
-                                    material.additionalPreparation!,
-                                    size: Dimen.textSizeBig,
-                                  ),
-                                ),
-                              )
-
-                            ],
-                          ),
-                        ),
-                      )
-                    )
-                  )
+                context: context,
+                builder: (context) => Padding(
+                  padding: const EdgeInsets.all(Dimen.sideMarg),
+                  child: Center(
+                    child: AppDialog(
+                      title: 'Przygotowanie materiału',
+                      closable: true,
+                      scrollable: true,
+                      maxWidth: maxDialogWidth,
+                      child: AppText(
+                        material.additionalPreparation!,
+                        size: Dimen.textSizeBig,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
 

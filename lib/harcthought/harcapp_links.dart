@@ -1,5 +1,7 @@
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan.dart';
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan_persistent_folder.dart';
+import 'package:harcapp_core/harcthought/articles/model/article.dart';
+import 'package:harcapp_core/harcthought/articles/model/article_source.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/harc_forms/harc_form.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
@@ -36,6 +38,10 @@ class HarcappLinks {
   static const String apelEwanFolderTemplate = '/rozwazania_ewangeliczne/:folder';
   static const String apelEwanItemTemplate = '/rozwazania_ewangeliczne/:folder/:apel';
 
+  static const String articleListTemplate = '/articles';
+  static const String articleSourceListTemplate = '/articles/:source';
+  static const String articleItemTemplate = '/articles/:source/:localId';
+
   // Short forms (reserved — not yet wired up).
   static const String poradnikItemTemplateShort = '/p/:name';
   static const String poradnikItemFileTemplateShort = '/p/:name/:ext';
@@ -43,6 +49,7 @@ class HarcappLinks {
   static const String formaItemTemplateShort = '/f/:filename';
   static const String apelEwanFolderTemplateShort = '/r/:folder';
   static const String apelEwanItemTemplateShort = '/r/:folder/:apel';
+  static const String articleItemTemplateShort = '/a/:source/:localId';
 
   // ---------------- go_router path helpers ----------------
   // Web router has separate routes per KonspektCategory; these helpers fill
@@ -89,6 +96,11 @@ class HarcappLinks {
     return '$baseUrl${_fill(tpl, {'folder': folderSlug, 'apel': apelDirName})}';
   }
 
+  static String article(ArticleSource source, String localId, {bool short = false}) {
+    final tpl = short ? articleItemTemplateShort : articleItemTemplate;
+    return '$baseUrl${_fill(tpl, {'source': source.name, 'localId': localId})}';
+  }
+
   static String poradnikOf(Poradnik p, {bool short = false}) =>
       poradnik(p.name, short: short);
 
@@ -106,6 +118,9 @@ class HarcappLinks {
 
   static String apelEwanItemOf(ApelEwanPersistentFolder f, ApelEwan apel, {bool short = false}) =>
       apelEwanItem(f.slug, apel.dirName, short: short);
+
+  static String articleOf(CoreArticle a, {bool short = false}) =>
+      article(a.source, a.localId, short: short);
 
   // ---------------- Parser ----------------
   /// Parse any harcapp.web.app URL (long or short form) into a typed link.
@@ -159,6 +174,17 @@ class HarcappLinks {
       return null;
     }
 
+    // Article: /articles/:source/:localId or /a/:source/:localId.
+    if (segs[0] == 'articles' || segs[0] == 'a') {
+      if (segs.length == 3) {
+        final source = ArticleSource.fromName(segs[1]);
+        if (source != null) {
+          return ArticleLink(source: source, localId: segs[2]);
+        }
+      }
+      return null;
+    }
+
     return null;
   }
 
@@ -195,4 +221,10 @@ class FormaLink extends HarcappLink {
 class ApelEwanFolderLink extends HarcappLink {
   final String slug;
   const ApelEwanFolderLink({required this.slug});
+}
+
+class ArticleLink extends HarcappLink {
+  final ArticleSource source;
+  final String localId;
+  const ArticleLink({required this.source, required this.localId});
 }
