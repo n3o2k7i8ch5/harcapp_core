@@ -103,42 +103,6 @@ const String rozwazanie_ewangeliczne_html_przebieg_praktyczny =
     '</ol>';
 
 
-/// Treść kroku 1 - wprowadzenie do formy i rozdanie kartek.
-const String rozwazanie_ewangeliczne_html_step_wprowadzenie =
-    '<p style="text-align:justify;">'
-    'Drużyna dzieli się na <b>zastępy</b>. Opiekun zastępu krótko tłumaczy uczestnikom, na czym polega forma i jak będzie przebiegać, a następnie rozdaje każdemu harcerzowi kartkę z fragmentem Ewangelii oraz z pytaniami pomocniczymi.'
-    '</p>';
-
-/// Treść kroku 2 - indywidualna refleksja nad fragmentem.
-const String rozwazanie_ewangeliczne_html_step_indywidualna_refleksja =
-    '<p style="text-align:justify;">'
-    'Każdy z uczestników <b>indywidualnie</b> czyta fragment Ewangelii i odpowiada sobie na załączone pytania pomocnicze - może swobodnie zapisywać swoje myśli na kartce. W tym czasie zastęp pracuje w ciszy.'
-    '<br>'
-    '<br>Również opiekun bierze udział w refleksji.'
-    '</p>';
-
-/// Treść kroku 3 - wspólne dzielenie się przemyśleniami w zastępie.
-const String rozwazanie_ewangeliczne_html_step_dzielenie_sie =
-    '<p style="text-align:justify;">'
-    'Po wyznaczonym czasie zastęp zbiera się razem. Tę część <b>animuje opiekun zastępu</b> (członek kadry lub zastępowy):'
-    '</p>'
-    '<ul>'
-    '<li><p style="text-align:justify;">stwarza każdemu przestrzeń, by się wypowiedział,</p></li>'
-    '<li><p style="text-align:justify;">nie kwestionuje ani nie ocenia tego, co mówią uczestnicy - może natomiast „z wyczuciem” o coś dopytać.</p></li>'
-    '</ul>'
-    '<p style="text-align:justify;">'
-    'Każdy może (ale nie musi) podzielić się swoimi przemyśleniami - <b>bez presji</b>. Gdy każdy chętny się wypowie, może wywiązać się dalsza, swobodna rozmowa.'
-    '<br>'
-    '<br><b>Wszystko, co zostało powiedziane podczas Rozważania ewangelicznego, zostaje w zastępie!</b>'
-    '</p>';
-
-/// Treść kroku 4 - wspólna, krótka modlitwa kończąca formę.
-const String rozwazanie_ewangeliczne_html_step_modlitwa =
-    '<p style="text-align:justify;">'
-    'Zastęp może się krótko, wspólnie pomodlić - własnymi słowami lub np. modlitwą <i>„Ojcze nasz”</i>.'
-    '</p>';
-
-
 Konspekt rozwazanie_ewangeliczne = const Konspekt(
     name: konspekt_harc_name_rozwazanie_ewangeliczne,
     title: konspekt_harc_title_rozwazanie_ewangeliczne,
@@ -207,43 +171,53 @@ Konspekt rozwazanie_ewangeliczne = const Konspekt(
         '$rozwazanie_ewangeliczne_html_dla_calej_druzyny'
         '$rozwazanie_ewangeliczne_html_kiedy_przeprowadzic'
         '<p style="text-align:justify;"><b>Przygotowanie</b></p>'
-        '$rozwazanie_ewangeliczne_html_przygotowanie_materialy'
-        '$rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie'
-        '$rozwazanie_ewangeliczne_html_przygotowanie_miejsce',
+        '<ol>'
+        '<li>$rozwazanie_ewangeliczne_html_przygotowanie_materialy</li>'
+        '<li>$rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie</li>'
+        '<li>$rozwazanie_ewangeliczne_html_przygotowanie_miejsce</li>'
+        '</ol>'
+        '$rozwazanie_ewangeliczne_html_ewaluacja'
+        '$rozwazanie_ewangeliczne_html_zrodla_w_aplikacji',
     steps: [
 
       KonspektStep(
         title: 'Wprowadzenie i rozdanie kartek',
         duration: Duration(minutes: 5),
         activeForm: KonspektStepActiveForm.static,
-        content: rozwazanie_ewangeliczne_html_step_wprowadzenie,
+        content: '<p style="text-align:justify;">Drużyna dzieli się na <b>zastępy</b>. Opiekun zastępu krótko tłumaczy uczestnikom, na czym polega forma i jak będzie przebiegać, a następnie rozdaje każdemu harcerzowi kartkę z fragmentem Ewangelii oraz z pytaniami pomocniczymi.</p>',
       ),
 
       KonspektStep(
         title: 'Indywidualna refleksja',
         duration: Duration(minutes: 15),
         activeForm: KonspektStepActiveForm.static,
-        content: rozwazanie_ewangeliczne_html_step_indywidualna_refleksja,
+        content: '<p style="text-align:justify;">Każdy z uczestników <b>indywidualnie</b> czyta fragment Ewangelii i odpowiada sobie na załączone pytania pomocnicze - może swobodnie zapisywać swoje myśli na kartce. W tym czasie zastęp pracuje w ciszy.'
+            '<br>'
+            '<br>Również opiekun bierze udział w refleksji.</p>',
       ),
 
       KonspektStep(
         title: 'Wspólne dzielenie się w zastępie',
         duration: Duration(minutes: 20),
         activeForm: KonspektStepActiveForm.static,
-        content: rozwazanie_ewangeliczne_html_step_dzielenie_sie,
+        content: '<p style="text-align:justify;">Po wyznaczonym czasie zastęp zbiera się razem. Tę część <b>animuje opiekun zastępu</b> (członek kadry lub zastępowy):</p>'
+            '<ul>'
+            '<li><p style="text-align:justify;">stwarza każdemu przestrzeń, by się wypowiedział,</p></li>'
+            '<li><p style="text-align:justify;">nie kwestionuje ani nie ocenia tego, co mówią uczestnicy - może natomiast „z wyczuciem” o coś dopytać.</p></li>'
+            '</ul>'
+            '<p style="text-align:justify;">Każdy może (ale nie musi) podzielić się swoimi przemyśleniami - <b>bez presji</b>. Gdy każdy chętny się wypowie, może wywiązać się dalsza, swobodna rozmowa.'
+            '<br>'
+            '<br><b>Wszystko, co zostało powiedziane podczas Rozważania ewangelicznego, zostaje w zastępie!</b></p>',
       ),
 
       KonspektStep(
         title: 'Wspólna modlitwa',
         duration: Duration(minutes: 5),
         activeForm: KonspektStepActiveForm.static,
-        content: rozwazanie_ewangeliczne_html_step_modlitwa,
+        content: '<p style="text-align:justify;">Zastęp może się krótko, wspólnie pomodlić - własnymi słowami lub np. modlitwą <i>„Ojcze nasz”</i>.</p>',
       ),
 
     ],
-    description:
-        '$rozwazanie_ewangeliczne_html_ewaluacja'
-        '$rozwazanie_ewangeliczne_html_zrodla_w_aplikacji',
     howToFail: [
       'Zmusić opiekuna zastępu do prowadzenia formy, jeśli ten nie chce.',
       'Kwestionować, podważać lub oceniać przemyślenia uczestników.',
