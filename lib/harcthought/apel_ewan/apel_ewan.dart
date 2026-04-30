@@ -1,3 +1,5 @@
+import 'package:harcapp_core/song_book/contributor_identity.dart';
+
 class ApelEwanVariant{
 
   final String title;
@@ -24,11 +26,16 @@ class ApelEwan{
   /// [shortTitle], [questions] and [comment].
   final Map<String, ApelEwanVariant> variants;
   final Set<String> folders;
+  /// Who added this apel ewangeliczne to the app. At least one of
+  /// [ContributorIdentity.name] / [ContributorIdentity.emailRef] /
+  /// [ContributorIdentity.userKeyRef] must be set.
+  final ContributorIdentity addedBy;
 
   const ApelEwan({
     required this.dirName,
     required this.siglum,
     required this.text,
+    required this.addedBy,
     this.variants = const {},
     this.folders = const {},
   });

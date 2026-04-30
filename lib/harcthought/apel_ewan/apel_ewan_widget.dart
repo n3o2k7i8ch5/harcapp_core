@@ -3,10 +3,26 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
+import 'package:harcapp_core/comm_widgets/person_card.dart';
+import 'package:harcapp_core/song_book/contributor_identity.dart';
 import 'package:harcapp_core/values/dimen.dart';
+import 'package:harcapp_core/values/people/person.dart';
+import 'package:harcapp_core/values/people/utils.dart';
 
 import 'apel_ewan.dart';
 import 'apel_ewan_category_selector.dart';
+
+String _addedByLabel(ContributorIdentity identity) {
+  if (identity.name != null && identity.name!.trim().isNotEmpty) return identity.name!.trim();
+  if (identity.emailRef != null && identity.emailRef!.trim().isNotEmpty) return identity.emailRef!.trim();
+  return identity.userKeyRef!.trim();
+}
+
+Person? _personFor(ContributorIdentity identity) {
+  final email = identity.emailRef?.trim();
+  if (email == null || email.isEmpty) return null;
+  return allPeopleByEmailMap[email];
+}
 
 class ApelEwanWidget extends StatefulWidget{
 
@@ -228,6 +244,37 @@ class ApelEwanWidgetState extends State<ApelEwanWidget>{
 
         if(hasComment || hasQuestions)
           const SizedBox(height: Dimen.sideMarg),
+
+        Material(
+          clipBehavior: Clip.hardEdge,
+          color: cardEnab_(context),
+          borderRadius: BorderRadius.circular(AppCard.bigRadius),
+          child: Padding(
+            padding: const EdgeInsets.all(Dimen.sideMarg),
+            child: Builder(builder: (context) {
+              final person = _personFor(apelEwan.addedBy);
+              final labelStyle = AppTextStyle(
+                fontSize: Dimen.textSizeNormal,
+                color: hintEnab_(context),
+              );
+              if (person != null)
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text('Dodał:', style: labelStyle),
+                    const SizedBox(height: Dimen.defMarg),
+                    PersonCard(person, selectable: true),
+                  ],
+                );
+              return Text(
+                'Dodał: ${_addedByLabel(apelEwan.addedBy)}',
+                style: labelStyle,
+              );
+            }),
+          ),
+        ),
+
+        const SizedBox(height: Dimen.sideMarg),
 
       ],
     );

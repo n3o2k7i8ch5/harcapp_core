@@ -133,7 +133,12 @@ class AppDialog extends StatelessWidget{
 
         scrollable
         ? Flexible(child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: appDialogDefMargin),
+          padding: EdgeInsets.fromLTRB(
+            appDialogDefMargin,
+            0,
+            appDialogDefMargin,
+            buttons.isEmpty ? appDialogDefMargin : 0,
+          ),
           child: child)
         )
         : Padding(
@@ -142,7 +147,8 @@ class AppDialog extends StatelessWidget{
         ),
 
         if(buttons.isEmpty)
-          SizedBox(height: appDialogDefMargin)
+          if(!scrollable) SizedBox(height: appDialogDefMargin)
+          else const SizedBox.shrink()
         else
           actionButtonsExpanded?
           paddedActionButtons:
