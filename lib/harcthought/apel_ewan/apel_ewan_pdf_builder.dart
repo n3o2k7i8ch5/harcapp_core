@@ -108,6 +108,18 @@ Future<Uint8List> buildApelEwanPdf({
     pw.MultiPage page = pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
 
+        footer: (context) => pw.Padding(
+          padding: const pw.EdgeInsets.only(top: 6.0),
+          child: pw.Text(
+            'Rozważanie ewangeliczne z aplikacji HarcApp',
+            style: pw.TextStyle(
+              font: font,
+              fontSize: 11.0,
+              color: PdfColors.grey,
+            ),
+          ),
+        ),
+
         build: (pw.Context pwContext) => [
 
           pw.Text(title, style: pw.TextStyle(font: font, fontSize: 22.0)),

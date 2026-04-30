@@ -17,10 +17,10 @@ const String rozwazanie_ewangeliczne_html_opis_ogolny =
     '</p>';
 
 /// Dla jakich metodyk forma jest przygotowywana - z podziałem na dwie grupy wiekowe.
+const String rozwazanie_ewangeliczne_html_title_dla_jakich_metodyk = '<p style="text-align:justify;"><b>Dla jakich metodyk?</b></p>';
 const String rozwazanie_ewangeliczne_html_dla_jakich_metodyk =
-    '<p style="text-align:justify;"><b>Dla jakich metodyk?</b>'
-    '<br>'
-    '<br>Pytania pomocnicze są przygotowywane osobno dla dwóch grup wiekowych:'
+    '<p style="text-align:justify;">'
+    'Pytania pomocnicze są przygotowywane osobno dla dwóch grup wiekowych:'
     '</p>'
     '<ul>'
     '<li><p style="text-align:justify;">dla <b>młodszych</b> - metodyki <i>zuchowa</i> i <i>harcerska</i>,</p></li>'
@@ -28,31 +28,34 @@ const String rozwazanie_ewangeliczne_html_dla_jakich_metodyk =
     '</ul>';
 
 /// Czy formę można zaproponować całej drużynie - również osobom poszukującym.
+const String rozwazanie_ewangeliczne_html_title_dla_calej_druzyny = '<p style="text-align:justify;"><b>Czy formę można zaproponować całej drużynie?</b></p>';
 const String rozwazanie_ewangeliczne_html_dla_calej_druzyny =
-    '<p style="text-align:justify;"><b>Czy formę można zaproponować całej drużynie?</b>'
-    '<br>'
-    '<br>Tak. Dla osób wychowywanych w wierze chrześcijańskiej jest to okazja do pogłębienia znajomości Pisma Świętego, relacji z Bogiem oraz przygotowania do głębszego przeżycia <b>Mszy Świętej</b> w daną niedzielę. Osoby poszukujące znajdą w niej okazję do refleksji nad postawami i wartościami, które ukształtowały naszą kulturę i cywilizację.'
+    '<p style="text-align:justify;">'
+    'Tak. Dla osób wychowywanych w wierze chrześcijańskiej jest to okazja do pogłębienia znajomości Pisma Świętego, relacji z Bogiem oraz przygotowania do głębszego przeżycia <b>Mszy Świętej</b> w daną niedzielę. Osoby poszukujące znajdą w niej okazję do refleksji nad postawami i wartościami, które ukształtowały naszą kulturę i cywilizację.'
     '</p>';
 
 /// Sugerowany moment przeprowadzenia formy.
+const String rozwazanie_ewangeliczne_html_title_kiedy_przeprowadzic = '<p style="text-align:justify;"><b>Kiedy przeprowadzić?</b></p>';
 const String rozwazanie_ewangeliczne_html_kiedy_przeprowadzic =
-    '<p style="text-align:justify;"><b>Kiedy przeprowadzić?</b>'
-    '<br>'
-    '<br>Formę najlepiej przeprowadzić w niedzielę przed Mszą lub w sobotę wieczorem. Sprawdza się ona także w trakcie roku harcerskiego - przy ognisku, czy na biwaku.'
+    '<p style="text-align:justify;">'
+    'Formę najlepiej przeprowadzić w niedzielę przed Mszą lub w sobotę wieczorem. Sprawdza się ona także w trakcie roku harcerskiego - przy ognisku, czy na biwaku.'
     '</p>';
 
+/// Tytuł sekcji "Przygotowanie" - obejmuje materiały, opiekunów i miejsce.
+const String rozwazanie_ewangeliczne_html_title_przygotowanie = '<p style="text-align:justify;"><b>Przygotowanie</b></p>';
+
 /// Materiały, które należy przygotować przed przeprowadzeniem formy.
+const String rozwazanie_ewangeliczne_html_title_przygotowanie_materialy = '<p style="text-align:justify;"><b>Materiały</b></p>';
 const String rozwazanie_ewangeliczne_html_przygotowanie_materialy =
-    '<p style="text-align:justify;"><b>Materiały</b>'
-    '<br>'
-    '<br>Rozważanie ewangeliczne należy wcześniej <b>wydrukować - po jednym egzemplarzu na uczestnika</b>. Pytania trzeba dobrać do grupy wiekowej (młodsi: zuch + harc; starsi: HS + wędro).'
+    '<p style="text-align:justify;">'
+    'Rozważanie ewangeliczne należy wcześniej <b>wydrukować - po jednym egzemplarzu na uczestnika</b>. Pytania trzeba dobrać do grupy wiekowej (młodsi: zuch + harc; starsi: HS + wędro).'
     '</p>';
 
 /// Zasady doboru i pracy opiekunów zastępów prowadzących Rozważanie ewangeliczne.
+const String rozwazanie_ewangeliczne_html_title_przygotowanie_opiekunowie = '<p style="text-align:justify;"><b>Opiekunowie zastępów</b></p>';
 const String rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie =
-    '<p style="text-align:justify;"><b>Opiekunowie zastępów</b>'
-    '<br>'
-    '<br>Każdy zastęp w ramach tej formy powinien mieć swojego opiekuna - może to być ktoś z kadry lub zastępowy. Opiekunów warto wcześniej przygotować, np. przeprowadzając z nimi „na rozgrzewkę” dowolne Rozważanie ewangeliczne, by poczuli się w roli swobodnie.'
+    '<p style="text-align:justify;">'
+    'Każdy zastęp w ramach tej formy powinien mieć swojego opiekuna - może to być ktoś z kadry lub zastępowy. Opiekunów warto wcześniej przygotować, np. przeprowadzając z nimi „na rozgrzewkę” dowolne Rozważanie ewangeliczne, by poczuli się w roli swobodnie.'
     '<br>'
     '<br><b>Zasady dla opiekunów:</b>'
     '</p>'
@@ -66,17 +69,17 @@ const String rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie =
     '</ul>';
 
 /// Wskazówki dotyczące miejsca i atmosfery przeprowadzenia formy.
+const String rozwazanie_ewangeliczne_html_title_przygotowanie_miejsce = '<p style="text-align:justify;"><b>Miejsce i atmosfera</b></p>';
 const String rozwazanie_ewangeliczne_html_przygotowanie_miejsce =
-    '<p style="text-align:justify;"><b>Miejsce i atmosfera</b>'
-    '<br>'
-    '<br>Odpowiedni czas, miejsce i komfort są kluczowe. Warto zadbać o spokojne miejsce i ciszę - może sprzyjający refleksji piękny widok na jezioro lub leśna polana?'
+    '<p style="text-align:justify;">'
+    'Odpowiedni czas, miejsce i komfort są kluczowe. Warto zadbać o spokojne miejsce i ciszę - może sprzyjający refleksji piękny widok na jezioro lub leśna polana?'
     '</p>';
 
 /// Pytania ewaluacyjne, które warto zadać po przeprowadzeniu formy.
+const String rozwazanie_ewangeliczne_html_title_ewaluacja = '<p style="text-align:justify;"><b>Ewaluacja</b></p>';
 const String rozwazanie_ewangeliczne_html_ewaluacja =
-    '<p style="text-align:justify;"><b>Ewaluacja</b>'
-    '<br>'
-    '<br>Po przeprowadzeniu formy warto sprawdzić z opiekunami, czy wszystko gra:'
+    '<p style="text-align:justify;">'
+    'Po przeprowadzeniu formy warto sprawdzić z opiekunami, czy wszystko gra:'
     '</p>'
     '<ul>'
     '<li><p style="text-align:justify;">Jak opiekunowie odnajdują się w przeprowadzaniu formy?</p></li>'
@@ -93,8 +96,8 @@ const String rozwazanie_ewangeliczne_html_zrodla_w_aplikacji =
 
 /// Krótkie streszczenie 4 kroków przebiegu formy w jednym bloku HTML.
 /// Używane do zwięzłego opisu w innych miejscach (sam konspekt korzysta z rozbudowanych [steps]).
+const String rozwazanie_ewangeliczne_html_title_przebieg_praktyczny = '<p style="text-align:justify;"><b>Jak przeprowadzić to w praktyce?</b></p>';
 const String rozwazanie_ewangeliczne_html_przebieg_praktyczny =
-    '<p style="text-align:justify;"><b>Jak przeprowadzić to w praktyce?</b></p>'
     '<ol>'
     '<li><p style="text-align:justify;">W <b>zastępach</b> każdy harcerz otrzymuje kartkę z fragmentem Ewangelii oraz z pytaniami pomocniczymi.</p></li>'
     '<li><p style="text-align:justify;">Harcerze mają indywidualnie <b>10-15 minut</b> na przeczytanie fragmentu i refleksję nad pytaniami - mogą zapisywać swoje myśli.</p></li>'
@@ -104,19 +107,22 @@ const String rozwazanie_ewangeliczne_html_przebieg_praktyczny =
 
 
 const String rozwEwanStandaloneDescription = '$rozwazanie_ewangeliczne_html_opis_ogolny'
+    '$rozwazanie_ewangeliczne_html_title_dla_jakich_metodyk'
     '$rozwazanie_ewangeliczne_html_dla_jakich_metodyk'
     '<br>'
+    '$rozwazanie_ewangeliczne_html_title_dla_calej_druzyny'
     '$rozwazanie_ewangeliczne_html_dla_calej_druzyny'
     '<br>'
+    '$rozwazanie_ewangeliczne_html_title_kiedy_przeprowadzic'
     '$rozwazanie_ewangeliczne_html_kiedy_przeprowadzic'
-    '<p style="text-align:justify;"><b>Przygotowanie</b></p>'
+    '$rozwazanie_ewangeliczne_html_title_przygotowanie'
     '<ol>'
-    '<li>$rozwazanie_ewangeliczne_html_przygotowanie_materialy</li>'
-    '<li>$rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie</li>'
-    '<li>$rozwazanie_ewangeliczne_html_przygotowanie_miejsce</li>'
+    '<li>$rozwazanie_ewangeliczne_html_title_przygotowanie_materialy$rozwazanie_ewangeliczne_html_przygotowanie_materialy</li>'
+    '<li>$rozwazanie_ewangeliczne_html_title_przygotowanie_opiekunowie$rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie</li>'
+    '<li>$rozwazanie_ewangeliczne_html_title_przygotowanie_miejsce$rozwazanie_ewangeliczne_html_przygotowanie_miejsce</li>'
     '</ol>'
-    '$rozwazanie_ewangeliczne_html_ewaluacja'
-    '$rozwazanie_ewangeliczne_html_zrodla_w_aplikacji';
+    '$rozwazanie_ewangeliczne_html_title_ewaluacja'
+    '$rozwazanie_ewangeliczne_html_ewaluacja';
 
 
 Konspekt rozwazanie_ewangeliczne = const Konspekt(
@@ -183,17 +189,18 @@ Konspekt rozwazanie_ewangeliczne = const Konspekt(
     summary: 'Uczestnicy w zastępach indywidualnie czytają krótki fragment Ewangelii i odpowiadają na pytania pomocnicze, a następnie wspólnie - w atmosferze zaufania - dzielą się swoimi przemyśleniami i kończą krótką modlitwą.',
     intro:
         '$rozwazanie_ewangeliczne_html_opis_ogolny'
+        '$rozwazanie_ewangeliczne_html_title_dla_jakich_metodyk'
         '$rozwazanie_ewangeliczne_html_dla_jakich_metodyk'
+        '$rozwazanie_ewangeliczne_html_title_dla_calej_druzyny'
         '$rozwazanie_ewangeliczne_html_dla_calej_druzyny'
+        '$rozwazanie_ewangeliczne_html_title_kiedy_przeprowadzic'
         '$rozwazanie_ewangeliczne_html_kiedy_przeprowadzic'
-        '<p style="text-align:justify;"><b>Przygotowanie</b></p>'
+        '$rozwazanie_ewangeliczne_html_title_przygotowanie'
         '<ol>'
-        '<li>$rozwazanie_ewangeliczne_html_przygotowanie_materialy</li>'
-        '<li>$rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie</li>'
-        '<li>$rozwazanie_ewangeliczne_html_przygotowanie_miejsce</li>'
-        '</ol>'
-        '$rozwazanie_ewangeliczne_html_ewaluacja'
-        '$rozwazanie_ewangeliczne_html_zrodla_w_aplikacji',
+        '<li>$rozwazanie_ewangeliczne_html_title_przygotowanie_materialy$rozwazanie_ewangeliczne_html_przygotowanie_materialy</li>'
+        '<li>$rozwazanie_ewangeliczne_html_title_przygotowanie_opiekunowie$rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie</li>'
+        '<li>$rozwazanie_ewangeliczne_html_title_przygotowanie_miejsce$rozwazanie_ewangeliczne_html_przygotowanie_miejsce</li>'
+        '</ol>',
     steps: [
 
       KonspektStep(

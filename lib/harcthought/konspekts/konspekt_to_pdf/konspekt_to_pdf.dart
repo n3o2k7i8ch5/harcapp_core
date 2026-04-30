@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/comm_classes/storage.dart';
+import 'package:harcapp_core/harcthought/harcapp_links.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt_to_pdf/spheres_widget.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt_to_pdf/steps_widget.dart';
@@ -442,25 +443,43 @@ Future<Uint8List> konspektToPdf(
           build: (context) => multiPage,
           footer: (context) => Padding(
             padding: EdgeInsets.only(top: 6.0),
-            child: Row(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Konspekt z aplikacji HarcApp',
-                    style: TextStyle(
-                      font: font,
-                      fontSize: defTextSize,
-                      color: PdfColors.grey,
+                  Row(
+                      children: [
+                        Text(
+                          'Konspekt z aplikacji HarcApp',
+                          style: TextStyle(
+                            font: font,
+                            fontSize: defTextSize,
+                            color: PdfColors.grey,
+                          ),
+                        ),
+                        Expanded(child: Container()),
+                        Text(
+                          'Strona ${context.pageNumber} z ${context.pagesCount}',
+                          style: TextStyle(
+                            font: font,
+                            fontSize: defTextSize,
+                            color: PdfColors.grey,
+                          ),
+                        )
+                      ]
+                  ),
+                  SizedBox(height: 2.0),
+                  UrlLink(
+                    destination: HarcappLinks.konspektOf(konspekt, short: true),
+                    child: Text(
+                      HarcappLinks.konspektOf(konspekt, short: true),
+                      style: TextStyle(
+                        font: font,
+                        fontSize: defTextSize,
+                        color: PdfColors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
-                  Expanded(child: Container()),
-                  Text(
-                    'Strona ${context.pageNumber} z ${context.pagesCount}',
-                    style: TextStyle(
-                      font: font,
-                      fontSize: defTextSize,
-                      color: PdfColors.grey,
-                    ),
-                  )
                 ]
             )
           ),
