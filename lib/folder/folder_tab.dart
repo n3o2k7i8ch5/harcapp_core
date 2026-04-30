@@ -40,27 +40,30 @@ class FolderBaseTab extends StatelessWidget implements PreferredSizeWidget{
 
 class FolderTwoLineTab extends StatelessWidget implements PreferredSizeWidget{
 
-  final String? text;
+  final Widget? leading;
+  final String text;
   final String? subText;
   final CrossAxisAlignment textAlignment;
-  final TextStyle? countTextStyle;
+  final TextStyle? subTextStyle;
 
   const FolderTwoLineTab({
-    this.text,
+    this.leading,
+    required this.text,
     this.subText,
     this.textAlignment = CrossAxisAlignment.start,
-    this.countTextStyle,
+    this.subTextStyle,
     super.key
   });
 
   @override
   Widget build(BuildContext context) => FolderBaseTab(
+    leading: leading,
     textWidget: Column(
         crossAxisAlignment: textAlignment,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(text!, style: const AppTextStyle(fontWeight: weightHalfBold)),
-          if(subText!=null) Text(subText!, style: const AppTextStyle()),
+          Text(text, style: const AppTextStyle(fontWeight: weightHalfBold)),
+          if(subText!=null) Text(subText!, style: subTextStyle ?? const AppTextStyle()),
         ]
     ),
   );
@@ -89,17 +92,12 @@ class FolderTab extends StatelessWidget implements PreferredSizeWidget{
   });
 
   @override
-  Widget build(BuildContext context) => FolderBaseTab(
+  Widget build(BuildContext context) => FolderTwoLineTab(
     leading: FolderIcon(iconKey, colorsKey),
     text: folderName,
-    textWidget: Column(
-        crossAxisAlignment: textAlignment,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(folderName, style: const AppTextStyle(fontWeight: weightHalfBold)),
-          Text(countText, style: countTextStyle ?? const AppTextStyle()),
-        ]
-    ),
+    subText: countText,
+    textAlignment: textAlignment,
+    subTextStyle: countTextStyle,
   );
 
   @override
