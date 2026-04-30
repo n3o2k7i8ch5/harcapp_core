@@ -42,20 +42,24 @@ class FolderTwoLineTab extends StatelessWidget implements PreferredSizeWidget{
 
   final String? text;
   final String? subText;
+  final CrossAxisAlignment textAlignment;
+  final TextStyle? countTextStyle;
 
   const FolderTwoLineTab({
     this.text,
     this.subText,
+    this.textAlignment = CrossAxisAlignment.start,
+    this.countTextStyle,
     super.key
   });
 
   @override
   Widget build(BuildContext context) => FolderBaseTab(
     textWidget: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: textAlignment,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(text!, style: const AppTextStyle(fontWeight: weightBold)),
+          Text(text!, style: const AppTextStyle(fontWeight: weightHalfBold)),
           if(subText!=null) Text(subText!, style: const AppTextStyle()),
         ]
     ),
