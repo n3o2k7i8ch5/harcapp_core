@@ -11,6 +11,13 @@ import 'package:harcapp_core/logger.dart';
 // This is a stateful widget for a reason. It's to prevent re-loading the image.
 class ArticleCoverWidget extends StatelessWidget {
 
+  /// Optional override for cover rendering, used by web builds where
+  /// HTTP fetches of cross-origin images are blocked by browser CORS and the
+  /// only viable path is to embed a native `<img>` tag through `HtmlElementView`.
+  /// When set, this builder fully replaces the default rendering for any
+  /// article (the builder is responsible for resolving the URL itself).
+  static Widget Function(CoreArticle article, bool big)? coverBuilderOverride;
+
   final CoreArticle article;
   final Key? fallbackCoverKey;
   final bool bigResolution;
@@ -24,17 +31,21 @@ class ArticleCoverWidget extends StatelessWidget {
       });
 
   @override
-  Widget build(BuildContext context) =>
-  !loadWebImage || article.imageUrl == null?
-  _FallbackCoverWidget(article, key: fallbackCoverKey, big: bigResolution):
-  CachedNetworkImage(
-    imageUrl: article.imageUrl!,
-    placeholder: (context, url) => _LoadingWidget(),
-    errorWidget: (context, url, error){
-      logger.w('Error loading article cover from ${article.uniqName}: $error. Loading fallback cover.');
-      return _FallbackCoverWidget(article, big: bigResolution);
-    },
-  );
+  Widget build(BuildContext context) {
+    final override = coverBuilderOverride;
+    if (override != null) return override(article, bigResolution);
+
+    return !loadWebImage || article.imageUrl == null
+        ? _FallbackCoverWidget(article, key: fallbackCoverKey, big: bigResolution)
+        : CachedNetworkImage(
+            imageUrl: article.imageUrl!,
+            placeholder: (context, url) => _LoadingWidget(),
+            errorWidget: (context, url, error) {
+              logger.w('Error loading article cover from ${article.uniqName}: $error. Loading fallback cover.');
+              return _FallbackCoverWidget(article, big: bigResolution);
+            },
+          );
+  }
 
 }
 

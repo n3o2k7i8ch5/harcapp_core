@@ -18,6 +18,6 @@ Dio get defDio{
   return dio;
 }
 
-String corsProxy(String url) => 'https://corsproxy.io/' + Uri.encodeComponent(url);
+String corsProxy(String url) => 'https://corsproxy.io/?' + Uri.encodeComponent(url);
 
 String webCorsProxy(String url) => _isJs ? corsProxy(url) : url;
