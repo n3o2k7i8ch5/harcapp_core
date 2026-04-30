@@ -5,18 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/harcthought/articles/article_renderers.dart';
 import 'package:harcapp_core/harcthought/articles/model/article.dart';
 import 'package:harcapp_core/logger.dart';
 
 // This is a stateful widget for a reason. It's to prevent re-loading the image.
 class ArticleCoverWidget extends StatelessWidget {
-
-  /// Optional override for cover rendering, used by web builds where
-  /// HTTP fetches of cross-origin images are blocked by browser CORS and the
-  /// only viable path is to embed a native `<img>` tag through `HtmlElementView`.
-  /// When set, this builder fully replaces the default rendering for any
-  /// article (the builder is responsible for resolving the URL itself).
-  static Widget Function(CoreArticle article, bool big)? coverBuilderOverride;
 
   final CoreArticle article;
   final Key? fallbackCoverKey;
@@ -32,8 +26,8 @@ class ArticleCoverWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final override = coverBuilderOverride;
-    if (override != null) return override(article, bigResolution);
+    final coverBuilder = ArticleRenderers.maybeOf(context)?.coverBuilder;
+    if (coverBuilder != null) return coverBuilder(article);
 
     return !loadWebImage || article.imageUrl == null
         ? _FallbackCoverWidget(article, key: fallbackCoverKey, big: bigResolution)

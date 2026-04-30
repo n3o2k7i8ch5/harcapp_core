@@ -7,6 +7,7 @@ import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
+import 'package:harcapp_core/harcthought/articles/article_renderers.dart';
 import 'package:harcapp_core/harcthought/articles/model/common.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -154,35 +155,43 @@ class QuoteArticleElementWidget extends StatelessWidget{
 
 class PictureArticleElementWidget extends StatelessWidget{
 
-  static Widget getImage(String imgUrl) => CachedNetworkImage(
-    imageUrl: imgUrl,
-    placeholder: (context, _) => AspectRatio(
-      aspectRatio: 1,
-      child: Center(
-        child: SpinKitChasingDots(
-          size: Dimen.iconSize,
-          color: iconEnab_(context),
+  /// Renders an image at [imgUrl]. If an [ArticleRenderers] is wrapping the
+  /// caller's subtree, its `imageBuilder` takes over (e.g. on Flutter web
+  /// to bypass CORS by routing through a native `<img>` HtmlElementView).
+  /// Otherwise falls back to [CachedNetworkImage].
+  static Widget getImage(BuildContext context, String imgUrl) {
+    final imageBuilder = ArticleRenderers.maybeOf(context)?.imageBuilder;
+    if (imageBuilder != null) return imageBuilder(imgUrl);
+    return CachedNetworkImage(
+      imageUrl: imgUrl,
+      placeholder: (context, _) => AspectRatio(
+        aspectRatio: 1,
+        child: Center(
+          child: SpinKitChasingDots(
+            size: Dimen.iconSize,
+            color: iconEnab_(context),
+          ),
         ),
       ),
-    ),
-    errorWidget: (context, _, __) => AspectRatio(
-        aspectRatio: 1,
-        child: Padding(
-          padding: const EdgeInsets.all(Dimen.iconMarg),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+      errorWidget: (context, _, __) => AspectRatio(
+          aspectRatio: 1,
+          child: Padding(
+            padding: const EdgeInsets.all(Dimen.iconMarg),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
 
-              Icon(MdiIcons.close),
-              const SizedBox(height: Dimen.iconMarg),
-              Text(imgUrl),
+                Icon(MdiIcons.close),
+                const SizedBox(height: Dimen.iconMarg),
+                Text(imgUrl),
 
-            ],
-          ),
-        )
-    ),
-    fit: BoxFit.cover,
-  );
+              ],
+            ),
+          )
+      ),
+      fit: BoxFit.cover,
+    );
+  }
 
   final PictureArticleElement picture;
 
@@ -197,7 +206,7 @@ class PictureArticleElementWidget extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
 
-          getImage(picture.link),
+          getImage(context, picture.link),
 
           if(picture.desc != null && picture.desc!.isNotEmpty)
             Padding(
@@ -251,7 +260,7 @@ class YoutubeArticleElementWidget extends StatelessWidget{
 
 class CustomArticleElementWidget extends StatelessWidget{
 
-  static Widget getWidget(String html, String? fontFamily) => HtmlWidget(
+  static Widget getWidget(BuildContext context, String html, String? fontFamily) => HtmlWidget(
     html,
     textStyle: TextStyle(
       fontFamily: fontFamily,
@@ -262,12 +271,12 @@ class CustomArticleElementWidget extends StatelessWidget{
 
       if(element.localName == 'figure' && element.children.length == 1)
         return getWidget(
-            element.children[0].outerHtml, fontFamily
+            context, element.children[0].outerHtml, fontFamily
         );
 
       if(element.localName == 'img')
         return PictureArticleElementWidget.getImage(
-            element.attributes['src']??''
+            context, element.attributes['src']??''
         );
 
       return null;
@@ -287,7 +296,7 @@ class CustomArticleElementWidget extends StatelessWidget{
         clipBehavior: Clip.hardEdge,
         borderRadius: BorderRadius.circular(AppCard.defRadius),
         elevation: AppCard.bigElevation,
-        child: getWidget(item.html, fontFamily),
+        child: getWidget(context, item.html, fontFamily),
       )
   );
 }
