@@ -5,6 +5,7 @@ import 'package:rss_dart/domain/atom_item.dart';
 import 'article.dart';
 import 'article_data.dart';
 import 'article_source.dart';
+import 'zhr_cover_loader.dart';
 import 'zhr_utils.dart';
 
 mixin ArticleAzymutMixin on CoreArticle{
@@ -15,6 +16,6 @@ mixin ArticleAzymutMixin on CoreArticle{
 
   @override
   @protected
-  Future<(img.Image?, img.Image?)> downloadCover() async => ZHRUtils.downloadCover(link);
+  Future<(img.Image?, img.Image?)> downloadCover() async => downloadZhrCover(link);
 
 }

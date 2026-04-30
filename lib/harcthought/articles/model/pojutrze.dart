@@ -5,6 +5,7 @@ import 'package:image/image.dart' as img;
 import 'article.dart';
 import 'article_data.dart';
 import 'article_source.dart';
+import 'zhr_cover_loader.dart';
 import 'zhr_utils.dart';
 
 mixin ArticlePojutrzeMixin on CoreArticle{
@@ -15,6 +16,6 @@ mixin ArticlePojutrzeMixin on CoreArticle{
 
   @override
   @protected
-  Future<(img.Image?, img.Image?)> downloadCover() => ZHRUtils.downloadCover(link);
+  Future<(img.Image?, img.Image?)> downloadCover() => downloadZhrCover(link);
 
 }
