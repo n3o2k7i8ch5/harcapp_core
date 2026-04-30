@@ -13,9 +13,7 @@ const String konspekt_harc_html_rozwazanie_ewangeliczne = '<a href="$konspekt_ha
 /// Krótki, ogólny opis czym jest "Rozważanie ewangeliczne" (zwane też "apelem ewangelicznym").
 const String rozwazanie_ewangeliczne_html_opis_ogolny =
     '<p style="text-align:justify;">'
-    '<b>Rozważanie ewangeliczne</b> (zwane też <i>„apelem ewangelicznym”</i>) to krótka forma duchowa polegająca na wspólnym wysłuchaniu fragmentu <b>Ewangelii</b> i zatrzymaniu się nad jego treścią z pomocą prostych, praktycznych pytań pomocniczych.'
-    '<br>'
-    '<br>Forma sprawdza się zarówno na obozie (np. w niedzielę przed Mszą lub w sobotę wieczorem), jak i w trakcie roku harcerskiego - przy ognisku, na wyjeździe, przed zbiórką.'
+    '<b>Rozważanie ewangeliczne</b> (zwane też <i>„apelem ewangelicznym”</i>) to krótka forma duchowa polegająca na wspólnym wysłuchaniu fragmentu <b>Ewangelii</b> z pomocą prostych, praktycznych pytań.'
     '</p>';
 
 /// Dla jakich metodyk forma jest przygotowywana - z podziałem na dwie grupy wiekowe.
@@ -40,7 +38,7 @@ const String rozwazanie_ewangeliczne_html_dla_calej_druzyny =
 const String rozwazanie_ewangeliczne_html_kiedy_przeprowadzic =
     '<p style="text-align:justify;"><b>Kiedy przeprowadzić?</b>'
     '<br>'
-    '<br>Formę najlepiej przeprowadzić w niedzielę przed Mszą lub w sobotę wieczorem.'
+    '<br>Formę najlepiej przeprowadzić w niedzielę przed Mszą lub w sobotę wieczorem. Sprawdza się ona także w trakcie roku harcerskiego - przy ognisku, czy na biwaku.'
     '</p>';
 
 /// Materiały, które należy przygotować przed przeprowadzeniem formy.

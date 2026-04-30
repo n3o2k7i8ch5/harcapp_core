@@ -1700,6 +1700,9 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
   ),
 
 
+  rozwazanie_ewangeliczne,
+
+
   // Done
   const Konspekt(
       name: 'sad_nad_postawa',
@@ -2245,7 +2248,6 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
 
 
   // Done
-  rozwazanie_ewangeliczne,
   sznury_funkcje_stopnie,
   await uzaleznienia_behawioralne,
   warta_nocna,
