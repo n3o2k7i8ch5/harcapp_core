@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart' hide Element;
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-
 enum ArticleSource{
   harcApp,
   azymut,
@@ -39,8 +35,6 @@ enum ArticleSource{
       default: return null;
     }
   }
-
-  static Widget get icon => Icon(MdiIcons.bookOpenBlankVariant, size: 16.0);
 
 }
 

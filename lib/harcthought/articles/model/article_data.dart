@@ -1,9 +1,25 @@
-import 'article.dart';
 import 'article_identifier.dart';
 import 'article_source.dart';
 import 'common.dart';
 
 class ArticleData extends ArticleIdentifier{
+
+  static const String paramTitle = 'title';
+  static const String paramTags = 'tags';
+  static const String paramAuthor = 'author';
+  static const String paramDate = 'date';
+  static const String paramLink = 'link';
+
+  static const String paramImageUrl = 'imageUrl';
+  static const String paramImageSource = 'imageSource';
+  static const String paramAuthCode = 'authorCode';
+
+  static const String paramItems = 'items';
+  static const String paramOtherArtCores = 'other_art_cores';
+
+  static const String paramLiked = 'liked';
+  static const String paramBookmarked = 'bookmarked';
+  static const String paramSeen = 'seen';
 
   String get link => _link??"https://harcapp.web.app/article/${source.name}/$localId";
 
@@ -29,13 +45,13 @@ class ArticleData extends ArticleIdentifier{
 
   static ArticleData fromJsonMap(String localId, ArticleSource source, Map jsonMap) {
 
-    final String title = jsonMap[CoreArticle.paramTitle] as String;
-    final List<String> tags = ((jsonMap[CoreArticle.paramTags]??[]) as List).cast<String>();
-    final String author = jsonMap[CoreArticle.paramAuthor] as String;
-    final DateTime date = DateTime.parse(jsonMap[CoreArticle.paramDate] as String);
-    final String? link = jsonMap[CoreArticle.paramLink] as String?;
-    final String? imageUrl = jsonMap[CoreArticle.paramImageUrl] as String?;
-    final List<dynamic> items = jsonMap[CoreArticle.paramItems] as List<dynamic>;
+    final String title = jsonMap[ArticleData.paramTitle] as String;
+    final List<String> tags = ((jsonMap[ArticleData.paramTags]??[]) as List).cast<String>();
+    final String author = jsonMap[ArticleData.paramAuthor] as String;
+    final DateTime date = DateTime.parse(jsonMap[ArticleData.paramDate] as String);
+    final String? link = jsonMap[ArticleData.paramLink] as String?;
+    final String? imageUrl = jsonMap[ArticleData.paramImageUrl] as String?;
+    final List<dynamic> items = jsonMap[ArticleData.paramItems] as List<dynamic>;
 
     List<ArticleElement> articleElements = [];
     for(dynamic item in items){
@@ -61,13 +77,13 @@ class ArticleData extends ArticleIdentifier{
   }
 
   Map toJsonMap() => {
-    CoreArticle.paramTitle: title,
-    CoreArticle.paramTags: tags,
-    CoreArticle.paramAuthor: author,
-    CoreArticle.paramDate: date.toIso8601String(),
-    CoreArticle.paramLink: link,
-    CoreArticle.paramImageUrl: imageUrl,
-    CoreArticle.paramItems: articleElements.map((item) => item.toJsonObject()).toList()
+    ArticleData.paramTitle: title,
+    ArticleData.paramTags: tags,
+    ArticleData.paramAuthor: author,
+    ArticleData.paramDate: date.toIso8601String(),
+    ArticleData.paramLink: link,
+    ArticleData.paramImageUrl: imageUrl,
+    ArticleData.paramItems: articleElements.map((item) => item.toJsonObject()).toList()
   };
 
 }

@@ -103,6 +103,22 @@ const String rozwazanie_ewangeliczne_html_przebieg_praktyczny =
     '</ol>';
 
 
+const String rozwEwanStandaloneDescription = '$rozwazanie_ewangeliczne_html_opis_ogolny'
+    '$rozwazanie_ewangeliczne_html_dla_jakich_metodyk'
+    '<br>'
+    '$rozwazanie_ewangeliczne_html_dla_calej_druzyny'
+    '<br>'
+    '$rozwazanie_ewangeliczne_html_kiedy_przeprowadzic'
+    '<p style="text-align:justify;"><b>Przygotowanie</b></p>'
+    '<ol>'
+    '<li>$rozwazanie_ewangeliczne_html_przygotowanie_materialy</li>'
+    '<li>$rozwazanie_ewangeliczne_html_przygotowanie_opiekunowie</li>'
+    '<li>$rozwazanie_ewangeliczne_html_przygotowanie_miejsce</li>'
+    '</ol>'
+    '$rozwazanie_ewangeliczne_html_ewaluacja'
+    '$rozwazanie_ewangeliczne_html_zrodla_w_aplikacji';
+
+
 Konspekt rozwazanie_ewangeliczne = const Konspekt(
     name: konspekt_harc_name_rozwazanie_ewangeliczne,
     title: konspekt_harc_title_rozwazanie_ewangeliczne,
@@ -215,6 +231,13 @@ Konspekt rozwazanie_ewangeliczne = const Konspekt(
         duration: Duration(minutes: 5),
         activeForm: KonspektStepActiveForm.static,
         content: '<p style="text-align:justify;">Zastęp może się krótko, wspólnie pomodlić - własnymi słowami lub np. modlitwą <i>„Ojcze nasz”</i>.</p>',
+      ),
+
+      KonspektStep(
+          title: 'Ewaluacja',
+          duration: Duration.zero,
+          activeForm: KonspektStepActiveForm.static,
+          content: rozwazanie_ewangeliczne_html_ewaluacja,
       ),
 
     ],

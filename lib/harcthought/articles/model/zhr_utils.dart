@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:harcapp_core/comm_classes/dio.dart';
-import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:harcapp_core/harcthought/articles/model/article_source.dart';
 import 'package:html/dom.dart' as html_dom;
 import 'package:html/parser.dart';
@@ -126,7 +124,16 @@ abstract class ZHRUtils{
   }
 
   static Future<String> coverLinkFromHtmlLink(String link) async {
-    String? htmlFile = await downloadFile(link, webCors: true);
+    String? htmlFile;
+    try {
+      Response response = await defDio.get(
+        webCorsProxy(link),
+        options: Options(responseType: ResponseType.plain),
+      );
+      htmlFile = response.data as String?;
+    } catch (_) {
+      htmlFile = null;
+    }
     if(htmlFile == null) return '';
     String imageLink = htmlFile.split('<meta property="og:image" content="')[1];
     imageLink = imageLink.split('" />')[0];
@@ -134,7 +141,7 @@ abstract class ZHRUtils{
     return imageLink;
   }
 
-  static Future<(img.Image?, img.Image?)> _coverFromHtmlLink(String link) async{
+  static Future<(img.Image?, img.Image?)> downloadCover(String link) async {
     try{
       String imageLink = await coverLinkFromHtmlLink(link);
 
@@ -147,10 +154,6 @@ abstract class ZHRUtils{
     }catch(_){
       return (null, null);
     }
-  }
-
-  static Future<(img.Image?, img.Image?)> downloadCover(String link) async {
-    return await compute(_coverFromHtmlLink, link);
   }
 
 }

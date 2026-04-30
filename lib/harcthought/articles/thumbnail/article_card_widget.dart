@@ -7,6 +7,7 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/harcthought/articles/model/article.dart';
 import 'package:harcapp_core/harcthought/articles/model/article_source.dart';
+import 'package:harcapp_core/harcthought/articles/model/article_source_icon.dart';
 
 import 'article_cover_widget.dart';
 import 'article_info_widget.dart';
@@ -20,7 +21,7 @@ class ArticleCardWidget extends StatelessWidget{
   final void Function(
       BuildContext context,
       CoreArticle article
-  )? onTap;
+      )? onTap;
   final double radius;
   final EdgeInsets margin;
   final bool disableHeroTag;
@@ -54,31 +55,31 @@ class ArticleCardWidget extends StatelessWidget{
             children: [
 
               ArticleCoverWidget(
-                  fallbackCoverKey: fallbackCoverKey,
-                  article,
-                  bigResolution: true,
+                fallbackCoverKey: fallbackCoverKey,
+                article,
+                bigResolution: true,
               ),
 
               Positioned(
-                  top: Dimen.defMarg,
-                  left: Dimen.defMarg,
-                  child: Blur(
-                    borderRadius: BorderRadius.circular(AppCard.bigRadius),
-                    color: cardEnab_(context).withValues(alpha: .85),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: Dimen.defMarg, horizontal: Dimen.iconMarg),
-                      child: Row(
-                        children: [
-                          ArticleSource.icon,
-                          SizedBox(width: Dimen.defMarg),
-                          Text(
-                              article.source.displayName,
-                              style: AppTextStyle(fontWeight: weightHalfBold, color: iconEnab_(context))
-                          )
-                        ],
-                      ),
+                top: Dimen.defMarg,
+                left: Dimen.defMarg,
+                child: Blur(
+                  borderRadius: BorderRadius.circular(AppCard.bigRadius),
+                  color: cardEnab_(context).withValues(alpha: .85),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: Dimen.defMarg, horizontal: Dimen.iconMarg),
+                    child: Row(
+                      children: [
+                        articleSourceIcon,
+                        SizedBox(width: Dimen.defMarg),
+                        Text(
+                            article.source.displayName,
+                            style: AppTextStyle(fontWeight: weightHalfBold, color: iconEnab_(context))
+                        )
+                      ],
                     ),
                   ),
+                ),
               ),
 
               Positioned(
@@ -86,13 +87,13 @@ class ArticleCardWidget extends StatelessWidget{
                 left: -.1,
                 right: -.1,
                 child: Blur(
-                  color: cardEnab_(context).withValues(alpha: .85),
-                  child: Padding(
-                    padding: const EdgeInsets.all(Dimen.iconMarg).subtract(
-                        const EdgeInsets.only(top: (1.2 - 1)*Dimen.textSizeBig)
-                    ),
-                    child: ArticleInfoWidget(article, infoBottomTrailing: infoBottomTrailing),
-                  )
+                    color: cardEnab_(context).withValues(alpha: .85),
+                    child: Padding(
+                      padding: const EdgeInsets.all(Dimen.iconMarg).subtract(
+                          const EdgeInsets.only(top: (1.2 - 1)*Dimen.textSizeBig)
+                      ),
+                      child: ArticleInfoWidget(article, infoBottomTrailing: infoBottomTrailing),
+                    )
                 ),
               )
 

@@ -2,9 +2,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
-import 'package:harcapp_core/values/dimen.dart';
 
-const double FONT_SIZE_NORM = Dimen.textSizeBig;
+const double FONT_SIZE_NORM = 16.0;
 const double FONT_SIZE_HEIGHT = 1.5;
 
 class Author{
