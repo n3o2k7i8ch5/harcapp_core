@@ -76,10 +76,6 @@ class BaseHarcFormWidgetState extends State<BaseHarcFormWidget>{
         padding: const EdgeInsets.all(Dimen.sideMarg),
         sliver: SliverList(delegate: SliverChildListDelegate([
 
-          _TagWrapWidget(form),
-
-          const SizedBox(height: 2*Dimen.sideMarg),
-
           if(text != null)
             Text(
               text!,
@@ -88,6 +84,10 @@ class BaseHarcFormWidgetState extends State<BaseHarcFormWidget>{
               ),
               textAlign: TextAlign.justify,
             ),
+
+          const SizedBox(height: 2*Dimen.sideMarg),
+
+          _TagWrapWidget(form),
 
           const SizedBox(height: 2*Dimen.sideMarg),
 

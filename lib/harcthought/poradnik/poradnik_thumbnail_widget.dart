@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
-import 'package:harcapp_core/comm_widgets/blur.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
@@ -111,19 +110,10 @@ class PoradnikThumbnailWidget extends StatelessWidget {
                       Positioned(
                         bottom: 2*Dimen.defMarg,
                         left: 2*Dimen.defMarg,
-                        child: Blur(
-                          sigma: 2,
-                          color: Colors.white.withValues(alpha: 0.7),
-                          borderRadius: BorderRadius.circular(AppCard.defRadius),
-                          child: HarcappShareButton(
-                            url: HarcappLinks.poradnikOf(poradnik, short: true),
-                            subject: poradnik.title,
-                            color: Colors.transparent,
-                            iconColor: Colors.black,
-                            radius: AppCard.defRadius,
-                            collapsed: true,
-                            padding: const EdgeInsets.all(Dimen.defMarg),
-                          ),
+                        child: HarcappShareButton.simpleButton(
+                          url: HarcappLinks.poradnikOf(poradnik, short: true),
+                          subject: poradnik.title,
+                          collapsed: true,
                         ),
                       ),
 
