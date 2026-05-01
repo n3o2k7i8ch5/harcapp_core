@@ -37,7 +37,7 @@ enum _ShareButtonKind { appButton, simpleButton, floatingActionButton }
 ///   and inline sidebars (next to a header).
 /// - [HarcappShareButton.simpleButton] — pill (icon + optional label) with
 ///   optional [Blur] backdrop. Defaults are tuned for "glass pill on a cover":
-///   transparent fill, black icon, white α=0.7 blur sigma=2, [AppCard.defRadius].
+///   transparent fill, black icon, white α=0.85 blur sigma=6, [AppCard.defRadius].
 ///   Set `blurSigma: null` (or 0) to drop the [Blur] entirely.
 /// - [HarcappShareButton.floatingActionButton] — Material [FloatingActionButton]
 ///   for `Scaffold.floatingActionButton`. Pass a unique [heroTag] when multiple
@@ -88,7 +88,7 @@ class HarcappShareButton extends StatelessWidget {
     double? radius,
     EdgeInsets? padding,
     EdgeInsets? margin,
-    double? blurSigma = 2.0,
+    double? blurSigma = 6.0,
     Color? blurColor,
     super.key,
   })  : assert(
@@ -169,7 +169,7 @@ class HarcappShareButton extends StatelessWidget {
     if (!hasBlur) return pill;
     return Blur(
       sigma: _blurSigma,
-      color: _blurColor ?? Colors.white.withValues(alpha: 0.7),
+      color: _blurColor ?? Colors.white.withValues(alpha: 0.85),
       borderRadius: BorderRadius.circular(radius),
       child: pill,
     );
