@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/blur.dart';
@@ -27,17 +28,21 @@ class HarcappShare {
   }
 }
 
-enum _ShareButtonKind { appButton, simpleButton }
+enum _ShareButtonKind { appButton, simpleButton, floatingActionButton }
 
 /// Button that shares a harcapp.web.app URL. Hidden if no share impl registered.
 ///
-/// Two variants:
+/// Three variants:
 /// - [HarcappShareButton.appButton] — icon-only [AppButton], for app bar actions
 ///   and inline sidebars (next to a header).
 /// - [HarcappShareButton.simpleButton] — pill (icon + optional label) with
 ///   optional [Blur] backdrop. Defaults are tuned for "glass pill on a cover":
 ///   transparent fill, black icon, white α=0.7 blur sigma=2, [AppCard.defRadius].
 ///   Set `blurSigma: null` (or 0) to drop the [Blur] entirely.
+/// - [HarcappShareButton.floatingActionButton] — Material [FloatingActionButton]
+///   for `Scaffold.floatingActionButton`. Pass a unique [heroTag] when multiple
+///   instances live in the same `Navigator` (e.g. inside a `TabBarView`); a
+///   url-derived default is used otherwise.
 class HarcappShareButton extends StatelessWidget {
   final String url;
   final String? subject;
@@ -54,6 +59,9 @@ class HarcappShareButton extends StatelessWidget {
   final double? _blurSigma;
   final Color? _blurColor;
 
+  // floatingActionButton-only fields
+  final Object? _heroTag;
+
   const HarcappShareButton.appButton({
     required this.url,
     this.subject,
@@ -67,7 +75,8 @@ class HarcappShareButton extends StatelessWidget {
         _padding = null,
         _margin = null,
         _blurSigma = null,
-        _blurColor = null;
+        _blurColor = null,
+        _heroTag = null;
 
   const HarcappShareButton.simpleButton({
     required this.url,
@@ -95,20 +104,47 @@ class HarcappShareButton extends StatelessWidget {
         _padding = padding,
         _margin = margin,
         _blurSigma = blurSigma,
-        _blurColor = blurColor;
+        _blurColor = blurColor,
+        _heroTag = null;
+
+  const HarcappShareButton.floatingActionButton({
+    required this.url,
+    this.subject,
+    Object? heroTag,
+    super.key,
+  })  : _kind = _ShareButtonKind.floatingActionButton,
+        _heroTag = heroTag,
+        _collapsed = false,
+        _color = null,
+        _iconColor = null,
+        _textColor = null,
+        _radius = null,
+        _padding = null,
+        _margin = null,
+        _blurSigma = null,
+        _blurColor = null;
 
   @override
   Widget build(BuildContext context) {
     if (!HarcappShare.isRegistered) return const SizedBox.shrink();
-    return _kind == _ShareButtonKind.appButton
-        ? _buildAppButton()
-        : _buildSimpleButton(context);
+    return switch (_kind) {
+      _ShareButtonKind.appButton => _buildAppButton(),
+      _ShareButtonKind.simpleButton => _buildSimpleButton(context),
+      _ShareButtonKind.floatingActionButton => _buildFloatingActionButton(context),
+    };
   }
 
   Widget _buildAppButton() => AppButton(
     icon: Icon(MdiIcons.shareVariant),
     tooltip: 'Udostępnij',
     onTap: () => HarcappShare.share(url, subject: subject),
+  );
+
+  Widget _buildFloatingActionButton(BuildContext context) => FloatingActionButton(
+    heroTag: _heroTag ?? 'HarcappShareFab_$url',
+    tooltip: 'Udostępnij',
+    onPressed: () => HarcappShare.share(url, subject: subject),
+    child: Icon(MdiIcons.shareVariant, color: background_(context)),
   );
 
   Widget _buildSimpleButton(BuildContext context) {
