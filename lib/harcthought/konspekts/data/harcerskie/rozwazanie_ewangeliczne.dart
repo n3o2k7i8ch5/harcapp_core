@@ -13,7 +13,7 @@ const String konspekt_harc_html_rozwazanie_ewangeliczne = '<a href="$konspekt_ha
 /// Krótki, ogólny opis czym jest "Rozważanie ewangeliczne" (zwane też "apelem ewangelicznym").
 const String rozwazanie_ewangeliczne_html_opis_ogolny =
     '<p style="text-align:justify;">'
-    '<b>Rozważanie ewangeliczne</b> (zwane też <i>„apelem ewangelicznym”</i>) to krótka forma duchowa polegająca na wspólnym wysłuchaniu fragmentu <b>Ewangelii</b> z pomocą prostych, praktycznych pytań.'
+    '<b>Rozważanie ewangeliczne</b> (zwane też <i>„apelem ewangelicznym”</i>) to krótka forma duchowa polegająca na rozważeniu fragmentu <b>Ewangelii</b> z pomocą prostych, praktycznych pytań.'
     '</p>';
 
 /// Dla jakich metodyk forma jest przygotowywana - z podziałem na dwie grupy wiekowe.
