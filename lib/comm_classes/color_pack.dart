@@ -25,6 +25,9 @@ Color accent_(BuildContext context) => Theme.of(context).colorScheme.secondary;
 Color iconEnab_(BuildContext context) => Theme.of(context).iconTheme.color!;
 Color iconDisab_(BuildContext context) => Theme.of(context).hintColor;
 
+AppTextStyle settingsHintStyle(BuildContext context) => AppTextStyle(fontSize: Dimen.textSizeNormal, color: hintEnab_(context));
+AppTextStyle settingsTextStyle(BuildContext context) => AppTextStyle(fontSize: Dimen.textSizeBig, color: textEnab_(context), fontWeight: weightHalfBold);
+
 abstract class ColorPack{
 
   static const defAppBarTextEnab = Colors.black;
