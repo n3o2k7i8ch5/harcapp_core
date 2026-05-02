@@ -112,7 +112,7 @@ Future<void> showSavePdfDialog({
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        AppBarX(title: title),
+        AppBarX(title: title, primary: false),
         Flexible(child: child),
       ],
     ),
