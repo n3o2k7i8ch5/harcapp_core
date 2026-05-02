@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/save_pdf_dialog.dart';
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan.dart';
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan_folder.dart';
@@ -87,71 +88,83 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
       isStillMounted: () => mounted,
       buttonEnabled: _selectedSiglums.isNotEmpty,
       topWidget: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
 
-          if(widget.extraTopWidget != null)
+          if(widget.extraTopWidget != null) ...[
             widget.extraTopWidget!,
+            const SizedBox(height: Dimen.sideMarg),
+          ],
 
           if(apels.isNotEmpty)
-            CheckboxListTile(
-              tristate: true,
-              value: allSelected ? true : (noneSelected ? false : null),
-              controlAffinity: ListTileControlAffinity.leading,
-              activeColor: accent_(context),
-              title: Text(
-                'Uwzględnione apele (${_selectedSiglums.length}/${apels.length})',
-                style: AppTextStyle(
-                  fontSize: Dimen.textSizeAppBar,
-                  fontWeight: weightBold,
-                  color: iconEnab_(context),
-                ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppCard.defRadius),
+                color: cardEnab_(context),
               ),
-              onChanged: (_) {
-                if (allSelected) {
-                  _deselectAll();
-                } else {
-                  _selectAll();
-                }
-              },
-            ),
+              clipBehavior: Clip.hardEdge,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CheckboxListTile(
+                    tristate: true,
+                    value: allSelected ? true : (noneSelected ? false : null),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    activeColor: accent_(context),
+                    title: Text(
+                      'Uwzględnione apele (${_selectedSiglums.length}/${apels.length})',
+                      style: AppTextStyle(
+                        fontSize: Dimen.textSizeAppBar,
+                        fontWeight: weightBold,
+                        color: iconEnab_(context),
+                      ),
+                    ),
+                    onChanged: (_) {
+                      if (allSelected) {
+                        _deselectAll();
+                      } else {
+                        _selectAll();
+                      }
+                    },
+                  ),
 
-          if(apels.isNotEmpty)
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 320),
-              child: Scrollbar(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: apels.length,
-                  itemBuilder: (context, index){
-                    final apel = apels[index];
-                    final selected = _selectedSiglums.contains(apel.siglum);
-                    return CheckboxListTile(
-                      value: selected,
-                      onChanged: (v) => _toggle(apel.siglum, v),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      activeColor: accent_(context),
-                      dense: true,
-                      title: Text(
-                        _titleFor(apel),
-                        style: const AppTextStyle(),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxHeight: 320),
+                    child: Scrollbar(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: apels.length,
+                        itemBuilder: (context, index){
+                          final apel = apels[index];
+                          final selected = _selectedSiglums.contains(apel.siglum);
+                          return CheckboxListTile(
+                            value: selected,
+                            onChanged: (v) => _toggle(apel.siglum, v),
+                            controlAffinity: ListTileControlAffinity.leading,
+                            activeColor: accent_(context),
+                            dense: true,
+                            title: Text(
+                              _titleFor(apel),
+                              style: const AppTextStyle(),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            subtitle: Text(
+                              apel.siglum,
+                              style: AppTextStyle(
+                                color: hintEnab_(context),
+                                fontSize: Dimen.textSizeSmall,
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      subtitle: Text(
-                        apel.siglum,
-                        style: AppTextStyle(
-                          color: hintEnab_(context),
-                          fontSize: Dimen.textSizeSmall,
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                    ),
+                  ),
+                ],
               ),
             ),
-
-          const SizedBox(height: Dimen.sideMarg),
 
         ],
       ),

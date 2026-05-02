@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/save_pdf_dialog.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt_to_pdf/konspekt_to_pdf.dart';
@@ -66,34 +68,34 @@ class KonspektSavePdfContentState extends State<KonspektSavePdfContent>{
       return (bytes: bytes, filename: 'Konspekt - ${widget.konspekt.title}.pdf');
     },
     topWidget: Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
 
-        SwitchListTile(
-          title: Text('Zdjęcie okładki', style: settingsTextStyle(context)),
+        _SwitchCard(
+          title: 'Zdjęcie okładki',
           value: withCover,
           onChanged: (value) => setState(() => withCover = value),
-          activeThumbColor: accent_(context),
         ),
+        SizedBox(height: Dimen.sideMarg),
 
-        SwitchListTile(
-          title: Text('Metodyki, autor, czas, skrót', style: settingsTextStyle(context)),
+        _SwitchCard(
+          title: 'Metodyki, autor, czas, skrót',
           value: withMetadata,
           onChanged: (value) => setState(() => withMetadata = value),
-          activeThumbColor: accent_(context),
         ),
+        SizedBox(height: Dimen.sideMarg),
 
-        SwitchListTile(
-          title: Text('Cele', style: settingsTextStyle(context)),
+        _SwitchCard(
+          title: 'Cele',
           value: withAims,
           onChanged: (value) => setState(() => withAims = value),
-          activeThumbColor: accent_(context),
         ),
+        SizedBox(height: Dimen.sideMarg),
 
-        SwitchListTile(
-          title: Text('Lista materiałów', style: settingsTextStyle(context)),
+        _SwitchCard(
+          title: 'Lista materiałów',
           value: withMaterials,
           onChanged: (value) => setState(() => withMaterials = value),
-          activeThumbColor: accent_(context),
         ),
 
         if(widget.konspekt.anySteps)
@@ -111,9 +113,31 @@ class KonspektSavePdfContentState extends State<KonspektSavePdfContent>{
                   })
           ),
 
-        SizedBox(height: Dimen.sideMarg),
-
       ],
+    ),
+  );
+
+}
+
+class _SwitchCard extends StatelessWidget {
+
+  final String title;
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
+  const _SwitchCard({required this.title, required this.value, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) => Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(AppCard.defRadius),
+      color: cardEnab_(context),
+    ),
+    child: SwitchListTile(
+      title: Text(title, style: AppTextStyle(color: iconEnab_(context))),
+      value: value,
+      onChanged: onChanged,
+      activeThumbColor: accent_(context),
     ),
   );
 
