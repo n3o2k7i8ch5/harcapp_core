@@ -160,7 +160,7 @@ abstract class ColorPack{
     );
 
     DialogThemeData dialogThemeData = DialogTheme.of(context);
-    dialogThemeData.copyWith(
+    dialogThemeData = dialogThemeData.copyWith(
       titleTextStyle: (dialogThemeData.titleTextStyle??(useMaterial3?textTheme.headlineSmall:textTheme.titleLarge)??TextStyle()).copyWith(
         fontFamily: AppTextStyle.fontFamily_,
         fontWeight: weightHalfBold,
@@ -241,6 +241,15 @@ abstract class ColorPack{
       cardTheme: CardThemeData(
           color: defCardEnabled,
           shadowColor: defCardElevation
+      ),
+
+      popupMenuTheme: PopupMenuThemeData(
+        color: background,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppCard.bigRadius),
+        ),
+        elevation: AppCard.bigElevation,
       ),
 
       disabledColor: textDisabled,
