@@ -15,9 +15,6 @@ class ApelEwanSavePdfContent extends StatefulWidget {
   final ApelEwanVariantIdResolver? variantIdFor;
   final ApelEwanNoteResolver? noteFor;
   final Widget? extraTopWidget;
-  final Color? textColor;
-  final Color? iconColor;
-  final Color? iconEndColor;
 
   const ApelEwanSavePdfContent({
     super.key,
@@ -25,9 +22,6 @@ class ApelEwanSavePdfContent extends StatefulWidget {
     this.variantIdFor,
     this.noteFor,
     this.extraTopWidget,
-    this.textColor,
-    this.iconColor,
-    this.iconEndColor,
   });
 
   @override
@@ -92,9 +86,6 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
       generatePdf: _generate,
       isStillMounted: () => mounted,
       buttonEnabled: _selectedSiglums.isNotEmpty,
-      textColor: widget.textColor,
-      iconColor: widget.iconColor,
-      iconEndColor: widget.iconEndColor,
       topWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

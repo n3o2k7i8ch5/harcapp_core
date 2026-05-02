@@ -1,14 +1,12 @@
 import 'dart:typed_data';
 
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide DialogRoute;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:harcapp_core/comm_classes/app_navigator.dart';
-import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
-import 'package:harcapp_core/comm_widgets/app_card.dart';
+import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
-import 'package:harcapp_core/comm_widgets/dialog/app_dialog.dart';
-import 'package:harcapp_core/comm_widgets/gradient_icon.dart';
+import 'package:harcapp_core/comm_widgets/dialog/base.dart';
 import 'package:harcapp_core/comm_widgets/save_pdf.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
@@ -19,22 +17,16 @@ typedef SavePdfDataBuilder = Future<({Uint8List bytes, String filename})> Functi
 class SavePdfDialogContent extends StatefulWidget {
 
   final SavePdfDataBuilder generatePdf;
-  final bool Function()? isStillMounted;
   final Widget? topWidget;
   final bool buttonEnabled;
-  final Color? textColor;
-  final Color? iconColor;
-  final Color? iconEndColor;
+  final bool Function()? isStillMounted;
 
   const SavePdfDialogContent({
     super.key,
     required this.generatePdf,
-    this.isStillMounted,
     this.topWidget,
     this.buttonEnabled = true,
-    this.textColor,
-    this.iconColor,
-    this.iconEndColor,
+    this.isStillMounted,
   });
 
   @override
@@ -49,13 +41,13 @@ class _SavePdfDialogContentState extends State<SavePdfDialogContent> {
 
   Future<void> _onTap() async {
     setState(() => _busy = true);
-    showAppToast(context, text: 'Generowanie pliku...');
 
     ({Uint8List bytes, String filename}) data;
     try {
       data = await widget.generatePdf();
     } catch (_) {
       if(!_stillMounted) return;
+      setState(() => _busy = false);
       showAppToast(context, text: 'Wystąpił błąd');
       await popPage(context);
       return;
@@ -85,49 +77,23 @@ class _SavePdfDialogContentState extends State<SavePdfDialogContent> {
       children: [
 
         if(widget.topWidget != null)
-          widget.topWidget!,
+          Flexible(child: SingleChildScrollView(
+            padding: const EdgeInsets.all(Dimen.sideMarg),
+            child: widget.topWidget!,
+          )),
 
-        SimpleButton(
-          onTap: enabled ? _onTap : null,
-          radius: AppCard.bigRadius,
+        SimpleButton.from(
+          context: context,
+          iconWidget: _busy
+              ? SpinKitChasingDots(color: textDisab_(context), size: Dimen.iconSize)
+              : null,
+          icon: _busy ? null : MdiIcons.printer,
+          text: _busy ? 'Przygotowywanie pliku PDF...' : 'Pobierz PDF',
           color: cardEnab_(context),
-          child: SizedBox(
-            height: 100,
-            child: Row(
-              children: [
-
-                const SizedBox(width: 2*Dimen.sideMarg),
-
-                Expanded(
-                  child: AutoSizeText(
-                    'Stwórz PDF',
-                    style: AppTextStyle(
-                        fontSize: 24.0,
-                        color: enabled ? widget.textColor : hintEnab_(context),
-                        fontWeight: weightBold,
-                    ),
-                    maxLines: 1,
-                  ),
-                ),
-
-                const SizedBox(width: Dimen.sideMarg),
-
-                GradientIcon(
-                  MdiIcons.printer,
-                  colorStart: enabled
-                      ? (widget.iconColor ?? widget.textColor ?? iconEnab_(context))
-                      : hintEnab_(context),
-                  colorEnd: enabled
-                      ? (widget.iconEndColor ?? widget.textColor ?? iconEnab_(context))
-                      : hintEnab_(context),
-                  size: 80,
-                ),
-
-                const SizedBox(width: Dimen.sideMarg),
-
-              ],
-            ),
-          ),
+          textColor: enabled ? iconEnab_(context) : iconDisab_(context),
+          margin: EdgeInsets.zero,
+          radius: 0,
+          onTap: enabled ? _onTap : null,
         ),
       ],
     );
@@ -136,11 +102,18 @@ class _SavePdfDialogContentState extends State<SavePdfDialogContent> {
 
 Future<void> showSavePdfDialog({
   required BuildContext context,
-  String title = 'Stwórz plik PDF',
+  String title = 'Właściwości pliku PDF',
   required Widget child,
-}) => openAppDialog(
+  double maxWidth = 500,
+}) => openBaseDialog(
     context: context,
-    title: title,
-    scrollable: true,
-    child: child,
+    maxWidth: maxWidth,
+    builder: (context) => Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        AppBarX(title: title),
+        Flexible(child: child),
+      ],
+    ),
 );
