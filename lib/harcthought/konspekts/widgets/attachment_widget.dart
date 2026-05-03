@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_classes/common.dart' show launchURL;
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
@@ -10,6 +12,7 @@ import 'package:harcapp_core/harcthought/common/file_format_selector_row_widget.
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../konspekt.dart';
+import '../konspekt_navigation_scope.dart';
 
 class KonspektAttachmentPrintWidget extends StatelessWidget{
 
@@ -140,7 +143,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
         Color? color,
         double? maxDialogWidth
       }) {
-    KonspektAttachment attachment;
+    BaseKonspektAttachment attachment;
     if(konspekt.attachments == null) return null;
 
     try {
@@ -163,7 +166,7 @@ class KonspektAttachmentWidget extends StatelessWidget{
       String attachmentName,
       {double? maxDialogWidth}
   ) async {
-    KonspektAttachment attachment;
+    BaseKonspektAttachment attachment;
     if(konspekt.attachments == null) return null;
 
     try {
@@ -172,17 +175,44 @@ class KonspektAttachmentWidget extends StatelessWidget{
       showAppToast(context, text: 'Załącznik o nazwie $attachmentName nie istnieje.');
       return;
     }
-    await attachment.openOrShowMessage(
-        context,
-        konspekt.name,
-        attachment.assets.keys.first,
-        konspekt.category,
-        maxDialogWidth: maxDialogWidth
-    );
+    if(attachment is KonspektInternalLinkAttachment){
+      await _openInternalLink(context, attachment);
+      return;
+    }
+    if(attachment is KonspektAttachment){
+      await attachment.openOrShowMessage(
+          context,
+          konspekt.name,
+          attachment.assets.keys.first,
+          konspekt.category,
+          maxDialogWidth: maxDialogWidth
+      );
+    }
+  }
+
+  /// Opens [att]: web → new browser tab via `launchURL`; mobile/desktop →
+  /// in-app `Navigator.push` via the surrounding [KonspektNavigationScope]
+  /// (falls back to `launchURL` if the scope is missing).
+  static Future<void> _openInternalLink(
+      BuildContext context,
+      KonspektInternalLinkAttachment att,
+  ) async {
+    if(kIsWeb){
+      launchURL(att.url);
+      return;
+    }
+    final scope = KonspektNavigationScope.maybeOf(context);
+    if(scope == null){
+      launchURL(att.url);
+      return;
+    }
+    final ok = await scope.openInternalLink(context, att.linkPath);
+    if(!ok && context.mounted)
+      showAppToast(context, text: 'Nie udało się otworzyć');
   }
 
   final Konspekt konspekt;
-  final KonspektAttachment attachment;
+  final BaseKonspektAttachment attachment;
   final Color? color;
   final double? maxDialogWidth;
 
@@ -196,6 +226,36 @@ class KonspektAttachmentWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
+
+    final attachment = this.attachment;
+
+    if(attachment is KonspektInternalLinkAttachment)
+      return SimpleButton(
+          color: color??cardEnab_(context),
+          borderRadius: BorderRadius.circular(AppCard.defRadius),
+          child: Padding(
+            padding: const EdgeInsets.all(Dimen.iconMarg),
+            child: Row(
+              children: [
+
+                Expanded(child: Text(
+                    attachment.title,
+                    style: const AppTextStyle(
+                      fontSize: Dimen.textSizeBig,
+                      fontWeight: weightHalfBold,
+                    )
+                )),
+
+                Icon(MdiIcons.openInNew),
+
+              ],
+            ),
+          ),
+          onTap: () => _openInternalLink(context, attachment)
+      );
+
+    if(attachment is! KonspektAttachment)
+      return const SizedBox.shrink();
 
     if(attachment.assets.length == 1)
       return SimpleButton(

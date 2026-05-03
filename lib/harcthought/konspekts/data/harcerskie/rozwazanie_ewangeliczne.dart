@@ -1,4 +1,5 @@
 import 'package:harcapp_core/comm_classes/meto.dart';
+import 'package:harcapp_core/harcthought/harcapp_links.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/level_examples.dart';
 import 'package:harcapp_core/values/people/data.dart';
 
@@ -8,6 +9,16 @@ import '../../konspekt.dart';
 const String konspekt_harc_name_rozwazanie_ewangeliczne = 'rozwazanie_ewangeliczne';
 const String konspekt_harc_title_rozwazanie_ewangeliczne = 'Rozważanie ewangeliczne';
 const String konspekt_harc_html_rozwazanie_ewangeliczne = '<a href="$konspekt_harc_name_rozwazanie_ewangeliczne@harcerskie.konspekt">$konspekt_harc_title_rozwazanie_ewangeliczne</a>';
+
+
+const String _attach_name_rozwazania_ewangeliczne_lista = 'rozwazania_ewangeliczne_lista';
+const String _attach_title_rozwazania_ewangeliczne_lista = 'Rozważania ewangeliczne — pełna lista';
+
+const KonspektInternalLinkAttachment _attach_rozwazania_ewangeliczne_lista = KonspektInternalLinkAttachment(
+  name: _attach_name_rozwazania_ewangeliczne_lista,
+  title: _attach_title_rozwazania_ewangeliczne_lista,
+  linkPath: HarcappLinks.apelEwanFolderListTemplate,
+);
 
 
 /// Krótki, ogólny opis czym jest "Rozważanie ewangeliczne" (zwane też "apelem ewangelicznym").
@@ -183,8 +194,12 @@ Konspekt rozwazanie_ewangeliczne = const Konspekt(
       KonspektMaterial(
         amountAttendantFactor: 1,
         name: 'Wydrukowana kartka z fragmentem Ewangelii i pytaniami pomocniczymi',
+        attachmentName: _attach_name_rozwazania_ewangeliczne_lista,
         additionalPreparation: 'Po jednym egzemplarzu na uczestnika. Pytania należy dobrać do grupy wiekowej (młodsi: zuch + harc; starsi: HS + wędro).',
       ),
+    ],
+    attachments: [
+      _attach_rozwazania_ewangeliczne_lista,
     ],
     summary: 'Uczestnicy w zastępach indywidualnie czytają krótki fragment Ewangelii i odpowiadają na pytania pomocnicze, a następnie wspólnie - w atmosferze zaufania - dzielą się swoimi przemyśleniami i kończą krótką modlitwą.',
     intro:

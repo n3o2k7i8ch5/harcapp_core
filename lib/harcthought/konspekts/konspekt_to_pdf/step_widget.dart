@@ -8,6 +8,7 @@ import 'common.dart';
 import 'material_tiles.dart';
 
 Future<List<Widget>> StepWidget(
+    Konspekt konspekt,
     KonspektStep step,
     TimeOfDay? startTime,
     int index,
@@ -198,7 +199,8 @@ Future<List<Widget>> StepWidget(
                                   )
                               ),
 
-                              ...await MaterialTiles(
+                              ...MaterialTiles(
+                                  konspekt,
                                   step.materials!,
                                   font,
                                   fontHalfBold,

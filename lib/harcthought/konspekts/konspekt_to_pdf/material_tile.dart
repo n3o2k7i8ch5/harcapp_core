@@ -3,7 +3,38 @@ import 'package:html_pdf_widgets/html_pdf_widgets.dart';
 
 import 'common.dart';
 
+class _PrintAttachmentRef {
+  final String title;
+  final String url;
+  const _PrintAttachmentRef(this.title, this.url);
+}
+
+/// Looks up the attachment referenced by [material.attachmentName] in
+/// [konspekt.attachments] and — if it carries a URL viewable in print —
+/// returns its title and URL. Returns null for materials without a referenced
+/// attachment, or for attachments that have only local-asset formats (those
+/// can't be followed from paper anyway).
+_PrintAttachmentRef? _resolvePrintAttachment(Konspekt konspekt, KonspektMaterial material){
+  final name = material.attachmentName;
+  if(name == null) return null;
+  final attachments = konspekt.attachments;
+  if(attachments == null) return null;
+  for(final att in attachments){
+    if(att.name != name) continue;
+    if(att is KonspektInternalLinkAttachment)
+      return _PrintAttachmentRef(att.title, att.url);
+    if(att is KonspektAttachment){
+      for(final entry in att.assets.entries)
+        if(entry.key.isUrl && entry.value != null)
+          return _PrintAttachmentRef(att.title, entry.value!);
+    }
+    return null;
+  }
+  return null;
+}
+
 Widget MaterialTile(
+    Konspekt konspekt,
     KonspektMaterial material,
     Font font,
     Font fontHalfBold,
@@ -14,78 +45,128 @@ Widget MaterialTile(
     { bool showComment = true,
       bool showAdditionalPreparation = true,
       PdfColor? backgroundColor
-    }) => ClipRRect(
-    horizontalRadius: defRadius,
-    verticalRadius: defRadius,
-    child: Container(
-        color: backgroundColor??cardColor,
-        child: Padding(
-            padding: EdgeInsets.all(6.0),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+    }) {
+  final attachmentRef = _resolvePrintAttachment(konspekt, material);
+  return ClipRRect(
+      horizontalRadius: defRadius,
+      verticalRadius: defRadius,
+      child: Container(
+          color: backgroundColor??cardColor,
+          child: Padding(
+              padding: EdgeInsets.all(6.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
 
-                  Row(
-                      children: [
-                        Expanded(
-                            child: Text(
-                                material.name,
-                                style: TextStyle(font: font, fontSize: defTextSize)
-                            )
-                        ),
-                        if(material.hasAmount)
-                          SizedBox(width: elementSmallSeparator),
-                        if(material.hasAmount)
-                          MaterialAmountWidget(material, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic),
-                      ]
-                  ),
-
-                  if(material.comment != null && showComment)
-                    SizedBox(height: elementSmallSeparator),
-
-                  if(material.comment != null && showComment)
-                    Text(
-                        material.comment!,
-                        style: TextStyle(font: font, fontSize: defTextSize, height: 1.2, color: PdfColors.grey)
+                    Row(
+                        children: [
+                          Expanded(
+                              child: Text(
+                                  material.name,
+                                  style: TextStyle(font: font, fontSize: defTextSize)
+                              )
+                          ),
+                          if(material.hasAmount)
+                            SizedBox(width: elementSmallSeparator),
+                          if(material.hasAmount)
+                            MaterialAmountWidget(material, font, fontHalfBold, fontBold, fontItalic, fontHalfBoldItalic, fontBoldItalic),
+                        ]
                     ),
 
-                  if(material.additionalPreparation != null && showAdditionalPreparation)
-                    SizedBox(height: elementSmallSeparator),
+                    if(material.comment != null && showComment)
+                      SizedBox(height: elementSmallSeparator),
 
-                  if(material.additionalPreparation != null && showAdditionalPreparation)
-                    ClipRRect(
-                        horizontalRadius: defRadius,
-                        verticalRadius: defRadius,
-                        child: Container(
-                            color: PdfColors.white,
-                            child: Padding(
-                                padding: EdgeInsets.all(elementSmallSeparator),
-                                child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                                    children: [
+                    if(material.comment != null && showComment)
+                      Text(
+                          material.comment!,
+                          style: TextStyle(font: font, fontSize: defTextSize, height: 1.2, color: PdfColors.grey)
+                      ),
 
-                                      Text(
-                                        'Wymagane dodatkowe przygotowanie:',
-                                        style: TextStyle(font: fontBold, fontSize: defTextSize),
-                                      ),
+                    if(material.additionalPreparation != null && showAdditionalPreparation)
+                      SizedBox(height: elementSmallSeparator),
 
-                                      SizedBox(height: elementSmallSeparator),
+                    if(material.additionalPreparation != null && showAdditionalPreparation)
+                      ClipRRect(
+                          horizontalRadius: defRadius,
+                          verticalRadius: defRadius,
+                          child: Container(
+                              color: PdfColors.white,
+                              child: Padding(
+                                  padding: EdgeInsets.all(elementSmallSeparator),
+                                  child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: [
 
-                                      Text(
-                                          material.additionalPreparation!,
-                                          style: TextStyle(font: font, fontSize: defTextSize),
-                                          textAlign: TextAlign.justify
-                                      )
-                                    ]
-                                )
-                            )
-                        )
-                    )
-                ]
-            )
-        )
-    )
-);
+                                        Text(
+                                          'Wymagane dodatkowe przygotowanie:',
+                                          style: TextStyle(font: fontBold, fontSize: defTextSize),
+                                        ),
+
+                                        SizedBox(height: elementSmallSeparator),
+
+                                        Text(
+                                            material.additionalPreparation!,
+                                            style: TextStyle(font: font, fontSize: defTextSize),
+                                            textAlign: TextAlign.justify
+                                        )
+                                      ]
+                                  )
+                              )
+                          )
+                      ),
+
+                    if(attachmentRef != null)
+                      SizedBox(height: elementSmallSeparator),
+
+                    if(attachmentRef != null)
+                      ClipRRect(
+                          horizontalRadius: defRadius,
+                          verticalRadius: defRadius,
+                          child: Container(
+                              color: PdfColors.white,
+                              child: Padding(
+                                  padding: EdgeInsets.all(elementSmallSeparator),
+                                  child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: [
+
+                                        Text(
+                                          'Załącznik online:',
+                                          style: TextStyle(font: fontBold, fontSize: defTextSize),
+                                        ),
+
+                                        SizedBox(height: elementSmallSeparator),
+
+                                        Text(
+                                            attachmentRef.title,
+                                            style: TextStyle(font: fontHalfBold, fontSize: defTextSize),
+                                        ),
+
+                                        SizedBox(height: 2.0),
+
+                                        UrlLink(
+                                            destination: attachmentRef.url,
+                                            child: Text(
+                                                attachmentRef.url,
+                                                style: TextStyle(
+                                                  font: font,
+                                                  fontSize: defTextSize,
+                                                  color: PdfColors.blue,
+                                                  decoration: TextDecoration.underline,
+                                                ),
+                                            )
+                                        ),
+                                      ]
+                                  )
+                              )
+                          )
+                      )
+                  ]
+              )
+          )
+      )
+  );
+}
 
 Widget MaterialAmountWidget(
     KonspektMaterial material,

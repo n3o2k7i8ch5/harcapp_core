@@ -5,6 +5,7 @@ import 'common.dart';
 import 'material_tile.dart';
 
 List<Widget> MaterialTiles(
+    Konspekt konspekt,
     List<KonspektMaterial> materials,
     Font font,
     Font fontHalfBold,
@@ -38,6 +39,7 @@ List<Widget> MaterialTiles(
   for(int i=0; i<materials.length; i++){
     widgets.add(
         MaterialTile(
+            konspekt,
             materials[i],
             font,
             fontHalfBold,

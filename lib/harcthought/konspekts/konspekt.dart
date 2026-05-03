@@ -621,6 +621,18 @@ abstract class BaseKonspektAttachment{
     'print': print?.toJsonMap()
   };
 
+  /// Polymorphic deserializer. Dispatches on the `type` discriminator —
+  /// missing or `'file'` → [KonspektAttachment]; `'internal_link'` →
+  /// [KonspektInternalLinkAttachment].
+  static BaseKonspektAttachment fromJsonMap(Map<String, dynamic> map){
+    final type = map['type'] as String? ?? 'file';
+    switch(type){
+      case 'internal_link': return KonspektInternalLinkAttachment.fromJsonMap(map);
+      case 'file':
+      default: return KonspektAttachment.fromJsonMap(map);
+    }
+  }
+
 }
 
 class KonspektAttachment extends BaseKonspektAttachment{
@@ -759,6 +771,52 @@ class KonspektAttachment extends BaseKonspektAttachment{
     //     printColor: print?.color??KonspektAttachmentPrintColor.monochrome,
     //   );
     // }
+
+}
+
+/// Attachment that points to another page inside the harcapp ecosystem rather
+/// than to a downloadable file. Pure data — opening behavior lives in the
+/// widget layer (see `KonspektAttachmentWidget`), which on Flutter Web opens
+/// the public URL in a new tab and on mobile/desktop delegates to
+/// `KonspektNavigationScope` for an in-app `Navigator.push`.
+class KonspektInternalLinkAttachment extends BaseKonspektAttachment{
+
+  @override
+  final String name;
+  @override
+  final String title;
+  /// Path on `harcapp.web.app` (e.g. `/rozwazania_ewangeliczne`). Use
+  /// `HarcappLinks` path templates / builders to construct.
+  final String linkPath;
+
+  const KonspektInternalLinkAttachment({
+    required this.name,
+    required this.title,
+    required this.linkPath,
+  });
+
+  @override
+  Map<FileFormat, String?> get assets => const {};
+
+  @override
+  KonspektAttachmentPrint? get print => null;
+
+  String get url => 'https://harcapp.web.app$linkPath';
+
+  @override
+  Map toJsonMap() => {
+    'type': 'internal_link',
+    'name': name,
+    'title': title,
+    'linkPath': linkPath,
+  };
+
+  static KonspektInternalLinkAttachment fromJsonMap(Map<String, dynamic> map) =>
+      KonspektInternalLinkAttachment(
+        name: map['name'] as String,
+        title: map['title'] as String,
+        linkPath: map['linkPath'] as String,
+      );
 
 }
 
@@ -1118,7 +1176,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
   final List<KonspektStepGroup>? stepGroups;
   final List<KonspektStep> steps;
 
-  final List<KonspektAttachment>? attachments;
+  final List<BaseKonspektAttachment>? attachments;
   final Konspekt? partOf;
   final bool upToDate;
 
@@ -1145,7 +1203,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
   static Konspekt oldFrom(
     Konspekt upToDateKonspekt, {
       List<KonspektMaterial> materials = const [],
-      List<KonspektAttachment> attachments = const [],
+      List<BaseKonspektAttachment> attachments = const [],
       List<KonspektStep> steps = const [],
       List<KonspektStepGroup> stepGroups = const [],
     }) => Konspekt(
@@ -1298,7 +1356,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
     customDuration: data['customDuration'] == null ? null : Duration(seconds: data['customDuration'] as int),
     aims: (data['aims'] as List?)?.map((e) => e as String).toList()??[],
     attachments: (data['attachments'] as List?)?.map(
-            (e) => KonspektAttachment.fromJsonMap((e as Map).cast<String, dynamic>())
+            (e) => BaseKonspektAttachment.fromJsonMap((e as Map).cast<String, dynamic>())
     ).toList()??[],
     materials: (data['materials'] as List?)?.map(
             (e) => KonspektMaterial.fromJsonMap((e as Map).cast<String, dynamic>())
@@ -1314,7 +1372,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
 
   Future<HrcpknspktData> toHrcpknspktData() async{
     final Map<String, Uint8List> attachmentFiles = {};
-    for (final KonspektAttachment attachment in attachments ?? [])
+    for (final attachment in (attachments ?? const <BaseKonspektAttachment>[]).whereType<KonspektAttachment>())
       for (final FileFormat format in attachment.assets.keys) {
         final bytes = await attachment.getAssetBytes(name, format, category);
         if (bytes != null) attachmentFiles['${attachment.name}.${format.extension}'] = bytes;

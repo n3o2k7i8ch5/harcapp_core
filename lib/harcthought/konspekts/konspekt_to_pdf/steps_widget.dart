@@ -36,6 +36,7 @@ Future<List<Widget>> StepsWidget(
     for(int i=0; i<steps.length; i++) {
       stepWidgets.addAll(
           await StepWidget(
+              konspekt,
               steps[i],
               stepsTimeTable?[i],
               i,
@@ -55,14 +56,15 @@ Future<List<Widget>> StepsWidget(
     int globalStepIdx = 0;
     for (int groupIdx=0; groupIdx<konspekt.stepGroups!.length; groupIdx++) {
       KonspektStepGroup group = konspekt.stepGroups![groupIdx];
-      
+
       // Build time table for this group, similar to UI widget
       TimeOfDay? groupStartTime = stepsTimeTable == null ? null : stepsTimeTable[globalStepIdx];
       List<TimeOfDay>? groupStepsTimeTable = groupStartTime == null ? null : konspekt_common.buildTimeTable(group.steps, groupStartTime);
-      
+
       for(int stepIdx=0; stepIdx<group.steps.length; stepIdx++) {
         stepWidgets.addAll(
             await StepWidget(
+                konspekt,
                 group.steps[stepIdx],
                 groupStepsTimeTable?[stepIdx],
                 stepIdx,

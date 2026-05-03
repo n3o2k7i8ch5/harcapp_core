@@ -101,7 +101,7 @@ class KonspektMaterialTile extends StatelessWidget{
                       child: attachmentWidget?? Text('Problem z załącznikiem ${material.attachmentName}'),
                     );
 
-                  KonspektAttachment attachment = attachmentWidget.attachment;
+                  BaseKonspektAttachment attachment = attachmentWidget.attachment;
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
