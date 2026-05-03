@@ -28,17 +28,22 @@ class HarcappShare {
   }
 }
 
-enum _ShareButtonKind { appButton, simpleButton, floatingActionButton }
+enum _ShareButtonKind { appButton, simpleButton, compactSimpleButton, floatingActionButton }
 
 /// Button that shares a harcapp.web.app URL. Hidden if no share impl registered.
 ///
-/// Three variants:
+/// Four variants:
 /// - [HarcappShareButton.appButton] — icon-only [AppButton], for app bar actions
 ///   and inline sidebars (next to a header).
-/// - [HarcappShareButton.simpleButton] — pill (icon + optional label) with
-///   optional [Blur] backdrop. Defaults are tuned for "glass pill on a cover":
-///   transparent fill, black icon, white α=0.85 blur sigma=6, [AppCard.defRadius].
-///   Set `blurSigma: null` (or 0) to drop the [Blur] entirely.
+/// - [HarcappShareButton.simpleButton] — plain [SimpleButton.from] pill (icon +
+///   optional label). No tooltip, no blur, no custom radius/padding/margin —
+///   blends in next to other [SimpleButton.from] buttons. Use for action rows
+///   on web/mobile pages where a "regular" button look is expected.
+/// - [HarcappShareButton.compactSimpleButton] — pill (icon + optional label)
+///   with optional [Blur] backdrop. Defaults are tuned for "glass pill on a
+///   cover": transparent fill, black icon, white α=0.85 blur sigma=6,
+///   [AppCard.defRadius]. Set `blurSigma: null` (or 0) to drop the [Blur]
+///   entirely.
 /// - [HarcappShareButton.floatingActionButton] — Material [FloatingActionButton]
 ///   for `Scaffold.floatingActionButton`. Pass a unique [heroTag] when multiple
 ///   instances live in the same `Navigator` (e.g. inside a `TabBarView`); a
@@ -48,14 +53,16 @@ class HarcappShareButton extends StatelessWidget {
   final String? subject;
   final _ShareButtonKind _kind;
 
-  // simpleButton-only fields
+  // simpleButton + compactSimpleButton shared fields
   final bool _collapsed;
   final Color? _color;
+  final double? _radius;
+  final EdgeInsets? _margin;
+
+  // compactSimpleButton-only fields
   final Color? _iconColor;
   final Color? _textColor;
-  final double? _radius;
   final EdgeInsets? _padding;
-  final EdgeInsets? _margin;
   final double? _blurSigma;
   final Color? _blurColor;
 
@@ -81,6 +88,26 @@ class HarcappShareButton extends StatelessWidget {
   const HarcappShareButton.simpleButton({
     required this.url,
     this.subject,
+    Color? color,
+    bool collapsed = false,
+    double? radius,
+    EdgeInsets? margin,
+    super.key,
+  })  : _kind = _ShareButtonKind.simpleButton,
+        _collapsed = collapsed,
+        _color = color,
+        _radius = radius,
+        _margin = margin,
+        _iconColor = null,
+        _textColor = null,
+        _padding = null,
+        _blurSigma = null,
+        _blurColor = null,
+        _heroTag = null;
+
+  const HarcappShareButton.compactSimpleButton({
+    required this.url,
+    this.subject,
     bool collapsed = false,
     Color? color = Colors.transparent,
     Color? iconColor = Colors.black,
@@ -95,7 +122,7 @@ class HarcappShareButton extends StatelessWidget {
           blurColor == null || (blurSigma != null && blurSigma > 0),
           'blurColor only takes effect when blurSigma > 0',
         ),
-        _kind = _ShareButtonKind.simpleButton,
+        _kind = _ShareButtonKind.compactSimpleButton,
         _collapsed = collapsed,
         _color = color,
         _iconColor = iconColor,
@@ -130,6 +157,7 @@ class HarcappShareButton extends StatelessWidget {
     return switch (_kind) {
       _ShareButtonKind.appButton => _buildAppButton(),
       _ShareButtonKind.simpleButton => _buildSimpleButton(context),
+      _ShareButtonKind.compactSimpleButton => _buildCompactSimpleButton(context),
       _ShareButtonKind.floatingActionButton => _buildFloatingActionButton(context),
     };
   }
@@ -147,7 +175,17 @@ class HarcappShareButton extends StatelessWidget {
     child: Icon(MdiIcons.shareVariant, color: background_(context)),
   );
 
-  Widget _buildSimpleButton(BuildContext context) {
+  Widget _buildSimpleButton(BuildContext context) => SimpleButton.from(
+    context: context,
+    color: _color,
+    radius: _radius,
+    margin: _margin ?? const EdgeInsets.all(SimpleButton.defMargVal),
+    icon: MdiIcons.shareVariant,
+    text: _collapsed ? null : 'Udostępnij',
+    onTap: () => HarcappShare.share(url, subject: subject),
+  );
+
+  Widget _buildCompactSimpleButton(BuildContext context) {
     final radius = _radius ?? AppCard.defRadius;
     final pill = Tooltip(
       message: 'Udostępnij',
