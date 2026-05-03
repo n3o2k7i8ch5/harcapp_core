@@ -1,3 +1,4 @@
+import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart';
 
@@ -8,6 +9,19 @@ class _PrintAttachmentRef {
   final String url;
   const _PrintAttachmentRef(this.title, this.url);
 }
+
+/// Priority order for picking a URL when an attachment exposes the same
+/// resource in several URL-typed formats (e.g. `urlPdf` + `urlDocx`). Plain
+/// `url` first (most generic), then document formats, then images. Anything
+/// not listed here is fallback-iterated last.
+const List<FileFormat> _printUrlPreference = [
+  FileFormat.url,
+  FileFormat.urlPdf,
+  FileFormat.urlDocx,
+  FileFormat.urlPng,
+  FileFormat.urlWebp,
+  FileFormat.urlSvg,
+];
 
 /// Looks up the attachment referenced by [material.attachmentName] in
 /// [konspekt.attachments] and — if it carries a URL viewable in print —
@@ -24,9 +38,10 @@ _PrintAttachmentRef? _resolvePrintAttachment(Konspekt konspekt, KonspektMaterial
     if(att is KonspektInternalLinkAttachment)
       return _PrintAttachmentRef(att.title, att.url);
     if(att is KonspektAttachment){
-      for(final entry in att.assets.entries)
-        if(entry.key.isUrl && entry.value != null)
-          return _PrintAttachmentRef(att.title, entry.value!);
+      for(final format in _printUrlPreference){
+        final value = att.assets[format];
+        if(value != null) return _PrintAttachmentRef(att.title, value);
+      }
     }
     return null;
   }

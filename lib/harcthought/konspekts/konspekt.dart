@@ -13,6 +13,7 @@ import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/open_image_dialog.dart';
 import 'package:harcapp_core/comm_widgets/open_svg_image_dialog.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
+import 'package:harcapp_core/harcthought/harcapp_host.dart';
 import 'package:harcapp_core/values/people/person.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:open_filex/open_filex.dart';
@@ -741,6 +742,12 @@ class KonspektAttachment extends BaseKonspektAttachment{
       return result;
     }
 
+    @override
+    Map toJsonMap() => {
+      'type': 'file',
+      ...super.toJsonMap(),
+    };
+
     static KonspektAttachment fromJsonMap(Map<String, dynamic> map) => KonspektAttachment(
       name: map['name'],
       title: map['title'],
@@ -801,7 +808,7 @@ class KonspektInternalLinkAttachment extends BaseKonspektAttachment{
   @override
   KonspektAttachmentPrint? get print => null;
 
-  String get url => 'https://harcapp.web.app$linkPath';
+  String get url => '$harcappBaseUrl$linkPath';
 
   @override
   Map toJsonMap() => {

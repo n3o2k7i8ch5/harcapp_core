@@ -4,6 +4,7 @@ import 'package:harcapp_core/harcthought/articles/model/article.dart';
 import 'package:harcapp_core/harcthought/articles/model/article_source.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/harc_forms/harc_form.dart';
+import 'package:harcapp_core/harcthought/harcapp_host.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/poradnik/poradnik.dart';
 
@@ -18,9 +19,9 @@ import 'package:harcapp_core/harcthought/poradnik/poradnik.dart';
 class HarcappLinks {
   HarcappLinks._();
 
-  static const String scheme = 'https';
-  static const String host = 'harcapp.web.app';
-  static const String baseUrl = '$scheme://$host';
+  static const String scheme = harcappScheme;
+  static const String host = harcappHost;
+  static const String baseUrl = harcappBaseUrl;
 
   // ---------------- Path templates ----------------
   // Long forms (active).
