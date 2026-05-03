@@ -110,7 +110,7 @@ class PoradnikThumbnailWidget extends StatelessWidget {
                       Positioned(
                         bottom: 2*Dimen.defMarg,
                         left: 2*Dimen.defMarg,
-                        child: HarcappShareButton.simpleButton(
+                        child: HarcappShareButton.compactSimpleButton(
                           url: HarcappLinks.poradnikOf(poradnik, short: true),
                           subject: poradnik.title,
                           collapsed: true,
