@@ -130,6 +130,18 @@ class ApelEwanWidgetState extends State<ApelEwanWidget>{
                     textAlign: TextAlign.justify,
                   ),
 
+                  const SizedBox(height: Dimen.sideMarg),
+
+                  Text(
+                    apelEwan.edition,
+                    style: AppTextStyle(
+                      fontSize: Dimen.textSizeNormal,
+                      color: hintEnab_(context),
+                      fontStyle: FontStyle.italic,
+                    ),
+                    textAlign: TextAlign.right,
+                  ),
+
                 ],
               ),
             )

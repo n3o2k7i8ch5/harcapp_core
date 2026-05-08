@@ -20,6 +20,7 @@ class ApelEwan{
 
   final String dirName;
   final String siglum;
+  final String edition;
   final String text;
   /// Each ApelEwan can be presented under different variants (e.g. 'ogolne',
   /// 'dekalog'). The variants share the gospel [text] but differ by [title],
@@ -34,6 +35,7 @@ class ApelEwan{
   const ApelEwan({
     required this.dirName,
     required this.siglum,
+    required this.edition,
     required this.text,
     required this.addedBy,
     this.variants = const {},

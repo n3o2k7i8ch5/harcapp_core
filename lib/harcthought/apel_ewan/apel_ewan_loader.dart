@@ -158,6 +158,7 @@ ApelEwan _parseApelEwan(String id, String yamlSource) {
   return ApelEwan(
     dirName: id,
     siglum: doc['siglum'] as String,
+    edition: doc['edition'] as String,
     text: doc['text'] as String,
     variants: variants,
     folders: folders,
