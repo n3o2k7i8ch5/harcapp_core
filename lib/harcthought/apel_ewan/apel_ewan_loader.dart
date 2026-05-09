@@ -33,8 +33,12 @@ const Map<String, String> apelEwansVariantNameMap = {
 // `folder.colorsData`.
 const String _omegaApelEwanColorsKey = 'omega_apel_ewan';
 const String _dekalogApelEwanColorsKey = 'dekalog_apel_ewan';
-const String _hal2026JrApelEwanColorsKey = 'hal_2026_jr_apel_ewan';
-const String _hal2026SrApelEwanColorsKey = 'hal_2026_sr_apel_ewan';
+const String _hal2026ApelEwanColorsKey = 'hal_2026_apel_ewan';
+
+// Folder-membership tag stored under each camp YAML's `folders:` list.
+// Distinct from the per-age variant ids (`hal-2026-jr` / `hal-2026-sr`)
+// which live under `variants:`.
+const String _hal2026FolderId = 'hal-2026';
 
 const String _assetDir = 'packages/harcapp_core/assets/apel_ewan';
 
@@ -53,8 +57,8 @@ const List<String> dekalogOrder = [
   'Koh_5_9',
 ];
 
-// Camp Sundays 2026 — chronological display order, shared by both age-variant
-// folders. Membership is discovered from each YAML's `folders` field.
+// Camp Sundays 2026 — chronological display order. Membership is discovered
+// from each YAML's `folders` field (tagged with [_hal2026FolderId]).
 const List<String> hal2026Order = [
   'Mt_10_37-42',
   'Mt_11_25-30',
@@ -73,8 +77,7 @@ late Map<String, ApelEwan> allApelEwanMap;
 
 late ApelEwanPersistentFolder omegaFolder;
 late ApelEwanPersistentFolder dekalogFolder;
-late ApelEwanPersistentFolder hal2026JrFolder;
-late ApelEwanPersistentFolder hal2026SrFolder;
+late ApelEwanPersistentFolder hal2026Folder;
 
 Future<List<String>> _discoverIds() async {
   final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
@@ -243,10 +246,8 @@ void _registerFolderPalettes() {
       const CommonColorData(Colors.yellow, Colors.orange, Colors.black));
   CommonColorData.register(_dekalogApelEwanColorsKey,
       const CommonColorData(Colors.greenAccent, Colors.blue, Colors.black));
-  CommonColorData.register(_hal2026JrApelEwanColorsKey,
+  CommonColorData.register(_hal2026ApelEwanColorsKey,
       const CommonColorData(Colors.purpleAccent, Colors.deepPurple, Colors.black));
-  CommonColorData.register(_hal2026SrApelEwanColorsKey,
-      const CommonColorData(Colors.lightBlue, Colors.indigo, Colors.black));
 }
 
 List<ApelEwan> _collectOrderedItems({
@@ -277,16 +278,10 @@ void _buildPersistentFolders() {
     folderId: dekalogApelEwansVariantId,
   );
 
-  final hal2026JrItems = _collectOrderedItems(
+  final hal2026Items = _collectOrderedItems(
     byId: byId,
     order: hal2026Order,
-    folderId: hal2026JrApelEwansVariantId,
-  );
-
-  final hal2026SrItems = _collectOrderedItems(
-    byId: byId,
-    order: hal2026Order,
-    folderId: hal2026SrApelEwansVariantId,
+    folderId: _hal2026FolderId,
   );
 
   omegaFolder = ApelEwanPersistentFolder(
@@ -308,28 +303,20 @@ void _buildPersistentFolders() {
     pdfVariantIds: const [dekalogApelEwansVariantId],
   );
 
-  hal2026JrFolder = ApelEwanPersistentFolder(
-    id: '__hal-2026-jr__',
-    apelEwans: hal2026JrItems,
-    name: hal2026JrApelEwansName,
-    colorsKey: _hal2026JrApelEwanColorsKey,
+  hal2026Folder = ApelEwanPersistentFolder(
+    id: '__hal-2026__',
+    apelEwans: hal2026Items,
+    name: 'Obóz 2026',
+    colorsKey: _hal2026ApelEwanColorsKey,
     iconKey: 'tent',
     variantId: hal2026JrApelEwansVariantId,
-    pdfVariantIds: const [hal2026JrApelEwansVariantId],
-  );
-
-  hal2026SrFolder = ApelEwanPersistentFolder(
-    id: '__hal-2026-sr__',
-    apelEwans: hal2026SrItems,
-    name: hal2026SrApelEwansName,
-    colorsKey: _hal2026SrApelEwanColorsKey,
-    iconKey: 'tent',
-    variantId: hal2026SrApelEwansVariantId,
-    pdfVariantIds: const [hal2026SrApelEwansVariantId],
+    pdfVariantIds: const [
+      hal2026JrApelEwansVariantId,
+      hal2026SrApelEwansVariantId,
+    ],
   );
 
   ApelEwanPersistentFolder.register(omegaFolder);
   ApelEwanPersistentFolder.register(dekalogFolder);
-  ApelEwanPersistentFolder.register(hal2026JrFolder);
-  ApelEwanPersistentFolder.register(hal2026SrFolder);
+  ApelEwanPersistentFolder.register(hal2026Folder);
 }
