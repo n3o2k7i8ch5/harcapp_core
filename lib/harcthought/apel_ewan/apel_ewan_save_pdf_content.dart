@@ -233,44 +233,106 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
     );
   }
 
+  // First text line is `fontSize * height` tall (AppTextStyle defaults to
+  // height ≈ 1.4). The checkbox is wrapped in a SizedBox of this height so its
+  // center aligns with the title's center — siglum naturally lands below.
+  static const double _titleLineHeight = Dimen.textSizeBig * 1.4;
+
+  Widget _checkbox({
+    required bool? value,
+    required ValueChanged<bool?> onChanged,
+    bool tristate = false,
+  }) =>
+      SizedBox(
+        height: _titleLineHeight,
+        width: 24,
+        child: Align(
+          alignment: Alignment.center,
+          child: Checkbox(
+            tristate: tristate,
+            value: value,
+            onChanged: onChanged,
+            activeColor: accent_(context),
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            visualDensity: VisualDensity.compact,
+          ),
+        ),
+      );
+
   Widget _buildSelectAllTile(BuildContext context, List<ApelEwan> apels) {
     final allSelected = _selectedSiglums.length == apels.length && apels.isNotEmpty;
     final noneSelected = _selectedSiglums.isEmpty;
-    return CheckboxListTile(
-      tristate: true,
-      value: allSelected ? true : (noneSelected ? false : null),
-      controlAffinity: ListTileControlAffinity.leading,
-      activeColor: accent_(context),
-      title: Text(
-        '${_selectedSiglums.length}/${apels.length}',
-        style: AppTextStyle(
-          fontWeight: weightBold,
-          fontSize: Dimen.textSizeBig,
-          color: iconEnab_(context),
+    return InkWell(
+      onTap: () => allSelected ? _deselectAll() : _selectAll(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: Dimen.sideMarg,
+          vertical: Dimen.iconMarg,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _checkbox(
+              tristate: true,
+              value: allSelected ? true : (noneSelected ? false : null),
+              onChanged: (_) => allSelected ? _deselectAll() : _selectAll(),
+            ),
+            const SizedBox(width: Dimen.sideMarg),
+            Expanded(
+              child: Text(
+                '${_selectedSiglums.length}/${apels.length}',
+                style: AppTextStyle(
+                  fontWeight: weightBold,
+                  fontSize: Dimen.textSizeBig,
+                  color: iconEnab_(context),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-      onChanged: (_) => allSelected ? _deselectAll() : _selectAll(),
     );
   }
 
   Widget _buildApelTile(BuildContext context, ApelEwan apel) {
-    return CheckboxListTile(
-      value: _selectedSiglums.contains(apel.siglum),
-      onChanged: (v) => _toggle(apel.siglum, v),
-      controlAffinity: ListTileControlAffinity.leading,
-      activeColor: accent_(context),
-      dense: true,
-      title: Text(
-        _titleFor(apel),
-        style: const AppTextStyle(fontSize: Dimen.textSizeBig),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      subtitle: Text(
-        apel.siglum,
-        style: AppTextStyle(
-          color: hintEnab_(context),
-          fontSize: Dimen.textSizeSmall,
+    final selected = _selectedSiglums.contains(apel.siglum);
+    return InkWell(
+      onTap: () => _toggle(apel.siglum, !selected),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: Dimen.sideMarg,
+          vertical: Dimen.iconMarg,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _checkbox(
+              value: selected,
+              onChanged: (v) => _toggle(apel.siglum, v),
+            ),
+            const SizedBox(width: Dimen.sideMarg),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    _titleFor(apel),
+                    style: const AppTextStyle(fontSize: Dimen.textSizeBig),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    apel.siglum,
+                    style: AppTextStyle(
+                      color: hintEnab_(context),
+                      fontSize: Dimen.textSizeSmall,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
