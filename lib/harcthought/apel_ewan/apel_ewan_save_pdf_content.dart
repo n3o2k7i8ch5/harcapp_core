@@ -122,10 +122,10 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
                       controlAffinity: ListTileControlAffinity.leading,
                       activeColor: accent_(context),
                       title: Text(
-                        'Uwzględnione apele (${_selectedSiglums.length}/${apels.length})',
+                        '${_selectedSiglums.length}/${apels.length}',
                         style: AppTextStyle(
-                          fontSize: Dimen.textSizeAppBar,
                           fontWeight: weightBold,
+                          fontSize: Dimen.textSizeBig,
                           color: iconEnab_(context),
                         ),
                       ),
