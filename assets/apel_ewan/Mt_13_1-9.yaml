@@ -1,0 +1,32 @@
+siglum: Mt 13, 1-9
+edition: Biblia Tysiąclecia
+folders:
+- niedziele_obozowe_2026_zh
+- niedziele_obozowe_2026_hsw
+text: |-
+  Owego dnia Jezus wyszedł z domu i usiadł nad jeziorem. Wnet zebrały się koło Niego tłumy tak wielkie, że wszedł do łodzi i usiadł, a cały lud stał na brzegu. I mówił im wiele w przypowieściach tymi słowami:
+
+  «Oto siewca wyszedł siać. A gdy siał, niektóre [ziarna] padły na drogę, nadleciały ptaki i wydziobały je. Inne padły na grunt skalisty, gdzie niewiele miały ziemi; i wnet powschodziły, bo gleba nie była głęboka. Lecz gdy słońce wzeszło, przypaliły się i uschły, bo nie miały korzenia. Inne znowu padły między ciernie, a ciernie wybujały i zagłuszyły je. Inne wreszcie padły na ziemię żyzną i plon wydały, jedno stokrotny, drugie sześćdziesięciokrotny, a inne trzydziestokrotny. Kto ma uszy, niechaj słucha!».
+variants:
+  niedziele_obozowe_2026_zh:
+    title: &t Przypowieść o siewcy
+    shortTitle: &s |-
+      12.
+      lipca
+      2026 r.
+    questions:
+    - 'Kto pomaga Ci rozwijać Twoją wiarę? Czy masz osoby (rodzina, przyjaciele, nauczyciele), które są dla Ciebie jak „dobry ogrodnik”? Czy zdarzyło Ci się za to podziękować?'
+    - 'Jakie „owoce” możesz przynosić w codziennym życiu? W jaki sposób możesz pokazać dobro, miłość i wiarę w domu, szkole czy wśród koleżanek i kolegów?'
+    - Co możesz zrobić, żeby Twoje serce było jak dobra ziemia?
+  niedziele_obozowe_2026_hsw:
+    title: *t
+    shortTitle: *s
+    questions:
+    - Czy dajesz sobie przestrzeń na refleksję i rozwój wewnętrzny? Jak wygląda Twój czas na ciszę, modlitwę lub zatrzymanie się w codziennym biegu?
+    - 'Jakie konkretne „ciernie” dziś Ciebie zagłuszają? Czy to presja, media, ambicje, relacje, a może brak czasu – co realnie odciąga Cię od tego, co duchowe?'
+    - Dlaczego czasem szybko tracisz zapał do dobrych postanowień? Co sprawia, że jesteś jak gleba skalista i jak możesz to zmienić?
+    - Jakim słuchaczem jesteś dla swoich bliskich?
+    - Siewca z przypowieści był dość rozrzutny. Sypał ziarno w miejsca nieprzygotowane pod zasiew. Jak myślisz, dlaczego tak postępował?
+addedBy:
+  name: Paulina Jaskułowska
+  email: paulina.prokop@zhp.net.pl

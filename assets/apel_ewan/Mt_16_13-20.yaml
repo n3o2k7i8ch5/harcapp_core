@@ -1,0 +1,37 @@
+siglum: Mt 16, 13-20
+edition: Biblia Tysiąclecia
+folders:
+- niedziele_obozowe_2026_zh
+- niedziele_obozowe_2026_hsw
+text: |-
+  Gdy Jezus przyszedł w okolice Cezarei Filipowej, pytał swoich uczniów: Za kogo ludzie uważają Syna Człowieczego? Odpowiedzieli Mu: Jedni za Jana Chrzciciela, inni za Eliasza, jeszcze inni za Jeremiasza albo za jednego z proroków. Wtedy ich zapytał: A wy za kogo Mnie uważacie? Szymon Piotr odpowiedział: Ty jesteś Mesjasz, Syn Boga żywego. Wówczas Jezus mu oznajmił: Błogosławiony jesteś Szymonie, synu Jony, bo nie ciało i krew objawiły to tobie, lecz Mój Ojciec, który jest w niebie. I Ja ci mówię: Ty jesteś Piotr i na tej skale zbuduję Mój Kościół, a potęga śmierci go nie zwycięży. Tobie dam klucze Królestwa Niebios i cokolwiek zwiążesz na ziemi, będzie związane w niebie, a co rozwiążesz na ziemi, będzie rozwiązane w niebie. Następnie nakazał uczniom, aby nikomu nie mówili, że On jest Mesjaszem.
+variants:
+  niedziele_obozowe_2026_zh:
+    title: &t Chrystus skałą Kościoła
+    shortTitle: &s |-
+      23.
+      sierpnia
+      2026 r.
+    comment: &c |-
+      Opisana scena jest momentem przełomowym w Ewangelii. Jezus zadaje uczniom kluczowe pytanie o to, kim on jest dla każdego z nich osobiście.
+
+      W odpowiedzi Piotra widzimy łaskę wiary. Jezus wyraźnie wskazuje na to, że Piotr nie doszedł do swego wyznania własnym rozumowym wysiłkiem, ale Bóg dał mu łaskę wiary. Na tej skale jaką jest autentyczna wiara w Chrystusa, Bóg buduje swój Kościół.
+
+      „Klucze Królestwa” odnoszą się do władzy odpuszczania i zatrzymywania grzechów, czyli do głoszenia przebaczenia w imieniu Chrystusa.
+    questions:
+    - &q1 'Co Ty odpowiedział(a)byś Jezusowi na pytanie: „za kogo Ty mnie uważasz”?'
+    - &q2 Czy zdarzyło ci się doświadczyć przebaczenia od innej osoby?
+    - &q3 Czy Ty potrafisz przebaczać innym ludziom?
+  niedziele_obozowe_2026_hsw:
+    title: *t
+    shortTitle: *s
+    comment: *c
+    questions:
+    - *q1
+    - W jaki sposób rozumiesz, że wiara jest darem Boga, a nie wynikiem ludzkiego wysiłku? Co to zmienia w Twoim podejściu do życia duchowego?
+    - Jak mógł czuć się Piotr, gdy Jezus powierzył mu odpowiedzialność za Kościół? Czy Ty potrafisz podjąć się wyzwania związanego z wzięciem na siebie odpowiedzialności?
+    - *q2
+    - *q3
+addedBy:
+  name: Kacper Bączkowski
+  email: kacper.baczkowski@zhp.pl

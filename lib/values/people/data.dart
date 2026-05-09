@@ -1527,9 +1527,10 @@ const Person JULITA_STEPIEN = Person(name: 'Julita Stępień');
 
 const Person KACPER_BACZKOWSKI = Person(
     name: 'Kacper Bączkowski',
-    rankHarc: RankHarc.dhc,
+    druzyna: 'Ewangelickie Duszpasterstwo Związku Harcerstwa Polskiego',
+    rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
-    email: ['baczkowski.kacper.04@gmail.com']
+    email: ['baczkowski.kacper.04@gmail.com', 'kacper.baczkowski@zhp.pl']
 );
 const Person KACPER_CIESIELSKI = Person(
     name: 'Kacper Ciesielski',
@@ -2461,6 +2462,12 @@ const Person MARIA_PRZYBYLSKA = Person(
     org: Org.zhp,
     email: ['marysia.przybylska10@gmail.com', 'maria.przybylska@zhp.net.pl']
 );
+const Person MARIA_SKOWRONEK = Person(
+    name: 'Maria Skowronek',
+    rankInstr: RankInstr.phm,
+    org: Org.zhp,
+    email: ['maria.skowronek@zhp.net.pl']
+);
 Person MARIA_STACHARSKA = const Person(
     name: 'Maria Stacharska',
     druzyna: '8. PgDSH "Pandora"',
@@ -3046,7 +3053,7 @@ const Person PATRYK_GRABOWSKI = Person(
 );
 const Person PATRYK_OLECH = Person(
     name: 'Patryk Olech',
-    druzyna: '1 JDH „Pościg” im. Jana III Sobieskiego',
+    druzyna: '1. JDH „Pościg” im. Jana III Sobieskiego',
     hufiec: 'Południowo-Wschodni Hufiec Harcerzy "Grody" im. gen. bryg. Antoniego Chruściela ps. "Monter"',
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhrHOc,
@@ -3061,6 +3068,12 @@ const Person PAULINA_FERENC = Person(
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ["ur.fav.paulinka@gmail.com", "paulaferenc45@gmail.com"]
+);
+const Person PAULINA_JASKULOWSKA = Person(
+    name: 'Paulina Jaskułowska',
+    rankInstr: RankInstr.phm,
+    org: Org.zhp,
+    email: ['paulina.prokop@zhp.net.pl']
 );
 const Person PAULINA_LUBOS = Person(
   name: 'Paulina Lubos',
@@ -3077,7 +3090,7 @@ const Person PAULA_PALA = Person(
 );
 const Person PAULINA_PODGORSKA = Person(
     name: 'Paulina Podgórska',
-    druzyna: '254 DW „Paloma”',
+    druzyna: '254. DW „Paloma”',
     hufiec: 'Krapkowice',
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
@@ -3137,7 +3150,7 @@ const Person PIOTR_KUBOWICZ = Person(
 );
 const Person PIOTR_KWAPIEN = Person(
     name: 'Piotr Kwapień',
-    druzyna: '35 TDH "Ignis" im. Józefy Kantor',
+    druzyna: '35. TDH "Ignis" im. Józefy Kantor',
     hufiec: huf_zhp_torun,
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
@@ -3252,7 +3265,7 @@ const Person ROBERT_LISZEWSKI = Person(
 );
 const Person ROBERT_LOPATKA = Person(
     name: 'Robert Łopatka',
-    druzyna: '37 drużyna wędrownicza "Nocne Licha"',
+    druzyna: '37. Drużyna Wędrownicza "Nocne Licha"',
     hufiec: huf_zhp_ziemi_zywieckiej,
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHRc,
@@ -3346,7 +3359,7 @@ const Person STANISLAW_MARCHEWICZ = Person(
 );
 const Person STANISLAW_WOJCIECHOWSKI = Person(
     name: 'Stanisław Wojciechowski',
-    druzyna: '58 DW "Szuwary"',
+    druzyna: '58. DW "Szuwary"',
     hufiec: huf_zhp_ostrow_wielkopolski,
     org: Org.zhp,
     email: ["stasiu2w2@gmail.com"]
@@ -3428,6 +3441,12 @@ const Person SZYMON_MALCZAK = Person(
     org: Org.zhp,
     email: ["tomek02897@gmail.com"]
 );
+const Person SZYMON_MASLOWSKI = Person(
+    name: 'Szymon Masłowski',
+    rankInstr: RankInstr.pwd,
+    org: Org.zhp,
+    email: ['szymon.maslowski@zhp.net.pl']
+);
 const Person SZYMON_OPLOCKI_NIEMIEC = Person(
     name: 'Szymon Opłocki-Niemiec',
     hufiec: huf_zhp_warszawa_mokotow,
@@ -3459,14 +3478,14 @@ const Person SZYMON_PODGORNY = Person(
 );
 const Person SZYMON_REKOWSKI = Person(
     name: 'Szymon Rekowski',
-    druzyna: '8 GDH Brzask',
+    druzyna: '8. GDH „Brzask”',
     hufiec: huf_zhp_gdynia,
     org: Org.zhp,
     email: ["szym.rekowski@gmail.com"]
 );
 const Person SZYMON_SITEK = Person(
     name: 'Szymon Sitek',
-    druzyna: '29 DSH „Ignis” w Zgórzu',
+    druzyna: '29. DSH „Ignis” w Zgórzu',
     hufiec: huf_zhp_garwolin,
     org: Org.zhp,
     email: ['szymonsitek09@gmail.com']

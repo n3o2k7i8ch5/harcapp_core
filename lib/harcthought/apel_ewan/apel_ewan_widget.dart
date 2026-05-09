@@ -12,6 +12,18 @@ import 'package:harcapp_core/values/people/utils.dart';
 import 'apel_ewan.dart';
 import 'apel_ewan_category_selector.dart';
 
+const Map<String, String> _gospelAuthorMap = {
+  'Mt': 'Mateusza',
+  'Mk': 'Marka',
+  'Łk': 'Łukasza',
+  'J': 'Jana',
+};
+
+const TextStyle _sectionTitleStyle = AppTextStyle(
+  fontSize: Dimen.textSizeBig,
+  fontWeight: weightHalfBold,
+);
+
 String _addedByLabel(ContributorIdentity identity) {
   if (identity.name != null && identity.name!.trim().isNotEmpty) return identity.name!.trim();
   if (identity.emailRef != null && identity.emailRef!.trim().isNotEmpty) return identity.emailRef!.trim();
@@ -49,246 +61,220 @@ class ApelEwanWidgetState extends State<ApelEwanWidget>{
 
   @override
   void initState() {
-
     final initVariantId = widget.initVariantId;
     selVariantId = (initVariantId != null && apelEwan.variants.containsKey(initVariantId))
         ? initVariantId
         : apelEwan.variants.keys.first;
     allVariantId = apelEwan.variants.keys.toList();
-
-    switch(apelEwan.siglum.split(' ')[0]){
-      case 'Mt':
-        author = 'Mateusza';
-        break;
-      case 'Mk':
-        author = 'Marka';
-        break;
-      case 'Łk':
-        author = 'Łukasza';
-        break;
-      case 'J':
-        author = 'Jana';
-        break;
-    }
+    author = _gospelAuthorMap[apelEwan.siglum.split(' ')[0]];
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final variant = selVariant;
-    final hasComment = variant?.comment != null;
-    final hasQuestions = variant != null && variant.questions.isNotEmpty;
-    return Column(
+    final variant = selVariant!;
+    final hasComment = variant.comment != null;
+    final hasQuestions = variant.questions.isNotEmpty;
+    return SelectionArea(
+      child: Column(
+        children: [
+          _buildGospelCard(variant),
+          const SizedBox(height: Dimen.sideMarg),
+          if (hasComment || hasQuestions) ...[
+            _buildVariantContentCard(variant, hasComment: hasComment, hasQuestions: hasQuestions),
+            const SizedBox(height: Dimen.sideMarg),
+          ],
+          _buildAddedByCard(),
+          const SizedBox(height: Dimen.sideMarg),
+        ],
+      ),
+    );
+  }
+
+  Widget _card({required Widget child}) => Material(
+    clipBehavior: Clip.hardEdge,
+    color: cardEnab_(context),
+    borderRadius: BorderRadius.circular(AppCard.bigRadius),
+    child: child,
+  );
+
+  Widget _section(String title, Widget child) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Text(title, style: _sectionTitleStyle, textAlign: TextAlign.justify),
+      const SizedBox(height: Dimen.sideMarg),
+      child,
+    ],
+  );
+
+  Widget _buildGospelCard(ApelEwanVariant variant) => _card(
+    child: Padding(
+      padding: const EdgeInsets.all(Dimen.sideMarg),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+
+          Text(
+            variant.title,
+            style: const AppTextStyle(
+              fontSize: Dimen.textSizeAppBar,
+              fontWeight: weightBold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+
+          if (author != null) ...[
+            const SizedBox(height: Dimen.sideMarg),
+            Text(
+              'Słowa Ewangelii według św. $author',
+              style: AppTextStyle(
+                fontSize: Dimen.textSizeBig,
+                fontWeight: weightHalfBold,
+                color: hintEnab_(context),
+              ),
+              textAlign: TextAlign.justify,
+            ),
+          ],
+
+          const SizedBox(height: Dimen.sideMarg),
+
+          AppText(
+            apelEwan.text.replaceAll('\n\n', '\n').replaceAll('\n', '\n\n'),
+            size: Dimen.textSizeBig,
+            textAlign: TextAlign.justify,
+          ),
+
+          const SizedBox(height: Dimen.sideMarg),
+
+          const Text(
+            'Oto Słowo Boże.',
+            style: AppTextStyle(fontSize: Dimen.textSizeBig),
+            textAlign: TextAlign.justify,
+          ),
+
+          const SizedBox(height: Dimen.sideMarg),
+
+          Text(
+            apelEwan.edition,
+            style: AppTextStyle(
+              fontSize: Dimen.textSizeNormal,
+              color: hintEnab_(context),
+              fontStyle: FontStyle.italic,
+            ),
+            textAlign: TextAlign.right,
+          ),
+
+        ],
+      ),
+    ),
+  );
+
+  Widget _buildVariantContentCard(
+    ApelEwanVariant variant, {
+    required bool hasComment,
+    required bool hasQuestions,
+  }) => _card(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
 
-        Material(
-            clipBehavior: Clip.hardEdge,
-            color: cardEnab_(context),
-            borderRadius: BorderRadius.circular(AppCard.bigRadius),
-            child: Padding(
-              padding: const EdgeInsets.all(Dimen.sideMarg),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-
-                  Text(
-                    variant!.title,
-                    style: const AppTextStyle(
-                        fontSize: Dimen.textSizeAppBar,
-                        fontWeight: weightBold
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-
-                  if(author != null)
-                    const SizedBox(height: Dimen.sideMarg),
-
-                  if(author != null)
-                    Text(
-                      'Słowa Ewangelii według św. $author',
-                      style: AppTextStyle(
-                          fontSize: Dimen.textSizeBig,
-                          fontWeight: weightHalfBold,
-                          color: hintEnab_(context)
-                      ),
-                      textAlign: TextAlign.justify,
-                    ),
-
-                  const SizedBox(height: Dimen.sideMarg),
-
-                  AppText(
-                    apelEwan.text.replaceAll('\n\n', '\n').replaceAll('\n', '\n\n'),
-                    size: Dimen.textSizeBig,
-                    textAlign: TextAlign.justify,
-                  ),
-
-                  const SizedBox(height: Dimen.sideMarg),
-
-                  const Text(
-                    'Oto Słowo Boże.',
-                    style: AppTextStyle(fontSize: Dimen.textSizeBig),
-                    textAlign: TextAlign.justify,
-                  ),
-
-                  const SizedBox(height: Dimen.sideMarg),
-
-                  Text(
-                    apelEwan.edition,
-                    style: AppTextStyle(
-                      fontSize: Dimen.textSizeNormal,
-                      color: hintEnab_(context),
-                      fontStyle: FontStyle.italic,
-                    ),
-                    textAlign: TextAlign.right,
-                  ),
-
-                ],
-              ),
-            )
-        ),
-
-        const SizedBox(height: Dimen.sideMarg),
-
-        if(hasComment || hasQuestions)
+        if (allVariantId.length > 1)
           Material(
-            clipBehavior: Clip.hardEdge,
-            color: cardEnab_(context),
-            borderRadius: BorderRadius.circular(AppCard.bigRadius),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            color: backgroundIcon_(context),
+            child: Row(
               children: [
-
-                if(allVariantId.length > 1)
-                  Material(
-                    color: backgroundIcon_(context),
-                    child: Row(
-                      children: [
-
-                        const SizedBox(width: Dimen.sideMarg),
-
-                        const Text(
-                          'Wariant:',
-                          style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold),
-                          textAlign: TextAlign.justify,
-                        ),
-
-                        Expanded(
-                          child: ApelEwanCategorySelector(
-                            allVariantIds: allVariantId,
-                            selVariantIds: selVariantId,
-                            onChanged: (value) => setState(() => selVariantId = value as String),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                Padding(
-                  padding: const EdgeInsets.all(Dimen.sideMarg),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-
-                      if(hasComment)
-                        const Text(
-                          'Garść komentarzy',
-                          style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold),
-                          textAlign: TextAlign.justify,
-                        ),
-
-                      if(hasComment)
-                        const SizedBox(height: Dimen.sideMarg),
-
-                      if(hasComment)
-                        Text(
-                          variant.comment!,
-                          style: const AppTextStyle(fontSize: Dimen.textSizeBig),
-                          textAlign: TextAlign.justify,
-                        ),
-
-                      if(hasComment)
-                        const SizedBox(height: 2*Dimen.sideMarg),
-
-                      if(hasQuestions)
-                        const Text(
-                          'Pytania',
-                          style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold),
-                          textAlign: TextAlign.justify,
-                        ),
-
-                      if(hasQuestions)
-                        const SizedBox(height: Dimen.sideMarg),
-
-                      if(hasQuestions)
-                        ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) => Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 6.0),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: 32,
-                                    child: Text(
-                                        '${index + 1}',
-                                        style: const AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightHalfBold)
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: AppText(
-                                        variant.questions[index],
-                                        size: Dimen.textSizeBig
-                                    ),
-                                  )
-                                ]),
-                          ),
-                          itemCount: variant.questions.length,
-                          shrinkWrap: true,
-                        )
-
-                    ],
+                const SizedBox(width: Dimen.sideMarg),
+                const Text('Wariant:', style: _sectionTitleStyle, textAlign: TextAlign.justify),
+                Expanded(
+                  child: ApelEwanCategorySelector(
+                    allVariantIds: allVariantId,
+                    selVariantIds: selVariantId,
+                    onChanged: (value) => setState(() => selVariantId = value as String),
                   ),
                 ),
-
               ],
             ),
           ),
 
-        if(hasComment || hasQuestions)
-          const SizedBox(height: Dimen.sideMarg),
-
-        Material(
-          clipBehavior: Clip.hardEdge,
-          color: cardEnab_(context),
-          borderRadius: BorderRadius.circular(AppCard.bigRadius),
-          child: Padding(
-            padding: const EdgeInsets.all(Dimen.sideMarg),
-            child: Builder(builder: (context) {
-              final person = _personFor(apelEwan.addedBy);
-              final labelStyle = AppTextStyle(
-                fontSize: Dimen.textSizeNormal,
-                color: hintEnab_(context),
-              );
-              if (person != null)
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text('Dodał:', style: labelStyle),
-                    const SizedBox(height: Dimen.defMarg),
-                    PersonCard(person, selectable: true),
-                  ],
-                );
-              return Text(
-                'Dodał: ${_addedByLabel(apelEwan.addedBy)}',
-                style: labelStyle,
-              );
-            }),
+        Padding(
+          padding: const EdgeInsets.all(Dimen.sideMarg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (hasComment) ...[
+                _section(
+                  'Garść komentarzy',
+                  Text(
+                    variant.comment!,
+                    style: const AppTextStyle(fontSize: Dimen.textSizeBig),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+                const SizedBox(height: 2 * Dimen.sideMarg),
+              ],
+              if (hasQuestions) _section('Pytania', _buildQuestionsList(variant)),
+            ],
           ),
         ),
 
-        const SizedBox(height: Dimen.sideMarg),
-
       ],
+    ),
+  );
+
+  Widget _buildQuestionsList(ApelEwanVariant variant) => ListView.builder(
+    physics: const NeverScrollableScrollPhysics(),
+    shrinkWrap: true,
+    itemCount: variant.questions.length,
+    itemBuilder: (context, index) => Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 32,
+            child: Text('${index + 1}', style: _sectionTitleStyle),
+          ),
+          Expanded(
+            child: AppText(variant.questions[index], size: Dimen.textSizeBig),
+          ),
+        ],
+      ),
+    ),
+  );
+
+  Widget _buildAddedByCard() {
+    final person = _personFor(apelEwan.addedBy);
+    return _card(
+      child: Padding(
+        padding: const EdgeInsets.all(Dimen.sideMarg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+
+            Text(
+              'Osoba dodająca',
+              style: AppTextStyle(
+                fontSize: Dimen.textSizeBig,
+                color: hintEnab_(context),
+              ),
+            ),
+
+            const SizedBox(height: Dimen.defMarg),
+
+            person != null
+                ? PersonCard(person, selectable: true)
+                : Text(
+                    _addedByLabel(apelEwan.addedBy),
+                    style: const AppTextStyle(
+                      fontSize: Dimen.textSizeBig,
+                      fontWeight: weightHalfBold,
+                    ),
+                  ),
+
+          ],
+        ),
+      ),
     );
   }
 

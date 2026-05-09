@@ -1,5 +1,8 @@
 siglum: Mt 13, 44-52
 edition: Biblia Tysiąclecia
+folders:
+- niedziele_obozowe_2026_zh
+- niedziele_obozowe_2026_hsw
 text: |-
   Jezus opowiedział tłumom taką przypowieść:
 
@@ -12,11 +15,22 @@ text: |-
   A On rzekł do nich: «Dlatego każdy uczony w Piśmie, który stał się uczniem królestwa niebieskiego, podobny jest do ojca rodziny, który ze swego skarbca wydobywa rzeczy nowe i stare».
 variants:
   ogolne:
-    title: Przypowieść o skarbie i perle
-    questions:
+    title: &t Przypowieść o skarbie i perle
+    questions: &q
     - Co jest Twoim największym celem życiowym?
     - Znalezienie skarbu nie jest jakimś tam byle zadankiem. Czy sądzisz, że wymagasz wystarczająco dużo na drodze do jego znalezienia?
     - 'Co jest Ci bliższe: „albo grubo, albo wcale”, czy „no chyba ujdzie”?'
+  niedziele_obozowe_2026_zh:
+    title: *t
+    shortTitle: &s |-
+      26.
+      lipca
+      2026 r.
+    questions: *q
+  niedziele_obozowe_2026_hsw:
+    title: *t
+    shortTitle: *s
+    questions: *q
 addedBy:
   name: Daniel Iwanicki
   email: daniel.iwanicki@zhp.net.pl
