@@ -1527,7 +1527,7 @@ const Person JULITA_STEPIEN = Person(name: 'Julita Stępień');
 
 const Person KACPER_BACZKOWSKI = Person(
     name: 'Kacper Bączkowski',
-    druzyna: 'Ewangelickie Duszpasterstwo Związku Harcerstwa Polskiego',
+    comment: 'Ewangelickie Duszpasterstwo Związku Harcerstwa Polskiego',
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ['baczkowski.kacper.04@gmail.com', 'kacper.baczkowski@zhp.pl']
@@ -1907,6 +1907,12 @@ const Person KRYSTIAN_BULANDA = Person(
     hufiec: huf_zhp_krakow_pdg,
     email: ['krystian.bulanda@zhp.net.pl'],
     org: Org.zhp
+);
+const Person KRYSTYNA_BITNER = Person(
+    name: 'Krystyna Bitner',
+    org: Org.zhp,
+    comment: 'Chorągiew Stołeczna',
+    email: ['krystyna.bitner@zhp.net.pl']
 );
 const Person KRZESIMIR_KARBOWNIK = Person(
     name: 'Krzesimir Karbownik',

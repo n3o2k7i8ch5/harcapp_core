@@ -142,6 +142,7 @@ class ApelEwanWidgetState extends State<ApelEwanWidget>{
           AppText(
             apelEwan.text.replaceAll('\n\n', '\n').replaceAll('\n', '\n\n'),
             size: Dimen.textSizeBig,
+            height: 1.2,
             textAlign: TextAlign.justify,
           ),
 
