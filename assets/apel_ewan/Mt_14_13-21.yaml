@@ -1,14 +1,14 @@
 siglum: Mt 14, 13-21
 edition: Biblia Tysiąclecia
 folders:
-- niedziele_obozowe_2026_zh
-- niedziele_obozowe_2026_hsw
+- hal-2026-1
+- hal-2026-2
 text: |-
   Gdy Jezus to usłyszał, oddalił się stamtąd w łodzi na miejsce pustynne, osobno. Lecz tłumy zwiedziały się o tym i z miast poszły za Nim pieszo. Gdy wysiadł, ujrzał wielki tłum. Zlitował się nad nimi i uzdrowił ich chorych.
 
   A gdy nastał wieczór, przystąpili do Niego uczniowie i rzekli: «Miejsce to jest puste i pora już spóźniona. Każ więc rozejść się tłumom: niech idą do wsi i zakupią sobie żywności!» Lecz Jezus im odpowiedział: «Nie potrzebują odchodzić; wy dajcie im jeść!» Odpowiedzieli Mu: «Nie mamy tu nic prócz pięciu chlebów i dwóch ryb». On rzekł: «Przynieście Mi je tutaj!» Kazał tłumom usiąść na trawie, następnie wziąwszy pięć chlebów i dwie ryby, spojrzał w niebo, odmówił błogosławieństwo i połamawszy chleby dał je uczniom, uczniowie zaś tłumom. Jedli wszyscy do sytości, i zebrano z tego, co pozostało, dwanaście pełnych koszy ułomków. Tych zaś, którzy jedli, było około pięciu tysięcy mężczyzn, nie licząc kobiet i dzieci.
 variants:
-  niedziele_obozowe_2026_zh:
+  hal-2026-1:
     title: &t Pierwsze rozmnożenie chleba
     shortTitle: &s |-
       2.
@@ -18,7 +18,7 @@ variants:
     - Jak myślisz, dlaczego niektórzy chcieli słuchać Jezusa, syna jakiegoś żydowskiego stolarza, do późnego wieczora bez jedzenia?
     - Jezus i apostołowie musieli być niezwykle popularni po rozmnożeniu chleba. Dlaczego Jezus zaraz po cudzie odprawił tłumy i poszedł sam się modlić?
     - Czy zdarza Ci się nie zrobić czegoś bardzo ważnego z obawy, że zabraknie Ci rzeczy przyziemnych?
-  niedziele_obozowe_2026_hsw:
+  hal-2026-2:
     title: *t
     shortTitle: *s
     questions: *q

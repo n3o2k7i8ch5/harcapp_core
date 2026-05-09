@@ -14,11 +14,11 @@ const String ogolneApelEwansName = 'Ogólne';
 const String dekalogApelEwansVariantId = 'dekalog';
 const String dekalogApelEwansName = 'Dekalog';
 
-const String niedzieleObozowe2026ZhApelEwansVariantId = 'niedziele_obozowe_2026_zh';
-const String niedzieleObozowe2026ZhApelEwansName = 'Niedziele obozowe 2026 (7–12 lat)';
+const String niedzieleObozowe2026ZhApelEwansVariantId = 'hal-2026-1';
+const String niedzieleObozowe2026ZhApelEwansName = 'Obóz 2026 (7–12 lat)';
 
-const String niedzieleObozowe2026HswApelEwansVariantId = 'niedziele_obozowe_2026_hsw';
-const String niedzieleObozowe2026HswApelEwansName = 'Niedziele obozowe 2026 (13+ lat)';
+const String niedzieleObozowe2026HswApelEwansVariantId = 'hal-2026-2';
+const String niedzieleObozowe2026HswApelEwansName = 'Obóz 2026 (13+ lat)';
 
 const Map<String, String> apelEwansVariantNameMap = {
   ogolneApelEwansVariantId: ogolneApelEwansName,
@@ -222,7 +222,7 @@ void _registerFolderPalettes() {
   CommonColorData.register(_dekalogApelEwanColorsKey,
       const CommonColorData(Colors.greenAccent, Colors.blue, Colors.black));
   CommonColorData.register(_niedzieleObozowe2026ZhApelEwanColorsKey,
-      const CommonColorData(Colors.lightGreen, Colors.green, Colors.black));
+      const CommonColorData(Colors.purpleAccent, Colors.deepPurple, Colors.black));
   CommonColorData.register(_niedzieleObozowe2026HswApelEwanColorsKey,
       const CommonColorData(Colors.lightBlue, Colors.indigo, Colors.black));
 }

@@ -1,8 +1,8 @@
 siglum: Mt 13, 44-52
 edition: Biblia Tysiąclecia
 folders:
-- niedziele_obozowe_2026_zh
-- niedziele_obozowe_2026_hsw
+- hal-2026-1
+- hal-2026-2
 text: |-
   Jezus opowiedział tłumom taką przypowieść:
 
@@ -20,14 +20,14 @@ variants:
     - Co jest Twoim największym celem życiowym?
     - Znalezienie skarbu nie jest jakimś tam byle zadankiem. Czy sądzisz, że wymagasz wystarczająco dużo na drodze do jego znalezienia?
     - 'Co jest Ci bliższe: „albo grubo, albo wcale”, czy „no chyba ujdzie”?'
-  niedziele_obozowe_2026_zh:
+  hal-2026-1:
     title: *t
     shortTitle: &s |-
       26.
       lipca
       2026 r.
     questions: *q
-  niedziele_obozowe_2026_hsw:
+  hal-2026-2:
     title: *t
     shortTitle: *s
     questions: *q

@@ -7,7 +7,9 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/save_pdf_dialog.dart';
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan.dart';
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan_folder.dart';
+import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan_loader.dart';
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan_pdf_builder.dart';
+import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan_persistent_folder.dart';
 import 'package:harcapp_core/values/dimen.dart';
 
 class ApelEwanSavePdfContent extends StatefulWidget {
@@ -51,6 +53,15 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
   String _resolveVariantId(ApelEwan apel) =>
       widget.variantIdFor?.call(apel) ?? defaultApelEwanVariantId(folder, apel);
 
+  String? _displayedVariantName() {
+    final f = folder;
+    if (f is ApelEwanPersistentFolder)
+      return apelEwansVariantNameMap[f.variantId];
+    if (f.apelEwans.isEmpty) return null;
+    final id = _resolveVariantId(f.apelEwans.first);
+    return apelEwansVariantNameMap[id];
+  }
+
   String _titleFor(ApelEwan apel){
     final String variantId = _resolveVariantId(apel);
     final variant = apel.variants[variantId] ?? apel.variants.values.first;
@@ -89,6 +100,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
     final apels = folder.apelEwans;
     final allSelected = _selectedSiglums.length == apels.length && apels.isNotEmpty;
     final noneSelected = _selectedSiglums.isEmpty;
+    final variantName = _displayedVariantName();
 
     return SavePdfDialogContent(
       generatePdf: _generate,
@@ -102,6 +114,38 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
 
           if(widget.extraTopWidget != null) ...[
             widget.extraTopWidget!,
+            const SizedBox(height: Dimen.sideMarg),
+          ],
+
+          if(variantName != null) ...[
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppCard.defRadius),
+                color: cardEnab_(context),
+              ),
+              padding: const EdgeInsets.all(Dimen.sideMarg),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Wariant pytań:',
+                    style: AppTextStyle(color: hintEnab_(context)),
+                  ),
+                  const SizedBox(height: Dimen.defMarg),
+                  Text(
+                    variantName,
+                    style: AppTextStyle(
+                      fontSize: Dimen.textSizeBig,
+                      fontWeight: weightHalfBold,
+                      color: iconEnab_(context),
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: Dimen.sideMarg),
           ],
 
