@@ -13,6 +13,11 @@ class ApelEwanCategorySelector extends StatelessWidget{
   static const double height = Dimen.iconFootprint;
   static const double leadingPadding = 0;
   static const double trailingPadding = 0;
+  /// Horizontal padding `dropdown_button2` adds inside the button before the
+  /// item text starts (`_kMenuItemPadding`, applied when both button width and
+  /// dropdown width are null). Hosts can use it to align outside labels with
+  /// the selector's text.
+  static const double internalTextPadding = 16.0;
 
   final List<String> allVariantIds;
   final String selVariantIds;

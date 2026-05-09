@@ -44,10 +44,10 @@ class ApelEwanPersistentFolder extends ApelEwanFolder{
   final String variantId;
 
   /// Variants offered to the user in the PDF download dialog. When empty,
-  /// the dialog defaults to [ogolneApelEwansVariantId] with no picker.
-  /// A single-element list also hides the picker and just uses that variant.
-  /// Multiple entries render a selector. Apels missing the chosen variant
-  /// fall back to their first variant in the generated PDF.
+  /// the dialog falls back to a single-entry list containing [variantId] and
+  /// hides the picker. A single-element list also hides the picker and just
+  /// uses that variant. Multiple entries render a selector. Apels missing the
+  /// chosen variant fall back to their first variant in the generated PDF.
   final List<String> pdfVariantIds;
 
   const ApelEwanPersistentFolder({
