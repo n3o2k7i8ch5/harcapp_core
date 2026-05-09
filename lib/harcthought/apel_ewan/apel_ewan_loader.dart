@@ -179,19 +179,12 @@ ApelEwan _parseApelEwan(String id, String yamlSource) {
   if (variants.isEmpty)
     debugPrint('ApelEwan $id has no variants — every apel must define at least one variant');
 
-  final folders = <String>{};
-  final foldersYaml = doc['folders'] as YamlList?;
-  if (foldersYaml != null)
-    for (final f in foldersYaml)
-      folders.add(f as String);
-
   return ApelEwan(
     dirName: id,
     siglum: doc['siglum'] as String,
     edition: doc['edition'] as String,
     text: doc['text'] as String,
     variants: variants,
-    folders: folders,
     addedBy: _parseAddedBy(id, doc['addedBy'] as YamlMap),
   );
 }
@@ -261,9 +254,6 @@ List<ApelEwan> _collectOrderedItems({
     assert(apelEwan != null,
         '$folderId: order references "$id" but no asset was discovered');
     if (apelEwan == null) continue;
-    assert(apelEwan.folders.contains(folderId),
-        '$folderId: $id.yaml is in order but its `folders` list does not contain "$folderId"');
-    if (!apelEwan.folders.contains(folderId)) continue;
     items.add(apelEwan);
   }
   return items;

@@ -26,7 +26,6 @@ class ApelEwan{
   /// 'dekalog'). The variants share the gospel [text] but differ by [title],
   /// [shortTitle], [questions] and [comment].
   final Map<String, ApelEwanVariant> variants;
-  final Set<String> folders;
   /// Who added this apel ewangeliczne to the app. At least one of
   /// [ContributorIdentity.name] / [ContributorIdentity.emailRef] /
   /// [ContributorIdentity.userKeyRef] must be set.
@@ -39,7 +38,6 @@ class ApelEwan{
     required this.text,
     required this.addedBy,
     this.variants = const {},
-    this.folders = const {},
   });
 
   @override
