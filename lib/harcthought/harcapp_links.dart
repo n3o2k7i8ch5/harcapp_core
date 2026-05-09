@@ -136,9 +136,31 @@ class HarcappLinks {
     return '$baseUrl${_fill(tpl, {'folder': slug})}';
   }
 
-  static String apelEwanItem(String folderSlug, String apelDirName, {bool short = false}) {
+  /// Query parameter that pins the questions variant on an apel item URL
+  /// (e.g. `?variant=hal-2026-2`). Optional — when omitted, the folder's
+  /// default variant is used. The short URL form uses [_short] (`?v=…`).
+  static const String apelEwanItemVariantQueryParam = 'variant';
+  static const String apelEwanItemVariantQueryParamShort = 'v';
+
+  /// All accepted query-parameter names for the apel variant pin (long + short
+  /// form). Router/parser should match any of these to stay tolerant.
+  static const List<String> apelEwanItemVariantQueryParamAliases = [
+    apelEwanItemVariantQueryParam,
+    apelEwanItemVariantQueryParamShort,
+  ];
+
+  static String apelEwanItem(
+    String folderSlug,
+    String apelDirName, {
+    String? variantId,
+    bool short = false,
+  }) {
     final tpl = short ? apelEwanItemTemplateShort : apelEwanItemTemplate;
-    return '$baseUrl${_fill(tpl, {'folder': folderSlug, 'apel': apelDirName})}';
+    final path = _fill(tpl, {'folder': folderSlug, 'apel': apelDirName});
+    if (variantId == null) return '$baseUrl$path';
+    final key = short ? apelEwanItemVariantQueryParamShort : apelEwanItemVariantQueryParam;
+    final q = Uri.encodeQueryComponent(variantId);
+    return '$baseUrl$path?$key=$q';
   }
 
   static String article(ArticleSource source, String localId, {bool short = false}) {
@@ -161,8 +183,13 @@ class HarcappLinks {
   static String apelEwanFolderOf(ApelEwanPersistentFolder f, {bool short = false}) =>
       apelEwanFolder(f.slug, short: short);
 
-  static String apelEwanItemOf(ApelEwanPersistentFolder f, ApelEwan apel, {bool short = false}) =>
-      apelEwanItem(f.slug, apel.dirName, short: short);
+  static String apelEwanItemOf(
+    ApelEwanPersistentFolder f,
+    ApelEwan apel, {
+    String? variantId,
+    bool short = false,
+  }) =>
+      apelEwanItem(f.slug, apel.dirName, variantId: variantId, short: short);
 
   static String articleOf(CoreArticle a, {bool short = false}) =>
       article(a.source, a.localId, short: short);

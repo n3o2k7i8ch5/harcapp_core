@@ -40,8 +40,12 @@ class ApelEwanWidget extends StatefulWidget{
 
   final ApelEwan apelEwan;
   final String? initVariantId;
+  /// Fires whenever the user changes the variant via the in-widget dropdown.
+  /// The selected id is one of [apelEwan]'s variant keys (never null). Hosts
+  /// can use it to persist the choice (e.g. reflect it in the page URL).
+  final ValueChanged<String>? onVariantChanged;
 
-  const ApelEwanWidget(this.apelEwan, {this.initVariantId, super.key});
+  const ApelEwanWidget(this.apelEwan, {this.initVariantId, this.onVariantChanged, super.key});
 
   @override
   State<StatefulWidget> createState() => ApelEwanWidgetState();
@@ -61,14 +65,27 @@ class ApelEwanWidgetState extends State<ApelEwanWidget>{
 
   @override
   void initState() {
-    final initVariantId = widget.initVariantId;
-    selVariantId = (initVariantId != null && apelEwan.variants.containsKey(initVariantId))
-        ? initVariantId
-        : apelEwan.variants.keys.first;
+    selVariantId = _resolveVariantId(widget.initVariantId);
     allVariantId = apelEwan.variants.keys.toList();
     author = _gospelAuthorMap[apelEwan.siglum.split(' ')[0]];
     super.initState();
   }
+
+  @override
+  void didUpdateWidget(ApelEwanWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Keep the local selection in sync with externally-driven [initVariantId]
+    // changes (e.g. host reading a query param after browser back/forward).
+    if (widget.initVariantId != oldWidget.initVariantId) {
+      final resolved = _resolveVariantId(widget.initVariantId);
+      if (resolved != selVariantId) setState(() => selVariantId = resolved);
+    }
+  }
+
+  String _resolveVariantId(String? requested) =>
+      (requested != null && apelEwan.variants.containsKey(requested))
+          ? requested
+          : apelEwan.variants.keys.first;
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +208,11 @@ class ApelEwanWidgetState extends State<ApelEwanWidget>{
                   child: ApelEwanCategorySelector(
                     allVariantIds: allVariantId,
                     selVariantIds: selVariantId,
-                    onChanged: (value) => setState(() => selVariantId = value as String),
+                    onChanged: (value) {
+                      if (value == null || value == selVariantId) return;
+                      setState(() => selVariantId = value);
+                      widget.onVariantChanged?.call(value);
+                    },
                   ),
                 ),
               ],
