@@ -32,6 +32,7 @@ class ApelEwanSavePdfContent extends StatefulWidget {
 class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
 
   late Set<String> _selectedSiglums;
+  final ScrollController _listScrollController = ScrollController();
 
   ApelEwanFolder get folder => widget.folder;
 
@@ -39,6 +40,12 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
   void initState() {
     super.initState();
     _selectedSiglums = folder.apelEwans.map((a) => a.siglum).toSet();
+  }
+
+  @override
+  void dispose() {
+    _listScrollController.dispose();
+    super.dispose();
   }
 
   String _resolveVariantId(ApelEwan apel) =>
@@ -133,7 +140,9 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
 
                     Flexible(
                       child: Scrollbar(
+                        controller: _listScrollController,
                         child: ListView.builder(
+                          controller: _listScrollController,
                           shrinkWrap: true,
                           itemCount: apels.length,
                           itemBuilder: (context, index){
