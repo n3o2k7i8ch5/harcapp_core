@@ -792,7 +792,7 @@ class KonspektInternalLinkAttachment extends BaseKonspektAttachment{
   final String name;
   @override
   final String title;
-  /// Path on `harcapp.web.app` (e.g. `/rozwazania_ewangeliczne`). Use
+  /// Path on `harcapp.web.app` (e.g. `/rozwazania-ewangeliczne`). Use
   /// `HarcappLinks` path templates / builders to construct.
   final String linkPath;
 

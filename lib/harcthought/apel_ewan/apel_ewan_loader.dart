@@ -286,7 +286,7 @@ void _buildPersistentFolders() {
   );
 
   niedzieleObozowe2026ZhFolder = ApelEwanPersistentFolder(
-    id: '__niedziele_obozowe_2026_zh__',
+    id: '__hal-2026-1__',
     apelEwans: niedzieleObozowe2026ZhItems,
     name: niedzieleObozowe2026ZhApelEwansName,
     colorsKey: _niedzieleObozowe2026ZhApelEwanColorsKey,
@@ -295,7 +295,7 @@ void _buildPersistentFolders() {
   );
 
   niedzieleObozowe2026HswFolder = ApelEwanPersistentFolder(
-    id: '__niedziele_obozowe_2026_hsw__',
+    id: '__hal-2026-2__',
     apelEwans: niedzieleObozowe2026HswItems,
     name: niedzieleObozowe2026HswApelEwansName,
     colorsKey: _niedzieleObozowe2026HswApelEwanColorsKey,

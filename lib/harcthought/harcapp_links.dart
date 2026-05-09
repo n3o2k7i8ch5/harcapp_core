@@ -36,9 +36,9 @@ class HarcappLinks {
   static const String formaListTemplate = '/konspekty/formy';
   static const String formaItemTemplate = '/konspekty/formy/:filename';
 
-  static const String apelEwanFolderListTemplate = '/rozwazania_ewangeliczne';
-  static const String apelEwanFolderTemplate = '/rozwazania_ewangeliczne/:folder';
-  static const String apelEwanItemTemplate = '/rozwazania_ewangeliczne/:folder/:apel';
+  static const String apelEwanFolderListTemplate = '/rozwazania-ewangeliczne';
+  static const String apelEwanFolderTemplate = '/rozwazania-ewangeliczne/:folder';
+  static const String apelEwanItemTemplate = '/rozwazania-ewangeliczne/:folder/:apel';
 
   static const String articleListTemplate = '/articles';
   static const String articleSourceListTemplate = '/articles/:source';
@@ -223,8 +223,8 @@ class HarcappLinks {
       return null;
     }
 
-    // Apel ewangeliczny: /rozwazania_ewangeliczne(/:folder) or /r(/:folder).
-    if (segs[0] == 'rozwazania_ewangeliczne' || segs[0] == 'r') {
+    // Apel ewangeliczny: /rozwazania-ewangeliczne(/:folder) or /r(/:folder).
+    if (segs[0] == 'rozwazania-ewangeliczne' || segs[0] == 'r') {
       if (segs.length == 1) return const ApelEwanFolderListLink();
       if (segs.length == 2) return ApelEwanFolderLink(slug: segs[1]);
       return null;

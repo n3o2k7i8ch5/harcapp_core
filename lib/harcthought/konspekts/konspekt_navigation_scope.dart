@@ -10,7 +10,7 @@ import 'package:flutter/widgets.dart';
 /// otherwise be a global mutable singleton.
 class KonspektNavigationScope extends InheritedWidget {
 
-  /// Opens [linkPath] (a `harcapp.web.app` path like `/rozwazania_ewangeliczne`)
+  /// Opens [linkPath] (a `harcapp.web.app` path like `/rozwazania-ewangeliczne`)
   /// inside the host app — typically by parsing it via `HarcappLinks.parsePath`
   /// and pushing the resulting page on top of the current route. Returns true
   /// if the link was resolved and pushed.

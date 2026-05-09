@@ -11,8 +11,8 @@ import 'apel_ewan_loader.dart';
 class ApelEwanCategorySelector extends StatelessWidget{
 
   static const double height = Dimen.iconFootprint;
-  static const double leadingPadding = 6;
-  static const double trailingPadding = 14;
+  static const double leadingPadding = 0;
+  static const double trailingPadding = 0;
 
   final List<String> allVariantIds;
   final String selVariantIds;
@@ -54,6 +54,7 @@ class ApelEwanCategorySelector extends StatelessWidget{
         ),
 
         dropdownStyleData: DropdownStyleData(
+          padding: EdgeInsets.zero,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppCard.bigRadius),
           ),
