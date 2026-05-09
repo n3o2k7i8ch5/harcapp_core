@@ -49,7 +49,8 @@ Future<Uint8List> buildApelEwanPdf({
     final String variantId = variantIdFor?.call(apelEwan)
         ?? defaultApelEwanVariantId(folder, apelEwan);
 
-    ApelEwanVariant variant = apelEwan.variants[variantId]!;
+    ApelEwanVariant variant =
+        apelEwan.variants[variantId] ?? apelEwan.variants.values.first;
     String title = variant.title;
 
     List<pw.Widget> questionLineWidgets = [];

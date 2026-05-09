@@ -1,12 +1,12 @@
 siglum: Mt 13, 24-30
 edition: Biblia Tysiąclecia
 folders:
-- hal-2026-1
-- hal-2026-2
+- hal-2026-jr
+- hal-2026-sr
 text: |-
   Jezus opowiedział tłumom tę przypowieść: Królestwo niebieskie podobne jest do człowieka, który posiał dobre nasienie na swej roli. Lecz gdy ludzie spali, przyszedł jego nieprzyjaciel, nasiał chwastu między pszenicę i odszedł. A gdy zboże wyrosło i wypuściło kłosy, wtedy pojawił się i chwast. Słudzy gospodarza przyszli i zapytali go: Panie, czy nie posiałeś dobrego nasienia na swej roli? Skąd więc wziął się na niej chwast? Odpowiedział im: Nieprzyjazny człowiek to sprawił. Rzekli mu słudzy: Chcesz więc, żebyśmy poszli i zebrali go? A on im odrzekł: Nie, byście zbierając chwast nie wyrwali razem z nim i pszenicy. Pozwólcie obojgu róść aż do żniwa; a w czasie żniwa powiem żeńcom: Zbierzcie najpierw chwast i powiążcie go w snopki na spalenie; pszenicę zaś zwieźcie do mego spichlerza.
 variants:
-  hal-2026-1:
+  hal-2026-jr:
     title: &t Przypowieść o chwaście wśród zboża
     shortTitle: &s |-
       19.
@@ -16,7 +16,7 @@ variants:
     - &q1 Jak reagujesz na trudności i porażki podczas swoich działań?
     - &q2 Kiedy o kimś myślisz, to bardziej pamiętasz o dobrych czy złych rzeczach, które zrobił/a?
     - &q3 Jak zauważać i zapamiętywać dobro mimo obecności zła?
-  hal-2026-2:
+  hal-2026-sr:
     title: *t
     shortTitle: *s
     questions:

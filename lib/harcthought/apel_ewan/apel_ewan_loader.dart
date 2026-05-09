@@ -14,17 +14,17 @@ const String ogolneApelEwansName = 'Ogólne';
 const String dekalogApelEwansVariantId = 'dekalog';
 const String dekalogApelEwansName = 'Dekalog';
 
-const String niedzieleObozowe2026ZhApelEwansVariantId = 'hal-2026-1';
-const String niedzieleObozowe2026ZhApelEwansName = 'Obóz 2026 (7–12 lat)';
+const String hal2026JrApelEwansVariantId = 'hal-2026-jr';
+const String hal2026JrApelEwansName = 'Obóz 2026 (7–12 lat)';
 
-const String niedzieleObozowe2026HswApelEwansVariantId = 'hal-2026-2';
-const String niedzieleObozowe2026HswApelEwansName = 'Obóz 2026 (13+ lat)';
+const String hal2026SrApelEwansVariantId = 'hal-2026-sr';
+const String hal2026SrApelEwansName = 'Obóz 2026 (13+ lat)';
 
 const Map<String, String> apelEwansVariantNameMap = {
   ogolneApelEwansVariantId: ogolneApelEwansName,
   dekalogApelEwansVariantId: dekalogApelEwansName,
-  niedzieleObozowe2026ZhApelEwansVariantId: niedzieleObozowe2026ZhApelEwansName,
-  niedzieleObozowe2026HswApelEwansVariantId: niedzieleObozowe2026HswApelEwansName,
+  hal2026JrApelEwansVariantId: hal2026JrApelEwansName,
+  hal2026SrApelEwansVariantId: hal2026SrApelEwansName,
 };
 
 // Palette keys for the persistent folders. Registered with [CommonColorData]
@@ -33,8 +33,8 @@ const Map<String, String> apelEwansVariantNameMap = {
 // `folder.colorsData`.
 const String _omegaApelEwanColorsKey = 'omega_apel_ewan';
 const String _dekalogApelEwanColorsKey = 'dekalog_apel_ewan';
-const String _niedzieleObozowe2026ZhApelEwanColorsKey = 'niedziele_obozowe_2026_zh_apel_ewan';
-const String _niedzieleObozowe2026HswApelEwanColorsKey = 'niedziele_obozowe_2026_hsw_apel_ewan';
+const String _hal2026JrApelEwanColorsKey = 'hal_2026_jr_apel_ewan';
+const String _hal2026SrApelEwanColorsKey = 'hal_2026_sr_apel_ewan';
 
 const String _assetDir = 'packages/harcapp_core/assets/apel_ewan';
 
@@ -55,7 +55,7 @@ const List<String> dekalogOrder = [
 
 // Camp Sundays 2026 — chronological display order, shared by both age-variant
 // folders. Membership is discovered from each YAML's `folders` field.
-const List<String> niedzieleObozowe2026Order = [
+const List<String> hal2026Order = [
   'Mt_10_37-42',
   'Mt_11_25-30',
   'Mt_13_1-9',
@@ -73,8 +73,8 @@ late Map<String, ApelEwan> allApelEwanMap;
 
 late ApelEwanPersistentFolder omegaFolder;
 late ApelEwanPersistentFolder dekalogFolder;
-late ApelEwanPersistentFolder niedzieleObozowe2026ZhFolder;
-late ApelEwanPersistentFolder niedzieleObozowe2026HswFolder;
+late ApelEwanPersistentFolder hal2026JrFolder;
+late ApelEwanPersistentFolder hal2026SrFolder;
 
 Future<List<String>> _discoverIds() async {
   final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
@@ -214,6 +214,28 @@ Future<void> loadAllApelEwans() async {
 
   _registerFolderPalettes();
   _buildPersistentFolders();
+  _validatePdfVariantsCoverage();
+}
+
+/// Logs a warning for each persistent folder whose [pdfVariantIds] cover
+/// variants not present on every apel in that folder. Empty [pdfVariantIds]
+/// (e.g. omega) intentionally opts out — its PDFs fall back to the apel's
+/// first variant per [buildApelEwanPdf].
+void _validatePdfVariantsCoverage() {
+  for (final folder in ApelEwanPersistentFolder.all) {
+    if (folder.pdfVariantIds.isEmpty) continue;
+    for (final variantId in folder.pdfVariantIds) {
+      final missing = <String>[
+        for (final apel in folder.apelEwans)
+          if (!apel.variants.containsKey(variantId)) apel.siglum,
+      ];
+      if (missing.isEmpty) continue;
+      debugPrint(
+        '[ApelEwan] Folder "${folder.name}" pdfVariant "$variantId": '
+        'missing in ${missing.length} apel(s): ${missing.join(", ")}',
+      );
+    }
+  }
 }
 
 void _registerFolderPalettes() {
@@ -221,9 +243,9 @@ void _registerFolderPalettes() {
       const CommonColorData(Colors.yellow, Colors.orange, Colors.black));
   CommonColorData.register(_dekalogApelEwanColorsKey,
       const CommonColorData(Colors.greenAccent, Colors.blue, Colors.black));
-  CommonColorData.register(_niedzieleObozowe2026ZhApelEwanColorsKey,
+  CommonColorData.register(_hal2026JrApelEwanColorsKey,
       const CommonColorData(Colors.purpleAccent, Colors.deepPurple, Colors.black));
-  CommonColorData.register(_niedzieleObozowe2026HswApelEwanColorsKey,
+  CommonColorData.register(_hal2026SrApelEwanColorsKey,
       const CommonColorData(Colors.lightBlue, Colors.indigo, Colors.black));
 }
 
@@ -255,16 +277,16 @@ void _buildPersistentFolders() {
     folderId: dekalogApelEwansVariantId,
   );
 
-  final niedzieleObozowe2026ZhItems = _collectOrderedItems(
+  final hal2026JrItems = _collectOrderedItems(
     byId: byId,
-    order: niedzieleObozowe2026Order,
-    folderId: niedzieleObozowe2026ZhApelEwansVariantId,
+    order: hal2026Order,
+    folderId: hal2026JrApelEwansVariantId,
   );
 
-  final niedzieleObozowe2026HswItems = _collectOrderedItems(
+  final hal2026SrItems = _collectOrderedItems(
     byId: byId,
-    order: niedzieleObozowe2026Order,
-    folderId: niedzieleObozowe2026HswApelEwansVariantId,
+    order: hal2026Order,
+    folderId: hal2026SrApelEwansVariantId,
   );
 
   omegaFolder = ApelEwanPersistentFolder(
@@ -283,28 +305,31 @@ void _buildPersistentFolders() {
     colorsKey: _dekalogApelEwanColorsKey,
     iconKey: 'textBoxMultiple',
     variantId: dekalogApelEwansVariantId,
+    pdfVariantIds: const [dekalogApelEwansVariantId],
   );
 
-  niedzieleObozowe2026ZhFolder = ApelEwanPersistentFolder(
-    id: '__hal-2026-1__',
-    apelEwans: niedzieleObozowe2026ZhItems,
-    name: niedzieleObozowe2026ZhApelEwansName,
-    colorsKey: _niedzieleObozowe2026ZhApelEwanColorsKey,
+  hal2026JrFolder = ApelEwanPersistentFolder(
+    id: '__hal-2026-jr__',
+    apelEwans: hal2026JrItems,
+    name: hal2026JrApelEwansName,
+    colorsKey: _hal2026JrApelEwanColorsKey,
     iconKey: 'tent',
-    variantId: niedzieleObozowe2026ZhApelEwansVariantId,
+    variantId: hal2026JrApelEwansVariantId,
+    pdfVariantIds: const [hal2026JrApelEwansVariantId],
   );
 
-  niedzieleObozowe2026HswFolder = ApelEwanPersistentFolder(
-    id: '__hal-2026-2__',
-    apelEwans: niedzieleObozowe2026HswItems,
-    name: niedzieleObozowe2026HswApelEwansName,
-    colorsKey: _niedzieleObozowe2026HswApelEwanColorsKey,
+  hal2026SrFolder = ApelEwanPersistentFolder(
+    id: '__hal-2026-sr__',
+    apelEwans: hal2026SrItems,
+    name: hal2026SrApelEwansName,
+    colorsKey: _hal2026SrApelEwanColorsKey,
     iconKey: 'tent',
-    variantId: niedzieleObozowe2026HswApelEwansVariantId,
+    variantId: hal2026SrApelEwansVariantId,
+    pdfVariantIds: const [hal2026SrApelEwansVariantId],
   );
 
   ApelEwanPersistentFolder.register(omegaFolder);
   ApelEwanPersistentFolder.register(dekalogFolder);
-  ApelEwanPersistentFolder.register(niedzieleObozowe2026ZhFolder);
-  ApelEwanPersistentFolder.register(niedzieleObozowe2026HswFolder);
+  ApelEwanPersistentFolder.register(hal2026JrFolder);
+  ApelEwanPersistentFolder.register(hal2026SrFolder);
 }

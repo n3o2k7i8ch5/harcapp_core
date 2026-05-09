@@ -34,6 +34,8 @@ class ApelEwanSavePdfContent extends StatefulWidget {
 class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
 
   late Set<String> _selectedSiglums;
+  late List<String> _availableVariantIds;
+  late String _selectedVariantId;
   final ScrollController _listScrollController = ScrollController();
 
   ApelEwanFolder get folder => widget.folder;
@@ -42,6 +44,17 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
   void initState() {
     super.initState();
     _selectedSiglums = folder.apelEwans.map((a) => a.siglum).toSet();
+
+    final f = folder;
+    if (f is ApelEwanPersistentFolder) {
+      _availableVariantIds = f.pdfVariantIds.isEmpty
+          ? const [ogolneApelEwansVariantId]
+          : f.pdfVariantIds;
+      _selectedVariantId = _availableVariantIds.first;
+    } else {
+      _availableVariantIds = const [];
+      _selectedVariantId = '';
+    }
   }
 
   @override
@@ -50,15 +63,20 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
     super.dispose();
   }
 
-  String _resolveVariantId(ApelEwan apel) =>
-      widget.variantIdFor?.call(apel) ?? defaultApelEwanVariantId(folder, apel);
+  String _resolveVariantId(ApelEwan apel) {
+    if (_availableVariantIds.isNotEmpty) {
+      return apel.variants.containsKey(_selectedVariantId)
+          ? _selectedVariantId
+          : apel.variants.keys.first;
+    }
+    return widget.variantIdFor?.call(apel) ?? defaultApelEwanVariantId(folder, apel);
+  }
 
   String? _displayedVariantName() {
-    final f = folder;
-    if (f is ApelEwanPersistentFolder)
-      return apelEwansVariantNameMap[f.variantId];
-    if (f.apelEwans.isEmpty) return null;
-    final id = _resolveVariantId(f.apelEwans.first);
+    if (_availableVariantIds.isNotEmpty)
+      return apelEwansVariantNameMap[_selectedVariantId];
+    if (folder.apelEwans.isEmpty) return null;
+    final id = _resolveVariantId(folder.apelEwans.first);
     return apelEwansVariantNameMap[id];
   }
 
@@ -88,7 +106,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
     final bytes = await buildApelEwanPdf(
       folder: folder,
       selectedSiglums: _selectedSiglums,
-      variantIdFor: widget.variantIdFor,
+      variantIdFor: _resolveVariantId,
       noteFor: widget.noteFor,
     );
     return (bytes: bytes, filename: pdfFileNameForFolder(folder));
@@ -117,7 +135,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
             const SizedBox(height: Dimen.sideMarg),
           ],
 
-          if(variantName != null) ...[
+          if(variantName != null || _availableVariantIds.length > 1) ...[
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppCard.defRadius),
@@ -133,16 +151,43 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
                     style: AppTextStyle(color: hintEnab_(context)),
                   ),
                   const SizedBox(height: Dimen.defMarg),
-                  Text(
-                    variantName,
-                    style: AppTextStyle(
-                      fontSize: Dimen.textSizeBig,
-                      fontWeight: weightHalfBold,
-                      color: iconEnab_(context),
+                  if(_availableVariantIds.length > 1)
+                    DropdownButton<String>(
+                      isExpanded: true,
+                      value: _selectedVariantId,
+                      underline: const SizedBox.shrink(),
+                      items: [
+                        for(final id in _availableVariantIds)
+                          DropdownMenuItem<String>(
+                            value: id,
+                            child: Text(
+                              apelEwansVariantNameMap[id] ?? id,
+                              style: AppTextStyle(
+                                fontSize: Dimen.textSizeBig,
+                                fontWeight: weightHalfBold,
+                                color: iconEnab_(context),
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                      ],
+                      onChanged: (v){
+                        if(v == null) return;
+                        setState(() => _selectedVariantId = v);
+                      },
+                    )
+                  else
+                    Text(
+                      variantName ?? '',
+                      style: AppTextStyle(
+                        fontSize: Dimen.textSizeBig,
+                        fontWeight: weightHalfBold,
+                        color: iconEnab_(context),
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
                 ],
               ),
             ),

@@ -1,14 +1,14 @@
 siglum: Mt 16, 21-28
 edition: Biblia Tysiąclecia
 folders:
-- hal-2026-1
-- hal-2026-2
+- hal-2026-jr
+- hal-2026-sr
 text: |-
   Odtąd zaczął Jezus [Chrystus] wskazywać swoim uczniom na to, że musi udać się do Jerozolimy i wiele wycierpieć od starszych i arcykapłanów oraz uczonych w Piśmie; że będzie zabity i trzeciego dnia zmartwychwstanie. A Piotr wziął Go na bok i począł robić Mu wyrzuty: «Panie, niech Cię Bóg broni! Nie przyjdzie to nigdy na Ciebie». Lecz On odwrócił się i rzekł do Piotra: «Zejdź Mi z oczu, szatanie! Jesteś Mi zawadą, bo nie myślisz po Bożemu, lecz po ludzku».
 
   Wtedy Jezus rzekł do swoich uczniów: «Jeśli ktoś chce pójść za Mną, niech się zaprze samego siebie, niech weźmie krzyż swój i niech Mnie naśladuje. Bo kto chce zachować swoje życie, straci je; a kto straci swe życie z mego powodu, znajdzie je. Cóż bowiem za korzyść odniesie człowiek, choćby cały świat zyskał, a na swej duszy szkodę poniósł? Albo co da człowiek w zamian za swoją duszę? Albowiem Syn Człowieczy przyjdzie w chwale Ojca swego razem z aniołami swoimi i wtedy odda każdemu według jego postępowania. Zaprawdę, powiadam wam: Niektórzy z tych, co tu stoją, nie zaznają śmierci, aż ujrzą Syna Człowieczego przychodzącego w królestwie swoim».
 variants:
-  hal-2026-1:
+  hal-2026-jr:
     title: &t Pierwsza zapowiedź męki i zmartwychwstania
     shortTitle: &s |-
       30.
@@ -20,7 +20,7 @@ variants:
     - 'Na co „tracisz swoje życie” - co robisz w wolnym czasie? Czy są to zajęcia pożyteczne dla Ciebie lub innych ludzi?'
     - Krzyż jest symbolem cierpienia, trudów. Jakie są ostatnio trudy, z którymi się mierzysz? Jak myślisz, czego Cię one nauczyły?
     - '„Niech mnie naśladuje” - jak myślisz, co to znaczy naśladować Jezusa? Co konkretnie dziś możesz zrobić, co byłoby naśladowaniem Jezusa?'
-  hal-2026-2:
+  hal-2026-sr:
     title: *t
     shortTitle: *s
     comment: *c

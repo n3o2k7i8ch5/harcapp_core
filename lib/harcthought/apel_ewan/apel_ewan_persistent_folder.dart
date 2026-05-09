@@ -43,6 +43,13 @@ class ApelEwanPersistentFolder extends ApelEwanFolder{
   /// to the apel's first variant if the apel doesn't define this one.
   final String variantId;
 
+  /// Variants offered to the user in the PDF download dialog. When empty,
+  /// the dialog defaults to [ogolneApelEwansVariantId] with no picker.
+  /// A single-element list also hides the picker and just uses that variant.
+  /// Multiple entries render a selector. Apels missing the chosen variant
+  /// fall back to their first variant in the generated PDF.
+  final List<String> pdfVariantIds;
+
   const ApelEwanPersistentFolder({
     required super.id,
     required super.apelEwans,
@@ -50,6 +57,7 @@ class ApelEwanPersistentFolder extends ApelEwanFolder{
     required this.iconKey,
     required this.colorsKey,
     required this.variantId,
+    this.pdfVariantIds = const [],
   });
 
   @override

@@ -137,7 +137,7 @@ class HarcappLinks {
   }
 
   /// Query parameter that pins the questions variant on an apel item URL
-  /// (e.g. `?variant=hal-2026-2`). Optional — when omitted, the folder's
+  /// (e.g. `?variant=hal-2026-sr`). Optional — when omitted, the folder's
   /// default variant is used. The short URL form uses [_short] (`?v=…`).
   static const String apelEwanItemVariantQueryParam = 'variant';
   static const String apelEwanItemVariantQueryParamShort = 'v';
