@@ -31,7 +31,7 @@ class BaseDialog extends StatelessWidget{
     );
 
     if(maxWidth != null)
-      _child = Container(
+      _child = ConstrainedBox(
         constraints: BoxConstraints(maxWidth: maxWidth!),
         child: _child,
       );

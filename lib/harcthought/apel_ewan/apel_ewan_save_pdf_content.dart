@@ -47,7 +47,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
   String _titleFor(ApelEwan apel){
     final String variantId = _resolveVariantId(apel);
     final variant = apel.variants[variantId] ?? apel.variants.values.first;
-    return variant.shortTitle ?? variant.title;
+    return (variant.shortTitle ?? variant.title).replaceAll('\n', ' ');
   }
 
   void _toggle(String siglum, bool? value){
@@ -87,6 +87,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
       generatePdf: _generate,
       isStillMounted: () => mounted,
       buttonEnabled: _selectedSiglums.isNotEmpty,
+      topWidgetExpands: true,
       topWidget: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -98,71 +99,72 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
           ],
 
           if(apels.isNotEmpty)
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppCard.defRadius),
-                color: cardEnab_(context),
-              ),
-              clipBehavior: Clip.hardEdge,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CheckboxListTile(
-                    tristate: true,
-                    value: allSelected ? true : (noneSelected ? false : null),
-                    controlAffinity: ListTileControlAffinity.leading,
-                    activeColor: accent_(context),
-                    title: Text(
-                      'Uwzględnione apele (${_selectedSiglums.length}/${apels.length})',
-                      style: AppTextStyle(
-                        fontSize: Dimen.textSizeAppBar,
-                        fontWeight: weightBold,
-                        color: iconEnab_(context),
+            Flexible(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(AppCard.defRadius),
+                  color: cardEnab_(context),
+                ),
+                clipBehavior: Clip.hardEdge,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CheckboxListTile(
+                      tristate: true,
+                      value: allSelected ? true : (noneSelected ? false : null),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      activeColor: accent_(context),
+                      title: Text(
+                        'Uwzględnione apele (${_selectedSiglums.length}/${apels.length})',
+                        style: AppTextStyle(
+                          fontSize: Dimen.textSizeAppBar,
+                          fontWeight: weightBold,
+                          color: iconEnab_(context),
+                        ),
                       ),
+                      onChanged: (_) {
+                        if (allSelected) {
+                          _deselectAll();
+                        } else {
+                          _selectAll();
+                        }
+                      },
                     ),
-                    onChanged: (_) {
-                      if (allSelected) {
-                        _deselectAll();
-                      } else {
-                        _selectAll();
-                      }
-                    },
-                  ),
 
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxHeight: 320),
-                    child: Scrollbar(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: apels.length,
-                        itemBuilder: (context, index){
-                          final apel = apels[index];
-                          final selected = _selectedSiglums.contains(apel.siglum);
-                          return CheckboxListTile(
-                            value: selected,
-                            onChanged: (v) => _toggle(apel.siglum, v),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            activeColor: accent_(context),
-                            dense: true,
-                            title: Text(
-                              _titleFor(apel),
-                              style: const AppTextStyle(),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            subtitle: Text(
-                              apel.siglum,
-                              style: AppTextStyle(
-                                color: hintEnab_(context),
-                                fontSize: Dimen.textSizeSmall,
+                    Flexible(
+                      child: Scrollbar(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: apels.length,
+                          itemBuilder: (context, index){
+                            final apel = apels[index];
+                            final selected = _selectedSiglums.contains(apel.siglum);
+                            return CheckboxListTile(
+                              value: selected,
+                              onChanged: (v) => _toggle(apel.siglum, v),
+                              controlAffinity: ListTileControlAffinity.leading,
+                              activeColor: accent_(context),
+                              dense: true,
+                              title: Text(
+                                _titleFor(apel),
+                                style: const AppTextStyle(),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                            ),
-                          );
-                        },
+                              subtitle: Text(
+                                apel.siglum,
+                                style: AppTextStyle(
+                                  color: hintEnab_(context),
+                                  fontSize: Dimen.textSizeSmall,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
 

@@ -20,6 +20,7 @@ class SavePdfDialogContent extends StatefulWidget {
   final Widget? topWidget;
   final bool buttonEnabled;
   final bool Function()? isStillMounted;
+  final bool topWidgetExpands;
 
   const SavePdfDialogContent({
     super.key,
@@ -27,6 +28,7 @@ class SavePdfDialogContent extends StatefulWidget {
     this.topWidget,
     this.buttonEnabled = true,
     this.isStillMounted,
+    this.topWidgetExpands = false,
   });
 
   @override
@@ -76,7 +78,13 @@ class _SavePdfDialogContentState extends State<SavePdfDialogContent> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
 
-        if(widget.topWidget != null)
+        if(widget.topWidget != null && widget.topWidgetExpands)
+          Flexible(child: Padding(
+            padding: const EdgeInsets.all(Dimen.sideMarg),
+            child: widget.topWidget!,
+          )),
+
+        if(widget.topWidget != null && !widget.topWidgetExpands)
           Flexible(child: SingleChildScrollView(
             padding: const EdgeInsets.all(Dimen.sideMarg),
             child: widget.topWidget!,
