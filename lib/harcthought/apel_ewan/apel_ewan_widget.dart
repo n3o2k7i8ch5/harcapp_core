@@ -4,13 +4,14 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/comm_widgets/person_card.dart';
+import 'package:harcapp_core/comm_widgets/tab_bar.dart';
 import 'package:harcapp_core/song_book/contributor_identity.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/values/people/person.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 
 import 'apel_ewan.dart';
-import 'apel_ewan_category_selector.dart';
+import 'apel_ewan_loader.dart';
 
 const Map<String, String> _gospelAuthorMap = {
   'Mt': 'Mateusza',
@@ -52,12 +53,13 @@ class ApelEwanWidget extends StatefulWidget{
 
 }
 
-class ApelEwanWidgetState extends State<ApelEwanWidget>{
+class ApelEwanWidgetState extends State<ApelEwanWidget> with SingleTickerProviderStateMixin{
 
   ApelEwan get apelEwan => widget.apelEwan;
 
   late String selVariantId;
   late List<String> allVariantId;
+  TabController? _tabController;
 
   String? author;
 
@@ -67,8 +69,31 @@ class ApelEwanWidgetState extends State<ApelEwanWidget>{
   void initState() {
     selVariantId = _resolveVariantId(widget.initVariantId);
     allVariantId = apelEwan.variants.keys.toList();
+    if (allVariantId.length > 1) {
+      _tabController = TabController(
+        length: allVariantId.length,
+        vsync: this,
+        initialIndex: allVariantId.indexOf(selVariantId),
+      )..addListener(_onTabChanged);
+    }
     author = _gospelAuthorMap[apelEwan.siglum.split(' ')[0]];
     super.initState();
+  }
+
+  void _onTabChanged() {
+    final controller = _tabController!;
+    if (controller.indexIsChanging) return;
+    final newId = allVariantId[controller.index];
+    if (newId == selVariantId) return;
+    setState(() => selVariantId = newId);
+    widget.onVariantChanged?.call(newId);
+  }
+
+  @override
+  void dispose() {
+    _tabController?.removeListener(_onTabChanged);
+    _tabController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -78,7 +103,12 @@ class ApelEwanWidgetState extends State<ApelEwanWidget>{
     // changes (e.g. host reading a query param after browser back/forward).
     if (widget.initVariantId != oldWidget.initVariantId) {
       final resolved = _resolveVariantId(widget.initVariantId);
-      if (resolved != selVariantId) setState(() => selVariantId = resolved);
+      if (resolved != selVariantId) {
+        setState(() => selVariantId = resolved);
+        final idx = allVariantId.indexOf(resolved);
+        if (_tabController != null && idx != -1 && _tabController!.index != idx)
+          _tabController!.index = idx;
+      }
     }
   }
 
@@ -200,22 +230,19 @@ class ApelEwanWidgetState extends State<ApelEwanWidget>{
         if (allVariantId.length > 1)
           Material(
             color: backgroundIcon_(context),
-            child: Row(
-              children: [
-                const SizedBox(width: Dimen.sideMarg),
-                const Text('Wariant:', style: _sectionTitleStyle, textAlign: TextAlign.justify),
-                Expanded(
-                  child: ApelEwanCategorySelector(
-                    allVariantIds: allVariantId,
-                    selVariantIds: selVariantId,
-                    onChanged: (value) {
-                      if (value == null || value == selVariantId) return;
-                      setState(() => selVariantId = value);
-                      widget.onVariantChanged?.call(value);
-                    },
-                  ),
+            child: TabBarX(
+              controller: _tabController,
+              isScrollable: true,
+              indicator: BoxDecoration(
+                color: cardEnab_(context),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(AppCard.defRadius),
+                  topRight: Radius.circular(AppCard.defRadius),
                 ),
-              ],
+              ),
+              tabs: allVariantId.map((variantId) => Tab(
+                text: apelEwansVariantNameMap[variantId] ?? variantId,
+              )).toList(),
             ),
           ),
 
