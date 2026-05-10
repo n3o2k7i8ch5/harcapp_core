@@ -84,11 +84,8 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
     return apelEwansVariantNameMap[id];
   }
 
-  String _titleFor(ApelEwan apel){
-    final String variantId = _resolveVariantId(apel);
-    final variant = apel.variants[variantId] ?? apel.variants.values.first;
-    return (variant.shortTitle ?? variant.title).replaceAll('\n', ' ');
-  }
+  String _titleFor(ApelEwan apel) =>
+      apel.variantOrFirst(_resolveVariantId(apel)).oneLineLabel;
 
   void _toggle(String siglum, bool? value){
     setState((){
