@@ -5,6 +5,8 @@ import 'package:harcapp_core/comm_classes/storage.dart';
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan.dart';
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan_folder.dart';
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan_persistent_folder.dart';
+import 'package:harcapp_core/values/common_color_data.dart';
+import 'package:harcapp_core/values/common_icon_data.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -19,6 +21,44 @@ String defaultApelEwanVariantId(ApelEwanFolder folder, ApelEwan apel){
 
 String pdfFileNameForFolder(ApelEwanFolder folder) =>
     'Zbiór apeli ewangelicznych - ${folder.name}.pdf';
+
+String pdfFileNameForApel(ApelEwan apel, {String? variantId}) =>
+    'Apel ewangeliczny - ${apel.variantOrFirst(variantId).oneLineLabel}.pdf';
+
+class _SingleApelFolder extends ApelEwanFolder {
+  _SingleApelFolder(ApelEwan apel)
+      : super(id: 'single:${apel.siglum}', apelEwans: [apel]);
+
+  @override
+  String get name => apelEwans.first.siglum;
+
+  @override
+  String get iconKey => CommonIconData.folderIconKey;
+
+  @override
+  String get colorsKey => CommonColorData.defColorsKey;
+
+  @override
+  bool get isEmpty => false;
+}
+
+/// Builds a PDF containing just one [apel] — optionally pinned to [variantId]
+/// (defaults to apel's first variant) with [note] inlined below the gospel
+/// text. Reuses [buildApelEwanPdf] under the hood via a synthetic single-apel
+/// folder so layout/typography stays identical to multi-apel exports.
+Future<Uint8List> buildSingleApelEwanPdf({
+  required ApelEwan apel,
+  String? variantId,
+  String? note,
+}) {
+  final folder = _SingleApelFolder(apel);
+  return buildApelEwanPdf(
+    folder: folder,
+    selectedSiglums: {apel.siglum},
+    variantIdFor: variantId != null ? (_) => variantId : null,
+    noteFor: note != null ? (_) => note : null,
+  );
+}
 
 Future<Uint8List> buildApelEwanPdf({
   required ApelEwanFolder folder,
