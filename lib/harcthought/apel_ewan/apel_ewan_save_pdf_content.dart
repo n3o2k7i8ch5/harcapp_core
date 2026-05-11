@@ -141,6 +141,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
   }
 
   Widget? _buildVariantCard(BuildContext context) {
+    if (_availableVariantIds.isEmpty) return null;
     final variantName = _displayedVariantName();
     final hasPicker = _availableVariantIds.length > 1;
     if (variantName == null && !hasPicker) return null;
