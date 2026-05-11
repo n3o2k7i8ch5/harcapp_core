@@ -236,8 +236,8 @@ class ApelEwanWidgetState extends State<ApelEwanWidget> with SingleTickerProvide
               indicator: BoxDecoration(
                 color: cardEnab_(context),
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(AppCard.defRadius),
-                  topRight: Radius.circular(AppCard.defRadius),
+                  topLeft: Radius.circular(AppCard.bigRadius),
+                  topRight: Radius.circular(AppCard.bigRadius),
                 ),
               ),
               tabs: allVariantId.map((variantId) => Tab(

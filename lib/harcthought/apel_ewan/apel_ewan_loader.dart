@@ -15,10 +15,10 @@ const String dekalogApelEwansVariantId = 'dekalog';
 const String dekalogApelEwansName = 'Dekalog';
 
 const String hal2026JrApelEwansVariantId = 'hal-2026-jr';
-const String hal2026JrApelEwansName = 'Obóz 2026 (7–12 lat)';
+const String hal2026JrApelEwansName = '7–12 lat';
 
 const String hal2026SrApelEwansVariantId = 'hal-2026-sr';
-const String hal2026SrApelEwansName = 'Obóz 2026 (13+ lat)';
+const String hal2026SrApelEwansName = '13+ lat';
 
 const Map<String, String> apelEwansVariantNameMap = {
   ogolneApelEwansVariantId: ogolneApelEwansName,
