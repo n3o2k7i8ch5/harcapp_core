@@ -76,13 +76,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
     return widget.variantIdFor?.call(apel) ?? defaultApelEwanVariantId(folder, apel);
   }
 
-  String? _displayedVariantName() {
-    if (_availableVariantIds.isNotEmpty)
-      return apelEwansVariantNameMap[_selectedVariantId];
-    if (folder.apelEwans.isEmpty) return null;
-    final id = _resolveVariantId(folder.apelEwans.first);
-    return apelEwansVariantNameMap[id];
-  }
+  String? _displayedVariantName() => apelEwansVariantNameMap[_selectedVariantId];
 
   String _titleFor(ApelEwan apel) =>
       apel.variantOrFirst(_resolveVariantId(apel)).oneLineLabel;
@@ -185,7 +179,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
                 Dimen.sideMarg,
                 Dimen.defMarg,
                 Dimen.sideMarg,
-                Dimen.defMarg,
+                ApelEwanCategorySelector.internalTextPadding,
               ),
               child: Text(
                 variantName ?? '',
@@ -220,6 +214,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
               child: ListView.builder(
                 controller: _listScrollController,
                 shrinkWrap: true,
+                padding: EdgeInsets.zero,
                 itemCount: apels.length,
                 itemBuilder: (context, index) =>
                     _buildApelTile(context, apels[index]),
