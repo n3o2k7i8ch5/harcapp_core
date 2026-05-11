@@ -19,6 +19,7 @@ class ApelEwanSavePdfContent extends StatefulWidget {
   final ApelEwanVariantIdResolver? variantIdFor;
   final ApelEwanNoteResolver? noteFor;
   final Widget? extraTopWidget;
+  final void Function(ApelEwanFolder folder, int selectedCount)? onPdfGenerated;
 
   const ApelEwanSavePdfContent({
     super.key,
@@ -26,6 +27,7 @@ class ApelEwanSavePdfContent extends StatefulWidget {
     this.variantIdFor,
     this.noteFor,
     this.extraTopWidget,
+    this.onPdfGenerated,
   });
 
   @override
@@ -104,6 +106,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
       variantIdFor: _resolveVariantId,
       noteFor: widget.noteFor,
     );
+    widget.onPdfGenerated?.call(folder, _selectedSiglums.length);
     return (bytes: bytes, filename: pdfFileNameForFolder(folder));
   }
 
