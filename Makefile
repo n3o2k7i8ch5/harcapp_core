@@ -15,6 +15,10 @@ generate:
 # Generate AppMdiIcons font + Dart class from SVGs in assets/app_mdi_icons/.
 # Drop kebab-case SVGs there (e.g. pdf-multi.svg) and run `make icons`.
 # Filenames map to camelCase identifiers (pdf-multi.svg -> AppMdiIcons.pdfMulti).
+# Note: MDI SVGs as exported are authored for even-odd fill rule; OpenType
+# outlines need non-zero winding. If a glyph renders as a blob over its
+# cutouts, normalize the SVG once with picosvg (with fill-rule="evenodd"
+# forced on the path) and commit the normalized result.
 .PHONY: icons
 icons:
 	dart run icon_font_generator:generator \

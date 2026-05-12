@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/app_mdi_icons.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/save_pdf_dialog.dart';
 import 'package:harcapp_core/harcthought/apel_ewan/apel_ewan.dart';
@@ -119,6 +120,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
       isStillMounted: () => mounted,
       buttonEnabled: _selectedSiglums.isNotEmpty,
       topWidgetExpands: true,
+      icon: AppMdiIcons.filePdfBoxMultiple,
       topWidget: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,

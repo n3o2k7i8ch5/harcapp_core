@@ -21,6 +21,7 @@ class SavePdfDialogContent extends StatefulWidget {
   final bool buttonEnabled;
   final bool Function()? isStillMounted;
   final bool topWidgetExpands;
+  final IconData? icon;
 
   const SavePdfDialogContent({
     super.key,
@@ -29,6 +30,7 @@ class SavePdfDialogContent extends StatefulWidget {
     this.buttonEnabled = true,
     this.isStillMounted,
     this.topWidgetExpands = false,
+    this.icon,
   });
 
   @override
@@ -95,7 +97,7 @@ class _SavePdfDialogContentState extends State<SavePdfDialogContent> {
           iconWidget: _busy
               ? SpinKitChasingDots(color: textDisab_(context), size: Dimen.iconSize)
               : null,
-          icon: _busy ? null : MdiIcons.printer,
+          icon: _busy ? null : (widget.icon ?? MdiIcons.printer),
           text: _busy ? 'Przygotowywanie pliku PDF...' : 'Pobierz PDF',
           color: cardEnab_(context),
           textColor: enabled ? iconEnab_(context) : iconDisab_(context),
