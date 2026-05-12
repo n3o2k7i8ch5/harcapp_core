@@ -98,6 +98,15 @@ const String rozwazanie_ewangeliczne_html_ewaluacja =
     '<li><p style="text-align:justify;">Czy są jakieś przeszkody lub rozpraszacze? Co można zrobić, aby je rozwiązać?</p></li>'
     '</ul>';
 
+/// Wskazówki dotyczące miejsca i atmosfery przeprowadzenia formy.
+const String rozwazanie_ewangeliczne_html_title_informacja_zwrotna = '<p style="text-align:justify;"><b>Informacja zwrotna</b></p>';
+const String rozwazanie_ewangeliczne_html_informacja_zwrotna =
+    '<p style="text-align:justify;">'
+    'Bardzo nam pomoże, jeśli dacie znać jak Wam się ta forma udała! Za wszystkie opinie, uwagi, refleksje i doświadczenia będziemy dozgodnnie wdzięczni.'
+    '<br>'
+    '<br>Informacje zwrotne bardzo prosimy kierować na maria.skowronek@zhp.net.pl'
+    '</p>';
+
 /// Fragmenty Ewangelii dostępne w aplikacji jako gotowe materiały.
 const String rozwazanie_ewangeliczne_html_zrodla_w_aplikacji =
     '<p style="text-align:justify;">'
@@ -133,7 +142,9 @@ const String rozwEwanStandaloneDescription = '$rozwazanie_ewangeliczne_html_opis
     '<li>$rozwazanie_ewangeliczne_html_title_przygotowanie_miejsce$rozwazanie_ewangeliczne_html_przygotowanie_miejsce</li>'
     '</ol>'
     '$rozwazanie_ewangeliczne_html_title_ewaluacja'
-    '$rozwazanie_ewangeliczne_html_ewaluacja';
+    '$rozwazanie_ewangeliczne_html_ewaluacja'
+    '$rozwazanie_ewangeliczne_html_title_informacja_zwrotna'
+    '$rozwazanie_ewangeliczne_html_informacja_zwrotna';
 
 
 Konspekt rozwazanie_ewangeliczne = const Konspekt(

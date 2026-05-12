@@ -1527,7 +1527,7 @@ const Person JULITA_STEPIEN = Person(name: 'Julita Stępień');
 
 const Person KACPER_BACZKOWSKI = Person(
     name: 'Kacper Bączkowski',
-    comment: 'Ewangelickie Duszpasterstwo Związku Harcerstwa Polskiego',
+    druzyna: 'Ewangelickie Duszpasterstwo Związku Harcerstwa Polskiego',
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ['baczkowski.kacper.04@gmail.com', 'kacper.baczkowski@zhp.pl']
@@ -1911,7 +1911,7 @@ const Person KRYSTIAN_BULANDA = Person(
 const Person KRYSTYNA_BITNER = Person(
     name: 'Krystyna Bitner',
     org: Org.zhp,
-    comment: 'Chorągiew Stołeczna',
+    druzyna: 'Chorągiew Stołeczna',
     email: ['krystyna.bitner@zhp.net.pl']
 );
 const Person KRZESIMIR_KARBOWNIK = Person(
@@ -2470,6 +2470,7 @@ const Person MARIA_PRZYBYLSKA = Person(
 );
 const Person MARIA_SKOWRONEK = Person(
     name: 'Maria Skowronek',
+    druzyna: 'Chorągiew Stołeczna',
     rankInstr: RankInstr.phm,
     org: Org.zhp,
     email: ['maria.skowronek@zhp.net.pl']
@@ -3077,6 +3078,7 @@ const Person PAULINA_FERENC = Person(
 );
 const Person PAULINA_JASKULOWSKA = Person(
     name: 'Paulina Jaskułowska',
+    druzyna: 'Chorągiew Stołeczna',
     rankInstr: RankInstr.phm,
     org: Org.zhp,
     email: ['paulina.prokop@zhp.net.pl']
@@ -3449,6 +3451,7 @@ const Person SZYMON_MALCZAK = Person(
 );
 const Person SZYMON_MASLOWSKI = Person(
     name: 'Szymon Masłowski',
+    druzyna: 'Chorągiew Białostocka',
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ['szymon.maslowski@zhp.net.pl']
