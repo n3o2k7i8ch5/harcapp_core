@@ -25,3 +25,4 @@ icons:
 		--font-name=AppMdiIcons \
 		--package=harcapp_core \
 		--format
+	dart run tool/post_process_icons.dart
