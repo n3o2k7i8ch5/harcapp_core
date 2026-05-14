@@ -21,9 +21,11 @@ const String hal2026FeedbackFormButtonText = 'Zostaw kontakt';
 const String _popupTitle = 'Podziel się wrażeniami';
 
 const String _popupBody =
-    'Super, że korzystasz z rozważań ewangelicznych! '
-    'Po Twoim obozie, chcielibyśmy zapytać Cię o wrażenia z prowadzenia tej formy. '
-    'Zostaw nam swój kontakt — odezwiemy się, gdy Twój obóz dobiegnie końca.';
+    'Super, że korzystasz z rozważań ewangelicznych!'
+    '\n'
+    '\nPo Twoim obozie, chcielibyśmy zapytać Cię o wrażenia z prowadzenia tej formy.'
+    '\n'
+    '\nZostaw nam swój kontakt - odezwiemy się, gdy Twój obóz dobiegnie końca.';
 
 /// Opens the Google Form asking for feedback contact after the obóz 2026 apel
 /// ewangeliczny PDF download. Pluggable [onOpenForm] lets hosts override the
