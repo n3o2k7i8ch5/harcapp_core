@@ -155,6 +155,26 @@ class SimpleButton extends StatelessWidget{
       if (!iconLeading && iconW != null) iconW,
     ];
 
+    Widget inner = direction == Axis.horizontal
+        ? Row(
+            mainAxisAlignment: center ? MainAxisAlignment.center : MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: children,
+          )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: children,
+          );
+
+    if (animateSize)
+      inner = AnimatedSize(
+        duration: const Duration(milliseconds: 300),
+        alignment: Alignment.centerLeft,
+        curve: Curves.easeInOutQuad,
+        child: inner,
+      );
+
     return SimpleButton(
       key: key,
       elevation: elevation,
@@ -164,23 +184,7 @@ class SimpleButton extends StatelessWidget{
       margin: margin,
       padding: padding,
       borderRadius: borderRadius,
-      child: AnimatedSize(
-        duration: Duration(milliseconds: animateSize?300:0),
-        alignment: Alignment.centerLeft,
-        curve: Curves.easeInOutQuad,
-        child:
-        direction==Axis.horizontal?
-        Row(
-          mainAxisAlignment: center?MainAxisAlignment.center:MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: children,
-        ):
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: children,
-        ),
-      ),
+      child: inner,
       onTap: onTap,
       onLongPress: onLongPress,
       colorSplash: colorSplash,
