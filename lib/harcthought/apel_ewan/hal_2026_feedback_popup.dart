@@ -46,9 +46,8 @@ Future<void> showHal2026FeedbackPopup(
           style: AppTextStyle(
             fontSize: Dimen.textSizeBig,
             color: textEnab_(context),
-            height: 1.35,
+            height: 1.2,
           ),
-          textAlign: TextAlign.justify,
         ),
       ),
       buttons: [
