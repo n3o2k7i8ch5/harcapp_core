@@ -22,6 +22,7 @@ class SavePdfDialogContent extends StatefulWidget {
   final bool Function()? isStillMounted;
   final bool topWidgetExpands;
   final IconData? icon;
+  final VoidCallback? onPdfSaved;
 
   const SavePdfDialogContent({
     super.key,
@@ -31,6 +32,7 @@ class SavePdfDialogContent extends StatefulWidget {
     this.isStillMounted,
     this.topWidgetExpands = false,
     this.icon,
+    this.onPdfSaved,
   });
 
   @override
@@ -70,6 +72,7 @@ class _SavePdfDialogContentState extends State<SavePdfDialogContent> {
     if(!ok)
       showAppToast(context, text: 'Nie udało się zapisać pliku');
     await popPage(context);
+    if (ok) widget.onPdfSaved?.call();
   }
 
   @override

@@ -23,6 +23,7 @@ class ApelEwanSingleSavePdfContent extends StatefulWidget {
   final String? note;
   final Widget? extraTopWidget;
   final void Function(ApelEwan apel, String variantId)? onPdfGenerated;
+  final VoidCallback? onPdfSaved;
 
   const ApelEwanSingleSavePdfContent({
     super.key,
@@ -31,6 +32,7 @@ class ApelEwanSingleSavePdfContent extends StatefulWidget {
     this.note,
     this.extraTopWidget,
     this.onPdfGenerated,
+    this.onPdfSaved,
   });
 
   @override
@@ -74,6 +76,7 @@ class _ApelEwanSingleSavePdfContentState
     return SavePdfDialogContent(
       generatePdf: _generate,
       isStillMounted: () => mounted,
+      onPdfSaved: widget.onPdfSaved,
       topWidget: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -21,6 +21,7 @@ class ApelEwanSavePdfContent extends StatefulWidget {
   final ApelEwanNoteResolver? noteFor;
   final Widget? extraTopWidget;
   final void Function(ApelEwanFolder folder, int selectedCount)? onPdfGenerated;
+  final VoidCallback? onPdfSaved;
 
   const ApelEwanSavePdfContent({
     super.key,
@@ -29,6 +30,7 @@ class ApelEwanSavePdfContent extends StatefulWidget {
     this.noteFor,
     this.extraTopWidget,
     this.onPdfGenerated,
+    this.onPdfSaved,
   });
 
   @override
@@ -121,6 +123,7 @@ class _ApelEwanSavePdfContentState extends State<ApelEwanSavePdfContent> {
       buttonEnabled: _selectedSiglums.isNotEmpty,
       topWidgetExpands: true,
       icon: AppMdiIcons.filePdfBoxMultiple,
+      onPdfSaved: widget.onPdfSaved,
       topWidget: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
