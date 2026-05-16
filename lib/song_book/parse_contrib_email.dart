@@ -6,6 +6,7 @@ import 'package:harcapp_core/values/org.dart';
 import 'package:harcapp_core/values/people/person.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
+import 'package:harcapp_core/values/srodowiska/models.dart';
 
 class ParsedContribEmail{
 
@@ -43,8 +44,8 @@ ParsedContribEmail parseContribEmail(String content){
     } catch(eLegacy){
       throw ContribEmailParseError(
         'Nie udało się odczytać piosenki z mejla.\n'
-        'Próba nowego formatu: $eNew\n'
-        'Próba formatu legacy: $eLegacy',
+            'Próba nowego formatu: $eNew\n'
+            'Próba formatu legacy: $eLegacy',
       );
     }
   }
@@ -174,7 +175,7 @@ Person? _parseLegacyPersonBlock(String block){
   if(name == null || name.trim().isEmpty) return null;
 
   String? druzyna = _captureLegacyString(body, 'druzyna');
-  String? srodowisko = _captureLegacyString(body, 'hufiec');
+  Srodowisko? srodowisko = Srodowisko.fromJson(_captureLegacyString(body, 'hufiec'));
   String? comment = _captureLegacyString(body, 'comment');
 
   String? rankHarcRaw = _captureLegacyEnumValue(body, 'rankHarc');

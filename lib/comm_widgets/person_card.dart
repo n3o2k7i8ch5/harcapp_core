@@ -7,6 +7,7 @@ import 'package:harcapp_core/values/org.dart';
 import 'package:harcapp_core/values/people/person.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
+import 'package:harcapp_core/values/srodowiska/models.dart';
 
 class PersonCardSimple extends StatelessWidget{
 
@@ -14,7 +15,7 @@ class PersonCardSimple extends StatelessWidget{
   RankHarc? get rankHarc => person.rankHarc;
   RankInstr? get rankInstr => person.rankInstr;
   String? get druzyna => person.druzyna;
-  String? get srodowisko => person.srodowisko;
+  Srodowisko? get srodowisko => person.srodowisko;
   Org? get org => person.org;
   String? get comment => person.comment;
 
@@ -54,7 +55,7 @@ class PersonCard extends StatelessWidget{
   RankHarc? get rankHarc => person.rankHarc;
   RankInstr? get rankInstr => person.rankInstr;
   String? get druzyna => person.druzyna;
-  String? get srodowisko => person.srodowisko;
+  Srodowisko? get srodowisko => person.srodowisko;
   Org? get org => person.org;
   String? get comment => person.comment;
 
@@ -103,7 +104,16 @@ class PersonCard extends StatelessWidget{
         if(srodowisko != null)
           Padding(
             padding: const EdgeInsets.only(top: 6),
-            child: Text(srodowisko!, style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
+            child: Text(srodowisko!.displayName ?? '', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
+          ),
+
+        if(srodowisko?.hufiec != null && srodowisko?.choragiew != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Text(
+              srodowisko!.choragiew!.name,
+              style: AppTextStyle(fontSize: textSize - 2, color: hintEnab_(context)),
+            ),
           ),
 
         if(druzyna != null)

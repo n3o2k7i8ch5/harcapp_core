@@ -14,6 +14,7 @@ import 'package:harcapp_core/values/org.dart';
 import 'package:harcapp_core/values/people/person.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
+import 'package:harcapp_core/values/srodowiska/models.dart';
 
 class PersonDataDialog extends StatefulWidget{
 
@@ -56,7 +57,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
   Person get currentPerson => Person(
       name: nameController.text.trim(),
       druzyna: druzynaController.text.trim(),
-      srodowisko: srodowiskoController.text.trim(),
+      srodowisko: Srodowisko.fromJson(srodowiskoController.text),
       rankInstr: rankInstr,
       rankHarc: rankHarc,
       org: org
@@ -66,7 +67,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
   void initState() {
     nameController = TextEditingController(text: initialPerson?.name);
     druzynaController = TextEditingController(text: initialPerson?.druzyna);
-    srodowiskoController = TextEditingController(text: initialPerson?.srodowisko);
+    srodowiskoController = TextEditingController(text: initialPerson?.srodowisko?.displayName);
     rankInstr = initialPerson?.rankInstr;
     rankHarc = initialPerson?.rankHarc;
     org = initialPerson?.org;

@@ -1,6 +1,7 @@
 import 'package:harcapp_core/values/people/person.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
+import 'package:harcapp_core/values/srodowiska/models.dart';
 
 import '../hufce.dart';
 import '../org.dart';
@@ -14,20 +15,20 @@ const Person ABRAHAM_PRAGER = Person(
 const Person ADAM_DAWID = Person(
     name: 'Adam Dawid',
     druzyna: '33. CDH „Czarne stopy”',
-    srodowisko: huf_zhp_ziemi_cieszynskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_cieszynskiej),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ['treaxy09@gmail.com']
 );
 const Person ADAM_DUDAK = Person(
     name: 'Adam Dudak',
-    srodowisko: huf_zhp_warszawa_ursynow,
+    srodowisko: Srodowisko.custom(huf_zhp_warszawa_ursynow),
     druzyna: '234. Warszawska Drużyna Harcerska „Forteca”'
 );
 const Person ADAM_SKLODOWSKI = Person(
     name: 'Adam Skłodowski',
     druzyna: '58. MDH „Cichociemni”',
-    srodowisko: 'Eldorado',
+    srodowisko: Srodowisko.custom('Eldorado'),
     rankHarc: RankHarc.zhrWywiadowca,
     org: Org.zhr,
     email: []
@@ -35,14 +36,14 @@ const Person ADAM_SKLODOWSKI = Person(
 const Person ADAM_SOBIERAJ = Person(
     name: 'Adam Sobieraj',
     druzyna: '24. Turystyczno Krajoznawcza DH',
-    srodowisko: huf_zhp_jaktorow,
+    srodowisko: Srodowisko.custom(huf_zhp_jaktorow),
     org: Org.zhp,
     email: ["sobierajadam96@gmail.com"]
 );
 const Person ADAM_WIECZOREK = Person(
     name: 'Adam Wieczorek',
     druzyna: '160. WDSH „Silva”',
-    srodowisko: huf_zhp_warszawa_praga_pd,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pd'),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["aadam.wieczorek@gmail.com"]
@@ -50,26 +51,26 @@ const Person ADAM_WIECZOREK = Person(
 const Person AGATA_KOPYTKO = Person(
     name: 'Agata',
     druzyna: '22. LDH „Potok”',
-    srodowisko: 'Lubelski Hufiec Harcerek „Rzeka”',
+    srodowisko: Srodowisko.custom('Lubelski Hufiec Harcerek „Rzeka”'),
     rankHarc: RankHarc.zhrOchotniczka,
     org: Org.zhr,
     email: ['aga.kopyto28@gmail.com']
 );
 const Person AGATA_MAJEWSKA = Person(
     name: 'Agata Majewska',
-    srodowisko: huf_zhp_lodz_widzew,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_widzew),
     org: Org.zhp,
     email: ['agattam2004@gmail.com']
 );
 const Person AGNIESZKA_DURSKA = Person(
     name: 'Agnieszka Durska',
     rankInstr: RankInstr.phm,
-    srodowisko: huf_zhp_lodz_baluty
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_baluty)
 );
 const Person AGNIESZKA_PIEKARSKA = Person(
     name: 'Agnieszka Piekarska',
     druzyna: '3. Drużyna Wędrownicza „3DSH”',
-    srodowisko: huf_zhp_szczecinsko_wloszczowski,
+    srodowisko: Srodowisko.custom(huf_zhp_szczecinsko_wloszczowski),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -78,13 +79,13 @@ const Person AGNIESZKA_PIEKARSKA = Person(
 const Person AGNIESZKA_RADECKA_KUBICKA = Person(
     name: 'Agnieszka Radecka-Kubicka',
     druzyna: '5. Gromada Zuchów',
-    srodowisko: huf_zhp_ziemi_sanockiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_sanockiej),
     org: Org.zhp,
     email: ['irja@interia.pl']
 );
 const Person AGNIESZKA_SKUBA = Person(
     name: 'Agnieszka Skuba',
-    srodowisko: huf_zhp_grodzisk_mazowiecki,
+    srodowisko: Srodowisko.hufiec('grodzisk_mazowiecki'),
     rankInstr: RankInstr.phm,
     org: Org.zhp,
     email: ["agnieszka.skuba@zhp.net.pl"]
@@ -92,7 +93,7 @@ const Person AGNIESZKA_SKUBA = Person(
 const Person AGNIESZKA_TYLKO = Person(
   name: 'Agnieszka Tylko',
   rankHarc: RankHarc.zhpPionierka,
-  srodowisko: huf_zhp_myslenice,
+  srodowisko: Srodowisko.hufiec('myslenice'),
   druzyna: '3,14. Myślenicka Drużyna Starszoharcerska „Awangarda”',
   org: Org.zhp,
 );
@@ -100,13 +101,13 @@ const Person ALAN_FILAS = Person(
     name: 'Alan Filas',
     rankInstr: RankInstr.phm,
     druzyna: '2. Szczep „Malta”',
-    srodowisko: huf_zhp_poznan_nowe_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_nowe_miasto),
     email: ['alan.filas@zhp.net.pl']
 );
 const Person ALEKSANDER_BIL = Person(
     name: 'Aleksander Bil',
     druzyna: '28. Łódzka Drużyna Harcerzy im. Antoniego Olbromskiego',
-    srodowisko: huf_zhr_lodz_polesie,
+    srodowisko: Srodowisko.custom(huf_zhr_lodz_polesie),
     rankHarc: RankHarc.zhrCwik,
     org: Org.zhr,
     email: ['bil.olek2010@gmail.com']
@@ -114,7 +115,7 @@ const Person ALEKSANDER_BIL = Person(
 const Person ALEKSANDER_CHRZEST = Person(
     name: 'Olek Chrzęst',
     druzyna: '1. PGZ',
-    srodowisko: 'Szaniec',
+    srodowisko: Srodowisko.custom('Szaniec'),
     rankHarc: RankHarc.zhrCwik,
     org: Org.zhr,
     email: ["olgierd.chrzes@zhr.pl"]
@@ -129,7 +130,7 @@ const Person ALEKSANDER_GROSZAN = Person(
 const Person ALEKSANDER_PALKA = Person(
     name: 'Aleksander Palka',
     druzyna: '10. HDŻ',
-    srodowisko: 'Katowice',
+    srodowisko: Srodowisko.custom('Katowice'),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ['tomaszml9236@gmail.com']
@@ -137,7 +138,7 @@ const Person ALEKSANDER_PALKA = Person(
 const Person ALEKSANDER_WELYCZKO = Person(
     name: 'Aleksander Wełyczko',
     druzyna: '5. DH „Czarne Wilki”',
-    srodowisko: 'OłWa',
+    srodowisko: Srodowisko.custom('OłWa'),
     rankHarc: RankHarc.zhpOdkrywca,
     org: Org.zhp,
     email: ["rxus759@gmail.com"]
@@ -145,7 +146,7 @@ const Person ALEKSANDER_WELYCZKO = Person(
 const Person ALEKSANDRA_ANTKIEWICZ = Person(
     name: 'Ola Antkiewicz',
     druzyna: '35. Chynowska Drużyna Wielopoziomowa „Vis Verum”',
-    srodowisko: huf_zhp_grojec,
+    srodowisko: Srodowisko.custom(huf_zhp_grojec),
     org: Org.zhp,
     email: ['drzewonadrzewie@gmail.com']
 );
@@ -153,14 +154,14 @@ const Person ALEKSANDRA_CHRUSTEK = Person(
     name: 'Aleksandra Chrustek',
     rankHarc: RankHarc.zhpHOd,
     rankInstr: RankInstr.pwd,
-    srodowisko: huf_zhp_warszawa_mokotow,
+    srodowisko: Srodowisko.hufiec('warszawa_mokotow'),
     org: Org.zhp,
     email: ['olachrustek@gmail.com']
 );
 const Person ALEKSANDRA_CWYNAR = Person(
     name: 'Aleksandra Cwynar',
     druzyna: '15.15 „Zadyma”',
-    srodowisko: huf_zhp_wroclaw,
+    srodowisko: Srodowisko.custom(huf_zhp_wroclaw),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ['ola210411@gmail.com']
@@ -168,7 +169,7 @@ const Person ALEKSANDRA_CWYNAR = Person(
 const Person ALEKSANDRA_GALIJ = Person(
     name: 'Ola Galij',
     druzyna: 'Studencki Krąg instruktorski im. Tonyego Halika',
-    srodowisko: huf_zhp_bydgoszcz_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_bydgoszcz_miasto),
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
     email: ["aleksandra.galij@zhp.net.pl", 'aleksandra.galij@gmail.com']
@@ -176,7 +177,7 @@ const Person ALEKSANDRA_GALIJ = Person(
 const Person ALEKSANDRA_KLEJDYSZ = Person(
     name: 'Aleksandra Klejdysz',
     druzyna: '8. PgDW „Granat”',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ["olaklejdysz123@gmail.com"]
@@ -188,7 +189,7 @@ const Person ALEKSANDRA_KOSTRZEWA = Person(
 const Person ALEKSANDRA_KOWALSKA = Person(
   name: 'Aleksandra Kowalska',
   druzyna: '17. ZODH',
-  srodowisko: huf_zhp_zgierz,
+  srodowisko: Srodowisko.custom(huf_zhp_zgierz),
   email: ['kowalskaola057@gmail.com'],
   org: Org.zhp,
 );
@@ -200,7 +201,7 @@ const Person ALEKSANDRA_KOZUBAL = Person(
 const Person ALEKSANDRA_KWAPISZ = Person(
     name: 'Aleksandra Kwapisz',
     druzyna: '08. ŚTDH „Burza” im. Tadeusza „Zośki” Zawadzkiego',
-    srodowisko: huf_zhp_ostrowiec_swietokrzyski,
+    srodowisko: Srodowisko.custom(huf_zhp_ostrowiec_swietokrzyski),
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
     email: ['aleksandra.kwapisz@zhp.net.pl']
@@ -208,7 +209,7 @@ const Person ALEKSANDRA_KWAPISZ = Person(
 const Person ALEKSANDRA_MISIAK = Person(
     name: 'Aleksandra Misiak',
     druzyna: 'ŁGZ „Pracowite Pszczółki”',
-    srodowisko: huf_zhp_lodz_baluty,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_baluty),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ['aleksandra.misiak@zhp.net.pl']
@@ -216,7 +217,7 @@ const Person ALEKSANDRA_MISIAK = Person(
 const Person ALEKSANDRA_SZKLARCZYK = Person(
     name: 'Aleksandra Szklarczyk',
     druzyna: '3. DW „Szarada”',
-    srodowisko: huf_zhp_trzebinia,
+    srodowisko: Srodowisko.hufiec('trzebinia'),
     rankInstr: RankInstr.phm,
     org: Org.zhp,
     email: ['olaszklarczyk94@gmail.com']
@@ -224,7 +225,7 @@ const Person ALEKSANDRA_SZKLARCZYK = Person(
 const Person ALEKSANDRA_TIMM = Person(
     name: 'Aleksandra Timm',
     druzyna: '21 WDW „Luna”',
-    srodowisko: huf_zhp_wrzesnia_wrzos,
+    srodowisko: Srodowisko.custom(huf_zhp_wrzesnia_wrzos),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["aleksandra.timm@zhp.pl"]
@@ -232,14 +233,14 @@ const Person ALEKSANDRA_TIMM = Person(
 const Person ALEKSANDRA_TKOCZ = Person(
     name: 'Aleksandra Tkocz',
     druzyna: 'XIX. WDH „Sokół”',
-    srodowisko: huf_zhp_szczecin_dabie,
+    srodowisko: Srodowisko.custom(huf_zhp_szczecin_dabie),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ['nikiii2115@gmail.com']
 );
 const Person ALEKSANDRA_WOJCIECHOWSKA = Person(
     name: 'Aleksandra Wojciechowska',
-    srodowisko: huf_zhp_plock,
+    srodowisko: Srodowisko.custom(huf_zhp_plock),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ['aleksandra.wojciechowska@zhp.net.pl']
@@ -247,13 +248,13 @@ const Person ALEKSANDRA_WOJCIECHOWSKA = Person(
 const Person ALICJA_DOBOSZ = Person(
     name: 'Alicja Dobosz',
     druzyna: '24. GDHS „Boreasz”',
-    srodowisko: huf_zhp_ziemi_gliwickiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_gliwickiej),
     email: ["alicja.dobosz@zhp.net.pl"]
 );
 const Person ALICJA_JASINSKA = Person(
     name: 'Alicja Jasińska',
     druzyna: '10 Świdnicka Drużyna Harcerska "Mrówkojady"',
-    srodowisko: huf_zhp_swidnica,
+    srodowisko: Srodowisko.custom(huf_zhp_swidnica),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ["jasinska.alicja@zhp.net.pl"]
@@ -261,7 +262,7 @@ const Person ALICJA_JASINSKA = Person(
 const Person ALICJA_JEZNACKA = Person(
     name: 'Alicja Jeznacka',
     druzyna: '79. WWDH „ALPHA”',
-    srodowisko: huf_zhp_warszawa_zoliborz,
+    srodowisko: Srodowisko.hufiec('warszawa_zoliborz'),
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
     email: ['alicja.jeznacka@zhp.net.pl']
@@ -269,7 +270,7 @@ const Person ALICJA_JEZNACKA = Person(
 const Person ALICJA_MAJCHER = Person(
     name: 'Ala Majcher',
     druzyna: '222. WDH „Bukowina” im. Jerzego Kukuczki',
-    srodowisko: huf_zhp_warszawa_wola,
+    srodowisko: Srodowisko.hufiec('warszawa_wola'),
     org: Org.zhp,
     email: ['alicja.majcher@zhp.net.pl']
 );
@@ -280,7 +281,7 @@ const Person ALICJA_NOWOSAD = Person(
 const Person AMELIA_BOJARSKA = Person(
     name: 'Amelia Bojarska',
     druzyna: '1. MDH „Wichry”',
-    srodowisko: huf_zhp_ostroleka,
+    srodowisko: Srodowisko.custom(huf_zhp_ostroleka),
     org: Org.zhp,
     email: []
 );
@@ -292,7 +293,7 @@ const Person AMELIA_KALICKA = Person(
 const Person AMELIA_SITNICKA = Person(
     name: 'Amelia Sitnicka',
     druzyna: '112. WDH „Czirokezi”',
-    srodowisko: huf_zhp_warszawa_praga_pd,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pd'),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ["ameliasitnicka787@gmail.com"]
@@ -300,7 +301,7 @@ const Person AMELIA_SITNICKA = Person(
 const Person AMELIA_SZALEWICZ = Person(
     name: 'Amelia Szalewicz',
     druzyna: '16. „Astra”',
-    srodowisko: huf_zhp_lowicz,
+    srodowisko: Srodowisko.custom(huf_zhp_lowicz),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["amelia_sz.2010@o2.pl", "ameliaszalewicz@gmail.com"]
@@ -314,7 +315,7 @@ const Person ANGELIKA_MOSKAL = Person(
 const Person ANNA_RAJEWSKA = Person(
     name: 'Anna Rajewska',
     druzyna: '2. Drużyna im. Leona Zadurskiego w Żukowie',
-    srodowisko: huf_zhp_kartuzy,
+    srodowisko: Srodowisko.custom(huf_zhp_kartuzy),
     email: ['anna.rajewska14@gmail.com']
 );
 const Person ANNA_SZMAJ = Person(
@@ -327,7 +328,7 @@ const Person ANNA_SZMAJ = Person(
 const Person ANTONI_ATANASSOW = Person(
     name: 'Antoni Atanassow',
     druzyna: '5. PgDH „Eastwick” im. Zawiszy Czarnego',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
     email: ["hal133258007@gmail.com", 'obszycia-polemiczny2p@icloud.com']
@@ -335,14 +336,14 @@ const Person ANTONI_ATANASSOW = Person(
 const Person ANTONINA_KARMANSKA = Person(
     name: 'Szczurowa',
     druzyna: '123. WSH „Za horyzontem”',
-    srodowisko: huf_zhp_warszawa_zoliborz,
+    srodowisko: Srodowisko.hufiec('warszawa_zoliborz'),
     org: Org.zhp,
     email: ['tosia.karmanska@gmail.com']
 );
 const Person ANTONINA_PIERZCHALA = Person(
     name: 'Antonina Pierzchała',
     druzyna: '41. Drużyna Harcerska „Huba”',
-    srodowisko: huf_zhp_ostrowiec_swietokrzyski,
+    srodowisko: Srodowisko.custom(huf_zhp_ostrowiec_swietokrzyski),
     org: Org.zhp,
     email: ['tosiaczek118@gmail.com']
 );
@@ -355,7 +356,7 @@ const Person ANTONINA_ROMANSKA = Person(
 );
 const Person ANTONINA_SZTYGLIC = Person(
     name: 'Antonina Sztyglic',
-    srodowisko: huf_zhp_lask,
+    srodowisko: Srodowisko.custom(huf_zhp_lask),
     druzyna: '5. Wieluńska Drużyna Harcerek Starszych „Kozy”',
     org: Org.zhp,
     email: ['sztyglica@gmail.com']
@@ -363,14 +364,14 @@ const Person ANTONINA_SZTYGLIC = Person(
 const Person ARTUR_KOSTRZEWA = Person(
   name: 'Artur Kostrzewa',
   druzyna: 'Puszczanie',
-  srodowisko: huf_zhp_krakow_pdg,
+  srodowisko: Srodowisko.hufiec('krakow_podgorze'),
   org: Org.zhp,
   email: ['arturkos321@gmail.com'],
 );
 const Person ARTUR_RUSA = Person(
   name: 'Artur Rusa',
   rankHarc: RankHarc.zhpWywiadowca,
-  srodowisko: huf_zhp_pulawy,
+  srodowisko: Srodowisko.custom(huf_zhp_pulawy),
   druzyna: '113. SDSH',
   org: Org.zhp,
 );
@@ -387,7 +388,7 @@ const Person BARTLOMIEJ_DANIELAK = Person(
 const Person BARTLOMIEJ_JASKOLSKI = Person(
     name: 'Bartłomiej Jaskólski',
     druzyna: '100 Drużyna Harcerska „Surykatki”',
-    srodowisko: huf_zhp_ziemi_tarnogorskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_tarnogorskiej),
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ["nino.prywatne@gmail.com", 'nino.music.tg@gmail.com']
@@ -395,7 +396,7 @@ const Person BARTLOMIEJ_JASKOLSKI = Person(
 const Person BARTLOMIEJ_MALYJUREK = Person(
     name: 'Bartłomiej Małyjurek',
     druzyna: '24. Jodła',
-    srodowisko: huf_zhp_ziemi_cieszynskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_cieszynskiej),
     email: ["malyjurekbartlomiej@gmail.com"]
 );
 const Person BARTLOMIEJ_SIUSTA = Person(
@@ -417,7 +418,7 @@ const Person BARTOSZ_IGNASIAK = Person(
 const Person BARTOSZ_KSIAZEK = Person(
     name: 'Bartosz Książek',
     druzyna: '91. DHS „Ad Astra”',
-    srodowisko: huf_zhp_katowice,
+    srodowisko: Srodowisko.custom(huf_zhp_katowice),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHRc,
     org: Org.zhp,
@@ -426,7 +427,7 @@ const Person BARTOSZ_KSIAZEK = Person(
 const Person BLANKA_KARCZEWSKA = Person(
     name: 'Blanka Karczewska',
     druzyna: '56. WDS „Ignis”',
-    srodowisko: huf_zhp_warszawa_zoliborz,
+    srodowisko: Srodowisko.hufiec('warszawa_zoliborz'),
     email: ["blankakarczewska10@gmail.com"]
 );
 const Person BENIAMIN_PLUCINSKI = Person(
@@ -437,7 +438,7 @@ const Person BENIAMIN_PLUCINSKI = Person(
 const Person BLAZEJ_KLEBBA = Person(
     name: 'Błażej Klebba',
     druzyna: '45. Drużyna Harcerska „Tuptaki”',
-    srodowisko: huf_zhp_puck,
+    srodowisko: Srodowisko.custom(huf_zhp_puck),
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
     email: ['blazej3klebba.onet.pl@gmail.com']
@@ -446,7 +447,7 @@ const Person BRUNO_BRONCEL = Person(
     name: 'Bruno Broncel',
     rankHarc: RankHarc.zhpMlodzik,
     druzyna: '55. DHSiW „Exigo”',
-    srodowisko: huf_zhp_karkonoski,
+    srodowisko: Srodowisko.custom(huf_zhp_karkonoski),
     org: Org.zhp,
     email: ['bruno.broncel@gmail.com']
 );
@@ -476,7 +477,7 @@ const Person DANIEL_IWANICKI = Person(
 const Person DANIEL_KRYSIAK = Person(
     name: 'Daniel Krysiak',
     druzyna: 'I KDW im. Tadeusza Rejtana',
-    srodowisko: huf_zhp_kutno,
+    srodowisko: Srodowisko.custom(huf_zhp_kutno),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["danielkrysiak8098@wp.pl", 'krysiakdaniel8098@gmail.com']
@@ -485,13 +486,13 @@ const Person DANIEL_KORZEB = Person(
   name: 'Daniel Korzeb',
   rankHarc: RankHarc.zhpOdkrywca,
   druzyna: '39. HDŻ Burza',
-  srodowisko: huf_zhp_czestochowa,
+  srodowisko: Srodowisko.custom(huf_zhp_czestochowa),
   org: Org.zhp,
 );
 const Person DARIUSZ_DYMEK = Person(
     name: 'Dariusz Dymek',
     druzyna: 'PJDSH "Biała Róża"',
-    srodowisko: huf_zhp_jaworzno,
+    srodowisko: Srodowisko.custom(huf_zhp_jaworzno),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["dymek.daro@gmail.com"]
@@ -499,7 +500,7 @@ const Person DARIUSZ_DYMEK = Person(
 const Person DAWID_KOBEDZA = Person(
     name: 'Dawid Kobędza',
     druzyna: '8. ŁDH Gniazdo',
-    srodowisko: huf_zhp_lodz_gorna,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_gorna),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -508,7 +509,7 @@ const Person DAWID_KOBEDZA = Person(
 const Person DAWID_LOBODA = Person(
     name: 'Dawid Łoboda',
     druzyna: '63. GDH im. mi. Hieronima Degutowskiego „Zapora”',
-    srodowisko: huf_zhr_3_gdynski,
+    srodowisko: Srodowisko.custom(huf_zhr_3_gdynski),
     rankHarc: RankHarc.zhrHOc,
     org: Org.zhr,
     email: ['dawidekk728@gmail.com']
@@ -528,7 +529,7 @@ const Person DAWID_WYSZYNSKI = Person(
 const Person DOMINIK_BETKA = Person(
     name: 'Dominik Betka',
     druzyna: '53 GDSH "STEFANY"',
-    srodowisko: huf_zhp_gdynia,
+    srodowisko: Srodowisko.custom(huf_zhp_gdynia),
     rankInstr: RankInstr.phm,
     org: Org.zhp,
     email: ["dominik.betka@zhp.net.pl"]
@@ -536,7 +537,7 @@ const Person DOMINIK_BETKA = Person(
 const Person DOMINIK_KIERES = Person(
     name: 'Dominik Kiereś',
     druzyna: '9. Drużyna Starszoharcerska "Zachód"',
-    srodowisko: huf_zhp_wolsztyn,
+    srodowisko: Srodowisko.custom(huf_zhp_wolsztyn),
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ["dominik.kieres@zhp.net.pl"]
@@ -544,14 +545,14 @@ const Person DOMINIK_KIERES = Person(
 const Person DOMINIK_PRZYBYLOWSKI = Person(
     name: 'Dominik Przybyłowski',
     druzyna: '141. BDW',
-    srodowisko: huf_zhp_bialystok,
+    srodowisko: Srodowisko.custom(huf_zhp_bialystok),
     rankHarc: RankHarc.zhpHRc,
     org: Org.zhp,
     email: ['dominik.przybylowski@zhp.pl']
 );
 const Person DOMINIKA_GORZYNSKA = Person(name: 'Dominika Gorzyńska', rankHarc: RankHarc.zhpPionierka,
   druzyna: '11. Gdańska Drużyna Starszoharcerska „Cegły” im. Anny Burdówny',
-  srodowisko: huf_zhp_gdansk_srodmiesie,
+  srodowisko: Srodowisko.custom(huf_zhp_gdansk_srodmiesie),
   org: Org.zhp,
 );
 const Person DOMINIKA_HOCHMANSKA = Person(
@@ -563,7 +564,7 @@ const Person DOMINIKA_HOCHMANSKA = Person(
 const Person DOMINIKA_KONARSKA = Person(
     name: 'Dominika Konarska',
     druzyna: '12 DSH „Północ”',
-    srodowisko: 'Krapkowice',
+    srodowisko: Srodowisko.custom('Krapkowice'),
     rankHarc: RankHarc.zhpTropicielka,
     org: Org.zhp,
     email: ['u5796295922@gmail.com']
@@ -572,13 +573,13 @@ const Person DORIAN_JAREK = Person(
     name: 'Dorian Jarek',
     rankInstr: RankInstr.pwd,
     druzyna: '13. Konińska Drużyna Wędrownicza „Wadery”',
-    srodowisko: huf_zhp_konin,
+    srodowisko: Srodowisko.custom(huf_zhp_konin),
     org: Org.zhp
 );
 const Person EMILIA_ADAMCZYK = Person(
     name: 'Emilka Adamczyk',
     druzyna: '222. WDH „Bukowina” im. Jerzego Kukuczki',
-    srodowisko: huf_zhp_warszawa_wola,
+    srodowisko: Srodowisko.hufiec('warszawa_wola'),
     org: Org.zhp,
     email: ["e.emilia246@gmail.com"]
 );
@@ -591,7 +592,7 @@ const Person EMILIA_Z_FSE = Person(
 const Person EMILIA_BARABASZ = Person(
     name: 'Emilia Barabasz',
     druzyna: '71. WGZ „Strażnicy Kraczaru”',
-    srodowisko: huf_zhp_warszawa_praga_pn,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
     email: ['emilia.barabasz@zhp.net.pl']
@@ -600,14 +601,14 @@ const Person EMILIA_WARSZAJLO = Person(
     name: 'Emilia Warszajło',
     rankHarc: RankHarc.zhpSamarytanka,
     druzyna: '24. Szczep DHiGZ „Awangarda”',
-    srodowisko: huf_zhp_poznan_grunwald,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_grunwald),
     org: Org.zhp,
     email: ['emiwarszajlo@gmail.com']
 );
 const Person EMILIA_WITKOWSKA = Person(
     name: 'Emilia Witkowska',
     druzyna: '307. WDHiZ',
-    srodowisko: huf_zhp_warszawa_mokotow,
+    srodowisko: Srodowisko.hufiec('warszawa_mokotow'),
     rankInstr: RankInstr.phm,
     rankHarc: RankHarc.zhpHRd,
     org: Org.zhp,
@@ -624,7 +625,7 @@ const Person EWA_BYSTRZYNSKA = Person(name: 'Ewa Bystrzyńska', rankHarc: RankHa
 const Person EWELINA_HUPKA = Person(
     name: 'Ewelina Hupka',
     druzyna: 'XXII. Drużyna Harcerska „Ignis”',
-    srodowisko: huf_zhp_wegierska_gorka,
+    srodowisko: Srodowisko.custom(huf_zhp_wegierska_gorka),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ['ewelina.hupka@zhp.net.pl']
@@ -633,21 +634,21 @@ const Person FILIP_BERGIER = Person(
     name: 'Filip Bergier',
     rankHarc: RankHarc.zhpWywiadowca,
     druzyna: '72. WDHS „Uroczysko”',
-    srodowisko: huf_zhp_warszawa_praga_pn,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
     org: Org.zhp,
     email: ['janberg7272@gmail.com', 'filip.bergier@zhp.net.pl', 'filip.bergier111@gmail.com']
 );
 const Person FILIP_BRASZEWSKI = Person(
     name: 'Filip Brąszewski',
     druzyna: '62 KDHS „Brzoza” im. Stefana Szolca-Rogodzińskiego',
-    srodowisko: huf_zhp_kalisz,
+    srodowisko: Srodowisko.custom(huf_zhp_kalisz),
     org: Org.zhp,
     email: ["fbraszewskii@gmail.com"]
 );
 const Person FILIP_JASTRZEBSKI = Person(
     name: 'Filip Jastrzębski',
     druzyna: '58 Mazowiecka Drużyna Harcerzy "Cichociemni" im. płk. Jana Piwnika ps. "Ponury"',
-    srodowisko: 'Warszawski Hufiec Harcerzy „Eldorado”',
+    srodowisko: Srodowisko.custom('Warszawski Hufiec Harcerzy „Eldorado”'),
     rankHarc: RankHarc.zhrWywiadowca,
     org: Org.zhr,
     email: ["filip8j@gmail.com"]
@@ -660,7 +661,7 @@ const Person FILIP_KWIATKOWSKI = Person(
 const Person FILIP_LEWICKI = Person(
     name: 'Filip Lewicki',
     druzyna: '44 BDO "Beryl"',
-    srodowisko: huf_zhp_bialystok,
+    srodowisko: Srodowisko.custom(huf_zhp_bialystok),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -682,7 +683,7 @@ const Person FILIP_SWIDEREK = Person(
 const Person FLORIAN_PELEC = Person(
     name: 'Florian Pelec',
     druzyna: '28. DW "Żywica"',
-    srodowisko: huf_zhp_jarocin,
+    srodowisko: Srodowisko.custom(huf_zhp_jarocin),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["florian.pelec@zhp.pl"]
@@ -691,7 +692,7 @@ const Person FLORIAN_PELEC = Person(
 const Person FRANCISZEK_FALENTA = Person(
     name: 'Franciszek Falenta',
     druzyna: '123. LDSH „Imperatyw”',
-    srodowisko: huf_zhp_lublin,
+    srodowisko: Srodowisko.custom(huf_zhp_lublin),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["franciszek.falenta@zhp.pl"]
@@ -699,7 +700,7 @@ const Person FRANCISZEK_FALENTA = Person(
 const Person FRANCISZEK_HALUCH = Person(
     name: 'Franciszek Haluch',
     druzyna: '73. KDSH „Carpe Diem”',
-    srodowisko: huf_zhp_beskidzki,
+    srodowisko: Srodowisko.custom(huf_zhp_beskidzki),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["franciszek.haluch@zhp.net.pl"]
@@ -713,41 +714,41 @@ const Person FRANCISZEK_LINKE = Person(
 const Person FRANCISZEK_MICHALSKI = Person(
     name: 'Franciszek Michalski',
     druzyna: '254. WDH „Matecznik” im. Janka Bytnara „Rudego”',
-    srodowisko: huf_zhp_warszawa_zoliborz,
+    srodowisko: Srodowisko.hufiec('warszawa_zoliborz'),
     org: Org.zhp,
     email: ['franciszek.michalski@zhp.net.pl']
 );
 const Person FRANCISZEK_PUKNEL = Person(
     name: 'Franek Puknel',
     druzyna: '579. WDH Łatwopalni',
-    srodowisko: huf_zhp_powiatu_trzebnickiego,
+    srodowisko: Srodowisko.custom(huf_zhp_powiatu_trzebnickiego),
     rankHarc: RankHarc.zhpWywiadowca,
     org: Org.zhp,
     email: ["franekpuknel12@gmail.com", 'franek.pu@icloud.com']
 );
 const Person FRANCISZEK_TOMASZCZYK = Person(
     name: 'Franciszek Tomaszczyk',
-    rankHarc: RankHarc.zhpWywiadowca, srodowisko: huf_zhp_ziemi_cieszynskiej,
+    rankHarc: RankHarc.zhpWywiadowca, srodowisko: Srodowisko.custom(huf_zhp_ziemi_cieszynskiej),
     druzyna: '33. CDH „Czarne stopy”, 4. GZ „Radosne Misie”',
     org: Org.zhp
 );
 const Person FRANCISZEK_WOJDYLO = Person(
     name: 'Franciszek Wojdyło',
     druzyna: '424 DW „Puszcza”',
-    srodowisko: 'Nowy Dwór Mazowiecki',
+    srodowisko: Srodowisko.custom('Nowy Dwór Mazowiecki'),
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ["franciszek.wojdylo@zhp.net.pl", 'franciszek.wojdylo@icloud.com']
 );
 const Person GABRIEL_KOSSAKOWSKI = Person(
-  name: 'Gabriel Kossakowski',
-  srodowisko: huf_zhp_gorlice,
-  org: Org.zhp
+    name: 'Gabriel Kossakowski',
+    srodowisko: Srodowisko.hufiec('gorlice'),
+    org: Org.zhp
 );
 const Person GABRIEL_POZNANSKI = Person(
     name: 'Gabriel Poznański',
     druzyna: '6. GZ „Jeźdźcy Smoków”',
-    srodowisko: huf_zhp_chodziez,
+    srodowisko: Srodowisko.custom(huf_zhp_chodziez),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -756,7 +757,7 @@ const Person GABRIEL_POZNANSKI = Person(
 const Person GABRIELA_OZOG = Person(
     name: 'Gabriela Ożóg',
     druzyna: '175. RwDW „Orientalis”',
-    srodowisko: huf_zhp_rzeszow,
+    srodowisko: Srodowisko.custom(huf_zhp_rzeszow),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["gabriela.ozog.mw@gmail.com"]
@@ -764,21 +765,21 @@ const Person GABRIELA_OZOG = Person(
 const Person GABRIELA_SAWICKA = Person(
     name: 'Gabriela Sawicka',
     druzyna: '14. BDSh „Pomost”',
-    srodowisko: huf_zhp_bialystok,
+    srodowisko: Srodowisko.custom(huf_zhp_bialystok),
     email: ["bibi.sawicka@gmail.com"]
 );
 
 const Person GABRIELA_SOBCZAK = Person(
     name: 'Gabriela Sobczak',
     druzyna: '10. DH',
-    srodowisko: huf_zhp_jaktorow,
+    srodowisko: Srodowisko.custom(huf_zhp_jaktorow),
     rankHarc: RankHarc.zhpOchotniczka,
     email: ["gabi.sobczak1011@gmail.com"]
 );
 Person GABRIELA_TWORKOWSKA = const Person(
     name: 'Gabriela Tworkowska',
     druzyna: '75. ŁDH-EK „Brzask” im. gen. Marii Wittek',
-    srodowisko: 'Łódzki Hufiec Harcerek „Mozaika”',
+    srodowisko: Srodowisko.custom('Łódzki Hufiec Harcerek „Mozaika”'),
     rankHarc: RankHarc.zhrTropicielka,
     org: Org.zhr,
     email: ['gabi.tworko@gmail.com']
@@ -787,12 +788,12 @@ const Person GRZEGORZ_BOROWIEC = Person(
   name: 'Grzegorz Borowiec',
   rankHarc: RankHarc.zhpHOc,
   druzyna: '66. WDW „Tornado”',
-  srodowisko: huf_zhp_torun,
+  srodowisko: Srodowisko.custom(huf_zhp_torun),
   org: Org.zhp,
 );
 const Person GRZEGORZ_FRANK = Person(
     name: 'Grzegorz Frank',
-    srodowisko: huf_zhp_ruda_slaska,
+    srodowisko: Srodowisko.custom(huf_zhp_ruda_slaska),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -801,7 +802,7 @@ const Person GRZEGORZ_FRANK = Person(
 const Person GRZEGORZ_FRANKOW = Person(
     name: 'Grzegorz Franków',
     druzyna: '22. Kielecka Drużyna Harcerska',
-    srodowisko: huf_zhp_kielce_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_kielce_miasto),
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ['grzegorz.frankow@zhp.net.pl']
@@ -809,7 +810,7 @@ const Person GRZEGORZ_FRANKOW = Person(
 const Person GRZEGORZ_GIBADLO = Person(
     name: 'Grzegorz Gibadło',
     druzyna: '25 DSH „Północ"',
-    srodowisko: huf_zhp_podkrakowski,
+    srodowisko: Srodowisko.hufiec('podkrakowski'),
     rankHarc: RankHarc.zhpOdkrywca,
     org: Org.zhp,
     email: ["gg.gibadło@gmail.com"]
@@ -821,12 +822,12 @@ const Person GRZEGORZ_PAWLAK = Person(
 const Person GRZEGORZ_ZAWADZKI = Person(
   name: 'Grzegorz Zawadzki',
   druzyna: '8. DSH „Ignis”',
-  srodowisko: huf_zhp_kutno,
+  srodowisko: Srodowisko.custom(huf_zhp_kutno),
 );
 const Person GUSTAW_BAJCAR = Person(
     name: 'Gustaw Bajcar',
     druzyna: '2. WDH',
-    srodowisko: huf_zhp_olawa,
+    srodowisko: Srodowisko.custom(huf_zhp_olawa),
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
     email: ['gustaw.bajcar2@gmail.com']
@@ -851,7 +852,7 @@ const Person HANNA_CZAJKOWSKA = Person(
 const Person HANNA_ERMAN = Person(
     name: 'Hanna Erman',
     druzyna: '62 KDHS "Brzoza" im. Stefana Szolca-Rogodzińskiego',
-    srodowisko: huf_zhp_kalisz,
+    srodowisko: Srodowisko.custom(huf_zhp_kalisz),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["bellahania511@gmail.com"]
@@ -866,7 +867,7 @@ const Person HANNA_KESKA = Person(
 const Person HANNA_KUCINSKA = Person(
     name: 'Hanna Kucińska',
     druzyna: '14. DHS „Wataha"',
-    srodowisko: huf_zhp_legionowo,
+    srodowisko: Srodowisko.hufiec('legionowo'),
     rankHarc: RankHarc.zhpTropicielka,
     org: Org.zhp,
     email: ["hanna.kucinska@vp.pl"]
@@ -878,7 +879,7 @@ const Person HANNA_KUJAWSKA = Person(
 );
 const Person HANNA_RYBACKA = Person(name: 'Hanna Rybacka',
     druzyna: 'Gromada Zuchowa „Ogniste Feniksy”',
-    srodowisko: huf_zhp_zdunska_wola,
+    srodowisko: Srodowisko.custom(huf_zhp_zdunska_wola),
     rankHarc: RankHarc.zhpSamarytanka,
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
@@ -887,13 +888,13 @@ const Person HANNA_RYBACKA = Person(name: 'Hanna Rybacka',
 const Person HANNA_STRZESZEWSKA = Person(
     name: 'Hanna Strzeszewska',
     druzyna: '368. „Gniazdk”',
-    srodowisko: huf_zhp_warszawa_zoliborz,
+    srodowisko: Srodowisko.hufiec('warszawa_zoliborz'),
     email: ['hania.prime@gmail.com']
 );
 const Person HANNA_WITKOWSKA = Person(
     name: 'Hanna Witkowska',
     druzyna: '66. Wrocławska Drużyna Harcerska „PSIAKI”',
-    srodowisko: huf_zhp_wroclaw_polnoc,
+    srodowisko: Srodowisko.custom(huf_zhp_wroclaw_polnoc),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -902,13 +903,13 @@ const Person HANNA_WITKOWSKA = Person(
 const Person HANNA_WNEKOWICZ = Person(
     name: 'Hanna Wnękowicz',
     druzyna: '12. DH „Szare Wilki” w Brodach',
-    srodowisko: huf_zhp_zary,
+    srodowisko: Srodowisko.custom(huf_zhp_zary),
     org: Org.zhp,
     email: ['hannawnekowicz93@gmail.com']
 );
 const Person HELENA_LATOSINSKA = Person(name: 'Helena Latosińska',
   druzyna: '39. Wielopoziomowa Drużyna Harcerska „Leśne Stwory z Radlina”',
-  srodowisko: huf_zhp_ziemi_wodzislawskiej,
+  srodowisko: Srodowisko.custom(huf_zhp_ziemi_wodzislawskiej),
   org: Org.zhp,
 );
 const Person HELENA_SWIATKOWSKA = Person(
@@ -920,7 +921,7 @@ const Person HELENA_SWIATKOWSKA = Person(
 const Person HUBERT_CISLAK = Person(
     name: 'Hubert Ciślak',
     druzyna: '300. PgLDH „Wichura”',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     rankHarc: RankHarc.zhpWywiadowca,
     email: ["hubertcc007@gmail.com"]
 );
@@ -930,14 +931,14 @@ const Person HUBERT_FRUKOWSKI = Person(
 const Person HUBERT_JANIK = Person(
     name: 'Hubert Janik',
     druzyna: '7. BDH „Białe Czaple”',
-    srodowisko: huf_zhp_bydgoszcz_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_bydgoszcz_miasto),
     org: Org.zhp,
     email: ['hubert.janik@zhp.net.pl', 'hubert.janik@zhp.pl']
 );
 const Person HUBERT_MILEROWICZ = Person(
     name: 'Hubert Milerowicz',
     rankHarc: RankHarc.zhpOdkrywca,
-    srodowisko: huf_zhp_warszawa_ochota,
+    srodowisko: Srodowisko.hufiec('warszawa_ochota'),
     druzyna: 'Środowisko „Szczep 224”',
     email: ['hubertmilerowicz@gmail.com']
 );
@@ -948,7 +949,7 @@ const Person HUBERT_NAPIERALA = Person(
 const Person HUBERT_SULSKI = Person(
     name: 'Hubert Sulski',
     druzyna: '23. DSH „Legendarne Smoki”',
-    srodowisko: huf_zhp_ziemi_wodzislawskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_wodzislawskiej),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ['hksik2007@gmail.com']
@@ -956,7 +957,7 @@ const Person HUBERT_SULSKI = Person(
 const Person HUGO_HANUSA = Person(
     name: 'Hugo Hanusa',
     druzyna: '44. KDH im Krzysztofa Kamil Baczyńskiego',
-    srodowisko: huf_zhr_harcerzy_krakow_stare_miasto,
+    srodowisko: Srodowisko.custom(huf_zhr_harcerzy_krakow_stare_miasto),
     rankHarc: RankHarc.zhrWywiadowca,
     org: Org.zhr,
     email: [
@@ -967,7 +968,7 @@ const Person HUGO_HANUSA = Person(
 const Person HUGO_ZASACKI = Person(
     name: 'Hugo Zasacki',
     druzyna: 'Impeesa',
-    srodowisko: "Wawer",
+    srodowisko: Srodowisko.custom("Wawer"),
     rankHarc: RankHarc.zhrCwik,
     org: Org.zhr,
     email: ["hugozas10@gmail.com"]
@@ -975,7 +976,7 @@ const Person HUGO_ZASACKI = Person(
 const Person IDA_BECHTOLD = Person(
     name: 'Ida Bechtold',
     druzyna: '18. ŁDH Wierchy',
-    srodowisko: huf_zhp_lodz_baluty,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_baluty),
     rankHarc: RankHarc.zhpTropicielka,
     org: Org.zhp,
     email: ['idabechtold@icloud.com', 'i.bechtold@sp.120.elodz.edu.pl']
@@ -983,7 +984,7 @@ const Person IDA_BECHTOLD = Person(
 const Person IGNACY_DUDZIAK = Person(
     name: 'Ignacy Dudziak',
     druzyna: '121. PgDSH „Szlak Łez” im. Plutonu „Alicja”',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     rankHarc: RankHarc.zhpWywiadowca,
     org: Org.zhp,
     email: ['ignacy.dudziak@zhp.net.pl']
@@ -991,7 +992,7 @@ const Person IGNACY_DUDZIAK = Person(
 const Person IGNACY_SZYMICHOWSKI = Person(
     name: 'Ignacy Szymichowski',
     druzyna: '70. SDH',
-    srodowisko: 'Gdyński HH „Pasieka”',
+    srodowisko: Srodowisko.custom('Gdyński HH „Pasieka”'),
     rankInstr: RankInstr.phm,
     rankHarc: RankHarc.zhrHRc,
     org: Org.zhr,
@@ -1000,7 +1001,7 @@ const Person IGNACY_SZYMICHOWSKI = Person(
 const Person IGNACY_WOJTCZAK = Person(
     name: 'Ignacy Wojtczak',
     druzyna: '8. ADH',
-    srodowisko: huf_zhr_lodz_polesie,
+    srodowisko: Srodowisko.custom(huf_zhr_lodz_polesie),
     rankHarc: RankHarc.zhrMlodzik,
     org: Org.zhr,
     email: [
@@ -1010,7 +1011,7 @@ const Person IGNACY_WOJTCZAK = Person(
 const Person IGOR_SOLECKI = Person(
     name: 'Igor Solecki',
     druzyna: '58. (MDH) Cichociemni ps. Ponury',
-    srodowisko: 'Rosa Venti',
+    srodowisko: Srodowisko.custom('Rosa Venti'),
     rankHarc: RankHarc.zhrWywiadowca,
     org: Org.zhr,
     email: ["mrk282665@gmail.com"]
@@ -1018,7 +1019,7 @@ const Person IGOR_SOLECKI = Person(
 const Person IZABELA_MOSKAL = Person(
     name: 'Izabela Moskal',
     druzyna: '5. Krośnieńska Drużyna Harcerek „Shenandu”',
-    srodowisko: huf_zhp_krosno,
+    srodowisko: Srodowisko.custom(huf_zhp_krosno),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ['izabela.moskal.5@gmail.com', 'izabela.moskal@zhp.pl']
@@ -1026,7 +1027,7 @@ const Person IZABELA_MOSKAL = Person(
 const Person INGA_WIERZBICKA = Person(
     name: 'Inga Wierzbicka',
     druzyna: '11. PgDH „Ignis” im. Zofii Cierniakowej',
-    srodowisko: huf_zhr_harcerek_krakow_podgorze,
+    srodowisko: Srodowisko.custom(huf_zhr_harcerek_krakow_podgorze),
     rankHarc: RankHarc.zhrOchotniczka,
     org: Org.zhr,
     email: ['ingawierzbicka1@gmail.com']
@@ -1039,7 +1040,7 @@ const Person JACEK_ANTKIEWICZ = Person(
 const Person JACEK_PELCZAR = Person(
     name: 'Jacek Pelczar',
     druzyna: '79. Warszawska Wodna Drużyna Harcerska „Alpha”',
-    srodowisko: huf_zhp_warszawa_zoliborz,
+    srodowisko: Srodowisko.hufiec('warszawa_zoliborz'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -1049,7 +1050,7 @@ const Person JADWIGA_BILINSKA = Person(
     name: 'Jadwiga Bilińska',
     rankInstr: RankInstr.phm,
     rankHarc: RankHarc.zhpSamarytanka,
-    srodowisko: huf_zhp_zielonka,
+    srodowisko: Srodowisko.hufiec('zielonka'),
     druzyna: '132. Mazowiecka Drużyna Harcerska „Wielkie Bractwo Halicza”',
     org: Org.zhp,
     email: ['jadwiga.bilinska@zhp.net.pl']
@@ -1068,14 +1069,14 @@ const Person JAGIENKA_KULCZYCKA = Person(
   name: 'Jagienka Kulczycka',
   rankHarc: RankHarc.zhpOchotniczka,
   druzyna: '36. Kaliska Drużyna Harcerska „Orły”',
-  srodowisko: huf_zhp_kalisz,
+  srodowisko: Srodowisko.custom(huf_zhp_kalisz),
   org: Org.zhp,
   email: ['jagienkakulczycka@gmail.com', 'kulczyckajagienka@gmail.com'],
 );
 const Person JAGODA_BLASZCZYK = Person(
     name: 'Jagoda Błaszczyk',
     druzyna: '29. Zgierska Drużyna Harcerska „Dakota”',
-    srodowisko: huf_zhp_zgierz,
+    srodowisko: Srodowisko.custom(huf_zhp_zgierz),
     rankHarc: RankHarc.zhpOchotniczka,
     org: Org.zhp,
     email: ['blaszczykjagoda25@gmail.com']
@@ -1083,7 +1084,7 @@ const Person JAGODA_BLASZCZYK = Person(
 const Person JAGODA_SKOWRONSKA = Person(
     name: 'Jagoda Skowrońska',
     druzyna: '125. „Aves”',
-    srodowisko: huf_zhp_nowe_miasto_lubawskie,
+    srodowisko: Srodowisko.custom(huf_zhp_nowe_miasto_lubawskie),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ['jagoda.skowronska@edu.szkolagortatowo.pl', 'jagodaskowronska2021@gmail.com']
@@ -1095,7 +1096,7 @@ const Person JAKUB_BRYLA = Person(
 const Person JAKUB_DEBICKI = Person(
     name: 'Jakub Dębicki',
     druzyna: '8. Drużyna Wędrownicza „Kuźnia Płomienia”',
-    srodowisko: huf_zhp_lask,
+    srodowisko: Srodowisko.custom(huf_zhp_lask),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ['j.debicki@icloud.com']
@@ -1103,7 +1104,7 @@ const Person JAKUB_DEBICKI = Person(
 const Person JAKUB_DUDA = Person(
     name: 'Jakub Duda',
     druzyna: '6DW „Malachit”',
-    srodowisko: huf_zhp_ziemi_myszkowskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_myszkowskiej),
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ['jakubduda2006@gmail.com']
@@ -1112,13 +1113,13 @@ const Person JAKUB_EJDUK = Person(
     name: 'Jakub Ejduk',
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
-    srodowisko: huf_zhp_warszawa_praga_pn,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
     org: Org.zhp
 );
 const Person JAKUB_GABIS = Person(
     name: 'Jakub Gabiś',
     druzyna: '47. DW „Popioły” im. Franciszka Brody',
-    srodowisko: huf_zhp_kalisz,
+    srodowisko: Srodowisko.custom(huf_zhp_kalisz),
     email: ["kubulus1303@gmail.com"]
 );
 const Person JAKUB_HURYSZ = Person(
@@ -1132,7 +1133,7 @@ const Person JAKUB_HURYSZ = Person(
 const Person JAKUB_KLEPACZ = Person(
     name: 'Jakub Klepacz',
     druzyna: '7. ŁDW „Chaos”',
-    srodowisko: huf_zhp_lodz_gorna,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_gorna),
     rankHarc: RankHarc.zhpHRc,
     org: Org.zhp,
     email: ['jakub.klepacz@zhp.net.pl']
@@ -1141,21 +1142,21 @@ const Person JAKUB_KLUCZKOWSKI = Person(
     name: 'Jakub Kluczkowski',
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
-    srodowisko: huf_zhp_ziemi_koszalinskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_koszalinskiej),
     org: Org.zhp,
     email: ['jakub.kluczkowski@zhp.net.pl']
 );
 const Person JAKUB_KRUCZKOWSKI = Person(
     name: 'Jakub Kruczkowski',
     druzyna: '128. WDHS',
-    srodowisko: 'Warszawa Żoliborz',
+    srodowisko: Srodowisko.custom('Warszawa Żoliborz'),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ['kuba.kruczkowski@icloud.com', 'jfkruczkowski@gmail.com']
 );
 const Person JAKUB_KUBICKI = Person(
     name: 'Jakub Kubicki',
-    srodowisko: huf_zhp_jaktorow,
+    srodowisko: Srodowisko.custom(huf_zhp_jaktorow),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
@@ -1168,7 +1169,7 @@ const Person JAKUB_LYSZKOWSKI = Person(
 const Person JAKUB_MAGIERA = Person(
     name: 'Jakub Magiera',
     druzyna: '6. DSH „Ichtis”',
-    srodowisko: huf_zhp_nisko,
+    srodowisko: Srodowisko.custom(huf_zhp_nisko),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHRd,
     org: Org.zhp,
@@ -1177,7 +1178,7 @@ const Person JAKUB_MAGIERA = Person(
 const Person JAKUB_MICHALSKI = Person(
     name: 'Jakub Michalski',
     druzyna: '3. PDH im. płk. Jana Kilińskiego „Czarna Trójka”',
-    srodowisko: huf_zhp_pabianice,
+    srodowisko: Srodowisko.custom(huf_zhp_pabianice),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["michalski.jakub@zhp.net.pl"]
@@ -1185,14 +1186,14 @@ const Person JAKUB_MICHALSKI = Person(
 const Person JAKUB_MLYNSKI = Person(
     name: 'Jakub Młyński',
     druzyna: '77. WDH im. Harcerskiego Batalionu Szturmowego „Zośka”',
-    srodowisko: huf_zhp_gdansk_srodmiesie,
+    srodowisko: Srodowisko.custom(huf_zhp_gdansk_srodmiesie),
     org: Org.zhp,
     email: ['kubamlynski4@gmail.com']
 );
 const Person JAKUB_NOGA = Person(
     name: 'Jakub Noga',
     druzyna: "30. PgDSH „Waganci”",
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     org: Org.zhp,
     email: ['jakub.noga@zhp.net.pl']
 );
@@ -1201,13 +1202,13 @@ const Person JAKUB_STEFANSKI = Person(name: 'Jakub Stefański', rankHarc: RankHa
 const Person JAKUB_STRACZYNSKI = Person(
     name: 'Jakub Strączyński',
     druzyna: '52. KDHS',
-    srodowisko: huf_zhp_kielce_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_kielce_miasto),
     email: ['pancernuq@gmail.com', 'pancernu2@gmail.com', 'qbastraczynski@gmail.com']
 );
 const Person JAKUB_SWIT = Person(
     name: 'Jakub Świt',
     druzyna: '124. Łódzka Drużyna Harcerzy „Bór" im. K.K. Baczyńskiego',
-    srodowisko: huf_zhp_lodz_baluty,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_baluty),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -1216,7 +1217,7 @@ const Person JAKUB_SWIT = Person(
 const Person JAKUB_TARNOWSKI = Person(
     name: 'Jakub Tarnowski',
     druzyna: '101. Tarnowska Wędrownicza Drużyna Harcerska „Currahee”',
-    srodowisko: huf_zhp_tarnow,
+    srodowisko: Srodowisko.hufiec('tarnow'),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["jakubtar14@gmail.com"]
@@ -1225,14 +1226,14 @@ const Person JAKUB_ZDANOWICZ_ZASIDKO = Person(name: 'Jakub Zdanowicz-Zasidko', r
 const Person JAN_JARECKI = Person(
     name: 'Jan Jarecki',
     druzyna: '30. PgDSH „Waganci”',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     org: Org.zhp,
     email: ['jareckijan07@gmail.com', 'jan.jarecki@zhp.pl']
 );
 const Person JAN_JAWORSKI = Person(
     name: 'Jan Jaworski',
     druzyna: '125. DH „Aves” im. Harcerzy Spod Znaku Rodła',
-    srodowisko: huf_zhp_nowe_miasto_lubawskie,
+    srodowisko: Srodowisko.custom(huf_zhp_nowe_miasto_lubawskie),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ['jaworskijan8@gmail.com']
@@ -1240,7 +1241,7 @@ const Person JAN_JAWORSKI = Person(
 const Person JAN_KRASZEWSKI = Person(
     name: 'Jan Kraszewski',
     druzyna: '50. TDSH „Impeesa”',
-    srodowisko: huf_zhp_torun,
+    srodowisko: Srodowisko.custom(huf_zhp_torun),
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ['jan.kraszewski@zhp.net.pl']
@@ -1248,7 +1249,7 @@ const Person JAN_KRASZEWSKI = Person(
 const Person JAN_KUCZA = Person(
     name: 'Jan Kucza',
     druzyna: '12. PDHS „Parszywa Dwunastka”',
-    srodowisko: huf_zhp_legionowo,
+    srodowisko: Srodowisko.hufiec('legionowo'),
     org: Org.zhp,
     email: ['jan.kucza@zhp.net.pl', 's219284@sggw.edu.pl']
 );
@@ -1263,7 +1264,7 @@ const Person JAN_KWIATKOWSKI = Person(
 const Person JAN_LEWANDOWSKI = Person(
     name: 'Jan Lewandowski',
     druzyna: '58. MDH „Cichociemni”',
-    srodowisko: 'Eldorado',
+    srodowisko: Srodowisko.custom('Eldorado'),
     rankHarc: RankHarc.zhrWywiadowca,
     org: Org.zhr,
     email: ["janeklefy@gmail.com"]
@@ -1271,7 +1272,7 @@ const Person JAN_LEWANDOWSKI = Person(
 const Person JAN_LICZBANSKI = Person(
     name: 'Jan Liczbański',
     druzyna: '1. PDH „Puszcza” im. KWP',
-    srodowisko: 'Łódzki Hufiec Harcerzy "Szaniec"',
+    srodowisko: Srodowisko.custom('Łódzki Hufiec Harcerzy "Szaniec"'),
     rankHarc: RankHarc.zhrWywiadowca,
     org: Org.zhr,
     email: ["janekliczbanski10@gmail.com", "kowalewiczgosia@gmail.com"]
@@ -1279,7 +1280,7 @@ const Person JAN_LICZBANSKI = Person(
 const Person JAN_NOWAK = Person(
     name: 'Jan Nowak',
     druzyna: '8. UDH „Knieja”',
-    srodowisko: huf_zhr_urynowski_hufiec_rawicz,
+    srodowisko: Srodowisko.custom(huf_zhr_urynowski_hufiec_rawicz),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhr,
     email: ['lolekmarian.200@gmail.com']
@@ -1287,7 +1288,7 @@ const Person JAN_NOWAK = Person(
 const Person JAN_REWERSKI = Person(
     name: 'Jan Rewerski',
     druzyna: '173. WDH „Biała” im K. K. Baczyńskiego',
-    srodowisko: huf_zhp_warszawa_ochota,
+    srodowisko: Srodowisko.hufiec('warszawa_ochota'),
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
     email: ["jarewerski@gmail.com"]
@@ -1295,7 +1296,7 @@ const Person JAN_REWERSKI = Person(
 const Person JAN_STANULA = Person(
     name: 'Jan Stanula',
     druzyna: '4. DSH Ogniste Płomyki',
-    srodowisko: huf_zhp_trzebinia,
+    srodowisko: Srodowisko.hufiec('trzebinia'),
     org: Org.zhp
 );
 const Person JANUSZ_ORLUTA = Person(
@@ -1308,23 +1309,23 @@ const Person JANUSZ_ORLUTA = Person(
 const Person JAROMIR_JABLONSKI = Person(
     name: 'Jaromir Jabłoński',
     druzyna: '132. Mazowiecka Drużyna Harcerzy "Synowie Szarego Wilka"',
-    srodowisko: huf_zhp_zielonka,
+    srodowisko: Srodowisko.hufiec('zielonka'),
     rankInstr: RankInstr.phm,
     rankHarc: RankHarc.zhpHRc,
     org: Org.zhp,
     email: ["jaromir.jablonski@zhp.pl"]
 );
 const Person JAROSLAW_JAKUBIAK = Person(name: 'Jarosław Jakubiak', rankHarc: RankHarc.dhc,
-  srodowisko: huf_zhp_uk,
+  srodowisko: Srodowisko.custom(huf_zhp_uk),
 );
 const Person JAROSLAW_ZASACKI = Person(name: 'Jarosław Zasacki', rankHarc: RankHarc.zhpHOc, rankInstr: RankInstr.phm,
-  srodowisko: huf_zhr_zielonagora_topor,
+  srodowisko: Srodowisko.custom(huf_zhr_zielonagora_topor),
   org: Org.zhrChlop,
 );
 const Person JASMINA_ROZYCKA = Person(
     name: 'Jaśmina Różycka',
     druzyna: '12. Lubelska Drużyna Wędrowniczek Północ',
-    srodowisko: huf_zhr_lubelski_hufiec_harcerek_harmonia,
+    srodowisko: Srodowisko.custom(huf_zhr_lubelski_hufiec_harcerek_harmonia),
     rankHarc: RankHarc.zhrSamarytanka,
     org: Org.zhr,
     email: ["kontrabasistka5@gmail.com", "rozyckajasmina@gmail.com"]
@@ -1332,7 +1333,7 @@ const Person JASMINA_ROZYCKA = Person(
 const Person JERZY_ZOLNA = Person(
     name: 'Jerzy Żołna',
     druzyna: '30. PDSH „Chruptasy”',
-    srodowisko: huf_zhp_poznan_stare_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_stare_miasto),
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ["kamil12356544@gmail.com"]
@@ -1340,7 +1341,7 @@ const Person JERZY_ZOLNA = Person(
 const Person JOANNA_ASZKLAR = Person(
     name: 'Joanna Aszklar',
     druzyna: '155. WDSH „Kuźnia”',
-    srodowisko: huf_zhp_warszawa_mokotow,
+    srodowisko: Srodowisko.hufiec('warszawa_mokotow'),
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
     email: ["Joanna.aszklar@zhp.net.pl"]
@@ -1352,7 +1353,7 @@ const Person JOANNA_MICHALOWSKA = Person(name: 'Joanna Michałowska', rankHarc: 
 const Person JOANNA_PAJAK = Person(
     name: 'Asia Pająk',
     druzyna: '124. ŁGDH „Płomienie”',
-    srodowisko: huf_zhp_lodz_gorna,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_gorna),
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
     email: ['joanna.pajak@zhp.net.pl', 'pasiajak1@gmail.com']
@@ -1360,7 +1361,7 @@ const Person JOANNA_PAJAK = Person(
 const Person JOANNA_RACZKO = Person(
     name: 'Joanna Raczko',
     druzyna: '33. WWDH „Korsarze” im. Marynarki Wojennej RP',
-    srodowisko: 'Wejherowo',
+    srodowisko: Srodowisko.custom('Wejherowo'),
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ['joanna.raczko@zhp.net.pl']
@@ -1368,7 +1369,7 @@ const Person JOANNA_RACZKO = Person(
 const Person JOANNA_ZUBEK = Person(
     name: 'Joanna Zubek',
     druzyna: '234. WDW „Feniks”',
-    srodowisko: 'Hufiec ZHP Warszawa Mokotów',
+    srodowisko: Srodowisko.custom('Hufiec ZHP Warszawa Mokotów'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -1378,7 +1379,7 @@ const Person JOANNA_ZUBEK = Person(
 const Person JULIA_SZOZDA = Person(
     name: 'Julia Szozda',
     druzyna: '123. LDSh „Imperatyw”',
-    srodowisko: huf_zhp_lublin,
+    srodowisko: Srodowisko.custom(huf_zhp_lublin),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["jszozdaaa@gmail.com"]
@@ -1386,7 +1387,7 @@ const Person JULIA_SZOZDA = Person(
 const Person JOANNA_WALENDZIK = Person(
     name: 'Joanna Walendzik',
     druzyna: '111 Artystyczna Drużyna Harcerska',
-    srodowisko: huf_zhp_starachowice,
+    srodowisko: Srodowisko.custom(huf_zhp_starachowice),
     rankHarc: RankHarc.zhpHRd,
     org: Org.zhp,
     email: ["joanna.walendzik@zhp.net.pl"]
@@ -1394,7 +1395,7 @@ const Person JOANNA_WALENDZIK = Person(
 const Person JOLA_RYS = Person(
     name: 'Jola Ryś',
     druzyna: '5. Drużyna „Dzieci Gór”',
-    srodowisko: huf_zhp_gorczanski,
+    srodowisko: Srodowisko.hufiec('gorczanski'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
@@ -1403,7 +1404,7 @@ const Person JOLA_RYS = Person(
 const Person JOWITA_BUCZYNSKA = Person(
     name: 'Jowita Buczyńska',
     druzyna: '23 ZDH "Zorza"',
-    srodowisko: huf_zhp_ziemi_bedzinskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_bedzinskiej),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ['jowitabuczynska947@gmail.com']
@@ -1411,7 +1412,7 @@ const Person JOWITA_BUCZYNSKA = Person(
 const Person JULIA_BENEDYK = Person(
     name: 'Julia Benedyk',
     druzyna: '9. MDH',
-    srodowisko: huf_zhp_mielec,
+    srodowisko: Srodowisko.custom(huf_zhp_mielec),
     rankHarc: RankHarc.zhpTropicielka,
     org: Org.zhp,
     email: ['benedykjulia976@gmail.com']
@@ -1429,14 +1430,14 @@ const Person JULIA_BOLOZ = Person(
 const Person JULIA_GRODZKA = Person(
     name: 'Julka Grodzka',
     druzyna: '2. DH „Śpiący Rycerz”',
-    srodowisko: huf_zhp_ziemi_rybnickiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_rybnickiej),
     rankHarc: RankHarc.zhpSamarytanka,
     email: ['jucia.grodzka@gmail.com', 'grodzka.julia@zhp.net.pl']
 );
 const Person JULIA_JAROSZ = Person(
     name: 'Julia Jarosz',
     druzyna: '72. WDH „Knieja”',
-    srodowisko: huf_zhp_warszawa_praga_pn,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -1446,14 +1447,14 @@ const Person JULIA_KARAS = Person(
     name: 'Julia Karaś',
     rankHarc: RankHarc.zhpPionierka,
     druzyna: '78. Grunwaldzka Wielopoziomowa Drużyna Harcerska „Halny” im. hm. Józefy Kantor',
-    srodowisko: huf_zhp_beskidzki,
+    srodowisko: Srodowisko.custom(huf_zhp_beskidzki),
     org: Org.zhp,
     email: ['karasjulka81@gmail.com']
 );
 const Person JULIA_KOSZTYLA = Person(
     name: 'Julia Kosztyła',
     druzyna: '7. DH NEMUS',
-    srodowisko: huf_zhp_krosno,
+    srodowisko: Srodowisko.custom(huf_zhp_krosno),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ['juliakosztyla23@gmail.com']
@@ -1461,7 +1462,7 @@ const Person JULIA_KOSZTYLA = Person(
 const Person JULIA_MARCINIAK = Person(
     name: 'Julia Marciniak',
     druzyna: '22 Lubelska Drużyna Harcerek "Potok" im. hm. Danuty Zofii Magierskiej',
-    srodowisko: 'Lubelski Hufiec Harcerek "Rzeka"',
+    srodowisko: Srodowisko.custom('Lubelski Hufiec Harcerek "Rzeka"'),
     rankHarc: RankHarc.zhrSamarytanka,
     org: Org.zhr,
     email: ["juliamarcinka08@gmail.com"]
@@ -1469,7 +1470,7 @@ const Person JULIA_MARCINIAK = Person(
 const Person JULIA_PIASKOWSKA = Person(
     name: 'Julia Piaskowska',
     druzyna: '41 TDH Astrum',
-    srodowisko: huf_zhp_tomaszow_mazowiecki,
+    srodowisko: Srodowisko.custom(huf_zhp_tomaszow_mazowiecki),
     rankHarc: RankHarc.zhpTropicielka,
     org: Org.zhp,
     email: ['jpiaskowska25@gmail.com']
@@ -1485,7 +1486,7 @@ const Person JULIA_SIUDMAK = Person(name: 'Julia Siudmak');
 const Person JULIA_SLAZAK = Person(
     name: 'Julia Ślązak',
     druzyna: '6 Świdnicka Drużyna Harcerska "Pasieka"',
-    srodowisko: huf_zhp_swidnica,
+    srodowisko: Srodowisko.custom(huf_zhp_swidnica),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ["juliaslazak2000@gmail.com"]
@@ -1493,7 +1494,7 @@ const Person JULIA_SLAZAK = Person(
 const Person JULIA_TYSZKIEWICZ = Person(
     name: 'Julia Tyszkiewicz',
     druzyna: '328. WDW „Fantasmagoria”',
-    srodowisko: huf_zhp_warszawa_centrum,
+    srodowisko: Srodowisko.hufiec('warszawa_centrum'),
     org: Org.zhp,
     email: ['julia.tyszkiewicz@zhp.net.pl']
 );
@@ -1504,7 +1505,7 @@ const Person JULIA_WIERZBA = Person(
 const Person JULIA_WIESZOLEK = Person(
     name: 'Julia Wieszołek',
     druzyna: '3. Ozimska Drużyna Harcerek „Małapanew”',
-    srodowisko: 'Zawadczański Związek Drużyn Harcerek „Horyzonty”',
+    srodowisko: Srodowisko.custom('Zawadczański Związek Drużyn Harcerek „Horyzonty”'),
     rankHarc: RankHarc.zhrWedrowniczka,
     org: Org.zhr,
     email: ["julia.wieszolek@zhr.pl"]
@@ -1512,14 +1513,14 @@ const Person JULIA_WIESZOLEK = Person(
 const Person JULIAN_SLAZYK = Person(
     name: 'Julian Ślazyk',
     druzyna: '47. ŁWDW',
-    srodowisko: huf_zhp_lodz_polesie,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_polesie),
     rankHarc: RankHarc.dhd,
     email: ['l.z.slazyk@gmail.com', 'podstawczak0@gmail.com']
 );
 const Person JULIANNA_KLUS = Person(
     name: 'Julianna Klus',
     druzyna: '208. Warszawska Drużyna Harcerska „Helios”',
-    srodowisko: huf_zhp_warszawa_mokotow,
+    srodowisko: Srodowisko.hufiec('warszawa_mokotow'),
     org: Org.zhp,
     email: ['julianna.klus@zhp.net.pl', 'julianna.klus4@gmail.com']
 );
@@ -1535,7 +1536,7 @@ const Person KACPER_BACZKOWSKI = Person(
 const Person KACPER_CIESIELSKI = Person(
     name: 'Kacper Ciesielski',
     druzyna: '64. Świnoujska drużyna harcerska im. Batalionów “Zośka” i “Parasol”',
-    srodowisko: huf_zhp_ziemi_wolinskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_wolinskiej),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHRc,
     org: Org.zhp,
@@ -1549,7 +1550,7 @@ const Person KACPER_FRONC = Person(
 const Person KACPER_JASINSKI = Person(
     name: 'Kacper Jasiński',
     druzyna: '7. PDW "Żar"',
-    srodowisko: 'Poleski Hufiec Harcerzy "Świt"',
+    srodowisko: Srodowisko.custom('Poleski Hufiec Harcerzy "Świt"'),
     rankHarc: RankHarc.zhrMlodzik,
     org: Org.zhr,
     email: ["kjasinski008@gmail.com"]
@@ -1558,7 +1559,7 @@ const Person KACPER_KORDEK = Person(name: 'Kacper Kordek', rankHarc: RankHarc.zh
 const Person KACPER_KOTECKI = Person(
     name: 'Kacper Kotecki',
     druzyna: '3. GŚDHS Kumade Niedździedzia Łapa',
-    srodowisko: huf_zhp_glowno,
+    srodowisko: Srodowisko.custom(huf_zhp_glowno),
     rankHarc: RankHarc.zhpWywiadowca,
     org: Org.zhp,
     email: ["panszkrzyneczka@gmail.com"]
@@ -1570,7 +1571,7 @@ const Person KACPER_KOZLUK = Person(
 const Person KACPER_MIESOWICZ = Person(
     name: 'Kacper Mięsowicz',
     druzyna: '99. DH Amazonki',
-    srodowisko: huf_zhp_bochnia,
+    srodowisko: Srodowisko.hufiec('bochnia'),
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
     email: ['kacper.miesowicz@gmail.com']
@@ -1578,7 +1579,7 @@ const Person KACPER_MIESOWICZ = Person(
 const Person KACPER_OLEJNIK = Person(
     name: 'Kacper Olejnik',
     druzyna: '8 DW "Leśne Licho"',
-    srodowisko: huf_zhp_lubaczow,
+    srodowisko: Srodowisko.custom(huf_zhp_lubaczow),
     org: Org.zhp,
     email: ["kacper.olejnik@zhp.pl"]
 );
@@ -1588,20 +1589,20 @@ const Person KACPER_SZCZENSY = Person(name: 'Kacper Szczęsny', rankHarc: RankHa
 const Person KACPER_SZYMANKIEWICZ = Person(
     name: 'Kacper Szymankiewicz',
     druzyna: '15. Dąbrowska Drużyna Starszoharcerska „Niezłomni” im. Rotmistrza Witolda Pileckiego',
-    srodowisko: huf_zhp_dabrowa_gornicza,
+    srodowisko: Srodowisko.custom(huf_zhp_dabrowa_gornicza),
     email: ['kacper.szymankiewicz@zhp.net.pl']
 );
 const Person KACPER_TOMCZYK = Person(
     name: 'Kacper Tomczyk',
     druzyna: '77. Wrzesińska Drużyna Wędrownicza „Huragan”',
-    srodowisko: huf_zhp_wrzesnia_wrzos,
+    srodowisko: Srodowisko.custom(huf_zhp_wrzesnia_wrzos),
     org: Org.zhp,
     email: ['celnysnajper@gmail.com']
 );
 const Person KACPER_TRUCHLEWSKI = Person(
     name: 'Kacper Truchlewski',
     druzyna: '13. DSH „Szalona Trzynsatka”',
-    srodowisko: huf_zhp_ziemi_mikolowskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_mikolowskiej),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ['truchlewski_kacper@enaukasp1.laziska.pl']
@@ -1610,12 +1611,12 @@ const Person KACPER_WIDZ = Person(
   name: 'Kacper Widz',
   rankHarc: RankHarc.zhpMlodzik,
   org: Org.zhp,
-  srodowisko: huf_zhp_lublin,
+  srodowisko: Srodowisko.custom(huf_zhp_lublin),
   druzyna: '8. Lubelska Drużyna Wędrownicza „Infiniti”',
 );
 const Person KACPER_WIETRZYKOWSKI = Person(
     name: 'Kacper Wietrzykowski',
-    srodowisko: huf_zhp_legionowo,
+    srodowisko: Srodowisko.hufiec('legionowo'),
     org: Org.zhp,
     email: ['kacper.wietrzykowski@zhp.net.pl']
 );
@@ -1623,21 +1624,21 @@ const Person KACPER_WIETRZYKOWSKI = Person(
 const Person KAJETAN_MEDYK = Person(
     name: 'Kajetan Mędyk',
     druzyna: '254 Warszawskie Drużyny Harcerskie i Gromady Zuchowe',
-    srodowisko: huf_zhp_warszawa_zoliborz,
+    srodowisko: Srodowisko.hufiec('warszawa_zoliborz'),
     org: Org.zhp,
     email: ['Kajetan_Medyk@outlook.com']
 );
 const Person KAJETAN_RUSZKOWSKI = Person(
   name: 'Kajetan Ruszkowski',
   druzyna: 'XV. ŁDH „Zielony Płomień” im. Andrzeja Małkowskiego',
-  srodowisko: huf_zhr_lodz,
+  srodowisko: Srodowisko.custom(huf_zhr_lodz),
   rankHarc: RankHarc.zhpHOc,
   org: Org.zhr,
 );
 const Person KAJETAN_WITKOWSKI = Person(
     name: 'Kajetan Witkowski',
     druzyna: '2. DH Iskry',
-    srodowisko: huf_zhp_miedzyrzecz,
+    srodowisko: Srodowisko.custom(huf_zhp_miedzyrzecz),
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
     email: ['kajetanwitkowski1602@gmail.com']
@@ -1645,14 +1646,14 @@ const Person KAJETAN_WITKOWSKI = Person(
 const Person KAJETAN_WYGNANSKI = Person(
   name: 'Kajetan Wygrański',
   druzyna: '62. MDSH „Krzemień”',
-  srodowisko: huf_zhp_pruszkow,
+  srodowisko: Srodowisko.hufiec('pruszkow'),
   rankHarc: RankHarc.zhpOdkrywca,
   org: Org.zhp,
 );
 const Person KAROLINA_BABOL = Person(
     name: 'Karolina Bąbol',
     druzyna: '1. PDH-ek „Płomień” im. Olgi Drahonowskiej- Małkowskiej',
-    srodowisko: 'Łodzki Hufiec Harcerek „Mozaika”',
+    srodowisko: Srodowisko.custom('Łodzki Hufiec Harcerek „Mozaika”'),
     rankHarc: RankHarc.zhrTropicielka,
     org: Org.zhr,
     email: ["karolinababolzhr@gmail.com"]
@@ -1666,7 +1667,7 @@ const Person KAROLINA_CZARNECKA = Person(
 const Person KAROLINA_HAJDUK = Person(
     name: 'Karolina Hajduk',
     druzyna: '21. DH',
-    srodowisko: huf_zhp_bytom,
+    srodowisko: Srodowisko.custom(huf_zhp_bytom),
     rankHarc: RankHarc.zhpOchotniczka,
     org: Org.zhp,
     email: ['kotrolina.h@gmail.com']
@@ -1675,7 +1676,7 @@ const Person KAROLINA_MARCINKOWSKA = Person(name: 'Karolina Marcinkowska');
 const Person KAROLINA_MROCZKO = Person(
     name: 'Karolina Mroczko',
     druzyna: '14. Próbna SDH „Fenris”',
-    srodowisko: huf_zhp_lagiewniki,
+    srodowisko: Srodowisko.custom(huf_zhp_lagiewniki),
     rankHarc: RankHarc.zhpOchotniczka,
     org: Org.zhp,
     email: ["luskam1234@gmail.com"]
@@ -1684,7 +1685,7 @@ const Person KAROLINA_WISNIEWSKA = Person(
     name: 'Karolina Wiśniewska',
     rankHarc: RankHarc.dhc,
     druzyna: '70 WPDH „Nienudni”',
-    srodowisko: huf_zhp_podlasie_w_siedlcach,
+    srodowisko: Srodowisko.custom(huf_zhp_podlasie_w_siedlcach),
     org: Org.zhp,
     email: ['carowis07@gmail.com']
 );
@@ -1692,7 +1693,7 @@ const Person KAMIL_GORNIK = Person(
     name: 'Kamil Gurnik',
     rankHarc: RankHarc.zhpCwik,
     druzyna: '64. WDHS „Etos”',
-    srodowisko: huf_zhp_warszawa_praga_pn,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
     org: Org.zhp,
     email: ['kamilgurnik@gmail.com']
 );
@@ -1700,7 +1701,7 @@ const Person KAMIL_ORGANISTA = Person(
     name: 'Kamil Organista',
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
-    srodowisko: huf_zhp_zamosc,
+    srodowisko: Srodowisko.custom(huf_zhp_zamosc),
     org: Org.zhp,
     email: ['k.furiao@gmail.com', 'k.organista@onet.pl']
 );
@@ -1711,7 +1712,7 @@ const Person KAMIL_ZAK = Person(
 const Person KAMILA_GAJEWSKA = Person(
     name: 'Kamila Gajewska',
     druzyna: '16. Drużyna Harcerska „Metrum”',
-    srodowisko: huf_zhp_grojec,
+    srodowisko: Srodowisko.custom(huf_zhp_grojec),
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ["kgajewska1616@gmail.com"]
@@ -1726,7 +1727,7 @@ const Person KAROL_FRANKOWSKI = Person(
 const Person KAROL_FROST = Person(
     name: 'Karol Frost',
     druzyna: '20. DSH „Nomada”',
-    srodowisko: huf_zhp_starogard_gdanski,
+    srodowisko: Srodowisko.custom(huf_zhp_starogard_gdanski),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["Karol.frost@zhp.pl"]
@@ -1750,7 +1751,7 @@ const Person KAROL_MALUS = Person(
 const Person KAROL_PODOLSKI = Person(
     name: 'Karol Podolski',
     druzyna: '22. IMDW „Baribale”',
-    srodowisko: huf_zhp_ilawa,
+    srodowisko: Srodowisko.custom(huf_zhp_ilawa),
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ["karol.podolski@zhp.net.pl"]
@@ -1763,7 +1764,7 @@ const Person KATARZYNA_BIALAS = Person(
 const Person KATARZYNA_LISAK = Person(
     name: 'Katarzyna Lisak',
     druzyna: '88. DW „Wierchy”',
-    srodowisko: huf_zhp_beskidzki,
+    srodowisko: Srodowisko.custom(huf_zhp_beskidzki),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ['katarzyna.lisak@zhp.net.pl']
@@ -1786,16 +1787,16 @@ const Person KATARZYNA_STUDNICKA = Person(
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.dhd,
     druzyna: '12. DH „Na Tropie”',
-    srodowisko: huf_zhp_andrychow, org: Org.zhp,
+    srodowisko: Srodowisko.hufiec('andrychow'), org: Org.zhp,
     email: ['katarzyna.studnicka@zhp.net.pl']
 );
 const Person KATARZYNA_TRZESNIOWSKA = Person(
-  name: 'Katarzyna Trześniowska',
-  druzyna: '4. Lubelska Drużyna Wędrownicza „Czarna Czwórka” im. hetmana Jana Zamojskiego',
-  srodowisko: huf_zhp_lublin,
-  rankHarc: RankHarc.dhd,
-  org: Org.zhp,
-  email: ["kasiat.trzesniowska@gmail.com"]
+    name: 'Katarzyna Trześniowska',
+    druzyna: '4. Lubelska Drużyna Wędrownicza „Czarna Czwórka” im. hetmana Jana Zamojskiego',
+    srodowisko: Srodowisko.custom(huf_zhp_lublin),
+    rankHarc: RankHarc.dhd,
+    org: Org.zhp,
+    email: ["kasiat.trzesniowska@gmail.com"]
 );
 const Person KINGA_BABIARSKA = Person(
     name: 'Kinga Babiarska',
@@ -1807,7 +1808,7 @@ const Person KINGA_BABIARSKA = Person(
 const Person KINGA_KONOPCZYNSKA = Person(
     name: 'Kinga Konopczyńska',
     druzyna: '29. WDCzB',
-    srodowisko: huf_zhp_rumia,
+    srodowisko: Srodowisko.custom(huf_zhp_rumia),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHRd,
     org: Org.zhp,
@@ -1821,7 +1822,7 @@ const Person KINGA_ZEBRACKA = Person(
 const Person KINGA_JANKO = Person(
     name: 'K. Janko',
     druzyna: '1. DSH im. Szarych Szeregów',
-    srodowisko: huf_zhp_ziemi_tarnogorskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_tarnogorskiej),
     email: ["jankokinga9@gmail.com"]
 );
 const Person KINGA_JASKULSKA = Person(
@@ -1836,7 +1837,7 @@ const Person KLARA_MAZEK = Person(name: 'Klara Mazek');
 const Person KLAUDIA_PARNIEWICZ = Person(
     name: 'Klaudia Parniewicz',
     druzyna: '12 Drużyna Starszoharcerska „Horyzont”',
-    srodowisko: huf_zhp_nowy_tomysl,
+    srodowisko: Srodowisko.custom(huf_zhp_nowy_tomysl),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -1847,7 +1848,7 @@ const Person KLAUDIA_STASINSKA = Person(
     rankInstr: RankInstr.phm,
     rankHarc: RankHarc.zhpHOd,
     druzyna: '45 Nowomiejska Gromada Zuchowa „Czterolistne Koniczynki”',
-    srodowisko: huf_zhp_poznan_nowe_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_nowe_miasto),
     org: Org.zhp,
     email: ['klaudia.stasinska@zhp.net.pl', 'claudia.stasinska@gmail.com']
 );
@@ -1864,7 +1865,7 @@ const Person KLEMENTYNA_MARWICZ = Person(
 const Person KORDIAN_LATOCHA = Person(
     name: 'Kordian Latocha',
     druzyna: '10. ŁDH',
-    srodowisko: huf_zhr_lodz_polesie,
+    srodowisko: Srodowisko.custom(huf_zhr_lodz_polesie),
     rankHarc: RankHarc.zhrMlodzik,
     org: Org.zhr,
     email: ["latochakordian@gmail.com"]
@@ -1872,7 +1873,7 @@ const Person KORDIAN_LATOCHA = Person(
 const Person KORNEL_DABKOWSKI = Person(
     name: 'Kornel Dąbkowski',
     druzyna: '0,5. Próbna Drużyna Wędrownicza „Włóczykije”',
-    srodowisko: huf_zhp_trzcianka,
+    srodowisko: Srodowisko.custom(huf_zhp_trzcianka),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["rener17011973@gmail.com"]
@@ -1884,7 +1885,7 @@ const Person KORNEL_GOLEBIEWSKI = Person(
 const Person KORNELIA_KASIBORSKA = Person(
     name: 'Kornelia Kasiborska',
     druzyna: '45. WDH „Alias”',
-    srodowisko: huf_zhp_wloclawek,
+    srodowisko: Srodowisko.custom(huf_zhp_wloclawek),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["korneliakasiborska76@gmail.com"]
@@ -1892,7 +1893,7 @@ const Person KORNELIA_KASIBORSKA = Person(
 const Person KORNELIA_MROWKA = Person(
     name: 'Kornelia Mrówka',
     druzyna: '11 DH Ragnar im Jana Bytnara w Sierakowie',
-    srodowisko: huf_zhp_miedzychod,
+    srodowisko: Srodowisko.custom(huf_zhp_miedzychod),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["kornelia.mrowka1@gmail.com"]
@@ -1904,7 +1905,7 @@ const Person KORNELIA_PRZYCZOLKA = Person(
 );
 const Person KRYSTIAN_BULANDA = Person(
     name: 'Krystian Bulanda',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     email: ['krystian.bulanda@zhp.net.pl'],
     org: Org.zhp
 );
@@ -1917,7 +1918,7 @@ const Person KRYSTYNA_BITNER = Person(
 const Person KRZESIMIR_KARBOWNIK = Person(
     name: 'Krzesimir Karbownik',
     druzyna: '132. MDH "SSzW"',
-    srodowisko: huf_zhp_zielonka,
+    srodowisko: Srodowisko.hufiec('zielonka'),
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ["krzesimir@karbownik.org"]
@@ -1932,7 +1933,7 @@ const Person KRZYSZTOF_BANIK = Person(
 const Person KRZYSZTOF_GORECKI = Person(
     name: 'Krzysztof Górecki',
     druzyna: 'Szczep Pomarańczowy',
-    srodowisko: huf_zhp_andrychow,
+    srodowisko: Srodowisko.hufiec('andrychow'),
     rankInstr: RankInstr.phm,
     org: Org.zhp,
     email: ["krzysztof.gorecki@zhp.net.pl"]
@@ -1941,7 +1942,7 @@ const Person KRZYSZTOF_KANIEWSKI = Person(
     name: 'Krzysztof Kaniewski',
     rankHarc: RankHarc.zhpHOc,
     druzyna: '1. DW „Geneza”',
-    srodowisko: huf_zhp_legionowo,
+    srodowisko: Srodowisko.hufiec('legionowo'),
     org: Org.zhp,
     email: ['krzysztof.kaniewski@zhp.net.pl']
 );
@@ -1952,7 +1953,7 @@ const Person KRZYSZTOF_KRAWCZYK = Person(
 const Person KRZYSZTOF_LUBAS = Person(
     name: 'Krzysztof Lubas',
     druzyna: '1. Śledziejowicka Drużyna Harcerzy „Pełnia”',
-    srodowisko: 'Polonia Minor',
+    srodowisko: Srodowisko.custom('Polonia Minor'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhrHOc,
     org: Org.zhr,
@@ -1961,20 +1962,20 @@ const Person KRZYSZTOF_LUBAS = Person(
 const Person KRZYSZTOF_MALIKIEWICZ = Person(
     name: 'Krzysztof Malikiewicz',
     rankHarc: RankHarc.zhpHRc,
-    srodowisko: huf_zhp_trzebinia,
+    srodowisko: Srodowisko.hufiec('trzebinia'),
     email: ['krzysztof.malikiewicz@zhp.net.pl', 'krzysztof.malikiewicz@zhp.pl']
 );
 const Person KRZYSZTOF_MALINOWSKI = Person(
     name: 'Krzysztof Malinowski',
     druzyna: '19. DWa',
-    srodowisko: '5. Hufiec Warszawski',
+    srodowisko: Srodowisko.custom('5. Hufiec Warszawski'),
     org: Org.fse,
     email: ["krzysztofwmalinowski@gmail.com"]
 );
 const Person KRZYSZTOF_PIOTR_WAGROWSKI = Person(
     name: 'Krzysztof Piotr Wągrowski',
     druzyna: '8. Aleksandrowska Drużyna Harcerzy',
-    srodowisko: huf_zhr_lodz_polesie,
+    srodowisko: Srodowisko.custom(huf_zhr_lodz_polesie),
     rankHarc: RankHarc.zhrMlodzik,
     org: Org.zhr,
     email: ['krzysio.wagrowski@gmail.com', "agattam2004@gmail.com"]
@@ -1987,7 +1988,7 @@ const Person KRZYSZTOF_RODZINKA = Person(
 const Person KRZYSZTOF_SUCHARSKI = Person(
     name: 'Krzysztof Sucharski',
     druzyna: '14 DSH Fenris',
-    srodowisko: huf_zhp_lagiewniki,
+    srodowisko: Srodowisko.custom(huf_zhp_lagiewniki),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["krzysztofsucharski75@gmail.com"]
@@ -2010,21 +2011,21 @@ const Person LAURA_FRASZEWSKA = Person(name: 'Laura Fraszewska');
 const Person LAURA_NOWAKOWSKA = Person(
     name: 'Laura Nowakowska',
     druzyna: '25. GGDSH „Zawiszacy” im. dh. Stefana Mirowskiego',
-    srodowisko: huf_zhp_grodzisk_mazowiecki,
+    srodowisko: Srodowisko.hufiec('grodzisk_mazowiecki'),
     org: Org.zhp,
     email: ['kocham.racuchy.pl@gmail.com', 'laura.elwartowska@edu.sp1grodzisk.pl']
 );
 const Person LENA_PATLA = Person(
     name: 'Lena Patla',
     druzyna: '3. Krośnieńska Górska Drużyna Harcerska „Adventure”',
-    srodowisko: huf_zhp_krosno,
+    srodowisko: Srodowisko.custom(huf_zhp_krosno),
     org: Org.zhp,
     email: ['lena.patla@icloud.com']
 );
 const Person LENA_STEFANSKA = Person(
     name: 'Lena Stefańska',
     druzyna: 'Różanie',
-    srodowisko: huf_zhp_bydgoszcz_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_bydgoszcz_miasto),
     rankHarc: RankHarc.zhpOchotniczka,
     org: Org.zhp,
     email: ["lenastefanska16@gmail.com"]
@@ -2038,7 +2039,7 @@ const Person LENA_WEISS = Person(
 const Person LILIANA_KASPRZYK = Person(
     name: 'Liliana Kasprzyk',
     druzyna: '9 GDHS Lukarna',
-    srodowisko: huf_zhp_ziemi_gliwickiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_gliwickiej),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["lilianokotek@wp.pl", "lilka.kasprzyk@gmail.com"]
@@ -2046,7 +2047,7 @@ const Person LILIANA_KASPRZYK = Person(
 const Person LILIANA_MIROTA = Person(
     name: 'Liliana Mirota',
     druzyna: '7. BDH „Wrzosowisko”',
-    srodowisko: huf_zhp_reduta,
+    srodowisko: Srodowisko.custom(huf_zhp_reduta),
     rankHarc: RankHarc.zhpOchotniczka,
     org: Org.zhp,
     email: ['lilianamirota@gmail.com', 'lilianokotek@wp.pl']
@@ -2073,7 +2074,7 @@ const Person LUKAS_JANOSIS = Person(
 const Person LUKASZ_STANISZEWSKI = Person(
     name: 'Łukasz Staniszewski',
     druzyna: '27. DW „Śreżoga”',
-    srodowisko: huf_zhp_legionowo,
+    srodowisko: Srodowisko.hufiec('legionowo'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHRc,
     org: Org.zhp,
@@ -2082,7 +2083,7 @@ const Person LUKASZ_STANISZEWSKI = Person(
 const Person LUKASZ_STROZYK = Person(
     name: 'Łukasz Stróżyk',
     druzyna: '3. MWDH „Brzask”',
-    srodowisko: huf_zhp_wagrowiec,
+    srodowisko: Srodowisko.custom(huf_zhp_wagrowiec),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["lukaszstrozyk33@gmail.com"]
@@ -2091,7 +2092,7 @@ const Person LUKASZ_SZEPIELAK = Person(name: 'Łukasz Szepielak', rankHarc: Rank
 const Person LUKASZ_SZTANDERA = Person(
     name: 'Łukasz Sztandera',
     rankHarc: RankHarc.zhpWywiadowca,
-    srodowisko: huf_zhp_kielce_poludnie,
+    srodowisko: Srodowisko.custom(huf_zhp_kielce_poludnie),
     druzyna: '29. Kielecka Drużyna Harcerska „Bukowina”',
     org: Org.zhp,
     email: ['lukasz.sztandera@zhp.net.pl']
@@ -2101,7 +2102,7 @@ const Person LUKASZ_RYBINSKI = Person(name: 'Łukasz Rybiński', rankInstr: Rank
 const Person LUKASZ_WERNIK = Person(
     name: 'Łukasz Wernik',
     druzyna: '3. DSH „Feniks”',
-    srodowisko: huf_zhp_gostynin,
+    srodowisko: Srodowisko.custom(huf_zhp_gostynin),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["lukasz.wernik@zhp.pl", 'danzelrex0@gmail.com']
@@ -2118,7 +2119,7 @@ const Person MACIEJ_CHUSTECKI = Person(
 );
 const Person MACIEJ_DOBROWOLSKI = Person(
     name: 'Maciej Dobrowolski',
-    srodowisko: huf_zhp_elblag,
+    srodowisko: Srodowisko.custom(huf_zhp_elblag),
     rankInstr: RankInstr.phm,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -2134,7 +2135,7 @@ const Person MACIEJ_GRZELAZKA = Person(
 const Person MACIEJ_KOLAKOWSKI = Person(
     name: 'Maciej Kołakowski',
     druzyna: '97. DSh',
-    srodowisko: huf_zhp_zywiec,
+    srodowisko: Srodowisko.custom(huf_zhp_zywiec),
     org: Org.zhp,
     email: ['maciej.kolakowski@zhp.net.pl']
 );
@@ -2142,21 +2143,21 @@ const Person MACIEJ_LADOS = Person(
   name: 'Maciej Ładoś',
   rankInstr: RankInstr.pwd,
   druzyna: '8. PgDW Granat',
-  srodowisko: huf_zhp_krakow_pdg,
+  srodowisko: Srodowisko.hufiec('krakow_podgorze'),
   org: Org.zhp,
   email: ['macieklad@gmail.com', 'maciej.lados@zhp.net.pl'],
 );
 const Person MACIEJ_PAWLICA = Person(
     name: 'Maciej Pawlica',
     druzyna: '1. Nadarzyńska Drużyna Starszoharcerska „Impessa”',
-    srodowisko: huf_zhp_pruszkow,
+    srodowisko: Srodowisko.hufiec('pruszkow'),
     org: Org.zhp,
     email: ['maciek.pawlica@outlook.com']
 );
 const Person MACIEJ_PRZYBYSZ = Person(
     name: 'Maciej Przybysz',
     druzyna: '20. DW „Avengers”',
-    srodowisko: huf_zhp_legionowo,
+    srodowisko: Srodowisko.hufiec('legionowo'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -2165,13 +2166,13 @@ const Person MACIEJ_PRZYBYSZ = Person(
 const Person MACIEJ_SZOLC = Person(
     name: 'Maciej Szolc',
     druzyna: '17. Drużyna Harcerska „Salamandra” z Jejkowic',
-    srodowisko: huf_zhp_ziemi_rybnickiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_rybnickiej),
     email: ['maciekszolc12@gmail.com']
 );
 const Person MACIEJ_WYSOCKI = Person(
     name: 'Maciej Wysocki',
     druzyna: 'WDHiZ „Matecznik”',
-    srodowisko: huf_zhp_warszawa_zoliborz,
+    srodowisko: Srodowisko.hufiec('warszawa_zoliborz'),
     org: Org.zhp,
     email: ['pan.macieq@gmail.com']
 );
@@ -2183,7 +2184,7 @@ const Person MAGDALENA_BAJER = Person(
 const Person MAGDALENA_KALISZ = Person(
     name: 'Magdalena Kalisz',
     druzyna: '64. WDH „Skaut”',
-    srodowisko: huf_zhp_warszawa_praga_pn,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
     org: Org.zhp,
     email: ['magdalena.kalisz@zhp.net.pl']
 );
@@ -2197,7 +2198,7 @@ const Person MAGDALENA_KOZLOWSKA = Person(
 const Person MAGDALENA_KROSZCZYNSKA = Person(
     name: 'Magdalena Kroszczyńska',
     druzyna: '73. WDHS „Sensorium"',
-    srodowisko: huf_zhp_warszawa_praga_pn,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ["madzik.kroszczyk@gmail.com"]
@@ -2212,7 +2213,7 @@ const Person MAGDALENA_MIELNIK = Person(
 const Person MAKSYM_KAWULA = Person(
     name: 'Maksym Kawula',
     druzyna: '29 TDSH "Feniks"',
-    srodowisko: huf_zhp_tarnow,
+    srodowisko: Srodowisko.hufiec('tarnow'),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ['maksym.kawula@gmail.com']
@@ -2227,7 +2228,7 @@ const Person MAKSYMILIAN_SPADLO = Person(
 const Person MAKSYMILIAN_TURZYNSKI = Person(
     name: 'Maksymilian Turzyński',
     druzyna: '124. „Bór”',
-    srodowisko: huf_zhp_lodz_baluty,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_baluty),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["jestemwlasku@gmail.com", "jestemwborze@gmail.com"]
@@ -2242,7 +2243,7 @@ const Person MAKSYMILIAN_WERAN = Person(
 const Person MAJA_BUDZIOSZ = Person(
     name: 'Maja Budziosz',
     druzyna: '3. PDH-ek Róża Wiatrów',
-    srodowisko: 'Kraków',
+    srodowisko: Srodowisko.custom('Kraków'),
     rankHarc: RankHarc.zhrOchotniczka,
     org: Org.zhr,
     email: ["akita.wiktoria@gmail.com"]
@@ -2264,7 +2265,7 @@ const Person MAJA_HAJDACKA = Person(
 );
 const Person MAJA_SLOWINSKA = Person(
     name: 'Maja Słowińska',
-    srodowisko: 'Pałuki',
+    srodowisko: Srodowisko.custom('Pałuki'),
     org: Org.zhp,
     email: ["slowinska.maja1@gmail.com"]
 );
@@ -2277,7 +2278,7 @@ const Person MAJA_WOJTYNIAK = Person(
 const Person MAJA_ZAJACZKOWSKA = Person(
     name: 'Maja Zajączkowska',
     druzyna: '3. PDH „Jabłoń” im. św. siostry Faustyny Kowalskiej',
-    srodowisko: 'PHH-ek "Przymierze"',
+    srodowisko: Srodowisko.custom('PHH-ek "Przymierze"'),
     rankHarc: RankHarc.zhrSamarytanka,
     org: Org.zhr,
     email: ["m.zajaczkowska@zhr.pl"]
@@ -2286,7 +2287,7 @@ const Person MALGORZATA_KLOC = Person(
     name: 'Małgorzata Kloc',
     rankHarc: RankHarc.zhpPionierka,
     druzyna: '9. Gliwicka Drużyna Harcerzy Starszych „Lukarna” im. płk. Witolda Pileckiego',
-    srodowisko: huf_zhp_ziemi_gliwickiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_gliwickiej),
     org: Org.zhp,
     email: ['malgorzata.kloc@zhp.net.pl']
 );
@@ -2299,7 +2300,7 @@ const Person MALGORZATA_MASKO_HORYZA = Person(
 const Person MALGORZATA_ORANKIEWICZ = Person(
     name: 'Małgorzata Orankiewicz',
     druzyna: '43. ZDHS „Parasol”',
-    srodowisko: huf_zhp_zgierz,
+    srodowisko: Srodowisko.custom(huf_zhp_zgierz),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ["orankiewicz.gosia1@gmail.com"]
@@ -2313,14 +2314,14 @@ const Person MALWINA_TRUSZKOWSKA = Person(
     name: 'Malwina Truszkowska',
     rankHarc: RankHarc.zhpPionierka,
     druzyna: '23. Warszawska Drużyna Wędrownicza „Binduga”',
-    srodowisko: huf_zhp_warszawa_mokotow,
+    srodowisko: Srodowisko.hufiec('warszawa_mokotow'),
     org: Org.zhp,
     email: ['malwina.truszkowska@zhp.net.pl', 'malvisianna@gmail.com']
 );
 const Person MARCEL_MICHALIK = Person(
     name: 'Marcel Michalik',
     druzyna: '7. DSH „Kosogłos”',
-    srodowisko: huf_zhp_glogow,
+    srodowisko: Srodowisko.custom(huf_zhp_glogow),
     org: Org.zhp,
     email: ["michalikmsp@gmail.com"]
 );
@@ -2332,7 +2333,7 @@ const Person MARCEL_RYCHTER = Person(
 const Person MARCEL_WOZNIAK = Person(
     name: 'Marcel Woźniak',
     druzyna: '10. KDSH Zioła',
-    srodowisko: huf_zhp_ziemi_koszalinskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_koszalinskiej),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ['marcel.wozniak.144@gmail.com']
@@ -2340,7 +2341,7 @@ const Person MARCEL_WOZNIAK = Person(
 const Person MARCELI_WARDA = Person(
     name: 'Marceli Warda',
     druzyna: '123. LDSh „Imperatyw”',
-    srodowisko: huf_zhp_lublin,
+    srodowisko: Srodowisko.custom(huf_zhp_lublin),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["marceliwarda@gmail.com"]
@@ -2352,7 +2353,7 @@ const Person MARCELINA_SZYNDLER = Person(
 const Person MARCELINA_WILCZAK = Person(
     name: 'Marcelina Wilczak',
     druzyna: '1. DH „Bór”',
-    srodowisko: huf_zhp_trzebinia,
+    srodowisko: Srodowisko.hufiec('trzebinia'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -2360,19 +2361,19 @@ const Person MARCELINA_WILCZAK = Person(
 );
 const Person MARCIN_JANKOWIAK = Person(
   name: 'Marcin Jankowiak',
-  srodowisko: huf_zhp_jarocin,
+  srodowisko: Srodowisko.custom(huf_zhp_jarocin),
   org: Org.zhp,
 );
 const Person MARCIN_SOBKOWICZ = Person(
     name: 'Marcin Sobkowicz',
     druzyna: '107. DH „Powsinogi” im. Zygmunta Glogera',
-    srodowisko: huf_zhp_opole,
+    srodowisko: Srodowisko.custom(huf_zhp_opole),
     email: ["m.sobkovicz@gmail.com"]
 );
 const Person MARCJANNA_NEY = Person(
     name: 'Marcjanna Ney',
     druzyna: '16 EŻDH Lilie',
-    srodowisko: huf_zhp_elblag,
+    srodowisko: Srodowisko.custom(huf_zhp_elblag),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ["marcjanna199@gmail.com"]
@@ -2380,7 +2381,7 @@ const Person MARCJANNA_NEY = Person(
 const Person MAREK_BIZON = Person(
     name: 'Marek Bizoń',
     druzyna: '17. DH „Salamandra”',
-    srodowisko: 'Hufiec Ziemi Rybnickiej',
+    srodowisko: Srodowisko.custom('Hufiec Ziemi Rybnickiej'),
     rankInstr: RankInstr.phm,
     rankHarc: RankHarc.zhpHRc,
     org: Org.zhp,
@@ -2405,14 +2406,14 @@ const Person MARLENA_BANIA = Person(
     name: 'Marlena Bania',
     rankHarc: RankHarc.zhpSamarytanka,
     druzyna: '9. Gliwicka Drużyna Wędrownicza „Maszkaron”',
-    srodowisko: huf_zhp_ziemi_gliwickiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_gliwickiej),
     org: Org.zhp,
     email: ['marlena.bania6474@gmail.com', 'marlena.bania@zhp.net.pl']
 );
 const Person MARIA_BATKO = Person(
     name: 'Maria Batko',
     druzyna: '99 EŻDSH Wapiti im. Marii Konopnickiej',
-    srodowisko: huf_zhp_elblag,
+    srodowisko: Srodowisko.custom(huf_zhp_elblag),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ["marysiajamna@gmail.com"]
@@ -2420,7 +2421,7 @@ const Person MARIA_BATKO = Person(
 const Person MARIA_GRZYWACZ = Person(
     name: 'Maria Grzywacz',
     druzyna: '13. CDH „Bezimienni”',
-    srodowisko: huf_zhp_czestochowa,
+    srodowisko: Srodowisko.custom(huf_zhp_czestochowa),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ["marysia.grzywacz@gmail.com"]
@@ -2428,14 +2429,14 @@ const Person MARIA_GRZYWACZ = Person(
 const Person MARIA_KIELIN = Person(
     name: 'Maria Kielin',
     druzyna: '11. WKDH Czarne Kruki',
-    srodowisko: huf_zhp_konin,
+    srodowisko: Srodowisko.custom(huf_zhp_konin),
     org: Org.zhp,
     email: ['eryh4757@gmail.com']
 );
 const Person MARIA_LAKOMA = Person(
     name: 'Maria Łakoma',
     druzyna: '1 Specjalnościowa Drużyna Harcerska GROM im. Cichociemnych Spadochroniarzy AK',
-    srodowisko: huf_zhp_doliny_liwca,
+    srodowisko: Srodowisko.custom(huf_zhp_doliny_liwca),
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
     email: ["maria.lakoma@zhp.net.pl"]
@@ -2447,7 +2448,7 @@ const Person MARIA_MAGDALENA_DESKUR = Person(
 const Person MARIA_MIELCZAREK = Person(
     name: 'Maria Mielczarek',
     druzyna: '86. ŁWDSH',
-    srodowisko: huf_zhp_lodz_polesie,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_polesie),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ["marysia.m.mielczarek@gmail.com"]
@@ -2455,7 +2456,7 @@ const Person MARIA_MIELCZAREK = Person(
 const Person MARIA_PIKOSZ = Person(
     name: 'Maria Pikosz',
     druzyna: '42. BDSH „Krzewy”',
-    srodowisko: huf_zhp_bydgoszcz_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_bydgoszcz_miasto),
     rankHarc: RankHarc.zhpTropicielka,
     org: Org.zhp,
     email: ["nszzbga@gmail.comI"]
@@ -2463,7 +2464,7 @@ const Person MARIA_PIKOSZ = Person(
 const Person MARIA_PRZYBYLSKA = Person(
     name: 'Maria Przybylska',
     druzyna: '49. Łódzka Drużyna Harcerek im. gen. Elżbiety Zawackiej „Zo”',
-    srodowisko: huf_zhp_lodz_baluty,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_baluty),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ['marysia.przybylska10@gmail.com', 'maria.przybylska@zhp.net.pl']
@@ -2478,7 +2479,7 @@ const Person MARIA_SKOWRONEK = Person(
 Person MARIA_STACHARSKA = const Person(
     name: 'Maria Stacharska',
     druzyna: '8. PgDSH "Pandora"',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ['maria.f.stacharska@gmail.com']
@@ -2490,20 +2491,20 @@ const Person MARTA_GOLEBIOWSKA = Person(
     org: Org.zhp,
     email: ["marta.golebiowska@zhp.net.pl"]
 );
-const Person MARTA_SZYMANDERSKA = Person(name: 'Marta Szymanderska', rankHarc: RankHarc.dhd, srodowisko: huf_zhp_warszawa_mokotow, org: Org.zhp);
+const Person MARTA_SZYMANDERSKA = Person(name: 'Marta Szymanderska', rankHarc: RankHarc.dhd, srodowisko: Srodowisko.hufiec('warszawa_mokotow'), org: Org.zhp);
 const Person MARTYNA_BULAKOWSKA = Person(
     name: 'Martyna Bułakowska',
     rankHarc: RankHarc.zhpHOd,
     rankInstr: RankInstr.pwd,
     druzyna: '17 Rudzka Grubwaldzka Drużyna Harcerska „VICTORY”',
-    srodowisko: huf_zhp_ruda_slaska,
+    srodowisko: Srodowisko.custom(huf_zhp_ruda_slaska),
     org: Org.zhp,
     email: ['m.bulakowska1997@gmail.com']
 );
 const Person MARTYNA_CEGLAREK = Person(
     name: 'Martyna Ceglarek',
     druzyna: '21. Drużyna Harcerska „Gawra”',
-    srodowisko: huf_zhp_wolsztyn,
+    srodowisko: Srodowisko.custom(huf_zhp_wolsztyn),
     rankHarc: RankHarc.zhpTropicielka,
     org: Org.zhp,
     email: ["ceglarekmartyna003@gmail.com"]
@@ -2511,7 +2512,7 @@ const Person MARTYNA_CEGLAREK = Person(
 const Person MARTYNA_SADOWNIK = Person(
     name: 'Martyna Sadownik',
     druzyna: '316. GDH „Huragan”',
-    srodowisko: huf_zhp_ziemi_gliwickiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_gliwickiej),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ['martyna.sadownik@zhp.net.pl']
@@ -2519,7 +2520,7 @@ const Person MARTYNA_SADOWNIK = Person(
 const Person MARTYNA_WASILEWSKA = Person(
     name: 'Martyna Wasilewska',
     druzyna: '7. BDSH „Żywica”',
-    srodowisko: 'Reduta',
+    srodowisko: Srodowisko.custom('Reduta'),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ['martynawasilewska.1972@gmail.com', 'martynawas91@gmail.com']
@@ -2527,7 +2528,7 @@ const Person MARTYNA_WASILEWSKA = Person(
 const Person MARTYNA_ZAJAC = Person(
     name: 'Martyna Zając',
     druzyna: '12. PDH „Atomówki”',
-    srodowisko: huf_zhp_poznan_grunwald,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_grunwald),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ['zajacmartyna000@gmail.com']
@@ -2535,7 +2536,7 @@ const Person MARTYNA_ZAJAC = Person(
 const Person MARYSIA_SLUGAJ = Person(
     name: 'Marysia Ślugaj',
     rankHarc: RankHarc.zhpHOd,
-    srodowisko: huf_zhp_wrzesnia_wrzos,
+    srodowisko: Srodowisko.custom(huf_zhp_wrzesnia_wrzos),
     druzyna: '77. Wrzesińska Drużyna Wędrownicza „Huragan”',
     email: ['nutkiq@gmail.com', 'giyuu@op.pl']
 );
@@ -2543,7 +2544,7 @@ const Person MATEUSZ_CIAGLO = Person(name: 'Mateusz Ciągło', rankHarc: RankHar
 const Person MATEUSZ_D = Person(
     name: 'Mateusz D',
     druzyna: '2. BDH „Rajza”',
-    srodowisko: huf_zhr_bytomski_zwiazek_druzyn,
+    srodowisko: Srodowisko.custom(huf_zhr_bytomski_zwiazek_druzyn),
     rankHarc: RankHarc.zhrWywiadowca,
     org: Org.zhr,
     email: ["matiadormateusz@gmail.com"]
@@ -2553,12 +2554,12 @@ const Person MATEUSZ_KOBYLAREK = Person(
   name: 'Mateusz Kobylarek',
   rankHarc: RankHarc.zhpMlodzik,
   druzyna: '35. Poznańska Drużyna Harcerska im. I Polskiej Samodzielnej Kompanii Commando',
-  srodowisko: huf_zhp_poznan_wilda,
+  srodowisko: Srodowisko.custom(huf_zhp_poznan_wilda),
   org: Org.zhp,);
 const Person MATEUSZ_KORZENIOWSKI = Person(
     name: 'Mateusz Korzeniowski',
     druzyna: '1. DH D.R.E.S.Z.C.Z',
-    srodowisko: huf_zhp_wieliczka,
+    srodowisko: Srodowisko.hufiec('wieliczka'),
 
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
@@ -2567,7 +2568,7 @@ const Person MATEUSZ_KORZENIOWSKI = Person(
 const Person MATEUSZ_MIKLASZEWSKI = Person(
     name: 'Mateusz Miklaszewski',
     druzyna: '12. DH Silva',
-    srodowisko: huf_zhp_augustow,
+    srodowisko: Srodowisko.custom(huf_zhp_augustow),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
@@ -2582,7 +2583,7 @@ const Person MATEUSZ_PYSZKA = Person(
 const Person MATEUSZ_OLSZANSKI = Person(
     name: 'Mateusz Olszański',
     druzyna: '30 Pgdsh "Waganci"',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     rankHarc: RankHarc.zhpWywiadowca,
     org: Org.zhp,
     email: ["mateusz@olszanski.com"]
@@ -2590,7 +2591,7 @@ const Person MATEUSZ_OLSZANSKI = Person(
 const Person MATEUSZ_STEPNIEWSKI = Person(
     name: 'Mateusz Stępniewski',
     druzyna: '119',
-    srodowisko: huf_zhp_warszawa_zoliborz,
+    srodowisko: Srodowisko.hufiec('warszawa_zoliborz'),
     rankHarc: RankHarc.zhpWywiadowca,
     org: Org.zhp,
     email: ['mateuszk.stepniewski@gmail.com']
@@ -2598,7 +2599,7 @@ const Person MATEUSZ_STEPNIEWSKI = Person(
 const Person MATEUSZ_SWIEBODA = Person(
     name: 'Mateusz Świeboda',
     druzyna: '17. KDH Jaworznia',
-    srodowisko: huf_zhp_kielce_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_kielce_miasto),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ['etykik0@gmail.com']
@@ -2613,14 +2614,14 @@ const Person MATEUSZ_URBANIAK = Person(
 const Person MATEUSZ_WAS = Person(
     name: 'Mateusz Wąs',
     druzyna: '91 Kłobucka Drużyna Wędrownicza „Hades”',
-    srodowisko: huf_zhp_klobuck,
+    srodowisko: Srodowisko.custom(huf_zhp_klobuck),
     org: Org.zhp,
     email: ['was.mateusz@zhp.pl']
 );
 const Person MATVII_MASLOVSKYI = Person(
     name: 'Матвій Масловскi',
     druzyna: '6. DSH',
-    srodowisko: huf_zhp_gniezno,
+    srodowisko: Srodowisko.custom(huf_zhp_gniezno),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["matvijmaslovski@gmail.com"]
@@ -2628,7 +2629,7 @@ const Person MATVII_MASLOVSKYI = Person(
 const Person MATYLDA_OLEJNIK = Person(
     name: 'Matylda Olejnik',
     druzyna: 'V DH Impsa',
-    srodowisko: huf_zhp_kedzierzyn_kozle,
+    srodowisko: Srodowisko.custom(huf_zhp_kedzierzyn_kozle),
     email: ["matyldazbagien@gmail.com"]
 );
 const Person MAXIMILIAN_STEINHOFF = Person(
@@ -2640,7 +2641,7 @@ const Person MAXIMILIAN_STEINHOFF = Person(
 const Person MICHAL_CHOLEWCZYNSKI = Person(
     name: 'Michał Cholewczyński',
     druzyna: '77. PDW „Chimera”',
-    srodowisko: huf_zhp_poznan_jezyce,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_jezyce),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ['michal.cholewczynski@zhp.net.pl', 'michalcholewczynski@gmail.com', 'theniedzwiedz@icloud.com']
@@ -2650,7 +2651,7 @@ const Person MICHAL_DYDERSKI = Person(
     rankHarc: RankHarc.zhpHOc,
     rankInstr: RankInstr.pwd,
     druzyna: '93. PDW',
-    srodowisko: huf_zhp_poznan_wilda,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_wilda),
     org: Org.zhp,
     email: ['michal.dyderski6@gmail.com', 'michal.dyderski@zhp.net.pl']
 );
@@ -2659,7 +2660,7 @@ const Person MICHAL_JABCZYNSKI = Person(
     rankHarc: RankHarc.zhpHRc,
     rankInstr: RankInstr.pwd,
     druzyna: '9. DH „Feniks”',
-    srodowisko: huf_zhp_gniezno,
+    srodowisko: Srodowisko.custom(huf_zhp_gniezno),
     org: Org.zhp,
     email: ['michal.jabczynski@gmail.com']
 );
@@ -2672,20 +2673,20 @@ const Person MICHAL_KARWOWSKI = Person(
   rankHarc: RankHarc.zhpHOc,
   rankInstr: RankInstr.phm,
   druzyna: '72. Szczep WDHiGZ „Ostoja”',
-  srodowisko: huf_zhp_warszawa_praga_pn,
+  srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
   org: Org.zhp,
 );
 const Person MICHAL_KUSTOSIK = Person(
     name: 'Michał Kustosik',
     druzyna: 'Krąg Instruktorski',
-    srodowisko: huf_zhp_lodz_polesie,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_polesie),
     email: ["mkustosik@gmail.com"]
 );
 const Person MICHAL_MACULEWICZ = Person(
     name: 'Michał Maculewicz',
     druzyna: '6. GNDH „Vitae" im.Floriana Marciniaka',
     rankHarc: RankHarc.zhpHOc,
-    srodowisko: huf_zhp_nidzica,
+    srodowisko: Srodowisko.custom(huf_zhp_nidzica),
     org: Org.zhp,
     email: ['michal.maculewicz@zhp.net.pl']
 );
@@ -2694,7 +2695,7 @@ const Person MICHAL_METEL = Person(
   druzyna: 'Szczep „Unia” im. Władysława Jagiełły',
   rankHarc: RankHarc.zhpHOc,
   rankInstr: RankInstr.pwd,
-  srodowisko: huf_zhp_krakow_nowa_huta,
+  srodowisko: Srodowisko.hufiec('krakow_nowa_huta'),
   org: Org.zhp,
   email: ['michal.metel@zhp.net.pl'],
 );
@@ -2709,7 +2710,7 @@ const Person MICHAL_PIENIAZEK = Person(
 const Person MICHAL_RZEZNIKIEWICZ = Person(
     name: 'Michał Rzeźnikiewicz',
     druzyna: '104. WDH „Strumień”',
-    srodowisko: huf_zhp_karkonoski,
+    srodowisko: Srodowisko.custom(huf_zhp_karkonoski),
     rankHarc: RankHarc.zhpWywiadowca,
     org: Org.zhp,
     email: ["rzeznikiewiczmichal@gmail.com", "michalrzeznik2819@gmail.com"]
@@ -2717,13 +2718,13 @@ const Person MICHAL_RZEZNIKIEWICZ = Person(
 const Person MICHAL_SITEK = Person(
     name: 'Michał Sitek',
     druzyna: '21. EŚDH Horyzont',
-    srodowisko: huf_zhp_chrzanow,
+    srodowisko: Srodowisko.custom(huf_zhp_chrzanow),
     email: ['misiokikol@gmail.com']
 );
 const Person MICHAL_SMULIK = Person(
     name: 'Michał Smulik',
     druzyna: '62 kdhs brzoza',
-    srodowisko: huf_zhp_kalisz,
+    srodowisko: Srodowisko.custom(huf_zhp_kalisz),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["smumichal@gmail.com"]
@@ -2733,7 +2734,7 @@ const Person MICHAL_SUPINSKI = Person(
     rankHarc: RankHarc.zhpHOc,
     rankInstr: RankInstr.pwd,
     druzyna: '149. Poznańska Drużyna Harcerska „Bzura” im. generała Tadeusza Kutrzeby',
-    srodowisko: huf_zhp_poznan_nowe_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_nowe_miasto),
     org: Org.zhp,
     email: ['michal.supinskii@gmail.com']
 );
@@ -2744,7 +2745,7 @@ const Person MIECZYSLAW_MICHALIK = Person(
 const Person MIESZKO_OKROJ = Person(
     name: 'Mieszko Okrój',
     druzyna: '82 ŁDSH "Eliock" im. 1SBS',
-    srodowisko: huf_zhp_lodz_gorna,
+    srodowisko: Srodowisko.custom(huf_zhp_lodz_gorna),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -2753,14 +2754,14 @@ const Person MIESZKO_OKROJ = Person(
 const Person MIKOLAJ_GORECKI = Person(
     name: 'Mikołaj Górecki',
     druzyna: '30. PgDSHW „Waganci”',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     org: Org.zhp,
     email: ['mikolaj.gorecki.pl@gmail.com']
 );
 const Person MIKOLAJ_HORDEJUK = Person(
     name: 'Mikołaj Hordejuk',
     druzyna: '44 44 WDH "Kedyw" im. gen. Augusta Emila Fieldorfa ps. "Nil"',
-    srodowisko: huf_zhr_mazowiecki_hufiec_harcerzy_pogranicze,
+    srodowisko: Srodowisko.custom(huf_zhr_mazowiecki_hufiec_harcerzy_pogranicze),
     rankHarc: RankHarc.zhrMlodzik,
     org: Org.zhr,
     email: ["mgmiko813@gmail.com"]
@@ -2768,7 +2769,7 @@ const Person MIKOLAJ_HORDEJUK = Person(
 const Person MIKOLAJ_LACHENDRO = Person(
     name: 'Mikołaj Lachendro',
     druzyna: '28 d. harcerska południe',
-    srodowisko: huf_zhp_andrychow,
+    srodowisko: Srodowisko.hufiec('andrychow'),
     rankHarc: RankHarc.zhpWywiadowca,
     org: Org.zhp,
     email: ["mikilego2012@gmail.com"]
@@ -2776,7 +2777,7 @@ const Person MIKOLAJ_LACHENDRO = Person(
 const Person MIKOLAJ_LUKASIK = Person(
     name: 'Mikołaj Łukasik',
     druzyna: '8. PgDSH „Pandora”',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ['mikiriki2017@gmail.com']
@@ -2784,14 +2785,14 @@ const Person MIKOLAJ_LUKASIK = Person(
 const Person MIKOLAJ_MATUSZEWSKI = Person(
   name: 'Mikołaj Matuszewski',
   druzyna: '43. CHDG „SULIMA” im. Rycerza Zawiszy Czarnego',
-  srodowisko: huf_zhp_czestochowa,
+  srodowisko: Srodowisko.custom(huf_zhp_czestochowa),
   org: Org.zhp,
   email: ['mikolaj.matuszewski@zhp.net.pl'],
 );
 const Person MIKOLAJ_SOBON = Person(
     name: 'Mikołaj Soboń',
     druzyna: '16. Drużyna Harcerska',
-    srodowisko: huf_zhp_zyrardow,
+    srodowisko: Srodowisko.custom(huf_zhp_zyrardow),
     rankInstr: RankInstr.phm,
     rankHarc: RankHarc.zhpHRc,
     org: Org.zhp,
@@ -2809,7 +2810,7 @@ const Person MILENA_DULAK = Person(
 const Person MILENA_NOWICKA = Person(
     name: 'Milena Nowicka',
     druzyna: '13 BGDH Astus im. KS. Edmunda Barbasiewicza',
-    srodowisko: huf_zhp_biala_podlaska,
+    srodowisko: Srodowisko.custom(huf_zhp_biala_podlaska),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ["milenia.now123@gmail.com"]
@@ -2824,14 +2825,14 @@ const Person MILOSZ_SZYMANSKI = Person(
 const Person MINION_MALGOSIA_MIKOLAJCZYK = Person(
     name: 'Minion Małgosia Mikołajczyk',
     druzyna: '119. Warszawska Drużyna Harcerska „Immortales”',
-    srodowisko: huf_zhp_warszawa_zoliborz,
+    srodowisko: Srodowisko.hufiec('warszawa_zoliborz'),
     org: Org.zhp,
     email: ["malgorzata.a.mikolajczyk@gmail.com"]
 );
 const Person NADIA_STOLAR = Person(
     name: 'Nadia Stolar',
     druzyna: '41. TDH „Astrum”',
-    srodowisko: huf_zhp_tomaszow_mazowiecki,
+    srodowisko: Srodowisko.custom(huf_zhp_tomaszow_mazowiecki),
     rankHarc: RankHarc.zhpOchotniczka,
     email: ["stolar.nadia14@gmail.com"]
 );
@@ -2839,26 +2840,26 @@ const Person NADIA_OSSOWSKA = Person(
   name: 'Nadia Ossowska',
   rankHarc: RankHarc.dhd,
   druzyna: '6. Zagłębiowska Drużyna Harcerska „Eleusis” im.Stanisława Żółkiewskiego',
-  srodowisko: huf_zhp_ziemi_bedzinskiej,
+  srodowisko: Srodowisko.custom(huf_zhp_ziemi_bedzinskiej),
   org: Org.zhp,
   email: ['nadia.ossowska.2007@gmail.com', 'nadia.ossowska@icloud.com'],
 );
 const Person NADIA_WYSZOGRODZKA = Person(
     name: 'Nadia Wyszogrodzka',
     druzyna: '1. Drużyna Specjalnościowa „Grom” im. Cichociemnych Spadochroniarzy Armi Krajowej w Węgrowie',
-    srodowisko: huf_zhp_doliny_liwca,
+    srodowisko: Srodowisko.custom(huf_zhp_doliny_liwca),
     org: Org.zhp
 );
 const Person NATALIA_KLEPACKA = Person(
     name: 'Natalia Klepacka',
     druzyna: '23. WDH "Wilki" im. Bogusława Ustaborowicza "Żara"',
-    srodowisko: huf_zhp_wroclaw_polnoc,
+    srodowisko: Srodowisko.custom(huf_zhp_wroclaw_polnoc),
     email: ["natalia.klepacka@zhp.net.pl"]
 );
 const Person NATALIA_STODOLNA = Person(
     name: 'Natalia Stodolna',
     druzyna: '1. DSH „Viatores”',
-    srodowisko: huf_zhp_zielona_gora,
+    srodowisko: Srodowisko.custom(huf_zhp_zielona_gora),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ['natalia.stodolna@zhp.net.pl']
@@ -2873,7 +2874,7 @@ const Person NATALIA_SZYMANIAK = Person(
 const Person NATALIA_WOJTYCZKA = Person(
     name: 'Natalia Wojtyczka',
     druzyna: '39. DH „Azymut” im. Batalionu „Zośka”',
-    srodowisko: huf_zhp_ziemi_tyskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_tyskiej),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ["nataliawojtyczka00@gmail.com"]
@@ -2881,7 +2882,7 @@ const Person NATALIA_WOJTYCZKA = Person(
 const Person NATASZA_OLSZANSKA = Person(
     name: 'Natasza Olszańska',
     druzyna: '9. Mielecka Drużyna Harcerska',
-    srodowisko: huf_zhp_mielec,
+    srodowisko: Srodowisko.custom(huf_zhp_mielec),
     rankHarc: RankHarc.zhpTropicielka,
     email: ["natasza.olszanska1@gmail.com"]
 );
@@ -2895,7 +2896,7 @@ const Person NINA_KESKA = Person(
 const Person NINA_MIKLAS = Person(
     name: 'Nina Mikłas',
     druzyna: '39. DH „Azymut” Im Batalionu „Zośka”',
-    srodowisko: huf_zhp_ziemi_tyskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_tyskiej),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ["nina.miklas05@gmail.com"]
@@ -2903,14 +2904,14 @@ const Person NINA_MIKLAS = Person(
 const Person NINA_ROGUSKA = Person(
     name: 'Nina Roguska',
     druzyna: '300. Warszawska Drużyna Wielopoziomowa „Elba”',
-    srodowisko: huf_zhp_warszawa_praga_pn,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ["ninka.roguska@gmail.com"]
 );
 const Person NORBERT_PIATKOWSKI = Person(
     name: 'Norbert Piątkowski',
-    srodowisko: huf_zhp_szczecin,
+    srodowisko: Srodowisko.custom(huf_zhp_szczecin),
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: []
@@ -2918,7 +2919,7 @@ const Person NORBERT_PIATKOWSKI = Person(
 const Person NORBERT_SOWA = Person(
     name: 'Norbert Sowa',
     druzyna: '18. DH „Ogniki”',
-    srodowisko: huf_zhp_lagiewniki,
+    srodowisko: Srodowisko.custom(huf_zhp_lagiewniki),
     rankHarc: RankHarc.zhpOdkrywca,
     org: Org.zhp,
     email: ["norbert.sowa2010@gmail.com"]
@@ -2926,7 +2927,7 @@ const Person NORBERT_SOWA = Person(
 const Person OLAF_MILEROWICZ = Person(
     name: 'Olaf Milerowicz',
     druzyna: '173. WDH „Biała” im. Krzysztofa Kamila Baczyńskiego',
-    srodowisko: huf_zhp_warszawa_ochota,
+    srodowisko: Srodowisko.hufiec('warszawa_ochota'),
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
     email: ["milerowicz.olaf@gmail.com"]
@@ -2934,7 +2935,7 @@ const Person OLAF_MILEROWICZ = Person(
 const Person OLEKSII_OVCHYNNIKOV = Person(
     name: 'Oleksii Ovchynnikov',
     druzyna: '191. „Żagiew”',
-    srodowisko: huf_zhp_warszawa_mokotow,
+    srodowisko: Srodowisko.hufiec('warszawa_mokotow'),
     rankHarc: RankHarc.zhpOdkrywca,
     org: Org.zhp,
     email: ['dobroslaovch@gmail.com']
@@ -2949,7 +2950,7 @@ const Person OLGA_JAJKO = Person(
 const Person OLGA_LUCZAK = Person(
     name: 'Olga Łuczak',
     druzyna: '1. DH „Huragan”',
-    srodowisko: huf_zhp_sieradz,
+    srodowisko: Srodowisko.custom(huf_zhp_sieradz),
     org: Org.zhp,
     email: ['oluczak390@gmail.com']
 );
@@ -2958,7 +2959,7 @@ const Person OLIWIA_MAJDA = Person(
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     druzyna: '47. Bolszewska Gromada Zuchowa „Odważne Pingwiny”',
-    srodowisko: huf_zhp_wejherowo,
+    srodowisko: Srodowisko.custom(huf_zhp_wejherowo),
     org: Org.zhp,
     email: ['oliwia.majda@zhp.net.pl']
 );
@@ -2972,7 +2973,7 @@ const Person OLIWIA_STANCZYK = Person(
 const Person OLIWIER_STARCZEWSKI = Person(
     name: '- Oliwier Starczewski',
     druzyna: '16 GDH „Cichociemni” im. Adama „Pługa” Borysa',
-    srodowisko: huf_zhp_gdansk_srodmiesie,
+    srodowisko: Srodowisko.custom(huf_zhp_gdansk_srodmiesie),
     org: Org.zhp,
     email: ['staryoliwierszoli@gmail.com']
 );
@@ -2980,7 +2981,7 @@ const Person OSKAR_PARDYAK = Person(name: 'Oskar Pardyak', rankInstr: RankInstr.
 const Person OSKAR_POLONSKI = Person(
     name: 'Oskar Połoński',
     druzyna: '53. WDSH "Vesper"',
-    srodowisko: huf_zhp_warszawa_mokotow,
+    srodowisko: Srodowisko.hufiec('warszawa_mokotow'),
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ["oskarpolonski@gmail.com"]
@@ -2994,7 +2995,7 @@ const Person OSKAR_SAKOWICZ = Person(
 const Person PATRYCJA_BINKIEWICZ = Person(
     name: 'Patrycja Binkiewicz',
     druzyna: '5. SDH „Trawersi”',
-    srodowisko: huf_zhp_sokolka,
+    srodowisko: Srodowisko.custom(huf_zhp_sokolka),
     org: Org.zhp,
     email: ["patrycja.binkiewicz@zhp.net.pl", "patrycjabinkiewicz2@gmail.com"]
 );
@@ -3008,21 +3009,21 @@ const Person PATRYCJA_DUDZINSKA = Person(
 const Person PATRYCJA_KALINOWSKA = Person(
     name: 'Patrycja Kalinowska',
     rankHarc: RankHarc.zhpPionierka,
-    srodowisko: huf_zhp_zory,
+    srodowisko: Srodowisko.custom(huf_zhp_zory),
     org: Org.zhp,
     email: ['patrycja.kalinowska@zhp.pl']
 );
 const Person PATRYCJA_PIETRAS = Person(
     name: 'Patrycja Pietras',
     druzyna: '6. ZDH „Eleusis”',
-    srodowisko: huf_zhp_ziemi_bedzinskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_bedzinskiej),
     org: Org.zhp,
     email: ['patusiapietras2101@gmail.com']
 );
 const Person PATRYCJA_POLOWCZYK = Person(
     name: 'Patrycja Polowczyk',
     druzyna: '25 DH Przygoda',
-    srodowisko: huf_zhp_karkonoski,
+    srodowisko: Srodowisko.custom(huf_zhp_karkonoski),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ["patrycjapolo09@gmail.com"]
@@ -3030,22 +3031,22 @@ const Person PATRYCJA_POLOWCZYK = Person(
 const Person PATRYCJA_SPYRKA = Person(
     name: 'Patrycja Spyrka',
     druzyna: '8. PgDSH „Pandora”',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     org: Org.zhp,
     email: ['patrycjaspyrka13@gmail.com']
 );
-const Person PATRYCJA_SZCZESNA = Person(name: 'Patrycja Szczęsna', rankInstr: RankInstr.pwd, rankHarc: RankHarc.zhpHOd, srodowisko: huf_zhp_warszawa_praga_pn, org: Org.zhp);
+const Person PATRYCJA_SZCZESNA = Person(name: 'Patrycja Szczęsna', rankInstr: RankInstr.pwd, rankHarc: RankHarc.zhpHOd, srodowisko: Srodowisko.hufiec('warszawa_praga_pn'), org: Org.zhp);
 const Person PATRYCJA_TARCZYNSKA = Person(
     name: 'Patrycja Tarczyńska',
     druzyna: '92. DH AQUA „Zgórze”',
-    srodowisko: huf_zhp_garwolin,
+    srodowisko: Srodowisko.hufiec('garwolin'),
     org: Org.zhp,
     email: ["pa.tarczyn@op.pl"]
 );
 const Person PATRYK_CZUPIK = Person(
     name: 'Patryk Czupik',
     druzyna: '92. PDH „Orzeł” im. III Kompanii „AGAT”',
-    srodowisko: huf_zhp_poznan_wilda,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_wilda),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -3054,24 +3055,24 @@ const Person PATRYK_CZUPIK = Person(
 const Person PATRYK_GRABOWSKI = Person(
     name: 'Patryk Grabowski',
     druzyna: '174. WDH-y „Wilki”',
-    srodowisko: huf_zhp_warszawa_ochota,
+    srodowisko: Srodowisko.hufiec('warszawa_ochota'),
     org: Org.zhp,
     email: ['patryk.grabowski@zhp.net.pl']
 );
 const Person PATRYK_OLECH = Person(
     name: 'Patryk Olech',
     druzyna: '1. JDH „Pościg” im. Jana III Sobieskiego',
-    srodowisko: 'Południowo-Wschodni Hufiec Harcerzy "Grody" im. gen. bryg. Antoniego Chruściela ps. "Monter"',
+    srodowisko: Srodowisko.custom('Południowo-Wschodni Hufiec Harcerzy "Grody" im. gen. bryg. Antoniego Chruściela ps. "Monter"'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhrHOc,
     org: Org.zhr,
     email: ["patryk.olech@zhr.pl"]
 );
-const Person PAULINA_BURDZIK = Person(name: 'Paulina Burdzik', rankInstr: RankInstr.pwd, srodowisko: huf_zhp_krakow_pdg, org: Org.zhp, comment: 'J. niemiecki',);
+const Person PAULINA_BURDZIK = Person(name: 'Paulina Burdzik', rankInstr: RankInstr.pwd, srodowisko: Srodowisko.hufiec('krakow_podgorze'), org: Org.zhp, comment: 'J. niemiecki',);
 const Person PAULINA_FERENC = Person(
     name: 'Paulina Ferenc',
     druzyna: '14. DSH „Fenris”',
-    srodowisko: huf_zhp_lagiewniki,
+    srodowisko: Srodowisko.custom(huf_zhp_lagiewniki),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ["ur.fav.paulinka@gmail.com", "paulaferenc45@gmail.com"]
@@ -3091,7 +3092,7 @@ const Person PAULINA_LUBOS = Person(
 );
 const Person PAULA_PALA = Person(
     name: 'Paula Pala',
-    srodowisko: huf_zhp_ziemi_wadowickiej,
+    srodowisko: Srodowisko.hufiec('ziemi_wadowickiej'),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ['paulinapala2000@gmail.com']
@@ -3099,7 +3100,7 @@ const Person PAULA_PALA = Person(
 const Person PAULINA_PODGORSKA = Person(
     name: 'Paulina Podgórska',
     druzyna: '254. DW „Paloma”',
-    srodowisko: 'Krapkowice',
+    srodowisko: Srodowisko.custom('Krapkowice'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -3113,7 +3114,7 @@ const Person PAWEL_MARUD = Person(name: 'Piotr Marud');
 const Person PAWEL_SZCZYGIEL = Person(
     name: 'Paweł Szczygieł',
     druzyna: '15. Radomska Drużyna Harcerska „Paszczaki"',
-    srodowisko: huf_zhp_radom_miasto,
+    srodowisko: Srodowisko.custom(huf_zhp_radom_miasto),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["pawel.szczygiel@zhp.net.pl"]
@@ -3121,7 +3122,7 @@ const Person PAWEL_SZCZYGIEL = Person(
 const Person PIOTR_BUKOWSKI = Person(
     name: 'Piotr Bukowski',
     druzyna: '2. DH „Sokoły”',
-    srodowisko: huf_zhp_milicz,
+    srodowisko: Srodowisko.custom(huf_zhp_milicz),
     rankHarc: RankHarc.zhpOdkrywca,
     org: Org.zhp,
     email: ["piotr.bukowski@zhp.pl"]
@@ -3129,7 +3130,7 @@ const Person PIOTR_BUKOWSKI = Person(
 const Person PIOTR_CHELMINIAK = Person(
     name: 'Piotr Chełminiak',
     druzyna: 'PWDH „Gloria Mare”',
-    srodowisko: huf_zhp_poznan_jezyce,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_jezyce),
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
     email: ["wrutek2000@gmail.com"]
@@ -3137,7 +3138,7 @@ const Person PIOTR_CHELMINIAK = Person(
 const Person PIOTR_GASIOR = Person(
     name: 'Piotr Gąsior',
     druzyna: '44. Drużyna Harcerska „Stella”',
-    srodowisko: huf_zhp_myslowice,
+    srodowisko: Srodowisko.custom(huf_zhp_myslowice),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["patusiapietras2101@gmail.com", "piotr.gasior@zhp.net.pl"]
@@ -3153,13 +3154,13 @@ const Person PIOTR_KRAKOWIAK = Person(
 const Person PIOTR_KUBOWICZ = Person(
     name: 'Piotr Kubowicz',
     druzyna: '2. NDWP „Płomienie”',
-    srodowisko: huf_zhp_nowy_sacz,
+    srodowisko: Srodowisko.hufiec('nowy_sacz'),
     email: ['piotr.kubowicz@supersnow.com', 'ocwypyziuleh@gmail.com']
 );
 const Person PIOTR_KWAPIEN = Person(
     name: 'Piotr Kwapień',
     druzyna: '35. TDH "Ignis" im. Józefy Kantor',
-    srodowisko: huf_zhp_torun,
+    srodowisko: Srodowisko.custom(huf_zhp_torun),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -3172,7 +3173,7 @@ const Person PIOTR_SOSNOWSKI = Person(
   name: 'Piotr Sosnowski',
   rankInstr: RankInstr.pwd,
   druzyna: 'II. SzDHiZ, 74. Poznańska Drużyna Wędrownicza „Lewe Skrzydło” im. Dywizjonu 303',
-  srodowisko: huf_zhp_poznan_wilda,
+  srodowisko: Srodowisko.custom(huf_zhp_poznan_wilda),
   org: Org.zhp,
 );
 const Person PIOTR_TUROWSKI = Person(
@@ -3184,7 +3185,7 @@ const Person PIOTR_TUROWSKI = Person(
 const Person PIOTR_URBANIEC = Person(
   name: 'Piotr Urbaniec',
   rankHarc: RankHarc.zhpWywiadowca,
-  srodowisko: huf_zhp_ziemi_rybnickiej,
+  srodowisko: Srodowisko.custom(huf_zhp_ziemi_rybnickiej),
   org: Org.zhp,
   email: ['piotr23042006@gmail.com'],
 );
@@ -3192,7 +3193,7 @@ const Person PIOTR_ZIEMBIKIEWICZ = Person(name: 'Piotr Ziembikiewicz', rankInstr
 const Person POLA_MARCINKOWSKA = Person(
     name: 'Pola Marcinkowska',
     druzyna: '2. DH „Mimo wszystko”',
-    srodowisko: huf_zhp_krosno,
+    srodowisko: Srodowisko.custom(huf_zhp_krosno),
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ['polamarcinkowska2005@gmail.com']
@@ -3201,14 +3202,14 @@ const Person PRZEMYSLAW_KLUCZKOWSKI = Person(name: 'Przemysław Kluczkowski');
 const Person PRZEMYSLAW_KOWALIK = Person(
     name: 'Przemysław Kowalik',
     druzyna: '300. PgLDH „Wichura"',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     rankHarc: RankHarc.dhc,
     email: ["przemek.kowalik.pl@gmail.com"]
 );
 const Person PRZEMYSLAW_MROCZKOWSKI = Person(
     name: 'Przemysław Mroczkowski',
     druzyna: '16. Drużyna Harcerska im. marsz. J. Piłsudskiego „Niepokonani”',
-    srodowisko: huf_zhp_bytom,
+    srodowisko: Srodowisko.custom(huf_zhp_bytom),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -3217,7 +3218,7 @@ const Person PRZEMYSLAW_MROCZKOWSKI = Person(
 const Person RADOSLAW_JASZCZAK = Person(
     name: 'Radosław Jaszczak',
     druzyna: '77. PDW CHIMERA',
-    srodowisko: huf_zhp_poznan_jezyce,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_jezyce),
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ["radoslaw.jaszczak@zhp.net.pl"]
@@ -3227,13 +3228,13 @@ const Person RADOSLAW_RELIDZYNSKI = Person(
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     druzyna: 'Warszawska Drużyna Wędrownicza „Halny”',
-    srodowisko: huf_zhp_warszawa_praga_pn,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
     org: Org.zhp
 );
 const Person RAFAL_ANTONICKI = Person(
     name: 'Rafał Antonicki',
     druzyna: '27. HDW',
-    srodowisko: huf_zhp_ziemi_mikolowskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_mikolowskiej),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["rafalantonicki@gmail.com"]
@@ -3246,27 +3247,27 @@ const Person RAFAL_BARAN = Person(
 const Person RAFAL_KOWALSKI = Person(
   name: 'Radał Kowalski',
   rankHarc: RankHarc.zhpMlodzik,
-  srodowisko: huf_zhp_rzeszow,
+  srodowisko: Srodowisko.custom(huf_zhp_rzeszow),
   druzyna: '14. DH im. K.K. Baczyńskiego',
   org: Org.zhp,
 );
 const Person RAFAL_LALIK = Person(
   name: 'Rafał Lalik', rankHarc: RankHarc.zhpHOc,
   druzyna: '30. Podgórska Drużyna Harcerska „Zielone Stopy”',
-  srodowisko: huf_zhp_krakow_pdg,
+  srodowisko: Srodowisko.hufiec('krakow_podgorze'),
   org: Org.zhp,
 );
 const Person RAFAL_RECZKIN = Person(
     name: 'Rafał Reczkin',
     druzyna: '3. DW „Chmara”',
-    srodowisko: 'Ziemi Tarnogórskiej',
+    srodowisko: Srodowisko.custom('Ziemi Tarnogórskiej'),
     rankInstr: RankInstr.phm,
     email: ['rafal.reczkin@zhp.net.pl']
 );
 const Person ROBERT_LISZEWSKI = Person(
     name: 'Robert Liszewski',
     druzyna: "25. Środowiskowa Drużyna Harcerska „Echo” im. Tony'ego Halika",
-    srodowisko: huf_zhp_sochaczew,
+    srodowisko: Srodowisko.custom(huf_zhp_sochaczew),
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ['liszewskir25@gmail.com', 'robert.liszewski@zhp.net.pl']
@@ -3274,7 +3275,7 @@ const Person ROBERT_LISZEWSKI = Person(
 const Person ROBERT_LOPATKA = Person(
     name: 'Robert Łopatka',
     druzyna: '37. Drużyna Wędrownicza "Nocne Licha"',
-    srodowisko: huf_zhp_ziemi_zywieckiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_zywieckiej),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHRc,
     org: Org.zhp,
@@ -3292,7 +3293,7 @@ const Person ROBERT_ROBOTYCKI = Person(
 const Person RYSZARD_LASECKI = Person(
     name: 'Ryszard Łasecki',
     druzyna: '102. WDH',
-    srodowisko: huf_zhp_wagrowiec,
+    srodowisko: Srodowisko.custom(huf_zhp_wagrowiec),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ['lasecki.rysiu@gmail.com']
@@ -3315,7 +3316,7 @@ const Person SEBASTIAN_KOPROWSKI = Person(
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     druzyna: '37. Harcerska Drużyna Męska im. Franciszka Drake’a',
-    srodowisko: huf_zhp_brodnica,
+    srodowisko: Srodowisko.custom(huf_zhp_brodnica),
     email: ['sebastian.koprowski@zhp.net.pl']
 );
 const Person SEBASTIAN_SOBOLEWSKI = Person(
@@ -3327,7 +3328,7 @@ const Person SEBASTIAN_SUGALSKI = Person(
   rankHarc: RankHarc.zhpHOc,
   rankInstr: RankInstr.pwd,
   druzyna: 'Zielony Szczep 10-ych Koszalińskich Drużyn Harcerskich i Gromad Zuchowych',
-  srodowisko: huf_zhp_ziemi_koszalinskiej,
+  srodowisko: Srodowisko.custom(huf_zhp_ziemi_koszalinskiej),
   email: ['sugalski29@gmail.com'],
 );
 const Person SEWERYN_WOLINSKI = Person(
@@ -3344,7 +3345,7 @@ const Person SLAWOMIR_MILEWSKI = Person(
 const Person SOFIJA_GALICKA = Person(
     name: 'Sofija Galicka',
     druzyna: '8. PgDSH „Pandora”',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ['galicka.sofija16@gmail.com']
@@ -3352,7 +3353,7 @@ const Person SOFIJA_GALICKA = Person(
 const Person STANISLAW_WATOR = Person(
     name: 'Stanisław Wątor',
     druzyna: '19. WDH "Przygoda" im. Ludwika Narbutta',
-    srodowisko: huf_zhp_warszawa_wola,
+    srodowisko: Srodowisko.hufiec('warszawa_wola'),
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
     email: ["stanislaw.wator@zhp.pl"]
@@ -3368,7 +3369,7 @@ const Person STANISLAW_MARCHEWICZ = Person(
 const Person STANISLAW_WOJCIECHOWSKI = Person(
     name: 'Stanisław Wojciechowski',
     druzyna: '58. DW "Szuwary"',
-    srodowisko: huf_zhp_ostrow_wielkopolski,
+    srodowisko: Srodowisko.custom(huf_zhp_ostrow_wielkopolski),
     org: Org.zhp,
     email: ["stasiu2w2@gmail.com"]
 );
@@ -3383,28 +3384,28 @@ const Person STEFAN_KRYCZKA = Person(
 const Person SZYMON_BARCZYK = Person(
     name: 'Szymon Barczyk',
     druzyna: '60. WDH „Amber”',
-    srodowisko: huf_zhp_warszawa_ursus_wlochy,
+    srodowisko: Srodowisko.hufiec('warszawa_ursus_wlochy'),
     org: Org.zhp,
     email: ['szbarsz5@gmail.com', 'szymon.barczyk@zhp.net.pl']
 );
 const Person SZYMON_CHORAZY = Person(
     name: 'Szymon „Durszlak” Chorąży',
     druzyna: '72. WDHS „Uroczysko”',
-    srodowisko: huf_zhp_warszawa_praga_pn,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
     org: Org.zhp
 );
 const Person SZYMON_DRATWINSKI = Person(
     name: 'Szymon Dratwiński',
     rankHarc: RankHarc.zhpCwik,
     druzyna: '16. Krakowska Drużyna Harcerska',
-    srodowisko: huf_zhp_krakow_srodmiescie,
+    srodowisko: Srodowisko.hufiec('krakow_srodmiescie'),
     org: Org.zhp,
     email: ['szymon.dratwinski@gmail.com']
 );
 const Person SZYMON_DROPEK = Person(
     name: 'Szymon Dropek',
     druzyna:'7. Kwidzyńska Drużyna Harcerska',
-    srodowisko: huf_zhp_kwidzyn,
+    srodowisko: Srodowisko.custom(huf_zhp_kwidzyn),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOc,
     org: Org.zhp,
@@ -3413,7 +3414,7 @@ const Person SZYMON_DROPEK = Person(
 const Person SZYMON_HARAZIM = Person(
     name: 'Szymon Harazim',
     druzyna: '5. Drużyna Harcerska „Zorza”',
-    srodowisko: huf_zhp_ziemi_tarnogorskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_tarnogorskiej),
     rankInstr: RankInstr.pwd,
     org: Org.zhp,
     email: ["szymon.harazim@zhp.net.pl"]
@@ -3428,12 +3429,12 @@ const Person SZYMON_JACKIEWICZ = Person(
 const Person SZYMON_JAWOREK = Person(
     name: 'Szymon Jaworek',
     druzyna: '17. DH „Gryfne Bajtle”',
-    srodowisko: huf_zhp_ziemi_tarnogorskiej
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_tarnogorskiej)
 );
 const Person SZYMON_KLIMUNTOWSKI = Person(
     name: 'Szymon Klimuntowski',
     druzyna: '7. DH „Iskra”',
-    srodowisko: huf_zhp_ziemi_dzierzoniowskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_dzierzoniowskiej),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["klimuntowskiszymon@gmail.com"]
@@ -3445,7 +3446,7 @@ const Person SZYMON_LANDORF = Person(
 const Person SZYMON_MALCZAK = Person(
     name: 'Szymon Małczak',
     druzyna: '128. WDH „Orion”',
-    srodowisko: huf_zhp_zary,
+    srodowisko: Srodowisko.custom(huf_zhp_zary),
     org: Org.zhp,
     email: ["tomek02897@gmail.com"]
 );
@@ -3458,7 +3459,7 @@ const Person SZYMON_MASLOWSKI = Person(
 );
 const Person SZYMON_OPLOCKI_NIEMIEC = Person(
     name: 'Szymon Opłocki-Niemiec',
-    srodowisko: huf_zhp_warszawa_mokotow,
+    srodowisko: Srodowisko.hufiec('warszawa_mokotow'),
     druzyna: 'Szczep 156. i 414. WDHiZ',
     org: Org.zhp,
     email: ['szymon.oplocki.niemiec@gmail.com']
@@ -3473,7 +3474,7 @@ const Person SZYMON_OZOG = Person(
 const Person SZYMON_PADOK = Person(
     name: 'Szymon Padok',
     druzyna: '9. WDH „Wataha” im. Józefa Gołębiowskiego',
-    srodowisko: huf_zhp_gorzow_wielkopolski,
+    srodowisko: Srodowisko.custom(huf_zhp_gorzow_wielkopolski),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["abeber444@gmail.com"]
@@ -3481,21 +3482,21 @@ const Person SZYMON_PADOK = Person(
 const Person SZYMON_PODGORNY = Person(
     name: 'Szymon Podgórny',
     druzyna:'19. Pyzdrska Drużyna Wędrownicza „Wataha”, 5 Pyzdrski szczep „Orion”',
-    srodowisko: huf_zhp_wrzesnia_wrzos,
+    srodowisko: Srodowisko.custom(huf_zhp_wrzesnia_wrzos),
     org: Org.zhp,
     email: ['szymon.podgorny@zhp.net.pl']
 );
 const Person SZYMON_REKOWSKI = Person(
     name: 'Szymon Rekowski',
     druzyna: '8. GDH „Brzask”',
-    srodowisko: huf_zhp_gdynia,
+    srodowisko: Srodowisko.custom(huf_zhp_gdynia),
     org: Org.zhp,
     email: ["szym.rekowski@gmail.com"]
 );
 const Person SZYMON_SITEK = Person(
     name: 'Szymon Sitek',
     druzyna: '29. DSH „Ignis” w Zgórzu',
-    srodowisko: huf_zhp_garwolin,
+    srodowisko: Srodowisko.hufiec('garwolin'),
     org: Org.zhp,
     email: ['szymonsitek09@gmail.com']
 );
@@ -3511,7 +3512,7 @@ const Person TADEUSZ_BOJANOWSKI = Person(
 const Person TADEUSZ_BRACHA = Person(
     name: 'Tadeusz K. Bracha',
     druzyna: '6. DSH „Andromeda”',
-    srodowisko: 'Hufiec Oświęcim',
+    srodowisko: Srodowisko.custom('Hufiec Oświęcim'),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["tadekbracha@gmail.com"]
@@ -3519,7 +3520,7 @@ const Person TADEUSZ_BRACHA = Person(
 const Person TAMANACO_NORIEGA = Person(
     name: 'Tamanaco Noriega',
     druzyna: '73. WDH „Custodia”',
-    srodowisko: huf_zhp_warszawa_praga_pn,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pn'),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ["tamanaconoriegau@gmail.com"]
@@ -3528,14 +3529,14 @@ const Person TOMASZ_BUKOWIECKI = Person(
     name: 'Tomasz Bukowiecki',
     rankHarc: RankHarc.zhpHOc,
     druzyna: '25. Wielopoziomowa Drużyna Harcerska „Brzask” im. Cichociemnych Spadochroniarzy Armii Krajowej',
-    srodowisko: huf_zhp_legionowo,
+    srodowisko: Srodowisko.hufiec('legionowo'),
     org: Org.zhp,
     email: ['tomasz.bukowiecki@zhp.net.pl']
 );
 const Person TOMASZ_FLORCZAK = Person(
     name: 'Tomasz Florczak',
     druzyna: '99. Przemyska Drużyna Starszoharcerska',
-    srodowisko: huf_zhp_ziemi_przemyskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_przemyskiej),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ['tflorczak913@gmail.com']
@@ -3547,7 +3548,7 @@ const Person TOMASZ_GORECKI = Person(
 const Person TOMASZ_KOTOWSKI = Person(
     name: 'Tomasz Kotowski',
     druzyna: '20. DW „Avengers”',
-    srodowisko: huf_zhp_legionowo,
+    srodowisko: Srodowisko.hufiec('legionowo'),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["tomasz.kotowski@zhp.net.pl"]
@@ -3555,7 +3556,7 @@ const Person TOMASZ_KOTOWSKI = Person(
 const Person TOMASZ_LUDWIG = Person(
     name: 'Tomasz Ludwig',
     druzyna: '8. PgDW „Granat”',
-    srodowisko: huf_zhp_krakow_pdg,
+    srodowisko: Srodowisko.hufiec('krakow_podgorze'),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["tomasz.ludwig@zhp.pl"]
@@ -3573,7 +3574,7 @@ const Person TOMASZ_ZAGORSKI = Person(
 const Person TOMASZ_ZGORSKI = Person(
     name: 'Tomasz Zgórski',
     druzyna: '27. Wielopoziomowa Drużyna Harcerska „Eskulapy”',
-    srodowisko: huf_zhp_jastrzebie_zdroj,
+    srodowisko: Srodowisko.custom(huf_zhp_jastrzebie_zdroj),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -3588,7 +3589,7 @@ const Person TOSIA_BANASZAK = Person(
 const Person TOSIA_KLEPACKA = Person(
     name: 'Tosia Klepacka',
     druzyna: '89. WDS „W drogę”',
-    srodowisko: huf_zhp_wroclaw_polnoc,
+    srodowisko: Srodowisko.custom(huf_zhp_wroclaw_polnoc),
     rankHarc: RankHarc.zhpTropicielka,
     org: Org.zhp,
     email: ["klepacka.tosia@gmail.com", 'antonina.klepacka@zhp.pl']
@@ -3596,7 +3597,7 @@ const Person TOSIA_KLEPACKA = Person(
 const Person TYMON_TALECKI = Person(
     name: 'Tymon Talecki',
     druzyna: '1. DSH „Orlęta”',
-    srodowisko: huf_zhp_gorlice,
+    srodowisko: Srodowisko.hufiec('gorlice'),
     rankHarc: RankHarc.dhc,
     org: Org.zhp,
     email: ['vulturebro323@gmail.com']
@@ -3604,7 +3605,7 @@ const Person TYMON_TALECKI = Person(
 const Person TYMOTEUSZ_JAWORSKI = Person(
     name: 'Tymoteusz Jaworski',
     druzyna: '60. KDH „Puszczanie”',
-    srodowisko: huf_zhr_harcerzy_krakow_srodmiescie,
+    srodowisko: Srodowisko.custom(huf_zhr_harcerzy_krakow_srodmiescie),
     rankHarc: RankHarc.zhrWywiadowca,
     org: Org.zhr,
     email: ['tymekjaworski36@gmail.com']
@@ -3620,13 +3621,13 @@ const Person WANDA_MARCHEL = Person(
     name: 'Wanda Marchel',
     rankHarc: RankHarc.zhpOchotniczka,
     druzyna: '13. DH „Szczęściarze”',
-    srodowisko: huf_zhp_opole,
+    srodowisko: Srodowisko.custom(huf_zhp_opole),
     org: Org.zhp
 );
 const Person WERONIKA_IWANISZYN = Person(
     name: 'Weronika Iwaniszyn',
     druzyna: '222. WDS „Biedrony"',
-    srodowisko: huf_zhp_ziemi_walbrzyskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_walbrzyskiej),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["wera.iw03@gmail.com"]
@@ -3640,7 +3641,7 @@ const Person WERONIKA_KOLCZ = Person(
 const Person WERONIKA_MATECKA = Person(
     name: 'Weronika Matecka',
     druzyna: '31. JGZ „Bordowe Wilczęta"',
-    srodowisko: huf_zhp_poznan_jezyce,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_jezyce),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["weronika.matecka@zhp.net.pl"]
@@ -3648,7 +3649,7 @@ const Person WERONIKA_MATECKA = Person(
 const Person WERONIKA_PUSCIAN = Person(
     name: 'Weronika Puścian',
     druzyna: '37. Drużyna Harcerska im. Zawiszy Czarnego w „Góralach Mandarynki"',
-    srodowisko: huf_zhp_brodnica,
+    srodowisko: Srodowisko.custom(huf_zhp_brodnica),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ["weronika.puscian@zhp.pl"]
@@ -3664,7 +3665,7 @@ const Person WERONIKA_WICHER = Person(
 const Person WERONIKA_ZAWIERUCHA = Person(
     name: 'Weronika Zawierucha',
     druzyna: '43. ZDHS „Parasol”',
-    srodowisko: huf_zhp_zgierz,
+    srodowisko: Srodowisko.custom(huf_zhp_zgierz),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ['zawieruchaweronika570@gmail.com']
@@ -3674,19 +3675,19 @@ const Person WIKTOR_KARPALA = Person(
   rankHarc: RankHarc.zhpHOc,
   rankInstr: RankInstr.pwd,
   druzyna:'74. DH „Desant” im. 1. SBS gen. bryg. Stanisława Sosabowskiego',
-  srodowisko: huf_zhp_podkrakowski,
+  srodowisko: Srodowisko.hufiec('podkrakowski'),
   org: Org.zhp,
 );
 const Person WIKTOR_KOWALCZUK = Person(
     name: 'Wiktor Kowalczuk',
     druzyna: '2. WDH „Aves”',
-    srodowisko: huf_zhp_olecko,
+    srodowisko: Srodowisko.custom(huf_zhp_olecko),
     email: ["vect0428m66@gmail.com"]
 );
 const Person WIKTORIA_DRGAS = Person(
     name: 'Wiktoria Drgas',
     druzyna: 'DW Ijupiter',
-    srodowisko: huf_zhp_zary,
+    srodowisko: Srodowisko.custom(huf_zhp_zary),
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
     email: ["wiktoria.drgas@zhp.net.pl"]
@@ -3694,7 +3695,7 @@ const Person WIKTORIA_DRGAS = Person(
 const Person WIKTORIA_LUKASIK = Person(
     name: 'Wiktoria Łukasik',
     druzyna: '160. WDH „Desertum”',
-    srodowisko: huf_zhp_warszawa_praga_pd,
+    srodowisko: Srodowisko.hufiec('warszawa_praga_pd'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -3703,13 +3704,13 @@ const Person WIKTORIA_LUKASIK = Person(
 const Person WIKTORIA_PINKOWSKA = Person(
     name: 'Wiktoria Pinkowska',
     druzyna: '8. Zgierska Wodna Drużyna Harcerzy Starszych „Nieskończoność”',
-    srodowisko: huf_zhp_zgierz,
+    srodowisko: Srodowisko.custom(huf_zhp_zgierz),
     email: ['wiktoria.pinkowska@zhp.net.pl', 'w.pinkowskaa@gmail.com']
 );
 const Person WIKTORIA_POPIS = Person(
     name: 'Wiktoria Popis',
     druzyna: '40. WDSH-ek B.U.R.Z.A.',
-    srodowisko: huf_zhp_warszawa_mokotow,
+    srodowisko: Srodowisko.hufiec('warszawa_mokotow'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -3721,7 +3722,7 @@ const Person WIKTORIA_PRUSZYNSKA = Person(
 const Person WIKTORIA_WENCEL = Person(
     name: 'Wiktoria Wencel',
     druzyna: '4. ODH im. Jadwigi Falkowskiej',
-    srodowisko: 'Ostrzeszowski hufiec harcerek "Agat" im. szarych szeregów',
+    srodowisko: Srodowisko.custom('Ostrzeszowski hufiec harcerek "Agat" im. szarych szeregów'),
     rankHarc: RankHarc.zhrOchotniczka,
     org: Org.zhr,
     email: ['sigmaboy.oe@gmail.com']
@@ -3738,21 +3739,21 @@ const Person WINCENTY_DIETRYCH = Person(
 const Person WITOLD_BASIURA = Person(
     name: 'Witold Basiura',
     druzyna: '1. KDSH „Świt”',
-    srodowisko: huf_zhp_podkrakowski,
+    srodowisko: Srodowisko.hufiec('podkrakowski'),
     org: Org.zhp,
     email: ['witold.basiura@gmail.com']
 );
 const Person WITOLD_BRACHA = Person(
     name: 'Witold Bracha',
     druzyna: '16. DH „Celestials”',
-    srodowisko: huf_zhp_oswiecim,
+    srodowisko: Srodowisko.hufiec('oswiecim'),
     org: Org.zhp,
     email: ['u0021657761@gmail.com']
 );
 const Person WITOLD_FIALKOWSKI = Person(
     name: 'Witold Fiałkowski',
     druzyna: '243. PDHS „Aves”',
-    srodowisko: huf_zhp_poznan_jezyce,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_jezyce),
     rankHarc: RankHarc.zhpWywiadowca,
     org: Org.zhp,
     email: ["witekfia@gmail.com"]
@@ -3760,7 +3761,7 @@ const Person WITOLD_FIALKOWSKI = Person(
 const Person WITOLD_JAKUBOWSKI = Person(
     name: 'Witold Jakubowski',
     druzyna: '50. WDW „BOREALIS”',
-    srodowisko: huf_zhp_warszawa_ursus_wlochy,
+    srodowisko: Srodowisko.hufiec('warszawa_ursus_wlochy'),
     rankHarc: RankHarc.zhpMlodzik,
     org: Org.zhp,
     email: ['shinypokemin.hunterxdddd@gmail.com']
@@ -3774,7 +3775,7 @@ const Person WOJCIECH_GRUSZCZYNSKI = Person(
 const Person WOJCIECH_KITA = Person(
     name: 'Wojciech Kita',
     druzyna: '10 JDSH "Minerki"',
-    srodowisko: huf_zhp_jordanow,
+    srodowisko: Srodowisko.hufiec('jordanow'),
     rankHarc: RankHarc.zhpCwik,
     org: Org.zhp,
     email: ["wojtix912@gmail.com"]
@@ -3782,7 +3783,7 @@ const Person WOJCIECH_KITA = Person(
 const Person WOJCIECH_KORZENIOWSKI = Person(
     name: 'Wojciech Korzeniowski',
     druzyna: '72. WDSH Gawra',
-    srodowisko: huf_zhp_wroclaw_polnoc,
+    srodowisko: Srodowisko.custom(huf_zhp_wroclaw_polnoc),
     rankHarc: RankHarc.dhc,
     email: ["wojtek2012k@gmail.com"]
 );
@@ -3796,13 +3797,13 @@ const Person WOJCIECH_GODECKI = Person(
     name: 'Wojciech Godecki',
     rankInstr: RankInstr.hm,
     druzyna: '„Złota Ósemka” im. Zawiszy Czarnego',
-    srodowisko: huf_zhp_dabrowa_gornicza,
+    srodowisko: Srodowisko.custom(huf_zhp_dabrowa_gornicza),
     email: ['wojciech.godecki@zhp.net.pl']
 );
 const Person WOJCIECH_JUCYK = Person(
     name: 'Wojciech Jucyk',
     druzyna: '73 DSH „Los Niños”',
-    srodowisko: huf_zhp_konin,
+    srodowisko: Srodowisko.custom(huf_zhp_konin),
     rankHarc: RankHarc.zhpOdkrywca,
     org: Org.zhp,
     email: ['wojtek.jucyk.buffon@gmail.com', 'wojciech.jucyk@zhp.net.pl']
@@ -3815,7 +3816,7 @@ const Person WOJCIECH_TURSKI = Person(
 const Person WOJCIECH_WALACH = Person(
   name: 'Wojciech Wałach',
   druzyna: '34. DH „Watra” im. Braci Buchalików',
-  srodowisko: huf_zhp_ziemi_rybnickiej,
+  srodowisko: Srodowisko.custom(huf_zhp_ziemi_rybnickiej),
   org: Org.zhp,
   email: ['wojtek.w.2008@gmail.com'],
 );
@@ -3823,7 +3824,7 @@ const Person WOJCIECH_WOLNIK = Person(
     name: 'Wojciech Wolnik',
     rankHarc: RankHarc.zhpMlodzik,
     druzyna: '7. Przemeckiej Drużyna Harcerska im. Jana Pawła II',
-    srodowisko: huf_zhp_wolsztyn,
+    srodowisko: Srodowisko.custom(huf_zhp_wolsztyn),
     org: Org.zhp
 );
 const Person WOJCIECH_ZIELINSKI = Person(
@@ -3845,7 +3846,7 @@ const Person ZOFIA_FABROWSKA = Person(
 const Person ZOFIA_KOSIDER = Person(
     name: 'Zosia Kosider',
     druzyna: '1. DH „Wilcza Sfora”',
-    srodowisko: huf_zhp_ziemi_wodzislawskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_wodzislawskiej),
     org: Org.zhp,
     email: ['zosiakosider@gmail.com']
 );
@@ -3853,28 +3854,28 @@ const Person ZOFIA_SZAFRANEK = Person(
     name: 'Zofia Szafranek',
     rankHarc: RankHarc.zhpPionierka,
     druzyna: '39. Wielopoziomowa Drużyna Harcerska „Leśne Stwory” w Radlinie',
-    srodowisko: huf_zhp_ziemi_wodzislawskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_wodzislawskiej),
     org: Org.zhp,
     email: ['zofia.szafranek2008@gmail.com']
 );
 const Person ZOFIA_ZAWADZKA = Person(
     name: 'Zofia Zawadzka',
     rankHarc: RankHarc.zhpTropicielka,
-    srodowisko: huf_zhp_warszawa_zoliborz,
+    srodowisko: Srodowisko.hufiec('warszawa_zoliborz'),
     druzyna: '128. WDH',
     org: Org.zhp
 );
 const Person ZOFIA_ZBRUK = Person(
     name: 'Zofia Zbruk',
     druzyna: '5. PDHS „Wagabunda” im. Kazimierza Nowaka',
-    srodowisko: huf_zhp_poznan_grunwald,
+    srodowisko: Srodowisko.custom(huf_zhp_poznan_grunwald),
     org: Org.zhp,
     email: ['anonusiauvu@gmail.com']
 );
 const Person ZUZANNA_ANDRZEJCZAK = Person(
     name: 'Zuzanna Andrzejczak',
     druzyna: '15. ZWDH „Atlantyda”',
-    srodowisko: huf_zhp_zgierz,
+    srodowisko: Srodowisko.custom(huf_zhp_zgierz),
     email: ['zuzannaandrzejczak12@gmail.com']
 );
 const Person ZUZANNA_BIALA = Person(
@@ -3884,7 +3885,7 @@ const Person ZUZANNA_BIALA = Person(
 const Person ZUZANNA_CHMIEL = Person(
     name: 'Zuzanna Chmiel',
     druzyna: '48. Lubelska Drużyna Harcerska ,,Araukanie"',
-    srodowisko: huf_zhp_lublin,
+    srodowisko: Srodowisko.custom(huf_zhp_lublin),
     org: Org.zhp,
     email: ['chmiel.zuzanna@zhp.pl']
 );
@@ -3892,7 +3893,7 @@ const Person ZUZANNA_CHMIEL = Person(
 const Person ZUZANNA_DUDEK = Person(
     name: 'Zuzanna Dudek',
     druzyna: '8. Drużyna Harcerska „Tajne Śledzie”',
-    srodowisko: huf_zhp_olkusz,
+    srodowisko: Srodowisko.hufiec('olkusz'),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ['z.dudek2011@gmail.com', 'zizigames2011@gmail.com']
@@ -3901,7 +3902,7 @@ const Person ZUZANNA_DUDEK = Person(
 const Person ZUZANNA_DZIEDZIC = Person(
     name: 'Zuzia Dziedzic',
     druzyna: '128 WDH Orion',
-    srodowisko: huf_zhp_zary,
+    srodowisko: Srodowisko.custom(huf_zhp_zary),
     org: Org.zhp,
     email: ['z_dziedzic@icloud.com', '5363@e-at.edu.pl']
 );
@@ -3909,13 +3910,13 @@ const Person ZUZANNA_DZIEDZIC = Person(
 const Person ZUZANNA_EJSMONT = Person(
     name: 'Zuzanna Ejsmont',
     druzyna: '2. WDH „Aves”',
-    srodowisko: huf_zhp_olecko,
+    srodowisko: Srodowisko.custom(huf_zhp_olecko),
     email: ["vect0428m66@gmail.com"]
 );
 
 const Person ZUZANNA_GRZESIAK = Person(
     name: 'Zuzanna Grzesiak',
-    srodowisko: huf_zhp_kepno,
+    srodowisko: Srodowisko.custom(huf_zhp_kepno),
     org: Org.zhp,
     email: ["gzuzia415@gmail.com"]
 );
@@ -3923,7 +3924,7 @@ const Person ZUZANNA_GRZESIAK = Person(
 const Person ZUZANNA_GUGALA = Person(
     name: 'Zuzanna Gugała',
     druzyna: '51 BDW „Silva”',
-    srodowisko: huf_zhp_bialystok,
+    srodowisko: Srodowisko.custom(huf_zhp_bialystok),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["zuzanna.gugala@zhp.pl"]
@@ -3932,7 +3933,7 @@ const Person ZUZANNA_GUGALA = Person(
 const Person ZUZANNA_JANKOWSKA = Person(
     name: 'Zuzanna Jankowska',
     druzyna: '12. GWDH „Północ”',
-    srodowisko: huf_zhp_paluki,
+    srodowisko: Srodowisko.custom(huf_zhp_paluki),
     rankHarc: RankHarc.zhpPionierka,
     org: Org.zhp,
     email: ["niebieskizozolek@gmail.com"]
@@ -3943,14 +3944,14 @@ const Person ZUZANNA_JAWORSKA = Person(
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
-    srodowisko: huf_zhp_wroclaw
+    srodowisko: Srodowisko.custom(huf_zhp_wroclaw)
 );
 
 const Person ZUZANNA_KOLIS = Person(
   name: 'Zuzanna Kolis',
   rankHarc: RankHarc.zhpOchotniczka,
   druzyna: '„Wilki”',
-  srodowisko: huf_zhp_glowno,
+  srodowisko: Srodowisko.custom(huf_zhp_glowno),
   org: Org.zhp,
   email: ['koliszuzia@gmail.com'],
 );
@@ -3958,7 +3959,7 @@ const Person ZUZANNA_KOLIS = Person(
 const Person ZUZANNA_KOWALCZYK = Person(
     name: 'Zuzanna Kowalczyk',
     rankHarc: RankHarc.zhpOchotniczka,
-    srodowisko: huf_zhp_stargard,
+    srodowisko: Srodowisko.custom(huf_zhp_stargard),
     druzyna: '1. Choszczeńska Drużyna Starszoharcerska „Regulus” im. Janusza Korczaka',
     org: Org.zhp
 );
@@ -3967,14 +3968,14 @@ const Person ZUZANNA_MIERZEJEWSKA = Person(
     name: 'Zuzanna Mierzejewska',
     rankHarc: RankHarc.zhpOchotniczka,
     druzyna: '13. Lubańska Drużyna Starszoharcerska „Brzask”',
-    srodowisko: huf_zhp_luban,
+    srodowisko: Srodowisko.custom(huf_zhp_luban),
     org: Org.zhp
 );
 
 const Person ZUZANNA_NAWROT = Person(
     name: 'Zuzanna Nawrot',
     druzyna: '9. BGZ „Pszczółki”',
-    srodowisko: huf_zhp_reduta,
+    srodowisko: Srodowisko.custom(huf_zhp_reduta),
     rankHarc: RankHarc.zhpSamarytanka,
     org: Org.zhp,
     email: ['zuzannanawrot5c@gmail.com']
@@ -3983,7 +3984,7 @@ const Person ZUZANNA_NAWROT = Person(
 const Person ZUZANNA_NIEWEGLOWSKA = Person(
     name: 'Zuzanna Niewęgłowska',
     druzyna: '307. WDH-EK „Zorza”',
-    srodowisko: huf_zhp_warszawa_mokotow,
+    srodowisko: Srodowisko.hufiec('warszawa_mokotow'),
     rankInstr: RankInstr.pwd,
     rankHarc: RankHarc.zhpHOd,
     org: Org.zhp,
@@ -3995,7 +3996,7 @@ const Person ZUZANNA_PIWKO = Person(
     rankHarc: RankHarc.zhpHOc,
     rankInstr: RankInstr.pwd,
     druzyna: '46. Wrocławska Drużyna Harcerska „Arda”',
-    srodowisko: huf_zhp_wroclaw_wschod,
+    srodowisko: Srodowisko.custom(huf_zhp_wroclaw_wschod),
     org: Org.zhp,
     email: ['zuzanna.piwko@zhp.net.pl']
 );
@@ -4003,7 +4004,7 @@ const Person ZUZANNA_PIWKO = Person(
 const Person ZUZANNA_RELKOWSKA = Person(
     name: 'Zuzanna Rełkowska',
     druzyna: '5. DH Niebo w Kleszczowie',
-    srodowisko: huf_zhp_reduta,
+    srodowisko: Srodowisko.custom(huf_zhp_reduta),
     rankHarc: RankHarc.dhd,
     org: Org.zhp,
     email: ["zuzanna.relkowska@wp.pl"]
@@ -4012,14 +4013,14 @@ const Person ZUZANNA_RELKOWSKA = Person(
 const Person ZUZANNA_ROMANISZYN = Person(
     name: 'Zuzanna Romaniszyn',
     druzyna: '321 Teraz',
-    srodowisko: huf_zhp_krakow_nowa_huta,
+    srodowisko: Srodowisko.hufiec('krakow_nowa_huta'),
     email: ['zuziarysia19@outlook.com', 'zuziarysia19@gmail.com']
 );
 
 const Person ZUZANNA_RADKOWSKA = Person(
     name: 'Zuzanna Radkowska',
     druzyna: '21. ZDH',
-    srodowisko: huf_zhp_ziemi_zawiercianskiej,
+    srodowisko: Srodowisko.custom(huf_zhp_ziemi_zawiercianskiej),
     rankHarc: RankHarc.zhpTropicielka,
     org: Org.zhp,
     email: ['zuzanna.radkowska21.12@gmail.com']
@@ -4029,5 +4030,5 @@ const Person ZUZANNA_WARCHOL = Person(
     name: 'Zuzanna Warchoł',
     druzyna: '113. TWDH „Pustynna Burza”',
     org: Org.zhp,
-    srodowisko: huf_zhp_szczecin_pogodno
+    srodowisko: Srodowisko.custom(huf_zhp_szczecin_pogodno)
 );
