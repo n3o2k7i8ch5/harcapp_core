@@ -20,6 +20,7 @@ const hufiecWarszawaOchota = Hufiec('warszawa_ochota', 'Hufiec Warszawa-Ochota i
 const hufiecWarszawaPragaPn = Hufiec('warszawa_praga_pn', 'Hufiec Warszawa-Praga-Północ im. Wigierczyków', choragiewStoleczna);
 const hufiecWarszawaPragaPd = Hufiec('warszawa_praga_pd', 'Hufiec Warszawa-Praga-Południe im. I WDP „T. Kościuszki”', choragiewStoleczna);
 const hufiecWarszawaUrsusWlochy = Hufiec('warszawa_ursus_wlochy', 'Hufiec Warszawa-Ursus-Włochy im. hm. Mieczysława Bema', choragiewStoleczna);
+const hufiecWarszawaUrsynow = Hufiec('warszawa_ursynow', 'Hufiec ZHP Warszawa Ursynów', choragiewStoleczna);
 const hufiecWarszawaWawer = Hufiec('warszawa_wawer', 'Hufiec Warszawa-Wawer', choragiewStoleczna);
 const hufiecWarszawaWola = Hufiec('warszawa_wola', 'Hufiec Warszawa-Wola', choragiewStoleczna);
 const hufiecWarszawaZoliborz = Hufiec('warszawa_zoliborz', 'Hufiec Warszawa-Żoliborz', choragiewStoleczna);
@@ -33,6 +34,6 @@ const List<Hufiec> hufceStoleczna = [
   hufiecPiaseczno, hufiecPiastow, hufiecPruszkow, hufiecSulejowek,
   hufiecUroczyskoKonstancin, hufiecWarszawaCentrum, hufiecWarszawaMokotow,
   hufiecWarszawaOchota, hufiecWarszawaPragaPn, hufiecWarszawaPragaPd,
-  hufiecWarszawaUrsusWlochy, hufiecWarszawaWawer, hufiecWarszawaWola,
+  hufiecWarszawaUrsusWlochy, hufiecWarszawaUrsynow, hufiecWarszawaWawer, hufiecWarszawaWola,
   hufiecWarszawaZoliborz, hufiecWolomin, hufiecZabki, hufiecZielonka,
 ];

@@ -20,6 +20,7 @@ const choragiewWarminskoMazurska = Choragiew('warminsko_mazurska', 'Chorągiew W
 const choragiewWielkopolska = Choragiew('wielkopolska', 'Chorągiew Wielkopolska', Org.zhp);
 const choragiewZachodniopomorska = Choragiew('zachodniopomorska', 'Chorągiew Zachodniopomorska', Org.zhp);
 const choragiewZiemiLubuskiej = Choragiew('ziemi_lubuskiej', 'Chorągiew Ziemi Lubuskiej', Org.zhp);
+const choragiewZhpPgK = Choragiew('zhp_pgk', 'ZHP poza granicami Kraju', Org.zhp);
 
 // ===== Chorągwie ZHR =====
 // Each okreg has two chorągwie (harcerek/harcerzy) — separate gendered organizations.
@@ -69,6 +70,7 @@ const List<Choragiew> choragwie = [
   choragiewWielkopolska,
   choragiewZachodniopomorska,
   choragiewZiemiLubuskiej,
+  choragiewZhpPgK,
 
   // ZHR
   choragiewDolnoslaskaHarcerek, choragiewDolnoslaskaHarcerzy,

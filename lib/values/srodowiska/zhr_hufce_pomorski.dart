@@ -19,6 +19,7 @@ const hufiecGdynskiPasiekaHarcerzy = Hufiec('gdynski_pasieka_harcerzy', 'Gdyńsk
 const hufiecGdynski2ZbrojaHarcerzy = Hufiec('gdynski_2_zbroja_harcerzy', '2. Gdyński Hufiec Harcerzy „Zbroja” im. rtm. Witolda Pileckiego', choragiewPomorskaHarcerzy);
 const hufiecRumskiHarcerzy = Hufiec('rumski_harcerzy', 'Rumski Hufiec Harcerzy', choragiewPomorskaHarcerzy);
 const hufiecWarminskiPlomienieHarcerzy = Hufiec('warminski_plomienie_harcerzy', 'Warmiński Hufiec Harcerzy „Płomienie”', choragiewPomorskaHarcerzy);
+const hufiecGdynski3PojutrzeHarcerzy = Hufiec('gdynski_3_pojutrze_harcerzy', 'III Gdyński Hufiec Harcerski „Pojutrze”', choragiewPomorskaHarcerzy);
 
 const List<Hufiec> hufceZhrPomorski = [
   hufiecGdanskoKociewski1WiezbaHarcerek,
@@ -36,4 +37,5 @@ const List<Hufiec> hufceZhrPomorski = [
   hufiecGdynski2ZbrojaHarcerzy,
   hufiecRumskiHarcerzy,
   hufiecWarminskiPlomienieHarcerzy,
+  hufiecGdynski3PojutrzeHarcerzy,
 ];

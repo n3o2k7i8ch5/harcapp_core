@@ -14,6 +14,7 @@ const hufiecCzechowickiFortisHarcerzy = Hufiec('czechowicki_fortis_harcerzy', 'C
 const hufiecOpolskiHarcerzy = Hufiec('opolski_harcerzy', 'Opolski Hufiec Harcerzy im. Szarych Szeregów', choragiewZiemiOpolskiejHarcerzy);
 const hufiecKluczborskiPlomienHarcerzy = Hufiec('kluczborski_plomien_harcerzy', 'Kluczborski Hufiec Harcerzy „Płomień”', choragiewZiemiOpolskiejHarcerzy);
 const hufiecWolczynskiOmegaHarcerzy = Hufiec('wolczynski_omega_harcerzy', 'Wołczyński Hufiec Harcerzy „Omega”', choragiewZiemiOpolskiejHarcerzy);
+const hufiecBytomskiZdhHarcerzy = Hufiec('bytomski_zdh_harcerzy', 'Bytomski Związek Drużyn Harcerzy', choragiewGornoslaskaHarcerzy);
 
 const List<Hufiec> hufceZhrGornoslaski = [
   hufiecOpolskiTeczaHarcerek,
@@ -24,4 +25,5 @@ const List<Hufiec> hufceZhrGornoslaski = [
   hufiecOpolskiHarcerzy,
   hufiecKluczborskiPlomienHarcerzy,
   hufiecWolczynskiOmegaHarcerzy,
+  hufiecBytomskiZdhHarcerzy,
 ];

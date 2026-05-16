@@ -9,6 +9,7 @@ import 'package:harcapp_core/values/srodowiska/zhp_hufce_lodzka.dart';
 import 'package:harcapp_core/values/srodowiska/zhp_hufce_lubelska.dart';
 import 'package:harcapp_core/values/srodowiska/zhp_hufce_mazowiecka.dart';
 import 'package:harcapp_core/values/srodowiska/zhp_hufce_opolska.dart';
+import 'package:harcapp_core/values/srodowiska/zhp_hufce_pgk.dart';
 import 'package:harcapp_core/values/srodowiska/zhp_hufce_podkarpacka.dart';
 import 'package:harcapp_core/values/srodowiska/zhp_hufce_slaska.dart';
 import 'package:harcapp_core/values/srodowiska/zhp_hufce_stoleczna.dart';
@@ -48,6 +49,7 @@ const List<Hufiec> hufce = [
   ...hufceWielkopolska,
   ...hufceZachodniopomorska,
   ...hufceZiemiLubuskiej,
+  ...hufceZhpPgK,
 
   // ===== ZHR =====
   ...hufceZhrDolnoslaski,
