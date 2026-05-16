@@ -528,7 +528,7 @@ class AddButtonState extends State<AddButton>{
 
   bool get tappable => allowZeroFields?
   (controller.length==0 || controller.last.isNotEmpty):
-  (controller.isContentEmpty || controller.last.isNotEmpty);
+  controller.last.isNotEmpty;
 
   @override
   Widget build(BuildContext context){
