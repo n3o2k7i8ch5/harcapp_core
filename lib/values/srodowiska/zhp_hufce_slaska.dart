@@ -35,17 +35,19 @@ const hufiecZiemiWodzislawskiej = Hufiec('ziemi_wodzislawskiej', 'Hufiec ZHP Zie
 const hufiecZiemiZawiercianskiej = Hufiec('ziemi_zawiercianskiej', 'Hufiec ZHP Ziemi Zawierciańskiej', choragiewSlaska);
 const hufiecZory = Hufiec('zory', 'Hufiec ZHP Żory', choragiewSlaska);
 const hufiecZywiec = Hufiec('zywiec', 'Hufiec ZHP Żywiec', choragiewSlaska);
+const hufiecRybnik = Hufiec('rybnik', 'Hufiec ZHP Rybnik', choragiewSlaska);
+const hufiecZiemiZywieckiej = Hufiec('ziemi_zywieckiej', 'Hufiec Ziemi Żywieckiej im. Tadeusza Jänicha', choragiewSlaska);
 
 const List<Hufiec> hufceSlaska = [
   hufiecBeskidzki, hufiecBytom, hufiecChorzow, hufiecChrzanow,
   hufiecCzechowiceDziedzice, hufiecCzerwionkaLeszczyny, hufiecCzestochowa,
   hufiecDabrowaGornicza, hufiecJastrzebieZdroj, hufiecJaworzno, hufiecKatowice,
   hufiecKlobuck, hufiecMyslowice, hufiecPiekarySlaskie, hufiecRudaSlaska,
-  hufiecRydultowy, hufiecSiemianowiceSlaskie, hufiecSosnowiec,
+  hufiecRybnik, hufiecRydultowy, hufiecSiemianowiceSlaskie, hufiecSosnowiec,
   hufiecWegierskaGorka, hufiecZabrze, hufiecZiemiBedzinskiej,
   hufiecZiemiCieszynskiej, hufiecZiemiGliwickiej, hufiecZiemiLublinieckiej,
   hufiecZiemiMikolowskiej, hufiecZiemiMyszkowskiej, hufiecZiemiRaciborskiej,
   hufiecZiemiRybnickiej, hufiecZiemiTarnogorskiej, hufiecZiemiTyskiej,
-  hufiecZiemiWodzislawskiej, hufiecZiemiZawiercianskiej, hufiecZory,
-  hufiecZywiec,
+  hufiecZiemiWodzislawskiej, hufiecZiemiZawiercianskiej, hufiecZiemiZywieckiej,
+  hufiecZory, hufiecZywiec,
 ];

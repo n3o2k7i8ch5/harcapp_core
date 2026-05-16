@@ -24,12 +24,13 @@ const hufiecWroclawPoludnie = Hufiec('wroclaw_poludnie', 'Hufiec ZHP Wrocław Po
 const hufiecWroclawPolnoc = Hufiec('wroclaw_polnoc', 'Hufiec ZHP Wrocław Północ', choragiewDolnoslaska);
 const hufiecPowiatuTrzebnickiego = Hufiec('powiatu_trzebnickiego', 'Hufiec ZHP Powiatu Trzebnickiego', choragiewDolnoslaska);
 const hufiecZgorzelec = Hufiec('zgorzelec', 'Hufiec ZHP Zgorzelec', choragiewDolnoslaska);
+const hufiecMilicz = Hufiec('milicz', 'Hufiec ZHP Milicz', choragiewDolnoslaska);
 
 const List<Hufiec> hufceDolnoslaska = [
   hufiecBoleslawiec, hufiecBystrzycaKlodzka, hufiecZiemiDzierzoniowskiej,
   hufiecGlogow, hufiecJawor, hufiecKamiennaGora, hufiecKarkonoski,
   hufiecZiemiKlodzkiej, hufiecLegnica, hufiecLuban, hufiecLubin,
-  hufiecLagiewniki, hufiecOlesnica, hufiecOlawa, hufiecSrodaSlaska,
+  hufiecLagiewniki, hufiecMilicz, hufiecOlesnica, hufiecOlawa, hufiecSrodaSlaska,
   hufiecSwidnica, hufiecZiemiWalbrzyskiej, hufiecWroclaw, hufiecWroclawWschod,
   hufiecWroclawPoludnie, hufiecWroclawPolnoc, hufiecPowiatuTrzebnickiego,
   hufiecZgorzelec,
