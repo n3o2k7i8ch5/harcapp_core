@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 
 class AppScaffold extends StatelessWidget{
@@ -222,13 +223,11 @@ class _WebToastOverlayState extends State<_WebToastOverlay>
                     ),
                     const SizedBox(width: 12),
                     Expanded(
-                      child: SelectableText(
+                      child: AppText(
                         widget.text,
-                        style: TextStyle(
-                          color: fg,
-                          fontSize: 16,
-                          fontFamily: 'packages/harcapp_core/Lato',
-                        ),
+                        color: fg,
+                        size: 16,
+                        selectable: true,
                       ),
                     ),
                     const SizedBox(width: 8),
