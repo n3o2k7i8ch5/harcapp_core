@@ -1,6 +1,12 @@
 import 'package:harcapp_core/values/org.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
 
+// ===== Pseudo-okręgi (dummy) =====
+// ZHP nie ma okręgów organizacyjnie — chorągwie wskazują na ten pseudo-okręg,
+// żeby model był jednolity: Hufiec → Chorągiew → Okręg → Org. UI traktuje
+// dummy-okręgi (z `_` w slugu) jako brak okręgu.
+const okregZhpRoot = Okreg('_zhp', '', Org.zhp);
+
 // ===== Okręgi ZHR =====
 const okregDolnoslaski = Okreg('dolnoslaski', 'Okręg Dolnośląski', Org.zhr);
 const okregGornoslaski = Okreg('gornoslaski', 'Okręg Górnośląski', Org.zhr);
