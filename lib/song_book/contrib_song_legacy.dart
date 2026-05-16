@@ -1,10 +1,13 @@
-import 'dart:convert';
-import 'dart:io';
+// Legacy email composer for song contributions.
+// Kept as a reference for the older format that parseContribEmail still needs
+// to fall back to. New emails should be composed via contrib_song.dart.
 
+import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/values/people/person.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 
+import 'contrib_song.dart';
 import 'contributor_identity.dart';
 
 bool _isContributorNew(ContributorIdentity contribId) {
@@ -26,40 +29,39 @@ bool _isPersonsFirstSong(List<SongCore> songs){
   return isPersonsFirstSong;
 }
 
-enum SongSource{
-  application,
-  web;
+String personToObjectStringLegacy(Person person, {List<ContributorIdentity> contribIds = const []}) =>
+    _personToObjectString(person, contribIds: contribIds);
 
-  String get displayName {
-    switch(this) {
-      case SongSource.application:
-        return "Aplikacja ${Platform.isIOS?'iOS':Platform.isAndroid?'Android':''}".trim();
-      case SongSource.web:
-        return "harcapp.web.app";
-    }
-  }
+String _personToObjectString(Person person, {List<ContributorIdentity> contribIds = const []}){
+  late String newPersonCode;
 
-  static SongSource? fromDisplayName(String value){
-    String v = value.trim();
-    if(v == SongSource.web.displayName) return SongSource.web;
-    if(v.startsWith('Aplikacja')) return SongSource.application;
-    return null;
-  }
-}
+  bool hasName = person.name.isNotEmpty;
+  bool hasDruzyna = person.druzyna != null && person.druzyna!.isNotEmpty;
+  bool hasHufiec = person.hufiec != null && person.hufiec!.isNotEmpty;
+  bool hasRankInstr = person.rankInstr != null;
+  bool hasRankHarc = person.rankHarc != null;
+  bool hasOrg = person.org != null;
+  bool hasComment = person.comment != null && person.comment!.isNotEmpty;
 
-String _personToJsonBlock(Person person, {List<ContributorIdentity> contribIds = const []}){
   List<String> contribIdEmails = [];
   for(ContributorIdentity contribId in contribIds)
     if(contribId.emailRef != null) contribIdEmails.add(contribId.emailRef!);
 
-  Map jsonMap = person.toApiJsonMap();
-  if(person.email.isEmpty && contribIdEmails.isNotEmpty)
-    jsonMap['email'] = contribIdEmails;
+  newPersonCode = "Person ${remPolChars(person.name).toUpperCase().replaceAll(' ', '_')} = const Person(";
+  if(hasName) newPersonCode += "\n  name: '${person.name}',";
+  if(hasDruzyna) newPersonCode += "\n  druzyna: '${person.druzyna}',";
+  if(hasHufiec) newPersonCode += "\n  hufiec: '${person.hufiec}',";
+  if(hasRankInstr) newPersonCode += "\n  rankInstr: RankInstr.${person.rankInstr?.name},";
+  if(hasRankHarc) newPersonCode += "\n  rankHarc: RankHarc.${person.rankHarc?.name},";
+  if(hasOrg) newPersonCode += "\n  org: ${person.org},";
+  if(hasComment) newPersonCode += "\n  comment: '${person.comment}',";
+  newPersonCode += "\n  email: [${(person.email.isEmpty?contribIdEmails:person.email).map((email) => '"$email"').join(', ')}]";
+  newPersonCode += "\n);";
 
-  return const JsonEncoder.withIndent('  ').convert(jsonMap);
+  return newPersonCode;
 }
 
-String composeContribSongEmailSubject({
+String composeContribSongEmailSubjectLegacy({
   required SongCore song,
   required bool isNewSong,
 }){
@@ -67,12 +69,11 @@ String composeContribSongEmailSubject({
   return '${isNewSong?'Nowa piosenka':'Poprawka piosenki'} "${song.title}" (${isPersonsFirstSong?' + świeżak + ':' - weteran - '})';
 }
 
-String _baseMessage(
+String _baseMessageLegacy(
     SongSource source,
     String? acceptRulesVersion,
     bool isPersonsFirstSong,
     Person? person,
-    List<ContributorIdentity> contribIds,
 ) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
     "\n"
     "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
@@ -90,12 +91,10 @@ String _baseMessage(
         '\n'
         '\n### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):'
         '\n'
-        '\n```json'
-        '\n${_personToJsonBlock(person, contribIds: contribIds)}'
-        '\n```'
+        '\n${_personToObjectString(person)}'
     }";
 
-Future<String> composeContribSongEmail({
+Future<String> composeContribSongEmailLegacy({
   required SongCore song,
   required SongSource source,
   String? acceptRulesVersion,
@@ -108,33 +107,29 @@ Future<String> composeContribSongEmail({
 
   String encodedSong = await song.code;
 
-  return "${_baseMessage(source, acceptRulesVersion, isPersonsFirstSong, person, song.contribId)}"
+  return "${_baseMessageLegacy(source, acceptRulesVersion, isPersonsFirstSong, person)}"
       "${
           updateComment != null?
           '\n'
           '\n### Propozycja poprawki:'
           '\n'
-          '\n```text'
-          '\n$updateComment'
-          '\n```':
+          '\n$updateComment':
           ''
       }"
       "\n"
       "\n### Kod piosenki:"
       "\n"
-      "\n```json"
-      "\n$encodedSong"
-      "\n```";
+      "\n$encodedSong";
 }
 
-String composeContribAttachedSongsEmailSubject({
+String composeContribAttachedSongsEmailSubjectLegacy({
   required List<SongCore> songs,
 }){
   bool isPersonsFirstSong = _isPersonsFirstSong(songs);
   return 'Piosenki ${songs.length} (${isPersonsFirstSong?' + świeżak + ':' - weteran - '})';
 }
 
-String composeContribAttachedSongsEmail({
+String composeContribAttachedSongsEmailLegacy({
   required List<SongCore> songs,
   required SongSource source,
   String? acceptRulesVersion,
@@ -143,10 +138,6 @@ String composeContribAttachedSongsEmail({
 
   bool isPersonsFirstSong = _isPersonsFirstSong(songs);
 
-  List<ContributorIdentity> allContribIds = [
-    for(SongCore song in songs) ...song.contribId
-  ];
-
-  return _baseMessage(source, acceptRulesVersion, isPersonsFirstSong, person, allContribIds);
+  return _baseMessageLegacy(source, acceptRulesVersion, isPersonsFirstSong, person);
 
 }
