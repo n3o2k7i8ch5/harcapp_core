@@ -13,6 +13,7 @@ class ParsedContribEmail{
   final String? senderEmail;
   final String? acceptedRulesVersion;
   final Person? person;
+  final String? userMessage;
   final bool isNewFormat;
 
   ParsedContribEmail({
@@ -20,6 +21,7 @@ class ParsedContribEmail{
     required this.senderEmail,
     required this.acceptedRulesVersion,
     required this.person,
+    required this.userMessage,
     required this.isNewFormat,
   });
 
@@ -87,6 +89,7 @@ ParsedContribEmail _parseV2(String content){
     senderEmail: senderEmail,
     acceptedRulesVersion: acceptedRulesVersion,
     person: person,
+    userMessage: _extractUserMessage(content),
     isNewFormat: true,
   );
 }
@@ -154,6 +157,7 @@ ParsedContribEmail _parseLegacy(String content){
     senderEmail: senderEmail,
     acceptedRulesVersion: acceptedRulesVersion,
     person: person,
+    userMessage: _extractUserMessage(content),
     isNewFormat: false,
   );
 }
@@ -170,7 +174,7 @@ Person? _parseLegacyPersonBlock(String block){
   if(name == null || name.trim().isEmpty) return null;
 
   String? druzyna = _captureLegacyString(body, 'druzyna');
-  String? hufiec = _captureLegacyString(body, 'hufiec');
+  String? srodowisko = _captureLegacyString(body, 'hufiec');
   String? comment = _captureLegacyString(body, 'comment');
 
   String? rankHarcRaw = _captureLegacyEnumValue(body, 'rankHarc');
@@ -194,7 +198,7 @@ Person? _parseLegacyPersonBlock(String block){
   return Person(
     name: name,
     druzyna: druzyna,
-    hufiec: hufiec,
+    srodowisko: srodowisko,
     rankHarc: rankHarc,
     rankInstr: rankInstr,
     org: org,
@@ -240,6 +244,23 @@ final RegExp _acceptRulesRe = RegExp(
   r'akceptuj[ęe]\s+zasady\s+dodawania\s+piosenek\s+do\s+aplikacji\s+HarcApp\s*\(\s*([^,\)]+?)\s*[,\)]',
   caseSensitive: false,
 );
+
+final RegExp _userMessageRe = RegExp(
+  r'-\s*-\s*-\s*-\s*-\s*-\s*Miejsce na własną wiadomość\s*-\s*-\s*-\s*-\s*-\s*-([\s\S]*?)-\s*-\s*-\s*-\s*-\s*-\s*Zasady dodawania piosenek\s*-\s*-\s*-\s*-\s*-\s*-',
+);
+
+const String _userMessagePlaceholder =
+    '[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]';
+
+String? _extractUserMessage(String content){
+  Match? m = _userMessageRe.firstMatch(content);
+  if(m == null) return null;
+  String raw = m.group(1) ?? '';
+  raw = raw.replaceAll(_userMessagePlaceholder, '');
+  String trimmed = raw.trim();
+  if(trimmed.isEmpty) return null;
+  return trimmed;
+}
 
 String? _extractAcceptedRulesVersion(String content){
   Match? m = _acceptRulesRe.firstMatch(content);

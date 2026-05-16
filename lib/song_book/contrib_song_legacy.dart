@@ -37,7 +37,7 @@ String _personToObjectString(Person person, {List<ContributorIdentity> contribId
 
   bool hasName = person.name.isNotEmpty;
   bool hasDruzyna = person.druzyna != null && person.druzyna!.isNotEmpty;
-  bool hasHufiec = person.hufiec != null && person.hufiec!.isNotEmpty;
+  bool hasSrodowisko = person.srodowisko != null && person.srodowisko!.isNotEmpty;
   bool hasRankInstr = person.rankInstr != null;
   bool hasRankHarc = person.rankHarc != null;
   bool hasOrg = person.org != null;
@@ -50,7 +50,7 @@ String _personToObjectString(Person person, {List<ContributorIdentity> contribId
   newPersonCode = "Person ${remPolChars(person.name).toUpperCase().replaceAll(' ', '_')} = const Person(";
   if(hasName) newPersonCode += "\n  name: '${person.name}',";
   if(hasDruzyna) newPersonCode += "\n  druzyna: '${person.druzyna}',";
-  if(hasHufiec) newPersonCode += "\n  hufiec: '${person.hufiec}',";
+  if(hasSrodowisko) newPersonCode += "\n  hufiec: '${person.srodowisko}',";
   if(hasRankInstr) newPersonCode += "\n  rankInstr: RankInstr.${person.rankInstr?.name},";
   if(hasRankHarc) newPersonCode += "\n  rankHarc: RankHarc.${person.rankHarc?.name},";
   if(hasOrg) newPersonCode += "\n  org: ${person.org},";

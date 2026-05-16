@@ -14,7 +14,7 @@ class PersonCardSimple extends StatelessWidget{
   RankHarc? get rankHarc => person.rankHarc;
   RankInstr? get rankInstr => person.rankInstr;
   String? get druzyna => person.druzyna;
-  String? get hufiec => person.hufiec;
+  String? get srodowisko => person.srodowisko;
   Org? get org => person.org;
   String? get comment => person.comment;
 
@@ -54,7 +54,7 @@ class PersonCard extends StatelessWidget{
   RankHarc? get rankHarc => person.rankHarc;
   RankInstr? get rankInstr => person.rankInstr;
   String? get druzyna => person.druzyna;
-  String? get hufiec => person.hufiec;
+  String? get srodowisko => person.srodowisko;
   Org? get org => person.org;
   String? get comment => person.comment;
 
@@ -100,10 +100,10 @@ class PersonCard extends StatelessWidget{
           ),
         ),
 
-        if(hufiec != null)
+        if(srodowisko != null)
           Padding(
             padding: const EdgeInsets.only(top: 6),
-            child: Text(hufiec!, style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
+            child: Text(srodowisko!, style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
           ),
 
         if(druzyna != null)

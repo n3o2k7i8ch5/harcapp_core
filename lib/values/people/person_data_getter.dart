@@ -48,7 +48,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
 
   late TextEditingController nameController;
   late TextEditingController druzynaController;
-  late TextEditingController hufiecController;
+  late TextEditingController srodowiskoController;
   RankInstr? rankInstr;
   RankHarc? rankHarc;
   Org? org;
@@ -56,7 +56,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
   Person get currentPerson => Person(
       name: nameController.text.trim(),
       druzyna: druzynaController.text.trim(),
-      hufiec: hufiecController.text.trim(),
+      srodowisko: srodowiskoController.text.trim(),
       rankInstr: rankInstr,
       rankHarc: rankHarc,
       org: org
@@ -66,7 +66,7 @@ class PersonDataDialogState extends State<PersonDataDialog>{
   void initState() {
     nameController = TextEditingController(text: initialPerson?.name);
     druzynaController = TextEditingController(text: initialPerson?.druzyna);
-    hufiecController = TextEditingController(text: initialPerson?.hufiec);
+    srodowiskoController = TextEditingController(text: initialPerson?.srodowisko);
     rankInstr = initialPerson?.rankInstr;
     rankHarc = initialPerson?.rankHarc;
     org = initialPerson?.org;
@@ -131,10 +131,10 @@ class PersonDataDialogState extends State<PersonDataDialog>{
 
                           _Container(
                               child: AppTextFieldHint(
-                                hint: 'Hufiec:',
-                                hintTop: 'Hufiec',
+                                hint: 'Środowisko:',
+                                hintTop: 'Środowisko',
                                 style: AppTextStyle(fontSize: Dimen.textSizeBig),
-                                controller: hufiecController,
+                                controller: srodowiskoController,
                                 contentPadding: const EdgeInsets.only(left: 16),
                                 onChanged: (_, __) => widget.onChanged?.call(currentPerson),
                               )

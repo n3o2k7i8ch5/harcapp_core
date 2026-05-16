@@ -9,7 +9,7 @@ class Person{
   final RankHarc? rankHarc;
   final RankInstr? rankInstr;
   final String? druzyna;
-  final String? hufiec;
+  final String? srodowisko;
   final Org? org;
   final String? comment;
   final List<String> email;
@@ -19,7 +19,7 @@ class Person{
     this.rankHarc,
     this.rankInstr,
     this.druzyna,
-    this.hufiec,
+    this.srodowisko,
     this.org,
     this.comment,
     this.email = const []
@@ -30,7 +30,7 @@ class Person{
       rankHarc == null &&
       rankInstr == null &&
       (druzyna == null || druzyna!.trim().isEmpty) &&
-      (hufiec == null || hufiec!.trim().isEmpty) &&
+      (srodowisko == null || srodowisko!.trim().isEmpty) &&
       org == null &&
       (comment == null || comment!.trim().isEmpty) &&
       email.where((e) => e.trim().isNotEmpty).isEmpty;
@@ -43,7 +43,7 @@ class Person{
         'rankHarc': rankHarc?.apiParam,
         'rankInstr': rankInstr?.apiParam,
         'druzyna': druzyna,
-        'hufiec': hufiec,
+        'srodowisko': srodowisko,
         'org': org?.asParam,
         'comment': comment,
         'email': email.isEmpty ? null : email
@@ -54,7 +54,7 @@ class Person{
     rankHarc: json['rankHarc'] == null ? null : RankHarc.fromApiParam(json['rankHarc'] as String),
     rankInstr: json['rankInstr'] == null? null : RankInstr.fromApiParam(json['rankInstr'] as String),
     druzyna: json['druzyna'] as String?,
-    hufiec: json['hufiec'] as String?,
+    srodowisko: json['srodowisko'] as String?,
     org: json['org'] == null ? null : Org.fromParam(json['org'] as String),
     comment: json['comment'] as String?,
     email: (json['email'] as List?)?.cast<String>() ?? [],

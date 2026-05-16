@@ -171,7 +171,7 @@ const String huf_zhr_harcerzy_krakow_stare_miasto = 'Hufiec Harcerzy Kraków Sta
 const String huf_zhr_lodz = 'Hufiec „Szaniec” - Okręg Łódzki ZHR';
 const String huf_zhr_lodz_polesie = 'Łódzki Hufiec Harcerzy „Polesie”';
 const String huf_zhr_lubelski_hufiec_harcerek_harmonia = 'Lubelski Hufiec Harcerek Harmonia';
-const String huf_zhr_mazowiecki_hufiec_harcerzy_pogranicze = 'Mazowiecki Hufiec Harcerzy "Pogranicze"';
+const String huf_zhr_mazowiecki_hufiec_harcerzy_pogranicze = 'Mazowiecki Hufiec Harcerzy „Pogranicze”';
 const String huf_zhr_urynowski_hufiec_rawicz = 'Ursynowski Hufiec Harcerzy „Rawicz”';
 const String huf_zhr_zielonagora_topor = 'Zielonogórski Hufiec Harcerzy „Topór”';
 
