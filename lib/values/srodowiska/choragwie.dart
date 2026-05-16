@@ -27,6 +27,7 @@ const choragiewDolnoslaskaHarcerek = Choragiew('dolnoslaska_harcerek', 'Chorągi
 const choragiewDolnoslaskaHarcerzy = Choragiew('dolnoslaska_harcerzy', 'Chorągiew Harcerzy Okręgu Dolnośląskiego', Org.zhr, okreg: okregDolnoslaski);
 const choragiewGornoslaskaHarcerek = Choragiew('gornoslaska_harcerek', 'Chorągiew Harcerek Okręgu Górnośląskiego', Org.zhr, okreg: okregGornoslaski);
 const choragiewGornoslaskaHarcerzy = Choragiew('gornoslaska_harcerzy', 'Chorągiew Harcerzy Okręgu Górnośląskiego', Org.zhr, okreg: okregGornoslaski);
+const choragiewZiemiOpolskiejHarcerzy = Choragiew('ziemi_opolskiej_harcerzy', 'Chorągiew Harcerzy Ziemi Opolskiej', Org.zhr, okreg: okregGornoslaski);
 const choragiewKujawskoPomorskaHarcerek = Choragiew('kujawsko_pomorska_harcerek', 'Chorągiew Harcerek Okręgu Kujawsko-Pomorskiego', Org.zhr, okreg: okregKujawskoPomorski);
 const choragiewKujawskoPomorskaHarcerzy = Choragiew('kujawsko_pomorska_harcerzy', 'Chorągiew Harcerzy Okręgu Kujawsko-Pomorskiego', Org.zhr, okreg: okregKujawskoPomorski);
 const choragiewLubelskaHarcerek = Choragiew('lubelska_harcerek', 'Chorągiew Harcerek Okręgu Lubelskiego', Org.zhr, okreg: okregLubelski);
@@ -37,6 +38,7 @@ const choragiewMalopolskaHarcerek = Choragiew('malopolska_harcerek', 'Chorągiew
 const choragiewMalopolskaHarcerzy = Choragiew('malopolska_harcerzy', 'Chorągiew Harcerzy Okręgu Małopolskiego', Org.zhr, okreg: okregMalopolski);
 const choragiewMazowieckaHarcerek = Choragiew('mazowiecka_harcerek', 'Chorągiew Harcerek Okręgu Mazowieckiego', Org.zhr, okreg: okregMazowiecki);
 const choragiewMazowieckaHarcerzy = Choragiew('mazowiecka_harcerzy', 'Chorągiew Harcerzy Okręgu Mazowieckiego', Org.zhr, okreg: okregMazowiecki);
+const choragiewPolnocnoWschodniaHarcerzy = Choragiew('polnocno_wschodnia_harcerzy', 'Północno-Wschodnia Chorągiew Harcerzy', Org.zhr, okreg: okregMazowiecki);
 const choragiewPodkarpackaHarcerek = Choragiew('podkarpacka_harcerek', 'Chorągiew Harcerek Okręgu Podkarpackiego', Org.zhr, okreg: okregPodkarpacki);
 const choragiewPodkarpackaHarcerzy = Choragiew('podkarpacka_harcerzy', 'Chorągiew Harcerzy Okręgu Podkarpackiego', Org.zhr, okreg: okregPodkarpacki);
 const choragiewPomorskaHarcerek = Choragiew('pomorska_harcerek', 'Chorągiew Harcerek Okręgu Pomorskiego', Org.zhr, okreg: okregPomorski);
@@ -70,12 +72,12 @@ const List<Choragiew> choragwie = [
 
   // ZHR
   choragiewDolnoslaskaHarcerek, choragiewDolnoslaskaHarcerzy,
-  choragiewGornoslaskaHarcerek, choragiewGornoslaskaHarcerzy,
+  choragiewGornoslaskaHarcerek, choragiewGornoslaskaHarcerzy, choragiewZiemiOpolskiejHarcerzy,
   choragiewKujawskoPomorskaHarcerek, choragiewKujawskoPomorskaHarcerzy,
   choragiewLubelskaHarcerek, choragiewLubelskaHarcerzy,
   choragiewLodzkaHarcerek, choragiewLodzkaHarcerzy,
   choragiewMalopolskaHarcerek, choragiewMalopolskaHarcerzy,
-  choragiewMazowieckaHarcerek, choragiewMazowieckaHarcerzy,
+  choragiewMazowieckaHarcerek, choragiewMazowieckaHarcerzy, choragiewPolnocnoWschodniaHarcerzy,
   choragiewPodkarpackaHarcerek, choragiewPodkarpackaHarcerzy,
   choragiewPomorskaHarcerek, choragiewPomorskaHarcerzy,
   choragiewPolnocnoZachodniaHarcerek, choragiewPolnocnoZachodniaHarcerzy,
