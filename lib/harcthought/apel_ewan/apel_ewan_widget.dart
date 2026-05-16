@@ -5,10 +5,8 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text.dart';
 import 'package:harcapp_core/comm_widgets/person_card.dart';
 import 'package:harcapp_core/comm_widgets/tab_bar.dart';
-import 'package:harcapp_core/song_book/contributor_identity.dart';
 import 'package:harcapp_core/values/dimen.dart';
-import 'package:harcapp_core/values/people/person.dart';
-import 'package:harcapp_core/values/people/utils.dart';
+import 'package:harcapp_core/values/people/models.dart';
 
 import 'apel_ewan.dart';
 import 'apel_ewan_loader.dart';
@@ -24,18 +22,6 @@ const TextStyle _sectionTitleStyle = AppTextStyle(
   fontSize: Dimen.textSizeBig,
   fontWeight: weightHalfBold,
 );
-
-String _addedByLabel(ContributorIdentity identity) {
-  if (identity.name != null && identity.name!.trim().isNotEmpty) return identity.name!.trim();
-  if (identity.emailRef != null && identity.emailRef!.trim().isNotEmpty) return identity.emailRef!.trim();
-  return identity.userKeyRef!.trim();
-}
-
-Person? _personFor(ContributorIdentity identity) {
-  final email = identity.emailRef?.trim();
-  if (email == null || email.isEmpty) return null;
-  return allPeopleByEmailMap[email];
-}
 
 class ApelEwanWidget extends StatefulWidget{
 
@@ -132,7 +118,6 @@ class ApelEwanWidgetState extends State<ApelEwanWidget> with SingleTickerProvide
             const SizedBox(height: Dimen.sideMarg),
           ],
           _buildAddedByCard(),
-          const SizedBox(height: Dimen.sideMarg),
         ],
       ),
     );
@@ -293,7 +278,9 @@ class ApelEwanWidgetState extends State<ApelEwanWidget> with SingleTickerProvide
   );
 
   Widget _buildAddedByCard() {
-    final person = _personFor(apelEwan.addedBy);
+    final Person? person = apelEwan.addedBy.resolve();
+    if(person == null) return Container();
+
     return _card(
       child: Padding(
         padding: const EdgeInsets.all(Dimen.sideMarg),
@@ -311,15 +298,7 @@ class ApelEwanWidgetState extends State<ApelEwanWidget> with SingleTickerProvide
 
             const SizedBox(height: Dimen.defMarg),
 
-            person != null
-                ? PersonCard(person, selectable: true)
-                : Text(
-                    _addedByLabel(apelEwan.addedBy),
-                    style: const AppTextStyle(
-                      fontSize: Dimen.textSizeBig,
-                      fontWeight: weightHalfBold,
-                    ),
-                  ),
+            PersonCard(person, selectable: true)
 
           ],
         ),

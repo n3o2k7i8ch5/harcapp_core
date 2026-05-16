@@ -5,7 +5,7 @@ import 'package:harcapp_core/values/people/data.dart';
 import '../../konspekt.dart';
 import '_consts.dart';
 
-Konspekt zimowiskowe_apele_przed_osrodkiem = const Konspekt(
+Konspekt zimowiskowe_apele_przed_osrodkiem = Konspekt(
     name: 'zimowiskowe_apele_przed_osrodkiem',
     title: 'Zimowiskowe apele przed ośrodkiem',
     category: KonspektCategory.harcerskie,
@@ -19,7 +19,7 @@ Konspekt zimowiskowe_apele_przed_osrodkiem = const Konspekt(
     },
     metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: [
       aimSilaCharakteruZimno
     ],

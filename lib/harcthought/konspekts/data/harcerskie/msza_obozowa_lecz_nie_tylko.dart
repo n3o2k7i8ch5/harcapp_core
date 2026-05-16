@@ -59,7 +59,7 @@ Konspekt msza_obozowa_lecz_nie_tylko = Konspekt(
   },
   metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
   coverAuthor: 'Daniel Iwanicki',
-  author: DANIEL_IWANICKI,
+  author: DANIEL_IWANICKI.toContributorIdentity(),
   customDuration: Duration(hours: 5),
   aims: [
     'Przygotowanie uczestników do uczestnictwa we Mszy Świętej.',

@@ -1,4 +1,4 @@
-import 'package:harcapp_core/song_book/contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_identity.dart';
 
 class ApelEwanVariant{
 

@@ -4,7 +4,7 @@ import 'package:harcapp_core/values/people/data.dart';
 
 import '../../konspekt.dart';
 
-const Konspekt warta_nocna = Konspekt(
+Konspekt warta_nocna = Konspekt(
     name: 'warta_nocna',
     title: 'Warta nocna',
     category: KonspektCategory.harcerskie,
@@ -26,7 +26,7 @@ const Konspekt warta_nocna = Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: [
       'Kształtowanie u uczestników siły charakteru poprzez wstawanie w nocy na wartę, walkę z sennością, wartowaniem w chłodnej temperaturze',
       'Kształtowanie uważności uczestników poprzez spędzenie czasu w ciszy, w izolacji od bodźców dnia codziennego'

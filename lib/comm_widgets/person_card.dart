@@ -4,7 +4,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/color_pack_app.dart';
 import 'package:harcapp_core/values/org.dart';
-import 'package:harcapp_core/values/people/person.dart';
+import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
@@ -68,10 +68,15 @@ class PersonCard extends StatelessWidget{
   const PersonCard(this.person, {this.textSize = Dimen.textSizeBig, this.textColor, this.selectable = false, super.key});
 
   @override
-  Widget build(BuildContext context) => SelectionArea(
-    child: Column(
+  Widget build(BuildContext context) {
+    final body = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+      children: _children(context),
+    );
+    return selectable ? SelectionArea(child: body) : body;
+  }
+
+  List<Widget> _children(BuildContext context) => [
 
         SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -102,19 +107,19 @@ class PersonCard extends StatelessWidget{
         ),
 
         if(srodowisko != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 6),
-            child: Text(srodowisko!.displayName ?? '', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
-          ),
-
-        if(srodowisko?.hufiec != null && srodowisko?.choragiew != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 2),
-            child: Text(
-              srodowisko!.choragiew!.name,
-              style: AppTextStyle(fontSize: textSize - 2, color: hintEnab_(context)),
-            ),
-          ),
+          ...srodowisko!.displayLines.asMap().entries.map((entry){
+            final isPrimary = entry.key == 0;
+            return Padding(
+              padding: EdgeInsets.only(top: isPrimary ? 6 : 2),
+              child: Text(
+                entry.value,
+                style: AppTextStyle(
+                  fontSize: isPrimary ? textSize : textSize - 2,
+                  color: isPrimary ? (textColor ?? textEnab_(context)) : hintEnab_(context),
+                ),
+              ),
+            );
+          }),
 
         if(druzyna != null)
           Padding(
@@ -122,7 +127,5 @@ class PersonCard extends StatelessWidget{
             child: Text(druzyna!, style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
           ),
 
-      ],
-    ),
-  );
+      ];
 }

@@ -15,6 +15,7 @@ import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt_tile_widget.dart';
 import 'package:harcapp_core/harcthought/konspekts/widgets/step_group_widget.dart';
+import 'package:harcapp_core/values/people/models.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../comm_widgets/app_card.dart';
@@ -138,6 +139,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
     builder: (BuildContext context, BoxConstraints constraints) {
 
       layoutWidth = constraints.maxWidth;
+      Person? author = konspekt.author?.resolve();
 
       return CustomScrollView(
         controller: controller,
@@ -680,11 +682,11 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             padding: const EdgeInsets.all(Dimen.sideMarg),
             sliver: SliverList(delegate: SliverChildListDelegate([
 
-              if(konspekt.author != null)
+              if(author != null)
                 const TitleShortcutRowWidget(title: 'Autor', textAlign: TextAlign.left),
 
-              if(konspekt.author != null)
-                PersonCard(konspekt.author!, selectable: true)
+              if(author != null)
+                PersonCard(author, selectable: true)
 
             ])),
           ),

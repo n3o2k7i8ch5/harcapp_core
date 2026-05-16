@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:harcapp_core/song_book/contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_identity.dart';
 import 'package:harcapp_core/values/common_color_data.dart';
 import 'package:yaml/yaml.dart';
 
@@ -158,14 +158,13 @@ ApelEwanVariant _parseApelEwanVariant(YamlMap v) {
 }
 
 ContributorIdentity _parseAddedBy(String id, YamlMap addedByYaml) {
-  final identity = ContributorIdentity(
-    name: addedByYaml['name'] as String?,
-    emailRef: addedByYaml['email'] as String?,
-    userKeyRef: addedByYaml['userKey'] as String?,
-  );
-  assert(identity.isNotEmpty,
-      'ApelEwan $id: `addedBy` must specify at least one of `name`, `email`, `userKey`');
-  return identity;
+  try {
+    return ContributorIdentity.fromApiRespMapStrict(
+      Map<String, dynamic>.from(addedByYaml),
+    );
+  } on StateError catch (e) {
+    throw StateError('ApelEwan $id: ${e.message}');
+  }
 }
 
 ApelEwan _parseApelEwan(String id, String yamlSource) {

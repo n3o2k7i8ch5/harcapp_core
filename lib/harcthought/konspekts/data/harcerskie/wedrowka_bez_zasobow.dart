@@ -6,7 +6,7 @@ import 'package:harcapp_core/values/people/data.dart';
 import '../../konspekt.dart';
 import '_consts.dart';
 
-Konspekt wedrowka_bez_zasobow = const Konspekt(
+Konspekt wedrowka_bez_zasobow = Konspekt(
     name: 'wedrowka_bez_zasobow',
     title: 'Wędrówka bez zasobów',
     additionalSearchPhrases: ['wedrowki'],
@@ -43,7 +43,7 @@ Konspekt wedrowka_bez_zasobow = const Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (DenisW)',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: [
       aimSilaCharakteruWedrowanie,
       aimUmiejetnoscWedrowania,

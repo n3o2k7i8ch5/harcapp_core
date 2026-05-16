@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 
-import 'contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_identity.dart';
 
 SongRate? songRateFromInt(int value){
   switch(value){

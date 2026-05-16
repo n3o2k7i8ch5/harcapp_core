@@ -30,5 +30,4 @@ variants:
     - *q2
     - *q3
 addedBy:
-  name: Kacper Bączkowski
-  email: kacper.baczkowski@zhp.pl
+  email_ref: kacper.baczkowski@zhp.pl

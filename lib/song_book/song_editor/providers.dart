@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:provider/provider.dart';
 
-import '../contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_identity.dart';
 import 'song_raw.dart';
 
 
@@ -21,14 +21,7 @@ class CurrentItemProvider extends ChangeNotifier{
 
   late TextEditingController ytLinkController;
 
-  late List<(TextEditingController, TextEditingController, TextEditingController)> contribIdData;
-
-  void _updateControllers({
-    required SongRaw song,
-    String? contribIdName,
-    String? contribIdEmail,
-    String? contribIdUserKey
-  }){
+  void _updateControllers(SongRaw song){
     titleController.text = song.title;
     hiddenTitlesController.texts = song.hidTitles;
     authorsController.texts = song.authors;
@@ -36,47 +29,15 @@ class CurrentItemProvider extends ChangeNotifier{
     performersController.texts = song.performers;
 
     ytLinkController.text = song.youtubeUrl??'';
-
-    if(song.contribId.isNotEmpty)
-      contribIdData = song.contribId.map((contribId) => (
-      TextEditingController(text: contribId.name),
-      TextEditingController(text: contribId.emailRef),
-      TextEditingController(text: contribId.userKeyRef)
-      )).toList();
-    else if (contribIdName != null || contribIdEmail != null || contribIdUserKey != null){
-      song.contribId.add(ContributorIdentity(name: contribIdName, emailRef: contribIdEmail, userKeyRef: contribIdUserKey));
-      contribIdData = [(
-      TextEditingController(text: contribIdName??''),
-      TextEditingController(text: contribIdEmail??''),
-      TextEditingController(text: contribIdUserKey??'')
-      )];
-    } else
-      contribIdData = [];
-
   }
 
-  void set({
-    required SongRaw song,
-    String? contribIdName,
-    String? contribIdEmail,
-    String? contribIdUserKey,
-    bool notify = true
-  }) {
+  void set({required SongRaw song, bool notify = true}) {
     _song = song;
-    _updateControllers(
-        song: song,
-        contribIdName: contribIdName,
-        contribIdEmail: contribIdEmail,
-        contribIdUserKey: contribIdUserKey
-    );
+    _updateControllers(song);
     if(notify) notifyListeners();
   }
-  CurrentItemProvider({
-    required SongRaw song,
-    String? initContribIdName,
-    String? initContribIdEmail,
-    String? initContribIdUserKey
-  }){
+
+  CurrentItemProvider({required SongRaw song}){
     titleController = TextEditingController();
     hiddenTitlesController = MultiTextFieldController(minCount: 0);
     authorsController = MultiTextFieldController();
@@ -86,13 +47,7 @@ class CurrentItemProvider extends ChangeNotifier{
     ytLinkController = TextEditingController();
 
     _song = song;
-    _updateControllers(
-      song: _song,
-      contribIdName: initContribIdName,
-      contribIdEmail: initContribIdEmail,
-      contribIdUserKey: initContribIdUserKey
-    );
-
+    _updateControllers(_song);
   }
 
   SongRaw get song => _song;
@@ -100,7 +55,7 @@ class CurrentItemProvider extends ChangeNotifier{
 
   void setSong(SongRaw song, {bool notify = true}){
     _song = song;
-    _updateControllers(song: _song);
+    _updateControllers(_song);
     if(notify) notifyListeners();
   }
 
@@ -183,8 +138,25 @@ class CurrentItemProvider extends ChangeNotifier{
   }
 
   List<ContributorIdentity> get contribId => _song.contribId;
-  setContribId(List<ContributorIdentity> value, {bool notify = true}){
+
+  void setContribId(List<ContributorIdentity> value, {bool notify = true}){
     _song.contribId = value;
+    if(notify) notifyListeners();
+  }
+
+  void setContribIdAt(int index, ContributorIdentity value, {bool notify = true}){
+    _song.contribId[index] = value;
+    if(notify) notifyListeners();
+  }
+
+  void insertContribId(ContributorIdentity value, {int? index, bool notify = true}){
+    if(index == null) _song.contribId.add(value);
+    else _song.contribId.insert(index, value);
+    if(notify) notifyListeners();
+  }
+
+  void removeContribIdAt(int index, {bool notify = true}){
+    _song.contribId.removeAt(index);
     if(notify) notifyListeners();
   }
 

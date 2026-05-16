@@ -8,9 +8,9 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 import 'package:harcapp_core/values/people/data.dart';
-import 'package:harcapp_core/values/people/person.dart';
+import 'package:harcapp_core/values/people/models.dart';
 
-const List<Person> allPeople = [
+const List<RegisteredContributorPerson> allRegisteredPeople = [
   ABRAHAM_PRAGER,
   ADAM_DAWID,
   ADAM_DUDAK,
@@ -122,6 +122,7 @@ const List<Person> allPeople = [
   GABRIELA_OZOG,
   GABRIELA_SAWICKA,
   GABRIELA_SOBCZAK,
+  GABRIELA_TWORKOWSKA,
   GRZEGORZ_BOROWIEC,
   GRZEGORZ_FRANK,
   GRZEGORZ_FRANKOW,
@@ -129,6 +130,7 @@ const List<Person> allPeople = [
   GRZEGORZ_PAWLAK,
   GRZEGORZ_ZAWADZKI,
   GUSTAW_BAJCAR,
+  HANNA_BAJER,
   HANNA_CISAKOWSKA,
   HANNA_CZAJKOWSKA,
   HANNA_ERMAN,
@@ -373,6 +375,7 @@ const List<Person> allPeople = [
   MARIA_PIKOSZ,
   MARIA_PRZYBYLSKA,
   MARIA_SKOWRONEK,
+  MARIA_STACHARSKA,
   MARTA_GOLEBIOWSKA,
   MARTA_SZYMANDERSKA,
   MARTYNA_BULAKOWSKA,

@@ -4,7 +4,7 @@ import 'package:harcapp_core/values/people/data.dart';
 
 import '../../konspekt.dart';
 
-Konspekt zakwaterowanie_pod_namiotem = const Konspekt(
+Konspekt zakwaterowanie_pod_namiotem = Konspekt(
     name: 'zakwaterowanie_pod_namiotem',
     title: 'Zakwaterowanie pod namiotem',
     category: KonspektCategory.harcerskie,
@@ -34,7 +34,7 @@ Konspekt zakwaterowanie_pod_namiotem = const Konspekt(
     },
     metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: [
       'Kształtowanie u uczestników siły charakteru poprzez funkcjonowanie w warunkach obniżonego komfortu',
       'Budowanie u uczestników wspólnoty poprzez codzienne funkcjonowanie na ograniczonej przestrzeni'

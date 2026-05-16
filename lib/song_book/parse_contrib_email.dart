@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
-import 'package:harcapp_core/values/org.dart';
-import 'package:harcapp_core/values/people/person.dart';
+import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
@@ -13,7 +12,7 @@ class ParsedContribEmail{
   final SongRaw song;
   final String? senderEmail;
   final String? acceptedRulesVersion;
-  final Person? person;
+  final RegisteredContributorPerson? registered;
   final String? userMessage;
   final bool isNewFormat;
 
@@ -21,7 +20,7 @@ class ParsedContribEmail{
     required this.song,
     required this.senderEmail,
     required this.acceptedRulesVersion,
-    required this.person,
+    required this.registered,
     required this.userMessage,
     required this.isNewFormat,
   });
@@ -74,14 +73,17 @@ ParsedContribEmail _parseV2(String content){
   String? acceptedRulesVersion = _extractAcceptedRulesVersion(content);
   String? senderEmail = _extractSenderEmail(content);
 
-  Person? person;
+  RegisteredContributorPerson? registered;
   String? personJson = _tryExtractFencedBlockAfter(content, '### Osoba dodająca');
   if(personJson != null){
     try {
       Map<String, dynamic> personMap = jsonDecode(personJson) as Map<String, dynamic>;
-      person = Person.fromApiJsonMap(personMap);
+      final emailsRaw = personMap.remove('email');
+      final emails = emailsRaw is List ? emailsRaw.cast<String>() : const <String>[];
+      final person = Person.fromApiJsonMap(personMap);
+      registered = RegisteredContributorPerson(person: person, emails: emails);
     } catch(_){
-      // Person block malformed — keep person null but still let parsing succeed.
+      // Person block malformed — keep null but still let parsing succeed.
     }
   }
 
@@ -89,7 +91,7 @@ ParsedContribEmail _parseV2(String content){
     song: song,
     senderEmail: senderEmail,
     acceptedRulesVersion: acceptedRulesVersion,
-    person: person,
+    registered: registered,
     userMessage: _extractUserMessage(content),
     isNewFormat: true,
   );
@@ -146,41 +148,109 @@ ParsedContribEmail _parseLegacy(String content){
   String? acceptedRulesVersion = _extractAcceptedRulesVersion(content);
   String? senderEmail = _extractSenderEmail(content);
 
-  Person? person;
+  RegisteredContributorPerson? registered;
   int personHeaderIdx = content.indexOf('### Osoba dodająca');
   if(personHeaderIdx != -1 && personHeaderIdx < codeHeaderIdx){
     String personBlock = content.substring(personHeaderIdx, codeHeaderIdx);
-    person = _parseLegacyPersonBlock(personBlock);
+    // Try newer-legacy (RegisteredContributorPerson) first, fall back to V1
+    // (bare Person), so nested `Person(...)` inside doesn't get mis-matched.
+    registered = _parseLegacyRegisteredBlock(personBlock)
+              ?? _parseLegacyPersonBlock(personBlock);
   }
 
   return ParsedContribEmail(
     song: song,
     senderEmail: senderEmail,
     acceptedRulesVersion: acceptedRulesVersion,
-    person: person,
+    registered: registered,
     userMessage: _extractUserMessage(content),
     isNewFormat: false,
   );
 }
 
-Person? _parseLegacyPersonBlock(String block){
-  int parenIdx = block.indexOf('Person(');
-  if(parenIdx == -1) return null;
-  int closingIdx = block.indexOf(');', parenIdx);
-  if(closingIdx == -1) return null;
+/// Parses the newer legacy block emitted by `contrib_song_email_legacy.dart`:
+/// `RegisteredContributorPerson X = const RegisteredContributorPerson(
+///    person: Person(...), emails: [...] );`
+RegisteredContributorPerson? _parseLegacyRegisteredBlock(String block){
+  const marker = 'RegisteredContributorPerson(';
+  final start = block.indexOf(marker);
+  if(start == -1) return null;
+  final outerOpenParen = start + marker.length - 1; // index of '('
+  final outerClose = _findMatchingParen(block, outerOpenParen);
+  if(outerClose == -1) return null;
+  final outerBody = block.substring(outerOpenParen + 1, outerClose);
 
-  String body = block.substring(parenIdx + 'Person('.length, closingIdx);
+  final pIdx = outerBody.indexOf('Person(');
+  if(pIdx == -1) return null;
+  final pOpenParen = pIdx + 'Person('.length - 1;
+  final pClose = _findMatchingParen(outerBody, pOpenParen);
+  if(pClose == -1) return null;
+  final personBody = outerBody.substring(pOpenParen + 1, pClose);
 
-  String? name = _captureLegacyString(body, 'name');
+  final person = _personFromLegacyBody(personBody);
+  if(person == null) return null;
+
+  // Emails sit on the OUTER level (outside Person body). Slice Person out
+  // so the regex doesn't accidentally hit something inside.
+  final outerWithoutPerson =
+      outerBody.substring(0, pIdx) + outerBody.substring(pClose + 1);
+  final emails = _captureLegacyStringList(outerWithoutPerson, 'emails');
+
+  return RegisteredContributorPerson(person: person, emails: emails);
+}
+
+/// Parses the original legacy block: `Person X = const Person(... email: [...] );`.
+/// Maps `hufiec: '...'` and `org: Org.xxx` onto the new `Srodowisko` model.
+RegisteredContributorPerson? _parseLegacyPersonBlock(String block){
+  final start = block.indexOf('Person(');
+  if(start == -1) return null;
+  final pOpenParen = start + 'Person('.length - 1;
+  final pClose = _findMatchingParen(block, pOpenParen);
+  if(pClose == -1) return null;
+  final body = block.substring(pOpenParen + 1, pClose);
+
+  final person = _personFromLegacyBody(body);
+  if(person == null) return null;
+
+  final emails = _captureLegacyStringList(body, 'email');
+  return RegisteredContributorPerson(person: person, emails: emails);
+}
+
+/// Wyciąga pola [Person] z ciała wnętrza `Person(...)`. Wspiera oba formaty
+/// środowiska: stary `hufiec: '...'` (V1) i nowy `srodowisko: Srodowisko.custom('...')`
+/// (V2). Org-tylko fallback: brak hufca/srodowiska + `org: Org.xxx` →
+/// `Srodowisko.org(...)`.
+Person? _personFromLegacyBody(String body){
+  final name = _captureLegacyString(body, 'name');
   if(name == null || name.trim().isEmpty) return null;
 
-  String? druzyna = _captureLegacyString(body, 'druzyna');
-  Srodowisko? srodowisko = Srodowisko.fromJson(_captureLegacyString(body, 'hufiec'));
-  String? comment = _captureLegacyString(body, 'comment');
+  final druzyna = _captureLegacyString(body, 'druzyna');
+  final comment = _captureLegacyString(body, 'comment');
 
-  String? rankHarcRaw = _captureLegacyEnumValue(body, 'rankHarc');
-  String? rankInstrRaw = _captureLegacyEnumValue(body, 'rankInstr');
-  String? orgRaw = _captureLegacyEnumValue(body, 'org');
+  Srodowisko? srodowisko;
+
+  // V2 path: srodowisko: Srodowisko.custom('value')
+  final v2Match = RegExp(r"srodowisko:\s*Srodowisko\.custom\('((?:\\'|[^'])*)'\)")
+      .firstMatch(body);
+  if(v2Match != null) {
+    final value = v2Match.group(1)?.replaceAll(r"\'", "'");
+    if(value != null && value.isNotEmpty) srodowisko = Srodowisko.custom(value);
+  }
+
+  // V1 path: hufiec: 'value'
+  if(srodowisko == null) {
+    final hufiec = _captureLegacyString(body, 'hufiec');
+    if(hufiec != null && hufiec.trim().isNotEmpty) srodowisko = Srodowisko.custom(hufiec);
+  }
+
+  // V1 org-only fallback (Person had a separate `org: Org.xxx` field).
+  if(srodowisko == null) {
+    final orgRaw = _captureLegacyEnumValue(body, 'org');
+    if(orgRaw != null) srodowisko = Srodowisko.org(orgRaw);
+  }
+
+  final rankHarcRaw = _captureLegacyEnumValue(body, 'rankHarc');
+  final rankInstrRaw = _captureLegacyEnumValue(body, 'rankInstr');
 
   RankHarc? rankHarc;
   if(rankHarcRaw != null)
@@ -190,22 +260,39 @@ Person? _parseLegacyPersonBlock(String block){
   if(rankInstrRaw != null)
     rankInstr = RankInstr.values.where((r) => r.name == rankInstrRaw).firstOrNull;
 
-  Org? org;
-  if(orgRaw != null)
-    org = Org.values.where((o) => o.name == orgRaw).firstOrNull;
-
-  List<String> emails = _captureLegacyStringList(body, 'email');
-
   return Person(
     name: name,
     druzyna: druzyna,
     srodowisko: srodowisko,
     rankHarc: rankHarc,
     rankInstr: rankInstr,
-    org: org,
     comment: comment,
-    email: emails,
   );
+}
+
+/// Walks paren-balance from `openIdx` (which points to '(') and returns the
+/// index of the matching ')'. Skips parens inside Dart string literals.
+int _findMatchingParen(String s, int openIdx){
+  int depth = 0;
+  bool inString = false;
+  String? quote;
+  bool escape = false;
+  for(int i = openIdx; i < s.length; i++){
+    final c = s[i];
+    if(escape) { escape = false; continue; }
+    if(inString){
+      if(c == r'\') { escape = true; }
+      else if(c == quote) { inString = false; quote = null; }
+      continue;
+    }
+    if(c == "'" || c == '"') { inString = true; quote = c; continue; }
+    if(c == '(') depth++;
+    else if(c == ')') {
+      depth--;
+      if(depth == 0) return i;
+    }
+  }
+  return -1;
 }
 
 String? _captureLegacyString(String body, String key){

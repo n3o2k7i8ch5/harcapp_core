@@ -4,7 +4,7 @@ import 'package:harcapp_core/values/people/data.dart';
 
 import '../../konspekt.dart';
 
-Konspekt wlasny_nagrobek = const Konspekt(
+Konspekt wlasny_nagrobek = Konspekt(
     name: 'wlasny_nagrobek',
     title: 'Własny nagrobek',
     additionalSearchPhrases: ['grob', 'śmierć', 'cmentarz'],
@@ -26,7 +26,7 @@ Konspekt wlasny_nagrobek = const Konspekt(
     },
     metos: [Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (vecstock)',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: [
       'Refleksja uczestników nad sensem i celem własnego życia',
       'Refleksja uczestników nad hierarchia wartości w perspektywie własnej śmierci',

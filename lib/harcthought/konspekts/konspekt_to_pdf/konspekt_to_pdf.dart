@@ -7,6 +7,7 @@ import 'package:harcapp_core/harcthought/harcapp_links.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt_to_pdf/spheres_widget.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt_to_pdf/steps_widget.dart';
+import 'package:harcapp_core/values/people/models.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart';
 
 import 'common.dart';
@@ -333,7 +334,9 @@ Future<List<Widget>> HowToFailWidget(
 
 Widget AuthorWidget(Konspekt konspekt, Font font, Font fontBold){
 
-  if(konspekt.author == null)
+  Person? author = konspekt.author?.resolve();
+
+  if(author == null)
     return Container();
 
   return Column(
@@ -350,7 +353,7 @@ Widget AuthorWidget(Konspekt konspekt, Font font, Font fontBold){
 
           Expanded(
             child: Text(
-              konspekt.author!.name,
+              author.name,
               style: TextStyle(
                 font: font,
                 fontSize: headerTextSize

@@ -6,7 +6,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../song_core.dart';
 import '../song_element.dart';
-import '../contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_identity.dart';
 import 'providers.dart';
 import 'widgets/song_part_editor_template/errors.dart';
 

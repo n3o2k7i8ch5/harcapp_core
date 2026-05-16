@@ -5,7 +5,7 @@ import 'package:harcapp_core/values/people/data.dart';
 import '../../konspekt.dart';
 import '_consts.dart';
 
-Konspekt zwiad_lokalnej_spolecznosci = const Konspekt(
+Konspekt zwiad_lokalnej_spolecznosci = Konspekt(
     name: 'zwiad_lokalnej_spolecznosci',
     title: 'Zwiad lokalnej społeczności',
     category: KonspektCategory.harcerskie,
@@ -26,7 +26,7 @@ Konspekt zwiad_lokalnej_spolecznosci = const Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     customDuration: Duration(hours: 5),
     aims: [
       'Kształtowanie u uczestników otwartości na kontakt z drugim człowiekiem',

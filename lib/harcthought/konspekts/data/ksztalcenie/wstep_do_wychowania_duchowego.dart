@@ -24,7 +24,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
     spheres: {},
     metos: [Meto.kadra],
     coverAuthor: 'Freepik (al17)',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: wstep_do_wychowania_duchowego_aims,
     attachments: [
       attach_poradnik_o_strukturze_duchowosci,

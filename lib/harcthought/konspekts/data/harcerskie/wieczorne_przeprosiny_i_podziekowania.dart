@@ -4,7 +4,7 @@ import 'package:harcapp_core/values/people/data.dart';
 
 import '../../konspekt.dart';
 
-Konspekt wieczorne_przeprosiny_i_podziekowania = const Konspekt(
+Konspekt wieczorne_przeprosiny_i_podziekowania = Konspekt(
     name: 'wieczorne_przeprosiny_i_podziekowania',
     title: 'Wieczorne przeprosiny i podziękowania',
     category: KonspektCategory.harcerskie,
@@ -46,7 +46,7 @@ Konspekt wieczorne_przeprosiny_i_podziekowania = const Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: '',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     customDuration: Duration(minutes: 15),
     aims: [
       'Kształtowanie u uczestników postawy wdzięczności',

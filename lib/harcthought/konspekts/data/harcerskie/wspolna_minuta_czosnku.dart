@@ -4,7 +4,7 @@ import 'package:harcapp_core/values/people/data.dart';
 
 import '../../konspekt.dart';
 
-Konspekt wspolna_minuta_czosnku = const Konspekt(
+Konspekt wspolna_minuta_czosnku = Konspekt(
     name: 'wspolna_minuta_czosnku',
     title: 'Wspólna minuta czosnku',
     additionalSearchPhrases: ['czosnek'],
@@ -55,7 +55,7 @@ Konspekt wspolna_minuta_czosnku = const Konspekt(
     },
     metos: [Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (frimufilms)',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     customDuration: Duration(minutes: 1),
     aims: [
       'Kształtowanie u uczestników siły charakteru poprzez nieprzyjemne praktyki',

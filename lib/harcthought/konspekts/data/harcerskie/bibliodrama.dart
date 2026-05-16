@@ -4,7 +4,7 @@ import 'package:harcapp_core/harcthought/konspekts/data/level_examples.dart';
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:harcapp_core/values/people/data.dart';
 
-Konspekt bibliodrama = const Konspekt(
+Konspekt bibliodrama = Konspekt(
     name: 'bibliodrama',
     title: 'Bibliodrama',
     category: KonspektCategory.harcerskie,
@@ -23,7 +23,7 @@ Konspekt bibliodrama = const Konspekt(
 
     metos: [Meto.wedro],
     coverAuthor: 'freepik.com (freepik)',
-    author: MIKOLAJ_WITKOWSKI,
+    author: MIKOLAJ_WITKOWSKI.toContributorIdentity(),
     aims: [
       'Doświadczenie Słowa Bożego poprzez zbudowanie empatycznej relacji z bohaterami biblijnych historii',
       'Doświadczenie Słowa Bożego poprzez wymianę z innymi osobami punktów widzenia interpretowanej historii biblijnej',

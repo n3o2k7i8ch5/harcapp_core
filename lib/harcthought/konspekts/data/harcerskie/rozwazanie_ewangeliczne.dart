@@ -147,7 +147,7 @@ const String rozwEwanStandaloneDescription = '$rozwazanie_ewangeliczne_html_opis
     '$rozwazanie_ewangeliczne_html_informacja_zwrotna';
 
 
-Konspekt rozwazanie_ewangeliczne = const Konspekt(
+Konspekt rozwazanie_ewangeliczne = Konspekt(
     name: konspekt_harc_name_rozwazanie_ewangeliczne,
     title: konspekt_harc_title_rozwazanie_ewangeliczne,
     additionalSearchPhrases: ['rozważania ewangeliczne', 'ewangelia', 'apel ewangeliczny', 'pismo święte', 'biblia'],
@@ -193,7 +193,7 @@ Konspekt rozwazanie_ewangeliczne = const Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (fijulanam468)',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: [
       'Stworzenie uczestnikom czasu do budowania ich relacji z Bogiem',
       'Budowanie u uczestników nawyku regularnego sięgania po Słowo Boże',

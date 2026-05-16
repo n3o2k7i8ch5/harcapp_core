@@ -4,7 +4,7 @@ import 'package:harcapp_core/values/people/data.dart';
 
 import '../../konspekt.dart';
 
-Konspekt biwak_bez_nadzoru = const Konspekt(
+Konspekt biwak_bez_nadzoru = Konspekt(
     name: 'biwak_bez_nadzoru',
     title: 'Biwak bez nadzoru',
     category: KonspektCategory.harcerskie,
@@ -61,7 +61,7 @@ Konspekt biwak_bez_nadzoru = const Konspekt(
     },
     metos: [Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: [
       'Kształtowanie u uczestników postawy i umiejętności odpowiedzialności',
       'Kształtowanie u uczestników postawy sumienności, zaradności i proaktywnej postawy',

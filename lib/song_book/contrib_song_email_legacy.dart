@@ -1,18 +1,18 @@
 // Legacy email composer for song contributions.
 // Kept as a reference for the older format that parseContribEmail still needs
-// to fall back to. New emails should be composed via contrib_song.dart.
+// to fall back to. New emails should be composed via contrib_song_email.dart.
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
-import 'package:harcapp_core/values/people/person.dart';
+import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 
-import 'contrib_song.dart';
-import 'contributor_identity.dart';
+import 'contrib_song_email.dart';
+import 'package:harcapp_core/values/people/contributor_identity.dart';
 
 bool _isContributorNew(ContributorIdentity contribId) {
   if(contribId.emailRef == null) return true;
-  if(!allPeopleByEmailMap.containsKey(contribId.emailRef)) return true;
+  if(!allRegisteredPeopleByEmailMap.containsKey(contribId.emailRef)) return true;
 
   return false;
 }
@@ -29,36 +29,37 @@ bool _isPersonsFirstSong(List<SongCore> songs){
   return isPersonsFirstSong;
 }
 
-String personToObjectStringLegacy(Person person, {List<ContributorIdentity> contribIds = const []}) =>
-    _personToObjectString(person, contribIds: contribIds);
+String registeredPersonToObjectStringLegacy(RegisteredContributorPerson registered, {List<ContributorIdentity> contribIds = const []}) =>
+    _registeredPersonToObjectString(registered, contribIds: contribIds);
 
-String _personToObjectString(Person person, {List<ContributorIdentity> contribIds = const []}){
-  late String newPersonCode;
+String _registeredPersonToObjectString(RegisteredContributorPerson registered, {List<ContributorIdentity> contribIds = const []}){
+  final person = registered.person;
 
-  bool hasName = person.name.isNotEmpty;
-  bool hasDruzyna = person.druzyna != null && person.druzyna!.isNotEmpty;
-  bool hasSrodowisko = person.srodowisko != null;
-  bool hasRankInstr = person.rankInstr != null;
-  bool hasRankHarc = person.rankHarc != null;
-  bool hasOrg = person.org != null;
-  bool hasComment = person.comment != null && person.comment!.isNotEmpty;
+  final contribIdEmails = <String>[
+    for(final c in contribIds)
+      if(c.emailRef != null) c.emailRef!,
+  ];
+  final emails = registered.emails.isNotEmpty ? registered.emails : contribIdEmails;
 
-  List<String> contribIdEmails = [];
-  for(ContributorIdentity contribId in contribIds)
-    if(contribId.emailRef != null) contribIdEmails.add(contribId.emailRef!);
+  final personFields = <String>[];
+  if(person.name.isNotEmpty) personFields.add("name: '${person.name}'");
+  if(person.druzyna != null && person.druzyna!.isNotEmpty) personFields.add("druzyna: '${person.druzyna}'");
+  if(person.srodowisko != null) personFields.add("srodowisko: Srodowisko.custom('${person.srodowisko!.displayName}')");
+  if(person.rankInstr != null) personFields.add("rankInstr: RankInstr.${person.rankInstr!.name}");
+  if(person.rankHarc != null) personFields.add("rankHarc: RankHarc.${person.rankHarc!.name}");
+  if(person.comment != null && person.comment!.isNotEmpty) personFields.add("comment: '${person.comment}'");
 
-  newPersonCode = "Person ${remPolChars(person.name).toUpperCase().replaceAll(' ', '_')} = const Person(";
-  if(hasName) newPersonCode += "\n  name: '${person.name}',";
-  if(hasDruzyna) newPersonCode += "\n  druzyna: '${person.druzyna}',";
-  if(hasSrodowisko) newPersonCode += "\n  hufiec: '${person.srodowisko!.displayName}',";
-  if(hasRankInstr) newPersonCode += "\n  rankInstr: RankInstr.${person.rankInstr?.name},";
-  if(hasRankHarc) newPersonCode += "\n  rankHarc: RankHarc.${person.rankHarc?.name},";
-  if(hasOrg) newPersonCode += "\n  org: ${person.org},";
-  if(hasComment) newPersonCode += "\n  comment: '${person.comment}',";
-  newPersonCode += "\n  email: [${(person.email.isEmpty?contribIdEmails:person.email).map((email) => '"$email"').join(', ')}]";
-  newPersonCode += "\n);";
+  final varName = remPolChars(person.name).toUpperCase().replaceAll(' ', '_');
+  final emailsLiteral = '[${emails.map((e) => '"$e"').join(', ')}]';
 
-  return newPersonCode;
+  return [
+    'RegisteredContributorPerson $varName = const RegisteredContributorPerson(',
+    '  person: Person(',
+    for(final f in personFields) '    $f,',
+    '  ),',
+    '  emails: $emailsLiteral,',
+    ');',
+  ].join('\n');
 }
 
 String composeContribSongEmailSubjectLegacy({
@@ -73,7 +74,7 @@ String _baseMessageLegacy(
     SongSource source,
     String? acceptRulesVersion,
     bool isPersonsFirstSong,
-    Person? person,
+    RegisteredContributorPerson? registered,
     ) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
     "\n"
     "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
@@ -86,19 +87,19 @@ String _baseMessageLegacy(
     "\n"
     "\n### Źródło piosenki: ${source.displayName}"
     "${
-    person == null?
+    registered == null?
     '':
     '\n'
         '\n### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):'
         '\n'
-        '\n${_personToObjectString(person)}'
+        '\n${_registeredPersonToObjectString(registered)}'
 }";
 
 Future<String> composeContribSongEmailLegacy({
   required SongCore song,
   required SongSource source,
   String? acceptRulesVersion,
-  Person? person,
+  RegisteredContributorPerson? registered,
   required bool isNewSong,
   String? updateComment
 }) async {
@@ -107,7 +108,7 @@ Future<String> composeContribSongEmailLegacy({
 
   String encodedSong = await song.code;
 
-  return "${_baseMessageLegacy(source, acceptRulesVersion, isPersonsFirstSong, person)}"
+  return "${_baseMessageLegacy(source, acceptRulesVersion, isPersonsFirstSong, registered)}"
       "${
       updateComment != null?
       '\n'
@@ -133,11 +134,11 @@ String composeContribAttachedSongsEmailLegacy({
   required List<SongCore> songs,
   required SongSource source,
   String? acceptRulesVersion,
-  Person? person,
+  RegisteredContributorPerson? registered,
 }) {
 
   bool isPersonsFirstSong = _isPersonsFirstSong(songs);
 
-  return _baseMessageLegacy(source, acceptRulesVersion, isPersonsFirstSong, person);
+  return _baseMessageLegacy(source, acceptRulesVersion, isPersonsFirstSong, registered);
 
 }

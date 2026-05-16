@@ -10,7 +10,7 @@ const String konspekt_title = 'Wędrówka';
 
 const String konspekt_ref = '<a href="${konspekt_name}@harcerskie.konspekt">Wędrówka</a>';
 
-Konspekt wedrowka = const Konspekt(
+Konspekt wedrowka = Konspekt(
     name: konspekt_name,
     title: konspekt_title,
     additionalSearchPhrases: ['wedrowki'],
@@ -46,7 +46,7 @@ Konspekt wedrowka = const Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: [
       aimSilaCharakteruWedrowanie,
       aimUmiejetnoscWedrowania,

@@ -25,7 +25,7 @@ Konspekt spiewogranie_z_quizem_interpretacyjnym = Konspekt(
   },
   metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
   coverAuthor: 'freepik.com (artefacti)',
-  author: DANIEL_IWANICKI,
+  author: DANIEL_IWANICKI.toContributorIdentity(),
   customDuration: Duration(minutes: 90),
   aims: [
     'Refleksja nad historiami i wynikającymi z nich wartościami i postawami w piosenkach.',

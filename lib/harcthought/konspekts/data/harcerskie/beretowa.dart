@@ -5,7 +5,7 @@ import 'package:harcapp_core/values/people/data.dart';
 import '../level_examples.dart';
 import '_consts.dart';
 
-Konspekt beretowa = const Konspekt(
+Konspekt beretowa = Konspekt(
     name: 'beretowa',
     title: 'Beretówa',
     category: KonspektCategory.harcerskie,
@@ -46,7 +46,7 @@ Konspekt beretowa = const Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (vecstock)',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: [
       aimPostawaWspolpracy,
       aimSzacunekDlaSprawnosciFizycznej,

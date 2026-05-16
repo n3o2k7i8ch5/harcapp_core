@@ -20,5 +20,4 @@ variants:
     shortTitle: *s
     questions: *q
 addedBy:
-  name: Daniel Iwanicki
-  email: daniel.iwanicki@zhp.net.pl
+  email_ref: daniel.iwanicki@zhp.net.pl

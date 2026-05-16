@@ -5,7 +5,7 @@ import 'package:harcapp_core/values/people/data.dart';
 
 import '../../konspekt.dart';
 
-Konspekt sznury_funkcje_stopnie = const Konspekt(
+Konspekt sznury_funkcje_stopnie = Konspekt(
   name: 'sznury_funkcje_stopnie',
   title: 'Sznury, funkcje, stopnie ZHP',
   category: KonspektCategory.harcerskie,
@@ -34,7 +34,7 @@ Konspekt sznury_funkcje_stopnie = const Konspekt(
   },
   metos: [Meto.harc, Meto.hs],
   coverAuthor: 'freepik.com (WangXiNa)',
-  author: DANIEL_IWANICKI,
+  author: DANIEL_IWANICKI.toContributorIdentity(),
   aims: [
     'Przekazanie wiedzy o funkcjach w ZHP i sposobie ich oznaczenia.',
     'Przekazanie wiedzy o stopniach harcerskich i instruktorskich w ZHP i sposobie ich oznaczenia.',

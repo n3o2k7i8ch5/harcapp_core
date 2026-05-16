@@ -5,7 +5,7 @@ import 'package:harcapp_core/values/people/data.dart';
 import '../../konspekt.dart';
 
 
-Konspekt wedrowka_medytacyjna = const Konspekt(
+Konspekt wedrowka_medytacyjna = Konspekt(
     name: 'wedrowka_medytacyjna',
     title: 'Wędrówka medytacyjna',
     additionalSearchPhrases: ['wedrowki', 'medytacja'],
@@ -33,7 +33,7 @@ Konspekt wedrowka_medytacyjna = const Konspekt(
     },
     metos: [Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (stockgiu)',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: [
       'Wyciszenie uczestników i refleksja nad wybranym zagadnieniem'
     ],

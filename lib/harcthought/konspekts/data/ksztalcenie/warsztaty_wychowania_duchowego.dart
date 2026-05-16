@@ -156,7 +156,7 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
     spheres: {},
     metos: [Meto.kadra],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI,
+    author: DANIEL_IWANICKI.toContributorIdentity(),
     aims: [
       ...wstep_do_wychowania_duchowego_aims,
       'Zapoznanie uczestników z mechanizmami i narzędziami kształtowania duchowości.',

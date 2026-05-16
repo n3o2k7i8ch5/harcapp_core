@@ -4,7 +4,7 @@ import 'package:harcapp_core/values/people/data.dart';
 
 import '../../konspekt.dart';
 
-Konspekt zagadki_matematyczno_logiczne = const Konspekt(
+Konspekt zagadki_matematyczno_logiczne = Konspekt(
   name: 'zagadki_matematyczno_logiczne',
   title: 'Zagadki matematno-logiczne',
   additionalSearchPhrases: ['zagadki', 'matematyka', 'logika'],
@@ -15,7 +15,7 @@ Konspekt zagadki_matematyczno_logiczne = const Konspekt(
   },
   metos: [Meto.hs, Meto.wedro],
   coverAuthor: 'Freepik (hamimfadillah)',
-  author: DANIEL_IWANICKI,
+  author: DANIEL_IWANICKI.toContributorIdentity(),
   customDuration: Duration(minutes: 90),
   aims: [
     'Kształtowanie u uczestników szacunku dla wiedzy i logicznego myślenia'

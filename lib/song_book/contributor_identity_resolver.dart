@@ -3,7 +3,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/values/dimen.dart';
 
-import 'contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_identity.dart';
 
 abstract class ContributorIdentityResolver{
 
@@ -16,7 +16,7 @@ abstract class ContributorIdentityResolver{
 class ContributorIdentitySimpleResolver extends ContributorIdentityResolver{
 
   static String? name(ContributorIdentity data){
-    return data.name;
+    return data.person?.name;
   }
 
   final double? textSize;
@@ -26,7 +26,7 @@ class ContributorIdentitySimpleResolver extends ContributorIdentityResolver{
 
   @override
   Widget build(BuildContext context, ContributorIdentity data) => Text(
-      data.name??'',
+      data.person?.name??'',
       style: AppTextStyle(color: textColor??hintEnab_(context), fontSize: textSize??Dimen.textSizeNormal, fontWeight: weightHalfBold)
   );
 

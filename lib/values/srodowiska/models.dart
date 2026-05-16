@@ -7,6 +7,10 @@ class Okreg {
   final Org org;
   const Okreg(this.slug, this.name, this.org);
 
+  /// Pseudo-okręg dla organizacji bez okręgów (np. ZHP). UI traktuje takie
+  /// okręgi jak `null` i nie pokazuje ich w wyborze.
+  bool get isDummy => slug.startsWith('_');
+
   /// Globally unique ID in the form `<slug>@<org>`.
   String get id => '$slug@${org.name}';
 }
@@ -14,13 +18,14 @@ class Okreg {
 class Choragiew {
   final String slug;
   final String name;
-  final Org org;
-  final Okreg? okreg;
-  const Choragiew(this.slug, this.name, this.org, {this.okreg});
+  final Okreg okreg;
+  const Choragiew(this.slug, this.name, this.okreg);
 
-  /// Globally unique ID in the form `<slug>@<okreg?>@<org>` — the okreg slot
-  /// is always present; empty when the organization (e.g. ZHP) has no okręgi.
-  String get id => '$slug@${okreg?.slug ?? ''}@${org.name}';
+  /// Pojedyncze źródło prawdy o organizacji — czytane przez okręg.
+  Org get org => okreg.org;
+
+  /// Globally unique ID in the form `<slug>@<okreg.id>`.
+  String get id => '$slug@${okreg.id}';
 }
 
 class Hufiec {
@@ -44,8 +49,26 @@ class Srodowisko {
   final String? orgSlug;
   final String? custom;
 
-  const Srodowisko({this.hufiecSlug, this.choragiewSlug, this.okregSlug, this.orgSlug, this.custom})
-      : assert(
+  /// Per-level display flags. Default `true` (show). Setting a level to
+  /// `false` hides it from generated display lines, even if it is implied by
+  /// a more specific slug (e.g. hufiec → choragiew → okreg → org). Useful
+  /// when only some of the auto-derived structural levels should appear in UI.
+  final bool showHufiec;
+  final bool showChoragiew;
+  final bool showOkreg;
+  final bool showOrg;
+
+  const Srodowisko({
+    this.hufiecSlug,
+    this.choragiewSlug,
+    this.okregSlug,
+    this.orgSlug,
+    this.custom,
+    this.showHufiec = true,
+    this.showChoragiew = true,
+    this.showOkreg = true,
+    this.showOrg = true,
+  })  : assert(
           (hufiecSlug != null ? 1 : 0)
         + (choragiewSlug != null ? 1 : 0)
         + (okregSlug != null ? 1 : 0)
@@ -61,11 +84,55 @@ class Srodowisko {
           'At least one field must be set',
         );
 
-  const Srodowisko.hufiec(String slug, {String? custom}) : this(hufiecSlug: slug, custom: custom);
-  const Srodowisko.choragiew(String slug, {String? custom}) : this(choragiewSlug: slug, custom: custom);
-  const Srodowisko.okreg(String slug, {String? custom}) : this(okregSlug: slug, custom: custom);
-  const Srodowisko.org(String slug, {String? custom}) : this(orgSlug: slug, custom: custom);
-  const Srodowisko.custom(String text) : this(custom: text);
+  const Srodowisko.hufiec(
+    String slug, {
+    String? custom,
+    bool showHufiec = true,
+    bool showChoragiew = true,
+    bool showOkreg = true,
+    bool showOrg = true,
+  }) : this(
+          hufiecSlug: slug,
+          custom: custom,
+          showHufiec: showHufiec,
+          showChoragiew: showChoragiew,
+          showOkreg: showOkreg,
+          showOrg: showOrg,
+        );
+
+  const Srodowisko.choragiew(
+    String slug, {
+    String? custom,
+    bool showChoragiew = true,
+    bool showOkreg = true,
+    bool showOrg = true,
+  }) : this(
+          choragiewSlug: slug,
+          custom: custom,
+          showChoragiew: showChoragiew,
+          showOkreg: showOkreg,
+          showOrg: showOrg,
+        );
+
+  const Srodowisko.okreg(
+    String slug, {
+    String? custom,
+    bool showOkreg = true,
+    bool showOrg = true,
+  }) : this(
+          okregSlug: slug,
+          custom: custom,
+          showOkreg: showOkreg,
+          showOrg: showOrg,
+        );
+
+  const Srodowisko.org(String slug, {String? custom, bool showOrg = true})
+      : this(orgSlug: slug, custom: custom, showOrg: showOrg);
+
+  /// Wolnotekstowe środowisko. Można dorzucić [orgSlug] (np. `'zhp'`,
+  /// `Org.zhp.name`), żeby zachować informację o organizacji obok tekstu.
+  const Srodowisko.custom(String text, {String? orgSlug})
+      : this(custom: text, orgSlug: orgSlug);
 
   Hufiec? get hufiec => hufiecSlug == null ? null : hufiecBySlug(hufiecSlug!);
   Choragiew? get choragiew {
@@ -76,7 +143,7 @@ class Srodowisko {
   }
   Okreg? get okreg {
     final c = choragiew;
-    if(c?.okreg != null) return c!.okreg;
+    if(c != null && !c.okreg.isDummy) return c.okreg;
     if(okregSlug != null) return okregBySlug(okregSlug!);
     return null;
   }
@@ -89,14 +156,18 @@ class Srodowisko {
     return null;
   }
 
-  /// Primary label. Prefers user-typed [custom] when set, otherwise falls back
-  /// to the most specific structured field.
-  String? get displayName =>
-      custom
-          ?? hufiec?.name
-          ?? choragiew?.name
-          ?? okreg?.name
-          ?? org?.fullName;
+  /// Display lines, ordered from most-specific to most-general, filtered by
+  /// per-level visibility flags. [custom] (if any) always comes first.
+  List<String> get displayLines => [
+    if(custom != null) custom!,
+    if(showHufiec && hufiec != null) hufiec!.name,
+    if(showChoragiew && choragiew != null) choragiew!.name,
+    if(showOkreg && okreg != null) okreg!.name,
+    if(showOrg && org != null) org!.fullName,
+  ];
+
+  /// Primary single-line label — the first visible line, or null if none.
+  String? get displayName => displayLines.isEmpty ? null : displayLines.first;
 
   Map<String, dynamic> toJsonMap() => {
     if(hufiecSlug != null) 'hufiecSlug': hufiecSlug,
@@ -104,6 +175,11 @@ class Srodowisko {
     if(okregSlug != null) 'okregSlug': okregSlug,
     if(orgSlug != null) 'orgSlug': orgSlug,
     if(custom != null) 'custom': custom,
+    // Persist only the hidden levels — defaults stay implicit.
+    if(!showHufiec) 'hideHufiec': true,
+    if(!showChoragiew) 'hideChoragiew': true,
+    if(!showOkreg) 'hideOkreg': true,
+    if(!showOrg) 'hideOrg': true,
   };
 
   static Srodowisko? fromJson(Object? json){
@@ -120,6 +196,10 @@ class Srodowisko {
       okregSlug: okregSlug,
       orgSlug: orgSlug,
       custom: custom,
+      showHufiec: json['hideHufiec'] != true,
+      showChoragiew: json['hideChoragiew'] != true,
+      showOkreg: json['hideOkreg'] != true,
+      showOrg: json['hideOrg'] != true,
     );
   }
 }

@@ -2,7 +2,8 @@ import 'package:harcapp_core/comm_classes/meto.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/level_examples.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/utils.dart';
-import 'package:harcapp_core/values/people/person.dart';
+import 'package:harcapp_core/values/people/contributor_identity.dart';
+import 'package:harcapp_core/values/people/models.dart';
 
 import '../../konspekt.dart';
 
@@ -63,7 +64,7 @@ Konspekt druzynowe_przekazanie_bsp = Konspekt(
 
     metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'PAP/M. Marek',
-    author: Person(name: 'Zespół Wychowania Duchowego i Religijnego Chorągwi Stołecznej ZHP'),
+    author: ContributorIdentity(person: Person(name: 'Zespół Wychowania Duchowego i Religijnego Chorągwi Stołecznej ZHP')),
     customDuration: Duration(days: 30),
     aims: [
       'Kształtowanie postawy przebaczenia',
