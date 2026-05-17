@@ -14,7 +14,7 @@ import 'package:harcapp_core/comm_widgets/open_image_dialog.dart';
 import 'package:harcapp_core/comm_widgets/open_svg_image_dialog.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/harcapp_host.dart';
-import 'package:harcapp_core/values/people/contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart' as pdf;
@@ -1098,7 +1098,7 @@ abstract class BaseKonspekt with BaseKonspektStepsContainerMixin{
 
   List<Meto> get metos;
   String get coverAuthor;
-  ContributorIdentity? get author;
+  ContributorRef? get author;
   Duration? get customDuration;
   List<String> get aims;
   List<BaseKonspektAttachment>? get attachments;
@@ -1171,7 +1171,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
   final List<Meto> metos;
   final String coverAuthor;
   final String? customCoverDirName;
-  final ContributorIdentity? author;
+  final ContributorRef? author;
   final Duration? customDuration;
   final List<String> aims;
   final List<KonspektMaterial>? materials;
@@ -1359,7 +1359,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
     metos: (data['metos'] as List).map((e) => Meto.fromApiParam(e as String)??(throw MissingDecodeParamError('metos'))).toList(),
     coverAuthor: data['coverAuthor'] as String,
     customCoverDirName: data['customCoverDirName'] as String?,
-    author: data['author']==null?null:ContributorIdentity.fromApiRespMap((data['author'] as Map).cast<String, dynamic>()),
+    author: data['author']==null?null:ContributorRef.fromApiRespMap((data['author'] as Map).cast<String, dynamic>()),
     customDuration: data['customDuration'] == null ? null : Duration(seconds: data['customDuration'] as int),
     aims: (data['aims'] as List?)?.map((e) => e as String).toList()??[],
     attachments: (data['attachments'] as List?)?.map(

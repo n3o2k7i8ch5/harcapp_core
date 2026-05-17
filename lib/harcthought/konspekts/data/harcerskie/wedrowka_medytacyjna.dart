@@ -33,7 +33,7 @@ Konspekt wedrowka_medytacyjna = Konspekt(
     },
     metos: [Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (stockgiu)',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     aims: [
       'Wyciszenie uczestników i refleksja nad wybranym zagadnieniem'
     ],

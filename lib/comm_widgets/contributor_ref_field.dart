@@ -6,21 +6,21 @@ import 'package:harcapp_core/comm_widgets/dialog/route.dart' as harcapp_dialog;
 import 'package:harcapp_core/comm_widgets/person_card.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
-import 'package:harcapp_core/values/people/contributor_identity.dart';
-import 'package:harcapp_core/values/people/contributor_identity_editor_dialog.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
+import 'package:harcapp_core/values/people/contributor_ref_editor_dialog.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-/// Karta z [ContributorIdentity] + edycja przez [ContributorIdentityEditorDialog].
+/// Karta z [ContributorRef] + edycja przez [ContributorRefEditorDialog].
 /// Pusty stan: przycisk z plus-ikoną i napisem [emptyLabel].
-/// Wypełniony stan: [PersonCard] (z [ContributorIdentity.resolve]) + X do wyczyszczenia.
-class ContributorIdentityField extends StatelessWidget {
-  final ContributorIdentity? identity;
-  final void Function(ContributorIdentity? identity) onChanged;
+/// Wypełniony stan: [PersonCard] (z [ContributorRef.resolve]) + X do wyczyszczenia.
+class ContributorRefField extends StatelessWidget {
+  final ContributorRef? identity;
+  final void Function(ContributorRef? identity) onChanged;
   final String emptyLabel;
   final String dialogTitle;
 
-  const ContributorIdentityField({
+  const ContributorRefField({
     required this.identity,
     required this.onChanged,
     this.emptyLabel = 'Dodaj osobę',
@@ -87,7 +87,7 @@ class ContributorIdentityField extends StatelessWidget {
   void _showEditDialog(BuildContext context) {
     Navigator.of(context, rootNavigator: true).push(
       harcapp_dialog.DialogRoute(
-        builder: (ctx) => ContributorIdentityEditorDialog(
+        builder: (ctx) => ContributorRefEditorDialog(
           initial: identity,
           onAccepted: onChanged,
           title: dialogTitle,

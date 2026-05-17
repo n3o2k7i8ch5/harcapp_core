@@ -312,7 +312,7 @@ Konspekt zycie_i_swiat_prl = Konspekt(
     },
     metos: [Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     customDuration: Duration(days: 20),
     aims: [
       'Poznanie przez uczestników realiów życia codziennego w PRL',

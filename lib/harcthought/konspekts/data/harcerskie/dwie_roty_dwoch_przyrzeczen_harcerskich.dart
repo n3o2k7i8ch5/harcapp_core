@@ -54,7 +54,7 @@ Konspekt dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
     },
   metos: [Meto.kadra],
   coverAuthor: 'Daniel Iwanicki',
-  author: DANIEL_IWANICKI.toContributorIdentity(),
+  author: DANIEL_IWANICKI.toContributorRef(),
   customDuration: Duration(days: 180),
   aims: [
     'Wyłonienie roty Przyrzeczenia Harcerskiego, które złoży harcerz.',

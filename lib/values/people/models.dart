@@ -3,7 +3,7 @@ import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
 
-import 'contributor_identity.dart';
+import 'contributor_ref.dart';
 
 class Person{
 
@@ -62,7 +62,7 @@ class RegisteredContributor{
 
   const RegisteredContributor({required this.person, required this.emails, this.userKey});
 
-  ContributorIdentity toContributorIdentity() => ContributorIdentity(
+  ContributorRef toContributorRef() => ContributorRef(
       person: person,
       emailRef: emails.firstOrNull,
       userKeyRef: userKey

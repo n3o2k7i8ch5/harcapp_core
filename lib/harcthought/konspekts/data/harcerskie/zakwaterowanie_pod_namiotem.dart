@@ -34,7 +34,7 @@ Konspekt zakwaterowanie_pod_namiotem = Konspekt(
     },
     metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     aims: [
       'Kształtowanie u uczestników siły charakteru poprzez funkcjonowanie w warunkach obniżonego komfortu',
       'Budowanie u uczestników wspólnoty poprzez codzienne funkcjonowanie na ograniczonej przestrzeni'

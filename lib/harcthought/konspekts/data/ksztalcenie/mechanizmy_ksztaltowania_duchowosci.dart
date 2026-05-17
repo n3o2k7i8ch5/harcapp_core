@@ -398,7 +398,7 @@ Konspekt konspekt_kszt_mechanizmy_ksztaltowania_duchowosci = Konspekt(
   spheres: {},
   metos: [Meto.kadra],
   coverAuthor: 'Freepik (freepik)',
-  author: DANIEL_IWANICKI.toContributorIdentity(),
+  author: DANIEL_IWANICKI.toContributorRef(),
   aims: [
     'Przedstawienie uczestnikom czynników duchowości.',
     'Przedstawienie uczestnikom mechanizmów kształtowania duchowości.',

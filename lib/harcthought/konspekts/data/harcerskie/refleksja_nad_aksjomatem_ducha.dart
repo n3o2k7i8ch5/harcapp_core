@@ -29,7 +29,7 @@ Konspekt refleksja_nad_aksjomatem_ducha = Konspekt(
   },
   metos: [Meto.hs, Meto.wedro],
   coverAuthor: 'freepik.com (vectorpouch)',
-  author: DANIEL_IWANICKI.toContributorIdentity(),
+  author: DANIEL_IWANICKI.toContributorRef(),
   customDuration: Duration(minutes: 4 * 20 + 30),
   aims: [
     'Refleksja nad poziomem aksjomatycznym swojej duchowości',

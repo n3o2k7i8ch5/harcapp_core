@@ -26,7 +26,7 @@ Konspekt warta_nocna = Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     aims: [
       'Kształtowanie u uczestników siły charakteru poprzez wstawanie w nocy na wartę, walkę z sennością, wartowaniem w chłodnej temperaturze',
       'Kształtowanie uważności uczestników poprzez spędzenie czasu w ciszy, w izolacji od bodźców dnia codziennego'

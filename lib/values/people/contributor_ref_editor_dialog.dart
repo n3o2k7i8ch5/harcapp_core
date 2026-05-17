@@ -8,26 +8,26 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
-import 'package:harcapp_core/values/people/contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'package:harcapp_core/values/people/person_fields_editor.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 
-/// Dialog edycji [ContributorIdentity] — pole „Email" na górze + ten sam zestaw
+/// Dialog edycji [ContributorRef] — pole „Email" na górze + ten sam zestaw
 /// pól co `PersonEditorDialog` (przez `PersonFieldsEditor`). Wpisanie znanego
 /// maila (zarejestrowanej osoby w [allRegisteredPeopleByEmailMap]) auto-uzupełnia
 /// pozostałe pola.
-class ContributorIdentityEditorDialog extends StatefulWidget {
+class ContributorRefEditorDialog extends StatefulWidget {
 
-  final ContributorIdentity? initial;
-  final void Function(ContributorIdentity)? onChanged;
-  final void Function(ContributorIdentity)? onAccepted;
+  final ContributorRef? initial;
+  final void Function(ContributorRef)? onChanged;
+  final void Function(ContributorRef)? onAccepted;
 
   final String title;
   final String? description;
   final String saveText;
   final String? cancelText;
 
-  const ContributorIdentityEditorDialog({
+  const ContributorRefEditorDialog({
     this.initial,
     this.onChanged,
     this.onAccepted,
@@ -39,10 +39,10 @@ class ContributorIdentityEditorDialog extends StatefulWidget {
   });
 
   @override
-  State<ContributorIdentityEditorDialog> createState() => _ContributorIdentityEditorDialogState();
+  State<ContributorRefEditorDialog> createState() => _ContributorRefEditorDialogState();
 }
 
-class _ContributorIdentityEditorDialogState extends State<ContributorIdentityEditorDialog> {
+class _ContributorRefEditorDialogState extends State<ContributorRefEditorDialog> {
 
   final GlobalKey<PersonFieldsEditorState> _fieldsKey = GlobalKey();
   final FocusNode _nameFocus = FocusNode();
@@ -70,7 +70,7 @@ class _ContributorIdentityEditorDialogState extends State<ContributorIdentityEdi
     super.dispose();
   }
 
-  ContributorIdentity get current => ContributorIdentity(
+  ContributorRef get current => ContributorRef(
     person: _fieldsKey.currentState?.currentPerson ?? widget.initial?.person,
     emailRef: emailController.text.trim().isEmpty ? null : emailController.text.trim(),
     userKeyRef: _userKeyRef,

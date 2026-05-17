@@ -193,7 +193,7 @@ Konspekt rozwazanie_ewangeliczne = Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (fijulanam468)',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     aims: [
       'Stworzenie uczestnikom czasu do budowania ich relacji z Bogiem',
       'Budowanie u uczestników nawyku regularnego sięgania po Słowo Boże',

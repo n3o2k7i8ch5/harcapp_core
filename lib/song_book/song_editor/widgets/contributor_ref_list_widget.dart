@@ -3,34 +3,34 @@ import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_button.dart';
-import 'package:harcapp_core/comm_widgets/contributor_identity_field.dart';
+import 'package:harcapp_core/comm_widgets/contributor_ref_field.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'package:harcapp_core/values/people/contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
 import '../providers.dart';
 
-class ContributorIdentityListWidget extends StatefulWidget{
+class ContributorRefListWidget extends StatefulWidget{
 
-  final void Function(List<ContributorIdentity>)? onChanged;
+  final void Function(List<ContributorRef>)? onChanged;
   final EdgeInsets titlePadding;
   final EdgeInsets listPadding;
 
-  const ContributorIdentityListWidget({this.onChanged, this.titlePadding = EdgeInsets.zero, this.listPadding = EdgeInsets.zero, super.key});
+  const ContributorRefListWidget({this.onChanged, this.titlePadding = EdgeInsets.zero, this.listPadding = EdgeInsets.zero, super.key});
 
   @override
-  State<StatefulWidget> createState() => ContributorIdentityListWidgetState();
+  State<StatefulWidget> createState() => ContributorRefListWidgetState();
 
 }
 
-class ContributorIdentityListWidgetState extends State<ContributorIdentityListWidget>{
+class ContributorRefListWidgetState extends State<ContributorRefListWidget>{
 
-  void Function(List<ContributorIdentity>)? get onChanged => widget.onChanged;
+  void Function(List<ContributorRef>)? get onChanged => widget.onChanged;
 
   void _addEmpty(CurrentItemProvider prov){
-    prov.insertContribId(ContributorIdentity());
+    prov.insertContribId(ContributorRef());
     onChanged?.call(prov.contribId);
   }
 
@@ -62,14 +62,14 @@ class ContributorIdentityListWidgetState extends State<ContributorIdentityListWi
                 return Padding(
                   key: ObjectKey(entry),
                   padding: EdgeInsets.only(bottom: index < prov.contribId.length - 1?Dimen.defMarg:0),
-                  child: ContributorIdentityField(
+                  child: ContributorRefField(
                     identity: entry,
                     emptyLabel: 'Dodaj osobę dodającą',
                     dialogTitle: 'Osoba dodająca',
                     onChanged: (id){
                       if(id == null || id.isEmpty){
                         if(prov.contribId.length <= 1)
-                          prov.setContribIdAt(index, ContributorIdentity());
+                          prov.setContribIdAt(index, ContributorRef());
                         else
                           prov.removeContribIdAt(index);
                       } else {

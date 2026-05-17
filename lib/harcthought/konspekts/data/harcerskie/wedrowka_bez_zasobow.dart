@@ -43,7 +43,7 @@ Konspekt wedrowka_bez_zasobow = Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (DenisW)',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     aims: [
       aimSilaCharakteruWedrowanie,
       aimUmiejetnoscWedrowania,

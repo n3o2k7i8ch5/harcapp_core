@@ -15,7 +15,7 @@ Konspekt zagadki_matematyczno_logiczne = Konspekt(
   },
   metos: [Meto.hs, Meto.wedro],
   coverAuthor: 'Freepik (hamimfadillah)',
-  author: DANIEL_IWANICKI.toContributorIdentity(),
+  author: DANIEL_IWANICKI.toContributorRef(),
   customDuration: Duration(minutes: 90),
   aims: [
     'Kształtowanie u uczestników szacunku dla wiedzy i logicznego myślenia'

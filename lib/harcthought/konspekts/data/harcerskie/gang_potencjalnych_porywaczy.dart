@@ -44,7 +44,7 @@ Konspekt gang_potencjalnych_porywaczy = Konspekt(
 
   metos: [Meto.harc, Meto.hs],
   coverAuthor: 'freepik.com (vector_corp)',
-  author: JULIA_JAROSZ.toContributorIdentity(),
+  author: JULIA_JAROSZ.toContributorRef(),
   customDuration: Duration(hours: 3),
   aims: [
     'Poprawa umiejętności pracy w zespole i przyjmowania potrzebnych w zespole ról.',

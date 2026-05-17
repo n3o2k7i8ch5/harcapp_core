@@ -1,7 +1,7 @@
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 
-class ContributorIdentity{
+class ContributorRef{
 
   static const String PARAM_PERSON = 'person';
   static const String PARAM_EMAIL_REF = 'email_ref';
@@ -12,7 +12,7 @@ class ContributorIdentity{
   final String? userKeyRef;
 
 
-  const ContributorIdentity({this.person, this.emailRef, this.userKeyRef});
+  const ContributorRef({this.person, this.emailRef, this.userKeyRef});
 
   Map<String, dynamic> toApiJsonMap() => {
     if(person != null) PARAM_PERSON: person!.toApiJsonMap(),
@@ -20,13 +20,13 @@ class ContributorIdentity{
     PARAM_USER_KEY_REF: userKeyRef==null || userKeyRef!.trim().isEmpty?null:userKeyRef!.trim(),
   };
 
-  static ContributorIdentity fromApiRespMap(Map<String, dynamic> respMap) {
+  static ContributorRef fromApiRespMap(Map<String, dynamic> respMap) {
     final personRaw = respMap[PARAM_PERSON];
     final Person? person = personRaw is Map<String, dynamic>
         ? Person.fromApiJsonMap(personRaw)
         : null;
 
-    return ContributorIdentity(
+    return ContributorRef(
       person: person,
       emailRef: respMap[PARAM_EMAIL_REF],
       userKeyRef: respMap[PARAM_USER_KEY_REF],
@@ -36,11 +36,11 @@ class ContributorIdentity{
   /// Strict variant of [fromApiRespMap]: throws [StateError] if the resulting
   /// identity is empty (no `person`, `email_ref`, nor `user_key_ref`). Use on
   /// data paths where a missing identity is a bug, not a legacy artifact.
-  static ContributorIdentity fromApiRespMapStrict(Map<String, dynamic> respMap) {
+  static ContributorRef fromApiRespMapStrict(Map<String, dynamic> respMap) {
     final identity = fromApiRespMap(respMap);
     if(identity.isEmpty)
       throw StateError(
-        '`ContributorIdentity` must specify at least one of '
+        '`ContributorRef` must specify at least one of '
         '`$PARAM_PERSON`, `$PARAM_EMAIL_REF`, `$PARAM_USER_KEY_REF`',
       );
     return identity;
@@ -73,7 +73,7 @@ class ContributorIdentity{
 
   @override
   bool operator == (Object other) {
-    if(!(other is ContributorIdentity)) return false;
+    if(!(other is ContributorRef)) return false;
 
     if(userKeyRef != null && userKeyRef!.trim().isNotEmpty && userKeyRef!.trim() == other.userKeyRef?.trim())
       return true;

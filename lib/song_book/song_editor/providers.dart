@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:provider/provider.dart';
 
-import 'package:harcapp_core/values/people/contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'song_raw.dart';
 
 
@@ -137,19 +137,19 @@ class CurrentItemProvider extends ChangeNotifier{
     if(notify) notifyListeners();
   }
 
-  List<ContributorIdentity> get contribId => _song.contribId;
+  List<ContributorRef> get contribId => _song.contribId;
 
-  void setContribId(List<ContributorIdentity> value, {bool notify = true}){
+  void setContribId(List<ContributorRef> value, {bool notify = true}){
     _song.contribId = value;
     if(notify) notifyListeners();
   }
 
-  void setContribIdAt(int index, ContributorIdentity value, {bool notify = true}){
+  void setContribIdAt(int index, ContributorRef value, {bool notify = true}){
     _song.contribId[index] = value;
     if(notify) notifyListeners();
   }
 
-  void insertContribId(ContributorIdentity value, {int? index, bool notify = true}){
+  void insertContribId(ContributorRef value, {int? index, bool notify = true}){
     if(index == null) _song.contribId.add(value);
     else _song.contribId.insert(index, value);
     if(notify) notifyListeners();

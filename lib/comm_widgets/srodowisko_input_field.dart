@@ -4,6 +4,7 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/polish_inflection.dart';
 import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
+import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
 import 'package:harcapp_core/comm_widgets/hint_dropdown_widget.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -52,6 +53,11 @@ const Set<Org> _orgsWithOkregi = {Org.zhr};
 class _SrodowiskoInputFieldState extends State<SrodowiskoInputField> {
   late final TextEditingController _hufiecSearchCtrl;
   late final TextEditingController _customCtrl;
+
+  /// Zapamiętany custom przy aplikacji sugestii — umożliwia „Cofnij".
+  String? _lastReplacedCustom;
+  /// Hufiec ostatnio zastosowany z sugestii — do bannera „Użyto hufca…".
+  Hufiec? _lastAppliedHufiec;
 
   @override
   void initState() {
@@ -146,7 +152,11 @@ class _SrodowiskoInputFieldState extends State<SrodowiskoInputField> {
   }
 
   /// Czyści całą strukturalną kaskadę (zostaje tylko `custom`).
-  void _clearStructured() => _emit(_rebase(null));
+  void _clearStructured() {
+    _lastReplacedCustom = null;
+    _lastAppliedHufiec = null;
+    _emit(_rebase(null));
+  }
 
   void _setCustom(String text) {
     final t = text.trim();
@@ -182,6 +192,46 @@ class _SrodowiskoInputFieldState extends State<SrodowiskoInputField> {
     return hufce;
   }
 
+  /// Szuka hufca, którego nazwa zawiera tekst z [custom] (lub odwrotnie).
+  /// Aktywuje się tylko gdy struktura jest pusta i custom ma sens (>= 3 znaki).
+  Hufiec? _findHufiecMatchingCustom() {
+    if (_activeLevel != _Level.none) return null;
+    final t = (_custom ?? '').trim().toLowerCase();
+    if (t.length < 3) return null;
+    for (final h in hufce) {
+      final n = h.name.toLowerCase();
+      if (n.contains(t) || t.contains(n)) return h;
+    }
+    return null;
+  }
+
+  bool get _appliedBannerVisible =>
+      _lastAppliedHufiec != null && _hufiec?.slug == _lastAppliedHufiec!.slug;
+
+  void _applyHufiecSuggestion(Hufiec h) {
+    final prevCustom = _custom;
+    setState(() {
+      _lastReplacedCustom = prevCustom;
+      _lastAppliedHufiec = h;
+    });
+    _emit(Srodowisko.hufiec(
+      h.slug,
+      showChoragiew: false,
+      showOkreg: false,
+    ));
+  }
+
+  void _undoHufiecSuggestion() {
+    final restoreCustom = _lastReplacedCustom;
+    setState(() {
+      _lastReplacedCustom = null;
+      _lastAppliedHufiec = null;
+    });
+    _emit(restoreCustom == null || restoreCustom.isEmpty
+        ? null
+        : Srodowisko.custom(restoreCustom));
+  }
+
   /// Opis filtra na hufce — pokazywany jako nagłówek nad listą w dropdownie.
   String? get _hufceFilterLabel {
     if (_choragiew != null) return 'Hufce z chorągwi ${choragiewGenitive(_choragiew!.name)}';
@@ -205,9 +255,18 @@ class _SrodowiskoInputFieldState extends State<SrodowiskoInputField> {
 
     final orgHasOkregi = org == null || _orgsWithOkregi.contains(org);
 
+    final suggestion = _findHufiecMatchingCustom();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (_appliedBannerVisible) ...[
+          _appliedHufiecBanner(_lastAppliedHufiec!),
+          const SizedBox(height: Dimen.sideMarg),
+        ] else if (suggestion != null) ...[
+          _suggestHufiecBanner(suggestion),
+          const SizedBox(height: Dimen.sideMarg),
+        ],
         _slot(_hufiecDropdown(enabled: enabledAt(_Level.hufiec), clearIfActive: clearIfActive(_Level.hufiec))),
         const SizedBox(height: Dimen.sideMarg),
         _slot(_choragiewDropdown(enabled: enabledAt(_Level.choragiew), clearIfActive: clearIfActive(_Level.choragiew))),
@@ -328,6 +387,67 @@ class _SrodowiskoInputFieldState extends State<SrodowiskoInputField> {
         items: [
           for (final o in _orgsToShow) _item(o, o.fullName),
         ],
+      );
+
+  Widget _suggestHufiecBanner(Hufiec h) => Material(
+        color: cardEnab_(context),
+        borderRadius: BorderRadius.circular(AppCard.defRadius),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: () => _applyHufiecSuggestion(h),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: Dimen.iconMarg),
+            child: Row(
+              children: [
+                Icon(MdiIcons.accountGroupOutline, color: iconEnab_(context)),
+                const SizedBox(width: Dimen.iconMarg),
+                Expanded(
+                  child: Text(
+                    'Użyj hufca: ${h.name}',
+                    style: AppTextStyle(
+                      color: textEnab_(context),
+                      fontSize: Dimen.textSizeBig,
+                      fontWeight: weightHalfBold,
+                    ),
+                  ),
+                ),
+                Icon(MdiIcons.chevronRight, color: iconEnab_(context)),
+              ],
+            ),
+          ),
+        ),
+      );
+
+  Widget _appliedHufiecBanner(Hufiec h) => Material(
+        color: cardEnab_(context),
+        borderRadius: BorderRadius.circular(AppCard.defRadius),
+        clipBehavior: Clip.antiAlias,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16, right: Dimen.defMarg / 2, top: Dimen.defMarg / 2, bottom: Dimen.defMarg / 2),
+          child: Row(
+            children: [
+              Icon(MdiIcons.checkCircleOutline, color: iconEnab_(context)),
+              const SizedBox(width: Dimen.iconMarg),
+              Expanded(
+                child: Text(
+                  'Użyto hufca: ${h.name}',
+                  style: AppTextStyle(
+                    color: textEnab_(context),
+                    fontSize: Dimen.textSizeBig,
+                  ),
+                ),
+              ),
+              if (_lastReplacedCustom != null && _lastReplacedCustom!.isNotEmpty)
+                SimpleButton.from(
+                  context: context,
+                  margin: EdgeInsets.zero,
+                  text: 'Cofnij',
+                  icon: MdiIcons.undoVariant,
+                  onTap: _undoHufiecSuggestion,
+                ),
+            ],
+          ),
+        ),
       );
 
   Widget _customField() => AppTextFieldHint(

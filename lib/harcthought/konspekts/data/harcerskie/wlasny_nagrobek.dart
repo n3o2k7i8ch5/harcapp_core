@@ -26,7 +26,7 @@ Konspekt wlasny_nagrobek = Konspekt(
     },
     metos: [Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (vecstock)',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     aims: [
       'Refleksja uczestników nad sensem i celem własnego życia',
       'Refleksja uczestników nad hierarchia wartości w perspektywie własnej śmierci',

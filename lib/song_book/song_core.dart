@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 
-import 'package:harcapp_core/values/people/contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
 
 SongRate? songRateFromInt(int value){
   switch(value){
@@ -89,7 +89,7 @@ abstract class SongCore{
   bool get showRelDateMonth;
   bool get showRelDateDay;
 
-  List<ContributorIdentity> get contribId;
+  List<ContributorRef> get contribId;
   ContributorData? get contributorData;
   String? get youtubeVideoId;
   bool get isOwn;

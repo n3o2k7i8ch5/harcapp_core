@@ -19,7 +19,7 @@ Konspekt zimowiskowe_apele_przed_osrodkiem = Konspekt(
     },
     metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     aims: [
       aimSilaCharakteruZimno
     ],

@@ -55,7 +55,7 @@ Konspekt wspolna_minuta_czosnku = Konspekt(
     },
     metos: [Meto.hs, Meto.wedro],
     coverAuthor: 'Freepik (frimufilms)',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     customDuration: Duration(minutes: 1),
     aims: [
       'Kształtowanie u uczestników siły charakteru poprzez nieprzyjemne praktyki',

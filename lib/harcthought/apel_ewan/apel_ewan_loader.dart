@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:harcapp_core/values/people/contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'package:harcapp_core/values/common_color_data.dart';
 import 'package:yaml/yaml.dart';
 
@@ -157,9 +157,9 @@ ApelEwanVariant _parseApelEwanVariant(YamlMap v) {
   );
 }
 
-ContributorIdentity _parseAddedBy(String id, YamlMap addedByYaml) {
+ContributorRef _parseAddedBy(String id, YamlMap addedByYaml) {
   try {
-    return ContributorIdentity.fromApiRespMapStrict(
+    return ContributorRef.fromApiRespMapStrict(
       Map<String, dynamic>.from(addedByYaml),
     );
   } on StateError catch (e) {

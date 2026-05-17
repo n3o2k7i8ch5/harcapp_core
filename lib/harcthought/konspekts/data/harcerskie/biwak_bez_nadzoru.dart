@@ -61,7 +61,7 @@ Konspekt biwak_bez_nadzoru = Konspekt(
     },
     metos: [Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     aims: [
       'Kształtowanie u uczestników postawy i umiejętności odpowiedzialności',
       'Kształtowanie u uczestników postawy sumienności, zaradności i proaktywnej postawy',

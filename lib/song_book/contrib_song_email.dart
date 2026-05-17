@@ -5,9 +5,9 @@ import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 
-import 'package:harcapp_core/values/people/contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
 
-bool _isContributorNew(ContributorIdentity contribId) {
+bool _isContributorNew(ContributorRef contribId) {
   if(contribId.emailRef == null) return true;
   if(!allRegisteredPeopleByEmailMap.containsKey(contribId.emailRef)) return true;
 
@@ -17,7 +17,7 @@ bool _isContributorNew(ContributorIdentity contribId) {
 bool _isPersonsFirstSong(List<SongCore> songs){
   bool isPersonsFirstSong = false;
   for (SongCore song in songs)
-    for (ContributorIdentity contribId in song.contribId)
+    for (ContributorRef contribId in song.contribId)
       if (_isContributorNew(contribId)) {
         isPersonsFirstSong = true;
         break;
@@ -47,7 +47,7 @@ enum SongSource{
   }
 }
 
-String _registeredPersonToJsonBlock(RegisteredContributor registered, {List<ContributorIdentity> contribIds = const []}){
+String _registeredPersonToJsonBlock(RegisteredContributor registered, {List<ContributorRef> contribIds = const []}){
   final contribIdEmails = <String>[
     for(final c in contribIds)
       if(c.emailRef != null) c.emailRef!,
@@ -72,7 +72,7 @@ String _baseMessage(
     String? acceptRulesVersion,
     bool isPersonsFirstSong,
     RegisteredContributor? registered,
-    List<ContributorIdentity> contribIds,
+    List<ContributorRef> contribIds,
 ) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
     "\n"
     "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
@@ -143,7 +143,7 @@ String composeContribAttachedSongsEmail({
 
   bool isPersonsFirstSong = _isPersonsFirstSong(songs);
 
-  List<ContributorIdentity> allContribIds = [
+  List<ContributorRef> allContribIds = [
     for(SongCore song in songs) ...song.contribId
   ];
 

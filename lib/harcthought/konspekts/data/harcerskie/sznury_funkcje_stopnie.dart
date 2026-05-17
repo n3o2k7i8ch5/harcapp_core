@@ -34,7 +34,7 @@ Konspekt sznury_funkcje_stopnie = Konspekt(
   },
   metos: [Meto.harc, Meto.hs],
   coverAuthor: 'freepik.com (WangXiNa)',
-  author: DANIEL_IWANICKI.toContributorIdentity(),
+  author: DANIEL_IWANICKI.toContributorRef(),
   aims: [
     'Przekazanie wiedzy o funkcjach w ZHP i sposobie ich oznaczenia.',
     'Przekazanie wiedzy o stopniach harcerskich i instruktorskich w ZHP i sposobie ich oznaczenia.',

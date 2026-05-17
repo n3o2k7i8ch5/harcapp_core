@@ -23,7 +23,7 @@ Konspekt bibliodrama = Konspekt(
 
     metos: [Meto.wedro],
     coverAuthor: 'freepik.com (freepik)',
-    author: MIKOLAJ_WITKOWSKI.toContributorIdentity(),
+    author: MIKOLAJ_WITKOWSKI.toContributorRef(),
     aims: [
       'Doświadczenie Słowa Bożego poprzez zbudowanie empatycznej relacji z bohaterami biblijnych historii',
       'Doświadczenie Słowa Bożego poprzez wymianę z innymi osobami punktów widzenia interpretowanej historii biblijnej',

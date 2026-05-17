@@ -66,7 +66,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'deon.pl (Zielone Parafie)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Normalizacja tematów związanych z religią chrześcijańską',
         'Sprowokowanie refleksji nad znaczeniem symboliki chrześcijańskiej poprzez jej tworzenie',
@@ -178,7 +178,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (Flatiron)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Normalizacja tematów związanych z religią chrześcijańską i jej symboliką',
         'Sprowokowanie refleksji nad historią narodzin Jezusa poprzez jej własne przedstawienie',
@@ -302,7 +302,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: '',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       customDuration: Duration(minutes: 45),
       aims: [
         aimSilaCharakteruZimno
@@ -342,7 +342,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.wedro],
       coverAuthor: 'Radio Olsztyn',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       customDuration: Duration(hours: 8),
       aims: [
         aimUmiejetnoscWedrowania,
@@ -387,7 +387,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (vecstock)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Przedstawienie uczestnikom kokretnych sposobów postępowań charakteryzujących świętych'
       ],
@@ -439,7 +439,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.wedro],
       coverAuthor: 'Freepik (vecstock)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Poznanie przez uczestników własnych emocji i ich motywacji',
         'Uświadomienie uczestnikom związku między ich emocjami a czynami'
@@ -538,7 +538,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Uczestniczenie we wspólnocie Kościoła',
         'Normalizacja spraw wiary jako kwestii otwartej i wspólnej',
@@ -588,7 +588,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       customDuration: Duration(hours: 2),
       aims: [
         'Utrwalenie wśród uczestników treści Prawa Harcerskiego',
@@ -635,7 +635,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.zuch],
       coverAuthor: 'Daniel Iwanicki',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       customDuration: Duration(hours: 2),
       aims: [
         'Utrwalenie wśród uczestników treści Prawa Zucha',
@@ -721,7 +721,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (mengsilinxi)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       customDuration: Duration(minutes: 90),
       aims: [
         'Refleksja nad historiami i wynikającymi z nich wartościami i postawami w piosenkach.',
@@ -859,7 +859,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (freepik)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Budowanie relacji z Bogiem',
         'Budowanie przekonania o ważności modlitwy',
@@ -911,7 +911,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Kształtowanie u uczestników szacunku dla porządku kosztem własnej indywidualności',
         'Budowanie u uczestników doświadczenia bycia częścią większej wspólnoty (nie tylko indywidualną jednostką)',
@@ -972,7 +972,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Refleksja uczestników nad fundamentami swoich poglądów i wartości',
         aimUmiejetnoscNegocjowania,
@@ -1133,7 +1133,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     aims: [
       'Budowanie u uczestników wspólnoty poprzez mechanizm rywalizacji',
       'Kształtowanie u uczestników szacunku dla skuteczności w działaniu',
@@ -1170,7 +1170,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.zuch, Meto.harc],
       coverAuthor: 'Freepik (freepik)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Kształtowanie u uczestników postawy sumienności'
       ],
@@ -1211,7 +1211,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: '',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Refleksja nad życiem i wartościami autorytetu'
       ],
@@ -1252,7 +1252,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: '',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Budowanie u uczestników postawy szacunku dla dla wydawanych przez kadrę komend',
         aimSzacunekDlaSkutecznegoDzialania,
@@ -1320,7 +1320,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         aimPraktykaModlitwy,
         aimSilaCharakteruWedrowanie,
@@ -1349,7 +1349,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Kształtowanie u uczestników szacunku dla wiedzy i logicznego myślenia'
       ],
@@ -1527,7 +1527,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (QuadGraphics)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Kształtowanie u uczestników siły charakteru'
       ],
@@ -1576,7 +1576,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (vector_corp)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Podjęcie przez uczestników refleksji nad sensem i celem życia'
       ],
@@ -1641,7 +1641,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Daniel Iwanicki',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Wyciszenie poprzez podróż rowerową po niezurbanizowanym terenie',
         aimPraktykaModlitwy,
@@ -1754,7 +1754,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.harc, Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (thetrimhub)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       customDuration: Duration(minutes: 90),
       aims: [
         'Stworzenie naturalnej okazji do poruszenia kluczowych aspektów dot. wartości i postaw',
@@ -1811,7 +1811,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (freepik)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Zrozumienie przez uczestników mechanizmu szyfrowania danych w sieci',
         'Zrozumienie przez uczestników poziomu prywatności danych przechowywanych w sieci',
@@ -2128,7 +2128,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
     type: KonspektType.zwyczaj,
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'freepik.com (vecstock)',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     customDuration: Duration(minutes: 15),
     aims: [
       'Utrwalenie treści Prawa Harcerskiego u uczestników.',
@@ -2180,7 +2180,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
     type: KonspektType.zwyczaj,
     metos: [Meto.zuch],
     coverAuthor: 'freepik.com (Sketchepedia)',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     customDuration: Duration(minutes: 15),
     aims: [
       'Utrwalenie treści Prawa Zucha u uczestników.',
@@ -2238,7 +2238,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       },
       metos: [Meto.hs, Meto.wedro],
       coverAuthor: 'Freepik (DenisW)',
-      author: DANIEL_IWANICKI.toContributorIdentity(),
+      author: DANIEL_IWANICKI.toContributorRef(),
       aims: [
         'Uporządkowanie życia i pomoc w pracy nad sobą przez uczestników'
       ],

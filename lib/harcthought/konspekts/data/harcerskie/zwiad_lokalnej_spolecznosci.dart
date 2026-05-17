@@ -26,7 +26,7 @@ Konspekt zwiad_lokalnej_spolecznosci = Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'Daniel Iwanicki',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     customDuration: Duration(hours: 5),
     aims: [
       'Kształtowanie u uczestników otwartości na kontakt z drugim człowiekiem',

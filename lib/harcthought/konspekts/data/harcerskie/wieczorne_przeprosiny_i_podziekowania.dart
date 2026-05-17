@@ -46,7 +46,7 @@ Konspekt wieczorne_przeprosiny_i_podziekowania = Konspekt(
     },
     metos: [Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: '',
-    author: DANIEL_IWANICKI.toContributorIdentity(),
+    author: DANIEL_IWANICKI.toContributorRef(),
     customDuration: Duration(minutes: 15),
     aims: [
       'Kształtowanie u uczestników postawy wdzięczności',

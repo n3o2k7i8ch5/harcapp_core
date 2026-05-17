@@ -1,4 +1,4 @@
-import 'package:harcapp_core/values/people/contributor_identity.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
 
 class ApelEwanVariant{
 
@@ -33,9 +33,9 @@ class ApelEwan{
   /// [shortTitle], [questions] and [comment].
   final Map<String, ApelEwanVariant> variants;
   /// Who added this apel ewangeliczne to the app. At least one of
-  /// [ContributorIdentity.name] / [ContributorIdentity.emailRef] /
-  /// [ContributorIdentity.userKeyRef] must be set.
-  final ContributorIdentity addedBy;
+  /// [ContributorRef.name] / [ContributorRef.emailRef] /
+  /// [ContributorRef.userKeyRef] must be set.
+  final ContributorRef addedBy;
 
   const ApelEwan({
     required this.dirName,
