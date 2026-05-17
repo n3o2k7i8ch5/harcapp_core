@@ -13,6 +13,7 @@ import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/chord.dart';
 import 'package:harcapp_core/comm_widgets/chord_draw_bar.dart';
+import 'package:harcapp_core/comm_widgets/person_card.dart';
 import 'package:harcapp_core/comm_widgets/separated_column.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/logger.dart';
@@ -22,7 +23,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:native_device_orientation/native_device_orientation.dart';
 import 'package:provider/provider.dart';
 
-import '../contributor_identity_resolver.dart';
 import '../providers.dart';
 import '../settings.dart';
 import '../song_core.dart';
@@ -68,7 +68,7 @@ class SongAutoScrollController extends StatelessWidget{
 
 }
 
-class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends StatefulWidget{
+class SongWidgetTemplate<TSong extends SongCore> extends StatefulWidget{
 
   static IconData iconSendSong = MdiIcons.sendCircleOutline;
   static IconData iconShareSong = MdiIcons.shareVariant;
@@ -133,8 +133,6 @@ class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends Contribut
   final ScrollController scrollController;
   final Color? accentColor;
 
-  final TContribIdRes contribIdResolver;
-
   const SongWidgetTemplate(
       this.song,
       this.settings,
@@ -195,17 +193,15 @@ class SongWidgetTemplate<TSong extends SongCore, TContribIdRes extends Contribut
         required this.scrollController,
         this.accentColor,
 
-        required this.contribIdResolver,
-
         Key? key
       }):super(key: key);
 
   @override
-  State<StatefulWidget> createState() => SongWidgetTemplateState<TSong, TContribIdRes>();
+  State<StatefulWidget> createState() => SongWidgetTemplateState<TSong>();
 
 }
 
-class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends State<SongWidgetTemplate<TSong, TContribIdRes>>{
+class SongWidgetTemplateState<TSong extends SongCore> extends State<SongWidgetTemplate<TSong>>{
 
   TSong get song => widget.song;
   SongBookSettTempl get settings => widget.settings;
@@ -266,8 +262,6 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
   ScrollController get scrollController => widget.scrollController;
   Color? get accentColor => widget.accentColor;
-
-  TContribIdRes get contribIdResolver => widget.contribIdResolver;
 
   bool get showChords => settings.showChords && song.hasChords;
 
@@ -338,7 +332,7 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
                 if(header!=null) header!.call(context, scrollController),
 
-                _TitleCard<TSong, TContribIdRes>(
+                _TitleCard<TSong>(
                   song: song,
                   index: index,
                   onTitleTap: (){
@@ -380,9 +374,9 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
             SliverList(
               delegate: SliverChildListDelegate([
 
-                _ButtonsWidget<TSong, TContribIdRes>(this, contentCardsKey),
+                _ButtonsWidget<TSong>(this, contentCardsKey),
 
-                _ContentWidget<TSong, TContribIdRes>(this, scrollController, contentCardsKey, scrollviewKey, key: contentCardsKey),
+                _ContentWidget<TSong>(this, scrollController, contentCardsKey, scrollviewKey, key: contentCardsKey),
 
                 if(song.releaseDate != null)
                   Padding(
@@ -419,7 +413,11 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
                       child: SeparatedColumn(
                         separator: SizedBox(height: Dimen.defMarg),
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: song.contribId.map((contribId) => contribIdResolver.build(context, contribId)).toList(),
+                        children: song.contribId.map((contribId) {
+                          final person = contribId.resolve();
+                          if(person == null) return const SizedBox.shrink();
+                          return PersonCard(person);
+                        }).toList(),
                       )
                   ),
 
@@ -468,12 +466,12 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
     final RenderBox renderBoxScrollview = scrollviewKey.currentContext!.findRenderObject() as RenderBox;
     return renderBoxScrollview.size.height;
   }
-  
+
   static double scrollViewTop(GlobalKey scrollviewKey){
     final RenderBox renderBoxScrollview = scrollviewKey.currentContext!.findRenderObject() as RenderBox;
     return renderBoxScrollview.localToGlobal(Offset.zero).dy;
   }
-  
+
   static double contentWidgetHeight(GlobalKey contentCardsKey){
     final RenderBox renderBoxText = contentCardsKey.currentContext!.findRenderObject() as RenderBox;
     return renderBoxText.size.height;
@@ -485,10 +483,10 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
   }
 
   static double contentWidgetTopOffset(GlobalKey contentCardsKey, GlobalKey scrollviewKey, double innerScrollOffset) =>
-    contentWidgetTopPos(contentCardsKey) - scrollViewTop(scrollviewKey) + innerScrollOffset;
+      contentWidgetTopPos(contentCardsKey) - scrollViewTop(scrollviewKey) + innerScrollOffset;
 
   static double textWidgetHeight(GlobalKey contentCardsKey) =>
-    contentWidgetHeight(contentCardsKey) - 2*_ContentWidget.vertMargVal - 2*_ContentWidget.vertPaddVal;
+      contentWidgetHeight(contentCardsKey) - 2*_ContentWidget.vertMargVal - 2*_ContentWidget.vertPaddVal;
 
   static double textWidgetTopPos(GlobalKey contentCardsKey) =>
       contentWidgetTopPos(contentCardsKey) + _ContentWidget.vertMargVal + _ContentWidget.vertPaddVal;
@@ -499,13 +497,13 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
   }
 
   static void _startAutoscroll(
-    BuildContext context,
-    SongCore song,
-    ScrollController scrollController,
-    { bool restart = false,
-      GlobalKey? scrollviewKey,
-      GlobalKey? contentCardsKey,
-    })async{
+      BuildContext context,
+      SongCore song,
+      ScrollController scrollController,
+      { bool restart = false,
+        GlobalKey? scrollviewKey,
+        GlobalKey? contentCardsKey,
+      })async{
 
     assert(restart || (contentCardsKey != null && scrollviewKey != null));
 
@@ -558,20 +556,20 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
       autoscrollProvider.isScrolling = true;
 
     Function() debugListener = () =>
-      logger.d(
-        'Autoscrolling: '
-        '${scrollController.offset.toStringAsFixed(1)} / '
-        '${autoscrollProvider.scrollExtent!.toStringAsFixed(1)}'
-      );
+        logger.d(
+            'Autoscrolling: '
+                '${scrollController.offset.toStringAsFixed(1)} / '
+                '${autoscrollProvider.scrollExtent!.toStringAsFixed(1)}'
+        );
 
     scrollController.addListener(debugListener);
 
     logger.d('Autoscrolling started for ${millisecondsLeft.round()} milliseconds (autoscrollTextSpeed: ${settings.autoscrollTextSpeed}, bottomVisibleLineIdx: ${bottomVisibleLineIdx}).');
     await scrollController.animateTo(
       // Don't use `scrollController.position.maxScrollExtent` - it changes it's value during scrolling.
-      autoscrollProvider.scrollExtent!,
-      duration: Duration(milliseconds: millisecondsLeft.round()),
-      curve: Curves.linear
+        autoscrollProvider.scrollExtent!,
+        duration: Duration(milliseconds: millisecondsLeft.round()),
+        curve: Curves.linear
     );
 
     scrollController.removeListener(debugListener);
@@ -582,14 +580,14 @@ class SongWidgetTemplateState<TSong extends SongCore, TContribIdRes extends Cont
 
   void _notify(){
     textSizeProvider.reinit(
-      song,
-      chordsVisible: ShowChordsProvider.of(context).showChords
+        song,
+        chordsVisible: ShowChordsProvider.of(context).showChords
     );
   }
 
 }
 
-class _TitleCard<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends StatelessWidget{
+class _TitleCard<TSong extends SongCore> extends StatelessWidget{
 
   final TSong song;
   final int index;
@@ -660,34 +658,34 @@ class _TitleCard<TSong extends SongCore, TContribIdRes extends ContributorIdenti
     );
 
     Widget widgetComposer = Row(
-      mainAxisSize: MainAxisSize.min,
-      children:[
+        mainAxisSize: MainAxisSize.min,
+        children:[
 
-        SizedBox(width: Dimen.defMarg, height: Dimen.textSizeSmall + 3*Dimen.defMarg),
+          SizedBox(width: Dimen.defMarg, height: Dimen.textSizeSmall + 3*Dimen.defMarg),
 
-        Text(
-          'Kompoz.: ',
-          style: AppTextStyle(
-            fontSize: Dimen.textSizeSmall,
-            color: hintEnab_(context),
-          ),
-          textAlign: TextAlign.left,
-        ),
-
-        if(song.composers.isNotEmpty)
-          Expanded(
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: song.composers.map((composer) => _ContribPersonWidget(
-                  composer,
-                  onTap: () => onComposerTap?.call(composer),
-                )).toList(),
-              )
+          Text(
+            'Kompoz.: ',
+            style: AppTextStyle(
+              fontSize: Dimen.textSizeSmall,
+              color: hintEnab_(context),
             ),
-          )
-      ]
+            textAlign: TextAlign.left,
+          ),
+
+          if(song.composers.isNotEmpty)
+            Expanded(
+              child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: song.composers.map((composer) => _ContribPersonWidget(
+                      composer,
+                      onTap: () => onComposerTap?.call(composer),
+                    )).toList(),
+                  )
+              ),
+            )
+        ]
     );
 
     Widget widgetPerformer = Row(
@@ -712,9 +710,9 @@ class _TitleCard<TSong extends SongCore, TContribIdRes extends ContributorIdenti
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: song.performers.map((performer) => _ContribPersonWidget(
-                          performer,
-                          onTap: () => onPerformerTap?.call(performer),
-                        )).toList(),
+                      performer,
+                      onTap: () => onPerformerTap?.call(performer),
+                    )).toList(),
                   )
               ),
             )
@@ -758,7 +756,7 @@ class _TitleCard<TSong extends SongCore, TContribIdRes extends ContributorIdenti
                 children: [
 
                   widgetTitle,
-                  
+
                   widgetAuthor,
 
                   widgetComposer,
@@ -778,12 +776,12 @@ class _TitleCard<TSong extends SongCore, TContribIdRes extends ContributorIdenti
 
     if(pageNotifier == null) return appCard;
     else return AnimatedBuilder(
-        animation: pageNotifier!,
-        builder: (context, _) => Transform.translate(
-            offset: Offset(-MediaQuery.of(context).size.width/3*(pageNotifier!.value - index), 0),
-            child: appCard
-        ),
-      );
+      animation: pageNotifier!,
+      builder: (context, _) => Transform.translate(
+          offset: Offset(-MediaQuery.of(context).size.width/3*(pageNotifier!.value - index), 0),
+          child: appCard
+      ),
+    );
   }
 
 }
@@ -831,9 +829,9 @@ class _ButtonData{
     this.onLongPress,
     required this.show
   }):
-      assert(iconData != null || iconWidget != null, 'Either iconData or iconWidget must be provided.'),
-      _iconData = iconData,
-      _iconWidgetBuilder = iconWidget;
+        assert(iconData != null || iconWidget != null, 'Either iconData or iconWidget must be provided.'),
+        _iconData = iconData,
+        _iconWidgetBuilder = iconWidget;
 
   Widget icon(BuildContext context, SongWidgetTemplateState songWidget, _ButtonsWidgetState buttonsWidget) =>
       _iconWidgetBuilder == null ?
@@ -845,25 +843,25 @@ class _ButtonData{
       SongWidgetTemplateState songWidget,
       _ButtonsWidgetState buttonsWidget,
       {bool tappable = true}
-  ) => AppButton(
+      ) => AppButton(
     icon: icon(context, songWidget, buttonsWidget),
 
     onTap: tappable?
-    () => onPressed.call(context, songWidget, buttonsWidget):
+        () => onPressed.call(context, songWidget, buttonsWidget):
     null,
 
     onLongPress:
     onLongPress == null || !tappable?
     null:
-    () => onLongPress?.call(context, songWidget, buttonsWidget),
+        () => onLongPress?.call(context, songWidget, buttonsWidget),
   );
 
   Widget buildSimpleButton(
-    BuildContext context,
-    SongWidgetTemplateState songWidget,
-    _ButtonsWidgetState buttonsWidget,
-    {bool tappable = true}
-  ) => SimpleButton.from(
+      BuildContext context,
+      SongWidgetTemplateState songWidget,
+      _ButtonsWidgetState buttonsWidget,
+      {bool tappable = true}
+      ) => SimpleButton.from(
     context: context,
     text: name,
     iconWidget: icon(context, songWidget, buttonsWidget),
@@ -872,30 +870,30 @@ class _ButtonData{
 
     onTap:
     tappable?
-    () => onPressed.call(context, songWidget, buttonsWidget):
+        () => onPressed.call(context, songWidget, buttonsWidget):
     null,
 
     onLongPress: onLongPress == null || !tappable?
     null:
-    () => onLongPress?.call(context, songWidget, buttonsWidget),
+        () => onLongPress?.call(context, songWidget, buttonsWidget),
   );
 
 }
 
-class _ButtonsWidget<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends StatefulWidget{
+class _ButtonsWidget<TSong extends SongCore> extends StatefulWidget{
 
-  final SongWidgetTemplateState<TSong, TContribIdRes> fragmentState;
+  final SongWidgetTemplateState<TSong> fragmentState;
   final GlobalKey contentCardsKey;
 
   const _ButtonsWidget(this.fragmentState, this.contentCardsKey);
 
   @override
-  State<StatefulWidget> createState() => _ButtonsWidgetState<TSong, TContribIdRes>();
+  State<StatefulWidget> createState() => _ButtonsWidgetState<TSong>();
 
 }
 
-class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends State<_ButtonsWidget<TSong, TContribIdRes>>{
-  
+class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<TSong>>{
+
   // Reversed order of buttons to show them from right to left.
   static List<_ButtonData> getButtonData({bool showYtButton = true}) => [
 
@@ -939,26 +937,26 @@ class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends Contribu
           },
           show: (_, parent, _) => parent.song.youtubeVideoId != null && parent.song.youtubeVideoId!.length!=0
       ),
-    
+
     _ButtonData(
-      name: 'Trudne słowa',
-      iconData: MdiIcons.timelineTextOutline,
-      onPressed: (_, songWidget, _) => songWidget.onSongExplanationTap?.call(),
-      show: (_, songWidget, _) => songWidget.showSongExplanationButton
+        name: 'Trudne słowa',
+        iconData: MdiIcons.timelineTextOutline,
+        onPressed: (_, songWidget, _) => songWidget.onSongExplanationTap?.call(),
+        show: (_, songWidget, _) => songWidget.showSongExplanationButton
     ),
 
     _ButtonData(
-      name: 'Modyfikuj',
-      iconData: FeatherIcons.edit,
-      onPressed: (context, parent, _) => parent.onEditTap?.call(TextSizeProvider.of(context)),
-      show: (_, _, _) => true
+        name: 'Modyfikuj',
+        iconData: FeatherIcons.edit,
+        onPressed: (context, parent, _) => parent.onEditTap?.call(TextSizeProvider.of(context)),
+        show: (_, _, _) => true
     ),
 
     _ButtonData(
-      name: 'Kopiuj treść',
-      iconData: MdiIcons.contentCopy,
-      onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
-      show: (_, _, _) => true
+        name: 'Kopiuj treść',
+        iconData: MdiIcons.contentCopy,
+        onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
+        show: (_, _, _) => true
     ),
 
 
@@ -977,16 +975,16 @@ class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends Contribu
     ),
 
     _ButtonData(
-      name: 'Usuń',
-      iconData: MdiIcons.trashCanOutline,
-      onPressed: (_, songWidget, _) => songWidget.onDeleteTap?.call(),
-      onLongPress: (_, songWidget, _) => songWidget.onDeleteLongPress,
-      show: (_, songWidget, _) => songWidget.song.isOwn
+        name: 'Usuń',
+        iconData: MdiIcons.trashCanOutline,
+        onPressed: (_, songWidget, _) => songWidget.onDeleteTap?.call(),
+        onLongPress: (_, songWidget, _) => songWidget.onDeleteLongPress,
+        show: (_, songWidget, _) => songWidget.song.isOwn
     ),
-    
+
   ];
 
-  SongWidgetTemplateState<TSong, TContribIdRes> get fragmentState => widget.fragmentState;
+  SongWidgetTemplateState<TSong> get fragmentState => widget.fragmentState;
   GlobalKey get contentCardsKey => widget.contentCardsKey;
 
   late bool changeSizeVisible;
@@ -1016,12 +1014,12 @@ class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends Contribu
     setState(() => changeSizeVisible = true);
     scheduleAutoHide();
   }
-  
+
   void hideChangeSize(){
     setState(() => changeSizeVisible = false);
     scheduleId++;
   }
-  
+
   @override
   Widget build(BuildContext context){
 
@@ -1057,16 +1055,16 @@ class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends Contribu
               clipBehavior: Clip.hardEdge,
               onSelected: (_ButtonData item) => item.onPressed(context, fragmentState, this),
               itemBuilder: (BuildContext context) => hiddenButtons.map(
-                  (button) => PopupMenuItem<_ButtonData>(
-                    value: button,
-                    padding: EdgeInsets.zero,
-                    child: button.buildSimpleButton(
-                      context,
-                      fragmentState,
-                      this,
-                      tappable: false,
+                      (button) => PopupMenuItem<_ButtonData>(
+                      value: button,
+                      padding: EdgeInsets.zero,
+                      child: button.buildSimpleButton(
+                        context,
+                        fragmentState,
+                        this,
+                        tappable: false,
+                      )
                   )
-                )
               ).toList(),
             ),
 
@@ -1085,25 +1083,25 @@ class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends Contribu
     );
 
     return SizedBox(
-      height: Dimen.iconFootprint,
-      child: AnimatedChildSlider(
-        direction: Axis.horizontal,
-        duration: Duration(milliseconds: 150),
-        alignment: Alignment.centerRight,
-        isCenter: false,
-        index: changeSizeVisible?1:0,
-        children: [
+        height: Dimen.iconFootprint,
+        child: AnimatedChildSlider(
+          direction: Axis.horizontal,
+          duration: Duration(milliseconds: 150),
+          alignment: Alignment.centerRight,
+          isCenter: false,
+          index: changeSizeVisible?1:0,
+          children: [
 
-          buttonWidget,
+            buttonWidget,
 
-          _TextResizeWidget<TSong, TContribIdRes>(
-            fragmentState,
-            onCloseTap: hideChangeSize,
-            onResizeTap: scheduleAutoHide
-          )
+            _TextResizeWidget<TSong>(
+                fragmentState,
+                onCloseTap: hideChangeSize,
+                onResizeTap: scheduleAutoHide
+            )
 
-        ],
-      )
+          ],
+        )
     );
   }
 
@@ -1111,22 +1109,22 @@ class _ButtonsWidgetState<TSong extends SongCore, TContribIdRes extends Contribu
 
 
 
-class _TextResizeWidget<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends StatelessWidget{
+class _TextResizeWidget<TSong extends SongCore> extends StatelessWidget{
 
-  final SongWidgetTemplateState<TSong, TContribIdRes> fragmentState;
+  final SongWidgetTemplateState<TSong> fragmentState;
   final void Function()? onCloseTap;
   final void Function()? onResizeTap;
-  
+
   const _TextResizeWidget(this.fragmentState, {this.onCloseTap, this.onResizeTap});
-  
+
   @override
   Widget build(BuildContext context) => Row(
       mainAxisSize: MainAxisSize.max,
       children: [
 
         Padding(
-          padding: EdgeInsets.all(Dimen.iconMarg),
-          child: TextSizeIcon(color: iconDisab_(context))
+            padding: EdgeInsets.all(Dimen.iconMarg),
+            child: TextSizeIcon(color: iconDisab_(context))
         ),
 
         AppButton(icon: Icon(MdiIcons.formatFontSizeDecrease, color: iconEnab_(context)),
@@ -1150,7 +1148,7 @@ class _TextResizeWidget<TSong extends SongCore, TContribIdRes extends Contributo
               TextSizeProvider prov = TextSizeProvider.of(context);
               TextScaler textScaler = MediaQuery.textScalerOf(context);
 
-                double scaleFactor = TextSizeProvider.fits(
+              double scaleFactor = TextSizeProvider.fits(
                   prov.maxWidth,
                   textScaler,
                   fragmentState.song.text,
@@ -1176,10 +1174,10 @@ class _TextResizeWidget<TSong extends SongCore, TContribIdRes extends Contributo
           icon: Icon(MdiIcons.close),
           onTap: onCloseTap,
         ),
-        
+
       ]
   );
-  
+
 }
 
 class TextSizeIcon extends StatelessWidget{
@@ -1235,12 +1233,12 @@ class TextSizeIcon extends StatelessWidget{
 
 }
 
-class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorIdentityResolver> extends StatelessWidget{
+class _ContentWidget<TSong extends SongCore> extends StatelessWidget{
 
   static const double vertMargVal = SimpleButton.defMargVal;
   static const double vertPaddVal = SimpleButton.defPaddVal;
 
-  final SongWidgetTemplateState<TSong, TContribIdRes> parent;
+  final SongWidgetTemplateState<TSong> parent;
   final ScrollController scrollController;
   final GlobalKey contentCardsKey;
   final GlobalKey scrollviewKey;
@@ -1258,145 +1256,145 @@ class _ContentWidget<TSong extends SongCore, TContribIdRes extends ContributorId
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
-    builder: (BuildContext context, BoxConstraints constraints) => OrientationBuilder(
-        builder: (BuildContext context, Orientation orientation) {
+      builder: (BuildContext context, BoxConstraints constraints) => OrientationBuilder(
+          builder: (BuildContext context, Orientation orientation) {
 
-          // To po to, żeby tekst został zresetowany po zmianie orientacji.
-          // if (parent.oldOrientation != MediaQuery.of(context).orientation)
-          // parent.oldOrientation = orientation;
+            // To po to, żeby tekst został zresetowany po zmianie orientacji.
+            // if (parent.oldOrientation != MediaQuery.of(context).orientation)
+            // parent.oldOrientation = orientation;
 
-          return Consumer3<TextSizeProvider, ShowChordsProvider, ChordsTrailingProvider>(
-              builder: (context, textSizeProv, showChordsProv, chordsTrailProv, _){
+            return Consumer3<TextSizeProvider, ShowChordsProvider, ChordsTrailingProvider>(
+                builder: (context, textSizeProv, showChordsProv, chordsTrailProv, _){
 
-                textSizeProv.tryInit(
-                    song, constraints.maxWidth,
-                    chordsVisible: showChordsProv.showChords
-                );
+                  textSizeProv.tryInit(
+                      song, constraints.maxWidth,
+                      chordsVisible: showChordsProv.showChords
+                  );
 
-                Widget chordsWidget = Builder(
-                    builder: (context){
+                  Widget chordsWidget = Builder(
+                      builder: (context){
 
-                      if(!showChordsProv.showChords)
-                        return Container();
+                        if(!showChordsProv.showChords)
+                          return Container();
 
-                      return SimpleButton(
-                          margin: EdgeInsets.all(SimpleButton.defMargVal),
-                          padding: EdgeInsets.all(SimpleButton.defPaddVal),
-                          child: Text(
-                            chords,
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: textSizeProv.value, //initial font size
-                              color: textEnab_(context),
-                              height: lineSpacing,
-                            ),
-                          ),
-                          onTap: parent.onChordsTap==null?null:(){
-                            parent.onChordsTap!(textSizeProv);
-                            ChordShiftProvider.of(context).notify();
-                          },
-                          onLongPress: parent.onChordsLongPress==null?null:(){
-                            parent.onChordsLongPress!(textSizeProv);
-                            ChordShiftProvider.of(context).notify();
-                          }
-                      );
-
-                    }
-                );
-
-                Widget numWidget = Text(
-                  lineNum,
-                  textAlign: TextAlign.end,
-                  style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: min(textSizeProv.value, Dimen.textSizeTiny),  //initial font size
-                      color: hintEnab_(context),
-                      height:
-                      textSizeProv.value<Dimen.textSizeTiny?
-                      lineSpacing:
-                      lineSpacing*(textSizeProv.value / Dimen.textSizeTiny)
-                  ),
-                );
-
-                bool chordsTrailing = settings.chordsTrailing;
-                // bool numTrailing = settings.chordsTrailing || !settings.showChords;
-
-                return Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-
-                    if(!chordsTrailing) chordsWidget,
-
-                    Expanded(
-                      child: SimpleButton(
-                          margin: EdgeInsets.all(SimpleButton.defMargVal),
-                          padding: EdgeInsets.all(SimpleButton.defPaddVal),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Expanded(
-                                  child: Text(
-                                    text,
-                                    style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: textSizeProv.value, //initial font size
-                                      color: textEnab_(context),
-                                      height: lineSpacing,
-                                    ),
-                                  )
+                        return SimpleButton(
+                            margin: EdgeInsets.all(SimpleButton.defMargVal),
+                            padding: EdgeInsets.all(SimpleButton.defPaddVal),
+                            child: Text(
+                              chords,
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: textSizeProv.value, //initial font size
+                                color: textEnab_(context),
+                                height: lineSpacing,
                               ),
-                              numWidget
-                            ],
-                          ),
-                          onTap: () async {
-                            if(settings.scrollText) {
-
-                              double scrollDefDelta = MediaQuery.of(context).size.height / 2;
-
-                              double scrollableContentHeight = (
-                                SongWidgetTemplateState.contentWidgetTopOffset(contentCardsKey, scrollviewKey, scrollController.offset)
-                                + SongWidgetTemplateState.contentWidgetHeight(contentCardsKey)
-                                + Dimen.floatingButtonMarg + Dimen.floatingButtonSize
-                              );
-
-                              double scrollableAmount = scrollableContentHeight - SongWidgetTemplateState.scrollViewHeight(scrollviewKey);
-
-                              double scrollDelta = min(
-                                  scrollDefDelta,
-                                  scrollableAmount - scrollController.offset
-                              );
-
-                              int scrollDuration = (1200*scrollDelta/scrollDefDelta).round();
-
-                              if(scrollDuration > 0) {
-                                parent.tapScrolling = true;
-                                await scrollController.animateTo(
-                                    scrollController.offset + scrollDelta,
-                                    duration: Duration(
-                                        milliseconds: scrollDuration),
-                                    curve: Curves.ease
-                                );
-                                parent.tapScrolling = false;
-                              }
+                            ),
+                            onTap: parent.onChordsTap==null?null:(){
+                              parent.onChordsTap!(textSizeProv);
+                              ChordShiftProvider.of(context).notify();
+                            },
+                            onLongPress: parent.onChordsLongPress==null?null:(){
+                              parent.onChordsLongPress!(textSizeProv);
+                              ChordShiftProvider.of(context).notify();
                             }
-                          },
-                          onLongPress: () => SongWidgetTemplateState._startAutoscroll(
-                            context,
-                            song,
-                            scrollController,
-                            contentCardsKey: contentCardsKey,
-                            scrollviewKey: scrollviewKey
-                          )
-                      ),
+                        );
+
+                      }
+                  );
+
+                  Widget numWidget = Text(
+                    lineNum,
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: min(textSizeProv.value, Dimen.textSizeTiny),  //initial font size
+                        color: hintEnab_(context),
+                        height:
+                        textSizeProv.value<Dimen.textSizeTiny?
+                        lineSpacing:
+                        lineSpacing*(textSizeProv.value / Dimen.textSizeTiny)
                     ),
+                  );
 
-                    if(chordsTrailing) chordsWidget
+                  bool chordsTrailing = settings.chordsTrailing;
+                  // bool numTrailing = settings.chordsTrailing || !settings.showChords;
 
-                  ],
-                );
-              }
-          );
-        }));
+                  return Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+
+                      if(!chordsTrailing) chordsWidget,
+
+                      Expanded(
+                        child: SimpleButton(
+                            margin: EdgeInsets.all(SimpleButton.defMargVal),
+                            padding: EdgeInsets.all(SimpleButton.defPaddVal),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Expanded(
+                                    child: Text(
+                                      text,
+                                      style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize: textSizeProv.value, //initial font size
+                                        color: textEnab_(context),
+                                        height: lineSpacing,
+                                      ),
+                                    )
+                                ),
+                                numWidget
+                              ],
+                            ),
+                            onTap: () async {
+                              if(settings.scrollText) {
+
+                                double scrollDefDelta = MediaQuery.of(context).size.height / 2;
+
+                                double scrollableContentHeight = (
+                                    SongWidgetTemplateState.contentWidgetTopOffset(contentCardsKey, scrollviewKey, scrollController.offset)
+                                        + SongWidgetTemplateState.contentWidgetHeight(contentCardsKey)
+                                        + Dimen.floatingButtonMarg + Dimen.floatingButtonSize
+                                );
+
+                                double scrollableAmount = scrollableContentHeight - SongWidgetTemplateState.scrollViewHeight(scrollviewKey);
+
+                                double scrollDelta = min(
+                                    scrollDefDelta,
+                                    scrollableAmount - scrollController.offset
+                                );
+
+                                int scrollDuration = (1200*scrollDelta/scrollDefDelta).round();
+
+                                if(scrollDuration > 0) {
+                                  parent.tapScrolling = true;
+                                  await scrollController.animateTo(
+                                      scrollController.offset + scrollDelta,
+                                      duration: Duration(
+                                          milliseconds: scrollDuration),
+                                      curve: Curves.ease
+                                  );
+                                  parent.tapScrolling = false;
+                                }
+                              }
+                            },
+                            onLongPress: () => SongWidgetTemplateState._startAutoscroll(
+                                context,
+                                song,
+                                scrollController,
+                                contentCardsKey: contentCardsKey,
+                                scrollviewKey: scrollviewKey
+                            )
+                        ),
+                      ),
+
+                      if(chordsTrailing) chordsWidget
+
+                    ],
+                  );
+                }
+            );
+          }));
 
 }
 
@@ -1439,7 +1437,7 @@ class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
                   onChanged: (value){
                     prov.speed = value;
                     SongWidgetTemplateState._startAutoscroll(
-                        context, 
+                        context,
                         songBuilder(),
                         scrollControllerBuilder(),
                         restart: true
@@ -1448,8 +1446,8 @@ class AutoScrollSpeedWidget<T extends SongCore> extends StatelessWidget{
                   label: 'Jedna linijka co ${(10/prov.speed).ceil()/10} sek.',
                 ),
                 data: SliderTheme.of(context).copyWith(
-                  valueIndicatorTextStyle: AppTextStyle(color: accentIconColor??background_(context), fontWeight: weightHalfBold),
-                  valueIndicatorColor: accentColor??accent_(context)
+                    valueIndicatorTextStyle: AppTextStyle(color: accentIconColor??background_(context), fontWeight: weightHalfBold),
+                    valueIndicatorColor: accentColor??accent_(context)
                 ),
               ),
             ),
