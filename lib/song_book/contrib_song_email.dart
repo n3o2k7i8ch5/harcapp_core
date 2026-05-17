@@ -7,23 +7,12 @@ import 'package:harcapp_core/values/people/utils.dart';
 
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 
-bool _isContributorNew(ContributorRef contribRefs) {
-  if(contribRefs.emailRef == null) return true;
-  if(!allRegisteredPeopleByEmailMap.containsKey(contribRefs.emailRef)) return true;
-
-  return false;
-}
-
-bool _isPersonsFirstSong(List<SongCore> songs){
-  bool isPersonsFirstSong = false;
-  for (SongCore song in songs)
-    for (ContributorRef contribRefs in song.contribRefs)
-      if (_isContributorNew(contribRefs)) {
-        isPersonsFirstSong = true;
-        break;
-      }
-
-  return isPersonsFirstSong;
+/// Świeżak iff nadawca nie jest jeszcze zarejestrowany — czyli `registered`
+/// jest `null` albo żaden z jego adresów nie figuruje w globalnej mapie
+/// `allRegisteredPeopleByEmailMap`.
+bool _isContributorsFirstSong(RegisteredContributor? candidate){
+  if(candidate == null || candidate.emails.isEmpty) return true;
+  return !candidate.emails.any(allRegisteredPeopleByEmailMap.containsKey);
 }
 
 enum SongSource{
@@ -62,15 +51,16 @@ String _registeredPersonToJsonBlock(RegisteredContributor registered, {List<Cont
 String composeContribSongEmailSubject({
   required SongCore song,
   required bool isNewSong,
+  RegisteredContributor? registered,
 }){
-  bool isPersonsFirstSong = _isPersonsFirstSong([song]);
-  return '${isNewSong?'Nowa piosenka':'Poprawka piosenki'} "${song.title}" (${isPersonsFirstSong?' + świeżak + ':' - weteran - '})';
+  bool isContributorsFirstSong = _isContributorsFirstSong(registered);
+  return '${isNewSong?'Nowa piosenka':'Poprawka piosenki'} "${song.title}" (${isContributorsFirstSong?' + świeżak + ':' - weteran - '})';
 }
 
 String _baseMessage(
     SongSource source,
     String? acceptRulesVersion,
-    bool isPersonsFirstSong,
+    bool isContributorsFirstSong,
     RegisteredContributor? registered,
     List<ContributorRef> contribRefs,
 ) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
@@ -88,7 +78,7 @@ String _baseMessage(
         registered == null?
         '':
         '\n'
-        '\n### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):'
+        '\n### Osoba dodająca (${isContributorsFirstSong?' + świeżak + ':' - weteran - '}):'
         '\n'
         '\n```json'
         '\n${_registeredPersonToJsonBlock(registered, contribRefs: contribRefs)}'
@@ -104,11 +94,11 @@ Future<String> composeContribSongEmail({
   String? updateComment
 }) async {
 
-  bool isPersonsFirstSong = _isPersonsFirstSong([song]);
+  bool isContributorsFirstSong = _isContributorsFirstSong(registered);
 
   String encodedSong = await song.code;
 
-  return "${_baseMessage(source, acceptRulesVersion, isPersonsFirstSong, registered, song.contribRefs)}"
+  return "${_baseMessage(source, acceptRulesVersion, isContributorsFirstSong, registered, song.contribRefs)}"
       "${
           updateComment != null?
           '\n'
@@ -129,9 +119,10 @@ Future<String> composeContribSongEmail({
 
 String composeContribAttachedSongsEmailSubject({
   required List<SongCore> songs,
+  RegisteredContributor? registered,
 }){
-  bool isPersonsFirstSong = _isPersonsFirstSong(songs);
-  return 'Piosenki ${songs.length} (${isPersonsFirstSong?' + świeżak + ':' - weteran - '})';
+  bool isContributorsFirstSong = _isContributorsFirstSong(registered);
+  return 'Piosenki ${songs.length} (${isContributorsFirstSong?' + świeżak + ':' - weteran - '})';
 }
 
 String composeContribAttachedSongsEmail({
@@ -141,12 +132,12 @@ String composeContribAttachedSongsEmail({
   RegisteredContributor? registered,
 }) {
 
-  bool isPersonsFirstSong = _isPersonsFirstSong(songs);
+  bool isContributorsFirstSong = _isContributorsFirstSong(registered);
 
   List<ContributorRef> allContribRefs = [
     for(SongCore song in songs) ...song.contribRefs
   ];
 
-  return _baseMessage(source, acceptRulesVersion, isPersonsFirstSong, registered, allContribRefs);
+  return _baseMessage(source, acceptRulesVersion, isContributorsFirstSong, registered, allContribRefs);
 
 }
