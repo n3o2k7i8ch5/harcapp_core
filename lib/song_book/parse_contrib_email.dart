@@ -12,7 +12,7 @@ class ParsedContribEmail{
   final SongRaw song;
   final String? senderEmail;
   final String? acceptedRulesVersion;
-  final RegisteredContributorPerson? registered;
+  final RegisteredContributor? registered;
   final String? userMessage;
   final bool isNewFormat;
 
@@ -73,7 +73,7 @@ ParsedContribEmail _parseV2(String content){
   String? acceptedRulesVersion = _extractAcceptedRulesVersion(content);
   String? senderEmail = _extractSenderEmail(content);
 
-  RegisteredContributorPerson? registered;
+  RegisteredContributor? registered;
   String? personJson = _tryExtractFencedBlockAfter(content, '### Osoba dodająca');
   if(personJson != null){
     try {
@@ -81,7 +81,7 @@ ParsedContribEmail _parseV2(String content){
       final emailsRaw = personMap.remove('email');
       final emails = emailsRaw is List ? emailsRaw.cast<String>() : const <String>[];
       final person = Person.fromApiJsonMap(personMap);
-      registered = RegisteredContributorPerson(person: person, emails: emails);
+      registered = RegisteredContributor(person: person, emails: emails);
     } catch(_){
       // Person block malformed — keep null but still let parsing succeed.
     }
@@ -148,11 +148,11 @@ ParsedContribEmail _parseLegacy(String content){
   String? acceptedRulesVersion = _extractAcceptedRulesVersion(content);
   String? senderEmail = _extractSenderEmail(content);
 
-  RegisteredContributorPerson? registered;
+  RegisteredContributor? registered;
   int personHeaderIdx = content.indexOf('### Osoba dodająca');
   if(personHeaderIdx != -1 && personHeaderIdx < codeHeaderIdx){
     String personBlock = content.substring(personHeaderIdx, codeHeaderIdx);
-    // Try newer-legacy (RegisteredContributorPerson) first, fall back to V1
+    // Try newer-legacy (RegisteredContributor) first, fall back to V1
     // (bare Person), so nested `Person(...)` inside doesn't get mis-matched.
     registered = _parseLegacyRegisteredBlock(personBlock)
               ?? _parseLegacyPersonBlock(personBlock);
@@ -169,10 +169,10 @@ ParsedContribEmail _parseLegacy(String content){
 }
 
 /// Parses the newer legacy block emitted by `contrib_song_email_legacy.dart`:
-/// `RegisteredContributorPerson X = const RegisteredContributorPerson(
+/// `RegisteredContributor X = const RegisteredContributor(
 ///    person: Person(...), emails: [...] );`
-RegisteredContributorPerson? _parseLegacyRegisteredBlock(String block){
-  const marker = 'RegisteredContributorPerson(';
+RegisteredContributor? _parseLegacyRegisteredBlock(String block){
+  const marker = 'RegisteredContributor(';
   final start = block.indexOf(marker);
   if(start == -1) return null;
   final outerOpenParen = start + marker.length - 1; // index of '('
@@ -196,12 +196,12 @@ RegisteredContributorPerson? _parseLegacyRegisteredBlock(String block){
       outerBody.substring(0, pIdx) + outerBody.substring(pClose + 1);
   final emails = _captureLegacyStringList(outerWithoutPerson, 'emails');
 
-  return RegisteredContributorPerson(person: person, emails: emails);
+  return RegisteredContributor(person: person, emails: emails);
 }
 
 /// Parses the original legacy block: `Person X = const Person(... email: [...] );`.
 /// Maps `hufiec: '...'` and `org: Org.xxx` onto the new `Srodowisko` model.
-RegisteredContributorPerson? _parseLegacyPersonBlock(String block){
+RegisteredContributor? _parseLegacyPersonBlock(String block){
   final start = block.indexOf('Person(');
   if(start == -1) return null;
   final pOpenParen = start + 'Person('.length - 1;
@@ -213,7 +213,7 @@ RegisteredContributorPerson? _parseLegacyPersonBlock(String block){
   if(person == null) return null;
 
   final emails = _captureLegacyStringList(body, 'email');
-  return RegisteredContributorPerson(person: person, emails: emails);
+  return RegisteredContributor(person: person, emails: emails);
 }
 
 /// Wyciąga pola [Person] z ciała wnętrza `Person(...)`. Wspiera oba formaty

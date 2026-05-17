@@ -29,10 +29,10 @@ bool _isPersonsFirstSong(List<SongCore> songs){
   return isPersonsFirstSong;
 }
 
-String registeredPersonToObjectStringLegacy(RegisteredContributorPerson registered, {List<ContributorIdentity> contribIds = const []}) =>
+String registeredPersonToObjectStringLegacy(RegisteredContributor registered, {List<ContributorIdentity> contribIds = const []}) =>
     _registeredPersonToObjectString(registered, contribIds: contribIds);
 
-String _registeredPersonToObjectString(RegisteredContributorPerson registered, {List<ContributorIdentity> contribIds = const []}){
+String _registeredPersonToObjectString(RegisteredContributor registered, {List<ContributorIdentity> contribIds = const []}){
   final person = registered.person;
 
   final contribIdEmails = <String>[
@@ -53,7 +53,7 @@ String _registeredPersonToObjectString(RegisteredContributorPerson registered, {
   final emailsLiteral = '[${emails.map((e) => '"$e"').join(', ')}]';
 
   return [
-    'RegisteredContributorPerson $varName = const RegisteredContributorPerson(',
+    'RegisteredContributor $varName = const RegisteredContributor(',
     '  person: Person(',
     for(final f in personFields) '    $f,',
     '  ),',
@@ -74,7 +74,7 @@ String _baseMessageLegacy(
     SongSource source,
     String? acceptRulesVersion,
     bool isPersonsFirstSong,
-    RegisteredContributorPerson? registered,
+    RegisteredContributor? registered,
     ) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
     "\n"
     "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
@@ -99,7 +99,7 @@ Future<String> composeContribSongEmailLegacy({
   required SongCore song,
   required SongSource source,
   String? acceptRulesVersion,
-  RegisteredContributorPerson? registered,
+  RegisteredContributor? registered,
   required bool isNewSong,
   String? updateComment
 }) async {
@@ -134,7 +134,7 @@ String composeContribAttachedSongsEmailLegacy({
   required List<SongCore> songs,
   required SongSource source,
   String? acceptRulesVersion,
-  RegisteredContributorPerson? registered,
+  RegisteredContributor? registered,
 }) {
 
   bool isPersonsFirstSong = _isPersonsFirstSong(songs);

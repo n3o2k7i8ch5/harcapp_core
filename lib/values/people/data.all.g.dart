@@ -10,7 +10,7 @@
 import 'package:harcapp_core/values/people/data.dart';
 import 'package:harcapp_core/values/people/models.dart';
 
-const List<RegisteredContributorPerson> allRegisteredPeople = [
+const List<RegisteredContributor> allRegisteredPeople = [
   ABRAHAM_PRAGER,
   ADAM_DAWID,
   ADAM_DUDAK,

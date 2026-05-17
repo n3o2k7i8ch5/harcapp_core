@@ -2,8 +2,8 @@ import 'package:harcapp_core/values/people/data.all.g.dart';
 
 import 'package:harcapp_core/values/people/models.dart';
 
-Map<String, RegisteredContributorPerson> _buildAllRegisteredPeopleByEmailMap(){
-  Map<String, RegisteredContributorPerson> result = {};
+Map<String, RegisteredContributor> _buildAllRegisteredPeopleByEmailMap(){
+  Map<String, RegisteredContributor> result = {};
 
   for(final entry in allRegisteredPeople)
     for(final email in entry.emails)
@@ -12,4 +12,4 @@ Map<String, RegisteredContributorPerson> _buildAllRegisteredPeopleByEmailMap(){
   return result;
 }
 
-final Map<String, RegisteredContributorPerson> allRegisteredPeopleByEmailMap = _buildAllRegisteredPeopleByEmailMap();
+final Map<String, RegisteredContributor> allRegisteredPeopleByEmailMap = _buildAllRegisteredPeopleByEmailMap();

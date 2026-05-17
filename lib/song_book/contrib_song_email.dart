@@ -47,7 +47,7 @@ enum SongSource{
   }
 }
 
-String _registeredPersonToJsonBlock(RegisteredContributorPerson registered, {List<ContributorIdentity> contribIds = const []}){
+String _registeredPersonToJsonBlock(RegisteredContributor registered, {List<ContributorIdentity> contribIds = const []}){
   final contribIdEmails = <String>[
     for(final c in contribIds)
       if(c.emailRef != null) c.emailRef!,
@@ -71,7 +71,7 @@ String _baseMessage(
     SongSource source,
     String? acceptRulesVersion,
     bool isPersonsFirstSong,
-    RegisteredContributorPerson? registered,
+    RegisteredContributor? registered,
     List<ContributorIdentity> contribIds,
 ) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
     "\n"
@@ -99,7 +99,7 @@ Future<String> composeContribSongEmail({
   required SongCore song,
   required SongSource source,
   String? acceptRulesVersion,
-  RegisteredContributorPerson? registered,
+  RegisteredContributor? registered,
   required bool isNewSong,
   String? updateComment
 }) async {
@@ -138,7 +138,7 @@ String composeContribAttachedSongsEmail({
   required List<SongCore> songs,
   required SongSource source,
   String? acceptRulesVersion,
-  RegisteredContributorPerson? registered,
+  RegisteredContributor? registered,
 }) {
 
   bool isPersonsFirstSong = _isPersonsFirstSong(songs);

@@ -55,12 +55,12 @@ class Person{
   );
 }
 
-class RegisteredContributorPerson{
+class RegisteredContributor{
   final Person person;
   final List<String> emails;
   final String? userKey;
 
-  const RegisteredContributorPerson({required this.person, required this.emails, this.userKey});
+  const RegisteredContributor({required this.person, required this.emails, this.userKey});
 
   ContributorIdentity toContributorIdentity() => ContributorIdentity(
       person: person,

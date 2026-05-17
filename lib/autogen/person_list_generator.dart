@@ -14,15 +14,15 @@ class PersonFieldGenerator extends Generator {
           if (!element.isConst) return false;
 
           final typeElemName = element.type.element?.name;
-          if (typeElemName == 'RegisteredContributorPerson') return true;
+          if (typeElemName == 'RegisteredContributor') return true;
 
           final constTypeElemName = element.computeConstantValue()?.type?.element?.name;
-          return constTypeElemName == 'RegisteredContributorPerson';
+          return constTypeElemName == 'RegisteredContributor';
         })
         .toList();
 
     if (topLevelPeople.isEmpty)
-      throw StateError('No top-level const RegisteredContributorPerson values found.');
+      throw StateError('No top-level const RegisteredContributor values found.');
 
     Uri uri = buildStep.inputId.uri;
     buffer.writeln('// GENERATED CODE - DO NOT MODIFY BY HAND');
@@ -30,7 +30,7 @@ class PersonFieldGenerator extends Generator {
     buffer.writeln("import '${uri}';");
     buffer.writeln("import 'package:${uri.pathSegments.sublist(0, uri.pathSegments.length - 1).join('/')}/models.dart';");
     buffer.writeln('');
-    buffer.writeln('const List<RegisteredContributorPerson> allRegisteredPeople = [');
+    buffer.writeln('const List<RegisteredContributor> allRegisteredPeople = [');
     for (final person in topLevelPeople) {
       buffer.writeln('  ${person.name},');
     }

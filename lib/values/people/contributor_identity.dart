@@ -49,7 +49,7 @@ class ContributorIdentity{
   Person? resolve(){
 
     if(emailRef != null) {
-      RegisteredContributorPerson? registeredPerson = allRegisteredPeopleByEmailMap[emailRef];
+      RegisteredContributor? registeredPerson = allRegisteredPeopleByEmailMap[emailRef];
       if(registeredPerson != null)
         return registeredPerson.person;
     }
