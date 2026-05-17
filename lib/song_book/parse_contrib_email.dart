@@ -324,7 +324,11 @@ List<String> _captureLegacyStringList(String body, String key){
 final RegExp _emailAngleRe = RegExp(r'<([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})>');
 
 String? _extractSenderEmail(String content){
-  Match? m = _emailAngleRe.firstMatch(content);
+  // Szukamy tylko przed sekcją „### Kod piosenki:" — wszystko poniżej (np.
+  // quoted reply chain w mejlu zwrotnym) nie powinno być źródłem nadawcy.
+  final int cutoff = content.indexOf('### Kod piosenki:');
+  final String haystack = cutoff == -1 ? content : content.substring(0, cutoff);
+  final Match? m = _emailAngleRe.firstMatch(haystack);
   return m?.group(1)?.toLowerCase();
 }
 
