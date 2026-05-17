@@ -30,8 +30,8 @@ class ContributorRefListWidgetState extends State<ContributorRefListWidget>{
   void Function(List<ContributorRef>)? get onChanged => widget.onChanged;
 
   void _addEmpty(CurrentItemProvider prov){
-    prov.insertContribId(ContributorRef());
-    onChanged?.call(prov.contribId);
+    prov.insertContribRef(ContributorRef());
+    onChanged?.call(prov.contribRefs);
   }
 
   @override
@@ -43,11 +43,11 @@ class ContributorRefListWidgetState extends State<ContributorRefListWidget>{
             Padding(
               padding: widget.titlePadding,
               child: TitleShortcutRowWidget(
-                title: prov.contribId.length <= 1?'Osoba dodająca':'Osoby dodające',
+                title: prov.contribRefs.length <= 1?'Osoba dodająca':'Osoby dodające',
                 textAlign: TextAlign.left,
                 trailing: AppButton(
                   icon: Icon(MdiIcons.plus),
-                  onTap: prov.contribId.isNotEmpty && prov.contribId.last.isEmpty
+                  onTap: prov.contribRefs.isNotEmpty && prov.contribRefs.last.isEmpty
                       ? null
                       : () => _addEmpty(prov),
                 ),
@@ -56,26 +56,26 @@ class ContributorRefListWidgetState extends State<ContributorRefListWidget>{
 
             AnimatedListView(
               padding: widget.listPadding,
-              items: prov.contribId,
+              items: prov.contribRefs,
               itemBuilder: (context, index){
-                final entry = prov.contribId[index];
+                final entry = prov.contribRefs[index];
                 return Padding(
                   key: ObjectKey(entry),
-                  padding: EdgeInsets.only(bottom: index < prov.contribId.length - 1?Dimen.defMarg:0),
+                  padding: EdgeInsets.only(bottom: index < prov.contribRefs.length - 1?Dimen.defMarg:0),
                   child: ContributorRefField(
                     identity: entry,
                     emptyLabel: 'Dodaj osobę dodającą',
                     dialogTitle: 'Osoba dodająca',
                     onChanged: (id){
                       if(id == null || id.isEmpty){
-                        if(prov.contribId.length <= 1)
-                          prov.setContribIdAt(index, ContributorRef());
+                        if(prov.contribRefs.length <= 1)
+                          prov.setContribRefAt(index, ContributorRef());
                         else
-                          prov.removeContribIdAt(index);
+                          prov.removeContribRefAt(index);
                       } else {
-                        prov.setContribIdAt(index, id);
+                        prov.setContribRefAt(index, id);
                       }
-                      onChanged?.call(prov.contribId);
+                      onChanged?.call(prov.contribRefs);
                     },
                   ),
                 );

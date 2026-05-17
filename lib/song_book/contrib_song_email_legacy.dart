@@ -11,9 +11,9 @@ import 'package:harcapp_core/values/srodowiska/models.dart';
 import 'contrib_song_email.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 
-bool _isContributorNew(ContributorRef contribId) {
-  if(contribId.emailRef == null) return true;
-  if(!allRegisteredPeopleByEmailMap.containsKey(contribId.emailRef)) return true;
+bool _isContributorNew(ContributorRef contribRefs) {
+  if(contribRefs.emailRef == null) return true;
+  if(!allRegisteredPeopleByEmailMap.containsKey(contribRefs.emailRef)) return true;
 
   return false;
 }
@@ -21,8 +21,8 @@ bool _isContributorNew(ContributorRef contribId) {
 bool _isPersonsFirstSong(List<SongCore> songs){
   bool isPersonsFirstSong = false;
   for (SongCore song in songs)
-    for (ContributorRef contribId in song.contribId)
-      if (_isContributorNew(contribId)) {
+    for (ContributorRef contribRefs in song.contribRefs)
+      if (_isContributorNew(contribRefs)) {
         isPersonsFirstSong = true;
         break;
       }
@@ -30,8 +30,8 @@ bool _isPersonsFirstSong(List<SongCore> songs){
   return isPersonsFirstSong;
 }
 
-String registeredPersonToObjectStringLegacy(RegisteredContributor registered, {List<ContributorRef> contribIds = const []}) =>
-    _registeredPersonToObjectString(registered, contribIds: contribIds);
+String registeredPersonToObjectStringLegacy(RegisteredContributor registered, {List<ContributorRef> contribRefs = const []}) =>
+    _registeredPersonToObjectString(registered, contribRefs: contribRefs);
 
 /// Emituje literał Darta dla [Srodowisko]: preferuje konstruktor strukturalny
 /// (`hufiec`/`choragiew`/`okreg`/`org`) gdy odpowiedni slug jest ustawiony;
@@ -64,14 +64,14 @@ String _srodowiskoToObjectString(Srodowisko s){
   return args.isEmpty ? '$primary)' : '$primary, ${args.join(', ')})';
 }
 
-String _registeredPersonToObjectString(RegisteredContributor registered, {List<ContributorRef> contribIds = const []}){
+String _registeredPersonToObjectString(RegisteredContributor registered, {List<ContributorRef> contribRefs = const []}){
   final person = registered.person;
 
-  final contribIdEmails = <String>[
-    for(final c in contribIds)
+  final contribRefEmails = <String>[
+    for(final c in contribRefs)
       if(c.emailRef != null) c.emailRef!,
   ];
-  final emails = registered.emails.isNotEmpty ? registered.emails : contribIdEmails;
+  final emails = registered.emails.isNotEmpty ? registered.emails : contribRefEmails;
 
   final personFields = <String>[];
   if(person.name.isNotEmpty) personFields.add("name: '${person.name}'");

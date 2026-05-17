@@ -137,26 +137,26 @@ class CurrentItemProvider extends ChangeNotifier{
     if(notify) notifyListeners();
   }
 
-  List<ContributorRef> get contribId => _song.contribId;
+  List<ContributorRef> get contribRefs => _song.contribRefs;
 
-  void setContribId(List<ContributorRef> value, {bool notify = true}){
-    _song.contribId = value;
+  void setContribRefs(List<ContributorRef> value, {bool notify = true}){
+    _song.contribRefs = value;
     if(notify) notifyListeners();
   }
 
-  void setContribIdAt(int index, ContributorRef value, {bool notify = true}){
-    _song.contribId[index] = value;
+  void setContribRefAt(int index, ContributorRef value, {bool notify = true}){
+    _song.contribRefs[index] = value;
     if(notify) notifyListeners();
   }
 
-  void insertContribId(ContributorRef value, {int? index, bool notify = true}){
-    if(index == null) _song.contribId.add(value);
-    else _song.contribId.insert(index, value);
+  void insertContribRef(ContributorRef value, {int? index, bool notify = true}){
+    if(index == null) _song.contribRefs.add(value);
+    else _song.contribRefs.insert(index, value);
     if(notify) notifyListeners();
   }
 
-  void removeContribIdAt(int index, {bool notify = true}){
-    _song.contribId.removeAt(index);
+  void removeContribRefAt(int index, {bool notify = true}){
+    _song.contribRefs.removeAt(index);
     if(notify) notifyListeners();
   }
 

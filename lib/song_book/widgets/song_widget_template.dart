@@ -396,25 +396,25 @@ class SongWidgetTemplateState<TSong extends SongCore> extends State<SongWidgetTe
 
                 if(contentFooter!=null) contentFooter!.call(context, scrollController),
 
-                if(song.contribId.isNotEmpty)
+                if(song.contribRefs.isNotEmpty)
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(width: Dimen.defMarg),
                       Icon(MdiIcons.accountEdit, size: Dimen.textSizeNormal + 2, color: hintEnab_(context)),
                       const SizedBox(width: Dimen.defMarg),
-                      Expanded(child: Text(song.contribId.length <=1 ? 'Osoba dodająca' : 'Osoby dodające', style: AppTextStyle(fontSize: Dimen.textSizeNormal, color: hintEnab_(context))))
+                      Expanded(child: Text(song.contribRefs.length <=1 ? 'Osoba dodająca' : 'Osoby dodające', style: AppTextStyle(fontSize: Dimen.textSizeNormal, color: hintEnab_(context))))
                     ],
                   ),
 
-                if(song.contribId.isNotEmpty)
+                if(song.contribRefs.isNotEmpty)
                   Padding(
                       padding: const EdgeInsets.only(top: Dimen.defMarg, bottom: Dimen.defMarg, left: 2*Dimen.defMarg + Dimen.textSizeNormal + 2),
                       child: SeparatedColumn(
                         separator: SizedBox(height: Dimen.defMarg),
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: song.contribId.map((contribId) {
-                          final person = contribId.resolve();
+                        children: song.contribRefs.map((contribRefs) {
+                          final person = contribRefs.resolve();
                           if(person == null) return const SizedBox.shrink();
                           return PersonCard(person);
                         }).toList(),

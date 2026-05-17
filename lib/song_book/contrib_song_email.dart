@@ -7,9 +7,9 @@ import 'package:harcapp_core/values/people/utils.dart';
 
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 
-bool _isContributorNew(ContributorRef contribId) {
-  if(contribId.emailRef == null) return true;
-  if(!allRegisteredPeopleByEmailMap.containsKey(contribId.emailRef)) return true;
+bool _isContributorNew(ContributorRef contribRefs) {
+  if(contribRefs.emailRef == null) return true;
+  if(!allRegisteredPeopleByEmailMap.containsKey(contribRefs.emailRef)) return true;
 
   return false;
 }
@@ -17,8 +17,8 @@ bool _isContributorNew(ContributorRef contribId) {
 bool _isPersonsFirstSong(List<SongCore> songs){
   bool isPersonsFirstSong = false;
   for (SongCore song in songs)
-    for (ContributorRef contribId in song.contribId)
-      if (_isContributorNew(contribId)) {
+    for (ContributorRef contribRefs in song.contribRefs)
+      if (_isContributorNew(contribRefs)) {
         isPersonsFirstSong = true;
         break;
       }
@@ -47,14 +47,14 @@ enum SongSource{
   }
 }
 
-String _registeredPersonToJsonBlock(RegisteredContributor registered, {List<ContributorRef> contribIds = const []}){
-  final contribIdEmails = <String>[
-    for(final c in contribIds)
+String _registeredPersonToJsonBlock(RegisteredContributor registered, {List<ContributorRef> contribRefs = const []}){
+  final contribRefEmails = <String>[
+    for(final c in contribRefs)
       if(c.emailRef != null) c.emailRef!,
   ];
 
   final Map jsonMap = registered.person.toApiJsonMap();
-  jsonMap['email'] = registered.emails.isNotEmpty ? registered.emails : contribIdEmails;
+  jsonMap['email'] = registered.emails.isNotEmpty ? registered.emails : contribRefEmails;
 
   return const JsonEncoder.withIndent('  ').convert(jsonMap);
 }
@@ -72,7 +72,7 @@ String _baseMessage(
     String? acceptRulesVersion,
     bool isPersonsFirstSong,
     RegisteredContributor? registered,
-    List<ContributorRef> contribIds,
+    List<ContributorRef> contribRefs,
 ) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
     "\n"
     "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
@@ -91,7 +91,7 @@ String _baseMessage(
         '\n### Osoba dodająca (${isPersonsFirstSong?' + świeżak + ':' - weteran - '}):'
         '\n'
         '\n```json'
-        '\n${_registeredPersonToJsonBlock(registered, contribIds: contribIds)}'
+        '\n${_registeredPersonToJsonBlock(registered, contribRefs: contribRefs)}'
         '\n```'
     }";
 
@@ -108,7 +108,7 @@ Future<String> composeContribSongEmail({
 
   String encodedSong = await song.code;
 
-  return "${_baseMessage(source, acceptRulesVersion, isPersonsFirstSong, registered, song.contribId)}"
+  return "${_baseMessage(source, acceptRulesVersion, isPersonsFirstSong, registered, song.contribRefs)}"
       "${
           updateComment != null?
           '\n'
@@ -143,10 +143,10 @@ String composeContribAttachedSongsEmail({
 
   bool isPersonsFirstSong = _isPersonsFirstSong(songs);
 
-  List<ContributorRef> allContribIds = [
-    for(SongCore song in songs) ...song.contribId
+  List<ContributorRef> allContribRefs = [
+    for(SongCore song in songs) ...song.contribRefs
   ];
 
-  return _baseMessage(source, acceptRulesVersion, isPersonsFirstSong, registered, allContribIds);
+  return _baseMessage(source, acceptRulesVersion, isPersonsFirstSong, registered, allContribRefs);
 
 }

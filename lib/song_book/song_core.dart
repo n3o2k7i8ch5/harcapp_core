@@ -73,7 +73,7 @@ abstract class SongCore{
   static const String PARAM_YT_VIDEO_ID = 'yt_video_id';
   // tmp - old yt_video_id
   static const String PARAM_YT_LINK = 'yt_link';
-  static const String PARAM_CONTRIB_ID = 'add_pers';
+  static const String PARAM_CONTRIB_REFS = 'add_pers';
   static const String PARAM_CONTRIBUTOR_DATA = 'contributor_data';
   static const String PARAM_TAGS = 'tags';
   static const String PARAM_REFREN = 'refren';
@@ -89,7 +89,7 @@ abstract class SongCore{
   bool get showRelDateMonth;
   bool get showRelDateDay;
 
-  List<ContributorRef> get contribId;
+  List<ContributorRef> get contribRefs;
   ContributorData? get contributorData;
   String? get youtubeVideoId;
   bool get isOwn;

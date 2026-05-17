@@ -22,7 +22,7 @@ class SongRaw extends SongCore{
   DateTime? releaseDate;
   bool showRelDateMonth;
   bool showRelDateDay;
-  List<ContributorRef> contribId;
+  List<ContributorRef> contribRefs;
   ContributorData? contributorData;
   String? youtubeVideoId;
   String? get youtubeUrl{
@@ -55,7 +55,7 @@ class SongRaw extends SongCore{
     this.releaseDate = song.releaseDate;
     this.showRelDateMonth = song.showRelDateMonth;
     this.showRelDateDay = song.showRelDateDay;
-    this.contribId = song.contribId;
+    this.contribRefs = song.contribRefs;
     this.youtubeVideoId = song.youtubeVideoId;
     this.tags = song.tags.toList();
 
@@ -75,7 +75,7 @@ class SongRaw extends SongCore{
     required this.releaseDate,
     required this.showRelDateMonth,
     required this.showRelDateDay,
-    required this.contribId,
+    required this.contribRefs,
     required this.contributorData,
     required this.youtubeVideoId,
 
@@ -101,7 +101,7 @@ class SongRaw extends SongCore{
     releaseDate: null,
     showRelDateMonth: true,
     showRelDateDay: true,
-    contribId: [ContributorRef()],
+    contribRefs: [ContributorRef()],
     contributorData: null,
     youtubeVideoId: null,
     tags: [],
@@ -146,9 +146,9 @@ class SongRaw extends SongCore{
     bool showRelDateMonth = respMap[SongCore.PARAM_SHOW_REL_DATE_MONTH]??true;
     bool showRelDateDay = respMap[SongCore.PARAM_SHOW_REL_DATE_DAY]??true;
     String? youtubeVideoId = respMap[SongCore.PARAM_YT_VIDEO_ID]??ytLinkToVideoId(respMap[SongCore.PARAM_YT_LINK]);
-    List<ContributorRef> contribId = ((respMap[SongCore.PARAM_CONTRIB_ID]??[]) as List).map((map) => ContributorRef.fromApiRespMap(map)).toList();
+    List<ContributorRef> contribRefs = ((respMap[SongCore.PARAM_CONTRIB_REFS]??[]) as List).map((map) => ContributorRef.fromApiRespMap(map)).toList();
     ContributorData? contributorData = respMap[SongCore.PARAM_CONTRIBUTOR_DATA]==null?null:
-        ContributorData.fromJsonMap(respMap[SongCore.PARAM_CONTRIBUTOR_DATA] as Map<String, dynamic>);
+    ContributorData.fromJsonMap(respMap[SongCore.PARAM_CONTRIBUTOR_DATA] as Map<String, dynamic>);
     List<String> tags = (respMap[SongCore.PARAM_TAGS] as List).cast<String>();
     SongPart refrenPart;
     if (respMap.containsKey(SongCore.PARAM_REFREN)) {
@@ -184,7 +184,7 @@ class SongRaw extends SongCore{
       showRelDateMonth: showRelDateMonth,
       showRelDateDay: showRelDateDay,
 
-      contribId: contribId,
+      contribRefs: contribRefs,
       contributorData: contributorData,
       youtubeVideoId: youtubeVideoId,
 
@@ -207,7 +207,7 @@ class SongRaw extends SongCore{
     releaseDate: releaseDate,
     showRelDateMonth: showRelDateMonth,
     showRelDateDay: showRelDateDay,
-    contribId: contribId,
+    contribRefs: contribRefs,
     contributorData: null,
     youtubeVideoId: youtubeVideoId,
     tags: tags,
@@ -278,8 +278,8 @@ class SongRaw extends SongCore{
     map[SongCore.PARAM_SHOW_REL_DATE_MONTH] = showRelDateMonth;
     map[SongCore.PARAM_SHOW_REL_DATE_DAY] = showRelDateDay;
     map[SongCore.PARAM_YT_VIDEO_ID] = youtubeVideoId;
-    map[SongCore.PARAM_CONTRIB_ID] = contribId.where((contribId) => contribId.isNotEmpty)
-        .map((contribId) => contribId.toApiJsonMap()).toList();
+    map[SongCore.PARAM_CONTRIB_REFS] = contribRefs.where((contribRefs) => contribRefs.isNotEmpty)
+        .map((contribRefs) => contribRefs.toApiJsonMap()).toList();
     map[SongCore.PARAM_CONTRIBUTOR_DATA] = contributorData?.toJsonMap();
 
     map[SongCore.PARAM_TAGS] = tags;
@@ -299,20 +299,20 @@ class SongRaw extends SongCore{
     for (SongPart part in songParts) {
 
       if(part.element == refrenPart.element) {
-          refCount++;
+        refCount++;
       } else {
 
-          if (hasRefren && refCount > 0) {
-            parts.add({'refren': refCount});
-            refCount = 0;
-          }
-
-          parts.add({
-            'text': correctPartText(part.getText()),
-            'chords': correctPartChords(part.chords),
-            'shift': part.shift
-          });
+        if (hasRefren && refCount > 0) {
+          parts.add({'refren': refCount});
+          refCount = 0;
         }
+
+        parts.add({
+          'text': correctPartText(part.getText()),
+          'chords': correctPartChords(part.chords),
+          'shift': part.shift
+        });
+      }
     }
 
     if(hasRefren && refCount>0)
@@ -346,12 +346,12 @@ class SongRaw extends SongCore{
 
       int removeFromEnd = 0;
       while(
-          line.length > removeFromEnd && (
+      line.length > removeFromEnd && (
           line[line.length-1-removeFromEnd] == ' ' ||
-          line[line.length-1-removeFromEnd] == '.' ||
-          line[line.length-1-removeFromEnd] == ',' ||
-          line[line.length-1-removeFromEnd] == ':' ||
-          line[line.length-1-removeFromEnd] == ';'))
+              line[line.length-1-removeFromEnd] == '.' ||
+              line[line.length-1-removeFromEnd] == ',' ||
+              line[line.length-1-removeFromEnd] == ':' ||
+              line[line.length-1-removeFromEnd] == ';'))
         removeFromEnd++;
       line = line.substring(0, line.length-removeFromEnd);
 
@@ -394,7 +394,7 @@ class SongRaw extends SongCore{
       return false;
     if(releaseDate != null)
       return false;
-    if(contribId.where((c) => c.isNotEmpty).isNotEmpty)
+    if(contribRefs.where((c) => c.isNotEmpty).isNotEmpty)
       return false;
     if(youtubeVideoId != null && youtubeVideoId!.trim().isNotEmpty)
       return false;
@@ -410,7 +410,7 @@ class SongRaw extends SongCore{
 
   }
 
-  /*
+/*
   static Future<SongRaw> read({@required String id}) async {
     String code = await getSongCode(id);
     return SongRaw.parse(id, code);
