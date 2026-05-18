@@ -9,46 +9,6 @@ import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
 
-class PersonCardSimple extends StatelessWidget{
-
-  String get name => person.name;
-  RankHarc? get rankHarc => person.rankHarc;
-  RankInstr? get rankInstr => person.rankInstr;
-  String? get druzyna => person.druzyna;
-  Srodowisko? get srodowisko => person.srodowisko;
-  Org? get org => person.org;
-  String? get comment => person.comment;
-
-  final Person person;
-  final Color? textColor;
-
-  const PersonCardSimple(this.person, {this.textColor, super.key});
-
-  @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: <Widget>[
-          if(rankHarc != null
-              && rankHarc != RankHarc.zhpHOc
-              && rankHarc != RankHarc.zhpHOd
-              && rankHarc != RankHarc.zhpHRc
-              && rankHarc != RankHarc.zhpHRd
-          ) Text('${rankHarc!.shortName} ', style: AppTextStyle(fontSize: Dimen.textSizeBig, color: textColor??textEnab_(context))),
-          if(rankInstr != null) Text('$rankInstr ', style: AppTextStyle(fontSize: Dimen.textSizeBig, color: textColor??textEnab_(context))),
-          Text(name, style: AppTextStyle(fontSize: Dimen.textSizeBig, fontWeight: weightBold, color: textColor??textEnab_(context))),
-          if(rankHarc == RankHarc.zhpHOc
-              || rankHarc == RankHarc.zhpHOd
-              || rankHarc == RankHarc.zhpHRc
-              || rankHarc == RankHarc.zhpHRd
-          ) Text(' ${rankHarc!.shortName}', style: AppTextStyle(color: textColor??textEnab_(context))),
-          Expanded(child: Container()),
-        ],
-      )
-  );
-}
-
 class PersonCard extends StatelessWidget{
 
   String get name => person.name;
@@ -76,56 +36,75 @@ class PersonCard extends StatelessWidget{
     return selectable ? SelectionArea(child: body) : body;
   }
 
-  List<Widget> _children(BuildContext context) => [
+  List<Widget> _children(BuildContext context) {
+    final defaultColor = textColor ?? textEnab_(context);
+    final lines = srodowisko?.displayLines ?? const <String>[];
 
-        SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: <Widget>[
-              if(rankHarc != null
-                  && rankHarc != RankHarc.zhpHOc
-                  && rankHarc != RankHarc.zhpHOd
-                  && rankHarc != RankHarc.zhpHRc
-                  && rankHarc != RankHarc.zhpHRd
-              ) Text('${rankHarc!.shortName} ', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
-              if(rankInstr != null) Text('${rankInstr!.shortName}. ', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
-              Text(name, style: AppTextStyle(fontSize: textSize, fontWeight: weightHalfBold, color: textColor??textEnab_(context))),
-              if(rankHarc == RankHarc.zhpHOc
-                  || rankHarc == RankHarc.zhpHOd
-                  || rankHarc == RankHarc.zhpHRc
-                  || rankHarc == RankHarc.zhpHRd
-              ) Text(' ${rankHarc!.shortName}', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
-              //Expanded(child: Container()),
-              if(org != null) Text(' (', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context), fontWeight: weightHalfBold)),
-              if(org != null)
-                Text(org!.shortName.$1, style: AppTextStyle(fontSize: textSize, color: org!.colors.avgColor(isDark(context)), fontWeight: weightHalfBold)),
-              if(org != null) Text(')', style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context), fontWeight: weightHalfBold)),
+    // Gdy pełna nazwa organizacji jest jedyną informacją o środowisku,
+    // pomijamy skrót w nawiasie obok imienia i renderujemy tę nazwę na dole
+    // w kolorze organizacji. W innym wypadku skrót jest obok imienia, a
+    // pełna nazwa organizacji nie powtarza się w liście linii środowiska.
+    final orgOnly = org != null
+        && lines.length == 1
+        && lines.first == org!.fullName;
 
-            ],
-          ),
+    final showOrgInline = org != null && !orgOnly;
+
+    final visibleLines = (org != null && !orgOnly)
+        ? lines.where((l) => l != org!.fullName).toList()
+        : lines;
+
+    final srodowiskoColor = orgOnly
+        ? org!.colors.avgColor(isDark(context))
+        : defaultColor;
+
+    return [
+      _buildHeader(context, defaultColor, showOrgInline: showOrgInline),
+      if(druzyna != null) _buildLine(druzyna!, defaultColor),
+      for(final line in visibleLines) _buildLine(line, srodowiskoColor),
+    ];
+  }
+
+  Widget _buildHeader(BuildContext context, Color color, {required bool showOrgInline}) =>
+      SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: <Widget>[
+            if(rankHarc != null && !_renderRankAfterName(rankHarc!))
+              Text('${rankHarc!.shortName} ', style: AppTextStyle(fontSize: textSize, color: color)),
+            if(rankInstr != null)
+              Text('${rankInstr!.shortName}. ', style: AppTextStyle(fontSize: textSize, color: color)),
+            Text(name, style: AppTextStyle(fontSize: textSize, fontWeight: weightHalfBold, color: color)),
+            if(rankHarc != null && _renderRankAfterName(rankHarc!))
+              Text(' ${rankHarc!.shortName}', style: AppTextStyle(fontSize: textSize, color: color)),
+            if(showOrgInline) _buildOrgChip(context, color),
+          ],
         ),
+      );
 
-        if(srodowisko != null)
-          ...srodowisko!.displayLines.asMap().entries.map((entry){
-            final isPrimary = entry.key == 0;
-            return Padding(
-              padding: EdgeInsets.only(top: isPrimary ? 6 : 2),
-              child: Text(
-                entry.value,
-                style: AppTextStyle(
-                  fontSize: isPrimary ? textSize : textSize - 2,
-                  color: isPrimary ? (textColor ?? textEnab_(context)) : hintEnab_(context),
-                ),
-              ),
-            );
-          }),
+  Widget _buildOrgChip(BuildContext context, Color baseColor) => Text.rich(
+        TextSpan(
+          style: AppTextStyle(fontSize: textSize, color: baseColor, fontWeight: weightHalfBold),
+          children: [
+            const TextSpan(text: ' ('),
+            TextSpan(
+              text: org!.shortName.$1,
+              style: TextStyle(color: org!.colors.avgColor(isDark(context))),
+            ),
+            const TextSpan(text: ')'),
+          ],
+        ),
+      );
 
-        if(druzyna != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 6),
-            child: Text(druzyna!, style: AppTextStyle(fontSize: textSize, color: textColor??textEnab_(context))),
-          ),
+  Widget _buildLine(String text, Color color) => Padding(
+        padding: const EdgeInsets.only(top: 6),
+        child: Text(text, style: AppTextStyle(fontSize: textSize, color: color)),
+      );
 
-      ];
+  static bool _renderRankAfterName(RankHarc r) =>
+      r == RankHarc.zhpHOc ||
+      r == RankHarc.zhpHOd ||
+      r == RankHarc.zhpHRc ||
+      r == RankHarc.zhpHRd;
 }

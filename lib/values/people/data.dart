@@ -735,9 +735,9 @@ const RegisteredContributor DOMINIKA_HOCHMANSKA = RegisteredContributor(
 const RegisteredContributor DOMINIKA_KONARSKA = RegisteredContributor(
   person: Person(
     name: 'Dominika Konarska',
-      druzyna: '12 DSH „Północ”',
-      srodowisko: Srodowisko.custom('Krapkowice', orgSlug: 'zhp'),
-      rankHarc: RankHarc.zhpTropicielka,
+    druzyna: '12 DSH „Północ”',
+    srodowisko: Srodowisko.hufiec('krapkowice', showChoragiew: false, showOkreg: false),
+    rankHarc: RankHarc.zhpTropicielka,
   ),
   emails: ['u5796295922@gmail.com'],
 );
@@ -5565,3 +5565,22 @@ const RegisteredContributor ZUZANNA_WARCHOL = RegisteredContributor(
   emails: const [],
 );
 
+// ---
+
+RegisteredContributor ANTONI_DEBICKI = const RegisteredContributor(
+  person: Person(
+    name: 'Antoni Dębicki',
+    srodowisko: Srodowisko.org('zhp'),
+  ),
+  emails: ["antoni.debicki@zhp.pl"],
+);
+
+RegisteredContributor IGOR_KASPERSKI = const RegisteredContributor(
+  person: Person(
+    name: 'Igor Kasperski',
+    srodowisko: Srodowisko.org('zhp'),
+    rankHarc: RankHarc.zhpHOc,
+    rankInstr: RankInstr.pwd,
+  ),
+  emails: ["igor.kasperski@zhp.net.pl"],
+);

@@ -15,6 +15,10 @@ class ParsedContribEmail{
   final RegisteredContributor? registered;
   final String? userMessage;
   final bool isNewFormat;
+  /// Lista pól z bloku `Osoba dodająca`, które były obecne w mejlu, ale
+  /// nie udało się ich zmapować na aktualny model (np. `rankHarc: HO` po
+  /// refaktorze enuma). Każdy wpis to gotowy do wyświetlenia komunikat.
+  final List<String> personParseWarnings;
 
   ParsedContribEmail({
     required this.song,
@@ -23,6 +27,7 @@ class ParsedContribEmail{
     required this.registered,
     required this.userMessage,
     required this.isNewFormat,
+    this.personParseWarnings = const [],
   });
 
 }
@@ -149,13 +154,16 @@ ParsedContribEmail _parseLegacy(String content){
   String? senderEmail = _extractSenderEmail(content);
 
   RegisteredContributor? registered;
+  List<String> personWarnings = const [];
   int personHeaderIdx = content.indexOf('### Osoba dodająca');
   if(personHeaderIdx != -1 && personHeaderIdx < codeHeaderIdx){
     String personBlock = content.substring(personHeaderIdx, codeHeaderIdx);
     // Try newer-legacy (RegisteredContributor) first, fall back to V1
     // (bare Person), so nested `Person(...)` inside doesn't get mis-matched.
-    registered = _parseLegacyRegisteredBlock(personBlock)
-              ?? _parseLegacyPersonBlock(personBlock);
+    var parsed = _parseLegacyRegisteredBlock(personBlock);
+    if(parsed.registered == null) parsed = _parseLegacyPersonBlock(personBlock);
+    registered = parsed.registered;
+    personWarnings = parsed.warnings;
   }
 
   return ParsedContribEmail(
@@ -165,30 +173,42 @@ ParsedContribEmail _parseLegacy(String content){
     registered: registered,
     userMessage: _extractUserMessage(content),
     isNewFormat: false,
+    personParseWarnings: personWarnings,
   );
+}
+
+/// Wynik parsowania bloku osoby: zarejestrowany kontrybutor (jeśli się udało)
+/// i lista ostrzeżeń o polach, które były obecne w mejlu, ale nie udało się
+/// ich zmapować na aktualny model.
+class _LegacyPersonParse {
+  final RegisteredContributor? registered;
+  final List<String> warnings;
+  const _LegacyPersonParse(this.registered, this.warnings);
+  static const empty = _LegacyPersonParse(null, []);
 }
 
 /// Parses the newer legacy block emitted by `contrib_song_email_legacy.dart`:
 /// `RegisteredContributor X = const RegisteredContributor(
 ///    person: Person(...), emails: [...] );`
-RegisteredContributor? _parseLegacyRegisteredBlock(String block){
+_LegacyPersonParse _parseLegacyRegisteredBlock(String block){
   const marker = 'RegisteredContributor(';
   final start = block.indexOf(marker);
-  if(start == -1) return null;
+  if(start == -1) return _LegacyPersonParse.empty;
   final outerOpenParen = start + marker.length - 1; // index of '('
   final outerClose = _findMatchingParen(block, outerOpenParen);
-  if(outerClose == -1) return null;
+  if(outerClose == -1) return _LegacyPersonParse.empty;
   final outerBody = block.substring(outerOpenParen + 1, outerClose);
 
   final pIdx = outerBody.indexOf('Person(');
-  if(pIdx == -1) return null;
+  if(pIdx == -1) return _LegacyPersonParse.empty;
   final pOpenParen = pIdx + 'Person('.length - 1;
   final pClose = _findMatchingParen(outerBody, pOpenParen);
-  if(pClose == -1) return null;
+  if(pClose == -1) return _LegacyPersonParse.empty;
   final personBody = outerBody.substring(pOpenParen + 1, pClose);
 
-  final person = _personFromLegacyBody(personBody);
-  if(person == null) return null;
+  final warnings = <String>[];
+  final person = _personFromLegacyBody(personBody, warnings);
+  if(person == null) return _LegacyPersonParse.empty;
 
   // Emails sit on the OUTER level (outside Person body). Slice Person out
   // so the regex doesn't accidentally hit something inside.
@@ -196,31 +216,41 @@ RegisteredContributor? _parseLegacyRegisteredBlock(String block){
       outerBody.substring(0, pIdx) + outerBody.substring(pClose + 1);
   final emails = _captureLegacyStringList(outerWithoutPerson, 'emails');
 
-  return RegisteredContributor(person: person, emails: emails);
+  return _LegacyPersonParse(
+    RegisteredContributor(person: person, emails: emails),
+    warnings,
+  );
 }
 
 /// Parses the original legacy block: `Person X = const Person(... email: [...] );`.
 /// Maps `hufiec: '...'` and `org: Org.xxx` onto the new `Srodowisko` model.
-RegisteredContributor? _parseLegacyPersonBlock(String block){
+_LegacyPersonParse _parseLegacyPersonBlock(String block){
   final start = block.indexOf('Person(');
-  if(start == -1) return null;
+  if(start == -1) return _LegacyPersonParse.empty;
   final pOpenParen = start + 'Person('.length - 1;
   final pClose = _findMatchingParen(block, pOpenParen);
-  if(pClose == -1) return null;
+  if(pClose == -1) return _LegacyPersonParse.empty;
   final body = block.substring(pOpenParen + 1, pClose);
 
-  final person = _personFromLegacyBody(body);
-  if(person == null) return null;
+  final warnings = <String>[];
+  final person = _personFromLegacyBody(body, warnings);
+  if(person == null) return _LegacyPersonParse.empty;
 
   final emails = _captureLegacyStringList(body, 'email');
-  return RegisteredContributor(person: person, emails: emails);
+  return _LegacyPersonParse(
+    RegisteredContributor(person: person, emails: emails),
+    warnings,
+  );
 }
 
 /// Wyciąga pola [Person] z ciała wnętrza `Person(...)`. Wspiera oba formaty
 /// środowiska: stary `hufiec: '...'` (V1) i nowy `srodowisko: Srodowisko.custom('...')`
 /// (V2). Org-tylko fallback: brak hufca/srodowiska + `org: Org.xxx` →
 /// `Srodowisko.org(...)`.
-Person? _personFromLegacyBody(String body){
+///
+/// Pola, które były w mejlu, ale nie zostały rozpoznane (np. `rankHarc: HO`
+/// po refaktorze enuma), trafiają do [warnings] jako gotowe komunikaty.
+Person? _personFromLegacyBody(String body, List<String> warnings){
   final name = _captureLegacyString(body, 'name');
   if(name == null || name.trim().isEmpty) return null;
 
@@ -253,12 +283,18 @@ Person? _personFromLegacyBody(String body){
   final rankInstrRaw = _captureLegacyEnumValue(body, 'rankInstr');
 
   RankHarc? rankHarc;
-  if(rankHarcRaw != null)
+  if(rankHarcRaw != null){
     rankHarc = RankHarc.values.where((r) => r.name == rankHarcRaw).firstOrNull;
+    if(rankHarc == null)
+      warnings.add('rankHarc: $rankHarcRaw — nierozpoznana wartość, pole pominięte.');
+  }
 
   RankInstr? rankInstr;
-  if(rankInstrRaw != null)
+  if(rankInstrRaw != null){
     rankInstr = RankInstr.values.where((r) => r.name == rankInstrRaw).firstOrNull;
+    if(rankInstr == null)
+      warnings.add('rankInstr: $rankInstrRaw — nierozpoznana wartość, pole pominięte.');
+  }
 
   return Person(
     name: name,
