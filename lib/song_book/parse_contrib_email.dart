@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:harcapp_core/song_book/song_core.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
@@ -19,6 +20,10 @@ class ParsedContribEmail{
   /// nie udało się ich zmapować na aktualny model (np. `rankHarc: HO` po
   /// refaktorze enuma). Każdy wpis to gotowy do wyświetlenia komunikat.
   final List<String> personParseWarnings;
+  /// True, gdy mejl pochodzi z najstarszej (już nierozwijanej) wersji apki
+  /// mobilnej — rozpoznawane po owinięciu piosenki w `{"o!_filename": {...}}`
+  /// lub po charakterystycznym nagłówku „Dzięki za chęć dzielenia się…".
+  final bool isOldestFormat;
 
   ParsedContribEmail({
     required this.song,
@@ -28,6 +33,7 @@ class ParsedContribEmail{
     required this.userMessage,
     required this.isNewFormat,
     this.personParseWarnings = const [],
+    this.isOldestFormat = false,
   });
 
 }
@@ -144,6 +150,11 @@ ParsedContribEmail _parseLegacy(String content){
     throw ContribEmailParseError('Nie udało się sparsować JSON-a piosenki: $e');
   }
 
+  // Najstarsze legacy — patrz `parse_contrib_email_oldest.dart`.
+  final oldestDetection = detectOldestFormat(songMap, content);
+  songMap = oldestDetection.songMap;
+  final isOldestFormat = oldestDetection.isOldestFormat;
+
   String? title = songMap[SongCore.PARAM_TITLE] as String?;
   if(title == null || title.isEmpty)
     throw ContribEmailParseError('Brak tytułu piosenki w JSON-ie.');
@@ -174,6 +185,7 @@ ParsedContribEmail _parseLegacy(String content){
     userMessage: _extractUserMessage(content),
     isNewFormat: false,
     personParseWarnings: personWarnings,
+    isOldestFormat: isOldestFormat,
   );
 }
 
