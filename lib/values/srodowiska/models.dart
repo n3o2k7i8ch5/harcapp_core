@@ -30,12 +30,19 @@ class Choragiew {
 
 class Hufiec {
   final String slug;
+  /// Bazowa nazwa hufca bez patrona, np. `'Hufiec ZHP Zamość'`.
   final String name;
+  /// Patron hufca bez prefiksu `im.`, np. `'Dzieci Zamojszczyzny'`. Łączony
+  /// z [name] przez [displayName] do postaci `'$name im. $patron'`.
+  final String? patron;
   final Choragiew choragiew;
-  const Hufiec(this.slug, this.name, this.choragiew);
+  const Hufiec(this.slug, this.name, this.choragiew, {this.patron});
 
   /// Globally unique ID in the form `<slug>@<choragiew.id>`.
   String get id => '$slug@${choragiew.id}';
+
+  /// Pełna nazwa do wyświetlenia — `name` plus opcjonalny patron.
+  String get displayName => patron == null ? name : '$name im. $patron';
 }
 
 class Srodowisko {
@@ -160,7 +167,7 @@ class Srodowisko {
   /// per-level visibility flags. [custom] (if any) always comes first.
   List<String> get displayLines => [
     if(custom != null) custom!,
-    if(showHufiec && hufiec != null) hufiec!.name,
+    if(showHufiec && hufiec != null) hufiec!.displayName,
     if(showChoragiew && choragiew != null) choragiew!.name,
     if(showOkreg && okreg != null) okreg!.name,
     if(showOrg && org != null) org!.fullName,

@@ -5765,3 +5765,22 @@ RegisteredContributor JULIA_MACIAG = const RegisteredContributor(
   ),
   emails: ["juliamaciag8310@gmail.com"],
 );
+
+RegisteredContributor WOJCIECH_PONIEWSKI = const RegisteredContributor(
+  person: Person(
+    name: 'Wojciech Poniewski',
+    druzyna: '5. Wodna Drużyna Harcerska',
+    srodowisko: Srodowisko.hufiec('szamotuly', showChoragiew: false, showOkreg: false),
+  ),
+  emails: ["wojtek.poniewski@zhp.pl", "wojtek.poniewski@gmail.com"],
+);
+
+RegisteredContributor ADAM_WOLOWIEC = const RegisteredContributor(
+  person: Person(
+    name: 'Adam Wołowiec',
+    druzyna: '19. DH „Globtroterzy”',
+    srodowisko: Srodowisko.org('zhp'),
+    rankHarc: RankHarc.zhpCwik,
+  ),
+  emails: ["adamwolowiec123@gmail.com"],
+);

@@ -36,7 +36,7 @@ const hufiecZiemiZawiercianskiej = Hufiec('ziemi_zawiercianskiej', 'Hufiec ZHP Z
 const hufiecZory = Hufiec('zory', 'Hufiec ZHP Żory', choragiewSlaska);
 const hufiecZywiec = Hufiec('zywiec', 'Hufiec ZHP Żywiec', choragiewSlaska);
 const hufiecRybnik = Hufiec('rybnik', 'Hufiec ZHP Rybnik', choragiewSlaska);
-const hufiecZiemiZywieckiej = Hufiec('ziemi_zywieckiej', 'Hufiec Ziemi Żywieckiej im. Tadeusza Jänicha', choragiewSlaska);
+const hufiecZiemiZywieckiej = Hufiec('ziemi_zywieckiej', 'Hufiec Ziemi Żywieckiej', choragiewSlaska, patron: 'Tadeusza Jänicha');
 
 const List<Hufiec> hufceSlaska = [
   hufiecBeskidzki, hufiecBytom, hufiecChorzow, hufiecChrzanow,

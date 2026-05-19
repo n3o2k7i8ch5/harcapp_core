@@ -199,7 +199,7 @@ class _SrodowiskoInputFieldState extends State<SrodowiskoInputField> {
     final t = (_custom ?? '').trim().toLowerCase();
     if (t.length < 3) return null;
     for (final h in hufce) {
-      final n = h.name.toLowerCase();
+      final n = h.displayName.toLowerCase();
       if (n.contains(t) || t.contains(n)) return h;
     }
     return null;
@@ -322,7 +322,7 @@ class _SrodowiskoInputFieldState extends State<SrodowiskoInputField> {
       trailing: _visibilityToggle(_Level.hufiec),
       dropdownMaxHeight: 320,
       items: [
-        for (final h in _hufceFiltered) _item(h, h.name),
+        for (final h in _hufceFiltered) _item(h, h.displayName),
       ],
       searchController: _hufiecSearchCtrl,
       searchHint: 'Szukaj hufca...',
@@ -339,7 +339,7 @@ class _SrodowiskoInputFieldState extends State<SrodowiskoInputField> {
       ),
       searchMatchFn: (item, search) {
         final h = item.value;
-        return h != null && h.name.toLowerCase().contains(search.toLowerCase());
+        return h != null && h.displayName.toLowerCase().contains(search.toLowerCase());
       },
     );
   }
@@ -403,7 +403,7 @@ class _SrodowiskoInputFieldState extends State<SrodowiskoInputField> {
                 const SizedBox(width: Dimen.iconMarg),
                 Expanded(
                   child: Text(
-                    'Użyj hufca: ${h.name}',
+                    'Użyj hufca: ${h.displayName}',
                     style: AppTextStyle(
                       color: textEnab_(context),
                       fontSize: Dimen.textSizeBig,
@@ -430,7 +430,7 @@ class _SrodowiskoInputFieldState extends State<SrodowiskoInputField> {
               const SizedBox(width: Dimen.iconMarg),
               Expanded(
                 child: Text(
-                  'Użyto hufca: ${h.name}',
+                  'Użyto hufca: ${h.displayName}',
                   style: AppTextStyle(
                     color: textEnab_(context),
                     fontSize: Dimen.textSizeBig,
