@@ -28,6 +28,7 @@ class SongPartsListWidget extends StatelessWidget{
   final void Function()? onDelete;
   final void Function()? onDuplicate;
   final void Function()? onReorderFinished;
+  final double? maxDialogWidth;
 
   SongPartsListWidget({
     ScrollController? controller,
@@ -40,6 +41,7 @@ class SongPartsListWidget extends StatelessWidget{
     this.onDelete,
     this.onDuplicate,
     this.onReorderFinished,
+    this.maxDialogWidth,
   }): _controller = controller??ScrollController();
 
   bool _isLastSongPartIndex(BuildContext context, int index){
@@ -127,6 +129,7 @@ class SongPartsListWidget extends StatelessWidget{
                       topBuilder: (context, part) => TopZwrotkaButtons(
                         part,
                         index: songPartIndex,
+                        maxDialogWidth: maxDialogWidth,
                         onDuplicate: (SongPart part){
                           scrollToBottom(_controller);
                           onDuplicate?.call();

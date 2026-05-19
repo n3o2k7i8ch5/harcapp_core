@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import '../common.dart';
 import '../providers.dart';
 import '../song_raw.dart';
+import 'song_part_split.dart';
 
 enum SongPartType{
   ZWROTKA,
@@ -247,13 +248,15 @@ class TopZwrotkaButtons extends StatelessWidget{
   final void Function(SongPart)? onDuplicate;
   final void Function(SongPart)? onDelete;
   final bool showName;
+  final double? maxDialogWidth;
 
   const TopZwrotkaButtons(
       this.songPart,
       { required this.index,
         this.onDuplicate,
         this.onDelete,
-        this.showName = true
+        this.showName = true,
+        this.maxDialogWidth,
       });
 
   @override
@@ -266,6 +269,23 @@ class TopZwrotkaButtons extends StatelessWidget{
         AppButton(
           icon: Icon(MdiIcons.alertCircleOutline, color: Colors.red),
           onTap: () => AppScaffold.showMessage(context, text: 'Zwrotka nie spełnia standardów. Podejrzyj ją by dowiedzieć się więcej.'),
+        ),
+
+      if(canSplitSongPart(songPart))
+        AppButton(
+          icon: Icon(MdiIcons.callSplit, color: iconEnab_(context)),
+          onTap: () => openSplitSongPartDialog(
+            context,
+            part: songPart,
+            maxWidth: maxDialogWidth,
+            onConfirm: (newParts){
+              final prov = CurrentItemProvider.of(context);
+              final idx = prov.song.songParts.indexOf(songPart);
+              if(idx < 0) return;
+              prov.song.songParts.replaceRange(idx, idx + 1, newParts);
+              prov.notify();
+            },
+          ),
         ),
 
       AppButton(

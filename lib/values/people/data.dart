@@ -5584,3 +5584,10 @@ RegisteredContributor IGOR_KASPERSKI = const RegisteredContributor(
   ),
   emails: ["igor.kasperski@zhp.net.pl"],
 );
+
+RegisteredContributor LUCIANO_COSTA = const RegisteredContributor(
+  person: Person(
+    name: 'Luciano Costa',
+  ),
+  emails: ["baronyburdel@gmail.com"],
+);
