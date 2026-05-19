@@ -1879,7 +1879,7 @@ const RegisteredContributor JOANNA_ZUBEK = RegisteredContributor(
   person: Person(
     name: 'Joanna Zubek',
       druzyna: '234. WDW „Feniks”',
-      srodowisko: Srodowisko.custom('Hufiec ZHP Warszawa Mokotów', orgSlug: 'zhp'),
+      srodowisko: Srodowisko.hufiec('warszawa_mokotow', showChoragiew: false, showOkreg: false),
       rankInstr: RankInstr.pwd,
       rankHarc: RankHarc.zhpHOd,
   ),
@@ -3304,7 +3304,7 @@ const RegisteredContributor MAREK_BIZON = RegisteredContributor(
   person: Person(
     name: 'Marek Bizoń',
       druzyna: '17. DH „Salamandra”',
-      srodowisko: Srodowisko.custom('Hufiec Ziemi Rybnickiej', orgSlug: 'zhp'),
+      srodowisko: Srodowisko.hufiec('ziemi_rybnickiej', showChoragiew: false, showOkreg: false),
       rankInstr: RankInstr.phm,
       rankHarc: RankHarc.zhpHRc,
   ),
@@ -3564,7 +3564,7 @@ const RegisteredContributor MATEUSZ_KORZENIOWSKI = RegisteredContributor(
   
       rankHarc: RankHarc.dhc,
   ),
-  emails: ['mateusz.korzeniowski@zhp.net.pl'],
+  emails: ['mateusz.korzeniowski@zhp.net.pl', 'matikorzeniowski09@gmail.com'],
 );
 
 const RegisteredContributor MATEUSZ_MIKLASZEWSKI = RegisteredContributor(
@@ -4888,7 +4888,7 @@ const RegisteredContributor TADEUSZ_BRACHA = RegisteredContributor(
   person: Person(
     name: 'Tadeusz K. Bracha',
       druzyna: '6. DSH „Andromeda”',
-      srodowisko: Srodowisko.custom('Hufiec Oświęcim', orgSlug: 'zhp'),
+      srodowisko: Srodowisko.hufiec('oswiecim', showChoragiew: false, showOkreg: false),
       rankHarc: RankHarc.dhc,
   ),
   emails: ['tadekbracha@gmail.com'],
@@ -5782,4 +5782,42 @@ RegisteredContributor ADAM_WOLOWIEC = const RegisteredContributor(
     rankHarc: RankHarc.zhpCwik,
   ),
   emails: ["adamwolowiec123@gmail.com"],
+);
+
+RegisteredContributor MAREK_PRZYBYLA = const RegisteredContributor(
+  person: Person(
+    name: 'Marek Przybyła',
+    druzyna: '28. ŁDH',
+    srodowisko: Srodowisko.hufiec('lodz_polesie', showChoragiew: false, showOkreg: false),
+  ),
+  emails: ["marusprzybyla@gmail.com"],
+);
+
+RegisteredContributor MARCIN_KOWALICKI = const RegisteredContributor(
+  person: Person(
+    name: 'Marcin Kowalicki',
+    druzyna: '5. DH "Twierdza"',
+    srodowisko: Srodowisko.hufiec('ziemi_dzierzoniowskiej', showChoragiew: false, showOkreg: false, showOrg: false),
+  ),
+  emails: ["kowalickimarcin13@gmail.com"],
+);
+
+RegisteredContributor MARCEL_CHRZASCIK = const RegisteredContributor(
+  person: Person(
+    name: 'Marcel Chrząścik',
+    druzyna: '7. DH WATAHA',
+    srodowisko: Srodowisko.hufiec('trzebinia', showChoragiew: false, showOkreg: false),
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhpHOc,
+  ),
+  emails: ["marcel.chrzascik@zhp.net.pl"],
+);
+
+RegisteredContributor ANTONINA_CHALINSKA = const RegisteredContributor(
+  person: Person(
+    name: 'Antonina Chalińska',
+    druzyna: 'PWDH Gloria Mare',
+    srodowisko: Srodowisko.hufiec('poznan_jezyce', showChoragiew: false, showOkreg: false, showOrg: false),
+  ),
+  emails: ["chalinskatosia@gmail.com"],
 );
