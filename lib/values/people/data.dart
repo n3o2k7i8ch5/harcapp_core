@@ -55,7 +55,7 @@ const RegisteredContributor ADAM_WIECZOREK = RegisteredContributor(
   ),
   emails: ['aadam.wieczorek@gmail.com'],
 );
-RegisteredContributor ADAM_WOLOWIEC = const RegisteredContributor(
+const RegisteredContributor ADAM_WOLOWIEC = RegisteredContributor(
   person: Person(
     name: 'Adam Wołowiec',
     druzyna: '19. DH „Globtroterzy”',
@@ -395,7 +395,7 @@ const RegisteredContributor ANNA_SZMAJ = RegisteredContributor(
   ),
   emails: ['annaszmaj10@gmail.com'],
 );
-RegisteredContributor ANTONINA_CHALINSKA = const RegisteredContributor(
+const RegisteredContributor ANTONINA_CHALINSKA = RegisteredContributor(
   person: Person(
     name: 'Antonina Chalińska',
     druzyna: 'PWDH Gloria Mare',
@@ -445,7 +445,7 @@ const RegisteredContributor ANTONI_ATANASSOW = RegisteredContributor(
   ),
   emails: ['hal133258007@gmail.com', 'obszycia-polemiczny2p@icloud.com'],
 );
-RegisteredContributor ANTONI_CHMIELEWSKI = const RegisteredContributor(
+const RegisteredContributor ANTONI_CHMIELEWSKI = RegisteredContributor(
   person: Person(
     name: 'Antoni Chmielewski',
     rankHarc: RankHarc.dhc,
@@ -454,14 +454,14 @@ RegisteredContributor ANTONI_CHMIELEWSKI = const RegisteredContributor(
   ),
   emails: ["antoni.t.chmielewski@gmail.com"],
 );
-RegisteredContributor ANTONI_DEBICKI = const RegisteredContributor(
+const RegisteredContributor ANTONI_DEBICKI = RegisteredContributor(
   person: Person(
     name: 'Antoni Dębicki',
     srodowisko: Srodowisko.org('zhp'),
   ),
   emails: ["antoni.debicki@zhp.pl"],
 );
-RegisteredContributor ANTONI_KOSZNIEC = const RegisteredContributor(
+const RegisteredContributor ANTONI_KOSZNIEC = RegisteredContributor(
   person: Person(
     name: 'Antoni Koszniec',
     druzyna: '174. WDH „Wilki”',
@@ -534,7 +534,7 @@ const RegisteredContributor BARTOSZ_DABROWSKI = RegisteredContributor(
   ),
   emails: const [],
 );
-RegisteredContributor BARTOSZ_GORECKI = const RegisteredContributor(
+const RegisteredContributor BARTOSZ_GORECKI = RegisteredContributor(
   person: Person(
     name: 'Bartosz Górecki',
     druzyna: '76. DH „Łącznicy”',
@@ -577,7 +577,7 @@ const RegisteredContributor BLANKA_KARCZEWSKA = RegisteredContributor(
   ),
   emails: ['blankakarczewska10@gmail.com'],
 );
-RegisteredContributor BLAZEJ_INGARDEN = const RegisteredContributor(
+const RegisteredContributor BLAZEJ_INGARDEN = RegisteredContributor(
   person: Person(
     name: 'Błażej Ingarden',
     druzyna: '3,14 MDSH "Awangarda"',
@@ -802,7 +802,7 @@ const RegisteredContributor EMILIA_Z_FSE = RegisteredContributor(
   ),
   emails: ['rozapodcieniem@gmail.com'],
 );
-RegisteredContributor ERYK_UZNANSKI = const RegisteredContributor(
+const RegisteredContributor ERYK_UZNANSKI = RegisteredContributor(
   person: Person(
     name: 'Eryk Uznański',
     druzyna: 'Drużyna starszo harcerska zdobywcy',
@@ -1021,7 +1021,7 @@ const RegisteredContributor GABRIEL_POZNANSKI = RegisteredContributor(
   ),
   emails: ['gabriel.poznanski455@gmail.com'],
 );
-RegisteredContributor GAJA_TURECKA = const RegisteredContributor(
+const RegisteredContributor GAJA_TURECKA = RegisteredContributor(
   person: Person(
     name: 'Gaja Turecka',
     druzyna: '71. WDH Iter',
@@ -1303,7 +1303,7 @@ const RegisteredContributor IGNACY_WOJTCZAK = RegisteredContributor(
       'wojtczaki009@gmail.com'
     ],
 );
-RegisteredContributor IGOR_KASPERSKI = const RegisteredContributor(
+const RegisteredContributor IGOR_KASPERSKI = RegisteredContributor(
   person: Person(
     name: 'Igor Kasperski',
     srodowisko: Srodowisko.org('zhp'),
@@ -1535,7 +1535,7 @@ const RegisteredContributor JAKUB_NOGA = RegisteredContributor(
   ),
   emails: ['jakub.noga@zhp.net.pl'],
 );
-RegisteredContributor JAKUB_SIKORA = const RegisteredContributor(
+const RegisteredContributor JAKUB_SIKORA = RegisteredContributor(
   person: Person(
     name: 'Jakub Sikora',
     druzyna: '2. DH Sokoły',
@@ -1878,7 +1878,7 @@ const RegisteredContributor JULIA_KOSZTYLA = RegisteredContributor(
   ),
   emails: ['juliakosztyla23@gmail.com'],
 );
-RegisteredContributor JULIA_MACIAG = const RegisteredContributor(
+const RegisteredContributor JULIA_MACIAG = RegisteredContributor(
   person: Person(
     name: 'Julia Maciąg',
     rankHarc: RankHarc.zhpPionierka,
@@ -2139,7 +2139,7 @@ const RegisteredContributor KAJETAN_WYGNANSKI = RegisteredContributor(
   ),
   emails: const [],
 );
-RegisteredContributor KALINA_KAWICZ = const RegisteredContributor(
+const RegisteredContributor KALINA_KAWICZ = RegisteredContributor(
   person: Person(
     name: 'Kalina Kawicz',
     druzyna: '71. WDHS ESCAENSUS',
@@ -2290,7 +2290,7 @@ const RegisteredContributor KATARZYNA_BIALAS = RegisteredContributor(
   ),
   emails: ['katarzyna.bialas2010@gmail.com'],
 );
-RegisteredContributor KATARZYNA_JEDRZEJCZYK = const RegisteredContributor(
+const RegisteredContributor KATARZYNA_JEDRZEJCZYK = RegisteredContributor(
   person: Person(
     name: 'Katarzyna Jędrzejczyk',
     druzyna: '4. Drużyna Wędrownicza "Olimp" im. Jana Bytnara "Rudego"',
@@ -2637,7 +2637,7 @@ const RegisteredContributor LENA_STEFANSKA = RegisteredContributor(
   ),
   emails: ['lenastefanska16@gmail.com'],
 );
-RegisteredContributor LENA_ULINSKA = const RegisteredContributor(
+const RegisteredContributor LENA_ULINSKA = RegisteredContributor(
   person: Person(
     name: 'Lena Ulińska',
     druzyna: '111. ADH',
@@ -2671,7 +2671,7 @@ const RegisteredContributor LILIANA_MIROTA = RegisteredContributor(
   ),
   emails: ['lilianamirota@gmail.com', 'lilianokotek@wp.pl'],
 );
-RegisteredContributor LUCIANO_COSTA = const RegisteredContributor(
+const RegisteredContributor LUCIANO_COSTA = RegisteredContributor(
   person: Person(
     name: 'Luciano Costa',
   ),
@@ -2911,7 +2911,7 @@ const RegisteredContributor MAJA_HAJDACKA = RegisteredContributor(
   ),
   emails: ['maja.hajdacka@gmail.com'],
 );
-RegisteredContributor MAJA_SAWICKA = const RegisteredContributor(
+const RegisteredContributor MAJA_SAWICKA = RegisteredContributor(
   person: Person(
     name: 'Maja Sawicka',
     druzyna: '55 Janowska Drużyna harcerska “Granum”',
@@ -3047,7 +3047,7 @@ const RegisteredContributor MARCELI_WARDA = RegisteredContributor(
   ),
   emails: ['marceliwarda@gmail.com'],
 );
-RegisteredContributor MARCEL_CHRZASCIK = const RegisteredContributor(
+const RegisteredContributor MARCEL_CHRZASCIK = RegisteredContributor(
   person: Person(
     name: 'Marcel Chrząścik',
     druzyna: '7. DH WATAHA',
@@ -3088,7 +3088,7 @@ const RegisteredContributor MARCIN_JANKOWIAK = RegisteredContributor(
   ),
   emails: const [],
 );
-RegisteredContributor MARCIN_KOWALICKI = const RegisteredContributor(
+const RegisteredContributor MARCIN_KOWALICKI = RegisteredContributor(
   person: Person(
     name: 'Marcin Kowalicki',
     druzyna: '5. DH "Twierdza"',
@@ -3147,7 +3147,7 @@ const RegisteredContributor MAREK_MUSIALIK = RegisteredContributor(
   ),
   emails: const [],
 );
-RegisteredContributor MAREK_PRZYBYLA = const RegisteredContributor(
+const RegisteredContributor MAREK_PRZYBYLA = RegisteredContributor(
   person: Person(
     name: 'Marek Przybyła',
     druzyna: '28. ŁDH',
@@ -3701,7 +3701,7 @@ const RegisteredContributor NADIA_WYSZOGRODZKA = RegisteredContributor(
   ),
   emails: const [],
 );
-RegisteredContributor NAPEWNO_NIEBRONIEWSKI = const RegisteredContributor(
+const RegisteredContributor NAPEWNO_NIEBRONIEWSKI = RegisteredContributor(
   person: Person(
     name: 'Napewno Niebroniewski',
   ),
@@ -4387,7 +4387,7 @@ const RegisteredContributor STEFAN_KRYCZKA = RegisteredContributor(
   ),
   emails: const [],
 );
-RegisteredContributor STEFAN_PACIOREK = const RegisteredContributor(
+const RegisteredContributor STEFAN_PACIOREK = RegisteredContributor(
   person: Person(
     name: 'Stefan Paciorek',
     druzyna: '23 WGZ-ów "Zgrani Górale"',
@@ -4405,7 +4405,7 @@ const RegisteredContributor SZYMON_BARCZYK = RegisteredContributor(
   ),
   emails: ['szbarsz5@gmail.com', 'szymon.barczyk@zhp.net.pl'],
 );
-RegisteredContributor SZYMON_BRODA = const RegisteredContributor(
+const RegisteredContributor SZYMON_BRODA = RegisteredContributor(
   person: Person(
     name: 'Szymon Broda',
     druzyna: '208 WDH "Żywioł"',
@@ -4692,7 +4692,7 @@ const RegisteredContributor URSZULA_KOWALSKA = RegisteredContributor(
   ),
   emails: ['kobea9415@gmail.com'],
 );
-RegisteredContributor VICTORIA_TROCZYNSKA = const RegisteredContributor(
+const RegisteredContributor VICTORIA_TROCZYNSKA = RegisteredContributor(
   person: Person(
     name: 'Victoria Troczyńska',
     druzyna: '62 KDHS "Brzoza"',
@@ -4763,7 +4763,7 @@ const RegisteredContributor WERONIKA_ZAWIERUCHA = RegisteredContributor(
   ),
   emails: ['zawieruchaweronika570@gmail.com'],
 );
-RegisteredContributor WIKTORIA_BECHERKA = const RegisteredContributor(
+const RegisteredContributor WIKTORIA_BECHERKA = RegisteredContributor(
   person: Person(
     name: 'Wiktoria Becherka',
     druzyna: 'GDH "Czarne Stopy"',
@@ -4943,7 +4943,7 @@ const RegisteredContributor WOJCIECH_KUCHARSKI = RegisteredContributor(
   ),
   emails: ['kucharskiwojtek4@gmail.com'],
 );
-RegisteredContributor WOJCIECH_PONIEWSKI = const RegisteredContributor(
+const RegisteredContributor WOJCIECH_PONIEWSKI = RegisteredContributor(
   person: Person(
     name: 'Wojciech Poniewski',
     druzyna: '5. Wodna Drużyna Harcerska',
@@ -4983,7 +4983,7 @@ const RegisteredContributor WOJCIECH_ZIELINSKI = RegisteredContributor(
   ),
   emails: const [],
 );
-RegisteredContributor WOJTEK_KRAWIEC = const RegisteredContributor(
+const RegisteredContributor WOJTEK_KRAWIEC = RegisteredContributor(
   person: Person(
     name: 'Wojtek Krawiec',
     druzyna: '9. MDH Wawer',
