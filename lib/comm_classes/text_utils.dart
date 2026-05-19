@@ -254,3 +254,19 @@ String simplifyString(String string, {SpaceStrategy spaceStrategy = SpaceStrateg
 }
 
 String searchableString(String string) => simplifyString(string, spaceStrategy: SpaceStrategy.remove);
+
+/// Normalizacja używana przy porównywaniu tekstów dla potrzeb diffowania
+/// (np. czy pole `Person` z maila różni się od lokalnego wpisu). Ignoruje
+/// kropki i normalizuje białe znaki, żeby kosmetyczne różnice typu
+/// `"50 TDSH"` vs `"50. TDSH"` nie zapalały pill "aktualizacja".
+String normalizeForDiff(String s) => s
+    .replaceAll('.', '')
+    .replaceAll(RegExp(r'[„""«»]'), '"')
+    .replaceAll(RegExp(r"[‚''‹›]"), "'")
+    .replaceAll(RegExp(r'\s+'), ' ')
+    .trim();
+
+bool softEqualsForDiff(String? a, String? b) {
+  if(a == null || b == null) return a == b;
+  return normalizeForDiff(a) == normalizeForDiff(b);
+}
