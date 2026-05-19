@@ -1979,9 +1979,9 @@ const RegisteredContributor JULIA_KARAS = RegisteredContributor(
     name: 'Julia Karaś',
       rankHarc: RankHarc.zhpPionierka,
       druzyna: '78. Grunwaldzka Wielopoziomowa Drużyna Harcerska „Halny” im. hm. Józefy Kantor',
-      srodowisko: Srodowisko.custom(huf_zhp_beskidzki, orgSlug: 'zhp'),
+    srodowisko: Srodowisko.hufiec('beskidzki', showChoragiew: false, showOkreg: false),
   ),
-  emails: ['karasjulka81@gmail.com'],
+  emails: ['karasjulka81@gmail.com', 'julia.karas@zhp.pl'],
 );
 
 const RegisteredContributor JULIA_KOSZTYLA = RegisteredContributor(

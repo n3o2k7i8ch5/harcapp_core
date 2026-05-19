@@ -5,19 +5,10 @@
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/values/people/models.dart';
-import 'package:harcapp_core/values/people/utils.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
 
 import 'contrib_song_email.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
-
-/// Świeżak iff nadawca nie jest jeszcze zarejestrowany — czyli `registered`
-/// jest `null` albo żaden z jego adresów nie figuruje w globalnej mapie
-/// `allRegisteredPeopleByEmailMap`.
-bool _isContributorsFirstSong(RegisteredContributor? candidate){
-  if(candidate == null || candidate.emails.isEmpty) return true;
-  return !candidate.emails.any(allRegisteredPeopleByEmailMap.containsKey);
-}
 
 String registeredPersonToObjectStringLegacy(RegisteredContributor registered, {List<ContributorRef> contribRefs = const []}) =>
     _registeredPersonToObjectString(registered, contribRefs: contribRefs);
@@ -88,8 +79,8 @@ String composeContribSongEmailSubjectLegacy({
   required bool isNewSong,
   RegisteredContributor? registered,
 }){
-  bool isContributorsFirstSong = _isContributorsFirstSong(registered);
-  return '${isNewSong?'Nowa piosenka':'Poprawka piosenki'} "${song.title}" (${isContributorsFirstSong?' + świeżak + ':' - weteran - '})';
+  final firstSong = isContributorsFirstSong(registered?.emails ?? const []);
+  return '${isNewSong?'Nowa piosenka':'Poprawka piosenki'} "${song.title}" (${firstSong?' + świeżak + ':' - weteran - '})';
 }
 
 String _baseMessageLegacy(
@@ -126,11 +117,11 @@ Future<String> composeContribSongEmailLegacy({
   String? updateComment
 }) async {
 
-  bool isContributorsFirstSong = _isContributorsFirstSong(registered);
+  final firstSong = isContributorsFirstSong(registered?.emails ?? const []);
 
   String encodedSong = await song.code;
 
-  return "${_baseMessageLegacy(source, acceptRulesVersion, isContributorsFirstSong, registered)}"
+  return "${_baseMessageLegacy(source, acceptRulesVersion, firstSong, registered)}"
       "${
       updateComment != null?
       '\n'
@@ -149,8 +140,8 @@ String composeContribAttachedSongsEmailSubjectLegacy({
   required List<SongCore> songs,
   RegisteredContributor? registered,
 }){
-  bool isContributorsFirstSong = _isContributorsFirstSong(registered);
-  return 'Piosenki ${songs.length} (${isContributorsFirstSong?' + świeżak + ':' - weteran - '})';
+  final firstSong = isContributorsFirstSong(registered?.emails ?? const []);
+  return 'Piosenki ${songs.length} (${firstSong?' + świeżak + ':' - weteran - '})';
 }
 
 String composeContribAttachedSongsEmailLegacy({
@@ -160,8 +151,8 @@ String composeContribAttachedSongsEmailLegacy({
   RegisteredContributor? registered,
 }) {
 
-  bool isContributorsFirstSong = _isContributorsFirstSong(registered);
+  final firstSong = isContributorsFirstSong(registered?.emails ?? const []);
 
-  return _baseMessageLegacy(source, acceptRulesVersion, isContributorsFirstSong, registered);
+  return _baseMessageLegacy(source, acceptRulesVersion, firstSong, registered);
 
 }
