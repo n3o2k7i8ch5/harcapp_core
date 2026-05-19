@@ -23,7 +23,7 @@ const hufiecSkierniewice = Hufiec('skierniewice', 'Hufiec ZHP Skierniewice', cho
 const hufiecTomaszowMazowiecki = Hufiec('tomaszow_mazowiecki', 'Hufiec ZHP Tomaszów Mazowiecki', choragiewLodzka);
 const hufiecUniejow = Hufiec('uniejow', 'Hufiec ZHP Uniejów', choragiewLodzka);
 const hufiecZdunskaWola = Hufiec('zdunska_wola', 'Hufiec ZHP Zduńska Wola', choragiewLodzka);
-const hufiecZgierz = Hufiec('zgierz', 'Hufiec ZHP Zgierz', choragiewLodzka);
+const hufiecZgierz = Hufiec('zgierz', 'Hufiec ZHP Zgierz', choragiewLodzka, patron: 'Wojska Polskiego');
 
 const List<Hufiec> hufceLodzka = [
   hufiecBrzeziny, hufiecDolinyPilicy, hufiecGlowno, hufiecKonstantynowLodzki,

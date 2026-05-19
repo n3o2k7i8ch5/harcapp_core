@@ -30,10 +30,7 @@ class Choragiew {
 
 class Hufiec {
   final String slug;
-  /// Bazowa nazwa hufca bez patrona, np. `'Hufiec ZHP Zamość'`.
   final String name;
-  /// Patron hufca bez prefiksu `im.`, np. `'Dzieci Zamojszczyzny'`. Łączony
-  /// z [name] przez [displayName] do postaci `'$name im. $patron'`.
   final String? patron;
   final Choragiew choragiew;
   const Hufiec(this.slug, this.name, this.choragiew, {this.patron});
@@ -41,7 +38,6 @@ class Hufiec {
   /// Globally unique ID in the form `<slug>@<choragiew.id>`.
   String get id => '$slug@${choragiew.id}';
 
-  /// Pełna nazwa do wyświetlenia — `name` plus opcjonalny patron.
   String get displayName => patron == null ? name : '$name im. $patron';
 }
 

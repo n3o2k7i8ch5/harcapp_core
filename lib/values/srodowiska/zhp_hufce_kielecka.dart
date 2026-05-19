@@ -13,7 +13,7 @@ const hufiecOstrowiecSwietokrzyski = Hufiec('ostrowiec_swietokrzyski', 'Hufiec Z
 const hufiecPinczow = Hufiec('pinczow', 'Hufiec ZHP Pińczów', choragiewKielecka);
 const hufiecSandomierz = Hufiec('sandomierz', 'Hufiec ZHP Sandomierz', choragiewKielecka);
 const hufiecSkarzyskoKamienna = Hufiec('skarzysko_kamienna', 'Hufiec ZHP Skarżysko-Kamienna', choragiewKielecka);
-const hufiecStarachowice = Hufiec('starachowice', 'Hufiec ZHP Starachowice', choragiewKielecka);
+const hufiecStarachowice = Hufiec('starachowice', 'Hufiec ZHP Starachowice', choragiewKielecka, patron: 'Stanisława Staszica');
 const hufiecStaszow = Hufiec('staszow', 'Hufiec ZHP Staszów', choragiewKielecka);
 const hufiecSzczekocinskoWloszczowski = Hufiec('szczekocinsko_wloszczowski', 'Hufiec ZHP Szczekocińsko-Włoszczowski', choragiewKielecka);
 

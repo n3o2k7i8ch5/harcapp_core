@@ -3,7 +3,7 @@ import 'package:harcapp_core/values/srodowiska/models.dart';
 
 const hufiecBoleslawiec = Hufiec('boleslawiec', 'Hufiec ZHP Bolesławiec', choragiewDolnoslaska);
 const hufiecBystrzycaKlodzka = Hufiec('bystrzyca_klodzka', 'Hufiec ZHP Bystrzyca Kłodzka', choragiewDolnoslaska);
-const hufiecZiemiDzierzoniowskiej = Hufiec('ziemi_dzierzoniowskiej', 'Hufiec ZHP Ziemi Dzierżoniowskiej', choragiewDolnoslaska);
+const hufiecZiemiDzierzoniowskiej = Hufiec('ziemi_dzierzoniowskiej', 'Hufiec ZHP Ziemi Dzierżoniowskiej', choragiewDolnoslaska, patron: 'Władysława Reniewickiego');
 const hufiecGlogow = Hufiec('glogow', 'Hufiec ZHP Głogów', choragiewDolnoslaska);
 const hufiecJawor = Hufiec('jawor', 'Hufiec ZHP Jawor', choragiewDolnoslaska);
 const hufiecKamiennaGora = Hufiec('kamienna_gora', 'Hufiec ZHP Kamienna Góra', choragiewDolnoslaska);
@@ -12,13 +12,13 @@ const hufiecZiemiKlodzkiej = Hufiec('ziemi_klodzkiej', 'Hufiec ZHP Ziemi Kłodzk
 const hufiecLegnica = Hufiec('legnica', 'Hufiec ZHP Legnica', choragiewDolnoslaska);
 const hufiecLuban = Hufiec('luban', 'Hufiec ZHP Lubań', choragiewDolnoslaska);
 const hufiecLubin = Hufiec('lubin', 'Hufiec ZHP Lubin', choragiewDolnoslaska);
-const hufiecLagiewniki = Hufiec('lagiewniki', 'Hufiec ZHP Łagiewniki', choragiewDolnoslaska);
+const hufiecLagiewniki = Hufiec('lagiewniki', 'Hufiec ZHP Łagiewniki', choragiewDolnoslaska, patron: 'Synów Pułku');
 const hufiecOlesnica = Hufiec('olesnica', 'Hufiec ZHP Oleśnica', choragiewDolnoslaska);
 const hufiecOlawa = Hufiec('olawa', 'Hufiec ZHP Oława', choragiewDolnoslaska);
 const hufiecSrodaSlaska = Hufiec('sroda_slaska', 'Hufiec ZHP Środa Śląska', choragiewDolnoslaska);
 const hufiecSwidnica = Hufiec('swidnica', 'Hufiec ZHP Świdnica', choragiewDolnoslaska);
-const hufiecZiemiWalbrzyskiej = Hufiec('ziemi_walbrzyskiej', 'Hufiec ZHP Ziemi Wałbrzyskiej', choragiewDolnoslaska);
-const hufiecWroclaw = Hufiec('wroclaw', 'Hufiec ZHP Wrocław', choragiewDolnoslaska);
+const hufiecZiemiWalbrzyskiej = Hufiec('ziemi_walbrzyskiej', 'Hufiec ZHP Ziemi Wałbrzyskiej', choragiewDolnoslaska, patron: 'Alojzego Ciasnochy');
+const hufiecWroclaw = Hufiec('wroclaw', 'Hufiec ZHP Wrocław', choragiewDolnoslaska, patron: 'Polonii Wrocławskiej');
 const hufiecWroclawWschod = Hufiec('wroclaw_wschod', 'Hufiec ZHP Wrocław Wschód', choragiewDolnoslaska);
 const hufiecWroclawPoludnie = Hufiec('wroclaw_poludnie', 'Hufiec ZHP Wrocław Południe', choragiewDolnoslaska);
 const hufiecWroclawPolnoc = Hufiec('wroclaw_polnoc', 'Hufiec ZHP Wrocław Północ', choragiewDolnoslaska);

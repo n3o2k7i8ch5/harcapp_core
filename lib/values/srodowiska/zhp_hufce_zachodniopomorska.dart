@@ -7,12 +7,12 @@ const hufiecMysliborz = Hufiec('mysliborz', 'Hufiec ZHP Myślibórz', choragiewZ
 const hufiecPolice = Hufiec('police', 'Hufiec ZHP Police', choragiewZachodniopomorska);
 const hufiecSlawno = Hufiec('slawno', 'Hufiec ZHP Sławno', choragiewZachodniopomorska);
 const hufiecStargard = Hufiec('stargard', 'Hufiec ZHP Stargard', choragiewZachodniopomorska);
-const hufiecSzczecin = Hufiec('szczecin', 'Hufiec ZHP Szczecin', choragiewZachodniopomorska);
+const hufiecSzczecin = Hufiec('szczecin', 'Hufiec ZHP Szczecin', choragiewZachodniopomorska, patron: 'Pierwszych Szczecińskich Harcerzy');
 const hufiecSzczecinDabie = Hufiec('szczecin_dabie', 'Hufiec ZHP Szczecin-Dąbie', choragiewZachodniopomorska);
 const hufiecSzczecinPogodno = Hufiec('szczecin_pogodno', 'Hufiec ZHP Szczecin-Pogodno', choragiewZachodniopomorska, patron: 'Janusza Korczaka');
 const hufiecSzczecinek = Hufiec('szczecinek', 'Hufiec ZHP Szczecinek', choragiewZachodniopomorska);
 const hufiecZiemiKoszalinskiej = Hufiec('ziemi_koszalinskiej', 'Hufiec ZHP Ziemi Koszalińskiej', choragiewZachodniopomorska);
-const hufiecZiemiWolinskiej = Hufiec('ziemi_wolinskiej', 'Hufiec ZHP Ziemi Wolińskiej w Świnoujściu', choragiewZachodniopomorska);
+const hufiecZiemiWolinskiej = Hufiec('ziemi_wolinskiej', 'Hufiec ZHP Ziemi Wolińskiej w Świnoujściu', choragiewZachodniopomorska, patron: 'Marynarki Wojennej RP');
 
 const List<Hufiec> hufceZachodniopomorska = [
   hufiecBaltyckiKolobrzeg, hufiecGoleniow, hufiecMysliborz, hufiecPolice,

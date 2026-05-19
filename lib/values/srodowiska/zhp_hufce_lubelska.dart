@@ -1,7 +1,7 @@
 import 'package:harcapp_core/values/srodowiska/choragwie.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
 
-const hufiecBialaPodlaska = Hufiec('biala_podlaska', 'Hufiec ZHP Biała Podlaska', choragiewLubelska);
+const hufiecBialaPodlaska = Hufiec('biala_podlaska', 'Hufiec ZHP Biała Podlaska „Rubież”', choragiewLubelska, patron: 'hm. Aleksandra Kamińskiego');
 const hufiecChelm = Hufiec('chelm', 'Hufiec ZHP Chełm', choragiewLubelska);
 const hufiecHrubieszow = Hufiec('hrubieszow', 'Hufiec ZHP Hrubieszów', choragiewLubelska);
 const hufiecLublin = Hufiec('lublin', 'Hufiec ZHP Lublin', choragiewLubelska);
