@@ -21,7 +21,9 @@ List<String> _splitParagraphs(String value){
 /// Distributes `chordChunks` (length [m]) across `textCount` slots (length [n]).
 /// - m == n: 1:1 mapping.
 /// - m  > n: consecutive chord chunks are merged proportionally.
-/// - m  < n: chord chunks are spread evenly, leaving the gaps empty.
+/// - m  < n: chord chunks are placed at indices `floor(n*i/m)` for i in 0..m-1,
+///           so they cluster towards the start of the list (not centered).
+///           Remaining slots stay empty.
 List<String> _distributeChords(List<String> chordChunks, int textCount){
   final n = textCount;
   final m = chordChunks.length;
@@ -49,12 +51,12 @@ List<String> _distributeChords(List<String> chordChunks, int textCount){
   return result;
 }
 
-List<_SplitChunk>? _computeSplit(SongPart part){
-  final textChunks = _splitParagraphs(part.getText())
-      .where((c) => c.isNotEmpty)
-      .toList();
-  if(textChunks.length <= 1) return null;
+List<String> _textChunks(SongPart part) => _splitParagraphs(part.getText())
+    .where((c) => c.isNotEmpty)
+    .toList();
 
+List<_SplitChunk> _computeSplit(SongPart part){
+  final textChunks = _textChunks(part);
   final chordChunks = _splitParagraphs(part.chords);
   final chordsAssigned = _distributeChords(chordChunks, textChunks.length);
 
@@ -64,20 +66,25 @@ List<_SplitChunk>? _computeSplit(SongPart part){
   ];
 }
 
-bool canSplitSongPart(SongPart part) => _computeSplit(part) != null;
+bool canSplitSongPart(SongPart part) => _textChunks(part).length > 1;
 
+SongPart _toSongPart(_SplitChunk c) => SongPart.from(SongElement(c.text, c.chords, c.shift));
+
+/// Precondition: `canSplitSongPart(part)` must be true.
 Future<void> openSplitSongPartDialog(
   BuildContext context, {
   required SongPart part,
   required void Function(List<SongPart> newParts) onConfirm,
   double? maxWidth,
 }){
+  if(!canSplitSongPart(part))
+    throw StateError('openSplitSongPartDialog called on a non-splittable part — guard with canSplitSongPart first.');
+
   final chunks = _computeSplit(part);
-  assert(chunks != null, 'openSplitSongPartDialog called on a non-splittable part — guard with canSplitSongPart first.');
 
   return openAppDialog(
     context: context,
-    title: 'Podziel zwrotkę na ${chunks!.length}',
+    title: 'Podziel zwrotkę na ${chunks.length}',
     closable: true,
     scrollable: true,
     maxWidth: maxWidth,
@@ -94,7 +101,7 @@ Future<void> openSplitSongPartDialog(
               padding: EdgeInsets.symmetric(horizontal: Dimen.defMarg),
               child: SongPartCard(
                 type: SongPartType.ZWROTKA,
-                songPart: SongPart.from(SongElement(chunks[i].text, chunks[i].chords, chunks[i].shift)),
+                songPart: _toSongPart(chunks[i]),
               ),
             ),
           ),
@@ -110,10 +117,7 @@ Future<void> openSplitSongPartDialog(
         text: 'Podziel',
         onTap: (){
           Navigator.pop(context);
-          onConfirm([
-            for(final c in chunks)
-              SongPart.from(SongElement(c.text, c.chords, c.shift)),
-          ]);
+          onConfirm(chunks.map(_toSongPart).toList());
         },
       ),
     ],
