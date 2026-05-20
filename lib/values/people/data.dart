@@ -3094,7 +3094,7 @@ const RegisteredContributor MARCIN_KOWALICKI = RegisteredContributor(
     druzyna: '5. DH "Twierdza"',
     srodowisko: Srodowisko.hufiec('ziemi_dzierzoniowskiej', showChoragiew: false, showOkreg: false, showOrg: false),
   ),
-  emails: ["kowalickimarcin13@gmail.com"],
+  emails: ["kowalickimarcin13@gmail.com", 'marcin.kowalicki@zhp.pl'],
 );
 const RegisteredContributor MARCIN_SOBKOWICZ = RegisteredContributor(
   person: Person(
