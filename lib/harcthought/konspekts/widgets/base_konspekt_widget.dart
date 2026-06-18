@@ -34,6 +34,7 @@ class BaseKonspektWidget extends StatefulWidget{
 
   final Konspekt konspekt;
   final bool withAppBar;
+  final List<Widget>? appBarActions;
   final void Function()? onDuchLevelInfoTap;
   final double? maxDialogWidth;
   final ScrollPhysics physics;
@@ -56,6 +57,7 @@ class BaseKonspektWidget extends StatefulWidget{
       this.konspekt,
       { super.key,
         this.withAppBar = true,
+        this.appBarActions,
         required this.onDuchLevelInfoTap,
         this.maxDialogWidth,
         this.physics = const BouncingScrollPhysics(),
@@ -153,6 +155,7 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
               stretch: true,
               floating: false,
               expandedHeight: constraints.maxWidth*600/1000,
+              actions: widget.appBarActions,
               flexibleSpace: FlexibleSpaceBar(
                 title: AnimatedOpacity(
                   opacity: showAppBarTitle?1:0,

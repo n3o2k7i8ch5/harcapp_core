@@ -7,54 +7,57 @@ import 'package:qr_code_dart_scan/qr_code_dart_scan.dart';
 Future<String?> scanQrCode(BuildContext context) async {
   String? scannedQrCode;
   await openBaseDialog(
-      context: context,
-      builder: (context) => QRCodeScannerWidget(
-        onCapture: (qrCode){
-          scannedQrCode = qrCode;
-          popPage(context);
-        },
-      )
+    context: context,
+    builder:
+        (context) => QRCodeScannerWidget(
+          onCapture: (qrCode) {
+            scannedQrCode = qrCode;
+            popPage(context);
+          },
+        ),
   );
 
   return scannedQrCode;
 }
 
-class QRCodeScannerWidget extends StatelessWidget{
-
+class QRCodeScannerWidget extends StatelessWidget {
   final void Function(String) onCapture;
 
   const QRCodeScannerWidget({required this.onCapture, super.key});
 
   @override
-  Widget build(BuildContext context) => Stack(
-    children: [
-      QRCodeDartScanView(
-        typeScan: TypeScan.live, // if TypeScan.takePicture will try decode when click to take a picture (default TypeScan.live)
-        // takePictureButtonBuilder: (context,controller,isLoading){ // if typeScan == TypeScan.takePicture you can customize the button.
-        //    if(loading) return CircularProgressIndicator();
-        //    return ElevatedButton(
-        //       onPressed:controller.takePictureAndDecode,
-        //       child:Text('Take a picture'),
-        //    );
-        // }
-        // resolutionPreset: = QrCodeDartScanResolutionPreset.high,
-        formats: const [ // You can restrict specific formats.
-          BarcodeFormat.qrCode
-        ],
-        onCapture: (Result result) {
-          onCapture.call(result.text);
-        },
-      ),
-
-      Positioned(
-        top: 0,
-        left: 0,
-        right: 0,
-        child: AppBarX(
-          backgroundColor: Colors.transparent,
+  Widget build(BuildContext context) => SizedBox.expand(
+    child: Stack(
+      fit: StackFit.expand,
+      children: [
+        QRCodeDartScanView(
+          typeScan:
+              TypeScan
+                  .live, // if TypeScan.takePicture will try decode when click to take a picture (default TypeScan.live)
+          // takePictureButtonBuilder: (context,controller,isLoading){ // if typeScan == TypeScan.takePicture you can customize the button.
+          //    if(loading) return CircularProgressIndicator();
+          //    return ElevatedButton(
+          //       onPressed:controller.takePictureAndDecode,
+          //       child:Text('Take a picture'),
+          //    );
+          // }
+          // resolutionPreset: = QrCodeDartScanResolutionPreset.high,
+          formats: const [
+            // You can restrict specific formats.
+            BarcodeFormat.qrCode,
+          ],
+          onCapture: (Result result) {
+            onCapture.call(result.text);
+          },
         ),
-      )
-    ],
-  );
 
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: AppBarX(backgroundColor: Colors.transparent),
+        ),
+      ],
+    ),
+  );
 }

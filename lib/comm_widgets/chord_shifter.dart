@@ -1,4 +1,5 @@
 import 'chord_draw.dart';
+import 'chord_normalizer.dart';
 
 class ChordShifter{
 
@@ -23,6 +24,9 @@ class ChordShifter{
   }
 
   void decode(String chordsString, int shift){
+
+    // Nieobsługiwane akordy (np. "Dadd11") -> podstawowy stopień ("D").
+    chordsString = normalizeChords(chordsString);
 
     List<String> lines = chordsString.split('\n').map((line) => line.trim()).toList();
 
