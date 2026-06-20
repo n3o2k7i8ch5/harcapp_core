@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../song_core.dart';
 import '../song_element.dart';
@@ -131,7 +131,7 @@ class SongRaw extends SongCore{
     if(!ytLink.startsWith("https://"))
       ytLink = "https://$ytLink";
 
-    return YoutubePlayer.convertUrlToId(ytLink);
+    return YoutubePlayerController.convertUrlToId(ytLink);
   }
 
   static SongRaw fromApiRespMap(String id, Map respMap){

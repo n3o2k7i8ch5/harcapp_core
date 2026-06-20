@@ -10,7 +10,7 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/harcthought/articles/article_renderers.dart';
 import 'package:harcapp_core/harcthought/articles/model/common.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import 'article_text_style.dart';
 
@@ -225,34 +225,48 @@ class PictureArticleElementWidget extends StatelessWidget{
   );
 }
 
-class YoutubeArticleElementWidget extends StatelessWidget{
+class YoutubeArticleElementWidget extends StatefulWidget{
 
   final YoutubeArticleElement item;
 
   const YoutubeArticleElementWidget(this.item, {super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<YoutubeArticleElementWidget> createState() => _YoutubeArticleElementWidgetState();
+}
 
-    YoutubePlayerController controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(item.link)!,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
+class _YoutubeArticleElementWidgetState extends State<YoutubeArticleElementWidget>{
+
+  late final YoutubePlayerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = YoutubePlayerController.fromVideoId(
+      videoId: YoutubePlayerController.convertUrlToId(widget.item.link)!,
+      autoPlay: false,
+      params: const YoutubePlayerParams(
         mute: false,
+        showFullscreenButton: true,
       ),
     );
+  }
 
+  @override
+  void dispose() {
+    controller.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return AppCard(
       elevation: AppCard.bigElevation,
       padding: EdgeInsets.zero,
       margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: YoutubePlayer(
         controller: controller,
-        showVideoProgressIndicator: true,
-        progressColors: const ProgressBarColors(
-          playedColor: Colors.amber,
-          handleColor: Colors.amberAccent,
-        ),
+        aspectRatio: 16 / 9,
       ),
     );
   }
