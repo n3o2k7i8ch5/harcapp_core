@@ -14,7 +14,7 @@ import 'package:harcapp_core/values/srodowiska/choragwie.dart';
 import 'package:harcapp_core/values/srodowiska/hufce.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
 import 'package:harcapp_core/values/srodowiska/okregi.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 /// Cascading picker dla [Srodowisko]: Hufiec → Chorągiew → Okręg → Organizacja.
 ///

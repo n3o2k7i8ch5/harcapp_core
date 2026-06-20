@@ -9,7 +9,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/harcthought/articles/article_renderers.dart';
 import 'package:harcapp_core/harcthought/articles/model/common.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'article_text_style.dart';

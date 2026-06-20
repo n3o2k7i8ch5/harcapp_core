@@ -433,7 +433,7 @@ Future<Uint8List> konspektToPdf(
   if(withMetadata)
     multiPage.addAll(await HowToFailWidget(konspekt, font, fontBold, fontHalfBold, fontItalic, fontHalfBoldItalic, fontBoldItalic));
 
-  ByteData fontByteData = await rootBundle.load('packages/material_design_icons_flutter/lib/fonts/materialdesignicons-webfont.ttf');
+  ByteData fontByteData = await rootBundle.load('packages/flutter_material_design_icons/assets/materialdesignicons-webfont.ttf');
 
   pdf.addPage(
       MultiPage(

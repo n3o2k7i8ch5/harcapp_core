@@ -10,7 +10,7 @@ import 'package:harcapp_core/comm_widgets/dialog/base.dart';
 import 'package:harcapp_core/comm_widgets/save_pdf.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 typedef SavePdfDataBuilder = Future<({Uint8List bytes, String filename})> Function();
 

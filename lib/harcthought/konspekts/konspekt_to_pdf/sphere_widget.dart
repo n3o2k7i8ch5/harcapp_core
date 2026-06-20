@@ -1,6 +1,6 @@
 import 'package:harcapp_core/harcthought/konspekts/konspekt.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 import 'common.dart';
 

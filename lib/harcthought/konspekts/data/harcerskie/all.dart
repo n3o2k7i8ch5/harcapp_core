@@ -25,7 +25,7 @@ import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/spiewogranie_
 import 'package:harcapp_core/harcthought/konspekts/data/harcerskie/zycie_i_swiat_prl.dart';
 import 'package:harcapp_core/harcthought/konspekts/data/level_examples.dart';
 import 'package:harcapp_core/values/people/data.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 import '../../konspekt.dart';
 import '_consts.dart';

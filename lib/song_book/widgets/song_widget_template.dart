@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
@@ -19,7 +18,7 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/logger.dart';
 import 'package:harcapp_core/song_book/song_scroll_to_visible_lines.dart';
 import 'package:harcapp_core/values/dimen.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:native_device_orientation/native_device_orientation.dart';
 import 'package:provider/provider.dart';
 
@@ -919,7 +918,7 @@ class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<T
 
     _ButtonData(
         name: 'Albumy',
-        iconData: FeatherIcons.bookmark,
+        iconData: MdiIcons.bookmarkOutline,
         onPressed: (_, songWidget, _) => songWidget.onAlbumsTap?.call(),
         show: (_, _, _) => true
     ),
@@ -927,7 +926,7 @@ class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<T
     if(showYtButton)
       _ButtonData(
           name: 'YouTube',
-          iconData: FeatherIcons.youtube,
+          iconData: MdiIcons.youtube,
           onLongPress: (_, songWidget, _) => songWidget.onYtLongPress?.call(),
           onPressed: (_, songWidget, _){
             if(songWidget.onYtTap==null) return;
@@ -947,7 +946,7 @@ class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<T
 
     _ButtonData(
         name: 'Modyfikuj',
-        iconData: FeatherIcons.edit,
+        iconData: MdiIcons.pencilOutline,
         onPressed: (context, parent, _) => parent.onEditTap?.call(TextSizeProvider.of(context)),
         show: (_, _, _) => true
     ),

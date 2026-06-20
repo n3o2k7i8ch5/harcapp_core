@@ -4,7 +4,7 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_widgets/dialog/app_dialog.dart';
 import 'package:harcapp_core/values/dimen.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 const String hal2026FeedbackFormUrl =
     'https://docs.google.com/forms/d/e/1FAIpQLScEjpiz8xbgzCr0CBO8eYn_fiSVcBrTqNwJCZUz4hBiVHn_5w/viewform?usp=publish-editor';

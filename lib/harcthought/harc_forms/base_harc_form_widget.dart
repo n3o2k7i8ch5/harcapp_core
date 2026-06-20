@@ -8,7 +8,7 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/gradient_icon.dart';
 import 'package:harcapp_core/comm_widgets/meto.dart';
 import 'package:harcapp_core/values/dimen.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 import 'harc_form.dart';
 

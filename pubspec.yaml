@@ -19,7 +19,6 @@ dependencies:
   dio: ^5.8.0+1
   dropdown_button2: ^3.0.0
   fluttertoast: ^9.0.0
-  flutter_feather_icons: ^2.0.0+1
   flutter_layout_grid: ^2.0.7
   flutter_spinkit: ^5.2.1
   flutter_svg: ^2.0.17
@@ -35,7 +34,7 @@ dependencies:
   just_audio: ^0.10.4
   linked_scroll_controller: ^0.2.0
   logger: ^2.5.0
-  material_design_icons_flutter: ^7.0.7296
+  flutter_material_design_icons: ^3.1.0+7447
   mime: ^2.0.0
   native_device_orientation: ^2.0.3
   oktoast: ^3.4.0

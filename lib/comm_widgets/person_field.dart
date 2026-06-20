@@ -8,7 +8,7 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/people/person_editor_dialog.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 /// Karta z osobą + edycja przez [PersonEditorDialog].
 /// Pusty stan: przycisk z plus-ikoną i napisem [emptyLabel].
