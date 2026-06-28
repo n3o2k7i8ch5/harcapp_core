@@ -3427,9 +3427,8 @@ const RegisteredContributor MATEUSZ_KOBYLAREK = RegisteredContributor(
 const RegisteredContributor MATEUSZ_KORZENIOWSKI = RegisteredContributor(
   person: Person(
     name: 'Mateusz Korzeniowski',
-      druzyna: '1. DH D.R.E.S.Z.C.Z',
+      // druzyna: '1. DH D.R.E.S.Z.C.Z',
       srodowisko: Srodowisko.hufiec('wieliczka', showChoragiew: false, showOkreg: false),
-  
       rankHarc: RankHarc.dhc,
   ),
   emails: ['mateusz.korzeniowski@zhp.net.pl', 'matikorzeniowski09@gmail.com'],
