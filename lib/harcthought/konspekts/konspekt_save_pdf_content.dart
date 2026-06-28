@@ -127,12 +127,14 @@ class _SwitchCard extends StatelessWidget {
 
   const _SwitchCard({required this.title, required this.value, required this.onChanged});
 
+  // The coloured rounded background must be a Material (not a DecoratedBox),
+  // otherwise the SwitchListTile paints its ink/selection on the Material
+  // ancestor *behind* the background, which hides them (Flutter asserts on it).
   @override
-  Widget build(BuildContext context) => Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(AppCard.defRadius),
-      color: cardEnab_(context),
-    ),
+  Widget build(BuildContext context) => Material(
+    color: cardEnab_(context),
+    borderRadius: BorderRadius.circular(AppCard.defRadius),
+    clipBehavior: Clip.hardEdge,
     child: SwitchListTile(
       title: Text(title, style: AppTextStyle(color: iconEnab_(context))),
       value: value,
