@@ -882,9 +882,9 @@ const RegisteredContributor FILIP_LEWICKI = RegisteredContributor(
 const RegisteredContributor FILIP_PIELA = RegisteredContributor(
   person: Person(
     name: 'Filip Piela',
-      druzyna: '1. KDHS „Świt”',
-      rankHarc: RankHarc.dhc,
-      srodowisko: Srodowisko.org('zhp'),
+    druzyna: '1. KDHS „Świt”',
+    rankHarc: RankHarc.dhc,
+    srodowisko: Srodowisko.hufiec('podkrakowski'),
   ),
   emails: ['filip.piela0209@gmail.com'],
 );
@@ -3091,7 +3091,7 @@ const RegisteredContributor MARCIN_JANKOWIAK = RegisteredContributor(
 const RegisteredContributor MARCIN_KOWALICKI = RegisteredContributor(
   person: Person(
     name: 'Marcin Kowalicki',
-    druzyna: '5. DH "Twierdza"',
+    druzyna: '5. DH „Twierdza”',
     srodowisko: Srodowisko.hufiec('ziemi_dzierzoniowskiej', showChoragiew: false, showOkreg: false, showOrg: false),
   ),
   emails: ["kowalickimarcin13@gmail.com", 'marcin.kowalicki@zhp.pl'],
@@ -3152,8 +3152,9 @@ const RegisteredContributor MAREK_PRZYBYLA = RegisteredContributor(
     name: 'Marek Przybyła',
     druzyna: '28. ŁDH',
     srodowisko: Srodowisko.hufiec('lodz_polesie', showChoragiew: false, showOkreg: false),
+    rankHarc: RankHarc.zhrCwik,
   ),
-  emails: ["marusprzybyla@gmail.com"],
+  emails: ["rzecznykamien@gmail.com", "marusprzybyla@gmail.com"],
 );
 const RegisteredContributor MARIA_BATKO = RegisteredContributor(
   person: Person(
@@ -5204,4 +5205,115 @@ const RegisteredContributor ZUZANNA_WARCHOL = RegisteredContributor(
       srodowisko: Srodowisko.hufiec('szczecin_pogodno', showChoragiew: false, showOkreg: false),
   ),
   emails: const [],
+);
+
+// ---
+
+RegisteredContributor JAN_SUROWKA = const RegisteredContributor(
+  person: Person(
+    name: 'Jan Surówka',
+    srodowisko: Srodowisko.org('zhp'),
+    rankHarc: RankHarc.dhc,
+  ),
+  emails: ["jsrwka@gmail.com"],
+);
+
+RegisteredContributor JULIAN_WANICZEK = const RegisteredContributor(
+  person: Person(
+    name: 'Julian Waniczek',
+    druzyna: '8. DW „AZYL”',
+    srodowisko: Srodowisko.hufiec('luzycki', showChoragiew: false, showOkreg: false),
+    rankHarc: RankHarc.dhc,
+  ),
+  emails: ["julian.waniczek@zhp.pl"],
+);
+
+RegisteredContributor JAKUB_SMYK = const RegisteredContributor(
+  person: Person(
+    name: 'Jakub Smyk',
+    druzyna: '102. WDW "Rudy"',
+    srodowisko: Srodowisko.hufiec('wagrowiec'),
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhpHOc,
+  ),
+  emails: ["jakub.smyk@zhp.net.pl", "jakubsmyk23@gmail.com"],
+);
+
+RegisteredContributor OLIWER_DARA = const RegisteredContributor(
+  person: Person(
+    name: 'Oliwer Dara',
+    druzyna: '335 KDSH „Niewidzialni”',
+    srodowisko: Srodowisko.hufiec('krakow_nowa_huta', showChoragiew: false, showOkreg: false),
+    rankHarc: RankHarc.zhpOdkrywca,
+  ),
+  emails: ["naprawskifranciszek@gmail.com", "fnapraw@icloud.com"],
+);
+
+RegisteredContributor MARIAN_KWIECIEN = const RegisteredContributor(
+  person: Person(
+    name: 'Marian Kwiecień',
+    druzyna: '34 RDHS "Meksyk 2"',
+    srodowisko: Srodowisko.org('zhp'),
+    rankInstr: RankInstr.hm,
+    rankHarc: RankHarc.zhpHRc,
+  ),
+  emails: ["d.lordunio@onet.eu", "d.kolasinski@psp34.radom.pl"],
+);
+
+RegisteredContributor TOMASZ_KOZA = const RegisteredContributor(
+  person: Person(
+    name: 'Tomasz Koza',
+    srodowisko: Srodowisko.org('zhp'),
+    rankHarc: RankHarc.dhc,
+  ),
+  emails: ["koza.tomasz.13@gmail.com"],
+);
+
+RegisteredContributor GABRIELA_BRATKIEWICZ = const RegisteredContributor(
+  person: Person(
+    name: 'Gabriela Bratkiewicz',
+    druzyna: '21 WDW Luna',
+    srodowisko: Srodowisko.custom('Września WRZOS'),
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhpPionierka,
+  ),
+  emails: ["gabriela.bratkiewicz@zhp.net.pl", "gabriela.bratkiewicz07@gmail.com"],
+);
+
+RegisteredContributor LILA_KULAGOWSKA = const RegisteredContributor(
+  person: Person(
+    name: 'Lila Kułagowska',
+    druzyna: '10 Harcerska drużyna żeglarska',
+    srodowisko: Srodowisko.hufiec('katowice'),
+    rankHarc: RankHarc.zhpOchotniczka,
+  ),
+  emails: ["liliana080513@gmail.com"],
+);
+
+RegisteredContributor MACIEK_KUZAWINSKI = const RegisteredContributor(
+  person: Person(
+    name: 'Maciek Kuzawiński',
+    srodowisko: Srodowisko.org('sh'),
+    rankInstr: RankInstr.pwd,
+    rankHarc: RankHarc.zhrHOc,
+  ),
+  emails: ["mkuzawinski@sh.org.pl", "maciekkuzawinski@gmail.com"],
+);
+
+RegisteredContributor DAMIAN_DASZYNSKI = const RegisteredContributor(
+  person: Person(
+    name: 'Damian Daszyński',
+    druzyna: '64 Łódzka Drużyna Starszoharcerska "Szpony"',
+    srodowisko: Srodowisko.hufiec('lodz_polesie', showOrg: false),
+  ),
+  emails: ["damian2010poland@gmail.com", "bombodamian388@gmail.com"],
+);
+
+RegisteredContributor ZASTEP_SWAROGI = const RegisteredContributor(
+  person: Person(
+    name: 'Zastęp Swarogi',
+    srodowisko: Srodowisko.hufiec('wolomin', showChoragiew: false, showOkreg: false),
+    rankHarc: RankHarc.zhpTropicielka,
+  ),
+  emails: ["zejmo.lucja@gmail.com"],
 );

@@ -255,10 +255,10 @@ _LegacyPersonParse _parseLegacyPersonBlock(String block){
   );
 }
 
-/// Wyciąga pola [Person] z ciała wnętrza `Person(...)`. Wspiera oba formaty
-/// środowiska: stary `hufiec: '...'` (V1) i nowy `srodowisko: Srodowisko.custom('...')`
-/// (V2). Org-tylko fallback: brak hufca/srodowiska + `org: Org.xxx` →
-/// `Srodowisko.org(...)`.
+/// Wyciąga pola [Person] z ciała wnętrza `Person(...)`. Wspiera formaty
+/// środowiska: strukturalny `Srodowisko.hufiec/choragiew/okreg/org('slug', ...)`
+/// (domyślny emitowany format), `Srodowisko.custom('...')`, stary `hufiec: '...'`
+/// (V1) oraz org-tylko fallback `org: Org.xxx` → `Srodowisko.org(...)`.
 ///
 /// Pola, które były w mejlu, ale nie zostały rozpoznane (np. `rankHarc: HO`
 /// po refaktorze enuma), trafiają do [warnings] jako gotowe komunikaty.
@@ -271,12 +271,56 @@ Person? _personFromLegacyBody(String body, List<String> warnings){
 
   Srodowisko? srodowisko;
 
-  // V2 path: srodowisko: Srodowisko.custom('value')
-  final v2Match = RegExp(r"srodowisko:\s*Srodowisko\.custom\('((?:\\'|[^'])*)'\)")
+  // V2 structural path: srodowisko: Srodowisko.hufiec('slug', showX: false, ...)
+  // (also .choragiew / .okreg / .org). Musi być przed `.custom`, bo to jest
+  // domyślny format emitowany przez `contrib_song_email_legacy.dart`.
+  final structMatch = RegExp(
+      r"srodowisko:\s*Srodowisko\.(hufiec|choragiew|okreg|org)\(\s*'((?:\\'|[^'])*)'([^)]*)\)")
       .firstMatch(body);
-  if(v2Match != null) {
-    final value = v2Match.group(1)?.replaceAll(r"\'", "'");
-    if(value != null && value.isNotEmpty) srodowisko = Srodowisko.custom(value);
+  if(structMatch != null) {
+    final kind = structMatch.group(1)!;
+    final slug = structMatch.group(2)!.replaceAll(r"\'", "'");
+    final rest = structMatch.group(3) ?? '';
+    bool show(String name) => !RegExp('$name:\\s*false').hasMatch(rest);
+    final customMatch = RegExp(r"custom:\s*'((?:\\'|[^'])*)'").firstMatch(rest);
+    final customVal = customMatch?.group(1)?.replaceAll(r"\'", "'");
+    switch(kind){
+      case 'hufiec':
+        srodowisko = Srodowisko(
+          hufiecSlug: slug, custom: customVal,
+          showHufiec: show('showHufiec'), showChoragiew: show('showChoragiew'),
+          showOkreg: show('showOkreg'), showOrg: show('showOrg'),
+        );
+        break;
+      case 'choragiew':
+        srodowisko = Srodowisko(
+          choragiewSlug: slug, custom: customVal,
+          showChoragiew: show('showChoragiew'), showOkreg: show('showOkreg'),
+          showOrg: show('showOrg'),
+        );
+        break;
+      case 'okreg':
+        srodowisko = Srodowisko(
+          okregSlug: slug, custom: customVal,
+          showOkreg: show('showOkreg'), showOrg: show('showOrg'),
+        );
+        break;
+      case 'org':
+        srodowisko = Srodowisko(
+          orgSlug: slug, custom: customVal, showOrg: show('showOrg'),
+        );
+        break;
+    }
+  }
+
+  // V2 custom path: srodowisko: Srodowisko.custom('value')
+  if(srodowisko == null) {
+    final v2Match = RegExp(r"srodowisko:\s*Srodowisko\.custom\('((?:\\'|[^'])*)'\)")
+        .firstMatch(body);
+    if(v2Match != null) {
+      final value = v2Match.group(1)?.replaceAll(r"\'", "'");
+      if(value != null && value.isNotEmpty) srodowisko = Srodowisko.custom(value);
+    }
   }
 
   // V1 path: hufiec: 'value'
