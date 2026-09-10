@@ -134,7 +134,7 @@ Classified classify(ContribMessage m, {required SongBook book}) {
 
   if (reasons.isNotEmpty) return Classified(m, Manual(reasons, detail: bookDetail), title);
 
-  _enrich(song, parsed, sender: sender!, date: m.date);
+  _enrich(song, parsed, sender: sender!, date: m.date, msgId: m.id);
   return Classified(m, Import(song, sender, registered: parsed.registered), title);
 }
 
@@ -287,12 +287,18 @@ void _enrich(
   SongRaw song,
   ParsedContribEmail parsed, {
   required String sender,
+  required String msgId,
   DateTime? date,
 }) {
-  song.contributorData ??= ContributorData(
-    email: sender,
-    contributionDate: date ?? DateTime.now(),
-    acceptedContributionRulesVersion: parsed.acceptedRulesVersion!,
+  // Dane z mejla mają pierwszeństwo (stary format je niósł), ale id mejla
+  // stemplujemy zawsze: po nim `review` wiąże piosenkę ze zgłoszeniem.
+  final fromEmail = song.contributorData;
+  song.contributorData = ContributorData(
+    email: fromEmail?.email ?? sender,
+    contributionDate: fromEmail?.contributionDate ?? date ?? DateTime.now(),
+    acceptedContributionRulesVersion:
+        fromEmail?.acceptedContributionRulesVersion ?? parsed.acceptedRulesVersion!,
+    emailMsgId: msgId,
   );
   final known = song.contribRefs
       .any((c) => (c.emailRef ?? '').toLowerCase() == sender);

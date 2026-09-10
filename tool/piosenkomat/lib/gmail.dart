@@ -115,6 +115,14 @@ class GmailMailbox {
     );
   }
 
+  /// Nazwy etykiet mejla. Tylko metadane, bez treści.
+  Future<Set<String>> labelsOf(String messageId) async {
+    final msg = await _call(() => _api.users.messages.get('me', messageId, format: 'minimal'));
+    return {
+      for (final id in msg.labelIds ?? const <String>[]) _nameById[id] ?? id,
+    };
+  }
+
   /// Czy mejl ma już jakąś etykietę zaczynającą się od [prefix]. Tylko metadane.
   Future<bool> hasAnyLabel(String messageId, {required String prefix}) async {
     final msg = await _call(() => _api.users.messages.get('me', messageId, format: 'minimal'));
@@ -151,6 +159,14 @@ class GmailMailbox {
   Future<void> addLabels(String messageId, Iterable<String> names) => _modify(
         messageId,
         add: [for (final n in names) _idByName[n]!],
+      );
+
+  /// Odrzucona po Twoim przeglądzie: schodzi „w pliku”, wchodzi powód.
+  /// `Auto` zostaje, bo to automat ją zaproponował.
+  Future<void> rejectAfterReview(String messageId) => _modify(
+        messageId,
+        add: [_idByName[kLabelRejectedAfterReview]!],
+        remove: [_idByName[kLabelReady]!],
       );
 
   /// Gotowa do dodania → Zatwierdzona i dodana, przeczytane. `Auto` zostaje.

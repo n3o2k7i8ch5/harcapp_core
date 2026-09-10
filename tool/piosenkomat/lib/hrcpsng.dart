@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
+import 'package:harcapp_core/song_book/import_hrcpsng.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:path/path.dart' as p;
 
@@ -62,6 +63,22 @@ void writeHrcpsng(String path, List<SongRaw> songs) {
   file.writeAsStringSync(encodeHrcpsng(songs));
 }
 
+/// Piosenki z pliku `.hrcpsng`, tym samym parserem, co strona.
+List<SongRaw> readHrcpsng(String path) {
+  final file = File(path);
+  if (!file.existsSync()) throw FileSystemException('Nie ma pliku piosenek', path);
+  try {
+    final (official, conf) = importHrcpsng(file.readAsStringSync());
+    return [...official, ...conf];
+  } on HrcpsngImportError catch (e) {
+    throw FileSystemException(e.message, path);
+  } on Error {
+    // Najczęściej dziury albo duplikaty w polach „index” po ręcznej edycji.
+    throw FileSystemException(
+        'Nie udało się wczytać pliku — wyeksportuj go ponownie ze strony', path);
+  }
+}
+
 /// `PIOSENKOMAT_SONGS_DB` albo `assets/songs/all_songs.hrcpsng` szukane w górę.
 String defaultSongsDbPath() {
   final env = Platform.environment['PIOSENKOMAT_SONGS_DB'];
@@ -76,7 +93,8 @@ String defaultSongsDbPath() {
 }
 
 /// Osobny katalog na każdy przebieg, żeby drugi `process` nie nadpisał pierwszego.
-/// W środku: `songs.hrcpsng`, `people.dart`, `labels.json`, `report.txt`.
+/// W środku: `songs.hrcpsng`, `approved.hrcpsng`, `people.dart`, `labels.json`,
+/// `report.txt`, a po przeglądzie `review.json`.
 String defaultOutDir() {
   final t = DateTime.now().toIso8601String().substring(0, 19).replaceAll(':', '');
   return p.join('out', 'import-$t');
@@ -87,3 +105,6 @@ String songsPathIn(String outDir) => p.join(outDir, 'songs.hrcpsng');
 String planPathIn(String outDir) => p.join(outDir, 'labels.json');
 String reportPathIn(String outDir) => p.join(outDir, 'report.txt');
 String peoplePathIn(String outDir) => p.join(outDir, 'people.dart');
+/// Kopia `songs.hrcpsng` do podmiany po przeglądzie na stronie.
+String approvedPathIn(String outDir) => p.join(outDir, 'approved.hrcpsng');
+String reviewPathIn(String outDir) => p.join(outDir, 'review.json');

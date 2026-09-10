@@ -10,6 +10,8 @@ const String kLabelReady = 'song/ready-to-add';
 const String kLabelDone = 'song/added';
 const String kLabelRejectedInBook = 'song/rejected/already-in-app';
 const String kLabelRejectedDuplicate = 'song/rejected/duplicate';
+/// Automat wstawił do pliku, Ty przy przeglądzie na stronie wyrzuciłeś.
+const String kLabelRejectedAfterReview = 'song/rejected/after-review';
 const String kLabelToReview = 'song/needs-review';
 
 /// Podkategorie przeglądu, jedna na powód. Mejl z kilkoma powodami dostaje kilka.
@@ -33,6 +35,7 @@ final List<String> kToolLabels = [
   kLabelDone,
   kLabelRejectedInBook,
   kLabelRejectedDuplicate,
+  kLabelRejectedAfterReview,
   kLabelToReview,
   for (final k in ReviewKind.values) k.label,
 ];

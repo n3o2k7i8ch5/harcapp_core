@@ -22,9 +22,11 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
 ./piosenkomat process -n 20            # podgląd: 20 najstarszych z kolejki + pliki, Gmail nietknięty
 ./piosenkomat process -n 20 --apply    # to samo + etykiety
 ./piosenkomat apply out/import-<data>/labels.json --apply   # etykiety z wcześniejszego podglądu
-# wczytaj out/import-<data>/songs.hrcpsng na stronie;
-# doklej out/import-<data>/people.dart do lib/values/people/data.dart;
-# odrzucone przenieś w Gmailu z „ready-to-add” do „rejected/…”
+# wczytaj out/import-<data>/songs.hrcpsng na stronie, wyrzuć co niepotrzebne,
+# wyeksportuj z powrotem i podmień nim out/import-<data>/approved.hrcpsng
+./piosenkomat review out/import-<data>          # co wypadło przy przeglądzie
+./piosenkomat review out/import-<data> --apply  # → „rejected/after-review”
+# doklej out/import-<data>/people.dart do lib/values/people/data.dart
 ./piosenkomat commit                   # lista tego, co automat wstawił do pliku
 ./piosenkomat commit --apply           # → „added” + przeczytane
 ./piosenkomat check plik.eml           # klasyfikacja lokalnego pliku, bez Gmaila
@@ -47,6 +49,7 @@ song/
 ├── rejected/
 │   ├── already-in-app        automat: ten sam tytuł i tekst, co w śpiewniku
 │   ├── duplicate             automat: ten sam tytuł i tekst, co starsze zgłoszenie w paczce
+│   ├── after-review          automat zaproponował, Ty wyrzuciłeś na stronie (`review`)
 │   ├── no-chords             tylko Ty
 │   ├── silly                 tylko Ty (kiedyś LLM)
 │   └── too-niche             tylko Ty (kiedyś LLM)
@@ -81,6 +84,7 @@ Przydatne zapytania:
 | dodane przez automat | `label:song/added label:song/auto` |
 | dodane przez Ciebie | `label:song/added -label:song/auto` |
 | automatyczne odrzucenia do wyrywkowej kontroli | `label:song/rejected label:song/auto` |
+| pudła automatu (zaproponował, a odpadło) | `label:song/rejected/after-review` |
 
 ## Warunki auto-importu
 
@@ -114,13 +118,38 @@ Porównania w paczce dotyczą tylko kandydatów, którzy przeszli resztę warunk
 wysłany w innym przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs.hrcpsng`.
 W raporcie przy każdym trafieniu jest procent i tytuł pierwowzoru.
 
+## Przegląd (`review`)
+
+`process` obok `songs.hrcpsng` zostawia jego kopię jako `approved.hrcpsng`.
+Po przejrzeniu piosenek na stronie eksportujesz to, co zostało, i podmieniasz nim
+`approved.hrcpsng`. `review` porównuje oba pliki: czego nie ma w `approved`,
+to odrzucone — mejl traci „ready-to-add” i dostaje `rejected/after-review`.
+Bez `--apply` tylko pokazuje różnicę. Ślad decyzji ląduje w `review.json`.
+
+Piosenki wiąże ze zgłoszeniami `email_msg_id` w `contributor_data` — automat
+wpisuje tam id mejla, więc poprawiony przy przeglądzie tytuł niczego nie psuje.
+Gdyby strona to pole zgubiła, `review` schodzi po kolei na id piosenki, tytuł
+i wreszcie tekst (ten sam próg, co przy duplikatach). Czego nie umie związać
+z przebiegiem, zostawia w spokoju i wypisuje jako pominięte.
+
+Bezpieczniki: pusty `approved.hrcpsng` albo odrzucona ponad połowa przebiegu
+przerywają robotę — to prawie zawsze znaczy, że podmieniony został nie ten plik.
+`--force`, jeśli naprawdę tak ma być. Etykiety zmienia tylko na mejlach, które
+dalej mają „ready-to-add” i „auto”.
+
+Mejl to dziś jedna piosenka. Gdyby kiedyś niósł kilka, `review` odetykietuje go
+tylko wtedy, gdy wypadną wszystkie — przy części wypisze ostrzeżenie i zostawi
+decyzję Tobie.
+
 ## Osoby dodające
 
 W katalogu przebiegu, obok `songs.hrcpsng`, powstaje `people.dart` z gotowymi stałymi `RegisteredContributor`
 w kształcie `lib/values/people/data.dart`, tylko dla osób, których tam jeszcze nie ma
 (sprawdzane po adresie). Adres nadawcy jest zawsze pierwszy w `emails`, bo to on siedzi
 w `email_ref` piosenki i po nim `ContributorRef.resolve()` znajduje osobę. Doklejasz
-plik na koniec `data.dart`, `data.all.g.dart` przegeneruje pre-commit.
+plik na koniec `data.dart`, `data.all.g.dart` przegeneruje pre-commit. Rób to po
+`review` — wypisuje on adresy osób, którym wszystkie piosenki wypadły przy
+przeglądzie, więc nie ma po co ich dopisywać.
 
 W komentarzach na końcu pliku: nadawcy już obecni w `data.dart` oraz piosenki bez bloku
 „Osoba dodająca” (te mają tylko `email_ref`, nie ma kogo dopisać).

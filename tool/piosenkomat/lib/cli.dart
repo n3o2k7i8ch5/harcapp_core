@@ -9,6 +9,7 @@ import 'hrcpsng.dart';
 import 'model.dart';
 import 'people.dart';
 import 'plan.dart';
+import 'review.dart';
 import 'similarity.dart';
 
 Future<int> runPiosenkomat(List<String> args) async {
@@ -33,6 +34,17 @@ Future<int> runPiosenkomat(List<String> args) async {
     ..addFlag('apply',
         negatable: false, help: 'Zmień etykiety w Gmailu (bez tej flagi lista)');
   _addCommon(commit);
+
+  final review = parser.addCommand('review')
+    ..addFlag('apply',
+        negatable: false,
+        help: 'Zmień etykiety odrzuconych (bez tej flagi tylko lista)')
+    ..addOption('approved',
+        help: 'Plik z zatwierdzonymi (domyślnie approved.hrcpsng w katalogu)')
+    ..addFlag('force',
+        negatable: false,
+        help: 'Pomiń bezpieczniki (pusty plik, odrzucona większość)');
+  _addCommon(review);
 
   final check = parser.addCommand('check');
   _addCommon(check);
@@ -62,6 +74,8 @@ Future<int> runPiosenkomat(List<String> args) async {
         return await _process(cmd);
       case 'commit':
         return await _commit(cmd);
+      case 'review':
+        return await _review(cmd);
       case 'check':
         return _check(cmd);
       case 'apply':
@@ -134,6 +148,12 @@ Future<int> _process(ArgResults cmd) async {
     writeHrcpsng(songsPath, imports);
     stdout.writeln('\nZapisano ${imports.length} piosenek → $songsPath');
     stdout.writeln('Wczytaj ten plik na stronie ze śpiewnikiem.');
+    // Kopia do podmiany: po przeglądzie wgrywasz tu eksport ze strony,
+    // a `review` z różnicy wyciąga odrzucone.
+    final approvedPath = approvedPathIn(outDir);
+    File(songsPath).copySync(approvedPath);
+    stdout.writeln('Po przeglądzie podmień $approvedPath eksportem ze strony '
+        'i odpal: ./piosenkomat review $outDir');
 
     final people = collectPeople(classified);
     final peoplePath = peoplePathIn(outDir);
@@ -221,8 +241,8 @@ Future<void> _applyPlan(
   if (skipped > 0) {
     stdout.writeln('Pominięto $skipped mejli, które już miały etykietę song/*.');
   }
-  stdout.writeln('Odrzucone na stronie przenieś w Gmailu z „$kLabelReady” do '
-      '„song/rejected/…”, potem: ./piosenkomat commit --apply');
+  stdout.writeln('Po przeglądzie na stronie podmień approved.hrcpsng, potem '
+      './piosenkomat review <katalog> --apply i ./piosenkomat commit --apply');
 }
 
 Future<int> _commit(ArgResults cmd) async {
@@ -250,6 +270,120 @@ Future<int> _commit(ArgResults cmd) async {
   return 0;
 }
 
+/// `review <katalog przebiegu> [--apply]`: różnica między tym, co automat
+/// wstawił do pliku, a tym, co zostało po Twoim przeglądzie na stronie.
+/// Mejl traci „w pliku” tylko wtedy, gdy wypadły wszystkie jego piosenki.
+Future<int> _review(ArgResults cmd) async {
+  if (cmd.rest.length != 1) {
+    stderr.writeln('Podaj katalog przebiegu: ./piosenkomat review out/import-<data>');
+    return 64;
+  }
+  final outDir = _resolve(cmd.rest.single);
+  final force = cmd['force'] as bool;
+  final plan = readPlan(planPathIn(outDir));
+  final approvedPath =
+      _resolve(cmd['approved'] as String? ?? approvedPathIn(outDir));
+
+  final proposed = collectProposed(plan, readHrcpsng(songsPathIn(outDir)));
+  if (proposed.isEmpty) {
+    stderr.writeln('Ten przebieg nic nie zaproponował do pliku, nie ma co porównywać.');
+    return 1;
+  }
+  final approved = readHrcpsng(approvedPath);
+  stdout.writeln('Przebieg $outDir: ${proposed.length} zaproponowanych, '
+      '${approved.length} w $approvedPath');
+
+  final result = reviewDiff(proposed: proposed, approved: approved);
+  final reviewPath = reviewPathIn(outDir);
+  writeReviewLedger(reviewPath, approvedPath: approvedPath, result: result);
+
+  stdout.writeln();
+  stdout.writeln('ZOSTAJE   ${result.accepted.length}');
+  stdout.writeln('ODRZUCONE ${result.rejected.length}');
+  for (final r in result.rejected) {
+    stdout.writeln('  ODRZUĆ  ${r.title}  [${r.msgId}]');
+  }
+  if (result.unknown.isNotEmpty) {
+    stdout.writeln('Spoza przebiegu, pomijam: ${result.unknown.length}');
+    for (final t in result.unknown) {
+      stdout.writeln('  ?       $t');
+    }
+  }
+  // Kto z people.dart został tylko przy odrzuconych piosenkach — jego wpisu
+  // nie ma po co doklejać do data.dart.
+  final dropped = {for (final r in result.rejected) r.sender}
+    ..removeAll({for (final m in result.accepted) m.proposed.sender})
+    ..remove('');
+  if (dropped.isNotEmpty) {
+    stdout.writeln('Tylko odrzucone piosenki (pomiń w people.dart): '
+        '${dropped.join(', ')}');
+  }
+  final byOther = [
+    for (final m in result.accepted)
+      if (m.kind != MatchKind.emailMsgId) m,
+  ];
+  if (byOther.isNotEmpty) {
+    stdout.writeln('Rozpoznane inaczej niż po id mejla '
+        '(tytuł mógł się zmienić przy przeglądzie): ${byOther.length}');
+    for (final m in byOther) {
+      stdout.writeln('  ${m.kind.text.padRight(12)} ${m.proposed.title}'
+          '${m.approvedTitle == m.proposed.title ? '' : ' → ${m.approvedTitle}'}');
+    }
+  }
+  for (final e in result.partial.entries) {
+    stdout.writeln('UWAGA: z mejla [${e.key}] część piosenek weszła, a część nie '
+        '(${e.value.map((s) => s.title).join(', ')}). Etykiety zostawiam Tobie.');
+  }
+  stdout.writeln('Ślad przeglądu: $reviewPath');
+
+  // Bezpieczniki na zły plik: pusty eksport i „odrzucona większość” prawie
+  // zawsze znaczą, że podmieniony został nie ten plik, co trzeba.
+  if (!force && approved.isEmpty) {
+    stderr.writeln('\n$approvedPath jest pusty — to wygląda na pomyłkę. '
+        'Jeśli naprawdę odrzucasz wszystko: --force.');
+    return 1;
+  }
+  if (!force && result.rejected.length * 2 > proposed.length) {
+    stderr.writeln('\nOdrzucone to ponad połowa przebiegu '
+        '(${result.rejected.length}/${proposed.length}) — sprawdź, czy podmieniłeś '
+        'właściwy plik. Jeśli tak ma być: --force.');
+    return 1;
+  }
+
+  final msgIds = result.rejectedMsgIds;
+  if (msgIds.isEmpty) {
+    stdout.writeln('\nNic do odetykietowania. Dalej: ./piosenkomat commit --apply');
+    return 0;
+  }
+  if (!(cmd['apply'] as bool)) {
+    stdout.writeln('\nDry-run: Gmail nietknięty. --apply zdejmie „$kLabelReady” '
+        'i nada „$kLabelRejectedAfterReview” na ${msgIds.length} mejlach.');
+    return 0;
+  }
+
+  final mailbox = await _connect(cmd);
+  await mailbox.ensureToolLabels();
+  var done = 0;
+  var skipped = 0;
+  for (final id in msgIds) {
+    // Bezpiecznik jak w `commit`: ruszamy tylko to, co automat sam wstawił
+    // do pliku i co dalej tam czeka.
+    final labels = await mailbox.labelsOf(id);
+    if (!labels.contains(kLabelReady) || !labels.contains(kLabelAuto)) {
+      skipped++;
+      continue;
+    }
+    await mailbox.rejectAfterReview(id);
+    done++;
+  }
+  stdout.writeln('Odrzucono po przeglądzie: $done mejli.');
+  if (skipped > 0) {
+    stdout.writeln('Pominięto $skipped mejli bez „$kLabelReady” + „$kLabelAuto”.');
+  }
+  stdout.writeln('Dalej: ./piosenkomat commit --apply');
+  return 0;
+}
+
 int _check(ArgResults cmd) {
   if (cmd.rest.isEmpty) {
     stderr.writeln('Podaj pliki .eml do sprawdzenia.');
@@ -267,14 +401,17 @@ int _check(ArgResults cmd) {
 /// Narzędzie działa w `tool/piosenkomat/`, ale użytkownik podaje ścieżki
 /// z katalogu, w którym wpisał `./piosenkomat` (przekazany w PIOSENKOMAT_CWD).
 String _resolve(String path) {
-  if (p.isAbsolute(path) || File(path).existsSync()) return path;
+  if (p.isAbsolute(path) || _exists(path)) return path;
   final cwd = Platform.environment['PIOSENKOMAT_CWD'];
   if (cwd != null) {
     final candidate = p.join(cwd, path);
-    if (File(candidate).existsSync()) return candidate;
+    if (_exists(candidate)) return candidate;
   }
   return path;
 }
+
+bool _exists(String path) =>
+    FileSystemEntity.typeSync(path) != FileSystemEntityType.notFound;
 
 SongBook _loadBook(ArgResults cmd) {
   final path = cmd['songs-db'] as String? ?? defaultSongsDbPath();
@@ -423,6 +560,8 @@ piosenkomat: sitko mejli z piosenkami na $kInboxEmail.
       reszta: „$kLabelToReview”; wszystko ze znacznikiem „$kLabelAuto”
   ./piosenkomat apply out/import-<data>/labels.json [--apply]
       etykiety z wcześniejszego przebiegu, bez ponownego czytania skrzynki
+  ./piosenkomat review out/import-<data> [--apply]
+      songs.hrcpsng minus approved.hrcpsng → „$kLabelRejectedAfterReview”
   ./piosenkomat commit [--apply]
       „$kLabelReady” + „$kLabelAuto” → „$kLabelDone” + przeczytane
   ./piosenkomat check plik.eml [...]
@@ -432,6 +571,9 @@ Bez --apply nic w Gmailu się nie zmienia.
 
 process:
 ${parser.commands['process']!.usage}
+
+review:
+${parser.commands['review']!.usage}
 
 commit:
 ${parser.commands['commit']!.usage}
