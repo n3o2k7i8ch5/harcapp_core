@@ -4,6 +4,7 @@ import 'package:piosenkomat/cli.dart';
 import 'package:piosenkomat/hrcpsng.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
+import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
 
 import 'helpers.dart';
@@ -38,5 +39,37 @@ void main() {
     expect(report, contains('RĘCZNIE  1'));
     expect(report, contains('   1  ${SkipReason.hasUserMessage.text}'));
     expect(report, contains('[ok]'));
+  });
+
+  test('raport przebiegu: sparsowane vs nie, tylko ten powód, wiązki', () async {
+    final report = formatRunReport(classifyBatch([
+      msgFrom(await completeEmail(), id: 'ok'),
+      msgFrom(await completeEmail(song: sampleSong(yt: null)), id: 'yt'),
+      msgFrom(
+        await completeEmail(song: sampleSong(yt: null, chords: false)),
+        id: 'both',
+      ),
+      msgFrom('From: a@b.pl\nSubject: Cześć\n\nCześć, mam pytanie', id: 'raw'),
+    ], book: SongBook.empty));
+    expect(report, contains('SKLASYFIKOWANO  4'));
+    expect(report, contains('SPARSOWANE      3'));
+    expect(report, contains('NIE SPARSOWANE  1'));
+    expect(report, contains('IMPORT          1'));
+    expect(report, contains('Tylko ten powód:'));
+    expect(report, contains(SkipReason.missingYoutube.text));
+    expect(report, contains('Wiązki (więcej niż jeden powód):'));
+    expect(report, contains(
+        '${SkipReason.missingChords.text}; ${SkipReason.missingYoutube.text}'));
+  });
+
+  test('domyślne wyjście to katalog przebiegu', () {
+    final dir = defaultOutDir();
+    expect(p.split(dir), hasLength(2));
+    expect(p.split(dir).first, 'out');
+    expect(p.basename(dir), startsWith('import-'));
+    expect(songsPathIn(dir), p.join(dir, 'songs.hrcpsng'));
+    expect(planPathIn(dir), p.join(dir, 'labels.json'));
+    expect(reportPathIn(dir), p.join(dir, 'report.txt'));
+    expect(peoplePathIn(dir), p.join(dir, 'people.dart'));
   });
 }

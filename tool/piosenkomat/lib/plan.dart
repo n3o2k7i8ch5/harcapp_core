@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:path/path.dart' as p;
-
 import 'model.dart';
 
 /// Zapisany wynik `process`: które etykiety automat nadałby któremu mejlowi.
@@ -42,8 +40,6 @@ class LabelPlan {
         },
       );
 }
-
-String planPathFor(String hrcpsngPath) => p.setExtension(hrcpsngPath, '.labels.json');
 
 void writePlan(String path, LabelPlan plan) {
   final file = File(path);

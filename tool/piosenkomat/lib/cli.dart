@@ -24,7 +24,8 @@ Future<int> runPiosenkomat(List<String> args) async {
     ..addFlag('newest',
         negatable: false, help: 'Najnowsze N zamiast najstarszych')
     ..addOption('out',
-        abbr: 'o', help: 'Plik .hrcpsng (domyślnie out/import-<data>.hrcpsng)')
+        abbr: 'o',
+        help: 'Katalog przebiegu (domyślnie out/import-<data>)')
     ..addOption('query', help: 'Własne query Gmaila zamiast kolejki');
   _addCommon(process);
 
@@ -122,17 +123,20 @@ Future<int> _process(ArgResults cmd) async {
     for (final c in classified)
       if (c.verdict case Import(:final song)) song,
   ];
-  final outPath = cmd['out'] as String? ?? defaultOutPath();
-  final planPath = planPathFor(outPath);
-  final plan = LabelPlan.fromClassified(classified, outPath);
+  final outDir = cmd['out'] as String? ?? defaultOutDir();
+  final songsPath = songsPathIn(outDir);
+  final planPath = planPathIn(outDir);
+  final reportPath = reportPathIn(outDir);
+  final plan = LabelPlan.fromClassified(classified, songsPath);
   writePlan(planPath, plan);
+  writeReport(reportPath, formatRunReport(classified));
   if (imports.isNotEmpty) {
-    writeHrcpsng(outPath, imports);
-    stdout.writeln('\nZapisano ${imports.length} piosenek → $outPath');
+    writeHrcpsng(songsPath, imports);
+    stdout.writeln('\nZapisano ${imports.length} piosenek → $songsPath');
     stdout.writeln('Wczytaj ten plik na stronie ze śpiewnikiem.');
 
     final people = collectPeople(classified);
-    final peoplePath = peoplePathFor(outPath);
+    final peoplePath = peoplePathIn(outDir);
     writePeopleDart(peoplePath, people);
     stdout.writeln('Osoby dodające: ${people.newContributors.length} nowych → $peoplePath'
         '${people.knownByEmail.isEmpty ? '' : ', ${people.knownByEmail.length} już w data.dart'}'
@@ -144,6 +148,8 @@ Future<int> _process(ArgResults cmd) async {
     stdout.writeln('\nNic do importu.');
   }
 
+  stdout.writeln('Katalog: $outDir');
+  stdout.writeln('Raport: $reportPath');
   stdout.writeln('Plan etykiet: $planPath');
   if (!apply) {
     stdout.writeln('Dry-run: Gmail nietknięty. Etykiety jak w raporcie nada '
@@ -161,7 +167,7 @@ Future<int> _process(ArgResults cmd) async {
 /// etykietę song/*, są pomijane.
 Future<int> _apply(ArgResults cmd) async {
   if (cmd.rest.length != 1) {
-    stderr.writeln('Podaj jeden plik planu: ./piosenkomat apply out/import-<data>.labels.json');
+    stderr.writeln('Podaj jeden plik planu: ./piosenkomat apply out/import-<data>/labels.json');
     return 64;
   }
   final plan = readPlan(_resolve(cmd.rest.single));
@@ -254,7 +260,7 @@ int _check(ArgResults cmd) {
     for (final path in cmd.rest)
       ContribMessage.fromEml(File(_resolve(path)).readAsStringSync(), id: p.basename(path)),
   ];
-  stdout.write(formatReport(classifyBatch(messages, book: book)));
+  stdout.write(formatRunReport(classifyBatch(messages, book: book)));
   return 0;
 }
 
@@ -282,15 +288,98 @@ Future<GmailMailbox> _connect(ArgResults cmd) => GmailMailbox.connect(
       tokenFile: File(cmd['token'] as String? ?? defaultTokenPath()),
     );
 
-String formatReport(List<Classified> items) {
+void writeReport(String path, String text) {
+  final file = File(path);
+  file.parent.createSync(recursive: true);
+  file.writeAsStringSync(text);
+}
+
+bool _unparsed(Classified c) =>
+    c.verdict is Manual &&
+    (c.verdict as Manual).reasons.contains(SkipReason.parseError);
+
+bool _autoReject(Classified c) =>
+    c.verdict is Manual && stateLabelsFor(c.verdict).first != kLabelToReview;
+
+/// Raport przebiegu: sparsowane vs nie, powody, wiązki, potem lista jak w konsoli.
+String formatRunReport(List<Classified> items) {
+  final imports = items.where((c) => c.isImport).toList();
+  final manual = items.where((c) => !c.isImport).toList();
+  final unparsed = [for (final c in manual) if (_unparsed(c)) c];
+  final parsedSkip = [for (final c in manual) if (!_unparsed(c)) c];
+  final rejected = [for (final c in manual) if (_autoReject(c)) c];
+  final review = manual.length - rejected.length;
+
+  final buf = StringBuffer()
+    ..writeln('SKLASYFIKOWANO  ${items.length}')
+    ..writeln('SPARSOWANE      ${items.length - unparsed.length}')
+    ..writeln('NIE SPARSOWANE  ${unparsed.length}')
+    ..writeln('IMPORT          ${imports.length}')
+    ..writeln('ODRZUĆ          ${rejected.length}')
+    ..writeln('RĘCZNIE         $review');
+
+  if (parsedSkip.isNotEmpty) {
+    final any = <SkipReason, int>{};
+    final only = <SkipReason, int>{};
+    final bundles = <String, int>{};
+    for (final c in parsedSkip) {
+      final reasons = (c.verdict as Manual).reasons;
+      for (final r in reasons) {
+        any[r] = (any[r] ?? 0) + 1;
+      }
+      if (reasons.length == 1) {
+        only[reasons.single] = (only[reasons.single] ?? 0) + 1;
+      } else {
+        final key = reasons.map((r) => r.text).join('; ');
+        bundles[key] = (bundles[key] ?? 0) + 1;
+      }
+    }
+    buf.writeln();
+    buf.writeln('Powody sparsowanych (mejl może mieć kilka):');
+    _countLines(buf, {
+      for (final e in any.entries) e.key.text: e.value,
+    });
+    if (only.isNotEmpty) {
+      buf.writeln('Tylko ten powód:');
+      _countLines(buf, {
+        for (final e in only.entries) e.key.text: e.value,
+      });
+    }
+    if (bundles.isNotEmpty) {
+      buf.writeln('Wiązki (więcej niż jeden powód):');
+      _countLines(buf, bundles);
+    }
+  }
+
+  buf.write(formatReport(items, summary: false));
+  return buf.toString();
+}
+
+void _countLines(StringBuffer buf, Map<String, int> counts) {
+  final rows = counts.entries.toList()
+    ..sort((a, b) {
+      final byCount = b.value.compareTo(a.value);
+      return byCount != 0 ? byCount : a.key.compareTo(b.key);
+    });
+  for (final e in rows) {
+    buf.writeln('  ${e.value.toString().padLeft(4)}  ${e.key}');
+  }
+}
+
+/// `summary: false` pomija nagłówek IMPORT/RĘCZNIE — [formatRunReport] ma
+/// własny, liczony inaczej (bez auto-odrzuconych), więc dwa naraz kłamią.
+String formatReport(List<Classified> items, {bool summary = true}) {
   final imports = items.where((c) => c.isImport).toList()
     ..sort((a, b) => (a.message.date ?? DateTime(0))
         .compareTo(b.message.date ?? DateTime(0)));
   final manual = items.where((c) => !c.isImport).toList();
 
-  final buf = StringBuffer()
-    ..writeln('IMPORT   ${imports.length}')
-    ..writeln('RĘCZNIE  ${manual.length}');
+  final buf = StringBuffer();
+  if (summary) {
+    buf
+      ..writeln('IMPORT   ${imports.length}')
+      ..writeln('RĘCZNIE  ${manual.length}');
+  }
 
   final counts = <SkipReason, int>{};
   for (final c in manual) {
@@ -329,10 +418,10 @@ String _usage(ArgParser parser) => '''
 piosenkomat: sitko mejli z piosenkami na $kInboxEmail.
 
   ./piosenkomat process [-n N] [--newest] [--apply]
-      kolejka (inbox bez song/*) → plik .hrcpsng
+      kolejka (inbox bez song/*) → katalog out/import-<data>/
       kandydaci: „$kLabelReady”, jednoznaczne odrzucenia: „song/rejected/…”,
       reszta: „$kLabelToReview”; wszystko ze znacznikiem „$kLabelAuto”
-  ./piosenkomat apply out/import-<data>.labels.json [--apply]
+  ./piosenkomat apply out/import-<data>/labels.json [--apply]
       etykiety z wcześniejszego przebiegu, bez ponownego czytania skrzynki
   ./piosenkomat commit [--apply]
       „$kLabelReady” + „$kLabelAuto” → „$kLabelDone” + przeczytane

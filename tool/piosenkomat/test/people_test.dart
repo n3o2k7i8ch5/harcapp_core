@@ -85,10 +85,9 @@ void main() {
     expect(dart, contains('// UWAGA: w data.dart jest już ${dartConstName(existing)}.'));
   });
 
-  test('dartConstName i ścieżka pliku', () {
+  test('dartConstName', () {
     expect(dartConstName('Agnieszka Radecka-Kubicka'), 'AGNIESZKA_RADECKA_KUBICKA');
     expect(dartConstName('  Łukasz  Żółw '), 'LUKASZ_ZOLW');
-    expect(peoplePathFor('out/import-2026.hrcpsng'), 'out/import-2026.people.dart');
   });
 
   test('srodowisko: custom z orgSlug i org bez flag', () {

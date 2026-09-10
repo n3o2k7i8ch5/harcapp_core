@@ -75,8 +75,15 @@ String defaultSongsDbPath() {
   return p.join('assets', 'songs', 'all_songs.hrcpsng');
 }
 
-/// Osobny plik na każdy przebieg, żeby drugi `process` nie nadpisał pierwszego.
-String defaultOutPath() {
+/// Osobny katalog na każdy przebieg, żeby drugi `process` nie nadpisał pierwszego.
+/// W środku: `songs.hrcpsng`, `people.dart`, `labels.json`, `report.txt`.
+String defaultOutDir() {
   final t = DateTime.now().toIso8601String().substring(0, 19).replaceAll(':', '');
-  return p.join('out', 'import-$t.hrcpsng');
+  return p.join('out', 'import-$t');
 }
+
+/// Nazwy plików w katalogu przebiegu.
+String songsPathIn(String outDir) => p.join(outDir, 'songs.hrcpsng');
+String planPathIn(String outDir) => p.join(outDir, 'labels.json');
+String reportPathIn(String outDir) => p.join(outDir, 'report.txt');
+String peoplePathIn(String outDir) => p.join(outDir, 'people.dart');

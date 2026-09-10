@@ -21,18 +21,20 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
 ```bash
 ./piosenkomat process -n 20            # podgląd: 20 najstarszych z kolejki + pliki, Gmail nietknięty
 ./piosenkomat process -n 20 --apply    # to samo + etykiety
-./piosenkomat apply out/import-<data>.labels.json --apply   # etykiety z wcześniejszego podglądu
-# wczytaj out/import-<data>.hrcpsng na stronie;
-# doklej out/import-<data>.people.dart do lib/values/people/data.dart;
+./piosenkomat apply out/import-<data>/labels.json --apply   # etykiety z wcześniejszego podglądu
+# wczytaj out/import-<data>/songs.hrcpsng na stronie;
+# doklej out/import-<data>/people.dart do lib/values/people/data.dart;
 # odrzucone przenieś w Gmailu z „ready-to-add” do „rejected/…”
 ./piosenkomat commit                   # lista tego, co automat wstawił do pliku
 ./piosenkomat commit --apply           # → „added” + przeczytane
 ./piosenkomat check plik.eml           # klasyfikacja lokalnego pliku, bez Gmaila
 ```
 
-Bez `--apply` nic w Gmailu się nie zmienia. Każdy `process` zapisuje plan etykiet
-`out/import-<data>.labels.json`; `apply` nadaje go później bez ponownego czytania mejli,
-pomijając te, które w międzyczasie dostały już etykietę `song/*`. `-n` pomiń, żeby wziąć całą kolejkę;
+Bez `--apply` nic w Gmailu się nie zmienia. Każdy `process` zapisuje katalog
+`out/import-<data>/` (`-o` wskazuje własny katalog przebiegu): raport `report.txt` (sparsowane vs nie, powody, wiązki)
+i plan etykiet `labels.json`; przy imporcie także `songs.hrcpsng` i `people.dart`.
+`apply` nadaje plan później bez ponownego czytania mejli, pomijając te, które
+w międzyczasie dostały już etykietę `song/*`. `-n` pomiń, żeby wziąć całą kolejkę;
 `--newest` bierze najnowsze zamiast najstarszych.
 
 ## Etykiety
@@ -114,7 +116,7 @@ W raporcie przy każdym trafieniu jest procent i tytuł pierwowzoru.
 
 ## Osoby dodające
 
-Obok `.hrcpsng` powstaje `.people.dart` z gotowymi stałymi `RegisteredContributor`
+W katalogu przebiegu, obok `songs.hrcpsng`, powstaje `people.dart` z gotowymi stałymi `RegisteredContributor`
 w kształcie `lib/values/people/data.dart`, tylko dla osób, których tam jeszcze nie ma
 (sprawdzane po adresie). Adres nadawcy jest zawsze pierwszy w `emails`, bo to on siedzi
 w `email_ref` piosenki i po nim `ContributorRef.resolve()` znajduje osobę. Doklejasz

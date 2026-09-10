@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
 import 'package:piosenkomat/classify.dart';
+import 'package:piosenkomat/hrcpsng.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/plan.dart';
 import 'package:piosenkomat/similarity.dart';
@@ -19,8 +21,8 @@ void main() {
     expect(plan.labelsById['msg'], [kLabelToReview, ReviewKind.userMessage.label, kLabelAuto]);
 
     final dir = Directory.systemTemp.createTempSync('plan');
-    final path = planPathFor('${dir.path}/x.hrcpsng');
-    expect(path, endsWith('x.labels.json'));
+    final path = planPathIn(dir.path);
+    expect(path, p.join(dir.path, 'labels.json'));
     writePlan(path, plan);
     final back = readPlan(path);
     expect(back.labelsById, plan.labelsById);

@@ -5,7 +5,6 @@ import 'package:harcapp_core/values/people/data.all.g.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
-import 'package:path/path.dart' as p;
 
 import 'model.dart';
 
@@ -207,10 +206,6 @@ bool _has(String? s) => s != null && s.trim().isNotEmpty;
 
 String _str(String s) =>
     "'${s.replaceAll(r'\', r'\\').replaceAll("'", r"\'").replaceAll(r'$', r'\$')}'";
-
-/// `out/import-X.hrcpsng` → `out/import-X.people.dart`.
-String peoplePathFor(String hrcpsngPath) =>
-    p.setExtension(hrcpsngPath, '.people.dart');
 
 void writePeopleDart(String path, PeopleReport report) {
   final file = File(path);
