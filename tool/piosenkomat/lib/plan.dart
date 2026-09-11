@@ -50,7 +50,7 @@ class LabelPlan {
         hrcpsngPath: hrcpsngPath,
         labelsById: {
           for (final c in items)
-            c.message.id: [...stateLabelsFor(c.verdict), kLabelAuto],
+            c.message.id: [...c.labels, kLabelAuto],
         },
         importsById: {
           for (final c in items)

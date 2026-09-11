@@ -8,6 +8,13 @@ import 'package:path/path.dart' as p;
 
 import 'model.dart';
 
+/// `modify` etykietuje, `send` odpisuje autorom ze starej apki. Zmiana tej
+/// listy unieważnia zapisany token — trzeba zalogować się jeszcze raz.
+final List<String> kGmailScopes = [
+  GmailApi.gmailModifyScope,
+  GmailApi.gmailSendScope,
+];
+
 String defaultCredentialsPath() => p.join('secrets', 'credentials.json');
 String defaultTokenPath() => p.join('secrets', 'gmail_token.json');
 
@@ -115,6 +122,46 @@ class GmailMailbox {
     );
   }
 
+  /// Odpowiedź w wątku [message]: ten sam `threadId`, `In-Reply-To`
+  /// i `References`, żeby u autora wpadła pod jego zgłoszenie, a nie jako
+  /// osobny mejl znikąd.
+  Future<void> replyTo(ReplyTarget target, String text) async {
+    final raw = _mimeReply(target, text);
+    await _call(() => _api.users.messages.send(
+          Message()
+            ..raw = base64Url.encode(utf8.encode(raw))
+            ..threadId = target.threadId,
+          'me',
+        ));
+  }
+
+  /// Dane potrzebne do odpowiedzi. Osobny strzał po nagłówki, bo
+  /// [ContribMessage] ich nie niesie.
+  Future<ReplyTarget> replyTarget(String messageId) async {
+    final msg = await _call(() => _api.users.messages.get('me', messageId,
+        format: 'metadata',
+        metadataHeaders: ['From', 'Subject', 'Message-ID', 'References']));
+    final headers = {
+      for (final h in msg.payload?.headers ?? const <MessagePartHeader>[])
+        if (h.name != null && h.value != null) h.name!.toLowerCase(): h.value!,
+    };
+    return ReplyTarget(
+      messageId: msg.id ?? messageId,
+      threadId: msg.threadId ?? messageId,
+      to: headers['from'] ?? '',
+      subject: headers['subject'] ?? '',
+      rfcMessageId: headers['message-id'],
+      references: headers['references'],
+    );
+  }
+
+  /// Odpowiedź poszła: mejl schodzi z kolejki „do odpisania”.
+  Future<void> markReplied(String messageId) => _modify(
+        messageId,
+        add: [_idByName[kLabelOldAppReplied]!],
+        remove: [_idByName[kLabelOldAppToReply]!],
+      );
+
   /// Nazwy etykiet mejla. Tylko metadane, bez treści.
   Future<Set<String>> labelsOf(String messageId) async {
     final msg = await _call(() => _api.users.messages.get('me', messageId, format: 'minimal'));
@@ -161,6 +208,16 @@ class GmailMailbox {
         add: [for (final n in names) _idByName[n]!],
       );
 
+  /// Zdejmuje etykiety nadane przez pomyłkę (`unapply`). Nazw, których nie ma
+  /// w skrzynce, nie ruszamy — nie ma czego zdejmować.
+  Future<void> removeLabels(String messageId, Iterable<String> names) => _modify(
+        messageId,
+        remove: [
+          for (final n in names)
+            if (_idByName[n] case final id?) id,
+        ],
+      );
+
   /// Odrzucona po Twoim przeglądzie: schodzi „w pliku”, wchodzi powód.
   /// `Auto` zostaje, bo to automat ją zaproponował.
   Future<void> rejectAfterReview(String messageId) => _modify(
@@ -189,6 +246,58 @@ class GmailMailbox {
             messageId,
           ));
 }
+
+/// Mejl, na który odpisujemy, wraz z tym, co trzeba wpisać w nagłówki.
+class ReplyTarget {
+  final String messageId;
+  final String threadId;
+  final String to;
+  final String subject;
+  final String? rfcMessageId;
+  final String? references;
+
+  const ReplyTarget({
+    required this.messageId,
+    required this.threadId,
+    required this.to,
+    required this.subject,
+    this.rfcMessageId,
+    this.references,
+  });
+}
+
+/// RFC 822 odpowiedzi. Temat i treść po polsku, więc base64 + UTF-8.
+String _mimeReply(ReplyTarget target, String text) {
+  final subject = target.subject.startsWith('Re:')
+      ? target.subject
+      : 'Re: ${target.subject}';
+  final references = [
+    if ((target.references ?? '').trim().isNotEmpty) target.references!.trim(),
+    if (target.rfcMessageId != null) target.rfcMessageId!,
+  ].join(' ');
+  final headers = <String, String>{
+    'To': target.to,
+    'Subject': _encodeHeader(subject),
+    if (target.rfcMessageId != null) 'In-Reply-To': target.rfcMessageId!,
+    if (references.isNotEmpty) 'References': references,
+    'MIME-Version': '1.0',
+    'Content-Type': 'text/plain; charset="UTF-8"',
+    'Content-Transfer-Encoding': 'base64',
+  };
+  final body = base64.encode(utf8.encode(text));
+  return [
+    for (final e in headers.entries) '${e.key}: ${e.value}',
+    '',
+    // Base64 w mejlu łamie się co 76 znaków.
+    for (var i = 0; i < body.length; i += 76)
+      body.substring(i, i + 76 > body.length ? body.length : i + 76),
+  ].join('\r\n');
+}
+
+/// Nagłówek z polskimi znakami: RFC 2047.
+String _encodeHeader(String value) => value.codeUnits.every((c) => c < 128)
+    ? value
+    : '=?UTF-8?B?${base64.encode(utf8.encode(value))}?=';
 
 String _plainText(MessagePart? part) {
   if (part == null) return '';
@@ -226,10 +335,15 @@ Future<AutoRefreshingAuthClient> _authClient(ClientId id, File tokenFile) async 
       json['refresh_token'] as String?,
       (json['scopes'] as List).cast<String>(),
     );
-    return autoRefreshingClient(id, credentials, http.Client());
+    final scopes = credentials.scopes.toSet();
+    if (kGmailScopes.every(scopes.contains)) {
+      return autoRefreshingClient(id, credentials, http.Client());
+    }
+    stdout.writeln('Zapisany token nie ma uprawnienia do wysyłki. '
+        'Zaloguj się jeszcze raz, żeby je nadać.');
   }
 
-  final client = await clientViaUserConsent(id, [GmailApi.gmailModifyScope], (url) {
+  final client = await clientViaUserConsent(id, kGmailScopes, (url) {
     stdout.writeln('Zaloguj się w przeglądarce na $kInboxEmail. '
         'Jeśli okno się nie otworzyło, wejdź na:\n$url');
     // Otwieramy sami, bo link kopiowany z terminala bywa ucinany.

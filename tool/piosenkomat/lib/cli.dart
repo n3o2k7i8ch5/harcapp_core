@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:path/path.dart' as p;
 
 import 'classify.dart';
@@ -16,10 +17,7 @@ Future<int> runPiosenkomat(List<String> args) async {
   final parser = ArgParser()
     ..addFlag('help', abbr: 'h', negatable: false, help: 'Pomoc');
 
-  final process = parser.addCommand('process')
-    ..addFlag('apply',
-        negatable: false,
-        help: 'Nadaj etykiety w Gmailu (bez tej flagi tylko raport i plik)')
+  final scan = parser.addCommand('scan')
     ..addOption('limit',
         abbr: 'n', help: 'Ile mejli z kolejki (domyślnie wszystkie)')
     ..addFlag('newest',
@@ -28,31 +26,74 @@ Future<int> runPiosenkomat(List<String> args) async {
         abbr: 'o',
         help: 'Katalog przebiegu (domyślnie out/import-<data>)')
     ..addOption('query', help: 'Własne query Gmaila zamiast kolejki');
-  _addCommon(process);
+  _addCommon(scan);
+  // `scan` do Gmaila nie pisze. Flaga siedzi tu wyłącznie dla aliasu
+  // `process --apply`, który etykietował od razu po przesiewie.
+  _addWrite(scan, hidden: true);
 
-  final commit = parser.addCommand('commit')
-    ..addFlag('apply',
-        negatable: false, help: 'Zmień etykiety w Gmailu (bez tej flagi lista)');
-  _addCommon(commit);
+  final label = parser.addCommand('label');
+  final labelScanned = label.addCommand('scanned');
+  _addCommon(labelScanned);
+  _addWrite(labelScanned, help: 'Nadaj etykiety (bez tej flagi tylko lista)');
 
-  final review = parser.addCommand('review')
-    ..addFlag('apply',
-        negatable: false,
-        help: 'Zmień etykiety odrzuconych (bez tej flagi tylko lista)')
-    ..addOption('approved',
-        help: 'Plik z zatwierdzonymi (domyślnie approved.hrcpsng w katalogu)')
+  final labelReviewed = label.addCommand('reviewed')
+    ..addOption('reviewed',
+        help: 'Plik po przeglądzie (domyślnie reviewed.hrcpsng w katalogu)')
+    // Nazwa sprzed przemianowania pliku.
+    ..addOption('approved', hide: true)
     ..addFlag('force',
         negatable: false,
         help: 'Pomiń bezpieczniki (pusty plik, odrzucona większość)');
-  _addCommon(review);
+  _addCommon(labelReviewed);
+  _addWrite(labelReviewed,
+      help: 'Zmień etykiety odrzuconych (bez tej flagi tylko lista)');
 
-  final check = parser.addCommand('check');
-  _addCommon(check);
+  final labelAdded = label.addCommand('added');
+  _addCommon(labelAdded);
+  _addWrite(labelAdded, help: 'Zmień etykiety w Gmailu (bez tej flagi lista)');
 
-  final apply = parser.addCommand('apply')
-    ..addFlag('apply',
-        negatable: false, help: 'Nadaj etykiety (bez tej flagi tylko lista)');
-  _addCommon(apply);
+  final unlabel = parser.addCommand('unlabel')
+    ..addFlag('force',
+        negatable: false,
+        help: 'Zdejmij też z mejli, których stan zmienił się po przebiegu');
+  _addCommon(unlabel);
+  _addWrite(unlabel, help: 'Zdejmij etykiety (bez tej flagi tylko lista)');
+
+  final reply = parser.addCommand('reply')
+    ..addOption('limit',
+        abbr: 'n', help: 'Ilu autorom odpisać w tym przebiegu')
+    ..addOption('query', help: 'Własne query Gmaila zamiast kolejki odpowiedzi');
+  _addCommon(reply);
+  _addWrite(reply, help: 'Wyślij (bez tej flagi tylko lista)');
+
+  final explain = parser.addCommand('explain');
+  _addCommon(explain);
+
+  // Stare nazwy: działają po cichu, nie ma ich w pomocy.
+  for (final old in _aliases.keys) {
+    final a = parser.addCommand(old);
+    switch (_aliases[old]!) {
+      case 'scan':
+        a
+          ..addOption('limit', abbr: 'n')
+          ..addFlag('newest', negatable: false)
+          ..addOption('out', abbr: 'o')
+          ..addOption('query');
+      case 'label reviewed':
+        a
+          ..addOption('approved')
+          ..addOption('reviewed')
+          ..addFlag('force', negatable: false);
+      case 'unlabel':
+        a.addFlag('force', negatable: false);
+      case 'reply':
+        a
+          ..addOption('limit', abbr: 'n')
+          ..addOption('query');
+    }
+    _addCommon(a);
+    _addWrite(a, hidden: true);
+  }
 
   ArgResults opts;
   try {
@@ -62,24 +103,40 @@ Future<int> runPiosenkomat(List<String> args) async {
     stderr.writeln(_usage(parser));
     return 64;
   }
-  final cmd = opts.command;
+  var cmd = opts.command;
   if (opts['help'] as bool || cmd == null) {
     stdout.writeln(_usage(parser));
     return cmd == null && !(opts['help'] as bool) ? 64 : 0;
   }
 
+  var name = _aliases[cmd.name] ?? cmd.name;
+  if (name == 'label') {
+    final stage = cmd.command;
+    if (stage == null) {
+      stderr.writeln('Podaj etap: ./piosenkomat label scanned|reviewed|added');
+      stderr.writeln(_usage(parser));
+      return 64;
+    }
+    cmd = stage;
+    name = 'label ${stage.name}';
+  }
+
   try {
-    switch (cmd.name) {
-      case 'process':
-        return await _process(cmd);
-      case 'commit':
-        return await _commit(cmd);
-      case 'review':
-        return await _review(cmd);
-      case 'check':
-        return _check(cmd);
-      case 'apply':
-        return await _apply(cmd);
+    switch (name) {
+      case 'scan':
+        return await _scan(cmd);
+      case 'label scanned':
+        return await _labelScanned(cmd);
+      case 'label reviewed':
+        return await _labelReviewed(cmd);
+      case 'label added':
+        return await _labelAdded(cmd);
+      case 'unlabel':
+        return await _unlabel(cmd);
+      case 'reply':
+        return await _reply(cmd);
+      case 'explain':
+        return _explain(cmd);
     }
     return 64;
   } on FileSystemException catch (e) {
@@ -88,13 +145,32 @@ Future<int> runPiosenkomat(List<String> args) async {
   }
 }
 
+/// Nazwy sprzed przemianowania → dzisiejsze komendy.
+const Map<String, String> _aliases = {
+  'process': 'scan',
+  'apply': 'label scanned',
+  'review': 'label reviewed',
+  'commit': 'label added',
+  'unapply': 'unlabel',
+  'check': 'explain',
+};
+
+/// `--write` to jedyna flaga, która pozwala cokolwiek zmienić w Gmailu.
+/// `--apply` zostaje ukrytym synonimem, żeby stare notatki dalej działały.
+void _addWrite(ArgParser p, {String? help, bool hidden = false}) => p
+  ..addFlag('write', negatable: false, hide: hidden, help: help)
+  ..addFlag('apply', negatable: false, hide: true);
+
+bool _write(ArgResults cmd) =>
+    (cmd['write'] as bool) || (cmd['apply'] as bool);
+
 void _addCommon(ArgParser p) => p
   ..addOption('songs-db', help: 'Ścieżka do all_songs.hrcpsng')
   ..addOption('credentials', help: 'Domyślnie secrets/credentials.json')
   ..addOption('token', help: 'Domyślnie secrets/gmail_token.json');
 
-Future<int> _process(ArgResults cmd) async {
-  final apply = cmd['apply'] as bool;
+Future<int> _scan(ArgResults cmd) async {
+  final write = _write(cmd);
   final newest = cmd['newest'] as bool;
   int? limit;
   if (cmd['limit'] != null) {
@@ -149,11 +225,11 @@ Future<int> _process(ArgResults cmd) async {
     stdout.writeln('\nZapisano ${imports.length} piosenek → $songsPath');
     stdout.writeln('Wczytaj ten plik na stronie ze śpiewnikiem.');
     // Kopia do podmiany: po przeglądzie wgrywasz tu eksport ze strony,
-    // a `review` z różnicy wyciąga odrzucone.
-    final approvedPath = approvedPathIn(outDir);
-    File(songsPath).copySync(approvedPath);
-    stdout.writeln('Po przeglądzie podmień $approvedPath eksportem ze strony '
-        'i odpal: ./piosenkomat review $outDir');
+    // a `label reviewed` z różnicy wyciąga odrzucone.
+    final reviewedPath = reviewedPathIn(outDir);
+    File(songsPath).copySync(reviewedPath);
+    stdout.writeln('Po przeglądzie podmień $reviewedPath eksportem ze strony '
+        'i odpal: ./piosenkomat label reviewed $outDir');
 
     final people = collectPeople(classified);
     final peoplePath = peoplePathIn(outDir);
@@ -171,9 +247,9 @@ Future<int> _process(ArgResults cmd) async {
   stdout.writeln('Katalog: $outDir');
   stdout.writeln('Raport: $reportPath');
   stdout.writeln('Plan etykiet: $planPath');
-  if (!apply) {
-    stdout.writeln('Dry-run: Gmail nietknięty. Etykiety jak w raporcie nada '
-        '--apply teraz albo później: ./piosenkomat apply $planPath --apply');
+  if (!write) {
+    stdout.writeln('Gmail nietknięty — `scan` tylko czyta. Etykiety jak '
+        'w raporcie nada: ./piosenkomat label scanned $outDir --write');
     return 0;
   }
   await _applyPlan(mailbox, plan, alreadyLabeled: {
@@ -182,15 +258,13 @@ Future<int> _process(ArgResults cmd) async {
   return 0;
 }
 
-/// `apply <plan.labels.json> [--apply]`: etykiety z zapisanego planu, bez
-/// ponownego czytania treści. Mejle, które w międzyczasie dostały już
-/// etykietę song/*, są pomijane.
-Future<int> _apply(ArgResults cmd) async {
-  if (cmd.rest.length != 1) {
-    stderr.writeln('Podaj jeden plik planu: ./piosenkomat apply out/import-<data>/labels.json');
-    return 64;
-  }
-  final plan = readPlan(_resolve(cmd.rest.single));
+/// `label scanned [katalog] [--write]`: etykiety z planu zapisanego przez
+/// `scan`, bez ponownego czytania treści. Mejle, które w międzyczasie dostały
+/// już etykietę song/*, są pomijane.
+Future<int> _labelScanned(ArgResults cmd) async {
+  final planPath = _planPath(cmd);
+  if (planPath == null) return 64;
+  final plan = readPlan(planPath);
   stdout.writeln('Plan z ${plan.createdAt.toLocal().toIso8601String().substring(0, 16)}: '
       '${plan.labelsById.length} mejli, plik piosenek ${plan.hrcpsngPath}');
   final counts = <String, int>{};
@@ -202,8 +276,8 @@ Future<int> _apply(ArgResults cmd) async {
   for (final e in counts.entries.toList()..sort((a, b) => a.key.compareTo(b.key))) {
     stdout.writeln('  ${e.value.toString().padLeft(4)}  ${e.key}');
   }
-  if (!(cmd['apply'] as bool)) {
-    stdout.writeln('\nDry-run: Gmail nietknięty. --apply nada powyższe.');
+  if (!_write(cmd)) {
+    stdout.writeln('\nDry-run: Gmail nietknięty. --write nada powyższe.');
     return 0;
   }
   final mailbox = await _connect(cmd);
@@ -213,6 +287,73 @@ Future<int> _apply(ArgResults cmd) async {
     if (await mailbox.hasAnyLabel(id, prefix: 'song')) alreadyLabeled.add(id);
   }
   await _applyPlan(mailbox, plan, alreadyLabeled: alreadyLabeled);
+  return 0;
+}
+
+/// `unlabel [katalog] [--write]`: cofa etykiety nadane przez ten przebieg —
+/// na wypadek `label scanned` puszczonego za szybko. Zdejmuje wyłącznie to,
+/// co jest w planie, więc Twoje ręczne etykiety zostają.
+///
+/// Bezpiecznik: mejla, który po przebiegu ruszył dalej (dostał etykietę
+/// `song/*` spoza planu, np. przez `label added` albo Twoją rękę), nie ruszamy —
+/// cofnięcie zostawiłoby go w połowie drogi. `--force`, jeśli mimo to ma zejść.
+Future<int> _unlabel(ArgResults cmd) async {
+  final planPath = _planPath(cmd);
+  if (planPath == null) return 64;
+  final plan = readPlan(planPath);
+  final force = cmd['force'] as bool;
+  stdout.writeln('Plan z ${plan.createdAt.toLocal().toIso8601String().substring(0, 16)}: '
+      '${plan.labelsById.length} mejli, sprawdzam aktualne etykiety…');
+
+  final mailbox = await _connect(cmd);
+  final toRemove = <String, List<String>>{};
+  final counts = <String, int>{};
+  var untouched = 0;
+  var movedOn = 0;
+  for (final e in plan.labelsById.entries) {
+    final current = await mailbox.labelsOf(e.key);
+    final planned = e.value.toSet();
+    final moved = current.any((l) =>
+        (l == 'song' || l.startsWith('song/')) && !planned.contains(l));
+    if (moved && !force) {
+      movedOn++;
+      continue;
+    }
+    final hit = [for (final l in e.value) if (current.contains(l)) l];
+    if (hit.isEmpty) {
+      untouched++;
+      continue;
+    }
+    toRemove[e.key] = hit;
+    for (final l in hit) {
+      counts[l] = (counts[l] ?? 0) + 1;
+    }
+  }
+
+  if (toRemove.isEmpty) {
+    stdout.writeln('Nic do zdjęcia — po tym przebiegu nie został ślad.');
+    return 0;
+  }
+  stdout.writeln('Do zdjęcia z ${toRemove.length} mejli:');
+  for (final c in counts.entries.toList()..sort((a, b) => a.key.compareTo(b.key))) {
+    stdout.writeln('  ${c.value.toString().padLeft(4)}  ${c.key}');
+  }
+  if (untouched > 0) {
+    stdout.writeln('${untouched} mejli już bez etykiet z planu.');
+  }
+  if (movedOn > 0) {
+    stdout.writeln('Pomijam $movedOn mejli ze stanem spoza planu '
+        '(ruszyły dalej po przebiegu); --force, jeśli mimo to mają zejść.');
+  }
+  if (!_write(cmd)) {
+    stdout.writeln('\nDry-run: Gmail nietknięty. --write zdejmie powyższe.');
+    return 0;
+  }
+  for (final e in toRemove.entries) {
+    await mailbox.removeLabels(e.key, e.value);
+  }
+  stdout.writeln('Zdjęto z ${toRemove.length} mejli. '
+      'Wracają do kolejki, więc `scan` weźmie je ponownie.');
   return 0;
 }
 
@@ -242,11 +383,11 @@ Future<void> _applyPlan(
     stdout.writeln('Pominięto $skipped mejli, które już miały etykietę song/*.');
   }
   stdout.writeln('Po przeglądzie na stronie podmień approved.hrcpsng, potem '
-      './piosenkomat review <katalog> --apply i ./piosenkomat commit --apply');
+      './piosenkomat label reviewed --write i ./piosenkomat label added --write');
 }
 
-Future<int> _commit(ArgResults cmd) async {
-  final apply = cmd['apply'] as bool;
+Future<int> _labelAdded(ArgResults cmd) async {
+  final write = _write(cmd);
   final mailbox = await _connect(cmd);
   final ids = await mailbox.listIds(kReadyByToolQuery);
   final ready = <ContribMessage>[];
@@ -258,8 +399,8 @@ Future<int> _commit(ArgResults cmd) async {
     stdout.writeln('  ${m.subject ?? ''}  ${emailFromHeader(m.from) ?? ''}  [$id]');
   }
   stdout.writeln('„$kLabelReady” + „$kLabelAuto”: ${ready.length} mejli');
-  if (!apply) {
-    stdout.writeln('\nDry-run: Gmail nietknięty. --apply zmieni na „$kLabelDone” + przeczytane.');
+  if (!write) {
+    stdout.writeln('\nDry-run: Gmail nietknięty. --write zmieni na „$kLabelDone” + przeczytane.');
     return 0;
   }
   await mailbox.ensureToolLabels();
@@ -270,32 +411,31 @@ Future<int> _commit(ArgResults cmd) async {
   return 0;
 }
 
-/// `review <katalog przebiegu> [--apply]`: różnica między tym, co automat
+/// `label reviewed [katalog] [--write]`: różnica między tym, co automat
 /// wstawił do pliku, a tym, co zostało po Twoim przeglądzie na stronie.
 /// Mejl traci „w pliku” tylko wtedy, gdy wypadły wszystkie jego piosenki.
-Future<int> _review(ArgResults cmd) async {
-  if (cmd.rest.length != 1) {
-    stderr.writeln('Podaj katalog przebiegu: ./piosenkomat review out/import-<data>');
-    return 64;
-  }
-  final outDir = _resolve(cmd.rest.single);
+Future<int> _labelReviewed(ArgResults cmd) async {
+  final outDir = _runDir(cmd);
+  if (outDir == null) return 64;
   final force = cmd['force'] as bool;
   final plan = readPlan(planPathIn(outDir));
-  final approvedPath =
-      _resolve(cmd['approved'] as String? ?? approvedPathIn(outDir));
+  final reviewedPath = _resolve(cmd['reviewed'] as String? ??
+      // `--approved` i `approved.hrcpsng`: nazwy sprzed przemianowania.
+      cmd['approved'] as String? ??
+      _pickReviewedFile(outDir));
 
   final proposed = collectProposed(plan, readHrcpsng(songsPathIn(outDir)));
   if (proposed.isEmpty) {
     stderr.writeln('Ten przebieg nic nie zaproponował do pliku, nie ma co porównywać.');
     return 1;
   }
-  final approved = readHrcpsng(approvedPath);
+  final reviewed = readHrcpsng(reviewedPath);
   stdout.writeln('Przebieg $outDir: ${proposed.length} zaproponowanych, '
-      '${approved.length} w $approvedPath');
+      '${reviewed.length} w $reviewedPath');
 
-  final result = reviewDiff(proposed: proposed, approved: approved);
+  final result = reviewDiff(proposed: proposed, reviewed: reviewed);
   final reviewPath = reviewPathIn(outDir);
-  writeReviewLedger(reviewPath, approvedPath: approvedPath, result: result);
+  writeReviewLedger(reviewPath, reviewedPath: reviewedPath, result: result);
 
   stdout.writeln();
   stdout.writeln('ZOSTAJE   ${result.accepted.length}');
@@ -327,7 +467,7 @@ Future<int> _review(ArgResults cmd) async {
         '(tytuł mógł się zmienić przy przeglądzie): ${byOther.length}');
     for (final m in byOther) {
       stdout.writeln('  ${m.kind.text.padRight(12)} ${m.proposed.title}'
-          '${m.approvedTitle == m.proposed.title ? '' : ' → ${m.approvedTitle}'}');
+          '${m.reviewedTitle == m.proposed.title ? '' : ' → ${m.reviewedTitle}'}');
     }
   }
   for (final e in result.partial.entries) {
@@ -338,8 +478,8 @@ Future<int> _review(ArgResults cmd) async {
 
   // Bezpieczniki na zły plik: pusty eksport i „odrzucona większość” prawie
   // zawsze znaczą, że podmieniony został nie ten plik, co trzeba.
-  if (!force && approved.isEmpty) {
-    stderr.writeln('\n$approvedPath jest pusty — to wygląda na pomyłkę. '
+  if (!force && reviewed.isEmpty) {
+    stderr.writeln('\n$reviewedPath jest pusty — to wygląda na pomyłkę. '
         'Jeśli naprawdę odrzucasz wszystko: --force.');
     return 1;
   }
@@ -352,11 +492,11 @@ Future<int> _review(ArgResults cmd) async {
 
   final msgIds = result.rejectedMsgIds;
   if (msgIds.isEmpty) {
-    stdout.writeln('\nNic do odetykietowania. Dalej: ./piosenkomat commit --apply');
+    stdout.writeln('\nNic do odetykietowania. Dalej: ./piosenkomat label added --write');
     return 0;
   }
-  if (!(cmd['apply'] as bool)) {
-    stdout.writeln('\nDry-run: Gmail nietknięty. --apply zdejmie „$kLabelReady” '
+  if (!_write(cmd)) {
+    stdout.writeln('\nDry-run: Gmail nietknięty. --write zdejmie „$kLabelReady” '
         'i nada „$kLabelRejectedAfterReview” na ${msgIds.length} mejlach.');
     return 0;
   }
@@ -380,13 +520,104 @@ Future<int> _review(ArgResults cmd) async {
   if (skipped > 0) {
     stdout.writeln('Pominięto $skipped mejli bez „$kLabelReady” + „$kLabelAuto”.');
   }
-  stdout.writeln('Dalej: ./piosenkomat commit --apply');
+  stdout.writeln('Dalej: ./piosenkomat label added --write');
   return 0;
 }
 
-int _check(ArgResults cmd) {
+/// `reply [--apply]`: autorom ze starej apki wiadomość, żeby ją zaktualizowali.
+///
+/// Kolejką jest sam Gmail: etykieta „$kLabelOldAppToReply”, którą wiesza
+/// `label scanned --write`. Wysyłka ją zdejmuje i wiesza „$kLabelOldAppReplied”,
+/// więc nikt nie dostanie dwóch odpowiedzi, a przerwany przebieg dokańcza się
+/// zwykłym powtórzeniem komendy.
+///
+/// Jedna odpowiedź na autora, nie na mejl: kto przysłał pięć piosenek ze starej
+/// apki, dostaje jeden mejl w najnowszym wątku, a etykieta schodzi ze wszystkich.
+Future<int> _reply(ArgResults cmd) async {
+  final write = _write(cmd);
+  int? limit;
+  if (cmd['limit'] != null) {
+    limit = int.tryParse(cmd['limit'] as String);
+    if (limit == null || limit <= 0) {
+      stderr.writeln('--limit wymaga liczby dodatniej.');
+      return 64;
+    }
+  }
+
+  final mailbox = await _connect(cmd);
+  final query = cmd['query'] as String? ??
+      'label:${labelQueryName(kLabelOldAppToReply)}';
+  final ids = await mailbox.listIds(query);
+  if (ids.isEmpty) {
+    stdout.writeln('Nikt nie czeka na odpowiedź.');
+    return 0;
+  }
+  stdout.writeln('Do odpisania: ${ids.length} mejli, pobieram nagłówki…');
+
+  // Grupujemy po autorze, w każdej grupie odpisujemy na najnowszy wątek.
+  final bySender = <String, List<ReplyTarget>>{};
+  final unknownSender = <String>[];
+  for (final id in ids) {
+    final target = await mailbox.replyTarget(id);
+    final sender = emailFromHeader(target.to);
+    if (sender == null || sender == kInboxEmail) {
+      unknownSender.add(id);
+      continue;
+    }
+    bySender.putIfAbsent(sender, () => []).add(target);
+  }
+
+  final senders = bySender.keys.toList()..sort();
+  final planned = limit == null ? senders : senders.take(limit).toList();
+  for (final sender in planned) {
+    final targets = bySender[sender]!;
+    stdout.writeln('  → $sender  ${targets.length} '
+        '${targets.length == 1 ? 'mejl' : 'mejli'}  '
+        'wątek [${targets.last.messageId}]');
+  }
+  if (planned.length < senders.length) {
+    stdout.writeln('  (${senders.length - planned.length} autorów poza --limit, '
+        'zostają w kolejce)');
+  }
+  if (unknownSender.isNotEmpty) {
+    stdout.writeln('Pomijam ${unknownSender.length} mejli bez czytelnego nadawcy; '
+        'etykieta zostaje.');
+  }
+
+  if (!write) {
+    stdout.writeln('\nDry-run: nic nie wysłano. --write wyśle '
+        '${planned.length} ${planned.length == 1 ? 'mejl' : 'mejli'}.');
+    return 0;
+  }
+
+  await mailbox.ensureToolLabels();
+  var sent = 0;
+  var failed = 0;
+  for (final sender in planned) {
+    final targets = bySender[sender]!;
+    try {
+      await mailbox.replyTo(targets.last, oldestFormatReplyMessage);
+    } catch (e) {
+      // Etykieta zostaje, więc następny przebieg spróbuje jeszcze raz.
+      stderr.writeln('  ! $sender: $e');
+      failed++;
+      continue;
+    }
+    sent++;
+    // Zaraz po wysyłce, żeby ewentualna wywrotka nie kosztowała drugiego mejla.
+    for (final t in targets) {
+      await mailbox.markReplied(t.messageId);
+    }
+  }
+  stdout.writeln('Wysłano $sent '
+      '${sent == 1 ? 'odpowiedź' : 'odpowiedzi'}'
+      '${failed == 0 ? '' : ', $failed nieudanych (zostają w kolejce)'}.');
+  return 0;
+}
+
+int _explain(ArgResults cmd) {
   if (cmd.rest.isEmpty) {
-    stderr.writeln('Podaj pliki .eml do sprawdzenia.');
+    stderr.writeln('Podaj pliki .eml: ./piosenkomat explain plik.eml');
     return 64;
   }
   final book = _loadBook(cmd);
@@ -400,6 +631,41 @@ int _check(ArgResults cmd) {
 
 /// Narzędzie działa w `tool/piosenkomat/`, ale użytkownik podaje ścieżki
 /// z katalogu, w którym wpisał `./piosenkomat` (przekazany w PIOSENKOMAT_CWD).
+/// Katalog przebiegu z argumentu, a bez argumentu — ostatni z `out/`.
+/// Dla wygody przyjmuje też ścieżkę do pliku w środku (np. `labels.json`),
+/// bo tak wyglądały wywołania sprzed przemianowania.
+String? _runDir(ArgResults cmd) {
+  if (cmd.rest.length > 1) {
+    stderr.writeln('Podaj jeden katalog przebiegu albo żaden (weźmie ostatni).');
+    return null;
+  }
+  if (cmd.rest.length == 1) {
+    final arg = _resolve(cmd.rest.single);
+    return FileSystemEntity.isDirectorySync(arg) ? arg : p.dirname(arg);
+  }
+  final latest = latestOutDir();
+  if (latest == null) {
+    stderr.writeln('Nie ma żadnego przebiegu w out/. Najpierw: ./piosenkomat scan');
+    return null;
+  }
+  final dir = _resolve(latest);
+  stdout.writeln('Ostatni przebieg: $dir');
+  return dir;
+}
+
+/// `reviewed.hrcpsng`, a w katalogach sprzed przemianowania `approved.hrcpsng`.
+String _pickReviewedFile(String outDir) {
+  final now = reviewedPathIn(outDir);
+  if (_exists(now)) return now;
+  final legacy = legacyReviewedPathIn(outDir);
+  return _exists(legacy) ? legacy : now;
+}
+
+String? _planPath(ArgResults cmd) {
+  final dir = _runDir(cmd);
+  return dir == null ? null : planPathIn(dir);
+}
+
 String _resolve(String path) {
   if (p.isAbsolute(path) || _exists(path)) return path;
   final cwd = Platform.environment['PIOSENKOMAT_CWD'];
@@ -453,7 +719,9 @@ String formatRunReport(List<Classified> items) {
     ..writeln('NIE SPARSOWANE  ${unparsed.length}')
     ..writeln('IMPORT          ${imports.length}')
     ..writeln('ODRZUĆ          ${rejected.length}')
-    ..writeln('RĘCZNIE         $review');
+    ..writeln('RĘCZNIE         $review')
+    ..writeln('STARA APKA      ${items.where((c) => c.oldApp).length}'
+        '  (do odpisania: ./piosenkomat reply)');
 
   if (parsedSkip.isNotEmpty) {
     final any = <SkipReason, int>{};
@@ -533,7 +801,8 @@ String formatReport(List<Classified> items, {bool summary = true}) {
   for (final c in imports) {
     final v = c.verdict as Import;
     final date = c.message.date?.toLocal().toIso8601String().substring(0, 10) ?? '';
-    buf.writeln('IMPORT   ${c.title}  ${v.sender}  $date  [${c.message.id}]');
+    buf.writeln('IMPORT   ${c.title}  ${v.sender}  $date  [${c.message.id}]'
+        '${c.oldApp ? '  (stara apka)' : ''}');
   }
   if (manual.isNotEmpty) buf.writeln();
   for (final c in manual) {
@@ -542,8 +811,10 @@ String formatReport(List<Classified> items, {bool summary = true}) {
     final review = labels.first == kLabelToReview;
     final tag = review ? 'RĘCZNIE ' : 'ODRZUĆ  ';
     buf.writeln('$tag ${c.title}  [${c.message.id}]  '
-        '${v.reasons.map((r) => r.text).join('; ')}');
-    buf.writeln('         → ${(review ? labels.skip(1) : labels).join(', ')}');
+        '${v.reasons.map((r) => r.text).join('; ')}'
+        '${c.oldApp ? '  (stara apka)' : ''}');
+    buf.writeln('         → ${(review ? labels.skip(1) : labels).join(', ')}'
+        '${c.oldApp ? ', $kLabelOldAppToReply' : ''}');
     if (v.detail != null) {
       buf.writeln('         ${v.detail!.split('\n').first}');
     }
@@ -554,27 +825,33 @@ String formatReport(List<Classified> items, {bool summary = true}) {
 String _usage(ArgParser parser) => '''
 piosenkomat: sitko mejli z piosenkami na $kInboxEmail.
 
-  ./piosenkomat process [-n N] [--newest] [--apply]
-      kolejka (inbox bez song/*) → katalog out/import-<data>/
-      kandydaci: „$kLabelReady”, jednoznaczne odrzucenia: „song/rejected/…”,
-      reszta: „$kLabelToReview”; wszystko ze znacznikiem „$kLabelAuto”
-  ./piosenkomat apply out/import-<data>/labels.json [--apply]
-      etykiety z wcześniejszego przebiegu, bez ponownego czytania skrzynki
-  ./piosenkomat review out/import-<data> [--apply]
-      songs.hrcpsng minus approved.hrcpsng → „$kLabelRejectedAfterReview”
-  ./piosenkomat commit [--apply]
+  ./piosenkomat scan [-n N] [--newest] [-o katalog]
+      kolejka (inbox bez song/*) → katalog out/import-<data>/: raport, plan,
+      songs.hrcpsng, reviewed.hrcpsng, people.dart. Gmaila tylko czyta
+  ./piosenkomat label scanned [katalog] --write
+      werdykty automatu na mejle: „$kLabelReady”, „song/rejected/…”,
+      „$kLabelToReview”, wszystko ze znacznikiem „$kLabelAuto”
+  ./piosenkomat label reviewed [katalog] --write
+      songs.hrcpsng minus reviewed.hrcpsng → „$kLabelRejectedAfterReview”
+  ./piosenkomat label added [katalog] --write
       „$kLabelReady” + „$kLabelAuto” → „$kLabelDone” + przeczytane
-  ./piosenkomat check plik.eml [...]
+  ./piosenkomat unlabel [katalog] --write
+      cofa etykiety nadane przez ten przebieg
+  ./piosenkomat reply [-n N] --write
+      autorom ze starej apki: „zaktualizuj apkę”; kolejką jest etykieta
+      „$kLabelOldAppToReply”, wysyłka przestawia ją na „$kLabelOldAppReplied”
+  ./piosenkomat explain plik.eml [...]
       klasyfikacja lokalnych plików, bez Gmaila
 
-Bez --apply nic w Gmailu się nie zmienia.
+Bez katalogu komendy biorą ostatni przebieg z out/.
+Bez --write nic w Gmailu się nie zmienia.
 
-process:
-${parser.commands['process']!.usage}
+scan:
+${parser.commands['scan']!.usage}
 
-review:
-${parser.commands['review']!.usage}
+label reviewed:
+${parser.commands['label']!.commands['reviewed']!.usage}
 
-commit:
-${parser.commands['commit']!.usage}
+unlabel:
+${parser.commands['unlabel']!.usage}
 ''';

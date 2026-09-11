@@ -41,7 +41,8 @@ List<Classified> classifyBatch(
     final prev = out[i].verdict;
     final reasons = prev is Manual ? prev.reasons : <SkipReason>[];
     if (reasons.contains(reason)) return;
-    out[i] = Classified(out[i].message, Manual([...reasons, reason], detail: detail), out[i].title);
+    out[i] = Classified(out[i].message, Manual([...reasons, reason], detail: detail),
+        out[i].title, oldApp: out[i].oldApp);
   }
 
   // Ten sam tytuł.
@@ -106,13 +107,16 @@ Classified classify(ContribMessage m, {required SongBook book}) {
   final title = song.title.trim().isEmpty ? fallbackTitle : song.title;
   final reasons = <SkipReason>[];
 
-  if (parsed.isOldestFormat) reasons.add(SkipReason.oldestFormat);
+  final oldApp = parsed.isOldestFormat;
   if (m.isReply) reasons.add(SkipReason.reply);
 
+  // Najstarsza apka miała jeden szablon tematu (`Piosenka "X"`) i nie umiała
+  // wysyłać poprawek — nie ma w niej sekcji „Propozycja poprawki”. Jej temat
+  // nie niesie więc żadnej informacji i nie jest powodem do przeglądu.
   final subject = m.subject ?? '';
   if (subject.contains('Poprawka piosenki') || _hasCorrectionText(m.body)) {
     reasons.add(SkipReason.correction);
-  } else if (!subject.contains('Nowa piosenka')) {
+  } else if (!subject.contains('Nowa piosenka') && !oldApp) {
     reasons.add(SkipReason.unknownSubject);
   }
 
@@ -122,7 +126,9 @@ Classified classify(ContribMessage m, {required SongBook book}) {
   if ((song.youtubeVideoId ?? '').trim().isEmpty) {
     reasons.add(SkipReason.missingYoutube);
   }
-  if ((parsed.acceptedRulesVersion ?? '').trim().isEmpty) {
+  // Stara apka o zgodę nie pytała, bo regulaminu jeszcze nie było — dostaje
+  // sentinel [kOldAppRulesVersion] zamiast blokady.
+  if ((parsed.acceptedRulesVersion ?? '').trim().isEmpty && !oldApp) {
     reasons.add(SkipReason.noConsent);
   }
 
@@ -132,10 +138,13 @@ Classified classify(ContribMessage m, {required SongBook book}) {
   final (bookReason, bookDetail) = _compareWithBook(song, book);
   if (bookReason != null) reasons.add(bookReason);
 
-  if (reasons.isNotEmpty) return Classified(m, Manual(reasons, detail: bookDetail), title);
+  if (reasons.isNotEmpty) {
+    return Classified(m, Manual(reasons, detail: bookDetail), title, oldApp: oldApp);
+  }
 
   _enrich(song, parsed, sender: sender!, date: m.date, msgId: m.id);
-  return Classified(m, Import(song, sender, registered: parsed.registered), title);
+  return Classified(m, Import(song, sender, registered: parsed.registered), title,
+      oldApp: oldApp);
 }
 
 /// Tytuł i tekst względem śpiewnika:
@@ -193,8 +202,7 @@ ParsedContribEmail parseSubmission(ContribMessage m) {
   final attachment = m.songAttachment == null ? null : _attachmentSong(m.songAttachment!);
   final candidates = <String?>[
     if (region != null && attachment != null)
-      _replaceRegion(m.body, region,
-          region.fenced ? jsonEncode(attachment.$2) : jsonEncode({attachment.$1: attachment.$2})),
+      _replaceRegion(m.body, region, _attachmentJson(region, attachment)),
     m.body,
     if (region != null) _replaceRegion(m.body, region, region.json.replaceAll(RegExp(r'\r?\n'), ' ')),
     if (region != null) _replaceRegion(m.body, region, region.json.replaceAll(RegExp(r'\r?\n'), '')),
@@ -238,6 +246,18 @@ _SongRegion? _songRegion(String body) {
 
 String _replaceRegion(String body, _SongRegion r, String json) =>
     body.replaceRange(r.start, r.end, json);
+
+/// JSON załącznika w kształcie, w jakim był w treści. Otoczka
+/// `{"o!_id": {...}}` to znak rozpoznawczy najstarszej apki
+/// (`detectOldestFormat`), więc dokładamy ją tylko wtedy, gdy treść też ją
+/// miała — inaczej mejl z nowszej apki bez fence'a dostawałby otoczkę od nas
+/// i wyglądał na stary format.
+String _attachmentJson(_SongRegion region, (String, Map<String, dynamic>) attachment) =>
+    !region.fenced && _oldestWrapperRe.hasMatch(region.json)
+        ? jsonEncode({attachment.$1: attachment.$2})
+        : jsonEncode(attachment.$2);
+
+final _oldestWrapperRe = RegExp(r'^\s*\{\s*"o!_');
 
 /// Załącznik `.hrcpsng`: `(id, mapa piosenki)`.
 (String, Map<String, dynamic>)? _attachmentSong(String attachment) {
@@ -297,7 +317,9 @@ void _enrich(
     email: fromEmail?.email ?? sender,
     contributionDate: fromEmail?.contributionDate ?? date ?? DateTime.now(),
     acceptedContributionRulesVersion:
-        fromEmail?.acceptedContributionRulesVersion ?? parsed.acceptedRulesVersion!,
+        fromEmail?.acceptedContributionRulesVersion
+            ?? parsed.acceptedRulesVersion
+            ?? kOldAppRulesVersion,
     emailMsgId: msgId,
   );
   final known = song.contribRefs

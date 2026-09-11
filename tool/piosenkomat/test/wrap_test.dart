@@ -64,7 +64,8 @@ void _oldest() {
   test('najstarsza apka: goły JSON połamany, załącznik ratuje', () async {
     final good = classify(msgFrom(await completeEmail()), book: SongBook.empty);
     final song = (good.verdict as Import).song;
-    final songMap = song.toApiJsonMap(withId: false);
+    // Stara apka nie znała zgody na regulamin, więc i piosenka jej nie niesie.
+    final songMap = song.toApiJsonMap(withId: false)..remove('contributor_data');
     final attachment = jsonEncode({'official': {song.id: {'song': songMap, 'index': 0}}, 'conf': {}});
     final wrapped = hardWrap(jsonEncode({song.id: songMap}), width: 60);
     final body = 'Dzięki za chęć dzielenia się swoimi piosenkami!\n'
@@ -74,9 +75,33 @@ void _oldest() {
     final m = ContribMessage(id: 'old', body: body, subject: 'Piosenka "Piosenka testowa XYZ"',
         from: 'Jan <jan.testowy@example.com>', songAttachment: attachment);
     final got = classify(m, book: SongBook.empty);
-    final reasons = (got.verdict as Manual).reasons;
-    expect(reasons, isNot(contains(SkipReason.parseError)));
-    expect(reasons, containsAll([SkipReason.oldestFormat, SkipReason.noConsent]));
+    // Stara apka nie blokuje: treść jest kompletna, brak zgody dostaje sentinel,
+    // a jej temat („Piosenka …”) nie jest tematem spoza szablonów.
+    expect(got.verdict, isA<Import>());
+    expect(got.oldApp, isTrue);
+    expect(got.labels, contains(kLabelOldAppToReply));
+    expect((got.verdict as Import).song.contributorData?.acceptedContributionRulesVersion,
+        kOldAppRulesVersion);
     expect(got.title, 'Piosenka testowa XYZ');
+  });
+
+  test('nowsza apka bez fence\'a: załącznik nie robi z mejla starego formatu', () async {
+    final good = classify(msgFrom(await completeEmail()), book: SongBook.empty);
+    final song = (good.verdict as Import).song;
+    final attachment = jsonEncode({
+      'official': {song.id: {'song': song.toApiJsonMap(withId: false), 'index': 0}},
+      'conf': {},
+    });
+    // Format pośredni: zgoda i temat jak dziś, ale JSON goły, bez ```.
+    final raw = (await completeEmail())
+        .replaceFirst('### Kod piosenki:\n\n```json\n', '### Kod piosenki:\n\n')
+        .replaceFirst(RegExp(r'\n```\s*$'), '\n');
+    final eml = msgFrom(hardWrap(raw));
+    final m = ContribMessage(id: 'mid', body: eml.body, subject: eml.subject,
+        from: eml.from, date: eml.date, songAttachment: attachment);
+    final got = classify(m, book: SongBook.empty);
+    expect(got.verdict, isA<Import>());
+    expect(got.oldApp, isFalse);
+    expect(got.labels, isNot(contains(kLabelOldAppToReply)));
   });
 }

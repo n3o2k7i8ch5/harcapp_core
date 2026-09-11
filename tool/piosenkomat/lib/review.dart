@@ -7,7 +7,7 @@ import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'plan.dart';
 import 'similarity.dart';
 
-/// Po czym piosenka z `approved.hrcpsng` została związana ze zgłoszeniem.
+/// Po czym piosenka z `reviewed.hrcpsng` została związana ze zgłoszeniem.
 enum MatchKind {
   emailMsgId('id mejla'),
   songId('id piosenki'),
@@ -39,15 +39,15 @@ class ProposedSong {
 class Matched {
   final ProposedSong proposed;
   final MatchKind kind;
-  final String approvedTitle;
+  final String reviewedTitle;
 
-  const Matched(this.proposed, this.kind, this.approvedTitle);
+  const Matched(this.proposed, this.kind, this.reviewedTitle);
 }
 
 class ReviewResult {
   final List<Matched> accepted;
   final List<ProposedSong> rejected;
-  /// Piosenki z `approved`, których nie da się związać ze zgłoszeniem
+  /// Piosenki z `reviewed`, których nie da się związać ze zgłoszeniem
   /// (dorzucone ręcznie na stronie). Nic z nimi nie robimy.
   final List<String> unknown;
   /// Mejle, z których część piosenek weszła, a część wypadła. Dziś niemożliwe
@@ -118,12 +118,12 @@ List<ProposedSong> collectProposed(LabelPlan plan, List<SongRaw> songs) {
 /// i chwyty mogły się zmienić, a strona mogła zgubić `email_msg_id`.
 ReviewResult reviewDiff({
   required List<ProposedSong> proposed,
-  required List<SongRaw> approved,
+  required List<SongRaw> reviewed,
 }) {
   final matched = <ProposedSong, Matched>{};
   final unknown = <String>[];
 
-  for (final song in approved) {
+  for (final song in reviewed) {
     final hit = _match(song, proposed);
     if (hit == null) {
       unknown.add(song.title);
@@ -205,14 +205,14 @@ Matched? _match(SongRaw song, List<ProposedSong> proposed) {
 /// zostało rozpoznane.
 void writeReviewLedger(
   String path, {
-  required String approvedPath,
+  required String reviewedPath,
   required ReviewResult result,
 }) {
   final file = File(path);
   file.parent.createSync(recursive: true);
   file.writeAsStringSync(const JsonEncoder.withIndent('  ').convert({
     'created_at': DateTime.now().toIso8601String(),
-    'approved': approvedPath,
+    'reviewed': reviewedPath,
     'songs': [
       for (final m in result.accepted)
         {

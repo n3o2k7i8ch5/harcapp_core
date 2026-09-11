@@ -93,11 +93,23 @@ String defaultSongsDbPath() {
 }
 
 /// Osobny katalog na każdy przebieg, żeby drugi `process` nie nadpisał pierwszego.
-/// W środku: `songs.hrcpsng`, `approved.hrcpsng`, `people.dart`, `labels.json`,
+/// W środku: `songs.hrcpsng`, `reviewed.hrcpsng`, `people.dart`, `labels.json`,
 /// `report.txt`, a po przeglądzie `review.json`.
 String defaultOutDir() {
   final t = DateTime.now().toIso8601String().substring(0, 19).replaceAll(':', '');
   return p.join('out', 'import-$t');
+}
+
+/// Ostatni przebieg w `out/`, czyli ten, o który chodzi w 99% wywołań.
+/// Katalogi mają w nazwie datę ISO, więc porządek alfabetyczny to porządek czasu.
+String? latestOutDir({String root = 'out'}) {
+  final dir = Directory(root);
+  if (!dir.existsSync()) return null;
+  final runs = [
+    for (final e in dir.listSync())
+      if (e is Directory && p.basename(e.path).startsWith('import-')) e.path,
+  ]..sort();
+  return runs.isEmpty ? null : runs.last;
 }
 
 /// Nazwy plików w katalogu przebiegu.
@@ -105,6 +117,8 @@ String songsPathIn(String outDir) => p.join(outDir, 'songs.hrcpsng');
 String planPathIn(String outDir) => p.join(outDir, 'labels.json');
 String reportPathIn(String outDir) => p.join(outDir, 'report.txt');
 String peoplePathIn(String outDir) => p.join(outDir, 'people.dart');
-/// Kopia `songs.hrcpsng` do podmiany po przeglądzie na stronie.
-String approvedPathIn(String outDir) => p.join(outDir, 'approved.hrcpsng');
+/// Kopia `songs.hrcpsng` do podmiany po przeglądzie na stronie. Starsze
+/// przebiegi mają ten plik pod dawną nazwą `approved.hrcpsng` — czytamy obie.
+String reviewedPathIn(String outDir) => p.join(outDir, 'reviewed.hrcpsng');
+String legacyReviewedPathIn(String outDir) => p.join(outDir, 'approved.hrcpsng');
 String reviewPathIn(String outDir) => p.join(outDir, 'review.json');

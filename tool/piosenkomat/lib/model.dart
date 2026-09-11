@@ -13,6 +13,10 @@ const String kLabelRejectedDuplicate = 'song/rejected/duplicate';
 /// Automat wstawił do pliku, Ty przy przeglądzie na stronie wyrzuciłeś.
 const String kLabelRejectedAfterReview = 'song/rejected/after-review';
 const String kLabelToReview = 'song/needs-review';
+/// Mejl z najstarszej apki: autorowi trzeba odpisać, żeby ją zaktualizował.
+/// Etykieta jest kolejką — `reply` ją zdejmuje i wiesza [kLabelOldAppReplied].
+const String kLabelOldAppToReply = 'song/old-app/to-reply';
+const String kLabelOldAppReplied = 'song/old-app/replied';
 
 /// Podkategorie przeglądu, jedna na powód. Mejl z kilkoma powodami dostaje kilka.
 enum ReviewKind {
@@ -37,6 +41,8 @@ final List<String> kToolLabels = [
   kLabelRejectedDuplicate,
   kLabelRejectedAfterReview,
   kLabelToReview,
+  kLabelOldAppToReply,
+  kLabelOldAppReplied,
   for (final k in ReviewKind.values) k.label,
 ];
 
@@ -55,6 +61,11 @@ final List<String> kAllSongLabels = [...kToolLabels, ...kHumanOnlyLabels];
 /// Gmail w `label:` zamienia spacje na myślniki.
 String labelQueryName(String label) => label.replaceAll(' ', '-');
 
+/// Wersja regulaminu stemplowana zgłoszeniom z najstarszej apki, która o zgodę
+/// nie pytała — regulaminu jeszcze nie było. Zostaje w bazie do wygrepowania,
+/// gdybyś kiedyś chciał doprosić autorów o zgodę.
+const String kOldAppRulesVersion = 'brak (stara apka)';
+
 /// Po czym poznać zgłoszenie piosenki. Inne mejle narzędzie omija szerokim
 /// łukiem: nie czyta ich i nie etykietuje.
 const String kSongMarker = '### Kod piosenki:';
@@ -72,8 +83,10 @@ final String kReadyByToolQuery =
 /// Dlaczego mejl nie idzie do pliku i do której podkategorii przeglądu trafia.
 enum SkipReason {
   parseError('nie udało się sparsować mejla', ReviewKind.unparsable),
-  oldestFormat('stary format apki', ReviewKind.unparsable),
-  unknownSubject('temat nie jest „Nowa piosenka”', ReviewKind.unparsable),
+  /// Temat nie pasuje do żadnego szablonu apki — ani obecnego („Nowa piosenka”,
+  /// „Poprawka piosenki”), ani najstarszego („Piosenka”). Zwykle mejl pisany
+  /// albo przerabiany ręcznie.
+  unknownSubject('temat spoza szablonów apki', ReviewKind.unparsable),
   correction('poprawka, nie nowa piosenka', ReviewKind.correction),
   reply('odpowiedź na inny mejl', ReviewKind.reply),
   hasUserMessage('użytkownik dopisał wiadomość', ReviewKind.userMessage),
@@ -184,10 +197,19 @@ class Classified {
   final Verdict verdict;
   /// Tytuł piosenki jeśli się sparsował, inaczej temat mejla.
   final String title;
+  /// Mejl z najstarszej apki. Nie blokuje importu — treść bywa kompletna —
+  /// ale autorowi trzeba odpisać, żeby się przesiadł na nową wersję.
+  final bool oldApp;
 
-  const Classified(this.message, this.verdict, this.title);
+  const Classified(this.message, this.verdict, this.title, {this.oldApp = false});
 
   bool get isImport => verdict is Import;
+
+  /// Etykiety stanu plus kolejka odpowiedzi, jeśli mejl jest ze starej apki.
+  List<String> get labels => [
+        ...stateLabelsFor(verdict),
+        if (oldApp) kLabelOldAppToReply,
+      ];
 }
 
 /// Etykiety stanu, jakie nadaje automat (zawsze razem z `song/auto`).

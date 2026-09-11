@@ -1,6 +1,8 @@
 import 'package:piosenkomat/similarity.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
+import 'dart:convert';
+
 import 'package:test/test.dart';
 
 import 'helpers.dart';
@@ -50,7 +52,7 @@ void main() {
         await completeEmail(),
         SkipReason.alreadyInBook,
         book: bookWith([sampleSong()])));
-    test('temat bez „Nowa piosenka”', () {
+    test('temat spoza szablonów apki', () {
       final got = classify(
         ContribMessage(id: 'x', body: 'Cześć, mam pytanie', subject: 'Cześć'),
         book: SongBook.empty,
@@ -60,6 +62,33 @@ void main() {
     });
   });
 
+
+  test('stara apka: import plus kolejka odpowiedzi, poprawka dalej łapana', () async {
+    final oldApp = ContribMessage(
+      id: 'old',
+      subject: 'Piosenka "Piosenka testowa XYZ"',
+      from: 'Jan <jan.testowy@example.com>',
+      body: 'Dzięki za chęć dzielenia się swoimi piosenkami!\n\n'
+          '### Kod piosenki:\n\n'
+          '${jsonEncode({'o!_x': sampleSong().toApiJsonMap(withId: false)})}\n',
+    );
+    final got = classify(oldApp, book: SongBook.empty);
+    expect(got.verdict, isA<Import>(), reason: 'stary format sam w sobie nie blokuje');
+    expect(got.labels, [kLabelReady, kLabelOldAppToReply]);
+
+    // Brak chwytów i YouTube blokuje tak samo jak wszędzie indziej.
+    final noChords = ContribMessage(
+      id: 'old2', subject: oldApp.subject, from: oldApp.from,
+      body: oldApp.body.replaceFirst(
+          jsonEncode({'o!_x': sampleSong().toApiJsonMap(withId: false)}),
+          jsonEncode({'o!_x': sampleSong(chords: false, yt: null).toApiJsonMap(withId: false)})),
+    );
+    final blocked = classify(noChords, book: SongBook.empty);
+    expect(reasonsOf(blocked),
+        containsAll([SkipReason.missingChords, SkipReason.missingYoutube]));
+    expect(blocked.labels, contains(kLabelOldAppToReply),
+        reason: 'odrzucona piosenka też wymaga odpowiedzi o aktualizacji');
+  });
 
   test('emailFromHeader', () {
     expect(emailFromHeader('Jan <Jan.K@Example.com>'), 'jan.k@example.com');
