@@ -21,7 +21,8 @@ Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduj
    `./piosenkomat label scanned --push`  
    ####
    Wiesza werdykty z `labels.json`: `ready-to-add`, `rejected/…`,
-   `needs-review/…`, `old-app/to-reply`, każdy ze znacznikiem `song/auto`.  
+   `needs-review/…`, `old-app/to-reply`, każdy ze znacznikiem `song/auto`.
+   Odrzucone od razu oznacza jako przeczytane — nic już od Ciebie nie zależy.  
    Pomija mejle, które w międzyczasie dostały już jakąś etykietę `song/*`.  
    Pomyłka? `./piosenkomat unlabel --push` cofa wszystko, co nadał automat.
    ####
@@ -36,7 +37,7 @@ Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduj
    `./piosenkomat label reviewed --push`  
    ####
    Porównuje `songs.hrcpsng` z `reviewed.hrcpsng`: czego nie ma w tym drugim,
-   traci `ready-to-add` i dostaje `rejected/after-review`. Zatwierdzone zostają
+   traci `ready-to-add`, dostaje `rejected/after-review` i idzie jako przeczytane. Zatwierdzone zostają
    bez zmian. Bez `--push` tylko pokazuje różnicę.
    ####
 5. **Osoby dodające.**
@@ -169,6 +170,9 @@ Zasady:
 - Automat odrzuca sam tylko, gdy **jedynym** powodem jest identyczna piosenka
   w śpiewniku albo identyczna w paczce. Każdy inny powód, także w połączeniu, daje
   `needs-review` plus podkategorię na każdy powód (mejl może mieć kilka).
+- Przeczytane oznaczamy tam, gdzie sprawa jest zamknięta: `added` i każde
+  `rejected/*`. `needs-review/*` i `old-app/to-reply` zostają nieprzeczytane —
+  jedne czekają na Twoją decyzję, drugie na odpowiedź.
 - `label added` dotyka wyłącznie mejli z `ready-to-add` **i** `auto`. Twoje ręczne
   „ready-to-add” czekają na Ciebie jak dotąd.
 

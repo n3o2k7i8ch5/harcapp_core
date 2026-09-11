@@ -390,8 +390,14 @@ Future<void> _batchByLabels(
         .add(e.key);
   }
   for (final (labels, ids) in groups.values) {
+    if (!add) {
+      await mailbox.batchModify(ids, remove: labels);
+      continue;
+    }
+    // Werdykt domykający sprawę zdejmuje też „nieprzeczytane”.
     await mailbox.batchModify(ids,
-        add: add ? labels : null, remove: add ? null : labels);
+        add: labels,
+        remove: labels.any(isClosedLabel) ? const ['UNREAD'] : null);
   }
 }
 
@@ -484,7 +490,7 @@ Future<int> _labelReviewed(ArgResults cmd) async {
   }
   // `auto` zostaje — to automat tę piosenkę zaproponował.
   await mailbox.batchModify(todo,
-      add: [kLabelRejectedAfterReview], remove: [kLabelReady]);
+      add: [kLabelRejectedAfterReview], remove: [kLabelReady, 'UNREAD']);
   stdout.writeln('Odrzucono po przeglądzie: ${todo.length} mejli.');
   if (todo.length < msgIds.length) {
     stdout.writeln('Pominięto ${msgIds.length - todo.length} mejli '

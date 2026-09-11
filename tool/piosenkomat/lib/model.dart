@@ -61,6 +61,13 @@ final List<String> kAllSongLabels = [...kToolLabels, ...kHumanOnlyLabels];
 /// `song` albo cokolwiek pod `song/` — mejl z taką etykietą nie jest już w kolejce.
 bool isSongLabel(String label) => label == 'song' || label.startsWith('song/');
 
+/// Etykiety stanu, po których nic już od Ciebie nie zależy: piosenka weszła
+/// albo odpadła na dobre. Takie mejle oznaczamy jako przeczytane, żeby nie
+/// wisiały w skrzynce. `needs-review/*` i `old-app/to-reply` zostają
+/// nieprzeczytane — jedne czekają na Twoją decyzję, drugie na odpowiedź.
+bool isClosedLabel(String label) =>
+    label == kLabelDone || label.startsWith('song/rejected');
+
 /// „W pliku” z ręki automatu: tylko takie mejle `label reviewed` i `label added`
 /// mają prawo ruszyć. Twoje ręczne „ready-to-add” zostają nietknięte.
 bool isReadyByTool(Set<String> labels) =>
