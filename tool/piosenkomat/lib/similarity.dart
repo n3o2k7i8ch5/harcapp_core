@@ -31,15 +31,13 @@ class SongBook {
   final List<BookSong> songs;
   final Map<String, List<BookSong>> _byTitle;
 
-  SongBook(this.songs)
-      : _byTitle = {
-          for (final s in songs) s.titleKey: [...?_group(songs, s.titleKey)],
-        };
+  SongBook(this.songs) : _byTitle = {} {
+    for (final s in songs) {
+      _byTitle.putIfAbsent(s.titleKey, () => []).add(s);
+    }
+  }
 
   static SongBook empty = SongBook(const []);
-
-  static List<BookSong>? _group(List<BookSong> all, String key) =>
-      all.where((s) => s.titleKey == key).toList();
 
   List<BookSong> withTitle(String title) => _byTitle[searchableString(title)] ?? const [];
 

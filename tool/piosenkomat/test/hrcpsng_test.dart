@@ -31,12 +31,12 @@ void main() {
   });
 
   test('raport liczy import i powody', () async {
-    final report = formatReport(classifyBatch([
+    final report = formatRunReport(classifyBatch([
       msgFrom(await completeEmail(), id: 'ok'),
       msgFrom(await completeEmail(userMessage: 'pytanie'), id: 'bad'),
     ], book: SongBook.empty));
-    expect(report, contains('IMPORT   1'));
-    expect(report, contains('RĘCZNIE  1'));
+    expect(report, contains('IMPORT          1'));
+    expect(report, contains('RĘCZNIE         1'));
     expect(report, contains('   1  ${SkipReason.hasUserMessage.text}'));
     expect(report, contains('[ok]'));
   });

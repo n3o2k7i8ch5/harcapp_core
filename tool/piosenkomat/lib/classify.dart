@@ -41,8 +41,7 @@ List<Classified> classifyBatch(
     final prev = out[i].verdict;
     final reasons = prev is Manual ? prev.reasons : <SkipReason>[];
     if (reasons.contains(reason)) return;
-    out[i] = Classified(out[i].message, Manual([...reasons, reason], detail: detail),
-        out[i].title, oldApp: out[i].oldApp);
+    out[i] = out[i].withVerdict(Manual([...reasons, reason], detail: detail));
   }
 
   // Ten sam tytuł.

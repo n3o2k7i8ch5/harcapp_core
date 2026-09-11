@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 
+import 'hrcpsng.dart';
 import 'plan.dart';
 import 'similarity.dart';
 
@@ -66,8 +66,6 @@ class ReviewResult {
         for (final e in _byMsg(rejected).entries)
           if (!partial.containsKey(e.key)) e.key,
       ];
-
-  int get proposedCount => accepted.length + rejected.length;
 }
 
 Map<String, List<ProposedSong>> _byMsg(List<ProposedSong> songs) {
@@ -208,9 +206,7 @@ void writeReviewLedger(
   required String reviewedPath,
   required ReviewResult result,
 }) {
-  final file = File(path);
-  file.parent.createSync(recursive: true);
-  file.writeAsStringSync(const JsonEncoder.withIndent('  ').convert({
+  writeText(path, const JsonEncoder.withIndent('  ').convert({
     'created_at': DateTime.now().toIso8601String(),
     'reviewed': reviewedPath,
     'songs': [

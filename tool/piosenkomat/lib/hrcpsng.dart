@@ -57,10 +57,14 @@ String encodeHrcpsng(List<SongRaw> songs) {
   return jsonEncode({'official': official, 'conf': <String, dynamic>{}});
 }
 
-void writeHrcpsng(String path, List<SongRaw> songs) {
+void writeHrcpsng(String path, List<SongRaw> songs) =>
+    writeText(path, encodeHrcpsng(songs));
+
+/// Zapis z założeniem katalogów po drodze — każdy plik przebiegu tak ląduje.
+void writeText(String path, String text) {
   final file = File(path);
   file.parent.createSync(recursive: true);
-  file.writeAsStringSync(encodeHrcpsng(songs));
+  file.writeAsStringSync(text);
 }
 
 /// Piosenki z pliku `.hrcpsng`, tym samym parserem, co strona.

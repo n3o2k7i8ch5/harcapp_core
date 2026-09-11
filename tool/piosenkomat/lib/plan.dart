@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'hrcpsng.dart';
 import 'model.dart';
 
 /// Piosenka, którą automat wstawił do pliku. Wiąże wpis w `.hrcpsng`
@@ -89,11 +90,8 @@ class LabelPlan {
       );
 }
 
-void writePlan(String path, LabelPlan plan) {
-  final file = File(path);
-  file.parent.createSync(recursive: true);
-  file.writeAsStringSync(const JsonEncoder.withIndent('  ').convert(plan.toJson()));
-}
+void writePlan(String path, LabelPlan plan) =>
+    writeText(path, const JsonEncoder.withIndent('  ').convert(plan.toJson()));
 
 LabelPlan readPlan(String path) {
   final file = File(path);

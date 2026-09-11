@@ -17,33 +17,18 @@ Future<int> runPiosenkomat(List<String> args) async {
   final parser = ArgParser()
     ..addFlag('help', abbr: 'h', negatable: false, help: 'Pomoc');
 
-  final scan = parser.addCommand('scan')
-    ..addOption('limit',
-        abbr: 'n', help: 'Ile mejli z kolejki (domyślnie wszystkie)')
-    ..addFlag('newest',
-        negatable: false, help: 'Najnowsze N zamiast najstarszych')
-    ..addOption('out',
-        abbr: 'o',
-        help: 'Katalog przebiegu (domyślnie out/import-<data>)')
-    ..addOption('query', help: 'Własne query Gmaila zamiast kolejki');
+  // `scan` do Gmaila nie pisze, więc jako jedyna komenda nie ma `--write`.
+  final scan = parser.addCommand('scan');
+  _scanOptions(scan);
   _addCommon(scan);
-  // `scan` do Gmaila nie pisze. Flaga siedzi tu wyłącznie dla aliasu
-  // `process --apply`, który etykietował od razu po przesiewie.
-  _addWrite(scan, hidden: true);
 
   final label = parser.addCommand('label');
   final labelScanned = label.addCommand('scanned');
   _addCommon(labelScanned);
   _addWrite(labelScanned, help: 'Nadaj etykiety (bez tej flagi tylko lista)');
 
-  final labelReviewed = label.addCommand('reviewed')
-    ..addOption('reviewed',
-        help: 'Plik po przeglądzie (domyślnie reviewed.hrcpsng w katalogu)')
-    // Nazwa sprzed przemianowania pliku.
-    ..addOption('approved', hide: true)
-    ..addFlag('force',
-        negatable: false,
-        help: 'Pomiń bezpieczniki (pusty plik, odrzucona większość)');
+  final labelReviewed = label.addCommand('reviewed');
+  _reviewedOptions(labelReviewed);
   _addCommon(labelReviewed);
   _addWrite(labelReviewed,
       help: 'Zmień etykiety odrzuconych (bez tej flagi tylko lista)');
@@ -52,45 +37,25 @@ Future<int> runPiosenkomat(List<String> args) async {
   _addCommon(labelAdded);
   _addWrite(labelAdded, help: 'Zmień etykiety w Gmailu (bez tej flagi lista)');
 
-  final unlabel = parser.addCommand('unlabel')
-    ..addFlag('force',
-        negatable: false,
-        help: 'Zdejmij też z mejli, których stan zmienił się po przebiegu');
+  final unlabel = parser.addCommand('unlabel');
+  _unlabelOptions(unlabel);
   _addCommon(unlabel);
   _addWrite(unlabel, help: 'Zdejmij etykiety (bez tej flagi tylko lista)');
 
-  final reply = parser.addCommand('reply')
-    ..addOption('limit',
-        abbr: 'n', help: 'Ilu autorom odpisać w tym przebiegu')
-    ..addOption('query', help: 'Własne query Gmaila zamiast kolejki odpowiedzi');
+  final reply = parser.addCommand('reply');
+  _replyOptions(reply);
   _addCommon(reply);
   _addWrite(reply, help: 'Wyślij (bez tej flagi tylko lista)');
 
   final explain = parser.addCommand('explain');
   _addCommon(explain);
 
-  // Stare nazwy: działają po cichu, nie ma ich w pomocy.
-  for (final old in _aliases.keys) {
-    final a = parser.addCommand(old);
-    switch (_aliases[old]!) {
-      case 'scan':
-        a
-          ..addOption('limit', abbr: 'n')
-          ..addFlag('newest', negatable: false)
-          ..addOption('out', abbr: 'o')
-          ..addOption('query');
-      case 'label reviewed':
-        a
-          ..addOption('approved')
-          ..addOption('reviewed')
-          ..addFlag('force', negatable: false);
-      case 'unlabel':
-        a.addFlag('force', negatable: false);
-      case 'reply':
-        a
-          ..addOption('limit', abbr: 'n')
-          ..addOption('query');
-    }
+  // Stare nazwy: działają po cichu, nie ma ich w pomocy. Dostają `--write`
+  // nawet tam, gdzie dzisiejsza komenda go nie ma (`process --apply`), żeby
+  // stare notatki nie wywalały się na parserze.
+  for (final e in _aliases.entries) {
+    final a = parser.addCommand(e.key);
+    _optionsOf[e.value]?.call(a);
     _addCommon(a);
     _addWrite(a, hidden: true);
   }
@@ -142,7 +107,16 @@ Future<int> runPiosenkomat(List<String> args) async {
   } on FileSystemException catch (e) {
     stderr.writeln('${e.message}: ${e.path}');
     return 1;
+  } on _UsageError catch (e) {
+    stderr.writeln(e.message);
+    return 64;
   }
+}
+
+/// Zły argument: komunikat i kod 64, jak przy błędzie parsera.
+class _UsageError implements Exception {
+  final String message;
+  const _UsageError(this.message);
 }
 
 /// Nazwy sprzed przemianowania → dzisiejsze komendy.
@@ -153,6 +127,40 @@ const Map<String, String> _aliases = {
   'commit': 'label added',
   'unapply': 'unlabel',
   'check': 'explain',
+};
+
+/// Opcje komend, wspólne dla nazwy dzisiejszej i aliasu.
+void _scanOptions(ArgParser p) => p
+  ..addOption('limit',
+      abbr: 'n', help: 'Ile mejli z kolejki (domyślnie wszystkie)')
+  ..addFlag('newest',
+      negatable: false, help: 'Najnowsze N zamiast najstarszych')
+  ..addOption('out',
+      abbr: 'o', help: 'Katalog przebiegu (domyślnie out/import-<data>)')
+  ..addOption('query', help: 'Własne query Gmaila zamiast kolejki');
+
+void _reviewedOptions(ArgParser p) => p
+  ..addOption('reviewed',
+      help: 'Plik po przeglądzie (domyślnie reviewed.hrcpsng w katalogu)')
+  // Nazwa sprzed przemianowania pliku.
+  ..addOption('approved', hide: true)
+  ..addFlag('force',
+      negatable: false,
+      help: 'Pomiń bezpieczniki (pusty plik, odrzucona większość)');
+
+void _unlabelOptions(ArgParser p) => p.addFlag('force',
+    negatable: false,
+    help: 'Zdejmij też z mejli, których stan zmienił się po przebiegu');
+
+void _replyOptions(ArgParser p) => p
+  ..addOption('limit', abbr: 'n', help: 'Ilu autorom odpisać w tym przebiegu')
+  ..addOption('query', help: 'Własne query Gmaila zamiast kolejki odpowiedzi');
+
+const Map<String, void Function(ArgParser)> _optionsOf = {
+  'scan': _scanOptions,
+  'label reviewed': _reviewedOptions,
+  'unlabel': _unlabelOptions,
+  'reply': _replyOptions,
 };
 
 /// `--write` to jedyna flaga, która pozwala cokolwiek zmienić w Gmailu.
@@ -169,17 +177,20 @@ void _addCommon(ArgParser p) => p
   ..addOption('credentials', help: 'Domyślnie secrets/credentials.json')
   ..addOption('token', help: 'Domyślnie secrets/gmail_token.json');
 
-Future<int> _scan(ArgResults cmd) async {
-  final write = _write(cmd);
-  final newest = cmd['newest'] as bool;
-  int? limit;
-  if (cmd['limit'] != null) {
-    limit = int.tryParse(cmd['limit'] as String);
-    if (limit == null || limit <= 0) {
-      stderr.writeln('--limit wymaga liczby dodatniej.');
-      return 64;
-    }
+/// `-n`: liczba dodatnia albo brak.
+int? _limit(ArgResults cmd) {
+  final raw = cmd['limit'] as String?;
+  if (raw == null) return null;
+  final limit = int.tryParse(raw);
+  if (limit == null || limit <= 0) {
+    throw const _UsageError('--limit wymaga liczby dodatniej.');
   }
+  return limit;
+}
+
+Future<int> _scan(ArgResults cmd) async {
+  final newest = cmd['newest'] as bool;
+  final limit = _limit(cmd);
 
   final book = _loadBook(cmd);
   final mailbox = await _connect(cmd);
@@ -206,8 +217,9 @@ Future<int> _scan(ArgResults cmd) async {
   }
 
   final classified = classifyBatch(messages, book: book);
+  final report = formatRunReport(classified);
   stdout.writeln();
-  stdout.write(formatReport(classified));
+  stdout.write(report);
 
   final imports = [
     for (final c in classified)
@@ -219,7 +231,7 @@ Future<int> _scan(ArgResults cmd) async {
   final reportPath = reportPathIn(outDir);
   final plan = LabelPlan.fromClassified(classified, songsPath);
   writePlan(planPath, plan);
-  writeReport(reportPath, formatRunReport(classified));
+  writeText(reportPath, report);
   if (imports.isNotEmpty) {
     writeHrcpsng(songsPath, imports);
     stdout.writeln('\nZapisano ${imports.length} piosenek → $songsPath');
@@ -247,14 +259,8 @@ Future<int> _scan(ArgResults cmd) async {
   stdout.writeln('Katalog: $outDir');
   stdout.writeln('Raport: $reportPath');
   stdout.writeln('Plan etykiet: $planPath');
-  if (!write) {
-    stdout.writeln('Gmail nietknięty — `scan` tylko czyta. Etykiety jak '
-        'w raporcie nada: ./piosenkomat label scanned $outDir --write');
-    return 0;
-  }
-  await _applyPlan(mailbox, plan, alreadyLabeled: {
-    for (final m in messages) if (m.hasSongLabel) m.id,
-  });
+  stdout.writeln('Gmail nietknięty — `scan` tylko czyta. Etykiety jak '
+      'w raporcie nada: ./piosenkomat label scanned $outDir --write');
   return 0;
 }
 
@@ -265,17 +271,8 @@ Future<int> _labelScanned(ArgResults cmd) async {
   final planPath = _planPath(cmd);
   if (planPath == null) return 64;
   final plan = readPlan(planPath);
-  stdout.writeln('Plan z ${plan.createdAt.toLocal().toIso8601String().substring(0, 16)}: '
-      '${plan.labelsById.length} mejli, plik piosenek ${plan.hrcpsngPath}');
-  final counts = <String, int>{};
-  for (final labels in plan.labelsById.values) {
-    for (final l in labels) {
-      counts[l] = (counts[l] ?? 0) + 1;
-    }
-  }
-  for (final e in counts.entries.toList()..sort((a, b) => a.key.compareTo(b.key))) {
-    stdout.writeln('  ${e.value.toString().padLeft(4)}  ${e.key}');
-  }
+  stdout.writeln('${_planHeader(plan)}, plik piosenek ${plan.hrcpsngPath}');
+  _countLines(stdout, _tally(plan.labelsById.values.expand((l) => l)));
   if (!_write(cmd)) {
     stdout.writeln('\nDry-run: Gmail nietknięty. --write nada powyższe.');
     return 0;
@@ -284,7 +281,7 @@ Future<int> _labelScanned(ArgResults cmd) async {
   stdout.writeln('Sprawdzam aktualne etykiety ${plan.labelsById.length} mejli…');
   final alreadyLabeled = <String>{};
   for (final id in plan.labelsById.keys) {
-    if (await mailbox.hasAnyLabel(id, prefix: 'song')) alreadyLabeled.add(id);
+    if ((await mailbox.labelsOf(id)).any(isSongLabel)) alreadyLabeled.add(id);
   }
   await _applyPlan(mailbox, plan, alreadyLabeled: alreadyLabeled);
   return 0;
@@ -302,19 +299,16 @@ Future<int> _unlabel(ArgResults cmd) async {
   if (planPath == null) return 64;
   final plan = readPlan(planPath);
   final force = cmd['force'] as bool;
-  stdout.writeln('Plan z ${plan.createdAt.toLocal().toIso8601String().substring(0, 16)}: '
-      '${plan.labelsById.length} mejli, sprawdzam aktualne etykiety…');
+  stdout.writeln('${_planHeader(plan)}, sprawdzam aktualne etykiety…');
 
   final mailbox = await _connect(cmd);
   final toRemove = <String, List<String>>{};
-  final counts = <String, int>{};
   var untouched = 0;
   var movedOn = 0;
   for (final e in plan.labelsById.entries) {
     final current = await mailbox.labelsOf(e.key);
     final planned = e.value.toSet();
-    final moved = current.any((l) =>
-        (l == 'song' || l.startsWith('song/')) && !planned.contains(l));
+    final moved = current.any((l) => isSongLabel(l) && !planned.contains(l));
     if (moved && !force) {
       movedOn++;
       continue;
@@ -325,9 +319,6 @@ Future<int> _unlabel(ArgResults cmd) async {
       continue;
     }
     toRemove[e.key] = hit;
-    for (final l in hit) {
-      counts[l] = (counts[l] ?? 0) + 1;
-    }
   }
 
   if (toRemove.isEmpty) {
@@ -335,9 +326,7 @@ Future<int> _unlabel(ArgResults cmd) async {
     return 0;
   }
   stdout.writeln('Do zdjęcia z ${toRemove.length} mejli:');
-  for (final c in counts.entries.toList()..sort((a, b) => a.key.compareTo(b.key))) {
-    stdout.writeln('  ${c.value.toString().padLeft(4)}  ${c.key}');
-  }
+  _countLines(stdout, _tally(toRemove.values.expand((l) => l)));
   if (untouched > 0) {
     stdout.writeln('${untouched} mejli już bez etykiet z planu.');
   }
@@ -363,7 +352,7 @@ Future<void> _applyPlan(
   required Set<String> alreadyLabeled,
 }) async {
   await mailbox.ensureToolLabels();
-  final counts = <String, int>{};
+  final applied = <String>[];
   var skipped = 0;
   for (final e in plan.labelsById.entries) {
     if (alreadyLabeled.contains(e.key)) {
@@ -371,20 +360,19 @@ Future<void> _applyPlan(
       continue;
     }
     await mailbox.addLabels(e.key, e.value);
-    for (final l in e.value) {
-      counts[l] = (counts[l] ?? 0) + 1;
-    }
+    applied.addAll(e.value);
   }
   stdout.writeln('Nadano:');
-  for (final c in counts.entries.toList()..sort((a, b) => a.key.compareTo(b.key))) {
-    stdout.writeln('  ${c.value.toString().padLeft(4)}  ${c.key}');
-  }
+  _countLines(stdout, _tally(applied));
   if (skipped > 0) {
     stdout.writeln('Pominięto $skipped mejli, które już miały etykietę song/*.');
   }
-  stdout.writeln('Po przeglądzie na stronie podmień approved.hrcpsng, potem '
+  stdout.writeln('Po przeglądzie na stronie podmień reviewed.hrcpsng, potem '
       './piosenkomat label reviewed --write i ./piosenkomat label added --write');
 }
+
+String _planHeader(LabelPlan plan) =>
+    'Plan z ${_minute(plan.createdAt)}: ${plan.labelsById.length} mejli';
 
 Future<int> _labelAdded(ArgResults cmd) async {
   final write = _write(cmd);
@@ -394,7 +382,7 @@ Future<int> _labelAdded(ArgResults cmd) async {
   for (final id in ids) {
     final m = await mailbox.getMessage(id);
     // Bezpiecznik: tylko to, co automat sam wstawił do pliku.
-    if (!m.labels.contains(kLabelReady) || !m.labels.contains(kLabelAuto)) continue;
+    if (!isReadyByTool(m.labels)) continue;
     ready.add(m);
     stdout.writeln('  ${m.subject ?? ''}  ${emailFromHeader(m.from) ?? ''}  [$id]');
   }
@@ -436,7 +424,58 @@ Future<int> _labelReviewed(ArgResults cmd) async {
   final result = reviewDiff(proposed: proposed, reviewed: reviewed);
   final reviewPath = reviewPathIn(outDir);
   writeReviewLedger(reviewPath, reviewedPath: reviewedPath, result: result);
+  _printReview(result);
+  stdout.writeln('Ślad przeglądu: $reviewPath');
 
+  // Bezpieczniki na zły plik: pusty eksport i „odrzucona większość” prawie
+  // zawsze znaczą, że podmieniony został nie ten plik, co trzeba.
+  if (!force && reviewed.isEmpty) {
+    stderr.writeln('\n$reviewedPath jest pusty — to wygląda na pomyłkę. '
+        'Jeśli naprawdę odrzucasz wszystko: --force.');
+    return 1;
+  }
+  if (!force && result.rejected.length * 2 > proposed.length) {
+    stderr.writeln('\nOdrzucone to ponad połowa przebiegu '
+        '(${result.rejected.length}/${proposed.length}) — sprawdź, czy podmieniłeś '
+        'właściwy plik. Jeśli tak ma być: --force.');
+    return 1;
+  }
+
+  final msgIds = result.rejectedMsgIds;
+  if (msgIds.isEmpty) {
+    stdout.writeln('\nNic do odetykietowania. Dalej: ./piosenkomat label added --write');
+    return 0;
+  }
+  if (!_write(cmd)) {
+    stdout.writeln('\nDry-run: Gmail nietknięty. --write zdejmie „$kLabelReady” '
+        'i nada „$kLabelRejectedAfterReview” na ${msgIds.length} mejlach.');
+    return 0;
+  }
+
+  final mailbox = await _connect(cmd);
+  await mailbox.ensureToolLabels();
+  var done = 0;
+  var skipped = 0;
+  for (final id in msgIds) {
+    // Bezpiecznik jak w `label added`: ruszamy tylko to, co automat sam
+    // wstawił do pliku i co dalej tam czeka.
+    if (!isReadyByTool(await mailbox.labelsOf(id))) {
+      skipped++;
+      continue;
+    }
+    await mailbox.rejectAfterReview(id);
+    done++;
+  }
+  stdout.writeln('Odrzucono po przeglądzie: $done mejli.');
+  if (skipped > 0) {
+    stdout.writeln('Pominięto $skipped mejli bez „$kLabelReady” + „$kLabelAuto”.');
+  }
+  stdout.writeln('Dalej: ./piosenkomat label added --write');
+  return 0;
+}
+
+/// Co weszło, co wypadło, co rozpoznane inaczej niż po id mejla.
+void _printReview(ReviewResult result) {
   stdout.writeln();
   stdout.writeln('ZOSTAJE   ${result.accepted.length}');
   stdout.writeln('ODRZUCONE ${result.rejected.length}');
@@ -474,54 +513,6 @@ Future<int> _labelReviewed(ArgResults cmd) async {
     stdout.writeln('UWAGA: z mejla [${e.key}] część piosenek weszła, a część nie '
         '(${e.value.map((s) => s.title).join(', ')}). Etykiety zostawiam Tobie.');
   }
-  stdout.writeln('Ślad przeglądu: $reviewPath');
-
-  // Bezpieczniki na zły plik: pusty eksport i „odrzucona większość” prawie
-  // zawsze znaczą, że podmieniony został nie ten plik, co trzeba.
-  if (!force && reviewed.isEmpty) {
-    stderr.writeln('\n$reviewedPath jest pusty — to wygląda na pomyłkę. '
-        'Jeśli naprawdę odrzucasz wszystko: --force.');
-    return 1;
-  }
-  if (!force && result.rejected.length * 2 > proposed.length) {
-    stderr.writeln('\nOdrzucone to ponad połowa przebiegu '
-        '(${result.rejected.length}/${proposed.length}) — sprawdź, czy podmieniłeś '
-        'właściwy plik. Jeśli tak ma być: --force.');
-    return 1;
-  }
-
-  final msgIds = result.rejectedMsgIds;
-  if (msgIds.isEmpty) {
-    stdout.writeln('\nNic do odetykietowania. Dalej: ./piosenkomat label added --write');
-    return 0;
-  }
-  if (!_write(cmd)) {
-    stdout.writeln('\nDry-run: Gmail nietknięty. --write zdejmie „$kLabelReady” '
-        'i nada „$kLabelRejectedAfterReview” na ${msgIds.length} mejlach.');
-    return 0;
-  }
-
-  final mailbox = await _connect(cmd);
-  await mailbox.ensureToolLabels();
-  var done = 0;
-  var skipped = 0;
-  for (final id in msgIds) {
-    // Bezpiecznik jak w `commit`: ruszamy tylko to, co automat sam wstawił
-    // do pliku i co dalej tam czeka.
-    final labels = await mailbox.labelsOf(id);
-    if (!labels.contains(kLabelReady) || !labels.contains(kLabelAuto)) {
-      skipped++;
-      continue;
-    }
-    await mailbox.rejectAfterReview(id);
-    done++;
-  }
-  stdout.writeln('Odrzucono po przeglądzie: $done mejli.');
-  if (skipped > 0) {
-    stdout.writeln('Pominięto $skipped mejli bez „$kLabelReady” + „$kLabelAuto”.');
-  }
-  stdout.writeln('Dalej: ./piosenkomat label added --write');
-  return 0;
 }
 
 /// `reply [--apply]`: autorom ze starej apki wiadomość, żeby ją zaktualizowali.
@@ -535,14 +526,7 @@ Future<int> _labelReviewed(ArgResults cmd) async {
 /// apki, dostaje jeden mejl w najnowszym wątku, a etykieta schodzi ze wszystkich.
 Future<int> _reply(ArgResults cmd) async {
   final write = _write(cmd);
-  int? limit;
-  if (cmd['limit'] != null) {
-    limit = int.tryParse(cmd['limit'] as String);
-    if (limit == null || limit <= 0) {
-      stderr.writeln('--limit wymaga liczby dodatniej.');
-      return 64;
-    }
-  }
+  final limit = _limit(cmd);
 
   final mailbox = await _connect(cmd);
   final query = cmd['query'] as String? ??
@@ -691,116 +675,79 @@ Future<GmailMailbox> _connect(ArgResults cmd) => GmailMailbox.connect(
       tokenFile: File(cmd['token'] as String? ?? defaultTokenPath()),
     );
 
-void writeReport(String path, String text) {
-  final file = File(path);
-  file.parent.createSync(recursive: true);
-  file.writeAsStringSync(text);
-}
+String _minute(DateTime d) => d.toLocal().toIso8601String().substring(0, 16);
+String _day(DateTime d) => d.toLocal().toIso8601String().substring(0, 10);
 
-bool _unparsed(Classified c) =>
-    c.verdict is Manual &&
-    (c.verdict as Manual).reasons.contains(SkipReason.parseError);
-
-bool _autoReject(Classified c) =>
-    c.verdict is Manual && stateLabelsFor(c.verdict).first != kLabelToReview;
-
-/// Raport przebiegu: sparsowane vs nie, powody, wiązki, potem lista jak w konsoli.
-String formatRunReport(List<Classified> items) {
-  final imports = items.where((c) => c.isImport).toList();
-  final manual = items.where((c) => !c.isImport).toList();
-  final unparsed = [for (final c in manual) if (_unparsed(c)) c];
-  final parsedSkip = [for (final c in manual) if (!_unparsed(c)) c];
-  final rejected = [for (final c in manual) if (_autoReject(c)) c];
-  final review = manual.length - rejected.length;
-
-  final buf = StringBuffer()
-    ..writeln('SKLASYFIKOWANO  ${items.length}')
-    ..writeln('SPARSOWANE      ${items.length - unparsed.length}')
-    ..writeln('NIE SPARSOWANE  ${unparsed.length}')
-    ..writeln('IMPORT          ${imports.length}')
-    ..writeln('ODRZUĆ          ${rejected.length}')
-    ..writeln('RĘCZNIE         $review')
-    ..writeln('STARA APKA      ${items.where((c) => c.oldApp).length}'
-        '  (do odpisania: ./piosenkomat reply)');
-
-  if (parsedSkip.isNotEmpty) {
-    final any = <SkipReason, int>{};
-    final only = <SkipReason, int>{};
-    final bundles = <String, int>{};
-    for (final c in parsedSkip) {
-      final reasons = (c.verdict as Manual).reasons;
-      for (final r in reasons) {
-        any[r] = (any[r] ?? 0) + 1;
-      }
-      if (reasons.length == 1) {
-        only[reasons.single] = (only[reasons.single] ?? 0) + 1;
-      } else {
-        final key = reasons.map((r) => r.text).join('; ');
-        bundles[key] = (bundles[key] ?? 0) + 1;
-      }
-    }
-    buf.writeln();
-    buf.writeln('Powody sparsowanych (mejl może mieć kilka):');
-    _countLines(buf, {
-      for (final e in any.entries) e.key.text: e.value,
-    });
-    if (only.isNotEmpty) {
-      buf.writeln('Tylko ten powód:');
-      _countLines(buf, {
-        for (final e in only.entries) e.key.text: e.value,
-      });
-    }
-    if (bundles.isNotEmpty) {
-      buf.writeln('Wiązki (więcej niż jeden powód):');
-      _countLines(buf, bundles);
-    }
+Map<String, int> _tally(Iterable<String> keys) {
+  final counts = <String, int>{};
+  for (final k in keys) {
+    counts[k] = (counts[k] ?? 0) + 1;
   }
-
-  buf.write(formatReport(items, summary: false));
-  return buf.toString();
+  return counts;
 }
 
-void _countLines(StringBuffer buf, Map<String, int> counts) {
+/// Wiersze `  liczba  klucz`, po kluczu; [byCount] daje najliczniejsze pierwsze.
+void _countLines(StringSink out, Map<String, int> counts, {bool byCount = false}) {
   final rows = counts.entries.toList()
     ..sort((a, b) {
-      final byCount = b.value.compareTo(a.value);
-      return byCount != 0 ? byCount : a.key.compareTo(b.key);
+      final c = byCount ? b.value.compareTo(a.value) : 0;
+      return c != 0 ? c : a.key.compareTo(b.key);
     });
   for (final e in rows) {
-    buf.writeln('  ${e.value.toString().padLeft(4)}  ${e.key}');
+    out.writeln('  ${e.value.toString().padLeft(4)}  ${e.key}');
   }
 }
 
-/// `summary: false` pomija nagłówek IMPORT/RĘCZNIE — [formatRunReport] ma
-/// własny, liczony inaczej (bez auto-odrzuconych), więc dwa naraz kłamią.
-String formatReport(List<Classified> items, {bool summary = true}) {
+bool _unparsed(Classified c) => switch (c.verdict) {
+      Manual(:final reasons) => reasons.contains(SkipReason.parseError),
+      _ => false,
+    };
+
+/// Raport przebiegu (konsola i `report.txt`): liczby, powody i wiązki
+/// sparsowanych, potem lista mejli z werdyktem i etykietami.
+String formatRunReport(List<Classified> items) {
   final imports = items.where((c) => c.isImport).toList()
     ..sort((a, b) => (a.message.date ?? DateTime(0))
         .compareTo(b.message.date ?? DateTime(0)));
-  final manual = items.where((c) => !c.isImport).toList();
+  final manual = [for (final c in items) if (c.verdict case Manual()) c];
+  final unparsed = manual.where(_unparsed).length;
+  final rejected =
+      manual.where((c) => (c.verdict as Manual).isAutoReject).length;
 
-  final buf = StringBuffer();
-  if (summary) {
-    buf
-      ..writeln('IMPORT   ${imports.length}')
-      ..writeln('RĘCZNIE  ${manual.length}');
-  }
+  final buf = StringBuffer()
+    ..writeln('SKLASYFIKOWANO  ${items.length}')
+    ..writeln('SPARSOWANE      ${items.length - unparsed}')
+    ..writeln('NIE SPARSOWANE  $unparsed')
+    ..writeln('IMPORT          ${imports.length}')
+    ..writeln('ODRZUĆ          $rejected')
+    ..writeln('RĘCZNIE         ${manual.length - rejected}')
+    ..writeln('STARA APKA      ${items.where((c) => c.oldApp).length}'
+        '  (do odpisania: ./piosenkomat reply)');
 
-  final counts = <SkipReason, int>{};
-  for (final c in manual) {
-    for (final r in (c.verdict as Manual).reasons) {
-      counts[r] = (counts[r] ?? 0) + 1;
+  final reasonsOf = [
+    for (final c in manual)
+      if (!_unparsed(c)) (c.verdict as Manual).reasons.map((r) => r.text).toList(),
+  ];
+  if (reasonsOf.isNotEmpty) {
+    buf.writeln();
+    buf.writeln('Powody sparsowanych (mejl może mieć kilka):');
+    _countLines(buf, _tally(reasonsOf.expand((r) => r)), byCount: true);
+    final only = _tally([for (final r in reasonsOf) if (r.length == 1) r.single]);
+    if (only.isNotEmpty) {
+      buf.writeln('Tylko ten powód:');
+      _countLines(buf, only, byCount: true);
     }
-  }
-  final rows = counts.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
-  for (final e in rows) {
-    buf.writeln('  ${e.value.toString().padLeft(4)}  ${e.key.text}');
+    final bundles = _tally([for (final r in reasonsOf) if (r.length > 1) r.join('; ')]);
+    if (bundles.isNotEmpty) {
+      buf.writeln('Wiązki (więcej niż jeden powód):');
+      _countLines(buf, bundles, byCount: true);
+    }
   }
 
   if (imports.isNotEmpty) buf.writeln();
   for (final c in imports) {
     final v = c.verdict as Import;
-    final date = c.message.date?.toLocal().toIso8601String().substring(0, 10) ?? '';
+    final date = c.message.date == null ? '' : _day(c.message.date!);
     buf.writeln('IMPORT   ${c.title}  ${v.sender}  $date  [${c.message.id}]'
         '${c.oldApp ? '  (stara apka)' : ''}');
   }
@@ -808,12 +755,12 @@ String formatReport(List<Classified> items, {bool summary = true}) {
   for (final c in manual) {
     final v = c.verdict as Manual;
     final labels = stateLabelsFor(v);
-    final review = labels.first == kLabelToReview;
-    final tag = review ? 'RĘCZNIE ' : 'ODRZUĆ  ';
+    final tag = v.isAutoReject ? 'ODRZUĆ  ' : 'RĘCZNIE ';
     buf.writeln('$tag ${c.title}  [${c.message.id}]  '
         '${v.reasons.map((r) => r.text).join('; ')}'
         '${c.oldApp ? '  (stara apka)' : ''}');
-    buf.writeln('         → ${(review ? labels.skip(1) : labels).join(', ')}'
+    // Przy przeglądzie sama `needs-review` nic nie mówi — liczą się podkategorie.
+    buf.writeln('         → ${(v.isAutoReject ? labels : labels.skip(1)).join(', ')}'
         '${c.oldApp ? ', $kLabelOldAppToReply' : ''}');
     if (v.detail != null) {
       buf.writeln('         ${v.detail!.split('\n').first}');

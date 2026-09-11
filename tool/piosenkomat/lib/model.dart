@@ -58,6 +58,14 @@ const List<String> kHumanOnlyLabels = [
 
 final List<String> kAllSongLabels = [...kToolLabels, ...kHumanOnlyLabels];
 
+/// `song` albo cokolwiek pod `song/` — mejl z taką etykietą nie jest już w kolejce.
+bool isSongLabel(String label) => label == 'song' || label.startsWith('song/');
+
+/// „W pliku” z ręki automatu: tylko takie mejle `label reviewed` i `label added`
+/// mają prawo ruszyć. Twoje ręczne „ready-to-add” zostają nietknięte.
+bool isReadyByTool(Set<String> labels) =>
+    labels.contains(kLabelReady) && labels.contains(kLabelAuto);
+
 /// Gmail w `label:` zamienia spacje na myślniki.
 String labelQueryName(String label) => label.replaceAll(' ', '-');
 
@@ -139,7 +147,7 @@ class ContribMessage {
     this.songAttachment,
   });
 
-  bool get hasSongLabel => labels.any((l) => l == 'song' || l.startsWith('song/'));
+  bool get hasSongLabel => labels.any(isSongLabel);
 
   /// Czy to w ogóle zgłoszenie piosenki (po temacie albo treści).
   bool get isSongSubmission =>
@@ -190,6 +198,9 @@ class Manual extends Verdict {
   final List<SkipReason> reasons;
   final String? detail;
   const Manual(this.reasons, {this.detail});
+
+  /// Automat odrzuca sam tylko wtedy, gdy JEDYNE powody są z [kAutoReject].
+  bool get isAutoReject => reasons.every(kAutoReject.contains);
 }
 
 class Classified {
@@ -205,6 +216,9 @@ class Classified {
 
   bool get isImport => verdict is Import;
 
+  Classified withVerdict(Verdict verdict) =>
+      Classified(message, verdict, title, oldApp: oldApp);
+
   /// Etykiety stanu plus kolejka odpowiedzi, jeśli mejl jest ze starej apki.
   List<String> get labels => [
         ...stateLabelsFor(verdict),
@@ -213,14 +227,14 @@ class Classified {
 }
 
 /// Etykiety stanu, jakie nadaje automat (zawsze razem z `song/auto`).
-/// Odrzuca sam tylko wtedy, gdy JEDYNE powody są z [kAutoReject].
-/// W innym razie `needs-review` plus podkategoria na każdy powód.
+/// Odrzucenie tylko przy [Manual.isAutoReject], w innym razie `needs-review`
+/// plus podkategoria na każdy powód.
 List<String> stateLabelsFor(Verdict verdict) {
   switch (verdict) {
     case Import():
       return const [kLabelReady];
-    case Manual(:final reasons):
-      if (reasons.every(kAutoReject.contains)) {
+    case Manual(:final reasons, :final isAutoReject):
+      if (isAutoReject) {
         return reasons.contains(SkipReason.alreadyInBook)
             ? const [kLabelRejectedInBook]
             : const [kLabelRejectedDuplicate];

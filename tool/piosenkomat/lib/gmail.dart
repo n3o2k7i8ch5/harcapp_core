@@ -6,6 +6,7 @@ import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
 
+import 'hrcpsng.dart';
 import 'model.dart';
 
 /// `modify` etykietuje, `send` odpisuje autorom ze starej apki. Zmiana tej
@@ -98,10 +99,7 @@ class GmailMailbox {
       if (att.data != null) songAttachment = _decode(att.data!);
       break;
     }
-    final headers = {
-      for (final h in msg.payload?.headers ?? const <MessagePartHeader>[])
-        if (h.name != null && h.value != null) h.name!.toLowerCase(): h.value!,
-    };
+    final headers = _headersOf(msg.payload);
     return ContribMessage(
       id: msg.id ?? id,
       body: _plainText(msg.payload),
@@ -141,10 +139,7 @@ class GmailMailbox {
     final msg = await _call(() => _api.users.messages.get('me', messageId,
         format: 'metadata',
         metadataHeaders: ['From', 'Subject', 'Message-ID', 'References']));
-    final headers = {
-      for (final h in msg.payload?.headers ?? const <MessagePartHeader>[])
-        if (h.name != null && h.value != null) h.name!.toLowerCase(): h.value!,
-    };
+    final headers = _headersOf(msg.payload);
     return ReplyTarget(
       messageId: msg.id ?? messageId,
       threadId: msg.threadId ?? messageId,
@@ -168,14 +163,6 @@ class GmailMailbox {
     return {
       for (final id in msg.labelIds ?? const <String>[]) _nameById[id] ?? id,
     };
-  }
-
-  /// Czy mejl ma już jakąś etykietę zaczynającą się od [prefix]. Tylko metadane.
-  Future<bool> hasAnyLabel(String messageId, {required String prefix}) async {
-    final msg = await _call(() => _api.users.messages.get('me', messageId, format: 'minimal'));
-    return (msg.labelIds ?? const <String>[])
-        .map((id) => _nameById[id] ?? id)
-        .any((n) => n == prefix || n.startsWith('$prefix/'));
   }
 
   Future<void> _loadLabels() async {
@@ -314,6 +301,12 @@ String _plainText(MessagePart? part) {
 
 String _decode(String data) => utf8.decode(base64.decode(base64.normalize(data)));
 
+/// Nagłówki po małych literach: `subject`, `from`, `in-reply-to`…
+Map<String, String> _headersOf(MessagePart? part) => {
+      for (final h in part?.headers ?? const <MessagePartHeader>[])
+        if (h.name != null && h.value != null) h.name!.toLowerCase(): h.value!,
+    };
+
 ClientId _clientIdFromFile(File file) {
   final json = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
   final installed = (json['installed'] ?? json['web']) as Map<String, dynamic>;
@@ -350,8 +343,7 @@ Future<AutoRefreshingAuthClient> _authClient(ClientId id, File tokenFile) async 
     final opener = Platform.isMacOS ? 'open' : 'xdg-open';
     Process.run(opener, [url]).ignore();
   });
-  tokenFile.parent.createSync(recursive: true);
-  tokenFile.writeAsStringSync(jsonEncode({
+  writeText(tokenFile.path, jsonEncode({
     'token_type': client.credentials.accessToken.type,
     'access_token': client.credentials.accessToken.data,
     'expiry': client.credentials.accessToken.expiry.toUtc().toIso8601String(),

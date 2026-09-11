@@ -98,7 +98,9 @@ przebieg, i zostawia w spokoju mejle, które od tamtej pory ruszyły dalej
 (`--force`, żeby i je cofnąć).
 
 Stare nazwy (`process`, `apply`, `review`, `commit`, `unapply`, `check`) oraz flaga
-`--apply` dalej działają jako ciche aliasy, ale nie ma ich w pomocy.
+`--apply` dalej działają jako ciche aliasy, ale nie ma ich w pomocy. Wyjątek:
+`process --apply` już nie etykietuje po przesiewie — `scan` Gmaila tylko czyta,
+etykiety nadaje osobny `label scanned --write`.
 
 ## Stara apka (`reply`)
 

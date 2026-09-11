@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/values/people/data.all.g.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
 
+import 'hrcpsng.dart';
 import 'model.dart';
 
 /// Osoba dodająca z zaimportowanej piosenki, której nie ma jeszcze
@@ -35,9 +34,6 @@ class PeopleReport {
     required this.knownByEmail,
     required this.anonymousByEmail,
   });
-
-  bool get isEmpty =>
-      newContributors.isEmpty && knownByEmail.isEmpty && anonymousByEmail.isEmpty;
 }
 
 /// Zbiera osoby dodające z importów. Nadawca zawsze ląduje w `emails`,
@@ -207,8 +203,5 @@ bool _has(String? s) => s != null && s.trim().isNotEmpty;
 String _str(String s) =>
     "'${s.replaceAll(r'\', r'\\').replaceAll("'", r"\'").replaceAll(r'$', r'\$')}'";
 
-void writePeopleDart(String path, PeopleReport report) {
-  final file = File(path);
-  file.parent.createSync(recursive: true);
-  file.writeAsStringSync(emitPeopleDart(report));
-}
+void writePeopleDart(String path, PeopleReport report) =>
+    writeText(path, emitPeopleDart(report));
