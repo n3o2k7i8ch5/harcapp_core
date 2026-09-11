@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:googleapis/gmail/v1.dart';
 import 'package:googleapis_auth/auth_io.dart';
@@ -9,12 +10,14 @@ import 'package:path/path.dart' as p;
 import 'hrcpsng.dart';
 import 'model.dart';
 
-/// `modify` etykietuje, `send` odpisuje autorom ze starej apki. Zmiana tej
-/// listy unieważnia zapisany token — trzeba zalogować się jeszcze raz.
-final List<String> kGmailScopes = [
-  GmailApi.gmailModifyScope,
-  GmailApi.gmailSendScope,
-];
+/// `modify` etykietuje — bez niego nie zrobi nic. `send` odpisuje autorom ze
+/// starej apki i potrzebuje go wyłącznie `reply`, więc reszta komend nie każe
+/// się logować od nowa, kiedy zapisany token go nie ma.
+const String kScopeModify = GmailApi.gmailModifyScope;
+const String kScopeSend = GmailApi.gmailSendScope;
+
+/// O zgodę prosimy zawsze na komplet — jedno logowanie starcza na wszystko.
+final List<String> kGmailScopes = [kScopeModify, kScopeSend];
 
 String defaultCredentialsPath() => p.join('secrets', 'credentials.json');
 String defaultTokenPath() => p.join('secrets', 'gmail_token.json');
@@ -49,16 +52,20 @@ class GmailMailbox {
     }
   }
 
+  /// [needsSend] tylko dla `reply`: bez niego zapisany token wystarczy,
+  /// gdy ma samo `modify`.
   static Future<GmailMailbox> connect({
     required File credentialsFile,
     required File tokenFile,
+    bool needsSend = false,
   }) async {
     if (!credentialsFile.existsSync()) {
       throw FileSystemException(
           'Brak credentials.json, zobacz README', credentialsFile.path);
     }
     final clientId = _clientIdFromFile(credentialsFile);
-    final mailbox = GmailMailbox(GmailApi(await _authClient(clientId, tokenFile)));
+    final mailbox = GmailMailbox(
+        GmailApi(await _authClient(clientId, tokenFile, needsSend: needsSend)));
     await mailbox._loadLabels();
     return mailbox;
   }
@@ -150,12 +157,13 @@ class GmailMailbox {
     );
   }
 
-  /// Odpowiedź poszła: mejl schodzi z kolejki „do odpisania”.
-  Future<void> markReplied(String messageId) => _modify(
-        messageId,
-        add: [_idByName[kLabelOldAppReplied]!],
-        remove: [_idByName[kLabelOldAppToReply]!],
-      );
+  /// Nagłówki bez treści — do wypisania listy, gdy treść jest niepotrzebna.
+  Future<({String subject, String from})> headersOf(String messageId) async {
+    final msg = await _call(() => _api.users.messages.get('me', messageId,
+        format: 'metadata', metadataHeaders: ['From', 'Subject']));
+    final headers = _headersOf(msg.payload);
+    return (subject: headers['subject'] ?? '', from: headers['from'] ?? '');
+  }
 
   /// Nazwy etykiet mejla. Tylko metadane, bez treści.
   Future<Set<String>> labelsOf(String messageId) async {
@@ -163,6 +171,22 @@ class GmailMailbox {
     return {
       for (final id in msg.labelIds ?? const <String>[]) _nameById[id] ?? id,
     };
+  }
+
+  /// Etykiety `song/*` całej skrzynki: jedno zapytanie na etykietę zamiast
+  /// jednego na mejl. Przy przebiegu z setkami mejli to różnica między
+  /// kilkunastoma strzałami a kilkuset. Mejle bez żadnej `song/*` nie mają klucza.
+  ///
+  /// Bierzemy nazwy prosto ze skrzynki, nie z [kAllSongLabels] — inaczej
+  /// etykieta dorobiona ręcznie poza taksonomią byłaby dla nas niewidzialna.
+  Future<Map<String, Set<String>>> songLabelsByMessage() async {
+    final out = <String, Set<String>>{};
+    for (final name in _idByName.keys.where(isSongLabel).toList()) {
+      for (final id in await listIds('label:${labelQueryName(name)}')) {
+        out.putIfAbsent(id, () => {}).add(name);
+      }
+    }
+    return out;
   }
 
   Future<void> _loadLabels() async {
@@ -190,48 +214,27 @@ class GmailMailbox {
     }
   }
 
-  Future<void> addLabels(String messageId, Iterable<String> names) => _modify(
-        messageId,
-        add: [for (final n in names) _idByName[n]!],
-      );
-
-  /// Zdejmuje etykiety nadane przez pomyłkę (`unapply`). Nazw, których nie ma
-  /// w skrzynce, nie ruszamy — nie ma czego zdejmować.
-  Future<void> removeLabels(String messageId, Iterable<String> names) => _modify(
-        messageId,
-        remove: [
-          for (final n in names)
-            if (_idByName[n] case final id?) id,
-        ],
-      );
-
-  /// Odrzucona po Twoim przeglądzie: schodzi „w pliku”, wchodzi powód.
-  /// `Auto` zostaje, bo to automat ją zaproponował.
-  Future<void> rejectAfterReview(String messageId) => _modify(
-        messageId,
-        add: [_idByName[kLabelRejectedAfterReview]!],
-        remove: [_idByName[kLabelReady]!],
-      );
-
-  /// Gotowa do dodania → Zatwierdzona i dodana, przeczytane. `Auto` zostaje.
-  Future<void> commitReady(String messageId) => _modify(
-        messageId,
-        add: [_idByName[kLabelDone]!],
-        remove: [_idByName[kLabelReady]!, 'UNREAD'],
-      );
-
-  Future<void> _modify(
-    String messageId, {
+  /// Ta sama zmiana na całej paczce mejli: `batchModify` bierze do 1000 naraz.
+  /// Nazw, których w skrzynce nie ma, nie zdejmujemy — nie ma czego.
+  Future<void> batchModify(
+    List<String> messageIds, {
     List<String>? add,
     List<String>? remove,
-  }) =>
-      _call(() => _api.users.messages.modify(
-            ModifyMessageRequest()
-              ..addLabelIds = add
-              ..removeLabelIds = remove,
+  }) async {
+    for (var i = 0; i < messageIds.length; i += 1000) {
+      final chunk = messageIds.sublist(i, min(i + 1000, messageIds.length));
+      await _call(() => _api.users.messages.batchModify(
+            BatchModifyMessagesRequest()
+              ..ids = chunk
+              ..addLabelIds = add == null ? null : [for (final n in add) _idByName[n]!]
+              ..removeLabelIds = remove == null
+                  ? null
+                  : [for (final n in remove) if (_idByName[n] case final id?) id],
             'me',
-            messageId,
           ));
+    }
+  }
+
 }
 
 /// Mejl, na który odpisujemy, wraz z tym, co trzeba wpisać w nagłówki.
@@ -316,7 +319,11 @@ ClientId _clientIdFromFile(File file) {
   );
 }
 
-Future<AutoRefreshingAuthClient> _authClient(ClientId id, File tokenFile) async {
+Future<AutoRefreshingAuthClient> _authClient(
+  ClientId id,
+  File tokenFile, {
+  required bool needsSend,
+}) async {
   if (tokenFile.existsSync()) {
     final json = jsonDecode(tokenFile.readAsStringSync()) as Map<String, dynamic>;
     final credentials = AccessCredentials(
@@ -329,11 +336,14 @@ Future<AutoRefreshingAuthClient> _authClient(ClientId id, File tokenFile) async 
       (json['scopes'] as List).cast<String>(),
     );
     final scopes = credentials.scopes.toSet();
-    if (kGmailScopes.every(scopes.contains)) {
+    final required = [kScopeModify, if (needsSend) kScopeSend];
+    if (required.every(scopes.contains)) {
       return autoRefreshingClient(id, credentials, http.Client());
     }
-    stdout.writeln('Zapisany token nie ma uprawnienia do wysyłki. '
-        'Zaloguj się jeszcze raz, żeby je nadać.');
+    stdout.writeln(scopes.contains(kScopeModify)
+        ? 'Zapisany token nie ma uprawnienia do wysyłki. '
+            'Zaloguj się jeszcze raz, żeby je nadać.'
+        : 'Zapisany token nie wystarcza. Zaloguj się jeszcze raz.');
   }
 
   final client = await clientViaUserConsent(id, kGmailScopes, (url) {

@@ -17,7 +17,7 @@ Future<int> runPiosenkomat(List<String> args) async {
   final parser = ArgParser()
     ..addFlag('help', abbr: 'h', negatable: false, help: 'Pomoc');
 
-  // `scan` do Gmaila nie pisze, więc jako jedyna komenda nie ma `--write`.
+  // `scan` do Gmaila nie pisze, więc jako jedyna komenda nie ma `--push`.
   final scan = parser.addCommand('scan');
   _scanOptions(scan);
   _addCommon(scan);
@@ -50,7 +50,7 @@ Future<int> runPiosenkomat(List<String> args) async {
   final explain = parser.addCommand('explain');
   _addCommon(explain);
 
-  // Stare nazwy: działają po cichu, nie ma ich w pomocy. Dostają `--write`
+  // Stare nazwy: działają po cichu, nie ma ich w pomocy. Dostają `--push`
   // nawet tam, gdzie dzisiejsza komenda go nie ma (`process --apply`), żeby
   // stare notatki nie wywalały się na parserze.
   for (final e in _aliases.entries) {
@@ -150,7 +150,7 @@ void _reviewedOptions(ArgParser p) => p
 
 void _unlabelOptions(ArgParser p) => p.addFlag('force',
     negatable: false,
-    help: 'Zdejmij też z mejli, których stan zmienił się po przebiegu');
+    help: 'Zdejmij też z domkniętych („song/added”)');
 
 void _replyOptions(ArgParser p) => p
   ..addOption('limit', abbr: 'n', help: 'Ilu autorom odpisać w tym przebiegu')
@@ -163,14 +163,16 @@ const Map<String, void Function(ArgParser)> _optionsOf = {
   'reply': _replyOptions,
 };
 
-/// `--write` to jedyna flaga, która pozwala cokolwiek zmienić w Gmailu.
-/// `--apply` zostaje ukrytym synonimem, żeby stare notatki dalej działały.
+/// `--push` to jedyna flaga, która pozwala cokolwiek zmienić w Gmailu:
+/// „wypchnij to, co widzisz na sucho, do skrzynki”. `--write` i `--apply`
+/// zostają ukrytymi synonimami, żeby stare notatki dalej działały.
 void _addWrite(ArgParser p, {String? help, bool hidden = false}) => p
-  ..addFlag('write', negatable: false, hide: hidden, help: help)
+  ..addFlag('push', abbr: 'p', negatable: false, hide: hidden, help: help)
+  ..addFlag('write', negatable: false, hide: true)
   ..addFlag('apply', negatable: false, hide: true);
 
 bool _write(ArgResults cmd) =>
-    (cmd['write'] as bool) || (cmd['apply'] as bool);
+    (cmd['push'] as bool) || (cmd['write'] as bool) || (cmd['apply'] as bool);
 
 void _addCommon(ArgParser p) => p
   ..addOption('songs-db', help: 'Ścieżka do all_songs.hrcpsng')
@@ -260,11 +262,11 @@ Future<int> _scan(ArgResults cmd) async {
   stdout.writeln('Raport: $reportPath');
   stdout.writeln('Plan etykiet: $planPath');
   stdout.writeln('Gmail nietknięty — `scan` tylko czyta. Etykiety jak '
-      'w raporcie nada: ./piosenkomat label scanned $outDir --write');
+      'w raporcie nada: ./piosenkomat label scanned $outDir --push');
   return 0;
 }
 
-/// `label scanned [katalog] [--write]`: etykiety z planu zapisanego przez
+/// `label scanned [katalog] [--push]`: etykiety z planu zapisanego przez
 /// `scan`, bez ponownego czytania treści. Mejle, które w międzyczasie dostały
 /// już etykietę song/*, są pomijane.
 Future<int> _labelScanned(ArgResults cmd) async {
@@ -274,73 +276,76 @@ Future<int> _labelScanned(ArgResults cmd) async {
   stdout.writeln('${_planHeader(plan)}, plik piosenek ${plan.hrcpsngPath}');
   _countLines(stdout, _tally(plan.labelsById.values.expand((l) => l)));
   if (!_write(cmd)) {
-    stdout.writeln('\nDry-run: Gmail nietknięty. --write nada powyższe.');
+    stdout.writeln('\nDry-run: Gmail nietknięty. --push nada powyższe.');
     return 0;
   }
   final mailbox = await _connect(cmd);
   stdout.writeln('Sprawdzam aktualne etykiety ${plan.labelsById.length} mejli…');
-  final alreadyLabeled = <String>{};
-  for (final id in plan.labelsById.keys) {
-    if ((await mailbox.labelsOf(id)).any(isSongLabel)) alreadyLabeled.add(id);
-  }
-  await _applyPlan(mailbox, plan, alreadyLabeled: alreadyLabeled);
+  final current = await mailbox.songLabelsByMessage();
+  await _applyPlan(mailbox, plan, alreadyLabeled: {
+    for (final id in plan.labelsById.keys)
+      if (current.containsKey(id)) id,
+  });
   return 0;
 }
 
-/// `unlabel [katalog] [--write]`: cofa etykiety nadane przez ten przebieg —
-/// na wypadek `label scanned` puszczonego za szybko. Zdejmuje wyłącznie to,
-/// co jest w planie, więc Twoje ręczne etykiety zostają.
+/// `unlabel [katalog] [--push]`: cofa to, co nadał automat. Swoje poznaje po
+/// znaczniku `song/auto` — Ty go nie wieszasz, więc Twoje ręczne etykiety
+/// (te bez `auto`) zostają nietknięte. Bez argumentu bierze całą skrzynkę,
+/// z katalogiem przebiegu — tylko mejle z jego planu.
 ///
-/// Bezpiecznik: mejla, który po przebiegu ruszył dalej (dostał etykietę
-/// `song/*` spoza planu, np. przez `label added` albo Twoją rękę), nie ruszamy —
-/// cofnięcie zostawiłoby go w połowie drogi. `--force`, jeśli mimo to ma zejść.
+/// Bezpiecznik: mejla domkniętego przez `label added` nie ruszamy — piosenka
+/// jest już w apce, a zdjęcie etykiet wepchnęłoby ją z powrotem do kolejki.
+/// `--force`, jeśli mimo to ma zejść.
 Future<int> _unlabel(ArgResults cmd) async {
-  final planPath = _planPath(cmd);
-  if (planPath == null) return 64;
-  final plan = readPlan(planPath);
   final force = cmd['force'] as bool;
-  stdout.writeln('${_planHeader(plan)}, sprawdzam aktualne etykiety…');
+  final dir = cmd.rest.isEmpty ? null : _runDir(cmd);
+  if (cmd.rest.isNotEmpty && dir == null) return 64;
+  final plan = dir == null ? null : readPlan(planPathIn(dir));
+  if (plan != null) stdout.writeln(_planHeader(plan));
 
   final mailbox = await _connect(cmd);
+  stdout.writeln('Sprawdzam etykiety w skrzynce…');
+  final currentById = await mailbox.songLabelsByMessage();
+  final byAutomat = {
+    for (final e in currentById.entries)
+      if (e.value.contains(kLabelAuto)) e.key: e.value,
+  };
+
   final toRemove = <String, List<String>>{};
-  var untouched = 0;
-  var movedOn = 0;
-  for (final e in plan.labelsById.entries) {
-    final current = await mailbox.labelsOf(e.key);
-    final planned = e.value.toSet();
-    final moved = current.any((l) => isSongLabel(l) && !planned.contains(l));
-    if (moved && !force) {
-      movedOn++;
+  var outsidePlan = 0;
+  var closed = 0;
+  for (final e in byAutomat.entries) {
+    if (plan != null && !plan.labelsById.containsKey(e.key)) {
+      outsidePlan++;
       continue;
     }
-    final hit = [for (final l in e.value) if (current.contains(l)) l];
-    if (hit.isEmpty) {
-      untouched++;
+    if (e.value.contains(kLabelDone) && !force) {
+      closed++;
       continue;
     }
-    toRemove[e.key] = hit;
+    toRemove[e.key] = [for (final l in kToolLabels) if (e.value.contains(l)) l];
   }
 
   if (toRemove.isEmpty) {
-    stdout.writeln('Nic do zdjęcia — po tym przebiegu nie został ślad.');
+    stdout.writeln('Nic do zdjęcia — po automacie nie został ślad.');
     return 0;
   }
   stdout.writeln('Do zdjęcia z ${toRemove.length} mejli:');
   _countLines(stdout, _tally(toRemove.values.expand((l) => l)));
-  if (untouched > 0) {
-    stdout.writeln('${untouched} mejli już bez etykiet z planu.');
+  if (outsidePlan > 0) {
+    stdout.writeln('Poza tym przebiegiem siedzi jeszcze $outsidePlan mejli '
+        'ze znacznikiem „$kLabelAuto”. Zejdą, jeśli odpalisz `unlabel` bez katalogu.');
   }
-  if (movedOn > 0) {
-    stdout.writeln('Pomijam $movedOn mejli ze stanem spoza planu '
-        '(ruszyły dalej po przebiegu); --force, jeśli mimo to mają zejść.');
+  if (closed > 0) {
+    stdout.writeln('Pomijam $closed domkniętych („$kLabelDone”) — te piosenki są '
+        'już w apce; --force, jeśli mimo to mają zejść.');
   }
   if (!_write(cmd)) {
-    stdout.writeln('\nDry-run: Gmail nietknięty. --write zdejmie powyższe.');
+    stdout.writeln('\nDry-run: Gmail nietknięty. --push zdejmie powyższe.');
     return 0;
   }
-  for (final e in toRemove.entries) {
-    await mailbox.removeLabels(e.key, e.value);
-  }
+  await _batchByLabels(mailbox, toRemove, add: false);
   stdout.writeln('Zdjęto z ${toRemove.length} mejli. '
       'Wracają do kolejki, więc `scan` weźmie je ponownie.');
   return 0;
@@ -352,54 +357,73 @@ Future<void> _applyPlan(
   required Set<String> alreadyLabeled,
 }) async {
   await mailbox.ensureToolLabels();
-  final applied = <String>[];
+  final toAdd = <String, List<String>>{};
   var skipped = 0;
   for (final e in plan.labelsById.entries) {
     if (alreadyLabeled.contains(e.key)) {
       skipped++;
       continue;
     }
-    await mailbox.addLabels(e.key, e.value);
-    applied.addAll(e.value);
+    toAdd[e.key] = e.value;
   }
+  await _batchByLabels(mailbox, toAdd, add: true);
   stdout.writeln('Nadano:');
-  _countLines(stdout, _tally(applied));
+  _countLines(stdout, _tally(toAdd.values.expand((l) => l)));
   if (skipped > 0) {
     stdout.writeln('Pominięto $skipped mejli, które już miały etykietę song/*.');
   }
   stdout.writeln('Po przeglądzie na stronie podmień reviewed.hrcpsng, potem '
-      './piosenkomat label reviewed --write i ./piosenkomat label added --write');
+      './piosenkomat label reviewed --push i ./piosenkomat label added --push');
 }
 
 String _planHeader(LabelPlan plan) =>
     'Plan z ${_minute(plan.createdAt)}: ${plan.labelsById.length} mejli';
 
+/// Mejle o identycznym zestawie etykiet idą jedną paczką: `batchModify`
+/// bierze do 1000 naraz, więc przebieg to kilkanaście strzałów, nie kilkaset.
+Future<void> _batchByLabels(
+  GmailMailbox mailbox,
+  Map<String, List<String>> labelsById, {
+  required bool add,
+}) async {
+  final groups = <String, (List<String>, List<String>)>{};
+  for (final e in labelsById.entries) {
+    groups.putIfAbsent(e.value.join('\u0000'), () => (e.value, <String>[])).$2
+        .add(e.key);
+  }
+  for (final (labels, ids) in groups.values) {
+    await mailbox.batchModify(ids,
+        add: add ? labels : null, remove: add ? null : labels);
+  }
+}
+
 Future<int> _labelAdded(ArgResults cmd) async {
   final write = _write(cmd);
   final mailbox = await _connect(cmd);
-  final ids = await mailbox.listIds(kReadyByToolQuery);
-  final ready = <ContribMessage>[];
-  for (final id in ids) {
-    final m = await mailbox.getMessage(id);
-    // Bezpiecznik: tylko to, co automat sam wstawił do pliku.
-    if (!isReadyByTool(m.labels)) continue;
-    ready.add(m);
-    stdout.writeln('  ${m.subject ?? ''}  ${emailFromHeader(m.from) ?? ''}  [$id]');
+  final current = await mailbox.songLabelsByMessage();
+  // Bezpiecznik na wypadek, gdyby query przepuściło coś bez „auto”: ruszamy
+  // tylko to, co automat sam wstawił do pliku.
+  final ready = [
+    for (final id in await mailbox.listIds(kReadyByToolQuery))
+      if (isReadyByTool(current[id] ?? const {})) id,
+  ];
+  for (final id in ready) {
+    final h = await mailbox.headersOf(id);
+    stdout.writeln('  ${h.subject}  ${emailFromHeader(h.from) ?? ''}  [$id]');
   }
   stdout.writeln('„$kLabelReady” + „$kLabelAuto”: ${ready.length} mejli');
   if (!write) {
-    stdout.writeln('\nDry-run: Gmail nietknięty. --write zmieni na „$kLabelDone” + przeczytane.');
+    stdout.writeln('\nDry-run: Gmail nietknięty. --push zmieni na „$kLabelDone” + przeczytane.');
     return 0;
   }
   await mailbox.ensureToolLabels();
-  for (final m in ready) {
-    await mailbox.commitReady(m.id);
-  }
+  await mailbox.batchModify(ready,
+      add: [kLabelDone], remove: [kLabelReady, 'UNREAD']);
   stdout.writeln('Zatwierdzono ${ready.length} mejli.');
   return 0;
 }
 
-/// `label reviewed [katalog] [--write]`: różnica między tym, co automat
+/// `label reviewed [katalog] [--push]`: różnica między tym, co automat
 /// wstawił do pliku, a tym, co zostało po Twoim przeglądzie na stronie.
 /// Mejl traci „w pliku” tylko wtedy, gdy wypadły wszystkie jego piosenki.
 Future<int> _labelReviewed(ArgResults cmd) async {
@@ -443,34 +467,32 @@ Future<int> _labelReviewed(ArgResults cmd) async {
 
   final msgIds = result.rejectedMsgIds;
   if (msgIds.isEmpty) {
-    stdout.writeln('\nNic do odetykietowania. Dalej: ./piosenkomat label added --write');
+    stdout.writeln('\nNic do odetykietowania. Dalej: ./piosenkomat label added --push');
     return 0;
   }
   if (!_write(cmd)) {
-    stdout.writeln('\nDry-run: Gmail nietknięty. --write zdejmie „$kLabelReady” '
+    stdout.writeln('\nDry-run: Gmail nietknięty. --push zdejmie „$kLabelReady” '
         'i nada „$kLabelRejectedAfterReview” na ${msgIds.length} mejlach.');
     return 0;
   }
 
   final mailbox = await _connect(cmd);
   await mailbox.ensureToolLabels();
-  var done = 0;
-  var skipped = 0;
+  // Bezpiecznik jak w `label added`: ruszamy tylko to, co automat sam
+  // wstawił do pliku i co dalej tam czeka.
+  final todo = <String>[];
   for (final id in msgIds) {
-    // Bezpiecznik jak w `label added`: ruszamy tylko to, co automat sam
-    // wstawił do pliku i co dalej tam czeka.
-    if (!isReadyByTool(await mailbox.labelsOf(id))) {
-      skipped++;
-      continue;
-    }
-    await mailbox.rejectAfterReview(id);
-    done++;
+    if (isReadyByTool(await mailbox.labelsOf(id))) todo.add(id);
   }
-  stdout.writeln('Odrzucono po przeglądzie: $done mejli.');
-  if (skipped > 0) {
-    stdout.writeln('Pominięto $skipped mejli bez „$kLabelReady” + „$kLabelAuto”.');
+  // `auto` zostaje — to automat tę piosenkę zaproponował.
+  await mailbox.batchModify(todo,
+      add: [kLabelRejectedAfterReview], remove: [kLabelReady]);
+  stdout.writeln('Odrzucono po przeglądzie: ${todo.length} mejli.');
+  if (todo.length < msgIds.length) {
+    stdout.writeln('Pominięto ${msgIds.length - todo.length} mejli '
+        'bez „$kLabelReady” + „$kLabelAuto”.');
   }
-  stdout.writeln('Dalej: ./piosenkomat label added --write');
+  stdout.writeln('Dalej: ./piosenkomat label added --push');
   return 0;
 }
 
@@ -515,10 +537,10 @@ void _printReview(ReviewResult result) {
   }
 }
 
-/// `reply [--apply]`: autorom ze starej apki wiadomość, żeby ją zaktualizowali.
+/// `reply [--push]`: autorom ze starej apki wiadomość, żeby ją zaktualizowali.
 ///
 /// Kolejką jest sam Gmail: etykieta „$kLabelOldAppToReply”, którą wiesza
-/// `label scanned --write`. Wysyłka ją zdejmuje i wiesza „$kLabelOldAppReplied”,
+/// `label scanned --push`. Wysyłka ją zdejmuje i wiesza „$kLabelOldAppReplied”,
 /// więc nikt nie dostanie dwóch odpowiedzi, a przerwany przebieg dokańcza się
 /// zwykłym powtórzeniem komendy.
 ///
@@ -528,7 +550,7 @@ Future<int> _reply(ArgResults cmd) async {
   final write = _write(cmd);
   final limit = _limit(cmd);
 
-  final mailbox = await _connect(cmd);
+  final mailbox = await _connect(cmd, needsSend: true);
   final query = cmd['query'] as String? ??
       'label:${labelQueryName(kLabelOldAppToReply)}';
   final ids = await mailbox.listIds(query);
@@ -569,7 +591,7 @@ Future<int> _reply(ArgResults cmd) async {
   }
 
   if (!write) {
-    stdout.writeln('\nDry-run: nic nie wysłano. --write wyśle '
+    stdout.writeln('\nDry-run: nic nie wysłano. --push wyśle '
         '${planned.length} ${planned.length == 1 ? 'mejl' : 'mejli'}.');
     return 0;
   }
@@ -589,9 +611,8 @@ Future<int> _reply(ArgResults cmd) async {
     }
     sent++;
     // Zaraz po wysyłce, żeby ewentualna wywrotka nie kosztowała drugiego mejla.
-    for (final t in targets) {
-      await mailbox.markReplied(t.messageId);
-    }
+    await mailbox.batchModify([for (final t in targets) t.messageId],
+        add: [kLabelOldAppReplied], remove: [kLabelOldAppToReply]);
   }
   stdout.writeln('Wysłano $sent '
       '${sent == 1 ? 'odpowiedź' : 'odpowiedzi'}'
@@ -670,9 +691,11 @@ SongBook _loadBook(ArgResults cmd) {
   return book;
 }
 
-Future<GmailMailbox> _connect(ArgResults cmd) => GmailMailbox.connect(
+Future<GmailMailbox> _connect(ArgResults cmd, {bool needsSend = false}) =>
+    GmailMailbox.connect(
       credentialsFile: File(cmd['credentials'] as String? ?? defaultCredentialsPath()),
       tokenFile: File(cmd['token'] as String? ?? defaultTokenPath()),
+      needsSend: needsSend,
     );
 
 String _minute(DateTime d) => d.toLocal().toIso8601String().substring(0, 16);
@@ -775,23 +798,24 @@ piosenkomat: sitko mejli z piosenkami na $kInboxEmail.
   ./piosenkomat scan [-n N] [--newest] [-o katalog]
       kolejka (inbox bez song/*) → katalog out/import-<data>/: raport, plan,
       songs.hrcpsng, reviewed.hrcpsng, people.dart. Gmaila tylko czyta
-  ./piosenkomat label scanned [katalog] --write
+  ./piosenkomat label scanned [katalog] --push
       werdykty automatu na mejle: „$kLabelReady”, „song/rejected/…”,
       „$kLabelToReview”, wszystko ze znacznikiem „$kLabelAuto”
-  ./piosenkomat label reviewed [katalog] --write
+  ./piosenkomat label reviewed [katalog] --push
       songs.hrcpsng minus reviewed.hrcpsng → „$kLabelRejectedAfterReview”
-  ./piosenkomat label added [katalog] --write
+  ./piosenkomat label added [katalog] --push
       „$kLabelReady” + „$kLabelAuto” → „$kLabelDone” + przeczytane
-  ./piosenkomat unlabel [katalog] --write
-      cofa etykiety nadane przez ten przebieg
-  ./piosenkomat reply [-n N] --write
+  ./piosenkomat unlabel [katalog] --push
+      cofa wszystko, co nadał automat („$kLabelAuto”); z katalogiem — tylko
+      mejle z jego planu
+  ./piosenkomat reply [-n N] --push
       autorom ze starej apki: „zaktualizuj apkę”; kolejką jest etykieta
       „$kLabelOldAppToReply”, wysyłka przestawia ją na „$kLabelOldAppReplied”
   ./piosenkomat explain plik.eml [...]
       klasyfikacja lokalnych plików, bez Gmaila
 
 Bez katalogu komendy biorą ostatni przebieg z out/.
-Bez --write nic w Gmailu się nie zmienia.
+Bez --push nic w Gmailu się nie zmienia.
 
 scan:
 ${parser.commands['scan']!.usage}

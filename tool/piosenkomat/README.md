@@ -18,12 +18,12 @@ Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduj
    `-o` wskazuje własny katalog przebiegu.
    ####
 2. **Etykiety automatu.**  
-   `./piosenkomat label scanned --write`  
+   `./piosenkomat label scanned --push`  
    ####
    Wiesza werdykty z `labels.json`: `ready-to-add`, `rejected/…`,
    `needs-review/…`, `old-app/to-reply`, każdy ze znacznikiem `song/auto`.  
    Pomija mejle, które w międzyczasie dostały już jakąś etykietę `song/*`.  
-   Pomyłka? `./piosenkomat unlabel --write` cofa cały przebieg.
+   Pomyłka? `./piosenkomat unlabel --push` cofa cały przebieg.
    ####
 3. **Przegląd na stronie.**  
    *(ręcznie)*  
@@ -33,11 +33,11 @@ Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduj
    i podmieniasz eksportem `out/import-<data>/reviewed.hrcpsng`.
    ####
 4. **Odrzucenia z przeglądu.**  
-   `./piosenkomat label reviewed --write`  
+   `./piosenkomat label reviewed --push`  
    ####
    Porównuje `songs.hrcpsng` z `reviewed.hrcpsng`: czego nie ma w tym drugim,
    traci `ready-to-add` i dostaje `rejected/after-review`. Zatwierdzone zostają
-   bez zmian. Bez `--write` tylko pokazuje różnicę.
+   bez zmian. Bez `--push` tylko pokazuje różnicę.
    ####
 5. **Osoby dodające.**
    *(ręcznie)*  
@@ -53,13 +53,13 @@ Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduj
    piosenki w apce nie ma), a następny `scan` nie rozpozna ich jako duplikatów.
    ####
 7. **Domknięcie mejli.** 
-   `./piosenkomat label added --write`  
+   `./piosenkomat label added --push`  
    ####
    `ready-to-add` + `auto` → `added` i oznaczenie jako przeczytane. Rusza
    wyłącznie mejle, które automat sam wstawił do pliku; Twoje ręczne
    „ready-to-add” zostają nietknięte.
 
-Osobno, kiedy chcesz: `./piosenkomat reply --write` — odpowiedzi autorom ze
+Osobno, kiedy chcesz: `./piosenkomat reply --push` — odpowiedzi autorom ze
 starej apki (kolejką jest etykieta, nie katalog przebiegu).
 
 ## Setup (raz)
@@ -78,29 +78,29 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
 ```bash
 ./piosenkomat scan -n 20                 # przesiew 20 najstarszych, Gmail tylko czytany
 ./piosenkomat label scanned              # lista: co by dostało jaką etykietę
-./piosenkomat label scanned --write      # nadaje etykiety
-./piosenkomat label reviewed --write     # → „rejected/after-review”
-./piosenkomat label added --write        # → „added” + przeczytane
-./piosenkomat unlabel --write            # cofa etykiety całego przebiegu
+./piosenkomat label scanned --push      # nadaje etykiety
+./piosenkomat label reviewed --push     # → „rejected/after-review”
+./piosenkomat label added --push        # → „added” + przeczytane
+./piosenkomat unlabel --push            # cofa etykiety całego przebiegu
 ./piosenkomat reply                      # kto czeka na „zaktualizuj apkę”
-./piosenkomat reply --write              # wyślij; → „old-app/replied”
+./piosenkomat reply --push              # wyślij; → „old-app/replied”
 ./piosenkomat explain plik.eml           # klasyfikacja lokalnego pliku, bez Gmaila
 ```
 
-Bez `--write` nic w Gmailu się nie zmienia — `scan` i `explain` nie mają tej flagi,
+Bez `--push` nic w Gmailu się nie zmienia — `scan` i `explain` nie mają tej flagi,
 bo nie piszą do skrzynki nigdy. Komendy operujące na przebiegu biorą bez argumentu
 **ostatni** katalog z `out/`; własny wskażesz, podając go wprost:
-`./piosenkomat label scanned out/import-<data> --write`.
+`./piosenkomat label scanned out/import-<data> --push`.
 
 `label scanned` nadaje plan także długo po `scan`, bez ponownego czytania mejli.
 `unlabel` jest jego odwrotnością: zdejmuje dokładnie te etykiety, które nadał ten
 przebieg, i zostawia w spokoju mejle, które od tamtej pory ruszyły dalej
 (`--force`, żeby i je cofnąć).
 
-Stare nazwy (`process`, `apply`, `review`, `commit`, `unapply`, `check`) oraz flaga
-`--apply` dalej działają jako ciche aliasy, ale nie ma ich w pomocy. Wyjątek:
+Stare nazwy (`process`, `apply`, `review`, `commit`, `unapply`, `check`) oraz flagi
+`--write` i `--apply` dalej działają jako ciche aliasy, ale nie ma ich w pomocy. Wyjątek:
 `process --apply` już nie etykietuje po przesiewie — `scan` Gmaila tylko czyta,
-etykiety nadaje osobny `label scanned --write`.
+etykiety nadaje osobny `label scanned --push`.
 
 ## Stara apka (`reply`)
 
@@ -215,7 +215,7 @@ W raporcie przy każdym trafieniu jest procent i tytuł pierwowzoru.
 Po przejrzeniu piosenek na stronie eksportujesz to, co zostało, i podmieniasz nim
 `reviewed.hrcpsng`. `label reviewed` porównuje oba pliki: czego nie ma w `reviewed`,
 to odrzucone — mejl traci „ready-to-add” i dostaje `rejected/after-review`.
-Bez `--write` tylko pokazuje różnicę. Ślad decyzji ląduje w `review.json`.
+Bez `--push` tylko pokazuje różnicę. Ślad decyzji ląduje w `review.json`.
 
 Piosenki wiąże ze zgłoszeniami `email_msg_id` w `contributor_data` — automat
 wpisuje tam id mejla, więc poprawiony przy przeglądzie tytuł niczego nie psuje.
