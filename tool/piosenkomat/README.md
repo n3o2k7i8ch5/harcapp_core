@@ -23,7 +23,7 @@ Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduj
    Wiesza werdykty z `labels.json`: `ready-to-add`, `rejected/…`,
    `needs-review/…`, `old-app/to-reply`, każdy ze znacznikiem `song/auto`.  
    Pomija mejle, które w międzyczasie dostały już jakąś etykietę `song/*`.  
-   Pomyłka? `./piosenkomat unlabel --push` cofa cały przebieg.
+   Pomyłka? `./piosenkomat unlabel --push` cofa wszystko, co nadał automat.
    ####
 3. **Przegląd na stronie.**  
    *(ręcznie)*  
@@ -81,7 +81,7 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
 ./piosenkomat label scanned --push      # nadaje etykiety
 ./piosenkomat label reviewed --push     # → „rejected/after-review”
 ./piosenkomat label added --push        # → „added” + przeczytane
-./piosenkomat unlabel --push            # cofa etykiety całego przebiegu
+./piosenkomat unlabel --push            # cofa wszystko, co nadał automat
 ./piosenkomat reply                      # kto czeka na „zaktualizuj apkę”
 ./piosenkomat reply --push              # wyślij; → „old-app/replied”
 ./piosenkomat explain plik.eml           # klasyfikacja lokalnego pliku, bez Gmaila
@@ -93,9 +93,18 @@ bo nie piszą do skrzynki nigdy. Komendy operujące na przebiegu biorą bez argu
 `./piosenkomat label scanned out/import-<data> --push`.
 
 `label scanned` nadaje plan także długo po `scan`, bez ponownego czytania mejli.
-`unlabel` jest jego odwrotnością: zdejmuje dokładnie te etykiety, które nadał ten
-przebieg, i zostawia w spokoju mejle, które od tamtej pory ruszyły dalej
-(`--force`, żeby i je cofnąć).
+`unlabel` jest jego odwrotnością. Swoje poznaje po znaczniku `song/auto`, którego
+Ty nie wieszasz, więc bez argumentu zdejmuje etykiety automatu z **całej skrzynki** —
+także z przebiegów, po których katalog w `out/` już przepadł. Twoje ręczne etykiety
+(te bez `auto`) zostają nietknięte.
+
+Uwaga: skoro bierze całą skrzynkę, zdejmie też etykiety starszej paczce, która
+czeka jeszcze u Ciebie na przegląd. Jeśli ma ruszyć tylko jeden przebieg, podaj
+jego katalog: `./piosenkomat unlabel out/import-<data> --push` — wtedy wypisze przy
+okazji, ile mejli z `song/auto` siedzi poza tym planem.
+
+Mejli domkniętych przez `label added` nie rusza: piosenka jest już w apce, a zdjęcie
+etykiet wepchnęłoby ją z powrotem do kolejki (`--force`, żeby i one zeszły).
 
 Stare nazwy (`process`, `apply`, `review`, `commit`, `unapply`, `check`) oraz flagi
 `--write` i `--apply` dalej działają jako ciche aliasy, ale nie ma ich w pomocy. Wyjątek:

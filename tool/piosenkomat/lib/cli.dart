@@ -203,11 +203,9 @@ Future<int> _scan(ArgResults cmd) async {
       ? 'cała kolejka'
       : '${newest ? 'najnowsze' : 'najstarsze'} $limit';
   stdout.writeln('Kolejka ($scope): ${ids.length} mejli, pobieram…');
-  final fetched = <ContribMessage>[];
-  for (final id in ids) {
-    fetched.add(await mailbox.getMessage(id));
-    if (fetched.length % 50 == 0) stdout.writeln('  ${fetched.length}/${ids.length}');
-  }
+  final fetched = await mailbox.getMessages(ids, onProgress: (done, total) {
+    if (done % 50 == 0 || done == total) stdout.writeln('  $done/$total');
+  });
   // Bezpieczniki na wypadek, gdyby query przepuściło coś już otagowanego
   // albo coś, co nie jest zgłoszeniem piosenki. Takich mejli nie dotykamy.
   final messages = fetched

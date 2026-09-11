@@ -28,17 +28,60 @@ class GmailMailbox {
   final GmailApi _api;
   final Map<String, String> _idByName = {};
   final Map<String, String> _nameById = {};
-  DateTime _lastCall = DateTime.fromMillisecondsSinceEpoch(0);
 
-  /// Gmail liczy limit w jednostkach na minutę. Trzymamy stałe tempo,
-  /// a przy 403/429 czekamy i próbujemy jeszcze raz.
-  Future<T> _call<T>(Future<T> Function() fn) async {
-    const minGap = Duration(milliseconds: 60);
+  /// Gmail rozlicza limit w **jednostkach**, nie w requestach: 6000 na minutę
+  /// na użytkownika. Metody kosztują różnie — `messages.get` i `attachments.get`
+  /// po 20, `batchModify` 50 za paczkę do 1000 mejli, `list` 5, `labels.list` 1.
+  ///
+  /// Wiadro z żetonami trzyma nas tuż pod progiem. Sztywna przerwa między
+  /// requestami tego nie umiała: przy 20-jednostkowych `get` celowała trzykrotnie
+  /// ponad limit, wpadała w 429 i czekała po kilkanaście sekund, więc im szybciej
+  /// próbowała, tym wolniej szło.
+  /// Odnawiamy poniżej progu 6000/min, bo Gmail pilnuje też krótszych okien
+  /// i przy jeździe równo po limicie potrafi oddać 429.
+  static const int _unitsPerMinute = 5200;
+
+  /// Ile żetonów wolno uzbierać na zapas. Pełne wiadro (minuta z góry)
+  /// puszczałoby na starcie serię 300 zapytań naraz — i prosto w 429.
+  static const int _maxBurst = 100;
+  static const int _costGet = 20;
+  static const int _costList = 5;
+  static const int _costModify = 50;
+  static const int _costLabelCreate = 5;
+  static const int _costLabelList = 1;
+  static const int _costSend = 100;
+  double _units = 0;
+  DateTime _refilled = DateTime.now();
+
+  /// Czeka, aż w wiadrze będzie [cost] żetonów, i zabiera je.
+  Future<void> _spend(int cost) async {
+    while (true) {
+      final now = DateTime.now();
+      _units = min(
+          _maxBurst.toDouble(),
+          _units +
+              now.difference(_refilled).inMilliseconds *
+                  _unitsPerMinute /
+                  Duration.millisecondsPerMinute);
+      _refilled = now;
+      if (_units >= cost) {
+        _units -= cost;
+        return;
+      }
+      final brakuje = cost - _units;
+      await Future.delayed(Duration(
+          milliseconds:
+              (brakuje * Duration.millisecondsPerMinute / _unitsPerMinute)
+                      .ceil() +
+                  5));
+    }
+  }
+
+  /// Zapytanie w ramach limitu; przy 403/429 czekamy i próbujemy jeszcze raz.
+  Future<T> _call<T>(Future<T> Function() fn, {int cost = _costList}) async {
     var wait = const Duration(seconds: 5);
     for (var attempt = 1;; attempt++) {
-      final since = DateTime.now().difference(_lastCall);
-      if (since < minGap) await Future.delayed(minGap - since);
-      _lastCall = DateTime.now();
+      await _spend(cost);
       try {
         return await fn();
       } on DetailedApiRequestError catch (e) {
@@ -48,8 +91,36 @@ class GmailMailbox {
         stdout.writeln('Limit Gmail API, czekam ${wait.inSeconds}s…');
         await Future.delayed(wait);
         wait *= 2;
+        // Limit i tak przekroczony — wiadro do zera, żeby nie dobijać.
+        _units = 0;
       }
     }
+  }
+
+  /// Pobiera mejle kilkoma strumieniami naraz. Tempo i tak pilnuje [_spend];
+  /// równoległość służy tylko temu, żeby czekanie na odpowiedź nie marnowało
+  /// limitu, który w tym czasie się odnawia.
+  Future<List<ContribMessage>> getMessages(
+    List<String> ids, {
+    int concurrency = 8,
+    void Function(int done, int total)? onProgress,
+  }) async {
+    final out = List<ContribMessage?>.filled(ids.length, null);
+    var next = 0;
+    var done = 0;
+    Future<void> worker() async {
+      while (true) {
+        final i = next++;
+        if (i >= ids.length) return;
+        out[i] = await getMessage(ids[i]);
+        onProgress?.call(++done, ids.length);
+      }
+    }
+
+    await Future.wait([
+      for (var i = 0; i < min(concurrency, ids.length); i++) worker(),
+    ]);
+    return out.cast<ContribMessage>();
   }
 
   /// [needsSend] tylko dla `reply`: bez niego zapisany token wystarczy,
@@ -80,12 +151,14 @@ class GmailMailbox {
     final ids = <String>[];
     String? page;
     do {
-      final resp = await _call(() => _api.users.messages.list(
-            'me',
-            q: query,
-            maxResults: 500,
-            pageToken: page,
-          ));
+      final resp = await _call(
+          () => _api.users.messages.list(
+                'me',
+                q: query,
+                maxResults: 500,
+                pageToken: page,
+              ),
+          cost: _costList);
       ids.addAll([for (final m in resp.messages ?? const <Message>[]) m.id!]);
       page = resp.nextPageToken;
     } while (page != null && !(newest && limit != null && ids.length >= limit));
@@ -97,13 +170,24 @@ class GmailMailbox {
   }
 
   Future<ContribMessage> getMessage(String id) async {
-    final msg = await _call(() => _api.users.messages.get('me', id, format: 'full'));
+    final msg = await _call(
+        () => _api.users.messages.get('me', id, format: 'full'),
+        cost: _costGet);
     String? songAttachment;
     for (final part in msg.payload?.parts ?? const <MessagePart>[]) {
-      final attId = part.body?.attachmentId;
-      if (attId == null || !(part.filename ?? '').endsWith('.hrcpsng')) continue;
-      final att = await _call(() => _api.users.messages.attachments.get('me', id, attId));
-      if (att.data != null) songAttachment = _decode(att.data!);
+      if (!(part.filename ?? '').endsWith('.hrcpsng')) continue;
+      // Małe załączniki Gmail oddaje od razu w treści odpowiedzi. Dokładanie
+      // wtedy `attachments.get` to drugie 20 jednostek za te same bajty.
+      if (part.body?.data case final data?) {
+        songAttachment = _decode(data);
+        break;
+      }
+      if (part.body?.attachmentId case final attId?) {
+        final att = await _call(
+            () => _api.users.messages.attachments.get('me', id, attId),
+            cost: _costGet);
+        if (att.data != null) songAttachment = _decode(att.data!);
+      }
       break;
     }
     final headers = _headersOf(msg.payload);
@@ -132,20 +216,24 @@ class GmailMailbox {
   /// osobny mejl znikąd.
   Future<void> replyTo(ReplyTarget target, String text) async {
     final raw = _mimeReply(target, text);
-    await _call(() => _api.users.messages.send(
-          Message()
-            ..raw = base64Url.encode(utf8.encode(raw))
-            ..threadId = target.threadId,
-          'me',
-        ));
+    await _call(
+        () => _api.users.messages.send(
+              Message()
+                ..raw = base64Url.encode(utf8.encode(raw))
+                ..threadId = target.threadId,
+              'me',
+            ),
+        cost: _costSend);
   }
 
   /// Dane potrzebne do odpowiedzi. Osobny strzał po nagłówki, bo
   /// [ContribMessage] ich nie niesie.
   Future<ReplyTarget> replyTarget(String messageId) async {
-    final msg = await _call(() => _api.users.messages.get('me', messageId,
-        format: 'metadata',
-        metadataHeaders: ['From', 'Subject', 'Message-ID', 'References']));
+    final msg = await _call(
+        () => _api.users.messages.get('me', messageId,
+            format: 'metadata',
+            metadataHeaders: ['From', 'Subject', 'Message-ID', 'References']),
+        cost: _costGet);
     final headers = _headersOf(msg.payload);
     return ReplyTarget(
       messageId: msg.id ?? messageId,
@@ -159,15 +247,19 @@ class GmailMailbox {
 
   /// Nagłówki bez treści — do wypisania listy, gdy treść jest niepotrzebna.
   Future<({String subject, String from})> headersOf(String messageId) async {
-    final msg = await _call(() => _api.users.messages.get('me', messageId,
-        format: 'metadata', metadataHeaders: ['From', 'Subject']));
+    final msg = await _call(
+        () => _api.users.messages.get('me', messageId,
+            format: 'metadata', metadataHeaders: ['From', 'Subject']),
+        cost: _costGet);
     final headers = _headersOf(msg.payload);
     return (subject: headers['subject'] ?? '', from: headers['from'] ?? '');
   }
 
   /// Nazwy etykiet mejla. Tylko metadane, bez treści.
   Future<Set<String>> labelsOf(String messageId) async {
-    final msg = await _call(() => _api.users.messages.get('me', messageId, format: 'minimal'));
+    final msg = await _call(
+        () => _api.users.messages.get('me', messageId, format: 'minimal'),
+        cost: _costGet);
     return {
       for (final id in msg.labelIds ?? const <String>[]) _nameById[id] ?? id,
     };
@@ -190,7 +282,8 @@ class GmailMailbox {
   }
 
   Future<void> _loadLabels() async {
-    final existing = await _call(() => _api.users.labels.list('me'));
+    final existing =
+        await _call(() => _api.users.labels.list('me'), cost: _costLabelList);
     for (final l in existing.labels ?? const <Label>[]) {
       if (l.name == null || l.id == null) continue;
       _idByName[l.name!] = l.id!;
@@ -202,13 +295,15 @@ class GmailMailbox {
   Future<void> ensureToolLabels() async {
     for (final name in kToolLabels) {
       if (_idByName.containsKey(name)) continue;
-      final created = await _call(() => _api.users.labels.create(
-            Label()
-              ..name = name
-              ..labelListVisibility = 'labelShow'
-              ..messageListVisibility = 'show',
-            'me',
-          ));
+      final created = await _call(
+          () => _api.users.labels.create(
+                Label()
+                  ..name = name
+                  ..labelListVisibility = 'labelShow'
+                  ..messageListVisibility = 'show',
+                'me',
+              ),
+          cost: _costLabelCreate);
       _idByName[name] = created.id!;
       _nameById[created.id!] = name;
     }
@@ -223,15 +318,18 @@ class GmailMailbox {
   }) async {
     for (var i = 0; i < messageIds.length; i += 1000) {
       final chunk = messageIds.sublist(i, min(i + 1000, messageIds.length));
-      await _call(() => _api.users.messages.batchModify(
-            BatchModifyMessagesRequest()
-              ..ids = chunk
-              ..addLabelIds = add == null ? null : [for (final n in add) _idByName[n]!]
-              ..removeLabelIds = remove == null
-                  ? null
-                  : [for (final n in remove) if (_idByName[n] case final id?) id],
-            'me',
-          ));
+      await _call(
+          () => _api.users.messages.batchModify(
+                BatchModifyMessagesRequest()
+                  ..ids = chunk
+                  ..addLabelIds =
+                      add == null ? null : [for (final n in add) _idByName[n]!]
+                  ..removeLabelIds = remove == null
+                      ? null
+                      : [for (final n in remove) if (_idByName[n] case final id?) id],
+                'me',
+              ),
+          cost: _costModify);
     }
   }
 
