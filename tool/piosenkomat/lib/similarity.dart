@@ -7,10 +7,17 @@ const double kSimilarText = 0.5;
 
 /// Zbiór słów po normalizacji (małe litery, bez polskich znaków, bez
 /// interpunkcji). Kolejność zwrotek i literówki w wielkości liter nie liczą się.
-Set<String> textWords(String text) => simplifyString(text, spaceStrategy: SpaceStrategy.space)
-    .split(' ')
-    .where((w) => w.isNotEmpty)
-    .toSet();
+///
+/// Końce linii sprowadzamy do spacji **przed** normalizacją: `simplifyString`
+/// je kasuje, więc ostatnie słowo wersu sklejało się z pierwszym słowem
+/// następnego (`dach` + `żeby` → `dachzeby`) i każda para wychodziła mniej
+/// podobna, niż jest naprawdę.
+Set<String> textWords(String text) =>
+    simplifyString(text.replaceAll(RegExp(r'\s+'), ' '),
+            spaceStrategy: SpaceStrategy.space)
+        .split(' ')
+        .where((w) => w.isNotEmpty)
+        .toSet();
 
 double jaccard(Set<String> a, Set<String> b) {
   if (a.isEmpty || b.isEmpty) return 0;

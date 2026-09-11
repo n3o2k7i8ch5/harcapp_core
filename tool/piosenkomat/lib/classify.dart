@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
@@ -205,6 +206,7 @@ ParsedContribEmail parseSubmission(ContribMessage m) {
     m.body,
     if (region != null) _replaceRegion(m.body, region, region.json.replaceAll(RegExp(r'\r?\n'), ' ')),
     if (region != null) _replaceRegion(m.body, region, region.json.replaceAll(RegExp(r'\r?\n'), '')),
+    ..._oldestCandidates(m.body),
   ].whereType<String>().toList();
 
   Object? firstError;
@@ -218,6 +220,25 @@ ParsedContribEmail parseSubmission(ContribMessage m) {
     }
   }
   throw firstError!;
+}
+
+/// Najstarsza apka: JSON siedzi między znacznikami „nie edytuj", bez sekcji
+/// `### Kod piosenki:`. Rdzeń umie wyjąć ten region (i zdjąć z niego cytowanie
+/// oraz HTML), ale klienty pocztowe łamią w nim długie linie tak samo jak
+/// wszędzie indziej. Doklejamy więc region jako sekcję, którą parser już zna,
+/// w trzech wariantach sklejenia — oryginalna treść zostaje, żeby
+/// `detectOldestFormat` dalej rozpoznał po niej starą apkę.
+List<String> _oldestCandidates(String body) {
+  final region = oldestFormatSongRegion(body);
+  if (region == null || !region.trimLeft().startsWith('{')) return const [];
+  return [
+    for (final json in [
+      region,
+      region.replaceAll(RegExp(r'\s*\r?\n\s*'), ' '),
+      region.replaceAll(RegExp(r'\s*\r?\n\s*'), ''),
+    ])
+      '$body\n\n$kSongMarker\n$json',
+  ];
 }
 
 class _SongRegion {

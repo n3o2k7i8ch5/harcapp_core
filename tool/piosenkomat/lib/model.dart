@@ -79,9 +79,14 @@ const String kOldAppRulesVersion = 'brak (stara apka)';
 const String kSongMarker = '### Kod piosenki:';
 const List<String> kSongSubjects = ['Nowa piosenka', 'Poprawka piosenki'];
 
+/// Najstarsza apka nie ma [kSongMarker] — JSON wkleja między znaczniki
+/// „nie edytuj". Bez tego jej zgłoszenia w ogóle nie wchodziły do kolejki.
+const String kOldAppMarker = 'NIE EDYTUJ PONIŻSZEGO TEKSTU';
+
 /// Kolejka: zgłoszenia piosenek w inboxie bez żadnej etykiety song/*.
 final String kQueueQuery = 'in:inbox '
-    '(${kSongSubjects.map((s) => 'subject:"$s"').join(' OR ')} OR "$kSongMarker") '
+    '(${kSongSubjects.map((s) => 'subject:"$s"').join(' OR ')} '
+    'OR "$kSongMarker" OR "$kOldAppMarker") '
     '${kAllSongLabels.map((l) => '-label:${labelQueryName(l)}').join(' ')}';
 
 /// Do commitu: w pliku, nadane przez automat.
@@ -152,7 +157,8 @@ class ContribMessage {
   /// Czy to w ogóle zgłoszenie piosenki (po temacie albo treści).
   bool get isSongSubmission =>
       kSongSubjects.any((s) => (subject ?? '').contains(s))
-      || body.contains(kSongMarker);
+      || body.contains(kSongMarker)
+      || body.toUpperCase().contains(kOldAppMarker);
 
   /// Plik .eml (nagłówki, pusta linia, treść). Bez nagłówków całość to treść.
   factory ContribMessage.fromEml(String raw, {required String id}) {

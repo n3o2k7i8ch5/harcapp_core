@@ -34,12 +34,18 @@ SongBook loadBook(String path) {
   return SongBook(songs);
 }
 
+/// Refren siedzi w osobnym polu, a w `parts` bywa tylko odsyłaczem
+/// (`{"refren": 1}`). Bez niego tekst ze śpiewnika jest uboższy niż tekst
+/// ze zgłoszenia (`SongRaw.text` refren zawiera) i każda piosenka z refrenem
+/// wychodziła mniej podobna, niż jest naprawdę.
 String _textOf(Map songMap) {
   final parts = songMap['parts'];
-  if (parts is! List) return '';
+  final refren = songMap['refren'];
   return [
-    for (final part in parts)
-      if (part is Map && part['text'] is String) part['text'] as String,
+    if (refren is Map && refren['text'] is String) refren['text'] as String,
+    if (parts is List)
+      for (final part in parts)
+        if (part is Map && part['text'] is String) part['text'] as String,
   ].join('\n');
 }
 

@@ -137,11 +137,20 @@ String? _tryExtractFencedBlockAfter(String content, String header){
 
 ParsedContribEmail _parseLegacy(String content){
   int codeHeaderIdx = content.indexOf('### Kod piosenki:');
-  if(codeHeaderIdx == -1)
-    throw ContribEmailParseError('Brak sekcji "### Kod piosenki:".');
 
-  String songJson = _extractFirstJsonObject(
-      content.substring(codeHeaderIdx + '### Kod piosenki:'.length));
+  // Najstarsza apka sekcji `### Kod piosenki:` nie ma — JSON wkleja między
+  // znaczniki „nie edytuj". Patrz `parse_contrib_email_oldest.dart`.
+  String songSection;
+  if(codeHeaderIdx != -1)
+    songSection = content.substring(codeHeaderIdx + '### Kod piosenki:'.length);
+  else {
+    final oldest = oldestFormatSongRegion(content);
+    if(oldest == null)
+      throw ContribEmailParseError('Brak sekcji "### Kod piosenki:".');
+    songSection = oldest;
+  }
+
+  String songJson = _extractFirstJsonObject(songSection);
 
   Map<String, dynamic> songMap;
   try {
@@ -154,6 +163,9 @@ ParsedContribEmail _parseLegacy(String content){
   final oldestDetection = detectOldestFormat(songMap, content);
   songMap = oldestDetection.songMap;
   final isOldestFormat = oldestDetection.isOldestFormat;
+  // Najstarsza apka bywa niechlujna w `add_pers` — patrz
+  // `normalizeOldestSongMap`. Nowszych formatów to nie dotyka.
+  if(isOldestFormat) songMap = normalizeOldestSongMap(songMap);
 
   String? title = songMap[SongCore.PARAM_TITLE] as String?;
   if(title == null || title.isEmpty)
@@ -167,7 +179,7 @@ ParsedContribEmail _parseLegacy(String content){
   RegisteredContributor? registered;
   List<String> personWarnings = const [];
   int personHeaderIdx = content.indexOf('### Osoba dodająca');
-  if(personHeaderIdx != -1 && personHeaderIdx < codeHeaderIdx){
+  if(personHeaderIdx != -1 && codeHeaderIdx != -1 && personHeaderIdx < codeHeaderIdx){
     String personBlock = content.substring(personHeaderIdx, codeHeaderIdx);
     // Try newer-legacy (RegisteredContributor) first, fall back to V1
     // (bare Person), so nested `Person(...)` inside doesn't get mis-matched.
