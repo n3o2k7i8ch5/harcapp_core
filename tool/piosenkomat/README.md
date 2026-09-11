@@ -5,6 +5,63 @@ trafiają do pliku `.hrcpsng` do wczytania na stronie, a mejle dostają te same
 etykiety, których używasz przy ręcznym przeglądaniu, plus znacznik `song/auto`.
 Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduje.
 
+## Przebieg krok po kroku
+
+1. **Przesiew.**  
+   `./piosenkomat scan -n 20`  
+   ####
+   Czyta kolejkę (inbox bez `song/*`), parsuje, wykrywa duplikaty i zapisuje
+   katalog `out/import-<data>/`: `report.txt`, plan etykiet `labels.json`,
+   a przy imporcie `songs.hrcpsng`, `reviewed.hrcpsng` i `people.dart`.
+   Gmaila tylko czyta — `scan` nigdy niczego nie etykietuje. `-n` pomiń, żeby
+   wziąć całą kolejkę; `--newest` bierze najnowsze zamiast najstarszych;
+   `-o` wskazuje własny katalog przebiegu.
+   ####
+2. **Etykiety automatu.**  
+   `./piosenkomat label scanned --write`  
+   ####
+   Wiesza werdykty z `labels.json`: `ready-to-add`, `rejected/…`,
+   `needs-review/…`, `old-app/to-reply`, każdy ze znacznikiem `song/auto`.  
+   Pomija mejle, które w międzyczasie dostały już jakąś etykietę `song/*`.  
+   Pomyłka? `./piosenkomat unlabel --write` cofa cały przebieg.
+   ####
+3. **Przegląd na stronie.**  
+   *(ręcznie)*  
+   ####
+   Wczytujesz `out/import-<data>/songs.hrcpsng` na stronie ze śpiewnikiem,
+   wyrzucasz co niepotrzebne, poprawiasz co trzeba, eksportujesz z powrotem
+   i podmieniasz eksportem `out/import-<data>/reviewed.hrcpsng`.
+   ####
+4. **Odrzucenia z przeglądu.**  
+   `./piosenkomat label reviewed --write`  
+   ####
+   Porównuje `songs.hrcpsng` z `reviewed.hrcpsng`: czego nie ma w tym drugim,
+   traci `ready-to-add` i dostaje `rejected/after-review`. Zatwierdzone zostają
+   bez zmian. Bez `--write` tylko pokazuje różnicę.
+   ####
+5. **Osoby dodające.**
+   *(ręcznie)*  
+   ####
+   Doklejasz `out/import-<data>/people.dart` na koniec `lib/values/people/data.dart`.  
+   Po kroku 4, bo dopiero on mówi, czyje piosenki wypadły i kogo nie ma po co dopisywać.
+   ####
+6. **Piosenki do śpiewnika aplikacji.**  
+   *(ręcznie)*  
+   ####
+   Zatwierdzone piosenki muszą trafić do `assets/songs/all_songs.hrcpsng` i do
+   commita. Dopóki tam nie są, `label added` z kroku 7 kłamie (mejl zamknięty,
+   piosenki w apce nie ma), a następny `scan` nie rozpozna ich jako duplikatów.
+   ####
+7. **Domknięcie mejli.** 
+   `./piosenkomat label added --write`  
+   ####
+   `ready-to-add` + `auto` → `added` i oznaczenie jako przeczytane. Rusza
+   wyłącznie mejle, które automat sam wstawił do pliku; Twoje ręczne
+   „ready-to-add” zostają nietknięte.
+
+Osobno, kiedy chcesz: `./piosenkomat reply --write` — odpowiedzi autorom ze
+starej apki (kolejką jest etykieta, nie katalog przebiegu).
+
 ## Setup (raz)
 
 1. Google Cloud: włącz Gmail API, utwórz klienta OAuth typu **Desktop**.
@@ -13,47 +70,8 @@ Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduj
    Token ląduje w `tool/piosenkomat/secrets/gmail_token.json`. Zakresy: `gmail.modify`
    (etykiety) i `gmail.send` (odpowiedzi o starej apce). Token bez obu zakresów
    narzędzie odrzuca i prosi o ponowne zalogowanie.
-4. W Gmailu zmień nazwy istniejących etykiet na te z drzewa niżej (zmiana nazwy
-   zachowuje etykietę na mejlach). Nazwy muszą zgadzać się co do znaku z `lib/model.dart`. Małe litery i myślniki, bez spacji, dzięki czemu nazwa w pasku i w `label:` są identyczne.
 
 Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` są względem `tool/piosenkomat/`.
-
-## Przebieg krok po kroku
-
-1. **Przesiew.** `./piosenkomat scan -n 20`
-   Czyta kolejkę (inbox bez `song/*`), parsuje, wykrywa duplikaty i zapisuje
-   katalog `out/import-<data>/`: `report.txt`, plan etykiet `labels.json`,
-   a przy imporcie `songs.hrcpsng`, `reviewed.hrcpsng` i `people.dart`.
-   Gmaila tylko czyta — `scan` nigdy niczego nie etykietuje. `-n` pomiń, żeby
-   wziąć całą kolejkę; `--newest` bierze najnowsze zamiast najstarszych;
-   `-o` wskazuje własny katalog przebiegu.
-2. **Etykiety automatu.** `./piosenkomat label scanned --write`
-   Wiesza werdykty z `labels.json`: `ready-to-add`, `rejected/…`,
-   `needs-review/…`, `old-app/to-reply`, każdy ze znacznikiem `song/auto`.
-   Pomija mejle, które w międzyczasie dostały już jakąś etykietę `song/*`.
-   Pomyłka? `./piosenkomat unlabel --write` cofa cały przebieg.
-3. **Przegląd na stronie.** *(ręcznie)*
-   Wczytujesz `out/import-<data>/songs.hrcpsng` na stronie ze śpiewnikiem,
-   wyrzucasz co niepotrzebne, poprawiasz co trzeba, eksportujesz z powrotem
-   i podmieniasz eksportem `out/import-<data>/reviewed.hrcpsng`.
-4. **Odrzucenia z przeglądu.** `./piosenkomat label reviewed --write`
-   Porównuje `songs.hrcpsng` z `reviewed.hrcpsng`: czego nie ma w tym drugim,
-   traci `ready-to-add` i dostaje `rejected/after-review`. Zatwierdzone zostają
-   bez zmian. Bez `--write` tylko pokazuje różnicę.
-5. **Osoby dodające.** *(ręcznie)*
-   Doklejasz `out/import-<data>/people.dart` na koniec `lib/values/people/data.dart`.
-   Po kroku 4, bo dopiero on mówi, czyje piosenki wypadły i kogo nie ma po co dopisywać.
-6. **Piosenki do śpiewnika aplikacji.** *(ręcznie)*
-   Zatwierdzone piosenki muszą trafić do `assets/songs/all_songs.hrcpsng` i do
-   commita. Dopóki tam nie są, `label added` z kroku 7 kłamie (mejl zamknięty,
-   piosenki w apce nie ma), a następny `scan` nie rozpozna ich jako duplikatów.
-7. **Domknięcie mejli.** `./piosenkomat label added --write`
-   `ready-to-add` + `auto` → `added` i oznaczenie jako przeczytane. Rusza
-   wyłącznie mejle, które automat sam wstawił do pliku; Twoje ręczne
-   „ready-to-add” zostają nietknięte.
-
-Osobno, kiedy chcesz: `./piosenkomat reply --write` — odpowiedzi autorom ze
-starej apki (kolejką jest etykieta, nie katalog przebiegu).
 
 ## Komendy
 
