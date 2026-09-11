@@ -160,7 +160,16 @@ ParsedContribEmail _parseLegacy(String content){
   }
 
   // Najstarsze legacy — patrz `parse_contrib_email_oldest.dart`.
-  final oldestDetection = detectOldestFormat(songMap, content);
+  //
+  // Znacznik „nie edytuj" liczy się tylko przed sekcją `### Kod piosenki:`.
+  // Odpowiedź z nowej apki cytuje stary mejl pod spodem — gdyby ten cytat
+  // robił z niej zgłoszenie ze starej apki, przeszłaby bez sprawdzenia zgody.
+  // Mejl ze starej apki, któremu sekcję dokleja narzędzie, ma znacznik
+  // w oryginalnej treści, czyli przed nią.
+  final oldestDetection = detectOldestFormat(
+    songMap,
+    codeHeaderIdx == -1 ? content : content.substring(0, codeHeaderIdx),
+  );
   songMap = oldestDetection.songMap;
   final isOldestFormat = oldestDetection.isOldestFormat;
   // Najstarsza apka bywa niechlujna w `add_pers` — patrz

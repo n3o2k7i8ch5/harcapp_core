@@ -6,6 +6,7 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../song_core.dart';
 import '../song_element.dart';
+import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'providers.dart';
 import 'widgets/song_part_editor_template/errors.dart';
@@ -38,6 +39,10 @@ class SongRaw extends SongCore{
 
   List<String> tags;
 
+  /// Ślad piosenkomatu: uwagi z przeglądu zgłoszeń. `null` dla każdej
+  /// normalnej piosenki — niepuste znaczy „jeszcze nie wchodzi do apki”.
+  PiosenkomatData? piosenkomatData;
+
   bool hasRefren;
   late SongPart refrenPart;
 
@@ -58,6 +63,7 @@ class SongRaw extends SongCore{
     this.contribRefs = song.contribRefs;
     this.youtubeVideoId = song.youtubeVideoId;
     this.tags = song.tags.toList();
+    this.piosenkomatData = song.piosenkomatData;
 
     this.hasRefren = song.hasRefren;
     this.refrenPart = song.refrenPart;
@@ -80,6 +86,7 @@ class SongRaw extends SongCore{
     required this.youtubeVideoId,
 
     required this.tags,
+    this.piosenkomatData,
 
     required this.hasRefren,
     SongPart? refrenPart,
@@ -105,6 +112,7 @@ class SongRaw extends SongCore{
     contributorData: null,
     youtubeVideoId: null,
     tags: [],
+    piosenkomatData: null,
     hasRefren: true,
     refrenPart: SongPart.empty(isRefrenTemplate: true),
     songParts: [],
@@ -134,14 +142,24 @@ class SongRaw extends SongCore{
     return YoutubePlayerController.convertUrlToId(ytLink);
   }
 
+  /// Lista napisów odporna na śmieci w danych: `null` i wpisy innego typu
+  /// wypadają. `cast<String>()` przepuściłby je tutaj, a wywalił się dopiero
+  /// przy zapisie — a takie JSON-y naprawdę przychodzą (`performers: [null]`
+  /// z najstarszej wersji apki).
+  static List<String> _stringList(dynamic raw) => [
+    if(raw is List)
+      for(final item in raw)
+        if(item is String) item
+  ];
+
   static SongRaw fromApiRespMap(String id, Map respMap){
     bool hasRefren = false;
 
     String title = respMap[SongCore.PARAM_TITLE];
-    List<String> hidTitles = (respMap[SongCore.PARAM_HID_TITLES] as List).cast<String>();
-    List<String> authors = ((respMap[SongCore.PARAM_TEXT_AUTHORS]??[]) as List).cast<String>();
-    List<String> composers = ((respMap[SongCore.PARAM_COMPOSERS]??[]) as List).cast<String>();
-    List<String> performers = ((respMap[SongCore.PARAM_PERFORMERS]??[]) as List).cast<String>();
+    List<String> hidTitles = _stringList(respMap[SongCore.PARAM_HID_TITLES]);
+    List<String> authors = _stringList(respMap[SongCore.PARAM_TEXT_AUTHORS]);
+    List<String> composers = _stringList(respMap[SongCore.PARAM_COMPOSERS]);
+    List<String> performers = _stringList(respMap[SongCore.PARAM_PERFORMERS]);
     DateTime? releaseDate = DateTime.tryParse(respMap[SongCore.PARAM_REL_DATE]??'');
     bool showRelDateMonth = respMap[SongCore.PARAM_SHOW_REL_DATE_MONTH]??true;
     bool showRelDateDay = respMap[SongCore.PARAM_SHOW_REL_DATE_DAY]??true;
@@ -149,7 +167,9 @@ class SongRaw extends SongCore{
     List<ContributorRef> contribRefs = ((respMap[SongCore.PARAM_CONTRIB_REFS]??[]) as List).map((map) => ContributorRef.fromApiRespMap(map)).toList();
     ContributorData? contributorData = respMap[SongCore.PARAM_CONTRIBUTOR_DATA]==null?null:
     ContributorData.fromJsonMap(respMap[SongCore.PARAM_CONTRIBUTOR_DATA] as Map<String, dynamic>);
-    List<String> tags = (respMap[SongCore.PARAM_TAGS] as List).cast<String>();
+    List<String> tags = _stringList(respMap[SongCore.PARAM_TAGS]);
+    PiosenkomatData? piosenkomatData = respMap[SongCore.PARAM_PIOSENKOMAT]==null?null:
+    PiosenkomatData.fromJsonMap(respMap[SongCore.PARAM_PIOSENKOMAT] as Map<String, dynamic>);
     SongPart refrenPart;
     if (respMap.containsKey(SongCore.PARAM_REFREN)) {
       hasRefren = true;
@@ -189,6 +209,7 @@ class SongRaw extends SongCore{
       youtubeVideoId: youtubeVideoId,
 
       tags: tags,
+      piosenkomatData: piosenkomatData,
 
       hasRefren: hasRefren,
       refrenPart: refrenPart,
@@ -266,7 +287,10 @@ class SongRaw extends SongCore{
     return chords;
   }
 
-  Map toApiJsonMap({bool withId = true}){
+  /// [withPiosenkomatData] wypuszcza uwagi piosenkomatu do pliku. Domyślnie
+  /// wyłączone, żeby ślad przeglądu nigdy nie wyciekł do bazy piosenek —
+  /// włącza je tylko samo narzędzie, zapisując swoje pliki robocze.
+  Map toApiJsonMap({bool withId = true, bool withPiosenkomatData = false}){
 
     Map map = {};
     map[SongCore.PARAM_TITLE] = title.trim();
@@ -283,6 +307,9 @@ class SongRaw extends SongCore{
     map[SongCore.PARAM_CONTRIBUTOR_DATA] = contributorData?.toJsonMap();
 
     map[SongCore.PARAM_TAGS] = tags;
+
+    if(withPiosenkomatData && piosenkomatData != null)
+      map[SongCore.PARAM_PIOSENKOMAT] = piosenkomatData!.toJsonMap();
 
     hasRefren = hasRefren && !refrenPart.isEmpty;
 

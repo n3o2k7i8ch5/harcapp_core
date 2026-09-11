@@ -1,3 +1,5 @@
+import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/similarity.dart';
 import 'package:harcapp_core/song_book/contrib_song_email.dart';
@@ -94,3 +96,16 @@ String hardWrap(String text, {int width = 76}) {
 /// Śpiewnik z podanych piosenek (tytuł + tekst).
 SongBook bookWith(List<SongRaw> songs) =>
     SongBook([for (final s in songs) BookSong(s.title, s.text)]);
+
+/// Sam zestaw uwag, bez mejla — do testów etykiet.
+Classified classifiedWith(List<SongIssue> issues) => Classified(
+      message: const ContribMessage(id: 'x', body: ''),
+      title: 'x',
+      song: SongRaw.empty(id: 'x'),
+      issues: [for (final i in issues) PiosenkomatIssue(i)],
+    );
+
+List<SongIssue> issuesOf(Classified c) => [for (final i in c.issues) i.issue];
+
+String? detailOf(Classified c, SongIssue issue) =>
+    c.issues.where((i) => i.issue == issue).firstOrNull?.detail;

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
+import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
+import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:path/path.dart' as p;
 
 import 'classify.dart';
@@ -221,25 +223,48 @@ Future<int> _scan(ArgResults cmd) async {
   stdout.writeln();
   stdout.write(report);
 
-  final imports = [
-    for (final c in classified)
-      if (c.verdict case Import(:final song)) song,
-  ];
   final outDir = cmd['out'] as String? ?? defaultOutDir();
-  final songsPath = songsPathIn(outDir);
+  final run = p.basename(outDir);
   final planPath = planPathIn(outDir);
   final reportPath = reportPathIn(outDir);
-  final plan = LabelPlan.fromClassified(classified, songsPath);
-  writePlan(planPath, plan);
   writeText(reportPath, report);
-  if (imports.isNotEmpty) {
-    writeHrcpsng(songsPath, imports);
-    stdout.writeln('\nZapisano ${imports.length} piosenek → $songsPath');
-    stdout.writeln('Wczytaj ten plik na stronie ze śpiewnikiem.');
-    // Kopia do podmiany: po przeglądzie wgrywasz tu eksport ze strony,
-    // a `label reviewed` z różnicy wyciąga odrzucone.
+
+  // Dwa pliki, bo to dwie różne roboty: `auto` przelatujesz, `review`
+  // czytasz po kolei. Uwagi jadą w piosenkach, więc edytor pokaże przy każdej,
+  // co jest z nią nie tak.
+  final auto = [for (final c in classified) if (c.goesToApp) c.song!];
+  final review = [for (final c in classified) if (c.goesToReview) c.song!];
+  // Razem, bo `reviewed.hrcpsng` też jest jednym plikiem z obu.
+  assignUniqueIds([...auto, ...review]);
+  for (final c in classified) {
+    if (c.song case final song?) {
+      song.piosenkomatData = c.piosenkomatData(run: run);
+    }
+  }
+
+  final files = <RunFile, String>{
+    if (auto.isNotEmpty) RunFile.auto: autoPathIn(outDir),
+    if (review.isNotEmpty) RunFile.review: reviewPathIn(outDir),
+  };
+  final plan = LabelPlan.fromClassified(classified, files: files);
+  writePlan(planPath, plan);
+
+  if (auto.isNotEmpty) {
+    writeHrcpsng(autoPathIn(outDir), auto, withPiosenkomatData: true);
+    stdout.writeln('\nBez zarzutu: ${auto.length} piosenek → ${autoPathIn(outDir)}');
+  }
+  if (review.isNotEmpty) {
+    writeHrcpsng(reviewPathIn(outDir), review, withPiosenkomatData: true);
+    stdout.writeln('Do przeglądu: ${review.length} piosenek → ${reviewPathIn(outDir)}');
+    stdout.writeln('  (każda niesie swoje uwagi — edytor pokaże je nad piosenką)');
+  }
+
+  if (auto.isNotEmpty || review.isNotEmpty) {
+    stdout.writeln('Wczytaj oba pliki na stronie ze śpiewnikiem.');
+    // Miejsce na eksport: wrzucasz tu jeden plik z obu, a `label reviewed`
+    // z różnicy wyciąga odrzucone i nieogarnięte.
     final reviewedPath = reviewedPathIn(outDir);
-    File(songsPath).copySync(reviewedPath);
+    writeHrcpsng(reviewedPath, [...auto, ...review], withPiosenkomatData: true);
     stdout.writeln('Po przeglądzie podmień $reviewedPath eksportem ze strony '
         'i odpal: ./piosenkomat label reviewed $outDir');
 
@@ -253,7 +278,7 @@ Future<int> _scan(ArgResults cmd) async {
       stdout.writeln('Doklej nowe do lib/values/people/data.dart.');
     }
   } else {
-    stdout.writeln('\nNic do importu.');
+    stdout.writeln('\nNic nie poszło do plików.');
   }
 
   stdout.writeln('Katalog: $outDir');
@@ -271,7 +296,8 @@ Future<int> _labelScanned(ArgResults cmd) async {
   final planPath = _planPath(cmd);
   if (planPath == null) return 64;
   final plan = readPlan(planPath);
-  stdout.writeln('${_planHeader(plan)}, plik piosenek ${plan.hrcpsngPath}');
+  stdout.writeln('${_planHeader(plan)}, pliki: '
+      '${plan.files.values.join(', ')}');
   _countLines(stdout, _tally(plan.labelsById.values.expand((l) => l)));
   if (!_write(cmd)) {
     stdout.writeln('\nDry-run: Gmail nietknięty. --push nada powyższe.');
@@ -305,9 +331,13 @@ Future<int> _unlabel(ArgResults cmd) async {
   final mailbox = await _connect(cmd);
   stdout.writeln('Sprawdzam etykiety w skrzynce…');
   final currentById = await mailbox.songLabelsByMessage();
+  // Znacznik `auto` albo etykieta z wcześniejszej wersji narzędzia — tę drugą
+  // trzeba złapać osobno, bo po zdjęciu `auto` nie ma już po czym poznać,
+  // że to ślad automatu.
   final byAutomat = {
     for (final e in currentById.entries)
-      if (e.value.contains(kLabelAuto)) e.key: e.value,
+      if (e.value.contains(kLabelAuto) || e.value.any(kLegacyToolLabels.contains))
+        e.key: e.value,
   };
 
   final toRemove = <String, List<String>>{};
@@ -322,7 +352,13 @@ Future<int> _unlabel(ArgResults cmd) async {
       closed++;
       continue;
     }
-    toRemove[e.key] = [for (final l in kToolLabels) if (e.value.contains(l)) l];
+    // „Odpisano" zostaje: to jedyny ślad, że autor już dostał mejla o starej
+    // apce. Bez niego wróciłby do kolejki `to-reply` i dostał drugi.
+    toRemove[e.key] = [
+      for (final l in [...kToolLabels, ...kLegacyToolLabels])
+        if (e.value.contains(l) && (force || l != kLabelOldAppReplied)) l,
+    ];
+    if (toRemove[e.key]!.isEmpty) toRemove.remove(e.key);
   }
 
   if (toRemove.isEmpty) {
@@ -338,6 +374,10 @@ Future<int> _unlabel(ArgResults cmd) async {
   if (closed > 0) {
     stdout.writeln('Pomijam $closed domkniętych („$kLabelDone”) — te piosenki są '
         'już w apce; --force, jeśli mimo to mają zejść.');
+  }
+  if (!force) {
+    stdout.writeln('„$kLabelOldAppReplied” zostaje — autor już dostał odpowiedź. '
+        '--force, jeśli ma zejść.');
   }
   if (!_write(cmd)) {
     stdout.writeln('\nDry-run: Gmail nietknięty. --push zdejmie powyższe.');
@@ -374,6 +414,26 @@ Future<void> _applyPlan(
       './piosenkomat label reviewed --push i ./piosenkomat label added --push');
 }
 
+/// Piosenki z ostatniego przebiegu, po id mejla. Służą tylko do wypisania
+/// tytułu i nadawcy — gdy planu nie ma albo jest niekompletny, `label added`
+/// dopyta Gmaila.
+Map<String, PlannedSong> _songsFromLatestPlan() {
+  final dir = latestOutDir();
+  if (dir == null) return const {};
+  final path = planPathIn(_resolve(dir));
+  if (!_exists(path)) return const {};
+  try {
+    return {
+      for (final e in readPlan(path).songsById.entries)
+        if (e.value.isNotEmpty) e.key: e.value.first,
+    };
+  } catch (_) {
+    // Plan tylko ładniej podpisuje wiersze; uszkodzony (zły JSON, stary
+    // kształt) niczego nie blokuje — dopytamy Gmaila.
+    return const {};
+  }
+}
+
 String _planHeader(LabelPlan plan) =>
     'Plan z ${_minute(plan.createdAt)}: ${plan.labelsById.length} mejli';
 
@@ -406,14 +466,22 @@ Future<int> _labelAdded(ArgResults cmd) async {
   final mailbox = await _connect(cmd);
   final current = await mailbox.songLabelsByMessage();
   // Bezpiecznik na wypadek, gdyby query przepuściło coś bez „auto”: ruszamy
-  // tylko to, co automat sam wstawił do pliku.
+  // tylko to, co automat sam wstawił do pliku. Sam zestaw etykiet wystarczy,
+  // żeby wiedzieć, co jest gotowe — bez osobnego zapytania do Gmaila.
   final ready = [
-    for (final id in await mailbox.listIds(kReadyByToolQuery))
-      if (isReadyByTool(current[id] ?? const {})) id,
+    for (final e in current.entries)
+      if (isReadyByTool(e.value)) e.key,
   ];
+  // Tytuł i nadawcę bierzemy z planu przebiegu — leżą w `labels.json` za darmo.
+  // Dopytujemy Gmaila tylko o mejle spoza planu (20 jednostek za sztukę).
+  final zPlanu = _songsFromLatestPlan();
   for (final id in ready) {
-    final h = await mailbox.headersOf(id);
-    stdout.writeln('  ${h.subject}  ${emailFromHeader(h.from) ?? ''}  [$id]');
+    if (zPlanu[id] case final i?) {
+      stdout.writeln('  ${i.title}  ${i.sender}  [$id]');
+    } else {
+      final h = await mailbox.headersOf(id);
+      stdout.writeln('  ${h.subject}  ${emailFromHeader(h.from) ?? ''}  [$id]');
+    }
   }
   stdout.writeln('„$kLabelReady” + „$kLabelAuto”: ${ready.length} mejli');
   if (!write) {
@@ -428,8 +496,15 @@ Future<int> _labelAdded(ArgResults cmd) async {
 }
 
 /// `label reviewed [katalog] [--push]`: różnica między tym, co automat
-/// wstawił do pliku, a tym, co zostało po Twoim przeglądzie na stronie.
-/// Mejl traci „w pliku” tylko wtedy, gdy wypadły wszystkie jego piosenki.
+/// wstawił do plików przebiegu, a tym, co zostało po Twoim przeglądzie.
+///
+/// Piosenka ma trzy stany i każdy znaczy co innego dla mejla:
+///  - wróciła bez uwag → „$kLabelReady”, czeka na `label added`,
+///  - wróciła z uwagami → z powrotem „$kLabelToReview” plus podkategorie tych
+///    uwag, które zostały (zdjęcie uwagi w edytorze to Twoja decyzja),
+///  - nie wróciła → „$kLabelRejectedAfterReview”.
+///
+/// Mejl zmienia stan tylko wtedy, gdy dotyczy go los wszystkich jego piosenek.
 Future<int> _labelReviewed(ArgResults cmd) async {
   final outDir = _runDir(cmd);
   if (outDir == null) return 64;
@@ -440,20 +515,20 @@ Future<int> _labelReviewed(ArgResults cmd) async {
       cmd['approved'] as String? ??
       _pickReviewedFile(outDir));
 
-  final proposed = collectProposed(plan, readHrcpsng(songsPathIn(outDir)));
+  final proposed = collectProposed(plan, _runFileSongs(outDir, plan));
   if (proposed.isEmpty) {
-    stderr.writeln('Ten przebieg nic nie zaproponował do pliku, nie ma co porównywać.');
+    stderr.writeln('Ten przebieg nic nie wstawił do plików, nie ma co porównywać.');
     return 1;
   }
   final reviewed = readHrcpsng(reviewedPath);
-  stdout.writeln('Przebieg $outDir: ${proposed.length} zaproponowanych, '
+  stdout.writeln('Przebieg $outDir: ${proposed.length} w plikach, '
       '${reviewed.length} w $reviewedPath');
 
   final result = reviewDiff(proposed: proposed, reviewed: reviewed);
-  final reviewPath = reviewPathIn(outDir);
-  writeReviewLedger(reviewPath, reviewedPath: reviewedPath, result: result);
+  final decisionsPath = decisionsPathIn(outDir);
+  writeDecisions(decisionsPath, reviewedPath: reviewedPath, result: result);
   _printReview(result);
-  stdout.writeln('Ślad przeglądu: $reviewPath');
+  stdout.writeln('Ślad przeglądu: $decisionsPath');
 
   // Bezpieczniki na zły plik: pusty eksport i „odrzucona większość” prawie
   // zawsze znaczą, że podmieniony został nie ten plik, co trzeba.
@@ -468,43 +543,126 @@ Future<int> _labelReviewed(ArgResults cmd) async {
         'właściwy plik. Jeśli tak ma być: --force.');
     return 1;
   }
+  // Zgubione pole to nie to samo, co ogarnięte uwagi: gdyby strona wyrzuciła
+  // `piosenkomat` przy eksporcie, wszystko wyglądałoby na załatwione.
+  if (!force && result.lostIssues) {
+    stderr.writeln('\nŻadna piosenka nie wróciła ze śladem piosenkomatu, choć '
+        'jechały z uwagami — eksport prawdopodobnie zgubił pole „piosenkomat”. '
+        'Jeśli naprawdę ogarnąłeś wszystko: --force.');
+    return 1;
+  }
 
-  final msgIds = result.rejectedMsgIds;
-  if (msgIds.isEmpty) {
-    stdout.writeln('\nNic do odetykietowania. Dalej: ./piosenkomat label added --push');
+  final changes = _reviewLabelChanges(result, plan);
+  if (changes.isEmpty) {
+    stdout.writeln('\nNic do przestawienia. Dalej: ./piosenkomat label added --push');
     return 0;
   }
   if (!_write(cmd)) {
-    stdout.writeln('\nDry-run: Gmail nietknięty. --push zdejmie „$kLabelReady” '
-        'i nada „$kLabelRejectedAfterReview” na ${msgIds.length} mejlach.');
+    stdout.writeln('\nDry-run: Gmail nietknięty. --push przestawi etykiety '
+        'na ${changes.length} mejlach.');
     return 0;
   }
 
   final mailbox = await _connect(cmd);
   await mailbox.ensureToolLabels();
   // Bezpiecznik jak w `label added`: ruszamy tylko to, co automat sam
-  // wstawił do pliku i co dalej tam czeka.
-  final todo = <String>[];
-  for (final id in msgIds) {
-    if (isReadyByTool(await mailbox.labelsOf(id))) todo.add(id);
+  // wstawił do plików przebiegu i co dalej tam czeka.
+  // Przy garstce taniej zapytać o każdy mejl (20 jednostek), przy większej
+  // liczbie — raz o całą skrzynkę (jedno zapytanie na etykietę `song/*`).
+  final current = <String, Set<String>>{};
+  if (changes.length > 5) {
+    current.addAll(await mailbox.songLabelsByMessage());
+  } else {
+    for (final id in changes.keys) {
+      current[id] = await mailbox.labelsOf(id);
+    }
   }
-  // `auto` zostaje — to automat tę piosenkę zaproponował.
-  await mailbox.batchModify(todo,
-      add: [kLabelRejectedAfterReview], remove: [kLabelReady, 'UNREAD']);
-  stdout.writeln('Odrzucono po przeglądzie: ${todo.length} mejli.');
-  if (todo.length < msgIds.length) {
-    stdout.writeln('Pominięto ${msgIds.length - todo.length} mejli '
-        'bez „$kLabelReady” + „$kLabelAuto”.');
+
+  // Mejle o tej samej zmianie idą jedną paczką (`batchModify` bierze do 1000),
+  // inaczej każdy kosztuje osobne zapytanie i przy setkach Gmail dławi.
+  final groups = <String, (List<String>, List<String>, List<String>)>{};
+  var skipped = 0;
+  for (final e in changes.entries) {
+    final labels = current[e.key] ?? const <String>{};
+    if (!isInRunFilesByTool(labels)) {
+      skipped++;
+      continue;
+    }
+    final (add, remove) = e.value;
+    // Odrzucone i wchodzące do apki są domknięte z Twojej strony;
+    // te z niezdjętymi uwagami dalej czekają, więc zostają nieprzeczytane.
+    final effectiveRemove = [
+      ...remove.where(labels.contains),
+      if (add.any(isClosedLabel)) 'UNREAD',
+    ];
+    final key = '${add.join('\u0000')}\u0001${effectiveRemove.join('\u0000')}';
+    groups.putIfAbsent(key, () => (add, effectiveRemove, <String>[])).$3.add(e.key);
+  }
+  var done = 0;
+  for (final (add, remove, ids) in groups.values) {
+    await mailbox.batchModify(ids,
+        add: add.isEmpty ? null : add, remove: remove.isEmpty ? null : remove);
+    done += ids.length;
+  }
+  stdout.writeln('Przestawiono etykiety na $done mejlach.');
+  if (skipped > 0) {
+    stdout.writeln('Pominięto $skipped mejli spoza plików tego przebiegu.');
   }
   stdout.writeln('Dalej: ./piosenkomat label added --push');
   return 0;
 }
 
-/// Co weszło, co wypadło, co rozpoznane inaczej niż po id mejla.
+/// Piosenki z plików przebiegu: `auto` i `review`, a w starszych katalogach
+/// jeden `songs.hrcpsng`.
+List<SongRaw> _runFileSongs(String outDir, LabelPlan plan) {
+  final paths = <String>{
+    for (final path in plan.files.values) _resolve(path),
+    autoPathIn(outDir),
+    reviewPathIn(outDir),
+    legacySongsPathIn(outDir),
+  };
+  return [
+    for (final path in paths)
+      if (_exists(path)) ...readHrcpsng(path),
+  ];
+}
+
+/// Co zrobić z etykietami każdego mejla po przeglądzie: `(dodaj, zdejmij)`.
+Map<String, (List<String>, List<String>)> _reviewLabelChanges(
+  ReviewResult result,
+  LabelPlan plan,
+) {
+  final out = <String, (List<String>, List<String>)>{};
+
+  for (final id in result.rejectedMsgIds) {
+    out[id] = ([kLabelRejectedAfterReview], [kLabelReady, ...kReviewLabels]);
+  }
+  for (final e in result.unresolvedLabels.entries) {
+    out[e.key] = (
+      e.value,
+      [kLabelReady, ...kReviewLabels.where((l) => !e.value.contains(l))],
+    );
+  }
+  for (final id in result.acceptedMsgIds) {
+    // Piosenki bez zarzutu już mają „w pliku” — ruszamy tylko te, które
+    // wyszły z przeglądu.
+    final wasInReview = (plan.labelsById[id] ?? const []).contains(kLabelToReview);
+    if (!wasInReview) continue;
+    out[id] = ([kLabelReady], kReviewLabels);
+  }
+  return out;
+}
+
+/// Co weszło, co dalej czeka, co wypadło i co rozpoznane inaczej niż po id mejla.
 void _printReview(ReviewResult result) {
   stdout.writeln();
-  stdout.writeln('ZOSTAJE   ${result.accepted.length}');
-  stdout.writeln('ODRZUCONE ${result.rejected.length}');
+  stdout.writeln('WCHODZI      ${result.accepted.length}');
+  stdout.writeln('DALEJ CZEKA  ${result.unresolved.length}');
+  stdout.writeln('ODRZUCONE    ${result.rejected.length}');
+  for (final m in result.unresolved) {
+    stdout.writeln('  CZEKA   ${m.reviewedTitle}  [${m.proposed.msgId}]  '
+        '${m.remaining.map((i) => i.text).join('; ')}');
+  }
   for (final r in result.rejected) {
     stdout.writeln('  ODRZUĆ  ${r.title}  [${r.msgId}]');
   }
@@ -517,14 +675,16 @@ void _printReview(ReviewResult result) {
   // Kto z people.dart został tylko przy odrzuconych piosenkach — jego wpisu
   // nie ma po co doklejać do data.dart.
   final dropped = {for (final r in result.rejected) r.sender}
-    ..removeAll({for (final m in result.accepted) m.proposed.sender})
+    ..removeAll({
+      for (final m in [...result.accepted, ...result.unresolved]) m.proposed.sender
+    })
     ..remove('');
   if (dropped.isNotEmpty) {
     stdout.writeln('Tylko odrzucone piosenki (pomiń w people.dart): '
         '${dropped.join(', ')}');
   }
   final byOther = [
-    for (final m in result.accepted)
+    for (final m in [...result.accepted, ...result.unresolved])
       if (m.kind != MatchKind.emailMsgId) m,
   ];
   if (byOther.isNotEmpty) {
@@ -565,27 +725,49 @@ Future<int> _reply(ArgResults cmd) async {
   stdout.writeln('Do odpisania: ${ids.length} mejli, pobieram nagłówki…');
 
   // Grupujemy po autorze, w każdej grupie odpisujemy na najnowszy wątek.
-  final bySender = <String, List<ReplyTarget>>{};
+  // Nadawcy nie da się poznać bez nagłówka, a ten kosztuje 20 jednostek, więc
+  // przy `-n` przestajemy czytać, gdy mamy już tylu autorów, ilu obsłużymy.
+  final bySender = <String, List<String>>{};
+  final targets = <String, ReplyTarget>{};
   final unknownSender = <String>[];
+  var urwane = false;
   for (final id in ids) {
+    if (limit != null && bySender.length >= limit) {
+      urwane = true;
+      break;
+    }
     final target = await mailbox.replyTarget(id);
+    targets[id] = target;
     final sender = emailFromHeader(target.to);
     if (sender == null || sender == kInboxEmail) {
       unknownSender.add(id);
       continue;
     }
-    bySender.putIfAbsent(sender, () => []).add(target);
+    bySender.putIfAbsent(sender, () => []).add(id);
+  }
+  // Urwany przegląd zna tylko część mejli wybranych autorów, a etykieta musi
+  // zejść ze wszystkich. Reszta to jedno zapytanie na autora zamiast czytania
+  // nagłówków całej kolejki.
+  if (urwane) {
+    for (final sender in bySender.keys.toList()) {
+      // Nawiasy, bo `--query` z `OR` bez nich łapałby cudze mejle:
+      // `a OR b from:x` to dla Gmaila `a OR (b from:x)`.
+      bySender[sender] = await mailbox.listIds('($query) from:$sender');
+    }
   }
 
   final senders = bySender.keys.toList()..sort();
   final planned = limit == null ? senders : senders.take(limit).toList();
   for (final sender in planned) {
-    final targets = bySender[sender]!;
-    stdout.writeln('  → $sender  ${targets.length} '
-        '${targets.length == 1 ? 'mejl' : 'mejli'}  '
-        'wątek [${targets.last.messageId}]');
+    final mejle = bySender[sender]!;
+    stdout.writeln('  → $sender  ${mejle.length} '
+        '${mejle.length == 1 ? 'mejl' : 'mejli'}  '
+        'wątek [${mejle.last}]');
   }
-  if (planned.length < senders.length) {
+  if (urwane) {
+    stdout.writeln('  (w kolejce czekają kolejni autorzy — `-n` bierze '
+        'najstarszych)');
+  } else if (planned.length < senders.length) {
     stdout.writeln('  (${senders.length - planned.length} autorów poza --limit, '
         'zostają w kolejce)');
   }
@@ -604,9 +786,12 @@ Future<int> _reply(ArgResults cmd) async {
   var sent = 0;
   var failed = 0;
   for (final sender in planned) {
-    final targets = bySender[sender]!;
+    final mejle = bySender[sender]!;
+    final najnowszy = mejle.last;
     try {
-      await mailbox.replyTo(targets.last, oldestFormatReplyMessage);
+      final target =
+          targets[najnowszy] ?? await mailbox.replyTarget(najnowszy);
+      await mailbox.replyTo(target, oldestFormatReplyMessage);
     } catch (e) {
       // Etykieta zostaje, więc następny przebieg spróbuje jeszcze raz.
       stderr.writeln('  ! $sender: $e');
@@ -615,7 +800,7 @@ Future<int> _reply(ArgResults cmd) async {
     }
     sent++;
     // Zaraz po wysyłce, żeby ewentualna wywrotka nie kosztowała drugiego mejla.
-    await mailbox.batchModify([for (final t in targets) t.messageId],
+    await mailbox.batchModify(mejle,
         add: [kLabelOldAppReplied], remove: [kLabelOldAppToReply]);
   }
   stdout.writeln('Wysłano $sent '
@@ -725,74 +910,77 @@ void _countLines(StringSink out, Map<String, int> counts, {bool byCount = false}
   }
 }
 
-bool _unparsed(Classified c) => switch (c.verdict) {
-      Manual(:final reasons) => reasons.contains(SkipReason.parseError),
-      _ => false,
-    };
+bool _unparsed(Classified c) => c.has(SongIssue.parseError);
 
-/// Raport przebiegu (konsola i `report.txt`): liczby, powody i wiązki
-/// sparsowanych, potem lista mejli z werdyktem i etykietami.
+/// Raport przebiegu (konsola i `report.txt`): liczby, uwagi i ich wiązki,
+/// potem lista mejli z tym, gdzie trafiły i co im automat zarzuca.
 String formatRunReport(List<Classified> items) {
-  final imports = items.where((c) => c.isImport).toList()
+  final auto = items.where((c) => c.goesToApp).toList()
     ..sort((a, b) => (a.message.date ?? DateTime(0))
         .compareTo(b.message.date ?? DateTime(0)));
-  final manual = [for (final c in items) if (c.verdict case Manual()) c];
-  final unparsed = manual.where(_unparsed).length;
-  final rejected =
-      manual.where((c) => (c.verdict as Manual).isAutoReject).length;
+  final review = [for (final c in items) if (c.goesToReview) c];
+  final rejected = [for (final c in items) if (c.isAutoReject) c];
+  final unparsed = items.where(_unparsed).length;
 
   final buf = StringBuffer()
     ..writeln('SKLASYFIKOWANO  ${items.length}')
     ..writeln('SPARSOWANE      ${items.length - unparsed}')
     ..writeln('NIE SPARSOWANE  $unparsed')
-    ..writeln('IMPORT          ${imports.length}')
-    ..writeln('ODRZUĆ          $rejected')
-    ..writeln('RĘCZNIE         ${manual.length - rejected}')
+    ..writeln('BEZ ZARZUTU     ${auto.length}  (auto.hrcpsng)')
+    ..writeln('DO PRZEGLĄDU    ${review.length}  (review.hrcpsng)')
+    ..writeln('ODRZUĆ          ${rejected.length}')
     ..writeln('STARA APKA      ${items.where((c) => c.oldApp).length}'
         '  (do odpisania: ./piosenkomat reply)');
 
-  final reasonsOf = [
-    for (final c in manual)
-      if (!_unparsed(c)) (c.verdict as Manual).reasons.map((r) => r.text).toList(),
+  final issuesOf = [
+    for (final c in items)
+      if (c.toResolve.isNotEmpty && !_unparsed(c))
+        [for (final i in c.toResolve) i.issue.text],
   ];
-  if (reasonsOf.isNotEmpty) {
+  if (issuesOf.isNotEmpty) {
     buf.writeln();
-    buf.writeln('Czemu sparsowane nie weszły do pliku '
-        '(jeden mejl może mieć kilka powodów):');
-    _countLines(buf, _tally(reasonsOf.expand((r) => r)), byCount: true);
-    final only = _tally([for (final r in reasonsOf) if (r.length == 1) r.single]);
+    buf.writeln('Co automat ma do zarzucenia '
+        '(jedno zgłoszenie może mieć kilka uwag):');
+    _countLines(buf, _tally(issuesOf.expand((r) => r)), byCount: true);
+    final only = _tally([for (final r in issuesOf) if (r.length == 1) r.single]);
     if (only.isNotEmpty) {
-      buf.writeln('Blokowane wyłącznie przez to '
-          '(usuń przeszkodę i mejl wejdzie):');
+      buf.writeln('Jedyna uwaga do zgłoszenia '
+          '(zdejmij ją i piosenka wchodzi):');
       _countLines(buf, only, byCount: true);
     }
-    final bundles = _tally([for (final r in reasonsOf) if (r.length > 1) r.join('; ')]);
+    final bundles = _tally([for (final r in issuesOf) if (r.length > 1) r.join('; ')]);
     if (bundles.isNotEmpty) {
-      buf.writeln('Blokowane przez kilka rzeczy naraz:');
+      buf.writeln('Kilka uwag naraz:');
       _countLines(buf, bundles, byCount: true);
     }
   }
 
-  if (imports.isNotEmpty) buf.writeln();
-  for (final c in imports) {
-    final v = c.verdict as Import;
+  if (auto.isNotEmpty) buf.writeln();
+  for (final c in auto) {
     final date = c.message.date == null ? '' : _day(c.message.date!);
-    buf.writeln('IMPORT   ${c.title}  ${v.sender}  $date  [${c.message.id}]'
+    buf.writeln('APKA     ${c.title}  ${c.sender ?? ''}  $date  [${c.message.id}]'
         '${c.oldApp ? '  (stara apka)' : ''}');
   }
-  if (manual.isNotEmpty) buf.writeln();
-  for (final c in manual) {
-    final v = c.verdict as Manual;
-    final labels = stateLabelsFor(v);
-    final tag = v.isAutoReject ? 'ODRZUĆ  ' : 'RĘCZNIE ';
+
+  final rest = [for (final c in items) if (!c.goesToApp) c];
+  if (rest.isNotEmpty) buf.writeln();
+  for (final c in rest) {
+    final tag = c.isAutoReject
+        ? 'ODRZUĆ  '
+        : c.goesToReview
+            ? 'PRZEGLĄD'
+            : 'MEJL    ';
     buf.writeln('$tag ${c.title}  [${c.message.id}]  '
-        '${v.reasons.map((r) => r.text).join('; ')}'
+        '${c.toResolve.map((i) => i.issue.text).join('; ')}'
         '${c.oldApp ? '  (stara apka)' : ''}');
+    final labels = stateLabelsFor(c);
     // Przy przeglądzie sama `needs-review` nic nie mówi — liczą się podkategorie.
-    buf.writeln('         → ${(v.isAutoReject ? labels : labels.skip(1)).join(', ')}'
+    buf.writeln('         → ${(c.isAutoReject ? labels : labels.skip(1)).join(', ')}'
         '${c.oldApp ? ', $kLabelOldAppToReply' : ''}');
-    if (v.detail != null) {
-      buf.writeln('         ${v.detail!.split('\n').first}');
+    for (final i in c.issues) {
+      if (i.detail case final detail?) {
+        buf.writeln('         ${i.issue.text}: ${detail.split('\n').first}');
+      }
     }
   }
   return buf.toString();
@@ -803,12 +991,14 @@ piosenkomat: sitko mejli z piosenkami na $kInboxEmail.
 
   ./piosenkomat scan [-n N] [--newest] [-o katalog]
       kolejka (inbox bez song/*) → katalog out/import-<data>/: raport, plan,
-      songs.hrcpsng, reviewed.hrcpsng, people.dart. Gmaila tylko czyta
+      auto.hrcpsng (bez zarzutu), review.hrcpsng (z uwagami przy piosenkach),
+      reviewed.hrcpsng, people.dart. Gmaila tylko czyta
   ./piosenkomat label scanned [katalog] --push
       werdykty automatu na mejle: „$kLabelReady”, „song/rejected/…”,
       „$kLabelToReview”, wszystko ze znacznikiem „$kLabelAuto”
   ./piosenkomat label reviewed [katalog] --push
-      songs.hrcpsng minus reviewed.hrcpsng → „$kLabelRejectedAfterReview”
+      co wróciło w reviewed.hrcpsng bez uwag → „$kLabelReady”, z uwagami →
+      z powrotem „$kLabelToReview”, czego nie ma → „$kLabelRejectedAfterReview”
   ./piosenkomat label added [katalog] --push
       „$kLabelReady” + „$kLabelAuto” → „$kLabelDone” + przeczytane
   ./piosenkomat unlabel [katalog] --push

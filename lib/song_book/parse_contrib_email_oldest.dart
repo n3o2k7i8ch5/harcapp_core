@@ -45,10 +45,17 @@ String? oldestFormatSongRegion(String content){
   return _stripHtml(region).trim();
 }
 
+/// Po czym poznać, że klient odesłał treść jako HTML. Samo `<` nie wystarczy:
+/// `Refren <powtórz 2x>` albo `Zosia -> Kasia` w tekście piosenki to nie tagi,
+/// a zdejmowanie ich po cichu psuło piosenkę bez błędu parsowania.
+final RegExp _htmlTagRe = RegExp(
+    r'<(a|br|div|p|span|b|i|u|font|html|body|blockquote)(\s[^>]*)?/?>',
+    caseSensitive: false);
+
 /// `<a href="mailto:x@y">x@y</a>` → `x@y`, `<br>` → nowa linia, reszta tagów
 /// won. Encje wracają do postaci, w jakiej były w JSON-ie.
 String _stripHtml(String s){
-  if(!s.contains('<')) return s;
+  if(!_htmlTagRe.hasMatch(s)) return s;
   return s
       .replaceAllMapped(RegExp(r'<a[^>]*href="mailto:([^"]*)"[^>]*>.*?</a>',
           caseSensitive: false, dotAll: true), (m) => m.group(1)!)

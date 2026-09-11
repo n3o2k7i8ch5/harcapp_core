@@ -84,6 +84,9 @@ abstract class SongCore{
   static const String PARAM_CONTRIB_REFS = 'add_pers';
   static const String PARAM_CONTRIBUTOR_DATA = 'contributor_data';
   static const String PARAM_TAGS = 'tags';
+  /// Ślad piosenkomatu: uwagi do przeglądu. Tylko w plikach roboczych
+  /// narzędzia — do bazy piosenek to pole nie trafia.
+  static const String PARAM_PIOSENKOMAT = 'piosenkomat';
   static const String PARAM_REFREN = 'refren';
   static const String PARAM_PARTS = 'parts';
 

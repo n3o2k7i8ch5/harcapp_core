@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
+import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
@@ -16,38 +18,37 @@ final _emailRe = RegExp(r'[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}');
 String? emailFromHeader(String? from) =>
     from == null ? null : _emailRe.firstMatch(from)?.group(0)?.toLowerCase();
 
-/// Cała paczka: klasyfikacja każdego mejla, potem duplikaty między kandydatami.
+/// Cała paczka: klasyfikacja każdego mejla, potem duplikaty między
+/// zgłoszeniami, które w ogóle się sparsowały.
 ///
-/// Wśród kandydatów do importu:
-///  - ten sam tytuł i ten sam tekst (≥ [kSameText]): najstarszy zostaje,
-///    młodsze → `duplicateInBatch` (automatyczne odrzucenie),
-///  - ten sam tytuł, inna treść → oba `sameTitleInBatch` (przegląd),
-///  - różne tytuły, podobna treść (≥ [kSimilarText]) → oba `similarInBatch`.
+/// Porównujemy wszystkie sparsowane, nie tylko te bez zarzutów: dwa razy to
+/// samo zgłoszenie bez YouTube'a to dalej to samo zgłoszenie i nie ma powodu
+/// oglądać go dwa razy.
+///  - ten sam tytuł i ten sam tekst (≥ [kSameText]): najstarsze zostaje,
+///    młodsze → `identical-in-batch` (automatyczne odrzucenie),
+///  - ten sam tytuł, inna treść → oba `same-title-in-batch`,
+///  - różne tytuły, podobna treść (≥ [kSimilarText]) → oba `similar-text-in-batch`.
 List<Classified> classifyBatch(
   List<ContribMessage> messages, {
   required SongBook book,
 }) {
   final out = [for (final m in messages) classify(m, book: book)];
-  final imports = <int>[
+  final parsed = <int>[
     for (var i = 0; i < out.length; i++)
-      if (out[i].isImport) i,
+      if (out[i].song != null) i,
   ];
-  if (imports.length < 2) return out;
+  if (parsed.length < 2) return out;
 
-  final words = {
-    for (final i in imports) i: textWords((out[i].verdict as Import).song.text),
-  };
+  final words = {for (final i in parsed) i: textWords(out[i].song!.text)};
   DateTime dateOf(int i) => out[i].message.date ?? DateTime(9999);
-  void demote(int i, SkipReason reason, String detail) {
-    final prev = out[i].verdict;
-    final reasons = prev is Manual ? prev.reasons : <SkipReason>[];
-    if (reasons.contains(reason)) return;
-    out[i] = out[i].withVerdict(Manual([...reasons, reason], detail: detail));
+  void flag(int i, SongIssue issue, String detail) {
+    if (out[i].has(issue)) return;
+    out[i] = out[i].withIssues([...out[i].issues, PiosenkomatIssue(issue, detail: detail)]);
   }
 
   // Ten sam tytuł.
   final byTitle = <String, List<int>>{};
-  for (final i in imports) {
+  for (final i in parsed) {
     byTitle.putIfAbsent(searchableString(out[i].title), () => []).add(i);
   }
   final duplicates = <int>{};
@@ -59,7 +60,7 @@ List<Classified> classifyBatch(
       final head = heads.where((h) => jaccard(words[h]!, words[i]!) >= kSameText).firstOrNull;
       if (head != null) {
         duplicates.add(i);
-        demote(i, SkipReason.duplicateInBatch,
+        flag(i, SongIssue.identicalInBatch,
             'to samo, co starsze zgłoszenie [${out[head].message.id}]');
       } else {
         heads.add(i);
@@ -67,28 +68,34 @@ List<Classified> classifyBatch(
     }
     if (heads.length > 1) {
       for (final h in heads) {
-        demote(h, SkipReason.sameTitleInBatch,
+        flag(h, SongIssue.sameTitleInBatch,
             'ten sam tytuł, co ${heads.where((o) => o != h).map((o) => '[${out[o].message.id}]').join(', ')}');
       }
     }
   }
 
   // Różne tytuły, podobna treść.
-  final rest = imports.where((i) => !duplicates.contains(i)).toList();
+  final rest = parsed.where((i) => !duplicates.contains(i)).toList();
   for (var a = 0; a < rest.length; a++) {
     for (var b = a + 1; b < rest.length; b++) {
       final i = rest[a], j = rest[b];
       if (searchableString(out[i].title) == searchableString(out[j].title)) continue;
       final score = jaccard(words[i]!, words[j]!);
       if (score < kSimilarText) continue;
-      demote(i, SkipReason.similarInBatch, 'treść ${pct(score)} jak „${out[j].title}” [${out[j].message.id}]');
-      demote(j, SkipReason.similarInBatch, 'treść ${pct(score)} jak „${out[i].title}” [${out[i].message.id}]');
+      flag(i, SongIssue.similarTextInBatch, 'treść ${pct(score)} jak „${out[j].title}” [${out[j].message.id}]');
+      flag(j, SongIssue.similarTextInBatch, 'treść ${pct(score)} jak „${out[i].title}” [${out[i].message.id}]');
     }
+  }
+  // Uwagi z paczki dochodzą po klasyfikacji pojedynczych mejli, więc ślad
+  // w piosence trzeba odświeżyć.
+  for (final i in parsed) {
+    out[i].song!.piosenkomatData = out[i].piosenkomatData();
   }
   return out;
 }
 
-/// Jeden mejl. Import tylko gdy WSZYSTKIE warunki są spełnione.
+/// Jeden mejl. Do apki wchodzi tylko taki, który nie ma żadnej uwagi
+/// cięższej niż adnotacja.
 Classified classify(ContribMessage m, {required SongBook book}) {
   final fallbackTitle = m.subject ?? m.id;
 
@@ -97,61 +104,74 @@ Classified classify(ContribMessage m, {required SongBook book}) {
     parsed = parseSubmission(m);
   } catch (e) {
     return Classified(
-      m,
-      Manual(const [SkipReason.parseError], detail: e.toString()),
-      fallbackTitle,
+      message: m,
+      title: fallbackTitle,
+      issues: [PiosenkomatIssue(SongIssue.parseError, detail: e.toString())],
     );
   }
 
   final song = parsed.song;
   final title = song.title.trim().isEmpty ? fallbackTitle : song.title;
-  final reasons = <SkipReason>[];
+  final issues = <PiosenkomatIssue>[];
+  void add(SongIssue issue, [String? detail]) =>
+      issues.add(PiosenkomatIssue(issue, detail: detail));
 
-  final oldApp = parsed.isOldestFormat;
-  if (m.isReply) reasons.add(SkipReason.reply);
+  // Kod piosenki w cytacie odpowiedzi. Sam w sobie niczego nie psuje: jeśli to
+  // powtórka, złapią ją uwagi o duplikatach, a jeśli nie — szkoda zgłoszenia.
+  if (m.isReply) add(SongIssue.reply, m.subject);
+  if (parsed.isOldestFormat) add(SongIssue.oldApp, kOldAppRulesVersion);
 
-  // Najstarsza apka miała jeden szablon tematu (`Piosenka "X"`) i nie umiała
-  // wysyłać poprawek — nie ma w niej sekcji „Propozycja poprawki”. Jej temat
-  // nie niesie więc żadnej informacji i nie jest powodem do przeglądu.
-  final subject = m.subject ?? '';
-  if (subject.contains('Poprawka piosenki') || _hasCorrectionText(m.body)) {
-    reasons.add(SkipReason.correction);
-  } else if (!subject.contains('Nowa piosenka') && !oldApp) {
-    reasons.add(SkipReason.unknownSubject);
+  if ((m.subject ?? '').contains('Poprawka piosenki') || _hasCorrectionText(m.body)) {
+    add(SongIssue.correction, _correctionText(m.body));
   }
 
-  if (parsed.userMessage != null) reasons.add(SkipReason.hasUserMessage);
-  if (song.title.trim().isEmpty) reasons.add(SkipReason.missingTitle);
-  if (!song.hasChords) reasons.add(SkipReason.missingChords);
-  if ((song.youtubeVideoId ?? '').trim().isEmpty) {
-    reasons.add(SkipReason.missingYoutube);
+  if (parsed.userMessage != null) {
+    add(SongIssue.hasUserMessage, parsed.userMessage!.trim());
   }
+  if (song.title.trim().isEmpty) add(SongIssue.missingTitle, m.subject);
+  if (!song.hasChords) add(SongIssue.missingChords, _chordsDetail(song));
+  if ((song.youtubeVideoId ?? '').trim().isEmpty) add(SongIssue.missingYoutube);
   // Stara apka o zgodę nie pytała, bo regulaminu jeszcze nie było — dostaje
   // sentinel [kOldAppRulesVersion] zamiast blokady.
-  if ((parsed.acceptedRulesVersion ?? '').trim().isEmpty && !oldApp) {
-    reasons.add(SkipReason.noConsent);
+  if ((parsed.acceptedRulesVersion ?? '').trim().isEmpty && !parsed.isOldestFormat) {
+    add(SongIssue.noConsent);
   }
 
   final sender = _sender(m, parsed);
-  if (sender == null) reasons.add(SkipReason.noSender);
-
-  final (bookReason, bookDetail) = _compareWithBook(song, book);
-  if (bookReason != null) reasons.add(bookReason);
-
-  if (reasons.isNotEmpty) {
-    return Classified(m, Manual(reasons, detail: bookDetail), title, oldApp: oldApp);
+  if (sender == null) {
+    add(SongIssue.noContributorEmail, 'nadawca: ${m.from ?? 'brak nagłówka'}');
   }
 
-  _enrich(song, parsed, sender: sender!, date: m.date, msgId: m.id);
-  return Classified(m, Import(song, sender, registered: parsed.registered), title,
-      oldApp: oldApp);
+  if (_compareWithApp(song, book) case final collision?) issues.add(collision);
+
+  _enrich(song, parsed, sender: sender, date: m.date, msgId: m.id);
+  final out = Classified(
+    message: m,
+    title: title,
+    song: song,
+    sender: sender,
+    registered: parsed.registered,
+    issues: issues,
+  );
+  song.piosenkomatData = out.piosenkomatData();
+  return out;
 }
 
-/// Tytuł i tekst względem śpiewnika:
-///  - ten sam tytuł, tekst ≥ [kSameText] → `alreadyInBook` (odrzucenie),
-///  - ten sam tytuł, inny tekst → `sameTitleDifferentText` (przegląd),
-///  - inny tytuł, tekst ≥ [kSimilarText] → `similarInBook` (przegląd).
-(SkipReason?, String?) _compareWithBook(SongRaw song, SongBook book) {
+/// Ile linijek tekstu zostało bez chwytów — bez tego „brak chwytów” nie mówi,
+/// czy brakuje wszystkiego, czy jednej zwrotki.
+String _chordsDetail(SongRaw song) {
+  final lines = song.text.split('\n').where((l) => l.trim().isNotEmpty).length;
+  return 'linijek tekstu: $lines, chwytów: brak';
+}
+
+String? _correctionText(String body) =>
+    _correctionFenceRe.firstMatch(body)?.group(1)?.trim();
+
+/// Tytuł i tekst względem piosenek już w apce:
+///  - ten sam tytuł, tekst ≥ [kSameText] → `identical-in-app` (odrzucenie),
+///  - ten sam tytuł, inny tekst → `same-title-in-app` (przegląd),
+///  - inny tytuł, tekst ≥ [kSimilarText] → `similar-text-in-app` (przegląd).
+PiosenkomatIssue? _compareWithApp(SongRaw song, SongBook book) {
   final words = textWords(song.text);
   final sameTitle = book.withTitle(song.title);
   if (sameTitle.isNotEmpty) {
@@ -160,14 +180,19 @@ Classified classify(ContribMessage m, {required SongBook book}) {
       final score = jaccard(words, s.words);
       if (score > best) best = score;
     }
-    if (best >= kSameText || words.isEmpty) return (SkipReason.alreadyInBook, null);
-    return (SkipReason.sameTitleDifferentText, 'tekst zgodny w ${pct(best)} z piosenką o tym tytule');
+    if (best >= kSameText || words.isEmpty) {
+      return PiosenkomatIssue(SongIssue.identicalInApp,
+          detail: 'w apce stoi „${sameTitle.first.title}”');
+    }
+    return PiosenkomatIssue(SongIssue.sameTitleInApp,
+        detail: 'tekst zgodny w ${pct(best)} z piosenką o tym tytule');
   }
   final closest = book.closest(words);
   if (closest != null && closest.$2 >= kSimilarText) {
-    return (SkipReason.similarInBook, 'treść ${pct(closest.$2)} jak „${closest.$1.title}” w śpiewniku');
+    return PiosenkomatIssue(SongIssue.similarTextInApp,
+        detail: 'treść ${pct(closest.$2)} jak „${closest.$1.title}” w apce');
   }
-  return (null, null);
+  return null;
 }
 
 final _correctionFenceRe = RegExp(
@@ -323,10 +348,13 @@ String? _sender(ContribMessage m, ParsedContribEmail parsed) {
 }
 
 /// To samo, co `_save()` w EmailSongDialog: zgoda, data, kontrybutor, id.
+///
+/// Robimy to także dla zgłoszeń z uwagami — one też jadą do pliku, a bez
+/// `email_msg_id` przegląd nie wiedziałby, z którego mejla wróciła piosenka.
 void _enrich(
   SongRaw song,
   ParsedContribEmail parsed, {
-  required String sender,
+  required String? sender,
   required String msgId,
   DateTime? date,
 }) {
@@ -334,7 +362,7 @@ void _enrich(
   // stemplujemy zawsze: po nim `review` wiąże piosenkę ze zgłoszeniem.
   final fromEmail = song.contributorData;
   song.contributorData = ContributorData(
-    email: fromEmail?.email ?? sender,
+    email: fromEmail?.email ?? sender ?? '',
     contributionDate: fromEmail?.contributionDate ?? date ?? DateTime.now(),
     acceptedContributionRulesVersion:
         fromEmail?.acceptedContributionRulesVersion
@@ -342,7 +370,7 @@ void _enrich(
             ?? kOldAppRulesVersion,
     emailMsgId: msgId,
   );
-  final known = song.contribRefs
+  final known = sender == null || song.contribRefs
       .any((c) => (c.emailRef ?? '').toLowerCase() == sender);
   if (!known) {
     song.contribRefs.add(ContributorRef(

@@ -36,36 +36,38 @@ class PeopleReport {
   });
 }
 
-/// Zbiera osoby dodające z importów. Nadawca zawsze ląduje w `emails`,
-/// bo to jego adres siedzi w `email_ref` piosenki i po nim `ContributorRef`
-/// odnajduje osobę.
+/// Zbiera osoby dodające z piosenek, które poszły do plików — i tych bez
+/// zarzutu, i tych do przeglądu, bo jedne i drugie mogą skończyć w apce.
+/// Nadawca zawsze ląduje w `emails`, bo to jego adres siedzi w `email_ref`
+/// piosenki i po nim `ContributorRef` odnajduje osobę.
 PeopleReport collectPeople(List<Classified> items) {
   final newOnes = <String, NewContributor>{};
   final known = <String, List<String>>{};
   final anonymous = <String, List<String>>{};
 
   for (final c in items) {
-    if (c.verdict is! Import) continue;
-    final v = c.verdict as Import;
-    final registered = v.registered;
+    if (!c.goesToApp && !c.goesToReview) continue;
+    final sender = c.sender;
+    if (sender == null) continue;
+    final registered = c.registered;
 
-    if (allRegisteredPeopleByEmailMap.containsKey(v.sender)) {
-      known.putIfAbsent(v.sender, () => []).add(c.title);
+    if (allRegisteredPeopleByEmailMap.containsKey(sender)) {
+      known.putIfAbsent(sender, () => []).add(c.title);
       continue;
     }
     if (registered == null) {
-      anonymous.putIfAbsent(v.sender, () => []).add(c.title);
+      anonymous.putIfAbsent(sender, () => []).add(c.title);
       continue;
     }
 
     final emails = <String>{
-      v.sender,
+      sender,
       for (final e in registered.emails) e.trim().toLowerCase(),
     }..removeWhere((e) => e.isEmpty);
 
     final alreadyKnown = emails.any(allRegisteredPeopleByEmailMap.containsKey);
     if (alreadyKnown) {
-      known.putIfAbsent(v.sender, () => []).add(c.title);
+      known.putIfAbsent(sender, () => []).add(c.title);
       continue;
     }
 

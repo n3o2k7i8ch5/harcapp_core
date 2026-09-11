@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
+import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:test/test.dart';
 
 import 'helpers.dart';
@@ -14,13 +15,13 @@ void main() {
     final raw = hardWrap(await completeEmail());
     expect(raw, contains('\r\n'));
     final got = classify(msgFrom(raw), book: SongBook.empty);
-    expect(got.verdict, isA<Import>());
-    expect((got.verdict as Import).song.title, 'Piosenka testowa XYZ');
+    expect(got.goesToApp, isTrue);
+    expect(got.song!.title, 'Piosenka testowa XYZ');
   });
 
   test('załącznik .hrcpsng wygrywa nad uszkodzoną treścią', () async {
     final good = classify(msgFrom(await completeEmail()), book: SongBook.empty);
-    final song = (good.verdict as Import).song;
+    final song = good.song!;
     final attachment = jsonEncode({
       'official': {song.id: {'song': song.toApiJsonMap(withId: false), 'index': 0}},
       'conf': {},
@@ -34,17 +35,17 @@ void main() {
       date: eml.date, songAttachment: attachment,
     );
     final got = classify(withAtt, book: SongBook.empty);
-    expect(got.verdict, isA<Import>());
-    expect((got.verdict as Import).song.title, 'Piosenka testowa XYZ');
-    expect((got.verdict as Import).song.contributorData!.acceptedContributionRulesVersion, 'v05.10.2025');
+    expect(got.goesToApp, isTrue);
+    expect(got.song!.title, 'Piosenka testowa XYZ');
+    expect(got.song!.contributorData!.acceptedContributionRulesVersion, 'v05.10.2025');
   });
 
   test('zbłąkana spacja w email_ref jest usuwana', () async {
     final raw = (await completeEmail()).replaceFirst('"add_pers":[]',
         '"add_pers":[{"person":null,"email_ref":"\r\njan.testowy@example.com","user_key_ref":null}]');
     final got = classify(msgFrom(raw), book: SongBook.empty);
-    expect(got.verdict, isA<Import>());
-    final refs = (got.verdict as Import).song.contribRefs;
+    expect(got.goesToApp, isTrue);
+    final refs = got.song!.contribRefs;
     expect(refs.where((c) => c.emailRef == 'jan.testowy@example.com'), hasLength(1));
   });
 }
@@ -53,17 +54,17 @@ void _correction() {
   test('pusty blok „Propozycja poprawki” to nie poprawka', () async {
     final raw = (await completeEmail()).replaceFirst('### Kod piosenki:',
         '### Propozycja poprawki:\n\n```text\n\n```\n\n### Kod piosenki:');
-    expect(classify(msgFrom(raw), book: SongBook.empty).verdict, isA<Import>());
+    expect(classify(msgFrom(raw), book: SongBook.empty).goesToApp, isTrue);
     final withText = raw.replaceFirst('```text\n\n```', '```text\nzła tonacja\n```');
     final got = classify(msgFrom(withText), book: SongBook.empty);
-    expect((got.verdict as Manual).reasons, contains(SkipReason.correction));
+    expect(issuesOf(got), contains(SongIssue.correction));
   });
 }
 
 void _oldest() {
   test('najstarsza apka: goły JSON połamany, załącznik ratuje', () async {
     final good = classify(msgFrom(await completeEmail()), book: SongBook.empty);
-    final song = (good.verdict as Import).song;
+    final song = good.song!;
     // Stara apka nie znała zgody na regulamin, więc i piosenka jej nie niesie.
     final songMap = song.toApiJsonMap(withId: false)..remove('contributor_data');
     final attachment = jsonEncode({'official': {song.id: {'song': songMap, 'index': 0}}, 'conf': {}});
@@ -77,17 +78,17 @@ void _oldest() {
     final got = classify(m, book: SongBook.empty);
     // Stara apka nie blokuje: treść jest kompletna, brak zgody dostaje sentinel,
     // a jej temat („Piosenka …”) nie jest tematem spoza szablonów.
-    expect(got.verdict, isA<Import>());
+    expect(got.goesToApp, isTrue);
     expect(got.oldApp, isTrue);
     expect(got.labels, contains(kLabelOldAppToReply));
-    expect((got.verdict as Import).song.contributorData?.acceptedContributionRulesVersion,
+    expect(got.song!.contributorData?.acceptedContributionRulesVersion,
         kOldAppRulesVersion);
     expect(got.title, 'Piosenka testowa XYZ');
   });
 
   test('nowsza apka bez fence\'a: załącznik nie robi z mejla starego formatu', () async {
     final good = classify(msgFrom(await completeEmail()), book: SongBook.empty);
-    final song = (good.verdict as Import).song;
+    final song = good.song!;
     final attachment = jsonEncode({
       'official': {song.id: {'song': song.toApiJsonMap(withId: false), 'index': 0}},
       'conf': {},
@@ -100,7 +101,7 @@ void _oldest() {
     final m = ContribMessage(id: 'mid', body: eml.body, subject: eml.subject,
         from: eml.from, date: eml.date, songAttachment: attachment);
     final got = classify(m, book: SongBook.empty);
-    expect(got.verdict, isA<Import>());
+    expect(got.goesToApp, isTrue);
     expect(got.oldApp, isFalse);
     expect(got.labels, isNot(contains(kLabelOldAppToReply)));
   });

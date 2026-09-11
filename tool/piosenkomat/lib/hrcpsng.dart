@@ -49,7 +49,26 @@ String _textOf(Map songMap) {
   ].join('\n');
 }
 
-String encodeHrcpsng(List<SongRaw> songs) {
+/// Nadaje zdublowanym id sufiks `~2`, `~3`… **w piosenkach**, zanim cokolwiek
+/// trafi do planu. `encodeHrcpsng` robi to samo przy zapisie, ale wtedy plan
+/// już zna stare id i po przeglądzie dwie piosenki o tym samym tytule
+/// i wykonawcy wskazywałyby na tę samą — obie z tekstem pierwszej.
+void assignUniqueIds(List<SongRaw> songs) {
+  final taken = <String>{};
+  for (final song in songs) {
+    var id = song.id;
+    for (var n = 2; taken.contains(id); n++) {
+      id = '${song.id}~$n';
+    }
+    song.id = id;
+    taken.add(id);
+  }
+}
+
+/// [withPiosenkomatData] wypuszcza do pliku uwagi piosenkomatu. Włączamy je
+/// dla plików przebiegu, bo to one niosą przegląd; do bazy piosenek to pole
+/// nie ma prawa dojechać.
+String encodeHrcpsng(List<SongRaw> songs, {bool withPiosenkomatData = false}) {
   final sorted = [...songs]..sort((a, b) => compareText(a.title, b.title));
   final official = <String, dynamic>{};
   var index = 0;
@@ -58,13 +77,19 @@ String encodeHrcpsng(List<SongRaw> songs) {
     for (var n = 2; official.containsKey(id); n++) {
       id = '${song.id}~$n';
     }
-    official[id] = {'song': song.toApiJsonMap(withId: false), 'index': index++};
+    official[id] = {
+      'song': song.toApiJsonMap(
+          withId: false, withPiosenkomatData: withPiosenkomatData),
+      'index': index++,
+    };
   }
   return jsonEncode({'official': official, 'conf': <String, dynamic>{}});
 }
 
-void writeHrcpsng(String path, List<SongRaw> songs) =>
-    writeText(path, encodeHrcpsng(songs));
+void writeHrcpsng(String path, List<SongRaw> songs,
+        {bool withPiosenkomatData = false}) =>
+    writeText(path,
+        encodeHrcpsng(songs, withPiosenkomatData: withPiosenkomatData));
 
 /// Zapis z założeniem katalogów po drodze — każdy plik przebiegu tak ląduje.
 void writeText(String path, String text) {
@@ -102,9 +127,9 @@ String defaultSongsDbPath() {
   return p.join('assets', 'songs', 'all_songs.hrcpsng');
 }
 
-/// Osobny katalog na każdy przebieg, żeby drugi `process` nie nadpisał pierwszego.
-/// W środku: `songs.hrcpsng`, `reviewed.hrcpsng`, `people.dart`, `labels.json`,
-/// `report.txt`, a po przeglądzie `review.json`.
+/// Osobny katalog na każdy przebieg, żeby drugi `scan` nie nadpisał pierwszego.
+/// W środku: `auto.hrcpsng`, `review.hrcpsng`, `reviewed.hrcpsng`, `people.dart`,
+/// `labels.json`, `report.txt`, a po przeglądzie `decisions.json`.
 String defaultOutDir() {
   final t = DateTime.now().toIso8601String().substring(0, 19).replaceAll(':', '');
   return p.join('out', 'import-$t');
@@ -123,12 +148,20 @@ String? latestOutDir({String root = 'out'}) {
 }
 
 /// Nazwy plików w katalogu przebiegu.
-String songsPathIn(String outDir) => p.join(outDir, 'songs.hrcpsng');
+///
+/// Piosenki bez zarzutu i piosenki z uwagami leżą osobno, bo i oglądasz je
+/// inaczej: `auto.hrcpsng` przelatujesz, `review.hrcpsng` czytasz po kolei.
+/// Wracają jednym plikiem — `reviewed.hrcpsng`.
+String autoPathIn(String outDir) => p.join(outDir, 'auto.hrcpsng');
+String reviewPathIn(String outDir) => p.join(outDir, 'review.hrcpsng');
+/// Przebiegi sprzed podziału miały jeden plik `songs.hrcpsng`.
+String legacySongsPathIn(String outDir) => p.join(outDir, 'songs.hrcpsng');
 String planPathIn(String outDir) => p.join(outDir, 'labels.json');
 String reportPathIn(String outDir) => p.join(outDir, 'report.txt');
 String peoplePathIn(String outDir) => p.join(outDir, 'people.dart');
-/// Kopia `songs.hrcpsng` do podmiany po przeglądzie na stronie. Starsze
-/// przebiegi mają ten plik pod dawną nazwą `approved.hrcpsng` — czytamy obie.
+/// Miejsce na eksport ze strony po przeglądzie: jeden plik na oba powyższe.
+/// Starsze przebiegi mają go pod dawną nazwą `approved.hrcpsng` — czytamy obie.
 String reviewedPathIn(String outDir) => p.join(outDir, 'reviewed.hrcpsng');
 String legacyReviewedPathIn(String outDir) => p.join(outDir, 'approved.hrcpsng');
-String reviewPathIn(String outDir) => p.join(outDir, 'review.json');
+/// Ślad przeglądu: co weszło, co wypadło, co zostało nieogarnięte.
+String decisionsPathIn(String outDir) => p.join(outDir, 'decisions.json');
