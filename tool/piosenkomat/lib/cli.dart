@@ -751,16 +751,18 @@ String formatRunReport(List<Classified> items) {
   ];
   if (reasonsOf.isNotEmpty) {
     buf.writeln();
-    buf.writeln('Powody sparsowanych (mejl może mieć kilka):');
+    buf.writeln('Czemu sparsowane nie weszły do pliku '
+        '(jeden mejl może mieć kilka powodów):');
     _countLines(buf, _tally(reasonsOf.expand((r) => r)), byCount: true);
     final only = _tally([for (final r in reasonsOf) if (r.length == 1) r.single]);
     if (only.isNotEmpty) {
-      buf.writeln('Tylko ten powód:');
+      buf.writeln('Blokowane wyłącznie przez to '
+          '(usuń przeszkodę i mejl wejdzie):');
       _countLines(buf, only, byCount: true);
     }
     final bundles = _tally([for (final r in reasonsOf) if (r.length > 1) r.join('; ')]);
     if (bundles.isNotEmpty) {
-      buf.writeln('Wiązki (więcej niż jeden powód):');
+      buf.writeln('Blokowane przez kilka rzeczy naraz:');
       _countLines(buf, bundles, byCount: true);
     }
   }

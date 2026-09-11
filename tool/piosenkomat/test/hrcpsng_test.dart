@@ -41,7 +41,7 @@ void main() {
     expect(report, contains('[ok]'));
   });
 
-  test('raport przebiegu: sparsowane vs nie, tylko ten powód, wiązki', () async {
+  test('raport przebiegu: sparsowane vs nie, jedna przeszkoda vs kilka', () async {
     final report = formatRunReport(classifyBatch([
       msgFrom(await completeEmail(), id: 'ok'),
       msgFrom(await completeEmail(song: sampleSong(yt: null)), id: 'yt'),
@@ -55,9 +55,9 @@ void main() {
     expect(report, contains('SPARSOWANE      3'));
     expect(report, contains('NIE SPARSOWANE  1'));
     expect(report, contains('IMPORT          1'));
-    expect(report, contains('Tylko ten powód:'));
+    expect(report, contains('Blokowane wyłącznie przez to'));
     expect(report, contains(SkipReason.missingYoutube.text));
-    expect(report, contains('Wiązki (więcej niż jeden powód):'));
+    expect(report, contains('Blokowane przez kilka rzeczy naraz:'));
     expect(report, contains(
         '${SkipReason.missingChords.text}; ${SkipReason.missingYoutube.text}'));
   });
