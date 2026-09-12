@@ -15,6 +15,9 @@ class ParsedContribEmail{
   final String? acceptedRulesVersion;
   final RegisteredContributor? registered;
   final String? userMessage;
+  /// Treść bloku „Propozycja poprawki”. Apka emituje ten blok zawsze —
+  /// dla nowych piosenek pusty — więc niepusty znaczy: autor przysłał poprawkę.
+  final String? correctionMessage;
   final bool isNewFormat;
   /// Lista pól z bloku `Osoba dodająca`, które były obecne w mejlu, ale
   /// nie udało się ich zmapować na aktualny model (np. `rankHarc: HO` po
@@ -31,6 +34,7 @@ class ParsedContribEmail{
     required this.acceptedRulesVersion,
     required this.registered,
     required this.userMessage,
+    this.correctionMessage,
     required this.isNewFormat,
     this.personParseWarnings = const [],
     this.isOldestFormat = false,
@@ -104,6 +108,7 @@ ParsedContribEmail _parseV2(String content){
     acceptedRulesVersion: acceptedRulesVersion,
     registered: registered,
     userMessage: _extractUserMessage(content),
+    correctionMessage: extractCorrectionMessage(content),
     isNewFormat: true,
   );
 }
@@ -204,6 +209,7 @@ ParsedContribEmail _parseLegacy(String content){
     acceptedRulesVersion: acceptedRulesVersion,
     registered: registered,
     userMessage: _extractUserMessage(content),
+    correctionMessage: extractCorrectionMessage(content),
     isNewFormat: false,
     personParseWarnings: personWarnings,
     isOldestFormat: isOldestFormat,
@@ -465,6 +471,17 @@ String? _extractUserMessage(String content){
   String trimmed = raw.trim();
   if(trimmed.isEmpty) return null;
   return trimmed;
+}
+
+final RegExp _correctionFenceRe = RegExp(
+  r'### Propozycja poprawki:\s*```[a-zA-Z]*\s*\n([\s\S]*?)```',
+);
+
+/// Blok „Propozycja poprawki” — `null`, gdy pusty albo go nie ma.
+String? extractCorrectionMessage(String content){
+  final m = _correctionFenceRe.firstMatch(content);
+  final text = m?.group(1)?.trim();
+  return text == null || text.isEmpty? null: text;
 }
 
 String? _extractAcceptedRulesVersion(String content){

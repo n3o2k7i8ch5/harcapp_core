@@ -4,10 +4,16 @@ import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/values/people/models.dart';
 
+import 'similarity.dart';
+
 const String kInboxEmail = 'harcapp@gmail.com';
 
-/// Etykiety w Gmailu. Ręczna taksonomia Daniela pod `song/` plus znacznik
-/// `song/auto`, który mówi „tę etykietę stanu nadał automat”.
+// ---------------------------------------------------------------------------
+// Etykiety Gmaila
+// ---------------------------------------------------------------------------
+
+/// Ręczna taksonomia Daniela pod `song/` plus znacznik `song/auto`, który
+/// mówi „tę etykietę stanu nadał automat”.
 const String kLabelAuto = 'song/auto';
 const String kLabelReady = 'song/ready-to-add';
 const String kLabelDone = 'song/added';
@@ -16,51 +22,57 @@ const String kLabelRejectedDuplicate = 'song/rejected/duplicate';
 /// Automat wstawił do pliku, Ty przy przeglądzie na stronie wyrzuciłeś.
 const String kLabelRejectedAfterReview = 'song/rejected/after-review';
 const String kLabelToReview = 'song/needs-review';
+/// Znacznik: zgłoszenie to poprawka istniejącej piosenki. Zatwierdzoną
+/// wgrywasz inaczej — podmiana, nie dodanie.
+const String kLabelCorrection = 'song/correction';
+/// Nie dało się sparsować. Poza `needs-review` — to nie Twoja kolejka
+/// przeglądu; etykieta jest tylko po to, żeby mejl nie wracał do `scan`.
+/// Zostaje nieprzeczytany, bo masz go zobaczyć w skrzynce.
+const String kLabelUnparsable = 'song/unparsable';
 /// Mejl z najstarszej apki: autorowi trzeba odpisać, żeby ją zaktualizował.
 /// Etykieta jest kolejką — `reply` ją zdejmuje i wiesza [kLabelOldAppReplied].
 const String kLabelOldAppToReply = 'song/old-app/to-reply';
 const String kLabelOldAppReplied = 'song/old-app/replied';
 
 /// Podkategorie przeglądu, jedna na powód. Mejl z kilkoma powodami dostaje kilka.
-///
-/// Kolizja z apką i kolizja w paczce to osobne etykiety, bo i robota jest inna:
-/// przy pierwszej wybierasz między zgłoszeniem a tym, co już masz, przy drugiej
-/// — między kilkoma zgłoszeniami.
 enum ReviewKind {
   userMessage('song/needs-review/user-message'),
+  /// Kolizja z piosenką, która już jest w apce.
   duplicateInApp('song/needs-review/duplicate-in-app'),
+  /// Kolizja z innym zgłoszeniem z tej samej paczki.
   duplicateInBatch('song/needs-review/duplicate-in-batch'),
   missingData('song/needs-review/missing-data'),
   noConsent('song/needs-review/no-consent'),
-  correction('song/needs-review/correction'),
-  unparsable('song/needs-review/unparsable');
+  /// Poprawka, z którą coś nie tak: nie ma czego poprawiać.
+  correctionProblem('song/needs-review/correction-problem'),
+  /// Ktoś poprawił piosenkę i wysłał jako nową.
+  undeclaredCorrection('song/needs-review/undeclared-correction'),
+  /// Piosenka identyczna z apką, ale autor coś dopisał albo zadeklarował
+  /// poprawkę. Piosenki nie ma w pliku — sam mejl do przeczytania.
+  identicalInApp('song/needs-review/identical-in-app');
 
   const ReviewKind(this.label);
   final String label;
 }
 
-/// Do której podkategorii przeglądu idzie uwaga. `null` dla uwag
-/// [SongIssueSeverity.info] — te niczego nie blokują, więc nie zakładają
-/// kolejki w Gmailu.
+/// Do której podkategorii przeglądu idzie uwaga.
 extension SongIssueReview on SongIssue {
-  ReviewKind? get review => switch (this) {
-        SongIssue.identicalInApp ||
-        SongIssue.sameTitleInApp ||
-        SongIssue.similarTextInApp =>
-          ReviewKind.duplicateInApp,
-        SongIssue.identicalInBatch ||
+  ReviewKind get review => switch (this) {
+        SongIssue.sameTitleInApp || SongIssue.similarTextInApp => ReviewKind.duplicateInApp,
         SongIssue.sameTitleInBatch ||
-        SongIssue.similarTextInBatch =>
+        SongIssue.similarTextInBatch ||
+        SongIssue.sameTargetInBatch =>
           ReviewKind.duplicateInBatch,
         SongIssue.missingTitle ||
         SongIssue.missingChords ||
         SongIssue.missingYoutube =>
           ReviewKind.missingData,
         SongIssue.noConsent || SongIssue.noContributorEmail => ReviewKind.noConsent,
+        SongIssue.chordsDifferFromApp ||
+        SongIssue.metadataDifferFromApp =>
+          ReviewKind.undeclaredCorrection,
+        SongIssue.noTargetInApp => ReviewKind.correctionProblem,
         SongIssue.hasUserMessage => ReviewKind.userMessage,
-        SongIssue.correction => ReviewKind.correction,
-        SongIssue.parseError => ReviewKind.unparsable,
-        SongIssue.reply || SongIssue.oldApp => null,
       };
 }
 
@@ -73,6 +85,8 @@ final List<String> kToolLabels = [
   kLabelRejectedDuplicate,
   kLabelRejectedAfterReview,
   kLabelToReview,
+  kLabelCorrection,
+  kLabelUnparsable,
   kLabelOldAppToReply,
   kLabelOldAppReplied,
   for (final k in ReviewKind.values) k.label,
@@ -85,6 +99,9 @@ final List<String> kToolLabels = [
 const List<String> kLegacyToolLabels = [
   'song/needs-review/possible-duplicate',
   'song/needs-review/reply',
+  'song/needs-review/correction',
+  'song/needs-review/identical-with-message',
+  'song/needs-review/unparsable',
 ];
 
 /// Te nadaje tylko człowiek; narzędzie ich nie tworzy, ale mejle z nimi
@@ -104,8 +121,8 @@ bool isSongLabel(String label) => label == 'song' || label.startsWith('song/');
 
 /// Etykiety stanu, po których nic już od Ciebie nie zależy: piosenka weszła
 /// albo odpadła na dobre. Takie mejle oznaczamy jako przeczytane, żeby nie
-/// wisiały w skrzynce. `needs-review/*` i `old-app/to-reply` zostają
-/// nieprzeczytane — jedne czekają na Twoją decyzję, drugie na odpowiedź.
+/// wisiały w skrzynce. `needs-review/*`, `unparsable` i `old-app/to-reply`
+/// zostają nieprzeczytane — czekają na Twoją decyzję, Twoje oko albo odpowiedź.
 bool isClosedLabel(String label) =>
     label == kLabelDone || label.startsWith('song/rejected');
 
@@ -114,7 +131,7 @@ bool isClosedLabel(String label) =>
 bool isReadyByTool(Set<String> labels) =>
     labels.contains(kLabelReady) && labels.contains(kLabelAuto);
 
-/// Cokolwiek, co automat wstawił do pliku przebiegu: bez zarzutu („w pliku”)
+/// Cokolwiek, co automat wstawił do pliku kandydatów: bez zarzutu („w pliku”)
 /// albo do przeglądu. Tylko takie mejle rusza `label reviewed`.
 bool isInRunFilesByTool(Set<String> labels) =>
     labels.contains(kLabelAuto) &&
@@ -138,26 +155,32 @@ const String kOldAppRulesVersion = 'brak (stara apka)';
 /// łukiem: nie czyta ich i nie etykietuje.
 const String kSongMarker = '### Kod piosenki:';
 const List<String> kSongSubjects = ['Nowa piosenka', 'Poprawka piosenki'];
+const String kCorrectionSubject = 'Poprawka piosenki';
 
 /// Najstarsza apka nie ma [kSongMarker] — JSON wkleja między znaczniki
 /// „nie edytuj". Bez tego jej zgłoszenia w ogóle nie wchodziły do kolejki.
 const String kOldAppMarker = 'NIE EDYTUJ PONIŻSZEGO TEKSTU';
 
 /// Kolejka: zgłoszenia piosenek w inboxie bez żadnej etykiety song/*.
+/// To filtr po wiadomościach — po wątkach dofiltrowuje `scan`.
 final String kQueueQuery = 'in:inbox '
     '(${kSongSubjects.map((s) => 'subject:"$s"').join(' OR ')} '
     'OR "$kSongMarker" OR "$kOldAppMarker") '
     '${kAllSongLabels.map((l) => '-label:${labelQueryName(l)}').join(' ')}';
 
-/// Uwagi, przy których automat odrzuca sam, o ile są JEDYNYMI do ogarnięcia.
-/// Przekątna „identyczne” z macierzy duplikatów: tu nie ma czego rozstrzygać.
-const Set<SongIssue> kAutoReject = {
-  SongIssue.identicalInApp,
-  SongIssue.identicalInBatch,
-};
+/// Do commitu: w pliku, nadane przez automat.
+final String kReadyByToolQuery =
+    'label:${labelQueryName(kLabelReady)} label:${labelQueryName(kLabelAuto)}';
+
+// ---------------------------------------------------------------------------
+// Wiadomość
+// ---------------------------------------------------------------------------
 
 class ContribMessage {
   final String id;
+  /// Wątek Gmaila. Tożsamością zgłoszenia jest wątek, nie wiadomość —
+  /// odpowiedzi w wątku to dopiski do tego samego zgłoszenia.
+  final String threadId;
   final String body;
   final String? subject;
   final String? from;
@@ -171,6 +194,7 @@ class ContribMessage {
 
   const ContribMessage({
     required this.id,
+    String? threadId,
     required this.body,
     this.subject,
     this.from,
@@ -178,7 +202,7 @@ class ContribMessage {
     this.date,
     this.labels = const {},
     this.songAttachment,
-  });
+  }) : threadId = threadId ?? id;
 
   bool get hasSongLabel => labels.any(isSongLabel);
 
@@ -191,6 +215,18 @@ class ContribMessage {
       kSongSubjects.any((s) => (subject ?? '').contains(s))
       || body.contains(kSongMarker)
       || oldestFormatSongRegion(body) != null;
+
+  /// Czy wiadomość niesie **własny** kod piosenki, nie tylko cytat cudzego.
+  /// Po tym wybieramy reprezentanta wątku: odpowiedź z samym cytatem
+  /// oryginału parsuje się do tej samej piosenki, ale nie jest zgłoszeniem.
+  bool get hasOwnSongCode {
+    if (songAttachment != null) return true;
+    final own = body
+        .split('\n')
+        .where((l) => !l.trimLeft().startsWith('>'))
+        .join('\n');
+    return own.contains(kSongMarker) || oldestFormatSongRegion(own) != null;
+  }
 
   /// Plik .eml (nagłówki, pusta linia, treść). Bez nagłówków całość to treść.
   factory ContribMessage.fromEml(String raw, {required String id}) {
@@ -252,93 +288,169 @@ DateTime? parseMailDate(String? raw) {
   return m.group(7) == '+' ? utc.subtract(offset) : utc.add(offset);
 }
 
-/// Wynik klasyfikacji jednego mejla: piosenka (o ile się sparsowała) i to,
-/// co automat ma jej do zarzucenia.
-///
-/// Nie ma tu podziału „import albo ręcznie” — jest lista uwag, a z niej wynika
-/// wszystko inne: co blokuje ([SongIssueSeverity.blocking]), co wymaga decyzji
-/// ([SongIssueSeverity.decision]), a co jest tylko adnotacją
-/// ([SongIssueSeverity.info]) i piosenki nie zatrzymuje.
-class Classified {
+// ---------------------------------------------------------------------------
+// Zgłoszenie — cechy (fakty)
+// ---------------------------------------------------------------------------
+
+/// Zgłoszenie = wątek. Same fakty, zero ocen: co autor zadeklarował, skąd
+/// przyszło, co dopisał, do czego jest podobne. Osądy robi `decide`.
+class Submission {
+  final String threadId;
+  /// Reprezentant wątku: najnowsza wiadomość z własnym kodem piosenki od
+  /// nadawcy ≠ skrzynka HarcApp; gdy takiej nie ma poza pierwszą — pierwsza.
   final ContribMessage message;
+  /// Wszystkie wiadomości wątku, od najstarszej.
+  final List<ContribMessage> messages;
+  final SubmissionKind kind;
+  final SubmissionSource source;
+  final String? userMessage;
+  final String? correctionMessage;
+  /// Data reprezentanta.
+  final DateTime? sentAt;
+  final String? sender;
+  final String? consentVersion;
+  /// `null` = nie sparsowało się.
+  final SongRaw? song;
+  final RegisteredContributor? registered;
   /// Tytuł piosenki jeśli się sparsował, inaczej temat mejla.
   final String title;
-  /// `null` tylko wtedy, gdy mejla nie dało się sparsować — wtedy nie ma czego
-  /// wpisać do żadnego pliku i zostaje sam mejl z etykietą.
-  final SongRaw? song;
-  final String? sender;
-  /// Blok „Osoba dodająca” z mejla, jeśli był.
-  final RegisteredContributor? registered;
-  final List<PiosenkomatIssue> issues;
+  final AppMatch? appMatch;
+  final BatchMatch? batchMatch;
 
-  const Classified({
+  const Submission({
+    required this.threadId,
     required this.message,
+    required this.messages,
+    required this.kind,
+    required this.source,
     required this.title,
-    this.song,
+    this.userMessage,
+    this.correctionMessage,
+    this.sentAt,
     this.sender,
+    this.consentVersion,
+    this.song,
     this.registered,
-    this.issues = const [],
+    this.appMatch,
+    this.batchMatch,
   });
 
-  Classified withIssues(List<PiosenkomatIssue> issues) => Classified(
+  bool get isCorrection => kind == SubmissionKind.correction;
+  bool get isOldApp => source == SubmissionSource.oldApp;
+  bool get hasUserMessage => (userMessage ?? '').trim().isNotEmpty;
+
+  /// Którą piosenkę w apce poprawia — zgadywane po [appMatch], bo mejl z apki
+  /// tego nie niesie.
+  String? get correctionTarget => isCorrection ? appMatch?.songId : null;
+
+  Submission copyWith({AppMatch? appMatch, BatchMatch? batchMatch}) => Submission(
+        threadId: threadId,
         message: message,
+        messages: messages,
+        kind: kind,
+        source: source,
         title: title,
-        song: song,
+        userMessage: userMessage,
+        correctionMessage: correctionMessage,
+        sentAt: sentAt,
         sender: sender,
+        consentVersion: consentVersion,
+        song: song,
         registered: registered,
-        issues: issues,
+        appMatch: appMatch ?? this.appMatch,
+        batchMatch: batchMatch ?? this.batchMatch,
       );
+}
+
+// ---------------------------------------------------------------------------
+// Decyzja
+// ---------------------------------------------------------------------------
+
+/// Dokąd trafia zgłoszenie. Pięć wyjść: dwa pliki, odrzut, sam mejl
+/// do przeczytania, niesparsowalne.
+enum Target {
+  candidateNew,
+  candidateCorrection,
+  rejectAlreadyInApp,
+  rejectDuplicate,
+  /// Identyczna z apką, ale autor coś powiedział (dopisek albo deklaracja
+  /// poprawki). Piosenki nie ma po co oglądać; mejl trzeba przeczytać.
+  mailOnlyIdentical,
+  unparsable;
+
+  bool get goesToFile => this == candidateNew || this == candidateCorrection;
+  bool get isReject => this == rejectAlreadyInApp || this == rejectDuplicate;
+}
+
+class Decision {
+  final Target target;
+  final List<PiosenkomatIssue> issues;
+  /// Dla odrzutów i mail-only: z czym kolizja.
+  final String? detail;
+
+  const Decision(this.target, {this.issues = const [], this.detail});
+}
+
+/// Zgłoszenie z decyzją — to, czym operuje raport, plan i pliki.
+class Classified {
+  final Submission submission;
+  final Decision decision;
+
+  const Classified(this.submission, this.decision);
+
+  ContribMessage get message => submission.message;
+  String get title => submission.title;
+  SongRaw? get song => submission.song;
+  Target get target => decision.target;
+  List<PiosenkomatIssue> get issues => decision.issues;
+  bool get goesToFile => target.goesToFile && song != null;
 
   bool has(SongIssue issue) => issues.any((i) => i.issue == issue);
 
-  /// Uwagi, które ktoś musi ogarnąć. Adnotacje się nie liczą.
-  List<PiosenkomatIssue> get toResolve =>
-      [for (final i in issues) if (!i.issue.isInfo) i];
-
-  /// Automat odrzuca sam tylko wtedy, gdy JEDYNE uwagi są z [kAutoReject].
-  bool get isAutoReject =>
-      toResolve.isNotEmpty && toResolve.every((i) => kAutoReject.contains(i.issue));
-
-  /// Do `auto.hrcpsng`: nie ma nic do ogarnięcia, wchodzi w całości.
-  bool get goesToApp => song != null && toResolve.isEmpty;
-
-  /// Do `review.hrcpsng`: jest co oglądać i jest co pokazać.
-  bool get goesToReview => song != null && toResolve.isNotEmpty && !isAutoReject;
-
-  /// Zgłoszenie ze starej apki — autorowi trzeba odpisać.
-  bool get oldApp => has(SongIssue.oldApp);
-
-  /// Etykiety stanu plus kolejka odpowiedzi, jeśli mejl jest ze starej apki.
+  /// Etykiety stanu plus znaczniki (poprawka, stara apka).
   List<String> get labels => [
         ...stateLabelsFor(this),
-        if (oldApp) kLabelOldAppToReply,
+        if (submission.isCorrection && target != Target.unparsable) kLabelCorrection,
+        if (submission.isOldApp) kLabelOldAppToReply,
       ];
 
-  /// Uwagi w kształcie, w jakim jadą do pliku z piosenkami.
+  /// Ślad w piosence: cechy + uwagi, w kształcie, w jakim jadą do pliku.
   PiosenkomatData piosenkomatData({String? run}) => PiosenkomatData(
-        issues: issues,
-        emailMsgId: message.id,
+        kind: submission.kind,
+        source: submission.source,
+        sentAt: submission.sentAt,
+        userMessage: submission.userMessage,
+        correctionMessage: submission.correctionMessage,
+        correctionTarget: submission.correctionTarget,
+        threadId: submission.threadId,
         run: run,
+        issues: issues,
       );
 }
 
 /// Etykiety stanu, jakie nadaje automat (zawsze razem z `song/auto`).
-/// Odrzucenie tylko przy [Classified.isAutoReject], w innym razie
-/// `needs-review` plus podkategoria na każdą uwagę do ogarnięcia.
 List<String> stateLabelsFor(Classified c) {
-  if (c.toResolve.isEmpty) return const [kLabelReady];
-  if (c.isAutoReject) {
-    return c.has(SongIssue.identicalInApp)
-        ? const [kLabelRejectedInBook]
-        : const [kLabelRejectedDuplicate];
+  switch (c.target) {
+    case Target.unparsable:
+      return const [kLabelUnparsable];
+    case Target.rejectAlreadyInApp:
+      return const [kLabelRejectedInBook];
+    case Target.rejectDuplicate:
+      return const [kLabelRejectedDuplicate];
+    case Target.mailOnlyIdentical:
+      return [
+        kLabelToReview,
+        ReviewKind.identicalInApp.label,
+        if (c.submission.hasUserMessage) ReviewKind.userMessage.label,
+      ];
+    case Target.candidateNew:
+    case Target.candidateCorrection:
+      if (c.issues.isEmpty) return const [kLabelReady];
+      return [
+        kLabelToReview,
+        ...{for (final i in c.issues) i.issue.review.label},
+      ];
   }
-  return [
-    kLabelToReview,
-    ...{
-      for (final i in c.toResolve)
-        if (i.issue.review case final r?) r.label,
-    },
-  ];
 }
 
 /// Pierwsza etykieta stanu, do raportu.

@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
-import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:test/test.dart';
 
 import 'helpers.dart';
@@ -15,7 +14,7 @@ void main() {
     final raw = hardWrap(await completeEmail());
     expect(raw, contains('\r\n'));
     final got = classify(msgFrom(raw), book: SongBook.empty);
-    expect(got.goesToApp, isTrue);
+    expect(got.isClean, isTrue);
     expect(got.song!.title, 'Piosenka testowa XYZ');
   });
 
@@ -35,7 +34,7 @@ void main() {
       date: eml.date, songAttachment: attachment,
     );
     final got = classify(withAtt, book: SongBook.empty);
-    expect(got.goesToApp, isTrue);
+    expect(got.isClean, isTrue);
     expect(got.song!.title, 'Piosenka testowa XYZ');
     expect(got.song!.contributorData!.acceptedContributionRulesVersion, 'v05.10.2025');
   });
@@ -44,7 +43,7 @@ void main() {
     final raw = (await completeEmail()).replaceFirst('"add_pers":[]',
         '"add_pers":[{"person":null,"email_ref":"\r\njan.testowy@example.com","user_key_ref":null}]');
     final got = classify(msgFrom(raw), book: SongBook.empty);
-    expect(got.goesToApp, isTrue);
+    expect(got.isClean, isTrue);
     final refs = got.song!.contribRefs;
     expect(refs.where((c) => c.emailRef == 'jan.testowy@example.com'), hasLength(1));
   });
@@ -54,10 +53,12 @@ void _correction() {
   test('pusty blok „Propozycja poprawki” to nie poprawka', () async {
     final raw = (await completeEmail()).replaceFirst('### Kod piosenki:',
         '### Propozycja poprawki:\n\n```text\n\n```\n\n### Kod piosenki:');
-    expect(classify(msgFrom(raw), book: SongBook.empty).goesToApp, isTrue);
+    expect(classify(msgFrom(raw), book: SongBook.empty).submission.isCorrection, isFalse);
     final withText = raw.replaceFirst('```text\n\n```', '```text\nzła tonacja\n```');
     final got = classify(msgFrom(withText), book: SongBook.empty);
-    expect(issuesOf(got), contains(SongIssue.correction));
+    expect(got.submission.isCorrection, isTrue);
+    expect(got.submission.correctionMessage, 'zła tonacja');
+    expect(got.target, Target.candidateCorrection);
   });
 }
 
@@ -78,7 +79,7 @@ void _oldest() {
     final got = classify(m, book: SongBook.empty);
     // Stara apka nie blokuje: treść jest kompletna, brak zgody dostaje sentinel,
     // a jej temat („Piosenka …”) nie jest tematem spoza szablonów.
-    expect(got.goesToApp, isTrue);
+    expect(got.isClean, isTrue);
     expect(got.oldApp, isTrue);
     expect(got.labels, contains(kLabelOldAppToReply));
     expect(got.song!.contributorData?.acceptedContributionRulesVersion,
@@ -101,7 +102,7 @@ void _oldest() {
     final m = ContribMessage(id: 'mid', body: eml.body, subject: eml.subject,
         from: eml.from, date: eml.date, songAttachment: attachment);
     final got = classify(m, book: SongBook.empty);
-    expect(got.goesToApp, isTrue);
+    expect(got.isClean, isTrue);
     expect(got.oldApp, isFalse);
     expect(got.labels, isNot(contains(kLabelOldAppToReply)));
   });

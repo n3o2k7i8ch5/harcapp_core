@@ -10,10 +10,13 @@ Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduj
 1. **Przesiew.**  
    `./piosenkomat scan -n 20`  
    ####
-   Czyta kolejkę (inbox bez `song/*`), parsuje, wykrywa duplikaty i zapisuje
-   katalog `out/import-<data>/`: `report.txt`, plan etykiet `labels.json`,
-   `auto.hrcpsng` (piosenki bez zarzutu), `review.hrcpsng` (z uwagami przy
-   każdej piosence), `reviewed.hrcpsng` i `people.dart`.
+   Czyta kolejkę (inbox bez `song/*`, po **wątkach** — zgłoszenie to cały
+   wątek), parsuje, porównuje z apką i między sobą i zapisuje katalog
+   `out/import-<data>/`: `report.txt`, plan etykiet `labels.json`,
+   `candidates-new.hrcpsng` (nowe piosenki), `candidates-correction.hrcpsng`
+   (poprawki), kopie `reviewed-*.hrcpsng` do podmiany i `people.dart`.
+   Przy każdej piosence jadą jej cechy (poprawka? dopisek? stara apka?)
+   i uwagi.
    Gmaila tylko czyta — `scan` nigdy niczego nie etykietuje. `-n` pomiń, żeby
    wziąć całą kolejkę; `--newest` bierze najnowsze zamiast najstarszych;
    `-o` wskazuje własny katalog przebiegu.
@@ -30,20 +33,23 @@ Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduj
 3. **Przegląd na stronie.**  
    *(ręcznie)*  
    ####
-   Wczytujesz `auto.hrcpsng` i `review.hrcpsng` na stronie ze śpiewnikiem.
-   Piosenki z `review.hrcpsng` mają nad sobą uwagi piosenkomatu — co w nich
-   podejrzane i dlaczego. Każdą uwagę albo ogarniasz (poprawiasz piosenkę
-   i zdejmujesz uwagę), albo zostawiasz na potem, albo wyrzucasz całą piosenkę.
-   Eksportujesz z powrotem i podmieniasz eksportem
-   `out/import-<data>/reviewed.hrcpsng` — jeden plik na oba.
+   Wczytujesz **jeden** plik naraz na stronie ze śpiewnikiem — najpierw
+   `candidates-new.hrcpsng`, potem osobno `candidates-correction.hrcpsng`.
+   Nad piosenką: badge POPRAWKA (z tytułem tego, co poprawia), dopiski autora
+   i pastylki z uwagami — wszystko tylko do czytania. Poprawiasz, co trzeba,
+   wyrzucasz, czego nie chcesz, eksportujesz i podmieniasz eksportem
+   odpowiednio `reviewed-new.hrcpsng` albo `reviewed-correction.hrcpsng`.
+   **Z kandydatów można wywalać i edytować, nie dodawać.**
    ####
 4. **Decyzje z przeglądu.**  
    `./piosenkomat label reviewed --push`  
    ####
-   Czyta `reviewed.hrcpsng` i rozstrzyga każdą piosenkę: wróciła bez uwag →
-   `ready-to-add`, wróciła z uwagami → z powrotem `needs-review` plus
-   podkategorie tych uwag, które zostały, nie wróciła → `rejected/after-review`
-   i przeczytane. Bez `--push` tylko pokazuje, co by zrobił.
+   Dwa stany, po id wątku: piosenka **jest** w `reviewed-*` → `ready-to-add`
+   (poprawka: + `song/correction`), **nie ma** → `rejected/after-review`
+   i przeczytane. Uwagi w piosence nie mają znaczenia — pastylki były dla
+   Ciebie. Obca piosenka, zły rodzaj w pliku albo dwie poprawki tej samej
+   piosenki → STOP. Brak pliku zwrotnego = tej części jeszcze nie przeglądałeś.
+   Bez `--push` tylko pokazuje, co by zrobił.
    ####
 5. **Osoby dodające.**
    *(ręcznie)*  
@@ -52,8 +58,11 @@ Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduj
    Po kroku 4, bo dopiero on mówi, czyje piosenki wypadły i kogo nie ma po co dopisywać.
    ####
 6. **Piosenki do śpiewnika aplikacji.**  
-   *(ręcznie)*  
+   `./piosenkomat strip`, potem *(ręcznie)*  
    ####
+   `strip` zdejmuje ślad piosenkomatu z `reviewed-*.hrcpsng` → `final-*.hrcpsng`
+   gotowe do wklejenia. Poprawki dostają `id` poprawianej piosenki (apka
+   referencjonuje piosenki po `lclId` — ulubione, albumy) i listę „co podmienić".
    Zatwierdzone piosenki muszą trafić do `assets/songs/all_songs.hrcpsng` i do
    commita. Dopóki tam nie są, `label added` z kroku 7 kłamie (mejl zamknięty,
    piosenki w apce nie ma), a następny `scan` nie rozpozna ich jako duplikatów.
@@ -146,22 +155,28 @@ wsadza kogoś z powrotem do kolejki.
 song/
 ├── ready-to-add              w pliku, czeka na domknięcie (albo Twoja ręczna)
 ├── added                     koniec
+├── correction                ZNACZNIK: zgłoszenie to poprawka — wgrywasz podmianą, nie dodaniem
+├── unparsable                nie dało się sparsować; poza needs-review, nieprzeczytane,
+│                             etykieta tylko po to, żeby mejl nie wracał do `scan`
 ├── add-contributor           „wpisać osobę dodającą do apki”, tylko Ty
 ├── rejected/
-│   ├── already-in-app        automat: ten sam tytuł i tekst, co w śpiewniku
-│   ├── duplicate             automat: ten sam tytuł i tekst, co starsze zgłoszenie w paczce
+│   ├── already-in-app        automat: piosenka IDENTYCZNA (każde pole) z tą w apce
+│   ├── duplicate             automat: identyczna z nowszym zgłoszeniem w paczce
 │   ├── after-review          automat zaproponował, Ty wyrzuciłeś na stronie (`label reviewed`)
 │   ├── no-chords             tylko Ty
 │   ├── silly                 tylko Ty (kiedyś LLM)
 │   └── too-niche             tylko Ty (kiedyś LLM)
 ├── needs-review/             automat spasował; podkategoria na każdy powód
 │   ├── user-message          ktoś coś dopisał
-│   ├── duplicate-in-app      kolizja z piosenką, która jest już w apce
+│   ├── identical-in-app      identyczna z apką, ale autor coś dopisał albo zadeklarował
+│   │                         poprawkę — piosenki nie ma w pliku, sam mejl do przeczytania
+│   ├── duplicate-in-app      ten sam tytuł / podobny tekst do piosenki w apce
 │   ├── duplicate-in-batch    kolizja z innym zgłoszeniem z tej samej paczki
+│   ├── undeclared-correction ta sama piosenka co w apce, inne chwyty albo drobiazgi —
+│   │                         ktoś poprawił i wysłał jako nową
+│   ├── correction-problem    poprawka, ale w apce nie ma czego poprawiać
 │   ├── missing-data          brak YouTube, chwytów lub tytułu
-│   ├── no-consent            brak zgody albo nie wiadomo, kto zgłosił
-│   ├── correction            poprawka istniejącej piosenki
-│   └── unparsable            nie udało się sparsować mejla
+│   └── no-consent            brak zgody albo nie wiadomo, kto zgłosił
 ├── old-app/                  ZNACZNIK: mejl z najstarszej, nierozwijanej apki
 │   ├── to-reply              kolejka: autorowi trzeba odpisać (`reply`)
 │   └── replied               odpowiedź poszła
@@ -171,15 +186,25 @@ song/
 Zasady:
 
 - Kolejka to zgłoszenia piosenek (temat `Nowa piosenka` / `Poprawka piosenki` albo
-  `### Kod piosenki:` w treści) w `in:inbox` bez żadnej etykiety `song/*`. Innych mejli
-  narzędzie nie czyta i nie etykietuje. Gmail jest jedynym stanem.
+  `### Kod piosenki:` w treści) w `in:inbox` bez żadnej etykiety `song/*` — liczonej
+  **po wątku**: odpowiedź w wątku, który już dostał etykietę, nie jest nowym
+  zgłoszeniem. Innych mejli narzędzie nie czyta i nie etykietuje. Gmail jest jedynym stanem.
+- **Zgłoszenie = wątek.** Reprezentantem jest najnowsza wiadomość z własnym kodem
+  piosenki (nie z cytatu) od nadawcy ≠ skrzynka HarcApp; gdy takiej nie ma poza
+  pierwszą — pierwsza. Pozostałe wiadomości wątku to dopiski. Etykiety idą na
+  wszystkie wiadomości wątku.
 - `song/auto` zawsze towarzyszy jednej etykiecie stanu. Twoje decyzje to te bez `Auto`.
-- Automat odrzuca sam tylko, gdy **jedyną** uwagą jest identyczna piosenka
-  w apce albo identyczna w paczce. Każda inna uwaga, także w połączeniu, daje
-  `needs-review` plus podkategorię na każdą uwagę (mejl może mieć kilka).
+- **Identyczna** znaczy: każde pole dosłownie równe (tytuł, tekst, chwyty,
+  YouTube, autorzy, wykonawcy, tagi…). Taka piosenka **nigdy nie idzie do
+  pliku**: bez sygnału od człowieka → `rejected/already-in-app`; z dopiskiem
+  albo jako poprawka → `needs-review/identical-in-app`, sam mejl, nieprzeczytany.
+  W paczce z grupy identycznych zostaje najnowsza, reszta → `rejected/duplicate`.
+- Wszystko mniej niż identyczne idzie do pliku (`candidates-new` albo
+  `candidates-correction`) — bez uwag → `ready-to-add`, z uwagami → `needs-review`
+  plus podkategoria na każdą uwagę. Poprawki nie dostają `missing-*`.
 - Przeczytane oznaczamy tam, gdzie sprawa jest zamknięta: `added` i każde
-  `rejected/*`. `needs-review/*` i `old-app/to-reply` zostają nieprzeczytane —
-  jedne czekają na Twoją decyzję, drugie na odpowiedź.
+  `rejected/*`. `needs-review/*`, `unparsable` i `old-app/to-reply` zostają
+  nieprzeczytane — czekają na Twoją decyzję, Twoje oko albo odpowiedź.
 - `label added` dotyka wyłącznie mejli z `ready-to-add` **i** `auto`. Twoje ręczne
   „ready-to-add” czekają na Ciebie jak dotąd.
 
@@ -193,86 +218,120 @@ Przydatne zapytania:
 | automatyczne odrzucenia do wyrywkowej kontroli | `label:song/rejected label:song/auto` |
 | pudła automatu (zaproponował, a odpadło) | `label:song/rejected/after-review` |
 
-## Uwagi piosenkomatu
+## Cechy, uwagi, decyzja
 
-Każda piosenka jedzie do pliku ze swoimi uwagami — co automat ma jej do
-zarzucenia. Uwagi mają trzy wagi:
+Każde zgłoszenie przechodzi trzy kroki, każdy z osobną strukturą
+(uzasadnienia w `PLAN.md`):
 
-| waga | znaczenie | uwagi |
-|---|---|---|
-| **blokada** | piosenka nie ma prawa wejść do apki, dopóki tego nie naprawisz | `missing-title`, `missing-chords`, `missing-youtube`, `no-consent`, `no-contributor-email`, `parse-error`, `identical-in-app`, `identical-in-batch` |
-| **decyzja** | dane są kompletne, ale ktoś musi zdecydować | `same-title-in-app`, `similar-text-in-app`, `same-title-in-batch`, `similar-text-in-batch`, `has-user-message`, `correction` |
-| **adnotacja** | nic nie blokuje, warto wiedzieć | `reply`, `old-app` |
+1. **Cechy** — same fakty, zero ocen: `kind` (`new` / `correction` — z tematu
+   albo niepustego bloku „Propozycja poprawki”), `source` (`current-app` /
+   `old-app`), `userMessage`, `correctionMessage`, `sentAt`, nadawca, zgoda,
+   sparsowana piosenka, `appMatch` (najbliższa piosenka w apce), `batchMatch`
+   (najbliższe inne zgłoszenie w paczce).
+2. **Decyzja** — jedna tabela `decide(cechy)`: dokąd trafia zgłoszenie
+   (`candidates-new` / `candidates-correction` / odrzut / sam mejl /
+   niesparsowalne) i jakie uwagi dostaje.
+3. **Uwagi** — tylko dla tego, co idzie do pliku. Osąd o piosence, nie fakt
+   o zgłoszeniu; identyczność nie jest uwagą, bo identyczna nigdy nie trafia
+   do pliku.
 
-Piosenka bez uwag cięższych niż adnotacja ląduje w `auto.hrcpsng`; reszta
-w `review.hrcpsng`. Uwagi siedzą w polu `piosenkomat` piosenki (obok `tags`,
-ale to nie tagi — tagi widzi użytkownik apki, uwagi tylko Ty przy przeglądzie)
-i nigdy nie jadą do `all_songs.hrcpsng`: `toApiJsonMap` wypuszcza je tylko na
-wyraźne życzenie narzędzia.
-
-Każda uwaga niesie `detail` — z czym kolizja, ile procent, co dokładnie brakuje.
-Bez tego „ten sam tytuł” nie mówi nic, czego nie wiadomo z samej nazwy.
-
-`contributor_data` dostaje adres nadawcy, datę mejla i wersję regulaminu z mejla.
-
-Brak chwytów czy YouTube blokuje tak samo w każdej wersji apki — automat niczego
-nie dopisuje za autora.
-
-## Duplikaty
-
-Tytuły porównywane po normalizacji jak w wyszukiwarce na stronie. Teksty jako zbiory słów,
-indeks Jaccarda; kolejność zwrotek i wielkość liter bez znaczenia. Dwa progi: 90% to
-„ta sama piosenka”, 50% to „podejrzanie podobna”.
-
-Nazwy uwag to dwie osie: **co** (`identical` / `same-title` / `similar-text`)
-i **gdzie** (`in-app` — wśród piosenek, które są już w apce, `in-batch` —
-w tej samej paczce zgłoszeń).
-
-| Tytuł | Tekst | Uwaga | Efekt |
+| uwaga | waga | `new` | `correction` |
 |---|---|---|---|
-| jak w apce | ≥ 90% | `identical-in-app` | `rejected/already-in-app`, automat |
-| jak w apce | < 90% | `same-title-in-app` | `needs-review/duplicate-in-app` |
-| inny | ≥ 50% do czegoś w apce | `similar-text-in-app` | `needs-review/duplicate-in-app` z nazwą pierwowzoru |
-| jak starsze zgłoszenie w paczce | ≥ 90% | `identical-in-batch` | `rejected/duplicate`, starsze wchodzi |
-| jak inne zgłoszenie w paczce | < 90% | `same-title-in-batch` | oba `needs-review/duplicate-in-batch` |
-| inny niż w paczce | ≥ 50% do innego zgłoszenia | `similar-text-in-batch` | oba `needs-review/duplicate-in-batch` |
+| `missing-title`, `missing-chords`, `missing-youtube` | blocking | ✓ | — (poprawka to diff) |
+| `no-consent`, `no-contributor-email` | blocking | ✓ | ✓ |
+| `chords-differ-from-app`, `metadata-differ-from-app` | decision | ✓ | — |
+| `same-title-in-app`, `similar-text-in-app` | decision | ✓ | — (normalny kształt poprawki) |
+| `same-title-in-batch`, `similar-text-in-batch` | decision | ✓ | zapasowo, gdy nie ma celu |
+| `same-target-in-batch` | decision | — | ✓ (dwie poprawki tej samej piosenki) |
+| `no-target-in-app` | decision | — | ✓ |
+| `has-user-message` | decision | ✓ | ✓ (tylko `userMessage`; blok poprawki jest oczekiwany) |
 
-Porównania w paczce obejmują wszystkie sparsowane zgłoszenia, nie tylko te bez
-zarzutu: dwa razy to samo zgłoszenie bez YouTube'a to dalej to samo zgłoszenie. Duplikat
-wysłany w innym przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs.hrcpsng`.
-W raporcie przy każdym trafieniu jest procent i tytuł pierwowzoru.
+Waga to **kolor pastylki** w edytorze — czerwona „bez tego nie powinno wejść”,
+pomarańczowa „zdecyduj”. **Pastylki są dla Ciebie, nie dla piosenkomatu**:
+narzędzie po przeglądzie ich nie czyta. Zrobiłeś przegląd, piosenka jest
+w pliku — wchodzi.
 
-## Przegląd (`label reviewed`)
+Stara apka: `consentVersion` dostaje sentinel `brak (stara apka)`, bez
+`no-consent` — regulaminu jeszcze nie było. Brak chwytów czy YouTube blokuje
+tak samo w każdej wersji apki — automat niczego nie dopisuje za autora.
 
-`scan` obok `auto.hrcpsng` i `review.hrcpsng` zostawia ich kopię jako
-`reviewed.hrcpsng`. Po przejrzeniu piosenek na stronie eksportujesz to, co
-zostało, i podmieniasz nim ten plik. Każda piosenka ma wtedy trzy możliwe losy:
+Wszystko jedzie w polu `piosenkomat` piosenki (obok `tags`, ale to nie tagi —
+tagi widzi użytkownik apki):
 
-| w `reviewed.hrcpsng` | znaczy | mejl dostaje |
-|---|---|---|
-| jest, bez uwag | ogarnięta, wchodzi do apki | `ready-to-add` |
-| jest, uwagi zostały | jeszcze nie tknięta, wraca do kolejki | `needs-review` + podkategorie tych uwag, które zostały |
-| nie ma jej | odrzucona przy przeglądzie | `rejected/after-review` |
+```json
+"piosenkomat": {
+  "kind": "correction", "source": "old-app", "sent_at": "…",
+  "user_message": "…", "correction_message": "…",
+  "correction_target": "o!_plonie_ognisko",
+  "thread_id": "17a6…", "run": "import-…",
+  "issues": [{"issue": "no-consent"}]
+}
+```
 
-Czyli **zdjęcie uwagi w edytorze to Twoja decyzja**: „to już załatwione”.
-Bez `--push` tylko pokazuje, co by zrobił. Ślad decyzji ląduje w `decisions.json`.
+`correction_target` — którą piosenkę w apce poprawia — jest **zgadywany**
+po tytule/tekście, bo mejl z apki tego nie niesie (apka powinna kiedyś
+dokładać `### Poprawiana piosenka: <lclId>`). Pole nigdy nie jedzie do
+`all_songs.hrcpsng`: `toApiJsonMap` wypuszcza je tylko na życzenie narzędzia,
+a `strip` zdejmuje je przed wgraniem.
 
-Piosenki wiąże ze zgłoszeniami `email_msg_id` w `contributor_data` — automat
-wpisuje tam id mejla, więc poprawiony przy przeglądzie tytuł niczego nie psuje.
-Gdyby strona to pole zgubiła, `label reviewed` schodzi po kolei na id piosenki, tytuł
-i wreszcie tekst (ten sam próg, co przy duplikatach). Czego nie umie związać
-z przebiegiem, zostawia w spokoju i wypisuje jako pominięte.
+## Podobieństwo
 
-Bezpieczniki: pusty `reviewed.hrcpsng`, odrzucona ponad połowa przebiegu albo
-eksport, w którym żadna piosenka nie niesie już pola `piosenkomat` (czyli strona
-je zgubiła, a nie Ty ogarnąłeś wszystko naraz) przerywają robotę — to prawie
-zawsze znaczy, że coś poszło nie tak z plikiem. `--force`, jeśli naprawdę tak ma
-być. Etykiety zmienia tylko na mejlach, które automat sam wstawił do plików
-przebiegu.
+Porównanie dwóch piosenek to **lista dowodów**, każdy mówi co i jak bardzo:
+`SameTitle` (po normalizacji jak w wyszukiwarce, także `hid_titles`),
+`SameText` (tekst dosłownie równy po zbiciu białych znaków), `TextOverlap`
+(Jaccard zbiorów słów — nie widzi kolejności zwrotek ani interpunkcji),
+`SameChords` (wielkość liter zostaje, `a` ≠ `A`), `MetadataDiff` (które
+z: tytuł dosłownie, ukryte tytuły, autorzy, kompozytorzy, wykonawcy, data,
+YouTube, tagi się różnią; `null == []`).
 
-Mejl to dziś jedna piosenka. Gdyby kiedyś niósł kilka, `label reviewed` odetykietuje go
-tylko wtedy, gdy wypadną wszystkie — przy części wypisze ostrzeżenie i zostawi
-decyzję Tobie.
+Wniosek to reguła nad listą, progi 90% i 50%:
+
+| poziom | reguła | `new` → | `correction` → |
+|---|---|---|---|
+| `identical` | `SameText ∧ SameChords ∧ ¬MetadataDiff` — **każde pole równe** | `rejected/already-in-app`; z dopiskiem → `needs-review/identical-in-app` | `needs-review/identical-in-app` (poprawka, która nic nie zmienia) |
+| `sameSong` | tytuł, tekst ≥ 90%, chwyty, ale coś inne | uwaga `metadata-differ-from-app` | kandydat bez uwagi |
+| `sameTextDifferentChords` | tytuł, tekst ≥ 90%, inne chwyty | uwaga `chords-differ-from-app` | kandydat |
+| `sameTitleDifferentText` | ten sam tytuł, tekst < 90% | uwaga `same-title-in-app` | kandydat |
+| `similarText` | inny tytuł, tekst ≥ 50% | uwaga `similar-text-in-app` | kandydat (cel zgadnięty po tekście) |
+| brak | — | czysty kandydat | uwaga `no-target-in-app` |
+
+**W paczce** zgłoszenia grupują się po kluczu zależnym od rodzaju: nowe po
+tytule, poprawki po `correction_target` (poprawka może zmieniać tytuł).
+W grupie identyczne zlewają się do **najnowszej** (reszta →
+`rejected/duplicate`), wszystko mniej niż identyczne idzie do pliku z uwagą
+`same-title-in-batch` / `same-target-in-batch`. Poza grupami, parami:
+`similarText` między różnymi tytułami → `similar-text-in-batch`. Duplikat
+z innego przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs`.
+
+## Przegląd (`label reviewed`) i `strip`
+
+`scan` obok `candidates-*.hrcpsng` zostawia ich kopie jako
+`reviewed-*.hrcpsng`. Wczytujesz jeden plik na stronę, przeglądasz,
+eksportujesz i podmieniasz nim odpowiedni `reviewed-*`. Dwa stany, po id
+wątku:
+
+| w `reviewed-*.hrcpsng` | mejl dostaje |
+|---|---|
+| jest | `ready-to-add` (poprawka: + `song/correction`) |
+| nie ma jej | `rejected/after-review`, przeczytane |
+
+Uwagi w piosence nie mają znaczenia. Brak pliku zwrotnego danego rodzaju =
+tej części jeszcze nie przeglądałeś. Ślad decyzji w `decisions.json`.
+
+**Z kandydatów można wywalać i edytować, nie dodawać.** Piosenka spoza
+kandydatów (obcy `thread_id`), zły rodzaj w pliku (poprawka w `reviewed-new`)
+albo dwie zachowane poprawki tej samej piosenki → **STOP**, bez `--force`.
+Bezpieczniki z `--force`: pusty plik, odrzucona ponad połowa.
+
+Piosenki wiąże ze zgłoszeniami `thread_id` (w `piosenkomat` i zapasowo
+w `contributor_data.email_thread_id`). Gdyby oba zginęły, `label reviewed`
+schodzi po kolei na id piosenki, tytuł i tekst.
+
+`./piosenkomat strip` zdejmuje pole `piosenkomat` z `reviewed-*` →
+`final-*.hrcpsng` do wklejenia w `all_songs`. Przy poprawkach ustawia
+`id = correction_target` — apka referencjonuje piosenki po `lclId` (ulubione,
+albumy, oceny), więc poprawiony tytuł nie może zmienić id — i wypisuje listę
+„co podmienić”. Samo wgranie do `all_songs` robisz ręcznie.
 
 ## Osoby dodające
 

@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:provider/provider.dart';
 
-import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'song_raw.dart';
 
@@ -68,15 +67,6 @@ class CurrentItemProvider extends ChangeNotifier{
 
   void setLclId(String value, {bool notify = true}){
     _song.id = value;
-    if(notify) notifyListeners();
-  }
-
-  /// Uwaga piosenkomatu ogarnięta: znika z piosenki, więc po eksporcie
-  /// narzędzie widzi, że problem został załatwiony.
-  void resolvePiosenkomatIssue(SongIssue issue, {bool notify = true}){
-    final data = _song.piosenkomatData;
-    if(data == null) return;
-    _song.piosenkomatData = data.withoutIssue(issue);
     if(notify) notifyListeners();
   }
 

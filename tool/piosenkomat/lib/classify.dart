@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
-import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
@@ -18,144 +18,269 @@ final _emailRe = RegExp(r'[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}');
 String? emailFromHeader(String? from) =>
     from == null ? null : _emailRe.firstMatch(from)?.group(0)?.toLowerCase();
 
-/// Cała paczka: klasyfikacja każdego mejla, potem duplikaty między
-/// zgłoszeniami, które w ogóle się sparsowały.
-///
-/// Porównujemy wszystkie sparsowane, nie tylko te bez zarzutów: dwa razy to
-/// samo zgłoszenie bez YouTube'a to dalej to samo zgłoszenie i nie ma powodu
-/// oglądać go dwa razy.
-///  - ten sam tytuł i ten sam tekst (≥ [kSameText]): najstarsze zostaje,
-///    młodsze → `identical-in-batch` (automatyczne odrzucenie),
-///  - ten sam tytuł, inna treść → oba `same-title-in-batch`,
-///  - różne tytuły, podobna treść (≥ [kSimilarText]) → oba `similar-text-in-batch`.
+// ---------------------------------------------------------------------------
+// Krok 1: wiadomości → zgłoszenia (cechy)
+// ---------------------------------------------------------------------------
+
+/// Cała paczka: wiadomości składają się w zgłoszenia (po wątku), każde
+/// dostaje cechy, potem porównanie z apką i między sobą, na końcu decyzja.
 List<Classified> classifyBatch(
   List<ContribMessage> messages, {
   required SongBook book,
 }) {
-  final out = [for (final m in messages) classify(m, book: book)];
-  final parsed = <int>[
-    for (var i = 0; i < out.length; i++)
-      if (out[i].song != null) i,
+  final byThread = <String, List<ContribMessage>>{};
+  for (final m in messages) {
+    byThread.putIfAbsent(m.threadId, () => []).add(m);
+  }
+  var submissions = [
+    for (final thread in byThread.values) buildSubmission(thread, book: book),
   ];
-  if (parsed.length < 2) return out;
-
-  final words = {for (final i in parsed) i: textWords(out[i].song!.text)};
-  DateTime dateOf(int i) => out[i].message.date ?? DateTime(9999);
-  void flag(int i, SongIssue issue, String detail) {
-    if (out[i].has(issue)) return;
-    out[i] = out[i].withIssues([...out[i].issues, PiosenkomatIssue(issue, detail: detail)]);
-  }
-
-  // Ten sam tytuł.
-  final byTitle = <String, List<int>>{};
-  for (final i in parsed) {
-    byTitle.putIfAbsent(searchableString(out[i].title), () => []).add(i);
-  }
-  final duplicates = <int>{};
-  for (final group in byTitle.values) {
-    if (group.length < 2) continue;
-    final ordered = [...group]..sort((a, b) => dateOf(a).compareTo(dateOf(b)));
-    final heads = <int>[];
-    for (final i in ordered) {
-      final head = heads.where((h) => jaccard(words[h]!, words[i]!) >= kSameText).firstOrNull;
-      if (head != null) {
-        duplicates.add(i);
-        flag(i, SongIssue.identicalInBatch,
-            'to samo, co starsze zgłoszenie [${out[head].message.id}]');
-      } else {
-        heads.add(i);
-      }
-    }
-    if (heads.length > 1) {
-      for (final h in heads) {
-        flag(h, SongIssue.sameTitleInBatch,
-            'ten sam tytuł, co ${heads.where((o) => o != h).map((o) => '[${out[o].message.id}]').join(', ')}');
-      }
-    }
-  }
-
-  // Różne tytuły, podobna treść.
-  final rest = parsed.where((i) => !duplicates.contains(i)).toList();
-  for (var a = 0; a < rest.length; a++) {
-    for (var b = a + 1; b < rest.length; b++) {
-      final i = rest[a], j = rest[b];
-      if (searchableString(out[i].title) == searchableString(out[j].title)) continue;
-      final score = jaccard(words[i]!, words[j]!);
-      if (score < kSimilarText) continue;
-      flag(i, SongIssue.similarTextInBatch, 'treść ${pct(score)} jak „${out[j].title}” [${out[j].message.id}]');
-      flag(j, SongIssue.similarTextInBatch, 'treść ${pct(score)} jak „${out[i].title}” [${out[i].message.id}]');
-    }
-  }
-  // Uwagi z paczki dochodzą po klasyfikacji pojedynczych mejli, więc ślad
-  // w piosence trzeba odświeżyć.
-  for (final i in parsed) {
-    out[i].song!.piosenkomatData = out[i].piosenkomatData();
+  submissions = matchWithinBatch(submissions);
+  final out = [for (final s in submissions) Classified(s, decide(s))];
+  // Ślad w piosence od razu — `scan` dopisze jeszcze nazwę przebiegu.
+  for (final c in out) {
+    c.song?.piosenkomatData = c.piosenkomatData();
   }
   return out;
 }
 
-/// Jeden mejl. Do apki wchodzi tylko taki, który nie ma żadnej uwagi
-/// cięższej niż adnotacja.
-Classified classify(ContribMessage m, {required SongBook book}) {
-  final fallbackTitle = m.subject ?? m.id;
+/// Jeden wątek → jedno zgłoszenie. Reprezentant: najnowsza wiadomość
+/// z własnym kodem piosenki od nadawcy ≠ skrzynka HarcApp; gdy poza pierwszą
+/// takiej nie ma — pierwsza. Dzięki temu autor, który poprawił piosenkę
+/// i odesłał przez „Odpowiedz”, dostaje ten sam wynik, co nowym mejlem.
+/// Pozostałe wiadomości dostarczają tylko dopisków.
+Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}) {
+  final ordered = [...thread]..sort((a, b) => _dateOf(a).compareTo(_dateOf(b)));
+  final own = [
+    for (final m in ordered.skip(1))
+      if (m.hasOwnSongCode && _senderOf(m) != null) m,
+  ];
+  final rep = own.isNotEmpty ? own.last : ordered.first;
 
-  ParsedContribEmail parsed;
+  ParsedContribEmail? parsed;
   try {
-    parsed = parseSubmission(m);
-  } catch (e) {
-    return Classified(
-      message: m,
-      title: fallbackTitle,
-      issues: [PiosenkomatIssue(SongIssue.parseError, detail: e.toString())],
-    );
+    parsed = parseSubmission(rep);
+  } catch (_) {
+    parsed = null;
   }
 
-  final song = parsed.song;
-  final title = song.title.trim().isEmpty ? fallbackTitle : song.title;
+  final song = parsed?.song;
+  final fallbackTitle = rep.subject ?? rep.id;
+  final title = (song?.title.trim().isEmpty ?? true) ? fallbackTitle : song!.title;
+
+  // Dopiski z pozostałych wiadomości wątku doklejamy z datą, żeby było
+  // wiadomo, co kiedy przyszło.
+  final messagesText = <String>[];
+  if (parsed?.userMessage case final own?) messagesText.add(own);
+  for (final m in ordered) {
+    if (m.id == rep.id) continue;
+    final extra = _userMessageOf(m);
+    if (extra != null) messagesText.add('[${_day(m.date)}]: $extra');
+  }
+
+  final oldApp = parsed?.isOldestFormat ?? false;
+  final isCorrection = (rep.subject ?? '').contains(kCorrectionSubject) ||
+      extractCorrectionMessage(rep.body) != null;
+  final sender = parsed == null ? _senderOf(rep) : _sender(rep, parsed);
+  final consent = oldApp
+      ? kOldAppRulesVersion
+      : (parsed?.acceptedRulesVersion?.trim().isEmpty ?? true)
+          ? null
+          : parsed!.acceptedRulesVersion!.trim();
+
+  if (song != null && parsed != null) {
+    _enrich(song, parsed, sender: sender, threadId: rep.threadId, date: rep.date);
+  }
+
+  final profile = song == null ? null : SongProfile(song);
+  return Submission(
+    threadId: rep.threadId,
+    message: rep,
+    messages: ordered,
+    kind: isCorrection ? SubmissionKind.correction : SubmissionKind.newSong,
+    source: oldApp ? SubmissionSource.oldApp : SubmissionSource.currentApp,
+    title: title,
+    userMessage: messagesText.isEmpty ? null : messagesText.join('\n\n'),
+    correctionMessage: parsed?.correctionMessage ?? extractCorrectionMessage(rep.body),
+    sentAt: rep.date,
+    sender: sender,
+    consentVersion: consent,
+    song: song,
+    registered: parsed?.registered,
+    appMatch: profile == null ? null : book.closest(profile),
+  );
+}
+
+/// Porównanie między zgłoszeniami paczki. Dwa przejścia: najpierw grupy po
+/// kluczu zależnym od `kind` (tytuł dla nowych, `correction_target` dla
+/// poprawek — poprawka może właśnie zmieniać tytuł), w grupie identyczne
+/// zlewają się do najnowszej; potem parami `similarText` między różnymi
+/// tytułami.
+List<Submission> matchWithinBatch(List<Submission> subs) {
+  final profiles = {
+    for (final s in subs)
+      if (s.song != null) s.threadId: SongProfile(s.song!),
+  };
+  final out = {for (final s in subs) s.threadId: s};
+
+  BatchMatch matchOf(Submission a, Submission b, {bool newest = true}) => BatchMatch(
+        threadId: b.threadId,
+        msgId: b.message.id,
+        title: b.title,
+        sentAt: b.sentAt,
+        similarities: compare(profiles[a.threadId]!, profiles[b.threadId]!),
+        isNewestInBatch: newest,
+      );
+
+  // Grupy.
+  final groups = <String, List<Submission>>{};
+  for (final s in subs) {
+    if (s.song == null) continue;
+    final key = s.isCorrection
+        ? (s.correctionTarget == null ? 'title:${searchableString(s.title)}' : 'target:${s.correctionTarget}')
+        : 'title:${searchableString(s.title)}';
+    groups.putIfAbsent('${s.kind.id}|$key', () => []).add(s);
+  }
+
+  for (final group in groups.values) {
+    if (group.length < 2) continue;
+    final ordered = [...group]..sort((a, b) => _cmpDate(a.sentAt, b.sentAt));
+    // Identyczne zlewają się: każde wskazuje najnowsze identyczne z pozostałych.
+    for (final s in ordered) {
+      final identical = [
+        for (final o in ordered)
+          if (o.threadId != s.threadId &&
+              levelOf(compare(profiles[s.threadId]!, profiles[o.threadId]!)) == MatchLevel.identical)
+            o,
+      ];
+      if (identical.isNotEmpty) {
+        final newest = identical.last; // `ordered` jest po dacie
+        final isNewest = _cmpDate(s.sentAt, newest.sentAt) >= 0;
+        out[s.threadId] = s.copyWith(batchMatch: matchOf(s, newest, newest: isNewest));
+        continue;
+      }
+      // Nieidentyczne w grupie: najbliższe tekstem z pozostałych.
+      Submission? best;
+      var bestScore = -1.0;
+      for (final o in ordered) {
+        if (o.threadId == s.threadId) continue;
+        final score = jaccard(profiles[s.threadId]!.words, profiles[o.threadId]!.words);
+        if (score > bestScore) {
+          best = o;
+          bestScore = score;
+        }
+      }
+      if (best != null) out[s.threadId] = s.copyWith(batchMatch: matchOf(s, best));
+    }
+  }
+
+  // Parami, różne tytuły, podobny tekst — tylko tam, gdzie grupa nic nie dała.
+  final list = out.values.where((s) => s.song != null).toList();
+  for (var i = 0; i < list.length; i++) {
+    for (var j = i + 1; j < list.length; j++) {
+      final a = list[i], b = list[j];
+      if (a.kind != b.kind) continue;
+      if (profiles[a.threadId]!.sharesTitleWith(profiles[b.threadId]!)) continue;
+      final score = jaccard(profiles[a.threadId]!.words, profiles[b.threadId]!.words);
+      if (score < kSimilarText) continue;
+      if (out[a.threadId]!.batchMatch == null) out[a.threadId] = a.copyWith(batchMatch: matchOf(a, b));
+      if (out[b.threadId]!.batchMatch == null) out[b.threadId] = b.copyWith(batchMatch: matchOf(b, a));
+    }
+  }
+  return [for (final s in subs) out[s.threadId]!];
+}
+
+// ---------------------------------------------------------------------------
+// Krok 2: polityka
+// ---------------------------------------------------------------------------
+
+/// Cechy → decyzja. Jedna tabela; `kind` jest deklaracją autora i rozstrzyga
+/// pierwsza. Identyczna z apką **nigdy** nie idzie do pliku.
+Decision decide(Submission s) {
+  final song = s.song;
+  if (song == null) return const Decision(Target.unparsable);
+
+  final batch = s.batchMatch;
+  if (batch != null && batch.level == MatchLevel.identical && !batch.isNewestInBatch) {
+    return Decision(Target.rejectDuplicate,
+        detail: 'nowsza wersja w [${batch.msgId}]');
+  }
+
+  final app = s.appMatch;
+  final appLevel = app?.level;
+
+  if (appLevel == MatchLevel.identical) {
+    if (s.isCorrection || s.hasUserMessage) {
+      return Decision(Target.mailOnlyIdentical, detail: app!.detail);
+    }
+    return Decision(Target.rejectAlreadyInApp, detail: app!.detail);
+  }
+
   final issues = <PiosenkomatIssue>[];
   void add(SongIssue issue, [String? detail]) =>
       issues.add(PiosenkomatIssue(issue, detail: detail));
 
-  // Kod piosenki w cytacie odpowiedzi. Sam w sobie niczego nie psuje: jeśli to
-  // powtórka, złapią ją uwagi o duplikatach, a jeśli nie — szkoda zgłoszenia.
-  if (m.isReply) add(SongIssue.reply, m.subject);
-  if (parsed.isOldestFormat) add(SongIssue.oldApp, kOldAppRulesVersion);
+  // Wspólne.
+  if (s.consentVersion == null) add(SongIssue.noConsent);
+  if (s.sender == null) {
+    add(SongIssue.noContributorEmail, 'nadawca: ${s.message.from ?? 'brak nagłówka'}');
+  }
+  if (s.hasUserMessage) add(SongIssue.hasUserMessage, s.userMessage!.trim());
 
-  if ((m.subject ?? '').contains('Poprawka piosenki') || _hasCorrectionText(m.body)) {
-    add(SongIssue.correction, _correctionText(m.body));
+  if (s.isCorrection) {
+    if (app == null) add(SongIssue.noTargetInApp, 'nic w apce nie pasuje tytułem ani tekstem');
+    // `sameSong` i reszta to normalny kształt poprawki — bez uwag o apce.
+    if (batch != null) {
+      if (s.correctionTarget != null) {
+        add(SongIssue.sameTargetInBatch, batch.detail);
+      } else if (batch.level != null && batch.level != MatchLevel.similarText) {
+        add(SongIssue.sameTitleInBatch, batch.detail);
+      }
+    }
+    return Decision(Target.candidateCorrection, issues: issues);
   }
 
-  if (parsed.userMessage != null) {
-    add(SongIssue.hasUserMessage, parsed.userMessage!.trim());
-  }
-  if (song.title.trim().isEmpty) add(SongIssue.missingTitle, m.subject);
+  // Nowa piosenka.
+  if (song.title.trim().isEmpty) add(SongIssue.missingTitle, s.message.subject);
   if (!song.hasChords) add(SongIssue.missingChords, _chordsDetail(song));
   if ((song.youtubeVideoId ?? '').trim().isEmpty) add(SongIssue.missingYoutube);
-  // Stara apka o zgodę nie pytała, bo regulaminu jeszcze nie było — dostaje
-  // sentinel [kOldAppRulesVersion] zamiast blokady.
-  if ((parsed.acceptedRulesVersion ?? '').trim().isEmpty && !parsed.isOldestFormat) {
-    add(SongIssue.noConsent);
+
+  switch (appLevel) {
+    case MatchLevel.sameSong:
+      add(SongIssue.metadataDifferFromApp, app!.detail);
+    case MatchLevel.sameTextDifferentChords:
+      add(SongIssue.chordsDifferFromApp, app!.detail);
+    case MatchLevel.sameTitleDifferentText:
+      add(SongIssue.sameTitleInApp, app!.detail);
+    case MatchLevel.similarText:
+      add(SongIssue.similarTextInApp, app!.detail);
+    case MatchLevel.identical:
+    case null:
+      break;
   }
-
-  final sender = _sender(m, parsed);
-  if (sender == null) {
-    add(SongIssue.noContributorEmail, 'nadawca: ${m.from ?? 'brak nagłówka'}');
+  if (batch != null) {
+    switch (batch.level) {
+      case MatchLevel.similarText:
+        add(SongIssue.similarTextInBatch, batch.detail);
+      case MatchLevel.identical:
+        // Ta jest najnowsza (inaczej odpadłaby wyżej) — starsza odpadła, nic do uwag.
+        break;
+      case null:
+        break;
+      default:
+        add(SongIssue.sameTitleInBatch, batch.detail);
+    }
   }
-
-  if (_compareWithApp(song, book) case final collision?) issues.add(collision);
-
-  _enrich(song, parsed, sender: sender, date: m.date, msgId: m.id);
-  final out = Classified(
-    message: m,
-    title: title,
-    song: song,
-    sender: sender,
-    registered: parsed.registered,
-    issues: issues,
-  );
-  song.piosenkomatData = out.piosenkomatData();
-  return out;
+  return Decision(Target.candidateNew, issues: issues);
 }
+
+// ---------------------------------------------------------------------------
+// Pomocnicze
+// ---------------------------------------------------------------------------
+
+DateTime _dateOf(ContribMessage m) => m.date ?? DateTime(0);
+int _cmpDate(DateTime? a, DateTime? b) => (a ?? DateTime(0)).compareTo(b ?? DateTime(0));
+String _day(DateTime? d) => d == null ? '?' : d.toLocal().toIso8601String().substring(0, 10);
 
 /// Ile linijek tekstu zostało bez chwytów — bez tego „brak chwytów” nie mówi,
 /// czy brakuje wszystkiego, czy jednej zwrotki.
@@ -164,46 +289,33 @@ String _chordsDetail(SongRaw song) {
   return 'linijek tekstu: $lines, chwytów: brak';
 }
 
-String? _correctionText(String body) =>
-    _correctionFenceRe.firstMatch(body)?.group(1)?.trim();
-
-/// Tytuł i tekst względem piosenek już w apce:
-///  - ten sam tytuł, tekst ≥ [kSameText] → `identical-in-app` (odrzucenie),
-///  - ten sam tytuł, inny tekst → `same-title-in-app` (przegląd),
-///  - inny tytuł, tekst ≥ [kSimilarText] → `similar-text-in-app` (przegląd).
-PiosenkomatIssue? _compareWithApp(SongRaw song, SongBook book) {
-  final words = textWords(song.text);
-  final sameTitle = book.withTitle(song.title);
-  if (sameTitle.isNotEmpty) {
-    var best = 0.0;
-    for (final s in sameTitle) {
-      final score = jaccard(words, s.words);
-      if (score > best) best = score;
+/// Dopisek z wiadomości wątku, która nie jest reprezentantem. Gdy niesie
+/// własny kod piosenki (starsza wersja), bierzemy pole na wiadomość z jej
+/// szablonu; gdy to zwykła odpowiedź — cały jej własny tekst, bez cytatu
+/// i bez linii „Dnia … napisał(a):”.
+String? _userMessageOf(ContribMessage m) {
+  if (m.hasOwnSongCode) {
+    try {
+      return parseSubmission(m).userMessage;
+    } catch (_) {
+      return null;
     }
-    if (best >= kSameText || words.isEmpty) {
-      return PiosenkomatIssue(SongIssue.identicalInApp,
-          detail: 'w apce stoi „${sameTitle.first.title}”');
-    }
-    return PiosenkomatIssue(SongIssue.sameTitleInApp,
-        detail: 'tekst zgodny w ${pct(best)} z piosenką o tym tytule');
   }
-  final closest = book.closest(words);
-  if (closest != null && closest.$2 >= kSimilarText) {
-    return PiosenkomatIssue(SongIssue.similarTextInApp,
-        detail: 'treść ${pct(closest.$2)} jak „${closest.$1.title}” w apce');
-  }
-  return null;
+  final own = m.body
+      .split('\n')
+      .where((l) => !l.trimLeft().startsWith('>'))
+      .where((l) => !_quoteHeaderRe.hasMatch(l.trim()))
+      .join('\n')
+      .trim();
+  return own.isEmpty ? null : own;
 }
 
-final _correctionFenceRe = RegExp(
-  r'### Propozycja poprawki:\s*```[a-zA-Z]*\s*\n([\s\S]*?)```',
-);
+final _quoteHeaderRe = RegExp(
+    r'^(On .+ wrote:|W dniu .+ napisał(a)?:|.+<.+@.+> napisał(a)?:|Dnia .+ napisał(a)?:)$');
 
-/// Apka zawsze emituje sekcję „Propozycja poprawki”, dla nowych piosenek
-/// z pustym blokiem. Poprawka to dopiero blok z treścią.
-bool _hasCorrectionText(String body) {
-  final m = _correctionFenceRe.firstMatch(body);
-  return m != null && m.group(1)!.trim().isNotEmpty;
+String? _senderOf(ContribMessage m) {
+  final e = emailFromHeader(m.from);
+  return e == null || e == kInboxEmail ? null : e;
 }
 
 /// Blok z kodem piosenki: w ogrodzeniu ``` (nowy format) albo goły JSON
@@ -355,10 +467,10 @@ void _enrich(
   SongRaw song,
   ParsedContribEmail parsed, {
   required String? sender,
-  required String msgId,
+  required String threadId,
   DateTime? date,
 }) {
-  // Dane z mejla mają pierwszeństwo (stary format je niósł), ale id mejla
+  // Dane z mejla mają pierwszeństwo (stary format je niósł), ale id wątku
   // stemplujemy zawsze: po nim `review` wiąże piosenkę ze zgłoszeniem.
   final fromEmail = song.contributorData;
   song.contributorData = ContributorData(
@@ -368,7 +480,7 @@ void _enrich(
         fromEmail?.acceptedContributionRulesVersion
             ?? parsed.acceptedRulesVersion
             ?? kOldAppRulesVersion,
-    emailMsgId: msgId,
+    emailThreadId: threadId,
   );
   final known = sender == null || song.contribRefs
       .any((c) => (c.emailRef ?? '').toLowerCase() == sender);
@@ -380,3 +492,7 @@ void _enrich(
   }
   song.id = 'o!_${song.generateFileName(withPerformer: true)}';
 }
+
+/// Jedna wiadomość → jedno zgłoszenie z decyzją. Wygoda do testów i `explain`.
+Classified classify(ContribMessage m, {required SongBook book}) =>
+    classifyBatch([m], book: book).single;

@@ -46,10 +46,10 @@ PeopleReport collectPeople(List<Classified> items) {
   final anonymous = <String, List<String>>{};
 
   for (final c in items) {
-    if (!c.goesToApp && !c.goesToReview) continue;
-    final sender = c.sender;
+    if (!c.goesToFile) continue;
+    final sender = c.submission.sender;
     if (sender == null) continue;
-    final registered = c.registered;
+    final registered = c.submission.registered;
 
     if (allRegisteredPeopleByEmailMap.containsKey(sender)) {
       known.putIfAbsent(sender, () => []).add(c.title);

@@ -34,16 +34,17 @@ class ContributorData{
   final String email;
   final DateTime contributionDate;
   final String acceptedContributionRulesVersion;
-  /// Id mejla zgłoszenia w skrzynce HarcApp, jeśli piosenka przyszła tą drogą.
-  /// Wypełnia je piosenkomat; dzięki temu piosenka wyeksportowana ze strony
-  /// wskazuje mejl, z którego pochodzi, także po ręcznych poprawkach tytułu.
-  final String? emailMsgId;
+  /// Id wątku ze zgłoszeniem w skrzynce HarcApp, jeśli piosenka przyszła tą
+  /// drogą. Wypełnia je piosenkomat; dzięki temu piosenka wyeksportowana ze
+  /// strony wskazuje zgłoszenie, z którego pochodzi, także po ręcznych
+  /// poprawkach tytułu. Wątek, nie wiadomość — zgłoszenie to cały wątek.
+  final String? emailThreadId;
 
   ContributorData({
     required this.email,
     required this.contributionDate,
     required this.acceptedContributionRulesVersion,
-    this.emailMsgId,
+    this.emailThreadId,
   });
 
   Map toJsonMap() {
@@ -52,7 +53,7 @@ class ContributorData{
       'contribution_date': contributionDate.toIso8601String(),
       'accepted_contribution_rules_version': acceptedContributionRulesVersion,
       // Bez id klucza nie ma wcale, żeby nie zaśmiecać piosenek dodanych ręcznie.
-      if(emailMsgId != null) 'email_msg_id': emailMsgId,
+      if(emailThreadId != null) 'email_thread_id': emailThreadId,
     };
   }
 
@@ -61,7 +62,8 @@ class ContributorData{
       email: jsonMap['email'] as String,
       contributionDate: DateTime.parse(jsonMap['contribution_date'] as String),
       acceptedContributionRulesVersion: jsonMap['accepted_contribution_rules_version'] as String,
-      emailMsgId: jsonMap['email_msg_id'] as String?,
+      // `email_msg_id`: nazwa sprzed przejścia na wątki.
+      emailThreadId: (jsonMap['email_thread_id'] ?? jsonMap['email_msg_id']) as String?,
     );
 
 }

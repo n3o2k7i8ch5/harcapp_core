@@ -3,50 +3,25 @@ import 'dart:io';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
+import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:path/path.dart' as p;
 
 import 'similarity.dart';
 
-/// Śpiewnik do porównań: tytuły (także ukryte) i teksty wszystkich piosenek.
+/// Piosenki już w apce, do porównań. Ten sam parser, co strona — refren
+/// z osobnego pola wchodzi do tekstu tak samo, jak w zgłoszeniu.
 SongBook loadBook(String path) {
   final file = File(path);
   if (!file.existsSync()) {
     throw FileSystemException('Nie znaleziono śpiewnika', path);
   }
-  final map = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
-  final songs = <BookSong>[];
-  for (final section in const ['official', 'conf']) {
-    final entries = map[section];
-    if (entries is! Map) continue;
-    for (final id in entries.keys) {
-      final entry = entries[id];
-      final songMap = entry is Map ? entry['song'] : null;
-      if (songMap is! Map) continue;
-      final text = _textOf(songMap);
-      final title = songMap['title'];
-      if (title is String) songs.add(BookSong(title, text));
-      for (final h in (songMap['hid_titles'] as List? ?? const [])) {
-        if (h is String) songs.add(BookSong(h, text));
-      }
-    }
+  try {
+    final (official, conf) = importHrcpsng(file.readAsStringSync());
+    return SongBook([for (final s in [...official, ...conf]) SongProfile(s)]);
+  } on HrcpsngImportError catch (e) {
+    throw FileSystemException('Śpiewnik: ${e.message}', path);
   }
-  return SongBook(songs);
-}
-
-/// Refren siedzi w osobnym polu, a w `parts` bywa tylko odsyłaczem
-/// (`{"refren": 1}`). Bez niego tekst ze śpiewnika jest uboższy niż tekst
-/// ze zgłoszenia (`SongRaw.text` refren zawiera) i każda piosenka z refrenem
-/// wychodziła mniej podobna, niż jest naprawdę.
-String _textOf(Map songMap) {
-  final parts = songMap['parts'];
-  final refren = songMap['refren'];
-  return [
-    if (refren is Map && refren['text'] is String) refren['text'] as String,
-    if (parts is List)
-      for (final part in parts)
-        if (part is Map && part['text'] is String) part['text'] as String,
-  ].join('\n');
 }
 
 /// Nadaje zdublowanym id sufiks `~2`, `~3`… **w piosenkach**, zanim cokolwiek
@@ -128,8 +103,9 @@ String defaultSongsDbPath() {
 }
 
 /// Osobny katalog na każdy przebieg, żeby drugi `scan` nie nadpisał pierwszego.
-/// W środku: `auto.hrcpsng`, `review.hrcpsng`, `reviewed.hrcpsng`, `people.dart`,
-/// `labels.json`, `report.txt`, a po przeglądzie `decisions.json`.
+/// W środku: `candidates-new.hrcpsng`, `candidates-correction.hrcpsng`,
+/// `reviewed-*.hrcpsng`, `people.dart`, `labels.json`, `report.txt`,
+/// a po przeglądzie `decisions.json`.
 String defaultOutDir() {
   final t = DateTime.now().toIso8601String().substring(0, 19).replaceAll(':', '');
   return p.join('out', 'import-$t');
@@ -147,21 +123,51 @@ String? latestOutDir({String root = 'out'}) {
   return runs.isEmpty ? null : runs.last;
 }
 
-/// Nazwy plików w katalogu przebiegu.
+/// Nazwy plików w katalogu przebiegu, po rodzaju zgłoszenia.
 ///
-/// Piosenki bez zarzutu i piosenki z uwagami leżą osobno, bo i oglądasz je
-/// inaczej: `auto.hrcpsng` przelatujesz, `review.hrcpsng` czytasz po kolei.
-/// Wracają jednym plikiem — `reviewed.hrcpsng`.
-String autoPathIn(String outDir) => p.join(outDir, 'auto.hrcpsng');
-String reviewPathIn(String outDir) => p.join(outDir, 'review.hrcpsng');
-/// Przebiegi sprzed podziału miały jeden plik `songs.hrcpsng`.
-String legacySongsPathIn(String outDir) => p.join(outDir, 'songs.hrcpsng');
+/// Nowe piosenki i poprawki leżą osobno, bo to inna robota: dodać vs porównać
+/// z tym, co w apce. Wracają też osobno — jeden plik wczytany, jeden
+/// wyeksportowany.
+String candidatesPathIn(String outDir, SubmissionKind kind) =>
+    p.join(outDir, 'candidates-${kind.id}.hrcpsng');
+String reviewedPathIn(String outDir, SubmissionKind kind) =>
+    p.join(outDir, 'reviewed-${kind.id}.hrcpsng');
+/// Po `strip`: bez pola `piosenkomat`, gotowe do wklejenia w `all_songs`.
+String finalPathIn(String outDir, SubmissionKind kind) =>
+    p.join(outDir, 'final-${kind.id}.hrcpsng');
+/// Wcześniejsze nazwy plików kandydatów: `songs.hrcpsng`, para
+/// `auto.hrcpsng` + `review.hrcpsng`, `candidates.hrcpsng`. Czytamy wszystkie
+/// jako nowe piosenki — poprawek wtedy nie było.
+List<String> legacyCandidatesPathsIn(String outDir) => [
+      p.join(outDir, 'songs.hrcpsng'),
+      p.join(outDir, 'auto.hrcpsng'),
+      p.join(outDir, 'review.hrcpsng'),
+      p.join(outDir, 'candidates.hrcpsng'),
+    ];
+/// Wcześniejsze nazwy pliku zwrotnego: `approved.hrcpsng`, `reviewed.hrcpsng`.
+List<String> legacyReviewedPathsIn(String outDir) => [
+      p.join(outDir, 'reviewed.hrcpsng'),
+      p.join(outDir, 'approved.hrcpsng'),
+    ];
 String planPathIn(String outDir) => p.join(outDir, 'labels.json');
 String reportPathIn(String outDir) => p.join(outDir, 'report.txt');
 String peoplePathIn(String outDir) => p.join(outDir, 'people.dart');
-/// Miejsce na eksport ze strony po przeglądzie: jeden plik na oba powyższe.
-/// Starsze przebiegi mają go pod dawną nazwą `approved.hrcpsng` — czytamy obie.
-String reviewedPathIn(String outDir) => p.join(outDir, 'reviewed.hrcpsng');
-String legacyReviewedPathIn(String outDir) => p.join(outDir, 'approved.hrcpsng');
-/// Ślad przeglądu: co weszło, co wypadło, co zostało nieogarnięte.
+/// Ślad przeglądu: co weszło, co wypadło.
 String decisionsPathIn(String outDir) => p.join(outDir, 'decisions.json');
+
+/// Zdejmuje ślad piosenkomatu przed wgraniem do `all_songs`. Przy poprawkach
+/// **ustawia `id = correction_target`**: w apce piosenki są referencjonowane
+/// po `lclId` (ulubione, albumy, oceny), więc poprawiony tytuł nie może
+/// zmienić id. Zwraca listę `(id w apce, tytuł po poprawce)` do podmiany.
+List<(String, String)> stripPiosenkomat(List<SongRaw> songs) {
+  final targets = <(String, String)>[];
+  for (final s in songs) {
+    final data = s.piosenkomatData;
+    if (data != null && data.isCorrection && data.correctionTarget != null) {
+      s.id = data.correctionTarget!;
+      targets.add((s.id, s.title));
+    }
+    s.piosenkomatData = null;
+  }
+  return targets;
+}

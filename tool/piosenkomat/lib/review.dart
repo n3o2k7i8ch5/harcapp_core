@@ -2,17 +2,15 @@ import 'dart:convert';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
-import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 
 import 'hrcpsng.dart';
-import 'model.dart';
 import 'plan.dart';
 import 'similarity.dart';
 
-/// Po czym piosenka z `reviewed.hrcpsng` została związana ze zgłoszeniem.
+/// Po czym piosenka z `reviewed-*.hrcpsng` została związana ze zgłoszeniem.
 enum MatchKind {
-  emailMsgId('id mejla'),
+  threadId('id wątku'),
   songId('id piosenki'),
   title('tytuł'),
   songText('tekst');
@@ -21,239 +19,189 @@ enum MatchKind {
   final String text;
 }
 
-/// Piosenka, którą automat wstawił do pliku przebiegu, wraz z mejlem źródłowym.
+/// Piosenka, którą automat wstawił do pliku kandydatów, wraz z wątkiem.
 class ProposedSong {
-  final String msgId;
+  final String threadId;
   final String songId;
   final String title;
   final String sender;
-  final RunFile file;
-  /// Uwagi, z jakimi piosenka pojechała do przeglądu.
-  final List<SongIssue> issues;
+  final SubmissionKind kind;
   /// Puste, gdy piosenki nie ma w pliku (plan i plik się rozjechały).
   final Set<String> words;
 
   ProposedSong({
-    required this.msgId,
+    required this.threadId,
     required this.songId,
     required this.title,
     this.sender = '',
-    this.file = RunFile.auto,
-    this.issues = const [],
+    this.kind = SubmissionKind.newSong,
     this.words = const {},
   });
 }
 
-/// Piosenka, która wróciła z przeglądu — i to, co z niej zostało.
+/// Piosenka, która wróciła z przeglądu.
 class Matched {
   final ProposedSong proposed;
   final MatchKind kind;
-  final String reviewedTitle;
-  /// Uwagi, których nie zdjąłeś w edytorze. Puste = ogarnięte.
-  final List<SongIssue> remaining;
+  final SongRaw reviewed;
 
-  const Matched(this.proposed, this.kind, this.reviewedTitle,
-      {this.remaining = const []});
-
-  bool get isResolved => remaining.isEmpty;
+  const Matched(this.proposed, this.kind, this.reviewed);
 }
 
+/// Dwa stany: wróciła → wchodzi, nie wróciła → odrzucona. Plus to, co każe
+/// się zatrzymać: z kandydatów można wywalać i edytować, nie dodawać.
 class ReviewResult {
-  /// Wróciły i nie mają już żadnej uwagi: idą do apki.
+  final SubmissionKind kind;
   final List<Matched> accepted;
-  /// Wróciły, ale uwagi zostały: wracają do kolejki przeglądu.
-  final List<Matched> unresolved;
-  /// Nie wróciły wcale: odrzucone przy przeglądzie.
   final List<ProposedSong> rejected;
-  /// Piosenki z `reviewed`, których nie da się związać ze zgłoszeniem
-  /// (dorzucone ręcznie na stronie). Nic z nimi nie robimy.
-  final List<String> unknown;
-  /// Mejle, z których część piosenek weszła, a część wypadła. Dziś niemożliwe
-  /// (jeden mejl = jedna piosenka), ale review nie ma prawa tego zgadywać.
-  final Map<String, List<ProposedSong>> partial;
-  /// Żadna wracająca piosenka nie niesie już śladu piosenkomatu, choć plan
-  /// mówi, że niosły go wszystkie — czyli eksport zgubił pole, a nie Ty
-  /// ogarnąłeś wszystko naraz.
-  final bool lostIssues;
+  /// Piosenki z `reviewed`, których nie ma w kandydatach — obcy `thread_id`
+  /// albo dorzucone na stronie. STOP.
+  final List<SongRaw> foreign;
+  /// Piosenki innego rodzaju niż plik (poprawka w `reviewed-new`). STOP.
+  final List<SongRaw> wrongKind;
+  /// Dwie zachowane poprawki tej samej piosenki w apce. STOP.
+  final Map<String, List<String>> duplicateTargets;
 
   const ReviewResult({
+    required this.kind,
     required this.accepted,
-    required this.unresolved,
     required this.rejected,
-    required this.unknown,
-    required this.partial,
-    this.lostIssues = false,
+    required this.foreign,
+    required this.wrongKind,
+    required this.duplicateTargets,
   });
 
-  /// Mejle do odetykietowania: wypadły wszystkie ich piosenki.
-  List<String> get rejectedMsgIds => [
-        for (final e in _byMsg(rejected).entries)
-          if (!partial.containsKey(e.key)) e.key,
-      ];
+  bool get mustStop =>
+      foreign.isNotEmpty || wrongKind.isNotEmpty || duplicateTargets.isNotEmpty;
 
-  /// Mejle, które po przeglądzie są gotowe do apki: wszystkie ich piosenki
-  /// wróciły bez uwag.
-  List<String> get acceptedMsgIds {
-    final blocked = {
-      for (final m in unresolved) m.proposed.msgId,
-      for (final r in rejected) r.msgId,
-    };
-    return [
-      for (final id in {for (final m in accepted) m.proposed.msgId})
-        if (!blocked.contains(id)) id,
-    ];
-  }
-
-  /// Mejle z nieogarniętymi uwagami i etykiety przeglądu, jakie mają dostać.
-  Map<String, List<String>> get unresolvedLabels {
-    final out = <String, List<String>>{};
-    for (final m in unresolved) {
-      final labels = out.putIfAbsent(m.proposed.msgId, () => [kLabelToReview]);
-      for (final issue in m.remaining) {
-        final label = issue.review?.label;
-        if (label != null && !labels.contains(label)) labels.add(label);
-      }
-    }
-    return out;
-  }
+  List<String> get acceptedThreads => [for (final m in accepted) m.proposed.threadId];
+  List<String> get rejectedThreads => [for (final r in rejected) r.threadId];
 }
 
-Map<String, List<ProposedSong>> _byMsg(List<ProposedSong> songs) {
-  final out = <String, List<ProposedSong>>{};
-  for (final s in songs) {
-    out.putIfAbsent(s.msgId, () => []).add(s);
-  }
-  return out;
-}
-
-/// Co automat zaproponował: plan jest kręgosłupem (wiąże piosenkę z mejlem),
-/// pliki dokładają tekst do porównań. Plany sprzed wersji z sekcją `songs`
-/// odtwarzamy z `email_msg_id` w samych piosenkach.
-List<ProposedSong> collectProposed(LabelPlan plan, List<SongRaw> songs) {
-  final byId = {for (final s in songs) s.id: s};
+/// Co automat zaproponował dla danego rodzaju: plan jest kręgosłupem (wiąże
+/// piosenkę z wątkiem), plik dokłada tekst do porównań awaryjnych.
+List<ProposedSong> collectProposed(
+  LabelPlan plan,
+  List<SongRaw> candidates,
+  SubmissionKind kind,
+) {
+  final byId = {for (final s in candidates) s.id: s};
   SongRaw? find(String songId) =>
       byId[songId] ??
-      songs.where((s) => s.id.split('~').first == songId).firstOrNull;
+      candidates.where((s) => s.id.split('~').first == songId).firstOrNull;
 
-  if (plan.songsById.isNotEmpty) {
+  if (plan.songsByThread.isNotEmpty) {
     return [
-      for (final e in plan.songsById.entries)
+      for (final e in plan.songsByThread.entries)
         for (final i in e.value)
-          ProposedSong(
-            msgId: e.key,
-            songId: i.songId,
-            title: i.title,
-            sender: i.sender,
-            file: i.file,
-            issues: [
-              for (final id in i.issues)
-                if (SongIssue.byId(id) case final issue?) issue,
-            ],
-            words: textWords(find(i.songId)?.text ?? ''),
-          ),
+          if (i.kind == kind)
+            ProposedSong(
+              threadId: e.key,
+              songId: i.songId,
+              title: i.title,
+              sender: i.sender,
+              kind: kind,
+              words: textWords(find(i.songId)?.text ?? ''),
+            ),
     ];
   }
+  // Plany sprzed sekcji `songs`: kręgosłupem jest id wątku w piosenkach.
   return [
-    for (final s in songs)
-      if (s.contributorData?.emailMsgId case final msgId?)
-        ProposedSong(
-          msgId: msgId,
-          songId: s.id,
-          title: s.title,
-          sender: s.contributorData?.email ?? '',
-          issues: [for (final i in s.piosenkomatData?.issues ?? const []) i.issue],
-          words: textWords(s.text),
-        ),
+    for (final s in candidates)
+      if (_threadOf(s) case final threadId?)
+        if ((s.piosenkomatData?.kind ?? SubmissionKind.newSong) == kind)
+          ProposedSong(
+            threadId: threadId,
+            songId: s.id,
+            title: s.title,
+            sender: s.contributorData?.email ?? '',
+            kind: kind,
+            words: textWords(s.text),
+          ),
   ];
 }
 
-/// Różnica „zaproponowane minus to, co wróciło”. Piosenka ma trzy stany:
-/// wróciła bez uwag (wchodzi), wróciła z uwagami (dalej czeka), nie wróciła
-/// (odrzucona). Dopasowanie kaskadą: id mejla, potem id piosenki, tytuł
-/// i wreszcie tekst — bo przy przeglądzie tytuł i chwyty mogły się zmienić,
-/// a strona mogła zgubić `email_msg_id`.
+String? _threadOf(SongRaw s) =>
+    s.piosenkomatData?.threadId ?? s.contributorData?.emailThreadId;
+
+/// Różnica „zaproponowane minus to, co wróciło”. Dopasowanie kaskadą: id
+/// wątku, potem id piosenki, tytuł i wreszcie tekst — bo przy przeglądzie
+/// tytuł i chwyty mogły się zmienić, a strona mogła zgubić `thread_id`.
 ReviewResult reviewDiff({
+  required SubmissionKind kind,
   required List<ProposedSong> proposed,
   required List<SongRaw> reviewed,
 }) {
   final matched = <ProposedSong, Matched>{};
-  final unknown = <String>[];
+  final foreign = <SongRaw>[];
+  final wrongKind = <SongRaw>[];
 
   for (final song in reviewed) {
-    final hit = _match(song, proposed);
-    if (hit == null) {
-      unknown.add(song.title);
+    final songKind = song.piosenkomatData?.kind;
+    if (songKind != null && songKind != kind) {
+      wrongKind.add(song);
       continue;
     }
-    final remaining = [
-      for (final i in song.piosenkomatData?.toResolve ?? const <PiosenkomatIssue>[])
-        i.issue,
-    ];
+    final hit = _match(song, proposed);
+    if (hit == null) {
+      foreign.add(song);
+      continue;
+    }
     // Kilka zatwierdzonych na jedno zgłoszenie (np. rozbite na stronie):
     // pierwsze dopasowanie wystarczy, żeby zgłoszenie uznać za przyjęte.
-    matched.putIfAbsent(
-      hit.proposed,
-      () => Matched(hit.proposed, hit.kind, hit.reviewedTitle, remaining: remaining),
-    );
+    matched.putIfAbsent(hit.proposed, () => hit);
   }
 
   final rejected = [for (final p in proposed) if (!matched.containsKey(p)) p];
-  final accepted = [for (final m in matched.values) if (m.isResolved) m];
-  final unresolved = [for (final m in matched.values) if (!m.isResolved) m];
-  final acceptedByMsg = _byMsg([for (final m in matched.values) m.proposed]);
-  final partial = {
-    for (final e in _byMsg(rejected).entries)
-      if (acceptedByMsg.containsKey(e.key)) e.key: e.value,
-  };
 
-  // Bezpiecznik na zgubione pole: coś jechało z uwagą do ogarnięcia, a żadna
-  // piosenka nie wróciła ze śladem piosenkomatu. Adnotacje (`old-app`, `reply`)
-  // się nie liczą — nie ma w nich czego ogarniać, więc ich brak nic nie znaczy.
-  // Ogarnięcie zdejmuje uwagę, a nie całe pole, więc uczciwy eksport zawsze
-  // ma ślad — zero śladów przy choćby jednej takiej piosence to zgubione pole.
-  final withIssues = matched.keys
-      .where((p) => p.issues.any((i) => !i.isInfo))
-      .length;
-  final lostIssues = withIssues >= 1 &&
-      reviewed.every((s) => s.piosenkomatData == null);
+  // Jedna poprawka na piosenkę: dwie zachowane z tym samym celem nie mają
+  // poprawnej interpretacji.
+  final byTarget = <String, List<String>>{};
+  if (kind == SubmissionKind.correction) {
+    for (final m in matched.values) {
+      final target = m.reviewed.piosenkomatData?.correctionTarget;
+      if (target != null) byTarget.putIfAbsent(target, () => []).add(m.reviewed.title);
+    }
+  }
 
   return ReviewResult(
-    accepted: accepted,
-    unresolved: unresolved,
+    kind: kind,
+    accepted: matched.values.toList(),
     rejected: rejected,
-    unknown: unknown,
-    partial: partial,
-    lostIssues: lostIssues,
+    foreign: foreign,
+    wrongKind: wrongKind,
+    duplicateTargets: {
+      for (final e in byTarget.entries)
+        if (e.value.length > 1) e.key: e.value,
+    },
   );
 }
 
 Matched? _match(SongRaw song, List<ProposedSong> proposed) {
-  final msgId = song.contributorData?.emailMsgId;
-  if (msgId != null) {
-    final sameMail = [for (final p in proposed) if (p.msgId == msgId) p];
-    if (sameMail.isNotEmpty) {
-      // W obrębie jednego mejla id wystarczy; gdy piosenek jest kilka i nie da
-      // się ich rozróżnić, bierzemy pierwszą. Pomyłka zostawia mejl w „w pliku”,
-      // czyli u Ciebie — odwrotnie niż zgadywanie, które zdejmowałoby etykietę.
-      final hit = _narrow(song, sameMail, trustSingle: true);
-      return Matched(hit?.$1 ?? sameMail.first, hit?.$2 ?? MatchKind.emailMsgId,
-          song.title);
+  final threadId = _threadOf(song);
+  if (threadId != null) {
+    final sameThread = [for (final p in proposed) if (p.threadId == threadId) p];
+    if (sameThread.isNotEmpty) {
+      // W obrębie wątku id wystarczy; gdy piosenek jest kilka i nie da się
+      // ich rozróżnić, bierzemy pierwszą.
+      final hit = _narrow(song, sameThread, trustSingle: true);
+      return Matched(hit?.$1 ?? sameThread.first, hit?.$2 ?? MatchKind.threadId, song);
     }
   }
-  // Bez id mejla piosenka musi się obronić sama: id, tytuł albo tekst.
+  // Bez id wątku piosenka musi się obronić sama: id, tytuł albo tekst.
   final hit = _narrow(song, proposed, trustSingle: false);
-  return hit == null ? null : Matched(hit.$1, hit.$2, song.title);
+  return hit == null ? null : Matched(hit.$1, hit.$2, song);
 }
 
 /// [trustSingle] mówi, czy jedyny kandydat jest już odpowiedzią — jest nią
-/// w obrębie mejla, ale nie w całym przebiegu.
+/// w obrębie wątku, ale nie w całym przebiegu.
 (ProposedSong, MatchKind)? _narrow(
   SongRaw song,
   List<ProposedSong> candidates, {
   required bool trustSingle,
 }) {
   if (trustSingle && candidates.length == 1) {
-    return (candidates.single, MatchKind.emailMsgId);
+    return (candidates.single, MatchKind.threadId);
   }
 
   final id = song.id.split('~').first;
@@ -279,47 +227,34 @@ Matched? _match(SongRaw song, List<ProposedSong> proposed) {
   return best == null ? null : (best, MatchKind.songText);
 }
 
-/// Ślad przeglądu w katalogu przebiegu: co weszło, co dalej czeka, co wypadło
-/// i po czym zostało rozpoznane.
-void writeDecisions(
-  String path, {
-  required String reviewedPath,
-  required ReviewResult result,
-}) {
+/// Ślad przeglądu w katalogu przebiegu: co weszło, co wypadło, po czym
+/// rozpoznane. Jeden plik na oba rodzaje.
+void writeDecisions(String path, List<ReviewResult> results) {
   writeText(path, const JsonEncoder.withIndent('  ').convert({
     'created_at': DateTime.now().toIso8601String(),
-    'reviewed': reviewedPath,
     'songs': [
-      for (final m in result.accepted)
-        {
-          'song_id': m.proposed.songId,
-          'title': m.proposed.title,
-          'email_msg_id': m.proposed.msgId,
-          'decision': 'accepted',
-          'matched_by': m.kind.text,
-          if (m.proposed.issues.isNotEmpty)
-            'resolved_issues': [for (final i in m.proposed.issues) i.id],
-        },
-      for (final m in result.unresolved)
-        {
-          'song_id': m.proposed.songId,
-          'title': m.proposed.title,
-          'email_msg_id': m.proposed.msgId,
-          'decision': 'still-needs-review',
-          'matched_by': m.kind.text,
-          'issues': [for (final i in m.remaining) i.id],
-        },
-      for (final r in result.rejected)
-        {
-          'song_id': r.songId,
-          'title': r.title,
-          'email_msg_id': r.msgId,
-          'sender': r.sender,
-          'decision': 'rejected-after-review',
-          if (r.issues.isNotEmpty)
-            'issues': [for (final i in r.issues) i.id],
-        },
+      for (final r in results) ...[
+        for (final m in r.accepted)
+          {
+            'kind': r.kind.id,
+            'song_id': m.proposed.songId,
+            'title': m.reviewed.title,
+            'thread_id': m.proposed.threadId,
+            'decision': 'accepted',
+            'matched_by': m.kind.text,
+            if (m.reviewed.piosenkomatData?.correctionTarget case final t?)
+              'correction_target': t,
+          },
+        for (final p in r.rejected)
+          {
+            'kind': r.kind.id,
+            'song_id': p.songId,
+            'title': p.title,
+            'thread_id': p.threadId,
+            'sender': p.sender,
+            'decision': 'rejected-after-review',
+          },
+      ],
     ],
-    'unknown': result.unknown,
   }));
 }

@@ -193,6 +193,7 @@ class GmailMailbox {
     final headers = _headersOf(msg.payload);
     return ContribMessage(
       id: msg.id ?? id,
+      threadId: msg.threadId,
       body: _plainText(msg.payload),
       subject: headers['subject'],
       from: headers['from'],
@@ -253,6 +254,26 @@ class GmailMailbox {
         cost: _costGet);
     final headers = _headersOf(msg.payload);
     return (subject: headers['subject'] ?? '', from: headers['from'] ?? '');
+  }
+
+  /// Suma etykiet wszystkich wiadomości wątku. Kolejka jest po wątkach:
+  /// odpowiedź w wątku, który już dostał `song/*`, nie jest nowym zgłoszeniem.
+  Future<Set<String>> threadLabels(String threadId) async {
+    final thread = await _call(
+        () => _api.users.threads.get('me', threadId, format: 'minimal'),
+        cost: _costGet);
+    return {
+      for (final m in thread.messages ?? const <Message>[])
+        for (final id in m.labelIds ?? const <String>[]) _nameById[id] ?? id,
+    };
+  }
+
+  /// Id wszystkich wiadomości wątku — etykiety idą na cały wątek.
+  Future<List<String>> threadMessageIds(String threadId) async {
+    final thread = await _call(
+        () => _api.users.threads.get('me', threadId, format: 'minimal'),
+        cost: _costGet);
+    return [for (final m in thread.messages ?? const <Message>[]) m.id!];
   }
 
   /// Nazwy etykiet mejla. Tylko metadane, bez treści.

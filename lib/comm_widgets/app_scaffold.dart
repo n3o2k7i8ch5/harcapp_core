@@ -63,6 +63,8 @@ class AppScaffold extends StatelessWidget{
       _showWebToast(
         context,
         text: text,
+        buttonText: buttonText,
+        onButtonPressed: onButtonPressed,
         backgroundColor: backgroundColor,
         textColor: textColor,
         duration: duration,
@@ -88,6 +90,8 @@ class AppScaffold extends StatelessWidget{
   static void _showWebToast(
     BuildContext context, {
     required String text,
+    String? buttonText,
+    void Function()? onButtonPressed,
     Color? backgroundColor,
     Color? textColor,
     required Duration duration,
@@ -101,6 +105,8 @@ class AppScaffold extends StatelessWidget{
     entry = OverlayEntry(
       builder: (context) => _WebToastOverlay(
         text: text,
+        buttonText: buttonText,
+        onButtonPressed: onButtonPressed,
         backgroundColor: backgroundColor,
         textColor: textColor,
         duration: duration,
@@ -119,6 +125,8 @@ class AppScaffold extends StatelessWidget{
 
 class _WebToastOverlay extends StatefulWidget {
   final String text;
+  final String? buttonText;
+  final void Function()? onButtonPressed;
   final Color? backgroundColor;
   final Color? textColor;
   final Duration duration;
@@ -126,6 +134,8 @@ class _WebToastOverlay extends StatefulWidget {
 
   const _WebToastOverlay({
     required this.text,
+    this.buttonText,
+    this.onButtonPressed,
     this.backgroundColor,
     this.textColor,
     required this.duration,
@@ -231,6 +241,18 @@ class _WebToastOverlayState extends State<_WebToastOverlay>
                       ),
                     ),
                     const SizedBox(width: 8),
+                    if(widget.buttonText != null)
+                      TextButton(
+                        onPressed: () {
+                          _dismiss();
+                          widget.onButtonPressed?.call();
+                        },
+                        child: AppText(
+                          '<b>${widget.buttonText!}</b>',
+                          color: fg,
+                          size: 16,
+                        ),
+                      ),
                     IconButton(
                       icon: Icon(
                         _copied ? Icons.check : Icons.copy,

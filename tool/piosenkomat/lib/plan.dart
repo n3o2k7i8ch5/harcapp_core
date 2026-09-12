@@ -1,39 +1,29 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+
 import 'hrcpsng.dart';
 import 'model.dart';
 
-/// Który plik przebiegu: bez zarzutów czy do przeglądu.
-enum RunFile {
-  auto('auto'),
-  review('review');
-
-  const RunFile(this.key);
-  final String key;
-
-  static RunFile byKey(String key) =>
-      RunFile.values.where((f) => f.key == key).firstOrNull ?? RunFile.auto;
-}
-
-/// Piosenka, którą automat wstawił do pliku. Wiąże wpis w `.hrcpsng`
-/// z mejlem, nawet gdy strona zgubi `email_msg_id` przy eksporcie.
+/// Piosenka, którą automat wstawił do pliku kandydatów. Wiąże wpis
+/// w `.hrcpsng` ze zgłoszeniem (wątkiem), nawet gdy strona zgubi
+/// `thread_id` przy eksporcie.
 class PlannedSong {
   final String songId;
   final String title;
   /// Nadawca — po nim poznasz, czyj wpis w `people.dart` był niepotrzebny,
   /// jeśli piosenka wypadnie przy przeglądzie.
   final String sender;
-  final RunFile file;
-  /// Uwagi, z jakimi piosenka pojechała do przeglądu. Po powrocie z edytora
-  /// porównujemy je z tym, co zostało — stąd wiadomo, co ogarnąłeś.
+  final SubmissionKind kind;
+  /// Uwagi, z jakimi piosenka pojechała do przeglądu — do `decisions.json`.
   final List<String> issues;
 
   const PlannedSong({
     required this.songId,
     required this.title,
     required this.sender,
-    this.file = RunFile.auto,
+    this.kind = SubmissionKind.newSong,
     this.issues = const [],
   });
 
@@ -41,7 +31,7 @@ class PlannedSong {
         'song_id': songId,
         'title': title,
         'sender': sender,
-        'file': file.key,
+        'kind': kind.id,
         'issues': issues,
       };
 
@@ -49,92 +39,90 @@ class PlannedSong {
         songId: json['song_id'] as String,
         title: json['title'] as String,
         sender: json['sender'] as String? ?? '',
-        file: RunFile.byKey(json['file'] as String? ?? RunFile.auto.key),
+        kind: SubmissionKind.byId(json['kind'] as String?),
         issues: ((json['issues'] ?? const []) as List).cast<String>(),
       );
 }
 
 /// Zapisany wynik `scan`: które etykiety automat nadałby któremu mejlowi
-/// i co z którego mejla poszło do którego pliku.
-/// Pozwala nadać etykiety później (`label scanned`) bez ponownego czytania
-/// skrzynki.
+/// i co z którego wątku poszło do pliku. Pozwala nadać etykiety później
+/// (`label scanned`) bez ponownego czytania skrzynki.
 class LabelPlan {
   final DateTime createdAt;
-  /// Ścieżki plików przebiegu, po [RunFile.key].
-  final Map<String, String> files;
+  /// Etykiety po **wiadomości** — wątek dostaje je na wszystkich.
   final Map<String, List<String>> labelsById;
-  /// Tylko mejle, z których coś poszło do pliku. Lista, bo kiedyś jeden mejl
-  /// może nieść kilka piosenek; dziś zawsze jednoelementowa.
-  final Map<String, List<PlannedSong>> songsById;
+  /// Piosenki po **wątku**. Lista, bo kiedyś jeden wątek może nieść kilka
+  /// piosenek; dziś zawsze jednoelementowa.
+  final Map<String, List<PlannedSong>> songsByThread;
+  /// Wiadomości każdego wątku — `label reviewed` przestawia etykiety na całym.
+  final Map<String, List<String>> messagesByThread;
 
   const LabelPlan({
     required this.createdAt,
-    required this.files,
     required this.labelsById,
-    this.songsById = const {},
+    this.songsByThread = const {},
+    this.messagesByThread = const {},
   });
 
-  String? get autoPath => files[RunFile.auto.key];
-  String? get reviewPath => files[RunFile.review.key];
-
-  factory LabelPlan.fromClassified(
-    List<Classified> items, {
-    required Map<RunFile, String> files,
-  }) =>
-      LabelPlan(
+  factory LabelPlan.fromClassified(List<Classified> items) => LabelPlan(
         createdAt: DateTime.now(),
-        files: {for (final e in files.entries) e.key.key: e.value},
         labelsById: {
-          for (final c in items) c.message.id: [...c.labels, kLabelAuto],
-        },
-        songsById: {
           for (final c in items)
-            if (c.song case final song?)
-              if (c.goesToApp || c.goesToReview)
-                c.message.id: [
-                  PlannedSong(
-                    songId: song.id,
-                    title: song.title,
-                    sender: c.sender ?? '',
-                    file: c.goesToApp ? RunFile.auto : RunFile.review,
-                    issues: [for (final i in c.issues) i.issue.id],
-                  ),
-                ],
+            for (final m in c.submission.messages)
+              m.id: [...c.labels, kLabelAuto],
+        },
+        songsByThread: {
+          for (final c in items)
+            if (c.goesToFile)
+              c.submission.threadId: [
+                PlannedSong(
+                  songId: c.song!.id,
+                  title: c.song!.title,
+                  sender: c.submission.sender ?? '',
+                  kind: c.submission.kind,
+                  issues: [for (final i in c.issues) i.issue.id],
+                ),
+              ],
+        },
+        messagesByThread: {
+          for (final c in items)
+            c.submission.threadId: [for (final m in c.submission.messages) m.id],
         },
       );
 
   Map<String, dynamic> toJson() => {
         'created_at': createdAt.toIso8601String(),
-        'files': files,
         'labels': labelsById,
         'songs': {
-          for (final e in songsById.entries)
+          for (final e in songsByThread.entries)
             e.key: [for (final i in e.value) i.toJson()],
         },
+        'threads': messagesByThread,
       };
 
   factory LabelPlan.fromJson(Map<String, dynamic> json) => LabelPlan(
         createdAt: DateTime.parse(json['created_at'] as String),
-        // Plany sprzed podziału na `auto` i `review` miały jeden plik
-        // pod kluczem `hrcpsng`.
-        files: {
-          if (json['hrcpsng'] is String) RunFile.auto.key: json['hrcpsng'] as String,
-          for (final e in ((json['files'] ?? {}) as Map<String, dynamic>).entries)
-            e.key: e.value as String,
-        },
         labelsById: {
           for (final e in (json['labels'] as Map<String, dynamic>).entries)
             e.key: (e.value as List).cast<String>(),
         },
-        // Plany z wcześniejszych wersji narzędzia mają tę sekcję pod `imports`.
-        songsById: {
-          for (final e in ((json['songs'] ?? json['imports'] ?? {}) as Map<String, dynamic>).entries)
+        // Wcześniejsze plany: sekcja `imports`, klucz = id wiadomości = wątek.
+        songsByThread: {
+          for (final e in ((json['songs'] ?? json['imports'] ?? <String, dynamic>{}) as Map<String, dynamic>).entries)
             e.key: [
               for (final i in e.value as List)
                 PlannedSong.fromJson(i as Map<String, dynamic>),
             ],
         },
+        messagesByThread: {
+          for (final e in ((json['threads'] ?? <String, dynamic>{}) as Map<String, dynamic>).entries)
+            e.key: (e.value as List).cast<String>(),
+        },
       );
+
+  /// Wiadomości wątku; dla planów sprzed wątków — sam id.
+  List<String> messagesOf(String threadId) =>
+      messagesByThread[threadId] ?? [threadId];
 }
 
 void writePlan(String path, LabelPlan plan) =>

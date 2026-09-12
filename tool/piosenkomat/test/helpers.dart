@@ -93,19 +93,42 @@ String hardWrap(String text, {int width = 76}) {
   return out.join('\r\n');
 }
 
-/// Śpiewnik z podanych piosenek (tytuł + tekst).
+/// Piosenki „już w apce” z podanych piosenek.
 SongBook bookWith(List<SongRaw> songs) =>
-    SongBook([for (final s in songs) BookSong(s.title, s.text)]);
+    SongBook([for (final s in songs) SongProfile(s)]);
 
 /// Sam zestaw uwag, bez mejla — do testów etykiet.
-Classified classifiedWith(List<SongIssue> issues) => Classified(
-      message: const ContribMessage(id: 'x', body: ''),
+Classified classifiedWith(
+  List<SongIssue> issues, {
+  Target target = Target.candidateNew,
+  SubmissionKind kind = SubmissionKind.newSong,
+  bool userMessage = false,
+}) {
+  const m = ContribMessage(id: 'x', body: '');
+  return Classified(
+    Submission(
+      threadId: 'x',
+      message: m,
+      messages: const [m],
+      kind: kind,
+      source: SubmissionSource.currentApp,
       title: 'x',
       song: SongRaw.empty(id: 'x'),
-      issues: [for (final i in issues) PiosenkomatIssue(i)],
-    );
+      userMessage: userMessage ? 'hej' : null,
+    ),
+    Decision(target, issues: [for (final i in issues) PiosenkomatIssue(i)]),
+  );
+}
 
 List<SongIssue> issuesOf(Classified c) => [for (final i in c.issues) i.issue];
 
 String? detailOf(Classified c, SongIssue issue) =>
     c.issues.where((i) => i.issue == issue).firstOrNull?.detail;
+
+/// Skróty do testów.
+extension ClassifiedTest on Classified {
+  /// Kandydat bez zarzutu — wchodzi bez oglądania.
+  bool get isClean => goesToFile && issues.isEmpty;
+  bool get oldApp => submission.isOldApp;
+  String? get sender => submission.sender;
+}
