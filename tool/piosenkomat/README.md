@@ -220,8 +220,7 @@ Przydatne zapytania:
 
 ## Cechy, uwagi, decyzja
 
-Każde zgłoszenie przechodzi trzy kroki, każdy z osobną strukturą
-(uzasadnienia w `PLAN.md`):
+Każde zgłoszenie przechodzi trzy kroki, każdy z osobną strukturą:
 
 1. **Cechy** — same fakty, zero ocen: `kind` (`new` / `correction` — z tematu
    albo niepustego bloku „Propozycja poprawki”), `source` (`current-app` /
