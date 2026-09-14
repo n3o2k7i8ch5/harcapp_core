@@ -330,6 +330,9 @@ class Submission {
   final String title;
   final AppMatch? appMatch;
   final BatchMatch? batchMatch;
+  /// `lclId` poprawianej piosenki **zadeklarowany przez apkę** w mejlu.
+  /// Fakt, nie zgadywanie: gdy jest, to on rozstrzyga, co autor poprawiał.
+  final String? declaredCorrectionTarget;
 
   const Submission({
     required this.threadId,
@@ -347,15 +350,19 @@ class Submission {
     this.registered,
     this.appMatch,
     this.batchMatch,
+    this.declaredCorrectionTarget,
   });
 
   bool get isCorrection => kind == SubmissionKind.correction;
   bool get isOldApp => source == SubmissionSource.oldApp;
   bool get hasUserMessage => (userMessage ?? '').trim().isNotEmpty;
 
-  /// Którą piosenkę w apce poprawia — zgadywane po [appMatch], bo mejl z apki
-  /// tego nie niesie.
-  String? get correctionTarget => isCorrection ? appMatch?.songId : null;
+  /// Którą piosenkę w apce poprawia. **Tylko z deklaracji** — piosenka niesie
+  /// swój pierwowzór, a my niczego nie zgadujemy: pod tym id poprawka podmieni
+  /// piosenkę w apce, więc pomyłka kosztuje cudzą piosenkę. Gdy deklaracji
+  /// nie ma, celu nie ma i sprawa idzie do Ciebie.
+  String? get correctionTarget =>
+      isCorrection ? declaredCorrectionTarget : null;
 
   Submission copyWith({AppMatch? appMatch, BatchMatch? batchMatch}) => Submission(
         threadId: threadId,
@@ -373,6 +380,7 @@ class Submission {
         registered: registered,
         appMatch: appMatch ?? this.appMatch,
         batchMatch: batchMatch ?? this.batchMatch,
+        declaredCorrectionTarget: declaredCorrectionTarget,
       );
 }
 

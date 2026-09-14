@@ -89,6 +89,11 @@ abstract class SongCore{
   /// Ślad piosenkomatu: uwagi do przeglądu. Tylko w plikach roboczych
   /// narzędzia — do bazy piosenek to pole nie trafia.
   static const String PARAM_PIOSENKOMAT = 'piosenkomat';
+  /// `lclId` piosenki, z której ta powstała przez edycję. Pamięć o pierwowzorze
+  /// w piosence własnej: edytor startuje od kopii bez id, więc bez tego pola
+  /// link do źródła ginie w pierwszym kroku. Do bazy piosenek nie trafia —
+  /// zdejmuje je `prepare` przed wgraniem.
+  static const String PARAM_CORRECTED_SONG_ID = 'corrected_song_id';
   static const String PARAM_REFREN = 'refren';
   static const String PARAM_PARTS = 'parts';
 

@@ -142,7 +142,7 @@ void main() {
       final same = classify(msgFrom(await completeEmail(isNew: false, song: sampleSong(lyrics: _a))), book: book);
       expect(same.target, Target.mailOnlyIdentical);
       final yt = classify(
-          msgFrom(await completeEmail(isNew: false, song: sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx'))),
+          msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx'))),
           book: book);
       expect(yt.target, Target.candidateCorrection);
       expect(yt.issues, isEmpty);
@@ -195,8 +195,8 @@ void main() {
     test('dwie poprawki tej samej piosenki → same-target-in-batch, obie do pliku', () async {
       final book = bookWith([sampleSong(lyrics: _a)]);
       final out = classifyBatch([
-        msgFrom(await completeEmail(isNew: false, song: sampleSong(lyrics: '$_a\nDopisana zwrotka')), id: 'a'),
-        msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'Płonie ognisko', lyrics: '$_a\nInna zwrotka')), id: 'b'),
+        msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(lyrics: '$_a\nDopisana zwrotka')), id: 'a'),
+        msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(title: 'Płonie ognisko', lyrics: '$_a\nInna zwrotka')), id: 'b'),
       ], book: book);
       expect(out.map((c) => c.target), everyElement(Target.candidateCorrection));
       expect(out.map((c) => c.submission.correctionTarget), everyElement('tmp'));

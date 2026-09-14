@@ -93,6 +93,16 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
   }
 
   final profile = song == null ? null : SongProfile(song);
+  // Apka mówi, którą piosenkę autor poprawiał: porównujemy z NIĄ, a nie
+  // z najbliższą tytułem. Bez tej deklaracji zostaje zgadywanie.
+  final declaredTarget = parsed?.correctedSongId?.trim();
+  final declared = declaredTarget == null || declaredTarget.isEmpty
+      ? null
+      : declaredTarget;
+  final appMatch = profile == null
+      ? null
+      : (declared == null ? null : book.matchTo(declared, profile)) ??
+          book.closest(profile);
   return Submission(
     threadId: rep.threadId,
     message: rep,
@@ -107,7 +117,8 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
     consentVersion: consent,
     song: song,
     registered: parsed?.registered,
-    appMatch: profile == null ? null : book.closest(profile),
+    appMatch: appMatch,
+    declaredCorrectionTarget: declared,
   );
 }
 
@@ -228,7 +239,21 @@ Decision decide(Submission s) {
   if (s.hasUserMessage) add(SongIssue.hasUserMessage, s.userMessage!.trim());
 
   if (s.isCorrection) {
-    if (app == null) add(SongIssue.noTargetInApp, 'nic w apce nie pasuje tytułem ani tekstem');
+    final declared = s.declaredCorrectionTarget;
+    if (declared == null) {
+      // Bez deklaracji nie ma celu i nie ma zgadywania: podmiana idzie po id,
+      // więc trafienie w cudzą piosenkę kosztuje ją całą. Najbliższa piosenka
+      // z apki jedzie w opisie jako podpowiedź, nie jako decyzja.
+      add(SongIssue.noTargetInApp,
+          app == null
+              ? 'zgłoszenie nie mówi, którą piosenkę poprawia'
+              : 'zgłoszenie nie mówi, którą piosenkę poprawia; podobna: ${app.detail}');
+    } else if (app?.songId != declared) {
+      // `buildSubmission` celuje w zadeklarowaną piosenkę, więc inny `songId`
+      // w dopasowaniu znaczy, że tego id w śpiewniku nie ma: albo autor
+      // poprawiał własną piosenkę, albo id zdążyło się zmienić.
+      add(SongIssue.noTargetInApp, 'apka wskazała „$declared”, a nie ma go w śpiewniku');
+    }
     // `sameSong` i reszta to normalny kształt poprawki — bez uwag o apce.
     if (batch != null) {
       if (s.correctionTarget != null) {

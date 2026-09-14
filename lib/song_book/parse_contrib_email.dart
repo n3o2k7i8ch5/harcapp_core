@@ -27,6 +27,10 @@ class ParsedContribEmail{
   /// mobilnej — rozpoznawane po owinięciu piosenki w `{"o!_filename": {...}}`
   /// lub po charakterystycznym nagłówku „Dzięki za chęć dzielenia się…".
   final bool isOldestFormat;
+  /// `lclId` piosenki, którą autor poprawia, zadeklarowany przez apkę
+  /// w linii „### Poprawiana piosenka”. `null` znaczy: mejl tego nie niesie
+  /// (nowa piosenka albo apka sprzed tej linii) i cel trzeba zgadywać.
+  final String? correctedSongId;
 
   ParsedContribEmail({
     required this.song,
@@ -38,6 +42,7 @@ class ParsedContribEmail{
     required this.isNewFormat,
     this.personParseWarnings = const [],
     this.isOldestFormat = false,
+    this.correctedSongId,
   });
 
 }
@@ -110,6 +115,7 @@ ParsedContribEmail _parseV2(String content){
     userMessage: _extractUserMessage(content),
     correctionMessage: extractCorrectionMessage(content),
     isNewFormat: true,
+    correctedSongId: extractCorrectedSongId(content),
   );
 }
 
@@ -476,6 +482,18 @@ String? _extractUserMessage(String content){
 final RegExp _correctionFenceRe = RegExp(
   r'### Propozycja poprawki:\s*```[a-zA-Z]*\s*\n([\s\S]*?)```',
 );
+
+final RegExp _correctedSongIdRe = RegExp(r'### Poprawiana piosenka:\s*(\S+)');
+
+/// Linia „### Poprawiana piosenka” — `lclId` piosenki, którą autor poprawia.
+/// `null`, gdy mejl jej nie ma. Czytamy tylko sprzed sekcji „### Kod piosenki:",
+/// żeby nie złapać linii z cytatu w mejlu zwrotnym.
+String? extractCorrectedSongId(String content){
+  final int cutoff = content.indexOf('### Kod piosenki:');
+  final String haystack = cutoff == -1? content: content.substring(0, cutoff);
+  final String? id = _correctedSongIdRe.firstMatch(haystack)?.group(1)?.trim();
+  return id == null || id.isEmpty? null: id;
+}
 
 /// Blok „Propozycja poprawki” — `null`, gdy pusty albo go nie ma.
 String? extractCorrectionMessage(String content){

@@ -35,6 +35,7 @@ Future<String> completeEmail({
   bool withConsent = true,
   bool reply = false,
   RegisteredContributor? registered,
+  String? correctedSongId,
 }) async {
   song ??= sampleSong();
   final subject = composeContribSongEmailSubject(
@@ -49,6 +50,7 @@ Future<String> completeEmail({
     registered: registered,
     isNewSong: isNew,
     updateComment: isNew ? null : 'poprawka chwytu w refrenie',
+    correctedSongId: correctedSongId,
   );
   if (userMessage != null) {
     body = body.replaceFirst(

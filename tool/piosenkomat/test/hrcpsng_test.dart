@@ -63,14 +63,19 @@ void main() {
     final book = bookWith([sampleSong(title: 'Stara', lyrics: 'Ala ma kota\nA kot ma Ale')]);
     final items = classifyBatch([
       msgFrom(await completeEmail(song: sampleSong(title: 'Nowa', lyrics: 'Zupelnie inne')), id: 'n'),
-      msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'Stara (popr.)', lyrics: 'Ala ma kota\nA kot ma Ale\nZwrotka')), id: 'c'),
+      msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(title: 'Stara (popr.)', lyrics: 'Ala ma kota\nA kot ma Ale\nZwrotka')), id: 'c'),
     ], book: book);
     final songs = [for (final c in items) c.song!..piosenkomatData = c.piosenkomatData()];
     expect(songs[1].piosenkomatData!.correctionTarget, 'tmp');
     expect(songs.every((s) => s.contributorData?.emailThreadId != null), isTrue,
         reason: 'przed stripem id wątku wiąże piosenkę ze zgłoszeniem');
+    // Poprawka zrobiona w apce na własnej kopii przyjeżdża z pamięcią
+    // o pierwowzorze w samej piosence.
+    songs[1].correctedSongId = 'tmp';
     final targets = stripPiosenkomat(songs);
     expect(songs.every((s) => s.piosenkomatData == null), isTrue);
+    expect(songs.every((s) => s.correctedSongId == null), isTrue,
+        reason: 'do bazy jedzie sama piosenka, bez pamięci o poprawianiu');
     expect(songs[1].id, 'tmp', reason: 'apka referencjonuje piosenki po lclId');
     expect(targets, [('tmp', 'Stara (popr.)')]);
     expect(songs[0].id, startsWith('o!_'));

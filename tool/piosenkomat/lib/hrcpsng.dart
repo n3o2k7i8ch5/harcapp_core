@@ -170,6 +170,9 @@ List<(String, String)> stripPiosenkomat(List<SongRaw> songs) {
       targets.add((s.id, s.title));
     }
     s.piosenkomatData = null;
+    // Pamięć o pierwowzorze jest robocza: w bazie piosenka nie ma po co
+    // pamiętać, że powstała z poprawiania — tam liczy się jej dzisiejsza treść.
+    s.correctedSongId = null;
     final contributor = s.contributorData;
     if (contributor?.emailThreadId != null) {
       s.contributorData = ContributorData(

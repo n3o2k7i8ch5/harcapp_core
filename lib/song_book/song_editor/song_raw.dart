@@ -42,6 +42,9 @@ class SongRaw extends SongCore{
   /// Ślad piosenkomatu: uwagi z przeglądu zgłoszeń. `null` dla każdej
   /// normalnej piosenki — niepuste znaczy „jeszcze nie wchodzi do apki”.
   PiosenkomatData? piosenkomatData;
+  /// `lclId` piosenki, którą ta poprawia — pamięć o pierwowzorze, żeby nie
+  /// trzeba go było zgadywać po tytule i tekście. Ustawia je [copyAsCorrection].
+  String? correctedSongId;
 
   bool hasRefren;
   late SongPart refrenPart;
@@ -71,6 +74,15 @@ class SongRaw extends SongCore{
     this.songParts = song.songParts;
   }
 
+  /// Piosenka ze śpiewnika wzięta do poprawienia: kopia bez id (bo to będzie
+  /// osobna, własna piosenka), ale z zapamiętanym pierwowzorem. Dzięki temu
+  /// zgłoszenie poprawki niesie źródło, zamiast kazać je komuś zgadywać.
+  SongRaw copyAsCorrection() {
+    final copied = copy(withId: false);
+    copied.correctedSongId = correctedSongId ?? id;
+    return copied;
+  }
+
   SongRaw({
     required this.id,
     required this.title,
@@ -87,6 +99,7 @@ class SongRaw extends SongCore{
 
     required this.tags,
     this.piosenkomatData,
+    this.correctedSongId,
 
     required this.hasRefren,
     SongPart? refrenPart,
@@ -170,6 +183,7 @@ class SongRaw extends SongCore{
     List<String> tags = _stringList(respMap[SongCore.PARAM_TAGS]);
     PiosenkomatData? piosenkomatData = respMap[SongCore.PARAM_PIOSENKOMAT]==null?null:
     PiosenkomatData.fromJsonMap(respMap[SongCore.PARAM_PIOSENKOMAT] as Map<String, dynamic>);
+    String? correctedSongId = respMap[SongCore.PARAM_CORRECTED_SONG_ID] as String?;
     SongPart refrenPart;
     if (respMap.containsKey(SongCore.PARAM_REFREN)) {
       hasRefren = true;
@@ -210,6 +224,7 @@ class SongRaw extends SongCore{
 
       tags: tags,
       piosenkomatData: piosenkomatData,
+      correctedSongId: correctedSongId,
 
       hasRefren: hasRefren,
       refrenPart: refrenPart,
@@ -232,6 +247,7 @@ class SongRaw extends SongCore{
     contributorData: null,
     youtubeVideoId: youtubeVideoId,
     tags: tags,
+    correctedSongId: correctedSongId,
     hasRefren: hasRefren,
     refrenPart: refrenPart,
     songParts: songParts,
@@ -310,6 +326,11 @@ class SongRaw extends SongCore{
 
     if(withPiosenkomatData && piosenkomatData != null)
       map[SongCore.PARAM_PIOSENKOMAT] = piosenkomatData!.toJsonMap();
+
+    // Bez klucza, gdy piosenka nie powstała z poprawiania — żeby nie zaśmiecać
+    // piosenek pisanych od zera.
+    if(correctedSongId != null)
+      map[SongCore.PARAM_CORRECTED_SONG_ID] = correctedSongId;
 
     hasRefren = hasRefren && !refrenPart.isEmpty;
 

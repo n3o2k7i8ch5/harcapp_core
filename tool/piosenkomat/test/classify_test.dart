@@ -122,12 +122,45 @@ void main() {
       expect(got.target, Target.candidateCorrection);
       expect(issuesOf(got), isNot(contains(SongIssue.missingYoutube)),
           reason: 'poprawka to diff, nie pełna piosenka');
-      expect(got.submission.correctionTarget, 'tmp');
+      expect(got.submission.correctionTarget, isNull,
+          reason: 'bez deklaracji nie ma celu — narzędzie nie zgaduje po tytule');
+      expect(issuesOf(got), contains(SongIssue.noTargetInApp));
       expect(got.labels, contains(kLabelCorrection));
     });
-    test('bez pierwowzoru w apce → no-target-in-app', () async {
+    test('bez deklaracji → no-target-in-app, choćby coś pasowało', () async {
       final got = classify(msgFrom(await completeEmail(isNew: false)), book: SongBook.empty);
       expect(issuesOf(got), [SongIssue.noTargetInApp]);
+      expect(got.submission.correctionTarget, isNull);
+    });
+    test('apka wskazała poprawianą piosenkę → cel z mejla, nie z domysłu', () async {
+      // W apce dwie piosenki o tym samym tytule; domysł wskazałby tę bliższą
+      // tekstem, deklaracja wskazuje tę właściwą.
+      final mylona = sampleSong(lyrics: 'Ala ma kota a kot ma ale\nW lesie gra muzyka');
+      mylona.id = 'o!_blisko';
+      final wlasciwa = sampleSong(lyrics: 'Zupelnie inny tekst o morzu i zaglach');
+      wlasciwa.id = 'o!_wskazana';
+      final got = classify(
+        msgFrom(await completeEmail(isNew: false, correctedSongId: 'o!_wskazana')),
+        book: bookWith([mylona, wlasciwa]),
+      );
+      expect(got.submission.declaredCorrectionTarget, 'o!_wskazana');
+      expect(got.submission.correctionTarget, 'o!_wskazana');
+      expect(got.submission.appMatch?.songId, 'o!_wskazana',
+          reason: 'porównujemy z pierwowzorem wskazanym przez apkę');
+      expect(issuesOf(got), isNot(contains(SongIssue.noTargetInApp)));
+    });
+    test('apka wskazała piosenkę, której nie ma w śpiewniku → no-target-in-app', () async {
+      final got = classify(
+        msgFrom(await completeEmail(isNew: false, correctedSongId: 'o!_nie_ma_takiej')),
+        book: bookWith([sampleSong(lyrics: 'Ala ma kota a kot ma ale\nW lesie gra muzyka i cos jeszcze')]),
+      );
+      expect(issuesOf(got), contains(SongIssue.noTargetInApp));
+      expect(got.target, Target.candidateCorrection);
+    });
+    test('nowa piosenka nie niesie deklaracji celu', () async {
+      final got = classify(msgFrom(await completeEmail(correctedSongId: 'o!_cokolwiek')),
+          book: SongBook.empty);
+      expect(got.submission.declaredCorrectionTarget, isNull);
       expect(got.submission.correctionTarget, isNull);
     });
     test('identyczna z apką → sam mejl, nie do pliku', () async {
