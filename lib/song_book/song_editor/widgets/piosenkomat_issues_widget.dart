@@ -141,7 +141,6 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
                   ),
                   Switch(
                     value: goesIn,
-                    activeThumbColor: Colors.green,
                     // `false` zapisujemy jawnie, `true` kasuje flagę do `null`:
                     // plik zwrotny ma nieść tylko odstępstwa od domyślnego
                     // „wchodzi”.
