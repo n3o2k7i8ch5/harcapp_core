@@ -4,6 +4,7 @@
 // gdy uznamy, że stara apka już nie krąży po świecie.
 // =====================================================================
 
+import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 
 /// Charakterystyczny nagłówek z najstarszej wersji apki. Klienty pocztowe
@@ -69,26 +70,17 @@ String _stripHtml(String s){
       .replaceAll('&amp;', '&');
 }
 
-/// Treść maila zwrotnego, którą Daniel ma wysłać autorowi maila w starym
-/// formacie, żeby przesiadł się na nową apkę.
+/// Treść maila zwrotnego dla autora mejla w starym formacie, żeby przesiadł
+/// się na nową apkę. Złożenie [kReplyGreeting] + [kOldAppReplyBlock] +
+/// [kReplyClosing] — ten sam wynik, co `composeContribReply(oldApp: true)`,
+/// tylko `const`. Gdy do mejla dochodzi uwaga z przeglądu, używaj
+/// [composeContribReply], nie tego napisu.
 const String oldestFormatReplyMessage =
-    'Dzięki za piosenki :)\n'
+    '$kReplyGreeting\n'
     '\n'
-    'Ważne info!\n'
-    'Stara wersja apki, którą masz zainstalowaną, NIE JEST JUŻ ROZWIJANA. '
-    'Żeby "przesiąść się" na nową wersję apki wystarczy pobrać HarcAppa od nowa:\n'
+    '$kOldAppReplyBlock\n'
     '\n'
-    '[Android]\n'
-    'https://play.google.com/store/apps/details?id=com.daniwan.harcapp\n'
-    '\n'
-    '[iOS]\n'
-    'https://apps.apple.com/us/app/harcapp/id6754627071\n'
-    '\n'
-    'Nowe piosenki lądują tylko w nowej wersji apki!\n'
-    '\n'
-    'Daj proszę przy okazji znać o tym w swoim środowisku! :)\n'
-    '\n'
-    'Czuwaj!';
+    '$kReplyClosing';
 
 /// Najstarsza apka zapisywała `add_pers` swobodnie: raz samym napisem
 /// z imieniem, raz listą napisów, raz listą map, w których `name` leży obok

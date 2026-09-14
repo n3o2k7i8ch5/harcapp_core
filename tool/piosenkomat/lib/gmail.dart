@@ -263,6 +263,38 @@ class GmailMailbox {
     return out;
   }
 
+  /// Podmienia treść istniejącego szkicu — mejl przelicza się od nowa, gdy
+  /// dochodzi kolejna sprawa (np. dopisałeś uwagę do piosenki autora, który
+  /// i tak miał dostać blok o starej apce).
+  Future<void> updateDraft(String draftId, ReplyTarget target, String text) async {
+    final raw = _mimeReply(target, text);
+    await _call(
+        () => _api.users.drafts.update(
+              Draft()
+                ..message = (Message()
+                  ..raw = base64Url.encode(utf8.encode(raw))
+                  ..threadId = target.threadId),
+              'me',
+              draftId,
+            ),
+        cost: _costDraftCreate);
+  }
+
+  /// Treść szkicu jako czysty tekst — po to, żeby nie nadpisać tego, co
+  /// poprawiłeś ręcznie w Gmailu. `null`, gdy nie da się jej odczytać.
+  Future<String?> draftBody(String draftId) async {
+    final draft = await _call(
+        () => _api.users.drafts.get('me', draftId, format: 'full'),
+        cost: _costGet);
+    final payload = draft.message?.payload;
+    if (payload == null) return null;
+    // Ten sam ekstraktor, co przy czytaniu zgłoszeń: schodzi w głąb
+    // `multipart/mixed → multipart/alternative → text/plain`, w co Gmail
+    // owija szkic po pierwszym otwarciu w edytorze.
+    final text = _plainText(payload);
+    return text.trim().isEmpty ? null : text;
+  }
+
   /// Kasuje szkic. Po pomyłkowym `--draft`: nic nie poszło w świat, więc
   /// wystarczy sprzątnąć szkic i zdjąć „$kLabelOldAppDrafted”.
   Future<void> deleteDraft(String draftId) async {
@@ -276,15 +308,43 @@ class GmailMailbox {
         cost: _costSend);
   }
 
-  /// Czy w wątku jest już cokolwiek wysłanego z naszej skrzynki. Po tym
-  /// poznajemy szkic wysłany ręcznie z Gmaila — wtedy szkicu już nie ma,
-  /// a drugiego mejla autor dostać nie może.
-  Future<bool> threadHasSentMessage(String threadId) async {
+  /// Wiadomości wątku bez szkiców: `threads.get` oddaje też to, co dopiero
+  /// piszesz (etykieta `DRAFT`), a szkic nie jest ani nasz wysłany, ani cudzy
+  /// przychodzący.
+  Future<List<Message>> _threadMessages(String threadId) async {
     final thread = await _call(
         () => _api.users.threads.get('me', threadId, format: 'minimal'),
         cost: _costGet);
-    return (thread.messages ?? const <Message>[])
-        .any((m) => (m.labelIds ?? const <String>[]).contains('SENT'));
+    return [
+      for (final m in thread.messages ?? const <Message>[])
+        if (!(m.labelIds ?? const <String>[]).contains('DRAFT')) m,
+    ];
+  }
+
+  static bool _sent(Message m) =>
+      (m.labelIds ?? const <String>[]).contains('SENT');
+
+  /// Czy po naszej ostatniej wiadomości autor odpisał. Po tym poznajemy, że
+  /// pytanie o chwyty doczekało się odpowiedzi — a odpowiedź przychodzi
+  /// w wątku, który ma już etykiety `song/*`, więc `scan` sam jej nie widzi.
+  ///
+  /// Same etykiety wystarczą: wiadomość bez `SENT` w naszej skrzynce jest
+  /// przychodząca. Nagłówka `From` nie czytamy, bo to kolejne 20 jednostek
+  /// na wątek, a niczego by nie rozstrzygnęło.
+  Future<bool> hasIncomingAfterOurReply(String threadId) async {
+    final messages = await _threadMessages(threadId);
+    final lastOurs = messages.lastIndexWhere(_sent);
+    if (lastOurs < 0) return false;
+    return messages.skip(lastOurs + 1).any((m) => !_sent(m));
+  }
+
+  /// Czy ostatnie słowo w wątku jest nasze. Tak poznajemy szkic wysłany
+  /// ręcznie z Gmaila: szkicu już nie ma, a od tamtej pory nikt nie odpisał.
+  /// „Kiedykolwiek coś wysłaliśmy” nie wystarcza — po odpowiedzi autora
+  /// i drugim pytaniu z przeglądu stara wysyłka udawałaby nową.
+  Future<bool> ourReplyIsLatest(String threadId) async {
+    final messages = await _threadMessages(threadId);
+    return messages.isNotEmpty && _sent(messages.last);
   }
 
   /// Dane potrzebne do odpowiedzi. Osobny strzał po nagłówki, bo
@@ -354,7 +414,7 @@ class GmailMailbox {
   /// etykieta dorobiona ręcznie poza taksonomią byłaby dla nas niewidzialna.
   Future<Map<String, Set<String>>> songLabelsByMessage() async {
     final out = <String, Set<String>>{};
-    for (final name in _idByName.keys.where(isSongLabel).toList()) {
+    for (final name in _idByName.keys.where(isAnySongLabel).toList()) {
       for (final id in await listIds('label:${labelQueryName(name)}')) {
         out.putIfAbsent(id, () => {}).add(name);
       }

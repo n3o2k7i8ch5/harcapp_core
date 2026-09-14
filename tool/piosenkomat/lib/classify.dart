@@ -223,7 +223,7 @@ Decision decide(Submission s) {
   // Wspólne.
   if (s.consentVersion == null) add(SongIssue.noConsent);
   if (s.sender == null) {
-    add(SongIssue.noContributorEmail, 'nadawca: ${s.message.from ?? 'brak nagłówka'}');
+    add(SongIssue.noContributorEmail, 'nadawca: ${s.message.from ?? 'missingCount nagłówka'}');
   }
   if (s.hasUserMessage) add(SongIssue.hasUserMessage, s.userMessage!.trim());
 
@@ -485,10 +485,31 @@ void _enrich(
   final known = sender == null || song.contribRefs
       .any((c) => (c.emailRef ?? '').toLowerCase() == sender);
   if (!known) {
-    song.contribRefs.add(ContributorRef(
-      person: parsed.registered?.person,
-      emailRef: sender,
-    ));
+    // Apka wysyła kartę osoby dodającej w `add_pers` **bez** adresu — adres
+    // jedzie osobno. Doklejony jako drugi wpis robił z jednej osoby dwie:
+    // kartę i goły mejl pod nią. Jeśli jest dokładnie jedna karta bez
+    // adresu, to jest ta osoba — adres wchodzi do niej. Kilka kart bez
+    // adresu (współautorzy) albo żadnej → osobny wpis, jak dotąd.
+    final withoutEmail = [
+      for (var i = 0; i < song.contribRefs.length; i++)
+        if (song.contribRefs[i].person != null &&
+            (song.contribRefs[i].emailRef ?? '').isEmpty)
+          i,
+    ];
+    if (withoutEmail.length == 1) {
+      final i = withoutEmail.single;
+      final c = song.contribRefs[i];
+      song.contribRefs[i] = ContributorRef(
+        person: c.person,
+        emailRef: sender,
+        userKeyRef: c.userKeyRef,
+      );
+    } else {
+      song.contribRefs.add(ContributorRef(
+        person: parsed.registered?.person,
+        emailRef: sender,
+      ));
+    }
   }
   song.id = 'o!_${song.generateFileName(withPerformer: true)}';
 }

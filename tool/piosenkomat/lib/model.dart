@@ -32,7 +32,18 @@ const String kLabelUnparsable = 'song/unparsable';
 /// Mejl z najstarszej apki: autorowi trzeba odpisać, żeby ją zaktualizował.
 /// Etykieta jest kolejką — `reply` ją zdejmuje i wiesza [kLabelOldAppReplied].
 const String kLabelOldAppToReply = 'song/old-app/to-reply';
+/// Odpowiedź o starej apce poszła. Jedyna etykieta `song/*`, która **nie**
+/// wyłącza wątku z kolejki: mówi o nadawcy, nie o stanie zgłoszenia. Dzięki
+/// temu wątek, który `reopen` cofa do kolejki, wraca **z nią** — i `scan`
+/// nie wiesza drugi raz `to-reply`, więc nikt nie dostaje bloku o starej
+/// apce po raz drugi.
 const String kLabelOldAppReplied = 'song/old-app/replied';
+/// Przy przeglądzie napisałeś autorowi — pytanie o chwyty, prośba o poprawkę.
+/// Kolejka jak przy starej apce: `reply` ją zdejmuje i wiesza
+/// [kLabelContributorAsked]. Zostaje nieprzeczytane: czekasz na odpowiedź.
+const String kLabelContributorToAsk = 'song/contributor/to-ask';
+const String kLabelContributorAsked = 'song/contributor/asked';
+
 /// `reply --draft --push` przygotował szkic i czeka, aż go przejrzysz.
 /// Wisi **obok** [kLabelOldAppToReply], nie zamiast — nikt jeszcze nic nie
 /// dostał, więc autor zostaje w kolejce. Chroni przed drugim szkicem dla tej
@@ -96,6 +107,8 @@ final List<String> kToolLabels = [
   kLabelOldAppToReply,
   kLabelOldAppReplied,
   kLabelOldAppDrafted,
+  kLabelContributorToAsk,
+  kLabelContributorAsked,
   for (final k in ReviewKind.values) k.label,
 ];
 
@@ -123,8 +136,14 @@ const List<String> kHumanOnlyLabels = [
 
 final List<String> kAllSongLabels = [...kToolLabels, ...kHumanOnlyLabels];
 
-/// `song` albo cokolwiek pod `song/` — mejl z taką etykietą nie jest już w kolejce.
-bool isSongLabel(String label) => label == 'song' || label.startsWith('song/');
+/// `song` albo cokolwiek pod `song/` — mejl z taką etykietą nie jest już
+/// w kolejce. Wyjątek: [kLabelOldAppReplied], znacznik o nadawcy.
+bool isSongLabel(String label) =>
+    (label == 'song' || label.startsWith('song/')) && label != kLabelOldAppReplied;
+
+/// Cokolwiek pod `song/`, także [kLabelOldAppReplied] — do zdejmowania
+/// przez `unlabel --force`, nie do liczenia kolejki.
+bool isAnySongLabel(String label) => label == 'song' || label.startsWith('song/');
 
 /// Etykiety stanu, po których nic już od Ciebie nie zależy: piosenka weszła
 /// albo odpadła na dobre. Takie mejle oznaczamy jako przeczytane, żeby nie
@@ -173,7 +192,7 @@ const String kOldAppMarker = 'NIE EDYTUJ PONIŻSZEGO TEKSTU';
 final String kQueueQuery = 'in:inbox '
     '(${kSongSubjects.map((s) => 'subject:"$s"').join(' OR ')} '
     'OR "$kSongMarker" OR "$kOldAppMarker") '
-    '${kAllSongLabels.map((l) => '-label:${labelQueryName(l)}').join(' ')}';
+    '${kAllSongLabels.where(isSongLabel).map((l) => '-label:${labelQueryName(l)}').join(' ')}';
 
 /// Do commitu: w pliku, nadane przez automat.
 final String kReadyByToolQuery =
@@ -418,7 +437,11 @@ class Classified {
   List<String> get labels => [
         ...stateLabelsFor(this),
         if (submission.isCorrection && target != Target.unparsable) kLabelCorrection,
-        if (submission.isOldApp) kLabelOldAppToReply,
+        // Komu już odpisano o starej apce (wątek wrócił przez `reopen`),
+        // ten nie wraca do kolejki odpowiedzi.
+        if (submission.isOldApp &&
+            !submission.messages.any((m) => m.labels.contains(kLabelOldAppReplied)))
+          kLabelOldAppToReply,
       ];
 
   /// Ślad w piosence: cechy + uwagi, w kształcie, w jakim jadą do pliku.

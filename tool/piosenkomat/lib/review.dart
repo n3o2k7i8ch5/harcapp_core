@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
@@ -48,12 +49,20 @@ class Matched {
   const Matched(this.proposed, this.kind, this.reviewed);
 }
 
-/// Dwa stany: wróciła → wchodzi, nie wróciła → odrzucona. Plus to, co każe
-/// się zatrzymać: z kandydatów można wywalać i edytować, nie dodawać.
+/// Werdykt przeglądu. Piosenka wchodzi, gdy wróciła w pliku **i** nie ma
+/// zgaszonego przełącznika; nie wróciła albo zgaszony → odpada. Plus to, co
+/// każe się zatrzymać: z kandydatów można wywalać i edytować, nie dodawać.
 class ReviewResult {
   final SubmissionKind kind;
   final List<Matched> accepted;
+  /// Nie wróciła w pliku zwrotnym — skasowana przy przeglądzie.
   final List<ProposedSong> rejected;
+  /// Wróciła, ale z przełącznikiem „nie wchodzi”. Odpada tak samo jak
+  /// [rejected], ale wiemy o niej więcej — m.in. może nieść odpowiedź.
+  final List<Matched> turnedDown;
+  /// Co napisać autorom: id wątku → tekst z pola „Odpowiedź do autora”.
+  /// Niezależne od werdyktu — i odrzucona, i przyjęta może coś nieść.
+  final Map<String, String> replies;
   /// Piosenki z `reviewed`, których nie ma w kandydatach — obcy `thread_id`
   /// albo dorzucone na stronie. STOP.
   final List<SongRaw> foreign;
@@ -69,13 +78,22 @@ class ReviewResult {
     required this.foreign,
     required this.wrongKind,
     required this.duplicateTargets,
+    this.turnedDown = const [],
+    this.replies = const {},
   });
 
   bool get mustStop =>
       foreign.isNotEmpty || wrongKind.isNotEmpty || duplicateTargets.isNotEmpty;
 
   List<String> get acceptedThreads => [for (final m in accepted) m.proposed.threadId];
-  List<String> get rejectedThreads => [for (final r in rejected) r.threadId];
+  /// Skasowane i zgaszone przełącznikiem — dla etykiet to jedno i to samo.
+  List<String> get rejectedThreads => [
+        for (final r in rejected) r.threadId,
+        for (final m in turnedDown) m.proposed.threadId,
+      ];
+  /// Wszystko, co odpadło, do wypisania.
+  List<ProposedSong> get allRejected =>
+      [...rejected, for (final m in turnedDown) m.proposed];
 }
 
 /// Co automat zaproponował dla danego rodzaju: plan jest kręgosłupem (wiąże
@@ -154,11 +172,28 @@ ReviewResult reviewDiff({
 
   final rejected = [for (final p in proposed) if (!matched.containsKey(p)) p];
 
+  // Przełącznik z edytora. Brak flagi znaczy „wchodzi”, więc pliki sprzed
+  // przełącznika (i te, z których po prostu skasowałeś, co odpada) działają
+  // jak dotąd.
+  final goesIn = <Matched>[];
+  final turnedDown = <Matched>[];
+  for (final m in matched.values) {
+    (m.reviewed.piosenkomatData?.goesIn ?? true ? goesIn : turnedDown).add(m);
+  }
+
+  // Odpowiedzi do autorów — z każdej piosenki, która wróciła, niezależnie
+  // od werdyktu.
+  final replies = <String, String>{};
+  for (final m in matched.values) {
+    final text = m.reviewed.piosenkomatData?.replyToContributor?.trim();
+    if (text != null && text.isNotEmpty) replies[m.proposed.threadId] = text;
+  }
+
   // Jedna poprawka na piosenkę: dwie zachowane z tym samym celem nie mają
-  // poprawnej interpretacji.
+  // poprawnej interpretacji. Liczą się tylko te, które faktycznie wchodzą.
   final byTarget = <String, List<String>>{};
   if (kind == SubmissionKind.correction) {
-    for (final m in matched.values) {
+    for (final m in goesIn) {
       final target = m.reviewed.piosenkomatData?.correctionTarget;
       if (target != null) byTarget.putIfAbsent(target, () => []).add(m.reviewed.title);
     }
@@ -166,8 +201,10 @@ ReviewResult reviewDiff({
 
   return ReviewResult(
     kind: kind,
-    accepted: matched.values.toList(),
+    accepted: goesIn,
     rejected: rejected,
+    turnedDown: turnedDown,
+    replies: replies,
     foreign: foreign,
     wrongKind: wrongKind,
     duplicateTargets: {
@@ -227,6 +264,25 @@ Matched? _match(SongRaw song, List<ProposedSong> proposed) {
   return best == null ? null : (best, MatchKind.songText);
 }
 
+/// Odpowiedzi do autorów ze śladu przeglądu: id wątku → tekst. Stąd, a nie
+/// z plików `.hrcpsng`, bo `reply` woła się długo po `strip`, a `strip`
+/// zdejmuje pole `piosenkomat` razem z odpowiedzią.
+Map<String, String> readReplies(String decisionsPath) {
+  if (!File(decisionsPath).existsSync()) return const {};
+  final raw = jsonDecode(File(decisionsPath).readAsStringSync());
+  if (raw is! Map) return const {};
+  final out = <String, String>{};
+  for (final entry in (raw['songs'] as List? ?? const [])) {
+    if (entry is! Map) continue;
+    final threadId = entry['thread_id'] as String?;
+    final reply = (entry['reply_to_contributor'] as String?)?.trim();
+    if (threadId != null && reply != null && reply.isNotEmpty) {
+      out[threadId] = reply;
+    }
+  }
+  return out;
+}
+
 /// Ślad przeglądu w katalogu przebiegu: co weszło, co wypadło, po czym
 /// rozpoznane. Jeden plik na oba rodzaje.
 void writeDecisions(String path, List<ReviewResult> results) {
@@ -244,6 +300,21 @@ void writeDecisions(String path, List<ReviewResult> results) {
             'matched_by': m.kind.text,
             if (m.reviewed.piosenkomatData?.correctionTarget case final t?)
               'correction_target': t,
+            if (r.replies[m.proposed.threadId] case final reply?)
+              'reply_to_contributor': reply,
+          },
+        for (final m in r.turnedDown)
+          {
+            'kind': r.kind.id,
+            'song_id': m.proposed.songId,
+            'title': m.reviewed.title,
+            'thread_id': m.proposed.threadId,
+            'sender': m.proposed.sender,
+            // Wróciła w pliku, ale z przełącznikiem „nie wchodzi”.
+            'decision': 'turned-down',
+            'matched_by': m.kind.text,
+            if (r.replies[m.proposed.threadId] case final reply?)
+              'reply_to_contributor': reply,
           },
         for (final p in r.rejected)
           {

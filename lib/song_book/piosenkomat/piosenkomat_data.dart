@@ -73,6 +73,8 @@ class PiosenkomatData{
   static const String PARAM_THREAD_ID = 'thread_id';
   static const String PARAM_RUN = 'run';
   static const String PARAM_ISSUES = 'issues';
+  static const String PARAM_ACCEPTED = 'accepted';
+  static const String PARAM_REPLY_TO_CONTRIBUTOR = 'reply_to_contributor';
 
   final SubmissionKind kind;
   final SubmissionSource source;
@@ -91,6 +93,17 @@ class PiosenkomatData{
   /// Katalog przebiegu, z którego piosenka pochodzi (np. `import-2026-09-12T00`).
   final String? run;
   final List<PiosenkomatIssue> issues;
+  /// Werdykt z przeglądu: `true` — do śpiewnika, `false` — nie. `null` znaczy
+  /// „nie dotknięte”, czyli wchodzi: przełącznika dotykasz tylko przy tych,
+  /// które odrzucasz, a pliki sprzed przełącznika dalej działają.
+  ///
+  /// Nieobecność piosenki w pliku zwrotnym **dalej** znaczy „odrzucona” —
+  /// flaga tylko wygrywa, kiedy jest.
+  final bool? accepted;
+  /// Co napisać autorowi. Niezależne od [accepted]: da się i odrzucić
+  /// z wyjaśnieniem („dorzuć chwyty i wejdzie”), i przyjąć z uwagą
+  /// („dodałem, popraw literówkę”). Piosenkomat robi z tego szkic w wątku.
+  final String? replyToContributor;
 
   const PiosenkomatData({
     this.kind = SubmissionKind.newSong,
@@ -102,13 +115,36 @@ class PiosenkomatData{
     this.threadId,
     this.run,
     this.issues = const [],
+    this.accepted,
+    this.replyToContributor,
   });
+
+  PiosenkomatData copyWith({
+    bool? Function()? accepted,
+    String? Function()? replyToContributor,
+  }) => PiosenkomatData(
+    kind: kind,
+    source: source,
+    sentAt: sentAt,
+    userMessage: userMessage,
+    correctionMessage: correctionMessage,
+    correctionTarget: correctionTarget,
+    threadId: threadId,
+    run: run,
+    issues: issues,
+    accepted: accepted == null? this.accepted: accepted(),
+    replyToContributor: replyToContributor == null? this.replyToContributor: replyToContributor(),
+  );
 
   bool get isCorrection => kind == SubmissionKind.correction;
   bool get isOldApp => source == SubmissionSource.oldApp;
   bool get hasBlocking => issues.any((i) => i.issue.isBlocking);
   /// Czy jest coś od autora do przeczytania.
   bool get hasMessages => (userMessage ?? '').isNotEmpty || (correctionMessage ?? '').isNotEmpty;
+  /// Werdykt do użycia: brak przełącznika znaczy „wchodzi”.
+  bool get goesIn => accepted ?? true;
+  /// Czy jest co wysłać autorowi.
+  bool get hasReplyToContributor => (replyToContributor ?? '').trim().isNotEmpty;
 
   Map<String, dynamic> toJsonMap() => {
     PARAM_KIND: kind.id,
@@ -120,6 +156,8 @@ class PiosenkomatData{
     if(threadId != null) PARAM_THREAD_ID: threadId,
     if(run != null) PARAM_RUN: run,
     PARAM_ISSUES: issues.map((i) => i.toJsonMap()).toList(),
+    if(accepted != null) PARAM_ACCEPTED: accepted,
+    if(hasReplyToContributor) PARAM_REPLY_TO_CONTRIBUTOR: replyToContributor!.trim(),
   };
 
   static PiosenkomatData fromJsonMap(Map<String, dynamic> map) => PiosenkomatData(
@@ -137,6 +175,8 @@ class PiosenkomatData{
         if(raw is Map<String, dynamic>)
           if(PiosenkomatIssue.fromJsonMap(raw) case final issue?) issue
     ],
+    accepted: map[PARAM_ACCEPTED] as bool?,
+    replyToContributor: map[PARAM_REPLY_TO_CONTRIBUTOR] as String?,
   );
 
 }

@@ -3,6 +3,7 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
+import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
@@ -13,6 +14,7 @@ import 'package:provider/provider.dart';
 import '../providers.dart';
 
 /// Kolor uwagi po wadze: blokada na czerwono, decyzja na pomarańczowo.
+/// Ten sam kolor niesie ikonę, tekst i półprzezroczyste tło pastylki.
 Color piosenkomatIssueColor(BuildContext context, SongIssue issue) => switch(issue.severity){
   SongIssueSeverity.blocking => Colors.red,
   SongIssueSeverity.decision => Colors.orange,
@@ -23,17 +25,19 @@ IconData piosenkomatIssueIcon(SongIssue issue) => switch(issue.severity){
   SongIssueSeverity.decision => MdiIcons.helpCircleOutline,
 };
 
-/// Nagłówek piosenkomatu nad przeglądaną piosenką: badge POPRAWKA, dopiski
-/// autora do przeczytania i pastylki z uwagami.
+/// Karta piosenkomatu nad przeglądaną piosenką — jedno pudełko na wszystko,
+/// co przyniosło zgłoszenie: werdykt, badge POPRAWKA, dopiski osoby dodającej,
+/// pastylki z uwagami i pole na odpowiedź.
 ///
-/// Wszystko tu jest **tylko do czytania**. Pastylki są dla przeglądającego,
-/// nie dla narzędzia — piosenkomat po przeglądzie ich nie sprawdza; piosenka
-/// jest w pliku → wchodzi, nie ma → odrzucona.
+/// Pastylki i dopiski są tylko do czytania: to dla Ciebie, narzędzie ich po
+/// przeglądzie nie sprawdza. Czyta natomiast werdykt i odpowiedź. Piosenki
+/// nie trzeba już kasować z pliku — wystarczy zgasić przełącznik; kasowanie
+/// dalej działa i dalej znaczy „odrzucona”.
 ///
 /// Świadomie osobne od [SongTagsWidget] i od błędów edytora: to nie są tagi
 /// piosenki (te widzi użytkownik apki) ani walidacja treści (tę edytor liczy
 /// sam) — tylko ślad narzędzia, które zgłoszenie przyniosło.
-class PiosenkomatHeaderWidget extends StatelessWidget{
+class PiosenkomatHeaderWidget extends StatefulWidget{
 
   final EdgeInsets padding;
   /// Tytuł poprawianej piosenki po `correctionTarget` — strona zna piosenki
@@ -47,35 +51,151 @@ class PiosenkomatHeaderWidget extends StatelessWidget{
   });
 
   @override
+  State<PiosenkomatHeaderWidget> createState() => _PiosenkomatHeaderWidgetState();
+
+}
+
+class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
+
+  TextEditingController? _controller;
+  /// Do której piosenki należy kontroler. Po **obiekcie** piosenki, nie po id
+  /// wątku: wątek bywa `null` (plik ręcznie edytowany, sprzed id), a dwie
+  /// takie piosenki pod rząd dzieliłyby jedno pole i jeden tekst.
+  SongRaw? _boundSong;
+
+  @override
+  void dispose(){
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  /// Przeskok na inną piosenkę dostaje **nowy** kontroler, a nie podmieniony
+  /// tekst w starym. Dwa powody: podmiana w środku `build` woła listenerów
+  /// kontrolera, czyli „setState w trakcie budowania”, a pole z rdzenia liczy
+  /// widoczność pływającej etykiety raz, w `initState` — ze starym kontrolerem
+  /// etykieta zostałaby nad pustym polem. Klucz na wątku wymusza świeży stan.
+  void _rebind(SongRaw song, PiosenkomatData data){
+    if(_controller != null && identical(song, _boundSong)) return;
+    _boundSong = song;
+    final previous = _controller;
+    _controller = TextEditingController(text: data.replyToContributor ?? '');
+    // Po klatce, bo stare pole trzyma go jeszcze przez to budowanie.
+    if(previous != null){
+      WidgetsBinding.instance.addPostFrameCallback((_) => previous.dispose());
+    }
+  }
+
+  void _update(PiosenkomatData Function(PiosenkomatData) change){
+    final prov = CurrentItemProvider.of(context);
+    final data = prov.song.piosenkomatData;
+    if(data == null) return;
+    prov.song.piosenkomatData = change(data);
+    prov.notify();
+  }
+
+  @override
   Widget build(BuildContext context) => Consumer<CurrentItemProvider>(
     builder: (context, prov, child){
 
       final PiosenkomatData? data = prov.song.piosenkomatData;
+      // Karta jest też miejscem na werdykt, więc pokazuje się przy każdej
+      // piosence z przeglądu — także przy takiej bez zarzutu.
       if(data == null) return const SizedBox.shrink();
-      if(!data.isCorrection && !data.hasMessages && data.issues.isEmpty)
-        return const SizedBox.shrink();
+      _rebind(prov.song, data);
 
-      return Align(
-        alignment: Alignment.centerLeft,
-        child: Padding(
-          padding: padding,
+      final goesIn = data.goesIn;
+      final color = goesIn? Colors.green: Colors.red;
+      final correction = data.correctionMessage ?? '';
+      final user = data.userMessage ?? '';
+
+      return Padding(
+        padding: widget.padding,
+        child: AppCard(
+          radius: AppCard.bigRadius,
+          padding: const EdgeInsets.all(Dimen.defMarg*2),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
 
-              if(data.isCorrection) ...[
-                _CorrectionBadge(data, titleOfAppSong: titleOfAppSong),
+              // Werdykt: nagłówek karty i jedyne tu miejsce, gdzie coś klikasz.
+              Row(
+                children: [
+                  Icon(
+                    goesIn
+                        ? MdiIcons.checkCircleOutline
+                        : MdiIcons.closeCircleOutline,
+                    size: Dimen.textSizeBig + 2,
+                    color: color,
+                  ),
+                  const SizedBox(width: Dimen.defMarg),
+                  Expanded(
+                    child: Text(
+                      goesIn? 'Do zatwierdzenia': 'Do odrzucenia',
+                      style: AppTextStyle(
+                        fontSize: Dimen.textSizeBig,
+                        fontWeight: weightHalfBold,
+                        color: color,
+                      ),
+                    ),
+                  ),
+                  Switch(
+                    value: goesIn,
+                    activeThumbColor: Colors.green,
+                    // `false` zapisujemy jawnie, `true` kasuje flagę do `null`:
+                    // plik zwrotny ma nieść tylko odstępstwa od domyślnego
+                    // „wchodzi”.
+                    onChanged: (value) => _update((d) =>
+                        d.copyWith(accepted: () => value? null: false)),
+                  ),
+                ],
+              ),
+
+              if(data.isCorrection || data.issues.isNotEmpty) ...[
                 const SizedBox(height: Dimen.defMarg),
+                Wrap(
+                  alignment: WrapAlignment.start,
+                  spacing: Dimen.defMarg,
+                  runSpacing: Dimen.defMarg,
+                  children: [
+                    if(data.isCorrection)
+                      _CorrectionBadge(data, titleOfAppSong: widget.titleOfAppSong),
+                    for(final issue in data.issues) PiosenkomatIssuePill(issue),
+                  ],
+                ),
               ],
 
-              if(data.hasMessages) ...[
-                _MessagesFrame(data),
-                const SizedBox(height: Dimen.defMarg),
-              ],
+              // Rozmowa: co przyszło od osoby dodającej i co jej odpiszesz.
+              if(correction.isNotEmpty)
+                _Bubble(title: 'Propozycja poprawki', text: correction),
+              if(user.isNotEmpty)
+                _Bubble(title: 'Wiadomość od osoby dodającej', text: user),
 
-              if(data.issues.isNotEmpty)
-                PiosenkomatIssuesWidget(data.issues),
+              // Bez własnego tytułu: etykietę niesie samo pole — na pustym
+              // jest podpowiedzią w środku, a gdy zaczniesz pisać, wjeżdża
+              // nad tekst. Taka sama zawsze, niezależnie od werdyktu.
+              _Bubble(
+                mine: true,
+                child: AppTextFieldHint(
+                  key: ObjectKey(_boundSong),
+                  hint: 'Odpowiedz…',
+                  controller: _controller,
+                  maxLines: null,
+                  showUnderline: false,
+                  contentPadding: EdgeInsets.zero,
+                  style: AppTextStyle(
+                    fontSize: Dimen.textSizeNormal,
+                    color: textEnab_(context),
+                  ),
+                  hintStyle: AppTextStyle(
+                    fontSize: Dimen.textSizeNormal,
+                    color: hintEnab_(context),
+                  ),
+                  onChanged: (_, text) => _update((d) => d.copyWith(
+                      replyToContributor: () =>
+                          text.trim().isEmpty? null: text)),
+                ),
+              ),
 
             ],
           ),
@@ -84,6 +204,63 @@ class PiosenkomatHeaderWidget extends StatelessWidget{
 
     },
   );
+
+}
+
+/// Dymek rozmowy: prostokątny, bez dziubka. Od osoby dodającej — z lewej,
+/// na neutralnym tle; Twoja odpowiedź — z prawej, na tle akcentu.
+class _Bubble extends StatelessWidget{
+
+  final String? title;
+  final String? text;
+  final Widget? child;
+  final bool mine;
+
+  const _Bubble({this.title, this.text, this.child, this.mine = false});
+
+  @override
+  Widget build(BuildContext context){
+    final accent = accent_(context);
+    return Padding(
+      padding: const EdgeInsets.only(top: Dimen.defMarg),
+      child: Align(
+        alignment: mine? Alignment.centerRight: Alignment.centerLeft,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width*0.85,
+          ),
+          child: Material(
+            color: mine
+                ? accent.withValues(alpha: 0.15)
+                : backgroundIcon_(context),
+            borderRadius: BorderRadius.circular(AppCard.defRadius),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Dimen.defMarg*2,
+                vertical: Dimen.defMarg,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if(title != null) ...[
+                    Text(title!, style: AppTextStyle(
+                      fontSize: Dimen.textSizeSmall,
+                      fontWeight: weightHalfBold,
+                      color: mine? accent: hintEnab_(context),
+                    )),
+                    const SizedBox(height: 2),
+                  ],
+                  child ?? SelectableText(text!, style: AppTextStyle(
+                    fontSize: Dimen.textSizeNormal, color: textEnab_(context))),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
 }
 
@@ -107,10 +284,11 @@ class PiosenkomatIssuesWidget extends StatelessWidget{
 
 }
 
-/// Jedna pastylka w stylu [Tag] z apki: karta o pełnym zaokrągleniu, bez
-/// obramowania. Na pastylce sam kod uwagi (`missing-youtube`) — krótki
-/// i jednoznaczny; polski opis i szczegół w podpowiedzi. O wadze mówi kolor
-/// ikony z przodu, nie tło — tło zostaje neutralne.
+/// Jedna pastylka w stylu [Tag] z apki: pełne zaokrąglenie, bez obramowania.
+/// Na pastylce sam kod uwagi (`missing-youtube`) — krótki i jednoznaczny;
+/// polski opis i szczegół w podpowiedzi. O wadze mówi **kolor pastylki**:
+/// półprzezroczyste tło plus ikona i tekst w pełnym kolorze, tak samo jak
+/// badge POPRAWKA.
 class PiosenkomatIssuePill extends StatelessWidget{
 
   final PiosenkomatIssue issue;
@@ -127,9 +305,16 @@ class PiosenkomatIssuePill extends StatelessWidget{
 
     final pill = SimpleButton(
       radius: 100,
-      elevation: compact? 0: AppCard.defElevation,
-      color: compact? backgroundIcon_(context): cardEnab_(context),
-      padding: EdgeInsets.symmetric(horizontal: pad, vertical: compact? 2: pad/2),
+      elevation: 0,
+      color: color.withValues(alpha: 0.15),
+      // Z lewej mniej niż z prawej: tam siedzi ikona, która ma własny odstęp.
+      // Równy padding dookoła odsuwał ją od krawędzi bardziej niż od góry.
+      padding: EdgeInsets.only(
+        left: pad/2,
+        right: pad,
+        top: compact? 2: pad/2,
+        bottom: compact? 2: pad/2,
+      ),
       onTap: null,
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -140,8 +325,8 @@ class PiosenkomatIssuePill extends StatelessWidget{
             issue.issue.id,
             style: AppTextStyle(
               fontSize: fontSize,
-              fontWeight: compact? weightNormal: weightHalfBold,
-              color: textEnab_(context),
+              fontWeight: weightHalfBold,
+              color: color,
             ),
             maxLines: 1,
           ),
@@ -150,7 +335,13 @@ class PiosenkomatIssuePill extends StatelessWidget{
     );
 
     return Tooltip(
-      message: [issue.issue.text, if(issue.detail != null) issue.detail!].join('\n'),
+      // Przy „has-user-message” szczegółem jest sama wiadomość — a tę widać
+      // wyżej w dymku. Powtarzanie jej w podpowiedzi to szum.
+      message: [
+        issue.issue.text,
+        if(issue.detail != null && issue.issue != SongIssue.hasUserMessage)
+          issue.detail!,
+      ].join('\n'),
       child: pill,
     );
   }
@@ -216,7 +407,12 @@ class _CorrectionBadge extends StatelessWidget{
         radius: 100,
         elevation: 0,
         color: accent.withValues(alpha: 0.15),
-        padding: EdgeInsets.symmetric(horizontal: pad, vertical: compact? 2: pad/2),
+        padding: EdgeInsets.only(
+          left: pad/2,
+          right: pad,
+          top: compact? 2: pad/2,
+          bottom: compact? 2: pad/2,
+        ),
         onTap: null,
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -235,50 +431,5 @@ class _CorrectionBadge extends StatelessWidget{
   }
 
   static String _day(DateTime d) => d.toLocal().toIso8601String().substring(0, 10);
-
-}
-
-/// Dopiski autora: do przeczytania, nie do ogarnięcia.
-class _MessagesFrame extends StatelessWidget{
-
-  final PiosenkomatData data;
-
-  const _MessagesFrame(this.data);
-
-  @override
-  Widget build(BuildContext context){
-    final correction = data.correctionMessage ?? '';
-    final user = data.userMessage ?? '';
-    return Material(
-      color: backgroundIcon_(context),
-      borderRadius: BorderRadius.circular(AppCard.defRadius),
-      child: Padding(
-        padding: const EdgeInsets.all(Dimen.iconMarg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if(correction.isNotEmpty)
-              _message(context, 'Propozycja poprawki', correction),
-            if(correction.isNotEmpty && user.isNotEmpty)
-              const SizedBox(height: Dimen.defMarg),
-            if(user.isNotEmpty)
-              _message(context, 'Wiadomość od autora', user),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _message(BuildContext context, String title, String text) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      Text(title, style: AppTextStyle(
-        fontSize: Dimen.textSizeSmall, fontWeight: weightHalfBold, color: hintEnab_(context))),
-      const SizedBox(height: 2),
-      SelectableText(text, style: AppTextStyle(fontSize: Dimen.textSizeNormal, color: textEnab_(context))),
-    ],
-  );
 
 }

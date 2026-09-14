@@ -44,7 +44,12 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
    Wczytujesz **jeden** plik naraz: najpierw:
    - `candidates-new.hrcpsng`, potem osobno
    - `candidates-correction.hrcpsng`.  
-   Poprawiasz, wyrzucasz, eksportujesz i podmieniasz eksportem odpowiednio: 
+   Nad piosenką: badge POPRAWKA, dopiski autora, pastylki z uwagami
+   i **werdykt** — przełącznik „wchodzi do śpiewnika” plus pole na odpowiedź
+   do osoby dodającej.
+   ####
+   Poprawiasz, gasisz przełącznik przy tych, co odpadają, eksportujesz
+   i podmieniasz eksportem odpowiednio: 
    - `reviewed-new.hrcpsng` albo 
    - `reviewed-correction.hrcpsng`.
    ####
@@ -53,8 +58,8 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
 4. **Decyzje z przeglądu.**  
    `./piosenkomat label reviewed --push`  
    ####
-   Piosenka **jest** w `reviewed-*` → `ready-to-add`; 
-   **nie ma** → `rejected/after-review`.
+   Piosenka z ✓ → `ready-to-add`; z ✗ albo skasowana →
+   `rejected/after-review`; z odpowiedzią → `contributor/to-ask`.
    ####
    Szczegóły i warunki STOP → [Przegląd i strip](#przegląd-i-strip).
    ####
@@ -77,6 +82,13 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
    ####
    `ready-to-add` + `auto` → `added`, przeczytane. Twoje ręczne `ready-to-add`
    (bez `auto`) zostają nietknięte.
+   ####
+8. **Sprzątanie.**  
+   `./piosenkomat clean --push`  
+   ####
+   Kasuje katalog przebiegu, gdy nic już na niego nie czeka. Sam sprawdza
+   w Gmailu, czy werdykty, odpowiedzi do osób dodających i kolejka starej apki są
+   domknięte — jeśli nie, odmawia i mówi, co wisi.
 
 Osobno, kiedy chcesz: `./piosenkomat reply --push` — odpowiedzi autorom ze
 starej apki → [Stara apka](#stara-apka-reply).
@@ -95,6 +107,8 @@ starej apki → [Stara apka](#stara-apka-reply).
 | `reply --draft [KATALOG]` | szkice do przejrzenia zamiast wysyłki | czyta |
 | `reply --undraft [KATALOG]` | kasuje szkice, nikomu nic nie wysyłając | czyta |
 | `reply --all …` | cała stojąca kolejka, nie tylko przebieg | czyta |
+| `reopen` | kto odpisał na Twoje pytanie — wraca do kolejki | czyta |
+| `clean [KATALOG]` | kasuje katalog domkniętego przebiegu | czyta |
 | `strip [KATALOG]` | `reviewed-*` → `final-*` | nie dotyka |
 | `… --push` | wykonuje to, co bez flagi tylko pokazał | **pisze** |
 
@@ -136,6 +150,9 @@ song/
 │   ├── correction-problem    poprawka, ale w apce nie ma czego poprawiać
 │   ├── missing-data          brak YouTube, chwytów lub tytułu
 │   └── no-consent            brak zgody albo nie wiadomo, kto zgłosił
+├── contributor/              napisałeś coś osobie dodającej przy przeglądzie
+│   ├── to-ask                kolejka: mejl do wysłania (`reply`)
+│   └── asked                 poszło; czekamy na odpowiedź (`reopen`)
 ├── old-app/                  ZNACZNIK: mejl z najstarszej, nierozwijanej apki
 │   ├── to-reply              kolejka: autorowi trzeba odpisać (`reply`)
 │   ├── drafted               szkic czeka w wątku na Twoje oko; wisi OBOK to-reply
@@ -150,6 +167,9 @@ song/
   piosenki (nie z cytatu) od nadawcy ≠ skrzynka HarcApp; gdy takiej nie ma poza
   pierwszą — pierwsza. Pozostałe wiadomości to dopiski. Etykiety idą na cały wątek.
 - `song/auto` zawsze towarzyszy jednej etykiecie stanu. Twoje decyzje to te bez `auto`.
+- Jedyny wyjątek od „`song/*` = poza kolejką”: `old-app/replied`. To znacznik
+  o nadawcy (dostał już odpowiedź), nie stan zgłoszenia — wątek z samą tą
+  etykietą jest w kolejce.
 - **Przeczytane** = sprawa zamknięta: `added` i każde `rejected/*`. `needs-review/*`,
   `unparsable` i `old-app/to-reply` zostają nieprzeczytane.
 
@@ -247,13 +267,21 @@ przed wgraniem.
 (`thread_id` w `piosenkomat`, zapasowo `contributor_data.email_thread_id`; gdyby
 oba zginęły — po kolei id piosenki, tytuł, tekst):
 
-| w `reviewed-*.hrcpsng` | mejl dostaje |
-|---|---|
-| jest | `ready-to-add` (poprawka: + `song/correction`) |
-| nie ma jej | `rejected/after-review`, przeczytane |
+| przełącznik | odpowiedź do osoby dodającej | mejl dostaje |
+|---|---|---|
+| ✓ (albo brak flagi) | — | `ready-to-add` (poprawka: + `song/correction`) |
+| ✓ | jest | `ready-to-add` + `contributor/to-ask` |
+| ✗ | — | `rejected/after-review`, przeczytane |
+| ✗ | jest | `contributor/to-ask`, **nie** `rejected` — piosenka może wrócić z chwytami |
+| skasowana z pliku | — | `rejected/after-review`, przeczytane |
+
+**Przełącznik zastępuje kasowanie, nie zabrania go.** Brak flagi znaczy
+„wchodzi”, więc dotykasz tylko tych, które odrzucasz, a kasowanie działa jak
+dotąd — stare pliki zwrotne też. `strip` bierze do `final-*` wyłącznie te z ✓.
 
 Brak pliku zwrotnego danego rodzaju = tej części jeszcze nie przeglądałeś. Ślad
-decyzji w `decisions.json`.
+decyzji w `decisions.json` — z werdyktem i odpowiedzią, bo stamtąd bierze je
+później `reply`.
 
 **STOP** (bez wyjścia przez `--force`): piosenka spoza kandydatów (obcy `thread_id`),
 zły rodzaj w pliku (poprawka w `reviewed-new`), dwie zachowane poprawki tej samej
@@ -263,6 +291,71 @@ piosenki. **Bezpieczniki** (`--force` przechodzi): pusty plik, odrzucona ponad p
 poprawkach ustawia `id = correction_target` — apka referencjonuje piosenki po `lclId`
 (ulubione, albumy, oceny), więc poprawiony tytuł nie może zmienić id — i wypisuje
 listę „co podmienić”.
+
+## Sprzątanie (`clean`)
+
+Katalog przebiegu **nie jest śmieciem od razu** po wgraniu piosenek do
+`all_songs`. Trzy rzeczy trzymają go przy życiu:
+
+| co | dopóki |
+|---|---|
+| plan etykiet (`labels.json`) | `label reviewed` i `label added` mają co robić |
+| teksty odpowiedzi (`decisions.json`) | `reply` nie wyśle ich autorom |
+| pliki `.hrcpsng` | nie skończysz przeglądu i `strip`a |
+
+Najłatwiej przeoczyć ten drugi: odpowiedź do osoby dodającej piszesz w edytorze, ale
+mejl wychodzi czasem długo później, a tekst siedzi w `decisions.json`. Katalog
+skasowany za wcześnie = mejl bez Twojego tekstu.
+
+Dlatego to komenda, a nie `rm -rf`: `clean` pyta Gmaila, czy mejle przebiegu
+nie wiszą w `ready-to-add`, `needs-review/*`, `contributor/to-ask` ani
+`old-app/to-reply`. Wiszą → odmawia i wypisuje, ile czego (`--force` przechodzi).
+Nie wiszą → katalog leci, bo cały ślad jest już w Gmailu.
+
+## Pytania do osób dodających
+
+Piosenka bez chwytów nie jest ani „wchodzi”, ani „odrzucona” — jest
+**wstrzymana**, dopóki osoba dodająca czegoś nie dośle. Żeby tego nie trzymać w głowie,
+w edytorze piszesz odpowiedź od razu przy piosence, a narzędzie pamięta resztę.
+
+```bash
+# 1. w edytorze: gasisz przełącznik + „Brakuje chwytów. Dorzuć je i wejdzie.”
+./piosenkomat label reviewed --push   # → song/contributor/to-ask, nieprzeczytane
+./piosenkomat reply --draft --push    # szkic w wątku
+#  …przejrzysz w Gmailu…
+./piosenkomat reply --push            # → song/contributor/asked
+#  …osoba dodająca odpisuje z chwytami…
+./piosenkomat reopen --push           # zdejmuje song/*, wątek wraca do kolejki
+./piosenkomat scan                    # przesiewa go jak nowe zgłoszenie
+```
+
+**Dlaczego `reopen` w ogóle istnieje:** kolejka to „inbox bez `song/*`, po
+wątkach”, a odpowiedź wpada do wątku, który etykiety już ma — więc
+`scan` sam by jej nie zobaczył. `reopen` szuka wątków z `contributor/asked`,
+w których po naszej ostatniej wiadomości pojawiła się przychodząca (szkice
+się nie liczą), i zdejmuje z nich `song/*`. Wątek wraca do kolejki i przechodzi
+normalny przesiew, tyle że z nowymi chwytami.
+
+Dwa wyjątki. Wątek z `added` **pomija** — piosenka jest w apce, „dzięki” od
+autora to nie zgłoszenie, a poprawkę przysyła się z apki jako nową.
+`old-app/replied` **zostawia** — to jedyna etykieta `song/*`, która nie
+wyłącza z kolejki, bo mówi o nadawcy, nie o zgłoszeniu; dzięki niej `scan`
+nie zapyta o starą apkę drugi raz.
+
+**Mejl jest składany, nie pisany raz.** Treść to funkcja tego, co mamy do
+powiedzenia (`composeContribReply` w `harcapp_core`): powitanie + Twoje uwagi +
+blok o starej apce, jeśli zgłoszenie z niej przyszło + „Czuwaj!”. Dzięki temu
+osoba ze starej apki, której dopisałeś uwagę, dostaje **jeden** mejl z obiema
+sprawami, a nie dwa. Kto przysłał kilka piosenek, dostaje jeden mejl ze
+wszystkimi uwagami.
+
+Gdy dochodzi kolejna sprawa, istniejący szkic jest **aktualizowany**
+(`drafts.update`), nie zakładany drugi raz. Swój szkic narzędzie poznaje po
+kształcie: „Dzięki za piosenki :)” na początku, „Czuwaj!” na końcu. Taki
+przelicza od nowa i **wypisuje akapity, które przy tym wypadły** — bo
+poprzedniej wersji uwagi nikt nie pamięta, a po cichu gubić nie wolno. Szkic
+dopisany po „Czuwaj!” albo z innym początkiem to Twoja ręczna robota: zostaje
+nietknięty, z komunikatem. Nieczytelny też zostaje.
 
 ## Stara apka (`reply`)
 

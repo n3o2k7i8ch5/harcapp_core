@@ -124,6 +124,16 @@ String? latestOutDir({String root = 'out'}) {
   return runs.isEmpty ? null : runs.last;
 }
 
+/// Wszystkie katalogi przebiegów, od najstarszego.
+List<String> allOutDirs({String root = 'out'}) {
+  final dir = Directory(root);
+  if (!dir.existsSync()) return const [];
+  return [
+    for (final e in dir.listSync())
+      if (e is Directory && p.basename(e.path).startsWith('import-')) e.path,
+  ]..sort();
+}
+
 /// Nazwy plików w katalogu przebiegu, po rodzaju zgłoszenia.
 ///
 /// Nowe piosenki i poprawki leżą osobno, bo to inna robota: dodać vs porównać

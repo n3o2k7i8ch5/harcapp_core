@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
+import 'package:harcapp_core/values/people/models.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/similarity.dart';
@@ -30,6 +32,40 @@ void main() {
     expect(song.contribRefs.any((c) => c.emailRef == 'jan.testowy@example.com'), isTrue);
     expect(song.contributorData!.emailThreadId, got.submission.threadId,
         reason: 'po tym przegląd wiąże piosenkę ze zgłoszeniem');
+  });
+
+  group('osoba dodająca w `add_pers`:', () {
+    Person card(String name) => Person(name: name, druzyna: '88. DW „Wierchy”');
+
+    test('karta bez adresu + nadawca → jedna osoba, nie karta i goły mejl', () async {
+      // Tak wysyła apka: karta w `add_pers` bez adresu, adres osobno.
+      final song = sampleSong()..contribRefs = [ContributorRef(person: card('Patrycja Dudzinska'))];
+      final got = classify(msgFrom(await completeEmail(song: song)), book: SongBook.empty);
+      final refs = got.song!.contribRefs;
+      expect(refs, hasLength(1), reason: 'druga pozycja z samym mejlem to bug, który irytował przy przeglądzie');
+      expect(refs.single.person?.name, 'Patrycja Dudzinska');
+      expect(refs.single.emailRef, 'jan.testowy@example.com');
+    });
+
+    test('kilka kart bez adresu → nie zgadujemy, mejl osobno', () async {
+      final song = sampleSong()..contribRefs = [
+        ContributorRef(person: card('Jedna')),
+        ContributorRef(person: card('Druga')),
+      ];
+      final got = classify(msgFrom(await completeEmail(song: song)), book: SongBook.empty);
+      final refs = got.song!.contribRefs;
+      expect(refs, hasLength(3));
+      expect(refs.where((c) => c.emailRef == 'jan.testowy@example.com'), hasLength(1));
+      expect(refs.take(2).every((c) => c.emailRef == null), isTrue, reason: 'żadna karta nie dostaje adresu na chybił trafił');
+    });
+
+    test('karta już z tym adresem → nic nie dokładamy', () async {
+      final song = sampleSong()..contribRefs = [
+        ContributorRef(person: card('Jan'), emailRef: 'jan.testowy@example.com'),
+      ];
+      final got = classify(msgFrom(await completeEmail(song: song)), book: SongBook.empty);
+      expect(got.song!.contribRefs, hasLength(1));
+    });
   });
 
   group('cechy → uwagi:', () {
