@@ -12,9 +12,12 @@ import 'model.dart';
 class PlannedSong {
   final String songId;
   final String title;
-  /// Nadawca — po nim poznasz, czyj wpis w `people.dart` był niepotrzebny,
-  /// jeśli piosenka wypadnie przy przeglądzie.
+  /// Nadawca — po nim `prepare` wiąże piosenkę z osobą dodającą.
   final String sender;
+  /// Pozostałe adresy z bloku „Osoba dodająca”. Piosenka niesie tylko jeden
+  /// (`email_ref`), a `people.dart` powstaje dopiero po przeglądzie, więc
+  /// reszta musi tu przeczekać.
+  final List<String> otherEmails;
   final SubmissionKind kind;
   /// Uwagi, z jakimi piosenka pojechała do przeglądu — do `decisions.json`.
   final List<String> issues;
@@ -25,6 +28,7 @@ class PlannedSong {
     required this.sender,
     this.kind = SubmissionKind.newSong,
     this.issues = const [],
+    this.otherEmails = const [],
   });
 
   Map<String, dynamic> toJson() => {
@@ -33,6 +37,7 @@ class PlannedSong {
         'sender': sender,
         'kind': kind.id,
         'issues': issues,
+        if (otherEmails.isNotEmpty) 'other_emails': otherEmails,
       };
 
   factory PlannedSong.fromJson(Map<String, dynamic> json) => PlannedSong(
@@ -41,6 +46,8 @@ class PlannedSong {
         sender: json['sender'] as String? ?? '',
         kind: SubmissionKind.byId(json['kind'] as String?),
         issues: ((json['issues'] ?? const []) as List).cast<String>(),
+        otherEmails:
+            ((json['other_emails'] ?? const []) as List).cast<String>(),
       );
 }
 
@@ -81,6 +88,7 @@ class LabelPlan {
                   sender: c.submission.sender ?? '',
                   kind: c.submission.kind,
                   issues: [for (final i in c.issues) i.issue.id],
+                  otherEmails: _otherEmailsOf(c),
                 ),
               ],
         },
@@ -106,9 +114,8 @@ class LabelPlan {
           for (final e in (json['labels'] as Map<String, dynamic>).entries)
             e.key: (e.value as List).cast<String>(),
         },
-        // Wcześniejsze plany: sekcja `imports`, klucz = id wiadomości = wątek.
         songsByThread: {
-          for (final e in ((json['songs'] ?? json['imports'] ?? <String, dynamic>{}) as Map<String, dynamic>).entries)
+          for (final e in ((json['songs'] ?? <String, dynamic>{}) as Map<String, dynamic>).entries)
             e.key: [
               for (final i in e.value as List)
                 PlannedSong.fromJson(i as Map<String, dynamic>),
@@ -120,9 +127,37 @@ class LabelPlan {
         },
       );
 
-  /// Wiadomości wątku; dla planów sprzed wątków — sam id.
+  /// Wiadomości wątku. Plan zna wszystkie wątki przebiegu, więc pusta lista
+  /// znaczy, że pytasz o wątek spoza niego.
   List<String> messagesOf(String threadId) =>
-      messagesByThread[threadId] ?? [threadId];
+      messagesByThread[threadId] ?? const [];
+}
+
+/// Adresy z bloku „Osoba dodająca” poza adresem nadawcy — ten jest już
+/// w `email_ref` piosenki.
+List<String> _otherEmailsOf(Classified c) {
+  final sender = (c.submission.sender ?? '').trim().toLowerCase();
+  return [
+    for (final e in c.submission.registered?.emails ?? const <String>[])
+      if (e.trim().isNotEmpty && e.trim().toLowerCase() != sender) e.trim(),
+  ];
+}
+
+/// Dodatkowe adresy z przebiegu, po nadawcy — tyle, ile `people.dart`
+/// potrzebuje od planu.
+Map<String, List<String>> otherEmailsBySender(LabelPlan plan) {
+  final out = <String, List<String>>{};
+  for (final songs in plan.songsByThread.values) {
+    for (final s in songs) {
+      final sender = s.sender.trim().toLowerCase();
+      if (sender.isEmpty || s.otherEmails.isEmpty) continue;
+      final into = out.putIfAbsent(sender, () => []);
+      for (final e in s.otherEmails) {
+        if (!into.contains(e)) into.add(e);
+      }
+    }
+  }
+  return out;
 }
 
 void writePlan(String path, LabelPlan plan) =>

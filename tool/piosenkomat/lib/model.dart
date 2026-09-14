@@ -112,18 +112,6 @@ final List<String> kToolLabels = [
   for (final k in ReviewKind.values) k.label,
 ];
 
-/// Etykiety z wcześniejszych wersji narzędzia. Nie nadajemy ich już, ale
-/// `unlabel` musi umieć je zdjąć — inaczej zostają na mejlach na zawsze.
-/// Świadomie poza [kAllSongLabels]: mejl z samą taką etykietą ma wrócić
-/// do kolejki, a nie z niej wypaść.
-const List<String> kLegacyToolLabels = [
-  'song/needs-review/possible-duplicate',
-  'song/needs-review/reply',
-  'song/needs-review/correction',
-  'song/needs-review/identical-with-message',
-  'song/needs-review/unparsable',
-];
-
 /// Te nadaje tylko człowiek; narzędzie ich nie tworzy, ale mejle z nimi
 /// nie są już „w kolejce”.
 const List<String> kHumanOnlyLabels = [

@@ -265,7 +265,7 @@ Matched? _match(SongRaw song, List<ProposedSong> proposed) {
 }
 
 /// Odpowiedzi do autorów ze śladu przeglądu: id wątku → tekst. Stąd, a nie
-/// z plików `.hrcpsng`, bo `reply` woła się długo po `strip`, a `strip`
+/// z plików `.hrcpsng`, bo `reply` woła się długo po `prepare`, a ono
 /// zdejmuje pole `piosenkomat` razem z odpowiedzią.
 Map<String, String> readReplies(String decisionsPath) {
   if (!File(decisionsPath).existsSync()) return const {};

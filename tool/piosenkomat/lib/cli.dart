@@ -63,18 +63,8 @@ Future<int> runPiosenkomat(List<String> args) async {
   final explain = parser.addCommand('explain');
   _addCommon(explain);
 
-  final strip = parser.addCommand('strip');
-  _addCommon(strip);
-
-  // Stare nazwy: działają po cichu, nie ma ich w pomocy. Dostają `--push`
-  // nawet tam, gdzie dzisiejsza komenda go nie ma (`process --apply`), żeby
-  // stare notatki nie wywalały się na parserze.
-  for (final e in _aliases.entries) {
-    final a = parser.addCommand(e.key);
-    _optionsOf[e.value]?.call(a);
-    _addCommon(a);
-    _addWrite(a, hidden: true);
-  }
+  final prepare = parser.addCommand('prepare');
+  _addCommon(prepare);
 
   ArgResults opts;
   try {
@@ -86,11 +76,16 @@ Future<int> runPiosenkomat(List<String> args) async {
   }
   var cmd = opts.command;
   if (opts['help'] as bool || cmd == null) {
+    // Słowo, którego parser nie zna: powiedz to wprost, zamiast pokazywać
+    // samą pomoc i kazać się domyślać.
+    if (cmd == null && opts.rest.isNotEmpty) {
+      stderr.writeln('Nie ma komendy „${opts.rest.first}”.');
+    }
     stdout.writeln(_usage(parser));
     return cmd == null && !(opts['help'] as bool) ? 64 : 0;
   }
 
-  var name = _aliases[cmd.name] ?? cmd.name;
+  var name = cmd.name;
   if (name == 'label') {
     final stage = cmd.command;
     if (stage == null) {
@@ -122,8 +117,8 @@ Future<int> runPiosenkomat(List<String> args) async {
         return await _clean(cmd);
       case 'explain':
         return _explain(cmd);
-      case 'strip':
-        return _strip(cmd);
+      case 'prepare':
+        return _prepare(cmd);
     }
     return 64;
   } on FileSystemException catch (e) {
@@ -141,17 +136,7 @@ class _UsageError implements Exception {
   const _UsageError(this.message);
 }
 
-/// Nazwy sprzed przemianowania → dzisiejsze komendy.
-const Map<String, String> _aliases = {
-  'process': 'scan',
-  'apply': 'label scanned',
-  'review': 'label reviewed',
-  'commit': 'label added',
-  'unapply': 'unlabel',
-  'check': 'explain',
-};
-
-/// Opcje komend, wspólne dla nazwy dzisiejszej i aliasu.
+/// Opcje poszczególnych komend.
 void _scanOptions(ArgParser p) => p
   ..addOption('limit',
       abbr: 'n', help: 'Ile mejli z kolejki (domyślnie wszystkie)')
@@ -181,23 +166,13 @@ void _replyOptions(ArgParser p) => p
       negatable: false,
       help: 'Cała stojąca kolejka, nie tylko autorzy z przebiegu');
 
-const Map<String, void Function(ArgParser)> _optionsOf = {
-  'scan': _scanOptions,
-  'label reviewed': _reviewedOptions,
-  'unlabel': _unlabelOptions,
-  'reply': _replyOptions,
-};
 
 /// `--push` to jedyna flaga, która pozwala cokolwiek zmienić w Gmailu:
-/// „wypchnij to, co widzisz na sucho, do skrzynki”. `--write` i `--apply`
-/// zostają ukrytymi synonimami, żeby stare notatki dalej działały.
-void _addWrite(ArgParser p, {String? help, bool hidden = false}) => p
-  ..addFlag('push', abbr: 'p', negatable: false, hide: hidden, help: help)
-  ..addFlag('write', negatable: false, hide: true)
-  ..addFlag('apply', negatable: false, hide: true);
+/// „wypchnij to, co widzisz na sucho, do skrzynki”.
+void _addWrite(ArgParser p, {String? help}) =>
+    p.addFlag('push', abbr: 'p', negatable: false, help: help);
 
-bool _write(ArgResults cmd) =>
-    (cmd['push'] as bool) || (cmd['write'] as bool) || (cmd['apply'] as bool);
+bool _write(ArgResults cmd) => cmd['push'] as bool;
 
 void _addCommon(ArgParser p) => p
   ..addOption('songs-db', help: 'Ścieżka do all_songs.hrcpsng')
@@ -298,15 +273,8 @@ Future<int> _scan(ArgResults cmd) async {
   if (wrote) {
     stdout.writeln('Wczytuj jeden plik naraz na stronie ze śpiewnikiem; '
         'potem: ./piosenkomat label reviewed $outDir');
-    final people = collectPeople(classified);
-    final peoplePath = peoplePathIn(outDir);
-    writePeopleDart(peoplePath, people);
-    stdout.writeln('Osoby dodające: ${people.newContributors.length} nowych → $peoplePath'
-        '${people.knownByEmail.isEmpty ? '' : ', ${people.knownByEmail.length} już w data.dart'}'
-        '${people.anonymousByEmail.isEmpty ? '' : ', ${people.anonymousByEmail.length} bez bloku osoby'}');
-    if (people.newContributors.isNotEmpty) {
-      stdout.writeln('Doklej nowe do lib/values/people/data.dart.');
-    }
+    // Osoby dodające dopiero przy `prepare`: przed przeglądem nie wiadomo,
+    // które piosenki wejdą, a więc kogo w ogóle dopisywać do data.dart.
   } else {
     stdout.writeln('\nNic nie poszło do plików.');
   }
@@ -360,13 +328,10 @@ Future<int> _unlabel(ArgResults cmd) async {
   final mailbox = await _connect(cmd);
   stdout.writeln('Sprawdzam etykiety w skrzynce…');
   final currentById = await mailbox.songLabelsByMessage();
-  // Znacznik `auto` albo etykieta z wcześniejszej wersji narzędzia — tę drugą
-  // trzeba złapać osobno, bo po zdjęciu `auto` nie ma już po czym poznać,
-  // że to ślad automatu.
+  // Ślad automatu to znacznik `auto` — nic innego nie daje prawa zdejmować.
   final byAutomat = {
     for (final e in currentById.entries)
-      if (e.value.contains(kLabelAuto) || e.value.any(kLegacyToolLabels.contains))
-        e.key: e.value,
+      if (e.value.contains(kLabelAuto)) e.key: e.value,
   };
 
   final toRemove = <String, List<String>>{};
@@ -384,7 +349,7 @@ Future<int> _unlabel(ArgResults cmd) async {
     // „Odpisano" zostaje: to jedyny ślad, że autor już dostał mejla o starej
     // apce. Bez niego wróciłby do kolejki `to-reply` i dostał drugi.
     toRemove[e.key] = [
-      for (final l in [...kToolLabels, ...kLegacyToolLabels])
+      for (final l in kToolLabels)
         if (e.value.contains(l) && (force || l != kLabelOldAppReplied)) l,
     ];
     if (toRemove[e.key]!.isEmpty) toRemove.remove(e.key);
@@ -503,7 +468,7 @@ Future<int> _labelAdded(ArgResults cmd) async {
     for (final e in current.entries)
       if (isReadyByTool(e.value)) e.key,
   ];
-  // Tytuł i nadawcę bierzemy z planu przebiegu — leżą w `labels.json` za darmo.
+  // Tytuł i nadawcę bierzemy z planu przebiegu — leżą w `plan.json` za darmo.
   // Dopytujemy Gmaila tylko o mejle spoza planu (20 jednostek za sztukę).
   final zPlanu = _songsFromLatestPlan();
   for (final id in ready) {
@@ -672,28 +637,16 @@ Future<int> _labelReviewed(ArgResults cmd) async {
 String _kindName(SubmissionKind k) =>
     k == SubmissionKind.correction ? 'Poprawki' : 'Nowe';
 
-/// Kandydaci danego rodzaju z katalogu przebiegu. Starsze katalogi miały
-/// jeden plik — czytamy go jako nowe piosenki.
+/// Kandydaci danego rodzaju z katalogu przebiegu.
 List<SongRaw> _candidatesOf(String outDir, SubmissionKind kind) {
   final path = candidatesPathIn(outDir, kind);
-  if (_exists(path)) return readHrcpsng(path);
-  if (kind != SubmissionKind.newSong) return const [];
-  return [
-    for (final legacy in legacyCandidatesPathsIn(outDir))
-      if (_exists(legacy)) ...readHrcpsng(legacy),
-  ];
+  return _exists(path) ? readHrcpsng(path) : const [];
 }
 
-/// Plik zwrotny danego rodzaju, o ile jest. Dla nowych także pod starymi
-/// nazwami (`reviewed.hrcpsng`, `approved.hrcpsng`).
+/// Plik zwrotny danego rodzaju, o ile jest.
 String? _reviewedFileOf(String outDir, SubmissionKind kind) {
   final path = reviewedPathIn(outDir, kind);
-  if (_exists(path)) return path;
-  if (kind != SubmissionKind.newSong) return null;
-  for (final legacy in legacyReviewedPathsIn(outDir)) {
-    if (_exists(legacy)) return legacy;
-  }
-  return null;
+  return _exists(path) ? path : null;
 }
 
 /// Co zrobić z etykietami każdej wiadomości po przeglądzie: `(dodaj, zdejmij)`.
@@ -740,15 +693,6 @@ void _printReview(ReviewResult result) {
     stdout.writeln('    ODRZUĆ  ${m.reviewed.title}  [${m.proposed.threadId}]'
         '  (przełącznik${hasQuestion ? ', z odpowiedzią' : ''})');
   }
-  // Kto z people.dart został tylko przy odrzuconych piosenkach — jego wpisu
-  // nie ma po co doklejać do data.dart.
-  final dropped = {for (final r in result.allRejected) r.sender}
-    ..removeAll({for (final m in result.accepted) m.proposed.sender})
-    ..remove('');
-  if (dropped.isNotEmpty) {
-    stdout.writeln('  Tylko odrzucone piosenki (pomiń w people.dart): '
-        '${dropped.join(', ')}');
-  }
   final byOther = [
     for (final m in result.accepted)
       if (m.kind != MatchKind.threadId) m,
@@ -763,27 +707,36 @@ void _printReview(ReviewResult result) {
   }
 }
 
-/// `strip [katalog]`: zdejmuje ślad piosenkomatu z plików zwrotnych →
-/// `final-*.hrcpsng`, gotowe do wklejenia w `all_songs`. Przy poprawkach
-/// `id = correction_target`, żeby apka nie zgubiła powiązań użytkowników.
-/// Nie patrzy na uwagi — przegląd był Twój.
-int _strip(ArgResults cmd) {
+/// `prepare [katalog]`: składa z przeglądu materiał dla repo. Zdejmuje ślad
+/// piosenkomatu z plików zwrotnych → `final-*.hrcpsng`, gotowe do wklejenia
+/// w `all_songs`. Przy poprawkach `id = correction_target`, żeby apka nie
+/// zgubiła powiązań użytkowników. Nie patrzy na uwagi — przegląd był Twój.
+///
+/// Tu też powstaje `people.dart`: dopiero teraz wiadomo, które piosenki
+/// naprawdę wchodzą, a osoby czyta z nich samych, więc łapią się Twoje
+/// poprawki kart z przeglądu.
+///
+/// Jedyna komenda, która niczego nie rusza w Gmailu — i nie ostatnia
+/// w przebiegu, bo po niej idzie jeszcze `label added` i odpowiedzi.
+int _prepare(ArgResults cmd) {
   final outDir = _runDir(cmd);
   if (outDir == null) return 64;
   var any = false;
+  final entering = <SongRaw>[];
   for (final kind in SubmissionKind.values) {
     final reviewedPath = _reviewedFileOf(outDir, kind);
     if (reviewedPath == null) continue;
     any = true;
     final allSongs = readHrcpsng(reviewedPath);
-    // Przełącznik „nie wchodzi” z przeglądu. Brak flagi znaczy „wchodzi”,
-    // więc pliki sprzed przełącznika lecą w całości jak dotąd.
+    // Przełącznik „nie wchodzi” z przeglądu. Nieruszony znaczy „wchodzi”,
+    // więc milczenie na stronie nie wyrzuca piosenki z pliku.
     final songs = [
       for (final s in allSongs)
         if (s.piosenkomatData?.goesIn ?? true) s,
     ];
     final turnedDownCount = allSongs.length - songs.length;
     final targets = stripPiosenkomat(songs);
+    entering.addAll(songs);
     final out = finalPathIn(outDir, kind);
     writeHrcpsng(out, songs);
     stdout.writeln('${_kindName(kind)}: ${songs.length} piosenek → $out');
@@ -805,7 +758,34 @@ int _strip(ArgResults cmd) {
     stderr.writeln('Brak plików zwrotnych w $outDir — najpierw przegląd na stronie.');
     return 1;
   }
+  _writePeople(outDir, entering);
   return 0;
+}
+
+/// `people.dart` z piosenek, które wchodzą. Dodatkowe adresy z bloku „Osoba
+/// dodająca” dokłada plan przebiegu — piosenka niesie tylko `email_ref`.
+void _writePeople(String outDir, List<SongRaw> entering) {
+  final planPath = planPathIn(outDir);
+  var otherEmails = const <String, List<String>>{};
+  if (_exists(planPath)) {
+    try {
+      otherEmails = otherEmailsBySender(readPlan(planPath));
+    } on FormatException {
+      stdout.writeln('Plan $planPath nie do odczytania — '
+          'w people.dart same adresy nadawców.');
+    }
+  }
+  final people = collectPeople(
+      contributorSourcesOf(entering, otherEmailsBySender: otherEmails));
+  final peoplePath = peoplePathIn(outDir);
+  writePeopleDart(peoplePath, people);
+  stdout.writeln('Osoby dodające: ${people.newContributors.length} nowych → $peoplePath'
+      '${people.knownByEmail.isEmpty ? '' : ', ${people.knownByEmail.length} już w data.dart'}'
+      '${people.anonymousByEmail.isEmpty ? '' : ', ${people.anonymousByEmail.length} bez karty osoby'}');
+  if (people.newContributors.isNotEmpty) {
+    stdout.writeln('Doklej nowe do lib/values/people/data.dart, '
+        'zanim wkleisz piosenki do all_songs.');
+  }
 }
 
 /// `reply [--draft] [--push]`: autorom ze starej apki wiadomość, żeby ją
@@ -859,7 +839,7 @@ Future<int> _reply(ArgResults cmd) async {
               : '($queueQuery)');
   var ids = await mailbox.listIds(query);
 
-  // Teksty z pola „Odpowiedź do autora”: ze śladu przeglądu, bo `strip`
+  // Teksty z pola „Odpowiedź do autora”: ze śladu przeglądu, bo `prepare`
   // zdejmuje je z piosenek na długo przed `reply`.
   final replies = <String, String>{};
   for (final dir in runDir != null ? [runDir] : allOutDirs()) {
@@ -1328,8 +1308,6 @@ int _explain(ArgResults cmd) {
 /// Narzędzie działa w `tool/piosenkomat/`, ale użytkownik podaje ścieżki
 /// z katalogu, w którym wpisał `./piosenkomat` (przekazany w PIOSENKOMAT_CWD).
 /// Katalog przebiegu z argumentu, a bez argumentu — ostatni z `out/`.
-/// Dla wygody przyjmuje też ścieżkę do pliku w środku (np. `labels.json`),
-/// bo tak wyglądały wywołania sprzed przemianowania.
 String? _runDir(ArgResults cmd) {
   if (cmd.rest.length > 1) {
     stderr.writeln('Podaj jeden katalog przebiegu albo żaden (weźmie ostatni).');
@@ -1337,7 +1315,11 @@ String? _runDir(ArgResults cmd) {
   }
   if (cmd.rest.length == 1) {
     final arg = _resolve(cmd.rest.single);
-    return FileSystemEntity.isDirectorySync(arg) ? arg : p.dirname(arg);
+    if (!FileSystemEntity.isDirectorySync(arg)) {
+      stderr.writeln('To nie jest katalog przebiegu: $arg');
+      return null;
+    }
+    return arg;
   }
   final latest = latestOutDir();
   if (latest == null) {
@@ -1482,7 +1464,7 @@ piosenkomat: sitko mejli z piosenkami na $kInboxEmail.
   ./piosenkomat scan [-n N] [--newest] [-o katalog]
       queueQuery (inbox bez song/*, po wątkach) → katalog out/import-<data>/:
       raport, plan, candidates-new.hrcpsng, candidates-correction.hrcpsng
-      (notes przy piosenkach), reviewed-*.hrcpsng, people.dart. Gmaila tylko czyta
+      (notes przy piosenkach), reviewed-*.hrcpsng. Gmaila tylko czyta
   ./piosenkomat label scanned [katalog] --push
       werdykty automatu na mejle: „$kLabelReady”, „song/rejected/…”,
       „$kLabelToReview”, wszystko ze znacznikiem „$kLabelAuto”
@@ -1509,9 +1491,10 @@ piosenkomat: sitko mejli z piosenkami na $kInboxEmail.
       w Gmailu, czy werdykty, odpowiedzi i queueQuery starej apki są domknięte
   ./piosenkomat explain plik.eml [...]
       klasyfikacja lokalnych plików, bez Gmaila
-  ./piosenkomat strip [katalog]
+  ./piosenkomat prepare [katalog]
       reviewed-*.hrcpsng → final-*.hrcpsng bez pola `piosenkomat`; poprawki
-      dostają id poprawianej piosenki i listę „co podmienić"
+      dostają id poprawianej piosenki i listę „co podmienić”; do tego
+      people.dart z osób, które naprawdę weszły
 
 Bez katalogu komendy biorą ostatni przebieg z out/.
 Bez --push nic w Gmailu się nie zmienia.

@@ -153,7 +153,7 @@ void main() {
     expect(reviewedPathIn(dir, SubmissionKind.newSong), p.join(dir, 'reviewed-new.hrcpsng'));
     expect(finalPathIn(dir, SubmissionKind.correction), p.join(dir, 'final-correction.hrcpsng'));
     expect(decisionsPathIn(dir), p.join(dir, 'decisions.json'));
-    expect(planPathIn(dir), p.join(dir, 'labels.json'));
+    expect(planPathIn(dir), p.join(dir, 'plan.json'));
     expect(reportPathIn(dir), p.join(dir, 'report.txt'));
     expect(peoplePathIn(dir), p.join(dir, 'people.dart'));
   });

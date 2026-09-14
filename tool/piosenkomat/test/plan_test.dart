@@ -40,7 +40,7 @@ void main() {
 
     final dir = Directory.systemTemp.createTempSync('plan');
     final path = planPathIn(dir.path);
-    expect(path, p.join(dir.path, 'labels.json'));
+    expect(path, p.join(dir.path, 'plan.json'));
     writePlan(path, plan);
     final back = readPlan(path);
     expect(back.labelsById, plan.labelsById);

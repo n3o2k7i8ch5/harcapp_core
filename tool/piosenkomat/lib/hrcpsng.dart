@@ -105,8 +105,8 @@ String defaultSongsDbPath() {
 
 /// Osobny katalog na każdy przebieg, żeby drugi `scan` nie nadpisał pierwszego.
 /// W środku: `candidates-new.hrcpsng`, `candidates-correction.hrcpsng`,
-/// `reviewed-*.hrcpsng`, `people.dart`, `labels.json`, `report.txt`,
-/// a po przeglądzie `decisions.json`.
+/// `reviewed-*.hrcpsng`, `plan.json`, `report.txt`, a po przeglądzie
+/// `decisions.json` i `people.dart`.
 String defaultOutDir() {
   final t = DateTime.now().toIso8601String().substring(0, 19).replaceAll(':', '');
   return p.join('out', 'import-$t');
@@ -143,24 +143,10 @@ String candidatesPathIn(String outDir, SubmissionKind kind) =>
     p.join(outDir, 'candidates-${kind.id}.hrcpsng');
 String reviewedPathIn(String outDir, SubmissionKind kind) =>
     p.join(outDir, 'reviewed-${kind.id}.hrcpsng');
-/// Po `strip`: bez pola `piosenkomat`, gotowe do wklejenia w `all_songs`.
+/// Po `prepare`: bez pola `piosenkomat`, gotowe do wklejenia w `all_songs`.
 String finalPathIn(String outDir, SubmissionKind kind) =>
     p.join(outDir, 'final-${kind.id}.hrcpsng');
-/// Wcześniejsze nazwy plików kandydatów: `songs.hrcpsng`, para
-/// `auto.hrcpsng` + `review.hrcpsng`, `candidates.hrcpsng`. Czytamy wszystkie
-/// jako nowe piosenki — poprawek wtedy nie było.
-List<String> legacyCandidatesPathsIn(String outDir) => [
-      p.join(outDir, 'songs.hrcpsng'),
-      p.join(outDir, 'auto.hrcpsng'),
-      p.join(outDir, 'review.hrcpsng'),
-      p.join(outDir, 'candidates.hrcpsng'),
-    ];
-/// Wcześniejsze nazwy pliku zwrotnego: `approved.hrcpsng`, `reviewed.hrcpsng`.
-List<String> legacyReviewedPathsIn(String outDir) => [
-      p.join(outDir, 'reviewed.hrcpsng'),
-      p.join(outDir, 'approved.hrcpsng'),
-    ];
-String planPathIn(String outDir) => p.join(outDir, 'labels.json');
+String planPathIn(String outDir) => p.join(outDir, 'plan.json');
 String reportPathIn(String outDir) => p.join(outDir, 'report.txt');
 String peoplePathIn(String outDir) => p.join(outDir, 'people.dart');
 /// Ślad przeglądu: co weszło, co wypadło.
@@ -173,7 +159,7 @@ String decisionsPathIn(String outDir) => p.join(outDir, 'decisions.json');
 ///
 /// Ślad to nie tylko pole `piosenkomat`: `contributor_data.email_thread_id`
 /// też jest nasz. Wiąże piosenkę ze zgłoszeniem przez cały przebieg (zapasowy
-/// klucz dopasowania w `label reviewed`, który idzie przed `strip`), ale
+/// klucz dopasowania w `label reviewed`, który idzie przed `prepare`), ale
 /// w `all_songs` byłby tylko wyciekiem id wątku ze skrzynki.
 List<(String, String)> stripPiosenkomat(List<SongRaw> songs) {
   final targets = <(String, String)>[];

@@ -25,18 +25,17 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
    Czyta kolejkę, parsuje, porównuje z apką i między sobą, zapisuje katalog
    `out/import-<data>/`: 
    - `report.txt`,
-   - `labels.json`,
+   - `plan.json`,
    - `candidates-new.hrcpsng`,
    - `candidates-correction.hrcpsng`,
-   - kopie `reviewed-*.hrcpsng`,
-   - `people.dart`.  
+   - kopie `reviewed-*.hrcpsng`.  
    ####
    [Jak automat decyduje](#jak-automat-decyduje).
    ####
 2. **Etykiety automatu.**  
    `./piosenkomat label scanned --push`  
    ####
-   Wrzyca labele z `labels.json` na Gmaila. Pomija mejle, które w międzyczasie dostały już jakąś etykietę `song/*`. Pomyłka → `unlabel --push`.
+   Wrzyca labele z `plan.json` na Gmaila. Pomija mejle, które w międzyczasie dostały już jakąś etykietę `song/*`. Pomyłka → `unlabel --push`.
    ####
 3. **Przegląd na stronie.**  
    *(ręcznie)*  
@@ -61,21 +60,22 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
    Piosenka z ✓ → `ready-to-add`; z ✗ albo skasowana →
    `rejected/after-review`; z odpowiedzią → `contributor/to-ask`.
    ####
-   Szczegóły i warunki STOP → [Przegląd i strip](#przegląd-i-strip).
+   Szczegóły i warunki STOP → [Przegląd i prepare](#przegląd-i-prepare).
    ####
-5. **Osoby dodające.**  
-   *(ręcznie)*  
+5. **Piosenki do śpiewnika.**  
+   `./piosenkomat prepare` (zdjęcie z plików .hrcpsng metadanych piosenkomatu), potem *(ręcznie)*  
    ####
-   Doklejasz `out/import-<data>/people.dart` na koniec `lib/values/people/data.dart`.
-   Po kroku 4, bo dopiero on mówi, czyje piosenki wypadły → [Osoby dodające](#osoby-dodające).
-   ####
-6. **Piosenki do śpiewnika.**  
-   `./piosenkomat strip` (usunięcie z pliku .hrcpsng metadanych piosenkomatu), potem *(ręcznie)*  
-   ####
-   `reviewed-*.hrcpsng` → `final-*.hrcpsng` bez śladu piosenkomatu; wklejasz do
+   `reviewed-*.hrcpsng` → `final-*.hrcpsng` bez śladu piosenkomatu, plus
+   `people.dart` z osób, które naprawdę weszły. Pliki `final-*` wklejasz do
    `assets/songs/all_songs.hrcpsng` i commitujesz. Dopóki tam nie są, `label added`
    kłamie (mejl zamknięty, piosenki w apce nie ma), a następny `scan` nie
    rozpozna ich jako duplikatów.
+   ####
+6. **Osoby dodające.**  
+   *(ręcznie)*  
+   ####
+   Doklejasz `out/import-<data>/people.dart` na koniec `lib/values/people/data.dart`,
+   zanim wkleisz piosenki → [Osoby dodające](#osoby-dodające).
    ####
 7. **Domknięcie mejli.**  
    `./piosenkomat label added --push`  
@@ -99,7 +99,7 @@ starej apki → [Stara apka](#stara-apka-reply).
 |---|---|---|
 | `scan [-n N] [--newest] [-o KATALOG]` | przesiew N najstarszych (bez `-n` — całej kolejki; `--newest` — najnowszych) | czyta |
 | `explain plik.eml` | klasyfikacja lokalnego pliku | nie dotyka |
-| `label scanned [KATALOG]` | pokazuje plan etykiet z `labels.json` | czyta |
+| `label scanned [KATALOG]` | pokazuje plan przebiegu z `plan.json` | czyta |
 | `label reviewed [KATALOG]` | pokazuje decyzje z `reviewed-*` | czyta |
 | `label added [KATALOG]` | pokazuje, co domknie | czyta |
 | `unlabel [KATALOG]` | pokazuje, co cofnie | czyta |
@@ -109,7 +109,7 @@ starej apki → [Stara apka](#stara-apka-reply).
 | `reply --all …` | cała stojąca kolejka, nie tylko przebieg | czyta |
 | `reopen` | kto odpisał na Twoje pytanie — wraca do kolejki | czyta |
 | `clean [KATALOG]` | kasuje katalog domkniętego przebiegu | czyta |
-| `strip [KATALOG]` | `reviewed-*` → `final-*` | nie dotyka |
+| `prepare [KATALOG]` | `reviewed-*` → `final-*` plus `people.dart` | nie dotyka |
 | `… --push` | wykonuje to, co bez flagi tylko pokazał | **pisze** |
 
 Komendy na przebiegu bez `KATALOG` biorą **ostatni** z `out/`.
@@ -258,10 +258,10 @@ tagi widzi użytkownik apki):
 `correction_target` — którą piosenkę w apce poprawia — jest **zgadywany**
 po tytule/tekście, bo mejl z apki tego nie niesie (apka powinna kiedyś dokładać
 `### Poprawiana piosenka: <lclId>`). Pole nigdy nie jedzie do `all_songs.hrcpsng`:
-`toApiJsonMap` wypuszcza je tylko na życzenie narzędzia, a `strip` zdejmuje je
+`toApiJsonMap` wypuszcza je tylko na życzenie narzędzia, a `prepare` zdejmuje je
 przed wgraniem.
 
-## Przegląd i `strip`
+## Przegląd i `prepare`
 
 `label reviewed` porównuje `candidates-*` z `reviewed-*` po id wątku
 (`thread_id` w `piosenkomat`, zapasowo `contributor_data.email_thread_id`; gdyby
@@ -277,7 +277,7 @@ oba zginęły — po kolei id piosenki, tytuł, tekst):
 
 **Przełącznik zastępuje kasowanie, nie zabrania go.** Brak flagi znaczy
 „wchodzi”, więc dotykasz tylko tych, które odrzucasz, a kasowanie działa jak
-dotąd — stare pliki zwrotne też. `strip` bierze do `final-*` wyłącznie te z ✓.
+dotąd — stare pliki zwrotne też. `prepare` bierze do `final-*` wyłącznie te z ✓.
 
 Brak pliku zwrotnego danego rodzaju = tej części jeszcze nie przeglądałeś. Ślad
 decyzji w `decisions.json` — z werdyktem i odpowiedzią, bo stamtąd bierze je
@@ -287,7 +287,7 @@ później `reply`.
 zły rodzaj w pliku (poprawka w `reviewed-new`), dwie zachowane poprawki tej samej
 piosenki. **Bezpieczniki** (`--force` przechodzi): pusty plik, odrzucona ponad połowa.
 
-`strip` zdejmuje pole `piosenkomat` z `reviewed-*` → `final-*.hrcpsng`. Przy
+`prepare` zdejmuje pole `piosenkomat` z `reviewed-*` → `final-*.hrcpsng`. Przy
 poprawkach ustawia `id = correction_target` — apka referencjonuje piosenki po `lclId`
 (ulubione, albumy, oceny), więc poprawiony tytuł nie może zmienić id — i wypisuje
 listę „co podmienić”.
@@ -299,9 +299,9 @@ Katalog przebiegu **nie jest śmieciem od razu** po wgraniu piosenek do
 
 | co | dopóki |
 |---|---|
-| plan etykiet (`labels.json`) | `label reviewed` i `label added` mają co robić |
+| plan przebiegu (`plan.json`) | `label reviewed` i `label added` mają co robić |
 | teksty odpowiedzi (`decisions.json`) | `reply` nie wyśle ich autorom |
-| pliki `.hrcpsng` | nie skończysz przeglądu i `strip`a |
+| pliki `.hrcpsng` | nie skończysz przeglądu i `prepare` |
 
 Najłatwiej przeoczyć ten drugi: odpowiedź do osoby dodającej piszesz w edytorze, ale
 mejl wychodzi czasem długo później, a tekst siedzi w `decisions.json`. Katalog
@@ -414,11 +414,16 @@ w kształcie `lib/values/people/data.dart`, tylko dla osób, których tam jeszcz
 ma (po adresie). Adres nadawcy jest zawsze pierwszy w `emails`, bo to on siedzi
 w `email_ref` piosenki i po nim `ContributorRef.resolve()` znajduje osobę.
 Doklejasz na koniec `data.dart`, `data.all.g.dart` przegeneruje pre-commit.
-`label reviewed` wypisuje adresy osób, którym wszystkie piosenki wypadły — tych
-nie dopisujesz.
+
+Plik powstaje przy `prepare`, nie przy `scan`, i czyta osoby **z samych piosenek,
+które wchodzą** — tych z `final-*.hrcpsng`, już bez wywalonych przy przeglądzie
+i bez zgaszonego przełącznika. Dzięki temu łapią się też Twoje poprawki karty
+osoby zrobione na stronie. Jedyne, czego piosenka nie niesie, to dodatkowe
+adresy z bloku „Osoba dodająca” (`ContributorRef` ma jeden `email_ref`) — te
+czekają w `plan.json` i `prepare` dokłada je po nadawcy.
 
 W komentarzach na końcu pliku: nadawcy już obecni w `data.dart` oraz piosenki bez
-bloku „Osoba dodająca” (mają tylko `email_ref`, nie ma kogo dopisać).
+karty osoby (mają tylko `email_ref`, nie ma kogo dopisać).
 
 ## Dev
 
@@ -426,6 +431,6 @@ Parser ciągnie `SongRaw`, a ten Fluttera, więc `dart run` nie działa. `./pios
 odpala pod spodem `flutter test test/cli_harness.dart`, stąd prefiks `Shell:`
 w wyjściu. Testy: `flutter test` w `tool/piosenkomat`.
 
-Stare nazwy komend (`process`, `apply`, `review`, `commit`, `unapply`, `check`) i flagi
-`--write` / `--apply` działają jako ciche aliasy, ale nie ma ich w pomocy. `process --apply`
-już nie etykietuje po przesiewie — etykiety nadaje osobny `label scanned --push`.
+Jedna nazwa na jedną rzecz: żadnych aliasów komend, ukrytych synonimów flag ani
+czytania plików pod starymi nazwami. Komendy są tylko te z pomocy, pisze wyłącznie
+`--push`, a plan przebiegu nazywa się `plan.json`.

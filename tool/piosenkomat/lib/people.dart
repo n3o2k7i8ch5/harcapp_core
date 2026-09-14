@@ -1,11 +1,11 @@
 import 'package:harcapp_core/comm_classes/text_utils.dart';
+import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/values/people/data.all.g.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
 
 import 'hrcpsng.dart';
-import 'model.dart';
 
 /// Osoba dodająca z zaimportowanej piosenki, której nie ma jeszcze
 /// w `lib/values/people/data.dart`.
@@ -26,7 +26,7 @@ class PeopleReport {
   final List<NewContributor> newContributors;
   /// Nadawcy już obecni w `data.dart` (nic do dopisania).
   final Map<String, List<String>> knownByEmail;
-  /// Piosenki bez bloku „Osoba dodająca”: w `data.dart` nie będzie kogo dopisać.
+  /// Piosenki bez karty osoby: w `data.dart` nie będzie kogo dopisać.
   final Map<String, List<String>> anonymousByEmail;
 
   const PeopleReport({
@@ -36,33 +36,85 @@ class PeopleReport {
   });
 }
 
-/// Zbiera osoby dodające z piosenek, które poszły do plików — i tych bez
-/// zarzutu, i tych do przeglądu, bo jedne i drugie mogą skończyć w apce.
-/// Nadawca zawsze ląduje w `emails`, bo to jego adres siedzi w `email_ref`
-/// piosenki i po nim `ContributorRef` odnajduje osobę.
-PeopleReport collectPeople(List<Classified> items) {
+/// Piosenka, która wchodzi do apki — tyle o niej, ile trzeba, żeby dopisać
+/// osobę dodającą do `data.dart`.
+class ContributorSource {
+  /// Adres nadawcy: to on siedzi w `email_ref` piosenki i po nim
+  /// `ContributorRef` odnajduje osobę.
+  final String sender;
+  final String title;
+  /// Karta osoby wyjęta z piosenki — a więc już po Twoich poprawkach
+  /// z przeglądu, nie ta sparsowana z mejla.
+  final Person? person;
+  /// Pozostałe adresy, które autor zadeklarował w mejlu. Piosenka ich nie
+  /// niesie (`ContributorRef` ma jeden `emailRef`), więc idą bokiem, z planu.
+  final List<String> otherEmails;
+
+  const ContributorSource({
+    required this.sender,
+    required this.title,
+    this.person,
+    this.otherEmails = const [],
+  });
+}
+
+/// Osoby z piosenek, które **wchodzą do apki** — czyli z `final-*.hrcpsng`,
+/// po przeglądzie. Wcześniej nie ma sensu: kogo wywalisz na stronie, tego nie
+/// ma po co dopisywać do `data.dart`.
+List<ContributorSource> contributorSourcesOf(
+  List<SongRaw> songs, {
+  Map<String, List<String>> otherEmailsBySender = const {},
+}) {
+  final out = <ContributorSource>[];
+  for (final song in songs) {
+    final sender = (song.contributorData?.email ?? '').trim().toLowerCase();
+    if (sender.isEmpty) continue;
+    out.add(ContributorSource(
+      sender: sender,
+      title: song.title,
+      person: _personOf(song, sender),
+      otherEmails: otherEmailsBySender[sender] ?? const [],
+    ));
+  }
+  return out;
+}
+
+/// Karta osoby dopięta do adresu nadawcy. Zwykle `_enrich` wstawił adres
+/// wprost w jej `emailRef`; jeśli przy przeglądzie adres z niej zniknął,
+/// a karta jest w piosence jedna — to ona.
+Person? _personOf(SongRaw song, String sender) {
+  for (final c in song.contribRefs) {
+    if (c.person != null &&
+        (c.emailRef ?? '').trim().toLowerCase() == sender) return c.person;
+  }
+  final withPerson = [for (final c in song.contribRefs) if (c.person != null) c];
+  return withPerson.length == 1 && (withPerson.single.emailRef ?? '').trim().isEmpty
+      ? withPerson.single.person
+      : null;
+}
+
+/// Zbiera osoby dodające z piosenek, które wchodzą. Nadawca zawsze ląduje
+/// w `emails`, bo to jego adres siedzi w `email_ref` piosenki.
+PeopleReport collectPeople(List<ContributorSource> items) {
   final newOnes = <String, NewContributor>{};
   final known = <String, List<String>>{};
   final anonymous = <String, List<String>>{};
 
   for (final c in items) {
-    if (!c.goesToFile) continue;
-    final sender = c.submission.sender;
-    if (sender == null) continue;
-    final registered = c.submission.registered;
+    final sender = c.sender;
 
     if (allRegisteredPeopleByEmailMap.containsKey(sender)) {
       known.putIfAbsent(sender, () => []).add(c.title);
       continue;
     }
-    if (registered == null) {
+    if (c.person == null) {
       anonymous.putIfAbsent(sender, () => []).add(c.title);
       continue;
     }
 
     final emails = <String>{
       sender,
-      for (final e in registered.emails) e.trim().toLowerCase(),
+      for (final e in c.otherEmails) e.trim().toLowerCase(),
     }..removeWhere((e) => e.isEmpty);
 
     final alreadyKnown = emails.any(allRegisteredPeopleByEmailMap.containsKey);
@@ -83,7 +135,7 @@ PeopleReport collectPeople(List<Classified> items) {
       );
     } else {
       newOnes[key] = NewContributor(
-        person: registered.person,
+        person: c.person!,
         emails: emails.toList(),
         songTitles: [c.title],
       );
