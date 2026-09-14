@@ -84,7 +84,7 @@ const String oldestFormatReplyMessage =
     '[iOS]\n'
     'https://apps.apple.com/us/app/harcapp/id6754627071\n'
     '\n'
-    'Nowe piosenki (w tym ta) lądują tylko w nowej wersji apki!\n'
+    'Nowe piosenki lądują tylko w nowej wersji apki!\n'
     '\n'
     'Daj proszę przy okazji znać o tym w swoim środowisku! :)\n'
     '\n'

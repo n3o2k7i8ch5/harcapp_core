@@ -33,6 +33,12 @@ const String kLabelUnparsable = 'song/unparsable';
 /// Etykieta jest kolejką — `reply` ją zdejmuje i wiesza [kLabelOldAppReplied].
 const String kLabelOldAppToReply = 'song/old-app/to-reply';
 const String kLabelOldAppReplied = 'song/old-app/replied';
+/// `reply --draft --push` przygotował szkic i czeka, aż go przejrzysz.
+/// Wisi **obok** [kLabelOldAppToReply], nie zamiast — nikt jeszcze nic nie
+/// dostał, więc autor zostaje w kolejce. Chroni przed drugim szkicem dla tej
+/// samej osoby i mówi `reply --push`, że ma wysłać gotowy szkic zamiast
+/// składać mejl od nowa.
+const String kLabelOldAppDrafted = 'song/old-app/drafted';
 
 /// Podkategorie przeglądu, jedna na powód. Mejl z kilkoma powodami dostaje kilka.
 enum ReviewKind {
@@ -89,6 +95,7 @@ final List<String> kToolLabels = [
   kLabelUnparsable,
   kLabelOldAppToReply,
   kLabelOldAppReplied,
+  kLabelOldAppDrafted,
   for (final k in ReviewKind.values) k.label,
 ];
 

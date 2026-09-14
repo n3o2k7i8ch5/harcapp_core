@@ -91,7 +91,10 @@ starej apki → [Stara apka](#stara-apka-reply).
 | `label reviewed [KATALOG]` | pokazuje decyzje z `reviewed-*` | czyta |
 | `label added [KATALOG]` | pokazuje, co domknie | czyta |
 | `unlabel [KATALOG]` | pokazuje, co cofnie | czyta |
-| `reply [-n N]` | kto czeka na „zaktualizuj apkę” | czyta |
+| `reply [KATALOG] [-n N]` | kto z przebiegu czeka na „zaktualizuj apkę” | czyta |
+| `reply --draft [KATALOG]` | szkice do przejrzenia zamiast wysyłki | czyta |
+| `reply --undraft [KATALOG]` | kasuje szkice, nikomu nic nie wysyłając | czyta |
+| `reply --all …` | cała stojąca kolejka, nie tylko przebieg | czyta |
 | `strip [KATALOG]` | `reviewed-*` → `final-*` | nie dotyka |
 | `… --push` | wykonuje to, co bez flagi tylko pokazał | **pisze** |
 
@@ -135,6 +138,7 @@ song/
 │   └── no-consent            brak zgody albo nie wiadomo, kto zgłosił
 ├── old-app/                  ZNACZNIK: mejl z najstarszej, nierozwijanej apki
 │   ├── to-reply              kolejka: autorowi trzeba odpisać (`reply`)
+│   ├── drafted               szkic czeka w wątku na Twoje oko; wisi OBOK to-reply
 │   └── replied               odpowiedź poszła
 └── auto                      ZNACZNIK: tę etykietę stanu nadał automat
 ```
@@ -268,15 +272,47 @@ jeszcze nie było. Treść bywa kompletna, więc **stary format nie blokuje impo
 `consentVersion` dostaje sentinel `brak (stara apka)` (bez uwagi `no-consent`;
 do wygrepowania, gdybyś chciał doprosić o zgodę), a mejl etykietę `song/old-app/to-reply`.
 
-Ta etykieta jest kolejką odpowiedzi i jedynym źródłem prawdy, komu nie odpisano —
-stąd `reply` nie bierze katalogu. Jedna odpowiedź na autora, nie na mejl: kto
-przysłał pięć piosenek, dostaje jeden mejl w najnowszym wątku, a `to-reply`
-schodzi ze wszystkich pięciu i wchodzi `replied`. Przerwany przebieg dokańcza
-powtórzenie komendy. Treść: `oldestFormatReplyMessage` z `harcapp_core`. `-n`
-ogranicza liczbę autorów (Gmail tnie ok. 500 mejli na dobę).
+Ta etykieta jest kolejką odpowiedzi i jedynym źródłem prawdy, komu nie odpisano.
+Jedna odpowiedź na autora, nie na mejl: kto przysłał pięć piosenek, dostaje jeden
+mejl w najnowszym wątku, a `to-reply` schodzi ze wszystkich pięciu i wchodzi
+`replied`. Przerwany przebieg dokańcza powtórzenie komendy. Treść:
+`oldestFormatReplyMessage` z `harcapp_core`. `-n` ogranicza liczbę autorów
+(Gmail tnie ok. 500 mejli na dobę).
+
+**Zakresem jest przebieg**, jak w pozostałych komendach: bez argumentu ostatni
+z `out/`. Etykieta dalej mówi, *komu* nie odpisano — katalog tylko zawęża do
+tych, których sam przyniósł. Zaległość spoza przebiegu (a bywa jej sporo — to
+kolejka stojąca od zawsze) bierze dopiero `--all`; własne `--query` też omija
+zawężenie.
 
 Etykietę można ruszać ręcznie: zdjęta znaczy „nie zawracaj mu głowy”, dowieszona
 wsadza z powrotem do kolejki.
+
+### Szkice (`reply --draft`)
+
+Żeby zobaczyć mejl przed wysyłką, rozbij `reply` na dwa kroki:
+
+```bash
+./piosenkomat reply --draft --push   # szkice w wątkach, nikt nic nie dostaje
+#  …przejrzyj i popraw w Gmailu…
+./piosenkomat reply --push           # wysyła gotowe szkice, z Twoimi poprawkami
+```
+
+Rozmyśliłeś się? `./piosenkomat reply --undraft --push` kasuje szkice i zdejmuje
+`drafted`. Nikt nic nie dostał, więc autorzy zostają w kolejce `to-reply`.
+
+`--draft` wiesza `old-app/drafted` **obok** `to-reply`, nie zamiast: skoro nikt
+nic nie dostał, autor zostaje w kolejce. Drugi `--draft` pomija tych, co szkic
+już mają — po etykiecie, a gdyby ta zeszła (`unlabel`), po samym szkicu
+w wątku. Wysyłka idzie przez `drafts.send`, więc to, co poprawisz w Gmailu,
+leci w świat; obie etykiety schodzą i wchodzi `replied`.
+
+Szkic skasowany albo wysłany ręcznie z Gmaila też jest obsłużony: jeśli w wątku
+jest już nasza wysłana wiadomość, `reply --push` uznaje za odpisane i tylko
+przestawia etykiety — drugiego mejla autor nie dostanie. Jeśli nie ma, składa
+mejl normalnie.
+
+Szkic potrzebuje tylko zakresu `gmail.modify`, ten sam co etykiety.
 
 ## Osoby dodające
 

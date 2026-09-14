@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:path/path.dart' as p;
 
@@ -159,6 +160,11 @@ String decisionsPathIn(String outDir) => p.join(outDir, 'decisions.json');
 /// **ustawia `id = correction_target`**: w apce piosenki są referencjonowane
 /// po `lclId` (ulubione, albumy, oceny), więc poprawiony tytuł nie może
 /// zmienić id. Zwraca listę `(id w apce, tytuł po poprawce)` do podmiany.
+///
+/// Ślad to nie tylko pole `piosenkomat`: `contributor_data.email_thread_id`
+/// też jest nasz. Wiąże piosenkę ze zgłoszeniem przez cały przebieg (zapasowy
+/// klucz dopasowania w `label reviewed`, który idzie przed `strip`), ale
+/// w `all_songs` byłby tylko wyciekiem id wątku ze skrzynki.
 List<(String, String)> stripPiosenkomat(List<SongRaw> songs) {
   final targets = <(String, String)>[];
   for (final s in songs) {
@@ -168,6 +174,15 @@ List<(String, String)> stripPiosenkomat(List<SongRaw> songs) {
       targets.add((s.id, s.title));
     }
     s.piosenkomatData = null;
+    final contributor = s.contributorData;
+    if (contributor?.emailThreadId != null) {
+      s.contributorData = ContributorData(
+        email: contributor!.email,
+        contributionDate: contributor.contributionDate,
+        acceptedContributionRulesVersion:
+            contributor.acceptedContributionRulesVersion,
+      );
+    }
   }
   return targets;
 }

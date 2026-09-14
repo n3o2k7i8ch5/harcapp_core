@@ -65,11 +65,18 @@ void main() {
     ], book: book);
     final songs = [for (final c in items) c.song!..piosenkomatData = c.piosenkomatData()];
     expect(songs[1].piosenkomatData!.correctionTarget, 'tmp');
+    expect(songs.every((s) => s.contributorData?.emailThreadId != null), isTrue,
+        reason: 'przed stripem id wątku wiąże piosenkę ze zgłoszeniem');
     final targets = stripPiosenkomat(songs);
     expect(songs.every((s) => s.piosenkomatData == null), isTrue);
     expect(songs[1].id, 'tmp', reason: 'apka referencjonuje piosenki po lclId');
     expect(targets, [('tmp', 'Stara (popr.)')]);
     expect(songs[0].id, startsWith('o!_'));
+    // Ślad to nie tylko pole `piosenkomat` — id wątku ze skrzynki też jest nasze.
+    expect(songs.every((s) => s.contributorData?.emailThreadId == null), isTrue);
+    expect(songs.every((s) => s.contributorData?.email.isNotEmpty ?? false), isTrue,
+        reason: 'reszta contributor_data zostaje — to dane autora, nie nasz ślad');
+    expect(encodeHrcpsng(songs), isNot(contains('email_thread_id')));
   });
 
   test('raport liczy nowe, poprawki, odrzuty i sam mejl', () async {

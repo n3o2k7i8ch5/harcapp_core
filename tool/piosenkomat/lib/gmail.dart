@@ -50,6 +50,8 @@ class GmailMailbox {
   static const int _costLabelCreate = 5;
   static const int _costLabelList = 1;
   static const int _costSend = 100;
+  static const int _costDraftCreate = 10;
+  static const int _costDraftList = 5;
   double _units = 0;
   DateTime _refilled = DateTime.now();
 
@@ -225,6 +227,64 @@ class GmailMailbox {
               'me',
             ),
         cost: _costSend);
+  }
+
+  /// To samo, co [replyTo], ale zostaje szkicem w wątku — do przejrzenia
+  /// i poprawienia w Gmailu, zanim pójdzie w świat. Zwraca id szkicu.
+  Future<String> draftReplyTo(ReplyTarget target, String text) async {
+    final raw = _mimeReply(target, text);
+    final draft = await _call(
+        () => _api.users.drafts.create(
+              Draft()
+                ..message = (Message()
+                  ..raw = base64Url.encode(utf8.encode(raw))
+                  ..threadId = target.threadId),
+              'me',
+            ),
+        cost: _costDraftCreate);
+    return draft.id!;
+  }
+
+  /// Szkice po wątku, w którym siedzą. Jedno zapytanie zamiast jednego na
+  /// autora — `drafts.list` i tak oddaje `message.threadId` przy każdym.
+  Future<Map<String, String>> draftIdsByThread() async {
+    final out = <String, String>{};
+    String? page;
+    do {
+      final resp = await _call(
+          () => _api.users.drafts.list('me', maxResults: 500, pageToken: page),
+          cost: _costDraftList);
+      for (final d in resp.drafts ?? const <Draft>[]) {
+        final threadId = d.message?.threadId;
+        if (d.id != null && threadId != null) out[threadId] = d.id!;
+      }
+      page = resp.nextPageToken;
+    } while (page != null);
+    return out;
+  }
+
+  /// Kasuje szkic. Po pomyłkowym `--draft`: nic nie poszło w świat, więc
+  /// wystarczy sprzątnąć szkic i zdjąć „$kLabelOldAppDrafted”.
+  Future<void> deleteDraft(String draftId) async {
+    await _call(() => _api.users.drafts.delete('me', draftId),
+        cost: _costDraftCreate);
+  }
+
+  /// Wysyła gotowy szkic — z Twoimi poprawkami, jeśli jakieś zrobiłeś.
+  Future<void> sendDraft(String draftId) async {
+    await _call(() => _api.users.drafts.send(Draft()..id = draftId, 'me'),
+        cost: _costSend);
+  }
+
+  /// Czy w wątku jest już cokolwiek wysłanego z naszej skrzynki. Po tym
+  /// poznajemy szkic wysłany ręcznie z Gmaila — wtedy szkicu już nie ma,
+  /// a drugiego mejla autor dostać nie może.
+  Future<bool> threadHasSentMessage(String threadId) async {
+    final thread = await _call(
+        () => _api.users.threads.get('me', threadId, format: 'minimal'),
+        cost: _costGet);
+    return (thread.messages ?? const <Message>[])
+        .any((m) => (m.labelIds ?? const <String>[]).contains('SENT'));
   }
 
   /// Dane potrzebne do odpowiedzi. Osobny strzał po nagłówki, bo
