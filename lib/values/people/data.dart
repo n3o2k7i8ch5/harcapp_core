@@ -299,6 +299,14 @@ const RegisteredContributor ALEKSANDRA_TKOCZ = RegisteredContributor(
   ),
   emails: ['nikiii2115@gmail.com'],
 );
+const RegisteredContributor ALEKSANDRA_TOWALSKA = RegisteredContributor(
+  person: Person(
+    name: 'Aleksandra Towalska',
+      druzyna: '47 Drużyna Starszoharcerska ,,Brzost"',
+      srodowisko: Srodowisko.hufiec('piaseczno', showChoragiew: false, showOkreg: false),
+  ),
+  emails: ['transport.hds.warszawa@gmail.com', 'ola.tova@op.pl'],
+);
 const RegisteredContributor ALEKSANDRA_WOJCIECHOWSKA = RegisteredContributor(
   person: Person(
     name: 'Aleksandra Wojciechowska',
@@ -1194,6 +1202,13 @@ const RegisteredContributor HANNA_KUJAWSKA = RegisteredContributor(
       druzyna: '6. DSH „Wataha”',
   ),
   emails: ['kujawskahanka@gmail.com'],
+);
+const RegisteredContributor HANNA_OLESZOWSKA = RegisteredContributor(
+  person: Person(
+    name: 'Hanna Oleszowska',
+      srodowisko: Srodowisko.org('zhr'),
+  ),
+  emails: ['holeszowska@gmail.com'],
 );
 const RegisteredContributor HANNA_RYBACKA = RegisteredContributor(
   person: Person(
@@ -3857,6 +3872,14 @@ const RegisteredContributor NATASZA_OLSZANSKA = RegisteredContributor(
   ),
   emails: ['natasza.olszanska1@gmail.com'],
 );
+const RegisteredContributor NA_PEWNO_NIE_RYSZARD = RegisteredContributor(
+  person: Person(
+    name: 'na pewno nie Ryszard',
+      druzyna: '32 SDŚ',
+      rankHarc: RankHarc.zhpMlodzik,
+  ),
+  emails: ['pecynanatan@gmail.com'],
+);
 const RegisteredContributor NINA_GACEK = RegisteredContributor(
   person: Person(
     name: 'Nina Gacek',
@@ -5054,6 +5077,14 @@ const RegisteredContributor WOJCIECH_GODECKI = RegisteredContributor(
       srodowisko: Srodowisko.hufiec('dabrowa_gornicza', showChoragiew: false, showOkreg: false, showOrg: false),
   ),
   emails: ['wojciech.godecki@zhp.net.pl'],
+);
+const RegisteredContributor WOJCIECH_GOLIS = RegisteredContributor(
+  person: Person(
+    name: 'Wojciech Golis',
+      druzyna: '22 Ożarowski Szczep "Chabry"',
+      srodowisko: Srodowisko.hufiec('blonie', showChoragiew: false, showOkreg: false),
+  ),
+  emails: ['wojciech.golis@zhp.net.pl'],
 );
 const RegisteredContributor WOJCIECH_GRUSZCZYNSKI = RegisteredContributor(
   person: Person(
