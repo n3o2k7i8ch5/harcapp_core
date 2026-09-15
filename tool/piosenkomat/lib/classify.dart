@@ -95,7 +95,17 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
   final profile = song == null ? null : SongProfile(song);
   // Apka mówi, którą piosenkę autor poprawiał: porównujemy z NIĄ, a nie
   // z najbliższą tytułem. Bez tej deklaracji zostaje zgadywanie.
-  final declaredTarget = parsed?.correctedSongId?.trim();
+  //
+  // Dwa źródła tego samego id: linia „### Poprawiana piosenka” w treści i pole
+  // `corrected_song_id` w JSON-ie piosenki (piosenka własna pamięta swój
+  // pierwowzór). Linia bywa złamana albo zacytowana, JSON jedzie też
+  // w załączniku — więc bierzemy, co jest. Ale tylko w poprawce: piosenka
+  // przerobiona z cudzej i wysłana jako nowa też niesie `corrected_song_id`,
+  // a to żadna deklaracja — poprawką jest wyłącznie to, co autor wysłał
+  // jako poprawkę.
+  final declaredTarget = isCorrection
+      ? (parsed?.correctedSongId ?? song?.correctedSongId)?.trim()
+      : null;
   final declared = declaredTarget == null || declaredTarget.isEmpty
       ? null
       : declaredTarget;
@@ -141,16 +151,21 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
         sentAt: b.sentAt,
         similarities: compare(profiles[a.threadId]!, profiles[b.threadId]!),
         isNewestInBatch: newest,
+        correctionTarget: b.correctionTarget,
       );
+
+  String keyOf(Submission s) {
+    final key = s.isCorrection && s.correctionTarget != null
+        ? 'target:${s.correctionTarget}'
+        : 'title:${searchableString(s.title)}';
+    return '${s.kind.id}|$key';
+  }
 
   // Grupy.
   final groups = <String, List<Submission>>{};
   for (final s in subs) {
     if (s.song == null) continue;
-    final key = s.isCorrection
-        ? (s.correctionTarget == null ? 'title:${searchableString(s.title)}' : 'target:${s.correctionTarget}')
-        : 'title:${searchableString(s.title)}';
-    groups.putIfAbsent('${s.kind.id}|$key', () => []).add(s);
+    groups.putIfAbsent(keyOf(s), () => []).add(s);
   }
 
   for (final group in groups.values) {
@@ -185,15 +200,20 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
     }
   }
 
-  // Parami, różne tytuły, podobny tekst — tylko tam, gdzie grupa nic nie dała.
+  // Parami, między grupami — tylko tam, gdzie grupa nic nie dała. Nowe
+  // o wspólnym tytule już się spotkały w grupie, więc tu liczy się sam tekst.
+  // Poprawki grupuje cel, więc dwie poprawki „Barki” o różnych albo
+  // nieznanych celach spotykają się dopiero tutaj — i mają się zobaczyć bez
+  // względu na tekst, jak w grupie.
   final list = out.values.where((s) => s.song != null).toList();
   for (var i = 0; i < list.length; i++) {
     for (var j = i + 1; j < list.length; j++) {
       final a = list[i], b = list[j];
-      if (a.kind != b.kind) continue;
-      if (profiles[a.threadId]!.sharesTitleWith(profiles[b.threadId]!)) continue;
+      if (a.kind != b.kind || keyOf(a) == keyOf(b)) continue;
+      final sameTitle = profiles[a.threadId]!.sharesTitleWith(profiles[b.threadId]!);
+      if (sameTitle && !a.isCorrection) continue;
       final score = jaccard(profiles[a.threadId]!.words, profiles[b.threadId]!.words);
-      if (score < kSimilarText) continue;
+      if (!sameTitle && score < kSimilarText) continue;
       if (out[a.threadId]!.batchMatch == null) out[a.threadId] = a.copyWith(batchMatch: matchOf(a, b));
       if (out[b.threadId]!.batchMatch == null) out[b.threadId] = b.copyWith(batchMatch: matchOf(b, a));
     }
@@ -241,24 +261,31 @@ Decision decide(Submission s) {
   if (s.isCorrection) {
     final declared = s.declaredCorrectionTarget;
     if (declared == null) {
-      // Bez deklaracji nie ma celu i nie ma zgadywania: podmiana idzie po id,
-      // więc trafienie w cudzą piosenkę kosztuje ją całą. Najbliższa piosenka
-      // z apki jedzie w opisie jako podpowiedź, nie jako decyzja.
-      add(SongIssue.noTargetInApp,
-          app == null
-              ? 'zgłoszenie nie mówi, którą piosenkę poprawia'
-              : 'zgłoszenie nie mówi, którą piosenkę poprawia; podobna: ${app.detail}');
-    } else if (app?.songId != declared) {
-      // `buildSubmission` celuje w zadeklarowaną piosenkę, więc inny `songId`
-      // w dopasowaniu znaczy, że tego id w śpiewniku nie ma: albo autor
-      // poprawiał własną piosenkę, albo id zdążyło się zmienić.
+      if (app != null && app.guessable) {
+        // Zgłoszenie nie powiedziało, co poprawia — wolno zgadnąć, ale domysł
+        // musi być widoczny: podmiana idzie po id, więc to Ty decydujesz,
+        // czy narzędzie trafiło.
+        add(SongIssue.guessedCorrectionTarget, app.detail);
+      } else {
+        // Także wtedy, gdy coś tam pasuje, ale za słabo, by na to podmieniać.
+        add(SongIssue.noTargetInApp,
+            app == null ? 'nic w apce nie pasuje tytułem ani tekstem' : 'za mało podobne: ${app.detail}');
+      }
+    } else if (!s.declaredTargetInBook) {
+      // Albo autor poprawiał własną piosenkę, albo id zdążyło się zmienić.
+      // Bez celu: podmiana po nieistniejącym id to nie podmiana.
       add(SongIssue.noTargetInApp, 'apka wskazała „$declared”, a nie ma go w śpiewniku');
     }
     // `sameSong` i reszta to normalny kształt poprawki — bez uwag o apce.
     if (batch != null) {
-      if (s.correctionTarget != null) {
+      // `batchMatch` bywa dopasowaniem po samym tekście (różne tytuły), a cele
+      // obu poprawek mogą być różne — wtedy to nie „druga poprawka tej samej
+      // piosenki”, tylko zwykły duplikat treści.
+      if (s.correctionTarget != null && batch.correctionTarget == s.correctionTarget) {
         add(SongIssue.sameTargetInBatch, batch.detail);
-      } else if (batch.level != null && batch.level != MatchLevel.similarText) {
+      } else if (batch.level == MatchLevel.similarText) {
+        add(SongIssue.similarTextInBatch, batch.detail);
+      } else if (batch.level != null) {
         add(SongIssue.sameTitleInBatch, batch.detail);
       }
     }

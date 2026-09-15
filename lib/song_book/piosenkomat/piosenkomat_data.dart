@@ -70,6 +70,8 @@ class PiosenkomatData{
   static const String PARAM_USER_MESSAGE = 'user_message';
   static const String PARAM_CORRECTION_MESSAGE = 'correction_message';
   static const String PARAM_CORRECTION_TARGET = 'correction_target';
+  /// Klucz obecny tylko wtedy, gdy cel poprawki jest domysłem.
+  static const String PARAM_CORRECTION_TARGET_GUESSED = 'correction_target_guessed';
   static const String PARAM_THREAD_ID = 'thread_id';
   static const String PARAM_RUN = 'run';
   static const String PARAM_ISSUES = 'issues';
@@ -84,9 +86,14 @@ class PiosenkomatData{
   final String? userMessage;
   /// Co autor napisał w bloku „Propozycja poprawki”. Przy poprawce oczekiwane.
   final String? correctionMessage;
-  /// Którą piosenkę w apce poprawia (`lclId`). Zgadywane po tytule/tekście,
-  /// bo mejl z apki tego nie niesie; `null` = nie znaleziono.
+  /// Którą piosenkę w apce poprawia (`lclId`); `null` = nie znaleziono.
+  /// Skąd się wziął, mówi [correctionTargetGuessed].
   final String? correctionTarget;
+  /// Czy [correctionTarget] to **domysł** narzędzia (najbliższa piosenka po
+  /// tytule i tekście), a nie id podane przez apkę w zgłoszeniu. Poprawka
+  /// podmienia piosenkę po id, więc przy domyśle trzeba spojrzeć, zanim
+  /// wejdzie.
+  final bool correctionTargetGuessed;
   /// Wątek Gmaila ze zgłoszeniem — po nim przegląd wiąże piosenkę
   /// ze zgłoszeniem, nawet gdy tytuł zmieni się przy poprawianiu.
   final String? threadId;
@@ -112,6 +119,7 @@ class PiosenkomatData{
     this.userMessage,
     this.correctionMessage,
     this.correctionTarget,
+    this.correctionTargetGuessed = false,
     this.threadId,
     this.run,
     this.issues = const [],
@@ -129,6 +137,7 @@ class PiosenkomatData{
     userMessage: userMessage,
     correctionMessage: correctionMessage,
     correctionTarget: correctionTarget,
+    correctionTargetGuessed: correctionTargetGuessed,
     threadId: threadId,
     run: run,
     issues: issues,
@@ -153,6 +162,7 @@ class PiosenkomatData{
     if(userMessage != null) PARAM_USER_MESSAGE: userMessage,
     if(correctionMessage != null) PARAM_CORRECTION_MESSAGE: correctionMessage,
     if(correctionTarget != null) PARAM_CORRECTION_TARGET: correctionTarget,
+    if(correctionTargetGuessed) PARAM_CORRECTION_TARGET_GUESSED: true,
     if(threadId != null) PARAM_THREAD_ID: threadId,
     if(run != null) PARAM_RUN: run,
     PARAM_ISSUES: issues.map((i) => i.toJsonMap()).toList(),
@@ -167,6 +177,7 @@ class PiosenkomatData{
     userMessage: map[PARAM_USER_MESSAGE] as String?,
     correctionMessage: map[PARAM_CORRECTION_MESSAGE] as String?,
     correctionTarget: map[PARAM_CORRECTION_TARGET] as String?,
+    correctionTargetGuessed: map[PARAM_CORRECTION_TARGET_GUESSED] as bool? ?? false,
     // `email_msg_id`: nazwa sprzed przejścia na wątki.
     threadId: (map[PARAM_THREAD_ID] ?? map['email_msg_id']) as String?,
     run: map[PARAM_RUN] as String?,

@@ -88,7 +88,9 @@ extension SongIssueReview on SongIssue {
         SongIssue.chordsDifferFromApp ||
         SongIssue.metadataDifferFromApp =>
           ReviewKind.undeclaredCorrection,
-        SongIssue.noTargetInApp => ReviewKind.correctionProblem,
+        SongIssue.noTargetInApp ||
+        SongIssue.guessedCorrectionTarget =>
+          ReviewKind.correctionProblem,
         SongIssue.hasUserMessage => ReviewKind.userMessage,
       };
 }
@@ -357,12 +359,32 @@ class Submission {
   bool get isOldApp => source == SubmissionSource.oldApp;
   bool get hasUserMessage => (userMessage ?? '').trim().isNotEmpty;
 
-  /// Którą piosenkę w apce poprawia. **Tylko z deklaracji** — piosenka niesie
-  /// swój pierwowzór, a my niczego nie zgadujemy: pod tym id poprawka podmieni
-  /// piosenkę w apce, więc pomyłka kosztuje cudzą piosenkę. Gdy deklaracji
-  /// nie ma, celu nie ma i sprawa idzie do Ciebie.
-  String? get correctionTarget =>
-      isCorrection ? declaredCorrectionTarget : null;
+  /// Czy zadeklarowany cel istnieje w śpiewniku. `buildSubmission` celuje
+  /// [appMatch] w zadeklarowaną piosenkę, więc inny `songId` w dopasowaniu
+  /// znaczy, że tego id w śpiewniku nie ma.
+  bool get declaredTargetInBook =>
+      declaredCorrectionTarget != null && appMatch?.songId == declaredCorrectionTarget;
+
+  /// Którą piosenkę w apce poprawia. Najpierw to, co powiedziało zgłoszenie
+  /// — o ile taka piosenka jest w śpiewniku; deklaracja nieistniejącego id
+  /// to brak celu, nie cel. Gdy zgłoszenie nie powiedziało nic — najbliższa
+  /// piosenka z apki, o ile jest naprawdę blisko ([AppMatch.guessable]).
+  /// Zgłoszenie bez decyzji człowieka wchodzi (`goesIn` to `accepted ?? true`),
+  /// więc słaby domysł kasujemy do `null`, a nie zostawiamy do wyłapania
+  /// okiem. Domysł nigdy nie udaje danych: mówi o tym
+  /// [correctionTargetGuessed], uwaga `guessed-correction-target` i pole
+  /// w śladzie piosenki.
+  String? get correctionTarget {
+    if (!isCorrection) return null;
+    if (declaredCorrectionTarget != null) {
+      return declaredTargetInBook ? declaredCorrectionTarget : null;
+    }
+    return (appMatch?.guessable ?? false) ? appMatch!.songId : null;
+  }
+
+  /// Czy [correctionTarget] jest domysłem, a nie id ze zgłoszenia.
+  bool get correctionTargetGuessed =>
+      correctionTarget != null && declaredCorrectionTarget == null;
 
   Submission copyWith({AppMatch? appMatch, BatchMatch? batchMatch}) => Submission(
         threadId: threadId,
@@ -448,6 +470,7 @@ class Classified {
         userMessage: submission.userMessage,
         correctionMessage: submission.correctionMessage,
         correctionTarget: submission.correctionTarget,
+        correctionTargetGuessed: submission.correctionTargetGuessed,
         threadId: submission.threadId,
         run: run,
         issues: issues,

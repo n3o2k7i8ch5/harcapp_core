@@ -483,16 +483,63 @@ final RegExp _correctionFenceRe = RegExp(
   r'### Propozycja poprawki:\s*```[a-zA-Z]*\s*\n([\s\S]*?)```',
 );
 
-final RegExp _correctedSongIdRe = RegExp(r'### Poprawiana piosenka:\s*(\S+)');
+const String _correctedSongIdHeader = '### Poprawiana piosenka:';
 
-/// Linia „### Poprawiana piosenka” — `lclId` piosenki, którą autor poprawia.
+/// Cała linia wygląda na kawałek `lclId`: bez białych znaków (po nich poznajemy,
+/// że to już nie identyfikator), bez `>` (cytat w mejlu zwrotnym) i bez `#`
+/// (nagłówek sekcji). Same identyfikatory bywają dziwne — np.
+/// `o!_ballada_o_stefanie_mirowskim@21_druzyna_harcerska_...` — więc reszty
+/// znaków nie ograniczamy.
+final RegExp _songIdPieceRe = RegExp(r'^[^\s>#]+$');
+
+/// Znak cytatu na początku linii w mejlu zwrotnym: `> `, `>> ` itd.
+final RegExp _quotePrefixRe = RegExp(r'^[>\s]+');
+
+/// Sekcja „### Poprawiana piosenka” — `lclId` piosenki, którą autor poprawia.
 /// `null`, gdy mejl jej nie ma. Czytamy tylko sprzed sekcji „### Kod piosenki:",
 /// żeby nie złapać linii z cytatu w mejlu zwrotnym.
+///
+/// Wartość bywa złamana: klienty pocztowe łamią linie koło 76 znaku, także
+/// w środku słowa, a `lclId` bywa dłuższe (najdłuższe w śpiewniku ma 95 znaków).
+/// Dlatego apka wysyła id w bloku ``` — wszystko między ogrodzeniami to id,
+/// białe znaki i znaki cytatu (`>`) wyrzucamy, nic nie zgadujemy. Starsze mejle
+/// niosły id w tej samej linii co nagłówek; wtedy doklejamy następne linie —
+/// ale tylko takie, które **w całości** wyglądają na kawałek identyfikatora.
+/// Pusta linia, nagłówek (`###`) czy podpis („Z poważaniem”) kończą wartość.
 String? extractCorrectedSongId(String content){
   final int cutoff = content.indexOf('### Kod piosenki:');
   final String haystack = cutoff == -1? content: content.substring(0, cutoff);
-  final String? id = _correctedSongIdRe.firstMatch(haystack)?.group(1)?.trim();
-  return id == null || id.isEmpty? null: id;
+  final int at = haystack.indexOf(_correctedSongIdHeader);
+  if(at == -1) return null;
+
+  final List<String> lines = haystack
+      .substring(at + _correctedSongIdHeader.length)
+      .split('\n')
+      .map((l) => l.replaceFirst(_quotePrefixRe, '').trim())
+      .toList();
+
+  final int fence = lines.indexWhere((l) => l.startsWith('```'));
+  final bool fenced = fence != -1 && lines.take(fence).every((l) => l.isEmpty);
+  final String out;
+  if(fenced){
+    final StringBuffer id = StringBuffer();
+    for(final String line in lines.skip(fence + 1)){
+      if(line.startsWith('```')) break;
+      id.write(line.replaceAll(RegExp(r'\s'), ''));
+    }
+    out = id.toString();
+  } else {
+    // Reszta linii nagłówka: pusta, gdy klient złamał ją zaraz po dwukropku.
+    final String first = lines.first;
+    if(first.isNotEmpty && !_songIdPieceRe.hasMatch(first)) return null;
+    final StringBuffer id = StringBuffer(first);
+    for(final String line in lines.skip(1)){
+      if(!_songIdPieceRe.hasMatch(line)) break;
+      id.write(line);
+    }
+    out = id.toString();
+  }
+  return out.isEmpty? null: out;
 }
 
 /// Blok „Propozycja poprawki” — `null`, gdy pusty albo go nie ma.

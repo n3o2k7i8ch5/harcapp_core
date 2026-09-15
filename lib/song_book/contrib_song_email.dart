@@ -79,7 +79,11 @@ String _baseMessage(
         correctedSongId == null?
         '':
         '\n'
-        '\n### Poprawiana piosenka: $correctedSongId'
+        '\n### Poprawiana piosenka:'
+        '\n'
+        '\n```'
+        '\n$correctedSongId'
+        '\n```'
     }"
     "${
         registered == null?

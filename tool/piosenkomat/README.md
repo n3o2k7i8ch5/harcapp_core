@@ -207,7 +207,7 @@ ukryte tytuły, autorzy, kompozytorzy, wykonawcy, data, YouTube, tagi się róż
 | `sameSong` | tytuł, tekst ≥ 90%, chwyty, ale coś inne | uwaga `metadata-differ-from-app` | kandydat bez uwagi |
 | `sameTextDifferentChords` | tytuł, tekst ≥ 90%, inne chwyty | uwaga `chords-differ-from-app` | kandydat |
 | `sameTitleDifferentText` | ten sam tytuł, tekst < 90% | uwaga `same-title-in-app` | kandydat |
-| `similarText` | inny tytuł, tekst ≥ 50% | uwaga `similar-text-in-app` | kandydat (cel zgadnięty po tekście) |
+| `similarText` | inny tytuł, tekst ≥ 50% | uwaga `similar-text-in-app` | kandydat; cel zgadnięty tylko przy tekście ≥ 90%, inaczej `no-target-in-app` |
 | brak | — | czysty kandydat | uwaga `no-target-in-app` |
 
 **Identyczna nigdy nie idzie do pliku** — to jedyny przypadek, gdzie automat sam
@@ -255,11 +255,20 @@ tagi widzi użytkownik apki):
 }
 ```
 
-`correction_target` — którą piosenkę w apce poprawia — jest **zgadywany**
-po tytule/tekście, bo mejl z apki tego nie niesie (apka powinna kiedyś dokładać
-`### Poprawiana piosenka: <lclId>`). Pole nigdy nie jedzie do `all_songs.hrcpsng`:
-`toApiJsonMap` wypuszcza je tylko na życzenie narzędzia, a `prepare` zdejmuje je
-przed wgraniem.
+`correction_target` — którą piosenkę w apce poprawia — bierze się **z mejla**:
+apka wysyła sekcję `### Poprawiana piosenka:` z id w bloku ``` (klienty łamią
+długie linie, blok czyta się w całości), a piosenka własna pamięta
+swój pierwowzór od chwili, w której wzięto ją do edycji. Gdy zgłoszenie nic nie
+mówi (stara apka, apka sprzed tej zmiany), narzędzie **wolno zgaduje** po tytule
+i tekście, ale nigdy nie udaje, że to dane: dokłada `correction_target_guessed`,
+uwagę `guessed-correction-target` i dopisek przy „podmień” w `prepare`.
+Deklaracja liczy się tylko w poprawce (piosenka przerobiona z cudzej i wysłana
+jako nowa też pamięta pierwowzór — to nie deklaracja) i tylko wtedy, gdy wskazane
+id **jest** w śpiewniku; inaczej to brak celu (`no-target-in-app`), nie cel.
+
+Oba pola nigdy nie jadą do `all_songs.hrcpsng`: `toApiJsonMap` wypuszcza je tylko
+na życzenie narzędzia, a `prepare` zdejmuje je przed wgraniem — razem z pamięcią
+o pierwowzorze w samej piosence (`corrected_song_id`).
 
 ## Przegląd i `prepare`
 
@@ -290,7 +299,8 @@ piosenki. **Bezpieczniki** (`--force` przechodzi): pusty plik, odrzucona ponad p
 `prepare` zdejmuje pole `piosenkomat` z `reviewed-*` → `final-*.hrcpsng`. Przy
 poprawkach ustawia `id = correction_target` — apka referencjonuje piosenki po `lclId`
 (ulubione, albumy, oceny), więc poprawiony tytuł nie może zmienić id — i wypisuje
-listę „co podmienić”.
+listę „co podmienić”. Cel zgadnięty dostaje w tej liście dopisek, bo podmiana
+po złym id kosztuje cudzą piosenkę.
 
 ## Sprzątanie (`clean`)
 

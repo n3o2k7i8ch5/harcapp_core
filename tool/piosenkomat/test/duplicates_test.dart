@@ -171,6 +171,21 @@ void main() {
       expect(out.firstWhere((c) => c.message.id == 'old').target, Target.rejectDuplicate);
     });
 
+    test('dwie poprawki „Barki”, tylko jedna z celem → obie widzą się w paczce', () async {
+      // Cel jednej zgadnięty (grupa po celu), drugiej nie (grupa po tytule):
+      // różne grupy, a wspólny tytuł nie może ich wtedy rozdzielać.
+      final book = bookWith([sampleSong(title: 'Barka', lyrics: _a)]);
+      final out = classifyBatch([
+        msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'Barka', lyrics: '$_a\nDopisek')), id: 'z'),
+        msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'Barka', lyrics: _b)), id: 'bez'),
+      ], book: book);
+      final byId = {for (final c in out) c.message.id: c};
+      expect(byId['z']!.submission.correctionTargetGuessed, isTrue);
+      expect(byId['bez']!.submission.correctionTarget, isNull);
+      expect(issuesOf(byId['z']!), contains(SongIssue.sameTitleInBatch));
+      expect(issuesOf(byId['bez']!), contains(SongIssue.sameTitleInBatch));
+    });
+
     test('mniej niż identyczne → obie do pliku z same-title-in-batch', () async {
       final out = classifyBatch([
         msgFrom(await completeEmail(song: sampleSong(lyrics: _a)), id: 'a'),
@@ -201,6 +216,31 @@ void main() {
       expect(out.map((c) => c.target), everyElement(Target.candidateCorrection));
       expect(out.map((c) => c.submission.correctionTarget), everyElement('tmp'));
       expect(out.map(issuesOf), everyElement([SongIssue.sameTargetInBatch]));
+    });
+
+    test('poprawki różnych piosenek o podobnej treści → nie „ta sama piosenka”', () async {
+      // `batchMatch` bywa dopasowaniem po samym tekście (różne tytuły). Cele
+      // są wtedy różne, więc pastylka „druga poprawka tej samej piosenki”
+      // byłaby nieprawdą.
+      final ognisko = sampleSong(title: 'Ognisko', lyrics: _a)..id = 'o1';
+      final knieje = sampleSong(title: 'Knieje', lyrics: '$_a\nJedna nowa linijka')..id = 'k1';
+      final out = classifyBatch([
+        msgFrom(
+            await completeEmail(
+                isNew: false,
+                correctedSongId: 'o1',
+                song: sampleSong(title: 'Ognisko', lyrics: '$_a\nDopisana zwrotka')),
+            id: 'a'),
+        msgFrom(
+            await completeEmail(
+                isNew: false,
+                correctedSongId: 'k1',
+                song: sampleSong(title: 'Knieje', lyrics: '$_a\nJedna nowa linijka\nI jeszcze jedna')),
+            id: 'b'),
+      ], book: bookWith([ognisko, knieje]));
+      expect(out.map((c) => c.submission.correctionTarget), ['o1', 'k1']);
+      expect(out.map(issuesOf), everyElement(isNot(contains(SongIssue.sameTargetInBatch))));
+      expect(issuesOf(out[0]), contains(SongIssue.similarTextInBatch));
     });
 
     test('nowa i poprawka nie zlewają się w jedną grupę', () async {

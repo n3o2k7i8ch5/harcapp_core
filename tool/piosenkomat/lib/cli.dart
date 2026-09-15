@@ -744,8 +744,9 @@ int _prepare(ArgResults cmd) {
       stdout.writeln('  pominięto $turnedDownCount z przełącznikiem „nie wchodzi”');
     }
     if (kind == SubmissionKind.correction) {
-      for (final (id, title) in targets) {
-        stdout.writeln('  podmień $id  ←  $title');
+      for (final t in targets) {
+        stdout.writeln('  podmień ${t.id}  ←  ${t.title}'
+            '${t.guessed ? '   (cel ZGADNIĘTY — sprawdź, zanim podmienisz)' : ''}');
       }
       final noTarget = songs.length - targets.length;
       if (noTarget > 0) {

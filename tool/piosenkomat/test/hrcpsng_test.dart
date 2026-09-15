@@ -77,7 +77,9 @@ void main() {
     expect(songs.every((s) => s.correctedSongId == null), isTrue,
         reason: 'do bazy jedzie sama piosenka, bez pamięci o poprawianiu');
     expect(songs[1].id, 'tmp', reason: 'apka referencjonuje piosenki po lclId');
-    expect(targets, [('tmp', 'Stara (popr.)')]);
+    expect(targets.single.id, 'tmp');
+    expect(targets.single.title, 'Stara (popr.)');
+    expect(targets.single.guessed, isFalse, reason: 'cel podany przez apkę');
     expect(songs[0].id, startsWith('o!_'));
     // Ślad to nie tylko pole `piosenkomat` — id wątku ze skrzynki też jest nasze.
     expect(songs.every((s) => s.contributorData?.emailThreadId == null), isTrue);

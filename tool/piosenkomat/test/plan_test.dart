@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:path/path.dart' as p;
 import 'package:piosenkomat/classify.dart';
@@ -38,7 +36,7 @@ void main() {
         [kLabelToReview, ReviewKind.correctionProblem.label, kLabelCorrection, kLabelAuto]);
     expect(plan.messagesOf('ok'), ['ok', 'ok2']);
 
-    final dir = Directory.systemTemp.createTempSync('plan');
+    final dir = tempDir();
     final path = planPathIn(dir.path);
     expect(path, p.join(dir.path, 'plan.json'));
     writePlan(path, plan);
@@ -49,6 +47,5 @@ void main() {
     expect(back.songsByThread['msg']!.single.issues, ['has-user-message']);
     expect(back.songsByThread['corr']!.single.kind, SubmissionKind.correction);
     expect(back.messagesOf('ok'), ['ok', 'ok2']);
-    dir.deleteSync(recursive: true);
   });
 }

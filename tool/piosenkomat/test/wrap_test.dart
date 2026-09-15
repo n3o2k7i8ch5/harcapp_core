@@ -1,3 +1,4 @@
+import 'package:harcapp_core/song_book/parse_contrib_email.dart';
 import 'package:piosenkomat/similarity.dart';
 import 'dart:convert';
 
@@ -16,6 +17,64 @@ void main() {
     final got = classify(msgFrom(raw), book: SongBook.empty);
     expect(got.isClean, isTrue);
     expect(got.song!.title, 'Piosenka testowa XYZ');
+  });
+
+  test('złamane id poprawianej piosenki: deklaracja nie ginie', () async {
+    // Najdłuższe lclId w śpiewniku ma 95 znaków, a nagłówek zjada 25, więc
+    // klient pocztowy łamie tę linię — i to w środku identyfikatora.
+    const long =
+        'o!_ballada_o_stefanie_mirowskim@21_druzyna_harcerska_im_hm_stefana_mirowskiego_blekitna_gwiazda';
+    final raw = hardWrap(await completeEmail(isNew: false, correctedSongId: long));
+    expect(raw, contains('Poprawiana piosenka'));
+    expect(raw.split('\r\n').any((l) => l.contains(long)), isFalse,
+        reason: 'linia z id ma być w tym teście naprawdę złamana');
+
+    final got = classify(msgFrom(raw), book: SongBook.empty);
+    expect(got.submission.declaredCorrectionTarget, long);
+    expect(got.submission.correctionTargetGuessed, isFalse);
+  });
+
+  test('cytat w mejlu zwrotnym nie wchodzi do id poprawianej piosenki', () {
+    // Klient dokleja „> " przed każdą linią cytatu; bez sprawdzenia, czy linia
+    // w całości wygląda na id, wartość wychodziła jako „o!_barka>>".
+    expect(
+      extractCorrectedSongId('> ### Poprawiana piosenka: o!_barka\n>\n> ### Osoba dodająca:'),
+      'o!_barka',
+    );
+  });
+
+  test('podpis pod nagłówkiem nie wchodzi do id poprawianej piosenki', () {
+    // Bez pustej linii i bez następnej sekcji wartość zjadała resztę mejla.
+    expect(
+      extractCorrectedSongId('### Poprawiana piosenka: o!_barka\nZ poważaniem\nJan Kowalski'),
+      'o!_barka',
+    );
+  });
+
+  test('id w bloku ```: złamane i zacytowane linie sklejają się w całość', () {
+    const long =
+        'o!_ballada_o_stefanie_mirowskim@21_druzyna_harcerska_im_hm_stefana_mirowskiego_blekitna_gwiazda';
+    const broken = 'o!_ballada_o_stefanie_mirowskim@21_druzyna_harcerska_im_hm_s\ntefana_mirowskiego_blekitna_gwiazda';
+    expect(
+      extractCorrectedSongId('### Poprawiana piosenka:\n\n```\n$broken\n```\n\n### Osoba dodająca:'),
+      long,
+    );
+    expect(
+      extractCorrectedSongId('> ### Poprawiana piosenka:\n>\n> ```\n> o!_ballada_o_stefanie_mirowskim@21_druzyna_harcerska_im_hm_s\n> tefana_mirowskiego_blekitna_gwiazda\n> ```\n>\n> ### Osoba dodająca:'),
+      long,
+    );
+    // Podpis pod blokiem nie wchodzi do id.
+    expect(
+      extractCorrectedSongId('### Poprawiana piosenka:\n\n```\no!_barka\n```\nPozdrawiam\nJan'),
+      'o!_barka',
+    );
+  });
+
+  test('stary format bez bloku: cytat złamanej linii nie ucina id', () {
+    expect(
+      extractCorrectedSongId('> ### Poprawiana piosenka: o!_ballada_im_hm_s\n> tefana_gwiazda\n>\n> ### Osoba dodająca:'),
+      'o!_ballada_im_hm_stefana_gwiazda',
+    );
   });
 
   test('załącznik .hrcpsng wygrywa nad uszkodzoną treścią', () async {

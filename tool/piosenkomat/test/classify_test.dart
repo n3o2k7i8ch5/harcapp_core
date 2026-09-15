@@ -122,12 +122,65 @@ void main() {
       expect(got.target, Target.candidateCorrection);
       expect(issuesOf(got), isNot(contains(SongIssue.missingYoutube)),
           reason: 'poprawka to diff, nie pełna piosenka');
-      expect(got.submission.correctionTarget, isNull,
-          reason: 'bez deklaracji nie ma celu — narzędzie nie zgaduje po tytule');
-      expect(issuesOf(got), contains(SongIssue.noTargetInApp));
+      expect(got.submission.correctionTarget, 'tmp',
+          reason: 'bez deklaracji wolno zgadnąć po tytule i tekście');
+      expect(got.submission.correctionTargetGuessed, isTrue);
+      expect(issuesOf(got), contains(SongIssue.guessedCorrectionTarget),
+          reason: 'domysł nigdy nie udaje danych ze zgłoszenia');
+      // Ślad w piosence też musi to nieść — po nim pozna edytor i `prepare`.
+      final data = PiosenkomatData.fromJsonMap(
+          got.piosenkomatData().toJsonMap());
+      expect(data.correctionTarget, 'tmp');
+      expect(data.correctionTargetGuessed, isTrue);
       expect(got.labels, contains(kLabelCorrection));
     });
-    test('bez deklaracji → no-target-in-app, choćby coś pasowało', () async {
+    test('ten sam tytuł, zupełnie inna piosenka → nie zgadujemy', () async {
+      // `closest` przy trafieniu w tytuł zwraca wynik bez względu na tekst.
+      // Podmiana idzie po id, a nietknięte zgłoszenie wchodzi, więc taki
+      // domysł musi zostać pusty — inaczej poprawka kasuje cudzą piosenkę.
+      final got = classify(
+        msgFrom(await completeEmail(
+            isNew: false,
+            song: sampleSong(title: 'Barka', lyrics: 'Pan kiedyś stanął nad brzegiem'))),
+        book: bookWith([
+          sampleSong(title: 'Barka', lyrics: 'Zupełnie co innego o tym samym tytule')
+        ]),
+      );
+      expect(got.submission.correctionTarget, isNull);
+      expect(got.submission.correctionTargetGuessed, isFalse);
+      expect(issuesOf(got), contains(SongIssue.noTargetInApp));
+      expect(issuesOf(got), isNot(contains(SongIssue.guessedCorrectionTarget)));
+    });
+
+    test('bez deklaracji, zmieniony tytuł, ten sam tekst → cel zgadnięty', () async {
+      // Poprawka może właśnie zmieniać tytuł; identyczny tekst to ta sama
+      // piosenka, więc „za mało podobne” byłoby tu nieprawdą.
+      final wApce = sampleSong(title: 'Stary tytuł');
+      wApce.id = 'o!_stary';
+      final got = classify(
+        msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'Nowy tytuł'))),
+        book: bookWith([wApce]),
+      );
+      expect(got.submission.correctionTarget, 'o!_stary');
+      expect(got.submission.correctionTargetGuessed, isTrue);
+      expect(issuesOf(got), contains(SongIssue.guessedCorrectionTarget));
+      expect(issuesOf(got), isNot(contains(SongIssue.noTargetInApp)));
+    });
+
+    test('linia z celem zginęła — id z JSON-a piosenki ratuje deklarację', () async {
+      // Apka niesie `corrected_song_id` w dwóch miejscach: w linii nagłówka
+      // i w samej piosence. Nagłówek bywa złamany albo zacytowany.
+      final song = sampleSong()..correctedSongId = 'tmp';
+      final raw = await completeEmail(isNew: false, song: song);
+      expect(raw, isNot(contains('Poprawiana piosenka')));
+      final got = classify(msgFrom(raw),
+          book: bookWith([sampleSong(lyrics: 'Zupełnie co innego')]));
+      expect(got.submission.declaredCorrectionTarget, 'tmp');
+      expect(got.submission.correctionTarget, 'tmp');
+      expect(got.submission.correctionTargetGuessed, isFalse);
+    });
+
+    test('bez deklaracji i bez czego zgadnąć → no-target-in-app', () async {
       final got = classify(msgFrom(await completeEmail(isNew: false)), book: SongBook.empty);
       expect(issuesOf(got), [SongIssue.noTargetInApp]);
       expect(got.submission.correctionTarget, isNull);
@@ -145,6 +198,8 @@ void main() {
       );
       expect(got.submission.declaredCorrectionTarget, 'o!_wskazana');
       expect(got.submission.correctionTarget, 'o!_wskazana');
+      expect(got.submission.correctionTargetGuessed, isFalse);
+      expect(issuesOf(got), isNot(contains(SongIssue.guessedCorrectionTarget)));
       expect(got.submission.appMatch?.songId, 'o!_wskazana',
           reason: 'porównujemy z pierwowzorem wskazanym przez apkę');
       expect(issuesOf(got), isNot(contains(SongIssue.noTargetInApp)));
@@ -156,12 +211,30 @@ void main() {
       );
       expect(issuesOf(got), contains(SongIssue.noTargetInApp));
       expect(got.target, Target.candidateCorrection);
+      // Nieistniejące id to brak celu: `prepare` nie może kazać podmieniać
+      // piosenki, której nie ma, i to bez ostrzeżenia.
+      expect(got.submission.correctionTarget, isNull);
+      expect(got.submission.correctionTargetGuessed, isFalse);
     });
     test('nowa piosenka nie niesie deklaracji celu', () async {
       final got = classify(msgFrom(await completeEmail(correctedSongId: 'o!_cokolwiek')),
           book: SongBook.empty);
       expect(got.submission.declaredCorrectionTarget, isNull);
       expect(got.submission.correctionTarget, isNull);
+    });
+    test('przerobiona cudza piosenka wysłana jako nowa: JSON-owe id to nie deklaracja', () async {
+      // Piosenka własna pamięta pierwowzór w `corrected_song_id`; wysłana jako
+      // nowa ma być sprawdzona jak nowa — z najbliższą, nie z pierwowzorem.
+      final pierwowzor = sampleSong(title: 'Pierwowzór', lyrics: 'Zupełnie inny tekst o górach');
+      pierwowzor.id = 'o!_pierwowzor';
+      final wApce = sampleSong();
+      wApce.id = 'o!_juz_jest';
+      final song = sampleSong()..correctedSongId = 'o!_pierwowzor';
+      final got = classify(msgFrom(await completeEmail(song: song)),
+          book: bookWith([pierwowzor, wApce]));
+      expect(got.submission.declaredCorrectionTarget, isNull);
+      expect(got.submission.appMatch?.songId, 'o!_juz_jest');
+      expect(got.target, Target.rejectAlreadyInApp);
     });
     test('identyczna z apką → sam mejl, nie do pliku', () async {
       final got = classify(msgFrom(await completeEmail(isNew: false)),

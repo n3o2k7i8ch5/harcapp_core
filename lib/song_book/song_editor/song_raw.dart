@@ -67,6 +67,8 @@ class SongRaw extends SongCore{
     this.youtubeVideoId = song.youtubeVideoId;
     this.tags = song.tags.toList();
     this.piosenkomatData = song.piosenkomatData;
+    this.contributorData = song.contributorData;
+    this.correctedSongId = song.correctedSongId;
 
     this.hasRefren = song.hasRefren;
     this.refrenPart = song.refrenPart;

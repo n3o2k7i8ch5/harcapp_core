@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:piosenkomat/model.dart';
@@ -6,6 +8,7 @@ import 'package:harcapp_core/song_book/contrib_song_email.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/song_book/song_element.dart';
 import 'package:harcapp_core/values/people/models.dart';
+import 'package:test/test.dart';
 
 SongRaw sampleSong({
   String title = 'Piosenka testowa XYZ',
@@ -133,4 +136,11 @@ extension ClassifiedTest on Classified {
   bool get isClean => goesToFile && issues.isEmpty;
   bool get oldApp => submission.isOldApp;
   String? get sender => submission.sender;
+}
+
+/// Katalog tymczasowy sprzątany po teście — także po nieudanym `expect`.
+Directory tempDir() {
+  final dir = Directory.systemTemp.createTempSync('piosenkomat');
+  addTearDown(() => dir.deleteSync(recursive: true));
+  return dir;
 }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:piosenkomat/hrcpsng.dart';
 import 'package:piosenkomat/similarity.dart';
 import 'package:piosenkomat/classify.dart';
@@ -117,14 +115,13 @@ void main() {
     final plan = LabelPlan.fromClassified(items);
 
     // Tak jak strona: piosenki przez plik i z powrotem, jednej brak.
-    final dir = Directory.systemTemp.createTempSync('people');
+    final dir = tempDir();
     final path = '${dir.path}/reviewed-new.hrcpsng';
     writeHrcpsng(path, [for (final c in items) c.song!], withPiosenkomatData: true);
     final reviewed = [
       for (final s in readHrcpsng(path)) if (s.title != 'Wywalona') s,
     ];
     stripPiosenkomat(reviewed);
-    dir.deleteSync(recursive: true);
 
     final report = collectPeople(contributorSourcesOf(reviewed,
         otherEmailsBySender: otherEmailsBySender(plan)));

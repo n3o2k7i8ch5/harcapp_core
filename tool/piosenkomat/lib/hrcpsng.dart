@@ -155,19 +155,25 @@ String decisionsPathIn(String outDir) => p.join(outDir, 'decisions.json');
 /// Zdejmuje ślad piosenkomatu przed wgraniem do `all_songs`. Przy poprawkach
 /// **ustawia `id = correction_target`**: w apce piosenki są referencjonowane
 /// po `lclId` (ulubione, albumy, oceny), więc poprawiony tytuł nie może
-/// zmienić id. Zwraca listę `(id w apce, tytuł po poprawce)` do podmiany.
+/// zmienić id. Zwraca listę `(id w apce, tytuł po poprawce, czy cel był
+/// zgadnięty)` do podmiany — przy zgadniętym trzeba zerknąć, zanim podmienisz.
 ///
 /// Ślad to nie tylko pole `piosenkomat`: `contributor_data.email_thread_id`
 /// też jest nasz. Wiąże piosenkę ze zgłoszeniem przez cały przebieg (zapasowy
 /// klucz dopasowania w `label reviewed`, który idzie przed `prepare`), ale
 /// w `all_songs` byłby tylko wyciekiem id wątku ze skrzynki.
-List<(String, String)> stripPiosenkomat(List<SongRaw> songs) {
-  final targets = <(String, String)>[];
+List<({String id, String title, bool guessed})> stripPiosenkomat(
+    List<SongRaw> songs) {
+  final targets = <({String id, String title, bool guessed})>[];
   for (final s in songs) {
     final data = s.piosenkomatData;
     if (data != null && data.isCorrection && data.correctionTarget != null) {
       s.id = data.correctionTarget!;
-      targets.add((s.id, s.title));
+      targets.add((
+        id: s.id,
+        title: s.title,
+        guessed: data.correctionTargetGuessed,
+      ));
     }
     s.piosenkomatData = null;
     // Pamięć o pierwowzorze jest robocza: w bazie piosenka nie ma po co

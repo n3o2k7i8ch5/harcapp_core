@@ -49,6 +49,9 @@ enum SongIssue{
   /// Poprawka, ale w apce nie ma czego poprawiać — nic nie pasuje tytułem
   /// ani tekstem.
   noTargetInApp('no-target-in-app', 'poprawka piosenki, której nie ma w apce', SongIssueSeverity.decision),
+  /// Zgłoszenie nie powiedziało, co poprawia — cel dobrany po tytule i tekście.
+  /// Poprawka podmienia piosenkę po id, więc domysł trzeba obejrzeć.
+  guessedCorrectionTarget('guessed-correction-target', 'cel poprawki zgadnięty, nie podany przez apkę', SongIssueSeverity.decision),
 
   hasUserMessage('has-user-message', 'użytkownik dopisał wiadomość', SongIssueSeverity.decision);
 
