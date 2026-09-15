@@ -36,6 +36,9 @@ Future<int> runPiosenkomat(List<String> args) async {
       help: 'Zmień etykiety odrzuconych (bez tej flagi tylko lista)');
 
   final labelAdded = label.addCommand('added');
+  labelAdded.addFlag('all',
+      negatable: false,
+      help: 'Cała skrzynka, nie tylko przebieg');
   _addCommon(labelAdded);
   _addWrite(labelAdded, help: 'Zmień etykiety w Gmailu (bez tej flagi lista)');
 
@@ -408,21 +411,22 @@ Future<void> _applyPlan(
       './piosenkomat label reviewed --push i ./piosenkomat label added --push');
 }
 
-/// Piosenki z ostatniego przebiegu, po id mejla. Służą tylko do wypisania
-/// tytułu i nadawcy — gdy planu nie ma albo jest niekompletny, `label added`
-/// dopyta Gmaila.
+/// Piosenki przebiegu po id mejla — do wypisania tytułu i nadawcy.
+Map<String, PlannedSong> _songsOf(LabelPlan plan) => {
+      for (final e in plan.songsByThread.entries)
+        if (e.value.isNotEmpty)
+          for (final msgId in plan.messagesOf(e.key)) msgId: e.value.first,
+    };
+
+/// To samo z ostatniego przebiegu, dla `label added --all`: mejle spoza
+/// planu i tak trzeba dopytać Gmaila, a uszkodzony plan niczego nie blokuje.
 Map<String, PlannedSong> _songsFromLatestPlan() {
   final dir = latestOutDir();
   if (dir == null) return const {};
   final path = planPathIn(_resolve(dir));
   if (!_exists(path)) return const {};
   try {
-    final plan = readPlan(path);
-    return {
-      for (final e in plan.songsByThread.entries)
-        if (e.value.isNotEmpty)
-          for (final msgId in plan.messagesOf(e.key)) msgId: e.value.first,
-    };
+    return _songsOf(readPlan(path));
   } catch (_) {
     // Plan tylko ładniej podpisuje wiersze; uszkodzony (zły JSON, stary
     // kształt) niczego nie blokuje — dopytamy Gmaila.
@@ -459,18 +463,32 @@ Future<void> _batchByLabels(
 
 Future<int> _labelAdded(ArgResults cmd) async {
   final write = _write(cmd);
+  // Domyślnie przebieg, jak w każdej komendzie na katalogu: `label added`
+  // znaczy „domknij to, co z TEGO przebiegu wkleiłeś do śpiewnika”. Mejle
+  // z innego przebiegu, którego jeszcze nie wkleiłeś, mają zostać otwarte.
+  final all = cmd['all'] as bool;
+  final dir = all ? null : _runDir(cmd);
+  if (!all && dir == null) return 64;
+  final plan = dir == null ? null : readPlan(planPathIn(dir));
+  if (plan != null) stdout.writeln(_planHeader(plan));
+
   final mailbox = await _connect(cmd);
   final current = await mailbox.songLabelsByMessage();
   // Bezpiecznik na wypadek, gdyby query przepuściło coś bez „auto”: ruszamy
   // tylko to, co automat sam wstawił do pliku. Sam zestaw etykiet wystarczy,
   // żeby wiedzieć, co jest gotowe — bez osobnego zapytania do Gmaila.
-  final ready = [
+  final gotowe = [
     for (final e in current.entries)
       if (isReadyByTool(e.value)) e.key,
   ];
+  final ready = plan == null
+      ? gotowe
+      : [for (final id in gotowe) if (plan.labelsById.containsKey(id)) id];
+  final pozaPrzebiegiem = gotowe.length - ready.length;
+
   // Tytuł i nadawcę bierzemy z planu przebiegu — leżą w `plan.json` za darmo.
   // Dopytujemy Gmaila tylko o mejle spoza planu (20 jednostek za sztukę).
-  final zPlanu = _songsFromLatestPlan();
+  final zPlanu = plan == null ? _songsFromLatestPlan() : _songsOf(plan);
   for (final id in ready) {
     if (zPlanu[id] case final i?) {
       stdout.writeln('  ${i.title}  ${i.sender}  [$id]');
@@ -480,6 +498,10 @@ Future<int> _labelAdded(ArgResults cmd) async {
     }
   }
   stdout.writeln('„$kLabelReady” + „$kLabelAuto”: ${ready.length} mejli');
+  if (pozaPrzebiegiem > 0) {
+    stdout.writeln('  $pozaPrzebiegiem czeka poza tym przebiegiem — domknij je '
+        'jego własnym `label added` (albo `--all`, gdy masz wklejone wszystkie).');
+  }
   if (!write) {
     stdout.writeln('\nDry-run: Gmail nietknięty. --push zmieni na „$kLabelDone” + przeczytane.');
     return 0;

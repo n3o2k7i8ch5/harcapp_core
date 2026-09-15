@@ -9,7 +9,7 @@ import 'package:harcapp_core/values/people/contributor_ref.dart';
 
 bool isContributorsFirstSong(Iterable<String> emails){
   for(final e in emails)
-    if(allRegisteredPeopleByEmailMap.containsKey(e.trim().toLowerCase()))
+    if(registeredPersonByEmail(e) != null)
       return false;
 
   return true;

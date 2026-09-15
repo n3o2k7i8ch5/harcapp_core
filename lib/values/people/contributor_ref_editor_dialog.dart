@@ -58,7 +58,7 @@ class _ContributorRefEditorDialogState extends State<ContributorRefEditorDialog>
     _userKeyRef = init?.userKeyRef ??
         (init?.emailRef == null
             ? null
-            : allRegisteredPeopleByEmailMap[init!.emailRef!.trim().toLowerCase()]?.userKey);
+            : registeredPersonByEmail(init!.emailRef)?.userKey);
     _name = resolved?.name ?? '';
     super.initState();
   }
@@ -79,7 +79,7 @@ class _ContributorRefEditorDialogState extends State<ContributorRefEditorDialog>
   bool get _canAccept => _name.trim().isNotEmpty;
 
   void _onEmailChanged(String value){
-    final hit = allRegisteredPeopleByEmailMap[value.trim().toLowerCase()];
+    final hit = registeredPersonByEmail(value);
     if(hit != null){
       _fieldsKey.currentState?.setPerson(hit.person);
       setState((){

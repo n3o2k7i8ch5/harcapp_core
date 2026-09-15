@@ -103,7 +103,7 @@ PeopleReport collectPeople(List<ContributorSource> items) {
   for (final c in items) {
     final sender = c.sender;
 
-    if (allRegisteredPeopleByEmailMap.containsKey(sender)) {
+    if (registeredPersonByEmail(sender) != null) {
       known.putIfAbsent(sender, () => []).add(c.title);
       continue;
     }
@@ -117,7 +117,7 @@ PeopleReport collectPeople(List<ContributorSource> items) {
       for (final e in c.otherEmails) e.trim().toLowerCase(),
     }..removeWhere((e) => e.isEmpty);
 
-    final alreadyKnown = emails.any(allRegisteredPeopleByEmailMap.containsKey);
+    final alreadyKnown = emails.any((e) => registeredPersonByEmail(e) != null);
     if (alreadyKnown) {
       known.putIfAbsent(sender, () => []).add(c.title);
       continue;

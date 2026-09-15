@@ -6,6 +6,7 @@ import 'package:piosenkomat/people.dart';
 import 'package:piosenkomat/plan.dart';
 import 'package:harcapp_core/values/people/data.all.g.dart';
 import 'package:harcapp_core/values/people/models.dart';
+import 'package:harcapp_core/values/people/utils.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
 import 'package:test/test.dart';
@@ -22,6 +23,31 @@ const _jan = RegisteredContributor(
   emails: ['jan.testowy@example.com', 'Jan.Drugi@Example.com'],
 );
 
+void _indexTests() {
+  test('każdy adres z bazy ludzi daje się odnaleźć', () {
+    // Indeks kluczuje adresem znormalizowanym, a pytający mają adres
+    // z nagłówka mejla (małymi literami). Wpis pisany wielką literą bez tego
+    // nie dopasowałby się nigdy i wracałby jako „nowa osoba”.
+    final zgubione = [
+      for (final osoba in allRegisteredPeople)
+        for (final email in osoba.emails)
+          if (registeredPersonByEmail(email) == null) email,
+    ];
+    expect(zgubione, isEmpty);
+  });
+
+  test('wielkość liter i spacje w pytaniu nie mają znaczenia', () {
+    final email = allRegisteredPeople
+        .expand((o) => o.emails)
+        .firstWhere((e) => e.trim().isNotEmpty);
+    final osoba = registeredPersonByEmail(email);
+    expect(osoba, isNotNull);
+    expect(registeredPersonByEmail(email.toUpperCase()), same(osoba));
+    expect(registeredPersonByEmail('  ${email.toLowerCase()} '), same(osoba));
+    expect(registeredPersonByEmail(null), isNull);
+  });
+}
+
 /// Tak, jak robi to `strip`: osoby z piosenek, które wchodzą, plus dodatkowe
 /// adresy z planu przebiegu.
 PeopleReport peopleOf(List<Classified> items) => collectPeople(
@@ -32,6 +58,7 @@ PeopleReport peopleOf(List<Classified> items) => collectPeople(
     );
 
 void main() {
+  _indexTests();
   test('nowa osoba: stała jak w data.dart, nadawca pierwszy w emails', () async {
     final items = classifyBatch([
       msgFrom(await completeEmail(registered: _jan), id: 'a'),

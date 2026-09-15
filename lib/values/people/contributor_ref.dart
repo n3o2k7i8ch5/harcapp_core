@@ -16,7 +16,7 @@ class ContributorRef{
 
   Map<String, dynamic> toApiJsonMap() => {
     if(person != null) PARAM_PERSON: person!.toApiJsonMap(),
-    PARAM_EMAIL_REF: emailRef==null || emailRef!.trim().isEmpty?null:emailRef!.trim().toLowerCase(),
+    PARAM_EMAIL_REF: emailRef==null || emailRef!.trim().isEmpty?null:normalizedEmail(emailRef!),
     PARAM_USER_KEY_REF: userKeyRef==null || userKeyRef!.trim().isEmpty?null:userKeyRef!.trim(),
   };
 
@@ -49,7 +49,7 @@ class ContributorRef{
   Person? resolve(){
 
     if(emailRef != null) {
-      RegisteredContributor? registeredPerson = allRegisteredPeopleByEmailMap[emailRef];
+      RegisteredContributor? registeredPerson = registeredPersonByEmail(emailRef);
       if(registeredPerson != null)
         return registeredPerson.person;
     }

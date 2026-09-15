@@ -81,7 +81,9 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
    `./piosenkomat label added --push`  
    ####
    `ready-to-add` + `auto` → `added`, przeczytane. Twoje ręczne `ready-to-add`
-   (bez `auto`) zostają nietknięte.
+   (bez `auto`) zostają nietknięte. Domyka **ten przebieg**; gotowe mejle
+   z innego przebiegu wypisuje i zostawia, bo tamtych piosenek jeszcze nie
+   wkleiłeś. `--all`, gdy wklejone są wszystkie.
    ####
 8. **Sprzątanie.**  
    `./piosenkomat clean --push`  
@@ -101,7 +103,8 @@ starej apki → [Stara apka](#stara-apka-reply).
 | `explain plik.eml` | klasyfikacja lokalnego pliku | nie dotyka |
 | `label scanned [KATALOG]` | pokazuje plan przebiegu z `plan.json` | czyta |
 | `label reviewed [KATALOG]` | pokazuje decyzje z `reviewed-*` | czyta |
-| `label added [KATALOG]` | pokazuje, co domknie | czyta |
+| `label added [KATALOG]` | pokazuje, co domknie z przebiegu | czyta |
+| `label added --all` | cała skrzynka, nie tylko przebieg | czyta |
 | `unlabel [KATALOG]` | pokazuje, co cofnie | czyta |
 | `reply [KATALOG] [-n N]` | kto z przebiegu czeka na „zaktualizuj apkę” | czyta |
 | `reply --draft [KATALOG]` | szkice do przejrzenia zamiast wysyłki | czyta |
