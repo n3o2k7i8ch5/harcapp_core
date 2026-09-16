@@ -26,6 +26,20 @@ enum SongIssue{
   missingYoutube('missing-youtube', 'brak YouTube', SongIssueSeverity.blocking),
 
   noConsent('no-consent', 'brak zgody / wersji regulaminu', SongIssueSeverity.blocking),
+
+  /// Załącznika zgłoszenia nie da się wczytać: niezgodna suma kontrolna, nie
+  /// JSON, obcięty plik albo zero zgłoszeń w środku. Zawsze ręczna robota.
+  corruptedSubmissionFile('corrupted-submission-file', 'załącznik zgłoszenia uszkodzony', SongIssueSeverity.blocking),
+  /// Wersja formatu zgłoszenia nowsza niż znana temu narzędziu. Zawartości
+  /// **nie zgadujemy** — trzeba zaktualizować piosenkomat.
+  unknownSubmissionFormat('unknown-submission-format', 'nowsza wersja formatu zgłoszenia', SongIssueSeverity.blocking),
+  /// W jednym pliku przyszło kilka zgłoszeń, a narzędzie bierze pierwsze.
+  /// Reszta **nie weszła** — o tym się nie milczy.
+  skippedSubmissions('skipped-submissions', 'pominięte zgłoszenia z tego samego pliku', SongIssueSeverity.blocking),
+  /// Kilka kart osób dodających w jednym zgłoszeniu: nie wiadomo, do której
+  /// dokleić adres nadawcy, więc wkład przypisujesz ręcznie.
+  severalContributors('several-contributors', 'kilka osób dodających w zgłoszeniu', SongIssueSeverity.blocking),
+
   /// Nadawcą jest skrzynka HarcApp, a treść nie niesie adresu — nie ma komu
   /// przypisać wkładu ani kogo dopytać o zgodę.
   noContributorEmail('no-contributor-email', 'nie da się ustalić, kto zgłosił', SongIssueSeverity.blocking),

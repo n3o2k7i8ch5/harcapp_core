@@ -7,6 +7,8 @@ import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
 
+import 'package:harcapp_core/song_book/submission/submission_file.dart';
+
 import 'hrcpsng.dart';
 import 'model.dart';
 
@@ -175,23 +177,12 @@ class GmailMailbox {
     final msg = await _call(
         () => _api.users.messages.get('me', id, format: 'full'),
         cost: _costGet);
-    String? songAttachment;
-    for (final part in msg.payload?.parts ?? const <MessagePart>[]) {
-      if (!(part.filename ?? '').endsWith('.hrcpsng')) continue;
-      // Małe załączniki Gmail oddaje od razu w treści odpowiedzi. Dokładanie
-      // wtedy `attachments.get` to drugie 20 jednostek za te same bajty.
-      if (part.body?.data case final data?) {
-        songAttachment = _decode(data);
-        break;
-      }
-      if (part.body?.attachmentId case final attId?) {
-        final att = await _call(
-            () => _api.users.messages.attachments.get('me', id, attId),
-            cost: _costGet);
-        if (att.data != null) songAttachment = _decode(att.data!);
-      }
-      break;
-    }
+    // Dwa rozszerzenia naraz: nowe zgłoszenia jadą `.$kSubmissionFileExtension`,
+    // stare `.hrcpsng`. Mejl przejściowy z dwoma załącznikami rozstrzyga się
+    // w `parseSubmission` — wygrywa nowy.
+    final songAttachment = await _attachmentOf(msg, id, '.hrcpsng');
+    final submissionAttachment =
+        await _attachmentOf(msg, id, '.$kSubmissionFileExtension');
     final headers = _headersOf(msg.payload);
     return ContribMessage(
       id: msg.id ?? id,
@@ -211,7 +202,37 @@ class GmailMailbox {
           _nameById[lid] ?? lid,
       },
       songAttachment: songAttachment,
+      submissionAttachment: submissionAttachment,
     );
+  }
+
+  /// Treść pierwszego załącznika o podanym rozszerzeniu. Szuka też
+  /// w częściach zagnieżdżonych — `multipart/mixed` bywa owinięty wokół
+  /// `multipart/alternative` i wtedy płaska pętla po `payload.parts` gubi
+  /// wszystko, co leży głębiej.
+  Future<String?> _attachmentOf(Message msg, String id, String extension) async {
+    for (final part in _allParts(msg.payload)) {
+      if (!(part.filename ?? '').toLowerCase().endsWith(extension)) continue;
+      // Małe załączniki Gmail oddaje od razu w treści odpowiedzi. Dokładanie
+      // wtedy `attachments.get` to drugie 20 jednostek za te same bajty.
+      if (part.body?.data case final data?) return _decode(data);
+      if (part.body?.attachmentId case final attId?) {
+        final att = await _call(
+            () => _api.users.messages.attachments.get('me', id, attId),
+            cost: _costGet);
+        if (att.data != null) return _decode(att.data!);
+      }
+      return null;
+    }
+    return null;
+  }
+
+  static Iterable<MessagePart> _allParts(MessagePart? part) sync* {
+    if (part == null) return;
+    yield part;
+    for (final child in part.parts ?? const <MessagePart>[]) {
+      yield* _allParts(child);
+    }
   }
 
   /// Odpowiedź w wątku [message]: ten sam `threadId`, `In-Reply-To`

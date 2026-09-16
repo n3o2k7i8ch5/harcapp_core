@@ -3,8 +3,67 @@
 Przesiewa mejle z piosenkami na `harcapp@gmail.com`. Kompletne nowe piosenki
 trafiają do pliku `.hrcpsng` do wczytania na stronie, a mejle dostają te same
 etykiety, których używasz przy ręcznym przeglądaniu, plus znacznik `song/auto`.
-Parsowaniem zajmuje się `parseContribEmail` z `harcapp_core`, nic tu nie zgaduje.
+Parsowaniem zajmuje się `harcapp_core`, nic tu nie zgaduje.
 Gmail jest jedynym stanem.
+
+**Obsługuje wyłącznie zgłoszenia wysłane z apki.** Zgłoszenia ze strony
+(`harcapp.web.app`) są poza zakresem i są **aktywnie odsiewane** — po znaczniku
+`[hrcpsng/web]` w temacie, a gdy jest plik zgłoszenia, także po polu `source`
+w nim. Ogarniasz je ręcznie.
+
+**Jeden wątek to jedna piosenka.** Druga piosenka dosłana odpowiedzią w wątku,
+który ma już etykietę, nie istnieje dla narzędzia i nie ma istnieć. Wyjątkiem
+jest `reopen`: on celowo wraca wątek do kolejki, żeby poprawiona wersja **tej
+samej** piosenki mogła przyjść odpowiedzią. Dlatego i apka (ekran wysyłki),
+i treść zgłoszenia, i szablon odpowiedzi mówią autorowi: każdą kolejną piosenkę
+wyślij osobnym mejlem.
+
+## Format zgłoszenia
+
+Zgłoszenie z apki jedzie **załącznikiem** `.hrcpsngsbm`, nie treścią mejla.
+Treść jest wyłącznie dla człowieka, a narzędzie czyta z niej jedną rzecz:
+dopisek autora, czyli wszystko nad zamrożoną belką `Akceptacja regulaminu`.
+
+```json
+{
+  "format": 1,
+  "digest": "sha256:…",
+  "source": "app-android",
+  "app_version": "2.4.1",
+  "rules_version": "v05.10.2025",
+  "submissions": [
+    {
+      "kind": "correction",
+      "corrected_song_id": "o!_barka",
+      "corrected_song_digest": null,
+      "correction_message": "poprawka chwytu w refrenie",
+      "sender_is_contributor": true,
+      "contributor": {"person": {…}, "emails": ["…"]},
+      "song": {…}
+    }
+  ]
+}
+```
+
+- **`format`** to wersja **całego protokołu** (znacznik w temacie + kontrakt
+  treści + kształt pliku), nie samego pliku. Wersja nowsza niż znana nie jest
+  zgadywana: zgłoszenie dostaje `needs-review/unknown-format`.
+- **`digest`** liczy się z całego pliku po wyrzuceniu samego pola `digest`,
+  z postaci kanonicznej (klucze posortowane, bez białych znaków, UTF-8).
+  Nie broni przed połamaniem linii — od tego jest sam załącznik, który idzie
+  bajt w bajt. Broni przed ręczną edycją i przed obcięciem.
+- **Plik zawiera listę zgłoszeń**, każde z **jedną** piosenką i własnymi
+  metadanymi. Dziś apka wysyła jedno; przy kilku narzędzie bierze pierwsze
+  i mówi o tym uwagą `skipped-submissions`.
+- **`sender_is_contributor`** rozstrzyga to, co dotąd zgadywała heurystyka: czy
+  adres nadawcy doklejać do karty osoby dodającej. Przy `false` adres służy
+  wyłącznie do odpisania i **nie** wchodzi do `people.dart`.
+- Kolejka łapie nowy format dwiema drogami — znacznik `[hrcpsng/app]` w temacie
+  **albo** rozszerzenie załącznika — bo temat jest edytowalny przez człowieka.
+
+Stare kształty mejla (`fenced`, `legacy`, `oldest`) działają dalej, obok.
+`report.txt` pokazuje ich rozkład; po nim poznasz, kiedy wolno skasować stare
+czytniki — a schodzą **razem** ze starymi członami kolejki, jednym ruchem.
 
 ## Setup (raz)
 
@@ -152,7 +211,12 @@ song/
 │   │                         ktoś poprawił i wysłał jako nową
 │   ├── correction-problem    poprawka, ale w apce nie ma czego poprawiać
 │   ├── missing-data          brak YouTube, chwytów lub tytułu
-│   └── no-consent            brak zgody albo nie wiadomo, kto zgłosił
+│   ├── no-consent            brak zgody albo nie wiadomo, kto zgłosił
+│   ├── corrupted-data        załącznik zgłoszenia nie do wczytania: suma, JSON, obcięcie,
+│   │                         zero zgłoszeń — etykieta leci już przy `scan`
+│   ├── unknown-format        plik w wersji protokołu nowszej niż zna to narzędzie
+│   ├── skipped-submissions   w pliku było kilka zgłoszeń, weszło pierwsze
+│   └── several-contributors  kilka kart osób dodających — wkład przypisz ręcznie
 ├── contributor/              napisałeś coś osobie dodającej przy przeglądzie
 │   ├── to-ask                kolejka: mejl do wysłania (`reply`)
 │   └── asked                 poszło; czekamy na odpowiedź (`reopen`)
@@ -190,8 +254,9 @@ Trzy kroki, każdy z osobną strukturą: **cechy** (fakty o zgłoszeniu) →
 **decyzja** (jedna tabela `decide(cechy)`: dokąd trafia i jakie uwagi) →
 **uwagi** (osąd o piosence, tylko dla tego, co idzie do pliku).
 
-**Cechy**: `kind` (`new` / `correction` — z tematu albo niepustego bloku
-„Propozycja poprawki”), `source` (`current-app` / `old-app`), `userMessage`,
+**Cechy**: `kind` (z pliku zgłoszenia; przy starych mejlach z tematu albo
+niepustego bloku „Propozycja poprawki”), `legacyApp` (czy ze starej apki),
+`shape` (rozpoznany kształt mejla), `senderIsContributor`, `userMessage`,
 `correctionMessage`, `sentAt`, nadawca, zgoda, sparsowana piosenka, `appMatch`
 (najbliższa piosenka w apce), `batchMatch` (najbliższe inne zgłoszenie w paczce).
 
@@ -231,6 +296,8 @@ z innego przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs`.
 |---|---|---|---|
 | `missing-title`, `missing-chords`, `missing-youtube` | blocking | ✓ | — (poprawka to diff) |
 | `no-consent`, `no-contributor-email` | blocking | ✓ | ✓ |
+| `corrupted-submission-file`, `unknown-submission-format` | blocking | ✓ | ✓ (piosenki nie ma po czym odczytać) |
+| `skipped-submissions`, `several-contributors` | blocking | ✓ | ✓ |
 | `chords-differ-from-app`, `metadata-differ-from-app` | decision | ✓ | — |
 | `same-title-in-app`, `similar-text-in-app` | decision | ✓ | — (normalny kształt poprawki) |
 | `same-title-in-batch`, `similar-text-in-batch` | decision | ✓ | zapasowo, gdy nie ma celu |
@@ -250,7 +317,8 @@ tagi widzi użytkownik apki):
 
 ```json
 "piosenkomat": {
-  "kind": "correction", "source": "old-app", "sent_at": "…",
+  "kind": "correction", "legacy_app_used": true, "sent_at": "…",
+  "sender": "jan@example.com", "sender_is_contributor": false,
   "user_message": "…", "correction_message": "…",
   "correction_target": "o!_plonie_ognisko",
   "thread_id": "17a6…", "run": "import-…",
@@ -258,8 +326,15 @@ tagi widzi użytkownik apki):
 }
 ```
 
+`legacy_app_used` zastąpiło dawne pole `source`, które miało dwie wartości
+(`current-app` / `old-app`), czyli nie mówiło **skąd**, tylko **jak stare**.
+Stare pliki przebiegu dalej się czytają: `source: old-app` wchodzi jako
+`legacy_app_used`. Skąd przyszło zgłoszenie, mówi `source` w **pliku
+zgłoszenia**; rozpoznany kształt mejla widać w rozkładzie w `report.txt`.
+
 `correction_target` — którą piosenkę w apce poprawia — bierze się **z mejla**:
-apka wysyła sekcję `### Poprawiana piosenka:` z id w bloku ``` (klienty łamią
+nowy format niesie `corrected_song_id` w pliku zgłoszenia, starszy w sekcji
+`### Poprawiana piosenka:` z id w bloku ``` (klienty łamią
 długie linie, blok czyta się w całości), a piosenka własna pamięta
 swój pierwowzór od chwili, w której wzięto ją do edycji. Gdy zgłoszenie nic nie
 mówi (stara apka, apka sprzed tej zmiany), narzędzie **wolno zgaduje** po tytule

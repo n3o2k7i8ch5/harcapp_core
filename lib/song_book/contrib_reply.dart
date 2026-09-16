@@ -7,6 +7,8 @@
 /// nowa, zamiast kazać go przepisywać ręcznie.
 library;
 
+import 'package:harcapp_core/song_book/submission/submission_email.dart';
+
 /// Zawsze na początku — mejl zaczyna się od podziękowania, nie od pretensji.
 const String kReplyGreeting = 'Dzięki za piosenki :)';
 
@@ -30,6 +32,14 @@ const String kOldAppReplyBlock =
     '\n'
     'Daj proszę przy okazji znać o tym w swoim środowisku! :)';
 
+/// Jeden wątek to jedna piosenka: druga, dosłana odpowiedzią na wątek, który
+/// ma już etykietę, nie istnieje dla narzędzia. Dlatego mówimy to autorowi
+/// wprost, tym samym zdaniem, co apka na ekranie wysyłki i sam mejl
+/// zgłoszeniowy ([kSubmissionOneSongPerMailNote]).
+const String kOneSongPerMailReplyBlock =
+    'Przy okazji: każdą kolejną piosenkę wyślij proszę osobnym mejlem, '
+    'a nie odpowiedzią na ten — inaczej może mi umknąć.';
+
 /// Treść odpowiedzi do autora.
 ///
 /// [notes] to Twoje teksty z pola „Odpowiedź do autora” w edytorze — idą przed
@@ -42,6 +52,7 @@ const String kOldAppReplyBlock =
 String? composeContribReply({
   Iterable<String> notes = const [],
   bool oldApp = false,
+  bool oneSongPerMail = false,
 }) {
   final trimmed = [
     for(final n in notes) if(n.trim().isNotEmpty) n.trim(),
@@ -51,6 +62,7 @@ String? composeContribReply({
     kReplyGreeting,
     ...trimmed,
     if (oldApp) kOldAppReplyBlock,
+    if (oneSongPerMail) kOneSongPerMailReplyBlock,
     kReplyClosing,
   ].join('\n\n');
 }

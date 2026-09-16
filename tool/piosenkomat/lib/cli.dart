@@ -212,8 +212,13 @@ Future<int> _scan(ArgResults cmd) async {
   // Bezpieczniki na wypadek, gdyby query przepuściło coś już otagowanego
   // albo coś, co nie jest zgłoszeniem piosenki. Takich mejli nie dotykamy.
   var messages = fetched
-      .where((m) => !m.hasSongLabel && m.isSongSubmission)
+      .where((m) => !m.hasSongLabel && m.isSongSubmission && !isWebSubmission(m))
       .toList();
+  final web = fetched.where(isWebSubmission).length;
+  if (web > 0) {
+    stdout.writeln('Odsiano $web zgłoszeń ze strony — piosenkomat obsługuje '
+        'wyłącznie zgłoszenia wysłane z apki. Te ogarnij ręcznie.');
+  }
   // Kolejka jest po wątkach: odpowiedź w wątku, który już dostał `song/*`,
   // to nie nowe zgłoszenie. Query tego nie umie (działa na wiadomościach),
   // więc dociągamy wątek — jedno zapytanie na wątek.
@@ -745,6 +750,7 @@ int _prepare(ArgResults cmd) {
   if (outDir == null) return 64;
   var any = false;
   final entering = <SongRaw>[];
+  final sources = <ContributorSource>[];
   for (final kind in SubmissionKind.values) {
     final reviewedPath = _reviewedFileOf(outDir, kind);
     if (reviewedPath == null) continue;
@@ -757,6 +763,9 @@ int _prepare(ArgResults cmd) {
         if (s.piosenkomatData?.goesIn ?? true) s,
     ];
     final turnedDownCount = allSongs.length - songs.length;
+    // Osoby zbieramy **przed** `strip`: to ślad piosenkomatu niesie
+    // `sender_is_contributor`, a strip go zdejmuje.
+    sources.addAll(contributorSourcesOf(songs));
     final targets = stripPiosenkomat(songs);
     entering.addAll(songs);
     final out = finalPathIn(outDir, kind);
@@ -781,13 +790,13 @@ int _prepare(ArgResults cmd) {
     stderr.writeln('Brak plików zwrotnych w $outDir — najpierw przegląd na stronie.');
     return 1;
   }
-  _writePeople(outDir, entering);
+  _writePeople(outDir, sources);
   return 0;
 }
 
 /// `people.dart` z piosenek, które wchodzą. Dodatkowe adresy z bloku „Osoba
 /// dodająca” dokłada plan przebiegu — piosenka niesie tylko `email_ref`.
-void _writePeople(String outDir, List<SongRaw> entering) {
+void _writePeople(String outDir, List<ContributorSource> sources) {
   final planPath = planPathIn(outDir);
   var otherEmails = const <String, List<String>>{};
   if (_exists(planPath)) {
@@ -798,13 +807,17 @@ void _writePeople(String outDir, List<SongRaw> entering) {
           'w people.dart same adresy nadawców.');
     }
   }
-  final people = collectPeople(
-      contributorSourcesOf(entering, otherEmailsBySender: otherEmails));
+  final people = collectPeople(withOtherEmails(sources, otherEmails));
   final peoplePath = peoplePathIn(outDir);
   writePeopleDart(peoplePath, people);
   stdout.writeln('Osoby dodające: ${people.newContributors.length} nowych → $peoplePath'
       '${people.knownByEmail.isEmpty ? '' : ', ${people.knownByEmail.length} już w data.dart'}'
       '${people.anonymousByEmail.isEmpty ? '' : ', ${people.anonymousByEmail.length} bez karty osoby'}');
+  if (people.senderNotContributorByEmail.isNotEmpty) {
+    stdout.writeln('${people.senderNotContributorByEmail.length} zgłoszeń '
+        'w cudzym imieniu — osobę dodającą przypisz ręcznie '
+        '(adres nadawcy jest tylko do odpisania).');
+  }
   if (people.newContributors.isNotEmpty) {
     stdout.writeln('Doklej nowe do lib/values/people/data.dart, '
         'zanim wkleisz piosenki do all_songs.');
@@ -974,6 +987,9 @@ Future<int> _reply(ArgResults cmd) async {
               if (replies[threadId] case final note?) note,
         ].toSet(),
         oldApp: mejle.any(oldAppIds.contains),
+        // Odpowiedź wprost zaprasza do odpisania — a piosenka dosłana
+        // w tym wątku przepada, bo wątek ma już etykietę.
+        oneSongPerMail: true,
       );
 
   /// Etykiety po odpowiedzi: schodzą obie kolejki, wchodzi to, co się należy.
@@ -1433,6 +1449,20 @@ String formatRunReport(List<Classified> items) {
         '  (identyczna z apką, ale autor coś napisał)')
     ..writeln('STARA APKA      ${count((c) => c.submission.isOldApp)}'
         '  (do odpisania: ./piosenkomat reply)');
+
+  // Rozkład kształtów mejla: po nim poznasz, kiedy wolno skasować czytniki
+  // starych formatów. Rozkład wersji apki mówi, jak szybko ludzie aktualizują.
+  buf.writeln();
+  buf.writeln('Kształt mejla:');
+  _countLines(buf, _tally([for (final c in items) c.submission.shape.id]), byCount: true);
+  final versions = _tally([
+    for (final c in items)
+      if (c.submission.appVersion case final v?) v,
+  ]);
+  if (versions.isNotEmpty) {
+    buf.writeln('Wersja apki:');
+    _countLines(buf, versions, byCount: true);
+  }
 
   final issuesOf = [
     for (final c in items)

@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
+import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+import 'package:harcapp_core/song_book/submission/submission_email.dart';
+import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
@@ -31,6 +34,19 @@ class ParsedContribEmail{
   /// w linii „### Poprawiana piosenka”. `null` znaczy: mejl tego nie niesie
   /// (nowa piosenka albo apka sprzed tej linii) i cel trzeba zgadywać.
   final String? correctedSongId;
+  /// Rodzaj **zadeklarowany przez apkę**. Niesie go tylko nowy format; przy
+  /// starych mejlach jest `null` i rodzaj wnioskuje się z tematu.
+  final SubmissionKind? declaredKind;
+  /// Co autor wybrał przed wysyłką: w swoim czy w cudzym imieniu. `null` przy
+  /// starych mejlach — one tego nie niosą, więc zostaje heurystyka.
+  final bool? senderIsContributor;
+  /// Wersja apki, z której poszło zgłoszenie. Tylko nowy format.
+  final String? appVersion;
+  /// Skąd przyszło zgłoszenie. Tylko nowy format.
+  final SubmissionOrigin? origin;
+  /// Ile zgłoszeń z tego samego pliku **nie weszło**. Narzędzie bierze
+  /// pierwsze, a o reszcie nie wolno milczeć.
+  final int skippedSubmissions;
 
   ParsedContribEmail({
     required this.song,
@@ -43,7 +59,39 @@ class ParsedContribEmail{
     this.personParseWarnings = const [],
     this.isOldestFormat = false,
     this.correctedSongId,
+    this.declaredKind,
+    this.senderIsContributor,
+    this.appVersion,
+    this.origin,
+    this.skippedSubmissions = 0,
   });
+
+  /// Nowa ścieżka: fakty z załącznika plus dopisek z treści. Wypełnia **tę
+  /// samą** strukturę, co stary parser, żeby reszta narzędzia nie musiała
+  /// wiedzieć, skąd przyszły dane.
+  factory ParsedContribEmail.fromSubmissionFile(
+    SongSubmissionFile file,
+    String body, {
+    String? senderEmail,
+    int index = 0,
+  }){
+    final submission = file.submissions[index];
+    return ParsedContribEmail(
+      song: submission.song,
+      senderEmail: senderEmail,
+      acceptedRulesVersion: file.rulesVersion,
+      registered: submission.contributor,
+      userMessage: extractSubmissionUserMessage(body),
+      correctionMessage: submission.correctionMessage,
+      isNewFormat: true,
+      correctedSongId: submission.correctedSongId,
+      declaredKind: submission.kind,
+      senderIsContributor: submission.senderIsContributor,
+      appVersion: file.appVersion,
+      origin: file.source,
+      skippedSubmissions: file.submissions.length - 1,
+    );
+  }
 
 }
 

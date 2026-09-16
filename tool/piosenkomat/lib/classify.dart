@@ -7,6 +7,8 @@ import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
+import 'package:harcapp_core/song_book/submission/submission_email.dart';
+import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 
 import 'model.dart';
@@ -17,6 +19,35 @@ final _emailRe = RegExp(r'[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}');
 /// Adres z nagłówka `From` (`Jan <jan@x.pl>` albo `jan@x.pl`).
 String? emailFromHeader(String? from) =>
     from == null ? null : _emailRe.firstMatch(from)?.group(0)?.toLowerCase();
+
+/// Wynik sięgnięcia po załącznik zgłoszenia: plik, powód odmowy, albo nic —
+/// gdy mejl jest w starym kształcie i załącznika w ogóle nie ma.
+class SubmissionFileRead {
+  final SongSubmissionFile? file;
+  final SubmissionFileError? error;
+
+  const SubmissionFileRead({this.file, this.error});
+
+  /// Czy mejl w ogóle niósł plik zgłoszenia. Uszkodzony wciąż nim jest —
+  /// i właśnie dlatego nie wolno po cichu wracać do starej ścieżki.
+  bool get isFile => file != null || error != null;
+}
+
+SubmissionFileRead readSubmissionFile(ContribMessage m) {
+  final raw = m.submissionAttachment;
+  if (raw == null) return const SubmissionFileRead();
+  try {
+    return SubmissionFileRead(file: SongSubmissionFile.decode(raw));
+  } on SubmissionFileError catch (e) {
+    return SubmissionFileRead(error: e);
+  }
+}
+
+/// **Piosenkomat obsługuje wyłącznie zgłoszenia wysłane z apki.** Zgłoszenie
+/// ze strony odsiewamy jawnie: po znaczniku w temacie, a gdy plik jest —
+/// po polu `source`, bo temat człowiek może zmienić.
+bool isWebSubmission(ContribMessage m) =>
+    m.isWebSubmission || (readSubmissionFile(m).file?.source?.isWeb ?? false);
 
 // ---------------------------------------------------------------------------
 // Krok 1: wiadomości → zgłoszenia (cechy)
@@ -57,11 +88,23 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
   ];
   final rep = own.isNotEmpty ? own.last : ordered.first;
 
+  // Nowa ścieżka: fakty z załącznika, dopisek z treści. Wypełnia tę samą
+  // strukturę, co stary parser, więc wszystko poniżej zostaje bez zmian.
+  final file = readSubmissionFile(rep);
+
   ParsedContribEmail? parsed;
-  try {
-    parsed = parseSubmission(rep);
-  } catch (_) {
-    parsed = null;
+  if (file.error == null && file.file != null) {
+    parsed = ParsedContribEmail.fromSubmissionFile(
+      file.file!,
+      rep.body,
+      senderEmail: emailFromHeader(rep.from),
+    );
+  } else if (file.error == null) {
+    try {
+      parsed = parseSubmission(rep);
+    } catch (_) {
+      parsed = null;
+    }
   }
 
   final song = parsed?.song;
@@ -79,8 +122,19 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
   }
 
   final oldApp = parsed?.isOldestFormat ?? false;
-  final isCorrection = (rep.subject ?? '').contains(kCorrectionSubject) ||
-      extractCorrectionMessage(rep.body) != null;
+  final shape = file.isFile
+      ? EmailShape.file
+      : oldApp
+          ? EmailShape.oldest
+          : (parsed?.isNewFormat ?? true)
+              ? EmailShape.fenced
+              : EmailShape.legacy;
+  // Rodzaj bierze się z pliku i **tylko** z pliku, gdy plik jest. Dla starych
+  // mejli zostaje wnioskowanie z tematu albo z niepustego bloku poprawki.
+  final isCorrection = parsed?.declaredKind != null
+      ? parsed!.declaredKind == SubmissionKind.correction
+      : (rep.subject ?? '').contains(kCorrectionSubject) ||
+          extractCorrectionMessage(rep.body) != null;
   final sender = parsed == null ? _senderOf(rep) : _sender(rep, parsed);
   final consent = oldApp
       ? kOldAppRulesVersion
@@ -88,8 +142,18 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
           ? null
           : parsed!.acceptedRulesVersion!.trim();
 
+  final senderIsContributor = parsed?.senderIsContributor ?? true;
+  final contributorCards =
+      song == null ? 0 : song.contribRefs.where((c) => c.person != null).length;
   if (song != null && parsed != null) {
-    _enrich(song, parsed, sender: sender, threadId: rep.threadId, date: rep.date);
+    _enrich(song, parsed,
+        sender: sender,
+        threadId: rep.threadId,
+        date: rep.date,
+        // Heurystyka „doklej nadawcę do jedynej karty” zostaje dla starych
+        // formatów — one nie niosą `sender_is_contributor`, więc nie ma jej
+        // czym zastąpić. Nowa ścieżka pyta pliku.
+        attachSender: !file.isFile || (senderIsContributor && contributorCards < 2));
   }
 
   final profile = song == null ? null : SongProfile(song);
@@ -118,7 +182,15 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
     message: rep,
     messages: ordered,
     kind: isCorrection ? SubmissionKind.correction : SubmissionKind.newSong,
-    source: oldApp ? SubmissionSource.oldApp : SubmissionSource.currentApp,
+    legacyApp: oldApp,
+    shape: shape,
+    origin: parsed?.origin,
+    appVersion: parsed?.appVersion,
+    senderIsContributor: senderIsContributor,
+    skippedSubmissions: parsed?.skippedSubmissions ?? 0,
+    severalContributors: file.isFile && contributorCards > 1,
+    fileError: file.error?.kind,
+    fileErrorMessage: file.error?.message,
     title: title,
     userMessage: messagesText.isEmpty ? null : messagesText.join('\n\n'),
     correctionMessage: parsed?.correctionMessage ?? extractCorrectionMessage(rep.body),
@@ -229,7 +301,20 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
 /// pierwsza. Identyczna z apką **nigdy** nie idzie do pliku.
 Decision decide(Submission s) {
   final song = s.song;
-  if (song == null) return const Decision(Target.unparsable);
+
+  // Uwagi o samym załączniku: te istnieją nawet wtedy, gdy piosenki nie ma
+  // po czym odczytać. Bez nich uszkodzony plik wyglądałby jak zwykły mejl
+  // nie do sparsowania i przepadłby w worku `unparsable`.
+  final fileIssues = <PiosenkomatIssue>[
+    if (s.fileError != null)
+      PiosenkomatIssue(
+        s.fileError == SubmissionFileErrorKind.unknownFormat
+            ? SongIssue.unknownSubmissionFormat
+            : SongIssue.corruptedSubmissionFile,
+        detail: s.fileErrorMessage,
+      ),
+  ];
+  if (song == null) return Decision(Target.unparsable, issues: fileIssues);
 
   final batch = s.batchMatch;
   if (batch != null && batch.level == MatchLevel.identical && !batch.isNewestInBatch) {
@@ -247,11 +332,18 @@ Decision decide(Submission s) {
     return Decision(Target.rejectAlreadyInApp, detail: app!.detail);
   }
 
-  final issues = <PiosenkomatIssue>[];
+  final issues = <PiosenkomatIssue>[...fileIssues];
   void add(SongIssue issue, [String? detail]) =>
       issues.add(PiosenkomatIssue(issue, detail: detail));
 
   // Wspólne.
+  if (s.skippedSubmissions > 0) {
+    add(SongIssue.skippedSubmissions,
+        'w pliku było ${s.skippedSubmissions + 1} zgłoszeń, weszło pierwsze');
+  }
+  if (s.severalContributors) {
+    add(SongIssue.severalContributors, 'przypisz wkład ręcznie');
+  }
   if (s.consentVersion == null) add(SongIssue.noConsent);
   if (s.sender == null) {
     add(SongIssue.noContributorEmail, 'nadawca: ${s.message.from ?? 'missingCount nagłówka'}');
@@ -346,6 +438,9 @@ String _chordsDetail(SongRaw song) {
 /// szablonu; gdy to zwykła odpowiedź — cały jej własny tekst, bez cytatu
 /// i bez linii „Dnia … napisał(a):”.
 String? _userMessageOf(ContribMessage m) {
+  // Nowy format: dopisek to wszystko nad zamrożoną belką, a w treści nie ma
+  // już żadnego kodu piosenki do sparsowania.
+  if (m.submissionAttachment != null) return extractSubmissionUserMessage(m.body);
   if (m.hasOwnSongCode) {
     try {
       return parseSubmission(m).userMessage;
@@ -521,6 +616,7 @@ void _enrich(
   required String? sender,
   required String threadId,
   DateTime? date,
+  bool attachSender = true,
 }) {
   // Dane z mejla mają pierwszeństwo (stary format je niósł), ale id wątku
   // stemplujemy zawsze: po nim `review` wiąże piosenkę ze zgłoszeniem.
@@ -536,7 +632,7 @@ void _enrich(
   );
   final known = sender == null || song.contribRefs
       .any((c) => (c.emailRef ?? '').toLowerCase() == sender);
-  if (!known) {
+  if (!known && attachSender) {
     // Apka wysyła kartę osoby dodającej w `add_pers` **bez** adresu — adres
     // jedzie osobno. Doklejony jako drugi wpis robił z jednej osoby dwie:
     // kartę i goły mejl pod nią. Jeśli jest dokładnie jedna karta bez

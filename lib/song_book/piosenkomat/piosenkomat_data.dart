@@ -12,19 +12,6 @@ enum SubmissionKind{
       values.where((k) => k.id == id).firstOrNull ?? SubmissionKind.newSong;
 }
 
-/// Z której wersji apki przyszło zgłoszenie. Wiedza o nadawcy, nie o piosence:
-/// autorowi ze starej apki piosenkomat odpisze, żeby ją zaktualizował.
-enum SubmissionSource{
-  currentApp('current-app'),
-  oldApp('old-app');
-
-  const SubmissionSource(this.id);
-  final String id;
-
-  static SubmissionSource byId(String? id) =>
-      values.where((s) => s.id == id).firstOrNull ?? SubmissionSource.currentApp;
-}
-
 /// Jedna uwaga piosenkomatu do piosenki. [detail] mówi *z czym* kolizja albo
 /// *co* dokładnie jest nie tak — bez tego „ten sam tytuł” nie niesie nic,
 /// czego nie wiadomo z samej nazwy uwagi.
@@ -65,7 +52,11 @@ class PiosenkomatIssue{
 class PiosenkomatData{
 
   static const String PARAM_KIND = 'kind';
-  static const String PARAM_SOURCE = 'source';
+  /// Nazwa sprzed rozbicia pola `source` na trzy: patrz [legacyAppUsed].
+  static const String PARAM_LEGACY_SOURCE = 'source';
+  static const String PARAM_LEGACY_APP_USED = 'legacy_app_used';
+  static const String PARAM_SENDER = 'sender';
+  static const String PARAM_SENDER_IS_CONTRIBUTOR = 'sender_is_contributor';
   static const String PARAM_SENT_AT = 'sent_at';
   static const String PARAM_USER_MESSAGE = 'user_message';
   static const String PARAM_CORRECTION_MESSAGE = 'correction_message';
@@ -79,7 +70,23 @@ class PiosenkomatData{
   static const String PARAM_REPLY_TO_CONTRIBUTOR = 'reply_to_contributor';
 
   final SubmissionKind kind;
-  final SubmissionSource source;
+  /// Czy zgłoszenie przyszło ze starej apki. Wiedza o nadawcy, nie o piosence:
+  /// takiemu autorowi piosenkomat odpisze, żeby apkę zaktualizował.
+  ///
+  /// Zastępuje dawne pole `source`, które miało dwie wartości — „bieżąca apka”
+  /// i „stara apka” — czyli nie mówiło **skąd**, tylko **jak stare**, a nazywało
+  /// się tak, jakby mówiło skąd.
+  final bool legacyAppUsed;
+  /// Adres, z którego przyszło zgłoszenie. Zawsze widoczny w pasku
+  /// piosenkomatu — to jedyne miejsce, gdzie go zobaczysz, gdy nie został
+  /// doklejony do karty osoby dodającej (wysyłka w cudzym imieniu, kilka kart).
+  final String? sender;
+  /// Co autor wybrał przed wysyłką: „wysyłam piosenkę proponowaną przeze mnie”
+  /// (`true`) albo „wysyłam w imieniu innej osoby” (`false`). Przy `false`
+  /// adres nadawcy służy wyłącznie do odpisania i **nie** trafia do
+  /// `people.dart`. Stare zgłoszenia tego nie niosą — dla nich `true`, bo tak
+  /// to dotąd zgadywała heurystyka.
+  final bool senderIsContributor;
   /// Data wysłania mejla-reprezentanta zgłoszenia.
   final DateTime? sentAt;
   /// Co autor dopisał w polu „Jeśli chcesz coś dodać…”.
@@ -114,7 +121,9 @@ class PiosenkomatData{
 
   const PiosenkomatData({
     this.kind = SubmissionKind.newSong,
-    this.source = SubmissionSource.currentApp,
+    this.legacyAppUsed = false,
+    this.sender,
+    this.senderIsContributor = true,
     this.sentAt,
     this.userMessage,
     this.correctionMessage,
@@ -132,7 +141,9 @@ class PiosenkomatData{
     String? Function()? replyToContributor,
   }) => PiosenkomatData(
     kind: kind,
-    source: source,
+    legacyAppUsed: legacyAppUsed,
+    sender: sender,
+    senderIsContributor: senderIsContributor,
     sentAt: sentAt,
     userMessage: userMessage,
     correctionMessage: correctionMessage,
@@ -146,7 +157,7 @@ class PiosenkomatData{
   );
 
   bool get isCorrection => kind == SubmissionKind.correction;
-  bool get isOldApp => source == SubmissionSource.oldApp;
+  bool get isOldApp => legacyAppUsed;
   bool get hasBlocking => issues.any((i) => i.issue.isBlocking);
   /// Czy jest coś od autora do przeczytania.
   bool get hasMessages => (userMessage ?? '').isNotEmpty || (correctionMessage ?? '').isNotEmpty;
@@ -157,7 +168,9 @@ class PiosenkomatData{
 
   Map<String, dynamic> toJsonMap() => {
     PARAM_KIND: kind.id,
-    PARAM_SOURCE: source.id,
+    if(legacyAppUsed) PARAM_LEGACY_APP_USED: true,
+    if(sender != null) PARAM_SENDER: sender,
+    if(!senderIsContributor) PARAM_SENDER_IS_CONTRIBUTOR: false,
     if(sentAt != null) PARAM_SENT_AT: sentAt!.toIso8601String(),
     if(userMessage != null) PARAM_USER_MESSAGE: userMessage,
     if(correctionMessage != null) PARAM_CORRECTION_MESSAGE: correctionMessage,
@@ -172,7 +185,12 @@ class PiosenkomatData{
 
   static PiosenkomatData fromJsonMap(Map<String, dynamic> map) => PiosenkomatData(
     kind: SubmissionKind.byId(map[PARAM_KIND] as String?),
-    source: SubmissionSource.byId(map[PARAM_SOURCE] as String?),
+    // Stare pliki przebiegu niosą `source: old-app` — bez tego mapowania
+    // wracałyby po cichu jako „bieżąca apka”, bo tym była domyślna wartość.
+    legacyAppUsed: map[PARAM_LEGACY_APP_USED] as bool?
+        ?? map[PARAM_LEGACY_SOURCE] == 'old-app',
+    sender: map[PARAM_SENDER] as String?,
+    senderIsContributor: map[PARAM_SENDER_IS_CONTRIBUTOR] as bool? ?? true,
     sentAt: DateTime.tryParse(map[PARAM_SENT_AT] as String? ?? ''),
     userMessage: map[PARAM_USER_MESSAGE] as String?,
     correctionMessage: map[PARAM_CORRECTION_MESSAGE] as String?,

@@ -255,7 +255,7 @@ void main() {
     );
     final got = classify(oldApp, book: SongBook.empty);
     expect(got.isClean, isTrue, reason: 'stary format sam w sobie nie blokuje');
-    expect(got.submission.source, SubmissionSource.oldApp);
+    expect(got.submission.legacyApp, isTrue);
     expect(got.submission.consentVersion, kOldAppRulesVersion);
     expect(got.labels, [kLabelReady, kLabelOldAppToReply]);
     expect(got.song!.piosenkomatData!.isOldApp, isTrue);
@@ -332,7 +332,12 @@ void _submission() {
     expect(const ContribMessage(id: 'a', body: 'x', subject: 'Nowa piosenka "Y"').isSongSubmission, isTrue);
     expect(const ContribMessage(id: 'b', body: 'bla\n### Kod piosenki:\n{}').isSongSubmission, isTrue);
     expect(const ContribMessage(id: 'c', body: 'x', subject: 'Re: grupa FB').isSongSubmission, isFalse);
-    expect(kQueueQuery, contains('subject:"Nowa piosenka" OR subject:"Poprawka piosenki" OR "### Kod piosenki:"'));
+    expect(kQueueQuery, contains('subject:"Nowa piosenka" OR subject:"Poprawka piosenki"'));
+    expect(kQueueQuery, contains('"### Kod piosenki:"'));
+    // Nowy format wpada dwiema drogami: znacznik w temacie albo rozszerzenie
+    // załącznika. Temat jest edytowalny, więc jeden sygnał to za mało.
+    expect(kQueueQuery, contains('subject:"hrcpsng/app"'));
+    expect(kQueueQuery, contains('filename:hrcpsngsbm'));
   });
 
   test('hasOwnSongCode: cytat to nie własny kod', () {

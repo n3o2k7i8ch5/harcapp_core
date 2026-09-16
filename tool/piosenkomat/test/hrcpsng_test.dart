@@ -52,7 +52,7 @@ void main() {
     final data = back.piosenkomatData!;
     expect(data.threadId, c.submission.threadId);
     expect(data.kind, SubmissionKind.newSong);
-    expect(data.source, SubmissionSource.currentApp);
+    expect(data.legacyAppUsed, isFalse);
     expect(data.userMessage, 'hej');
     expect(data.run, 'import-x');
     expect(data.sentAt, c.submission.sentAt);

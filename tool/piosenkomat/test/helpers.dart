@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
@@ -7,6 +8,8 @@ import 'package:piosenkomat/similarity.dart';
 import 'package:harcapp_core/song_book/contrib_song_email.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/song_book/song_element.dart';
+import 'package:harcapp_core/song_book/submission/submission_email.dart';
+import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:test/test.dart';
 
@@ -116,7 +119,6 @@ Classified classifiedWith(
       message: m,
       messages: const [m],
       kind: kind,
-      source: SubmissionSource.currentApp,
       title: 'x',
       song: SongRaw.empty(id: 'x'),
       userMessage: userMessage ? 'hej' : null,
@@ -143,4 +145,81 @@ Directory tempDir() {
   final dir = Directory.systemTemp.createTempSync('piosenkomat');
   addTearDown(() => dir.deleteSync(recursive: true));
   return dir;
+}
+
+/// Mejl MIME z załącznikami — taki, jaki wychodzi z klienta pocztowego.
+/// Dotychczasowy pomocnik składał samą treść, więc nowy format nie miał
+/// w testach żadnej reprezentacji.
+String mimeEmail({
+  required String subject,
+  String from = 'Jan Testowy <jan.testowy@example.com>',
+  String body = '',
+  Map<String, String> attachments = const {},
+  String date = 'Thu, 11 Sep 2026 10:00:00 +0200',
+  bool reply = false,
+}) {
+  const boundary = '----harcapp-test-boundary';
+  final buf = StringBuffer()
+    ..writeln('From: $from')
+    ..writeln('To: harcapp@gmail.com')
+    ..writeln('Subject: $subject')
+    ..writeln('Date: $date');
+  if (reply) buf.writeln('In-Reply-To: <prev@mail.gmail.com>');
+  if (attachments.isEmpty) {
+    buf..writeln('Content-Type: text/plain; charset="UTF-8"')..writeln()..write(body);
+    return buf.toString();
+  }
+  buf
+    ..writeln('Content-Type: multipart/mixed; boundary="$boundary"')
+    ..writeln()
+    ..writeln('--$boundary')
+    ..writeln('Content-Type: text/plain; charset="UTF-8"')
+    ..writeln()
+    ..writeln(body);
+  for (final e in attachments.entries) {
+    buf
+      ..writeln('--$boundary')
+      ..writeln('Content-Type: application/octet-stream; name="${e.key}"')
+      ..writeln('Content-Disposition: attachment; filename="${e.key}"')
+      ..writeln('Content-Transfer-Encoding: base64')
+      ..writeln()
+      ..writeln(base64.encode(utf8.encode(e.value)));
+  }
+  buf.writeln('--$boundary--');
+  return buf.toString();
+}
+
+/// Zgłoszenie w nowym formacie: mejl plus załącznik, tak jak składa je apka.
+({String eml, String file}) submissionEmail({
+  List<SongSubmission>? submissions,
+  SongRaw? song,
+  SubmissionOrigin origin = SubmissionOrigin.appAndroid,
+  String? rulesVersion = 'v05.10.2025',
+  String? appVersion = '2.4.1',
+  String? userMessage,
+  String from = 'Jan Testowy <jan.testowy@example.com>',
+  bool reply = false,
+  String Function(String)? mangle,
+}) {
+  final mail = composeSongSubmissionEmail(
+    submissions: submissions ??
+        [SongSubmission(kind: SubmissionKind.newSong, song: song ?? sampleSong())],
+    origin: origin,
+    appVersion: appVersion,
+    acceptRulesVersion: rulesVersion,
+  );
+  final file = mangle == null ? mail.fileContent : mangle(mail.fileContent);
+  final body = userMessage == null
+      ? mail.body
+      : mail.body.replaceFirst(kSubmissionUserMessagePlaceholder, userMessage);
+  return (
+    eml: mimeEmail(
+      subject: mail.subject,
+      from: from,
+      body: body,
+      attachments: {mail.fileName: file},
+      reply: reply,
+    ),
+    file: file,
+  );
 }

@@ -6,6 +6,7 @@ import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 
 import 'package:harcapp_core/values/people/contributor_ref.dart';
+import 'package:harcapp_core/song_book/submission/submission_file.dart';
 
 bool isContributorsFirstSong(Iterable<String> emails){
   for(final e in emails)
@@ -25,6 +26,17 @@ enum SongSource{
         return "Aplikacja ${Platform.isIOS?'iOS':Platform.isAndroid?'Android':''}".trim();
       case SongSource.web:
         return "harcapp.web.app";
+    }
+  }
+
+  /// Identyfikator źródła w pliku zgłoszenia. `displayName` jest dla oka,
+  /// to jest dla narzędzia.
+  SubmissionOrigin get origin {
+    switch(this){
+      case SongSource.application:
+        return Platform.isIOS? SubmissionOrigin.appIos: SubmissionOrigin.appAndroid;
+      case SongSource.web:
+        return SubmissionOrigin.web;
     }
   }
 

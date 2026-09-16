@@ -150,6 +150,35 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
                 ],
               ),
 
+              // Adres nadawcy: jedyne miejsce, gdzie go zobaczysz, gdy nie
+              // został doklejony do karty osoby dodającej — czyli przy
+              // wysyłce w cudzym imieniu i przy kilku kartach. Bez tego
+              // trzeba by wracać do skrzynki.
+              if(data.sender case final sender?) ...[
+                const SizedBox(height: Dimen.defMarg),
+                Row(
+                  children: [
+                    Icon(
+                      MdiIcons.emailOutline,
+                      size: Dimen.textSizeNormal,
+                      color: hintEnab_(context),
+                    ),
+                    const SizedBox(width: Dimen.defMarg),
+                    Expanded(
+                      child: Text(
+                        data.senderIsContributor
+                            ? sender
+                            : '$sender (wysyła w czyimś imieniu)',
+                        style: AppTextStyle(
+                          fontSize: Dimen.textSizeNormal,
+                          color: hintEnab_(context),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+
               if(data.isCorrection || data.issues.isNotEmpty) ...[
                 const SizedBox(height: Dimen.defMarg),
                 Wrap(

@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
+import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/models.dart';
 
 import 'similarity.dart';
@@ -66,7 +69,16 @@ enum ReviewKind {
   undeclaredCorrection('song/needs-review/undeclared-correction'),
   /// Piosenka identyczna z apką, ale autor coś dopisał albo zadeklarował
   /// poprawkę. Piosenki nie ma w pliku — sam mejl do przeczytania.
-  identicalInApp('song/needs-review/identical-in-app');
+  identicalInApp('song/needs-review/identical-in-app'),
+  /// Załącznika zgłoszenia nie da się wczytać — suma, JSON, obcięcie, zero
+  /// zgłoszeń. Etykieta leci już przy `scan`, nie dopiero na pastylce.
+  corruptedData('song/needs-review/corrupted-data'),
+  /// Plik w wersji protokołu nowszej niż znana. Nie zgadujemy.
+  unknownFormat('song/needs-review/unknown-format'),
+  /// W pliku było więcej zgłoszeń, weszło pierwsze.
+  skippedSubmissions('song/needs-review/skipped-submissions'),
+  /// Kilka kart osób dodających — wkład przypisujesz ręcznie.
+  severalContributors('song/needs-review/several-contributors');
 
   const ReviewKind(this.label);
   final String label;
@@ -85,6 +97,10 @@ extension SongIssueReview on SongIssue {
         SongIssue.missingYoutube =>
           ReviewKind.missingData,
         SongIssue.noConsent || SongIssue.noContributorEmail => ReviewKind.noConsent,
+        SongIssue.corruptedSubmissionFile => ReviewKind.corruptedData,
+        SongIssue.unknownSubmissionFormat => ReviewKind.unknownFormat,
+        SongIssue.skippedSubmissions => ReviewKind.skippedSubmissions,
+        SongIssue.severalContributors => ReviewKind.severalContributors,
         SongIssue.chordsDifferFromApp ||
         SongIssue.metadataDifferFromApp =>
           ReviewKind.undeclaredCorrection,
@@ -177,10 +193,23 @@ const String kCorrectionSubject = 'Poprawka piosenki';
 /// „nie edytuj". Bez tego jej zgłoszenia w ogóle nie wchodziły do kolejki.
 const String kOldAppMarker = 'NIE EDYTUJ PONIŻSZEGO TEKSTU';
 
+/// Znacznik w temacie zgłoszenia z **apki**. Zamrożony na zawsze — po nim
+/// kolejka poznaje nowy format bez oglądania się na copy tematu.
+final String kAppSubmissionMarker = submissionSubjectMarker(SubmissionOrigin.appAndroid);
+
+/// To samo dla strony. **Piosenkomat obsługuje wyłącznie zgłoszenia z apki**,
+/// więc ten znacznik służy do **aktywnego odsiewania**, nie do łapania.
+final String kWebSubmissionMarker = submissionSubjectMarker(SubmissionOrigin.web);
+
 /// Kolejka: zgłoszenia piosenek w inboxie bez żadnej etykiety song/*.
 /// To filtr po wiadomościach — po wątkach dofiltrowuje `scan`.
+///
+/// Nowy format wpada dwiema drogami, bo temat jest edytowalny przez człowieka
+/// i wystarczy jeden z dwóch sygnałów: znacznik w temacie **albo** rozszerzenie
+/// załącznika. Stare człony zostają, dopóki stare formaty są w obiegu.
 final String kQueueQuery = 'in:inbox '
     '(${kSongSubjects.map((s) => 'subject:"$s"').join(' OR ')} '
+    'OR subject:"hrcpsng/app" OR filename:$kSubmissionFileExtension '
     'OR "$kSongMarker" OR "$kOldAppMarker") '
     '${kAllSongLabels.where(isSongLabel).map((l) => '-label:${labelQueryName(l)}').join(' ')}';
 
@@ -207,6 +236,9 @@ class ContribMessage {
   /// Treść załącznika `.hrcpsng`, jeśli apka go dołączyła. Źródło prawdy
   /// o piosence: klienty pocztowe łamią długie linie JSON-a w treści.
   final String? songAttachment;
+  /// Treść załącznika `.$kSubmissionFileExtension` — nowy format, w którym
+  /// fakty o zgłoszeniu w ogóle nie są w treści mejla.
+  final String? submissionAttachment;
 
   const ContribMessage({
     required this.id,
@@ -218,6 +250,7 @@ class ContribMessage {
     this.date,
     this.labels = const {},
     this.songAttachment,
+    this.submissionAttachment,
   }) : threadId = threadId ?? id;
 
   bool get hasSongLabel => labels.any(isSongLabel);
@@ -228,15 +261,23 @@ class ContribMessage {
   /// — sztywne `contains` gubiło mejle, w których klient przełamał go w
   /// środku: wchodziły do kolejki, wypadały tu i wracały przy każdym `scan`.
   bool get isSongSubmission =>
-      kSongSubjects.any((s) => (subject ?? '').contains(s))
-      || body.contains(kSongMarker)
-      || oldestFormatSongRegion(body) != null;
+      !isWebSubmission
+      && (submissionAttachment != null
+          || (subject ?? '').contains(kAppSubmissionMarker)
+          || kSongSubjects.any((s) => (subject ?? '').contains(s))
+          || body.contains(kSongMarker)
+          || oldestFormatSongRegion(body) != null);
+
+  /// Zgłoszenie ze strony — **poza zakresem narzędzia**. Odsiewamy je jawnie,
+  /// a nie licząc na to, że przypadkiem nie trafi: po znaczniku w temacie, a po
+  /// pobraniu załącznika także po polu `source` w pliku (patrz `classify`).
+  bool get isWebSubmission => (subject ?? '').contains(kWebSubmissionMarker);
 
   /// Czy wiadomość niesie **własny** kod piosenki, nie tylko cytat cudzego.
   /// Po tym wybieramy reprezentanta wątku: odpowiedź z samym cytatem
   /// oryginału parsuje się do tej samej piosenki, ale nie jest zgłoszeniem.
   bool get hasOwnSongCode {
-    if (songAttachment != null) return true;
+    if (submissionAttachment != null || songAttachment != null) return true;
     final own = body
         .split('\n')
         .where((l) => !l.trimLeft().startsWith('>'))
@@ -245,6 +286,10 @@ class ContribMessage {
   }
 
   /// Plik .eml (nagłówki, pusta linia, treść). Bez nagłówków całość to treść.
+  ///
+  /// Rozumie MIME: mejl wieloczęściowy rozkłada na części, treść bierze
+  /// z `text/plain`, a załączniki rozpoznaje po rozszerzeniu w `filename`.
+  /// Bez tego `explain` na pliku z dysku nie widziałby nowego formatu wcale.
   factory ContribMessage.fromEml(String raw, {required String id}) {
     final text = raw.replaceAll('\r\n', '\n');
     final split = text.indexOf('\n\n');
@@ -252,21 +297,147 @@ class ContribMessage {
     if (split == -1 || !looksLikeHeaders) {
       return ContribMessage(id: id, body: text);
     }
-    final headers = <String, String>{};
-    for (final line in text.substring(0, split).split('\n')) {
-      final colon = line.indexOf(':');
-      if (colon <= 0) continue;
-      headers[line.substring(0, colon).trim().toLowerCase()] =
-          line.substring(colon + 1).trim();
-    }
+    final headers = parseMailHeaders(text.substring(0, split));
+    final content = MimePart(headers, text.substring(split + 2)).flatten();
     return ContribMessage(
       id: id,
-      body: text.substring(split + 2),
+      body: content.plainText,
       subject: headers['subject'],
       from: headers['from'],
       isReply: (headers['in-reply-to'] ?? headers['references'] ?? '').isNotEmpty,
       date: parseMailDate(headers['date']),
+      songAttachment: content.attachmentByExtension('.hrcpsng'),
+      submissionAttachment:
+          content.attachmentByExtension('.$kSubmissionFileExtension'),
     );
+  }
+}
+
+/// Nagłówki mejla, po sklejeniu linii kontynuowanych (zaczynają się od spacji
+/// albo tabulatora). Klucze małymi literami.
+Map<String, String> parseMailHeaders(String block) {
+  final out = <String, String>{};
+  final lines = block.split('\n');
+  final unfolded = <String>[];
+  for (final line in lines) {
+    if (line.startsWith(' ') || line.startsWith('\t')) {
+      if (unfolded.isNotEmpty) unfolded[unfolded.length - 1] += ' ${line.trim()}';
+      continue;
+    }
+    unfolded.add(line);
+  }
+  for (final line in unfolded) {
+    final colon = line.indexOf(':');
+    if (colon <= 0) continue;
+    out[line.substring(0, colon).trim().toLowerCase()] =
+        line.substring(colon + 1).trim();
+  }
+  return out;
+}
+
+/// Jedna część mejla MIME: własne nagłówki plus surowa zawartość.
+class MimePart {
+  final Map<String, String> headers;
+  final String raw;
+
+  const MimePart(this.headers, this.raw);
+
+  String get contentType => (headers['content-type'] ?? 'text/plain').toLowerCase();
+  String? get boundary => _paramOf(headers['content-type'], 'boundary');
+  String? get fileName =>
+      _paramOf(headers['content-disposition'], 'filename') ??
+      _paramOf(headers['content-type'], 'name');
+
+  /// Zawartość po zdjęciu kodowania transportowego. W praktyce base64 — tak
+  /// jedzie każdy załącznik — albo quoted-printable w treści.
+  String get content {
+    final encoding =
+        (headers['content-transfer-encoding'] ?? '').trim().toLowerCase();
+    if (encoding == 'base64') {
+      try {
+        return utf8.decode(base64.decode(raw.replaceAll(RegExp(r'\s'), '')));
+      } catch (_) {
+        return raw;
+      }
+    }
+    if (encoding == 'quoted-printable') return _decodeQuotedPrintable(raw);
+    return raw;
+  }
+
+  /// Rozkłada mejl na płaską listę części — także z zagnieżdżonych
+  /// `multipart/alternative` w `multipart/mixed`.
+  MimeContent flatten() {
+    final b = boundary;
+    if (b == null || !contentType.startsWith('multipart/')) {
+      return MimeContent([this]);
+    }
+    final out = <MimePart>[];
+    // Preambuła przed pierwszym separatorem i epilog po `--boundary--`
+    // nie są częściami.
+    final chunks = raw.split('--$b');
+    for (final chunk in chunks.skip(1)) {
+      if (chunk.trimLeft().startsWith('--')) break;
+      final body = chunk.startsWith('\n') ? chunk.substring(1) : chunk;
+      final split = body.indexOf('\n\n');
+      final part = split == -1
+          ? MimePart(const {}, body)
+          : MimePart(parseMailHeaders(body.substring(0, split)),
+              body.substring(split + 2));
+      out.addAll(part.flatten().parts);
+    }
+    return MimeContent(out);
+  }
+}
+
+class MimeContent {
+  final List<MimePart> parts;
+  const MimeContent(this.parts);
+
+  /// Treść dla człowieka: pierwszy `text/plain` bez nazwy pliku.
+  String get plainText {
+    for (final p in parts) {
+      if (p.fileName == null && p.contentType.startsWith('text/plain')) {
+        return p.content;
+      }
+    }
+    return parts.isEmpty ? '' : parts.first.content;
+  }
+
+  String? attachmentByExtension(String extension) {
+    for (final p in parts) {
+      if ((p.fileName ?? '').toLowerCase().endsWith(extension.toLowerCase())) {
+        return p.content;
+      }
+    }
+    return null;
+  }
+}
+
+String? _paramOf(String? header, String name) {
+  if (header == null) return null;
+  final m = RegExp('$name\\s*=\\s*(?:"([^"]*)"|([^;\\s]+))', caseSensitive: false)
+      .firstMatch(header);
+  return m?.group(1) ?? m?.group(2);
+}
+
+String _decodeQuotedPrintable(String raw) {
+  final unfolded = raw.replaceAll(RegExp(r'=\r?\n'), '');
+  final bytes = <int>[];
+  for (var i = 0; i < unfolded.length; i++) {
+    if (unfolded[i] == '=' && i + 2 < unfolded.length) {
+      final hex = int.tryParse(unfolded.substring(i + 1, i + 3), radix: 16);
+      if (hex != null) {
+        bytes.add(hex);
+        i += 2;
+        continue;
+      }
+    }
+    bytes.addAll(utf8.encode(unfolded[i]));
+  }
+  try {
+    return utf8.decode(bytes);
+  } catch (_) {
+    return unfolded;
   }
 }
 
@@ -308,6 +479,23 @@ DateTime? parseMailDate(String? raw) {
 // Zgłoszenie — cechy (fakty)
 // ---------------------------------------------------------------------------
 
+/// Który **kształt mejla** rozpoznało narzędzie. Nie ma tego w żadnym mejlu —
+/// wnioskujemy z wyglądu. Do plików nie jedzie; w nich zostaje
+/// `legacy_app_used`, które z tego wynika.
+enum EmailShape {
+  /// Najstarsza apka: JSON między znacznikami „nie edytuj", otoczka `o!_`.
+  oldest('oldest'),
+  /// `### Kod piosenki:` bez ogrodzeń, osoba jako literał Darta.
+  legacy('legacy'),
+  /// Dzisiejszy: bloki ```, osoba jako JSON.
+  fenced('fenced'),
+  /// Plik zgłoszenia.
+  file('file');
+
+  const EmailShape(this.id);
+  final String id;
+}
+
 /// Zgłoszenie = wątek. Same fakty, zero ocen: co autor zadeklarował, skąd
 /// przyszło, co dopisał, do czego jest podobne. Osądy robi `decide`.
 class Submission {
@@ -318,7 +506,28 @@ class Submission {
   /// Wszystkie wiadomości wątku, od najstarszej.
   final List<ContribMessage> messages;
   final SubmissionKind kind;
-  final SubmissionSource source;
+  /// Czy zgłoszenie przyszło z najstarszej apki — autorowi trzeba odpisać,
+  /// żeby ją zaktualizował. Dawniej pole `source`, które nie mówiło **skąd**,
+  /// tylko **jak stare**.
+  final bool legacyApp;
+  /// Który kształt mejla rozpoznało narzędzie. Diagnostyka: po rozkładzie
+  /// w `report.txt` poznasz, kiedy wolno skasować stare czytniki.
+  final EmailShape shape;
+  /// Skąd przyszło zgłoszenie — z pliku, więc tylko dla nowego formatu.
+  final SubmissionOrigin? origin;
+  /// Wersja apki, z której poszło zgłoszenie. Tylko nowy format.
+  final String? appVersion;
+  /// Czy nadawca zgłasza **własną** piosenkę. Przy `false` jego adres służy
+  /// wyłącznie do odpisania. Stare mejle tego nie niosą — dla nich `true`.
+  final bool senderIsContributor;
+  /// Ile zgłoszeń z tego samego pliku nie weszło.
+  final int skippedSubmissions;
+  /// Kilka kart osób dodających w jednym zgłoszeniu: nie wiadomo, do której
+  /// miałby iść adres nadawcy.
+  final bool severalContributors;
+  /// Co było nie tak z załącznikiem zgłoszenia. `null` = nic.
+  final SubmissionFileErrorKind? fileError;
+  final String? fileErrorMessage;
   final String? userMessage;
   final String? correctionMessage;
   /// Data reprezentanta.
@@ -341,8 +550,16 @@ class Submission {
     required this.message,
     required this.messages,
     required this.kind,
-    required this.source,
     required this.title,
+    this.legacyApp = false,
+    this.shape = EmailShape.fenced,
+    this.origin,
+    this.appVersion,
+    this.senderIsContributor = true,
+    this.skippedSubmissions = 0,
+    this.severalContributors = false,
+    this.fileError,
+    this.fileErrorMessage,
     this.userMessage,
     this.correctionMessage,
     this.sentAt,
@@ -356,7 +573,7 @@ class Submission {
   });
 
   bool get isCorrection => kind == SubmissionKind.correction;
-  bool get isOldApp => source == SubmissionSource.oldApp;
+  bool get isOldApp => legacyApp;
   bool get hasUserMessage => (userMessage ?? '').trim().isNotEmpty;
 
   /// Czy zadeklarowany cel istnieje w śpiewniku. `buildSubmission` celuje
@@ -391,8 +608,16 @@ class Submission {
         message: message,
         messages: messages,
         kind: kind,
-        source: source,
         title: title,
+        legacyApp: legacyApp,
+        shape: shape,
+        origin: origin,
+        appVersion: appVersion,
+        senderIsContributor: senderIsContributor,
+        skippedSubmissions: skippedSubmissions,
+        severalContributors: severalContributors,
+        fileError: fileError,
+        fileErrorMessage: fileErrorMessage,
         userMessage: userMessage,
         correctionMessage: correctionMessage,
         sentAt: sentAt,
@@ -465,7 +690,9 @@ class Classified {
   /// Ślad w piosence: cechy + uwagi, w kształcie, w jakim jadą do pliku.
   PiosenkomatData piosenkomatData({String? run}) => PiosenkomatData(
         kind: submission.kind,
-        source: submission.source,
+        legacyAppUsed: submission.legacyApp,
+        sender: submission.sender,
+        senderIsContributor: submission.senderIsContributor,
         sentAt: submission.sentAt,
         userMessage: submission.userMessage,
         correctionMessage: submission.correctionMessage,
@@ -481,7 +708,13 @@ class Classified {
 List<String> stateLabelsFor(Classified c) {
   switch (c.target) {
     case Target.unparsable:
-      return const [kLabelUnparsable];
+      // Uszkodzony albo za nowy załącznik ma trafić do kolejki przeglądu,
+      // a nie do worka „nie umiem odczytać” — powód jest znany i konkretny.
+      if (c.issues.isEmpty) return const [kLabelUnparsable];
+      return [
+        kLabelToReview,
+        ...{for (final i in c.issues) i.issue.review.label},
+      ];
     case Target.rejectAlreadyInApp:
       return const [kLabelRejectedInBook];
     case Target.rejectDuplicate:

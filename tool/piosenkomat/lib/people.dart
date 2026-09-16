@@ -28,11 +28,16 @@ class PeopleReport {
   final Map<String, List<String>> knownByEmail;
   /// Piosenki bez karty osoby: w `data.dart` nie będzie kogo dopisać.
   final Map<String, List<String>> anonymousByEmail;
+  /// Zgłoszenia wysłane **w cudzym imieniu**: adres nadawcy jest tylko do
+  /// odpisania, więc do `data.dart` nie idzie. Osobę dodającą przypisujesz
+  /// ręcznie — dlatego to widać w wyniku, a nie znika po cichu.
+  final Map<String, List<String>> senderNotContributorByEmail;
 
   const PeopleReport({
     required this.newContributors,
     required this.knownByEmail,
     required this.anonymousByEmail,
+    this.senderNotContributorByEmail = const {},
   });
 }
 
@@ -49,14 +54,38 @@ class ContributorSource {
   /// Pozostałe adresy, które autor zadeklarował w mejlu. Piosenka ich nie
   /// niesie (`ContributorRef` ma jeden `emailRef`), więc idą bokiem, z planu.
   final List<String> otherEmails;
+  /// Czy nadawca zgłaszał **własną** piosenkę. Przy `false` jego adres nie ma
+  /// prawa trafić do `data.dart` — patrz `sender_is_contributor`.
+  final bool senderIsContributor;
 
   const ContributorSource({
     required this.sender,
     required this.title,
     this.person,
     this.otherEmails = const [],
+    this.senderIsContributor = true,
   });
+
+  ContributorSource withEmails(List<String> emails) => ContributorSource(
+        sender: sender,
+        title: title,
+        person: person,
+        otherEmails: emails,
+        senderIsContributor: senderIsContributor,
+      );
 }
+
+/// Dokłada adresy z planu przebiegu do już zebranych źródeł. Osobno, bo
+/// źródła powstają **przed** `strip` (tylko wtedy piosenka niesie jeszcze
+/// ślad piosenkomatu), a plan czyta się dopiero na końcu.
+List<ContributorSource> withOtherEmails(
+  List<ContributorSource> sources,
+  Map<String, List<String>> otherEmailsBySender,
+) =>
+    [
+      for (final c in sources)
+        c.withEmails(otherEmailsBySender[c.sender] ?? c.otherEmails),
+    ];
 
 /// Osoby z piosenek, które **wchodzą do apki** — czyli z `final-*.hrcpsng`,
 /// po przeglądzie. Wcześniej nie ma sensu: kogo wywalisz na stronie, tego nie
@@ -74,6 +103,8 @@ List<ContributorSource> contributorSourcesOf(
       title: song.title,
       person: _personOf(song, sender),
       otherEmails: otherEmailsBySender[sender] ?? const [],
+      // Ślad piosenkomatu zdejmuje `strip`, więc czytamy go, dopóki jest.
+      senderIsContributor: song.piosenkomatData?.senderIsContributor ?? true,
     ));
   }
   return out;
@@ -99,9 +130,18 @@ PeopleReport collectPeople(List<ContributorSource> items) {
   final newOnes = <String, NewContributor>{};
   final known = <String, List<String>>{};
   final anonymous = <String, List<String>>{};
+  final notContributor = <String, List<String>>{};
 
   for (final c in items) {
     final sender = c.sender;
+
+    // Wysyłka w cudzym imieniu: adres nadawcy jest śladem zgody, nie wkładem.
+    // Do `data.dart` nie wchodzi ani on, ani karta, bo nie ma jej z czym
+    // związać — to robota dla Ciebie.
+    if (!c.senderIsContributor) {
+      notContributor.putIfAbsent(sender, () => []).add(c.title);
+      continue;
+    }
 
     if (registeredPersonByEmail(sender) != null) {
       known.putIfAbsent(sender, () => []).add(c.title);
@@ -147,6 +187,7 @@ PeopleReport collectPeople(List<ContributorSource> items) {
       ..sort((a, b) => dartConstName(a.person.name).compareTo(dartConstName(b.person.name))),
     knownByEmail: known,
     anonymousByEmail: anonymous,
+    senderNotContributorByEmail: notContributor,
   );
 }
 
