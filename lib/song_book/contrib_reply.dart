@@ -32,10 +32,8 @@ const String kOldAppReplyBlock =
     '\n'
     'Daj proszę przy okazji znać o tym w swoim środowisku! :)';
 
-/// Jeden wątek to jedna piosenka: druga, dosłana odpowiedzią na wątek, który
-/// ma już etykietę, nie istnieje dla narzędzia. Dlatego mówimy to autorowi
-/// wprost, tym samym zdaniem, co apka na ekranie wysyłki i sam mejl
-/// zgłoszeniowy ([kSubmissionOneSongPerMailNote]).
+/// Prośba o osobny mejl na każdą piosenkę — odpowiedź w wątku z etykietą nie
+/// wraca już do kolejki. To samo zdanie, co [kSubmissionOneSongPerMailNote].
 const String kOneSongPerMailReplyBlock =
     'Przy okazji: każdą kolejną piosenkę wyślij proszę osobnym mejlem, '
     'a nie odpowiedzią na ten — inaczej może mi umknąć.';

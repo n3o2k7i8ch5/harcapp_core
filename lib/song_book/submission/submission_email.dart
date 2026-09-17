@@ -1,12 +1,13 @@
+/// Treść mejla zgłoszeniowego jest **tylko dla człowieka**: narzędzie czyta
+/// z niej wyłącznie dopisek autora, czyli wszystko nad pierwszą belką. Fakty
+/// jadą załącznikiem — patrz [SongSubmissionFile].
+library;
+
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 
-/// Treść mejla zgłoszeniowego jest **tylko dla człowieka**. Narzędzie czyta
-/// z niej jedną rzecz: dopisek autora, czyli wszystko nad pierwszą belką.
-/// Fakty o zgłoszeniu jadą załącznikiem — patrz [SongSubmissionFile].
-
-/// Zamrożona linia: jedyna rzecz w treści, którą narzędzie czyta. Nigdy nie
-/// zmieniamy tego napisu bez podbicia [kSubmissionFormat].
+/// Zamrożona linia: jedyne, co narzędzie czyta z treści. Zmiana tego napisu
+/// wymaga podbicia [kSubmissionFormat].
 const String kSubmissionConsentBar = '- - - - - - Akceptacja regulaminu - - - - - -';
 
 /// Druga belka, czysto dla oka — pod nią nie ma nic do parsowania.
@@ -15,13 +16,11 @@ const String kSubmissionStructuralBar = '- - - - - - Informacje strukturalne - -
 const String kSubmissionUserMessagePlaceholder =
     '[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]';
 
-/// To samo zdanie idzie na ekran wysyłki w apce i do szablonu odpowiedzi:
-/// jeden wątek to jedna piosenka, druga dosłana odpowiedzią przepada.
+/// Wspólne dla ekranu wysyłki w apce, treści zgłoszenia i odpowiedzi do autora.
 const String kSubmissionOneSongPerMailNote =
     'Każdą kolejną piosenkę wyślij osobnym mejlem, nie odpowiedzią na ten.';
 
-/// Belka w treści, odporna na to, co z odstępami robią klienty pocztowe,
-/// i na cytowanie (`>`) w mejlu zwrotnym.
+/// Belka w treści, odporna na odstępy i na cytowanie (`>`).
 RegExp submissionBarRe(String bar) => RegExp(
       '^[>\\s]*'
       '${bar.split('').where((c) => c != ' ').map(RegExp.escape).join('\\s*')}'
@@ -31,9 +30,8 @@ RegExp submissionBarRe(String bar) => RegExp(
 
 final RegExp _consentBarRe = submissionBarRe(kSubmissionConsentBar);
 
-/// Dopisek autora z mejla w nowym formacie: **wszystko powyżej zamrożonej
-/// linii**, po zdjęciu cytowania. `null`, gdy belki nie ma — wtedy mejl jest
-/// w starym kształcie i czyta go stary parser.
+/// Dopisek autora: wszystko powyżej zamrożonej belki, bez cytowania.
+/// `null`, gdy belki nie ma — czyli gdy mejl jest w starym kształcie.
 String? extractSubmissionUserMessage(String body){
   final bar = _consentBarRe.firstMatch(body);
   if(bar == null) return null;
@@ -62,10 +60,9 @@ String composeSubmissionEmailSubject({
   return '$what ${submissionSubjectMarker(origin)}';
 }
 
-/// Pod zamrożoną linią zostają trzy rzeczy i nic więcej: zdanie o akceptacji
-/// zasad, zdanie o załączniku i zdanie o kolejnych piosenkach. Podsumowania
-/// zgłoszenia w treści **nie ma** — kto, co poprawia i z jakim komentarzem,
-/// to wszystko jest w załączniku i w pasku piosenkomatu w edytorze.
+/// Dopisek autora, belka zgody, belka informacji strukturalnych. Pod belkami
+/// trzy zdania: zgoda, załącznik, jedna piosenka na mejl. Podsumowania
+/// zgłoszenia w treści **nie ma** — jest w załączniku.
 String composeSubmissionEmailBody({
   required String attachmentFileName,
   String? acceptRulesVersion,
@@ -84,8 +81,7 @@ String composeSubmissionEmailBody({
     '\n'
     '\n$kSubmissionOneSongPerMailNote';
 
-/// Gotowe zgłoszenie: temat, treść i załącznik. Jedno wywołanie, żeby apka
-/// i strona nie składały tego każda po swojemu.
+/// Gotowe zgłoszenie: temat, treść i załącznik.
 typedef SongSubmissionEmail = ({
   String subject,
   String body,
@@ -106,11 +102,12 @@ SongSubmissionEmail composeSongSubmissionEmail({
     submissions: submissions,
   );
   final fileName = file.fileName;
+  final single = submissions.length == 1? submissions.single: null;
   return (
     subject: composeSubmissionEmailSubject(
       origin: origin,
-      song: submissions.length == 1? submissions.single.song: null,
-      isNewSong: submissions.length != 1 || !submissions.single.isCorrection,
+      song: single?.song,
+      isNewSong: !(single?.isCorrection ?? false),
       songCount: submissions.length,
     ),
     body: composeSubmissionEmailBody(

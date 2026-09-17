@@ -211,8 +211,8 @@ Future<int> _scan(ArgResults cmd) async {
   });
   // Bezpieczniki na wypadek, gdyby query przepuściło coś już otagowanego
   // albo coś, co nie jest zgłoszeniem piosenki. Takich mejli nie dotykamy.
-  // Zgłoszenia ze strony liczymy osobno i tylko te, które inaczej weszłyby
-  // do przebiegu — inaczej ten sam mejl wchodziłby do dwóch podsumowań naraz.
+  // Osobno i tylko te, które inaczej weszłyby do przebiegu — żeby ten sam
+  // mejl nie wpadł do dwóch podsumowań.
   final web = fetched.where((m) => !m.hasSongLabel && isWebSubmission(m)).length;
   var messages = fetched
       .where((m) => !m.hasSongLabel && m.isSongSubmission && !isWebSubmission(m))
@@ -766,8 +766,7 @@ int _prepare(ArgResults cmd) {
         if (s.piosenkomatData?.goesIn ?? true) s,
     ];
     final turnedDownCount = allSongs.length - songs.length;
-    // Osoby zbieramy **przed** `strip`: to ślad piosenkomatu niesie
-    // `sender_is_contributor`, a strip go zdejmuje.
+    // Przed `strip`, bo `sender_is_contributor` niesie ślad piosenkomatu.
     sources.addAll(contributorSourcesOf(songs));
     final targets = stripPiosenkomat(songs);
     entering.addAll(songs);
@@ -990,8 +989,8 @@ Future<int> _reply(ArgResults cmd) async {
               if (replies[threadId] case final note?) note,
         ].toSet(),
         oldApp: mejle.any(oldAppIds.contains),
-        // Odpowiedź wprost zaprasza do odpisania — a piosenka dosłana
-        // w tym wątku przepada, bo wątek ma już etykietę.
+        // Odpowiedź zaprasza do odpisania, a piosenka dosłana w tym wątku
+        // przepada: wątek ma już etykietę.
         oneSongPerMail: true,
       );
 
@@ -1453,8 +1452,8 @@ String formatRunReport(List<Classified> items) {
     ..writeln('STARA APKA      ${count((c) => c.submission.isOldApp)}'
         '  (do odpisania: ./piosenkomat reply)');
 
-  // Rozkład kształtów mejla: po nim poznasz, kiedy wolno skasować czytniki
-  // starych formatów. Rozkład wersji apki mówi, jak szybko ludzie aktualizują.
+  // Rozkład kształtów mejla mówi, kiedy wolno skasować czytniki starych
+  // formatów; rozkład wersji apki — jak szybko ludzie aktualizują.
   buf.writeln();
   buf.writeln('Kształt mejla:');
   _countLines(buf, _tally([for (final c in items) c.submission.shape.id]), byCount: true);

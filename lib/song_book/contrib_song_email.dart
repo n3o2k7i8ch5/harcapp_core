@@ -29,8 +29,7 @@ enum SongSource{
     }
   }
 
-  /// Identyfikator źródła w pliku zgłoszenia. `displayName` jest dla oka,
-  /// to jest dla narzędzia.
+  /// Identyfikator źródła do pliku zgłoszenia; [displayName] jest dla oka.
   SubmissionOrigin get origin {
     switch(this){
       case SongSource.application:

@@ -34,18 +34,16 @@ class ParsedContribEmail{
   /// w linii „### Poprawiana piosenka”. `null` znaczy: mejl tego nie niesie
   /// (nowa piosenka albo apka sprzed tej linii) i cel trzeba zgadywać.
   final String? correctedSongId;
-  /// Rodzaj **zadeklarowany przez apkę**. Niesie go tylko nowy format; przy
-  /// starych mejlach jest `null` i rodzaj wnioskuje się z tematu.
+  /// Rodzaj zadeklarowany przez apkę. Tylko nowy format; przy starych mejlach
+  /// `null` i rodzaj wnioskuje się z tematu.
   final SubmissionKind? declaredKind;
-  /// Co autor wybrał przed wysyłką: w swoim czy w cudzym imieniu. `null` przy
-  /// starych mejlach — one tego nie niosą, więc zostaje heurystyka.
+  /// Czy nadawca zgłasza własną piosenkę. `null` przy starych mejlach.
   final bool? senderIsContributor;
   /// Wersja apki, z której poszło zgłoszenie. Tylko nowy format.
   final String? appVersion;
   /// Skąd przyszło zgłoszenie. Tylko nowy format.
   final SubmissionOrigin? origin;
-  /// Ile zgłoszeń z tego samego pliku **nie weszło**. Narzędzie bierze
-  /// pierwsze, a o reszcie nie wolno milczeć.
+  /// Ile zgłoszeń z tego samego pliku nie weszło.
   final int skippedSubmissions;
 
   ParsedContribEmail({
@@ -66,9 +64,8 @@ class ParsedContribEmail{
     this.skippedSubmissions = 0,
   });
 
-  /// Nowa ścieżka: fakty z załącznika plus dopisek z treści. Wypełnia **tę
-  /// samą** strukturę, co stary parser, żeby reszta narzędzia nie musiała
-  /// wiedzieć, skąd przyszły dane.
+  /// Fakty z załącznika plus dopisek z treści — ta sama struktura, co ze
+  /// starego parsera.
   factory ParsedContribEmail.fromSubmissionFile(
     SongSubmissionFile file,
     String body, {

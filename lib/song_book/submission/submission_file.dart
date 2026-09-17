@@ -6,25 +6,22 @@ import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/values/people/models.dart';
 
-/// Rozszerzenie pliku zgłoszenia. Reguła na przyszłość: format plus `sbm`,
-/// czyli `hrcpartclsbm` dla artykułów i tak dalej.
+/// Rozszerzenie pliku zgłoszenia: nazwa formatu plus `sbm`.
 const String kSubmissionFileExtension = 'hrcpsngsbm';
 
-/// Wersja **protokołu zgłoszeń z apki**, nie samego pliku. Podbija ją zmiana
-/// któregokolwiek z trzech elementów: znacznika w temacie, kontraktu treści
-/// (gdzie kończy się dopisek autora) albo kształtu pliku. Jeden numer na jeden
-/// protokół — inaczej za pół roku nie odpowiesz na pytanie „co dokładnie
-/// wysyłała apka w wersji X”.
+/// Nazwa załącznika — zawsze ta sama, krótka i czysto ASCII, żeby klient
+/// pocztowy nie zakodował jej po RFC 2231. Plik rozpoznajemy po rozszerzeniu.
+const String kSubmissionFileName = 'submission.$kSubmissionFileExtension';
+
+/// Wersja **protokołu**, nie samego pliku: podbija ją zmiana znacznika
+/// w temacie, kontraktu treści albo kształtu pliku.
 const int kSubmissionFormat = 1;
 
-/// Znacznik w temacie mejla. **Zamrożony na zawsze**, nie podlega
-/// wersjonowaniu: gdyby podlegał, mejl w nowszym protokole nie wpadłby do
-/// kolejki starszego narzędzia i reguła „nieznana wersja → ostrzeżenie” nigdy
-/// by się nie odpaliła.
+/// Znacznik w temacie, np. `[hrcpsng/app]`. Zamrożony: nie podlega
+/// wersjonowaniu, bo po nim kolejka łapie **każdą** wersję protokołu.
 String submissionSubjectMarker(SubmissionOrigin origin) => '[hrcpsng/${origin.tag}]';
 
-/// Skąd przyszło zgłoszenie. Identyfikator, nie napis do pokazania —
-/// piosenkomat obsługuje wyłącznie [SubmissionOrigin.web] **odsiewając** je.
+/// Skąd przyszło zgłoszenie. Identyfikator, nie napis do pokazania.
 enum SubmissionOrigin{
   appAndroid('app-android', 'app'),
   appIos('app-ios', 'app'),
@@ -45,17 +42,19 @@ enum SubmissionOrigin{
 
 /// Co poszło nie tak z plikiem zgłoszenia.
 enum SubmissionFileErrorKind{
-  /// Załącznika nie da się wczytać jako JSON albo nie ma kształtu pliku
-  /// zgłoszenia. Obcięty plik wpada tutaj.
+  /// Nie JSON, nie ten kształt albo plik obcięty.
   corrupted,
   /// Suma kontrolna się nie zgadza — ktoś plik edytował ręcznie.
   badDigest,
-  /// Plik poprawny, ale w wersji protokołu nowszej niż znana. **Nie zgadujemy**
-  /// jego zawartości.
+  /// Wersja protokołu nowsza niż znana.
   unknownFormat,
   /// Zero zgłoszeń w liście — nie ma czego przyjąć.
   noSubmissions;
 }
+
+/// Skrót na najczęstszy powód odmowy.
+Never _corrupted(String message) =>
+    throw SubmissionFileError(SubmissionFileErrorKind.corrupted, message);
 
 class SubmissionFileError implements Exception{
   final SubmissionFileErrorKind kind;
@@ -65,9 +64,8 @@ class SubmissionFileError implements Exception{
   String toString() => 'SubmissionFileError(${kind.name}): $message';
 }
 
-/// Kanoniczna postać JSON-a: klucze posortowane alfabetycznie na każdym
-/// poziomie, bez białych znaków między elementami. Obie strony — apka
-/// i piosenkomat — liczą sumę z **tej samej** funkcji, nie z dwóch własnych.
+/// Kanoniczna postać JSON-a: klucze posortowane na każdym poziomie, bez
+/// białych znaków. Podstawa sumy kontrolnej po obu stronach.
 String canonicalJson(Object? value) => jsonEncode(_canonical(value));
 
 Object? _canonical(Object? value){
@@ -79,20 +77,16 @@ Object? _canonical(Object? value){
   return value;
 }
 
-/// Suma kontrolna liczona z **całego pliku po wyrzuceniu samego pola
-/// `digest`**: wszystko inne wchodzi, razem z tekstem piosenki, chwytami,
-/// kartą osoby i wersją regulaminu.
-///
-/// Nie broni przed połamaniem linii — od tego jest sam załącznik, który idzie
-/// bajt w bajt. Broni przed ręczną edycją pliku i przed obcięciem.
+/// `sha256` z całego pliku po wyrzuceniu samego pola `digest`. Wykrywa ręczną
+/// edycję i obcięcie; łamanie linii nie dotyczy załącznika, który idzie bajt
+/// w bajt.
 String submissionDigest(Map<String, dynamic> fileMap){
   final withoutDigest = {...fileMap}..remove(SongSubmissionFile.PARAM_DIGEST);
   final bytes = utf8.encode(canonicalJson(withoutDigest));
   return 'sha256:${sha256.convert(bytes)}';
 }
 
-/// Jedno zgłoszenie: **jedna piosenka** plus jej własne metadane. Kilka
-/// piosenek to kilka zgłoszeń w liście, nigdy lista piosenek w zgłoszeniu.
+/// Jedno zgłoszenie: **jedna** piosenka plus jej metadane.
 class SongSubmission{
 
   static const String PARAM_KIND = 'kind';
@@ -107,22 +101,17 @@ class SongSubmission{
   static const String PARAM_CONTRIBUTOR_EMAILS = 'emails';
   static const String PARAM_CONTRIBUTOR_USER_KEY = 'user_key';
 
-  /// Piosenka niesie swoje `id`, jeśli je ma — przy poprawce to samo, co
-  /// [correctedSongId], przy nowej piosence tylko podpowiedź. Id ostateczne
-  /// i tak nadaje piosenkomat.
+  /// Id piosenki, jeśli je ma — podpowiedź, bo ostateczne nadaje piosenkomat.
   static const String PARAM_SONG_ID = 'id';
 
   final SubmissionKind kind;
   /// Co autor **deklaruje**, że poprawia. Wygrywa z `corrected_song_id`
-  /// w JSON-ie piosenki, które znaczy co innego: tam „piosenka pamięta swój
-  /// pierwowzór”, tu „autor deklaruje, co poprawia”.
+  /// w JSON-ie piosenki, które znaczy co innego: pierwowzór, z którego powstała.
   final String? correctedSongId;
-  /// Miejsce na odcisk wersji pierwowzoru, którą autor widział. Na razie
-  /// zawsze `null` — pole jest od początku, żeby nie podbijać [kSubmissionFormat].
+  /// Odcisk wersji pierwowzoru, którą autor widział. Na razie zawsze `null`.
   final String? correctedSongDigest;
   final String? correctionMessage;
-  /// Apka pyta przed wysyłką: „wysyłam piosenkę proponowaną przeze mnie” albo
-  /// „wysyłam w imieniu innej osoby”. `false` znaczy: adres nadawcy służy
+  /// Czy nadawca zgłasza **własną** piosenkę. `false`: jego adres służy
   /// wyłącznie do odpisania i nie trafia do karty osoby dodającej.
   final bool senderIsContributor;
   final RegisteredContributor? contributor;
@@ -157,59 +146,46 @@ class SongSubmission{
     },
   };
 
-  static SongSubmission fromJsonMap(Map<String, dynamic> map){
-    final songMap = map[PARAM_SONG];
-    if(songMap is! Map)
-      throw const SubmissionFileError(
-          SubmissionFileErrorKind.corrupted, 'Zgłoszenie bez piosenki.');
+  static SongSubmission fromJsonMap(Map<String, dynamic> map) => SongSubmission(
+    kind: SubmissionKind.byId(map[PARAM_KIND] as String?),
+    correctedSongId: _nonEmpty(map[PARAM_CORRECTED_SONG_ID]),
+    correctedSongDigest: _nonEmpty(map[PARAM_CORRECTED_SONG_DIGEST]),
+    correctionMessage: _nonEmpty(map[PARAM_CORRECTION_MESSAGE]),
+    senderIsContributor: map[PARAM_SENDER_IS_CONTRIBUTOR] as bool? ?? true,
+    contributor: _contributorOf(map[PARAM_CONTRIBUTOR]),
+    song: _songOf(map[PARAM_SONG]),
+  );
 
-    final title = songMap[SongCore.PARAM_TITLE];
-    if(title is! String)
-      throw const SubmissionFileError(
-          SubmissionFileErrorKind.corrupted, 'Piosenka bez tytułu.');
-
-    final id = songMap[PARAM_SONG_ID] as String?;
-    final SongRaw song;
+  static SongRaw _songOf(Object? raw){
+    if(raw is! Map) _corrupted('Zgłoszenie bez piosenki.');
+    final title = raw[SongCore.PARAM_TITLE];
+    if(title is! String) _corrupted('Piosenka bez tytułu.');
     try {
-      song = SongRaw.fromApiRespMap(
-        id ?? 'o!_${SongCore.filenameFromTitle(title)}',
-        songMap,
+      return SongRaw.fromApiRespMap(
+        raw[PARAM_SONG_ID] as String? ?? 'o!_${SongCore.filenameFromTitle(title)}',
+        raw,
       );
     } catch(e){
-      throw SubmissionFileError(
-          SubmissionFileErrorKind.corrupted, 'Nie udało się wczytać piosenki: $e');
+      _corrupted('Nie udało się wczytać piosenki: $e');
     }
+  }
 
-    RegisteredContributor? contributor;
-    final contributorMap = map[PARAM_CONTRIBUTOR];
-    if(contributorMap is Map){
-      final personMap = contributorMap[PARAM_CONTRIBUTOR_PERSON];
-      if(personMap is Map){
-        try {
-          contributor = RegisteredContributor(
-            person: Person.fromApiJsonMap(personMap.cast<String, dynamic>()),
-            emails: [
-              for(final e in (contributorMap[PARAM_CONTRIBUTOR_EMAILS] as List? ?? const []))
-                if(e is String) e
-            ],
-            userKey: contributorMap[PARAM_CONTRIBUTOR_USER_KEY] as String?,
-          );
-        } catch(e){
-          throw SubmissionFileError(SubmissionFileErrorKind.corrupted,
-              'Nie udało się wczytać osoby dodającej: $e');
-        }
-      }
+  static RegisteredContributor? _contributorOf(Object? raw){
+    if(raw is! Map) return null;
+    final person = raw[PARAM_CONTRIBUTOR_PERSON];
+    if(person is! Map) return null;
+    try {
+      return RegisteredContributor(
+        person: Person.fromApiJsonMap(person.cast<String, dynamic>()),
+        emails: [
+          for(final e in (raw[PARAM_CONTRIBUTOR_EMAILS] as List? ?? const []))
+            if(e is String) e
+        ],
+        userKey: raw[PARAM_CONTRIBUTOR_USER_KEY] as String?,
+      );
+    } catch(e){
+      _corrupted('Nie udało się wczytać osoby dodającej: $e');
     }
-
-    return SongSubmission(
-      kind: SubmissionKind.byId(map[PARAM_KIND] as String?),
-      correctedSongId: _nonEmpty(map[PARAM_CORRECTED_SONG_ID]),
-      correctedSongDigest: _nonEmpty(map[PARAM_CORRECTED_SONG_DIGEST]),
-      correctionMessage: _nonEmpty(map[PARAM_CORRECTION_MESSAGE]),
-      senderIsContributor: map[PARAM_SENDER_IS_CONTRIBUTOR] as bool? ?? true,
-      contributor: contributor,
-      song: song,
-    );
   }
 
 }
@@ -220,9 +196,9 @@ String? _nonEmpty(Object? raw){
   return trimmed.isEmpty? null: trimmed;
 }
 
-/// Plik `.hrcpsngsbm`: fakty o zgłoszeniu wyjęte z treści mejla, wersjonowane
-/// i podpisane sumą kontrolną. Pola przy pliku opisują **wysyłkę**, pola przy
-/// zgłoszeniu — **jedną piosenkę**.
+/// Plik `.hrcpsngsbm`: fakty o zgłoszeniu, wersjonowane i podpisane sumą
+/// kontrolną. Pola przy pliku opisują **wysyłkę**, pola przy zgłoszeniu —
+/// **jedną piosenkę**.
 class SongSubmissionFile{
 
   static const String PARAM_FORMAT = 'format';
@@ -258,57 +234,43 @@ class SongSubmissionFile{
     return {PARAM_DIGEST: submissionDigest(map), ...map};
   }
 
-  /// Zawartość pliku. Wcięcia są dla człowieka, który go otworzy — suma liczy
-  /// się z postaci kanonicznej, więc formatowanie na nią nie wpływa.
+  /// Zawartość pliku. Wcięcia są dla człowieka; suma liczy się z postaci
+  /// kanonicznej, więc formatowanie na nią nie wpływa.
   String encode() => const JsonEncoder.withIndent('  ').convert(toJsonMap());
 
-  /// Nazwa pliku: `song_<nazwa>.hrcpsngsbm` przy jednym zgłoszeniu,
-  /// `songs_<liczba>.hrcpsngsbm` przy wielu.
-  String get fileName => submissions.length == 1
-      ? 'song_${submissions.single.song.generateFileName(withPerformer: true)}.$kSubmissionFileExtension'
-      : 'songs_${submissions.length}.$kSubmissionFileExtension';
+  String get fileName => kSubmissionFileName;
 
-  /// Wczytanie z rzuceniem [SubmissionFileError] o rozpoznanym powodzie —
-  /// piosenkomat robi z niego osobną etykietę, więc powód musi być rozróżnialny.
+  /// Wczytuje plik albo rzuca [SubmissionFileError] z rozpoznanym powodem —
+  /// piosenkomat robi z każdego osobną etykietę.
   static SongSubmissionFile decode(String raw){
     Object? decoded;
     try {
       decoded = jsonDecode(raw);
     } catch(e){
-      throw SubmissionFileError(SubmissionFileErrorKind.corrupted,
-          'Załącznika nie da się wczytać jako JSON: $e');
+      _corrupted('Załącznika nie da się wczytać jako JSON: $e');
     }
-    if(decoded is! Map)
-      throw const SubmissionFileError(
-          SubmissionFileErrorKind.corrupted, 'Załącznik nie jest obiektem JSON.');
+    if(decoded is! Map) _corrupted('Załącznik nie jest obiektem JSON.');
     final map = decoded.cast<String, dynamic>();
 
     final format = map[PARAM_FORMAT];
-    if(format is! int)
-      throw const SubmissionFileError(
-          SubmissionFileErrorKind.corrupted, 'Brak wersji formatu.');
-    // Nieznana wersja idzie przed sumą: pliku z przyszłości nie zgadujemy,
-    // nawet gdyby suma się zgadzała.
+    if(format is! int) _corrupted('Brak wersji formatu.');
+    // Wersja przed sumą: pliku z przyszłości nie zgadujemy, choćby suma grała.
     if(format > kSubmissionFormat)
       throw SubmissionFileError(SubmissionFileErrorKind.unknownFormat,
           'Wersja formatu $format jest nowsza niż znana ($kSubmissionFormat).');
 
     final digest = map[PARAM_DIGEST];
-    if(digest is! String)
-      throw const SubmissionFileError(
-          SubmissionFileErrorKind.corrupted, 'Brak sumy kontrolnej.');
+    if(digest is! String) _corrupted('Brak sumy kontrolnej.');
     final expected = submissionDigest(map);
     if(digest != expected)
       throw SubmissionFileError(SubmissionFileErrorKind.badDigest,
           'Suma kontrolna się nie zgadza (w pliku $digest, policzona $expected).');
 
-    final rawSubmissions = map[PARAM_SUBMISSIONS];
-    if(rawSubmissions is! List)
-      throw const SubmissionFileError(
-          SubmissionFileErrorKind.corrupted, 'Brak listy zgłoszeń.');
-    if(rawSubmissions.isEmpty)
-      throw const SubmissionFileError(
-          SubmissionFileErrorKind.noSubmissions, 'Plik nie zawiera żadnego zgłoszenia.');
+    final submissions = map[PARAM_SUBMISSIONS];
+    if(submissions is! List) _corrupted('Brak listy zgłoszeń.');
+    if(submissions.isEmpty)
+      throw const SubmissionFileError(SubmissionFileErrorKind.noSubmissions,
+          'Plik nie zawiera żadnego zgłoszenia.');
 
     return SongSubmissionFile(
       format: format,
@@ -316,12 +278,11 @@ class SongSubmissionFile{
       appVersion: _nonEmpty(map[PARAM_APP_VERSION]),
       rulesVersion: _nonEmpty(map[PARAM_RULES_VERSION]),
       submissions: [
-        for(final raw in rawSubmissions)
+        for(final raw in submissions)
           if(raw is Map)
             SongSubmission.fromJsonMap(raw.cast<String, dynamic>())
           else
-            throw const SubmissionFileError(
-                SubmissionFileErrorKind.corrupted, 'Zgłoszenie nie jest obiektem JSON.')
+            _corrupted('Zgłoszenie nie jest obiektem JSON.')
       ],
     );
   }

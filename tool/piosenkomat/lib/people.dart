@@ -28,9 +28,8 @@ class PeopleReport {
   final Map<String, List<String>> knownByEmail;
   /// Piosenki bez karty osoby: w `data.dart` nie będzie kogo dopisać.
   final Map<String, List<String>> anonymousByEmail;
-  /// Zgłoszenia wysłane **w cudzym imieniu**: adres nadawcy jest tylko do
-  /// odpisania, więc do `data.dart` nie idzie. Osobę dodającą przypisujesz
-  /// ręcznie — dlatego to widać w wyniku, a nie znika po cichu.
+  /// Zgłoszenia w cudzym imieniu: adres nadawcy jest tylko do odpisania, więc
+  /// do `data.dart` nie idzie. Osobę dodającą przypisujesz ręcznie.
   final Map<String, List<String>> senderNotContributorByEmail;
 
   const PeopleReport({
@@ -54,8 +53,8 @@ class ContributorSource {
   /// Pozostałe adresy, które autor zadeklarował w mejlu. Piosenka ich nie
   /// niesie (`ContributorRef` ma jeden `emailRef`), więc idą bokiem, z planu.
   final List<String> otherEmails;
-  /// Czy nadawca zgłaszał **własną** piosenkę. Przy `false` jego adres nie ma
-  /// prawa trafić do `data.dart` — patrz `sender_is_contributor`.
+  /// Czy nadawca zgłaszał **własną** piosenkę. Przy `false` jego adres nie
+  /// trafia do `data.dart`.
   final bool senderIsContributor;
 
   const ContributorSource({
@@ -75,9 +74,8 @@ class ContributorSource {
       );
 }
 
-/// Dokłada adresy z planu przebiegu do już zebranych źródeł. Osobno, bo
-/// źródła powstają **przed** `strip` (tylko wtedy piosenka niesie jeszcze
-/// ślad piosenkomatu), a plan czyta się dopiero na końcu.
+/// Dokłada adresy z planu przebiegu do zebranych źródeł — plan czyta się
+/// dopiero po `strip`, a źródła powstają przed nim.
 List<ContributorSource> withOtherEmails(
   List<ContributorSource> sources,
   Map<String, List<String>> otherEmailsBySender,
@@ -103,7 +101,7 @@ List<ContributorSource> contributorSourcesOf(
       title: song.title,
       person: _personOf(song, sender),
       otherEmails: otherEmailsBySender[sender] ?? const [],
-      // Ślad piosenkomatu zdejmuje `strip`, więc czytamy go, dopóki jest.
+      // Ślad piosenkomatu zdejmuje `strip`, więc tylko dopóki jest.
       senderIsContributor: song.piosenkomatData?.senderIsContributor ?? true,
     ));
   }
@@ -135,9 +133,8 @@ PeopleReport collectPeople(List<ContributorSource> items) {
   for (final c in items) {
     final sender = c.sender;
 
-    // Wysyłka w cudzym imieniu: adres nadawcy jest śladem zgody, nie wkładem.
-    // Do `data.dart` nie wchodzi ani on, ani karta, bo nie ma jej z czym
-    // związać — to robota dla Ciebie.
+    // Adres nadawcy jest tu śladem zgody, nie wkładem. Karta też nie wchodzi:
+    // nie ma jej z czym związać.
     if (!c.senderIsContributor) {
       notContributor.putIfAbsent(sender, () => []).add(c.title);
       continue;

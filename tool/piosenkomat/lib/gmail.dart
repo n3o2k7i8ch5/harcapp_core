@@ -177,9 +177,8 @@ class GmailMailbox {
     final msg = await _call(
         () => _api.users.messages.get('me', id, format: 'full'),
         cost: _costGet);
-    // Dwa rozszerzenia naraz: nowe zgłoszenia jadą `.$kSubmissionFileExtension`,
-    // stare `.hrcpsng`. Mejl przejściowy z dwoma załącznikami rozstrzyga się
-    // w `parseSubmission` — wygrywa nowy.
+    // Nowe zgłoszenia jadą `.$kSubmissionFileExtension`, stare `.hrcpsng`.
+    // Przy obu naraz wygrywa nowy — patrz `buildSubmission`.
     final songAttachment = await _attachmentOf(msg, id, '.hrcpsng');
     final submissionAttachment =
         await _attachmentOf(msg, id, '.$kSubmissionFileExtension');
@@ -206,10 +205,8 @@ class GmailMailbox {
     );
   }
 
-  /// Treść pierwszego załącznika o podanym rozszerzeniu. Szuka też
-  /// w częściach zagnieżdżonych — `multipart/mixed` bywa owinięty wokół
-  /// `multipart/alternative` i wtedy płaska pętla po `payload.parts` gubi
-  /// wszystko, co leży głębiej.
+  /// Treść pierwszego załącznika o podanym rozszerzeniu, także z części
+  /// zagnieżdżonych.
   Future<String?> _attachmentOf(Message msg, String id, String extension) async {
     for (final part in _allParts(msg.payload)) {
       if (!(part.filename ?? '').toLowerCase().endsWith(extension)) continue;

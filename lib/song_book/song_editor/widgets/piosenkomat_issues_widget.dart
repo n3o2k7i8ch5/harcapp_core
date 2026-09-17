@@ -150,10 +150,8 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
                 ],
               ),
 
-              // Adres nadawcy: jedyne miejsce, gdzie go zobaczysz, gdy nie
-              // został doklejony do karty osoby dodającej — czyli przy
-              // wysyłce w cudzym imieniu i przy kilku kartach. Bez tego
-              // trzeba by wracać do skrzynki.
+              // Adres nadawcy — jedyne miejsce, gdy nie doklejono go do karty
+              // osoby dodającej.
               if(data.sender case final sender?) ...[
                 const SizedBox(height: Dimen.defMarg),
                 Row(

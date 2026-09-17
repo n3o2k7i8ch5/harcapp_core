@@ -27,17 +27,13 @@ enum SongIssue{
 
   noConsent('no-consent', 'brak zgody / wersji regulaminu', SongIssueSeverity.blocking),
 
-  /// Załącznika zgłoszenia nie da się wczytać: niezgodna suma kontrolna, nie
-  /// JSON, obcięty plik albo zero zgłoszeń w środku. Zawsze ręczna robota.
+  /// Zła suma kontrolna, nie JSON, obcięty plik albo zero zgłoszeń w środku.
   corruptedSubmissionFile('corrupted-submission-file', 'załącznik zgłoszenia uszkodzony', SongIssueSeverity.blocking),
-  /// Wersja formatu zgłoszenia nowsza niż znana temu narzędziu. Zawartości
-  /// **nie zgadujemy** — trzeba zaktualizować piosenkomat.
+  /// Wersja formatu nowsza niż znana — zawartości nie zgadujemy.
   unknownSubmissionFormat('unknown-submission-format', 'nowsza wersja formatu zgłoszenia', SongIssueSeverity.blocking),
-  /// W jednym pliku przyszło kilka zgłoszeń, a narzędzie bierze pierwsze.
-  /// Reszta **nie weszła** — o tym się nie milczy.
+  /// Kilka zgłoszeń w pliku; weszło pierwsze, reszta nie.
   skippedSubmissions('skipped-submissions', 'pominięte zgłoszenia z tego samego pliku', SongIssueSeverity.blocking),
-  /// Kilka kart osób dodających w jednym zgłoszeniu: nie wiadomo, do której
-  /// dokleić adres nadawcy, więc wkład przypisujesz ręcznie.
+  /// Kilka kart osób dodających: nie wiadomo, do której dokleić adres nadawcy.
   severalContributors('several-contributors', 'kilka osób dodających w zgłoszeniu', SongIssueSeverity.blocking),
 
   /// Nadawcą jest skrzynka HarcApp, a treść nie niesie adresu — nie ma komu

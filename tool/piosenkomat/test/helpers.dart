@@ -148,8 +148,6 @@ Directory tempDir() {
 }
 
 /// Mejl MIME z załącznikami — taki, jaki wychodzi z klienta pocztowego.
-/// Dotychczasowy pomocnik składał samą treść, więc nowy format nie miał
-/// w testach żadnej reprezentacji.
 String mimeEmail({
   required String subject,
   String from = 'Jan Testowy <jan.testowy@example.com>',

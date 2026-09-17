@@ -52,9 +52,10 @@ class PiosenkomatIssue{
 class PiosenkomatData{
 
   static const String PARAM_KIND = 'kind';
-  /// Nazwa sprzed rozbicia pola `source` na trzy: patrz [legacyAppUsed].
+  /// Nazwa sprzed rozbicia na [legacyAppUsed] i `source` w pliku zgłoszenia.
   static const String PARAM_LEGACY_SOURCE = 'source';
   static const String PARAM_LEGACY_APP_USED = 'legacy_app_used';
+  static const String PARAM_APP_VERSION = 'app_version';
   static const String PARAM_SENDER = 'sender';
   static const String PARAM_SENDER_IS_CONTRIBUTOR = 'sender_is_contributor';
   static const String PARAM_SENT_AT = 'sent_at';
@@ -72,20 +73,16 @@ class PiosenkomatData{
   final SubmissionKind kind;
   /// Czy zgłoszenie przyszło ze starej apki. Wiedza o nadawcy, nie o piosence:
   /// takiemu autorowi piosenkomat odpisze, żeby apkę zaktualizował.
-  ///
-  /// Zastępuje dawne pole `source`, które miało dwie wartości — „bieżąca apka”
-  /// i „stara apka” — czyli nie mówiło **skąd**, tylko **jak stare**, a nazywało
-  /// się tak, jakby mówiło skąd.
   final bool legacyAppUsed;
-  /// Adres, z którego przyszło zgłoszenie. Zawsze widoczny w pasku
-  /// piosenkomatu — to jedyne miejsce, gdzie go zobaczysz, gdy nie został
-  /// doklejony do karty osoby dodającej (wysyłka w cudzym imieniu, kilka kart).
+  /// Wersja apki, z której poszło zgłoszenie. Niesie ją plik zgłoszenia, więc
+  /// jest tylko przy nowym formacie.
+  final String? appVersion;
+  /// Adres, z którego przyszło zgłoszenie. Widoczny w pasku piosenkomatu —
+  /// to jedyne miejsce, gdy nie doklejono go do karty osoby dodającej.
   final String? sender;
-  /// Co autor wybrał przed wysyłką: „wysyłam piosenkę proponowaną przeze mnie”
-  /// (`true`) albo „wysyłam w imieniu innej osoby” (`false`). Przy `false`
-  /// adres nadawcy służy wyłącznie do odpisania i **nie** trafia do
-  /// `people.dart`. Stare zgłoszenia tego nie niosą — dla nich `true`, bo tak
-  /// to dotąd zgadywała heurystyka.
+  /// Czy nadawca zgłasza **własną** piosenkę. Przy `false` jego adres służy
+  /// wyłącznie do odpisania i nie trafia do `people.dart`. Stare zgłoszenia
+  /// tego nie niosą — dla nich `true`.
   final bool senderIsContributor;
   /// Data wysłania mejla-reprezentanta zgłoszenia.
   final DateTime? sentAt;
@@ -122,6 +119,7 @@ class PiosenkomatData{
   const PiosenkomatData({
     this.kind = SubmissionKind.newSong,
     this.legacyAppUsed = false,
+    this.appVersion,
     this.sender,
     this.senderIsContributor = true,
     this.sentAt,
@@ -142,6 +140,7 @@ class PiosenkomatData{
   }) => PiosenkomatData(
     kind: kind,
     legacyAppUsed: legacyAppUsed,
+    appVersion: appVersion,
     sender: sender,
     senderIsContributor: senderIsContributor,
     sentAt: sentAt,
@@ -169,6 +168,7 @@ class PiosenkomatData{
   Map<String, dynamic> toJsonMap() => {
     PARAM_KIND: kind.id,
     if(legacyAppUsed) PARAM_LEGACY_APP_USED: true,
+    if(appVersion != null) PARAM_APP_VERSION: appVersion,
     if(sender != null) PARAM_SENDER: sender,
     if(!senderIsContributor) PARAM_SENDER_IS_CONTRIBUTOR: false,
     if(sentAt != null) PARAM_SENT_AT: sentAt!.toIso8601String(),
@@ -185,10 +185,10 @@ class PiosenkomatData{
 
   static PiosenkomatData fromJsonMap(Map<String, dynamic> map) => PiosenkomatData(
     kind: SubmissionKind.byId(map[PARAM_KIND] as String?),
-    // Stare pliki przebiegu niosą `source: old-app` — bez tego mapowania
-    // wracałyby po cichu jako „bieżąca apka”, bo tym była domyślna wartość.
+    // Stare pliki przebiegu niosą `source: old-app`.
     legacyAppUsed: map[PARAM_LEGACY_APP_USED] as bool?
         ?? map[PARAM_LEGACY_SOURCE] == 'old-app',
+    appVersion: map[PARAM_APP_VERSION] as String?,
     sender: map[PARAM_SENDER] as String?,
     senderIsContributor: map[PARAM_SENDER_IS_CONTRIBUTOR] as bool? ?? true,
     sentAt: DateTime.tryParse(map[PARAM_SENT_AT] as String? ?? ''),

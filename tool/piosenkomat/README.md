@@ -20,7 +20,10 @@ wyślij osobnym mejlem.
 
 ## Format zgłoszenia
 
-Zgłoszenie z apki jedzie **załącznikiem** `.hrcpsngsbm`, nie treścią mejla.
+Zgłoszenie z apki jedzie **załącznikiem** `submission.hrcpsngsbm`, nie treścią
+mejla. Nazwa jest zawsze ta sama i zawsze ASCII — rozpoznajemy plik po
+rozszerzeniu, a stała krótka nazwa nie da się żadnemu klientowi zakodować
+po RFC 2231, czego czytnik surowego `.eml` by nie odczytał.
 Treść jest wyłącznie dla człowieka, a narzędzie czyta z niej jedną rzecz:
 dopisek autora, czyli wszystko nad zamrożoną belką `Akceptacja regulaminu`.
 
@@ -318,6 +321,7 @@ tagi widzi użytkownik apki):
 ```json
 "piosenkomat": {
   "kind": "correction", "legacy_app_used": true, "sent_at": "…",
+  "app_version": "2.4.1",
   "sender": "jan@example.com", "sender_is_contributor": false,
   "user_message": "…", "correction_message": "…",
   "correction_target": "o!_plonie_ognisko",

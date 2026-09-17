@@ -20,16 +20,14 @@ final _emailRe = RegExp(r'[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}');
 String? emailFromHeader(String? from) =>
     from == null ? null : _emailRe.firstMatch(from)?.group(0)?.toLowerCase();
 
-/// Wynik sięgnięcia po załącznik zgłoszenia: plik, powód odmowy, albo nic —
-/// gdy mejl jest w starym kształcie i załącznika w ogóle nie ma.
+/// Załącznik zgłoszenia: plik, powód odmowy, albo nic — gdy mejl go nie ma.
 class SubmissionFileRead {
   final SongSubmissionFile? file;
   final SubmissionFileError? error;
 
   const SubmissionFileRead({this.file, this.error});
 
-  /// Czy mejl w ogóle niósł plik zgłoszenia. Uszkodzony wciąż nim jest —
-  /// i właśnie dlatego nie wolno po cichu wracać do starej ścieżki.
+  /// Czy mejl niósł plik zgłoszenia — uszkodzony też się liczy.
   bool get isFile => file != null || error != null;
 }
 
@@ -43,9 +41,8 @@ SubmissionFileRead readSubmissionFile(ContribMessage m) {
   }
 }
 
-/// **Piosenkomat obsługuje wyłącznie zgłoszenia wysłane z apki.** Zgłoszenie
-/// ze strony odsiewamy jawnie: po znaczniku w temacie, a gdy plik jest —
-/// po polu `source`, bo temat człowiek może zmienić.
+/// Zgłoszenie ze strony — poza zakresem narzędzia. Po znaczniku w temacie,
+/// a gdy plik jest, po polu `source`: temat człowiek może zmienić.
 bool isWebSubmission(ContribMessage m) =>
     m.isWebSubmission || (readSubmissionFile(m).file?.source?.isWeb ?? false);
 
@@ -88,24 +85,15 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
   ];
   final rep = own.isNotEmpty ? own.last : ordered.first;
 
-  // Nowa ścieżka: fakty z załącznika, dopisek z treści. Wypełnia tę samą
-  // strukturę, co stary parser, więc wszystko poniżej zostaje bez zmian.
+  // Fakty z załącznika, dopisek z treści — ta sama struktura, co ze starego
+  // parsera, więc wszystko poniżej jej nie odróżnia. Uszkodzony plik nie
+  // wraca do starej ścieżki: jego dane mogą być inne niż te w treści.
   final file = readSubmissionFile(rep);
-
-  ParsedContribEmail? parsed;
-  if (file.error == null && file.file != null) {
-    parsed = ParsedContribEmail.fromSubmissionFile(
-      file.file!,
-      rep.body,
-      senderEmail: emailFromHeader(rep.from),
-    );
-  } else if (file.error == null) {
-    try {
-      parsed = parseSubmission(rep);
-    } catch (_) {
-      parsed = null;
-    }
-  }
+  final parsed = switch (file.file) {
+    final f? => ParsedContribEmail.fromSubmissionFile(f, rep.body,
+        senderEmail: emailFromHeader(rep.from)),
+    null => file.isFile ? null : _tryParse(rep),
+  };
 
   final song = parsed?.song;
   final fallbackTitle = rep.subject ?? rep.id;
@@ -121,16 +109,10 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
     if (extra != null) messagesText.add('[${_day(m.date)}]: $extra');
   }
 
-  final oldApp = parsed?.isOldestFormat ?? false;
-  final shape = file.isFile
-      ? EmailShape.file
-      : oldApp
-          ? EmailShape.oldest
-          : (parsed?.isNewFormat ?? true)
-              ? EmailShape.fenced
-              : EmailShape.legacy;
-  // Rodzaj bierze się z pliku i **tylko** z pliku, gdy plik jest. Dla starych
-  // mejli zostaje wnioskowanie z tematu albo z niepustego bloku poprawki.
+  final shape = _shapeOf(file, parsed);
+  final oldApp = shape == EmailShape.oldest;
+  // Gdy plik jest, rodzaj bierze się z niego i tylko z niego. Bez pliku —
+  // z tematu albo z niepustego bloku poprawki.
   final isCorrection = parsed?.declaredKind != null
       ? parsed!.declaredKind == SubmissionKind.correction
       : (rep.subject ?? '').contains(kCorrectionSubject) ||
@@ -150,9 +132,8 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
         sender: sender,
         threadId: rep.threadId,
         date: rep.date,
-        // Heurystyka „doklej nadawcę do jedynej karty” zostaje dla starych
-        // formatów — one nie niosą `sender_is_contributor`, więc nie ma jej
-        // czym zastąpić. Nowa ścieżka pyta pliku.
+        // Stare formaty nie niosą `sender_is_contributor`, więc zostaje im
+        // heurystyka „doklej nadawcę do jedynej karty”.
         attachSender: !file.isFile || (senderIsContributor && contributorCards < 2));
   }
 
@@ -202,6 +183,20 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
     appMatch: appMatch,
     declaredCorrectionTarget: declared,
   );
+}
+
+ParsedContribEmail? _tryParse(ContribMessage m) {
+  try {
+    return parseSubmission(m);
+  } catch (_) {
+    return null;
+  }
+}
+
+EmailShape _shapeOf(SubmissionFileRead file, ParsedContribEmail? parsed) {
+  if (file.isFile) return EmailShape.file;
+  if (parsed?.isOldestFormat ?? false) return EmailShape.oldest;
+  return (parsed?.isNewFormat ?? true) ? EmailShape.fenced : EmailShape.legacy;
 }
 
 /// Porównanie między zgłoszeniami paczki. Dwa przejścia: najpierw grupy po
@@ -302,13 +297,12 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
 Decision decide(Submission s) {
   final song = s.song;
 
-  // Uwagi o samym załączniku: te istnieją nawet wtedy, gdy piosenki nie ma
-  // po czym odczytać. Bez nich uszkodzony plik wyglądałby jak zwykły mejl
-  // nie do sparsowania i przepadłby w worku `unparsable`.
-  final fileIssues = <PiosenkomatIssue>[
-    if (s.fileError != null)
+  // Uwagi o samym załączniku — jedyne, jakie da się postawić, gdy piosenki
+  // nie ma po czym odczytać.
+  final fileIssues = [
+    if (s.fileError case final kind?)
       PiosenkomatIssue(
-        s.fileError == SubmissionFileErrorKind.unknownFormat
+        kind == SubmissionFileErrorKind.unknownFormat
             ? SongIssue.unknownSubmissionFormat
             : SongIssue.corruptedSubmissionFile,
         detail: s.fileErrorMessage,
@@ -438,8 +432,7 @@ String _chordsDetail(SongRaw song) {
 /// szablonu; gdy to zwykła odpowiedź — cały jej własny tekst, bez cytatu
 /// i bez linii „Dnia … napisał(a):”.
 String? _userMessageOf(ContribMessage m) {
-  // Nowy format: dopisek to wszystko nad zamrożoną belką, a w treści nie ma
-  // już żadnego kodu piosenki do sparsowania.
+  // Nowy format: w treści nie ma kodu piosenki, jest sam dopisek.
   if (m.submissionAttachment != null) return extractSubmissionUserMessage(m.body);
   if (m.hasOwnSongCode) {
     try {
@@ -631,18 +624,14 @@ void _enrich(
     emailThreadId: threadId,
   );
   if (!attachSender) {
-    // Nadawca nie jest osobą dodającą — albo jest ich kilka i nie wiadomo, do
-    // której adres miałby iść. Adres nie wchodzi, ale **karta osoby owszem**,
-    // bez adresu: to ją wysyłający wskazał i tylko ona mówi, komu przypisać
-    // wkład. Bez tego zgłoszenie w cudzym imieniu docierało do przeglądu
-    // z pustym `add_pers` i osoba przepadała razem z adresem.
+    // Adres nadawcy nie wchodzi, ale karta osoby owszem — bez adresu, bo tylko
+    // ona mówi, komu przypisać wkład.
     final person = parsed.registered?.person;
-    final alreadyThere = person == null ||
-        person.name.trim().isEmpty ||
-        song.contribRefs.any((c) =>
-            (c.person?.name ?? '').trim().toLowerCase() ==
-            person.name.trim().toLowerCase());
-    if (!alreadyThere) song.contribRefs.add(ContributorRef(person: person));
+    final name = person?.name.trim().toLowerCase() ?? '';
+    final missing = name.isNotEmpty &&
+        !song.contribRefs
+            .any((c) => (c.person?.name ?? '').trim().toLowerCase() == name);
+    if (missing) song.contribRefs.add(ContributorRef(person: person));
   }
 
   final known = sender == null || song.contribRefs
