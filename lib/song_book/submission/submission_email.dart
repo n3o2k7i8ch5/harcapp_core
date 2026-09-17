@@ -45,9 +45,6 @@ String? extractSubmissionUserMessage(String body){
   return raw.isEmpty? null: raw;
 }
 
-/// Czy treść jest w nowym kształcie.
-bool isSubmissionEmailBody(String body) => _consentBarRe.hasMatch(body);
-
 String composeSubmissionEmailSubject({
   required SubmissionOrigin origin,
   SongCore? song,

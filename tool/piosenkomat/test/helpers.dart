@@ -7,7 +7,9 @@ import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/similarity.dart';
 import 'package:harcapp_core/song_book/contrib_song_email.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
+import 'package:harcapp_core/song_book/import_hrcpsng.dart';
 import 'package:harcapp_core/song_book/song_element.dart';
+import 'package:piosenkomat/hrcpsng.dart';
 import 'package:harcapp_core/song_book/submission/submission_email.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/models.dart';
@@ -99,6 +101,13 @@ String hardWrap(String text, {int width = 76}) {
     out.add(rest);
   }
   return out.join('\r\n');
+}
+
+/// Piosenki przez format pliku i z powrotem, tak jak robi to strona: proposed
+/// i reviewed są wtedy osobnymi obiektami, więc dopasowanie musi iść po id.
+List<SongRaw> roundTrip(List<SongRaw> songs) {
+  final (official, conf) = importHrcpsng(encodeHrcpsng(songs, withPiosenkomatData: true));
+  return [...official, ...conf];
 }
 
 /// Piosenki „już w apce” z podanych piosenek.

@@ -208,28 +208,18 @@ class GmailMailbox {
   /// Treść pierwszego załącznika o podanym rozszerzeniu, także z części
   /// zagnieżdżonych.
   Future<String?> _attachmentOf(Message msg, String id, String extension) async {
-    for (final part in _allParts(msg.payload)) {
-      if (!(part.filename ?? '').toLowerCase().endsWith(extension)) continue;
-      // Małe załączniki Gmail oddaje od razu w treści odpowiedzi. Dokładanie
-      // wtedy `attachments.get` to drugie 20 jednostek za te same bajty.
-      if (part.body?.data case final data?) return _decode(data);
-      if (part.body?.attachmentId case final attId?) {
-        final att = await _call(
-            () => _api.users.messages.attachments.get('me', id, attId),
-            cost: _costGet);
-        if (att.data != null) return _decode(att.data!);
-      }
-      return null;
+    final part = attachmentPart(msg.payload, extension);
+    if (part == null) return null;
+    // Małe załączniki Gmail oddaje od razu w treści odpowiedzi. Dokładanie
+    // wtedy `attachments.get` to drugie 20 jednostek za te same bajty.
+    if (part.body?.data case final data?) return _decode(data);
+    if (part.body?.attachmentId case final attId?) {
+      final att = await _call(
+          () => _api.users.messages.attachments.get('me', id, attId),
+          cost: _costGet);
+      if (att.data != null) return _decode(att.data!);
     }
     return null;
-  }
-
-  static Iterable<MessagePart> _allParts(MessagePart? part) sync* {
-    if (part == null) return;
-    yield part;
-    for (final child in part.parts ?? const <MessagePart>[]) {
-      yield* _allParts(child);
-    }
   }
 
   /// Odpowiedź w wątku [message]: ten sam `threadId`, `In-Reply-To`
@@ -545,6 +535,23 @@ String _mimeReply(ReplyTarget target, String text) {
 String _encodeHeader(String value) => value.codeUnits.every((c) => c < 128)
     ? value
     : '=?UTF-8?B?${base64.encode(utf8.encode(value))}?=';
+
+/// Wszystkie części wiadomości, także zagnieżdżone: `multipart/mixed` bywa
+/// owinięty wokół `multipart/alternative`, a płaska pętla po `payload.parts`
+/// gubi wtedy wszystko, co leży głębiej.
+Iterable<MessagePart> allMessageParts(MessagePart? part) sync* {
+  if (part == null) return;
+  yield part;
+  for (final child in part.parts ?? const <MessagePart>[]) {
+    yield* allMessageParts(child);
+  }
+}
+
+/// Pierwszy załącznik o podanym rozszerzeniu w `filename`.
+MessagePart? attachmentPart(MessagePart? payload, String extension) =>
+    allMessageParts(payload)
+        .where((p) => (p.filename ?? '').toLowerCase().endsWith(extension))
+        .firstOrNull;
 
 String _plainText(MessagePart? part) {
   if (part == null) return '';

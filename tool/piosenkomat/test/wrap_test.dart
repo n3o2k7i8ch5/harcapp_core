@@ -163,6 +163,7 @@ void _oldest() {
     final got = classify(m, book: SongBook.empty);
     expect(got.isClean, isTrue);
     expect(got.oldApp, isFalse);
+    expect(got.submission.shape, EmailShape.legacy);
     expect(got.labels, isNot(contains(kLabelOldAppToReply)));
   });
 }

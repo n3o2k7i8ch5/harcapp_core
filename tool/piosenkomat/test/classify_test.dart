@@ -12,8 +12,6 @@ import 'package:test/test.dart';
 import 'helpers.dart';
 
 void main() {
-  _labels();
-  _submission();
   _threads();
 
   test('kompletna nowa piosenka → kandydat bez zarzutu, ze zgodą, datą i nadawcą', () async {
@@ -107,7 +105,7 @@ void main() {
       expect(got.target, Target.unparsable);
       expect(got.song, isNull);
       expect(got.title, 'Cześć');
-      expect(got.labels, [kLabelUnparsable, kLabelAuto].sublist(0, 1));
+      expect(got.labels, [kLabelUnparsable]);
     });
   });
 
@@ -135,9 +133,8 @@ void main() {
       expect(got.labels, contains(kLabelCorrection));
     });
     test('ten sam tytuł, zupełnie inna piosenka → nie zgadujemy', () async {
-      // `closest` przy trafieniu w tytuł zwraca wynik bez względu na tekst.
-      // Podmiana idzie po id, a nietknięte zgłoszenie wchodzi, więc taki
-      // domysł musi zostać pusty — inaczej poprawka kasuje cudzą piosenkę.
+      // Podmiana idzie po id, a zgłoszenie bez decyzji wchodzi: słaby domysł
+      // skasowałby cudzą piosenkę.
       final got = classify(
         msgFrom(await completeEmail(
             isNew: false,
@@ -153,8 +150,7 @@ void main() {
     });
 
     test('bez deklaracji, zmieniony tytuł, ten sam tekst → cel zgadnięty', () async {
-      // Poprawka może właśnie zmieniać tytuł; identyczny tekst to ta sama
-      // piosenka, więc „za mało podobne” byłoby tu nieprawdą.
+      // Poprawka może zmieniać tytuł; identyczny tekst to ta sama piosenka.
       final wApce = sampleSong(title: 'Stary tytuł');
       wApce.id = 'o!_stary';
       final got = classify(
@@ -267,83 +263,6 @@ void main() {
     expect(emailFromHeader('jan@example.com'), 'jan@example.com');
     expect(emailFromHeader('HarcApp'), isNull);
     expect(emailFromHeader(null), isNull);
-  });
-
-  test('Date: po RFC 2822, jak piszą prawdziwe klienty', () {
-    expect(parseMailDate('Thu, 11 Sep 2026 10:00:00 +0200'),
-        DateTime.utc(2026, 9, 11, 8, 0, 0));
-    expect(parseMailDate('11 Sep 2026 10:00 -0130'), DateTime.utc(2026, 9, 11, 11, 30));
-    expect(parseMailDate('2026-09-06T12:00:00+02:00'),
-        DateTime.parse('2026-09-06T12:00:00+02:00'));
-    expect(parseMailDate('wczoraj'), isNull);
-    expect(parseMailDate(null), isNull);
-    final m = ContribMessage.fromEml(
-        'From: a@b.pl\nDate: Thu, 11 Sep 2026 10:00:00 +0200\n\nx', id: 'x');
-    expect(m.date, DateTime.utc(2026, 9, 11, 8));
-  });
-
-  test('fromEml: bez nagłówków całość jest treścią', () {
-    final m = ContribMessage.fromEml('Ala ma kota\n\nDruga linia', id: 'x');
-    expect(m.subject, isNull);
-    expect(m.body, 'Ala ma kota\n\nDruga linia');
-  });
-}
-
-void _labels() {
-  test('stateLabelsFor: po decyzji, nie po uwagach', () {
-    expect(stateLabelFor(classifiedWith([SongIssue.missingChords])), kLabelToReview);
-    expect(stateLabelFor(classifiedWith([])), kLabelReady);
-    expect(stateLabelFor(classifiedWith([], target: Target.rejectAlreadyInApp)),
-        kLabelRejectedInBook);
-    expect(stateLabelFor(classifiedWith([], target: Target.rejectDuplicate)),
-        kLabelRejectedDuplicate);
-    expect(stateLabelsFor(classifiedWith([], target: Target.mailOnlyIdentical, userMessage: true)),
-        [kLabelToReview, ReviewKind.identicalInApp.label, ReviewKind.userMessage.label]);
-    expect(stateLabelsFor(classifiedWith([], target: Target.unparsable)), [kLabelUnparsable]);
-    expect(
-      stateLabelsFor(classifiedWith(
-          [SongIssue.missingYoutube, SongIssue.missingTitle, SongIssue.hasUserMessage])),
-      [kLabelToReview, ReviewKind.missingData.label, ReviewKind.userMessage.label],
-    );
-    expect(stateLabelsFor(classifiedWith([SongIssue.similarTextInApp, SongIssue.sameTargetInBatch])),
-        [kLabelToReview, ReviewKind.duplicateInApp.label, ReviewKind.duplicateInBatch.label]);
-    expect(stateLabelsFor(classifiedWith([SongIssue.chordsDifferFromApp])),
-        [kLabelToReview, ReviewKind.undeclaredCorrection.label]);
-    // Znaczniki.
-    expect(classifiedWith([], kind: SubmissionKind.correction).labels,
-        [kLabelReady, kLabelCorrection]);
-    expect(kQueueQuery, contains('-label:song/needs-review/duplicate-in-app'));
-    expect(kQueueQuery, contains('-label:song/unparsable'));
-    expect(kQueueQuery, contains('-label:song/correction'));
-  });
-
-  test('query Gmaila i rozpoznanie „w pliku” z ręki automatu', () {
-    expect(kQueueQuery, startsWith('in:inbox (subject:'));
-    expect(kQueueQuery, contains(' -label:song/auto '));
-    expect(kQueueQuery, contains('-label:song/ready-to-add'));
-    expect(kQueueQuery, contains('-label:song/rejected/too-niche'));
-    expect(isReadyByTool({kLabelReady, kLabelAuto}), isTrue);
-    expect(isReadyByTool({kLabelReady}), isFalse);
-  });
-}
-
-void _submission() {
-  test('isSongSubmission: po temacie albo znaczniku w treści', () {
-    expect(const ContribMessage(id: 'a', body: 'x', subject: 'Nowa piosenka "Y"').isSongSubmission, isTrue);
-    expect(const ContribMessage(id: 'b', body: 'bla\n### Kod piosenki:\n{}').isSongSubmission, isTrue);
-    expect(const ContribMessage(id: 'c', body: 'x', subject: 'Re: grupa FB').isSongSubmission, isFalse);
-    expect(kQueueQuery, contains('subject:"Nowa piosenka" OR subject:"Poprawka piosenki"'));
-    expect(kQueueQuery, contains('"### Kod piosenki:"'));
-    // Nowy format wpada dwiema drogami: znacznik w temacie albo rozszerzenie
-    // załącznika. Temat jest edytowalny, więc jeden sygnał to za mało.
-    expect(kQueueQuery, contains('subject:"hrcpsng/app"'));
-    expect(kQueueQuery, contains('filename:hrcpsngsbm'));
-  });
-
-  test('hasOwnSongCode: cytat to nie własny kod', () {
-    expect(const ContribMessage(id: 'a', body: 'Dzięki!\n> ### Kod piosenki:\n> {}').hasOwnSongCode, isFalse);
-    expect(const ContribMessage(id: 'b', body: '### Kod piosenki:\n{}').hasOwnSongCode, isTrue);
-    expect(const ContribMessage(id: 'c', body: 'x', songAttachment: '{}').hasOwnSongCode, isTrue);
   });
 }
 

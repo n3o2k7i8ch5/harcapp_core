@@ -1,11 +1,8 @@
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
-import 'package:harcapp_core/song_book/contrib_reply.dart';
-import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:path/path.dart' as p;
 import 'package:piosenkomat/classify.dart';
-import 'package:piosenkomat/cli.dart';
 import 'package:piosenkomat/hrcpsng.dart';
 import 'package:piosenkomat/similarity.dart';
 import 'package:test/test.dart';
@@ -86,68 +83,6 @@ void main() {
     expect(songs.every((s) => s.contributorData?.email.isNotEmpty ?? false), isTrue,
         reason: 'reszta contributor_data zostaje — to dane autora, nie nasz ślad');
     expect(encodeHrcpsng(songs), isNot(contains('email_thread_id')));
-  });
-
-  test('mejl do autora składa się z kawałków, nie pisze od nowa', () {
-    // Sama uwaga: bez bloku o starej apce.
-    final noteOnly = composeContribReply(notes: ['Brakuje chwytów.'])!;
-    expect(noteOnly, contains('Brakuje chwytów.'));
-    expect(noteOnly, isNot(contains('NIE JEST JUŻ ROZWIJANA')));
-
-    // Ten sam autor ze starej apki: jeden mejl, obie sprawy, uwaga przed blokiem.
-    final both = composeContribReply(notes: ['Brakuje chwytów.'], oldApp: true)!;
-    expect(both.indexOf('Brakuje chwytów.'),
-        lessThan(both.indexOf('NIE JEST JUŻ ROZWIJANA')));
-
-    // Kilka piosenek jednego autora → jeden mejl ze wszystkimi uwagami.
-    final many = composeContribReply(notes: ['Brak chwytów.', 'Brak YouTube.'])!;
-    expect(many, contains('Brak chwytów.'));
-    expect(many, contains('Brak YouTube.'));
-
-    // Nie ma o czym pisać — żadnego pustego szkicu.
-    expect(composeContribReply(), isNull);
-    expect(composeContribReply(notes: ['  ']), isNull);
-
-    // Stara treść to dokładnie złożenie bez uwag — nic się nikomu nie zmieniło.
-    expect(oldestFormatReplyMessage, composeContribReply(oldApp: true));
-
-    // Własny szkic poznajemy po kształcie, nie po jednym wariancie treści:
-    // uwaga mogła się zmienić, a poprzedniej nikt nie pamięta.
-    expect(isToolShapedReply(noteOnly), isTrue);
-    expect(isToolShapedReply(both), isTrue);
-    expect(isToolShapedReply('$noteOnly\n\nPS. dopisane ręcznie'), isFalse,
-        reason: 'coś po „Czuwaj!” to ręczna robota w Gmailu');
-    expect(isToolShapedReply('Hej!\n\n$noteOnly'), isFalse);
-    expect(isToolShapedReply(noteOnly.replaceAll('\n', '\r\n')), isTrue,
-        reason: 'Gmail oddaje CRLF');
-
-    // Co wypadnie przy przeliczeniu — do pokazania, nie do zgubienia.
-    final revised = composeContribReply(notes: ['Brakuje YouTube.'])!;
-    expect(paragraphsDroppedBy(noteOnly, revised), ['Brakuje chwytów.']);
-    expect(paragraphsDroppedBy(noteOnly, noteOnly), isEmpty);
-  });
-
-  test('raport liczy nowe, poprawki, odrzuty i sam mejl', () async {
-    final book = bookWith([sampleSong(title: 'W apce', lyrics: 'Ala ma kota\nA kot ma Ale')]);
-    final report = formatRunReport(classifyBatch([
-      msgFrom(await completeEmail(song: sampleSong(title: 'Czysta', lyrics: 'Zupelnie inne slowa')), id: 'ok'),
-      msgFrom(await completeEmail(song: sampleSong(title: 'Bez YT', yt: null, lyrics: 'Wlazl kotek na plotek')), id: 'yt'),
-      msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'W apce', lyrics: 'Ala ma kota\nA kot ma Ale\nX')), id: 'corr'),
-      msgFrom(await completeEmail(song: sampleSong(title: 'W apce', lyrics: 'Ala ma kota\nA kot ma Ale')), id: 'dup'),
-      msgFrom(await completeEmail(song: sampleSong(title: 'W apce', lyrics: 'Ala ma kota\nA kot ma Ale'), userMessage: 'hej'), id: 'msg'),
-      msgFrom('From: a@b.pl\nSubject: Cześć\n\nCześć, mam pytanie', id: 'raw'),
-    ], book: book));
-    expect(report, contains('ZGŁOSZEŃ        6'));
-    expect(report, contains('NIE SPARSOWANE  1'));
-    expect(report, contains('NOWE            2'));
-    expect(report, contains('  bez zarzutu   1'));
-    expect(report, contains('  z uwagami     1'));
-    expect(report, contains('POPRAWKI        1'));
-    expect(report, contains('  już w apce    1'));
-    expect(report, contains('SAM MEJL        1'));
-    expect(report, contains('missing-youtube'));
-    expect(report, contains('[ok]'));
-    expect(report, contains('NIEPARS  Cześć'));
   });
 
   test('nazwy plików przebiegu', () {

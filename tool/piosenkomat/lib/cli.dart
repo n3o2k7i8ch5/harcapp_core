@@ -609,7 +609,7 @@ Future<int> _labelReviewed(ArgResults cmd) async {
   writeDecisions(decisionsPath, results);
   stdout.writeln('Ślad przeglądu: $decisionsPath');
 
-  final changes = _reviewLabelChanges(results, plan);
+  final changes = reviewLabelChanges(results, plan);
   if (changes.isEmpty) {
     stdout.writeln('\nNic do przestawienia. Dalej: ./piosenkomat label added --push');
     return 0;
@@ -681,7 +681,8 @@ String? _reviewedFileOf(String outDir, SubmissionKind kind) {
 
 /// Co zrobić z etykietami każdej wiadomości po przeglądzie: `(dodaj, zdejmij)`.
 /// Etykiety idą na wszystkie wiadomości wątku.
-Map<String, (List<String>, List<String>)> _reviewLabelChanges(
+/// Co po przeglądzie dochodzi i co schodzi z każdej wiadomości wątku.
+Map<String, (List<String>, List<String>)> reviewLabelChanges(
   List<ReviewResult> results,
   LabelPlan plan,
 ) {
