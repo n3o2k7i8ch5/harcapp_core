@@ -211,10 +211,12 @@ Future<int> _scan(ArgResults cmd) async {
   });
   // Bezpieczniki na wypadek, gdyby query przepuściło coś już otagowanego
   // albo coś, co nie jest zgłoszeniem piosenki. Takich mejli nie dotykamy.
+  // Zgłoszenia ze strony liczymy osobno i tylko te, które inaczej weszłyby
+  // do przebiegu — inaczej ten sam mejl wchodziłby do dwóch podsumowań naraz.
+  final web = fetched.where((m) => !m.hasSongLabel && isWebSubmission(m)).length;
   var messages = fetched
       .where((m) => !m.hasSongLabel && m.isSongSubmission && !isWebSubmission(m))
       .toList();
-  final web = fetched.where(isWebSubmission).length;
   if (web > 0) {
     stdout.writeln('Odsiano $web zgłoszeń ze strony — piosenkomat obsługuje '
         'wyłącznie zgłoszenia wysłane z apki. Te ogarnij ręcznie.');
@@ -228,8 +230,9 @@ Future<int> _scan(ArgResults cmd) async {
     if ((await mailbox.threadLabels(t)).any(isSongLabel)) labeledThreads.add(t);
   }
   messages = messages.where((m) => !labeledThreads.contains(m.threadId)).toList();
-  if (messages.length != fetched.length) {
-    stdout.writeln('Pominięto ${fetched.length - messages.length} mejli '
+  final skipped = fetched.length - messages.length - web;
+  if (skipped > 0) {
+    stdout.writeln('Pominięto $skipped mejli '
         '(już otagowane, w otagowanym wątku albo nie o piosence), zostają bez zmian.');
   }
 

@@ -630,6 +630,21 @@ void _enrich(
             ?? kOldAppRulesVersion,
     emailThreadId: threadId,
   );
+  if (!attachSender) {
+    // Nadawca nie jest osobą dodającą — albo jest ich kilka i nie wiadomo, do
+    // której adres miałby iść. Adres nie wchodzi, ale **karta osoby owszem**,
+    // bez adresu: to ją wysyłający wskazał i tylko ona mówi, komu przypisać
+    // wkład. Bez tego zgłoszenie w cudzym imieniu docierało do przeglądu
+    // z pustym `add_pers` i osoba przepadała razem z adresem.
+    final person = parsed.registered?.person;
+    final alreadyThere = person == null ||
+        person.name.trim().isEmpty ||
+        song.contribRefs.any((c) =>
+            (c.person?.name ?? '').trim().toLowerCase() ==
+            person.name.trim().toLowerCase());
+    if (!alreadyThere) song.contribRefs.add(ContributorRef(person: person));
+  }
+
   final known = sender == null || song.contribRefs
       .any((c) => (c.emailRef ?? '').toLowerCase() == sender);
   if (!known && attachSender) {
