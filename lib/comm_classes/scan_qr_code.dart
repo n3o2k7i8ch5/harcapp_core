@@ -46,7 +46,7 @@ class QRCodeScannerWidget extends StatelessWidget {
             // You can restrict specific formats.
             BarcodeFormat.qrCode,
           ],
-          onCapture: (Result result) {
+          onCapture: (ScanResult result) {
             onCapture.call(result.text);
           },
         ),
