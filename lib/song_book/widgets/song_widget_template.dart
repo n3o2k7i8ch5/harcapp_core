@@ -926,7 +926,9 @@ class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<T
     if(showYtButton)
       _ButtonData(
           name: 'YouTube',
-          iconData: MdiIcons.youtube,
+          // Konturowe „play” — MDI nie ma outline'owego `youtube`, a pełne logo
+          // odstawało od reszty paska (`bookmarkOutline` i spółka).
+          iconData: MdiIcons.playCircleOutline,
           onLongPress: (_, songWidget, _) => songWidget.onYtLongPress?.call(),
           onPressed: (_, songWidget, _){
             if(songWidget.onYtTap==null) return;
