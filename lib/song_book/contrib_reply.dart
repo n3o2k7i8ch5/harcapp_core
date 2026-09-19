@@ -41,11 +41,8 @@ const String kOneSongPerMailReplyBlock =
 
 /// Propozycja uwagi do pola „Odpowiedź” z pastylek `missing-*`.
 ///
-/// To **nie** jest cały mejl: całą wiadomość — z powitaniem, blokiem o starej
-/// apce i „Czuwaj!” — składa wyłącznie [composeContribReply], w jednym
-/// miejscu. Tu tylko środek: lista braków sklejona w jedno zdanie plus prośba
-/// o poprawkę, bez własnego pożegnania — inaczej wylądowałoby w połowie mejla,
-/// przed blokami, które doklei składanie. `null`, gdy żadna pastylka nie
+/// Tu tylko środek, bez powitania i pożegnania — całą wiadomość składa
+/// [composeContribReply], w jednym miejscu. `null`, gdy żadna pastylka nie
 /// zasługuje na pytanie do autora (duplikat, zgoda, dopisek…).
 ///
 /// Kolejność zawsze jak w [SongIssue], nie jak na pastylkach: „chwytów

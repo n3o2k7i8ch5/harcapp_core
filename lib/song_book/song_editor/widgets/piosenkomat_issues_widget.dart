@@ -98,9 +98,8 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
     prov.notify();
   }
 
-  /// Wstawia propozycję do pola. Gdy coś już tam jest — Twój tekst, nie
-  /// poprzednia propozycja — pyta najpierw: kliknięcie gwiazdki zamiast
-  /// w pole byłoby inaczej cichą utratą napisanej odpowiedzi, bez cofnięcia.
+  /// Gdy w polu już coś jest, pyta — inaczej chybione kliknięcie gwiazdki
+  /// kasuje napisaną odpowiedź bez cofnięcia.
   Future<void> _proposeReply(String note) async {
     if(_controller!.text.trim().isNotEmpty){
       bool overwrite = false;
@@ -128,9 +127,7 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
       if(!mounted) return;
     }
 
-    // Przez `value`, nie przez `text`: samo `text` zostawia zaznaczenie
-    // w pozycji -1, więc w sfokusowanym polu następny znak wchodzi na
-    // początek propozycji zamiast za nią.
+    // Przez `value`: samo `text` zostawia zaznaczenie w pozycji -1.
     _controller!.value = TextEditingValue(
       text: note,
       selection: TextSelection.collapsed(offset: note.length),
@@ -248,8 +245,7 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
               // nad tekst. Taka sama zawsze, niezależnie od werdyktu.
               // Gwiazdka — jak przy AI, ale bez modelu: skleja uwagę
               // z pastylek `missing-*`. Widać ją tylko, gdy jest co
-              // zaproponować; klik nie wysyła mejla, tylko wypełnia pole,
-              // a gdy coś już w nim jest — najpierw pyta.
+              // zaproponować; klik nie wysyła mejla, tylko wypełnia pole.
               _Bubble(
                 mine: true,
                 child: Row(

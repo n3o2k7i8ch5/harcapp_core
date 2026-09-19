@@ -1,6 +1,8 @@
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
+import 'package:harcapp_core/song_book/piosenkomat/file_names.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
+import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:path/path.dart' as p;
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/hrcpsng.dart';
@@ -83,6 +85,29 @@ void main() {
     expect(songs.every((s) => s.contributorData?.email.isNotEmpty ?? false), isTrue,
         reason: 'reszta contributor_data zostaje — to dane autora, nie nasz ślad');
     expect(encodeHrcpsng(songs), isNot(contains('email_thread_id')));
+  });
+
+  test('nazwa zapisu z edytora liczy się z samych piosenek', () {
+    SongRaw z(SubmissionKind kind) => sampleSong()
+      ..piosenkomatData = PiosenkomatData(kind: kind);
+
+    // Cała paczka z przeglądu, jeden rodzaj.
+    expect(
+        suggestedSaveFileName([z(SubmissionKind.newSong), z(SubmissionKind.newSong)]),
+        'reviewed-new.hrcpsng');
+    expect(suggestedSaveFileName([z(SubmissionKind.correction)]),
+        'reviewed-correction.hrcpsng');
+
+    // Cokolwiek innego — nazwa neutralna.
+    expect(suggestedSaveFileName([]), '0_songs.hrcpsng',
+        reason: 'pusto');
+    expect(suggestedSaveFileName([z(SubmissionKind.newSong), sampleSong()]),
+        '2_songs.hrcpsng',
+        reason: 'piosenka dorzucona z ręki, bez śladu piosenkomatu');
+    expect(
+        suggestedSaveFileName([z(SubmissionKind.newSong), z(SubmissionKind.correction)]),
+        '2_songs.hrcpsng',
+        reason: 'nowe zmieszane z poprawkami — narzędzie czyta je osobno');
   });
 
   test('nazwy plików przebiegu', () {

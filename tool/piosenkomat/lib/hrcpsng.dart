@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
+import 'package:harcapp_core/song_book/piosenkomat/file_names.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
@@ -139,13 +140,14 @@ List<String> allOutDirs({String root = 'out'}) {
 /// Nowe piosenki i poprawki leżą osobno, bo to inna robota: dodać vs porównać
 /// z tym, co w apce. Wracają też osobno — jeden plik wczytany, jeden
 /// wyeksportowany.
+/// Same nazwy są w rdzeniu — używa ich też edytor na stronie.
 String candidatesPathIn(String outDir, SubmissionKind kind) =>
-    p.join(outDir, 'candidates-${kind.id}.hrcpsng');
+    p.join(outDir, candidatesFileName(kind));
 String reviewedPathIn(String outDir, SubmissionKind kind) =>
-    p.join(outDir, 'reviewed-${kind.id}.hrcpsng');
+    p.join(outDir, reviewedFileName(kind));
 /// Po `prepare`: bez pola `piosenkomat`, gotowe do wklejenia w `all_songs`.
 String finalPathIn(String outDir, SubmissionKind kind) =>
-    p.join(outDir, 'final-${kind.id}.hrcpsng');
+    p.join(outDir, finalFileName(kind));
 String planPathIn(String outDir) => p.join(outDir, 'plan.json');
 String reportPathIn(String outDir) => p.join(outDir, 'report.txt');
 String peoplePathIn(String outDir) => p.join(outDir, 'people.dart');
