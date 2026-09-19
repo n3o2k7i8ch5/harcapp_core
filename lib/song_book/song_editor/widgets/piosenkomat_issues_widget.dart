@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:harcapp_core/comm_classes/app_navigator.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
+import 'package:harcapp_core/comm_widgets/dialog/alert_dialog.dart';
+import 'package:harcapp_core/comm_widgets/dialog/app_dialog.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
+import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
@@ -93,6 +98,46 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
     prov.notify();
   }
 
+  /// Wstawia propozycję do pola. Gdy coś już tam jest — Twój tekst, nie
+  /// poprzednia propozycja — pyta najpierw: kliknięcie gwiazdki zamiast
+  /// w pole byłoby inaczej cichą utratą napisanej odpowiedzi, bez cofnięcia.
+  Future<void> _proposeReply(String note) async {
+    if(_controller!.text.trim().isNotEmpty){
+      bool overwrite = false;
+      await showAlertDialog(
+        context: context,
+        title: 'Podmienić odpowiedź?',
+        content: 'W polu odpowiedzi jest już tekst. '
+            'Propozycja go <b>zastąpi</b> — tego nie da się cofnąć.',
+        buttons: [
+          AppDialogButton(
+            text: 'Zostaw mój tekst',
+            onTap: () => popPage(context),
+          ),
+          AppDialogButton(
+            text: 'Podmień',
+            onTap: (){
+              overwrite = true;
+              popPage(context);
+            },
+            textColor: hintEnab_(context),
+          ),
+        ],
+      );
+      if(!overwrite) return;
+      if(!mounted) return;
+    }
+
+    // Przez `value`, nie przez `text`: samo `text` zostawia zaznaczenie
+    // w pozycji -1, więc w sfokusowanym polu następny znak wchodzi na
+    // początek propozycji zamiast za nią.
+    _controller!.value = TextEditingValue(
+      text: note,
+      selection: TextSelection.collapsed(offset: note.length),
+    );
+    _update((d) => d.copyWith(replyToContributor: () => note));
+  }
+
   @override
   Widget build(BuildContext context) => Consumer<CurrentItemProvider>(
     builder: (context, prov, child){
@@ -118,7 +163,8 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
             mainAxisSize: MainAxisSize.min,
             children: [
 
-              // Werdykt: nagłówek karty i jedyne tu miejsce, gdzie coś klikasz.
+              // Werdykt: nagłówek karty. Drugie klikalne miejsce to gwiazdka
+              // przy polu odpowiedzi, gdy pastylki dają się skleić w uwagę.
               Row(
                 children: [
                   Icon(
@@ -200,26 +246,49 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
               // Bez własnego tytułu: etykietę niesie samo pole — na pustym
               // jest podpowiedzią w środku, a gdy zaczniesz pisać, wjeżdża
               // nad tekst. Taka sama zawsze, niezależnie od werdyktu.
+              // Gwiazdka — jak przy AI, ale bez modelu: skleja uwagę
+              // z pastylek `missing-*`. Widać ją tylko, gdy jest co
+              // zaproponować; klik nie wysyła mejla, tylko wypełnia pole,
+              // a gdy coś już w nim jest — najpierw pyta.
               _Bubble(
                 mine: true,
-                child: AppTextFieldHint(
-                  key: ObjectKey(_boundSong),
-                  hint: 'Odpowiedz…',
-                  controller: _controller,
-                  maxLines: null,
-                  showUnderline: false,
-                  contentPadding: EdgeInsets.zero,
-                  style: AppTextStyle(
-                    fontSize: Dimen.textSizeNormal,
-                    color: textEnab_(context),
-                  ),
-                  hintStyle: AppTextStyle(
-                    fontSize: Dimen.textSizeNormal,
-                    color: hintEnab_(context),
-                  ),
-                  onChanged: (_, text) => _update((d) => d.copyWith(
-                      replyToContributor: () =>
-                          text.trim().isEmpty? null: text)),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: AppTextFieldHint(
+                        key: ObjectKey(_boundSong),
+                        hint: 'Odpowiedz…',
+                        // Po wstawieniu z gwiazdki kontroler ma już tekst,
+                        // a pływająca etykieta liczy się w `initState` —
+                        // bez tego „Odpowiedz…” siada na propozycji.
+                        alwaysShowTopHint: _controller?.text.isNotEmpty ?? false,
+                        controller: _controller,
+                        maxLines: null,
+                        showUnderline: false,
+                        contentPadding: EdgeInsets.zero,
+                        style: AppTextStyle(
+                          fontSize: Dimen.textSizeNormal,
+                          color: textEnab_(context),
+                        ),
+                        hintStyle: AppTextStyle(
+                          fontSize: Dimen.textSizeNormal,
+                          color: hintEnab_(context),
+                        ),
+                        onChanged: (_, text) => _update((d) => d.copyWith(
+                            replyToContributor: () =>
+                                text.trim().isEmpty? null: text)),
+                      ),
+                    ),
+                    if(proposeContribReplyNote(
+                            data.issues.map((i) => i.issue)) case final note?)
+                      AppButton(
+                        icon: Icon(MdiIcons.starFourPoints),
+                        color: accent_(context),
+                        tooltip: 'Zaproponuj odpowiedź',
+                        onTap: () => _proposeReply(note),
+                      ),
+                  ],
                 ),
               ),
 

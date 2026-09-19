@@ -7,6 +7,7 @@
 /// nowa, zamiast kazać go przepisywać ręcznie.
 library;
 
+import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/submission/submission_email.dart';
 
 /// Zawsze na początku — mejl zaczyna się od podziękowania, nie od pretensji.
@@ -37,6 +38,47 @@ const String kOldAppReplyBlock =
 const String kOneSongPerMailReplyBlock =
     'Przy okazji: każdą kolejną piosenkę wyślij proszę osobnym mejlem, '
     'a nie odpowiedzią na ten — inaczej może mi umknąć.';
+
+/// Propozycja uwagi do pola „Odpowiedź” z pastylek `missing-*`.
+///
+/// To **nie** jest cały mejl: całą wiadomość — z powitaniem, blokiem o starej
+/// apce i „Czuwaj!” — składa wyłącznie [composeContribReply], w jednym
+/// miejscu. Tu tylko środek: lista braków sklejona w jedno zdanie plus prośba
+/// o poprawkę, bez własnego pożegnania — inaczej wylądowałoby w połowie mejla,
+/// przed blokami, które doklei składanie. `null`, gdy żadna pastylka nie
+/// zasługuje na pytanie do autora (duplikat, zgoda, dopisek…).
+///
+/// Kolejność zawsze jak w [SongIssue], nie jak na pastylkach: „chwytów
+/// i linku do YT” ma brzmieć tak samo, niezależnie od tego, która
+/// pastylka była pierwsza.
+String? proposeContribReplyNote(Iterable<SongIssue> issues) {
+  final present = issues.toSet();
+  final phrases = [
+    for (final issue in SongIssue.values)
+      if (present.contains(issue))
+        if (_askPhrase(issue) case final phrase?) phrase,
+  ];
+  if (phrases.isEmpty) return null;
+  return 'Niestety widzę, że brakuje ${_joinPolish(phrases)}.'
+      '\n\nPrześlij proszę poprawione, żebym mógł zerknąć czy reszta jest ok.';
+}
+
+/// Co idzie po „brakuje …” w uwadze do autora. `null` = ta pastylka nie
+/// prosi autora o poprawkę — duplikat, zgoda, uszkodzony plik i reszta
+/// zostają do ręcznego dopisania.
+String? _askPhrase(SongIssue issue) => switch (issue) {
+      SongIssue.missingTitle => 'tytułu',
+      SongIssue.missingChords => 'chwytów',
+      SongIssue.missingYoutube => 'linku do YT',
+      _ => null,
+    };
+
+/// „a”, „a i b”, „a, b i c”.
+String _joinPolish(List<String> items) {
+  if (items.length == 1) return items.single;
+  if (items.length == 2) return '${items[0]} i ${items[1]}';
+  return '${items.sublist(0, items.length - 1).join(', ')} i ${items.last}';
+}
 
 /// Treść odpowiedzi do autora.
 ///
