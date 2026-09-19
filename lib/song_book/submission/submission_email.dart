@@ -60,9 +60,12 @@ String composeSubmissionEmailSubject({
 /// Dopisek autora, belka zgody, belka informacji strukturalnych. Pod belkami
 /// trzy zdania: zgoda, załącznik, jedna piosenka na mejl. Podsumowania
 /// zgłoszenia w treści **nie ma** — jest w załączniku.
+/// [oneSongPerMail] gaśnie tam, gdzie jeden mejl niesie całą paczkę — na
+/// stronie. W apce zostaje: odpowiedź w wątku z etykietą nie wraca do kolejki.
 String composeSubmissionEmailBody({
   required String attachmentFileName,
   String? acceptRulesVersion,
+  bool oneSongPerMail = true,
 }) =>
     '$kSubmissionUserMessagePlaceholder'
     '\n'
@@ -75,8 +78,7 @@ String composeSubmissionEmailBody({
     '\n$kSubmissionStructuralBar'
     '\n'
     '\nDane zgłoszenia są w załączniku $attachmentFileName. Nie edytuj go.'
-    '\n'
-    '\n$kSubmissionOneSongPerMailNote';
+    '${oneSongPerMail? '\n\n$kSubmissionOneSongPerMailNote': ''}';
 
 /// Gotowe zgłoszenie: temat, treść i załącznik.
 typedef SongSubmissionEmail = ({
