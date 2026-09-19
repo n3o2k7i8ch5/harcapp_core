@@ -41,9 +41,9 @@ const String kOneSongPerMailReplyBlock =
 
 /// Propozycja uwagi do pola „Odpowiedź” z pastylek `missing-*`.
 ///
-/// Tu tylko środek, bez powitania i pożegnania — całą wiadomość składa
-/// [composeContribReply], w jednym miejscu. `null`, gdy żadna pastylka nie
-/// zasługuje na pytanie do autora (duplikat, zgoda, dopisek…).
+/// Gotowa wiadomość do autora, z pożegnaniem — powitanie dokłada
+/// [composeContribReply]. `null`, gdy żadna pastylka nie zasługuje na pytanie
+/// do autora (duplikat, zgoda, dopisek…).
 ///
 /// Kolejność zawsze jak w [SongIssue], nie jak na pastylkach: „chwytów
 /// i linku do YT” ma brzmieć tak samo, niezależnie od tego, która
@@ -57,7 +57,8 @@ String? proposeContribReplyNote(Iterable<SongIssue> issues) {
   ];
   if (phrases.isEmpty) return null;
   return 'Niestety widzę, że brakuje ${_joinPolish(phrases)}.'
-      '\n\nPrześlij proszę poprawione, żebym mógł zerknąć czy reszta jest ok.';
+      '\n\nPrześlij proszę poprawione, żebym mógł zerknąć czy reszta jest ok.'
+      '\n\nPozdrowienia!';
 }
 
 /// Co idzie po „brakuje …” w uwadze do autora. `null` = ta pastylka nie
