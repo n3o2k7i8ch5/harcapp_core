@@ -374,7 +374,10 @@ class SongWidgetTemplateState<TSong extends SongCore> extends State<SongWidgetTe
                     ),
                     height: ChordWidget.height(6) + 2.0
                 ),
-                floating: true,
+                // Bez `floating`: taki sliver liczy `paintOrigin` jako
+                // `min(overlap, 0)`, czyli ignoruje przyklejone paski nad sobą
+                // i maluje po nich. Przy stałej wysokości (minExtent ==
+                // maxExtent) `floating` i tak niczego nie wnosiło.
                 pinned: true,
               ):SliverList(delegate: SliverChildListDelegate([])),
             ),
