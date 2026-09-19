@@ -154,8 +154,10 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
    w Gmailu, czy werdykty, odpowiedzi do osób dodających i kolejka starej apki są
    domknięte — jeśli nie, odmawia i mówi, co wisi.
 
-Osobno, kiedy chcesz: `./piosenkomat reply --push` — odpowiedzi autorom ze
-starej apki → [Stara apka](#stara-apka-reply).
+Osobno, kiedy chcesz: **najpierw** `./piosenkomat reply --draft --push`,
+przegląd szkiców w Gmailu, **potem** `./piosenkomat reply --push` — odpowiedzi
+autorom ze starej apki i osobom dodającym → [Stara apka](#stara-apka-reply).
+Bez szkicu nie wysyłasz.
 
 ## Komendy
 
@@ -475,7 +477,8 @@ wsadza z powrotem do kolejki.
 
 ### Szkice (`reply --draft`)
 
-Żeby zobaczyć mejl przed wysyłką, rozbij `reply` na dwa kroki:
+**Zawsze najpierw szkic.** `reply --push` bez wcześniejszego `--draft` wysyła
+od razu — tego nie robisz. Kolejność:
 
 ```bash
 ./piosenkomat reply --draft --push   # szkice w wątkach, nikt nic nie dostaje
