@@ -3,6 +3,14 @@ enum InstrumentType{
   UKULELE,
   MANDOLIN;
 
+  int get stringCount{
+    switch(this){
+      case InstrumentType.GUITAR: return 6;
+      case InstrumentType.UKULELE: return 4;
+      case InstrumentType.MANDOLIN: return 4;
+    }
+  }
+
   String get name{
     switch(this){
       case InstrumentType.GUITAR: return 'Gitara';

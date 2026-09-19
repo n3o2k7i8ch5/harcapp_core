@@ -372,7 +372,7 @@ class SongWidgetTemplateState<TSong extends SongCore> extends State<SongWidgetTe
                         instrumentType: prov3.chordsDrawType,
                       ),
                     ),
-                    height: ChordWidget.height(6) + 2.0
+                    height: ChordDrawBar.barHeight(prov3.chordsDrawType)
                 ),
                 // Bez `floating`: taki sliver liczy `paintOrigin` jako
                 // `min(overlap, 0)`, czyli ignoruje przyklejone paski nad sobą

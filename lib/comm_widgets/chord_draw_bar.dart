@@ -261,7 +261,14 @@ class ChordWidget extends StatelessWidget{
 }
 
 class ChordDrawBar extends StatelessWidget{
-  
+
+  /// Wysokość paska przyklejonego nad tekstem piosenki dla danego instrumentu
+  /// — tyle, ile potrzebują jego obrazki chwytów (gitara: 6 strun, ukulele
+  /// i mandolina: 4). Wszystko, co liczy, ile pasek zasłania, ma brać tę
+  /// liczbę stąd, żeby sliver i statystyki przewijania widziały to samo.
+  static double barHeight(InstrumentType instrumentType) =>
+      ChordWidget.height(instrumentType.stringCount) + 2.0;
+
   final String chords;
   final Color background;
   final Color? chordColor;
