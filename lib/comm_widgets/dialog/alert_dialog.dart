@@ -27,7 +27,7 @@ class _DefaultChildWidget extends StatelessWidget{
       Row(
         children: [
           if(leadingContent != null) leadingContent!,
-          Expanded(child: AppText(content, size: Dimen.textSizeBig))
+          Expanded(child: AppText(content, size: Dimen.textSizeBig, selectable: true))
         ],
       ),
 

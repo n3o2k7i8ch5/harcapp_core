@@ -29,12 +29,14 @@ String finalFileName(SubmissionKind kind) =>
 /// Rodzaj czytamy z samych piosenek, nie z zapamiętanego „co wczytano”: ślad
 /// jedzie z piosenką i wraca w pliku, więc nie ma stanu do rozjechania.
 String suggestedSaveFileName(List<SongRaw> songs) {
-  final kind = _commonSubmissionKind(songs);
+  final kind = piosenkomatReviewKind(songs);
   if (kind != null) return reviewedFileName(kind);
   return '${songs.length}_songs.$kSongFileExtension';
 }
 
-SubmissionKind? _commonSubmissionKind(List<SongRaw> songs) {
+/// Rodzaj paczki z przeglądu, albo `null`, gdy to nie paczka z przeglądu:
+/// piosenka bez śladu piosenkomatu, wymieszane rodzaje albo pusto.
+SubmissionKind? piosenkomatReviewKind(List<SongRaw> songs) {
   if (songs.isEmpty) return null;
   SubmissionKind? kind;
   for (final song in songs) {
