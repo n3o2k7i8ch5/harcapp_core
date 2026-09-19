@@ -126,6 +126,11 @@ class SongWidgetTemplate<TSong extends SongCore> extends StatefulWidget{
 
   final Widget Function(BuildContext, ScrollController)? header;
   final Widget Function(BuildContext, ScrollController)? titleCardFooter;
+
+  /// To samo miejsce, co [titleCardFooter], ale sliverem — dla czegoś, co ma
+  /// móc przykleić się do góry (`SliverPersistentHeader`), a nie tylko
+  /// przewinąć razem z kartą tytułową.
+  final Widget Function(BuildContext, ScrollController)? titleCardFooterSliver;
   final Widget Function(BuildContext, ScrollController)? contentFooter;
   final Widget Function(BuildContext, ScrollController)? footer;
 
@@ -186,6 +191,7 @@ class SongWidgetTemplate<TSong extends SongCore> extends StatefulWidget{
 
         this.header,
         this.titleCardFooter,
+        this.titleCardFooterSliver,
         this.contentFooter,
         this.footer,
 
@@ -256,6 +262,7 @@ class SongWidgetTemplateState<TSong extends SongCore> extends State<SongWidgetTe
 
   Widget Function(BuildContext, ScrollController)? get header => widget.header;
   Widget Function(BuildContext, ScrollController)? get titleCardFooter => widget.titleCardFooter;
+  Widget Function(BuildContext, ScrollController)? get titleCardFooterSliver => widget.titleCardFooterSliver;
   Widget Function(BuildContext, ScrollController)? get contentFooter => widget.contentFooter;
   Widget Function(BuildContext, ScrollController)? get footer => widget.footer;
 
@@ -349,6 +356,8 @@ class SongWidgetTemplateState<TSong extends SongCore> extends State<SongWidgetTe
 
               ]),
             ),
+
+            if(titleCardFooterSliver!=null) titleCardFooterSliver!.call(context, scrollController),
 
             Consumer3<ShowChordsProvider, ChordsDrawShowProvider, ChordsDrawTypeProvider>(
               builder: (context, prov1, chordsDrawShowProv, prov3, child) => settings.isDrawChordsBarVisible&&song.hasChords?SliverPersistentHeader(
