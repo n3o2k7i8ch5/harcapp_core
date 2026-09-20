@@ -110,6 +110,15 @@ abstract class SongCore{
   List<ContributorRef> get contribRefs;
   ContributorData? get contributorData;
   String? get youtubeVideoId;
+
+  /// Pełny link do filmu, ze schematem. `null`, gdy filmu nie ma. Jedno
+  /// miejsce na ten napis — apka miała wersję bez `https://`, edytor z, i
+  /// obie znaczyły to samo.
+  String? get youtubeUrl {
+    final id = youtubeVideoId;
+    if (id == null || id.isEmpty) return null;
+    return 'https://www.youtube.com/watch?v=$id';
+  }
   bool get isOwn;
 
   List<String> get tags;

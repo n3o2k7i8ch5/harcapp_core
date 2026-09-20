@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
 import 'package:harcapp_core/comm_widgets/app_button.dart';
@@ -16,6 +17,9 @@ import 'package:harcapp_core/comm_widgets/person_card.dart';
 import 'package:harcapp_core/comm_widgets/separated_column.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/logger.dart';
+import 'package:harcapp_core/song_book/playback/playback_controller.dart';
+import 'package:harcapp_core/song_book/playback/playback_source.dart';
+import 'package:harcapp_core/song_book/playback/widgets/song_playback_bar.dart';
 import 'package:harcapp_core/song_book/song_scroll_to_visible_lines.dart';
 import 'package:harcapp_core/values/dimen.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
@@ -94,7 +98,14 @@ class SongWidgetTemplate<TSong extends SongCore> extends StatefulWidget{
   final bool showSongExplanationButton;
   final void Function()? onSongExplanationTap;
 
-  final bool showYtButton;
+  /// Pasek z nagraniami i filmem pod kartą tytułową. Domyślnie go nie ma.
+  final PlaybackBarMode playbackBar;
+  /// Nagranie skończyło się w trybie „następna” — gospodarz ma przeskoczyć
+  /// do kolejnej piosenki. Tylko on zna swój `PageController`.
+  final void Function(bool random)? onPlaybackContinue;
+
+  /// Nadpisanie tego, co robi przycisk „YouTube” w rzędzie ikon. Bez niego:
+  /// przy pasku interaktywnym — gra w pasku, przy podglądzie — otwiera link.
   final void Function(double position)? onYtTap;
   final void Function()? onYtLongPress;
 
@@ -159,7 +170,8 @@ class SongWidgetTemplate<TSong extends SongCore> extends StatefulWidget{
         this.showSongExplanationButton = false,
         this.onSongExplanationTap,
 
-        this.showYtButton = true,
+        this.playbackBar = PlaybackBarMode.hidden,
+        this.onPlaybackContinue,
         this.onYtTap,
         this.onYtLongPress,
 
@@ -230,7 +242,8 @@ class SongWidgetTemplateState<TSong extends SongCore> extends State<SongWidgetTe
   bool get showSongExplanationButton => widget.showSongExplanationButton;
   void Function()? get onSongExplanationTap => widget.onSongExplanationTap;
 
-  bool get showYtButton => widget.showYtButton;
+  PlaybackBarMode get playbackBar => widget.playbackBar;
+  void Function(bool random)? get onPlaybackContinue => widget.onPlaybackContinue;
   void Function(double position)? get onYtTap => widget.onYtTap;
   void Function()? get onYtLongPress => widget.onYtLongPress;
 
@@ -356,6 +369,16 @@ class SongWidgetTemplateState<TSong extends SongCore> extends State<SongWidgetTe
 
               ]),
             ),
+
+            // Pasek odtwarzania tylko, gdy piosenka ma czym grać — pusty
+            // sliver i tak nic by nie pokazał, a zajmowałby miejsce w drzewie.
+            if(playbackBar.isShown && playbackSourcesOf(song).isNotEmpty)
+              SongPlaybackBar(
+                song,
+                settings: settings,
+                mode: playbackBar,
+                onContinue: onPlaybackContinue,
+              ),
 
             if(titleCardFooterSliver!=null) titleCardFooterSliver!.call(context, scrollController),
 
@@ -906,7 +929,7 @@ class _ButtonsWidget<TSong extends SongCore> extends StatefulWidget{
 class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<TSong>>{
 
   // Reversed order of buttons to show them from right to left.
-  static List<_ButtonData> getButtonData({bool showYtButton = true}) => [
+  static List<_ButtonData> getButtonData() => [
 
     _ButtonData(
       name: 'Ocena',
@@ -935,21 +958,32 @@ class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<T
         show: (_, _, _) => true
     ),
 
-    if(showYtButton)
-      _ButtonData(
-          name: 'YouTube',
-          // Konturowe „play” — MDI nie ma outline'owego `youtube`, a pełne logo
-          // odstawało od reszty paska (`bookmarkOutline` i spółka).
-          iconData: MdiIcons.playCircleOutline,
-          onLongPress: (_, songWidget, _) => songWidget.onYtLongPress?.call(),
-          onPressed: (_, songWidget, _){
-            if(songWidget.onYtTap==null) return;
+    _ButtonData(
+        name: 'YouTube',
+        // Konturowe „play” — MDI nie ma outline'owego `youtube`, a pełne logo
+        // odstawało od reszty paska (`bookmarkOutline` i spółka).
+        iconData: MdiIcons.playCircleOutline,
+        onLongPress: (_, songWidget, _) => songWidget.onYtLongPress?.call(),
+        onPressed: (_, songWidget, _){
+          if(songWidget.onYtTap case final onYtTap?){
             final RenderBox renderBox = songWidget.contentCardsKey.currentContext!.findRenderObject() as RenderBox;
             final position = renderBox.localToGlobal(Offset.zero).dy; // - parent.widget.topScreenPadding;
-            songWidget.onYtTap!(position);
-          },
-          show: (_, parent, _) => parent.song.youtubeVideoId != null && parent.song.youtubeVideoId!.length!=0
-      ),
+            onYtTap(position);
+            return;
+          }
+          // Bez nadpisania: film gra w pasku nad piosenką (pasek sam dojedzie
+          // do jego kafelka), a w podglądzie — otwiera się poza aplikacją.
+          if(songWidget.playbackBar.isInteractive)
+            SongbookPlaybackController.instance.play(PlaybackSource.youtube(songWidget.song));
+          else if(songWidget.song.youtubeUrl case final url?)
+            launchURL(url);
+        },
+        // Widoczny tylko, gdy klik coś zrobi. Bez tego strona pokazywała
+        // przycisk, który nic nie robił.
+        show: (_, songWidget, _) =>
+            (songWidget.song.youtubeVideoId?.isNotEmpty ?? false)
+            && (songWidget.playbackBar.isShown || songWidget.onYtTap != null)
+    ),
 
     _ButtonData(
         name: 'Trudne słowa',
@@ -1010,7 +1044,7 @@ class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<T
     changeSizeVisible = false;
     scheduleId = 0;
 
-    buttonData = getButtonData(showYtButton: fragmentState.showYtButton);
+    buttonData = getButtonData();
 
     super.initState();
   }

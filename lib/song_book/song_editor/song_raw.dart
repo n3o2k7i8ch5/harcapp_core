@@ -25,12 +25,8 @@ class SongRaw extends SongCore{
   bool showRelDateDay;
   List<ContributorRef> contribRefs;
   ContributorData? contributorData;
+  // `youtubeUrl` dziedziczone z `SongCore` — jedno miejsce na ten napis.
   String? youtubeVideoId;
-  String? get youtubeUrl{
-    if(youtubeVideoId == null)
-      return null;
-    return "https://www.youtube.com/watch?v=${youtubeVideoId}";
-  }
 
   bool get isOwn => !isOfficial && !isConfid;
 

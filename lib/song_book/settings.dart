@@ -26,4 +26,10 @@ abstract class SongBookSettTempl{
 
   bool get isDrawChordsBarVisible => showChords&&chordsDrawShow;
 
+  /// Czy grający pasek odtwarzania przykleja się do góry ekranu. Domyślnie
+  /// tak; gospodarz, który to ustawienie wystawia użytkownikowi, nadpisuje
+  /// oba — dlatego nie abstrakcyjne, żeby reszta gospodarzy nie musiała.
+  bool get stickyAudioPlayer => true;
+  set stickyAudioPlayer(bool value) {}
+
 }
