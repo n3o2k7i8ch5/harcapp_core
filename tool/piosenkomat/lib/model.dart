@@ -70,7 +70,8 @@ enum ReviewKind {
   /// Ktoś poprawił piosenkę i wysłał jako nową.
   undeclaredCorrection('song/needs-review/undeclared-correction'),
   /// Piosenka identyczna z apką, ale autor coś dopisał albo zadeklarował
-  /// poprawkę. Piosenki nie ma w pliku — sam mejl do przeczytania.
+  /// poprawkę. Piosenki nie ma w pliku — dopisek jest w mejlu, po etykiecie.
+  /// Po `label scanned` przeczytane: z Twojej strony nic już nie wisi.
   identicalInApp('song/needs-review/identical-in-app'),
   /// Załącznika zgłoszenia nie da się wczytać — suma, JSON, obcięcie, zero
   /// zgłoszeń. Etykieta leci już przy `scan`, nie dopiero na pastylce.
@@ -155,12 +156,19 @@ bool isAnySongLabel(String label) => label == 'song' || label.startsWith('song/'
 
 /// Etykiety stanu, po których nic już od Ciebie nie zależy: piosenka weszła
 /// albo odpadła na dobre. Takie mejle oznaczamy jako przeczytane, żeby nie
-/// wisiały w skrzynce. `needs-review/*`, `unparsable`, `old-app/to-reply`
-/// i `contributor/to-ask` zostają nieprzeczytane — czekają na Twoją decyzję,
-/// oko albo wysyłkę. Po `reply` mejl z [kLabelContributorAsked] jest
-/// przeczytany osobno, patrz [labelsAfterReply].
+/// wisiały w skrzynce. `needs-review/*` (poza [ReviewKind.identicalInApp]),
+/// `unparsable`, `old-app/to-reply` i `contributor/to-ask` zostają
+/// nieprzeczytane — czekają na Twoją decyzję, oko albo wysyłkę. Po `reply`
+/// mejl z [kLabelContributorAsked] jest przeczytany osobno, patrz
+/// [labelsAfterReply].
 bool isClosedLabel(String label) =>
     label == kLabelDone || label.startsWith('song/rejected');
+
+/// Po nadaniu etykiet te mejle nie wiszą jako nieprzeczytane.
+/// Werdykt zamknięty plus [ReviewKind.identicalInApp]: piosenki nie ma
+/// w pliku, z Twojej strony skrzynka nic już nie potrzebuje.
+bool clearsUnread(String label) =>
+    isClosedLabel(label) || label == ReviewKind.identicalInApp.label;
 
 /// Etykiety po wysłanej odpowiedzi (`reply --push`): schodzą kolejki,
 /// wchodzi asked/replied. `UNREAD` schodzi, gdy odpisaliśmy osobie dodającej
@@ -663,7 +671,8 @@ enum Target {
   rejectAlreadyInApp,
   rejectDuplicate,
   /// Identyczna z apką, ale autor coś dopisał. Piosenki nie ma po co
-  /// oglądać; mejl trzeba przeczytać. Sama deklaracja poprawki nie wystarcza.
+  /// oglądać; dopisek zostaje w mejlu, po etykiecie. Sama deklaracja
+  /// poprawki nie wystarcza.
   mailOnlyIdentical,
   unparsable;
 

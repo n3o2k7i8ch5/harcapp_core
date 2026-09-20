@@ -462,10 +462,10 @@ Future<void> _batchByLabels(
       await mailbox.batchModify(ids, remove: labels);
       continue;
     }
-    // Werdykt domykający sprawę zdejmuje też „nieprzeczytane”.
+    // Werdykt domykający sprawę (i identical-in-app) zdejmuje „nieprzeczytane”.
     await mailbox.batchModify(ids,
         add: labels,
-        remove: labels.any(isClosedLabel) ? const ['UNREAD'] : null);
+        remove: labels.any(clearsUnread) ? const ['UNREAD'] : null);
   }
 }
 
@@ -645,7 +645,7 @@ Future<int> _labelReviewed(ArgResults cmd) async {
     final (add, remove) = e.value;
     final effectiveRemove = [
       ...remove.where(labels.contains),
-      if (add.any(isClosedLabel)) 'UNREAD',
+      if (add.any(clearsUnread)) 'UNREAD',
     ];
     final key = '${add.join('\u0000')}\u0001${effectiveRemove.join('\u0000')}';
     groups.putIfAbsent(key, () => (add, effectiveRemove, <String>[])).$3.add(e.key);

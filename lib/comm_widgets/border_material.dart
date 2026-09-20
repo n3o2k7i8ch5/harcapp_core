@@ -27,6 +27,7 @@ class BorderMaterial extends StatelessWidget{
   @override
   Widget build(BuildContext context) => Material(
       elevation: elevation,
+      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radius),
         side: BorderSide(width: borderWidth, color: borderColor??cardEnab_(context)),

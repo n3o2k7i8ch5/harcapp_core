@@ -87,12 +87,21 @@ void main() {
     expect(isClosedLabel(kLabelUnparsable), isFalse,
         reason: 'niesparsowalne masz zobaczyć w skrzynce');
     expect(isClosedLabel(ReviewKind.missingData.label), isFalse);
+    expect(isClosedLabel(ReviewKind.identicalInApp.label), isFalse,
+        reason: 'to nie odrzut — piosenki nie ma w pliku, ale etykieta zostaje');
     expect(isClosedLabel(kLabelOldAppToReply), isFalse);
     expect(isClosedLabel(kLabelContributorToAsk), isFalse);
     expect(isClosedLabel(kLabelContributorAsked), isFalse,
         reason: 'asked nie jest werdyktem — przeczytane zdejmuje `reply`');
     expect(isClosedLabel(kLabelReady), isFalse);
     expect(isClosedLabel(kLabelAuto), isFalse);
+
+    expect(clearsUnread(kLabelDone), isTrue);
+    expect(clearsUnread(kLabelRejectedInBook), isTrue);
+    expect(clearsUnread(ReviewKind.identicalInApp.label), isTrue,
+        reason: 'piosenki nie ma w pliku — po etykietach nie wisi w nieprzeczytanych');
+    expect(clearsUnread(kLabelToReview), isFalse);
+    expect(clearsUnread(ReviewKind.missingData.label), isFalse);
   });
 
   test('po odpowiedzi do osoby dodającej mejl jest przeczytany', () {

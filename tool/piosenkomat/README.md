@@ -209,8 +209,8 @@ song/
 ├── needs-review/             automat spasował; podkategoria na każdą uwagę
 │   ├── user-message          ktoś coś dopisał
 │   ├── identical-in-app      identyczna z apką, ale autor coś napisał (dopisek albo
-│   │                         propozycja poprawki) — piosenki nie ma w pliku,
-│   │                         sam mejl do przeczytania
+│   │                         propozycja poprawki) — piosenki nie ma w pliku;
+│   │                         po `label scanned` przeczytane
 │   ├── duplicate-in-app      ten sam tytuł / podobny tekst do piosenki w apce
 │   ├── duplicate-in-batch    kolizja z innym zgłoszeniem z tej samej paczki
 │   ├── undeclared-correction ta sama piosenka co w apce, inne chwyty albo drobiazgi —
@@ -243,8 +243,9 @@ song/
 - Jedyny wyjątek od „`song/*` = poza kolejką”: `old-app/replied`. To znacznik
   o nadawcy (dostał już odpowiedź), nie stan zgłoszenia — wątek z samą tą
   etykietą jest w kolejce.
-- **Przeczytane** = sprawa zamknięta: `added` i każde `rejected/*`, oraz
-  `contributor/asked` po wysłanej odpowiedzi. `needs-review/*`, `unparsable`,
+- **Przeczytane** = sprawa zamknięta: `added` i każde `rejected/*`,
+  `needs-review/identical-in-app` po `label scanned`, oraz `contributor/asked`
+  po wysłanej odpowiedzi. Pozostałe `needs-review/*`, `unparsable`,
   `old-app/to-reply` i `contributor/to-ask` zostają nieprzeczytane.
 
 | Co | Zapytanie |

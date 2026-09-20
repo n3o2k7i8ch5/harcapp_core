@@ -33,9 +33,7 @@ void launchURL(String url) async {
   if(!url.startsWith('http://') && !url.startsWith('https://'))
     url = 'https://' + url;
 
-  if (await canLaunchUrlString(url))
-    await launchUrlString(url);
-  else
+  if (!await launchUrlString(url))
     throw CannotLaunchUrlException(url);
 
 }

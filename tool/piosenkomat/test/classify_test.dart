@@ -246,7 +246,7 @@ void main() {
     test('identyczna poprawka z propozycją poprawki → sam mejl', () async {
       // `completeEmail(isNew: false)` wypełnia blok „Propozycja poprawki” —
       // przy `identical` to zwykle cała treść zgłoszenia (autor nie zmienił
-      // niczego, bo zmianę opisał słowami), więc mejl trzeba przeczytać.
+      // niczego, bo zmianę opisał słowami). Piosenki nie ma w pliku.
       final got = classify(msgFrom(await completeEmail(isNew: false)),
           book: bookWith([sampleSong()]));
       expect(got.submission.hasUserMessage, isFalse);

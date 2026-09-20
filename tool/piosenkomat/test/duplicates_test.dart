@@ -95,7 +95,7 @@ void main() {
       expect(got.goesToFile, isFalse);
     });
 
-    test('identyczna z dopiskiem → sam mejl, nieprzeczytany', () async {
+    test('identyczna z dopiskiem → sam mejl, przeczytany po etykietach', () async {
       final got = classify(
         msgFrom(await completeEmail(song: sampleSong(lyrics: _a), userMessage: 'Dodajcie drugi głos')),
         book: bookWith([sampleSong(lyrics: _a)]),
@@ -105,6 +105,8 @@ void main() {
       expect(stateLabelsFor(got),
           [kLabelToReview, ReviewKind.identicalInApp.label, ReviewKind.userMessage.label]);
       expect(got.labels.any(isClosedLabel), isFalse);
+      expect(got.labels.any(clearsUnread), isTrue,
+          reason: 'po `label scanned` nie wisi w nieprzeczytanych');
     });
 
     test('ta sama piosenka, inny YouTube → metadata-differ-from-app, do pliku', () async {

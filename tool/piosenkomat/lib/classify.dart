@@ -326,6 +326,7 @@ Decision decide(Submission s) {
     // dopisek **albo** „Propozycja poprawki”. To drugie bywa całą treścią
     // zgłoszenia — `identical` znaczy, że autor nie zmienił niczego, więc
     // zwykle właśnie dlatego, że zmianę opisał słowami zamiast ją wpisać.
+    // Piosenki nie ma w pliku; po `label scanned` mejl jest przeczytany.
     if (s.hasMessages) {
       return Decision(Target.mailOnlyIdentical, detail: app!.detail);
     }
