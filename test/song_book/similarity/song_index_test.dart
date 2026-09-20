@@ -1,0 +1,143 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+import 'package:harcapp_core/song_book/similarity/similarity.dart';
+import 'package:harcapp_core/song_book/similarity/song_index.dart';
+import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
+import 'package:harcapp_core/song_book/song_element.dart';
+
+const _ognisko = 'Płonie ognisko i szumią knieje\nDrużynowy jest wśród nas\nOpowiada starodawne dzieje\nBohaterski wskrzesza czas';
+const _morze = 'Zupełnie inny tekst o morzu\nŻagle na wietrze i sól na wargach\nDaleko od lasu i od ogniska';
+const _gory = 'Hej góry moje góry\nWysoko pod chmury\nTam gdzie orzeł krąży\nA wiatr halny dąży';
+
+SongRaw song(String id, String title, String lyrics, {String chords = 'a d e\na d e', List<String>? hidTitles}) {
+  final s = SongRaw.empty(id: id);
+  s.title = title;
+  s.hidTitles = hidTitles ?? [];
+  s.performers = ['Zespół'];
+  s.hasRefren = false;
+  s.songParts = [SongPart.from(SongElement(lyrics, chords, false))];
+  return s;
+}
+
+void main() {
+  final app = SongIndex<SongRaw>([
+    song('o!_ognisko@zespol', 'Płonie ognisko', _ognisko),
+    song('o!_morze', 'Morze', _morze, hidTitles: ['Żagle']),
+    song('o!_gory', 'Góry', _gory),
+  ]);
+
+  group('SongIndex.byId:', () {
+    test('dokładnie, a potem bez członu @wykonawca', () {
+      expect(app.byId('o!_morze')?.title, 'Morze');
+      expect(app.byId('o!_ognisko@zespol')?.title, 'Płonie ognisko');
+      expect(app.byId('o!_ognisko@inny')?.title, 'Płonie ognisko',
+          reason: 'zgłoszenie sprzed zmiany wykonawcy to dalej ta sama piosenka');
+      expect(app.byId('o!_nie_ma'), isNull);
+    });
+  });
+
+  group('SongIndex.matches:', () {
+    test('wszystkie trafienia, od najsilniejszego, z dowodami', () {
+      // Ten sam tytuł co „Morze”, tekst z „Ogniska” — trafia w obie.
+      final probe = SongProfile(song('o!_probe', 'Morze', '$_ognisko\nDodatkowa linijka'));
+      final got = app.matches(probe);
+
+      expect(got.map((m) => m.song.id), ['o!_morze', 'o!_ognisko@zespol']);
+      expect(got[0].level, MatchLevel.sameTitleDifferentText);
+      expect(got[0].similarities.whereType<SameTitle>(), hasLength(1));
+      expect(got[1].level, MatchLevel.similarText);
+      expect(got[1].overlap, greaterThanOrEqualTo(kSimilarText));
+      expect(got.every((m) => m.source == MatchSource.app), isTrue);
+    });
+
+    test('tytuł ukryty liczy się jak tytuł', () {
+      final got = app.matches(SongProfile(song('x', 'Żagle', 'coś zupełnie innego')));
+      expect(got.single.song.id, 'o!_morze');
+      expect(got.single.level, MatchLevel.sameTitleDifferentText);
+    });
+
+    test('w obrębie poziomu wyżej większe pokrycie tekstu', () {
+      final index = SongIndex<SongRaw>([
+        song('a', 'Ognisko A', _ognisko),
+        song('b', 'Ognisko B', '$_ognisko\nJedna\nDwie\nTrzy\nCztery\nPięć'),
+      ]);
+      final got = index.matches(SongProfile(song('p', 'Inny tytuł', _ognisko)));
+      expect(got.map((m) => m.song.id), ['a', 'b']);
+      expect(got[0].overlap, greaterThan(got[1].overlap));
+    });
+
+    test('exclude wyłącza wskazane piosenki, np. samą siebie', () {
+      final self = song('o!_gory', 'Góry', _gory);
+      final index = SongIndex<SongRaw>([self, song('o!_gory2', 'Góry', _gory)]);
+      final got = index.matches(SongProfile(self), exclude: (s) => identical(s, self));
+      expect(got.map((m) => m.song.id), ['o!_gory2']);
+    });
+
+    test('source jedzie na trafieniu i do detail', () {
+      final got = app.matches(SongProfile(song('o!_morze', 'Morze', _morze, hidTitles: ['Żagle'])), source: MatchSource.workspace);
+      expect(got.single.source, MatchSource.workspace);
+      expect(got.single.detail, startsWith('„Morze” w warsztacie: to samo id, ten sam tytuł'));
+      expect(got.single.level, MatchLevel.identical);
+    });
+
+    test('samo wspólne id daje sameIdDifferentSong, za treścią', () {
+      final got = app.matches(SongProfile(song('o!_gory', 'Zupełnie co innego', _morze)));
+      // „Morze” po tekście przed „Góry” po id.
+      expect(got.map((m) => m.song.id), ['o!_morze', 'o!_gory']);
+      expect(got[1].level, MatchLevel.sameIdDifferentSong);
+      expect(got[1].similarities.whereType<SameId>(), hasLength(1));
+    });
+
+    test('nic podobnego → pusto', () {
+      expect(app.matches(SongProfile(song('x', 'Nowa', 'Tekst bez żadnego wspólnego słowa z resztą'))), isEmpty);
+    });
+  });
+
+  group('SongIndex.closest / matchTo:', () {
+    test('closest: po tytule, gdy jest; inaczej po tekście ≥ 50%', () {
+      expect(app.closest(SongProfile(song('x', 'Morze', 'nic')))?.song.id, 'o!_morze');
+      expect(app.closest(SongProfile(song('x', 'Inaczej', _gory)))?.song.id, 'o!_gory');
+      expect(app.closest(SongProfile(song('x', 'Inaczej', 'zupełnie obcy tekst bez słów wspólnych'))), isNull);
+    });
+
+    test('matchTo: ze wskazaną, nie najbliższą', () {
+      final m = app.matchTo('o!_gory', SongProfile(song('x', 'Morze', _morze)));
+      expect(m?.song.id, 'o!_gory');
+      expect(m?.level, isNull);
+      expect(app.matchTo('o!_brak', SongProfile(song('x', 'Morze', _morze))), isNull);
+    });
+  });
+
+  group('correctionTargetOf:', () {
+    test('ze śladu piosenkomatu — po correctionTarget', () {
+      final s = song('o!_hej_sokoly', 'Hej sokoły', _gory)
+        ..piosenkomatData = const PiosenkomatData(kind: SubmissionKind.correction, correctionTarget: 'o!_gory');
+      expect(correctionTargetOf(s, app)?.id, 'o!_gory');
+    });
+
+    test('bez śladu (po prepare) — po własnym id', () {
+      final s = song('o!_morze', 'Morze poprawione', _morze);
+      expect(correctionTargetOf(s, app)?.id, 'o!_morze');
+    });
+
+    test('nowa piosenka ze śladem nie jest poprawką, choćby id kolidowało', () {
+      final s = song('o!_morze', 'Morze', _morze)
+        ..piosenkomatData = const PiosenkomatData(kind: SubmissionKind.newSong);
+      expect(correctionTargetOf(s, app), isNull);
+    });
+
+    test('piosenka własna z apki — po correctedSongId', () {
+      final s = song('own_1', 'Moje góry', _gory)..correctedSongId = 'o!_gory';
+      expect(correctionTargetOf(s, app)?.id, 'o!_gory');
+    });
+
+    test('sama siebie nie jest własnym pierwowzorem', () {
+      final self = app.songs.first;
+      expect(correctionTargetOf(self, app), isNull);
+    });
+
+    test('nic nie pasuje → null', () {
+      expect(correctionTargetOf(song('o!_nowa', 'Nowa', 'tekst'), app), isNull);
+    });
+  });
+}

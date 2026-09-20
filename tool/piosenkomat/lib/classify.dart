@@ -392,6 +392,10 @@ Decision decide(Submission s) {
       add(SongIssue.sameTitleInApp, app!.detail);
     case MatchLevel.similarText:
       add(SongIssue.similarTextInApp, app!.detail);
+    case MatchLevel.sameIdDifferentSong:
+      // `closest` szuka po tytule i tekście, nie po id — nowa piosenka nie
+      // dostanie trafienia „tylko id”. Gdyby jednak: to konflikt nazwy
+      // pliku, który `dedupIds` i tak rozwiąże sufiksem, nie duplikat.
     case MatchLevel.identical:
     case null:
       break;

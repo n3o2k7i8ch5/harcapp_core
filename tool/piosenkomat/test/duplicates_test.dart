@@ -60,11 +60,22 @@ void main() {
     });
 
     test('inny tytuł, podobny tekst → similarText; inny → null', () {
-      final a = SongProfile(sampleSong(title: 'Ognisko', lyrics: _a));
-      final b = SongProfile(sampleSong(title: 'Knieje', lyrics: '$_a\nJedna nowa linijka'));
+      // Różne id: helper daje wszystkim `tmp`, a wspólne id to osobny dowód.
+      final a = SongProfile(sampleSong(id: 'a', title: 'Ognisko', lyrics: _a));
+      final b = SongProfile(sampleSong(id: 'b', title: 'Knieje', lyrics: '$_a\nJedna nowa linijka'));
       expect(levelOf(compare(a, b)), MatchLevel.similarText);
-      final c = SongProfile(sampleSong(title: 'Morze', lyrics: _b));
+      final c = SongProfile(sampleSong(id: 'c', title: 'Morze', lyrics: _b));
       expect(levelOf(compare(a, c)), isNull);
+    });
+
+    test('to samo id, poza tym nic → sameIdDifferentSong; podobny tekst wygrywa', () {
+      final a = SongProfile(sampleSong(id: 'x', title: 'Ognisko', lyrics: _a));
+      final c = SongProfile(sampleSong(id: 'x', title: 'Morze', lyrics: _b));
+      final s = compare(a, c);
+      expect(s.whereType<SameId>(), hasLength(1));
+      expect(levelOf(s), MatchLevel.sameIdDifferentSong);
+      final b = SongProfile(sampleSong(id: 'x', title: 'Knieje', lyrics: '$_a\nJedna nowa linijka'));
+      expect(levelOf(compare(a, b)), MatchLevel.similarText);
     });
 
     test('null == [] w metadanych', () {

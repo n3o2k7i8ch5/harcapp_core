@@ -277,7 +277,9 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
                       ),
                     ),
                     if(proposeContribReplyNote(
-                            data.issues.map((i) => i.issue)) case final note?)
+                          data.issues.map((i) => i.issue),
+                          oldApp: data.legacyAppUsed,
+                        ) case final note?)
                       AppButton(
                         icon: Icon(MdiIcons.starFourPoints),
                         color: accent_(context),

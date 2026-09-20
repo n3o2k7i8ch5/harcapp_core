@@ -16,13 +16,14 @@ import 'package:harcapp_core/values/people/models.dart';
 import 'package:test/test.dart';
 
 SongRaw sampleSong({
+  String id = 'tmp',
   String title = 'Piosenka testowa XYZ',
   String? yt = 'dQw4w9WgXcQ',
   bool chords = true,
   String lyrics = 'Ala ma kota a kot ma ale\nW lesie gra muzyka',
   String chordsText = 'a d e\na d e',
 }) {
-  final song = SongRaw.empty(id: 'tmp');
+  final song = SongRaw.empty(id: id);
   song.title = title;
   song.youtubeVideoId = yt;
   song.authors = ['Autor Testowy'];
@@ -111,8 +112,7 @@ List<SongRaw> roundTrip(List<SongRaw> songs) {
 }
 
 /// Piosenki „już w apce” z podanych piosenek.
-SongBook bookWith(List<SongRaw> songs) =>
-    SongBook([for (final s in songs) SongProfile(s)]);
+SongBook bookWith(List<SongRaw> songs) => SongBook(songs);
 
 /// Sam zestaw uwag, bez mejla — do testów etykiet.
 Classified classifiedWith(

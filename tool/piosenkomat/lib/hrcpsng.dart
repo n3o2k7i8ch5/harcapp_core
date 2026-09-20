@@ -20,7 +20,7 @@ SongBook loadBook(String path) {
   }
   try {
     final (official, conf) = importHrcpsng(file.readAsStringSync());
-    return SongBook([for (final s in [...official, ...conf]) SongProfile(s)]);
+    return SongBook([...official, ...conf]);
   } on HrcpsngImportError catch (e) {
     throw FileSystemException('Śpiewnik: ${e.message}', path);
   }

@@ -14,7 +14,7 @@ import 'package:harcapp_core/song_book/submission/submission_email.dart';
 const String kReplyGreeting = 'Dzięki za piosenki :)';
 
 /// Zawsze na końcu.
-const String kReplyClosing = 'Czuwaj!';
+const String kReplyClosing = 'Pozdrowienia!';
 
 /// Blok o najstarszej, nierozwijanej apce. Doklejany, gdy zgłoszenie przyszło
 /// z niej — niezależnie od tego, czy piosenka weszła do śpiewnika.
@@ -39,16 +39,23 @@ const String kOneSongPerMailReplyBlock =
     'Przy okazji: każdą kolejną piosenkę wyślij proszę osobnym mejlem, '
     'a nie odpowiedzią na ten — inaczej może mi umknąć.';
 
-/// Propozycja uwagi do pola „Odpowiedź” z pastylek `missing-*`.
+/// Propozycja do pola „Odpowiedź” z pastylek `missing-*`.
 ///
-/// Gotowa wiadomość do autora, z pożegnaniem — powitanie dokłada
-/// [composeContribReply]. `null`, gdy żadna pastylka nie zasługuje na pytanie
-/// do autora (duplikat, zgoda, dopisek…).
+/// **Cały mejl, jaki pójdzie do autora** — z powitaniem, blokiem o starej apce
+/// ([oldApp]), prośbą o osobny mejl na piosenkę i pożegnaniem. Co widzisz
+/// w polu, to dostanie autor; po drodze nic się nie dokleja.
 ///
-/// Kolejność zawsze jak w [SongIssue], nie jak na pastylkach: „chwytów
-/// i linku do YT” ma brzmieć tak samo, niezależnie od tego, która
-/// pastylka była pierwsza.
-String? proposeContribReplyNote(Iterable<SongIssue> issues) {
+/// `null`, gdy żadna pastylka nie zasługuje na pytanie do autora (duplikat,
+/// zgoda, dopisek…).
+///
+/// Kolejność braków zawsze jak w [SongIssue], nie jak na pastylkach: „chwytów
+/// i linku do YT” ma brzmieć tak samo, niezależnie od tego, która pastylka
+/// była pierwsza.
+String? proposeContribReplyNote(
+  Iterable<SongIssue> issues, {
+  bool oldApp = false,
+  bool oneSongPerMail = true,
+}) {
   final present = issues.toSet();
   final phrases = [
     for (final issue in SongIssue.values)
@@ -56,9 +63,14 @@ String? proposeContribReplyNote(Iterable<SongIssue> issues) {
         if (_askPhrase(issue) case final phrase?) phrase,
   ];
   if (phrases.isEmpty) return null;
-  return 'Niestety widzę, że brakuje ${_joinPolish(phrases)}.'
-      '\n\nPrześlij proszę poprawione, żebym mógł zerknąć czy reszta jest ok.'
-      '\n\nPozdrowienia!';
+  return [
+    kReplyGreeting,
+    'Niestety widzę, że brakuje ${_joinPolish(phrases)}.',
+    'Prześlij proszę poprawione, żebym mógł zerknąć czy reszta jest ok.',
+    if (oldApp) kOldAppReplyBlock,
+    if (oneSongPerMail) kOneSongPerMailReplyBlock,
+    kReplyClosing,
+  ].join('\n\n');
 }
 
 /// Co idzie po „brakuje …” w uwadze do autora. `null` = ta pastylka nie
@@ -80,10 +92,14 @@ String _joinPolish(List<String> items) {
 
 /// Treść odpowiedzi do autora.
 ///
-/// [notes] to Twoje teksty z pola „Odpowiedź do autora” w edytorze — idą przed
-/// blokiem o starej apce, bo dotyczą konkretnych piosenek, a blok jest ogólny.
-/// Lista, bo jeden autor mógł przysłać kilka piosenek i do każdej dopisać coś
-/// innego, a mejl idzie jeden. [oldApp] dokłada blok o starej apce.
+/// [notes] to Twoje teksty z pola „Odpowiedź do autora” w edytorze. Idą
+/// **dosłownie**: każda jest już całym mejlem (patrz [proposeContribReplyNote]),
+/// więc nic się do nich nie dokleja — inaczej autor dostałby co innego, niż
+/// widziałeś w polu. Lista, bo jeden autor mógł przysłać kilka piosenek.
+///
+/// [oldApp] i [oneSongPerMail] działają **tylko wtedy, gdy uwag nie ma**: to
+/// jedyny przypadek, w którym mejl nie ma autora i narzędzie składa go samo.
+/// Gdy piszesz sam, blok o starej apce dokładasz sobie w propozycji.
 ///
 /// Pusty wynik (ani uwagi, ani starej apki) znaczy „nie ma po co pisać” —
 /// zwracamy `null`, żeby wołający nie tworzył pustego szkicu.
@@ -95,11 +111,11 @@ String? composeContribReply({
   final trimmed = [
     for(final n in notes) if(n.trim().isNotEmpty) n.trim(),
   ];
-  if (trimmed.isEmpty && !oldApp) return null;
+  if (trimmed.isNotEmpty) return trimmed.join('\n\n');
+  if (!oldApp) return null;
   return [
     kReplyGreeting,
-    ...trimmed,
-    if (oldApp) kOldAppReplyBlock,
+    kOldAppReplyBlock,
     if (oneSongPerMail) kOneSongPerMailReplyBlock,
     kReplyClosing,
   ].join('\n\n');
