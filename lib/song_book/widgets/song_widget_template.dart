@@ -1297,7 +1297,7 @@ class _ContentWidget<TSong extends SongCore> extends StatelessWidget{
   String get chords => song.chords;
   String get lineNum => song.lineNumStr;
 
-  static const double lineSpacing = 1.2;
+  static const double lineSpacing = TextSizeProvider.songLineHeight;
 
   const _ContentWidget(this.parent, this.scrollController, this.contentCardsKey, this.scrollviewKey, {Key? key}):super(key: key);
 
@@ -1329,11 +1329,9 @@ class _ContentWidget<TSong extends SongCore> extends StatelessWidget{
                             padding: EdgeInsets.all(SimpleButton.defPaddVal),
                             child: Text(
                               chords,
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: textSizeProv.value, //initial font size
+                              style: TextSizeProvider.songTextStyle(
+                                textSizeProv.value,
                                 color: textEnab_(context),
-                                height: lineSpacing,
                               ),
                             ),
                             onTap: parent.onChordsTap==null?null:(){
@@ -1352,14 +1350,12 @@ class _ContentWidget<TSong extends SongCore> extends StatelessWidget{
                   Widget numWidget = Text(
                     lineNum,
                     textAlign: TextAlign.end,
-                    style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: min(textSizeProv.value, Dimen.textSizeTiny),  //initial font size
-                        color: hintEnab_(context),
-                        height:
-                        textSizeProv.value<Dimen.textSizeTiny?
+                    style: TextSizeProvider.songTextStyle(
+                      min(textSizeProv.value, Dimen.textSizeTiny),
+                      color: hintEnab_(context),
+                      height: textSizeProv.value<Dimen.textSizeTiny?
                         lineSpacing:
-                        lineSpacing*(textSizeProv.value / Dimen.textSizeTiny)
+                        lineSpacing*(textSizeProv.value / Dimen.textSizeTiny),
                     ),
                   );
 
@@ -1382,11 +1378,9 @@ class _ContentWidget<TSong extends SongCore> extends StatelessWidget{
                                 Expanded(
                                     child: Text(
                                       text,
-                                      style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontSize: textSizeProv.value, //initial font size
+                                      style: TextSizeProvider.songTextStyle(
+                                        textSizeProv.value,
                                         color: textEnab_(context),
-                                        height: lineSpacing,
                                       ),
                                     )
                                 ),

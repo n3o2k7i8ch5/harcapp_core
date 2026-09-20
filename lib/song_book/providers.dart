@@ -110,6 +110,20 @@ class TextSizeProvider extends ChangeNotifier{
   static TextSizeProvider of(BuildContext context) => Provider.of<TextSizeProvider>(context, listen: false);
 
   static const double defFontSize = 18.0;
+  static const String songFontFamily = 'Roboto';
+  static const double songLineHeight = 1.2;
+
+  /// Ten sam styl co na ekranie. Bez `letterSpacing: 0` motyw M3 dokleja
+  /// spacing do `Text`, a `TextPainter` go nie ma — czcionka wychodzi za duża,
+  /// tekst się zawija, chwyty zjeżdżają z linii.
+  static TextStyle songTextStyle(double fontSize, {Color? color, double? height}) => TextStyle(
+    fontFamily: songFontFamily,
+    fontSize: fontSize,
+    height: height ?? songLineHeight,
+    letterSpacing: 0,
+    wordSpacing: 0,
+    color: color,
+  );
 
   late Map<double, double> _value;
   late Map<double, double> _wantedValue;
@@ -183,51 +197,88 @@ class TextSizeProvider extends ChangeNotifier{
     return scale*initSize;
   }
 
-  double? recalculate(double maxWidth, TextScaler textScaler, SongCore song, {required chordsVisible, double? fontSize}){
-    _value[_maxWidth] = calculate(maxWidth, textScaler, song, chordsVisible: chordsVisible, initSize: fontSize??_wantedValue[_maxWidth]!);
+  /// Liczy od szerokości kolumny z [tryInit], nie od szerokości ekranu.
+  double? recalculate(SongCore song, {required bool chordsVisible, double? fontSize, TextScaler? textScaler}){
+    final scaler = textScaler ?? _textScaler;
+    _textScaler = scaler;
+    _value[_maxWidth] = calculate(_maxWidth, scaler, song, chordsVisible: chordsVisible, initSize: fontSize??_wantedValue[_maxWidth]!);
     notifyListeners();
     return _value[_maxWidth];
   }
 
+  static double _buttonHPad(bool present) =>
+      present ? 2 * SimpleButton.defMargVal + 2 * SimpleButton.defPaddVal : 0;
+
+  static TextPainter _painter(String text, TextStyle style, TextScaler textScaler) => TextPainter(
+    text: TextSpan(style: style, text: text),
+    textDirection: TextDirection.ltr,
+    textScaler: textScaler,
+  );
+
+  static double _unconstrainedWidth(String text, TextStyle style, TextScaler textScaler) {
+    final painter = _painter(text, style, textScaler);
+    painter.layout();
+    final width = painter.width;
+    painter.dispose();
+    return width;
+  }
+
+  static bool _wraps(String text, TextStyle style, TextScaler textScaler, double maxWidth) {
+    if (text.isEmpty) return false;
+    if (maxWidth <= 0) return true;
+    final painter = _painter(text, style, textScaler);
+    painter.layout(maxWidth: maxWidth);
+    final visualLines = painter.computeLineMetrics().length;
+    painter.dispose();
+    return visualLines > '\n'.allMatches(text).length + 1;
+  }
+
+  static bool _lyricsWrap({
+    required double maxWidth,
+    required TextScaler textScaler,
+    required String text,
+    required String? chords,
+    required String nums,
+    required double fontSize,
+  }) {
+    final style = songTextStyle(fontSize);
+    final chordsWidth = chords == null ? 0.0 : _unconstrainedWidth(chords, style, textScaler);
+    final numsWidth = _unconstrainedWidth(
+      nums,
+      songTextStyle(min(fontSize, Dimen.textSizeTiny)),
+      textScaler,
+    );
+    // 1 px: zaokrąglenie TextPainter vs Text.
+    final lyricsMax = maxWidth
+        - _buttonHPad(true)
+        - _buttonHPad(chords != null)
+        - chordsWidth
+        - numsWidth
+        - 1;
+    return _wraps(text, style, textScaler, lyricsMax);
+  }
+
   static double fits(double maxWidth, TextScaler textScaler, String text, String? chords, String nums, double fontSize){
-
-    TextStyle style = TextStyle(fontSize: fontSize, fontFamily: 'Roboto', height: 1.2);
-
-    var wordWrapText = TextPainter(text: TextSpan(style: style, text: text),
-      textDirection: TextDirection.ltr,
+    if (!_lyricsWrap(
+      maxWidth: maxWidth,
       textScaler: textScaler,
-    );
-    wordWrapText.layout();
+      text: text,
+      chords: chords,
+      nums: nums,
+      fontSize: fontSize,
+    )) return 1;
 
-    late var wordWrapChords;
-    if(chords!=null) {
-      wordWrapChords = TextPainter(text: TextSpan(style: style, text: chords),
-        textDirection: TextDirection.ltr,
-        textScaler: textScaler,
-      );
-      wordWrapChords.layout();
-    }
-    var wordWrapNums = TextPainter(text: TextSpan(style: style.copyWith(fontSize: Dimen.textSizeTiny), text: nums),
-      textDirection: TextDirection.ltr,
+    double size = fontSize;
+    while (size - 0.5 >= Dimen.textSizeLimit && _lyricsWrap(
+      maxWidth: maxWidth,
       textScaler: textScaler,
-    );
-    wordWrapNums.layout();
+      text: text,
+      chords: chords,
+      nums: nums,
+      fontSize: size,
+    )) size -= 0.5;
 
-    double textWidth = wordWrapText.width;
-    double chordsWidth = chords==null?0:wordWrapChords.width;
-    double numsWidth = wordWrapNums.width;
-
-    double textPadMargWidth = 2*SimpleButton.defMargVal + 2*SimpleButton.defPaddVal;
-    double chordsPadMargWidth = 2*SimpleButton.defMargVal + 2*SimpleButton.defPaddVal;
-    double lineNumPadMargWidth = 2*SimpleButton.defMargVal + 2*SimpleButton.defPaddVal;
-
-    double maxTextWidth;
-    if(chords!=null)
-      maxTextWidth = .96*(maxWidth - lineNumPadMargWidth - textPadMargWidth - chordsPadMargWidth);
-    else
-      maxTextWidth = .96*(maxWidth - lineNumPadMargWidth - textPadMargWidth);
-
-    return min(1, maxTextWidth/(textWidth + chordsWidth + numsWidth));
+    return size / fontSize;
   }
 
 
