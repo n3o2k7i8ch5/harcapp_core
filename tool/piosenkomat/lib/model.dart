@@ -556,6 +556,13 @@ class Submission {
   bool get isOldApp => legacyApp;
   bool get hasUserMessage => (userMessage ?? '').trim().isNotEmpty;
 
+  /// Cokolwiek autor napisał słowami: dopisek albo blok „Propozycja
+  /// poprawki”. To drugie jest przy poprawce polem **domyślnym** — apka o nie
+  /// pyta wprost — więc „autor nic nie powiedział” musi znaczyć „oba puste”.
+  /// To samo, co `PiosenkomatData.hasMessages` w rdzeniu.
+  bool get hasMessages =>
+      hasUserMessage || (correctionMessage ?? '').trim().isNotEmpty;
+
   /// Czy zadeklarowany cel istnieje w śpiewniku. `buildSubmission` celuje
   /// [appMatch] w zadeklarowaną piosenkę, więc inny `songId` w dopasowaniu
   /// znaczy, że tego id w śpiewniku nie ma.
@@ -622,8 +629,8 @@ enum Target {
   candidateCorrection,
   rejectAlreadyInApp,
   rejectDuplicate,
-  /// Identyczna z apką, ale autor coś powiedział (dopisek albo deklaracja
-  /// poprawki). Piosenki nie ma po co oglądać; mejl trzeba przeczytać.
+  /// Identyczna z apką, ale autor coś dopisał. Piosenki nie ma po co
+  /// oglądać; mejl trzeba przeczytać. Sama deklaracja poprawki nie wystarcza.
   mailOnlyIdentical,
   unparsable;
 

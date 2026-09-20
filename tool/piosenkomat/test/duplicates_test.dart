@@ -148,10 +148,13 @@ void main() {
       expect(got.isClean, isTrue);
     });
 
-    test('poprawka: identyczna → sam mejl; sameSong → kandydat bez uwag', () async {
+    test('poprawka: identyczna bez komentarza → odrzut; sameSong → kandydat bez uwag', () async {
       final book = bookWith([sampleSong(lyrics: _a)]);
-      final same = classify(msgFrom(await completeEmail(isNew: false, song: sampleSong(lyrics: _a))), book: book);
-      expect(same.target, Target.mailOnlyIdentical);
+      final same = classify(
+          msgFrom(await completeEmail(isNew: false, song: sampleSong(lyrics: _a), withUpdateComment: false)),
+          book: book);
+      expect(same.target, Target.rejectAlreadyInApp);
+      expect(same.goesToFile, isFalse);
       final yt = classify(
           msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx'))),
           book: book);

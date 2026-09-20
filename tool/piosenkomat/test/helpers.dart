@@ -45,6 +45,9 @@ Future<String> completeEmail({
   bool reply = false,
   RegisteredContributor? registered,
   String? correctedSongId,
+  /// Blok „Propozycja poprawki”. Domyślnie wypełniony przy poprawce — tak
+  /// wysyła apka; `false` daje poprawkę, przy której autor nie napisał nic.
+  bool withUpdateComment = true,
 }) async {
   song ??= sampleSong();
   final subject = composeContribSongEmailSubject(
@@ -58,7 +61,7 @@ Future<String> completeEmail({
     acceptRulesVersion: 'v05.10.2025',
     registered: registered,
     isNewSong: isNew,
-    updateComment: isNew ? null : 'poprawka chwytu w refrenie',
+    updateComment: isNew || !withUpdateComment ? null : 'poprawka chwytu w refrenie',
     correctedSongId: correctedSongId,
   );
   if (userMessage != null) {

@@ -232,9 +232,33 @@ void main() {
       expect(got.submission.appMatch?.songId, 'o!_juz_jest');
       expect(got.target, Target.rejectAlreadyInApp);
     });
-    test('identyczna z apką → sam mejl, nie do pliku', () async {
+    test('identyczna poprawka bez słowa komentarza → odrzut, nie do pliku', () async {
+      // Bez `updateComment`: poprawka, przy której autor nie napisał nic
+      // ani w bloku propozycji, ani w dopisku.
+      final got = classify(
+        msgFrom(await completeEmail(isNew: false, withUpdateComment: false)),
+        book: bookWith([sampleSong()]),
+      );
+      expect(got.target, Target.rejectAlreadyInApp);
+      expect(got.goesToFile, isFalse);
+      expect(got.labels, containsAll([kLabelRejectedInBook, kLabelCorrection]));
+    });
+    test('identyczna poprawka z propozycją poprawki → sam mejl', () async {
+      // `completeEmail(isNew: false)` wypełnia blok „Propozycja poprawki” —
+      // przy `identical` to zwykle cała treść zgłoszenia (autor nie zmienił
+      // niczego, bo zmianę opisał słowami), więc mejl trzeba przeczytać.
       final got = classify(msgFrom(await completeEmail(isNew: false)),
           book: bookWith([sampleSong()]));
+      expect(got.submission.hasUserMessage, isFalse);
+      expect(got.submission.correctionMessage, isNotNull);
+      expect(got.target, Target.mailOnlyIdentical);
+      expect(got.labels, containsAll([kLabelToReview, ReviewKind.identicalInApp.label, kLabelCorrection]));
+    });
+    test('identyczna poprawka z dopiskiem → sam mejl', () async {
+      final got = classify(
+        msgFrom(await completeEmail(isNew: false, userMessage: 'zostawiam komentarz')),
+        book: bookWith([sampleSong()]),
+      );
       expect(got.target, Target.mailOnlyIdentical);
       expect(got.labels, containsAll([kLabelToReview, ReviewKind.identicalInApp.label, kLabelCorrection]));
     });

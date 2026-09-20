@@ -208,8 +208,9 @@ song/
 │   └── too-niche             tylko Ty (kiedyś LLM)
 ├── needs-review/             automat spasował; podkategoria na każdą uwagę
 │   ├── user-message          ktoś coś dopisał
-│   ├── identical-in-app      identyczna z apką, ale autor coś dopisał albo zadeklarował
-│   │                         poprawkę — piosenki nie ma w pliku, sam mejl do przeczytania
+│   ├── identical-in-app      identyczna z apką, ale autor coś napisał (dopisek albo
+│   │                         propozycja poprawki) — piosenki nie ma w pliku,
+│   │                         sam mejl do przeczytania
 │   ├── duplicate-in-app      ten sam tytuł / podobny tekst do piosenki w apce
 │   ├── duplicate-in-batch    kolizja z innym zgłoszeniem z tej samej paczki
 │   ├── undeclared-correction ta sama piosenka co w apce, inne chwyty albo drobiazgi —
@@ -276,7 +277,7 @@ ukryte tytuły, autorzy, kompozytorzy, wykonawcy, data, YouTube, tagi się róż
 
 | poziom | reguła | `new` → | `correction` → |
 |---|---|---|---|
-| `identical` | `SameText ∧ SameChords ∧ ¬MetadataDiff` — **każde pole równe** | `rejected/already-in-app`; z dopiskiem → `needs-review/identical-in-app` | `needs-review/identical-in-app` (poprawka, która nic nie zmienia) |
+| `identical` | `SameText ∧ SameChords ∧ ¬MetadataDiff` — **każde pole równe** | `rejected/already-in-app`; z dopiskiem → `needs-review/identical-in-app` | to samo, a „dopiskiem” jest też propozycja poprawki |
 | `sameSong` | tytuł, tekst ≥ 90%, chwyty, ale coś inne | uwaga `metadata-differ-from-app` | kandydat bez uwagi |
 | `sameTextDifferentChords` | tytuł, tekst ≥ 90%, inne chwyty | uwaga `chords-differ-from-app` | kandydat |
 | `sameTitleDifferentText` | ten sam tytuł, tekst < 90% | uwaga `same-title-in-app` | kandydat |

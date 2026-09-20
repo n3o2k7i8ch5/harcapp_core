@@ -320,7 +320,12 @@ Decision decide(Submission s) {
   final appLevel = app?.level;
 
   if (appLevel == MatchLevel.identical) {
-    if (s.isCorrection || s.hasUserMessage) {
+    // Identyczna poprawka bez słowa komentarza to ten sam odrzut co nowa —
+    // nie ma czego czytać. SAM MEJL, gdy autor coś napisał poza kodem:
+    // dopisek **albo** „Propozycja poprawki”. To drugie bywa całą treścią
+    // zgłoszenia — `identical` znaczy, że autor nie zmienił niczego, więc
+    // zwykle właśnie dlatego, że zmianę opisał słowami zamiast ją wpisać.
+    if (s.hasMessages) {
       return Decision(Target.mailOnlyIdentical, detail: app!.detail);
     }
     return Decision(Target.rejectAlreadyInApp, detail: app!.detail);
