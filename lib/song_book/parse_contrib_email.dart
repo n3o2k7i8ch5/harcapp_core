@@ -514,6 +514,34 @@ final RegExp _userMessageRe = RegExp(
 const String _userMessagePlaceholder =
     '[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]';
 
+/// Znaczniki, od których zaczyna się to, co dokłada szablon zgłoszenia.
+/// W zwykłej odpowiedzi ich nie ma — ale klient pocztowy bywa kreatywny
+/// i cytuje treść bez `>`, a wtedy do „wiadomości” wpadłby cały kod piosenki.
+final RegExp _templateStartRe = RegExp(
+  r'^(\s*-\s*){6}\s*(Zasady dodawania piosenek|Nie edytuj poniższego)'
+  r'|^###\s*(Kod piosenki|Osoba dodająca|Propozycja poprawki|Źródło piosenki|Poprawiana piosenka)',
+  multiLine: true,
+);
+
+/// Sama belka „Miejsce na własną wiadomość” — nagłówek pola, nie treść.
+final RegExp _userMessageBarRe = RegExp(
+  r'^(\s*-\s*){6}\s*Miejsce na własną wiadomość(\s*-\s*){6}\s*$',
+  multiLine: true,
+);
+
+/// Treść wiadomości bez tego, co dokłada szablon: belek, kodu piosenki,
+/// karty osoby dodającej i podpowiedzi w nawiasach kwadratowych.
+/// `null`, gdy po wycięciu nie zostaje nic.
+String? stripSubmissionTemplate(String body){
+  final start = _templateStartRe.firstMatch(body);
+  String text = start == null? body: body.substring(0, start.start);
+  text = text
+      .replaceAll(_userMessageBarRe, '')
+      .replaceAll(_userMessagePlaceholder, '')
+      .trim();
+  return text.isEmpty? null: text;
+}
+
 String? _extractUserMessage(String content){
   Match? m = _userMessageRe.firstMatch(content);
   if(m == null) return null;

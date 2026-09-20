@@ -225,7 +225,7 @@ song/
 │   └── several-contributors  kilka kart osób dodających — wkład przypisz ręcznie
 ├── contributor/              napisałeś coś osobie dodającej przy przeglądzie
 │   ├── to-ask                kolejka: mejl do wysłania (`reply`)
-│   └── asked                 poszło; czekamy na odpowiedź (`reopen`)
+│   └── asked                 poszło, przeczytane; czekamy na odpowiedź (`reopen`)
 ├── old-app/                  ZNACZNIK: mejl z najstarszej, nierozwijanej apki
 │   ├── to-reply              kolejka: autorowi trzeba odpisać (`reply`)
 │   ├── drafted               szkic czeka w wątku na Twoje oko; wisi OBOK to-reply
@@ -243,8 +243,9 @@ song/
 - Jedyny wyjątek od „`song/*` = poza kolejką”: `old-app/replied`. To znacznik
   o nadawcy (dostał już odpowiedź), nie stan zgłoszenia — wątek z samą tą
   etykietą jest w kolejce.
-- **Przeczytane** = sprawa zamknięta: `added` i każde `rejected/*`. `needs-review/*`,
-  `unparsable` i `old-app/to-reply` zostają nieprzeczytane.
+- **Przeczytane** = sprawa zamknięta: `added` i każde `rejected/*`, oraz
+  `contributor/asked` po wysłanej odpowiedzi. `needs-review/*`, `unparsable`,
+  `old-app/to-reply` i `contributor/to-ask` zostają nieprzeczytane.
 
 | Co | Zapytanie |
 |---|---|
@@ -418,7 +419,7 @@ w edytorze piszesz odpowiedź od razu przy piosence, a narzędzie pamięta reszt
 ./piosenkomat label reviewed --push   # → song/contributor/to-ask, nieprzeczytane
 ./piosenkomat reply --draft --push    # szkic w wątku
 #  …przejrzysz w Gmailu…
-./piosenkomat reply --push            # → song/contributor/asked
+./piosenkomat reply --push            # → song/contributor/asked, przeczytane
 #  …osoba dodająca odpisuje z chwytami…
 ./piosenkomat reopen --push           # zdejmuje song/*, wątek wraca do kolejki
 ./piosenkomat scan                    # przesiewa go jak nowe zgłoszenie

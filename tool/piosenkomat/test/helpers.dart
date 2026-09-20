@@ -133,7 +133,7 @@ Classified classifiedWith(
       kind: kind,
       title: 'x',
       song: SongRaw.empty(id: 'x'),
-      userMessage: userMessage ? 'hej' : null,
+      conversation: userMessage ? const [PiosenkomatMessage('hej')] : const [],
     ),
     Decision(target, issues: [for (final i in issues) PiosenkomatIssue(i)]),
   );

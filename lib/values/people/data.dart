@@ -525,6 +525,15 @@ const RegisteredContributor ANTONI_DEBICKI = RegisteredContributor(
   ),
   emails: ["antoni.debicki@zhp.pl"],
 );
+const RegisteredContributor ANTONI_KOLARCZYK = RegisteredContributor(
+  person: Person(
+    name: 'Antoni Kolarczyk',
+    druzyna: '36HDCzB',
+    srodowisko: Srodowisko.hufiec('jastrzebie_zdroj', showChoragiew: false, showOkreg: false),
+    rankHarc: RankHarc.zhpHOc,
+  ),
+  emails: ['giplantelo@gmail.com'],
+);
 const RegisteredContributor ANTONI_KOSZNIEC = RegisteredContributor(
   person: Person(
     name: 'Antoni Koszniec',
@@ -3070,8 +3079,8 @@ const RegisteredContributor MACIEJ_LADOS = RegisteredContributor(
 const RegisteredContributor MACIEJ_PAWLICA = RegisteredContributor(
   person: Person(
     name: 'Maciej Pawlica',
-      druzyna: '1. Nadarzyńska Drużyna Starszoharcerska „Impessa”',
-      srodowisko: Srodowisko.hufiec('pruszkow', showChoragiew: false, showOkreg: false),
+      // druzyna: '1. Nadarzyńska Drużyna Starszoharcerska „Impessa”',
+      // srodowisko: Srodowisko.hufiec('pruszkow', showChoragiew: false, showOkreg: false),
   ),
   emails: ['maciek.pawlica@outlook.com'],
 );

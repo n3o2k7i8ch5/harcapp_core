@@ -88,8 +88,33 @@ void main() {
         reason: 'niesparsowalne masz zobaczyć w skrzynce');
     expect(isClosedLabel(ReviewKind.missingData.label), isFalse);
     expect(isClosedLabel(kLabelOldAppToReply), isFalse);
+    expect(isClosedLabel(kLabelContributorToAsk), isFalse);
+    expect(isClosedLabel(kLabelContributorAsked), isFalse,
+        reason: 'asked nie jest werdyktem — przeczytane zdejmuje `reply`');
     expect(isClosedLabel(kLabelReady), isFalse);
     expect(isClosedLabel(kLabelAuto), isFalse);
+  });
+
+  test('po odpowiedzi do osoby dodającej mejl jest przeczytany', () {
+    final (add, remove) =
+        labelsAfterReply(oldApp: false, askedContributor: true);
+    expect(add, [kLabelContributorAsked]);
+    expect(remove, [
+      kLabelOldAppToReply,
+      kLabelContributorToAsk,
+      kLabelOldAppDrafted,
+      'UNREAD',
+    ]);
+
+    // Sama stara apka: piosenka może wciąż czekać na przegląd.
+    final onlyOld = labelsAfterReply(oldApp: true, askedContributor: false);
+    expect(onlyOld.$1, [kLabelOldAppReplied]);
+    expect(onlyOld.$2, isNot(contains('UNREAD')));
+
+    // Obie sprawy w jednym mejlu: pytanie poszło, nieprzeczytane schodzi.
+    final both = labelsAfterReply(oldApp: true, askedContributor: true);
+    expect(both.$1, [kLabelOldAppReplied, kLabelContributorAsked]);
+    expect(both.$2, contains('UNREAD'));
   });
 
   test('isSongSubmission: po temacie albo znaczniku w treści', () {

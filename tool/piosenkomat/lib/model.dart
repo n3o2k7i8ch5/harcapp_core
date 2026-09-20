@@ -43,8 +43,10 @@ const String kLabelOldAppToReply = 'song/old-app/to-reply';
 const String kLabelOldAppReplied = 'song/old-app/replied';
 /// Przy przeglądzie napisałeś autorowi — pytanie o chwyty, prośba o poprawkę.
 /// Kolejka jak przy starej apce: `reply` ją zdejmuje i wiesza
-/// [kLabelContributorAsked]. Zostaje nieprzeczytane: czekasz na odpowiedź.
+/// [kLabelContributorAsked]. Zostaje nieprzeczytane, dopóki mejl nie wyjdzie.
 const String kLabelContributorToAsk = 'song/contributor/to-ask';
+/// Odpowiedź poszła. Mejl jest przeczytany — z Twojej strony nic już nie wisi,
+/// a gdy autor odpisze, Gmail sam oznaczy wątek jako nieprzeczytany (`reopen`).
 const String kLabelContributorAsked = 'song/contributor/asked';
 
 /// `reply --draft --push` przygotował szkic i czeka, aż go przejrzysz.
@@ -153,10 +155,33 @@ bool isAnySongLabel(String label) => label == 'song' || label.startsWith('song/'
 
 /// Etykiety stanu, po których nic już od Ciebie nie zależy: piosenka weszła
 /// albo odpadła na dobre. Takie mejle oznaczamy jako przeczytane, żeby nie
-/// wisiały w skrzynce. `needs-review/*`, `unparsable` i `old-app/to-reply`
-/// zostają nieprzeczytane — czekają na Twoją decyzję, Twoje oko albo odpowiedź.
+/// wisiały w skrzynce. `needs-review/*`, `unparsable`, `old-app/to-reply`
+/// i `contributor/to-ask` zostają nieprzeczytane — czekają na Twoją decyzję,
+/// oko albo wysyłkę. Po `reply` mejl z [kLabelContributorAsked] jest
+/// przeczytany osobno, patrz [labelsAfterReply].
 bool isClosedLabel(String label) =>
     label == kLabelDone || label.startsWith('song/rejected');
+
+/// Etykiety po wysłanej odpowiedzi (`reply --push`): schodzą kolejki,
+/// wchodzi asked/replied. `UNREAD` schodzi, gdy odpisaliśmy osobie dodającej
+/// — jak po odpowiedzi z Gmaila. Sama stara apka nie czyści nieprzeczytanego:
+/// piosenka może wciąż czekać na przegląd.
+(List<String> add, List<String> remove) labelsAfterReply({
+  required bool oldApp,
+  required bool askedContributor,
+}) =>
+    (
+      [
+        if (oldApp) kLabelOldAppReplied,
+        if (askedContributor) kLabelContributorAsked,
+      ],
+      [
+        kLabelOldAppToReply,
+        kLabelContributorToAsk,
+        kLabelOldAppDrafted,
+        if (askedContributor) 'UNREAD',
+      ],
+    );
 
 /// „W pliku” z ręki automatu: tylko takie mejle `label added` ma prawo ruszyć.
 /// Twoje ręczne „ready-to-add” zostają nietknięte.
@@ -508,7 +533,9 @@ class Submission {
   /// Co było nie tak z załącznikiem zgłoszenia. `null` = nic.
   final SubmissionFileErrorKind? fileError;
   final String? fileErrorMessage;
-  final String? userMessage;
+  /// Rozmowa z wątku, od najstarszej: dopiski autora i odpowiedzi ze
+  /// skrzynki HarcAppa. To, co z [messages] zostaje po wycięciu szablonu.
+  final List<PiosenkomatMessage> conversation;
   final String? correctionMessage;
   /// Data reprezentanta.
   final DateTime? sentAt;
@@ -540,7 +567,7 @@ class Submission {
     this.severalContributors = false,
     this.fileError,
     this.fileErrorMessage,
-    this.userMessage,
+    this.conversation = const [],
     this.correctionMessage,
     this.sentAt,
     this.sender,
@@ -554,6 +581,12 @@ class Submission {
 
   bool get isCorrection => kind == SubmissionKind.correction;
   bool get isOldApp => legacyApp;
+  /// Co napisał **autor** — bez odpowiedzi ze skrzynki HarcAppa.
+  String? get userMessage {
+    final own = [for (final m in conversation) if (!m.mine) m.text];
+    return own.isEmpty ? null : own.join('\n\n');
+  }
+
   bool get hasUserMessage => (userMessage ?? '').trim().isNotEmpty;
 
   /// Cokolwiek autor napisał słowami: dopisek albo blok „Propozycja
@@ -605,7 +638,7 @@ class Submission {
         severalContributors: severalContributors,
         fileError: fileError,
         fileErrorMessage: fileErrorMessage,
-        userMessage: userMessage,
+        conversation: conversation,
         correctionMessage: correctionMessage,
         sentAt: sentAt,
         sender: sender,
@@ -682,7 +715,7 @@ class Classified {
         sender: submission.sender,
         senderIsContributor: submission.senderIsContributor,
         sentAt: submission.sentAt,
-        userMessage: submission.userMessage,
+        messages: submission.conversation,
         correctionMessage: submission.correctionMessage,
         correctionTarget: submission.correctionTarget,
         correctionTargetGuessed: submission.correctionTargetGuessed,

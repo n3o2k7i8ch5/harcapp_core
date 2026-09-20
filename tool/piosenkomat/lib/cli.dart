@@ -996,13 +996,12 @@ Future<int> _reply(ArgResults cmd) async {
       );
 
   /// Etykiety po odpowiedzi: schodzą obie kolejki, wchodzi to, co się należy.
-  (List<String>, List<String>) labelsAfterReply(List<String> mejle) => (
-        [
-          if (mejle.any(oldAppIds.contains)) kLabelOldAppReplied,
-          if (mejle.any((id) => replies.containsKey(targets[id]?.threadId)))
-            kLabelContributorAsked,
-        ],
-        [kLabelOldAppToReply, kLabelContributorToAsk, kLabelOldAppDrafted],
+  /// Pytanie do osoby dodającej zdejmuje też UNREAD — mejl poszedł, z Twojej
+  /// strony nic już nie wisi.
+  (List<String>, List<String>) labelsFor(List<String> mejle) => labelsAfterReply(
+        oldApp: mejle.any(oldAppIds.contains),
+        askedContributor:
+            mejle.any((id) => replies.containsKey(targets[id]?.threadId)),
       );
 
   if (undraft) {
@@ -1125,7 +1124,7 @@ Future<int> _reply(ArgResults cmd) async {
   for (final sender in planned) {
     final mejle = bySender[sender]!;
     final najnowszy = mejle.last;
-    final (add, remove) = labelsAfterReply(mejle);
+    final (add, remove) = labelsFor(mejle);
     try {
       final target =
           targets[najnowszy] ?? await mailbox.replyTarget(najnowszy);

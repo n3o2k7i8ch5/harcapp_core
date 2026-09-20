@@ -148,7 +148,6 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
       final goesIn = data.goesIn;
       final color = goesIn? Colors.green: Colors.red;
       final correction = data.correctionMessage ?? '';
-      final user = data.userMessage ?? '';
 
       return Padding(
         padding: widget.padding,
@@ -235,10 +234,20 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
               ],
 
               // Rozmowa: co przyszło od osoby dodającej i co jej odpiszesz.
+              // Propozycja poprawki idzie pierwsza i osobno — to pole
+              // formularza, nie wiadomość z wątku.
               if(correction.isNotEmpty)
                 _Bubble(title: 'Propozycja poprawki', text: correction),
-              if(user.isNotEmpty)
-                _Bubble(title: 'Wiadomość od osoby dodającej', text: user),
+
+              // Każda wiadomość z wątku we własnym dymku, po swojej stronie:
+              // autor z lewej, Twoje odpowiedzi z prawej. Zlepek wszystkiego
+              // w jednym dymku nie mówił ani kto co powiedział, ani kiedy.
+              for(final message in data.messages)
+                _Bubble(
+                  mine: message.mine,
+                  title: _messageTitle(message),
+                  text: message.text,
+                ),
 
               // Bez własnego tytułu: etykietę niesie samo pole — na pustym
               // jest podpowiedzią w środku, a gdy zaczniesz pisać, wjeżdża
@@ -298,6 +307,16 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
     },
   );
 
+}
+
+/// Podpis dymka: kto i kiedy. Bez daty, gdy mejl jej nie niósł — pusty
+/// nawias mówiłby mniej niż sam podpis.
+String _messageTitle(PiosenkomatMessage message){
+  final who = message.mine? 'Ty': 'Osoba dodająca';
+  final at = message.at;
+  if(at == null) return who;
+  final local = at.toLocal();
+  return '$who · ${local.day}.${local.month}.${local.year}';
 }
 
 /// Dymek rozmowy: prostokątny, bez dziubka. Od osoby dodającej — z lewej,

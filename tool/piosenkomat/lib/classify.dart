@@ -99,15 +99,16 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
   final fallbackTitle = rep.subject ?? rep.id;
   final title = (song?.title.trim().isEmpty ?? true) ? fallbackTitle : song!.title;
 
-  // Dopiski z pozostałych wiadomości wątku doklejamy z datą, żeby było
-  // wiadomo, co kiedy przyszło.
-  final messagesText = <String>[];
-  if (parsed?.userMessage case final own?) messagesText.add(own);
-  for (final m in ordered) {
-    if (m.id == rep.id) continue;
-    final extra = _userMessageOf(m);
-    if (extra != null) messagesText.add('[${_day(m.date)}]: $extra');
-  }
+  // Wątek to rozmowa, więc zbieramy ją jako listę, a nie jeden zlepek:
+  // każda wiadomość z datą i ze stroną, po której padła. Kolejność po dacie,
+  // bo reprezentantem bywa **najnowsze** zgłoszenie z wątku.
+  final conversation = <PiosenkomatMessage>[
+    if (parsed?.userMessage case final own?) PiosenkomatMessage(own, at: rep.date),
+    for (final m in ordered)
+      if (m.id != rep.id)
+        if (_userMessageOf(m) case final extra?)
+          PiosenkomatMessage(extra, at: m.date, mine: _isOurs(m)),
+  ]..sort((a, b) => (a.at ?? DateTime(0)).compareTo(b.at ?? DateTime(0)));
 
   final shape = _shapeOf(file, parsed);
   final oldApp = shape == EmailShape.oldest;
@@ -173,7 +174,7 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
     fileError: file.error?.kind,
     fileErrorMessage: file.error?.message,
     title: title,
-    userMessage: messagesText.isEmpty ? null : messagesText.join('\n\n'),
+    conversation: conversation,
     correctionMessage: parsed?.correctionMessage ?? extractCorrectionMessage(rep.body),
     sentAt: rep.date,
     sender: sender,
@@ -427,7 +428,6 @@ Decision decide(Submission s) {
 
 DateTime _dateOf(ContribMessage m) => m.date ?? DateTime(0);
 int _cmpDate(DateTime? a, DateTime? b) => (a ?? DateTime(0)).compareTo(b ?? DateTime(0));
-String _day(DateTime? d) => d == null ? '?' : d.toLocal().toIso8601String().substring(0, 10);
 
 /// Ile linijek tekstu zostało bez chwytów — bez tego „brak chwytów” nie mówi,
 /// czy brakuje wszystkiego, czy jednej zwrotki.
@@ -454,10 +454,14 @@ String? _userMessageOf(ContribMessage m) {
       .split('\n')
       .where((l) => !l.trimLeft().startsWith('>'))
       .where((l) => !_quoteHeaderRe.hasMatch(l.trim()))
-      .join('\n')
-      .trim();
-  return own.isEmpty ? null : own;
+      .join('\n');
+  // Cytat bez `>` (klient pocztowy bywa kreatywny) wciągnąłby tu cały kod
+  // piosenki — stąd jeszcze cięcie po znacznikach szablonu.
+  return stripSubmissionTemplate(own);
 }
+
+/// Czy wiadomość wyszła ze skrzynki HarcAppa, czyli od Ciebie.
+bool _isOurs(ContribMessage m) => emailFromHeader(m.from) == kInboxEmail;
 
 final _quoteHeaderRe = RegExp(
     r'^(On .+ wrote:|W dniu .+ napisał(a)?:|.+<.+@.+> napisał(a)?:|Dnia .+ napisał(a)?:)$');
