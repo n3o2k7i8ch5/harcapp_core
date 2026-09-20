@@ -13,7 +13,7 @@ export 'package:harcapp_core/song_book/similarity/song_index.dart';
 
 /// Najbliższa piosenka **w apce**.
 class AppMatch extends SongMatch<SongRaw> {
-  const AppMatch({required super.song, required super.similarities})
+  AppMatch({required super.song, required super.similarities})
       : super(source: MatchSource.app);
 
   AppMatch.of(SongMatch<SongRaw> m)

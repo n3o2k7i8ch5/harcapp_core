@@ -26,13 +26,25 @@ void main() {
     song('o!_gory', 'Góry', _gory),
   ]);
 
-  group('SongIndex.byId:', () {
+  group('SongIndex.byId / allById:', () {
+    test('allById daje wszystkie pod jednym id — w warsztacie id się powtarza', () {
+      final index = SongIndex<SongRaw>([
+        song('x', 'Pierwsza', _ognisko),
+        song('y', 'Inna', _morze),
+        song('x', 'Druga', _gory),
+      ]);
+      expect(index.allById('x').map((s) => s.title), ['Pierwsza', 'Druga']);
+      expect(index.allById('nie ma'), isEmpty);
+      expect(index.byId('x')?.title, 'Pierwsza');
+    });
+
     test('dokładnie, a potem bez członu @wykonawca', () {
       expect(app.byId('o!_morze')?.title, 'Morze');
       expect(app.byId('o!_ognisko@zespol')?.title, 'Płonie ognisko');
       expect(app.byId('o!_ognisko@inny')?.title, 'Płonie ognisko',
           reason: 'zgłoszenie sprzed zmiany wykonawcy to dalej ta sama piosenka');
       expect(app.byId('o!_nie_ma'), isNull);
+      expect(app.byId(''), isNull, reason: 'puste id to nie id');
     });
   });
 
@@ -88,6 +100,24 @@ void main() {
       expect(got[1].similarities.whereType<SameId>(), hasLength(1));
     });
 
+    test('kandydaci z odwróconego indeksu dają to samo, co pełne przejście', () {
+      final probe = SongProfile(song('p', 'Morze', '$_ognisko\nŻagle na wietrze'));
+      final fast = app.matches(probe).map((m) => m.song.id).toList();
+      final naive = [
+        for (final s in app.songs)
+          if (levelOf(compare(probe, SongProfile(s))) != null) s.id,
+      ];
+      expect(fast.toSet(), naive.toSet());
+    });
+
+    test('identyczne, choć tekst bez ani jednego słowa — nie wypada z prefiltra', () {
+      final a = song('a', '', '♪ ♪ ♪');
+      final b = song('b', '', '♪ ♪ ♪');
+      expect(SongProfile(a).words, isEmpty);
+      final got = SongIndex<SongRaw>([a]).matches(SongProfile(b));
+      expect(got.single.level, MatchLevel.identical);
+    });
+
     test('nic podobnego → pusto', () {
       expect(app.matches(SongProfile(song('x', 'Nowa', 'Tekst bez żadnego wspólnego słowa z resztą'))), isEmpty);
     });
@@ -115,9 +145,13 @@ void main() {
       expect(correctionTargetOf(s, app)?.id, 'o!_gory');
     });
 
-    test('bez śladu (po prepare) — po własnym id', () {
+    test('sama kolizja id to nie deklaracja — o niej mówi dowód SameId', () {
       final s = song('o!_morze', 'Morze poprawione', _morze);
-      expect(correctionTargetOf(s, app)?.id, 'o!_morze');
+      expect(correctionTargetOf(s, app), isNull);
+      expect(
+        app.matches(SongProfile(s)).first.similarities.whereType<SameId>(),
+        hasLength(1),
+      );
     });
 
     test('nowa piosenka ze śladem nie jest poprawką, choćby id kolidowało', () {
@@ -132,8 +166,25 @@ void main() {
     });
 
     test('sama siebie nie jest własnym pierwowzorem', () {
-      final self = app.songs.first;
-      expect(correctionTargetOf(self, app), isNull);
+      final self = song('o!_x', 'X', _gory)..correctedSongId = 'o!_x';
+      expect(correctionTargetOf(self, SongIndex<SongRaw>([self])), isNull);
+    });
+
+    test('przy powtórzonym id deklaracja wskazuje sąsiada, nigdy samą siebie', () {
+      // Po `prepare` poprawka ma id pierwowzoru, a obok w warsztacie leży
+      // oryginał pod tym samym id — deklaracja `correctedSongId` ma trafić
+      // w niego, niezależnie od tego, kto jest pierwszy na liście.
+      final a = song('o!_x', 'X', _gory);
+      final b = song('o!_x', 'X poprawione', _gory)..correctedSongId = 'o!_x';
+      expect(correctionTargetOf(b, SongIndex<SongRaw>([a, b])), same(a));
+      expect(correctionTargetOf(b, SongIndex<SongRaw>([b, a])), same(a));
+      expect(correctionTargetOf(b, SongIndex<SongRaw>([b])), isNull);
+    });
+
+    test('puste correctedSongId nie wskazuje piosenek bez id', () {
+      final blank = song('', 'Bez id', _gory);
+      final s = song('o!_y', 'Y', _morze)..correctedSongId = '';
+      expect(correctionTargetOf(s, SongIndex<SongRaw>([blank])), isNull);
     });
 
     test('nic nie pasuje → null', () {

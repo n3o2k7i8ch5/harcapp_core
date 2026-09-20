@@ -35,7 +35,15 @@ Set<String> textWords(String text) =>
 
 double jaccard(Set<String> a, Set<String> b) {
   if (a.isEmpty || b.isEmpty) return 0;
-  return a.intersection(b).length / a.union(b).length;
+  return jaccardFromCounts(a.intersection(b).length, a.length, b.length);
+}
+
+/// Ten sam Jaccard, gdy przecięcie policzono inaczej niż przez `Set` —
+/// np. z odwróconego indeksu słów. Jedno miejsce na wzór, żeby prefiltr
+/// i pełne porównanie nie mogły się rozjechać.
+double jaccardFromCounts(int shared, int sizeA, int sizeB) {
+  if (sizeA == 0 || sizeB == 0) return 0;
+  return shared / (sizeA + sizeB - shared);
 }
 
 String pct(double score) => '${(score * 100).round()}%';
