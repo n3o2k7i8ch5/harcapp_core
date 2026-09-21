@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
-import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_classes/date_to_str.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
 import 'package:harcapp_core/comm_widgets/app_button.dart';
@@ -17,7 +16,6 @@ import 'package:harcapp_core/comm_widgets/person_card.dart';
 import 'package:harcapp_core/comm_widgets/separated_column.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/logger.dart';
-import 'package:harcapp_core/song_book/playback/playback_controller.dart';
 import 'package:harcapp_core/song_book/playback/playback_source.dart';
 import 'package:harcapp_core/song_book/playback/widgets/song_playback_bar.dart';
 import 'package:harcapp_core/song_book/song_scroll_to_visible_lines.dart';
@@ -106,8 +104,6 @@ class SongWidgetTemplate<TSong extends SongCore> extends StatefulWidget{
 
   /// Nadpisanie tego, co robi przycisk „YouTube” w rzędzie ikon. Bez niego:
   /// przy pasku interaktywnym — gra w pasku, przy podglądzie — otwiera link.
-  final void Function(double position)? onYtTap;
-  final void Function()? onYtLongPress;
 
   final void Function(BuildContext context, bool changedSize)? onMinusTap;
   final void Function(BuildContext context, bool changedSize)? onPlusTap;
@@ -172,8 +168,6 @@ class SongWidgetTemplate<TSong extends SongCore> extends StatefulWidget{
 
         this.playbackBar = PlaybackBarMode.hidden,
         this.onPlaybackContinue,
-        this.onYtTap,
-        this.onYtLongPress,
 
         this.onMinusTap,
         this.onPlusTap,
@@ -244,8 +238,6 @@ class SongWidgetTemplateState<TSong extends SongCore> extends State<SongWidgetTe
 
   PlaybackBarMode get playbackBar => widget.playbackBar;
   void Function(bool random)? get onPlaybackContinue => widget.onPlaybackContinue;
-  void Function(double position)? get onYtTap => widget.onYtTap;
-  void Function()? get onYtLongPress => widget.onYtLongPress;
 
   void Function(BuildContext context, bool changedSize)? get onMinusTap => widget.onMinusTap;
   void Function(BuildContext context, bool changedSize)? get onPlusTap => widget.onPlusTap;
@@ -956,33 +948,6 @@ class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<T
         iconData: MdiIcons.bookmarkOutline,
         onPressed: (_, songWidget, _) => songWidget.onAlbumsTap?.call(),
         show: (_, _, _) => true
-    ),
-
-    _ButtonData(
-        name: 'YouTube',
-        // Konturowe „play” — MDI nie ma outline'owego `youtube`, a pełne logo
-        // odstawało od reszty paska (`bookmarkOutline` i spółka).
-        iconData: MdiIcons.playCircleOutline,
-        onLongPress: (_, songWidget, _) => songWidget.onYtLongPress?.call(),
-        onPressed: (_, songWidget, _){
-          if(songWidget.onYtTap case final onYtTap?){
-            final RenderBox renderBox = songWidget.contentCardsKey.currentContext!.findRenderObject() as RenderBox;
-            final position = renderBox.localToGlobal(Offset.zero).dy; // - parent.widget.topScreenPadding;
-            onYtTap(position);
-            return;
-          }
-          // Bez nadpisania: film gra w pasku nad piosenką (pasek sam dojedzie
-          // do jego kafelka), a w podglądzie — otwiera się poza aplikacją.
-          if(songWidget.playbackBar.isInteractive)
-            SongbookPlaybackController.instance.play(PlaybackSource.youtube(songWidget.song));
-          else if(songWidget.song.youtubeUrl case final url?)
-            launchURL(url);
-        },
-        // Widoczny tylko, gdy klik coś zrobi. Bez tego strona pokazywała
-        // przycisk, który nic nie robił.
-        show: (_, songWidget, _) =>
-            (songWidget.song.youtubeVideoId?.isNotEmpty ?? false)
-            && (songWidget.playbackBar.isShown || songWidget.onYtTap != null)
     ),
 
     _ButtonData(
