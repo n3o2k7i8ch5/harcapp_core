@@ -573,7 +573,7 @@ Future<int> _labelReviewed(ArgResults cmd) async {
       }
       for (final s in result.wrongKind) {
         stderr.writeln('  ZŁY PLIK ${s.title} — to '
-            '${s.piosenkomatData!.isCorrection ? 'poprawka' : 'revised piosenka'}, '
+            '${s.piosenkomatData!.isCorrection ? 'poprawka' : 'nowa piosenka'}, '
             'a plik jest na ${_kindName(kind).toLowerCase()}');
       }
       for (final e in result.duplicateTargets.entries) {
@@ -1517,9 +1517,9 @@ String _usage(ArgParser parser) => '''
 piosenkomat: sitko mejli z piosenkami na $kInboxEmail.
 
   ./piosenkomat scan [-n N] [--newest] [-o katalog]
-      queueQuery (inbox bez song/*, po wątkach) → katalog out/import-<data>/:
+      kolejka (inbox bez song/*, po wątkach) → katalog out/import-<data>/:
       raport, plan, candidates-new.hrcpsng, candidates-correction.hrcpsng
-      (notes przy piosenkach), reviewed-*.hrcpsng. Gmaila tylko czyta
+      (uwagi przy piosenkach), reviewed-*.hrcpsng. Gmaila tylko czyta
   ./piosenkomat label scanned [katalog] --push
       werdykty automatu na mejle: „$kLabelReady”, „song/rejected/…”,
       „$kLabelToReview”, wszystko ze znacznikiem „$kLabelAuto”
@@ -1535,15 +1535,15 @@ piosenkomat: sitko mejli z piosenkami na $kInboxEmail.
       autorom ze starej apki: „zaktualizuj apkę”; kolejką jest etykieta
       „$kLabelOldAppToReply”, wysyłka przestawia ją na „$kLabelOldAppReplied”.
       Zakresem jest przebieg; zaległość spoza niego bierze --all
-      --draft zostawia drafts w wątkach („$kLabelOldAppDrafted”, queueQuery
+      --draft zostawia szkice w wątkach („$kLabelOldAppDrafted”, kolejka
       nietknięta) — późniejszy reply --push wysyła je z Twoimi poprawkami,
       a --undraft je kasuje, nikomu nic nie wysyłając
   ./piosenkomat reopen --push
-      autorzy, którzy odpisali na Twoje hasQuestion („$kLabelContributorAsked”):
+      autorzy, którzy odpisali na Twoje pytanie („$kLabelContributorAsked”):
       zdejmuje z ich wątków „song/*”, żeby wróciły do kolejki i przeszły scan
   ./piosenkomat clean [katalog] --push
-      kasuje katalog przebiegu, gdy nic już na niego nie pendingLabels — sprawdza
-      w Gmailu, czy werdykty, odpowiedzi i queueQuery starej apki są domknięte
+      kasuje katalog przebiegu, gdy nic już na niego nie czeka — sprawdza
+      w Gmailu, czy werdykty, odpowiedzi i kolejka starej apki są domknięte
   ./piosenkomat explain plik.eml [...]
       klasyfikacja lokalnych plików, bez Gmaila
   ./piosenkomat prepare [katalog]

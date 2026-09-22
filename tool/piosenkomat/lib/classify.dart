@@ -347,7 +347,7 @@ Decision decide(Submission s) {
   }
   if (s.consentVersion == null) add(SongIssue.noConsent);
   if (s.sender == null) {
-    add(SongIssue.noContributorEmail, 'nadawca: ${s.message.from ?? 'missingCount nagłówka'}');
+    add(SongIssue.noContributorEmail, 'nadawca: ${s.message.from ?? 'brak nagłówka'}');
   }
   if (s.hasUserMessage) add(SongIssue.hasUserMessage, s.userMessage!.trim());
 
