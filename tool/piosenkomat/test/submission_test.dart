@@ -213,14 +213,16 @@ void main() {
     expect(issuesOf(c), isEmpty);
   });
 
-  test('uszkodzony załącznik: etykieta przeglądu, nie worek „nie umiem”', () {
+  test('uszkodzony załącznik: odrzut z „rzuć okiem”, nie worek „nie umiem”', () {
     final mail = submissionEmail(mangle: (f) => f.replaceFirst('Piosenka', 'Piosenki'));
     final c = _classify(mail.eml);
-    expect(c.target, Target.unparsable);
+    expect(c.target, Target.rejectBrokenFile);
     expect(issuesOf(c), [SongIssue.corruptedSubmissionFile]);
-    expect(c.labels, contains(ReviewKind.corruptedData.label));
+    expect(c.labels, containsAll([kLabelRejectedCorruptedData, kLabelHaveALook]));
     expect(c.labels, isNot(contains(kLabelUnparsable)));
-    expect(kToolLabels, contains(ReviewKind.corruptedData.label),
+    expect(c.labels.any((l) => l.startsWith(kLabelToReview)), isFalse,
+        reason: 'piosenki nie ma w pliku, piosenkomat nie ma tu nic do roboty');
+    expect(kToolLabels, containsAll([kLabelRejectedCorruptedData, kLabelHaveALook]),
         reason: 'bez tego --push wywali się na brakującej etykiecie');
   });
 
@@ -233,7 +235,8 @@ void main() {
     });
     final c = _classify(mail.eml);
     expect(issuesOf(c), [SongIssue.unknownSubmissionFormat]);
-    expect(c.labels, contains(ReviewKind.unknownFormat.label));
+    expect(c.labels, containsAll([kLabelRejectedUnknownFormat, kLabelHaveALook]));
+    expect(kToolLabels, contains(kLabelRejectedUnknownFormat));
   });
 
   test('kilka zgłoszeń w pliku: wchodzi pierwsze, o reszcie się nie milczy', () {
@@ -356,7 +359,7 @@ void main() {
       msgFrom(emlWith(mail.fileContent.replaceFirst('Nowa', 'Nowaa')), id: 'm2'),
       book: SongBook.empty,
     );
-    expect(broken.target, Target.unparsable);
+    expect(broken.target, Target.rejectBrokenFile);
     expect(issuesOf(broken), [SongIssue.corruptedSubmissionFile]);
   });
 

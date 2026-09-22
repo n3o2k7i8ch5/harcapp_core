@@ -52,16 +52,24 @@ bool isWebSubmission(ContribMessage m) =>
 
 /// Cała paczka: wiadomości składają się w zgłoszenia (po wątku), każde
 /// dostaje cechy, potem porównanie z apką i między sobą, na końcu decyzja.
+///
+/// [answeredThreads]: wątki, których autor dostał już od nas odpowiedź —
+/// `scan` wie to z etykiet wątku (`SENT`) i, przy starej apce, z tego, czy
+/// coś do nadawcy wysłaliśmy; nie ze swoich wiadomości, bo kolejka łapie
+/// tylko przychodzące.
 List<Classified> classifyBatch(
   List<ContribMessage> messages, {
   required SongBook book,
+  Set<String> answeredThreads = const {},
 }) {
   final byThread = <String, List<ContribMessage>>{};
   for (final m in messages) {
     byThread.putIfAbsent(m.threadId, () => []).add(m);
   }
   var submissions = [
-    for (final thread in byThread.values) buildSubmission(thread, book: book),
+    for (final e in byThread.entries)
+      buildSubmission(e.value,
+          book: book, answered: answeredThreads.contains(e.key)),
   ];
   submissions = matchWithinBatch(submissions);
   final out = [for (final s in submissions) Classified(s, decide(s))];
@@ -77,7 +85,11 @@ List<Classified> classifyBatch(
 /// takiej nie ma — pierwsza. Dzięki temu autor, który poprawił piosenkę
 /// i odesłał przez „Odpowiedz”, dostaje ten sam wynik, co nowym mejlem.
 /// Pozostałe wiadomości dostarczają tylko dopisków.
-Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}) {
+Submission buildSubmission(
+  List<ContribMessage> thread, {
+  required SongBook book,
+  bool answered = false,
+}) {
   final ordered = [...thread]..sort((a, b) => _dateOf(a).compareTo(_dateOf(b)));
   final own = [
     for (final m in ordered.skip(1))
@@ -171,6 +183,7 @@ Submission buildSubmission(List<ContribMessage> thread, {required SongBook book}
     senderIsContributor: senderIsContributor,
     skippedSubmissions: parsed?.skippedSubmissions ?? 0,
     severalContributors: file.isFile && contributorCards > 1,
+    weReplied: answered || ordered.any(_isOurs),
     fileError: file.error?.kind,
     fileErrorMessage: file.error?.message,
     title: title,
@@ -309,7 +322,12 @@ Decision decide(Submission s) {
         detail: s.fileErrorMessage,
       ),
   ];
-  if (song == null) return Decision(Target.unparsable, issues: fileIssues);
+  if (song == null) {
+    // Zepsuty załącznik ma znany powód: odrzut, nie worek „nie umiem odczytać”.
+    return fileIssues.isEmpty
+        ? const Decision(Target.unparsable)
+        : Decision(Target.rejectBrokenFile, issues: fileIssues);
+  }
 
   final batch = s.batchMatch;
   if (batch != null && batch.level == MatchLevel.identical && !batch.isNewestInBatch) {
@@ -321,15 +339,8 @@ Decision decide(Submission s) {
   final appLevel = app?.level;
 
   if (appLevel == MatchLevel.identical) {
-    // Identyczna poprawka bez słowa komentarza to ten sam odrzut co nowa —
-    // nie ma czego czytać. SAM MEJL, gdy autor coś napisał poza kodem:
-    // dopisek **albo** „Propozycja poprawki”. To drugie bywa całą treścią
-    // zgłoszenia — `identical` znaczy, że autor nie zmienił niczego, więc
-    // zwykle właśnie dlatego, że zmianę opisał słowami zamiast ją wpisać.
-    // Piosenki nie ma w pliku; po `label scanned` mejl jest przeczytany.
-    if (s.hasMessages) {
-      return Decision(Target.mailOnlyIdentical, detail: app!.detail);
-    }
+    // Identyczna to odrzut — nowa czy poprawka, z dopiskiem czy bez. Gdy autor
+    // coś napisał, odrzut dostaje znacznik „rzuć okiem” (`Classified.haveALook`).
     return Decision(Target.rejectAlreadyInApp, detail: app!.detail);
   }
 

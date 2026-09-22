@@ -95,17 +95,18 @@ void main() {
       expect(got.goesToFile, isFalse);
     });
 
-    test('identyczna z dopiskiem → sam mejl, przeczytany po etykietach', () async {
+    test('identyczna z dopiskiem → odrzut z „rzuć okiem”, przeczytany', () async {
       final got = classify(
         msgFrom(await completeEmail(song: sampleSong(lyrics: _a), userMessage: 'Dodajcie drugi głos')),
         book: bookWith([sampleSong(lyrics: _a)]),
       );
-      expect(got.target, Target.mailOnlyIdentical);
+      expect(got.target, Target.rejectAlreadyInApp);
       expect(got.goesToFile, isFalse, reason: 'piosenki nie ma po co oglądać');
-      expect(stateLabelsFor(got),
-          [kLabelToReview, ReviewKind.identicalInApp.label, ReviewKind.userMessage.label]);
-      expect(got.labels.any(isClosedLabel), isFalse);
-      expect(got.labels.any(clearsUnread), isTrue,
+      expect(stateLabelsFor(got), [kLabelRejectedInBook]);
+      expect(got.labels, contains(kLabelHaveALook));
+      expect(got.labels.any((l) => l.startsWith(kLabelToReview)), isFalse,
+          reason: '`needs-review` jest tylko dla piosenek w pliku');
+      expect(got.labels.any(isClosedLabel), isTrue,
           reason: 'po `label scanned` nie wisi w nieprzeczytanych');
     });
 

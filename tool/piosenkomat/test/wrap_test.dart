@@ -140,7 +140,7 @@ void _oldest() {
     // a jej temat („Piosenka …”) nie jest tematem spoza szablonów.
     expect(got.isClean, isTrue);
     expect(got.oldApp, isTrue);
-    expect(got.labels, contains(kLabelOldAppToReply));
+    expect(got.labels, contains(kLabelReplyOldApp));
     expect(got.song!.contributorData?.acceptedContributionRulesVersion,
         kOldAppRulesVersion);
     expect(got.title, 'Piosenka testowa XYZ');
@@ -164,6 +164,6 @@ void _oldest() {
     expect(got.isClean, isTrue);
     expect(got.oldApp, isFalse);
     expect(got.submission.shape, EmailShape.legacy);
-    expect(got.labels, isNot(contains(kLabelOldAppToReply)));
+    expect(got.labels, isNot(contains(kLabelReplyOldApp)));
   });
 }

@@ -242,8 +242,9 @@ void main() {
       expect(got.target, Target.rejectAlreadyInApp);
       expect(got.goesToFile, isFalse);
       expect(got.labels, containsAll([kLabelRejectedInBook, kLabelCorrection]));
+      expect(got.labels, isNot(contains(kLabelHaveALook)));
     });
-    test('identyczna poprawka z propozycją poprawki → sam mejl', () async {
+    test('identyczna poprawka z propozycją poprawki → odrzut, rzuć okiem', () async {
       // `completeEmail(isNew: false)` wypełnia blok „Propozycja poprawki” —
       // przy `identical` to zwykle cała treść zgłoszenia (autor nie zmienił
       // niczego, bo zmianę opisał słowami). Piosenki nie ma w pliku.
@@ -251,16 +252,17 @@ void main() {
           book: bookWith([sampleSong()]));
       expect(got.submission.hasUserMessage, isFalse);
       expect(got.submission.correctionMessage, isNotNull);
-      expect(got.target, Target.mailOnlyIdentical);
-      expect(got.labels, containsAll([kLabelToReview, ReviewKind.identicalInApp.label, kLabelCorrection]));
+      expect(got.target, Target.rejectAlreadyInApp);
+      expect(got.labels, containsAll([kLabelRejectedInBook, kLabelHaveALook, kLabelCorrection]));
+      expect(got.labels, isNot(contains(kLabelToReview)));
     });
-    test('identyczna poprawka z dopiskiem → sam mejl', () async {
+    test('identyczna poprawka z dopiskiem → odrzut, rzuć okiem', () async {
       final got = classify(
         msgFrom(await completeEmail(isNew: false, userMessage: 'zostawiam komentarz')),
         book: bookWith([sampleSong()]),
       );
-      expect(got.target, Target.mailOnlyIdentical);
-      expect(got.labels, containsAll([kLabelToReview, ReviewKind.identicalInApp.label, kLabelCorrection]));
+      expect(got.target, Target.rejectAlreadyInApp);
+      expect(got.labels, containsAll([kLabelRejectedInBook, kLabelHaveALook, kLabelCorrection]));
     });
   });
 
@@ -277,7 +279,7 @@ void main() {
     expect(got.isClean, isTrue, reason: 'stary format sam w sobie nie blokuje');
     expect(got.submission.legacyApp, isTrue);
     expect(got.submission.consentVersion, kOldAppRulesVersion);
-    expect(got.labels, [kLabelReady, kLabelOldAppToReply]);
+    expect(got.labels, [kLabelReady, kLabelReplyOldApp]);
     expect(got.song!.piosenkomatData!.isOldApp, isTrue);
     expect(got.issues, isEmpty, reason: 'stara apka to wiedza o nadawcy, nie zarzut');
   });

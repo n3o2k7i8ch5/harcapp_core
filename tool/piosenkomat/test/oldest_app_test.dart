@@ -120,33 +120,38 @@ void main() {
     expect(c.submission.isOldApp, isTrue);
     expect(c.submission.shape, EmailShape.oldest,
         reason: 'po rozkładzie kształtów poznasz, kiedy wolno skasować czytnik');
-    expect(c.labels, contains(kLabelOldAppToReply));
+    expect(c.labels, contains(kLabelReplyOldApp));
   });
 
   test('komu już odpisano, ten nie wraca do kolejki odpowiedzi', () {
-    // Wątek cofnięty przez `reopen`: `old-app/replied` zostało na mejlu.
-    final m = ContribMessage(
-      id: 'stara1',
-      body: _mejl(_songJson),
-      subject: 'Piosenka własna',
-      from: 'Jan Testowy <jan.testowy@example.com>',
-      date: DateTime(2021, 5, 1),
-      labels: const {kLabelOldAppReplied},
-    );
-    expect(m.hasSongLabel, isFalse,
-        reason: '`old-app/replied` to znacznik o nadawcy, nie wyłącza z kolejki');
-    final c = classify(m, book: SongBook.empty);
+    // Wątek cofnięty przez `reopen`: etykiety zeszły, ale nasza odpowiedź
+    // w wątku została — `scan` wie o niej z etykiety wątku `SENT`.
+    final m = _wiadomosc(_mejl(_songJson));
+    final c = classifyBatch([m], book: SongBook.empty, answeredThreads: {m.threadId}).single;
     expect(c.submission.isOldApp, isTrue);
-    expect(c.labels, isNot(contains(kLabelOldAppToReply)),
+    expect(c.submission.weReplied, isTrue);
+    expect(c.labels, isNot(contains(kLabelReplyOldApp)),
         reason: 'drugi blok o starej apce nikomu nie jest potrzebny');
   });
 
-  test('kolejka nie wyklucza po `old-app/replied`, wyklucza po reszcie', () {
-    expect(isSongLabel(kLabelOldAppReplied), isFalse);
-    expect(isAnySongLabel(kLabelOldAppReplied), isTrue);
+  test('nasza wiadomość w wątku też znaczy „odpisano”', () {
+    final ours = ContribMessage(
+      id: 'nasza',
+      threadId: 'stara1',
+      body: 'Zaktualizuj apkę',
+      from: 'HarcApp <$kInboxEmail>',
+      date: DateTime(2021, 5, 2),
+    );
+    final c = classifyBatch([_wiadomosc(_mejl(_songJson)), ours], book: SongBook.empty).single;
+    expect(c.submission.weReplied, isTrue);
+    expect(c.labels, isNot(contains(kLabelReplyOldApp)));
+  });
+
+  test('kolejka wyklucza po każdej etykiecie song/*', () {
     expect(isSongLabel(kLabelDone), isTrue);
-    expect(isSongLabel(kLabelOldAppToReply), isTrue);
-    expect(kQueueQuery, isNot(contains(labelQueryName(kLabelOldAppReplied))));
+    expect(isSongLabel(kLabelReplyOldApp), isTrue);
+    expect(isSongLabel(kLabelWaitingForAuthor), isTrue);
     expect(kQueueQuery, contains(labelQueryName(kLabelDone)));
+    expect(kQueueQuery, contains(labelQueryName(kLabelReplyOldApp)));
   });
 }

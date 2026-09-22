@@ -59,7 +59,7 @@ void main() {
     yt.piosenkomatData = yt.piosenkomatData!.copyWith(
         accepted: () => false, replyToContributor: () => 'Dorzuć YouTube i wejdzie.');
     final changes = _changes(plan, reviewed, proposed);
-    expect(changes['yt']!.$1, [kLabelContributorToAsk]);
+    expect(changes['yt']!.$1, [kLabelReplyReviewNote]);
     expect(changes['yt']!.$1, isNot(contains(kLabelRejectedAfterReview)));
   });
 
@@ -70,7 +70,7 @@ void main() {
     ok.piosenkomatData = ok.piosenkomatData!
         .copyWith(replyToContributor: () => 'Dodałem, popraw literówkę.');
     final changes = _changes(plan, reviewed, proposed);
-    expect(changes['ok']!.$1, [kLabelReady, kLabelContributorToAsk],
+    expect(changes['ok']!.$1, [kLabelReady, kLabelReplyReviewNote],
         reason: 'bez zarzutu, ale z uwagą — musi ruszyć mimo „ready-to-add”');
     expect(changes['ok']!.$2, kReviewLabels);
   });
@@ -89,7 +89,7 @@ void main() {
     expect(changes['yt2']!.$2, changes['yt']!.$2);
   });
 
-  test('raport liczy nowe, poprawki, odrzuty i sam mejl', () async {
+  test('raport liczy nowe, poprawki, odrzuty i „rzuć okiem”', () async {
     final book = bookWith([sampleSong(title: 'W apce', lyrics: 'Ala ma kota\nA kot ma Ale')]);
     final report = formatRunReport(classifyBatch([
       msgFrom(await completeEmail(song: sampleSong(title: 'Czysta', lyrics: 'Zupelnie inne slowa')), id: 'ok'),
@@ -105,8 +105,8 @@ void main() {
     expect(report, contains('  bez zarzutu   1'));
     expect(report, contains('  z uwagami     1'));
     expect(report, contains('POPRAWKI        1'));
-    expect(report, contains('  już w apce    1'));
-    expect(report, contains('SAM MEJL        1'));
+    expect(report, contains('  już w apce    2'), reason: 'identyczna z dopiskiem też jest odrzutem');
+    expect(report, contains('RZUĆ OKIEM      1'));
     expect(report, contains('missing-youtube'));
     expect(report, contains('Kształt mejla:'));
     expect(report, contains('fenced'));

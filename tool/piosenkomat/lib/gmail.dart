@@ -30,6 +30,12 @@ class GmailMailbox {
   final GmailApi _api;
   final Map<String, String> _idByName = {};
   final Map<String, String> _nameById = {};
+  /// Wątek każdego mejla, który przeszedł przez [listIds] — `messages.list`
+  /// oddaje go za darmo, a pytanie o niego osobno kosztuje `get`.
+  final Map<String, String> _threadById = {};
+
+  /// Wątek mejla, jeśli znamy go z [listIds].
+  String? knownThreadOf(String messageId) => _threadById[messageId];
 
   /// Gmail rozlicza limit w **jednostkach**, nie w requestach: 6000 na minutę
   /// na użytkownika. Metody kosztują różnie — `messages.get` i `attachments.get`
@@ -163,7 +169,10 @@ class GmailMailbox {
                 pageToken: page,
               ),
           cost: _costList);
-      ids.addAll([for (final m in resp.messages ?? const <Message>[]) m.id!]);
+      for (final m in resp.messages ?? const <Message>[]) {
+        ids.add(m.id!);
+        if (m.threadId case final t?) _threadById[m.id!] = t;
+      }
       page = resp.nextPageToken;
     } while (page != null && !(newest && limit != null && ids.length >= limit));
 
@@ -304,7 +313,7 @@ class GmailMailbox {
   }
 
   /// Kasuje szkic. Po pomyłkowym `--draft`: nic nie poszło w świat, więc
-  /// wystarczy sprzątnąć szkic i zdjąć „$kLabelOldAppDrafted”.
+  /// wystarczy sprzątnąć szkic.
   Future<void> deleteDraft(String draftId) async {
     await _call(() => _api.users.drafts.delete('me', draftId),
         cost: _costDraftCreate);
@@ -422,7 +431,7 @@ class GmailMailbox {
   /// etykieta dorobiona ręcznie poza taksonomią byłaby dla nas niewidzialna.
   Future<Map<String, Set<String>>> songLabelsByMessage() async {
     final out = <String, Set<String>>{};
-    for (final name in _idByName.keys.where(isAnySongLabel).toList()) {
+    for (final name in _idByName.keys.where(isSongLabel).toList()) {
       for (final id in await listIds('label:${labelQueryName(name)}')) {
         out.putIfAbsent(id, () => {}).add(name);
       }

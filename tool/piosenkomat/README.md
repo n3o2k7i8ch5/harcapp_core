@@ -50,7 +50,7 @@ dopisek autora, czyli wszystko nad zamrożoną belką `Akceptacja regulaminu`.
 
 - **`format`** to wersja **całego protokołu** (znacznik w temacie + kontrakt
   treści + kształt pliku), nie samego pliku. Wersja nowsza niż znana nie jest
-  zgadywana: zgłoszenie dostaje `needs-review/unknown-format`.
+  zgadywana: zgłoszenie dostaje `rejected/unknown-format` + `have-a-look`.
 - **`digest`** liczy się z całego pliku po wyrzuceniu samego pola `digest`,
   z postaci kanonicznej (klucze posortowane, bez białych znaków, UTF-8).
   Nie broni przed połamaniem linii — od tego jest sam załącznik, który idzie
@@ -120,7 +120,7 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
    `./piosenkomat label reviewed --push`  
    ####
    Piosenka z ✓ → `ready-to-add`; z ✗ albo skasowana →
-   `rejected/after-review`; z odpowiedzią → `contributor/to-ask`.
+   `rejected/after-review`; z odpowiedzią → `reply/review-note`.
    ####
    Szczegóły i warunki STOP → [Przegląd i prepare](#przegląd-i-prepare).
    ####
@@ -186,8 +186,8 @@ wieszasz. Bez katalogu czyści **całą skrzynkę**, także przebiegi, po który
 już przepadł — i także paczkę, która czeka jeszcze u Ciebie na przegląd; jeśli ma
 ruszyć jeden przebieg, podaj katalog (wypisze, ile mejli z `auto` siedzi poza nim).
 Nie rusza `added` (piosenka jest w apce, zdjęcie etykiet wepchnęłoby ją z powrotem
-do kolejki) ani `old-app/replied` (jedyny ślad, że autor dostał odpowiedź) — `--force`,
-żeby i one zeszły.
+do kolejki) — `--force`, żeby i te zeszły. Tego, że autor dostał już odpowiedź,
+`unlabel` nie zgubi: to nie etykieta, tylko nasza wysłana wiadomość.
 
 ## Etykiety
 
@@ -196,6 +196,8 @@ song/
 ├── ready-to-add              w pliku, czeka na domknięcie (albo Twoja ręczna)
 ├── added                     koniec
 ├── correction                ZNACZNIK: zgłoszenie to poprawka — wgrywasz podmianą, nie dodaniem
+├── have-a-look               ZNACZNIK obok odrzutu: piosenkomat skończył, ale rzuć okiem —
+│                             identyczna z dopiskiem albo zepsuty załącznik; zdejmujesz Ty
 ├── unparsable                nie dało się sparsować; poza needs-review, nieprzeczytane,
 │                             etykieta tylko po to, żeby mejl nie wracał do `scan`
 ├── add-contributor           „wpisać osobę dodającą do apki”, tylko Ty
@@ -203,14 +205,16 @@ song/
 │   ├── already-in-app        automat: piosenka IDENTYCZNA (każde pole) z tą w apce
 │   ├── duplicate             automat: identyczna z nowszym zgłoszeniem w paczce
 │   ├── after-review          automat zaproponował, Ty wyrzuciłeś na stronie (`label reviewed`)
+│   ├── corrupted-data        automat: załącznik nie do wczytania (suma, JSON, obcięcie,
+│   │                         zero zgłoszeń); zawsze z `have-a-look`
+│   ├── unknown-format        automat: plik w wersji protokołu nowszej niż zna to narzędzie;
+│   │                         zawsze z `have-a-look`
 │   ├── no-chords             tylko Ty
 │   ├── silly                 tylko Ty (kiedyś LLM)
 │   └── too-niche             tylko Ty (kiedyś LLM)
-├── needs-review/             automat spasował; podkategoria na każdą uwagę
+├── needs-review/             piosenka w pliku kandydatów, czeka na `label reviewed`;
+│                             podkategoria na każdą uwagę
 │   ├── user-message          ktoś coś dopisał
-│   ├── identical-in-app      identyczna z apką, ale autor coś napisał (dopisek albo
-│   │                         propozycja poprawki) — piosenki nie ma w pliku;
-│   │                         po `label scanned` przeczytane
 │   ├── duplicate-in-app      ten sam tytuł / podobny tekst do piosenki w apce
 │   ├── duplicate-in-batch    kolizja z innym zgłoszeniem z tej samej paczki
 │   ├── undeclared-correction ta sama piosenka co w apce, inne chwyty albo drobiazgi —
@@ -218,18 +222,13 @@ song/
 │   ├── correction-problem    poprawka, ale w apce nie ma czego poprawiać
 │   ├── missing-data          brak YouTube, chwytów lub tytułu
 │   ├── no-consent            brak zgody albo nie wiadomo, kto zgłosił
-│   ├── corrupted-data        załącznik zgłoszenia nie do wczytania: suma, JSON, obcięcie,
-│   │                         zero zgłoszeń — etykieta leci już przy `scan`
-│   ├── unknown-format        plik w wersji protokołu nowszej niż zna to narzędzie
 │   ├── skipped-submissions   w pliku było kilka zgłoszeń, weszło pierwsze
 │   └── several-contributors  kilka kart osób dodających — wkład przypisz ręcznie
-├── contributor/              napisałeś coś osobie dodającej przy przeglądzie
-│   ├── to-ask                kolejka: mejl do wysłania (`reply`)
-│   └── asked                 poszło, przeczytane; czekamy na odpowiedź (`reopen`)
-├── old-app/                  ZNACZNIK: mejl z najstarszej, nierozwijanej apki
-│   ├── to-reply              kolejka: autorowi trzeba odpisać (`reply`)
-│   ├── drafted               szkic czeka w wątku na Twoje oko; wisi OBOK to-reply
-│   └── replied               odpowiedź poszła
+├── reply/                    kolejka `reply`: autorowi trzeba odpisać, jeden mejl na autora
+│   ├── old-app               mejl z najstarszej apki — blok „zaktualizuj apkę”
+│   └── review-note           Twój tekst z przeglądu („Odpowiedź do autora”)
+├── waiting-for-author        tekst z przeglądu poszedł, przeczytane; czekamy na
+│                             odpowiedź autora (`reopen`)
 └── auto                      ZNACZNIK: tę etykietę stanu nadał automat
 ```
 
@@ -240,13 +239,14 @@ song/
   piosenki (nie z cytatu) od nadawcy ≠ skrzynka HarcApp; gdy takiej nie ma poza
   pierwszą — pierwsza. Pozostałe wiadomości to dopiski. Etykiety idą na cały wątek.
 - `song/auto` zawsze towarzyszy jednej etykiecie stanu. Twoje decyzje to te bez `auto`.
-- Jedyny wyjątek od „`song/*` = poza kolejką”: `old-app/replied`. To znacznik
-  o nadawcy (dostał już odpowiedź), nie stan zgłoszenia — wątek z samą tą
-  etykietą jest w kolejce.
-- **Przeczytane** = sprawa zamknięta: `added` i każde `rejected/*`,
-  `needs-review/identical-in-app` po `label scanned`, oraz `contributor/asked`
-  po wysłanej odpowiedzi. Pozostałe `needs-review/*`, `unparsable`,
-  `old-app/to-reply` i `contributor/to-ask` zostają nieprzeczytane.
+- Czy autor dostał już odpowiedź, mówi Gmail, nie etykieta: nasza wysłana
+  wiadomość w wątku (`SENT`), a przy starej apce — cokolwiek wysłanego do
+  nadawcy (`in:sent to:…`), bo `reply` odpisuje raz na autora. Tak samo szkic:
+  czeka w wątku, Gmail go pokazuje.
+- **Przeczytane** = sprawa zamknięta: `added` i każde `rejected/*` (także
+  z `have-a-look` — listą jest etykieta, nie nieprzeczytane), oraz
+  `waiting-for-author` po wysłanej odpowiedzi. Pozostałe `needs-review/*`,
+  `unparsable` i `reply/*` zostają nieprzeczytane.
 
 | Co | Zapytanie |
 |---|---|
@@ -279,15 +279,15 @@ ukryte tytuły, autorzy, kompozytorzy, wykonawcy, data, YouTube, tagi się róż
 
 | poziom | reguła | `new` → | `correction` → |
 |---|---|---|---|
-| `identical` | `SameText ∧ SameChords ∧ ¬MetadataDiff` — **każde pole równe** | `rejected/already-in-app`; z dopiskiem → `needs-review/identical-in-app` | to samo, a „dopiskiem” jest też propozycja poprawki |
+| `identical` | `SameText ∧ SameChords ∧ ¬MetadataDiff` — **każde pole równe** | `rejected/already-in-app`; z dopiskiem + `have-a-look` | to samo, a „dopiskiem” jest też propozycja poprawki |
 | `sameSong` | tytuł, tekst ≥ 90%, chwyty, ale coś inne | uwaga `metadata-differ-from-app` | kandydat bez uwagi |
 | `sameTextDifferentChords` | tytuł, tekst ≥ 90%, inne chwyty | uwaga `chords-differ-from-app` | kandydat |
 | `sameTitleDifferentText` | ten sam tytuł, tekst < 90% | uwaga `same-title-in-app` | kandydat |
 | `similarText` | inny tytuł, tekst ≥ 50% | uwaga `similar-text-in-app` | kandydat; cel zgadnięty tylko przy tekście ≥ 90%, inaczej `no-target-in-app` |
 | brak | — | czysty kandydat | uwaga `no-target-in-app` |
 
-**Identyczna nigdy nie idzie do pliku** — to jedyny przypadek, gdzie automat sam
-odrzuca. Wszystko mniej niż identyczne idzie do `candidates-new` albo
+**Identyczna nigdy nie idzie do pliku** — automat sam ją odrzuca, z dopiskiem
+czy bez. Wszystko mniej niż identyczne idzie do `candidates-new` albo
 `candidates-correction`: bez uwag → `ready-to-add`, z uwagami → `needs-review`
 plus podkategoria na każdą uwagę.
 
@@ -366,9 +366,9 @@ oba zginęły — po kolei id piosenki, tytuł, tekst):
 | przełącznik | odpowiedź do osoby dodającej | mejl dostaje |
 |---|---|---|
 | ✓ (albo brak flagi) | — | `ready-to-add` (poprawka: + `song/correction`) |
-| ✓ | jest | `ready-to-add` + `contributor/to-ask` |
+| ✓ | jest | `ready-to-add` + `reply/review-note` |
 | ✗ | — | `rejected/after-review`, przeczytane |
-| ✗ | jest | `contributor/to-ask`, **nie** `rejected` — piosenka może wrócić z chwytami |
+| ✗ | jest | `reply/review-note`, **nie** `rejected` — piosenka może wrócić z chwytami |
 | skasowana z pliku | — | `rejected/after-review`, przeczytane |
 
 **Przełącznik zastępuje kasowanie, nie zabrania go.** Brak flagi znaczy
@@ -405,8 +405,7 @@ mejl wychodzi czasem długo później, a tekst siedzi w `decisions.json`. Katalo
 skasowany za wcześnie = mejl bez Twojego tekstu.
 
 Dlatego to komenda, a nie `rm -rf`: `clean` pyta Gmaila, czy mejle przebiegu
-nie wiszą w `ready-to-add`, `needs-review/*`, `contributor/to-ask` ani
-`old-app/to-reply`. Wiszą → odmawia i wypisuje, ile czego (`--force` przechodzi).
+nie wiszą w `ready-to-add`, `needs-review/*` ani `reply/*`. Wiszą → odmawia i wypisuje, ile czego (`--force` przechodzi).
 Nie wiszą → katalog leci, bo cały ślad jest już w Gmailu.
 
 ## Pytania do osób dodających
@@ -417,10 +416,10 @@ w edytorze piszesz odpowiedź od razu przy piosence, a narzędzie pamięta reszt
 
 ```bash
 # 1. w edytorze: gasisz przełącznik + „Brakuje chwytów. Dorzuć je i wejdzie.”
-./piosenkomat label reviewed --push   # → song/contributor/to-ask, nieprzeczytane
+./piosenkomat label reviewed --push   # → song/reply/review-note, nieprzeczytane
 ./piosenkomat reply --draft --push    # szkic w wątku
 #  …przejrzysz w Gmailu…
-./piosenkomat reply --push            # → song/contributor/asked, przeczytane
+./piosenkomat reply --push            # → song/waiting-for-author, przeczytane
 #  …osoba dodająca odpisuje z chwytami…
 ./piosenkomat reopen --push           # zdejmuje song/*, wątek wraca do kolejki
 ./piosenkomat scan                    # przesiewa go jak nowe zgłoszenie
@@ -428,16 +427,15 @@ w edytorze piszesz odpowiedź od razu przy piosence, a narzędzie pamięta reszt
 
 **Dlaczego `reopen` w ogóle istnieje:** kolejka to „inbox bez `song/*`, po
 wątkach”, a odpowiedź wpada do wątku, który etykiety już ma — więc
-`scan` sam by jej nie zobaczył. `reopen` szuka wątków z `contributor/asked`,
+`scan` sam by jej nie zobaczył. `reopen` szuka wątków z `waiting-for-author`,
 w których po naszej ostatniej wiadomości pojawiła się przychodząca (szkice
 się nie liczą), i zdejmuje z nich `song/*`. Wątek wraca do kolejki i przechodzi
 normalny przesiew, tyle że z nowymi chwytami.
 
-Dwa wyjątki. Wątek z `added` **pomija** — piosenka jest w apce, „dzięki” od
-autora to nie zgłoszenie, a poprawkę przysyła się z apki jako nową.
-`old-app/replied` **zostawia** — to jedyna etykieta `song/*`, która nie
-wyłącza z kolejki, bo mówi o nadawcy, nie o zgłoszeniu; dzięki niej `scan`
-nie zapyta o starą apkę drugi raz.
+Wątek z `added` **pomija** — piosenka jest w apce, „dzięki” od autora to nie
+zgłoszenie, a poprawkę przysyła się z apki jako nową. O starą apkę `scan` drugi
+raz nie zapyta: do tego autora już coś wysłaliśmy, a blok o starej apce idzie
+w każdej odpowiedzi takiemu autorowi.
 
 **Mejl jest składany, nie pisany raz.** Treść to funkcja tego, co mamy do
 powiedzenia (`composeContribReply` w `harcapp_core`): powitanie + Twoje uwagi +
@@ -460,12 +458,12 @@ Najstarsza, nierozwijana wersja apki wysyła mejle w innym formacie: temat
 `Piosenka "X"`, JSON owinięty w `{"o!_id": {…}}`, bez zgody na regulamin, bo go
 jeszcze nie było. Treść bywa kompletna, więc **stary format nie blokuje importu**:
 `consentVersion` dostaje sentinel `brak (stara apka)` (bez uwagi `no-consent`;
-do wygrepowania, gdybyś chciał doprosić o zgodę), a mejl etykietę `song/old-app/to-reply`.
+do wygrepowania, gdybyś chciał doprosić o zgodę), a mejl etykietę `song/reply/old-app`
+— chyba że autor dostał już od nas odpowiedź (w tym albo innym wątku).
 
-Ta etykieta jest kolejką odpowiedzi i jedynym źródłem prawdy, komu nie odpisano.
-Jedna odpowiedź na autora, nie na mejl: kto przysłał pięć piosenek, dostaje jeden
-mejl w najnowszym wątku, a `to-reply` schodzi ze wszystkich pięciu i wchodzi
-`replied`. Przerwany przebieg dokańcza powtórzenie komendy. Treść:
+Razem z `reply/review-note` to kolejka odpowiedzi i jedyne źródło prawdy, komu
+nie odpisano. Jedna odpowiedź na autora, nie na mejl: kto przysłał pięć piosenek,
+dostaje jeden mejl w najnowszym wątku, a `reply/*` schodzi ze wszystkich pięciu. Przerwany przebieg dokańcza powtórzenie komendy. Treść:
 `oldestFormatReplyMessage` z `harcapp_core`. `-n` ogranicza liczbę autorów
 (Gmail tnie ok. 500 mejli na dobę).
 
@@ -489,14 +487,14 @@ od razu — tego nie robisz. Kolejność:
 ./piosenkomat reply --push           # wysyła gotowe szkice, z Twoimi poprawkami
 ```
 
-Rozmyśliłeś się? `./piosenkomat reply --undraft --push` kasuje szkice i zdejmuje
-`drafted`. Nikt nic nie dostał, więc autorzy zostają w kolejce `to-reply`.
+Rozmyśliłeś się? `./piosenkomat reply --undraft --push` kasuje szkice. Nikt nic
+nie dostał, więc autorzy zostają w kolejce `reply/*`.
 
-`--draft` wiesza `old-app/drafted` **obok** `to-reply`, nie zamiast: skoro nikt
-nic nie dostał, autor zostaje w kolejce. Drugi `--draft` pomija tych, co szkic
-już mają — po etykiecie, a gdyby ta zeszła (`unlabel`), po samym szkicu
-w wątku. Wysyłka idzie przez `drafts.send`, więc to, co poprawisz w Gmailu,
-leci w świat; obie etykiety schodzą i wchodzi `replied`.
+`--draft` etykiet nie rusza: skoro nikt nic nie dostał, autor zostaje w kolejce.
+Kto ma szkic, narzędzie pyta Gmaila — w którymkolwiek wątku autora, nie tylko
+w najnowszym, więc drugi `--draft` nie założy drugiego szkicu, tylko przeliczy
+istniejący. Wysyłka idzie przez `drafts.send`, więc to, co poprawisz w Gmailu,
+leci w świat; `reply/*` schodzi.
 
 Szkic skasowany albo wysłany ręcznie z Gmaila też jest obsłużony: jeśli w wątku
 jest już nasza wysłana wiadomość, `reply --push` uznaje za odpisane i tylko

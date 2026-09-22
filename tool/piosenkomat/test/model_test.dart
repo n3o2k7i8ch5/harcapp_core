@@ -33,8 +33,10 @@ void main() {
         kLabelRejectedInBook);
     expect(stateLabelFor(classifiedWith([], target: Target.rejectDuplicate)),
         kLabelRejectedDuplicate);
-    expect(stateLabelsFor(classifiedWith([], target: Target.mailOnlyIdentical, userMessage: true)),
-        [kLabelToReview, ReviewKind.identicalInApp.label, ReviewKind.userMessage.label]);
+    expect(stateLabelsFor(classifiedWith([SongIssue.corruptedSubmissionFile], target: Target.rejectBrokenFile)),
+        [kLabelRejectedCorruptedData]);
+    expect(stateLabelsFor(classifiedWith([SongIssue.unknownSubmissionFormat], target: Target.rejectBrokenFile)),
+        [kLabelRejectedUnknownFormat]);
     expect(stateLabelsFor(classifiedWith([], target: Target.unparsable)), [kLabelUnparsable]);
     expect(
       stateLabelsFor(classifiedWith(
@@ -63,14 +65,13 @@ void main() {
     ]) {
       expect(kQueueQuery, contains(czlon));
     }
-    // Nie łapie: cokolwiek już otagowanego — poza znacznikiem o nadawcy.
+    // Nie łapie: cokolwiek już otagowanego.
     for (final etykieta in [
       kLabelAuto, kLabelReady, kLabelDone, kLabelUnparsable, kLabelCorrection,
-      kLabelOldAppToReply, ReviewKind.duplicateInApp.label, 'song/rejected/too-niche',
+      kLabelReplyOldApp, ReviewKind.duplicateInApp.label, 'song/rejected/too-niche',
     ]) {
       expect(kQueueQuery, contains('-label:${labelQueryName(etykieta)}'));
     }
-    expect(kQueueQuery, isNot(contains(labelQueryName(kLabelOldAppReplied))));
 
     expect(isReadyByTool({kLabelReady, kLabelAuto}), isTrue);
     expect(isReadyByTool({kLabelReady}), isFalse);
@@ -87,43 +88,27 @@ void main() {
     expect(isClosedLabel(kLabelUnparsable), isFalse,
         reason: 'niesparsowalne masz zobaczyć w skrzynce');
     expect(isClosedLabel(ReviewKind.missingData.label), isFalse);
-    expect(isClosedLabel(ReviewKind.identicalInApp.label), isFalse,
-        reason: 'to nie odrzut — piosenki nie ma w pliku, ale etykieta zostaje');
-    expect(isClosedLabel(kLabelOldAppToReply), isFalse);
-    expect(isClosedLabel(kLabelContributorToAsk), isFalse);
-    expect(isClosedLabel(kLabelContributorAsked), isFalse,
-        reason: 'asked nie jest werdyktem — przeczytane zdejmuje `reply`');
+    expect(isClosedLabel(kLabelRejectedCorruptedData), isTrue);
+    expect(isClosedLabel(kLabelHaveALook), isFalse,
+        reason: 'znacznik, nie werdykt');
+    expect(isClosedLabel(kLabelReplyOldApp), isFalse);
+    expect(isClosedLabel(kLabelReplyReviewNote), isFalse);
+    expect(isClosedLabel(kLabelWaitingForAuthor), isFalse,
+        reason: 'czekanie na autora nie jest werdyktem — przeczytane zdejmuje `reply`');
     expect(isClosedLabel(kLabelReady), isFalse);
     expect(isClosedLabel(kLabelAuto), isFalse);
 
-    expect(clearsUnread(kLabelDone), isTrue);
-    expect(clearsUnread(kLabelRejectedInBook), isTrue);
-    expect(clearsUnread(ReviewKind.identicalInApp.label), isTrue,
-        reason: 'piosenki nie ma w pliku — po etykietach nie wisi w nieprzeczytanych');
-    expect(clearsUnread(kLabelToReview), isFalse);
-    expect(clearsUnread(ReviewKind.missingData.label), isFalse);
   });
 
-  test('po odpowiedzi do osoby dodającej mejl jest przeczytany', () {
-    final (add, remove) =
-        labelsAfterReply(oldApp: false, askedContributor: true);
-    expect(add, [kLabelContributorAsked]);
-    expect(remove, [
-      kLabelOldAppToReply,
-      kLabelContributorToAsk,
-      kLabelOldAppDrafted,
-      'UNREAD',
-    ]);
+  test('po tekście z przeglądu mejl jest przeczytany i czeka na autora', () {
+    final (add, remove) = labelsAfterReply(sentReviewNote: true);
+    expect(add, [kLabelWaitingForAuthor]);
+    expect(remove, [kLabelReplyOldApp, kLabelReplyReviewNote, 'UNREAD']);
 
     // Sama stara apka: piosenka może wciąż czekać na przegląd.
-    final onlyOld = labelsAfterReply(oldApp: true, askedContributor: false);
-    expect(onlyOld.$1, [kLabelOldAppReplied]);
-    expect(onlyOld.$2, isNot(contains('UNREAD')));
-
-    // Obie sprawy w jednym mejlu: pytanie poszło, nieprzeczytane schodzi.
-    final both = labelsAfterReply(oldApp: true, askedContributor: true);
-    expect(both.$1, [kLabelOldAppReplied, kLabelContributorAsked]);
-    expect(both.$2, contains('UNREAD'));
+    final onlyOld = labelsAfterReply(sentReviewNote: false);
+    expect(onlyOld.$1, isEmpty, reason: 'o odpowiedzi mówi sam wątek (SENT)');
+    expect(onlyOld.$2, [kLabelReplyOldApp, kLabelReplyReviewNote]);
   });
 
   test('isSongSubmission: po temacie albo znaczniku w treści', () {
