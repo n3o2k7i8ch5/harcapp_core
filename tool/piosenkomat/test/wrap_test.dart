@@ -117,7 +117,7 @@ void _correction() {
     final got = classify(msgFrom(withText), book: SongBook.empty);
     expect(got.submission.isCorrection, isTrue);
     expect(got.submission.correctionMessage, 'zła tonacja');
-    expect(got.target, Target.candidateCorrection);
+    expect(got.destination, Destination.candidateCorrection);
   });
 }
 

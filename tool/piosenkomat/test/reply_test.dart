@@ -9,7 +9,7 @@ void main() {
 
     expect(note, startsWith(kReplyGreeting));
     expect(note, endsWith(kReplyClosing));
-    expect(note, contains('brakuje chwytów'));
+    expect(note, contains('missingUnits chwytów'));
     expect(note, contains(kOneSongPerMailReplyBlock));
     expect(note, isNot(contains('NIE JEST JUŻ ROZWIJANA')));
 
@@ -17,7 +17,7 @@ void main() {
     final oldApp =
         proposeContribReplyNote([SongIssue.missingChords], oldApp: true)!;
     expect(oldApp, contains(kOldAppReplyBlock));
-    expect(oldApp.indexOf('brakuje chwytów'),
+    expect(oldApp.indexOf('missingUnits chwytów'),
         lessThan(oldApp.indexOf(kOldAppReplyBlock)));
     expect(oldApp, endsWith(kReplyClosing));
 
@@ -37,22 +37,22 @@ void main() {
 
   test('uwaga idzie do autora dosłownie, nic się nie dokleja', () {
     final note = proposeContribReplyNote([SongIssue.missingChords])!;
-    expect(composeContribReply(notes: [note]), note);
+    expect(composeContribReply(reviewNotes: [note]), note);
 
     // Nawet gdy wołający prosi o bloki: uwaga jest już całym mejlem, a autor
     // ma dostać dokładnie to, co było widać w polu.
     expect(
-        composeContribReply(notes: [note], oldApp: true, oneSongPerMail: true),
+        composeContribReply(reviewNotes: [note], oldApp: true, oneSongPerMail: true),
         note);
 
     // Kilka piosenek jednego autora → jeden mejl ze wszystkimi uwagami.
-    final many = composeContribReply(notes: ['Pierwsza.', 'Druga.'])!;
+    final many = composeContribReply(reviewNotes: ['Pierwsza.', 'Druga.'])!;
     expect(many, contains('Pierwsza.'));
     expect(many, contains('Druga.'));
 
     // Nie ma o czym pisać — żadnego pustego szkicu.
     expect(composeContribReply(), isNull);
-    expect(composeContribReply(notes: ['  ']), isNull);
+    expect(composeContribReply(reviewNotes: ['  ']), isNull);
     expect(composeContribReply(oneSongPerMail: true), isNull,
         reason: 'sama prośba to za mało, żeby zaczepiać autora');
   });
@@ -80,8 +80,8 @@ void main() {
   });
 
   test('co wypada przy przeliczeniu — do pokazania, nie do zgubienia', () {
-    final przed = composeContribReply(notes: ['Brakuje chwytów.'])!;
-    final po = composeContribReply(notes: ['Brakuje YouTube.'])!;
+    final przed = composeContribReply(reviewNotes: ['Brakuje chwytów.'])!;
+    final po = composeContribReply(reviewNotes: ['Brakuje YouTube.'])!;
     expect(paragraphsDroppedBy(przed, po), ['Brakuje chwytów.']);
     expect(paragraphsDroppedBy(przed, przed), isEmpty);
   });

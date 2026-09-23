@@ -64,7 +64,7 @@ dopisek autora, czyli wszystko nad zamrożoną belką `Akceptacja regulaminu`.
 - Kolejka łapie nowy format dwiema drogami — znacznik `[hrcpsng/app]` w temacie
   **albo** rozszerzenie załącznika — bo temat jest edytowalny przez człowieka.
 
-Stare kształty mejla (`fenced`, `legacy`, `oldest`) działają dalej, obok.
+Stare kształty mejla (`fenced`, `legacy`, `old-app`) działają dalej, obok.
 `report.txt` pokazuje ich rozkład; po nim poznasz, kiedy wolno skasować stare
 czytniki — a schodzą **razem** ze starymi członami kolejki, jednym ruchem.
 
@@ -169,7 +169,8 @@ Bez szkicu nie wysyłasz.
 | `label reviewed [KATALOG]` | pokazuje decyzje z `reviewed-*` | czyta |
 | `label added [KATALOG]` | pokazuje, co domknie z przebiegu | czyta |
 | `label added --all` | cała skrzynka, nie tylko przebieg | czyta |
-| `unlabel [KATALOG]` | pokazuje, co cofnie | czyta |
+| `unlabel [KATALOG]` | pokazuje, co cofnie na mejlach przebiegu | czyta |
+| `unlabel --all` | cała skrzynka, nie tylko przebieg | czyta |
 | `reply [KATALOG] [-n N]` | kto z przebiegu czeka na „zaktualizuj apkę” | czyta |
 | `reply --draft [KATALOG]` | szkice do przejrzenia zamiast wysyłki | czyta |
 | `reply --undraft [KATALOG]` | kasuje szkice, nikomu nic nie wysyłając | czyta |
@@ -182,9 +183,10 @@ Bez szkicu nie wysyłasz.
 Komendy na przebiegu bez `KATALOG` biorą **ostatni** z `out/`.
 
 `unlabel` cofa wszystko, co nadał automat — poznaje po `song/auto`, którego Ty nie
-wieszasz. Bez katalogu czyści **całą skrzynkę**, także przebiegi, po których `out/`
-już przepadł — i także paczkę, która czeka jeszcze u Ciebie na przegląd; jeśli ma
-ruszyć jeden przebieg, podaj katalog (wypisze, ile mejli z `auto` siedzi poza nim).
+wieszasz. Jak każda komenda na przebiegu bierze katalog, a bez niego ostatni
+przebieg (wypisze, ile mejli z `auto` siedzi poza nim). **Całą skrzynkę** czyści
+dopiero `--all` — także przebiegi, po których `out/` już przepadł, i paczkę, która
+czeka jeszcze u Ciebie na przegląd.
 Nie rusza `added` (piosenka jest w apce, zdjęcie etykiet wepchnęłoby ją z powrotem
 do kolejki) — `--force`, żeby i te zeszły. Tego, że autor dostał już odpowiedź,
 `unlabel` nie zgubi: to nie etykieta, tylko nasza wysłana wiadomość.
@@ -204,7 +206,7 @@ song/
 │   ├── already-in-app        automat: piosenka IDENTYCZNA (każde pole) z tą w apce
 │   ├── duplicate             automat: identyczna z nowszym zgłoszeniem w paczce
 │   ├── after-review          automat zaproponował, Ty wyrzuciłeś na stronie (`label reviewed`)
-│   ├── corrupted-data        automat: załącznik nie do wczytania (suma, JSON, obcięcie,
+│   ├── corrupted-file        automat: załącznik nie do wczytania (suma, JSON, obcięcie,
 │   │                         zero zgłoszeń); zawsze z `have-a-look`
 │   ├── unknown-format        automat: plik w wersji protokołu nowszej niż zna to narzędzie;
 │   │                         zawsze z `have-a-look`
@@ -326,21 +328,23 @@ tagi widzi użytkownik apki):
 
 ```json
 "piosenkomat": {
-  "kind": "correction", "legacy_app_used": true, "sent_at": "…",
+  "kind": "correction", "old_app": true, "sent_at": "…",
   "app_version": "2.4.1",
   "sender": "jan@example.com", "sender_is_contributor": false,
-  "user_message": "…", "correction_message": "…",
+  "conversation": [{"text": "…", "at": "…"}, {"text": "…", "ours": true}],
+  "correction_message": "…",
   "correction_target": "o!_plonie_ognisko",
   "thread_id": "17a6…", "run": "import-…",
-  "issues": [{"issue": "no-consent"}]
+  "issues": [{"issue": "no-consent"}],
+  "accepted": false, "review_note": "…"
 }
 ```
 
-`legacy_app_used` zastąpiło dawne pole `source`, które miało dwie wartości
-(`current-app` / `old-app`), czyli nie mówiło **skąd**, tylko **jak stare**.
-Stare pliki przebiegu dalej się czytają: `source: old-app` wchodzi jako
-`legacy_app_used`. Skąd przyszło zgłoszenie, mówi `source` w **pliku
-zgłoszenia**; rozpoznany kształt mejla widać w rozkładzie w `report.txt`.
+`conversation` to rozmowa z wątku: dopiski autora i Twoje odpowiedzi (`ours`).
+`accepted` i `review_note` dopisuje edytor przy przeglądzie: przełącznik
+„wchodzi” i tekst z pola „Odpowiedź do autora”. Skąd przyszło zgłoszenie, mówi
+`source` w **pliku zgłoszenia**; rozpoznany kształt mejla widać w rozkładzie
+w `report.txt`.
 
 `correction_target` — którą piosenkę w apce poprawia — bierze się **z mejla**:
 nowy format niesie `corrected_song_id` w pliku zgłoszenia, starszy w sekcji

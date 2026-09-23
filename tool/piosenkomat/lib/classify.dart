@@ -28,7 +28,7 @@ class SubmissionFileRead {
   const SubmissionFileRead({this.file, this.error});
 
   /// Czy mejl niósł plik zgłoszenia — uszkodzony też się liczy.
-  bool get isFile => file != null || error != null;
+  bool get hasFile => file != null || error != null;
 }
 
 SubmissionFileRead readSubmissionFile(ContribMessage m) {
@@ -44,7 +44,25 @@ SubmissionFileRead readSubmissionFile(ContribMessage m) {
 /// Zgłoszenie ze strony — poza zakresem narzędzia. Po znaczniku w temacie,
 /// a gdy plik jest, po polu `source`: temat człowiek może zmienić.
 bool isWebSubmission(ContribMessage m) =>
-    m.isWebSubmission || (readSubmissionFile(m).file?.source?.isWeb ?? false);
+    m.hasWebSubjectMarker || (readSubmissionFile(m).file?.source?.isWeb ?? false);
+
+/// Co z pobranej kolejki idzie do przebiegu. Bezpieczniki na wypadek, gdyby
+/// query przepuściło coś już otagowanego albo coś, co nie jest zgłoszeniem
+/// piosenki — takich mejli nie dotykamy. Zgłoszenia ze strony liczymy osobno,
+/// żeby powiedzieć o nich wprost.
+({int web, List<ContribMessage> songs}) partitionQueue(List<ContribMessage> fetched) {
+  var web = 0;
+  final songs = <ContribMessage>[];
+  for (final m in fetched) {
+    if (m.isHandled) continue;
+    if (isWebSubmission(m)) {
+      web++;
+    } else if (m.isSongSubmission) {
+      songs.add(m);
+    }
+  }
+  return (web: web, songs: songs);
+}
 
 // ---------------------------------------------------------------------------
 // Krok 1: wiadomości → zgłoszenia (cechy)
@@ -53,14 +71,15 @@ bool isWebSubmission(ContribMessage m) =>
 /// Cała paczka: wiadomości składają się w zgłoszenia (po wątku), każde
 /// dostaje cechy, potem porównanie z apką i między sobą, na końcu decyzja.
 ///
-/// [answeredThreads]: wątki, których autor dostał już od nas odpowiedź —
+/// [weRepliedThreads]: wątki, których autor dostał już od nas odpowiedź —
 /// `scan` wie to z etykiet wątku (`SENT`) i, przy starej apce, z tego, czy
 /// coś do nadawcy wysłaliśmy; nie ze swoich wiadomości, bo kolejka łapie
-/// tylko przychodzące.
+/// tylko przychodzące. [run] trafia do śladu w piosence.
 List<Classified> classifyBatch(
   List<ContribMessage> messages, {
   required SongBook book,
-  Set<String> answeredThreads = const {},
+  Set<String> weRepliedThreads = const {},
+  String? run,
 }) {
   final byThread = <String, List<ContribMessage>>{};
   for (final m in messages) {
@@ -69,13 +88,12 @@ List<Classified> classifyBatch(
   var submissions = [
     for (final e in byThread.entries)
       buildSubmission(e.value,
-          book: book, answered: answeredThreads.contains(e.key)),
+          book: book, weReplied: weRepliedThreads.contains(e.key)),
   ];
   submissions = matchWithinBatch(submissions);
   final out = [for (final s in submissions) Classified(s, decide(s))];
-  // Ślad w piosence od razu — `scan` dopisze jeszcze nazwę przebiegu.
   for (final c in out) {
-    c.song?.piosenkomatData = c.piosenkomatData();
+    c.song?.piosenkomatData = c.piosenkomatData(run: run);
   }
   return out;
 }
@@ -88,12 +106,12 @@ List<Classified> classifyBatch(
 Submission buildSubmission(
   List<ContribMessage> thread, {
   required SongBook book,
-  bool answered = false,
+  bool weReplied = false,
 }) {
   final ordered = [...thread]..sort((a, b) => _dateOf(a).compareTo(_dateOf(b)));
   final own = [
     for (final m in ordered.skip(1))
-      if (m.hasOwnSongCode && _senderOf(m) != null) m,
+      if (m.hasOwnSongCode && _senderFromHeader(m) != null) m,
   ];
   final rep = own.isNotEmpty ? own.last : ordered.first;
 
@@ -104,7 +122,7 @@ Submission buildSubmission(
   final parsed = switch (file.file) {
     final f? => ParsedContribEmail.fromSubmissionFile(f, rep.body,
         senderEmail: emailFromHeader(rep.from)),
-    null => file.isFile ? null : _tryParse(rep),
+    null => file.hasFile ? null : _tryParseEmailBody(rep),
   };
 
   final song = parsed?.song;
@@ -119,23 +137,21 @@ Submission buildSubmission(
     for (final m in ordered)
       if (m.id != rep.id)
         if (_userMessageOf(m) case final extra?)
-          PiosenkomatMessage(extra, at: m.date, mine: _isOurs(m)),
+          PiosenkomatMessage(extra, at: m.date, isOurs: _isOurs(m)),
   ]..sort((a, b) => (a.at ?? DateTime(0)).compareTo(b.at ?? DateTime(0)));
 
   final shape = _shapeOf(file, parsed);
-  final oldApp = shape == EmailShape.oldest;
+  final oldApp = shape == EmailShape.oldApp;
   // Gdy plik jest, rodzaj bierze się z niego i tylko z niego. Bez pliku —
   // z tematu albo z niepustego bloku poprawki.
   final isCorrection = parsed?.declaredKind != null
       ? parsed!.declaredKind == SubmissionKind.correction
       : (rep.subject ?? '').contains(kCorrectionSubject) ||
           extractCorrectionMessage(rep.body) != null;
-  final sender = parsed == null ? _senderOf(rep) : _sender(rep, parsed);
-  final consent = oldApp
-      ? kOldAppRulesVersion
-      : (parsed?.acceptedRulesVersion?.trim().isEmpty ?? true)
-          ? null
-          : parsed!.acceptedRulesVersion!.trim();
+  final sender =
+      parsed == null ? _senderFromHeader(rep) : _senderWithBodyFallback(rep, parsed);
+  final rules = parsed?.acceptedRulesVersion?.trim();
+  final consent = oldApp ? kOldAppRulesVersion : (rules?.isEmpty ?? true) ? null : rules;
 
   final senderIsContributor = parsed?.senderIsContributor ?? true;
   final contributorCards =
@@ -147,7 +163,7 @@ Submission buildSubmission(
         date: rep.date,
         // Stare formaty nie niosą `sender_is_contributor`, więc zostaje im
         // heurystyka „doklej nadawcę do jedynej karty”.
-        attachSender: !file.isFile || (senderIsContributor && contributorCards < 2));
+        attachSender: !file.hasFile || (senderIsContributor && contributorCards < 2));
   }
 
   final profile = song == null ? null : SongProfile(song);
@@ -161,29 +177,27 @@ Submission buildSubmission(
   // przerobiona z cudzej i wysłana jako nowa też niesie `corrected_song_id`,
   // a to żadna deklaracja — poprawką jest wyłącznie to, co autor wysłał
   // jako poprawkę.
-  final declaredTarget = isCorrection
-      ? (parsed?.correctedSongId ?? song?.correctedSongId)?.trim()
-      : null;
-  final declared = declaredTarget == null || declaredTarget.isEmpty
-      ? null
-      : declaredTarget;
-  final appMatch = profile == null
-      ? null
-      : (declared == null ? null : book.matchTo(declared, profile)) ??
-          book.closest(profile);
+  final declaredRaw =
+      isCorrection ? (parsed?.correctedSongId ?? song?.correctedSongId)?.trim() : null;
+  final declared = (declaredRaw?.isEmpty ?? true) ? null : declaredRaw;
+  AppMatch? appMatch;
+  if (profile != null) {
+    if (declared != null) appMatch = book.matchTo(declared, profile);
+    appMatch ??= book.closest(profile);
+  }
   return Submission(
     threadId: rep.threadId,
     message: rep,
     messages: ordered,
     kind: isCorrection ? SubmissionKind.correction : SubmissionKind.newSong,
-    legacyApp: oldApp,
+    isOldApp: oldApp,
     shape: shape,
     origin: parsed?.origin,
     appVersion: parsed?.appVersion,
     senderIsContributor: senderIsContributor,
     skippedSubmissions: parsed?.skippedSubmissions ?? 0,
-    severalContributors: file.isFile && contributorCards > 1,
-    weReplied: answered || ordered.any(_isOurs),
+    hasSeveralContributors: file.hasFile && contributorCards > 1,
+    weReplied: weReplied || ordered.any(_isOurs),
     fileError: file.error?.kind,
     fileErrorMessage: file.error?.message,
     title: title,
@@ -199,17 +213,17 @@ Submission buildSubmission(
   );
 }
 
-ParsedContribEmail? _tryParse(ContribMessage m) {
+ParsedContribEmail? _tryParseEmailBody(ContribMessage m) {
   try {
-    return parseSubmission(m);
+    return parseEmailBody(m);
   } catch (_) {
     return null;
   }
 }
 
 EmailShape _shapeOf(SubmissionFileRead file, ParsedContribEmail? parsed) {
-  if (file.isFile) return EmailShape.file;
-  if (parsed?.isOldestFormat ?? false) return EmailShape.oldest;
+  if (file.hasFile) return EmailShape.file;
+  if (parsed?.isOldestFormat ?? false) return EmailShape.oldApp;
   return (parsed?.isNewFormat ?? true) ? EmailShape.fenced : EmailShape.legacy;
 }
 
@@ -226,10 +240,8 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
   final out = {for (final s in subs) s.threadId: s};
 
   BatchMatch matchOf(Submission a, Submission b, {bool newest = true}) => BatchMatch(
-        threadId: b.threadId,
-        msgId: b.message.id,
+        messageId: b.message.id,
         title: b.title,
-        sentAt: b.sentAt,
         similarities: compare(profiles[a.threadId]!, profiles[b.threadId]!),
         isNewestInBatch: newest,
         correctionTarget: b.correctionTarget,
@@ -325,14 +337,14 @@ Decision decide(Submission s) {
   if (song == null) {
     // Zepsuty załącznik ma znany powód: odrzut, nie worek „nie umiem odczytać”.
     return fileIssues.isEmpty
-        ? const Decision(Target.unparsable)
-        : Decision(Target.rejectBrokenFile, issues: fileIssues);
+        ? const Decision(Destination.unparsable)
+        : Decision(Destination.rejectCorruptedFile, issues: fileIssues);
   }
 
   final batch = s.batchMatch;
   if (batch != null && batch.level == MatchLevel.identical && !batch.isNewestInBatch) {
-    return Decision(Target.rejectDuplicate,
-        detail: 'nowsza wersja w [${batch.msgId}]');
+    return Decision(Destination.rejectDuplicate,
+        detail: 'nowsza wersja w [${batch.messageId}]');
   }
 
   final app = s.appMatch;
@@ -341,7 +353,7 @@ Decision decide(Submission s) {
   if (appLevel == MatchLevel.identical) {
     // Identyczna to odrzut — nowa czy poprawka, z dopiskiem czy bez. Gdy autor
     // coś napisał, odrzut dostaje znacznik „rzuć okiem” (`Classified.haveALook`).
-    return Decision(Target.rejectAlreadyInApp, detail: app!.detail);
+    return Decision(Destination.rejectAlreadyInApp, detail: app!.detail);
   }
 
   final issues = <PiosenkomatIssue>[...fileIssues];
@@ -353,7 +365,7 @@ Decision decide(Submission s) {
     add(SongIssue.skippedSubmissions,
         'w pliku było ${s.skippedSubmissions + 1} zgłoszeń, weszło pierwsze');
   }
-  if (s.severalContributors) {
+  if (s.hasSeveralContributors) {
     add(SongIssue.severalContributors, 'przypisz wkład ręcznie');
   }
   if (s.consentVersion == null) add(SongIssue.noConsent);
@@ -365,7 +377,7 @@ Decision decide(Submission s) {
   if (s.isCorrection) {
     final declared = s.declaredCorrectionTarget;
     if (declared == null) {
-      if (app != null && app.guessable) {
+      if (app != null && app.isGuessable) {
         // Zgłoszenie nie powiedziało, co poprawia — wolno zgadnąć, ale domysł
         // musi być widoczny: podmiana idzie po id, więc to Ty decydujesz,
         // czy narzędzie trafiło.
@@ -375,7 +387,7 @@ Decision decide(Submission s) {
         add(SongIssue.noTargetInApp,
             app == null ? 'nic w apce nie pasuje tytułem ani tekstem' : 'za mało podobne: ${app.detail}');
       }
-    } else if (!s.declaredTargetInBook) {
+    } else if (!s.isDeclaredTargetInApp) {
       // Albo autor poprawiał własną piosenkę, albo id zdążyło się zmienić.
       // Bez celu: podmiana po nieistniejącym id to nie podmiana.
       add(SongIssue.noTargetInApp, 'apka wskazała „$declared”, a nie ma go w śpiewniku');
@@ -393,7 +405,7 @@ Decision decide(Submission s) {
         add(SongIssue.sameTitleInBatch, batch.detail);
       }
     }
-    return Decision(Target.candidateCorrection, issues: issues);
+    return Decision(Destination.candidateCorrection, issues: issues);
   }
 
   // Nowa piosenka.
@@ -431,7 +443,7 @@ Decision decide(Submission s) {
         add(SongIssue.sameTitleInBatch, batch.detail);
     }
   }
-  return Decision(Target.candidateNew, issues: issues);
+  return Decision(Destination.candidateNew, issues: issues);
 }
 
 // ---------------------------------------------------------------------------
@@ -442,7 +454,7 @@ DateTime _dateOf(ContribMessage m) => m.date ?? DateTime(0);
 int _cmpDate(DateTime? a, DateTime? b) => (a ?? DateTime(0)).compareTo(b ?? DateTime(0));
 
 /// Ile linijek tekstu zostało bez chwytów — bez tego „brak chwytów” nie mówi,
-/// czy brakuje wszystkiego, czy jednej zwrotki.
+/// czy missingUnits wszystkiego, czy jednej zwrotki.
 String _chordsDetail(SongRaw song) {
   final lines = song.text.split('\n').where((l) => l.trim().isNotEmpty).length;
   return 'linijek tekstu: $lines, chwytów: brak';
@@ -457,7 +469,7 @@ String? _userMessageOf(ContribMessage m) {
   if (m.submissionAttachment != null) return extractSubmissionUserMessage(m.body);
   if (m.hasOwnSongCode) {
     try {
-      return parseSubmission(m).userMessage;
+      return parseEmailBody(m).userMessage;
     } catch (_) {
       return null;
     }
@@ -478,7 +490,7 @@ bool _isOurs(ContribMessage m) => emailFromHeader(m.from) == kInboxEmail;
 final _quoteHeaderRe = RegExp(
     r'^(On .+ wrote:|W dniu .+ napisał(a)?:|.+<.+@.+> napisał(a)?:|Dnia .+ napisał(a)?:)$');
 
-String? _senderOf(ContribMessage m) {
+String? _senderFromHeader(ContribMessage m) {
   final e = emailFromHeader(m.from);
   return e == null || e == kInboxEmail ? null : e;
 }
@@ -499,7 +511,7 @@ final _songBareRe = RegExp(r'(### Kod piosenki:\s*\n\s*)(\{[\s\S]*)$');
 ///  2. treść jak jest,
 ///  3. treść z liniami JSON-a sklejonymi spacją,
 ///  4. treść z liniami JSON-a sklejonymi bez spacji.
-ParsedContribEmail parseSubmission(ContribMessage m) {
+ParsedContribEmail parseEmailBody(ContribMessage m) {
   final region = _songRegion(m.body);
   final attachment = m.songAttachment == null ? null : _attachmentSong(m.songAttachment!);
   final candidates = <String?>[
@@ -547,8 +559,8 @@ class _SongRegion {
   final int start;
   final int end;
   final String json;
-  final bool fenced;
-  const _SongRegion(this.start, this.end, this.json, this.fenced);
+  final bool isFenced;
+  const _SongRegion(this.start, this.end, this.json, this.isFenced);
 }
 
 _SongRegion? _songRegion(String body) {
@@ -575,7 +587,7 @@ String _replaceRegion(String body, _SongRegion r, String json) =>
 /// miała — inaczej mejl z nowszej apki bez fence'a dostawałby otoczkę od nas
 /// i wyglądał na stary format.
 String _attachmentJson(_SongRegion region, (String, Map<String, dynamic>) attachment) =>
-    !region.fenced && _oldestWrapperRe.hasMatch(region.json)
+    !region.isFenced && _oldestWrapperRe.hasMatch(region.json)
         ? jsonEncode({attachment.$1: attachment.$2})
         : jsonEncode(attachment.$2);
 
@@ -612,7 +624,7 @@ void _trimEmailRefs(SongRaw song) {
 }
 
 /// Nadawca z nagłówka; skrzynka HarcApp się nie liczy. Awaryjnie z treści.
-String? _sender(ContribMessage m, ParsedContribEmail parsed) {
+String? _senderWithBodyFallback(ContribMessage m, ParsedContribEmail parsed) {
   for (final candidate in [
     emailFromHeader(m.from),
     parsed.senderEmail?.trim().toLowerCase(),
@@ -627,7 +639,7 @@ String? _sender(ContribMessage m, ParsedContribEmail parsed) {
 /// To samo, co `_save()` w EmailSongDialog: zgoda, data, kontrybutor, id.
 ///
 /// Robimy to także dla zgłoszeń z uwagami — one też jadą do pliku, a bez
-/// `email_msg_id` przegląd nie wiedziałby, z którego mejla wróciła piosenka.
+/// `email_thread_id` przegląd nie wiedziałby, z którego wątku wróciła piosenka.
 void _enrich(
   SongRaw song,
   ParsedContribEmail parsed, {

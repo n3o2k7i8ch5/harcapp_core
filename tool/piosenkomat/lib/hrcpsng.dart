@@ -33,13 +33,18 @@ SongBook loadBook(String path) {
 void assignUniqueIds(List<SongRaw> songs) {
   final taken = <String>{};
   for (final song in songs) {
-    var id = song.id;
-    for (var n = 2; taken.contains(id); n++) {
-      id = '${song.id}~$n';
-    }
-    song.id = id;
-    taken.add(id);
+    song.id = _uniqueId(song.id, taken.contains);
+    taken.add(song.id);
   }
+}
+
+/// [id], a gdy zajęte — `id~2`, `id~3`…
+String _uniqueId(String id, bool Function(String) taken) {
+  var unique = id;
+  for (var n = 2; taken(unique); n++) {
+    unique = '$id~$n';
+  }
+  return unique;
 }
 
 /// [withPiosenkomatData] wypuszcza do pliku uwagi piosenkomatu. Włączamy je
@@ -50,11 +55,7 @@ String encodeHrcpsng(List<SongRaw> songs, {bool withPiosenkomatData = false}) {
   final official = <String, dynamic>{};
   var index = 0;
   for (final song in sorted) {
-    var id = song.id;
-    for (var n = 2; official.containsKey(id); n++) {
-      id = '${song.id}~$n';
-    }
-    official[id] = {
+    official[_uniqueId(song.id, official.containsKey)] = {
       'song': song.toApiJsonMap(
           withId: false, withPiosenkomatData: withPiosenkomatData),
       'index': index++,
@@ -108,25 +109,17 @@ String defaultSongsDbPath() {
 /// W środku: `candidates-new.hrcpsng`, `candidates-correction.hrcpsng`,
 /// `reviewed-*.hrcpsng`, `plan.json`, `report.txt`, a po przeglądzie
 /// `decisions.json` i `people.dart`.
-String defaultOutDir() {
+String defaultRunDir() {
   final t = DateTime.now().toIso8601String().substring(0, 19).replaceAll(':', '');
   return p.join('out', 'import-$t');
 }
 
 /// Ostatni przebieg w `out/`, czyli ten, o który chodzi w 99% wywołań.
-/// Katalogi mają w nazwie datę ISO, więc porządek alfabetyczny to porządek czasu.
-String? latestOutDir({String root = 'out'}) {
-  final dir = Directory(root);
-  if (!dir.existsSync()) return null;
-  final runs = [
-    for (final e in dir.listSync())
-      if (e is Directory && p.basename(e.path).startsWith('import-')) e.path,
-  ]..sort();
-  return runs.isEmpty ? null : runs.last;
-}
+String? latestRunDir({String root = 'out'}) => allRunDirs(root: root).lastOrNull;
 
-/// Wszystkie katalogi przebiegów, od najstarszego.
-List<String> allOutDirs({String root = 'out'}) {
+/// Wszystkie katalogi przebiegów, od najstarszego. Katalogi mają w nazwie
+/// datę ISO, więc porządek alfabetyczny to porządek czasu.
+List<String> allRunDirs({String root = 'out'}) {
   final dir = Directory(root);
   if (!dir.existsSync()) return const [];
   return [
@@ -141,18 +134,18 @@ List<String> allOutDirs({String root = 'out'}) {
 /// z tym, co w apce. Wracają też osobno — jeden plik wczytany, jeden
 /// wyeksportowany.
 /// Same nazwy są w rdzeniu — używa ich też edytor na stronie.
-String candidatesPathIn(String outDir, SubmissionKind kind) =>
-    p.join(outDir, candidatesFileName(kind));
-String reviewedPathIn(String outDir, SubmissionKind kind) =>
-    p.join(outDir, reviewedFileName(kind));
-/// Po `prepare`: bez pola `piosenkomat`, gotowe do wklejenia w `all_songs`.
-String finalPathIn(String outDir, SubmissionKind kind) =>
-    p.join(outDir, finalFileName(kind));
-String planPathIn(String outDir) => p.join(outDir, 'plan.json');
-String reportPathIn(String outDir) => p.join(outDir, 'report.txt');
-String peoplePathIn(String outDir) => p.join(outDir, 'people.dart');
+String candidatesPathIn(String runDir, SubmissionKind kind) =>
+    p.join(runDir, candidatesFileName(kind));
+String reviewedPathIn(String runDir, SubmissionKind kind) =>
+    p.join(runDir, reviewedFileName(kind));
+/// Po `prepare`: bez pola `piosenkomat`, readyByTool do wklejenia w `all_songs`.
+String finalPathIn(String runDir, SubmissionKind kind) =>
+    p.join(runDir, finalFileName(kind));
+String planPathIn(String runDir) => p.join(runDir, 'plan.json');
+String reportPathIn(String runDir) => p.join(runDir, 'report.txt');
+String peoplePathIn(String runDir) => p.join(runDir, 'people.dart');
 /// Ślad przeglądu: co weszło, co wypadło.
-String decisionsPathIn(String outDir) => p.join(outDir, 'decisions.json');
+String decisionsPathIn(String runDir) => p.join(runDir, 'decisions.json');
 
 /// Zdejmuje ślad piosenkomatu przed wgraniem do `all_songs`. Przy poprawkach
 /// **ustawia `id = correction_target`**: w apce piosenki są referencjonowane

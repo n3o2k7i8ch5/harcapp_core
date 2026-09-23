@@ -51,7 +51,7 @@ void main() {
     final data = back.piosenkomatData!;
     expect(data.threadId, c.submission.threadId);
     expect(data.kind, SubmissionKind.newSong);
-    expect(data.legacyAppUsed, isFalse);
+    expect(data.isOldApp, isFalse);
     expect(data.userMessage, 'hej');
     expect(data.run, 'import-x');
     expect(data.sentAt, c.submission.sentAt);
@@ -111,7 +111,7 @@ void main() {
   });
 
   test('nazwy plików przebiegu', () {
-    final dir = defaultOutDir();
+    final dir = defaultRunDir();
     expect(p.split(dir), hasLength(2));
     expect(p.split(dir).first, 'out');
     expect(p.basename(dir), startsWith('import-'));

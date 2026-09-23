@@ -120,7 +120,7 @@ SongBook bookWith(List<SongRaw> songs) => SongBook(songs);
 /// Sam zestaw uwag, bez mejla — do testów etykiet.
 Classified classifiedWith(
   List<SongIssue> issues, {
-  Target target = Target.candidateNew,
+  Destination destination = Destination.candidateNew,
   SubmissionKind kind = SubmissionKind.newSong,
   bool userMessage = false,
 }) {
@@ -135,7 +135,7 @@ Classified classifiedWith(
       song: SongRaw.empty(id: 'x'),
       conversation: userMessage ? const [PiosenkomatMessage('hej')] : const [],
     ),
-    Decision(target, issues: [for (final i in issues) PiosenkomatIssue(i)]),
+    Decision(destination, issues: [for (final i in issues) PiosenkomatIssue(i)]),
   );
 }
 

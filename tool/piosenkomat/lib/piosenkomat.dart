@@ -5,5 +5,6 @@ export 'hrcpsng.dart';
 export 'model.dart';
 export 'people.dart';
 export 'plan.dart';
+export 'report.dart';
 export 'review.dart';
 export 'similarity.dart';

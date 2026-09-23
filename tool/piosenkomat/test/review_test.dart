@@ -33,9 +33,9 @@ Future<(LabelPlan, List<SongRaw>)> _run() async {
 
 /// Stan po `scan` widziany oczami `label reviewed`: co automat zaproponował
 /// i piosenki, z których da się złożyć plik zwrotny.
-Future<(List<ProposedSong>, List<SongRaw>)> _scanned() async {
+Future<(List<ReviewCandidate>, List<SongRaw>)> _scanned() async {
   final (plan, songs) = await _run();
-  return (collectProposed(plan, roundTrip(songs), _new), songs);
+  return (collectCandidates(plan, roundTrip(songs), _new), songs);
 }
 
 void main() {
@@ -57,9 +57,9 @@ void main() {
 
   test('nic nie usunięte: wszystko wchodzi', () async {
     final (proposed, songs) = await _scanned();
-    final result = reviewDiff(kind: _new, proposed: proposed, reviewed: roundTrip(songs));
+    final result = reviewDiff(kind: _new, candidates: proposed, reviewed: roundTrip(songs));
     expect(result.accepted.length, 2);
-    expect(result.rejected, isEmpty);
+    expect(result.removed, isEmpty);
     expect(result.mustStop, isFalse);
   });
 
@@ -69,9 +69,9 @@ void main() {
     // Zostawiona pastylka nic nie zmienia: piosenka jest → wchodzi.
     kept.single.piosenkomatData = const PiosenkomatData(
         threadId: 'm1', issues: [PiosenkomatIssue(SongIssue.missingYoutube)]);
-    final result = reviewDiff(kind: _new, proposed: proposed, reviewed: kept);
+    final result = reviewDiff(kind: _new, candidates: proposed, reviewed: kept);
     expect(result.acceptedThreads, ['m1']);
-    expect(result.rejected.single.title, 'Druga');
+    expect(result.removed.single.title, 'Druga');
     expect(result.rejectedThreads, ['m2']);
   });
 
@@ -79,9 +79,9 @@ void main() {
     final (proposed, songs) = await _scanned();
     final edited = roundTrip(songs);
     edited.first.title = 'Pierwsza (poprawiony tytuł)';
-    final result = reviewDiff(kind: _new, proposed: proposed, reviewed: edited);
-    expect(result.rejected, isEmpty);
-    expect(result.accepted.map((m) => m.kind), everyElement(MatchKind.threadId));
+    final result = reviewDiff(kind: _new, candidates: proposed, reviewed: edited);
+    expect(result.removed, isEmpty);
+    expect(result.accepted.map((m) => m.matchedBy), everyElement(MatchedBy.threadId));
   });
 
   test('strona zgubiła pole piosenkomat → id wątku z contributorData', () async {
@@ -90,9 +90,9 @@ void main() {
     for (final s in stripped) {
       s.piosenkomatData = null;
     }
-    final result = reviewDiff(kind: _new, proposed: proposed, reviewed: stripped);
+    final result = reviewDiff(kind: _new, candidates: proposed, reviewed: stripped);
     expect(result.accepted, hasLength(2));
-    expect(result.accepted.map((m) => m.kind), everyElement(MatchKind.threadId));
+    expect(result.accepted.map((m) => m.matchedBy), everyElement(MatchedBy.threadId));
   });
 
   test('zgubione oba id → dopasowanie po id piosenki', () async {
@@ -103,8 +103,8 @@ void main() {
       s.contributorData = null;
     }
     final first = stripped.firstWhere((s) => s.title == 'Pierwsza');
-    final result = reviewDiff(kind: _new, proposed: proposed, reviewed: [first]);
-    expect(result.accepted.single.kind, MatchKind.songId);
+    final result = reviewDiff(kind: _new, candidates: proposed, reviewed: [first]);
+    expect(result.accepted.single.matchedBy, MatchedBy.songId);
     expect(result.rejectedThreads, ['m2']);
   });
 
@@ -113,7 +113,7 @@ void main() {
     final obca = sampleSong(title: 'Dorzucona recznie', lyrics: 'Zupelnie inne slowa tutaj');
     obca.id = 'o!_dorzucona_recznie';
     final result = reviewDiff(
-        kind: _new, proposed: proposed, reviewed: roundTrip([...songs, obca]));
+        kind: _new, candidates: proposed, reviewed: roundTrip([...songs, obca]));
     expect(result.foreign.map((s) => s.title), ['Dorzucona recznie']);
     expect(result.mustStop, isTrue);
   });
@@ -122,7 +122,7 @@ void main() {
     final (proposed, songs) = await _scanned();
     final back = roundTrip(songs);
     back.first.piosenkomatData = const PiosenkomatData(kind: _corr, threadId: 'm1');
-    final result = reviewDiff(kind: _new, proposed: proposed, reviewed: back);
+    final result = reviewDiff(kind: _new, candidates: proposed, reviewed: back);
     expect(result.wrongKind, hasLength(1));
     expect(result.mustStop, isTrue);
   });
@@ -133,44 +133,35 @@ void main() {
       msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(lyrics: 'Ala ma kota\nA kot ma Ale\nX')), id: 'a'),
       msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(lyrics: 'Ala ma kota\nA kot ma Ale\nY')), id: 'b'),
     ], book: book);
-    expect(items.map((c) => c.target), everyElement(Target.candidateCorrection));
+    expect(items.map((c) => c.destination), everyElement(Destination.candidateCorrection));
     final songs = [for (final c in items) c.song!..piosenkomatData = c.piosenkomatData()];
     assignUniqueIds(songs);
     final plan = LabelPlan.fromClassified(items);
-    final proposed = collectProposed(plan, roundTrip(songs), _corr);
-    final result = reviewDiff(kind: _corr, proposed: proposed, reviewed: roundTrip(songs));
+    final proposed = collectCandidates(plan, roundTrip(songs), _corr);
+    final result = reviewDiff(kind: _corr, candidates: proposed, reviewed: roundTrip(songs));
     expect(result.duplicateTargets.keys, ['tmp']);
     expect(result.mustStop, isTrue);
     // Zostawiona jedna → OK.
-    final one = reviewDiff(kind: _corr, proposed: proposed, reviewed: roundTrip([songs.first]));
+    final one = reviewDiff(kind: _corr, candidates: proposed, reviewed: roundTrip([songs.first]));
     expect(one.mustStop, isFalse);
     expect(one.acceptedThreads, ['a']);
     expect(one.rejectedThreads, ['b']);
   });
 
-  test('collectProposed filtruje po rodzaju', () async {
+  test('collectCandidates filtruje po rodzaju', () async {
     final items = classifyBatch([
       msgFrom(await completeEmail(song: sampleSong(title: 'Nowa', lyrics: 'Ala ma kota')), id: 'n'),
       msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'Popr', lyrics: 'Wlazl kotek')), id: 'c'),
     ], book: SongBook.empty);
     final plan = LabelPlan.fromClassified(items);
     final songs = [for (final c in items) c.song!];
-    expect(collectProposed(plan, songs, _new).map((p) => p.threadId), ['n']);
-    expect(collectProposed(plan, songs, _corr).map((p) => p.threadId), ['c']);
-  });
-
-  test('plan bez sekcji songs: kręgosłupem jest id wątku w piosenkach', () async {
-    final (plan, songs) = await _run();
-    final stary = LabelPlan(createdAt: plan.createdAt, labelsById: plan.labelsById);
-    final proposed = collectProposed(stary, roundTrip(songs), _new);
-    expect(proposed.map((p) => p.threadId).toSet(), {'m1', 'm2'});
-    final result = reviewDiff(kind: _new, proposed: proposed, reviewed: roundTrip([songs.last]));
-    expect(result.rejectedThreads, ['m1']);
+    expect(collectCandidates(plan, songs, _new).map((p) => p.threadId), ['n']);
+    expect(collectCandidates(plan, songs, _corr).map((p) => p.threadId), ['c']);
   });
 
   test('ślad przeglądu zapisuje decyzje z rodzajem', () async {
     final (proposed, songs) = await _scanned();
-    final result = reviewDiff(kind: _new, proposed: proposed, reviewed: roundTrip([songs.first]));
+    final result = reviewDiff(kind: _new, candidates: proposed, reviewed: roundTrip([songs.first]));
     final path = decisionsPathIn(tempDir().path);
     writeDecisions(path, [result]);
 
@@ -193,10 +184,10 @@ void _verdictTests() {
     second.piosenkomatData =
         second.piosenkomatData!.copyWith(accepted: () => false);
 
-    final r = reviewDiff(kind: _new, proposed: proposed, reviewed: back);
+    final r = reviewDiff(kind: _new, candidates: proposed, reviewed: back);
     expect(r.accepted.map((m) => m.reviewed.title), ['Pierwsza']);
     expect(r.turnedDown.map((m) => m.reviewed.title), ['Druga']);
-    expect(r.rejected, isEmpty, reason: 'nie skasowana, tylko zgaszona');
+    expect(r.removed, isEmpty, reason: 'nie skasowana, tylko zgaszona');
     expect(r.rejectedThreads, ['m2'], reason: 'dla etykiet to jedno i to samo');
     expect(r.mustStop, isFalse);
   });
@@ -206,7 +197,7 @@ void _verdictTests() {
     final back = roundTrip(songs);
     expect(back.every((s) => s.piosenkomatData!.accepted == null), isTrue);
     final r = reviewDiff(
-        kind: _new, proposed: collectProposed(plan, back, _new), reviewed: back);
+        kind: _new, candidates: collectCandidates(plan, back, _new), reviewed: back);
     expect(r.accepted.length, 2);
     expect(r.turnedDown, isEmpty);
   });
@@ -217,12 +208,12 @@ void _verdictTests() {
     final first = back.firstWhere((s) => s.title == 'Pierwsza');
     final second = back.firstWhere((s) => s.title == 'Druga');
     first.piosenkomatData = first.piosenkomatData!
-        .copyWith(replyToContributor: () => 'Dodałem, popraw literówkę.');
+        .copyWith(reviewNote: () => 'Dodałem, popraw literówkę.');
     second.piosenkomatData = second.piosenkomatData!.copyWith(
-        accepted: () => false, replyToContributor: () => 'Brakuje chwytów.');
+        accepted: () => false, reviewNote: () => 'Brakuje chwytów.');
 
-    final r = reviewDiff(kind: _new, proposed: proposed, reviewed: back);
-    expect(r.replies, {
+    final r = reviewDiff(kind: _new, candidates: proposed, reviewed: back);
+    expect(r.reviewNotes, {
       'm1': 'Dodałem, popraw literówkę.',
       'm2': 'Brakuje chwytów.',
     });
@@ -232,7 +223,7 @@ void _verdictTests() {
     // Ślad przeglądu niesie i werdykt, i odpowiedź: stąd bierze je `reply`.
     final path = '${tempDir().path}/decisions.json';
     writeDecisions(path, [r]);
-    expect(readReplies(path), {
+    expect(readReviewNotes(path), {
       'm1': 'Dodałem, popraw literówkę.',
       'm2': 'Brakuje chwytów.',
     });
@@ -242,12 +233,12 @@ void _verdictTests() {
     final (_, songs) = await _run();
     final pierwsza = songs.firstWhere((s) => s.title == 'Pierwsza');
     pierwsza.piosenkomatData = pierwsza.piosenkomatData!
-        .copyWith(accepted: () => false, replyToContributor: () => 'Dorzuć chwyty.');
+        .copyWith(accepted: () => false, reviewNote: () => 'Dorzuć chwyty.');
     final back = roundTrip(songs);
     final first = back.firstWhere((s) => s.title == 'Pierwsza');
     expect(first.piosenkomatData!.accepted, isFalse);
     expect(first.piosenkomatData!.goesIn, isFalse);
-    expect(first.piosenkomatData!.replyToContributor, 'Dorzuć chwyty.');
+    expect(first.piosenkomatData!.reviewNote, 'Dorzuć chwyty.');
     expect(back.firstWhere((s) => s.title == 'Druga').piosenkomatData!.goesIn,
         isTrue);
   });

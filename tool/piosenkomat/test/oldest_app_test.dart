@@ -45,20 +45,20 @@ void main() {
   });
 
   test('parsuje się i jest rozpoznana jako stara apka', () {
-    final parsed = parseSubmission(_wiadomosc(_mejl(_songJson)));
+    final parsed = parseEmailBody(_wiadomosc(_mejl(_songJson)));
     expect(parsed.song.title, 'Testowa stara piosenka');
     expect(parsed.isOldestFormat, isTrue);
     expect(parsed.song.youtubeVideoId, 'dQw4w9WgXcQ');
   });
 
   test('treść połamana przez klienta pocztowego', () {
-    final parsed = parseSubmission(_wiadomosc(hardWrap(_mejl(_songJson))));
+    final parsed = parseEmailBody(_wiadomosc(hardWrap(_mejl(_songJson))));
     expect(parsed.song.title, 'Testowa stara piosenka');
     expect(textWords(parsed.song.text), contains('zwrotki'));
   });
 
   test('nagłówek powitalny przełamany w środku', () {
-    final parsed = parseSubmission(_wiadomosc(
+    final parsed = parseEmailBody(_wiadomosc(
         _mejl(_songJson, powitanie: 'Dzięki za chęć dzielenia się\nswoimi piosenkami!')));
     expect(parsed.isOldestFormat, isTrue);
   });
@@ -68,7 +68,7 @@ void main() {
         .split('\n')
         .map((l) => '> $l')
         .join('\n');
-    final parsed = parseSubmission(_wiadomosc('Dzięki!\n\n$cytat'));
+    final parsed = parseEmailBody(_wiadomosc('Dzięki!\n\n$cytat'));
     expect(parsed.song.title, 'Testowa stara piosenka');
   });
 
@@ -80,7 +80,7 @@ void main() {
                 '"user_key_ref":""}]'))
         .split('\n')
         .join('<br>');
-    final parsed = parseSubmission(_wiadomosc(html));
+    final parsed = parseEmailBody(_wiadomosc(html));
     expect(parsed.song.title, 'Testowa stara piosenka');
     expect(parsed.song.contribRefs.map((c) => c.emailRef), contains('jan@example.com'));
   });
@@ -88,7 +88,7 @@ void main() {
   test('nawiasy kątowe w tekście piosenki to nie HTML', () {
     final json = _songJson.replaceFirst(
         'Zwrotka pierwsza tej piosenki', 'Refren <powtórz 2x> i Zosia -> Kasia');
-    final parsed = parseSubmission(_wiadomosc(_mejl(json)));
+    final parsed = parseEmailBody(_wiadomosc(_mejl(json)));
     expect(parsed.song.text, contains('Refren <powtórz 2x> i Zosia -> Kasia'));
   });
 
@@ -111,14 +111,14 @@ void main() {
   });
 
   test('`add_pers` napisem zamiast listą nie wywala parsera', () {
-    final parsed = parseSubmission(_wiadomosc(_mejl(_songJson)));
+    final parsed = parseEmailBody(_wiadomosc(_mejl(_songJson)));
     expect(parsed.song.contribRefs.map((c) => c.person?.name), contains('Jan Testowy'));
   });
 
   test('klasyfikacja wiesza kolejkę odpowiedzi do starej apki', () {
     final c = classify(_wiadomosc(_mejl(_songJson)), book: SongBook.empty);
     expect(c.submission.isOldApp, isTrue);
-    expect(c.submission.shape, EmailShape.oldest,
+    expect(c.submission.shape, EmailShape.oldApp,
         reason: 'po rozkładzie kształtów poznasz, kiedy wolno skasować czytnik');
     expect(c.labels, contains(kLabelReplyOldApp));
   });
@@ -127,7 +127,7 @@ void main() {
     // Wątek cofnięty przez `reopen`: etykiety zeszły, ale nasza odpowiedź
     // w wątku została — `scan` wie o niej z etykiety wątku `SENT`.
     final m = _wiadomosc(_mejl(_songJson));
-    final c = classifyBatch([m], book: SongBook.empty, answeredThreads: {m.threadId}).single;
+    final c = classifyBatch([m], book: SongBook.empty, weRepliedThreads: {m.threadId}).single;
     expect(c.submission.isOldApp, isTrue);
     expect(c.submission.weReplied, isTrue);
     expect(c.labels, isNot(contains(kLabelReplyOldApp)),
@@ -148,10 +148,10 @@ void main() {
   });
 
   test('kolejka wyklucza po każdej etykiecie song/*', () {
-    expect(isSongLabel(kLabelDone), isTrue);
+    expect(isSongLabel(kLabelAdded), isTrue);
     expect(isSongLabel(kLabelReplyOldApp), isTrue);
     expect(isSongLabel(kLabelWaitingForAuthor), isTrue);
-    expect(kQueueQuery, contains(labelQueryName(kLabelDone)));
+    expect(kQueueQuery, contains(labelQueryName(kLabelAdded)));
     expect(kQueueQuery, contains(labelQueryName(kLabelReplyOldApp)));
   });
 }

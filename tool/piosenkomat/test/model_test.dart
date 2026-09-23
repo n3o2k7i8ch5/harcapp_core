@@ -27,29 +27,29 @@ void main() {
   });
 
   test('stateLabelsFor: po decyzji, nie po uwagach', () {
-    expect(stateLabelFor(classifiedWith([SongIssue.missingChords])), kLabelToReview);
-    expect(stateLabelFor(classifiedWith([])), kLabelReady);
-    expect(stateLabelFor(classifiedWith([], target: Target.rejectAlreadyInApp)),
-        kLabelRejectedInBook);
-    expect(stateLabelFor(classifiedWith([], target: Target.rejectDuplicate)),
+    expect(stateLabelsFor(classifiedWith([SongIssue.missingChords])).first, kLabelNeedsReview);
+    expect(stateLabelsFor(classifiedWith([])).first, kLabelReadyToAdd);
+    expect(stateLabelsFor(classifiedWith([], destination: Destination.rejectAlreadyInApp)).first,
+        kLabelRejectedAlreadyInApp);
+    expect(stateLabelsFor(classifiedWith([], destination: Destination.rejectDuplicate)).first,
         kLabelRejectedDuplicate);
-    expect(stateLabelsFor(classifiedWith([SongIssue.corruptedSubmissionFile], target: Target.rejectBrokenFile)),
-        [kLabelRejectedCorruptedData]);
-    expect(stateLabelsFor(classifiedWith([SongIssue.unknownSubmissionFormat], target: Target.rejectBrokenFile)),
+    expect(stateLabelsFor(classifiedWith([SongIssue.corruptedSubmissionFile], destination: Destination.rejectCorruptedFile)),
+        [kLabelRejectedCorruptedFile]);
+    expect(stateLabelsFor(classifiedWith([SongIssue.unknownSubmissionFormat], destination: Destination.rejectCorruptedFile)),
         [kLabelRejectedUnknownFormat]);
-    expect(stateLabelsFor(classifiedWith([], target: Target.unparsable)), [kLabelUnparsable]);
+    expect(stateLabelsFor(classifiedWith([], destination: Destination.unparsable)), [kLabelRejectedUnparsable]);
     expect(
       stateLabelsFor(classifiedWith(
           [SongIssue.missingYoutube, SongIssue.missingTitle, SongIssue.hasUserMessage])),
-      [kLabelToReview, ReviewKind.missingData.label, ReviewKind.userMessage.label],
+      [kLabelNeedsReview, NeedsReviewKind.missingData.label, NeedsReviewKind.userMessage.label],
     );
     expect(stateLabelsFor(classifiedWith([SongIssue.similarTextInApp, SongIssue.sameTargetInBatch])),
-        [kLabelToReview, ReviewKind.duplicateInApp.label, ReviewKind.duplicateInBatch.label]);
+        [kLabelNeedsReview, NeedsReviewKind.duplicateInApp.label, NeedsReviewKind.duplicateInBatch.label]);
     expect(stateLabelsFor(classifiedWith([SongIssue.chordsDifferFromApp])),
-        [kLabelToReview, ReviewKind.undeclaredCorrection.label]);
+        [kLabelNeedsReview, NeedsReviewKind.undeclaredCorrection.label]);
     // Znaczniki.
     expect(classifiedWith([], kind: SubmissionKind.correction).labels,
-        [kLabelReady, kLabelCorrection]);
+        [kLabelReadyToAdd, kLabelCorrection]);
   });
 
   test('kolejka: co łapie, czego nie', () {
@@ -67,35 +67,35 @@ void main() {
     }
     // Nie łapie: cokolwiek już otagowanego.
     for (final etykieta in [
-      kLabelAuto, kLabelReady, kLabelDone, kLabelUnparsable, kLabelCorrection,
-      kLabelReplyOldApp, ReviewKind.duplicateInApp.label, 'song/rejected/too-niche',
+      kLabelAuto, kLabelReadyToAdd, kLabelAdded, kLabelRejectedUnparsable, kLabelCorrection,
+      kLabelReplyOldApp, NeedsReviewKind.duplicateInApp.label, 'song/rejected/too-niche',
     ]) {
       expect(kQueueQuery, contains('-label:${labelQueryName(etykieta)}'));
     }
 
-    expect(isReadyByTool({kLabelReady, kLabelAuto}), isTrue);
-    expect(isReadyByTool({kLabelReady}), isFalse);
+    expect(isReadyByTool({kLabelReadyToAdd, kLabelAuto}), isTrue);
+    expect(isReadyByTool({kLabelReadyToAdd}), isFalse);
   });
 
   test('przeczytane tylko przy werdykcie domykającym', () {
-    expect(isClosedLabel(kLabelDone), isTrue);
-    expect(isClosedLabel(kLabelRejectedInBook), isTrue);
+    expect(isClosedLabel(kLabelAdded), isTrue);
+    expect(isClosedLabel(kLabelRejectedAlreadyInApp), isTrue);
     expect(isClosedLabel(kLabelRejectedDuplicate), isTrue);
     expect(isClosedLabel(kLabelRejectedAfterReview), isTrue);
     expect(isClosedLabel('song/rejected/silly'), isTrue);
 
-    expect(isClosedLabel(kLabelToReview), isFalse);
-    expect(isClosedLabel(kLabelUnparsable), isTrue,
+    expect(isClosedLabel(kLabelNeedsReview), isFalse);
+    expect(isClosedLabel(kLabelRejectedUnparsable), isTrue,
         reason: 'odrzut; zobaczyć masz go po `have-a-look`');
-    expect(isClosedLabel(ReviewKind.missingData.label), isFalse);
-    expect(isClosedLabel(kLabelRejectedCorruptedData), isTrue);
+    expect(isClosedLabel(NeedsReviewKind.missingData.label), isFalse);
+    expect(isClosedLabel(kLabelRejectedCorruptedFile), isTrue);
     expect(isClosedLabel(kLabelHaveALook), isFalse,
         reason: 'znacznik, nie werdykt');
     expect(isClosedLabel(kLabelReplyOldApp), isFalse);
     expect(isClosedLabel(kLabelReplyReviewNote), isFalse);
     expect(isClosedLabel(kLabelWaitingForAuthor), isFalse,
         reason: 'czekanie na autora nie jest werdyktem — przeczytane zdejmuje `reply`');
-    expect(isClosedLabel(kLabelReady), isFalse);
+    expect(isClosedLabel(kLabelReadyToAdd), isFalse);
     expect(isClosedLabel(kLabelAuto), isFalse);
 
   });

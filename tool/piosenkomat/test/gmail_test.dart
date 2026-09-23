@@ -21,7 +21,7 @@ void main() {
     expect(allMessageParts(payload), hasLength(5));
     expect(attachmentPart(payload, '.$kSubmissionFileExtension')?.filename,
         kSubmissionFileName);
-    // Gmail pakuje tak mejle z załącznikiem: `payload.parts` ma dwie pozycje,
+    // Gmail pakuje tak messageIds z załącznikiem: `payload.parts` ma dwie pozycje,
     // a treść leży piętro niżej.
     expect(payload.parts, hasLength(2));
   });

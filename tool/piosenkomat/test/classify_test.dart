@@ -17,7 +17,7 @@ void main() {
   test('kompletna nowa piosenka → kandydat bez zarzutu, ze zgodą, datą i nadawcą', () async {
     final got = classify(msgFrom(await completeEmail()), book: SongBook.empty);
     final song = got.song!;
-    expect(got.target, Target.candidateNew);
+    expect(got.destination, Destination.candidateNew);
     expect(got.issues, isEmpty);
     expect(got.submission.kind, SubmissionKind.newSong);
     expect(got.sender, 'jan.testowy@example.com');
@@ -95,17 +95,17 @@ void main() {
     test('odpowiedź w wątku nie jest zarzutem', () async {
       final got = await run(await completeEmail(reply: true));
       expect(got.issues, isEmpty);
-      expect(got.target, Target.candidateNew);
+      expect(got.destination, Destination.candidateNew);
     });
     test('nie da się sparsować → rejected/unparsable, rzuć okiem', () {
       final got = classify(
         ContribMessage(id: 'x', body: 'Cześć, mam pytanie', subject: 'Cześć'),
         book: SongBook.empty,
       );
-      expect(got.target, Target.unparsable);
+      expect(got.destination, Destination.unparsable);
       expect(got.song, isNull);
       expect(got.title, 'Cześć');
-      expect(got.labels, [kLabelUnparsable, kLabelHaveALook]);
+      expect(got.labels, [kLabelRejectedUnparsable, kLabelHaveALook]);
       expect(got.labels.any(isClosedLabel), isTrue, reason: 'odrzut jest przeczytany');
     });
   });
@@ -118,7 +118,7 @@ void main() {
       );
       expect(got.submission.kind, SubmissionKind.correction);
       expect(got.submission.correctionMessage, 'poprawka chwytu w refrenie');
-      expect(got.target, Target.candidateCorrection);
+      expect(got.destination, Destination.candidateCorrection);
       expect(issuesOf(got), isNot(contains(SongIssue.missingYoutube)),
           reason: 'poprawka to diff, nie pełna piosenka');
       expect(got.submission.correctionTarget, 'tmp',
@@ -207,7 +207,7 @@ void main() {
         book: bookWith([sampleSong(lyrics: 'Ala ma kota a kot ma ale\nW lesie gra muzyka i cos jeszcze')]),
       );
       expect(issuesOf(got), contains(SongIssue.noTargetInApp));
-      expect(got.target, Target.candidateCorrection);
+      expect(got.destination, Destination.candidateCorrection);
       // Nieistniejące id to brak celu: `prepare` nie może kazać podmieniać
       // piosenki, której nie ma, i to bez ostrzeżenia.
       expect(got.submission.correctionTarget, isNull);
@@ -231,7 +231,7 @@ void main() {
           book: bookWith([pierwowzor, wApce]));
       expect(got.submission.declaredCorrectionTarget, isNull);
       expect(got.submission.appMatch?.songId, 'o!_juz_jest');
-      expect(got.target, Target.rejectAlreadyInApp);
+      expect(got.destination, Destination.rejectAlreadyInApp);
     });
     test('identyczna poprawka bez słowa komentarza → odrzut, nie do pliku', () async {
       // Bez `updateComment`: poprawka, przy której autor nie napisał nic
@@ -240,9 +240,9 @@ void main() {
         msgFrom(await completeEmail(isNew: false, withUpdateComment: false)),
         book: bookWith([sampleSong()]),
       );
-      expect(got.target, Target.rejectAlreadyInApp);
+      expect(got.destination, Destination.rejectAlreadyInApp);
       expect(got.goesToFile, isFalse);
-      expect(got.labels, containsAll([kLabelRejectedInBook, kLabelCorrection]));
+      expect(got.labels, containsAll([kLabelRejectedAlreadyInApp, kLabelCorrection]));
       expect(got.labels, isNot(contains(kLabelHaveALook)));
     });
     test('identyczna poprawka z propozycją poprawki → odrzut, rzuć okiem', () async {
@@ -253,17 +253,17 @@ void main() {
           book: bookWith([sampleSong()]));
       expect(got.submission.hasUserMessage, isFalse);
       expect(got.submission.correctionMessage, isNotNull);
-      expect(got.target, Target.rejectAlreadyInApp);
-      expect(got.labels, containsAll([kLabelRejectedInBook, kLabelHaveALook, kLabelCorrection]));
-      expect(got.labels, isNot(contains(kLabelToReview)));
+      expect(got.destination, Destination.rejectAlreadyInApp);
+      expect(got.labels, containsAll([kLabelRejectedAlreadyInApp, kLabelHaveALook, kLabelCorrection]));
+      expect(got.labels, isNot(contains(kLabelNeedsReview)));
     });
     test('identyczna poprawka z dopiskiem → odrzut, rzuć okiem', () async {
       final got = classify(
         msgFrom(await completeEmail(isNew: false, userMessage: 'zostawiam komentarz')),
         book: bookWith([sampleSong()]),
       );
-      expect(got.target, Target.rejectAlreadyInApp);
-      expect(got.labels, containsAll([kLabelRejectedInBook, kLabelHaveALook, kLabelCorrection]));
+      expect(got.destination, Destination.rejectAlreadyInApp);
+      expect(got.labels, containsAll([kLabelRejectedAlreadyInApp, kLabelHaveALook, kLabelCorrection]));
     });
   });
 
@@ -278,9 +278,9 @@ void main() {
     );
     final got = classify(oldApp, book: SongBook.empty);
     expect(got.isClean, isTrue, reason: 'stary format sam w sobie nie blokuje');
-    expect(got.submission.legacyApp, isTrue);
+    expect(got.submission.isOldApp, isTrue);
     expect(got.submission.consentVersion, kOldAppRulesVersion);
-    expect(got.labels, [kLabelReady, kLabelReplyOldApp]);
+    expect(got.labels, [kLabelReadyToAdd, kLabelReplyOldApp]);
     expect(got.song!.piosenkomatData!.isOldApp, isTrue);
     expect(got.issues, isEmpty, reason: 'stara apka to wiedza o nadawcy, nie zarzut');
   });

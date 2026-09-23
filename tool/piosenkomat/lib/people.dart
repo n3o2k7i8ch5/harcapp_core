@@ -64,26 +64,7 @@ class ContributorSource {
     this.otherEmails = const [],
     this.senderIsContributor = true,
   });
-
-  ContributorSource withEmails(List<String> emails) => ContributorSource(
-        sender: sender,
-        title: title,
-        person: person,
-        otherEmails: emails,
-        senderIsContributor: senderIsContributor,
-      );
 }
-
-/// Dokłada adresy z planu przebiegu do zebranych źródeł — plan czyta się
-/// dopiero po `strip`, a źródła powstają przed nim.
-List<ContributorSource> withOtherEmails(
-  List<ContributorSource> sources,
-  Map<String, List<String>> otherEmailsBySender,
-) =>
-    [
-      for (final c in sources)
-        c.withEmails(otherEmailsBySender[c.sender] ?? c.otherEmails),
-    ];
 
 /// Osoby z piosenek, które **wchodzą do apki** — czyli z `final-*.hrcpsng`,
 /// po przeglądzie. Wcześniej nie ma sensu: kogo wywalisz na stronie, tego nie
@@ -101,7 +82,7 @@ List<ContributorSource> contributorSourcesOf(
       title: song.title,
       person: _personOf(song, sender),
       otherEmails: otherEmailsBySender[sender] ?? const [],
-      // Ślad piosenkomatu zdejmuje `strip`, więc tylko dopóki jest.
+      // Ślad piosenkomatu zdejmuje `prepare`, więc czytamy go przed nim.
       senderIsContributor: song.piosenkomatData?.senderIsContributor ?? true,
     ));
   }

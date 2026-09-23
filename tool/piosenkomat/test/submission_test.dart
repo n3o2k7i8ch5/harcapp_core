@@ -175,7 +175,7 @@ void main() {
     expect(m.subject, contains('[hrcpsng/app]'));
 
     final c = classify(m, book: SongBook.empty);
-    expect(c.target, Target.candidateNew);
+    expect(c.destination, Destination.candidateNew);
     expect(c.submission.shape, EmailShape.file);
     expect(c.submission.origin, SubmissionOrigin.appAndroid);
     expect(c.submission.appVersion, '2.4.1');
@@ -185,7 +185,7 @@ void main() {
     expect(issuesOf(c), [SongIssue.hasUserMessage]);
     expect(c.song!.contributorData!.acceptedContributionRulesVersion, 'v05.10.2025');
     expect(c.song!.piosenkomatData!.sender, 'jan.testowy@example.com');
-    expect(c.song!.piosenkomatData!.legacyAppUsed, isFalse);
+    expect(c.song!.piosenkomatData!.isOldApp, isFalse);
     expect(c.song!.piosenkomatData!.appVersion, '2.4.1');
   });
 
@@ -205,7 +205,7 @@ void main() {
       sampleSong(title: 'Barka', chordsText: 'C G a\nC G a')..id = 'o!_barka',
     ]);
     final c = _classify(mangled, book: book);
-    expect(c.target, Target.candidateCorrection);
+    expect(c.destination, Destination.candidateCorrection);
     expect(c.submission.declaredCorrectionTarget, 'o!_barka');
     expect(c.submission.correctionTarget, 'o!_barka');
     expect(c.submission.correctionTargetGuessed, isFalse);
@@ -216,13 +216,13 @@ void main() {
   test('uszkodzony załącznik: odrzut z „rzuć okiem”, nie worek „nie umiem”', () {
     final mail = submissionEmail(mangle: (f) => f.replaceFirst('Piosenka', 'Piosenki'));
     final c = _classify(mail.eml);
-    expect(c.target, Target.rejectBrokenFile);
+    expect(c.destination, Destination.rejectCorruptedFile);
     expect(issuesOf(c), [SongIssue.corruptedSubmissionFile]);
-    expect(c.labels, containsAll([kLabelRejectedCorruptedData, kLabelHaveALook]));
-    expect(c.labels, isNot(contains(kLabelUnparsable)));
-    expect(c.labels.any((l) => l.startsWith(kLabelToReview)), isFalse,
+    expect(c.labels, containsAll([kLabelRejectedCorruptedFile, kLabelHaveALook]));
+    expect(c.labels, isNot(contains(kLabelRejectedUnparsable)));
+    expect(c.labels.any((l) => l.startsWith(kLabelNeedsReview)), isFalse,
         reason: 'piosenki nie ma w pliku, piosenkomat nie ma tu nic do roboty');
-    expect(kToolLabels, containsAll([kLabelRejectedCorruptedData, kLabelHaveALook]),
+    expect(kToolLabels, containsAll([kLabelRejectedCorruptedFile, kLabelHaveALook]),
         reason: 'bez tego --push wywali się na brakującej etykiecie');
   });
 
@@ -249,7 +249,7 @@ void main() {
     expect(c.title, 'Pierwsza');
     expect(issuesOf(c), contains(SongIssue.skippedSubmissions));
     expect(detailOf(c, SongIssue.skippedSubmissions), contains('3 zgłoszeń'));
-    expect(c.labels, contains(ReviewKind.skippedSubmissions.label));
+    expect(c.labels, contains(NeedsReviewKind.skippedSubmissions.label));
   });
 
   test('wysyłka w cudzym imieniu: adres nadawcy tylko do odpisania', () {
@@ -312,7 +312,7 @@ void main() {
   test('zgłoszenie ze strony jest odsiewane, nie przeoczone', () {
     final mail = submissionEmail(origin: SubmissionOrigin.web);
     final m = msgFrom(mail.eml);
-    expect(m.isWebSubmission, isTrue);
+    expect(m.hasWebSubjectMarker, isTrue);
     expect(m.isSongSubmission, isFalse);
     expect(isWebSubmission(m), isTrue);
 
@@ -359,7 +359,7 @@ void main() {
       msgFrom(emlWith(mail.fileContent.replaceFirst('Nowa', 'Nowaa')), id: 'm2'),
       book: SongBook.empty,
     );
-    expect(broken.target, Target.rejectBrokenFile);
+    expect(broken.destination, Destination.rejectCorruptedFile);
     expect(issuesOf(broken), [SongIssue.corruptedSubmissionFile]);
   });
 
@@ -411,26 +411,17 @@ void main() {
     expect(m.submissionAttachment, file);
 
     final c = classify(m, book: SongBook.empty);
-    expect(c.target, Target.candidateNew);
+    expect(c.destination, Destination.candidateNew);
     expect(c.submission.userMessage, 'Zapomniałem dodać: refren dwa razy.');
   });
 
-  test('stare pliki przebiegu: `source` czyta się jako `legacy_app_used`', () {
-    expect(
-      PiosenkomatData.fromJsonMap({'kind': 'new', 'source': 'old-app'}).legacyAppUsed,
-      isTrue,
-    );
-    expect(
-      PiosenkomatData.fromJsonMap({'kind': 'new', 'source': 'current-app'}).legacyAppUsed,
-      isFalse,
-    );
-    // Nowy zapis: bez `source`, bez flagi przy wartości domyślnej.
+  test('ślad: stara apka jako flaga, bez wartości domyślnych w pliku', () {
     final map = const PiosenkomatData(
-            legacyAppUsed: true, sender: 'a@b.pl', appVersion: '2.4.1')
+            isOldApp: true, sender: 'a@b.pl', appVersion: '2.4.1')
         .toJsonMap();
-    expect(map['legacy_app_used'], isTrue);
+    expect(map[PiosenkomatData.PARAM_OLD_APP], isTrue);
+    expect(PiosenkomatData.fromJsonMap(map).isOldApp, isTrue);
     expect(map['app_version'], '2.4.1');
-    expect(map.containsKey('source'), isFalse);
     expect(map.containsKey('sender_is_contributor'), isFalse);
     expect(PiosenkomatData.fromJsonMap(map).sender, 'a@b.pl');
     expect(PiosenkomatData.fromJsonMap(map).senderIsContributor, isTrue);
@@ -439,7 +430,7 @@ void main() {
   test('stary format dalej działa obok nowego', () async {
     final old = await completeEmail(userMessage: 'dopisek ze starego mejla');
     final c = _classify(old);
-    expect(c.target, Target.candidateNew);
+    expect(c.destination, Destination.candidateNew);
     expect(c.submission.shape, EmailShape.fenced);
     expect(c.submission.userMessage, 'dopisek ze starego mejla');
     expect(c.submission.senderIsContributor, isTrue);

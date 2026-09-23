@@ -29,7 +29,7 @@ class AppMatch extends SongMatch<SongRaw> {
   /// zupełnie inną piosenkę o tym samym tytule. Wymagamy tytułu i tekstu
   /// ≥ [kGuessableTarget] — albo tekstu ≥ [kSameText]: poprawka może właśnie
   /// zmieniać tytuł, a (prawie) ten sam tekst to ta sama piosenka.
-  bool get guessable {
+  bool get isGuessable {
     if (overlap >= kSameText) return true;
     return similarities.any((e) => e is SameTitle) && overlap >= kGuessableTarget;
   }
@@ -37,14 +37,12 @@ class AppMatch extends SongMatch<SongRaw> {
 
 /// Najbliższe **inne zgłoszenie (inny wątek)** w tej paczce.
 class BatchMatch {
-  final String threadId;
   /// Reprezentant drugiego zgłoszenia — do `detail`.
-  final String msgId;
+  final String messageId;
   final String title;
-  final DateTime? sentAt;
   final List<Similarity> similarities;
   /// Czy TO zgłoszenie jest najnowsze w grupie identycznych, do której należy
-  /// razem z [msgId]. Fakt o porównaniu, nie o zgłoszeniu. Ma sens tylko przy
+  /// razem z [messageId]. Fakt o porównaniu, nie o zgłoszeniu. Ma sens tylko przy
   /// `level == identical`.
   final bool isNewestInBatch;
   /// Którą piosenkę w apce poprawia TAMTO zgłoszenie. `null` dla nowych
@@ -52,16 +50,14 @@ class BatchMatch {
   /// w tę samą piosenkę — podobny tekst tego jeszcze nie znaczy.
   final String? correctionTarget;
   const BatchMatch({
-    required this.threadId,
-    required this.msgId,
+    required this.messageId,
     required this.title,
-    required this.sentAt,
     required this.similarities,
     this.isNewestInBatch = true,
     this.correctionTarget,
   });
   MatchLevel? get level => levelOf(similarities);
-  String get detail => '„$title” [$msgId]: ${similaritiesText(similarities)}';
+  String get detail => '„$title” [$messageId]: ${similaritiesText(similarities)}';
 }
 
 /// Piosenki już w apce. [SongIndex] z wynikami jako [AppMatch].

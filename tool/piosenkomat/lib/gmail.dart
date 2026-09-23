@@ -58,7 +58,7 @@ class GmailMailbox {
   static const int _costLabelCreate = 5;
   static const int _costLabelList = 1;
   static const int _costSend = 100;
-  static const int _costDraftCreate = 10;
+  static const int _costDraftWrite = 10;
   static const int _costDraftList = 5;
   double _units = 0;
   DateTime _refilled = DateTime.now();
@@ -78,10 +78,10 @@ class GmailMailbox {
         _units -= cost;
         return;
       }
-      final brakuje = cost - _units;
+      final missingUnits = cost - _units;
       await Future.delayed(Duration(
           milliseconds:
-              (brakuje * Duration.millisecondsPerMinute / _unitsPerMinute)
+              (missingUnits * Duration.millisecondsPerMinute / _unitsPerMinute)
                       .ceil() +
                   5));
     }
@@ -107,7 +107,7 @@ class GmailMailbox {
     }
   }
 
-  /// Pobiera mejle kilkoma strumieniami naraz. Tempo i tak pilnuje [_spend];
+  /// Pobiera messageIds kilkoma strumieniami naraz. Tempo i tak pilnuje [_spend];
   /// równoległość służy tylko temu, żeby czekanie na odpowiedź nie marnowało
   /// limitu, który w tym czasie się odnawia.
   Future<List<ContribMessage>> getMessages(
@@ -176,10 +176,8 @@ class GmailMailbox {
       page = resp.nextPageToken;
     } while (page != null && !(newest && limit != null && ids.length >= limit));
 
-    if (limit == null) return newest ? ids : ids.reversed.toList();
-    return newest
-        ? ids.take(limit).toList()
-        : ids.reversed.take(limit).toList();
+    final ordered = newest ? ids : ids.reversed;
+    return (limit == null ? ordered : ordered.take(limit)).toList();
   }
 
   Future<ContribMessage> getMessage(String id) async {
@@ -198,9 +196,6 @@ class GmailMailbox {
       body: _plainText(msg.payload),
       subject: headers['subject'],
       from: headers['from'],
-      isReply: (headers['in-reply-to'] ?? headers['references'] ?? '')
-          .trim()
-          .isNotEmpty,
       date: msg.internalDate == null
           ? null
           : DateTime.fromMillisecondsSinceEpoch(
@@ -235,36 +230,23 @@ class GmailMailbox {
   /// i `References`, żeby u autora wpadła pod jego zgłoszenie, a nie jako
   /// osobny mejl znikąd.
   Future<void> replyTo(ReplyTarget target, String text) async {
-    final raw = _mimeReply(target, text);
-    await _call(
-        () => _api.users.messages.send(
-              Message()
-                ..raw = base64Url.encode(utf8.encode(raw))
-                ..threadId = target.threadId,
-              'me',
-            ),
+    await _call(() => _api.users.messages.send(_replyMessage(target, text), 'me'),
         cost: _costSend);
   }
 
   /// To samo, co [replyTo], ale zostaje szkicem w wątku — do przejrzenia
   /// i poprawienia w Gmailu, zanim pójdzie w świat. Zwraca id szkicu.
   Future<String> draftReplyTo(ReplyTarget target, String text) async {
-    final raw = _mimeReply(target, text);
     final draft = await _call(
         () => _api.users.drafts.create(
-              Draft()
-                ..message = (Message()
-                  ..raw = base64Url.encode(utf8.encode(raw))
-                  ..threadId = target.threadId),
-              'me',
-            ),
-        cost: _costDraftCreate);
+            Draft()..message = _replyMessage(target, text), 'me'),
+        cost: _costDraftWrite);
     return draft.id!;
   }
 
   /// Szkice po wątku, w którym siedzą. Jedno zapytanie zamiast jednego na
   /// autora — `drafts.list` i tak oddaje `message.threadId` przy każdym.
-  Future<Map<String, String>> draftIdsByThread() async {
+  Future<Map<String, String>> draftIdByThread() async {
     final out = <String, String>{};
     String? page;
     do {
@@ -284,17 +266,10 @@ class GmailMailbox {
   /// dochodzi kolejna sprawa (np. dopisałeś uwagę do piosenki autora, który
   /// i tak miał dostać blok o starej apce).
   Future<void> updateDraft(String draftId, ReplyTarget target, String text) async {
-    final raw = _mimeReply(target, text);
     await _call(
         () => _api.users.drafts.update(
-              Draft()
-                ..message = (Message()
-                  ..raw = base64Url.encode(utf8.encode(raw))
-                  ..threadId = target.threadId),
-              'me',
-              draftId,
-            ),
-        cost: _costDraftCreate);
+            Draft()..message = _replyMessage(target, text), 'me', draftId),
+        cost: _costDraftWrite);
   }
 
   /// Treść szkicu jako czysty tekst — po to, żeby nie nadpisać tego, co
@@ -316,7 +291,7 @@ class GmailMailbox {
   /// wystarczy sprzątnąć szkic.
   Future<void> deleteDraft(String draftId) async {
     await _call(() => _api.users.drafts.delete('me', draftId),
-        cost: _costDraftCreate);
+        cost: _costDraftWrite);
   }
 
   /// Wysyła gotowy szkic — z Twoimi poprawkami, jeśli jakieś zrobiłeś.
@@ -328,17 +303,20 @@ class GmailMailbox {
   /// Wiadomości wątku bez szkiców: `threads.get` oddaje też to, co dopiero
   /// piszesz (etykieta `DRAFT`), a szkic nie jest ani nasz wysłany, ani cudzy
   /// przychodzący.
-  Future<List<Message>> _threadMessages(String threadId) async {
+  Future<List<Message>> _threadMessages(String threadId) async => [
+        for (final m in await _thread(threadId))
+          if (!(m.labelIds ?? const <String>[]).contains('DRAFT')) m,
+      ];
+
+  /// Wiadomości wątku, same etykiety (bez treści).
+  Future<List<Message>> _thread(String threadId) async {
     final thread = await _call(
         () => _api.users.threads.get('me', threadId, format: 'minimal'),
         cost: _costGet);
-    return [
-      for (final m in thread.messages ?? const <Message>[])
-        if (!(m.labelIds ?? const <String>[]).contains('DRAFT')) m,
-    ];
+    return thread.messages ?? const [];
   }
 
-  static bool _sent(Message m) =>
+  static bool _isSent(Message m) =>
       (m.labelIds ?? const <String>[]).contains('SENT');
 
   /// Czy po naszej ostatniej wiadomości autor odpisał. Po tym poznajemy, że
@@ -350,9 +328,9 @@ class GmailMailbox {
   /// na wątek, a niczego by nie rozstrzygnęło.
   Future<bool> hasIncomingAfterOurReply(String threadId) async {
     final messages = await _threadMessages(threadId);
-    final lastOurs = messages.lastIndexWhere(_sent);
+    final lastOurs = messages.lastIndexWhere(_isSent);
     if (lastOurs < 0) return false;
-    return messages.skip(lastOurs + 1).any((m) => !_sent(m));
+    return messages.skip(lastOurs + 1).any((m) => !_isSent(m));
   }
 
   /// Czy ostatnie słowo w wątku jest nasze. Tak poznajemy szkic wysłany
@@ -361,7 +339,7 @@ class GmailMailbox {
   /// i drugim pytaniu z przeglądu stara wysyłka udawałaby nową.
   Future<bool> ourReplyIsLatest(String threadId) async {
     final messages = await _threadMessages(threadId);
-    return messages.isNotEmpty && _sent(messages.last);
+    return messages.isNotEmpty && _isSent(messages.last);
   }
 
   /// Dane potrzebne do odpowiedzi. Osobny strzał po nagłówki, bo
@@ -395,33 +373,14 @@ class GmailMailbox {
 
   /// Suma etykiet wszystkich wiadomości wątku. Kolejka jest po wątkach:
   /// odpowiedź w wątku, który już dostał `song/*`, nie jest nowym zgłoszeniem.
-  Future<Set<String>> threadLabels(String threadId) async {
-    final thread = await _call(
-        () => _api.users.threads.get('me', threadId, format: 'minimal'),
-        cost: _costGet);
-    return {
-      for (final m in thread.messages ?? const <Message>[])
-        for (final id in m.labelIds ?? const <String>[]) _nameById[id] ?? id,
-    };
-  }
+  Future<Set<String>> labelsOfThread(String threadId) async => {
+        for (final m in await _thread(threadId))
+          for (final id in m.labelIds ?? const <String>[]) _nameById[id] ?? id,
+      };
 
   /// Id wszystkich wiadomości wątku — etykiety idą na cały wątek.
-  Future<List<String>> threadMessageIds(String threadId) async {
-    final thread = await _call(
-        () => _api.users.threads.get('me', threadId, format: 'minimal'),
-        cost: _costGet);
-    return [for (final m in thread.messages ?? const <Message>[]) m.id!];
-  }
-
-  /// Nazwy etykiet mejla. Tylko metadane, bez treści.
-  Future<Set<String>> labelsOf(String messageId) async {
-    final msg = await _call(
-        () => _api.users.messages.get('me', messageId, format: 'minimal'),
-        cost: _costGet);
-    return {
-      for (final id in msg.labelIds ?? const <String>[]) _nameById[id] ?? id,
-    };
-  }
+  Future<List<String>> threadMessageIds(String threadId) async =>
+      [for (final m in await _thread(threadId)) m.id!];
 
   /// Etykiety `song/*` całej skrzynki: jedno zapytanie na etykietę zamiast
   /// jednego na mejl. Przy przebiegu z setkami mejli to różnica między
@@ -511,6 +470,11 @@ class ReplyTarget {
     this.references,
   });
 }
+
+/// Odpowiedź gotowa do wysłania albo do szkicu: w wątku [ReplyTarget.threadId].
+Message _replyMessage(ReplyTarget target, String text) => Message()
+  ..raw = base64Url.encode(utf8.encode(_mimeReply(target, text)))
+  ..threadId = target.threadId;
 
 /// RFC 822 odpowiedzi. Temat i treść po polsku, więc base64 + UTF-8.
 String _mimeReply(ReplyTarget target, String text) {

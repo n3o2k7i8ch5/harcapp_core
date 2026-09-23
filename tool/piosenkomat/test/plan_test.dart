@@ -28,12 +28,12 @@ void main() {
     ], book: SongBook.empty);
     final plan = LabelPlan.fromClassified(items);
     // „dzięki” w odpowiedzi to dopisek autora — stąd `user-message`.
-    final okLabels = [kLabelToReview, ReviewKind.userMessage.label, kLabelAuto];
-    expect(plan.labelsById['ok'], okLabels);
-    expect(plan.labelsById['ok2'], okLabels, reason: 'etykiety idą na cały wątek');
-    expect(plan.labelsById['msg'], [kLabelToReview, ReviewKind.userMessage.label, kLabelAuto]);
-    expect(plan.labelsById['corr'],
-        [kLabelToReview, ReviewKind.correctionProblem.label, kLabelCorrection, kLabelAuto]);
+    final okLabels = [kLabelNeedsReview, NeedsReviewKind.userMessage.label, kLabelAuto];
+    expect(plan.labelsByMessage['ok'], okLabels);
+    expect(plan.labelsByMessage['ok2'], okLabels, reason: 'etykiety idą na cały wątek');
+    expect(plan.labelsByMessage['msg'], [kLabelNeedsReview, NeedsReviewKind.userMessage.label, kLabelAuto]);
+    expect(plan.labelsByMessage['corr'],
+        [kLabelNeedsReview, NeedsReviewKind.correctionProblem.label, kLabelCorrection, kLabelAuto]);
     expect(plan.messagesOf('ok'), ['ok', 'ok2']);
 
     final dir = tempDir();
@@ -41,10 +41,8 @@ void main() {
     expect(path, p.join(dir.path, 'plan.json'));
     writePlan(path, plan);
     final back = readPlan(path);
-    expect(back.labelsById, plan.labelsById);
-    expect(back.songsByThread['ok']!.single.issues, ['has-user-message']);
+    expect(back.labelsByMessage, plan.labelsByMessage);
     expect(back.songsByThread['ok']!.single.kind, SubmissionKind.newSong);
-    expect(back.songsByThread['msg']!.single.issues, ['has-user-message']);
     expect(back.songsByThread['corr']!.single.kind, SubmissionKind.correction);
     expect(back.messagesOf('ok'), ['ok', 'ok2']);
   });

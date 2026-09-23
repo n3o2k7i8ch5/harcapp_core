@@ -44,69 +44,64 @@ void main() {
 
   group('PiosenkomatData: rozmowa', () {
     test('userMessage to tylko to, co napisał autor', () {
-      const data = PiosenkomatData(messages: [
+      const data = PiosenkomatData(conversation: [
         PiosenkomatMessage('pierwsze pytanie'),
-        PiosenkomatMessage('moja odpowiedź', mine: true),
+        PiosenkomatMessage('moja odpowiedź', isOurs: true),
         PiosenkomatMessage('druga wiadomość'),
       ]);
       expect(data.userMessage, 'pierwsze pytanie\n\ndruga wiadomość');
-      expect(data.hasMessages, isTrue);
     });
 
     test('same odpowiedzi ze skrzynki → autor nic nie napisał', () {
-      const data = PiosenkomatData(messages: [PiosenkomatMessage('odpisałem', mine: true)]);
+      const data = PiosenkomatData(conversation: [PiosenkomatMessage('odpisałem', isOurs: true)]);
       expect(data.userMessage, isNull);
-      // `hasMessages` pyta o rozmowę w ogóle — ta jest, choć autor milczy.
-      expect(data.hasMessages, isTrue);
     });
 
-    test('bez rozmowy i bez poprawki → nic', () {
-      const data = PiosenkomatData();
-      expect(data.userMessage, isNull);
-      expect(data.hasMessages, isFalse);
+    test('bez rozmowy → nic', () {
+      expect(const PiosenkomatData().userMessage, isNull);
     });
   });
 
   group('PiosenkomatData: zapis i odczyt', () {
     test('runda w obie strony zachowuje stronę i datę', () {
-      final data = PiosenkomatData(messages: [
+      final data = PiosenkomatData(conversation: [
         PiosenkomatMessage('od autora', at: DateTime.utc(2026, 6, 28, 17, 54)),
-        const PiosenkomatMessage('ode mnie', mine: true),
+        const PiosenkomatMessage('ode mnie', isOurs: true),
       ]);
       final back = PiosenkomatData.fromJsonMap(data.toJsonMap());
 
-      expect(back.messages, hasLength(2));
-      expect(back.messages[0].text, 'od autora');
-      expect(back.messages[0].mine, isFalse);
-      expect(back.messages[0].at, DateTime.utc(2026, 6, 28, 17, 54));
-      expect(back.messages[1].mine, isTrue);
-      expect(back.messages[1].at, isNull);
+      expect(back.conversation, hasLength(2));
+      expect(back.conversation[0].text, 'od autora');
+      expect(back.conversation[0].isOurs, isFalse);
+      expect(back.conversation[0].at, DateTime.utc(2026, 6, 28, 17, 54));
+      expect(back.conversation[1].isOurs, isTrue);
+      expect(back.conversation[1].at, isNull);
     });
 
-    test('`mine: false` nie zaśmieca pliku', () {
-      const data = PiosenkomatData(messages: [PiosenkomatMessage('od autora')]);
-      final json = data.toJsonMap()[PiosenkomatData.PARAM_MESSAGES] as List;
-      expect((json.single as Map).containsKey(PiosenkomatMessage.PARAM_MINE), isFalse);
+    test('`ours: false` nie zaśmieca pliku', () {
+      const data = PiosenkomatData(conversation: [PiosenkomatMessage('od autora')]);
+      final json = data.toJsonMap()[PiosenkomatData.PARAM_CONVERSATION] as List;
+      expect((json.single as Map).containsKey(PiosenkomatMessage.PARAM_OURS), isFalse);
     });
 
-    test('stary plik z `user_message` czyta się jako jedna wiadomość autora', () {
-      final back = PiosenkomatData.fromJsonMap({
-        PiosenkomatData.PARAM_USER_MESSAGE: 'stary zlepiony dopisek',
-      });
-      expect(back.messages, hasLength(1));
-      expect(back.messages.single.text, 'stary zlepiony dopisek');
-      expect(back.messages.single.mine, isFalse);
-      expect(back.userMessage, 'stary zlepiony dopisek');
+    test('odpowiedź do autora i stara apka przechodzą przez zapis', () {
+      const data = PiosenkomatData(isOldApp: true, reviewNote: '  Dorzuć chwyty.  ');
+      final json = data.toJsonMap();
+      expect(json[PiosenkomatData.PARAM_REVIEW_NOTE], 'Dorzuć chwyty.');
+      final back = PiosenkomatData.fromJsonMap(json);
+      expect(back.isOldApp, isTrue);
+      expect(back.reviewNote, 'Dorzuć chwyty.');
+      expect(back.hasReviewNote, isTrue);
     });
 
     test('pusta wiadomość w pliku jest pomijana', () {
       final back = PiosenkomatData.fromJsonMap({
-        PiosenkomatData.PARAM_MESSAGES: [
+        PiosenkomatData.PARAM_CONVERSATION: [
           {PiosenkomatMessage.PARAM_TEXT: '   '},
           {PiosenkomatMessage.PARAM_TEXT: 'coś'},
         ],
       });
-      expect(back.messages.map((m) => m.text), ['coś']);
+      expect(back.conversation.map((m) => m.text), ['coś']);
     });
   });
 

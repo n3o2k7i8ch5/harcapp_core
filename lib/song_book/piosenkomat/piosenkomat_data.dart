@@ -22,22 +22,22 @@ class PiosenkomatMessage{
 
   static const String PARAM_TEXT = 'text';
   static const String PARAM_AT = 'at';
-  static const String PARAM_MINE = 'mine';
+  static const String PARAM_OURS = 'ours';
 
   final String text;
-  /// Kiedy przyszła. `null` w starych plikach i w mejlach bez daty.
+  /// Kiedy przyszła. `null` w mejlach bez daty.
   final DateTime? at;
   /// Czy to odpowiedź ze skrzynki HarcAppa, czyli **Twoja** — a nie autora.
-  final bool mine;
+  final bool isOurs;
 
-  const PiosenkomatMessage(this.text, {this.at, this.mine = false});
+  const PiosenkomatMessage(this.text, {this.at, this.isOurs = false});
 
   Map<String, dynamic> toJsonMap() => {
     PARAM_TEXT: text,
     if(at != null) PARAM_AT: at!.toIso8601String(),
     // Tylko odstępstwo od domyślnego „od autora” — plik ma nieść to, co
     // niesie treść, a nie powtarzać `false` przy każdej wiadomości.
-    if(mine) PARAM_MINE: true,
+    if(isOurs) PARAM_OURS: true,
   };
 
   /// `null`, gdy wiadomość nie ma treści — pusty dymek nic nie mówi.
@@ -47,7 +47,7 @@ class PiosenkomatMessage{
     return PiosenkomatMessage(
       text,
       at: DateTime.tryParse(map[PARAM_AT] as String? ?? ''),
-      mine: map[PARAM_MINE] as bool? ?? false,
+      isOurs: map[PARAM_OURS] as bool? ?? false,
     );
   }
 
@@ -89,20 +89,16 @@ class PiosenkomatIssue{
 /// Jest `null` dla każdej normalnej piosenki — obecność tego pola znaczy
 /// „ta piosenka jest w trakcie przeglądu”. Do `all_songs.hrcpsng` nigdy nie
 /// jedzie: `SongRaw.toApiJsonMap` serializuje je tylko na wyraźne życzenie
-/// (`withPiosenkomatData`), a `piosenkomat strip` zdejmuje je przed wgraniem.
+/// (`withPiosenkomatData`), a `piosenkomat prepare` zdejmuje je przed wgraniem.
 class PiosenkomatData{
 
   static const String PARAM_KIND = 'kind';
-  /// Nazwa sprzed rozbicia na [legacyAppUsed] i `source` w pliku zgłoszenia.
-  static const String PARAM_LEGACY_SOURCE = 'source';
-  static const String PARAM_LEGACY_APP_USED = 'legacy_app_used';
+  static const String PARAM_OLD_APP = 'old_app';
   static const String PARAM_APP_VERSION = 'app_version';
   static const String PARAM_SENDER = 'sender';
   static const String PARAM_SENDER_IS_CONTRIBUTOR = 'sender_is_contributor';
   static const String PARAM_SENT_AT = 'sent_at';
-  static const String PARAM_MESSAGES = 'messages';
-  /// Nazwa sprzed rozbicia rozmowy na wiadomości: jeden zlepiony dopisek.
-  static const String PARAM_USER_MESSAGE = 'user_message';
+  static const String PARAM_CONVERSATION = 'conversation';
   static const String PARAM_CORRECTION_MESSAGE = 'correction_message';
   static const String PARAM_CORRECTION_TARGET = 'correction_target';
   /// Klucz obecny tylko wtedy, gdy cel poprawki jest domysłem.
@@ -111,12 +107,12 @@ class PiosenkomatData{
   static const String PARAM_RUN = 'run';
   static const String PARAM_ISSUES = 'issues';
   static const String PARAM_ACCEPTED = 'accepted';
-  static const String PARAM_REPLY_TO_CONTRIBUTOR = 'reply_to_contributor';
+  static const String PARAM_REVIEW_NOTE = 'review_note';
 
   final SubmissionKind kind;
   /// Czy zgłoszenie przyszło ze starej apki. Wiedza o nadawcy, nie o piosence:
   /// takiemu autorowi piosenkomat odpisze, żeby apkę zaktualizował.
-  final bool legacyAppUsed;
+  final bool isOldApp;
   /// Wersja apki, z której poszło zgłoszenie. Niesie ją plik zgłoszenia, więc
   /// jest tylko przy nowym formacie.
   final String? appVersion;
@@ -130,7 +126,7 @@ class PiosenkomatData{
   /// Data wysłania mejla-reprezentanta zgłoszenia.
   final DateTime? sentAt;
   /// Cała rozmowa z wątku, od najstarszej: dopiski autora i Twoje odpowiedzi.
-  final List<PiosenkomatMessage> messages;
+  final List<PiosenkomatMessage> conversation;
   /// Co autor napisał w bloku „Propozycja poprawki”. Przy poprawce oczekiwane.
   final String? correctionMessage;
   /// Którą piosenkę w apce poprawia (`lclId`); `null` = nie znaleziono.
@@ -154,19 +150,20 @@ class PiosenkomatData{
   /// Nieobecność piosenki w pliku zwrotnym **dalej** znaczy „odrzucona” —
   /// flaga tylko wygrywa, kiedy jest.
   final bool? accepted;
-  /// Co napisać autorowi. Niezależne od [accepted]: da się i odrzucić
-  /// z wyjaśnieniem („dorzuć chwyty i wejdzie”), i przyjąć z uwagą
-  /// („dodałem, popraw literówkę”). Piosenkomat robi z tego szkic w wątku.
-  final String? replyToContributor;
+  /// Twój tekst z pola „Odpowiedź do autora” — pójdzie do nadawcy zgłoszenia.
+  /// Niezależny od [accepted]: da się i odrzucić z wyjaśnieniem („dorzuć
+  /// chwyty i wejdzie”), i przyjąć z uwagą („dodałem, popraw literówkę”).
+  /// Piosenkomat robi z tego szkic w wątku.
+  final String? reviewNote;
 
   const PiosenkomatData({
     this.kind = SubmissionKind.newSong,
-    this.legacyAppUsed = false,
+    this.isOldApp = false,
     this.appVersion,
     this.sender,
     this.senderIsContributor = true,
     this.sentAt,
-    this.messages = const [],
+    this.conversation = const [],
     this.correctionMessage,
     this.correctionTarget,
     this.correctionTargetGuessed = false,
@@ -174,20 +171,20 @@ class PiosenkomatData{
     this.run,
     this.issues = const [],
     this.accepted,
-    this.replyToContributor,
+    this.reviewNote,
   });
 
   PiosenkomatData copyWith({
     bool? Function()? accepted,
-    String? Function()? replyToContributor,
+    String? Function()? reviewNote,
   }) => PiosenkomatData(
     kind: kind,
-    legacyAppUsed: legacyAppUsed,
+    isOldApp: isOldApp,
     appVersion: appVersion,
     sender: sender,
     senderIsContributor: senderIsContributor,
     sentAt: sentAt,
-    messages: messages,
+    conversation: conversation,
     correctionMessage: correctionMessage,
     correctionTarget: correctionTarget,
     correctionTargetGuessed: correctionTargetGuessed,
@@ -195,34 +192,30 @@ class PiosenkomatData{
     run: run,
     issues: issues,
     accepted: accepted == null? this.accepted: accepted(),
-    replyToContributor: replyToContributor == null? this.replyToContributor: replyToContributor(),
+    reviewNote: reviewNote == null? this.reviewNote: reviewNote(),
   );
 
   bool get isCorrection => kind == SubmissionKind.correction;
-  bool get isOldApp => legacyAppUsed;
-  bool get hasBlocking => issues.any((i) => i.issue.isBlocking);
-  /// Czy jest coś od autora do przeczytania.
-  bool get hasMessages => messages.isNotEmpty || (correctionMessage ?? '').isNotEmpty;
 
   /// Co napisał **autor**, bez Twoich odpowiedzi — tego dotyczy uwaga
   /// `has-user-message` i z tego robi się propozycja odpowiedzi.
   String? get userMessage {
-    final own = [for(final m in messages) if(!m.mine) m.text];
+    final own = [for(final m in conversation) if(!m.isOurs) m.text];
     return own.isEmpty? null: own.join('\n\n');
   }
   /// Werdykt do użycia: brak przełącznika znaczy „wchodzi”.
   bool get goesIn => accepted ?? true;
   /// Czy jest co wysłać autorowi.
-  bool get hasReplyToContributor => (replyToContributor ?? '').trim().isNotEmpty;
+  bool get hasReviewNote => (reviewNote ?? '').trim().isNotEmpty;
 
   Map<String, dynamic> toJsonMap() => {
     PARAM_KIND: kind.id,
-    if(legacyAppUsed) PARAM_LEGACY_APP_USED: true,
+    if(isOldApp) PARAM_OLD_APP: true,
     if(appVersion != null) PARAM_APP_VERSION: appVersion,
     if(sender != null) PARAM_SENDER: sender,
     if(!senderIsContributor) PARAM_SENDER_IS_CONTRIBUTOR: false,
     if(sentAt != null) PARAM_SENT_AT: sentAt!.toIso8601String(),
-    if(messages.isNotEmpty) PARAM_MESSAGES: [for(final m in messages) m.toJsonMap()],
+    if(conversation.isNotEmpty) PARAM_CONVERSATION: [for(final m in conversation) m.toJsonMap()],
     if(correctionMessage != null) PARAM_CORRECTION_MESSAGE: correctionMessage,
     if(correctionTarget != null) PARAM_CORRECTION_TARGET: correctionTarget,
     if(correctionTargetGuessed) PARAM_CORRECTION_TARGET_GUESSED: true,
@@ -230,24 +223,25 @@ class PiosenkomatData{
     if(run != null) PARAM_RUN: run,
     PARAM_ISSUES: issues.map((i) => i.toJsonMap()).toList(),
     if(accepted != null) PARAM_ACCEPTED: accepted,
-    if(hasReplyToContributor) PARAM_REPLY_TO_CONTRIBUTOR: replyToContributor!.trim(),
+    if(hasReviewNote) PARAM_REVIEW_NOTE: reviewNote!.trim(),
   };
 
   static PiosenkomatData fromJsonMap(Map<String, dynamic> map) => PiosenkomatData(
     kind: SubmissionKind.byId(map[PARAM_KIND] as String?),
-    // Stare pliki przebiegu niosą `source: old-app`.
-    legacyAppUsed: map[PARAM_LEGACY_APP_USED] as bool?
-        ?? map[PARAM_LEGACY_SOURCE] == 'old-app',
+    isOldApp: map[PARAM_OLD_APP] as bool? ?? false,
     appVersion: map[PARAM_APP_VERSION] as String?,
     sender: map[PARAM_SENDER] as String?,
     senderIsContributor: map[PARAM_SENDER_IS_CONTRIBUTOR] as bool? ?? true,
     sentAt: DateTime.tryParse(map[PARAM_SENT_AT] as String? ?? ''),
-    messages: _messagesOf(map),
+    conversation: [
+      for(final raw in (map[PARAM_CONVERSATION] as List? ?? const []))
+        if(raw is Map<String, dynamic>)
+          if(PiosenkomatMessage.fromJsonMap(raw) case final message?) message
+    ],
     correctionMessage: map[PARAM_CORRECTION_MESSAGE] as String?,
     correctionTarget: map[PARAM_CORRECTION_TARGET] as String?,
     correctionTargetGuessed: map[PARAM_CORRECTION_TARGET_GUESSED] as bool? ?? false,
-    // `email_msg_id`: nazwa sprzed przejścia na wątki.
-    threadId: (map[PARAM_THREAD_ID] ?? map['email_msg_id']) as String?,
+    threadId: map[PARAM_THREAD_ID] as String?,
     run: map[PARAM_RUN] as String?,
     issues: [
       for(final raw in (map[PARAM_ISSUES] as List? ?? const []))
@@ -255,22 +249,7 @@ class PiosenkomatData{
           if(PiosenkomatIssue.fromJsonMap(raw) case final issue?) issue
     ],
     accepted: map[PARAM_ACCEPTED] as bool?,
-    replyToContributor: map[PARAM_REPLY_TO_CONTRIBUTOR] as String?,
+    reviewNote: map[PARAM_REVIEW_NOTE] as String?,
   );
-
-  /// Stare pliki przebiegu niosą jeden napis `user_message` — czytamy go jako
-  /// pojedynczą wiadomość od autora, żeby przegląd sprzed zmiany dalej się
-  /// otwierał.
-  static List<PiosenkomatMessage> _messagesOf(Map<String, dynamic> map){
-    if(map[PARAM_MESSAGES] case final List raw)
-      return [
-        for(final item in raw)
-          if(item is Map<String, dynamic>)
-            if(PiosenkomatMessage.fromJsonMap(item) case final message?) message
-      ];
-
-    final legacy = (map[PARAM_USER_MESSAGE] as String? ?? '').trim();
-    return legacy.isEmpty? const []: [PiosenkomatMessage(legacy)];
-  }
 
 }

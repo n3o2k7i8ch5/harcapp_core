@@ -83,7 +83,7 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
     if(_controller != null && identical(song, _boundSong)) return;
     _boundSong = song;
     final previous = _controller;
-    _controller = TextEditingController(text: data.replyToContributor ?? '');
+    _controller = TextEditingController(text: data.reviewNote ?? '');
     // Po klatce, bo stare pole trzyma go jeszcze przez to budowanie.
     if(previous != null){
       WidgetsBinding.instance.addPostFrameCallback((_) => previous.dispose());
@@ -132,7 +132,7 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
       text: note,
       selection: TextSelection.collapsed(offset: note.length),
     );
-    _update((d) => d.copyWith(replyToContributor: () => note));
+    _update((d) => d.copyWith(reviewNote: () => note));
   }
 
   @override
@@ -242,9 +242,9 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
               // Każda wiadomość z wątku we własnym dymku, po swojej stronie:
               // autor z lewej, Twoje odpowiedzi z prawej. Zlepek wszystkiego
               // w jednym dymku nie mówił ani kto co powiedział, ani kiedy.
-              for(final message in data.messages)
+              for(final message in data.conversation)
                 _Bubble(
-                  mine: message.mine,
+                  mine: message.isOurs,
                   title: _messageTitle(message),
                   text: message.text,
                 ),
@@ -281,13 +281,13 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
                           color: hintEnab_(context),
                         ),
                         onChanged: (_, text) => _update((d) => d.copyWith(
-                            replyToContributor: () =>
+                            reviewNote: () =>
                                 text.trim().isEmpty? null: text)),
                       ),
                     ),
                     if(proposeContribReplyNote(
                           data.issues.map((i) => i.issue),
-                          oldApp: data.legacyAppUsed,
+                          oldApp: data.isOldApp,
                         ) case final note?)
                       AppButton(
                         icon: Icon(MdiIcons.starFourPoints),
@@ -312,7 +312,7 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
 /// Podpis dymka: kto i kiedy. Bez daty, gdy mejl jej nie niósł — pusty
 /// nawias mówiłby mniej niż sam podpis.
 String _messageTitle(PiosenkomatMessage message){
-  final who = message.mine? 'Ty': 'Osoba dodająca';
+  final who = message.isOurs? 'Ty': 'Osoba dodająca';
   final at = message.at;
   if(at == null) return who;
   final local = at.toLocal();

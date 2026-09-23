@@ -1,4 +1,3 @@
-import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/similarity.dart';
@@ -13,7 +12,6 @@ ContribMessage reply(String id, String body, {required String from, required Dat
       body: body,
       subject: 'Re: Poprawka piosenki „Poezja”',
       from: from,
-      isReply: true,
       date: at,
     );
 
@@ -57,7 +55,7 @@ void main() {
         'Jasne, czyli rozumiem, że możemy dodać to samo?',
         'Jasne, może byc tak?',
       ]);
-      expect(sub.conversation.map((m) => m.mine), [false, true, false, false]);
+      expect(sub.conversation.map((m) => m.isOurs), [false, true, false, false]);
       expect(sub.conversation.first.at, DateTime.utc(2026, 6, 17));
 
       // Do uwagi `has-user-message` liczy się tylko to, co napisał autor.
@@ -93,7 +91,7 @@ void main() {
         book: SongBook.empty,
       );
       final data = got.piosenkomatData();
-      expect(data.messages.map((m) => m.text), ['hej']);
+      expect(data.conversation.map((m) => m.text), ['hej']);
       expect(data.userMessage, 'hej');
     });
 

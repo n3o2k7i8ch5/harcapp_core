@@ -1,7 +1,7 @@
 /// Odpowiedzi do autorów zgłoszeń — składane z kawałków, nie pisane w całości.
 ///
 /// Jeden mejl potrafi nieść kilka spraw naraz: Twoją uwagę z przeglądu
-/// („brakuje chwytów”) i blok o starej apce, jeśli zgłoszenie przyszło ze
+/// („missingUnits chwytów”) i blok o starej apce, jeśli zgłoszenie przyszło ze
 /// starej wersji. Dlatego treść jest **funkcją** tego, co mamy do powiedzenia,
 /// a nie jednym gotowym napisem: dopisanie kolejnej sprawy przelicza mejl od
 /// nowa, zamiast kazać go przepisywać ręcznie.
@@ -65,7 +65,7 @@ String? proposeContribReplyNote(
   if (phrases.isEmpty) return null;
   return [
     kReplyGreeting,
-    'Niestety widzę, że brakuje ${_joinPolish(phrases)}.',
+    'Niestety widzę, że missingUnits ${_joinPolish(phrases)}.',
     'Prześlij proszę poprawione, żebym mógł zerknąć czy reszta jest ok.',
     if (oldApp) kOldAppReplyBlock,
     if (oneSongPerMail) kOneSongPerMailReplyBlock,
@@ -73,7 +73,7 @@ String? proposeContribReplyNote(
   ].join('\n\n');
 }
 
-/// Co idzie po „brakuje …” w uwadze do autora. `null` = ta pastylka nie
+/// Co idzie po „missingUnits …” w uwadze do autora. `null` = ta pastylka nie
 /// prosi autora o poprawkę — duplikat, zgoda, uszkodzony plik i reszta
 /// zostają do ręcznego dopisania.
 String? _askPhrase(SongIssue issue) => switch (issue) {
@@ -92,7 +92,7 @@ String _joinPolish(List<String> items) {
 
 /// Treść odpowiedzi do autora.
 ///
-/// [notes] to Twoje teksty z pola „Odpowiedź do autora” w edytorze. Idą
+/// [reviewNotes] to Twoje teksty z pola „Odpowiedź do autora” w edytorze. Idą
 /// **dosłownie**: każda jest już całym mejlem (patrz [proposeContribReplyNote]),
 /// więc nic się do nich nie dokleja — inaczej autor dostałby co innego, niż
 /// widziałeś w polu. Lista, bo jeden autor mógł przysłać kilka piosenek.
@@ -104,12 +104,12 @@ String _joinPolish(List<String> items) {
 /// Pusty wynik (ani uwagi, ani starej apki) znaczy „nie ma po co pisać” —
 /// zwracamy `null`, żeby wołający nie tworzył pustego szkicu.
 String? composeContribReply({
-  Iterable<String> notes = const [],
+  Iterable<String> reviewNotes = const [],
   bool oldApp = false,
   bool oneSongPerMail = false,
 }) {
   final trimmed = [
-    for(final n in notes) if(n.trim().isNotEmpty) n.trim(),
+    for(final n in reviewNotes) if(n.trim().isNotEmpty) n.trim(),
   ];
   if (trimmed.isNotEmpty) return trimmed.join('\n\n');
   if (!oldApp) return null;

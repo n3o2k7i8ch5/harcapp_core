@@ -1,7 +1,7 @@
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:piosenkomat/classify.dart';
-import 'package:piosenkomat/cli.dart';
+import 'package:piosenkomat/report.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/plan.dart';
 import 'package:piosenkomat/review.dart';
@@ -20,19 +20,19 @@ Future<(LabelPlan, List<SongRaw>)> _scan() async {
     msgFrom(await completeEmail(song: sampleSong(title: 'Bez YT', yt: null, lyrics: 'Wlazl kotek na plotek')), id: 'yt'),
   ], book: SongBook.empty);
   expect(items.first.isClean, isTrue);
-  expect(items.last.labels, contains(kLabelToReview));
+  expect(items.last.labels, contains(kLabelNeedsReview));
   return (LabelPlan.fromClassified(items), [for (final c in items) c.song!]);
 }
 
-Future<(LabelPlan, List<SongRaw>, List<ProposedSong>)> _proposed() async {
+Future<(LabelPlan, List<SongRaw>, List<ReviewCandidate>)> _proposed() async {
   final (plan, songs) = await _scan();
-  return (plan, songs, collectProposed(plan, roundTrip(songs), _new));
+  return (plan, songs, collectCandidates(plan, roundTrip(songs), _new));
 }
 
-Map<String, (List<String>, List<String>)> _changes(
-        LabelPlan plan, List<SongRaw> reviewed, List<ProposedSong> proposed) =>
+Map<String, LabelChange> _changes(
+        LabelPlan plan, List<SongRaw> reviewed, List<ReviewCandidate> proposed) =>
     reviewLabelChanges(
-        [reviewDiff(kind: _new, proposed: proposed, reviewed: reviewed)], plan);
+        [reviewDiff(kind: _new, candidates: proposed, reviewed: reviewed)], plan);
 
 void main() {
   test('wróciła z przeglądu → „w pliku”; bez zarzutu nie rusza się wcale', () async {
@@ -40,15 +40,15 @@ void main() {
     final changes = _changes(plan, roundTrip(songs), proposed);
     expect(changes.containsKey('ok'), isFalse,
         reason: '„ready-to-add” już wisi, nie ma czego przestawiać');
-    expect(changes['yt']!.$1, [kLabelReady]);
-    expect(changes['yt']!.$2, kReviewLabels);
+    expect(changes['yt']!.$1, [kLabelReadyToAdd]);
+    expect(changes['yt']!.$2, kNeedsReviewLabels);
   });
 
   test('wyrzucona na stronie → rejected/after-review', () async {
     final (plan, songs, proposed) = await _proposed();
     final changes = _changes(plan, roundTrip([songs.first]), proposed);
     expect(changes['yt']!.$1, [kLabelRejectedAfterReview]);
-    expect(changes['yt']!.$2, contains(kLabelReady));
+    expect(changes['yt']!.$2, contains(kLabelReadyToAdd));
   });
 
   test('odrzucona z wyjaśnieniem to pytanie do autora, nie odrzut', () async {
@@ -57,7 +57,7 @@ void main() {
     final reviewed = roundTrip(songs);
     final yt = reviewed.firstWhere((s) => s.title == 'Bez YT');
     yt.piosenkomatData = yt.piosenkomatData!.copyWith(
-        accepted: () => false, replyToContributor: () => 'Dorzuć YouTube i wejdzie.');
+        accepted: () => false, reviewNote: () => 'Dorzuć YouTube i wejdzie.');
     final changes = _changes(plan, reviewed, proposed);
     expect(changes['yt']!.$1, [kLabelReplyReviewNote]);
     expect(changes['yt']!.$1, isNot(contains(kLabelRejectedAfterReview)));
@@ -68,22 +68,22 @@ void main() {
     final reviewed = roundTrip(songs);
     final ok = reviewed.firstWhere((s) => s.title == 'Czysta');
     ok.piosenkomatData = ok.piosenkomatData!
-        .copyWith(replyToContributor: () => 'Dodałem, popraw literówkę.');
+        .copyWith(reviewNote: () => 'Dodałem, popraw literówkę.');
     final changes = _changes(plan, reviewed, proposed);
-    expect(changes['ok']!.$1, [kLabelReady, kLabelReplyReviewNote],
+    expect(changes['ok']!.$1, [kLabelReadyToAdd, kLabelReplyReviewNote],
         reason: 'bez zarzutu, ale z uwagą — musi ruszyć mimo „ready-to-add”');
-    expect(changes['ok']!.$2, kReviewLabels);
+    expect(changes['ok']!.$2, kNeedsReviewLabels);
   });
 
   test('etykiety idą na wszystkie wiadomości wątku', () async {
     final (plan, songs) = await _scan();
     final withReply = LabelPlan(
       createdAt: plan.createdAt,
-      labelsById: {...plan.labelsById, 'yt2': plan.labelsById['yt']!},
+      labelsByMessage: {...plan.labelsByMessage, 'yt2': plan.labelsByMessage['yt']!},
       songsByThread: plan.songsByThread,
       messagesByThread: {...plan.messagesByThread, 'yt': ['yt', 'yt2']},
     );
-    final proposed = collectProposed(withReply, roundTrip(songs), _new);
+    final proposed = collectCandidates(withReply, roundTrip(songs), _new);
     final changes = _changes(withReply, roundTrip(songs), proposed);
     expect(changes['yt2']!.$1, changes['yt']!.$1);
     expect(changes['yt2']!.$2, changes['yt']!.$2);
@@ -100,7 +100,7 @@ void main() {
       msgFrom('From: a@b.pl\nSubject: Cześć\n\nCześć, mam pytanie', id: 'raw'),
     ], book: book));
     expect(report, contains('ZGŁOSZEŃ        6'));
-    expect(report, contains('NIE SPARSOWANE  1'));
+    expect(report, contains('  nie do odczytu 1'));
     expect(report, contains('NOWE            2'));
     expect(report, contains('  bez zarzutu   1'));
     expect(report, contains('  z uwagami     1'));
