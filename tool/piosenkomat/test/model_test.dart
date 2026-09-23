@@ -85,8 +85,8 @@ void main() {
     expect(isClosedLabel('song/rejected/silly'), isTrue);
 
     expect(isClosedLabel(kLabelToReview), isFalse);
-    expect(isClosedLabel(kLabelUnparsable), isFalse,
-        reason: 'niesparsowalne masz zobaczyć w skrzynce');
+    expect(isClosedLabel(kLabelUnparsable), isTrue,
+        reason: 'odrzut; zobaczyć masz go po `have-a-look`');
     expect(isClosedLabel(ReviewKind.missingData.label), isFalse);
     expect(isClosedLabel(kLabelRejectedCorruptedData), isTrue);
     expect(isClosedLabel(kLabelHaveALook), isFalse,

@@ -1458,7 +1458,7 @@ String formatRunReport(List<Classified> items) {
     ..writeln('  duplikat      ${count((c) => c.target == Target.rejectDuplicate)}')
     ..writeln('  zły załącznik ${count((c) => c.target == Target.rejectBrokenFile)}')
     ..writeln('RZUĆ OKIEM      ${count((c) => c.haveALook)}'
-        '  (odrzut, ale autor coś napisał albo załącznik zepsuty)')
+        '  (odrzut, ale autor coś napisał albo mejla nie da się odczytać)')
     ..writeln('STARA APKA      ${count((c) => c.submission.isOldApp)}'
         '  (do odpisania: ./piosenkomat reply)');
 

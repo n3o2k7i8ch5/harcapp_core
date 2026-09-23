@@ -97,7 +97,7 @@ void main() {
       expect(got.issues, isEmpty);
       expect(got.target, Target.candidateNew);
     });
-    test('nie da się sparsować → unparsable, sam mejl', () {
+    test('nie da się sparsować → rejected/unparsable, rzuć okiem', () {
       final got = classify(
         ContribMessage(id: 'x', body: 'Cześć, mam pytanie', subject: 'Cześć'),
         book: SongBook.empty,
@@ -105,7 +105,8 @@ void main() {
       expect(got.target, Target.unparsable);
       expect(got.song, isNull);
       expect(got.title, 'Cześć');
-      expect(got.labels, [kLabelUnparsable]);
+      expect(got.labels, [kLabelUnparsable, kLabelHaveALook]);
+      expect(got.labels.any(isClosedLabel), isTrue, reason: 'odrzut jest przeczytany');
     });
   });
 

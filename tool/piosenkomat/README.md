@@ -197,9 +197,8 @@ song/
 ├── added                     koniec
 ├── correction                ZNACZNIK: zgłoszenie to poprawka — wgrywasz podmianą, nie dodaniem
 ├── have-a-look               ZNACZNIK obok odrzutu: piosenkomat skończył, ale rzuć okiem —
-│                             identyczna z dopiskiem albo zepsuty załącznik; zdejmujesz Ty
-├── unparsable                nie dało się sparsować; poza needs-review, nieprzeczytane,
-│                             etykieta tylko po to, żeby mejl nie wracał do `scan`
+│                             identyczna z dopiskiem, zepsuty załącznik albo unparsable;
+│                             zdejmujesz Ty
 ├── add-contributor           „wpisać osobę dodającą do apki”, tylko Ty
 ├── rejected/
 │   ├── already-in-app        automat: piosenka IDENTYCZNA (każde pole) z tą w apce
@@ -209,6 +208,8 @@ song/
 │   │                         zero zgłoszeń); zawsze z `have-a-look`
 │   ├── unknown-format        automat: plik w wersji protokołu nowszej niż zna to narzędzie;
 │   │                         zawsze z `have-a-look`
+│   ├── unparsable            automat: nie dało się sparsować, powód nieznany (nie-piosenka,
+│   │                         nieznany kształt); zawsze z `have-a-look`
 │   ├── no-chords             tylko Ty
 │   ├── silly                 tylko Ty (kiedyś LLM)
 │   └── too-niche             tylko Ty (kiedyś LLM)
@@ -245,8 +246,8 @@ song/
   czeka w wątku, Gmail go pokazuje.
 - **Przeczytane** = sprawa zamknięta: `added` i każde `rejected/*` (także
   z `have-a-look` — listą jest etykieta, nie nieprzeczytane), oraz
-  `waiting-for-author` po wysłanej odpowiedzi. Pozostałe `needs-review/*`,
-  `unparsable` i `reply/*` zostają nieprzeczytane.
+  `waiting-for-author` po wysłanej odpowiedzi. Pozostałe `needs-review/*`
+  i `reply/*` zostają nieprzeczytane.
 
 | Co | Zapytanie |
 |---|---|

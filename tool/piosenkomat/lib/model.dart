@@ -37,10 +37,11 @@ const String kLabelToReview = 'song/needs-review';
 /// Znacznik: zgłoszenie to poprawka istniejącej piosenki. Zatwierdzoną
 /// wgrywasz inaczej — podmiana, nie dodanie.
 const String kLabelCorrection = 'song/correction';
-/// Nie dało się sparsować. Poza `needs-review` — to nie Twoja kolejka
-/// przeglądu; etykieta jest tylko po to, żeby mejl nie wracał do `scan`.
-/// Zostaje nieprzeczytany, bo masz go zobaczyć w skrzynce.
-const String kLabelUnparsable = 'song/unparsable';
+/// Nie dało się sparsować, a powód nieznany (znany →
+/// [kLabelRejectedCorruptedData] / [kLabelRejectedUnknownFormat]). Piosenkomat
+/// nic więcej z tym nie zrobi, więc to odrzut — zawsze z [kLabelHaveALook],
+/// bo w środku bywa piosenka w nieznanym kształcie albo zwykłe pytanie.
+const String kLabelUnparsable = 'song/rejected/unparsable';
 /// Kolejka `reply`, powód pierwszy: mejl z najstarszej apki, autorowi trzeba
 /// odpisać, żeby ją zaktualizował. `reply` ją zdejmuje. `scan` jej nie wiesza,
 /// gdy autor dostał już od nas odpowiedź (`Submission.weReplied`) — blok
@@ -145,7 +146,7 @@ bool isSongLabel(String label) => label == 'song' || label.startsWith('song/');
 
 /// Etykiety stanu, po których nic już od Ciebie nie zależy: piosenka weszła
 /// albo odpadła na dobre. Takie mejle oznaczamy jako przeczytane, żeby nie
-/// wisiały w skrzynce. `needs-review/*`, `unparsable` i `reply/*` zostają
+/// wisiały w skrzynce. `needs-review/*` i `reply/*` zostają
 /// nieprzeczytane — czekają na Twoją decyzję, oko albo wysyłkę. Po `reply`
 /// mejl z [kLabelWaitingForAuthor] jest przeczytany osobno, patrz
 /// [labelsAfterReply].
@@ -688,9 +689,10 @@ class Classified {
 
   /// Piosenkomat skończył, ale warto rzucić okiem: identyczna z apką, do
   /// której autor coś napisał (dopisek albo propozycja poprawki — ta bywa
-  /// całą treścią zgłoszenia), albo zepsuty załącznik.
+  /// całą treścią zgłoszenia), zepsuty załącznik albo coś nie do odczytania.
   bool get haveALook =>
       target == Target.rejectBrokenFile ||
+      target == Target.unparsable ||
       (target == Target.rejectAlreadyInApp && submission.hasMessages);
 
   /// Etykiety stanu plus znaczniki (poprawka, stara apka).
