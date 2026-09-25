@@ -371,12 +371,24 @@ class GmailMailbox {
     return (subject: headers['subject'] ?? '', from: headers['from'] ?? '');
   }
 
-  /// Suma etykiet wszystkich wiadomości wątku. Kolejka jest po wątkach:
-  /// odpowiedź w wątku, który już dostał `song/*`, nie jest nowym zgłoszeniem.
-  Future<Set<String>> labelsOfThread(String threadId) async => {
-        for (final m in await _thread(threadId))
+  /// Wątek jednym strzałem: suma etykiet wszystkich wiadomości (kolejka jest
+  /// po wątkach — odpowiedź w wątku z `song/*` nie jest nowym zgłoszeniem)
+  /// i id naszych wysłanych wiadomości, bez szkiców — te wchodzą do rozmowy
+  /// w edytorze, choć w kolejce ich nie ma (leżą w `SENT`, nie w `INBOX`).
+  Future<({Set<String> labels, List<String> sentIds})> threadSummary(
+      String threadId) async {
+    final messages = await _thread(threadId);
+    return (
+      labels: {
+        for (final m in messages)
           for (final id in m.labelIds ?? const <String>[]) _nameById[id] ?? id,
-      };
+      },
+      sentIds: [
+        for (final m in messages)
+          if (_isSent(m) && !(m.labelIds ?? const <String>[]).contains('DRAFT')) m.id!,
+      ],
+    );
+  }
 
   /// Id wszystkich wiadomości wątku — etykiety idą na cały wątek.
   Future<List<String>> threadMessageIds(String threadId) async =>

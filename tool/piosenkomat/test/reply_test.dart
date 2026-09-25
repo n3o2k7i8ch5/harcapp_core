@@ -72,6 +72,17 @@ void main() {
         reason: 'Gmail oddaje CRLF');
   });
 
+  test('z mejla do dymka: sama odpowiedź, bez ramki', () {
+    expect(replyNoteOf(composeContribReply(reviewNote: 'Brakuje chwytów.', oldApp: true)!),
+        'Brakuje chwytów.');
+    expect(replyNoteOf(composeContribReply(reviewNote: 'Dwa akapity.\n\nNaprawdę dwa.')!),
+        'Dwa akapity.\n\nNaprawdę dwa.');
+    // Sam blok o starej apce: nie ma czego pokazać.
+    expect(replyNoteOf(composeContribReply(oldApp: true)!), isEmpty);
+    // Mejl pisany ręcznie wraca cały.
+    expect(replyNoteOf(' Cześć, piszę sam. '), 'Cześć, piszę sam.');
+  });
+
   test('co wypada przy przeliczeniu — do pokazania, nie do zgubienia', () {
     final przed = composeContribReply(reviewNote: 'Brakuje chwytów.')!;
     final po = composeContribReply(reviewNote: 'Brakuje YouTube.')!;

@@ -1,5 +1,7 @@
+import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
+import 'package:piosenkomat/plan.dart';
 import 'package:piosenkomat/similarity.dart';
 import 'package:test/test.dart';
 
@@ -83,6 +85,47 @@ void main() {
 
       expect(sub.conversation.map((m) => m.text), contains('Dopisuję autorów.'));
       expect(sub.conversation.map((m) => m.text).join(), isNot(contains('Znam i akceptuję')));
+    });
+
+    test('po reopen: nasza odpowiedź w rozmowie, bez ramki — ale nie w etykietach', () async {
+      final v1 = msgFrom(await completeEmail(userMessage: 'Pierwsza wersja.'), id: 'm1');
+      final v2 = msgFrom(await completeEmail(userMessage: 'Poprawione, z chwytami.'), id: 'm3');
+      ContribMessage inThread(ContribMessage m, DateTime at) => ContribMessage(
+            id: m.id, threadId: 't', body: m.body, subject: m.subject,
+            from: _author, date: at,
+            songAttachment: m.songAttachment, submissionAttachment: m.submissionAttachment,
+          );
+      final out = classifyBatch([
+        inThread(v1, DateTime.utc(2026, 9, 1)),
+        // Tak wychodzi z `reply`: z ramką. W kolejce jej nie ma — `scan`
+        // dociąga ją z wątku.
+        reply('m2', composeContribReply(reviewNote: 'Brakuje chwytów.', oldApp: true)!,
+            from: 'Harc App <$kInboxEmail>', at: DateTime.utc(2026, 9, 2)),
+        inThread(v2, DateTime.utc(2026, 9, 3)),
+      ], book: SongBook.empty);
+      final c = out.single;
+
+      expect(c.submission.message.id, 'm3', reason: 'reprezentantem jest nowsza wersja autora');
+      expect(c.submission.conversation.map((m) => (m.text, m.isOurs)), [
+        ('Pierwsza wersja.', false),
+        ('Brakuje chwytów.', true),
+        ('Poprawione, z chwytami.', false),
+      ]);
+      // Na naszym wysłanym mejlu etykiet nie wieszamy.
+      expect(c.submission.messages.map((m) => m.id), ['m1', 'm3']);
+      expect(RunPlan.fromClassified(out).labelsByMessage.keys, unorderedEquals(['m1', 'm3']));
+    });
+
+    test('nasza odpowiedź pisana ręcznie w Gmailu: bez cytatu, reszta cała', () {
+      final sub = buildSubmission([
+        ContribMessage(
+          id: 'm1', threadId: 't', body: 'Zgłoszenie', from: _author,
+          date: DateTime.utc(2026, 6, 1),
+        ),
+        reply('m2', 'Hej, dorzuć proszę chwyty.\n\nW dniu 1 czerwca Filip napisał:\n> Zgłoszenie',
+            from: 'Harc App <$kInboxEmail>', at: DateTime.utc(2026, 6, 2)),
+      ], book: SongBook.empty);
+      expect(sub.conversation.where((m) => m.isOurs).single.text, 'Hej, dorzuć proszę chwyty.');
     });
 
     test('ślad w piosence niesie rozmowę, nie zlepek', () async {

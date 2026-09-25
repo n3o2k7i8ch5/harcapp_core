@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
+import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
@@ -129,11 +130,13 @@ Submission buildSubmission(
   bool weReplied = false,
 }) {
   final ordered = [...thread]..sort((a, b) => _dateOf(a).compareTo(_dateOf(b)));
+  // Nasze odpowiedzi są tylko w rozmowie — zgłoszeniem jest to, co przysłał autor.
+  final theirs = [for (final m in ordered) if (!_isOurReply(m)) m];
   final own = [
-    for (final m in ordered.skip(1))
+    for (final m in theirs.skip(1))
       if (m.hasOwnSongCode && _senderFromHeader(m) != null) m,
   ];
-  final rep = own.isNotEmpty ? own.last : ordered.first;
+  final rep = own.isNotEmpty ? own.last : theirs.first;
 
   // Fakty z załącznika, dopisek z treści — ta sama struktura, co ze starego
   // parsera, więc wszystko poniżej jej nie odróżnia. Uszkodzony plik nie
@@ -156,7 +159,7 @@ Submission buildSubmission(
     if (parsed?.userMessage case final own?) PiosenkomatMessage(own, at: rep.date),
     for (final m in ordered)
       if (m.id != rep.id)
-        if (_userMessageOf(m) case final extra?)
+        if (_conversationTextOf(m) case final extra?)
           PiosenkomatMessage(extra, at: m.date, isOurs: _isOurs(m)),
   ]..sort((a, b) => (a.at ?? DateTime(0)).compareTo(b.at ?? DateTime(0)));
 
@@ -208,7 +211,8 @@ Submission buildSubmission(
   return Submission(
     threadId: rep.threadId,
     message: rep,
-    messages: ordered,
+    // Etykiety tylko na tym, co przysłał autor — na naszych nie ma po co.
+    messages: theirs,
     kind: isCorrection ? SubmissionKind.correction : SubmissionKind.newSong,
     isOldApp: oldApp,
     shape: shape,
@@ -522,6 +526,20 @@ String? _userMessageOf(ContribMessage m) {
   // piosenki — stąd jeszcze cięcie po znacznikach szablonu.
   return stripSubmissionTemplate(own);
 }
+
+/// Tekst wiadomości do dymka w edytorze. Nasza odpowiedź bez ramki
+/// (powitania, bloku o starej apce, pożegnania, stopki) — tę widać przy polu.
+String? _conversationTextOf(ContribMessage m) {
+  final text = _userMessageOf(m);
+  if (text == null || !_isOurReply(m)) return text;
+  final note = replyNoteOf(text);
+  return note.isEmpty ? null : note;
+}
+
+/// Nasza odpowiedź w wątku: ze skrzynki HarcAppa i bez kodu piosenki.
+/// Zgłoszenie wysłane z samej skrzynki (test, przekazanie) dalej jest
+/// zgłoszeniem — niesie piosenkę.
+bool _isOurReply(ContribMessage m) => _isOurs(m) && !m.hasOwnSongCode;
 
 /// Czy wiadomość wyszła ze skrzynki HarcAppa, czyli od Ciebie.
 bool _isOurs(ContribMessage m) => emailFromHeader(m.from) == kInboxEmail;

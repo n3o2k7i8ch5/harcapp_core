@@ -121,6 +121,21 @@ bool isToolShapedReply(String body) {
       paragraphs.last == kReplyFooter;
 }
 
+/// Twoja odpowiedź wyjęta z mejla — do dymka w edytorze, bez ramki, którą
+/// i tak widać przy polu. Odwrotność [composeContribReply]: z mejla w naszym
+/// kształcie zdejmuje powitanie, blok o starej apce, pożegnanie i stopkę.
+/// Mejl w innym kształcie (pisany ręcznie w Gmailu) wraca cały.
+String replyNoteOf(String body) {
+  if (!isToolShapedReply(body)) return body.trim();
+  final frame = {
+    kReplyGreeting,
+    ..._paragraphs(kOldAppReplyBlock),
+    kReplyClosing,
+    kReplyFooter,
+  };
+  return [for (final a in _paragraphs(body)) if (!frame.contains(a)) a].join('\n\n');
+}
+
 /// Akapity z [oldBody], których nie ma w [newBody]. To, co wypadnie ze
 /// szkicu przy przeliczeniu — do pokazania, nie do zgubienia po cichu.
 List<String> paragraphsDroppedBy(String oldBody, String newBody) {

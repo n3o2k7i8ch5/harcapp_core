@@ -250,15 +250,18 @@ Future<int> _scan(ArgResults cmd) async {
         'ze strony — piosenkomat obsługuje wyłącznie zgłoszenia wysłane z apki. '
         'Te ogarnij ręcznie.');
   }
-  final (messages, weRepliedThreads) = await _unlabeledThreads(mailbox, queue.songs);
+  final (messages, weRepliedThreads, ourSentIds) = await _unlabeledThreads(mailbox, queue.songs);
   final skipped = fetched.length - messages.length - queue.web;
   if (skipped > 0) {
     stdout.writeln('Pominięto ${plural(skipped, 'mejl', 'mejle', 'mejli')} '
         '(już otagowane, w otagowanym wątku albo nie o piosence), zostają bez zmian.');
   }
+  // Nasze odpowiedzi z tych wątków — tylko do rozmowy w edytorze. W kolejce
+  // ich nie ma, a bez nich po `reopen` widać odpowiedź autora bez pytania.
+  final ours = await mailbox.getMessages(ourSentIds);
 
   final runDir = cmd['out'] as String? ?? defaultRunDir();
-  final classified = classifyBatch(messages,
+  final classified = classifyBatch([...messages, ...ours],
       book: book, weRepliedThreads: weRepliedThreads, run: p.basename(runDir));
   final report = formatRunReport(classified);
   stdout
@@ -274,20 +277,25 @@ Future<int> _scan(ArgResults cmd) async {
 /// Kolejka jest po wątkach: odpowiedź w wątku, który już dostał `song/*`,
 /// to nie nowe zgłoszenie. Query tego nie umie (działa na wiadomościach),
 /// więc dociągamy wątek — jedno zapytanie na wątek. Przy okazji zbieramy
-/// wątki, których autor dostał już od nas odpowiedź.
-Future<(List<ContribMessage>, Set<String>)> _unlabeledThreads(
+/// wątki, których autor dostał już od nas odpowiedź, i id tych odpowiedzi.
+Future<(List<ContribMessage>, Set<String>, List<String>)> _unlabeledThreads(
   GmailMailbox mailbox,
   List<ContribMessage> messages,
 ) async {
   final labeledThreads = <String>{};
   final weRepliedThreads = <String>{};
+  final sentIdsByThread = <String, List<String>>{};
   for (final t in {for (final m in messages) m.threadId}) {
-    final labels = await mailbox.labelsOfThread(t);
-    if (labels.any(isSongLabel)) labeledThreads.add(t);
+    final thread = await mailbox.threadSummary(t);
+    if (thread.labels.any(isSongLabel)) labeledThreads.add(t);
     // Np. wątek cofnięty przez `reopen`.
-    if (labels.contains('SENT')) weRepliedThreads.add(t);
+    if (thread.labels.contains('SENT')) weRepliedThreads.add(t);
+    sentIdsByThread[t] = thread.sentIds;
   }
   final unlabeled = [for (final m in messages) if (!labeledThreads.contains(m.threadId)) m];
+  final ourSentIds = [
+    for (final t in {for (final m in unlabeled) m.threadId}) ...?sentIdsByThread[t],
+  ];
 
   // Stara apka: blok „zaktualizuj apkę” wystarczy autorowi raz, a `reply`
   // nie odpisuje w każdym jego wątku, więc w części z nich `SENT` nie ma.
@@ -308,7 +316,7 @@ Future<(List<ContribMessage>, Set<String>)> _unlabeledThreads(
       weRepliedThreads.add(m.threadId);
     }
   }
-  return (unlabeled, weRepliedThreads);
+  return (unlabeled, weRepliedThreads, ourSentIds);
 }
 
 /// Katalog przebiegu: raport, plan przebiegu i po dwa pliki na rodzaj —

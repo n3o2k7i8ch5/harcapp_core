@@ -347,6 +347,8 @@ tagi widzi użytkownik apki):
 ```
 
 `conversation` to rozmowa z wątku: dopiski autora i Twoje odpowiedzi (`ours`).
+Twoich w kolejce nie ma (leżą w wysłanych), więc `scan` dociąga je z wątku
+i pokazuje bez ramki — samą sprawę; etykiet na nich nie wiesza.
 `accepted` i `review_note` dopisuje edytor przy przeglądzie: przełącznik
 „wchodzi” i tekst z pola „Odpowiedź do autora”. Skąd przyszło zgłoszenie, mówi
 `source` w **pliku zgłoszenia**; rozpoznany kształt mejla widać w rozkładzie
