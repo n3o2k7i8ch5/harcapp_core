@@ -105,7 +105,10 @@ void main() {
     expect(report, contains('  bez zarzutu   1'));
     expect(report, contains('  z uwagami     1'));
     expect(report, contains('POPRAWKI        1'));
-    expect(report, contains('  już w apce    2'), reason: 'identyczna z dopiskiem też jest odrzutem');
+    // `dup` i `msg` są sobie identyczne (dopisek to nie piosenka) i mają tę samą
+    // datę: zostaje późniejsza w kolejce, wcześniejsza to duplikat.
+    expect(report, contains('  już w apce    1'), reason: 'identyczna z dopiskiem też jest odrzutem');
+    expect(report, contains('  duplikat      1'));
     expect(report, contains('RZUĆ OKIEM      2'), reason: 'identyczna z dopiskiem + nie do odczytania');
     expect(report, contains('missing-youtube'));
     expect(report, contains('Kształt mejla:'));

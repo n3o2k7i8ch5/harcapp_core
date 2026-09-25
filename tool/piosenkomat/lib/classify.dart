@@ -281,27 +281,39 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
     groups.putIfAbsent(keyOf(s), () => []).add(s);
   }
 
+  // Odrzucone jako duplikat nowszego identycznego. Nie wskazuje ich żadna
+  // pastylka — w pliku ich nie będzie, więc nie byłoby czego sprawdzić.
+  final superseded = <String>{};
   for (final group in groups.values) {
     if (group.length < 2) continue;
     final ordered = [...group]..sort((a, b) => _cmpDate(a.sentAt, b.sentAt));
-    // Identyczne zlewają się: każde wskazuje najnowsze identyczne z pozostałych.
-    for (final s in ordered) {
-      final identical = [
-        for (final o in ordered)
-          if (o.threadId != s.threadId &&
-              levelOf(compare(profiles[s.threadId]!, profiles[o.threadId]!)) == MatchLevel.identical)
-            o,
+
+    // 1. Identyczne zlewają się do najnowszej: starsze wskazują ją i odpadną.
+    final survivors = <Submission>[];
+    for (var i = 0; i < ordered.length; i++) {
+      final s = ordered[i];
+      final newer = [
+        for (var j = i + 1; j < ordered.length; j++)
+          if (levelOf(compare(profiles[s.threadId]!, profiles[ordered[j].threadId]!)) ==
+              MatchLevel.identical)
+            ordered[j],
       ];
-      if (identical.isNotEmpty) {
-        final newest = identical.last; // `ordered` jest po dacie
-        final isNewest = _cmpDate(s.sentAt, newest.sentAt) >= 0;
-        out[s.threadId] = s.copyWith(batchMatch: matchOf(s, newest, newest: isNewest));
+      if (newer.isEmpty) {
+        survivors.add(s);
         continue;
       }
-      // Nieidentyczne w grupie: najbliższe tekstem z pozostałych.
+      out[s.threadId] = s.copyWith(batchMatch: matchOf(s, newer.last, newest: false));
+      superseded.add(s.threadId);
+    }
+
+    // 2. Pozostałe porównują się tylko między sobą: każde wskazuje najbliższe
+    // tekstem **inne pozostałe**. Sama najnowsza z identycznych nie ma z kim —
+    // i nie dostaje pastylki.
+    if (survivors.length < 2) continue;
+    for (final s in survivors) {
       Submission? best;
       var bestScore = -1.0;
-      for (final o in ordered) {
+      for (final o in survivors) {
         if (o.threadId == s.threadId) continue;
         final score = jaccard(profiles[s.threadId]!.words, profiles[o.threadId]!.words);
         if (score > bestScore) {
@@ -309,7 +321,7 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
           bestScore = score;
         }
       }
-      if (best != null) out[s.threadId] = s.copyWith(batchMatch: matchOf(s, best));
+      out[s.threadId] = s.copyWith(batchMatch: matchOf(s, best!));
     }
   }
 
@@ -318,7 +330,10 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
   // Poprawki grupuje cel, więc dwie poprawki „Barki” o różnych albo
   // nieznanych celach spotykają się dopiero tutaj — i mają się zobaczyć bez
   // względu na tekst, jak w grupie.
-  final list = out.values.where((s) => s.song != null).toList();
+  final list = [
+    for (final s in out.values)
+      if (s.song != null && !superseded.contains(s.threadId)) s,
+  ];
   for (var i = 0; i < list.length; i++) {
     for (var j = i + 1; j < list.length; j++) {
       final a = list[i], b = list[j];
@@ -455,7 +470,8 @@ Decision decide(Submission s) {
       case MatchLevel.similarText:
         add(SongIssue.similarTextInBatch, batch.detail);
       case MatchLevel.identical:
-        // Ta jest najnowsza (inaczej odpadłaby wyżej) — starsza odpadła, nic do uwag.
+        // Nie zdarza się: identyczna z nowszą odpada wyżej, a te, które
+        // zostają, nie są sobie identyczne.
         break;
       case null:
         break;

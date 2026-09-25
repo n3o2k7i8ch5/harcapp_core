@@ -170,6 +170,8 @@ void main() {
   group('w paczce:', () {
     Future<String> older(String raw) async =>
         raw.replaceFirst('Date: 2026-09-06T12:00:00+02:00', 'Date: 2026-09-01T12:00:00+02:00');
+    Future<String> dated(String raw, String day) async =>
+        raw.replaceFirst('Date: 2026-09-06T12:00:00+02:00', 'Date: 2026-09-${day}T12:00:00+02:00');
 
     test('identyczna dwa razy → najnowsza wchodzi, starsza rejected/duplicate', () async {
       final old = await older(await completeEmail(song: sampleSong(lyrics: _a)));
@@ -211,6 +213,61 @@ void main() {
       expect(out.map((c) => c.destination), everyElement(Destination.candidateNew));
       expect(out.map(issuesOf), everyElement([SongIssue.sameTitleInBatch]));
       expect(detailOf(out[0], SongIssue.sameTitleInBatch), contains('[b]'));
+    });
+
+    test('A≡B + C z innymi chwytami: A odpada, B i C wskazują siebie nawzajem', () async {
+      final a = await dated(await completeEmail(song: sampleSong(lyrics: _a)), '01');
+      final b = await dated(await completeEmail(song: sampleSong(lyrics: _a)), '03');
+      final c = await completeEmail(song: sampleSong(lyrics: _a, chordsText: 'C G a\nC G a'));
+      final out = classifyBatch(
+          [msgFrom(c, id: 'c'), msgFrom(a, id: 'a'), msgFrom(b, id: 'b')], book: SongBook.empty);
+      final byId = {for (final x in out) x.message.id: x};
+      expect(byId['a']!.destination, Destination.rejectDuplicate);
+      expect(byId['a']!.decision.detail, contains('[b]'));
+      // B nie wchodzi bez pytania, choć jest najnowszą z identycznych.
+      expect(issuesOf(byId['b']!), [SongIssue.sameTitleInBatch]);
+      expect(issuesOf(byId['c']!), [SongIssue.sameTitleInBatch]);
+      // Pastylki wskazują to, co jest w pliku — nie odrzucone A.
+      expect(detailOf(byId['b']!, SongIssue.sameTitleInBatch), contains('[c]'));
+      expect(detailOf(byId['c']!, SongIssue.sameTitleInBatch), contains('[b]'));
+    });
+
+    test('trzy identyczne → zostaje najnowsza, bez pastylki', () async {
+      final out = classifyBatch([
+        msgFrom(await dated(await completeEmail(song: sampleSong(lyrics: _a)), '01'), id: 'a'),
+        msgFrom(await dated(await completeEmail(song: sampleSong(lyrics: _a)), '03'), id: 'b'),
+        msgFrom(await completeEmail(song: sampleSong(lyrics: _a)), id: 'c'),
+      ], book: SongBook.empty);
+      final byId = {for (final x in out) x.message.id: x};
+      expect(byId['a']!.destination, Destination.rejectDuplicate);
+      expect(byId['b']!.destination, Destination.rejectDuplicate);
+      expect(byId['c']!.isClean, isTrue);
+    });
+
+    test('dwie identyczne poprawki → starsza odpada, nowsza bez same-target-in-batch', () async {
+      final book = bookWith([sampleSong(lyrics: _a)]);
+      Future<String> poprawka() => completeEmail(
+          isNew: false, correctedSongId: 'tmp', song: sampleSong(lyrics: '$_a\nDopisana zwrotka'));
+      final out = classifyBatch([
+        msgFrom(await older(await poprawka()), id: 'old'),
+        msgFrom(await poprawka(), id: 'new'),
+      ], book: book);
+      final byId = {for (final x in out) x.message.id: x};
+      expect(byId['old']!.destination, Destination.rejectDuplicate);
+      expect(byId['new']!.destination, Destination.candidateCorrection);
+      expect(issuesOf(byId['new']!), isNot(contains(SongIssue.sameTargetInBatch)));
+    });
+
+    test('podobna z innej grupy wskazuje zostającą, nie odrzucony duplikat', () async {
+      final out = classifyBatch([
+        msgFrom(await older(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a))), id: 'a'),
+        msgFrom(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a)), id: 'b'),
+        msgFrom(await completeEmail(song: sampleSong(title: 'Knieje', lyrics: '$_a\nJedna nowa linijka')), id: 'd'),
+      ], book: SongBook.empty);
+      final byId = {for (final x in out) x.message.id: x};
+      expect(byId['a']!.destination, Destination.rejectDuplicate);
+      expect(detailOf(byId['d']!, SongIssue.similarTextInBatch), contains('[b]'));
+      expect(detailOf(byId['b']!, SongIssue.similarTextInBatch), contains('[d]'));
     });
 
     test('różne tytuły, podobna treść → similar-text-in-batch', () async {
