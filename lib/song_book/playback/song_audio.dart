@@ -61,8 +61,6 @@ class AudioMeta {
   static Map<String, List<SongAudio>> _byId = const {};
   static bool _loaded = false;
 
-  static bool get loaded => _loaded;
-
   static List<SongAudio> audiosOf(String songId) => _byId[songId] ?? const [];
 
   static Future<void> load() async {

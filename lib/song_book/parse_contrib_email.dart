@@ -70,9 +70,8 @@ class ParsedContribEmail{
     SongSubmissionFile file,
     String body, {
     String? senderEmail,
-    int index = 0,
   }){
-    final submission = file.submissions[index];
+    final submission = file.submissions.first;
     return ParsedContribEmail(
       song: submission.song,
       senderEmail: senderEmail,

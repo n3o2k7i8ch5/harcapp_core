@@ -106,16 +106,15 @@ List<ReviewCandidate> collectCandidates(
       candidateSongs.where((s) => s.id.split('~').first == songId).firstOrNull;
 
   return [
-    for (final e in plan.songsByThread.entries)
-      for (final i in e.value)
-        if (i.kind == kind)
-          ReviewCandidate(
-            threadId: e.key,
-            songId: i.songId,
-            title: i.title,
-            sender: i.sender,
-            words: textWords(find(i.songId)?.text ?? ''),
-          ),
+    for (final e in plan.songByThread.entries)
+      if (e.value.kind == kind)
+        ReviewCandidate(
+          threadId: e.key,
+          songId: e.value.songId,
+          title: e.value.title,
+          sender: e.value.sender,
+          words: textWords(find(e.value.songId)?.text ?? ''),
+        ),
   ];
 }
 

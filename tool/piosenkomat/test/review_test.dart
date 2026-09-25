@@ -50,9 +50,9 @@ void main() {
 
   test('plan wiąże piosenkę z wątkiem', () async {
     final (plan, songs) = await _run();
-    expect(plan.songsByThread.keys, ['m1', 'm2']);
-    expect(plan.songsByThread['m1']!.single.title, 'Pierwsza');
-    expect(plan.songsByThread['m1']!.single.songId, songs.first.id);
+    expect(plan.songByThread.keys, ['m1', 'm2']);
+    expect(plan.songByThread['m1']!.title, 'Pierwsza');
+    expect(plan.songByThread['m1']!.songId, songs.first.id);
   });
 
   test('nic nie usunięte: wszystko wchodzi', () async {

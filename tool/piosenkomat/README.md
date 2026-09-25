@@ -38,7 +38,6 @@ dopisek autora, czyli wszystko nad zamrożoną belką `Akceptacja regulaminu`.
     {
       "kind": "correction",
       "corrected_song_id": "o!_barka",
-      "corrected_song_digest": null,
       "correction_message": "poprawka chwytu w refrenie",
       "sender_is_contributor": true,
       "contributor": {"person": {…}, "emails": ["…"]},

@@ -80,7 +80,7 @@ void main() {
     final withReply = RunPlan(
       createdAt: plan.createdAt,
       labelsByMessage: {...plan.labelsByMessage, 'yt2': plan.labelsByMessage['yt']!},
-      songsByThread: plan.songsByThread,
+      songByThread: plan.songByThread,
       messagesByThread: {...plan.messagesByThread, 'yt': ['yt', 'yt2']},
     );
     final proposed = collectCandidates(withReply, roundTrip(songs), _new);

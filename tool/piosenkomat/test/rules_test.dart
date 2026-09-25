@@ -63,7 +63,7 @@ void main() {
     RunPlan planOf(List<String> ids) => RunPlan(
           createdAt: DateTime(2026),
           labelsByMessage: {for (final id in ids) id: const []},
-          songsByThread: const {},
+          songByThread: const {},
           messagesByThread: const {},
         );
 

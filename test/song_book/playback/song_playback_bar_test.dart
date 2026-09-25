@@ -176,11 +176,6 @@ void main() {
     // Szeroko — jeden rząd; wąsko — nazwa i przyciski nie zmieszczą się.
     expect(SongPlaybackBar.heightFor(s, 600), SongPlaybackBar.rowHeight);
     expect(SongPlaybackBar.heightFor(s, 120), 2 * SongPlaybackBar.rowHeight);
-    // Podgląd ma jeden przycisk, więc mieści się tam, gdzie interaktywny już nie.
-    expect(
-      SongPlaybackBar.heightFor(s, 200, mode: PlaybackBarMode.preview),
-      lessThanOrEqualTo(SongPlaybackBar.heightFor(s, 200)),
-    );
   });
 
 }

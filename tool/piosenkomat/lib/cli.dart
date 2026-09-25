@@ -23,51 +23,51 @@ Future<int> runPiosenkomat(List<String> args) async {
   // `scan` do Gmaila nie pisze, więc jako jedyna komenda nie ma `--push`.
   final scan = parser.addCommand('scan');
   _scanOptions(scan);
-  _addCommon(scan);
+  _addSongsDbOption(scan);
+  _addGmailOptions(scan);
 
   final label = parser.addCommand('label');
   final labelScanned = label.addCommand('scanned');
-  _addCommon(labelScanned);
+  _addGmailOptions(labelScanned);
   _addPushFlag(labelScanned, help: 'Nadaj etykiety (bez tej flagi tylko lista)');
 
   final labelReviewed = label.addCommand('reviewed');
   _reviewedOptions(labelReviewed);
-  _addCommon(labelReviewed);
+  _addGmailOptions(labelReviewed);
   _addPushFlag(labelReviewed,
       help: 'Zmień etykiety odrzuconych (bez tej flagi tylko lista)');
 
   final labelAdded = label.addCommand('added');
   _addAllFlag(labelAdded);
-  _addCommon(labelAdded);
+  _addGmailOptions(labelAdded);
   _addPushFlag(labelAdded, help: 'Zmień etykiety w Gmailu (bez tej flagi lista)');
 
   final unlabel = parser.addCommand('unlabel');
   _unlabelOptions(unlabel);
   _addAllFlag(unlabel);
-  _addCommon(unlabel);
+  _addGmailOptions(unlabel);
   _addPushFlag(unlabel, help: 'Zdejmij etykiety (bez tej flagi tylko lista)');
 
   final reply = parser.addCommand('reply');
   _replyOptions(reply);
-  _addCommon(reply);
+  _addGmailOptions(reply);
   _addPushFlag(reply, help: 'Wyślij (bez tej flagi tylko lista)');
 
   final reopen = parser.addCommand('reopen');
   reopen.addOption('query', help: 'Własne query Gmaila zamiast czekających na autora');
-  _addCommon(reopen);
+  _addGmailOptions(reopen);
   _addPushFlag(reopen, help: 'Zdejmij etykiety (bez tej flagi tylko lista)');
 
   final clean = parser.addCommand('clean');
   clean.addFlag('force',
       negatable: false, help: 'Skasuj mimo niedokończonych spraw');
-  _addCommon(clean);
+  _addGmailOptions(clean);
   _addPushFlag(clean, help: 'Skasuj katalog (bez tej flagi tylko lista)');
 
   final explain = parser.addCommand('explain');
-  _addCommon(explain);
+  _addSongsDbOption(explain);
 
-  final prepare = parser.addCommand('prepare');
-  _addCommon(prepare);
+  parser.addCommand('prepare');
 
   ArgResults opts;
   try {
@@ -191,8 +191,12 @@ bool _dryRun(ArgResults cmd, String whatPushDoes) {
   return true;
 }
 
-void _addCommon(ArgParser p) => p
-  ..addOption('songs-db', help: 'Ścieżka do all_songs.hrcpsng')
+/// Tylko komendy, które porównują ze śpiewnikiem.
+void _addSongsDbOption(ArgParser p) =>
+    p.addOption('songs-db', help: 'Ścieżka do all_songs.hrcpsng');
+
+/// Tylko komendy, które łączą się z Gmailem.
+void _addGmailOptions(ArgParser p) => p
   ..addOption('credentials', help: 'Domyślnie secrets/credentials.json')
   ..addOption('token', help: 'Domyślnie secrets/gmail_token.json');
 

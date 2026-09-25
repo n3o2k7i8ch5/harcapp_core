@@ -20,7 +20,7 @@ import '../providers.dart';
 
 /// Kolor uwagi po wadze: blokada na czerwono, decyzja na pomarańczowo.
 /// Ten sam kolor niesie ikonę, tekst i półprzezroczyste tło pastylki.
-Color piosenkomatIssueColor(BuildContext context, SongIssue issue) => switch(issue.severity){
+Color piosenkomatIssueColor(SongIssue issue) => switch(issue.severity){
   SongIssueSeverity.blocking => Colors.red,
   SongIssueSeverity.decision => Colors.orange,
 };
@@ -376,26 +376,6 @@ class _Bubble extends StatelessWidget{
 
 }
 
-/// Rząd pastylek — od lewej, zawijany.
-class PiosenkomatIssuesWidget extends StatelessWidget{
-
-  final List<PiosenkomatIssue> issues;
-  final bool compact;
-
-  const PiosenkomatIssuesWidget(this.issues, {this.compact = false, super.key});
-
-  @override
-  Widget build(BuildContext context) => Wrap(
-    alignment: WrapAlignment.start,
-    spacing: compact? Dimen.defMarg/2: Dimen.defMarg,
-    runSpacing: compact? Dimen.defMarg/2: Dimen.defMarg,
-    children: [
-      for(final issue in issues) PiosenkomatIssuePill(issue, compact: compact),
-    ],
-  );
-
-}
-
 /// Jedna pastylka w stylu [Tag] z apki: pełne zaokrąglenie, bez obramowania.
 /// Na pastylce sam kod uwagi (`missing-youtube`) — krótki i jednoznaczny;
 /// polski opis i szczegół w podpowiedzi. O wadze mówi **kolor pastylki**:
@@ -411,7 +391,7 @@ class PiosenkomatIssuePill extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    final color = piosenkomatIssueColor(context, issue.issue);
+    final color = piosenkomatIssueColor(issue.issue);
     final fontSize = compact? Dimen.textSizeTiny: Dimen.textSizeSmall;
     final pad = compact? Dimen.defMarg/2: Dimen.iconMarg;
 

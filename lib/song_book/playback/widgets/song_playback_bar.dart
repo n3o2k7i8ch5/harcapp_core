@@ -157,10 +157,10 @@ class SongPlaybackBar extends StatefulWidget {
 
   /// Wysokość paska dla tej piosenki przy tej szerokości: najwyższy z kafelków,
   /// żeby pasek nie skakał przy przewijaniu między nimi.
-  static double heightFor(SongCore song, double viewportWidth,
-      {PlaybackBarMode mode = PlaybackBarMode.interactive}) {
+  static double heightFor(SongCore song, double viewportWidth) {
     final double maxWidth = viewportWidth - padding.horizontal;
-    final bool anyWraps = playbackSourcesOf(song).any((s) => _tileWraps(s, maxWidth, mode));
+    final bool anyWraps = playbackSourcesOf(song)
+        .any((s) => _tileWraps(s, maxWidth, PlaybackBarMode.interactive));
     return rowHeight * (anyWraps ? 2 : 1) + padding.vertical;
   }
 

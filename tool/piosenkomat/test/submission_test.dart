@@ -49,7 +49,6 @@ void main() {
     final s = back.submissions.single;
     expect(s.kind, SubmissionKind.correction);
     expect(s.correctedSongId, 'o!_barka');
-    expect(s.correctedSongDigest, isNull);
     expect(s.correctionMessage, 'poprawka chwytu w refrenie');
     expect(s.senderIsContributor, isFalse);
     expect(s.contributor?.person.name, 'Jan Kowalski');

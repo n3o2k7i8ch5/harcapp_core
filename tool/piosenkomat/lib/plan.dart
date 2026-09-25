@@ -54,16 +54,15 @@ class RunPlan {
   final DateTime createdAt;
   /// Etykiety po **wiadomości** — wątek dostaje je na wszystkich.
   final Map<String, List<String>> labelsByMessage;
-  /// Piosenki po **wątku**. Lista, bo kiedyś jeden wątek może nieść kilka
-  /// piosenek; dziś zawsze jednoelementowa.
-  final Map<String, List<PlannedSong>> songsByThread;
+  /// Piosenka po **wątku** — jeden wątek to jedna piosenka.
+  final Map<String, PlannedSong> songByThread;
   /// Wiadomości każdego wątku — `label reviewed` przestawia etykiety na całym.
   final Map<String, List<String>> messagesByThread;
 
   const RunPlan({
     required this.createdAt,
     required this.labelsByMessage,
-    required this.songsByThread,
+    required this.songByThread,
     required this.messagesByThread,
   });
 
@@ -74,18 +73,16 @@ class RunPlan {
             for (final m in c.submission.messages)
               m.id: [...c.labels, kLabelAuto],
         },
-        songsByThread: {
+        songByThread: {
           for (final c in items)
             if (c.goesToFile)
-              c.submission.threadId: [
-                PlannedSong(
-                  songId: c.song!.id,
-                  title: c.song!.title,
-                  sender: c.submission.sender ?? '',
-                  kind: c.submission.kind,
-                  otherEmails: _otherEmailsOf(c),
-                ),
-              ],
+              c.submission.threadId: PlannedSong(
+                songId: c.song!.id,
+                title: c.song!.title,
+                sender: c.submission.sender ?? '',
+                kind: c.submission.kind,
+                otherEmails: _otherEmailsOf(c),
+              ),
         },
         messagesByThread: {
           for (final c in items)
@@ -97,8 +94,7 @@ class RunPlan {
         'created_at': createdAt.toIso8601String(),
         'labels': labelsByMessage,
         'songs': {
-          for (final e in songsByThread.entries)
-            e.key: [for (final i in e.value) i.toJson()],
+          for (final e in songByThread.entries) e.key: e.value.toJson(),
         },
         'threads': messagesByThread,
       };
@@ -109,12 +105,9 @@ class RunPlan {
           for (final e in (json['labels'] as Map<String, dynamic>).entries)
             e.key: (e.value as List).cast<String>(),
         },
-        songsByThread: {
+        songByThread: {
           for (final e in (json['songs'] as Map<String, dynamic>).entries)
-            e.key: [
-              for (final i in e.value as List)
-                PlannedSong.fromJson(i as Map<String, dynamic>),
-            ],
+            e.key: PlannedSong.fromJson(e.value as Map<String, dynamic>),
         },
         messagesByThread: {
           for (final e in (json['threads'] as Map<String, dynamic>).entries)
@@ -129,9 +122,8 @@ class RunPlan {
 
   /// Piosenka przebiegu po id mejla — do wypisania tytułu i nadawcy.
   Map<String, PlannedSong> get songByMessage => {
-        for (final e in songsByThread.entries)
-          if (e.value.isNotEmpty)
-            for (final messageId in messagesOf(e.key)) messageId: e.value.first,
+        for (final e in songByThread.entries)
+          for (final messageId in messagesOf(e.key)) messageId: e.value,
       };
 }
 
@@ -149,14 +141,12 @@ List<String> _otherEmailsOf(Classified c) {
 /// potrzebuje od planu.
 Map<String, List<String>> otherEmailsBySender(RunPlan plan) {
   final out = <String, List<String>>{};
-  for (final songs in plan.songsByThread.values) {
-    for (final s in songs) {
-      final sender = s.sender.trim().toLowerCase();
-      if (sender.isEmpty || s.otherEmails.isEmpty) continue;
-      final into = out.putIfAbsent(sender, () => []);
-      for (final e in s.otherEmails) {
-        if (!into.contains(e)) into.add(e);
-      }
+  for (final s in plan.songByThread.values) {
+    final sender = s.sender.trim().toLowerCase();
+    if (sender.isEmpty || s.otherEmails.isEmpty) continue;
+    final into = out.putIfAbsent(sender, () => []);
+    for (final e in s.otherEmails) {
+      if (!into.contains(e)) into.add(e);
     }
   }
   return out;

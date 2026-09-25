@@ -91,7 +91,6 @@ class SongSubmission{
 
   static const String PARAM_KIND = 'kind';
   static const String PARAM_CORRECTED_SONG_ID = 'corrected_song_id';
-  static const String PARAM_CORRECTED_SONG_DIGEST = 'corrected_song_digest';
   static const String PARAM_CORRECTION_MESSAGE = 'correction_message';
   static const String PARAM_SENDER_IS_CONTRIBUTOR = 'sender_is_contributor';
   static const String PARAM_CONTRIBUTOR = 'contributor';
@@ -108,8 +107,6 @@ class SongSubmission{
   /// Co autor **deklaruje**, że poprawia. Wygrywa z `corrected_song_id`
   /// w JSON-ie piosenki, które znaczy co innego: pierwowzór, z którego powstała.
   final String? correctedSongId;
-  /// Odcisk wersji pierwowzoru, którą autor widział. Na razie zawsze `null`.
-  final String? correctedSongDigest;
   final String? correctionMessage;
   /// Czy nadawca zgłasza **własną** piosenkę. `false`: jego adres służy
   /// wyłącznie do odpisania i nie trafia do karty osoby dodającej.
@@ -121,7 +118,6 @@ class SongSubmission{
     required this.kind,
     required this.song,
     this.correctedSongId,
-    this.correctedSongDigest,
     this.correctionMessage,
     this.senderIsContributor = true,
     this.contributor,
@@ -132,7 +128,6 @@ class SongSubmission{
   Map<String, dynamic> toJsonMap() => {
     PARAM_KIND: kind.id,
     PARAM_CORRECTED_SONG_ID: correctedSongId,
-    PARAM_CORRECTED_SONG_DIGEST: correctedSongDigest,
     PARAM_CORRECTION_MESSAGE: correctionMessage,
     PARAM_SENDER_IS_CONTRIBUTOR: senderIsContributor,
     PARAM_CONTRIBUTOR: contributor == null? null: {
@@ -149,7 +144,6 @@ class SongSubmission{
   static SongSubmission fromJsonMap(Map<String, dynamic> map) => SongSubmission(
     kind: SubmissionKind.byId(map[PARAM_KIND] as String?),
     correctedSongId: _nonEmpty(map[PARAM_CORRECTED_SONG_ID]),
-    correctedSongDigest: _nonEmpty(map[PARAM_CORRECTED_SONG_DIGEST]),
     correctionMessage: _nonEmpty(map[PARAM_CORRECTION_MESSAGE]),
     senderIsContributor: map[PARAM_SENDER_IS_CONTRIBUTOR] as bool? ?? true,
     contributor: _contributorOf(map[PARAM_CONTRIBUTOR]),
