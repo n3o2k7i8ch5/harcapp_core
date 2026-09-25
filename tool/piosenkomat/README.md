@@ -229,7 +229,7 @@ song/
 │   ├── no-consent            brak zgody albo nie wiadomo, kto zgłosił
 │   ├── skipped-submissions   w pliku było kilka zgłoszeń, weszło pierwsze
 │   └── several-contributors  kilka kart osób dodających — wkład przypisz ręcznie
-├── reply/                    kolejka `reply`: autorowi trzeba odpisać, jeden mejl na autora
+├── reply/                    kolejka `reply`: autorowi trzeba odpisać, mejl na piosenkę
 │   ├── old-app               mejl z najstarszej apki — blok „zaktualizuj apkę”
 │   └── review-note           Twój tekst z przeglądu („Odpowiedź do autora”)
 ├── waiting-for-author        tekst z przeglądu poszedł, przeczytane; czekamy na
@@ -453,20 +453,30 @@ zgłoszenie, a poprawkę przysyła się z apki jako nową. O starą apkę `scan`
 raz nie zapyta: do tego autora już coś wysłaliśmy, a blok o starej apce idzie
 w każdej odpowiedzi takiemu autorowi.
 
-**Mejl jest składany, nie pisany raz.** Treść to funkcja tego, co mamy do
-powiedzenia (`composeContribReply` w `harcapp_core`): powitanie + Twoje uwagi +
-blok o starej apce, jeśli zgłoszenie z niej przyszło + „Czuwaj!”. Dzięki temu
-osoba ze starej apki, której dopisałeś uwagę, dostaje **jeden** mejl z obiema
-sprawami, a nie dwa. Kto przysłał kilka piosenek, dostaje jeden mejl ze
-wszystkimi uwagami.
+**Jedna odpowiedź na piosenkę, w jej wątku.** Uwaga jest przy piosence,
+a odpowiedź autora wraca do właściwego wątku — `reopen` przywraca dokładnie tę
+piosenkę. Kto przysłał cztery piosenki i do każdej dostał uwagę, dostaje cztery
+mejle, każdy w swoim wątku.
 
-Gdy dochodzi kolejna sprawa, istniejący szkic jest **aktualizowany**
+**Twoja jest tylko sprawa, ramkę dokłada narzędzie.** W polu „Odpowiedź” piszesz
+samą treść („Brakuje chwytów…”). Mejl składa `composeContribReply` w `harcapp_core`:
+„Dzięki za piosenki :)” + Twoja odpowiedź + blok o starej apce, jeśli zgłoszenie
+z niej przyszło + „Czuwaj!” + stopka pod kreską („Każdą kolejną piosenkę
+wyślij proszę osobnym mejlem…”). Edytor pokazuje tę ramkę na szaro nad polem
+i pod nim — tą samą funkcją, więc widzisz cały mejl, a ramki nie da się ani
+zapomnieć, ani zepsuć. Gwiazdka proponuje samą sprawę z pastylek `missing-*`.
+
+Stara apka bez żadnej uwagi: jeden mejl z samym blokiem, w najnowszym wątku
+autora, a `reply/old-app` schodzi ze wszystkich jego wątków. Taki mejl nie
+zdejmuje `reply/review-note` — tekst, który nie poszedł, dalej czeka.
+
+Gdy uwaga się zmieni, istniejący szkic w wątku jest **aktualizowany**
 (`drafts.update`), nie zakładany drugi raz. Swój szkic narzędzie poznaje po
-kształcie: „Dzięki za piosenki :)” na początku, „Czuwaj!” na końcu. Taki
-przelicza od nowa i **wypisuje akapity, które przy tym wypadły** — bo
-poprzedniej wersji uwagi nikt nie pamięta, a po cichu gubić nie wolno. Szkic
-dopisany po „Czuwaj!” albo z innym początkiem to Twoja ręczna robota: zostaje
-nietknięty, z komunikatem. Nieczytelny też zostaje.
+kształcie: powitanie na początku, pożegnanie i stopka na końcu. Taki przelicza
+od nowa i **wypisuje akapity, które przy tym wypadły** — bo poprzedniej wersji
+uwagi nikt nie pamięta, a po cichu gubić nie wolno. Szkic dopisany po stopce
+albo z innym początkiem to Twoja ręczna robota: zostaje nietknięty,
+z komunikatem. Nieczytelny też zostaje.
 
 ## Stara apka (`reply`)
 
@@ -478,10 +488,11 @@ do wygrepowania, gdybyś chciał doprosić o zgodę), a mejl etykietę `song/rep
 — chyba że autor dostał już od nas odpowiedź (w tym albo innym wątku).
 
 Razem z `reply/review-note` to kolejka odpowiedzi i jedyne źródło prawdy, komu
-nie odpisano. Jedna odpowiedź na autora, nie na mejl: kto przysłał pięć piosenek,
-dostaje jeden mejl w najnowszym wątku, a `reply/*` schodzi ze wszystkich pięciu. Przerwany przebieg dokańcza powtórzenie komendy. Treść:
-`oldestFormatReplyMessage` z `harcapp_core`. `-n` ogranicza liczbę autorów
-(Gmail tnie ok. 500 mejli na dobę).
+nie odpisano. Jedna odpowiedź na piosenkę, w jej wątku; blok o starej apce jedzie
+w środku, a gdy uwag nie ma — jeden mejl z samym blokiem na autora (treść jak
+`oldestFormatReplyMessage` z `harcapp_core`). Przerwany przebieg dokańcza
+powtórzenie komendy. `-n` ogranicza liczbę autorów (Gmail tnie ok. 500 mejli
+na dobę).
 
 **Zakresem jest przebieg**, jak w pozostałych komendach: bez argumentu ostatni
 z `out/`. Etykieta dalej mówi, *komu* nie odpisano — katalog tylko zawęża do
@@ -507,9 +518,8 @@ Rozmyśliłeś się? `./piosenkomat reply --undraft --push` kasuje szkice. Nikt 
 nie dostał, więc autorzy zostają w kolejce `reply/*`.
 
 `--draft` etykiet nie rusza: skoro nikt nic nie dostał, autor zostaje w kolejce.
-Kto ma szkic, narzędzie pyta Gmaila — w którymkolwiek wątku autora, nie tylko
-w najnowszym, więc drugi `--draft` nie założy drugiego szkicu, tylko przeliczy
-istniejący. Wysyłka idzie przez `drafts.send`, więc to, co poprawisz w Gmailu,
+Szkic jest jeden na wątek, a który wątek go ma, narzędzie pyta Gmaila — drugi
+`--draft` nie założy drugiego szkicu, tylko przeliczy istniejący. Wysyłka idzie przez `drafts.send`, więc to, co poprawisz w Gmailu,
 leci w świat; `reply/*` schodzi.
 
 Szkic skasowany albo wysłany ręcznie z Gmaila też jest obsłużony: jeśli w wątku

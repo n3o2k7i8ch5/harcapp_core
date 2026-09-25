@@ -105,10 +105,11 @@ void main() {
     expect(add, [kLabelWaitingForAuthor]);
     expect(remove, [kLabelReplyOldApp, kLabelReplyReviewNote, 'UNREAD']);
 
-    // Sama stara apka: piosenka może wciąż czekać na przegląd.
+    // Sam blok o starej apce: piosenka może wciąż czekać na przegląd,
+    // a `reply/review-note` bez wysłanego tekstu to sprawa, która nie poszła.
     final onlyOld = labelsAfterReply(sentReviewNote: false);
     expect(onlyOld.$1, isEmpty, reason: 'o odpowiedzi mówi sam wątek (SENT)');
-    expect(onlyOld.$2, [kLabelReplyOldApp, kLabelReplyReviewNote]);
+    expect(onlyOld.$2, [kLabelReplyOldApp]);
   });
 
   test('isSongSubmission: po temacie albo znaczniku w treści', () {

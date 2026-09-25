@@ -176,21 +176,17 @@ Set<String> pendingLabelsOf(Set<String> labels) => {
           l,
     };
 
-/// Etykiety po wysłanej odpowiedzi (`reply --push`): schodzą kolejki, a gdy
-/// poszedł tekst z przeglądu, wchodzi [kLabelWaitingForAuthor] i schodzi
-/// `UNREAD` — jak po odpowiedzi z Gmaila. Sama stara apka nie czyści
-/// nieprzeczytanego: piosenka może wciąż czekać na przegląd.
+/// Etykiety wątku po wysłanej odpowiedzi (`reply --push`). Z tekstem
+/// z przeglądu schodzą obie kolejki, wchodzi [kLabelWaitingForAuthor]
+/// i schodzi `UNREAD` — jak po odpowiedzi z Gmaila. Sam blok o starej apce
+/// zdejmuje tylko swoją kolejkę: `reply/review-note` bez tekstu to sprawa,
+/// która nie poszła, a piosenka może wciąż czekać na przegląd.
 (List<String> add, List<String> remove) labelsAfterReply({
   required bool sentReviewNote,
 }) =>
-    (
-      [if (sentReviewNote) kLabelWaitingForAuthor],
-      [
-        kLabelReplyOldApp,
-        kLabelReplyReviewNote,
-        if (sentReviewNote) 'UNREAD',
-      ],
-    );
+    sentReviewNote
+        ? ([kLabelWaitingForAuthor], [kLabelReplyOldApp, kLabelReplyReviewNote, 'UNREAD'])
+        : (const [], [kLabelReplyOldApp]);
 
 /// „W pliku” z ręki automatu: tylko takie mejle `label added` ma prawo ruszyć.
 /// Twoje ręczne „ready-to-add” zostają nietknięte.

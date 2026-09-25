@@ -13,6 +13,7 @@ import 'model.dart';
 import 'people.dart';
 import 'plan.dart';
 import 'report.dart';
+import 'reply.dart';
 import 'review.dart';
 import 'similarity.dart';
 
@@ -276,8 +277,8 @@ Future<(List<ContribMessage>, Set<String>)> _unlabeledThreads(
   }
   final unlabeled = [for (final m in messages) if (!labeledThreads.contains(m.threadId)) m];
 
-  // Stara apka: blok „zaktualizuj apkę” idzie raz na autora, nie na wątek —
-  // `reply` odpisuje w jego najnowszym wątku, więc w starszych `SENT` nie ma.
+  // Stara apka: blok „zaktualizuj apkę” wystarczy autorowi raz, a `reply`
+  // nie odpisuje w każdym jego wątku, więc w części z nich `SENT` nie ma.
   // Pytamy więc o nadawcę: jedno tanie zapytanie na autora ze starej apki.
   final oldAppSenders = {
     for (final m in unlabeled)
@@ -756,16 +757,19 @@ void _writePeople(String runDir, PeopleReport people) {
 
 enum _ReplyMode { send, draft, undraft }
 
-/// `reply [--draft|--undraft] [--push]`: odpowiedzi do autorów — blok
-/// „zaktualizuj apkę” i Twoje teksty z przeglądu, razem w jednym mejlu.
+/// `reply [--draft|--undraft] [--push]`: odpowiedzi do autorów — Twoje teksty
+/// z przeglądu i blok „zaktualizuj apkę”.
 ///
 /// Kolejką jest sam Gmail: etykiety [kLabelReplyOldApp] (wiesza
 /// `label scanned`) i [kLabelReplyReviewNote] (wiesza `label reviewed`).
 /// Wysyłka je zdejmuje, więc nikt nie dostanie dwóch odpowiedzi, a przerwany
 /// przebieg dokańcza się zwykłym powtórzeniem komendy.
 ///
-/// Jedna odpowiedź na autora, nie na mejl: kto przysłał pięć piosenek ze starej
-/// apki, dostaje jeden mejl w najnowszym wątku, a etykieta schodzi ze wszystkich.
+/// Jedna odpowiedź na piosenkę, w jej wątku: uwaga jest przy piosence,
+/// a odpowiedź autora wraca tam, gdzie trzeba. Kto przysłał pięć piosenek ze
+/// starej apki bez żadnej uwagi, dostaje jeden mejl z samym blokiem
+/// w najnowszym wątku, a `reply/old-app` schodzi ze wszystkich
+/// ([planAuthorReplies]).
 ///
 /// `--draft` rozrywa to na dwa kroki: najpierw szkic w wątku (etykiety
 /// zostają — nikt nic nie dostał). Późniejszy `reply --push` wysyła gotowy
@@ -825,12 +829,38 @@ Future<int> _reply(ArgResults cmd) async {
       'pobieram nagłówki…');
 
   final queue = await _groupBySender(mailbox, ids, query: query, limit: limit, inScope: inScope);
-  _printReplyQueue(queue);
-  final authors = queue.bySender.length;
+  // Teksty z pola „Odpowiedź do autora”: ze śladu przeglądu, bo `prepare`
+  // zdejmuje je z piosenek na długo przed `reply`.
+  final reviewNotes = {
+    for (final dir in runDir != null ? [runDir] : allRunDirs())
+      ...readReviewNotes(decisionsPathIn(dir)),
+  };
+  // Kto jest ze starej apki — po tym wiadomo, czy doklejać jej blok.
+  final oldAppIds =
+      (await mailbox.listIds('label:${labelQueryName(kLabelReplyOldApp)}')).toSet();
+  final plans = {
+    for (final sender in queue.senders)
+      sender: planAuthorReplies(
+        sender,
+        [
+          for (final id in queue.bySender[sender]!)
+            (id: id, threadId: queue.replyTargetById[id]!.threadId),
+        ],
+        reviewNotes: reviewNotes,
+        oldAppIds: oldAppIds,
+      ),
+  };
+  _printReplyQueue(queue, plans);
+  final mails = plans.values.fold(0, (n, a) => n + a.replies.length);
+  final queuedDrafts = {
+    for (final id in queue.replyTargetById.keys)
+      if (draftIdByThread[queue.replyTargetById[id]!.threadId] case final draftId?) draftId,
+  };
   if (_dryRun(cmd, switch (mode) {
-    _ReplyMode.undraft => 'skasuje ${plural(authors, 'szkic', 'szkice', 'szkiców')}',
-    _ReplyMode.draft => 'przygotuje ${plural(authors, 'szkic', 'szkice', 'szkiców')}',
-    _ReplyMode.send => 'wyśle ${plural(authors, 'mejl', 'mejle', 'mejli')}',
+    _ReplyMode.undraft =>
+      'skasuje ${plural(queuedDrafts.length, 'szkic', 'szkice', 'szkiców')}',
+    _ReplyMode.draft => 'przygotuje ${plural(mails, 'szkic', 'szkice', 'szkiców')}',
+    _ReplyMode.send => 'wyśle ${plural(mails, 'mejl', 'mejle', 'mejli')}',
   })) {
     return 0;
   }
@@ -839,19 +869,12 @@ Future<int> _reply(ArgResults cmd) async {
   final run = _ReplyRun(
     mailbox: mailbox,
     queue: queue,
-    // Teksty z pola „Odpowiedź do autora”: ze śladu przeglądu, bo `prepare`
-    // zdejmuje je z piosenek na długo przed `reply`.
-    reviewNotes: {
-      for (final dir in runDir != null ? [runDir] : allRunDirs())
-        ...readReviewNotes(decisionsPathIn(dir)),
-    },
-    // Kto jest ze starej apki — po tym wiadomo, czy doklejać jej blok.
-    oldAppIds: (await mailbox.listIds('label:${labelQueryName(kLabelReplyOldApp)}')).toSet(),
+    plans: plans,
     draftIdByThread: draftIdByThread,
   );
   switch (mode) {
     case _ReplyMode.undraft:
-      await run.undraftAll();
+      await run.undraftAll(queuedDrafts);
     case _ReplyMode.draft:
       await run.draftAll();
     case _ReplyMode.send:
@@ -862,7 +885,7 @@ Future<int> _reply(ArgResults cmd) async {
 
 /// Kolejka `reply` pogrupowana po autorze.
 class _ReplyQueue {
-  /// Mejle każdego autora, od najstarszego — odpisujemy w ostatnim.
+  /// Mejle każdego autora, od najstarszego.
   final Map<String, List<String>> bySender;
   final Map<String, ReplyTarget> replyTargetById;
   final int unknownSenderCount;
@@ -924,11 +947,20 @@ Future<_ReplyQueue> _groupBySender(
       unknownSenderCount: unknownSenderCount, truncated: truncated);
 }
 
-void _printReplyQueue(_ReplyQueue queue) {
+void _printReplyQueue(_ReplyQueue queue, Map<String, AuthorReplies> plans) {
   for (final sender in queue.senders) {
-    final ids = queue.bySender[sender]!;
-    stdout.writeln('  → $sender  ${plural(ids.length, 'mejl', 'mejle', 'mejli')}  '
-        'wątek [${ids.last}]');
+    final plan = plans[sender]!;
+    stdout.writeln('  → $sender  ${plural(plan.replies.length, 'odpowiedź', 'odpowiedzi', 'odpowiedzi')}');
+    for (final r in plan.replies) {
+      final what = r.reviewNote == null
+          ? 'sam blok o starej apce'
+          : r.oldApp ? 'odpowiedź + blok o starej apce' : 'odpowiedź';
+      stdout.writeln('      wątek [${r.threadId}]  $what');
+    }
+    if (plan.nothingToSay.isNotEmpty) {
+      stdout.writeln('      ${plural(plan.nothingToSay.length, 'mejl', 'mejle', 'mejli')} '
+          'bez tekstu z przeglądu — etykieta zostaje');
+    }
   }
   if (queue.truncated) {
     stdout.writeln('  (w kolejce czekają kolejni autorzy — `-n` bierze najstarszych)');
@@ -939,62 +971,45 @@ void _printReplyQueue(_ReplyQueue queue) {
   }
 }
 
-/// Jedno odpalenie `reply --push`: kolejka plus to, z czego składamy mejle.
+/// Jedno odpalenie `reply --push`: kolejka i plan — mejl na piosenkę, w jej
+/// wątku ([planAuthorReplies]).
 class _ReplyRun {
   final GmailMailbox mailbox;
   final _ReplyQueue queue;
-  /// Id wątku → Twój tekst z przeglądu.
-  final Map<String, String> reviewNotes;
-  final Set<String> oldAppIds;
+  final Map<String, AuthorReplies> plans;
   final Map<String, String> draftIdByThread;
 
   _ReplyRun({
     required this.mailbox,
     required this.queue,
-    required this.reviewNotes,
-    required this.oldAppIds,
+    required this.plans,
     required this.draftIdByThread,
   });
 
-  ReplyTarget _targetOf(String id) => queue.replyTargetById[id]!;
+  Iterable<PlannedReply> get _replies => plans.values.expand((a) => a.replies);
 
-  /// Mejl dla autora: jego uwagi z przeglądu plus blok o starej apce, jeśli
-  /// któreś z jego zgłoszeń z niej przyszło. `null` = nie ma o czym pisać.
-  String? replyTextFor(List<String> ids) => composeContribReply(
-        reviewNotes: {
-          for (final id in ids)
-            if (reviewNotes[_targetOf(id).threadId] case final note?) note,
-        },
-        oldApp: ids.any(oldAppIds.contains),
-        // Odpowiedź zaprasza do odpisania, a piosenka dosłana w tym wątku
-        // przepada: wątek ma już etykietę.
-        oneSongPerMail: true,
-      );
+  int get _nothingToSay => plans.values.fold(0, (n, a) => n + a.nothingToSay.length);
 
-  LabelChange labelsAfterReplyTo(List<String> ids) => labelsAfterReply(
-      sentReviewNote: ids.any((id) => reviewNotes.containsKey(_targetOf(id).threadId)));
+  ReplyTarget _targetOf(PlannedReply r) => queue.replyTargetById[r.targetMessageId]!;
 
-  /// Szkic autora i wątek, w którym czeka. Szukamy we wszystkich jego
-  /// wątkach, nie tylko w najnowszym: mejl mógł dojść już po szkicu, a drugi
-  /// szkic w innym wątku to dwa mejle do jednej osoby.
-  (String, ReplyTarget)? draftOf(List<String> ids) {
-    for (final id in ids.reversed) {
-      final target = _targetOf(id);
-      if (draftIdByThread[target.threadId] case final draftId?) return (draftId, target);
+  /// Etykiety po wysyłce: wątek odpowiedzi plus wątki, które czekały tylko na
+  /// blok o starej apce, a ten poszedł tym mejlem.
+  Future<void> _relabel(PlannedReply r) async {
+    final (add, remove) = r.labels;
+    await mailbox.batchModify(r.messageIds, add: add, remove: remove);
+    if (r.alsoClearsOldApp.isNotEmpty) {
+      await mailbox.batchModify(r.alsoClearsOldApp, add: const [], remove: [kLabelReplyOldApp]);
     }
-    return null;
   }
 
-  Future<void> undraftAll() async {
+  Future<void> undraftAll(Set<String> draftIds) async {
     var removed = 0;
     var failed = 0;
-    for (final sender in queue.senders) {
+    for (final draftId in draftIds) {
       try {
-        final found = draftOf(queue.bySender[sender]!);
-        if (found == null) continue;
-        await mailbox.deleteDraft(found.$1);
+        await mailbox.deleteDraft(draftId);
       } catch (e) {
-        stderr.writeln('  ! $sender: $e');
+        stderr.writeln('  ! szkic $draftId: $e');
         failed++;
         continue;
       }
@@ -1012,20 +1027,14 @@ class _ReplyRun {
     var created = 0;
     var updated = 0;
     var unchanged = 0;
-    var nothingToSay = 0;
     var failed = 0;
-    for (final sender in queue.senders) {
-      final ids = queue.bySender[sender]!;
-      final text = replyTextFor(ids);
-      if (text == null) {
-        // Ani starej apki, ani uwagi — nie ma o czym pisać.
-        nothingToSay++;
-        continue;
-      }
+    for (final r in _replies) {
+      final text = r.text;
+      final where = '${r.sender} [${r.threadId}]';
       try {
-        if (draftOf(ids) case (final draftId, final target)) {
-          // Szkic już jest. Doszła kolejna sprawa? Przeliczamy mejl od nowa —
-          // ale tylko szkic w naszym kształcie; Twoją ręczną robotę zostawiamy.
+        if (draftIdByThread[r.threadId] case final draftId?) {
+          // Szkic w tym wątku już jest. Przeliczamy go od nowa — ale tylko
+          // szkic w naszym kształcie; Twoją ręczną robotę zostawiamy.
           final body = await mailbox.draftBody(draftId);
           switch (draftActionFor(body, text)) {
             case DraftAction.unchanged:
@@ -1034,23 +1043,22 @@ class _ReplyRun {
               // Akapity, których w nowej treści nie będzie, wypisujemy — to
               // Twoja jedyna szansa, żeby zobaczyć, co wypadło.
               final dropped = paragraphsDroppedBy(body!, text);
-              await mailbox.updateDraft(draftId, target, text);
+              await mailbox.updateDraft(draftId, _targetOf(r), text);
               updated++;
               for (final paragraph in dropped) {
-                stdout.writeln('  ~ $sender: ze szkicu wypadło: '
-                    '„${paragraph.split('\n').first}”');
+                stdout.writeln('  ~ $where: ze szkicu wypadło: „$paragraph”');
               }
             case DraftAction.leaveManual:
-              stdout.writeln('  ~ $sender: szkic '
+              stdout.writeln('  ~ $where: szkic '
                   '${body == null ? 'nieczytelny' : 'ruszony ręcznie'} — zostawiam jak jest');
               unchanged++;
           }
           continue;
         }
-        await mailbox.draftReplyTo(_targetOf(ids.last), text);
+        await mailbox.draftReplyTo(_targetOf(r), text);
       } catch (e) {
         // Bez szkicu, więc następny przebieg spróbuje jeszcze raz.
-        stderr.writeln('  ! $sender: $e');
+        stderr.writeln('  ! $where: $e');
         failed++;
         continue;
       }
@@ -1060,7 +1068,7 @@ class _ReplyRun {
       'Przygotowano ${plural(created, 'szkic', 'szkice', 'szkiców')}',
       if (updated > 0) plural(updated, 'zaktualizowany', 'zaktualizowane', 'zaktualizowanych'),
       if (unchanged > 0) '$unchanged bez zmian',
-      if (nothingToSay > 0) '$nothingToSay bez treści (pominięte)',
+      if (_nothingToSay > 0) '$_nothingToSay bez treści (pominięte)',
       if (failed > 0)
         '${plural(failed, 'nieudany', 'nieudane', 'nieudanych')} (zostają w kolejce)',
     ]));
@@ -1072,48 +1080,38 @@ class _ReplyRun {
   Future<void> sendAll() async {
     var sent = 0;
     var repliedByHand = 0;
-    var nothingToSay = 0;
     var failed = 0;
-    for (final sender in queue.senders) {
-      final ids = queue.bySender[sender]!;
-      final latest = _targetOf(ids.last);
-      final (add, remove) = labelsAfterReplyTo(ids);
+    for (final r in _replies) {
       try {
-        if (draftOf(ids) case (final draftId, _)) {
+        if (draftIdByThread[r.threadId] case final draftId?) {
           // Z Twoimi poprawkami, jeśli jakieś zrobiłeś.
           await mailbox.sendDraft(draftId);
-        } else if (await mailbox.ourReplyIsLatest(latest.threadId)) {
+        } else if (await mailbox.ourReplyIsLatest(r.threadId)) {
           // Szkic zniknął, a ostatnie słowo w wątku jest nasze — wysłany
           // ręcznie z Gmaila. Drugiego mejla autor dostać nie może. Jeśli od
           // tamtej pory autor odpisał, to nowa sprawa: składamy mejl normalnie.
-          await mailbox.batchModify(ids, add: add, remove: remove);
+          await _relabel(r);
           repliedByHand++;
           continue;
         } else {
-          final text = replyTextFor(ids);
-          if (text == null) {
-            // Nic do napisania — etykiety zostają, żeby nie zgubić sprawy.
-            nothingToSay++;
-            continue;
-          }
-          await mailbox.replyTo(latest, text);
+          await mailbox.replyTo(_targetOf(r), r.text);
         }
       } catch (e) {
         // Etykieta zostaje, więc następny przebieg spróbuje jeszcze raz.
-        stderr.writeln('  ! $sender: $e');
+        stderr.writeln('  ! ${r.sender} [${r.threadId}]: $e');
         failed++;
         continue;
       }
       sent++;
       // Zaraz po wysyłce, żeby ewentualna wywrotka nie kosztowała drugiego mejla.
-      await mailbox.batchModify(ids, add: add, remove: remove);
+      await _relabel(r);
     }
     stdout.writeln(_sentence([
       'Wysłano ${plural(sent, 'odpowiedź', 'odpowiedzi', 'odpowiedzi')}',
       if (repliedByHand > 0)
         plural(repliedByHand, 'już odpisany ręcznie', 'już odpisane ręcznie',
             'już odpisanych ręcznie'),
-      if (nothingToSay > 0) '$nothingToSay bez treści (pominięte)',
+      if (_nothingToSay > 0) '$_nothingToSay bez treści (pominięte)',
       if (failed > 0)
         '${plural(failed, 'nieudany', 'nieudane', 'nieudanych')} (zostają w kolejce)',
     ]));
@@ -1366,8 +1364,8 @@ piosenkomat: sitko mejli z piosenkami na $kInboxEmail.
       cofa wszystko, co nadał automat („$kLabelAuto”) na mejlach przebiegu;
       z --all — w całej skrzynce
   ./piosenkomat reply [katalog] [-n N] [--draft] --push
-      odpowiedzi do autorów: „zaktualizuj apkę” i Twoje teksty z przeglądu,
-      jeden mejl na autora; kolejką są „$kLabelReplyOldApp”
+      odpowiedzi do autorów: Twoje teksty z przeglądu i „zaktualizuj apkę”,
+      jeden mejl na piosenkę, w jej wątku; kolejką są „$kLabelReplyOldApp”
       i „$kLabelReplyReviewNote”, po tekście z przeglądu wchodzi
       „$kLabelWaitingForAuthor”. Zakresem jest przebieg; zaległość spoza niego
       bierze --all

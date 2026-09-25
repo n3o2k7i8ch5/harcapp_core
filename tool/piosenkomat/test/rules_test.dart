@@ -133,9 +133,7 @@ void main() {
       expect(draftActionFor('  $text\n', text), DraftAction.unchanged);
     });
     test('nasz kształt, inna treść → przeliczamy', () {
-      final older = composeContribReply(reviewNotes: [
-        '$kReplyGreeting\n\nStara uwaga.\n\n$kReplyClosing',
-      ])!;
+      final older = composeContribReply(reviewNote: 'Stara uwaga.')!;
       expect(isToolShapedReply(older), isTrue);
       expect(draftActionFor(older, text), DraftAction.rewrite);
     });

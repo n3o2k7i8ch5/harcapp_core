@@ -1,20 +1,18 @@
 /// Odpowiedzi do autorów zgłoszeń — składane z kawałków, nie pisane w całości.
 ///
-/// Jeden mejl potrafi nieść kilka spraw naraz: Twoją uwagę z przeglądu
-/// („brakuje chwytów”) i blok o starej apce, jeśli zgłoszenie przyszło ze
-/// starej wersji. Dlatego treść jest **funkcją** tego, co mamy do powiedzenia,
-/// a nie jednym gotowym napisem: dopisanie kolejnej sprawy przelicza mejl od
-/// nowa, zamiast kazać go przepisywać ręcznie.
+/// Jeden mejl na piosenkę, w jej wątku. Twoja jest tylko sprawa („brakuje
+/// chwytów”); powitanie, blok o starej apce, pożegnanie i stopkę dokłada
+/// narzędzie. Dlatego treść jest **funkcją** tego, co mamy do powiedzenia,
+/// a nie jednym gotowym napisem: zmiana uwagi przelicza mejl od nowa.
 library;
 
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
-import 'package:harcapp_core/song_book/submission/submission_email.dart';
 
 /// Zawsze na początku — mejl zaczyna się od podziękowania, nie od pretensji.
 const String kReplyGreeting = 'Dzięki za piosenki :)';
 
 /// Zawsze na końcu.
-const String kReplyClosing = 'Pozdrowienia!';
+const String kReplyClosing = 'Czuwaj!';
 
 /// Blok o najstarszej, nierozwijanej apce. Doklejany, gdy zgłoszenie przyszło
 /// z niej — niezależnie od tego, czy piosenka weszła do śpiewnika.
@@ -33,17 +31,20 @@ const String kOldAppReplyBlock =
     '\n'
     'Daj proszę przy okazji znać o tym w swoim środowisku! :)';
 
-/// Prośba o osobny mejl na każdą piosenkę — odpowiedź w wątku z etykietą nie
-/// wraca już do kolejki. To samo zdanie, co [kSubmissionOneSongPerMailNote].
-const String kOneSongPerMailReplyBlock =
-    'Przy okazji: każdą kolejną piosenkę wyślij proszę osobnym mejlem, '
-    'a nie odpowiedzią na ten — inaczej może mi umknąć.';
+/// Kreska nad stopką. Nie `-- ` — to separator podpisu, który część klientów
+/// pocztowych zwija albo wyszarza.
+const String kReplyFooterRule = '――――――――――';
 
-/// Propozycja do pola „Odpowiedź” z pastylek `missing-*`.
-///
-/// **Cały mejl, jaki pójdzie do autora** — z powitaniem, blokiem o starej apce
-/// ([oldApp]), prośbą o osobny mejl na piosenkę i pożegnaniem. Co widzisz
-/// w polu, to dostanie autor; po drodze nic się nie dokleja.
+/// Stopka pod kreską, na samym końcu każdej odpowiedzi: stała reguła, nie
+/// sprawa do tego autora. Odpowiedź w wątku z etykietą nie wraca do kolejki,
+/// więc druga piosenka dosłana w nim by przepadła.
+const String kReplyFooter = '$kReplyFooterRule\n'
+    'Każdą kolejną piosenkę wyślij proszę osobnym mejlem — ten wątek dotyczy '
+    'tylko tej jednej. Inaczej może mi umknąć.';
+
+/// Propozycja do pola „Odpowiedź” z pastylek `missing-*`: **sama sprawa**.
+/// Powitanie, blok o starej apce, pożegnanie i stopkę dokłada
+/// [composeContribReply] — edytor pokazuje je na szaro wokół pola.
 ///
 /// `null`, gdy żadna pastylka nie zasługuje na pytanie do autora (duplikat,
 /// zgoda, dopisek…).
@@ -51,11 +52,7 @@ const String kOneSongPerMailReplyBlock =
 /// Kolejność braków zawsze jak w [SongIssue], nie jak na pastylkach: „chwytów
 /// i linku do YT” ma brzmieć tak samo, niezależnie od tego, która pastylka
 /// była pierwsza.
-String? proposeContribReplyNote(
-  Iterable<SongIssue> issues, {
-  bool oldApp = false,
-  bool oneSongPerMail = true,
-}) {
+String? proposeContribReplyNote(Iterable<SongIssue> issues) {
   final present = issues.toSet();
   final phrases = [
     for (final issue in SongIssue.values)
@@ -63,14 +60,8 @@ String? proposeContribReplyNote(
         if (_askPhrase(issue) case final phrase?) phrase,
   ];
   if (phrases.isEmpty) return null;
-  return [
-    kReplyGreeting,
-    'Niestety widzę, że brakuje ${_joinPolish(phrases)}.',
-    'Prześlij proszę poprawione, żebym mógł zerknąć czy reszta jest ok.',
-    if (oldApp) kOldAppReplyBlock,
-    if (oneSongPerMail) kOneSongPerMailReplyBlock,
-    kReplyClosing,
-  ].join('\n\n');
+  return 'Niestety widzę, że brakuje ${_joinPolish(phrases)}. '
+      'Prześlij proszę poprawione, żebym mógł zerknąć czy reszta jest ok.';
 }
 
 /// Co idzie po „brakuje …” w uwadze do autora. `null` = ta pastylka nie
@@ -90,50 +81,44 @@ String _joinPolish(List<String> items) {
   return '${items.sublist(0, items.length - 1).join(', ')} i ${items.last}';
 }
 
-/// Treść odpowiedzi do autora.
+/// Ramka mejla wokół Twojej odpowiedzi: [before] nad nią, [after] pod nią.
+/// Tę samą edytor pokazuje na szaro przy polu, więc widzisz cały mejl, a ramki
+/// nie da się ani zapomnieć, ani zepsuć.
+({String before, String after}) contribReplyFrame({bool oldApp = false}) => (
+      before: kReplyGreeting,
+      after: [if (oldApp) kOldAppReplyBlock, kReplyClosing, kReplyFooter].join('\n\n'),
+    );
+
+/// Mejl w wątku **jednej** piosenki: ramka z [contribReplyFrame] wokół
+/// [reviewNote] — Twojego tekstu z pola „Odpowiedź do autora”. Każda piosenka
+/// dostaje własny mejl we własnym wątku, więc uwaga jest przy piosence,
+/// a odpowiedź autora wraca tam, gdzie trzeba.
 ///
-/// [reviewNotes] to Twoje teksty z pola „Odpowiedź do autora” w edytorze. Idą
-/// **dosłownie**: każda jest już całym mejlem (patrz [proposeContribReplyNote]),
-/// więc nic się do nich nie dokleja — inaczej autor dostałby co innego, niż
-/// widziałeś w polu. Lista, bo jeden autor mógł przysłać kilka piosenek.
+/// [oldApp]: zgłoszenie przyszło ze starej apki — blok o niej idzie w środku.
 ///
-/// [oldApp] i [oneSongPerMail] działają **tylko wtedy, gdy uwag nie ma**: to
-/// jedyny przypadek, w którym mejl nie ma autora i narzędzie składa go samo.
-/// Gdy piszesz sam, blok o starej apce dokładasz sobie w propozycji.
-///
-/// Pusty wynik (ani uwagi, ani starej apki) znaczy „nie ma po co pisać” —
-/// zwracamy `null`, żeby wołający nie tworzył pustego szkicu.
-String? composeContribReply({
-  Iterable<String> reviewNotes = const [],
-  bool oldApp = false,
-  bool oneSongPerMail = false,
-}) {
-  final trimmed = [
-    for(final n in reviewNotes) if(n.trim().isNotEmpty) n.trim(),
-  ];
-  if (trimmed.isNotEmpty) return trimmed.join('\n\n');
-  if (!oldApp) return null;
-  return [
-    kReplyGreeting,
-    kOldAppReplyBlock,
-    if (oneSongPerMail) kOneSongPerMailReplyBlock,
-    kReplyClosing,
-  ].join('\n\n');
+/// `null` = nie ma o czym pisać (ani odpowiedzi, ani starej apki), żeby
+/// wołający nie tworzył pustego szkicu.
+String? composeContribReply({String? reviewNote, bool oldApp = false}) {
+  final note = reviewNote?.trim() ?? '';
+  if (note.isEmpty && !oldApp) return null;
+  final frame = contribReplyFrame(oldApp: oldApp);
+  return [frame.before, if (note.isNotEmpty) note, frame.after].join('\n\n');
 }
 
 /// Czy treść wygląda na mejl złożony przez [composeContribReply]: powitanie
-/// na początku, zakończenie na końcu. Po tym piosenkomat poznaje własny
-/// szkic — taki wolno przeliczyć od nowa. Wszystko inne to ręczna robota
-/// w Gmailu i zostaje nietknięte.
+/// na początku, pożegnanie i stopka na końcu. Po tym piosenkomat poznaje
+/// własny szkic — taki wolno przeliczyć od nowa. Wszystko inne to ręczna
+/// robota w Gmailu i zostaje nietknięte.
 ///
 /// Środek nie jest sprawdzany celowo: uwaga z przeglądu mogła się zmienić,
 /// a poprzedniej wersji nikt nie pamięta. Zamiast zgadywać, co w środku jest
 /// stare, wołający wypisuje akapity, które przy przeliczeniu wypadają.
 bool isToolShapedReply(String body) {
   final paragraphs = _paragraphs(body);
-  return paragraphs.length >= 2 &&
+  return paragraphs.length >= 3 &&
       paragraphs.first == kReplyGreeting &&
-      paragraphs.last == kReplyClosing;
+      paragraphs[paragraphs.length - 2] == kReplyClosing &&
+      paragraphs.last == kReplyFooter;
 }
 
 /// Akapity z [oldBody], których nie ma w [newBody]. To, co wypadnie ze

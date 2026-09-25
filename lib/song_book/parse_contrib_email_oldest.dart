@@ -71,8 +71,7 @@ String _stripHtml(String s){
 }
 
 /// Treść maila zwrotnego dla autora mejla w starym formacie, żeby przesiadł
-/// się na nową apkę. Złożenie [kReplyGreeting] + [kOldAppReplyBlock] +
-/// [kReplyClosing] — ten sam wynik, co `composeContribReply(oldApp: true)`,
+/// się na nową apkę. Ten sam wynik, co `composeContribReply(oldApp: true)`,
 /// tylko `const`. Gdy do mejla dochodzi uwaga z przeglądu, używaj
 /// [composeContribReply], nie tego napisu.
 const String oldestFormatReplyMessage =
@@ -80,7 +79,9 @@ const String oldestFormatReplyMessage =
     '\n'
     '$kOldAppReplyBlock\n'
     '\n'
-    '$kReplyClosing';
+    '$kReplyClosing\n'
+    '\n'
+    '$kReplyFooter';
 
 /// Najstarsza apka zapisywała `add_pers` swobodnie: raz samym napisem
 /// z imieniem, raz listą napisów, raz listą map, w których `name` leży obok

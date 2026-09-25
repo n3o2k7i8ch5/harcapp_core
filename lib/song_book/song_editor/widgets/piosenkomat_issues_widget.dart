@@ -148,6 +148,7 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
       final goesIn = data.goesIn;
       final color = goesIn? Colors.green: Colors.red;
       final correction = data.correctionMessage ?? '';
+      final frame = contribReplyFrame(oldApp: data.isOldApp);
 
       return Padding(
         padding: widget.padding,
@@ -255,46 +256,57 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
               // Gwiazdka — jak przy AI, ale bez modelu: skleja uwagę
               // z pastylek `missing-*`. Widać ją tylko, gdy jest co
               // zaproponować; klik nie wysyła mejla, tylko wypełnia pole.
+              // Szara ramka nad polem i pod nim to reszta mejla, którą dokłada
+              // `reply` — ta sama funkcja, więc podgląd nie rozjedzie się z tym,
+              // co wyjdzie. Twoje jest tylko pole: ramki nie da się zapomnieć
+              // ani zepsuć.
               _Bubble(
                 mine: true,
-                child: Row(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: AppTextFieldHint(
-                        key: ObjectKey(_boundSong),
-                        hint: 'Odpowiedz…',
-                        // Po wstawieniu z gwiazdki kontroler ma już tekst,
-                        // a pływająca etykieta liczy się w `initState` —
-                        // bez tego „Odpowiedz…” siada na propozycji.
-                        alwaysShowTopHint: _controller?.text.isNotEmpty ?? false,
-                        controller: _controller,
-                        maxLines: null,
-                        showUnderline: false,
-                        contentPadding: EdgeInsets.zero,
-                        style: AppTextStyle(
-                          fontSize: Dimen.textSizeNormal,
-                          color: textEnab_(context),
+                    _ReplyFrameText(frame.before),
+                    const SizedBox(height: Dimen.defMarg),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: AppTextFieldHint(
+                            key: ObjectKey(_boundSong),
+                            hint: 'Odpowiedz…',
+                            // Po wstawieniu z gwiazdki kontroler ma już tekst,
+                            // a pływająca etykieta liczy się w `initState` —
+                            // bez tego „Odpowiedz…” siada na propozycji.
+                            alwaysShowTopHint: _controller?.text.isNotEmpty ?? false,
+                            controller: _controller,
+                            maxLines: null,
+                            showUnderline: false,
+                            contentPadding: EdgeInsets.zero,
+                            style: AppTextStyle(
+                              fontSize: Dimen.textSizeNormal,
+                              color: textEnab_(context),
+                            ),
+                            hintStyle: AppTextStyle(
+                              fontSize: Dimen.textSizeNormal,
+                              color: hintEnab_(context),
+                            ),
+                            onChanged: (_, text) => _update((d) => d.copyWith(
+                                reviewNote: () =>
+                                    text.trim().isEmpty? null: text)),
+                          ),
                         ),
-                        hintStyle: AppTextStyle(
-                          fontSize: Dimen.textSizeNormal,
-                          color: hintEnab_(context),
-                        ),
-                        onChanged: (_, text) => _update((d) => d.copyWith(
-                            reviewNote: () =>
-                                text.trim().isEmpty? null: text)),
-                      ),
+                        if(proposeContribReplyNote(data.issues.map((i) => i.issue))
+                            case final note?)
+                          AppButton(
+                            icon: Icon(MdiIcons.starFourPoints),
+                            color: accent_(context),
+                            tooltip: 'Zaproponuj odpowiedź',
+                            onTap: () => _proposeReply(note),
+                          ),
+                      ],
                     ),
-                    if(proposeContribReplyNote(
-                          data.issues.map((i) => i.issue),
-                          oldApp: data.isOldApp,
-                        ) case final note?)
-                      AppButton(
-                        icon: Icon(MdiIcons.starFourPoints),
-                        color: accent_(context),
-                        tooltip: 'Zaproponuj odpowiedź',
-                        onTap: () => _proposeReply(note),
-                      ),
+                    const SizedBox(height: Dimen.defMarg),
+                    _ReplyFrameText(frame.after),
                   ],
                 ),
               ),
@@ -321,6 +333,21 @@ String _messageTitle(PiosenkomatMessage message){
 
 /// Dymek rozmowy: prostokątny, bez dziubka. Od osoby dodającej — z lewej,
 /// na neutralnym tle; Twoja odpowiedź — z prawej, na tle akcentu.
+/// Część mejla, którą dokłada narzędzie — na szaro i bez edycji.
+class _ReplyFrameText extends StatelessWidget{
+
+  final String text;
+
+  const _ReplyFrameText(this.text);
+
+  @override
+  Widget build(BuildContext context) => SelectableText(
+    text,
+    style: AppTextStyle(fontSize: Dimen.textSizeNormal, color: hintEnab_(context)),
+  );
+
+}
+
 class _Bubble extends StatelessWidget{
 
   final String? title;
