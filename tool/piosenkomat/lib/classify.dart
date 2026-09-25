@@ -259,12 +259,16 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
   };
   final out = {for (final s in subs) s.threadId: s};
 
+  bool sameMainTitle(Submission a, Submission b) =>
+      searchableString(a.title) == searchableString(b.title);
+
   BatchMatch matchOf(Submission a, Submission b, {bool newest = true}) => BatchMatch(
         messageId: b.message.id,
         title: b.title,
         similarities: compare(profiles[a.threadId]!, profiles[b.threadId]!),
         isNewestInBatch: newest,
         correctionTarget: b.correctionTarget,
+        sameMainTitle: sameMainTitle(a, b),
       );
 
   String keyOf(Submission s) {
@@ -338,8 +342,9 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
     for (var j = i + 1; j < list.length; j++) {
       final a = list[i], b = list[j];
       if (a.kind != b.kind || keyOf(a) == keyOf(b)) continue;
-      final sameTitle = profiles[a.threadId]!.sharesTitleWith(profiles[b.threadId]!);
-      if (sameTitle && !a.isCorrection) continue;
+      // Tytuł w paczce to tytuł główny; wspólny tytuł ukryty łapie tekst.
+      // Nowe o tym samym tytule głównym są w jednej grupie — tu ich nie ma.
+      final sameTitle = sameMainTitle(a, b);
       final score = jaccard(profiles[a.threadId]!.words, profiles[b.threadId]!.words);
       if (!sameTitle && score < kSimilarText) continue;
       if (out[a.threadId]!.batchMatch == null) out[a.threadId] = a.copyWith(batchMatch: matchOf(a, b));
@@ -434,10 +439,10 @@ Decision decide(Submission s) {
       // piosenki”, tylko zwykły duplikat treści.
       if (s.correctionTarget != null && batch.correctionTarget == s.correctionTarget) {
         add(SongIssue.sameTargetInBatch, batch.detail);
-      } else if (batch.level == MatchLevel.similarText) {
-        add(SongIssue.similarTextInBatch, batch.detail);
-      } else if (batch.level != null) {
+      } else if (batch.sameMainTitle) {
         add(SongIssue.sameTitleInBatch, batch.detail);
+      } else if (batch.level != null) {
+        add(SongIssue.similarTextInBatch, batch.detail);
       }
     }
     return Decision(Destination.candidateCorrection, issues: issues);
@@ -465,19 +470,11 @@ Decision decide(Submission s) {
     case null:
       break;
   }
-  if (batch != null) {
-    switch (batch.level) {
-      case MatchLevel.similarText:
-        add(SongIssue.similarTextInBatch, batch.detail);
-      case MatchLevel.identical:
-        // Nie zdarza się: identyczna z nowszą odpada wyżej, a te, które
-        // zostają, nie są sobie identyczne.
-        break;
-      case null:
-        break;
-      default:
-        add(SongIssue.sameTitleInBatch, batch.detail);
-    }
+  // Identyczna z nowszą odpada wyżej, a te, które zostają, nie są sobie
+  // identyczne — tu każde dopasowanie w paczce jest uwagą.
+  if (batch != null && batch.level != null) {
+    add(batch.sameMainTitle ? SongIssue.sameTitleInBatch : SongIssue.similarTextInBatch,
+        batch.detail);
   }
   return Decision(Destination.candidateNew, issues: issues);
 }

@@ -270,6 +270,27 @@ void main() {
       expect(detailOf(byId['b']!, SongIssue.similarTextInBatch), contains('[d]'));
     });
 
+    test('wspólny tylko tytuł ukryty: łapie tekst, nie tytuł', () async {
+      final ukryty = sampleSong(title: 'Pan kiedyś stanął nad brzegiem', lyrics: _a)
+        ..hidTitles = ['Ognisko'];
+      final out = classifyBatch([
+        msgFrom(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a)), id: 'a'),
+        msgFrom(await completeEmail(song: ukryty), id: 'b'),
+      ], book: SongBook.empty);
+      expect(out.map(issuesOf), everyElement([SongIssue.similarTextInBatch]));
+      expect(detailOf(out[0], SongIssue.similarTextInBatch), contains('[b]'));
+    });
+
+    test('wspólny tylko tytuł ukryty, inny tekst → obie czyste', () async {
+      final ukryty = sampleSong(title: 'Pan kiedyś stanął nad brzegiem', lyrics: _b)
+        ..hidTitles = ['Ognisko'];
+      final out = classifyBatch([
+        msgFrom(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a)), id: 'a'),
+        msgFrom(await completeEmail(song: ukryty), id: 'b'),
+      ], book: SongBook.empty);
+      expect(out.map((c) => c.isClean), everyElement(isTrue));
+    });
+
     test('różne tytuły, podobna treść → similar-text-in-batch', () async {
       final out = classifyBatch([
         msgFrom(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a)), id: 'a'),

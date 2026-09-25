@@ -296,11 +296,13 @@ czy bez. Wszystko mniej niż identyczne idzie do `candidates-new` albo
 `candidates-correction`: bez uwag → `ready-to-add`, z uwagami → `needs-review`
 plus podkategoria na każdą uwagę.
 
-**W paczce** zgłoszenia grupują się po kluczu zależnym od rodzaju: nowe po tytule,
-poprawki po `correction_target` (poprawka może zmieniać tytuł). W grupie identyczne
-zlewają się do **najnowszej** (reszta → `rejected/duplicate`), mniej niż identyczne
-idą do pliku z uwagą `same-title-in-batch` / `same-target-in-batch`. Poza grupami,
-parami: `similarText` między różnymi tytułami → `similar-text-in-batch`. Duplikat
+**W paczce** zgłoszenia grupują się po kluczu zależnym od rodzaju: nowe po tytule
+głównym, poprawki po `correction_target` (poprawka może zmieniać tytuł). W grupie
+identyczne zlewają się do **najnowszej** (reszta → `rejected/duplicate`), a pozostałe
+porównują się już tylko między sobą i idą do pliku z uwagą `same-title-in-batch` /
+`same-target-in-batch`. Poza grupami, parami: tekst ≥ 50% między różnymi tytułami
+głównymi → `similar-text-in-batch`. **W paczce „ten sam tytuł” to tytuł główny** —
+wspólny tytuł ukryty łapie dopiero tekst (z apką `hid_titles` liczą się jak tytuł). Duplikat
 z innego przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs`.
 
 ### Uwagi

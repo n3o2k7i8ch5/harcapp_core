@@ -49,12 +49,17 @@ class BatchMatch {
   /// piosenek i poprawek bez celu. Po tym poznajemy, czy obie poprawki celują
   /// w tę samą piosenkę — podobny tekst tego jeszcze nie znaczy.
   final String? correctionTarget;
+  /// Ten sam **tytuł główny**. W paczce tylko on robi „ten sam tytuł” —
+  /// wspólny tytuł ukryty łapie dopiero tekst. `SameTitle` w [similarities]
+  /// liczy też ukryte, bo tak porównujemy z apką.
+  final bool sameMainTitle;
   const BatchMatch({
     required this.messageId,
     required this.title,
     required this.similarities,
     this.isNewestInBatch = true,
     this.correctionTarget,
+    this.sameMainTitle = false,
   });
   MatchLevel? get level => levelOf(similarities);
   String get detail => '„$title” [$messageId]: ${similaritiesText(similarities)}';
