@@ -46,6 +46,26 @@ SubmissionFileRead readSubmissionFile(ContribMessage m) {
 bool isWebSubmission(ContribMessage m) =>
     m.hasWebSubjectMarker || (readSubmissionFile(m).file?.source?.isWeb ?? false);
 
+/// Które wiadomości kolejki pobiera `scan`: pierwsze [limit] **wątków**,
+/// każdy w całości. Zgłoszeniem jest wątek, więc limit na wiadomościach
+/// ucinałby wątek w połowie — starsza wersja by weszła, a nowsza, za granicą,
+/// trafiłaby potem do otagowanego wątku i nie wróciła już nigdy.
+///
+/// [queue] od najstarszego. Wątek stoi w kolejce na miejscu swojej
+/// najstarszej wiadomości, a przy [newest] — najnowszej. Wynik w kolejności
+/// [queue]; bez [limit] — cała kolejka.
+List<String> takeThreads(
+  List<({String id, String threadId})> queue,
+  int? limit, {
+  bool newest = false,
+}) {
+  final order = <String>{
+    for (final m in newest ? queue.reversed : queue) m.threadId,
+  };
+  final chosen = (limit == null ? order : order.take(limit)).toSet();
+  return [for (final m in queue) if (chosen.contains(m.threadId)) m.id];
+}
+
 /// Co z pobranej kolejki idzie do przebiegu. Bezpieczniki na wypadek, gdyby
 /// query przepuściło coś już otagowanego albo coś, co nie jest zgłoszeniem
 /// piosenki — takich mejli nie dotykamy. Zgłoszenia ze strony liczymy osobno,

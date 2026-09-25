@@ -146,7 +146,7 @@ class _UsageError implements Exception {
 
 void _scanOptions(ArgParser p) => p
   ..addOption('limit',
-      abbr: 'n', help: 'Ile mejli z kolejki (domyślnie wszystkie)')
+      abbr: 'n', help: 'Ile zgłoszeń (wątków) z kolejki, każde w całości (domyślnie wszystkie)')
   ..addFlag('newest',
       negatable: false, help: 'Najnowsze N zamiast najstarszych')
   ..addOption('out',
@@ -224,11 +224,23 @@ Future<int> _scan(ArgResults cmd) async {
   final mailbox = await _connect(cmd);
   final query = cmd['query'] as String? ?? kQueueQuery;
 
-  final ids = await mailbox.listIds(query, limit: limit, newest: newest);
+  // Cała lista, bo `-n` liczy wątki, a wiadomości jednego wątku bywają
+  // rozrzucone po kolejce. Samo listowanie jest tanie — treści nie ciągnie.
+  final queueIds = [
+    for (final id in await mailbox.listIds(query))
+      (id: id, threadId: mailbox.knownThreadOf(id) ?? id),
+  ];
+  final ids = takeThreads(queueIds, limit, newest: newest);
+  final picked = ids.toSet();
+  final threadCount = {
+    for (final m in queueIds) if (picked.contains(m.id)) m.threadId,
+  }.length;
   final scope = limit == null
       ? 'cała kolejka'
-      : '${newest ? 'najnowsze' : 'najstarsze'} $limit';
-  stdout.writeln('Kolejka ($scope): ${plural(ids.length, 'mejl', 'mejle', 'mejli')}, pobieram…');
+      : '${newest ? 'najnowsze' : 'najstarsze'} '
+          '${plural(limit, 'wątek', 'wątki', 'wątków')}';
+  stdout.writeln('Kolejka ($scope): ${plural(ids.length, 'mejl', 'mejle', 'mejli')} '
+      'w ${plural(threadCount, 'wątku', 'wątkach', 'wątkach')}, pobieram…');
   final fetched = await mailbox.getMessages(ids, onProgress: (done, total) {
     if (done % 50 == 0 || done == total) stdout.writeln('  $done/$total');
   });

@@ -165,7 +165,7 @@ Bez szkicu nie wysyłasz.
 
 | komenda | co robi | Gmail |
 |---|---|---|
-| `scan [-n N] [--newest] [-o KATALOG]` | przesiew N najstarszych (bez `-n` — całej kolejki; `--newest` — najnowszych) | czyta |
+| `scan [-n N] [--newest] [-o KATALOG]` | przesiew N najstarszych zgłoszeń — wątków, każdy w całości (bez `-n` — całej kolejki; `--newest` — najnowszych) | czyta |
 | `explain plik.eml` | klasyfikacja lokalnego pliku | nie dotyka |
 | `label scanned [KATALOG]` | pokazuje plan przebiegu z `plan.json` | czyta |
 | `label reviewed [KATALOG]` | pokazuje decyzje z `reviewed-*` | czyta |
