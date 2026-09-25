@@ -101,6 +101,53 @@ void main() {
     expect(emitPeopleDart(report), contains('// Już w data.dart'));
   });
 
+  group('znani z innego adresu', () {
+    final withEmail = allRegisteredPeople.where((r) => r.emails.isNotEmpty).toList();
+    final jan = withEmail[0];
+    final ola = withEmail[1];
+    const nowy = 'nowy.adres.piosenkomatu@example.com';
+
+    test('adres nadawcy do dopisania w istniejącym wpisie, nie „nic do dopisania”', () {
+      final report = collectPeople([
+        ContributorSource(
+          sender: nowy,
+          title: 'Barka',
+          person: jan.person,
+          otherEmails: [jan.emails.first],
+        ),
+        ContributorSource(
+          sender: nowy,
+          title: 'Ognisko',
+          person: jan.person,
+          otherEmails: [jan.emails.first],
+        ),
+      ]);
+      expect(report.knownByEmail, isEmpty);
+      expect(report.newContributors, isEmpty);
+      final k = report.knownWithNewEmails.single;
+      expect(k.registered, same(jan));
+      expect(k.newEmails, [nowy]);
+      expect(k.songTitles, ['Barka', 'Ognisko']);
+      final dart = emitPeopleDart(report);
+      expect(dart, contains('// Znani z innego adresu — dopisz do `emails` istniejącego wpisu:'));
+      expect(dart, contains("${jan.person.name} (w data.dart pod ${jan.emails.join(', ')}): '$nowy'"));
+    });
+
+    test('adresy z dwóch różnych wpisów → ostrzeżenie, nic nie zgadujemy', () {
+      final report = collectPeople([
+        ContributorSource(
+          sender: nowy,
+          title: 'Barka',
+          person: jan.person,
+          otherEmails: [jan.emails.first, ola.emails.first],
+        ),
+      ]);
+      expect(report.knownWithNewEmails, isEmpty);
+      expect(report.ambiguous.single.matches, unorderedEquals([jan, ola]));
+      expect(emitPeopleDart(report), contains('// Adresy wskazują różne osoby z data.dart'));
+    });
+  });
+
   test('bez bloku osoby → tylko adnotacja', () async {
     final items = classifyBatch([
       msgFrom(await completeEmail(), id: 'a'),

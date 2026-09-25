@@ -751,6 +751,8 @@ void _writePeople(String runDir, PeopleReport people) {
   writePeopleDart(peoplePath, people);
   stdout.writeln('Osoby dodające: ${people.newContributors.length} nowych → $peoplePath'
       '${people.knownByEmail.isEmpty ? '' : ', ${people.knownByEmail.length} już w data.dart'}'
+      '${people.knownWithNewEmails.isEmpty ? '' : ', ${people.knownWithNewEmails.length} z nowym adresem do dopisania'}'
+      '${people.ambiguous.isEmpty ? '' : ', ${people.ambiguous.length} do sprawdzenia (adresy z różnych wpisów)'}'
       '${people.anonymousByEmail.isEmpty ? '' : ', ${people.anonymousByEmail.length} bez karty osoby'}');
   if (people.senderNotContributorByEmail.isNotEmpty) {
     stdout.writeln('${people.senderNotContributorByEmail.length} zgłoszeń '

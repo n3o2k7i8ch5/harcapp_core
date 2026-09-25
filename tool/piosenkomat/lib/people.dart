@@ -22,10 +22,43 @@ class NewContributor {
   });
 }
 
+/// Osoba już w `data.dart`, ale pod innym adresem niż ten, z którego przyszło
+/// zgłoszenie. [newEmails] trzeba dopisać do `emails` jej wpisu — inaczej
+/// `ContributorRef.resolve()` nie znajdzie jej po `email_ref` piosenki.
+class KnownWithNewEmails {
+  final RegisteredContributor registered;
+  final List<String> newEmails;
+  final List<String> songTitles;
+
+  const KnownWithNewEmails({
+    required this.registered,
+    required this.newEmails,
+    required this.songTitles,
+  });
+}
+
+/// Adresy jednego nadawcy wskazują **różne** osoby z `data.dart` — nie
+/// zgadujemy, która to ta.
+class AmbiguousContributor {
+  final String sender;
+  final List<RegisteredContributor> matches;
+  final List<String> songTitles;
+
+  const AmbiguousContributor({
+    required this.sender,
+    required this.matches,
+    required this.songTitles,
+  });
+}
+
 class PeopleReport {
   final List<NewContributor> newContributors;
   /// Nadawcy już obecni w `data.dart` (nic do dopisania).
   final Map<String, List<String>> knownByEmail;
+  /// Znani z innego adresu — do dopisania ręcznie w istniejącym wpisie.
+  final List<KnownWithNewEmails> knownWithNewEmails;
+  /// Adresy nadawcy z kilku różnych wpisów `data.dart`.
+  final List<AmbiguousContributor> ambiguous;
   /// Piosenki bez karty osoby: w `data.dart` nie będzie kogo dopisać.
   final Map<String, List<String>> anonymousByEmail;
   /// Zgłoszenia w cudzym imieniu: adres nadawcy jest tylko do odpisania, więc
@@ -36,6 +69,8 @@ class PeopleReport {
     required this.newContributors,
     required this.knownByEmail,
     required this.anonymousByEmail,
+    this.knownWithNewEmails = const [],
+    this.ambiguous = const [],
     this.senderNotContributorByEmail = const {},
   });
 }
@@ -110,6 +145,9 @@ PeopleReport collectPeople(List<ContributorSource> items) {
   final known = <String, List<String>>{};
   final anonymous = <String, List<String>>{};
   final notContributor = <String, List<String>>{};
+  // Po tożsamości wpisu: dwie piosenki tej samej osoby to jeden komentarz.
+  final withNewEmails = <RegisteredContributor, KnownWithNewEmails>{};
+  final ambiguous = <String, AmbiguousContributor>{};
 
   for (final c in items) {
     final sender = c.sender;
@@ -135,9 +173,32 @@ PeopleReport collectPeople(List<ContributorSource> items) {
       for (final e in c.otherEmails) e.trim().toLowerCase(),
     }..removeWhere((e) => e.isEmpty);
 
-    final alreadyKnown = emails.any((e) => registeredPersonByEmail(e) != null);
-    if (alreadyKnown) {
-      known.putIfAbsent(sender, () => []).add(c.title);
+    // Nadawcy nie ma w `data.dart`, ale może być pod innym swoim adresem.
+    final matches = <RegisteredContributor>{
+      for (final e in emails)
+        if (registeredPersonByEmail(e) case final r?) r,
+    };
+    if (matches.length > 1) {
+      final prev = ambiguous[sender];
+      ambiguous[sender] = AmbiguousContributor(
+        sender: sender,
+        matches: matches.toList(),
+        songTitles: [...?prev?.songTitles, c.title],
+      );
+      continue;
+    }
+    if (matches.length == 1) {
+      final registered = matches.single;
+      final prev = withNewEmails[registered];
+      withNewEmails[registered] = KnownWithNewEmails(
+        registered: registered,
+        newEmails: {
+          ...?prev?.newEmails,
+          for (final e in emails)
+            if (registeredPersonByEmail(e) == null) e,
+        }.toList(),
+        songTitles: [...?prev?.songTitles, c.title],
+      );
       continue;
     }
 
@@ -164,6 +225,8 @@ PeopleReport collectPeople(List<ContributorSource> items) {
     newContributors: newOnes.values.toList()
       ..sort((a, b) => dartConstName(a.person.name).compareTo(dartConstName(b.person.name))),
     knownByEmail: known,
+    knownWithNewEmails: withNewEmails.values.toList(),
+    ambiguous: ambiguous.values.toList(),
     anonymousByEmail: anonymous,
     senderNotContributorByEmail: notContributor,
   );
@@ -211,6 +274,24 @@ String emitPeopleDart(PeopleReport report) {
     buf.writeln(');');
   }
 
+  if (report.knownWithNewEmails.isNotEmpty) {
+    buf.writeln();
+    buf.writeln('// Znani z innego adresu — dopisz do `emails` istniejącego wpisu:');
+    for (final k in report.knownWithNewEmails) {
+      buf.writeln('//   ${k.registered.person.name} (w data.dart pod ${k.registered.emails.join(', ')}): '
+          '${k.newEmails.map(_str).join(', ')}  ← ${k.songTitles.join('; ')}');
+    }
+  }
+  if (report.ambiguous.isNotEmpty) {
+    buf.writeln();
+    buf.writeln('// Adresy wskazują różne osoby z data.dart — sprawdź, zanim cokolwiek dopiszesz:');
+    for (final a in report.ambiguous) {
+      final who = [
+        for (final r in a.matches) '${r.person.name} (${r.emails.join(', ')})',
+      ].join(', ');
+      buf.writeln('//   ${a.sender}: $who  ← ${a.songTitles.join('; ')}');
+    }
+  }
   if (report.knownByEmail.isNotEmpty) {
     buf.writeln();
     buf.writeln('// Już w data.dart (nic do dopisania):');

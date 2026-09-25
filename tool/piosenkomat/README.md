@@ -548,8 +548,14 @@ osoby zrobione na stronie. Jedyne, czego piosenka nie niesie, to dodatkowe
 adresy z bloku „Osoba dodająca” (`ContributorRef` ma jeden `email_ref`) — te
 czekają w `plan.json` i `prepare` dokłada je po nadawcy.
 
-W komentarzach na końcu pliku: nadawcy już obecni w `data.dart` oraz piosenki bez
-karty osoby (mają tylko `email_ref`, nie ma kogo dopisać).
+W komentarzach na końcu pliku:
+- **znani z innego adresu** — osoba jest w `data.dart`, ale zgłoszenie przyszło
+  z adresu, którego tam nie ma. Adres dopisujesz ręcznie do `emails` jej wpisu
+  (komentarz mówi, którego i co), inaczej piosenka nie znajdzie jej po `email_ref`;
+- **adresy z różnych wpisów** — adresy nadawcy wskazują dwie różne osoby
+  z `data.dart`; narzędzie nie zgaduje, sprawdzasz sam;
+- nadawcy już obecni w `data.dart` (nic do dopisania) oraz piosenki bez karty
+  osoby (mają tylko `email_ref`, nie ma kogo dopisać).
 
 ## Dev
 
