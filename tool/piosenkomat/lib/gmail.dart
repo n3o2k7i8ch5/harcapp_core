@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
@@ -39,7 +40,8 @@ class GmailMailbox {
 
   /// Gmail rozlicza limit w **jednostkach**, nie w requestach: 6000 na minutę
   /// na użytkownika. Metody kosztują różnie — `messages.get` i `attachments.get`
-  /// po 20, `batchModify` 50 za paczkę do 1000 mejli, `list` 5, `labels.list` 1.
+  /// po 20, `threads.get` 40, `batchModify` 50 za paczkę do 1000 mejli, `list` 5,
+  /// `labels.list` 1 (tabela: developers.google.com/workspace/gmail/api/reference/quota).
   ///
   /// Wiadro z żetonami trzyma nas tuż pod progiem. Sztywna przerwa między
   /// requestami tego nie umiała: przy 20-jednostkowych `get` celowała trzykrotnie
@@ -53,12 +55,14 @@ class GmailMailbox {
   /// puszczałoby na starcie serię 300 zapytań naraz — i prosto w 429.
   static const int _maxBurst = 100;
   static const int _costGet = 20;
+  static const int _costThreadGet = 40;
   static const int _costList = 5;
   static const int _costModify = 50;
   static const int _costLabelCreate = 5;
   static const int _costLabelList = 1;
   static const int _costSend = 100;
   static const int _costDraftWrite = 10;
+  static const int _costDraftUpdate = 15;
   static const int _costDraftList = 5;
   double _units = 0;
   DateTime _refilled = DateTime.now();
@@ -87,22 +91,32 @@ class GmailMailbox {
     }
   }
 
-  /// Zapytanie w ramach limitu; przy 403/429 czekamy i próbujemy jeszcze raz.
-  Future<T> _call<T>(Future<T> Function() fn, {int cost = _costList}) async {
+  /// Zapytanie w ramach limitu. Przy przekroczonym limicie i przy błędach
+  /// przejściowych (5xx, zerwane połączenie) czekamy i próbujemy jeszcze raz —
+  /// inaczej jeden 503 w połowie `scan` kosztował całe pobieranie od nowa.
+  ///
+  /// [idempotent] = `false` dla wysyłki i zakładania: tam błąd przejściowy
+  /// mógł przyjść **po** wykonaniu, a drugi raz to drugi mejl albo drugi
+  /// szkic. Przekroczony limit ponawiamy zawsze — Gmail odrzuca go przed
+  /// wykonaniem.
+  Future<T> _call<T>(Future<T> Function() fn,
+      {int cost = _costList, bool idempotent = true}) async {
     var wait = const Duration(seconds: 5);
     for (var attempt = 1;; attempt++) {
       await _spend(cost);
       try {
         return await fn();
-      } on DetailedApiRequestError catch (e) {
-        final quota = e.status == 429
-            || (e.status == 403 && (e.message ?? '').toLowerCase().contains('quota'));
-        if (!quota || attempt >= 7) rethrow;
-        stdout.writeln('Limit Gmail API, czekam ${wait.inSeconds}s…');
+      } catch (e) {
+        final kind = gmailRetryKind(e);
+        final retry = kind == GmailRetry.quota ||
+            (kind == GmailRetry.transient && idempotent);
+        if (!retry || attempt >= 7) rethrow;
+        stdout.writeln('${kind == GmailRetry.quota ? 'Limit Gmail API' : 'Chwilowy błąd Gmaila'}'
+            ', czekam ${wait.inSeconds}s…');
         await Future.delayed(wait);
         wait *= 2;
         // Limit i tak przekroczony — wiadro do zera, żeby nie dobijać.
-        _units = 0;
+        if (kind == GmailRetry.quota) _units = 0;
       }
     }
   }
@@ -231,7 +245,7 @@ class GmailMailbox {
   /// osobny mejl znikąd.
   Future<void> replyTo(ReplyTarget target, String text) async {
     await _call(() => _api.users.messages.send(_replyMessage(target, text), 'me'),
-        cost: _costSend);
+        cost: _costSend, idempotent: false);
   }
 
   /// To samo, co [replyTo], ale zostaje szkicem w wątku — do przejrzenia
@@ -240,7 +254,7 @@ class GmailMailbox {
     final draft = await _call(
         () => _api.users.drafts.create(
             Draft()..message = _replyMessage(target, text), 'me'),
-        cost: _costDraftWrite);
+        cost: _costDraftWrite, idempotent: false);
     return draft.id!;
   }
 
@@ -269,7 +283,7 @@ class GmailMailbox {
     await _call(
         () => _api.users.drafts.update(
             Draft()..message = _replyMessage(target, text), 'me', draftId),
-        cost: _costDraftWrite);
+        cost: _costDraftUpdate);
   }
 
   /// Treść szkicu jako czysty tekst — po to, żeby nie nadpisać tego, co
@@ -291,13 +305,13 @@ class GmailMailbox {
   /// wystarczy sprzątnąć szkic.
   Future<void> deleteDraft(String draftId) async {
     await _call(() => _api.users.drafts.delete('me', draftId),
-        cost: _costDraftWrite);
+        cost: _costDraftWrite, idempotent: false);
   }
 
   /// Wysyła gotowy szkic — z Twoimi poprawkami, jeśli jakieś zrobiłeś.
   Future<void> sendDraft(String draftId) async {
     await _call(() => _api.users.drafts.send(Draft()..id = draftId, 'me'),
-        cost: _costSend);
+        cost: _costSend, idempotent: false);
   }
 
   /// Wiadomości wątku bez szkiców: `threads.get` oddaje też to, co dopiero
@@ -312,7 +326,7 @@ class GmailMailbox {
   Future<List<Message>> _thread(String threadId) async {
     final thread = await _call(
         () => _api.users.threads.get('me', threadId, format: 'minimal'),
-        cost: _costGet);
+        cost: _costThreadGet);
     return thread.messages ?? const [];
   }
 
@@ -371,23 +385,35 @@ class GmailMailbox {
     return (subject: headers['subject'] ?? '', from: headers['from'] ?? '');
   }
 
-  /// Wątek jednym strzałem: suma etykiet wszystkich wiadomości (kolejka jest
-  /// po wątkach — odpowiedź w wątku z `song/*` nie jest nowym zgłoszeniem)
-  /// i id naszych wysłanych wiadomości, bez szkiców — te wchodzą do rozmowy
-  /// w edytorze, choć w kolejce ich nie ma (leżą w `SENT`, nie w `INBOX`).
-  Future<({Set<String> labels, List<String> sentIds})> threadSummary(
-      String threadId) async {
-    final messages = await _thread(threadId);
-    return (
-      labels: {
-        for (final m in messages)
-          for (final id in m.labelIds ?? const <String>[]) _nameById[id] ?? id,
-      },
-      sentIds: [
-        for (final m in messages)
-          if (_isSent(m) && !(m.labelIds ?? const <String>[]).contains('DRAFT')) m.id!,
-      ],
-    );
+  /// Wątki, w których choć jedna wiadomość ma etykietę `song/*`. Kolejka jest
+  /// po wątkach — odpowiedź w takim wątku nie jest nowym zgłoszeniem — a query
+  /// działa na wiadomościach, więc liczymy to z list: kilka zapytań po 5
+  /// jednostek zamiast `threads.get` (40) na każdy wątek kolejki.
+  ///
+  /// Nazwy prosto ze skrzynki, nie z [kAllSongLabels] — etykieta dorobiona
+  /// ręcznie poza taksonomią też się liczy.
+  Future<Set<String>> threadsWithSongLabels() async {
+    final names = _idByName.keys.where(isSongLabel).toList();
+    final out = <String>{};
+    // Po kilkanaście etykiet na zapytanie: `{a b}` to w Gmailu „a albo b”.
+    for (var i = 0; i < names.length; i += 15) {
+      final chunk = names.sublist(i, min(i + 15, names.length));
+      final query = '{${chunk.map((n) => 'label:${labelQueryName(n)}').join(' ')}}';
+      for (final id in await listIds(query)) {
+        if (_threadById[id] case final t?) out.add(t);
+      }
+    }
+    return out;
+  }
+
+  /// Nasze wysłane wiadomości po wątkach, bez szkiców (`in:sent` ich nie
+  /// łapie). Jedna lista na całą skrzynkę zamiast `threads.get` na wątek.
+  Future<Map<String, List<String>>> sentIdsByThread() async {
+    final out = <String, List<String>>{};
+    for (final id in await listIds('in:sent')) {
+      if (_threadById[id] case final t?) out.putIfAbsent(t, () => []).add(id);
+    }
+    return out;
   }
 
   /// Id wszystkich wiadomości wątku — etykiety idą na cały wątek.
@@ -432,7 +458,7 @@ class GmailMailbox {
                   ..messageListVisibility = 'show',
                 'me',
               ),
-          cost: _costLabelCreate);
+          cost: _costLabelCreate, idempotent: false);
       _idByName[name] = created.id!;
       _nameById[created.id!] = name;
     }
@@ -462,6 +488,34 @@ class GmailMailbox {
     }
   }
 
+}
+
+/// Co zrobić z błędem zapytania do Gmaila.
+enum GmailRetry {
+  /// Przekroczony limit — Gmail odrzucił zapytanie przed wykonaniem.
+  quota,
+  /// Chwilowa awaria (5xx, zerwane połączenie) — mogła przyjść już po
+  /// wykonaniu, więc ponawiamy tylko to, co da się bezpiecznie powtórzyć.
+  transient,
+  /// Prawdziwy błąd — ponawianie nic nie da.
+  none,
+}
+
+GmailRetry gmailRetryKind(Object e) {
+  if (e is DetailedApiRequestError) {
+    final message = (e.message ?? '').toLowerCase();
+    if (e.status == 429 ||
+        (e.status == 403 && (message.contains('quota') || message.contains('rate limit')))) {
+      return GmailRetry.quota;
+    }
+    final status = e.status;
+    if (status != null && status >= 500 && status < 600) return GmailRetry.transient;
+    return GmailRetry.none;
+  }
+  if (e is SocketException || e is http.ClientException || e is TimeoutException) {
+    return GmailRetry.transient;
+  }
+  return GmailRetry.none;
 }
 
 /// Mejl, na który odpisujemy, wraz z tym, co trzeba wpisać w nagłówki.

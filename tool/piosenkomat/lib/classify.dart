@@ -47,6 +47,16 @@ SubmissionFileRead readSubmissionFile(ContribMessage m) {
 bool isWebSubmission(ContribMessage m) =>
     m.hasWebSubjectMarker || (readSubmissionFile(m).file?.source?.isWeb ?? false);
 
+/// Kolejka bez wiadomości z wątków, które mają już `song/*`. Query działa na
+/// wiadomościach, więc odpowiedź autora w otagowanym wątku („dzięki!”) siedzi
+/// w kolejce na zawsze — odsiewamy ją, zanim cokolwiek pobierzemy i zanim
+/// `-n` zacznie liczyć wątki.
+List<({String id, String threadId})> unlabeledQueue(
+  List<({String id, String threadId})> queue,
+  Set<String> labeledThreads,
+) =>
+    [for (final m in queue) if (!labeledThreads.contains(m.threadId)) m];
+
 /// Które wiadomości kolejki pobiera `scan`: pierwsze [limit] **wątków**,
 /// każdy w całości. Zgłoszeniem jest wątek, więc limit na wiadomościach
 /// ucinałby wątek w połowie — starsza wersja by weszła, a nowsza, za granicą,

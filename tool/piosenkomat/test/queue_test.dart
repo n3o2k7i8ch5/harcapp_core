@@ -32,4 +32,24 @@ void main() {
       expect(takeThreads(queue, null), [for (final m in queue) m.id]);
     });
   });
+
+  group('unlabeledQueue: odpowiedzi w otagowanych wątkach nie są zgłoszeniami', () {
+    // „dzięki!” w wątku, który ma już `song/added`, siedzi w kolejce na zawsze.
+    final queue = _queue([
+      ('dzieki', 'stary'),
+      ('barka', 'barka'),
+      ('dzieki2', 'stary2'),
+      ('ognisko', 'ognisko'),
+    ]);
+    final alive = unlabeledQueue(queue, {'stary', 'stary2'});
+
+    test('odsiane przed pobieraniem', () {
+      expect(alive.map((m) => m.id), ['barka', 'ognisko']);
+    });
+
+    test('-n liczy dopiero żywe wątki', () {
+      expect(takeThreads(alive, 2), ['barka', 'ognisko'],
+          reason: 'bez odsiania -n 2 wzięłoby dwa martwe wątki i zero zgłoszeń');
+    });
+  });
 }

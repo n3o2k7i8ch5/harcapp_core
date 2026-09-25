@@ -230,15 +230,23 @@ Future<int> _scan(ArgResults cmd) async {
     for (final id in await mailbox.listIds(query))
       (id: id, threadId: mailbox.knownThreadOf(id) ?? id),
   ];
-  final ids = takeThreads(queueIds, limit, newest: newest);
+  // Odpowiedzi w wątkach z `song/*` odsiewamy przed pobieraniem treści —
+  // i przed `-n`, żeby limit liczył prawdziwe zgłoszenia.
+  final alive = unlabeledQueue(queueIds, await mailbox.threadsWithSongLabels());
+  final ids = takeThreads(alive, limit, newest: newest);
   final picked = ids.toSet();
   final threadCount = {
-    for (final m in queueIds) if (picked.contains(m.id)) m.threadId,
+    for (final m in alive) if (picked.contains(m.id)) m.threadId,
   }.length;
   final scope = limit == null
       ? 'cała kolejka'
       : '${newest ? 'najnowsze' : 'najstarsze'} '
           '${plural(limit, 'wątek', 'wątki', 'wątków')}';
+  final inTagged = queueIds.length - alive.length;
+  if (inTagged > 0) {
+    stdout.writeln('Pominięto ${plural(inTagged, 'mejl', 'mejle', 'mejli')} w wątkach, '
+        'które mają już etykietę song/* — to odpowiedzi po zgłoszeniu, nie zgłoszenia.');
+  }
   stdout.writeln('Kolejka ($scope): ${plural(ids.length, 'mejl', 'mejle', 'mejli')} '
       'w ${plural(threadCount, 'wątku', 'wątkach', 'wątkach')}, pobieram…');
   final fetched = await mailbox.getMessages(ids, onProgress: (done, total) {
@@ -250,15 +258,24 @@ Future<int> _scan(ArgResults cmd) async {
         'ze strony — piosenkomat obsługuje wyłącznie zgłoszenia wysłane z apki. '
         'Te ogarnij ręcznie.');
   }
-  final (messages, weRepliedThreads, ourSentIds) = await _unlabeledThreads(mailbox, queue.songs);
+  final messages = queue.songs;
   final skipped = fetched.length - messages.length - queue.web;
   if (skipped > 0) {
     stdout.writeln('Pominięto ${plural(skipped, 'mejl', 'mejle', 'mejli')} '
-        '(już otagowane, w otagowanym wątku albo nie o piosence), zostają bez zmian.');
+        '(już otagowane albo nie o piosence), zostają bez zmian.');
   }
-  // Nasze odpowiedzi z tych wątków — tylko do rozmowy w edytorze. W kolejce
-  // ich nie ma, a bez nich po `reopen` widać odpowiedź autora bez pytania.
-  final ours = await mailbox.getMessages(ourSentIds);
+  // Nasze wysłane z tych wątków: kto dostał już odpowiedź i — do rozmowy
+  // w edytorze — co mu napisaliśmy. W kolejce ich nie ma (leżą w `SENT`),
+  // a bez nich po `reopen` widać odpowiedź autora bez pytania.
+  final sentByThread = await mailbox.sentIdsByThread();
+  final threads = {for (final m in messages) m.threadId};
+  final weRepliedThreads = {
+    for (final t in threads) if (sentByThread.containsKey(t)) t,
+    ...await _oldAppAuthorsWeRepliedTo(mailbox, messages),
+  };
+  final ours = await mailbox.getMessages([
+    for (final t in threads) ...?sentByThread[t],
+  ]);
 
   final runDir = cmd['out'] as String? ?? defaultRunDir();
   final classified = classifyBatch([...messages, ...ours],
@@ -274,34 +291,16 @@ Future<int> _scan(ArgResults cmd) async {
   return 0;
 }
 
-/// Kolejka jest po wątkach: odpowiedź w wątku, który już dostał `song/*`,
-/// to nie nowe zgłoszenie. Query tego nie umie (działa na wiadomościach),
-/// więc dociągamy wątek — jedno zapytanie na wątek. Przy okazji zbieramy
-/// wątki, których autor dostał już od nas odpowiedź, i id tych odpowiedzi.
-Future<(List<ContribMessage>, Set<String>, List<String>)> _unlabeledThreads(
+/// Wątki autorów ze starej apki, którym już coś wysłaliśmy — w którymkolwiek
+/// wątku. Blok „zaktualizuj apkę” wystarczy dostać raz, a `reply` nie odpisuje
+/// w każdym wątku autora, więc w części z nich `SENT` nie ma. Pytamy więc
+/// o nadawcę: jedno tanie zapytanie na autora ze starej apki.
+Future<Set<String>> _oldAppAuthorsWeRepliedTo(
   GmailMailbox mailbox,
   List<ContribMessage> messages,
 ) async {
-  final labeledThreads = <String>{};
-  final weRepliedThreads = <String>{};
-  final sentIdsByThread = <String, List<String>>{};
-  for (final t in {for (final m in messages) m.threadId}) {
-    final thread = await mailbox.threadSummary(t);
-    if (thread.labels.any(isSongLabel)) labeledThreads.add(t);
-    // Np. wątek cofnięty przez `reopen`.
-    if (thread.labels.contains('SENT')) weRepliedThreads.add(t);
-    sentIdsByThread[t] = thread.sentIds;
-  }
-  final unlabeled = [for (final m in messages) if (!labeledThreads.contains(m.threadId)) m];
-  final ourSentIds = [
-    for (final t in {for (final m in unlabeled) m.threadId}) ...?sentIdsByThread[t],
-  ];
-
-  // Stara apka: blok „zaktualizuj apkę” wystarczy autorowi raz, a `reply`
-  // nie odpisuje w każdym jego wątku, więc w części z nich `SENT` nie ma.
-  // Pytamy więc o nadawcę: jedno tanie zapytanie na autora ze starej apki.
   final oldAppSenders = {
-    for (final m in unlabeled)
+    for (final m in messages)
       if (m.body.contains(kOldAppMarker))
         if (emailFromHeader(m.from) case final sender?) sender,
   };
@@ -311,12 +310,10 @@ Future<(List<ContribMessage>, Set<String>, List<String>)> _unlabeledThreads(
           .isNotEmpty)
         sender,
   };
-  for (final m in unlabeled) {
-    if (weRepliedSenders.contains(emailFromHeader(m.from))) {
-      weRepliedThreads.add(m.threadId);
-    }
-  }
-  return (unlabeled, weRepliedThreads, ourSentIds);
+  return {
+    for (final m in messages)
+      if (weRepliedSenders.contains(emailFromHeader(m.from))) m.threadId,
+  };
 }
 
 /// Katalog przebiegu: raport, plan przebiegu i po dwa pliki na rodzaj —
