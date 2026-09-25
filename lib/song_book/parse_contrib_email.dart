@@ -43,8 +43,9 @@ class ParsedContribEmail{
   final String? appVersion;
   /// Skąd przyszło zgłoszenie. Tylko nowy format.
   final SubmissionOrigin? origin;
-  /// Ile zgłoszeń z tego samego pliku nie weszło.
-  final int skippedSubmissions;
+  /// Ile zgłoszeń niesie plik. Więcej niż jedno: piosenkomat ich nie rusza —
+  /// jeden wątek to jedna piosenka.
+  final int submissionCount;
 
   ParsedContribEmail({
     required this.song,
@@ -61,7 +62,7 @@ class ParsedContribEmail{
     this.senderIsContributor,
     this.appVersion,
     this.origin,
-    this.skippedSubmissions = 0,
+    this.submissionCount = 1,
   });
 
   /// Fakty z załącznika plus dopisek z treści — ta sama struktura, co ze
@@ -85,7 +86,7 @@ class ParsedContribEmail{
       senderIsContributor: submission.senderIsContributor,
       appVersion: file.appVersion,
       origin: file.source,
-      skippedSubmissions: file.submissions.length - 1,
+      submissionCount: file.submissions.length,
     );
   }
 

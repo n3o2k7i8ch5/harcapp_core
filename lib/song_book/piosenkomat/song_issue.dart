@@ -31,8 +31,6 @@ enum SongIssue{
   corruptedSubmissionFile('corrupted-submission-file', 'załącznik zgłoszenia uszkodzony', SongIssueSeverity.blocking),
   /// Wersja formatu nowsza niż znana — zawartości nie zgadujemy.
   unknownSubmissionFormat('unknown-submission-format', 'nowsza wersja formatu zgłoszenia', SongIssueSeverity.blocking),
-  /// Kilka zgłoszeń w pliku; weszło pierwsze, reszta nie.
-  skippedSubmissions('skipped-submissions', 'pominięte zgłoszenia z tego samego pliku', SongIssueSeverity.blocking),
   /// Kilka kart osób dodających: nie wiadomo, do której dokleić adres nadawcy.
   severalContributors('several-contributors', 'kilka osób dodających w zgłoszeniu', SongIssueSeverity.blocking),
 

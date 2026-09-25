@@ -44,6 +44,7 @@ String formatRunReport(List<Classified> items) {
     ..writeln('  duplikat      ${to(Destination.rejectDuplicate)}')
     ..writeln('  zły załącznik ${to(Destination.rejectCorruptedFile)}')
     ..writeln('  nie do odczytu ${to(Destination.unparsable)}')
+    ..writeln('RĘCZNIE         ${to(Destination.multipleSongs)}  (kilka piosenek w jednym mejlu)')
     ..writeln('RZUĆ OKIEM      ${count((c) => c.haveALook)}'
         '  (odrzut, ale autor coś napisał albo mejla nie da się odczytać)')
     ..writeln('STARA APKA      ${count((c) => c.submission.isOldApp)}'
@@ -92,6 +93,7 @@ String formatRunReport(List<Classified> items) {
       Destination.candidateNew => 'NOWA    ',
       Destination.candidateCorrection => 'POPRAWKA',
       Destination.unparsable => 'NIEPARS ',
+      Destination.multipleSongs => 'RĘCZNIE ',
       Destination.rejectAlreadyInApp ||
       Destination.rejectDuplicate ||
       Destination.rejectCorruptedFile =>

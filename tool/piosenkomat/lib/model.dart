@@ -43,6 +43,10 @@ const String kLabelCorrection = 'song/correction';
 /// nic więcej z tym nie zrobi, więc to odrzut — zawsze z [kLabelHaveALook],
 /// bo w środku bywa piosenka w nieznanym kształcie albo zwykłe pytanie.
 const String kLabelRejectedUnparsable = 'song/rejected/unparsable';
+/// W jednym mejlu kilka piosenek. Jeden wątek to jedna piosenka, więc
+/// automat ich nie rusza — ani do plików, ani do porównań — i nie rozstrzyga:
+/// zawsze z [kLabelHaveALook], nieprzeczytane. Ogarniasz ręcznie.
+const String kLabelMultipleSongs = 'song/multiple-songs';
 /// Kolejka `reply`, powód pierwszy: mejl z najstarszej apki, autorowi trzeba
 /// odpisać, żeby ją zaktualizował. `reply` ją zdejmuje. `scan` jej nie wiesza,
 /// gdy autor dostał już od nas odpowiedź (`Submission.weReplied`) — blok
@@ -72,8 +76,6 @@ enum NeedsReviewKind {
   correctionProblem('song/needs-review/correction-problem'),
   /// Ktoś poprawił piosenkę i wysłał jako nową.
   undeclaredCorrection('song/needs-review/undeclared-correction'),
-  /// W pliku było więcej zgłoszeń, weszło pierwsze.
-  skippedSubmissions('song/needs-review/skipped-submissions'),
   /// Kilka kart osób dodających — wkład przypisujesz ręcznie.
   severalContributors('song/needs-review/several-contributors');
 
@@ -97,7 +99,6 @@ extension SongIssueNeedsReview on SongIssue {
           NeedsReviewKind.missingData,
         SongIssue.noConsent || SongIssue.noContributorEmail => NeedsReviewKind.noConsent,
         SongIssue.corruptedSubmissionFile || SongIssue.unknownSubmissionFormat => null,
-        SongIssue.skippedSubmissions => NeedsReviewKind.skippedSubmissions,
         SongIssue.severalContributors => NeedsReviewKind.severalContributors,
         SongIssue.chordsDifferFromApp ||
         SongIssue.metadataDifferFromApp =>
@@ -123,6 +124,7 @@ final List<String> kToolLabels = [
   kLabelNeedsReview,
   kLabelCorrection,
   kLabelRejectedUnparsable,
+  kLabelMultipleSongs,
   kLabelReplyOldApp,
   kLabelReplyReviewNote,
   kLabelWaitingForAuthor,
@@ -524,8 +526,8 @@ class Submission {
   /// Czy nadawca zgłasza **własną** piosenkę. Przy `false` jego adres służy
   /// wyłącznie do odpisania.
   final bool senderIsContributor;
-  /// Ile zgłoszeń z tego samego pliku nie weszło.
-  final int skippedSubmissions;
+  /// Ile zgłoszeń niesie plik — patrz [hasMultipleSongs].
+  final int submissionCount;
   /// Kilka kart osób dodających: nie wiadomo, do której miałby iść adres nadawcy.
   final bool hasSeveralContributors;
   /// Autor dostał już od nas odpowiedź: w tym wątku albo, przy starej apce,
@@ -564,7 +566,7 @@ class Submission {
     this.origin,
     this.appVersion,
     this.senderIsContributor = true,
-    this.skippedSubmissions = 0,
+    this.submissionCount = 1,
     this.hasSeveralContributors = false,
     this.weReplied = false,
     this.fileError,
@@ -582,6 +584,9 @@ class Submission {
   });
 
   bool get isCorrection => kind == SubmissionKind.correction;
+
+  /// Kilka piosenek w jednym mejlu: [Destination.multipleSongs].
+  bool get hasMultipleSongs => submissionCount > 1;
   /// Co napisał **autor** — bez odpowiedzi ze skrzynki HarcAppa.
   String? get userMessage {
     final own = [for (final m in conversation) if (!m.isOurs) m.text];
@@ -634,7 +639,7 @@ class Submission {
         origin: origin,
         appVersion: appVersion,
         senderIsContributor: senderIsContributor,
-        skippedSubmissions: skippedSubmissions,
+        submissionCount: submissionCount,
         hasSeveralContributors: hasSeveralContributors,
         weReplied: weReplied,
         fileError: fileError,
@@ -665,10 +670,12 @@ enum Destination {
   /// Załącznik jest, ale nie do wczytania — znany powód, piosenki brak.
   rejectCorruptedFile,
   /// Nie da się odczytać, powód nieznany.
-  unparsable;
+  unparsable,
+  /// Kilka piosenek w jednym mejlu — nie rozstrzygamy, ogarniasz ręcznie.
+  multipleSongs;
 
   bool get goesToFile => this == candidateNew || this == candidateCorrection;
-  bool get isReject => !goesToFile;
+  bool get isReject => !goesToFile && this != multipleSongs;
 }
 
 class Decision {
@@ -702,6 +709,7 @@ class Classified {
   bool get haveALook =>
       destination == Destination.rejectCorruptedFile ||
       destination == Destination.unparsable ||
+      destination == Destination.multipleSongs ||
       (destination == Destination.rejectAlreadyInApp && submission.hasAuthorText);
 
   /// Etykiety stanu plus znaczniki (poprawka, stara apka).
@@ -709,7 +717,8 @@ class Classified {
         ...stateLabelsFor(this),
         if (submission.isCorrection &&
             destination != Destination.unparsable &&
-            destination != Destination.rejectCorruptedFile)
+            destination != Destination.rejectCorruptedFile &&
+            destination != Destination.multipleSongs)
           kLabelCorrection,
         if (haveALook) kLabelHaveALook,
         // Komu już odpisano (wątek wrócił przez `reopen`), ten dostał blok
@@ -738,6 +747,7 @@ class Classified {
 /// Etykiety stanu, jakie nadaje automat (zawsze razem z `song/auto`).
 List<String> stateLabelsFor(Classified c) => switch (c.destination) {
       Destination.unparsable => const [kLabelRejectedUnparsable],
+      Destination.multipleSongs => const [kLabelMultipleSongs],
       Destination.rejectCorruptedFile => [
           c.has(SongIssue.unknownSubmissionFormat)
               ? kLabelRejectedUnknownFormat

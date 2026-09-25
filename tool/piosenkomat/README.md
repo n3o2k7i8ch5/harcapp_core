@@ -55,8 +55,9 @@ dopisek autora, czyli wszystko nad zamrożoną belką `Akceptacja regulaminu`.
   Nie broni przed połamaniem linii — od tego jest sam załącznik, który idzie
   bajt w bajt. Broni przed ręczną edycją i przed obcięciem.
 - **Plik zawiera listę zgłoszeń**, każde z **jedną** piosenką i własnymi
-  metadanymi. Dziś apka wysyła jedno; przy kilku narzędzie bierze pierwsze
-  i mówi o tym uwagą `skipped-submissions`.
+  metadanymi. Dziś apka wysyła jedno. Przy kilku narzędzie **nie rusza żadnego**
+  — jeden wątek to jedna piosenka — tylko wiesza `song/multiple-songs`
+  + `have-a-look` i zostawia mejl nieprzeczytany: ogarniasz ręcznie.
 - **`sender_is_contributor`** rozstrzyga to, co dotąd zgadywała heurystyka: czy
   adres nadawcy doklejać do karty osoby dodającej. Przy `false` adres służy
   wyłącznie do odpisania i **nie** wchodzi do `people.dart`.
@@ -201,8 +202,10 @@ song/
 ├── added                     koniec
 ├── correction                ZNACZNIK: zgłoszenie to poprawka — wgrywasz podmianą, nie dodaniem
 ├── have-a-look               ZNACZNIK obok odrzutu: piosenkomat skończył, ale rzuć okiem —
-│                             identyczna z dopiskiem, zepsuty załącznik albo unparsable;
-│                             zdejmujesz Ty
+│                             identyczna z dopiskiem, zepsuty załącznik, unparsable
+│                             albo multiple-songs; zdejmujesz Ty
+├── multiple-songs            w jednym mejlu kilka piosenek — automat ich nie rusza
+│                             (ani plik, ani porównania), nieprzeczytane; ogarniasz ręcznie
 ├── add-contributor           „wpisać osobę dodającą do apki”, tylko Ty
 ├── rejected/
 │   ├── already-in-app        automat: piosenka IDENTYCZNA (każde pole) z tą w apce
@@ -227,7 +230,6 @@ song/
 │   ├── correction-problem    poprawka, ale w apce nie ma czego poprawiać
 │   ├── missing-data          brak YouTube, chwytów lub tytułu
 │   ├── no-consent            brak zgody albo nie wiadomo, kto zgłosił
-│   ├── skipped-submissions   w pliku było kilka zgłoszeń, weszło pierwsze
 │   └── several-contributors  kilka kart osób dodających — wkład przypisz ręcznie
 ├── reply/                    kolejka `reply`: autorowi trzeba odpisać, mejl na piosenkę
 │   ├── old-app               mejl z najstarszej apki — blok „zaktualizuj apkę”
@@ -312,7 +314,7 @@ z innego przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs`.
 | `missing-title`, `missing-chords`, `missing-youtube` | blocking | ✓ | — (poprawka to diff) |
 | `no-consent`, `no-contributor-email` | blocking | ✓ | ✓ |
 | `corrupted-submission-file`, `unknown-submission-format` | blocking | ✓ | ✓ (piosenki nie ma po czym odczytać) |
-| `skipped-submissions`, `several-contributors` | blocking | ✓ | ✓ |
+| `several-contributors` | blocking | ✓ | ✓ |
 | `chords-differ-from-app`, `metadata-differ-from-app` | decision | ✓ | — |
 | `same-title-in-app`, `similar-text-in-app` | decision | ✓ | — (normalny kształt poprawki) |
 | `same-title-in-batch`, `similar-text-in-batch` | decision | ✓ | zapasowo, gdy nie ma celu |

@@ -238,17 +238,45 @@ void main() {
     expect(kToolLabels, contains(kLabelRejectedUnknownFormat));
   });
 
-  test('kilka zgłoszeń w pliku: wchodzi pierwsze, o reszcie się nie milczy', () {
+  test('kilka zgłoszeń w pliku: nic nie wchodzi, mejl do ręcznego ogarnięcia', () {
     final mail = submissionEmail(submissions: [
       SongSubmission(kind: SubmissionKind.newSong, song: sampleSong(title: 'Pierwsza')),
       SongSubmission(kind: SubmissionKind.newSong, song: sampleSong(title: 'Druga')),
       SongSubmission(kind: SubmissionKind.newSong, song: sampleSong(title: 'Trzecia')),
     ]);
     final c = _classify(mail.eml);
-    expect(c.title, 'Pierwsza');
-    expect(issuesOf(c), contains(SongIssue.skippedSubmissions));
-    expect(detailOf(c, SongIssue.skippedSubmissions), contains('3 zgłoszeń'));
-    expect(c.labels, contains(NeedsReviewKind.skippedSubmissions.label));
+    expect(c.destination, Destination.multipleSongs);
+    expect(c.goesToFile, isFalse);
+    expect(c.decision.detail, contains('3 zgłoszeń'));
+    expect(c.labels, unorderedEquals([kLabelMultipleSongs, kLabelHaveALook]));
+    // Nie rozstrzygamy, więc mejl zostaje nieprzeczytany.
+    expect(withReadOnClose((c.labels, const <String>[])).$2, isNot(contains('UNREAD')));
+  });
+
+  test('kilka zgłoszeń, pierwsze identyczne z apką — i tak nie odrzut', () {
+    final w = sampleSong(title: 'W apce');
+    final mail = submissionEmail(submissions: [
+      SongSubmission(kind: SubmissionKind.newSong, song: w),
+      SongSubmission(kind: SubmissionKind.newSong, song: sampleSong(title: 'Nowa')),
+    ]);
+    final c = classify(msgFrom(mail.eml), book: bookWith([sampleSong(title: 'W apce')]));
+    expect(c.destination, Destination.multipleSongs);
+    expect(c.labels, contains(kLabelHaveALook));
+  });
+
+  test('piosenki z takiego mejla nie są punktem odniesienia w paczce', () {
+    final multi = submissionEmail(submissions: [
+      SongSubmission(kind: SubmissionKind.newSong, song: sampleSong(title: 'Barka')),
+      SongSubmission(kind: SubmissionKind.newSong, song: sampleSong(title: 'Inna')),
+    ]);
+    final single = submissionEmail(song: sampleSong(title: 'Barka'));
+    final out = classifyBatch(
+        [msgFrom(multi.eml, id: 'multi'), msgFrom(single.eml, id: 'single')],
+        book: SongBook.empty);
+    final byId = {for (final c in out) c.message.id: c};
+    expect(byId['multi']!.destination, Destination.multipleSongs);
+    expect(byId['single']!.isClean, isTrue,
+        reason: 'druga „Barka” siedzi w mejlu, który do pliku nie idzie');
   });
 
   test('wysyłka w cudzym imieniu: adres nadawcy tylko do odpisania', () {

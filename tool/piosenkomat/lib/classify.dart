@@ -215,7 +215,7 @@ Submission buildSubmission(
     origin: parsed?.origin,
     appVersion: parsed?.appVersion,
     senderIsContributor: senderIsContributor,
-    skippedSubmissions: parsed?.skippedSubmissions ?? 0,
+    submissionCount: parsed?.submissionCount ?? 1,
     hasSeveralContributors: file.hasFile && contributorCards > 1,
     weReplied: weReplied || ordered.any(_isOurs),
     fileError: file.error?.kind,
@@ -253,9 +253,12 @@ EmailShape _shapeOf(SubmissionFileRead file, ParsedContribEmail? parsed) {
 /// zlewają się do najnowszej; potem parami `similarText` między różnymi
 /// tytułami.
 List<Submission> matchWithinBatch(List<Submission> subs) {
+  // Mejl z kilkoma piosenkami nie idzie do pliku, więc nie może być też
+  // punktem odniesienia — żadna pastylka nie wskaże piosenki, której nie ma.
+  bool comparable(Submission s) => s.song != null && !s.hasMultipleSongs;
   final profiles = {
     for (final s in subs)
-      if (s.song != null) s.threadId: SongProfile(s.song!),
+      if (comparable(s)) s.threadId: SongProfile(s.song!),
   };
   final out = {for (final s in subs) s.threadId: s};
 
@@ -281,7 +284,7 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
   // Grupy.
   final groups = <String, List<Submission>>{};
   for (final s in subs) {
-    if (s.song == null) continue;
+    if (!comparable(s)) continue;
     groups.putIfAbsent(keyOf(s), () => []).add(s);
   }
 
@@ -336,7 +339,7 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
   // względu na tekst, jak w grupie.
   final list = [
     for (final s in out.values)
-      if (s.song != null && !superseded.contains(s.threadId)) s,
+      if (comparable(s) && !superseded.contains(s.threadId)) s,
   ];
   for (var i = 0; i < list.length; i++) {
     for (var j = i + 1; j < list.length; j++) {
@@ -381,6 +384,13 @@ Decision decide(Submission s) {
         : Decision(Destination.rejectCorruptedFile, issues: fileIssues);
   }
 
+  // Kilka piosenek w jednym mejlu: nie rozstrzygamy — ani pliku, ani odrzutu.
+  // Jeden wątek to jedna piosenka, więc reszta nie miałaby gdzie wejść.
+  if (s.hasMultipleSongs) {
+    return Decision(Destination.multipleSongs,
+        detail: 'w pliku ${s.submissionCount} zgłoszeń — ogarnij ręcznie');
+  }
+
   final batch = s.batchMatch;
   if (batch != null && batch.level == MatchLevel.identical && !batch.isNewestInBatch) {
     return Decision(Destination.rejectDuplicate,
@@ -401,10 +411,6 @@ Decision decide(Submission s) {
       issues.add(PiosenkomatIssue(issue, detail: detail));
 
   // Wspólne.
-  if (s.skippedSubmissions > 0) {
-    add(SongIssue.skippedSubmissions,
-        'w pliku było ${s.skippedSubmissions + 1} zgłoszeń, weszło pierwsze');
-  }
   if (s.hasSeveralContributors) {
     add(SongIssue.severalContributors, 'przypisz wkład ręcznie');
   }
