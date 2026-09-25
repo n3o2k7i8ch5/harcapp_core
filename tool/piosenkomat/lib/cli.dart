@@ -299,7 +299,7 @@ Future<(List<ContribMessage>, Set<String>)> _unlabeledThreads(
 }
 
 /// Katalog przebiegu: raport, plan przebiegu i po dwa pliki na rodzaj —
-/// kandydaci i ich kopia na eksport po przeglądzie.
+/// kandydaci i puste miejsce na eksport po przeglądzie.
 void _writeRunFiles(String runDir, List<Classified> classified, String report) {
   final reportPath = reportPathIn(runDir);
   writeText(reportPath, report);
@@ -325,10 +325,11 @@ void _writeRunFiles(String runDir, List<Classified> classified, String report) {
     stdout.writeln('\n${_kindName(kind)}: ${plural(songs.length, 'piosenka', 'piosenki', 'piosenek')} '
         '→ $path ($clean bez zarzutu, ${songs.length - clean} z uwagami)');
     // Miejsce na eksport: wrzucasz tu plik ze strony, a `label reviewed`
-    // z różnicy wyciąga odrzucone.
+    // z różnicy wyciąga odrzucone. Pusty, nie kopia kandydatów — kopia
+    // wyglądałaby jak przegląd, w którym wszystko weszło.
     final reviewedPath = reviewedPathIn(runDir, kind);
-    writeHrcpsng(reviewedPath, songs, withPiosenkomatData: true);
-    stdout.writeln('  po przeglądzie podmień $reviewedPath eksportem ze strony');
+    writeReviewedPlaceholder(reviewedPath);
+    stdout.writeln('  po przeglądzie zapisz eksport ze strony w $reviewedPath (na razie pusty)');
   }
 
   stdout.writeln(anyWritten
@@ -513,6 +514,7 @@ Future<void> _applyChanges(
 Future<int> _labelReviewed(ArgResults cmd) async {
   final runDir = _runDir(cmd);
   final force = cmd['force'] as bool;
+  if (_stopOnMissingExports(runDir)) return 1;
   final plan = readPlan(planPathIn(runDir));
 
   final results = <ReviewResult>[];
@@ -520,10 +522,6 @@ Future<int> _labelReviewed(ArgResults cmd) async {
     final candidates = collectCandidates(plan, _candidatesOf(runDir, kind), kind);
     if (candidates.isEmpty) continue;
     final reviewedPath = reviewedPathIn(runDir, kind);
-    if (!_exists(reviewedPath)) {
-      stdout.writeln('${_kindName(kind)}: nie ma $reviewedPath — pomijam.');
-      continue;
-    }
     final reviewed = readHrcpsng(reviewedPath);
     stdout.writeln('${_kindName(kind)}: ${candidates.length} kandydatów, '
         '${reviewed.length} w $reviewedPath');
@@ -586,6 +584,19 @@ Future<int> _labelReviewed(ArgResults cmd) async {
   }
   stdout.writeln('Dalej: ./piosenkomat label added --push');
   return 0;
+}
+
+/// `label reviewed` i `prepare` ruszają dopiero z kompletem eksportów: pusty
+/// albo brakujący plik zwrotny to przegląd, którego jeszcze nie było, a nie
+/// „wszystko weszło”. `true` = STOP, dalej nie idziemy.
+bool _stopOnMissingExports(String runDir) {
+  final missing = missingExportsIn(runDir);
+  if (missing.isEmpty) return false;
+  for (final path in missing) {
+    stderr.writeln('  BRAK EKSPORTU  $path');
+  }
+  stderr.writeln('STOP. Zapisz tam eksport ze strony i odpal ponownie.');
+  return true;
 }
 
 String _kindName(SubmissionKind k) =>
@@ -654,6 +665,7 @@ void _printStop(ReviewResult result, SubmissionKind kind) {
 /// w przebiegu, bo po niej idzie jeszcze `label added` i odpowiedzi.
 int _prepare(ArgResults cmd) {
   final runDir = _runDir(cmd);
+  if (_stopOnMissingExports(runDir)) return 1;
   final otherEmails = _otherEmailsFromPlan(runDir);
   var anyReviewed = false;
   final sources = <ContributorSource>[];

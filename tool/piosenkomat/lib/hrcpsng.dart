@@ -138,6 +138,21 @@ String candidatesPathIn(String runDir, SubmissionKind kind) =>
     p.join(runDir, candidatesFileName(kind));
 String reviewedPathIn(String runDir, SubmissionKind kind) =>
     p.join(runDir, reviewedFileName(kind));
+/// Miejsce na eksport: `scan` zakłada pusty plik zwrotny, żeby było widać,
+/// gdzie zapisać eksport ze strony. Pusty = eksportu jeszcze nie ma.
+void writeReviewedPlaceholder(String path) => writeText(path, '');
+
+/// Pliki zwrotne, których eksportu jeszcze nie ma: rodzaj ma kandydatów,
+/// a `reviewed-*` jest pusty (miejsce ze `scan`) albo go nie ma. Eksport bez
+/// żadnej piosenki to co innego — to „odrzucam wszystko”.
+List<String> missingExportsIn(String runDir) => [
+      for (final kind in SubmissionKind.values)
+        if (File(candidatesPathIn(runDir, kind)).existsSync())
+          if (File(reviewedPathIn(runDir, kind)) case final file
+              when !file.existsSync() || file.readAsStringSync().trim().isEmpty)
+            file.path,
+    ];
+
 /// Po `prepare`: bez pola `piosenkomat`, gotowe do wklejenia w `all_songs`.
 String finalPathIn(String runDir, SubmissionKind kind) =>
     p.join(runDir, finalFileName(kind));

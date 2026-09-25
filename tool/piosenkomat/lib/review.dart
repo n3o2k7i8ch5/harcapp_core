@@ -251,7 +251,7 @@ String? reviewSafetyError(
   required int candidateCount,
 }) {
   if (reviewedCount == 0) {
-    return '$reviewedPath jest pusty — to wygląda na pomyłkę. '
+    return '$reviewedPath nie zawiera żadnej piosenki — to wygląda na pomyłkę. '
         'Jeśli naprawdę odrzucasz wszystko: --force.';
   }
   final rejectedCount = result.rejected.length;

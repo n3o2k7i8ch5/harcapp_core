@@ -107,11 +107,11 @@ void main() {
           duplicateTargets: const {},
         );
 
-    test('pusty plik zwrotny to prawie na pewno pomyłka', () {
+    test('eksport bez żadnej piosenki to prawie na pewno pomyłka', () {
       expect(
           reviewSafetyError(resultWith(),
               reviewedPath: 'r.hrcpsng', reviewedCount: 0, candidateCount: 3),
-          contains('pusty'));
+          contains('nie zawiera żadnej piosenki'));
     });
     test('odrzucona większość zatrzymuje', () {
       expect(

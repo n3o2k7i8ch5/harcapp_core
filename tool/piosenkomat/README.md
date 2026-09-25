@@ -89,7 +89,7 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
    - `plan.json`,
    - `candidates-new.hrcpsng`,
    - `candidates-correction.hrcpsng`,
-   - kopie `reviewed-*.hrcpsng`.  
+   - puste `reviewed-*.hrcpsng` — miejsca na eksport po przeglądzie.  
    ####
    [Jak automat decyduje](#jak-automat-decyduje).
    ####
@@ -109,7 +109,7 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
    do osoby dodającej.
    ####
    Poprawiasz, gasisz przełącznik przy tych, co odpadają, eksportujesz
-   i podmieniasz eksportem odpowiednio: 
+   i zapisujesz eksport w miejsce pustego pliku, odpowiednio: 
    - `reviewed-new.hrcpsng` albo 
    - `reviewed-correction.hrcpsng`.
    ####
@@ -379,13 +379,17 @@ oba zginęły — po kolei id piosenki, tytuł, tekst):
 „wchodzi”, więc dotykasz tylko tych, które odrzucasz, a kasowanie działa jak
 dotąd — stare pliki zwrotne też. `prepare` bierze do `final-*` wyłącznie te z ✓.
 
-Brak pliku zwrotnego danego rodzaju = tej części jeszcze nie przeglądałeś. Ślad
+**Bez kompletu eksportów nic nie rusza.** Pusty plik zwrotny (tak zostawia go
+`scan`) albo brak pliku = tej części jeszcze nie przeglądałeś, więc `label reviewed`
+i `prepare` stają (STOP, bez `--force`) i wypisują, którego eksportu brakuje.
+Przeglądu na raty nie ma: najpierw oba pliki, potem komendy. Eksport bez żadnej
+piosenki to co innego — „odrzucam wszystko”, bezpiecznik niżej. Ślad
 decyzji w `decisions.json` — z werdyktem i odpowiedzią, bo stamtąd bierze je
 później `reply`.
 
 **STOP** (bez wyjścia przez `--force`): piosenka spoza kandydatów (obcy `thread_id`),
 zły rodzaj w pliku (poprawka w `reviewed-new`), dwie zachowane poprawki tej samej
-piosenki. **Bezpieczniki** (`--force` przechodzi): pusty plik, odrzucona ponad połowa.
+piosenki. **Bezpieczniki** (`--force` przechodzi): eksport bez żadnej piosenki, odrzucona ponad połowa.
 
 `prepare` zdejmuje pole `piosenkomat` z `reviewed-*` → `final-*.hrcpsng`. Przy
 poprawkach ustawia `id = correction_target` — apka referencjonuje piosenki po `lclId`
