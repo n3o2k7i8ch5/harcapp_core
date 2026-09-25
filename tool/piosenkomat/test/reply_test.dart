@@ -9,7 +9,7 @@ void main() {
 
     expect(note, startsWith(kReplyGreeting));
     expect(note, endsWith(kReplyClosing));
-    expect(note, contains('missingUnits chwytów'));
+    expect(note, contains('brakuje chwytów'));
     expect(note, contains(kOneSongPerMailReplyBlock));
     expect(note, isNot(contains('NIE JEST JUŻ ROZWIJANA')));
 
@@ -17,7 +17,7 @@ void main() {
     final oldApp =
         proposeContribReplyNote([SongIssue.missingChords], oldApp: true)!;
     expect(oldApp, contains(kOldAppReplyBlock));
-    expect(oldApp.indexOf('missingUnits chwytów'),
+    expect(oldApp.indexOf('brakuje chwytów'),
         lessThan(oldApp.indexOf(kOldAppReplyBlock)));
     expect(oldApp, endsWith(kReplyClosing));
 

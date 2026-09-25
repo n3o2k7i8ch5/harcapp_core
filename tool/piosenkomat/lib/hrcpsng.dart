@@ -138,7 +138,7 @@ String candidatesPathIn(String runDir, SubmissionKind kind) =>
     p.join(runDir, candidatesFileName(kind));
 String reviewedPathIn(String runDir, SubmissionKind kind) =>
     p.join(runDir, reviewedFileName(kind));
-/// Po `prepare`: bez pola `piosenkomat`, readyByTool do wklejenia w `all_songs`.
+/// Po `prepare`: bez pola `piosenkomat`, gotowe do wklejenia w `all_songs`.
 String finalPathIn(String runDir, SubmissionKind kind) =>
     p.join(runDir, finalFileName(kind));
 String planPathIn(String runDir) => p.join(runDir, 'plan.json');

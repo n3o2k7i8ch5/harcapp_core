@@ -109,7 +109,7 @@ extension SongIssueNeedsReview on SongIssue {
       };
 }
 
-/// Te nadaje narzędzie; tworzy je, jeśli missingUnits.
+/// Te nadaje narzędzie; tworzy je, jeśli brakuje.
 final List<String> kToolLabels = [
   kLabelAuto,
   kLabelReadyToAdd,
@@ -129,7 +129,7 @@ final List<String> kToolLabels = [
   for (final k in NeedsReviewKind.values) k.label,
 ];
 
-/// Te nadaje tylko człowiek; narzędzie ich nie tworzy, ale messageIds z nimi
+/// Te nadaje tylko człowiek; narzędzie ich nie tworzy, ale mejle z nimi
 /// nie są już „w kolejce”.
 const List<String> kHumanOnlyLabels = [
   'song/rejected',
@@ -146,7 +146,7 @@ final List<String> kAllSongLabels = [...kToolLabels, ...kHumanOnlyLabels];
 bool isSongLabel(String label) => label == 'song' || label.startsWith('song/');
 
 /// Etykiety stanu, po których nic już od Ciebie nie zależy: piosenka weszła
-/// albo odpadła na dobre. Takie messageIds oznaczamy jako przeczytane, żeby nie
+/// albo odpadła na dobre. Takie mejle oznaczamy jako przeczytane, żeby nie
 /// wisiały w skrzynce. `needs-review/*` i `reply/*` zostają
 /// nieprzeczytane — czekają na Twoją decyzję, oko albo wysyłkę. Po `reply`
 /// mejl z [kLabelWaitingForAuthor] jest przeczytany osobno, patrz
@@ -192,13 +192,13 @@ Set<String> pendingLabelsOf(Set<String> labels) => {
       ],
     );
 
-/// „W pliku” z ręki automatu: tylko takie messageIds `label added` ma prawo ruszyć.
+/// „W pliku” z ręki automatu: tylko takie mejle `label added` ma prawo ruszyć.
 /// Twoje ręczne „ready-to-add” zostają nietknięte.
 bool isReadyByTool(Set<String> labels) =>
     labels.contains(kLabelReadyToAdd) && labels.contains(kLabelAuto);
 
 /// Cokolwiek, co automat wstawił do pliku kandydatów: bez zarzutu („w pliku”)
-/// albo do przeglądu. Tylko takie messageIds rusza `label reviewed`.
+/// albo do przeglądu. Tylko takie mejle rusza `label reviewed`.
 bool isInRunFilesByTool(Set<String> labels) =>
     labels.contains(kLabelAuto) &&
     (labels.contains(kLabelReadyToAdd) || labels.contains(kLabelNeedsReview));
@@ -217,7 +217,7 @@ String labelQueryName(String label) => label.replaceAll(' ', '-');
 /// gdybyś kiedyś chciał doprosić autorów o zgodę.
 const String kOldAppRulesVersion = 'brak (stara apka)';
 
-/// Po czym poznać zgłoszenie piosenki. Inne messageIds narzędzie omija szerokim
+/// Po czym poznać zgłoszenie piosenki. Inne mejle narzędzie omija szerokim
 /// łukiem: nie czyta ich i nie etykietuje.
 const String kSongMarker = '### Kod piosenki:';
 const List<String> kSongSubjects = ['Nowa piosenka', 'Poprawka piosenki'];
@@ -284,7 +284,7 @@ class ContribMessage {
   /// Czy to w ogóle zgłoszenie piosenki (po temacie albo treści).
   ///
   /// Znacznik starej apki rozpoznajemy tym samym, luźnym regexem, co parser
-  /// — sztywne `contains` gubiło messageIds, w których klient przełamał go w
+  /// — sztywne `contains` gubiło mejle, w których klient przełamał go w
   /// środku: wchodziły do kolejki, wypadały tu i wracały przy każdym `scan`.
   bool get isSongSubmission =>
       !hasWebSubjectMarker

@@ -294,7 +294,7 @@ Future<(List<ContribMessage>, Set<String>)> _unlabeledThreads(
   return (unlabeled, weRepliedThreads);
 }
 
-/// Katalog przebiegu: raport, plan etykiet i po dwa pliki na rodzaj —
+/// Katalog przebiegu: raport, plan przebiegu i po dwa pliki na rodzaj —
 /// kandydaci i ich kopia na eksport po przeglądzie.
 void _writeRunFiles(String runDir, List<Classified> classified, String report) {
   final reportPath = reportPathIn(runDir);
@@ -302,7 +302,7 @@ void _writeRunFiles(String runDir, List<Classified> classified, String report) {
 
   assignUniqueIds([for (final c in classified) if (c.goesToFile) c.song!]);
   final planPath = planPathIn(runDir);
-  writePlan(planPath, LabelPlan.fromClassified(classified));
+  writePlan(planPath, RunPlan.fromClassified(classified));
 
   // Dwa pliki, bo to dwie roboty: nowe dodajesz, poprawki porównujesz
   // z tym, co w apce. Uwagi jadą w piosenkach — edytor pokaże je nad każdą.
@@ -334,7 +334,7 @@ void _writeRunFiles(String runDir, List<Classified> classified, String report) {
   stdout
     ..writeln('Katalog: $runDir')
     ..writeln('Raport: $reportPath')
-    ..writeln('Plan etykiet: $planPath');
+    ..writeln('Plan przebiegu: $planPath');
 }
 
 // ---------------------------------------------------------------------------
@@ -464,14 +464,14 @@ Future<int> _labelAdded(ArgResults cmd) async {
 
 /// Plan przebiegu z argumentu (albo ostatniego) — chyba że `--all`, wtedy
 /// cała skrzynka i planu nie ma.
-LabelPlan? _planUnlessAll(ArgResults cmd) {
+RunPlan? _planUnlessAll(ArgResults cmd) {
   if (cmd['all'] as bool) return null;
   final plan = readPlan(planPathIn(_runDir(cmd)));
   stdout.writeln(_planHeader(plan));
   return plan;
 }
 
-String _planHeader(LabelPlan plan) => 'Plan z ${_minute(plan.createdAt)}: '
+String _planHeader(RunPlan plan) => 'Plan z ${_minute(plan.createdAt)}: '
     '${plural(plan.labelsByMessage.length, 'mejl', 'mejle', 'mejli')}';
 
 /// Mejle o tej samej zmianie idą jedną paczką: `batchModify` bierze do 1000
@@ -1142,7 +1142,7 @@ Future<int> _clean(ArgResults cmd) async {
     countLines(stdout, tally(pendingByMessage.values.expand((l) => l)));
     if (!force) {
       stderr.writeln('Katalog zostaje — bez niego te sprawy się nie domkną '
-          '(plan etykiet, teksty odpowiedzi do autorów). --force, jeśli mimo '
+          '(plan przebiegu, teksty odpowiedzi do autorów). --force, jeśli mimo '
           'to ma zniknąć.');
       return 1;
     }

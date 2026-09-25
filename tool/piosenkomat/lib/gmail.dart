@@ -107,7 +107,7 @@ class GmailMailbox {
     }
   }
 
-  /// Pobiera messageIds kilkoma strumieniami naraz. Tempo i tak pilnuje [_spend];
+  /// Pobiera mejle kilkoma strumieniami naraz. Tempo i tak pilnuje [_spend];
   /// równoległość służy tylko temu, żeby czekanie na odpowiedź nie marnowało
   /// limitu, który w tym czasie się odnawia.
   Future<List<ContribMessage>> getMessages(

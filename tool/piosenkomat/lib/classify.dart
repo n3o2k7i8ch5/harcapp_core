@@ -454,7 +454,7 @@ DateTime _dateOf(ContribMessage m) => m.date ?? DateTime(0);
 int _cmpDate(DateTime? a, DateTime? b) => (a ?? DateTime(0)).compareTo(b ?? DateTime(0));
 
 /// Ile linijek tekstu zostało bez chwytów — bez tego „brak chwytów” nie mówi,
-/// czy missingUnits wszystkiego, czy jednej zwrotki.
+/// czy brakuje wszystkiego, czy jednej zwrotki.
 String _chordsDetail(SongRaw song) {
   final lines = song.text.split('\n').where((l) => l.trim().isNotEmpty).length;
   return 'linijek tekstu: $lines, chwytów: brak';

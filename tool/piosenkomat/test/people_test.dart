@@ -53,7 +53,7 @@ void _indexTests() {
 PeopleReport peopleOf(List<Classified> items) => collectPeople(
       contributorSourcesOf(
         [for (final c in items) if (c.goesToFile) c.song!],
-        otherEmailsBySender: otherEmailsBySender(LabelPlan.fromClassified(items)),
+        otherEmailsBySender: otherEmailsBySender(RunPlan.fromClassified(items)),
       ),
     );
 
@@ -139,7 +139,7 @@ void main() {
         id: 'b',
       ),
     ], book: SongBook.empty);
-    final plan = LabelPlan.fromClassified(items);
+    final plan = RunPlan.fromClassified(items);
 
     // Tak jak strona: piosenki przez plik i z powrotem, jednej brak.
     final dir = tempDir();

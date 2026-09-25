@@ -16,7 +16,7 @@ String candidatesFileName(SubmissionKind kind) =>
 String reviewedFileName(SubmissionKind kind) =>
     'reviewed-${kind.id}.$kSongFileExtension';
 
-/// Po `prepare`: bez śladu piosenkomatu, readyByTool do wklejenia w `all_songs`.
+/// Po `prepare`: bez śladu piosenkomatu, gotowe do wklejenia w `all_songs`.
 String finalFileName(SubmissionKind kind) =>
     'final-${kind.id}.$kSongFileExtension';
 

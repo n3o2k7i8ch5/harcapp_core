@@ -14,23 +14,23 @@ const _new = SubmissionKind.newSong;
 
 /// Stan po `scan`: „Czysta” bez zarzutu (`ready-to-add`), „Bez YT” do
 /// przeglądu (`needs-review`).
-Future<(LabelPlan, List<SongRaw>)> _scan() async {
+Future<(RunPlan, List<SongRaw>)> _scan() async {
   final items = classifyBatch([
     msgFrom(await completeEmail(song: sampleSong(title: 'Czysta', lyrics: 'Zupelnie inne slowa tutaj')), id: 'ok'),
     msgFrom(await completeEmail(song: sampleSong(title: 'Bez YT', yt: null, lyrics: 'Wlazl kotek na plotek')), id: 'yt'),
   ], book: SongBook.empty);
   expect(items.first.isClean, isTrue);
   expect(items.last.labels, contains(kLabelNeedsReview));
-  return (LabelPlan.fromClassified(items), [for (final c in items) c.song!]);
+  return (RunPlan.fromClassified(items), [for (final c in items) c.song!]);
 }
 
-Future<(LabelPlan, List<SongRaw>, List<ReviewCandidate>)> _proposed() async {
+Future<(RunPlan, List<SongRaw>, List<ReviewCandidate>)> _proposed() async {
   final (plan, songs) = await _scan();
   return (plan, songs, collectCandidates(plan, roundTrip(songs), _new));
 }
 
 Map<String, LabelChange> _changes(
-        LabelPlan plan, List<SongRaw> reviewed, List<ReviewCandidate> proposed) =>
+        RunPlan plan, List<SongRaw> reviewed, List<ReviewCandidate> proposed) =>
     reviewLabelChanges(
         [reviewDiff(kind: _new, candidates: proposed, reviewed: reviewed)], plan);
 
@@ -77,7 +77,7 @@ void main() {
 
   test('etykiety idą na wszystkie wiadomości wątku', () async {
     final (plan, songs) = await _scan();
-    final withReply = LabelPlan(
+    final withReply = RunPlan(
       createdAt: plan.createdAt,
       labelsByMessage: {...plan.labelsByMessage, 'yt2': plan.labelsByMessage['yt']!},
       songsByThread: plan.songsByThread,

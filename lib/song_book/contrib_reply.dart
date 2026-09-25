@@ -1,7 +1,7 @@
 /// Odpowiedzi do autorów zgłoszeń — składane z kawałków, nie pisane w całości.
 ///
 /// Jeden mejl potrafi nieść kilka spraw naraz: Twoją uwagę z przeglądu
-/// („missingUnits chwytów”) i blok o starej apce, jeśli zgłoszenie przyszło ze
+/// („brakuje chwytów”) i blok o starej apce, jeśli zgłoszenie przyszło ze
 /// starej wersji. Dlatego treść jest **funkcją** tego, co mamy do powiedzenia,
 /// a nie jednym gotowym napisem: dopisanie kolejnej sprawy przelicza mejl od
 /// nowa, zamiast kazać go przepisywać ręcznie.
@@ -65,7 +65,7 @@ String? proposeContribReplyNote(
   if (phrases.isEmpty) return null;
   return [
     kReplyGreeting,
-    'Niestety widzę, że missingUnits ${_joinPolish(phrases)}.',
+    'Niestety widzę, że brakuje ${_joinPolish(phrases)}.',
     'Prześlij proszę poprawione, żebym mógł zerknąć czy reszta jest ok.',
     if (oldApp) kOldAppReplyBlock,
     if (oneSongPerMail) kOneSongPerMailReplyBlock,
@@ -73,7 +73,7 @@ String? proposeContribReplyNote(
   ].join('\n\n');
 }
 
-/// Co idzie po „missingUnits …” w uwadze do autora. `null` = ta pastylka nie
+/// Co idzie po „brakuje …” w uwadze do autora. `null` = ta pastylka nie
 /// prosi autora o poprawkę — duplikat, zgoda, uszkodzony plik i reszta
 /// zostają do ręcznego dopisania.
 String? _askPhrase(SongIssue issue) => switch (issue) {

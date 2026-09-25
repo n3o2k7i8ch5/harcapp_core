@@ -96,7 +96,7 @@ class ReviewResult {
 /// Co automat zaproponował dla danego rodzaju: plan jest kręgosłupem (wiąże
 /// piosenkę z wątkiem), plik dokłada tekst do porównań awaryjnych.
 List<ReviewCandidate> collectCandidates(
-  LabelPlan plan,
+  RunPlan plan,
   List<SongRaw> candidateSongs,
   SubmissionKind kind,
 ) {
@@ -267,7 +267,7 @@ String? reviewSafetyError(
 /// Co po przeglądzie dochodzi i co schodzi z każdej wiadomości wątku.
 Map<String, LabelChange> reviewLabelChanges(
   List<ReviewResult> results,
-  LabelPlan plan,
+  RunPlan plan,
 ) {
   final out = <String, LabelChange>{};
   for (final r in results) {

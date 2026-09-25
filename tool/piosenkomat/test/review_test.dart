@@ -18,7 +18,7 @@ const _new = SubmissionKind.newSong;
 const _corr = SubmissionKind.correction;
 
 /// Dwa zgłoszenia nowych piosenek, każde z innego wątku: stan po `scan`.
-Future<(LabelPlan, List<SongRaw>)> _run() async {
+Future<(RunPlan, List<SongRaw>)> _run() async {
   final items = classifyBatch([
     msgFrom(await completeEmail(song: sampleSong(title: 'Pierwsza', lyrics: 'Ala ma kota\nA kot ma Ale')), id: 'm1'),
     msgFrom(await completeEmail(song: sampleSong(title: 'Druga', lyrics: 'Wlazl kotek na plotek\nI mruga')), id: 'm2'),
@@ -28,7 +28,7 @@ Future<(LabelPlan, List<SongRaw>)> _run() async {
   for (final c in items) {
     c.song!.piosenkomatData = c.piosenkomatData(run: 'test');
   }
-  return (LabelPlan.fromClassified(items), songs);
+  return (RunPlan.fromClassified(items), songs);
 }
 
 /// Stan po `scan` widziany oczami `label reviewed`: co automat zaproponował
@@ -136,7 +136,7 @@ void main() {
     expect(items.map((c) => c.destination), everyElement(Destination.candidateCorrection));
     final songs = [for (final c in items) c.song!..piosenkomatData = c.piosenkomatData()];
     assignUniqueIds(songs);
-    final plan = LabelPlan.fromClassified(items);
+    final plan = RunPlan.fromClassified(items);
     final proposed = collectCandidates(plan, roundTrip(songs), _corr);
     final result = reviewDiff(kind: _corr, candidates: proposed, reviewed: roundTrip(songs));
     expect(result.duplicateTargets.keys, ['tmp']);
@@ -153,7 +153,7 @@ void main() {
       msgFrom(await completeEmail(song: sampleSong(title: 'Nowa', lyrics: 'Ala ma kota')), id: 'n'),
       msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'Popr', lyrics: 'Wlazl kotek')), id: 'c'),
     ], book: SongBook.empty);
-    final plan = LabelPlan.fromClassified(items);
+    final plan = RunPlan.fromClassified(items);
     final songs = [for (final c in items) c.song!];
     expect(collectCandidates(plan, songs, _new).map((p) => p.threadId), ['n']);
     expect(collectCandidates(plan, songs, _corr).map((p) => p.threadId), ['c']);

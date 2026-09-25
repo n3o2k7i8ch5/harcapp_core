@@ -46,10 +46,11 @@ class PlannedSong {
       );
 }
 
-/// Zapisany wynik `scan`: które etykiety automat nadałby któremu mejlowi
-/// i co z którego wątku poszło do pliku. Pozwala nadać etykiety później
-/// (`label scanned`) bez ponownego czytania skrzynki.
-class LabelPlan {
+/// Plan przebiegu (`plan.json`), czyli zapisany wynik `scan`: które etykiety
+/// automat nadałby któremu mejlowi i co z którego wątku poszło do pliku.
+/// Pozwala nadać etykiety później (`label scanned`) bez ponownego czytania
+/// skrzynki.
+class RunPlan {
   final DateTime createdAt;
   /// Etykiety po **wiadomości** — wątek dostaje je na wszystkich.
   final Map<String, List<String>> labelsByMessage;
@@ -59,14 +60,14 @@ class LabelPlan {
   /// Wiadomości każdego wątku — `label reviewed` przestawia etykiety na całym.
   final Map<String, List<String>> messagesByThread;
 
-  const LabelPlan({
+  const RunPlan({
     required this.createdAt,
     required this.labelsByMessage,
     required this.songsByThread,
     required this.messagesByThread,
   });
 
-  factory LabelPlan.fromClassified(List<Classified> items) => LabelPlan(
+  factory RunPlan.fromClassified(List<Classified> items) => RunPlan(
         createdAt: DateTime.now(),
         labelsByMessage: {
           for (final c in items)
@@ -102,7 +103,7 @@ class LabelPlan {
         'threads': messagesByThread,
       };
 
-  factory LabelPlan.fromJson(Map<String, dynamic> json) => LabelPlan(
+  factory RunPlan.fromJson(Map<String, dynamic> json) => RunPlan(
         createdAt: DateTime.parse(json['created_at'] as String),
         labelsByMessage: {
           for (final e in (json['labels'] as Map<String, dynamic>).entries)
@@ -146,7 +147,7 @@ List<String> _otherEmailsOf(Classified c) {
 
 /// Dodatkowe adresy z przebiegu, po nadawcy — tyle, ile `people.dart`
 /// potrzebuje od planu.
-Map<String, List<String>> otherEmailsBySender(LabelPlan plan) {
+Map<String, List<String>> otherEmailsBySender(RunPlan plan) {
   final out = <String, List<String>>{};
   for (final songs in plan.songsByThread.values) {
     for (final s in songs) {
@@ -169,7 +170,7 @@ Map<String, List<String>> otherEmailsBySender(LabelPlan plan) {
 /// już w apce, a zdjęcie etykiet wepchnęłoby ją z powrotem do kolejki.
 ({Map<String, List<String>> toRemove, int outsidePlan, int added}) unlabelChanges(
   Map<String, Set<String>> labelsByMessage, {
-  LabelPlan? plan,
+  RunPlan? plan,
   bool force = false,
 }) {
   final toRemove = <String, List<String>>{};
@@ -191,11 +192,11 @@ Map<String, List<String>> otherEmailsBySender(LabelPlan plan) {
   return (toRemove: toRemove, outsidePlan: outsidePlan, added: added);
 }
 
-void writePlan(String path, LabelPlan plan) =>
+void writePlan(String path, RunPlan plan) =>
     writeText(path, const JsonEncoder.withIndent('  ').convert(plan.toJson()));
 
-LabelPlan readPlan(String path) {
+RunPlan readPlan(String path) {
   final file = File(path);
   if (!file.existsSync()) throw FileSystemException('Nie ma pliku planu', path);
-  return LabelPlan.fromJson(jsonDecode(file.readAsStringSync()) as Map<String, dynamic>);
+  return RunPlan.fromJson(jsonDecode(file.readAsStringSync()) as Map<String, dynamic>);
 }
