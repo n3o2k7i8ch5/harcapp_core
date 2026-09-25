@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:piosenkomat/cli.dart';
 import 'package:piosenkomat/hrcpsng.dart';
+import 'package:piosenkomat/model.dart';
+import 'package:piosenkomat/plan.dart';
 import 'package:test/test.dart';
 
 import 'helpers.dart';
@@ -58,5 +60,47 @@ void main() {
     writeHrcpsng(reviewedPathIn(dir, SubmissionKind.newSong), [sampleSong()],
         withPiosenkomatData: true);
     expect(missingExportsIn(dir), isEmpty);
+  });
+
+  group('runda w Gmailu', () {
+    final plan = RunPlan(
+      createdAt: DateTime(2026),
+      labelsByMessage: const {'a': [], 'b': []},
+      songByThread: const {},
+      messagesByThread: const {},
+    );
+
+    test('bez label scanned nie ma jej w Gmailu', () {
+      expect(isRunInGmail(plan, const {}), isFalse);
+      // Obce etykiety innych mejli się nie liczą.
+      expect(isRunInGmail(plan, const {'x': {kLabelAuto, kLabelReadyToAdd}}), isFalse);
+    });
+
+    test('wystarczy jeden mejl ze znacznikiem automatu', () {
+      expect(isRunInGmail(plan, const {'b': {kLabelAuto, kLabelAdded}}), isTrue);
+    });
+
+    test('etykieta postawiona ręcznie, bez song/auto, to nie label scanned', () {
+      expect(isRunInGmail(plan, const {'a': {kLabelReadyToAdd}}), isFalse);
+    });
+  });
+
+  group('robota do stracenia przy clean', () {
+    test('sam wynik scan to żadna robota', () {
+      final dir = _scannedRun();
+      writeText(planPathIn(dir), '{}');
+      writeText(reportPathIn(dir), 'raport');
+      writeText('$dir/.DS_Store', 'x');
+      expect(localReviewWorkIn(dir), isEmpty);
+    });
+
+    test('eksport, ślad decyzji i final-* są robotą', () {
+      final dir = _scannedRun();
+      writeHrcpsng(reviewedPathIn(dir, SubmissionKind.newSong), [sampleSong()]);
+      writeText(decisionsPathIn(dir), '{}');
+      writeHrcpsng(finalPathIn(dir, SubmissionKind.newSong), [sampleSong()]);
+      expect(localReviewWorkIn(dir),
+          ['decisions.json', 'final-new.hrcpsng', 'reviewed-new.hrcpsng']);
+    });
   });
 }

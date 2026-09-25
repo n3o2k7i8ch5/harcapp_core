@@ -517,6 +517,16 @@ Future<int> _labelReviewed(ArgResults cmd) async {
   if (_stopOnMissingExports(runDir)) return 1;
   final plan = readPlan(planPathIn(runDir));
 
+  // Także na sucho: bez etykiet automatu `--push` nie ma czego przestawić,
+  // a dry-run obiecywałby zmiany, których nie będzie.
+  final mailbox = await _connect(cmd);
+  final current = await mailbox.songLabelsByMessage();
+  if (!isRunInGmail(plan, current)) {
+    stderr.writeln('Runda ${p.basename(runDir)} nie ma jeszcze etykiet w Gmailu. '
+        'Najpierw: ./piosenkomat label scanned $runDir --push');
+    return 1;
+  }
+
   final results = <ReviewResult>[];
   for (final kind in SubmissionKind.values) {
     final candidates = collectCandidates(plan, _candidatesOf(runDir, kind), kind);
@@ -563,11 +573,9 @@ Future<int> _labelReviewed(ArgResults cmd) async {
     return 0;
   }
 
-  final mailbox = await _connect(cmd);
   await mailbox.ensureToolLabels();
   // Bezpiecznik jak w `label added`: ruszamy tylko to, co automat sam
   // wstawił do plików przebiegu i co dalej tam czeka.
-  final current = await mailbox.songLabelsByMessage();
   final applicable = <String, LabelChange>{
     for (final e in changes.entries)
       if (current[e.key] case final labels? when isInRunFilesByTool(labels))
@@ -1133,6 +1141,10 @@ String _sentence(List<String> parts) => '${parts.join(', ')}.';
 /// - **Kolejka starej apki.** [kLabelReplyOldApp] z tego przebiegu.
 ///
 /// Kiedy wszystko jest domknięte, zostaje sam ślad w Gmailu — a ten wystarczy.
+///
+/// Runda, która do Gmaila nie trafiła (bez `label scanned`), śladu tam nie ma:
+/// sam wynik `scan` leci od razu, bo kolejny `scan` go odtworzy, a Twoja
+/// robota z przeglądu — tylko z `--force`.
 Future<int> _clean(ArgResults cmd) async {
   final force = cmd['force'] as bool;
   final runDir = _runDir(cmd);
@@ -1152,7 +1164,26 @@ Future<int> _clean(ArgResults cmd) async {
       '${plural(plan.labelsByMessage.length, 'mejl', 'mejle', 'mejli')}, '
       '${plural(files, 'plik', 'pliki', 'plików')}.');
 
-  if (pendingByMessage.isNotEmpty) {
+  final runName = p.basename(runDir);
+  if (!isRunInGmail(plan, labelsByMessage)) {
+    // Bez etykiet w Gmailu „nic nie wisi” znaczy „nic nie zaczęte”, nie
+    // „domknięte” — cały stan rundy jest w tym katalogu.
+    final work = localReviewWorkIn(runDir);
+    if (work.isEmpty) {
+      stdout.writeln('Runda $runName nie trafiła do Gmaila, ale poza wynikiem scan '
+          'nic w niej nie ma — kolejny scan ją odtworzy.');
+    } else {
+      stdout
+        ..writeln('Runda $runName nie jest zakończona — nie trafiła do Gmaila, '
+            'jest tylko tutaj.')
+        ..writeln('Stracisz bezpowrotnie: ${work.join(', ')}.');
+      if (!force) {
+        stderr.writeln('Usunąć mimo to: ./piosenkomat clean $runDir --push --force');
+        return 1;
+      }
+      stdout.writeln('--force: kasuję mimo to.');
+    }
+  } else if (pendingByMessage.isNotEmpty) {
     stdout.writeln('Niedokończone sprawy na '
         '${plural(pendingByMessage.length, 'mejlu', 'mejlach', 'mejlach')}:');
     countLines(stdout, tally(pendingByMessage.values.expand((l) => l)));

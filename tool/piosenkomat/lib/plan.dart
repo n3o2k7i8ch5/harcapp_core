@@ -152,6 +152,13 @@ Map<String, List<String>> otherEmailsBySender(RunPlan plan) {
   return out;
 }
 
+/// Czy runda trafiła do Gmaila: choć jeden jej mejl ma znacznik automatu.
+/// Stawia go `label scanned`, zdejmuje `unlabel` — po cofnięciu runda znowu
+/// jest tylko lokalna.
+bool isRunInGmail(RunPlan plan, Map<String, Set<String>> labelsByMessage) =>
+    plan.labelsByMessage.keys
+        .any((id) => labelsByMessage[id]?.contains(kLabelAuto) ?? false);
+
 /// Co `unlabel` zdejmie. Swoje automat poznaje po znaczniku `song/auto` —
 /// Ty go nie wieszasz, więc Twoje ręczne etykiety zostają nietknięte.
 /// Z [plan] tylko mejle przebiegu; bez — cała skrzynka.

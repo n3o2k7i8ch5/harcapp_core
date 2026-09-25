@@ -118,6 +118,20 @@ void main() {
     expect(result.mustStop, isTrue);
   });
 
+  test('obcy wątek → STOP, choćby tytuł pasował do kandydata', () async {
+    final (proposed, songs) = await _scanned();
+    final back = roundTrip(songs);
+    // „Pierwsza” z innego przebiegu: ten sam tytuł i tekst, inny wątek.
+    final obca = back.firstWhere((s) => s.title == 'Pierwsza')
+      ..piosenkomatData = const PiosenkomatData(kind: _new, threadId: 'z-innego-przebiegu')
+      ..contributorData = null;
+    final druga = back.firstWhere((s) => s.title == 'Druga');
+    final result = reviewDiff(kind: _new, candidates: proposed, reviewed: [obca, druga]);
+    expect(result.foreign.map((s) => s.title), ['Pierwsza']);
+    expect(result.mustStop, isTrue);
+    expect(result.removed.map((c) => c.threadId), ['m1']);
+  });
+
   test('poprawka w pliku nowych → STOP (zły plik)', () async {
     final (proposed, songs) = await _scanned();
     final back = roundTrip(songs);

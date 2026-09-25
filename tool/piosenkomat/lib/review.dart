@@ -195,12 +195,13 @@ Matched? _match(SongRaw song, List<ReviewCandidate> candidates) {
   final threadId = _threadOf(song);
   if (threadId != null) {
     final sameThread = [for (final c in candidates) if (c.threadId == threadId) c];
-    if (sameThread.isNotEmpty) {
-      // W obrębie wątku id wystarczy; gdy piosenek jest kilka i nie da się
-      // ich rozróżnić, bierzemy pierwszą.
-      final hit = _narrow(song, sameThread, trustSingle: true);
-      return Matched(hit?.$1 ?? sameThread.first, hit?.$2 ?? MatchedBy.threadId, song);
-    }
+    // Id wątku jest, ale spoza kandydatów: obca, bez zgadywania po tytule —
+    // inaczej piosenka z innego przebiegu przeszłaby jako „przyjęta”.
+    if (sameThread.isEmpty) return null;
+    // W obrębie wątku id wystarczy; gdy piosenek jest kilka i nie da się
+    // ich rozróżnić, bierzemy pierwszą.
+    final hit = _narrow(song, sameThread, trustSingle: true);
+    return Matched(hit?.$1 ?? sameThread.first, hit?.$2 ?? MatchedBy.threadId, song);
   }
   // Bez id wątku piosenka musi się obronić sama: id, tytuł albo tekst.
   final hit = _narrow(song, candidates, trustSingle: false);

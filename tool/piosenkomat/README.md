@@ -121,6 +121,9 @@ Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` 
    Piosenka z ✓ → `ready-to-add`; z ✗ albo skasowana →
    `rejected/after-review`; z odpowiedzią → `reply/review-note`.
    ####
+   Wymaga etykiet automatu w Gmailu: bez `label scanned --push` staje od razu,
+   także na sucho.
+   ####
    Szczegóły i warunki STOP → [Przegląd i prepare](#przegląd-i-prepare).
    ####
 5. **Piosenki do śpiewnika.**  
@@ -415,6 +418,11 @@ skasowany za wcześnie = mejl bez Twojego tekstu.
 Dlatego to komenda, a nie `rm -rf`: `clean` pyta Gmaila, czy mejle przebiegu
 nie wiszą w `ready-to-add`, `needs-review/*` ani `reply/*`. Wiszą → odmawia i wypisuje, ile czego (`--force` przechodzi).
 Nie wiszą → katalog leci, bo cały ślad jest już w Gmailu.
+
+**Runda bez `label scanned`** śladu w Gmailu nie ma — żaden jej mejl nie ma
+`song/auto`. Sam wynik `scan` `clean --push` kasuje od razu (kolejny `scan` go
+odtworzy). Gdy jest w niej Twoja robota — eksporty z przeglądu, `decisions.json`,
+`final-*` — odmawia, wypisuje, co stracisz, i podaje komendę z `--force`.
 
 ## Pytania do osób dodających
 

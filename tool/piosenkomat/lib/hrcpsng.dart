@@ -153,6 +153,27 @@ List<String> missingExportsIn(String runDir) => [
             file.path,
     ];
 
+/// Pliki rundy, których kolejny `scan` nie odtworzy: wszystko poza jego
+/// wynikiem (raport, plan, kandydaci, puste miejsca na eksport) — eksporty
+/// z przeglądu, ślad decyzji, `final-*`, `people.dart`.
+List<String> localReviewWorkIn(String runDir) {
+  final fromScan = {
+    p.basename(reportPathIn(runDir)),
+    p.basename(planPathIn(runDir)),
+    for (final kind in SubmissionKind.values) candidatesFileName(kind),
+  };
+  final files = Directory(runDir).listSync().whereType<File>().toList()
+    ..sort((a, b) => a.path.compareTo(b.path));
+  return [
+    for (final f in files)
+      if (p.basename(f.path) case final name
+          when !name.startsWith('.') &&
+              !fromScan.contains(name) &&
+              f.readAsStringSync().trim().isNotEmpty)
+        name,
+  ];
+}
+
 /// Po `prepare`: bez pola `piosenkomat`, gotowe do wklejenia w `all_songs`.
 String finalPathIn(String runDir, SubmissionKind kind) =>
     p.join(runDir, finalFileName(kind));
