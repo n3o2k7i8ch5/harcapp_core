@@ -142,13 +142,21 @@ class SongSubmission{
   };
 
   static SongSubmission fromJsonMap(Map<String, dynamic> map) => SongSubmission(
-    kind: SubmissionKind.byId(map[PARAM_KIND] as String?),
+    kind: _kindOf(map[PARAM_KIND]),
     correctedSongId: _nonEmpty(map[PARAM_CORRECTED_SONG_ID]),
     correctionMessage: _nonEmpty(map[PARAM_CORRECTION_MESSAGE]),
     senderIsContributor: map[PARAM_SENDER_IS_CONTRIBUTOR] as bool? ?? true,
     contributor: _contributorOf(map[PARAM_CONTRIBUTOR]),
     song: _songOf(map[PARAM_SONG]),
   );
+
+  static SubmissionKind _kindOf(Object? raw){
+    try {
+      return SubmissionKind.byId(raw is String? raw: null);
+    } on FormatException catch(e){
+      _corrupted(e.message);
+    }
+  }
 
   static SongRaw _songOf(Object? raw){
     if(raw is! Map) _corrupted('Zgłoszenie bez piosenki.');

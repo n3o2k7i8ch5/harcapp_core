@@ -789,7 +789,7 @@ bool _enrich(
   bool attachSender = true,
 }) {
   // Dane z mejla mają pierwszeństwo (stary format je niósł), ale id wątku
-  // stemplujemy zawsze: po nim `review` wiąże piosenkę ze zgłoszeniem.
+  // stemplujemy zawsze: po nim `label reviewed` wiąże piosenkę ze zgłoszeniem.
   final fromEmail = song.contributorData;
   song.contributorData = ContributorData(
     email: fromEmail?.email ?? sender ?? '',

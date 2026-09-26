@@ -100,6 +100,7 @@ void main() {
 
     test('pusta wiadomość w pliku jest pomijana', () {
       final back = PiosenkomatData.fromJsonMap({
+        PiosenkomatData.PARAM_KIND: SubmissionKind.newSong.id,
         PiosenkomatData.PARAM_CONVERSATION: [
           {PiosenkomatMessage.PARAM_TEXT: '   '},
           {PiosenkomatMessage.PARAM_TEXT: 'coś'},
@@ -107,6 +108,13 @@ void main() {
       });
       expect(back.conversation.map((m) => m.text), ['coś']);
     });
+  });
+
+
+  test('nieznany rodzaj zgłoszenia to błąd, nie „nowa”', () {
+    expect(() => SubmissionKind.byId('correctoin'), throwsFormatException);
+    expect(() => SubmissionKind.byId(null), throwsFormatException);
+    expect(SubmissionKind.byId('correction'), SubmissionKind.correction);
   });
 
 }

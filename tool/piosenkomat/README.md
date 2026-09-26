@@ -283,7 +283,7 @@ Trzy kroki, każdy z osobną strukturą: **cechy** (fakty o zgłoszeniu) →
 **uwagi** (osąd o piosence, tylko dla tego, co idzie do pliku).
 
 **Cechy**: `kind` (z pliku zgłoszenia; przy starych mejlach z tematu albo
-niepustego bloku „Propozycja poprawki”), `legacyApp` (czy ze starej apki),
+niepustego bloku „Propozycja poprawki”), `isOldApp` (czy ze starej apki),
 `shape` (rozpoznany kształt mejla), `senderIsContributor`, `userMessage`,
 `correctionMessage`, `sentAt`, nadawca, zgoda, sparsowana piosenka, `appMatch`
 (najbliższa piosenka w apce), `batchMatch` (najbliższe inne zgłoszenie w paczce).

@@ -62,8 +62,7 @@ class ContributorData{
       email: jsonMap['email'] as String,
       contributionDate: DateTime.parse(jsonMap['contribution_date'] as String),
       acceptedContributionRulesVersion: jsonMap['accepted_contribution_rules_version'] as String,
-      // `email_msg_id`: nazwa sprzed przejścia na wątki.
-      emailThreadId: (jsonMap['email_thread_id'] ?? jsonMap['email_msg_id']) as String?,
+      emailThreadId: jsonMap['email_thread_id'] as String?,
     );
 
 }

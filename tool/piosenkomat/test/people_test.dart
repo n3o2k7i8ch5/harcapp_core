@@ -48,7 +48,7 @@ void _indexTests() {
   });
 }
 
-/// Tak, jak robi to `strip`: osoby z piosenek, które wchodzą, plus dodatkowe
+/// Tak, jak robi to `prepare`: osoby z piosenek, które wchodzą, plus dodatkowe
 /// adresy z planu przebiegu.
 PeopleReport peopleOf(List<Classified> items) => collectPeople(
       contributorSourcesOf(

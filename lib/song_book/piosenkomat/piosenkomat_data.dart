@@ -8,8 +8,11 @@ enum SubmissionKind{
   const SubmissionKind(this.id);
   final String id;
 
+  /// Rodzaj po id. Nieznane albo brakujące id to błąd, nie „nowa” —
+  /// po cichu zgadnięty rodzaj zmieniłby poprawkę w nową piosenkę.
   static SubmissionKind byId(String? id) =>
-      values.where((k) => k.id == id).firstOrNull ?? SubmissionKind.newSong;
+      values.where((k) => k.id == id).firstOrNull ??
+      (throw FormatException('Nieznany rodzaj zgłoszenia: „$id”'));
 }
 
 /// Jedna wiadomość z wątku zgłoszenia.
