@@ -33,6 +33,9 @@ enum SongIssue{
   unknownSubmissionFormat('unknown-submission-format', 'nowsza wersja formatu zgłoszenia', SongIssueSeverity.blocking),
   /// Kilka kart osób dodających: nie wiadomo, do której dokleić adres nadawcy.
   severalContributors('several-contributors', 'kilka osób dodających w zgłoszeniu', SongIssueSeverity.blocking),
+  /// Adres nadawcy doklejony do jedynej karty na zgadywanie — stary format
+  /// nie mówi, czy nadawca to osoba dodająca.
+  guessedContributorEmail('guessed-contributor-email', 'adres nadawcy doklejony do jedynej karty — sprawdź, czy to ta osoba', SongIssueSeverity.decision),
 
   /// Nadawcą jest skrzynka HarcApp, a treść nie niesie adresu — nie ma komu
   /// przypisać wkładu ani kogo dopytać o zgodę.
@@ -44,6 +47,14 @@ enum SongIssue{
   /// Ta sama piosenka co w apce, różni się drobiazgiem: kolejność zwrotek,
   /// interpunkcja, YouTube, wykonawca… — niezadeklarowana poprawka.
   metadataDifferFromApp('metadata-differ-from-app', 'ta sama piosenka co w apce, drobne różnice', SongIssueSeverity.decision),
+
+  /// Cała piosenka z apki plus zwrotki, których tam nie ma — zwykle poprawka
+  /// wysłana jako nowa piosenka.
+  moreVersesThanApp('more-verses-than-app', 'ta sama piosenka co w apce, dopisane zwrotki — może to poprawka?', SongIssueSeverity.decision),
+  /// Fragment piosenki z apki: część zwrotek, nic nowego.
+  fewerVersesThanApp('fewer-verses-than-app', 'fragment piosenki z apki — brak części zwrotek', SongIssueSeverity.decision),
+  /// Połowa wersów wspólna: wariant tej samej piosenki albo bliska przeróbka.
+  variantOfApp('variant-of-app', 'wariant albo bliska przeróbka piosenki z apki', SongIssueSeverity.decision),
 
   sameTitleInApp('same-title-in-app', 'ten sam tytuł, inna treść niż w apce', SongIssueSeverity.decision),
   similarTextInApp('similar-text-in-app', 'treść podobna do piosenki w apce', SongIssueSeverity.decision),

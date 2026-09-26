@@ -1,4 +1,5 @@
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
+import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:piosenkomat/similarity.dart';
 import 'dart:convert';
 
@@ -136,13 +137,13 @@ void _oldest() {
     final m = ContribMessage(id: 'old', body: body, subject: 'Piosenka "Piosenka testowa XYZ"',
         from: 'Jan <jan.testowy@example.com>', songAttachment: attachment);
     final got = classify(m, book: SongBook.empty);
-    // Stara apka nie blokuje: treść jest kompletna, brak zgody dostaje sentinel,
-    // a jej temat („Piosenka …”) nie jest tematem spoza szablonów.
-    expect(got.isClean, isTrue);
+    // Stara apka wchodzi jak każda: jedyny zarzut to brak zgody, a jej temat
+    // („Piosenka …”) nie jest tematem spoza szablonów.
+    expect(issuesOf(got), [SongIssue.noConsent]);
     expect(got.oldApp, isTrue);
     expect(got.labels, contains(kLabelReplyOldApp));
     expect(got.song!.contributorData?.acceptedContributionRulesVersion,
-        kOldAppRulesVersion);
+        kNoConsentRulesVersion);
     expect(got.title, 'Piosenka testowa XYZ');
   });
 

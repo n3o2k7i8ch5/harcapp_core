@@ -11,19 +11,13 @@ import 'package:harcapp_core/values/dimen.dart';
 
 import 'similarity.dart';
 
-/// Czerwony, gdy to z grubsza **ta sama piosenka**; pomarańczowy, gdy tylko
-/// coś ją łączy i trzeba spojrzeć. Te same dwa kolory, co pastylki uwag
-/// piosenkomatu: blokada i decyzja.
+/// Czerwony, gdy to **ta sama piosenka** (także z dopisanymi albo uciętymi
+/// zwrotkami); pomarańczowy, gdy tylko coś ją łączy i trzeba spojrzeć. Te
+/// same dwa kolory, co pastylki uwag piosenkomatu: blokada i decyzja.
 Color matchLevelColor(MatchLevel? level) => switch (level) {
-      MatchLevel.identical ||
-      MatchLevel.sameSong ||
-      MatchLevel.sameTextDifferentChords =>
-        Colors.red,
-      MatchLevel.sameTitleDifferentText ||
-      MatchLevel.similarText ||
-      MatchLevel.sameIdDifferentSong =>
-        Colors.orange,
       null => Colors.grey,
+      final l when l.isSameSong => Colors.red,
+      _ => Colors.orange,
     };
 
 /// Polska nazwa pola z [MetadataDiff] — **tylko do pokazania**.
@@ -51,20 +45,13 @@ IconData similarityIcon(Similarity s) => switch (s) {
       SameId() => MdiIcons.identifier,
       SameTitle() => MdiIcons.formTextbox,
       SameText() => MdiIcons.textBoxCheckOutline,
-      TextOverlap() => MdiIcons.textBoxSearchOutline,
+      SharedLines() => MdiIcons.textBoxSearchOutline,
       SameChords() => MdiIcons.musicNote,
+      ChordsMatch() => MdiIcons.musicNoteOutline,
+      MeterMatch() => MdiIcons.metronome,
+      SameRecording() => MdiIcons.playBoxOutline,
       MetadataDiff() => MdiIcons.notEqualVariant,
     };
-
-/// Dowody do pokazania: bez `tekst 100%` obok `ten sam tekst` — Jaccard 1.0
-/// przy dosłownie równym tekście nie mówi nic nowego.
-List<Similarity> similaritiesToShow(List<Similarity> s) {
-  final sameText = s.any((e) => e is SameText);
-  return [
-    for (final e in s)
-      if (!(sameText && e is TextOverlap)) e,
-  ];
-}
 
 /// Jedna pastylka dowodu, w stylu pastylek uwag piosenkomatu: pełne
 /// zaokrąglenie, półprzezroczyste tło, ikona i tekst w pełnym kolorze.

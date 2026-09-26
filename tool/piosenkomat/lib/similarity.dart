@@ -5,11 +5,9 @@
 library;
 
 import 'package:harcapp_core/song_book/similarity/similarity.dart';
-import 'package:harcapp_core/song_book/similarity/song_index.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 
 export 'package:harcapp_core/song_book/similarity/similarity.dart';
-export 'package:harcapp_core/song_book/similarity/song_index.dart';
 
 /// Najbliższa piosenka **w apce**.
 class AppMatch extends SongMatch<SongRaw> {
@@ -24,14 +22,16 @@ class AppMatch extends SongMatch<SongRaw> {
   String get title => song.title;
 
   /// Czy na tę piosenkę wolno wskazać poprawkę, która **nie powiedziała**,
-  /// co poprawia. `SongBook.closest` przy trafieniu w tytuł zwraca wynik bez
-  /// względu na tekst, więc bez tego progu poprawka podmieniałaby po id
-  /// zupełnie inną piosenkę o tym samym tytule. Wymagamy tytułu i tekstu
-  /// ≥ [kGuessableTarget] — albo tekstu ≥ [kSameText]: poprawka może właśnie
-  /// zmieniać tytuł, a (prawie) ten sam tekst to ta sama piosenka.
+  /// co poprawia. Podmiana idzie po id, więc sam zbieżny tytuł („Barka” to
+  /// nie zawsze ta sama „Barka”) nie wystarczy: wymagamy co najmniej połowy
+  /// wspólnych wersów w którąś stronę ([MatchLevel.variant] i mocniejsze) —
+  /// poprawka może właśnie zmieniać tytuł, a (prawie) ten sam tekst to ta
+  /// sama piosenka. Słabsze podobieństwo przechodzi tylko z tym samym tytułem.
   bool get isGuessable {
-    if (overlap >= kSameText) return true;
-    return similarities.any((e) => e is SameTitle) && overlap >= kGuessableTarget;
+    final l = level;
+    if (l == null) return false;
+    if (l.index <= MatchLevel.variant.index) return true;
+    return l == MatchLevel.related && similarities.has<SameTitle>();
   }
 }
 
@@ -76,6 +76,10 @@ class SongBook extends SongIndex<SongRaw> {
     final m = super.matchTo(songId, song, source: source);
     return m == null ? null : AppMatch.of(m);
   }
+
+  /// Najsilniejsze trafienia, od najsilniejszego — [limit] pierwszych.
+  List<AppMatch> strongest(SongProfile song, {int limit = 3}) =>
+      [for (final m in matches(song).take(limit)) AppMatch.of(m)];
 
   @override
   AppMatch? closest(SongProfile song, {MatchSource source = MatchSource.app}) {

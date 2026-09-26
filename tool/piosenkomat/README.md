@@ -230,7 +230,9 @@ song/
 │   ├── correction-problem    poprawka, ale w apce nie ma czego poprawiać
 │   ├── missing-data          brak YouTube, chwytów lub tytułu
 │   ├── no-consent            brak zgody albo nie wiadomo, kto zgłosił
-│   └── several-contributors  kilka kart osób dodających — wkład przypisz ręcznie
+│   ├── several-contributors  kilka kart osób dodających — wkład przypisz ręcznie
+│   └── guessed-contributor   adres nadawcy doklejony do jedynej karty na zgadywanie
+│                             (stary format nie mówi, czy nadawca to ta osoba)
 ├── reply/                    kolejka `reply`: autorowi trzeba odpisać, mejl na piosenkę
 │   ├── old-app               mejl z najstarszej apki — blok „zaktualizuj apkę”
 │   └── review-note           Twój tekst z przeglądu („Odpowiedź do autora”)
@@ -277,33 +279,55 @@ niepustego bloku „Propozycja poprawki”), `legacyApp` (czy ze starej apki),
 
 ### Podobieństwo
 
-Porównanie dwóch piosenek to lista dowodów: `SameTitle` (po normalizacji jak
-w wyszukiwarce, także `hid_titles`), `SameText` (dosłownie równy po zbiciu białych
-znaków), `TextOverlap` (Jaccard zbiorów słów — nie widzi kolejności zwrotek ani
-interpunkcji), `SameChords` (`a` ≠ `A`), `MetadataDiff` (które z: tytuł dosłownie,
-ukryte tytuły, autorzy, kompozytorzy, wykonawcy, data, YouTube, tagi się różnią;
-`null == []`). Wniosek to reguła nad listą, progi 90% i 50%:
+Całe porównanie mieszka w rdzeniu (`harcapp_core/song_book/similarity/similarity.dart`,
+jeden import), bo tego samego używa edytor na stronie. Porównanie dwóch piosenek to
+lista dowodów:
+- `SharedLines` — które wersy jednej mają odpowiednik w drugiej, w obie strony
+  (trigramy znaków ≥ 0,7; literówki, kolejność zwrotek, powtórzenia refrenu
+  i sklejone wersy tego nie ruszają, dopisane i ucięte zwrotki widać po asymetrii;
+  wokalizy „laj la” ważą zero);
+- `SameText` — dosłownie równy po zbiciu białych znaków;
+- `SameChords` (`a` ≠ `A`) i `ChordsMatch` — pary akordów niezależne od tonacji
+  i kolejności zwrotek, z transpozycją;
+- `MeterMatch` (sylaby w wersach), `SameRecording` (ten sam film YouTube);
+- `SameTitle` — tytuł główny jednej to tytuł drugiej (sam wspólny ukryty się nie liczy);
+- `SameId`, `MetadataDiff` (które z: tytuł dosłownie, ukryte tytuły, autorzy,
+  kompozytorzy, wykonawcy, data, YouTube, tagi się różnią; `null == []`).
+
+Wniosek to reguła nad listą (`levelOf`). **Tekst rozstrzyga, tytuł tylko opisuje**:
+ta sama treść pod innym tytułem to ta sama piosenka. Pokrycie to udział wersów
+(wagą długości), które mają odpowiednik; poniżej 40 znaków tekstu nie dowodzi niczego.
 
 | poziom | reguła | `new` → | `correction` → |
 |---|---|---|---|
 | `identical` | `SameText ∧ SameChords ∧ ¬MetadataDiff` — **każde pole równe** | `rejected/already-in-app`; z dopiskiem + `have-a-look` | to samo, a „dopiskiem” jest też propozycja poprawki |
-| `sameSong` | tytuł, tekst ≥ 90%, chwyty, ale coś inne | uwaga `metadata-differ-from-app` | kandydat bez uwagi |
-| `sameTextDifferentChords` | tytuł, tekst ≥ 90%, inne chwyty | uwaga `chords-differ-from-app` | kandydat |
-| `sameTitleDifferentText` | ten sam tytuł, tekst < 90% | uwaga `same-title-in-app` | kandydat |
-| `similarText` | inny tytuł, tekst ≥ 50% | uwaga `similar-text-in-app` | kandydat; cel zgadnięty tylko przy tekście ≥ 90%, inaczej `no-target-in-app` |
+| `sameSong` | wersy w obie strony ≥ 90% (albo `SameText`) | chwyty te same z dokładnością do kolejności → `metadata-differ-from-app`, inaczej `chords-differ-from-app` | kandydat bez uwagi |
+| `longer` | wersy ≥ 90% tylko w jedną stronę: zgłoszenie ma dopisane zwrotki | uwaga `more-verses-than-app` (→ `undeclared-correction`) | kandydat |
+| `shorter` | to samo w drugą stronę: fragment piosenki z apki | uwaga `fewer-verses-than-app` | kandydat |
+| `variant` | ≥ 50% wersów w którąś stronę | uwaga `variant-of-app` | kandydat |
+| `related` | wspólne wersy w obie strony (≥ 10%, co najmniej dwa), wersy „w połowie te same”, te same chwyty albo metrum przy częściowo podobnym tekście, ten sam film | uwaga `similar-text-in-app` | kandydat; cel zgadnięty tylko z tym samym tytułem |
+| `sameTitleDifferentText` | ten sam tytuł, treść niepodobna | uwaga `same-title-in-app` | kandydat |
 | brak | — | czysty kandydat | uwaga `no-target-in-app` |
+
+Uwaga mówi o najsilniejszym trafieniu i wymienia do dwóch kolejnych („też …”) —
+dwie podobne piosenki w apce to często dwie wersje tej samej. Cel poprawki bez deklaracji zgadujemy od `variant` w górę (co najmniej połowa
+wspólnych wersów), a słabsze podobieństwo tylko z tym samym tytułem. Najbliższa
+piosenka w apce to najsilniejszy poziom — piosenka o tym samym tytule i innym
+tekście przegrywa z piosenką o tym samym tekście. Progi są skalibrowane na całym
+śpiewniku; `test/song_book/similarity/songbook_test.dart` pilnuje par ze śpiewnika,
+scenariuszy (literówki, refren, zwrotki, przeróbki) i tego, ile par w bazie coś łączy.
 
 **Identyczna nigdy nie idzie do pliku** — automat sam ją odrzuca, z dopiskiem
 czy bez. Wszystko mniej niż identyczne idzie do `candidates-new` albo
 `candidates-correction`: bez uwag → `ready-to-add`, z uwagami → `needs-review`
 plus podkategoria na każdą uwagę.
 
-**W paczce** zgłoszenia grupują się po kluczu zależnym od rodzaju: nowe po tytule
-głównym, poprawki po `correction_target` (poprawka może zmieniać tytuł). W grupie
+**W paczce** zgłoszenia grupują się zależnie od rodzaju: nowe po tytule
+głównym **albo** treści (ta sama piosenka pod innym tytułem; grupa to spójna składowa), poprawki po `correction_target` (poprawka może zmieniać tytuł). W grupie
 identyczne zlewają się do **najnowszej** (reszta → `rejected/duplicate`), a pozostałe
 porównują się już tylko między sobą i idą do pliku z uwagą `same-title-in-batch` /
-`same-target-in-batch`. Poza grupami, parami: tekst ≥ 50% między różnymi tytułami
-głównymi → `similar-text-in-batch`. **W paczce „ten sam tytuł” to tytuł główny** —
+`same-target-in-batch`. Poza grupami, parami: podobne treścią (poziom od `related`
+w górę) między różnymi tytułami głównymi → `similar-text-in-batch`. **W paczce „ten sam tytuł” to tytuł główny** —
 wspólny tytuł ukryty łapie dopiero tekst (z apką `hid_titles` liczą się jak tytuł). Duplikat
 z innego przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs`.
 
@@ -315,8 +339,10 @@ z innego przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs`.
 | `no-consent`, `no-contributor-email` | blocking | ✓ | ✓ |
 | `corrupted-submission-file`, `unknown-submission-format` | blocking | ✓ | ✓ (piosenki nie ma po czym odczytać) |
 | `several-contributors` | blocking | ✓ | ✓ |
+| `guessed-contributor-email` | decision | ✓ | ✓ (tylko formaty bez `sender_is_contributor`) |
 | `chords-differ-from-app`, `metadata-differ-from-app` | decision | ✓ | — |
 | `same-title-in-app`, `similar-text-in-app` | decision | ✓ | — (normalny kształt poprawki) |
+| `more-verses-than-app`, `fewer-verses-than-app`, `variant-of-app` | decision | ✓ | — (normalny kształt poprawki) |
 | `same-title-in-batch`, `similar-text-in-batch` | decision | ✓ | zapasowo, gdy nie ma celu |
 | `same-target-in-batch` | decision | — | ✓ (dwie poprawki tej samej piosenki) |
 | `no-target-in-app` | decision | — | ✓ |
@@ -488,10 +514,12 @@ z komunikatem. Nieczytelny też zostaje.
 
 Najstarsza, nierozwijana wersja apki wysyła mejle w innym formacie: temat
 `Piosenka "X"`, JSON owinięty w `{"o!_id": {…}}`, bez zgody na regulamin, bo go
-jeszcze nie było. Treść bywa kompletna, więc **stary format nie blokuje importu**:
-`consentVersion` dostaje sentinel `brak (stara apka)` (bez uwagi `no-consent`;
-do wygrepowania, gdybyś chciał doprosić o zgodę), a mejl etykietę `song/reply/old-app`
-— chyba że autor dostał już od nas odpowiedź (w tym albo innym wątku).
+jeszcze nie było. **Format i zgoda to osobne fakty**: zgody nie ma, więc piosenka
+dostaje uwagę `no-consent` i w `contributor_data` wpis `brak` — tak samo jak
+zgłoszenie z nowszej apki, w którym zgody zabrakło (do wygrepowania, gdybyś chciał
+doprosić o zgodę). Przyjmujesz ją normalnie, przełącznikiem. Mejl dostaje też
+etykietę `song/reply/old-app` — chyba że autor dostał już od nas odpowiedź
+(w tym albo innym wątku).
 
 Razem z `reply/review-note` to kolejka odpowiedzi i jedyne źródło prawdy, komu
 nie odpisano. Jedna odpowiedź na piosenkę, w jej wątku; blok o starej apce jedzie

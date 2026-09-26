@@ -15,17 +15,27 @@ import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:test/test.dart';
 
+const _defaultLyrics = 'Ala ma kota a kot ma ale\nW lesie gra muzyka';
+const _ytFromLyrics = '\u0000z tekstu';
+
+/// Film zależny od tekstu: ta sama piosenka ma ten sam film, różne — różne.
+/// Jeden film dla wszystkich łączyłby w porównaniach każdą parę dowodem
+/// „to samo nagranie”.
+String _ytFor(String lyrics) => lyrics == _defaultLyrics
+    ? 'dQw4w9WgXcQ'
+    : 'yt${lyrics.hashCode.toRadixString(36)}000000000'.substring(0, 11);
+
 SongRaw sampleSong({
   String id = 'tmp',
   String title = 'Piosenka testowa XYZ',
-  String? yt = 'dQw4w9WgXcQ',
+  String? yt = _ytFromLyrics,
   bool chords = true,
-  String lyrics = 'Ala ma kota a kot ma ale\nW lesie gra muzyka',
+  String lyrics = _defaultLyrics,
   String chordsText = 'a d e\na d e',
 }) {
   final song = SongRaw.empty(id: id);
   song.title = title;
-  song.youtubeVideoId = yt;
+  song.youtubeVideoId = yt == _ytFromLyrics ? _ytFor(lyrics) : yt;
   song.authors = ['Autor Testowy'];
   song.performers = ['Zespol Testowy'];
   song.hasRefren = false;

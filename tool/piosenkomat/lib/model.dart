@@ -77,7 +77,9 @@ enum NeedsReviewKind {
   /// Ktoś poprawił piosenkę i wysłał jako nową.
   undeclaredCorrection('song/needs-review/undeclared-correction'),
   /// Kilka kart osób dodających — wkład przypisujesz ręcznie.
-  severalContributors('song/needs-review/several-contributors');
+  severalContributors('song/needs-review/several-contributors'),
+  /// Adres nadawcy doklejony do karty na zgadywanie — sprawdź osobę.
+  guessedContributor('song/needs-review/guessed-contributor');
 
   const NeedsReviewKind(this.label);
   final String label;
@@ -88,7 +90,14 @@ enum NeedsReviewKind {
 /// zgłoszenie idzie do odrzutu ([Destination.rejectCorruptedFile]).
 extension SongIssueNeedsReview on SongIssue {
   NeedsReviewKind? get needsReviewKind => switch (this) {
-        SongIssue.sameTitleInApp || SongIssue.similarTextInApp => NeedsReviewKind.duplicateInApp,
+        SongIssue.sameTitleInApp ||
+        SongIssue.similarTextInApp ||
+        SongIssue.fewerVersesThanApp ||
+        SongIssue.variantOfApp =>
+          NeedsReviewKind.duplicateInApp,
+        // Dopisane zwrotki do piosenki z apki to najczęściej poprawka
+        // wysłana jako nowa — ten sam worek, co inne chwyty czy metadane.
+        SongIssue.moreVersesThanApp => NeedsReviewKind.undeclaredCorrection,
         SongIssue.sameTitleInBatch ||
         SongIssue.similarTextInBatch ||
         SongIssue.sameTargetInBatch =>
@@ -100,6 +109,7 @@ extension SongIssueNeedsReview on SongIssue {
         SongIssue.noConsent || SongIssue.noContributorEmail => NeedsReviewKind.noConsent,
         SongIssue.corruptedSubmissionFile || SongIssue.unknownSubmissionFormat => null,
         SongIssue.severalContributors => NeedsReviewKind.severalContributors,
+        SongIssue.guessedContributorEmail => NeedsReviewKind.guessedContributor,
         SongIssue.chordsDifferFromApp ||
         SongIssue.metadataDifferFromApp =>
           NeedsReviewKind.undeclaredCorrection,
@@ -210,10 +220,11 @@ final List<String> kNeedsReviewLabels = [
 /// Gmail w `label:` zamienia spacje na myślniki.
 String labelQueryName(String label) => label.replaceAll(' ', '-');
 
-/// Wersja regulaminu stemplowana zgłoszeniom z najstarszej apki, która o zgodę
-/// nie pytała — regulaminu jeszcze nie było. Zostaje w bazie do wygrepowania,
-/// gdybyś kiedyś chciał doprosić autorów o zgodę.
-const String kOldAppRulesVersion = 'brak (stara apka)';
+/// Wersja regulaminu w `contributor_data`, gdy zgody nie ma — z jakiegokolwiek
+/// powodu: stara apka o nią nie pytała, ktoś ją wykreślił, pole zginęło.
+/// Format mejla to osobny fakt ([Submission.isOldApp]). Do wygrepowania,
+/// gdybyś chciał doprosić autorów o zgodę.
+const String kNoConsentRulesVersion = 'brak';
 
 /// Po czym poznać zgłoszenie piosenki. Inne mejle narzędzie omija szerokim
 /// łukiem: nie czyta ich i nie etykietuje.
@@ -530,6 +541,9 @@ class Submission {
   final int submissionCount;
   /// Kilka kart osób dodających: nie wiadomo, do której miałby iść adres nadawcy.
   final bool hasSeveralContributors;
+  /// Adres nadawcy doklejony do jedynej karty bez adresu na zgadywanie:
+  /// format nie niósł `sender_is_contributor`.
+  final bool contributorEmailGuessed;
   /// Autor dostał już od nas odpowiedź: w tym wątku albo, przy starej apce,
   /// w którymkolwiek innym — `reply` odpisuje raz na autora.
   final bool weReplied;
@@ -550,6 +564,10 @@ class Submission {
   /// Tytuł piosenki jeśli się sparsował, inaczej temat mejla.
   final String title;
   final AppMatch? appMatch;
+  /// Kolejne (po [appMatch]) piosenki z apki, które też coś ze zgłoszeniem
+  /// łączy — najwyżej dwie, od najsilniejszej. Tylko do podpowiedzi przy
+  /// uwadze: o decyzji mówi [appMatch].
+  final List<AppMatch> alsoInApp;
   final BatchMatch? batchMatch;
   /// `lclId` poprawianej piosenki **zadeklarowany przez apkę** w mejlu.
   /// Fakt, nie zgadywanie: gdy jest, to on rozstrzyga, co autor poprawiał.
@@ -568,6 +586,7 @@ class Submission {
     this.senderIsContributor = true,
     this.submissionCount = 1,
     this.hasSeveralContributors = false,
+    this.contributorEmailGuessed = false,
     this.weReplied = false,
     this.fileError,
     this.fileErrorMessage,
@@ -579,6 +598,7 @@ class Submission {
     this.song,
     this.registered,
     this.appMatch,
+    this.alsoInApp = const [],
     this.batchMatch,
     this.declaredCorrectionTarget,
   });
@@ -641,6 +661,7 @@ class Submission {
         senderIsContributor: senderIsContributor,
         submissionCount: submissionCount,
         hasSeveralContributors: hasSeveralContributors,
+        contributorEmailGuessed: contributorEmailGuessed,
         weReplied: weReplied,
         fileError: fileError,
         fileErrorMessage: fileErrorMessage,
@@ -652,6 +673,7 @@ class Submission {
         song: song,
         registered: registered,
         appMatch: appMatch ?? this.appMatch,
+        alsoInApp: alsoInApp,
         batchMatch: batchMatch ?? this.batchMatch,
         declaredCorrectionTarget: declaredCorrectionTarget,
       );

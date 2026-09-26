@@ -3,11 +3,16 @@
 /// co do niego wpada.
 library;
 
+import 'dart:math';
+import 'dart:typed_data';
+
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 
-import 'similarity.dart';
+import 'evidence.dart';
+import 'level.dart';
+import 'profile.dart';
 
 /// Skąd jest piosenka, do której coś jest podobne. Na trafieniu, nie na
 /// indeksie: UI pokazuje jedną listę z dwóch indeksów, a przy każdej pozycji
@@ -38,26 +43,38 @@ class SongMatch<T extends SongCore> {
 
   late final MatchLevel? level = levelOf(similarities);
 
-  /// Pokrycie tekstu — do sortowania w obrębie poziomu.
-  late final double overlap =
-      similarities.whereType<TextOverlap>().firstOrNull?.jaccard ?? 0;
+  /// Jak blisko są teksty — do sortowania w obrębie poziomu.
+  late final double score = similarityScore(similarities);
 
   /// Gotowe zdanie do pastylki i raportu:
-  /// `„Barka” w apce: ten sam tytuł, tekst 82%`.
+  /// `„Barka” w apce: ten sam tytuł, 12 wspólnych wersów, 4 nowe`.
   String get detail => '„${song.title}” ${source.inText}: ${similaritiesText(similarities)}';
 }
 
-/// Od najsilniejszego: poziom, potem pokrycie tekstu malejąco. Jedna reguła
-/// dla listy z jednego indeksu i dla zszytej listy z kilku.
+/// Od najsilniejszego: poziom, potem bliskość tekstów. Jedna reguła dla
+/// listy z jednego indeksu i dla zszytej listy z kilku.
 int compareSongMatches(SongMatch a, SongMatch b) {
   final byLevel = (a.level?.index ?? MatchLevel.values.length)
       .compareTo(b.level?.index ?? MatchLevel.values.length);
   if (byLevel != 0) return byLevel;
-  return b.overlap.compareTo(a.overlap);
+  return b.score.compareTo(a.score);
 }
 
 /// Piosenki, z którymi porównujemy.
+///
+/// Dwa kroki: najpierw tanio wybieramy kandydatów (ten sam tytuł, id,
+/// nagranie, a z odwróconego indeksu słów — najbliższe tekstem), potem
+/// każdego porównujemy dokładnie ([compare]). Przy 2,5 tys. piosenek
+/// i przeliczaniu z każdym znakiem w edytorze to jest różnica między
+/// „nie widać” a „zacina się”.
 class SongIndex<T extends SongCore> {
+  /// Tylu najbliższych po słowach porównujemy dokładnie, choćby byli daleko.
+  static const int _nearest = 10;
+  /// …a ponad nich każdego, kto jest przynajmniej tak blisko (Jaccard słów
+  /// ważonych rzadkością). Piosenka z kilkunastoma wersjami w śpiewniku nie
+  /// straci żadnej.
+  static const double _nearEnough = 0.2;
+
   final List<T> songs;
   final List<SongProfile> profiles;
   final Map<String, List<int>> _byTitleKey = {};
@@ -65,18 +82,34 @@ class SongIndex<T extends SongCore> {
   /// Id bez członu `@wykonawca` → numery. Do drugiej rundy [byId] bez
   /// skanowania i bez `split` na każdym profilu.
   final Map<String, List<int>> _byBareId = {};
-  /// Tekst dosłownie (po zbiciu białych znaków) → numery. Jedyna droga do
-  /// `identical` dla piosenki, której tekst nie ma ani jednego słowa
-  /// (`♪ ♪`, same kropki) — zbiór słów jest wtedy pusty i odwrócony indeks
-  /// słów jej nie widzi.
-  final Map<String, List<int>> _byText = {};
-  /// Słowo → numery piosenek, w których występuje. Z niego liczymy przecięcia
-  /// zbiorów słów bez odwiedzania każdej piosenki — przy 2,5 tys. piosenek
-  /// i przeliczaniu z każdym znakiem w edytorze to jest różnica między
-  /// „nie widać” a „zacina się”.
+  final Map<String, List<int>> _byYoutube = {};
+  /// Tekst dosłownie → numery, tylko dla piosenek bez ani jednego słowa
+  /// (`♪ ♪`, same kropki): odwrócony indeks słów ich nie widzi, a to jedyna
+  /// droga do `identical`.
+  final Map<String, List<int>> _byWordlessText = {};
+  /// Słowo → numery piosenek, w których występuje.
   final Map<String, List<int>> _byWord = {};
 
-  SongIndex(this.songs) : profiles = [for (final s in songs) SongProfile(s)] {
+  SongIndex(List<T> songs) : this._(songs, [for (final s in songs) SongProfile(s)]);
+
+  /// Jak konstruktor, ale co [slice] oddaje wątek. Na webie `compute` nie ma
+  /// osobnego wątku, a odciski 2,5 tys. piosenek liczone jednym ciągiem
+  /// zamroziłyby stronę na start; tak strona żyje, a indeks dochodzi w tle.
+  static Future<SongIndex<T>> inSlices<T extends SongCore>(List<T> songs,
+      {Duration slice = const Duration(milliseconds: 12)}) async {
+    final profiles = <SongProfile>[];
+    final sw = Stopwatch()..start();
+    for (final s in songs) {
+      profiles.add(SongProfile(s));
+      if (sw.elapsed >= slice) {
+        await Future<void>.delayed(Duration.zero);
+        sw.reset();
+      }
+    }
+    return SongIndex._(songs, profiles);
+  }
+
+  SongIndex._(this.songs, this.profiles) {
     for (var i = 0; i < profiles.length; i++) {
       final p = profiles[i];
       if (p.id.isNotEmpty) {
@@ -86,7 +119,8 @@ class SongIndex<T extends SongCore> {
       for (final k in p.titleKeys) {
         _byTitleKey.putIfAbsent(k, () => []).add(i);
       }
-      if (p.text.isNotEmpty) _byText.putIfAbsent(p.text, () => []).add(i);
+      if (p.youtubeId.isNotEmpty) _byYoutube.putIfAbsent(p.youtubeId, () => []).add(i);
+      if (p.words.isEmpty && p.text.isNotEmpty) _byWordlessText.putIfAbsent(p.text, () => []).add(i);
       for (final w in p.words) {
         _byWord.putIfAbsent(w, () => []).add(i);
       }
@@ -125,81 +159,65 @@ class SongIndex<T extends SongCore> {
         similarities: compare(song, profiles[i]),
       );
 
-  /// Porównanie z **wskazaną** piosenką, nie z najbliższą. Tego używa
+  /// Porównanie ze **wskazaną** piosenką, nie z najbliższą. Tego używa
   /// piosenkomat, gdy apka powiedziała w zgłoszeniu, którą piosenkę autor
   /// poprawiał: wtedy nie ma czego zgadywać, a różnice liczymy względem
   /// właściwego pierwowzoru. `null`, gdy takiego id nie ma. Dokładnie po id,
   /// bez rundy po `@wykonawca` — narzędzie dostaje id z pliku i ma wiedzieć,
   /// gdy go nie ma.
-  SongMatch<T>? matchTo(String songId, SongProfile song,
-      {MatchSource source = MatchSource.app}) {
+  SongMatch<T>? matchTo(String songId, SongProfile song, {MatchSource source = MatchSource.app}) {
     final i = _byId[songId]?.first;
     if (i == null) return null;
     return _match(i, song, source);
   }
 
-  /// Pokrycie tekstu (Jaccard) z każdą piosenką, która dzieli z [song] choć
-  /// jedno słowo. Liczone z odwróconego indeksu: gęsty licznik wspólnych
-  /// słów, potem ten sam wzór, co [jaccard] — a nie 2,5 tys. przecięć
-  /// zbiorów. Piosenek bez wspólnego słowa nie ma w wyniku: ich pokrycie
-  /// to 0.
-  Map<int, double> _overlaps(SongProfile song) {
-    final shared = List<int>.filled(profiles.length, 0);
+  /// Rzadkość słowa: ln(1 + N/df), wygładzona tak, żeby mały indeks
+  /// (warsztat, paczka) nie zerował wag.
+  double _idf(int documents) => log(1 + (profiles.length + 1) / (documents + 1));
+
+  late final List<double> _idfSum = [
+    for (final p in profiles) p.words.fold(0.0, (a, w) => a + _idf(_byWord[w]!.length)),
+  ];
+
+  /// Najbliższe tekstem po słowach: Jaccard zbiorów słów ważonych rzadkością,
+  /// liczony z odwróconego indeksu — gęsty licznik, a nie 2,5 tys. przecięć
+  /// zbiorów. Częste słowa („i”, „się”, „nie”) ważą mało, więc nie ciągną
+  /// wszystkiego do wszystkiego.
+  Iterable<int> _nearestByWords(SongProfile song) {
+    final shared = Float64List(profiles.length);
+    final touched = <int>[];
+    var own = 0.0;
     for (final w in song.words) {
-      for (final i in _byWord[w] ?? const <int>[]) {
-        shared[i]++;
+      final posting = _byWord[w];
+      final weight = _idf(posting?.length ?? 0);
+      own += weight;
+      if (posting == null) continue;
+      for (final i in posting) {
+        if (shared[i] == 0) touched.add(i);
+        shared[i] += weight;
       }
     }
-    final out = <int, double>{};
-    for (var i = 0; i < shared.length; i++) {
-      if (shared[i] == 0) continue;
-      out[i] = jaccardFromCounts(shared[i], song.words.length, profiles[i].words.length);
-    }
-    return out;
+    final scored = [
+      for (final i in touched) (i, shared[i] / (own + _idfSum[i] - shared[i])),
+    ]..sort((a, b) => b.$2.compareTo(a.$2));
+    return [
+      for (var k = 0; k < scored.length; k++)
+        if (k < _nearest || scored[k].$2 >= _nearEnough) scored[k].$1,
+    ];
   }
 
-  /// Najbliższa piosenka: po tytule (przy kilku — najwyższy Jaccard), a gdy
-  /// tytuł nie pasuje — najbliższa tekstem, o ile ≥ [kSimilarText].
-  SongMatch<T>? closest(SongProfile song, {MatchSource source = MatchSource.app}) {
-    final byTitle = {
-      for (final k in song.titleKeys) ...?_byTitleKey[k],
-    };
-    final overlaps = _overlaps(song);
-
-    int? best;
-    var bestScore = -1.0;
-    for (final i in byTitle.isNotEmpty ? byTitle : overlaps.keys) {
-      final score = overlaps[i] ?? 0;
-      if (score > bestScore) {
-        best = i;
-        bestScore = score;
-      }
-    }
-    if (best == null) return null;
-    if (byTitle.isEmpty && bestScore < kSimilarText) return null;
-    return _match(best, song, source);
-  }
-
-  /// Kto w ogóle może mieć poziom. Każda gałąź [levelOf] wymaga jednego
-  /// z czterech: wspólnego tytułu, wspólnego id, pokrycia tekstu
-  /// ≥ [kSimilarText] albo — dla `identical` — dosłownie równego tekstu.
-  /// Reszty nie trzeba porównywać.
-  Set<int> _candidates(SongProfile song) {
-    final out = <int>{};
-    for (final k in song.titleKeys) {
-      out.addAll(_byTitleKey[k] ?? const []);
-    }
-    out.addAll(_indicesById(song.id));
-    if (song.text.isNotEmpty) out.addAll(_byText[song.text] ?? const []);
-    for (final e in _overlaps(song).entries) {
-      if (e.value >= kSimilarText) out.add(e.key);
-    }
-    return out;
-  }
+  /// Kto w ogóle może mieć poziom: wspólny tytuł, id, nagranie, dosłowny
+  /// tekst bez słów albo bliskość po słowach. Reszty nie trzeba porównywać.
+  Set<int> _candidates(SongProfile song) => {
+        for (final k in song.titleKeys) ...?_byTitleKey[k],
+        ..._indicesById(song.id),
+        if (song.youtubeId.isNotEmpty) ...?_byYoutube[song.youtubeId],
+        if (song.words.isEmpty && song.text.isNotEmpty) ...?_byWordlessText[song.text],
+        ..._nearestByWords(song),
+      };
 
   /// **Wszystkie** trafienia z poziomem, od najsilniejszego. To zasila belkę
-  /// i przeglądarkę — [closest] daje jedno, a człowiek chce zobaczyć każdą
-  /// kandydatkę.
+  /// i przeglądarkę — człowiek chce zobaczyć każdą kandydatkę.
   ///
   /// [exclude] wyłącza piosenki, których nie ma sensu porównywać: samą
   /// siebie (ten sam obiekt w warsztacie) i pierwowzór poprawki, który UI
@@ -215,6 +233,12 @@ class SongIndex<T extends SongCore> {
     out.sort(compareSongMatches);
     return out;
   }
+
+  /// Najsilniejsze trafienie — po treści, tytuł niczego tu nie przesądza:
+  /// piosenka o tym samym tytule i innym tekście przegrywa z piosenką o tym
+  /// samym tekście i innym tytule.
+  SongMatch<T>? closest(SongProfile song, {MatchSource source = MatchSource.app}) =>
+      matches(song, source: source).firstOrNull;
 }
 
 /// Którą piosenkę z [index] [song] **deklaruje**, że poprawia — albo `null`,

@@ -28,15 +28,16 @@ class ReviewCandidate {
   final String songId;
   final String title;
   final String sender;
-  /// Puste, gdy piosenki nie ma w pliku (plan i plik się rozjechały).
-  final Set<String> words;
+  /// Odcisk do porównań awaryjnych. `null`, gdy piosenki nie ma w pliku
+  /// (plan i plik się rozjechały).
+  final SongProfile? profile;
 
   ReviewCandidate({
     required this.threadId,
     required this.songId,
     required this.title,
     this.sender = '',
-    this.words = const {},
+    this.profile,
   });
 }
 
@@ -113,7 +114,7 @@ List<ReviewCandidate> collectCandidates(
           songId: e.value.songId,
           title: e.value.title,
           sender: e.value.sender,
-          words: textWords(find(e.value.songId)?.text ?? ''),
+          profile: switch (find(e.value.songId)) { final s? => SongProfile(s), null => null },
         ),
   ];
 }
@@ -229,11 +230,18 @@ Matched? _match(SongRaw song, List<ReviewCandidate> candidates) {
   ];
   if (byTitle.length == 1) return (byTitle.single, MatchedBy.title);
 
-  final words = textWords(song.text);
+  // Po przeglądzie tekst mógł się zmienić (poprawiona literówka, dopisana
+  // zwrotka), ale to ma być dalej ta sama piosenka — ta sama definicja, co
+  // przy wykrywaniu duplikatów.
+  final profile = SongProfile(song);
   ReviewCandidate? best;
-  var bestScore = kSameText;
+  var bestScore = -1.0;
   for (final c in byTitle.isEmpty ? candidates : byTitle) {
-    final score = jaccard(words, c.words);
+    final other = c.profile;
+    if (other == null) continue;
+    final evidence = compare(profile, other);
+    if (!(levelOf(evidence)?.isSameSong ?? false)) continue;
+    final score = similarityScore(evidence);
     if (score >= bestScore) {
       best = c;
       bestScore = score;

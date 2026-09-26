@@ -153,10 +153,13 @@ void main() {
 
     test('powiadamia przy starcie i przy stopie', () async {
       var n = 0;
-      ctrl.addListener(() => n++);
+      // Ta sama funkcja do zdjęcia: nowe `() => n++` to inny obiekt i nic by
+      // nie zdjęło, a kontroler jest singletonem — słuchacz przeżyłby test.
+      void listener() => n++;
+      ctrl.addListener(listener);
       await ctrl.play(PlaybackSource.youtube(song('a', yt: 'v')));
       await ctrl.stop();
-      ctrl.removeListener(() => n++);
+      ctrl.removeListener(listener);
       expect(n, greaterThanOrEqualTo(2));
     });
   });

@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/similarity/similarity.dart';
-import 'package:harcapp_core/song_book/similarity/song_index.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/song_book/song_element.dart';
 
@@ -49,16 +48,15 @@ void main() {
   });
 
   group('SongIndex.matches:', () {
-    test('wszystkie trafienia, od najsilniejszego, z dowodami', () {
-      // Ten sam tytuł co „Morze”, tekst z „Ogniska” — trafia w obie.
-      final probe = SongProfile(song('o!_probe', 'Morze', '$_ognisko\nDodatkowa linijka'));
+    test('wszystkie trafienia, od najsilniejszego — tekst przed tytułem', () {
+      // Ten sam tytuł co „Morze”, tekst z „Ogniska” i jeden wers więcej.
+      final probe = SongProfile(song('o!_probe', 'Morze', '$_ognisko\nDodatkowa linijka tekstu'));
       final got = app.matches(probe);
 
-      expect(got.map((m) => m.song.id), ['o!_morze', 'o!_ognisko@zespol']);
-      expect(got[0].level, MatchLevel.sameTitleDifferentText);
-      expect(got[0].similarities.whereType<SameTitle>(), hasLength(1));
-      expect(got[1].level, MatchLevel.similarText);
-      expect(got[1].overlap, greaterThanOrEqualTo(kSimilarText));
+      expect(got.map((m) => m.song.id), ['o!_ognisko@zespol', 'o!_morze']);
+      expect(got[0].level, MatchLevel.longer, reason: 'całe „Ognisko” jest w sprawdzanej, ona ma więcej');
+      expect(got[1].level, MatchLevel.sameTitleDifferentText);
+      expect(got[1].similarities.whereType<SameTitle>(), hasLength(1));
       expect(got.every((m) => m.source == MatchSource.app), isTrue);
     });
 
@@ -68,14 +66,15 @@ void main() {
       expect(got.single.level, MatchLevel.sameTitleDifferentText);
     });
 
-    test('w obrębie poziomu wyżej większe pokrycie tekstu', () {
+    test('w obrębie poziomu i między poziomami — bliższy tekst wyżej', () {
       final index = SongIndex<SongRaw>([
+        song('b', 'Ognisko B', '$_ognisko\nJedna nowa linijka tekstu\nI druga nowa linijka\nI trzecia na koniec'),
         song('a', 'Ognisko A', _ognisko),
-        song('b', 'Ognisko B', '$_ognisko\nJedna\nDwie\nTrzy\nCztery\nPięć'),
       ]);
       final got = index.matches(SongProfile(song('p', 'Inny tytuł', _ognisko)));
       expect(got.map((m) => m.song.id), ['a', 'b']);
-      expect(got[0].overlap, greaterThan(got[1].overlap));
+      expect(got[0].level, MatchLevel.sameSong);
+      expect(got[1].level, MatchLevel.shorter, reason: 'sprawdzana to fragment „Ogniska B”');
     });
 
     test('exclude wyłącza wskazane piosenki, np. samą siebie', () {
@@ -88,7 +87,7 @@ void main() {
     test('source jedzie na trafieniu i do detail', () {
       final got = app.matches(SongProfile(song('o!_morze', 'Morze', _morze, hidTitles: ['Żagle'])), source: MatchSource.workspace);
       expect(got.single.source, MatchSource.workspace);
-      expect(got.single.detail, startsWith('„Morze” w warsztacie: to samo id, ten sam tytuł'));
+      expect(got.single.detail, '„Morze” w warsztacie: to samo id, ten sam tytuł, ten sam tekst, te same chwyty');
       expect(got.single.level, MatchLevel.identical);
     });
 
@@ -96,12 +95,13 @@ void main() {
       final got = app.matches(SongProfile(song('o!_gory', 'Zupełnie co innego', _morze)));
       // „Morze” po tekście przed „Góry” po id.
       expect(got.map((m) => m.song.id), ['o!_morze', 'o!_gory']);
+      expect(got[0].level, MatchLevel.sameSong, reason: 'ten sam tekst pod innym tytułem to ta sama piosenka');
       expect(got[1].level, MatchLevel.sameIdDifferentSong);
       expect(got[1].similarities.whereType<SameId>(), hasLength(1));
     });
 
-    test('kandydaci z odwróconego indeksu dają to samo, co pełne przejście', () {
-      final probe = SongProfile(song('p', 'Morze', '$_ognisko\nŻagle na wietrze'));
+    test('kandydaci z indeksu dają to samo, co pełne przejście', () {
+      final probe = SongProfile(song('p', 'Morze', '$_ognisko\nŻagle na wietrze i sól na wargach'));
       final fast = app.matches(probe).map((m) => m.song.id).toList();
       final naive = [
         for (final s in app.songs)
@@ -110,7 +110,7 @@ void main() {
       expect(fast.toSet(), naive.toSet());
     });
 
-    test('identyczne, choć tekst bez ani jednego słowa — nie wypada z prefiltra', () {
+    test('identyczne, choć tekst bez ani jednego słowa — nie wypada z kandydatów', () {
       final a = song('a', '', '♪ ♪ ♪');
       final b = song('b', '', '♪ ♪ ♪');
       expect(SongProfile(a).words, isEmpty);
@@ -118,16 +118,33 @@ void main() {
       expect(got.single.level, MatchLevel.identical);
     });
 
+    test('ten sam film YouTube łączy, choćby tekst spisano inaczej', () {
+      final a = song('a', 'Pierwsza', _ognisko)..youtubeVideoId = 'abcdefghijk';
+      final b = song('b', 'Druga', _gory)..youtubeVideoId = 'abcdefghijk';
+      final got = SongIndex<SongRaw>([a]).matches(SongProfile(b));
+      expect(got.single.level, MatchLevel.related);
+      expect(got.single.similarities.whereType<SameRecording>(), hasLength(1));
+    });
+
     test('nic podobnego → pusto', () {
       expect(app.matches(SongProfile(song('x', 'Nowa', 'Tekst bez żadnego wspólnego słowa z resztą'))), isEmpty);
+    });
+
+    test('jeden krótki wers to za mało, żeby cokolwiek wnioskować', () {
+      // Wpisany w edytorze pierwszy wers „jest w całości” w piosence — ale
+      // tak samo byłby w każdej innej, która go ma.
+      final got = app.matches(SongProfile(song('x', 'Nowa', 'Opowiada starodawne dzieje')));
+      expect(got, isEmpty);
     });
   });
 
   group('SongIndex.closest / matchTo:', () {
-    test('closest: po tytule, gdy jest; inaczej po tekście ≥ 50%', () {
+    test('closest: najsilniejsze po treści, tytuł dopiero bez treści', () {
       expect(app.closest(SongProfile(song('x', 'Morze', 'nic')))?.song.id, 'o!_morze');
       expect(app.closest(SongProfile(song('x', 'Inaczej', _gory)))?.song.id, 'o!_gory');
       expect(app.closest(SongProfile(song('x', 'Inaczej', 'zupełnie obcy tekst bez słów wspólnych'))), isNull);
+      // Tytuł „Morze”, tekst „Gór”: wygrywa tekst.
+      expect(app.closest(SongProfile(song('x', 'Morze', _gory)))?.song.id, 'o!_gory');
     });
 
     test('matchTo: ze wskazaną, nie najbliższą', () {

@@ -22,11 +22,11 @@ void main() {
       expect(levelOf(s), MatchLevel.identical);
     });
 
-    test('Jaccard 1.0 to nie identyczna: zamieniona kolejność wersów → sameSong', () {
-      final a = SongProfile(sampleSong(lyrics: 'Ala ma kota\nKot ma Ale'));
-      final b = SongProfile(sampleSong(lyrics: 'Kot ma Ale\nAla ma kota'));
+    test('te same wersy to nie identyczna: zamieniona kolejność → sameSong', () {
+      final a = SongProfile(sampleSong(lyrics: _a));
+      final b = SongProfile(sampleSong(lyrics: _a.split('\n').reversed.join('\n')));
       final s = compare(a, b);
-      expect(s.whereType<TextOverlap>().single.jaccard, 1.0);
+      expect((s.sharedLines!.coverage(), s.sharedLines!.otherCoverage()), (1.0, 1.0));
       expect(s.whereType<SameText>(), isEmpty);
       expect(levelOf(s), MatchLevel.sameSong);
     });
@@ -48,10 +48,12 @@ void main() {
       expect(levelOf(s), MatchLevel.sameSong);
     });
 
-    test('inne chwyty → sameTextDifferentChords', () {
+    test('inne chwyty → sameSong, a o chwytach mówi dowód', () {
       final a = SongProfile(sampleSong(lyrics: _a, chordsText: 'a d e\na d e'));
       final b = SongProfile(sampleSong(lyrics: _a, chordsText: 'C G a\nC G a'));
-      expect(levelOf(compare(a, b)), MatchLevel.sameTextDifferentChords);
+      final s = compare(a, b);
+      expect(levelOf(s), MatchLevel.sameSong);
+      expect(s.sameChordsUpToOrder, isFalse);
     });
 
     test('ten sam tytuł, inny tekst → sameTitleDifferentText', () {
@@ -59,23 +61,24 @@ void main() {
           MatchLevel.sameTitleDifferentText);
     });
 
-    test('inny tytuł, podobny tekst → similarText; inny → null', () {
+    test('inny tytuł, ten sam tekst i wers więcej → shorter; inny → null', () {
       // Różne id: helper daje wszystkim `tmp`, a wspólne id to osobny dowód.
       final a = SongProfile(sampleSong(id: 'a', title: 'Ognisko', lyrics: _a));
       final b = SongProfile(sampleSong(id: 'b', title: 'Knieje', lyrics: '$_a\nJedna nowa linijka'));
-      expect(levelOf(compare(a, b)), MatchLevel.similarText);
+      expect(levelOf(compare(a, b)), MatchLevel.shorter, reason: 'całe „Ognisko” jest w „Kniejach”');
+      expect(levelOf(compare(b, a)), MatchLevel.longer);
       final c = SongProfile(sampleSong(id: 'c', title: 'Morze', lyrics: _b));
       expect(levelOf(compare(a, c)), isNull);
     });
 
-    test('to samo id, poza tym nic → sameIdDifferentSong; podobny tekst wygrywa', () {
+    test('to samo id, poza tym nic → sameIdDifferentSong; treść wygrywa', () {
       final a = SongProfile(sampleSong(id: 'x', title: 'Ognisko', lyrics: _a));
       final c = SongProfile(sampleSong(id: 'x', title: 'Morze', lyrics: _b));
       final s = compare(a, c);
       expect(s.whereType<SameId>(), hasLength(1));
       expect(levelOf(s), MatchLevel.sameIdDifferentSong);
       final b = SongProfile(sampleSong(id: 'x', title: 'Knieje', lyrics: '$_a\nJedna nowa linijka'));
-      expect(levelOf(compare(a, b)), MatchLevel.similarText);
+      expect(levelOf(compare(a, b)), MatchLevel.shorter);
     });
 
     test('null == [] w metadanych', () {
@@ -136,13 +139,46 @@ void main() {
       expect(stateLabelsFor(got), [kLabelNeedsReview, NeedsReviewKind.duplicateInApp.label]);
     });
 
-    test('inny tytuł, podobny tekst → similar-text-in-app z nazwą pierwowzoru', () async {
+    test('inny tytuł, dopisana zwrotka → more-verses-than-app z nazwą pierwowzoru', () async {
       final got = classify(
         msgFrom(await completeEmail(song: sampleSong(title: 'Płonie ognisko', lyrics: '$_a\nDodatkowa linijka'))),
         book: bookWith([sampleSong(title: 'Ognisko', lyrics: _a)]),
       );
-      expect(issuesOf(got), [SongIssue.similarTextInApp]);
-      expect(detailOf(got, SongIssue.similarTextInApp), contains('„Ognisko”'));
+      expect(issuesOf(got), [SongIssue.moreVersesThanApp]);
+      expect(detailOf(got, SongIssue.moreVersesThanApp), contains('„Ognisko”'));
+      expect(stateLabelsFor(got), [kLabelNeedsReview, NeedsReviewKind.undeclaredCorrection.label],
+          reason: 'dopisane zwrotki to najczęściej poprawka wysłana jako nowa');
+    });
+
+    test('fragment piosenki z apki → fewer-verses-than-app', () async {
+      final got = classify(
+        msgFrom(await completeEmail(song: sampleSong(title: 'Inny', lyrics: _a.split('\n').take(3).join('\n')))),
+        book: bookWith([sampleSong(title: 'Ognisko', lyrics: '$_a\n$_b')]),
+      );
+      expect(issuesOf(got), [SongIssue.fewerVersesThanApp]);
+    });
+
+    test('połowa wersów wspólna → variant-of-app', () async {
+      final half = _a.split('\n').take(2).join('\n');
+      final got = classify(
+        msgFrom(await completeEmail(song: sampleSong(title: 'Inny', lyrics: '$half\nZupełnie nowy wers o czymś innym\nI jeszcze jeden nowy na koniec'))),
+        book: bookWith([sampleSong(title: 'Ognisko', lyrics: _a)]),
+      );
+      expect(issuesOf(got), [SongIssue.variantOfApp]);
+    });
+
+    test('dwie wersje w apce → pastylka wymienia obie', () async {
+      final got = classify(
+        msgFrom(await completeEmail(song: sampleSong(title: 'Nowy tytuł', lyrics: _a))),
+        book: bookWith([
+          sampleSong(id: 'o!_a', title: 'Ognisko', lyrics: _a),
+          sampleSong(id: 'o!_b', title: 'Ognisko II', lyrics: '$_a\nJedna nowa linijka'),
+        ]),
+      );
+      expect(got.submission.appMatch?.songId, 'o!_a');
+      expect(got.submission.alsoInApp.map((m) => m.songId), ['o!_b']);
+      final detail = got.issues.single.detail!;
+      expect(detail, allOf(contains('„Ognisko”'), contains('też „Ognisko II”')));
     });
 
     test('inny tytuł, inny tekst → czysty kandydat', () async {
@@ -338,6 +374,19 @@ void main() {
       expect(issuesOf(out[0]), contains(SongIssue.similarTextInBatch));
     });
 
+    test('ta sama piosenka pod dwoma tytułami → jedna grupa, starsza odpada', () async {
+      final out = classifyBatch([
+        msgFrom(await older(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a))), id: 'old'),
+        msgFrom(await completeEmail(song: sampleSong(title: 'Płonie ognisko', lyrics: _a)), id: 'new'),
+      ], book: SongBook.empty);
+      final byId = {for (final x in out) x.message.id: x};
+      // Ten sam tekst, różne tytuły: w grupie po treści — nie identyczne
+      // (tytuł inny), więc obie do pliku, wskazując siebie nawzajem.
+      expect(byId['old']!.destination, Destination.candidateNew);
+      expect(detailOf(byId['old']!, SongIssue.similarTextInBatch), contains('[new]'));
+      expect(detailOf(byId['new']!, SongIssue.similarTextInBatch), contains('[old]'));
+    });
+
     test('nowa i poprawka nie zlewają się w jedną grupę', () async {
       final out = classifyBatch([
         msgFrom(await completeEmail(song: sampleSong(lyrics: _a)), id: 'a'),
@@ -347,8 +396,8 @@ void main() {
     });
   });
 
-  test('jaccard i słowa', () {
-    expect(jaccard(textWords('Ala ma kota'), textWords('ala MA kota!')), 1.0);
-    expect(jaccard(textWords(''), textWords('x')), 0);
+  test('słowa po normalizacji', () {
+    expect(textWords('Ala ma kota'), textWords('ala MA kota!'));
+    expect(textWords(''), isEmpty);
   });
 }

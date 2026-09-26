@@ -183,15 +183,19 @@ Submission buildSubmission(
           extractCorrectionMessage(rep.body) != null;
   final sender =
       parsed == null ? _senderFromHeader(rep) : _senderWithBodyFallback(rep, parsed);
+  // Zgoda to osobny fakt od formatu: stara apka o nią nie pytała, więc jej
+  // nie ma — tak samo, jak gdy ktoś ją wykreślił w nowszym formacie.
   final rules = parsed?.acceptedRulesVersion?.trim();
-  final consent = oldApp ? kOldAppRulesVersion : (rules?.isEmpty ?? true) ? null : rules;
+  final consent = (rules?.isEmpty ?? true) ? null : rules;
 
   final senderIsContributor = parsed?.senderIsContributor ?? true;
   final contributorCards =
       song == null ? 0 : song.contribRefs.where((c) => c.person != null).length;
+  var contributorEmailGuessed = false;
   if (song != null && parsed != null) {
-    _enrich(song, parsed,
+    contributorEmailGuessed = _enrich(song, parsed,
         sender: sender,
+        consent: consent,
         threadId: rep.threadId,
         date: rep.date,
         // Stare formaty nie niosą `sender_is_contributor`, więc zostaje im
@@ -214,9 +218,12 @@ Submission buildSubmission(
       isCorrection ? (parsed?.correctedSongId ?? song?.correctedSongId)?.trim() : null;
   final declared = (declaredRaw?.isEmpty ?? true) ? null : declaredRaw;
   AppMatch? appMatch;
+  var alsoInApp = <AppMatch>[];
   if (profile != null) {
+    final found = book.strongest(profile);
     if (declared != null) appMatch = book.matchTo(declared, profile);
-    appMatch ??= book.closest(profile);
+    appMatch ??= found.firstOrNull;
+    alsoInApp = [for (final m in found) if (m.songId != appMatch?.songId) m].take(2).toList();
   }
   return Submission(
     threadId: rep.threadId,
@@ -231,6 +238,7 @@ Submission buildSubmission(
     senderIsContributor: senderIsContributor,
     submissionCount: parsed?.submissionCount ?? 1,
     hasSeveralContributors: file.hasFile && contributorCards > 1,
+    contributorEmailGuessed: contributorEmailGuessed,
     weReplied: weReplied || ordered.any(_isOurs),
     fileError: file.error?.kind,
     fileErrorMessage: file.error?.message,
@@ -243,6 +251,7 @@ Submission buildSubmission(
     song: song,
     registered: parsed?.registered,
     appMatch: appMatch,
+    alsoInApp: alsoInApp,
     declaredCorrectionTarget: declared,
   );
 }
@@ -261,11 +270,11 @@ EmailShape _shapeOf(SubmissionFileRead file, ParsedContribEmail? parsed) {
   return (parsed?.isNewFormat ?? true) ? EmailShape.fenced : EmailShape.legacy;
 }
 
-/// Porównanie między zgłoszeniami paczki. Dwa przejścia: najpierw grupy po
-/// kluczu zależnym od `kind` (tytuł dla nowych, `correction_target` dla
-/// poprawek — poprawka może właśnie zmieniać tytuł), w grupie identyczne
-/// zlewają się do najnowszej; potem parami `similarText` między różnymi
-/// tytułami.
+/// Porównanie między zgłoszeniami paczki. Dwa przejścia: najpierw grupy
+/// zależne od `kind` (nowe — ten sam tytuł główny albo ta sama piosenka po
+/// treści; poprawki — `correction_target`, bo poprawka może właśnie zmieniać
+/// tytuł), w grupie identyczne zlewają się do najnowszej; potem parami —
+/// podobne treścią ([MatchLevel.byContent]) między grupami.
 List<Submission> matchWithinBatch(List<Submission> subs) {
   // Mejl z kilkoma piosenkami nie idzie do pliku, więc nie może być też
   // punktem odniesienia — żadna pastylka nie wskaże piosenki, której nie ma.
@@ -288,18 +297,40 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
         sameMainTitle: sameMainTitle(a, b),
       );
 
+  /// Klucz grupy poprawki: cel, a bez celu — tytuł główny.
   String keyOf(Submission s) {
-    final key = s.isCorrection && s.correctionTarget != null
+    final key = s.correctionTarget != null
         ? 'target:${s.correctionTarget}'
         : 'title:${searchableString(s.title)}';
     return '${s.kind.id}|$key';
   }
 
+  // Nowe łączą się w grupę po tytule głównym **albo** po treści: ta sama
+  // piosenka pod innym tytułem to dalej ta sama piosenka, więc spotyka się
+  // w grupie, a identyczne zlewają się do najnowszej. Grupa to spójna
+  // składowa — A~B i B~C to jedna grupa, choćby A i C nic nie łączyło.
+  final fresh = [for (final s in subs) if (comparable(s) && !s.isCorrection) s];
+  final parent = [for (var i = 0; i < fresh.length; i++) i];
+  int root(int i) => parent[i] == i ? i : parent[i] = root(parent[i]);
+  for (var i = 0; i < fresh.length; i++) {
+    for (var j = i + 1; j < fresh.length; j++) {
+      final a = fresh[i], b = fresh[j];
+      final same = sameMainTitle(a, b) ||
+          (levelOf(compare(profiles[a.threadId]!, profiles[b.threadId]!))?.isSameSong ?? false);
+      if (same) parent[root(i)] = root(j);
+    }
+  }
+  final groupOf = <String, String>{
+    for (var i = 0; i < fresh.length; i++) fresh[i].threadId: 'new|${fresh[root(i)].threadId}',
+    for (final s in subs)
+      if (comparable(s) && s.isCorrection) s.threadId: keyOf(s),
+  };
+
   // Grupy.
   final groups = <String, List<Submission>>{};
   for (final s in subs) {
     if (!comparable(s)) continue;
-    groups.putIfAbsent(keyOf(s), () => []).add(s);
+    groups.putIfAbsent(groupOf[s.threadId]!, () => []).add(s);
   }
 
   // Odrzucone jako duplikat nowszego identycznego. Nie wskazuje ich żadna
@@ -336,7 +367,7 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
       var bestScore = -1.0;
       for (final o in survivors) {
         if (o.threadId == s.threadId) continue;
-        final score = jaccard(profiles[s.threadId]!.words, profiles[o.threadId]!.words);
+        final score = similarityScore(compare(profiles[s.threadId]!, profiles[o.threadId]!));
         if (score > bestScore) {
           best = o;
           bestScore = score;
@@ -358,12 +389,12 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
   for (var i = 0; i < list.length; i++) {
     for (var j = i + 1; j < list.length; j++) {
       final a = list[i], b = list[j];
-      if (a.kind != b.kind || keyOf(a) == keyOf(b)) continue;
+      if (a.kind != b.kind || groupOf[a.threadId] == groupOf[b.threadId]) continue;
       // Tytuł w paczce to tytuł główny; wspólny tytuł ukryty łapie tekst.
       // Nowe o tym samym tytule głównym są w jednej grupie — tu ich nie ma.
       final sameTitle = sameMainTitle(a, b);
-      final score = jaccard(profiles[a.threadId]!.words, profiles[b.threadId]!.words);
-      if (!sameTitle && score < kSimilarText) continue;
+      final byContent = levelOf(compare(profiles[a.threadId]!, profiles[b.threadId]!))?.byContent ?? false;
+      if (!sameTitle && !byContent) continue;
       if (out[a.threadId]!.batchMatch == null) out[a.threadId] = a.copyWith(batchMatch: matchOf(a, b));
       if (out[b.threadId]!.batchMatch == null) out[b.threadId] = b.copyWith(batchMatch: matchOf(b, a));
     }
@@ -425,6 +456,9 @@ Decision decide(Submission s) {
       issues.add(PiosenkomatIssue(issue, detail: detail));
 
   // Wspólne.
+  if (s.contributorEmailGuessed) {
+    add(SongIssue.guessedContributorEmail, 'adres ${s.sender} doklejony do jedynej karty');
+  }
   if (s.hasSeveralContributors) {
     add(SongIssue.severalContributors, 'przypisz wkład ręcznie');
   }
@@ -473,19 +507,32 @@ Decision decide(Submission s) {
   if (!song.hasChords) add(SongIssue.missingChords, _chordsDetail(song));
   if ((song.youtubeVideoId ?? '').trim().isEmpty) add(SongIssue.missingYoutube);
 
+  // Pastylka mówi o najsilniejszym trafieniu, a kolejne dopisuje — dwie
+  // piosenki z apki podobne do zgłoszenia to często dwie wersje tej samej.
+  final appDetail = [
+    if (app != null) app.detail,
+    for (final m in s.alsoInApp)
+      if (m.level?.byContent ?? false) 'też ${m.detail}',
+  ].join('; ');
   switch (appLevel) {
     case MatchLevel.sameSong:
-      add(SongIssue.metadataDifferFromApp, app!.detail);
-    case MatchLevel.sameTextDifferentChords:
-      add(SongIssue.chordsDifferFromApp, app!.detail);
+      // Te same wersy: różni się coś, co pokazuje pastylka. Chwyty tylko
+      // w innej kolejności (przesunięty refren) to wciąż te same chwyty.
+      add(app!.similarities.sameChordsUpToOrder ? SongIssue.metadataDifferFromApp : SongIssue.chordsDifferFromApp,
+          appDetail);
+    case MatchLevel.longer:
+      add(SongIssue.moreVersesThanApp, appDetail);
+    case MatchLevel.shorter:
+      add(SongIssue.fewerVersesThanApp, appDetail);
+    case MatchLevel.variant:
+      add(SongIssue.variantOfApp, appDetail);
+    case MatchLevel.related:
+      add(SongIssue.similarTextInApp, appDetail);
     case MatchLevel.sameTitleDifferentText:
-      add(SongIssue.sameTitleInApp, app!.detail);
-    case MatchLevel.similarText:
-      add(SongIssue.similarTextInApp, app!.detail);
+      add(SongIssue.sameTitleInApp, appDetail);
     case MatchLevel.sameIdDifferentSong:
-      // `closest` szuka po tytule i tekście, nie po id — nowa piosenka nie
-      // dostanie trafienia „tylko id”. Gdyby jednak: to konflikt nazwy
-      // pliku, który `dedupIds` i tak rozwiąże sufiksem, nie duplikat.
+      // Samo id nic nie mówi o treści: to konflikt nazwy pliku, który
+      // `dedupIds` i tak rozwiąże sufiksem, nie duplikat.
     case MatchLevel.identical:
     case null:
       break;
@@ -707,10 +754,14 @@ String? _senderWithBodyFallback(ContribMessage m, ParsedContribEmail parsed) {
 ///
 /// Robimy to także dla zgłoszeń z uwagami — one też jadą do pliku, a bez
 /// `email_thread_id` przegląd nie wiedziałby, z którego wątku wróciła piosenka.
-void _enrich(
+///
+/// `true`, gdy adres nadawcy trafił do karty na zgadywanie — jedyna karta bez
+/// adresu, a format nie mówi, czy nadawca to osoba dodająca.
+bool _enrich(
   SongRaw song,
   ParsedContribEmail parsed, {
   required String? sender,
+  required String? consent,
   required String threadId,
   DateTime? date,
   bool attachSender = true,
@@ -722,9 +773,7 @@ void _enrich(
     email: fromEmail?.email ?? sender ?? '',
     contributionDate: fromEmail?.contributionDate ?? date ?? DateTime.now(),
     acceptedContributionRulesVersion:
-        fromEmail?.acceptedContributionRulesVersion
-            ?? parsed.acceptedRulesVersion
-            ?? kOldAppRulesVersion,
+        fromEmail?.acceptedContributionRulesVersion ?? consent ?? kNoConsentRulesVersion,
     emailThreadId: threadId,
   );
   if (!attachSender) {
@@ -738,6 +787,7 @@ void _enrich(
     if (missing) song.contribRefs.add(ContributorRef(person: person));
   }
 
+  var guessed = false;
   final known = sender == null || song.contribRefs
       .any((c) => (c.emailRef ?? '').toLowerCase() == sender);
   if (!known && attachSender) {
@@ -760,6 +810,8 @@ void _enrich(
         emailRef: sender,
         userKeyRef: c.userKeyRef,
       );
+      // Z `sender_is_contributor: true` to fakt z pliku, bez niego — domysł.
+      guessed = parsed.senderIsContributor == null;
     } else {
       song.contribRefs.add(ContributorRef(
         person: parsed.registered?.person,
@@ -768,6 +820,7 @@ void _enrich(
     }
   }
   song.id = 'o!_${song.generateFileName(withPerformer: true)}';
+  return guessed;
 }
 
 /// Jedna wiadomość → jedno zgłoszenie z decyzją. Wygoda do testów i `explain`.

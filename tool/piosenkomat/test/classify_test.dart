@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
+import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:piosenkomat/classify.dart';
@@ -43,6 +44,19 @@ void main() {
       expect(refs, hasLength(1), reason: 'druga pozycja z samym mejlem to bug, który irytował przy przeglądzie');
       expect(refs.single.person?.name, 'Patrycja Dudzinska');
       expect(refs.single.emailRef, 'jan.testowy@example.com');
+      // Stary format nie mówi, czy nadawca to ta osoba — domysł ma być widać.
+      expect(issuesOf(got), contains(SongIssue.guessedContributorEmail));
+      expect(got.labels, contains(NeedsReviewKind.guessedContributor.label));
+    });
+
+    test('plik z sender_is_contributor: karta dostaje adres bez domysłu', () {
+      final song = sampleSong()..contribRefs = [ContributorRef(person: card('Patrycja Dudzinska'))];
+      final mail = submissionEmail(submissions: [
+        SongSubmission(kind: SubmissionKind.newSong, song: song, senderIsContributor: true),
+      ]);
+      final got = classify(msgFrom(mail.eml), book: SongBook.empty);
+      expect(got.song!.contribRefs.single.emailRef, 'jan.testowy@example.com');
+      expect(issuesOf(got), isNot(contains(SongIssue.guessedContributorEmail)));
     });
 
     test('kilka kart bez adresu → nie zgadujemy, mejl osobno', () async {
@@ -277,12 +291,14 @@ void main() {
           '${jsonEncode({'o!_x': sampleSong().toApiJsonMap(withId: false)})}\n',
     );
     final got = classify(oldApp, book: SongBook.empty);
-    expect(got.isClean, isTrue, reason: 'stary format sam w sobie nie blokuje');
     expect(got.submission.isOldApp, isTrue);
-    expect(got.submission.consentVersion, kOldAppRulesVersion);
-    expect(got.labels, [kLabelReadyToAdd, kLabelReplyOldApp]);
     expect(got.song!.piosenkomatData!.isOldApp, isTrue);
-    expect(got.issues, isEmpty, reason: 'stara apka to wiedza o nadawcy, nie zarzut');
+    // Zgoda to osobny fakt od formatu: stara apka o nią nie pytała, więc jej nie ma.
+    expect(got.submission.consentVersion, isNull);
+    expect(issuesOf(got), [SongIssue.noConsent],
+        reason: 'stara apka to wiedza o nadawcy, nie zarzut — zarzutem jest brak zgody');
+    expect(got.song!.contributorData!.acceptedContributionRulesVersion, kNoConsentRulesVersion);
+    expect(got.labels, contains(kLabelReplyOldApp));
   });
 
   test('emailFromHeader', () {
