@@ -110,6 +110,8 @@ class TextSizeProvider extends ChangeNotifier{
   static TextSizeProvider of(BuildContext context) => Provider.of<TextSizeProvider>(context, listen: false);
 
   static const double defFontSize = 18.0;
+  /// Krok zmiany rozmiaru — przyciskami i przy dopasowaniu do szerokości.
+  static const double fontSizeStep = 0.5;
   static const String songFontFamily = 'Roboto';
   static const double songLineHeight = 1.2;
 
@@ -165,12 +167,12 @@ class TextSizeProvider extends ChangeNotifier{
         text,
         chords,
         lineNum,
-        _value[_maxWidth]! + 0.5);
+        _value[_maxWidth]! + fontSizeStep);
 
     bool changedSize = true;
     if(scaleFactor == 1){
       if(_value[_maxWidth]! >= 24) changedSize = false;
-      else _value[_maxWidth] = _value[_maxWidth]! + 0.5;
+      else _value[_maxWidth] = _value[_maxWidth]! + fontSizeStep;
     }else
       changedSize = false;
 
@@ -182,8 +184,8 @@ class TextSizeProvider extends ChangeNotifier{
   bool down(){
 
     bool changedSize = true;
-    if(_value[_maxWidth]! - 0.5 >= Dimen.textSizeLimit)
-      _value[_maxWidth] = _value[_maxWidth]! - 0.5;
+    if(_value[_maxWidth]! - fontSizeStep >= Dimen.textSizeLimit)
+      _value[_maxWidth] = _value[_maxWidth]! - fontSizeStep;
     else
       changedSize = false;
 
@@ -259,24 +261,18 @@ class TextSizeProvider extends ChangeNotifier{
   }
 
   static double fits(double maxWidth, TextScaler textScaler, String text, String? chords, String nums, double fontSize){
-    if (!_lyricsWrap(
-      maxWidth: maxWidth,
-      textScaler: textScaler,
-      text: text,
-      chords: chords,
-      nums: nums,
-      fontSize: fontSize,
-    )) return 1;
-
-    double size = fontSize;
-    while (size - 0.5 >= Dimen.textSizeLimit && _lyricsWrap(
+    bool wrapsAt(double size) => _lyricsWrap(
       maxWidth: maxWidth,
       textScaler: textScaler,
       text: text,
       chords: chords,
       nums: nums,
       fontSize: size,
-    )) size -= 0.5;
+    );
+    if (!wrapsAt(fontSize)) return 1;
+
+    double size = fontSize;
+    while (size - fontSizeStep >= Dimen.textSizeLimit && wrapsAt(size)) size -= fontSizeStep;
 
     return size / fontSize;
   }

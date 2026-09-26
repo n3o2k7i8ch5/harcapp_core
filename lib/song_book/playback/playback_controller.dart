@@ -60,9 +60,10 @@ class SongbookPlaybackController extends ChangeNotifier {
   /// funkcję budującą `MediaItem`; bez niej nagranie gra bez powiadomienia.
   Object? Function(PlaybackSource source)? mediaTagBuilder;
 
-  PlaybackSession _defaultSessionFactory(PlaybackSource source) => source.isYoutube
-      ? YoutubePlaybackSession(source)
-      : Mp3PlaybackSession(source, mediaTag: mediaTagBuilder?.call(source));
+  PlaybackSession _defaultSessionFactory(PlaybackSource source) => switch (source) {
+        YoutubeSource() => YoutubePlaybackSession(source),
+        Mp3Source() => Mp3PlaybackSession(source, mediaTag: mediaTagBuilder?.call(source)),
+      };
 
   PlaybackSessionFactory? _sessionFactory;
 

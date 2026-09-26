@@ -213,13 +213,13 @@ class Mp3PlaybackSession extends PlaybackSession {
 
   static final AudioPlayer _player = AudioPlayer();
 
-  Mp3PlaybackSession(super.source, {this.mediaTag}) : assert(!source.isYoutube);
+  Mp3PlaybackSession(Mp3Source super.source, {this.mediaTag});
 
   final Object? mediaTag;
 
   final List<StreamSubscription> _subs = [];
 
-  SongAudio get _audio => source.audio!;
+  SongAudio get _audio => (source as Mp3Source).audio;
 
   @override
   Future<void> start() async {
@@ -287,7 +287,7 @@ class Mp3PlaybackSession extends PlaybackSession {
 /// patrząc na [controller]. Dopóki kafelek nie jest zbudowany, film nie ruszy.
 class YoutubePlaybackSession extends PlaybackSession {
 
-  YoutubePlaybackSession(super.source) : assert(source.isYoutube);
+  YoutubePlaybackSession(YoutubeSource super.source);
 
   yt.YoutubePlayerController? _controller;
 

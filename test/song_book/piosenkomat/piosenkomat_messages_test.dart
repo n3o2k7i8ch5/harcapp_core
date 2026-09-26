@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+import 'package:harcapp_core/song_book/submission/submission_email.dart';
 
 // Fragment prawdziwego zgłoszenia z apki: belka, dopisek, podpowiedź
 // w nawiasach, a potem to, czego człowiek nie pisał.
@@ -39,6 +40,9 @@ void main() {
     test('tnie też przy karcie osoby dodającej i propozycji poprawki', () {
       expect(stripSubmissionTemplate('Dopisek\n\n### Osoba dodająca:\n{}'), 'Dopisek');
       expect(stripSubmissionTemplate('Dopisek\n\n### Propozycja poprawki:\n```text\n```'), 'Dopisek');
+      // Kształt z załącznikiem: belki z `submission_email.dart`, też bez `>`.
+      expect(stripSubmissionTemplate('Dopisek\n\n$kSubmissionConsentBar\nZnam i akceptuję…'), 'Dopisek');
+      expect(stripSubmissionTemplate('Dopisek\n\n$kSubmissionStructuralBar\nsubmission.hrcpsngsbm'), 'Dopisek');
     });
   });
 

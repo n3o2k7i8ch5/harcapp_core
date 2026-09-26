@@ -110,7 +110,7 @@ List<ContributorSource> contributorSourcesOf(
 }) {
   final out = <ContributorSource>[];
   for (final song in songs) {
-    final sender = (song.contributorData?.email ?? '').trim().toLowerCase();
+    final sender = normalizedEmail(song.contributorData?.email ?? '');
     if (sender.isEmpty) continue;
     out.add(ContributorSource(
       sender: sender,
@@ -130,7 +130,7 @@ List<ContributorSource> contributorSourcesOf(
 Person? _personOf(SongRaw song, String sender) {
   for (final c in song.contribRefs) {
     if (c.person != null &&
-        (c.emailRef ?? '').trim().toLowerCase() == sender) return c.person;
+        normalizedEmail(c.emailRef ?? '') == sender) return c.person;
   }
   final withPerson = [for (final c in song.contribRefs) if (c.person != null) c];
   return withPerson.length == 1 && (withPerson.single.emailRef ?? '').trim().isEmpty
@@ -170,7 +170,7 @@ PeopleReport collectPeople(List<ContributorSource> items) {
 
     final emails = <String>{
       sender,
-      for (final e in c.otherEmails) e.trim().toLowerCase(),
+      for (final e in c.otherEmails) normalizedEmail(e),
     }..removeWhere((e) => e.isEmpty);
 
     // Nadawcy nie ma w `data.dart`, ale może być pod innym swoim adresem.
@@ -252,10 +252,7 @@ String emitPeopleDart(PeopleReport report) {
   for (final n in report.newContributors) {
     var name = dartConstName(n.person.name);
     if (name.isEmpty) name = 'OSOBA';
-    var unique = name;
-    for (var i = 2; taken.contains(unique); i++) {
-      unique = '${name}_$i';
-    }
+    final unique = uniqueName(name, taken.contains, separator: '_');
     taken.add(unique);
     if (unique != name) {
       buf.writeln('// UWAGA: w data.dart jest już $name. Jeśli to ta sama osoba, nie dodawaj');

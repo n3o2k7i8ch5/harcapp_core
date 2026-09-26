@@ -51,6 +51,10 @@ enum PlaybackBarMode {
 
 const Duration _kSeekStep = Duration(seconds: 2);
 
+/// Dymki paska (krok przewijania, miejsce lądowania, tryb po nagraniu) —
+/// zdanie do przeczytania w biegu, nie komunikat.
+const Duration _kToast = Duration(seconds: 1);
+
 /// Minimum, którego wymaga IFrame API YouTube'a. Player i tak jest poza
 /// ekranem, więc nic nie kosztuje danie mu pełnego rozmiaru.
 const double _kHiddenPlayerSize = 200;
@@ -86,9 +90,9 @@ SongbookPlaybackController get _playback => SongbookPlaybackController.instance;
 /// Nazwa na kafelku. Anonimowe nagranie idzie kursywą — i tak samo jest
 /// mierzone, żeby zawijanie nie rozjechało się o szerokość pochyłych liter.
 (String, bool italic) _labelOf(PlaybackSource source) => switch (source) {
-  PlaybackSource(isYoutube: true) => ('YouTube', false),
-  PlaybackSource(audio: SongAudio(performer: final String performer)) => (performer, false),
-  _ => ('Anonimowe nagranie', true),
+  YoutubeSource() => ('YouTube', false),
+  Mp3Source(audio: SongAudio(performer: final String performer)) => (performer, false),
+  Mp3Source() => ('Anonimowe nagranie', true),
 };
 
 /// Szerokość napisu zależy tylko od jego treści, a pasek liczy ją przy każdej
@@ -139,6 +143,12 @@ class SongPlaybackBar extends StatefulWidget {
 
   static const EdgeInsets padding = EdgeInsets.symmetric(horizontal: Dimen.defMarg);
 
+  /// Wysokość rzędów kafelka: jeden, a dwa, gdy przyciski zjechały niżej.
+  static double rowsHeight(bool wrapped) => rowHeight * (wrapped ? 2 : 1);
+
+  /// Wysokość całego paska: rzędy najwyższego kafelka plus margines.
+  static double _barHeight(bool anyWraps) => rowsHeight(anyWraps) + padding.vertical;
+
   final SongCore song;
   final PlaybackBarMode mode;
   final SongBookSettTempl settings;
@@ -161,7 +171,7 @@ class SongPlaybackBar extends StatefulWidget {
     final double maxWidth = viewportWidth - padding.horizontal;
     final bool anyWraps = playbackSourcesOf(song)
         .any((s) => _tileWraps(s, maxWidth, PlaybackBarMode.interactive));
-    return rowHeight * (anyWraps ? 2 : 1) + padding.vertical;
+    return _barHeight(anyWraps);
   }
 
   /// Ile góry ekranu zasłania przyklejony pasek tej piosenki — zero, gdy nic
@@ -280,8 +290,7 @@ class _SongPlaybackBarState extends State<SongPlaybackBar> {
 
         final double maxWidth = constraints.crossAxisExtent - SongPlaybackBar.padding.horizontal;
         final List<bool> wraps = [for (final s in _sources) _tileWraps(s, maxWidth, mode)];
-        final double height = SongPlaybackBar.rowHeight * (wraps.contains(true) ? 2 : 1)
-            + SongPlaybackBar.padding.vertical;
+        final double height = SongPlaybackBar._barHeight(wraps.contains(true));
         final bool sticky = mode.isInteractive && SongPlaybackBar.isSticky(song, widget.settings);
 
         // Wysokość slivera zmienia się skokowo, więc rozsuwanie paska na dwa
@@ -461,7 +470,7 @@ class _SourceTile extends StatelessWidget {
     showAppToast(
       context,
       text: '${delta.isNegative ? '-' : '+'}${delta.abs().inSeconds} sekundy',
-      duration: const Duration(seconds: 1),
+      duration: _kToast,
     );
   }
 
@@ -472,7 +481,7 @@ class _SourceTile extends StatelessWidget {
     showAppToast(
       context,
       text: _timeString(session.position.value),
-      duration: const Duration(seconds: 1),
+      duration: _kToast,
     );
   }
 
@@ -589,7 +598,7 @@ class _TileLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: SongPlaybackBar.rowHeight * (wrapped ? 2 : 1),
+    height: SongPlaybackBar.rowsHeight(wrapped),
     child: Stack(
       children: [
 
@@ -664,7 +673,7 @@ class _ProgressFill extends StatelessWidget {
             duration: _kProgressAnim,
             curve: Curves.linear,
             color: backgroundIcon_(context),
-            height: SongPlaybackBar.rowHeight * (wrapped ? 2 : 1),
+            height: SongPlaybackBar.rowsHeight(wrapped),
             width: fraction * constraints.maxWidth,
           ),
         );
@@ -836,9 +845,6 @@ String autoplayModeText(AutoplayMode mode, {required bool random}) => switch (mo
       : 'Po nagraniu: następna piosenka',
   AutoplayMode.repeat => 'Po nagraniu: to samo od nowa',
 };
-
-/// Tyle, co przy przewijaniu — zdanie do przeczytania w biegu, nie komunikat.
-const Duration _kToast = Duration(seconds: 1);
 
 /// Powtarzanie i losowość — wspólne dla obu źródeł, więc identyczne na
 /// każdym kafelku.

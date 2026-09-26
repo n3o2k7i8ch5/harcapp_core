@@ -65,7 +65,8 @@ dopisek autora, czyli wszystko nad zamrożoną belką `Akceptacja regulaminu`.
   **albo** rozszerzenie załącznika — bo temat jest edytowalny przez człowieka.
 
 Stare kształty mejla (`fenced`, `legacy`, `old-app`) działają dalej, obok.
-`report.txt` pokazuje ich rozkład; po nim poznasz, kiedy wolno skasować stare
+`report.txt` pokazuje ich rozkład (mejl, którego nie da się odczytać, liczy się
+osobno jako `unknown`); po nim poznasz, kiedy wolno skasować stare
 czytniki — a schodzą **razem** ze starymi członami kolejki, jednym ruchem.
 
 ## Setup (raz)
@@ -180,10 +181,20 @@ Bez szkicu nie wysyłasz.
 | `reply --all …` | cała stojąca kolejka, nie tylko przebieg | czyta |
 | `reopen` | kto odpisał na Twoje pytanie — wraca do kolejki | czyta |
 | `clean [KATALOG]` | kasuje katalog domkniętego przebiegu | czyta |
+| `clean --force` | kasuje mimo niedokończonych spraw (i robotę z niewypchniętej rundy) | czyta |
+| `scan` / `reply` / `reopen` `--query Q` | własne query Gmaila zamiast kolejki (omija też zawężenie do przebiegu) | czyta |
+| `label reviewed --force` | pomija bezpieczniki (pusty eksport, odrzucona większość) | czyta |
+| `unlabel --force` | zdejmuje też z domkniętych (`added`) | czyta |
 | `prepare [KATALOG]` | `reviewed-*` → `final-*` plus `people.dart` | nie dotyka |
 | `… --push` | wykonuje to, co bez flagi tylko pokazał | **pisze** |
 
 Komendy na przebiegu bez `KATALOG` biorą **ostatni** z `out/`.
+
+Ścieżki: `--songs-db PLIK` (`scan`, `explain`; domyślnie `assets/songs/all_songs.hrcpsng`
+szukany w górę katalogów), `--credentials PLIK` i `--token PLIK` (komendy łączące się
+z Gmailem; domyślnie `secrets/credentials.json` i `secrets/gmail_token.json`).
+Pełna lista flag każdej komendy: `./piosenkomat --help` — generowana z ich definicji,
+więc żadnej nie brakuje.
 
 `unlabel` cofa wszystko, co nadał automat — poznaje po `song/auto`, którego Ty nie
 wieszasz. Jak każda komenda na przebiegu bierze katalog, a bez niego ostatni
@@ -343,7 +354,7 @@ z innego przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs`.
 | `chords-differ-from-app`, `metadata-differ-from-app` | decision | ✓ | — |
 | `same-title-in-app`, `similar-text-in-app` | decision | ✓ | — (normalny kształt poprawki) |
 | `more-verses-than-app`, `fewer-verses-than-app`, `variant-of-app` | decision | ✓ | — (normalny kształt poprawki) |
-| `same-title-in-batch`, `similar-text-in-batch` | decision | ✓ | zapasowo, gdy nie ma celu |
+| `same-title-in-batch`, `similar-text-in-batch` | decision | ✓ | gdy celu nie ma albo jest inny — dwie podobne poprawki **różnych** piosenek są podejrzane: zwykle jedna celuje w złą |
 | `same-target-in-batch` | decision | — | ✓ (dwie poprawki tej samej piosenki) |
 | `no-target-in-app` | decision | — | ✓ |
 | `has-user-message` | decision | ✓ | ✓ (tylko `userMessage`; blok poprawki jest oczekiwany) |

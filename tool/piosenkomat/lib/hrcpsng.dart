@@ -33,16 +33,17 @@ SongBook loadBook(String path) {
 void assignUniqueIds(List<SongRaw> songs) {
   final taken = <String>{};
   for (final song in songs) {
-    song.id = _uniqueId(song.id, taken.contains);
+    song.id = uniqueName(song.id, taken.contains);
     taken.add(song.id);
   }
 }
 
-/// [id], a gdy zajęte — `id~2`, `id~3`…
-String _uniqueId(String id, bool Function(String) taken) {
-  var unique = id;
+/// [base], a gdy zajęte — `base~2`, `base~3`… Id piosenek łączy `~`, stałe
+/// w `people.dart` — `_`.
+String uniqueName(String base, bool Function(String) taken, {String separator = '~'}) {
+  var unique = base;
   for (var n = 2; taken(unique); n++) {
-    unique = '$id~$n';
+    unique = '$base$separator$n';
   }
   return unique;
 }
@@ -55,7 +56,7 @@ String encodeHrcpsng(List<SongRaw> songs, {bool withPiosenkomatData = false}) {
   final official = <String, dynamic>{};
   var index = 0;
   for (final song in sorted) {
-    official[_uniqueId(song.id, official.containsKey)] = {
+    official[uniqueName(song.id, official.containsKey)] = {
       'song': song.toApiJsonMap(
           withId: false, withPiosenkomatData: withPiosenkomatData),
       'index': index++,
@@ -92,10 +93,8 @@ List<SongRaw> readHrcpsng(String path) {
   }
 }
 
-/// `PIOSENKOMAT_SONGS_DB` albo `assets/songs/all_songs.hrcpsng` szukane w górę.
+/// `assets/songs/all_songs.hrcpsng` szukane w górę. Inna ścieżka — `--songs-db`.
 String defaultSongsDbPath() {
-  final env = Platform.environment['PIOSENKOMAT_SONGS_DB'];
-  if (env != null && env.isNotEmpty) return env;
   var dir = Directory.current;
   for (var i = 0; i < 8; i++) {
     final here = File(p.join(dir.path, 'assets', 'songs', 'all_songs.hrcpsng'));

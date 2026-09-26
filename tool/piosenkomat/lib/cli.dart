@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:harcapp_core/song_book/contrib_reply.dart';
-import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:path/path.dart' as p;
@@ -181,7 +179,7 @@ void _addAllFlag(ArgParser p) => p.addFlag('all',
 /// `--push` to jedyna flaga, która pozwala cokolwiek zmienić w Gmailu:
 /// „wypchnij to, co widzisz na sucho, do skrzynki”.
 void _addPushFlag(ArgParser p, {String? help}) =>
-    p.addFlag('push', abbr: 'p', negatable: false, help: help);
+    p.addFlag('push', negatable: false, help: help);
 
 bool _isPush(ArgResults cmd) => cmd['push'] as bool;
 
@@ -292,12 +290,6 @@ Future<int> _scan(ArgResults cmd) async {
   return 0;
 }
 
-/// Czy mejl może być ze starej apki — przed klasyfikacją, więc tym samym
-/// luźnym wzorcem, co parser i [ContribMessage.isSongSubmission]. Sztywne
-/// `contains` na znaczniku gubiło mejle, w których klient przełamał go
-/// w środku: taki autor, choć już mu odpisano, dostawał drugi mejl.
-bool mayBeOldApp(ContribMessage m) => oldestFormatSongRegion(m.body) != null;
-
 /// Wątki autorów ze starej apki, którym już coś wysłaliśmy — w którymkolwiek
 /// wątku. Blok „zaktualizuj apkę” wystarczy dostać raz, a `reply` nie odpisuje
 /// w każdym wątku autora, więc w części z nich `SENT` nie ma. Pytamy więc
@@ -308,7 +300,7 @@ Future<Set<String>> _oldAppAuthorsWeRepliedTo(
 ) async {
   final oldAppSenders = {
     for (final m in messages)
-      if (mayBeOldApp(m))
+      if (m.hasOldAppRegion)
         if (emailFromHeader(m.from) case final sender?) sender,
   };
   final weRepliedSenders = {
@@ -397,8 +389,8 @@ Future<int> _labelScanned(ArgResults cmd) async {
     stdout.writeln('Pominięto ${plural(skipped, 'mejl', 'mejle', 'mejli')}, '
         'które już miały etykietę song/*.');
   }
-  stdout.writeln('Po przeglądzie na stronie podmień reviewed-*.hrcpsng, potem '
-      './piosenkomat label reviewed --push i ./piosenkomat label added --push');
+  stdout.writeln('Po przeglądzie na stronie zapisz eksporty w reviewed-*.hrcpsng, potem '
+      './piosenkomat label reviewed --push');
   return 0;
 }
 
@@ -478,15 +470,7 @@ Future<int> _labelAdded(ArgResults cmd) async {
   await mailbox.ensureToolLabels();
   await _applyChanges(mailbox, {
     for (final id in ready)
-      id: (
-        [kLabelAdded],
-        [
-          kLabelReadyToAdd,
-          // Przeczytane tylko tam, gdzie nic już nie wisi: mejl z tekstem do
-          // autora czeka jeszcze na wysyłkę, więc zostaje nieprzeczytany.
-          if (!(current[id] ?? const {}).contains(kLabelReplyReviewNote)) 'UNREAD',
-        ],
-      ),
+      id: withReadOnClose(([kLabelAdded], [kLabelReadyToAdd]), current: current[id] ?? const {}),
   });
   stdout.writeln('Zatwierdzono ${plural(ready.length, 'mejl', 'mejle', 'mejli')}.');
   return 0;
@@ -590,7 +574,7 @@ Future<int> _labelReviewed(ArgResults cmd) async {
 
   final changes = reviewLabelChanges(results, plan);
   if (changes.isEmpty) {
-    stdout.writeln('\nNic do przestawienia. Dalej: ./piosenkomat label added --push');
+    stdout.writeln('\nNic do przestawienia. ${_afterReviewed(runDir)}');
     return 0;
   }
   if (_dryRun(cmd, 'przestawi etykiety na '
@@ -605,7 +589,8 @@ Future<int> _labelReviewed(ArgResults cmd) async {
     for (final e in changes.entries)
       if (current[e.key] case final labels? when isInRunFilesByTool(labels))
         e.key: withReadOnClose(
-            (e.value.$1, [for (final l in e.value.$2) if (labels.contains(l)) l])),
+            (e.value.$1, [for (final l in e.value.$2) if (labels.contains(l)) l]),
+            current: labels),
   };
   await _applyChanges(mailbox, applicable);
   stdout.writeln('Przestawiono etykiety na '
@@ -615,7 +600,7 @@ Future<int> _labelReviewed(ArgResults cmd) async {
     stdout.writeln('Pominięto ${plural(skipped, 'mejl', 'mejle', 'mejli')} '
         'spoza plików tego przebiegu.');
   }
-  stdout.writeln('Dalej: ./piosenkomat label added --push');
+  stdout.writeln(_afterReviewed(runDir));
   return 0;
 }
 
@@ -631,6 +616,13 @@ bool _stopOnMissingExports(String runDir) {
   stderr.writeln('STOP. Zapisz tam eksport ze strony i odpal ponownie.');
   return true;
 }
+
+/// Co po `label reviewed`: kolejność z README, bez skrótów — `label added`
+/// przed wklejeniem piosenek do `all_songs` kłamie (mejl zamknięty, piosenki
+/// w apce nie ma).
+String _afterReviewed(String runDir) =>
+    'Dalej: ./piosenkomat prepare $runDir, wklej final-*.hrcpsng do all_songs, '
+    'a dopiero potem ./piosenkomat label added $runDir --push';
 
 String _kindName(SubmissionKind k) =>
     k == SubmissionKind.correction ? 'Poprawki' : 'Nowe';
@@ -854,7 +846,7 @@ Future<int> _reply(ArgResults cmd) async {
   stdout.writeln('Do odpisania: ${plural(ids.length, 'mejl', 'mejle', 'mejli')}, '
       'pobieram nagłówki…');
 
-  final queue = await _groupBySender(mailbox, ids, query: query, limit: limit, inScope: inScope);
+  final queue = await groupBySender(mailbox, ids, query: query, limit: limit, inScope: inScope);
   // Teksty z pola „Odpowiedź do autora”: ze śladu przeglądu, bo `prepare`
   // zdejmuje je z piosenek na długo przed `reply`.
   final reviewNotes = {
@@ -876,7 +868,7 @@ Future<int> _reply(ArgResults cmd) async {
         oldAppIds: oldAppIds,
       ),
   };
-  _printReplyQueue(queue, plans);
+  printReplyQueue(queue, plans);
   final mails = plans.values.fold(0, (n, a) => n + a.replies.length);
   final queuedDrafts = {
     for (final id in queue.replyTargetById.keys)
@@ -892,7 +884,7 @@ Future<int> _reply(ArgResults cmd) async {
   }
 
   await mailbox.ensureToolLabels();
-  final run = _ReplyRun(
+  final run = ReplyRun(
     mailbox: mailbox,
     queue: queue,
     plans: plans,
@@ -909,243 +901,6 @@ Future<int> _reply(ArgResults cmd) async {
   return 0;
 }
 
-/// Kolejka `reply` pogrupowana po autorze.
-class _ReplyQueue {
-  /// Mejle każdego autora, od najstarszego.
-  final Map<String, List<String>> bySender;
-  final Map<String, ReplyTarget> replyTargetById;
-  final int unknownSenderCount;
-  /// `-n` uciął kolejkę: czekają kolejni autorzy.
-  final bool truncated;
-
-  const _ReplyQueue(this.bySender, this.replyTargetById,
-      {required this.unknownSenderCount, required this.truncated});
-
-  List<String> get senders => bySender.keys.toList()..sort();
-}
-
-/// Nadawcy nie da się poznać bez nagłówka, a ten kosztuje 20 jednostek, więc
-/// przy `-n` przestajemy czytać, gdy mamy już tylu autorów, ilu obsłużymy.
-Future<_ReplyQueue> _groupBySender(
-  GmailMailbox mailbox,
-  List<String> ids, {
-  required String query,
-  required int? limit,
-  required bool Function(String) inScope,
-}) async {
-  final bySender = <String, List<String>>{};
-  final replyTargetById = <String, ReplyTarget>{};
-  var unknownSenderCount = 0;
-  var truncated = false;
-  for (final id in ids) {
-    if (limit != null && bySender.length >= limit) {
-      truncated = true;
-      break;
-    }
-    final target = await mailbox.replyTarget(id);
-    replyTargetById[id] = target;
-    final sender = emailFromHeader(target.to);
-    if (sender == null || sender == kInboxEmail) {
-      unknownSenderCount++;
-      continue;
-    }
-    bySender.putIfAbsent(sender, () => []).add(id);
-  }
-  // Urwany przegląd zna tylko część mejli wybranych autorów, a etykieta musi
-  // zejść ze wszystkich. Reszta to jedno zapytanie na autora zamiast czytania
-  // nagłówków całej kolejki.
-  if (truncated) {
-    for (final sender in bySender.keys.toList()) {
-      // Nawiasy, bo `--query` z `OR` bez nich łapałby cudze mejle:
-      // `a OR b from:x` to dla Gmaila `a OR (b from:x)`. Zakres jak na
-      // starcie: bez tego mejl autora z innego przebiegu straciłby etykietę,
-      // a uwaga do niego (w cudzym `decisions.json`) nigdy by nie wyszła.
-      bySender[sender] = [
-        for (final id in await mailbox.listIds('($query) from:$sender'))
-          if (inScope(id)) id,
-      ];
-      for (final id in bySender[sender]!) {
-        replyTargetById[id] ??= await mailbox.replyTarget(id);
-      }
-    }
-  }
-  return _ReplyQueue(bySender, replyTargetById,
-      unknownSenderCount: unknownSenderCount, truncated: truncated);
-}
-
-void _printReplyQueue(_ReplyQueue queue, Map<String, AuthorReplies> plans) {
-  for (final sender in queue.senders) {
-    final plan = plans[sender]!;
-    stdout.writeln('  → $sender  ${plural(plan.replies.length, 'odpowiedź', 'odpowiedzi', 'odpowiedzi')}');
-    for (final r in plan.replies) {
-      final what = r.reviewNote == null
-          ? 'sam blok o starej apce'
-          : r.oldApp ? 'odpowiedź + blok o starej apce' : 'odpowiedź';
-      stdout.writeln('      wątek [${r.threadId}]  $what');
-    }
-    if (plan.nothingToSay.isNotEmpty) {
-      stdout.writeln('      ${plural(plan.nothingToSay.length, 'mejl', 'mejle', 'mejli')} '
-          'bez tekstu z przeglądu — etykieta zostaje');
-    }
-  }
-  if (queue.truncated) {
-    stdout.writeln('  (w kolejce czekają kolejni autorzy — `-n` bierze najstarszych)');
-  }
-  if (queue.unknownSenderCount > 0) {
-    stdout.writeln('Pomijam ${plural(queue.unknownSenderCount, 'mejl', 'mejle', 'mejli')} '
-        'bez czytelnego nadawcy; etykieta zostaje.');
-  }
-}
-
-/// Jedno odpalenie `reply --push`: kolejka i plan — mejl na piosenkę, w jej
-/// wątku ([planAuthorReplies]).
-class _ReplyRun {
-  final GmailMailbox mailbox;
-  final _ReplyQueue queue;
-  final Map<String, AuthorReplies> plans;
-  final Map<String, String> draftIdByThread;
-
-  _ReplyRun({
-    required this.mailbox,
-    required this.queue,
-    required this.plans,
-    required this.draftIdByThread,
-  });
-
-  Iterable<PlannedReply> get _replies => plans.values.expand((a) => a.replies);
-
-  int get _nothingToSay => plans.values.fold(0, (n, a) => n + a.nothingToSay.length);
-
-  ReplyTarget _targetOf(PlannedReply r) => queue.replyTargetById[r.targetMessageId]!;
-
-  /// Etykiety po wysyłce: wątek odpowiedzi plus wątki, które czekały tylko na
-  /// blok o starej apce, a ten poszedł tym mejlem.
-  Future<void> _relabel(PlannedReply r) async {
-    final (add, remove) = r.labels;
-    await mailbox.batchModify(r.messageIds, add: add, remove: remove);
-    if (r.alsoClearsOldApp.isNotEmpty) {
-      await mailbox.batchModify(r.alsoClearsOldApp, add: const [], remove: [kLabelReplyOldApp]);
-    }
-  }
-
-  Future<void> undraftAll(Set<String> draftIds) async {
-    var removed = 0;
-    var failed = 0;
-    for (final draftId in draftIds) {
-      try {
-        await mailbox.deleteDraft(draftId);
-      } catch (e) {
-        stderr.writeln('  ! szkic $draftId: $e');
-        failed++;
-        continue;
-      }
-      removed++;
-    }
-    stdout
-      ..writeln(_sentence([
-        'Sprzątnięto ${plural(removed, 'szkic', 'szkice', 'szkiców')}',
-        if (failed > 0) plural(failed, 'nieudany', 'nieudane', 'nieudanych'),
-      ]))
-      ..writeln('Nikt nic nie dostał — autorzy zostają w kolejce `reply`.');
-  }
-
-  Future<void> draftAll() async {
-    var created = 0;
-    var updated = 0;
-    var unchanged = 0;
-    var failed = 0;
-    for (final r in _replies) {
-      final text = r.text;
-      final where = '${r.sender} [${r.threadId}]';
-      try {
-        if (draftIdByThread[r.threadId] case final draftId?) {
-          // Szkic w tym wątku już jest. Przeliczamy go od nowa — ale tylko
-          // szkic w naszym kształcie; Twoją ręczną robotę zostawiamy.
-          final body = await mailbox.draftBody(draftId);
-          switch (draftActionFor(body, text)) {
-            case DraftAction.unchanged:
-              unchanged++;
-            case DraftAction.rewrite:
-              // Akapity, których w nowej treści nie będzie, wypisujemy — to
-              // Twoja jedyna szansa, żeby zobaczyć, co wypadło.
-              final dropped = paragraphsDroppedBy(body!, text);
-              await mailbox.updateDraft(draftId, _targetOf(r), text);
-              updated++;
-              for (final paragraph in dropped) {
-                stdout.writeln('  ~ $where: ze szkicu wypadło: „$paragraph”');
-              }
-            case DraftAction.leaveManual:
-              stdout.writeln('  ~ $where: szkic '
-                  '${body == null ? 'nieczytelny' : 'ruszony ręcznie'} — zostawiam jak jest');
-              unchanged++;
-          }
-          continue;
-        }
-        await mailbox.draftReplyTo(_targetOf(r), text);
-      } catch (e) {
-        // Bez szkicu, więc następny przebieg spróbuje jeszcze raz.
-        stderr.writeln('  ! $where: $e');
-        failed++;
-        continue;
-      }
-      created++;
-    }
-    stdout.writeln(_sentence([
-      'Przygotowano ${plural(created, 'szkic', 'szkice', 'szkiców')}',
-      if (updated > 0) plural(updated, 'zaktualizowany', 'zaktualizowane', 'zaktualizowanych'),
-      if (unchanged > 0) '$unchanged bez zmian',
-      if (_nothingToSay > 0) '$_nothingToSay bez treści (pominięte)',
-      if (failed > 0)
-        '${plural(failed, 'nieudany', 'nieudane', 'nieudanych')} (zostają w kolejce)',
-    ]));
-    if (created + updated + unchanged > 0) {
-      stdout.writeln('Przejrzyj i popraw w Gmailu, potem: ./piosenkomat reply --push');
-    }
-  }
-
-  Future<void> sendAll() async {
-    var sent = 0;
-    var repliedByHand = 0;
-    var failed = 0;
-    for (final r in _replies) {
-      try {
-        if (draftIdByThread[r.threadId] case final draftId?) {
-          // Z Twoimi poprawkami, jeśli jakieś zrobiłeś.
-          await mailbox.sendDraft(draftId);
-        } else if (await mailbox.ourReplyIsLatest(r.threadId)) {
-          // Szkic zniknął, a ostatnie słowo w wątku jest nasze — wysłany
-          // ręcznie z Gmaila. Drugiego mejla autor dostać nie może. Jeśli od
-          // tamtej pory autor odpisał, to nowa sprawa: składamy mejl normalnie.
-          await _relabel(r);
-          repliedByHand++;
-          continue;
-        } else {
-          await mailbox.replyTo(_targetOf(r), r.text);
-        }
-      } catch (e) {
-        // Etykieta zostaje, więc następny przebieg spróbuje jeszcze raz.
-        stderr.writeln('  ! ${r.sender} [${r.threadId}]: $e');
-        failed++;
-        continue;
-      }
-      sent++;
-      // Zaraz po wysyłce, żeby ewentualna wywrotka nie kosztowała drugiego mejla.
-      await _relabel(r);
-    }
-    stdout.writeln(_sentence([
-      'Wysłano ${plural(sent, 'odpowiedź', 'odpowiedzi', 'odpowiedzi')}',
-      if (repliedByHand > 0)
-        plural(repliedByHand, 'już odpisany ręcznie', 'już odpisane ręcznie',
-            'już odpisanych ręcznie'),
-      if (_nothingToSay > 0) '$_nothingToSay bez treści (pominięte)',
-      if (failed > 0)
-        '${plural(failed, 'nieudany', 'nieudane', 'nieudanych')} (zostają w kolejce)',
-    ]));
-  }
-}
-
-/// Podsumowanie: pierwsza część i niezerowe dodatki po przecinku.
-String _sentence(List<String> parts) => '${parts.join(', ')}.';
 
 // ---------------------------------------------------------------------------
 // clean / reopen / explain
@@ -1414,12 +1169,28 @@ piosenkomat: sitko mejli z piosenkami na $kInboxEmail.
 Bez katalogu komendy biorą ostatni przebieg z out/.
 Bez --push nic w Gmailu się nie zmienia.
 
-scan:
-${parser.commands['scan']!.usage}
-
-label reviewed:
-${parser.commands['label']!.commands['reviewed']!.usage}
-
-unlabel:
-${parser.commands['unlabel']!.usage}
+${_flagsOf(parser)}
 ''';
+
+/// Flagi każdej komendy prosto z definicji parsera — pomoc nie może żadnej
+/// pominąć, bo nikt jej nie przepisuje ręcznie.
+String _flagsOf(ArgParser parser) {
+  final out = StringBuffer();
+  void add(String name, ArgParser p) {
+    if (p.options.isEmpty) return;
+    out
+      ..writeln('$name:')
+      ..writeln(p.usage)
+      ..writeln();
+  }
+  for (final e in parser.commands.entries) {
+    if (e.value.commands.isEmpty) {
+      add(e.key, e.value);
+    } else {
+      for (final stage in e.value.commands.entries) {
+        add('${e.key} ${stage.key}', stage.value);
+      }
+    }
+  }
+  return out.toString().trimRight();
+}

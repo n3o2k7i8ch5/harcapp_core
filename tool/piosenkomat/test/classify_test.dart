@@ -121,6 +121,8 @@ void main() {
       expect(got.title, 'Cześć');
       expect(got.labels, [kLabelRejectedUnparsable, kLabelHaveALook]);
       expect(got.labels.any(isClosedLabel), isTrue, reason: 'odrzut jest przeczytany');
+      expect(got.submission.shape, EmailShape.unknown,
+          reason: 'nie zawyża starych kształtów w rozkładzie raportu');
     });
   });
 

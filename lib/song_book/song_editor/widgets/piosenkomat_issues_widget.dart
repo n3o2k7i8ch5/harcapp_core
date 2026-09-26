@@ -403,26 +403,22 @@ class _Bubble extends StatelessWidget{
 
 }
 
-/// Jedna pastylka w stylu [Tag] z apki: pełne zaokrąglenie, bez obramowania.
-/// Na pastylce sam kod uwagi (`missing-youtube`) — krótki i jednoznaczny;
-/// polski opis i szczegół w podpowiedzi. O wadze mówi **kolor pastylki**:
-/// półprzezroczyste tło plus ikona i tekst w pełnym kolorze, tak samo jak
-/// badge POPRAWKA.
-class PiosenkomatIssuePill extends StatelessWidget{
+/// Kształt pastylki — wspólny dla uwag i badge'a POPRAWKA: pełne
+/// zaokrąglenie, półprzezroczyste tło, ikona i tekst w pełnym kolorze.
+class _Pill extends StatelessWidget{
 
-  final PiosenkomatIssue issue;
-  /// Mała wersja do listy: mniejsza czcionka, płasko.
+  final Color color;
+  final IconData icon;
+  final String label;
   final bool compact;
 
-  const PiosenkomatIssuePill(this.issue, {this.compact = false, super.key});
+  const _Pill({required this.color, required this.icon, required this.label, this.compact = false});
 
   @override
   Widget build(BuildContext context){
-    final color = piosenkomatIssueColor(issue.issue);
     final fontSize = compact? Dimen.textSizeTiny: Dimen.textSizeSmall;
     final pad = compact? Dimen.defMarg/2: Dimen.iconMarg;
-
-    final pill = SimpleButton(
+    return SimpleButton(
       radius: 100,
       elevation: 0,
       color: color.withValues(alpha: 0.15),
@@ -438,19 +434,40 @@ class PiosenkomatIssuePill extends StatelessWidget{
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(piosenkomatIssueIcon(issue.issue), size: fontSize + 2, color: color),
+          Icon(icon, size: fontSize + 2, color: color),
           SizedBox(width: pad/2),
           Text(
-            issue.issue.id,
-            style: AppTextStyle(
-              fontSize: fontSize,
-              fontWeight: weightHalfBold,
-              color: color,
-            ),
+            label,
+            style: AppTextStyle(fontSize: fontSize, fontWeight: weightHalfBold, color: color),
             maxLines: 1,
           ),
         ],
       ),
+    );
+  }
+
+}
+
+/// Jedna pastylka w stylu [Tag] z apki: pełne zaokrąglenie, bez obramowania.
+/// Na pastylce sam kod uwagi (`missing-youtube`) — krótki i jednoznaczny;
+/// polski opis i szczegół w podpowiedzi. O wadze mówi **kolor pastylki**:
+/// półprzezroczyste tło plus ikona i tekst w pełnym kolorze, tak samo jak
+/// badge POPRAWKA.
+class PiosenkomatIssuePill extends StatelessWidget{
+
+  final PiosenkomatIssue issue;
+  /// Mała wersja do listy: mniejsza czcionka, płasko.
+  final bool compact;
+
+  const PiosenkomatIssuePill(this.issue, {this.compact = false, super.key});
+
+  @override
+  Widget build(BuildContext context){
+    final pill = _Pill(
+      color: piosenkomatIssueColor(issue.issue),
+      icon: piosenkomatIssueIcon(issue.issue),
+      label: issue.issue.id,
+      compact: compact,
     );
 
     return Tooltip(
@@ -502,10 +519,6 @@ class _CorrectionBadge extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    final fontSize = compact? Dimen.textSizeTiny: Dimen.textSizeSmall;
-    final pad = compact? Dimen.defMarg/2: Dimen.iconMarg;
-    final accent = accent_(context);
-
     final target = data.correctionTarget;
     final targetTitle = target == null? null: titleOfAppSong?.call(target) ?? target;
     final when = data.sentAt == null? null: _day(data.sentAt!);
@@ -522,29 +535,11 @@ class _CorrectionBadge extends StatelessWidget{
       message: target == null
           ? 'Poprawka — nie wiadomo, której piosenki w apce (no-target-in-app)'
           : 'Poprawka piosenki $target',
-      child: SimpleButton(
-        radius: 100,
-        elevation: 0,
-        color: accent.withValues(alpha: 0.15),
-        padding: EdgeInsets.only(
-          left: pad/2,
-          right: pad,
-          top: compact? 2: pad/2,
-          bottom: compact? 2: pad/2,
-        ),
-        onTap: null,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(MdiIcons.pencilOutline, size: fontSize + 2, color: accent),
-            SizedBox(width: pad/2),
-            Text(
-              label,
-              style: AppTextStyle(fontSize: fontSize, fontWeight: weightHalfBold, color: accent),
-              maxLines: 1,
-            ),
-          ],
-        ),
+      child: _Pill(
+        color: accent_(context),
+        icon: MdiIcons.pencilOutline,
+        label: label,
+        compact: compact,
       ),
     );
   }

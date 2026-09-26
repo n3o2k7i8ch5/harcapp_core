@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+import 'package:harcapp_core/values/people/utils.dart';
 
 import 'hrcpsng.dart';
 import 'model.dart';
@@ -130,10 +131,10 @@ class RunPlan {
 /// Adresy z bloku „Osoba dodająca” poza adresem nadawcy — ten jest już
 /// w `email_ref` piosenki.
 List<String> _otherEmailsOf(Classified c) {
-  final sender = (c.submission.sender ?? '').trim().toLowerCase();
+  final sender = normalizedEmail(c.submission.sender ?? '');
   return [
     for (final e in c.submission.registered?.emails ?? const <String>[])
-      if (e.trim().isNotEmpty && e.trim().toLowerCase() != sender) e.trim(),
+      if (normalizedEmail(e) case final n when n.isNotEmpty && n != sender) e.trim(),
   ];
 }
 
@@ -142,7 +143,7 @@ List<String> _otherEmailsOf(Classified c) {
 Map<String, List<String>> otherEmailsBySender(RunPlan plan) {
   final out = <String, List<String>>{};
   for (final s in plan.songByThread.values) {
-    final sender = s.sender.trim().toLowerCase();
+    final sender = normalizedEmail(s.sender);
     if (sender.isEmpty || s.otherEmails.isEmpty) continue;
     final into = out.putIfAbsent(sender, () => []);
     for (final e in s.otherEmails) {

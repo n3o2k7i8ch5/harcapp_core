@@ -1,5 +1,6 @@
 export 'classify.dart';
 export 'cli.dart';
+export 'eml.dart';
 export 'gmail.dart';
 export 'hrcpsng.dart';
 export 'model.dart';

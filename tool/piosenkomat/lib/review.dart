@@ -25,20 +25,21 @@ enum MatchedBy {
 /// to, z czym porównujemy plik zwrotny.
 class ReviewCandidate {
   final String threadId;
-  final String songId;
-  final String title;
-  final String sender;
+  /// Wpis z planu przebiegu — id, tytuł i nadawca w jednym miejscu.
+  final PlannedSong planned;
   /// Odcisk do porównań awaryjnych. `null`, gdy piosenki nie ma w pliku
   /// (plan i plik się rozjechały).
   final SongProfile? profile;
 
   ReviewCandidate({
     required this.threadId,
-    required this.songId,
-    required this.title,
-    this.sender = '',
+    required this.planned,
     this.profile,
   });
+
+  String get songId => planned.songId;
+  String get title => planned.title;
+  String get sender => planned.sender;
 }
 
 /// Piosenka, która wróciła z przeglądu.
@@ -111,9 +112,7 @@ List<ReviewCandidate> collectCandidates(
       if (e.value.kind == kind)
         ReviewCandidate(
           threadId: e.key,
-          songId: e.value.songId,
-          title: e.value.title,
-          sender: e.value.sender,
+          planned: e.value,
           profile: switch (find(e.value.songId)) { final s? => SongProfile(s), null => null },
         ),
   ];

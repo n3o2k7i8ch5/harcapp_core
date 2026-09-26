@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
@@ -511,12 +512,11 @@ final RegExp _userMessageRe = RegExp(
   r'-\s*-\s*-\s*-\s*-\s*-\s*Miejsce na własną wiadomość\s*-\s*-\s*-\s*-\s*-\s*-([\s\S]*?)-\s*-\s*-\s*-\s*-\s*-\s*Zasady dodawania piosenek\s*-\s*-\s*-\s*-\s*-\s*-',
 );
 
-const String _userMessagePlaceholder =
-    '[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]';
-
-/// Znaczniki, od których zaczyna się to, co dokłada szablon zgłoszenia.
-/// W zwykłej odpowiedzi ich nie ma — ale klient pocztowy bywa kreatywny
-/// i cytuje treść bez `>`, a wtedy do „wiadomości” wpadłby cały kod piosenki.
+/// Znaczniki, od których zaczyna się to, co dokłada szablon zgłoszenia
+/// w starszych kształtach mejla; belki kształtu z załącznikiem są
+/// w [submissionBarRes]. W zwykłej odpowiedzi ich nie ma — ale klient
+/// pocztowy bywa kreatywny i cytuje treść bez `>`, a wtedy do „wiadomości”
+/// wpadłby cały kod piosenki.
 final RegExp _templateStartRe = RegExp(
   r'^(\s*-\s*){6}\s*(Zasady dodawania piosenek|Nie edytuj poniższego)'
   r'|^###\s*(Kod piosenki|Osoba dodająca|Propozycja poprawki|Źródło piosenki|Poprawiana piosenka)',
@@ -533,11 +533,14 @@ final RegExp _userMessageBarRe = RegExp(
 /// karty osoby dodającej i podpowiedzi w nawiasach kwadratowych.
 /// `null`, gdy po wycięciu nie zostaje nic.
 String? stripSubmissionTemplate(String body){
-  final start = _templateStartRe.firstMatch(body);
-  String text = start == null? body: body.substring(0, start.start);
+  final starts = [
+    for (final re in [_templateStartRe, ...submissionBarRes])
+      if (re.firstMatch(body) case final m?) m.start,
+  ];
+  String text = starts.isEmpty? body: body.substring(0, starts.reduce(min));
   text = text
       .replaceAll(_userMessageBarRe, '')
-      .replaceAll(_userMessagePlaceholder, '')
+      .replaceAll(kSubmissionUserMessagePlaceholder, '')
       .trim();
   return text.isEmpty? null: text;
 }
@@ -546,7 +549,7 @@ String? _extractUserMessage(String content){
   Match? m = _userMessageRe.firstMatch(content);
   if(m == null) return null;
   String raw = m.group(1) ?? '';
-  raw = raw.replaceAll(_userMessagePlaceholder, '');
+  raw = raw.replaceAll(kSubmissionUserMessagePlaceholder, '');
   String trimmed = raw.trim();
   if(trimmed.isEmpty) return null;
   return trimmed;
@@ -564,9 +567,6 @@ const String _correctedSongIdHeader = '### Poprawiana piosenka:';
 /// `o!_ballada_o_stefanie_mirowskim@21_druzyna_harcerska_...` — więc reszty
 /// znaków nie ograniczamy.
 final RegExp _songIdPieceRe = RegExp(r'^[^\s>#]+$');
-
-/// Znak cytatu na początku linii w mejlu zwrotnym: `> `, `>> ` itd.
-final RegExp _quotePrefixRe = RegExp(r'^[>\s]+');
 
 /// Sekcja „### Poprawiana piosenka” — `lclId` piosenki, którą autor poprawia.
 /// `null`, gdy mejl jej nie ma. Czytamy tylko sprzed sekcji „### Kod piosenki:",
@@ -588,7 +588,7 @@ String? extractCorrectedSongId(String content){
   final List<String> lines = haystack
       .substring(at + _correctedSongIdHeader.length)
       .split('\n')
-      .map((l) => l.replaceFirst(_quotePrefixRe, '').trim())
+      .map((l) => l.replaceFirst(quotePrefixRe, '').trim())
       .toList();
 
   final int fence = lines.indexWhere((l) => l.startsWith('```'));

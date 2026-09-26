@@ -1,4 +1,3 @@
-import 'package:piosenkomat/cli.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:test/test.dart';
 
@@ -15,21 +14,21 @@ $_json
 ''';
 
 void main() {
-  group('mayBeOldApp: ten sam luźny wzorzec, co parser', () {
+  group('hasOldAppRegion: ten sam luźny wzorzec, co parser', () {
     test('zwykły znacznik', () {
-      expect(mayBeOldApp(ContribMessage(id: 'a', body: _mejl('NIE EDYTUJ PONIŻSZEGO TEKSTU'))),
+      expect(ContribMessage(id: 'a', body: _mejl('NIE EDYTUJ PONIŻSZEGO TEKSTU')).hasOldAppRegion,
           isTrue);
     });
 
     test('znacznik przełamany przez klienta pocztowego', () {
       // Sztywne `contains` tu chybiało — autor, któremu już odpisano,
       // wracał do kolejki `reply/old-app` i dostawał drugi mejl.
-      expect(mayBeOldApp(ContribMessage(id: 'a', body: _mejl('NIE EDYTUJ\nPONIŻSZEGO TEKSTU'))),
+      expect(ContribMessage(id: 'a', body: _mejl('NIE EDYTUJ\nPONIŻSZEGO TEKSTU')).hasOldAppRegion,
           isTrue);
     });
 
     test('zgłoszenie z nowej apki to nie stara apka', () async {
-      expect(mayBeOldApp(msgFrom(await completeEmail())), isFalse);
+      expect(msgFrom(await completeEmail()).hasOldAppRegion, isFalse);
     });
   });
 }

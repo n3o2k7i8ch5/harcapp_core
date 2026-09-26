@@ -11,6 +11,7 @@ import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/song_book/submission/submission_email.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
+import 'package:harcapp_core/values/people/utils.dart';
 
 import 'model.dart';
 import 'similarity.dart';
@@ -19,7 +20,7 @@ final _emailRe = RegExp(r'[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}');
 
 /// Adres z nagłówka `From` (`Jan <jan@x.pl>` albo `jan@x.pl`).
 String? emailFromHeader(String? from) =>
-    from == null ? null : _emailRe.firstMatch(from)?.group(0)?.toLowerCase();
+    from == null ? null : switch (_emailRe.firstMatch(from)?.group(0)) { final e? => normalizedEmail(e), null => null };
 
 /// Załącznik zgłoszenia: plik, powód odmowy, albo nic — gdy mejl go nie ma.
 class SubmissionFileRead {
@@ -277,8 +278,9 @@ ParsedContribEmail? _tryParseEmailBody(ContribMessage m) {
 
 EmailShape _shapeOf(SubmissionFileRead file, ParsedContribEmail? parsed) {
   if (file.hasFile) return EmailShape.file;
-  if (parsed?.isOldestFormat ?? false) return EmailShape.oldApp;
-  return (parsed?.isNewFormat ?? true) ? EmailShape.fenced : EmailShape.legacy;
+  if (parsed == null) return EmailShape.unknown;
+  if (parsed.isOldestFormat) return EmailShape.oldApp;
+  return parsed.isNewFormat ? EmailShape.fenced : EmailShape.legacy;
 }
 
 /// Porównanie między zgłoszeniami paczki. Dwa przejścia: najpierw grupy
@@ -761,7 +763,7 @@ void _trimEmailRefs(SongRaw song) {
 String? _senderWithBodyFallback(ContribMessage m, ParsedContribEmail parsed) {
   for (final candidate in [
     emailFromHeader(m.from),
-    parsed.senderEmail?.trim().toLowerCase(),
+    if (parsed.senderEmail case final e?) normalizedEmail(e),
   ]) {
     if (candidate != null && candidate.isNotEmpty && candidate != kInboxEmail) {
       return candidate;
@@ -809,7 +811,7 @@ bool _enrich(
 
   var guessed = false;
   final known = sender == null || song.contribRefs
-      .any((c) => (c.emailRef ?? '').toLowerCase() == sender);
+      .any((c) => normalizedEmail(c.emailRef ?? '') == sender);
   if (!known && attachSender) {
     // Apka wysyła kartę osoby dodającej w `add_pers` **bez** adresu — adres
     // jedzie osobno. Doklejony jako drugi wpis robił z jednej osoby dwie:

@@ -35,6 +35,15 @@ void main() {
     test('nie dubluje UNREAD', () {
       expect(withReadOnClose(([kLabelAdded], ['UNREAD'])).$2, ['UNREAD']);
     });
+    test('tekst do autora czeka na wysyłkę → zostaje nieprzeczytany', () {
+      expect(
+          withReadOnClose(([kLabelAdded], [kLabelReadyToAdd]),
+              current: {kLabelReadyToAdd, kLabelReplyReviewNote}).$2,
+          [kLabelReadyToAdd]);
+      expect(
+          withReadOnClose(([kLabelAdded], [kLabelReadyToAdd]), current: {kLabelReadyToAdd}).$2,
+          [kLabelReadyToAdd, 'UNREAD']);
+    });
   });
 
   group('pendingLabelsOf (clean)', () {
@@ -100,7 +109,8 @@ void main() {
           accepted: const [],
           removed: [
             for (var i = 0; i < removed; i++)
-              ReviewCandidate(threadId: 't$i', songId: 's$i', title: 'x'),
+              ReviewCandidate(
+                  threadId: 't$i', planned: PlannedSong(songId: 's$i', title: 'x', sender: '')),
           ],
           foreign: const [],
           wrongKind: const [],

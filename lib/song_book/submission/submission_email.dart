@@ -20,6 +20,17 @@ const String kSubmissionUserMessagePlaceholder =
 const String kSubmissionOneSongPerMailNote =
     'Każdą kolejną piosenkę wyślij osobnym mejlem, nie odpowiedzią na ten.';
 
+/// Znak cytatu na początku linii w mejlu zwrotnym (`> `, `>> `) razem
+/// z wcięciem. Jeden wzorzec dla wszystkich, którzy zdejmują cytowanie.
+final RegExp quotePrefixRe = RegExp(r'^[>\s]+');
+
+/// Belki szablonu zgłoszenia z załącznikiem — od pierwszej z nich w dół to
+/// już szablon, nie dopisek.
+final List<RegExp> submissionBarRes = [
+  submissionBarRe(kSubmissionConsentBar),
+  submissionBarRe(kSubmissionStructuralBar),
+];
+
 /// Belka w treści, odporna na odstępy i na cytowanie (`>`).
 RegExp submissionBarRe(String bar) => RegExp(
       '^[>\\s]*'
@@ -38,7 +49,7 @@ String? extractSubmissionUserMessage(String body){
   final raw = body
       .substring(0, bar.start)
       .split('\n')
-      .map((l) => l.replaceFirst(RegExp(r'^[>\s]+'), ''))
+      .map((l) => l.replaceFirst(quotePrefixRe, ''))
       .join('\n')
       .replaceAll(kSubmissionUserMessagePlaceholder, '')
       .trim();
