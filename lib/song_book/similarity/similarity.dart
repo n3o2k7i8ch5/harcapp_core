@@ -35,7 +35,7 @@ export 'src/evidence.dart'
         similaritiesToShow,
         similaritiesText,
         kSameChordPairs;
-export 'src/index.dart' show SongIndex, SongMatch, MatchSource, compareSongMatches, correctionTargetOf;
+export 'src/index.dart' show SongIndex, SongMatch, MatchSource, compareSongMatches, correctionTargetOf, correctionTargetLookupOf, IdLookup, IdHit;
 export 'src/level.dart' show MatchLevel, levelOf, similarityScore, kSameLines, kVariantLines, kMinLinesWeight;
 export 'src/lines.dart' show kLineMatch;
 export 'src/normalize.dart' show textWords, squash, pct;

@@ -60,6 +60,31 @@ int compareSongMatches(SongMatch a, SongMatch b) {
   return b.score.compareTo(a.score);
 }
 
+/// Jak [SongIndex.lookupId] trafiło. Id ma postać `o!_tytuł@wykonawca`,
+/// a zmiana wykonawcy w apce zmienia id — zgłoszenie bywa sprzed niej.
+enum IdLookup {
+  /// Dokładnie to id — fakt.
+  exact,
+  /// Tylko bez członu `@wykonawca`, i tylko jedna piosenka — **domysł**.
+  /// Wołający ma go oznaczyć, nie podawać jak trafienia.
+  withoutPerformer,
+  /// Bez `@wykonawca` pasuje kilka różnych piosenek — nic nie wybieramy.
+  ambiguous,
+}
+
+/// Wynik [SongIndex.lookupId]: piosenki i to, **jak** je znaleziono.
+class IdHit<T extends SongCore> {
+  final IdLookup how;
+  /// [IdLookup.exact] i [IdLookup.withoutPerformer]: wszystkie pod znalezionym
+  /// id (w warsztacie id potrafi się powtarzać). [IdLookup.ambiguous]:
+  /// kandydaci, po jednym na każde id.
+  final List<T> songs;
+
+  const IdHit(this.how, this.songs);
+
+  bool get isGuessed => how != IdLookup.exact;
+}
+
 /// Piosenki, z którymi porównujemy.
 ///
 /// Dwa kroki: najpierw tanio wybieramy kandydatów (ten sam tytuł, id,
@@ -134,24 +159,39 @@ class SongIndex<T extends SongCore> {
 
   bool has(String songId) => _byId.containsKey(songId);
 
-  /// Numery piosenek pod tym id: dokładnie, a przy chybieniu bez członu
-  /// `@wykonawca` — zgłoszenie bywa sprzed zmiany wykonawcy w apce, a to
-  /// dalej ta sama piosenka. Puste id to nie id: nic nie pasuje.
-  List<int> _indicesById(String id) {
-    if (id.isEmpty) return const [];
-    return _byId[id] ?? _byBareId[_bare(id)] ?? const [];
+  /// Jedno wyszukiwanie po id dla wszystkich — edytora i piosenkomatu —
+  /// żeby ta sama poprawka nie miała w jednym miejscu celu, a w drugim nie.
+  /// Dokładnie, a przy chybieniu bez członu `@wykonawca` (zgłoszenie bywa
+  /// sprzed zmiany wykonawcy w apce); to drugie jest domysłem i wynik to mówi
+  /// ([IdHit.how]). Kilka różnych piosenek bez `@wykonawca` → [IdLookup.ambiguous],
+  /// nie pierwsza z brzegu. Puste id to nie id: `null`.
+  IdHit<T>? lookupId(String id) {
+    if (id.isEmpty) return null;
+    if (_byId[id] case final exact?) {
+      return IdHit(IdLookup.exact, [for (final i in exact) songs[i]]);
+    }
+    final bare = _byBareId[_bare(id)];
+    if (bare == null) return null;
+    final byFullId = <String, List<int>>{};
+    for (final i in bare) {
+      byFullId.putIfAbsent(profiles[i].id, () => []).add(i);
+    }
+    if (byFullId.length > 1) {
+      return IdHit(IdLookup.ambiguous, [for (final ids in byFullId.values) songs[ids.first]]);
+    }
+    return IdHit(IdLookup.withoutPerformer, [for (final i in byFullId.values.single) songs[i]]);
   }
 
-  /// Piosenka po `lclId`. Przy powtórzonym id — pierwsza z listy; wszystkie
-  /// daje [allById].
-  T? byId(String id) {
-    final indices = _indicesById(id);
-    return indices.isEmpty ? null : songs[indices.first];
-  }
+  /// Piosenka po `lclId` ([lookupId]) — przy powtórzonym id pierwsza z listy,
+  /// przy niejednoznacznym `null`. Czy to domysł, mówi dopiero [lookupId].
+  T? byId(String id) => allById(id).firstOrNull;
 
-  /// **Wszystkie** piosenki pod tym id — w warsztacie id potrafi się
-  /// powtarzać, a wtedy „ta jedna” to za mało.
-  List<T> allById(String id) => [for (final i in _indicesById(id)) songs[i]];
+  /// **Wszystkie** piosenki pod tym id ([lookupId]) — w warsztacie id potrafi
+  /// się powtarzać, a wtedy „ta jedna” to za mało. Niejednoznaczne → pusto.
+  List<T> allById(String id) => switch (lookupId(id)) {
+        IdHit(how: IdLookup.exact || IdLookup.withoutPerformer, :final songs) => songs,
+        _ => const [],
+      };
 
   SongMatch<T> _match(int i, SongProfile song, MatchSource source) => SongMatch(
         song: songs[i],
@@ -159,12 +199,10 @@ class SongIndex<T extends SongCore> {
         similarities: compare(song, profiles[i]),
       );
 
-  /// Porównanie ze **wskazaną** piosenką, nie z najbliższą. Tego używa
-  /// piosenkomat, gdy apka powiedziała w zgłoszeniu, którą piosenkę autor
-  /// poprawiał: wtedy nie ma czego zgadywać, a różnice liczymy względem
-  /// właściwego pierwowzoru. `null`, gdy takiego id nie ma. Dokładnie po id,
-  /// bez rundy po `@wykonawca` — narzędzie dostaje id z pliku i ma wiedzieć,
-  /// gdy go nie ma.
+  /// Porównanie ze **wskazaną** piosenką, nie z najbliższą — dokładnie po id.
+  /// Tego używa piosenkomat, gdy apka powiedziała w zgłoszeniu, którą piosenkę
+  /// autor poprawiał; id z rundy bez `@wykonawca` bierze najpierw z [lookupId],
+  /// żeby wiedzieć, że to domysł. `null`, gdy takiego id nie ma.
   SongMatch<T>? matchTo(String songId, SongProfile song, {MatchSource source = MatchSource.app}) {
     final i = _byId[songId]?.first;
     if (i == null) return null;
@@ -210,7 +248,8 @@ class SongIndex<T extends SongCore> {
   /// tekst bez słów albo bliskość po słowach. Reszty nie trzeba porównywać.
   Set<int> _candidates(SongProfile song) => {
         for (final k in song.titleKeys) ...?_byTitleKey[k],
-        ..._indicesById(song.id),
+        // Kandydaci, nie wniosek: tu także niejednoznaczne bez `@wykonawca`.
+        if (song.id.isNotEmpty) ...?(_byId[song.id] ?? _byBareId[_bare(song.id)]),
         if (song.youtubeId.isNotEmpty) ...?_byYoutube[song.youtubeId],
         if (song.words.isEmpty && song.text.isNotEmpty) ...?_byWordlessText[song.text],
         ..._nearestByWords(song),
@@ -250,7 +289,14 @@ class SongIndex<T extends SongCore> {
 /// pamięta, z czego powstała). Sama kolizja id deklaracją **nie jest** — nowa
 /// piosenka o zajętym id to konflikt, nie poprawka; o nim mówi dowód
 /// [SameId] w [SongIndex.matches].
-T? correctionTargetOf<T extends SongCore>(SongCore song, SongIndex<T> index) {
+T? correctionTargetOf<T extends SongCore>(SongCore song, SongIndex<T> index) =>
+    correctionTargetLookupOf(song, index)?.song;
+
+/// To samo, co [correctionTargetOf], plus **czy to domysł**: pierwowzór
+/// znaleziony dopiero bez członu `@wykonawca` ([IdLookup.withoutPerformer]).
+/// Przy kilku pasujących bez wykonawcy nic nie wybieramy — `null`.
+({T song, bool guessed})? correctionTargetLookupOf<T extends SongCore>(
+    SongCore song, SongIndex<T> index) {
   final data = song is SongRaw ? song.piosenkomatData : null;
   final correctedSongId = song is SongRaw ? song.correctedSongId : null;
 
@@ -262,10 +308,12 @@ T? correctionTargetOf<T extends SongCore>(SongCore song, SongIndex<T> index) {
   // Po wszystkich pod tym id, nie po pierwszym: w warsztacie id się
   // powtarza, a sąsiad pod tym samym id to kolizja, nie pierwowzór — tak
   // samo jak sama piosenka.
-  T? declared(String? id) {
+  ({T song, bool guessed})? declared(String? id) {
     if (id == null || id.isEmpty) return null;
-    for (final found in index.allById(id)) {
-      if (!identical(found, song)) return found;
+    final hit = index.lookupId(id);
+    if (hit == null || hit.how == IdLookup.ambiguous) return null;
+    for (final found in hit.songs) {
+      if (!identical(found, song)) return (song: found, guessed: hit.isGuessed);
     }
     return null;
   }

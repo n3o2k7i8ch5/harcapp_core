@@ -572,6 +572,11 @@ class Submission {
   /// `lclId` poprawianej piosenki **zadeklarowany przez apkę** w mejlu.
   /// Fakt, nie zgadywanie: gdy jest, to on rozstrzyga, co autor poprawiał.
   final String? declaredCorrectionTarget;
+  /// Jak znaleźliśmy [declaredCorrectionTarget] w śpiewniku: dokładnie, bez
+  /// `@wykonawca` (domysł) albo niejednoznacznie. `null` — wcale.
+  final IdLookup? declaredTargetLookup;
+  /// Przy [IdLookup.ambiguous]: id piosenek, które pasują bez `@wykonawca`.
+  final List<String> declaredTargetCandidates;
 
   const Submission({
     required this.threadId,
@@ -601,6 +606,8 @@ class Submission {
     this.alsoInApp = const [],
     this.batchMatch,
     this.declaredCorrectionTarget,
+    this.declaredTargetLookup,
+    this.declaredTargetCandidates = const [],
   });
 
   bool get isCorrection => kind == SubmissionKind.correction;
@@ -621,11 +628,13 @@ class Submission {
   bool get hasAuthorText =>
       hasUserMessage || (correctionMessage ?? '').trim().isNotEmpty;
 
-  /// Czy zadeklarowany cel istnieje w śpiewniku. `buildSubmission` celuje
-  /// [appMatch] w zadeklarowaną piosenkę, więc inny `songId` w dopasowaniu
-  /// znaczy, że tego id w śpiewniku nie ma.
+  /// Czy zadeklarowany cel jest w śpiewniku — dokładnie albo, jako domysł,
+  /// bez `@wykonawca`. `buildSubmission` celuje wtedy [appMatch] w znalezioną
+  /// piosenkę.
   bool get isDeclaredTargetInApp =>
-      declaredCorrectionTarget != null && appMatch?.songId == declaredCorrectionTarget;
+      declaredCorrectionTarget != null &&
+      (declaredTargetLookup == IdLookup.exact ||
+          declaredTargetLookup == IdLookup.withoutPerformer);
 
   /// Którą piosenkę w apce poprawia. Najpierw to, co powiedziało zgłoszenie
   /// — o ile taka piosenka jest w śpiewniku; deklaracja nieistniejącego id
@@ -639,14 +648,17 @@ class Submission {
   String? get correctionTarget {
     if (!isCorrection) return null;
     if (declaredCorrectionTarget != null) {
-      return isDeclaredTargetInApp ? declaredCorrectionTarget : null;
+      return isDeclaredTargetInApp ? appMatch?.songId : null;
     }
     return (appMatch?.isGuessable ?? false) ? appMatch!.songId : null;
   }
 
-  /// Czy [correctionTarget] jest domysłem, a nie id ze zgłoszenia.
+  /// Czy [correctionTarget] jest domysłem, a nie id ze zgłoszenia: dobrany
+  /// po podobieństwie albo znaleziony dopiero bez `@wykonawca`.
   bool get correctionTargetGuessed =>
-      correctionTarget != null && declaredCorrectionTarget == null;
+      correctionTarget != null &&
+      (declaredCorrectionTarget == null ||
+          declaredTargetLookup == IdLookup.withoutPerformer);
 
   Submission copyWith({AppMatch? appMatch, BatchMatch? batchMatch}) => Submission(
         threadId: threadId,
@@ -676,6 +688,8 @@ class Submission {
         alsoInApp: alsoInApp,
         batchMatch: batchMatch ?? this.batchMatch,
         declaredCorrectionTarget: declaredCorrectionTarget,
+        declaredTargetLookup: declaredTargetLookup,
+        declaredTargetCandidates: declaredTargetCandidates,
       );
 }
 

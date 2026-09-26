@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:harcapp_core/song_book/contrib_reply.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:path/path.dart' as p;
@@ -291,6 +292,12 @@ Future<int> _scan(ArgResults cmd) async {
   return 0;
 }
 
+/// Czy mejl może być ze starej apki — przed klasyfikacją, więc tym samym
+/// luźnym wzorcem, co parser i [ContribMessage.isSongSubmission]. Sztywne
+/// `contains` na znaczniku gubiło mejle, w których klient przełamał go
+/// w środku: taki autor, choć już mu odpisano, dostawał drugi mejl.
+bool mayBeOldApp(ContribMessage m) => oldestFormatSongRegion(m.body) != null;
+
 /// Wątki autorów ze starej apki, którym już coś wysłaliśmy — w którymkolwiek
 /// wątku. Blok „zaktualizuj apkę” wystarczy dostać raz, a `reply` nie odpisuje
 /// w każdym wątku autora, więc w części z nich `SENT` nie ma. Pytamy więc
@@ -301,7 +308,7 @@ Future<Set<String>> _oldAppAuthorsWeRepliedTo(
 ) async {
   final oldAppSenders = {
     for (final m in messages)
-      if (m.body.contains(kOldAppMarker))
+      if (mayBeOldApp(m))
         if (emailFromHeader(m.from) case final sender?) sender,
   };
   final weRepliedSenders = {

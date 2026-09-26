@@ -219,9 +219,15 @@ Submission buildSubmission(
   final declared = (declaredRaw?.isEmpty ?? true) ? null : declaredRaw;
   AppMatch? appMatch;
   var alsoInApp = <AppMatch>[];
+  final declaredHit = declared == null ? null : book.lookupId(declared);
   if (profile != null) {
     final found = book.strongest(profile);
-    if (declared != null) appMatch = book.matchTo(declared, profile);
+    // Ten sam `lookupId`, co w edytorze: trafienie bez `@wykonawca` to
+    // domysł, a kilka pasujących bez wykonawcy — brak celu, nie pierwszy
+    // z brzegu.
+    if (declaredHit case IdHit(how: IdLookup.exact || IdLookup.withoutPerformer, :final songs)) {
+      appMatch = book.matchTo(songs.first.id, profile);
+    }
     appMatch ??= found.firstOrNull;
     alsoInApp = [for (final m in found) if (m.songId != appMatch?.songId) m].take(2).toList();
   }
@@ -253,6 +259,11 @@ Submission buildSubmission(
     appMatch: appMatch,
     alsoInApp: alsoInApp,
     declaredCorrectionTarget: declared,
+    declaredTargetLookup: declaredHit?.how,
+    declaredTargetCandidates: [
+      if (declaredHit case IdHit(how: IdLookup.ambiguous, :final songs))
+        for (final s in songs) s.id,
+    ],
   );
 }
 
@@ -481,6 +492,15 @@ Decision decide(Submission s) {
         add(SongIssue.noTargetInApp,
             app == null ? 'nic w apce nie pasuje tytułem ani tekstem' : 'za mało podobne: ${app.detail}');
       }
+    } else if (s.declaredTargetLookup == IdLookup.withoutPerformer) {
+      // Id sprzed zmiany wykonawcy w apce — ta sama piosenka, ale to domysł,
+      // a podmiana idzie po id.
+      add(SongIssue.guessedCorrectionTarget,
+          'apka wskazała „$declared”, w śpiewniku jest „${s.correctionTarget}” — inny wykonawca');
+    } else if (s.declaredTargetLookup == IdLookup.ambiguous) {
+      add(SongIssue.noTargetInApp,
+          'apka wskazała „$declared”; bez wykonawcy pasuje kilka: '
+          '${s.declaredTargetCandidates.join(', ')}');
     } else if (!s.isDeclaredTargetInApp) {
       // Albo autor poprawiał własną piosenkę, albo id zdążyło się zmienić.
       // Bez celu: podmiana po nieistniejącym id to nie podmiana.
