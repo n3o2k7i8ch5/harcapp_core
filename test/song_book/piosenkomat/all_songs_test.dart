@@ -9,7 +9,7 @@ import 'package:harcapp_core/song_book/song_core.dart';
 /// rozmowy z autorami i id wątków ze skrzynki.
 const _workFields = {
   SongCore.PARAM_PIOSENKOMAT,
-  SongCore.PARAM_CORRECTED_SONG_ID,
+  SongCore.PARAM_BASED_ON_SONG_ID,
   'email_thread_id',
 };
 

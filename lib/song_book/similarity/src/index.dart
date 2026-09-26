@@ -285,7 +285,7 @@ class SongIndex<T extends SongCore> {
 ///
 /// Szukamy **po id, nie po tytule**: poprawka wolno zmienia tytuł, a dalej
 /// dotyczy tej samej piosenki. Dwa źródła deklaracji: `correctionTarget` ze
-/// śladu piosenkomatu i `correctedSongId` z JSON-a piosenki (piosenka własna
+/// śladu piosenkomatu i `basedOnSongId` z JSON-a piosenki (piosenka własna
 /// pamięta, z czego powstała). Sama kolizja id deklaracją **nie jest** — nowa
 /// piosenka o zajętym id to konflikt, nie poprawka; o nim mówi dowód
 /// [SameId] w [SongIndex.matches].
@@ -298,10 +298,10 @@ T? correctionTargetOf<T extends SongCore>(SongCore song, SongIndex<T> index) =>
 ({T song, bool guessed})? correctionTargetLookupOf<T extends SongCore>(
     SongCore song, SongIndex<T> index) {
   final data = song is SongRaw ? song.piosenkomatData : null;
-  final correctedSongId = song is SongRaw ? song.correctedSongId : null;
+  final basedOnSongId = song is SongRaw ? song.basedOnSongId : null;
 
   // Ślad piosenkomatu jest rozstrzygający: piosenka zgłoszona jako „nowa”
-  // nie jest poprawką, choćby niosła `correctedSongId` — przerobiona z cudzej
+  // nie jest poprawką, choćby niosła `basedOnSongId` — przerobiona z cudzej
   // i wysłana jako nowa też je ma, a to żadna deklaracja.
   if (data != null && data.kind != SubmissionKind.correction) return null;
 
@@ -318,5 +318,5 @@ T? correctionTargetOf<T extends SongCore>(SongCore song, SongIndex<T> index) =>
     return null;
   }
 
-  return declared(data?.correctionTarget) ?? declared(correctedSongId);
+  return declared(data?.correctionTarget) ?? declared(basedOnSongId);
 }

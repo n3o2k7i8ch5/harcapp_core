@@ -22,7 +22,9 @@ class ParsedContribEmail{
   /// Treść bloku „Propozycja poprawki”. Apka emituje ten blok zawsze —
   /// dla nowych piosenek pusty — więc niepusty znaczy: autor przysłał poprawkę.
   final String? correctionMessage;
-  final bool isNewFormat;
+  /// Mejl sprzed bloków ``` (`_parseLegacy`). Zgłoszenie z blokami albo
+  /// z załącznikiem — `false`.
+  final bool isLegacy;
   /// Lista pól z bloku `Osoba dodająca`, które były obecne w mejlu, ale
   /// nie udało się ich zmapować na aktualny model (np. `rankHarc: HO` po
   /// refaktorze enuma). Każdy wpis to gotowy do wyświetlenia komunikat.
@@ -34,15 +36,15 @@ class ParsedContribEmail{
   /// `lclId` piosenki, którą autor poprawia, zadeklarowany przez apkę
   /// w linii „### Poprawiana piosenka”. `null` znaczy: mejl tego nie niesie
   /// (nowa piosenka albo apka sprzed tej linii) i cel trzeba zgadywać.
-  final String? correctedSongId;
-  /// Rodzaj zadeklarowany przez apkę. Tylko nowy format; przy starych mejlach
-  /// `null` i rodzaj wnioskuje się z tematu.
+  final String? correctionTarget;
+  /// Rodzaj zadeklarowany przez apkę. Tylko z załącznika; bez niego `null`
+  /// i rodzaj wnioskuje się z tematu.
   final SubmissionKind? declaredKind;
-  /// Czy nadawca zgłasza własną piosenkę. `null` przy starych mejlach.
+  /// Czy nadawca zgłasza własną piosenkę. Tylko z załącznika.
   final bool? senderIsContributor;
-  /// Wersja apki, z której poszło zgłoszenie. Tylko nowy format.
+  /// Wersja apki, z której poszło zgłoszenie. Tylko z załącznika.
   final String? appVersion;
-  /// Skąd przyszło zgłoszenie. Tylko nowy format.
+  /// Skąd przyszło zgłoszenie. Tylko z załącznika.
   final SubmissionOrigin? origin;
   /// Ile zgłoszeń niesie plik. Więcej niż jedno: piosenkomat ich nie rusza —
   /// jeden wątek to jedna piosenka.
@@ -55,10 +57,10 @@ class ParsedContribEmail{
     required this.registered,
     required this.userMessage,
     this.correctionMessage,
-    required this.isNewFormat,
+    required this.isLegacy,
     this.personParseWarnings = const [],
     this.isOldestFormat = false,
-    this.correctedSongId,
+    this.correctionTarget,
     this.declaredKind,
     this.senderIsContributor,
     this.appVersion,
@@ -81,12 +83,12 @@ class ParsedContribEmail{
       registered: submission.contributor,
       userMessage: extractSubmissionUserMessage(body),
       correctionMessage: submission.correctionMessage,
-      isNewFormat: true,
-      correctedSongId: submission.correctedSongId,
+      isLegacy: false,
+      correctionTarget: submission.correctionTarget,
       declaredKind: submission.kind,
       senderIsContributor: submission.senderIsContributor,
       appVersion: file.appVersion,
-      origin: file.source,
+      origin: file.origin,
       submissionCount: file.submissions.length,
     );
   }
@@ -109,7 +111,7 @@ ParsedContribEmail parseContribEmail(String content){
     } catch(eLegacy){
       throw ContribEmailParseError(
         'Nie udało się odczytać piosenki z mejla.\n'
-            'Próba nowego formatu: $eNew\n'
+            'Próba formatu z blokami ```: $eNew\n'
             'Próba formatu legacy: $eLegacy',
       );
     }
@@ -160,8 +162,8 @@ ParsedContribEmail _parseV2(String content){
     registered: registered,
     userMessage: _extractUserMessage(content),
     correctionMessage: extractCorrectionMessage(content),
-    isNewFormat: true,
-    correctedSongId: extractCorrectedSongId(content),
+    isLegacy: false,
+    correctionTarget: extractCorrectionTarget(content),
   );
 }
 
@@ -262,7 +264,7 @@ ParsedContribEmail _parseLegacy(String content){
     registered: registered,
     userMessage: _extractUserMessage(content),
     correctionMessage: extractCorrectionMessage(content),
-    isNewFormat: false,
+    isLegacy: true,
     personParseWarnings: personWarnings,
     isOldestFormat: isOldestFormat,
   );
@@ -559,14 +561,7 @@ final RegExp _correctionFenceRe = RegExp(
   r'### Propozycja poprawki:\s*```[a-zA-Z]*\s*\n([\s\S]*?)```',
 );
 
-const String _correctedSongIdHeader = '### Poprawiana piosenka:';
-
-/// Cała linia wygląda na kawałek `lclId`: bez białych znaków (po nich poznajemy,
-/// że to już nie identyfikator), bez `>` (cytat w mejlu zwrotnym) i bez `#`
-/// (nagłówek sekcji). Same identyfikatory bywają dziwne — np.
-/// `o!_ballada_o_stefanie_mirowskim@21_druzyna_harcerska_...` — więc reszty
-/// znaków nie ograniczamy.
-final RegExp _songIdPieceRe = RegExp(r'^[^\s>#]+$');
+const String _correctionTargetHeader = '### Poprawiana piosenka:';
 
 /// Sekcja „### Poprawiana piosenka” — `lclId` piosenki, którą autor poprawia.
 /// `null`, gdy mejl jej nie ma. Czytamy tylko sprzed sekcji „### Kod piosenki:",
@@ -575,44 +570,28 @@ final RegExp _songIdPieceRe = RegExp(r'^[^\s>#]+$');
 /// Wartość bywa złamana: klienty pocztowe łamią linie koło 76 znaku, także
 /// w środku słowa, a `lclId` bywa dłuższe (najdłuższe w śpiewniku ma 95 znaków).
 /// Dlatego apka wysyła id w bloku ``` — wszystko między ogrodzeniami to id,
-/// białe znaki i znaki cytatu (`>`) wyrzucamy, nic nie zgadujemy. Starsze mejle
-/// niosły id w tej samej linii co nagłówek; wtedy doklejamy następne linie —
-/// ale tylko takie, które **w całości** wyglądają na kawałek identyfikatora.
-/// Pusta linia, nagłówek (`###`) czy podpis („Z poważaniem”) kończą wartość.
-String? extractCorrectedSongId(String content){
+/// białe znaki i znaki cytatu (`>`) wyrzucamy, nic nie zgadujemy. Bez bloku
+/// — `null`: żaden mejl w skrzynce nie niósł id inaczej.
+String? extractCorrectionTarget(String content){
   final int cutoff = content.indexOf('### Kod piosenki:');
   final String haystack = cutoff == -1? content: content.substring(0, cutoff);
-  final int at = haystack.indexOf(_correctedSongIdHeader);
+  final int at = haystack.indexOf(_correctionTargetHeader);
   if(at == -1) return null;
 
   final List<String> lines = haystack
-      .substring(at + _correctedSongIdHeader.length)
+      .substring(at + _correctionTargetHeader.length)
       .split('\n')
       .map((l) => l.replaceFirst(quotePrefixRe, '').trim())
       .toList();
 
   final int fence = lines.indexWhere((l) => l.startsWith('```'));
-  final bool fenced = fence != -1 && lines.take(fence).every((l) => l.isEmpty);
-  final String out;
-  if(fenced){
-    final StringBuffer id = StringBuffer();
-    for(final String line in lines.skip(fence + 1)){
-      if(line.startsWith('```')) break;
-      id.write(line.replaceAll(RegExp(r'\s'), ''));
-    }
-    out = id.toString();
-  } else {
-    // Reszta linii nagłówka: pusta, gdy klient złamał ją zaraz po dwukropku.
-    final String first = lines.first;
-    if(first.isNotEmpty && !_songIdPieceRe.hasMatch(first)) return null;
-    final StringBuffer id = StringBuffer(first);
-    for(final String line in lines.skip(1)){
-      if(!_songIdPieceRe.hasMatch(line)) break;
-      id.write(line);
-    }
-    out = id.toString();
+  if(fence == -1 || !lines.take(fence).every((l) => l.isEmpty)) return null;
+  final StringBuffer id = StringBuffer();
+  for(final String line in lines.skip(fence + 1)){
+    if(line.startsWith('```')) break;
+    id.write(line.replaceAll(RegExp(r'\s'), ''));
   }
-  return out.isEmpty? null: out;
+  return id.isEmpty? null: id.toString();
 }
 
 /// Blok „Propozycja poprawki” — `null`, gdy pusty albo go nie ma.

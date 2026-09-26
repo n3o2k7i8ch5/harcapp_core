@@ -314,7 +314,7 @@ class ContribMessage {
   bool get hasOldAppRegion => oldestFormatSongRegion(body) != null;
 
   /// Znacznik zgłoszenia ze strony w temacie. Całą regułę (także pole
-  /// `source` w pliku) sprawdza `isWebSubmission` w `classify`.
+  /// `origin` w pliku) sprawdza `isWebSubmission` w `classify`.
   bool get hasWebSubjectMarker => (subject ?? '').contains(kWebSubmissionMarker);
 
   /// Czy wiadomość niesie **własny** kod piosenki, nie tylko cytat cudzego.
@@ -392,9 +392,9 @@ class Submission {
   /// żeby ją zaktualizował.
   final bool isOldApp;
   final EmailShape shape;
-  /// Skąd przyszło zgłoszenie — z pliku, więc tylko dla nowego formatu.
+  /// Skąd przyszło zgłoszenie — tylko z załącznika.
   final SubmissionOrigin? origin;
-  /// Wersja apki, z której poszło zgłoszenie. Tylko nowy format.
+  /// Wersja apki, z której poszło zgłoszenie. Tylko z załącznika.
   final String? appVersion;
   /// Czy nadawca zgłasza **własną** piosenkę. Przy `false` jego adres służy
   /// wyłącznie do odpisania.
@@ -501,7 +501,7 @@ class Submission {
   /// Którą piosenkę w apce poprawia. Najpierw to, co powiedziało zgłoszenie
   /// — o ile taka piosenka jest w śpiewniku; deklaracja nieistniejącego id
   /// to brak celu, nie cel. Gdy zgłoszenie nie powiedziało nic — najbliższa
-  /// piosenka z apki, o ile jest naprawdę blisko ([AppMatch.isGuessable]).
+  /// piosenka z apki, o ile jest naprawdę blisko ([canGuessCorrectionTarget]).
   /// Zgłoszenie bez decyzji człowieka wchodzi (`goesIn` to `accepted ?? true`),
   /// więc słaby domysł kasujemy do `null`, a nie zostawiamy do wyłapania
   /// okiem. Domysł nigdy nie udaje danych: mówi o tym
@@ -512,7 +512,8 @@ class Submission {
     if (declaredCorrectionTarget != null) {
       return isDeclaredTargetInApp ? appMatch?.songId : null;
     }
-    return (appMatch?.isGuessable ?? false) ? appMatch!.songId : null;
+    final guess = appMatch;
+    return guess != null && canGuessCorrectionTarget(guess) ? guess.songId : null;
   }
 
   /// Czy [correctionTarget] jest domysłem, a nie id ze zgłoszenia: dobrany

@@ -92,7 +92,7 @@ abstract class SongCore{
   /// w piosence własnej: edytor startuje od kopii bez id, więc bez tego pola
   /// link do źródła ginie w pierwszym kroku. Do bazy piosenek nie trafia —
   /// zdejmuje je `prepare` przed wgraniem.
-  static const String PARAM_CORRECTED_SONG_ID = 'corrected_song_id';
+  static const String PARAM_BASED_ON_SONG_ID = 'based_on_song_id';
   static const String PARAM_REFREN = 'refren';
   static const String PARAM_PARTS = 'parts';
 

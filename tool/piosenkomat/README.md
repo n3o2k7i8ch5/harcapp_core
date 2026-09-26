@@ -8,7 +8,7 @@ Gmail jest jedynym stanem.
 
 **Obsługuje wyłącznie zgłoszenia wysłane z apki.** Zgłoszenia ze strony
 (`harcapp.web.app`) są poza zakresem i są **aktywnie odsiewane** — po znaczniku
-`[hrcpsng/web]` w temacie, a gdy jest plik zgłoszenia, także po polu `source`
+`[hrcpsng/web]` w temacie, a gdy jest plik zgłoszenia, także po polu `origin`
 w nim. Ogarniasz je ręcznie.
 
 **Jeden wątek to jedna piosenka.** Druga piosenka dosłana odpowiedzią w wątku,
@@ -31,13 +31,13 @@ dopisek autora, czyli wszystko nad zamrożoną belką `Akceptacja regulaminu`.
 {
   "format": 1,
   "digest": "sha256:…",
-  "source": "app-android",
+  "origin": "app-android",
   "app_version": "2.4.1",
   "rules_version": "v05.10.2025",
   "submissions": [
     {
       "kind": "correction",
-      "corrected_song_id": "o!_barka",
+      "correction_target": "o!_barka",
       "correction_message": "poprawka chwytu w refrenie",
       "sender_is_contributor": true,
       "contributor": {"person": {…}, "emails": ["…"]},
@@ -388,11 +388,11 @@ Twoich w kolejce nie ma (leżą w wysłanych), więc `scan` dociąga je z wątku
 i pokazuje bez ramki — samą sprawę; etykiet na nich nie wiesza.
 `accepted` i `review_note` dopisuje edytor przy przeglądzie: przełącznik
 „wchodzi” i tekst z pola „Odpowiedź do autora”. Skąd przyszło zgłoszenie, mówi
-`source` w **pliku zgłoszenia**; rozpoznany kształt mejla widać w rozkładzie
+`origin` w **pliku zgłoszenia**; rozpoznany kształt mejla widać w rozkładzie
 w `report.txt`.
 
 `correction_target` — którą piosenkę w apce poprawia — bierze się **z mejla**:
-nowy format niesie `corrected_song_id` w pliku zgłoszenia, starszy w sekcji
+plik zgłoszenia niesie `correction_target`, mejl bez załącznika sekcję
 `### Poprawiana piosenka:` z id w bloku ``` (klienty łamią
 długie linie, blok czyta się w całości), a piosenka własna pamięta
 swój pierwowzór od chwili, w której wzięto ją do edycji. Gdy zgłoszenie nic nie
@@ -405,7 +405,7 @@ id **jest** w śpiewniku; inaczej to brak celu (`no-target-in-app`), nie cel.
 
 Oba pola nigdy nie jadą do `all_songs.hrcpsng`: `toApiJsonMap` wypuszcza je tylko
 na życzenie narzędzia, a `prepare` zdejmuje je przed wgraniem — razem z pamięcią
-o pierwowzorze w samej piosence (`corrected_song_id`).
+o pierwowzorze w samej piosence (`based_on_song_id`).
 
 ## Przegląd i `prepare`
 

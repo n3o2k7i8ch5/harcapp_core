@@ -177,30 +177,30 @@ void main() {
       expect(correctionTargetOf(s, app), isNull);
     });
 
-    test('piosenka własna z apki — po correctedSongId', () {
-      final s = song('own_1', 'Moje góry', _gory)..correctedSongId = 'o!_gory';
+    test('piosenka własna z apki — po basedOnSongId', () {
+      final s = song('own_1', 'Moje góry', _gory)..basedOnSongId = 'o!_gory';
       expect(correctionTargetOf(s, app)?.id, 'o!_gory');
     });
 
     test('sama siebie nie jest własnym pierwowzorem', () {
-      final self = song('o!_x', 'X', _gory)..correctedSongId = 'o!_x';
+      final self = song('o!_x', 'X', _gory)..basedOnSongId = 'o!_x';
       expect(correctionTargetOf(self, SongIndex<SongRaw>([self])), isNull);
     });
 
     test('przy powtórzonym id deklaracja wskazuje sąsiada, nigdy samą siebie', () {
       // Po `prepare` poprawka ma id pierwowzoru, a obok w warsztacie leży
-      // oryginał pod tym samym id — deklaracja `correctedSongId` ma trafić
+      // oryginał pod tym samym id — deklaracja `basedOnSongId` ma trafić
       // w niego, niezależnie od tego, kto jest pierwszy na liście.
       final a = song('o!_x', 'X', _gory);
-      final b = song('o!_x', 'X poprawione', _gory)..correctedSongId = 'o!_x';
+      final b = song('o!_x', 'X poprawione', _gory)..basedOnSongId = 'o!_x';
       expect(correctionTargetOf(b, SongIndex<SongRaw>([a, b])), same(a));
       expect(correctionTargetOf(b, SongIndex<SongRaw>([b, a])), same(a));
       expect(correctionTargetOf(b, SongIndex<SongRaw>([b])), isNull);
     });
 
-    test('puste correctedSongId nie wskazuje piosenek bez id', () {
+    test('puste basedOnSongId nie wskazuje piosenek bez id', () {
       final blank = song('', 'Bez id', _gory);
-      final s = song('o!_y', 'Y', _morze)..correctedSongId = '';
+      final s = song('o!_y', 'Y', _morze)..basedOnSongId = '';
       expect(correctionTargetOf(s, SongIndex<SongRaw>([blank])), isNull);
     });
 

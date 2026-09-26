@@ -74,7 +74,7 @@ String _baseMessage(
     bool isContributorsFirstSong,
     RegisteredContributor? registered,
     List<ContributorRef> contribRefs,
-    {String? correctedSongId}
+    {String? correctionTarget}
 ) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
     "\n"
     "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
@@ -87,13 +87,13 @@ String _baseMessage(
     "\n"
     "\n### Źródło piosenki: ${source.displayName}"
     "${
-        correctedSongId == null?
+        correctionTarget == null?
         '':
         '\n'
         '\n### Poprawiana piosenka:'
         '\n'
         '\n```'
-        '\n$correctedSongId'
+        '\n$correctionTarget'
         '\n```'
     }"
     "${
@@ -107,7 +107,7 @@ String _baseMessage(
         '\n```'
     }";
 
-/// [correctedSongId] to `lclId` piosenki, którą autor poprawia — jedziemy z nim
+/// [correctionTarget] to `lclId` piosenki, którą autor poprawia — jedziemy z nim
 /// w mejlu, bo kod piosenki leci bez id (`withId: false`) i bez tej linii
 /// piosenkomat musi zgadywać cel poprawki po tytule i tekście.
 Future<String> composeContribSongEmail({
@@ -117,14 +117,14 @@ Future<String> composeContribSongEmail({
   RegisteredContributor? registered,
   required bool isNewSong,
   String? updateComment,
-  String? correctedSongId,
+  String? correctionTarget,
 }) async {
 
   final firstSong = isContributorsFirstSong(registered?.emails ?? const []);
 
   String encodedSong = await song.code;
 
-  return "${_baseMessage(source, acceptRulesVersion, firstSong, registered, song.contribRefs, correctedSongId: isNewSong? null: correctedSongId)}"
+  return "${_baseMessage(source, acceptRulesVersion, firstSong, registered, song.contribRefs, correctionTarget: isNewSong? null: correctionTarget)}"
       "${
           updateComment != null?
           '\n'

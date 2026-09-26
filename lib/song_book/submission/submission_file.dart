@@ -29,7 +29,7 @@ enum SubmissionOrigin{
 
   const SubmissionOrigin(this.id, this.tag);
 
-  /// Wartość pola `source` w pliku.
+  /// Wartość pola `origin` w pliku.
   final String id;
   /// Człon znacznika w temacie: `app` albo `web`.
   final String tag;
@@ -90,7 +90,7 @@ String submissionDigest(Map<String, dynamic> fileMap){
 class SongSubmission{
 
   static const String PARAM_KIND = 'kind';
-  static const String PARAM_CORRECTED_SONG_ID = 'corrected_song_id';
+  static const String PARAM_CORRECTION_TARGET = 'correction_target';
   static const String PARAM_CORRECTION_MESSAGE = 'correction_message';
   static const String PARAM_SENDER_IS_CONTRIBUTOR = 'sender_is_contributor';
   static const String PARAM_CONTRIBUTOR = 'contributor';
@@ -104,9 +104,9 @@ class SongSubmission{
   static const String PARAM_SONG_ID = 'id';
 
   final SubmissionKind kind;
-  /// Co autor **deklaruje**, że poprawia. Wygrywa z `corrected_song_id`
+  /// Co autor **deklaruje**, że poprawia. Wygrywa z `based_on_song_id`
   /// w JSON-ie piosenki, które znaczy co innego: pierwowzór, z którego powstała.
-  final String? correctedSongId;
+  final String? correctionTarget;
   final String? correctionMessage;
   /// Czy nadawca zgłasza **własną** piosenkę. `false`: jego adres służy
   /// wyłącznie do odpisania i nie trafia do karty osoby dodającej.
@@ -117,7 +117,7 @@ class SongSubmission{
   const SongSubmission({
     required this.kind,
     required this.song,
-    this.correctedSongId,
+    this.correctionTarget,
     this.correctionMessage,
     this.senderIsContributor = true,
     this.contributor,
@@ -127,7 +127,7 @@ class SongSubmission{
 
   Map<String, dynamic> toJsonMap() => {
     PARAM_KIND: kind.id,
-    PARAM_CORRECTED_SONG_ID: correctedSongId,
+    PARAM_CORRECTION_TARGET: correctionTarget,
     PARAM_CORRECTION_MESSAGE: correctionMessage,
     PARAM_SENDER_IS_CONTRIBUTOR: senderIsContributor,
     PARAM_CONTRIBUTOR: contributor == null? null: {
@@ -143,7 +143,7 @@ class SongSubmission{
 
   static SongSubmission fromJsonMap(Map<String, dynamic> map) => SongSubmission(
     kind: _kindOf(map[PARAM_KIND]),
-    correctedSongId: _nonEmpty(map[PARAM_CORRECTED_SONG_ID]),
+    correctionTarget: _nonEmpty(map[PARAM_CORRECTION_TARGET]),
     correctionMessage: _nonEmpty(map[PARAM_CORRECTION_MESSAGE]),
     senderIsContributor: map[PARAM_SENDER_IS_CONTRIBUTOR] as bool? ?? true,
     contributor: _contributorOf(map[PARAM_CONTRIBUTOR]),
@@ -205,13 +205,13 @@ class SongSubmissionFile{
 
   static const String PARAM_FORMAT = 'format';
   static const String PARAM_DIGEST = 'digest';
-  static const String PARAM_SOURCE = 'source';
+  static const String PARAM_ORIGIN = 'origin';
   static const String PARAM_APP_VERSION = 'app_version';
   static const String PARAM_RULES_VERSION = 'rules_version';
   static const String PARAM_SUBMISSIONS = 'submissions';
 
   final int format;
-  final SubmissionOrigin? source;
+  final SubmissionOrigin? origin;
   final String? appVersion;
   /// Wersja regulaminu zaakceptowana przez **osobę wysyłającą**, nie dodającą.
   final String? rulesVersion;
@@ -220,7 +220,7 @@ class SongSubmissionFile{
   const SongSubmissionFile({
     this.format = kSubmissionFormat,
     required this.submissions,
-    this.source,
+    this.origin,
     this.appVersion,
     this.rulesVersion,
   });
@@ -228,7 +228,7 @@ class SongSubmissionFile{
   Map<String, dynamic> toJsonMap(){
     final map = <String, dynamic>{
       PARAM_FORMAT: format,
-      PARAM_SOURCE: source?.id,
+      PARAM_ORIGIN: origin?.id,
       PARAM_APP_VERSION: appVersion,
       PARAM_RULES_VERSION: rulesVersion,
       PARAM_SUBMISSIONS: [for(final s in submissions) s.toJsonMap()],
@@ -276,7 +276,7 @@ class SongSubmissionFile{
 
     return SongSubmissionFile(
       format: format,
-      source: SubmissionOrigin.byId(map[PARAM_SOURCE] as String?),
+      origin: SubmissionOrigin.byId(map[PARAM_ORIGIN] as String?),
       appVersion: _nonEmpty(map[PARAM_APP_VERSION]),
       rulesVersion: _nonEmpty(map[PARAM_RULES_VERSION]),
       submissions: [

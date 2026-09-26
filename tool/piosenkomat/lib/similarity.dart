@@ -20,19 +20,19 @@ class AppMatch extends SongMatch<SongRaw> {
   String get songId => song.id;
   /// Tylko podpis do wyświetlenia.
   String get title => song.title;
+}
 
-  /// Czy na tę piosenkę wolno wskazać poprawkę, która **nie powiedziała**,
-  /// co poprawia. Podmiana idzie po id, więc sam zbieżny tytuł („Barka” to
-  /// nie zawsze ta sama „Barka”) nie wystarczy: wymagamy co najmniej połowy
-  /// wspólnych wersów w którąś stronę ([MatchLevel.variant] i mocniejsze) —
-  /// poprawka może właśnie zmieniać tytuł, a (prawie) ten sam tekst to ta
-  /// sama piosenka. Słabsze podobieństwo przechodzi tylko z tym samym tytułem.
-  bool get isGuessable {
-    final l = level;
-    if (l == null) return false;
-    if (l.index <= MatchLevel.variant.index) return true;
-    return l == MatchLevel.related && similarities.has<SameTitle>();
-  }
+/// Reguła: czy na [m] wolno wskazać poprawkę, która **nie powiedziała**,
+/// co poprawia. Podmiana idzie po id, więc sam zbieżny tytuł („Barka” to
+/// nie zawsze ta sama „Barka”) nie wystarczy: wymagamy co najmniej połowy
+/// wspólnych wersów w którąś stronę ([MatchLevel.variant] i mocniejsze) —
+/// poprawka może właśnie zmieniać tytuł, a (prawie) ten sam tekst to ta
+/// sama piosenka. Słabsze podobieństwo przechodzi tylko z tym samym tytułem.
+bool canGuessCorrectionTarget(AppMatch m) {
+  final l = m.level;
+  if (l == null) return false;
+  if (l.index <= MatchLevel.variant.index) return true;
+  return l == MatchLevel.related && m.similarities.has<SameTitle>();
 }
 
 /// Najbliższe **inne zgłoszenie (inny wątek)** w tej paczce.

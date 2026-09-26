@@ -180,7 +180,7 @@ class SongPlaybackBar extends StatefulWidget {
       isSticky(song, settings) ? heightFor(song, viewportWidth) : 0;
 
   static bool isSticky(SongCore song, SongBookSettTempl settings) =>
-      settings.stickyAudioPlayer && _playback.isEngaged(song);
+      settings.stickyPlaybackBar && _playback.isEngaged(song);
 
   @override
   State<SongPlaybackBar> createState() => _SongPlaybackBarState();

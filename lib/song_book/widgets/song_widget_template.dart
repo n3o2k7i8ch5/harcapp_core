@@ -1250,8 +1250,6 @@ class _ContentWidget<TSong extends SongCore> extends StatelessWidget{
   String get chords => song.chords;
   String get lineNum => song.lineNumStr;
 
-  static const double lineSpacing = TextSizeProvider.songLineHeight;
-
   const _ContentWidget(this.parent, this.scrollController, this.contentCardsKey, this.scrollviewKey, {Key? key}):super(key: key);
 
   @override
@@ -1307,8 +1305,8 @@ class _ContentWidget<TSong extends SongCore> extends StatelessWidget{
                       min(textSizeProv.value, Dimen.textSizeTiny),
                       color: hintEnab_(context),
                       height: textSizeProv.value<Dimen.textSizeTiny?
-                        lineSpacing:
-                        lineSpacing*(textSizeProv.value / Dimen.textSizeTiny),
+                        TextSizeProvider.songLineHeight:
+                        TextSizeProvider.songLineHeight*(textSizeProv.value / Dimen.textSizeTiny),
                     ),
                   );
 

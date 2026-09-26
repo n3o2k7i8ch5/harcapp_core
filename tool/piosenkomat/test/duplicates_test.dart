@@ -195,7 +195,7 @@ void main() {
       expect(same.destination, Destination.rejectAlreadyInApp);
       expect(same.goesToFile, isFalse);
       final yt = classify(
-          msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx'))),
+          msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx'))),
           book: book);
       expect(yt.destination, Destination.candidateCorrection);
       expect(yt.issues, isEmpty);
@@ -283,7 +283,7 @@ void main() {
     test('dwie identyczne poprawki → starsza odpada, nowsza bez same-target-in-batch', () async {
       final book = bookWith([sampleSong(lyrics: _a)]);
       Future<String> poprawka() => completeEmail(
-          isNew: false, correctedSongId: 'tmp', song: sampleSong(lyrics: '$_a\nDopisana zwrotka'));
+          isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: '$_a\nDopisana zwrotka'));
       final out = classifyBatch([
         msgFrom(await older(await poprawka()), id: 'old'),
         msgFrom(await poprawka(), id: 'new'),
@@ -341,8 +341,8 @@ void main() {
     test('dwie poprawki tej samej piosenki → same-target-in-batch, obie do pliku', () async {
       final book = bookWith([sampleSong(lyrics: _a)]);
       final out = classifyBatch([
-        msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(lyrics: '$_a\nDopisana zwrotka')), id: 'a'),
-        msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(title: 'Płonie ognisko', lyrics: '$_a\nInna zwrotka')), id: 'b'),
+        msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: '$_a\nDopisana zwrotka')), id: 'a'),
+        msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(title: 'Płonie ognisko', lyrics: '$_a\nInna zwrotka')), id: 'b'),
       ], book: book);
       expect(out.map((c) => c.destination), everyElement(Destination.candidateCorrection));
       expect(out.map((c) => c.submission.correctionTarget), everyElement('tmp'));
@@ -359,13 +359,13 @@ void main() {
         msgFrom(
             await completeEmail(
                 isNew: false,
-                correctedSongId: 'o1',
+                correctionTarget: 'o1',
                 song: sampleSong(title: 'Ognisko', lyrics: '$_a\nDopisana zwrotka')),
             id: 'a'),
         msgFrom(
             await completeEmail(
                 isNew: false,
-                correctedSongId: 'k1',
+                correctionTarget: 'k1',
                 song: sampleSong(title: 'Knieje', lyrics: '$_a\nJedna nowa linijka\nI jeszcze jedna')),
             id: 'b'),
       ], book: bookWith([ognisko, knieje]));

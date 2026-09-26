@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
-import 'package:harcapp_core/comm_classes/sha_pref.dart';
 import 'package:harcapp_core/comm_widgets/app_button.dart';
 import 'package:harcapp_core/comm_widgets/instrument_type.dart';
 import 'package:harcapp_core/song_book/playback/playback_controller.dart';
@@ -13,16 +12,7 @@ import 'package:harcapp_core/song_book/playback/widgets/song_playback_bar.dart';
 import 'package:harcapp_core/song_book/settings.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 
-class TestSettings extends SongBookSettTempl {
-  @override bool alwaysOnScreen = false;
-  @override bool scrollText = false;
-  @override double autoscrollTextSpeed = 0.1;
-  @override bool showChords = true;
-  @override bool chordsTrailing = false;
-  @override bool chordsDrawShow = false;
-  @override InstrumentType chordsDrawType = InstrumentType.values.first;
-  @override bool stickyAudioPlayer = true;
-}
+import 'test_settings.dart';
 
 class FakeSession extends PlaybackSession {
   FakeSession(super.source);
@@ -51,7 +41,7 @@ void main() {
   final ctrl = SongbookPlaybackController.instance;
 
   setUp(() {
-    ShaPref.setCustomMethodsWithMap({});
+    ctrl.settings = TestSettings();
     AudioMeta.set({'o!_x': const [SongAudio('x.mp3', performer: 'Ktoś')]});
     ctrl.sessionFactory = (source) => FakeSession(source);
   });
@@ -123,7 +113,7 @@ void main() {
 
   testWidgets('ustawienie „nie przyklejaj” wygrywa z graniem', (tester) async {
     final s = song('o!_x', yt: 'abc');
-    final settings = TestSettings()..stickyAudioPlayer = false;
+    final settings = TestSettings()..stickyPlaybackBar = false;
     await ctrl.play(preferredPlaybackSourceOf(s)!);
 
     await tester.pumpWidget(wrap(SongPlaybackBar(s, settings: settings)));

@@ -1,10 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:harcapp_core/comm_classes/sha_pref.dart';
 import 'package:harcapp_core/song_book/playback/playback_controller.dart';
 import 'package:harcapp_core/song_book/playback/playback_session.dart';
 import 'package:harcapp_core/song_book/playback/playback_source.dart';
 import 'package:harcapp_core/song_book/playback/song_audio.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
+
+import 'test_settings.dart';
 
 class FakeSession extends PlaybackSession {
 
@@ -57,11 +58,11 @@ void main() {
 
   final SongbookPlaybackController ctrl = SongbookPlaybackController.instance;
   final List<FakeSession> created = [];
-  late Map prefs;
+  late TestSettings settings;
 
   setUp(() {
-    prefs = {};
-    ShaPref.setCustomMethodsWithMap(prefs);
+    settings = TestSettings();
+    ctrl.settings = settings;
     created.clear();
     ctrl.sessionFactory = (source) {
       final s = FakeSession(source);
@@ -83,17 +84,16 @@ void main() {
       expect(AutoplayMode.repeat.cycled, AutoplayMode.one);
     });
 
-    test('nieznany kod z ShaPref → stop', () {
+    test('nieznany kod → stop', () {
       expect(AutoplayMode.fromCode(99), AutoplayMode.one);
       expect(AutoplayMode.fromCode(2), AutoplayMode.next);
     });
 
-    test('ustawienia idą do ShaPref pod starymi kluczami', () {
+    test('ustawienia idą do ustawień gospodarza', () {
       ctrl.autoplayMode = AutoplayMode.repeat;
       ctrl.autoplayRandom = true;
-      expect(prefs['SHA_PREF_SPIEWNIK_YT_AUTOPLAY'], 1);
-      expect(prefs['SHA_PREF_SPIEWNIK_YT_RANDOM'], true);
-      expect(ctrl.autoplayMode, AutoplayMode.repeat);
+      expect(settings.autoplayMode, AutoplayMode.repeat);
+      expect(settings.autoplayRandom, isTrue);
     });
   });
 

@@ -23,13 +23,13 @@ void main() {
   test('obieg w obie strony: co zapisane, to wczytane', () {
     final song = sampleSong(title: 'Barka');
     final file = SongSubmissionFile(
-      source: SubmissionOrigin.appAndroid,
+      origin: SubmissionOrigin.appAndroid,
       appVersion: '2.4.1',
       rulesVersion: 'v05.10.2025',
       submissions: [
         SongSubmission(
           kind: SubmissionKind.correction,
-          correctedSongId: 'o!_barka',
+          correctionTarget: 'o!_barka',
           correctionMessage: 'poprawka chwytu w refrenie',
           senderIsContributor: false,
           contributor: const RegisteredContributor(
@@ -43,12 +43,12 @@ void main() {
 
     final back = SongSubmissionFile.decode(file.encode());
     expect(back.format, kSubmissionFormat);
-    expect(back.source, SubmissionOrigin.appAndroid);
+    expect(back.origin, SubmissionOrigin.appAndroid);
     expect(back.appVersion, '2.4.1');
     expect(back.rulesVersion, 'v05.10.2025');
     final s = back.submissions.single;
     expect(s.kind, SubmissionKind.correction);
-    expect(s.correctedSongId, 'o!_barka');
+    expect(s.correctionTarget, 'o!_barka');
     expect(s.correctionMessage, 'poprawka chwytu w refrenie');
     expect(s.senderIsContributor, isFalse);
     expect(s.contributor?.person.name, 'Jan Kowalski');
@@ -192,7 +192,7 @@ void main() {
     final mail = submissionEmail(submissions: [
       SongSubmission(
         kind: SubmissionKind.correction,
-        correctedSongId: 'o!_barka',
+        correctionTarget: 'o!_barka',
         correctionMessage: 'poprawiony refren',
         song: sampleSong(title: 'Barka'),
       ),
@@ -343,7 +343,7 @@ void main() {
     expect(m.isSongSubmission, isFalse);
     expect(isWebSubmission(m), isTrue);
 
-    // Temat człowiek może zmienić — wtedy rozstrzyga pole `source` w pliku.
+    // Temat człowiek może zmienić — wtedy rozstrzyga pole `origin` w pliku.
     final noMarker = msgFrom(mail.eml.replaceFirst(' [hrcpsng/web]', ''), id: 'm2');
     expect(noMarker.isSongSubmission, isTrue);
     expect(isWebSubmission(noMarker), isTrue);

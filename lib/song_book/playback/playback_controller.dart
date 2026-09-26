@@ -4,44 +4,14 @@ library;
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:harcapp_core/comm_classes/sha_pref.dart';
+import 'package:harcapp_core/song_book/settings.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 
+import 'autoplay_mode.dart';
 import 'playback_session.dart';
 import 'playback_source.dart';
 
-/// Klucze **z tymi samymi napisami**, co miała apka — ustawienia użytkownika
-/// zostają na miejscu.
-const String kShaPrefPlaybackAutoplay = 'SHA_PREF_SPIEWNIK_YT_AUTOPLAY';
-const String kShaPrefPlaybackRandom = 'SHA_PREF_SPIEWNIK_YT_RANDOM';
-
-/// Co po skończonym nagraniu.
-enum AutoplayMode {
-  /// Stop, przewinięte na początek.
-  one(0),
-
-  /// To samo jeszcze raz.
-  repeat(1),
-
-  /// Następna piosenka z nagraniem (albo losowa, patrz
-  /// [SongbookPlaybackController.autoplayRandom]).
-  next(2);
-
-  const AutoplayMode(this.code);
-
-  /// Wartość w `ShaPref` — stała, bo była tam, zanim powstał ten enum.
-  final int code;
-
-  /// Kolejność przełączania przyciskiem: stop → następna → powtórka → stop.
-  AutoplayMode get cycled => switch (this) {
-    one => next,
-    next => repeat,
-    repeat => one,
-  };
-
-  static AutoplayMode fromCode(int code) =>
-      values.firstWhere((m) => m.code == code, orElse: () => one);
-}
+export 'autoplay_mode.dart';
 
 typedef PlaybackSessionFactory = PlaybackSession Function(PlaybackSource source);
 
@@ -59,6 +29,10 @@ class SongbookPlaybackController extends ChangeNotifier {
   /// `just_audio_background` (pakiet tylko mobilny), więc apka podaje tu
   /// funkcję budującą `MediaItem`; bez niej nagranie gra bez powiadomienia.
   Object? Function(PlaybackSource source)? mediaTagBuilder;
+
+  /// Ustawienia gospodarza: tam mieszka wybór „co po nagraniu” — apka trzyma
+  /// go w `ShaPref`, strona w pamięci. Gospodarz ustawia to przy starcie.
+  late SongBookSettTempl settings;
 
   PlaybackSession _defaultSessionFactory(PlaybackSource source) => switch (source) {
         YoutubeSource() => YoutubePlaybackSession(source),
@@ -134,7 +108,7 @@ class SongbookPlaybackController extends ChangeNotifier {
     if (session != _session) return;
     switch (autoplayMode) {
       case AutoplayMode.one:
-        session.rewind();
+        session.stopAtStart();
         break;
       case AutoplayMode.repeat:
         session.restart();
@@ -147,16 +121,15 @@ class SongbookPlaybackController extends ChangeNotifier {
 
   // --- ustawienia wspólne dla obu źródeł ---
 
-  AutoplayMode get autoplayMode =>
-      AutoplayMode.fromCode(ShaPref.getInt(kShaPrefPlaybackAutoplay, AutoplayMode.one.code));
+  AutoplayMode get autoplayMode => settings.autoplayMode;
   set autoplayMode(AutoplayMode value) {
-    ShaPref.setInt(kShaPrefPlaybackAutoplay, value.code);
+    settings.autoplayMode = value;
     notifyListeners();
   }
 
-  bool get autoplayRandom => ShaPref.getBool(kShaPrefPlaybackRandom, false);
+  bool get autoplayRandom => settings.autoplayRandom;
   set autoplayRandom(bool value) {
-    ShaPref.setBool(kShaPrefPlaybackRandom, value);
+    settings.autoplayRandom = value;
     notifyListeners();
   }
 

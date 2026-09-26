@@ -1,4 +1,5 @@
 import 'package:harcapp_core/comm_widgets/instrument_type.dart';
+import 'package:harcapp_core/song_book/playback/autoplay_mode.dart';
 
 abstract class SongBookSettTempl{
 
@@ -29,7 +30,15 @@ abstract class SongBookSettTempl{
   /// Czy grający pasek odtwarzania przykleja się do góry ekranu. Domyślnie
   /// tak; gospodarz, który to ustawienie wystawia użytkownikowi, nadpisuje
   /// oba — dlatego nie abstrakcyjne, żeby reszta gospodarzy nie musiała.
-  bool get stickyAudioPlayer => true;
-  set stickyAudioPlayer(bool value) {}
+  bool get stickyPlaybackBar => true;
+  set stickyPlaybackBar(bool value) {}
+
+  /// Co po skończonym nagraniu.
+  AutoplayMode get autoplayMode;
+  set autoplayMode(AutoplayMode value);
+
+  /// Czy [AutoplayMode.next] losuje piosenkę zamiast brać następną.
+  bool get autoplayRandom;
+  set autoplayRandom(bool value);
 
 }

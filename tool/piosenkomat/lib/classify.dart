@@ -44,9 +44,9 @@ SubmissionFileRead readSubmissionFile(ContribMessage m) {
 }
 
 /// Zgłoszenie ze strony — poza zakresem narzędzia. Po znaczniku w temacie,
-/// a gdy plik jest, po polu `source`: temat człowiek może zmienić.
+/// a gdy plik jest, po polu `origin`: temat człowiek może zmienić.
 bool isWebSubmission(ContribMessage m) =>
-    m.hasWebSubjectMarker || (readSubmissionFile(m).file?.source?.isWeb ?? false);
+    m.hasWebSubjectMarker || (readSubmissionFile(m).file?.origin?.isWeb ?? false);
 
 /// Kolejka bez wiadomości z wątków, które mają już `song/*`. Query działa na
 /// wiadomościach, więc odpowiedź autora w otagowanym wątku („dzięki!”) siedzi
@@ -209,14 +209,14 @@ Submission buildSubmission(
   // z najbliższą tytułem. Bez tej deklaracji zostaje zgadywanie.
   //
   // Dwa źródła tego samego id: linia „### Poprawiana piosenka” w treści i pole
-  // `corrected_song_id` w JSON-ie piosenki (piosenka własna pamięta swój
+  // `based_on_song_id` w JSON-ie piosenki (piosenka własna pamięta swój
   // pierwowzór). Linia bywa złamana albo zacytowana, JSON jedzie też
   // w załączniku — więc bierzemy, co jest. Ale tylko w poprawce: piosenka
-  // przerobiona z cudzej i wysłana jako nowa też niesie `corrected_song_id`,
+  // przerobiona z cudzej i wysłana jako nowa też niesie `based_on_song_id`,
   // a to żadna deklaracja — poprawką jest wyłącznie to, co autor wysłał
   // jako poprawkę.
   final declaredRaw =
-      isCorrection ? (parsed?.correctedSongId ?? song?.correctedSongId)?.trim() : null;
+      isCorrection ? (parsed?.correctionTarget ?? song?.basedOnSongId)?.trim() : null;
   final declared = (declaredRaw?.isEmpty ?? true) ? null : declaredRaw;
   AppMatch? appMatch;
   var alsoInApp = <AppMatch>[];
@@ -280,7 +280,7 @@ EmailShape _shapeOf(SubmissionFileRead file, ParsedContribEmail? parsed) {
   if (file.hasFile) return EmailShape.file;
   if (parsed == null) return EmailShape.unknown;
   if (parsed.isOldestFormat) return EmailShape.oldApp;
-  return parsed.isNewFormat ? EmailShape.fenced : EmailShape.legacy;
+  return parsed.isLegacy ? EmailShape.legacy : EmailShape.fenced;
 }
 
 /// Porównanie między zgłoszeniami paczki. Dwa przejścia: najpierw grupy
@@ -484,7 +484,7 @@ Decision decide(Submission s) {
   if (s.isCorrection) {
     final declared = s.declaredCorrectionTarget;
     if (declared == null) {
-      if (app != null && app.isGuessable) {
+      if (app != null && canGuessCorrectionTarget(app)) {
         // Zgłoszenie nie powiedziało, co poprawia — wolno zgadnąć, ale domysł
         // musi być widoczny: podmiana idzie po id, więc to Ty decydujesz,
         // czy narzędzie trafiło.
@@ -631,7 +631,7 @@ String? _senderFromHeader(ContribMessage m) {
   return e == null || e == kInboxEmail ? null : e;
 }
 
-/// Blok z kodem piosenki: w ogrodzeniu ``` (nowy format) albo goły JSON
+/// Blok z kodem piosenki: w ogrodzeniu ``` albo goły JSON
 /// od pierwszej `{` do końca treści (najstarsza apka).
 final _songFenceRe = RegExp(
   r'(### Kod piosenki:\s*```[a-zA-Z]*\s*\n)([\s\S]*?)(\n?```)',

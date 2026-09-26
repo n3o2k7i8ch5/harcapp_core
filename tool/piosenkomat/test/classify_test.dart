@@ -181,9 +181,9 @@ void main() {
     });
 
     test('linia z celem zginęła — id z JSON-a piosenki ratuje deklarację', () async {
-      // Apka niesie `corrected_song_id` w dwóch miejscach: w linii nagłówka
-      // i w samej piosence. Nagłówek bywa złamany albo zacytowany.
-      final song = sampleSong()..correctedSongId = 'tmp';
+      // Apka niesie cel w dwóch miejscach: w linii nagłówka
+      // i w samej piosence (`based_on_song_id`). Nagłówek bywa złamany albo zacytowany.
+      final song = sampleSong()..basedOnSongId = 'tmp';
       final raw = await completeEmail(isNew: false, song: song);
       expect(raw, isNot(contains('Poprawiana piosenka')));
       final got = classify(msgFrom(raw),
@@ -206,7 +206,7 @@ void main() {
       final wlasciwa = sampleSong(lyrics: 'Zupelnie inny tekst o morzu i zaglach');
       wlasciwa.id = 'o!_wskazana';
       final got = classify(
-        msgFrom(await completeEmail(isNew: false, correctedSongId: 'o!_wskazana')),
+        msgFrom(await completeEmail(isNew: false, correctionTarget: 'o!_wskazana')),
         book: bookWith([mylona, wlasciwa]),
       );
       expect(got.submission.declaredCorrectionTarget, 'o!_wskazana');
@@ -219,7 +219,7 @@ void main() {
     });
     test('apka wskazała piosenkę, której nie ma w śpiewniku → no-target-in-app', () async {
       final got = classify(
-        msgFrom(await completeEmail(isNew: false, correctedSongId: 'o!_nie_ma_takiej')),
+        msgFrom(await completeEmail(isNew: false, correctionTarget: 'o!_nie_ma_takiej')),
         book: bookWith([sampleSong(lyrics: 'Ala ma kota a kot ma ale\nW lesie gra muzyka i cos jeszcze')]),
       );
       expect(issuesOf(got), contains(SongIssue.noTargetInApp));
@@ -230,19 +230,19 @@ void main() {
       expect(got.submission.correctionTargetGuessed, isFalse);
     });
     test('nowa piosenka nie niesie deklaracji celu', () async {
-      final got = classify(msgFrom(await completeEmail(correctedSongId: 'o!_cokolwiek')),
+      final got = classify(msgFrom(await completeEmail(correctionTarget: 'o!_cokolwiek')),
           book: SongBook.empty);
       expect(got.submission.declaredCorrectionTarget, isNull);
       expect(got.submission.correctionTarget, isNull);
     });
     test('przerobiona cudza piosenka wysłana jako nowa: JSON-owe id to nie deklaracja', () async {
-      // Piosenka własna pamięta pierwowzór w `corrected_song_id`; wysłana jako
+      // Piosenka własna pamięta pierwowzór w `based_on_song_id`; wysłana jako
       // nowa ma być sprawdzona jak nowa — z najbliższą, nie z pierwowzorem.
       final pierwowzor = sampleSong(title: 'Pierwowzór', lyrics: 'Zupełnie inny tekst o górach');
       pierwowzor.id = 'o!_pierwowzor';
       final wApce = sampleSong();
       wApce.id = 'o!_juz_jest';
-      final song = sampleSong()..correctedSongId = 'o!_pierwowzor';
+      final song = sampleSong()..basedOnSongId = 'o!_pierwowzor';
       final got = classify(msgFrom(await completeEmail(song: song)),
           book: bookWith([pierwowzor, wApce]));
       expect(got.submission.declaredCorrectionTarget, isNull);

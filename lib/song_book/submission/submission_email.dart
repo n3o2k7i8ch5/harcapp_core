@@ -106,7 +106,7 @@ SongSubmissionEmail composeSongSubmissionEmail({
   String? acceptRulesVersion,
 }){
   final file = SongSubmissionFile(
-    source: origin,
+    origin: origin,
     appVersion: appVersion,
     rulesVersion: acceptRulesVersion,
     submissions: submissions,

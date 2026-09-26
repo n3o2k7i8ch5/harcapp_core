@@ -12,7 +12,7 @@ void main() {
     Future<Classified> poprawka(String celZApki, List<String> idsWApce) async => classify(
           msgFrom(await completeEmail(
             isNew: false,
-            correctedSongId: celZApki,
+            correctionTarget: celZApki,
             song: sampleSong(title: 'Barka', lyrics: '$_tekst\nDopisana zwrotka'),
           )),
           book: bookWith([

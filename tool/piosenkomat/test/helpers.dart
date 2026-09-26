@@ -54,7 +54,7 @@ Future<String> completeEmail({
   bool withConsent = true,
   bool reply = false,
   RegisteredContributor? registered,
-  String? correctedSongId,
+  String? correctionTarget,
   /// Blok „Propozycja poprawki”. Domyślnie wypełniony przy poprawce — tak
   /// wysyła apka; `false` daje poprawkę, przy której autor nie napisał nic.
   bool withUpdateComment = true,
@@ -72,7 +72,7 @@ Future<String> completeEmail({
     registered: registered,
     isNewSong: isNew,
     updateComment: isNew || !withUpdateComment ? null : 'poprawka chwytu w refrenie',
-    correctedSongId: correctedSongId,
+    correctionTarget: correctionTarget,
   );
   if (userMessage != null) {
     body = body.replaceFirst(

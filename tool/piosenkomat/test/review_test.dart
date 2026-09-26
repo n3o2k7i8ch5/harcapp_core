@@ -144,8 +144,8 @@ void main() {
   test('dwie zachowane poprawki tej samej piosenki → STOP', () async {
     final book = bookWith([sampleSong(lyrics: 'Ala ma kota\nA kot ma Ale')]);
     final items = classifyBatch([
-      msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(lyrics: 'Ala ma kota\nA kot ma Ale\nX')), id: 'a'),
-      msgFrom(await completeEmail(isNew: false, correctedSongId: 'tmp', song: sampleSong(lyrics: 'Ala ma kota\nA kot ma Ale\nY')), id: 'b'),
+      msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: 'Ala ma kota\nA kot ma Ale\nX')), id: 'a'),
+      msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: 'Ala ma kota\nA kot ma Ale\nY')), id: 'b'),
     ], book: book);
     expect(items.map((c) => c.destination), everyElement(Destination.candidateCorrection));
     final songs = [for (final c in items) c.song!..piosenkomatData = c.piosenkomatData()];

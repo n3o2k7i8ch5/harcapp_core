@@ -132,12 +132,12 @@ void main() {
     });
   });
 
-  group('rewind / restart:', () {
-    test('rewind: najpierw pauza, potem na zero — inaczej nagranie ruszyłoby od nowa', () async {
+  group('stopAtStart / restart:', () {
+    test('stopAtStart: najpierw pauza, potem na zero — inaczej nagranie ruszyłoby od nowa', () async {
       final s = session();
       await s.playImpl();
       s.log.clear();
-      await s.rewind();
+      await s.stopAtStart();
       expect(s.log, ['pause', 'seek 0']);
       expect(s.position.value, Duration.zero);
       expect(s.playing, isFalse);

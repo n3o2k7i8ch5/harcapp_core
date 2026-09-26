@@ -89,7 +89,7 @@ abstract class PlaybackSession extends ChangeNotifier {
   /// Najpierw pauza: po końcu nagrania `just_audio` wciąż zgłasza `playing`,
   /// więc samo cofnięcie na zero ruszyłoby je od nowa — na ułamek sekundy,
   /// ale słyszalnie.
-  Future<void> rewind() async {
+  Future<void> stopAtStart() async {
     await pauseImpl();
     await _toStart();
   }
@@ -251,7 +251,7 @@ class Mp3PlaybackSession extends PlaybackSession {
       _player.durationStream.listen((d) => setDuration(d ?? Duration.zero)),
       _player.processingStateStream.listen((state) async {
         if (state != ProcessingState.completed) return;
-        await rewind();
+        await stopAtStart();
         reportEnded();
       }),
     ]);
