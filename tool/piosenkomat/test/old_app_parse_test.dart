@@ -47,7 +47,7 @@ void main() {
   test('parsuje się i jest rozpoznana jako stara apka', () {
     final parsed = parseEmailBody(_wiadomosc(_mejl(_songJson)));
     expect(parsed.song.title, 'Testowa stara piosenka');
-    expect(parsed.isOldestFormat, isTrue);
+    expect(parsed.isOldAppFormat, isTrue);
     expect(parsed.song.youtubeVideoId, 'dQw4w9WgXcQ');
   });
 
@@ -60,7 +60,7 @@ void main() {
   test('nagłówek powitalny przełamany w środku', () {
     final parsed = parseEmailBody(_wiadomosc(
         _mejl(_songJson, powitanie: 'Dzięki za chęć dzielenia się\nswoimi piosenkami!')));
-    expect(parsed.isOldestFormat, isTrue);
+    expect(parsed.isOldAppFormat, isTrue);
   });
 
   test('odpowiedź w wątku: cytowanie na początku linii', () {
@@ -120,7 +120,7 @@ void main() {
     expect(c.submission.isOldApp, isTrue);
     expect(c.submission.shape, EmailShape.oldApp,
         reason: 'po rozkładzie kształtów poznasz, kiedy wolno skasować czytnik');
-    expect(c.labels, contains(kLabelReplyOldApp));
+    expect(c.labels, contains(SongLabel.replyOldApp.label));
   });
 
   test('komu już odpisano, ten nie wraca do kolejki odpowiedzi', () {
@@ -130,7 +130,7 @@ void main() {
     final c = classifyBatch([m], book: SongBook.empty, weRepliedThreads: {m.threadId}).single;
     expect(c.submission.isOldApp, isTrue);
     expect(c.submission.weReplied, isTrue);
-    expect(c.labels, isNot(contains(kLabelReplyOldApp)),
+    expect(c.labels, isNot(contains(SongLabel.replyOldApp.label)),
         reason: 'drugi blok o starej apce nikomu nie jest potrzebny');
   });
 
@@ -144,14 +144,14 @@ void main() {
     );
     final c = classifyBatch([_wiadomosc(_mejl(_songJson)), ours], book: SongBook.empty).single;
     expect(c.submission.weReplied, isTrue);
-    expect(c.labels, isNot(contains(kLabelReplyOldApp)));
+    expect(c.labels, isNot(contains(SongLabel.replyOldApp.label)));
   });
 
   test('kolejka wyklucza po każdej etykiecie song/*', () {
-    expect(isSongLabel(kLabelAdded), isTrue);
-    expect(isSongLabel(kLabelReplyOldApp), isTrue);
-    expect(isSongLabel(kLabelWaitingForAuthor), isTrue);
-    expect(kQueueQuery, contains(labelQueryName(kLabelAdded)));
-    expect(kQueueQuery, contains(labelQueryName(kLabelReplyOldApp)));
+    expect(isSongLabel(SongLabel.added.label), isTrue);
+    expect(isSongLabel(SongLabel.replyOldApp.label), isTrue);
+    expect(isSongLabel(SongLabel.waitingForAuthor.label), isTrue);
+    expect(kQueueQuery, contains(labelQueryName(SongLabel.added.label)));
+    expect(kQueueQuery, contains(labelQueryName(SongLabel.replyOldApp.label)));
   });
 }

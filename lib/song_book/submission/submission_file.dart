@@ -19,7 +19,10 @@ const int kSubmissionFormat = 1;
 
 /// Znacznik w temacie, np. `[hrcpsng/app]`. Zamrożony: nie podlega
 /// wersjonowaniu, bo po nim kolejka łapie **każdą** wersję protokołu.
-String submissionSubjectMarker(SubmissionOrigin origin) => '[hrcpsng/${origin.tag}]';
+String submissionSubjectMarker(SubmissionOrigin origin) => '[${submissionSubjectTag(origin)}]';
+
+/// Rdzeń znacznika bez nawiasów (`hrcpsng/app`) — tak go szuka query Gmaila.
+String submissionSubjectTag(SubmissionOrigin origin) => 'hrcpsng/${origin.tag}';
 
 /// Skąd przyszło zgłoszenie. Identyfikator, nie napis do pokazania.
 enum SubmissionOrigin{

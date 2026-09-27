@@ -18,7 +18,7 @@ void main() {
   test('kompletna nowa piosenka → kandydat bez zarzutu, ze zgodą, datą i nadawcą', () async {
     final got = classify(msgFrom(await completeEmail()), book: SongBook.empty);
     final song = got.song!;
-    expect(got.destination, Destination.candidateNew);
+    expect(got.destination, Destination.candidate);
     expect(got.issues, isEmpty);
     expect(got.submission.kind, SubmissionKind.newSong);
     expect(got.sender, 'jan.testowy@example.com');
@@ -45,8 +45,8 @@ void main() {
       expect(refs.single.person?.name, 'Patrycja Dudzinska');
       expect(refs.single.emailRef, 'jan.testowy@example.com');
       // Stary format nie mówi, czy nadawca to ta osoba — domysł ma być widać.
-      expect(issuesOf(got), contains(SongIssue.guessedContributorEmail));
-      expect(got.labels, contains(NeedsReviewKind.guessedContributor.label));
+      expect(issuesOf(got), contains(SongIssue.guessedContributor));
+      expect(got.labels, contains(SongLabel.guessedContributor.label));
     });
 
     test('plik z sender_is_contributor: karta dostaje adres bez domysłu', () {
@@ -56,7 +56,7 @@ void main() {
       ]);
       final got = classify(msgFrom(mail.eml), book: SongBook.empty);
       expect(got.song!.contribRefs.single.emailRef, 'jan.testowy@example.com');
-      expect(issuesOf(got), isNot(contains(SongIssue.guessedContributorEmail)));
+      expect(issuesOf(got), isNot(contains(SongIssue.guessedContributor)));
     });
 
     test('kilka kart bez adresu → nie zgadujemy, mejl osobno', () async {
@@ -86,7 +86,7 @@ void main() {
 
     test('własna wiadomość', () async {
       final got = await run(await completeEmail(userMessage: 'Czy możecie dodać transpozycję?'));
-      expect(issuesOf(got), [SongIssue.hasUserMessage]);
+      expect(issuesOf(got), [SongIssue.userMessage]);
       expect(got.submission.userMessage, 'Czy możecie dodać transpozycję?');
     });
     test('brak YouTube', () async {
@@ -109,7 +109,7 @@ void main() {
     test('odpowiedź w wątku nie jest zarzutem', () async {
       final got = await run(await completeEmail(reply: true));
       expect(got.issues, isEmpty);
-      expect(got.destination, Destination.candidateNew);
+      expect(got.destination, Destination.candidate);
     });
     test('nie da się sparsować → rejected/unparsable, rzuć okiem', () {
       final got = classify(
@@ -119,7 +119,7 @@ void main() {
       expect(got.destination, Destination.unparsable);
       expect(got.song, isNull);
       expect(got.title, 'Cześć');
-      expect(got.labels, [kLabelRejectedUnparsable, kLabelHaveALook]);
+      expect(got.labels, [SongLabel.rejectedUnparsable.label, SongLabel.haveALook.label]);
       expect(got.labels.any(isClosedLabel), isTrue, reason: 'odrzut jest przeczytany');
       expect(got.submission.shape, EmailShape.unknown,
           reason: 'nie zawyża starych kształtów w rozkładzie raportu');
@@ -134,7 +134,7 @@ void main() {
       );
       expect(got.submission.kind, SubmissionKind.correction);
       expect(got.submission.correctionMessage, 'poprawka chwytu w refrenie');
-      expect(got.destination, Destination.candidateCorrection);
+      expect(got.destination, Destination.candidate);
       expect(issuesOf(got), isNot(contains(SongIssue.missingYoutube)),
           reason: 'poprawka to diff, nie pełna piosenka');
       expect(got.submission.correctionTarget, 'tmp',
@@ -147,7 +147,7 @@ void main() {
           got.piosenkomatData().toJsonMap());
       expect(data.correctionTarget, 'tmp');
       expect(data.correctionTargetGuessed, isTrue);
-      expect(got.labels, contains(kLabelCorrection));
+      expect(got.labels, contains(SongLabel.correction.label));
     });
     test('ten sam tytuł, zupełnie inna piosenka → nie zgadujemy', () async {
       // Podmiana idzie po id, a zgłoszenie bez decyzji wchodzi: słaby domysł
@@ -223,7 +223,7 @@ void main() {
         book: bookWith([sampleSong(lyrics: 'Ala ma kota a kot ma ale\nW lesie gra muzyka i cos jeszcze')]),
       );
       expect(issuesOf(got), contains(SongIssue.noTargetInApp));
-      expect(got.destination, Destination.candidateCorrection);
+      expect(got.destination, Destination.candidate);
       // Nieistniejące id to brak celu: `prepare` nie może kazać podmieniać
       // piosenki, której nie ma, i to bez ostrzeżenia.
       expect(got.submission.correctionTarget, isNull);
@@ -258,8 +258,8 @@ void main() {
       );
       expect(got.destination, Destination.rejectAlreadyInApp);
       expect(got.goesToFile, isFalse);
-      expect(got.labels, containsAll([kLabelRejectedAlreadyInApp, kLabelCorrection]));
-      expect(got.labels, isNot(contains(kLabelHaveALook)));
+      expect(got.labels, containsAll([SongLabel.rejectedAlreadyInApp.label, SongLabel.correction.label]));
+      expect(got.labels, isNot(contains(SongLabel.haveALook.label)));
     });
     test('identyczna poprawka z propozycją poprawki → odrzut, rzuć okiem', () async {
       // `completeEmail(isNew: false)` wypełnia blok „Propozycja poprawki” —
@@ -270,8 +270,8 @@ void main() {
       expect(got.submission.hasUserMessage, isFalse);
       expect(got.submission.correctionMessage, isNotNull);
       expect(got.destination, Destination.rejectAlreadyInApp);
-      expect(got.labels, containsAll([kLabelRejectedAlreadyInApp, kLabelHaveALook, kLabelCorrection]));
-      expect(got.labels, isNot(contains(kLabelNeedsReview)));
+      expect(got.labels, containsAll([SongLabel.rejectedAlreadyInApp.label, SongLabel.haveALook.label, SongLabel.correction.label]));
+      expect(got.labels, isNot(contains(SongLabel.needsReview.label)));
     });
     test('identyczna poprawka z dopiskiem → odrzut, rzuć okiem', () async {
       final got = classify(
@@ -279,7 +279,7 @@ void main() {
         book: bookWith([sampleSong()]),
       );
       expect(got.destination, Destination.rejectAlreadyInApp);
-      expect(got.labels, containsAll([kLabelRejectedAlreadyInApp, kLabelHaveALook, kLabelCorrection]));
+      expect(got.labels, containsAll([SongLabel.rejectedAlreadyInApp.label, SongLabel.haveALook.label, SongLabel.correction.label]));
     });
   });
 
@@ -300,7 +300,7 @@ void main() {
     expect(issuesOf(got), [SongIssue.noConsent],
         reason: 'stara apka to wiedza o nadawcy, nie zarzut — zarzutem jest brak zgody');
     expect(got.song!.contributorData!.acceptedContributionRulesVersion, kNoConsentRulesVersion);
-    expect(got.labels, contains(kLabelReplyOldApp));
+    expect(got.labels, contains(SongLabel.replyOldApp.label));
   });
 
   test('emailFromHeader', () {
@@ -328,7 +328,7 @@ void _threads() {
       expect(c.message.id, 'm1', reason: 'cytat nie jest własnym kodem');
       expect(c.submission.messages.map((m) => m.id), ['m1', 'm2']);
       expect(c.submission.userMessage, contains('refren dwa razy'));
-      expect(issuesOf(c), [SongIssue.hasUserMessage]);
+      expect(issuesOf(c), [SongIssue.userMessage]);
     });
 
     test('poprawiona wersja odesłana w wątku wygrywa', () async {

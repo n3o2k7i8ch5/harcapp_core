@@ -270,3 +270,10 @@ bool softEqualsForDiff(String? a, String? b) {
   if(a == null || b == null) return a == b;
   return normalizeForDiff(a) == normalizeForDiff(b);
 }
+/// Liczebnik po polsku: `1 mejl`, `2 mejle`, `5 mejli`, `12 mejli`, `22 mejle`.
+String plural(int n, String one, String few, String many) {
+  if (n == 1) return '$n $one';
+  final unit = n % 10, tens = n % 100;
+  if (unit >= 2 && unit <= 4 && (tens < 12 || tens > 14)) return '$n $few';
+  return '$n $many';
+}

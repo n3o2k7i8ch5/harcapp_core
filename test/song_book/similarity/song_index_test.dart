@@ -25,6 +25,24 @@ void main() {
     song('o!_gory', 'Góry', _gory),
   ]);
 
+  test('inSlices buduje ten sam indeks, co konstruktor', () async {
+    final songs = [
+      song('o!_ognisko@zespol', 'Płonie ognisko', _ognisko),
+      song('o!_morze', 'Morze', _morze, hidTitles: ['Żagle']),
+      song('o!_gory', 'Góry', _gory),
+    ];
+    // Porcja zero: oddaje wątek po każdej piosence i każdym słowie.
+    final sliced = await SongIndex.inSlices(songs, slice: Duration.zero);
+    for (final probe in [
+      song('x', 'Inaczej', _ognisko),
+      song('x', 'Morze', 'nic'),
+      song('x', 'Żagle', '$_gory\nDopisana zwrotka'),
+    ]) {
+      String key(SongMatch m) => '${m.song.id} ${m.level} ${m.score}';
+      expect(sliced.matches(SongProfile(probe)).map(key), app.matches(SongProfile(probe)).map(key));
+    }
+  });
+
   group('SongIndex.byId / allById:', () {
     test('allById daje wszystkie pod jednym id — w warsztacie id się powtarza', () {
       final index = SongIndex<SongRaw>([

@@ -1,5 +1,5 @@
 import 'package:harcapp_core/song_book/contrib_reply.dart';
-import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email_old_app.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/reply.dart';
@@ -24,7 +24,7 @@ void main() {
 
     // Nie każda pastylka to pytanie do autora.
     expect(proposeContribReplyNote([]), isNull);
-    expect(proposeContribReplyNote([SongIssue.hasUserMessage]), isNull);
+    expect(proposeContribReplyNote([SongIssue.userMessage]), isNull);
   });
 
   test('mejl: powitanie, odpowiedź, blok starej apki, pożegnanie, stopka pod kreską', () {
@@ -56,7 +56,7 @@ void main() {
     final z = composeContribReply(oldApp: true)!;
     expect(z, '$kReplyGreeting\n\n$kOldAppReplyBlock\n\n$kReplyClosing\n\n$kReplyFooter');
     // `const` dla strony — musi być tym samym mejlem.
-    expect(oldestFormatReplyMessage, z);
+    expect(oldAppReplyMessage, z);
   });
 
   test('własny szkic poznajemy po kształcie, nie po treści', () {
@@ -136,7 +136,7 @@ void main() {
       expect(r.alsoClearsOldApp, ['a1']);
       // Sam blok nie odpowiada na `reply/review-note` — ta etykieta zostaje.
       expect(r.labels.$1, isEmpty);
-      expect(r.labels.$2, [kLabelReplyOldApp]);
+      expect(r.labels.$2, [SongLabel.replyOldApp.label]);
     });
 
     test('uwaga do piosenki z nowej apki nie niesie bloku — dostaje go osobny mejl', () {
@@ -153,7 +153,7 @@ void main() {
 
     test('po odpowiedzi z uwagą wątek czeka na autora', () {
       final r = plan([('a1', 'A')], notes: {'A': 'Super:)'}).replies.single;
-      expect(r.labels.$1, [kLabelWaitingForAuthor]);
+      expect(r.labels.$1, [SongLabel.waitingForAuthor.label]);
     });
   });
 }

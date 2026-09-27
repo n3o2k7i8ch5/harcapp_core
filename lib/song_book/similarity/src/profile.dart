@@ -5,6 +5,7 @@ import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 
 import 'chords.dart';
+import 'evidence.dart' show MetadataField;
 import 'normalize.dart';
 
 /// Jeden wers po normalizacji — jednostka porównania tekstu.
@@ -82,7 +83,7 @@ class SongProfile {
   final Set<String> titleKeys;
   /// Film YouTube — ten sam znaczy to samo nagranie.
   final String youtubeId;
-  final Map<String, String> metadata;
+  final Map<MetadataField, String> metadata;
   final String _rawText;
   final String _rawChords;
   /// Znormalizowane wersy w kolejności z tekstu, z powtórzeniami (refren).
@@ -91,35 +92,37 @@ class SongProfile {
   final Set<String> words;
 
   SongProfile._(this.id, this.title, this.titleKey, this.titleKeys, this.youtubeId, this.metadata,
-      this._rawText, this._rawChords, this._ordered)
-      : words = {for (final l in _ordered) ...l.split(' ')};
+      this._rawText, this._rawChords, List<List<String>> orderedWords)
+      : _ordered = [for (final w in orderedWords) w.join(' ')],
+        words = {for (final w in orderedWords) ...w};
 
   factory SongProfile(SongCore s) {
     final text = s.text;
+    final titleKey = searchableString(s.title);
     return SongProfile._(
       s.id,
       s.title,
-      searchableString(s.title),
+      titleKey,
       {
-        searchableString(s.title),
+        titleKey,
         for (final h in s.hidTitles) searchableString(h),
       }..remove(''),
       (s.youtubeVideoId ?? '').trim(),
       {
-        'title': s.title.trim(),
-        'hid_titles': _list(s.hidTitles),
-        'authors': _list(s.authors),
-        'composers': _list(s.composers),
-        'performers': _list(s.performers),
-        'release_date': s.releaseDate?.toIso8601String() ?? '',
-        'yt_video_id': (s.youtubeVideoId ?? '').trim(),
-        'tags': _list(s.tags),
+        MetadataField.title: s.title.trim(),
+        MetadataField.hidTitles: _list(s.hidTitles),
+        MetadataField.authors: _list(s.authors),
+        MetadataField.composers: _list(s.composers),
+        MetadataField.performers: _list(s.performers),
+        MetadataField.releaseDate: s.releaseDate?.toIso8601String() ?? '',
+        MetadataField.youtube: (s.youtubeVideoId ?? '').trim(),
+        MetadataField.tags: _list(s.tags),
       },
       text,
       s.chords,
       [
         for (final line in text.split('\n'))
-          if (lineWords(line) case final words when words.isNotEmpty) words.join(' '),
+          if (lineWords(line) case final words when words.isNotEmpty) words,
       ],
     );
   }
@@ -141,6 +144,7 @@ class SongProfile {
   /// Wersy bez powtórzeń — refren liczy się raz, gdziekolwiek stoi.
   late final List<ProfileLine> lines = [for (final l in {..._ordered}) ProfileLine(l)];
 
+  /// Ile tekstu ma piosenka: suma wag wersów.
   late final double totalWeight = lines.fold(0.0, (a, l) => a + l.weight);
 
   /// Pary sąsiednich wersów z tekstu, bez powtórzeń.

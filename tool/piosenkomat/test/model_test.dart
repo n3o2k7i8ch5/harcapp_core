@@ -28,29 +28,29 @@ void main() {
   });
 
   test('stateLabelsFor: po decyzji, nie po uwagach', () {
-    expect(stateLabelsFor(classifiedWith([SongIssue.missingChords])).first, kLabelNeedsReview);
-    expect(stateLabelsFor(classifiedWith([])).first, kLabelReadyToAdd);
+    expect(stateLabelsFor(classifiedWith([SongIssue.missingChords])).first, SongLabel.needsReview.label);
+    expect(stateLabelsFor(classifiedWith([])).first, SongLabel.readyToAdd.label);
     expect(stateLabelsFor(classifiedWith([], destination: Destination.rejectAlreadyInApp)).first,
-        kLabelRejectedAlreadyInApp);
+        SongLabel.rejectedAlreadyInApp.label);
     expect(stateLabelsFor(classifiedWith([], destination: Destination.rejectDuplicate)).first,
-        kLabelRejectedDuplicate);
-    expect(stateLabelsFor(classifiedWith([SongIssue.corruptedSubmissionFile], destination: Destination.rejectCorruptedFile)),
-        [kLabelRejectedCorruptedFile]);
-    expect(stateLabelsFor(classifiedWith([SongIssue.unknownSubmissionFormat], destination: Destination.rejectCorruptedFile)),
-        [kLabelRejectedUnknownFormat]);
-    expect(stateLabelsFor(classifiedWith([], destination: Destination.unparsable)), [kLabelRejectedUnparsable]);
+        SongLabel.rejectedDuplicate.label);
+    expect(stateLabelsFor(classifiedWith([], destination: Destination.rejectCorruptedFile)),
+        [SongLabel.rejectedCorruptedFile.label]);
+    expect(stateLabelsFor(classifiedWith([], destination: Destination.rejectUnknownFormat)),
+        [SongLabel.rejectedUnknownFormat.label]);
+    expect(stateLabelsFor(classifiedWith([], destination: Destination.unparsable)), [SongLabel.rejectedUnparsable.label]);
     expect(
       stateLabelsFor(classifiedWith(
-          [SongIssue.missingYoutube, SongIssue.missingTitle, SongIssue.hasUserMessage])),
-      [kLabelNeedsReview, NeedsReviewKind.missingData.label, NeedsReviewKind.userMessage.label],
+          [SongIssue.missingYoutube, SongIssue.missingTitle, SongIssue.userMessage])),
+      [SongLabel.needsReview.label, SongLabel.missingData.label, SongLabel.userMessage.label],
     );
     expect(stateLabelsFor(classifiedWith([SongIssue.similarTextInApp, SongIssue.sameTargetInBatch])),
-        [kLabelNeedsReview, NeedsReviewKind.duplicateInApp.label, NeedsReviewKind.duplicateInBatch.label]);
+        [SongLabel.needsReview.label, SongLabel.duplicateInApp.label, SongLabel.duplicateInBatch.label]);
     expect(stateLabelsFor(classifiedWith([SongIssue.chordsDifferFromApp])),
-        [kLabelNeedsReview, NeedsReviewKind.undeclaredCorrection.label]);
+        [SongLabel.needsReview.label, SongLabel.undeclaredCorrection.label]);
     // Znaczniki.
     expect(classifiedWith([], kind: SubmissionKind.correction).labels,
-        [kLabelReadyToAdd, kLabelCorrection]);
+        [SongLabel.readyToAdd.label, SongLabel.correction.label]);
   });
 
   test('kolejka: co łapie, czego nie', () {
@@ -68,49 +68,49 @@ void main() {
     }
     // Nie łapie: cokolwiek już otagowanego.
     for (final etykieta in [
-      kLabelAuto, kLabelReadyToAdd, kLabelAdded, kLabelRejectedUnparsable, kLabelCorrection,
-      kLabelReplyOldApp, NeedsReviewKind.duplicateInApp.label, 'song/rejected/too-niche',
+      SongLabel.auto.label, SongLabel.readyToAdd.label, SongLabel.added.label, SongLabel.rejectedUnparsable.label, SongLabel.correction.label,
+      SongLabel.replyOldApp.label, SongLabel.duplicateInApp.label, 'song/rejected/too-niche',
     ]) {
       expect(kQueueQuery, contains('-label:${labelQueryName(etykieta)}'));
     }
 
-    expect(isReadyByTool({kLabelReadyToAdd, kLabelAuto}), isTrue);
-    expect(isReadyByTool({kLabelReadyToAdd}), isFalse);
+    expect(isReadyByTool({SongLabel.readyToAdd.label, SongLabel.auto.label}), isTrue);
+    expect(isReadyByTool({SongLabel.readyToAdd.label}), isFalse);
   });
 
   test('przeczytane tylko przy werdykcie domykającym', () {
-    expect(isClosedLabel(kLabelAdded), isTrue);
-    expect(isClosedLabel(kLabelRejectedAlreadyInApp), isTrue);
-    expect(isClosedLabel(kLabelRejectedDuplicate), isTrue);
-    expect(isClosedLabel(kLabelRejectedAfterReview), isTrue);
+    expect(isClosedLabel(SongLabel.added.label), isTrue);
+    expect(isClosedLabel(SongLabel.rejectedAlreadyInApp.label), isTrue);
+    expect(isClosedLabel(SongLabel.rejectedDuplicate.label), isTrue);
+    expect(isClosedLabel(SongLabel.rejectedAfterReview.label), isTrue);
     expect(isClosedLabel('song/rejected/silly'), isTrue);
 
-    expect(isClosedLabel(kLabelNeedsReview), isFalse);
-    expect(isClosedLabel(kLabelRejectedUnparsable), isTrue,
+    expect(isClosedLabel(SongLabel.needsReview.label), isFalse);
+    expect(isClosedLabel(SongLabel.rejectedUnparsable.label), isTrue,
         reason: 'odrzut; zobaczyć masz go po `have-a-look`');
-    expect(isClosedLabel(NeedsReviewKind.missingData.label), isFalse);
-    expect(isClosedLabel(kLabelRejectedCorruptedFile), isTrue);
-    expect(isClosedLabel(kLabelHaveALook), isFalse,
+    expect(isClosedLabel(SongLabel.missingData.label), isFalse);
+    expect(isClosedLabel(SongLabel.rejectedCorruptedFile.label), isTrue);
+    expect(isClosedLabel(SongLabel.haveALook.label), isFalse,
         reason: 'znacznik, nie werdykt');
-    expect(isClosedLabel(kLabelReplyOldApp), isFalse);
-    expect(isClosedLabel(kLabelReplyReviewNote), isFalse);
-    expect(isClosedLabel(kLabelWaitingForAuthor), isFalse,
+    expect(isClosedLabel(SongLabel.replyOldApp.label), isFalse);
+    expect(isClosedLabel(SongLabel.replyReviewNote.label), isFalse);
+    expect(isClosedLabel(SongLabel.waitingForAuthor.label), isFalse,
         reason: 'czekanie na autora nie jest werdyktem — przeczytane zdejmuje `reply`');
-    expect(isClosedLabel(kLabelReadyToAdd), isFalse);
-    expect(isClosedLabel(kLabelAuto), isFalse);
+    expect(isClosedLabel(SongLabel.readyToAdd.label), isFalse);
+    expect(isClosedLabel(SongLabel.auto.label), isFalse);
 
   });
 
   test('po tekście z przeglądu mejl jest przeczytany i czeka na autora', () {
     final (add, remove) = labelsAfterReply(sentReviewNote: true);
-    expect(add, [kLabelWaitingForAuthor]);
-    expect(remove, [kLabelReplyOldApp, kLabelReplyReviewNote, 'UNREAD']);
+    expect(add, [SongLabel.waitingForAuthor.label]);
+    expect(remove, [SongLabel.replyOldApp.label, SongLabel.replyReviewNote.label, 'UNREAD']);
 
     // Sam blok o starej apce: piosenka może wciąż czekać na przegląd,
     // a `reply/review-note` bez wysłanego tekstu to sprawa, która nie poszła.
     final onlyOld = labelsAfterReply(sentReviewNote: false);
     expect(onlyOld.$1, isEmpty, reason: 'o odpowiedzi mówi sam wątek (SENT)');
-    expect(onlyOld.$2, [kLabelReplyOldApp]);
+    expect(onlyOld.$2, [SongLabel.replyOldApp.label]);
   });
 
   test('isSongSubmission: po temacie albo znaczniku w treści', () {

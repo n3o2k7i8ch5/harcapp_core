@@ -30,13 +30,11 @@ export 'src/evidence.dart'
         MeterMatch,
         SameRecording,
         MetadataDiff,
+        MetadataField,
         SimilarityList,
         compare,
-        similaritiesToShow,
-        similaritiesText,
-        kSameChordPairs;
+        similaritiesText;
 export 'src/index.dart' show SongIndex, SongMatch, MatchSource, compareSongMatches, correctionTargetOf, correctionTargetLookupOf, IdLookup, IdHit;
-export 'src/level.dart' show MatchLevel, levelOf, similarityScore, kSameLines, kVariantLines, kMinLinesWeight;
-export 'src/lines.dart' show kLineMatch;
-export 'src/normalize.dart' show textWords, squash, pct;
+export 'src/level.dart' show MatchLevel, levelOf, similarityScore, similaritiesToShow, sameChordsUpToOrder;
+export 'src/normalize.dart' show textWords, pct;
 export 'src/profile.dart' show SongProfile;

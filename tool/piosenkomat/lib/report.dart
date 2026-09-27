@@ -1,3 +1,6 @@
+import 'package:harcapp_core/song_book/piosenkomat/file_names.dart';
+import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+
 import 'model.dart';
 
 /// Ile razy wystąpił każdy klucz.
@@ -33,16 +36,17 @@ String formatRunReport(List<Classified> items) {
 
   final buf = StringBuffer()
     ..writeln('ZGŁOSZEŃ        ${items.length}  (wątków)')
-    ..writeln('NOWE            ${newInFile.length}  (candidates-new.hrcpsng)')
+    ..writeln('NOWE            ${newInFile.length}  (${candidatesFileName(SubmissionKind.newSong)})')
     ..writeln('  bez zarzutu   ${newInFile.where((c) => c.issues.isEmpty).length}')
     ..writeln('  z uwagami     ${newInFile.where((c) => c.issues.isNotEmpty).length}')
-    ..writeln('POPRAWKI        ${correctionsInFile.length}  (candidates-correction.hrcpsng)')
+    ..writeln('POPRAWKI        ${correctionsInFile.length}  (${candidatesFileName(SubmissionKind.correction)})')
     ..writeln('  bez zarzutu   ${correctionsInFile.where((c) => c.issues.isEmpty).length}')
     ..writeln('  z uwagami     ${correctionsInFile.where((c) => c.issues.isNotEmpty).length}')
     ..writeln('ODRZUĆ          ${count((c) => c.destination.isReject)}')
     ..writeln('  już w apce    ${to(Destination.rejectAlreadyInApp)}')
     ..writeln('  duplikat      ${to(Destination.rejectDuplicate)}')
     ..writeln('  zły załącznik ${to(Destination.rejectCorruptedFile)}')
+    ..writeln('  nowszy format ${to(Destination.rejectUnknownFormat)}')
     ..writeln('  nie do odczytu ${to(Destination.unparsable)}')
     ..writeln('RĘCZNIE         ${to(Destination.multipleSongs)}  (kilka piosenek w jednym mejlu)')
     ..writeln('RZUĆ OKIEM      ${count((c) => c.haveALook)}'
@@ -90,13 +94,13 @@ String formatRunReport(List<Classified> items) {
   for (final c in byDate) {
     final s = c.submission;
     final tag = switch (c.destination) {
-      Destination.candidateNew => 'NOWA    ',
-      Destination.candidateCorrection => 'POPRAWKA',
+      Destination.candidate => s.isCorrection ? 'POPRAWKA' : 'NOWA    ',
       Destination.unparsable => 'NIEPARS ',
       Destination.multipleSongs => 'RĘCZNIE ',
       Destination.rejectAlreadyInApp ||
       Destination.rejectDuplicate ||
-      Destination.rejectCorruptedFile =>
+      Destination.rejectCorruptedFile ||
+      Destination.rejectUnknownFormat =>
         'ODRZUĆ  ',
     };
     final date = s.sentAt == null ? '' : _day(s.sentAt!);

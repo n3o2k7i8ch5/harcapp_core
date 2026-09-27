@@ -3,6 +3,7 @@
 // to fall back to. New emails should be composed via contrib_song_email.dart.
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
@@ -131,28 +132,7 @@ Future<String> composeContribSongEmailLegacy({
       ''
   }"
       "\n"
-      "\n### Kod piosenki:"
+      "\n$kSongCodeMarker"
       "\n"
       "\n$encodedSong";
-}
-
-String composeContribAttachedSongsEmailSubjectLegacy({
-  required List<SongCore> songs,
-  RegisteredContributor? registered,
-}){
-  final firstSong = isContributorsFirstSong(registered?.emails ?? const []);
-  return 'Piosenki ${songs.length} (${firstSong?' + świeżak + ':' - weteran - '})';
-}
-
-String composeContribAttachedSongsEmailLegacy({
-  required List<SongCore> songs,
-  required SongSource source,
-  String? acceptRulesVersion,
-  RegisteredContributor? registered,
-}) {
-
-  final firstSong = isContributorsFirstSong(registered?.emails ?? const []);
-
-  return _baseMessageLegacy(source, acceptRulesVersion, firstSong, registered);
-
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:harcapp_core/song_book/parse_contrib_email.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/people/utils.dart';
@@ -136,34 +137,10 @@ Future<String> composeContribSongEmail({
           ''
       }"
       "\n"
-      "\n### Kod piosenki:"
+      "\n$kSongCodeMarker"
       "\n"
       "\n```json"
       "\n$encodedSong"
       "\n```";
 }
 
-String composeContribAttachedSongsEmailSubject({
-  required List<SongCore> songs,
-  RegisteredContributor? registered,
-}){
-  final firstSong = isContributorsFirstSong(registered?.emails ?? const []);
-  return 'Piosenki ${songs.length} (${firstSong?' + świeżak + ':' - weteran - '})';
-}
-
-String composeContribAttachedSongsEmail({
-  required List<SongCore> songs,
-  required SongSource source,
-  String? acceptRulesVersion,
-  RegisteredContributor? registered,
-}) {
-
-  final firstSong = isContributorsFirstSong(registered?.emails ?? const []);
-
-  List<ContributorRef> allContribRefs = [
-    for(SongCore song in songs) ...song.contribRefs
-  ];
-
-  return _baseMessage(source, acceptRulesVersion, firstSong, registered, allContribRefs);
-
-}

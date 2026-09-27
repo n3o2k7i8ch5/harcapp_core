@@ -72,7 +72,7 @@ class RunPlan {
         labelsByMessage: {
           for (final c in items)
             for (final m in c.submission.messages)
-              m.id: [...c.labels, kLabelAuto],
+              m.id: [...c.labels, SongLabel.auto.label],
         },
         songByThread: {
           for (final c in items)
@@ -158,7 +158,7 @@ Map<String, List<String>> otherEmailsBySender(RunPlan plan) {
 /// jest tylko lokalna.
 bool isRunInGmail(RunPlan plan, Map<String, Set<String>> labelsByMessage) =>
     plan.labelsByMessage.keys
-        .any((id) => labelsByMessage[id]?.contains(kLabelAuto) ?? false);
+        .any((id) => labelsByMessage[id]?.contains(SongLabel.auto.label) ?? false);
 
 /// Co `unlabel` zdejmie. Swoje automat poznaje po znaczniku `song/auto` —
 /// Ty go nie wieszasz, więc Twoje ręczne etykiety zostają nietknięte.
@@ -175,12 +175,12 @@ bool isRunInGmail(RunPlan plan, Map<String, Set<String>> labelsByMessage) =>
   var outsidePlan = 0;
   var added = 0;
   for (final e in labelsByMessage.entries) {
-    if (!e.value.contains(kLabelAuto)) continue;
+    if (!e.value.contains(SongLabel.auto.label)) continue;
     if (plan != null && !plan.labelsByMessage.containsKey(e.key)) {
       outsidePlan++;
       continue;
     }
-    if (e.value.contains(kLabelAdded) && !force) {
+    if (e.value.contains(SongLabel.added.label) && !force) {
       added++;
       continue;
     }

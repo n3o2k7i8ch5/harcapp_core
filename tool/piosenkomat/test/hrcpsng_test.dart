@@ -4,6 +4,7 @@ import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:path/path.dart' as p;
+import 'package:piosenkomat/run_dir.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/hrcpsng.dart';
 import 'package:piosenkomat/similarity.dart';
@@ -55,7 +56,23 @@ void main() {
     expect(data.userMessage, 'hej');
     expect(data.run, 'import-x');
     expect(data.sentAt, c.submission.sentAt);
-    expect(data.issues.map((i) => i.issue), [SongIssue.hasUserMessage, SongIssue.missingYoutube]);
+    expect(data.issues.map((i) => i.issue), [SongIssue.userMessage, SongIssue.missingYoutube]);
+  });
+
+  test('strip: zgadnięty cel poprawki jedzie z dopiskiem na liście „podmień”', () async {
+    const lyrics = 'Płonie ognisko i szumią knieje\nDrużynowy jest wśród nas\n'
+        'Opowiada starodawne dzieje\nBohaterski wskrzesza czas';
+    final book = bookWith([sampleSong(title: 'Stara', lyrics: lyrics)]);
+    // Bez deklaracji celu: narzędzie dobiera najbliższą i to oznacza.
+    final c = classify(
+        msgFrom(await completeEmail(
+            isNew: false, song: sampleSong(title: 'Stara', lyrics: '$lyrics\nDopisana zwrotka na koniec'))),
+        book: book);
+    final song = c.song!..piosenkomatData = c.piosenkomatData();
+    expect(song.piosenkomatData!.correctionTargetGuessed, isTrue);
+    final targets = stripPiosenkomat([song]);
+    expect(targets.single.id, 'tmp');
+    expect(targets.single.guessed, isTrue, reason: 'podmiana po złym id kosztuje cudzą piosenkę');
   });
 
   test('strip: zdejmuje ślad, poprawce daje id poprawianej piosenki', () async {
@@ -111,17 +128,17 @@ void main() {
   });
 
   test('nazwy plików przebiegu', () {
-    final dir = defaultRunDir();
+    final dir = RunDir.fresh().path;
     expect(p.split(dir), hasLength(2));
     expect(p.split(dir).first, 'out');
     expect(p.basename(dir), startsWith('import-'));
-    expect(candidatesPathIn(dir, SubmissionKind.newSong), p.join(dir, 'candidates-new.hrcpsng'));
-    expect(candidatesPathIn(dir, SubmissionKind.correction), p.join(dir, 'candidates-correction.hrcpsng'));
-    expect(reviewedPathIn(dir, SubmissionKind.newSong), p.join(dir, 'reviewed-new.hrcpsng'));
-    expect(finalPathIn(dir, SubmissionKind.correction), p.join(dir, 'final-correction.hrcpsng'));
-    expect(decisionsPathIn(dir), p.join(dir, 'decisions.json'));
-    expect(planPathIn(dir), p.join(dir, 'plan.json'));
-    expect(reportPathIn(dir), p.join(dir, 'report.txt'));
-    expect(peoplePathIn(dir), p.join(dir, 'people.dart'));
+    expect(RunDir(dir).candidates(SubmissionKind.newSong), p.join(dir, 'candidates-new.hrcpsng'));
+    expect(RunDir(dir).candidates(SubmissionKind.correction), p.join(dir, 'candidates-correction.hrcpsng'));
+    expect(RunDir(dir).reviewed(SubmissionKind.newSong), p.join(dir, 'reviewed-new.hrcpsng'));
+    expect(RunDir(dir).finalSongs(SubmissionKind.correction), p.join(dir, 'final-correction.hrcpsng'));
+    expect(RunDir(dir).decisions, p.join(dir, 'decisions.json'));
+    expect(RunDir(dir).plan, p.join(dir, 'plan.json'));
+    expect(RunDir(dir).report, p.join(dir, 'report.txt'));
+    expect(RunDir(dir).people, p.join(dir, 'people.dart'));
   });
 }

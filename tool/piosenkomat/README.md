@@ -4,7 +4,9 @@ Przesiewa mejle z piosenkami na `harcapp@gmail.com`. Kompletne nowe piosenki
 trafiają do pliku `.hrcpsng` do wczytania na stronie, a mejle dostają te same
 etykiety, których używasz przy ręcznym przeglądaniu, plus znacznik `song/auto`.
 Parsowaniem zajmuje się `harcapp_core`, nic tu nie zgaduje.
-Gmail jest jedynym stanem.
+Gmail jest jedynym stanem tego, co się z mejlem dzieje. Wyjątek to katalog
+przebiegu w `out/`: niesie Twoją robotę z przeglądu (eksporty, teksty odpowiedzi
+w `decisions.json`), dopóki `clean` nie uzna, że nic na nią nie czeka.
 
 **Obsługuje wyłącznie zgłoszenia wysłane z apki.** Zgłoszenia ze strony
 (`harcapp.web.app`) są poza zakresem i są **aktywnie odsiewane** — po znaczniku
@@ -74,9 +76,9 @@ czytniki — a schodzą **razem** ze starymi członami kolejki, jednym ruchem.
 1. Google Cloud: włącz Gmail API, utwórz klienta OAuth typu **Desktop**.
 2. Pobrany JSON zapisz jako `tool/piosenkomat/secrets/credentials.json` (katalog jest w `.gitignore`).
 3. Pierwsze uruchomienie otworzy przeglądarkę. Zaloguj się na `harcapp@gmail.com`.
-   Token ląduje w `tool/piosenkomat/secrets/gmail_token.json`. Zakresy: `gmail.modify`
-   (etykiety) i `gmail.send` (odpowiedzi o starej apce). Token bez obu zakresów
-   narzędzie odrzuca i prosi o ponowne zalogowanie.
+   Token ląduje w `tool/piosenkomat/secrets/gmail_token.json`. Zakres jeden:
+   `gmail.modify` — etykiety, szkice i wysyłka (`messages.send` i `drafts.send` go
+   przyjmują). Token bez niego narzędzie odrzuca i prosi o ponowne zalogowanie.
 
 Uruchamiaj z korzenia repo przez `./piosenkomat`. Ścieżki `secrets/` i `out/` są względem `tool/piosenkomat/`.
 
@@ -193,8 +195,9 @@ Komendy na przebiegu bez `KATALOG` biorą **ostatni** z `out/`.
 Ścieżki: `--songs-db PLIK` (`scan`, `explain`; domyślnie `assets/songs/all_songs.hrcpsng`
 szukany w górę katalogów), `--credentials PLIK` i `--token PLIK` (komendy łączące się
 z Gmailem; domyślnie `secrets/credentials.json` i `secrets/gmail_token.json`).
-Pełna lista flag każdej komendy: `./piosenkomat --help` — generowana z ich definicji,
-więc żadnej nie brakuje.
+Lista komend: `./piosenkomat --help`, flagi komendy: `./piosenkomat scan --help`
+(i tak dalej) — generowane z ich definicji, więc żadnej nie brakuje. Zbędny
+argument to błąd użycia (`scan 20` nie bierze po cichu całej kolejki).
 
 `unlabel` cofa wszystko, co nadał automat — poznaje po `song/auto`, którego Ty nie
 wieszasz. Jak każda komenda na przebiegu bierze katalog, a bez niego ostatni
@@ -238,7 +241,8 @@ song/
 │   ├── duplicate-in-batch    kolizja z innym zgłoszeniem z tej samej paczki
 │   ├── undeclared-correction ta sama piosenka co w apce, inne chwyty albo drobiazgi —
 │   │                         ktoś poprawił i wysłał jako nową
-│   ├── correction-problem    poprawka, ale w apce nie ma czego poprawiać
+│   ├── correction-problem    poprawka, ale w apce nie ma czego poprawiać albo cel
+│   │                         zgadnięty (`no-target-in-app`, `guessed-correction-target`)
 │   ├── missing-data          brak YouTube, chwytów lub tytułu
 │   ├── no-consent            brak zgody albo nie wiadomo, kto zgłosił
 │   ├── several-contributors  kilka kart osób dodających — wkład przypisz ręcznie
@@ -318,6 +322,7 @@ ta sama treść pod innym tytułem to ta sama piosenka. Pokrycie to udział wers
 | `variant` | ≥ 50% wersów w którąś stronę | uwaga `variant-of-app` | kandydat |
 | `related` | wspólne wersy w obie strony (≥ 10%, co najmniej dwa), wersy „w połowie te same”, te same chwyty albo metrum przy częściowo podobnym tekście, ten sam film | uwaga `similar-text-in-app` | kandydat; cel zgadnięty tylko z tym samym tytułem |
 | `sameTitleDifferentText` | ten sam tytuł, treść niepodobna | uwaga `same-title-in-app` | kandydat |
+| `sameIdDifferentSong` | to samo id, a poza tym nic — id zajęte przez inną piosenkę | kandydat bez uwagi (edytor pokazuje dowód `SameId`) | kandydat |
 | brak | — | czysty kandydat | uwaga `no-target-in-app` |
 
 Uwaga mówi o najsilniejszym trafieniu i wymienia do dwóch kolejnych („też …”) —
@@ -334,11 +339,13 @@ czy bez. Wszystko mniej niż identyczne idzie do `candidates-new` albo
 plus podkategoria na każdą uwagę.
 
 **W paczce** zgłoszenia grupują się zależnie od rodzaju: nowe po tytule
-głównym **albo** treści (ta sama piosenka pod innym tytułem; grupa to spójna składowa), poprawki po `correction_target` (poprawka może zmieniać tytuł). W grupie
+głównym **albo** treści (ta sama piosenka pod innym tytułem; grupa to spójna składowa), poprawki po `correction_target` (poprawka może zmieniać tytuł), a poprawki bez celu — po tytule głównym. W grupie
 identyczne zlewają się do **najnowszej** (reszta → `rejected/duplicate`), a pozostałe
-porównują się już tylko między sobą i idą do pliku z uwagą `same-title-in-batch` /
-`same-target-in-batch`. Poza grupami, parami: podobne treścią (poziom od `related`
-w górę) między różnymi tytułami głównymi → `similar-text-in-batch`. **W paczce „ten sam tytuł” to tytuł główny** —
+idą do pliku z uwagą. Każde wskazuje jedno najbliższe inne zgłoszenie tego samego
+rodzaju: najpierw z własnej grupy (`same-title-in-batch` / `same-target-in-batch`),
+spoza niej tylko podobne treścią (poziom od `related` w górę) albo o tym samym
+tytule → `similar-text-in-batch`; w obrębie tego — najsilniejszy poziom, potem
+bliskość tekstu. **W paczce „ten sam tytuł” to tytuł główny** —
 wspólny tytuł ukryty łapie dopiero tekst (z apką `hid_titles` liczą się jak tytuł). Duplikat
 z innego przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs`.
 
@@ -348,16 +355,21 @@ z innego przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs`.
 |---|---|---|---|
 | `missing-title`, `missing-chords`, `missing-youtube` | blocking | ✓ | — (poprawka to diff) |
 | `no-consent`, `no-contributor-email` | blocking | ✓ | ✓ |
-| `corrupted-submission-file`, `unknown-submission-format` | blocking | ✓ | ✓ (piosenki nie ma po czym odczytać) |
 | `several-contributors` | blocking | ✓ | ✓ |
-| `guessed-contributor-email` | decision | ✓ | ✓ (tylko formaty bez `sender_is_contributor`) |
+| `guessed-contributor` | decision | ✓ | ✓ (tylko formaty bez `sender_is_contributor`) |
 | `chords-differ-from-app`, `metadata-differ-from-app` | decision | ✓ | — |
 | `same-title-in-app`, `similar-text-in-app` | decision | ✓ | — (normalny kształt poprawki) |
 | `more-verses-than-app`, `fewer-verses-than-app`, `variant-of-app` | decision | ✓ | — (normalny kształt poprawki) |
 | `same-title-in-batch`, `similar-text-in-batch` | decision | ✓ | gdy celu nie ma albo jest inny — dwie podobne poprawki **różnych** piosenek są podejrzane: zwykle jedna celuje w złą |
 | `same-target-in-batch` | decision | — | ✓ (dwie poprawki tej samej piosenki) |
-| `no-target-in-app` | decision | — | ✓ |
-| `has-user-message` | decision | ✓ | ✓ (tylko `userMessage`; blok poprawki jest oczekiwany) |
+| `no-target-in-app` | decision | — | ✓ (brak celu albo zadeklarowane id, którego w śpiewniku nie ma lub bez `@wykonawca` pasuje kilka) |
+| `guessed-correction-target` | decision | — | ✓ (cel dobrany po podobieństwie albo znaleziony dopiero bez `@wykonawca`) |
+| `user-message` | decision | ✓ | ✓ (tylko `userMessage`; blok poprawki jest oczekiwany) |
+
+Uwaga, która ma podkategorię 1:1, nazywa się tak samo jak ona (`user-message`,
+`guessed-contributor`, `several-contributors`). Zepsuty albo nowszy załącznik
+uwagą nie jest — piosenki nie ma, więc nie ma czego oglądać w pliku: to odrzut
+(`rejected/corrupted-file`, `rejected/unknown-format`) z powodem w raporcie.
 
 Waga to **kolor pastylki** w edytorze — czerwona „bez tego nie powinno wejść”,
 pomarańczowa „zdecyduj”. Pastylki są dla Ciebie: po przeglądzie narzędzie ich nie
@@ -395,7 +407,9 @@ w `report.txt`.
 plik zgłoszenia niesie `correction_target`, mejl bez załącznika sekcję
 `### Poprawiana piosenka:` z id w bloku ``` (klienty łamią
 długie linie, blok czyta się w całości), a piosenka własna pamięta
-swój pierwowzór od chwili, w której wzięto ją do edycji. Gdy zgłoszenie nic nie
+swój pierwowzór od chwili, w której wzięto ją do edycji. Id sprzed zmiany
+wykonawcy w apce szukamy też bez członu `@wykonawca` — jedno trafienie to cel
+zgadnięty, kilka to brak celu. Gdy zgłoszenie nic nie
 mówi (stara apka, apka sprzed tej zmiany), narzędzie **wolno zgaduje** po tytule
 i tekście, ale nigdy nie udaje, że to dane: dokłada `correction_target_guessed`,
 uwagę `guessed-correction-target` i dopisek przy „podmień” w `prepare`.
@@ -405,7 +419,9 @@ id **jest** w śpiewniku; inaczej to brak celu (`no-target-in-app`), nie cel.
 
 Oba pola nigdy nie jadą do `all_songs.hrcpsng`: `toApiJsonMap` wypuszcza je tylko
 na życzenie narzędzia, a `prepare` zdejmuje je przed wgraniem — razem z pamięcią
-o pierwowzorze w samej piosence (`based_on_song_id`).
+o pierwowzorze w samej piosence (`based_on_song_id`) i id wątku
+w `contributor_data.email_thread_id` (zapasowy klucz dopasowania w `label reviewed`;
+w `all_songs` byłby tylko wyciekiem id ze skrzynki).
 
 ## Przegląd i `prepare`
 
@@ -535,7 +551,7 @@ etykietę `song/reply/old-app` — chyba że autor dostał już od nas odpowied�
 Razem z `reply/review-note` to kolejka odpowiedzi i jedyne źródło prawdy, komu
 nie odpisano. Jedna odpowiedź na piosenkę, w jej wątku; blok o starej apce jedzie
 w środku, a gdy uwag nie ma — jeden mejl z samym blokiem na autora (treść jak
-`oldestFormatReplyMessage` z `harcapp_core`). Przerwany przebieg dokańcza
+`oldAppReplyMessage` z `harcapp_core`). Przerwany przebieg dokańcza
 powtórzenie komendy. `-n` ogranicza liczbę autorów (Gmail tnie ok. 500 mejli
 na dobę).
 
@@ -567,12 +583,10 @@ Szkic jest jeden na wątek, a który wątek go ma, narzędzie pyta Gmaila — dr
 `--draft` nie założy drugiego szkicu, tylko przeliczy istniejący. Wysyłka idzie przez `drafts.send`, więc to, co poprawisz w Gmailu,
 leci w świat; `reply/*` schodzi.
 
-Szkic skasowany albo wysłany ręcznie z Gmaila też jest obsłużony: jeśli w wątku
-jest już nasza wysłana wiadomość, `reply --push` uznaje za odpisane i tylko
-przestawia etykiety — drugiego mejla autor nie dostanie. Jeśli nie ma, składa
-mejl normalnie.
-
-Szkic potrzebuje tylko zakresu `gmail.modify`, ten sam co etykiety.
+Szkic skasowany albo wysłany ręcznie z Gmaila też jest obsłużony: jeśli
+**ostatnia** wiadomość w wątku to nasza wysłana, `reply --push` uznaje za
+odpisane i tylko przestawia etykiety — drugiego mejla autor nie dostanie. Jeśli
+autor od tamtej pory odpisał, to nowa sprawa: składa mejl normalnie.
 
 ## Osoby dodające
 
@@ -603,6 +617,14 @@ W komentarzach na końcu pliku:
 Parser ciągnie `SongRaw`, a ten Fluttera, więc `dart run` nie działa. `./piosenkomat`
 odpala pod spodem `flutter test test/cli_harness.dart`, stąd prefiks `Shell:`
 w wyjściu. Testy: `flutter test` w `tool/piosenkomat`.
+
+Komendy łączą się ze skrzynką przez `Mailbox` (`mailbox.dart`); `GmailMailbox`
+to prawdziwy Gmail, a testy podstawiają `FakeMailbox` (`test/fake_mailbox.dart`)
+przez `runPiosenkomat(args, connect: …)` — tak sprawdzamy wysyłkę, szkice
+i `reopen` bez żywej skrzynki. Mejl z Gmaila czyta się w całości (`format: raw`)
+tym samym czytnikiem MIME (`eml.dart`), co pliki `.eml` w `explain`: charsety
+(UTF-8, ISO-8859-1/2, windows-1250) i nagłówki RFC 2047. Mejl, którego nie da
+się rozebrać, idzie jako „nie do odczytania”, zamiast przerywać `scan`.
 
 Jedna nazwa na jedną rzecz: żadnych aliasów komend, ukrytych synonimów flag ani
 czytania plików pod starymi nazwami. Komendy są tylko te z pomocy, pisze wyłącznie

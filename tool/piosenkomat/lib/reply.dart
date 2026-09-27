@@ -1,9 +1,10 @@
 import 'dart:io';
 
+import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/contrib_reply.dart';
 
 import 'classify.dart';
-import 'gmail.dart';
+import 'mailbox.dart';
 import 'model.dart';
 
 /// Mejl z kolejki `reply`: jego id i wątek, w którym leży.
@@ -140,7 +141,7 @@ class ReplyQueue {
 /// Nadawcy nie da się poznać bez nagłówka, a ten kosztuje 20 jednostek, więc
 /// przy `-n` przestajemy czytać, gdy mamy już tylu autorów, ilu obsłużymy.
 Future<ReplyQueue> groupBySender(
-  GmailMailbox mailbox,
+  Mailbox mailbox,
   List<String> ids, {
   required String query,
   required int? limit,
@@ -213,7 +214,7 @@ void printReplyQueue(ReplyQueue queue, Map<String, AuthorReplies> plans) {
 /// Jedno odpalenie `reply --push`: kolejka i plan — mejl na piosenkę, w jej
 /// wątku ([planAuthorReplies]).
 class ReplyRun {
-  final GmailMailbox mailbox;
+  final Mailbox mailbox;
   final ReplyQueue queue;
   final Map<String, AuthorReplies> plans;
   final Map<String, String> draftIdByThread;
@@ -237,7 +238,7 @@ class ReplyRun {
     final (add, remove) = r.labels;
     await mailbox.batchModify(r.messageIds, add: add, remove: remove);
     if (r.alsoClearsOldApp.isNotEmpty) {
-      await mailbox.batchModify(r.alsoClearsOldApp, add: const [], remove: [kLabelReplyOldApp]);
+      await mailbox.batchModify(r.alsoClearsOldApp, add: const [], remove: [SongLabel.replyOldApp.label]);
     }
   }
 
@@ -325,7 +326,7 @@ class ReplyRun {
         if (draftIdByThread[r.threadId] case final draftId?) {
           // Z Twoimi poprawkami, jeśli jakieś zrobiłeś.
           await mailbox.sendDraft(draftId);
-        } else if (await mailbox.ourReplyIsLatest(r.threadId)) {
+        } else if ((await mailbox.threadSummary(r.threadId)).ourReplyIsLatest) {
           // Szkic zniknął, a ostatnie słowo w wątku jest nasze — wysłany
           // ręcznie z Gmaila. Drugiego mejla autor dostać nie może. Jeśli od
           // tamtej pory autor odpisał, to nowa sprawa: składamy mejl normalnie.

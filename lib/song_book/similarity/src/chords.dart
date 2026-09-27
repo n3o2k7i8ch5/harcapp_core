@@ -14,10 +14,14 @@ const _roots = {'c': 0, 'd': 2, 'e': 4, 'f': 5, 'g': 7, 'a': 9, 'b': 10, 'h': 11
 
 /// `es`/`s` przed `us` to nie bemol, tylko `sus` (`Esus4`, `Asus2`).
 final _chord = RegExp(r'^([A-Ha-h])(is|es(?!us)|s(?!us))?(.*)$');
+final _brackets = RegExp(r'[()\[\]]');
+final _whitespace = RegExp(r'\s+');
+/// Pusta linia rozdziela części piosenki.
+final _partBreak = RegExp(r'\n[ \t]*\n');
 
 /// Akord jako liczba: `dźwięk * 64 + rodzaj * 2 + moll`. `null`, gdy to nie akord.
 int? parseChord(String token) {
-  var t = token.replaceAll(RegExp(r'[()\[\]]'), '');
+  var t = token.replaceAll(_brackets, '');
   final slash = t.indexOf('/');
   if (slash > 0) t = t.substring(0, slash); // bas (`D/Fis`) nie zmienia akordu
   final m = _chord.firstMatch(t);
@@ -43,7 +47,7 @@ int? parseChord(String token) {
 
 /// Akordy w kolejności z tekstu.
 List<int> chordSequence(String chords) => [
-      for (final token in chords.split(RegExp(r'\s+')))
+      for (final token in chords.split(_whitespace))
         if (token.isNotEmpty)
           if (parseChord(token) case final c?) c,
     ];
@@ -59,7 +63,7 @@ const _pairBase = 12 * 64;
 /// jednym chwycie też miała z czym się porównać.
 Set<int> chordPairs(String chords) {
   final out = <int>{};
-  for (final part in chords.split(RegExp(r'\n[ \t]*\n'))) {
+  for (final part in chords.split(_partBreak)) {
     final sequence = chordSequence(part);
     if (sequence.length == 1) out.add(sequence.first * _pairBase + sequence.first);
     for (var i = 0; i + 1 < sequence.length; i++) {

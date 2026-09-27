@@ -4,9 +4,13 @@ library;
 
 import 'dart:math';
 
+import 'package:harcapp_core/comm_classes/text_utils.dart';
+import 'package:harcapp_core/song_book/song_core.dart';
+
 import 'chords.dart';
 import 'lines.dart';
 import 'normalize.dart';
+import 'level.dart' show similaritiesToShow;
 import 'profile.dart';
 
 /// Jeden dowód. Zbieramy wszystkie, jakie są; co z nich wynika, mówi
@@ -58,7 +62,15 @@ class SharedLines extends Similarity {
   final List<ProfileLine> _lines;
   final List<ProfileLine> _otherLines;
 
-  SharedLines._(this.best, this.otherBest, this._lines, this._otherLines);
+  /// Ile tekstu (wagą wersów) ma ta piosenka i tamta — przy kilku słowach
+  /// każde pokrycie jest przypadkiem.
+  final double total, otherTotal;
+
+  SharedLines._(this.best, this.otherBest, SongProfile a, SongProfile b)
+      : _lines = a.lines,
+        _otherLines = b.lines,
+        total = a.totalWeight,
+        otherTotal = b.totalWeight;
 
   static double _coverage(List<double> best, List<ProfileLine> lines, double min) {
     var total = 0.0, covered = 0.0;
@@ -77,11 +89,6 @@ class SharedLines extends Similarity {
     }
     return total == 0 ? 0 : acc / total;
   }
-
-  /// Ile tekstu (wagą wersów) ma ta piosenka i tamta — przy kilku słowach
-  /// każde pokrycie jest przypadkiem.
-  double get total => _lines.fold(0.0, (a, l) => a + l.weight);
-  double get otherTotal => _otherLines.fold(0.0, (a, l) => a + l.weight);
 
   /// Jaka część tej piosenki (wagą wersów) jest w tamtej.
   double coverage([double min = kLineMatch]) => _coverage(best, _lines, min);
@@ -159,17 +166,30 @@ class SameRecording extends Similarity {
   String get text => 'to samo nagranie';
 }
 
-/// Które pola metadanych się różnią. Nieemitowany, gdy nic.
-class MetadataDiff extends Similarity {
-  final List<String> fields;
-  const MetadataDiff(this.fields);
-  @override
-  String get text => 'inne: ${fields.join(', ')}';
+/// Pole metadanych porównywane dosłownie: [key] jak w JSON-ie piosenki
+/// (jedzie do plików przeglądu i raportów), [label] — po polsku, do pokazania.
+enum MetadataField {
+  title(SongCore.PARAM_TITLE, 'tytuł'),
+  hidTitles(SongCore.PARAM_HID_TITLES, 'tytuły ukryte'),
+  authors(SongCore.PARAM_TEXT_AUTHORS, 'autorzy'),
+  composers(SongCore.PARAM_COMPOSERS, 'kompozytorzy'),
+  performers(SongCore.PARAM_PERFORMERS, 'wykonawcy'),
+  releaseDate(SongCore.PARAM_REL_DATE, 'data wydania'),
+  youtube(SongCore.PARAM_YT_VIDEO_ID, 'YouTube'),
+  tags(SongCore.PARAM_TAGS, 'tagi');
+
+  const MetadataField(this.key, this.label);
+  final String key;
+  final String label;
 }
 
-/// Od tego podobieństwa par akordów chwyty są te same z dokładnością do
-/// kolejności (przesunięty refren, inna kolejność zwrotek).
-const double kSameChordPairs = 0.8;
+/// Które pola metadanych się różnią. Nieemitowany, gdy nic.
+class MetadataDiff extends Similarity {
+  final List<MetadataField> fields;
+  const MetadataDiff(this.fields);
+  @override
+  String get text => 'inne: ${fields.map((f) => f.key).join(', ')}';
+}
 
 /// Wszystkie dowody, jakie da się zebrać między [a] („ta”) i [b] („tamta”).
 List<Similarity> compare(SongProfile a, SongProfile b) {
@@ -179,7 +199,7 @@ List<Similarity> compare(SongProfile a, SongProfile b) {
   if (a.text.isNotEmpty && a.text == b.text) out.add(const SameText());
   if (a.lines.isNotEmpty && b.lines.isNotEmpty) {
     final aligned = alignLines(a, b);
-    out.add(SharedLines._(aligned.a, aligned.b, a.lines, b.lines));
+    out.add(SharedLines._(aligned.a, aligned.b, a, b));
   }
   if (a.chords == b.chords) out.add(const SameChords());
   if (a.hasChords && b.hasChords) {
@@ -208,36 +228,11 @@ extension SimilarityList on List<Similarity> {
   MeterMatch? get meterMatch => whereType<MeterMatch>().firstOrNull;
   MetadataDiff? get metadataDiff => whereType<MetadataDiff>().firstOrNull;
 
-  /// Chwyty te same, choćby w innej kolejności (przesunięty refren).
-  /// Transpozycja to już inne chwyty.
-  bool get sameChordsUpToOrder {
-    if (has<SameChords>()) return true;
-    final c = chordsMatch;
-    return c != null && c.shift == 0 && c.similarity >= kSameChordPairs;
-  }
-
   /// Największe pokrycie wersów w którąś stronę.
   double get lineCoverage {
     final l = sharedLines;
     return l == null ? (has<SameText>() ? 1 : 0) : max(l.coverage(), l.otherCoverage());
   }
-}
-
-/// Dowody do pokazania: bez tego, co powtarza inny dowód (wspólne wersy
-/// obok „ten sam tekst”, podobieństwo chwytów obok „te same chwyty”), i bez
-/// metrum tam, gdzie o podobieństwie mówi już tekst — ono ma znaczenie
-/// tylko przy przeróbkach.
-List<Similarity> similaritiesToShow(List<Similarity> s) {
-  final sameText = s.has<SameText>();
-  final sameChords = s.has<SameChords>();
-  final meterSays = (s.meterMatch?.similarity ?? 0) >= 0.75 && s.lineCoverage < 0.5;
-  return [
-    for (final e in s)
-      if (!(sameText && e is SharedLines) &&
-          !(sameChords && e is ChordsMatch) &&
-          !(e is MeterMatch && !meterSays))
-        e,
-  ];
 }
 
 String similaritiesText(List<Similarity> s) => similaritiesToShow(s).map((e) => e.text).join(', ');

@@ -11,7 +11,7 @@ import 'helpers.dart';
 
 void main() {
   _correction();
-  _oldest();
+  _oldApp();
   test('złamane linie JSON-a: sklejenie spacją ratuje mejl', () async {
     final raw = hardWrap(await completeEmail());
     expect(raw, contains('\r\n'));
@@ -98,11 +98,11 @@ void _correction() {
     final got = classify(msgFrom(withText), book: SongBook.empty);
     expect(got.submission.isCorrection, isTrue);
     expect(got.submission.correctionMessage, 'zła tonacja');
-    expect(got.destination, Destination.candidateCorrection);
+    expect(got.destination, Destination.candidate);
   });
 }
 
-void _oldest() {
+void _oldApp() {
   test('najstarsza apka: goły JSON połamany, załącznik ratuje', () async {
     final good = classify(msgFrom(await completeEmail()), book: SongBook.empty);
     final song = good.song!;
@@ -121,7 +121,7 @@ void _oldest() {
     // („Piosenka …”) nie jest tematem spoza szablonów.
     expect(issuesOf(got), [SongIssue.noConsent]);
     expect(got.oldApp, isTrue);
-    expect(got.labels, contains(kLabelReplyOldApp));
+    expect(got.labels, contains(SongLabel.replyOldApp.label));
     expect(got.song!.contributorData?.acceptedContributionRulesVersion,
         kNoConsentRulesVersion);
     expect(got.title, 'Piosenka testowa XYZ');
@@ -145,6 +145,6 @@ void _oldest() {
     expect(got.isClean, isTrue);
     expect(got.oldApp, isFalse);
     expect(got.submission.shape, EmailShape.legacy);
-    expect(got.labels, isNot(contains(kLabelReplyOldApp)));
+    expect(got.labels, isNot(contains(SongLabel.replyOldApp.label)));
   });
 }

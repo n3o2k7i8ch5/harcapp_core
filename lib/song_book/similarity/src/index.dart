@@ -115,40 +115,54 @@ class SongIndex<T extends SongCore> {
   /// Słowo → numery piosenek, w których występuje.
   final Map<String, List<int>> _byWord = {};
 
-  SongIndex(List<T> songs) : this._(songs, [for (final s in songs) SongProfile(s)]);
-
-  /// Jak konstruktor, ale co [slice] oddaje wątek. Na webie `compute` nie ma
-  /// osobnego wątku, a odciski 2,5 tys. piosenek liczone jednym ciągiem
-  /// zamroziłyby stronę na start; tak strona żyje, a indeks dochodzi w tle.
-  static Future<SongIndex<T>> inSlices<T extends SongCore>(List<T> songs,
-      {Duration slice = const Duration(milliseconds: 12)}) async {
-    final profiles = <SongProfile>[];
-    final sw = Stopwatch()..start();
-    for (final s in songs) {
-      profiles.add(SongProfile(s));
-      if (sw.elapsed >= slice) {
-        await Future<void>.delayed(Duration.zero);
-        sw.reset();
-      }
+  SongIndex(this.songs) : profiles = [] {
+    for (var i = 0; i < songs.length; i++) {
+      _add(i, SongProfile(songs[i]));
     }
-    return SongIndex._(songs, profiles);
   }
 
-  SongIndex._(this.songs, this.profiles) {
-    for (var i = 0; i < profiles.length; i++) {
-      final p = profiles[i];
-      if (p.id.isNotEmpty) {
-        _byId.putIfAbsent(p.id, () => []).add(i);
-        _byBareId.putIfAbsent(_bare(p.id), () => []).add(i);
-      }
-      for (final k in p.titleKeys) {
-        _byTitleKey.putIfAbsent(k, () => []).add(i);
-      }
-      if (p.youtubeId.isNotEmpty) _byYoutube.putIfAbsent(p.youtubeId, () => []).add(i);
-      if (p.words.isEmpty && p.text.isNotEmpty) _byWordlessText.putIfAbsent(p.text, () => []).add(i);
-      for (final w in p.words) {
-        _byWord.putIfAbsent(w, () => []).add(i);
-      }
+  SongIndex._empty(this.songs) : profiles = [];
+
+  /// Jak konstruktor, ale co [slice] oddaje wątek. Na webie `compute` nie ma
+  /// osobnego wątku, a odciski 2,5 tys. piosenek, odwrócony indeks słów
+  /// i ich wagi liczone jednym ciągiem zamroziłyby stronę na start; tak strona
+  /// żyje, a indeks dochodzi w tle.
+  static Future<SongIndex<T>> inSlices<T extends SongCore>(List<T> songs,
+      {Duration slice = const Duration(milliseconds: 12)}) async {
+    final index = SongIndex<T>._empty(songs);
+    final sw = Stopwatch()..start();
+    Future<void> yieldIfDue() async {
+      if (sw.elapsed < slice) return;
+      await Future<void>.delayed(Duration.zero);
+      sw.reset();
+    }
+
+    for (var i = 0; i < songs.length; i++) {
+      index._add(i, SongProfile(songs[i]));
+      await yieldIfDue();
+    }
+    final sums = Float64List(songs.length);
+    for (final posting in index._byWord.values) {
+      index._addIdf(posting, sums);
+      await yieldIfDue();
+    }
+    index._idfSumCache = sums;
+    return index;
+  }
+
+  void _add(int i, SongProfile p) {
+    profiles.add(p);
+    if (p.id.isNotEmpty) {
+      _byId.putIfAbsent(p.id, () => []).add(i);
+      _byBareId.putIfAbsent(_bare(p.id), () => []).add(i);
+    }
+    for (final k in p.titleKeys) {
+      _byTitleKey.putIfAbsent(k, () => []).add(i);
+    }
+    if (p.youtubeId.isNotEmpty) _byYoutube.putIfAbsent(p.youtubeId, () => []).add(i);
+    if (p.words.isEmpty && p.text.isNotEmpty) _byWordlessText.putIfAbsent(p.text, () => []).add(i);
+    for (final w in p.words) {
+      _byWord.putIfAbsent(w, () => []).add(i);
     }
   }
 
@@ -213,9 +227,24 @@ class SongIndex<T extends SongCore> {
   /// (warsztat, paczka) nie zerował wag.
   double _idf(int documents) => log(1 + (profiles.length + 1) / (documents + 1));
 
-  late final List<double> _idfSum = [
-    for (final p in profiles) p.words.fold(0.0, (a, w) => a + _idf(_byWord[w]!.length)),
-  ];
+  /// Suma wag słów każdej piosenki — mianownik Jaccarda. Liczona po słowach,
+  /// nie po piosenkach: jeden `log` na słowo zamiast wyszukiwania w mapie
+  /// dla każdego słowa każdej piosenki.
+  List<double> get _idfSum => _idfSumCache ??= () {
+        final sums = Float64List(profiles.length);
+        for (final posting in _byWord.values) {
+          _addIdf(posting, sums);
+        }
+        return sums;
+      }();
+  List<double>? _idfSumCache;
+
+  void _addIdf(List<int> posting, Float64List sums) {
+    final weight = _idf(posting.length);
+    for (final i in posting) {
+      sums[i] += weight;
+    }
+  }
 
   /// Najbliższe tekstem po słowach: Jaccard zbiorów słów ważonych rzadkością,
   /// liczony z odwróconego indeksu — gęsty licznik, a nie 2,5 tys. przecięć
@@ -235,13 +264,26 @@ class SongIndex<T extends SongCore> {
         shared[i] += weight;
       }
     }
-    final scored = [
-      for (final i in touched) (i, shared[i] / (own + _idfSum[i] - shared[i])),
-    ]..sort((a, b) => b.$2.compareTo(a.$2));
-    return [
-      for (var k = 0; k < scored.length; k++)
-        if (k < _nearest || scored[k].$2 >= _nearEnough) scored[k].$1,
-    ];
+    // Każdy dość bliski wchodzi, a z dalszych — tylu najbliższych, żeby
+    // razem było [_nearest]. Bez sortowania wszystkich dotkniętych: częste
+    // słowa („i”, „w”, „się”) dotykają prawie całego śpiewnika.
+    final near = <int>[];
+    final far = <(int, double)>[]; // najbliżsi z dalszych, od najbliższego
+    final idfSum = _idfSum;
+    for (final i in touched) {
+      final score = shared[i] / (own + idfSum[i] - shared[i]);
+      if (score >= _nearEnough) {
+        near.add(i);
+      } else if (far.length < _nearest || score > far.last.$2) {
+        var at = far.length;
+        while (at > 0 && far[at - 1].$2 < score) {
+          at--;
+        }
+        far.insert(at, (i, score));
+        if (far.length > _nearest) far.removeLast();
+      }
+    }
+    return [...near, for (final (i, _) in far.take(max(0, _nearest - near.length))) i];
   }
 
   /// Kto w ogóle może mieć poziom: wspólny tytuł, id, nagranie, dosłowny

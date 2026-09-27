@@ -103,9 +103,6 @@ List<ReviewCandidate> collectCandidates(
   SubmissionKind kind,
 ) {
   final byId = {for (final s in candidateSongs) s.id: s};
-  SongRaw? find(String songId) =>
-      byId[songId] ??
-      candidateSongs.where((s) => s.id.split('~').first == songId).firstOrNull;
 
   return [
     for (final e in plan.songByThread.entries)
@@ -113,7 +110,7 @@ List<ReviewCandidate> collectCandidates(
         ReviewCandidate(
           threadId: e.key,
           planned: e.value,
-          profile: switch (find(e.value.songId)) { final s? => SongProfile(s), null => null },
+          profile: switch (byId[e.value.songId]) { final s? => SongProfile(s), null => null },
         ),
   ];
 }
@@ -194,31 +191,18 @@ ReviewResult reviewDiff({
 Matched? _match(SongRaw song, List<ReviewCandidate> candidates) {
   final threadId = _threadOf(song);
   if (threadId != null) {
-    final sameThread = [for (final c in candidates) if (c.threadId == threadId) c];
-    // Id wątku jest, ale spoza kandydatów: obca, bez zgadywania po tytule —
-    // inaczej piosenka z innego przebiegu przeszłaby jako „przyjęta”.
-    if (sameThread.isEmpty) return null;
-    // W obrębie wątku id wystarczy; gdy piosenek jest kilka i nie da się
-    // ich rozróżnić, bierzemy pierwszą.
-    final hit = _narrow(song, sameThread, trustSingle: true);
-    return Matched(hit?.$1 ?? sameThread.first, hit?.$2 ?? MatchedBy.threadId, song);
+    // Wątek to jedno zgłoszenie, więc i jeden kandydat. Id wątku spoza
+    // kandydatów: obca, bez zgadywania po tytule — inaczej piosenka z innego
+    // przebiegu przeszłaby jako „przyjęta”.
+    final hit = candidates.where((c) => c.threadId == threadId).firstOrNull;
+    return hit == null ? null : Matched(hit, MatchedBy.threadId, song);
   }
   // Bez id wątku piosenka musi się obronić sama: id, tytuł albo tekst.
-  final hit = _narrow(song, candidates, trustSingle: false);
+  final hit = _narrow(song, candidates);
   return hit == null ? null : Matched(hit.$1, hit.$2, song);
 }
 
-/// [trustSingle] mówi, czy jedyny kandydat jest już odpowiedzią — jest nią
-/// w obrębie wątku, ale nie w całym przebiegu.
-(ReviewCandidate, MatchedBy)? _narrow(
-  SongRaw song,
-  List<ReviewCandidate> candidates, {
-  required bool trustSingle,
-}) {
-  if (trustSingle && candidates.length == 1) {
-    return (candidates.single, MatchedBy.threadId);
-  }
-
+(ReviewCandidate, MatchedBy)? _narrow(SongRaw song, List<ReviewCandidate> candidates) {
   final id = song.id.split('~').first;
   final byId = [for (final c in candidates) if (c.songId == id) c];
   if (byId.length == 1) return (byId.single, MatchedBy.songId);
@@ -282,10 +266,10 @@ Map<String, LabelChange> reviewLabelChanges(
       // Odrzucona z wyjaśnieniem to nie koniec sprawy, tylko pytanie do
       // autora: bez „rejected”, bo piosenka może jeszcze wrócić z chwytami.
       final add = r.reviewNotes.containsKey(threadId)
-          ? kLabelReplyReviewNote
-          : kLabelRejectedAfterReview;
+          ? SongLabel.replyReviewNote.label
+          : SongLabel.rejectedAfterReview.label;
       for (final id in plan.messagesOf(threadId)) {
-        out[id] = ([add], [kLabelReadyToAdd, ...kNeedsReviewLabels]);
+        out[id] = ([add], [SongLabel.readyToAdd.label, ...kNeedsReviewLabels]);
       }
     }
     for (final threadId in r.acceptedThreads) {
@@ -294,11 +278,11 @@ Map<String, LabelChange> reviewLabelChanges(
         // Bez zarzutu już miały „w pliku” — ruszamy tylko te po przeglądzie
         // albo takie, którym dopisałeś odpowiedź.
         if (!hasReviewNote &&
-            !(plan.labelsByMessage[id] ?? const []).contains(kLabelNeedsReview)) {
+            !(plan.labelsByMessage[id] ?? const []).contains(SongLabel.needsReview.label)) {
           continue;
         }
         out[id] = (
-          [kLabelReadyToAdd, if (hasReviewNote) kLabelReplyReviewNote],
+          [SongLabel.readyToAdd.label, if (hasReviewNote) SongLabel.replyReviewNote.label],
           kNeedsReviewLabels,
         );
       }

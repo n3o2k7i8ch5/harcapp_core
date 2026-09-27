@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
+import 'package:piosenkomat/run_dir.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/hrcpsng.dart';
 import 'package:piosenkomat/model.dart';
@@ -147,7 +148,7 @@ void main() {
       msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: 'Ala ma kota\nA kot ma Ale\nX')), id: 'a'),
       msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: 'Ala ma kota\nA kot ma Ale\nY')), id: 'b'),
     ], book: book);
-    expect(items.map((c) => c.destination), everyElement(Destination.candidateCorrection));
+    expect(items.map((c) => c.destination), everyElement(Destination.candidate));
     final songs = [for (final c in items) c.song!..piosenkomatData = c.piosenkomatData()];
     assignUniqueIds(songs);
     final plan = RunPlan.fromClassified(items);
@@ -176,7 +177,7 @@ void main() {
   test('ślad przeglądu zapisuje decyzje z rodzajem', () async {
     final (proposed, songs) = await _scanned();
     final result = reviewDiff(kind: _new, candidates: proposed, reviewed: roundTrip([songs.first]));
-    final path = decisionsPathIn(tempDir().path);
+    final path = RunDir(tempDir().path).decisions;
     writeDecisions(path, [result]);
 
     final written = jsonDecode(File(path).readAsStringSync()) as Map<String, dynamic>;

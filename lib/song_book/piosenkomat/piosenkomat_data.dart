@@ -56,6 +56,15 @@ class PiosenkomatMessage{
 
 }
 
+extension PiosenkomatConversation on List<PiosenkomatMessage>{
+  /// Co napisał **autor** — wiadomości bez Twoich odpowiedzi, sklejone
+  /// pustą linią. `null`, gdy autor nic nie napisał.
+  String? get authorText {
+    final own = [for(final m in this) if(!m.isOurs) m.text];
+    return own.isEmpty? null: own.join('\n\n');
+  }
+}
+
 /// Jedna uwaga piosenkomatu do piosenki. [detail] mówi *z czym* kolizja albo
 /// *co* dokładnie jest nie tak — bez tego „ten sam tytuł” nie niesie nic,
 /// czego nie wiadomo z samej nazwy uwagi.
@@ -201,11 +210,8 @@ class PiosenkomatData{
   bool get isCorrection => kind == SubmissionKind.correction;
 
   /// Co napisał **autor**, bez Twoich odpowiedzi — tego dotyczy uwaga
-  /// `has-user-message` i z tego robi się propozycja odpowiedzi.
-  String? get userMessage {
-    final own = [for(final m in conversation) if(!m.isOurs) m.text];
-    return own.isEmpty? null: own.join('\n\n');
-  }
+  /// `user-message` i z tego robi się propozycja odpowiedzi.
+  String? get userMessage => conversation.authorText;
   /// Werdykt do użycia: brak przełącznika znaczy „wchodzi”.
   bool get goesIn => accepted ?? true;
   /// Czy jest co wysłać autorowi.

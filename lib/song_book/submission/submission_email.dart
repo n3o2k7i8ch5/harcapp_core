@@ -3,6 +3,7 @@
 /// jadą załącznikiem — patrz [SongSubmissionFile].
 library;
 
+import 'package:harcapp_core/song_book/mail_quotes.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 
@@ -19,10 +20,6 @@ const String kSubmissionUserMessagePlaceholder =
 /// Wspólne dla ekranu wysyłki w apce, treści zgłoszenia i odpowiedzi do autora.
 const String kSubmissionOneSongPerMailNote =
     'Każdą kolejną piosenkę wyślij osobnym mejlem, nie odpowiedzią na ten.';
-
-/// Znak cytatu na początku linii w mejlu zwrotnym (`> `, `>> `) razem
-/// z wcięciem. Jeden wzorzec dla wszystkich, którzy zdejmują cytowanie.
-final RegExp quotePrefixRe = RegExp(r'^[>\s]+');
 
 /// Belki szablonu zgłoszenia z załącznikiem — od pierwszej z nich w dół to
 /// już szablon, nie dopisek.

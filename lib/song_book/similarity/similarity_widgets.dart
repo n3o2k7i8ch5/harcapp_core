@@ -5,8 +5,7 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
-import 'package:harcapp_core/comm_classes/app_text_style.dart';
-import 'package:harcapp_core/comm_widgets/simple_button.dart';
+import 'package:harcapp_core/comm_widgets/pill.dart';
 import 'package:harcapp_core/values/dimen.dart';
 
 import 'similarity.dart';
@@ -20,24 +19,9 @@ Color matchLevelColor(MatchLevel? level) => switch (level) {
       _ => Colors.orange,
     };
 
-/// Polska nazwa pola z [MetadataDiff] — **tylko do pokazania**.
-/// [Similarity.text] zostaje techniczne, bo jedzie do plików przeglądu
-/// i raportów piosenkomatu, a tych nie wolno zmieniać pod UI.
-String metadataFieldLabel(String field) => switch (field) {
-      'title' => 'tytuł',
-      'hid_titles' => 'tytuły ukryte',
-      'authors' => 'autorzy',
-      'composers' => 'kompozytorzy',
-      'performers' => 'wykonawcy',
-      'release_date' => 'data wydania',
-      'yt_video_id' => 'YouTube',
-      'tags' => 'tagi',
-      _ => field,
-    };
-
 /// Napis na pastylkę: jak [Similarity.text], ale pola metadanych po polsku.
 String similarityLabel(Similarity s) => switch (s) {
-      MetadataDiff(fields: final f) => 'inne: ${f.map(metadataFieldLabel).join(', ')}',
+      MetadataDiff(fields: final f) => 'inne: ${f.map((e) => e.label).join(', ')}',
       _ => s.text,
     };
 
@@ -53,8 +37,7 @@ IconData similarityIcon(Similarity s) => switch (s) {
       MetadataDiff() => MdiIcons.notEqualVariant,
     };
 
-/// Jedna pastylka dowodu, w stylu pastylek uwag piosenkomatu: pełne
-/// zaokrąglenie, półprzezroczyste tło, ikona i tekst w pełnym kolorze.
+/// Jedna pastylka dowodu — ten sam [Pill], co uwagi piosenkomatu.
 class SimilarityPill extends StatelessWidget {
 
   final Similarity similarity;
@@ -65,35 +48,12 @@ class SimilarityPill extends StatelessWidget {
   const SimilarityPill(this.similarity, {required this.color, this.compact = false, super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final fontSize = compact ? Dimen.textSizeTiny : Dimen.textSizeSmall;
-    final pad = compact ? Dimen.defMarg / 2 : Dimen.iconMarg;
-
-    return SimpleButton(
-      radius: 100,
-      elevation: 0,
-      color: color.withValues(alpha: 0.15),
-      padding: EdgeInsets.only(
-        left: pad / 2,
-        right: pad,
-        top: compact ? 2 : pad / 2,
-        bottom: compact ? 2 : pad / 2,
-      ),
-      onTap: null,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(similarityIcon(similarity), size: fontSize + 2, color: color),
-          SizedBox(width: pad / 2),
-          Text(
-            similarityLabel(similarity),
-            style: AppTextStyle(fontSize: fontSize, fontWeight: weightHalfBold, color: color),
-            maxLines: 1,
-          ),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Pill(
+        color: color,
+        icon: similarityIcon(similarity),
+        label: similarityLabel(similarity),
+        compact: compact,
+      );
 
 }
 

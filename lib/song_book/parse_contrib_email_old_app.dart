@@ -5,12 +5,13 @@
 // =====================================================================
 
 import 'package:harcapp_core/song_book/contrib_reply.dart';
+import 'package:harcapp_core/song_book/mail_quotes.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 
 /// Charakterystyczny nagłówek z najstarszej wersji apki. Klienty pocztowe
 /// łamią długie linie, więc dopuszczamy dowolny odstęp między słowami —
 /// sztywne `contains` gubiło mejle przełamane w środku nagłówka.
-final RegExp _oldestFormatMarkerRe = RegExp(
+final RegExp _oldAppMarkerRe = RegExp(
     r'Dzięki\s+za\s+chęć\s+dzielenia\s+się\s+swoimi\s+piosenkami',
     caseSensitive: false);
 
@@ -18,10 +19,10 @@ final RegExp _oldestFormatMarkerRe = RegExp(
 /// między dwa znaczniki „nie edytuj". Wielkość liter i liczba wykrzykników
 /// bywają różne (`!!! NIE EDYTUJ PONIŻSZEGO TEKSTU !!!`, `(!) Nie edytuj
 /// poniższego tekstu`), więc rozpoznajemy je luźno.
-final RegExp _oldestSongStartRe =
+final RegExp _oldAppSongStartRe =
     RegExp(r'!{0,3}\s*\(?!?\)?\s*nie\s+edytuj\s+poniższego\s+tekstu\s*!{0,3}',
         caseSensitive: false);
-final RegExp _oldestSongEndRe =
+final RegExp _oldAppSongEndRe =
     RegExp(r'!{0,3}\s*\(?!?\)?\s*nie\s+edytuj\s+powyższego\s+tekstu\s*!{0,3}',
         caseSensitive: false);
 
@@ -31,17 +32,17 @@ final RegExp _oldestSongEndRe =
 /// Po drodze zdejmuje to, co dokłada poczta: prefiksy cytowania (`> `) z
 /// odpowiedzi w wątku i znaczniki HTML, gdy klient odesłał treść jako HTML
 /// (adres w `email_ref` bywa wtedy owinięty w `<a href="mailto:…">`).
-String? oldestFormatSongRegion(String content){
-  final start = _oldestSongStartRe.firstMatch(content);
+String? oldAppSongRegion(String content){
+  final start = _oldAppSongStartRe.firstMatch(content);
   if(start == null) return null;
 
   String region = content.substring(start.end);
-  final end = _oldestSongEndRe.firstMatch(region);
+  final end = _oldAppSongEndRe.firstMatch(region);
   if(end != null) region = region.substring(0, end.start);
 
   region = region
       .split('\n')
-      .map((l) => l.replaceFirst(RegExp(r'^\s*>+ ?'), ''))
+      .map((l) => l.replaceFirst(quotePrefixRe, ''))
       .join('\n');
   return _stripHtml(region).trim();
 }
@@ -74,7 +75,7 @@ String _stripHtml(String s){
 /// się na nową apkę. Ten sam wynik, co `composeContribReply(oldApp: true)`,
 /// tylko `const`. Gdy do mejla dochodzi uwaga z przeglądu, używaj
 /// [composeContribReply], nie tego napisu.
-const String oldestFormatReplyMessage =
+const String oldAppReplyMessage =
     '$kReplyGreeting\n'
     '\n'
     '$kOldAppReplyBlock\n'
@@ -91,7 +92,7 @@ const String oldestFormatReplyMessage =
 ///
 /// Ruszamy wyłącznie mejle rozpoznane jako najstarszy format — nowsze
 /// przechodzą bez zmian.
-Map<String, dynamic> normalizeOldestSongMap(Map<String, dynamic> songMap){
+Map<String, dynamic> normalizeOldAppSongMap(Map<String, dynamic> songMap){
   final raw = songMap[SongCore.PARAM_CONTRIB_REFS];
   if(raw == null) return songMap;
 
@@ -102,14 +103,14 @@ Map<String, dynamic> normalizeOldestSongMap(Map<String, dynamic> songMap){
       if(entry.trim().isNotEmpty)
         refs.add({'person': {'name': entry.trim()}});
     } else if(entry is Map)
-      refs.add(_contribRefFromOldest(Map<String, dynamic>.from(entry)));
+      refs.add(_contribRefFromOldApp(Map<String, dynamic>.from(entry)));
   }
   songMap[SongCore.PARAM_CONTRIB_REFS] = refs;
   return songMap;
 }
 
 /// `{name, email_ref, …}` → `{person: {name}, email_ref, …}`.
-Map<String, dynamic> _contribRefFromOldest(Map<String, dynamic> entry){
+Map<String, dynamic> _contribRefFromOldApp(Map<String, dynamic> entry){
   if(entry.containsKey('person') || !entry.containsKey('name')) return entry;
   final name = (entry['name'] as String? ?? '').trim();
   return {
@@ -120,29 +121,29 @@ Map<String, dynamic> _contribRefFromOldest(Map<String, dynamic> entry){
 
 /// Wynik rozpoznania najstarszego formatu — możliwa zdejmięta otoczka JSON
 /// piosenki + flaga, czy w ogóle mamy do czynienia ze starym formatem.
-class OldestFormatDetection {
+class OldAppFormatDetection {
   final Map<String, dynamic> songMap;
-  final bool isOldestFormat;
-  const OldestFormatDetection(this.songMap, this.isOldestFormat);
+  final bool isOldAppFormat;
+  const OldAppFormatDetection(this.songMap, this.isOldAppFormat);
 }
 
 /// Najstarszy format mejla owijał piosenkę w `{"o!_filename": {...songFields...}}`.
 /// Rozpoznajemy po pojedynczym kluczu z prefiksem `o!_`, którego wartością
 /// jest mapa z polem `title`. Wtedy bierzemy zawartość i podnosimy flagę.
 /// Dodatkowy sygnał: charakterystyczny nagłówek w treści mejla.
-OldestFormatDetection detectOldestFormat(Map<String, dynamic> songMap, String content){
+OldAppFormatDetection detectOldAppFormat(Map<String, dynamic> songMap, String content){
   if(songMap.length == 1){
     final onlyKey = songMap.keys.first;
     final inner = songMap[onlyKey];
     if(onlyKey.startsWith('o!_')
         && inner is Map<String, dynamic>
         && inner[SongCore.PARAM_TITLE] is String){
-      return OldestFormatDetection(inner, true);
+      return OldAppFormatDetection(inner, true);
     }
   }
   // Nagłówek powitalny albo sam kształt mejla (JSON między znacznikami
   // „nie edytuj") — jedno i drugie występuje tylko w najstarszej apce.
-  if(_oldestFormatMarkerRe.hasMatch(content) || oldestFormatSongRegion(content) != null)
-    return OldestFormatDetection(songMap, true);
-  return OldestFormatDetection(songMap, false);
+  if(_oldAppMarkerRe.hasMatch(content) || oldAppSongRegion(content) != null)
+    return OldAppFormatDetection(songMap, true);
+  return OldAppFormatDetection(songMap, false);
 }

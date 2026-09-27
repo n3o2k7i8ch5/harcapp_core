@@ -1,7 +1,7 @@
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:path/path.dart' as p;
+import 'package:piosenkomat/run_dir.dart';
 import 'package:piosenkomat/classify.dart';
-import 'package:piosenkomat/hrcpsng.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/plan.dart';
 import 'package:piosenkomat/similarity.dart';
@@ -28,16 +28,16 @@ void main() {
     ], book: SongBook.empty);
     final plan = RunPlan.fromClassified(items);
     // „dzięki” w odpowiedzi to dopisek autora — stąd `user-message`.
-    final okLabels = [kLabelNeedsReview, NeedsReviewKind.userMessage.label, kLabelAuto];
+    final okLabels = [SongLabel.needsReview.label, SongLabel.userMessage.label, SongLabel.auto.label];
     expect(plan.labelsByMessage['ok'], okLabels);
     expect(plan.labelsByMessage['ok2'], okLabels, reason: 'etykiety idą na cały wątek');
-    expect(plan.labelsByMessage['msg'], [kLabelNeedsReview, NeedsReviewKind.userMessage.label, kLabelAuto]);
+    expect(plan.labelsByMessage['msg'], [SongLabel.needsReview.label, SongLabel.userMessage.label, SongLabel.auto.label]);
     expect(plan.labelsByMessage['corr'],
-        [kLabelNeedsReview, NeedsReviewKind.correctionProblem.label, kLabelCorrection, kLabelAuto]);
+        [SongLabel.needsReview.label, SongLabel.correctionProblem.label, SongLabel.correction.label, SongLabel.auto.label]);
     expect(plan.messagesOf('ok'), ['ok', 'ok2']);
 
     final dir = tempDir();
-    final path = planPathIn(dir.path);
+    final path = RunDir(dir.path).plan;
     expect(path, p.join(dir.path, 'plan.json'));
     writePlan(path, plan);
     final back = readPlan(path);

@@ -1,9 +1,9 @@
-import 'dart:convert';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/contrib_reply.dart';
+import 'package:harcapp_core/song_book/mail_quotes.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
-import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email_tolerant.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
@@ -117,13 +117,15 @@ List<Classified> classifyBatch(
   for (final m in messages) {
     byThread.putIfAbsent(m.threadId, () => []).add(m);
   }
-  var submissions = [
+  final submissions = [
     for (final e in byThread.entries)
       buildSubmission(e.value,
           book: book, weReplied: weRepliedThreads.contains(e.key)),
   ];
-  submissions = matchWithinBatch(submissions);
-  final out = [for (final s in submissions) Classified(s, decide(s))];
+  final batch = matchWithinBatch(submissions);
+  final out = [
+    for (final s in submissions) Classified(s, decide(s, batch: batch[s.threadId])),
+  ];
   for (final c in out) {
     c.song?.piosenkomatData = c.piosenkomatData(run: run);
   }
@@ -240,7 +242,6 @@ Submission buildSubmission(
     kind: isCorrection ? SubmissionKind.correction : SubmissionKind.newSong,
     isOldApp: oldApp,
     shape: shape,
-    origin: parsed?.origin,
     appVersion: parsed?.appVersion,
     senderIsContributor: senderIsContributor,
     submissionCount: parsed?.submissionCount ?? 1,
@@ -256,6 +257,7 @@ Submission buildSubmission(
     sender: sender,
     consentVersion: consent,
     song: song,
+    profile: profile,
     registered: parsed?.registered,
     appMatch: appMatch,
     alsoInApp: alsoInApp,
@@ -279,24 +281,31 @@ ParsedContribEmail? _tryParseEmailBody(ContribMessage m) {
 EmailShape _shapeOf(SubmissionFileRead file, ParsedContribEmail? parsed) {
   if (file.hasFile) return EmailShape.file;
   if (parsed == null) return EmailShape.unknown;
-  if (parsed.isOldestFormat) return EmailShape.oldApp;
+  if (parsed.isOldAppFormat) return EmailShape.oldApp;
   return parsed.isLegacy ? EmailShape.legacy : EmailShape.fenced;
 }
 
-/// Porównanie między zgłoszeniami paczki. Dwa przejścia: najpierw grupy
-/// zależne od `kind` (nowe — ten sam tytuł główny albo ta sama piosenka po
-/// treści; poprawki — `correction_target`, bo poprawka może właśnie zmieniać
-/// tytuł), w grupie identyczne zlewają się do najnowszej; potem parami —
-/// podobne treścią ([MatchLevel.byContent]) między grupami.
-List<Submission> matchWithinBatch(List<Submission> subs) {
+/// Porównanie między zgłoszeniami paczki: wątek → najbliższe inne
+/// zgłoszenie. To fakt o paczce, nie o zgłoszeniu, więc osobno od cech.
+///
+/// Najpierw grupy zależne od `kind`: nowe — ten sam tytuł główny albo ta
+/// sama piosenka po treści (grupa to spójna składowa); poprawki —
+/// `correction_target`, bo poprawka może właśnie zmieniać tytuł, a bez celu —
+/// tytuł główny. W grupie identyczne zlewają się do najnowszej. Potem każde,
+/// które zostaje, wskazuje najbliższe inne pozostałe tego samego rodzaju:
+/// z własnej grupy zawsze, spoza niej — gdy łączy je tytuł główny albo treść
+/// ([MatchLevel.byContent]). Kolejność: własna grupa, poziom, bliskość tekstu.
+Map<String, BatchMatch> matchWithinBatch(List<Submission> subs) {
   // Mejl z kilkoma piosenkami nie idzie do pliku, więc nie może być też
   // punktem odniesienia — żadna pastylka nie wskaże piosenki, której nie ma.
-  bool comparable(Submission s) => s.song != null && !s.hasMultipleSongs;
-  final profiles = {
-    for (final s in subs)
-      if (comparable(s)) s.threadId: SongProfile(s.song!),
-  };
-  final out = {for (final s in subs) s.threadId: s};
+  final live = [for (final s in subs) if (s.song != null && !s.hasMultipleSongs) s];
+  final profiles = {for (final s in live) s.threadId: s.profile ?? SongProfile(s.song!)};
+
+  // Każdą parę liczymy raz: grupy, zlewanie i wybór partnera pytają o te same.
+  final evidence = <(String, String), List<Similarity>>{};
+  List<Similarity> evidenceOf(Submission a, Submission b) => evidence.putIfAbsent(
+      (a.threadId, b.threadId), () => compare(profiles[a.threadId]!, profiles[b.threadId]!));
+  MatchLevel? levelBetween(Submission a, Submission b) => levelOf(evidenceOf(a, b));
 
   bool sameMainTitle(Submission a, Submission b) =>
       searchableString(a.title) == searchableString(b.title);
@@ -304,142 +313,98 @@ List<Submission> matchWithinBatch(List<Submission> subs) {
   BatchMatch matchOf(Submission a, Submission b, {bool newest = true}) => BatchMatch(
         messageId: b.message.id,
         title: b.title,
-        similarities: compare(profiles[a.threadId]!, profiles[b.threadId]!),
+        similarities: evidenceOf(a, b),
         isNewestInBatch: newest,
         correctionTarget: b.correctionTarget,
         sameMainTitle: sameMainTitle(a, b),
       );
 
-  /// Klucz grupy poprawki: cel, a bez celu — tytuł główny.
-  String keyOf(Submission s) {
-    final key = s.correctionTarget != null
-        ? 'target:${s.correctionTarget}'
-        : 'title:${searchableString(s.title)}';
-    return '${s.kind.id}|$key';
-  }
-
   // Nowe łączą się w grupę po tytule głównym **albo** po treści: ta sama
-  // piosenka pod innym tytułem to dalej ta sama piosenka, więc spotyka się
-  // w grupie, a identyczne zlewają się do najnowszej. Grupa to spójna
-  // składowa — A~B i B~C to jedna grupa, choćby A i C nic nie łączyło.
-  final fresh = [for (final s in subs) if (comparable(s) && !s.isCorrection) s];
+  // piosenka pod innym tytułem to dalej ta sama piosenka. A~B i B~C to jedna
+  // grupa, choćby A i C nic nie łączyło.
+  final fresh = [for (final s in live) if (!s.isCorrection) s];
   final parent = [for (var i = 0; i < fresh.length; i++) i];
   int root(int i) => parent[i] == i ? i : parent[i] = root(parent[i]);
   for (var i = 0; i < fresh.length; i++) {
     for (var j = i + 1; j < fresh.length; j++) {
       final a = fresh[i], b = fresh[j];
-      final same = sameMainTitle(a, b) ||
-          (levelOf(compare(profiles[a.threadId]!, profiles[b.threadId]!))?.isSameSong ?? false);
-      if (same) parent[root(i)] = root(j);
+      if (sameMainTitle(a, b) || (levelBetween(a, b)?.isSameSong ?? false)) {
+        parent[root(i)] = root(j);
+      }
     }
   }
   final groupOf = <String, String>{
     for (var i = 0; i < fresh.length; i++) fresh[i].threadId: 'new|${fresh[root(i)].threadId}',
-    for (final s in subs)
-      if (comparable(s) && s.isCorrection) s.threadId: keyOf(s),
+    for (final s in live)
+      if (s.isCorrection)
+        s.threadId: s.correctionTarget != null
+            ? 'target|${s.correctionTarget}'
+            : 'title|${searchableString(s.title)}',
   };
-
-  // Grupy.
   final groups = <String, List<Submission>>{};
-  for (final s in subs) {
-    if (!comparable(s)) continue;
+  for (final s in live) {
     groups.putIfAbsent(groupOf[s.threadId]!, () => []).add(s);
   }
 
-  // Odrzucone jako duplikat nowszego identycznego. Nie wskazuje ich żadna
-  // pastylka — w pliku ich nie będzie, więc nie byłoby czego sprawdzić.
-  final superseded = <String>{};
+  // Identyczne zlewają się do najnowszej: starsze wskazują ją i odpadną.
+  // Nie wskazuje ich żadna pastylka — w pliku ich nie będzie.
+  final out = <String, BatchMatch>{};
   for (final group in groups.values) {
-    if (group.length < 2) continue;
     final ordered = [...group]..sort((a, b) => _cmpDate(a.sentAt, b.sentAt));
-
-    // 1. Identyczne zlewają się do najnowszej: starsze wskazują ją i odpadną.
-    final survivors = <Submission>[];
     for (var i = 0; i < ordered.length; i++) {
       final s = ordered[i];
       final newer = [
         for (var j = i + 1; j < ordered.length; j++)
-          if (levelOf(compare(profiles[s.threadId]!, profiles[ordered[j].threadId]!)) ==
-              MatchLevel.identical)
-            ordered[j],
+          if (levelBetween(s, ordered[j]) == MatchLevel.identical) ordered[j],
       ];
-      if (newer.isEmpty) {
-        survivors.add(s);
-        continue;
-      }
-      out[s.threadId] = s.copyWith(batchMatch: matchOf(s, newer.last, newest: false));
-      superseded.add(s.threadId);
-    }
-
-    // 2. Pozostałe porównują się tylko między sobą: każde wskazuje najbliższe
-    // tekstem **inne pozostałe**. Sama najnowsza z identycznych nie ma z kim —
-    // i nie dostaje pastylki.
-    if (survivors.length < 2) continue;
-    for (final s in survivors) {
-      Submission? best;
-      var bestScore = -1.0;
-      for (final o in survivors) {
-        if (o.threadId == s.threadId) continue;
-        final score = similarityScore(compare(profiles[s.threadId]!, profiles[o.threadId]!));
-        if (score > bestScore) {
-          best = o;
-          bestScore = score;
-        }
-      }
-      out[s.threadId] = s.copyWith(batchMatch: matchOf(s, best!));
+      if (newer.isNotEmpty) out[s.threadId] = matchOf(s, newer.last, newest: false);
     }
   }
 
-  // Parami, między grupami — tylko tam, gdzie grupa nic nie dała. Nowe
-  // o wspólnym tytule już się spotkały w grupie, więc tu liczy się sam tekst.
-  // Poprawki grupuje cel, więc dwie poprawki „Barki” o różnych albo
-  // nieznanych celach spotykają się dopiero tutaj — i mają się zobaczyć bez
-  // względu na tekst, jak w grupie.
-  final list = [
-    for (final s in out.values)
-      if (comparable(s) && !superseded.contains(s.threadId)) s,
-  ];
-  for (var i = 0; i < list.length; i++) {
-    for (var j = i + 1; j < list.length; j++) {
-      final a = list[i], b = list[j];
-      if (a.kind != b.kind || groupOf[a.threadId] == groupOf[b.threadId]) continue;
-      // Tytuł w paczce to tytuł główny; wspólny tytuł ukryty łapie tekst.
-      // Nowe o tym samym tytule głównym są w jednej grupie — tu ich nie ma.
-      final sameTitle = sameMainTitle(a, b);
-      final byContent = levelOf(compare(profiles[a.threadId]!, profiles[b.threadId]!))?.byContent ?? false;
-      if (!sameTitle && !byContent) continue;
-      if (out[a.threadId]!.batchMatch == null) out[a.threadId] = a.copyWith(batchMatch: matchOf(a, b));
-      if (out[b.threadId]!.batchMatch == null) out[b.threadId] = b.copyWith(batchMatch: matchOf(b, a));
+  // Pozostałe wskazują najbliższe inne pozostałe. Sama najnowsza
+  // z identycznych, bez nikogo obok, pastylki nie dostaje.
+  final survivors = [for (final s in live) if (!out.containsKey(s.threadId)) s];
+  for (final s in survivors) {
+    (BatchMatch, bool)? best;
+    for (final o in survivors) {
+      if (o.threadId == s.threadId || o.kind != s.kind) continue;
+      final sameGroup = groupOf[s.threadId] == groupOf[o.threadId];
+      final m = matchOf(s, o);
+      if (!sameGroup && !m.sameMainTitle && !(m.level?.byContent ?? false)) continue;
+      if (best == null || _isCloser(m, sameGroup, best.$1, best.$2)) best = (m, sameGroup);
     }
+    if (best != null) out[s.threadId] = best.$1;
   }
-  return [for (final s in subs) out[s.threadId]!];
+  return out;
+}
+
+/// Czy [a] to bliższy partner niż [b]: własna grupa, potem poziom, potem
+/// bliskość tekstu. Sama bliskość nie widzi tytułu — dlatego poziom przed nią.
+bool _isCloser(BatchMatch a, bool aSameGroup, BatchMatch b, bool bSameGroup) {
+  if (aSameGroup != bSameGroup) return aSameGroup;
+  final byLevel = (a.level?.index ?? MatchLevel.values.length)
+      .compareTo(b.level?.index ?? MatchLevel.values.length);
+  if (byLevel != 0) return byLevel < 0;
+  return a.score > b.score;
 }
 
 // ---------------------------------------------------------------------------
 // Krok 2: polityka
 // ---------------------------------------------------------------------------
 
-/// Cechy → decyzja. Jedna tabela; `kind` jest deklaracją autora i rozstrzyga
-/// pierwsza. Identyczna z apką **nigdy** nie idzie do pliku.
-Decision decide(Submission s) {
+/// Cechy (i porównanie z paczką) → decyzja. Jedna tabela; `kind` jest
+/// deklaracją autora i rozstrzyga pierwsza. Identyczna z apką **nigdy** nie
+/// idzie do pliku.
+Decision decide(Submission s, {BatchMatch? batch}) {
   final song = s.song;
-
-  // Uwagi o samym załączniku — jedyne, jakie da się postawić, gdy piosenki
-  // nie ma po czym odczytać.
-  final fileIssues = [
-    if (s.fileError case final kind?)
-      PiosenkomatIssue(
-        kind == SubmissionFileErrorKind.unknownFormat
-            ? SongIssue.unknownSubmissionFormat
-            : SongIssue.corruptedSubmissionFile,
-        detail: s.fileErrorMessage,
-      ),
-  ];
   if (song == null) {
     // Zepsuty załącznik ma znany powód: odrzut, nie worek „nie umiem odczytać”.
-    return fileIssues.isEmpty
-        ? const Decision(Destination.unparsable)
-        : Decision(Destination.rejectCorruptedFile, issues: fileIssues);
+    return switch (s.fileError) {
+      null => const Decision(Destination.unparsable),
+      SubmissionFileErrorKind.unknownFormat =>
+        Decision(Destination.rejectUnknownFormat, detail: s.fileErrorMessage),
+      _ => Decision(Destination.rejectCorruptedFile, detail: s.fileErrorMessage),
+    };
   }
 
   // Kilka piosenek w jednym mejlu: nie rozstrzygamy — ani pliku, ani odrzutu.
@@ -449,8 +414,7 @@ Decision decide(Submission s) {
         detail: 'w pliku ${s.submissionCount} zgłoszeń — ogarnij ręcznie');
   }
 
-  final batch = s.batchMatch;
-  if (batch != null && batch.level == MatchLevel.identical && !batch.isNewestInBatch) {
+  if (batch != null && !batch.isNewestInBatch) {
     return Decision(Destination.rejectDuplicate,
         detail: 'nowsza wersja w [${batch.messageId}]');
   }
@@ -464,13 +428,13 @@ Decision decide(Submission s) {
     return Decision(Destination.rejectAlreadyInApp, detail: app!.detail);
   }
 
-  final issues = <PiosenkomatIssue>[...fileIssues];
+  final issues = <PiosenkomatIssue>[];
   void add(SongIssue issue, [String? detail]) =>
       issues.add(PiosenkomatIssue(issue, detail: detail));
 
   // Wspólne.
   if (s.contributorEmailGuessed) {
-    add(SongIssue.guessedContributorEmail, 'adres ${s.sender} doklejony do jedynej karty');
+    add(SongIssue.guessedContributor, 'adres ${s.sender} doklejony do jedynej karty');
   }
   if (s.hasSeveralContributors) {
     add(SongIssue.severalContributors, 'przypisz wkład ręcznie');
@@ -479,41 +443,37 @@ Decision decide(Submission s) {
   if (s.sender == null) {
     add(SongIssue.noContributorEmail, 'nadawca: ${s.message.from ?? 'brak nagłówka'}');
   }
-  if (s.hasUserMessage) add(SongIssue.hasUserMessage, s.userMessage!.trim());
+  if (s.hasUserMessage) add(SongIssue.userMessage, s.userMessage!.trim());
 
   if (s.isCorrection) {
+    // Cel liczy `Submission.correctionTarget` — tu tylko, co o nim powiedzieć.
     final declared = s.declaredCorrectionTarget;
-    if (declared == null) {
-      if (app != null && canGuessCorrectionTarget(app)) {
-        // Zgłoszenie nie powiedziało, co poprawia — wolno zgadnąć, ale domysł
-        // musi być widoczny: podmiana idzie po id, więc to Ty decydujesz,
-        // czy narzędzie trafiło.
-        add(SongIssue.guessedCorrectionTarget, app.detail);
-      } else {
-        // Także wtedy, gdy coś tam pasuje, ale za słabo, by na to podmieniać.
-        add(SongIssue.noTargetInApp,
-            app == null ? 'nic w apce nie pasuje tytułem ani tekstem' : 'za mało podobne: ${app.detail}');
-      }
-    } else if (s.declaredTargetLookup == IdLookup.withoutPerformer) {
-      // Id sprzed zmiany wykonawcy w apce — ta sama piosenka, ale to domysł,
-      // a podmiana idzie po id.
-      add(SongIssue.guessedCorrectionTarget,
-          'apka wskazała „$declared”, w śpiewniku jest „${s.correctionTarget}” — inny wykonawca');
-    } else if (s.declaredTargetLookup == IdLookup.ambiguous) {
-      add(SongIssue.noTargetInApp,
-          'apka wskazała „$declared”; bez wykonawcy pasuje kilka: '
-          '${s.declaredTargetCandidates.join(', ')}');
-    } else if (!s.isDeclaredTargetInApp) {
-      // Albo autor poprawiał własną piosenkę, albo id zdążyło się zmienić.
-      // Bez celu: podmiana po nieistniejącym id to nie podmiana.
-      add(SongIssue.noTargetInApp, 'apka wskazała „$declared”, a nie ma go w śpiewniku');
+    final target = s.correctionTarget;
+    if (target == null) {
+      add(SongIssue.noTargetInApp, switch (s.declaredTargetLookup) {
+        _ when declared == null => app == null
+            ? 'nic w apce nie pasuje tytułem ani tekstem'
+            // Coś tam pasuje, ale za słabo, by na to podmieniać.
+            : 'za mało podobne: ${app.detail}',
+        IdLookup.ambiguous => 'apka wskazała „$declared”; bez wykonawcy pasuje kilka: '
+            '${s.declaredTargetCandidates.join(', ')}',
+        // Albo autor poprawiał własną piosenkę, albo id zdążyło się zmienić.
+        _ => 'apka wskazała „$declared”, a nie ma go w śpiewniku',
+      });
+    } else if (s.correctionTargetGuessed) {
+      // Domysł musi być widoczny: podmiana idzie po id, więc to Ty
+      // decydujesz, czy narzędzie trafiło.
+      add(SongIssue.guessedCorrectionTarget, declared == null
+          ? app!.detail
+          // Id sprzed zmiany wykonawcy w apce — ta sama piosenka, ale domysł.
+          : 'apka wskazała „$declared”, w śpiewniku jest „$target” — inny wykonawca');
     }
     // `sameSong` i reszta to normalny kształt poprawki — bez uwag o apce.
     if (batch != null) {
       // `batchMatch` bywa dopasowaniem po samym tekście (różne tytuły), a cele
       // obu poprawek mogą być różne — wtedy to nie „druga poprawka tej samej
       // piosenki”, tylko zwykły duplikat treści.
-      if (s.correctionTarget != null && batch.correctionTarget == s.correctionTarget) {
+      if (target != null && batch.correctionTarget == target) {
         add(SongIssue.sameTargetInBatch, batch.detail);
       } else if (batch.sameMainTitle) {
         add(SongIssue.sameTitleInBatch, batch.detail);
@@ -521,7 +481,7 @@ Decision decide(Submission s) {
         add(SongIssue.similarTextInBatch, batch.detail);
       }
     }
-    return Decision(Destination.candidateCorrection, issues: issues);
+    return Decision(Destination.candidate, issues: issues);
   }
 
   // Nowa piosenka.
@@ -540,7 +500,7 @@ Decision decide(Submission s) {
     case MatchLevel.sameSong:
       // Te same wersy: różni się coś, co pokazuje pastylka. Chwyty tylko
       // w innej kolejności (przesunięty refren) to wciąż te same chwyty.
-      add(app!.similarities.sameChordsUpToOrder ? SongIssue.metadataDifferFromApp : SongIssue.chordsDifferFromApp,
+      add(sameChordsUpToOrder(app!.similarities) ? SongIssue.metadataDifferFromApp : SongIssue.chordsDifferFromApp,
           appDetail);
     case MatchLevel.longer:
       add(SongIssue.moreVersesThanApp, appDetail);
@@ -565,7 +525,7 @@ Decision decide(Submission s) {
     add(batch.sameMainTitle ? SongIssue.sameTitleInBatch : SongIssue.similarTextInBatch,
         batch.detail);
   }
-  return Decision(Destination.candidateNew, issues: issues);
+  return Decision(Destination.candidate, issues: issues);
 }
 
 // ---------------------------------------------------------------------------
@@ -596,11 +556,7 @@ String? _userMessageOf(ContribMessage m) {
       return null;
     }
   }
-  final own = m.body
-      .split('\n')
-      .where((l) => !l.trimLeft().startsWith('>'))
-      .where((l) => !_quoteHeaderRe.hasMatch(l.trim()))
-      .join('\n');
+  final own = ownReplyText(m.body);
   // Cytat bez `>` (klient pocztowy bywa kreatywny) wciągnąłby tu cały kod
   // piosenki — stąd jeszcze cięcie po znacznikach szablonu.
   return stripSubmissionTemplate(own);
@@ -623,141 +579,15 @@ bool _isOurReply(ContribMessage m) => _isOurs(m) && !m.hasOwnSongCode;
 /// Czy wiadomość wyszła ze skrzynki HarcAppa, czyli od Ciebie.
 bool _isOurs(ContribMessage m) => emailFromHeader(m.from) == kInboxEmail;
 
-final _quoteHeaderRe = RegExp(
-    r'^(On .+ wrote:|W dniu .+ napisał(a)?:|.+<.+@.+> napisał(a)?:|Dnia .+ napisał(a)?:)$');
-
 String? _senderFromHeader(ContribMessage m) {
   final e = emailFromHeader(m.from);
   return e == null || e == kInboxEmail ? null : e;
 }
 
-/// Blok z kodem piosenki: w ogrodzeniu ``` albo goły JSON
-/// od pierwszej `{` do końca treści (najstarsza apka).
-final _songFenceRe = RegExp(
-  r'(### Kod piosenki:\s*```[a-zA-Z]*\s*\n)([\s\S]*?)(\n?```)',
-);
-final _songBareRe = RegExp(r'(### Kod piosenki:\s*\n\s*)(\{[\s\S]*)$');
-
-/// Parsuje mejl odpornie na łamanie linii przez klienty pocztowe.
-///
-/// Klient (np. Gmail na Androidzie) łamie długie linie co ~76 znaków,
-/// wstawiając CRLF w miejsce spacji albo w środek słowa. JSON piosenki
-/// w treści jest wtedy nie do odczytania. Kolejność prób:
-///  1. załącznik `.hrcpsng` wstawiony w miejsce JSON-a z treści (źródło prawdy),
-///  2. treść jak jest,
-///  3. treść z liniami JSON-a sklejonymi spacją,
-///  4. treść z liniami JSON-a sklejonymi bez spacji.
-ParsedContribEmail parseEmailBody(ContribMessage m) {
-  final region = _songRegion(m.body);
-  final attachment = m.songAttachment == null ? null : _attachmentSong(m.songAttachment!);
-  final candidates = <String?>[
-    if (region != null && attachment != null)
-      _replaceRegion(m.body, region, _attachmentJson(region, attachment)),
-    m.body,
-    if (region != null) _replaceRegion(m.body, region, region.json.replaceAll(RegExp(r'\r?\n'), ' ')),
-    if (region != null) _replaceRegion(m.body, region, region.json.replaceAll(RegExp(r'\r?\n'), '')),
-    ..._oldestCandidates(m.body),
-  ].whereType<String>().toList();
-
-  Object? firstError;
-  for (final content in candidates) {
-    try {
-      final parsed = parseContribEmail(content);
-      _trimEmailRefs(parsed.song);
-      return parsed;
-    } catch (e) {
-      firstError ??= e;
-    }
-  }
-  throw firstError!;
-}
-
-/// Najstarsza apka: JSON siedzi między znacznikami „nie edytuj", bez sekcji
-/// `### Kod piosenki:`. Rdzeń umie wyjąć ten region (i zdjąć z niego cytowanie
-/// oraz HTML), ale klienty pocztowe łamią w nim długie linie tak samo jak
-/// wszędzie indziej. Doklejamy więc region jako sekcję, którą parser już zna,
-/// w trzech wariantach sklejenia — oryginalna treść zostaje, żeby
-/// `detectOldestFormat` dalej rozpoznał po niej starą apkę.
-List<String> _oldestCandidates(String body) {
-  final region = oldestFormatSongRegion(body);
-  if (region == null || !region.trimLeft().startsWith('{')) return const [];
-  return [
-    for (final json in [
-      region,
-      region.replaceAll(RegExp(r'\s*\r?\n\s*'), ' '),
-      region.replaceAll(RegExp(r'\s*\r?\n\s*'), ''),
-    ])
-      '$body\n\n$kSongMarker\n$json',
-  ];
-}
-
-class _SongRegion {
-  final int start;
-  final int end;
-  final String json;
-  final bool isFenced;
-  const _SongRegion(this.start, this.end, this.json, this.isFenced);
-}
-
-_SongRegion? _songRegion(String body) {
-  final fenced = _songFenceRe.firstMatch(body);
-  if (fenced != null) {
-    return _SongRegion(fenced.start + fenced.group(1)!.length,
-        fenced.end - fenced.group(3)!.length, fenced.group(2)!, true);
-  }
-  final bare = _songBareRe.firstMatch(body);
-  if (bare != null) {
-    final json = bare.group(2)!.trimRight();
-    final start = bare.start + bare.group(1)!.length;
-    return _SongRegion(start, start + json.length, json, false);
-  }
-  return null;
-}
-
-String _replaceRegion(String body, _SongRegion r, String json) =>
-    body.replaceRange(r.start, r.end, json);
-
-/// JSON załącznika w kształcie, w jakim był w treści. Otoczka
-/// `{"o!_id": {...}}` to znak rozpoznawczy najstarszej apki
-/// (`detectOldestFormat`), więc dokładamy ją tylko wtedy, gdy treść też ją
-/// miała — inaczej mejl z nowszej apki bez fence'a dostawałby otoczkę od nas
-/// i wyglądał na stary format.
-String _attachmentJson(_SongRegion region, (String, Map<String, dynamic>) attachment) =>
-    !region.isFenced && _oldestWrapperRe.hasMatch(region.json)
-        ? jsonEncode({attachment.$1: attachment.$2})
-        : jsonEncode(attachment.$2);
-
-final _oldestWrapperRe = RegExp(r'^\s*\{\s*"o!_');
-
-/// Załącznik `.hrcpsng`: `(id, mapa piosenki)`.
-(String, Map<String, dynamic>)? _attachmentSong(String attachment) {
-  try {
-    final map = jsonDecode(attachment) as Map<String, dynamic>;
-    final official = map['official'];
-    if (official is Map && official.isNotEmpty) {
-      final id = official.keys.first as String;
-      final entry = official[id];
-      final song = entry is Map ? entry['song'] : null;
-      if (song is Map) return (id, song.cast<String, dynamic>());
-    }
-    if (map.containsKey(SongCore.PARAM_TITLE)) {
-      return ('o!_${SongCore.filenameFromTitle(map[SongCore.PARAM_TITLE] as String)}', map);
-    }
-  } catch (_) {}
-  return null;
-}
-
-/// Po sklejeniu linii w `email_ref` może zostać zbłąkana spacja.
-void _trimEmailRefs(SongRaw song) {
-  song.contribRefs = [
-    for (final c in song.contribRefs)
-      ContributorRef(
-        person: c.person,
-        emailRef: c.emailRef?.replaceAll(RegExp(r'\s'), ''),
-        userKeyRef: c.userKeyRef?.trim(),
-      ),
-  ];
-}
+/// Mejl bez pliku zgłoszenia, odpornie na łamanie linii przez klienty
+/// pocztowe — patrz [parseContribEmailTolerant].
+ParsedContribEmail parseEmailBody(ContribMessage m) =>
+    parseContribEmailTolerant(m.body, songAttachment: m.songAttachment);
 
 /// Nadawca z nagłówka; skrzynka HarcApp się nie liczy. Awaryjnie z treści.
 String? _senderWithBodyFallback(ContribMessage m, ParsedContribEmail parsed) {

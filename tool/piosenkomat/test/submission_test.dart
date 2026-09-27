@@ -174,14 +174,13 @@ void main() {
     expect(m.subject, contains('[hrcpsng/app]'));
 
     final c = classify(m, book: SongBook.empty);
-    expect(c.destination, Destination.candidateNew);
+    expect(c.destination, Destination.candidate);
     expect(c.submission.shape, EmailShape.file);
-    expect(c.submission.origin, SubmissionOrigin.appAndroid);
     expect(c.submission.appVersion, '2.4.1');
     expect(c.submission.sender, 'jan.testowy@example.com');
     expect(c.submission.consentVersion, 'v05.10.2025');
     expect(c.submission.userMessage, 'Dorzućcie proszę chwyty.');
-    expect(issuesOf(c), [SongIssue.hasUserMessage]);
+    expect(issuesOf(c), [SongIssue.userMessage]);
     expect(c.song!.contributorData!.acceptedContributionRulesVersion, 'v05.10.2025');
     expect(c.song!.piosenkomatData!.sender, 'jan.testowy@example.com');
     expect(c.song!.piosenkomatData!.isOldApp, isFalse);
@@ -204,7 +203,7 @@ void main() {
       sampleSong(title: 'Barka', chordsText: 'C G a\nC G a')..id = 'o!_barka',
     ]);
     final c = _classify(mangled, book: book);
-    expect(c.destination, Destination.candidateCorrection);
+    expect(c.destination, Destination.candidate);
     expect(c.submission.declaredCorrectionTarget, 'o!_barka');
     expect(c.submission.correctionTarget, 'o!_barka');
     expect(c.submission.correctionTargetGuessed, isFalse);
@@ -216,12 +215,13 @@ void main() {
     final mail = submissionEmail(mangle: (f) => f.replaceFirst('Piosenka', 'Piosenki'));
     final c = _classify(mail.eml);
     expect(c.destination, Destination.rejectCorruptedFile);
-    expect(issuesOf(c), [SongIssue.corruptedSubmissionFile]);
-    expect(c.labels, containsAll([kLabelRejectedCorruptedFile, kLabelHaveALook]));
-    expect(c.labels, isNot(contains(kLabelRejectedUnparsable)));
-    expect(c.labels.any((l) => l.startsWith(kLabelNeedsReview)), isFalse,
+    expect(c.decision.detail, contains('Suma kontrolna'));
+    expect(issuesOf(c), isEmpty, reason: 'uwagi są dla piosenek w pliku, a tej nie ma');
+    expect(c.labels, containsAll([SongLabel.rejectedCorruptedFile.label, SongLabel.haveALook.label]));
+    expect(c.labels, isNot(contains(SongLabel.rejectedUnparsable.label)));
+    expect(c.labels.any((l) => l.startsWith(SongLabel.needsReview.label)), isFalse,
         reason: 'piosenki nie ma w pliku, piosenkomat nie ma tu nic do roboty');
-    expect(kToolLabels, containsAll([kLabelRejectedCorruptedFile, kLabelHaveALook]),
+    expect(kToolLabels, containsAll([SongLabel.rejectedCorruptedFile.label, SongLabel.haveALook.label]),
         reason: 'bez tego --push wywali się na brakującej etykiecie');
   });
 
@@ -233,9 +233,10 @@ void main() {
       return jsonEncode(map);
     });
     final c = _classify(mail.eml);
-    expect(issuesOf(c), [SongIssue.unknownSubmissionFormat]);
-    expect(c.labels, containsAll([kLabelRejectedUnknownFormat, kLabelHaveALook]));
-    expect(kToolLabels, contains(kLabelRejectedUnknownFormat));
+    expect(c.destination, Destination.rejectUnknownFormat);
+    expect(c.decision.detail, contains('nowsza niż znana'));
+    expect(c.labels, containsAll([SongLabel.rejectedUnknownFormat.label, SongLabel.haveALook.label]));
+    expect(kToolLabels, contains(SongLabel.rejectedUnknownFormat.label));
   });
 
   test('kilka zgłoszeń w pliku: nic nie wchodzi, mejl do ręcznego ogarnięcia', () {
@@ -248,7 +249,7 @@ void main() {
     expect(c.destination, Destination.multipleSongs);
     expect(c.goesToFile, isFalse);
     expect(c.decision.detail, contains('3 zgłoszeń'));
-    expect(c.labels, unorderedEquals([kLabelMultipleSongs, kLabelHaveALook]));
+    expect(c.labels, unorderedEquals([SongLabel.multipleSongs.label, SongLabel.haveALook.label]));
     // Nie rozstrzygamy, więc mejl zostaje nieprzeczytany.
     expect(withReadOnClose((c.labels, const <String>[])).$2, isNot(contains('UNREAD')));
   });
@@ -261,7 +262,7 @@ void main() {
     ]);
     final c = classify(msgFrom(mail.eml), book: bookWith([sampleSong(title: 'W apce')]));
     expect(c.destination, Destination.multipleSongs);
-    expect(c.labels, contains(kLabelHaveALook));
+    expect(c.labels, contains(SongLabel.haveALook.label));
   });
 
   test('piosenki z takiego mejla nie są punktem odniesienia w paczce', () {
@@ -387,7 +388,7 @@ void main() {
       book: SongBook.empty,
     );
     expect(broken.destination, Destination.rejectCorruptedFile);
-    expect(issuesOf(broken), [SongIssue.corruptedSubmissionFile]);
+    expect(issuesOf(broken), isEmpty);
   });
 
   test('prawdziwy kształt z klienta: złamany nagłówek, zagnieżdżony MIME, QP', () {
@@ -438,7 +439,7 @@ void main() {
     expect(m.submissionAttachment, file);
 
     final c = classify(m, book: SongBook.empty);
-    expect(c.destination, Destination.candidateNew);
+    expect(c.destination, Destination.candidate);
     expect(c.submission.userMessage, 'Zapomniałem dodać: refren dwa razy.');
   });
 
@@ -457,7 +458,7 @@ void main() {
   test('stary format dalej działa obok nowego', () async {
     final old = await completeEmail(userMessage: 'dopisek ze starego mejla');
     final c = _classify(old);
-    expect(c.destination, Destination.candidateNew);
+    expect(c.destination, Destination.candidate);
     expect(c.submission.shape, EmailShape.fenced);
     expect(c.submission.userMessage, 'dopisek ze starego mejla');
     expect(c.submission.senderIsContributor, isTrue);

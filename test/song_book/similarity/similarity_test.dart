@@ -100,7 +100,7 @@ void main() {
     test('inne tylko metadane → sameSong', () {
       final s = song([_v1, null, _v2, null, _v3, null])..performers = ['Ktoś inny'];
       expect(level(s, app), MatchLevel.sameSong);
-      expect(cmp(s, app).metadataDiff!.fields, ['performers']);
+      expect(cmp(s, app).metadataDiff!.fields, [MetadataField.performers]);
     });
 
     test('refren raz, na początku albo w innych miejscach → sameSong, te same chwyty', () {
@@ -111,7 +111,7 @@ void main() {
       ]) {
         final s = cmp(song(parts), app);
         expect(levelOf(s), MatchLevel.sameSong, reason: '$parts');
-        expect(s.sameChordsUpToOrder, isTrue, reason: 'chwyty te same, tylko w innej kolejności');
+        expect(sameChordsUpToOrder(s), isTrue, reason: 'chwyty te same, tylko w innej kolejności');
       }
     });
 

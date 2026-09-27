@@ -17,7 +17,8 @@ enum SongIssueSeverity{
 /// i **gdzie** (`in-app` — wśród piosenek już w apce, `in-batch` — w tej
 /// samej paczce zgłoszeń).
 ///
-/// [id] jedzie w pliku `.hrcpsng`, więc raz nadanej nazwy nie zmieniamy.
+/// [id] jedzie w pliku `.hrcpsng`; przy mapowaniu 1:1 na podkategorię
+/// `needs-review/*` nazywa się tak samo jak ona.
 /// [text] widzi człowiek w podpowiedzi pastylki.
 enum SongIssue{
 
@@ -27,15 +28,11 @@ enum SongIssue{
 
   noConsent('no-consent', 'brak zgody / wersji regulaminu', SongIssueSeverity.blocking),
 
-  /// Zła suma kontrolna, nie JSON, obcięty plik albo zero zgłoszeń w środku.
-  corruptedSubmissionFile('corrupted-submission-file', 'załącznik zgłoszenia uszkodzony', SongIssueSeverity.blocking),
-  /// Wersja formatu nowsza niż znana — zawartości nie zgadujemy.
-  unknownSubmissionFormat('unknown-submission-format', 'nowsza wersja formatu zgłoszenia', SongIssueSeverity.blocking),
   /// Kilka kart osób dodających: nie wiadomo, do której dokleić adres nadawcy.
   severalContributors('several-contributors', 'kilka osób dodających w zgłoszeniu', SongIssueSeverity.blocking),
   /// Adres nadawcy doklejony do jedynej karty na zgadywanie — stary format
   /// nie mówi, czy nadawca to osoba dodająca.
-  guessedContributorEmail('guessed-contributor-email', 'adres nadawcy doklejony do jedynej karty — sprawdź, czy to ta osoba', SongIssueSeverity.decision),
+  guessedContributor('guessed-contributor', 'adres nadawcy doklejony do jedynej karty — sprawdź, czy to ta osoba', SongIssueSeverity.decision),
 
   /// Nadawcą jest skrzynka HarcApp, a treść nie niesie adresu — nie ma komu
   /// przypisać wkładu ani kogo dopytać o zgodę.
@@ -72,7 +69,7 @@ enum SongIssue{
   /// Poprawka podmienia piosenkę po id, więc domysł trzeba obejrzeć.
   guessedCorrectionTarget('guessed-correction-target', 'cel poprawki zgadnięty, nie podany przez apkę', SongIssueSeverity.decision),
 
-  hasUserMessage('has-user-message', 'użytkownik dopisał wiadomość', SongIssueSeverity.decision);
+  userMessage('user-message', 'użytkownik dopisał wiadomość', SongIssueSeverity.decision);
 
   const SongIssue(this.id, this.text, this.severity);
 

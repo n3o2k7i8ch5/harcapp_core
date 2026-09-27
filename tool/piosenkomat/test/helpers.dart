@@ -130,7 +130,7 @@ SongBook bookWith(List<SongRaw> songs) => SongBook(songs);
 /// Sam zestaw uwag, bez mejla — do testów etykiet.
 Classified classifiedWith(
   List<SongIssue> issues, {
-  Destination destination = Destination.candidateNew,
+  Destination destination = Destination.candidate,
   SubmissionKind kind = SubmissionKind.newSong,
   bool userMessage = false,
 }) {

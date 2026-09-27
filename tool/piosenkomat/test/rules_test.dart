@@ -1,3 +1,4 @@
+import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:piosenkomat/model.dart';
@@ -24,45 +25,45 @@ void main() {
 
   group('withReadOnClose', () {
     test('werdykt domykający zdejmuje nieprzeczytane', () {
-      expect(withReadOnClose(([kLabelRejectedAfterReview], [kLabelReadyToAdd])).$2,
-          [kLabelReadyToAdd, 'UNREAD']);
-      expect(withReadOnClose(([kLabelAdded], const [])).$2, ['UNREAD']);
+      expect(withReadOnClose(([SongLabel.rejectedAfterReview.label], [SongLabel.readyToAdd.label])).$2,
+          [SongLabel.readyToAdd.label, 'UNREAD']);
+      expect(withReadOnClose(([SongLabel.added.label], const [])).$2, ['UNREAD']);
     });
     test('reszta zostaje nieprzeczytana', () {
-      expect(withReadOnClose(([kLabelNeedsReview], const [])).$2, isEmpty);
-      expect(withReadOnClose(([kLabelReplyReviewNote], const [])).$2, isEmpty);
+      expect(withReadOnClose(([SongLabel.needsReview.label], const [])).$2, isEmpty);
+      expect(withReadOnClose(([SongLabel.replyReviewNote.label], const [])).$2, isEmpty);
     });
     test('nie dubluje UNREAD', () {
-      expect(withReadOnClose(([kLabelAdded], ['UNREAD'])).$2, ['UNREAD']);
+      expect(withReadOnClose(([SongLabel.added.label], ['UNREAD'])).$2, ['UNREAD']);
     });
     test('tekst do autora czeka na wysyłkę → zostaje nieprzeczytany', () {
       expect(
-          withReadOnClose(([kLabelAdded], [kLabelReadyToAdd]),
-              current: {kLabelReadyToAdd, kLabelReplyReviewNote}).$2,
-          [kLabelReadyToAdd]);
+          withReadOnClose(([SongLabel.added.label], [SongLabel.readyToAdd.label]),
+              current: {SongLabel.readyToAdd.label, SongLabel.replyReviewNote.label}).$2,
+          [SongLabel.readyToAdd.label]);
       expect(
-          withReadOnClose(([kLabelAdded], [kLabelReadyToAdd]), current: {kLabelReadyToAdd}).$2,
-          [kLabelReadyToAdd, 'UNREAD']);
+          withReadOnClose(([SongLabel.added.label], [SongLabel.readyToAdd.label]), current: {SongLabel.readyToAdd.label}).$2,
+          [SongLabel.readyToAdd.label, 'UNREAD']);
     });
   });
 
   group('pendingLabelsOf (clean)', () {
     test('czeka: werdykt w pliku, przegląd, kolejka odpowiedzi', () {
-      expect(pendingLabelsOf({kLabelAuto, kLabelReadyToAdd}), {kLabelReadyToAdd});
-      expect(pendingLabelsOf({kLabelNeedsReview, NeedsReviewKind.missingData.label}),
-          {kLabelNeedsReview, NeedsReviewKind.missingData.label});
-      expect(pendingLabelsOf({kLabelReplyOldApp, kLabelReplyReviewNote}),
-          {kLabelReplyOldApp, kLabelReplyReviewNote});
+      expect(pendingLabelsOf({SongLabel.auto.label, SongLabel.readyToAdd.label}), {SongLabel.readyToAdd.label});
+      expect(pendingLabelsOf({SongLabel.needsReview.label, SongLabel.missingData.label}),
+          {SongLabel.needsReview.label, SongLabel.missingData.label});
+      expect(pendingLabelsOf({SongLabel.replyOldApp.label, SongLabel.replyReviewNote.label}),
+          {SongLabel.replyOldApp.label, SongLabel.replyReviewNote.label});
     });
     test('nie czeka: odrzuty, dodane, znaczniki, czekanie na autora', () {
       expect(
           pendingLabelsOf({
-            kLabelAdded,
-            kLabelRejectedUnparsable,
-            kLabelHaveALook,
-            kLabelCorrection,
-            kLabelWaitingForAuthor,
-            kLabelAuto,
+            SongLabel.added.label,
+            SongLabel.rejectedUnparsable.label,
+            SongLabel.haveALook.label,
+            SongLabel.correction.label,
+            SongLabel.waitingForAuthor.label,
+            SongLabel.auto.label,
           }),
           isEmpty);
     });
@@ -78,15 +79,15 @@ void main() {
 
     test('zdejmuje tylko etykiety narzędzia i tylko ze śladem automatu', () {
       final r = unlabelChanges({
-        'auto': {kLabelAuto, kLabelReadyToAdd, 'song/rejected/silly'},
+        'auto': {SongLabel.auto.label, SongLabel.readyToAdd.label, 'song/rejected/silly'},
         'reczne': {'song/rejected/silly'},
       });
       expect(r.toRemove.keys, ['auto']);
-      expect(r.toRemove['auto'], [kLabelAuto, kLabelReadyToAdd]);
+      expect(r.toRemove['auto'], [SongLabel.auto.label, SongLabel.readyToAdd.label]);
     });
     test('domknięte zostają bez --force', () {
       final labels = {
-        'added': {kLabelAuto, kLabelAdded},
+        'added': {SongLabel.auto.label, SongLabel.added.label},
       };
       final r = unlabelChanges(labels);
       expect(r.toRemove, isEmpty);
@@ -95,8 +96,8 @@ void main() {
     });
     test('z planem: tylko mejle przebiegu', () {
       final r = unlabelChanges({
-        'w': {kLabelAuto, kLabelNeedsReview},
-        'poza': {kLabelAuto, kLabelNeedsReview},
+        'w': {SongLabel.auto.label, SongLabel.needsReview.label},
+        'poza': {SongLabel.auto.label, SongLabel.needsReview.label},
       }, plan: planOf(['w']));
       expect(r.toRemove.keys, ['w']);
       expect(r.outsidePlan, 1);

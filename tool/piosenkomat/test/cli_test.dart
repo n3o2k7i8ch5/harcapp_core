@@ -20,7 +20,7 @@ Future<(RunPlan, List<SongRaw>)> _scan() async {
     msgFrom(await completeEmail(song: sampleSong(title: 'Bez YT', yt: null, lyrics: 'Wlazl kotek na plotek')), id: 'yt'),
   ], book: SongBook.empty);
   expect(items.first.isClean, isTrue);
-  expect(items.last.labels, contains(kLabelNeedsReview));
+  expect(items.last.labels, contains(SongLabel.needsReview.label));
   return (RunPlan.fromClassified(items), [for (final c in items) c.song!]);
 }
 
@@ -40,15 +40,15 @@ void main() {
     final changes = _changes(plan, roundTrip(songs), proposed);
     expect(changes.containsKey('ok'), isFalse,
         reason: '„ready-to-add” już wisi, nie ma czego przestawiać');
-    expect(changes['yt']!.$1, [kLabelReadyToAdd]);
+    expect(changes['yt']!.$1, [SongLabel.readyToAdd.label]);
     expect(changes['yt']!.$2, kNeedsReviewLabels);
   });
 
   test('wyrzucona na stronie → rejected/after-review', () async {
     final (plan, songs, proposed) = await _proposed();
     final changes = _changes(plan, roundTrip([songs.first]), proposed);
-    expect(changes['yt']!.$1, [kLabelRejectedAfterReview]);
-    expect(changes['yt']!.$2, contains(kLabelReadyToAdd));
+    expect(changes['yt']!.$1, [SongLabel.rejectedAfterReview.label]);
+    expect(changes['yt']!.$2, contains(SongLabel.readyToAdd.label));
   });
 
   test('odrzucona z wyjaśnieniem to pytanie do autora, nie odrzut', () async {
@@ -59,8 +59,8 @@ void main() {
     yt.piosenkomatData = yt.piosenkomatData!.copyWith(
         accepted: () => false, reviewNote: () => 'Dorzuć YouTube i wejdzie.');
     final changes = _changes(plan, reviewed, proposed);
-    expect(changes['yt']!.$1, [kLabelReplyReviewNote]);
-    expect(changes['yt']!.$1, isNot(contains(kLabelRejectedAfterReview)));
+    expect(changes['yt']!.$1, [SongLabel.replyReviewNote.label]);
+    expect(changes['yt']!.$1, isNot(contains(SongLabel.rejectedAfterReview.label)));
   });
 
   test('przyjęta z uwagą wchodzi i zaczepia autora', () async {
@@ -70,7 +70,7 @@ void main() {
     ok.piosenkomatData = ok.piosenkomatData!
         .copyWith(reviewNote: () => 'Dodałem, popraw literówkę.');
     final changes = _changes(plan, reviewed, proposed);
-    expect(changes['ok']!.$1, [kLabelReadyToAdd, kLabelReplyReviewNote],
+    expect(changes['ok']!.$1, [SongLabel.readyToAdd.label, SongLabel.replyReviewNote.label],
         reason: 'bez zarzutu, ale z uwagą — musi ruszyć mimo „ready-to-add”');
     expect(changes['ok']!.$2, kNeedsReviewLabels);
   });

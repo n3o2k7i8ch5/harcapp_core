@@ -8,7 +8,7 @@ import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
 import 'package:harcapp_core/comm_widgets/dialog/alert_dialog.dart';
 import 'package:harcapp_core/comm_widgets/dialog/app_dialog.dart';
-import 'package:harcapp_core/comm_widgets/simple_button.dart';
+import 'package:harcapp_core/comm_widgets/pill.dart';
 import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
@@ -90,12 +90,15 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
     }
   }
 
-  void _update(PiosenkomatData Function(PiosenkomatData) change){
+  /// [notify] `false` tylko dla tekstu odpowiedzi: czyta go sama ta karta,
+  /// a `notify` przy każdym znaku przebudowywało cały edytor (na stronie —
+  /// z przeliczeniem podobieństw całego warsztatu).
+  void _update(PiosenkomatData Function(PiosenkomatData) change, {bool notify = true}){
     final prov = CurrentItemProvider.of(context);
     final data = prov.song.piosenkomatData;
     if(data == null) return;
     prov.song.piosenkomatData = change(data);
-    prov.notify();
+    if(notify) prov.notify();
   }
 
   /// Gdy w polu już coś jest, pyta — inaczej chybione kliknięcie gwiazdki
@@ -146,7 +149,6 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
       _rebind(prov.song, data);
 
       final goesIn = data.goesIn;
-      final color = goesIn? Colors.green: Colors.red;
       final correction = data.correctionMessage ?? '';
       final frame = contribReplyFrame(oldApp: data.isOldApp);
 
@@ -162,62 +164,20 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
 
               // Werdykt: nagłówek karty. Drugie klikalne miejsce to gwiazdka
               // przy polu odpowiedzi, gdy pastylki dają się skleić w uwagę.
-              Row(
-                children: [
-                  Icon(
-                    goesIn
-                        ? MdiIcons.checkCircleOutline
-                        : MdiIcons.closeCircleOutline,
-                    size: Dimen.textSizeBig + 2,
-                    color: color,
-                  ),
-                  const SizedBox(width: Dimen.defMarg),
-                  Expanded(
-                    child: Text(
-                      goesIn? 'Do zatwierdzenia': 'Do odrzucenia',
-                      style: AppTextStyle(
-                        fontSize: Dimen.textSizeBig,
-                        fontWeight: weightHalfBold,
-                        color: color,
-                      ),
-                    ),
-                  ),
-                  Switch(
-                    value: goesIn,
-                    // `false` zapisujemy jawnie, `true` kasuje flagę do `null`:
-                    // plik zwrotny ma nieść tylko odstępstwa od domyślnego
-                    // „wchodzi”.
-                    onChanged: (value) => _update((d) =>
-                        d.copyWith(accepted: () => value? null: false)),
-                  ),
-                ],
+              _VerdictRow(
+                goesIn: goesIn,
+                // `false` zapisujemy jawnie, `true` kasuje flagę do `null`:
+                // plik zwrotny ma nieść tylko odstępstwa od domyślnego
+                // „wchodzi”.
+                onChanged: (value) => _update((d) =>
+                    d.copyWith(accepted: () => value? null: false)),
               ),
 
               // Adres nadawcy — jedyne miejsce, gdy nie doklejono go do karty
               // osoby dodającej.
               if(data.sender case final sender?) ...[
                 const SizedBox(height: Dimen.defMarg),
-                Row(
-                  children: [
-                    Icon(
-                      MdiIcons.emailOutline,
-                      size: Dimen.textSizeNormal,
-                      color: hintEnab_(context),
-                    ),
-                    const SizedBox(width: Dimen.defMarg),
-                    Expanded(
-                      child: Text(
-                        data.senderIsContributor
-                            ? sender
-                            : '$sender (wysyła w czyimś imieniu)',
-                        style: AppTextStyle(
-                          fontSize: Dimen.textSizeNormal,
-                          color: hintEnab_(context),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                _SenderRow(sender: sender, senderIsContributor: data.senderIsContributor),
               ],
 
               if(data.isCorrection || data.issues.isNotEmpty) ...[
@@ -250,65 +210,15 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
                   text: message.text,
                 ),
 
-              // Bez własnego tytułu: etykietę niesie samo pole — na pustym
-              // jest podpowiedzią w środku, a gdy zaczniesz pisać, wjeżdża
-              // nad tekst. Taka sama zawsze, niezależnie od werdyktu.
-              // Gwiazdka — jak przy AI, ale bez modelu: skleja uwagę
-              // z pastylek `missing-*`. Widać ją tylko, gdy jest co
-              // zaproponować; klik nie wysyła mejla, tylko wypełnia pole.
-              // Szara ramka nad polem i pod nim to reszta mejla, którą dokłada
-              // `reply` — ta sama funkcja, więc podgląd nie rozjedzie się z tym,
-              // co wyjdzie. Twoje jest tylko pole: ramki nie da się zapomnieć
-              // ani zepsuć.
-              _Bubble(
-                mine: true,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _ReplyFrameText(frame.before),
-                    const SizedBox(height: Dimen.defMarg),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: AppTextFieldHint(
-                            key: ObjectKey(_boundSong),
-                            hint: 'Odpowiedz…',
-                            // Po wstawieniu z gwiazdki kontroler ma już tekst,
-                            // a pływająca etykieta liczy się w `initState` —
-                            // bez tego „Odpowiedz…” siada na propozycji.
-                            alwaysShowTopHint: _controller?.text.isNotEmpty ?? false,
-                            controller: _controller,
-                            maxLines: null,
-                            showUnderline: false,
-                            contentPadding: EdgeInsets.zero,
-                            style: AppTextStyle(
-                              fontSize: Dimen.textSizeNormal,
-                              color: textEnab_(context),
-                            ),
-                            hintStyle: AppTextStyle(
-                              fontSize: Dimen.textSizeNormal,
-                              color: hintEnab_(context),
-                            ),
-                            onChanged: (_, text) => _update((d) => d.copyWith(
-                                reviewNote: () =>
-                                    text.trim().isEmpty? null: text)),
-                          ),
-                        ),
-                        if(proposeContribReplyNote(data.issues.map((i) => i.issue))
-                            case final note?)
-                          AppButton(
-                            icon: Icon(MdiIcons.starFourPoints),
-                            color: accent_(context),
-                            tooltip: 'Zaproponuj odpowiedź',
-                            onTap: () => _proposeReply(note),
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: Dimen.defMarg),
-                    _ReplyFrameText(frame.after),
-                  ],
-                ),
+              _ReplyComposer(
+                frame: frame,
+                fieldKey: ObjectKey(_boundSong),
+                controller: _controller!,
+                proposal: proposeContribReplyNote(data.issues.map((i) => i.issue)),
+                onChanged: (text) => _update(
+                    (d) => d.copyWith(reviewNote: () => text.trim().isEmpty? null: text),
+                    notify: false),
+                onPropose: _proposeReply,
               ),
 
             ],
@@ -317,6 +227,139 @@ class _PiosenkomatHeaderWidgetState extends State<PiosenkomatHeaderWidget>{
       );
 
     },
+  );
+
+}
+
+/// Nagłówek karty: werdykt i przełącznik.
+class _VerdictRow extends StatelessWidget{
+
+  final bool goesIn;
+  final ValueChanged<bool> onChanged;
+
+  const _VerdictRow({required this.goesIn, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context){
+    final color = goesIn? Colors.green: Colors.red;
+    return Row(
+      children: [
+        Icon(
+          goesIn? MdiIcons.checkCircleOutline: MdiIcons.closeCircleOutline,
+          size: Dimen.textSizeBig + 2,
+          color: color,
+        ),
+        const SizedBox(width: Dimen.defMarg),
+        Expanded(
+          child: Text(
+            goesIn? 'Do zatwierdzenia': 'Do odrzucenia',
+            style: AppTextStyle(
+              fontSize: Dimen.textSizeBig,
+              fontWeight: weightHalfBold,
+              color: color,
+            ),
+          ),
+        ),
+        Switch(value: goesIn, onChanged: onChanged),
+      ],
+    );
+  }
+
+}
+
+class _SenderRow extends StatelessWidget{
+
+  final String sender;
+  final bool senderIsContributor;
+
+  const _SenderRow({required this.sender, required this.senderIsContributor});
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Icon(MdiIcons.emailOutline, size: Dimen.textSizeNormal, color: hintEnab_(context)),
+      const SizedBox(width: Dimen.defMarg),
+      Expanded(
+        child: Text(
+          senderIsContributor? sender: '$sender (wysyła w czyimś imieniu)',
+          style: AppTextStyle(fontSize: Dimen.textSizeNormal, color: hintEnab_(context)),
+        ),
+      ),
+    ],
+  );
+
+}
+
+/// Pole odpowiedzi w dymku, w ramce reszty mejla.
+///
+/// Bez własnego tytułu: etykietę niesie samo pole — na pustym jest
+/// podpowiedzią w środku, a gdy zaczniesz pisać, wjeżdża nad tekst. Taka sama
+/// zawsze, niezależnie od werdyktu. Gwiazdka — jak przy AI, ale bez modelu:
+/// skleja uwagę z pastylek `missing-*`. Widać ją tylko, gdy jest co
+/// zaproponować; klik nie wysyła mejla, tylko wypełnia pole. Szara ramka nad
+/// polem i pod nim to reszta mejla, którą dokłada `reply` — ta sama funkcja,
+/// więc podgląd nie rozjedzie się z tym, co wyjdzie. Twoje jest tylko pole:
+/// ramki nie da się zapomnieć ani zepsuć.
+class _ReplyComposer extends StatelessWidget{
+
+  final ({String before, String after}) frame;
+  final Key fieldKey;
+  final TextEditingController controller;
+  /// Propozycja z pastylek; `null` — gwiazdki nie ma.
+  final String? proposal;
+  final ValueChanged<String> onChanged;
+  final ValueChanged<String> onPropose;
+
+  const _ReplyComposer({
+    required this.frame,
+    required this.fieldKey,
+    required this.controller,
+    required this.proposal,
+    required this.onChanged,
+    required this.onPropose,
+  });
+
+  @override
+  Widget build(BuildContext context) => _Bubble(
+    mine: true,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _ReplyFrameText(frame.before),
+        const SizedBox(height: Dimen.defMarg),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: AppTextFieldHint(
+                key: fieldKey,
+                hint: 'Odpowiedz…',
+                // Po wstawieniu z gwiazdki kontroler ma już tekst, a pływająca
+                // etykieta liczy się w `initState` — bez tego „Odpowiedz…”
+                // siada na propozycji.
+                alwaysShowTopHint: controller.text.isNotEmpty,
+                controller: controller,
+                maxLines: null,
+                showUnderline: false,
+                contentPadding: EdgeInsets.zero,
+                style: AppTextStyle(fontSize: Dimen.textSizeNormal, color: textEnab_(context)),
+                hintStyle: AppTextStyle(fontSize: Dimen.textSizeNormal, color: hintEnab_(context)),
+                onChanged: (_, text) => onChanged(text),
+              ),
+            ),
+            if(proposal case final note?)
+              AppButton(
+                icon: Icon(MdiIcons.starFourPoints),
+                color: accent_(context),
+                tooltip: 'Zaproponuj odpowiedź',
+                onTap: () => onPropose(note),
+              ),
+          ],
+        ),
+        const SizedBox(height: Dimen.defMarg),
+        _ReplyFrameText(frame.after),
+      ],
+    ),
   );
 
 }
@@ -403,51 +446,6 @@ class _Bubble extends StatelessWidget{
 
 }
 
-/// Kształt pastylki — wspólny dla uwag i badge'a POPRAWKA: pełne
-/// zaokrąglenie, półprzezroczyste tło, ikona i tekst w pełnym kolorze.
-class _Pill extends StatelessWidget{
-
-  final Color color;
-  final IconData icon;
-  final String label;
-  final bool compact;
-
-  const _Pill({required this.color, required this.icon, required this.label, this.compact = false});
-
-  @override
-  Widget build(BuildContext context){
-    final fontSize = compact? Dimen.textSizeTiny: Dimen.textSizeSmall;
-    final pad = compact? Dimen.defMarg/2: Dimen.iconMarg;
-    return SimpleButton(
-      radius: 100,
-      elevation: 0,
-      color: color.withValues(alpha: 0.15),
-      // Z lewej mniej niż z prawej: tam siedzi ikona, która ma własny odstęp.
-      // Równy padding dookoła odsuwał ją od krawędzi bardziej niż od góry.
-      padding: EdgeInsets.only(
-        left: pad/2,
-        right: pad,
-        top: compact? 2: pad/2,
-        bottom: compact? 2: pad/2,
-      ),
-      onTap: null,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: fontSize + 2, color: color),
-          SizedBox(width: pad/2),
-          Text(
-            label,
-            style: AppTextStyle(fontSize: fontSize, fontWeight: weightHalfBold, color: color),
-            maxLines: 1,
-          ),
-        ],
-      ),
-    );
-  }
-
-}
-
 /// Jedna pastylka w stylu [Tag] z apki: pełne zaokrąglenie, bez obramowania.
 /// Na pastylce sam kod uwagi (`missing-youtube`) — krótki i jednoznaczny;
 /// polski opis i szczegół w podpowiedzi. O wadze mówi **kolor pastylki**:
@@ -463,7 +461,7 @@ class PiosenkomatIssuePill extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    final pill = _Pill(
+    final pill = Pill(
       color: piosenkomatIssueColor(issue.issue),
       icon: piosenkomatIssueIcon(issue.issue),
       label: issue.issue.id,
@@ -471,11 +469,11 @@ class PiosenkomatIssuePill extends StatelessWidget{
     );
 
     return Tooltip(
-      // Przy „has-user-message” szczegółem jest sama wiadomość — a tę widać
+      // Przy „user-message” szczegółem jest sama wiadomość — a tę widać
       // wyżej w dymku. Powtarzanie jej w podpowiedzi to szum.
       message: [
         issue.issue.text,
-        if(issue.detail != null && issue.issue != SongIssue.hasUserMessage)
+        if(issue.detail != null && issue.issue != SongIssue.userMessage)
           issue.detail!,
       ].join('\n'),
       child: pill,
@@ -535,7 +533,7 @@ class _CorrectionBadge extends StatelessWidget{
       message: target == null
           ? 'Poprawka — nie wiadomo, której piosenki w apce (no-target-in-app)'
           : 'Poprawka piosenki $target',
-      child: _Pill(
+      child: Pill(
         color: accent_(context),
         icon: MdiIcons.pencilOutline,
         label: label,

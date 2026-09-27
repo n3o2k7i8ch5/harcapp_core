@@ -84,10 +84,42 @@ bool _related(SharedLines lines, List<Similarity> s) {
   if (min(lines.total, lines.otherTotal) < _melodyNeeds) return false;
   final chords = s.chordsMatch?.similarity ?? 0;
   final meter = s.meterMatch?.similarity ?? 0;
-  return (chords >= 0.6 && mean >= 0.35) || (meter >= 0.75 && mean >= 0.33 && chords >= 0.25);
+  return (chords >= 0.6 && mean >= 0.35) || (meter >= _sameMeter && mean >= 0.33 && chords >= 0.25);
 }
 
 const double _melodyNeeds = 3 * kMinLinesWeight;
+
+/// Od tego metrum jest „te samo” — liczy się przy przeróbkach.
+const double _sameMeter = 0.75;
+
+/// Od tego podobieństwa par akordów chwyty są te same z dokładnością do
+/// kolejności (przesunięty refren, inna kolejność zwrotek).
+const double _sameChordPairs = 0.8;
+
+/// Chwyty te same, choćby w innej kolejności (przesunięty refren).
+/// Transpozycja to już inne chwyty.
+bool sameChordsUpToOrder(List<Similarity> s) {
+  if (s.has<SameChords>()) return true;
+  final c = s.chordsMatch;
+  return c != null && c.shift == 0 && c.similarity >= _sameChordPairs;
+}
+
+/// Dowody do pokazania: bez tego, co powtarza inny dowód (wspólne wersy
+/// obok „ten sam tekst”, podobieństwo chwytów obok „te same chwyty”), i bez
+/// metrum tam, gdzie o podobieństwie mówi już tekst — ono ma znaczenie
+/// tylko przy przeróbkach.
+List<Similarity> similaritiesToShow(List<Similarity> s) {
+  final sameText = s.has<SameText>();
+  final sameChords = s.has<SameChords>();
+  final meterSays = (s.meterMatch?.similarity ?? 0) >= _sameMeter && s.lineCoverage < kVariantLines;
+  return [
+    for (final e in s)
+      if (!(sameText && e is SharedLines) &&
+          !(sameChords && e is ChordsMatch) &&
+          !(e is MeterMatch && !meterSays))
+        e,
+  ];
+}
 
 MatchLevel? levelOf(List<Similarity> s) {
   final sameText = s.has<SameText>();

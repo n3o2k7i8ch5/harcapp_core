@@ -9,17 +9,11 @@ import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 
 export 'package:harcapp_core/song_book/similarity/similarity.dart';
 
-/// Najbliższa piosenka **w apce**.
-class AppMatch extends SongMatch<SongRaw> {
-  AppMatch({required super.song, required super.similarities})
-      : super(source: MatchSource.app);
+/// Trafienie **w apce**: piosenka ze śpiewnika i dowody.
+typedef AppMatch = SongMatch<SongRaw>;
 
-  AppMatch.of(SongMatch<SongRaw> m)
-      : this(song: m.song, similarities: m.similarities);
-
+extension AppMatchId on AppMatch {
   String get songId => song.id;
-  /// Tylko podpis do wyświetlenia.
-  String get title => song.title;
 }
 
 /// Reguła: czy na [m] wolno wskazać poprawkę, która **nie powiedziała**,
@@ -41,9 +35,8 @@ class BatchMatch {
   final String messageId;
   final String title;
   final List<Similarity> similarities;
-  /// Czy TO zgłoszenie jest najnowsze w grupie identycznych, do której należy
-  /// razem z [messageId]. Fakt o porównaniu, nie o zgłoszeniu. Ma sens tylko przy
-  /// `level == identical`.
+  /// `false`: TO zgłoszenie jest starszą kopią identycznego [messageId] —
+  /// wyparte, odpada. Fakt o porównaniu, nie o zgłoszeniu.
   final bool isNewestInBatch;
   /// Którą piosenkę w apce poprawia TAMTO zgłoszenie. `null` dla nowych
   /// piosenek i poprawek bez celu. Po tym poznajemy, czy obie poprawki celują
@@ -53,7 +46,7 @@ class BatchMatch {
   /// wspólny tytuł ukryty łapie dopiero tekst. `SameTitle` w [similarities]
   /// liczy też ukryte, bo tak porównujemy z apką.
   final bool sameMainTitle;
-  const BatchMatch({
+  BatchMatch({
     required this.messageId,
     required this.title,
     required this.similarities,
@@ -61,29 +54,19 @@ class BatchMatch {
     this.correctionTarget,
     this.sameMainTitle = false,
   });
-  MatchLevel? get level => levelOf(similarities);
+  late final MatchLevel? level = levelOf(similarities);
+  /// Jak blisko są teksty — do wyboru partnera w obrębie poziomu.
+  late final double score = similarityScore(similarities);
   String get detail => '„$title” [$messageId]: ${similaritiesText(similarities)}';
 }
 
-/// Piosenki już w apce. [SongIndex] z wynikami jako [AppMatch].
+/// Piosenki już w apce.
 class SongBook extends SongIndex<SongRaw> {
   SongBook(super.songs);
 
   static final SongBook empty = SongBook(const []);
 
-  @override
-  AppMatch? matchTo(String songId, SongProfile song, {MatchSource source = MatchSource.app}) {
-    final m = super.matchTo(songId, song, source: source);
-    return m == null ? null : AppMatch.of(m);
-  }
-
   /// Najsilniejsze trafienia, od najsilniejszego — [limit] pierwszych.
   List<AppMatch> strongest(SongProfile song, {int limit = 3}) =>
-      [for (final m in matches(song).take(limit)) AppMatch.of(m)];
-
-  @override
-  AppMatch? closest(SongProfile song, {MatchSource source = MatchSource.app}) {
-    final m = super.closest(song, source: source);
-    return m == null ? null : AppMatch.of(m);
-  }
+      matches(song).take(limit).toList();
 }

@@ -1,3 +1,4 @@
+import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
@@ -35,7 +36,7 @@ void main() {
       final a = SongProfile(sampleSong(lyrics: _a));
       final b = SongProfile(sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx'));
       final s = compare(a, b);
-      expect(s.whereType<MetadataDiff>().single.fields, ['yt_video_id']);
+      expect(s.whereType<MetadataDiff>().single.fields, [MetadataField.youtube]);
       expect(levelOf(s), MatchLevel.sameSong);
     });
 
@@ -44,7 +45,7 @@ void main() {
       final b = SongProfile(sampleSong(title: 'Płonie ognisko', lyrics: _a));
       final s = compare(a, b);
       expect(s.whereType<SameTitle>(), hasLength(1));
-      expect(s.whereType<MetadataDiff>().single.fields, ['title']);
+      expect(s.whereType<MetadataDiff>().single.fields, [MetadataField.title]);
       expect(levelOf(s), MatchLevel.sameSong);
     });
 
@@ -53,7 +54,7 @@ void main() {
       final b = SongProfile(sampleSong(lyrics: _a, chordsText: 'C G a\nC G a'));
       final s = compare(a, b);
       expect(levelOf(s), MatchLevel.sameSong);
-      expect(s.sameChordsUpToOrder, isFalse);
+      expect(sameChordsUpToOrder(s), isFalse);
     });
 
     test('ten sam tytuł, inny tekst → sameTitleDifferentText', () {
@@ -94,7 +95,7 @@ void main() {
           book: bookWith([sampleSong(lyrics: _a)]));
       expect(got.destination, Destination.rejectAlreadyInApp);
       expect(got.decision.detail, contains('ten sam tekst'));
-      expect(stateLabelsFor(got), [kLabelRejectedAlreadyInApp]);
+      expect(stateLabelsFor(got), [SongLabel.rejectedAlreadyInApp.label]);
       expect(got.goesToFile, isFalse);
     });
 
@@ -105,9 +106,9 @@ void main() {
       );
       expect(got.destination, Destination.rejectAlreadyInApp);
       expect(got.goesToFile, isFalse, reason: 'piosenki nie ma po co oglądać');
-      expect(stateLabelsFor(got), [kLabelRejectedAlreadyInApp]);
-      expect(got.labels, contains(kLabelHaveALook));
-      expect(got.labels.any((l) => l.startsWith(kLabelNeedsReview)), isFalse,
+      expect(stateLabelsFor(got), [SongLabel.rejectedAlreadyInApp.label]);
+      expect(got.labels, contains(SongLabel.haveALook.label));
+      expect(got.labels.any((l) => l.startsWith(SongLabel.needsReview.label)), isFalse,
           reason: '`needs-review` jest tylko dla piosenek w pliku');
       expect(got.labels.any(isClosedLabel), isTrue,
           reason: 'po `label scanned` nie wisi w nieprzeczytanych');
@@ -118,7 +119,7 @@ void main() {
         msgFrom(await completeEmail(song: sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx'))),
         book: bookWith([sampleSong(lyrics: _a)]),
       );
-      expect(got.destination, Destination.candidateNew);
+      expect(got.destination, Destination.candidate);
       expect(issuesOf(got), [SongIssue.metadataDifferFromApp]);
       expect(detailOf(got, SongIssue.metadataDifferFromApp), contains('yt_video_id'));
     });
@@ -129,14 +130,14 @@ void main() {
         book: bookWith([sampleSong(lyrics: _a)]),
       );
       expect(issuesOf(got), [SongIssue.chordsDifferFromApp]);
-      expect(stateLabelsFor(got), [kLabelNeedsReview, NeedsReviewKind.undeclaredCorrection.label]);
+      expect(stateLabelsFor(got), [SongLabel.needsReview.label, SongLabel.undeclaredCorrection.label]);
     });
 
     test('ten sam tytuł, inny tekst → same-title-in-app', () async {
       final got = classify(msgFrom(await completeEmail(song: sampleSong(lyrics: _b))),
           book: bookWith([sampleSong(lyrics: _a)]));
       expect(issuesOf(got), [SongIssue.sameTitleInApp]);
-      expect(stateLabelsFor(got), [kLabelNeedsReview, NeedsReviewKind.duplicateInApp.label]);
+      expect(stateLabelsFor(got), [SongLabel.needsReview.label, SongLabel.duplicateInApp.label]);
     });
 
     test('inny tytuł, dopisana zwrotka → more-verses-than-app z nazwą pierwowzoru', () async {
@@ -146,7 +147,7 @@ void main() {
       );
       expect(issuesOf(got), [SongIssue.moreVersesThanApp]);
       expect(detailOf(got, SongIssue.moreVersesThanApp), contains('„Ognisko”'));
-      expect(stateLabelsFor(got), [kLabelNeedsReview, NeedsReviewKind.undeclaredCorrection.label],
+      expect(stateLabelsFor(got), [SongLabel.needsReview.label, SongLabel.undeclaredCorrection.label],
           reason: 'dopisane zwrotki to najczęściej poprawka wysłana jako nowa');
     });
 
@@ -197,7 +198,7 @@ void main() {
       final yt = classify(
           msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx'))),
           book: book);
-      expect(yt.destination, Destination.candidateCorrection);
+      expect(yt.destination, Destination.candidate);
       expect(yt.issues, isEmpty);
       expect(yt.submission.correctionTarget, 'tmp');
     });
@@ -246,7 +247,7 @@ void main() {
         msgFrom(await completeEmail(song: sampleSong(lyrics: _a)), id: 'a'),
         msgFrom(await completeEmail(song: sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx')), id: 'b'),
       ], book: SongBook.empty);
-      expect(out.map((c) => c.destination), everyElement(Destination.candidateNew));
+      expect(out.map((c) => c.destination), everyElement(Destination.candidate));
       expect(out.map(issuesOf), everyElement([SongIssue.sameTitleInBatch]));
       expect(detailOf(out[0], SongIssue.sameTitleInBatch), contains('[b]'));
     });
@@ -290,7 +291,7 @@ void main() {
       ], book: book);
       final byId = {for (final x in out) x.message.id: x};
       expect(byId['old']!.destination, Destination.rejectDuplicate);
-      expect(byId['new']!.destination, Destination.candidateCorrection);
+      expect(byId['new']!.destination, Destination.candidate);
       expect(issuesOf(byId['new']!), isNot(contains(SongIssue.sameTargetInBatch)));
     });
 
@@ -344,7 +345,7 @@ void main() {
         msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: '$_a\nDopisana zwrotka')), id: 'a'),
         msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(title: 'Płonie ognisko', lyrics: '$_a\nInna zwrotka')), id: 'b'),
       ], book: book);
-      expect(out.map((c) => c.destination), everyElement(Destination.candidateCorrection));
+      expect(out.map((c) => c.destination), everyElement(Destination.candidate));
       expect(out.map((c) => c.submission.correctionTarget), everyElement('tmp'));
       expect(out.map(issuesOf), everyElement([SongIssue.sameTargetInBatch]));
     });
@@ -374,7 +375,7 @@ void main() {
       expect(issuesOf(out[0]), contains(SongIssue.similarTextInBatch));
     });
 
-    test('ta sama piosenka pod dwoma tytułami → jedna grupa, starsza odpada', () async {
+    test('ta sama piosenka pod dwoma tytułami → jedna grupa, obie w pliku i wskazują siebie', () async {
       final out = classifyBatch([
         msgFrom(await older(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a))), id: 'old'),
         msgFrom(await completeEmail(song: sampleSong(title: 'Płonie ognisko', lyrics: _a)), id: 'new'),
@@ -382,9 +383,22 @@ void main() {
       final byId = {for (final x in out) x.message.id: x};
       // Ten sam tekst, różne tytuły: w grupie po treści — nie identyczne
       // (tytuł inny), więc obie do pliku, wskazując siebie nawzajem.
-      expect(byId['old']!.destination, Destination.candidateNew);
+      expect(byId['old']!.destination, Destination.candidate);
       expect(detailOf(byId['old']!, SongIssue.similarTextInBatch), contains('[new]'));
       expect(detailOf(byId['new']!, SongIssue.similarTextInBatch), contains('[old]'));
+    });
+
+    test('łańcuch w grupie: partner po poziomie, nie po samej bliskości tekstu', () async {
+      // A~B tytułem, B~C treścią — jedna grupa. A nie ma nic wspólnego z C,
+      // więc wskazanie C (poziom `null`) zgubiłoby jej wspólny tytuł z B.
+      final out = classifyBatch([
+        msgFrom(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _b)), id: 'a'),
+        msgFrom(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a)), id: 'b'),
+        msgFrom(await completeEmail(song: sampleSong(title: 'Płonie ognisko', lyrics: '$_a\nDopisana zwrotka na koniec pieśni')), id: 'c'),
+      ], book: SongBook.empty);
+      final byId = {for (final x in out) x.message.id: x};
+      expect(detailOf(byId['a']!, SongIssue.sameTitleInBatch), contains('[b]'));
+      expect(issuesOf(byId['c']!), contains(SongIssue.similarTextInBatch));
     });
 
     test('nowa i poprawka nie zlewają się w jedną grupę', () async {
@@ -392,7 +406,8 @@ void main() {
         msgFrom(await completeEmail(song: sampleSong(lyrics: _a)), id: 'a'),
         msgFrom(await completeEmail(isNew: false, song: sampleSong(lyrics: _a)), id: 'b'),
       ], book: SongBook.empty);
-      expect(out.map((c) => c.destination).toSet(), {Destination.candidateNew, Destination.candidateCorrection});
+      expect(out.map((c) => c.destination), everyElement(Destination.candidate));
+      expect(out.map((c) => c.submission.kind).toSet(), {SubmissionKind.newSong, SubmissionKind.correction});
     });
   });
 

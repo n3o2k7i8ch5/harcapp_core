@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:harcapp_core/song_book/song_core.dart';
-import 'package:harcapp_core/song_book/parse_contrib_email_oldest.dart';
+import 'package:harcapp_core/song_book/mail_quotes.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email_old_app.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/submission/submission_email.dart';
@@ -11,6 +12,10 @@ import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
+
+/// Nagłówek sekcji z kodem piosenki w treści mejla (formaty sprzed pliku
+/// zgłoszenia). Po nim piosenkomat poznaje zgłoszenie.
+const String kSongCodeMarker = '### Kod piosenki:';
 
 class ParsedContribEmail{
 
@@ -32,7 +37,7 @@ class ParsedContribEmail{
   /// True, gdy mejl pochodzi z najstarszej (już nierozwijanej) wersji apki
   /// mobilnej — rozpoznawane po owinięciu piosenki w `{"o!_filename": {...}}`
   /// lub po charakterystycznym nagłówku „Dzięki za chęć dzielenia się…".
-  final bool isOldestFormat;
+  final bool isOldAppFormat;
   /// `lclId` piosenki, którą autor poprawia, zadeklarowany przez apkę
   /// w linii „### Poprawiana piosenka”. `null` znaczy: mejl tego nie niesie
   /// (nowa piosenka albo apka sprzed tej linii) i cel trzeba zgadywać.
@@ -59,7 +64,7 @@ class ParsedContribEmail{
     this.correctionMessage,
     required this.isLegacy,
     this.personParseWarnings = const [],
-    this.isOldestFormat = false,
+    this.isOldAppFormat = false,
     this.correctionTarget,
     this.declaredKind,
     this.senderIsContributor,
@@ -123,7 +128,7 @@ ParsedContribEmail parseContribEmail(String content){
 // =====================================================================
 
 ParsedContribEmail _parseV2(String content){
-  String songJson = _extractFencedBlockAfter(content, '### Kod piosenki:');
+  String songJson = _extractFencedBlockAfter(content, kSongCodeMarker);
 
   Map<String, dynamic> songMap;
   try {
@@ -195,18 +200,18 @@ String? _tryExtractFencedBlockAfter(String content, String header){
 // =====================================================================
 
 ParsedContribEmail _parseLegacy(String content){
-  int codeHeaderIdx = content.indexOf('### Kod piosenki:');
+  int codeHeaderIdx = content.indexOf(kSongCodeMarker);
 
   // Najstarsza apka sekcji `### Kod piosenki:` nie ma — JSON wkleja między
-  // znaczniki „nie edytuj". Patrz `parse_contrib_email_oldest.dart`.
+  // znaczniki „nie edytuj". Patrz `parse_contrib_email_old_app.dart`.
   String songSection;
   if(codeHeaderIdx != -1)
-    songSection = content.substring(codeHeaderIdx + '### Kod piosenki:'.length);
+    songSection = content.substring(codeHeaderIdx + kSongCodeMarker.length);
   else {
-    final oldest = oldestFormatSongRegion(content);
-    if(oldest == null)
+    final oldApp = oldAppSongRegion(content);
+    if(oldApp == null)
       throw ContribEmailParseError('Brak sekcji "### Kod piosenki:".');
-    songSection = oldest;
+    songSection = oldApp;
   }
 
   String songJson = _extractFirstJsonObject(songSection);
@@ -218,22 +223,22 @@ ParsedContribEmail _parseLegacy(String content){
     throw ContribEmailParseError('Nie udało się sparsować JSON-a piosenki: $e');
   }
 
-  // Najstarsze legacy — patrz `parse_contrib_email_oldest.dart`.
+  // Najstarsze legacy — patrz `parse_contrib_email_old_app.dart`.
   //
   // Znacznik „nie edytuj" liczy się tylko przed sekcją `### Kod piosenki:`.
   // Odpowiedź z nowej apki cytuje stary mejl pod spodem — gdyby ten cytat
   // robił z niej zgłoszenie ze starej apki, przeszłaby bez sprawdzenia zgody.
   // Mejl ze starej apki, któremu sekcję dokleja narzędzie, ma znacznik
   // w oryginalnej treści, czyli przed nią.
-  final oldestDetection = detectOldestFormat(
+  final oldAppDetection = detectOldAppFormat(
     songMap,
     codeHeaderIdx == -1 ? content : content.substring(0, codeHeaderIdx),
   );
-  songMap = oldestDetection.songMap;
-  final isOldestFormat = oldestDetection.isOldestFormat;
+  songMap = oldAppDetection.songMap;
+  final isOldAppFormat = oldAppDetection.isOldAppFormat;
   // Najstarsza apka bywa niechlujna w `add_pers` — patrz
-  // `normalizeOldestSongMap`. Nowszych formatów to nie dotyka.
-  if(isOldestFormat) songMap = normalizeOldestSongMap(songMap);
+  // `normalizeOldAppSongMap`. Nowszych formatów to nie dotyka.
+  if(isOldAppFormat) songMap = normalizeOldAppSongMap(songMap);
 
   String? title = songMap[SongCore.PARAM_TITLE] as String?;
   if(title == null || title.isEmpty)
@@ -266,7 +271,7 @@ ParsedContribEmail _parseLegacy(String content){
     correctionMessage: extractCorrectionMessage(content),
     isLegacy: true,
     personParseWarnings: personWarnings,
-    isOldestFormat: isOldestFormat,
+    isOldAppFormat: isOldAppFormat,
   );
 }
 
@@ -499,7 +504,7 @@ final RegExp _emailAngleRe = RegExp(r'<([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-z
 String? _extractSenderEmail(String content){
   // Szukamy tylko przed sekcją „### Kod piosenki:" — wszystko poniżej (np.
   // quoted reply chain w mejlu zwrotnym) nie powinno być źródłem nadawcy.
-  final int cutoff = content.indexOf('### Kod piosenki:');
+  final int cutoff = content.indexOf(kSongCodeMarker);
   final String haystack = cutoff == -1 ? content : content.substring(0, cutoff);
   final Match? m = _emailAngleRe.firstMatch(haystack);
   return m?.group(1)?.toLowerCase();
@@ -573,7 +578,7 @@ const String _correctionTargetHeader = '### Poprawiana piosenka:';
 /// białe znaki i znaki cytatu (`>`) wyrzucamy, nic nie zgadujemy. Bez bloku
 /// — `null`: żaden mejl w skrzynce nie niósł id inaczej.
 String? extractCorrectionTarget(String content){
-  final int cutoff = content.indexOf('### Kod piosenki:');
+  final int cutoff = content.indexOf(kSongCodeMarker);
   final String haystack = cutoff == -1? content: content.substring(0, cutoff);
   final int at = haystack.indexOf(_correctionTargetHeader);
   if(at == -1) return null;
