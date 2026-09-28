@@ -107,43 +107,41 @@ String? composeContribReply({String? reviewNote, bool oldApp = false}) {
 
 /// Czy treść wygląda na mejl złożony przez [composeContribReply]: powitanie
 /// na początku, pożegnanie i stopka na końcu. Po tym piosenkomat poznaje
-/// własny szkic — taki wolno przeliczyć od nowa. Wszystko inne to ręczna
-/// robota w Gmailu i zostaje nietknięte.
+/// własny szkic. Wszystko inne to ręczna robota w Gmailu i zostaje nietknięte.
 ///
-/// Środek nie jest sprawdzany celowo: uwaga z przeglądu mogła się zmienić,
-/// a poprzedniej wersji nikt nie pamięta. Zamiast zgadywać, co w środku jest
-/// stare, wołający wypisuje akapity, które przy przeliczeniu wypadają.
+/// Akapity porównujemy bez względu na łamanie linii — Gmail potrafi przełamać
+/// szkic poprawiany w przeglądarce, a to dalej ten sam tekst.
 bool isToolShapedReply(String body) {
-  final paragraphs = _paragraphs(body);
+  final paragraphs = [for (final a in _paragraphs(body)) _normalized(a)];
   return paragraphs.length >= 3 &&
-      paragraphs.first == kReplyGreeting &&
-      paragraphs[paragraphs.length - 2] == kReplyClosing &&
-      paragraphs.last == kReplyFooter;
+      paragraphs.first == _normalized(kReplyGreeting) &&
+      paragraphs[paragraphs.length - 2] == _normalized(kReplyClosing) &&
+      paragraphs.last == _normalized(kReplyFooter);
 }
 
 /// Twoja odpowiedź wyjęta z mejla — do dymka w edytorze, bez ramki, którą
 /// i tak widać przy polu. Odwrotność [composeContribReply]: z mejla w naszym
-/// kształcie zdejmuje powitanie, blok o starej apce, pożegnanie i stopkę.
-/// Mejl w innym kształcie (pisany ręcznie w Gmailu) wraca cały.
+/// kształcie zdejmuje powitanie, blok o starej apce, pożegnanie i stopkę,
+/// a Twoje akapity zostawia w kształcie, w jakim są. Mejl w innym kształcie
+/// (pisany ręcznie w Gmailu) wraca cały.
 String replyNoteOf(String body) {
   if (!isToolShapedReply(body)) return body.trim();
   final frame = {
-    kReplyGreeting,
-    ..._paragraphs(kOldAppReplyBlock),
-    kReplyClosing,
-    kReplyFooter,
+    for (final a in [kReplyGreeting, ..._paragraphs(kOldAppReplyBlock), kReplyClosing, kReplyFooter])
+      _normalized(a),
   };
-  return [for (final a in _paragraphs(body)) if (!frame.contains(a)) a].join('\n\n');
+  return [for (final a in _paragraphs(body)) if (!frame.contains(_normalized(a))) a].join('\n\n');
 }
 
-/// Akapity z [oldBody], których nie ma w [newBody]. To, co wypadnie ze
-/// szkicu przy przeliczeniu — do pokazania, nie do zgubienia po cichu.
-List<String> paragraphsDroppedBy(String oldBody, String newBody) {
-  final newParagraphs = _paragraphs(newBody).toSet();
-  return [for (final a in _paragraphs(oldBody)) if (!newParagraphs.contains(a)) a];
+/// Czy mejl niesie blok o starej apce — cały, bez względu na łamanie linii.
+bool carriesOldAppBlock(String body) {
+  final paragraphs = {for (final a in _paragraphs(body)) _normalized(a)};
+  return _paragraphs(kOldAppReplyBlock).every((a) => paragraphs.contains(_normalized(a)));
 }
 
 List<String> _paragraphs(String body) => [
-      for (final a in body.replaceAll('\r\n', '\n').split('\n\n'))
+      for (final a in body.replaceAll('\r\n', '\n').split(RegExp(r'\n[ \t]*\n')))
         if (a.trim().isNotEmpty) a.trim(),
     ];
+
+String _normalized(String paragraph) => paragraph.replaceAll(RegExp(r'\s+'), ' ');

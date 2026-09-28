@@ -6,3 +6,4 @@ build/
 secrets/
 out/
 *.iml
+archive/

@@ -17,13 +17,11 @@ abstract interface class Mailbox {
     void Function(int done, int total)? onProgress,
   });
 
-  /// Wątki, w których choć jedna wiadomość ma etykietę `song/*`.
-  Future<Set<String>> threadsWithSongLabels();
-
   /// Nasze wysłane wiadomości po wątkach, bez szkiców.
   Future<Map<String, List<String>>> sentIdsByThread();
 
-  /// Etykiety `song/*` całej skrzynki, po mejlu. Mejle bez żadnej nie mają klucza.
+  /// Etykiety `song/*` całej skrzynki, po mejlu. Mejle bez żadnej nie mają
+  /// klucza. Wątek każdego z nich zna potem [knownThreadOf].
   Future<Map<String, Set<String>>> songLabelsByMessage();
 
   /// Tworzy brakujące etykiety narzędzia.
@@ -32,16 +30,14 @@ abstract interface class Mailbox {
   /// Ta sama zmiana etykiet na całej paczce mejli.
   Future<void> batchModify(List<String> messageIds, {List<String>? add, List<String>? remove});
 
-  /// Temat i nadawca mejla.
-  Future<({String subject, String from})> headersOf(String messageId);
-
   /// Co trzeba wpisać w nagłówki odpowiedzi na [messageId].
   Future<ReplyTarget> replyTarget(String messageId);
 
-  /// Wątek jednym zapytaniem: wiadomości, kto miał ostatnie słowo, temat.
+  /// Wątek jednym zapytaniem: wiadomości, kto miał ostatnie słowo, temat
+  /// i nadawca pierwszej wiadomości.
   Future<ThreadSummary> threadSummary(String threadId);
 
-  Future<void> replyTo(ReplyTarget target, String text);
+  /// Szkic odpowiedzi w wątku [target] — tak czeka każda odpowiedź do autora.
   Future<String> draftReplyTo(ReplyTarget target, String text);
 
   /// Szkice po wątku, w którym siedzą.

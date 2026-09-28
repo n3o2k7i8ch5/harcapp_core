@@ -463,4 +463,15 @@ void main() {
     expect(c.submission.userMessage, 'dopisek ze starego mejla');
     expect(c.submission.senderIsContributor, isTrue);
   });
+
+  test('placeholder złamany przez klienta na 72 znakach nie robi z siebie dopisku', () {
+    final mail = submissionEmail();
+    final eml = mail.eml.replaceFirst(
+        kSubmissionUserMessagePlaceholder, hardWrap(kSubmissionUserMessagePlaceholder, width: 72));
+    expect(eml, isNot(contains(kSubmissionUserMessagePlaceholder)), reason: 'złamany naprawdę');
+    final c = _classify(eml);
+    expect(c.submission.hasUserMessage, isFalse);
+    expect(issuesOf(c), isNot(contains(SongIssue.userMessage)));
+    expect(c.labels, isNot(contains(SongLabel.userMessage.label)));
+  });
 }

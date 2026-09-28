@@ -117,7 +117,7 @@ List<ContributorSource> contributorSourcesOf(
       title: song.title,
       person: _personOf(song, sender),
       otherEmails: otherEmailsBySender[sender] ?? const [],
-      // Ślad piosenkomatu zdejmuje `prepare`, więc czytamy go przed nim.
+      // `review` zdejmuje ślad piosenkomatu, więc czytamy go przed nim.
       senderIsContributor: song.piosenkomatData?.senderIsContributor ?? true,
     ));
   }

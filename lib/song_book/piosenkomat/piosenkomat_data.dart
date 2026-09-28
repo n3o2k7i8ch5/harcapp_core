@@ -101,7 +101,8 @@ class PiosenkomatIssue{
 /// Jest `null` dla każdej normalnej piosenki — obecność tego pola znaczy
 /// „ta piosenka jest w trakcie przeglądu”. Do `all_songs.hrcpsng` nigdy nie
 /// jedzie: `SongRaw.toApiJsonMap` serializuje je tylko na wyraźne życzenie
-/// (`withPiosenkomatData`), a `piosenkomat prepare` zdejmuje je przed wgraniem.
+/// (`withPiosenkomatData`), a `review --push` piosenkomatu zdejmuje je
+/// w `final-*`.
 class PiosenkomatData{
 
   static const String PARAM_KIND = 'kind';
@@ -152,7 +153,7 @@ class PiosenkomatData{
   /// Wątek Gmaila ze zgłoszeniem — po nim przegląd wiąże piosenkę
   /// ze zgłoszeniem, nawet gdy tytuł zmieni się przy poprawianiu.
   final String? threadId;
-  /// Katalog przebiegu, z którego piosenka pochodzi (np. `import-2026-09-12T00`).
+  /// Przebieg, z którego piosenka pochodzi (np. `import-2026-09-28T101500`).
   final String? run;
   final List<PiosenkomatIssue> issues;
   /// Werdykt z przeglądu: `true` — do śpiewnika, `false` — nie. `null` znaczy

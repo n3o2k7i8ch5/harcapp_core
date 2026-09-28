@@ -48,12 +48,12 @@ void _indexTests() {
   });
 }
 
-/// Tak, jak robi to `prepare`: osoby z piosenek, które wchodzą, plus dodatkowe
+/// Tak, jak robi to `review --push`: osoby z piosenek, które wchodzą, plus dodatkowe
 /// adresy z planu przebiegu.
 PeopleReport peopleOf(List<Classified> items) => collectPeople(
       contributorSourcesOf(
         [for (final c in items) if (c.goesToFile) c.song!],
-        otherEmailsBySender: otherEmailsBySender(RunPlan.fromClassified(items)),
+        otherEmailsBySender: otherEmailsBySender(RunPlan.fromClassified(items, id: 'test')),
       ),
     );
 
@@ -186,7 +186,7 @@ void main() {
         id: 'b',
       ),
     ], book: SongBook.empty);
-    final plan = RunPlan.fromClassified(items);
+    final plan = RunPlan.fromClassified(items, id: 'test');
 
     // Tak jak strona: piosenki przez plik i z powrotem, jednej brak.
     final dir = tempDir();

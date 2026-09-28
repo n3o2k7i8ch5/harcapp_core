@@ -22,7 +22,7 @@ sealed class Similarity {
 }
 
 /// To samo id (`lclId`). Najtwardszy sygnał z możliwych: w apce piosenki są
-/// referencjonowane po id, a po `prepare` poprawka **ma** id pierwowzoru.
+/// referencjonowane po id, a w `final-*` poprawka **ma** id pierwowzoru.
 /// Dwie różne piosenki pod jednym id to konflikt, nawet gdy nic poza tym
 /// ich nie łączy.
 class SameId extends Similarity {

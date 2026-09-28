@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/mail_quotes.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email_old_app.dart';
@@ -21,15 +20,15 @@ const String kInboxEmail = 'harcapp@gmail.com';
 
 /// Etykiety pod `song/`: ręczna taksonomia Daniela plus znacznik [auto],
 /// który mówi „tę etykietę stanu nadał automat”. Jedna lista, jedna nazwa na
-/// etykietę — co narzędzie tworzy i na co czeka katalog przebiegu, to cechy
-/// przy niej, a nie osobne listy do pilnowania.
+/// etykietę — co narzędzie tworzy i co jest powodem przeglądu, to cechy przy
+/// niej, a nie osobne listy do pilnowania.
 enum SongLabel {
   auto('song/auto'),
-  readyToAdd('song/ready-to-add', pending: true),
+  readyToAdd('song/ready-to-add'),
   added('song/added'),
   rejectedAlreadyInApp('song/rejected/already-in-app'),
   rejectedDuplicate('song/rejected/duplicate'),
-  /// Automat wstawił do pliku, Ty przy przeglądzie na stronie wyrzuciłeś.
+  /// Automat wstawił do pliku, a przy przeglądzie na stronie odpadła.
   rejectedAfterReview('song/rejected/after-review'),
   /// Załącznik zgłoszenia nie do wczytania — suma, JSON, obcięcie, zero
   /// zgłoszeń. Piosenki nie ma czego wstawić do pliku.
@@ -45,24 +44,24 @@ enum SongLabel {
   /// identyczna z apką, do której autor coś napisał, albo zepsuty załącznik.
   /// Nikt go nie zdejmuje poza Tobą; listą jest `label:song/have-a-look`.
   haveALook('song/have-a-look'),
-  needsReview('song/needs-review', pending: true),
+  needsReview('song/needs-review'),
   /// Podkategorie przeglądu, jedna na powód. Mejl z kilkoma powodami dostaje
   /// kilka.
-  userMessage('song/needs-review/user-message', pending: true, reviewReason: true),
+  userMessage('song/needs-review/user-message', reviewReason: true),
   /// Kolizja z piosenką, która już jest w apce.
-  duplicateInApp('song/needs-review/duplicate-in-app', pending: true, reviewReason: true),
+  duplicateInApp('song/needs-review/duplicate-in-app', reviewReason: true),
   /// Kolizja z innym zgłoszeniem z tej samej paczki.
-  duplicateInBatch('song/needs-review/duplicate-in-batch', pending: true, reviewReason: true),
-  missingData('song/needs-review/missing-data', pending: true, reviewReason: true),
-  noConsent('song/needs-review/no-consent', pending: true, reviewReason: true),
+  duplicateInBatch('song/needs-review/duplicate-in-batch', reviewReason: true),
+  missingData('song/needs-review/missing-data', reviewReason: true),
+  noConsent('song/needs-review/no-consent', reviewReason: true),
   /// Poprawka, z którą coś nie tak: nie ma czego poprawiać albo cel zgadnięty.
-  correctionProblem('song/needs-review/correction-problem', pending: true, reviewReason: true),
+  correctionProblem('song/needs-review/correction-problem', reviewReason: true),
   /// Ktoś poprawił piosenkę i wysłał jako nową.
-  undeclaredCorrection('song/needs-review/undeclared-correction', pending: true, reviewReason: true),
+  undeclaredCorrection('song/needs-review/undeclared-correction', reviewReason: true),
   /// Kilka kart osób dodających — wkład przypisujesz ręcznie.
-  severalContributors('song/needs-review/several-contributors', pending: true, reviewReason: true),
+  severalContributors('song/needs-review/several-contributors', reviewReason: true),
   /// Adres nadawcy doklejony do karty na zgadywanie — sprawdź osobę.
-  guessedContributor('song/needs-review/guessed-contributor', pending: true, reviewReason: true),
+  guessedContributor('song/needs-review/guessed-contributor', reviewReason: true),
   /// Znacznik: zgłoszenie to poprawka istniejącej piosenki. Zatwierdzoną
   /// wgrywasz inaczej — podmiana, nie dodanie.
   correction('song/correction'),
@@ -71,13 +70,14 @@ enum SongLabel {
   /// zawsze z [haveALook], nieprzeczytane. Ogarniasz ręcznie.
   multipleSongs('song/multiple-songs'),
   /// Kolejka `reply`, powód pierwszy: mejl z najstarszej apki, autorowi trzeba
-  /// odpisać, żeby ją zaktualizował. `reply` ją zdejmuje. `scan` jej nie wiesza,
-  /// gdy autor dostał już od nas odpowiedź (`Submission.weReplied`).
-  replyOldApp('song/reply/old-app', pending: true),
-  /// Kolejka `reply`, powód drugi: przy przeglądzie wpisałeś tekst w „Odpowiedź
-  /// do autora”. Tekst czeka w `decisions.json`; `reply` go wysyła i przestawia
-  /// mejl na [waitingForAuthor]. Zostaje nieprzeczytane, dopóki mejl nie wyjdzie.
-  replyReviewNote('song/reply/review-note', pending: true),
+  /// odpisać, żeby ją zaktualizował. Blok czeka w szkicu — raz na autora;
+  /// wysłany zdejmuje tę etykietę ze wszystkich jego wątków. `scan` jej nie
+  /// wiesza, gdy autor dostał już od nas odpowiedź (`Submission.weReplied`).
+  replyOldApp('song/reply/old-app'),
+  /// Kolejka `reply`, powód drugi: przy przeglądzie w „Odpowiedź do autora”
+  /// jest tekst. Czeka w szkicu w wątku; `reply` go wysyła i przestawia mejl na
+  /// [waitingForAuthor]. Zostaje nieprzeczytane, dopóki mejl nie wyjdzie.
+  replyReviewNote('song/reply/review-note'),
   /// Tekst z przeglądu poszedł, czekamy, aż autor odpisze — po tym `reopen`
   /// wie, które wątki sprawdzić.
   waitingForAuthor('song/waiting-for-author'),
@@ -90,15 +90,12 @@ enum SongLabel {
   rejectedTooNiche('song/rejected/too-niche', byTool: false),
   addContributor('song/add-contributor', byTool: false);
 
-  const SongLabel(this.label, {this.byTool = true, this.pending = false, this.reviewReason = false});
+  const SongLabel(this.label, {this.byTool = true, this.reviewReason = false});
 
   /// Nazwa w Gmailu.
   final String label;
   /// Nadaje ją narzędzie i tworzy, jeśli jej brakuje.
   final bool byTool;
-  /// Dopóki wisi, katalog przebiegu jest potrzebny: werdykt czeka na
-  /// `label reviewed` / `label added` albo odpowiedź na `reply`.
-  final bool pending;
   /// Podkategoria `needs-review/*`.
   final bool reviewReason;
 
@@ -182,12 +179,6 @@ LabelChange withReadOnClose(LabelChange change, {Set<String> current = const {}}
   return (add, [...remove, 'UNREAD']);
 }
 
-/// Etykiety, z powodu których katalog przebiegu jest jeszcze potrzebny.
-Set<String> pendingLabelsOf(Set<String> labels) => {
-      for (final l in labels)
-        if (SongLabel.byLabel(l)?.pending ?? false) l,
-    };
-
 /// Etykiety wątku po wysłanej odpowiedzi (`reply --push`). Z tekstem
 /// z przeglądu schodzą obie kolejki, wchodzi [SongLabel.waitingForAuthor]
 /// i schodzi `UNREAD` — jak po odpowiedzi z Gmaila. Sam blok o starej apce
@@ -200,16 +191,27 @@ LabelChange labelsAfterReply({required bool sentReviewNote}) => sentReviewNote
       )
     : (const [], [SongLabel.replyOldApp.label]);
 
-/// „W pliku” z ręki automatu: tylko takie mejle `label added` ma prawo ruszyć.
-/// Twoje ręczne „ready-to-add” zostają nietknięte.
-bool isReadyByTool(Set<String> labels) =>
-    labels.contains(SongLabel.readyToAdd.label) && labels.contains(SongLabel.auto.label);
+/// Czy [label] jest od automatu: mejl ma i ją, i znacznik [SongLabel.auto].
+/// Tylko takie rusza narzędzie — Twoje ręczne (np. „ready-to-add” bez
+/// znacznika) zostają nietknięte.
+bool hasToolLabel(Set<String> labels, SongLabel label) =>
+    labels.contains(label.label) && labels.contains(SongLabel.auto.label);
 
-/// Cokolwiek, co automat wstawił do pliku kandydatów: bez zarzutu („w pliku”)
-/// albo do przeglądu. Tylko takie mejle rusza `label reviewed`.
+/// Cokolwiek, co automat wstawił do pliku kandydatów i co jeszcze nie weszło
+/// do apki: bez zarzutu („w pliku”), do przeglądu albo już po przeglądzie
+/// (odrzucona, z tekstem do autora, czeka na autora). Tylko takie mejle rusza
+/// `review` — także powtórny, po zmianie zdania. [SongLabel.added]
+/// to koniec sprawy: piosenka jest w apce.
 bool isInRunFilesByTool(Set<String> labels) =>
     labels.contains(SongLabel.auto.label) &&
-    (labels.contains(SongLabel.readyToAdd.label) || labels.contains(SongLabel.needsReview.label));
+    !labels.contains(SongLabel.added.label) &&
+    const [
+      SongLabel.readyToAdd,
+      SongLabel.needsReview,
+      SongLabel.rejectedAfterReview,
+      SongLabel.replyReviewNote,
+      SongLabel.waitingForAuthor,
+    ].any((l) => labels.contains(l.label));
 
 /// Gmail w `label:` zamienia spacje na myślniki.
 String labelQueryName(String label) => label.replaceAll(' ', '-');
@@ -247,6 +249,11 @@ final String kQueueQuery = 'in:inbox '
     'OR subject:"${submissionSubjectTag(SubmissionOrigin.appAndroid)}" '
     'OR filename:$kSubmissionFileExtension '
     'OR "$kSongCodeMarker" OR "$kOldAppMarker") '
+    // Zgłoszenia ze strony (temat i załącznik jak z apki) odsiewamy już tu,
+    // a nie dopiero po pobraniu: narzędzie ich nie etykietuje, więc stałyby
+    // na czele kolejki i zjadały `-n` przy każdym `scan`. Temat bez znacznika
+    // łapie potem pole `origin` w pliku.
+    '-subject:"${submissionSubjectTag(SubmissionOrigin.web)}" '
     '${kAllSongLabels.map((l) => '-label:${labelQueryName(l)}').join(' ')}';
 
 // ---------------------------------------------------------------------------
@@ -625,27 +632,3 @@ List<String> stateLabelsFor(Classified c) => switch (c.destination) {
               ...{for (final i in c.issues) i.issue.reviewReason.label},
             ],
     };
-
-// ---------------------------------------------------------------------------
-// Odpowiedź
-// ---------------------------------------------------------------------------
-
-/// Co zrobić z istniejącym szkicem odpowiedzi, gdy mejl do autora
-/// przeliczył się na [text].
-enum DraftAction {
-  /// Szkic już ma tę treść.
-  unchanged,
-  /// Szkic w naszym kształcie, ale z inną treścią — przeliczamy.
-  rewrite,
-  /// Ruszony ręcznie albo nieczytelny: to Twoja robota, nie ruszamy.
-  leaveManual,
-}
-
-/// Swój szkic narzędzie poznaje po kształcie (powitanie na początku,
-/// „Czuwaj!” na końcu). Nieczytelna treść też jest „nie nasza” — lepiej nic
-/// nie ruszyć, niż ruszyć w ciemno.
-DraftAction draftActionFor(String? body, String text) {
-  if (body == null) return DraftAction.leaveManual;
-  if (body.trim() == text.trim()) return DraftAction.unchanged;
-  return isToolShapedReply(body) ? DraftAction.rewrite : DraftAction.leaveManual;
-}

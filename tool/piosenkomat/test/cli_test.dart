@@ -21,7 +21,7 @@ Future<(RunPlan, List<SongRaw>)> _scan() async {
   ], book: SongBook.empty);
   expect(items.first.isClean, isTrue);
   expect(items.last.labels, contains(SongLabel.needsReview.label));
-  return (RunPlan.fromClassified(items), [for (final c in items) c.song!]);
+  return (RunPlan.fromClassified(items, id: 'test'), [for (final c in items) c.song!]);
 }
 
 Future<(RunPlan, List<SongRaw>, List<ReviewCandidate>)> _proposed() async {
@@ -32,7 +32,11 @@ Future<(RunPlan, List<SongRaw>, List<ReviewCandidate>)> _proposed() async {
 Map<String, LabelChange> _changes(
         RunPlan plan, List<SongRaw> reviewed, List<ReviewCandidate> proposed) =>
     reviewLabelChanges(
-        [reviewDiff(kind: _new, candidates: proposed, reviewed: reviewed)], plan);
+      [reviewDiff(kind: _new, candidates: proposed, reviewed: reviewed)],
+      plan,
+      // Stan po `label scanned --push`.
+      {for (final e in plan.labelsByMessage.entries) e.key: e.value.toSet()},
+    ).changes;
 
 void main() {
   test('wróciła z przeglądu → „w pliku”; bez zarzutu nie rusza się wcale', () async {
@@ -41,14 +45,15 @@ void main() {
     expect(changes.containsKey('ok'), isFalse,
         reason: '„ready-to-add” już wisi, nie ma czego przestawiać');
     expect(changes['yt']!.$1, [SongLabel.readyToAdd.label]);
-    expect(changes['yt']!.$2, kNeedsReviewLabels);
+    expect(changes['yt']!.$2, unorderedEquals([SongLabel.needsReview.label, SongLabel.missingData.label]),
+        reason: 'schodzi to, co mejl ma, a nie cała lista');
   });
 
   test('wyrzucona na stronie → rejected/after-review', () async {
     final (plan, songs, proposed) = await _proposed();
     final changes = _changes(plan, roundTrip([songs.first]), proposed);
     expect(changes['yt']!.$1, [SongLabel.rejectedAfterReview.label]);
-    expect(changes['yt']!.$2, contains(SongLabel.readyToAdd.label));
+    expect(changes['yt']!.$2, contains(SongLabel.needsReview.label));
   });
 
   test('odrzucona z wyjaśnieniem to pytanie do autora, nie odrzut', () async {
@@ -70,14 +75,15 @@ void main() {
     ok.piosenkomatData = ok.piosenkomatData!
         .copyWith(reviewNote: () => 'Dodałem, popraw literówkę.');
     final changes = _changes(plan, reviewed, proposed);
-    expect(changes['ok']!.$1, [SongLabel.readyToAdd.label, SongLabel.replyReviewNote.label],
-        reason: 'bez zarzutu, ale z uwagą — musi ruszyć mimo „ready-to-add”');
-    expect(changes['ok']!.$2, kNeedsReviewLabels);
+    expect(changes['ok']!.$1, [SongLabel.replyReviewNote.label],
+        reason: 'bez zarzutu, ale z uwagą — musi ruszyć mimo „ready-to-add”, które już ma');
+    expect(changes['ok']!.$2, isEmpty, reason: 'bez zarzutu nie miała nic do zdjęcia');
   });
 
   test('etykiety idą na wszystkie wiadomości wątku', () async {
     final (plan, songs) = await _scan();
     final withReply = RunPlan(
+      id: 'test',
       createdAt: plan.createdAt,
       labelsByMessage: {...plan.labelsByMessage, 'yt2': plan.labelsByMessage['yt']!},
       songByThread: plan.songByThread,

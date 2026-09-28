@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
 import 'package:harcapp_core/song_book/piosenkomat/file_names.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
@@ -128,17 +130,23 @@ void main() {
   });
 
   test('nazwy plików przebiegu', () {
-    final dir = RunDir.fresh().path;
-    expect(p.split(dir), hasLength(2));
-    expect(p.split(dir).first, 'out');
-    expect(p.basename(dir), startsWith('import-'));
-    expect(RunDir(dir).candidates(SubmissionKind.newSong), p.join(dir, 'candidates-new.hrcpsng'));
-    expect(RunDir(dir).candidates(SubmissionKind.correction), p.join(dir, 'candidates-correction.hrcpsng'));
-    expect(RunDir(dir).reviewed(SubmissionKind.newSong), p.join(dir, 'reviewed-new.hrcpsng'));
-    expect(RunDir(dir).finalSongs(SubmissionKind.correction), p.join(dir, 'final-correction.hrcpsng'));
-    expect(RunDir(dir).decisions, p.join(dir, 'decisions.json'));
-    expect(RunDir(dir).plan, p.join(dir, 'plan.json'));
-    expect(RunDir(dir).report, p.join(dir, 'report.txt'));
-    expect(RunDir(dir).people, p.join(dir, 'people.dart'));
+    final run = RunDir.current(root: 'x');
+    final dir = run.path;
+    expect(dir, p.join('x', 'out', 'run'), reason: 'przebieg jest jeden naraz — zawsze ten sam katalog');
+    expect(run.candidates(SubmissionKind.newSong), p.join(dir, 'candidates-new.hrcpsng'));
+    expect(run.candidates(SubmissionKind.correction), p.join(dir, 'candidates-correction.hrcpsng'));
+    expect(run.reviewed(SubmissionKind.newSong), p.join(dir, 'reviewed-new.hrcpsng'));
+    expect(run.finalSongs(SubmissionKind.correction), p.join(dir, 'final-correction.hrcpsng'));
+    expect(run.plan, p.join(dir, 'plan.json'));
+    expect(run.report, p.join(dir, 'report.txt'));
+    expect(run.people, p.join(dir, 'people.dart'));
+    expect(run.summary, p.join(dir, 'summary.md'));
+  });
+
+  test('archiwum: katalog przebiegu obok out/, drugi raz z sufiksem', () {
+    final root = tempDir().path;
+    expect(archivePath('import-1', root: root), p.join(root, 'archive', 'import-1'));
+    Directory(p.join(root, 'archive', 'import-1')).createSync(recursive: true);
+    expect(archivePath('import-1', root: root), p.join(root, 'archive', 'import-1~2'));
   });
 }

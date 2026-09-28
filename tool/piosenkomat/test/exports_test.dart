@@ -8,6 +8,7 @@ import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/plan.dart';
 import 'package:test/test.dart';
 
+import 'fake_mailbox.dart';
 import 'helpers.dart';
 
 /// Katalog tuż po `scan`: kandydaci obu rodzajów i puste miejsca na eksport.
@@ -21,6 +22,24 @@ String _scannedRun() {
   return dir;
 }
 
+/// To samo jako przebieg w `root/out/run/`, już w Gmailu (po `scan --push`).
+String _openRun() {
+  final root = tempDir().path;
+  final run = RunDir.current(root: root);
+  for (final kind in SubmissionKind.values) {
+    writeHrcpsng(run.candidates(kind), [sampleSong(id: 'o!_${kind.id}')], withPiosenkomatData: true);
+    run.writeReviewedPlaceholder(kind);
+  }
+  writePlan(run.plan, RunPlan(
+    id: 'test',
+    createdAt: DateTime(2026),
+    labelsByMessage: const {},
+    songByThread: const {},
+    messagesByThread: const {},
+  ).pushed(DateTime(2026)));
+  return root;
+}
+
 void main() {
   test('po scan żaden eksport nie jest gotowy', () {
     final dir = _scannedRun();
@@ -29,14 +48,17 @@ void main() {
     ]);
   });
 
-  test('przejrzane same nowe: label reviewed i prepare stają na poprawkach', () async {
-    final dir = _scannedRun();
-    writeHrcpsng(RunDir(dir).reviewed(SubmissionKind.newSong), [sampleSong(id: 'o!_new')],
+  test('przejrzane same nowe: review i finalize stają na poprawkach', () async {
+    final root = _openRun();
+    final run = RunDir.current(root: root);
+    writeHrcpsng(run.reviewed(SubmissionKind.newSong), [sampleSong(id: 'o!_new')],
         withPiosenkomatData: true);
 
-    expect(RunDir(dir).missingExports, [RunDir(dir).reviewed(SubmissionKind.correction)]);
-    expect(await runPiosenkomat(['label', 'reviewed', dir]), 1);
-    expect(await runPiosenkomat(['prepare', dir]), 1);
+    expect(run.missingExports, [run.reviewed(SubmissionKind.correction)]);
+    Future<int> cli(List<String> args) =>
+        runPiosenkomat(args, root: root, connect: (_) async => FakeMailbox());
+    expect(await cli(['review']), 1);
+    expect(await cli(['finalize']), 1);
   });
 
   test('skasowany plik zwrotny to też brak eksportu', () {
@@ -65,13 +87,14 @@ void main() {
 
   group('runda w Gmailu', () {
     final plan = RunPlan(
+      id: 'test',
       createdAt: DateTime(2026),
       labelsByMessage: const {'a': [], 'b': []},
       songByThread: const {},
       messagesByThread: const {},
     );
 
-    test('bez label scanned nie ma jej w Gmailu', () {
+    test('bez scan --push nie ma jej w Gmailu', () {
       expect(isRunInGmail(plan, {}), isFalse);
       // Obce etykiety innych mejli się nie liczą.
       expect(isRunInGmail(plan, {'x': {SongLabel.auto.label, SongLabel.readyToAdd.label}}), isFalse);
@@ -81,27 +104,20 @@ void main() {
       expect(isRunInGmail(plan, {'b': {SongLabel.auto.label, SongLabel.added.label}}), isTrue);
     });
 
-    test('etykieta postawiona ręcznie, bez song/auto, to nie label scanned', () {
+    test('etykieta postawiona ręcznie, bez song/auto, to nie scan --push', () {
       expect(isRunInGmail(plan, {'a': {SongLabel.readyToAdd.label}}), isFalse);
     });
   });
 
-  group('robota do stracenia przy clean', () {
+  group('robota z przeglądu (unlabel jej nie skasuje bez --force)', () {
     test('sam wynik scan to żadna robota', () {
-      final dir = _scannedRun();
-      writeText(RunDir(dir).plan, '{}');
-      writeText(RunDir(dir).report, 'raport');
-      writeText('$dir/.DS_Store', 'x');
-      expect(RunDir(dir).localReviewWork, isEmpty);
+      expect(RunDir(_scannedRun()).hasReviewWork, isFalse);
     });
 
-    test('eksport, ślad decyzji i final-* są robotą', () {
+    test('zapisany eksport to robota — także „odrzucam wszystko”', () {
       final dir = _scannedRun();
-      writeHrcpsng(RunDir(dir).reviewed(SubmissionKind.newSong), [sampleSong()]);
-      writeText(RunDir(dir).decisions, '{}');
-      writeHrcpsng(RunDir(dir).finalSongs(SubmissionKind.newSong), [sampleSong()]);
-      expect(RunDir(dir).localReviewWork,
-          ['decisions.json', 'final-new.hrcpsng', 'reviewed-new.hrcpsng']);
+      writeHrcpsng(RunDir(dir).reviewed(SubmissionKind.newSong), const []);
+      expect(RunDir(dir).hasReviewWork, isTrue);
     });
   });
 }

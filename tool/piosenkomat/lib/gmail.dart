@@ -224,16 +224,8 @@ class GmailMailbox implements Mailbox {
     }
   }
 
-  /// Odpowiedź w wątku [message]: ten sam `threadId`, `In-Reply-To`
-  /// i `References`, żeby u autora wpadła pod jego zgłoszenie, a nie jako
-  /// osobny mejl znikąd.
-  @override
-  Future<void> replyTo(ReplyTarget target, String text) async {
-    await _call(() => _api.users.messages.send(_replyMessage(target, text), 'me'),
-        cost: _costSend, idempotent: false);
-  }
-
-  /// To samo, co [replyTo], ale zostaje szkicem w wątku — do przejrzenia
+  /// Odpowiedź w wątku [target] jako szkic: ten sam `threadId`, `In-Reply-To`
+  /// i `References`, żeby u autora wpadła pod jego zgłoszenie. Do przejrzenia
   /// i poprawienia w Gmailu, zanim pójdzie w świat. Zwraca id szkicu.
   @override
   Future<String> draftReplyTo(ReplyTarget target, String text) async {
@@ -264,7 +256,7 @@ class GmailMailbox implements Mailbox {
   }
 
   /// Podmienia treść istniejącego szkicu — mejl przelicza się od nowa, gdy
-  /// dochodzi kolejna sprawa (np. dopisałeś uwagę do piosenki autora, który
+  /// dochodzi kolejna sprawa (np. uwaga z przeglądu do piosenki autora, który
   /// i tak miał dostać blok o starej apce).
   @override
   Future<void> updateDraft(String draftId, ReplyTarget target, String text) async {
@@ -274,8 +266,8 @@ class GmailMailbox implements Mailbox {
         cost: _costDraftUpdate);
   }
 
-  /// Treść szkicu jako czysty tekst — po to, żeby nie nadpisać tego, co
-  /// poprawiłeś ręcznie w Gmailu. `null`, gdy nie da się jej odczytać.
+  /// Treść szkicu jako czysty tekst — po to, żeby nie nadpisać Twoich
+  /// ręcznych poprawek z Gmaila. `null`, gdy nie da się jej odczytać.
   @override
   Future<String?> draftBody(String draftId) async {
     final draft = await _call(
@@ -290,15 +282,15 @@ class GmailMailbox implements Mailbox {
     return text.trim().isEmpty ? null : text;
   }
 
-  /// Kasuje szkic. Po pomyłkowym `--draft`: nic nie poszło w świat, więc
-  /// wystarczy sprzątnąć szkic.
+  /// Kasuje szkic — nic nie poszło w świat, więc to wystarczy. Narzędzie
+  /// kasuje tylko szkice bez Twojego tekstu.
   @override
   Future<void> deleteDraft(String draftId) async {
     await _call(() => _api.users.drafts.delete('me', draftId),
         cost: _costDraftWrite, idempotent: false);
   }
 
-  /// Wysyła gotowy szkic — z Twoimi poprawkami, jeśli jakieś zrobiłeś.
+  /// Wysyła gotowy szkic — z Twoimi poprawkami z Gmaila, jeśli są.
   @override
   Future<void> sendDraft(String draftId) async {
     await _call(() => _api.users.drafts.send(Draft()..id = draftId, 'me'),
@@ -349,39 +341,6 @@ class GmailMailbox implements Mailbox {
       rfcMessageId: headers['message-id'],
       references: headers['references'],
     );
-  }
-
-  /// Nagłówki bez treści — do wypisania listy, gdy treść jest niepotrzebna.
-  @override
-  Future<({String subject, String from})> headersOf(String messageId) async {
-    final msg = await _call(
-        () => _api.users.messages.get('me', messageId,
-            format: 'metadata', metadataHeaders: ['From', 'Subject']),
-        cost: _costGet);
-    final headers = _headersOf(msg.payload);
-    return (subject: headers['subject'] ?? '', from: headers['from'] ?? '');
-  }
-
-  /// Wątki, w których choć jedna wiadomość ma etykietę `song/*`. Kolejka jest
-  /// po wątkach — odpowiedź w takim wątku nie jest nowym zgłoszeniem — a query
-  /// działa na wiadomościach, więc liczymy to z list: kilka zapytań po 5
-  /// jednostek zamiast `threads.get` (40) na każdy wątek kolejki.
-  ///
-  /// Nazwy prosto ze skrzynki, nie z [kAllSongLabels] — etykieta dorobiona
-  /// ręcznie poza taksonomią też się liczy.
-  @override
-  Future<Set<String>> threadsWithSongLabels() async {
-    final names = _idByName.keys.where(isSongLabel).toList();
-    final out = <String>{};
-    // Po kilkanaście etykiet na zapytanie: `{a b}` to w Gmailu „a albo b”.
-    for (var i = 0; i < names.length; i += 15) {
-      final chunk = names.sublist(i, min(i + 15, names.length));
-      final query = '{${chunk.map((n) => 'label:${labelQueryName(n)}').join(' ')}}';
-      for (final id in await listIds(query)) {
-        if (_threadById[id] case final t?) out.add(t);
-      }
-    }
-    return out;
   }
 
   /// Nasze wysłane wiadomości po wątkach, bez szkiców (`in:sent` ich nie

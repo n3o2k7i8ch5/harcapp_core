@@ -110,7 +110,7 @@ String defaultSongsDbPath() {
 ///
 /// Ślad to nie tylko pole `piosenkomat`: `contributor_data.email_thread_id`
 /// też jest nasz. Wiąże piosenkę ze zgłoszeniem przez cały przebieg (zapasowy
-/// klucz dopasowania w `label reviewed`, który idzie przed `prepare`), ale
+/// klucz dopasowania w `review`, czytany przed zdjęciem śladu), ale
 /// w `all_songs` byłby tylko wyciekiem id wątku ze skrzynki.
 List<({String id, String title, bool guessed})> stripPiosenkomat(
     List<SongRaw> songs) {

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:piosenkomat/mailbox.dart';
 import 'package:piosenkomat/model.dart';
 
@@ -8,22 +10,29 @@ class FakeMail {
   final String from;
   final String subject;
   final String body;
+  /// Cały mejl (`.eml`) — gdy test potrzebuje prawdziwego zgłoszenia
+  /// z załącznikiem. Wtedy temat i nadawca są z niego.
+  final String? raw;
   /// Nasza wysłana (`SENT`).
   final bool sent;
   final Set<String> labels;
 
   FakeMail(this.id, this.threadId,
-      {this.from = 'Jan <jan@example.com>',
-      this.subject = 'Nowa piosenka',
+      {String from = 'Jan <jan@example.com>',
+      String subject = 'Nowa piosenka',
       this.body = '',
+      this.raw,
       this.sent = false,
       Set<String>? labels})
-      : labels = labels ?? {};
+      : labels = labels ?? {},
+        from = raw == null ? from : ContribMessage.fromEml(raw, id: id).from ?? from,
+        subject = raw == null ? subject : ContribMessage.fromEml(raw, id: id).subject ?? subject;
 }
 
 /// Skrzynka w pamięci — tyle Gmaila, ile potrzebują komendy. Query rozumie
-/// tylko to, co one wysyłają: `label:…` (kilka to „albo”), `from:…`,
-/// `in:sent to:…`.
+/// tylko to, co one wysyłają: `label:…` (kilka to „albo”), `-label:…`,
+/// `-subject:"…"`, `from:…`, `in:sent to:…`. Resztę kolejki (tematy, znaczniki)
+/// uznaje za spełnioną — w skrzynce na niby są same zgłoszenia.
 class FakeMailbox implements Mailbox {
   final List<FakeMail> mails = [];
   final Map<String, ({String threadId, String body})> drafts = {};
@@ -45,7 +54,13 @@ class FakeMailbox implements Mailbox {
   @override
   Future<List<String>> listIds(String query, {int? limit, bool newest = false}) async {
     final labels = [
-      for (final m in RegExp(r'label:(\S+?)(?=\)|\s|$)').allMatches(query)) m[1]!,
+      for (final m in RegExp(r'(?<!-)label:(\S+?)(?=\)|\s|$)').allMatches(query)) m[1]!,
+    ];
+    final withoutLabels = {
+      for (final m in RegExp(r'-label:(\S+)').allMatches(query)) m[1]!,
+    };
+    final withoutSubjects = [
+      for (final m in RegExp(r'-subject:"([^"]+)"').allMatches(query)) m[1]!,
     ];
     final from = RegExp(r'from:(\S+)').firstMatch(query)?[1];
     final sentTo = RegExp(r'in:sent to:(\S+)').firstMatch(query)?[1];
@@ -54,6 +69,8 @@ class FakeMailbox implements Mailbox {
         if (sentTo != null
             ? m.sent && _addressOf(m.from) == sentTo
             : (labels.isEmpty || labels.any((l) => m.labels.map(labelQueryName).contains(l))) &&
+                !m.labels.map(labelQueryName).any(withoutLabels.contains) &&
+                !withoutSubjects.any(m.subject.contains) &&
                 (from == null || _addressOf(m.from) == from))
           m.id,
     ];
@@ -69,12 +86,10 @@ class FakeMailbox implements Mailbox {
       [
         for (final id in ids)
           if (_mail(id) case final m)
-            ContribMessage(id: m.id, threadId: m.threadId, body: m.body, subject: m.subject, from: m.from, labels: m.labels),
+            m.raw == null
+                ? ContribMessage(id: m.id, threadId: m.threadId, body: m.body, subject: m.subject, from: m.from, labels: m.labels)
+                : ContribMessage.fromEmlBytes(utf8.encode(m.raw!), id: m.id, threadId: m.threadId, labels: m.labels),
       ];
-
-  @override
-  Future<Set<String>> threadsWithSongLabels() async =>
-      {for (final m in mails) if (m.labels.any(isSongLabel)) m.threadId};
 
   @override
   Future<Map<String, List<String>>> sentIdsByThread() async {
@@ -105,10 +120,6 @@ class FakeMailbox implements Mailbox {
   }
 
   @override
-  Future<({String subject, String from})> headersOf(String messageId) async =>
-      (subject: _mail(messageId).subject, from: _mail(messageId).from);
-
-  @override
   Future<ReplyTarget> replyTarget(String messageId) async {
     final m = _mail(messageId);
     return ReplyTarget(messageId: m.id, threadId: m.threadId, to: m.from, subject: m.subject);
@@ -129,9 +140,6 @@ class FakeMailbox implements Mailbox {
     sentTexts.add((threadId: threadId, text: text));
     add(FakeMail('sent${_next++}', threadId, from: '$kInboxEmail', body: text, sent: true));
   }
-
-  @override
-  Future<void> replyTo(ReplyTarget target, String text) async => _send(target.threadId, text);
 
   @override
   Future<String> draftReplyTo(ReplyTarget target, String text) async {

@@ -243,3 +243,28 @@ String mimeEmail({
     file: file,
   );
 }
+
+/// Treść mejla z najstarszej apki: JSON piosenki między znacznikami
+/// „nie edytuj”, bez sekcji `### Kod piosenki:`.
+String oldAppBody({
+  String title = 'Testowa stara piosenka',
+  String lyrics = 'Zwrotka pierwsza tej piosenki\nDruga linia zwrotki',
+  String yt = 'dQw4w9WgXcQ',
+}) {
+  final json = jsonEncode({
+    'title': title,
+    'hid_titles': [],
+    'text_authors': ['Autor Testowy'],
+    'composers': [],
+    'performers': ['Zespol Testowy'],
+    'release_date': null,
+    'yt_link': 'https://youtu.be/$yt',
+    'add_pers': 'Jan Testowy',
+    'tags': [],
+    'parts': [
+      {'text': lyrics, 'chords': 'a d\ne a', 'shift': false},
+    ],
+  });
+  return 'Dzięki za chęć dzielenia się swoimi piosenkami!\n\n'
+      '!!! NIE EDYTUJ PONIŻSZEGO TEKSTU !!!\n$json\n!!! NIE EDYTUJ POWYŻSZEGO TEKSTU !!!\n';
+}

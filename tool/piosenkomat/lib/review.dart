@@ -1,11 +1,7 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 
-import 'hrcpsng.dart';
 import 'model.dart';
 import 'plan.dart';
 import 'similarity.dart';
@@ -25,7 +21,7 @@ enum MatchedBy {
 /// to, z czym porównujemy plik zwrotny.
 class ReviewCandidate {
   final String threadId;
-  /// Wpis z planu przebiegu — id, tytuł i nadawca w jednym miejscu.
+  /// Wpis z planu przebiegu — id i tytuł.
   final PlannedSong planned;
   /// Odcisk do porównań awaryjnych. `null`, gdy piosenki nie ma w pliku
   /// (plan i plik się rozjechały).
@@ -39,7 +35,6 @@ class ReviewCandidate {
 
   String get songId => planned.songId;
   String get title => planned.title;
-  String get sender => planned.sender;
 }
 
 /// Piosenka, która wróciła z przeglądu.
@@ -54,8 +49,13 @@ class Matched {
 /// Werdykt przeglądu. Piosenka wchodzi, gdy wróciła w pliku **i** nie ma
 /// zgaszonego przełącznika; nie wróciła albo zgaszony → odpada. Plus to, co
 /// każe się zatrzymać: z kandydatów można wywalać i edytować, nie dodawać.
+///
+/// To jedyne źródło prawdy o przeglądzie: z niego `review` przestawia etykiety
+/// i składa `final-*`, a `finalize` sprawdza, że jedno i drugie jest aktualne.
 class ReviewResult {
   final SubmissionKind kind;
+  /// Piosenki, które wchodzą — każda, także kilka z jednego zgłoszenia
+  /// (nowa rozbita na stronie na dwie).
   final List<Matched> accepted;
   /// Nie wróciła w pliku zwrotnym — skasowana przy przeglądzie.
   final List<ReviewCandidate> removed;
@@ -72,6 +72,11 @@ class ReviewResult {
   final List<SongRaw> wrongKind;
   /// Dwie zachowane poprawki tej samej piosenki w apce. STOP.
   final Map<String, List<String>> duplicateTargets;
+  /// Kilka piosenek z jednego zgłoszenia, które się wykluczają: różne
+  /// przełączniki, różne odpowiedzi do autora albo dwie zachowane kopie jednej
+  /// poprawki. Wątek dostaje jedną etykietę, więc nie ma poprawnej
+  /// interpretacji. Id wątku → co się gryzie. STOP.
+  final Map<String, String> conflicts;
 
   const ReviewResult({
     required this.kind,
@@ -80,18 +85,26 @@ class ReviewResult {
     required this.foreign,
     required this.wrongKind,
     required this.duplicateTargets,
+    this.conflicts = const {},
     this.turnedDown = const [],
     this.reviewNotes = const {},
   });
 
   bool get mustStop =>
-      foreign.isNotEmpty || wrongKind.isNotEmpty || duplicateTargets.isNotEmpty;
+      foreign.isNotEmpty ||
+      wrongKind.isNotEmpty ||
+      duplicateTargets.isNotEmpty ||
+      conflicts.isNotEmpty;
 
-  List<String> get acceptedThreads => [for (final m in accepted) m.candidate.threadId];
+  /// Wątki przyjęte — każdy raz, choćby wróciły z niego dwie piosenki.
+  List<String> get acceptedThreads => {for (final m in accepted) m.candidate.threadId}.toList();
+
+  /// Piosenki, które idą do `final-*`.
+  List<SongRaw> get acceptedSongs => [for (final m in accepted) m.reviewed];
   /// Wszystko, co odpadło: skasowane i zgaszone przełącznikiem — dla etykiet
   /// to jedno i to samo.
   List<ReviewCandidate> get rejected =>
-      [...removed, for (final m in turnedDown) m.candidate];
+      {...removed, for (final m in turnedDown) m.candidate}.toList();
   List<String> get rejectedThreads => [for (final c in rejected) c.threadId];
 }
 
@@ -126,7 +139,7 @@ ReviewResult reviewDiff({
   required List<ReviewCandidate> candidates,
   required List<SongRaw> reviewed,
 }) {
-  final matched = <ReviewCandidate, Matched>{};
+  final matched = <ReviewCandidate, List<Matched>>{};
   final foreign = <SongRaw>[];
   final wrongKind = <SongRaw>[];
 
@@ -141,27 +154,44 @@ ReviewResult reviewDiff({
       foreign.add(song);
       continue;
     }
-    // Kilka zatwierdzonych na jedno zgłoszenie (np. rozbite na stronie):
-    // pierwsze dopasowanie wystarczy, żeby zgłoszenie uznać za przyjęte.
-    matched.putIfAbsent(hit.candidate, () => hit);
+    matched.putIfAbsent(hit.candidate, () => []).add(hit);
   }
 
   // Przełącznik z edytora. Brak flagi znaczy „wchodzi”, więc skasowanie
   // z pliku dalej działa jak odrzut.
+  bool goesInOf(Matched m) => m.reviewed.piosenkomatData?.goesIn ?? true;
+  String? noteOf(Matched m) => switch (m.reviewed.piosenkomatData?.reviewNote?.trim()) {
+        final note? when note.isNotEmpty => note,
+        _ => null,
+      };
+
   final goesIn = <Matched>[];
   final turnedDown = <Matched>[];
-  for (final m in matched.values) {
-    (m.reviewed.piosenkomatData?.goesIn ?? true ? goesIn : turnedDown).add(m);
+  final reviewNotes = <String, String>{};
+  final conflicts = <String, String>{};
+  for (final MapEntry(key: candidate, value: hits) in matched.entries) {
+    final thread = candidate.threadId;
+    // Kilka piosenek z jednego zgłoszenia: nowa rozbita na stronie na dwie
+    // wchodzi cała, ale sprzeczności nie rozstrzygamy za Ciebie.
+    final verdicts = {for (final m in hits) goesInOf(m)};
+    final notes = {for (final m in hits) if (noteOf(m) case final note?) note};
+    if (verdicts.length > 1) {
+      conflicts[thread] = '„${candidate.title}”: kopie z różnym przełącznikiem';
+      continue;
+    }
+    if (notes.length > 1) {
+      conflicts[thread] = '„${candidate.title}”: kopie z różną odpowiedzią do autora';
+      continue;
+    }
+    if (kind == SubmissionKind.correction && verdicts.single && hits.length > 1) {
+      conflicts[thread] = '„${candidate.title}”: ${hits.length} zachowane kopie jednej poprawki';
+      continue;
+    }
+    (verdicts.single ? goesIn : turnedDown).addAll(hits);
+    // Odpowiedź do autora niezależnie od werdyktu — i odrzucona, i przyjęta
+    // może coś nieść.
+    if (notes.singleOrNull case final note?) reviewNotes[thread] = note;
   }
-
-  // Odpowiedzi do autorów — z każdej piosenki, która wróciła, niezależnie
-  // od werdyktu.
-  final reviewNotes = <String, String>{
-    for (final m in matched.values)
-      if (m.reviewed.piosenkomatData?.reviewNote?.trim() case final note?
-          when note.isNotEmpty)
-        m.candidate.threadId: note,
-  };
 
   // Jedna poprawka na piosenkę: dwie zachowane z tym samym celem nie mają
   // poprawnej interpretacji. Liczą się tylko te, które faktycznie wchodzą.
@@ -185,6 +215,7 @@ ReviewResult reviewDiff({
       for (final e in byTarget.entries)
         if (e.value.length > 1) e.key: e.value,
     },
+    conflicts: conflicts,
   );
 }
 
@@ -249,97 +280,60 @@ String? reviewSafetyError(
   final rejectedCount = result.rejected.length;
   if (rejectedCount * 2 > candidateCount) {
     return 'Odrzucone to ponad połowa ($rejectedCount/$candidateCount) — '
-        'sprawdź, czy podmieniłeś właściwy plik i czy nie zgasiłeś przełącznika '
+        'sprawdź, czy podmieniony jest właściwy plik i czy przełącznik nie zgasł '
         'hurtem. Jeśli tak ma być: --force.';
   }
   return null;
 }
 
-/// Co po przeglądzie dochodzi i co schodzi z każdej wiadomości wątku.
-Map<String, LabelChange> reviewLabelChanges(
+/// Co po przeglądzie dochodzi i co schodzi z każdej wiadomości wątku —
+/// liczone od tego, co mejle mają **teraz** ([current]), nie od stanu po
+/// `scan`. Dzięki temu `review` można odpalać ile razy trzeba: zmiana zdania
+/// („nie” → „tak” i odwrotnie) przestawia etykietę, a to, co już się zgadza,
+/// zostaje nietknięte.
+///
+/// Tekst do autora idzie raz na przegląd. Wątek z [SongLabel.waitingForAuthor]
+/// ma odpowiedź już wysłaną, więc `reply/review-note` nie wraca — takie wątki
+/// lądują w `alreadyReplied`, żeby powiedzieć o nich wprost. Stan bierzemy
+/// z Gmaila, nie z katalogu przebiegu.
+({Map<String, LabelChange> changes, List<String> alreadyReplied}) reviewLabelChanges(
   List<ReviewResult> results,
   RunPlan plan,
+  Map<String, Set<String>> current,
 ) {
-  final out = <String, LabelChange>{};
+  final changes = <String, LabelChange>{};
+  final alreadyReplied = <String>[];
   for (final r in results) {
-    for (final threadId in r.rejectedThreads) {
+    final verdicts = {
+      for (final thread in r.acceptedThreads) thread: true,
+      for (final c in r.rejected) c.threadId: false,
+    };
+    for (final MapEntry(key: thread, value: accepted) in verdicts.entries) {
+      final ids = plan.messagesOf(thread);
+      final threadLabels = {for (final id in ids) ...?current[id]};
+      final hasNote = r.reviewNotes.containsKey(thread);
+      final replied = threadLabels.contains(SongLabel.waitingForAuthor.label);
+      if (hasNote && replied) alreadyReplied.add(thread);
       // Odrzucona z wyjaśnieniem to nie koniec sprawy, tylko pytanie do
       // autora: bez „rejected”, bo piosenka może jeszcze wrócić z chwytami.
-      final add = r.reviewNotes.containsKey(threadId)
-          ? SongLabel.replyReviewNote.label
-          : SongLabel.rejectedAfterReview.label;
-      for (final id in plan.messagesOf(threadId)) {
-        out[id] = ([add], [SongLabel.readyToAdd.label, ...kNeedsReviewLabels]);
-      }
-    }
-    for (final threadId in r.acceptedThreads) {
-      final hasReviewNote = r.reviewNotes.containsKey(threadId);
-      for (final id in plan.messagesOf(threadId)) {
-        // Bez zarzutu już miały „w pliku” — ruszamy tylko te po przeglądzie
-        // albo takie, którym dopisałeś odpowiedź.
-        if (!hasReviewNote &&
-            !(plan.labelsByMessage[id] ?? const []).contains(SongLabel.needsReview.label)) {
-          continue;
-        }
-        out[id] = (
-          [SongLabel.readyToAdd.label, if (hasReviewNote) SongLabel.replyReviewNote.label],
-          kNeedsReviewLabels,
-        );
+      final want = {
+        if (accepted) SongLabel.readyToAdd.label,
+        if (!accepted && !hasNote) SongLabel.rejectedAfterReview.label,
+        if (hasNote && !replied) SongLabel.replyReviewNote.label,
+      };
+      final drop = {
+        SongLabel.readyToAdd.label,
+        SongLabel.rejectedAfterReview.label,
+        SongLabel.replyReviewNote.label,
+        ...kNeedsReviewLabels,
+      }..removeAll(want);
+      for (final id in ids) {
+        final has = current[id] ?? const <String>{};
+        final add = [for (final l in want) if (!has.contains(l)) l];
+        final remove = [for (final l in drop) if (has.contains(l)) l];
+        if (add.isNotEmpty || remove.isNotEmpty) changes[id] = (add, remove);
       }
     }
   }
-  return out;
-}
-
-const _kReviewNote = PiosenkomatData.PARAM_REVIEW_NOTE;
-
-/// Odpowiedzi do autorów ze śladu przeglądu: id wątku → tekst. Stąd, a nie
-/// z plików `.hrcpsng`, bo `reply` woła się długo po `prepare`, a ono
-/// zdejmuje pole `piosenkomat` razem z odpowiedzią.
-Map<String, String> readReviewNotes(String decisionsPath) {
-  if (!File(decisionsPath).existsSync()) return const {};
-  final raw = jsonDecode(File(decisionsPath).readAsStringSync());
-  if (raw is! Map) return const {};
-  return {
-    for (final entry in (raw['songs'] as List? ?? const []))
-      if (entry is Map)
-        if ((entry['thread_id'] as String?, (entry[_kReviewNote] as String?)?.trim())
-            case (final threadId?, final note?) when note.isNotEmpty)
-          threadId: note,
-  };
-}
-
-/// Ślad przeglądu w katalogu przebiegu: co weszło, co wypadło, po czym
-/// rozpoznane. Jeden plik na oba rodzaje.
-void writeDecisions(String path, List<ReviewResult> results) {
-  Map<String, dynamic> entry(
-    ReviewResult r,
-    ReviewCandidate c,
-    String decision, {
-    Matched? matched,
-  }) =>
-      {
-        'kind': r.kind.id,
-        'song_id': c.songId,
-        'title': matched?.reviewed.title ?? c.title,
-        'thread_id': c.threadId,
-        'sender': c.sender,
-        'decision': decision,
-        if (matched != null) 'matched_by': matched.matchedBy.text,
-        if (matched?.reviewed.piosenkomatData?.correctionTarget case final t?)
-          'correction_target': t,
-        if (r.reviewNotes[c.threadId] case final note?) _kReviewNote: note,
-      };
-
-  writeText(path, const JsonEncoder.withIndent('  ').convert({
-    'created_at': DateTime.now().toIso8601String(),
-    'songs': [
-      for (final r in results) ...[
-        for (final m in r.accepted) entry(r, m.candidate, 'accepted', matched: m),
-        // Wróciła w pliku, ale z przełącznikiem „nie wchodzi”.
-        for (final m in r.turnedDown) entry(r, m.candidate, 'turned-down', matched: m),
-        for (final c in r.removed) entry(r, c, 'rejected-after-review'),
-      ],
-    ],
-  }));
+  return (changes: changes, alreadyReplied: alreadyReplied);
 }

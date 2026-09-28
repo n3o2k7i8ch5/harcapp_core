@@ -113,7 +113,7 @@ void main() {
       ]);
       // Na naszym wysłanym mejlu etykiet nie wieszamy.
       expect(c.submission.messages.map((m) => m.id), ['m1', 'm3']);
-      expect(RunPlan.fromClassified(out).labelsByMessage.keys, unorderedEquals(['m1', 'm3']));
+      expect(RunPlan.fromClassified(out, id: 'test').labelsByMessage.keys, unorderedEquals(['m1', 'm3']));
     });
 
     test('nasza odpowiedź pisana ręcznie w Gmailu: bez cytatu, reszta cała', () {
@@ -126,6 +126,21 @@ void main() {
             from: 'Harc App <$kInboxEmail>', at: DateTime.utc(2026, 6, 2)),
       ], book: SongBook.empty);
       expect(sub.conversation.where((m) => m.isOurs).single.text, 'Hej, dorzuć proszę chwyty.');
+    });
+
+    test('odpowiedź autora z Gmaila po polsku: bez „napisał(a):” w dopisku', () {
+      final sub = buildSubmission([
+        ContribMessage(
+          id: 'm1', threadId: 't', body: 'Zgłoszenie', from: _author,
+          date: DateTime.utc(2026, 6, 1),
+        ),
+        reply('m2', 'Chwyty: a d e\n\n'
+            'W dniu pt., 12 wrz 2026 o 10:15 HarcApp <$kInboxEmail> napisał(a):\n'
+            '> Dorzuć chwyty.',
+            from: _author, at: DateTime.utc(2026, 6, 2)),
+      ], book: SongBook.empty);
+      expect(sub.conversation.map((m) => m.text), contains('Chwyty: a d e'));
+      expect(sub.userMessage, isNot(contains('napisał')));
     });
 
     test('ślad w piosence niesie rozmowę, nie zlepek', () async {

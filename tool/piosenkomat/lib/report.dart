@@ -2,6 +2,8 @@ import 'package:harcapp_core/song_book/piosenkomat/file_names.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 
 import 'model.dart';
+import 'plan.dart';
+import 'review.dart';
 
 /// Ile razy wystąpił każdy klucz.
 Map<String, int> tally(Iterable<String> keys) {
@@ -25,6 +27,9 @@ void countLines(StringSink out, Map<String, int> counts, {bool byCount = false})
 }
 
 String _day(DateTime d) => d.toLocal().toIso8601String().substring(0, 10);
+
+/// `2026-09-28 10:15`, czas lokalny.
+String formatMinute(DateTime d) => d.toLocal().toIso8601String().substring(0, 16).replaceFirst('T', ' ');
 
 /// Raport przebiegu (konsola i `report.txt`): liczby, uwagi i ich wiązki,
 /// potem lista zgłoszeń z tym, gdzie trafiły i co im automat zarzuca.
@@ -122,5 +127,58 @@ String formatRunReport(List<Classified> items) {
       buf.writeln('         poprawka: ${m.split('\n').first}');
     }
   }
+  return buf.toString();
+}
+
+/// Ślad domkniętego przebiegu (`summary.md` w archiwum): co weszło, co
+/// odpadło przy przeglądzie i jakie odpowiedzi jeszcze czekały. Decyzje
+/// automatu (odrzuty, uwagi, kształty mejli) są obok, w `report.txt`.
+/// [results] sprzed zdjęcia śladu piosenkomatu — cel poprawki siedzi w nim.
+String formatRunSummary({
+  required RunPlan plan,
+  required List<ReviewResult> results,
+  required List<String> repliesWaiting,
+  required DateTime finalizedAt,
+}) {
+  String who(String thread) => '${plan.senderByThread[thread] ?? ''} [$thread]';
+  String accepted(Matched m) {
+    final song = '„${m.reviewed.title}” — ${who(m.candidate.threadId)}';
+    final data = m.reviewed.piosenkomatData;
+    if (data == null || !data.isCorrection) return '- `${m.reviewed.id}` $song';
+    return switch (data.correctionTarget) {
+      final target? => '- `$target` ← $song${data.correctionTargetGuessed ? ' (cel zgadnięty)' : ''}',
+      null => '- $song — bez celu w apce',
+    };
+  }
+
+  final buf = StringBuffer()
+    ..writeln('# Przebieg ${plan.id}')
+    ..writeln()
+    ..writeln('Zeskanowany ${formatMinute(plan.createdAt)}, domknięty ${formatMinute(finalizedAt)}.')
+    ..writeln('Decyzje automatu (odrzuty, uwagi, kształty mejli): `report.txt`.');
+  void section(String title, List<String> lines) {
+    buf
+      ..writeln()
+      ..writeln('## $title (${lines.length})');
+    if (lines.isEmpty) buf.writeln('—');
+    for (final l in lines) {
+      buf.writeln(l);
+    }
+  }
+
+  List<String> acceptedOf(SubmissionKind kind) => [
+        for (final r in results)
+          if (r.kind == kind)
+            for (final m in r.accepted) accepted(m),
+      ];
+  section('Nowe', acceptedOf(SubmissionKind.newSong));
+  section('Poprawki', acceptedOf(SubmissionKind.correction));
+  section('Odrzucone przy przeglądzie', [
+    for (final r in results)
+      for (final c in r.rejected)
+        '- „${c.title}” — ${who(c.threadId)}'
+            '${r.reviewNotes.containsKey(c.threadId) ? ' (z odpowiedzią do autora)' : ''}',
+  ]);
+  section('Odpowiedzi czekały w szkicach', [for (final t in repliesWaiting) '- ${who(t)}']);
   return buf.toString();
 }

@@ -74,8 +74,8 @@ void main() {
       expect(kQueueQuery, contains('-label:${labelQueryName(etykieta)}'));
     }
 
-    expect(isReadyByTool({SongLabel.readyToAdd.label, SongLabel.auto.label}), isTrue);
-    expect(isReadyByTool({SongLabel.readyToAdd.label}), isFalse);
+    expect(hasToolLabel({SongLabel.readyToAdd.label, SongLabel.auto.label}, SongLabel.readyToAdd), isTrue);
+    expect(hasToolLabel({SongLabel.readyToAdd.label}, SongLabel.readyToAdd), isFalse);
   });
 
   test('przeczytane tylko przy werdykcie domykającym', () {

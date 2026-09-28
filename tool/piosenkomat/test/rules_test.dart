@@ -1,8 +1,10 @@
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+import 'package:piosenkomat/cli.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/plan.dart';
+import 'package:piosenkomat/reply.dart';
 import 'package:piosenkomat/review.dart';
 import 'package:test/test.dart';
 
@@ -47,36 +49,30 @@ void main() {
     });
   });
 
-  group('pendingLabelsOf (clean)', () {
-    test('czeka: werdykt w pliku, przegląd, kolejka odpowiedzi', () {
-      expect(pendingLabelsOf({SongLabel.auto.label, SongLabel.readyToAdd.label}), {SongLabel.readyToAdd.label});
-      expect(pendingLabelsOf({SongLabel.needsReview.label, SongLabel.missingData.label}),
-          {SongLabel.needsReview.label, SongLabel.missingData.label});
-      expect(pendingLabelsOf({SongLabel.replyOldApp.label, SongLabel.replyReviewNote.label}),
-          {SongLabel.replyOldApp.label, SongLabel.replyReviewNote.label});
-    });
-    test('nie czeka: odrzuty, dodane, znaczniki, czekanie na autora', () {
+  group('openVerdicts: co trzyma przebieg otwarty', () {
+    test('werdykt automatu czeka na review albo finalize', () {
       expect(
-          pendingLabelsOf({
-            SongLabel.added.label,
-            SongLabel.rejectedUnparsable.label,
-            SongLabel.haveALook.label,
-            SongLabel.correction.label,
-            SongLabel.waitingForAuthor.label,
-            SongLabel.auto.label,
+          openVerdicts({
+            'ready': {SongLabel.auto.label, SongLabel.readyToAdd.label},
+            'review': {SongLabel.auto.label, SongLabel.needsReview.label, SongLabel.missingData.label},
+          }),
+          ['ready', 'review']);
+    });
+    test('nie trzyma: ręczne „ready-to-add”, odrzuty, dodane, odpowiedzi, czekanie na autora', () {
+      expect(
+          openVerdicts({
+            'reczne': {SongLabel.readyToAdd.label},
+            'odrzut': {SongLabel.auto.label, SongLabel.rejectedAfterReview.label},
+            'dodana': {SongLabel.auto.label, SongLabel.added.label},
+            'odpowiedz': {SongLabel.auto.label, SongLabel.replyOldApp.label, SongLabel.replyReviewNote.label},
+            'czeka': {SongLabel.auto.label, SongLabel.waitingForAuthor.label},
+            'recznie': {SongLabel.auto.label, SongLabel.multipleSongs.label, SongLabel.haveALook.label},
           }),
           isEmpty);
     });
   });
 
   group('unlabelChanges', () {
-    RunPlan planOf(List<String> ids) => RunPlan(
-          createdAt: DateTime(2026),
-          labelsByMessage: {for (final id in ids) id: const []},
-          songByThread: const {},
-          messagesByThread: const {},
-        );
-
     test('zdejmuje tylko etykiety narzędzia i tylko ze śladem automatu', () {
       final r = unlabelChanges({
         'auto': {SongLabel.auto.label, SongLabel.readyToAdd.label, 'song/rejected/silly'},
@@ -94,13 +90,13 @@ void main() {
       expect(r.added, 1);
       expect(unlabelChanges(labels, force: true).toRemove.keys, ['added']);
     });
-    test('z planem: tylko mejle przebiegu', () {
+    test('z zakresem: tylko mejle przebiegu', () {
       final r = unlabelChanges({
         'w': {SongLabel.auto.label, SongLabel.needsReview.label},
         'poza': {SongLabel.auto.label, SongLabel.needsReview.label},
-      }, plan: planOf(['w']));
+      }, scope: {'w'});
       expect(r.toRemove.keys, ['w']);
-      expect(r.outsidePlan, 1);
+      expect(r.outsideScope, 1);
     });
   });
 
@@ -111,7 +107,7 @@ void main() {
           removed: [
             for (var i = 0; i < removed; i++)
               ReviewCandidate(
-                  threadId: 't$i', planned: PlannedSong(songId: 's$i', title: 'x', sender: '')),
+                  threadId: 't$i', planned: PlannedSong(songId: 's$i', title: 'x')),
           ],
           foreign: const [],
           wrongKind: const [],
@@ -136,21 +132,35 @@ void main() {
     });
   });
 
-  group('draftActionFor', () {
-    final text = composeContribReply(oldApp: true)!;
+  group('draftStep: narzędzie rusza tylko szkic bez ludzkiego tekstu', () {
+    final block = composeContribReply(oldApp: true)!;
+    final note = composeContribReply(reviewNote: 'Brakuje chwytów.')!;
+    final noteWithBlock = composeContribReply(reviewNote: 'Brakuje chwytów.', oldApp: true)!;
 
-    test('ta sama treść → bez zmian', () {
-      expect(draftActionFor(text, text), DraftAction.unchanged);
-      expect(draftActionFor('  $text\n', text), DraftAction.unchanged);
+    test('bez szkicu: zakłada, gdy jest co napisać', () {
+      expect(draftStep(exists: false, want: note), DraftStep.create);
+      expect(draftStep(exists: false), DraftStep.none);
     });
-    test('nasz kształt, inna treść → przeliczamy', () {
-      final older = composeContribReply(reviewNote: 'Stara uwaga.')!;
-      expect(isToolShapedReply(older), isTrue);
-      expect(draftActionFor(older, text), DraftAction.rewrite);
+    test('taki, jaki ma być — także przełamany przez Gmaila', () {
+      expect(draftStep(exists: true, body: note, want: note), DraftStep.keep);
+      expect(draftStep(exists: true, body: noteWithBlock.replaceAll('. ', '.\n'), want: noteWithBlock),
+          DraftStep.keep);
     });
-    test('ruszony ręcznie albo nieczytelny → zostawiamy', () {
-      expect(draftActionFor('Cześć, piszę sam.', text), DraftAction.leaveManual);
-      expect(draftActionFor(null, text), DraftAction.leaveManual);
+    test('sama ramka i blok: wolno przeliczyć albo skasować', () {
+      expect(draftStep(exists: true, body: block, want: noteWithBlock), DraftStep.rewrite);
+      expect(draftStep(exists: true, body: block), DraftStep.delete);
+    });
+    test('ten sam tekst, inna ramka (doszedł blok): przeliczenie nic Twojego nie zmienia', () {
+      expect(draftStep(exists: true, body: note, want: noteWithBlock), DraftStep.rewrite);
+    });
+    test('szkic z innym tekstem jest Twój — zostaje, narzędzie mówi o różnicy', () {
+      final edited = composeContribReply(reviewNote: 'Brakuje chwytów w refrenie.')!;
+      expect(draftStep(exists: true, body: edited, want: note), DraftStep.differs);
+      expect(draftStep(exists: true, body: edited), DraftStep.differs);
+    });
+    test('pisany ręcznie albo nieczytelny — nietknięty', () {
+      expect(draftStep(exists: true, body: 'Cześć, piszę sam.', want: note), DraftStep.manual);
+      expect(draftStep(exists: true, want: note), DraftStep.manual);
     });
   });
 }

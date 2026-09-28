@@ -142,7 +142,7 @@ void main() {
       expect(got.submission.correctionTargetGuessed, isTrue);
       expect(issuesOf(got), contains(SongIssue.guessedCorrectionTarget),
           reason: 'domysł nigdy nie udaje danych ze zgłoszenia');
-      // Ślad w piosence też musi to nieść — po nim pozna edytor i `prepare`.
+      // Ślad w piosence też musi to nieść — po nim pozna edytor i `review`.
       final data = PiosenkomatData.fromJsonMap(
           got.piosenkomatData().toJsonMap());
       expect(data.correctionTarget, 'tmp');
@@ -224,7 +224,7 @@ void main() {
       );
       expect(issuesOf(got), contains(SongIssue.noTargetInApp));
       expect(got.destination, Destination.candidate);
-      // Nieistniejące id to brak celu: `prepare` nie może kazać podmieniać
+      // Nieistniejące id to brak celu: `review` nie może kazać podmieniać
       // piosenki, której nie ma, i to bez ostrzeżenia.
       expect(got.submission.correctionTarget, isNull);
       expect(got.submission.correctionTargetGuessed, isFalse);

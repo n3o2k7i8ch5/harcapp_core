@@ -1,10 +1,7 @@
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
-import 'package:piosenkomat/run_dir.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/hrcpsng.dart';
 import 'package:piosenkomat/model.dart';
@@ -29,7 +26,7 @@ Future<(RunPlan, List<SongRaw>)> _run() async {
   for (final c in items) {
     c.song!.piosenkomatData = c.piosenkomatData(run: 'test');
   }
-  return (RunPlan.fromClassified(items), songs);
+  return (RunPlan.fromClassified(items, id: 'test'), songs);
 }
 
 /// Stan po `scan` widziany oczami `label reviewed`: co automat zaproponował
@@ -151,7 +148,7 @@ void main() {
     expect(items.map((c) => c.destination), everyElement(Destination.candidate));
     final songs = [for (final c in items) c.song!..piosenkomatData = c.piosenkomatData()];
     assignUniqueIds(songs);
-    final plan = RunPlan.fromClassified(items);
+    final plan = RunPlan.fromClassified(items, id: 'test');
     final proposed = collectCandidates(plan, roundTrip(songs), _corr);
     final result = reviewDiff(kind: _corr, candidates: proposed, reviewed: roundTrip(songs));
     expect(result.duplicateTargets.keys, ['tmp']);
@@ -168,24 +165,10 @@ void main() {
       msgFrom(await completeEmail(song: sampleSong(title: 'Nowa', lyrics: 'Ala ma kota')), id: 'n'),
       msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'Popr', lyrics: 'Wlazl kotek')), id: 'c'),
     ], book: SongBook.empty);
-    final plan = RunPlan.fromClassified(items);
+    final plan = RunPlan.fromClassified(items, id: 'test');
     final songs = [for (final c in items) c.song!];
     expect(collectCandidates(plan, songs, _new).map((p) => p.threadId), ['n']);
     expect(collectCandidates(plan, songs, _corr).map((p) => p.threadId), ['c']);
-  });
-
-  test('ślad przeglądu zapisuje decyzje z rodzajem', () async {
-    final (proposed, songs) = await _scanned();
-    final result = reviewDiff(kind: _new, candidates: proposed, reviewed: roundTrip([songs.first]));
-    final path = RunDir(tempDir().path).decisions;
-    writeDecisions(path, [result]);
-
-    final written = jsonDecode(File(path).readAsStringSync()) as Map<String, dynamic>;
-    final rejected = (written['songs'] as List)
-        .cast<Map<String, dynamic>>()
-        .where((d) => d['decision'] == 'rejected-after-review');
-    expect(rejected.single['thread_id'], 'm2');
-    expect(rejected.single['kind'], 'new');
   });
 }
 
@@ -234,14 +217,6 @@ void _verdictTests() {
     });
     expect(r.accepted.single.reviewed.title, 'Pierwsza',
         reason: 'uwaga nie wyrzuca ze śpiewnika — od tego jest przełącznik');
-
-    // Ślad przeglądu niesie i werdykt, i odpowiedź: stąd bierze je `reply`.
-    final path = '${tempDir().path}/decisions.json';
-    writeDecisions(path, [r]);
-    expect(readReviewNotes(path), {
-      'm1': 'Dodałem, popraw literówkę.',
-      'm2': 'Brakuje chwytów.',
-    });
   });
 
   test('odpowiedź przeżywa zapis i odczyt pliku', () async {

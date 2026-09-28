@@ -1,7 +1,6 @@
 import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email_old_app.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
-import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/reply.dart';
 import 'package:test/test.dart';
 
@@ -83,77 +82,55 @@ void main() {
     expect(replyNoteOf(' Cześć, piszę sam. '), 'Cześć, piszę sam.');
   });
 
-  test('co wypada przy przeliczeniu — do pokazania, nie do zgubienia', () {
-    final przed = composeContribReply(reviewNote: 'Brakuje chwytów.')!;
-    final po = composeContribReply(reviewNote: 'Brakuje YouTube.')!;
-    expect(paragraphsDroppedBy(przed, po), ['Brakuje chwytów.']);
-    expect(paragraphsDroppedBy(przed, przed), isEmpty);
+  test('blok o starej apce rozpoznany także w szkicu przełamanym przez Gmaila', () {
+    final withBlock = composeContribReply(reviewNote: 'Super:)', oldApp: true)!;
+    expect(carriesOldAppBlock(withBlock), isTrue);
+    expect(carriesOldAppBlock(withBlock.replaceAll('. ', '.\n')), isTrue);
+    expect(carriesOldAppBlock(composeContribReply(reviewNote: 'Super:)')!), isFalse);
+    expect(replyNoteOf(withBlock.replaceAll('. ', '.\n')), 'Super:)',
+        reason: 'przełamany blok to dalej ramka, nie Twój tekst');
   });
 
-  group('planAuthorReplies — mejl na piosenkę, w jej wątku', () {
-    AuthorReplies plan(
-      List<(String, String)> messages, {
-      Map<String, String> notes = const {},
-      Set<String> oldApp = const {},
-    }) =>
-        planAuthorReplies(
-          'autor@example.com',
-          [for (final (id, thread) in messages) (id: id, threadId: thread)],
-          reviewNotes: notes,
-          oldAppIds: oldApp,
-        );
+  group('wantedReplies — mejl na piosenkę, w jej wątku, blok raz na autora', () {
+    ReplyThread thread(String id, {String? note, bool oldApp = false}) =>
+        (threadId: id, sender: 'autor@example.com', messageIds: ['${id}1'], oldApp: oldApp, note: note);
 
     test('dwie piosenki z uwagami → dwa mejle, każdy w swoim wątku', () {
-      final p = plan([('a1', 'A'), ('b1', 'B')],
-          notes: {'A': 'Brakuje chwytów.', 'B': 'Podziel na zwrotki.'});
-      expect(p.replies.map((r) => r.threadId), ['A', 'B']);
-      expect(p.replies.map((r) => r.reviewNote), ['Brakuje chwytów.', 'Podziel na zwrotki.']);
-      expect(p.replies.first.text, isNot(contains('Podziel na zwrotki.')));
-      expect(p.nothingToSay, isEmpty);
+      final w = wantedReplies([thread('A', note: 'Brakuje chwytów.'), thread('B', note: 'Podziel na zwrotki.')]);
+      expect(w.keys, ['A', 'B']);
+      expect(w['A'], contains('Brakuje chwytów.'));
+      expect(w['A'], isNot(contains('Podziel na zwrotki.')));
     });
 
-    test('kilka wiadomości w wątku → jeden mejl, odpowiedź na najnowszą', () {
-      final p = plan([('a1', 'A'), ('a2', 'A')], notes: {'A': 'Super:)'});
-      expect(p.replies.single.messageIds, ['a1', 'a2']);
-      expect(p.replies.single.targetMessageId, 'a2');
-    });
-
-    test('stara apka: blok w odpowiedzi, a wątki bez uwagi schodzą razem z nią', () {
-      final p = plan([('a1', 'A'), ('b1', 'B'), ('c1', 'C')],
-          notes: {'B': 'Super:)'}, oldApp: {'a1', 'b1', 'c1'});
-      final r = p.replies.single;
-      expect(r.threadId, 'B');
-      expect(r.oldApp, isTrue);
-      expect(r.text, contains(kOldAppReplyBlock));
-      expect(r.alsoClearsOldApp, ['a1', 'c1']);
+    test('stara apka: blok w odpowiedzi, bez osobnego mejla z samym blokiem', () {
+      final w = wantedReplies(
+          [thread('A', oldApp: true), thread('B', note: 'Super:)', oldApp: true), thread('C', oldApp: true)]);
+      expect(w.keys, ['B']);
+      expect(carriesOldAppBlock(w['B']!), isTrue);
     });
 
     test('stara apka bez żadnej uwagi → jeden mejl z samym blokiem, w najnowszym wątku', () {
-      final p = plan([('a1', 'A'), ('b1', 'B')], oldApp: {'a1', 'b1'});
-      final r = p.replies.single;
-      expect(r.threadId, 'B');
-      expect(r.reviewNote, isNull);
-      expect(r.alsoClearsOldApp, ['a1']);
-      // Sam blok nie odpowiada na `reply/review-note` — ta etykieta zostaje.
-      expect(r.labels.$1, isEmpty);
-      expect(r.labels.$2, [SongLabel.replyOldApp.label]);
+      final w = wantedReplies([thread('A', oldApp: true), thread('B', oldApp: true)]);
+      expect(w.keys, ['B']);
+      expect(replyNoteOf(w['B']!), isEmpty);
     });
 
     test('uwaga do piosenki z nowej apki nie niesie bloku — dostaje go osobny mejl', () {
-      final p = plan([('a1', 'A'), ('b1', 'B')], notes: {'B': 'Super:)'}, oldApp: {'a1'});
-      expect(p.replies.map((r) => (r.threadId, r.reviewNote, r.oldApp)),
-          [('B', 'Super:)', false), ('A', null, true)]);
+      final w = wantedReplies([thread('A', oldApp: true), thread('B', note: 'Super:)')]);
+      expect(w.keys, unorderedEquals(['A', 'B']));
+      expect(carriesOldAppBlock(w['B']!), isFalse);
+      expect(carriesOldAppBlock(w['A']!), isTrue);
     });
 
-    test('kolejka bez tekstu i bez starej apki → etykieta zostaje', () {
-      final p = plan([('a1', 'A')]);
-      expect(p.replies, isEmpty);
-      expect(p.nothingToSay, ['a1']);
+    test('autor czeka na blok w wątku z innego przebiegu → tu bloku nie ma', () {
+      final w = wantedReplies([thread('A', oldApp: true), thread('B', note: 'Super:)', oldApp: true)],
+          blockElsewhere: true);
+      expect(w.keys, ['B']);
+      expect(carriesOldAppBlock(w['B']!), isFalse);
     });
 
-    test('po odpowiedzi z uwagą wątek czeka na autora', () {
-      final r = plan([('a1', 'A')], notes: {'A': 'Super:)'}).replies.single;
-      expect(r.labels.$1, [SongLabel.waitingForAuthor.label]);
+    test('bez tekstu i bez starej apki nie ma czego pisać', () {
+      expect(wantedReplies([thread('A')]), isEmpty);
     });
   });
 }

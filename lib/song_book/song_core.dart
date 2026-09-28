@@ -91,7 +91,7 @@ abstract class SongCore{
   /// `lclId` piosenki, z której ta powstała przez edycję. Pamięć o pierwowzorze
   /// w piosence własnej: edytor startuje od kopii bez id, więc bez tego pola
   /// link do źródła ginie w pierwszym kroku. Do bazy piosenek nie trafia —
-  /// zdejmuje je `prepare` przed wgraniem.
+  /// zdejmuje je `review --push` piosenkomatu, składając `final-*`.
   static const String PARAM_BASED_ON_SONG_ID = 'based_on_song_id';
   static const String PARAM_REFREN = 'refren';
   static const String PARAM_PARTS = 'parts';

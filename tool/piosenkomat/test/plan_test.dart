@@ -26,7 +26,7 @@ void main() {
       msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'Trzecia', lyrics: 'Zupelnie inna')),
           id: 'corr'),
     ], book: SongBook.empty);
-    final plan = RunPlan.fromClassified(items);
+    final plan = RunPlan.fromClassified(items, id: 'test');
     // „dzięki” w odpowiedzi to dopisek autora — stąd `user-message`.
     final okLabels = [SongLabel.needsReview.label, SongLabel.userMessage.label, SongLabel.auto.label];
     expect(plan.labelsByMessage['ok'], okLabels);

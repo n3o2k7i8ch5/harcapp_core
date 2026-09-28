@@ -17,6 +17,14 @@ const String kSubmissionStructuralBar = '- - - - - - Informacje strukturalne - -
 const String kSubmissionUserMessagePlaceholder =
     '[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]';
 
+/// [kSubmissionUserMessagePlaceholder] tak, jak może przyjść w mejlu: klient
+/// z krótszym limitem linii łamie go w pół (ma 76 znaków), a cytat dokłada
+/// `>` na początku każdej linii. Dosłowne szukanie zostawiało wtedy złamany
+/// placeholder jako „dopisek autora”.
+final RegExp submissionUserMessagePlaceholderRe = RegExp(
+  kSubmissionUserMessagePlaceholder.split(' ').map(RegExp.escape).join(r'[\s>]+'),
+);
+
 /// Wspólne dla ekranu wysyłki w apce, treści zgłoszenia i odpowiedzi do autora.
 const String kSubmissionOneSongPerMailNote =
     'Każdą kolejną piosenkę wyślij osobnym mejlem, nie odpowiedzią na ten.';
@@ -48,7 +56,7 @@ String? extractSubmissionUserMessage(String body){
       .split('\n')
       .map((l) => l.replaceFirst(quotePrefixRe, ''))
       .join('\n')
-      .replaceAll(kSubmissionUserMessagePlaceholder, '')
+      .replaceAll(submissionUserMessagePlaceholderRe, '')
       .trim();
   return raw.isEmpty? null: raw;
 }

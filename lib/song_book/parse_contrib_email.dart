@@ -547,7 +547,7 @@ String? stripSubmissionTemplate(String body){
   String text = starts.isEmpty? body: body.substring(0, starts.reduce(min));
   text = text
       .replaceAll(_userMessageBarRe, '')
-      .replaceAll(kSubmissionUserMessagePlaceholder, '')
+      .replaceAll(submissionUserMessagePlaceholderRe, '')
       .trim();
   return text.isEmpty? null: text;
 }
@@ -556,7 +556,7 @@ String? _extractUserMessage(String content){
   Match? m = _userMessageRe.firstMatch(content);
   if(m == null) return null;
   String raw = m.group(1) ?? '';
-  raw = raw.replaceAll(kSubmissionUserMessagePlaceholder, '');
+  raw = raw.replaceAll(submissionUserMessagePlaceholderRe, '');
   String trimmed = raw.trim();
   if(trimmed.isEmpty) return null;
   return trimmed;
