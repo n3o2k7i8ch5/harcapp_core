@@ -248,8 +248,9 @@ song/
 │   ├── duplicate-in-batch    kolizja z innym zgłoszeniem z tej samej paczki
 │   ├── undeclared-correction ta sama piosenka co w apce, inne chwyty albo drobiazgi —
 │   │                         ktoś poprawił i wysłał jako nową
-│   ├── correction-problem    poprawka, ale w apce nie ma czego poprawiać albo cel
-│   │                         zgadnięty (`no-target-in-app`, `guessed-correction-target`)
+│   ├── correction-problem    poprawka, ale w apce nie ma czego poprawiać, cel zgadnięty
+│   │                         albo treść znacząco różna od celu (`no-target-in-app`,
+│   │                         `guessed-correction-target`, `differs-from-target`)
 │   ├── missing-data          brak YouTube, chwytów lub tytułu
 │   ├── no-consent            brak zgody albo nie wiadomo, kto zgłosił
 │   ├── several-contributors  kilka kart osób dodających — wkład przypisz ręcznie
@@ -310,6 +311,9 @@ lista dowodów:
   i sklejone wersy tego nie ruszają, dopisane i ucięte zwrotki widać po asymetrii;
   wokalizy „laj la” ważą zero);
 - `SameText` — dosłownie równy po zbiciu białych znaków;
+- `LayoutDiff` — ten sam tekst albo te same chwyty, ale inaczej ułożone: wersy
+  łamane inaczej, inny podział na zwrotki, inne wcięcia (refren), akordy przy
+  innych wersach (spacje na końcu wersu i ich ciągi w środku się nie liczą);
 - `SameChords` (`a` ≠ `A`) i `ChordsMatch` — pary akordów niezależne od tonacji
   i kolejności zwrotek, z transpozycją;
 - `MeterMatch` (sylaby w wersach), `SameRecording` (ten sam film YouTube);
@@ -323,15 +327,23 @@ ta sama treść pod innym tytułem to ta sama piosenka. Pokrycie to udział wers
 
 | poziom | reguła | `new` → | `correction` → |
 |---|---|---|---|
-| `identical` | `SameText ∧ SameChords ∧ ¬MetadataDiff` — **każde pole równe** | `rejected/already-in-app`; z dopiskiem + `have-a-look` | to samo, a „dopiskiem” jest też propozycja poprawki |
+| `identical` | `SameText ∧ SameChords ∧ ¬LayoutDiff ∧ ¬MetadataDiff` — **każde pole równe, także układ** | `rejected/already-in-app`; z dopiskiem + `have-a-look` | to samo, a „dopiskiem” jest też propozycja poprawki |
 | `sameSong` | wersy w obie strony ≥ 90% (albo `SameText`) | chwyty te same z dokładnością do kolejności → `metadata-differ-from-app`, inaczej `chords-differ-from-app` | kandydat bez uwagi |
 | `longer` | wersy ≥ 90% tylko w jedną stronę: zgłoszenie ma dopisane zwrotki | uwaga `more-verses-than-app` (→ `undeclared-correction`) | kandydat |
-| `shorter` | to samo w drugą stronę: fragment piosenki z apki | uwaga `fewer-verses-than-app` | kandydat |
-| `variant` | ≥ 50% wersów w którąś stronę | uwaga `variant-of-app` | kandydat |
-| `related` | wspólne wersy w obie strony (≥ 10%, co najmniej dwa), wersy „w połowie te same”, te same chwyty albo metrum przy częściowo podobnym tekście, ten sam film | uwaga `similar-text-in-app` | kandydat; cel zgadnięty tylko z tym samym tytułem |
-| `sameTitleDifferentText` | ten sam tytuł, treść niepodobna | uwaga `same-title-in-app` | kandydat |
-| `sameIdDifferentSong` | to samo id, a poza tym nic — id zajęte przez inną piosenkę | kandydat bez uwagi (edytor pokazuje dowód `SameId`) | kandydat |
-| brak | — | czysty kandydat | uwaga `no-target-in-app` |
+| `shorter` | to samo w drugą stronę: fragment piosenki z apki | uwaga `fewer-verses-than-app` | uwaga `differs-from-target` — podmiana skasowałaby brakujące zwrotki |
+| `variant` | ≥ 50% wersów w którąś stronę | uwaga `variant-of-app` | uwaga `differs-from-target` |
+| `related` | wspólne wersy w obie strony (≥ 10%, co najmniej dwa), wersy „w połowie te same”, te same chwyty albo metrum przy częściowo podobnym tekście, ten sam film | uwaga `similar-text-in-app` | uwaga `differs-from-target`; cel zgadnięty tylko z tym samym tytułem |
+| `sameTitleDifferentText` | ten sam tytuł, treść niepodobna | uwaga `same-title-in-app` | z celem z apki `differs-from-target`, bez — `no-target-in-app` |
+| `sameIdDifferentSong` | to samo id, a poza tym nic — id zajęte przez inną piosenkę | kandydat bez uwagi (edytor pokazuje dowód `SameId`) | z celem z apki `differs-from-target`, bez — `no-target-in-app` |
+| brak | — | czysty kandydat | z celem z apki `differs-from-target`, bez — `no-target-in-app` |
+
+**Poprawka znacząco różna od celu dostaje ostrzeżenie.** Cel wskazany przez apkę
+zostaje — to dane ze zgłoszenia — ale gdy treść nie jest już tą samą piosenką
+(od `shorter` w dół: fragment, wariant, przeróbka, wspólny tylko tytuł albo id,
+nic), poprawka dostaje pomarańczową pastylkę `differs-from-target` z tym, jak
+bardzo odbiega („„Płonie ognisko” w apce: treść niepodobna …”). Bez niej trafiłaby
+do pliku jako „bez zarzutu”, a po wklejeniu `final-*` zastąpiłaby pod starym id
+inną piosenkę. Drobne zmiany i dopisane zwrotki to zwykła poprawka — bez uwag.
 
 Uwaga mówi o najsilniejszym trafieniu i wymienia do dwóch kolejnych („też …”) —
 dwie podobne piosenki w apce to często dwie wersje tej samej. Cel poprawki bez deklaracji zgadujemy od `variant` w górę (co najmniej połowa
@@ -372,6 +384,7 @@ z innego przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs`.
 | `same-target-in-batch` | decision | — | ✓ (dwie poprawki tej samej piosenki) |
 | `no-target-in-app` | decision | — | ✓ (brak celu albo zadeklarowane id, którego w śpiewniku nie ma lub bez `@wykonawca` pasuje kilka) |
 | `guessed-correction-target` | decision | — | ✓ (cel dobrany po podobieństwie albo znaleziony dopiero bez `@wykonawca`) |
+| `differs-from-target` | decision | — | ✓ (cel jest, a treść to już nie ta sama piosenka: fragment, wariant, przeróbka albo coś zupełnie innego) |
 | `user-message` | decision | ✓ | ✓ (tylko `userMessage`; blok poprawki jest oczekiwany) |
 
 Uwaga, która ma podkategorię 1:1, nazywa się tak samo jak ona (`user-message`,

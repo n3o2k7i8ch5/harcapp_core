@@ -188,6 +188,25 @@ void main() {
       expect(got.isClean, isTrue);
     });
 
+    test('ten sam tekst inaczej ułożony to nie „już w apce”', () async {
+      // Słowa i akordy te same, inaczej złamane wersy — cała poprawka bywa
+      // samym układem (refren, podział zwrotek). Film ten sam, żeby różnił się
+      // wyłącznie układ.
+      const yt = 'abcdefghijk';
+      final book = bookWith([sampleSong(lyrics: _a, yt: yt)]);
+      final relaid = sampleSong(lyrics: _a.replaceFirst('\n', ' '), yt: yt);
+
+      final correction = classify(
+          msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: relaid)),
+          book: book);
+      expect(correction.destination, Destination.candidate);
+      expect(correction.submission.appMatch!.level, MatchLevel.sameSong);
+
+      final asNew = classify(msgFrom(await completeEmail(song: relaid)), book: book);
+      expect(asNew.destination, Destination.candidate);
+      expect(detailOf(asNew, SongIssue.metadataDifferFromApp), contains('inny układ tekstu'));
+    });
+
     test('poprawka: identyczna bez komentarza → odrzut; sameSong → kandydat bez uwag', () async {
       final book = bookWith([sampleSong(lyrics: _a)]);
       final same = classify(

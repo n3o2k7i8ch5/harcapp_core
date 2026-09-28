@@ -27,8 +27,9 @@ const double kMinLinesWeight = 40;
 /// [compare]): „„Barka” w apce: ta sama piosenka, dopisane zwrotki” znaczy,
 /// że sprawdzana ma zwrotki, których „Barka” w apce nie ma.
 enum MatchLevel {
-  /// Każde pole dosłownie równe — to jest ta sama piosenka. Tylko na tym
-  /// piosenkomat odrzuca sam.
+  /// Każde pole dosłownie równe, także układ (wersy, zwrotki, wcięcia,
+  /// chwyty przy wersach) — to jest ta sama piosenka. Tylko na tym piosenkomat
+  /// odrzuca sam.
   identical('ta sama piosenka, bez różnic'),
   /// Wersy pokrywają się w obie strony. Tytuł, chwyty, kolejność zwrotek,
   /// literówki czy metadane mogą się różnić — to mówią dowody.
@@ -123,7 +124,9 @@ List<Similarity> similaritiesToShow(List<Similarity> s) {
 
 MatchLevel? levelOf(List<Similarity> s) {
   final sameText = s.has<SameText>();
-  if (sameText && s.has<SameChords>() && !s.has<MetadataDiff>()) return MatchLevel.identical;
+  if (sameText && s.has<SameChords>() && !s.has<LayoutDiff>() && !s.has<MetadataDiff>()) {
+    return MatchLevel.identical;
+  }
 
   final lines = s.sharedLines;
   if (sameText) return MatchLevel.sameSong;

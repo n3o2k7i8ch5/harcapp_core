@@ -97,6 +97,28 @@ void main() {
       expect(level(song([_v1, null, _v2, null, _v3, null]), app), MatchLevel.identical);
     });
 
+    test('sam układ inny → sameSong z „inny układ”, nie identical', () {
+      final base = song([_v1, _v2]);
+      for (final (what, before, after, inText, inChords) in [
+        ('zrobiony refren (wcięcie)', song([_v1, _ref]), song([_v1, null], refChords: 'a d\ne a'), true, false),
+        ('wersy łamane inaczej', base, song([_v1.replaceAll('\n', ' '), _v2]), true, false),
+        ('podzielona zwrotka', song(['$_v1\n$_v2'], chords: 'a d\ne a\na d\ne a'), base, true, true),
+        ('akordy przy innych wersach', base, song([_v1, _v2], chords: 'a d e\na'), false, true),
+      ]) {
+        final s = cmp(after, before);
+        expect(s.has<SameText>() && s.has<SameChords>(), isTrue, reason: '$what: słowa i akordy te same');
+        final layout = s.whereType<LayoutDiff>().single;
+        expect((layout.inText, layout.inChords), (inText, inChords), reason: what);
+        expect(levelOf(s), MatchLevel.sameSong, reason: what);
+      }
+    });
+
+    test('spacje na końcu wersu i ciągi spacji to nie układ → identical', () {
+      final messy = song(['Płonie ognisko i  szumią knieje  \nDrużynowy jest wśród nas ', _v2]);
+      expect(cmp(messy, song([_v1, _v2])).has<LayoutDiff>(), isFalse);
+      expect(level(messy, song([_v1, _v2])), MatchLevel.identical);
+    });
+
     test('inne tylko metadane → sameSong', () {
       final s = song([_v1, null, _v2, null, _v3, null])..performers = ['Ktoś inny'];
       expect(level(s, app), MatchLevel.sameSong);

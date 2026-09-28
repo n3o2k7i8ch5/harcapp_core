@@ -308,6 +308,26 @@ void main() {
     expect(emailFromHeader('jan@example.com'), 'jan@example.com');
     expect(emailFromHeader('HarcApp'), isNull);
     expect(emailFromHeader(null), isNull);
+    expect(emailFromHeader('"jan@stary.pl" <Jan@Nowy.pl>'), 'jan@nowy.pl',
+        reason: 'adres jest w nawiasach ostrych, nazwa tylko go przypomina');
+  });
+
+  test('wątek z samymi naszymi wiadomościami nie wywraca przebiegu', () {
+    // Kopia naszej odpowiedzi w skrzynce, a zgłoszenie autora w archiwum.
+    // Wysłana do siebie przychodzi dwa razy: z kolejki i z wysłanych.
+    final ours = ContribMessage(
+      id: 'o1',
+      threadId: 't',
+      subject: 'Re: Nowa piosenka: Barka',
+      from: 'HarcApp <$kInboxEmail>',
+      body: 'Dorzuć chwyty.\n\n> ### Kod piosenki:\n> cokolwiek',
+      date: DateTime.utc(2026, 9, 1),
+    );
+    final c = classifyBatch([ours, ours], book: bookWith(const [])).single;
+    expect(c.destination, Destination.unparsable);
+    expect(c.labels, containsAll([SongLabel.rejectedUnparsable.label, SongLabel.haveALook.label]),
+        reason: 'wychodzi z kolejki, a Ty rzucasz okiem');
+    expect(c.submission.messages.map((m) => m.id), ['o1']);
   });
 }
 

@@ -36,6 +36,8 @@ class FakeMail {
 class FakeMailbox implements Mailbox {
   final List<FakeMail> mails = [];
   final Map<String, ({String threadId, String body})> drafts = {};
+  /// Adresat każdego szkicu (`To:`), po id szkicu.
+  final Map<String, String> draftTo = {};
   /// Treści wysłanych przez nas odpowiedzi, w kolejności.
   final List<({String threadId, String text})> sentTexts = [];
   var _next = 0;
@@ -120,9 +122,9 @@ class FakeMailbox implements Mailbox {
   }
 
   @override
-  Future<ReplyTarget> replyTarget(String messageId) async {
+  Future<ReplyTarget> replyTarget(String messageId, {required String to}) async {
     final m = _mail(messageId);
-    return ReplyTarget(messageId: m.id, threadId: m.threadId, to: m.from, subject: m.subject);
+    return ReplyTarget(messageId: m.id, threadId: m.threadId, to: to, subject: m.subject);
   }
 
   @override
@@ -145,6 +147,7 @@ class FakeMailbox implements Mailbox {
   Future<String> draftReplyTo(ReplyTarget target, String text) async {
     final id = 'draft${_next++}';
     drafts[id] = (threadId: target.threadId, body: text);
+    draftTo[id] = target.to;
     return id;
   }
 
@@ -153,8 +156,10 @@ class FakeMailbox implements Mailbox {
       {for (final e in drafts.entries) e.value.threadId: e.key};
 
   @override
-  Future<void> updateDraft(String draftId, ReplyTarget target, String text) async =>
-      drafts[draftId] = (threadId: target.threadId, body: text);
+  Future<void> updateDraft(String draftId, ReplyTarget target, String text) async {
+    drafts[draftId] = (threadId: target.threadId, body: text);
+    draftTo[draftId] = target.to;
+  }
 
   @override
   Future<String?> draftBody(String draftId) async => drafts[draftId]?.body;

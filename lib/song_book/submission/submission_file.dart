@@ -246,8 +246,18 @@ class SongSubmissionFile{
   String get fileName => kSubmissionFileName;
 
   /// Wczytuje plik albo rzuca [SubmissionFileError] z rozpoznanym powodem —
-  /// piosenkomat robi z każdego osobną etykietę.
+  /// piosenkomat robi z każdego osobną etykietę. Nic innego stąd nie leci:
+  /// pole złego typu (np. `origin` liczbą) to plik uszkodzony, choćby suma
+  /// się zgadzała, bo policzyła ją ta sama apka.
   static SongSubmissionFile decode(String raw){
+    try {
+      return _decode(raw);
+    } on TypeError catch(e){
+      _corrupted('Pole złego typu: $e');
+    }
+  }
+
+  static SongSubmissionFile _decode(String raw){
     Object? decoded;
     try {
       decoded = jsonDecode(raw);

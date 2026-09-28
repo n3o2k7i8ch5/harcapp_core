@@ -34,6 +34,7 @@ IconData similarityIcon(Similarity s) => switch (s) {
       ChordsMatch() => MdiIcons.musicNoteOutline,
       MeterMatch() => MdiIcons.metronome,
       SameRecording() => MdiIcons.playBoxOutline,
+      LayoutDiff() => MdiIcons.formatLineSpacing,
       MetadataDiff() => MdiIcons.notEqualVariant,
     };
 

@@ -110,6 +110,13 @@ void main() {
       expect(w.mailbox.sentTexts, isEmpty, reason: 'szkic to nie wysyłka');
     });
 
+    test('szkic idzie na sam adres autora — bez nazwy z nagłówka', () async {
+      // Nazwa z przecinkiem wpisana w `To:` wyglądałaby jak dwa adresy.
+      final w = _World()..submitOld('o', from: '"Kowalska, Kasia" <Kasia@Example.com>');
+      expect(await w.cli(['scan', '--push']), 0);
+      expect(w.mailbox.draftTo.values, ['kasia@example.com']);
+    });
+
     test('bez --push tylko raport: ani katalogu, ani etykiet', () async {
       final w = _World()..submit('a');
       expect(await w.cli(['scan']), 0);

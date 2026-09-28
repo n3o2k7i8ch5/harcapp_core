@@ -29,6 +29,7 @@ export 'src/evidence.dart'
         ChordsMatch,
         MeterMatch,
         SameRecording,
+        LayoutDiff,
         MetadataDiff,
         MetadataField,
         SimilarityList,

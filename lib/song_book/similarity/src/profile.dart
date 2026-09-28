@@ -141,6 +141,19 @@ class SongProfile {
   /// Chwyty po zbiciu białych znaków; wielkość liter zostaje (`a` ≠ `A`).
   late final String chords = squash(_rawChords);
 
+  /// Tekst z układem, jaki widać w apce: wersy, puste linie między zwrotkami,
+  /// wcięcia (refren). [text] go nie ma — a poprawka bywa samym układem.
+  late final String textLayout = _layout(_rawText);
+  /// Chwyty z podziałem na wersy — które akordy stoją przy którym wersie.
+  late final String chordsLayout = _layout(_rawChords);
+
+  /// Bez tego, czego nie widać: `\r`, spacji na końcu wersu, ciągów spacji
+  /// w środku i pustych linii na brzegach. Wcięcie na początku wersu zostaje.
+  static String _layout(String raw) => [
+        for (final line in raw.replaceAll('\r', '').split('\n'))
+          line.trimRight().replaceAllMapped(RegExp(r'(\S)\s+(?=\S)'), (m) => '${m[1]} '),
+      ].join('\n').replaceAll(RegExp(r'^\n+|\n+$'), '');
+
   /// Wersy bez powtórzeń — refren liczy się raz, gdziekolwiek stoi.
   late final List<ProfileLine> lines = [for (final l in {..._ordered}) ProfileLine(l)];
 

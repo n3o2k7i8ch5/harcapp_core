@@ -30,8 +30,10 @@ abstract interface class Mailbox {
   /// Ta sama zmiana etykiet na całej paczce mejli.
   Future<void> batchModify(List<String> messageIds, {List<String>? add, List<String>? remove});
 
-  /// Co trzeba wpisać w nagłówki odpowiedzi na [messageId].
-  Future<ReplyTarget> replyTarget(String messageId);
+  /// Co trzeba wpisać w nagłówki odpowiedzi na [messageId] do [to]. Adresata
+  /// podaje wołający — sam adres autora, bez nazwy z `From`: nazwa
+  /// z przecinkiem wyglądałaby w `To:` jak dwa adresy.
+  Future<ReplyTarget> replyTarget(String messageId, {required String to});
 
   /// Wątek jednym zapytaniem: wiadomości, kto miał ostatnie słowo, temat
   /// i nadawca pierwszej wiadomości.

@@ -183,6 +183,18 @@ enum MetadataField {
   final String label;
 }
 
+/// Ten sam tekst albo te same chwyty, ale inaczej ułożone: wersy łamane
+/// inaczej, inny podział na zwrotki, inne wcięcia (refren), akordy przy
+/// innych wersach. [SameText] i [SameChords] zbijają białe znaki, więc tego
+/// nie widzą — a poprawka bywa właśnie tym. Nieemitowany, gdy układ ten sam
+/// albo i tak różni się treść.
+class LayoutDiff extends Similarity {
+  final bool inText, inChords;
+  const LayoutDiff({required this.inText, required this.inChords});
+  @override
+  String get text => 'inny układ ${[if (inText) 'tekstu', if (inChords) 'chwytów'].join(' i ')}';
+}
+
 /// Które pola metadanych się różnią. Nieemitowany, gdy nic.
 class MetadataDiff extends Similarity {
   final List<MetadataField> fields;
@@ -212,6 +224,9 @@ List<Similarity> compare(SongProfile a, SongProfile b) {
     out.add(MeterMatch(meterSimilarity(a.meter, b.meter)));
   }
   if (a.youtubeId.isNotEmpty && a.youtubeId == b.youtubeId) out.add(const SameRecording());
+  final inText = a.text == b.text && a.textLayout != b.textLayout;
+  final inChords = a.chords == b.chords && a.chordsLayout != b.chordsLayout;
+  if (inText || inChords) out.add(LayoutDiff(inText: inText, inChords: inChords));
   final diff = [
     for (final e in a.metadata.entries)
       if (e.value != b.metadata[e.key]) e.key,

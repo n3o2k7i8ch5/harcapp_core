@@ -68,6 +68,11 @@ enum SongIssue{
   /// Zgłoszenie nie powiedziało, co poprawia — cel dobrany po tytule i tekście.
   /// Poprawka podmienia piosenkę po id, więc domysł trzeba obejrzeć.
   guessedCorrectionTarget('guessed-correction-target', 'cel poprawki zgadnięty, nie podany przez apkę', SongIssueSeverity.decision),
+  /// Poprawka, która nie jest już tą samą piosenką co poprawiana: fragment,
+  /// wariant, przeróbka albo coś zupełnie innego. Podmiana po id wstawiłaby
+  /// pod starym id inną treść — apka mogła wskazać nie tę piosenkę albo autor
+  /// wysłał formularzem poprawki zupełnie inną.
+  differsFromTarget('differs-from-target', 'poprawka znacząco różna od poprawianej piosenki — czy to na pewno jej poprawka?', SongIssueSeverity.decision),
 
   userMessage('user-message', 'użytkownik dopisał wiadomość', SongIssueSeverity.decision);
 

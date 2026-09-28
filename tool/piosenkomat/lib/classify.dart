@@ -16,12 +16,6 @@ import 'package:harcapp_core/values/people/utils.dart';
 import 'model.dart';
 import 'similarity.dart';
 
-final _emailRe = RegExp(r'[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}');
-
-/// Adres z nagłówka `From` (`Jan <jan@x.pl>` albo `jan@x.pl`).
-String? emailFromHeader(String? from) =>
-    from == null ? null : switch (_emailRe.firstMatch(from)?.group(0)) { final e? => normalizedEmail(e), null => null };
-
 /// Załącznik zgłoszenia: plik, powód odmowy, albo nic — gdy mejl go nie ma.
 class SubmissionFileRead {
   final SongSubmissionFile? file;
@@ -114,7 +108,10 @@ List<Classified> classifyBatch(
   String? run,
 }) {
   final byThread = <String, List<ContribMessage>>{};
+  final seen = <String>{};
   for (final m in messages) {
+    // Wysłana do siebie jest i w kolejce, i wśród naszych wysłanych.
+    if (!seen.add(m.id)) continue;
     byThread.putIfAbsent(m.threadId, () => []).add(m);
   }
   final submissions = [
@@ -145,6 +142,7 @@ Submission buildSubmission(
   final ordered = [...thread]..sort((a, b) => _dateOf(a).compareTo(_dateOf(b)));
   // Nasze odpowiedzi są tylko w rozmowie — zgłoszeniem jest to, co przysłał autor.
   final theirs = [for (final m in ordered) if (!_isOurReply(m)) m];
+  if (theirs.isEmpty) return _onlyOurs(ordered);
   final own = [
     for (final m in theirs.skip(1))
       if (m.hasOwnSongCode && _senderFromHeader(m) != null) m,
@@ -268,6 +266,34 @@ Submission buildSubmission(
         for (final s in songs) s.id,
     ],
   );
+}
+
+/// Wątek z samymi naszymi wiadomościami — np. kopia odpowiedzi do siebie, gdy
+/// zgłoszenie autora leży w archiwum. Zgłoszenia autora tu nie ma, a z cytatu
+/// nie zgadujemy: idzie jako „nie do odczytania” (z „rzuć okiem”), żeby
+/// wyszło z kolejki, zamiast wywracać cały przebieg.
+Submission _onlyOurs(List<ContribMessage> ordered) => Submission(
+      threadId: ordered.first.threadId,
+      message: ordered.first,
+      messages: ordered,
+      kind: SubmissionKind.newSong,
+      title: ordered.first.subject ?? ordered.first.id,
+      shape: EmailShape.unknown,
+      weReplied: true,
+      sentAt: ordered.first.date,
+    );
+
+/// Poprawka na tyle bliska celowi, że podmiana nikogo nie zaskoczy: ta sama
+/// piosenka z drobnymi zmianami albo z dopisanymi zwrotkami. Ucięte zwrotki
+/// już nie — podmiana by je skasowała.
+bool _closeToTarget(MatchLevel? level) => level == MatchLevel.sameSong || level == MatchLevel.longer;
+
+/// `„Płonie ognisko” w apce: treść niepodobna` — jak bardzo poprawka odbiega
+/// od celu i po czym to widać.
+String _targetDetail(AppMatch app) {
+  final evidence = similaritiesText(app.similarities);
+  return '„${app.song.title}” w apce: ${app.level?.text ?? 'treść niepodobna'}'
+      '${evidence.isEmpty ? '' : ' ($evidence)'}';
 }
 
 ParsedContribEmail? _tryParseEmailBody(ContribMessage m) {
@@ -468,7 +494,12 @@ Decision decide(Submission s, {BatchMatch? batch}) {
           // Id sprzed zmiany wykonawcy w apce — ta sama piosenka, ale domysł.
           : 'apka wskazała „$declared”, w śpiewniku jest „$target” — inny wykonawca');
     }
-    // `sameSong` i reszta to normalny kształt poprawki — bez uwag o apce.
+    // Cel jest, ale treść to już nie ta sama piosenka — podmiana po id
+    // wstawiłaby pod starym id coś innego. Drobne zmiany i dopisane zwrotki
+    // to normalny kształt poprawki, bez uwag o apce.
+    if (target != null && !_closeToTarget(app?.level)) {
+      add(SongIssue.differsFromTarget, _targetDetail(app!));
+    }
     if (batch != null) {
       // `batchMatch` bywa dopasowaniem po samym tekście (różne tytuły), a cele
       // obu poprawek mogą być różne — wtedy to nie „druga poprawka tej samej

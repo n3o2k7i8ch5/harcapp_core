@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/contrib_reply.dart';
 
-import 'classify.dart';
 import 'mailbox.dart';
 import 'model.dart';
 
@@ -116,11 +115,12 @@ Future<void> syncDrafts(Mailbox mailbox, List<ReplyThread> threads, {required bo
           break;
         case DraftStep.create:
           stdout.writeln('  + $where: ${_describe(want!)}');
-          if (push) await mailbox.draftReplyTo(await mailbox.replyTarget(t.messageIds.last), want);
+          if (push) await mailbox.draftReplyTo(await mailbox.replyTarget(t.messageIds.last, to: sender), want);
         case DraftStep.rewrite:
           stdout.writeln('  ~ $where: przeliczam szkic — ${_describe(want!)}');
           if (push) {
-            await mailbox.updateDraft(draftId!, await mailbox.replyTarget(t.messageIds.last), want);
+            await mailbox.updateDraft(
+                draftId!, await mailbox.replyTarget(t.messageIds.last, to: sender), want);
           }
         case DraftStep.delete:
           stdout.writeln('  - $where: szkic bez odpowiedzi w planie — kasuję');

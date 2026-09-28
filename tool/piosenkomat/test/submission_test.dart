@@ -107,6 +107,28 @@ void main() {
     );
   });
 
+  test('pole złego typu z poprawną sumą to plik uszkodzony, nie wywrotka', () {
+    Map<String, dynamic> fileWith(void Function(Map<String, dynamic> map) edit) {
+      final map = SongSubmissionFile(submissions: [
+        SongSubmission(kind: SubmissionKind.newSong, song: sampleSong()),
+      ]).toJsonMap();
+      edit(map);
+      return map..[SongSubmissionFile.PARAM_DIGEST] = submissionDigest(map);
+    }
+
+    for (final map in [
+      fileWith((m) => m[SongSubmissionFile.PARAM_ORIGIN] = 5),
+      fileWith((m) => (m[SongSubmissionFile.PARAM_SUBMISSIONS] as List).first
+          [SongSubmission.PARAM_SENDER_IS_CONTRIBUTOR] = 'tak'),
+    ]) {
+      expect(
+        () => SongSubmissionFile.decode(jsonEncode(map)),
+        throwsA(isA<SubmissionFileError>()
+            .having((e) => e.kind, 'kind', SubmissionFileErrorKind.corrupted)),
+      );
+    }
+  });
+
   test('plik bez zgłoszeń', () {
     final map = SongSubmissionFile(submissions: const []).toJsonMap();
     expect(
@@ -223,6 +245,18 @@ void main() {
         reason: 'piosenki nie ma w pliku, piosenkomat nie ma tu nic do roboty');
     expect(kToolLabels, containsAll([SongLabel.rejectedCorruptedFile.label, SongLabel.haveALook.label]),
         reason: 'bez tego --push wywali się na brakującej etykiecie');
+  });
+
+  test('pole złego typu w załączniku: zły załącznik, przebieg idzie dalej', () {
+    final mail = submissionEmail(mangle: (raw) {
+      final map = (jsonDecode(raw) as Map).cast<String, dynamic>()
+        ..[SongSubmissionFile.PARAM_ORIGIN] = 5;
+      map[SongSubmissionFile.PARAM_DIGEST] = submissionDigest(map);
+      return jsonEncode(map);
+    });
+    final c = _classify(mail.eml);
+    expect(c.destination, Destination.rejectCorruptedFile);
+    expect(c.decision.detail, contains('złego typu'));
   });
 
   test('nieznana wersja formatu ma własną etykietę', () {

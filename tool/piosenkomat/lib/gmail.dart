@@ -326,17 +326,16 @@ class GmailMailbox implements Mailbox {
   /// Dane potrzebne do odpowiedzi. Osobny strzał po nagłówki, bo
   /// [ContribMessage] ich nie niesie.
   @override
-  Future<ReplyTarget> replyTarget(String messageId) async {
+  Future<ReplyTarget> replyTarget(String messageId, {required String to}) async {
     final msg = await _call(
         () => _api.users.messages.get('me', messageId,
-            format: 'metadata',
-            metadataHeaders: ['From', 'Subject', 'Message-ID', 'References']),
+            format: 'metadata', metadataHeaders: ['Subject', 'Message-ID', 'References']),
         cost: _costGet);
     final headers = _headersOf(msg.payload);
     return ReplyTarget(
       messageId: msg.id ?? messageId,
       threadId: msg.threadId ?? messageId,
-      to: headers['from'] ?? '',
+      to: to,
       subject: headers['subject'] ?? '',
       rfcMessageId: headers['message-id'],
       references: headers['references'],

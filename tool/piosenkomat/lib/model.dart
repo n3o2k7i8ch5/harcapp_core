@@ -8,11 +8,24 @@ import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/models.dart';
+import 'package:harcapp_core/values/people/utils.dart';
 
 import 'eml.dart';
 import 'similarity.dart';
 
 const String kInboxEmail = 'harcapp@gmail.com';
+
+final _emailRe = RegExp(r'[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}');
+final _angledEmailRe = RegExp('<\\s*(${_emailRe.pattern})\\s*>');
+
+/// Adres z nagłówka `From` (`Jan <jan@x.pl>` albo `jan@x.pl`), małymi
+/// literami. Ten w nawiasach ostrych, gdy jest — nazwa potrafi wyglądać jak
+/// adres (`"jan@stary.pl" <jan@nowy.pl>`).
+String? emailFromHeader(String? from) {
+  if (from == null) return null;
+  final email = _angledEmailRe.allMatches(from).lastOrNull?.group(1) ?? _emailRe.firstMatch(from)?.group(0);
+  return email == null ? null : normalizedEmail(email);
+}
 
 // ---------------------------------------------------------------------------
 // Etykiety Gmaila
@@ -54,7 +67,8 @@ enum SongLabel {
   duplicateInBatch('song/needs-review/duplicate-in-batch', reviewReason: true),
   missingData('song/needs-review/missing-data', reviewReason: true),
   noConsent('song/needs-review/no-consent', reviewReason: true),
-  /// Poprawka, z którą coś nie tak: nie ma czego poprawiać albo cel zgadnięty.
+  /// Poprawka, z którą coś nie tak: nie ma czego poprawiać, cel zgadnięty
+  /// albo treść znacząco różna od poprawianej piosenki.
   correctionProblem('song/needs-review/correction-problem', reviewReason: true),
   /// Ktoś poprawił piosenkę i wysłał jako nową.
   undeclaredCorrection('song/needs-review/undeclared-correction', reviewReason: true),
@@ -130,7 +144,8 @@ extension SongIssueReviewReason on SongIssue {
         SongIssue.metadataDifferFromApp =>
           SongLabel.undeclaredCorrection,
         SongIssue.noTargetInApp ||
-        SongIssue.guessedCorrectionTarget =>
+        SongIssue.guessedCorrectionTarget ||
+        SongIssue.differsFromTarget =>
           SongLabel.correctionProblem,
         SongIssue.userMessage => SongLabel.userMessage,
       };
