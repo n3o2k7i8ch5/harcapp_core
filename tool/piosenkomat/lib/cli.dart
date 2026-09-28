@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:harcapp_core/comm_classes/text_utils.dart';
+import 'package:harcapp_core/song_book/import_hrcpsng.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:path/path.dart' as p;
@@ -46,6 +47,9 @@ Future<int> runPiosenkomat(List<String> args, {MailboxConnector? connect, String
     return 64;
   } on FileSystemException catch (e) {
     stderr.writeln('${e.message}: ${e.path}');
+    return 1;
+  } on HrcpsngDuplicateIdError catch (e) {
+    stderr.writeln('STOP. ${e.message} — pliku z duplikatami nie zapisuję.');
     return 1;
   }
 }
@@ -1016,7 +1020,17 @@ class _ExplainCommand extends _PiosenkomatCommand {
       for (final path in args.rest)
         ContribMessage.fromEmlBytes(File(_resolve(path)).readAsBytesSync(), id: p.basename(path)),
     ];
-    stdout.write(formatRunReport(classifyBatch(messages, book: book)));
+    // To samo sito, co w `scan` — inaczej `explain` pokazywałby jako
+    // zgłoszenie coś, czego przebieg w ogóle nie weźmie.
+    final queue = partitionQueue(messages);
+    final taken = queue.songs.toSet();
+    for (final m in messages) {
+      if (taken.contains(m)) continue;
+      stdout.writeln('${m.id}: ${isWebSubmission(m) ? 'zgłoszenie ze strony' : 'to nie zgłoszenie piosenki'} '
+          '— scan go nie weźmie.');
+    }
+    if (queue.songs.isEmpty) return 0;
+    stdout.write(formatRunReport(classifyBatch(queue.songs, book: book)));
     return 0;
   }
 }

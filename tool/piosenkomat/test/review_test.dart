@@ -29,7 +29,7 @@ Future<(RunPlan, List<SongRaw>)> _run() async {
   return (RunPlan.fromClassified(items, id: 'test'), songs);
 }
 
-/// Stan po `scan` widziany oczami `label reviewed`: co automat zaproponował
+/// Stan po `scan` widziany oczami `review`: co automat zaproponował
 /// i piosenki, z których da się złożyć plik zwrotny.
 Future<(List<ReviewCandidate>, List<SongRaw>)> _scanned() async {
   final (plan, songs) = await _run();
@@ -104,6 +104,18 @@ void main() {
     final result = reviewDiff(kind: _new, candidates: proposed, reviewed: [first]);
     expect(result.accepted.single.matchedBy, MatchedBy.songId);
     expect(result.rejectedThreads, ['m2']);
+  });
+
+  test('zgubione oba id → id piosenki dokładnie, `~2` to inna piosenka', () {
+    // Dwie „Barki” SDM w paczce: druga dostała sufiks przy scan.
+    ReviewCandidate candidate(String thread, String id) =>
+        ReviewCandidate(threadId: thread, planned: PlannedSong(songId: id, title: 'Barka'));
+    final proposed = [candidate('a', 'o!_barka@sdm'), candidate('b', 'o!_barka@sdm~2')];
+    final second = SongRaw.empty(id: 'o!_barka@sdm~2')..title = 'Barka';
+    final result = reviewDiff(kind: _new, candidates: proposed, reviewed: [second]);
+    expect(result.accepted.single.candidate.threadId, 'b', reason: 'nie pierwsza „Barka”');
+    expect(result.accepted.single.matchedBy, MatchedBy.songId);
+    expect(result.rejectedThreads, ['a']);
   });
 
   test('piosenka spoza kandydatów → STOP, nie „pomijam”', () async {

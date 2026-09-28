@@ -133,7 +133,9 @@ krok, mówi w każdej chwili `./piosenkomat status`.
    `out/run/people.dart` doklejasz na koniec `lib/values/people/data.dart` →
    [Osoby dodające](#osoby-dodające), potem `final-*.hrcpsng` wklejasz do
    `assets/songs/all_songs.hrcpsng` i commitujesz. Poprawki podmieniasz po id —
-   listę „podmień” wypisuje `review`.
+   listę „podmień” wypisuje `review`. `all_songs` nie może mieć zdublowanego
+   id: taki się nie wczyta (`scan`, `finalize`, strona) — dostajesz listę id
+   do naprawienia, a test `all_songs_test` nie przejdzie przed commitem.
    ####
 5. **Domknięcie.**  
    `./piosenkomat finalize --push`
@@ -163,7 +165,7 @@ etykiety, szkice bez Twojego tekstu i `out/run/`. Mejle wracają do kolejki.
 | `reply [-n N]` | kto czeka na odpowiedź i co by poszło | wysyła szkice z kolejki `reply/*` |
 | `reopen [--query Q]` | kto odpisał na Twój tekst | zdejmuje `song/*` z tych wątków — wracają do kolejki |
 | `unlabel [--all] [--force]` | co cofnie | cofa otwarty przebieg: etykiety automatu, szkice bez Twojego tekstu, `out/run/` |
-| `explain plik.eml …` | klasyfikacja lokalnych plików, bez Gmaila | — |
+| `explain plik.eml …` | klasyfikacja lokalnych plików, bez Gmaila — przez to samo sito co `scan` (zgłoszenie ze strony i mejl nie o piosence tylko wypisuje) | — |
 
 Flagi:
 - `review --force` pomija bezpieczniki (pusty eksport, odrzucona ponad połowa);
@@ -314,7 +316,7 @@ lista dowodów:
 - `LayoutDiff` — ten sam tekst albo te same chwyty, ale inaczej ułożone: wersy
   łamane inaczej, inny podział na zwrotki, inne wcięcia (refren), akordy przy
   innych wersach (spacje na końcu wersu i ich ciągi w środku się nie liczą);
-- `SameChords` (`a` ≠ `A`) i `ChordsMatch` — pary akordów niezależne od tonacji
+- `SameChords` (`a` ≠ `A`; dwie bez chwytów to „obie bez chwytów”) i `ChordsMatch` — pary akordów niezależne od tonacji
   i kolejności zwrotek, z transpozycją;
 - `MeterMatch` (sylaby w wersach), `SameRecording` (ten sam film YouTube);
 - `SameTitle` — tytuł główny jednej to tytuł drugiej (sam wspólny ukryty się nie liczy);
@@ -375,7 +377,7 @@ z innego przebiegu wyjdzie dopiero, gdy pierwsza wersja będzie w `all_songs`.
 |---|---|---|---|
 | `missing-title`, `missing-chords`, `missing-youtube` | blocking | ✓ | — (poprawka to diff) |
 | `no-consent`, `no-contributor-email` | blocking | ✓ | ✓ |
-| `several-contributors` | blocking | ✓ | ✓ |
+| `several-contributors` | blocking | ✓ | ✓ (każdy format: adresu nadawcy nie doklejamy do żadnej karty) |
 | `guessed-contributor` | decision | ✓ | ✓ (tylko formaty bez `sender_is_contributor`) |
 | `chords-differ-from-app`, `metadata-differ-from-app` | decision | ✓ | — |
 | `same-title-in-app`, `similar-text-in-app` | decision | ✓ | — (normalny kształt poprawki) |

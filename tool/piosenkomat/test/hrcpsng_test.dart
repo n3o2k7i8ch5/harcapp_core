@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+
 
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
 import 'package:harcapp_core/song_book/piosenkomat/file_names.dart';
@@ -26,13 +28,23 @@ void main() {
     expect(decoded.single.hasChords, isTrue);
   });
 
-  test('zdublowane id dostają sufiks, bez mutacji piosenki', () async {
+  test('pliku ze zdublowanym id nie zapisujemy — ani nie zmieniamy id po cichu', () async {
     final a = classify(msgFrom(await completeEmail()), book: SongBook.empty).song!;
     final b = classify(msgFrom(await completeEmail()), book: SongBook.empty).song!;
     expect(a.id, b.id);
-    final decoded = importHrcpsng(encodeHrcpsng([a, b])).$1;
-    expect(decoded.map((s) => s.id).toSet(), hasLength(2));
-    expect(a.id, b.id);
+    expect(() => encodeHrcpsng([a, b]),
+        throwsA(isA<HrcpsngDuplicateIdError>().having((e) => e.ids, 'ids', [a.id])));
+  });
+
+  test('all_songs ze zdublowanym id: błąd z listą id i śpiewnik się nie wczytuje', () {
+    final path = p.join(tempDir().path, 'all_songs.hrcpsng');
+    final song = jsonEncode({'song': sampleSong(title: 'Barka').toApiJsonMap(withId: false), 'index': 0});
+    File(path).writeAsStringSync('{"official":{"o!_barka":$song,"o!_barka":$song},"conf":{}}');
+    expect(
+      () => loadBook(path),
+      throwsA(isA<FileSystemException>().having((e) => e.message, 'message',
+          allOf(contains('W all_songs są zdublowane id (o!_barka)'), contains('napraw plik')))),
+    );
   });
 
   test('assignUniqueIds: sufiks w piosence, nie tylko w pliku', () async {

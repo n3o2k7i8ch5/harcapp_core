@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
@@ -10,24 +9,30 @@ import 'package:path/path.dart' as p;
 import 'similarity.dart';
 
 /// Piosenki już w apce, do porównań. Ten sam parser, co strona — refren
-/// z osobnego pola wchodzi do tekstu tak samo, jak w zgłoszeniu.
+/// z osobnego pola wchodzi do tekstu tak samo, jak w zgłoszeniu. Śpiewnik
+/// ze zdublowanym id się nie wczytuje: porównania i `finalize` idą po id.
 SongBook loadBook(String path) {
   final file = File(path);
   if (!file.existsSync()) {
     throw FileSystemException('Nie znaleziono śpiewnika', path);
   }
   try {
-    final (official, conf) = importHrcpsng(file.readAsStringSync());
+    final (official, conf) = importHrcpsng(file.readAsStringSync(), allowDuplicateIds: false);
     return SongBook([...official, ...conf]);
+  } on HrcpsngDuplicateIdError catch (e) {
+    throw FileSystemException(
+        'W all_songs są zdublowane id (${e.ids.join(', ')}) — napraw plik: pod każdym id ma być '
+        'jedna piosenka. Do tego czasu śpiewnik się nie wczyta',
+        path);
   } on HrcpsngImportError catch (e) {
     throw FileSystemException('Śpiewnik: ${e.message}', path);
   }
 }
 
 /// Nadaje zdublowanym id sufiks `~2`, `~3`… **w piosenkach**, zanim cokolwiek
-/// trafi do planu. `encodeHrcpsng` robi to samo przy zapisie, ale wtedy plan
-/// już zna stare id i po przeglądzie dwie piosenki o tym samym tytule
-/// i wykonawcy wskazywałyby na tę samą — obie z tekstem pierwszej.
+/// trafi do planu i do pliku: pliku ze zdublowanym id `encodeHrcpsng` nie
+/// zapisze, a dwie piosenki o tym samym tytule i wykonawcy muszą się dać
+/// rozróżnić po przeglądzie.
 void assignUniqueIds(List<SongRaw> songs) {
   final taken = <String>{};
   for (final song in songs) {
@@ -48,20 +53,14 @@ String uniqueName(String base, bool Function(String) taken, {String separator = 
 
 /// [withPiosenkomatData] wypuszcza do pliku uwagi piosenkomatu. Włączamy je
 /// dla plików przebiegu, bo to one niosą przegląd; do bazy piosenek to pole
-/// nie ma prawa dojechać.
-String encodeHrcpsng(List<SongRaw> songs, {bool withPiosenkomatData = false}) {
-  final sorted = [...songs]..sort((a, b) => compareText(a.title, b.title));
-  final official = <String, dynamic>{};
-  var index = 0;
-  for (final song in sorted) {
-    official[uniqueName(song.id, official.containsKey)] = {
-      'song': song.toApiJsonMap(
-          withId: false, withPiosenkomatData: withPiosenkomatData),
-      'index': index++,
-    };
-  }
-  return jsonEncode({'official': official, 'conf': <String, dynamic>{}});
-}
+/// nie ma prawa dojechać. Zdublowane id to [HrcpsngDuplicateIdError], nie
+/// cicha zmiana id przy zapisie.
+String encodeHrcpsng(List<SongRaw> songs, {bool withPiosenkomatData = false}) => encodeHrcpsngEntries(
+      official: [
+        for (final song in [...songs]..sort((a, b) => compareText(a.title, b.title)))
+          (song.id, song.toApiJsonMap(withId: false, withPiosenkomatData: withPiosenkomatData)),
+      ],
+    );
 
 void writeHrcpsng(String path, List<SongRaw> songs,
         {bool withPiosenkomatData = false}) =>

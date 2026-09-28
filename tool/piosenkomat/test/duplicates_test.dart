@@ -111,7 +111,7 @@ void main() {
       expect(got.labels.any((l) => l.startsWith(SongLabel.needsReview.label)), isFalse,
           reason: '`needs-review` jest tylko dla piosenek w pliku');
       expect(got.labels.any(isClosedLabel), isTrue,
-          reason: 'po `label scanned` nie wisi w nieprzeczytanych');
+          reason: 'po `scan --push` nie wisi w nieprzeczytanych');
     });
 
     test('ta sama piosenka, inny YouTube → metadata-differ-from-app, do pliku', () async {

@@ -131,9 +131,11 @@ class SharedLines extends Similarity {
 /// Chwyty dosłownie równe po zbiciu białych znaków; wielkość liter zostaje
 /// (`a` ≠ `A`).
 class SameChords extends Similarity {
-  const SameChords();
+  /// Obie bez chwytów — też „równe”, ale pastylka „te same chwyty” by kłamała.
+  final bool none;
+  const SameChords({this.none = false});
   @override
-  String get text => 'te same chwyty';
+  String get text => none ? 'obie bez chwytów' : 'te same chwyty';
 }
 
 /// Pary sąsiednich akordów, najlepsze z 12 transpozycji. Przesunięty refren
@@ -213,7 +215,7 @@ List<Similarity> compare(SongProfile a, SongProfile b) {
     final aligned = alignLines(a, b);
     out.add(SharedLines._(aligned.a, aligned.b, a, b));
   }
-  if (a.chords == b.chords) out.add(const SameChords());
+  if (a.chords == b.chords) out.add(SameChords(none: a.chords.isEmpty));
   if (a.hasChords && b.hasChords) {
     final m = matchChordPairs(a.chordPairsSet, b.chordPairsSet);
     // matchChordPairs mówi, o ile przesunąć tę, żeby wyszła tamta.

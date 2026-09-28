@@ -82,6 +82,15 @@ void main() {
       expect(l.coverage(), 1.0, reason: '„laj la” i „na na” nie są treścią');
     });
 
+    test('dwie bez chwytów: „obie bez chwytów”, nie „te same chwyty”', () {
+      final s = cmp(song([_v1], chords: ''), song([_v1], chords: ''));
+      expect(s.whereType<SameChords>().single.none, isTrue);
+      expect(similaritiesText(s), contains('obie bez chwytów'));
+      expect(similaritiesText(s), isNot(contains('te same chwyty')));
+      expect(levelOf(s), MatchLevel.identical, reason: 'identyczne dalej są identyczne');
+      expect(cmp(song([_v1]), song([_v1])).whereType<SameChords>().single.text, 'te same chwyty');
+    });
+
     test('dowody powtarzające inne nie idą do pokazania', () {
       final s = cmp(song([_v1, _v2]), song([_v1, _v2], id: 'o!_y'));
       expect(s.has<SharedLines>(), isTrue);

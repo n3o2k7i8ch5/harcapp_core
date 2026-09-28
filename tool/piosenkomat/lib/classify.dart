@@ -199,9 +199,10 @@ Submission buildSubmission(
         consent: consent,
         threadId: rep.threadId,
         date: rep.date,
-        // Stare formaty nie niosą `sender_is_contributor`, więc zostaje im
+        // Kilka kart: nie wiadomo, do której dokleić nadawcę — w każdym
+        // formacie. Stare nie niosą `sender_is_contributor`, więc zostaje im
         // heurystyka „doklej nadawcę do jedynej karty”.
-        attachSender: !file.hasFile || (senderIsContributor && contributorCards < 2));
+        attachSender: senderIsContributor && contributorCards < 2);
   }
 
   final profile = song == null ? null : SongProfile(song);
@@ -243,14 +244,16 @@ Submission buildSubmission(
     appVersion: parsed?.appVersion,
     senderIsContributor: senderIsContributor,
     submissionCount: parsed?.submissionCount ?? 1,
-    hasSeveralContributors: file.hasFile && contributorCards > 1,
+    hasSeveralContributors: contributorCards > 1,
     contributorEmailGuessed: contributorEmailGuessed,
     weReplied: weReplied || ordered.any(_isOurs),
     fileError: file.error?.kind,
     fileErrorMessage: file.error?.message,
     title: title,
     conversation: conversation,
-    correctionMessage: parsed?.correctionMessage ?? extractCorrectionMessage(rep.body),
+    // Z parsera: przy pliku — z pliku (treść jest dla człowieka), przy starych
+    // formatach parser bierze blok z treści sam.
+    correctionMessage: parsed?.correctionMessage,
     sentAt: rep.date,
     sender: sender,
     consentVersion: consent,

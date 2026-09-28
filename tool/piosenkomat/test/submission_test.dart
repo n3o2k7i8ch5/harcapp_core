@@ -209,6 +209,17 @@ void main() {
     expect(c.song!.piosenkomatData!.appVersion, '2.4.1');
   });
 
+  test('propozycja poprawki tylko z pliku — blok w treści mejla się nie liczy', () {
+    // Np. zacytowany stary mejl: przy pliku treść jest wyłącznie dla człowieka.
+    final mail = submissionEmail(
+      submissions: [
+        SongSubmission(kind: SubmissionKind.correction, correctionTarget: 'o!_barka', song: sampleSong(title: 'Barka')),
+      ],
+      userMessage: '### Propozycja poprawki:\n```\nstary tekst z cytatu\n```',
+    );
+    expect(_classify(mail.eml).submission.correctionMessage, isNull);
+  });
+
   test('rodzaj bierze się z pliku, nie z tematu', () {
     final mail = submissionEmail(submissions: [
       SongSubmission(

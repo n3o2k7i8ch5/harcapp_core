@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:harcapp_core/comm_classes/text_utils.dart';
+
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:piosenkomat/model.dart';
@@ -119,8 +121,22 @@ String hardWrap(String text, {int width = 76}) {
 
 /// Piosenki przez format pliku i z powrotem, tak jak robi to strona: proposed
 /// i reviewed są wtedy osobnymi obiektami, więc dopasowanie musi iść po id.
+/// Kopie jednej piosenki (rozbita na stronie na dwie) dostają `~2` — strona
+/// pliku ze zdublowanym id nie zapisze, trzeba je rozróżnić.
 List<SongRaw> roundTrip(List<SongRaw> songs) {
-  final (official, conf) = importHrcpsng(encodeHrcpsng(songs, withPiosenkomatData: true));
+  final taken = <String>{};
+  String idOf(SongRaw s) {
+    final id = uniqueName(s.id, taken.contains);
+    taken.add(id);
+    return id;
+  }
+
+  // W kolejności, w jakiej zapisuje `encodeHrcpsng`: po tytule.
+  final sorted = [...songs]..sort((a, b) => compareText(a.title, b.title));
+  final code = encodeHrcpsngEntries(official: [
+    for (final s in sorted) (idOf(s), s.toApiJsonMap(withId: false, withPiosenkomatData: true)),
+  ]);
+  final (official, conf) = importHrcpsng(code);
   return [...official, ...conf];
 }
 

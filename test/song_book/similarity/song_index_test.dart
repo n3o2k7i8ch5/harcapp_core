@@ -206,7 +206,7 @@ void main() {
     });
 
     test('przy powtórzonym id deklaracja wskazuje sąsiada, nigdy samą siebie', () {
-      // Po `prepare` poprawka ma id pierwowzoru, a obok w warsztacie leży
+      // W `final-*` poprawka ma id pierwowzoru, a obok w warsztacie leży
       // oryginał pod tym samym id — deklaracja `basedOnSongId` ma trafić
       // w niego, niezależnie od tego, kto jest pierwszy na liście.
       final a = song('o!_x', 'X', _gory);

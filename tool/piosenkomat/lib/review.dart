@@ -234,8 +234,8 @@ Matched? _match(SongRaw song, List<ReviewCandidate> candidates) {
 }
 
 (ReviewCandidate, MatchedBy)? _narrow(SongRaw song, List<ReviewCandidate> candidates) {
-  final id = song.id.split('~').first;
-  final byId = [for (final c in candidates) if (c.songId == id) c];
+  // Dokładnie: `o!_barka@sdm` i `o!_barka@sdm~2` to dwie różne piosenki z paczki.
+  final byId = [for (final c in candidates) if (c.songId == song.id) c];
   if (byId.length == 1) return (byId.single, MatchedBy.songId);
 
   final key = searchableString(song.title);

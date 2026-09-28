@@ -59,16 +59,19 @@ void main() {
       expect(issuesOf(got), isNot(contains(SongIssue.guessedContributor)));
     });
 
-    test('kilka kart bez adresu → nie zgadujemy, mejl osobno', () async {
+    test('kilka kart bez adresu → uwaga several-contributors, adresu nie doklejamy', () async {
+      // Ta sama reguła co przy pliku zgłoszenia: wkład przypisujesz ręcznie.
       final song = sampleSong()..contribRefs = [
         ContributorRef(person: card('Jedna')),
         ContributorRef(person: card('Druga')),
       ];
       final got = classify(msgFrom(await completeEmail(song: song)), book: SongBook.empty);
+      expect(issuesOf(got), contains(SongIssue.severalContributors));
+      expect(got.labels, contains(SongLabel.severalContributors.label));
       final refs = got.song!.contribRefs;
-      expect(refs, hasLength(3));
-      expect(refs.where((c) => c.emailRef == 'jan.testowy@example.com'), hasLength(1));
-      expect(refs.take(2).every((c) => c.emailRef == null), isTrue, reason: 'żadna karta nie dostaje adresu na chybił trafił');
+      expect(refs, hasLength(2), reason: 'bez dodatkowego wpisu z samym mejlem');
+      expect(refs.every((c) => c.emailRef == null), isTrue, reason: 'żadna karta nie dostaje adresu na chybił trafił');
+      expect(got.song!.contributorData!.email, 'jan.testowy@example.com', reason: 'ślad zgłoszenia zostaje');
     });
 
     test('karta już z tym adresem → nic nie dokładamy', () async {

@@ -34,7 +34,7 @@ Map<String, LabelChange> _changes(
     reviewLabelChanges(
       [reviewDiff(kind: _new, candidates: proposed, reviewed: reviewed)],
       plan,
-      // Stan po `label scanned --push`.
+      // Stan po `scan --push`.
       {for (final e in plan.labelsByMessage.entries) e.key: e.value.toSet()},
     ).changes;
 

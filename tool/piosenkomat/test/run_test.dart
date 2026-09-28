@@ -297,7 +297,8 @@ void main() {
         ..submit('c', title: 'Barka', lyrics: '$_barka\nDopisana zwrotka na koniec', kind: _correction, target: 'o!_barka');
       await w.cli(['scan', '--push']);
       final songs = roundTrip(readHrcpsng(w.run.candidates(_correction)));
-      writeHrcpsng(w.run.reviewed(_correction), [...songs, ...roundTrip(songs)], withPiosenkomatData: true);
+      // Dwie zachowane kopie jednej poprawki — strona dała drugiej inne id.
+      writeHrcpsng(w.run.reviewed(_correction), roundTrip([...songs, ...songs]), withPiosenkomatData: true);
       expect(await w.cli(['review', '--push']), 1);
       expect(File(w.run.finalSongs(_correction)).existsSync(), isFalse);
     });
@@ -575,6 +576,20 @@ void main() {
     });
   });
 
+  test('explain odsiewa to samo, co scan — zgłoszenie ze strony nie udaje zgłoszenia', () async {
+    final w = _World();
+    final eml = p.join(w.root, 'web.eml');
+    File(eml).writeAsStringSync(submissionEmail(origin: SubmissionOrigin.web).eml);
+    final out = _Capture();
+    final code = await IOOverrides.runZoned(
+      () => runPiosenkomat(['explain', eml, '--songs-db', w.db]),
+      stdout: () => out,
+    );
+    expect(code, 0);
+    expect(out.text, contains('web.eml: zgłoszenie ze strony — scan go nie weźmie.'));
+    expect(out.text, isNot(contains('NOWA')), reason: 'bez raportu, jakby weszło do przebiegu');
+  });
+
   test('zbędny argument i nieznana komenda to błąd użycia', () async {
     final w = _World();
     expect(await w.cli(['scan', '20']), 64);
@@ -588,4 +603,16 @@ void main() {
     await w.cli(['scan', '--push']);
     expect(await w.cli(['status']), 0);
   });
+}
+
+/// Przechwycone `stdout` komendy.
+class _Capture implements Stdout {
+  final _buf = StringBuffer();
+  String get text => _buf.toString();
+  @override
+  void write(Object? object) => _buf.write(object);
+  @override
+  void writeln([Object? object = '']) => _buf.writeln(object);
+  @override
+  dynamic noSuchMethod(Invocation invocation) => null;
 }
