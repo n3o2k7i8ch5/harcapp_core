@@ -60,7 +60,7 @@ class CurrentItemProvider extends ChangeNotifier{
   }
 
   String setLclIdFromTitleAndPerformer({bool withPerformer = true, bool notify = true}){
-    String newLclId = (song.isConfid?'oc!_':'o!_') + song.generateFileName(withPerformer: withPerformer);
+    String newLclId = song.idFromTitle(withPerformer: withPerformer);
     setLclId(newLclId, notify: notify);
     return newLclId;
   }

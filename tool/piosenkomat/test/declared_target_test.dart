@@ -1,4 +1,5 @@
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
+import 'package:piosenkomat/decide.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:test/test.dart';
@@ -12,7 +13,7 @@ void main() {
     Future<Classified> poprawka(String celZApki, List<String> idsWApce) async => classify(
           msgFrom(await completeEmail(
             isNew: false,
-            correctionTarget: celZApki,
+            basedOnSongId: celZApki,
             song: sampleSong(title: 'Barka', lyrics: '$_tekst\nDopisana zwrotka'),
           )),
           book: bookWith([
@@ -22,23 +23,23 @@ void main() {
 
     test('dokładne id → cel bez uwagi', () async {
       final c = await poprawka('o!_barka@sdm', ['o!_barka@sdm']);
-      expect(c.submission.correctionTarget, 'o!_barka@sdm');
-      expect(c.submission.correctionTargetGuessed, isFalse);
+      expect(pickCorrectionTarget(c.submission)?.id, 'o!_barka@sdm');
+      expect(pickCorrectionTarget(c.submission)?.guessed ?? false, isFalse);
       expect(issuesOf(c), isNot(contains(SongIssue.guessedCorrectionTarget)));
       expect(issuesOf(c), isNot(contains(SongIssue.differsFromTarget)), reason: 'dopisana zwrotka to zwykła poprawka');
     });
 
     test('id sprzed zmiany wykonawcy → cel znaleziony, ale oznaczony jako domysł', () async {
       final c = await poprawka('o!_barka@dom', ['o!_barka@sdm']);
-      expect(c.submission.correctionTarget, 'o!_barka@sdm');
-      expect(c.submission.correctionTargetGuessed, isTrue);
+      expect(pickCorrectionTarget(c.submission)?.id, 'o!_barka@sdm');
+      expect(pickCorrectionTarget(c.submission)?.guessed ?? false, isTrue);
       expect(detailOf(c, SongIssue.guessedCorrectionTarget), contains('inny wykonawca'));
       expect(issuesOf(c), isNot(contains(SongIssue.noTargetInApp)));
     });
 
     test('bez wykonawcy pasuje kilka → brak celu z listą kandydatów', () async {
       final c = await poprawka('o!_barka@dom', ['o!_barka@sdm', 'o!_barka@zespol']);
-      expect(c.submission.correctionTarget, isNull);
+      expect(pickCorrectionTarget(c.submission)?.id, isNull);
       expect(detailOf(c, SongIssue.noTargetInApp), allOf(contains('o!_barka@sdm'), contains('o!_barka@zespol')));
     });
   });
@@ -50,7 +51,7 @@ void main() {
         classify(
           msgFrom(await completeEmail(
             isNew: false,
-            correctionTarget: 'o!_plonie_ognisko',
+            basedOnSongId: 'o!_plonie_ognisko',
             song: sampleSong(title: title, lyrics: lyrics, chordsText: chords),
           )),
           book: bookWith([sampleSong(id: 'o!_plonie_ognisko', title: 'Płonie ognisko', lyrics: ognisko)]),
@@ -59,7 +60,7 @@ void main() {
     test('zupełnie inna piosenka jako poprawka → cel zostaje, ale z ostrzeżeniem do przeglądu', () async {
       final c = await poprawka(_tekst, title: 'Barka', chords: 'C G\nF C');
       expect(c.destination, Destination.candidate);
-      expect(c.submission.correctionTarget, 'o!_plonie_ognisko', reason: 'to dane z apki — rozstrzygasz przy przeglądzie');
+      expect(pickCorrectionTarget(c.submission)?.id, 'o!_plonie_ognisko', reason: 'to dane z apki — rozstrzygasz przy przeglądzie');
       expect(issuesOf(c), [SongIssue.differsFromTarget]);
       expect(detailOf(c, SongIssue.differsFromTarget), startsWith('„Płonie ognisko” w apce: treść niepodobna'));
       expect(c.labels, containsAll([SongLabel.needsReview.label, SongLabel.correctionProblem.label]));

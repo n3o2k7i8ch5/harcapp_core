@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:harcapp_core/song_book/song_core.dart';
+import 'package:harcapp_core/comm_classes/regexp_email.dart';
 import 'package:harcapp_core/song_book/mail_quotes.dart';
+import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email_old_app.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/submission/submission_email.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'package:harcapp_core/values/people/models.dart';
+import 'package:harcapp_core/values/people/utils.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/rank_instr.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
@@ -16,6 +19,23 @@ import 'package:harcapp_core/values/srodowiska/models.dart';
 /// Nagłówek sekcji z kodem piosenki w treści mejla (formaty sprzed pliku
 /// zgłoszenia). Po nim piosenkomat poznaje zgłoszenie.
 const String kSongCodeMarker = '### Kod piosenki:';
+
+/// Kształt mejla zgłoszenia, który rozpoznał parser. [id] idzie do rozkładu
+/// w raporcie piosenkomatu — po nim poznać, kiedy wolno skasować czytniki
+/// starych kształtów.
+enum ContribEmailShape {
+  /// Najstarsza apka: JSON między znacznikami „nie edytuj", otoczka `o!_`.
+  oldApp('old-app'),
+  /// `### Kod piosenki:` bez ogrodzeń, osoba jako literał Darta.
+  legacy('legacy'),
+  /// Bloki ```, osoba jako JSON.
+  fenced('fenced'),
+  /// Plik zgłoszenia w załączniku.
+  file('file');
+
+  const ContribEmailShape(this.id);
+  final String id;
+}
 
 class ParsedContribEmail{
 
@@ -27,20 +47,14 @@ class ParsedContribEmail{
   /// Treść bloku „Propozycja poprawki”. Apka emituje ten blok zawsze —
   /// dla nowych piosenek pusty — więc niepusty znaczy: autor przysłał poprawkę.
   final String? correctionMessage;
-  /// Mejl sprzed bloków ``` (`_parseLegacy`). Zgłoszenie z blokami albo
-  /// z załącznikiem — `false`.
-  final bool isLegacy;
+  final ContribEmailShape shape;
   /// Lista pól z bloku `Osoba dodająca`, które były obecne w mejlu, ale
   /// nie udało się ich zmapować na aktualny model (np. `rankHarc: HO` po
   /// refaktorze enuma). Każdy wpis to gotowy do wyświetlenia komunikat.
   final List<String> personParseWarnings;
-  /// True, gdy mejl pochodzi z najstarszej (już nierozwijanej) wersji apki
-  /// mobilnej — rozpoznawane po owinięciu piosenki w `{"o!_filename": {...}}`
-  /// lub po charakterystycznym nagłówku „Dzięki za chęć dzielenia się…".
-  final bool isOldAppFormat;
-  /// `lclId` piosenki, którą autor poprawia, zadeklarowany przez apkę
-  /// w linii „### Poprawiana piosenka”. `null` znaczy: mejl tego nie niesie
-  /// (nowa piosenka albo apka sprzed tej linii) i cel trzeba zgadywać.
+  /// `lclId` piosenki, którą autor poprawia, zadeklarowany przez apkę w pliku
+  /// zgłoszenia. `null` znaczy: zgłoszenie tego nie niesie (nowa piosenka albo
+  /// kształt mejla bez pliku) i cel trzeba zgadywać.
   final String? correctionTarget;
   /// Rodzaj zadeklarowany przez apkę. Tylko z załącznika; bez niego `null`
   /// i rodzaj wnioskuje się z tematu.
@@ -62,9 +76,8 @@ class ParsedContribEmail{
     required this.registered,
     required this.userMessage,
     this.correctionMessage,
-    required this.isLegacy,
+    required this.shape,
     this.personParseWarnings = const [],
-    this.isOldAppFormat = false,
     this.correctionTarget,
     this.declaredKind,
     this.senderIsContributor,
@@ -84,11 +97,11 @@ class ParsedContribEmail{
     return ParsedContribEmail(
       song: submission.song,
       senderEmail: senderEmail,
-      acceptedRulesVersion: file.rulesVersion,
-      registered: submission.contributor,
+      acceptedRulesVersion: file.acceptedRulesVersion,
+      registered: submission.registered,
       userMessage: extractSubmissionUserMessage(body),
       correctionMessage: submission.correctionMessage,
-      isLegacy: false,
+      shape: ContribEmailShape.file,
       correctionTarget: submission.correctionTarget,
       declaredKind: submission.kind,
       senderIsContributor: submission.senderIsContributor,
@@ -107,41 +120,121 @@ class ContribEmailParseError implements Exception {
   String toString() => 'ContribEmailParseError: $message';
 }
 
-ParsedContribEmail parseContribEmail(String content){
-  try {
-    return _parseV2(content);
-  } catch(eNew){
+/// Zgłoszenie z treści mejla, w każdym kształcie sprzed pliku zgłoszenia.
+///
+/// Piosenkę bierze z [songAttachment] (`.hrcpsng`, który apka dołączała),
+/// gdy jest i da się go odczytać — załącznik jedzie bajt w bajt, a JSON
+/// w treści klienty pocztowe łamią. Resztę (osoba, zgoda, dopisek) zawsze
+/// z treści. Bez załącznika JSON z treści czytamy odpornie na łamanie linii
+/// ([_unwrapped]).
+ParsedContribEmail parseContribEmail(String content, {String? songAttachment}){
+  final attached = songAttachment == null? null: _attachedSong(songAttachment);
+  if(attached != null){
     try {
-      return _parseLegacy(content);
+      return _parseAnyShape(content, attached: attached);
+    } catch(_){
+      // Załącznik nie pasuje do treści — zostaje sama treść.
+    }
+  }
+  return _parseAnyShape(content);
+}
+
+ParsedContribEmail _parseAnyShape(String content, {_AttachedSong? attached}){
+  try {
+    return _parseFenced(content, attached: attached);
+  } catch(eFenced){
+    try {
+      return _parseLegacy(content, attached: attached);
     } catch(eLegacy){
       throw ContribEmailParseError(
         'Nie udało się odczytać piosenki z mejla.\n'
-            'Próba formatu z blokami ```: $eNew\n'
+            'Próba formatu z blokami ```: $eFenced\n'
             'Próba formatu legacy: $eLegacy',
       );
     }
   }
 }
 
-// =====================================================================
-// V2 parser (fenced JSON blocks).
-// =====================================================================
+/// Piosenka z załącznika `.hrcpsng`.
+typedef _AttachedSong = ({String id, Map<String, dynamic> map});
 
-ParsedContribEmail _parseV2(String content){
-  String songJson = _extractFencedBlockAfter(content, kSongCodeMarker);
-
-  Map<String, dynamic> songMap;
+/// Pierwsza oficjalna piosenka załącznika albo sam załącznik, gdy to goła
+/// piosenka. `null`, gdy nie da się go odczytać.
+_AttachedSong? _attachedSong(String attachment){
   try {
-    songMap = jsonDecode(songJson) as Map<String, dynamic>;
+    final map = jsonDecode(attachment) as Map<String, dynamic>;
+    final official = map['official'];
+    if(official is Map && official.isNotEmpty){
+      final id = official.keys.first as String;
+      final entry = official[id];
+      final song = entry is Map? entry['song']: null;
+      if(song is Map) return (id: id, map: song.cast<String, dynamic>());
+    }
+    if(map[SongCore.PARAM_TITLE] case final String title)
+      return (id: SongCore.officialIdFromTitle(title), map: map);
+  } catch(_){}
+  return null;
+}
+
+/// Łamanie linii przez klienta pocztowego w JSON-ie z treści.
+final RegExp _lineBreakRe = RegExp(r'\r?\n');
+
+/// To samo w regionie starej apki: po zdjęciu cytowania i HTML-a przy
+/// łamaniu zostają tam jeszcze odstępy.
+final RegExp _oldAppLineBreakRe = RegExp(r'\s*\r?\n\s*');
+
+/// Pierwszy wariant [text], z którego [read] coś odczyta: jak jest, z liniami
+/// sklejonymi spacją, sklejonymi bez niej. Klienty pocztowe (np. Gmail na
+/// Androidzie) łamią długie linie co ~76 znaków — w miejscu spacji albo
+/// w środku słowa — a JSON piosenki w treści to jedna długa linia.
+T _unwrapped<T>(String text, RegExp lineBreak, T Function(String) read){
+  Object? firstError;
+  for(final variant in [text, text.replaceAll(lineBreak, ' '), text.replaceAll(lineBreak, '')]){
+    try {
+      return read(variant);
+    } catch(e){
+      firstError ??= e;
+    }
+  }
+  throw firstError!;
+}
+
+Map<String, dynamic> _decodeSongMap(String json){
+  try {
+    return jsonDecode(json) as Map<String, dynamic>;
   } catch(e){
     throw ContribEmailParseError('Nie udało się sparsować JSON-a piosenki: $e');
   }
+}
 
+/// Piosenka z mapy JSON-a; bez tytułu nie ma zgłoszenia. Po sklejeniu linii
+/// w `email_ref` bywa zbłąkana spacja — adres jej mieć nie może, więc won.
+SongRaw _songFromMap(Map<String, dynamic> songMap){
   String? title = songMap[SongCore.PARAM_TITLE] as String?;
   if(title == null || title.isEmpty)
     throw ContribEmailParseError('Brak tytułu piosenki w JSON-ie.');
 
-  SongRaw song = SongRaw.fromApiRespMap('o!_${SongCore.filenameFromTitle(title)}', songMap);
+  SongRaw song = SongRaw.fromApiRespMap(SongCore.officialIdFromTitle(title), songMap);
+  song.contribRefs = [
+    for(final c in song.contribRefs)
+      ContributorRef(
+        person: c.person,
+        emailRef: c.emailRef?.replaceAll(RegExp(r'\s'), ''),
+        userKeyRef: c.userKeyRef?.trim(),
+      ),
+  ];
+  return song;
+}
+
+// =====================================================================
+// Bloki ``` (kształt sprzed pliku zgłoszenia).
+// =====================================================================
+
+ParsedContribEmail _parseFenced(String content, {_AttachedSong? attached}){
+  String songJson = _extractFencedBlockAfter(content, kSongCodeMarker);
+  SongRaw song = attached != null
+      ? _songFromMap(attached.map)
+      : _unwrapped(songJson, _lineBreakRe, (json) => _songFromMap(_decodeSongMap(json)));
 
   String? acceptedRulesVersion = _extractAcceptedRulesVersion(content);
   String? senderEmail = _extractSenderEmail(content);
@@ -167,8 +260,7 @@ ParsedContribEmail _parseV2(String content){
     registered: registered,
     userMessage: _extractUserMessage(content),
     correctionMessage: extractCorrectionMessage(content),
-    isLegacy: false,
-    correctionTarget: extractCorrectionTarget(content),
+    shape: ContribEmailShape.fenced,
   );
 }
 
@@ -199,7 +291,7 @@ String? _tryExtractFencedBlockAfter(String content, String header){
 // Legacy parser (Dart-like Person, bare JSON song).
 // =====================================================================
 
-ParsedContribEmail _parseLegacy(String content){
+ParsedContribEmail _parseLegacy(String content, {_AttachedSong? attached}){
   int codeHeaderIdx = content.indexOf(kSongCodeMarker);
 
   // Najstarsza apka sekcji `### Kod piosenki:` nie ma — JSON wkleja między
@@ -214,37 +306,34 @@ ParsedContribEmail _parseLegacy(String content){
     songSection = oldApp;
   }
 
-  String songJson = _extractFirstJsonObject(songSection);
-
-  Map<String, dynamic> songMap;
-  try {
-    songMap = jsonDecode(songJson) as Map<String, dynamic>;
-  } catch(e){
-    throw ContribEmailParseError('Nie udało się sparsować JSON-a piosenki: $e');
-  }
-
   // Najstarsze legacy — patrz `parse_contrib_email_old_app.dart`.
   //
   // Znacznik „nie edytuj" liczy się tylko przed sekcją `### Kod piosenki:`.
   // Odpowiedź z nowej apki cytuje stary mejl pod spodem — gdyby ten cytat
   // robił z niej zgłoszenie ze starej apki, przeszłaby bez sprawdzenia zgody.
-  // Mejl ze starej apki, któremu sekcję dokleja narzędzie, ma znacznik
-  // w oryginalnej treści, czyli przed nią.
-  final oldAppDetection = detectOldAppFormat(
-    songMap,
-    codeHeaderIdx == -1 ? content : content.substring(0, codeHeaderIdx),
-  );
-  songMap = oldAppDetection.songMap;
-  final isOldAppFormat = oldAppDetection.isOldAppFormat;
-  // Najstarsza apka bywa niechlujna w `add_pers` — patrz
-  // `normalizeOldAppSongMap`. Nowszych formatów to nie dotyka.
-  if(isOldAppFormat) songMap = normalizeOldAppSongMap(songMap);
+  final String textBeforeCode = codeHeaderIdx == -1 ? content : content.substring(0, codeHeaderIdx);
+  ({SongRaw song, bool isOldAppFormat}) songOf(Map<String, dynamic> songMap){
+    final oldAppDetection = detectOldAppFormat(songMap, textBeforeCode);
+    songMap = oldAppDetection.songMap;
+    // Najstarsza apka bywa niechlujna w `add_pers` — patrz
+    // `normalizeOldAppSongMap`. Nowszych formatów to nie dotyka.
+    if(oldAppDetection.isOldAppFormat) songMap = normalizeOldAppSongMap(songMap);
+    return (song: _songFromMap(songMap), isOldAppFormat: oldAppDetection.isOldAppFormat);
+  }
 
-  String? title = songMap[SongCore.PARAM_TITLE] as String?;
-  if(title == null || title.isEmpty)
-    throw ContribEmailParseError('Brak tytułu piosenki w JSON-ie.');
-
-  SongRaw song = SongRaw.fromApiRespMap('o!_${SongCore.filenameFromTitle(title)}', songMap);
+  // Otoczka `{"o!_id": {...}}` to znak rozpoznawczy najstarszej apki
+  // (`detectOldAppFormat`), więc piosenkę z załącznika owijamy tylko wtedy,
+  // gdy treść też ją miała — inaczej mejl z nowszej apki bez ``` wyglądałby
+  // na stary format.
+  final read = attached != null
+      ? songOf(_oldAppWrapperRe.hasMatch(songSection) ? {attached.id: attached.map} : attached.map)
+      : _unwrapped(
+          songSection,
+          codeHeaderIdx != -1 ? _lineBreakRe : _oldAppLineBreakRe,
+          (section) => songOf(_decodeSongMap(_extractFirstJsonObject(section))),
+        );
+  final SongRaw song = read.song;
+  final bool isOldAppFormat = read.isOldAppFormat;
 
   String? acceptedRulesVersion = _extractAcceptedRulesVersion(content);
   String? senderEmail = _extractSenderEmail(content);
@@ -269,11 +358,14 @@ ParsedContribEmail _parseLegacy(String content){
     registered: registered,
     userMessage: _extractUserMessage(content),
     correctionMessage: extractCorrectionMessage(content),
-    isLegacy: true,
+    // Najstarsza apka — rozpoznana po otoczce `{"o!_filename": {...}}`,
+    // nagłówku „Dzięki za chęć dzielenia się…" albo znacznikach „nie edytuj".
+    shape: isOldAppFormat? ContribEmailShape.oldApp: ContribEmailShape.legacy,
     personParseWarnings: personWarnings,
-    isOldAppFormat: isOldAppFormat,
   );
 }
+
+final RegExp _oldAppWrapperRe = RegExp(r'^\s*\{\s*"o!_');
 
 /// Wynik parsowania bloku osoby: zarejestrowany kontrybutor (jeśli się udało)
 /// i lista ostrzeżeń o polach, które były obecne w mejlu, ale nie udało się
@@ -285,7 +377,7 @@ class _LegacyPersonParse {
   static const empty = _LegacyPersonParse(null, []);
 }
 
-/// Parses the newer legacy block emitted by `contrib_song_email_legacy.dart`:
+/// Parses the newer legacy block — the shape `registeredContributorDartCode` emits:
 /// `RegisteredContributor X = const RegisteredContributor(
 ///    person: Person(...), emails: [...] );`
 _LegacyPersonParse _parseLegacyRegisteredBlock(String block){
@@ -359,7 +451,7 @@ Person? _personFromLegacyBody(String body, List<String> warnings){
 
   // V2 structural path: srodowisko: Srodowisko.hufiec('slug', showX: false, ...)
   // (also .choragiew / .okreg / .org). Musi być przed `.custom`, bo to jest
-  // domyślny format emitowany przez `contrib_song_email_legacy.dart`.
+  // domyślny format emitowany przez `registeredContributorDartCode`.
   final structMatch = RegExp(
       r"srodowisko:\s*Srodowisko\.(hufiec|choragiew|okreg|org)\(\s*'((?:\\'|[^'])*)'([^)]*)\)")
       .firstMatch(body);
@@ -499,24 +591,18 @@ List<String> _captureLegacyStringList(String body, String key){
 // Shared helpers.
 // =====================================================================
 
-final RegExp _emailAngleRe = RegExp(r'<([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})>');
-
 String? _extractSenderEmail(String content){
   // Szukamy tylko przed sekcją „### Kod piosenki:" — wszystko poniżej (np.
   // quoted reply chain w mejlu zwrotnym) nie powinno być źródłem nadawcy.
   final int cutoff = content.indexOf(kSongCodeMarker);
   final String haystack = cutoff == -1 ? content : content.substring(0, cutoff);
-  final Match? m = _emailAngleRe.firstMatch(haystack);
-  return m?.group(1)?.toLowerCase();
+  final String? email = regExpAngledEmail.firstMatch(haystack)?.group(1);
+  return email == null? null: normalizedEmail(email);
 }
 
 final RegExp _acceptRulesRe = RegExp(
   r'akceptuj[ęe]\s+zasady\s+dodawania\s+piosenek\s+do\s+aplikacji\s+HarcApp\s*\(\s*([^,\)]+?)\s*[,\)]',
   caseSensitive: false,
-);
-
-final RegExp _userMessageRe = RegExp(
-  r'-\s*-\s*-\s*-\s*-\s*-\s*Miejsce na własną wiadomość\s*-\s*-\s*-\s*-\s*-\s*-([\s\S]*?)-\s*-\s*-\s*-\s*-\s*-\s*Zasady dodawania piosenek\s*-\s*-\s*-\s*-\s*-\s*-',
 );
 
 /// Znaczniki, od których zaczyna się to, co dokłada szablon zgłoszenia
@@ -526,7 +612,7 @@ final RegExp _userMessageRe = RegExp(
 /// wpadłby cały kod piosenki.
 final RegExp _templateStartRe = RegExp(
   r'^(\s*-\s*){6}\s*(Zasady dodawania piosenek|Nie edytuj poniższego)'
-  r'|^###\s*(Kod piosenki|Osoba dodająca|Propozycja poprawki|Źródło piosenki|Poprawiana piosenka)',
+  r'|^###\s*(Kod piosenki|Osoba dodająca|Propozycja poprawki|Źródło piosenki)',
   multiLine: true,
 );
 
@@ -552,52 +638,27 @@ String? stripSubmissionTemplate(String body){
   return text.isEmpty? null: text;
 }
 
-String? _extractUserMessage(String content){
-  Match? m = _userMessageRe.firstMatch(content);
-  if(m == null) return null;
-  String raw = m.group(1) ?? '';
-  raw = raw.replaceAll(submissionUserMessagePlaceholderRe, '');
-  String trimmed = raw.trim();
-  if(trimmed.isEmpty) return null;
-  return trimmed;
+/// Dopisek autora w zgłoszeniu z załącznikiem: wszystko nad zamrożoną belką
+/// ([kSubmissionConsentBar]). `null`, gdy belki nie ma — mejl w starym
+/// kształcie.
+String? extractSubmissionUserMessage(String body) => _authorNote(body, _consentBarRe);
+
+final RegExp _consentBarRe = submissionBarRe(kSubmissionConsentBar);
+
+String? _extractUserMessage(String content) => _authorNote(content, _userMessageBarRe);
+
+/// Dopisek autora w każdym kształcie zgłoszenia: to, co nad szablonem, bez
+/// znaczników cytatu i bez podpowiedzi ([stripSubmissionTemplate]). Tylko
+/// w mejlu z polem na dopisek, rozpoznanym po belce [fieldBar] — najstarsza
+/// apka pola nie miała, a nad jej JSON-em stoi tylko powitanie.
+String? _authorNote(String body, RegExp fieldBar){
+  final text = unquoted(body);
+  return fieldBar.hasMatch(text)? stripSubmissionTemplate(text): null;
 }
 
 final RegExp _correctionFenceRe = RegExp(
   r'### Propozycja poprawki:\s*```[a-zA-Z]*\s*\n([\s\S]*?)```',
 );
-
-const String _correctionTargetHeader = '### Poprawiana piosenka:';
-
-/// Sekcja „### Poprawiana piosenka” — `lclId` piosenki, którą autor poprawia.
-/// `null`, gdy mejl jej nie ma. Czytamy tylko sprzed sekcji „### Kod piosenki:",
-/// żeby nie złapać linii z cytatu w mejlu zwrotnym.
-///
-/// Wartość bywa złamana: klienty pocztowe łamią linie koło 76 znaku, także
-/// w środku słowa, a `lclId` bywa dłuższe (najdłuższe w śpiewniku ma 95 znaków).
-/// Dlatego apka wysyła id w bloku ``` — wszystko między ogrodzeniami to id,
-/// białe znaki i znaki cytatu (`>`) wyrzucamy, nic nie zgadujemy. Bez bloku
-/// — `null`: żaden mejl w skrzynce nie niósł id inaczej.
-String? extractCorrectionTarget(String content){
-  final int cutoff = content.indexOf(kSongCodeMarker);
-  final String haystack = cutoff == -1? content: content.substring(0, cutoff);
-  final int at = haystack.indexOf(_correctionTargetHeader);
-  if(at == -1) return null;
-
-  final List<String> lines = haystack
-      .substring(at + _correctionTargetHeader.length)
-      .split('\n')
-      .map((l) => l.replaceFirst(quotePrefixRe, '').trim())
-      .toList();
-
-  final int fence = lines.indexWhere((l) => l.startsWith('```'));
-  if(fence == -1 || !lines.take(fence).every((l) => l.isEmpty)) return null;
-  final StringBuffer id = StringBuffer();
-  for(final String line in lines.skip(fence + 1)){
-    if(line.startsWith('```')) break;
-    id.write(line.replaceAll(RegExp(r'\s'), ''));
-  }
-  return id.isEmpty? null: id.toString();
-}
 
 /// Blok „Propozycja poprawki” — `null`, gdy pusty albo go nie ma.
 String? extractCorrectionMessage(String content){

@@ -1,4 +1,5 @@
 import 'package:harcapp_core/song_book/contrib_reply.dart';
+import 'package:harcapp_core/values/strings.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/plan.dart';
@@ -41,7 +42,7 @@ void main() {
           songAttachment: first.songAttachment, submissionAttachment: first.submissionAttachment,
         ),
         reply('m2', 'Oryginalnej piosenki niestety nie mogę w ten sposób zmienić.',
-            from: 'Harc App <$kInboxEmail>', at: DateTime.utc(2026, 6, 28, 15, 51)),
+            from: 'Harc App <$kHarcappEmail>', at: DateTime.utc(2026, 6, 28, 15, 51)),
         reply('m3', 'Jasne, czyli rozumiem, że możemy dodać to samo?',
             from: _author, at: DateTime.utc(2026, 6, 28, 17, 54)),
         ContribMessage(
@@ -100,7 +101,7 @@ void main() {
         // Tak wychodzi z `reply`: z ramką. W kolejce jej nie ma — `scan`
         // dociąga ją z wątku.
         reply('m2', composeContribReply(reviewNote: 'Brakuje chwytów.', oldApp: true)!,
-            from: 'Harc App <$kInboxEmail>', at: DateTime.utc(2026, 9, 2)),
+            from: 'Harc App <$kHarcappEmail>', at: DateTime.utc(2026, 9, 2)),
         inThread(v2, DateTime.utc(2026, 9, 3)),
       ], book: SongBook.empty);
       final c = out.single;
@@ -123,7 +124,7 @@ void main() {
           date: DateTime.utc(2026, 6, 1),
         ),
         reply('m2', 'Hej, dorzuć proszę chwyty.\n\nW dniu 1 czerwca Filip napisał:\n> Zgłoszenie',
-            from: 'Harc App <$kInboxEmail>', at: DateTime.utc(2026, 6, 2)),
+            from: 'Harc App <$kHarcappEmail>', at: DateTime.utc(2026, 6, 2)),
       ], book: SongBook.empty);
       expect(sub.conversation.where((m) => m.isOurs).single.text, 'Hej, dorzuć proszę chwyty.');
     });
@@ -135,7 +136,7 @@ void main() {
           date: DateTime.utc(2026, 6, 1),
         ),
         reply('m2', 'Chwyty: a d e\n\n'
-            'W dniu pt., 12 wrz 2026 o 10:15 HarcApp <$kInboxEmail> napisał(a):\n'
+            'W dniu pt., 12 wrz 2026 o 10:15 HarcApp <$kHarcappEmail> napisał(a):\n'
             '> Dorzuć chwyty.',
             from: _author, at: DateTime.utc(2026, 6, 2)),
       ], book: SongBook.empty);

@@ -38,7 +38,7 @@ void main() {
         [SongLabel.rejectedCorruptedFile.label]);
     expect(stateLabelsFor(classifiedWith([], destination: Destination.rejectUnknownFormat)),
         [SongLabel.rejectedUnknownFormat.label]);
-    expect(stateLabelsFor(classifiedWith([], destination: Destination.unparsable)), [SongLabel.rejectedUnparsable.label]);
+    expect(stateLabelsFor(classifiedWith([], destination: Destination.rejectUnparsable)), [SongLabel.rejectedUnparsable.label]);
     expect(
       stateLabelsFor(classifiedWith(
           [SongIssue.missingYoutube, SongIssue.missingTitle, SongIssue.userMessage])),

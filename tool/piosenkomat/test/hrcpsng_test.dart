@@ -3,10 +3,8 @@ import 'dart:io';
 
 
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
-import 'package:harcapp_core/song_book/piosenkomat/file_names.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
-import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:path/path.dart' as p;
 import 'package:piosenkomat/run_dir.dart';
 import 'package:piosenkomat/classify.dart';
@@ -23,7 +21,7 @@ void main() {
 
     final decoded = importHrcpsng(encodeHrcpsng([song])).$1;
     expect(decoded, hasLength(1));
-    expect(decoded.single.contributorData!.acceptedContributionRulesVersion, 'v05.10.2025');
+    expect(decoded.single.contributorData!.acceptedRulesVersion, 'v05.10.2025');
     expect(decoded.single.youtubeVideoId, 'dQw4w9WgXcQ');
     expect(decoded.single.hasChords, isTrue);
   });
@@ -56,9 +54,9 @@ void main() {
   });
 
   test('ślad piosenkomatu jedzie do pliku tylko na życzenie i wraca w całości', () async {
-    final c = classify(msgFrom(await completeEmail(song: sampleSong(yt: null), userMessage: 'hej')),
-        book: SongBook.empty);
-    final song = c.song!..piosenkomatData = c.piosenkomatData(run: 'import-x');
+    final c = classifyBatch([msgFrom(await completeEmail(song: sampleSong(yt: null), userMessage: 'hej'))],
+        book: SongBook.empty, run: 'run-x').single;
+    final song = c.song!;
     expect(importHrcpsng(encodeHrcpsng([song])).$1.single.piosenkomatData, isNull,
         reason: 'domyślnie pole nie wychodzi — inaczej wyciekłoby do bazy piosenek');
 
@@ -68,7 +66,7 @@ void main() {
     expect(data.kind, SubmissionKind.newSong);
     expect(data.isOldApp, isFalse);
     expect(data.userMessage, 'hej');
-    expect(data.run, 'import-x');
+    expect(data.run, 'run-x');
     expect(data.sentAt, c.submission.sentAt);
     expect(data.issues.map((i) => i.issue), [SongIssue.userMessage, SongIssue.missingYoutube]);
   });
@@ -82,63 +80,60 @@ void main() {
         msgFrom(await completeEmail(
             isNew: false, song: sampleSong(title: 'Stara', lyrics: '$lyrics\nDopisana zwrotka na koniec'))),
         book: book);
-    final song = c.song!..piosenkomatData = c.piosenkomatData();
+    final song = c.song!;
     expect(song.piosenkomatData!.correctionTargetGuessed, isTrue);
-    final targets = stripPiosenkomat([song]);
-    expect(targets.single.id, 'tmp');
-    expect(targets.single.guessed, isTrue, reason: 'podmiana po złym id kosztuje cudzą piosenkę');
+    final replacements = stripPiosenkomat([song]).replacements;
+    expect(replacements.single.id, 'tmp');
+    expect(replacements.single.guessed, isTrue, reason: 'podmiana po złym id kosztuje cudzą piosenkę');
   });
 
-  test('strip: zdejmuje ślad, poprawce daje id poprawianej piosenki', () async {
+  test('strip: kopie bez śladu, poprawka pod id poprawianej piosenki, oryginały nietknięte', () async {
     final book = bookWith([sampleSong(title: 'Stara', lyrics: 'Ala ma kota\nA kot ma Ale')]);
     final items = classifyBatch([
       msgFrom(await completeEmail(song: sampleSong(title: 'Nowa', lyrics: 'Zupelnie inne')), id: 'n'),
-      msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(title: 'Stara (popr.)', lyrics: 'Ala ma kota\nA kot ma Ale\nZwrotka')), id: 'c'),
+      msgFrom(await completeEmail(isNew: false, basedOnSongId: 'tmp', song: sampleSong(title: 'Stara (popr.)', lyrics: 'Ala ma kota\nA kot ma Ale\nZwrotka')), id: 'c'),
     ], book: book);
-    final songs = [for (final c in items) c.song!..piosenkomatData = c.piosenkomatData()];
+    final songs = [for (final c in items) c.song!];
     expect(songs[1].piosenkomatData!.correctionTarget, 'tmp');
-    expect(songs.every((s) => s.contributorData?.emailThreadId != null), isTrue,
+    expect(songs.every((s) => s.piosenkomatData?.threadId != null), isTrue,
         reason: 'przed stripem id wątku wiąże piosenkę ze zgłoszeniem');
     // Poprawka zrobiona w apce na własnej kopii przyjeżdża z pamięcią
     // o pierwowzorze w samej piosence.
     songs[1].basedOnSongId = 'tmp';
-    final targets = stripPiosenkomat(songs);
-    expect(songs.every((s) => s.piosenkomatData == null), isTrue);
-    expect(songs.every((s) => s.basedOnSongId == null), isTrue,
+    final (songs: stripped, :replacements) = stripPiosenkomat(songs);
+    expect(stripped.every((s) => s.piosenkomatData == null), isTrue);
+    expect(stripped.every((s) => s.basedOnSongId == null), isTrue,
         reason: 'do bazy jedzie sama piosenka, bez pamięci o poprawianiu');
-    expect(songs[1].id, 'tmp', reason: 'apka referencjonuje piosenki po lclId');
-    expect(targets.single.id, 'tmp');
-    expect(targets.single.title, 'Stara (popr.)');
-    expect(targets.single.guessed, isFalse, reason: 'cel podany przez apkę');
-    expect(songs[0].id, startsWith('o!_'));
-    // Ślad to nie tylko pole `piosenkomat` — id wątku ze skrzynki też jest nasze.
-    expect(songs.every((s) => s.contributorData?.emailThreadId == null), isTrue);
-    expect(songs.every((s) => s.contributorData?.email.isNotEmpty ?? false), isTrue,
-        reason: 'reszta contributor_data zostaje — to dane autora, nie nasz ślad');
-    expect(encodeHrcpsng(songs), isNot(contains('email_thread_id')));
+    expect(stripped[1].id, 'tmp', reason: 'apka referencjonuje piosenki po lclId');
+    expect(replacements.single.id, 'tmp');
+    expect(replacements.single.title, 'Stara (popr.)');
+    expect(replacements.single.guessed, isFalse, reason: 'cel podany przez apkę');
+    expect(stripped[0].id, startsWith('o!_'));
+    expect(stripped.every((s) => s.contributorData?.email.isNotEmpty ?? false), isTrue,
+        reason: 'contributor_data zostaje — to dane autora, nie nasz ślad');
+    expect(encodeHrcpsng(stripped), isNot(contains('thread_id')), reason: 'id wątku ze skrzynki nie wycieka');
+    // Przegląd zostaje ze śladem: osoby i `summary.md` czytają go także po
+    // złożeniu `final-*`, w dowolnej kolejności.
+    expect(songs.every((s) => s.piosenkomatData != null), isTrue);
+    expect(songs[1].id, isNot('tmp'));
   });
 
-  test('nazwa zapisu z edytora liczy się z samych piosenek', () {
-    SongRaw z(SubmissionKind kind) => sampleSong()
-      ..piosenkomatData = PiosenkomatData(kind: kind);
+  test('poprawka piosenki z conf: w pliku w sekcji conf, id bez sklejonych przedrostków', () async {
+    const lyrics = 'Ala ma kota\nA kot ma Ale';
+    final book = bookWith([sampleSong(id: 'oc!_stara', title: 'Stara', lyrics: lyrics)]);
+    final c = classify(
+        msgFrom(await completeEmail(
+            isNew: false, basedOnSongId: 'oc!_stara', song: sampleSong(title: 'Stara', lyrics: '$lyrics\nZwrotka'))),
+        book: book);
+    final stripped = stripPiosenkomat([c.song!]).songs;
+    expect(stripped.single.id, 'oc!_stara');
 
-    // Cała paczka z przeglądu, jeden rodzaj.
-    expect(
-        suggestedSaveFileName([z(SubmissionKind.newSong), z(SubmissionKind.newSong)]),
-        'reviewed-new.hrcpsng');
-    expect(suggestedSaveFileName([z(SubmissionKind.correction)]),
-        'reviewed-correction.hrcpsng');
-
-    // Cokolwiek innego — nazwa neutralna.
-    expect(suggestedSaveFileName([]), '0_songs.hrcpsng',
-        reason: 'pusto');
-    expect(suggestedSaveFileName([z(SubmissionKind.newSong), sampleSong()]),
-        '2_songs.hrcpsng',
-        reason: 'piosenka dorzucona z ręki, bez śladu piosenkomatu');
-    expect(
-        suggestedSaveFileName([z(SubmissionKind.newSong), z(SubmissionKind.correction)]),
-        '2_songs.hrcpsng',
-        reason: 'nowe zmieszane z poprawkami — narzędzie czyta je osobno');
+    final content = encodeHrcpsng(stripped);
+    expect((jsonDecode(content)['conf'] as Map).keys, ['oc!_stara'],
+        reason: 'apka szuka piosenki oc!_… tylko w conf');
+    final (official, conf) = importHrcpsng(content);
+    expect(official, isEmpty);
+    expect(conf.single.id, 'oc!_stara');
   });
 
   test('nazwy plików przebiegu', () {
@@ -152,13 +147,14 @@ void main() {
     expect(run.plan, p.join(dir, 'plan.json'));
     expect(run.report, p.join(dir, 'report.txt'));
     expect(run.people, p.join(dir, 'people.dart'));
+    expect(run.drafts, p.join(dir, 'drafts.json'));
     expect(run.summary, p.join(dir, 'summary.md'));
   });
 
   test('archiwum: katalog przebiegu obok out/, drugi raz z sufiksem', () {
     final root = tempDir().path;
-    expect(archivePath('import-1', root: root), p.join(root, 'archive', 'import-1'));
-    Directory(p.join(root, 'archive', 'import-1')).createSync(recursive: true);
-    expect(archivePath('import-1', root: root), p.join(root, 'archive', 'import-1~2'));
+    expect(archivePath('run-1', root: root), p.join(root, 'archive', 'run-1'));
+    Directory(p.join(root, 'archive', 'run-1')).createSync(recursive: true);
+    expect(archivePath('run-1', root: root), p.join(root, 'archive', 'run-1~2'));
   });
 }

@@ -1,7 +1,6 @@
 import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email_old_app.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
-import 'package:piosenkomat/reply.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -89,48 +88,5 @@ void main() {
     expect(carriesOldAppBlock(composeContribReply(reviewNote: 'Super:)')!), isFalse);
     expect(replyNoteOf(withBlock.replaceAll('. ', '.\n')), 'Super:)',
         reason: 'przełamany blok to dalej ramka, nie Twój tekst');
-  });
-
-  group('wantedReplies — mejl na piosenkę, w jej wątku, blok raz na autora', () {
-    ReplyThread thread(String id, {String? note, bool oldApp = false}) =>
-        (threadId: id, sender: 'autor@example.com', messageIds: ['${id}1'], oldApp: oldApp, note: note);
-
-    test('dwie piosenki z uwagami → dwa mejle, każdy w swoim wątku', () {
-      final w = wantedReplies([thread('A', note: 'Brakuje chwytów.'), thread('B', note: 'Podziel na zwrotki.')]);
-      expect(w.keys, ['A', 'B']);
-      expect(w['A'], contains('Brakuje chwytów.'));
-      expect(w['A'], isNot(contains('Podziel na zwrotki.')));
-    });
-
-    test('stara apka: blok w odpowiedzi, bez osobnego mejla z samym blokiem', () {
-      final w = wantedReplies(
-          [thread('A', oldApp: true), thread('B', note: 'Super:)', oldApp: true), thread('C', oldApp: true)]);
-      expect(w.keys, ['B']);
-      expect(carriesOldAppBlock(w['B']!), isTrue);
-    });
-
-    test('stara apka bez żadnej uwagi → jeden mejl z samym blokiem, w najnowszym wątku', () {
-      final w = wantedReplies([thread('A', oldApp: true), thread('B', oldApp: true)]);
-      expect(w.keys, ['B']);
-      expect(replyNoteOf(w['B']!), isEmpty);
-    });
-
-    test('uwaga do piosenki z nowej apki nie niesie bloku — dostaje go osobny mejl', () {
-      final w = wantedReplies([thread('A', oldApp: true), thread('B', note: 'Super:)')]);
-      expect(w.keys, unorderedEquals(['A', 'B']));
-      expect(carriesOldAppBlock(w['B']!), isFalse);
-      expect(carriesOldAppBlock(w['A']!), isTrue);
-    });
-
-    test('autor czeka na blok w wątku z innego przebiegu → tu bloku nie ma', () {
-      final w = wantedReplies([thread('A', oldApp: true), thread('B', note: 'Super:)', oldApp: true)],
-          blockElsewhere: true);
-      expect(w.keys, ['B']);
-      expect(carriesOldAppBlock(w['B']!), isFalse);
-    });
-
-    test('bez tekstu i bez starej apki nie ma czego pisać', () {
-      expect(wantedReplies([thread('A')]), isEmpty);
-    });
   });
 }

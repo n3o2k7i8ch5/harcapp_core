@@ -3,14 +3,7 @@
 /// szybciej, a to był największy koszt budowy indeksu śpiewnika.
 library;
 
-const _foldPairs = {
-  'ą': 'a', 'á': 'a', 'ć': 'c', 'ę': 'e', 'é': 'e', 'ě': 'e', 'í': 'i', 'ł': 'l', 'ń': 'n', 'ó': 'o',
-  'ö': 'o', 'ő': 'o', 'ř': 'r', 'ś': 's', 'š': 's', 'ú': 'u', 'ü': 'u', 'ű': 'u', 'ý': 'y', 'ź': 'z',
-  'ż': 'z', 'ž': 'z',
-};
-final Map<int, int> _fold = {
-  for (final e in _foldPairs.entries) e.key.codeUnitAt(0): e.value.codeUnitAt(0),
-};
+import 'package:harcapp_core/comm_classes/text_utils.dart';
 
 final _wordChar = RegExp(r'[\p{L}\p{N}_]', unicode: true);
 /// Czy znak spoza ASCII jest literą albo cyfrą — `RegExp` raz na znak, nie
@@ -45,8 +38,7 @@ List<String> lineWords(String line) {
   }
 
   for (var i = 0; i < s.length; i++) {
-    var c = s.codeUnitAt(i);
-    c = _fold[c] ?? c;
+    final c = foldDiacritic(s.codeUnitAt(i));
     if ((c >= 0x61 && c <= 0x7a) || (c >= 0x30 && c <= 0x39) || c == 0x5f) {
       buf.writeCharCode(c);
     } else if (_isSeparator(c)) {

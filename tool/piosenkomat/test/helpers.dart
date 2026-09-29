@@ -7,7 +7,9 @@ import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/similarity.dart';
-import 'package:harcapp_core/song_book/contrib_song_email.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email.dart';
+import 'package:harcapp_core/song_book/song_core.dart';
+import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
 import 'package:harcapp_core/song_book/song_element.dart';
@@ -15,6 +17,9 @@ import 'package:piosenkomat/hrcpsng.dart';
 import 'package:harcapp_core/song_book/submission/submission_email.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/models.dart';
+import 'package:harcapp_core/values/people/registered_contributor_code.dart';
+import 'package:harcapp_core/values/people/utils.dart';
+import 'package:harcapp_core/values/strings.dart';
 import 'package:test/test.dart';
 
 const _defaultLyrics = 'Ala ma kota a kot ma ale\nW lesie gra muzyka';
@@ -56,25 +61,28 @@ Future<String> completeEmail({
   bool withConsent = true,
   bool reply = false,
   RegisteredContributor? registered,
-  String? correctionTarget,
+  /// Pierwowzór zapamiętany w samej piosence (`based_on_song_id`) — tak
+  /// poprawka mówi, co poprawia, w kształcie mejla bez pliku zgłoszenia.
+  String? basedOnSongId,
   /// Blok „Propozycja poprawki”. Domyślnie wypełniony przy poprawce — tak
   /// wysyła apka; `false` daje poprawkę, przy której autor nie napisał nic.
   bool withUpdateComment = true,
+  /// Nagłówek `Date:`; domyślnie 6 września 2026.
+  String? date,
 }) async {
   song ??= sampleSong();
-  final subject = composeContribSongEmailSubject(
+  if (basedOnSongId != null) song = SongRaw.empty()..set(song)..basedOnSongId = basedOnSongId;
+  final subject = _fencedEmailSubject(
     song: song,
     isNewSong: isNew,
     registered: registered,
   );
-  var body = await composeContribSongEmail(
+  var body = await _fencedEmailBody(
     song: song,
-    source: SongSource.web,
-    acceptRulesVersion: 'v05.10.2025',
+    acceptedRulesVersion: 'v05.10.2025',
     registered: registered,
     isNewSong: isNew,
     updateComment: isNew || !withUpdateComment ? null : 'poprawka chwytu w refrenie',
-    correctionTarget: correctionTarget,
   );
   if (userMessage != null) {
     body = body.replaceFirst(
@@ -91,9 +99,9 @@ Future<String> completeEmail({
 
   final buf = StringBuffer()
     ..writeln('From: $from')
-    ..writeln('To: harcapp@gmail.com')
+    ..writeln('To: $kHarcappEmail')
     ..writeln('Subject: $subject')
-    ..writeln('Date: 2026-09-06T12:00:00+02:00');
+    ..writeln('Date: ${date ?? '2026-09-06T12:00:00+02:00'}');
   if (reply) buf.writeln('In-Reply-To: <prev@mail.gmail.com>');
   buf.writeln();
   buf.write(body);
@@ -119,8 +127,8 @@ String hardWrap(String text, {int width = 76}) {
   return out.join('\r\n');
 }
 
-/// Piosenki przez format pliku i z powrotem, tak jak robi to strona: proposed
-/// i reviewed są wtedy osobnymi obiektami, więc dopasowanie musi iść po id.
+/// Piosenki przez format pliku i z powrotem, tak jak robi to strona: kandydaci
+/// i piosenki po przeglądzie są wtedy osobnymi obiektami, więc dopasowanie musi iść po id.
 /// Kopie jednej piosenki (rozbita na stronie na dwie) dostają `~2` — strona
 /// pliku ze zdublowanym id nie zapisze, trzeba je rozróżnić.
 List<SongRaw> roundTrip(List<SongRaw> songs) {
@@ -153,7 +161,6 @@ Classified classifiedWith(
   const m = ContribMessage(id: 'x', body: '');
   return Classified(
     Submission(
-      threadId: 'x',
       message: m,
       messages: const [m],
       kind: kind,
@@ -197,7 +204,7 @@ String mimeEmail({
   const boundary = '----harcapp-test-boundary';
   final buf = StringBuffer()
     ..writeln('From: $from')
-    ..writeln('To: harcapp@gmail.com')
+    ..writeln('To: $kHarcappEmail')
     ..writeln('Subject: $subject')
     ..writeln('Date: $date');
   if (reply) buf.writeln('In-Reply-To: <prev@mail.gmail.com>');
@@ -230,7 +237,7 @@ String mimeEmail({
   List<SongSubmission>? submissions,
   SongRaw? song,
   SubmissionOrigin origin = SubmissionOrigin.appAndroid,
-  String? rulesVersion = 'v05.10.2025',
+  String? acceptedRulesVersion = 'v05.10.2025',
   String? appVersion = '2.4.1',
   String? userMessage,
   String from = 'Jan Testowy <jan.testowy@example.com>',
@@ -242,7 +249,7 @@ String mimeEmail({
         [SongSubmission(kind: SubmissionKind.newSong, song: song ?? sampleSong())],
     origin: origin,
     appVersion: appVersion,
-    acceptRulesVersion: rulesVersion,
+    acceptedRulesVersion: acceptedRulesVersion,
   );
   final file = mangle == null ? mail.fileContent : mangle(mail.fileContent);
   final body = userMessage == null
@@ -260,27 +267,161 @@ String mimeEmail({
   );
 }
 
-/// Treść mejla z najstarszej apki: JSON piosenki między znacznikami
+/// Treść mejla z najstarszej apki: [json] piosenki między znacznikami
 /// „nie edytuj”, bez sekcji `### Kod piosenki:`.
 String oldAppBody({
+  String? json,
+  String greeting = 'Dzięki za chęć dzielenia się swoimi piosenkami!',
+}) =>
+    '$greeting\n\nPamiętaj, by podać swoje:\n- imię: Jan\n\n'
+    '!!! NIE EDYTUJ PONIŻSZEGO TEKSTU !!!\n${json ?? oldAppSongJson()}\n!!! NIE EDYTUJ POWYŻSZEGO TEKSTU !!!\n';
+
+/// JSON piosenki, jaki wklejała najstarsza apka: `add_pers` napisem,
+/// [refren] osobną częścią.
+String oldAppSongJson({
   String title = 'Testowa stara piosenka',
   String lyrics = 'Zwrotka pierwsza tej piosenki\nDruga linia zwrotki',
+  String? refren,
   String yt = 'dQw4w9WgXcQ',
-}) {
-  final json = jsonEncode({
-    'title': title,
-    'hid_titles': [],
-    'text_authors': ['Autor Testowy'],
-    'composers': [],
-    'performers': ['Zespol Testowy'],
-    'release_date': null,
-    'yt_link': 'https://youtu.be/$yt',
-    'add_pers': 'Jan Testowy',
-    'tags': [],
-    'parts': [
-      {'text': lyrics, 'chords': 'a d\ne a', 'shift': false},
-    ],
-  });
-  return 'Dzięki za chęć dzielenia się swoimi piosenkami!\n\n'
-      '!!! NIE EDYTUJ PONIŻSZEGO TEKSTU !!!\n$json\n!!! NIE EDYTUJ POWYŻSZEGO TEKSTU !!!\n';
+}) =>
+    jsonEncode({
+      'title': title,
+      'hid_titles': [],
+      'text_authors': ['Autor Testowy'],
+      'composers': [],
+      'performers': ['Zespol Testowy'],
+      'release_date': null,
+      'show_rel_date_month': true,
+      'show_rel_date_day': true,
+      'yt_link': 'https://youtu.be/$yt',
+      'add_pers': 'Jan Testowy',
+      'tags': [],
+      if (refren != null) 'refren': {'text': refren, 'chords': 'a d', 'shift': true},
+      'parts': [
+        {'text': lyrics, 'chords': 'a d\ne a', 'shift': false},
+        if (refren != null) {'refren': 1},
+      ],
+    });
+
+// ---------------------------------------------------------------------------
+// Mejl w kształcie sprzed pliku zgłoszenia (bloki ```): tak wysyłały apka
+// i strona, zanim zgłoszenie pojechało załącznikiem. Parser dalej go czyta,
+// a składa go już tylko ten test.
+// ---------------------------------------------------------------------------
+
+String _registeredPersonJsonBlock(RegisteredContributor registered, {List<ContributorRef> contribRefs = const []}){
+  final contribRefEmails = <String>[
+    for(final c in contribRefs)
+      if(c.emailRef != null) c.emailRef!,
+  ];
+
+  final Map jsonMap = registered.person.toApiJsonMap();
+  jsonMap['email'] = registered.emails.isNotEmpty ? registered.emails : contribRefEmails;
+
+  return const JsonEncoder.withIndent('  ').convert(jsonMap);
+}
+
+/// Czy żaden z adresów nie należy do osoby z `data.dart` — stare szablony
+/// pisały wtedy w temacie „świeżak”, inaczej „weteran”.
+bool _isFirstSong(RegisteredContributor? registered) =>
+    (registered?.emails ?? const []).every((e) => registeredPersonByEmail(e) == null);
+
+String _fencedEmailSubject({
+  required SongCore song,
+  required bool isNewSong,
+  RegisteredContributor? registered,
+}){
+  final firstSong = _isFirstSong(registered);
+  return '${isNewSong?'Nowa piosenka':'Poprawka piosenki'} "${song.title}" (${firstSong?' + świeżak + ':' - weteran - '})';
+}
+
+String _fencedEmailBase(
+    String? acceptedRulesVersion,
+    bool firstSong,
+    RegisteredContributor? registered,
+    List<ContributorRef> contribRefs,
+) => "- - - - - - Miejsce na własną wiadomość - - - - - -"
+    "\n"
+    "\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]"
+    "\n"
+    "\n- - - - - - Zasady dodawania piosenek - - - - - -"
+    "\n"
+    "\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (${acceptedRulesVersion}, dostępne na www.harcapp.web.app/song_contribution_rules)."
+    "\n"
+    "\n- - - - - - Nie edytuj poniższego - - - - - -"
+    "\n"
+    "\n### Źródło piosenki: harcapp.web.app"
+    "${
+        registered == null?
+        '':
+        '\n'
+        '\n### Osoba dodająca (${firstSong?' + świeżak + ':' - weteran - '}):'
+        '\n'
+        '\n```json'
+        '\n${_registeredPersonJsonBlock(registered, contribRefs: contribRefs)}'
+        '\n```'
+    }";
+
+Future<String> _fencedEmailBody({
+  required SongCore song,
+  String? acceptedRulesVersion,
+  RegisteredContributor? registered,
+  required bool isNewSong,
+  String? updateComment,
+}) async {
+
+  final firstSong = _isFirstSong(registered);
+
+  String encodedSong = await song.code;
+
+  return "${_fencedEmailBase(acceptedRulesVersion, firstSong, registered, song.contribRefs)}"
+      "${
+          updateComment != null?
+          '\n'
+          '\n### Propozycja poprawki:'
+          '\n'
+          '\n```text'
+          '\n$updateComment'
+          '\n```':
+          ''
+      }"
+      "\n"
+      "\n$kSongCodeMarker"
+      "\n"
+      "\n```json"
+      "\n$encodedSong"
+      "\n```";
+}
+
+// ---------------------------------------------------------------------------
+// Najstarszy kształt sprzed plików: osoba dodająca jako kod Darta, piosenka
+// gołym JSON-em, bez bloków ```. Tak wysyłały starsze wersje apki i strony;
+// parser dalej go czyta, a składa go już tylko ten test.
+// ---------------------------------------------------------------------------
+
+/// Cały mejl w najstarszym kształcie — osoba przez [registeredContributorDartCode],
+/// jak ją wtedy wstawiały apka i strona.
+Future<String> legacyEmail({
+  required SongRaw song,
+  required RegisteredContributor registered,
+  String from = 'Jan Testowy <jan.testowy@example.com>',
+}) async {
+  final firstSong = _isFirstSong(registered);
+  final body = '- - - - - - Miejsce na własną wiadomość - - - - - -\n'
+      '\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]\n'
+      '\n- - - - - - Zasady dodawania piosenek - - - - - -\n'
+      '\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp (v05.10.2025, '
+      'dostępne na www.harcapp.web.app/song_contribution_rules).\n'
+      '\n- - - - - - Nie edytuj poniższego - - - - - -\n'
+      '\n### Źródło piosenki: harcapp.web.app\n'
+      '\n### Osoba dodająca (${firstSong ? ' + świeżak + ' : ' - weteran - '}):\n'
+      '\n${registeredContributorDartCode(registered)}\n'
+      '\n$kSongCodeMarker\n'
+      '\n${await song.code}';
+  return 'From: $from\n'
+      'To: $kHarcappEmail\n'
+      'Subject: Nowa piosenka "${song.title}" (${firstSong ? ' + świeżak + ' : ' - weteran - '})\n'
+      'Date: 2026-09-06T12:00:00+02:00\n'
+      '\n'
+      '$body';
 }

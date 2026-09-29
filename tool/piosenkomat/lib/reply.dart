@@ -5,6 +5,7 @@ import 'package:harcapp_core/song_book/contrib_reply.dart';
 
 import 'mailbox.dart';
 import 'model.dart';
+import 'plan.dart';
 
 /// Odpowiedź do autora czeka w Gmailu jako **szkic** w wątku jego zgłoszenia
 /// — to jedyny jej stan. Etykieta `reply/*` mówi, że czeka, szkic — co pójdzie.
@@ -27,26 +28,25 @@ typedef ReplyThread = ({
   String? note,
 });
 
-/// Treść odpowiedzi w każdym wątku jednego autora, po id wątku. Każdy tekst
-/// z przeglądu to mejl w swoim wątku; w wątku ze starej apki niesie blok o niej.
-/// Gdy żaden go nie niesie, a autor na niego czeka — jeden mejl z samym
-/// blokiem, w najnowszym takim wątku. [threads] od najstarszego.
-///
-/// [blockElsewhere]: autor czeka już na blok w wątku spoza przebiegu — tam
-/// go dostanie, więc tutaj go nie ma. Blok idzie raz na autora.
-Map<String, String> wantedReplies(List<ReplyThread> threads, {bool blockElsewhere = false}) {
-  final out = <String, String>{
-    for (final t in threads)
-      if (t.note != null)
-        t.threadId: composeContribReply(reviewNote: t.note, oldApp: t.oldApp && !blockElsewhere)!,
-  };
-  final carried = threads.any((t) => t.note != null && t.oldApp);
-  final waiting = [for (final t in threads) if (t.oldApp && t.note == null) t];
-  if (!blockElsewhere && !carried && waiting.isNotEmpty) {
-    out[waiting.last.threadId] = composeContribReply(oldApp: true)!;
-  }
-  return out;
-}
+/// Wątki przebiegu, jakie widzą szkice: kto, na co czeka i jaki tekst z [notes]
+/// ma dostać. Tekst liczy się tylko w wątku, który czeka na odpowiedź
+/// z przeglądu (`reply/review-note`). [labels] — etykiety po mejlu takie, jakie
+/// będą po zmianach wypychanych przez komendę.
+List<ReplyThread> replyThreadsOf(RunPlan plan, Map<String, Set<String>> labels,
+        [Map<String, String> notes = const {}]) =>
+    [
+      for (final MapEntry(key: thread, value: t) in plan.threads.entries)
+        if (t.sender case final sender?)
+          (
+            threadId: thread,
+            sender: sender,
+            messageIds: t.messages,
+            oldApp: plan.labelsOfThread(thread, labels).contains(SongLabel.replyOldApp.label),
+            note: plan.labelsOfThread(thread, labels).contains(SongLabel.replyReviewNote.label)
+                ? notes[thread]
+                : null,
+          ),
+    ];
 
 /// Co zrobić ze szkicem w wątku.
 enum DraftStep {
@@ -55,89 +55,107 @@ enum DraftStep {
   create,
   /// Szkic już taki, jaki ma być.
   keep,
-  /// Szkic bez ludzkiego tekstu (sama ramka i blok) — wolno go przeliczyć.
+  /// Szkic poprawiony w Gmailu, a przegląd od tamtej pory się nie zmienił —
+  /// Twoja wersja wygrywa, bez uwag.
+  edited,
+  /// Szkic bez Twojego tekstu z Gmaila — sama ramka i blok albo dokładnie to,
+  /// co narzędzie wpisało — wolno go przeliczyć.
   rewrite,
-  /// Szkic bez ludzkiego tekstu w wątku, w którym odpowiedzi ma nie być.
+  /// Taki szkic w wątku, w którym odpowiedzi ma nie być.
   delete,
-  /// Szkic z tekstem inny niż plan — Twój; zostaje, a narzędzie mówi o różnicy.
+  /// Szkic poprawiony w Gmailu, a przegląd też się zmienił (albo nie wiadomo,
+  /// co narzędzie wpisało) — zostaje, a narzędzie mówi o różnicy.
   differs,
   /// Szkic nie w naszym kształcie albo nieczytelny — zostaje nietknięty.
   manual,
 }
 
-/// Jedna reguła dla każdego szkicu: narzędzie rusza tylko szkic, w którym nie
-/// ma ludzkiego tekstu — samą ramkę i blok o starej apce. Szkic z tekstem jest
-/// Twój, choćby tekst przyszedł z przeglądu: poprawki w Gmailu nie mogą
-/// zniknąć przy kolejnym `review --push`. [body] `null` przy [exists] —
-/// szkicu nie da się odczytać; [want] `null` — odpowiedzi ma tu nie być.
-DraftStep draftStep({required bool exists, String? body, String? want}) {
+/// Jedna reguła dla każdego szkicu: narzędzie rusza tylko szkic, którego nie
+/// poprawiałeś w Gmailu — samą ramkę, blok o starej apce albo tekst dokładnie
+/// taki, jaki samo wpisało ([written]). Poprawki z Gmaila nie mogą zniknąć przy
+/// kolejnym `review --push`. [body] `null` przy [exists] — szkicu nie da się
+/// odczytać; [want] `null` — odpowiedzi ma tu nie być; [written] `null` — nie
+/// wiadomo, co narzędzie wpisało, więc szkic z tekstem jest Twój.
+DraftStep draftStep({required bool exists, String? body, String? want, String? written}) {
   if (!exists) return want == null ? DraftStep.none : DraftStep.create;
   if (body == null || !isToolShapedReply(body)) return DraftStep.manual;
   final text = _squash(replyNoteOf(body));
-  if (want == null) return text.isEmpty ? DraftStep.delete : DraftStep.differs;
+  final untouched = written != null && _squash(body) == _squash(written);
+  if (want == null) return text.isEmpty || untouched ? DraftStep.delete : DraftStep.differs;
   if (_squash(body) == _squash(want)) return DraftStep.keep;
   // Sam tekst się zgadza, różni się ramka (np. doszedł blok) — przeliczenie
   // niczego Twojego nie zmieni.
-  if (text.isEmpty || text == _squash(replyNoteOf(want))) return DraftStep.rewrite;
+  if (text.isEmpty || untouched || text == _squash(replyNoteOf(want))) return DraftStep.rewrite;
+  if (written != null && _squash(replyNoteOf(written)) == _squash(replyNoteOf(want))) return DraftStep.edited;
   return DraftStep.differs;
 }
 
-/// Szkice wątków przebiegu takie, jak mają być ([wantedReplies] per autor,
-/// [draftStep] per wątek). Bez [push] tylko wypisuje, co by zrobił.
-Future<void> syncDrafts(Mailbox mailbox, List<ReplyThread> threads, {required bool push}) async {
+/// Szkice wątków przebiegu takie, jak mają być ([draftStep] per wątek). Bez
+/// [push] tylko wypisuje, co by zrobił. [written] — co narzędzie samo wpisało
+/// do szkiców, po wątku; z [push] dopisuje do niego to, co wpisze teraz.
+/// Zwraca, ile szkiców założyło, przeliczyło albo skasowało — na sucho: ile by.
+Future<int> syncDrafts(Mailbox mailbox, List<ReplyThread> threads,
+    {required bool push, required Map<String, String> written}) async {
   final drafts = await mailbox.draftIdByThread();
-  final runMessages = {for (final t in threads) ...t.messageIds};
-  final bySender = <String, List<ReplyThread>>{};
-  for (final t in threads) {
-    bySender.putIfAbsent(t.sender, () => []).add(t);
-  }
-
   final counts = {for (final step in DraftStep.values) step: 0};
-  for (final MapEntry(key: sender, value: own) in bySender.entries) {
-    final relevant = own.any((t) => t.oldApp || t.note != null || drafts.containsKey(t.threadId));
-    if (!relevant) continue;
-    // Blok raz na autora: czeka na niego wątek z innego przebiegu? Tam go
-    // dostanie, a wysłany zdejmie `reply/old-app` ze wszystkich wątków.
-    final blockElsewhere = own.any((t) => t.oldApp) &&
-        (await mailbox.listIds('label:${labelQueryName(SongLabel.replyOldApp.label)} from:$sender'))
-            .any((id) => !runMessages.contains(id));
-    final wanted = wantedReplies(own, blockElsewhere: blockElsewhere);
-
-    for (final t in own) {
-      final draftId = drafts[t.threadId];
-      final body = draftId == null ? null : await mailbox.draftBody(draftId);
-      final want = wanted[t.threadId];
-      final step = draftStep(exists: draftId != null, body: body, want: want);
-      counts[step] = counts[step]! + 1;
-      final where = '$sender [${t.threadId}]';
-      switch (step) {
-        case DraftStep.none || DraftStep.keep:
-          break;
-        case DraftStep.create:
-          stdout.writeln('  + $where: ${_describe(want!)}');
-          if (push) await mailbox.draftReplyTo(await mailbox.replyTarget(t.messageIds.last, to: sender), want);
-        case DraftStep.rewrite:
-          stdout.writeln('  ~ $where: przeliczam szkic — ${_describe(want!)}');
-          if (push) {
-            await mailbox.updateDraft(
-                draftId!, await mailbox.replyTarget(t.messageIds.last, to: sender), want);
-          }
-        case DraftStep.delete:
-          stdout.writeln('  - $where: szkic bez odpowiedzi w planie — kasuję');
-          if (push) await mailbox.deleteDraft(draftId!);
-        case DraftStep.differs:
-          stdout.writeln(want == null
-              ? '  ! $where: w szkicu jest tekst, a odpowiedzi tu już nie ma — skasuj go w Gmailu'
-              : '  ! $where: szkic różni się od przeglądu — popraw go w Gmailu albo skasuj, '
-                  'a review --push założy nowy');
-        case DraftStep.manual:
-          if (want != null) stdout.writeln('  ! $where: szkic ruszony ręcznie — zostawiam');
-      }
+  for (final t in threads) {
+    final draftId = drafts[t.threadId];
+    final body = draftId == null ? null : await mailbox.draftBody(draftId);
+    // Mejl na piosenkę, w jej wątku: tekst z przeglądu i — w **każdym** wątku
+    // ze starej apki — blok o niej. Nigdy raz na autora: kto przysłał ze
+    // starej apki trzy piosenki, dostaje blok w trzech mejlach.
+    final want = composeContribReply(reviewNote: t.note, oldApp: t.oldApp);
+    final where = '${t.sender} [${t.threadId}]';
+    // Szkicu nie ma, a ostatnie słowo w wątku to nasza odpowiedź z tym, na co
+    // wątek czeka — szkic poszedł ręcznie z Gmaila, a etykiety jeszcze o tym
+    // nie wiedzą. Nowy szkic byłby drugim takim samym mejlem; etykiety
+    // przestawi `reply --push`.
+    if (draftId == null &&
+        want != null &&
+        await _alreadySent(mailbox, t.threadId, expectsNote: t.note != null)) {
+      stdout.writeln('  ✓ $where: odpowiedź już wysłana z Gmaila — szkicu nie zakładam, '
+          'etykiety przestawi reply --push');
+      continue;
+    }
+    final step = draftStep(exists: draftId != null, body: body, want: want, written: written[t.threadId]);
+    counts[step] = counts[step]! + 1;
+    switch (step) {
+      case DraftStep.none || DraftStep.edited:
+        break;
+      case DraftStep.keep:
+        // Zgodny z przeglądem — odtąd wolno go przeliczać jak wpisany przez nas.
+        if (push) written[t.threadId] = want!;
+      case DraftStep.create:
+        stdout.writeln('  + $where: ${_describe(want!)}');
+        if (push) {
+          await mailbox.draftReplyTo(await mailbox.replyTarget(t.messageIds.last, to: t.sender), want);
+          written[t.threadId] = want;
+        }
+      case DraftStep.rewrite:
+        stdout.writeln('  ~ $where: przeliczam szkic — ${_describe(want!)}');
+        if (push) {
+          await mailbox.updateDraft(
+              draftId!, await mailbox.replyTarget(t.messageIds.last, to: t.sender), want);
+          written[t.threadId] = want;
+        }
+      case DraftStep.delete:
+        stdout.writeln('  - $where: szkic bez odpowiedzi w planie — kasuję');
+        if (push) {
+          await mailbox.deleteDraft(draftId!);
+          written.remove(t.threadId);
+        }
+      case DraftStep.differs:
+        stdout.writeln(want == null
+            ? '  ! $where: w szkicu jest tekst, a odpowiedzi tu już nie ma — skasuj go w Gmailu'
+            : '  ! $where: szkic różni się od przeglądu — popraw go w Gmailu albo skasuj, '
+                'a review --push założy nowy');
+      case DraftStep.manual:
+        if (want != null) stdout.writeln('  ! $where: szkic ruszony ręcznie — zostawiam');
     }
   }
 
   final changed = counts[DraftStep.create]! + counts[DraftStep.rewrite]! + counts[DraftStep.delete]!;
-  if (changed == 0 && counts[DraftStep.differs]! == 0) return;
+  if (changed == 0 && counts[DraftStep.differs]! == 0) return 0;
   stdout.writeln(sentence([
     '${push ? 'Szkice' : 'Szkice (na sucho)'}: '
         '${plural(counts[DraftStep.create]!, 'nowy', 'nowe', 'nowych')}',
@@ -148,6 +166,16 @@ Future<void> syncDrafts(Mailbox mailbox, List<ReplyThread> threads, {required bo
     if (counts[DraftStep.differs]! > 0)
       plural(counts[DraftStep.differs]!, 'do sprawdzenia', 'do sprawdzenia', 'do sprawdzenia'),
   ]));
+  return changed;
+}
+
+/// Czy ostatnia wiadomość wątku to nasza wysłana odpowiedź z tym, na co
+/// wątek czeka ([sentCovers]).
+Future<bool> _alreadySent(Mailbox mailbox, String threadId, {required bool expectsNote}) async {
+  final summary = await mailbox.threadSummary(threadId);
+  if (!summary.ourReplyIsLatest) return false;
+  final last = await mailbox.getMessages([summary.messageIds.last]);
+  return sentCovers(last.single.body, expectsNote: expectsNote);
 }
 
 String _describe(String text) {
@@ -164,52 +192,33 @@ String _describe(String text) {
 
 /// `reply`: szkice z kolejki odpowiedzi (`reply/*`) w świat — z Twoimi
 /// poprawkami z Gmaila, jeśli są. Kolejka jest jedna, dla wszystkich
-/// przebiegów. Blok o starej apce idzie raz na autora: wysłany — przez
-/// narzędzie albo ręcznie z Gmaila — zdejmuje `reply/old-app` ze **wszystkich**
-/// wątków autora. [limit] — najwyżej tyle mejli (Gmail tnie ok. 500 na dobę).
-Future<void> sendReplies(Mailbox mailbox, {required bool push, int? limit}) async {
-  final oldApp = labelQueryName(SongLabel.replyOldApp.label);
+/// przebiegów. Wysłana odpowiedź — przez narzędzie albo ręcznie z Gmaila —
+/// zdejmuje kolejkę tylko ze **swojego** wątku: blok o starej apce należy się
+/// każdemu wątkowi ze starej apki, nie raz autorowi. [limit] — najwyżej tyle
+/// mejli (Gmail tnie ok. 500 na dobę).
+/// Zwraca, w ilu wątkach coś się nie udało — te zostają w kolejce.
+Future<int> sendReplies(Mailbox mailbox, {required bool push, int? limit}) async {
   final reviewNote = labelQueryName(SongLabel.replyReviewNote.label);
-  final queued = await mailbox.listIds('(label:$oldApp OR label:$reviewNote)');
+  final queued = await mailbox.listIds(
+      '(${[for (final l in kReplyQueueLabels) 'label:${labelQueryName(l)}'].join(' OR ')})');
   if (queued.isEmpty) {
     stdout.writeln('Nikt nie czeka na odpowiedź.');
-    return;
+    return 0;
   }
-  final waitsForBlock = (await mailbox.listIds('label:$oldApp')).toSet();
   final expectsNote = (await mailbox.listIds('label:$reviewNote')).toSet();
   final byThread = <String, List<String>>{};
   for (final id in queued) {
-    byThread.putIfAbsent(mailbox.knownThreadOf(id) ?? id, () => []).add(id);
+    byThread.putIfAbsent(mailbox.threadOf(id), () => []).add(id);
   }
   final drafts = await mailbox.draftIdByThread();
-  final summaries = {for (final t in byThread.keys) t: await mailbox.threadSummary(t)};
-  // Najpierw szkice, potem odpisane ręcznie, na końcu reszta: blok, który
-  // poszedł, zdejmuje kolejkę z pozostałych wątków autora, zanim do nich
-  // dojdzie kolej — nie ma ich wtedy po co zgłaszać.
-  int order(String t) => drafts.containsKey(t) ? 0 : summaries[t]!.ourReplyIsLatest ? 1 : 2;
-  final threads = [
-    for (final rank in const [0, 1, 2]) ...byThread.keys.where((t) => order(t) == rank),
-  ];
-  // Mejle, którym blok poszedł w innym wątku — zostaje im tylko tekst z przeglądu.
-  final blockSent = <String>{};
-  Future<void> blockWentTo(String author) async {
-    final waiting = await mailbox.listIds('label:$oldApp from:$author');
-    blockSent.addAll(waiting);
-    if (push && waiting.isNotEmpty) await mailbox.batchModify(waiting, remove: [SongLabel.replyOldApp.label]);
-  }
 
   var sent = 0, byHand = 0, skipped = 0, failed = 0;
-  for (final thread in threads) {
-    final ids = [
-      for (final id in byThread[thread]!)
-        if (!blockSent.contains(id) || expectsNote.contains(id)) id,
-    ];
-    if (ids.isEmpty) continue;
+  for (final MapEntry(key: thread, value: ids) in byThread.entries) {
     if (limit != null && sent >= limit) {
-      stdout.writeln('  (w kolejce czekają kolejne — `-n` ${plural(limit, 'mejl', 'mejle', 'mejli')})');
+      stdout.writeln('  (w kolejce czekają kolejne — `-n` ${emailCount(limit)})');
       break;
     }
-    final summary = summaries[thread]!;
+    final summary = await mailbox.threadSummary(thread);
     final author = emailFromHeader(summary.from) ?? summary.from;
     final where = '$author  ${summary.subject}  [$thread]';
     final withNote = ids.any(expectsNote.contains);
@@ -223,7 +232,6 @@ Future<void> sendReplies(Mailbox mailbox, {required bool push, int? limit}) asyn
           stdout.writeln('  ✓ $where: już odpisane ręcznie');
           byHand++;
           if (push) await mailbox.batchModify(ids, add: labels.$1, remove: labels.$2);
-          if (ids.any(waitsForBlock.contains)) await blockWentTo(author);
         } else {
           stdout.writeln('  ! $where: brak szkicu — odpisz z Gmaila '
               '(w otwartym przebiegu szkic odtworzy review --push)');
@@ -244,7 +252,6 @@ Future<void> sendReplies(Mailbox mailbox, {required bool push, int? limit}) asyn
         // Zaraz po wysyłce, żeby ewentualna wywrotka nie kosztowała drugiego mejla.
         await mailbox.batchModify(ids, add: labels.$1, remove: labels.$2);
       }
-      if (carriesOldAppBlock(body)) await blockWentTo(author);
     } catch (e) {
       // Etykieta zostaje, więc następny przebieg spróbuje jeszcze raz.
       stderr.writeln('  ! $where: $e');
@@ -257,6 +264,7 @@ Future<void> sendReplies(Mailbox mailbox, {required bool push, int? limit}) asyn
     if (skipped > 0) '$skipped do ogarnięcia (zostają w kolejce)',
     if (failed > 0) '${plural(failed, 'nieudana', 'nieudane', 'nieudanych')} (zostają w kolejce)',
   ]));
+  return failed;
 }
 
 /// Dlaczego szkicu **nie** wolno wysłać — `null`, gdy wolno.
@@ -283,6 +291,14 @@ String? staleDraftReason(String? body, {required bool expectsNote}) {
   }
   return null;
 }
+
+/// Czy wysłana odpowiedź [body] niesie to, na co wątek czeka: tekst
+/// z przeglądu ([expectsNote]), a bez niego — blok o starej apce. Po tym
+/// poznajemy szkic wysłany ręcznie z Gmaila, także poprawiony przed wysyłką.
+/// Sam blok wysłany wcześniej tekstu z przeglądu nie zastępuje.
+bool sentCovers(String body, {required bool expectsNote}) =>
+    isToolShapedReply(body) &&
+    (expectsNote ? replyNoteOf(body).trim().isNotEmpty : carriesOldAppBlock(body));
 
 /// Białe znaki zbite do spacji: Gmail potrafi przełamać linie szkicu.
 String _squash(String s) => s.replaceAll(RegExp(r'\s+'), ' ').trim();

@@ -1,6 +1,7 @@
-/// Indeks piosenek do szukania podobnych: śpiewnik apki, warsztat na stronie,
-/// paczka zgłoszeń. Jeden typ dla wszystkich trzech — różni się tylko to,
-/// co do niego wpada.
+/// Indeks piosenek do szukania podobnych i trafienia z niego: śpiewnik apki,
+/// warsztat na stronie, paczka zgłoszeń. Jeden typ trafienia ([SongMatch])
+/// i jedna kolejność ([compareSongMatches]) dla wszystkich trzech — różni się
+/// tylko źródło ([MatchSource]).
 library;
 
 import 'dart:math';
@@ -16,10 +17,12 @@ import 'profile.dart';
 
 /// Skąd jest piosenka, do której coś jest podobne. Na trafieniu, nie na
 /// indeksie: UI pokazuje jedną listę z dwóch indeksów, a przy każdej pozycji
-/// podpis „w apce” / „w warsztacie”.
+/// podpis „w apce” / „w warsztacie”. Piosenkomat porównuje jeszcze
+/// zgłoszenia jednej paczki — „w paczce”.
 enum MatchSource {
   app('w apce'),
-  workspace('w warsztacie');
+  workspace('w warsztacie'),
+  batch('w paczce');
 
   const MatchSource(this.inText);
 
@@ -171,8 +174,6 @@ class SongIndex<T extends SongCore> {
   int get length => songs.length;
   bool get isEmpty => songs.isEmpty;
 
-  bool has(String songId) => _byId.containsKey(songId);
-
   /// Jedno wyszukiwanie po id dla wszystkich — edytora i piosenkomatu —
   /// żeby ta sama poprawka nie miała w jednym miejscu celu, a w drugim nie.
   /// Dokładnie, a przy chybieniu bez członu `@wykonawca` (zgłoszenie bywa
@@ -298,7 +299,9 @@ class SongIndex<T extends SongCore> {
       };
 
   /// **Wszystkie** trafienia z poziomem, od najsilniejszego. To zasila belkę
-  /// i przeglądarkę — człowiek chce zobaczyć każdą kandydatkę.
+  /// i przeglądarkę — człowiek chce zobaczyć każdą kandydatkę. Najsilniejsze
+  /// jest po treści, tytuł niczego tu nie przesądza: piosenka o tym samym
+  /// tytule i innym tekście przegrywa z piosenką o tym samym tekście.
   ///
   /// [exclude] wyłącza piosenki, których nie ma sensu porównywać: samą
   /// siebie (ten sam obiekt w warsztacie) i pierwowzór poprawki, który UI
@@ -314,12 +317,6 @@ class SongIndex<T extends SongCore> {
     out.sort(compareSongMatches);
     return out;
   }
-
-  /// Najsilniejsze trafienie — po treści, tytuł niczego tu nie przesądza:
-  /// piosenka o tym samym tytule i innym tekście przegrywa z piosenką o tym
-  /// samym tekście i innym tytule.
-  SongMatch<T>? closest(SongProfile song, {MatchSource source = MatchSource.app}) =>
-      matches(song, source: source).firstOrNull;
 }
 
 /// Którą piosenkę z [index] [song] **deklaruje**, że poprawia — albo `null`,
@@ -335,7 +332,8 @@ T? correctionTargetOf<T extends SongCore>(SongCore song, SongIndex<T> index) =>
     correctionTargetLookupOf(song, index)?.song;
 
 /// To samo, co [correctionTargetOf], plus **czy to domysł**: pierwowzór
-/// znaleziony dopiero bez członu `@wykonawca` ([IdLookup.withoutPerformer]).
+/// znaleziony dopiero bez członu `@wykonawca` ([IdLookup.withoutPerformer])
+/// albo cel, który piosenkomat sam zgadł (`correction_target_guessed`).
 /// Przy kilku pasujących bez wykonawcy nic nie wybieramy — `null`.
 ({T song, bool guessed})? correctionTargetLookupOf<T extends SongCore>(
     SongCore song, SongIndex<T> index) {
@@ -360,5 +358,10 @@ T? correctionTargetOf<T extends SongCore>(SongCore song, SongIndex<T> index) =>
     return null;
   }
 
-  return declared(data?.correctionTarget) ?? declared(basedOnSongId);
+  // Piosenkomat zapisuje id już rozwiązane, więc lookup trafia po nim
+  // dokładnie — o tym, że cel zgadł, mówi dopiero jego znacznik.
+  if (declared(data?.correctionTarget) case final hit?) {
+    return (song: hit.song, guessed: hit.guessed || data!.correctionTargetGuessed);
+  }
+  return declared(basedOnSongId);
 }

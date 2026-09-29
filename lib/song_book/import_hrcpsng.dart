@@ -23,6 +23,9 @@ class HrcpsngDuplicateIdError implements Exception {
   String toString() => 'HrcpsngDuplicateIdError: $message';
 }
 
+/// Rozszerzenie pliku piosenek.
+const String kSongFileExtension = 'hrcpsng';
+
 /// Sekcje pliku piosenek.
 const List<String> kHrcpsngSections = ['official', 'conf'];
 
@@ -63,6 +66,11 @@ List<String> _duplicatesOf(Iterable<String> ids){
 
 /// Piosenki z pliku `.hrcpsng`: `(oficjalne, niejawne)`, w kolejności `index`.
 ///
+/// Którą jest piosenka, mówi przedrostek id (`o!_` albo `oc!_`), nie sekcja:
+/// id to tożsamość piosenki (ulubione, albumy, oceny), więc zostaje, jakie
+/// jest. Sekcja dokłada przedrostek tylko do id, które nie ma żadnego —
+/// nigdy drugiego obok pierwszego (`o!_oc!_…`).
+///
 /// Zdublowane id domyślnie wczytują się jako osobne piosenki — warsztat na
 /// stronie pokaże je na czerwono i nie da zapisać pliku, dopóki ich nie
 /// usuniesz. [allowDuplicateIds] `false` (śpiewnik `all_songs`, który nigdy
@@ -75,13 +83,13 @@ List<String> _duplicatesOf(Iterable<String> ids){
     throw HrcpsngImportError('Błąd odczytu pliku (błąd dekodowania JSON)');
   }
 
-  List<SongRaw> section(String name, String prefix, bool Function(SongRaw) hasPrefix){
+  List<SongRaw> section(String name, String prefix){
     final songs = <(int, int, SongRaw)>[];
     for(final (i, (fileName, entry)) in entries[name]!.indexed){
       try {
         final songPackMap = entry as Map<String, dynamic>;
         final song = SongRaw.fromApiRespMap(fileName, songPackMap['song']);
-        if(!hasPrefix(song)) song.id = prefix + song.id;
+        if(!song.isOfficial && !song.isConfid) song.id = prefix + song.id;
         songs.add((songPackMap['index'] as int, i, song));
       } catch(e){
         throw HrcpsngImportError('Błąd odczytu pliku (błąd dekodowania piosenki $fileName)');
@@ -92,8 +100,9 @@ List<String> _duplicatesOf(Iterable<String> ids){
     return [for(final (_, _, song) in songs) song];
   }
 
-  final offSongs = section('official', 'o!_', (s) => s.isOfficial);
-  final confSongs = section('conf', 'oc!_', (s) => s.isConfid);
+  final songs = [...section('official', 'o!_'), ...section('conf', 'oc!_')];
+  final offSongs = [for(final s in songs) if(!s.isConfid) s];
+  final confSongs = [for(final s in songs) if(s.isConfid) s];
 
   if(!allowDuplicateIds){
     final duplicates = _duplicatesOf([for(final s in [...offSongs, ...confSongs]) s.id]);

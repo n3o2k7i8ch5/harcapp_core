@@ -3,10 +3,9 @@
 /// po jednej stronie rozjeżdża przegląd po cichu.
 library;
 
+import 'package:harcapp_core/song_book/import_hrcpsng.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
-
-const String kSongFileExtension = 'hrcpsng';
 
 /// Co piosenkomat wypluł do przeglądu.
 String candidatesFileName(SubmissionKind kind) =>

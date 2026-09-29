@@ -12,6 +12,7 @@ import 'hrcpsng.dart';
 import 'eml.dart';
 import 'mailbox.dart';
 import 'model.dart';
+import 'package:harcapp_core/values/strings.dart';
 
 /// Jeden zakres na wszystko: `gmail.modify` etykietuje, czyta, zakłada
 /// szkice i wysyła — `messages.send` i `drafts.send` go przyjmują
@@ -32,7 +33,7 @@ class GmailMailbox implements Mailbox {
   final Map<String, String> _threadById = {};
 
   @override
-  String? knownThreadOf(String messageId) => _threadById[messageId];
+  String threadOf(String messageId) => _threadById[messageId] ?? messageId;
 
   /// Gmail rozlicza limit w **jednostkach**, nie w requestach: 6000 na minutę
   /// na użytkownika. Metody kosztują różnie — `messages.get` i `attachments.get`
@@ -526,7 +527,7 @@ Future<AutoRefreshingAuthClient> _authClient(ClientId id, File tokenFile) async 
   }
 
   final client = await clientViaUserConsent(id, [kGmailScope], (url) {
-    stdout.writeln('Zaloguj się w przeglądarce na $kInboxEmail. '
+    stdout.writeln('Zaloguj się w przeglądarce na $kHarcappEmail. '
         'Jeśli okno się nie otworzyło, wejdź na:\n$url');
     // Otwieramy sami, bo link kopiowany z terminala bywa ucinany.
     final opener = Platform.isMacOS ? 'open' : 'xdg-open';

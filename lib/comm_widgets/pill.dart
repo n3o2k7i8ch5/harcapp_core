@@ -49,3 +49,19 @@ class Pill extends StatelessWidget{
   }
 
 }
+
+/// Rząd pastylek: od lewej, zawijany; w wersji [compact] ciaśniej.
+class PillWrap extends StatelessWidget{
+
+  final List<Widget> children;
+  final bool compact;
+
+  const PillWrap({required this.children, this.compact = false, super.key});
+
+  @override
+  Widget build(BuildContext context){
+    final gap = compact? Dimen.defMarg/2: Dimen.defMarg;
+    return Wrap(spacing: gap, runSpacing: gap, children: children);
+  }
+
+}

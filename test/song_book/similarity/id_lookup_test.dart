@@ -63,6 +63,16 @@ void main() {
       expect(correctionTargetOf(_correctionOf('o!_barka@dom'), index)?.id, 'o!_barka@sdm');
     });
 
+    test('cel zgadnięty przez piosenkomat → domysł, choć id pasuje dokładnie', () {
+      final index = SongIndex<SongRaw>([_song('o!_barka@sdm')]);
+      final song = _song('o!_barka_poprawiona')
+        ..piosenkomatData = PiosenkomatData(
+            kind: SubmissionKind.correction, correctionTarget: 'o!_barka@sdm', correctionTargetGuessed: true);
+      final found = correctionTargetLookupOf(song, index)!;
+      expect(found.song.id, 'o!_barka@sdm');
+      expect(found.guessed, isTrue, reason: 'narzędzie zapisuje id już rozwiązane — o domyśle mówi znacznik');
+    });
+
     test('niejednoznaczne → brak celu', () {
       final index = SongIndex<SongRaw>([_song('o!_barka@sdm'), _song('o!_barka@zespol')]);
       expect(correctionTargetLookupOf(_correctionOf('o!_barka@dom'), index), isNull);

@@ -11,7 +11,6 @@ import 'package:harcapp_core/song_book/song_core.dart';
 const _workFields = {
   SongCore.PARAM_PIOSENKOMAT,
   SongCore.PARAM_BASED_ON_SONG_ID,
-  'email_thread_id',
 };
 
 void main() {

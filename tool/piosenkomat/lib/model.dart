@@ -1,11 +1,15 @@
 import 'dart:convert';
 
+import 'package:harcapp_core/comm_classes/regexp_email.dart';
+import 'package:harcapp_core/comm_classes/text_utils.dart';
+import 'package:harcapp_core/song_book/import_hrcpsng.dart';
 import 'package:harcapp_core/song_book/mail_quotes.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email_old_app.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
+import 'package:harcapp_core/song_book/submission/submission_email.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/models.dart';
 import 'package:harcapp_core/values/people/utils.dart';
@@ -13,17 +17,15 @@ import 'package:harcapp_core/values/people/utils.dart';
 import 'eml.dart';
 import 'similarity.dart';
 
-const String kInboxEmail = 'harcapp@gmail.com';
-
-final _emailRe = RegExp(r'[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}');
-final _angledEmailRe = RegExp('<\\s*(${_emailRe.pattern})\\s*>');
+/// „1 mejl”, „3 mejle”, „5 mejli”.
+String emailCount(int n) => plural(n, 'mejl', 'mejle', 'mejli');
 
 /// Adres z nagłówka `From` (`Jan <jan@x.pl>` albo `jan@x.pl`), małymi
 /// literami. Ten w nawiasach ostrych, gdy jest — nazwa potrafi wyglądać jak
 /// adres (`"jan@stary.pl" <jan@nowy.pl>`).
 String? emailFromHeader(String? from) {
   if (from == null) return null;
-  final email = _angledEmailRe.allMatches(from).lastOrNull?.group(1) ?? _emailRe.firstMatch(from)?.group(0);
+  final email = regExpAngledEmail.allMatches(from).lastOrNull?.group(1) ?? regExpEmailInText.firstMatch(from)?.group(0);
   return email == null ? null : normalizedEmail(email);
 }
 
@@ -60,22 +62,22 @@ enum SongLabel {
   needsReview('song/needs-review'),
   /// Podkategorie przeglądu, jedna na powód. Mejl z kilkoma powodami dostaje
   /// kilka.
-  userMessage('song/needs-review/user-message', reviewReason: true),
+  userMessage('song/needs-review/user-message', isReviewReason: true),
   /// Kolizja z piosenką, która już jest w apce.
-  duplicateInApp('song/needs-review/duplicate-in-app', reviewReason: true),
+  duplicateInApp('song/needs-review/duplicate-in-app', isReviewReason: true),
   /// Kolizja z innym zgłoszeniem z tej samej paczki.
-  duplicateInBatch('song/needs-review/duplicate-in-batch', reviewReason: true),
-  missingData('song/needs-review/missing-data', reviewReason: true),
-  noConsent('song/needs-review/no-consent', reviewReason: true),
+  duplicateInBatch('song/needs-review/duplicate-in-batch', isReviewReason: true),
+  missingData('song/needs-review/missing-data', isReviewReason: true),
+  noConsent('song/needs-review/no-consent', isReviewReason: true),
   /// Poprawka, z którą coś nie tak: nie ma czego poprawiać, cel zgadnięty
   /// albo treść znacząco różna od poprawianej piosenki.
-  correctionProblem('song/needs-review/correction-problem', reviewReason: true),
+  correctionProblem('song/needs-review/correction-problem', isReviewReason: true),
   /// Ktoś poprawił piosenkę i wysłał jako nową.
-  undeclaredCorrection('song/needs-review/undeclared-correction', reviewReason: true),
+  undeclaredCorrection('song/needs-review/undeclared-correction', isReviewReason: true),
   /// Kilka kart osób dodających — wkład przypisujesz ręcznie.
-  severalContributors('song/needs-review/several-contributors', reviewReason: true),
+  severalContributors('song/needs-review/several-contributors', isReviewReason: true),
   /// Adres nadawcy doklejony do karty na zgadywanie — sprawdź osobę.
-  guessedContributor('song/needs-review/guessed-contributor', reviewReason: true),
+  guessedContributor('song/needs-review/guessed-contributor', isReviewReason: true),
   /// Znacznik: zgłoszenie to poprawka istniejącej piosenki. Zatwierdzoną
   /// wgrywasz inaczej — podmiana, nie dodanie.
   correction('song/correction'),
@@ -84,9 +86,10 @@ enum SongLabel {
   /// zawsze z [haveALook], nieprzeczytane. Ogarniasz ręcznie.
   multipleSongs('song/multiple-songs'),
   /// Kolejka `reply`, powód pierwszy: mejl z najstarszej apki, autorowi trzeba
-  /// odpisać, żeby ją zaktualizował. Blok czeka w szkicu — raz na autora;
-  /// wysłany zdejmuje tę etykietę ze wszystkich jego wątków. `scan` jej nie
-  /// wiesza, gdy autor dostał już od nas odpowiedź (`Submission.weReplied`).
+  /// odpisać, żeby ją zaktualizował. Blok należy się **każdemu** wątkowi ze
+  /// starej apki, nie raz autorowi: czeka w szkicu tego wątku, a wysłany
+  /// zdejmuje etykietę tylko z niego. `scan` jej nie wiesza, gdy blok w tym
+  /// wątku już poszedł (`Submission.oldAppBlockSent`).
   replyOldApp('song/reply/old-app'),
   /// Kolejka `reply`, powód drugi: przy przeglądzie w „Odpowiedź do autora”
   /// jest tekst. Czeka w szkicu w wątku; `reply` go wysyła i przestawia mejl na
@@ -104,18 +107,14 @@ enum SongLabel {
   rejectedTooNiche('song/rejected/too-niche', byTool: false),
   addContributor('song/add-contributor', byTool: false);
 
-  const SongLabel(this.label, {this.byTool = true, this.reviewReason = false});
+  const SongLabel(this.label, {this.byTool = true, this.isReviewReason = false});
 
   /// Nazwa w Gmailu.
   final String label;
   /// Nadaje ją narzędzie i tworzy, jeśli jej brakuje.
   final bool byTool;
-  /// Podkategoria `needs-review/*`.
-  final bool reviewReason;
-
-  static final Map<String, SongLabel> _byLabel = {for (final l in values) l.label: l};
-
-  static SongLabel? byLabel(String label) => _byLabel[label];
+  /// Podkategoria `needs-review/*` — powód przeglądu.
+  final bool isReviewReason;
 }
 
 /// Do której podkategorii przeglądu idzie uwaga.
@@ -161,8 +160,11 @@ final List<String> kAllSongLabels = [for (final l in SongLabel.values) l.label];
 /// Wszystkie etykiety przeglądu — do zdjęcia, gdy zgłoszenie zmienia stan.
 final List<String> kNeedsReviewLabels = [
   SongLabel.needsReview.label,
-  for (final l in SongLabel.values) if (l.reviewReason) l.label,
+  for (final l in SongLabel.values) if (l.isReviewReason) l.label,
 ];
+
+/// Kolejka odpowiedzi do autorów: mejl z którąkolwiek czeka na `reply`.
+final List<String> kReplyQueueLabels = [SongLabel.replyOldApp.label, SongLabel.replyReviewNote.label];
 
 /// `song` albo cokolwiek pod `song/`. Mejl z taką etykietą jest już
 /// obsłużony i `scan` go nie bierze — [kQueueQuery] wyklucza właśnie te.
@@ -179,6 +181,12 @@ bool isClosedLabel(String label) =>
 
 /// Zmiana etykiet jednego mejla.
 typedef LabelChange = (List<String> add, List<String> remove);
+
+/// Etykiety po mejlu, jakie będą po [changes] — bez pytania Gmaila drugi raz.
+Map<String, Set<String>> labelsAfter(Map<String, Set<String>> current, Map<String, LabelChange> changes) => {
+      for (final id in {...current.keys, ...changes.keys})
+        id: {...?current[id], ...?changes[id]?.$1}..removeAll(changes[id]?.$2 ?? const []),
+    };
 
 /// Werdykt domykający sprawę zdejmuje „nieprzeczytane” — mejl nie ma po co
 /// wisieć w skrzynce. Jedna reguła dla każdej komendy, która nadaje werdykt.
@@ -202,7 +210,7 @@ LabelChange withReadOnClose(LabelChange change, {Set<String> current = const {}}
 LabelChange labelsAfterReply({required bool sentReviewNote}) => sentReviewNote
     ? (
         [SongLabel.waitingForAuthor.label],
-        [SongLabel.replyOldApp.label, SongLabel.replyReviewNote.label, 'UNREAD'],
+        [...kReplyQueueLabels, 'UNREAD'],
       )
     : (const [], [SongLabel.replyOldApp.label]);
 
@@ -239,8 +247,7 @@ const String kNoConsentRulesVersion = 'brak';
 
 /// Po czym poznać zgłoszenie piosenki (obok [kSongCodeMarker] w treści).
 /// Inne mejle narzędzie omija szerokim łukiem: nie czyta ich i nie etykietuje.
-const List<String> kSongSubjects = ['Nowa piosenka', 'Poprawka piosenki'];
-const String kCorrectionSubject = 'Poprawka piosenki';
+const List<String> kSongSubjects = [kNewSongSubject, kCorrectionSubject];
 
 /// Najstarsza apka nie ma [kSongCodeMarker] — JSON wkleja między znaczniki
 /// „nie edytuj". Bez tego jej zgłoszenia w ogóle nie wchodziły do kolejki.
@@ -367,7 +374,7 @@ class ContribMessage {
       from: mail.headers['from'],
       date: receivedAt ?? parseMailDate(mail.headers['date']),
       labels: labels,
-      songAttachment: mail.attachment('.hrcpsng'),
+      songAttachment: mail.attachment('.$kSongFileExtension'),
       submissionAttachment: mail.attachment('.$kSubmissionFileExtension'),
     );
   }
@@ -377,42 +384,21 @@ class ContribMessage {
 // Zgłoszenie — cechy (fakty)
 // ---------------------------------------------------------------------------
 
-/// Który kształt mejla rozpoznało narzędzie — wniosek z wyglądu, nie fakt ze
-/// zgłoszenia. Do plików nie jedzie, jest w rozkładzie w `report.txt`.
-enum EmailShape {
-  /// Najstarsza apka: JSON między znacznikami „nie edytuj", otoczka `o!_`.
-  oldApp('old-app'),
-  /// `### Kod piosenki:` bez ogrodzeń, osoba jako literał Darta.
-  legacy('legacy'),
-  /// Dzisiejszy: bloki ```, osoba jako JSON.
-  fenced('fenced'),
-  /// Plik zgłoszenia.
-  file('file'),
-  /// Nierozpoznany: bez pliku i nie do sparsowania. Osobno, żeby rozkład
-  /// w raporcie nie zawyżał starych kształtów — po nim poznajesz, kiedy wolno
-  /// skasować stare czytniki.
-  unknown('unknown');
-
-  const EmailShape(this.id);
-  final String id;
-}
-
 /// Zgłoszenie = wątek. Same fakty, zero ocen: co autor zadeklarował, skąd
 /// przyszło, co dopisał, do czego jest podobne w apce. Osądy robi `decide`,
 /// a porównanie z resztą paczki — `matchWithinBatch`, bo to fakt o paczce,
 /// nie o zgłoszeniu.
 class Submission {
-  final String threadId;
   /// Reprezentant wątku: najnowsza wiadomość z własnym kodem piosenki od
   /// nadawcy ≠ skrzynka HarcApp; gdy takiej nie ma poza pierwszą — pierwsza.
   final ContribMessage message;
   /// Wszystkie wiadomości wątku, od najstarszej.
   final List<ContribMessage> messages;
   final SubmissionKind kind;
-  /// Czy zgłoszenie przyszło z najstarszej apki — autorowi trzeba odpisać,
-  /// żeby ją zaktualizował.
-  final bool isOldApp;
-  final EmailShape shape;
+  /// Rozpoznany kształt mejla — do rozkładu w `report.txt`, do plików nie
+  /// jedzie. `null` — nierozpoznany: bez pliku i nie do sparsowania; osobno,
+  /// żeby rozkład nie zawyżał starych kształtów.
+  final ContribEmailShape? shape;
   /// Wersja apki, z której poszło zgłoszenie. Tylko z załącznika.
   final String? appVersion;
   /// Czy nadawca zgłasza **własną** piosenkę. Przy `false` jego adres służy
@@ -425,9 +411,10 @@ class Submission {
   /// Adres nadawcy doklejony do jedynej karty bez adresu na zgadywanie:
   /// format nie niósł `sender_is_contributor`.
   final bool contributorEmailGuessed;
-  /// Autor dostał już od nas odpowiedź: w tym wątku albo, przy starej apce,
-  /// w którymkolwiek innym — `reply` odpisuje raz na autora.
-  final bool weReplied;
+  /// W tym wątku poszła już od nas odpowiedź z blokiem o starej apce — wątek
+  /// wrócił przez `reopen`. Liczy się tylko ten wątek: blok wysłany autorowi
+  /// w innym nie zwalnia z niego tego zgłoszenia.
+  final bool oldAppBlockSent;
   /// Co było nie tak z załącznikiem zgłoszenia. `null` = nic.
   final SubmissionFileErrorKind? fileError;
   final String? fileErrorMessage;
@@ -435,10 +422,8 @@ class Submission {
   /// skrzynki HarcAppa. To, co z [messages] zostaje po wycięciu szablonu.
   final List<PiosenkomatMessage> conversation;
   final String? correctionMessage;
-  /// Data reprezentanta.
-  final DateTime? sentAt;
   final String? sender;
-  final String? consentVersion;
+  final String? acceptedRulesVersion;
   /// `null` = nie sparsowało się.
   final SongRaw? song;
   /// Odcisk [song] do porównań — liczony raz, w `buildSubmission`.
@@ -461,26 +446,23 @@ class Submission {
   final List<String> declaredTargetCandidates;
 
   const Submission({
-    required this.threadId,
     required this.message,
     required this.messages,
     required this.kind,
     required this.title,
-    this.isOldApp = false,
-    this.shape = EmailShape.fenced,
+    this.shape,
     this.appVersion,
     this.senderIsContributor = true,
     this.submissionCount = 1,
     this.hasSeveralContributors = false,
     this.contributorEmailGuessed = false,
-    this.weReplied = false,
+    this.oldAppBlockSent = false,
     this.fileError,
     this.fileErrorMessage,
     this.conversation = const [],
     this.correctionMessage,
-    this.sentAt,
     this.sender,
-    this.consentVersion,
+    this.acceptedRulesVersion,
     this.song,
     this.profile,
     this.registered,
@@ -490,6 +472,16 @@ class Submission {
     this.declaredTargetLookup,
     this.declaredTargetCandidates = const [],
   });
+
+  /// Wątek zgłoszenia, czyli wątek reprezentanta.
+  String get threadId => message.threadId;
+
+  /// Data reprezentanta.
+  DateTime? get sentAt => message.date;
+
+  /// Czy zgłoszenie przyszło z najstarszej apki — autorowi trzeba odpisać,
+  /// żeby ją zaktualizował.
+  bool get isOldApp => shape == ContribEmailShape.oldApp;
 
   bool get isCorrection => kind == SubmissionKind.correction;
 
@@ -509,35 +501,10 @@ class Submission {
 
   /// Czy zadeklarowany cel jest w śpiewniku — dokładnie albo, jako domysł,
   /// bez `@wykonawca`. `buildSubmission` celuje wtedy [appMatch] w znalezioną
-  /// piosenkę.
+  /// piosenkę. Który cel z tego wynika, rozstrzyga `pickCorrectionTarget`.
   bool get isDeclaredTargetInApp =>
       declaredCorrectionTarget != null &&
       (declaredTargetLookup == IdLookup.exact ||
-          declaredTargetLookup == IdLookup.withoutPerformer);
-
-  /// Którą piosenkę w apce poprawia. Najpierw to, co powiedziało zgłoszenie
-  /// — o ile taka piosenka jest w śpiewniku; deklaracja nieistniejącego id
-  /// to brak celu, nie cel. Gdy zgłoszenie nie powiedziało nic — najbliższa
-  /// piosenka z apki, o ile jest naprawdę blisko ([canGuessCorrectionTarget]).
-  /// Zgłoszenie bez decyzji człowieka wchodzi (`goesIn` to `accepted ?? true`),
-  /// więc słaby domysł kasujemy do `null`, a nie zostawiamy do wyłapania
-  /// okiem. Domysł nigdy nie udaje danych: mówi o tym
-  /// [correctionTargetGuessed], uwaga `guessed-correction-target` i pole
-  /// w śladzie piosenki.
-  String? get correctionTarget {
-    if (!isCorrection) return null;
-    if (declaredCorrectionTarget != null) {
-      return isDeclaredTargetInApp ? appMatch?.songId : null;
-    }
-    final guess = appMatch;
-    return guess != null && canGuessCorrectionTarget(guess) ? guess.songId : null;
-  }
-
-  /// Czy [correctionTarget] jest domysłem, a nie id ze zgłoszenia: dobrany
-  /// po podobieństwie albo znaleziony dopiero bez `@wykonawca`.
-  bool get correctionTargetGuessed =>
-      correctionTarget != null &&
-      (declaredCorrectionTarget == null ||
           declaredTargetLookup == IdLookup.withoutPerformer);
 }
 
@@ -546,30 +513,32 @@ class Submission {
 // ---------------------------------------------------------------------------
 
 /// Dokąd trafia zgłoszenie: do pliku kandydatów (którego — mówi `kind`),
-/// odrzut albo ręcznie.
+/// odrzut albo ręcznie. Każde wyjście niesie swoją etykietę stanu; kandydata
+/// etykietują dopiero uwagi ([stateLabelsFor]).
 enum Destination {
-  candidate,
-  rejectAlreadyInApp,
-  rejectDuplicate,
+  candidate(null),
+  rejectAlreadyInApp(SongLabel.rejectedAlreadyInApp),
+  rejectDuplicate(SongLabel.rejectedDuplicate),
   /// Załącznik jest, ale nie do wczytania — znany powód, piosenki brak.
-  rejectCorruptedFile,
+  rejectCorruptedFile(SongLabel.rejectedCorruptedFile, hasSong: false),
   /// Załącznik w wersji protokołu nowszej niż znana — nie zgadujemy.
-  rejectUnknownFormat,
+  rejectUnknownFormat(SongLabel.rejectedUnknownFormat, hasSong: false),
   /// Nie da się odczytać, powód nieznany.
-  unparsable,
+  rejectUnparsable(SongLabel.rejectedUnparsable, hasSong: false),
   /// Kilka piosenek w jednym mejlu — nie rozstrzygamy, ogarniasz ręcznie.
-  multipleSongs;
+  multipleSongs(SongLabel.multipleSongs, hasSong: false);
 
-  bool get goesToFile => this == candidate;
-  bool get isReject => !goesToFile && this != multipleSongs;
+  const Destination(this.stateLabel, {this.hasSong = true});
+
+  /// Etykieta stanu; `null` tylko u kandydata.
+  final SongLabel? stateLabel;
 
   /// Czy automat miał jedną piosenkę, którą ocenił. Bez niej nie ma czego
   /// oznaczać jako poprawki, a zostaje tylko „rzuć okiem”.
-  bool get hasSong =>
-      this != unparsable &&
-      this != rejectCorruptedFile &&
-      this != rejectUnknownFormat &&
-      this != multipleSongs;
+  final bool hasSong;
+
+  bool get goesToFile => this == candidate;
+  bool get isReject => !goesToFile && this != multipleSongs;
 }
 
 class Decision {
@@ -577,8 +546,15 @@ class Decision {
   final List<PiosenkomatIssue> issues;
   /// Z czym kolizja albo co jest nie tak — dla odrzutów i „ręcznie”.
   final String? detail;
+  /// Którą piosenkę w apce poprawia poprawka, która idzie do pliku, i czy to
+  /// domysł (`pickCorrectionTarget`). `null` — nowa piosenka albo brak celu.
+  final ({String id, bool guessed})? correctionTarget;
+  /// Piosenkomat skończył, ale warto rzucić okiem: identyczna z apką, do
+  /// której autor coś napisał, zepsuty załącznik albo coś nie do odczytania.
+  final bool haveALook;
 
-  const Decision(this.destination, {this.issues = const [], this.detail});
+  const Decision(this.destination,
+      {this.issues = const [], this.detail, this.correctionTarget, this.haveALook = false});
 }
 
 /// Zgłoszenie z decyzją — to, czym operuje raport, plan i pliki.
@@ -596,22 +572,16 @@ class Classified {
   bool get goesToFile => destination.goesToFile;
 
   bool has(SongIssue issue) => issues.any((i) => i.issue == issue);
-
-  /// Piosenkomat skończył, ale warto rzucić okiem: identyczna z apką, do
-  /// której autor coś napisał (dopisek albo propozycja poprawki — ta bywa
-  /// całą treścią zgłoszenia), zepsuty załącznik albo coś nie do odczytania.
-  bool get haveALook =>
-      !destination.hasSong ||
-      (destination == Destination.rejectAlreadyInApp && submission.hasAuthorText);
+  bool get haveALook => decision.haveALook;
 
   /// Etykiety stanu plus znaczniki (poprawka, stara apka).
   List<String> get labels => [
         ...stateLabelsFor(this),
         if (submission.isCorrection && destination.hasSong) SongLabel.correction.label,
         if (haveALook) SongLabel.haveALook.label,
-        // Komu już odpisano (wątek wrócił przez `reopen`), ten dostał blok
-        // o starej apce i nie wraca z nim do kolejki odpowiedzi.
-        if (submission.isOldApp && !submission.weReplied) SongLabel.replyOldApp.label,
+        // Każdy wątek ze starej apki dostaje blok — chyba że już w nim poszedł
+        // (wątek wrócił przez `reopen`).
+        if (submission.isOldApp && !submission.oldAppBlockSent) SongLabel.replyOldApp.label,
       ];
 
   /// Ślad w piosence: cechy + uwagi, w kształcie, w jakim jadą do pliku.
@@ -624,8 +594,8 @@ class Classified {
         sentAt: submission.sentAt,
         conversation: submission.conversation,
         correctionMessage: submission.correctionMessage,
-        correctionTarget: submission.correctionTarget,
-        correctionTargetGuessed: submission.correctionTargetGuessed,
+        correctionTarget: decision.correctionTarget?.id,
+        correctionTargetGuessed: decision.correctionTarget?.guessed ?? false,
         threadId: submission.threadId,
         run: run,
         issues: issues,
@@ -633,17 +603,11 @@ class Classified {
 }
 
 /// Etykiety stanu, jakie nadaje automat (zawsze razem z `song/auto`).
-List<String> stateLabelsFor(Classified c) => switch (c.destination) {
-      Destination.unparsable => [SongLabel.rejectedUnparsable.label],
-      Destination.multipleSongs => [SongLabel.multipleSongs.label],
-      Destination.rejectCorruptedFile => [SongLabel.rejectedCorruptedFile.label],
-      Destination.rejectUnknownFormat => [SongLabel.rejectedUnknownFormat.label],
-      Destination.rejectAlreadyInApp => [SongLabel.rejectedAlreadyInApp.label],
-      Destination.rejectDuplicate => [SongLabel.rejectedDuplicate.label],
-      Destination.candidate => c.issues.isEmpty
-          ? [SongLabel.readyToAdd.label]
-          : [
-              SongLabel.needsReview.label,
-              ...{for (final i in c.issues) i.issue.reviewReason.label},
-            ],
+List<String> stateLabelsFor(Classified c) => switch (c.destination.stateLabel) {
+      final label? => [label.label],
+      null when c.issues.isEmpty => [SongLabel.readyToAdd.label],
+      null => [
+          SongLabel.needsReview.label,
+          ...{for (final i in c.issues) i.issue.reviewReason.label},
+        ],
     };

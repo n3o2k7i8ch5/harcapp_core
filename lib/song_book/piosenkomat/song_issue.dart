@@ -82,8 +82,6 @@ enum SongIssue{
   final String text;
   final SongIssueSeverity severity;
 
-  bool get isBlocking => severity == SongIssueSeverity.blocking;
-
   static SongIssue? byId(String id) =>
       SongIssue.values.where((i) => i.id == id).firstOrNull;
 }

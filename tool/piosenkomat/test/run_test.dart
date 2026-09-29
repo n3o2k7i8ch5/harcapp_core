@@ -4,6 +4,7 @@ import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
+import 'package:harcapp_core/values/strings.dart';
 import 'package:path/path.dart' as p;
 import 'package:piosenkomat/cli.dart';
 import 'package:piosenkomat/hrcpsng.dart';
@@ -28,10 +29,10 @@ const _kasia = 'Kasia <kasia@example.com>';
 /// Skrzynka, śpiewnik i katalog narzędzia na niby — cały świat jednego testu.
 class _World {
   final String root = tempDir().path;
-  final mailbox = FakeMailbox();
+  final FakeMailbox mailbox;
   late final String db = p.join(root, 'all_songs.hrcpsng');
 
-  _World({List<SongRaw> app = const []}) {
+  _World({List<SongRaw> app = const [], FakeMailbox? mailbox}) : mailbox = mailbox ?? FakeMailbox() {
     writeHrcpsng(db, app);
   }
 
@@ -60,7 +61,7 @@ class _World {
       mailbox.add(FakeMail(id, id,
           from: from,
           subject: 'Piosenka własna',
-          body: oldAppBody(title: title, lyrics: lyrics, yt: id.padRight(11, '_'))));
+          body: oldAppBody(json: oldAppSongJson(title: title, lyrics: lyrics, yt: id.padRight(11, '_')))));
 
   Set<String> labels(String id) => mailbox.mails.firstWhere((m) => m.id == id).labels;
   String? draftIn(String thread) =>
@@ -88,8 +89,31 @@ class _World {
   }
 }
 
+/// Skrzynka, która nie wysyła — jak Gmail w chwili awarii.
+class _FailingSend extends FakeMailbox {
+  @override
+  Future<void> sendDraft(String draftId) async => throw StateError('Gmail nie odpowiada');
+}
+
+/// Skrzynka, w której ktoś ręcznie taguje mejl [id], gdy `scan` już pobrał
+/// kolejkę, a jeszcze nie nadał etykiet.
+class _TaggedMeanwhile extends FakeMailbox {
+  _TaggedMeanwhile(this.id, this.label);
+  final String id;
+  final String label;
+
+  // `scan` pyta o nasze wysłane po pobraniu kolejki, a przed `--push`.
+  @override
+  Future<Map<String, List<String>>> sentIdsByThread() async {
+    for (final m in mails.where((m) => m.id == id)) {
+      m.labels.add(label);
+    }
+    return super.sentIdsByThread();
+  }
+}
+
 void Function(SongRaw) _verdict({bool accepted = true, String? note}) => (song) => song.piosenkomatData =
-    song.piosenkomatData!.copyWith(accepted: () => accepted ? null : false, reviewNote: () => note);
+    song.piosenkomatData!.copyWith(rejected: !accepted, reviewNote: () => note);
 
 void main() {
   group('scan: przebieg jest jeden naraz', () {
@@ -140,6 +164,15 @@ void main() {
       expect(w.run.exists, isFalse);
     });
 
+    test('mejl otagowany ręcznie w trakcie scan --push zostaje, jak jest', () async {
+      final w = _World(mailbox: _TaggedMeanwhile('a', SongLabel.rejected.label))
+        ..submit('a')
+        ..submit('b', title: 'Barka', lyrics: _barka);
+      expect(await w.cli(['scan', '--push']), 0);
+      expect(w.labels('a'), {SongLabel.rejected.label}, reason: 'Twoja decyzja wygrywa z automatem');
+      expect(w.labels('b'), contains(SongLabel.auto.label));
+    });
+
     test('pusta kolejka nie otwiera przebiegu', () async {
       final w = _World();
       expect(await w.cli(['scan', '--push']), 0);
@@ -153,14 +186,7 @@ void main() {
       expect(await w.cli(['scan', '--push']), 0);
       // Wywrotka po zapisaniu katalogu, przed etykietami i szkicami.
       final plan = w.run.readRunPlan();
-      writePlan(w.run.plan, RunPlan(
-        id: plan.id,
-        createdAt: plan.createdAt,
-        labelsByMessage: plan.labelsByMessage,
-        songByThread: plan.songByThread,
-        messagesByThread: plan.messagesByThread,
-        senderByThread: plan.senderByThread,
-      ));
+      writePlan(w.run.plan, RunPlan(id: plan.id, createdAt: plan.createdAt, threads: plan.threads));
       for (final m in w.mailbox.mails) {
         m.labels.clear();
       }
@@ -227,21 +253,23 @@ void main() {
       expect(w.draftIn('a'), edited);
     });
 
-    test('tekst z przeglądu w wątku ze starej apki wchłania szkic z samym blokiem', () async {
+    test('blok pod każdym mejlem ze starej apki; tekst z przeglądu wchłania szkic z samym blokiem', () async {
       final w = _World()
         ..submitOld('o1', title: 'Pierwsza stara', lyrics: _barka)
         ..submitOld('o2', title: 'Druga stara', lyrics: _ognisko);
       await w.cli(['scan', '--push']);
-      expect(w.mailbox.drafts.values.map((d) => d.threadId), ['o2'], reason: 'blok raz, w najnowszym wątku');
+      expect(w.mailbox.drafts.values.map((d) => d.threadId), unorderedEquals(['o1', 'o2']),
+          reason: 'jeden autor, dwa wątki ze starej apki — blok w każdym, nie raz na autora');
 
       w.export(_new, (song) {
         if (song.title == 'Pierwsza stara') _verdict(note: 'Dodałem, dzięki!')(song);
       });
       expect(await w.cli(['review', '--push']), 0);
-      expect(w.mailbox.drafts.values.map((d) => d.threadId), ['o1'],
-          reason: 'mejl z tekstem niesie blok, więc sam blok już niepotrzebny');
+      expect(w.mailbox.drafts.values.map((d) => d.threadId), unorderedEquals(['o1', 'o2']));
       expect(w.draftIn('o1'), contains('Dodałem, dzięki!'));
       expect(carriesOldAppBlock(w.draftIn('o1')!), isTrue);
+      expect(replyNoteOf(w.draftIn('o2')!), isEmpty);
+      expect(carriesOldAppBlock(w.draftIn('o2')!), isTrue);
     });
 
     test('zmiana zdania „nie” → „tak” → „nie” przestawia etykiety', () async {
@@ -278,6 +306,43 @@ void main() {
       expect(w.mailbox.sentTexts, hasLength(1), reason: 'drugiego takiego samego mejla nie ma');
     });
 
+    test('szkic wysłany ręcznie z Gmaila nie wraca przy powtórnym review', () async {
+      final w = _World()..submit('a');
+      await w.cli(['scan', '--push']);
+      w.export(_new, _verdict(note: 'Popraw literówkę w drugiej zwrotce.'));
+      await w.cli(['review', '--push']);
+      // Wysyłka z Gmaila: szkic znika, w wątku jest nasza wysłana, etykiety bez zmian.
+      await w.mailbox.sendDraft(w.mailbox.drafts.keys.single);
+
+      expect(await w.cli(['review', '--push']), 0);
+      expect(w.draftIn('a'), isNull, reason: 'drugi szkic byłby drugim takim samym mejlem');
+      expect(await w.cli(['reply', '--push']), 0);
+      expect(w.mailbox.sentTexts, hasLength(1));
+      expect(w.labels('a'), contains(SongLabel.waitingForAuthor.label));
+    });
+
+    test('blok o starej apce wysłany ręcznie z Gmaila nie wraca przy review', () async {
+      final w = _World()..submitOld('o');
+      await w.cli(['scan', '--push']);
+      await w.mailbox.sendDraft(w.mailbox.drafts.keys.single);
+      w.export(_new);
+      expect(await w.cli(['review', '--push']), 0);
+      expect(w.draftIn('o'), isNull);
+      expect(await w.cli(['reply', '--push']), 0);
+      expect(w.mailbox.sentTexts, hasLength(1));
+    });
+
+    test('po bloku wysłanym przez reply tekst z przeglądu dostaje własny szkic', () async {
+      final w = _World()..submitOld('o');
+      await w.cli(['scan', '--push']);
+      await w.cli(['reply', '--push']);
+      w.export(_new, _verdict(note: 'Dodałem, dzięki!'));
+      expect(await w.cli(['review', '--push']), 0);
+      expect(w.draftIn('o'), contains('Dodałem, dzięki!'),
+          reason: 'sam blok to jeszcze nie odpowiedź z przeglądu');
+      expect(carriesOldAppBlock(w.draftIn('o')!), isFalse, reason: 'blok autor już dostał');
+    });
+
     test('tekst skasowany przed wysyłką schodzi z kolejki odpowiedzi', () async {
       final w = _World()..submit('a');
       await w.cli(['scan', '--push']);
@@ -286,8 +351,7 @@ void main() {
       w.export(_new);
       expect(await w.cli(['review', '--push']), 0);
       expect(w.labels('a'), isNot(contains(SongLabel.replyReviewNote.label)));
-      // Szkic ma Twój tekst — zostaje do skasowania ręcznie, ale bez etykiety
-      // `reply --push` go nie wyśle.
+      expect(w.draftIn('a'), isNull, reason: 'szkic nieruszony w Gmailu — narzędzie samo go kasuje');
       expect(await w.cli(['reply', '--push']), 0);
       expect(w.mailbox.sentTexts, isEmpty);
     });
@@ -313,17 +377,17 @@ void main() {
     }
 
     test('kopie z różnym przełącznikiem → STOP, nie „pierwsza wygrywa”', () async {
-      final (proposed, songs) = await scanned();
+      final (candidates, songs) = await scanned();
       final copies = roundTrip([...songs, ...songs]);
-      copies.first.piosenkomatData = copies.first.piosenkomatData!.copyWith(accepted: () => false);
-      final r = reviewDiff(kind: _new, candidates: proposed, reviewed: copies);
+      copies.first.piosenkomatData = copies.first.piosenkomatData!.copyWith(rejected: true);
+      final r = reviewDiff(kind: _new, candidates: candidates, reviewed: copies);
       expect(r.conflicts, hasLength(1));
       expect(r.mustStop, isTrue);
     });
 
     test('nowa rozbita na stronie na dwie wchodzi cała', () async {
-      final (proposed, songs) = await scanned();
-      final r = reviewDiff(kind: _new, candidates: proposed, reviewed: roundTrip([...songs, ...songs]));
+      final (candidates, songs) = await scanned();
+      final r = reviewDiff(kind: _new, candidates: candidates, reviewed: roundTrip([...songs, ...songs]));
       expect(r.mustStop, isFalse);
       expect(r.acceptedSongs, hasLength(2));
       expect(r.acceptedThreads, hasLength(1));
@@ -370,6 +434,36 @@ void main() {
       expect(w.run.exists, isTrue);
     });
 
+    test('staje, gdy tekst do autora zmienił się na stronie po review — review --push przelicza szkic', () async {
+      final w = _World()..submit('a');
+      await w.cli(['scan', '--push']);
+      w.export(_new, _verdict(note: 'Popraw literówkę.'));
+      await w.cli(['review', '--push']);
+      w.paste();
+      w.export(_new, _verdict(note: 'Popraw literówkę w drugiej zwrotce.'));
+      expect(await w.cli(['finalize', '--push']), 1, reason: 'po archiwizacji poszedłby stary tekst');
+      expect(w.run.exists, isTrue);
+
+      expect(await w.cli(['review', '--push']), 0);
+      expect(w.draftIn('a'), contains('Popraw literówkę w drugiej zwrotce.'),
+          reason: 'szkicu nie ruszałeś w Gmailu, więc narzędzie samo go przelicza');
+      expect(await w.cli(['finalize', '--push']), 0);
+    });
+
+    test('szkic poprawiony w Gmailu jest Twój — finalize przez niego nie staje', () async {
+      final w = _World()..submit('a');
+      await w.cli(['scan', '--push']);
+      w.export(_new, _verdict(note: 'Popraw literówkę.'));
+      await w.cli(['review', '--push']);
+      final id = w.mailbox.drafts.keys.single;
+      final edited = w.draftIn('a')!.replaceFirst('Popraw literówkę.', 'Popraw literówkę w refrenie.');
+      w.mailbox.drafts[id] = (threadId: 'a', body: edited);
+      w.paste();
+      expect(await w.cli(['review', '--push']), 0);
+      expect(w.draftIn('a'), edited);
+      expect(await w.cli(['finalize', '--push']), 0);
+    });
+
     test('--force domyka mimo piosenek, których nie widać w all_songs', () async {
       final w = _World()..submit('a');
       await w.cli(['scan', '--push']);
@@ -390,19 +484,31 @@ void main() {
   });
 
   group('reply --push', () {
-    test('wysyła szkic, a blok o starej apce zdejmuje kolejkę ze wszystkich wątków autora', () async {
+    test('blok idzie w każdym wątku ze starej apki — także gdy autor czeka na niego w innym', () async {
       final w = _World();
       // Wątek autora z wcześniejszego przebiegu: blok czeka tam w szkicu.
       w.mailbox.add(FakeMail('prev', 'prev', from: _kasia, labels: {SongLabel.auto.label, SongLabel.replyOldApp.label}));
       w.mailbox.drafts['d-prev'] = (threadId: 'prev', body: composeContribReply(oldApp: true)!);
       w.submitOld('o');
       await w.cli(['scan', '--push']);
-      expect(w.draftIn('o'), isNull, reason: 'blok raz na autora — czeka już w innym wątku');
+      expect(carriesOldAppBlock(w.draftIn('o')!), isTrue);
 
       expect(await w.cli(['reply', '--push']), 0);
-      expect(w.mailbox.sentTexts.map((s) => s.threadId), ['prev']);
+      expect(w.mailbox.sentTexts.map((s) => s.threadId), unorderedEquals(['prev', 'o']));
+      expect(w.mailbox.sentTexts.every((s) => carriesOldAppBlock(s.text)), isTrue);
       expect(w.labels('prev'), isNot(contains(SongLabel.replyOldApp.label)));
       expect(w.labels('o'), isNot(contains(SongLabel.replyOldApp.label)));
+    });
+
+    test('blok wysłany autorowi w innym wątku nie zwalnia z bloku nowego zgłoszenia', () async {
+      final w = _World();
+      w.mailbox
+        ..add(FakeMail('k1', 'k1', from: _kasia, labels: {SongLabel.added.label}))
+        ..add(FakeMail('s1', 'k1', from: kHarcappEmail, sent: true, body: composeContribReply(oldApp: true)!));
+      w.submitOld('o');
+      await w.cli(['scan', '--push']);
+      expect(w.labels('o'), contains(SongLabel.replyOldApp.label));
+      expect(carriesOldAppBlock(w.draftIn('o')!), isTrue);
     });
 
     test('szkic bez tekstu w wątku, który na tekst czeka, nie wychodzi', () async {
@@ -418,7 +524,7 @@ void main() {
       final w = _World();
       w.mailbox
         ..add(FakeMail('t1', 't1', labels: {SongLabel.replyReviewNote.label}))
-        ..add(FakeMail('s1', 't1', from: kInboxEmail, sent: true))
+        ..add(FakeMail('s1', 't1', from: kHarcappEmail, sent: true))
         ..add(FakeMail('t2', 't2', labels: {SongLabel.replyReviewNote.label}));
       expect(await w.cli(['reply', '--push']), 0);
       expect(w.mailbox.sentTexts, isEmpty);
@@ -446,19 +552,20 @@ void main() {
       expect(w.mailbox.drafts, contains('d'));
     });
 
-    test('blok wysłany ręcznie z Gmaila też zdejmuje kolejkę z reszty wątków autora', () async {
+    test('blok wysłany ręcznie z Gmaila zdejmuje kolejkę tylko ze swojego wątku', () async {
       final w = _World();
       w.mailbox
         ..add(FakeMail('k1', 'k1', from: _kasia, labels: {SongLabel.replyOldApp.label}))
-        ..add(FakeMail('s1', 'k1', from: kInboxEmail, sent: true))
+        ..add(FakeMail('s1', 'k1', from: kHarcappEmail, sent: true))
         ..add(FakeMail('k2', 'k2', from: _kasia, labels: {SongLabel.replyOldApp.label}));
       expect(await w.cli(['reply', '--push']), 0);
       expect(w.mailbox.sentTexts, isEmpty);
       expect(w.labels('k1'), isNot(contains(SongLabel.replyOldApp.label)));
-      expect(w.labels('k2'), isNot(contains(SongLabel.replyOldApp.label)));
+      expect(w.labels('k2'), contains(SongLabel.replyOldApp.label),
+          reason: 'drugi wątek ze starej apki dalej czeka na swój blok');
     });
 
-    test('tekst wycofany przy przeglądzie w wątku ze starej apki nie wychodzi', () async {
+    test('tekst wycofany przy przeglądzie w wątku ze starej apki: nieruszony szkic wraca do samego bloku', () async {
       final w = _World()..submitOld('o');
       await w.cli(['scan', '--push']);
       w.export(_new, _verdict(note: 'Dodałem, dzięki!'));
@@ -466,10 +573,36 @@ void main() {
       expect(w.draftIn('o'), contains('Dodałem, dzięki!'), reason: 'szkic z samym blokiem przeliczony');
       w.export(_new);
       await w.cli(['review', '--push']);
-      expect(w.draftIn('o'), contains('Dodałem, dzięki!'), reason: 'szkic z tekstem jest Twój');
+      expect(replyNoteOf(w.draftIn('o')!), isEmpty, reason: 'tekst wpisało narzędzie, nie Ty w Gmailu');
+      expect(carriesOldAppBlock(w.draftIn('o')!), isTrue);
+      expect(await w.cli(['reply', '--push']), 0);
+      expect(w.mailbox.sentTexts.map((s) => replyNoteOf(s.text)), [''], reason: 'idzie sam blok');
+      expect(w.labels('o'), isNot(contains(SongLabel.replyOldApp.label)));
+    });
+
+    test('tekst poprawiony w Gmailu, a wycofany przy przeglądzie, nie wychodzi', () async {
+      final w = _World()..submitOld('o');
+      await w.cli(['scan', '--push']);
+      w.export(_new, _verdict(note: 'Dodałem, dzięki!'));
+      await w.cli(['review', '--push']);
+      final id = w.mailbox.drafts.keys.single;
+      final edited = w.draftIn('o')!.replaceFirst('Dodałem, dzięki!', 'Dodałem, dzięki wielkie!');
+      w.mailbox.drafts[id] = (threadId: 'o', body: edited);
+      w.export(_new);
+      await w.cli(['review', '--push']);
+      expect(w.draftIn('o'), edited, reason: 'szkic poprawiony w Gmailu jest Twój');
       expect(await w.cli(['reply', '--push']), 0);
       expect(w.mailbox.sentTexts, isEmpty);
       expect(w.labels('o'), contains(SongLabel.replyOldApp.label));
+    });
+
+    test('nieudana wysyłka: kod 1, wątek zostaje w kolejce', () async {
+      final w = _World(mailbox: _FailingSend());
+      w.mailbox.add(FakeMail('t', 't', labels: {SongLabel.replyReviewNote.label}));
+      w.mailbox.drafts['d'] = (threadId: 't', body: composeContribReply(reviewNote: 'Dorzuć chwyty.')!);
+      expect(await w.cli(['reply', '--push']), 1);
+      expect(w.labels('t'), contains(SongLabel.replyReviewNote.label));
+      expect(w.mailbox.drafts, contains('d'), reason: 'szkic czeka na kolejną próbę');
     });
 
     test('-n ogranicza liczbę mejli', () async {
@@ -532,6 +665,7 @@ void main() {
       final w = _World()..submit('a');
       await w.cli(['scan', '--push']);
       w.export(_new);
+      expect(await w.cli(['unlabel']), 0, reason: 'na sucho lista tego, co cofnie, nie STOP');
       expect(await w.cli(['unlabel', '--push']), 1);
       expect(w.run.exists, isTrue);
       expect(await w.cli(['unlabel', '--push', '--force']), 0);
@@ -546,7 +680,7 @@ void main() {
         SongLabel.waitingForAuthor.label,
         if (state != null) state.label,
       }))
-      ..mailbox.add(FakeMail('s1', 't1', from: kInboxEmail, sent: true))
+      ..mailbox.add(FakeMail('s1', 't1', from: kHarcappEmail, sent: true))
       ..mailbox.add(authorReplied ? FakeMail('m2', 't1', body: 'Chwyty: a d e') : FakeMail('s2', 't1', sent: true));
 
     test('autor odpisał → z --push wątek wraca do kolejki bez żadnej song/*', () async {

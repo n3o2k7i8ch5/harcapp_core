@@ -2,6 +2,7 @@ import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 
+import 'hrcpsng.dart';
 import 'model.dart';
 import 'plan.dart';
 import 'similarity.dart';
@@ -23,15 +24,17 @@ class ReviewCandidate {
   final String threadId;
   /// Wpis z planu przebiegu — id i tytuł.
   final PlannedSong planned;
-  /// Odcisk do porównań awaryjnych. `null`, gdy piosenki nie ma w pliku
-  /// (plan i plik się rozjechały).
-  final SongProfile? profile;
+  /// Piosenka z pliku kandydatów — do porównań awaryjnych. `null`, gdy jej
+  /// tam nie ma (plan i plik się rozjechały).
+  final SongRaw? song;
 
   ReviewCandidate({
     required this.threadId,
     required this.planned,
-    this.profile,
+    this.song,
   });
+
+  late final SongProfile? profile = switch (song) { final s? => SongProfile(s), null => null };
 
   String get songId => planned.songId;
   String get title => planned.title;
@@ -99,8 +102,18 @@ class ReviewResult {
   /// Wątki przyjęte — każdy raz, choćby wróciły z niego dwie piosenki.
   List<String> get acceptedThreads => {for (final m in accepted) m.candidate.threadId}.toList();
 
-  /// Piosenki, które idą do `final-*`.
+  /// Piosenki, które idą do `final-*` — jeszcze ze śladem piosenkomatu.
   List<SongRaw> get acceptedSongs => [for (final m in accepted) m.reviewed];
+
+  /// `final-*` z tego przeglądu: przyjęte piosenki w postaci do `all_songs`
+  /// ([stripPiosenkomat]), treść pliku i lista „co podmienić”. `review` go
+  /// zapisuje, a `finalize` składa jeszcze raz i porównuje z tym, co leży
+  /// na dysku — jedna definicja, więc porównanie nie rozjedzie się z zapisem.
+  ({List<SongRaw> songs, String content, List<Replacement> replacements}) finalFile() {
+    final (:songs, :replacements) = stripPiosenkomat(acceptedSongs);
+    return (songs: songs, content: encodeHrcpsng(songs), replacements: replacements);
+  }
+
   /// Wszystko, co odpadło: skasowane i zgaszone przełącznikiem — dla etykiet
   /// to jedno i to samo.
   List<ReviewCandidate> get rejected =>
@@ -118,18 +131,11 @@ List<ReviewCandidate> collectCandidates(
   final byId = {for (final s in candidateSongs) s.id: s};
 
   return [
-    for (final e in plan.songByThread.entries)
-      if (e.value.kind == kind)
-        ReviewCandidate(
-          threadId: e.key,
-          planned: e.value,
-          profile: switch (byId[e.value.songId]) { final s? => SongProfile(s), null => null },
-        ),
+    for (final MapEntry(key: thread, value: t) in plan.threads.entries)
+      if (t.song case final planned? when planned.kind == kind)
+        ReviewCandidate(threadId: thread, planned: planned, song: byId[planned.songId]),
   ];
 }
-
-String? _threadOf(SongRaw s) =>
-    s.piosenkomatData?.threadId ?? s.contributorData?.emailThreadId;
 
 /// Różnica „zaproponowane minus to, co wróciło”. Dopasowanie kaskadą: id
 /// wątku, potem id piosenki, tytuł i wreszcie tekst — bo przy przeglądzie
@@ -157,9 +163,9 @@ ReviewResult reviewDiff({
     matched.putIfAbsent(hit.candidate, () => []).add(hit);
   }
 
-  // Przełącznik z edytora. Brak flagi znaczy „wchodzi”, więc skasowanie
-  // z pliku dalej działa jak odrzut.
-  bool goesInOf(Matched m) => m.reviewed.piosenkomatData?.goesIn ?? true;
+  // Przełącznik z edytora. Bez zgaszonego przełącznika piosenka wchodzi,
+  // a skasowanie z pliku dalej działa jak odrzut.
+  bool goesInOf(Matched m) => !(m.reviewed.piosenkomatData?.rejected ?? false);
   String? noteOf(Matched m) => switch (m.reviewed.piosenkomatData?.reviewNote?.trim()) {
         final note? when note.isNotEmpty => note,
         _ => null,
@@ -220,7 +226,7 @@ ReviewResult reviewDiff({
 }
 
 Matched? _match(SongRaw song, List<ReviewCandidate> candidates) {
-  final threadId = _threadOf(song);
+  final threadId = song.piosenkomatData?.threadId;
   if (threadId != null) {
     // Wątek to jedno zgłoszenie, więc i jeden kandydat. Id wątku spoza
     // kandydatów: obca, bez zgadywania po tytule — inaczej piosenka z innego
@@ -246,22 +252,18 @@ Matched? _match(SongRaw song, List<ReviewCandidate> candidates) {
 
   // Po przeglądzie tekst mógł się zmienić (poprawiona literówka, dopisana
   // zwrotka), ale to ma być dalej ta sama piosenka — ta sama definicja, co
-  // przy wykrywaniu duplikatów.
+  // przy wykrywaniu duplikatów, i ta sama kolejność trafień, co wszędzie.
   final profile = SongProfile(song);
-  ReviewCandidate? best;
-  var bestScore = -1.0;
+  (ReviewCandidate, SongMatch<SongRaw>)? best;
   for (final c in byTitle.isEmpty ? candidates : byTitle) {
-    final other = c.profile;
-    if (other == null) continue;
-    final evidence = compare(profile, other);
-    if (!(levelOf(evidence)?.isSameSong ?? false)) continue;
-    final score = similarityScore(evidence);
-    if (score >= bestScore) {
-      best = c;
-      bestScore = score;
+    if (c.song case final other?) {
+      final m = SongMatch(song: other, similarities: compare(profile, c.profile!), source: MatchSource.batch);
+      if (!(m.level?.isSameSong ?? false)) continue;
+      // Przy remisie wygrywa późniejszy kandydat.
+      if (best == null || compareSongMatches(m, best.$2) <= 0) best = (c, m);
     }
   }
-  return best == null ? null : (best, MatchedBy.songText);
+  return best == null ? null : (best.$1, MatchedBy.songText);
 }
 
 /// Bezpieczniki na zły plik zwrotny: pusty eksport i „odrzucona większość”
@@ -310,7 +312,7 @@ String? reviewSafetyError(
     };
     for (final MapEntry(key: thread, value: accepted) in verdicts.entries) {
       final ids = plan.messagesOf(thread);
-      final threadLabels = {for (final id in ids) ...?current[id]};
+      final threadLabels = plan.labelsOfThread(thread, current);
       final hasNote = r.reviewNotes.containsKey(thread);
       final replied = threadLabels.contains(SongLabel.waitingForAuthor.label);
       if (hasNote && replied) alreadyReplied.add(thread);
@@ -337,3 +339,11 @@ String? reviewSafetyError(
   }
   return (changes: changes, alreadyReplied: alreadyReplied);
 }
+
+/// Zmiany, które wolno wypchnąć: tylko na mejlach, które automat wstawił do
+/// plików przebiegu i które jeszcze nie weszły do apki ([isInRunFilesByTool]).
+Map<String, LabelChange> applicableChanges(Map<String, LabelChange> changes, Map<String, Set<String>> current) => {
+      for (final e in changes.entries)
+        if (current[e.key] case final labels? when isInRunFilesByTool(labels))
+          e.key: withReadOnClose(e.value, current: labels),
+    };

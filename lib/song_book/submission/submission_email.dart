@@ -3,7 +3,6 @@
 /// jadą załącznikiem — patrz [SongSubmissionFile].
 library;
 
-import 'package:harcapp_core/song_book/mail_quotes.dart';
 import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 
@@ -44,22 +43,10 @@ RegExp submissionBarRe(String bar) => RegExp(
       multiLine: true,
     );
 
-final RegExp _consentBarRe = submissionBarRe(kSubmissionConsentBar);
-
-/// Dopisek autora: wszystko powyżej zamrożonej belki, bez cytowania.
-/// `null`, gdy belki nie ma — czyli gdy mejl jest w starym kształcie.
-String? extractSubmissionUserMessage(String body){
-  final bar = _consentBarRe.firstMatch(body);
-  if(bar == null) return null;
-  final raw = body
-      .substring(0, bar.start)
-      .split('\n')
-      .map((l) => l.replaceFirst(quotePrefixRe, ''))
-      .join('\n')
-      .replaceAll(submissionUserMessagePlaceholderRe, '')
-      .trim();
-  return raw.isEmpty? null: raw;
-}
+/// Początek tematu zgłoszenia jednej piosenki — ten sam w każdym kształcie
+/// mejla, po nim piosenkomat poznaje zgłoszenie.
+const String kNewSongSubject = 'Nowa piosenka';
+const String kCorrectionSubject = 'Poprawka piosenki';
 
 String composeSubmissionEmailSubject({
   required SubmissionOrigin origin,
@@ -69,7 +56,7 @@ String composeSubmissionEmailSubject({
 }){
   final what = songCount > 1
       ? 'Piosenki $songCount'
-      : '${isNewSong? 'Nowa piosenka': 'Poprawka piosenki'} "${song?.title ?? ''}"';
+      : '${isNewSong? kNewSongSubject: kCorrectionSubject} "${song?.title ?? ''}"';
   return '$what ${submissionSubjectMarker(origin)}';
 }
 
@@ -80,7 +67,7 @@ String composeSubmissionEmailSubject({
 /// stronie. W apce zostaje: odpowiedź w wątku z etykietą nie wraca do kolejki.
 String composeSubmissionEmailBody({
   required String attachmentFileName,
-  String? acceptRulesVersion,
+  String? acceptedRulesVersion,
   bool oneSongPerMail = true,
 }) =>
     '$kSubmissionUserMessagePlaceholder'
@@ -88,7 +75,7 @@ String composeSubmissionEmailBody({
     '\n$kSubmissionConsentBar'
     '\n'
     '\nZnam i akceptuję zasady dodawania piosenek do aplikacji HarcApp'
-    ' (${acceptRulesVersion ?? 'brak wersji'},'
+    ' (${acceptedRulesVersion ?? 'brak wersji'},'
     ' dostępne na www.harcapp.web.app/song_contribution_rules).'
     '\n'
     '\n$kSubmissionStructuralBar'
@@ -108,12 +95,12 @@ SongSubmissionEmail composeSongSubmissionEmail({
   required List<SongSubmission> submissions,
   required SubmissionOrigin origin,
   String? appVersion,
-  String? acceptRulesVersion,
+  String? acceptedRulesVersion,
 }){
   final file = SongSubmissionFile(
     origin: origin,
     appVersion: appVersion,
-    rulesVersion: acceptRulesVersion,
+    acceptedRulesVersion: acceptedRulesVersion,
     submissions: submissions,
   );
   final fileName = file.fileName;
@@ -127,7 +114,7 @@ SongSubmissionEmail composeSongSubmissionEmail({
     ),
     body: composeSubmissionEmailBody(
       attachmentFileName: fileName,
-      acceptRulesVersion: acceptRulesVersion,
+      acceptedRulesVersion: acceptedRulesVersion,
     ),
     fileName: fileName,
     fileContent: file.encode(),

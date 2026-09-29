@@ -212,4 +212,60 @@ void main() {
       expect(level(a, b), isNull);
     });
   });
+
+  group('poziomy — metadane, id, kolejność:', () {
+    const text = 'Płonie ognisko i szumią knieje\nDrużynowy jest wśród nas\n'
+        'Opowiada starodawne dzieje\nBohaterski wskrzesza czas';
+    SongRaw plain({String id = 'o!_x', String title = 'Ognisko', String lyrics = text,
+        String chords = 'a d e\na d e', String yt = 'dQw4w9WgXcQ'}) {
+      final s = SongRaw.empty(id: id);
+      s.title = title;
+      s.youtubeVideoId = yt;
+      s.authors = ['Autor Testowy'];
+      s.performers = ['Zespol Testowy'];
+      s.hasRefren = false;
+      s.songParts = [SongPart.from(SongElement(lyrics, chords, false))];
+      return s;
+    }
+
+    test('te same wersy w innej kolejności → sameSong, nie identical', () {
+      final s = cmp(plain(), plain(lyrics: text.split('\n').reversed.join('\n')));
+      expect((s.sharedLines!.coverage(), s.sharedLines!.otherCoverage()), (1.0, 1.0));
+      expect(s.whereType<SameText>(), isEmpty);
+      expect(levelOf(s), MatchLevel.sameSong);
+    });
+
+    test('inny film → MetadataDiff(youtube), sameSong', () {
+      final s = cmp(plain(), plain(yt: 'xxxxxxxxxxx'));
+      expect(s.whereType<MetadataDiff>().single.fields, [MetadataField.youtube]);
+      expect(levelOf(s), MatchLevel.sameSong);
+    });
+
+    test('inna wielkość liter w tytule → MetadataDiff(title), ale SameTitle', () {
+      final s = cmp(plain(title: 'Płonie Ognisko'), plain(title: 'Płonie ognisko'));
+      expect(s.whereType<SameTitle>(), hasLength(1));
+      expect(s.whereType<MetadataDiff>().single.fields, [MetadataField.title]);
+      expect(levelOf(s), MatchLevel.sameSong);
+    });
+
+    test('inne chwyty → sameSong, a o chwytach mówi dowód', () {
+      final s = cmp(plain(), plain(chords: 'C G a\nC G a'));
+      expect(levelOf(s), MatchLevel.sameSong);
+      expect(sameChordsUpToOrder(s), isFalse);
+    });
+
+    test('to samo id, poza tym nic → sameIdDifferentSong; treść wygrywa', () {
+      const other = 'Zupełnie inny tekst o morzu\nŻagle na wietrze i sól na wargach\nDaleko od lasu i od ogniska';
+      final s = cmp(plain(), plain(title: 'Morze', lyrics: other, yt: 'yyyyyyyyyyy'));
+      expect(s.whereType<SameId>(), hasLength(1));
+      expect(levelOf(s), MatchLevel.sameIdDifferentSong);
+      expect(level(plain(), plain(title: 'Knieje', lyrics: '$text\nJedna nowa linijka')), MatchLevel.shorter);
+    });
+
+    test('null == [] w metadanych', () {
+      final a = plain()..hidTitles = [];
+      final b = plain()..hidTitles = ['', ' '];
+      expect(cmp(a, b).whereType<MetadataDiff>(), isEmpty);
+    });
+  });
 }

@@ -33,27 +33,19 @@ enum SongRate{
 class ContributorData{
   final String email;
   final DateTime contributionDate;
-  final String acceptedContributionRulesVersion;
-  /// Id wątku ze zgłoszeniem w skrzynce HarcApp, jeśli piosenka przyszła tą
-  /// drogą. Wypełnia je piosenkomat; dzięki temu piosenka wyeksportowana ze
-  /// strony wskazuje zgłoszenie, z którego pochodzi, także po ręcznych
-  /// poprawkach tytułu. Wątek, nie wiadomość — zgłoszenie to cały wątek.
-  final String? emailThreadId;
+  final String acceptedRulesVersion;
 
   ContributorData({
     required this.email,
     required this.contributionDate,
-    required this.acceptedContributionRulesVersion,
-    this.emailThreadId,
+    required this.acceptedRulesVersion,
   });
 
   Map toJsonMap() {
     return {
       'email': email,
       'contribution_date': contributionDate.toIso8601String(),
-      'accepted_contribution_rules_version': acceptedContributionRulesVersion,
-      // Bez id klucza nie ma wcale, żeby nie zaśmiecać piosenek dodanych ręcznie.
-      if(emailThreadId != null) 'email_thread_id': emailThreadId,
+      'accepted_contribution_rules_version': acceptedRulesVersion,
     };
   }
 
@@ -61,8 +53,7 @@ class ContributorData{
     ContributorData(
       email: jsonMap['email'] as String,
       contributionDate: DateTime.parse(jsonMap['contribution_date'] as String),
-      acceptedContributionRulesVersion: jsonMap['accepted_contribution_rules_version'] as String,
-      emailThreadId: jsonMap['email_thread_id'] as String?,
+      acceptedRulesVersion: jsonMap['accepted_contribution_rules_version'] as String,
     );
 
 }
@@ -215,6 +206,10 @@ abstract class SongCore{
         .replaceAll(' ', '_')
         .replaceAll(RegExp(r"_+"), "_")
         .replaceAll(RegExp(r"[^\p{L}\p{N}_]", unicode: true), '');
+
+  /// Id oficjalnej piosenki o tym tytule — dla piosenki, która przyszła
+  /// bez id.
+  static String officialIdFromTitle(String title) => 'o!_${filenameFromTitle(title)}';
 
   String generateFileName({required bool withPerformer}){
 

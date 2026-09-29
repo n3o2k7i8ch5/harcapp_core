@@ -33,9 +33,7 @@ String _openRun() {
   writePlan(run.plan, RunPlan(
     id: 'test',
     createdAt: DateTime(2026),
-    labelsByMessage: const {},
-    songByThread: const {},
-    messagesByThread: const {},
+    threads: const {},
   ).pushed(DateTime(2026)));
   return root;
 }
@@ -89,9 +87,10 @@ void main() {
     final plan = RunPlan(
       id: 'test',
       createdAt: DateTime(2026),
-      labelsByMessage: const {'a': [], 'b': []},
-      songByThread: const {},
-      messagesByThread: const {},
+      threads: const {
+        'a': PlannedThread(messages: ['a'], labels: []),
+        'b': PlannedThread(messages: ['b'], labels: []),
+      },
     );
 
     test('bez scan --push nie ma jej w Gmailu', () {

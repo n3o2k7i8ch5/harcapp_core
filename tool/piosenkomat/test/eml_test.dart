@@ -110,6 +110,6 @@ void main() {
     const m = ContribMessage(id: 'a', body: '', readError: 'zepsuty');
     expect(m.isSongSubmission, isTrue,
         reason: 'przyszedł z kolejki — bez etykiety wracałby przy każdym scan');
-    expect(classify(m, book: SongBook.empty).destination, Destination.unparsable);
+    expect(classify(m, book: SongBook.empty).destination, Destination.rejectUnparsable);
   });
 }

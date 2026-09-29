@@ -195,7 +195,6 @@ void main() {
     final reviewed = [
       for (final s in readHrcpsng(path)) if (s.title != 'Wywalona') s,
     ];
-    stripPiosenkomat(reviewed);
 
     final report = collectPeople(contributorSourcesOf(reviewed,
         otherEmailsBySender: otherEmailsBySender(plan)));

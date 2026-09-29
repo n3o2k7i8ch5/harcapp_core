@@ -1,7 +1,6 @@
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:piosenkomat/classify.dart';
-import 'package:piosenkomat/report.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/plan.dart';
 import 'package:piosenkomat/review.dart';
@@ -24,15 +23,15 @@ Future<(RunPlan, List<SongRaw>)> _scan() async {
   return (RunPlan.fromClassified(items, id: 'test'), [for (final c in items) c.song!]);
 }
 
-Future<(RunPlan, List<SongRaw>, List<ReviewCandidate>)> _proposed() async {
+Future<(RunPlan, List<SongRaw>, List<ReviewCandidate>)> _candidates() async {
   final (plan, songs) = await _scan();
   return (plan, songs, collectCandidates(plan, roundTrip(songs), _new));
 }
 
 Map<String, LabelChange> _changes(
-        RunPlan plan, List<SongRaw> reviewed, List<ReviewCandidate> proposed) =>
+        RunPlan plan, List<SongRaw> reviewed, List<ReviewCandidate> candidates) =>
     reviewLabelChanges(
-      [reviewDiff(kind: _new, candidates: proposed, reviewed: reviewed)],
+      [reviewDiff(kind: _new, candidates: candidates, reviewed: reviewed)],
       plan,
       // Stan po `scan --push`.
       {for (final e in plan.labelsByMessage.entries) e.key: e.value.toSet()},
@@ -40,8 +39,8 @@ Map<String, LabelChange> _changes(
 
 void main() {
   test('wróciła z przeglądu → „w pliku”; bez zarzutu nie rusza się wcale', () async {
-    final (plan, songs, proposed) = await _proposed();
-    final changes = _changes(plan, roundTrip(songs), proposed);
+    final (plan, songs, candidates) = await _candidates();
+    final changes = _changes(plan, roundTrip(songs), candidates);
     expect(changes.containsKey('ok'), isFalse,
         reason: '„ready-to-add” już wisi, nie ma czego przestawiać');
     expect(changes['yt']!.$1, [SongLabel.readyToAdd.label]);
@@ -50,31 +49,31 @@ void main() {
   });
 
   test('wyrzucona na stronie → rejected/after-review', () async {
-    final (plan, songs, proposed) = await _proposed();
-    final changes = _changes(plan, roundTrip([songs.first]), proposed);
+    final (plan, songs, candidates) = await _candidates();
+    final changes = _changes(plan, roundTrip([songs.first]), candidates);
     expect(changes['yt']!.$1, [SongLabel.rejectedAfterReview.label]);
     expect(changes['yt']!.$2, contains(SongLabel.needsReview.label));
   });
 
   test('odrzucona z wyjaśnieniem to pytanie do autora, nie odrzut', () async {
     // Piosenka może jeszcze wrócić z chwytami, więc „rejected” byłoby kłamstwem.
-    final (plan, songs, proposed) = await _proposed();
+    final (plan, songs, candidates) = await _candidates();
     final reviewed = roundTrip(songs);
     final yt = reviewed.firstWhere((s) => s.title == 'Bez YT');
     yt.piosenkomatData = yt.piosenkomatData!.copyWith(
-        accepted: () => false, reviewNote: () => 'Dorzuć YouTube i wejdzie.');
-    final changes = _changes(plan, reviewed, proposed);
+        rejected: true, reviewNote: () => 'Dorzuć YouTube i wejdzie.');
+    final changes = _changes(plan, reviewed, candidates);
     expect(changes['yt']!.$1, [SongLabel.replyReviewNote.label]);
     expect(changes['yt']!.$1, isNot(contains(SongLabel.rejectedAfterReview.label)));
   });
 
   test('przyjęta z uwagą wchodzi i zaczepia autora', () async {
-    final (plan, songs, proposed) = await _proposed();
+    final (plan, songs, candidates) = await _candidates();
     final reviewed = roundTrip(songs);
     final ok = reviewed.firstWhere((s) => s.title == 'Czysta');
     ok.piosenkomatData = ok.piosenkomatData!
         .copyWith(reviewNote: () => 'Dodałem, popraw literówkę.');
-    final changes = _changes(plan, reviewed, proposed);
+    final changes = _changes(plan, reviewed, candidates);
     expect(changes['ok']!.$1, [SongLabel.replyReviewNote.label],
         reason: 'bez zarzutu, ale z uwagą — musi ruszyć mimo „ready-to-add”, które już ma');
     expect(changes['ok']!.$2, isEmpty, reason: 'bez zarzutu nie miała nic do zdjęcia');
@@ -82,44 +81,18 @@ void main() {
 
   test('etykiety idą na wszystkie wiadomości wątku', () async {
     final (plan, songs) = await _scan();
+    final yt = plan.threads['yt']!;
     final withReply = RunPlan(
       id: 'test',
       createdAt: plan.createdAt,
-      labelsByMessage: {...plan.labelsByMessage, 'yt2': plan.labelsByMessage['yt']!},
-      songByThread: plan.songByThread,
-      messagesByThread: {...plan.messagesByThread, 'yt': ['yt', 'yt2']},
+      threads: {
+        ...plan.threads,
+        'yt': PlannedThread(messages: ['yt', 'yt2'], labels: yt.labels, song: yt.song, sender: yt.sender),
+      },
     );
-    final proposed = collectCandidates(withReply, roundTrip(songs), _new);
-    final changes = _changes(withReply, roundTrip(songs), proposed);
+    final candidates = collectCandidates(withReply, roundTrip(songs), _new);
+    final changes = _changes(withReply, roundTrip(songs), candidates);
     expect(changes['yt2']!.$1, changes['yt']!.$1);
     expect(changes['yt2']!.$2, changes['yt']!.$2);
-  });
-
-  test('raport liczy nowe, poprawki, odrzuty i „rzuć okiem”', () async {
-    final book = bookWith([sampleSong(title: 'W apce', lyrics: 'Ala ma kota\nA kot ma Ale')]);
-    final report = formatRunReport(classifyBatch([
-      msgFrom(await completeEmail(song: sampleSong(title: 'Czysta', lyrics: 'Zupelnie inne slowa')), id: 'ok'),
-      msgFrom(await completeEmail(song: sampleSong(title: 'Bez YT', yt: null, lyrics: 'Wlazl kotek na plotek')), id: 'yt'),
-      msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'W apce', lyrics: 'Ala ma kota\nA kot ma Ale\nX')), id: 'corr'),
-      msgFrom(await completeEmail(song: sampleSong(title: 'W apce', lyrics: 'Ala ma kota\nA kot ma Ale')), id: 'dup'),
-      msgFrom(await completeEmail(song: sampleSong(title: 'W apce', lyrics: 'Ala ma kota\nA kot ma Ale'), userMessage: 'hej'), id: 'msg'),
-      msgFrom('From: a@b.pl\nSubject: Cześć\n\nCześć, mam pytanie', id: 'raw'),
-    ], book: book));
-    expect(report, contains('ZGŁOSZEŃ        6'));
-    expect(report, contains('  nie do odczytu 1'));
-    expect(report, contains('NOWE            2'));
-    expect(report, contains('  bez zarzutu   1'));
-    expect(report, contains('  z uwagami     1'));
-    expect(report, contains('POPRAWKI        1'));
-    // `dup` i `msg` są sobie identyczne (dopisek to nie piosenka) i mają tę samą
-    // datę: zostaje późniejsza w kolejce, wcześniejsza to duplikat.
-    expect(report, contains('  już w apce    1'), reason: 'identyczna z dopiskiem też jest odrzutem');
-    expect(report, contains('  duplikat      1'));
-    expect(report, contains('RZUĆ OKIEM      2'), reason: 'identyczna z dopiskiem + nie do odczytania');
-    expect(report, contains('missing-youtube'));
-    expect(report, contains('Kształt mejla:'));
-    expect(report, contains('fenced'));
-    expect(report, contains('[ok]'));
-    expect(report, contains('NIEPARS  Cześć'));
   });
 }

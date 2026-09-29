@@ -40,11 +40,7 @@ String? oldAppSongRegion(String content){
   final end = _oldAppSongEndRe.firstMatch(region);
   if(end != null) region = region.substring(0, end.start);
 
-  region = region
-      .split('\n')
-      .map((l) => l.replaceFirst(quotePrefixRe, ''))
-      .join('\n');
-  return _stripHtml(region).trim();
+  return _stripHtml(unquoted(region)).trim();
 }
 
 /// Po czym poznać, że klient odesłał treść jako HTML. Samo `<` nie wystarczy:

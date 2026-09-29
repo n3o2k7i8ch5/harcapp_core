@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
-import 'package:harcapp_core/song_book/song_core.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:path/path.dart' as p;
 
@@ -55,12 +54,18 @@ String uniqueName(String base, bool Function(String) taken, {String separator = 
 /// dla plików przebiegu, bo to one niosą przegląd; do bazy piosenek to pole
 /// nie ma prawa dojechać. Zdublowane id to [HrcpsngDuplicateIdError], nie
 /// cicha zmiana id przy zapisie.
-String encodeHrcpsng(List<SongRaw> songs, {bool withPiosenkomatData = false}) => encodeHrcpsngEntries(
-      official: [
-        for (final song in [...songs]..sort((a, b) => compareText(a.title, b.title)))
-          (song.id, song.toApiJsonMap(withId: false, withPiosenkomatData: withPiosenkomatData)),
-      ],
-    );
+///
+/// Sekcję wyznacza przedrostek id, jak na stronie: apka szuka piosenki `oc!_…`
+/// tylko w `conf`, więc poprawka takiej piosenki w `final-*` też tam leży.
+String encodeHrcpsng(List<SongRaw> songs, {bool withPiosenkomatData = false}) {
+  final sorted = [...songs]..sort((a, b) => compareText(a.title, b.title));
+  (String, Map) entryOf(SongRaw song) =>
+      (song.id, song.toApiJsonMap(withId: false, withPiosenkomatData: withPiosenkomatData));
+  return encodeHrcpsngEntries(
+    official: [for (final song in sorted) if (!song.isConfid) entryOf(song)],
+    conf: [for (final song in sorted) if (song.isConfid) entryOf(song)],
+  );
+}
 
 void writeHrcpsng(String path, List<SongRaw> songs,
         {bool withPiosenkomatData = false}) =>
@@ -101,42 +106,29 @@ String defaultSongsDbPath() {
   return p.join('assets', 'songs', 'all_songs.hrcpsng');
 }
 
-/// Zdejmuje ślad piosenkomatu przed wgraniem do `all_songs`. Przy poprawkach
-/// **ustawia `id = correction_target`**: w apce piosenki są referencjonowane
-/// po `lclId` (ulubione, albumy, oceny), więc poprawiony tytuł nie może
-/// zmienić id. Zwraca listę `(id w apce, tytuł po poprawce, czy cel był
-/// zgadnięty)` do podmiany — przy zgadniętym trzeba zerknąć, zanim podmienisz.
-///
-/// Ślad to nie tylko pole `piosenkomat`: `contributor_data.email_thread_id`
-/// też jest nasz. Wiąże piosenkę ze zgłoszeniem przez cały przebieg (zapasowy
-/// klucz dopasowania w `review`, czytany przed zdjęciem śladu), ale
-/// w `all_songs` byłby tylko wyciekiem id wątku ze skrzynki.
-List<({String id, String title, bool guessed})> stripPiosenkomat(
-    List<SongRaw> songs) {
-  final targets = <({String id, String title, bool guessed})>[];
+/// Poprawka do podmiany w `all_songs`: id w apce, tytuł po poprawce i czy cel
+/// był zgadnięty — przy zgadniętym trzeba zerknąć, zanim podmienisz.
+typedef Replacement = ({String id, String title, bool guessed});
+
+/// Piosenki do wgrania w `all_songs`: kopie [songs] bez śladu piosenkomatu.
+/// Same [songs] zostają nietknięte, więc przegląd da się czytać i przed,
+/// i po. Przy poprawkach kopia dostaje **`id = correction_target`**: w apce
+/// piosenki są referencjonowane po `lclId` (ulubione, albumy, oceny), więc
+/// poprawiony tytuł nie może zmienić id. Obok lista „co podmienić”.
+({List<SongRaw> songs, List<Replacement> replacements}) stripPiosenkomat(List<SongRaw> songs) {
+  final stripped = <SongRaw>[];
+  final replacements = <Replacement>[];
   for (final s in songs) {
+    final copy = s.copy(withContributorData: true);
     final data = s.piosenkomatData;
     if (data != null && data.isCorrection && data.correctionTarget != null) {
-      s.id = data.correctionTarget!;
-      targets.add((
-        id: s.id,
-        title: s.title,
-        guessed: data.correctionTargetGuessed,
-      ));
+      copy.id = data.correctionTarget!;
+      replacements.add((id: copy.id, title: copy.title, guessed: data.correctionTargetGuessed));
     }
-    s.piosenkomatData = null;
     // Pamięć o pierwowzorze jest robocza: w bazie piosenka nie ma po co
     // pamiętać, że powstała z poprawiania — tam liczy się jej dzisiejsza treść.
-    s.basedOnSongId = null;
-    final contributor = s.contributorData;
-    if (contributor?.emailThreadId != null) {
-      s.contributorData = ContributorData(
-        email: contributor!.email,
-        contributionDate: contributor.contributionDate,
-        acceptedContributionRulesVersion:
-            contributor.acceptedContributionRulesVersion,
-      );
-    }
+    copy.basedOnSongId = null;
+    stripped.add(copy);
   }
-  return targets;
+  return (songs: stripped, replacements: replacements);
 }

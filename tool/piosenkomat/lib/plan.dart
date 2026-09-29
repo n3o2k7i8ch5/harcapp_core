@@ -42,116 +42,121 @@ class PlannedSong {
       );
 }
 
-/// Nazwa przebiegu: data i godzina `scan --push`, np. `import-2026-09-28T101500`.
+/// Nazwa przebiegu: data i godzina `scan --push`, np. `run-2026-09-28T101500`.
 /// Tak nazywa się też jego katalog w archiwum i pole `run` w piosenkach.
 String newRunId(DateTime at) =>
-    'import-${at.toIso8601String().substring(0, 19).replaceAll(':', '')}';
+    'run-${at.toIso8601String().substring(0, 19).replaceAll(':', '')}';
 
-/// Plan przebiegu (`plan.json`), czyli zapisany wynik `scan`: które etykiety
-/// automat nadaje któremu mejlowi, co z którego wątku poszło do pliku i kto
-/// zgłaszał. Po nim `review` i `finalize` wiedzą, które mejle są ich —
-/// bez ponownego czytania skrzynki.
+/// Wątek przebiegu, czyli jedno zgłoszenie: jego wiadomości, etykiety, które
+/// automat nadaje każdej z nich, piosenka w pliku kandydatów i kto zgłaszał.
+class PlannedThread {
+  /// Od najstarszej — etykiety idą na wszystkie.
+  final List<String> messages;
+  final List<String> labels;
+  /// `null`, gdy zgłoszenie nie poszło do pliku kandydatów.
+  final PlannedSong? song;
+  /// Po nim szkice odpowiedzi liczą się per autor, a `people.dart` dokłada
+  /// adresy z planu. `null`, gdy nadawca nieczytelny.
+  final String? sender;
+
+  const PlannedThread({required this.messages, required this.labels, this.song, this.sender});
+
+  Map<String, dynamic> toJson() => {
+        'messages': messages,
+        'labels': labels,
+        if (song != null) 'song': song!.toJson(),
+        if (sender != null) 'sender': sender,
+      };
+
+  factory PlannedThread.fromJson(Map<String, dynamic> json) => PlannedThread(
+        messages: (json['messages'] as List).cast<String>(),
+        labels: (json['labels'] as List).cast<String>(),
+        song: switch (json['song']) { final Map<String, dynamic> song => PlannedSong.fromJson(song), _ => null },
+        sender: json['sender'] as String?,
+      );
+}
+
+/// Plan przebiegu (`plan.json`), czyli zapisany wynik `scan`: jego wątki
+/// z tym, co automat nadaje, co poszło do pliku i kto zgłaszał. Po nim
+/// `review` i `finalize` wiedzą, które mejle są ich — bez ponownego czytania
+/// skrzynki.
 class RunPlan {
   final String id;
   final DateTime createdAt;
   /// Kiedy `scan --push` skończył: etykiety i szkice są w Gmailu. `null` —
   /// przerwany w połowie; kolejny `scan --push` go dokończy.
   final DateTime? pushedAt;
-  /// Etykiety po **wiadomości** — wątek dostaje je na wszystkich.
-  final Map<String, List<String>> labelsByMessage;
-  /// Piosenka po **wątku** — jeden wątek to jedna piosenka.
-  final Map<String, PlannedSong> songByThread;
-  /// Wiadomości każdego wątku, od najstarszej — etykiety idą na cały wątek.
-  final Map<String, List<String>> messagesByThread;
-  /// Nadawca każdego wątku — po nim szkice odpowiedzi liczą się per autor,
-  /// a `people.dart` dokłada adresy z planu. Wątki bez czytelnego nadawcy nie
-  /// mają wpisu.
-  final Map<String, String> senderByThread;
+  /// Po id wątku — jeden wątek to jedno zgłoszenie.
+  final Map<String, PlannedThread> threads;
 
-  const RunPlan({
+  RunPlan({
     required this.id,
     required this.createdAt,
-    required this.labelsByMessage,
-    required this.songByThread,
-    required this.messagesByThread,
-    this.senderByThread = const {},
+    required this.threads,
     this.pushedAt,
   });
 
   factory RunPlan.fromClassified(List<Classified> items, {required String id}) => RunPlan(
         id: id,
         createdAt: DateTime.now(),
-        labelsByMessage: {
+        threads: {
           for (final c in items)
-            for (final m in c.submission.messages)
-              m.id: [...c.labels, SongLabel.auto.label],
-        },
-        songByThread: {
-          for (final c in items)
-            if (c.goesToFile)
-              c.submission.threadId: PlannedSong(
-                songId: c.song!.id,
-                title: c.song!.title,
-                kind: c.submission.kind,
-                otherEmails: _otherEmailsOf(c),
-              ),
-        },
-        messagesByThread: {
-          for (final c in items)
-            c.submission.threadId: [for (final m in c.submission.messages) m.id],
-        },
-        senderByThread: {
-          for (final c in items)
-            if (c.submission.sender case final sender?) c.submission.threadId: sender,
+            c.submission.threadId: PlannedThread(
+              messages: [for (final m in c.submission.messages) m.id],
+              labels: [...c.labels, SongLabel.auto.label],
+              song: c.goesToFile
+                  ? PlannedSong(
+                      songId: c.song!.id,
+                      title: c.song!.title,
+                      kind: c.submission.kind,
+                      otherEmails: _otherEmailsOf(c),
+                    )
+                  : null,
+              sender: c.submission.sender,
+            ),
         },
       );
 
   /// Ten sam plan po skończonym `scan --push`.
-  RunPlan pushed(DateTime at) => RunPlan(
-        id: id,
-        createdAt: createdAt,
-        pushedAt: at,
-        labelsByMessage: labelsByMessage,
-        songByThread: songByThread,
-        messagesByThread: messagesByThread,
-        senderByThread: senderByThread,
-      );
+  RunPlan pushed(DateTime at) => RunPlan(id: id, createdAt: createdAt, pushedAt: at, threads: threads);
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'created_at': createdAt.toIso8601String(),
         if (pushedAt != null) 'pushed_at': pushedAt!.toIso8601String(),
-        'labels': labelsByMessage,
-        'songs': {
-          for (final e in songByThread.entries) e.key: e.value.toJson(),
-        },
-        'threads': messagesByThread,
-        'senders': senderByThread,
+        'threads': {for (final e in threads.entries) e.key: e.value.toJson()},
       };
 
   factory RunPlan.fromJson(Map<String, dynamic> json) => RunPlan(
         id: json['id'] as String,
         createdAt: DateTime.parse(json['created_at'] as String),
         pushedAt: switch (json['pushed_at']) { final String at => DateTime.parse(at), _ => null },
-        labelsByMessage: {
-          for (final e in (json['labels'] as Map<String, dynamic>).entries)
-            e.key: (e.value as List).cast<String>(),
-        },
-        songByThread: {
-          for (final e in (json['songs'] as Map<String, dynamic>).entries)
-            e.key: PlannedSong.fromJson(e.value as Map<String, dynamic>),
-        },
-        messagesByThread: {
+        threads: {
           for (final e in (json['threads'] as Map<String, dynamic>).entries)
-            e.key: (e.value as List).cast<String>(),
+            e.key: PlannedThread.fromJson(e.value as Map<String, dynamic>),
         },
-        senderByThread: (json['senders'] as Map<String, dynamic>).cast<String, String>(),
       );
+
+  /// Etykiety po **wiadomości** — Gmail zmienia etykiety mejli, nie wątków.
+  late final Map<String, List<String>> labelsByMessage = {
+    for (final t in threads.values)
+      for (final m in t.messages) m: t.labels,
+  };
 
   /// Wiadomości wątku. Plan zna wszystkie wątki przebiegu, więc pusta lista
   /// znaczy, że pytasz o wątek spoza niego.
-  List<String> messagesOf(String threadId) =>
-      messagesByThread[threadId] ?? const [];
+  List<String> messagesOf(String threadId) => threads[threadId]?.messages ?? const [];
+
+  /// Etykiety wszystkich wiadomości wątku razem, według [labels] (mejl →
+  /// etykiety). Etykiety idą na cały wątek, więc to etykiety zgłoszenia.
+  Set<String> labelsOfThread(String threadId, Map<String, Set<String>> labels) =>
+      {for (final id in messagesOf(threadId)) ...?labels[id]};
+
+  /// Wątki przebiegu, w których automat trzyma [label] ([hasToolLabel]).
+  List<String> threadsWith(Map<String, Set<String>> current, SongLabel label) => [
+        for (final thread in threads.keys)
+          if (hasToolLabel(labelsOfThread(thread, current), label)) thread,
+      ];
 }
 
 /// Adresy z bloku „Osoba dodająca” poza adresem nadawcy — ten jest już
@@ -168,11 +173,12 @@ List<String> _otherEmailsOf(Classified c) {
 /// potrzebuje od planu.
 Map<String, List<String>> otherEmailsBySender(RunPlan plan) {
   final out = <String, List<String>>{};
-  for (final MapEntry(key: thread, value: s) in plan.songByThread.entries) {
-    final sender = normalizedEmail(plan.senderByThread[thread] ?? '');
-    if (sender.isEmpty || s.otherEmails.isEmpty) continue;
+  for (final t in plan.threads.values) {
+    final sender = normalizedEmail(t.sender ?? '');
+    final others = t.song?.otherEmails ?? const [];
+    if (sender.isEmpty || others.isEmpty) continue;
     final into = out.putIfAbsent(sender, () => []);
-    for (final e in s.otherEmails) {
+    for (final e in others) {
       if (!into.contains(e)) into.add(e);
     }
   }
@@ -181,9 +187,15 @@ Map<String, List<String>> otherEmailsBySender(RunPlan plan) {
 
 /// Czy przebieg jest w Gmailu: choć jeden jego mejl ma znacznik automatu.
 /// Stawia go `scan --push`, zdejmuje `unlabel`.
-bool isRunInGmail(RunPlan plan, Map<String, Set<String>> labelsByMessage) =>
-    plan.labelsByMessage.keys
-        .any((id) => labelsByMessage[id]?.contains(SongLabel.auto.label) ?? false);
+bool isRunInGmail(RunPlan plan, Map<String, Set<String>> current) =>
+    plan.labelsByMessage.keys.any((id) => current[id]?.contains(SongLabel.auto.label) ?? false);
+
+/// Mejle z otwartym werdyktem automatu: czekają na `review` albo `finalize`.
+/// Póki są, przebieg jest otwarty — gdziekolwiek jest jego katalog.
+List<String> openVerdicts(Map<String, Set<String>> current) => [
+      for (final MapEntry(key: id, value: labels) in current.entries)
+        if (hasToolLabel(labels, SongLabel.readyToAdd) || hasToolLabel(labels, SongLabel.needsReview)) id,
+    ];
 
 /// Co `unlabel` zdejmie. Swoje automat poznaje po znaczniku `song/auto` —
 /// Ty go nie wieszasz, więc Twoje ręczne etykiety zostają nietknięte.
@@ -192,14 +204,14 @@ bool isRunInGmail(RunPlan plan, Map<String, Set<String>> labelsByMessage) =>
 /// Bezpiecznik: mejla z `song/added` nie ruszamy bez [force] — piosenka jest
 /// już w apce, a zdjęcie etykiet wepchnęłoby ją z powrotem do kolejki.
 ({Map<String, List<String>> toRemove, int outsideScope, int added}) unlabelChanges(
-  Map<String, Set<String>> labelsByMessage, {
+  Map<String, Set<String>> current, {
   Set<String>? scope,
   bool force = false,
 }) {
   final toRemove = <String, List<String>>{};
   var outsideScope = 0;
   var added = 0;
-  for (final e in labelsByMessage.entries) {
+  for (final e in current.entries) {
     if (!e.value.contains(SongLabel.auto.label)) continue;
     if (scope != null && !scope.contains(e.key)) {
       outsideScope++;

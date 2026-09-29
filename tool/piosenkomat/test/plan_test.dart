@@ -42,8 +42,8 @@ void main() {
     writePlan(path, plan);
     final back = readPlan(path);
     expect(back.labelsByMessage, plan.labelsByMessage);
-    expect(back.songByThread['ok']!.kind, SubmissionKind.newSong);
-    expect(back.songByThread['corr']!.kind, SubmissionKind.correction);
+    expect(back.threads['ok']!.song!.kind, SubmissionKind.newSong);
+    expect(back.threads['corr']!.song!.kind, SubmissionKind.correction);
     expect(back.messagesOf('ok'), ['ok', 'ok2']);
   });
 }

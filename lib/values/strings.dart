@@ -1,3 +1,6 @@
+/// Skrzynka HarcAppu: tu trafiają zgłoszenia piosenek i sprawy do nas.
+const String kHarcappEmail = 'harcapp@gmail.com';
+
 const String noInternetMessage = 'Nie ma neta';
 
 String get simpleErrorMessage{

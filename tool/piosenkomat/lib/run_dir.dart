@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:harcapp_core/song_book/piosenkomat/file_names.dart';
@@ -8,8 +9,8 @@ import 'hrcpsng.dart';
 import 'plan.dart';
 
 /// Katalog roboczy przebiegu: zawsze `out/run/`, bo przebieg jest jeden naraz.
-/// W środku: `plan.json`, `report.txt`, `candidates-*.hrcpsng`, miejsca na
-/// eksport `reviewed-*.hrcpsng`, a po `review` — `final-*.hrcpsng`
+/// W środku: `plan.json`, `report.txt`, `drafts.json`, `candidates-*.hrcpsng`,
+/// miejsca na eksport `reviewed-*.hrcpsng`, a po `review` — `final-*.hrcpsng`
 /// i `people.dart`. `finalize` przenosi go do archiwum.
 ///
 /// Nowe piosenki i poprawki leżą osobno, bo to inna robota: dodać vs porównać
@@ -37,11 +38,23 @@ class RunDir {
   String get plan => p.join(path, 'plan.json');
   String get report => p.join(path, 'report.txt');
   String get people => p.join(path, 'people.dart');
+  /// Co narzędzie samo wpisało do szkiców, po wątku — po tym poznaje szkic,
+  /// którego nie poprawiałeś w Gmailu.
+  String get drafts => p.join(path, 'drafts.json');
   /// Podsumowanie przebiegu — pisze je `finalize`, zanim przeniesie katalog
   /// do archiwum.
   String get summary => p.join(path, 'summary.md');
 
   RunPlan readRunPlan() => readPlan(plan);
+
+  /// [drafts] — pusto, gdy narzędzie jeszcze nic do szkiców nie wpisało.
+  Map<String, String> readDrafts() {
+    final file = File(drafts);
+    return file.existsSync() ? (jsonDecode(file.readAsStringSync()) as Map).cast<String, String>() : {};
+  }
+
+  void writeDrafts(Map<String, String> written) =>
+      writeText(drafts, const JsonEncoder.withIndent('  ').convert(written));
 
   /// `scan` zakłada pusty plik zwrotny, żeby było widać, gdzie zapisać
   /// eksport ze strony. Pusty = eksportu jeszcze nie ma.

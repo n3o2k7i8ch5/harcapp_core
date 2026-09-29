@@ -156,13 +156,14 @@ void main() {
     });
   });
 
-  group('SongIndex.closest / matchTo:', () {
-    test('closest: najsilniejsze po treści, tytuł dopiero bez treści', () {
-      expect(app.closest(SongProfile(song('x', 'Morze', 'nic')))?.song.id, 'o!_morze');
-      expect(app.closest(SongProfile(song('x', 'Inaczej', _gory)))?.song.id, 'o!_gory');
-      expect(app.closest(SongProfile(song('x', 'Inaczej', 'zupełnie obcy tekst bez słów wspólnych'))), isNull);
+  group('SongIndex.matches / matchTo:', () {
+    test('matches: najsilniejsze po treści, tytuł dopiero bez treści', () {
+      String? first(String title, String text) => app.matches(SongProfile(song('x', title, text))).firstOrNull?.song.id;
+      expect(first('Morze', 'nic'), 'o!_morze');
+      expect(first('Inaczej', _gory), 'o!_gory');
+      expect(first('Inaczej', 'zupełnie obcy tekst bez słów wspólnych'), isNull);
       // Tytuł „Morze”, tekst „Gór”: wygrywa tekst.
-      expect(app.closest(SongProfile(song('x', 'Morze', _gory)))?.song.id, 'o!_gory');
+      expect(first('Morze', _gory), 'o!_gory');
     });
 
     test('matchTo: ze wskazaną, nie najbliższą', () {

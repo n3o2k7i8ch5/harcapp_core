@@ -33,6 +33,10 @@ class SongRaw extends SongCore{
   bool get isConfid => id.length >= 4 && id.substring(0, 4) == 'oc!_';
   bool get isOfficial => id.length >= 3 && id.substring(0, 3) == 'o!_';
 
+  /// Id z tytułu (i wykonawcy), z przedrostkiem jak dotąd: `oc!_` albo `o!_`.
+  String idFromTitle({required bool withPerformer}) =>
+      (isConfid? 'oc!_': 'o!_') + generateFileName(withPerformer: withPerformer);
+
   List<String> tags;
 
   /// Ślad piosenkomatu: uwagi z przeglądu zgłoszeń. `null` dla każdej
@@ -231,7 +235,9 @@ class SongRaw extends SongCore{
     );
   }
 
-  SongRaw copy({bool withId = true}) => SongRaw(
+  /// Kopia bez śladu piosenkomatu — ten opisuje zgłoszenie, nie piosenkę.
+  /// [withContributorData] — razem z `contributor_data` (domyślnie bez).
+  SongRaw copy({bool withId = true, bool withContributorData = false}) => SongRaw(
     id: withId?id:newId,
     title: title,
     hidTitles: hidTitles,
@@ -242,7 +248,7 @@ class SongRaw extends SongCore{
     showRelDateMonth: showRelDateMonth,
     showRelDateDay: showRelDateDay,
     contribRefs: contribRefs,
-    contributorData: null,
+    contributorData: withContributorData?contributorData:null,
     youtubeVideoId: youtubeVideoId,
     tags: tags,
     basedOnSongId: basedOnSongId,
@@ -301,9 +307,10 @@ class SongRaw extends SongCore{
     return chords;
   }
 
-  /// [withPiosenkomatData] wypuszcza uwagi piosenkomatu do pliku. Domyślnie
+  /// [withPiosenkomatData] wypuszcza ślad piosenkomatu do pliku. Domyślnie
   /// wyłączone, żeby ślad przeglądu nigdy nie wyciekł do bazy piosenek —
-  /// włącza je tylko samo narzędzie, zapisując swoje pliki robocze.
+  /// włączają je tylko pliki przebiegu: narzędzie przy kandydatach i strona
+  /// przy eksporcie po przeglądzie.
   Map toApiJsonMap({bool withId = true, bool withPiosenkomatData = false}){
 
     Map map = {};

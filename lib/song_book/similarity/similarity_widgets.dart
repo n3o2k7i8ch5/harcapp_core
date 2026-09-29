@@ -6,7 +6,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:harcapp_core/comm_widgets/pill.dart';
-import 'package:harcapp_core/values/dimen.dart';
 
 import 'similarity.dart';
 
@@ -69,10 +68,8 @@ class SimilarityPills extends StatelessWidget {
   const SimilarityPills(this.similarities, {required this.color, this.compact = false, super.key});
 
   @override
-  Widget build(BuildContext context) => Wrap(
-        alignment: WrapAlignment.start,
-        spacing: compact ? Dimen.defMarg / 2 : Dimen.defMarg,
-        runSpacing: compact ? Dimen.defMarg / 2 : Dimen.defMarg,
+  Widget build(BuildContext context) => PillWrap(
+        compact: compact,
         children: [
           for (final s in similaritiesToShow(similarities))
             SimilarityPill(s, color: color, compact: compact),

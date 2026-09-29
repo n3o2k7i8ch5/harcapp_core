@@ -119,7 +119,7 @@ class PiosenkomatData{
   static const String PARAM_THREAD_ID = 'thread_id';
   static const String PARAM_RUN = 'run';
   static const String PARAM_ISSUES = 'issues';
-  static const String PARAM_ACCEPTED = 'accepted';
+  static const String PARAM_REJECTED = 'rejected';
   static const String PARAM_REVIEW_NOTE = 'review_note';
 
   final SubmissionKind kind;
@@ -153,18 +153,16 @@ class PiosenkomatData{
   /// Wątek Gmaila ze zgłoszeniem — po nim przegląd wiąże piosenkę
   /// ze zgłoszeniem, nawet gdy tytuł zmieni się przy poprawianiu.
   final String? threadId;
-  /// Przebieg, z którego piosenka pochodzi (np. `import-2026-09-28T101500`).
+  /// Przebieg, z którego piosenka pochodzi (np. `run-2026-09-28T101500`).
   final String? run;
   final List<PiosenkomatIssue> issues;
-  /// Werdykt z przeglądu: `true` — do śpiewnika, `false` — nie. `null` znaczy
-  /// „nie dotknięte”, czyli wchodzi: przełącznika dotykasz tylko przy tych,
-  /// które odrzucasz, a pliki sprzed przełącznika dalej działają.
-  ///
-  /// Nieobecność piosenki w pliku zwrotnym **dalej** znaczy „odrzucona” —
-  /// flaga tylko wygrywa, kiedy jest.
-  final bool? accepted;
+  /// Przełącznik z przeglądu zgaszony: piosenka nie wchodzi do śpiewnika.
+  /// Domyślnie wchodzi — przełącznika dotykasz tylko przy tych, które
+  /// odrzucasz. Nieobecność piosenki w pliku zwrotnym **też** znaczy
+  /// „odrzucona”.
+  final bool rejected;
   /// Twój tekst z pola „Odpowiedź do autora” — pójdzie do nadawcy zgłoszenia.
-  /// Niezależny od [accepted]: da się i odrzucić z wyjaśnieniem („dorzuć
+  /// Niezależny od [rejected]: da się i odrzucić z wyjaśnieniem („dorzuć
   /// chwyty i wejdzie”), i przyjąć z uwagą („dodałem, popraw literówkę”).
   /// Piosenkomat robi z tego szkic w wątku.
   final String? reviewNote;
@@ -183,12 +181,12 @@ class PiosenkomatData{
     this.threadId,
     this.run,
     this.issues = const [],
-    this.accepted,
+    this.rejected = false,
     this.reviewNote,
   });
 
   PiosenkomatData copyWith({
-    bool? Function()? accepted,
+    bool? rejected,
     String? Function()? reviewNote,
   }) => PiosenkomatData(
     kind: kind,
@@ -204,7 +202,7 @@ class PiosenkomatData{
     threadId: threadId,
     run: run,
     issues: issues,
-    accepted: accepted == null? this.accepted: accepted(),
+    rejected: rejected ?? this.rejected,
     reviewNote: reviewNote == null? this.reviewNote: reviewNote(),
   );
 
@@ -213,8 +211,6 @@ class PiosenkomatData{
   /// Co napisał **autor**, bez Twoich odpowiedzi — tego dotyczy uwaga
   /// `user-message` i z tego robi się propozycja odpowiedzi.
   String? get userMessage => conversation.authorText;
-  /// Werdykt do użycia: brak przełącznika znaczy „wchodzi”.
-  bool get goesIn => accepted ?? true;
   /// Czy jest co wysłać autorowi.
   bool get hasReviewNote => (reviewNote ?? '').trim().isNotEmpty;
 
@@ -232,7 +228,7 @@ class PiosenkomatData{
     if(threadId != null) PARAM_THREAD_ID: threadId,
     if(run != null) PARAM_RUN: run,
     PARAM_ISSUES: issues.map((i) => i.toJsonMap()).toList(),
-    if(accepted != null) PARAM_ACCEPTED: accepted,
+    if(rejected) PARAM_REJECTED: true,
     if(hasReviewNote) PARAM_REVIEW_NOTE: reviewNote!.trim(),
   };
 
@@ -258,7 +254,7 @@ class PiosenkomatData{
         if(raw is Map<String, dynamic>)
           if(PiosenkomatIssue.fromJsonMap(raw) case final issue?) issue
     ],
-    accepted: map[PARAM_ACCEPTED] as bool?,
+    rejected: map[PARAM_REJECTED] as bool? ?? false,
     reviewNote: map[PARAM_REVIEW_NOTE] as String?,
   );
 

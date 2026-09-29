@@ -134,51 +134,23 @@ int compareText(String s1, String s2, {bool replaceStrangeChars = true}){
 
 String removeNonWordChars(String value, {bool keepSpaces = false}) => value.replaceAll(RegExp(keepSpaces ? r"[^\p{L}\p{N}_ ]" : r"[^\p{L}\p{N}_]", unicode: true), '');
 
-String remPolChars(String string) => string.toLowerCase()
-    .replaceAll('Ą', 'A')
-    .replaceAll('ą', 'a')
-    .replaceAll('Á', 'A')
-    .replaceAll('á', 'a')
-    .replaceAll('Ć', 'C')
-    .replaceAll('ć', 'c')
-    .replaceAll('Ę', 'E')
-    .replaceAll('ę', 'e')
-    .replaceAll('É', 'E')
-    .replaceAll('é', 'e')
-    .replaceAll('Ě', 'E')
-    .replaceAll('ě', 'e')
-    .replaceAll('Í', 'I')
-    .replaceAll('í', 'i')
-    .replaceAll('Ł', 'L')
-    .replaceAll('ł', 'l')
-    .replaceAll('Ń', 'N')
-    .replaceAll('ń', 'n')
-    .replaceAll('Ó', 'O')
-    .replaceAll('ó', 'o')
-    .replaceAll('Ö', 'O')
-    .replaceAll('ö', 'o')
-    .replaceAll('Ő', 'O')
-    .replaceAll('ő', 'o')
-    .replaceAll('Ř', 'R')
-    .replaceAll('ř', 'r')
-    .replaceAll('Ś', 'S')
-    .replaceAll('ś', 's')
-    .replaceAll('Š', 'S')
-    .replaceAll('š', 's')
-    .replaceAll('Ú', 'U')
-    .replaceAll('ú', 'u')
-    .replaceAll('Ü', 'U')
-    .replaceAll('ü', 'u')
-    .replaceAll('Ű', 'U')
-    .replaceAll('ű', 'u')
-    .replaceAll('Ý', 'Y')
-    .replaceAll('ý', 'y')
-    .replaceAll('Ź', 'Z')
-    .replaceAll('ź', 'z')
-    .replaceAll('Ż', 'Z')
-    .replaceAll('ż', 'z')
-    .replaceAll('Ž', 'Z')
-    .replaceAll('ž', 'z');
+/// Litera ze znakiem diakrytycznym → ta sama bez niego. Same małe: i
+/// [remPolChars], i porównywanie tekstów najpierw zmniejszają litery.
+const Map<String, String> _diacriticFolds = {
+  'ą': 'a', 'á': 'a', 'ć': 'c', 'ę': 'e', 'é': 'e', 'ě': 'e', 'í': 'i', 'ł': 'l', 'ń': 'n', 'ó': 'o',
+  'ö': 'o', 'ő': 'o', 'ř': 'r', 'ś': 's', 'š': 's', 'ú': 'u', 'ü': 'u', 'ű': 'u', 'ý': 'y', 'ź': 'z',
+  'ż': 'z', 'ž': 'z',
+};
+final Map<int, int> _diacriticFoldCodes = {
+  for(final e in _diacriticFolds.entries) e.key.codeUnitAt(0): e.value.codeUnitAt(0),
+};
+
+/// Znak (kod UTF-16) bez znaku diakrytycznego; inne bez zmian.
+int foldDiacritic(int codeUnit) => _diacriticFoldCodes[codeUnit] ?? codeUnit;
+
+/// Małymi literami i bez znaków diakrytycznych.
+String remPolChars(String string) =>
+    String.fromCharCodes(string.toLowerCase().codeUnits.map(foldDiacritic));
 
 String remSpecChars(String string) => string.toLowerCase()
     .replaceAll('.', '')
@@ -255,21 +227,6 @@ String simplifyString(String string, {SpaceStrategy spaceStrategy = SpaceStrateg
 
 String searchableString(String string) => simplifyString(string, spaceStrategy: SpaceStrategy.remove);
 
-/// Normalizacja używana przy porównywaniu tekstów dla potrzeb diffowania
-/// (np. czy pole `Person` z maila różni się od lokalnego wpisu). Ignoruje
-/// kropki i normalizuje białe znaki, żeby kosmetyczne różnice typu
-/// `"50 TDSH"` vs `"50. TDSH"` nie zapalały pill "aktualizacja".
-String normalizeForDiff(String s) => s
-    .replaceAll('.', '')
-    .replaceAll(RegExp(r'[„""«»]'), '"')
-    .replaceAll(RegExp(r"[‚''‹›]"), "'")
-    .replaceAll(RegExp(r'\s+'), ' ')
-    .trim();
-
-bool softEqualsForDiff(String? a, String? b) {
-  if(a == null || b == null) return a == b;
-  return normalizeForDiff(a) == normalizeForDiff(b);
-}
 /// Liczebnik po polsku: `1 mejl`, `2 mejle`, `5 mejli`, `12 mejli`, `22 mejle`.
 String plural(int n, String one, String few, String many) {
   if (n == 1) return '$n $one';

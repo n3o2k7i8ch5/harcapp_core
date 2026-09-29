@@ -4,8 +4,9 @@ import 'model.dart';
 /// testy podstawiają własną — bez tego wysyłka, szkice i `reopen` dały się
 /// sprawdzić tylko na żywej skrzynce.
 abstract interface class Mailbox {
-  /// Wątek mejla, jeśli znamy go z [listIds].
-  String? knownThreadOf(String messageId);
+  /// Wątek mejla znanego z [listIds]. Nieznanego — jego własne id, jak
+  /// w wątku, który ten mejl sam zaczyna.
+  String threadOf(String messageId);
 
   /// Id pasujące do [query], od najstarszego; [newest] — od najnowszego.
   /// [limit] ucina wynik.
@@ -21,7 +22,7 @@ abstract interface class Mailbox {
   Future<Map<String, List<String>>> sentIdsByThread();
 
   /// Etykiety `song/*` całej skrzynki, po mejlu. Mejle bez żadnej nie mają
-  /// klucza. Wątek każdego z nich zna potem [knownThreadOf].
+  /// klucza. Wątek każdego z nich zna potem [threadOf].
   Future<Map<String, Set<String>>> songLabelsByMessage();
 
   /// Tworzy brakujące etykiety narzędzia.
@@ -50,6 +51,21 @@ abstract interface class Mailbox {
   Future<String?> draftBody(String draftId);
   Future<void> deleteDraft(String draftId);
   Future<void> sendDraft(String draftId);
+}
+
+/// Mejle o tej samej zmianie idą jedną paczką: `batchModify` bierze do 1000
+/// naraz, więc przebieg to kilkanaście strzałów, nie kilkaset.
+Future<void> applyLabelChanges(Mailbox mailbox, Map<String, LabelChange> changes) async {
+  final groups = <String, (LabelChange, List<String>)>{};
+  for (final e in changes.entries) {
+    final (add, remove) = e.value;
+    final key = '${add.join('\u0000')}\u0001${remove.join('\u0000')}';
+    groups.putIfAbsent(key, () => (e.value, [])).$2.add(e.key);
+  }
+  for (final ((add, remove), ids) in groups.values) {
+    await mailbox.batchModify(ids,
+        add: add.isEmpty ? null : add, remove: remove.isEmpty ? null : remove);
+  }
 }
 
 /// Mejl, na który odpisujemy, wraz z tym, co trzeba wpisać w nagłówki.

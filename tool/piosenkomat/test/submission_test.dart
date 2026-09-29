@@ -6,6 +6,8 @@ import 'package:harcapp_core/song_book/submission/submission_email.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'package:harcapp_core/values/people/models.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email.dart';
+import 'package:piosenkomat/decide.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/hrcpsng.dart';
 import 'package:piosenkomat/model.dart';
@@ -19,175 +21,6 @@ Classified _classify(String eml, {SongBook? book, String id = 'm1'}) =>
     classify(msgFrom(eml, id: id), book: book ?? SongBook.empty);
 
 void main() {
-
-  test('obieg w obie strony: co zapisane, to wczytane', () {
-    final song = sampleSong(title: 'Barka');
-    final file = SongSubmissionFile(
-      origin: SubmissionOrigin.appAndroid,
-      appVersion: '2.4.1',
-      rulesVersion: 'v05.10.2025',
-      submissions: [
-        SongSubmission(
-          kind: SubmissionKind.correction,
-          correctionTarget: 'o!_barka',
-          correctionMessage: 'poprawka chwytu w refrenie',
-          senderIsContributor: false,
-          contributor: const RegisteredContributor(
-            person: Person(name: 'Jan Kowalski'),
-            emails: ['jan.kowalski@example.com'],
-          ),
-          song: song,
-        ),
-      ],
-    );
-
-    final back = SongSubmissionFile.decode(file.encode());
-    expect(back.format, kSubmissionFormat);
-    expect(back.origin, SubmissionOrigin.appAndroid);
-    expect(back.appVersion, '2.4.1');
-    expect(back.rulesVersion, 'v05.10.2025');
-    final s = back.submissions.single;
-    expect(s.kind, SubmissionKind.correction);
-    expect(s.correctionTarget, 'o!_barka');
-    expect(s.correctionMessage, 'poprawka chwytu w refrenie');
-    expect(s.senderIsContributor, isFalse);
-    expect(s.contributor?.person.name, 'Jan Kowalski');
-    expect(s.contributor?.emails, ['jan.kowalski@example.com']);
-    expect(s.song.title, 'Barka');
-    expect(s.song.text, song.text);
-    expect(s.song.chords, song.chords);
-  });
-
-  test('suma liczy się z postaci kanonicznej, nie z formatowania', () {
-    final file = SongSubmissionFile(submissions: [
-      SongSubmission(kind: SubmissionKind.newSong, song: sampleSong()),
-    ]);
-    final map = file.toJsonMap();
-    // Klucze w innej kolejności i inne wcięcia to ten sam plik.
-    final shuffled = {
-      for (final k in map.keys.toList().reversed) k: map[k],
-    };
-    expect(submissionDigest(shuffled), map[SongSubmissionFile.PARAM_DIGEST]);
-    expect(SongSubmissionFile.decode(jsonEncode(shuffled)).submissions, hasLength(1));
-  });
-
-  test('ręczna edycja pliku psuje sumę', () {
-    final raw = SongSubmissionFile(submissions: [
-      SongSubmission(kind: SubmissionKind.newSong, song: sampleSong(title: 'Barka')),
-    ]).encode();
-    final edited = raw.replaceFirst('Barka', 'Barka poprawiona');
-    expect(
-      () => SongSubmissionFile.decode(edited),
-      throwsA(isA<SubmissionFileError>()
-          .having((e) => e.kind, 'kind', SubmissionFileErrorKind.badDigest)),
-    );
-  });
-
-  test('obcięty plik to plik uszkodzony, nie pusty', () {
-    final raw = SongSubmissionFile(submissions: [
-      SongSubmission(kind: SubmissionKind.newSong, song: sampleSong()),
-    ]).encode();
-    expect(
-      () => SongSubmissionFile.decode(raw.substring(0, raw.length ~/ 2)),
-      throwsA(isA<SubmissionFileError>()
-          .having((e) => e.kind, 'kind', SubmissionFileErrorKind.corrupted)),
-    );
-  });
-
-  test('nowsza wersja formatu nie jest zgadywana', () {
-    final map = SongSubmissionFile(submissions: [
-      SongSubmission(kind: SubmissionKind.newSong, song: sampleSong()),
-    ]).toJsonMap()
-      ..[SongSubmissionFile.PARAM_FORMAT] = kSubmissionFormat + 1;
-    map[SongSubmissionFile.PARAM_DIGEST] = submissionDigest(map);
-    expect(
-      () => SongSubmissionFile.decode(jsonEncode(map)),
-      throwsA(isA<SubmissionFileError>()
-          .having((e) => e.kind, 'kind', SubmissionFileErrorKind.unknownFormat)),
-    );
-  });
-
-  test('pole złego typu z poprawną sumą to plik uszkodzony, nie wywrotka', () {
-    Map<String, dynamic> fileWith(void Function(Map<String, dynamic> map) edit) {
-      final map = SongSubmissionFile(submissions: [
-        SongSubmission(kind: SubmissionKind.newSong, song: sampleSong()),
-      ]).toJsonMap();
-      edit(map);
-      return map..[SongSubmissionFile.PARAM_DIGEST] = submissionDigest(map);
-    }
-
-    for (final map in [
-      fileWith((m) => m[SongSubmissionFile.PARAM_ORIGIN] = 5),
-      fileWith((m) => (m[SongSubmissionFile.PARAM_SUBMISSIONS] as List).first
-          [SongSubmission.PARAM_SENDER_IS_CONTRIBUTOR] = 'tak'),
-    ]) {
-      expect(
-        () => SongSubmissionFile.decode(jsonEncode(map)),
-        throwsA(isA<SubmissionFileError>()
-            .having((e) => e.kind, 'kind', SubmissionFileErrorKind.corrupted)),
-      );
-    }
-  });
-
-  test('plik bez zgłoszeń', () {
-    final map = SongSubmissionFile(submissions: const []).toJsonMap();
-    expect(
-      () => SongSubmissionFile.decode(jsonEncode(map)),
-      throwsA(isA<SubmissionFileError>()
-          .having((e) => e.kind, 'kind', SubmissionFileErrorKind.noSubmissions)),
-    );
-  });
-
-  test('nazwa załącznika: krótka i czysto ASCII', () {
-    // Długą albo niełacińską klient pocztowy zakoduje po RFC 2231, a takiej
-    // czytnik `.eml` nie odczyta.
-    expect(kSubmissionFileName,
-        matches(RegExp('^[a-z]+\\.$kSubmissionFileExtension\$')));
-    expect(kSubmissionFileName.length, lessThan(30));
-  });
-
-  test('treść ma dwie belki i nic maszynowego', () {
-    final mail = composeSongSubmissionEmail(
-      submissions: [SongSubmission(kind: SubmissionKind.newSong, song: sampleSong())],
-      origin: SubmissionOrigin.appAndroid,
-      acceptRulesVersion: 'v05.10.2025',
-    );
-    expect(mail.subject, contains('[hrcpsng/app]'));
-    expect(mail.subject, isNot(contains('świeżak')));
-    expect(mail.body, contains(kSubmissionConsentBar));
-    expect(mail.body, contains(kSubmissionStructuralBar));
-    expect(mail.body, contains(mail.fileName));
-    expect(mail.body, contains(kSubmissionOneSongPerMailNote));
-    for (final gone in const [
-      '### Kod piosenki:',
-      '### Osoba dodająca',
-      '### Poprawiana piosenka:',
-      '### Propozycja poprawki:',
-      '### Źródło piosenki:',
-      'Miejsce na własną wiadomość',
-      'Nie edytuj poniższego',
-    ]) {
-      expect(mail.body, isNot(contains(gone)), reason: '„$gone” miało zniknąć z treści');
-    }
-  });
-
-  test('dopisek autora to wszystko nad zamrożoną belką', () {
-    final mail = composeSongSubmissionEmail(
-      submissions: [SongSubmission(kind: SubmissionKind.newSong, song: sampleSong())],
-      origin: SubmissionOrigin.appAndroid,
-      acceptRulesVersion: 'v05.10.2025',
-    );
-    expect(extractSubmissionUserMessage(mail.body), isNull,
-        reason: 'sama podpowiedź to nie dopisek');
-    final withNote = mail.body.replaceFirst(
-        kSubmissionUserMessagePlaceholder, 'Hej, tę piosenkę śpiewamy na obozie.');
-    expect(extractSubmissionUserMessage(withNote), 'Hej, tę piosenkę śpiewamy na obozie.');
-    // Cytowanie w odpowiedzi nie może zgubić dopisku.
-    final quoted = withNote.split('\n').map((l) => '> $l').join('\n');
-    expect(extractSubmissionUserMessage(quoted), 'Hej, tę piosenkę śpiewamy na obozie.');
-    expect(extractSubmissionUserMessage('mejl w starym kształcie'), isNull);
-  });
-
   test('.eml z załącznikiem przechodzi cały przebieg', () {
     final mail = submissionEmail(userMessage: 'Dorzućcie proszę chwyty.');
     final m = msgFrom(mail.eml);
@@ -197,13 +30,13 @@ void main() {
 
     final c = classify(m, book: SongBook.empty);
     expect(c.destination, Destination.candidate);
-    expect(c.submission.shape, EmailShape.file);
+    expect(c.submission.shape, ContribEmailShape.file);
     expect(c.submission.appVersion, '2.4.1');
     expect(c.submission.sender, 'jan.testowy@example.com');
-    expect(c.submission.consentVersion, 'v05.10.2025');
+    expect(c.submission.acceptedRulesVersion, 'v05.10.2025');
     expect(c.submission.userMessage, 'Dorzućcie proszę chwyty.');
     expect(issuesOf(c), [SongIssue.userMessage]);
-    expect(c.song!.contributorData!.acceptedContributionRulesVersion, 'v05.10.2025');
+    expect(c.song!.contributorData!.acceptedRulesVersion, 'v05.10.2025');
     expect(c.song!.piosenkomatData!.sender, 'jan.testowy@example.com');
     expect(c.song!.piosenkomatData!.isOldApp, isFalse);
     expect(c.song!.piosenkomatData!.appVersion, '2.4.1');
@@ -238,8 +71,8 @@ void main() {
     final c = _classify(mangled, book: book);
     expect(c.destination, Destination.candidate);
     expect(c.submission.declaredCorrectionTarget, 'o!_barka');
-    expect(c.submission.correctionTarget, 'o!_barka');
-    expect(c.submission.correctionTargetGuessed, isFalse);
+    expect(pickCorrectionTarget(c.submission)?.id, 'o!_barka');
+    expect(pickCorrectionTarget(c.submission)?.guessed ?? false, isFalse);
     expect(c.submission.correctionMessage, 'poprawiony refren');
     expect(issuesOf(c), isEmpty);
   });
@@ -331,7 +164,7 @@ void main() {
       SongSubmission(
         kind: SubmissionKind.newSong,
         senderIsContributor: false,
-        contributor: const RegisteredContributor(
+        registered: const RegisteredContributor(
           person: Person(name: 'Ewa Nieobecna'),
           emails: [],
         ),
@@ -406,7 +239,7 @@ void main() {
     final mail = composeSongSubmissionEmail(
       submissions: [SongSubmission(kind: SubmissionKind.newSong, song: nowa)],
       origin: SubmissionOrigin.appAndroid,
-      acceptRulesVersion: 'v05.10.2025',
+      acceptedRulesVersion: 'v05.10.2025',
     );
 
     String emlWith(String submissionFile) => mimeEmail(
@@ -424,7 +257,7 @@ void main() {
 
     final c = classify(m, book: SongBook.empty);
     expect(c.title, 'Nowa');
-    expect(c.submission.shape, EmailShape.file);
+    expect(c.submission.shape, ContribEmailShape.file);
 
     // Gdy nowy plik jest uszkodzony, stara ścieżka jest wykonalna — ale nie
     // wolno po cichu z niej skorzystać: dane mogą się różnić.
@@ -442,7 +275,7 @@ void main() {
     final file = composeSongSubmissionEmail(
       submissions: [SongSubmission(kind: SubmissionKind.newSong, song: sampleSong())],
       origin: SubmissionOrigin.appAndroid,
-      acceptRulesVersion: 'v05.10.2025',
+      acceptedRulesVersion: 'v05.10.2025',
     ).fileContent;
     final eml = 'From: Jan Testowy <jan.testowy@example.com>\n'
         'Subject: Nowa piosenka "Piosenka testowa XYZ"\n'
@@ -504,7 +337,7 @@ void main() {
     final old = await completeEmail(userMessage: 'dopisek ze starego mejla');
     final c = _classify(old);
     expect(c.destination, Destination.candidate);
-    expect(c.submission.shape, EmailShape.fenced);
+    expect(c.submission.shape, ContribEmailShape.fenced);
     expect(c.submission.userMessage, 'dopisek ze starego mejla');
     expect(c.submission.senderIsContributor, isTrue);
   });

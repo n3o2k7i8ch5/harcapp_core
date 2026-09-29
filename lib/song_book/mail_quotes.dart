@@ -14,6 +14,11 @@ bool isQuotedLine(String line) => quotePrefixRe.hasMatch(line);
 String withoutQuotedLines(String body) =>
     body.split('\n').where((l) => !isQuotedLine(l)).join('\n');
 
+/// Treść cytatu bez znaczników `>` — gdy cytatem jest samo zgłoszenie
+/// (odpowiedź z cytatem, przekazanie), jego treść dalej się liczy.
+String unquoted(String body) =>
+    body.split('\n').map((l) => l.replaceFirst(quotePrefixRe, '')).join('\n');
+
 /// „napisał”, „napisała” i gmailowe „napisał(a)” — z **dosłownymi** nawiasami.
 const _wrote = r'(?:napisał(?:\(a\)|a)?|pisze|wrote)';
 

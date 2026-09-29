@@ -1,7 +1,5 @@
-import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
-import 'package:piosenkomat/cli.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/plan.dart';
 import 'package:piosenkomat/reply.dart';
@@ -11,17 +9,16 @@ import 'package:test/test.dart';
 /// Reguły, które kiedyś siedziały w komendach i dało się je sprawdzić tylko
 /// na żywej skrzynce.
 void main() {
-  group('plural', () {
+  group('emailCount', () {
     test('odmienia jak po polsku', () {
-      String mejl(int n) => plural(n, 'mejl', 'mejle', 'mejli');
-      expect(mejl(1), '1 mejl');
-      expect(mejl(2), '2 mejle');
-      expect(mejl(4), '4 mejle');
-      expect(mejl(5), '5 mejli');
-      expect(mejl(12), '12 mejli');
-      expect(mejl(14), '14 mejli');
-      expect(mejl(22), '22 mejle');
-      expect(mejl(0), '0 mejli');
+      expect(emailCount(1), '1 mejl');
+      expect(emailCount(2), '2 mejle');
+      expect(emailCount(4), '4 mejle');
+      expect(emailCount(5), '5 mejli');
+      expect(emailCount(12), '12 mejli');
+      expect(emailCount(14), '14 mejli');
+      expect(emailCount(22), '22 mejle');
+      expect(emailCount(0), '0 mejli');
     });
   });
 
@@ -132,7 +129,7 @@ void main() {
     });
   });
 
-  group('draftStep: narzędzie rusza tylko szkic bez ludzkiego tekstu', () {
+  group('draftStep: narzędzie rusza tylko szkic, którego nie poprawiałeś w Gmailu', () {
     final block = composeContribReply(oldApp: true)!;
     final note = composeContribReply(reviewNote: 'Brakuje chwytów.')!;
     final noteWithBlock = composeContribReply(reviewNote: 'Brakuje chwytów.', oldApp: true)!;
@@ -153,7 +150,24 @@ void main() {
     test('ten sam tekst, inna ramka (doszedł blok): przeliczenie nic Twojego nie zmienia', () {
       expect(draftStep(exists: true, body: note, want: noteWithBlock), DraftStep.rewrite);
     });
-    test('szkic z innym tekstem jest Twój — zostaje, narzędzie mówi o różnicy', () {
+    test('tekst taki, jaki wpisało narzędzie: wolno przeliczyć albo skasować', () {
+      final changed = composeContribReply(reviewNote: 'Brakuje linku do YT.')!;
+      expect(draftStep(exists: true, body: note, want: changed, written: note), DraftStep.rewrite);
+      expect(draftStep(exists: true, body: note.replaceAll('. ', '.\n'), want: changed, written: note),
+          DraftStep.rewrite, reason: 'łamanie linii przez Gmaila to nie poprawka');
+      expect(draftStep(exists: true, body: note, written: note), DraftStep.delete);
+    });
+    test('poprawiony w Gmailu, a przegląd bez zmian — Twój, bez uwag', () {
+      final edited = composeContribReply(reviewNote: 'Brakuje chwytów w refrenie.')!;
+      expect(draftStep(exists: true, body: edited, want: note, written: note), DraftStep.edited);
+    });
+    test('poprawiony w Gmailu i zmieniony na stronie — zostaje, narzędzie mówi o różnicy', () {
+      final edited = composeContribReply(reviewNote: 'Brakuje chwytów w refrenie.')!;
+      final changed = composeContribReply(reviewNote: 'Brakuje linku do YT.')!;
+      expect(draftStep(exists: true, body: edited, want: changed, written: note), DraftStep.differs);
+      expect(draftStep(exists: true, body: edited, written: note), DraftStep.differs);
+    });
+    test('szkic z innym tekstem, gdy nie wiadomo, co wpisało narzędzie — Twój', () {
       final edited = composeContribReply(reviewNote: 'Brakuje chwytów w refrenie.')!;
       expect(draftStep(exists: true, body: edited, want: note), DraftStep.differs);
       expect(draftStep(exists: true, body: edited), DraftStep.differs);

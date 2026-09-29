@@ -52,7 +52,7 @@ String formatRunReport(List<Classified> items) {
     ..writeln('  duplikat      ${to(Destination.rejectDuplicate)}')
     ..writeln('  zły załącznik ${to(Destination.rejectCorruptedFile)}')
     ..writeln('  nowszy format ${to(Destination.rejectUnknownFormat)}')
-    ..writeln('  nie do odczytu ${to(Destination.unparsable)}')
+    ..writeln('  nie do odczytu ${to(Destination.rejectUnparsable)}')
     ..writeln('RĘCZNIE         ${to(Destination.multipleSongs)}  (kilka piosenek w jednym mejlu)')
     ..writeln('RZUĆ OKIEM      ${count((c) => c.haveALook)}'
         '  (odrzut, ale autor coś napisał albo mejla nie da się odczytać)')
@@ -64,7 +64,7 @@ String formatRunReport(List<Classified> items) {
   buf
     ..writeln()
     ..writeln('Kształt mejla:');
-  countLines(buf, tally([for (final c in items) c.submission.shape.id]), byCount: true);
+  countLines(buf, tally([for (final c in items) c.submission.shape?.id ?? 'unknown']), byCount: true);
   final versions = tally([
     for (final c in items)
       if (c.submission.appVersion case final v?) v,
@@ -100,13 +100,9 @@ String formatRunReport(List<Classified> items) {
     final s = c.submission;
     final tag = switch (c.destination) {
       Destination.candidate => s.isCorrection ? 'POPRAWKA' : 'NOWA    ',
-      Destination.unparsable => 'NIEPARS ',
+      Destination.rejectUnparsable => 'NIEPARS ',
       Destination.multipleSongs => 'RĘCZNIE ',
-      Destination.rejectAlreadyInApp ||
-      Destination.rejectDuplicate ||
-      Destination.rejectCorruptedFile ||
-      Destination.rejectUnknownFormat =>
-        'ODRZUĆ  ',
+      _ => 'ODRZUĆ  ',
     };
     final date = s.sentAt == null ? '' : _day(s.sentAt!);
     final messageCountText =
@@ -133,14 +129,14 @@ String formatRunReport(List<Classified> items) {
 /// Ślad domkniętego przebiegu (`summary.md` w archiwum): co weszło, co
 /// odpadło przy przeglądzie i jakie odpowiedzi jeszcze czekały. Decyzje
 /// automatu (odrzuty, uwagi, kształty mejli) są obok, w `report.txt`.
-/// [results] sprzed zdjęcia śladu piosenkomatu — cel poprawki siedzi w nim.
+/// Cel poprawki czyta ze śladu piosenkomatu w [results] — w `final-*` go już nie ma.
 String formatRunSummary({
   required RunPlan plan,
   required List<ReviewResult> results,
   required List<String> repliesWaiting,
   required DateTime finalizedAt,
 }) {
-  String who(String thread) => '${plan.senderByThread[thread] ?? ''} [$thread]';
+  String who(String thread) => '${plan.threads[thread]?.sender ?? ''} [$thread]';
   String accepted(Matched m) {
     final song = '„${m.reviewed.title}” — ${who(m.candidate.threadId)}';
     final data = m.reviewed.piosenkomatData;
@@ -179,6 +175,6 @@ String formatRunSummary({
         '- „${c.title}” — ${who(c.threadId)}'
             '${r.reviewNotes.containsKey(c.threadId) ? ' (z odpowiedzią do autora)' : ''}',
   ]);
-  section('Odpowiedzi czekały w szkicach', [for (final t in repliesWaiting) '- ${who(t)}']);
+  section('Czekały na odpowiedź (reply/*)', [for (final t in repliesWaiting) '- ${who(t)}']);
   return buf.toString();
 }

@@ -1,10 +1,14 @@
 import 'dart:convert';
 
+import 'package:harcapp_core/song_book/parse_contrib_email.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'package:harcapp_core/values/people/models.dart';
+import 'package:harcapp_core/values/srodowiska/models.dart';
+import 'package:harcapp_core/values/strings.dart';
+import 'package:piosenkomat/decide.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/similarity.dart';
@@ -23,13 +27,13 @@ void main() {
     expect(got.submission.kind, SubmissionKind.newSong);
     expect(got.sender, 'jan.testowy@example.com');
     expect(got.title, 'Piosenka testowa XYZ');
-    expect(song.contributorData!.acceptedContributionRulesVersion, 'v05.10.2025');
+    expect(song.contributorData!.acceptedRulesVersion, 'v05.10.2025');
     expect(song.contributorData!.email, 'jan.testowy@example.com');
     expect(song.contributorData!.contributionDate,
         DateTime.parse('2026-09-06T12:00:00+02:00'));
     expect(song.id, startsWith('o!_'));
     expect(song.contribRefs.any((c) => c.emailRef == 'jan.testowy@example.com'), isTrue);
-    expect(song.contributorData!.emailThreadId, got.submission.threadId,
+    expect(song.piosenkomatData!.threadId, got.submission.threadId,
         reason: 'po tym przegląd wiąże piosenkę ze zgłoszeniem');
   });
 
@@ -103,7 +107,7 @@ void main() {
     test('brak zgody', () async {
       final got = await run(await completeEmail(withConsent: false));
       expect(issuesOf(got), [SongIssue.noConsent]);
-      expect(got.submission.consentVersion, isNull);
+      expect(got.submission.acceptedRulesVersion, isNull);
     });
     test('nadawca = skrzynka HarcApp', () async {
       final got = await run(await completeEmail(from: 'HarcApp <harcapp@gmail.com>'));
@@ -119,12 +123,12 @@ void main() {
         ContribMessage(id: 'x', body: 'Cześć, mam pytanie', subject: 'Cześć'),
         book: SongBook.empty,
       );
-      expect(got.destination, Destination.unparsable);
+      expect(got.destination, Destination.rejectUnparsable);
       expect(got.song, isNull);
       expect(got.title, 'Cześć');
       expect(got.labels, [SongLabel.rejectedUnparsable.label, SongLabel.haveALook.label]);
       expect(got.labels.any(isClosedLabel), isTrue, reason: 'odrzut jest przeczytany');
-      expect(got.submission.shape, EmailShape.unknown,
+      expect(got.submission.shape, isNull,
           reason: 'nie zawyża starych kształtów w rozkładzie raportu');
     });
   });
@@ -140,9 +144,9 @@ void main() {
       expect(got.destination, Destination.candidate);
       expect(issuesOf(got), isNot(contains(SongIssue.missingYoutube)),
           reason: 'poprawka to diff, nie pełna piosenka');
-      expect(got.submission.correctionTarget, 'tmp',
+      expect(pickCorrectionTarget(got.submission)?.id, 'tmp',
           reason: 'bez deklaracji wolno zgadnąć po tytule i tekście');
-      expect(got.submission.correctionTargetGuessed, isTrue);
+      expect(pickCorrectionTarget(got.submission)?.guessed ?? false, isTrue);
       expect(issuesOf(got), contains(SongIssue.guessedCorrectionTarget),
           reason: 'domysł nigdy nie udaje danych ze zgłoszenia');
       // Ślad w piosence też musi to nieść — po nim pozna edytor i `review`.
@@ -163,8 +167,8 @@ void main() {
           sampleSong(title: 'Barka', lyrics: 'Zupełnie co innego o tym samym tytule')
         ]),
       );
-      expect(got.submission.correctionTarget, isNull);
-      expect(got.submission.correctionTargetGuessed, isFalse);
+      expect(pickCorrectionTarget(got.submission)?.id, isNull);
+      expect(pickCorrectionTarget(got.submission)?.guessed ?? false, isFalse);
       expect(issuesOf(got), contains(SongIssue.noTargetInApp));
       expect(issuesOf(got), isNot(contains(SongIssue.guessedCorrectionTarget)));
     });
@@ -177,29 +181,26 @@ void main() {
         msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'Nowy tytuł'))),
         book: bookWith([wApce]),
       );
-      expect(got.submission.correctionTarget, 'o!_stary');
-      expect(got.submission.correctionTargetGuessed, isTrue);
+      expect(pickCorrectionTarget(got.submission)?.id, 'o!_stary');
+      expect(pickCorrectionTarget(got.submission)?.guessed ?? false, isTrue);
       expect(issuesOf(got), contains(SongIssue.guessedCorrectionTarget));
       expect(issuesOf(got), isNot(contains(SongIssue.noTargetInApp)));
     });
 
-    test('linia z celem zginęła — id z JSON-a piosenki ratuje deklarację', () async {
-      // Apka niesie cel w dwóch miejscach: w linii nagłówka
-      // i w samej piosence (`based_on_song_id`). Nagłówek bywa złamany albo zacytowany.
+    test('mejl bez pliku: `based_on_song_id` w JSON-ie piosenki to deklaracja celu', () async {
       final song = sampleSong()..basedOnSongId = 'tmp';
       final raw = await completeEmail(isNew: false, song: song);
-      expect(raw, isNot(contains('Poprawiana piosenka')));
       final got = classify(msgFrom(raw),
           book: bookWith([sampleSong(lyrics: 'Zupełnie co innego')]));
       expect(got.submission.declaredCorrectionTarget, 'tmp');
-      expect(got.submission.correctionTarget, 'tmp');
-      expect(got.submission.correctionTargetGuessed, isFalse);
+      expect(pickCorrectionTarget(got.submission)?.id, 'tmp');
+      expect(pickCorrectionTarget(got.submission)?.guessed ?? false, isFalse);
     });
 
     test('bez deklaracji i bez czego zgadnąć → no-target-in-app', () async {
       final got = classify(msgFrom(await completeEmail(isNew: false)), book: SongBook.empty);
       expect(issuesOf(got), [SongIssue.noTargetInApp]);
-      expect(got.submission.correctionTarget, isNull);
+      expect(pickCorrectionTarget(got.submission)?.id, isNull);
     });
     test('apka wskazała poprawianą piosenkę → cel z mejla, nie z domysłu', () async {
       // W apce dwie piosenki o tym samym tytule; domysł wskazałby tę bliższą
@@ -209,12 +210,12 @@ void main() {
       final wlasciwa = sampleSong(lyrics: 'Zupelnie inny tekst o morzu i zaglach');
       wlasciwa.id = 'o!_wskazana';
       final got = classify(
-        msgFrom(await completeEmail(isNew: false, correctionTarget: 'o!_wskazana')),
+        msgFrom(await completeEmail(isNew: false, basedOnSongId: 'o!_wskazana')),
         book: bookWith([mylona, wlasciwa]),
       );
       expect(got.submission.declaredCorrectionTarget, 'o!_wskazana');
-      expect(got.submission.correctionTarget, 'o!_wskazana');
-      expect(got.submission.correctionTargetGuessed, isFalse);
+      expect(pickCorrectionTarget(got.submission)?.id, 'o!_wskazana');
+      expect(pickCorrectionTarget(got.submission)?.guessed ?? false, isFalse);
       expect(issuesOf(got), isNot(contains(SongIssue.guessedCorrectionTarget)));
       expect(got.submission.appMatch?.songId, 'o!_wskazana',
           reason: 'porównujemy z pierwowzorem wskazanym przez apkę');
@@ -222,21 +223,21 @@ void main() {
     });
     test('apka wskazała piosenkę, której nie ma w śpiewniku → no-target-in-app', () async {
       final got = classify(
-        msgFrom(await completeEmail(isNew: false, correctionTarget: 'o!_nie_ma_takiej')),
+        msgFrom(await completeEmail(isNew: false, basedOnSongId: 'o!_nie_ma_takiej')),
         book: bookWith([sampleSong(lyrics: 'Ala ma kota a kot ma ale\nW lesie gra muzyka i cos jeszcze')]),
       );
       expect(issuesOf(got), contains(SongIssue.noTargetInApp));
       expect(got.destination, Destination.candidate);
       // Nieistniejące id to brak celu: `review` nie może kazać podmieniać
       // piosenki, której nie ma, i to bez ostrzeżenia.
-      expect(got.submission.correctionTarget, isNull);
-      expect(got.submission.correctionTargetGuessed, isFalse);
+      expect(pickCorrectionTarget(got.submission)?.id, isNull);
+      expect(pickCorrectionTarget(got.submission)?.guessed ?? false, isFalse);
     });
     test('nowa piosenka nie niesie deklaracji celu', () async {
-      final got = classify(msgFrom(await completeEmail(correctionTarget: 'o!_cokolwiek')),
+      final got = classify(msgFrom(await completeEmail(basedOnSongId: 'o!_cokolwiek')),
           book: SongBook.empty);
       expect(got.submission.declaredCorrectionTarget, isNull);
-      expect(got.submission.correctionTarget, isNull);
+      expect(pickCorrectionTarget(got.submission)?.id, isNull);
     });
     test('przerobiona cudza piosenka wysłana jako nowa: JSON-owe id to nie deklaracja', () async {
       // Piosenka własna pamięta pierwowzór w `based_on_song_id`; wysłana jako
@@ -286,6 +287,28 @@ void main() {
     });
   });
 
+  test('najstarszy kształt: osoba jako kod Darta, piosenka gołym JSON-em', () async {
+    const jan = RegisteredContributor(
+      person: Person(
+        name: 'Jan Testowy',
+        druzyna: '1 WDH',
+        srodowisko: Srodowisko.hufiec('ziemi_cieszynskiej', showChoragiew: false),
+      ),
+      emails: ['jan.testowy@example.com'],
+    );
+    final got = classify(msgFrom(await legacyEmail(song: sampleSong(), registered: jan)), book: SongBook.empty);
+    expect(got.submission.shape, ContribEmailShape.legacy);
+    expect(got.isClean, isTrue);
+    expect(got.song!.title, sampleSong().title);
+    expect(got.submission.acceptedRulesVersion, 'v05.10.2025');
+    final person = got.submission.registered!.person;
+    expect(person.name, 'Jan Testowy');
+    expect(person.druzyna, '1 WDH');
+    expect(person.srodowisko?.hufiecSlug, 'ziemi_cieszynskiej');
+    expect(person.srodowisko?.showChoragiew, isFalse);
+    expect(got.submission.registered!.emails, ['jan.testowy@example.com']);
+  });
+
   test('stara apka: kandydat plus kolejka odpowiedzi, sentinel zgody', () async {
     final oldApp = ContribMessage(
       id: 'old',
@@ -299,10 +322,10 @@ void main() {
     expect(got.submission.isOldApp, isTrue);
     expect(got.song!.piosenkomatData!.isOldApp, isTrue);
     // Zgoda to osobny fakt od formatu: stara apka o nią nie pytała, więc jej nie ma.
-    expect(got.submission.consentVersion, isNull);
+    expect(got.submission.acceptedRulesVersion, isNull);
     expect(issuesOf(got), [SongIssue.noConsent],
         reason: 'stara apka to wiedza o nadawcy, nie zarzut — zarzutem jest brak zgody');
-    expect(got.song!.contributorData!.acceptedContributionRulesVersion, kNoConsentRulesVersion);
+    expect(got.song!.contributorData!.acceptedRulesVersion, kNoConsentRulesVersion);
     expect(got.labels, contains(SongLabel.replyOldApp.label));
   });
 
@@ -322,12 +345,12 @@ void main() {
       id: 'o1',
       threadId: 't',
       subject: 'Re: Nowa piosenka: Barka',
-      from: 'HarcApp <$kInboxEmail>',
+      from: 'HarcApp <$kHarcappEmail>',
       body: 'Dorzuć chwyty.\n\n> ### Kod piosenki:\n> cokolwiek',
       date: DateTime.utc(2026, 9, 1),
     );
     final c = classifyBatch([ours, ours], book: bookWith(const [])).single;
-    expect(c.destination, Destination.unparsable);
+    expect(c.destination, Destination.rejectUnparsable);
     expect(c.labels, containsAll([SongLabel.rejectedUnparsable.label, SongLabel.haveALook.label]),
         reason: 'wychodzi z kolejki, a Ty rzucasz okiem');
     expect(c.submission.messages.map((m) => m.id), ['o1']);

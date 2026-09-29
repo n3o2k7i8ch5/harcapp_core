@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:piosenkomat/mailbox.dart';
 import 'package:piosenkomat/model.dart';
+import 'package:harcapp_core/values/strings.dart';
 
 /// Wiadomość w skrzynce na niby.
 class FakeMail {
@@ -31,8 +32,8 @@ class FakeMail {
 
 /// Skrzynka w pamięci — tyle Gmaila, ile potrzebują komendy. Query rozumie
 /// tylko to, co one wysyłają: `label:…` (kilka to „albo”), `-label:…`,
-/// `-subject:"…"`, `from:…`, `in:sent to:…`. Resztę kolejki (tematy, znaczniki)
-/// uznaje za spełnioną — w skrzynce na niby są same zgłoszenia.
+/// `-subject:"…"`. Resztę kolejki (tematy, znaczniki) uznaje za spełnioną —
+/// w skrzynce na niby są same zgłoszenia.
 class FakeMailbox implements Mailbox {
   final List<FakeMail> mails = [];
   final Map<String, ({String threadId, String body})> drafts = {};
@@ -50,8 +51,8 @@ class FakeMailbox implements Mailbox {
   FakeMail _mail(String id) => mails.firstWhere((m) => m.id == id);
 
   @override
-  String? knownThreadOf(String messageId) =>
-      mails.where((m) => m.id == messageId).firstOrNull?.threadId;
+  String threadOf(String messageId) =>
+      mails.where((m) => m.id == messageId).firstOrNull?.threadId ?? messageId;
 
   @override
   Future<List<String>> listIds(String query, {int? limit, bool newest = false}) async {
@@ -64,23 +65,16 @@ class FakeMailbox implements Mailbox {
     final withoutSubjects = [
       for (final m in RegExp(r'-subject:"([^"]+)"').allMatches(query)) m[1]!,
     ];
-    final from = RegExp(r'from:(\S+)').firstMatch(query)?[1];
-    final sentTo = RegExp(r'in:sent to:(\S+)').firstMatch(query)?[1];
     var ids = [
       for (final m in mails)
-        if (sentTo != null
-            ? m.sent && _addressOf(m.from) == sentTo
-            : (labels.isEmpty || labels.any((l) => m.labels.map(labelQueryName).contains(l))) &&
-                !m.labels.map(labelQueryName).any(withoutLabels.contains) &&
-                !withoutSubjects.any(m.subject.contains) &&
-                (from == null || _addressOf(m.from) == from))
+        if ((labels.isEmpty || labels.any((l) => m.labels.map(labelQueryName).contains(l))) &&
+            !m.labels.map(labelQueryName).any(withoutLabels.contains) &&
+            !withoutSubjects.any(m.subject.contains))
           m.id,
     ];
     if (newest) ids = ids.reversed.toList();
     return limit == null ? ids : ids.take(limit).toList();
   }
-
-  static String _addressOf(String from) => RegExp(r'<(.+)>').firstMatch(from)?[1] ?? from;
 
   @override
   Future<List<ContribMessage>> getMessages(List<String> ids,
@@ -140,7 +134,7 @@ class FakeMailbox implements Mailbox {
 
   void _send(String threadId, String text) {
     sentTexts.add((threadId: threadId, text: text));
-    add(FakeMail('sent${_next++}', threadId, from: '$kInboxEmail', body: text, sent: true));
+    add(FakeMail('sent${_next++}', threadId, from: '$kHarcappEmail', body: text, sent: true));
   }
 
   @override

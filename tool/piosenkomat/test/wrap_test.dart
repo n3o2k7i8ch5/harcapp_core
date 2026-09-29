@@ -1,10 +1,12 @@
-import 'package:harcapp_core/song_book/parse_contrib_email.dart';
-import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
-import 'package:piosenkomat/similarity.dart';
 import 'dart:convert';
 
+import 'package:harcapp_core/song_book/import_hrcpsng.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email.dart';
+import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:piosenkomat/classify.dart';
+import 'package:piosenkomat/hrcpsng.dart';
 import 'package:piosenkomat/model.dart';
+import 'package:piosenkomat/similarity.dart';
 import 'package:test/test.dart';
 
 import 'helpers.dart';
@@ -20,51 +22,10 @@ void main() {
     expect(got.song!.title, 'Piosenka testowa XYZ');
   });
 
-  test('złamane id poprawianej piosenki: deklaracja nie ginie', () async {
-    // Najdłuższe lclId w śpiewniku ma 95 znaków, a nagłówek zjada 25, więc
-    // klient pocztowy łamie tę linię — i to w środku identyfikatora.
-    const long =
-        'o!_ballada_o_stefanie_mirowskim@21_druzyna_harcerska_im_hm_stefana_mirowskiego_blekitna_gwiazda';
-    final raw = hardWrap(await completeEmail(isNew: false, correctionTarget: long));
-    expect(raw, contains('Poprawiana piosenka'));
-    expect(raw.split('\r\n').any((l) => l.contains(long)), isFalse,
-        reason: 'linia z id ma być w tym teście naprawdę złamana');
-
-    final got = classify(msgFrom(raw), book: SongBook.empty);
-    expect(got.submission.declaredCorrectionTarget, long);
-    expect(got.submission.correctionTargetGuessed, isFalse);
-  });
-
-  test('id w bloku ```: złamane i zacytowane linie sklejają się w całość', () {
-    const long =
-        'o!_ballada_o_stefanie_mirowskim@21_druzyna_harcerska_im_hm_stefana_mirowskiego_blekitna_gwiazda';
-    const broken = 'o!_ballada_o_stefanie_mirowskim@21_druzyna_harcerska_im_hm_s\ntefana_mirowskiego_blekitna_gwiazda';
-    expect(
-      extractCorrectionTarget('### Poprawiana piosenka:\n\n```\n$broken\n```\n\n### Osoba dodająca:'),
-      long,
-    );
-    expect(
-      extractCorrectionTarget('> ### Poprawiana piosenka:\n>\n> ```\n> o!_ballada_o_stefanie_mirowskim@21_druzyna_harcerska_im_hm_s\n> tefana_mirowskiego_blekitna_gwiazda\n> ```\n>\n> ### Osoba dodająca:'),
-      long,
-    );
-    // Podpis pod blokiem nie wchodzi do id.
-    expect(
-      extractCorrectionTarget('### Poprawiana piosenka:\n\n```\no!_barka\n```\nPozdrawiam\nJan'),
-      'o!_barka',
-    );
-  });
-
-  test('id bez bloku ``` to nie deklaracja', () {
-    expect(extractCorrectionTarget('### Poprawiana piosenka: o!_barka\n\n### Osoba dodająca:'), isNull);
-  });
-
   test('załącznik .hrcpsng wygrywa nad uszkodzoną treścią', () async {
     final good = classify(msgFrom(await completeEmail()), book: SongBook.empty);
     final song = good.song!;
-    final attachment = jsonEncode({
-      'official': {song.id: {'song': song.toApiJsonMap(withId: false), 'index': 0}},
-      'conf': {},
-    });
+    final attachment = encodeHrcpsng([song]);
 
     final broken = (await completeEmail()).replaceFirst('"title":"Piosenka testowa XYZ"',
         '"title":"Pios\r\nenka testowa XYZ"');
@@ -76,7 +37,7 @@ void main() {
     final got = classify(withAtt, book: SongBook.empty);
     expect(got.isClean, isTrue);
     expect(got.song!.title, 'Piosenka testowa XYZ');
-    expect(got.song!.contributorData!.acceptedContributionRulesVersion, 'v05.10.2025');
+    expect(got.song!.contributorData!.acceptedRulesVersion, 'v05.10.2025');
   });
 
   test('zbłąkana spacja w email_ref jest usuwana', () async {
@@ -108,7 +69,7 @@ void _oldApp() {
     final song = good.song!;
     // Stara apka nie znała zgody na regulamin, więc i piosenka jej nie niesie.
     final songMap = song.toApiJsonMap(withId: false)..remove('contributor_data');
-    final attachment = jsonEncode({'official': {song.id: {'song': songMap, 'index': 0}}, 'conf': {}});
+    final attachment = encodeHrcpsngEntries(official: [(song.id, songMap)]);
     final wrapped = hardWrap(jsonEncode({song.id: songMap}), width: 60);
     final body = 'Dzięki za chęć dzielenia się swoimi piosenkami!\n'
         '!!! Nie edytuj poniższego tekstu !!!\n\n- - - - - - - - -\n\n'
@@ -122,7 +83,7 @@ void _oldApp() {
     expect(issuesOf(got), [SongIssue.noConsent]);
     expect(got.oldApp, isTrue);
     expect(got.labels, contains(SongLabel.replyOldApp.label));
-    expect(got.song!.contributorData?.acceptedContributionRulesVersion,
+    expect(got.song!.contributorData?.acceptedRulesVersion,
         kNoConsentRulesVersion);
     expect(got.title, 'Piosenka testowa XYZ');
   });
@@ -130,10 +91,7 @@ void _oldApp() {
   test('nowsza apka bez fence\'a: załącznik nie robi z mejla starego formatu', () async {
     final good = classify(msgFrom(await completeEmail()), book: SongBook.empty);
     final song = good.song!;
-    final attachment = jsonEncode({
-      'official': {song.id: {'song': song.toApiJsonMap(withId: false), 'index': 0}},
-      'conf': {},
-    });
+    final attachment = encodeHrcpsng([song]);
     // Format pośredni: zgoda i temat jak dziś, ale JSON goły, bez ```.
     final raw = (await completeEmail())
         .replaceFirst('### Kod piosenki:\n\n```json\n', '### Kod piosenki:\n\n')
@@ -144,7 +102,7 @@ void _oldApp() {
     final got = classify(m, book: SongBook.empty);
     expect(got.isClean, isTrue);
     expect(got.oldApp, isFalse);
-    expect(got.submission.shape, EmailShape.legacy);
+    expect(got.submission.shape, ContribEmailShape.legacy);
     expect(got.labels, isNot(contains(SongLabel.replyOldApp.label)));
   });
 }

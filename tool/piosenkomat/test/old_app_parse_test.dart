@@ -1,4 +1,7 @@
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
+import 'package:harcapp_core/song_book/contrib_reply.dart';
+import 'package:harcapp_core/song_book/parse_contrib_email.dart';
+import 'package:harcapp_core/values/strings.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/similarity.dart';
@@ -10,25 +13,7 @@ import 'helpers.dart';
 /// JSON wklejony między znaczniki „nie edytuj”. Kształty zebrane z prawdziwej
 /// skrzynki: treść łamana przez klienta pocztowego, cytowanie w odpowiedziach,
 /// HTML w wątkach i `add_pers` raz napisem, raz listą.
-const _songJson =
-    r'{"title":"Testowa stara piosenka","hid_titles":[],"text_authors":["Autor Testowy"],'
-    r'"composers":[],"performers":["Zespol Testowy"],"release_date":null,'
-    r'"show_rel_date_month":true,"show_rel_date_day":true,'
-    r'"yt_link":"https://youtu.be/dQw4w9WgXcQ","add_pers":"Jan Testowy","tags":[],'
-    r'"refren":{"text":"Refren piosenki testowej","chords":"a d","shift":true},'
-    r'"parts":[{"text":"Zwrotka pierwsza tej piosenki\nDruga linia zwrotki",'
-    r'"chords":"a d\ne a","shift":false},{"refren":1}]}';
-
-String _mejl(String json, {String powitanie = 'Dzięki za chęć dzielenia się swoimi piosenkami!'}) => '''
-$powitanie
-
-Pamiętaj, by podać swoje:
-- imię: Jan
-
-!!! NIE EDYTUJ PONIŻSZEGO TEKSTU !!!
-$json
-!!! NIE EDYTUJ POWYŻSZEGO TEKSTU !!!
-''';
+final _songJson = oldAppSongJson(refren: 'Refren piosenki testowej');
 
 ContribMessage _wiadomosc(String body) => ContribMessage(
       id: 'stara1',
@@ -38,33 +23,42 @@ ContribMessage _wiadomosc(String body) => ContribMessage(
       date: DateTime(2021, 5, 1),
     );
 
+/// Nasza odpowiedź w wątku [_wiadomosc] — `scan` dociąga ją z wysłanych.
+ContribMessage _nasza(String body) => ContribMessage(
+      id: 'nasza',
+      threadId: 'stara1',
+      body: body,
+      from: 'HarcApp <$kHarcappEmail>',
+      date: DateTime(2021, 5, 2),
+    );
+
 void main() {
   test('wchodzi do kolejki mimo braku „### Kod piosenki:”', () {
-    expect(_wiadomosc(_mejl(_songJson)).isSongSubmission, isTrue);
+    expect(_wiadomosc(oldAppBody(json: _songJson)).isSongSubmission, isTrue);
     expect(kQueueQuery, contains(kOldAppMarker));
   });
 
   test('parsuje się i jest rozpoznana jako stara apka', () {
-    final parsed = parseEmailBody(_wiadomosc(_mejl(_songJson)));
+    final parsed = parseEmailBody(_wiadomosc(oldAppBody(json: _songJson)));
     expect(parsed.song.title, 'Testowa stara piosenka');
-    expect(parsed.isOldAppFormat, isTrue);
+    expect(parsed.shape, ContribEmailShape.oldApp);
     expect(parsed.song.youtubeVideoId, 'dQw4w9WgXcQ');
   });
 
   test('treść połamana przez klienta pocztowego', () {
-    final parsed = parseEmailBody(_wiadomosc(hardWrap(_mejl(_songJson))));
+    final parsed = parseEmailBody(_wiadomosc(hardWrap(oldAppBody(json: _songJson))));
     expect(parsed.song.title, 'Testowa stara piosenka');
     expect(textWords(parsed.song.text), contains('zwrotki'));
   });
 
   test('nagłówek powitalny przełamany w środku', () {
     final parsed = parseEmailBody(_wiadomosc(
-        _mejl(_songJson, powitanie: 'Dzięki za chęć dzielenia się\nswoimi piosenkami!')));
-    expect(parsed.isOldAppFormat, isTrue);
+        oldAppBody(greeting: 'Dzięki za chęć dzielenia się\nswoimi piosenkami!')));
+    expect(parsed.shape, ContribEmailShape.oldApp);
   });
 
   test('odpowiedź w wątku: cytowanie na początku linii', () {
-    final cytat = _mejl(_songJson)
+    final cytat = oldAppBody(json: _songJson)
         .split('\n')
         .map((l) => '> $l')
         .join('\n');
@@ -73,7 +67,7 @@ void main() {
   });
 
   test('wątek odesłany jako HTML', () {
-    final html = _mejl(_songJson.replaceAll(
+    final html = oldAppBody(json: _songJson.replaceAll(
             '"add_pers":"Jan Testowy"',
             '"add_pers":[{"name":"Jan Testowy","email_ref":'
                 '"<a href="mailto:jan@example.com" target="_blank">jan@example.com</a>",'
@@ -86,14 +80,13 @@ void main() {
   });
 
   test('nawiasy kątowe w tekście piosenki to nie HTML', () {
-    final json = _songJson.replaceFirst(
-        'Zwrotka pierwsza tej piosenki', 'Refren <powtórz 2x> i Zosia -> Kasia');
-    final parsed = parseEmailBody(_wiadomosc(_mejl(json)));
+    final json = oldAppSongJson(lyrics: 'Refren <powtórz 2x> i Zosia -> Kasia');
+    final parsed = parseEmailBody(_wiadomosc(oldAppBody(json: json)));
     expect(parsed.song.text, contains('Refren <powtórz 2x> i Zosia -> Kasia'));
   });
 
   test('marker przełamany przez klienta dalej robi ze zgłoszenia zgłoszenie', () {
-    final body = _mejl(_songJson)
+    final body = oldAppBody(json: _songJson)
         .replaceFirst('NIE EDYTUJ PONIŻSZEGO TEKSTU', 'NIE EDYTUJ\nPONIŻSZEGO TEKSTU');
     final m = ContribMessage(id: 'x', body: body, subject: 'Re: cokolwiek');
     expect(m.isSongSubmission, isTrue,
@@ -103,7 +96,7 @@ void main() {
   test('stary mejl zacytowany pod nowym zgłoszeniem nie robi z niego starej apki',
       () async {
     final nowy = await completeEmail(withConsent: false);
-    final zCytatem = '$nowy\n\n> ${_mejl(_songJson).split('\n').join('\n> ')}';
+    final zCytatem = '$nowy\n\n> ${oldAppBody(json: _songJson).split('\n').join('\n> ')}';
     final got = classify(msgFrom(zCytatem), book: SongBook.empty);
     expect(got.submission.isOldApp, isFalse);
     expect(issuesOf(got), contains(SongIssue.noConsent),
@@ -111,40 +104,35 @@ void main() {
   });
 
   test('`add_pers` napisem zamiast listą nie wywala parsera', () {
-    final parsed = parseEmailBody(_wiadomosc(_mejl(_songJson)));
+    final parsed = parseEmailBody(_wiadomosc(oldAppBody(json: _songJson)));
     expect(parsed.song.contribRefs.map((c) => c.person?.name), contains('Jan Testowy'));
   });
 
   test('klasyfikacja wiesza kolejkę odpowiedzi do starej apki', () {
-    final c = classify(_wiadomosc(_mejl(_songJson)), book: SongBook.empty);
+    final c = classify(_wiadomosc(oldAppBody(json: _songJson)), book: SongBook.empty);
     expect(c.submission.isOldApp, isTrue);
-    expect(c.submission.shape, EmailShape.oldApp,
+    expect(c.submission.shape, ContribEmailShape.oldApp,
         reason: 'po rozkładzie kształtów poznasz, kiedy wolno skasować czytnik');
     expect(c.labels, contains(SongLabel.replyOldApp.label));
   });
 
-  test('komu już odpisano, ten nie wraca do kolejki odpowiedzi', () {
+  test('blok, który w tym wątku już poszedł, nie idzie drugi raz', () {
     // Wątek cofnięty przez `reopen`: etykiety zeszły, ale nasza odpowiedź
-    // w wątku została — `scan` wie o niej z etykiety wątku `SENT`.
-    final m = _wiadomosc(_mejl(_songJson));
-    final c = classifyBatch([m], book: SongBook.empty, weRepliedThreads: {m.threadId}).single;
+    // z blokiem w wątku została — `scan` dociąga ją z wysłanych.
+    final c = classifyBatch([_wiadomosc(oldAppBody(json: _songJson)), _nasza(composeContribReply(oldApp: true)!)],
+        book: SongBook.empty).single;
     expect(c.submission.isOldApp, isTrue);
-    expect(c.submission.weReplied, isTrue);
-    expect(c.labels, isNot(contains(SongLabel.replyOldApp.label)),
-        reason: 'drugi blok o starej apce nikomu nie jest potrzebny');
+    expect(c.submission.oldAppBlockSent, isTrue);
+    expect(c.labels, isNot(contains(SongLabel.replyOldApp.label)));
   });
 
-  test('nasza wiadomość w wątku też znaczy „odpisano”', () {
-    final ours = ContribMessage(
-      id: 'nasza',
-      threadId: 'stara1',
-      body: 'Zaktualizuj apkę',
-      from: 'HarcApp <$kInboxEmail>',
-      date: DateTime(2021, 5, 2),
-    );
-    final c = classifyBatch([_wiadomosc(_mejl(_songJson)), ours], book: SongBook.empty).single;
-    expect(c.submission.weReplied, isTrue);
-    expect(c.labels, isNot(contains(SongLabel.replyOldApp.label)));
+  test('nasza odpowiedź bez bloku nie zwalnia z bloku', () {
+    // Np. odpisane ręcznie z Gmaila: pod mejlem ze starej apki info
+    // o aktualizacji ma być i tak.
+    final c = classifyBatch([_wiadomosc(oldAppBody(json: _songJson)), _nasza('Dzięki, dodam!')],
+        book: SongBook.empty).single;
+    expect(c.submission.oldAppBlockSent, isFalse);
+    expect(c.labels, contains(SongLabel.replyOldApp.label));
   });
 
   test('kolejka wyklucza po każdej etykiecie song/*', () {

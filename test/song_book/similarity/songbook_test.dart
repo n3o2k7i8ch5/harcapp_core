@@ -160,7 +160,7 @@ void main() {
           for (var i = 0; i < book.length; i++)
             if (index.profiles[i].words.length >= 40 && book[i].songParts.length >= 2) i
         ]..shuffle(r);
-        var n = 0, hits = 0, closest = 0;
+        var n = 0, hits = 0, first = 0;
         for (final i in eligible) {
           if (n == 60) break;
           final json = change(songJson(book[i]), r, book);
@@ -170,15 +170,15 @@ void main() {
           final probe = SongProfile(fromJson('probe_$n', json));
           n++;
           if (ok(levelOf(compare(probe, index.profiles[i])))) hits++;
-          if (identical(index.closest(probe)?.song, book[i])) closest++;
+          if (identical(index.matches(probe).firstOrNull?.song, book[i])) first++;
         }
         // ignore: avoid_print
-        print('$name: ${(100 * hits / n).round()}% wniosków, ${(100 * closest / n).round()}% closest (n=$n)');
+        print('$name: ${(100 * hits / n).round()}% wniosków, ${(100 * first / n).round()}% na pierwszym miejscu (n=$n)');
         expect(hits / n, greaterThanOrEqualTo(minRate));
         // Ta sama piosenka pod nowym tytułem ma wygrać z każdą inną —
         // piosenkomat bierze właśnie najsilniejsze trafienie.
         if (ok(MatchLevel.sameSong) || ok(MatchLevel.longer) || ok(MatchLevel.shorter)) {
-          expect(closest / n, greaterThanOrEqualTo(0.95));
+          expect(first / n, greaterThanOrEqualTo(0.95));
         }
       });
     }

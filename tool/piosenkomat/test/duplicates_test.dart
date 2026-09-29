@@ -1,5 +1,6 @@
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
+import 'package:piosenkomat/decide.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/similarity.dart';
@@ -11,84 +12,6 @@ const _a = 'Płonie ognisko i szumią knieje\nDrużynowy jest wśród nas\nOpowi
 const _b = 'Zupełnie inny tekst o morzu\nŻagle na wietrze i sól na wargach\nDaleko od lasu i od ogniska';
 
 void main() {
-  group('dowody i poziomy:', () {
-    test('identyczna = każde pole dosłownie równe', () {
-      final a = SongProfile(sampleSong(lyrics: _a));
-      final b = SongProfile(sampleSong(lyrics: _a));
-      final s = compare(a, b);
-      expect(s.whereType<SameTitle>(), hasLength(1));
-      expect(s.whereType<SameText>(), hasLength(1));
-      expect(s.whereType<SameChords>(), hasLength(1));
-      expect(s.whereType<MetadataDiff>(), isEmpty);
-      expect(levelOf(s), MatchLevel.identical);
-    });
-
-    test('te same wersy to nie identyczna: zamieniona kolejność → sameSong', () {
-      final a = SongProfile(sampleSong(lyrics: _a));
-      final b = SongProfile(sampleSong(lyrics: _a.split('\n').reversed.join('\n')));
-      final s = compare(a, b);
-      expect((s.sharedLines!.coverage(), s.sharedLines!.otherCoverage()), (1.0, 1.0));
-      expect(s.whereType<SameText>(), isEmpty);
-      expect(levelOf(s), MatchLevel.sameSong);
-    });
-
-    test('inny YouTube → MetadataDiff, sameSong', () {
-      final a = SongProfile(sampleSong(lyrics: _a));
-      final b = SongProfile(sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx'));
-      final s = compare(a, b);
-      expect(s.whereType<MetadataDiff>().single.fields, [MetadataField.youtube]);
-      expect(levelOf(s), MatchLevel.sameSong);
-    });
-
-    test('inna wielkość liter w tytule → MetadataDiff(title), ale SameTitle', () {
-      final a = SongProfile(sampleSong(title: 'Płonie Ognisko', lyrics: _a));
-      final b = SongProfile(sampleSong(title: 'Płonie ognisko', lyrics: _a));
-      final s = compare(a, b);
-      expect(s.whereType<SameTitle>(), hasLength(1));
-      expect(s.whereType<MetadataDiff>().single.fields, [MetadataField.title]);
-      expect(levelOf(s), MatchLevel.sameSong);
-    });
-
-    test('inne chwyty → sameSong, a o chwytach mówi dowód', () {
-      final a = SongProfile(sampleSong(lyrics: _a, chordsText: 'a d e\na d e'));
-      final b = SongProfile(sampleSong(lyrics: _a, chordsText: 'C G a\nC G a'));
-      final s = compare(a, b);
-      expect(levelOf(s), MatchLevel.sameSong);
-      expect(sameChordsUpToOrder(s), isFalse);
-    });
-
-    test('ten sam tytuł, inny tekst → sameTitleDifferentText', () {
-      expect(levelOf(compare(SongProfile(sampleSong(lyrics: _a)), SongProfile(sampleSong(lyrics: _b)))),
-          MatchLevel.sameTitleDifferentText);
-    });
-
-    test('inny tytuł, ten sam tekst i wers więcej → shorter; inny → null', () {
-      // Różne id: helper daje wszystkim `tmp`, a wspólne id to osobny dowód.
-      final a = SongProfile(sampleSong(id: 'a', title: 'Ognisko', lyrics: _a));
-      final b = SongProfile(sampleSong(id: 'b', title: 'Knieje', lyrics: '$_a\nJedna nowa linijka'));
-      expect(levelOf(compare(a, b)), MatchLevel.shorter, reason: 'całe „Ognisko” jest w „Kniejach”');
-      expect(levelOf(compare(b, a)), MatchLevel.longer);
-      final c = SongProfile(sampleSong(id: 'c', title: 'Morze', lyrics: _b));
-      expect(levelOf(compare(a, c)), isNull);
-    });
-
-    test('to samo id, poza tym nic → sameIdDifferentSong; treść wygrywa', () {
-      final a = SongProfile(sampleSong(id: 'x', title: 'Ognisko', lyrics: _a));
-      final c = SongProfile(sampleSong(id: 'x', title: 'Morze', lyrics: _b));
-      final s = compare(a, c);
-      expect(s.whereType<SameId>(), hasLength(1));
-      expect(levelOf(s), MatchLevel.sameIdDifferentSong);
-      final b = SongProfile(sampleSong(id: 'x', title: 'Knieje', lyrics: '$_a\nJedna nowa linijka'));
-      expect(levelOf(compare(a, b)), MatchLevel.shorter);
-    });
-
-    test('null == [] w metadanych', () {
-      final a = sampleSong(lyrics: _a)..hidTitles = [];
-      final b = sampleSong(lyrics: _a)..hidTitles = ['', ' '];
-      expect(compare(SongProfile(a), SongProfile(b)).whereType<MetadataDiff>(), isEmpty);
-    });
-  });
-
   group('względem apki:', () {
     test('identyczna bez dopisku → odrzut', () async {
       final got = classify(msgFrom(await completeEmail(song: sampleSong(lyrics: _a))),
@@ -197,7 +120,7 @@ void main() {
       final relaid = sampleSong(lyrics: _a.replaceFirst('\n', ' '), yt: yt);
 
       final correction = classify(
-          msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: relaid)),
+          msgFrom(await completeEmail(isNew: false, basedOnSongId: 'tmp', song: relaid)),
           book: book);
       expect(correction.destination, Destination.candidate);
       expect(correction.submission.appMatch!.level, MatchLevel.sameSong);
@@ -215,22 +138,20 @@ void main() {
       expect(same.destination, Destination.rejectAlreadyInApp);
       expect(same.goesToFile, isFalse);
       final yt = classify(
-          msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx'))),
+          msgFrom(await completeEmail(isNew: false, basedOnSongId: 'tmp', song: sampleSong(lyrics: _a, yt: 'xxxxxxxxxxx'))),
           book: book);
       expect(yt.destination, Destination.candidate);
       expect(yt.issues, isEmpty);
-      expect(yt.submission.correctionTarget, 'tmp');
+      expect(pickCorrectionTarget(yt.submission)?.id, 'tmp');
     });
   });
 
   group('w paczce:', () {
-    Future<String> older(String raw) async =>
-        raw.replaceFirst('Date: 2026-09-06T12:00:00+02:00', 'Date: 2026-09-01T12:00:00+02:00');
-    Future<String> dated(String raw, String day) async =>
-        raw.replaceFirst('Date: 2026-09-06T12:00:00+02:00', 'Date: 2026-09-${day}T12:00:00+02:00');
+    /// Dzień września 2026 w nagłówku `Date:` — [completeEmail] daje 6.
+    String sept(int day) => '2026-09-${'$day'.padLeft(2, '0')}T12:00:00+02:00';
 
     test('identyczna dwa razy → najnowsza wchodzi, starsza rejected/duplicate', () async {
-      final old = await older(await completeEmail(song: sampleSong(lyrics: _a)));
+      final old = await completeEmail(song: sampleSong(lyrics: _a), date: sept(1));
       final newer = await completeEmail(song: sampleSong(lyrics: _a));
       final out = classifyBatch([msgFrom(newer, id: 'new'), msgFrom(old, id: 'old')], book: SongBook.empty);
       final byId = {for (final c in out) c.message.id: c};
@@ -240,7 +161,7 @@ void main() {
     });
 
     test('starsza z dopiskiem też odpada — nowsza jest dobra', () async {
-      final old = await older(await completeEmail(song: sampleSong(lyrics: _a), userMessage: 'pytanie'));
+      final old = await completeEmail(song: sampleSong(lyrics: _a), userMessage: 'pytanie', date: sept(1));
       final newer = await completeEmail(song: sampleSong(lyrics: _a));
       final out = classifyBatch([msgFrom(old, id: 'old'), msgFrom(newer, id: 'new')], book: SongBook.empty);
       expect(out.firstWhere((c) => c.message.id == 'old').destination, Destination.rejectDuplicate);
@@ -255,8 +176,8 @@ void main() {
         msgFrom(await completeEmail(isNew: false, song: sampleSong(title: 'Barka', lyrics: _b)), id: 'bez'),
       ], book: book);
       final byId = {for (final c in out) c.message.id: c};
-      expect(byId['z']!.submission.correctionTargetGuessed, isTrue);
-      expect(byId['bez']!.submission.correctionTarget, isNull);
+      expect(pickCorrectionTarget(byId['z']!.submission)?.guessed ?? false, isTrue);
+      expect(pickCorrectionTarget(byId['bez']!.submission)?.id, isNull);
       expect(issuesOf(byId['z']!), contains(SongIssue.sameTitleInBatch));
       expect(issuesOf(byId['bez']!), contains(SongIssue.sameTitleInBatch));
     });
@@ -272,8 +193,8 @@ void main() {
     });
 
     test('A≡B + C z innymi chwytami: A odpada, B i C wskazują siebie nawzajem', () async {
-      final a = await dated(await completeEmail(song: sampleSong(lyrics: _a)), '01');
-      final b = await dated(await completeEmail(song: sampleSong(lyrics: _a)), '03');
+      final a = await completeEmail(song: sampleSong(lyrics: _a), date: sept(1));
+      final b = await completeEmail(song: sampleSong(lyrics: _a), date: sept(3));
       final c = await completeEmail(song: sampleSong(lyrics: _a, chordsText: 'C G a\nC G a'));
       final out = classifyBatch(
           [msgFrom(c, id: 'c'), msgFrom(a, id: 'a'), msgFrom(b, id: 'b')], book: SongBook.empty);
@@ -290,8 +211,8 @@ void main() {
 
     test('trzy identyczne → zostaje najnowsza, bez pastylki', () async {
       final out = classifyBatch([
-        msgFrom(await dated(await completeEmail(song: sampleSong(lyrics: _a)), '01'), id: 'a'),
-        msgFrom(await dated(await completeEmail(song: sampleSong(lyrics: _a)), '03'), id: 'b'),
+        msgFrom(await completeEmail(song: sampleSong(lyrics: _a), date: sept(1)), id: 'a'),
+        msgFrom(await completeEmail(song: sampleSong(lyrics: _a), date: sept(3)), id: 'b'),
         msgFrom(await completeEmail(song: sampleSong(lyrics: _a)), id: 'c'),
       ], book: SongBook.empty);
       final byId = {for (final x in out) x.message.id: x};
@@ -302,10 +223,10 @@ void main() {
 
     test('dwie identyczne poprawki → starsza odpada, nowsza bez same-target-in-batch', () async {
       final book = bookWith([sampleSong(lyrics: _a)]);
-      Future<String> poprawka() => completeEmail(
-          isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: '$_a\nDopisana zwrotka'));
+      Future<String> poprawka({String? date}) => completeEmail(
+          isNew: false, basedOnSongId: 'tmp', song: sampleSong(lyrics: '$_a\nDopisana zwrotka'), date: date);
       final out = classifyBatch([
-        msgFrom(await older(await poprawka()), id: 'old'),
+        msgFrom(await poprawka(date: sept(1)), id: 'old'),
         msgFrom(await poprawka(), id: 'new'),
       ], book: book);
       final byId = {for (final x in out) x.message.id: x};
@@ -316,7 +237,7 @@ void main() {
 
     test('podobna z innej grupy wskazuje zostającą, nie odrzucony duplikat', () async {
       final out = classifyBatch([
-        msgFrom(await older(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a))), id: 'a'),
+        msgFrom(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a), date: sept(1)), id: 'a'),
         msgFrom(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a)), id: 'b'),
         msgFrom(await completeEmail(song: sampleSong(title: 'Knieje', lyrics: '$_a\nJedna nowa linijka')), id: 'd'),
       ], book: SongBook.empty);
@@ -361,11 +282,11 @@ void main() {
     test('dwie poprawki tej samej piosenki → same-target-in-batch, obie do pliku', () async {
       final book = bookWith([sampleSong(lyrics: _a)]);
       final out = classifyBatch([
-        msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(lyrics: '$_a\nDopisana zwrotka')), id: 'a'),
-        msgFrom(await completeEmail(isNew: false, correctionTarget: 'tmp', song: sampleSong(title: 'Płonie ognisko', lyrics: '$_a\nInna zwrotka')), id: 'b'),
+        msgFrom(await completeEmail(isNew: false, basedOnSongId: 'tmp', song: sampleSong(lyrics: '$_a\nDopisana zwrotka')), id: 'a'),
+        msgFrom(await completeEmail(isNew: false, basedOnSongId: 'tmp', song: sampleSong(title: 'Płonie ognisko', lyrics: '$_a\nInna zwrotka')), id: 'b'),
       ], book: book);
       expect(out.map((c) => c.destination), everyElement(Destination.candidate));
-      expect(out.map((c) => c.submission.correctionTarget), everyElement('tmp'));
+      expect(out.map((c) => pickCorrectionTarget(c.submission)?.id), everyElement('tmp'));
       expect(out.map(issuesOf), everyElement([SongIssue.sameTargetInBatch]));
     });
 
@@ -379,24 +300,24 @@ void main() {
         msgFrom(
             await completeEmail(
                 isNew: false,
-                correctionTarget: 'o1',
+                basedOnSongId: 'o1',
                 song: sampleSong(title: 'Ognisko', lyrics: '$_a\nDopisana zwrotka')),
             id: 'a'),
         msgFrom(
             await completeEmail(
                 isNew: false,
-                correctionTarget: 'k1',
+                basedOnSongId: 'k1',
                 song: sampleSong(title: 'Knieje', lyrics: '$_a\nJedna nowa linijka\nI jeszcze jedna')),
             id: 'b'),
       ], book: bookWith([ognisko, knieje]));
-      expect(out.map((c) => c.submission.correctionTarget), ['o1', 'k1']);
+      expect(out.map((c) => pickCorrectionTarget(c.submission)?.id), ['o1', 'k1']);
       expect(out.map(issuesOf), everyElement(isNot(contains(SongIssue.sameTargetInBatch))));
       expect(issuesOf(out[0]), contains(SongIssue.similarTextInBatch));
     });
 
     test('ta sama piosenka pod dwoma tytułami → jedna grupa, obie w pliku i wskazują siebie', () async {
       final out = classifyBatch([
-        msgFrom(await older(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a))), id: 'old'),
+        msgFrom(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a), date: sept(1)), id: 'old'),
         msgFrom(await completeEmail(song: sampleSong(title: 'Płonie ognisko', lyrics: _a)), id: 'new'),
       ], book: SongBook.empty);
       final byId = {for (final x in out) x.message.id: x};

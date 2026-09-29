@@ -114,7 +114,7 @@ class SongSubmission{
   /// Czy nadawca zgłasza **własną** piosenkę. `false`: jego adres służy
   /// wyłącznie do odpisania i nie trafia do karty osoby dodającej.
   final bool senderIsContributor;
-  final RegisteredContributor? contributor;
+  final RegisteredContributor? registered;
   final SongRaw song;
 
   const SongSubmission({
@@ -123,7 +123,7 @@ class SongSubmission{
     this.correctionTarget,
     this.correctionMessage,
     this.senderIsContributor = true,
-    this.contributor,
+    this.registered,
   });
 
   bool get isCorrection => kind == SubmissionKind.correction;
@@ -133,10 +133,10 @@ class SongSubmission{
     PARAM_CORRECTION_TARGET: correctionTarget,
     PARAM_CORRECTION_MESSAGE: correctionMessage,
     PARAM_SENDER_IS_CONTRIBUTOR: senderIsContributor,
-    PARAM_CONTRIBUTOR: contributor == null? null: {
-      PARAM_CONTRIBUTOR_PERSON: contributor!.person.toApiJsonMap(),
-      PARAM_CONTRIBUTOR_EMAILS: contributor!.emails,
-      PARAM_CONTRIBUTOR_USER_KEY: contributor!.userKey,
+    PARAM_CONTRIBUTOR: registered == null? null: {
+      PARAM_CONTRIBUTOR_PERSON: registered!.person.toApiJsonMap(),
+      PARAM_CONTRIBUTOR_EMAILS: registered!.emails,
+      PARAM_CONTRIBUTOR_USER_KEY: registered!.userKey,
     },
     PARAM_SONG: {
       ...song.toApiJsonMap(withId: false).cast<String, dynamic>(),
@@ -149,7 +149,7 @@ class SongSubmission{
     correctionTarget: _nonEmpty(map[PARAM_CORRECTION_TARGET]),
     correctionMessage: _nonEmpty(map[PARAM_CORRECTION_MESSAGE]),
     senderIsContributor: map[PARAM_SENDER_IS_CONTRIBUTOR] as bool? ?? true,
-    contributor: _contributorOf(map[PARAM_CONTRIBUTOR]),
+    registered: _contributorOf(map[PARAM_CONTRIBUTOR]),
     song: _songOf(map[PARAM_SONG]),
   );
 
@@ -167,7 +167,7 @@ class SongSubmission{
     if(title is! String) _corrupted('Piosenka bez tytułu.');
     try {
       return SongRaw.fromApiRespMap(
-        raw[PARAM_SONG_ID] as String? ?? 'o!_${SongCore.filenameFromTitle(title)}',
+        raw[PARAM_SONG_ID] as String? ?? SongCore.officialIdFromTitle(title),
         raw,
       );
     } catch(e){
@@ -217,7 +217,7 @@ class SongSubmissionFile{
   final SubmissionOrigin? origin;
   final String? appVersion;
   /// Wersja regulaminu zaakceptowana przez **osobę wysyłającą**, nie dodającą.
-  final String? rulesVersion;
+  final String? acceptedRulesVersion;
   final List<SongSubmission> submissions;
 
   const SongSubmissionFile({
@@ -225,7 +225,7 @@ class SongSubmissionFile{
     required this.submissions,
     this.origin,
     this.appVersion,
-    this.rulesVersion,
+    this.acceptedRulesVersion,
   });
 
   Map<String, dynamic> toJsonMap(){
@@ -233,7 +233,7 @@ class SongSubmissionFile{
       PARAM_FORMAT: format,
       PARAM_ORIGIN: origin?.id,
       PARAM_APP_VERSION: appVersion,
-      PARAM_RULES_VERSION: rulesVersion,
+      PARAM_RULES_VERSION: acceptedRulesVersion,
       PARAM_SUBMISSIONS: [for(final s in submissions) s.toJsonMap()],
     };
     return {PARAM_DIGEST: submissionDigest(map), ...map};
@@ -291,7 +291,7 @@ class SongSubmissionFile{
       format: format,
       origin: SubmissionOrigin.byId(map[PARAM_ORIGIN] as String?),
       appVersion: _nonEmpty(map[PARAM_APP_VERSION]),
-      rulesVersion: _nonEmpty(map[PARAM_RULES_VERSION]),
+      acceptedRulesVersion: _nonEmpty(map[PARAM_RULES_VERSION]),
       submissions: [
         for(final raw in submissions)
           if(raw is Map)

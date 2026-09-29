@@ -60,6 +60,23 @@ void main() {
     );
   });
 
+  test('przedrostki id nigdy się nie sklejają: sekcja dokłada je tylko do gołego id', () {
+    final content = jsonEncode({
+      'official': {
+        'oc!_barka': {'song': _song('Barka'), 'index': 0},
+        'ognisko': {'song': _song('Ognisko'), 'index': 1},
+      },
+      'conf': {
+        'o!_kotek': {'song': _song('Kotek'), 'index': 0},
+        'tajna': {'song': _song('Tajna'), 'index': 1},
+      },
+    });
+    final (official, conf) = importHrcpsng(content);
+    expect([for (final s in official) s.id], ['o!_ognisko', 'o!_kotek'],
+        reason: 'o liście mówi przedrostek id, nie sekcja');
+    expect([for (final s in conf) s.id], ['oc!_barka', 'oc!_tajna']);
+  });
+
   test('to nie JSON → błąd odczytu, jak dotąd', () {
     expect(() => importHrcpsng('{"official": {'), throwsA(isA<HrcpsngImportError>()));
   });
