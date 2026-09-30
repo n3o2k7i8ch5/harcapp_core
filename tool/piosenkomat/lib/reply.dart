@@ -198,14 +198,12 @@ String _describe(String text) {
 /// mejli (Gmail tnie ok. 500 na dobę).
 /// Zwraca, w ilu wątkach coś się nie udało — te zostają w kolejce.
 Future<int> sendReplies(Mailbox mailbox, {required bool push, int? limit}) async {
-  final reviewNote = labelQueryName(SongLabel.replyReviewNote.label);
-  final queued = await mailbox.listIds(
-      '(${[for (final l in kReplyQueueLabels) 'label:${labelQueryName(l)}'].join(' OR ')})');
+  final queued = await mailbox.listIds(anyLabelQuery(kReplyQueueLabels));
   if (queued.isEmpty) {
     stdout.writeln('Nikt nie czeka na odpowiedź.');
     return 0;
   }
-  final expectsNote = (await mailbox.listIds('label:$reviewNote')).toSet();
+  final expectsNote = (await mailbox.listIds(labelQuery(SongLabel.replyReviewNote.label))).toSet();
   final byThread = <String, List<String>>{};
   for (final id in queued) {
     byThread.putIfAbsent(mailbox.threadOf(id), () => []).add(id);

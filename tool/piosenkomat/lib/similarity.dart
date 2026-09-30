@@ -20,11 +20,12 @@ extension AppMatchId on AppMatch {
 /// z indeksu — [song] tamtego zgłoszenia, dowody, poziom — plus fakty
 /// o paczce.
 class BatchMatch extends SongMatch<SongRaw> {
-  /// Reprezentant drugiego zgłoszenia — do [detail].
-  final String messageId;
+  /// Wątek drugiego zgłoszenia — do [detail]. Zgłoszenie to wątek, więc
+  /// i tu, jak w planie i podsumowaniu, stoi id wątku.
+  final String threadId;
   /// Tytuł tamtego zgłoszenia: piosenki albo, gdy pusty, tematu mejla.
   final String title;
-  /// `false`: TO zgłoszenie jest starszą kopią identycznego [messageId] —
+  /// `false`: TO zgłoszenie jest starszą kopią identycznego [threadId] —
   /// wyparte, odpada. Fakt o porównaniu, nie o zgłoszeniu.
   final bool isNewestInBatch;
   /// Którą piosenkę w apce poprawia TAMTO zgłoszenie. `null` dla nowych
@@ -39,17 +40,17 @@ class BatchMatch extends SongMatch<SongRaw> {
   BatchMatch({
     required super.song,
     required super.similarities,
-    required this.messageId,
+    required this.threadId,
     required this.title,
     this.isNewestInBatch = true,
     this.correctionTarget,
     this.sameMainTitle = false,
   }) : super(source: MatchSource.batch);
 
-  /// Z id wiadomości zamiast „w paczce” — po nim znajdziesz tamto zgłoszenie
-  /// w raporcie i w skrzynce.
+  /// Z id wątku zamiast „w paczce” — po nim znajdziesz tamto zgłoszenie
+  /// w raporcie i w planie.
   @override
-  String get detail => '„$title” [$messageId]: ${similaritiesText(similarities)}';
+  String get detail => '„$title” [$threadId]: ${similaritiesText(similarities)}';
 }
 
 /// Piosenki już w apce.

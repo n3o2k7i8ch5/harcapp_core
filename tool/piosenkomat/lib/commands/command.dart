@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:harcapp_core/comm_classes/text_utils.dart';
-import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 
 import '../hrcpsng.dart';
 import '../mailbox.dart';
@@ -115,7 +114,3 @@ String openElsewhereMessage(int count) => 'W Gmailu wisi otwarty przebieg, któr
 /// `scan --push` przerwany w połowie — dokończy go następny `scan --push`.
 String interruptedMessage(RunPlan plan) => 'scan --push przebiegu ${plan.id} został przerwany w połowie — '
     'dokończy go ./piosenkomat scan --push';
-
-/// Nagłówek rodzaju w wypisach komend.
-String kindName(SubmissionKind k) =>
-    k == SubmissionKind.correction ? 'Poprawki' : 'Nowe';

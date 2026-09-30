@@ -6,6 +6,7 @@ import 'package:piosenkomat/people.dart';
 import 'package:piosenkomat/plan.dart';
 import 'package:harcapp_core/values/people/data.all.g.dart';
 import 'package:harcapp_core/values/people/models.dart';
+import 'package:harcapp_core/values/people/registered_contributor_code.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 import 'package:harcapp_core/values/rank_harc.dart';
 import 'package:harcapp_core/values/srodowiska/models.dart';
@@ -203,11 +204,6 @@ void main() {
     expect(report.newContributors.single.emails,
         ['jan.testowy@example.com', 'jan.drugi@example.com'],
         reason: 'drugi adres piosenka gubi — dokłada go plan przebiegu');
-  });
-
-  test('dartConstName', () {
-    expect(dartConstName('Agnieszka Radecka-Kubicka'), 'AGNIESZKA_RADECKA_KUBICKA');
-    expect(dartConstName('  Łukasz  Żółw '), 'LUKASZ_ZOLW');
   });
 
   test('srodowisko: custom z orgSlug i org bez flag', () {

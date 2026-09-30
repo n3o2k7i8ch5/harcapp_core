@@ -311,7 +311,7 @@ Map<String, BatchMatch> matchWithinBatch(List<Submission> subs) {
 
   BatchMatch matchOf(Submission a, Submission b, {bool newest = true}) => BatchMatch(
         song: b.song!,
-        messageId: b.message.id,
+        threadId: b.threadId,
         title: b.title,
         similarities: evidenceOf(a, b),
         isNewestInBatch: newest,

@@ -17,7 +17,6 @@ import 'package:piosenkomat/hrcpsng.dart';
 import 'package:harcapp_core/song_book/submission/submission_email.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/models.dart';
-import 'package:harcapp_core/values/people/registered_contributor_code.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 import 'package:harcapp_core/values/strings.dart';
 import 'package:test/test.dart';
@@ -399,14 +398,14 @@ Future<String> _fencedEmailBody({
 // parser dalej go czyta, a składa go już tylko ten test.
 // ---------------------------------------------------------------------------
 
-/// Cały mejl w najstarszym kształcie — osoba przez [registeredContributorDartCode],
-/// jak ją wtedy wstawiały apka i strona.
+/// Cały mejl w najstarszym kształcie. [personCode] — osoba dokładnie tak, jak
+/// wstawiały ją wtedy apka i strona: kod Darta, adresy w cudzysłowach — nie
+/// w kształcie dzisiejszego `data.dart`.
 Future<String> legacyEmail({
   required SongRaw song,
-  required RegisteredContributor registered,
+  required String personCode,
   String from = 'Jan Testowy <jan.testowy@example.com>',
 }) async {
-  final firstSong = _isFirstSong(registered);
   final body = '- - - - - - Miejsce na własną wiadomość - - - - - -\n'
       '\n[Jeśli chcesz coś dodać, skomentować, lub wyjaśnić, możesz to zrobić tutaj.]\n'
       '\n- - - - - - Zasady dodawania piosenek - - - - - -\n'
@@ -414,13 +413,13 @@ Future<String> legacyEmail({
       'dostępne na www.harcapp.web.app/song_contribution_rules).\n'
       '\n- - - - - - Nie edytuj poniższego - - - - - -\n'
       '\n### Źródło piosenki: harcapp.web.app\n'
-      '\n### Osoba dodająca (${firstSong ? ' + świeżak + ' : ' - weteran - '}):\n'
-      '\n${registeredContributorDartCode(registered)}\n'
+      '\n### Osoba dodająca ( + świeżak + ):\n'
+      '\n$personCode\n'
       '\n$kSongCodeMarker\n'
       '\n${await song.code}';
   return 'From: $from\n'
       'To: $kHarcappEmail\n'
-      'Subject: Nowa piosenka "${song.title}" (${firstSong ? ' + świeżak + ' : ' - weteran - '})\n'
+      'Subject: Nowa piosenka "${song.title}" ( + świeżak + )\n'
       'Date: 2026-09-06T12:00:00+02:00\n'
       '\n'
       '$body';

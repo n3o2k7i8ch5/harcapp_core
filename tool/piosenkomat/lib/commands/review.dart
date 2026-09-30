@@ -100,7 +100,7 @@ List<ReviewResult> reviewRun(RunDir run, RunPlan plan, {required bool safety}) {
     if (candidates.isEmpty) continue;
     final reviewedPath = run.reviewed(kind);
     final reviewed = readHrcpsng(reviewedPath);
-    stdout.writeln('${kindName(kind)}: ${plural(candidates.length, 'kandydat', 'kandydaci', 'kandydatów')}, '
+    stdout.writeln('${kind.groupName}: ${plural(candidates.length, 'kandydat', 'kandydaci', 'kandydatów')}, '
         '${reviewed.length} w $reviewedPath');
     final result = reviewDiff(kind: kind, candidates: candidates, reviewed: reviewed);
     _printReview(result);
@@ -167,8 +167,8 @@ void _printStop(ReviewResult result, SubmissionKind kind) {
   }
   for (final s in result.wrongKind) {
     stderr.writeln('  ZŁY PLIK ${s.title} — to '
-        '${s.piosenkomatData!.isCorrection ? 'poprawka' : 'nowa piosenka'}, '
-        'a plik jest na ${kindName(kind).toLowerCase()}');
+        '${s.piosenkomatData!.kind.itemName}, '
+        'a plik jest na ${kind.groupName.toLowerCase()}');
   }
   for (final e in result.duplicateTargets.entries) {
     stderr.writeln('  DWIE POPRAWKI ${e.key}: ${e.value.join(' / ')} — '
@@ -185,7 +185,7 @@ void _printFinal(
   List<SongRaw> songs,
   List<Replacement> replacements,
 ) {
-  stdout.writeln('${kindName(result.kind)}: '
+  stdout.writeln('${result.kind.groupName}: '
       '${plural(songs.length, 'piosenka', 'piosenki', 'piosenek')} → ${run.finalSongs(result.kind)}');
   if (result.turnedDown.isNotEmpty) {
     stdout.writeln('  pominięto ${result.turnedDown.length} z przełącznikiem „nie wchodzi”');

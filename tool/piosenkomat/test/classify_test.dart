@@ -6,7 +6,6 @@ import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'package:harcapp_core/values/people/models.dart';
-import 'package:harcapp_core/values/srodowiska/models.dart';
 import 'package:harcapp_core/values/strings.dart';
 import 'package:piosenkomat/decide.dart';
 import 'package:piosenkomat/classify.dart';
@@ -288,15 +287,15 @@ void main() {
   });
 
   test('najstarszy kształt: osoba jako kod Darta, piosenka gołym JSON-em', () async {
-    const jan = RegisteredContributor(
-      person: Person(
-        name: 'Jan Testowy',
-        druzyna: '1 WDH',
-        srodowisko: Srodowisko.hufiec('ziemi_cieszynskiej', showChoragiew: false),
-      ),
-      emails: ['jan.testowy@example.com'],
-    );
-    final got = classify(msgFrom(await legacyEmail(song: sampleSong(), registered: jan)), book: SongBook.empty);
+    const jan = '''RegisteredContributor JAN_TESTOWY = const RegisteredContributor(
+  person: Person(
+    name: 'Jan Testowy',
+    druzyna: '1 WDH',
+    srodowisko: Srodowisko.hufiec('ziemi_cieszynskiej', showChoragiew: false),
+  ),
+  emails: ["jan.testowy@example.com"],
+);''';
+    final got = classify(msgFrom(await legacyEmail(song: sampleSong(), personCode: jan)), book: SongBook.empty);
     expect(got.submission.shape, ContribEmailShape.legacy);
     expect(got.isClean, isTrue);
     expect(got.song!.title, sampleSong().title);

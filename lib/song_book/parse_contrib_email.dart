@@ -377,7 +377,9 @@ class _LegacyPersonParse {
   static const empty = _LegacyPersonParse(null, []);
 }
 
-/// Parses the newer legacy block — the shape `registeredContributorDartCode` emits:
+/// Parses the newer legacy block — the person as Dart code, the way older app
+/// and web versions put it in the email (`legacyEmail` in the piosenkomat tests
+/// keeps that shape):
 /// `RegisteredContributor X = const RegisteredContributor(
 ///    person: Person(...), emails: [...] );`
 _LegacyPersonParse _parseLegacyRegisteredBlock(String block){
@@ -451,7 +453,7 @@ Person? _personFromLegacyBody(String body, List<String> warnings){
 
   // V2 structural path: srodowisko: Srodowisko.hufiec('slug', showX: false, ...)
   // (also .choragiew / .okreg / .org). Musi być przed `.custom`, bo to jest
-  // domyślny format emitowany przez `registeredContributorDartCode`.
+  // domyślny format tamtych mejli.
   final structMatch = RegExp(
       r"srodowisko:\s*Srodowisko\.(hufiec|choragiew|okreg|org)\(\s*'((?:\\'|[^'])*)'([^)]*)\)")
       .firstMatch(body);

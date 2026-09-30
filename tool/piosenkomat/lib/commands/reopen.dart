@@ -23,8 +23,7 @@ class ReopenCommand extends PiosenkomatCommand {
   @override
   Future<int> execute() async {
     final mailbox = await connect();
-    final query = args['query'] as String? ??
-        'label:${labelQueryName(SongLabel.waitingForAuthor.label)}';
+    final query = args['query'] as String? ?? labelQuery(SongLabel.waitingForAuthor.label);
     final ids = await mailbox.listIds(query);
     if (ids.isEmpty) {
       stdout.writeln('Nikt nie czeka na autora.');

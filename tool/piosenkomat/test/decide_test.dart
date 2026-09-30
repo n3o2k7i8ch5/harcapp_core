@@ -93,7 +93,7 @@ BatchMatch _partner(Submission s, {bool newest = true, bool sameMainTitle = true
   final other = sampleSong(id: 'o!_inne', title: 'Płonie ognisko', lyrics: _a);
   return BatchMatch(
     song: other,
-    messageId: 'inne',
+    threadId: 'inne',
     title: other.title,
     similarities: compare(s.profile!, SongProfile(other)),
     isNewestInBatch: newest,

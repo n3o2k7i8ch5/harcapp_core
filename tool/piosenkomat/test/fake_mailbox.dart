@@ -31,9 +31,9 @@ class FakeMail {
 }
 
 /// Skrzynka w pamięci — tyle Gmaila, ile potrzebują komendy. Query rozumie
-/// tylko to, co one wysyłają: `label:…` (kilka to „albo”), `-label:…`,
-/// `-subject:"…"`. Resztę kolejki (tematy, znaczniki) uznaje za spełnioną —
-/// w skrzynce na niby są same zgłoszenia.
+/// tylko to, co one wysyłają: [labelQuery] (kilka w [anyLabelQuery] to
+/// „albo”), `-`[labelQuery] i `-subject:"…"`. Resztę kolejki (tematy,
+/// znaczniki) uznaje za spełnioną — w skrzynce na niby są same zgłoszenia.
 class FakeMailbox implements Mailbox {
   final List<FakeMail> mails = [];
   final Map<String, ({String threadId, String body})> drafts = {};

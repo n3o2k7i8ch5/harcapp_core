@@ -36,17 +36,15 @@ String formatMinute(DateTime d) => d.toLocal().toIso8601String().substring(0, 16
 String formatRunReport(List<Classified> items) {
   int count(bool Function(Classified) test) => items.where(test).length;
   int to(Destination d) => count((c) => c.destination == d);
-  final newInFile = [for (final c in items) if (c.goesToFile && !c.submission.isCorrection) c];
-  final correctionsInFile = [for (final c in items) if (c.goesToFile && c.submission.isCorrection) c];
-
-  final buf = StringBuffer()
-    ..writeln('ZGŁOSZEŃ        ${items.length}  (wątków)')
-    ..writeln('NOWE            ${newInFile.length}  (${candidatesFileName(SubmissionKind.newSong)})')
-    ..writeln('  bez zarzutu   ${newInFile.where((c) => c.issues.isEmpty).length}')
-    ..writeln('  z uwagami     ${newInFile.where((c) => c.issues.isNotEmpty).length}')
-    ..writeln('POPRAWKI        ${correctionsInFile.length}  (${candidatesFileName(SubmissionKind.correction)})')
-    ..writeln('  bez zarzutu   ${correctionsInFile.where((c) => c.issues.isEmpty).length}')
-    ..writeln('  z uwagami     ${correctionsInFile.where((c) => c.issues.isNotEmpty).length}')
+  final buf = StringBuffer()..writeln('ZGŁOSZEŃ        ${items.length}  (wątków)');
+  for (final kind in SubmissionKind.values) {
+    final inFile = [for (final c in items) if (c.goesToFile && c.submission.kind == kind) c];
+    buf
+      ..writeln('${kind.groupName.toUpperCase().padRight(16)}${inFile.length}  (${candidatesFileName(kind)})')
+      ..writeln('  bez zarzutu   ${inFile.where((c) => c.issues.isEmpty).length}')
+      ..writeln('  z uwagami     ${inFile.where((c) => c.issues.isNotEmpty).length}');
+  }
+  buf
     ..writeln('ODRZUĆ          ${count((c) => c.destination.isReject)}')
     ..writeln('  już w apce    ${to(Destination.rejectAlreadyInApp)}')
     ..writeln('  duplikat      ${to(Destination.rejectDuplicate)}')
@@ -108,7 +106,7 @@ String formatRunReport(List<Classified> items) {
     final messageCountText =
         s.messages.length > 1 ? '  (${s.messages.length} wiadomości)' : '';
     buf
-      ..writeln('$tag ${c.title}  ${s.sender ?? ''}  $date  [${s.message.id}]'
+      ..writeln('$tag ${c.title}  ${s.sender ?? ''}  $date  [${s.threadId}]'
           '$messageCountText${s.isOldApp ? '  (stara apka)' : ''}')
       ..writeln('         → ${c.labels.join(', ')}');
     if (c.decision.detail case final d?) buf.writeln('         $d');
@@ -167,8 +165,9 @@ String formatRunSummary({
           if (r.kind == kind)
             for (final m in r.accepted) accepted(m),
       ];
-  section('Nowe', acceptedOf(SubmissionKind.newSong));
-  section('Poprawki', acceptedOf(SubmissionKind.correction));
+  for (final kind in SubmissionKind.values) {
+    section(kind.groupName, acceptedOf(kind));
+  }
   section('Odrzucone przy przeglądzie', [
     for (final r in results)
       for (final c in r.rejected)

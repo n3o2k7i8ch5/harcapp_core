@@ -364,7 +364,7 @@ class GmailMailbox implements Mailbox {
   Future<Map<String, Set<String>>> songLabelsByMessage() async {
     final out = <String, Set<String>>{};
     for (final name in _idByName.keys.where(isSongLabel).toList()) {
-      for (final id in await listIds('label:${labelQueryName(name)}')) {
+      for (final id in await listIds(labelQuery(name))) {
         out.putIfAbsent(id, () => {}).add(name);
       }
     }

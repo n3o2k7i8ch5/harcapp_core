@@ -163,7 +163,7 @@ void _writeRun(RunDir run, RunPlan plan, List<Classified> classified, String rep
     // jak przegląd, w którym wszystko weszło.
     staging.writeReviewedPlaceholder(kind);
     final clean = items.where((c) => c.issues.isEmpty).length;
-    stdout.writeln('\n${kindName(kind)}: ${plural(items.length, 'piosenka', 'piosenki', 'piosenek')} '
+    stdout.writeln('\n${kind.groupName}: ${plural(items.length, 'piosenka', 'piosenki', 'piosenek')} '
         '→ ${run.candidates(kind)} ($clean bez zarzutu, ${items.length - clean} z uwagami)');
   }
   Directory(staging.path).renameSync(run.path);

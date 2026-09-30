@@ -1,9 +1,8 @@
-import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/values/people/data.all.g.dart';
 import 'package:harcapp_core/values/people/models.dart';
+import 'package:harcapp_core/values/people/registered_contributor_code.dart';
 import 'package:harcapp_core/values/people/utils.dart';
-import 'package:harcapp_core/values/srodowiska/models.dart';
 
 import 'hrcpsng.dart';
 
@@ -233,12 +232,6 @@ PeopleReport collectPeople(List<ContributorSource> items) {
   );
 }
 
-/// `Adam Skłodowski` → `ADAM_SKLODOWSKI`, jak stałe w `data.dart`.
-String dartConstName(String name) => remPolChars(name)
-    .toUpperCase()
-    .replaceAll(RegExp('[^A-Z0-9]+'), '_')
-    .replaceAll(RegExp(r'^_+|_+$'), '');
-
 /// Fragment Darta do doklejenia na koniec `lib/values/people/data.dart`.
 String emitPeopleDart(PeopleReport report) {
   final taken = {
@@ -251,8 +244,7 @@ String emitPeopleDart(PeopleReport report) {
     ..writeln();
 
   for (final n in report.newContributors) {
-    var name = dartConstName(n.person.name);
-    if (name.isEmpty) name = 'OSOBA';
+    final name = dartConstName(n.person.name);
     final unique = uniqueName(name, taken.contains, separator: '_');
     taken.add(unique);
     if (unique != name) {
@@ -262,14 +254,8 @@ String emitPeopleDart(PeopleReport report) {
     for (final t in n.songTitles) {
       buf.writeln('// piosenka: $t');
     }
-    buf.writeln('const RegisteredContributor $unique = RegisteredContributor(');
-    buf.writeln('  person: Person(');
-    for (final f in _personFields(n.person)) {
-      buf.writeln('    $f,');
-    }
-    buf.writeln('  ),');
-    buf.writeln('  emails: [${n.emails.map(_str).join(', ')}],');
-    buf.writeln(');');
+    buf.writeln(registeredContributorDartCode(RegisteredContributor(person: n.person, emails: n.emails),
+        constName: unique));
   }
 
   if (report.knownWithNewEmails.isNotEmpty) {
@@ -277,7 +263,7 @@ String emitPeopleDart(PeopleReport report) {
     buf.writeln('// Znani z innego adresu — dopisz do `emails` istniejącego wpisu:');
     for (final k in report.knownWithNewEmails) {
       buf.writeln('//   ${k.registered.person.name} (w data.dart pod ${k.registered.emails.join(', ')}): '
-          '${k.newEmails.map(_str).join(', ')}  ← ${k.songTitles.join('; ')}');
+          '${k.newEmails.map(dartStringLiteral).join(', ')}  ← ${k.songTitles.join('; ')}');
     }
   }
   if (report.ambiguous.isNotEmpty) {
@@ -306,54 +292,6 @@ String emitPeopleDart(PeopleReport report) {
   }
   return buf.toString();
 }
-
-List<String> _personFields(Person person) => [
-      'name: ${_str(person.name)}',
-      if (_has(person.druzyna)) 'druzyna: ${_str(person.druzyna!)}',
-      if (person.srodowisko != null)
-        'srodowisko: ${_srodowisko(person.srodowisko!)}',
-      if (person.rankHarc != null) 'rankHarc: RankHarc.${person.rankHarc!.name}',
-      if (person.rankInstr != null) 'rankInstr: RankInstr.${person.rankInstr!.name}',
-      if (_has(person.comment)) 'comment: ${_str(person.comment!)}',
-    ];
-
-/// Ten sam kształt, co w `data.dart`: konstruktor strukturalny, flagi tylko
-/// gdy wyłączone, `custom` jako fallback.
-String _srodowisko(Srodowisko s) {
-  final flags = <String>[];
-  String head;
-  if (s.hufiecSlug != null) {
-    head = 'Srodowisko.hufiec(${_str(s.hufiecSlug!)}';
-    if (!s.showHufiec) flags.add('showHufiec: false');
-    if (!s.showChoragiew) flags.add('showChoragiew: false');
-    if (!s.showOkreg) flags.add('showOkreg: false');
-    if (!s.showOrg) flags.add('showOrg: false');
-  } else if (s.choragiewSlug != null) {
-    head = 'Srodowisko.choragiew(${_str(s.choragiewSlug!)}';
-    if (!s.showChoragiew) flags.add('showChoragiew: false');
-    if (!s.showOkreg) flags.add('showOkreg: false');
-    if (!s.showOrg) flags.add('showOrg: false');
-  } else if (s.okregSlug != null) {
-    head = 'Srodowisko.okreg(${_str(s.okregSlug!)}';
-    if (!s.showOkreg) flags.add('showOkreg: false');
-    if (!s.showOrg) flags.add('showOrg: false');
-  } else if (s.orgSlug != null && !_has(s.custom)) {
-    head = 'Srodowisko.org(${_str(s.orgSlug!)}';
-    if (!s.showOrg) flags.add('showOrg: false');
-  } else {
-    head = 'Srodowisko.custom(${_str(s.custom ?? '')}';
-    if (s.orgSlug != null) flags.add('orgSlug: ${_str(s.orgSlug!)}');
-  }
-  if (_has(s.custom) && !head.startsWith('Srodowisko.custom')) {
-    flags.insert(0, 'custom: ${_str(s.custom!)}');
-  }
-  return flags.isEmpty ? '$head)' : '$head, ${flags.join(', ')})';
-}
-
-bool _has(String? s) => s != null && s.trim().isNotEmpty;
-
-String _str(String s) =>
-    "'${s.replaceAll(r'\', r'\\').replaceAll("'", r"\'").replaceAll(r'$', r'\$')}'";
 
 void writePeopleDart(String path, PeopleReport report) =>
     writeText(path, emitPeopleDart(report));

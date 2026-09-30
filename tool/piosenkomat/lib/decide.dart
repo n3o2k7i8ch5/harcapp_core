@@ -35,7 +35,7 @@ Decision decide(Submission s, {BatchMatch? batch}) {
 
   if (batch != null && !batch.isNewestInBatch) {
     return Decision(Destination.rejectDuplicate,
-        detail: 'nowsza wersja w [${batch.messageId}]');
+        detail: 'nowsza wersja w [${batch.threadId}]');
   }
 
   final app = s.appMatch;

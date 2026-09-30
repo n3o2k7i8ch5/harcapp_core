@@ -236,8 +236,30 @@ bool isInRunFilesByTool(Set<String> labels) =>
       SongLabel.waitingForAuthor,
     ].any((l) => labels.contains(l.label));
 
+/// Nazwy rodzaju w tym, co narzędzie pisze — raport, podsumowanie, komunikaty.
+extension SubmissionKindName on SubmissionKind {
+  /// Nagłówek grupy: „Nowe” / „Poprawki”.
+  String get groupName => switch (this) {
+        SubmissionKind.newSong => 'Nowe',
+        SubmissionKind.correction => 'Poprawki',
+      };
+
+  /// Jedno zgłoszenie: „nowa piosenka” / „poprawka”.
+  String get itemName => switch (this) {
+        SubmissionKind.newSong => 'nowa piosenka',
+        SubmissionKind.correction => 'poprawka',
+      };
+}
+
 /// Gmail w `label:` zamienia spacje na myślniki.
 String labelQueryName(String label) => label.replaceAll(' ', '-');
+
+/// Zapytanie Gmaila o wiadomości z [label]. Jedyne miejsce, które składa
+/// `label:` — atrapa skrzynki w testach rozumie dokładnie ten kształt.
+String labelQuery(String label) => 'label:${labelQueryName(label)}';
+
+/// … z którąkolwiek z [labels].
+String anyLabelQuery(Iterable<String> labels) => '(${labels.map(labelQuery).join(' OR ')})';
 
 /// Wersja regulaminu w `contributor_data`, gdy zgody nie ma — z jakiegokolwiek
 /// powodu: stara apka o nią nie pytała, ktoś ją wykreślił, pole zginęło.
@@ -276,7 +298,7 @@ final String kQueueQuery = 'in:inbox '
     // na czele kolejki i zjadały `-n` przy każdym `scan`. Temat bez znacznika
     // łapie potem pole `origin` w pliku.
     '-subject:"${submissionSubjectTag(SubmissionOrigin.web)}" '
-    '${kAllSongLabels.map((l) => '-label:${labelQueryName(l)}').join(' ')}';
+    '${kAllSongLabels.map((l) => '-${labelQuery(l)}').join(' ')}';
 
 // ---------------------------------------------------------------------------
 // Wiadomość
