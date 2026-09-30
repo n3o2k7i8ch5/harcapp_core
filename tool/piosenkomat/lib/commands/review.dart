@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 
 import '../hrcpsng.dart';
@@ -197,7 +198,7 @@ void _printFinal(
   }
   final noTarget = songs.length - replacements.length;
   if (noTarget > 0) {
-    stdout.writeln('  $noTarget bez celu (no-target-in-app) — te dodasz jak nowe '
+    stdout.writeln('  $noTarget bez celu (${SongIssue.noTargetInApp.id}) — te dodasz jak nowe '
         'albo podmienisz ręcznie');
   }
 }

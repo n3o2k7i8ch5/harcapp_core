@@ -99,8 +99,8 @@ void main() {
           sampleSong(id: 'o!_b', title: 'Ognisko II', lyrics: '$_a\nJedna nowa linijka'),
         ]),
       );
-      expect(got.submission.appMatch?.songId, 'o!_a');
-      expect(got.submission.alsoInApp.map((m) => m.songId), ['o!_b']);
+      expect(got.submission.appMatch?.song.id, 'o!_a');
+      expect(got.submission.alsoInApp.map((m) => m.song.id), ['o!_b']);
       final detail = got.issues.single.detail!;
       expect(detail, allOf(contains('„Ognisko”'), contains('też „Ognisko II”')));
     });

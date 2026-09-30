@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:harcapp_core/comm_classes/text_utils.dart';
+import 'package:path/path.dart' as p;
 
 import '../hrcpsng.dart';
 import '../mailbox.dart';
@@ -87,7 +88,10 @@ abstract class PiosenkomatCommand extends Command<int> {
   }
 
   SongBook loadSongBook() {
-    final path = args['songs-db'] as String? ?? defaultSongsDbPath();
+    final path = switch (args['songs-db'] as String?) {
+      final db? => userPath(db),
+      null => defaultSongsDbPath(),
+    };
     final book = loadBook(path);
     stdout.writeln('Śpiewnik: $path (${plural(book.songs.length, 'tytuł', 'tytuły', 'tytułów')})');
     return book;
@@ -114,3 +118,13 @@ String openElsewhereMessage(int count) => 'W Gmailu wisi otwarty przebieg, któr
 /// `scan --push` przerwany w połowie — dokończy go następny `scan --push`.
 String interruptedMessage(RunPlan plan) => 'scan --push przebiegu ${plan.id} został przerwany w połowie — '
     'dokończy go ./piosenkomat scan --push';
+
+/// Ścieżka podana przez użytkownika. Narzędzie działa w `tool/piosenkomat/`,
+/// a względna liczy się od katalogu, w którym wpisał `./piosenkomat` — ten
+/// przychodzi w `PIOSENKOMAT_CWD` ([cwd] w testach). Bez niego — jak jest.
+/// Domyślne ścieżki (`secrets/`, szukanie `all_songs`) są względem narzędzia
+/// i tędy nie idą.
+String userPath(String path, {String? cwd}) {
+  final base = cwd ?? Platform.environment['PIOSENKOMAT_CWD'];
+  return base == null || p.isAbsolute(path) ? path : p.join(base, path);
+}

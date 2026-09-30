@@ -216,7 +216,7 @@ void main() {
       expect(pickCorrectionTarget(got.submission)?.id, 'o!_wskazana');
       expect(pickCorrectionTarget(got.submission)?.guessed ?? false, isFalse);
       expect(issuesOf(got), isNot(contains(SongIssue.guessedCorrectionTarget)));
-      expect(got.submission.appMatch?.songId, 'o!_wskazana',
+      expect(got.submission.appMatch?.song.id, 'o!_wskazana',
           reason: 'porównujemy z pierwowzorem wskazanym przez apkę');
       expect(issuesOf(got), isNot(contains(SongIssue.noTargetInApp)));
     });
@@ -249,7 +249,7 @@ void main() {
       final got = classify(msgFrom(await completeEmail(song: song)),
           book: bookWith([pierwowzor, wApce]));
       expect(got.submission.declaredCorrectionTarget, isNull);
-      expect(got.submission.appMatch?.songId, 'o!_juz_jest');
+      expect(got.submission.appMatch?.song.id, 'o!_juz_jest');
       expect(got.destination, Destination.rejectAlreadyInApp);
     });
     test('identyczna poprawka bez słowa komentarza → odrzut, nie do pliku', () async {

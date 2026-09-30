@@ -1,5 +1,6 @@
 import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
+import 'package:piosenkomat/commands/command.dart';
 import 'package:piosenkomat/model.dart';
 import 'package:piosenkomat/plan.dart';
 import 'package:piosenkomat/reply.dart';
@@ -20,6 +21,11 @@ void main() {
       expect(emailCount(22), '22 mejle');
       expect(emailCount(0), '0 mejli');
     });
+  });
+
+  test('userPath: względna od katalogu, w którym odpalono ./piosenkomat', () {
+    expect(userPath('all_songs.hrcpsng', cwd: '/home/jan/harcapp'), '/home/jan/harcapp/all_songs.hrcpsng');
+    expect(userPath('/tmp/all_songs.hrcpsng', cwd: '/home/jan/harcapp'), '/tmp/all_songs.hrcpsng');
   });
 
   group('withReadOnClose', () {

@@ -181,7 +181,9 @@ Flagi:
 Ścieżki: `--songs-db PLIK` (`scan`, `finalize`, `explain`; domyślnie
 `assets/songs/all_songs.hrcpsng` szukany w górę katalogów), `--credentials PLIK`
 i `--token PLIK` (komendy łączące się z Gmailem; domyślnie
-`secrets/credentials.json` i `secrets/gmail_token.json`). Lista komend:
+`secrets/credentials.json` i `secrets/gmail_token.json`). Ścieżka względna —
+tu i w `explain` — liczy się od katalogu, w którym odpalasz `./piosenkomat`,
+a domyślne — od `tool/piosenkomat/`. Lista komend:
 `./piosenkomat --help`, flagi komendy: `./piosenkomat scan --help` (i tak dalej) —
 generowane z ich definicji, więc żadnej nie brakuje. Zbędny argument to błąd
 użycia (`scan 20` nie bierze po cichu całej kolejki).

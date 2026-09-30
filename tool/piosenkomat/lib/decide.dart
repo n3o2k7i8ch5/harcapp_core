@@ -167,11 +167,11 @@ Decision decide(Submission s, {BatchMatch? batch}) {
 ({String id, bool guessed})? pickCorrectionTarget(Submission s) {
   if (!s.isCorrection) return null;
   if (s.declaredCorrectionTarget != null) {
-    final id = s.isDeclaredTargetInApp ? s.appMatch?.songId : null;
+    final id = s.isDeclaredTargetInApp ? s.appMatch?.song.id : null;
     return id == null ? null : (id: id, guessed: s.declaredTargetLookup == IdLookup.withoutPerformer);
   }
   final guess = s.appMatch;
-  return guess != null && canGuessCorrectionTarget(guess) ? (id: guess.songId, guessed: true) : null;
+  return guess != null && canGuessCorrectionTarget(guess) ? (id: guess.song.id, guessed: true) : null;
 }
 
 /// Reguła: czy na [m] wolno wskazać poprawkę, która **nie powiedziała**,

@@ -12,10 +12,6 @@ export 'package:harcapp_core/song_book/similarity/similarity.dart';
 /// Trafienie **w apce**: piosenka ze śpiewnika i dowody.
 typedef AppMatch = SongMatch<SongRaw>;
 
-extension AppMatchId on AppMatch {
-  String get songId => song.id;
-}
-
 /// Najbliższe **inne zgłoszenie (inny wątek)** w tej paczce: trafienie jak
 /// z indeksu — [song] tamtego zgłoszenia, dowody, poziom — plus fakty
 /// o paczce.
@@ -58,8 +54,4 @@ class SongBook extends SongIndex<SongRaw> {
   SongBook(super.songs);
 
   static final SongBook empty = SongBook(const []);
-
-  /// Najsilniejsze trafienia, od najsilniejszego — [limit] pierwszych.
-  List<AppMatch> strongest(SongProfile song, {int limit = 3}) =>
-      matches(song).take(limit).toList();
 }

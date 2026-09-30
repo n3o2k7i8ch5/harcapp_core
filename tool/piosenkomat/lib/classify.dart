@@ -216,7 +216,7 @@ Submission buildSubmission(
   var alsoInApp = <AppMatch>[];
   final declaredHit = declared == null ? null : book.lookupId(declared);
   if (profile != null) {
-    final found = book.strongest(profile);
+    final found = book.matches(profile);
     // Ten sam `lookupId`, co w edytorze: trafienie bez `@wykonawca` to
     // domysł, a kilka pasujących bez wykonawcy — brak celu, nie pierwszy
     // z brzegu.
@@ -224,7 +224,7 @@ Submission buildSubmission(
       appMatch = book.matchTo(songs.first.id, profile);
     }
     appMatch ??= found.firstOrNull;
-    alsoInApp = [for (final m in found) if (m.songId != appMatch?.songId) m].take(2).toList();
+    alsoInApp = [for (final m in found) if (m.song.id != appMatch?.song.id) m].take(2).toList();
   }
   return Submission(
     message: rep,

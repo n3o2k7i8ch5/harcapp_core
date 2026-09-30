@@ -95,7 +95,7 @@ class _CorrectionBadge extends StatelessWidget{
 
     return Tooltip(
       message: target == null
-          ? 'Poprawka — nie wiadomo, której piosenki w apce (no-target-in-app)'
+          ? 'Poprawka — nie wiadomo, której piosenki w apce (${SongIssue.noTargetInApp.id})'
           : 'Poprawka piosenki $target',
       child: Pill(
         color: accent_(context),

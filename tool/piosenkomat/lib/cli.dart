@@ -74,6 +74,11 @@ class _Runner extends CommandRunner<int> {
 }
 
 Future<Mailbox> _connectGmail(ArgResults args) => GmailMailbox.connect(
-      credentialsFile: File(args['credentials'] as String? ?? defaultCredentialsPath()),
-      tokenFile: File(args['token'] as String? ?? defaultTokenPath()),
+      credentialsFile: File(_optionPath(args, 'credentials') ?? defaultCredentialsPath()),
+      tokenFile: File(_optionPath(args, 'token') ?? defaultTokenPath()),
     );
+
+String? _optionPath(ArgResults args, String name) => switch (args[name] as String?) {
+      final path? => userPath(path),
+      null => null,
+    };

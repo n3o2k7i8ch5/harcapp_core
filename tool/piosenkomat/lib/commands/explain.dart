@@ -27,7 +27,7 @@ class ExplainCommand extends PiosenkomatCommand {
     final book = loadSongBook();
     final messages = [
       for (final path in args.rest)
-        ContribMessage.fromEmlBytes(File(_resolve(path)).readAsBytesSync(), id: p.basename(path)),
+        ContribMessage.fromEmlBytes(File(userPath(path)).readAsBytesSync(), id: p.basename(path)),
     ];
     // To samo sito, co w `scan` — inaczej `explain` pokazywałby jako
     // zgłoszenie coś, czego przebieg w ogóle nie weźmie.
@@ -43,18 +43,3 @@ class ExplainCommand extends PiosenkomatCommand {
     return 0;
   }
 }
-
-/// Narzędzie działa w `tool/piosenkomat/`, ale użytkownik podaje ścieżki
-/// z katalogu, w którym wpisał `./piosenkomat` (przekazany w PIOSENKOMAT_CWD).
-String _resolve(String path) {
-  if (p.isAbsolute(path) || _exists(path)) return path;
-  final cwd = Platform.environment['PIOSENKOMAT_CWD'];
-  if (cwd != null) {
-    final candidate = p.join(cwd, path);
-    if (_exists(candidate)) return candidate;
-  }
-  return path;
-}
-
-bool _exists(String path) =>
-    FileSystemEntity.typeSync(path) != FileSystemEntityType.notFound;
