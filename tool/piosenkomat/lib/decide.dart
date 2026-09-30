@@ -41,7 +41,7 @@ Decision decide(Submission s, {BatchMatch? batch}) {
   final app = s.appMatch;
   final appLevel = app?.level;
 
-  if (appLevel == MatchLevel.identical) {
+  if (s.isIdenticalToApp) {
     // Identyczna to odrzut — nowa czy poprawka, z dopiskiem czy bez. Gdy autor
     // coś napisał, warto rzucić okiem (dopisek albo propozycja poprawki bywa
     // całą treścią zgłoszenia).

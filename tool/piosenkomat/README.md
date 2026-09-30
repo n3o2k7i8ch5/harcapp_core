@@ -160,7 +160,7 @@ etykiety, szkice bez Twojego tekstu i `out/run/`. Mejle wracają do kolejki.
 
 | komenda | bez `--push` | z `--push` |
 |---|---|---|
-| `status` | co jest otwarte, co czeka, następny krok | — |
+| `status` | co jest otwarte, co czeka, następny krok — aktualność przeglądu sprawdza tak samo jak `finalize`, więc nie wyśle do komendy, która stanie | — |
 | `scan [-n N] [--newest] [--query Q]` | raport przesiewu N najstarszych zgłoszeń (wątków, każdy w całości; bez `-n` — całej kolejki; `--newest` — najnowszych) | otwiera przebieg: etykiety, szkice z blokiem, `out/run/`; dokańcza przerwany |
 | `review [--force]` | co przestawi, co pójdzie do `final-*`, jakie szkice | etykiety, `final-*`, `people.dart`, szkice z tekstem do autora |
 | `finalize [--force]` | czy wolno domknąć i jak będzie wyglądać `summary.md` | `added`, `summary.md`, `out/run/` → `archive/` |
@@ -208,9 +208,10 @@ jest w `all_songs`. Dlatego `scan --push` rusza tylko, gdy **nic** nie jest otwa
   `needs-review`.
 
 **Rozstrzyga Gmail**, katalog to tylko podpowiedź. Przebieg otwarty na innym
-komputerze albo ze skasowanym `out/run/` dalej blokuje: `scan` i `status` mówią,
-ile mejli czeka. Domykasz go tam, gdzie jest, albo cofasz:
-`./piosenkomat unlabel --push` zdejmuje etykiety automatu z wątków z otwartym
+komputerze albo ze skasowanym `out/run/` dalej blokuje: `scan`, `status`, `review`
+i `finalize` mówią, ile mejli czeka, zamiast odsyłać do `scan --push`. Domykasz go
+tam, gdzie jest, albo cofasz: `./piosenkomat unlabel --push` zdejmuje etykiety
+automatu z wątków z otwartym
 werdyktem, a domknięte sprawy zostawia. Te wątki wracają do kolejki, a piosenka
 wklejona już do `all_songs` wyjdzie przy kolejnym `scan` jako „już w apce” albo
 z uwagą, że jest do niej podobna.

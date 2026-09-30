@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:harcapp_core/song_book/import_hrcpsng.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
+import 'package:harcapp_core/song_book/submission/submission_contributor.dart';
 import 'package:piosenkomat/classify.dart';
 import 'package:piosenkomat/hrcpsng.dart';
 import 'package:piosenkomat/model.dart';

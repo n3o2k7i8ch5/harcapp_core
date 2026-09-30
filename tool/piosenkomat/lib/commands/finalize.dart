@@ -7,9 +7,7 @@ import 'package:path/path.dart' as p;
 import '../hrcpsng.dart';
 import '../mailbox.dart';
 import '../model.dart';
-import '../reply.dart';
 import '../report.dart';
-import '../review.dart';
 import '../run_dir.dart';
 import '../similarity.dart';
 import 'command.dart';
@@ -36,9 +34,9 @@ class FinalizeCommand extends PiosenkomatCommand {
   @override
   Future<int> execute() async {
     final run = runDir;
-    final plan = pushedRun();
     final mailbox = await connect();
     final current = await mailbox.songLabelsByMessage();
+    final plan = pushedRun(current);
 
     final waiting = plan.threadsWith(current, SongLabel.needsReview);
     if (waiting.isNotEmpty) {
@@ -47,20 +45,14 @@ class FinalizeCommand extends PiosenkomatCommand {
     }
     requireExports(run);
     final results = reviewRun(run, plan, safety: false);
-    // Przegląd ma być aktualny: etykiety i `final-*` z tego eksportu, który
-    // leży teraz w `reviewed-*` — inaczej domknęlibyśmy coś innego, niż weszło.
-    if (applicableChanges(reviewLabelChanges(results, plan, current).changes, current).isNotEmpty) {
-      throw const Stop('Etykiety w Gmailu nie zgadzają się z eksportem — przegląd nieaktualny. '
-          'Najpierw: ./piosenkomat review --push');
-    }
-    // Szkice też: tekst zmieniony na stronie po `review --push` zostałby
-    // w Gmailu po staremu, a po archiwizacji nie przeliczy go już nikt.
-    final notes = {for (final r in results) ...r.reviewNotes};
-    final stale = await syncDrafts(mailbox, replyThreadsOf(plan, current, notes),
-        push: false, written: run.readDrafts());
-    if (stale > 0) {
-      throw const Stop('Szkice w Gmailu nie zgadzają się z eksportem (wyżej, co by się zmieniło). '
-          'Najpierw: ./piosenkomat review --push');
+    // Przegląd ma być aktualny: etykiety, `final-*` i szkice z tego eksportu,
+    // który leży teraz w `reviewed-*` — inaczej domknęlibyśmy coś innego, niż
+    // weszło, a tekstu zmienionego na stronie po archiwizacji nie przeliczy
+    // już nikt.
+    final stale = await staleReview(mailbox, run, plan, results, current);
+    if (stale.isNotEmpty) {
+      throw Stop('Przegląd nieaktualny — eksport zmienił się po review --push '
+          '(nie zgadzają się: ${stale.join(', ')}). Najpierw: ./piosenkomat review --push');
     }
     final summary = formatRunSummary(
       plan: plan,
@@ -71,17 +63,7 @@ class FinalizeCommand extends PiosenkomatCommand {
       ],
       finalizedAt: DateTime.now(),
     );
-    final finals = <SongRaw>[];
-    for (final result in results) {
-      final expected = result.finalFile();
-      final path = run.finalSongs(result.kind);
-      final file = File(path);
-      if (!file.existsSync() || file.readAsStringSync() != expected.content) {
-        throw Stop('$path nie jest z ostatniego przeglądu. Najpierw: ./piosenkomat review --push');
-      }
-      finals.addAll(expected.songs);
-    }
-
+    final finals = [for (final result in results) ...result.finalFile().songs];
     final missing = _notInAllSongs(loadSongBook(), finals);
     for (final m in missing) {
       stderr.writeln('  NIE MA W ALL_SONGS  $m');

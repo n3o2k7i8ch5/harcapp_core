@@ -221,6 +221,19 @@ void main() {
       expect(byId['c']!.isClean, isTrue);
     });
 
+    test('identyczna z apką nie jest partnerem pastylki — w pliku jej nie będzie', () async {
+      final book = bookWith([sampleSong(title: 'Ognisko', lyrics: _a)]);
+      final out = classifyBatch([
+        msgFrom(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: _a)), id: 'same'),
+        msgFrom(await completeEmail(song: sampleSong(title: 'Ognisko', lyrics: '$_a\nDopisana zwrotka')), id: 'more'),
+      ], book: book);
+      final byId = {for (final x in out) x.message.id: x};
+      expect(byId['same']!.destination, Destination.rejectAlreadyInApp);
+      expect(byId['more']!.destination, Destination.candidate);
+      expect(issuesOf(byId['more']!), isNot(contains(SongIssue.sameTitleInBatch)));
+      expect(issuesOf(byId['more']!), isNot(contains(SongIssue.similarTextInBatch)));
+    });
+
     test('dwie identyczne poprawki → starsza odpada, nowsza bez same-target-in-batch', () async {
       final book = bookWith([sampleSong(lyrics: _a)]);
       Future<String> poprawka({String? date}) => completeEmail(

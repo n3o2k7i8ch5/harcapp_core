@@ -4,11 +4,9 @@ import 'package:harcapp_core/song_book/contrib_reply.dart';
 import 'package:harcapp_core/song_book/mail_quotes.dart';
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
-import 'package:harcapp_core/song_book/song_core.dart';
-import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
 import 'package:harcapp_core/song_book/submission/submission_email.dart';
+import 'package:harcapp_core/song_book/submission/submission_contributor.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
-import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'package:harcapp_core/values/people/utils.dart';
 import 'package:harcapp_core/values/strings.dart';
 
@@ -181,22 +179,17 @@ Submission buildSubmission(
       parsed == null ? _senderFromHeader(rep) : _senderWithBodyFallback(rep, parsed);
   // Zgoda to osobny fakt od formatu: stara apka o nią nie pytała, więc jej
   // nie ma — tak samo, jak gdy ktoś ją wykreślił w nowszym formacie.
-  final rules = parsed?.acceptedRulesVersion?.trim();
-  final consent = (rules?.isEmpty ?? true) ? null : rules;
+  final consent = parsed == null ? null : submissionConsent(parsed);
 
   final senderIsContributor = parsed?.senderIsContributor ?? true;
   final contributorCards =
       song == null ? 0 : song.contribRefs.where((c) => c.person != null).length;
   var contributorEmailGuessed = false;
   if (song != null && parsed != null) {
-    contributorEmailGuessed = _enrich(song, parsed,
-        sender: sender,
-        consent: consent,
-        date: rep.date,
-        // Kilka kart: nie wiadomo, do której dokleić nadawcę — w każdym
-        // formacie. Stare nie niosą `sender_is_contributor`, więc zostaje im
-        // heurystyka „doklej nadawcę do jedynej karty”.
-        attachSender: senderIsContributor && contributorCards < 2);
+    // Tak samo, jak przy ręcznym wklejaniu mejla na stronie. Robimy to także
+    // dla zgłoszeń z uwagami — one też jadą do pliku.
+    contributorEmailGuessed = applySubmissionContributor(parsed, sender: sender, date: rep.date);
+    song.id = song.idFromTitle(withPerformer: true);
   }
 
   final profile = song == null ? null : SongProfile(song);
@@ -363,8 +356,12 @@ Map<String, BatchMatch> matchWithinBatch(List<Submission> subs) {
   }
 
   // Pozostałe wskazują najbliższe inne pozostałe. Sama najnowsza
-  // z identycznych, bez nikogo obok, pastylki nie dostaje.
-  final survivors = [for (final s in live) if (!out.containsKey(s.threadId)) s];
+  // z identycznych, bez nikogo obok, pastylki nie dostaje. Identyczna z apką
+  // odpada w `decide`, więc i jej nie wskazuje żadna pastylka.
+  final survivors = [
+    for (final s in live)
+      if (!out.containsKey(s.threadId) && !s.isIdenticalToApp) s,
+  ];
   for (final s in survivors) {
     (BatchMatch, bool)? best;
     for (final o in survivors) {
@@ -451,73 +448,6 @@ String? _senderWithBodyFallback(ContribMessage m, ParsedContribEmail parsed) {
   return null;
 }
 
-/// To samo, co `_save()` w EmailSongDialog: zgoda, data, kontrybutor, id.
-/// Robimy to także dla zgłoszeń z uwagami — one też jadą do pliku.
-///
-/// `true`, gdy adres nadawcy trafił do karty na zgadywanie — jedyna karta bez
-/// adresu, a format nie mówi, czy nadawca to osoba dodająca.
-bool _enrich(
-  SongRaw song,
-  ParsedContribEmail parsed, {
-  required String? sender,
-  required String? consent,
-  DateTime? date,
-  bool attachSender = true,
-}) {
-  // Dane z mejla mają pierwszeństwo — stary format je niósł.
-  final fromEmail = song.contributorData;
-  song.contributorData = ContributorData(
-    email: fromEmail?.email ?? sender ?? '',
-    contributionDate: fromEmail?.contributionDate ?? date ?? DateTime.now(),
-    acceptedRulesVersion:
-        fromEmail?.acceptedRulesVersion ?? consent ?? kNoConsentRulesVersion,
-  );
-  if (!attachSender) {
-    // Adres nadawcy nie wchodzi, ale karta osoby owszem — bez adresu, bo tylko
-    // ona mówi, komu przypisać wkład.
-    final person = parsed.registered?.person;
-    final name = person?.name.trim().toLowerCase() ?? '';
-    final missing = name.isNotEmpty &&
-        !song.contribRefs
-            .any((c) => (c.person?.name ?? '').trim().toLowerCase() == name);
-    if (missing) song.contribRefs.add(ContributorRef(person: person));
-  }
-
-  var guessed = false;
-  final known = sender == null || song.contribRefs
-      .any((c) => normalizedEmail(c.emailRef ?? '') == sender);
-  if (!known && attachSender) {
-    // Apka wysyła kartę osoby dodającej w `add_pers` **bez** adresu — adres
-    // jedzie osobno. Doklejony jako drugi wpis robił z jednej osoby dwie:
-    // kartę i goły mejl pod nią. Jeśli jest dokładnie jedna karta bez
-    // adresu, to jest ta osoba — adres wchodzi do niej. Kilka kart bez
-    // adresu (współautorzy) albo żadnej → osobny wpis, jak dotąd.
-    final withoutEmail = [
-      for (var i = 0; i < song.contribRefs.length; i++)
-        if (song.contribRefs[i].person != null &&
-            (song.contribRefs[i].emailRef ?? '').isEmpty)
-          i,
-    ];
-    if (withoutEmail.length == 1) {
-      final i = withoutEmail.single;
-      final c = song.contribRefs[i];
-      song.contribRefs[i] = ContributorRef(
-        person: c.person,
-        emailRef: sender,
-        userKeyRef: c.userKeyRef,
-      );
-      // Z `sender_is_contributor: true` to fakt z pliku, bez niego — domysł.
-      guessed = parsed.senderIsContributor == null;
-    } else {
-      song.contribRefs.add(ContributorRef(
-        person: parsed.registered?.person,
-        emailRef: sender,
-      ));
-    }
-  }
-  song.id = song.idFromTitle(withPerformer: true);
-  return guessed;
-}
 
 /// Jedna wiadomość → jedno zgłoszenie z decyzją. Wygoda do testów i `explain`.
 Classified classify(ContribMessage m, {required SongBook book}) =>

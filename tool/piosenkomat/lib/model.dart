@@ -261,12 +261,6 @@ String labelQuery(String label) => 'label:${labelQueryName(label)}';
 /// … z którąkolwiek z [labels].
 String anyLabelQuery(Iterable<String> labels) => '(${labels.map(labelQuery).join(' OR ')})';
 
-/// Wersja regulaminu w `contributor_data`, gdy zgody nie ma — z jakiegokolwiek
-/// powodu: stara apka o nią nie pytała, ktoś ją wykreślił, pole zginęło.
-/// Format mejla to osobny fakt ([Submission.isOldApp]). Do wygrepowania,
-/// gdybyś chciał doprosić autorów o zgodę.
-const String kNoConsentRulesVersion = 'brak';
-
 /// Po czym poznać zgłoszenie piosenki (obok [kSongCodeMarker] w treści).
 /// Inne mejle narzędzie omija szerokim łukiem: nie czyta ich i nie etykietuje.
 const List<String> kSongSubjects = [kNewSongSubject, kCorrectionSubject];
@@ -506,6 +500,10 @@ class Submission {
   bool get isOldApp => shape == ContribEmailShape.oldApp;
 
   bool get isCorrection => kind == SubmissionKind.correction;
+
+  /// Identyczna z piosenką w apce — każde pole, także układ. Taka nigdy nie
+  /// idzie do pliku.
+  bool get isIdenticalToApp => appMatch?.level == MatchLevel.identical;
 
   /// Kilka piosenek w jednym mejlu: [Destination.multipleSongs].
   bool get hasMultipleSongs => submissionCount > 1;

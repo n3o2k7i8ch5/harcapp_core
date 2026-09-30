@@ -4,6 +4,7 @@ import 'package:harcapp_core/comm_classes/text_utils.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
 import 'package:harcapp_core/song_book/song_editor/song_raw.dart';
+import 'package:path/path.dart' as p;
 
 import '../hrcpsng.dart';
 import '../mailbox.dart';
@@ -35,10 +36,10 @@ class ReviewCommand extends PiosenkomatCommand {
   @override
   Future<int> execute() async {
     final run = runDir;
-    final plan = pushedRun();
-    requireExports(run);
     final mailbox = await connect();
     final current = await mailbox.songLabelsByMessage();
+    final plan = pushedRun(current);
+    requireExports(run);
     if (!isRunInGmail(plan, current)) {
       throw Stop('Przebieg ${plan.id} nie ma etykiet w Gmailu (zdjęte ręcznie?). '
           'Cofnij go: ./piosenkomat unlabel --push');
@@ -89,21 +90,39 @@ class ReviewCommand extends PiosenkomatCommand {
   }
 }
 
-/// Przegląd każdego rodzaju: kandydaci kontra plik zwrotny, z wypisaniem.
-/// Jedna droga dla `review` i `finalize`; eksport, z którego nie da się
-/// wyczytać werdyktu → [Stop]. [safety]: bezpieczniki na zły plik (pusty
-/// eksport, odrzucona większość) — `finalize` ich nie powtarza, bo przeszły,
-/// albo zostały świadomie pominięte, w `review`.
-List<ReviewResult> reviewRun(RunDir run, RunPlan plan, {required bool safety}) {
-  final results = <ReviewResult>[];
+/// Przegląd jednego rodzaju: wynik i to, z czego powstał.
+typedef KindReview = ({ReviewResult result, int candidateCount, int reviewedCount, String reviewedPath});
+
+/// Przegląd każdego rodzaju z kandydatami — kandydaci kontra plik zwrotny,
+/// bez wypisywania i bez STOP-ów. Po cichu, bo woła go też `status`.
+List<KindReview> kindReviews(RunDir run, RunPlan plan) {
+  final out = <KindReview>[];
   for (final kind in run.kinds) {
     final candidates = collectCandidates(plan, readHrcpsng(run.candidates(kind)), kind);
     if (candidates.isEmpty) continue;
     final reviewedPath = run.reviewed(kind);
     final reviewed = readHrcpsng(reviewedPath);
-    stdout.writeln('${kind.groupName}: ${plural(candidates.length, 'kandydat', 'kandydaci', 'kandydatów')}, '
-        '${reviewed.length} w $reviewedPath');
-    final result = reviewDiff(kind: kind, candidates: candidates, reviewed: reviewed);
+    out.add((
+      result: reviewDiff(kind: kind, candidates: candidates, reviewed: reviewed),
+      candidateCount: candidates.length,
+      reviewedCount: reviewed.length,
+      reviewedPath: reviewedPath,
+    ));
+  }
+  return out;
+}
+
+/// Przegląd każdego rodzaju, z wypisaniem ([kindReviews]). Jedna droga dla
+/// `review` i `finalize`; eksport, z którego nie da się wyczytać werdyktu →
+/// [Stop]. [safety]: bezpieczniki na zły plik (pusty eksport, odrzucona
+/// większość) — `finalize` ich nie powtarza, bo przeszły, albo zostały
+/// świadomie pominięte, w `review`.
+List<ReviewResult> reviewRun(RunDir run, RunPlan plan, {required bool safety}) {
+  final results = <ReviewResult>[];
+  for (final (:result, :candidateCount, :reviewedCount, :reviewedPath) in kindReviews(run, plan)) {
+    final kind = result.kind;
+    stdout.writeln('${kind.groupName}: ${plural(candidateCount, 'kandydat', 'kandydaci', 'kandydatów')}, '
+        '$reviewedCount w $reviewedPath');
     _printReview(result);
 
     if (result.mustStop) {
@@ -113,13 +132,32 @@ List<ReviewResult> reviewRun(RunDir run, RunPlan plan, {required bool safety}) {
     if (safety) {
       final error = reviewSafetyError(result,
           reviewedPath: reviewedPath,
-          reviewedCount: reviewed.length,
-          candidateCount: candidates.length);
+          reviewedCount: reviewedCount,
+          candidateCount: candidateCount);
       if (error != null) throw Stop(error);
     }
     results.add(result);
   }
   return results;
+}
+
+/// Czym Gmail i `out/run/` rozjechały się z eksportem, który leży teraz
+/// w `reviewed-*` — co przestawiłby `review --push`: etykiety, `final-*`,
+/// szkice odpowiedzi. Pusto — przegląd aktualny. Jedna reguła dla `finalize`
+/// (staje) i `status` (mówi, co dalej).
+Future<List<String>> staleReview(Mailbox mailbox, RunDir run, RunPlan plan, List<ReviewResult> results,
+    Map<String, Set<String>> current) async {
+  final notes = {for (final r in results) ...r.reviewNotes};
+  final drafts = await planDrafts(mailbox, replyThreadsOf(plan, current, notes), written: run.readDrafts());
+  return [
+    if (applicableChanges(reviewLabelChanges(results, plan, current).changes, current).isNotEmpty)
+      'etykiety w Gmailu',
+    for (final r in results)
+      if (File(run.finalSongs(r.kind)) case final file
+          when !file.existsSync() || file.readAsStringSync() != r.finalFile().content)
+        p.basename(file.path),
+    if (draftChanges(drafts) > 0) 'szkice odpowiedzi',
+  ];
 }
 
 /// `review` i `finalize` ruszają dopiero z kompletem eksportów: pusty albo

@@ -90,14 +90,17 @@ DraftStep draftStep({required bool exists, String? body, String? want, String? w
   return DraftStep.differs;
 }
 
-/// Szkice wątków przebiegu takie, jak mają być ([draftStep] per wątek). Bez
-/// [push] tylko wypisuje, co by zrobił. [written] — co narzędzie samo wpisało
-/// do szkiców, po wątku; z [push] dopisuje do niego to, co wpisze teraz.
-/// Zwraca, ile szkiców założyło, przeliczyło albo skasowało — na sucho: ile by.
-Future<int> syncDrafts(Mailbox mailbox, List<ReplyThread> threads,
-    {required bool push, required Map<String, String> written}) async {
+/// Co zrobić ze szkicem jednego wątku — policzone, jeszcze nie zrobione.
+/// [sentByHand]: szkicu nie ma, bo poszedł ręcznie z Gmaila — nic nie
+/// zakładamy, etykiety przestawi `reply --push`.
+typedef DraftPlan = ({ReplyThread thread, DraftStep step, String? want, String? draftId, bool sentByHand});
+
+/// Szkice wątków przebiegu takie, jak mają być — [draftStep] per wątek, bez
+/// ruszania Gmaila. [written] — co narzędzie samo wpisało do szkiców, po wątku.
+Future<List<DraftPlan>> planDrafts(Mailbox mailbox, List<ReplyThread> threads,
+    {required Map<String, String> written}) async {
   final drafts = await mailbox.draftIdByThread();
-  final counts = {for (final step in DraftStep.values) step: 0};
+  final plans = <DraftPlan>[];
   for (final t in threads) {
     final draftId = drafts[t.threadId];
     final body = draftId == null ? null : await mailbox.draftBody(draftId);
@@ -105,19 +108,45 @@ Future<int> syncDrafts(Mailbox mailbox, List<ReplyThread> threads,
     // ze starej apki — blok o niej. Nigdy raz na autora: kto przysłał ze
     // starej apki trzy piosenki, dostaje blok w trzech mejlach.
     final want = composeContribReply(reviewNote: t.note, oldApp: t.oldApp);
-    final where = '${t.sender} [${t.threadId}]';
     // Szkicu nie ma, a ostatnie słowo w wątku to nasza odpowiedź z tym, na co
     // wątek czeka — szkic poszedł ręcznie z Gmaila, a etykiety jeszcze o tym
-    // nie wiedzą. Nowy szkic byłby drugim takim samym mejlem; etykiety
-    // przestawi `reply --push`.
-    if (draftId == null &&
+    // nie wiedzą. Nowy szkic byłby drugim takim samym mejlem.
+    final sentByHand = draftId == null &&
         want != null &&
-        await _alreadySent(mailbox, t.threadId, expectsNote: t.note != null)) {
+        await _alreadySent(mailbox, t.threadId, expectsNote: t.note != null);
+    plans.add((
+      thread: t,
+      step: sentByHand
+          ? DraftStep.none
+          : draftStep(exists: draftId != null, body: body, want: want, written: written[t.threadId]),
+      want: want,
+      draftId: draftId,
+      sentByHand: sentByHand,
+    ));
+  }
+  return plans;
+}
+
+/// Ile szkiców trzeba by założyć, przeliczyć albo skasować.
+int draftChanges(List<DraftPlan> plans) =>
+    plans.where((d) => const {DraftStep.create, DraftStep.rewrite, DraftStep.delete}.contains(d.step)).length;
+
+/// Szkice wątków przebiegu takie, jak mają być ([planDrafts]). Bez [push] tylko
+/// wypisuje, co by zrobił. [written] — co narzędzie samo wpisało do szkiców,
+/// po wątku; z [push] dopisuje do niego to, co wpisze teraz. Zwraca, ile
+/// szkiców założyło, przeliczyło albo skasowało — na sucho: ile by.
+Future<int> syncDrafts(Mailbox mailbox, List<ReplyThread> threads,
+    {required bool push, required Map<String, String> written}) async {
+  final plans = await planDrafts(mailbox, threads, written: written);
+  final counts = {for (final step in DraftStep.values) step: 0};
+  for (final (:thread, :step, :want, :draftId, :sentByHand) in plans) {
+    final t = thread;
+    final where = '${t.sender} [${t.threadId}]';
+    if (sentByHand) {
       stdout.writeln('  ✓ $where: odpowiedź już wysłana z Gmaila — szkicu nie zakładam, '
           'etykiety przestawi reply --push');
       continue;
     }
-    final step = draftStep(exists: draftId != null, body: body, want: want, written: written[t.threadId]);
     counts[step] = counts[step]! + 1;
     switch (step) {
       case DraftStep.none || DraftStep.edited:

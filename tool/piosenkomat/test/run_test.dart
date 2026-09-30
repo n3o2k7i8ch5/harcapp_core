@@ -385,6 +385,27 @@ void main() {
       expect(r.mustStop, isTrue);
     });
 
+    test('kopie z różną odpowiedzią do autora → STOP, nie „pierwsza wygrywa”', () async {
+      final (candidates, songs) = await scanned();
+      final copies = roundTrip([...songs, ...songs]);
+      copies.first.piosenkomatData = copies.first.piosenkomatData!.copyWith(reviewNote: () => 'Dorzuć chwyty.');
+      copies.last.piosenkomatData = copies.last.piosenkomatData!.copyWith(reviewNote: () => 'Dorzuć link do YT.');
+      final r = reviewDiff(kind: _new, candidates: candidates, reviewed: copies);
+      expect(r.conflicts.values.single, contains('różną odpowiedzią do autora'));
+      expect(r.mustStop, isTrue);
+    });
+
+    test('ta sama odpowiedź w obu kopiach to jedna odpowiedź, nie sprzeczność', () async {
+      final (candidates, songs) = await scanned();
+      final copies = roundTrip([...songs, ...songs]);
+      for (final c in copies) {
+        c.piosenkomatData = c.piosenkomatData!.copyWith(reviewNote: () => 'Dorzuć chwyty.');
+      }
+      final r = reviewDiff(kind: _new, candidates: candidates, reviewed: copies);
+      expect(r.mustStop, isFalse);
+      expect(r.reviewNotes.values, ['Dorzuć chwyty.']);
+    });
+
     test('nowa rozbita na stronie na dwie wchodzi cała', () async {
       final (candidates, songs) = await scanned();
       final r = reviewDiff(kind: _new, candidates: candidates, reviewed: roundTrip([...songs, ...songs]));
@@ -729,6 +750,48 @@ void main() {
     expect(await w.cli(['scan', '20']), 64);
     expect(await runPiosenkomat(['nieznana']), 64);
     expect(await runPiosenkomat(['label', 'scanned']), 64, reason: 'stare komendy zniknęły');
+  });
+
+  test('status po zmianie eksportu po review każe review --push — tam, gdzie finalize stanie', () async {
+    final w = _World()..submit('a');
+    await w.cli(['scan', '--push']);
+    w.export(_new, _verdict(note: 'Popraw literówkę.'));
+    await w.cli(['review', '--push']);
+    w.paste();
+    Future<String> status() async {
+      final out = _Capture();
+      await IOOverrides.runZoned(() => w.cli(['status']), stdout: () => out);
+      return out.text;
+    }
+
+    expect(await status(), contains('Dalej: wklej final-*.hrcpsng do all_songs, potem ./piosenkomat finalize --push'));
+
+    w.export(_new, _verdict(note: 'Popraw literówkę w drugiej zwrotce.'));
+    expect(await status(), contains('Dalej: ./piosenkomat review --push — eksport zmienił się po przeglądzie '
+        '(nie zgadzają się: szkice odpowiedzi)'));
+    expect(await w.cli(['finalize', '--push']), 1, reason: 'status i finalize mówią to samo');
+
+    w.export(_new, _verdict(accepted: false));
+    expect(await status(), contains('(nie zgadzają się: etykiety w Gmailu, final-new.hrcpsng, szkice odpowiedzi)'));
+
+    expect(await w.cli(['review', '--push', '--force']), 0);
+    expect(await status(), contains('Dalej: wklej final-*.hrcpsng do all_songs, potem ./piosenkomat finalize --push'));
+  });
+
+  test('bez out/run/, z przebiegiem otwartym gdzie indziej: review i finalize odsyłają tam, nie do scan', () async {
+    final w = _World();
+    w.mailbox.add(FakeMail('x', 'x', labels: {SongLabel.auto.label, SongLabel.readyToAdd.label}));
+    for (final command in ['review', 'finalize']) {
+      final err = _Capture();
+      final code = await IOOverrides.runZoned(() => w.cli([command, '--push']), stderr: () => err);
+      expect(code, 1, reason: command);
+      expect(err.text, contains('W Gmailu wisi otwarty przebieg, którego tu nie ma'), reason: command);
+      expect(err.text, isNot(contains('scan --push')), reason: 'scan --push by przy nim stanął');
+    }
+
+    final err = _Capture();
+    await IOOverrides.runZoned(() => _World().cli(['review', '--push']), stderr: () => err);
+    expect(err.text, contains('Nie ma otwartego przebiegu'), reason: 'pusty Gmail — wtedy naprawdę od scan');
   });
 
   test('status działa i przy otwartym, i bez przebiegu', () async {

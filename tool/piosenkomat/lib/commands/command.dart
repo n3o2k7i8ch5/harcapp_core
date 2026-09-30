@@ -98,10 +98,16 @@ abstract class PiosenkomatCommand extends Command<int> {
   }
 
   /// Plan przebiegu, który jest już w Gmailu — na nim pracują `review`
-  /// i `finalize`. Nie ma takiego → [Stop].
-  RunPlan pushedRun() {
+  /// i `finalize`. Nie ma takiego → [Stop]. Bez `out/run/` rozstrzyga Gmail
+  /// ([current]), jak w `status`: przebieg otwarty gdzie indziej to co innego
+  /// niż brak przebiegu — `scan --push` by przy nim stanął, więc nie ma po co
+  /// do niego odsyłać.
+  RunPlan pushedRun(Map<String, Set<String>> current) {
     if (!runDir.exists) {
-      throw Stop('Nie ma otwartego przebiegu (${runDir.path}). Zacznij od: ./piosenkomat scan --push');
+      final open = openVerdicts(current);
+      throw Stop(open.isEmpty
+          ? 'Nie ma otwartego przebiegu (${runDir.path}). Zacznij od: ./piosenkomat scan --push'
+          : openElsewhereMessage(open.length));
     }
     final plan = runDir.readRunPlan();
     if (plan.pushedAt == null) throw Stop(interruptedMessage(plan));
