@@ -29,6 +29,18 @@ const KonspektAttachment attach_scenariusze_mechanizmow_ksztaltowania_duchowosci
   },
 );
 
+const String attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje = '<a href="$attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje@attachment">$attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje</a>';
+const String attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje = 'scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje';
+const String attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje = 'Scenariusze mechanizmów kształtowania duchowości – inspiracje';
+const KonspektAttachment attach_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje = KonspektAttachment(
+  name: attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje,
+  title: attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje,
+  assets: {
+    FileFormat.pdf: 'common/mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje.pdf',
+    FileFormat.docx: 'common/mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje.docx',
+  },
+);
+
 const String attach_html_plansza_mechanizmow_ksztaltowania_duchowosci = '<a href="$attach_name_plansza_mechanizmow_ksztaltowania_duchowosci@attachment">$attach_title_plansza_mechanizmow_ksztaltowania_duchowosci</a>';
 const String attach_name_plansza_mechanizmow_ksztaltowania_duchowosci = 'plansza_mechanizmow_ksztaltowania_duchowosci';
 const String attach_title_plansza_mechanizmow_ksztaltowania_duchowosci = 'Plansza mechanizmów kształtowania duchowości';
@@ -56,6 +68,7 @@ const KonspektAttachment attach_karty_szczebli_internalizacji_duchowosci = Konsp
 List<KonspektAttachment> attach_kszt_mechanizmy_ksztaltowania_duchowosci = [
   attach_poradnik_mechanizmy_ksztaltowania_duchowosci,
   attach_scenariusze_mechanizmow_ksztaltowania_duchowosci,
+  attach_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje,
   attach_plansza_mechanizmow_ksztaltowania_duchowosci,
   attach_karty_szczebli_internalizacji_duchowosci,
 ];
