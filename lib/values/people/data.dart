@@ -184,6 +184,15 @@ const RegisteredContributor ALEKSANDER_GROSZAN = RegisteredContributor(
   ),
   emails: ['olekgroszan@gmail.com'],
 );
+const RegisteredContributor ALEKSANDER_MILCZAREK = RegisteredContributor(
+  person: Person(
+    name: 'Aleksander Milczarek',
+    druzyna: '22 TDH ,,Słoneczni" im. Aleksandra Kamińskiego',
+    srodowisko: Srodowisko.hufiec('tomaszow_mazowiecki'),
+    rankHarc: RankHarc.zhpHOc,
+  ),
+  emails: ['aleksander.milczarek@zhp.pl'],
+);
 const RegisteredContributor ALEKSANDER_PALKA = RegisteredContributor(
   person: Person(
     name: 'Aleksander Palka',
@@ -2414,6 +2423,14 @@ const RegisteredContributor KAMIL_ZAK = RegisteredContributor(
   ),
   emails: const [],
 );
+const RegisteredContributor KARINA_POWIECKA = RegisteredContributor(
+  person: Person(
+    name: 'Anonim', // 'Karina Powiecka',
+    srodowisko: Srodowisko.hufiec('opole'),
+    rankHarc: RankHarc.dhd,
+  ),
+  emails: ['karina.powiecka@icloud.com'],
+);
 const RegisteredContributor KAROLINA_BABOL = RegisteredContributor(
   person: Person(
     name: 'Karolina Bąbol',
@@ -2613,6 +2630,16 @@ const RegisteredContributor KINGA_KONOPCZYNSKA = RegisteredContributor(
       rankHarc: RankHarc.zhpHRd,
   ),
   emails: ['kinga.konopczynska@zhp.net.pl', 'franciszek.skwiercz@zhp.pl'],
+);
+const RegisteredContributor KINGA_SZAFRANSKA = RegisteredContributor(
+  person: Person(
+    name: 'Kinga Szafrańska',
+    druzyna: '132 KDH "Na Przełaj"',
+    srodowisko: Srodowisko.hufiec('piastow', showChoragiew: false, showOrg: false),
+    rankHarc: RankHarc.zhpHRd,
+    rankInstr: RankInstr.pwd,
+  ),
+  emails: ['kinga.szafranska@zhp.net.pl'],
 );
 const RegisteredContributor KINGA_ZEBRACKA = RegisteredContributor(
   person: Person(
@@ -4908,6 +4935,14 @@ const RegisteredContributor SZYMON_MASLOWSKI = RegisteredContributor(
   ),
   emails: ['szymon.maslowski@zhp.net.pl'],
 );
+const RegisteredContributor SZYMON_NIEDBALA = RegisteredContributor(
+  person: Person(
+    name: 'Szymon Niedbała',
+    druzyna: '333 KDSH Hadrenalien',
+    srodowisko: Srodowisko.custom('Kraków Nowa-Huta'),
+  ),
+  emails: ['symon.niedbala@gmail.com', 'szymon.niedbala@zhp.net.pl'],
+);
 const RegisteredContributor SZYMON_OPLOCKI_NIEMIEC = RegisteredContributor(
   person: Person(
     name: 'Szymon Opłocki-Niemiec',
@@ -5385,6 +5420,15 @@ const RegisteredContributor WOJCIECH_KITA = RegisteredContributor(
       rankHarc: RankHarc.zhpCwik,
   ),
   emails: ['wojtix912@gmail.com'],
+);
+const RegisteredContributor WOJCIECH_KOBIELA = RegisteredContributor(
+  person: Person(
+    name: 'Wojciech Kobiela',
+    druzyna: '128 DSH "Silva"',
+    srodowisko: Srodowisko.hufiec('podkrakowski'),
+    rankHarc: RankHarc.zhpCwik,
+  ),
+  emails: ['kobielawojciech9@gmail.com'],
 );
 const RegisteredContributor WOJCIECH_KORZENIOWSKI = RegisteredContributor(
   person: Person(

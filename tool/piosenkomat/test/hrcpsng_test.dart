@@ -71,6 +71,23 @@ void main() {
     expect(data.issues.map((i) => i.issue), [SongIssue.userMessage, SongIssue.missingYoutube]);
   });
 
+  test('eksport ze strony w innej wersji → STOP, nie cichy przegląd bez werdyktów', () async {
+    final c = classifyBatch([msgFrom(await completeEmail())], book: SongBook.empty, run: 'run-x').single;
+    // Dokładnie to, co oddaje starsza strona: ten sam plik bez wersji śladu —
+    // jej „nie wchodzi” i odpowiedź do autora siedzą pod nazwami, których
+    // ta wersja nie zna, więc przegląd przepadłby bez słowa.
+    final content = encodeHrcpsng([c.song!], withPiosenkomatData: true)
+        .replaceAll('"${PiosenkomatData.PARAM_FORMAT}":$kPiosenkomatFormat,', '');
+    final path = p.join(tempDir().path, 'reviewed-new.hrcpsng');
+    File(path).writeAsStringSync(content);
+
+    expect(
+      () => readHrcpsng(path),
+      throwsA(isA<FileSystemException>().having((e) => e.message, 'message',
+          allOf(contains('sprzed wersjonowania'), contains('wyeksportuj piosenki ponownie')))),
+    );
+  });
+
   test('strip: zgadnięty cel poprawki jedzie z dopiskiem na liście „podmień”', () async {
     const lyrics = 'Płonie ognisko i szumią knieje\nDrużynowy jest wśród nas\n'
         'Opowiada starodawne dzieje\nBohaterski wskrzesza czas';

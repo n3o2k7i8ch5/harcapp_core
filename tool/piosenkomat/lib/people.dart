@@ -223,7 +223,8 @@ PeopleReport collectPeople(List<ContributorSource> items) {
 
   return PeopleReport(
     newContributors: newOnes.values.toList()
-      ..sort((a, b) => dartConstName(a.person.name).compareTo(dartConstName(b.person.name))),
+      ..sort((a, b) => dartConstName(a.person.name, email: a.emails.firstOrNull)
+          .compareTo(dartConstName(b.person.name, email: b.emails.firstOrNull))),
     knownByEmail: known,
     knownWithNewEmails: withNewEmails.values.toList(),
     ambiguous: ambiguous.values.toList(),
@@ -244,7 +245,7 @@ String emitPeopleDart(PeopleReport report) {
     ..writeln();
 
   for (final n in report.newContributors) {
-    final name = dartConstName(n.person.name);
+    final name = dartConstName(n.person.name, email: n.emails.firstOrNull);
     final unique = uniqueName(name, taken.contains, separator: '_');
     taken.add(unique);
     if (unique != name) {

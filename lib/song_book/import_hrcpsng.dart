@@ -23,6 +23,13 @@ class HrcpsngDuplicateIdError implements Exception {
   String toString() => 'HrcpsngDuplicateIdError: $message';
 }
 
+/// Błąd odczytu, który wie o pliku coś, czego [importHrcpsng] nie wie, i ma
+/// dojść do człowieka własnymi słowami. Bez tego każdy taki powód znika pod
+/// ogólnym „błąd dekodowania piosenki”, po którym nie widać, co naprawić.
+abstract interface class HrcpsngExplainedError implements Exception {
+  String get message;
+}
+
 /// Rozszerzenie pliku piosenek.
 const String kSongFileExtension = 'hrcpsng';
 
@@ -91,6 +98,8 @@ List<String> _duplicatesOf(Iterable<String> ids){
         final song = SongRaw.fromApiRespMap(fileName, songPackMap['song']);
         if(!song.isOfficial && !song.isConfid) song.id = prefix + song.id;
         songs.add((songPackMap['index'] as int, i, song));
+      } on HrcpsngExplainedError catch(e){
+        throw HrcpsngImportError(e.message);
       } catch(e){
         throw HrcpsngImportError('Błąd odczytu pliku (błąd dekodowania piosenki $fileName)');
       }

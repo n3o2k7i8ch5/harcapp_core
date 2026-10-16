@@ -1,3 +1,5 @@
+import 'package:harcapp_core/song_book/import_hrcpsng.dart';
+
 import 'song_issue.dart';
 
 /// Co autor zadeklarował: nowa piosenka czy poprawka istniejącej.
@@ -95,6 +97,41 @@ class PiosenkomatIssue{
 
 }
 
+/// Wersja śladu piosenkomatu — kontraktu między narzędziem a stroną.
+///
+/// Ślad jedzie tam i z powrotem: narzędzie wypisuje go do `candidates-*`,
+/// strona oddaje w `reviewed-*` werdykt i odpowiedź do autora. Obie strony
+/// muszą rozumieć te same klucze, a nie ma jak tego poznać po samym pliku:
+/// czytnik nieznanego klucza po prostu nie widzi, więc przegląd zrobiony
+/// na stronie z innej wersji znika bez słowa — zgaszony przełącznik czyta
+/// się jako „wchodzi”. Dlatego ślad niesie wersję i nie zgadujemy niczego
+/// ponad nią.
+///
+/// **Podbij przy każdej zmianie nazwy albo znaczenia klucza w bloku.**
+const int kPiosenkomatFormat = 1;
+
+/// Ślad piosenkomatu w innej wersji niż [kPiosenkomatFormat] — strona
+/// i narzędzie są z różnych wersji HarcAppa. Zatrzymujemy odczyt całego
+/// pliku: z połowicznie zrozumianego przeglądu nie da się wyczytać werdyktu.
+class PiosenkomatFormatError implements HrcpsngExplainedError{
+
+  /// Wersja z pliku; `null` — ślad sprzed wersjonowania.
+  final int? format;
+
+  const PiosenkomatFormatError(this.format);
+
+  @override
+  String get message =>
+      'Ślad piosenkomatu w wersji ${format ?? 'sprzed wersjonowania'}, '
+      'a ta wersja czyta $kPiosenkomatFormat — plik powstał na stronie albo '
+      'w narzędziu z innej wersji HarcAppa. Zaktualizuj jedno i drugie '
+      'i wyeksportuj piosenki ponownie.';
+
+  @override
+  String toString() => 'PiosenkomatFormatError: $message';
+
+}
+
 /// Ślad piosenkomatu na piosence: **cechy** zgłoszenia (fakty) plus **uwagi**
 /// (osądy) do przeglądu.
 ///
@@ -105,6 +142,7 @@ class PiosenkomatIssue{
 /// w `final-*`.
 class PiosenkomatData{
 
+  static const String PARAM_FORMAT = 'format';
   static const String PARAM_KIND = 'kind';
   static const String PARAM_OLD_APP = 'old_app';
   static const String PARAM_APP_VERSION = 'app_version';
@@ -215,6 +253,7 @@ class PiosenkomatData{
   bool get hasReviewNote => (reviewNote ?? '').trim().isNotEmpty;
 
   Map<String, dynamic> toJsonMap() => {
+    PARAM_FORMAT: kPiosenkomatFormat,
     PARAM_KIND: kind.id,
     if(isOldApp) PARAM_OLD_APP: true,
     if(appVersion != null) PARAM_APP_VERSION: appVersion,
@@ -232,30 +271,37 @@ class PiosenkomatData{
     if(hasReviewNote) PARAM_REVIEW_NOTE: reviewNote!.trim(),
   };
 
-  static PiosenkomatData fromJsonMap(Map<String, dynamic> map) => PiosenkomatData(
-    kind: SubmissionKind.byId(map[PARAM_KIND] as String?),
-    isOldApp: map[PARAM_OLD_APP] as bool? ?? false,
-    appVersion: map[PARAM_APP_VERSION] as String?,
-    sender: map[PARAM_SENDER] as String?,
-    senderIsContributor: map[PARAM_SENDER_IS_CONTRIBUTOR] as bool? ?? true,
-    sentAt: DateTime.tryParse(map[PARAM_SENT_AT] as String? ?? ''),
-    conversation: [
-      for(final raw in (map[PARAM_CONVERSATION] as List? ?? const []))
-        if(raw is Map<String, dynamic>)
-          if(PiosenkomatMessage.fromJsonMap(raw) case final message?) message
-    ],
-    correctionMessage: map[PARAM_CORRECTION_MESSAGE] as String?,
-    correctionTarget: map[PARAM_CORRECTION_TARGET] as String?,
-    correctionTargetGuessed: map[PARAM_CORRECTION_TARGET_GUESSED] as bool? ?? false,
-    threadId: map[PARAM_THREAD_ID] as String?,
-    run: map[PARAM_RUN] as String?,
-    issues: [
-      for(final raw in (map[PARAM_ISSUES] as List? ?? const []))
-        if(raw is Map<String, dynamic>)
-          if(PiosenkomatIssue.fromJsonMap(raw) case final issue?) issue
-    ],
-    rejected: map[PARAM_REJECTED] as bool? ?? false,
-    reviewNote: map[PARAM_REVIEW_NOTE] as String?,
-  );
+  /// Ślad w innej wersji niż [kPiosenkomatFormat] to [PiosenkomatFormatError]:
+  /// jedna brama dla każdego czytnika, więc rozjazdu nie przeoczy żaden.
+  static PiosenkomatData fromJsonMap(Map<String, dynamic> map){
+    if(map[PARAM_FORMAT] != kPiosenkomatFormat)
+      throw PiosenkomatFormatError(map[PARAM_FORMAT] as int?);
+
+    return PiosenkomatData(
+      kind: SubmissionKind.byId(map[PARAM_KIND] as String?),
+      isOldApp: map[PARAM_OLD_APP] as bool? ?? false,
+      appVersion: map[PARAM_APP_VERSION] as String?,
+      sender: map[PARAM_SENDER] as String?,
+      senderIsContributor: map[PARAM_SENDER_IS_CONTRIBUTOR] as bool? ?? true,
+      sentAt: DateTime.tryParse(map[PARAM_SENT_AT] as String? ?? ''),
+      conversation: [
+        for(final raw in (map[PARAM_CONVERSATION] as List? ?? const []))
+          if(raw is Map<String, dynamic>)
+            if(PiosenkomatMessage.fromJsonMap(raw) case final message?) message
+      ],
+      correctionMessage: map[PARAM_CORRECTION_MESSAGE] as String?,
+      correctionTarget: map[PARAM_CORRECTION_TARGET] as String?,
+      correctionTargetGuessed: map[PARAM_CORRECTION_TARGET_GUESSED] as bool? ?? false,
+      threadId: map[PARAM_THREAD_ID] as String?,
+      run: map[PARAM_RUN] as String?,
+      issues: [
+        for(final raw in (map[PARAM_ISSUES] as List? ?? const []))
+          if(raw is Map<String, dynamic>)
+            if(PiosenkomatIssue.fromJsonMap(raw) case final issue?) issue
+      ],
+      rejected: map[PARAM_REJECTED] as bool? ?? false,
+      reviewNote: map[PARAM_REVIEW_NOTE] as String?,
+    );
+  }
 
 }

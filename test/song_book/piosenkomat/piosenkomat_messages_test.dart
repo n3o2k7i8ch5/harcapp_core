@@ -100,6 +100,7 @@ void main() {
 
     test('pusta wiadomość w pliku jest pomijana', () {
       final back = PiosenkomatData.fromJsonMap({
+        PiosenkomatData.PARAM_FORMAT: kPiosenkomatFormat,
         PiosenkomatData.PARAM_KIND: SubmissionKind.newSong.id,
         PiosenkomatData.PARAM_CONVERSATION: [
           {PiosenkomatMessage.PARAM_TEXT: '   '},

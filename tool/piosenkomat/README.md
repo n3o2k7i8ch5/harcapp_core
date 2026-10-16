@@ -420,6 +420,7 @@ tagi widzi użytkownik apki):
 
 ```json
 "piosenkomat": {
+  "format": 1,
   "kind": "correction", "old_app": true, "sent_at": "…",
   "app_version": "2.4.1",
   "sender": "jan@example.com", "sender_is_contributor": false,
@@ -431,6 +432,18 @@ tagi widzi użytkownik apki):
   "rejected": true, "review_note": "…"
 }
 ```
+
+**`format`** to wersja samego śladu — kontraktu między narzędziem a stroną.
+Ślad jedzie tam i z powrotem (narzędzie → `candidates-*` → edytor →
+`reviewed-*`), a czytnik nieznanego klucza po prostu nie widzi: przegląd
+zrobiony na stronie z innej wersji przepadłby bez słowa, bo zgaszony
+przełącznik czyta się jako „wchodzi”. Dlatego **plik ze śladem w innej wersji
+— albo bez wersji, czyli sprzed jej wprowadzenia — nie wczytuje się wcale**:
+ani w narzędziu (STOP przy `review` i `finalize`), ani na stronie. Zobaczysz
+wtedy, że strona i narzędzie są z różnych wersji HarcAppa — przebuduj stronę
+(`flutter build web`), wczytaj kandydatów jeszcze raz i wyeksportuj ponownie.
+Wersję podbija się w `kPiosenkomatFormat` przy każdej zmianie nazwy albo
+znaczenia klucza w bloku.
 
 `conversation` to rozmowa z wątku: dopiski autora i Twoje odpowiedzi (`ours`).
 Twoich w kolejce nie ma (leżą w wysłanych), więc `scan` dociąga je z wątku
