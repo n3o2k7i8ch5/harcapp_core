@@ -78,4 +78,48 @@ void main() {
       expect(correctionTargetLookupOf(_correctionOf('o!_barka@dom'), index), isNull);
     });
   });
+
+  group('SongIdIndex: same id, te same reguły co w SongIndex', () {
+    test('lookupId daje to samo, co pełny indeks', () {
+      final songs = [_song('o!_barka@sdm'), _song('o!_barka@dom'), _song('o!_inna@x')];
+      final ids = SongIdIndex<SongRaw>(songs);
+      final full = SongIndex<SongRaw>(songs);
+      for (final id in ['o!_barka@sdm', 'o!_barka@nikt', 'o!_inna@y', 'o!_brak', '']) {
+        expect(ids.lookupId(id)?.how, full.lookupId(id)?.how, reason: id);
+        expect(ids.lookupId(id)?.songs, full.lookupId(id)?.songs, reason: id);
+      }
+    });
+
+    test('allByExactId: tylko dokładnie to id — bez rundy bez @wykonawca', () {
+      final a = _song('o!_barka@sdm');
+      final b = _song('o!_barka@sdm');
+      final ids = SongIdIndex<SongRaw>([a, b, _song('o!_barka@dom')]);
+      expect(ids.allByExactId('o!_barka@sdm'), [a, b]);
+      expect(ids.allByExactId('o!_barka@nikt'), isEmpty,
+          reason: 'pasuje tylko bez wykonawcy — to nie kolizja id');
+    });
+
+    test('correctionTargetOf działa na samym indeksie id', () {
+      final target = _song('o!_barka@sdm');
+      expect(correctionTargetOf(_correctionOf('o!_barka@sdm'), SongIdIndex<SongRaw>([target])), same(target));
+    });
+  });
+
+  group('SongIndex(profileOf:): gotowe odciski zamiast liczenia od nowa', () {
+    test('podany odcisk trafia do indeksu bez przeliczania', () {
+      final song = _song('o!_barka@sdm');
+      final profile = SongProfile(song);
+      final index = SongIndex<SongRaw>([song], profileOf: (_) => profile);
+      expect(index.profiles.single, same(profile));
+    });
+
+    test('wynik ten sam, co przy liczeniu od nowa', () {
+      final songs = [_song('o!_a', title: 'Barka'), _song('o!_b', title: 'Barka')];
+      final cached = {for (final s in songs) s: SongProfile(s)};
+      final fresh = SongIndex<SongRaw>(songs);
+      final reused = SongIndex<SongRaw>(songs, profileOf: (s) => cached[s]!);
+      final probe = SongProfile(_song('o!_c', title: 'Barka'));
+      expect(reused.matches(probe).map((m) => m.song), fresh.matches(probe).map((m) => m.song));
+    });
+  });
 }

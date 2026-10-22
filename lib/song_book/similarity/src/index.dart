@@ -88,6 +88,95 @@ class IdHit<T extends SongCore> {
   bool get isGuessed => how != IdLookup.exact;
 }
 
+/// Wyszukiwanie po id — wspólne dla pełnego indeksu ([SongIndex]) i samego
+/// indeksu id ([SongIdIndex]), żeby [correctionTargetLookupOf] działało
+/// z każdym z nich tak samo.
+abstract interface class SongIdLookup<T extends SongCore> {
+  IdHit<T>? lookupId(String id);
+}
+
+/// Same id → piosenki, bez odcisków treści. Dla tego, kto pyta wyłącznie
+/// o id (kolizje przy imporcie): zbudowanie go to kilka wpisów do map na
+/// piosenkę, a nie odcisk całego tekstu.
+///
+/// [SongIndex] trzyma taki indeks w środku — reguły wyszukiwania po id są
+/// jedne, niezależnie od tego, którego indeksu używasz.
+class SongIdIndex<T extends SongCore> implements SongIdLookup<T> {
+  final List<T> songs;
+  /// Id z chwili dodania — po nim grupujemy, nawet gdy piosenka zmieni id
+  /// później (indeks odzwierciedla jeden stan, a nie pół na pół).
+  final List<String> _ids = [];
+  final Map<String, List<int>> _byId = {};
+  /// Id bez członu `@wykonawca` → numery. Do drugiej rundy [lookupId] bez
+  /// skanowania i bez `split` na każdej piosence.
+  final Map<String, List<int>> _byBareId = {};
+
+  SongIdIndex(this.songs) {
+    for (var i = 0; i < songs.length; i++) {
+      _add(i, songs[i].id);
+    }
+  }
+
+  SongIdIndex._empty(this.songs);
+
+  void _add(int i, String id) {
+    _ids.add(id);
+    if (id.isEmpty) return;
+    _byId.putIfAbsent(id, () => []).add(i);
+    _byBareId.putIfAbsent(_bare(id), () => []).add(i);
+  }
+
+  static String _bare(String id) => id.split('@').first;
+
+  /// Kandydaci po id: dokładnie, a w braku — bez `@wykonawca`. Kandydaci,
+  /// nie wniosek: tu także niejednoznaczne.
+  Iterable<int> _candidates(String id) =>
+      id.isEmpty ? const [] : (_byId[id] ?? _byBareId[_bare(id)] ?? const []);
+
+  /// Jedno wyszukiwanie po id dla wszystkich — edytora i piosenkomatu —
+  /// żeby ta sama poprawka nie miała w jednym miejscu celu, a w drugim nie.
+  /// Dokładnie, a przy chybieniu bez członu `@wykonawca` (zgłoszenie bywa
+  /// sprzed zmiany wykonawcy w apce); to drugie jest domysłem i wynik to mówi
+  /// ([IdHit.how]). Kilka różnych piosenek bez `@wykonawca` → [IdLookup.ambiguous],
+  /// nie pierwsza z brzegu. Puste id to nie id: `null`.
+  @override
+  IdHit<T>? lookupId(String id) {
+    if (id.isEmpty) return null;
+    if (_byId[id] case final exact?) {
+      return IdHit(IdLookup.exact, [for (final i in exact) songs[i]]);
+    }
+    final bare = _byBareId[_bare(id)];
+    if (bare == null) return null;
+    final byFullId = <String, List<int>>{};
+    for (final i in bare) {
+      byFullId.putIfAbsent(_ids[i], () => []).add(i);
+    }
+    if (byFullId.length > 1) {
+      return IdHit(IdLookup.ambiguous, [for (final ids in byFullId.values) songs[ids.first]]);
+    }
+    return IdHit(IdLookup.withoutPerformer, [for (final i in byFullId.values.single) songs[i]]);
+  }
+
+  /// **Wszystkie** piosenki pod dokładnie tym id — bez rundy bez
+  /// `@wykonawca`. To jest kolizja id; dopasowanie po samym tytule-z-id
+  /// kolizją nie jest.
+  List<T> allByExactId(String id) => switch (lookupId(id)) {
+        IdHit(how: IdLookup.exact, :final songs) => songs,
+        _ => const [],
+      };
+
+  /// Piosenka po `lclId` ([lookupId]) — przy powtórzonym id pierwsza z listy,
+  /// przy niejednoznacznym `null`. Czy to domysł, mówi dopiero [lookupId].
+  T? byId(String id) => allById(id).firstOrNull;
+
+  /// **Wszystkie** piosenki pod tym id ([lookupId]) — w warsztacie id potrafi
+  /// się powtarzać, a wtedy „ta jedna” to za mało. Niejednoznaczne → pusto.
+  List<T> allById(String id) => switch (lookupId(id)) {
+        IdHit(how: IdLookup.exact || IdLookup.withoutPerformer, :final songs) => songs,
+        _ => const [],
+      };
+}
+
 /// Piosenki, z którymi porównujemy.
 ///
 /// Dwa kroki: najpierw tanio wybieramy kandydatów (ten sam tytuł, id,
@@ -95,7 +184,7 @@ class IdHit<T extends SongCore> {
 /// każdego porównujemy dokładnie ([compare]). Przy 2,5 tys. piosenek
 /// i przeliczaniu z każdym znakiem w edytorze to jest różnica między
 /// „nie widać” a „zacina się”.
-class SongIndex<T extends SongCore> {
+class SongIndex<T extends SongCore> implements SongIdLookup<T> {
   /// Tylu najbliższych po słowach porównujemy dokładnie, choćby byli daleko.
   static const int _nearest = 10;
   /// …a ponad nich każdego, kto jest przynajmniej tak blisko (Jaccard słów
@@ -105,11 +194,9 @@ class SongIndex<T extends SongCore> {
 
   final List<T> songs;
   final List<SongProfile> profiles;
+  /// Wyszukiwanie po id — te same reguły, co w samodzielnym [SongIdIndex].
+  final SongIdIndex<T> ids;
   final Map<String, List<int>> _byTitleKey = {};
-  final Map<String, List<int>> _byId = {};
-  /// Id bez członu `@wykonawca` → numery. Do drugiej rundy [byId] bez
-  /// skanowania i bez `split` na każdym profilu.
-  final Map<String, List<int>> _byBareId = {};
   final Map<String, List<int>> _byYoutube = {};
   /// Tekst dosłownie → numery, tylko dla piosenek bez ani jednego słowa
   /// (`♪ ♪`, same kropki): odwrócony indeks słów ich nie widzi, a to jedyna
@@ -118,13 +205,22 @@ class SongIndex<T extends SongCore> {
   /// Słowo → numery piosenek, w których występuje.
   final Map<String, List<int>> _byWord = {};
 
-  SongIndex(this.songs) : profiles = [] {
+  /// [profileOf] daje odcisk piosenki — domyślnie liczy go od nowa. To on
+  /// jest prawie całym kosztem budowy (mapy to ułamek), więc kto trzyma
+  /// odciski z poprzedniego razu, podaje je tu i odbudowa po zmianie jednej
+  /// piosenki kosztuje tyle, co odcisk tej jednej.
+  SongIndex(this.songs, {SongProfile Function(T song)? profileOf})
+      : profiles = [],
+        ids = SongIdIndex._empty(songs) {
+    final of = profileOf ?? SongProfile.new;
     for (var i = 0; i < songs.length; i++) {
-      _add(i, SongProfile(songs[i]));
+      _add(i, of(songs[i]));
     }
   }
 
-  SongIndex._empty(this.songs) : profiles = [];
+  SongIndex._empty(this.songs)
+      : profiles = [],
+        ids = SongIdIndex._empty(songs);
 
   /// Jak konstruktor, ale co [slice] oddaje wątek. Na webie `compute` nie ma
   /// osobnego wątku, a odciski 2,5 tys. piosenek, odwrócony indeks słów
@@ -155,10 +251,7 @@ class SongIndex<T extends SongCore> {
 
   void _add(int i, SongProfile p) {
     profiles.add(p);
-    if (p.id.isNotEmpty) {
-      _byId.putIfAbsent(p.id, () => []).add(i);
-      _byBareId.putIfAbsent(_bare(p.id), () => []).add(i);
-    }
+    ids._add(i, p.id);
     for (final k in p.titleKeys) {
       _byTitleKey.putIfAbsent(k, () => []).add(i);
     }
@@ -169,44 +262,17 @@ class SongIndex<T extends SongCore> {
     }
   }
 
-  static String _bare(String id) => id.split('@').first;
-
   int get length => songs.length;
   bool get isEmpty => songs.isEmpty;
 
-  /// Jedno wyszukiwanie po id dla wszystkich — edytora i piosenkomatu —
-  /// żeby ta sama poprawka nie miała w jednym miejscu celu, a w drugim nie.
-  /// Dokładnie, a przy chybieniu bez członu `@wykonawca` (zgłoszenie bywa
-  /// sprzed zmiany wykonawcy w apce); to drugie jest domysłem i wynik to mówi
-  /// ([IdHit.how]). Kilka różnych piosenek bez `@wykonawca` → [IdLookup.ambiguous],
-  /// nie pierwsza z brzegu. Puste id to nie id: `null`.
-  IdHit<T>? lookupId(String id) {
-    if (id.isEmpty) return null;
-    if (_byId[id] case final exact?) {
-      return IdHit(IdLookup.exact, [for (final i in exact) songs[i]]);
-    }
-    final bare = _byBareId[_bare(id)];
-    if (bare == null) return null;
-    final byFullId = <String, List<int>>{};
-    for (final i in bare) {
-      byFullId.putIfAbsent(profiles[i].id, () => []).add(i);
-    }
-    if (byFullId.length > 1) {
-      return IdHit(IdLookup.ambiguous, [for (final ids in byFullId.values) songs[ids.first]]);
-    }
-    return IdHit(IdLookup.withoutPerformer, [for (final i in byFullId.values.single) songs[i]]);
-  }
+  @override
+  IdHit<T>? lookupId(String id) => ids.lookupId(id);
 
-  /// Piosenka po `lclId` ([lookupId]) — przy powtórzonym id pierwsza z listy,
-  /// przy niejednoznacznym `null`. Czy to domysł, mówi dopiero [lookupId].
-  T? byId(String id) => allById(id).firstOrNull;
+  /// Patrz [SongIdIndex.byId].
+  T? byId(String id) => ids.byId(id);
 
-  /// **Wszystkie** piosenki pod tym id ([lookupId]) — w warsztacie id potrafi
-  /// się powtarzać, a wtedy „ta jedna” to za mało. Niejednoznaczne → pusto.
-  List<T> allById(String id) => switch (lookupId(id)) {
-        IdHit(how: IdLookup.exact || IdLookup.withoutPerformer, :final songs) => songs,
-        _ => const [],
-      };
+  /// Patrz [SongIdIndex.allById].
+  List<T> allById(String id) => ids.allById(id);
 
   SongMatch<T> _match(int i, SongProfile song, MatchSource source) => SongMatch(
         song: songs[i],
@@ -219,7 +285,7 @@ class SongIndex<T extends SongCore> {
   /// autor poprawiał; id z rundy bez `@wykonawca` bierze najpierw z [lookupId],
   /// żeby wiedzieć, że to domysł. `null`, gdy takiego id nie ma.
   SongMatch<T>? matchTo(String songId, SongProfile song, {MatchSource source = MatchSource.app}) {
-    final i = _byId[songId]?.first;
+    final i = ids._byId[songId]?.first;
     if (i == null) return null;
     return _match(i, song, source);
   }
@@ -291,8 +357,7 @@ class SongIndex<T extends SongCore> {
   /// tekst bez słów albo bliskość po słowach. Reszty nie trzeba porównywać.
   Set<int> _candidates(SongProfile song) => {
         for (final k in song.titleKeys) ...?_byTitleKey[k],
-        // Kandydaci, nie wniosek: tu także niejednoznaczne bez `@wykonawca`.
-        if (song.id.isNotEmpty) ...?(_byId[song.id] ?? _byBareId[_bare(song.id)]),
+        ...ids._candidates(song.id),
         if (song.youtubeId.isNotEmpty) ...?_byYoutube[song.youtubeId],
         if (song.words.isEmpty && song.text.isNotEmpty) ...?_byWordlessText[song.text],
         ..._nearestByWords(song),
@@ -328,7 +393,7 @@ class SongIndex<T extends SongCore> {
 /// pamięta, z czego powstała). Sama kolizja id deklaracją **nie jest** — nowa
 /// piosenka o zajętym id to konflikt, nie poprawka; o nim mówi dowód
 /// [SameId] w [SongIndex.matches].
-T? correctionTargetOf<T extends SongCore>(SongCore song, SongIndex<T> index) =>
+T? correctionTargetOf<T extends SongCore>(SongCore song, SongIdLookup<T> index) =>
     correctionTargetLookupOf(song, index)?.song;
 
 /// To samo, co [correctionTargetOf], plus **czy to domysł**: pierwowzór
@@ -336,7 +401,7 @@ T? correctionTargetOf<T extends SongCore>(SongCore song, SongIndex<T> index) =>
 /// albo cel, który piosenkomat sam zgadł (`correction_target_guessed`).
 /// Przy kilku pasujących bez wykonawcy nic nie wybieramy — `null`.
 ({T song, bool guessed})? correctionTargetLookupOf<T extends SongCore>(
-    SongCore song, SongIndex<T> index) {
+    SongCore song, SongIdLookup<T> index) {
   final data = song is SongRaw ? song.piosenkomatData : null;
   final basedOnSongId = song is SongRaw ? song.basedOnSongId : null;
 
