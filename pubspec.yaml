@@ -6,6 +6,11 @@ homepage: harcapp.web.app
 environment:
   sdk: ^3.7.2
 
+dependency_overrides:
+  # rss_dart (latest 1.0.14) still declares xml ^6.5.0, but works with xml 7;
+  # needed for pdf >=3.13 (and thus archive/image latest).
+  xml: ^7.0.1
+
 dependencies:
   flutter:
     sdk: flutter
@@ -39,10 +44,10 @@ dependencies:
   mime: ^2.0.0
   native_device_orientation: ^2.0.3
   oktoast: ^3.4.0
-  open_filex: ^4.7.0
+  open_filex: ^5.0.0
   path_provider: ^2.1.5
-  pdf: ^3.12.0
-  printing: ^5.14.0
+  pdf: ^3.13.1
+  printing: ^5.15.1
   provider: ^6.1.2
   qr_code_dart_scan: ^0.14.0
   qr_flutter: ^4.1.0  # generator
