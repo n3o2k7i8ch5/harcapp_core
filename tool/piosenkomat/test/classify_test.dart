@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:harcapp_core/song_book/parse_contrib_email.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/song_book/piosenkomat/song_issue.dart';
+import 'package:harcapp_core/song_book/song_origin.dart';
 import 'package:harcapp_core/song_book/submission/submission_contributor.dart';
 import 'package:harcapp_core/song_book/submission/submission_file.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
@@ -171,6 +172,34 @@ void main() {
       expect(pickCorrectionTarget(got.submission)?.guessed ?? false, isFalse);
       expect(issuesOf(got), contains(SongIssue.noTargetInApp));
       expect(issuesOf(got), isNot(contains(SongIssue.guessedCorrectionTarget)));
+    });
+
+    group('pochodzenie:', () {
+      const shrek = SongOrigin(SongOriginType.animation, 'Shrek');
+      SongBook bookWithShrek() => bookWith([sampleSong()..origins = [shrek]]);
+
+      test('poprawka bez pochodzenia (stara apka) bierze je z poprawianej piosenki', () async {
+        final got = classify(msgFrom(await completeEmail(isNew: false, song: sampleSong())),
+            book: bookWithShrek());
+        expect(pickCorrectionTarget(got.submission)?.id, 'tmp');
+        expect(got.song!.origins, [shrek], reason: 'podmiana w apce skasowałaby pochodzenie');
+        expect(got.submission.appMatch!.similarities.metadataDiff?.fields ?? [],
+            isNot(contains(MetadataField.origins)),
+            reason: 'brak pochodzenia nie może udawać zmiany');
+      });
+
+      test('poprawka z własnym pochodzeniem zostaje przy swoim', () async {
+        const film = SongOrigin(SongOriginType.film, 'Igrzyska śmierci');
+        final got = classify(
+            msgFrom(await completeEmail(isNew: false, song: sampleSong()..origins = [film])),
+            book: bookWithShrek());
+        expect(got.song!.origins, [film]);
+      });
+
+      test('nowa piosenka nie przejmuje pochodzenia podobnej z apki', () async {
+        final got = classify(msgFrom(await completeEmail(song: sampleSong())), book: bookWithShrek());
+        expect(got.song!.origins, isEmpty);
+      });
     });
 
     test('bez deklaracji, zmieniony tytuł, ten sam tekst → cel zgadnięty', () async {

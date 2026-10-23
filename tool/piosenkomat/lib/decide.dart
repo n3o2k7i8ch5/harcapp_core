@@ -164,14 +164,29 @@ Decision decide(Submission s, {BatchMatch? batch}) {
 /// Domysł nigdy nie udaje danych: `guessed` jedzie do śladu piosenki
 /// i daje uwagę `guessed-correction-target`. Domysłem jest cel dobrany po
 /// podobieństwie albo znaleziony dopiero bez `@wykonawca`.
-({String id, bool guessed})? pickCorrectionTarget(Submission s) {
-  if (!s.isCorrection) return null;
-  if (s.declaredCorrectionTarget != null) {
-    final id = s.isDeclaredTargetInApp ? s.appMatch?.song.id : null;
-    return id == null ? null : (id: id, guessed: s.declaredTargetLookup == IdLookup.withoutPerformer);
+({String id, bool guessed})? pickCorrectionTarget(Submission s) => s.isCorrection
+    ? pickCorrectionTargetFrom(
+        declared: s.declaredCorrectionTarget,
+        declaredLookup: s.declaredTargetLookup,
+        appMatch: s.appMatch,
+      )
+    : null;
+
+/// [pickCorrectionTarget] na samych faktach — `buildSubmission` pyta o cel,
+/// zanim zgłoszenie powstanie.
+({String id, bool guessed})? pickCorrectionTargetFrom({
+  required String? declared,
+  required IdLookup? declaredLookup,
+  required AppMatch? appMatch,
+}) {
+  if (declared != null) {
+    // Zadeklarowany cel jest w śpiewniku — dokładnie albo, jako domysł, bez
+    // `@wykonawca`. `buildSubmission` celuje wtedy [appMatch] w tę piosenkę.
+    final inApp = declaredLookup == IdLookup.exact || declaredLookup == IdLookup.withoutPerformer;
+    final id = inApp ? appMatch?.song.id : null;
+    return id == null ? null : (id: id, guessed: declaredLookup == IdLookup.withoutPerformer);
   }
-  final guess = s.appMatch;
-  return guess != null && canGuessCorrectionTarget(guess) ? (id: guess.song.id, guessed: true) : null;
+  return appMatch != null && canGuessCorrectionTarget(appMatch) ? (id: appMatch.song.id, guessed: true) : null;
 }
 
 /// Reguła: czy na [m] wolno wskazać poprawkę, która **nie powiedziała**,

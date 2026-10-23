@@ -6,6 +6,7 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../song_core.dart';
 import '../song_element.dart';
+import '../song_origin.dart';
 import 'package:harcapp_core/song_book/piosenkomat/piosenkomat_data.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 import 'providers.dart';
@@ -17,6 +18,9 @@ class SongRaw extends SongCore{
   String id;
   String title;
   List<String> hidTitles;
+  /// Zmieniane przez podmianę listy, nie w miejscu — kopie piosenki ją
+  /// współdzielą.
+  List<SongOrigin> origins;
   List<String> authors;
   List<String> performers;
   List<String> composers;
@@ -57,6 +61,7 @@ class SongRaw extends SongCore{
     this.id = song.id;
     this.title = song.title;
     this.hidTitles = song.hidTitles;
+    this.origins = song.origins;
     this.authors = song.authors;
     this.composers = song.composers;
     this.performers = song.performers;
@@ -89,6 +94,7 @@ class SongRaw extends SongCore{
     required this.id,
     required this.title,
     required this.hidTitles,
+    this.origins = const [],
     required this.authors,
     required this.composers,
     required this.performers,
@@ -172,6 +178,7 @@ class SongRaw extends SongCore{
 
     String title = respMap[SongCore.PARAM_TITLE];
     List<String> hidTitles = _stringList(respMap[SongCore.PARAM_HID_TITLES]);
+    List<SongOrigin> origins = SongOrigin.listFromJson(respMap[SongCore.PARAM_ORIGINS]);
     List<String> authors = _stringList(respMap[SongCore.PARAM_TEXT_AUTHORS]);
     List<String> composers = _stringList(respMap[SongCore.PARAM_COMPOSERS]);
     List<String> performers = _stringList(respMap[SongCore.PARAM_PERFORMERS]);
@@ -213,6 +220,7 @@ class SongRaw extends SongCore{
       id: id,
       title: title,
       hidTitles: hidTitles,
+      origins: origins,
       authors: authors,
       composers: composers,
       performers: performers,
@@ -241,6 +249,7 @@ class SongRaw extends SongCore{
     id: withId?id:newId,
     title: title,
     hidTitles: hidTitles,
+    origins: origins,
     authors: authors,
     composers: composers,
     performers: performers,
@@ -316,6 +325,9 @@ class SongRaw extends SongCore{
     Map map = {};
     map[SongCore.PARAM_TITLE] = title.trim();
     map[SongCore.PARAM_HID_TITLES] = hidTitles.map((text) => text.trim()).where((text) => text.isNotEmpty).toList();
+    final origins = [for(final origin in this.origins) if(origin.value.trim().isNotEmpty) origin.toJsonMap()];
+    if(origins.isNotEmpty)
+      map[SongCore.PARAM_ORIGINS] = origins;
     map[SongCore.PARAM_TEXT_AUTHORS] = authors.map((text) => text.trim()).where((text) => text.isNotEmpty).toList();
     map[SongCore.PARAM_COMPOSERS] = composers.map((text) => text.trim()).where((text) => text.isNotEmpty).toList();
     map[SongCore.PARAM_PERFORMERS] = performers.map((text) => text.trim()).where((text) => text.isNotEmpty).toList();
@@ -438,6 +450,8 @@ class SongRaw extends SongCore{
     if(title.trim().isNotEmpty)
       return false;
     if(hidTitles.where((a) => a.trim().isNotEmpty).isNotEmpty)
+      return false;
+    if(origins.any((o) => o.value.trim().isNotEmpty))
       return false;
     if(authors.where((a) => a.trim().isNotEmpty).isNotEmpty)
       return false;

@@ -641,6 +641,29 @@ class _TitleCard<TSong extends SongCore> extends StatelessWidget{
       onTap: onTitleTap,
     );
 
+    // Pochodzenie pod tytułem, każde osobną linią: „Z bajki: Shrek”.
+    Widget widgetOrigins = Padding(
+      padding: const EdgeInsets.only(bottom: Dimen.defMarg),
+      child: Column(
+        children: [
+          for(final origin in song.origins)
+            Text.rich(
+              TextSpan(children: [
+                TextSpan(
+                  text: '${origin.type.label}: ',
+                  style: AppTextStyle(fontSize: Dimen.textSizeNormal, color: hintEnab_(context)),
+                ),
+                TextSpan(
+                  text: origin.value,
+                  style: AppTextStyle(fontSize: Dimen.textSizeNormal, color: textEnab_(context), fontWeight: weightHalfBold),
+                ),
+              ]),
+              textAlign: TextAlign.center,
+            ),
+        ],
+      ),
+    );
+
     Widget widgetAuthor = Row(
         mainAxisSize: MainAxisSize.min,
         children:[
@@ -770,6 +793,9 @@ class _TitleCard<TSong extends SongCore> extends StatelessWidget{
                 children: [
 
                   widgetTitle,
+
+                  if(song.origins.isNotEmpty)
+                    widgetOrigins,
 
                   widgetAuthor,
 

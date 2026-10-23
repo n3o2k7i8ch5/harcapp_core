@@ -173,6 +173,7 @@ class SameRecording extends Similarity {
 enum MetadataField {
   title(SongCore.PARAM_TITLE, 'tytuł'),
   hidTitles(SongCore.PARAM_HID_TITLES, 'tytuły ukryte'),
+  origins(SongCore.PARAM_ORIGINS, 'pochodzenie'),
   authors(SongCore.PARAM_TEXT_AUTHORS, 'autorzy'),
   composers(SongCore.PARAM_COMPOSERS, 'kompozytorzy'),
   performers(SongCore.PARAM_PERFORMERS, 'wykonawcy'),

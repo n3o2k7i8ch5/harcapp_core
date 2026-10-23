@@ -518,14 +518,6 @@ class Submission {
   /// pyta wprost — więc „autor nic nie powiedział” musi znaczyć „oba puste”.
   bool get hasAuthorText =>
       hasUserMessage || (correctionMessage ?? '').trim().isNotEmpty;
-
-  /// Czy zadeklarowany cel jest w śpiewniku — dokładnie albo, jako domysł,
-  /// bez `@wykonawca`. `buildSubmission` celuje wtedy [appMatch] w znalezioną
-  /// piosenkę. Który cel z tego wynika, rozstrzyga `pickCorrectionTarget`.
-  bool get isDeclaredTargetInApp =>
-      declaredCorrectionTarget != null &&
-      (declaredTargetLookup == IdLookup.exact ||
-          declaredTargetLookup == IdLookup.withoutPerformer);
 }
 
 // ---------------------------------------------------------------------------

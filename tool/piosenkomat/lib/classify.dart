@@ -192,7 +192,7 @@ Submission buildSubmission(
     song.id = song.idFromTitle(withPerformer: true);
   }
 
-  final profile = song == null ? null : SongProfile(song);
+  var profile = song == null ? null : SongProfile(song);
   // Apka mówi, którą piosenkę autor poprawiał: porównujemy z NIĄ, a nie
   // z najbliższą tytułem. Bez tej deklaracji zostaje zgadywanie.
   //
@@ -208,16 +208,33 @@ Submission buildSubmission(
   AppMatch? appMatch;
   var alsoInApp = <AppMatch>[];
   final declaredHit = declared == null ? null : book.lookupId(declared);
-  if (profile != null) {
+  void matchWithApp(SongProfile profile) {
     final found = book.matches(profile);
     // Ten sam `lookupId`, co w edytorze: trafienie bez `@wykonawca` to
     // domysł, a kilka pasujących bez wykonawcy — brak celu, nie pierwszy
     // z brzegu.
+    appMatch = null;
     if (declaredHit case IdHit(how: IdLookup.exact || IdLookup.withoutPerformer, :final songs)) {
       appMatch = book.matchTo(songs.first.id, profile);
     }
     appMatch ??= found.firstOrNull;
     alsoInApp = [for (final m in found) if (m.song.id != appMatch?.song.id) m].take(2).toList();
+  }
+  if (profile != null) {
+    matchWithApp(profile);
+    // Poprawka podmienia w apce całą piosenkę, a apka sprzed pochodzenia
+    // („Z bajki: Shrek”) wysyła ją bez niego — podmiana by je skasowała. Bez
+    // własnego pochodzenia poprawka bierze je więc z piosenki, którą poprawia,
+    // i to przed porównaniem: brak pochodzenia nie może udawać zmiany.
+    // Przegląd je pokazuje, więc da się je jeszcze zmienić.
+    final target = isCorrection
+        ? pickCorrectionTargetFrom(declared: declared, declaredLookup: declaredHit?.how, appMatch: appMatch)
+        : null;
+    if (target != null && song!.origins.isEmpty && appMatch!.song.origins.isNotEmpty) {
+      song.origins = appMatch!.song.origins;
+      profile = SongProfile(song);
+      matchWithApp(profile);
+    }
   }
   return Submission(
     message: rep,

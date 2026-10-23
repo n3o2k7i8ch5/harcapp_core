@@ -111,6 +111,8 @@ class SongProfile {
       {
         MetadataField.title: s.title.trim(),
         MetadataField.hidTitles: _list(s.hidTitles),
+        // Tylko jako opis, nie jako tytuł: wspólna bajka to nie ta sama piosenka.
+        MetadataField.origins: _list([for (final o in s.origins) o.text]),
         MetadataField.authors: _list(s.authors),
         MetadataField.composers: _list(s.composers),
         MetadataField.performers: _list(s.performers),

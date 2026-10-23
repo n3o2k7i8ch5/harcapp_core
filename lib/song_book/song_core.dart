@@ -4,6 +4,8 @@ import 'package:harcapp_core/comm_classes/text_utils.dart';
 
 import 'package:harcapp_core/values/people/contributor_ref.dart';
 
+import 'song_origin.dart';
+
 SongRate? songRateFromInt(int value){
   switch(value){
     case 1: return SongRate.rate1;
@@ -64,6 +66,9 @@ abstract class SongCore{
 
   static const String PARAM_TITLE = 'title';
   static const String PARAM_HID_TITLES = 'hid_titles';
+  /// Pochodzenie ([SongOrigin]): z bajki, z filmu, przeróbka… Bez klucza,
+  /// gdy go nie ma — tak jest u prawie każdej piosenki.
+  static const String PARAM_ORIGINS = 'origins';
   static const String PARAM_TEXT_AUTHORS = 'text_authors';
   static const String PARAM_PERFORMERS = 'performers';
   static const String PARAM_COMPOSERS = 'composers';
@@ -90,6 +95,7 @@ abstract class SongCore{
   String get id;
   String get title;
   List<String> get hidTitles;
+  List<SongOrigin> get origins;
   List<String> get authors;
   List<String> get composers;
   List<String> get performers;

@@ -471,6 +471,12 @@ Oba pola nigdy nie jadą do `all_songs.hrcpsng`: `toApiJsonMap` wypuszcza je tyl
 na życzenie narzędzia, a `review --push` zdejmuje je w `final-*` — razem z pamięcią
 o pierwowzorze w samej piosence (`based_on_song_id`).
 
+**Pochodzenie** („Z bajki: Shrek”, `origins` w JSON-ie piosenki) poprawka bez
+własnego bierze z piosenki, którą poprawia: apka sprzed pochodzenia wysyła
+piosenkę bez niego, a podmiana w `all_songs` by je skasowała. Dzieje się to
+w `scan`, przed porównaniem z apką — brak pochodzenia nie udaje zmiany. W przeglądzie
+pochodzenie widać, więc da się je jeszcze zmienić albo usunąć.
+
 ## Przegląd (`review`)
 
 `review` porównuje `candidates-*` z `reviewed-*` po id wątku (`thread_id`

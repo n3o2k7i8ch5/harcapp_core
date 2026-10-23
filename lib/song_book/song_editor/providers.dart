@@ -3,6 +3,7 @@ import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:provider/provider.dart';
 
 import 'package:harcapp_core/values/people/contributor_ref.dart';
+import '../song_origin.dart';
 import 'song_raw.dart';
 
 
@@ -21,6 +22,11 @@ class CurrentItemProvider extends ChangeNotifier{
 
   late TextEditingController ytLinkController;
 
+  /// Pole nazwy dla każdego pochodzenia, w tej samej kolejności. Wiersze
+  /// w edytorze poznają się po kontrolerze — po usunięciu jednego reszta
+  /// zachowuje swój tekst.
+  late List<TextEditingController> originControllers;
+
   void _updateControllers(SongRaw song){
     titleController.text = song.title;
     hiddenTitlesController.texts = song.hidTitles;
@@ -29,6 +35,8 @@ class CurrentItemProvider extends ChangeNotifier{
     performersController.texts = song.performers;
 
     ytLinkController.text = song.youtubeUrl??'';
+
+    originControllers = [for(final origin in song.origins) TextEditingController(text: origin.value)];
   }
 
   void set({required SongRaw song, bool notify = true}) {
@@ -96,6 +104,30 @@ class CurrentItemProvider extends ChangeNotifier{
     hiddenTitlesController.removeAt(index);
     notifyListeners();
     return hiddenTitlesController.texts;
+  }
+
+  List<SongOrigin> get origins => _song.origins;
+
+  void addOrigin(SongOriginType type, {bool notify = true}){
+    _song.origins = [..._song.origins, SongOrigin(type, '')];
+    originControllers = [...originControllers, TextEditingController()];
+    if(notify) notifyListeners();
+  }
+
+  void setOriginType(int index, SongOriginType type, {bool notify = true}){
+    _song.origins = [..._song.origins]..[index] = _song.origins[index].withType(type);
+    if(notify) notifyListeners();
+  }
+
+  void setOriginValue(int index, String value, {bool notify = true}){
+    _song.origins = [..._song.origins]..[index] = _song.origins[index].withValue(value);
+    if(notify) notifyListeners();
+  }
+
+  void removeOriginAt(int index, {bool notify = true}){
+    _song.origins = [..._song.origins]..removeAt(index);
+    originControllers = [...originControllers]..removeAt(index);
+    if(notify) notifyListeners();
   }
 
   setAuthors(List<String> value, {bool notify = true}){
