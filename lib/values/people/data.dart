@@ -1517,7 +1517,7 @@ const RegisteredContributor IGOR_SOLECKI = RegisteredContributor(
       srodowisko: Srodowisko.custom('Rosa Venti', orgSlug: 'zhr'),
       rankHarc: RankHarc.zhrWywiadowca,
   ),
-  emails: ['mrk282665@gmail.com'],
+  emails: ['mrk282665@gmail.com', 'igorsolecki.58@gmail.com'],
 );
 const RegisteredContributor INGA_WIERZBICKA = RegisteredContributor(
   person: Person(
@@ -5733,4 +5733,35 @@ const RegisteredContributor ZUZANNA_WARCHOL = RegisteredContributor(
       srodowisko: Srodowisko.hufiec('szczecin_pogodno', showChoragiew: false, showOkreg: false),
   ),
   emails: const [],
+);
+const RegisteredContributor ALEKSANDRA_KRUSZEWSKA = RegisteredContributor(
+  person: Person(
+    name: 'Aleksandra Kruszewska',
+  ),
+  emails: ['a.krusz3wska@gmail.com'],
+);
+const RegisteredContributor MARTYNA_KWASNIAK = RegisteredContributor(
+  person: Person(
+    name: 'Martyna Kwaśniak',
+    druzyna: '89 SDWI Bieszczadzkie Anioły',
+    srodowisko: Srodowisko.custom('Sosnowiec'),
+    rankHarc: RankHarc.zhpOchotniczka,
+  ),
+  emails: ['mkwasniak45@gmail.com', 'cieplycroissant@gmail.com'],
+);
+const RegisteredContributor TOMASZ_LIPKA = RegisteredContributor(
+  person: Person(
+    name: 'Tomasz Lipka',
+    druzyna: 'V Leżajska Drużyna Harcerzy ,,WIR" im. por. Konrada Bartoszewskiego ps. ,,Wir"',
+    srodowisko: Srodowisko.hufiec('poludniowo_wschodni_grody_harcerzy'),
+    rankHarc: RankHarc.zhrCwik,
+  ),
+  emails: ['tomasz.lipka@zhr.pl'],
+);
+const RegisteredContributor JAKUB_JONAS = RegisteredContributor(
+  person: Person(
+    name: 'Jakub Jonas',
+    druzyna: '96. Drużyna Harcerska "Antillia"',
+  ),
+  emails: ['kubajonas06@gmail.com'],
 );
