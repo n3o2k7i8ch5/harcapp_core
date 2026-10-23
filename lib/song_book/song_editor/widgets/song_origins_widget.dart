@@ -112,7 +112,7 @@ class SongOriginsWidget extends StatelessWidget{
           Padding(
             padding: listPadding + const EdgeInsets.all(Dimen.iconMarg),
             child: Text(
-              'Jeśli dotyczy — z jakiej bajki, filmu, serialu, musicalu lub czego to przeróbka.',
+              'Jeśli dotyczy: z jakiej bajki, filmu, serialu, musicalu lub czego to przeróbka.',
               style: AppTextStyle(
                 fontWeight: weightHalfBold,
                 color: hintEnab_(context),

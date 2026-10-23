@@ -241,11 +241,19 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
                 ),
                 child: ValueListenableBuilder<bool>(
                   valueListenable: showTopHintNotifier,
-                  builder: (_, visible, _) => AnimatedOpacity(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if(widget.hintIcon != null && !widget.multi)
+                  builder: (_, visible, _) {
+                    Widget text = Text(
+                      multiController!.length==1?hintTop:multiHintTop,
+                      style: AppTextStyle(
+                          fontSize: AppTextFieldHint.topHintFontSize,
+                          fontWeight: AppTextFieldHint.topHintFontWeight,
+                          color: AppTextFieldHint.topHintColor(context)
+                      ),
+                    );
+                    return AnimatedOpacity(
+                      child: widget.hintIcon == null || widget.multi? text: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
                           Padding(
                             padding: EdgeInsets.only(right: 4),
                             child: Icon(
@@ -254,19 +262,13 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
                               color: AppTextFieldHint.topHintColor(context),
                             ),
                           ),
-                        Text(
-                          multiController!.length==1?hintTop:multiHintTop,
-                          style: AppTextStyle(
-                              fontSize: AppTextFieldHint.topHintFontSize,
-                              fontWeight: AppTextFieldHint.topHintFontWeight,
-                              color: AppTextFieldHint.topHintColor(context)
-                          ),
-                        ),
-                      ],
-                    ),
-                    duration: Duration(milliseconds: 300),
-                    opacity:widget.alwaysShowTopHint || visible?1:0,
-                  )
+                          Flexible(child: text),
+                        ],
+                      ),
+                      duration: Duration(milliseconds: 300),
+                      opacity:widget.alwaysShowTopHint || visible?1:0,
+                    );
+                  },
                 ),
               ),
 
