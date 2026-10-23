@@ -1379,11 +1379,14 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
 
   Future<HrcpknspktData> toHrcpknspktData() async{
     final Map<String, Uint8List> attachmentFiles = {};
-    for (final attachment in (attachments ?? const <BaseKonspektAttachment>[]).whereType<KonspektAttachment>())
+    // Klamry celowo: bez nich DDC (web w trybie debug) kończy zewnętrzną pętlę
+    // po pierwszym `await` — bez błędu, z jednym plikiem zamiast wszystkich.
+    for (final attachment in (attachments ?? const <BaseKonspektAttachment>[]).whereType<KonspektAttachment>()) {
       for (final FileFormat format in attachment.assets.keys) {
         final bytes = await attachment.getAssetBytes(name, format, category);
         if (bytes != null) attachmentFiles['${attachment.name}.${format.extension}'] = bytes;
       }
+    }
 
     return HrcpknspktData(
         coverImage: (await readByteDataFromAssets(coverPath))!.buffer.asUint8List(),

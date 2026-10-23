@@ -84,6 +84,19 @@ void main() {
 
   MatchLevel? between(String a, String b) => levelOf(compare(SongProfile(index.byId(a)!), SongProfile(index.byId(b)!)));
 
+  test('ponowny import: każda piosenka znajduje w śpiewniku siebie, bez różnic', () {
+    // Ten sam plik wczytany drugi raz — jak przy imporcie `all_songs` do
+    // warsztatu na stronie: inne obiekty, ta sama treść.
+    final (official, conf) = importHrcpsng(File('assets/songs/all_songs.hrcpsng').readAsStringSync());
+    final notFound = [
+      for (final song in [...official, ...conf])
+        if (index.matches(SongProfile(song)).firstOrNull case final best
+            when best?.song.id != song.id || best?.level != MatchLevel.identical)
+          '${song.id}: ${best?.detail}',
+    ];
+    expect(notFound, isEmpty);
+  });
+
   group('pary ze śpiewnika:', () {
     test('ta sama piosenka pod innym tytułem albo w innej wersji', () {
       for (final (a, b) in _sameSong) {
