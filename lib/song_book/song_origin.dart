@@ -11,18 +11,16 @@ import 'song_tags.dart';
 /// Rodzaj pochodzenia. [id] jedzie do JSON-a piosenki, [label] — na ekran.
 /// Nowy rodzaj to nowa pozycja tutaj.
 enum SongOriginType implements IconTextEnum{
-  animation('animation', 'Z bajki', 'Bajka', MdiIcons.castle, tag: SongTag.TAG_Z_BAJEK),
-  film('film', 'Z filmu', 'Film', MdiIcons.movieOpenOutline),
-  series('series', 'Z serialu', 'Serial', MdiIcons.televisionClassic),
-  musical('musical', 'Z musicalu', 'Musical', MdiIcons.dramaMasks),
-  rewrite('rewrite', 'Przeróbka', 'Oryginał', MdiIcons.textBoxEditOutline, tag: SongTag.TAG_PRZEROBKI);
+  animation('animation', 'Z bajki', MdiIcons.castle, tag: SongTag.TAG_Z_BAJEK),
+  film('film', 'Z filmu', MdiIcons.movieOpenOutline),
+  series('series', 'Z serialu', MdiIcons.televisionClassic),
+  musical('musical', 'Z musicalu', MdiIcons.dramaMasks),
+  rewrite('rewrite', 'Przeróbka', MdiIcons.textBoxEditOutline, tag: SongTag.TAG_PRZEROBKI);
 
-  const SongOriginType(this.id, this.label, this.valueHint, this.icon, {this.tag});
+  const SongOriginType(this.id, this.label, this.icon, {this.tag});
 
   final String id;
   final String label;
-  /// Podpowiedź w polu nazwy w edytorze.
-  final String valueHint;
   @override
   final IconData icon;
   /// Tag, który piosenka z takim pochodzeniem musi mieć — filtr w apce działa
@@ -51,7 +49,6 @@ class SongOrigin{
   /// Linia pod tytułem: „Z bajki: Shrek”.
   String get text => '${type.label}: $value';
 
-  SongOrigin withType(SongOriginType type) => SongOrigin(type, value);
   SongOrigin withValue(String value) => SongOrigin(type, value);
 
   Map<String, String> toJsonMap() => {

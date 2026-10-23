@@ -14,6 +14,9 @@ class AppTextFieldHint extends StatefulWidget{
 
   final String hint;
   final String? hintTop;
+  /// Ikonka przed podpowiedzią — w pustym polu i w podpisie nad nim, w ich
+  /// rozmiarze i kolorze. Tylko dla pola pojedynczego.
+  final IconData? hintIcon;
   final bool alwaysShowTopHint;
   final TextEditingController? controller;
   final FocusNode? focusNode;
@@ -55,6 +58,7 @@ class AppTextFieldHint extends StatefulWidget{
   const AppTextFieldHint({
     required this.hint,
     this.hintTop,
+    this.hintIcon,
     this.alwaysShowTopHint = false,
     this.controller,
     this.focusNode,
@@ -201,6 +205,7 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
         },
         counterStyle: widget.counterStyle,
         hint: hint,
+        hintIcon: widget.hintIcon,
         hintStyle: hintStyle,
         contentPadding: widget.contentPadding,
         maxLength: widget.maxLength,
@@ -237,13 +242,27 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
                 child: ValueListenableBuilder<bool>(
                   valueListenable: showTopHintNotifier,
                   builder: (_, visible, _) => AnimatedOpacity(
-                    child: Text(
-                      multiController!.length==1?hintTop:multiHintTop,
-                      style: AppTextStyle(
-                          fontSize: AppTextFieldHint.topHintFontSize,
-                          fontWeight: AppTextFieldHint.topHintFontWeight,
-                          color: AppTextFieldHint.topHintColor(context)
-                      ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if(widget.hintIcon != null && !widget.multi)
+                          Padding(
+                            padding: EdgeInsets.only(right: 4),
+                            child: Icon(
+                              widget.hintIcon,
+                              size: AppTextFieldHint.topHintFontSize + 2,
+                              color: AppTextFieldHint.topHintColor(context),
+                            ),
+                          ),
+                        Text(
+                          multiController!.length==1?hintTop:multiHintTop,
+                          style: AppTextStyle(
+                              fontSize: AppTextFieldHint.topHintFontSize,
+                              fontWeight: AppTextFieldHint.topHintFontWeight,
+                              color: AppTextFieldHint.topHintColor(context)
+                          ),
+                        ),
+                      ],
                     ),
                     duration: Duration(milliseconds: 300),
                     opacity:widget.alwaysShowTopHint || visible?1:0,
@@ -264,6 +283,8 @@ class AppTextFieldHintState extends State<AppTextFieldHint>{
 class BaseTextFieldHint extends StatelessWidget {
 
   final String? hint;
+  /// Ikonka przed podpowiedzią w pustym polu.
+  final IconData? hintIcon;
   final TextEditingController controller;
   final FocusNode? focusNode;
   final TextStyle? style;
@@ -285,6 +306,7 @@ class BaseTextFieldHint extends StatelessWidget {
 
   const BaseTextFieldHint({
     required this.hint,
+    this.hintIcon,
     required this.controller,
     this.focusNode,
     this.style,
@@ -316,7 +338,15 @@ class BaseTextFieldHint extends StatelessWidget {
     onChanged: onChanged,
     decoration: InputDecoration(
         counterStyle: counterStyle ?? AppTextStyle(color: hintEnab_(context)),
-        hintText: hint,
+        hintText: hintIcon == null? hint: null,
+        hint: hintIcon == null? null: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(hintIcon, size: (hintStyle?.fontSize ?? Dimen.textSizeBig) + 2, color: hintStyle?.color ?? hintEnab_(context)),
+            SizedBox(width: 6),
+            Flexible(child: Text(hint??'', style: hintStyle, overflow: TextOverflow.ellipsis)),
+          ],
+        ),
         hintStyle: hintStyle,
         border: showUnderline ? null : InputBorder.none,
         contentPadding: contentPadding,

@@ -3,7 +3,6 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_button.dart';
-import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_dropdown.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
@@ -15,6 +14,8 @@ import '../../song_origin.dart';
 import '../providers.dart';
 
 /// Sekcja „Pochodzenie”: każde to wiersz rodzaj + nazwa („Z bajki” + „Shrek”).
+/// Nieobowiązkowa — podpowiedź zaczyna się od „Jeśli dotyczy”, żeby nikt nie
+/// szukał pochodzenia na siłę.
 ///
 /// Rodzaj z tagiem (z bajki → `#ZBajek`) od razu dokłada ten tag do piosenki:
 /// filtr w apce działa po tagach, a test śpiewnika pilnuje, żeby się zgadzały.
@@ -67,35 +68,17 @@ class SongOriginsWidget extends StatelessWidget{
         for(int i=0; i<prov.origins.length; i++)
           Padding(
             key: ObjectKey(prov.originControllers[i]),
-            padding: listPadding + EdgeInsets.only(bottom: i < prov.origins.length - 1? Dimen.defMarg: 0),
+            padding: listPadding,
             child: Row(
               children: [
 
-                AppDropdown<SongOriginType>(
-                  items: SongOriginType.values,
-                  onSelected: (type){
-                    prov.setOriginType(i, type);
-                    _ensureTag(context, prov, type);
-                    onChanged?.call(prov.origins);
-                  },
-                  child: SimpleButton.from(
-                    context: context,
-                    icon: prov.origins[i].type.icon,
-                    text: prov.origins[i].type.label,
-                    textColor: iconEnab_(context),
-                    color: backgroundIcon_(context),
-                    radius: AppCard.defRadius,
-                    margin: EdgeInsets.zero,
-                    onTap: null,
-                  ),
-                ),
-
-                const SizedBox(width: Dimen.defMarg),
-
+                // Zwykłe pole jak „Tytuł” czy „Autor słów”: rodzaj z ikonką to
+                // jego podpowiedź. Zmienić rodzaj = usunąć i dodać nowy.
                 Expanded(
                   child: AppTextFieldHint(
                     controller: prov.originControllers[i],
-                    hint: '${prov.origins[i].type.valueHint}:',
+                    hint: '${prov.origins[i].type.label}:',
+                    hintIcon: prov.origins[i].type.icon,
                     style: AppTextStyle(
                       fontSize: Dimen.textSizeBig,
                       fontWeight: weightHalfBold,
@@ -129,7 +112,7 @@ class SongOriginsWidget extends StatelessWidget{
           Padding(
             padding: listPadding + const EdgeInsets.all(Dimen.iconMarg),
             child: Text(
-              'Z bajki, z filmu, z serialu, z musicalu albo czego to przeróbka.',
+              'Jeśli dotyczy — z jakiej bajki, filmu, serialu, musicalu lub czego to przeróbka.',
               style: AppTextStyle(
                 fontWeight: weightHalfBold,
                 color: hintEnab_(context),

@@ -54,6 +54,8 @@ class _AppDropdownState<T extends IconTextEnum> extends State<AppDropdown<T>> {
       context: context,
       position: position,
       shape: RoundedRectangleBorder(borderRadius: radius),
+      // Bez przycięcia podświetlona pozycja wystaje kanciasto poza zaokrąglone rogi.
+      clipBehavior: Clip.antiAlias,
       color: widget.color ?? background_(context),
       elevation: 8,
       constraints: BoxConstraints(minWidth: button.size.width),

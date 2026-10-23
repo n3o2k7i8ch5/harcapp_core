@@ -114,11 +114,6 @@ class CurrentItemProvider extends ChangeNotifier{
     if(notify) notifyListeners();
   }
 
-  void setOriginType(int index, SongOriginType type, {bool notify = true}){
-    _song.origins = [..._song.origins]..[index] = _song.origins[index].withType(type);
-    if(notify) notifyListeners();
-  }
-
   void setOriginValue(int index, String value, {bool notify = true}){
     _song.origins = [..._song.origins]..[index] = _song.origins[index].withValue(value);
     if(notify) notifyListeners();
