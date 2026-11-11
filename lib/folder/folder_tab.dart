@@ -40,10 +40,14 @@ class FolderBaseTab extends StatelessWidget implements PreferredSizeWidget{
 
 class FolderTwoLineTab extends StatelessWidget implements PreferredSizeWidget{
 
+  static const TextStyle defFirstLineTextStyle = const AppTextStyle(fontWeight: weightHalfBold);
+  static const TextStyle defSecondLineTextStyle = const AppTextStyle(fontWeight: weightNormal);
+
   final Widget? leading;
   final String text;
   final String? subText;
   final CrossAxisAlignment textAlignment;
+  final TextStyle? textStyle;
   final TextStyle? subTextStyle;
 
   const FolderTwoLineTab({
@@ -51,6 +55,7 @@ class FolderTwoLineTab extends StatelessWidget implements PreferredSizeWidget{
     required this.text,
     this.subText,
     this.textAlignment = CrossAxisAlignment.start,
+    this.textStyle,
     this.subTextStyle,
     super.key
   });
@@ -62,8 +67,8 @@ class FolderTwoLineTab extends StatelessWidget implements PreferredSizeWidget{
         crossAxisAlignment: textAlignment,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(text, style: const AppTextStyle(fontWeight: weightHalfBold)),
-          if(subText!=null) Text(subText!, style: subTextStyle ?? const AppTextStyle()),
+          Text(text, style: textStyle ?? defFirstLineTextStyle),
+          if(subText!=null) Text(subText!, style: subTextStyle ?? defSecondLineTextStyle),
         ]
     ),
   );
