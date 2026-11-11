@@ -5,12 +5,14 @@ import 'package:harcapp_core/values/dimen.dart';
 
 class SongContributionWidget extends StatelessWidget{
 
-  const SongContributionWidget({super.key});
+  final EdgeInsets padding;
+
+  const SongContributionWidget({this.padding = const EdgeInsets.all(Dimen.sideMarg), super.key});
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
     physics: const BouncingScrollPhysics(),
-    padding: EdgeInsets.all(Dimen.sideMarg),
+    padding: padding,
     child: AppText(
       songContributionRules.values.first,
       size: Dimen.textSizeBig,
