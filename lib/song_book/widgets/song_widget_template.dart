@@ -947,7 +947,7 @@ class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<T
         final position = renderBox.localToGlobal(Offset.zero).dy;// - parent.widget.topScreenPadding;
         songWidget.onRateTap!(position);
       },
-      show: (_, _, _) => true,
+      show: (_, songWidget, _) => songWidget.onRateTap != null,
     ),
 
     _ButtonData(
@@ -961,7 +961,7 @@ class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<T
         name: 'Albumy',
         iconData: MdiIcons.bookmarkOutline,
         onPressed: (_, songWidget, _) => songWidget.onAlbumsTap?.call(),
-        show: (_, _, _) => true
+        show: (_, songWidget, _) => songWidget.onAlbumsTap != null
     ),
 
     _ButtonData(
@@ -975,14 +975,14 @@ class _ButtonsWidgetState<TSong extends SongCore> extends State<_ButtonsWidget<T
         name: 'Modyfikuj',
         iconData: MdiIcons.pencilOutline,
         onPressed: (context, parent, _) => parent.onEditTap?.call(TextSizeProvider.of(context)),
-        show: (_, _, _) => true
+        show: (_, songWidget, _) => songWidget.onEditTap != null
     ),
 
     _ButtonData(
         name: 'Kopiuj treść',
         iconData: MdiIcons.contentCopy,
         onPressed: (_, songWidget, _) => songWidget.onCopyTap?.call(),
-        show: (_, _, _) => true
+        show: (_, songWidget, _) => songWidget.onCopyTap != null
     ),
 
 

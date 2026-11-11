@@ -117,6 +117,11 @@ abstract class SongCore{
   }
   bool get isOwn;
 
+  /// Oficjalna piosenka śpiewnika — po przedrostku id.
+  bool get isOfficial => id.length >= 3 && id.substring(0, 3) == 'o!_';
+  /// Piosenka niejawna — po przedrostku id.
+  bool get isConfid => id.length >= 4 && id.substring(0, 4) == 'oc!_';
+
   List<String> get tags;
   bool get hasChords;
 

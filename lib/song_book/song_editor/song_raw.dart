@@ -34,8 +34,6 @@ class SongRaw extends SongCore{
 
   bool get isOwn => !isOfficial && !isConfid;
 
-  bool get isConfid => id.length >= 4 && id.substring(0, 4) == 'oc!_';
-  bool get isOfficial => id.length >= 3 && id.substring(0, 3) == 'o!_';
 
   /// Id z tytułu (i wykonawcy), z przedrostkiem jak dotąd: `oc!_` albo `o!_`.
   String idFromTitle({required bool withPerformer}) =>
