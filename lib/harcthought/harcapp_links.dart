@@ -44,6 +44,20 @@ class HarcappLinks {
   static const String articleSourceListTemplate = '/articles/:source';
   static const String articleItemTemplate = '/articles/:source/:localId';
 
+  static const String sprawnosciListTemplate = '/sprawnosci';
+  static const String sprawnosciBookTemplate = '/sprawnosci/:bookId';
+  /// [sprawnosciFamilyTemplate] relative to [sprawnosciBookTemplate] — the web
+  /// router nests the family route under the book route.
+  static const String sprawnosciFamilySubTemplate = ':group/:family';
+  static const String sprawnosciFamilyTemplate =
+      '$sprawnosciBookTemplate/$sprawnosciFamilySubTemplate';
+
+  // Web-only pages.
+  static const String songContributionTemplate = '/song';
+  static const String songContributionRulesTemplate = '/song_contribution_rules';
+  static const String konspektWorkspaceTemplate = '/konspekty/warsztat';
+  static const String privacyPolicyTemplate = '/privacy_policy';
+
   // Short forms (reserved — not yet wired up).
   static const String poradnikListTemplateShort = '/p';
   static const String poradnikItemTemplateShort = '/p/:name';
@@ -73,6 +87,14 @@ class HarcappLinks {
     final tpl = short ? konspektItemTemplateShort : konspektItemTemplate;
     return tpl.replaceFirst(':category', category.path);
   }
+
+  static String sprawnosciBookPath(String bookSlug) =>
+      _fill(sprawnosciBookTemplate, {'bookId': bookSlug});
+
+  static String sprawnosciFamilyPath(
+          String bookSlug, String groupSlug, String familySlug) =>
+      _fill(sprawnosciFamilyTemplate,
+          {'bookId': bookSlug, 'group': groupSlug, 'family': familySlug});
 
   // ---------------- Builders ----------------
   // List pages (section-level share targets).
@@ -193,6 +215,15 @@ class HarcappLinks {
 
   static String articleOf(CoreArticle a, {bool short = false}) =>
       article(a.source, a.localId, short: short);
+
+  static String sprawnosciList() => '$baseUrl$sprawnosciListTemplate';
+
+  static String sprawnosciBook(String bookSlug) =>
+      '$baseUrl${sprawnosciBookPath(bookSlug)}';
+
+  static String sprawnosciFamily(
+          String bookSlug, String groupSlug, String familySlug) =>
+      '$baseUrl${sprawnosciFamilyPath(bookSlug, groupSlug, familySlug)}';
 
   // ---------------- Parser ----------------
   /// Parse any harcapp.web.app URL (long or short form) into a typed link.
