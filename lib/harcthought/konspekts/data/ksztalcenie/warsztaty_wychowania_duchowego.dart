@@ -179,6 +179,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       attach_scenka_wychowawcza,
 
+      attach_celowosc_harcerstwa_scenariusze,
+
       ...attach_kszt_mechanizmy_ksztaltowania_duchowosci,
 
       attach_narracja_opis,
@@ -248,6 +250,9 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
 
       material_budzik,
       material_zal_scenka_wychowawcza,
+
+      material_zal_celowosc_harcerstwa_scenariusze,
+      material_dlugopis_do_glosowania,
 
       ...materials_kszt_mechanizmy_ksztaltowania_duchowosci,
 
@@ -353,6 +358,8 @@ Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(
       step_group_etapy_rozwoju_duchowosci,
 
       step_group_scenka_wychowawcza,
+
+      step_group_celowosc_harcerstwa,
 
       // step_group_zdolnosc_integracji_duchowosci,
 

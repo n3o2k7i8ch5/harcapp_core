@@ -285,7 +285,20 @@ const KonspektAttachment attach_duchowosc_harcerska_tezy = KonspektAttachment(
   },
 );
 
-const String attach_html_szybkie_strzaly_dyskusyjne = '<a href="$attach_name_szybkie_strzaly_dyskusyjne@attachment">$attach_title_szybkie_strzaly_dyskusyjne</a>';
+const String attach_html_celowosc_harcerstwa_scenariusze = '<a href="$attach_name_celowosc_harcerstwa_scenariusze@attachment">$attach_title_celowosc_harcerstwa_scenariusze</a>';
+const String attach_name_celowosc_harcerstwa_scenariusze = 'celowosc_harcerstwa_scenariusze';
+const String attach_title_celowosc_harcerstwa_scenariusze = 'Celowość harcerstwa - scenariusze';
+KonspektAttachment attach_celowosc_harcerstwa_scenariusze = KonspektAttachment(
+  name: attach_name_celowosc_harcerstwa_scenariusze,
+  title: attach_title_celowosc_harcerstwa_scenariusze,
+  assets: {
+    FileFormat.pdf: 'common/warsztaty_duchowe/attach@$attach_name_celowosc_harcerstwa_scenariusze.pdf',
+    FileFormat.docx: 'common/warsztaty_duchowe/attach@$attach_name_celowosc_harcerstwa_scenariusze.docx',
+  },
+  print: KonspektAttachmentPrint(color: KonspektAttachmentPrintColor.monochrome, side: KonspektAttachmentPrintSide.single),
+);
+
+const String attach_html_szybkie_strzaly_dyskusyjne ='<a href="$attach_name_szybkie_strzaly_dyskusyjne@attachment">$attach_title_szybkie_strzaly_dyskusyjne</a>';
 const String attach_name_szybkie_strzaly_dyskusyjne = 'szybkie_strzaly_dyskusyjne';
 const String attach_title_szybkie_strzaly_dyskusyjne = 'Szybkie strzały dyskusyjne';
 const KonspektAttachment attach_szybkie_strzaly_dyskusyjne = KonspektAttachment(

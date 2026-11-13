@@ -118,6 +118,18 @@ KonspektMaterial material_zal_duchowosc_harcerska_tezy = KonspektMaterial(
     amount: 1,
 );
 
+KonspektMaterial material_zal_celowosc_harcerstwa_scenariusze = KonspektMaterial(
+    name: 'Wydrukowany załącznik “$attach_title_celowosc_harcerstwa_scenariusze”',
+    attachmentName: attach_name_celowosc_harcerstwa_scenariusze,
+    amount: 1,
+);
+
+KonspektMaterial material_dlugopis_do_glosowania = KonspektMaterial(
+    name: 'Długopis do głosowania',
+    amount: 2,
+    comment: 'Po jednym długopisie przy każdej kartce z załącznika “$attach_title_celowosc_harcerstwa_scenariusze”.',
+);
+
 KonspektMaterial material_zal_szybkie_strzaly_dyskusyjne = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_szybkie_strzaly_dyskusyjne”',
     attachmentName: attach_name_szybkie_strzaly_dyskusyjne,
@@ -1617,6 +1629,135 @@ KonspektStepGroup step_group_scenka_wychowawcza = KonspektStepGroup(
       _step_scenka_wychowawcza_przygotowanie,
       _step_scenka_wychowawcza_etap_wlasciwy,
       _step_scenka_wychowawcza_omowienie,
+    ]
+);
+
+
+// Celowość harcerstwa
+
+KonspektStep _step_celowosc_harcerstwa_glosowanie = KonspektStep(
+    title: 'Celowość harcerstwa - głosowanie',
+    duration: Duration(minutes: 10),
+    activeForm: KonspektStepActiveForm.active,
+    materials: [
+      material_zal_celowosc_harcerstwa_scenariusze,
+      material_dlugopis_do_glosowania,
+      material_tasma_klejaca,
+    ],
+    content: '<p style="text-align:justify;">'
+        'Prowadzący rozwiesza dwie kartki z załącznika $attach_html_celowosc_harcerstwa_scenariusze w dwóch różnych miejscach sali (np. na przeciwległych ścianach). Przy każdej kartce zostawia <b>jeden długopis</b>.'
+        '<br>'
+        '<br>Uczestnicy podchodzą kolejno do obu kartek, czytają opisane sytuacje i zaznaczają na kartce odpowiedź, za którą głosują.'
+        '</p>'
+);
+
+KonspektStep _step_celowosc_harcerstwa_omowienie = KonspektStep(
+    title: 'Celowość harcerstwa - omówienie wyników',
+    duration: Duration(minutes: 20),
+    activeForm: KonspektStepActiveForm.active,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący zbiera kartki i odczytuje wyniki głosowania. Następnie zadaje uczestnikom kolejno trzy pytania. Po każdym z nich uczestnicy mają chwilę na dyskusję, a na końcu prowadzący przedstawia sugerowaną odpowiedź.'
+        '</p>'
+
+        '<ol>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<u>A czemu, przepraszam bardzo, chcecie narzucać harcerzom swój światopogląd i duchowość?</u>'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Wychowanie harcerskie jest celowe - kształtujemy harcerzy w konkretnej, harcerskiej duchowości.'
+        '<br>'
+        '<br>Wychowanie celowe w konkretnej duchowości jest zaletą, a nie wadą! Jaka jest bowiem alternatywa - pozwolić harcerzom utwierdzać się w sposobie bycia, który zniszczy kiedyś im lub innym osobom życie?'
+        '<br>'
+        '<br>Wychowanie celowe nie zakłada zawsze "narzucania". Instruktorzy czasami narzucają treść, czasami do niej przekonują, a czasami działają jeszcze innymi metodami. Forma jest wtórna. Liczy się przede wszystkim skuteczność.'
+        '</p>'
+        '</blockquote>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<u>A co z faktem, że wychowanie w sprawach światopoglądowych powinno być neutralne?</u>'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Nic, bo nie ma nigdzie takiej zasady.'
+        '<br>'
+        '<br>Zresztą, co dokładnie miałby być neutralne? Ludzie używają słowa "neutralne" nie na to, co naprawdę jest neutralne, tylko na to, z czym oni sami, lub w ich mniemaniu większość osób się utożsamowia.'
+        '<br>'
+        '<br>Zostawienie danego aspektu duchowości samemu sobie nie jest wcale neutralne, tylko jest bierne. Harcerze w każdym aspekcie i tak zostaną jakoś i przez coś ukształtowani. Albo zrobimy to my, albo zrobi to ulica, internet, czy ludzie niemający na celu dobra wychowanków.'
+        '</p>'
+        '</blockquote>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<u>Przecież cechą metody harcerskiej jest dobrowolność!</u>'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Dobrowolność nie jest cechą celu harcerstwa, tylko cechą metody harcerskiej.'
+        '<br>'
+        '<br>Dobrowolność polega na tym, że harcerz, który ma poczucie, że sam podjął jakąś formę, łatwiej się w nią zaangażuje i chętniej się utożsami z jej wychowawczymi skutkami. Dobrowolność nie polega w harcerstwie na tym, że uczestnicy wybierają czy według nich harecrska duchwoość, czyli np. szacunek do drugiego człowieka im odpowiada, czy nie.'
+        '</p>'
+        '</blockquote>'
+        '</li>'
+
+        '<li>'
+        '<p style="text-align:justify;">'
+        '<u>Czy to znaczy, że zadaniem naszym (jako instruktorów) jest ukształtowanie każdego, najmniejszego aspektu duchowości harcerza? (Nie chodzi o to, co jest możliwe, tylko jaki jest nasz cel).</u>'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Nie. Harcerskie wychowanie zajmuje się tylko częścią duchowości człowieka. Reszta nie jest dla nas celem - najwyżej środkiem do niego. Np. nie ma dla nas znaczenia, czy harcerz bardziej ceni matematykę, czy chemię. Ale rozwijając jego zainteresowanie matematyką, możemy uczyć go sumienności, zaradności i ciekawości świata.'
+        '</p>'
+        '</blockquote>'
+        '</li>'
+
+        '</ol>'
+);
+
+KonspektStep _step_celowosc_harcerstwa_podsumowanie = KonspektStep(
+    title: 'Celowość harcerstwa - fudament',
+    duration: Duration(minutes: 5),
+    activeForm: KonspektStepActiveForm.static,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący podsumowuje:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        '<b>Bez zmiany filozofii nie ma żadnego wychowania duchowego.</b>'
+        '<br>'
+        '<br>Harcerstwo nie jest neutralne.'
+        '<br>'
+        '<br>Harcerstwo to nie szkoła zaradności życiowej, w której wartości i poglądy nie mają dla nas znaczenia.'
+        '<br>'
+        '<br>My, jako instruktorzy musimy wychodzić z założenia, że duchowość harcerska to najlepszy sposób, w jaki można żyć!'
+        '<br>'
+        '<br>Wychowanie duchowe harcerzy to nie jest przemoc, tylko troska o to, żeby harcerze przeżyli piękne życia w bardzo wymagającej rzeczywistości.'
+        '<br>'
+        '<br>To my, ruch harcerski mamy ukształtować harcerzy, a nie dostosowywać się do niewychowanych jeszcze wychowanków.'
+        '<br>'
+        '<br>Harcerstwo ma być skuteczne, angażujące, wymagające i konkretne - nie tylko w kształtowaniu zdolności, ale także wartości i poglądów.'
+        '<br>'
+        '<br>Do harcerskiej duchowości nie ma potrzeby zmuszać - mamy do zaoferowania najlepszą duchową treść na rynku. Kwestia tylko tego, czy umiemy do dostarczyć.'
+        '<br>'
+        '<br>Jeśli duchowość harcerska nie jest przez harcerzy akceptowana - problem nie jest z treścią, ale z metodami, jakie stosujemy.'
+        '<br>'
+        '<br>'
+        '<br>Jeśli ktoś nie spojrzy na harcerstwo w taki sposób - każde wychowanie duchowe będzie jałowe i bezcelowe.'
+        '</p>'
+        '</blockquote>'
+);
+
+KonspektStepGroup step_group_celowosc_harcerstwa = KonspektStepGroup(
+    title: 'Celowość harcerstwa',
+    steps: [
+      _step_celowosc_harcerstwa_glosowanie,
+      _step_celowosc_harcerstwa_omowienie,
+      _step_celowosc_harcerstwa_podsumowanie,
     ]
 );
 
