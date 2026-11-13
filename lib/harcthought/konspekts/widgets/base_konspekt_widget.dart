@@ -141,7 +141,10 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
     builder: (BuildContext context, BoxConstraints constraints) {
 
       layoutWidth = constraints.maxWidth;
-      Person? author = konspekt.author?.resolve();
+      List<(Person, String?)> authors = [
+        for(final a in konspekt.authors)
+          if(a.resolve() case final Person person) (person, a.note)
+      ];
 
       return CustomScrollView(
         controller: controller,
@@ -685,11 +688,31 @@ class BaseKonspektWidgetState extends State<BaseKonspektWidget>{
             padding: const EdgeInsets.all(Dimen.sideMarg),
             sliver: SliverList(delegate: SliverChildListDelegate([
 
-              if(author != null)
-                const TitleShortcutRowWidget(title: 'Autor', textAlign: TextAlign.left),
+              if(authors.isNotEmpty)
+                TitleShortcutRowWidget(title: authors.length == 1 ? 'Autor' : 'Autorzy', textAlign: TextAlign.left),
 
-              if(author != null)
-                PersonCard(author, selectable: true)
+              for(final (i, (person, note)) in authors.indexed)
+                Padding(
+                  padding: EdgeInsets.only(top: i == 0 ? 0 : Dimen.sideMarg),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      PersonCard(person, selectable: true),
+                      if(note != null && note.trim().isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 6),
+                          child: SelectableText(
+                            note.trim(),
+                            style: AppTextStyle(
+                              fontSize: Dimen.textSizeBig,
+                              fontStyle: FontStyle.italic,
+                              color: hintEnab_(context),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
 
             ])),
           ),

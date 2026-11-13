@@ -64,7 +64,7 @@ Konspekt druzynowe_przekazanie_bsp = Konspekt(
 
     metos: [Meto.zuch, Meto.harc, Meto.hs, Meto.wedro],
     coverAuthor: 'PAP/M. Marek',
-    author: ContributorRef(person: Person(name: 'Zespół Wychowania Duchowego i Religijnego Chorągwi Stołecznej ZHP')),
+    authors: [KonspektAuthor(ContributorRef(person: Person(name: 'Zespół Wychowania Duchowego i Religijnego Chorągwi Stołecznej ZHP')))],
     customDuration: Duration(days: 30),
     aims: [
       'Kształtowanie postawy przebaczenia',

@@ -334,9 +334,13 @@ Future<List<Widget>> HowToFailWidget(
 
 Widget AuthorWidget(Konspekt konspekt, Font font, Font fontBold){
 
-  Person? author = konspekt.author?.resolve();
+  List<String> authors = [
+    for(final a in konspekt.authors)
+      if(a.resolve() case final Person person)
+        a.note == null || a.note!.trim().isEmpty ? person.name : '${person.name} (${a.note!.trim()})'
+  ];
 
-  if(author == null)
+  if(authors.isEmpty)
     return Container();
 
   return Column(
@@ -349,11 +353,11 @@ Widget AuthorWidget(Konspekt konspekt, Font font, Font fontBold){
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
-          HeaderWidget('Autor: ', fontBold),
+          HeaderWidget(authors.length == 1 ? 'Autor: ' : 'Autorzy: ', fontBold),
 
           Expanded(
             child: Text(
-              author.name,
+              authors.join(', '),
               style: TextStyle(
                 font: font,
                 fontSize: headerTextSize

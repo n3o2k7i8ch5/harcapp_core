@@ -15,6 +15,7 @@ import 'package:harcapp_core/comm_widgets/open_svg_image_dialog.dart';
 import 'package:harcapp_core/harcthought/common/file_format.dart';
 import 'package:harcapp_core/harcthought/harcapp_host.dart';
 import 'package:harcapp_core/values/people/contributor_ref.dart';
+import 'package:harcapp_core/values/people/models.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:html_pdf_widgets/html_pdf_widgets.dart' as pdf;
@@ -1087,6 +1088,44 @@ class KonspektStepGroup with KonspektDurationElementMixin, KonspektStepTableOfCo
   });
 }
 
+/// Autor konspektu z opcjonalnym dopiskiem (np. „konsultacja merytoryczna”).
+class KonspektAuthor{
+
+  static const String PARAM_REF = 'ref';
+  static const String PARAM_NOTE = 'note';
+
+  final ContributorRef ref;
+  final String? note;
+
+  const KonspektAuthor(this.ref, {this.note});
+
+  Person? resolve() => ref.resolve();
+
+  Map<String, dynamic> toJsonMap() => {
+    PARAM_REF: ref.toApiJsonMap(),
+    if(note != null && note!.trim().isNotEmpty) PARAM_NOTE: note!.trim(),
+  };
+
+  static KonspektAuthor fromJsonMap(Map<String, dynamic> map) => KonspektAuthor(
+    ContributorRef.fromApiRespMap((map[PARAM_REF] as Map).cast<String, dynamic>()),
+    note: map[PARAM_NOTE] as String?,
+  );
+
+  /// Odczytuje `authors`, a dla starszych zapisów — pojedyncze pole `author`.
+  static List<KonspektAuthor> listFromKonspektJsonMap(Map data){
+    final authors = data['authors'] as List?;
+    if(authors != null)
+      return authors.map((e) => fromJsonMap((e as Map).cast<String, dynamic>())).toList();
+
+    final legacyAuthor = data['author'] as Map?;
+    if(legacyAuthor != null)
+      return [KonspektAuthor(ContributorRef.fromApiRespMap(legacyAuthor.cast<String, dynamic>()))];
+
+    return [];
+  }
+
+}
+
 abstract class BaseKonspekt with BaseKonspektStepsContainerMixin{
 
   String get name;
@@ -1098,7 +1137,8 @@ abstract class BaseKonspekt with BaseKonspektStepsContainerMixin{
 
   List<Meto> get metos;
   String get coverAuthor;
-  ContributorRef? get author;
+  /// Autorzy w kolejności wyświetlania.
+  List<KonspektAuthor> get authors;
   Duration? get customDuration;
   List<String> get aims;
   List<BaseKonspektAttachment>? get attachments;
@@ -1145,7 +1185,7 @@ abstract class BaseKonspekt with BaseKonspektStepsContainerMixin{
     'spheres': _spheresToJsonMap(),
     'metos': metos.map((e) => e.apiParam).toList(),
     'coverAuthor': coverAuthor,
-    'author': author?.toApiJsonMap(),
+    'authors': authors.map((e) => e.toJsonMap()).toList(),
     'customDuration': customDuration?.inSeconds,
     'aims': aims,
     'attachments': attachments?.map((e) => e.toJsonMap()).toList()??[],
@@ -1171,7 +1211,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
   final List<Meto> metos;
   final String coverAuthor;
   final String? customCoverDirName;
-  final ContributorRef? author;
+  final List<KonspektAuthor> authors;
   final Duration? customDuration;
   final List<String> aims;
   final List<KonspektMaterial>? materials;
@@ -1299,7 +1339,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
     required this.metos,
     required this.coverAuthor,
     this.customCoverDirName,
-    this.author,
+    this.authors = const [],
     this.customDuration,  // if null, `duration` will be calculated from the steps' duration.
     required this.aims,
     this.materials,
@@ -1359,7 +1399,7 @@ class Konspekt extends BaseKonspekt with KonspektStepsContainerMixin{
     metos: (data['metos'] as List).map((e) => Meto.fromApiParam(e as String)??(throw MissingDecodeParamError('metos'))).toList(),
     coverAuthor: data['coverAuthor'] as String,
     customCoverDirName: data['customCoverDirName'] as String?,
-    author: data['author']==null?null:ContributorRef.fromApiRespMap((data['author'] as Map).cast<String, dynamic>()),
+    authors: KonspektAuthor.listFromKonspektJsonMap(data),
     customDuration: data['customDuration'] == null ? null : Duration(seconds: data['customDuration'] as int),
     aims: (data['aims'] as List?)?.map((e) => e as String).toList()??[],
     attachments: (data['attachments'] as List?)?.map(
