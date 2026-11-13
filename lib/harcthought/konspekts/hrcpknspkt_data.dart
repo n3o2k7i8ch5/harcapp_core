@@ -22,7 +22,7 @@ class HrcpknspktData {
     for (final entry in attachmentFiles.entries)
       archive.addFile(ArchiveFile(posix.join("attach@${entry.key}"), entry.value.length, entry.value));
 
-    final Uint8List jsonBytes = utf8.encode(jsonEncode(konspektCore.toJsonMap()));
+    final Uint8List jsonBytes = utf8.encode(const JsonEncoder.withIndent('  ').convert(konspektCore.toJsonMap()));
     archive.addFile(ArchiveFile('konspekt.json', jsonBytes.length, jsonBytes));
 
     if (coverImage != null)
