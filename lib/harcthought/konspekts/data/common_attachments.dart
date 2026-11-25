@@ -41,6 +41,28 @@ const KonspektAttachment attach_scenariusze_mechanizmow_ksztaltowania_duchowosci
   },
 );
 
+const String attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja = '<a href="$attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja@attachment">$attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja</a>';
+const String attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja = 'scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja';
+const String attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja = 'Scenariusze mechanizmów kształtowania duchowości – prezentacja';
+const KonspektAttachment attach_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja = KonspektAttachment(
+  name: attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja,
+  title: attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja,
+  assets: {
+    FileFormat.pdf: 'common/mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja.pdf',
+  },
+);
+
+const String attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi = '<a href="$attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi@attachment">$attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi</a>';
+const String attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi = 'scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi';
+const String attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi = 'Scenariusze mechanizmów kształtowania duchowości – prezentacja bez odpowiedzi';
+const KonspektAttachment attach_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi = KonspektAttachment(
+  name: attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi,
+  title: attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi,
+  assets: {
+    FileFormat.pdf: 'common/mechanizmy_ksztaltowania_duchowosci/attach@$attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi.pdf',
+  },
+);
+
 const String attach_html_plansza_mechanizmow_ksztaltowania_duchowosci = '<a href="$attach_name_plansza_mechanizmow_ksztaltowania_duchowosci@attachment">$attach_title_plansza_mechanizmow_ksztaltowania_duchowosci</a>';
 const String attach_name_plansza_mechanizmow_ksztaltowania_duchowosci = 'plansza_mechanizmow_ksztaltowania_duchowosci';
 const String attach_title_plansza_mechanizmow_ksztaltowania_duchowosci = 'Plansza mechanizmów kształtowania duchowości';
@@ -68,6 +90,8 @@ const KonspektAttachment attach_karty_szczebli_internalizacji_duchowosci = Konsp
 List<KonspektAttachment> attach_kszt_mechanizmy_ksztaltowania_duchowosci = [
   attach_poradnik_mechanizmy_ksztaltowania_duchowosci,
   attach_scenariusze_mechanizmow_ksztaltowania_duchowosci,
+  attach_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja,
+  attach_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi,
   attach_scenariusze_mechanizmow_ksztaltowania_duchowosci_inspiracje,
   attach_plansza_mechanizmow_ksztaltowania_duchowosci,
   attach_karty_szczebli_internalizacji_duchowosci,

@@ -20,6 +20,13 @@ KonspektMaterial material_zal_scenariusze_czynnikow_duchowosci = KonspektMateria
   amount: 1
 );
 
+KonspektMaterial material_zal_scenariusze_prezentacja = KonspektMaterial(
+  name: 'Rzutnik lub ekran z wyświetlonym załącznikiem “$attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja”',
+  attachmentName: attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja,
+  amount: 1,
+  comment: 'Do wyświetlania, nie do druku. Jeśli nie ma rzutnika, można zamiast tego wysłać uczestnikom załącznik “$attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi”.',
+);
+
 KonspektMaterial material_zetony = KonspektMaterial(
     name: 'Żetony (np. zapałki, akrylowe kryształki, pieniądze z monopoly)',
     amount: 200
@@ -33,7 +40,8 @@ KonspektMaterial material_nagroda = KonspektMaterial(
 KonspektMaterial material_zal_plansza_mechanizmow_ksztaltowania_duchowosci = KonspektMaterial(
   name: 'Wydrukowany załącznik "$attach_title_plansza_mechanizmow_ksztaltowania_duchowosci"',
   attachmentName: attach_name_plansza_mechanizmow_ksztaltowania_duchowosci,
-  amount: 1
+  amount: 2,
+  comment: 'Po jednym egzemplarzu na grupę.',
 );
 
 KonspektMaterial material_zal_karty_szczebli_internalizacji_duchowosci = KonspektMaterial(
@@ -45,6 +53,7 @@ KonspektMaterial material_zal_karty_szczebli_internalizacji_duchowosci = Konspek
 List<KonspektMaterial> materials_kszt_mechanizmy_ksztaltowania_duchowosci = [
   material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
   material_zal_scenariusze_czynnikow_duchowosci,
+  material_zal_scenariusze_prezentacja,
   material_zal_plansza_mechanizmow_ksztaltowania_duchowosci,
   material_zal_karty_szczebli_internalizacji_duchowosci,
   material_zetony,
@@ -356,10 +365,11 @@ List<KonspektStep> steps_kszt_mechanizmy_ksztaltowania_duchowosci = [
       materials: [
         material_zetony,
         material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci,
-        material_zal_plansza_mechanizmow_ksztaltowania_duchowosci
+        material_zal_plansza_mechanizmow_ksztaltowania_duchowosci,
+        material_zal_scenariusze_prezentacja,
       ],
       content: '<p style="text-align:justify;">'
-          'Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci. Gdy skończy czytać, zadaje pytanie punktowane o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
+          'Co turę prowadzący odczytuje kolejną historię z załącznika $attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci. Jeśli jest rzutnik, prowadzący może równolegle wyświetlać załącznik $attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja - rozwiązanie pokazuje dopiero po obstawieniu odpowiedzi przez grupy. Jeśli rzutnika nie ma, może wysłać uczestnikom załącznik $attach_html_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi. Gdy skończy czytać, zadaje pytanie punktowane o to, "który czynnik duchowości jest opisany w opowiedzianej historii?".'
           '<br>'
           '<br>Grupy obstawiają swoje odpowiedzi. Gdy wszyscy skończą obstawiać, odsłaniają je i prowadzący odczytuje poprawne odpowiedzi.'
           '<br>'
