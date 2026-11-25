@@ -62,17 +62,17 @@ KonspektMaterial material_poradnik_przykladowa_strategia_rozwoju_duchowego = Kon
 
 KonspektMaterial material_identyfikator = KonspektMaterial(
   name: 'Identyfikator',
-  amountAttendantFactor: 1,
+  amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant,
 );
 
 KonspektMaterial material_dlugopis = KonspektMaterial(
   name: 'Długopis',
-  amountAttendantFactor: 1,
+  amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant,
 );
 
 KonspektMaterial material_notatnik = KonspektMaterial(
   name: 'Notatnik',
-  amountAttendantFactor: 1,
+  amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant,
 );
 
 KonspektMaterial material_nozyczki = KonspektMaterial(
@@ -87,7 +87,7 @@ KonspektMaterial material_kartka_a4 = KonspektMaterial(
 
 KonspektMaterial material_obiad = KonspektMaterial(
   name: 'Obiad',
-  amountAttendantFactor: 1,
+  amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant,
 );
 
 KonspektMaterial material_przekaski = KonspektMaterial(
@@ -105,7 +105,7 @@ KonspektMaterial material_herbata = KonspektMaterial(
 
 KonspektMaterial material_kubek = KonspektMaterial(
   name: 'Kubek',
-  amountAttendantFactor: 1,
+  amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant,
 );
 
 KonspektMaterial material_czajnik = KonspektMaterial(
@@ -116,7 +116,7 @@ KonspektMaterial material_czajnik = KonspektMaterial(
 KonspektMaterial material_zal_kratka_minimow_rozwoju_duchowego = KonspektMaterial(
     name: 'Wydrukowany załącznik “$attach_title_kratka_minimow_rozwoju_duchowego”',
     attachmentName: attach_name_kratka_minimow_rozwoju_duchowego,
-    amount: 4
+    amount: 1, amountUnit: KonspektMaterialAmountUnit.perGroup
 );
 
 KonspektMaterial material_zal_scenariusz_fantomowe_dzialania_wychowawcze = KonspektMaterial(
@@ -142,7 +142,7 @@ KonspektMaterial material_zal_planowanie_strategii_i_dzialan = KonspektMaterial(
 
 KonspektMaterial material_zal_przypinki = KonspektMaterial(
     name: 'Przypinki z logiem warsztatów',
-    amountAttendantFactor: 1
+    amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant
 );
 
 Konspekt konspekt_kszt_warsztaty_wychowania_duchowego = Konspekt(

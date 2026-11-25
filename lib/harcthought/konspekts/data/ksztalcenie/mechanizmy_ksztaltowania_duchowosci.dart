@@ -11,7 +11,7 @@ const konspekt_kszt_name_mechanizmy_ksztaltowania_duchowosci = 'mechanizmy_kszta
 KonspektMaterial material_zal_poradnik_mechanizmy_ksztaltowania_duchowosci = KonspektMaterial(
     name: 'Wydrukowany $attach_title_poradnik_mechanizmy_ksztaltowania_duchowosci',
     attachmentName: attach_name_poradnik_mechanizmy_ksztaltowania_duchowosci,
-    amount: 2
+    amount: 1, amountUnit: KonspektMaterialAmountUnit.perGroup
 );
 
 KonspektMaterial material_zal_scenariusze_czynnikow_duchowosci = KonspektMaterial(
@@ -24,7 +24,6 @@ KonspektMaterial material_zal_scenariusze_prezentacja = KonspektMaterial(
   name: 'Rzutnik lub ekran z wyświetlonym załącznikiem “$attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja”',
   attachmentName: attach_name_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja,
   amount: 1,
-  comment: 'Do wyświetlania, nie do druku. Jeśli nie ma rzutnika, można zamiast tego wysłać uczestnikom załącznik “$attach_title_scenariusze_mechanizmow_ksztaltowania_duchowosci_prezentacja_bez_odpowiedzi”.',
 );
 
 KonspektMaterial material_zetony = KonspektMaterial(
@@ -40,8 +39,7 @@ KonspektMaterial material_nagroda = KonspektMaterial(
 KonspektMaterial material_zal_plansza_mechanizmow_ksztaltowania_duchowosci = KonspektMaterial(
   name: 'Wydrukowany załącznik "$attach_title_plansza_mechanizmow_ksztaltowania_duchowosci"',
   attachmentName: attach_name_plansza_mechanizmow_ksztaltowania_duchowosci,
-  amount: 2,
-  comment: 'Po jednym egzemplarzu na grupę.',
+  amount: 1, amountUnit: KonspektMaterialAmountUnit.perGroup,
 );
 
 KonspektMaterial material_zal_karty_szczebli_internalizacji_duchowosci = KonspektMaterial(

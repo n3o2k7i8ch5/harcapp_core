@@ -32,7 +32,7 @@ Konspekt spiewogranie_z_quizem_interpretacyjnym = Konspekt(
   ],
   materials: [
     KonspektMaterial(
-      amountAttendantFactor: 1,
+      amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant,
       name: 'Teksty śpiewanych piosenek',
     ),
   ],

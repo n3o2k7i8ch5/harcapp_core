@@ -203,7 +203,7 @@ Konspekt rozwazanie_ewangeliczne = Konspekt(
     ],
     materials: [
       KonspektMaterial(
-        amountAttendantFactor: 1,
+        amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant,
         name: 'Wydrukowana kartka z fragmentem Ewangelii i pytaniami pomocniczymi',
         attachmentName: _attach_name_rozwazania_ewangeliczne_lista,
         additionalPreparation: 'Po jednym egzemplarzu na uczestnika. Pytania należy dobrać do grupy wiekowej (młodsi: zuch + harc; starsi: HS + wędro).',

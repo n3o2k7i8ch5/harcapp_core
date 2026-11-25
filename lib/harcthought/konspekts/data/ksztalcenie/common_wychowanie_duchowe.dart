@@ -8,7 +8,7 @@ const String _tdPadding = 'padding-left: 8px; padding-right: 8px;';
 
 KonspektMaterial material_mini_kartki_biurowe = KonspektMaterial(
   name: 'Mini kartki biurowe (ok. 10x10 cm)',
-  amountAttendantFactor: 3,
+  amount: 3, amountUnit: KonspektMaterialAmountUnit.perAttendant,
 );
 
 KonspektMaterial material_zal_karty_poziomow_duchowosci = KonspektMaterial(

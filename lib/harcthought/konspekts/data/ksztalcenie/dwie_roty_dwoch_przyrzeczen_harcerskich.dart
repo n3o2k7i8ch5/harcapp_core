@@ -110,7 +110,7 @@ Konspekt konspekt_kszt_dwie_roty_dwoch_przyrzeczen_harcerskich = Konspekt(
       KonspektMaterial(
           name: 'Wydrukowany załącznik “$_attach_title_jak_przeprowadzic_przyrzeczenie”',
           attachmentName: _attach_name_jak_przeprowadzic_przyrzeczenie,
-          amount: 2,
+          amount: 1, amountUnit: KonspektMaterialAmountUnit.perGroup,
           additionalPreparation: 'Kartki pociąć wzdłuż przerywanych linii i potasować w ramach każdego zestawu.'
       ),
 

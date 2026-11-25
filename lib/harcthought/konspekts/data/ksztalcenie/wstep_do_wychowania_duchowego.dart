@@ -90,7 +90,7 @@ Konspekt konspekt_kszt_wstep_do_wychowania_duchowego = Konspekt(
       KonspektMaterial(
           name: 'Wydrukowany załącznik “$attach_title_kratka_minimow_rozwoju_duchowego”',
           attachmentName: attach_name_kratka_minimow_rozwoju_duchowego,
-          amount: 4
+          amount: 1, amountUnit: KonspektMaterialAmountUnit.perGroup
       ),
 
       material_zal_szybkie_strzaly_dyskusyjne,

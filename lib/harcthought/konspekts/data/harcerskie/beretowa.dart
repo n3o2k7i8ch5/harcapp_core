@@ -55,11 +55,11 @@ Konspekt beretowa = Konspekt(
     ],
     materials: [
       KonspektMaterial(
-        amountAttendantFactor: 1,
+        amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant,
         name: 'Beret',
       ),
       KonspektMaterial(
-        amountAttendantFactor: 1,
+        amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant,
         name: 'Znacznik przynależności do grupy',
       ),
     ],

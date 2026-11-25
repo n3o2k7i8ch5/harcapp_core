@@ -193,41 +193,7 @@ Widget MaterialAmountWidget(
     Font fontBoldItalic,
     ){
 
-  if(material.amountAttendantFactor != null)
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-
-        Text(
-          'x',
-          style: TextStyle(
-            font: fontHalfBold,
-            fontSize: headerTextSize,
-          ),
-        ),
-
-        SizedBox(width: elementSmallSeparator/2),
-
-        Text(
-          '${material.amountAttendantFactor}',
-          style: TextStyle(
-            font: fontHalfBold,
-            fontSize: headerTextSize,
-          ),
-        ),
-
-        SizedBox(width: elementSmallSeparator),
-
-        Text(
-          'Liczba\nuczest.',
-          style: TextStyle(
-            font: fontHalfBold,
-            fontSize: defTextTiny,
-          ),
-        )
-
-      ],
-    );
+  final String? unitLabel = material.amountUnit.label;
 
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
@@ -250,6 +216,18 @@ Widget MaterialAmountWidget(
           fontSize: headerTextSize,
         ),
       ),
+
+      if(unitLabel != null)
+        SizedBox(width: elementSmallSeparator),
+
+      if(unitLabel != null)
+        Text(
+          unitLabel,
+          style: TextStyle(
+            font: fontHalfBold,
+            fontSize: defTextTiny,
+          ),
+        ),
 
     ],
   );

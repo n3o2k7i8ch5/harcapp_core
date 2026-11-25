@@ -334,19 +334,19 @@ Konspekt zycie_i_swiat_prl = Konspekt(
 
       KonspektMaterial(
           name: 'Punkty wpływu',
-          amountAttendantFactor: 100,
+          amount: 100, amountUnit: KonspektMaterialAmountUnit.perAttendant,
           comment: "Dobrze nadają się w tym celu kryształki z akrylu (złote)."
       ),
 
       KonspektMaterial(
           name: 'Znaczniki protestu',
-          amountAttendantFactor: 20,
+          amount: 20, amountUnit: KonspektMaterialAmountUnit.perAttendant,
           comment: "Dobrze nadają się w tym celu kryształki z akrylu (czerone)."
       ),
 
       KonspektMaterial(
-          name: 'Znaczniki agentów dla każdego ze stronnictw',
-          amountAttendantFactor: 50,
+          name: 'Znaczniki agentów',
+          amount: 50, amountUnit: KonspektMaterialAmountUnit.perGroup,
           comment: "Znaczniki powinny mieć różny kolor dla każdego stronnictwa. Dobrze nadają się w tym celu kryształki z akrylu (niebieskie, fioletowe, zielone, pomarańczowe, ...)."
       ),
 

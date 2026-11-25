@@ -29,7 +29,7 @@
   "materials": [
     {
       "amount": 1,
-      "amountAttendantFactor": 1,
+      "amountUnit": "perAttendant",
       "name": "Karteczki biurowe",
       "comment": null,
       "attachmentName": null,
@@ -37,7 +37,7 @@
     },
     {
       "amount": 1,
-      "amountAttendantFactor": 1,
+      "amountUnit": "perAttendant",
       "name": "Długopis",
       "comment": null,
       "attachmentName": null,
@@ -45,15 +45,15 @@
     },
     {
       "amount": 10,
-      "amountAttendantFactor": null,
+      "amountUnit": "pieces",
       "name": "Kartki A5",
       "comment": null,
       "attachmentName": null,
       "additionalPreparation": null
     },
     {
-      "amount": 1,
-      "amountAttendantFactor": 10,
+      "amount": 10,
+      "amountUnit": "perAttendant",
       "name": "Żetony",
       "comment": "Coś, co symbolizuje zdobywane punkty, np.: akrylowe kryształki, zapałki, pieniądze z eurobiznesu, etc.",
       "attachmentName": null,
@@ -61,7 +61,7 @@
     },
     {
       "amount": 1,
-      "amountAttendantFactor": null,
+      "amountUnit": "pieces",
       "name": "Nagroda",
       "comment": "Najlepiej taka, którą można się podzielić.",
       "attachmentName": null,

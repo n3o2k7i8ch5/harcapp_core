@@ -49,7 +49,7 @@ Konspekt sznury_funkcje_stopnie = Konspekt(
     KonspektMaterial(amount: 2, name: 'Kartka'),
     KonspektMaterial(amount: 2, name: 'Długopis'),
     KonspektMaterial(
-        amountAttendantFactor: 2,
+        amount: 2, amountUnit: KonspektMaterialAmountUnit.perAttendant,
         name: 'Jednokolorowe kartki samoprzylepne',
         additionalPreparation: 'Celem jest przygotowanie kartek z nazwami wszystkich stopni harcerskich, które harcerze będą mogli przymocować do czoła tak, by ich nie widzieć lecz by były widoczne dla innych. Należy przygotować osobno zestawy stopni męskich i zestaw stopni damskich.'
             '\n'

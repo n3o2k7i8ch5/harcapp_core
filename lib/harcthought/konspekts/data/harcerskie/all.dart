@@ -446,7 +446,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       ],
       materials: [
         KonspektMaterial(
-            amountAttendantFactor: 2,
+            amount: 2, amountUnit: KonspektMaterialAmountUnit.perAttendant,
             name: 'Wydrukowany załącznik "kroki".',
             attachmentName: 'kroki',
             additionalPreparation: 'Każdy uczestnik powinien dostać 6 przygotowanych elementów: jeden "wstęp" oraz 6 "kroki".'
@@ -728,7 +728,7 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
       ],
       materials: [
         KonspektMaterial(
-          amountAttendantFactor: 1,
+          amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant,
           name: 'Teksty śpiewanych piosenek',
         ),
       ],
@@ -1175,9 +1175,9 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
         'Kształtowanie u uczestników postawy sumienności'
       ],
       materials: [
-        KonspektMaterial(amountAttendantFactor: 1, name: 'Doniczki'),
-        KonspektMaterial(amountAttendantFactor: 1, name: 'Ziemia do roślin'),
-        KonspektMaterial(amountAttendantFactor: 5, name: 'Nasiona roślin'),
+        KonspektMaterial(amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant, name: 'Doniczki'),
+        KonspektMaterial(amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant, name: 'Ziemia do roślin'),
+        KonspektMaterial(amount: 5, amountUnit: KonspektMaterialAmountUnit.perAttendant, name: 'Nasiona roślin'),
       ],
       summary: 'Uczestnicy na zbiórce sadzą roślinki do doniczki, po czym ich zadaniem jest o nie regularnie dbać w domu. Na końcu rośliny są przynoszone do harcówki i upiększają to miejsce.',
       description: '<p style="text-align:justify;">Prowadzący na zbiórce daje uczestnikom doniczki, ziemię do roślin i nasiona. Uczestnicy sadzą roślinki do doniczki oraz dowiadują się jak o nie dbać. Uczestnicy dowiadują się, że po ustalonym czasie roślinki wrócą do harcówki, dlatego ważne, by harcerze zatroszczyli się o nie jak najlepiej.'
@@ -1833,24 +1833,24 @@ Future<List<Konspekt>> _loadAllHarcerskieKonspekts() async => [
             name: 'Wydrukowany załącznik "Symulator komputera"',
             comment: 'Uwaga: prowadzący musi umieć grać w warcaby!',
             attachmentName: 'komputer',
-            amountAttendantFactor: 1
+            amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant
         ),
         KonspektMaterial(
             name: 'Karteczki biurowe (kwadratowe, ok. 10 cm x 10 cm)',
-            amountAttendantFactor: 3
+            amount: 3, amountUnit: KonspektMaterialAmountUnit.perAttendant
         ),
         KonspektMaterial(
             name: 'Skrzynki zamykane na kłódkę na klucz',
-            amount: 4,
+            amount: 1, amountUnit: KonspektMaterialAmountUnit.perGroup,
             comment: 'Kłódki muszą móc się zamknąć bez użycia klucza. Ważne też, by prowadzący miał do każdej kłódki zapasowy klucz, w przypadku gdyby uczestnicy przypadkiem zatrzasnęli klucz w środku.'
         ),
         KonspektMaterial(
             name: 'Kartka A4',
-            amount: 5
+            amount: 1, amountUnit: KonspektMaterialAmountUnit.perGroup
         ),
         KonspektMaterial(
             name: 'Długopis',
-            amount: 5
+            amount: 1, amountUnit: KonspektMaterialAmountUnit.perGroup
         ),
       ],
       summary: 'Uczestnicy próbują przesłać sobie zaszyfrowaną wiadomość w środowisku odwzorowującym internet, po czym spisują zasady odpowiedzialnego korzystania z urządzeń mobilnych (smartfonów).',

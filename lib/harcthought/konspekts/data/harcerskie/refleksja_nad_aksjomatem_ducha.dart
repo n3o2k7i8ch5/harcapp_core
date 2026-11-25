@@ -36,7 +36,7 @@ Konspekt refleksja_nad_aksjomatem_ducha = Konspekt(
   ],
   materials: [
     KonspektMaterial(
-        amountAttendantFactor: 2,
+        amount: 2, amountUnit: KonspektMaterialAmountUnit.perAttendant,
         name: 'Wydrukowany załącznik "pytania".',
         attachmentName: 'pytania',
         additionalPreparation: 'Każdy uczestnik powinien dostać 5 przygotowanych elementów: jeden "wstęp" oraz 4 "pytania".'

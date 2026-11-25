@@ -37,7 +37,7 @@
   "materials": [
     {
       "amount": 2,
-      "amountAttendantFactor": null,
+      "amountUnit": "pieces",
       "name": "Kartki",
       "comment": null,
       "attachmentName": null,
@@ -45,7 +45,7 @@
     },
     {
       "amount": 1,
-      "amountAttendantFactor": 1,
+      "amountUnit": "perAttendant",
       "name": "Coś do pisania i rysowania",
       "comment": null,
       "attachmentName": null,

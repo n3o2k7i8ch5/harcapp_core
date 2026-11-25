@@ -828,9 +828,27 @@ class KonspektInternalLinkAttachment extends BaseKonspektAttachment{
 
 }
 
+/// Jednostka, w której podana jest liczba sztuk materiału.
+enum KonspektMaterialAmountUnit{
+  /// Stała liczba sztuk.
+  pieces(null),
+  /// Liczba sztuk na każdego uczestnika.
+  perAttendant('Liczb.\nuczest.'),
+  /// Liczba sztuk na każdą grupę.
+  perGroup('Liczb.\ngrup');
+
+  /// Dopisek przy liczbie sztuk (np. „x2 Liczb. uczest.”), `null` dla stałej liczby.
+  final String? label;
+
+  const KonspektMaterialAmountUnit(this.label);
+
+  static KonspektMaterialAmountUnit fromName(String? name) =>
+      values.firstWhere((u) => u.name == name, orElse: () => pieces);
+}
+
 abstract class BaseKonspektMaterial{
   int? get amount;
-  int? get amountAttendantFactor;
+  KonspektMaterialAmountUnit get amountUnit;
   String get name;
   String? get comment;
   String? get attachmentName;
@@ -838,23 +856,32 @@ abstract class BaseKonspektMaterial{
 
   const BaseKonspektMaterial();
 
-  bool get hasAmount => (amount != null && amount! > 0) || (amountAttendantFactor != null && amountAttendantFactor! > 0);
+  bool get hasAmount => amount != null && amount! > 0;
 
   Map toJsonMap() => {
     'amount': amount,
-    'amountAttendantFactor': amountAttendantFactor,
+    'amountUnit': amountUnit.name,
     'name': name,
     'comment': comment,
     'attachmentName': attachmentName,
     'additionalPreparation': additionalPreparation,
   };
 
+  /// Czyta liczbę sztuk i jednostkę z JSON-a. Obsługuje też stary format,
+  /// w którym liczba na uczestnika była osobnym polem `amountAttendantFactor`.
+  static (int?, KonspektMaterialAmountUnit) amountFromJsonMap(Map<String, dynamic> map){
+    final int? legacyAttendantFactor = map['amountAttendantFactor'] as int?;
+    if(!map.containsKey('amountUnit') && legacyAttendantFactor != null && legacyAttendantFactor > 0)
+      return (legacyAttendantFactor, KonspektMaterialAmountUnit.perAttendant);
+    return (map['amount'] as int?, KonspektMaterialAmountUnit.fromName(map['amountUnit'] as String?));
+  }
+
 }
 
 class KonspektMaterial extends BaseKonspektMaterial{
 
   final int? amount;
-  final int? amountAttendantFactor;
+  final KonspektMaterialAmountUnit amountUnit;
   final String name;
   final String? comment;
   final String? attachmentName;
@@ -864,7 +891,7 @@ class KonspektMaterial extends BaseKonspektMaterial{
 
   const KonspektMaterial({
     this.amount,
-    this.amountAttendantFactor,
+    this.amountUnit = KonspektMaterialAmountUnit.pieces,
     required this.name,
     this.comment,
     this.attachmentName,
@@ -875,7 +902,7 @@ class KonspektMaterial extends BaseKonspektMaterial{
 
   KonspektMaterial copyWith({
     int? amount,
-    int? amountAttendantFactor,
+    KonspektMaterialAmountUnit? amountUnit,
     String? name,
     String? comment,
     String? additionalPreparation,
@@ -884,7 +911,7 @@ class KonspektMaterial extends BaseKonspektMaterial{
     Widget Function(BuildContext)? bottomBuilder,
   }) => KonspektMaterial(
     amount: amount??this.amount,
-    amountAttendantFactor: amountAttendantFactor??this.amountAttendantFactor,
+    amountUnit: amountUnit??this.amountUnit,
     name: name??this.name,
     comment: comment??this.comment,
     additionalPreparation: additionalPreparation??this.additionalPreparation,
@@ -894,14 +921,17 @@ class KonspektMaterial extends BaseKonspektMaterial{
   );
 
 
-  static KonspektMaterial fromJsonMap(Map<String, dynamic> map) => KonspektMaterial(
-    amount: map['amount'] as int?,
-    amountAttendantFactor: map['amountAttendantFactor'] as int?,
-    name: map['name'] as String,
-    comment: map['comment'] as String?,
-    additionalPreparation: map['additionalPreparation'] as String?,
-    attachmentName: map['attachmentName'] as String?,
-  );
+  static KonspektMaterial fromJsonMap(Map<String, dynamic> map){
+    final (amount, amountUnit) = BaseKonspektMaterial.amountFromJsonMap(map);
+    return KonspektMaterial(
+      amount: amount,
+      amountUnit: amountUnit,
+      name: map['name'] as String,
+      comment: map['comment'] as String?,
+      additionalPreparation: map['additionalPreparation'] as String?,
+      attachmentName: map['attachmentName'] as String?,
+    );
+  }
 
 }
 

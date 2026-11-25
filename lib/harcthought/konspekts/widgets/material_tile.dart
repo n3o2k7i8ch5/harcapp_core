@@ -185,41 +185,7 @@ class AmountWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    if(material.amountAttendantFactor != null)
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-
-          const Text(
-            'x',
-            style: AppTextStyle(
-                fontSize: Dimen.textSizeBig,
-                fontWeight: weightHalfBold
-            ),
-          ),
-
-          const SizedBox(width: Dimen.defMarg),
-
-          Text(
-            '${material.amountAttendantFactor}',
-            style: const AppTextStyle(
-                fontSize: Dimen.textSizeAppBar,
-                fontWeight: weightBold
-            ),
-          ),
-
-          const SizedBox(width: 3),
-
-          const Text(
-            'Liczb.\nuczest.',
-            style: AppTextStyle(
-                fontSize: Dimen.textSizeAppBar/2/1.1,
-                fontWeight: weightBold
-            ),
-          )
-
-        ],
-      );
+    final String? unitLabel = material.amountUnit.label;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -241,12 +207,25 @@ class AmountWidget extends StatelessWidget{
               fontSize: Dimen.textSizeAppBar,
               fontWeight: weightBold
           ),
-        )
+        ),
+
+        if(unitLabel != null)
+          const SizedBox(width: 3),
+
+        if(unitLabel != null)
+          Text(
+            unitLabel,
+            style: const AppTextStyle(
+                fontSize: Dimen.textSizeAppBar/2/1.1,
+                fontWeight: weightBold
+            ),
+          ),
 
       ],
     );
 
   }
+
 
 
 

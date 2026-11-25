@@ -31,7 +31,7 @@ Konspekt bibliodrama = Konspekt(
     ],
     materials: [
       KonspektMaterial(
-        amountAttendantFactor: 1,
+        amount: 1, amountUnit: KonspektMaterialAmountUnit.perAttendant,
         name: 'Wydrukowane fragmenty Pisma Świętego z planem bibliodramy. Przykłady w załącznikach.',
       ),
     ],
