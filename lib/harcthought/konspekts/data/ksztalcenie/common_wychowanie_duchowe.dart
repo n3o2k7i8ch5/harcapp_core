@@ -1635,8 +1635,88 @@ KonspektStepGroup step_group_scenka_wychowawcza = KonspektStepGroup(
 
 // Celowość harcerstwa
 
+KonspektStep _step_celowosc_harcerstwa_wszystkie_sfery = KonspektStep(
+    title: 'Celowość harcerstwa - wszystkie sfery',
+    duration: Duration(minutes: 10),
+    activeForm: KonspektStepActiveForm.active,
+    content: '<p style="text-align:justify;">'
+        'Prowadzący pyta uczestników o cel harcerstwa:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Po co zadajemy sobie trud, żeby budować cały ten ruch harcerski?'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Uczestnicy najpewniej odpowiedzą, że po to, żeby wychowywać. Prowadzący kontynuuje:'
+        '</p>'
+
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Okej, zanurkujmy głębiej. Rozbijmy to na sfery.'
+        '</p>'
+        '</blockquote>'
+
+        '<p style="text-align:justify;">'
+        'Prowadzący zadaje kolejno pytania o poszczególne sfery. Po każdym z nich daje uczestnikom chwilę na odpowiedź.'
+        '</p>'
+
+        '<ol>'
+
+        '<li>'
+        '<blockquote>'
+        '<p style="text-align:justify;">Do czego dąży nasza praca nad <b>sferą fizyczną</b> wychowanków?</p>'
+        '</blockquote>'
+        '<p style="text-align:justify;">'
+        'Spodziewana odpowiedź: do tego, żeby byli możliwie silni, zdrowi, odporni na warunki pogodowe, żeby umieli wędrować itd.'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<blockquote>'
+        '<p style="text-align:justify;">Do czego dąży nasza praca nad <b>sferą emocjonalną</b> wychowanków?</p>'
+        '</blockquote>'
+        '<p style="text-align:justify;">'
+        'Spodziewana odpowiedź: do tego, żeby umieli rozpoznawać swoje emocje i nad nimi panować.'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<blockquote>'
+        '<p style="text-align:justify;">Do czego dąży nasza praca nad <b>sferą umysłową</b> wychowanków?</p>'
+        '</blockquote>'
+        '<p style="text-align:justify;">'
+        'Spodziewana odpowiedź: do tego, żeby umieli logicznie i krytycznie myśleć, żeby dobrze znali język polski i historię naszego kraju.'
+        '</p>'
+        '</li>'
+
+        '<li>'
+        '<blockquote>'
+        '<p style="text-align:justify;">Do czego dąży nasza praca nad <b>sferą duchową</b> wychowanków?</p>'
+        '</blockquote>'
+        '<p style="text-align:justify;">'
+        'Prowadzący pozwala uczestnikom przedstawić swoje propozycje, po czym podsumowuje (ostatni punkt wybiera w zależności od organizacji, w której prowadzi warsztaty):'
+        '</p>'
+        '<blockquote>'
+        '<p style="text-align:justify;">'
+        'Wychowanie duchowe dąży do tego, żeby harcerze żyli harcerskim duchem:'
+        '</p>'
+        '<ul>'
+        '<li><p style="text-align:justify;">żeby cechowały ich harcerskie zachowania i postawy,</p></li>'
+        '<li><p style="text-align:justify;">żeby kierowali się harcerskimi wartościami,</p></li>'
+        '<li><p style="text-align:justify;"><b>[klasyczny ruch harcerski]</b> żeby żyli wiarą w życie, śmierć i zmartwychwstanie Chrystusa.</p></li>'
+        '<li><p style="text-align:justify;"><b>[ZHP po 2025 roku]</b> żeby z ich wiary i poglądów spójnie, trwale i jednoznacznie wynikały harcerskie wartości i zachowania.</p></li>'
+        '</ul>'
+        '</blockquote>'
+        '</li>'
+
+        '</ol>'
+);
+
 KonspektStep _step_celowosc_harcerstwa_glosowanie = KonspektStep(
-    title: 'Celowość harcerstwa - głosowanie',
+    title: 'Celowość harcerstwa - sfera ducha - głosowanie',
     duration: Duration(minutes: 10),
     activeForm: KonspektStepActiveForm.active,
     materials: [
@@ -1652,7 +1732,7 @@ KonspektStep _step_celowosc_harcerstwa_glosowanie = KonspektStep(
 );
 
 KonspektStep _step_celowosc_harcerstwa_omowienie = KonspektStep(
-    title: 'Celowość harcerstwa - omówienie wyników',
+    title: 'Celowość harcerstwa - sfera ducha - omówienie wyników',
     duration: Duration(minutes: 20),
     activeForm: KonspektStepActiveForm.active,
     content: '<p style="text-align:justify;">'
@@ -1719,7 +1799,7 @@ KonspektStep _step_celowosc_harcerstwa_omowienie = KonspektStep(
 );
 
 KonspektStep _step_celowosc_harcerstwa_podsumowanie = KonspektStep(
-    title: 'Celowość harcerstwa - fudament',
+    title: 'Celowość harcerstwa - sfera ducha - fundament',
     duration: Duration(minutes: 5),
     activeForm: KonspektStepActiveForm.static,
     content: '<p style="text-align:justify;">'
@@ -1755,6 +1835,7 @@ KonspektStep _step_celowosc_harcerstwa_podsumowanie = KonspektStep(
 KonspektStepGroup step_group_celowosc_harcerstwa = KonspektStepGroup(
     title: 'Celowość harcerstwa',
     steps: [
+      _step_celowosc_harcerstwa_wszystkie_sfery,
       _step_celowosc_harcerstwa_glosowanie,
       _step_celowosc_harcerstwa_omowienie,
       _step_celowosc_harcerstwa_podsumowanie,
