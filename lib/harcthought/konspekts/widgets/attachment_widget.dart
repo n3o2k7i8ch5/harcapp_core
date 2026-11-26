@@ -135,13 +135,17 @@ class KonspektAttachmentPrintWidget extends StatelessWidget{
 
 class KonspektAttachmentWidget extends StatelessWidget{
 
+  static const double defaultSideLayoutBreakpoint = 520;
+  static const double formatWidgetWidth = 96;
+
   static KonspektAttachmentWidget? from(
       BuildContext context,
       Konspekt konspekt,
       String name,
       {
         Color? color,
-        double? maxDialogWidth
+        double? maxDialogWidth,
+        double sideLayoutBreakpoint = KonspektAttachmentWidget.defaultSideLayoutBreakpoint,
       }) {
     BaseKonspektAttachment attachment;
     if(konspekt.attachments == null) return null;
@@ -156,7 +160,8 @@ class KonspektAttachmentWidget extends StatelessWidget{
         konspekt,
         attachment,
         color: color,
-        maxDialogWidth: maxDialogWidth
+        maxDialogWidth: maxDialogWidth,
+        sideLayoutBreakpoint: sideLayoutBreakpoint,
     );
   }
 
@@ -215,12 +220,14 @@ class KonspektAttachmentWidget extends StatelessWidget{
   final BaseKonspektAttachment attachment;
   final Color? color;
   final double? maxDialogWidth;
+  final double sideLayoutBreakpoint;
 
   const KonspektAttachmentWidget(
       this.konspekt,
       this.attachment,
       { this.color,
         this.maxDialogWidth,
+        this.sideLayoutBreakpoint = KonspektAttachmentWidget.defaultSideLayoutBreakpoint,
         super.key
       });
 
@@ -288,35 +295,58 @@ class KonspektAttachmentWidget extends StatelessWidget{
           )
       );
 
-    return Material(
-      clipBehavior: Clip.hardEdge,
-      color: color??cardEnab_(context),
-      borderRadius: BorderRadius.circular(AppCard.defRadius),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(Dimen.iconMarg),
-            child: Text(
-                attachment.title,
-                style: const AppTextStyle(
-                  fontSize: Dimen.textSizeBig,
-                  fontWeight: weightHalfBold,
-                )
+    return LayoutBuilder(
+      builder: (context, constraints) {
+
+        final bool formatsOnSide = constraints.hasBoundedWidth &&
+            constraints.maxWidth >= sideLayoutBreakpoint;
+
+        final Widget titleWidget = Padding(
+          padding: const EdgeInsets.all(Dimen.iconMarg),
+          child: Text(
+            attachment.title,
+            style: const AppTextStyle(
+              fontSize: Dimen.textSizeBig,
+              fontWeight: weightHalfBold,
             ),
           ),
-          FileFormatSelectorRowWidget(
-              attachment.assets.keys,
-              onTap: (format) => attachment.openOrShowMessage(
-                  context,
-                  konspekt.name,
-                  format,
-                  konspekt.category,
-                  maxDialogWidth: maxDialogWidth
-              )
+        );
+
+        final Widget formats = FileFormatSelectorRowWidget(
+          attachment.assets.keys,
+          direction: Axis.horizontal,
+          onTap: (format) => attachment.openOrShowMessage(
+            context,
+            konspekt.name,
+            format,
+            konspekt.category,
+            maxDialogWidth: maxDialogWidth,
           ),
-        ],
-      ),
+        );
+
+        return Material(
+          clipBehavior: Clip.hardEdge,
+          color: color??cardEnab_(context),
+          borderRadius: BorderRadius.circular(AppCard.defRadius),
+          child: formatsOnSide
+              ? Row(
+                  children: [
+                    Expanded(child: titleWidget),
+                    SizedBox(
+                        width: formatWidgetWidth*attachment.assets.keys.length,
+                        child: formats
+                    ),
+                  ],
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    titleWidget,
+                    formats,
+                  ],
+                ),
+        );
+      },
     );
 
   }

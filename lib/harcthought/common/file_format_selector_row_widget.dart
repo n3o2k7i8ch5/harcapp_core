@@ -59,42 +59,43 @@ class FileFormatSelectorRowWidget extends StatelessWidget{
   final Iterable<FileFormat> fileFormats;
   final void Function(FileFormat) onTap;
   final BorderRadius? borderRadius;
+  final Axis direction;
 
   const FileFormatSelectorRowWidget(
     this.fileFormats,
     { required this.onTap,
       this.borderRadius,
+      this.direction = Axis.horizontal,
       super.key
     });
 
   @override
   Widget build(BuildContext context) {
 
-    List<Widget> formatButtons = [];
-
-    for(FileFormat format in fileFormats){
-      formatButtons.add(
-          Expanded(
-            child: SimpleButton(
-                padding: const EdgeInsets.all(Dimen.defMarg),
-                radius: 0,
-                color: format.color.withValues(alpha: .5),
-                child: Center(
-                  child: FileFormatWidget(format),
-                ),
-                onTap: () => onTap(format),
-            ),
-          )
+    final List<Widget> formatButtons = fileFormats.map((format) {
+      final button = SimpleButton(
+        padding: const EdgeInsets.all(Dimen.defMarg),
+        radius: 0,
+        color: format.color.withValues(alpha: .5),
+        child: Center(child: FileFormatWidget(format)),
+        onTap: () => onTap(format),
       );
-    }
+      return direction == Axis.horizontal ? Expanded(child: button) : button;
+    }).toList();
 
-    final Widget row = Row(children: formatButtons);
+    final Widget selector = direction == Axis.horizontal
+        ? Row(children: formatButtons)
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: formatButtons,
+          );
 
-    if(borderRadius == null) return row;
+    if(borderRadius == null) return selector;
 
     return ClipRRect(
       borderRadius: borderRadius!,
-      child: row,
+      child: selector,
     );
   }
 
