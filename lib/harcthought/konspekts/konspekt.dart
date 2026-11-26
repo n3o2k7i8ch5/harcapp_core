@@ -639,6 +639,20 @@ abstract class BaseKonspektAttachment{
 
 class KonspektAttachment extends BaseKonspektAttachment{
 
+  static const List<FileFormat> defaultFormatOrder = [
+    FileFormat.pdf,
+    FileFormat.urlPdf,
+    FileFormat.docx,
+    FileFormat.urlDocx,
+    FileFormat.png,
+    FileFormat.urlPng,
+    FileFormat.webp,
+    FileFormat.urlWebp,
+    FileFormat.svg,
+    FileFormat.urlSvg,
+    FileFormat.url,
+  ];
+
   static String buildAssetPath(
     KonspektCategory category,
     String konspektName,
@@ -662,6 +676,13 @@ class KonspektAttachment extends BaseKonspektAttachment{
       required this.assets,
       this.print
     });
+
+    FileFormat? get defaultFormat {
+      for (final format in defaultFormatOrder) {
+        if (assets.containsKey(format)) return format;
+      }
+      return null;
+    }
 
     String getAssetPath(
       String konspektName,

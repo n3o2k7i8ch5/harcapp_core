@@ -5,6 +5,7 @@ import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/common.dart' show launchURL;
 import 'package:harcapp_core/comm_widgets/app_bar.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
+import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_toast.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/values/dimen.dart';
@@ -185,10 +186,12 @@ class KonspektAttachmentWidget extends StatelessWidget{
       return;
     }
     if(attachment is KonspektAttachment){
+      final format = attachment.defaultFormat;
+      if (format == null) return;
       await attachment.openOrShowMessage(
           context,
           konspekt.name,
-          attachment.assets.keys.first,
+          format,
           konspekt.category,
           maxDialogWidth: maxDialogWidth
       );
@@ -264,87 +267,96 @@ class KonspektAttachmentWidget extends StatelessWidget{
     if(attachment is! KonspektAttachment)
       return const SizedBox.shrink();
 
-    if(attachment.assets.length == 1)
-      return SimpleButton(
-          color: color??cardEnab_(context),
-          borderRadius: BorderRadius.circular(AppCard.defRadius),
-          child: Padding(
-            padding: const EdgeInsets.all(Dimen.iconMarg),
-            child: Row(
-              children: [
-
-                Expanded(child: Text(
-                    attachment.title,
-                    style: const AppTextStyle(
-                      fontSize: Dimen.textSizeBig,
-                      fontWeight: weightHalfBold,
-                    )
-                )),
-
-                FileFormatWidget(attachment.assets.keys.first),
-
-              ],
-            ),
-          ),
-          onTap: () => attachment.openOrShowMessage(
-              context,
-              konspekt.name,
-              attachment.assets.keys.first,
-              konspekt.category,
-              maxDialogWidth: maxDialogWidth
-          )
-      );
-
     return LayoutBuilder(
       builder: (context, constraints) {
 
         final bool formatsOnSide = constraints.hasBoundedWidth &&
             constraints.maxWidth >= sideLayoutBreakpoint;
+        final bool singleFormat = attachment.assets.length == 1;
 
-        final Widget titleWidget = Padding(
-          padding: const EdgeInsets.all(Dimen.iconMarg),
-          child: Text(
-            attachment.title,
-            style: const AppTextStyle(
-              fontSize: Dimen.textSizeBig,
-              fontWeight: weightHalfBold,
-            ),
+        final Widget titleText = Text(
+          attachment.title,
+          style: const AppTextStyle(
+            fontSize: Dimen.textSizeBig,
+            fontWeight: weightHalfBold,
           ),
         );
+        final Widget titleWidget = Padding(
+          padding: const EdgeInsets.all(Dimen.iconMarg),
+          child: titleText,
+        );
 
-        final Widget formats = FileFormatSelectorRowWidget(
-          attachment.assets.keys,
-          direction: Axis.horizontal,
-          onTap: (format) => attachment.openOrShowMessage(
+        void openFormat(FileFormat format) {
+          attachment.openOrShowMessage(
             context,
             konspekt.name,
             format,
             konspekt.category,
             maxDialogWidth: maxDialogWidth,
-          ),
+          );
+        }
+
+        if (singleFormat && !formatsOnSide) {
+          final format = attachment.assets.keys.first;
+          return SimpleButton(
+            color: color??cardEnab_(context),
+            borderRadius: BorderRadius.circular(AppCard.defRadius),
+            child: Padding(
+              padding: const EdgeInsets.all(Dimen.iconMarg),
+              child: Row(
+                children: [
+                  Expanded(child: titleText),
+                  FileFormatWidget(format),
+                ],
+              ),
+            ),
+            onTap: () => openFormat(format),
+          );
+        }
+
+        final Widget formats = FileFormatSelectorRowWidget(
+          attachment.assets.keys,
+          direction: Axis.horizontal,
+          onTap: openFormat,
         );
+
+        final defaultFormat = attachment.defaultFormat;
 
         return Material(
           clipBehavior: Clip.hardEdge,
           color: color??cardEnab_(context),
           borderRadius: BorderRadius.circular(AppCard.defRadius),
-          child: formatsOnSide
-              ? Row(
-                  children: [
-                    Expanded(child: titleWidget),
-                    SizedBox(
-                        width: formatWidgetWidth*attachment.assets.keys.length,
-                        child: formats
-                    ),
-                  ],
-                )
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    titleWidget,
-                    formats,
-                  ],
-                ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(AppCard.defRadius),
+            onTap: defaultFormat == null
+                ? null
+                : () {
+                    if (!singleFormat) {
+                      AppScaffold.showMessage(
+                        context,
+                        text: "Domyślnie: " + defaultFormat.displayName + ". Inne formaty po prawej.",
+                      );
+                    }
+                    openFormat(defaultFormat);
+                  },
+            child: formatsOnSide
+                ? Row(
+                    children: [
+                      Expanded(child: titleWidget),
+                      SizedBox(
+                          width: formatWidgetWidth*attachment.assets.keys.length,
+                          child: formats
+                      ),
+                    ],
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      titleWidget,
+                      formats,
+                    ],
+                  ),
+          ),
         );
       },
     );
